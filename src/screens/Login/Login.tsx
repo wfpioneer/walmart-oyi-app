@@ -1,0 +1,66 @@
+import React, { ReactNode } from 'react';
+import { connect } from 'react-redux';
+import { View } from 'react-native';
+// @ts-ignore
+import WMSSO from 'react-native-wmsso';
+import Button from '../../components/button/Button';
+import styles from './Login.style';
+import { loginUser } from '../../state/actions/User';
+import User from '../../models/User';
+import { strings } from '../../locales';
+import { hideModal } from '../../state/actions/ActivityModal';
+
+const mapDispatchToProps = {
+  loginUser,
+  hideModal
+};
+
+interface LoginScreenProps {
+  loginUser: Function;
+  navigation: Record<string, any>;
+  hideModal: Function;
+}
+
+export class LoginScreen extends React.PureComponent<LoginScreenProps> {
+  private unsubscribe: Function | undefined;
+
+  constructor(props: any) {
+    super(props);
+    this.signInUser = this.signInUser.bind(this);
+  }
+
+  componentDidMount(): void {
+    this.signInUser();
+    // this following snippet is mostly for iOS, as
+    // I need it to automatically call signInUser when we go back to the login screen
+    this.unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.signInUser();
+    });
+  }
+
+  componentWillUnmount(): void {
+    return this.unsubscribe && this.unsubscribe();
+  }
+
+  signInUser(): void {
+    WMSSO.getUser().then((user: User) => {
+      this.props.loginUser(user);
+      this.props.hideModal();
+      this.props.navigation.navigate('HomeNavigator');
+    });
+  }
+
+  render(): ReactNode {
+    return (
+      <View style={styles.container}>
+        <Button
+          title={strings('GENERICS.SIGN_IN')}
+          style={styles.signInButton}
+          onPress={this.signInUser}
+        />
+      </View>
+    );
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LoginScreen);

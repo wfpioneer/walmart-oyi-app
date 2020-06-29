@@ -1,0 +1,86 @@
+{
+  "env": {
+    "es6": true,
+    "jest": true,
+    "react-native/react-native": true
+  },
+  "plugins": ["react", "react-native", "@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "globalReturn": true,
+      "impliedStrict": true,
+      "jsx": true
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "import/prefer-default-export": 0,
+    "react/jsx-filename-extension": 0,
+    "comma-dangle": ["error", "never"],
+    "arrow-parens": ["error", "as-needed"],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-extra-semi": 0,
+    "semi": 1,
+    "global-require": 0,
+    "max-len": [1, 120],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "class-methods-use-this": "off",
+    "react/jsx-boolean-value": "off",
+    "react/no-did-update-set-state": ["off", { "allow": ["warn"] }],
+    "sort-imports": ["error", {
+      "ignoreCase": false,
+      "ignoreDeclarationSort": true,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["none", "all", "single", "multiple"]
+    }],
+    "react-native/no-unused-styles": 2,
+    "react-native/no-color-literals": 2,
+    "react-native/no-raw-text": 2,
+    "react/prop-types": 0,
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "react/forbid-prop-types": [
+      "error",
+      {
+        "forbid": [],
+        "checkContextTypes": true,
+        "checkChildContextTypes": true
+      }
+    ],
+    "import/no-extraneous-dependencies": ["error", { "peerDependencies": true }],
+    "no-useless-constructor": "off",
+    "react/destructuring-assignment": 0,
+    "no-plusplus": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/ban-ts-ignore": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}
