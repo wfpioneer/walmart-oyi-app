@@ -5,7 +5,7 @@ const styles=StyleSheet.create({
     card: {
         margin: 4,
         padding:6,
-        borderColor: COLOR.GRAY,
+        borderColor: COLOR.GREY_400,
         borderRadius:3,
         borderWidth:1,
         width: "95%"
@@ -30,7 +30,7 @@ const styles=StyleSheet.create({
         flexDirection: "row",
         height:15,
         width:"100%",
-        backgroundColor: COLOR.LIGHT_GRAY,
+        backgroundColor: COLOR.GREY_400,
         borderRadius:10,
         borderColor: COLOR.BLACK,
         borderWidth: 1
