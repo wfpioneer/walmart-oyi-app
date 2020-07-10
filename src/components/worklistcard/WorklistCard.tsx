@@ -12,9 +12,9 @@ export interface Props {
 };
 
 function WorklistCard(Props:Props) {
-    const [completion, updCompletion] = useState({completionPercentage: ((Props.complete/Props.goal)*100),atGoal:((((Props.complete/Props.goal)*100)>94)?true:false)});
+    const [completion, updCompletion] = useState({completionPercentage: ((Props.complete/Props.goal)*100),atGoal:((((Props.complete/Props.goal)*100)>94)?styles.barFillAtGoal:styles.barFillNotAtGoal)});
     useEffect(()=>{
-        let newGoalState={completionPercentage: ((Props.complete/Props.goal)*100),atGoal:((((Props.complete/Props.goal)*100)>94)?true:false)};
+        let newGoalState={completionPercentage: ((Props.complete/Props.goal)*100),atGoal:((((Props.complete/Props.goal)*100)>94)?styles.barFillAtGoal:styles.barFillNotAtGoal)};
         updCompletion(newGoalState);
     })
     return (
@@ -24,7 +24,7 @@ function WorklistCard(Props:Props) {
                  <Text style={styles.progress}>Goal 95%</Text>
              </View>
              <View style={styles.progressBar}>
-                 <View style={[StyleSheet.absoluteFill,completion.atGoal?styles.barFillAtGoal:styles.barFillNotAtGoal, {width:`${completion.completionPercentage}%`}]} />
+                 <View style={[StyleSheet.absoluteFill,completion.atGoal, {width:`${completion.completionPercentage}%`}]} />
              </View>
              <Text style={styles.counter}>{Props.complete} of {Props.goal} items</Text>
          </View>

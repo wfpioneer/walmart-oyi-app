@@ -5,9 +5,9 @@ const styles=StyleSheet.create({
     card: {
         margin: 4,
         padding:6,
-        borderColor: COLOR.GREY_400,
-        borderRadius:3,
-        borderWidth:1,
+        elevation: 2,
+        borderRadius: 10,
+        backgroundColor: COLOR.WHITE,
         width: "95%"
     },
     head: {
@@ -28,18 +28,20 @@ const styles=StyleSheet.create({
     },
     progressBar: {
         flexDirection: "row",
-        height:15,
+        height:10,
         width:"100%",
-        backgroundColor: COLOR.GREY_400,
+        backgroundColor: COLOR.GREY_300,
         borderRadius:10,
-        borderColor: COLOR.BLACK,
-        borderWidth: 1
+        marginTop: 5,
+        marginBottom: 5
     },
     barFillAtGoal: {
-        backgroundColor: COLOR.GREY_800
+        backgroundColor: "#545F7A",
+        borderRadius:10
     },
     barFillNotAtGoal: {
-        backgroundColor: COLOR.RED
+        backgroundColor: "#D6512D",
+        borderRadius:10
     }
 });
 
