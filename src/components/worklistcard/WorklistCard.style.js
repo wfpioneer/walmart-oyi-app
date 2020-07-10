@@ -23,8 +23,7 @@ const styles=StyleSheet.create({
     },
     counter: {
         color: COLOR.TRAINING_BLUE,
-        textAlign:"right",
-        fontWeight:"bold"
+        textAlign:"right"
     },
     progressBar: {
         flexDirection: "row",

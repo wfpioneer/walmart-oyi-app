@@ -77,9 +77,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps> {
             </Text>
           )
           }
-          <WorklistCard goalTitle="Sample" goal={25} complete={23}/>
-          <WorklistCard goalTitle="Second Sample" goal={10} complete={3}/>
-          <WorklistCard goalTitle="100% Completion Sample" goal={200} complete={200}/>
+          <WorklistCard goalTitle="Sample" goal={25} complete={23} completionPercentage={(23/25)*100} completionGoal={98}/>
+          <WorklistCard goalTitle="Second Sample" goal={10} complete={3} completionPercentage={(3/10)*100} completionGoal={30}/>
+          <WorklistCard goalTitle="100% Completion Sample" goal={200} complete={200} completionPercentage={100}/>
         </ScrollView>
       </SafeAreaView>
     );
