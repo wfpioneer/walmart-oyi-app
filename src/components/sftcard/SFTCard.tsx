@@ -1,6 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { ReactNodeLike } from 'prop-types';
+import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import styles from './SFTCard.styles';
@@ -20,17 +19,17 @@ interface SFTCardProps {
 const renderBottomRightBtns = (textArray: string[], actionFunc?: (index: number) => void) => {
   const arraySize = textArray.length;
   return (
-    <View style={{flexDirection: 'row', padding: 16, justifyContent: 'flex-end'}}>
+    <View style={styles.bottomRowContainer}>
       {!actionFunc &&
-        <Text style={{color: COLOR.GREY_600}}>
+        <Text style={styles.bottomRowText}>
           {textArray[0]}
         </Text>
       }
       {actionFunc &&
-      <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+      <View style={styles.bottomRowBtnContainer}>
           {textArray.map((value, index) => {
             return (
-              <View key={index} style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View key={index} style={styles.bottomRowBtn}>
                 <Button
                   type={Button.Type.NO_BORDER}
                   title={value}
@@ -41,7 +40,7 @@ const renderBottomRightBtns = (textArray: string[], actionFunc?: (index: number)
                   height={24}
                 />
                 {index + 1 !== arraySize &&
-                  <Text style={{marginLeft: 12, marginRight: 12, color: COLOR.GREY_500, fontSize: 18}}>
+                  <Text style={styles.bottomRowDivider}>
                     |
                   </Text>
                 }
@@ -55,15 +54,14 @@ const renderBottomRightBtns = (textArray: string[], actionFunc?: (index: number)
 }
 
 const SFTCard = (props: SFTCardProps) => {
-
   const { iconName, title, topRightBtnTxt, topRightBtnAction, bottomRightBtnTxt, bottomRightBtnAction, children } = props;
 
   return (
-    <View style={{marginTop: 8, backgroundColor: "white", alignSelf: 'stretch'}} >
-      <View style={{padding: 16, flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1, borderBottomColor: COLOR.GREY_100}} >
-        <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-          <Icon name={iconName} size={15} color={COLOR.GREY_800} style={{marginRight: 8}} />
-          <Text style={{marginLeft: 8}}>{title}</Text>
+    <View style={styles.mainContainer} >
+      <View style={styles.topRowContainer} >
+        <View style={styles.iconTitleContainer}>
+          <Icon name={iconName} size={15} color={COLOR.GREY_800} style={styles.icon} />
+          <Text style={styles.title}>{title}</Text>
         </View>
         {topRightBtnTxt && topRightBtnAction &&
           <Button

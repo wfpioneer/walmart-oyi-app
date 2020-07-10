@@ -2,10 +2,50 @@ import { StyleSheet } from 'react-native';
 import { COLOR } from '../../themes/Color';
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     marginTop: 8,
     backgroundColor: "white",
     alignSelf: 'stretch'
+  },
+  topRowContainer: {
+    padding: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderBottomColor: COLOR.GREY_100
+  },
+  iconTitleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  icon: {
+    marginRight: 8
+  },
+  title: {
+    marginLeft: 8
+  },
+  bottomRowContainer: {
+    flexDirection: 'row',
+    padding: 16,
+    justifyContent: 'flex-end'
+  },
+  bottomRowText: {
+    color: COLOR.GREY_600
+  },
+  bottomRowBtnContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+  bottomRowBtn: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  bottomRowDivider: {
+    marginLeft: 12,
+    marginRight: 12,
+    color: COLOR.GREY_500,
+    fontSize: 18
   }
 })
 
