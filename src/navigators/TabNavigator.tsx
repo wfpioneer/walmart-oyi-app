@@ -26,7 +26,6 @@ export const TabNavigator = () => {
           } else if (route.name === 'Screen2') {
             iconName = 'help';
           }
-          console.log(iconName);
 
           // You can return any component that you like here!
           return <MaterialIcons name={iconName} size={size} color={color} />;
