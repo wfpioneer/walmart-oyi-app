@@ -1,8 +1,7 @@
-import { RESET_SCANNED_EVENT, SET_BYOD, SET_SCANNED_EVENT, SET_SCANNER_LIST } from '../actions/Global';
+import { RESET_SCANNED_EVENT, SET_BYOD, SET_SCANNED_EVENT } from '../actions/Global';
 
 const initialState = {
   isByod: false,
-  scannerList: [],
   scannedEvent: {
     value: null,
     type: null
@@ -15,11 +14,6 @@ export const Global = (state = initialState, action: any) => {
       return {
         ...state,
         isByod: action.payload
-      }
-    case SET_SCANNER_LIST:
-      return {
-        ...state,
-        scannerList: action.payload
       }
     case SET_SCANNED_EVENT:
       return {
