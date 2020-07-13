@@ -38,8 +38,8 @@ to set up many React Native apps.
 * themes
   * Contains color values
 
-### How to emulate a barcode scane
-1. 
+### How to emulate a barcode scan
+1. In your debugger console: `window.mockScan('value', 'type')`
 
 ### How to set up an API call
 1. Create your saga action in `state/actions/saga.ts`
