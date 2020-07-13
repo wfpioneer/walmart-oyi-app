@@ -35,6 +35,10 @@ export const disableScanner = () => {
   WMBarcodeScanner.disable();
 };
 
+export const manualScan = (val: string) => {
+  mockScanWrapper(val, 'manual');
+}
+
 export const mockScanWrapper = (val: string, type: string) => {
   WMBarcodeScanner.mockScan(val, type);
 };

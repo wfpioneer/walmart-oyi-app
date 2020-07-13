@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
@@ -14,6 +14,9 @@ import { strings } from '../locales';
 import { logoutUser } from '../state/actions/User';
 import { hideModal, showModal } from '../state/actions/ActivityModal';
 import StyleGuide from '../screens/StyleGuide/StyleGuide';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import TextInputComponent from '../components/textinput/TextInput';
+import ManualScanComponent from '../components/manualscan/ManualScan';
 
 interface HomeNavigatorComponentProps {
   logoutUser: Function;
@@ -64,6 +67,26 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps) => {
   });
 };
 
+const renderHomeHeader = (props: HomeNavigatorComponentProps, manualScanEnabled: boolean, setManualScanEnabled: Function) => {
+
+  return (
+    <View style={styles.headerContainer}>
+      {!manualScanEnabled ? renderHomeScanButton(setManualScanEnabled) : <ManualScanComponent />}
+      {renderHomeMenuButton(props)}
+    </View>
+  )
+}
+
+const renderHomeScanButton = (setManualScanEnabled: Function) => {
+  return (
+    <TouchableOpacity onPress={() => {setManualScanEnabled(true)}}>
+      <View style={styles.leftButton}>
+        <MaterialCommunityIcon name={'barcode-scan'} size={20} color={COLOR.WHITE} />
+      </View>
+    </TouchableOpacity>
+  );
+}
+
 const renderHomeMenuButton = (props: HomeNavigatorComponentProps) => (
   <TouchableOpacity onPress={() => showSignOutMenu(props)}>
     <View style={styles.rightButton}>
@@ -91,30 +114,34 @@ const renderStyleGuideMenuButton = (navigation: any, route: any) => (
   </TouchableOpacity>
 );
 
-export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps) => (
-  <Stack.Navigator
-    headerMode="float"
-    screenOptions={{
-      headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
-      headerTintColor: COLOR.WHITE
-    }}
-  >
-    <Stack.Screen
-      name="Home"
-      component={Home}
-      options={{
-        headerRight: () => renderHomeMenuButton(props)
+export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps) => {
+  const [isManualScanEnabled, setManualScanEnabled] = useState(false);
+
+  return (
+    <Stack.Navigator
+      headerMode="float"
+      screenOptions={{
+        headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
+        headerTintColor: COLOR.WHITE
       }}
-    />
-    <Stack.Screen
-      name="Style Guide"
-      component={StyleGuide}
-      options={({ navigation, route }) => ({
-        headerRight: () => renderStyleGuideMenuButton(navigation, route)
-      })}
-      initialParams={{ scrollIndex: 0, menuOpen: false }}
-    />
-  </Stack.Navigator>
-);
+    >
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerRight: () => renderHomeHeader(props, isManualScanEnabled, setManualScanEnabled)
+        }}
+      />
+      <Stack.Screen
+        name="Style Guide"
+        component={StyleGuide}
+        options={({ navigation, route }) => ({
+          headerRight: () => renderStyleGuideMenuButton(navigation, route)
+        })}
+        initialParams={{ scrollIndex: 0, menuOpen: false }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 export const HomeNavigator = connect(null, mapDispatchToProps)(HomeNavigatorComponent);
