@@ -33,7 +33,7 @@ const store = createStore(RootReducer,
 
 sagaMiddleware.run(rootSaga);
 
-export default class App extends React.Component {
+export default class App extends React.PureComponent {
   constructor(props: Readonly<{}>) {
     super(props);
     setI18nConfig();
