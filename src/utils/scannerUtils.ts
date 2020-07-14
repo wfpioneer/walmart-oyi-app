@@ -13,9 +13,7 @@ export const determineScanner = (isByod: boolean, scannerList: string[]) => {
 
 export const getInitialScanners = async () => {
   try {
-    const scannerList = await WMBarcodeScanner.getScannerList();
-    console.log("list of scanners", scannerList);
-    return scannerList
+    return await WMBarcodeScanner.getScannerList()
   } catch(err) {
     console.log(`Error getting scanner list: ${err}`)
     return [];

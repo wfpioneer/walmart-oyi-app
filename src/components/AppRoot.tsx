@@ -15,8 +15,8 @@ const AppRoot = (props: {children: any}) => {
     Promise.all([getBrand(), getDevice(), getManufacturer(), getInitialScanners()]).then(results => {
       // We can also use the list of scanners to identify if a device is BYOD or not
       const [brand, device, manufacturer, scannerList] = results;
-      console.log(results);
       const isByodLocal = false;
+
       setScanner(determineScanner(isByodLocal, scannerList))
       dispatch(setIsByod(isByodLocal)); // TODO [temp] This is gonna be hard without physical devices
     }).catch(reason => {
@@ -30,7 +30,6 @@ const AppRoot = (props: {children: any}) => {
     // Listen for a scanner list change event (due to how the barcode plugin asynchronously gets scanners)
     const scannerListSubscription = barcodeEmitter.addListener('scannerListChanged', (scannerList: string[]) => {
       console.log("list of available scanners has changed", scannerList);
-
       setScanner(determineScanner(isByod, scannerList));
     });
 
