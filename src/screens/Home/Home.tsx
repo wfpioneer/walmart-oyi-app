@@ -8,6 +8,7 @@ import { hitGoogle } from '../../state/actions/saga';
 import styles from './Home.style';
 import COLOR from '../../themes/Color';
 import WorklistCard from '../../components/worklistcard/WorklistCard';
+import GoalCircle from "../../components/goalcircle/GoalCircle";
 
 const mapStateToProps = (state: any) => {
   const googleResult = state.async.hitGoogle.result && state.async.hitGoogle.result.data;
@@ -77,6 +78,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps> {
             </Text>
           )
           }
+          <GoalCircle goalTitle="Circle Samp" completionPercentage={65}/>
+          <GoalCircle goalTitle="Sample Two" completionPercentage={95}/>
+          <GoalCircle goalTitle="Under Half" completionPercentage={30}/>
           <WorklistCard goalTitle="Sample" goal={25} complete={23} completionPercentage={(23/25)*100} completionGoal={98}/>
           <WorklistCard goalTitle="Second Sample" goal={10} complete={3} completionPercentage={(3/10)*100} completionGoal={30}/>
           <WorklistCard goalTitle="100% Completion Sample" goal={200} complete={200} completionPercentage={100}/>
