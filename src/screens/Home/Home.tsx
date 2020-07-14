@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  ActivityIndicator, SafeAreaView, ScrollView, Text
+  ActivityIndicator, EmitterSubscription, SafeAreaView, ScrollView, Text
 } from 'react-native';
 import Button from '../../components/button/Button';
 import { hitGoogle } from '../../state/actions/saga';
 import styles from './Home.style';
 import COLOR from '../../themes/Color';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { barcodeEmitter } from '../../utils/scannerUtils';
+import { setScannedEvent } from '../../state/actions/Global';
 
 const mapStateToProps = (state: any) => {
   const googleResult = state.async.hitGoogle.result && state.async.hitGoogle.result.data;
@@ -18,19 +21,40 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-const mapDispatchToProps = {
-  hitGoogle
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    hitGoogle: (payload: any) => dispatch(hitGoogle(payload)),
+    setScannedEvent: (event: any) => dispatch(setScannedEvent(event))
+  }
 };
 
 interface HomeScreenProps {
   userName: string;
   hitGoogle: Function;
+  setScannedEvent: Function;
   googleLoading: boolean;
   googleResult: string;
   googleError: string;
+  navigation: StackNavigationProp<any>;
 }
 
 export class HomeScreen extends React.PureComponent<HomeScreenProps> {
+  private readonly scannedSubscription: EmitterSubscription;
+
+  constructor(props: HomeScreenProps) {
+    super(props);
+
+    this.scannedSubscription = barcodeEmitter.addListener('scanned', (scan) => {
+      console.log('received scan', scan.value, scan.type);
+      props.setScannedEvent(scan)
+      props.navigation.navigate('ReviewItemDetails')
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.scannedSubscription) this.scannedSubscription.remove();
+  }
+
   render():
     | React.ReactElement<any, string | React.JSXElementConstructor<any>>
     | string

@@ -28,5 +28,8 @@ export default {
   HOME: {
     HOME: 'Home',
     STYLE_GUIDE: 'Style Guide'
+  },
+  EXCEPTION: {
+    PO: 'Price Override'
   }
 };
