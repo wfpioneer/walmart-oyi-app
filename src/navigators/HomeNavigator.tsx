@@ -71,7 +71,7 @@ const renderHomeHeader = (props: HomeNavigatorComponentProps, manualScanEnabled:
 
   return (
     <View style={styles.headerContainer}>
-      {!manualScanEnabled ? renderHomeScanButton(setManualScanEnabled) : <ManualScanComponent />}
+      {!manualScanEnabled ? renderHomeScanButton(setManualScanEnabled) : <ManualScanComponent setManualScanEnabled={setManualScanEnabled} />}
       {renderHomeMenuButton(props)}
     </View>
   )

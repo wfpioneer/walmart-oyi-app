@@ -22,7 +22,8 @@ export default {
     NEXT: 'Next',
     EXIT: 'Exit',
     ALL: 'All',
-    GET_STARTED: 'Get Started'
+    GET_STARTED: 'Get Started',
+    ENTER_UPC_ITEM_NBR: 'Enter UPC or Item Number'
   },
   HOME: {
     HOME: 'Home',

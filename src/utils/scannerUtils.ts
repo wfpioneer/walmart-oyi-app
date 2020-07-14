@@ -3,6 +3,8 @@ import { NativeEventEmitter, NativeModules } from 'react-native';
 export const WMBarcodeScanner = NativeModules.WMBarcodeScanner;
 export const barcodeEmitter = new NativeEventEmitter(WMBarcodeScanner);
 
+let isScannerSet = false;
+
 export const determineScanner = (isByod: boolean, scannerList: string[]) => {
   // preferred scanner type is "2D Barcode Imager" for club devices
   // TODO figure out logic we want for this
@@ -21,8 +23,14 @@ export const getInitialScanners = async () => {
 }
 
 export const setScanner = (scanner: string) => {
-  console.log("setting scanner to", scanner);
-  WMBarcodeScanner.setScanner(scanner);
+  if (!isScannerSet) {
+    console.log("setting scanner to", scanner);
+    WMBarcodeScanner.setScanner(scanner).then(() => {
+      isScannerSet = true;
+    });
+  } else {
+    console.log(`Scanner already set`)
+  }
 }
 
 export const enableScanner = () => {
