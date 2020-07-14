@@ -29,7 +29,7 @@ function GoalCircle(Props:Props) {
                 </View>
             </View>
             <Text style={styles.freq}>Daily</Text>
-            <Text style={styles.goalNameActive}>Items</Text>
+            <Text style={(Props.completionPercentage>=target)?styles.goalNameActive:styles.goalNameInactive}>{Props.goalTitle}</Text>
         </View>
     )
 };

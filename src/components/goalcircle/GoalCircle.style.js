@@ -50,8 +50,9 @@ const styles=StyleSheet.create({
         fontWeight: "bold"
     },
     freq: {
-        color: COLOR.GREY_300,
-        textAlign: "center"
+        color: COLOR.GREY_500,
+        textAlign: "center",
+        padding: 10
     },
     goalNameActive: {
         backgroundColor: COLOR.TRAINING_BLUE,
