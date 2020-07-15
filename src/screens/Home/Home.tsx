@@ -7,6 +7,7 @@ import Button from '../../components/button/Button';
 import { hitGoogle } from '../../state/actions/saga';
 import styles from './Home.style';
 import COLOR from '../../themes/Color';
+import WorklistCard from '../../components/worklistcard/WorklistCard';
 
 const mapStateToProps = (state: any) => {
   const googleResult = state.async.hitGoogle.result && state.async.hitGoogle.result.data;
@@ -76,6 +77,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps> {
             </Text>
           )
           }
+          <WorklistCard goalTitle="Sample" goal={25} complete={23} completionPercentage={(23/25)*100} completionGoal={98}/>
+          <WorklistCard goalTitle="Second Sample" goal={10} complete={3} completionPercentage={(3/10)*100} completionGoal={30}/>
+          <WorklistCard goalTitle="100% Completion Sample" goal={200} complete={200} completionPercentage={100}/>
         </ScrollView>
       </SafeAreaView>
     );
