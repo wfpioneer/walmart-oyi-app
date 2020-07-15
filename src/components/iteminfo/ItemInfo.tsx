@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Image, Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 import styles from './ItemInfo.style';
-import { strings } from '../../locales';
-import ItemDetails from '../../models/ItemDetails';
+import { currencies, strings } from '../../locales';
 import Button from '../button/Button';
 import COLOR from '../../themes/Color';
 
@@ -30,16 +28,16 @@ const ItemInfo = (props: ItemInfoProps) => {
       {exceptionType && <Text style={styles.exceptionText}>{strings(`EXCEPTION.${exceptionType.toUpperCase()}`)}</Text>}
       <Text style={styles.itemNameText} >{itemName}</Text>
       <View style={styles.nbrContainer}>
-        <Text style={styles.itemNbrText} >{`Item ${itemNbr}`}</Text>
+        <Text style={styles.itemNbrText} >{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
         <Text style={styles.nbrDivider} >|</Text>
-        <Text style={styles.upcNbrText} >{`UPC ${upcNbr}`}</Text>
+        <Text style={styles.upcNbrText} >{`${strings('ITEM.UPC')} ${upcNbr}`}</Text>
       </View>
-      <Text style={styles.statusText} >{`Status: ${status}`}</Text>
-      <Text style={styles.catgText} >{`Category: ${category}`}</Text>
-      <Text style={styles.priceText} >{`$${price}`}</Text>
+      <Text style={styles.statusText} >{`${strings('ITEM.STATUS')}: ${status}`}</Text>
+      <Text style={styles.catgText} >{`${strings('ITEM.CATEGORY')}: ${category}`}</Text>
+      <Text style={styles.priceText} >{`${currencies(price)}`}</Text>
       <Button
         type={2}
-        title={'Print price sign'}
+        title={strings('PRINT.PRICE_SIGN')}
         titleColor={COLOR.MAIN_THEME_COLOR}
         style={styles.printPriceBtn}
       />

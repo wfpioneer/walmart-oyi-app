@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 
 import COLOR from '../themes/Color';
-import Home from '../screens/Home/Home';
-import ItemDetails from '../models/ItemDetails';
 import ReviewItemDetails from '../screens/ReviewItemDetails/ReviewItemDetails';
 import { useNavigation } from '@react-navigation/native';
+import { strings } from '../locales';
 
 
 const Stack = createStackNavigator();
@@ -26,12 +25,14 @@ const ReviewItemDetailsNavigator = () => {
         name="ItemDetails"
         component={ReviewItemDetails}
         options={{
-          headerTitle: 'Review item details',
+          headerTitle: strings('ITEM.TITLE'),
           headerTitleAlign: 'left',
           headerTitleStyle: {fontSize: 18},
           headerBackTitleVisible: false,
           headerLeft: (props) => (
-            <HeaderBackButton //Shouldn't need to do this, but not showing on its own for some reason
+            // Shouldn't need to do this, but not showing on its own for some reason
+            // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
+            <HeaderBackButton
               {...props}
               onPress={navigation.goBack}
             />

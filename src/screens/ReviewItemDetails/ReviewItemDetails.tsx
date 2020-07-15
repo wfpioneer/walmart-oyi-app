@@ -73,7 +73,7 @@ const mockData: any = {
     upcNbr: '000055559999',
     status: 'Active',
     category: '93 - Meat PI',
-    price: '2.94',
+    price: 2000.94,
     exceptionType: 'po'
   }
 }
