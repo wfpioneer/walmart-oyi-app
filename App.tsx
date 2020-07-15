@@ -18,6 +18,7 @@ import { setI18nConfig } from './src/locales';
 import RootReducer from './src/state/reducers/RootReducer';
 import rootSaga from './src/state/sagas';
 import ActivityModal from './src/screens/ActivityModal/ActivityModal';
+import AppRoot from './src/components/AppRoot';
 
 declare let global: {HermesInternal: null | {}};
 
@@ -42,8 +43,10 @@ export default class App extends React.PureComponent {
   render() {
     return (
       <Provider store={store}>
-        <ActivityModal />
-        <MainNavigator />
+        <AppRoot>
+          <ActivityModal />
+          <MainNavigator />
+        </AppRoot>
       </Provider>
     );
   }
