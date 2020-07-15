@@ -23,7 +23,8 @@ export default {
     EXIT: 'Exit',
     ALL: 'All',
     GET_STARTED: 'Get Started',
-    ENTER_UPC_ITEM_NBR: 'Enter UPC or Item Number'
+    ENTER_UPC_ITEM_NBR: 'Enter UPC or Item Number',
+    CHANGE: 'Change'
   },
   HOME: {
     HOME: 'Home',
@@ -38,6 +39,9 @@ export default {
     UPC: 'UPC',
     STATUS: 'Status',
     CATEGORY: 'Category',
+    QUANTITY: 'Quantity',
+    ON_HANDS: 'On-hands',
+    PENDING_MGR_APPROVAL: 'Pending manager approval'
   },
   PRINT: {
     PRICE_SIGN: 'Print price sign'

@@ -1,13 +1,14 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 import styles from './SFTCard.styles';
 import COLOR from '../../themes/Color';
 import Button from '../button/Button';
 
 interface SFTCardProps {
-  iconName: string;
+  iconName?: string;
+  iconProp?: ReactNode;
   title: string;
   topRightBtnTxt?: string;
   topRightBtnAction?: () => void;
@@ -54,13 +55,19 @@ const renderBottomRightBtns = (textArray: string[], actionFunc?: (index: number)
 }
 
 const SFTCard = (props: SFTCardProps) => {
-  const { iconName, title, topRightBtnTxt, topRightBtnAction, bottomRightBtnTxt, bottomRightBtnAction, children } = props;
+  const { iconName, iconProp, title, topRightBtnTxt, topRightBtnAction, bottomRightBtnTxt, bottomRightBtnAction, children } = props;
 
   return (
     <View style={styles.mainContainer} >
       <View style={styles.topRowContainer} >
         <View style={styles.iconTitleContainer}>
-          <Icon name={iconName} size={15} color={COLOR.GREY_800} style={styles.icon} />
+          {iconName ?
+            <FontAwesome5Icon name={iconName} size={15} color={COLOR.GREY_700} style={styles.icon} />
+            :
+            <View style={styles.icon}>
+              {iconProp}
+            </View>
+          }
           <Text style={styles.title}>{title}</Text>
         </View>
         {topRightBtnTxt && topRightBtnAction &&
