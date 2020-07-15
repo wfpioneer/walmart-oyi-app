@@ -25,3 +25,7 @@ export const strings: (
   tag: string,
   options?: I18n.TranslateOptions | undefined,
 ) => string = (tag: string, options: TranslateOptions | undefined = {}) => I18n.t(tag, options);
+
+export const currencies: (
+  value: number
+) => string = (value: number) => I18n.l('currency', value);

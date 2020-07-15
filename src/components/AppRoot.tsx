@@ -33,16 +33,8 @@ const AppRoot = (props: {children: any}) => {
       setScanner(determineScanner(isByod, scannerList));
     });
 
-    // Listen for the scanned event. Will likely want to fire off a redux action here
-    // It's possible we will want to do this inside each "page", to give context as to where the user is in the app
-    const scannedSubscription = barcodeEmitter.addListener('scanned', (scan) => {
-      console.log('received scan', scan.value, scan.type);
-      dispatch(setScannedEvent(scan));
-    });
-
     // Cleanup the listeners/subscriptions
     return () => {
-      scannedSubscription.remove();
       scannerListSubscription.remove();
     }
   }, []);

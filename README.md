@@ -18,7 +18,7 @@ to set up many React Native apps.
 * Clone the repo
 * Run `npm install`
 * For iOS run `cd ios && pod install`
-* Run `npx react-native link`
+* Run `npx react-native link` (Needed??)
 * Open up Android Studio/Xcode
 * Hit play
 

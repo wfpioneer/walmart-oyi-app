@@ -28,5 +28,18 @@ export default {
   HOME: {
     HOME: 'Home',
     STYLE_GUIDE: 'Style Guide'
+  },
+  EXCEPTION: {
+    PO: 'Price Override'
+  },
+  ITEM: {
+    TITLE: 'Review item details',
+    ITEM: 'Item',
+    UPC: 'UPC',
+    STATUS: 'Status',
+    CATEGORY: 'Category',
+  },
+  PRINT: {
+    PRICE_SIGN: 'Print price sign'
   }
 };
