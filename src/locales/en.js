@@ -24,7 +24,10 @@ export default {
     ALL: 'All',
     GET_STARTED: 'Get Started',
     ENTER_UPC_ITEM_NBR: 'Enter UPC or Item Number',
-    CHANGE: 'Change'
+    CHANGE: 'Change',
+    SEE_ALL: 'See all',
+    ADD: 'Add',
+    NOT_ASSIGNED: 'Not assigned'
   },
   HOME: {
     HOME: 'Home',
@@ -42,7 +45,12 @@ export default {
     QUANTITY: 'Quantity',
     ON_HANDS: 'On-hands',
     ON_ORDER: 'On order',
-    PENDING_MGR_APPROVAL: 'Pending manager approval'
+    PENDING_MGR_APPROVAL: 'Pending manager approval',
+    LOCATION: 'Location',
+    TO_PICKLIST: ' to picklist',
+    RESERVE_NEEDED: 'Reserve location needed to add to picklist',
+    FLOOR: 'Floor',
+    RESERVE: 'Reserve'
   },
   PRINT: {
     PRICE_SIGN: 'Print price sign'
