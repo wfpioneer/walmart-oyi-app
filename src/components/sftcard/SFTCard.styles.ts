@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch'
   },
   topRowContainer: {
-    padding: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
@@ -20,10 +21,10 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   icon: {
-    marginRight: 8
+    marginRight: 16
   },
   title: {
-    marginLeft: 8
+    marginLeft: 0
   },
   bottomRowContainer: {
     flexDirection: 'row',
