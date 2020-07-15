@@ -41,6 +41,7 @@ export default {
     CATEGORY: 'Category',
     QUANTITY: 'Quantity',
     ON_HANDS: 'On-hands',
+    ON_ORDER: 'On order',
     PENDING_MGR_APPROVAL: 'Pending manager approval'
   },
   PRINT: {

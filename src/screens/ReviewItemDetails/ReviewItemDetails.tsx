@@ -9,6 +9,7 @@ import ItemDetails from '../../models/ItemDetails';
 import {useNavigation} from '@react-navigation/native';
 import COLOR from '../../themes/Color';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { strings } from '../../locales';
 
 const renderOHQtyComponent = (ohQty: number, isOnHandsPending: boolean) => {
@@ -75,8 +76,14 @@ const ReviewItemDetails = (props: any) => {
             >
               {renderOHQtyComponent(itemDetails.onHandsQty, itemDetails.isOnHandsPending)}
             </SFTCard>
-            <SFTCard iconName={'rocket'} title={'Replenishment'}>
-              {/* Replenishment placeholder */}
+            <SFTCard
+              iconProp={<MaterialCommunityIcon name={'label-variant'} size={20} color={COLOR.GREY_700} style={{marginLeft: -4}} />}
+              title={'Replenishment'}
+            >
+              <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 8, paddingVertical: 16}}>
+                <Text>{strings('ITEM.ON_ORDER')}</Text>
+                <Text>{itemDetails.replenishment.onOrder}</Text>
+              </View>
             </SFTCard>
             <SFTCard iconName={'rocket'} title={'Locations (?)'}>
               {/* Locations placeholder */}
@@ -106,6 +113,9 @@ const mockData: any = {
     price: 2000.94,
     exceptionType: 'po',
     onHandsQty: 42,
-    isOnHandsPending: true
+    isOnHandsPending: true,
+    replenishment: {
+      onOrder: 48
+    }
   }
 }
