@@ -5,7 +5,9 @@ import { View, Text } from "react-native";
 export interface Props {
     goalTitle: string,
     completionPercentage: number,
-    completionGoal?: number
+    completionGoal?: number,
+    active: boolean,
+    frequency: string
 };
 
 function GoalCircle(Props:Props) {
@@ -15,6 +17,7 @@ function GoalCircle(Props:Props) {
     let ringTwo=(Props.completionPercentage>=50)?atGoal:styles.under50;
     let transfOne=(Props.completionPercentage>=50)?180:(Props.completionPercentage*3.6);
     let transfTwo=(Props.completionPercentage>=50)?(Props.completionPercentage*3.6):0;
+    let goalStyle=Props.active?styles.goalNameActive:styles.goalNameInactive;
     return (
         <View>
             <View style={styles.baseRing}>
@@ -28,8 +31,8 @@ function GoalCircle(Props:Props) {
                     <Text style={styles.goalDisp}>{Props.completionPercentage}%</Text>
                 </View>
             </View>
-            <Text style={styles.freq}>Daily</Text>
-            <Text style={(Props.completionPercentage>=target)?styles.goalNameActive:styles.goalNameInactive}>{Props.goalTitle}</Text>
+            <Text style={styles.freq}>{Props.frequency}</Text>
+            <Text style={goalStyle}>{Props.goalTitle}</Text>
         </View>
     )
 };

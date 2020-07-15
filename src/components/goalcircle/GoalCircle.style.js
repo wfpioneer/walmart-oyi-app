@@ -15,7 +15,8 @@ const styles=StyleSheet.create({
         borderRadius: 50,
         backgroundColor: COLOR.GREY_300,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        alignSelf:"center"
     },
     halfRing: {
         width: 50,
@@ -52,7 +53,7 @@ const styles=StyleSheet.create({
     freq: {
         color: COLOR.GREY_500,
         textAlign: "center",
-        padding: 10
+        padding: 5
     },
     goalNameActive: {
         backgroundColor: COLOR.TRAINING_BLUE,

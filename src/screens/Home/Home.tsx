@@ -80,9 +80,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps> {
           )
           }
           <View style={containers.horizontalContainer}>
-            <GoalCircle goalTitle="Circle Samp" completionPercentage={65}/>
-            <GoalCircle goalTitle="Sample Two" completionPercentage={95}/>
-            <GoalCircle goalTitle="Under Half" completionPercentage={30}/>
+            <GoalCircle goalTitle="Items" completionPercentage={65} active={true} frequency="Daily"/>
+            <GoalCircle goalTitle="Pallets" completionPercentage={95} active={false} frequency="Daily"/>
+            <GoalCircle goalTitle="Audits" completionPercentage={30} active={false} frequency="Weekly"/>
           </View>
           <WorklistCard goalTitle="Sample" goal={25} complete={23} completionPercentage={(23/25)*100} completionGoal={98}/>
           <WorklistCard goalTitle="Second Sample" goal={10} complete={3} completionPercentage={(3/10)*100} completionGoal={30}/>
