@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 
@@ -14,22 +14,28 @@ import { strings } from '../../locales';
 import Location from '../../models/Location';
 import Button from '../../components/button/Button';
 import moment from 'moment';
+import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
 
 const ReviewItemDetails = (props: any) => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails)
   const { countryCode, siteId } = useTypedSelector(state => state.User);
   const navigation = useNavigation();
-  const [isDailyPeriod, setIsDailyPeriod] = useState(true);
+  const scrollViewRef: RefObject<ScrollView> = createRef();
 
   const itemDetails: ItemDetails = (result && result.data) || mockData[scannedEvent.value];
   const locationCount = itemDetails.location.count;
   const updatedSalesTS = moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a');
-  const salesTimePeriodText = isDailyPeriod ? strings('GENERICS.DAILY') : strings('GENERICS.WEEKLY');
 
   useEffect(() => {
     // TODO Call service here
   }, [scannedEvent])
+
+  // Used to scroll to bottom when the sales metrics switches from daily to weekly
+  // This may also happen when a new item is "scanned" from this screen, needs to be tested at a later time
+  const handleContentSizeChange = () => {
+    scrollViewRef.current && scrollViewRef.current.scrollToEnd();
+  }
 
   const handleUpdateQty = () => {
     // TODO display popup/modal
@@ -44,10 +50,6 @@ const ReviewItemDetails = (props: any) => {
   const handleAddToPicklist = () => {
     // TODO Call service for picklist here
     console.log('Add to picklist clicked!');
-  }
-
-  const handleDailyTimePeriodChange = (isDaily: boolean) => () => {
-    setIsDailyPeriod(isDaily);
   }
 
   const renderOHQtyComponent = () => {
@@ -123,41 +125,9 @@ const ReviewItemDetails = (props: any) => {
     );
   }
 
-  const renderDailyList = (dailyList: [{day: string, value: number}]) => {
-
-    return (
-      <View style={{paddingHorizontal: 10}}>
-        {dailyList.map((row, index) => {
-          const formattedDay = moment(row.day).format('ddd, MMM DD');
-          return (
-            <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 12, paddingHorizontal: 10, borderTopWidth: index !==0 ? 1 : 0, borderTopColor: COLOR.GREY_300}} >
-              <Text>{formattedDay}</Text>
-              <Text>{row.value}</Text>
-            </View>
-          )
-        })}
-      </View>
-    )
-  }
-  const renderWeeklyList = (weeklyList: [{week: number, value: number}]) => {
-
-    return (
-      <View style={{paddingHorizontal: 10}}>
-        {weeklyList.map((row, index) => {
-          return (
-            <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 12, paddingHorizontal: 10, borderTopWidth: index !==0 ? 1 : 0, borderTopColor: COLOR.GREY_300}} >
-              <Text>{`${strings('GENERICS.WEEK')} ${row.week}`}</Text>
-              <Text>{row.value}</Text>
-            </View>
-          )
-        })}
-      </View>
-    )
-  }
-
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container} onContentSizeChange={handleContentSizeChange}>
         {isWaiting && <ActivityIndicator
           animating={isWaiting}
           hidesWhenStopped
@@ -205,38 +175,7 @@ const ReviewItemDetails = (props: any) => {
               title={strings('ITEM.SALES_METRICS')}
               subTitle={`${strings('GENERICS.UPDATED')} ${updatedSalesTS}`}
             >
-              <View style={{alignItems: 'center', padding: 8, marginTop: 12}}>
-                <Text style={{fontSize: 32}}>{isDailyPeriod ? itemDetails.sales.dailyAvgSales : itemDetails.sales.weeklyAvgSales}</Text>
-                <Text style={{fontSize: 12, color: COLOR.GREY_600}}>{`${salesTimePeriodText} ${strings('ITEM.AVG_SALES')}`}</Text>
-              </View>
-              {isDailyPeriod && renderDailyList(itemDetails.sales.daily)}
-              {!isDailyPeriod && renderWeeklyList(itemDetails.sales.weekly)}
-              <View style={{flexDirection: 'row', justifyContent: 'center', marginVertical: 12}} >
-                <Button
-                  title={strings('GENERICS.DAILY')}
-                  titleFontSize={12}
-                  titleFontWeight={'bold'}
-                  titleColor={!isDailyPeriod ? COLOR.MAIN_THEME_COLOR : COLOR.WHITE}
-                  backgroundColor={!isDailyPeriod ? COLOR.GREY_200 : COLOR.MAIN_THEME_COLOR}
-                  height={20}
-                  width={72}
-                  radius={50}
-                  style={{marginRight: 4}}
-                  onPress={handleDailyTimePeriodChange(true)}
-                />
-                <Button
-                  title={strings('GENERICS.WEEKLY')}
-                  titleFontSize={12}
-                  titleFontWeight={'bold'}
-                  titleColor={isDailyPeriod ? COLOR.MAIN_THEME_COLOR : COLOR.WHITE}
-                  backgroundColor={isDailyPeriod ? COLOR.GREY_200 : COLOR.MAIN_THEME_COLOR}
-                  height={20}
-                  width={72}
-                  radius={50}
-                  style={{marginLeft: 4}}
-                  onPress={handleDailyTimePeriodChange(false)}
-                />
-              </View>
+              <SalesMetrics itemDetails={itemDetails} />
             </SFTCard>
           </View>
         }
@@ -283,7 +222,7 @@ const mockData: any = {
       count: 10
     },
     sales: {
-      lastUpdateTs: '2020-07-08T08:02:17-05:00',
+      lastUpdateTs: '2020-07-15T08:02:17-05:00',
       dailyAvgSales: 15,
       daily: [
         {
@@ -308,7 +247,7 @@ const mockData: any = {
         },
         {
           day: '2020-07-13',
-          value: 10
+          value: 5
         },
         {
           day: '2020-07-14',
