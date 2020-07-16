@@ -17,14 +17,14 @@ export default interface ItemDetails {
   location: {
     floor?: [Location];
     reserve?: [Location];
-    count? : number;
+    count: number;
   };
   sales: {
     lastUpdateTs: string;
     dailyAvgSales: number;
     daily: [
       {
-        day: any;
+        day: string;
         value: number
       }
     ];
