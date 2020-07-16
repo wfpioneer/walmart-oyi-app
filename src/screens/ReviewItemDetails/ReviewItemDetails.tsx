@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect } from 'react';
-import { ActivityIndicator, Button, Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 
 import styles from './ReviewItemDetails.style';
@@ -9,25 +9,10 @@ import ItemDetails from '../../models/ItemDetails';
 import {useNavigation} from '@react-navigation/native';
 import COLOR from '../../themes/Color';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { strings } from '../../locales';
-
-const renderOHQtyComponent = (ohQty: number, isOnHandsPending: boolean) => {
-
-  return (
-    <View style={{paddingHorizontal: 8, paddingVertical: 16}}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Text>{strings('ITEM.ON_HANDS')}</Text>
-        <Text>{ohQty}</Text>
-      </View>
-      {isOnHandsPending &&
-        <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 8}}>
-          <FontAwesome5Icon name={'info-circle'} size={12} color={COLOR.GREY_700} style={{paddingRight: 6}}/>
-          <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
-        </View>
-      }
-    </View>
-  );
-}
+import Location from '../../models/Location';
+import Button from '../../components/button/Button';
 
 const ReviewItemDetails = (props: any) => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
@@ -35,7 +20,8 @@ const ReviewItemDetails = (props: any) => {
   const { countryCode, siteId } = useTypedSelector(state => state.User);
   const navigation = useNavigation();
 
-  let itemDetails: ItemDetails = (result && result.data) || mockData[scannedEvent.value];
+  const itemDetails: ItemDetails = (result && result.data) || mockData[scannedEvent.value];
+  const locationCount = itemDetails.location.count;
 
   useEffect(() => {
     // TODO Call service here
@@ -43,7 +29,90 @@ const ReviewItemDetails = (props: any) => {
 
   const handleUpdateQty = () => {
     // TODO display popup/modal
-    console.log('Change qty clicked!')
+    console.log('Change qty clicked!');
+  }
+
+  const handleLocationAction = () => {
+    // TODO navigate to location screen
+    console.log('Handle location screen');
+  }
+
+  const handleAddToPicklist = () => {
+    // TODO Call service for picklist here
+    console.log('Add to picklist clicked!');
+  }
+
+  const renderOHQtyComponent = () => {
+    return (
+      <View style={{paddingHorizontal: 8, paddingVertical: 16}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text>{strings('ITEM.ON_HANDS')}</Text>
+          <Text>{itemDetails.onHandsQty}</Text>
+        </View>
+        {itemDetails.isOnHandsPending &&
+        <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 8}}>
+          <FontAwesome5Icon name={'info-circle'} size={12} color={COLOR.GREY_700} style={{paddingRight: 6}}/>
+          <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
+        </View>
+        }
+      </View>
+    );
+  }
+
+  const renderLocationComponent = () => {
+    const { floor, reserve } = itemDetails.location;
+
+    return (
+      <View style={{paddingHorizontal: 8}}>
+        <View style={styles.locationDetailsContainer}>
+          <Text>{strings('ITEM.FLOOR')}</Text>
+          {floor && floor.length >= 1 ?
+            <Text>{floor[0].name}</Text>
+            :
+            <Button
+              type={3}
+              title={strings('GENERICS.ADD')}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight={'bold'}
+              height={28}
+              onPress={handleLocationAction}
+            />
+          }
+        </View>
+        <View style={styles.locationDetailsContainer}>
+          <Text>{strings('ITEM.RESERVE')}</Text>
+          {reserve && reserve.length >= 1 ?
+            <Text>{reserve[0].name}</Text>
+            :
+            <Button
+              type={3}
+              title={strings('GENERICS.ADD')}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight={'bold'}
+              height={28}
+              onPress={handleLocationAction}
+            />
+          }
+        </View>
+        <View style={{flexDirection: 'row', justifyContent: 'flex-end', paddingVertical: 8}}>
+          {reserve && reserve.length >= 1 ?
+            <Button
+              type={3}
+              title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight={'bold'}
+              height={28}
+              onPress={handleAddToPicklist}
+            />
+            :
+            <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>
+          }
+        </View>
+      </View>
+    );
   }
 
   return (
@@ -73,13 +142,24 @@ const ReviewItemDetails = (props: any) => {
               topRightBtnTxt={strings('GENERICS.CHANGE')}
               topRightBtnAction={handleUpdateQty}
             >
-              {renderOHQtyComponent(itemDetails.onHandsQty, itemDetails.isOnHandsPending)}
+              {renderOHQtyComponent()}
             </SFTCard>
-            <SFTCard iconName={'rocket'} title={'Replenishment'}>
-              {/* Replenishment placeholder */}
+            <SFTCard
+              iconProp={<MaterialCommunityIcon name={'label-variant'} size={20} color={COLOR.GREY_700} style={{marginLeft: -4}} />}
+              title={'Replenishment'}
+            >
+              <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 8, paddingVertical: 16}}>
+                <Text>{strings('ITEM.ON_ORDER')}</Text>
+                <Text>{itemDetails.replenishment.onOrder}</Text>
+              </View>
             </SFTCard>
-            <SFTCard iconName={'rocket'} title={'Locations (?)'}>
-              {/* Locations placeholder */}
+            <SFTCard
+              iconName={'map-marker-alt'}
+              title={`${strings('ITEM.LOCATION')}(${locationCount})`}
+              topRightBtnTxt={locationCount && locationCount >= 1 ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD')}
+              topRightBtnAction={handleLocationAction}
+            >
+              {renderLocationComponent()}
             </SFTCard>
             <View>
               {/* Sales Metrics placeholder */}
@@ -106,6 +186,27 @@ const mockData: any = {
     price: 2000.94,
     exceptionType: 'po',
     onHandsQty: 42,
-    isOnHandsPending: true
+    isOnHandsPending: true,
+    replenishment: {
+      onOrder: 48
+    },
+    location: {
+      floor: [
+        {
+          id: '1',
+          type: 'pod',
+          name: 'F15-4'
+        }
+      ],
+      reserve: [
+        {
+          id: '2',
+          type: 'reserve',
+          name: 'F15-4'
+        }
+      ],
+      // reserve: [],
+      count: 10
+    }
   }
 }
