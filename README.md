@@ -12,11 +12,13 @@ to set up many React Native apps.
 * `react-native-localize` for your localization pleasure
 * `redux` for your state management
 * `react-native-wmsso` to handle Walmart associate logins
+* `react-native-wm-barcode` to handle barcode scanning on devices [(docs)](https://gecgithub01.walmart.com/Store-Mobility-Services/wm-barcode-scanner/tree/master/react)
 
 ### To run the app
 * Clone the repo
 * Run `npm install`
 * For iOS run `cd ios && pod install`
+* Run `npx react-native link` (Needed??)
 * Open up Android Studio/Xcode
 * Hit play
 
@@ -35,6 +37,9 @@ to set up many React Native apps.
   * All the redux actions/reducers
 * themes
   * Contains color values
+
+### How to emulate a barcode scan
+1. In your debugger console: `window.mockScan('value', 'type')`
 
 ### How to set up an API call
 1. Create your saga action in `state/actions/saga.ts`

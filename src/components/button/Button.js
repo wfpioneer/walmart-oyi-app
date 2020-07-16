@@ -40,6 +40,7 @@ class Button extends PureComponent {
       style,
       titleColor,
       titleFontSize,
+      titleFontWeight,
       title
     } = this.props;
     const containerStyle = width === -1
@@ -92,7 +93,8 @@ class Button extends PureComponent {
               style={{
                 color: titleColor,
                 fontSize: titleFontSize,
-                fontFamily: 'Roboto-Medium'
+                fontFamily: 'Roboto-Medium',
+                fontWeight: titleFontWeight
               }}
             >
               {title}
@@ -109,6 +111,7 @@ Button.propTypes = {
   title: PropTypes.string,
   titleColor: PropTypes.string,
   titleFontSize: PropTypes.number,
+  titleFontWeight: PropTypes.string,
   backgroundColor: PropTypes.string,
   height: PropTypes.number,
   width: PropTypes.number,
@@ -123,6 +126,7 @@ Button.defaultProps = {
   title: 'default',
   titleColor: COLOR.WHITE,
   titleFontSize: 16,
+  titleFontWeight: 'normal',
   backgroundColor: COLOR.MAIN_THEME_COLOR,
   height: 45,
   width: -1,

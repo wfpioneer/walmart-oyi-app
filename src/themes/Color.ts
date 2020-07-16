@@ -65,8 +65,8 @@ export const COLOR = {
   GAINSBORO: '#d8d8d8',
   MIDNIGHT: '#323a4e',
   PALE_BLUE: '#dbecff',
-  PALE_GRAY: '#edededcc'
-
+  PALE_GRAY: '#edededcc',
+  PINK: '#c71585'
 };
 
 export default COLOR;

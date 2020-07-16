@@ -22,9 +22,37 @@ export default {
     NEXT: 'Next',
     EXIT: 'Exit',
     ALL: 'All',
-    GET_STARTED: 'Get Started'
+    GET_STARTED: 'Get Started',
+    ENTER_UPC_ITEM_NBR: 'Enter UPC or Item Number',
+    CHANGE: 'Change',
+    SEE_ALL: 'See all',
+    ADD: 'Add',
+    NOT_ASSIGNED: 'Not assigned'
   },
   HOME: {
+    HOME: 'Home',
     STYLE_GUIDE: 'Style Guide'
+  },
+  EXCEPTION: {
+    PO: 'Price Override'
+  },
+  ITEM: {
+    TITLE: 'Review item details',
+    ITEM: 'Item',
+    UPC: 'UPC',
+    STATUS: 'Status',
+    CATEGORY: 'Category',
+    QUANTITY: 'Quantity',
+    ON_HANDS: 'On-hands',
+    ON_ORDER: 'On order',
+    PENDING_MGR_APPROVAL: 'Pending manager approval',
+    LOCATION: 'Location',
+    TO_PICKLIST: ' to picklist',
+    RESERVE_NEEDED: 'Reserve location needed to add to picklist',
+    FLOOR: 'Floor',
+    RESERVE: 'Reserve'
+  },
+  PRINT: {
+    PRICE_SIGN: 'Print price sign'
   }
 };

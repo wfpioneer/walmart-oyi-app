@@ -25,6 +25,7 @@ export default {
     GET_STARTED: 'Empezar'
   },
   HOME: {
+    HOME: 'Casa',
     STYLE_GUIDE: 'Guía de estilo'
   }
 };
