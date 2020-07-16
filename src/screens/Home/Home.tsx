@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  ActivityIndicator, SafeAreaView, ScrollView, Text, View
+  ActivityIndicator, EmitterSubscription, SafeAreaView, ScrollView, Text, View
 } from 'react-native';
 import Button from '../../components/button/Button';
 import { hitGoogle } from '../../state/actions/saga';
 import styles from './Home.style';
 import COLOR from '../../themes/Color';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { barcodeEmitter } from '../../utils/scannerUtils';
+import { setScannedEvent } from '../../state/actions/Global';
 import WorklistCard from '../../components/worklistcard/WorklistCard';
 import GoalCircle from "../../components/goalcircle/GoalCircle";
-import containers from "../../components/containerstyles/ContainerStyles.style";
 
 const mapStateToProps = (state: any) => {
   const googleResult = state.async.hitGoogle.result && state.async.hitGoogle.result.data;
@@ -79,7 +81,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps> {
             </Text>
           )
           }
-          <View style={containers.horizontalContainer}>
+          <View style={styles.horizontalContainer}>
             <GoalCircle goalTitle="Items" completionPercentage={65} active={true} frequency="Daily"/>
             <GoalCircle goalTitle="Pallets" completionPercentage={95} active={false} frequency="Daily"/>
             <GoalCircle goalTitle="Audits" completionPercentage={30} active={false} frequency="Weekly"/>

@@ -7,32 +7,33 @@ export interface Props {
     completionPercentage: number,
     completionGoal?: number,
     active: boolean,
-    frequency: string
+    frequency: "Daily" | "Weekly"
 };
 
-function GoalCircle(Props:Props) {
-    let target;
-    Props.completionGoal?(target=Props.completionGoal):(target=95);
-    let atGoal=(Props.completionPercentage>=target)?styles.goalMet:styles.goalNotMet;
-    let ringTwo=(Props.completionPercentage>=50)?atGoal:styles.under50;
-    let transfOne=(Props.completionPercentage>=50)?180:(Props.completionPercentage*3.6);
-    let transfTwo=(Props.completionPercentage>=50)?(Props.completionPercentage*3.6):0;
-    let goalStyle=Props.active?styles.goalNameActive:styles.goalNameInactive;
+function GoalCircle(props:Props) {
+    const target = (props.completionGoal)?props.completionGoal:95;
+    const atGoalStyle=(props.completionPercentage>=target)?styles.goalMet:styles.goalNotMet;
+    const ringTwoStyle=(props.completionPercentage>=50)?atGoalStyle:styles.under50;
+    //Calculate the transformation degrees to correctly position half-circle #1.
+    const transfOne=(props.completionPercentage>=50)?180:(props.completionPercentage*3.6);
+    //Calculate the transformation degrees to correctly position half-circle #2.
+    const transfTwo=(props.completionPercentage>=50)?(props.completionPercentage*3.6):0;
+    const goalStyle=props.active?styles.goalNameActive:styles.goalNameInactive;
     return (
         <View>
             <View style={styles.baseRing}>
                 <View style={[styles.container, {transform: [{rotate:`${transfOne}deg`}]}]}>
-                    <View style={[atGoal, styles.halfRing]}/>
+                    <View style={[atGoalStyle, styles.halfRing]}/>
                 </View>
                 <View style={[styles.container, {transform: [{rotate: `${transfTwo}deg`}]}]}>
-                    <View style={[ringTwo, styles.halfRing]}/>
+                    <View style={[ringTwoStyle, styles.halfRing]}/>
                 </View>
                 <View style={styles.centerRing}>
-                    <Text style={styles.goalDisp}>{Props.completionPercentage}%</Text>
+                    <Text style={styles.goalDisp}>{props.completionPercentage}%</Text>
                 </View>
             </View>
-            <Text style={styles.freq}>{Props.frequency}</Text>
-            <Text style={goalStyle}>{Props.goalTitle}</Text>
+            <Text style={styles.freq}>{props.frequency}</Text>
+            <Text style={goalStyle}>{props.goalTitle}</Text>
         </View>
     )
 };

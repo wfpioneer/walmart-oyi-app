@@ -28,18 +28,18 @@ const styles=StyleSheet.create({
         left:0
     },
     goalNotMet: {
-        backgroundColor: "#D6512D"
+        backgroundColor: COLOR.TRACKER_RED
     },
     goalMet: {
-        backgroundColor: "#545F7A"
+        backgroundColor: COLOR.TRACKER_GREY
     },
     under50: {
         backgroundColor: COLOR.GREY_300
     },
     centerRing: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
+        width: 85,
+        height: 85,
+        borderRadius: 43,
         backgroundColor: COLOR.WHITE,
         justifyContent: "center",
         alignItems: "center"
@@ -47,8 +47,7 @@ const styles=StyleSheet.create({
     goalDisp: {
         textAlign: "center",
         textAlignVertical: "center",
-        fontSize: 18,
-        fontWeight: "bold"
+        fontSize: 25
     },
     freq: {
         color: COLOR.GREY_500,
@@ -57,18 +56,18 @@ const styles=StyleSheet.create({
     },
     goalNameActive: {
         backgroundColor: COLOR.TRAINING_BLUE,
-        height: 25,
-        width: 110,
-        borderRadius: 25,
+        height: 30,
+        width: 100,
+        borderRadius: 30,
         color: COLOR.WHITE,
         textAlign: "center",
         textAlignVertical: "center"
     },
     goalNameInactive: {
         backgroundColor: COLOR.GREY_300,
-        height: 25,
-        width: 110,
-        borderRadius: 25,
+        height: 30,
+        width: 100,
+        borderRadius: 30,
         color: COLOR.TRAINING_BLUE,
         textAlign: "center",
         textAlignVertical: "center"
