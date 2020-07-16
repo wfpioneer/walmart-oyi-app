@@ -43,6 +43,60 @@ const renderWeeklyList = (weeklyList: [{week: number, value: number}]) => {
   )
 }
 
+const renderChart = (chartData:{label: string, value: number}[], isDailyPeriod: boolean) => {
+  const CUT_OFF = 50
+  const Labels = (props: { x: any, y: any, bandwidth: any, data: [{label: string, value: number}] }) => {
+    const { x, y, bandwidth, data } = props;
+    return (
+      data.map((entry, index) => (
+        <SvgText
+          key={ index }
+          x={ x(index) + (bandwidth / 2) }
+          y={ entry.value < CUT_OFF ? y(entry.value) - 10 : y(entry.value) + 15 }
+          fontSize={ 10 }
+          fill={ entry.value > CUT_OFF ? 'white' : 'black' }
+          alignmentBaseline={ 'middle' }
+          textAnchor={ 'middle' }
+        >
+          {entry.value}
+        </SvgText>
+      ))
+    )
+  }
+
+  const formatChartLabel = (label: string) => {
+    if (isDailyPeriod) {
+      return moment(label).format('MM-DD');
+    } else {
+      return `${strings('GENERICS.WEEK')} ${label}`;
+    }
+  }
+
+  return (
+    <View style={{height: 200, paddingVertical: 16}} >
+      <BarChart
+        style={{ flex: 1 }}
+        data={chartData}
+        yAccessor={({item}) => item.value}
+        svg={{ fill: COLOR.GREEN }}
+        contentInset={{ top: 10, bottom: 10 }}
+        gridMin={0}
+      >
+        <Grid />
+        {/*@ts-ignore because props are passed in from BarChart*/}
+        <Labels />
+      </BarChart>
+      <XAxis
+        style={{ marginTop: 10 }}
+        data={ chartData }
+        scale={scale.scaleBand}
+        formatLabel={ (value, index) => formatChartLabel(chartData[index].label) }
+        svg={{ fontSize: 10, fill: 'black' }}
+      />
+    </View>
+  )
+}
+
 const SalesMetrics = (props: {itemDetails: ItemDetails, isGraphView: boolean}) => {
   const [isDailyPeriod, setIsDailyPeriod] = useState(true);
   const { daily, weekly, dailyAvgSales, weeklyAvgSales } = props.itemDetails.sales;
@@ -56,7 +110,7 @@ const SalesMetrics = (props: {itemDetails: ItemDetails, isGraphView: boolean}) =
   });
   const weeklyChartData = weekly.map((data) => {
     return {
-      label: data.week,
+      label: `${data.week}`,
       value: data.value
     };
   });
@@ -71,38 +125,10 @@ const SalesMetrics = (props: {itemDetails: ItemDetails, isGraphView: boolean}) =
         <Text style={styles.averageQtyNbr}>{isDailyPeriod ? dailyAvgSales : weeklyAvgSales}</Text>
         <Text style={styles.averageQtyLabel}>{`${salesTimePeriodText} ${strings('ITEM.AVG_SALES')}`}</Text>
       </View>
-      {isDailyPeriod && !props.isGraphView ?
-        renderDailyList(daily)
-        :
-        <View style={{height: 200, paddingVertical: 16}} >
-          <BarChart
-            style={{ flex: 1 }}
-            data={dailyChartData}
-            yAccessor={({item}) => item.value}
-            svg={{ fill: 'rgba(12, 150, 12, 0.95)' }}
-            contentInset={{ top: 10, bottom: 10 }}
-            gridMin={0}
-          >
-            <Grid />
-          </BarChart>
-          <XAxis
-            style={{ marginTop: 10 }}
-            data={ dailyChartData }
-            scale={scale.scaleBand}
-            formatLabel={ (value, index) => moment(dailyChartData[index].label).format('MM-DD') }
-            svg={{ fontSize: 10, fill: 'black' }}
-          />
-        </View>
-      }
-      {!isDailyPeriod && !props.isGraphView ?
-        renderWeeklyList(weekly)
-        :
-        <View>
-          {/*<BarChart data={weeklyChartData}>*/}
-          {/*  <Grid />*/}
-          {/*</BarChart>*/}
-        </View>
-      }
+      {isDailyPeriod && !props.isGraphView && renderDailyList(daily)}
+      {isDailyPeriod && props.isGraphView && renderChart(dailyChartData, isDailyPeriod)}
+      {!isDailyPeriod && !props.isGraphView && renderWeeklyList(weekly)}
+      {!isDailyPeriod && props.isGraphView && renderChart(weeklyChartData, isDailyPeriod)}
       <View style={styles.bottomButtonContainer} >
         <Button
           title={strings('GENERICS.DAILY')}
