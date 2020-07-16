@@ -21,10 +21,18 @@ const styles = StyleSheet.create({
   bottomButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginVertical: 12
+    marginTop: 12,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: COLOR.GREY_100
   },
-  averageQtyNbr: {fontSize: 32},
-  averageQtyLabel: {fontSize: 12, color: COLOR.GREY_600}
+  averageQtyNbr: {
+    fontSize: 32
+  },
+  averageQtyLabel: {
+    fontSize: 12,
+    color: COLOR.GREY_600
+  }
 })
 
 export default styles;

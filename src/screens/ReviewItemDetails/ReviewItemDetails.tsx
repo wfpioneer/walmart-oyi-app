@@ -22,6 +22,7 @@ const ReviewItemDetails = (props: any) => {
   const { countryCode, siteId } = useTypedSelector(state => state.User);
   const navigation = useNavigation();
   const scrollViewRef: RefObject<ScrollView> = createRef();
+  const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
 
   const itemDetails: ItemDetails = (result && result.data) || mockData[scannedEvent.value];
   const locationCount = itemDetails.location.count;
@@ -32,10 +33,9 @@ const ReviewItemDetails = (props: any) => {
   }, [scannedEvent])
 
   // Used to scroll to bottom when the sales metrics switches from daily to weekly
-  // This may also happen when a new item is "scanned" from this screen, needs to be tested at a later time
-  const handleContentSizeChange = () => {
-    scrollViewRef.current && scrollViewRef.current.scrollToEnd();
-  }
+  // const handleContentSizeChange = () => {
+  //   scrollViewRef.current && scrollViewRef.current.scrollToEnd();
+  // }
 
   const handleUpdateQty = () => {
     // TODO display popup/modal
@@ -50,6 +50,10 @@ const ReviewItemDetails = (props: any) => {
   const handleAddToPicklist = () => {
     // TODO Call service for picklist here
     console.log('Add to picklist clicked!');
+  }
+
+  const toggleSalesGraphView = () => {
+    setIsSalesMetricsGraphView(prevState => !prevState);
   }
 
   const renderOHQtyComponent = () => {
@@ -127,7 +131,7 @@ const ReviewItemDetails = (props: any) => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container} onContentSizeChange={handleContentSizeChange}>
+      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container} >
         {isWaiting && <ActivityIndicator
           animating={isWaiting}
           hidesWhenStopped
@@ -174,8 +178,10 @@ const ReviewItemDetails = (props: any) => {
             <SFTCard
               title={strings('ITEM.SALES_METRICS')}
               subTitle={`${strings('GENERICS.UPDATED')} ${updatedSalesTS}`}
+              bottomRightBtnTxt={['Toggle graph']}
+              bottomRightBtnAction={[toggleSalesGraphView]}
             >
-              <SalesMetrics itemDetails={itemDetails} />
+              <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
             </SFTCard>
           </View>
         }
@@ -243,7 +249,7 @@ const mockData: any = {
         },
         {
           day: '2020-07-12',
-          value: 10
+          value: 42
         },
         {
           day: '2020-07-13',

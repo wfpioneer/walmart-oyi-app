@@ -14,11 +14,11 @@ interface SFTCardProps {
   topRightBtnTxt?: string;
   topRightBtnAction?: () => void;
   bottomRightBtnTxt?: string[];
-  bottomRightBtnAction?: (index: number) => void;
+  bottomRightBtnAction?: Function[];
   children?: ReactNode | ReactElement;
 }
 
-const renderBottomRightBtns = (textArray: string[], actionFunc?: (index: number) => void) => {
+const renderBottomRightBtns = (textArray: string[], actionFunc?: Function[]) => {
   const arraySize = textArray.length;
   return (
     <View style={styles.bottomRowContainer}>
@@ -35,7 +35,7 @@ const renderBottomRightBtns = (textArray: string[], actionFunc?: (index: number)
                 <Button
                   type={Button.Type.NO_BORDER}
                   title={value}
-                  onPress={() => actionFunc(index)}
+                  onPress={() => actionFunc[index]()}
                   titleColor={COLOR.MAIN_THEME_COLOR}
                   titleFontSize={14}
                   titleFontWeight={'bold'}
