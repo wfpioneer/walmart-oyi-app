@@ -9,7 +9,8 @@ import styles from './Home.style';
 import COLOR from '../../themes/Color';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { setScannedEvent } from '../../state/actions/Global';
+import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import ManualScanComponent from '../../components/manualscan/ManualScan';
 
 const mapStateToProps = (state: any) => {
   const googleResult = state.async.hitGoogle.result && state.async.hitGoogle.result.data;
@@ -17,24 +18,26 @@ const mapStateToProps = (state: any) => {
     userName: state.User.additional.displayName,
     googleLoading: state.async.hitGoogle.isWaiting,
     googleResult,
-    googleError: state.async.hitGoogle.error
+    googleError: state.async.hitGoogle.error,
+    isManualScanEnabled: state.Global.isManualScanEnabled
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    hitGoogle: (payload: any) => dispatch(hitGoogle(payload)),
-    setScannedEvent: (event: any) => dispatch(setScannedEvent(event))
-  }
+const mapDispatchToProps = {
+  hitGoogle,
+  setScannedEvent,
+  setManualScan
 };
 
 interface HomeScreenProps {
   userName: string;
   hitGoogle: Function;
   setScannedEvent: Function;
+  setManualScan: Function;
   googleLoading: boolean;
   googleResult: string;
   googleError: string;
+  isManualScanEnabled: boolean;
   navigation: StackNavigationProp<any>;
 }
 
@@ -46,8 +49,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps> {
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', (scan) => {
       console.log('received scan', scan.value, scan.type);
-      props.setScannedEvent(scan)
-      props.navigation.navigate('ReviewItemDetails')
+      props.setScannedEvent(scan);
+      props.setManualScan(false);
+      props.navigation.navigate('ReviewItemDetails');
     });
   }
 
@@ -67,6 +71,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps> {
     | undefined {
     return (
       <SafeAreaView style={styles.safeAreaView}>
+        {this.props.isManualScanEnabled && <ManualScanComponent />}
         <ScrollView contentContainerStyle={styles.container}>
           <Text>This is the home screen!</Text>
           <Text>

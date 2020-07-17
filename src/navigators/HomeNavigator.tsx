@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
 // @ts-ignore
 import WMSSO from 'react-native-wmsso';
-import {
-  Image, Platform, TouchableOpacity, View
-} from 'react-native';
+import { Image, Platform, TouchableOpacity, View } from 'react-native';
 import Home from '../screens/Home/Home';
 import COLOR from '../themes/Color';
 import styles from './HomeNavigator.style';
@@ -15,20 +13,28 @@ import { logoutUser } from '../state/actions/User';
 import { hideModal, showModal } from '../state/actions/ActivityModal';
 import StyleGuide from '../screens/StyleGuide/StyleGuide';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import TextInputComponent from '../components/textinput/TextInput';
-import ManualScanComponent from '../components/manualscan/ManualScan';
+import { setManualScan } from '../state/actions/Global';
 
 interface HomeNavigatorComponentProps {
   logoutUser: Function;
   showModal: Function;
   hideModal: Function;
   navigation: Record<string, any>;
+  isManualScanEnabled: boolean;
+  setManualScan: Function;
+}
+
+const mapStateToProps = (state: any) => {
+  return {
+    isManualScanEnabled: state.Global.isManualScanEnabled
+  }
 }
 
 const mapDispatchToProps = {
   logoutUser,
   showModal,
-  hideModal
+  hideModal,
+  setManualScan
 };
 
 const Stack = createStackNavigator();
@@ -67,19 +73,20 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps) => {
   });
 };
 
-const renderHomeHeader = (props: HomeNavigatorComponentProps, manualScanEnabled: boolean, setManualScanEnabled: Function) => {
+const renderHomeHeader = (props: HomeNavigatorComponentProps) => {
+  const { isManualScanEnabled, setManualScan } = props;
 
   return (
     <View style={styles.headerContainer}>
-      {!manualScanEnabled ? renderHomeScanButton(setManualScanEnabled) : <ManualScanComponent setManualScanEnabled={setManualScanEnabled} />}
+      {renderHomeScanButton(isManualScanEnabled, setManualScan)}
       {renderHomeMenuButton(props)}
     </View>
   )
 }
 
-const renderHomeScanButton = (setManualScanEnabled: Function) => {
+const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScan: Function) => {
   return (
-    <TouchableOpacity onPress={() => {setManualScanEnabled(true)}}>
+    <TouchableOpacity onPress={() => {setManualScan(!isManualScanEnabled)}}>
       <View style={styles.leftButton}>
         <MaterialCommunityIcon name={'barcode-scan'} size={20} color={COLOR.WHITE} />
       </View>
@@ -115,8 +122,6 @@ const renderStyleGuideMenuButton = (navigation: any, route: any) => (
 );
 
 export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps) => {
-  const [isManualScanEnabled, setManualScanEnabled] = useState(false);
-
   return (
     <Stack.Navigator
       headerMode="float"
@@ -129,7 +134,7 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps) => {
         name="Home"
         component={Home}
         options={{
-          headerRight: () => renderHomeHeader(props, isManualScanEnabled, setManualScanEnabled)
+          headerRight: () => renderHomeHeader(props)
         }}
       />
       <Stack.Screen
@@ -144,4 +149,4 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps) => {
   );
 }
 
-export const HomeNavigator = connect(null, mapDispatchToProps)(HomeNavigatorComponent);
+export const HomeNavigator = connect(mapStateToProps, mapDispatchToProps)(HomeNavigatorComponent);
