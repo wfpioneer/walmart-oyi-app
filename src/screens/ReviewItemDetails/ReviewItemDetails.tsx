@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 
@@ -13,19 +13,29 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import { strings } from '../../locales';
 import Location from '../../models/Location';
 import Button from '../../components/button/Button';
+import moment from 'moment';
+import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
 
 const ReviewItemDetails = (props: any) => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails)
   const { countryCode, siteId } = useTypedSelector(state => state.User);
   const navigation = useNavigation();
+  const scrollViewRef: RefObject<ScrollView> = createRef();
+  const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
 
   const itemDetails: ItemDetails = (result && result.data) || mockData[scannedEvent.value];
   const locationCount = itemDetails.location.count;
+  const updatedSalesTS = moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a');
 
   useEffect(() => {
     // TODO Call service here
   }, [scannedEvent])
+
+  // Used to scroll to bottom when the sales metrics switches from daily to weekly
+  // const handleContentSizeChange = () => {
+  //   scrollViewRef.current && scrollViewRef.current.scrollToEnd();
+  // }
 
   const handleUpdateQty = () => {
     // TODO display popup/modal
@@ -40,6 +50,10 @@ const ReviewItemDetails = (props: any) => {
   const handleAddToPicklist = () => {
     // TODO Call service for picklist here
     console.log('Add to picklist clicked!');
+  }
+
+  const toggleSalesGraphView = () => {
+    setIsSalesMetricsGraphView(prevState => !prevState);
   }
 
   const renderOHQtyComponent = () => {
@@ -117,7 +131,7 @@ const ReviewItemDetails = (props: any) => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container} >
         {isWaiting && <ActivityIndicator
           animating={isWaiting}
           hidesWhenStopped
@@ -161,9 +175,14 @@ const ReviewItemDetails = (props: any) => {
             >
               {renderLocationComponent()}
             </SFTCard>
-            <View>
-              {/* Sales Metrics placeholder */}
-            </View>
+            <SFTCard
+              title={strings('ITEM.SALES_METRICS')}
+              subTitle={`${strings('GENERICS.UPDATED')} ${updatedSalesTS}`}
+              bottomRightBtnTxt={['Toggle graph']}
+              bottomRightBtnAction={[toggleSalesGraphView]}
+            >
+              <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
+            </SFTCard>
           </View>
         }
       </ScrollView>
@@ -207,6 +226,59 @@ const mockData: any = {
       ],
       // reserve: [],
       count: 10
+    },
+    sales: {
+      lastUpdateTs: '2020-07-15T08:02:17-05:00',
+      dailyAvgSales: 15,
+      daily: [
+        {
+          day: '2020-07-08',
+          value: 100
+        },
+        {
+          day: '2020-07-09',
+          value: 0
+        },
+        {
+          day: '2020-07-10',
+          value: 10
+        },
+        {
+          day: '2020-07-11',
+          value: 10
+        },
+        {
+          day: '2020-07-12',
+          value: 42
+        },
+        {
+          day: '2020-07-13',
+          value: 5
+        },
+        {
+          day: '2020-07-14',
+          value: 1
+        }
+      ],
+      weeklyAvgSales: 10,
+      weekly: [
+        {
+          week: 51,
+          value: 0
+        },
+        {
+          week: 1,
+          value: 10
+        },
+        {
+          week: 2,
+          value: 100
+        },
+        {
+          week: 3,
+          value: 10
+        }
+      ]
     }
   }
 }

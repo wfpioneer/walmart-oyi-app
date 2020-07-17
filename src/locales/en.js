@@ -27,7 +27,11 @@ export default {
     CHANGE: 'Change',
     SEE_ALL: 'See all',
     ADD: 'Add',
-    NOT_ASSIGNED: 'Not assigned'
+    NOT_ASSIGNED: 'Not assigned',
+    UPDATED: 'Updated',
+    DAILY: 'Daily',
+    WEEKLY: 'Weekly',
+    WEEK: 'Week'
   },
   HOME: {
     HOME: 'Home',
@@ -50,7 +54,9 @@ export default {
     TO_PICKLIST: ' to picklist',
     RESERVE_NEEDED: 'Reserve location needed to add to picklist',
     FLOOR: 'Floor',
-    RESERVE: 'Reserve'
+    RESERVE: 'Reserve',
+    SALES_METRICS: 'Sales metrics',
+    AVG_SALES: 'average sales'
   },
   PRINT: {
     PRICE_SIGN: 'Print price sign'

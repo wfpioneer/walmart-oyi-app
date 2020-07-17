@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
   title: {
     marginLeft: 0
   },
+  subTitle: {
+    marginLeft: 0,
+    fontSize: 10,
+    color: COLOR.GREY_500
+  },
   bottomRowContainer: {
     flexDirection: 'row',
     padding: 16,

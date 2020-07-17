@@ -10,14 +10,15 @@ interface SFTCardProps {
   iconName?: string;
   iconProp?: ReactNode;
   title: string;
+  subTitle?: string;
   topRightBtnTxt?: string;
   topRightBtnAction?: () => void;
   bottomRightBtnTxt?: string[];
-  bottomRightBtnAction?: (index: number) => void;
+  bottomRightBtnAction?: Function[];
   children?: ReactNode | ReactElement;
 }
 
-const renderBottomRightBtns = (textArray: string[], actionFunc?: (index: number) => void) => {
+const renderBottomRightBtns = (textArray: string[], actionFunc?: Function[]) => {
   const arraySize = textArray.length;
   return (
     <View style={styles.bottomRowContainer}>
@@ -34,7 +35,7 @@ const renderBottomRightBtns = (textArray: string[], actionFunc?: (index: number)
                 <Button
                   type={Button.Type.NO_BORDER}
                   title={value}
-                  onPress={() => actionFunc(index)}
+                  onPress={() => actionFunc[index]()}
                   titleColor={COLOR.MAIN_THEME_COLOR}
                   titleFontSize={14}
                   titleFontWeight={'bold'}
@@ -54,8 +55,18 @@ const renderBottomRightBtns = (textArray: string[], actionFunc?: (index: number)
   )
 }
 
+const renderTitle = (title: string, subTitle?: string) => {
+
+  return (
+    <View>
+      <Text style={styles.title}>{title}</Text>
+      {subTitle && <Text style={styles.subTitle}>{subTitle}</Text>}
+    </View>
+  );
+}
+
 const SFTCard = (props: SFTCardProps) => {
-  const { iconName, iconProp, title, topRightBtnTxt, topRightBtnAction, bottomRightBtnTxt, bottomRightBtnAction, children } = props;
+  const { iconName, iconProp, title, subTitle, topRightBtnTxt, topRightBtnAction, bottomRightBtnTxt, bottomRightBtnAction, children } = props;
 
   return (
     <View style={styles.mainContainer} >
@@ -64,11 +75,11 @@ const SFTCard = (props: SFTCardProps) => {
           {iconName ?
             <FontAwesome5Icon name={iconName} size={15} color={COLOR.GREY_700} style={styles.icon} />
             :
-            <View style={styles.icon}>
+            iconProp && <View style={styles.icon}>
               {iconProp}
             </View>
           }
-          <Text style={styles.title}>{title}</Text>
+          {renderTitle(title, subTitle)}
         </View>
         {topRightBtnTxt && topRightBtnAction &&
           <Button
