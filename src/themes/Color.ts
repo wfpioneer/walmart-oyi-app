@@ -33,6 +33,9 @@ export const COLOR = {
   RED_800: '#c62828',
   RED_900: '#b71c1c',
 
+  TRACKER_RED: '#D6512D',
+  TRACKER_GREY: '#545F7A',
+
   HOLO_GREEN_DARK: '#669900',
   LIGHT_AQUA_BLUE: '#F0F9FF',
   TIP_BLUE: '#1977d3',
