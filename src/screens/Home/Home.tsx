@@ -12,7 +12,6 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
-import { setScannedEvent } from '../../state/actions/Global';
 import WorklistCard from '../../components/worklistcard/WorklistCard';
 import GoalCircle from "../../components/goalcircle/GoalCircle";
 
