@@ -3,7 +3,7 @@ import { Image, Text, View } from 'react-native';
 
 import styles from './ItemInfo.style';
 import { currencies, strings } from '../../locales';
-import Button from '../button/Button';
+import Button from '../buttons/Button';
 import COLOR from '../../themes/Color';
 
 type ItemInfoProps = {

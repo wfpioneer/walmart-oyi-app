@@ -4,7 +4,7 @@ import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 import styles from './SFTCard.styles';
 import COLOR from '../../themes/Color';
-import Button from '../button/Button';
+import Button from '../buttons/Button';
 
 interface SFTCardProps {
   iconName?: string;

@@ -4,7 +4,7 @@ import {
 
   ActivityIndicator, EmitterSubscription, SafeAreaView, ScrollView, Text, View
 } from 'react-native';
-import Button from '../../components/button/Button';
+import Button from '../../components/buttons/Button';
 import { hitGoogle } from '../../state/actions/saga';
 import styles from './Home.style';
 import COLOR from '../../themes/Color';

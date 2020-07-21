@@ -4,10 +4,12 @@ import { strings } from '../../locales';
 import styles from './ManualScan.style';
 import COLOR from '../../themes/Color';
 import { manualScan } from '../../utils/scannerUtils';
-import Button from '../button/Button';
+import Button from '../buttons/Button';
 import { setManualScan } from '../../state/actions/Global';
 import { useDispatch } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconButton from '../buttons/IconButton';
 
 interface ManualScanProps {
   keyboardType? : 'numeric' | 'default'
@@ -32,7 +34,7 @@ const ManualScanComponent = (props: ManualScanProps) => {
   }
 
   const clearText = () => {
-    textInputRef.current?.clear()
+    onChangeText('');
   }
 
   return (
@@ -47,10 +49,10 @@ const ManualScanComponent = (props: ManualScanProps) => {
         onSubmitEditing={(event: any) => onSubmit(event.nativeEvent.text)}
         keyboardType={props.keyboardType || 'numeric'}
       />
-      {value.length > 0 && <Button
-          title={'X'}
-          titleColor={COLOR.GREY_500}
-          type={3}
+      {value.length > 0  && value !== '' &&
+        <IconButton
+          icon={<MaterialCommunityIcon name={'close'} size={16} color={COLOR.GREY_500} />}
+          type={Button.Type.NO_BORDER}
           onPress={clearText}
         />
       }

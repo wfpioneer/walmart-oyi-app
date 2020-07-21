@@ -11,7 +11,7 @@ import COLOR from '../../themes/Color';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { strings } from '../../locales';
-import Button from '../../components/button/Button';
+import Button from '../../components/buttons/Button';
 import moment from 'moment';
 import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
