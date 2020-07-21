@@ -1,5 +1,5 @@
 import React, { createRef, RefObject, useEffect, useState } from 'react';
-import { ActivityIndicator, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Modal, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 
 import styles from './ReviewItemDetails.style';
@@ -18,6 +18,7 @@ import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { useDispatch } from 'react-redux';
+import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 
 const ReviewItemDetails = (props: any) => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
@@ -28,6 +29,7 @@ const ReviewItemDetails = (props: any) => {
   const isNavigationFocused = useIsFocused();
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
+  const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
 
   const itemDetails: ItemDetails = (result && result.data) || mockData[scannedEvent.value];
   const locationCount = itemDetails.location.count;
@@ -36,7 +38,7 @@ const ReviewItemDetails = (props: any) => {
   useEffect(() => {
     // Reset to top of screen
     scrollViewRef.current?.scrollTo({x: 0, y: 0, animated: false});
-    // TODO Call service here
+    // TODO Call get item details service here
   }, [scannedEvent])
 
   // Barcode event listener effect
@@ -61,8 +63,7 @@ const ReviewItemDetails = (props: any) => {
   }
 
   const handleUpdateQty = () => {
-    // TODO display popup/modal
-    console.log('Change qty clicked!');
+    setOhQtyModalVisible(true);
   }
 
   const handleLocationAction = () => {
@@ -155,6 +156,13 @@ const ReviewItemDetails = (props: any) => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent />}
+      <Modal
+        visible={ohQtyModalVisible}
+        onRequestClose={() => setOhQtyModalVisible(false)}
+        transparent
+      >
+        <OHQtyUpdate ohQty={itemDetails.onHandsQty} setOhQtyModalVisible={setOhQtyModalVisible}/>
+      </Modal>
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container} >
         {isWaiting && <ActivityIndicator
           animating={isWaiting}
