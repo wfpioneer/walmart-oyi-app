@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import PrintPriceSign from '../screens/PrintPriceSign/PrintPriceSign';
 
 export type PrintPriceSignStackParamList = {
-  PrintPriceSign: {
+  PrintPriceSignScreen: {
     image?: any;
     itemName: string;
     itemNbr: number;
@@ -35,7 +35,7 @@ const PrintPriceSignNavigator = () => {
       }}
     >
       <Stack.Screen
-        name="PrintPriceSign"
+        name="PrintPriceSignScreen"
         component={PrintPriceSign}
         options={{
           headerTitle: strings('PRINT.TITLE'),
