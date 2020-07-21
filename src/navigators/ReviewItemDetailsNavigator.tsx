@@ -5,13 +5,42 @@ import COLOR from '../themes/Color';
 import ReviewItemDetails from '../screens/ReviewItemDetails/ReviewItemDetails';
 import { useNavigation } from '@react-navigation/native';
 import { strings } from '../locales';
-
+import { Image, TouchableOpacity, View } from 'react-native';
+import { setManualScan } from '../state/actions/Global';
+import { useTypedSelector } from '../state/reducers/RootReducer';
+import { useDispatch } from 'react-redux';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import styles from './ReviewItemDetailsNavigator.style';
 
 const Stack = createStackNavigator();
 
 const ReviewItemDetailsNavigator = () => {
-  const [isManualScanEnabled, setManualScanEnabled] = useState(false);
+  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const renderScanButton = () => {
+    return (
+      <TouchableOpacity onPress={() => {dispatch(setManualScan(!isManualScanEnabled))}}>
+        <View style={styles.leftButton}>
+          <MaterialCommunityIcon name={'barcode-scan'} size={20} color={COLOR.WHITE} />
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
+  const renderPrintQueueButton = () => (
+    <TouchableOpacity onPress={() => console.log('Print queue button pressed')}>
+      <View style={styles.rightButton}>
+        <MaterialCommunityIcon name={'printer'} size={20} color={COLOR.WHITE} />
+      </View>
+    </TouchableOpacity>
+  );
+
+  const navigateBack = () =>{
+    dispatch(setManualScan(false));
+    navigation.goBack();
+  }
 
   return (
     <Stack.Navigator
@@ -34,9 +63,14 @@ const ReviewItemDetailsNavigator = () => {
             // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
             <HeaderBackButton
               {...props}
-              onPress={navigation.goBack}
+              onPress={navigateBack}
             />
-          )
+          ),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderScanButton()}
+              {renderPrintQueueButton()}
+            </View>)
         }}
       />
     </Stack.Navigator>

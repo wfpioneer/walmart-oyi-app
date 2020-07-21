@@ -1,35 +1,59 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { createRef, RefObject, useLayoutEffect } from 'react';
+import { TextInput, View } from 'react-native';
 import { strings } from '../../locales';
-import TextInputComponent from '../textinput/TextInput';
 import styles from './ManualScan.style';
 import COLOR from '../../themes/Color';
 import { manualScan } from '../../utils/scannerUtils';
-import { useTypedSelector } from '../../state/reducers/RootReducer';
+import Button from '../button/Button';
+import { setManualScan } from '../../state/actions/Global';
+import { useDispatch } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 
-// TODO this needs a lot more work for styling and understanding the desired functionality
-const ManualScanComponent = (props: { setManualScanEnabled: Function }) => {
-  const { scannedEvent } = useTypedSelector(state => state.Global);
-  const [value, onChangeText] = React.useState(scannedEvent.type === 'manual' ? scannedEvent.value : '');
+interface ManualScanProps {
+  keyboardType? : 'numeric' | 'default'
+}
+
+const ManualScanComponent = (props: ManualScanProps) => {
+  const dispatch = useDispatch();
+  const [value, onChangeText] = React.useState('');
+  const isNavigationFocused = useIsFocused();
+  const textInputRef: RefObject<TextInput> = createRef();
+
+  // Having to use this to get focus correct past the first screen where this gets shown
+  useLayoutEffect(() => {
+    isNavigationFocused && textInputRef.current?.focus();
+  }, [isNavigationFocused])
 
   const onSubmit = (text: string) => {
-    manualScan(text);
-    props.setManualScanEnabled(false);
+    if(text.length > 0) {
+      manualScan(text);
+      dispatch(setManualScan(false));
+    }
+  }
+
+  const clearText = () => {
+    textInputRef.current?.clear()
   }
 
   return (
     <View style={styles.container}>
-      <TextInputComponent
+      <TextInput
+        ref={textInputRef}
         style={styles.textInput}
         value={value}
-        label={''}
         onChangeText={(text: string) => onChangeText(text)}
         selectionColor={COLOR.MAIN_THEME_COLOR}
         placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')}
         onSubmitEditing={(event: any) => onSubmit(event.nativeEvent.text)}
-        keyboardType={'numeric'}
-        autoFocus={true}
+        keyboardType={props.keyboardType || 'numeric'}
       />
+      {value.length > 0 && <Button
+          title={'X'}
+          titleColor={COLOR.GREY_500}
+          type={3}
+          onPress={clearText}
+        />
+      }
     </View>
   )
 }

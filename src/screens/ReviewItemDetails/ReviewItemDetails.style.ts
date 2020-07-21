@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   container: {
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center'
   },
   safeAreaView: {

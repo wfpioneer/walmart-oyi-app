@@ -6,21 +6,26 @@ import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
 import ItemDetails from '../../models/ItemDetails';
-import {useNavigation} from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import COLOR from '../../themes/Color';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { strings } from '../../locales';
-import Location from '../../models/Location';
 import Button from '../../components/button/Button';
 import moment from 'moment';
 import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
+import ManualScanComponent from '../../components/manualscan/ManualScan';
+import { barcodeEmitter } from '../../utils/scannerUtils';
+import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import { useDispatch } from 'react-redux';
 
 const ReviewItemDetails = (props: any) => {
-  const { scannedEvent } = useTypedSelector(state => state.Global);
+  const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails)
   const { countryCode, siteId } = useTypedSelector(state => state.User);
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+  const isNavigationFocused = useIsFocused();
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
 
@@ -29,13 +34,31 @@ const ReviewItemDetails = (props: any) => {
   const updatedSalesTS = moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a');
 
   useEffect(() => {
+    // Reset to top of screen
+    scrollViewRef.current?.scrollTo({x: 0, y: 0, animated: false});
     // TODO Call service here
   }, [scannedEvent])
 
+  // Barcode event listener effect
+  useEffect(() => {
+    const scannedSubscription = barcodeEmitter.addListener('scanned', (scan) => {
+      if(isNavigationFocused) {
+        console.log('review item details received scan', scan.value, scan.type);
+        dispatch(setScannedEvent(scan));
+        dispatch(setManualScan(false));
+      }
+    });
+
+    return () => {
+      scannedSubscription?.remove();
+    }
+  }, [])
+
   // Used to scroll to bottom when the sales metrics switches from daily to weekly
-  // const handleContentSizeChange = () => {
-  //   scrollViewRef.current && scrollViewRef.current.scrollToEnd();
-  // }
+  // TODO this won't work because of changing data on scans
+  const handleContentSizeChange = () => {
+    scrollViewRef.current?.scrollToEnd();
+  }
 
   const handleUpdateQty = () => {
     // TODO display popup/modal
@@ -131,6 +154,7 @@ const ReviewItemDetails = (props: any) => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
+      {isManualScanEnabled && <ManualScanComponent />}
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container} >
         {isWaiting && <ActivityIndicator
           animating={isWaiting}
@@ -224,7 +248,6 @@ const mockData: any = {
           name: 'F15-4'
         }
       ],
-      // reserve: [],
       count: 10
     },
     sales: {
@@ -273,6 +296,83 @@ const mockData: any = {
         {
           week: 2,
           value: 100
+        },
+        {
+          week: 3,
+          value: 10
+        }
+      ]
+    }
+  },
+  '456': {
+    itemName: 'Small, Store Use Item',
+    itemNbr: 987654321,
+    upcNbr: '777555333',
+    status: 'Active',
+    category: '99 - Store Use',
+    price: 2000.94,
+    onHandsQty: 42,
+    isOnHandsPending: false,
+    replenishment: {
+      onOrder: 48
+    },
+    location: {
+      floor: [
+        {
+          id: '1',
+          type: 'pod',
+          name: 'F15-4'
+        }
+      ],
+      reserve: [],
+      count: 10
+    },
+    sales: {
+      lastUpdateTs: '2020-07-15T08:02:17-05:00',
+      dailyAvgSales: 15,
+      daily: [
+        {
+          day: '2020-07-08',
+          value: 10
+        },
+        {
+          day: '2020-07-09',
+          value: 0
+        },
+        {
+          day: '2020-07-10',
+          value: 10
+        },
+        {
+          day: '2020-07-11',
+          value: 10
+        },
+        {
+          day: '2020-07-12',
+          value: 42
+        },
+        {
+          day: '2020-07-13',
+          value: 5
+        },
+        {
+          day: '2020-07-14',
+          value: 1
+        }
+      ],
+      weeklyAvgSales: 10,
+      weekly: [
+        {
+          week: 51,
+          value: 0
+        },
+        {
+          week: 1,
+          value: 10
+        },
+        {
+          week: 2,
+          value: 27
         },
         {
           week: 3,

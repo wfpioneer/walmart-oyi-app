@@ -41,6 +41,13 @@ to set up many React Native apps.
 ### How to emulate a barcode scan
 1. In your debugger console: `window.mockScan('value', 'type')`
 
+### How to use the Manual Scan component
+* Add a button to the screen's header in the navigator
+* Have the button toggle the `state.Global.isManualScanEnabled` variable
+* Add `{isManualScanEnabled && <ManualScanComponent />}` in your component before the ScrollView
+
+TIP: Make sure your barcodeEmitter has a listener setup to receive `scanned` events.
+
 ### How to set up an API call
 1. Create your saga action in `state/actions/saga.ts`
 2. Create your API action in `state/actions/asyncAPI.ts`

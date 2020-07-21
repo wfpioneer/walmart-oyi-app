@@ -4,12 +4,13 @@ import { COLOR } from '../../themes/Color';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 8,
+    backgroundColor: COLOR.WHITE,
+    paddingRight: 16
   },
   textInput: {
-    backgroundColor: COLOR.WHITE,
-    // height: '65%',
+    flex: 1
   }
 });
 
