@@ -22,7 +22,7 @@ import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 
 const ReviewItemDetails = (props: any) => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails)
+  const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const { countryCode, siteId } = useTypedSelector(state => state.User);
   const dispatch = useDispatch();
   const navigation = useNavigation();

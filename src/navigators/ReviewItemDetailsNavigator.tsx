@@ -51,7 +51,7 @@ const ReviewItemDetailsNavigator = () => {
       }}
     >
       <Stack.Screen
-        name="ItemDetails"
+        name="ReviewItemDetails"
         component={ReviewItemDetails}
         options={{
           headerTitle: strings('ITEM.TITLE'),

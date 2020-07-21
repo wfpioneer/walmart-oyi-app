@@ -61,6 +61,7 @@ export default {
     OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}'
   },
   PRINT: {
+    TITLE: 'Print Price Sign',
     PRICE_SIGN: 'Print price sign'
   }
 };
