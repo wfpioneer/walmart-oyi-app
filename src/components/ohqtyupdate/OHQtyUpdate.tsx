@@ -38,13 +38,15 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
   const handleSaveOHQty = () => {
     // TODO call update OH service
     setOhQtyModalVisible(false);
-    // TODO call get item details again... not sure how to do this right now
+    // TODO call get item details again... not sure how to do this right now. Maybe update OH should return it as the response?
   }
 
   const handleTextChange = (text: string) => {
-    const newQty: number = Number(text);
-    setNewOHQty(newQty);
-    setIsValidNbr(validateQty(newQty));
+    const newQty: number = parseInt(text);
+    if(!isNaN(newQty)) {
+      setNewOHQty(newQty);
+      setIsValidNbr(validateQty(newQty));
+    }
   }
 
   const handleIncreaseQty = () => {
