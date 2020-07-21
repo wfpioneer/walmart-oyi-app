@@ -82,7 +82,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
         <View style={[styles.updateContainer, isValidNbr ? styles.updateContainerValid : styles.updateContainerInvalid]}>
           <IconButton
             icon={renderPlusMinusBtn('minus')}
-            type={Button.Type.NO_BORDER}
+            type={IconButton.Type.NO_BORDER}
             height={15}
             width={35}
             onPress={handleDecreaseQty}
@@ -96,7 +96,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
           </TextInput>
           <IconButton
             icon={renderPlusMinusBtn('plus')}
-            type={Button.Type.NO_BORDER}
+            type={IconButton.Type.NO_BORDER}
             height={15}
             width={35}
             onPress={handleIncreaseQty}
