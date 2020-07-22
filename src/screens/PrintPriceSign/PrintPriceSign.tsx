@@ -80,6 +80,10 @@ const PrintPriceSign = () => {
     }
   }
 
+  const handleChangePrinter = () => {
+    console.log('Change printer clicked');
+  }
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView contentContainerStyle={{justifyContent: 'center', alignItems: 'stretch'}}>
@@ -121,13 +125,22 @@ const PrintPriceSign = () => {
           <Text style={{marginVertical: 8, fontSize: 12, color: COLOR.GREY_500}} >Sign Size</Text>
           {renderSignSizeButtons(isLaser, catgNbr, signType, setSignType)}
         </View>
-        <View>
-          <Image source={{}} />
-          <View>
-            <Text></Text>
-            <Text></Text>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: COLOR.WHITE, alignItems: 'flex-end', marginTop: 8, paddingHorizontal: 8, paddingVertical: 12}}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <MaterialCommunityIcon name={'printer-check'} size={24} />
+            <View style={{marginLeft: 12}}>
+              <Text>Front desk printer</Text>
+              <Text style={{fontSize: 12, color: COLOR.GREY_600}} >Default</Text>
+            </View>
           </View>
-          <Button />
+          <Button
+            title={'Change'}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            titleFontSize={14}
+            type={Button.Type.NO_BORDER}
+            height={20}
+            onPress={handleChangePrinter}
+          />
         </View>
       </ScrollView>
       <View>
