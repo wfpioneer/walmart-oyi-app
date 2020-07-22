@@ -31,7 +31,8 @@ export default {
     UPDATED: 'Updated',
     DAILY: 'Daily',
     WEEKLY: 'Weekly',
-    WEEK: 'Week'
+    WEEK: 'Week',
+    TOTAL: 'Total'
   },
   HOME: {
     HOME: 'Home',
@@ -56,7 +57,8 @@ export default {
     FLOOR: 'Floor',
     RESERVE: 'Reserve',
     SALES_METRICS: 'Sales metrics',
-    AVG_SALES: 'average sales'
+    AVG_SALES: 'average sales',
+    OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}'
   },
   PRINT: {
     PRICE_SIGN: 'Print price sign'

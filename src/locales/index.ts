@@ -1,5 +1,5 @@
 import * as RNLocalize from 'react-native-localize';
-import I18n, { TranslateOptions } from 'i18n-js';
+import I18n from 'i18n-js';
 // @ts-ignore
 import moment from 'moment';
 import 'moment/locale/es';
@@ -24,8 +24,14 @@ export const setI18nConfig: () => void = () => {
 export const strings: (
   tag: string,
   options?: I18n.TranslateOptions | undefined,
-) => string = (tag: string, options: TranslateOptions | undefined = {}) => I18n.t(tag, options);
+) => string = (tag: string, options: I18n.TranslateOptions | undefined = {}) => I18n.t(tag, options);
 
 export const currencies: (
-  value: number
-) => string = (value: number) => I18n.l('currency', value);
+  value: number,
+  options?: I18n.ToCurrencyOptions | undefined
+) => string = (value: number, options: I18n.ToCurrencyOptions | undefined = {}) => I18n.toCurrency(value, options);
+
+export const numbers: (
+  value: number,
+  options?: I18n.ToNumberOptions | undefined
+) => string = (value: number, options: I18n.ToNumberOptions | undefined = {}) => I18n.toNumber(value, options);

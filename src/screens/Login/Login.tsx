@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View } from 'react-native';
 // @ts-ignore
 import WMSSO from 'react-native-wmsso';
-import Button from '../../components/button/Button';
+import Button from '../../components/buttons/Button';
 import styles from './Login.style';
 import { loginUser } from '../../state/actions/User';
 import User from '../../models/User';

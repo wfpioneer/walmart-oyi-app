@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import Button from '../../../components/button/Button';
+import Button from '../../../components/buttons/Button';
 import COLOR from '../../../themes/Color';
 
 export default class ButtonStyleGuide extends React.PureComponent {

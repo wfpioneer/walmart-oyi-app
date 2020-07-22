@@ -4,7 +4,9 @@ import COLOR from '../../themes/Color';
 
 const styles = StyleSheet.create({
   activityIndicator: {
-    marginTop: 10
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   container: {
     alignItems: 'stretch',

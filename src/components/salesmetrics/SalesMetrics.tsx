@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
-import Button from '../button/Button';
+import Button from '../buttons/Button';
 import moment from 'moment';
 import ItemDetails from '../../models/ItemDetails';
 import styles from './SalesMetrics.styles';
