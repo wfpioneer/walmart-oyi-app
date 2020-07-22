@@ -84,6 +84,14 @@ const PrintPriceSign = () => {
     console.log('Change printer clicked');
   }
 
+  const handleAddPrintList = () => {
+    console.log('ADD TO PRINT LIST clicked');
+  }
+
+  const handlePrint = () => {
+    console.log('PRINT clicked');
+  }
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView contentContainerStyle={{justifyContent: 'center', alignItems: 'stretch'}}>
@@ -143,9 +151,20 @@ const PrintPriceSign = () => {
           />
         </View>
       </ScrollView>
-      <View>
-        <Button />
-        <Button />
+      <View style={{flexDirection: 'row', justifyContent: 'space-around', backgroundColor: COLOR.WHITE, paddingHorizontal: 4, paddingTop: 8, paddingBottom: 20, elevation: 16}}>
+        <Button
+          title={'Add to print list'}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          type={Button.Type.SOLID_WHITE}
+          style={{flex: 1, paddingHorizontal: 4}}
+          onPress={handleAddPrintList}
+        />
+        <Button
+          title={'Print'}
+          type={Button.Type.PRIMARY}
+          style={{flex: 1, paddingHorizontal: 4}}
+          onPress={handlePrint}
+        />
       </View>
     </SafeAreaView>
   )
