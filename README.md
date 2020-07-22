@@ -7,6 +7,8 @@ You can login and go to a home screen. That's pretty much it.
 Really, the point of this app is to provide you the infrastructure and eliminate the setup that you normally have to go through
 to set up many React Native apps.
 
+The quantity change components in the OH modal and the print price sign screen need to be generalized and reused.
+
 ### What this contains
 * `react-navigation` version 5
 * `react-native-localize` for your localization pleasure

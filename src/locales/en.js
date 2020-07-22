@@ -63,10 +63,12 @@ export default {
   PRINT: {
     TITLE: 'Print Price Sign',
     PRICE_SIGN: 'Print price sign',
-    'XSmall': 'X-Small',
-    'Small': 'Small',
-    'Wine': 'Wine',
-    'Medium': 'Med',
-    'Large': 'Large'
+    COPY_QTY: 'Number of copies',
+    SIGN_SIZE: 'Sign size',
+    XSmall: 'X-Small',
+    Small: 'Small',
+    Wine: 'Wine',
+    Medium: 'Med',
+    Large: 'Large'
   }
 };

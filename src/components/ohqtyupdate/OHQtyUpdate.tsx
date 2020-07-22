@@ -63,7 +63,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
     if (newOHQty > OH_MAX) {
       setIsValidNbr(true);
       setNewOHQty(OH_MAX);
-    } else if (newOHQty > 0) {
+    } else if (newOHQty > OH_MIN) {
       setIsValidNbr(true);
       setNewOHQty((prevState => prevState - 1));
     }

@@ -6,11 +6,18 @@ import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { strings } from '../../locales';
+import { numbers, strings } from '../../locales';
+import styles from './PrintPriceSign.style'
 
 type PrintPriceSignScreenRouteParam = RouteProp<PrintPriceSignStackParamList, 'PrintPriceSignScreen'>;
 
 const wineCatgNbr = 19;
+const QTY_MIN = 1;
+const QTY_MAX = 100;
+const ERROR_FORMATTING_OPTIONS = {
+  min: QTY_MIN,
+  max: numbers(QTY_MAX, {precision: 0})
+};
 
 const Laser = {
   'XSmall': 'X',
@@ -25,6 +32,10 @@ const Portable = {
   'Small': 'C',
   'Wine': 'W',
   'Medium': 'D'
+}
+
+const validateQty = (qty: number) => {
+  return QTY_MIN <= qty && qty <= QTY_MAX;
 }
 
 const renderPlusMinusBtn = (name: 'plus' | 'minus') => {
@@ -66,8 +77,9 @@ const renderSignSizeButtons = (isLaser: boolean, catgNbr: number, signType: stri
 const PrintPriceSign = () => {
   const route = useRoute<PrintPriceSignScreenRouteParam>()
   const [signQty, setSignQty] = useState(1);
+  const [isValidQty, setIsValidQty] = useState(true);
   const [isLaser, setIsLaser] = useState(true);
-  const [signType, setSignType] = useState('')
+  const [signType, setSignType] = useState('');
 
   const { itemName, itemNbr, upcNbr, category } = route.params;
   const catgNbr = parseInt(category.split('-')[0]);
@@ -77,6 +89,25 @@ const PrintPriceSign = () => {
     const newQty: number = parseInt(text);
     if(!isNaN(newQty)) {
       setSignQty(newQty);
+      setIsValidQty(validateQty(newQty));
+    }
+  }
+
+  const handleIncreaseQty = () => {
+    setIsValidQty(true);
+    if (signQty < QTY_MIN) {
+      setSignQty(QTY_MIN);
+    } else if (signQty < QTY_MAX) {
+      setSignQty((prevState => prevState + 1));
+    }
+  }
+
+  const handleDecreaseQty = () => {
+    setIsValidQty(true);
+    if (signQty > QTY_MAX) {
+      setSignQty(QTY_MAX);
+    } else if (signQty > QTY_MIN) {
+      setSignQty((prevState => prevState - 1));
     }
   }
 
@@ -93,15 +124,15 @@ const PrintPriceSign = () => {
   }
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <ScrollView contentContainerStyle={{justifyContent: 'center', alignItems: 'stretch'}}>
-        <View style={{backgroundColor: COLOR.WHITE, flexDirection: 'row', paddingHorizontal: 8, paddingVertical: 16}}>
-          <Image source={require('../../assets/images/sams_logo.jpeg')} style={{height: 65, width: 65, resizeMode: 'stretch'}} />
-          <Text style={{marginHorizontal: 8, fontSize: 12, fontWeight: 'bold', flexWrap: 'wrap', flex: 1, lineHeight: 16}} >{itemName}</Text>
+    <SafeAreaView style={styles.mainContainer}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.itemDetailsContainer}>
+          <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.itemImage} />
+          <Text style={styles.itemNameTxt} >{itemName}</Text>
         </View>
-        <View style={{backgroundColor: COLOR.WHITE, alignItems: 'center', marginTop: 8, paddingHorizontal: 8, paddingVertical: 16}} >
-          <Text style={{marginVertical: 8, fontSize: 12, color: COLOR.GREY_500}} >Number of copies</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 12, marginTop: 6}}>
+        <View style={styles.copyQtyContainer} >
+          <Text style={styles.copyQtyLabel} >{strings('PRINT.COPY_QTY')}</Text>
+          <View style={styles.qtyChangeContainer}>
             <IconButton
               icon={renderPlusMinusBtn('minus')}
               type={IconButton.Type.SOLID_WHITE}
@@ -109,10 +140,10 @@ const PrintPriceSign = () => {
               height={30}
               width={30}
               radius={50}
-              onPress={() => setSignQty(prevState => prevState - 1)}
+              onPress={handleDecreaseQty}
             />
             <TextInput
-              style={{textAlign: 'center', minWidth: '15%', height: 30, fontSize: 12, borderColor: COLOR.MAIN_THEME_COLOR, borderWidth: 1, marginHorizontal: 12, padding: 6}}
+              style={[styles.copyQtyInput, isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid]}
               keyboardType={'numeric'}
               onChangeText={handleTextChange}
             >
@@ -125,15 +156,18 @@ const PrintPriceSign = () => {
               height={30}
               width={30}
               radius={50}
-              onPress={() => setSignQty(prevState => prevState + 1)}
+              onPress={handleIncreaseQty}
             />
           </View>
+          {!isValidQty && <Text style={styles.invalidLabel}>
+            {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
+          </Text>}
         </View>
-        <View style={{backgroundColor: COLOR.WHITE, alignItems: 'center', marginTop: 8, paddingHorizontal: 8, paddingVertical: 12}} >
-          <Text style={{marginVertical: 8, fontSize: 12, color: COLOR.GREY_500}} >Sign Size</Text>
+        <View style={styles.signSizeContainer} >
+          <Text style={styles.signSizeLabel} >{strings('PRINT.SIGN_SIZE')}</Text>
           {renderSignSizeButtons(isLaser, catgNbr, signType, setSignType)}
         </View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: COLOR.WHITE, alignItems: 'flex-end', marginTop: 8, paddingHorizontal: 8, paddingVertical: 12}}>
+        <View style={styles.printerContainer}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <MaterialCommunityIcon name={'printer-check'} size={24} />
             <View style={{marginLeft: 12}}>
@@ -151,18 +185,18 @@ const PrintPriceSign = () => {
           />
         </View>
       </ScrollView>
-      <View style={{flexDirection: 'row', justifyContent: 'space-around', backgroundColor: COLOR.WHITE, paddingHorizontal: 4, paddingTop: 8, paddingBottom: 20, elevation: 16}}>
+      <View style={styles.footerBtnContainer}>
         <Button
           title={'Add to print list'}
           titleColor={COLOR.MAIN_THEME_COLOR}
           type={Button.Type.SOLID_WHITE}
-          style={{flex: 1, paddingHorizontal: 4}}
+          style={styles.footerBtns}
           onPress={handleAddPrintList}
         />
         <Button
           title={'Print'}
           type={Button.Type.PRIMARY}
-          style={{flex: 1, paddingHorizontal: 4}}
+          style={styles.footerBtns}
           onPress={handlePrint}
         />
       </View>
