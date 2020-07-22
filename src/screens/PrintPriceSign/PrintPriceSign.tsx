@@ -39,12 +39,8 @@ const renderSignSizeButtons = (isLaser: boolean, catgNbr: number, signType: stri
   return (
     <View style={{flexDirection: 'row', marginVertical: 4}} >
       {Object.keys(sizeObject).map((key: string) => {
-        if(key === 'Wine') {
-          // Only show the wine button if the item's category is appropriate
-          if(catgNbr === wineCatgNbr) {
-            // TODO complete this logic
-          }
-        } else {
+        // Only show the wine button if the item's category is appropriate
+        if(key !== 'Wine' || (key === 'Wine' && catgNbr === wineCatgNbr)) {
           return (
             <Button
               key={key}
@@ -75,7 +71,6 @@ const PrintPriceSign = () => {
 
   const { itemName, itemNbr, upcNbr, category } = route.params;
   const catgNbr = parseInt(category.split('-')[0]);
-  console.log({category, catgNbr});
 
 
   const handleTextChange = (text: string) => {
