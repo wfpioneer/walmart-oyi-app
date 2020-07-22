@@ -62,6 +62,11 @@ export default {
   },
   PRINT: {
     TITLE: 'Print Price Sign',
-    PRICE_SIGN: 'Print price sign'
+    PRICE_SIGN: 'Print price sign',
+    'XSmall': 'X-Small',
+    'Small': 'Small',
+    'Wine': 'Wine',
+    'Medium': 'Med',
+    'Large': 'Large'
   }
 };

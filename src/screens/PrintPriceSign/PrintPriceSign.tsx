@@ -6,9 +6,26 @@ import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { strings } from '../../locales';
 
 type PrintPriceSignScreenRouteParam = RouteProp<PrintPriceSignStackParamList, 'PrintPriceSignScreen'>;
 
+const wineCatgNbr = 19;
+
+const Laser = {
+  'XSmall': 'X',
+  'Small': 'S',
+  'Wine': 'W',
+  'Medium': 'F',
+  'Large': 'H'
+}
+
+const Portable = {
+  'XSmall': 'j',
+  'Small': 'C',
+  'Wine': 'W',
+  'Medium': 'D'
+}
 
 const renderPlusMinusBtn = (name: 'plus' | 'minus') => {
   return (
@@ -16,11 +33,49 @@ const renderPlusMinusBtn = (name: 'plus' | 'minus') => {
   )
 }
 
+const renderSignSizeButtons = (isLaser: boolean, catgNbr: number, signType: string, setSignType: Function) => {
+  const sizeObject = isLaser ? Laser : Portable;
+
+  return (
+    <View style={{flexDirection: 'row', marginVertical: 4}} >
+      {Object.keys(sizeObject).map((key: string) => {
+        if(key === 'Wine') {
+          // Only show the wine button if the item's category is appropriate
+          if(catgNbr === wineCatgNbr) {
+            // TODO complete this logic
+          }
+        } else {
+          return (
+            <Button
+              key={key}
+              title={strings(`PRINT.${key}`)}
+              titleFontSize={12}
+              titleFontWeight={'bold'}
+              titleColor={signType === key ? COLOR.WHITE : COLOR.BLACK}
+              backgroundColor={signType === key ? COLOR.MAIN_THEME_COLOR : COLOR.GREY_200}
+              type={Button.Type.PRIMARY}
+              radius={20}
+              height={25}
+              width={56}
+              style={{marginHorizontal: 6}}
+              onPress={() => setSignType(key)}
+            />
+          )
+        }
+      })}
+    </View>
+  )
+}
+
 const PrintPriceSign = () => {
   const route = useRoute<PrintPriceSignScreenRouteParam>()
   const [signQty, setSignQty] = useState(1);
+  const [isLaser, setIsLaser] = useState(true);
+  const [signType, setSignType] = useState('')
 
   const { itemName, itemNbr, upcNbr, category } = route.params;
+  const catgNbr = parseInt(category.split('-')[0]);
+  console.log({category, catgNbr});
 
 
   const handleTextChange = (text: string) => {
@@ -67,9 +122,9 @@ const PrintPriceSign = () => {
             />
           </View>
         </View>
-        <View>
-          <Text></Text>
-          <View></View>
+        <View style={{backgroundColor: COLOR.WHITE, alignItems: 'center', marginTop: 8, paddingHorizontal: 8, paddingVertical: 12}} >
+          <Text style={{marginVertical: 8, fontSize: 12, color: COLOR.GREY_500}} >Sign Size</Text>
+          {renderSignSizeButtons(isLaser, catgNbr, signType, setSignType)}
         </View>
         <View>
           <Image source={{}} />

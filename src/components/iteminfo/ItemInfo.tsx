@@ -23,7 +23,6 @@ const ItemInfo = (props: ItemInfoProps) => {
   const navigation = useNavigation();
 
   const handlePrintPriceSign = () => {
-    console.log(props);
     navigation.navigate('PrintPriceSign', {screen: 'PrintPriceSignScreen', params: props});
   }
 
