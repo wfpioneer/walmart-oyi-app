@@ -4,6 +4,7 @@ import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import { useNavigation } from '@react-navigation/native';
 import PrintPriceSign from '../screens/PrintPriceSign/PrintPriceSign';
+import ChangePrinter from '../screens/ChangePrinter/ChangePrinter';
 
 const Stack = createStackNavigator();
 
@@ -28,7 +29,7 @@ const PrintPriceSignNavigator = () => {
         name="PrintPriceSignScreen"
         component={PrintPriceSign}
         options={{
-          headerTitle: strings('PRINT.TITLE'),
+          headerTitle: strings('PRINT.MAIN_TITLE'),
           headerTitleAlign: 'left',
           headerTitleStyle: {fontSize: 18},
           headerBackTitleVisible: false,

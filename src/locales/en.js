@@ -32,7 +32,8 @@ export default {
     DAILY: 'Daily',
     WEEKLY: 'Weekly',
     WEEK: 'Week',
-    TOTAL: 'Total'
+    TOTAL: 'Total',
+    DEFAULT: 'Default'
   },
   HOME: {
     HOME: 'Home',
@@ -61,10 +62,12 @@ export default {
     OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}'
   },
   PRINT: {
-    TITLE: 'Print Price Sign',
+    MAIN_TITLE: 'Print Price Sign',
+    CHANGE_TITLE: 'Printers',
     PRICE_SIGN: 'Print price sign',
     COPY_QTY: 'Number of copies',
     SIGN_SIZE: 'Sign size',
+    FRONT_DESK: 'Front desk printer',
     XSmall: 'X-Small',
     Small: 'Small',
     Wine: 'Wine',

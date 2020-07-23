@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { Image, SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
@@ -8,6 +8,8 @@ import { numbers, strings } from '../../locales';
 import styles from './PrintPriceSign.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getMockItemDetails } from '../../mockData';
+import { useDispatch } from 'react-redux';
+import { setSelectedPrinter, setSignType } from '../../state/actions/Print';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -20,16 +22,16 @@ const ERROR_FORMATTING_OPTIONS = {
 const Laser = {
   'XSmall': 'X',
   'Small': 'S',
-  'Wine': 'W',
   'Medium': 'F',
-  'Large': 'H'
+  'Large': 'H',
+  'Wine': 'W'
 }
 
 const Portable = {
   'XSmall': 'j',
   'Small': 'C',
-  'Wine': 'W',
-  'Medium': 'D'
+  'Medium': 'D',
+  'Wine': 'W'
 }
 
 const validateQty = (qty: number) => {
@@ -42,8 +44,8 @@ const renderPlusMinusBtn = (name: 'plus' | 'minus') => {
   )
 }
 
-const renderSignSizeButtons = (isLaser: boolean, catgNbr: number, signType: string, setSignType: Function) => {
-  const sizeObject = isLaser ? Laser : Portable;
+const renderSignSizeButtons = (selectedPrinter: {type: string}, catgNbr: number, signType: string, dispatch: Function) => {
+  const sizeObject = selectedPrinter.type === 'LASER' ? Laser : Portable;
 
   return (
     <View style={{flexDirection: 'row', marginVertical: 4}} >
@@ -63,7 +65,7 @@ const renderSignSizeButtons = (isLaser: boolean, catgNbr: number, signType: stri
               height={25}
               width={56}
               style={{marginHorizontal: 6}}
-              onPress={() => setSignType(key)}
+              onPress={() => dispatch(setSignType(key))}
             />
           )
         }
@@ -75,13 +77,21 @@ const renderSignSizeButtons = (isLaser: boolean, catgNbr: number, signType: stri
 const PrintPriceSign = () => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const { result } = useTypedSelector(state => state.async.getItemDetails);
+  const { selectedPrinter, signType } = useTypedSelector(state => state.Print);
+  const dispatch = useDispatch();
+
   const [signQty, setSignQty] = useState(1);
   const [isValidQty, setIsValidQty] = useState(true);
-  const [isLaser, setIsLaser] = useState(true);
-  const [signType, setSignType] = useState('');
 
   const { itemName, itemNbr, upcNbr, category } = (result && result.data) || getMockItemDetails(scannedEvent.value);
   const catgNbr = parseInt(category.split('-')[0]);
+
+  useLayoutEffect(() => {
+    // Just used to set the default printer the first time, since redux loads before the translations
+    if(selectedPrinter.name === ''){
+      dispatch(setSelectedPrinter({type: 'LASER', name: strings('PRINT.FRONT_DESK'), desc: strings('GENERICS.DEFAULT')}))
+    }
+  }, [])
 
 
   const handleTextChange = (text: string) => {
@@ -164,14 +174,14 @@ const PrintPriceSign = () => {
         </View>
         <View style={styles.signSizeContainer} >
           <Text style={styles.signSizeLabel} >{strings('PRINT.SIGN_SIZE')}</Text>
-          {renderSignSizeButtons(isLaser, catgNbr, signType, setSignType)}
+          {renderSignSizeButtons(selectedPrinter, catgNbr, signType, dispatch)}
         </View>
         <View style={styles.printerContainer}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <MaterialCommunityIcon name={'printer-check'} size={24} />
             <View style={{marginLeft: 12}}>
-              <Text>Front desk printer</Text>
-              <Text style={{fontSize: 12, color: COLOR.GREY_600}} >Default</Text>
+              <Text>{selectedPrinter.name}</Text>
+              <Text style={{fontSize: 12, color: COLOR.GREY_600}} >{selectedPrinter.desc}</Text>
             </View>
           </View>
           <Button
