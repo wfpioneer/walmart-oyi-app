@@ -58,7 +58,7 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps) => {
     if (buttonIndex === 0) {
       props.showModal();
       WMSSO.signOutUser().then(() => {
-        props.navigation.navigate('Login');
+        props.navigation.replace('Login');
         props.logoutUser();
         if (Platform.OS === 'android') {
           props.hideModal();

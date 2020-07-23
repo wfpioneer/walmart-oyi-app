@@ -46,7 +46,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     WMSSO.getUser().then((user: User) => {
       this.props.loginUser(user);
       this.props.hideModal();
-      this.props.navigation.navigate('Tabs');
+      this.props.navigation.replace('Tabs');
     });
   }
 
