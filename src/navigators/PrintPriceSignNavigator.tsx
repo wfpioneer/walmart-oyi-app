@@ -5,17 +5,7 @@ import { strings } from '../locales';
 import { useNavigation } from '@react-navigation/native';
 import PrintPriceSign from '../screens/PrintPriceSign/PrintPriceSign';
 
-export type PrintPriceSignStackParamList = {
-  PrintPriceSignScreen: {
-    image?: any;
-    itemName: string;
-    itemNbr: number;
-    upcNbr: string;
-    category: string;
-  }
-}
-
-const Stack = createStackNavigator<PrintPriceSignStackParamList>();
+const Stack = createStackNavigator();
 
 const PrintPriceSignNavigator = () => {
 

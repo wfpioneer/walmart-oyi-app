@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, Image, SafeAreaView, ScrollView, TextInput } from 'react-native';
-import {useRoute, RouteProp} from '@react-navigation/native';
-import { PrintPriceSignStackParamList } from '../../navigators/PrintPriceSignNavigator';
+import { Image, SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { numbers, strings } from '../../locales';
-import styles from './PrintPriceSign.style'
-
-type PrintPriceSignScreenRouteParam = RouteProp<PrintPriceSignStackParamList, 'PrintPriceSignScreen'>;
+import styles from './PrintPriceSign.style';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { getMockItemDetails } from '../../mockData';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -75,13 +73,14 @@ const renderSignSizeButtons = (isLaser: boolean, catgNbr: number, signType: stri
 }
 
 const PrintPriceSign = () => {
-  const route = useRoute<PrintPriceSignScreenRouteParam>()
+  const { scannedEvent } = useTypedSelector(state => state.Global);
+  const { result } = useTypedSelector(state => state.async.getItemDetails);
   const [signQty, setSignQty] = useState(1);
   const [isValidQty, setIsValidQty] = useState(true);
   const [isLaser, setIsLaser] = useState(true);
   const [signType, setSignType] = useState('');
 
-  const { itemName, itemNbr, upcNbr, category } = route.params;
+  const { itemName, itemNbr, upcNbr, category } = (result && result.data) || getMockItemDetails(scannedEvent.value);
   const catgNbr = parseInt(category.split('-')[0]);
 
 

@@ -29,6 +29,8 @@ The quantity change components in the OH modal and the print price sign screen n
   * Button, textinput, title (all "stolen" from US apps)
 * locales
   * Holds your localized strings
+* mockData
+  * Holds mock data
 * models
   * Holds your typescript models
 * navigators
