@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import styles from './ItemInfo.style';
 import { currencies, strings } from '../../locales';
@@ -19,6 +20,11 @@ type ItemInfoProps = {
 
 const ItemInfo = (props: ItemInfoProps) => {
   const { itemName, itemNbr, upcNbr, status, category, price, exceptionType} = props;
+  const navigation = useNavigation();
+
+  const handlePrintPriceSign = () => {
+    navigation.navigate('PrintPriceSign', {screen: 'PrintPriceSignScreen', params: props});
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -40,6 +46,7 @@ const ItemInfo = (props: ItemInfoProps) => {
         title={strings('PRINT.PRICE_SIGN')}
         titleColor={COLOR.MAIN_THEME_COLOR}
         style={styles.printPriceBtn}
+        onPress={handlePrintPriceSign}
       />
     </View>
   )
