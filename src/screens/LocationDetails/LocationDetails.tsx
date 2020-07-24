@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./LocationDetails.style";
 import { View, SafeAreaView } from "react-native";
 import LocationDetailsCard from "../../components/locationdetailscard/LocationDetailsCard";
-import { object, element } from "prop-types";
+import { strings } from '../../locales';
 
 export interface location {
     id: string,
@@ -32,9 +32,9 @@ function LocationDetails(props:Props) {
     };
     return(
         <SafeAreaView>
-            {(props.floorLocCount>0)?<View style={styles.sectionLabel}><text>Floor locations ({props.floorLocCount})</text></View>:''}
+            {(props.floorLocCount>0)?<View style={styles.sectionLabel}><text>{strings(LOCATION.FLOOR)} ({props.floorLocCount})</text></View>:''}
             <View>${displayFloorLocs}</View>
-            {(props.resLocCount>0)?<View style={styles.sectionLabel}><text>Reserve locations ({props.resLocCount})</text></View>:''}
+            {(props.resLocCount>0)?<View style={styles.sectionLabel}><text>{strings(LOCATION.RESERVE)} ({props.resLocCount})</text></View>:''}
             <View>${displayReserveLocs}</View>
         </SafeAreaView>
     );
