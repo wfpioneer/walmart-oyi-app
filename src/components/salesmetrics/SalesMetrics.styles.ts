@@ -3,6 +3,10 @@ import { COLOR } from '../../themes/Color';
 
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: COLOR.GREY_100
+  },
   averageContainer: {
     alignItems: 'center',
     padding: 8,
@@ -18,13 +22,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderTopColor: COLOR.GREY_300
   },
-  bottomButtonContainer: {
+  topButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 12,
-    paddingBottom: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: COLOR.GREY_100
+    marginTop: 12
   },
   averageQtyNbr: {
     fontSize: 32
