@@ -68,7 +68,7 @@ const ReviewItemDetails = (props: any) => {
   }
 
   const handleLocationAction = () => {
-    // TODO navigate to location screen
+    navigation.navigate('LocationDetails', {screen: 'LocationDetailsScreen', params: props});
     console.log('Handle location screen');
   }
 
