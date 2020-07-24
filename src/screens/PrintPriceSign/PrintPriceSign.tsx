@@ -9,7 +9,8 @@ import styles from './PrintPriceSign.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getMockItemDetails } from '../../mockData';
 import { useDispatch } from 'react-redux';
-import { setSelectedPrinter, setSignType } from '../../state/actions/Print';
+import { addToPrinterList, addToPrintQueue, setSelectedPrinter, setSignType } from '../../state/actions/Print';
+import { LaserPaper, PortablePaper, Printer, PrinterType, PrintQueueItem } from '../../models/Printer';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -18,21 +19,6 @@ const ERROR_FORMATTING_OPTIONS = {
   min: QTY_MIN,
   max: numbers(QTY_MAX, {precision: 0})
 };
-
-const Laser = {
-  'XSmall': 'X',
-  'Small': 'S',
-  'Medium': 'F',
-  'Large': 'H',
-  'Wine': 'W'
-}
-
-const Portable = {
-  'XSmall': 'j',
-  'Small': 'C',
-  'Medium': 'D',
-  'Wine': 'W'
-}
 
 const validateQty = (qty: number) => {
   return QTY_MIN <= qty && qty <= QTY_MAX;
@@ -44,8 +30,8 @@ const renderPlusMinusBtn = (name: 'plus' | 'minus') => {
   )
 }
 
-const renderSignSizeButtons = (selectedPrinter: {type: string}, catgNbr: number, signType: string, dispatch: Function) => {
-  const sizeObject = selectedPrinter.type === 'LASER' ? Laser : Portable;
+const renderSignSizeButtons = (selectedPrinter: Printer, catgNbr: number, signType: string, dispatch: Function) => {
+  const sizeObject = selectedPrinter.type === PrinterType.LASER ? LaserPaper : PortablePaper;
 
   return (
     <View style={{flexDirection: 'row', marginVertical: 4}} >
@@ -77,7 +63,7 @@ const renderSignSizeButtons = (selectedPrinter: {type: string}, catgNbr: number,
 const PrintPriceSign = () => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const { result } = useTypedSelector(state => state.async.getItemDetails);
-  const { selectedPrinter, signType } = useTypedSelector(state => state.Print);
+  const { selectedPrinter, selectedSignType, printQueue } = useTypedSelector(state => state.Print);
   const dispatch = useDispatch();
 
   const [signQty, setSignQty] = useState(1);
@@ -89,7 +75,14 @@ const PrintPriceSign = () => {
   useLayoutEffect(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
     if(selectedPrinter.name === ''){
-      dispatch(setSelectedPrinter({type: 'LASER', name: strings('PRINT.FRONT_DESK'), desc: strings('GENERICS.DEFAULT')}))
+      const initialPrinter: Printer = {
+        type: PrinterType.LASER,
+        name: strings('PRINT.FRONT_DESK'),
+        desc: strings('GENERICS.DEFAULT'),
+        id: 0
+      }
+      dispatch(setSelectedPrinter(initialPrinter));
+      dispatch(addToPrinterList(initialPrinter));
     }
   }, [])
 
@@ -126,6 +119,28 @@ const PrintPriceSign = () => {
 
   const handleAddPrintList = () => {
     console.log('ADD TO PRINT LIST clicked');
+
+    // check if the item/size already exists on the print queue
+    const itemSizeExists = printQueue.some((printItem => {
+      return printItem.itemNbr === itemNbr && printItem.paperSize === selectedSignType;
+    }))
+
+    if(itemSizeExists) {
+      // TODO show popup if already exists
+      console.log(`Sign already exists in queue for  - ${JSON.stringify({itemName, selectedSignType})}`)
+    } else {
+      // add to print queue, forcing to use laser
+      // TODO show popup if laser printer is not selected when adding to queue
+      const printQueueItem: PrintQueueItem = {
+        itemName: itemName,
+        itemNbr: itemNbr,
+        upcNbr: upcNbr,
+        catgNbr: catgNbr,
+        signQty: signQty,
+        paperSize: selectedSignType
+      }
+      dispatch(addToPrintQueue(printQueueItem));
+    }
   }
 
   const handlePrint = () => {
@@ -174,7 +189,7 @@ const PrintPriceSign = () => {
         </View>
         <View style={styles.signSizeContainer} >
           <Text style={styles.signSizeLabel} >{strings('PRINT.SIGN_SIZE')}</Text>
-          {renderSignSizeButtons(selectedPrinter, catgNbr, signType, dispatch)}
+          {renderSignSizeButtons(selectedPrinter, catgNbr, selectedSignType, dispatch)}
         </View>
         <View style={styles.printerContainer}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -201,12 +216,14 @@ const PrintPriceSign = () => {
           type={Button.Type.SOLID_WHITE}
           style={styles.footerBtns}
           onPress={handleAddPrintList}
+          disabled={!isValidQty}
         />
         <Button
           title={'Print'}
           type={Button.Type.PRIMARY}
           style={styles.footerBtns}
           onPress={handlePrint}
+          disabled={!isValidQty}
         />
       </View>
     </SafeAreaView>

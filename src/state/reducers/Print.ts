@@ -1,14 +1,28 @@
-import { SET_SELECTED_PRINTER, SET_SIGN_TYPE } from '../actions/Print';
-import { strings } from '../../locales';
+import {
+  ADD_TO_PRINT_QUEUE,
+  ADD_TO_PRINTER_LIST,
+  SET_SELECTED_PRINTER,
+  SET_SELECTED_SIGN_TYPE
+} from '../actions/Print';
+import { Printer, PrinterType, PrintQueueItem } from '../../models/Printer';
 
+interface StateType {
+  selectedPrinter: Printer;
+  selectedSignType: string;
+  printerList: Printer[];
+  printQueue: PrintQueueItem[];
+}
 
-const initialState = {
+const initialState: StateType = {
   selectedPrinter: {
-    type: 'LASER',
+    type: PrinterType.LASER,
     name: '',
-    desc: ''
+    desc: '',
+    id: 0
   },
-  signType: ''
+  selectedSignType: '',
+  printerList: [],
+  printQueue: []
 }
 
 export const Print = (state = initialState, action: any) => {
@@ -19,13 +33,30 @@ export const Print = (state = initialState, action: any) => {
         selectedPrinter: {
           type: action.payload.type,
           name: action.payload.name,
-          desc: action.payload.desc
+          desc: action.payload.desc,
+          id: action.payload.id
         }
       }
-    case SET_SIGN_TYPE:
+    case SET_SELECTED_SIGN_TYPE:
       return {
         ...state,
-        signType: action.payload
+        selectedSignType: action.payload
+      }
+    case ADD_TO_PRINTER_LIST:
+      const {printerList} = state;
+      printerList.push(action.payload);
+
+      return {
+        ...state,
+        printerList
+      }
+    case ADD_TO_PRINT_QUEUE:
+      const {printQueue} = state;
+      printQueue.push(action.payload);
+
+      return {
+        ...state,
+        printQueue
       }
     default:
       return state;

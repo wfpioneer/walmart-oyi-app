@@ -1,7 +1,11 @@
-export const SET_SELECTED_PRINTER = 'PRINT/SET_SELECTED_PRINTER';
-export const SET_SIGN_TYPE = 'PRINT/SET_SIGN_TYPE';
+import { Printer, PrintQueueItem } from '../../models/Printer';
 
-export const setSelectedPrinter = (printer: { type: string, name: string, desc: string }) => {
+export const SET_SELECTED_PRINTER = 'PRINT/SET_SELECTED_PRINTER';
+export const SET_SELECTED_SIGN_TYPE = 'PRINT/SET_SELECTED_SIGN_TYPE';
+export const ADD_TO_PRINTER_LIST = 'PRINT/ADD_TO_PRINTER_LIST';
+export const ADD_TO_PRINT_QUEUE = 'PRINT/ADD_TO_PRINT_QUEUE';
+
+export const setSelectedPrinter = (printer: Printer) => {
   return {
     type: SET_SELECTED_PRINTER,
     payload: printer
@@ -10,7 +14,21 @@ export const setSelectedPrinter = (printer: { type: string, name: string, desc: 
 
 export const setSignType = (type: string) => {
   return {
-    type: SET_SIGN_TYPE,
+    type: SET_SELECTED_SIGN_TYPE,
     payload: type
+  }
+}
+
+export const addToPrinterList = (printer: Printer) => {
+  return {
+    type: ADD_TO_PRINTER_LIST,
+    payload: printer
+  }
+}
+
+export const addToPrintQueue = (label: PrintQueueItem) => {
+  return {
+    type: ADD_TO_PRINT_QUEUE,
+    payload: label
   }
 }

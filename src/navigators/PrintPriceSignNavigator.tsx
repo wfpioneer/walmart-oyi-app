@@ -4,7 +4,6 @@ import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import { useNavigation } from '@react-navigation/native';
 import PrintPriceSign from '../screens/PrintPriceSign/PrintPriceSign';
-import ChangePrinter from '../screens/ChangePrinter/ChangePrinter';
 
 const Stack = createStackNavigator();
 
