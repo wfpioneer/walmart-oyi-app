@@ -70,5 +70,10 @@ export default {
     Wine: 'Wine',
     Medium: 'Med',
     Large: 'Large'
+  },
+  LOCATION: {
+    TITLE: 'All locations',
+    FLOOR: 'Floor locations',
+    RESERVE: 'Reserve locations'
   }
 };
