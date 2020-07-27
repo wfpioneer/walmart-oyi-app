@@ -123,9 +123,9 @@ const PrintPriceSign = () => {
     console.log('ADD TO PRINT LIST clicked');
 
     // check if the item/size already exists on the print queue
-    const itemSizeExists = printQueue.some((printItem => {
+    const itemSizeExists = printQueue.some((printItem: PrintQueueItem) => {
       return printItem.itemNbr === itemNbr && printItem.paperSize === selectedSignType;
-    }))
+    })
 
     if(itemSizeExists) {
       // TODO show popup if already exists

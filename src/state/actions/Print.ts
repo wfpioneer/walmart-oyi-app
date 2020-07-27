@@ -4,6 +4,7 @@ export const SET_SELECTED_PRINTER = 'PRINT/SET_SELECTED_PRINTER';
 export const SET_SELECTED_SIGN_TYPE = 'PRINT/SET_SELECTED_SIGN_TYPE';
 export const ADD_TO_PRINTER_LIST = 'PRINT/ADD_TO_PRINTER_LIST';
 export const ADD_TO_PRINT_QUEUE = 'PRINT/ADD_TO_PRINT_QUEUE';
+export const SET_PRINT_QUEUE = 'PRINT/SET_PRINT_QUEUE';
 
 export const setSelectedPrinter = (printer: Printer) => {
   return {
@@ -30,5 +31,12 @@ export const addToPrintQueue = (label: PrintQueueItem) => {
   return {
     type: ADD_TO_PRINT_QUEUE,
     payload: label
+  }
+}
+
+export const setPrintQueue = (printQueue: PrintQueueItem[]) => {
+  return {
+    type: SET_PRINT_QUEUE,
+    payload: printQueue
   }
 }

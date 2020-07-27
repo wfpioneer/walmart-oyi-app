@@ -1,6 +1,7 @@
 import {
   ADD_TO_PRINT_QUEUE,
   ADD_TO_PRINTER_LIST,
+  SET_PRINT_QUEUE,
   SET_SELECTED_PRINTER,
   SET_SELECTED_SIGN_TYPE
 } from '../actions/Print';
@@ -57,6 +58,11 @@ export const Print = (state = initialState, action: any) => {
       return {
         ...state,
         printQueue
+      }
+    case SET_PRINT_QUEUE:
+      return {
+        ...state,
+        printQueue: action.payload
       }
     default:
       return state;

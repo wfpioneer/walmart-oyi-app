@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Modal, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { useDispatch } from 'react-redux';
@@ -9,8 +9,20 @@ import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import COLOR from '../../themes/Color';
+import { setPrintQueue } from '../../state/actions/Print';
+import { strings } from '../../locales';
+import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
 
-const renderPrintItem = (printQueue: PrintQueueItem[]) => {
+const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Function, dispatch: Function) => {
+
+  const handleEditAction = (index: number) => () => {
+    setItemIndexToEdit(index);
+  }
+
+  const handleDeleteAction = (index: number) => () => {
+    printQueue.splice(index, 1)
+    dispatch(setPrintQueue(printQueue));
+  }
 
   return printQueue.map((item, index) => {
     return (
@@ -18,7 +30,7 @@ const renderPrintItem = (printQueue: PrintQueueItem[]) => {
         <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.itemImage} />
         <View style={styles.itemDetailsContainer}>
           <Text style={styles.itemDescText}>{item.itemName}</Text>
-          <Text style={styles.sizeText}>{`Paper size: ${item.paperSize}`}</Text>
+          <Text style={styles.sizeText}>{`${strings('PRINT.SIGN_SIZE')}: ${strings(`PRINT.${item.paperSize}`)}`}</Text>
           <View style={styles.itemBottomRowContainer}>
             <Text style={styles.copiesText}>{`Copies: ${item.signQty}`}</Text>
             <View style={styles.actionBtnContainer} >
@@ -26,13 +38,13 @@ const renderPrintItem = (printQueue: PrintQueueItem[]) => {
                 icon={<MaterialCommunityIcon name={'pencil'} color={COLOR.GREY_700} size={22} />}
                 type={IconButton.Type.NO_BORDER}
                 style={styles.actionBtns}
-                onPress={() => console.log('edit clicked')}
+                onPress={handleEditAction(index)}
               />
               <IconButton
                 icon={<MaterialCommunityIcon name={'delete'} color={COLOR.GREY_700} size={22} />}
                 type={IconButton.Type.NO_BORDER}
                 style={styles.actionBtns}
-                onPress={() => console.log('delete clicked')}
+                onPress={handleDeleteAction(index)}
               />
             </View>
           </View>
@@ -47,24 +59,35 @@ const PrintQueue = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  const [ itemIndexToEdit, setItemIndexToEdit ] = useState(-1);
+
   const handlePrint = () => {
     console.log('Print all clicked');
   }
 
-  return (
+  return (printQueue.length === 0 ?
+    <View>
+      <Text>
+        Nothing in the print list
+      </Text>
+    </View>
+    :
     <SafeAreaView style={styles.safeAreaView}>
       <Modal
-        visible={false}
-        onRequestClose={() => {}}
+        visible={itemIndexToEdit >= 0}
+        onRequestClose={() => {
+          setItemIndexToEdit(-1);
+        }}
         transparent
       >
+        <PrintQueueEdit itemIndexToEdit={itemIndexToEdit} setItemIndexToEdit={setItemIndexToEdit} />
       </Modal>
-      <ScrollView contentContainerStyle={styles.container} >
+      <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.totalCountContainer}>
           <Text>{`${printQueue.length} items total`}</Text>
         </View>
         <View style={styles.listContainer}>
-          {renderPrintItem(printQueue)}
+          {renderPrintItem(printQueue, setItemIndexToEdit, dispatch)}
         </View>
       </ScrollView>
       <View style={styles.footerBtnContainer}>
