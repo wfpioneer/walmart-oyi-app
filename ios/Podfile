@@ -23,8 +23,8 @@ end
 
 install! 'cocoapods', :disable_input_output_paths => true
 
-target 'ReactNativeSkeleton' do
-  # Pods for ReactNativeSkeleton
+target 'OYI' do
+  # Pods for OYI
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -56,7 +56,7 @@ target 'ReactNativeSkeleton' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'ReactNativeSkeletonTests' do
+  target 'OYITests' do
     inherit! :complete
     # Pods for testing
   end
@@ -73,10 +73,10 @@ target 'ReactNativeSkeleton' do
   end
 end
 
-target 'ReactNativeSkeleton-tvOS' do
-  # Pods for ReactNativeSkeleton-tvOS
+target 'OYI-tvOS' do
+  # Pods for OYI-tvOS
 
-  target 'ReactNativeSkeleton-tvOSTests' do
+  target 'OYI-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
