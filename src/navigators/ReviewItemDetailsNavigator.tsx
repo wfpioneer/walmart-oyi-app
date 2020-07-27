@@ -29,10 +29,16 @@ const ReviewItemDetailsNavigator = () => {
     );
   }
 
+  // TODO add "badge" to show signs currently in queue
   const renderPrintQueueButton = () => (
     <TouchableOpacity onPress={() => console.log('Print queue button pressed')}>
       <View style={styles.rightButton}>
-        <MaterialCommunityIcon name={'printer'} size={20} color={COLOR.WHITE} />
+        <MaterialCommunityIcon
+          name={'printer'}
+          size={20}
+          color={COLOR.WHITE}
+          onPress={() => navigation.navigate('PrintPriceSign', {screen: 'PrintQueue'})}
+        />
       </View>
     </TouchableOpacity>
   );

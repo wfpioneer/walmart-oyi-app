@@ -62,7 +62,8 @@ export default {
     OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}'
   },
   PRINT: {
-    MAIN_TITLE: 'Print Price Sign',
+    MAIN_TITLE: 'Print price sign',
+    QUEUE_TITLE: 'Print list',
     CHANGE_TITLE: 'Printers',
     PRICE_SIGN: 'Print price sign',
     COPY_QTY: 'Number of copies',

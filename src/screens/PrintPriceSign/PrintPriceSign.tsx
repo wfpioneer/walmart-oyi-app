@@ -11,6 +11,7 @@ import { getMockItemDetails } from '../../mockData';
 import { useDispatch } from 'react-redux';
 import { addToPrinterList, addToPrintQueue, setSelectedPrinter, setSignType } from '../../state/actions/Print';
 import { LaserPaper, PortablePaper, Printer, PrinterType, PrintQueueItem } from '../../models/Printer';
+import { useNavigation } from '@react-navigation/native';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -65,6 +66,7 @@ const PrintPriceSign = () => {
   const { result } = useTypedSelector(state => state.async.getItemDetails);
   const { selectedPrinter, selectedSignType, printQueue } = useTypedSelector(state => state.Print);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const [signQty, setSignQty] = useState(1);
   const [isValidQty, setIsValidQty] = useState(true);
@@ -131,6 +133,7 @@ const PrintPriceSign = () => {
     } else {
       // add to print queue, forcing to use laser
       // TODO show popup if laser printer is not selected when adding to queue
+      // TODO show toast that the item was added to queue
       const printQueueItem: PrintQueueItem = {
         itemName: itemName,
         itemNbr: itemNbr,
@@ -140,6 +143,7 @@ const PrintPriceSign = () => {
         paperSize: selectedSignType
       }
       dispatch(addToPrintQueue(printQueueItem));
+      navigation.goBack();
     }
   }
 
@@ -214,14 +218,14 @@ const PrintPriceSign = () => {
           title={'Add to print list'}
           titleColor={COLOR.MAIN_THEME_COLOR}
           type={Button.Type.SOLID_WHITE}
-          style={styles.footerBtns}
+          style={styles.footerBtn}
           onPress={handleAddPrintList}
           disabled={!isValidQty}
         />
         <Button
           title={'Print'}
           type={Button.Type.PRIMARY}
-          style={styles.footerBtns}
+          style={styles.footerBtn}
           onPress={handlePrint}
           disabled={!isValidQty}
         />

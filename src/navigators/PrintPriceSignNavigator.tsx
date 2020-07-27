@@ -4,6 +4,7 @@ import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import { useNavigation } from '@react-navigation/native';
 import PrintPriceSign from '../screens/PrintPriceSign/PrintPriceSign';
+import PrintQueue from '../screens/PrintQueue/PrintQueue';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,24 @@ const PrintPriceSignNavigator = () => {
         component={PrintPriceSign}
         options={{
           headerTitle: strings('PRINT.MAIN_TITLE'),
+          headerTitleAlign: 'left',
+          headerTitleStyle: {fontSize: 18},
+          headerBackTitleVisible: false,
+          headerLeft: (props) => (
+            // Shouldn't need to do this, but not showing on its own for some reason
+            // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
+            <HeaderBackButton
+              {...props}
+              onPress={navigateBack}
+            />
+          )
+        }}
+      />
+      <Stack.Screen
+        name="PrintQueue"
+        component={PrintQueue}
+        options={{
+          headerTitle: strings('PRINT.QUEUE_TITLE'),
           headerTitleAlign: 'left',
           headerTitleStyle: {fontSize: 18},
           headerBackTitleVisible: false,

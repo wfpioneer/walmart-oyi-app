@@ -97,7 +97,7 @@ const style = StyleSheet.create({
     fontSize: 12,
     color: COLOR.GREY_500
   },
-  footerBtns: {
+  footerBtn: {
     flex: 1,
     paddingHorizontal: 4
   }
