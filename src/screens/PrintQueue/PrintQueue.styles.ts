@@ -5,6 +5,12 @@ const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1
   },
+  emptyContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingVertical: 28
+  },
   container: {
     alignItems: 'stretch',
     justifyContent: 'center'
@@ -48,6 +54,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
     paddingVertical: 12,
     elevation: 16
+  },
+  emptyImage: {
+
+  },
+  emptyText: {
+    marginVertical: 16,
+    color: COLOR.GREY_700
   },
   itemImage: {
     height: 65,

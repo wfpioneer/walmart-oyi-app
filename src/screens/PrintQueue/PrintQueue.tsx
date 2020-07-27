@@ -32,7 +32,7 @@ const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Funct
           <Text style={styles.itemDescText}>{item.itemName}</Text>
           <Text style={styles.sizeText}>{`${strings('PRINT.SIGN_SIZE')}: ${strings(`PRINT.${item.paperSize}`)}`}</Text>
           <View style={styles.itemBottomRowContainer}>
-            <Text style={styles.copiesText}>{`Copies: ${item.signQty}`}</Text>
+            <Text style={styles.copiesText}>{`${strings('PRINT.COPIES')}: ${item.signQty}`}</Text>
             <View style={styles.actionBtnContainer} >
               <IconButton
                 icon={<MaterialCommunityIcon name={'pencil'} color={COLOR.GREY_700} size={22} />}
@@ -66,10 +66,18 @@ const PrintQueue = () => {
   }
 
   return (printQueue.length === 0 ?
-    <View>
-      <Text>
-        Nothing in the print list
-      </Text>
+    <View style={styles.emptyContainer}>
+      <IconButton
+        icon={<MaterialCommunityIcon name={'printer'} color={COLOR.GREY_500} size={100}/>}
+        type={IconButton.Type.PRIMARY}
+        backgroundColor={COLOR.GREY_200}
+        height={250}
+        width={250}
+        radius={250}
+        style={styles.emptyImage}
+        disabled
+      />
+      <Text style={styles.emptyText}>{strings('PRINT.EMPTY_LIST')}</Text>
     </View>
     :
     <SafeAreaView style={styles.safeAreaView}>
@@ -84,7 +92,7 @@ const PrintQueue = () => {
       </Modal>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.totalCountContainer}>
-          <Text>{`${printQueue.length} items total`}</Text>
+          <Text>{`${printQueue.length} ${strings('PRINT.TOTAL_ITEMS')}`}</Text>
         </View>
         <View style={styles.listContainer}>
           {renderPrintItem(printQueue, setItemIndexToEdit, dispatch)}
@@ -92,7 +100,7 @@ const PrintQueue = () => {
       </ScrollView>
       <View style={styles.footerBtnContainer}>
         <Button
-          title={'Print all'}
+          title={strings('PRINT.PRINT_ALL')}
           type={Button.Type.PRIMARY}
           style={styles.footerBtn}
           onPress={handlePrint}

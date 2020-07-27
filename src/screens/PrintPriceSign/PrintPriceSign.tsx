@@ -204,7 +204,7 @@ const PrintPriceSign = () => {
             </View>
           </View>
           <Button
-            title={'Change'}
+            title={strings('GENERICS.CHANGE')}
             titleColor={COLOR.MAIN_THEME_COLOR}
             titleFontSize={14}
             type={Button.Type.NO_BORDER}
@@ -215,19 +215,19 @@ const PrintPriceSign = () => {
       </ScrollView>
       <View style={styles.footerBtnContainer}>
         <Button
-          title={'Add to print list'}
+          title={strings('PRINT.ADD_TO_QUEUE')}
           titleColor={COLOR.MAIN_THEME_COLOR}
           type={Button.Type.SOLID_WHITE}
           style={styles.footerBtn}
           onPress={handleAddPrintList}
-          disabled={!isValidQty}
+          disabled={!isValidQty || selectedSignType?.length === 0}
         />
         <Button
-          title={'Print'}
+          title={strings('PRINT.PRINT')}
           type={Button.Type.PRIMARY}
           style={styles.footerBtn}
           onPress={handlePrint}
-          disabled={!isValidQty}
+          disabled={!isValidQty || selectedSignType?.length === 0}
         />
       </View>
     </SafeAreaView>
