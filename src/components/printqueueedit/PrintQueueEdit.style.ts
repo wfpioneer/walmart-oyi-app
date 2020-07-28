@@ -1,26 +1,39 @@
 import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
-const style = StyleSheet.create({
-  mainContainer: {
-    flex: 1
-  },
-  scrollContainer: {
+const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'stretch'
+    alignItems: 'center',
+    backgroundColor: COLOR.BLACK_TRANSPARENT_600
+  },
+  contentContainer: {
+    width: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLOR.WHITE,
+    borderRadius: 7.5,
+    paddingBottom: 12,
+    paddingHorizontal: 8
+  },
+  closeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    width: '100%'
   },
   itemDetailsContainer: {
     backgroundColor: COLOR.WHITE,
     flexDirection: 'row',
     paddingHorizontal: 8,
-    paddingVertical: 16
+    paddingVertical: 4
   },
   copyQtyContainer: {
     backgroundColor: COLOR.WHITE,
     alignItems: 'center',
     marginTop: 8,
     paddingHorizontal: 8,
-    paddingVertical: 16
+    paddingVertical: 4
   },
   qtyChangeContainer: {
     flexDirection: 'row',
@@ -33,7 +46,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
     marginTop: 8,
     paddingHorizontal: 8,
-    paddingVertical: 12
+    paddingVertical: 4
   },
   printerContainer: {
     flexDirection: 'row',
@@ -43,15 +56,6 @@ const style = StyleSheet.create({
     marginTop: 8,
     paddingHorizontal: 8,
     paddingVertical: 12
-  },
-  footerBtnContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: COLOR.WHITE,
-    paddingHorizontal: 4,
-    paddingTop: 8,
-    paddingBottom: 20,
-    elevation: 16
   },
   itemImage: {
     height: 65,
@@ -96,11 +100,7 @@ const style = StyleSheet.create({
     marginVertical: 8,
     fontSize: 12,
     color: COLOR.GREY_500
-  },
-  footerBtn: {
-    flex: 1,
-    paddingHorizontal: 4
   }
 });
 
-export default style;
+export default styles;

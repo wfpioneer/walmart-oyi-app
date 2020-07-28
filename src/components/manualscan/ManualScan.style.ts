@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
     paddingRight: 16
   },
   textInput: {
-    flex: 1
+    flex: 1,
+    paddingLeft: 10
   }
 });
 
