@@ -68,11 +68,6 @@ const ReviewItemDetails = (props: any) => {
   }
 
   const handleLocationAction = () => {
-    const locationProps = {
-      floorLoc: itemDetails.location.floor,
-      resLoc: itemDetails.location.reserve
-    };
-    console.log(locationProps)
     navigation.navigate({name: 'LocationDetails', params: {floorLoc: itemDetails.location.floor, resLoc: itemDetails.location.reserve}});
     console.log('Handle location screen');
   }
