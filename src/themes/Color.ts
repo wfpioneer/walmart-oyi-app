@@ -66,7 +66,7 @@ export const COLOR = {
   MIDNIGHT: '#323a4e',
   PALE_BLUE: '#dbecff',
   PALE_GRAY: '#edededcc',
-  PINK: '#c71585'
+  PINK: '#d938ab'
 };
 
 export default COLOR;

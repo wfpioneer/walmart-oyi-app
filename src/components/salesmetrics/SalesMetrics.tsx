@@ -120,16 +120,8 @@ const SalesMetrics = (props: {itemDetails: ItemDetails, isGraphView: boolean}) =
   }
 
   return (
-    <View>
-      <View style={styles.averageContainer}>
-        <Text style={styles.averageQtyNbr}>{isDailyPeriod ? dailyAvgSales : weeklyAvgSales}</Text>
-        <Text style={styles.averageQtyLabel}>{`${salesTimePeriodText} ${strings('ITEM.AVG_SALES')}`}</Text>
-      </View>
-      {isDailyPeriod && !props.isGraphView && renderDailyList(daily)}
-      {isDailyPeriod && props.isGraphView && renderChart(dailyChartData, isDailyPeriod)}
-      {!isDailyPeriod && !props.isGraphView && renderWeeklyList(weekly)}
-      {!isDailyPeriod && props.isGraphView && renderChart(weeklyChartData, isDailyPeriod)}
-      <View style={styles.bottomButtonContainer} >
+    <View style={styles.mainContainer}>
+      <View style={styles.topButtonContainer} >
         <Button
           title={strings('GENERICS.DAILY')}
           titleFontSize={12}
@@ -155,6 +147,14 @@ const SalesMetrics = (props: {itemDetails: ItemDetails, isGraphView: boolean}) =
           onPress={handleDailyTimePeriodChange(false)}
         />
       </View>
+      <View style={styles.averageContainer}>
+        <Text style={styles.averageQtyNbr}>{isDailyPeriod ? dailyAvgSales : weeklyAvgSales}</Text>
+        <Text style={styles.averageQtyLabel}>{`${salesTimePeriodText} ${strings('ITEM.AVG_SALES')}`}</Text>
+      </View>
+      {isDailyPeriod && !props.isGraphView && renderDailyList(daily)}
+      {isDailyPeriod && props.isGraphView && renderChart(dailyChartData, isDailyPeriod)}
+      {!isDailyPeriod && !props.isGraphView && renderWeeklyList(weekly)}
+      {!isDailyPeriod && props.isGraphView && renderChart(weeklyChartData, isDailyPeriod)}
     </View>
   )
 }

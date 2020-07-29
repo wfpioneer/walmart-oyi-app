@@ -1,20 +1,16 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeNavigator } from "./HomeNavigator";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import COLOR from "../themes/Color";
 import { strings } from "../locales";
+import { WorklistNavigator } from "./WorklistNavigator";
 
 const Tab = createBottomTabNavigator();
 
-const TestScreenTwo = () => (
-  <Text>
-    Test Screen 2!
-  </Text>
-);
-
 export const TabNavigator = () => {
+  // @ts-ignore
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -22,13 +18,13 @@ export const TabNavigator = () => {
           let iconName = '';
 
           if (route.name === 'Home') {
-            iconName = 'home';
-          } else if (route.name === 'Screen2') {
-            iconName = 'help';
+            return <MaterialIcons name='home' size={size} color={color} />;
+          } else if (route.name === 'Work List') {
+            return <AntDesign name='profile' size={size} color={color} />;
           }
 
           // You can return any component that you like here!
-          return <MaterialIcons name={iconName} size={size} color={color} />;
+          return <MaterialIcons name='help' size={size} color={color} />;
         },
       })}
       tabBarOptions={{
@@ -38,7 +34,9 @@ export const TabNavigator = () => {
     >
       { /* @ts-ignore */ }
       <Tab.Screen name="Home" title={strings('HOME.HOME')} component={HomeNavigator} />
-      <Tab.Screen name="Screen2" component={TestScreenTwo} />
+
+      { /* @ts-ignore */ }
+      <Tab.Screen name="Work List" title={strings('WORKLIST.WORKLIST')} component={WorklistNavigator}  />
     </Tab.Navigator>
   );
 }
