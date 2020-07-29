@@ -80,5 +80,10 @@ export default {
     Wine: 'Wine',
     Medium: 'Med',
     Large: 'Large'
+  },
+  WORKLIST: {
+    WORKLIST: 'Work List',
+    ITEM: 'item',
+    ITEMS: 'items'
   }
 };

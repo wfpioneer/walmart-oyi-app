@@ -4,6 +4,7 @@ import { User } from './User';
 import { activityModal } from './ActivityModal';
 import asyncReducer from './asyncAPI';
 import { Global } from './Global';
+import { worklistFilter } from "./WorklistFilter";
 import { Print } from './Print';
 
 /**
@@ -14,6 +15,7 @@ const RootReducer = combineReducers({
   activityModal,
   async: asyncReducer,
   Global,
+  WorklistFilter: worklistFilter,
   Print
 });
 
