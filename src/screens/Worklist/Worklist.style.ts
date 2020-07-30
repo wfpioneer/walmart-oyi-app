@@ -8,6 +8,15 @@ export default StyleSheet.create({
     flex: 1,
     width: '100%',
   },
+  filterContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    height: 50,
+    width: '100%',
+  },
+  filterList: {
+    paddingHorizontal: 0,
+  },
   list: {
     flex: 1,
     width: '100%'

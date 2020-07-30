@@ -41,7 +41,7 @@ export default {
   },
   EXCEPTION: {
     PO: 'Price Override',
-    NILPICK: 'Nil Pick',
+    NIL_PICK: 'Nil Pick',
     PRICE_OVERRIDE: 'Price Override',
     NO_SALES: 'No Sales',
     NEGATIVE_ON_HANDS: 'Negative on-hands',

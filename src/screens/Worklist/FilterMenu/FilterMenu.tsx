@@ -14,6 +14,7 @@ import {
   clearFilter
 } from "../../../state/actions/Worklist";
 import {strings} from "../../../locales";
+import FullExceptionList from "../FullExceptionList";
 
 interface MenuCardProps {
   title: string;
@@ -45,12 +46,12 @@ export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number, ca
   const onItemPress = () => {
     if (item.selected) {
       // @ts-ignore
-      filterCategories.splice(filterCategories.indexOf(item.value), 1);
+      filterCategories.splice(filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`), 1);
       return dispatch(updateFilterCategories(filterCategories));
     }
 
     const replacementFilter = filterCategories;
-    replacementFilter.push(item.catgNbr);
+    replacementFilter.push(`${item.catgNbr} - ${item.catgName}`);
     return dispatch(updateFilterCategories(replacementFilter));
   }
   return (
@@ -95,7 +96,7 @@ export const renderCategoryCollapsibleCard = () => {
   const dispatch = useDispatch();
   const categoryMap = data.map(item => {
     // @ts-ignore
-    const isSelected = filterCategories.indexOf(item.catgNbr) !== -1
+    const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1
     return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
   })
 
@@ -119,12 +120,11 @@ export const renderCategoryCollapsibleCard = () => {
   if (filterCategories.length === 0) {
     categorySubtext = strings('WORKLIST.ALL');
   } else {
-    filterCategories.forEach((category: number) => {
-      const catObj = filteredCategories.find(categoryListItem => categoryListItem.catgNbr === category);
-      if (catObj && categorySubtext !== '') {
-        categorySubtext = `${categorySubtext}\n${catObj.catgNbr} - ${catObj.catgName}`;
-      } else if (catObj) {
-        categorySubtext = `${catObj.catgNbr} - ${catObj.catgName}`;
+    filterCategories.forEach((category: string) => {
+      if (categorySubtext !== '') {
+        categorySubtext = `${categorySubtext}\n${category}`;
+      } else if (category) {
+        categorySubtext = category;
       }
     });
   }
@@ -150,34 +150,7 @@ export const renderExceptionTypeCard = () => {
   const { exceptionOpen, filterExceptions } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
 
-  const fullExceptionList = [
-    {
-      value: 'NILPICK',
-      display: strings('EXCEPTION.NILPICK')
-    },
-    {
-      value: 'PRICE_OVERRIDE',
-      display: strings('EXCEPTION.PRICE_OVERRIDE')
-    },
-    {
-      value: 'NO_SALES',
-      display: strings('EXCEPTION.NO_SALES')
-    },
-    {
-      value: 'NEGATIVE_ON_HANDS',
-      display: strings('EXCEPTION.NEGATIVE_ON_HANDS')
-    },
-    {
-      value: 'CANCELLED',
-      display: strings('EXCEPTION.CANCELLED')
-    },
-    {
-      value: 'NO_SALES_FLOOR',
-      display: strings('EXCEPTION.NO_SALES_FLOOR_LOCATION')
-    }
-  ];
-
-  const exceptionMap = fullExceptionList.map(item => {
+  const exceptionMap = FullExceptionList().map(item => {
     // @ts-ignore
     const isSelected = filterExceptions.indexOf(item.value) !== -1
     return { value: item.value, display: item.display, selected: isSelected };
@@ -188,7 +161,7 @@ export const renderExceptionTypeCard = () => {
     subtext = strings('WORKLIST.ALL');
   } else {
     filterExceptions.forEach((exception: string) => {
-      const exceptionObj = fullExceptionList.find(exceptionListItem => exceptionListItem.value === exception);
+      const exceptionObj = FullExceptionList().find(exceptionListItem => exceptionListItem.value === exception);
       if (exceptionObj && subtext !== '') {
         subtext = `${subtext}\n${exceptionObj.display}`;
       } else if (exceptionObj) {
