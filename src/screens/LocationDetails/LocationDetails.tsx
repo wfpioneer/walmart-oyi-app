@@ -16,9 +16,9 @@ function LocationDetails() {
     const locProps:locationProps = route.params?route.params:{};
     function createLocations(locationList:[Location]) {
         return (
-            <View>
+            <>
                 {locationList.map(cardMaker)}
-            </View>
+            </>
         );
     };
     function cardMaker(loc:Location) {
