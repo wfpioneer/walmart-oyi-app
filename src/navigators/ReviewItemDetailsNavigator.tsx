@@ -82,13 +82,6 @@ const ReviewItemDetailsNavigator = () => {
           headerTitleAlign: 'left',
           headerTitleStyle: {fontSize: 18},
           headerBackTitleVisible: false,
-          headerLeft: (props) => (
-            // Cloned from PrintPriceSignNavigator
-            <HeaderBackButton
-              {...props}
-              onPress={navigateBack}
-            />
-          )
         }}
       />
     </Stack.Navigator>
