@@ -27,5 +27,10 @@ export default {
   HOME: {
     HOME: 'Casa',
     STYLE_GUIDE: 'Guía de estilo'
+  },
+  WORKLIST: {
+    WORKLIST: 'Lista de trabajo',
+    ITEM: 'articulo',
+    ITEMS: 'articulos'
   }
 };

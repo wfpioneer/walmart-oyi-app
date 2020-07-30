@@ -47,7 +47,7 @@ class IconButton extends PureComponent {
         width
       };
 
-    this.bgColor = disabled ? COLOR.DISABLED_BLUE : backgroundColor;
+    this.bgColor = backgroundColor;
 
     let buttonStyle;
     if (type === IconButton.Type.PRIMARY) {
