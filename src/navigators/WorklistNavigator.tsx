@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, TouchableOpacity } from "react-native";
+import {View, TouchableOpacity, Animated} from "react-native";
 import { useDispatch } from "react-redux";
 import COLOR from "../themes/Color";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -8,8 +8,10 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { TodoWorklist } from "../screens/Worklist/TodoWorklist";
 import { CompletedWorklist } from "../screens/Worklist/CompletedWorklist";
 import styles from './WorklistNavigator.style';
-import { showMenu, hideMenu } from "../state/actions/WorklistFilter";
+import { toggleMenu } from "../state/actions/Worklist";
 import {useTypedSelector} from "../state/reducers/RootReducer";
+import SideMenu from "react-native-side-menu";
+import {FilterMenu} from "../screens/Worklist/FilterMenu/FilterMenu";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -37,9 +39,9 @@ const worklistTabs = () => {
 
 const onFilterMenuPress = (dispatch: any, menuOpen: boolean) => {
   if (menuOpen) {
-    dispatch(hideMenu());
+    dispatch(toggleMenu(false));
   } else {
-    dispatch(showMenu());
+    dispatch(toggleMenu(true));
   }
 };
 
@@ -55,22 +57,37 @@ const renderHeaderRight = (dispatch: any, menuOpen: boolean) => {
 
 export const WorklistNavigator  = () => {
   const dispatch = useDispatch();
-  const { menuOpen } = useTypedSelector(state => state.WorklistFilter);
+  const { menuOpen } = useTypedSelector(state => state.Worklist);
+  const menu = (
+    <FilterMenu />
+  )
   return (
-    <Stack.Navigator
-      headerMode="float"
-      screenOptions={ {
-          headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
-          headerTintColor: COLOR.WHITE
-      } }
+    <SideMenu
+      menu={menu}
+      menuPosition="right"
+      isOpen={menuOpen}
+      animationFunction={(prop, value) => Animated.spring(prop, {
+        toValue: value,
+        friction: 8,
+        useNativeDriver: true
+      })
+      }
     >
-      <Stack.Screen
-        name="Work List"
-        component={worklistTabs}
-        options={() => ({
-          headerRight: () => renderHeaderRight(dispatch, menuOpen)
-        })}
-      />
-    </Stack.Navigator>
+      <Stack.Navigator
+        headerMode="float"
+        screenOptions={ {
+            headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
+            headerTintColor: COLOR.WHITE
+        } }
+      >
+        <Stack.Screen
+          name="Work List"
+          component={worklistTabs}
+          options={() => ({
+            headerRight: () => renderHeaderRight(dispatch, menuOpen)
+          })}
+        />
+      </Stack.Navigator>
+    </SideMenu>
   )
 }

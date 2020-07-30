@@ -40,7 +40,13 @@ export default {
     STYLE_GUIDE: 'Style Guide'
   },
   EXCEPTION: {
-    PO: 'Price Override'
+    PO: 'Price Override',
+    NILPICK: 'Nil Pick',
+    PRICE_OVERRIDE: 'Price Override',
+    NO_SALES: 'No Sales',
+    NEGATIVE_ON_HANDS: 'Negative on-hands',
+    CANCELLED: 'Cancelled',
+    NO_SALES_FLOOR_LOCATION: 'No sales floor location',
   },
   ITEM: {
     TITLE: 'Review item details',
@@ -83,7 +89,12 @@ export default {
   },
   WORKLIST: {
     WORKLIST: 'Work List',
+    CATEGORY: 'Category',
+    EXCEPTION_TYPE: 'Exception Type',
     ITEM: 'item',
-    ITEMS: 'items'
+    ITEMS: 'items',
+    ALL: 'All',
+    REFINE: 'Refine',
+    CLEAR: 'Clear'
   }
 };
