@@ -5,6 +5,7 @@ import LocationDetailsCard from "../../components/locationdetailscard/LocationDe
 import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { useRoute } from "@react-navigation/native";
+import { AddLocationButton } from "../../components/addLocationButton/AddLocationButton";
 
 export interface locationProps {
     floorLoc?: [Location],
@@ -32,6 +33,7 @@ function LocationDetails() {
             {locProps.floorLoc?createLocations(locProps.floorLoc):<View></View>}
             {locProps.resLoc?<View style={styles.sectionLabel}><Text style={styles.labelText}>{strings('LOCATION.RESERVE')} ({locProps.resLoc.length})</Text></View>:<View></View>}
             {locProps.resLoc?createLocations(locProps.resLoc):<View></View>}
+            <AddLocationButton/>
         </>
     );
 };
