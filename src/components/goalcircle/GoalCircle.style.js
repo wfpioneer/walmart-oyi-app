@@ -31,7 +31,7 @@ const styles=StyleSheet.create({
         backgroundColor: COLOR.TRACKER_RED
     },
     goalMet: {
-        backgroundColor: COLOR.TRACKER_GREY
+        backgroundColor: COLOR.GREEN
     },
     under50: {
         backgroundColor: COLOR.GREY_300
