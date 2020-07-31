@@ -35,11 +35,11 @@ const styles=StyleSheet.create({
         marginBottom: 5
     },
     barFillAtGoal: {
-        backgroundColor: "#545F7A",
+        backgroundColor: COLOR.GREEN,
         borderRadius:10
     },
     barFillNotAtGoal: {
-        backgroundColor: "#D6512D",
+        backgroundColor: COLOR.TRACKER_RED,
         borderRadius:10
     }
 });
