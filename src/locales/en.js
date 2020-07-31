@@ -87,6 +87,11 @@ export default {
     Medium: 'Med',
     Large: 'Large'
   },
+  LOCATION: {
+    TITLE: 'All locations',
+    FLOOR: 'Floor locations',
+    RESERVE: 'Reserve locations'
+  },
   WORKLIST: {
     WORKLIST: 'Work List',
     CATEGORY: 'Category',

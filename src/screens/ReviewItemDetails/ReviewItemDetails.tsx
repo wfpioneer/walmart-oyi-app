@@ -60,7 +60,7 @@ const ReviewItemDetails = (props: any) => {
   // Used to scroll to bottom when the sales metrics switches from daily to weekly
   // TODO this won't work because of changing data on scans
   const handleContentSizeChange = () => {
-    scrollViewRef.current?.scrollToEnd();
+     scrollViewRef.current?.scrollToEnd();
   }
 
   const handleUpdateQty = () => {
@@ -68,7 +68,7 @@ const ReviewItemDetails = (props: any) => {
   }
 
   const handleLocationAction = () => {
-    // TODO navigate to location screen
+    navigation.navigate({name: 'LocationDetails', params: {floorLoc: itemDetails.location.floor, resLoc: itemDetails.location.reserve}});
     console.log('Handle location screen');
   }
 

@@ -11,6 +11,7 @@ import { useTypedSelector } from '../state/reducers/RootReducer';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './ReviewItemDetailsNavigator.style';
+import LocationDetails from "../screens/LocationDetails/LocationDetails";
 
 const Stack = createStackNavigator();
 
@@ -77,6 +78,16 @@ const ReviewItemDetailsNavigator = () => {
               {renderScanButton()}
               {renderPrintQueueButton()}
             </View>)
+        }}
+      />
+      <Stack.Screen
+        name="LocationDetails"
+        component={LocationDetails}
+        options={{
+          headerTitle: strings('LOCATION.TITLE'),
+          headerTitleAlign: 'left',
+          headerTitleStyle: {fontSize: 18},
+          headerBackTitleVisible: false,
         }}
       />
     </Stack.Navigator>
