@@ -6,7 +6,8 @@ import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { useRoute } from "@react-navigation/native";
 import { COLOR } from "../../themes/Color";
-import FAB from 'react-native-fab'
+import FAB from 'react-native-fab';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export interface locationProps {
     floorLoc?: [Location],
@@ -36,7 +37,7 @@ function LocationDetails() {
             {locProps.resLoc?createLocations(locProps.resLoc):<View></View>}
             <View style={styles.container}>
                 <View style={styles.button}>
-                    <FAB buttonColor={COLOR.MAIN_THEME_COLOR} iconTextColor={COLOR.WHITE} onClickAction={() => {console.log("Add location pressed.")}} visible={true} iconTextComponent={<Text>+</Text>} />
+                    <FAB buttonColor={COLOR.MAIN_THEME_COLOR} onClickAction={() => {console.log("Add location pressed.")}} visible={true} iconTextComponent={<MaterialCommunityIcon name={'plus'} size={40} color={COLOR.WHITE} />} />
                 </View>
             </View>
         </>
