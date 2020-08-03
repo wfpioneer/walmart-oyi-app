@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./locationDetailsCard.style";
 import { View, Text } from "react-native";
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { COLOR } from "../../themes/Color";
 
 export interface Props {
