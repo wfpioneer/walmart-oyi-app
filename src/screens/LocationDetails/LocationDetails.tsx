@@ -5,7 +5,8 @@ import LocationDetailsCard from "../../components/locationdetailscard/LocationDe
 import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { useRoute } from "@react-navigation/native";
-import { AddLocationButton } from "../../components/addLocationButton/AddLocationButton";
+import { COLOR } from "../../themes/Color";
+import FAB from 'react-native-fab'
 
 export interface locationProps {
     floorLoc?: [Location],
@@ -33,7 +34,11 @@ function LocationDetails() {
             {locProps.floorLoc?createLocations(locProps.floorLoc):<View></View>}
             {locProps.resLoc?<View style={styles.sectionLabel}><Text style={styles.labelText}>{strings('LOCATION.RESERVE')} ({locProps.resLoc.length})</Text></View>:<View></View>}
             {locProps.resLoc?createLocations(locProps.resLoc):<View></View>}
-            <AddLocationButton/>
+            <View style={styles.container}>
+                <View style={styles.button}>
+                    <FAB buttonColor={COLOR.MAIN_THEME_COLOR} iconTextColor={COLOR.WHITE} onClickAction={() => {console.log("Add location pressed.")}} visible={true} iconTextComponent={<Text>+</Text>} />
+                </View>
+            </View>
         </>
     );
 };

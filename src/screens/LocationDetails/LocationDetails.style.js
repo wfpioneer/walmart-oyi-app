@@ -12,6 +12,14 @@ const styles=StyleSheet.create({
     },
     labelText: {
         fontWeight: "bold"
+    },
+    container: {
+        width: "100%",
+        flex: 1,
+        justifyContent: "flex-end",
+    },
+    button: {
+        alignSelf: "flex-end"
     }
 });
 
