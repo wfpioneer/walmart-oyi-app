@@ -101,5 +101,13 @@ export default {
     ALL: 'All',
     REFINE: 'Refine',
     CLEAR: 'Clear'
+  },
+  SELECTLOCATIONTYPE: {
+    TITLE: "Select type of location",
+    FLOOR: "Floor",
+    ENDCAP: "End cap",
+    POD: "POD",
+    DISPLAY: "Display",
+    RESERVE: "Reserve"
   }
 };
