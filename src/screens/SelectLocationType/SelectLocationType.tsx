@@ -5,13 +5,13 @@ import { COLOR } from "../../themes/Color";
 import  styles  from "./SelectLocationType.style"
 import { strings } from '../../locales';
 import Button from "../../components/buttons/Button";
-import { string } from "prop-types";
+
 
 function SelectLocationType() {
-    const [type, setType] = React.useState("floor");
-    return (
-      <>
-        <RadioButton.Group onValueChange={value => setType(value)} value={type}>
+  const [type, setType] = React.useState("floor");
+  return (
+    <>
+      <RadioButton.Group onValueChange={value => setType(value)} value={type}>
         <View style={styles.typeListItem}>
           <RadioButton value="floor" status={type==="floor"?"checked":"unchecked"} color={COLOR.MAIN_THEME_COLOR} />
           <TouchableOpacity style={styles.labelBox} onPress={() => setType("floor")}>

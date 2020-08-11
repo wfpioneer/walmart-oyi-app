@@ -32,8 +32,7 @@ function LocationDetails() {
         );
     };
     const addNewLocationNav = () => {
-        navigation.navigate({name: 'SelectLocationType', params:{}});
-        console.log("Add new location.")
+        navigation.navigate('SelectLocationType');
     }
     return(
         <>
