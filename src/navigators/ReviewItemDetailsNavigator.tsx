@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './ReviewItemDetailsNavigator.style';
 import LocationDetails from "../screens/LocationDetails/LocationDetails";
+import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 
 const Stack = createStackNavigator();
 
@@ -87,7 +88,17 @@ const ReviewItemDetailsNavigator = () => {
           headerTitle: strings('LOCATION.TITLE'),
           headerTitleAlign: 'left',
           headerTitleStyle: {fontSize: 18},
-          headerBackTitleVisible: false,
+          headerBackTitleVisible: false
+        }}
+      />
+      <Stack.Screen
+        name="SelectLocationType"
+        component={SelectLocationType}
+        options={{
+          headerTitle: strings('SELECTLOCATIONTYPE.TITLE'),
+          headerTitleAlign: 'center',
+          headerTitleStyle: {fontSize: 18},
+          headerBackTitleVisible: false
         }}
       />
     </Stack.Navigator>
