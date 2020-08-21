@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import COLOR from "../themes/Color";
 
 export default StyleSheet.create({
   headerContainer: {
@@ -20,5 +21,14 @@ export default StyleSheet.create({
     width: 25,
     height: 25,
     marginRight: 10
+  },
+  headerTitle: {
+    color: COLOR.WHITE,
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  headerSubtitle: {
+    color: COLOR.WHITE,
+    fontSize: 14
   }
 });

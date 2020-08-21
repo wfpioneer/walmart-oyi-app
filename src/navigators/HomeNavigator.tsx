@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Text } from 'react-native';
+import { connect } from "react-redux";
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
 // @ts-ignore
@@ -22,11 +23,13 @@ interface HomeNavigatorComponentProps {
   navigation: Record<string, any>;
   isManualScanEnabled: boolean;
   setManualScan: Function;
+  clubNbr: number;
 }
 
 const mapStateToProps = (state: any) => {
   return {
-    isManualScanEnabled: state.Global.isManualScanEnabled
+    isManualScanEnabled: state.Global.isManualScanEnabled,
+    clubNbr: state.User.siteId
   }
 }
 
@@ -134,7 +137,15 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps) => {
         name="Home"
         component={Home}
         options={{
-          headerRight: () => renderHomeHeader(props)
+          headerRight: () => renderHomeHeader(props),
+          headerTitle: () => {
+            return (
+              <View>
+                <Text style={styles.headerTitle}>{strings('HOME.OWN_YOUR_INVENTORY')}</Text>
+                <Text style={styles.headerSubtitle}>{`${strings('GENERICS.CLUB')} ${props.clubNbr}`}</Text>
+              </View>
+            );
+          }
         }}
       />
       <Stack.Screen

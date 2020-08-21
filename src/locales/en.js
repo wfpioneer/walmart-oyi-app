@@ -33,9 +33,11 @@ export default {
     WEEKLY: 'Weekly',
     WEEK: 'Week',
     TOTAL: 'Total',
-    DEFAULT: 'Default'
+    DEFAULT: 'Default',
+    CLUB: 'Club'
   },
   HOME: {
+    OWN_YOUR_INVENTORY: 'Own Your Inventory',
     HOME: 'Home',
     STYLE_GUIDE: 'Style Guide'
   },
