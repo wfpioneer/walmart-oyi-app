@@ -1,13 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-
-  ActivityIndicator, EmitterSubscription, SafeAreaView, ScrollView, Text, View
+  EmitterSubscription, SafeAreaView, ScrollView, Text, View
 } from 'react-native';
-import Button from '../../components/buttons/Button';
-import { hitGoogle } from '../../state/actions/saga';
 import styles from './Home.style';
-import COLOR from '../../themes/Color';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
@@ -16,18 +12,13 @@ import WorklistCard from '../../components/worklistcard/WorklistCard';
 import GoalCircle from "../../components/goalcircle/GoalCircle";
 
 const mapStateToProps = (state: any) => {
-  const googleResult = state.async.hitGoogle.result && state.async.hitGoogle.result.data;
   return {
     userName: state.User.additional.displayName,
-    googleLoading: state.async.hitGoogle.isWaiting,
-    googleResult,
-    googleError: state.async.hitGoogle.error,
     isManualScanEnabled: state.Global.isManualScanEnabled
   };
 };
 
 const mapDispatchToProps = {
-  hitGoogle,
   setScannedEvent,
   setManualScan
 };
@@ -78,38 +69,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps> {
       <SafeAreaView style={styles.safeAreaView}>
         {this.props.isManualScanEnabled && <ManualScanComponent />}
         <ScrollView contentContainerStyle={styles.container}>
-          <Text>This is the home screen!</Text>
           <Text>
             { `Welcome ${this.props.userName}` }
           </Text>
-          <Button
-            type={Button.Type.PRIMARY}
-            disabled={this.props.googleLoading}
-            title="Ping Google"
-            onPress={() => this.props.hitGoogle({ stuff: 'test payload' })}
-            style={styles.pingGoogleButton}
-          />
-          <ActivityIndicator
-            animating={this.props.googleLoading}
-            hidesWhenStopped
-            color={COLOR.MAIN_THEME_COLOR}
-            size="large"
-            style={styles.activityIndicator}
-          />
-          { this.props.googleResult
-          && (
-          <Text numberOfLines={10} ellipsizeMode="tail">
-            {this.props.googleResult}
-          </Text>
-          )
-        }
-          { this.props.googleError
-          && (
-            <Text>
-              {this.props.googleError}
-            </Text>
-          )
-          }
           <View style={styles.horizontalContainer}>
             <GoalCircle goalTitle="Items" completionPercentage={65} active={true} frequency="Daily"/>
             <GoalCircle goalTitle="Pallets" completionPercentage={95} active={false} frequency="Daily"/>
