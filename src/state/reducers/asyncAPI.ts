@@ -5,7 +5,8 @@ import * as asyncActions from '../actions/asyncAPI';
 // @ts-ignore
 export const asyncReducer = combineReducers({
   hitGoogle: makeAsyncReducer(asyncActions.HIT_GOOGLE),
-  getItemDetails: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS)
+  getItemDetails: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS),
+  getWorklist: makeAsyncReducer(asyncActions.GET_WORKLIST)
 });
 
 export default asyncReducer;

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, FlatList, TouchableOpacity} from 'react-native';
+import {View, FlatList, TouchableOpacity, Text} from 'react-native';
 import { WorklistItem } from "../../components/worklistItem/WorklistItem";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import COLOR from "../../themes/Color";
@@ -19,6 +19,9 @@ interface ListItemI {
 
 interface WorklistProps {
   data: any;
+  onRefresh: () => void;
+  refreshing: boolean;
+  error: any;
 }
 
 export const renderWorklistItem = (listItem: ListItemI) => {
@@ -119,6 +122,25 @@ export const renderFilterPills = (listItem: any, dispatch: any, filterCategories
 };
 
 export const Worklist = (props: WorklistProps) => {
+  if (props.error) {
+    return (
+      <FlatList
+        data={['error']}
+        renderItem={() => (
+          <Text>{props.error}</Text>
+        )}
+        refreshing={false}
+        onRefresh={props.onRefresh}
+      />
+    )
+  }
+
+  if (props.refreshing || !props.data) {
+    return (
+      <FlatList data={[]} renderItem={() => null} refreshing onRefresh={() => null} />
+    );
+  }
+
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
@@ -134,7 +156,7 @@ export const Worklist = (props: WorklistProps) => {
 
   if (filterExceptions.length !== 0) {
     filteredData = filteredData.filter((worklistItem: WorklistItemI) => {
-      const exceptionTranslation = FullExceptionList().find((exceptionListItem: any) => exceptionListItem.display === worklistItem.exceptionType);
+      const exceptionTranslation = FullExceptionList().find((exceptionListItem: any) => exceptionListItem.value === worklistItem.exceptionType);
       if (exceptionTranslation) {
         return filterExceptions.findIndex((exception: any) => exception === exceptionTranslation.value) !== -1
       }
@@ -180,6 +202,8 @@ export const Worklist = (props: WorklistProps) => {
           return item.itemNbr.toString()
         } }
         renderItem={ renderWorklistItem }
+        onRefresh={ props.onRefresh }
+        refreshing={ props.refreshing }
         style={ styles.list }
       />
     </View>

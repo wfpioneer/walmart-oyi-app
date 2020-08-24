@@ -6,7 +6,7 @@ export default () => [
     display: strings('EXCEPTION.NIL_PICK')
   },
   {
-    value: 'PRICE_OVERRIDE',
+    value: 'po',
     display: strings('EXCEPTION.PRICE_OVERRIDE')
   },
   {

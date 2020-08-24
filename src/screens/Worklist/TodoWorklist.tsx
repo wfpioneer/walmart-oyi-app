@@ -1,30 +1,30 @@
 import React from 'react';
-import {WorklistItemI} from "../../models/WorklistItem";
+import { useDispatch } from "react-redux";
+import { WorklistItemI } from "../../models/WorklistItem";
 import { Worklist } from './Worklist';
+import { useTypedSelector } from "../../state/reducers/RootReducer";
+import { getWorklist } from "../../state/actions/saga";
 
 export const TodoWorklist = () => {
-  const dummyData: WorklistItemI[] = [
-    {
-      exceptionType: 'No sales floor location',
-      itemName: 'Dole 100% Pineapple Juice (8.4oz / 24pk)',
-      itemNbr: 464033,
-      upcNbr: '123456789012',
-      catgNbr: 40,
-      catgName: 'JUICE - WATER - SPORTS DRINKS',
-      isCompleted: false
-    },
-    {
-      exceptionType: 'No sales floor location',
-      itemName: 'Member\'s Mark Parmesan Crisps (9.5oz)',
-      itemNbr: 980039377,
-      upcNbr: '123456789012',
-      catgNbr: 46,
-      catgName: 'CAN PROTEIN - CONDIMENTS - PASTA',
-      isCompleted: false
-    }
-  ];
+  const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
+  const dispatch = useDispatch();
+
+  if (!result && !isWaiting && !error) {
+    dispatch(getWorklist());
+  }
+
+  let todoData: WorklistItemI[] | undefined = undefined;
+
+  if (result && result.data) {
+    todoData = result.data.filter((item: WorklistItemI) => item.isCompleted === false);
+  }
 
   return (
-    <Worklist data={dummyData} />
+    <Worklist
+      data={todoData}
+      refreshing={ isWaiting }
+      onRefresh={ () => dispatch(getWorklist()) }
+      error={ error }
+    />
   )
 }

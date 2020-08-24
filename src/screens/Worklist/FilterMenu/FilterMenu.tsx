@@ -92,9 +92,13 @@ export const renderExceptionFilterCard = (listItem: { item: { value: string, dis
 }
 
 export const renderCategoryCollapsibleCard = () => {
-  const { categoryOpen, data, filterCategories } = useTypedSelector(state => state.Worklist);
+  const { result } = useTypedSelector(state => state.async.getWorklist);
+  const { categoryOpen, filterCategories } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
-  const categoryMap = data.map(item => {
+
+  const data = result ? result.data : [];
+
+  const categoryMap = data.map((item: any) => {
     // @ts-ignore
     const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1
     return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
@@ -104,10 +108,10 @@ export const renderCategoryCollapsibleCard = () => {
     return firstItem.catgNbr - secondItem.catgNbr;
   })
 
-  const categoryNumberMap = categoryMap.map(item => item.catgNbr);
+  const categoryNumberMap = categoryMap.map((item: any) => item.catgNbr);
   const categoryNumberSet = new Set();
-  categoryNumberMap.forEach(item => categoryNumberSet.add(item));
-  const filteredCategories = categoryMap.filter(item => {
+  categoryNumberMap.forEach((item: any) => categoryNumberSet.add(item));
+  const filteredCategories = categoryMap.filter((item: any) => {
     if (categoryNumberSet.has(item.catgNbr)) {
       categoryNumberSet.delete(item.catgNbr);
       return true
