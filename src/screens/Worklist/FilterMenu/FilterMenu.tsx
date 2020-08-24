@@ -58,9 +58,9 @@ export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number, ca
     <TouchableOpacity style={styles.categoryFilterCard} onPress={onItemPress}>
       <View style={styles.selectionView}>
         { item.selected ? (
-          <MaterialCommunityIcons name='checkbox-marked-circle-outline' size={ 15 } color={COLOR.MAIN_THEME_COLOR} />
+          <MaterialCommunityIcons name='checkbox-marked-outline' size={ 15 } color={COLOR.MAIN_THEME_COLOR} />
         ) : (
-          <MaterialCommunityIcons name='checkbox-blank-circle-outline' size={ 15 } color={COLOR.MAIN_THEME_COLOR} />
+          <MaterialCommunityIcons name='checkbox-blank-outline' size={ 15 } color={COLOR.MAIN_THEME_COLOR} />
         )}
       </View>
       <Text style={styles.categoryFilterText} numberOfLines={ 2 }>
