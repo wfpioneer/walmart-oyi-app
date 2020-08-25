@@ -1,11 +1,11 @@
 import {
-  ADD_TO_PRINT_QUEUE,
   ADD_TO_PRINTER_LIST,
+  ADD_TO_PRINT_QUEUE,
   SET_PRINT_QUEUE,
   SET_SELECTED_PRINTER,
   SET_SELECTED_SIGN_TYPE
 } from '../actions/Print';
-import { Printer, PrinterType, PrintQueueItem } from '../../models/Printer';
+import { PrintQueueItem, Printer, PrinterType } from '../../models/Printer';
 
 interface StateType {
   selectedPrinter: Printer;
@@ -24,7 +24,7 @@ const initialState: StateType = {
   selectedSignType: '',
   printerList: [],
   printQueue: []
-}
+};
 
 export const Print = (state = initialState, action: any) => {
   switch (action.type) {
@@ -37,34 +37,34 @@ export const Print = (state = initialState, action: any) => {
           desc: action.payload.desc,
           id: action.payload.id
         }
-      }
+      };
     case SET_SELECTED_SIGN_TYPE:
       return {
         ...state,
         selectedSignType: action.payload
-      }
+      };
     case ADD_TO_PRINTER_LIST:
-      const {printerList} = state;
+      const { printerList } = state;
       printerList.push(action.payload);
 
       return {
         ...state,
         printerList
-      }
+      };
     case ADD_TO_PRINT_QUEUE:
-      const {printQueue} = state;
+      const { printQueue } = state;
       printQueue.push(action.payload);
 
       return {
         ...state,
         printQueue
-      }
+      };
     case SET_PRINT_QUEUE:
       return {
         ...state,
         printQueue: action.payload
-      }
+      };
     default:
       return state;
   }
-}
+};
