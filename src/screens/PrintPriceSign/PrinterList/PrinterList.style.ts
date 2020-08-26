@@ -16,11 +16,17 @@ export default StyleSheet.create({
   printerDescription: {
     flex: 1,
     alignItems: 'flex-start',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingHorizontal: 10
   },
   separator: {
     backgroundColor: COLOR.GREY_300,
     height: 1,
     width: '100%'
+  },
+  trashCan: {
+    paddingLeft: 15,
+    paddingRight: 5,
+    paddingVertical: 10
   }
 });

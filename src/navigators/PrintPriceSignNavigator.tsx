@@ -1,12 +1,14 @@
 import React from 'react';
 import { HeaderBackButton, createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { TouchableOpacity } from 'react-native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import PrintPriceSign from '../screens/PrintPriceSign/PrintPriceSign';
 import PrintQueue from '../screens/PrintQueue/PrintQueue';
 import { ChangePrinter } from '../screens/PrintPriceSign/ChangePrinter/ChangePrinter';
-import { PrinterList } from '../screens/PrintPriceSign/PrinterList/PrinterList';
+import PrinterList from '../screens/PrintPriceSign/PrinterList/PrinterList';
 
 const Stack = createStackNavigator();
 
@@ -50,7 +52,12 @@ const PrintPriceSignNavigator = () => {
         options={{
           headerTitle: strings('PRINT.PRINTER_LIST'),
           headerTitleAlign: 'left',
-          headerTitleStyle: { fontSize: 18 }
+          headerTitleStyle: { fontSize: 18 },
+          headerRight: () => (
+            <TouchableOpacity style={{ paddingHorizontal: 10 }} onPress={() => navigation.navigate('ChangePrinter')}>
+              <MaterialCommunityIcons name="plus" size={30} color={COLOR.WHITE} />
+            </TouchableOpacity>
+          )
         }}
       />
       <Stack.Screen

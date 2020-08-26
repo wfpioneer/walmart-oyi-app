@@ -1,40 +1,82 @@
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import {
+  FlatList, Text, TouchableOpacity, View
+} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useTypedSelector } from '../../../state/reducers/RootReducer';
-import { PrinterType } from '../../../models/Printer';
-import { strings } from '../../../locales';
+import { connect } from 'react-redux';
 import COLOR from '../../../themes/Color';
 import styles from './PrinterList.style';
-
-const PrinterListCard = (cardItem: { item: any }) => {
-  const { item } = cardItem;
-
-  return (
-    <View style={styles.cardContainer}>
-      <MaterialCommunityIcons name="printer" size={20} color={COLOR.BLACK} />
-      <View style={styles.printerDescription}>
-        <Text>{item.name}</Text>
-        <Text>{item.desc}</Text>
-      </View>
-      <MaterialCommunityIcons name="trash-can" size={20} color={COLOR.BLACK} />
-    </View>
-  );
-};
+import { deleteFromPrinterList, setSelectedPrinter } from '../../../state/actions/Print';
+import { Printer } from '../../../models/Printer';
 
 const ItemSeparator = () => (
   <View style={styles.separator} />
 );
 
-export const PrinterList = () => {
-  const printerList = useTypedSelector(state => state.Print.printerList);
+const mapStateToProps = (state: any) => ({
+  printerList: state.Print.printerList
+});
 
-  return (
-    <FlatList
-      data={printerList}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={PrinterListCard}
-      style={styles.flatList}
-    />
-  );
+const mapDispatchToProps = {
+  setSelectedPrinter,
+  deleteFromPrinterList
 };
+
+interface PrinterListProps {
+  printerList: Printer[];
+  deleteFromPrinterList: Function;
+  setSelectedPrinter: Function;
+  navigation: any;
+}
+
+export class PrinterList extends React.PureComponent<PrinterListProps> {
+  constructor(props: PrinterListProps) {
+    super(props);
+    this.printerListCard = this.printerListCard.bind(this);
+  }
+
+  printerListCard = (cardItem: { item: any }) => {
+    const { item } = cardItem;
+
+    const onCardClick = () => {
+      this.props.setSelectedPrinter(item);
+      this.props.navigation.goBack();
+    };
+
+    const onDeleteClick = () => {
+      this.props.deleteFromPrinterList(item.id);
+      // TODO: remove this to replace with some better update after
+      this.forceUpdate();
+    };
+
+    return (
+      <TouchableOpacity style={styles.cardContainer} onPress={onCardClick}>
+        <MaterialCommunityIcons name="printer" size={20} color={COLOR.BLACK} />
+        <View style={styles.printerDescription}>
+          <Text>{item.name}</Text>
+        </View>
+        {item.id !== 0
+        && (
+          <TouchableOpacity style={styles.trashCan} onPress={onDeleteClick}>
+            <MaterialCommunityIcons name="trash-can" size={20} color={COLOR.BLACK} />
+          </TouchableOpacity>
+        )
+        }
+      </TouchableOpacity>
+    );
+  };
+
+  render() {
+    return (
+      <FlatList
+        data={this.props.printerList}
+        ItemSeparatorComponent={ItemSeparator}
+        renderItem={this.printerListCard}
+        style={styles.flatList}
+        keyExtractor={(item: any) => item.id.toString()}
+      />
+    );
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrinterList);
