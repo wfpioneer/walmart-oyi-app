@@ -5,17 +5,21 @@ import { connect } from 'react-redux';
 import COLOR from '../../themes/Color';
 
 const mapStateToProps = (state: any) => ({
-  showActivityModal: state.activityModal
+  showModal: state.modal.showModal,
+  showActivity: state.modal.showActivity
 });
 
 interface ActivityModalComponentProps {
-  showActivityModal: boolean;
+  showModal: boolean;
+  showActivity: boolean;
 }
 
 class ActivityModalComponent extends React.PureComponent<ActivityModalComponentProps> {
   render() {
     return (
-      <Modal isVisible={this.props.showActivityModal} useNativeDriver animationInTiming={0}>
+      <Modal isVisible={this.props.showModal} useNativeDriver animationInTiming={0}>
+        {this.props.showActivity
+        && (
         <View style={{
           alignContent: 'center',
           alignSelf: 'center',
@@ -28,6 +32,8 @@ class ActivityModalComponent extends React.PureComponent<ActivityModalComponentP
         >
           <ActivityIndicator size="large" color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
         </View>
+        )
+        }
       </Modal>
     );
   }

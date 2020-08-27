@@ -11,15 +11,15 @@ import COLOR from '../themes/Color';
 import styles from './HomeNavigator.style';
 import { strings } from '../locales';
 import { logoutUser } from '../state/actions/User';
-import { hideModal, showModal } from '../state/actions/ActivityModal';
+import { hideActivityModal, showActivityModal } from '../state/actions/Modal';
 import StyleGuide from '../screens/StyleGuide/StyleGuide';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { setManualScan } from '../state/actions/Global';
 
 interface HomeNavigatorComponentProps {
   logoutUser: Function;
-  showModal: Function;
-  hideModal: Function;
+  showActivityModal: Function;
+  hideActivityModal: Function;
   navigation: Record<string, any>;
   isManualScanEnabled: boolean;
   setManualScan: Function;
@@ -35,8 +35,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = {
   logoutUser,
-  showModal,
-  hideModal,
+  showActivityModal,
+  hideActivityModal,
   setManualScan
 };
 
@@ -59,12 +59,12 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps) => {
   },
   buttonIndex => {
     if (buttonIndex === 0) {
-      props.showModal();
+      props.showActivityModal();
       WMSSO.signOutUser().then(() => {
         props.navigation.replace('Login');
         props.logoutUser();
         if (Platform.OS === 'android') {
-          props.hideModal();
+          props.hideActivityModal();
         }
       });
       return;

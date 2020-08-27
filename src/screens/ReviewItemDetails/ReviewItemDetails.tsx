@@ -20,6 +20,7 @@ import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { useDispatch } from 'react-redux';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { getMockItemDetails } from '../../mockData';
+import {setupScreen} from "../../state/actions/ItemDetailScreen";
 
 const ReviewItemDetails = (props: any) => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
@@ -55,7 +56,14 @@ const ReviewItemDetails = (props: any) => {
     return () => {
       scannedSubscription?.remove();
     }
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    console.log(itemDetails.exceptionType);
+    if (itemDetails.exceptionType) {
+      dispatch(setupScreen(itemDetails.exceptionType));
+    }
+  }, []);
 
   // Used to scroll to bottom when the sales metrics switches from daily to weekly
   // TODO this won't work because of changing data on scans

@@ -18,6 +18,7 @@ const Stack = createStackNavigator();
 
 const ReviewItemDetailsNavigator = () => {
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -46,9 +47,13 @@ const ReviewItemDetailsNavigator = () => {
   );
 
   const navigateBack = () =>{
+    if (!actionCompleted) {
+      //return dispatch(showAlertModal());
+    }
+
     dispatch(setManualScan(false));
-    navigation.goBack();
-  }
+    return navigation.goBack();
+  };
 
   return (
     <Stack.Navigator
