@@ -76,7 +76,7 @@ const PrintPriceSign = () => {
   const {
     itemName, itemNbr, upcNbr, category
   } = (result && result.data) || getMockItemDetails(scannedEvent.value);
-  const catgNbr = parseInt(category.split('-')[0]);
+  const catgNbr = parseInt(category.split('-')[0], 10);
 
   useLayoutEffect(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
@@ -94,7 +94,8 @@ const PrintPriceSign = () => {
 
 
   const handleTextChange = (text: string) => {
-    const newQty: number = parseInt(text);
+    const newQty: number = parseInt(text, 10);
+    // eslint-disable-next-line no-restricted-globals
     if (!isNaN(newQty)) {
       setSignQty(newQty);
       setIsValidQty(validateQty(newQty));
@@ -127,7 +128,8 @@ const PrintPriceSign = () => {
     console.log('ADD TO PRINT LIST clicked');
 
     // check if the item/size already exists on the print queue
-    const itemSizeExists = printQueue.some((printItem: PrintQueueItem) => printItem.itemNbr === itemNbr && printItem.paperSize === selectedSignType);
+    const itemSizeExists = printQueue.some((printItem: PrintQueueItem) => printItem.itemNbr === itemNbr
+      && printItem.paperSize === selectedSignType);
 
     if (itemSizeExists) {
       // TODO show popup if already exists
@@ -204,7 +206,6 @@ const PrintPriceSign = () => {
             <MaterialCommunityIcon name="printer-check" size={24} />
             <View style={{ marginLeft: 12 }}>
               <Text>{selectedPrinter.name}</Text>
-              <Text style={{ fontSize: 12, color: COLOR.GREY_600 }}>{selectedPrinter.desc}</Text>
             </View>
           </View>
           <Button
