@@ -1,65 +1,67 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { Image, SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native';
+import {
+  Image, SafeAreaView, ScrollView, Text, TextInput, View
+} from 'react-native';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { numbers, strings } from '../../locales';
 import styles from './PrintPriceSign.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getMockItemDetails } from '../../mockData';
-import { useDispatch } from 'react-redux';
-import { addToPrinterList, addToPrintQueue, setSelectedPrinter, setSignType } from '../../state/actions/Print';
-import { LaserPaper, PortablePaper, Printer, PrinterType, PrintQueueItem } from '../../models/Printer';
-import { useNavigation } from '@react-navigation/native';
+import {
+  addToPrintQueue, addToPrinterList, setSelectedPrinter, setSignType
+} from '../../state/actions/Print';
+import {
+  LaserPaper, PortablePaper, PrintQueueItem, Printer, PrinterType
+} from '../../models/Printer';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
 const QTY_MAX = 100;
 const ERROR_FORMATTING_OPTIONS = {
   min: QTY_MIN,
-  max: numbers(QTY_MAX, {precision: 0})
+  max: numbers(QTY_MAX, { precision: 0 })
 };
 
-const validateQty = (qty: number) => {
-  return QTY_MIN <= qty && qty <= QTY_MAX;
-}
+const validateQty = (qty: number) => QTY_MIN <= qty && qty <= QTY_MAX;
 
-const renderPlusMinusBtn = (name: 'plus' | 'minus') => {
-  return (
-    <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
-  )
-}
+const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
+  <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
+);
 
 const renderSignSizeButtons = (selectedPrinter: Printer, catgNbr: number, signType: string, dispatch: Function) => {
   const sizeObject = selectedPrinter.type === PrinterType.LASER ? LaserPaper : PortablePaper;
 
   return (
-    <View style={{flexDirection: 'row', marginVertical: 4}} >
+    <View style={{ flexDirection: 'row', marginVertical: 4 }}>
       {Object.keys(sizeObject).map((key: string) => {
         // Only show the wine button if the item's category is appropriate
-        if(key !== 'Wine' || (key === 'Wine' && catgNbr === wineCatgNbr)) {
+        if (key !== 'Wine' || (key === 'Wine' && catgNbr === wineCatgNbr)) {
           return (
             <Button
               key={key}
               title={strings(`PRINT.${key}`)}
               titleFontSize={12}
-              titleFontWeight={'bold'}
+              titleFontWeight="bold"
               titleColor={signType === key ? COLOR.WHITE : COLOR.BLACK}
               backgroundColor={signType === key ? COLOR.MAIN_THEME_COLOR : COLOR.GREY_200}
               type={Button.Type.PRIMARY}
               radius={20}
               height={25}
               width={56}
-              style={{marginHorizontal: 6}}
+              style={{ marginHorizontal: 6 }}
               onPress={() => dispatch(setSignType(key))}
             />
-          )
+          );
         }
       })}
     </View>
-  )
-}
+  );
+};
 
 const PrintPriceSign = () => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
@@ -71,31 +73,33 @@ const PrintPriceSign = () => {
   const [signQty, setSignQty] = useState(1);
   const [isValidQty, setIsValidQty] = useState(true);
 
-  const { itemName, itemNbr, upcNbr, category } = (result && result.data) || getMockItemDetails(scannedEvent.value);
+  const {
+    itemName, itemNbr, upcNbr, category
+  } = (result && result.data) || getMockItemDetails(scannedEvent.value);
   const catgNbr = parseInt(category.split('-')[0]);
 
   useLayoutEffect(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
-    if(selectedPrinter.name === ''){
+    if (selectedPrinter.name === '') {
       const initialPrinter: Printer = {
         type: PrinterType.LASER,
         name: strings('PRINT.FRONT_DESK'),
         desc: strings('GENERICS.DEFAULT'),
         id: 0
-      }
+      };
       dispatch(setSelectedPrinter(initialPrinter));
       dispatch(addToPrinterList(initialPrinter));
     }
-  }, [])
+  }, []);
 
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text);
-    if(!isNaN(newQty)) {
+    if (!isNaN(newQty)) {
       setSignQty(newQty);
       setIsValidQty(validateQty(newQty));
     }
-  }
+  };
 
   const handleIncreaseQty = () => {
     setIsValidQty(true);
@@ -104,7 +108,7 @@ const PrintPriceSign = () => {
     } else if (signQty < QTY_MAX) {
       setSignQty((prevState => prevState + 1));
     }
-  }
+  };
 
   const handleDecreaseQty = () => {
     setIsValidQty(true);
@@ -113,53 +117,51 @@ const PrintPriceSign = () => {
     } else if (signQty > QTY_MIN) {
       setSignQty((prevState => prevState - 1));
     }
-  }
+  };
 
   const handleChangePrinter = () => {
     console.log('Change printer clicked');
-  }
+  };
 
   const handleAddPrintList = () => {
     console.log('ADD TO PRINT LIST clicked');
 
     // check if the item/size already exists on the print queue
-    const itemSizeExists = printQueue.some((printItem: PrintQueueItem) => {
-      return printItem.itemNbr === itemNbr && printItem.paperSize === selectedSignType;
-    })
+    const itemSizeExists = printQueue.some((printItem: PrintQueueItem) => printItem.itemNbr === itemNbr && printItem.paperSize === selectedSignType);
 
-    if(itemSizeExists) {
+    if (itemSizeExists) {
       // TODO show popup if already exists
-      console.log(`Sign already exists in queue for  - ${JSON.stringify({itemName, selectedSignType})}`)
+      console.log(`Sign already exists in queue for  - ${JSON.stringify({ itemName, selectedSignType })}`);
     } else {
       // add to print queue, forcing to use laser
       // TODO show popup if laser printer is not selected when adding to queue
       // TODO show toast that the item was added to queue
       const printQueueItem: PrintQueueItem = {
-        itemName: itemName,
-        itemNbr: itemNbr,
-        upcNbr: upcNbr,
-        catgNbr: catgNbr,
-        signQty: signQty,
+        itemName,
+        itemNbr,
+        upcNbr,
+        catgNbr,
+        signQty,
         paperSize: selectedSignType
-      }
+      };
       dispatch(addToPrintQueue(printQueueItem));
       navigation.goBack();
     }
-  }
+  };
 
   const handlePrint = () => {
     console.log('PRINT clicked');
-  }
+  };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.itemDetailsContainer}>
           <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.itemImage} />
-          <Text style={styles.itemNameTxt} >{itemName}</Text>
+          <Text style={styles.itemNameTxt}>{itemName}</Text>
         </View>
-        <View style={styles.copyQtyContainer} >
-          <Text style={styles.copyQtyLabel} >{strings('PRINT.COPY_QTY')}</Text>
+        <View style={styles.copyQtyContainer}>
+          <Text style={styles.copyQtyLabel}>{strings('PRINT.COPY_QTY')}</Text>
           <View style={styles.qtyChangeContainer}>
             <IconButton
               icon={renderPlusMinusBtn('minus')}
@@ -172,7 +174,7 @@ const PrintPriceSign = () => {
             />
             <TextInput
               style={[styles.copyQtyInput, isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid]}
-              keyboardType={'numeric'}
+              keyboardType="numeric"
               onChangeText={handleTextChange}
             >
               {signQty}
@@ -187,20 +189,22 @@ const PrintPriceSign = () => {
               onPress={handleIncreaseQty}
             />
           </View>
-          {!isValidQty && <Text style={styles.invalidLabel}>
+          {!isValidQty && (
+          <Text style={styles.invalidLabel}>
             {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
-          </Text>}
+          </Text>
+          )}
         </View>
-        <View style={styles.signSizeContainer} >
-          <Text style={styles.signSizeLabel} >{strings('PRINT.SIGN_SIZE')}</Text>
+        <View style={styles.signSizeContainer}>
+          <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
           {renderSignSizeButtons(selectedPrinter, catgNbr, selectedSignType, dispatch)}
         </View>
         <View style={styles.printerContainer}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <MaterialCommunityIcon name={'printer-check'} size={24} />
-            <View style={{marginLeft: 12}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <MaterialCommunityIcon name="printer-check" size={24} />
+            <View style={{ marginLeft: 12 }}>
               <Text>{selectedPrinter.name}</Text>
-              <Text style={{fontSize: 12, color: COLOR.GREY_600}} >{selectedPrinter.desc}</Text>
+              <Text style={{ fontSize: 12, color: COLOR.GREY_600 }}>{selectedPrinter.desc}</Text>
             </View>
           </View>
           <Button
@@ -231,7 +235,7 @@ const PrintPriceSign = () => {
         />
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 export default PrintPriceSign;
