@@ -13,6 +13,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import styles from './ReviewItemDetailsNavigator.style';
 import LocationDetails from "../screens/LocationDetails/LocationDetails";
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
+import {showInfoModal} from "../state/actions/Modal";
 
 const Stack = createStackNavigator();
 
@@ -48,7 +49,7 @@ const ReviewItemDetailsNavigator = () => {
 
   const navigateBack = () =>{
     if (!actionCompleted) {
-      //return dispatch(showAlertModal());
+      return dispatch(showInfoModal('Error', 'You haven\'t completed a required task.'));
     }
 
     dispatch(setManualScan(false));
