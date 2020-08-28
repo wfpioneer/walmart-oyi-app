@@ -5,16 +5,17 @@ import moment from 'moment';
 import 'moment/locale/es';
 import en from './en';
 import es from './es';
+import zh from './zh';
 
 export const setI18nConfig: () => void = () => {
   // fallback if no available language fits
   const fallback = { languageTag: 'en', isRTL: false };
 
-  const { languageTag } = RNLocalize.findBestAvailableLanguage(['en', 'es'])
+  const { languageTag } = RNLocalize.findBestAvailableLanguage(['en', 'es', 'zh'])
     || fallback;
 
   // set i18n-js config
-  I18n.translations = { en, es };
+  I18n.translations = { en, es, zh };
   I18n.locale = languageTag;
 
   // the following is to set up moment to work with spanish localization
