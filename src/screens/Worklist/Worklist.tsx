@@ -124,13 +124,21 @@ export const renderFilterPills = (listItem: any, dispatch: any, filterCategories
 };
 
 export const Worklist = (props: WorklistProps) => {
+  const errorView = () => (
+    <View style={styles.errorView}>
+      <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
+      <Text style={styles.errorText}>An error has occurred. Please try again.</Text>
+      <TouchableOpacity style={styles.errorButton} onPress={props.onRefresh}>
+        <Text>Retry</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
   if (props.error) {
     return (
       <FlatList
         data={['error']}
-        renderItem={() => (
-          <Text>{props.error}</Text>
-        )}
+        renderItem={errorView}
         refreshing={false}
         onRefresh={props.onRefresh}
       />
@@ -151,12 +159,14 @@ export const Worklist = (props: WorklistProps) => {
 
   let filteredData: WorklistItemI[] = props.data;
   if (filterCategories.length !== 0) {
-    filteredData = filteredData.filter((worklistItem: WorklistItemI) => filterCategories.indexOf(`${worklistItem.catgNbr} - ${worklistItem.catgName}`) !== -1);
+    filteredData = filteredData.filter((worklistItem: WorklistItemI) => filterCategories
+      .indexOf(`${worklistItem.catgNbr} - ${worklistItem.catgName}`) !== -1);
   }
 
   if (filterExceptions.length !== 0) {
     filteredData = filteredData.filter((worklistItem: WorklistItemI) => {
-      const exceptionTranslation = FullExceptionList().find((exceptionListItem: any) => exceptionListItem.value === worklistItem.exceptionType);
+      const exceptionTranslation = FullExceptionList().find((exceptionListItem: any) => exceptionListItem.value
+        === worklistItem.exceptionType);
       if (exceptionTranslation) {
         return filterExceptions.findIndex((exception: any) => exception === exceptionTranslation.value) !== -1;
       }

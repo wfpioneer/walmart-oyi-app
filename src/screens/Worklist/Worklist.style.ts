@@ -8,6 +8,24 @@ export default StyleSheet.create({
     flex: 1,
     width: '100%'
   },
+  errorButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLOR.RED_300,
+    borderRadius: 4,
+    height: 40,
+    width: '100%'
+  },
+  errorText: {
+    marginVertical: 10
+  },
+  errorView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 15
+  },
   filterContainer: {
     alignItems: 'flex-start',
     justifyContent: 'center',
