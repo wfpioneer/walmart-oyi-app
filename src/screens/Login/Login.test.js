@@ -62,5 +62,5 @@ describe('ComponentWillUnmount', () => {
     loginScreen.unsubscribe = jest.fn();
     loginScreen.componentWillUnmount();
     expect(loginScreen.unsubscribe).toHaveBeenCalled();
-  })
+  });
 });
