@@ -206,6 +206,7 @@ const PrintPriceSign = () => {
             <MaterialCommunityIcon name="printer-check" size={24} />
             <View style={{ marginLeft: 12 }}>
               <Text>{selectedPrinter.name}</Text>
+              <Text style={{ fontSize: 12, color: COLOR.GREY_600 }}>{selectedPrinter.desc}</Text>
             </View>
           </View>
           <Button
