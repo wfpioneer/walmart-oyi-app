@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   copiesText: {
     flex: 3,
-    color: COLOR.GREY_700,
+    color: COLOR.GREY_700
   },
   actionBtns: {
 

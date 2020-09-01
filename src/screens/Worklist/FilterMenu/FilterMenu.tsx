@@ -1,20 +1,22 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, FlatList} from "react-native";
-import { useDispatch } from "react-redux";
+import {
+  FlatList, Text, TouchableOpacity, View
+} from 'react-native';
+import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './FilterMenu.style';
-import COLOR from "../../../themes/Color";
-import { useTypedSelector } from "../../../state/reducers/RootReducer";
+import COLOR from '../../../themes/Color';
+import { useTypedSelector } from '../../../state/reducers/RootReducer';
 import {
+  clearFilter,
   toggleCategories,
   toggleExceptions,
   updateFilterCategories,
-  updateFilterExceptions,
-  clearFilter
-} from "../../../state/actions/Worklist";
-import {strings} from "../../../locales";
-import FullExceptionList from "../FullExceptionList";
+  updateFilterExceptions
+} from '../../../state/actions/Worklist';
+import { strings } from '../../../locales';
+import FullExceptionList from '../FullExceptionList';
 
 interface MenuCardProps {
   title: string;
@@ -41,7 +43,7 @@ export const MenuCard = (props: MenuCardProps) => {
   );
 };
 
-export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number, catgName: string, selected: boolean } }, dispatch: any, filterCategories: any) => {
+export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number; catgName: string; selected: boolean } }, dispatch: any, filterCategories: any) => {
   const { item } = listItem;
   const onItemPress = () => {
     if (item.selected) {
@@ -53,43 +55,41 @@ export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number, ca
     const replacementFilter = filterCategories;
     replacementFilter.push(`${item.catgNbr} - ${item.catgName}`);
     return dispatch(updateFilterCategories(replacementFilter));
-  }
+  };
   return (
     <TouchableOpacity style={styles.categoryFilterCard} onPress={onItemPress}>
       <View style={styles.selectionView}>
         { item.selected ? (
-          <MaterialCommunityIcons name='checkbox-marked-outline' size={ 15 } color={COLOR.MAIN_THEME_COLOR} />
+          <MaterialCommunityIcons name="checkbox-marked-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />
         ) : (
-          <MaterialCommunityIcons name='checkbox-blank-outline' size={ 15 } color={COLOR.MAIN_THEME_COLOR} />
+          <MaterialCommunityIcons name="checkbox-blank-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />
         )}
       </View>
-      <Text style={styles.categoryFilterText} numberOfLines={ 2 }>
+      <Text style={styles.categoryFilterText} numberOfLines={2}>
         { `${item.catgNbr} - ${item.catgName} `}
       </Text>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
-export const renderExceptionFilterCard = (listItem: { item: { value: string, display: string, selected: boolean } }, dispatch: any) => {
+export const renderExceptionFilterCard = (listItem: { item: { value: string; display: string; selected: boolean } }, dispatch: any) => {
   const { item } = listItem;
-  const onItemPress = () => {
-    return dispatch(updateFilterExceptions([item.value]));
-  }
+  const onItemPress = () => dispatch(updateFilterExceptions([item.value]));
   return (
     <TouchableOpacity style={styles.categoryFilterCard} onPress={onItemPress}>
       <View style={styles.selectionView}>
         { item.selected ? (
-          <MaterialCommunityIcons name='checkbox-marked-circle-outline' size={ 15 } color={COLOR.MAIN_THEME_COLOR} />
+          <MaterialCommunityIcons name="checkbox-marked-circle-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />
         ) : (
-          <MaterialCommunityIcons name='checkbox-blank-circle-outline' size={ 15 } color={COLOR.MAIN_THEME_COLOR} />
+          <MaterialCommunityIcons name="checkbox-blank-circle-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />
         )}
       </View>
-      <Text style={styles.categoryFilterText} numberOfLines={ 2 }>
+      <Text style={styles.categoryFilterText} numberOfLines={2}>
         { item.display }
       </Text>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 export const renderCategoryCollapsibleCard = () => {
   const { result } = useTypedSelector(state => state.async.getWorklist);
@@ -100,13 +100,11 @@ export const renderCategoryCollapsibleCard = () => {
 
   const categoryMap = data.map((item: any) => {
     // @ts-ignore
-    const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1
+    const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
     return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
-  })
+  });
 
-  categoryMap.sort((firstItem: any, secondItem: any) => {
-    return firstItem.catgNbr - secondItem.catgNbr;
-  })
+  categoryMap.sort((firstItem: any, secondItem: any) => firstItem.catgNbr - secondItem.catgNbr);
 
   const categoryNumberMap = categoryMap.map((item: any) => item.catgNbr);
   const categoryNumberSet = new Set();
@@ -114,7 +112,7 @@ export const renderCategoryCollapsibleCard = () => {
   const filteredCategories = categoryMap.filter((item: any) => {
     if (categoryNumberSet.has(item.catgNbr)) {
       categoryNumberSet.delete(item.catgNbr);
-      return true
+      return true;
     }
 
     return false;
@@ -135,7 +133,7 @@ export const renderCategoryCollapsibleCard = () => {
 
   return (
     <>
-      <TouchableOpacity style={styles.menuCard} onPress={ () => { dispatch(toggleCategories(!categoryOpen))} }>
+      <TouchableOpacity style={styles.menuCard} onPress={() => { dispatch(toggleCategories(!categoryOpen)); }}>
         <MenuCard title={strings('WORKLIST.CATEGORY')} subtext={categorySubtext} opened={categoryOpen} />
       </TouchableOpacity>
       { categoryOpen && (
@@ -143,12 +141,12 @@ export const renderCategoryCollapsibleCard = () => {
           data={filteredCategories}
           renderItem={(item: any) => renderCategoryFilterCard(item, dispatch, filterCategories)}
           style={styles.categoryList}
-          keyExtractor={ (item: any) => item.catgNbr.toString() }
+          keyExtractor={(item: any) => item.catgNbr.toString()}
         />
       )}
     </>
-  )
-}
+  );
+};
 
 export const renderExceptionTypeCard = () => {
   const { exceptionOpen, filterExceptions } = useTypedSelector(state => state.Worklist);
@@ -156,9 +154,9 @@ export const renderExceptionTypeCard = () => {
 
   const exceptionMap = FullExceptionList().map(item => {
     // @ts-ignore
-    const isSelected = filterExceptions.indexOf(item.value) !== -1
+    const isSelected = filterExceptions.indexOf(item.value) !== -1;
     return { value: item.value, display: item.display, selected: isSelected };
-  })
+  });
 
   let subtext = '';
   if (filterExceptions.length === 0) {
@@ -171,12 +169,12 @@ export const renderExceptionTypeCard = () => {
       } else if (exceptionObj) {
         subtext = exceptionObj.display;
       }
-    })
+    });
   }
 
   return (
     <>
-      <TouchableOpacity style={styles.menuCard} onPress={ () => { dispatch(toggleExceptions(!exceptionOpen))} }>
+      <TouchableOpacity style={styles.menuCard} onPress={() => { dispatch(toggleExceptions(!exceptionOpen)); }}>
         <MenuCard title={strings('WORKLIST.EXCEPTION_TYPE')} subtext={subtext} opened={exceptionOpen} />
       </TouchableOpacity>
       { exceptionOpen && (
@@ -188,12 +186,10 @@ export const renderExceptionTypeCard = () => {
         />
       )}
     </>
-  )
-}
+  );
+};
 
-export const onClearPress = (dispatch: any) => {
-  return dispatch(clearFilter());
-}
+export const onClearPress = (dispatch: any) => dispatch(clearFilter());
 
 export const FilterMenu = () => {
   const dispatch = useDispatch();
