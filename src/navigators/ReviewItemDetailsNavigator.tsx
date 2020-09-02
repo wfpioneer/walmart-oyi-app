@@ -47,7 +47,9 @@ const ReviewItemDetailsNavigator = () => {
 
   const navigateBack = () => {
     if (!actionCompleted) {
-      return dispatch(showInfoModal('Error', 'You haven\'t completed a required task.'));
+      if (exceptionType === 'po') {
+        return dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
+      }
     }
 
     dispatch(setManualScan(false));

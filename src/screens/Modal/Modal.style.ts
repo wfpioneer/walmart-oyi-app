@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import COLOR from "../../themes/Color";
+import COLOR from '../../themes/Color';
 
 export default StyleSheet.create({
   activityView: {
@@ -25,5 +25,16 @@ export default StyleSheet.create({
   },
   normalText: {
     textAlign: 'center'
+  },
+  okButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    backgroundColor: COLOR.MAIN_THEME_COLOR,
+    height: 30,
+    borderRadius: 4
+  },
+  okText: {
+    color: COLOR.WHITE
   }
 });

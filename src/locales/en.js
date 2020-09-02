@@ -48,7 +48,7 @@ export default {
     NO_SALES: 'No Sales',
     NEGATIVE_ON_HANDS: 'Negative on-hands',
     CANCELLED: 'Cancelled',
-    NO_SALES_FLOOR_LOCATION: 'No sales floor location',
+    NO_SALES_FLOOR_LOCATION: 'No sales floor location'
   },
   ITEM: {
     TITLE: 'Review item details',
@@ -67,7 +67,10 @@ export default {
     RESERVE: 'Reserve',
     SALES_METRICS: 'Sales metrics',
     AVG_SALES: 'average sales',
-    OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}'
+    OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}',
+    SCAN_FOR_NO_ACTION: 'Scan for no action',
+    NO_SIGN_PRINTED: 'No sign printed',
+    NO_SIGN_PRINTED_DETAILS: 'Item not completed, because you never printed a new sign'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -105,11 +108,11 @@ export default {
     CLEAR: 'Clear'
   },
   SELECTLOCATIONTYPE: {
-    TITLE: "Select type of location",
-    FLOOR: "Floor",
-    ENDCAP: "End cap",
-    POD: "POD",
-    DISPLAY: "Display",
-    RESERVE: "Reserve"
+    TITLE: 'Select type of location',
+    FLOOR: 'Floor',
+    ENDCAP: 'End cap',
+    POD: 'POD',
+    DISPLAY: 'Display',
+    RESERVE: 'Reserve'
   }
 };

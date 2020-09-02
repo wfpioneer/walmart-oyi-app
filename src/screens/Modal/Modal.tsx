@@ -1,12 +1,14 @@
 import React from 'react';
 import {
-  ActivityIndicator, Platform, Text, View
+  ActivityIndicator, Platform, Text, TouchableOpacity, View
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
 import COLOR from '../../themes/Color';
 import styles from './Modal.style';
+import { strings } from '../../locales';
+import { hideInfoModal } from '../../state/actions/Modal';
 
 const mapStateToProps = (state: any) => ({
   showModal: state.modal.showModal,
@@ -14,10 +16,15 @@ const mapStateToProps = (state: any) => ({
   modalContent: state.modal.content
 });
 
+const mapDispatchToProps = {
+  hideInfoModal
+};
+
 interface ActivityModalComponentProps {
   showModal: boolean;
   showActivity: boolean;
   modalContent: any;
+  hideInfoModal: Function;
 }
 
 class ActivityModalComponent extends React.PureComponent<ActivityModalComponentProps> {
@@ -42,6 +49,9 @@ class ActivityModalComponent extends React.PureComponent<ActivityModalComponentP
         <MaterialIcons name="info" size={30} color={COLOR.MAIN_THEME_COLOR} style={styles.normalText} />
         <Text style={styles.titleText}>{this.props.modalContent.title}</Text>
         <Text style={styles.normalText}>{this.props.modalContent.text}</Text>
+        <TouchableOpacity style={styles.okButton} onPress={() => this.props.hideInfoModal()}>
+          <Text style={styles.okText}>{strings('GENERICS.OK')}</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -56,4 +66,4 @@ class ActivityModalComponent extends React.PureComponent<ActivityModalComponentP
   }
 }
 
-export default connect(mapStateToProps, null)(ActivityModalComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(ActivityModalComponent);
