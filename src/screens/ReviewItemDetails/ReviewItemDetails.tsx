@@ -56,6 +56,7 @@ const ReviewItemDetails = () => {
       if (isNavigationFocused) {
         if (scan.value === scannedEvent.value) {
           dispatch(setActionCompleted());
+          navigation.goBack();
         } else {
           dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
         }
@@ -83,7 +84,10 @@ const ReviewItemDetails = () => {
             dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
             return true;
           }
-          // return dispatch(showInfoModal('Error', 'You haven\'t completed a required task.'));
+          if (exceptionType === 'nsfl') {
+            dispatch(showInfoModal(strings('ITEM.NO_FLOOR_LOCATION'), strings('ITEM.NO_FLOOR_LOCATION_DETAILS')));
+            return true;
+          }
         }
 
         dispatch(setManualScan(false));

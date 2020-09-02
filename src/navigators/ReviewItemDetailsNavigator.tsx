@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { HeaderBackButton, createStackNavigator } from '@react-navigation/stack';
 
 import { useNavigation } from '@react-navigation/native';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import COLOR from '../themes/Color';
@@ -33,13 +33,12 @@ const ReviewItemDetailsNavigator = () => {
 
   // TODO add "badge" to show signs currently in queue
   const renderPrintQueueButton = () => (
-    <TouchableOpacity onPress={() => console.log('Print queue button pressed')}>
+    <TouchableOpacity onPress={() => navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' })}>
       <View style={styles.rightButton}>
         <MaterialCommunityIcon
           name="printer"
           size={20}
           color={COLOR.WHITE}
-          onPress={() => navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' })}
         />
       </View>
     </TouchableOpacity>
@@ -49,6 +48,9 @@ const ReviewItemDetailsNavigator = () => {
     if (!actionCompleted) {
       if (exceptionType === 'po') {
         return dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
+      }
+      if (exceptionType === 'nsfl') {
+        return dispatch(showInfoModal(strings('ITEM.NO_FLOOR_LOCATION'), strings('ITEM.NO_FLOOR_LOCATION_DETAILS')));
       }
     }
 
