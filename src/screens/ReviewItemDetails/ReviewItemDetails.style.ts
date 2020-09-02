@@ -24,8 +24,10 @@ const styles = StyleSheet.create({
     paddingVertical: 14
   },
   scanForNoActionButton: {
-    backgroundColor: COLOR.MAIN_THEME_COLOR,
+    backgroundColor: COLOR.WHITE,
     borderRadius: 4,
+    borderColor: COLOR.MAIN_THEME_COLOR,
+    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15
   },
   buttonText: {
-    color: COLOR.WHITE
+    color: COLOR.MAIN_THEME_COLOR
   }
 });
 

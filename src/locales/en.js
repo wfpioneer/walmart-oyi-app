@@ -70,6 +70,9 @@ export default {
     AVG_SALES: 'average sales',
     OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}',
     SCAN_FOR_NO_ACTION: 'Scan for no action',
+    USE_SCANNER_SCAN_FOR_NO_ACTION: 'Use the barcode scanner to scan for no action',
+    SCAN_DOESNT_MATCH: 'Scan doesn\'t match',
+    SCAN_DOESNT_MATCH_DETAILS: 'The item scanned doesn\'t match the current item\'s upc',
     NO_SIGN_PRINTED: 'No sign printed',
     NO_SIGN_PRINTED_DETAILS: 'Item not completed, because you never printed a new sign'
   },

@@ -6,6 +6,6 @@ export const setupScreen = (exceptionType: string | undefined) => ({
   payload: exceptionType
 });
 
-export const actionCompleted = () => ({
+export const setActionCompleted = () => ({
   type: ACTION_COMPLETED
 });

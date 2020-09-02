@@ -2,7 +2,7 @@ import React, {
   RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, BackHandler, Modal, SafeAreaView, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, Modal, Platform, SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
@@ -21,10 +21,10 @@ import Button from '../../components/buttons/Button';
 import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import { setManualScan } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { getMockItemDetails } from '../../mockData';
-import { setupScreen } from '../../state/actions/ItemDetailScreen';
+import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { showInfoModal } from '../../state/actions/Modal';
 
 const ReviewItemDetails = () => {
@@ -52,16 +52,20 @@ const ReviewItemDetails = () => {
 
   // Barcode event listener effect
   useEffect(() => {
-    const { remove } = barcodeEmitter.addListener('scanned', scan => {
+    const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (isNavigationFocused) {
-        console.log('review item details received scan', scan.value, scan.type);
-        dispatch(setScannedEvent(scan));
+        if (scan.value === scannedEvent.value) {
+          dispatch(setActionCompleted());
+        } else {
+          dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+        }
         dispatch(setManualScan(false));
       }
     });
 
     return () => {
-      remove();
+      // eslint-disable-next-line no-unused-expressions
+      scanSubscription?.remove();
     };
   }, []);
 
@@ -72,7 +76,7 @@ const ReviewItemDetails = () => {
   }, []);
 
   useFocusEffect(
-    React.useCallback(() => {
+    () => {
       const onBackPress = () => {
         if (!actionCompleted) {
           if (exceptionType === 'po') {
@@ -89,12 +93,13 @@ const ReviewItemDetails = () => {
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
       return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-    }, [])
+    }
   );
 
   // Used to scroll to bottom when the sales metrics switches from daily to weekly
   // TODO this won't work because of changing data on scans
   const handleContentSizeChange = () => {
+    // eslint-disable-next-line no-unused-expressions
      scrollViewRef.current?.scrollToEnd();
   };
 
@@ -107,12 +112,10 @@ const ReviewItemDetails = () => {
       name: 'LocationDetails',
       params: { floorLoc: itemDetails.location.floor, resLoc: itemDetails.location.reserve }
     });
-    console.log('Handle location screen');
   };
 
   const handleAddToPicklist = () => {
     // TODO Call service for picklist here
-    console.log('Add to picklist clicked!');
   };
 
   const toggleSalesGraphView = () => {
@@ -195,13 +198,26 @@ const ReviewItemDetails = () => {
     );
   };
 
+  const completeAction = () => {
+    dispatch(actionCompletedAction());
+    // dispatch(navigation.goBack());
+  };
+
   const renderScanForNoActionButton = () => {
     if (!exceptionType) {
       return null;
     }
 
+    if (Platform.OS === 'android') {
+      return (
+        <View style={styles.scanForNoActionButton}>
+          <Text style={styles.buttonText}>{strings('ITEM.USE_SCANNER_SCAN_FOR_NO_ACTION')}</Text>
+        </View>
+      );
+    }
+
     return (
-      <TouchableOpacity style={styles.scanForNoActionButton}>
+      <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
         <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
       </TouchableOpacity>
     );
