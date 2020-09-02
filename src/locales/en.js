@@ -34,7 +34,8 @@ export default {
     WEEK: 'Week',
     TOTAL: 'Total',
     DEFAULT: 'Default',
-    CLUB: 'Club'
+    CLUB: 'Club',
+    SUBMIT: 'Submit'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -90,7 +91,12 @@ export default {
     Small: 'Small',
     Wine: 'Wine',
     Medium: 'Med',
-    Large: 'Large'
+    Large: 'Large',
+    PRINTER_LIST: 'Printer List',
+    CHANGE_PRINTER: 'Change Printer',
+    MAC_ADDRESS: 'Enter or Scan MAC Address',
+    MAC_ADDRESS_ERROR: 'The MAC address is usually 12 numbers',
+    PORTABLE_PRINTER: 'Portable Printer'
   },
   LOCATION: {
     TITLE: 'All locations',

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 // @ts-ignore
 import WMSSO from 'react-native-wmsso';
 import Button from '../../components/buttons/Button';
@@ -33,9 +33,11 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     this.signInUser();
     // this following snippet is mostly for iOS, as
     // I need it to automatically call signInUser when we go back to the login screen
-    this.unsubscribe = this.props.navigation.addListener('focus', () => {
-      this.signInUser();
-    });
+    if (Platform.OS === 'ios') {
+      this.unsubscribe = this.props.navigation.addListener('focus', () => {
+        this.signInUser();
+      });
+    }
   }
 
   componentWillUnmount(): void {

@@ -1,30 +1,30 @@
-import { StyleSheet } from "react-native";
-import COLOR from "../../../themes/Color";
+import { StyleSheet } from 'react-native';
+import COLOR from '../../../themes/Color';
 
 export default StyleSheet.create({
   arrowView: {
     flex: 0.1
   },
   categoryList: {
-    flex: 1,
+    flex: 1
   },
   categoryFilterCard: {
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexDirection: 'row',
     flex: 1,
-    height: 40,
+    height: 40
   },
   categoryFilterText: {
     width: '90%'
   },
   clearButton: {
     flex: 0.5,
-    marginRight: 15,
+    marginRight: 15
   },
   clearText: {
     color: COLOR.WHITE,
-    textAlign: 'right',
+    textAlign: 'right'
   },
   headerBar: {
     alignItems: 'center',
@@ -65,5 +65,5 @@ export default StyleSheet.create({
   subtitleText: {
     color: COLOR.GREY_500,
     fontSize: 12
-  },
+  }
 });

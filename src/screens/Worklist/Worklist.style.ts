@@ -1,21 +1,39 @@
-import { StyleSheet } from "react-native";
-import COLOR from "../../themes/Color";
+import { StyleSheet } from 'react-native';
+import COLOR from '../../themes/Color';
 
 export default StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
-    width: '100%',
+    width: '100%'
+  },
+  errorButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLOR.RED_300,
+    borderRadius: 4,
+    height: 40,
+    width: '100%'
+  },
+  errorText: {
+    marginVertical: 10
+  },
+  errorView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 15
   },
   filterContainer: {
     alignItems: 'flex-start',
     justifyContent: 'center',
     height: 50,
-    width: '100%',
+    width: '100%'
   },
   filterList: {
-    paddingHorizontal: 0,
+    paddingHorizontal: 0
   },
   list: {
     flex: 1,
