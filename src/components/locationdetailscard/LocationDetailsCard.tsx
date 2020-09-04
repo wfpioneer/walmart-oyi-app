@@ -11,11 +11,12 @@ export interface Props {
 
 function locationDetailsCard(props:Props) {
     const editable=(props.locationType=="reserve")?<View><Text> </Text></View>:<MaterialCommunityIcon name={'pencil'} size={20} color={COLOR.TRACKER_GREY} />;
+    const deletable=(props.locationType=="reserve")?<View><Text> </Text></View>:<MaterialCommunityIcon name={'trash-can'} size={20} color={COLOR.TRACKER_GREY} />;
     return(
         <View style={styles.card}>
             <View style={styles.location}><Text style={styles.locationName}>{props.locationName}</Text></View>
             <View style={styles.icon}>{editable}</View>
-            <View style={styles.icon}><MaterialCommunityIcon name={'trash-can'} size={20} color={COLOR.TRACKER_GREY} /></View>
+            <View style={styles.icon}>{deletable}</View>
         </View>
     )
 };
