@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 import React from 'react';
 import {
   Image, Platform, Text, TouchableOpacity, View
@@ -86,7 +87,7 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, forceUpdateFunc: Fu
       });
     }
     if (buttonIndex === 1) {
-      props.showModal();
+      props.showActivityModal();
       WMSSO.signOutUser().then(() => {
         props.navigation.replace('Login');
         props.logoutUser();
