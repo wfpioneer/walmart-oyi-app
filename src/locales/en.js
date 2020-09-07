@@ -35,7 +35,8 @@ export default {
     TOTAL: 'Total',
     DEFAULT: 'Default',
     CLUB: 'Club',
-    SUBMIT: 'Submit'
+    SUBMIT: 'Submit',
+    RETRY: 'Retry'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -68,7 +69,8 @@ export default {
     RESERVE: 'Reserve',
     SALES_METRICS: 'Sales metrics',
     AVG_SALES: 'average sales',
-    OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}'
+    OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}',
+    API_ERROR: 'There was an error pulling the item details. Please try again.'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

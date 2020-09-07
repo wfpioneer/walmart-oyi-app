@@ -4,6 +4,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, Canceler } from 'axios';
 import moment from 'moment';
 import qs from 'qs';
 import { Platform } from 'react-native';
+import { store } from '../../App';
 
 /**
  * Base on Axios network request.
@@ -41,6 +42,10 @@ class RequestDispatch {
         // Custom headers here
         const interceptRequest = await this.settingHeaders(request);
         // console.log(`=====> Network ${request.method} to: ${request.url}`, interceptRequest);
+        interceptRequest.url = `https://intl-oyi-item-details-api.dev.walmart.com${request.url}`;
+        interceptRequest.headers.userId = store.getState().User.userId;
+        interceptRequest.headers.countryCode = 'CN';
+        interceptRequest.headers.clubNbr = '5597';
         this.requestStartTime = moment().valueOf();
         return interceptRequest;
       },

@@ -2,7 +2,7 @@ import React, {
   RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, Modal, SafeAreaView, ScrollView, Text, View
+  ActivityIndicator, Modal, SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
@@ -10,6 +10,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { getItemDetails } from '../../state/actions/saga';
 
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -23,12 +24,11 @@ import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
-import { getMockItemDetails } from '../../mockData';
 
-const ReviewItemDetails = (props: any) => {
+const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
-  const { countryCode, siteId } = useTypedSelector(state => state.User);
+  const { userId } = useTypedSelector(state => state.User);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const isNavigationFocused = useIsFocused();
@@ -36,12 +36,13 @@ const ReviewItemDetails = (props: any) => {
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
 
-  const itemDetails: ItemDetails = (result && result.data) || getMockItemDetails(scannedEvent.value);
-  const locationCount = itemDetails.location.count;
-  const updatedSalesTS = moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a');
+  useEffect(() => {
+    dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+  }, []);
 
   useEffect(() => {
     // Reset to top of screen
+    // eslint-disable-next-line no-unused-expressions
     scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
     // TODO Call get item details service here
   }, [scannedEvent]);
@@ -50,20 +51,52 @@ const ReviewItemDetails = (props: any) => {
   useEffect(() => {
     const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (isNavigationFocused) {
-        console.log('review item details received scan', scan.value, scan.type);
         dispatch(setScannedEvent(scan));
         dispatch(setManualScan(false));
       }
     });
 
     return () => {
+      // eslint-disable-next-line no-unused-expressions
       scannedSubscription?.remove();
     };
   }, []);
 
+  if (error) {
+    return (
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
+        <TouchableOpacity
+          style={styles.errorButton}
+          onPress={() => dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }))}
+        >
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  if (isWaiting || !result) {
+    return (
+      <ActivityIndicator
+        animating={isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
+
+  const itemDetails: ItemDetails = (result && result.data);// || getMockItemDetails(scannedEvent.value);
+  const locationCount = itemDetails.location.count;
+  const updatedSalesTS = moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a');
+
   // Used to scroll to bottom when the sales metrics switches from daily to weekly
   // TODO this won't work because of changing data on scans
   const handleContentSizeChange = () => {
+    // eslint-disable-next-line no-unused-expressions
      scrollViewRef.current?.scrollToEnd();
   };
 
@@ -72,13 +105,14 @@ const ReviewItemDetails = (props: any) => {
   };
 
   const handleLocationAction = () => {
-    navigation.navigate({ name: 'LocationDetails', params: { floorLoc: itemDetails.location.floor, resLoc: itemDetails.location.reserve } });
-    console.log('Handle location screen');
+    navigation.navigate({
+      name: 'LocationDetails',
+      params: { floorLoc: itemDetails.location.floor, resLoc: itemDetails.location.reserve }
+    });
   };
 
   const handleAddToPicklist = () => {
     // TODO Call service for picklist here
-    console.log('Add to picklist clicked!');
   };
 
   const toggleSalesGraphView = () => {
@@ -202,7 +236,14 @@ const ReviewItemDetails = (props: any) => {
               {renderOHQtyComponent()}
             </SFTCard>
             <SFTCard
-              iconProp={<MaterialCommunityIcon name="label-variant" size={20} color={COLOR.GREY_700} style={{ marginLeft: -4 }} />}
+              iconProp={(
+                <MaterialCommunityIcon
+                  name="label-variant"
+                  size={20}
+                  color={COLOR.GREY_700}
+                  style={{ marginLeft: -4 }}
+                />
+)}
               title="Replenishment"
             >
               <View style={{
@@ -216,7 +257,8 @@ const ReviewItemDetails = (props: any) => {
             <SFTCard
               iconName="map-marker-alt"
               title={`${strings('ITEM.LOCATION')}(${locationCount})`}
-              topRightBtnTxt={locationCount && locationCount >= 1 ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD')}
+              topRightBtnTxt={locationCount && locationCount >= 1
+                ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD')}
               topRightBtnAction={handleLocationAction}
             >
               {renderLocationComponent()}
