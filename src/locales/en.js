@@ -40,7 +40,8 @@ export default {
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
     HOME: 'Home',
-    STYLE_GUIDE: 'Style Guide'
+    STYLE_GUIDE: 'Style Guide',
+    CHANGE_LANGUAGE: 'Change Language'
   },
   EXCEPTION: {
     PO: 'Price Override',
