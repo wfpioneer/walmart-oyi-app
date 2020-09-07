@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { User } from './User';
-import { activityModal } from './ActivityModal';
+import { modal } from './Modal';
 import asyncReducer from './asyncAPI';
 import { Global } from './Global';
-import { worklist } from "./Worklist";
+import { worklist } from './Worklist';
+import { ItemDetailScreen } from './ItemDetailScreen';
 import { Print } from './Print';
 
 /**
@@ -12,11 +13,12 @@ import { Print } from './Print';
  */
 const RootReducer = combineReducers({
   User,
-  activityModal,
+  modal,
   async: asyncReducer,
   Global,
   Worklist: worklist,
-  Print
+  Print,
+  ItemDetailScreen
 });
 
 export default RootReducer;

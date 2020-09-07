@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 export default {
   '123': {
     itemName: 'Test Item That is Really, Really Long (and has parenthesis)',
@@ -6,27 +7,15 @@ export default {
     status: 'Active',
     category: '93 - Meat PI',
     price: 2000.94,
-    exceptionType: 'po',
+    exceptionType: 'nsfl',
     onHandsQty: 42,
     isOnHandsPending: true,
     replenishment: {
       onOrder: 48
     },
     location: {
-      floor: [
-        {
-          id: '1',
-          type: 'pod',
-          name: 'F15-4'
-        }
-      ],
-      reserve: [
-        {
-          id: '2',
-          type: 'reserve',
-          name: 'F15-4'
-        }
-      ],
+      floor: [],
+      reserve: [],
       count: 10
     },
     sales: {
@@ -237,4 +226,4 @@ export default {
       ]
     }
   }
-}
+};

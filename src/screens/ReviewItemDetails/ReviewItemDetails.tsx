@@ -2,9 +2,9 @@ import React, {
   RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, Modal, SafeAreaView, ScrollView, Text, View
+  ActivityIndicator, BackHandler, Modal, Platform, SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
@@ -21,14 +21,17 @@ import Button from '../../components/buttons/Button';
 import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import { setManualScan } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { getMockItemDetails } from '../../mockData';
+import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
+import { showInfoModal } from '../../state/actions/Modal';
 
-const ReviewItemDetails = (props: any) => {
+const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const { countryCode, siteId } = useTypedSelector(state => state.User);
+  const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const isNavigationFocused = useIsFocused();
@@ -42,28 +45,65 @@ const ReviewItemDetails = (props: any) => {
 
   useEffect(() => {
     // Reset to top of screen
+    // eslint-disable-next-line no-unused-expressions
     scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
     // TODO Call get item details service here
   }, [scannedEvent]);
 
   // Barcode event listener effect
   useEffect(() => {
-    const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
+    const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (isNavigationFocused) {
-        console.log('review item details received scan', scan.value, scan.type);
-        dispatch(setScannedEvent(scan));
+        if (scan.value === scannedEvent.value) {
+          dispatch(setActionCompleted());
+          navigation.goBack();
+        } else {
+          dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+        }
         dispatch(setManualScan(false));
       }
     });
 
     return () => {
-      scannedSubscription?.remove();
+      // eslint-disable-next-line no-unused-expressions
+      scanSubscription?.remove();
     };
   }, []);
+
+  useEffect(() => {
+    if (itemDetails.exceptionType) {
+      dispatch(setupScreen(itemDetails.exceptionType));
+    }
+  }, []);
+
+  useFocusEffect(
+    () => {
+      const onBackPress = () => {
+        if (!actionCompleted) {
+          if (exceptionType === 'po') {
+            dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
+            return true;
+          }
+          if (exceptionType === 'nsfl') {
+            dispatch(showInfoModal(strings('ITEM.NO_FLOOR_LOCATION'), strings('ITEM.NO_FLOOR_LOCATION_DETAILS')));
+            return true;
+          }
+        }
+
+        dispatch(setManualScan(false));
+        return false;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }
+  );
 
   // Used to scroll to bottom when the sales metrics switches from daily to weekly
   // TODO this won't work because of changing data on scans
   const handleContentSizeChange = () => {
+    // eslint-disable-next-line no-unused-expressions
      scrollViewRef.current?.scrollToEnd();
   };
 
@@ -72,13 +112,14 @@ const ReviewItemDetails = (props: any) => {
   };
 
   const handleLocationAction = () => {
-    navigation.navigate({ name: 'LocationDetails', params: { floorLoc: itemDetails.location.floor, resLoc: itemDetails.location.reserve } });
-    console.log('Handle location screen');
+    navigation.navigate({
+      name: 'LocationDetails',
+      params: { floorLoc: itemDetails.location.floor, resLoc: itemDetails.location.reserve }
+    });
   };
 
   const handleAddToPicklist = () => {
     // TODO Call service for picklist here
-    console.log('Add to picklist clicked!');
   };
 
   const toggleSalesGraphView = () => {
@@ -161,6 +202,31 @@ const ReviewItemDetails = (props: any) => {
     );
   };
 
+  const completeAction = () => {
+    dispatch(actionCompletedAction());
+    // dispatch(navigation.goBack());
+  };
+
+  const renderScanForNoActionButton = () => {
+    if (!exceptionType) {
+      return null;
+    }
+
+    if (Platform.OS === 'android') {
+      return (
+        <View style={styles.scanForNoActionButton}>
+          <Text style={styles.buttonText}>{strings('ITEM.USE_SCANNER_SCAN_FOR_NO_ACTION')}</Text>
+        </View>
+      );
+    }
+
+    return (
+      <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
+        <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent />}
@@ -202,7 +268,14 @@ const ReviewItemDetails = (props: any) => {
               {renderOHQtyComponent()}
             </SFTCard>
             <SFTCard
-              iconProp={<MaterialCommunityIcon name="label-variant" size={20} color={COLOR.GREY_700} style={{ marginLeft: -4 }} />}
+              iconProp={(
+                <MaterialCommunityIcon
+                  name="label-variant"
+                  size={20}
+                  color={COLOR.GREY_700}
+                  style={{ marginLeft: -4 }}
+                />
+)}
               title="Replenishment"
             >
               <View style={{
@@ -216,7 +289,9 @@ const ReviewItemDetails = (props: any) => {
             <SFTCard
               iconName="map-marker-alt"
               title={`${strings('ITEM.LOCATION')}(${locationCount})`}
-              topRightBtnTxt={locationCount && locationCount >= 1 ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD')}
+              topRightBtnTxt={
+                locationCount && locationCount >= 1 ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD')
+              }
               topRightBtnAction={handleLocationAction}
             >
               {renderLocationComponent()}
@@ -233,6 +308,7 @@ const ReviewItemDetails = (props: any) => {
           )
         }
       </ScrollView>
+      { renderScanForNoActionButton() }
     </SafeAreaView>
   );
 };

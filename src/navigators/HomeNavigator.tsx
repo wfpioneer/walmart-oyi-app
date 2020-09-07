@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 import React from 'react';
 import {
   Image, Platform, Text, TouchableOpacity, View
@@ -14,14 +15,14 @@ import COLOR from '../themes/Color';
 import styles from './HomeNavigator.style';
 import { setLanguage, strings } from '../locales';
 import { logoutUser } from '../state/actions/User';
-import { hideModal, showModal } from '../state/actions/ActivityModal';
+import { hideActivityModal, showActivityModal } from '../state/actions/Modal';
 import StyleGuide from '../screens/StyleGuide/StyleGuide';
 import { setManualScan } from '../state/actions/Global';
 
 interface HomeNavigatorComponentProps {
   logoutUser: Function;
-  showModal: Function;
-  hideModal: Function;
+  showActivityModal: Function;
+  hideActivityModal: Function;
   navigation: Record<string, any>;
   isManualScanEnabled: boolean;
   setManualScan: Function;
@@ -35,8 +36,8 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = {
   logoutUser,
-  showModal,
-  hideModal,
+  showActivityModal,
+  hideActivityModal,
   setManualScan
 };
 
@@ -86,12 +87,12 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, forceUpdateFunc: Fu
       });
     }
     if (buttonIndex === 1) {
-      props.showModal();
+      props.showActivityModal();
       WMSSO.signOutUser().then(() => {
         props.navigation.replace('Login');
         props.logoutUser();
         if (Platform.OS === 'android') {
-          props.hideModal();
+          props.hideActivityModal();
         }
       });
       return;

@@ -19,12 +19,14 @@ type ItemInfoProps = {
 }
 
 const ItemInfo = (props: ItemInfoProps) => {
-  const { itemName, itemNbr, upcNbr, status, category, price, exceptionType} = props;
+  const {
+    itemName, itemNbr, upcNbr, status, category, price, exceptionType
+  } = props;
   const navigation = useNavigation();
 
   const handlePrintPriceSign = () => {
-    navigation.navigate('PrintPriceSign', {screen: 'PrintPriceSignScreen'});
-  }
+    navigation.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' });
+  };
 
   return (
     <View style={styles.mainContainer}>
@@ -32,15 +34,15 @@ const ItemInfo = (props: ItemInfoProps) => {
         <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.image} />
       </View>
       {exceptionType && <Text style={styles.exceptionText}>{strings(`EXCEPTION.${exceptionType.toUpperCase()}`)}</Text>}
-      <Text style={styles.itemNameText} >{itemName}</Text>
+      <Text style={styles.itemNameText}>{itemName}</Text>
       <View style={styles.nbrContainer}>
-        <Text style={styles.itemNbrText} >{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
-        <Text style={styles.nbrDivider} >|</Text>
-        <Text style={styles.upcNbrText} >{`${strings('ITEM.UPC')} ${upcNbr}`}</Text>
+        <Text style={styles.itemNbrText}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
+        <Text style={styles.nbrDivider}>|</Text>
+        <Text style={styles.upcNbrText}>{`${strings('ITEM.UPC')} ${upcNbr}`}</Text>
       </View>
-      <Text style={styles.statusText} >{`${strings('ITEM.STATUS')}: ${status}`}</Text>
-      <Text style={styles.catgText} >{`${strings('ITEM.CATEGORY')}: ${category}`}</Text>
-      <Text style={styles.priceText} >{`${currencies(price)}`}</Text>
+      <Text style={styles.statusText}>{`${strings('ITEM.STATUS')}: ${status}`}</Text>
+      <Text style={styles.catgText}>{`${strings('ITEM.CATEGORY')}: ${category}`}</Text>
+      <Text style={styles.priceText}>{`${currencies(price)}`}</Text>
       <Button
         type={2}
         title={strings('PRINT.PRICE_SIGN')}
@@ -49,7 +51,7 @@ const ItemInfo = (props: ItemInfoProps) => {
         onPress={handlePrintPriceSign}
       />
     </View>
-  )
-}
+  );
+};
 
 export default ItemInfo;
