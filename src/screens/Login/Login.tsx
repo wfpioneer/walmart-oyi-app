@@ -8,17 +8,17 @@ import styles from './Login.style';
 import { loginUser } from '../../state/actions/User';
 import User from '../../models/User';
 import { strings } from '../../locales';
-import { hideModal } from '../../state/actions/ActivityModal';
+import { hideActivityModal } from '../../state/actions/Modal';
 
 const mapDispatchToProps = {
   loginUser,
-  hideModal
+  hideActivityModal
 };
 
 interface LoginScreenProps {
   loginUser: Function;
   navigation: Record<string, any>;
-  hideModal: Function;
+  hideActivityModal: Function;
 }
 
 export class LoginScreen extends React.PureComponent<LoginScreenProps> {
@@ -47,7 +47,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
   signInUser(): void {
     WMSSO.getUser().then((user: User) => {
       this.props.loginUser(user);
-      this.props.hideModal();
+      this.props.hideActivityModal();
       this.props.navigation.replace('Tabs');
     });
   }

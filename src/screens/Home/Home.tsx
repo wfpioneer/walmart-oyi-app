@@ -41,7 +41,6 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps> {
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (props.navigation.isFocused()) {
-        console.log('home received scan', scan.value, scan.type);
         props.setScannedEvent(scan);
         props.setManualScan(false);
         props.navigation.navigate('ReviewItemDetails');

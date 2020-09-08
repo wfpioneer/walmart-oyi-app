@@ -41,7 +41,8 @@ export default {
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
     HOME: 'Home',
-    STYLE_GUIDE: 'Style Guide'
+    STYLE_GUIDE: 'Style Guide',
+    CHANGE_LANGUAGE: 'Change Language'
   },
   EXCEPTION: {
     PO: 'Price Override',
@@ -50,7 +51,7 @@ export default {
     NO_SALES: 'No Sales',
     NEGATIVE_ON_HANDS: 'Negative on-hands',
     CANCELLED: 'Cancelled',
-    NO_SALES_FLOOR_LOCATION: 'No sales floor location'
+    NSFL: 'No sales floor location'
   },
   ITEM: {
     TITLE: 'Review item details',
@@ -70,7 +71,15 @@ export default {
     SALES_METRICS: 'Sales metrics',
     AVG_SALES: 'average sales',
     OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}',
-    API_ERROR: 'There was an error pulling the item details. Please try again.'
+    API_ERROR: 'There was an error pulling the item details. Please try again.',
+    SCAN_FOR_NO_ACTION: 'Scan for no action',
+    USE_SCANNER_SCAN_FOR_NO_ACTION: 'Use the barcode scanner to scan for no action',
+    SCAN_DOESNT_MATCH: 'Scan doesn\'t match',
+    SCAN_DOESNT_MATCH_DETAILS: 'The item scanned doesn\'t match the current item\'s upc',
+    NO_SIGN_PRINTED: 'No sign printed',
+    NO_SIGN_PRINTED_DETAILS: 'Item not completed because you never printed a new sign',
+    NO_FLOOR_LOCATION: 'No floor location',
+    NO_FLOOR_LOCATION_DETAILS: 'Item not completed because you never added a floor location'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

@@ -15,6 +15,7 @@ import { getMockItemDetails } from '../../mockData';
 import {
   addToPrintQueue, addToPrinterList, setSelectedPrinter, setSignType
 } from '../../state/actions/Print';
+import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
   LaserPaper, PortablePaper, PrintQueueItem, Printer, PrinterType
 } from '../../models/Printer';
@@ -58,6 +59,8 @@ const renderSignSizeButtons = (selectedPrinter: Printer, catgNbr: number, signTy
             />
           );
         }
+
+        return null;
       })}
     </View>
   );
@@ -65,6 +68,7 @@ const renderSignSizeButtons = (selectedPrinter: Printer, catgNbr: number, signTy
 
 const PrintPriceSign = () => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
+  const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const { result } = useTypedSelector(state => state.async.getItemDetails);
   const { selectedPrinter, selectedSignType, printQueue } = useTypedSelector(state => state.Print);
   const dispatch = useDispatch();
@@ -147,12 +151,19 @@ const PrintPriceSign = () => {
         paperSize: selectedSignType
       };
       dispatch(addToPrintQueue(printQueueItem));
+      if (!actionCompleted && exceptionType === 'po') {
+        dispatch(setActionCompleted());
+      }
       navigation.goBack();
     }
   };
 
   const handlePrint = () => {
-    console.log('PRINT clicked');
+    if (!actionCompleted && exceptionType === 'po') {
+      dispatch(setActionCompleted());
+    }
+    // TODO: implement printing
+    navigation.goBack();
   };
 
   return (

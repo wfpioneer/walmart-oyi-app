@@ -22,6 +22,15 @@ export const setI18nConfig: () => void = () => {
   moment.locale(languageTag);
 };
 
+export const setLanguage = (language: string) => {
+  if (language !== 'en' && language !== 'es' && language !== 'zh') {
+    throw new Error('Unsupported language');
+  }
+
+  I18n.locale = language;
+  moment.locale(language);
+};
+
 export const strings: (
   tag: string,
   options?: I18n.TranslateOptions | undefined,

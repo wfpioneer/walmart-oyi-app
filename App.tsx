@@ -17,7 +17,7 @@ import { MainNavigator } from './src/navigators/MainNavigator';
 import { setI18nConfig } from './src/locales';
 import RootReducer from './src/state/reducers/RootReducer';
 import rootSaga from './src/state/sagas';
-import ActivityModal from './src/screens/ActivityModal/ActivityModal';
+import Modal from './src/screens/Modal/Modal';
 import AppRoot from './src/components/AppRoot';
 
 declare let global: {HermesInternal: null | {}};
@@ -44,7 +44,7 @@ export default class App extends React.PureComponent {
     return (
       <Provider store={store}>
         <AppRoot>
-          <ActivityModal />
+          <Modal />
           <MainNavigator />
         </AppRoot>
       </Provider>
