@@ -24,7 +24,6 @@ import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
-import { getMockItemDetails } from '../../mockData';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { showInfoModal } from '../../state/actions/Modal';
 
@@ -32,7 +31,6 @@ const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const { userId } = useTypedSelector(state => state.User);
-  const { countryCode, siteId } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -72,11 +70,16 @@ const ReviewItemDetails = () => {
     };
   }, []);
 
+  const itemDetails: ItemDetails = (result && result.data);// || getMockItemDetails(scannedEvent.value);
+
+  const locationCount = itemDetails ? itemDetails.location.count : -1;
+  const updatedSalesTS = itemDetails ? moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a') : '';
+
   useEffect(() => {
-    if (itemDetails.exceptionType) {
+    if (itemDetails) {
       dispatch(setupScreen(itemDetails.exceptionType));
     }
-  }, []);
+  }, [itemDetails]);
 
   useFocusEffect(
     () => {
@@ -128,17 +131,6 @@ const ReviewItemDetails = () => {
       />
     );
   }
-
-  const itemDetails: ItemDetails = (result && result.data);// || getMockItemDetails(scannedEvent.value);
-  const locationCount = itemDetails.location.count;
-  const updatedSalesTS = moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a');
-
-  // Used to scroll to bottom when the sales metrics switches from daily to weekly
-  // TODO this won't work because of changing data on scans
-  const handleContentSizeChange = () => {
-    // eslint-disable-next-line no-unused-expressions
-     scrollViewRef.current?.scrollToEnd();
-  };
 
   const handleUpdateQty = () => {
     setOhQtyModalVisible(true);
@@ -236,7 +228,8 @@ const ReviewItemDetails = () => {
   };
 
   const completeAction = () => {
-    //dispatch(actionCompletedAction());
+    // TODO: reinstantiate when ios device support is needed
+    // dispatch(actionCompletedAction());
     // dispatch(navigation.goBack());
   };
 
