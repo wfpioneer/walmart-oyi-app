@@ -10,8 +10,8 @@ export interface Props {
 }
 
 function locationDetailsCard(props:Props) {
-    const editable=(props.locationType=="reserve")?<View><Text> </Text></View>:<MaterialCommunityIcon name={'pencil'} size={20} color={COLOR.TRACKER_GREY} />;
-    const deletable=(props.locationType=="reserve")?<View><Text> </Text></View>:<MaterialCommunityIcon name={'trash-can'} size={20} color={COLOR.TRACKER_GREY} />;
+    const editable=(props.locationType=="reserve")?null:<MaterialCommunityIcon name={'pencil'} size={20} color={COLOR.TRACKER_GREY} />;
+    const deletable=(props.locationType=="reserve")?null:<MaterialCommunityIcon name={'trash-can'} size={20} color={COLOR.TRACKER_GREY} />;
     return(
         <View style={styles.card}>
             <View style={styles.location}><Text style={styles.locationName}>{props.locationName}</Text></View>
