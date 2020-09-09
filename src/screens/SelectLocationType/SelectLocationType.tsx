@@ -36,12 +36,6 @@ function SelectLocationType() {
             <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.DISPLAY')}</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.typeListItem}>
-          <RadioButton value="reserve" status={type === 'reserve' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
-          <TouchableOpacity style={styles.labelBox} onPress={() => setType('reserve')}>
-            <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.RESERVE')}</Text>
-          </TouchableOpacity>
-        </View>
       </RadioButton.Group>
       <View style={styles.container}>
         <Button title={strings('GENERICS.NEXT')} radius={0} onPress={() => { console.log('Next button pressed.'); }} />
