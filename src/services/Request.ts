@@ -42,10 +42,9 @@ class RequestDispatch {
         // Custom headers here
         const interceptRequest = await this.settingHeaders(request);
         // console.log(`=====> Network ${request.method} to: ${request.url}`, interceptRequest);
-        interceptRequest.url = `https://intl-oyi-item-details-api.dev.walmart.com${request.url}`;
         interceptRequest.headers.userId = store.getState().User.userId;
         interceptRequest.headers.countryCode = 'CN';
-        interceptRequest.headers.clubNbr = '5597';
+        interceptRequest.headers.clubNbr = store.getState().User.siteId;
         this.requestStartTime = moment().valueOf();
         return interceptRequest;
       },
