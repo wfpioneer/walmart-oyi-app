@@ -35,7 +35,8 @@ export default {
     TOTAL: 'Total',
     DEFAULT: 'Default',
     CLUB: 'Club',
-    SUBMIT: 'Submit'
+    SUBMIT: 'Submit',
+    RETRY: 'Retry'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -70,6 +71,7 @@ export default {
     SALES_METRICS: 'Sales metrics',
     AVG_SALES: 'average sales',
     OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}',
+    API_ERROR: 'There was an error pulling the item details. Please try again.',
     SCAN_FOR_NO_ACTION: 'Scan for no action',
     USE_SCANNER_SCAN_FOR_NO_ACTION: 'Use the barcode scanner to scan for no action',
     SCAN_DOESNT_MATCH: 'Scan doesn\'t match',
