@@ -4,6 +4,7 @@ import React, {
 import {
   ActivityIndicator, BackHandler, Modal, Platform, SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
+import _ from 'lodash';
 import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -72,8 +73,10 @@ const ReviewItemDetails = () => {
 
   const itemDetails: ItemDetails = (result && result.data);// || getMockItemDetails(scannedEvent.value);
 
-  const locationCount = itemDetails ? itemDetails.location.count : -1;
-  const updatedSalesTS = itemDetails ? moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a') : '';
+  const locationCount = _.isFinite(_.get(itemDetails, 'location.count')) ? itemDetails.location.count : 0;
+  const updatedSalesTS = _.get(itemDetails, 'sales.lastUpdateTs')
+    ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
+    : undefined;
 
   useEffect(() => {
     if (itemDetails) {
@@ -323,7 +326,7 @@ const ReviewItemDetails = () => {
             </SFTCard>
             <SFTCard
               title={strings('ITEM.SALES_METRICS')}
-              subTitle={`${strings('GENERICS.UPDATED')} ${updatedSalesTS}`}
+              subTitle={updatedSalesTS}
               bottomRightBtnTxt={['Toggle graph']}
               bottomRightBtnAction={[toggleSalesGraphView]}
             >
