@@ -11,7 +11,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { getItemDetails } from '../../state/actions/saga';
+import { addToPicklist, getItemDetails } from '../../state/actions/saga';
 
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -31,7 +31,8 @@ import { showInfoModal } from '../../state/actions/Modal';
 const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
-  const { userId } = useTypedSelector(state => state.User);
+  const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
+  const { userId, siteId, countryCode } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -42,6 +43,7 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+    dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
   }, []);
 
   useEffect(() => {
@@ -147,7 +149,10 @@ const ReviewItemDetails = () => {
   };
 
   const handleAddToPicklist = () => {
-    // TODO Call service for picklist here
+    dispatch(addToPicklist({
+      headers: { clubNumber: siteId, countryCode },
+      itemNumber: itemDetails.itemNbr
+    }));
   };
 
   const toggleSalesGraphView = () => {
@@ -170,6 +175,51 @@ const ReviewItemDetails = () => {
         }
     </View>
   );
+
+  const renderAddPicklistButton = () => {
+    const { reserve } = itemDetails.location;
+
+    if (addToPicklistStatus.isWaiting) {
+      return <ActivityIndicator />;
+    }
+
+    if (addToPicklistStatus.result) {
+      return <Text style={styles.picklistSuccessText}>{strings('ITEM.ADDED_TO_PICKLIST')}</Text>;
+    }
+
+    if (addToPicklistStatus.error) {
+      return (
+        <View style={styles.picklistErrorView}>
+          <Text style={styles.picklistErrorText}>{strings('ITEM.ADDED_TO_PICKLIST_ERROR')}</Text>
+          <Button
+            type={3}
+            title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            titleFontSize={12}
+            titleFontWeight="bold"
+            height={28}
+            onPress={handleAddToPicklist}
+          />
+        </View>
+      );
+    }
+
+    if (reserve && reserve.length >= 1) {
+      return (
+        <Button
+          type={3}
+          title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          titleFontSize={12}
+          titleFontWeight="bold"
+          height={28}
+          onPress={handleAddToPicklist}
+        />
+      );
+    }
+
+    return <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>;
+  };
 
   const renderLocationComponent = () => {
     const { floor, reserve } = itemDetails.location;
@@ -211,20 +261,7 @@ const ReviewItemDetails = () => {
           }
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingVertical: 8 }}>
-          {reserve && reserve.length >= 1
-            ? (
-              <Button
-                type={3}
-                title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
-                titleColor={COLOR.MAIN_THEME_COLOR}
-                titleFontSize={12}
-                titleFontWeight="bold"
-                height={28}
-                onPress={handleAddToPicklist}
-              />
-            )
-            : <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>
-          }
+          { renderAddPicklistButton() }
         </View>
       </View>
     );

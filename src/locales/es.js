@@ -47,7 +47,7 @@ export default {
     NO_SALES: 'Sin Venta',
     NEGATIVE_ON_HANDS: 'Existencia negativa',
     CANCELLED: 'Cancelados',
-    NO_SALES_FLOOR_LOCATION: 'Sin Ubicación en Piso de Ventas',
+    NO_SALES_FLOOR_LOCATION: 'Sin Ubicación en Piso de Ventas'
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',
@@ -62,6 +62,8 @@ export default {
     LOCATION: 'Ubicación',
     TO_PICKLIST: 'Add to Droplist',
     RESERVE_NEEDED: 'La ubicación de add to Droplist',
+    ADDED_TO_PICKLIST: 'Elemento agregado a la lista de selección',
+    ADDED_TO_PICKLIST_ERROR: 'El envío de la lista de selección no se realizó correctamente. Inténtalo de nuevo.',
     FLOOR: 'Piso',
     RESERVE: 'Bodega',
     SALES_METRICS: 'Ventas',
@@ -104,11 +106,11 @@ export default {
     CLEAR: 'Limpiar'
   },
   SELECTLOCATIONTYPE: {
-    TITLE: "Select type of location",
-    FLOOR: "Floor",
-    ENDCAP: "End cap",
-    POD: "POD",
-    DISPLAY: "Display",
-    RESERVE: "Reserve"
+    TITLE: 'Select type of location',
+    FLOOR: 'Floor',
+    ENDCAP: 'End cap',
+    POD: 'POD',
+    DISPLAY: 'Display',
+    RESERVE: 'Reserve'
   }
 };
