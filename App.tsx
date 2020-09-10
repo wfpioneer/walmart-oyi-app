@@ -28,7 +28,7 @@ const sagaMiddleware = createSagaMiddleware();
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(RootReducer,
+export const store = createStore(RootReducer,
   composeEnhancer(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(rootSaga);

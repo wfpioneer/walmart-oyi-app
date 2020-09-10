@@ -4,12 +4,14 @@ import React, {
 import {
   ActivityIndicator, BackHandler, Modal, Platform, SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
+import _ from 'lodash';
 import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { getItemDetails } from '../../state/actions/saga';
 
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -23,14 +25,13 @@ import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
-import { getMockItemDetails } from '../../mockData';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { showInfoModal } from '../../state/actions/Modal';
 
 const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
-  const { countryCode, siteId } = useTypedSelector(state => state.User);
+  const { userId } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -39,9 +40,9 @@ const ReviewItemDetails = () => {
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
 
-  const itemDetails: ItemDetails = (result && result.data) || getMockItemDetails(scannedEvent.value);
-  const locationCount = itemDetails.location.count;
-  const updatedSalesTS = moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a');
+  useEffect(() => {
+    dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+  }, []);
 
   useEffect(() => {
     // Reset to top of screen
@@ -70,11 +71,18 @@ const ReviewItemDetails = () => {
     };
   }, []);
 
+  const itemDetails: ItemDetails = (result && result.data);// || getMockItemDetails(scannedEvent.value);
+
+  const locationCount = _.isFinite(_.get(itemDetails, 'location.count')) ? itemDetails.location.count : 0;
+  const updatedSalesTS = _.get(itemDetails, 'sales.lastUpdateTs')
+    ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
+    : undefined;
+
   useEffect(() => {
-    if (itemDetails.exceptionType) {
+    if (itemDetails) {
       dispatch(setupScreen(itemDetails.exceptionType));
     }
-  }, []);
+  }, [itemDetails]);
 
   useFocusEffect(
     () => {
@@ -100,12 +108,32 @@ const ReviewItemDetails = () => {
     }
   );
 
-  // Used to scroll to bottom when the sales metrics switches from daily to weekly
-  // TODO this won't work because of changing data on scans
-  const handleContentSizeChange = () => {
-    // eslint-disable-next-line no-unused-expressions
-     scrollViewRef.current?.scrollToEnd();
-  };
+  if (error) {
+    return (
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
+        <TouchableOpacity
+          style={styles.errorButton}
+          onPress={() => dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }))}
+        >
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  if (isWaiting || !result) {
+    return (
+      <ActivityIndicator
+        animating={isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
 
   const handleUpdateQty = () => {
     setOhQtyModalVisible(true);
@@ -203,7 +231,8 @@ const ReviewItemDetails = () => {
   };
 
   const completeAction = () => {
-    dispatch(actionCompletedAction());
+    // TODO: reinstantiate when ios device support is needed
+    // dispatch(actionCompletedAction());
     // dispatch(navigation.goBack());
   };
 
@@ -289,16 +318,15 @@ const ReviewItemDetails = () => {
             <SFTCard
               iconName="map-marker-alt"
               title={`${strings('ITEM.LOCATION')}(${locationCount})`}
-              topRightBtnTxt={
-                locationCount && locationCount >= 1 ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD')
-              }
+              topRightBtnTxt={locationCount && locationCount >= 1
+                ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD')}
               topRightBtnAction={handleLocationAction}
             >
               {renderLocationComponent()}
             </SFTCard>
             <SFTCard
               title={strings('ITEM.SALES_METRICS')}
-              subTitle={`${strings('GENERICS.UPDATED')} ${updatedSalesTS}`}
+              subTitle={updatedSalesTS}
               bottomRightBtnTxt={['Toggle graph']}
               bottomRightBtnAction={[toggleSalesGraphView]}
             >
