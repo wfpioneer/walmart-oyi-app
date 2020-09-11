@@ -72,6 +72,7 @@ export default {
     AVG_SALES: 'average sales',
     OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}',
     API_ERROR: 'There was an error pulling the item details. Please try again.',
+    ITEM_NOT_FOUND: 'The scanned item was not found.',
     SCAN_FOR_NO_ACTION: 'Scan for no action',
     USE_SCANNER_SCAN_FOR_NO_ACTION: 'Use the barcode scanner to scan for no action',
     SCAN_DOESNT_MATCH: 'Scan doesn\'t match',
