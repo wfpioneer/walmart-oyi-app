@@ -42,6 +42,7 @@ const ReviewItemDetails = () => {
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
 
   useEffect(() => {
+    dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
     dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
   }, []);
 
