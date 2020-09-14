@@ -68,7 +68,8 @@ export default {
     RESERVE: '高货架',
     SALES_METRICS: '销售',
     AVG_SALES: '平均销售',
-    OH_UPDATE_ERROR: '输入数字(%{min}-%{max})'
+    OH_UPDATE_ERROR: '输入数字(%{min}-%{max})',
+    OH_UPDATE_API_ERROR: '更新数量时出错。 请再试一遍。'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',

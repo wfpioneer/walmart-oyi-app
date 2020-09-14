@@ -71,6 +71,7 @@ export default {
     SALES_METRICS: 'Sales metrics',
     AVG_SALES: 'average sales',
     OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}',
+    OH_UPDATE_API_ERROR: 'There was an error updating the quantity. Please try again.',
     API_ERROR: 'There was an error pulling the item details. Please try again.',
     ITEM_NOT_FOUND: 'The scanned item was not found.',
     SCAN_FOR_NO_ACTION: 'Scan for no action',

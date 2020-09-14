@@ -67,7 +67,8 @@ export default {
     RESERVE: 'Bodega',
     SALES_METRICS: 'Ventas',
     AVG_SALES: 'Ventas Promedio',
-    OH_UPDATE_ERROR: 'Por favor ingresa un número entre %{min} y %{max}'
+    OH_UPDATE_ERROR: 'Por favor ingresa un número entre %{min} y %{max}',
+    OH_UPDATE_API_ERROR: 'Hubo un error al actualizar la cantidad. Inténtalo de nuevo.'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
