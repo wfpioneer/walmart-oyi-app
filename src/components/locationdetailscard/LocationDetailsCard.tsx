@@ -21,11 +21,12 @@ function locationDetailsCard(props: Props) {
       </TouchableOpacity>
     )
   };
+
   return (
     <View style={styles.card}>
       <View style={styles.location}>< Text style={styles.locationName}>{props.locationName}</Text></View>
       {props.locationType !== "Reserve" && renderIcon('pencil', props.editAction)}
-      {renderIcon('trash-can', props.deleteAction)}
+      {props.locationType !== "Reserve" && renderIcon('trash-can', props.deleteAction)}
     </View>
   )
 };
