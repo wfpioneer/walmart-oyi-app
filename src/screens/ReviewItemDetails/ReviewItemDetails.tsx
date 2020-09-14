@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -41,6 +42,7 @@ const ReviewItemDetails = () => {
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
 
   useEffect(() => {
+    dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
     dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
   }, []);
 
@@ -119,6 +121,15 @@ const ReviewItemDetails = () => {
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
         </TouchableOpacity>
+      </View>
+    );
+  }
+
+  if (_.get(result, 'status') === 204) {
+    return (
+      <View style={styles.activityIndicator}>
+        <MaterialIcon name="info" size={40} color={COLOR.DISABLED_BLUE} />
+        <Text style={styles.errorText}>{strings('ITEM.ITEM_NOT_FOUND')}</Text>
       </View>
     );
   }
