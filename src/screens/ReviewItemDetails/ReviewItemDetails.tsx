@@ -33,7 +33,7 @@ const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
-  const { userId, siteId, countryCode } = useTypedSelector(state => state.User);
+  const { userId } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -161,7 +161,6 @@ const ReviewItemDetails = () => {
 
   const handleAddToPicklist = () => {
     dispatch(addToPicklist({
-      headers: { clubNumber: siteId, countryCode },
       itemNumber: itemDetails.itemNbr
     }));
   };
