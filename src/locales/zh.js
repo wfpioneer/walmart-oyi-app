@@ -24,6 +24,7 @@ export default {
     ALL: '所有',
     GET_STARTED: '开始',
     ENTER_UPC_ITEM_NBR: '输入UPC或 商品号',
+    INPUT_LOC: 'Input Location Label',
     CHANGE: '更改',
     SEE_ALL: '查看全部',
     ADD: '增加',
