@@ -40,6 +40,7 @@ export default {
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
+    WELCOME: 'Welcome',
     HOME: 'Home',
     STYLE_GUIDE: 'Style Guide',
     CHANGE_LANGUAGE: 'Change Language'
@@ -122,7 +123,9 @@ export default {
     ITEMS: 'items',
     ALL: 'All',
     REFINE: 'Refine',
-    CLEAR: 'Clear'
+    CLEAR: 'Clear',
+    TODO: 'Todo',
+    COMPLETED: 'Completed'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',

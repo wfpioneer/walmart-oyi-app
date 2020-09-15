@@ -34,11 +34,16 @@ export default {
     WEEK: 'Semanal',
     TOTAL: 'Total',
     DEFAULT: 'Default',
-    CLUB: 'Club'
+    CLUB: 'Club',
+    SUBMIT: 'Enviar',
+    RETRY: 'Rever'
   },
   HOME: {
-    HOME: 'Home',
-    STYLE_GUIDE: 'Guía de estilo'
+    OWN_YOUR_INVENTORY: 'Sea dueño de su inventario',
+    WELCOME: 'Bienvenidos',
+    HOME: 'Casa',
+    STYLE_GUIDE: 'Guía de estilo',
+    CHANGE_LANGUAGE: 'Cambiar idioma'
   },
   EXCEPTION: {
     PO: 'Anulación de precio',
@@ -69,7 +74,16 @@ export default {
     RESERVE: 'Bodega',
     SALES_METRICS: 'Ventas',
     AVG_SALES: 'Ventas Promedio',
-    OH_UPDATE_ERROR: 'Por favor ingresa un número entre %{min} y %{max}'
+    OH_UPDATE_ERROR: 'Por favor ingresa un número entre %{min} y %{max}',
+    API_ERROR: 'Hubo un error al extraer los detalles del artículo. Inténtalo de nuevo.',
+    SCAN_FOR_NO_ACTION: 'Escanear en busca de acción',
+    USE_SCANNER_SCAN_FOR_NO_ACTION: 'Utilice el escáner de código de barras para escanear sin realizar ninguna acción',
+    SCAN_DOESNT_MATCH: 'El escaneo no coincide',
+    SCAN_DOESNT_MATCH_DETAILS: 'El elemento escaneado no coincide con el upc del elemento actual',
+    NO_SIGN_PRINTED: 'Ningún cartel impreso',
+    NO_SIGN_PRINTED_DETAILS: 'Artículo no completado porque nunca imprimiste un nuevo cartel',
+    NO_FLOOR_LOCATION: 'Sin ubicación en el piso',
+    NO_FLOOR_LOCATION_DETAILS: 'El artículo no se completó porque nunca agregó una ubicación en el piso'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -89,7 +103,12 @@ export default {
     Small: 'Chico',
     Wine: 'Vino',
     Medium: 'Mediano',
-    Large: 'Grande'
+    Large: 'Grande',
+    PRINTER_LIST: 'Lista de impresoras',
+    CHANGE_PRINTER: 'Cambiar impresora',
+    MAC_ADDRESS: 'Ingrese o escanee la dirección MAC',
+    MAC_ADDRESS_ERROR: 'La dirección MAC suele ser de 12 números',
+    PORTABLE_PRINTER: 'Impresora portátil'
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -104,7 +123,9 @@ export default {
     ITEMS: 'Artículos',
     ALL: 'Todo',
     REFINE: 'Refinar',
-    CLEAR: 'Limpiar'
+    CLEAR: 'Limpiar',
+    TODO: 'Que hacer',
+    COMPLETED: 'Terminado'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',
