@@ -24,6 +24,7 @@ export default {
     ALL: 'All',
     GET_STARTED: 'Get Started',
     ENTER_UPC_ITEM_NBR: 'Enter UPC or Item Number',
+    INPUT_LOC: 'Input Location Label',
     CHANGE: 'Change',
     SEE_ALL: 'See all',
     ADD: 'Add',
@@ -40,6 +41,7 @@ export default {
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
+    WELCOME: 'Welcome',
     HOME: 'Home',
     STYLE_GUIDE: 'Style Guide',
     CHANGE_LANGUAGE: 'Change Language'
@@ -66,6 +68,8 @@ export default {
     LOCATION: 'Location',
     TO_PICKLIST: ' to picklist',
     RESERVE_NEEDED: 'Reserve location needed to add to picklist',
+    ADDED_TO_PICKLIST: 'Item added to picklist',
+    ADDED_TO_PICKLIST_ERROR: 'Picklist submission unsuccessful. Please try again.',
     FLOOR: 'Floor',
     RESERVE: 'Reserve',
     SALES_METRICS: 'Sales metrics',
@@ -121,7 +125,9 @@ export default {
     ITEMS: 'items',
     ALL: 'All',
     REFINE: 'Refine',
-    CLEAR: 'Clear'
+    CLEAR: 'Clear',
+    TODO: 'Todo',
+    COMPLETED: 'Completed'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',

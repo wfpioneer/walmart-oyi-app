@@ -34,12 +34,16 @@ export default {
     WEEK: '周',
     TOTAL: '总计',
     DEFAULT: '默认',
-    CLUB: 'Club'
+    CLUB: '俱乐部',
+    SUBMIT: '递交',
+    RETRY: '重试'
   },
   HOME: {
-    OWN_YOUR_INVENTORY: 'Own Your Inventory',
+    OWN_YOUR_INVENTORY: '拥有您的库存',
     HOME: '主页',
-    STYLE_GUIDE: '页面风格'
+    WELCOME: '欢迎',
+    STYLE_GUIDE: '页面风格',
+    CHANGE_LANGUAGE: '改变语言'
   },
   EXCEPTION: {
     PO: '覆盖原价格',
@@ -63,13 +67,24 @@ export default {
     LOCATION: '位置',
     TO_PICKLIST: '添加到补货清单',
     RESERVE_NEEDED: '高货架位置需要添加到补货清单',
+    ADDED_TO_PICKLIST: '项目已添加到选择列表',
+    ADDED_TO_PICKLIST_ERROR: '选择列表提交失败。 请再试一遍。',
     ITEM_NOT_FOUND: '找不到扫描的项目。',
     FLOOR: '楼面',
     RESERVE: '高货架',
     SALES_METRICS: '销售',
     AVG_SALES: '平均销售',
     OH_UPDATE_ERROR: '输入数字(%{min}-%{max})',
-    OH_UPDATE_API_ERROR: '更新数量时出错。 请再试一遍。'
+    OH_UPDATE_API_ERROR: '更新数量时出错。 请再试一遍。',
+    API_ERROR: '提取商品详细信息时出错。 请再试一遍。',
+    SCAN_FOR_NO_ACTION: '扫描无动作',
+    USE_SCANNER_SCAN_FOR_NO_ACTION: '使用条形码扫描仪进行任何扫描',
+    SCAN_DOESNT_MATCH: '扫描不匹配',
+    SCAN_DOESNT_MATCH_DETAILS: '扫描的项目与当前项目的upc不匹配',
+    NO_SIGN_PRINTED: '没有印制标志',
+    NO_SIGN_PRINTED_DETAILS: '项目未完成，因为您从未打印过新标志',
+    NO_FLOOR_LOCATION: '没有楼层位置',
+    NO_FLOOR_LOCATION_DETAILS: '项目未完成，因为您从未添加楼层位置'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
@@ -89,7 +104,12 @@ export default {
     Small: '小标签',
     Wine: '红酒价签',
     Medium: '中标签',
-    Large: '大标签'
+    Large: '大标签',
+    PRINTER_LIST: '打印机清单',
+    CHANGE_PRINTER: '更换打印机',
+    MAC_ADDRESS: '输入或扫描MAC地址',
+    MAC_ADDRESS_ERROR: 'MAC地址通常是12个数字',
+    PORTABLE_PRINTER: '便携式打印机'
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -104,7 +124,9 @@ export default {
     ITEMS: '多个商品',
     ALL: '全部',
     REFINE: '更新',
-    CLEAR: '清除'
+    CLEAR: '清除',
+    TODO: '去做',
+    COMPLETED: '已完成'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',
