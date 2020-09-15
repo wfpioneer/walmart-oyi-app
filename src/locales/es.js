@@ -24,6 +24,7 @@ export default {
     ALL: 'Todo',
     GET_STARTED: 'Empezar',
     ENTER_UPC_ITEM_NBR: 'Ingresa el UPC o Número de Artículo',
+    INPUT_LOC: 'Input Location Label',
     CHANGE: 'Cambiar',
     SEE_ALL: 'Ver todo',
     ADD: 'Agregar',
