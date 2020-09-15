@@ -36,10 +36,12 @@ export default {
     TOTAL: 'Total',
     DEFAULT: 'Default',
     CLUB: 'Club',
-    SUBMIT: 'Submit'
+    SUBMIT: 'Submit',
+    RETRY: 'Retry'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
+    WELCOME: 'Welcome',
     HOME: 'Home',
     STYLE_GUIDE: 'Style Guide',
     CHANGE_LANGUAGE: 'Change Language'
@@ -66,11 +68,15 @@ export default {
     LOCATION: 'Location',
     TO_PICKLIST: ' to picklist',
     RESERVE_NEEDED: 'Reserve location needed to add to picklist',
+    ADDED_TO_PICKLIST: 'Item added to picklist',
+    ADDED_TO_PICKLIST_ERROR: 'Picklist submission unsuccessful. Please try again.',
     FLOOR: 'Floor',
     RESERVE: 'Reserve',
     SALES_METRICS: 'Sales metrics',
     AVG_SALES: 'average sales',
     OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}',
+    API_ERROR: 'There was an error pulling the item details. Please try again.',
+    ITEM_NOT_FOUND: 'The scanned item was not found.',
     SCAN_FOR_NO_ACTION: 'Scan for no action',
     USE_SCANNER_SCAN_FOR_NO_ACTION: 'Use the barcode scanner to scan for no action',
     SCAN_DOESNT_MATCH: 'Scan doesn\'t match',
@@ -118,7 +124,9 @@ export default {
     ITEMS: 'items',
     ALL: 'All',
     REFINE: 'Refine',
-    CLEAR: 'Clear'
+    CLEAR: 'Clear',
+    TODO: 'Todo',
+    COMPLETED: 'Completed'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',

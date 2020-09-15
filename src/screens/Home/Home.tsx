@@ -10,6 +10,7 @@ import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import WorklistCard from '../../components/worklistcard/WorklistCard';
 import GoalCircle from '../../components/goalcircle/GoalCircle';
+import { strings } from '../../locales';
 
 const mapStateToProps = (state: any) => ({
   userName: state.User.additional.displayName,
@@ -67,15 +68,27 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps> {
         {this.props.isManualScanEnabled && <ManualScanComponent />}
         <ScrollView contentContainerStyle={styles.container}>
           <Text>
-            { `Welcome ${this.props.userName}` }
+            { `${strings('HOME.WELCOME')} ${this.props.userName}` }
           </Text>
           <View style={styles.horizontalContainer}>
             <GoalCircle goalTitle="Items" completionPercentage={65} active={true} frequency="Daily" />
             <GoalCircle goalTitle="Pallets" completionPercentage={95} active={false} frequency="Daily" />
             <GoalCircle goalTitle="Audits" completionPercentage={30} active={false} frequency="Weekly" />
           </View>
-          <WorklistCard goalTitle="Sample" goal={25} complete={23} completionPercentage={(23 / 25) * 100} completionGoal={98} />
-          <WorklistCard goalTitle="Second Sample" goal={10} complete={3} completionPercentage={(3 / 10) * 100} completionGoal={30} />
+          <WorklistCard
+            goalTitle="Sample"
+            goal={25}
+            complete={23}
+            completionPercentage={(23 / 25) * 100}
+            completionGoal={98}
+          />
+          <WorklistCard
+            goalTitle="Second Sample"
+            goal={10}
+            complete={3}
+            completionPercentage={(3 / 10) * 100}
+            completionGoal={30}
+          />
           <WorklistCard goalTitle="100% Completion Sample" goal={200} complete={200} completionPercentage={100} />
         </ScrollView>
       </SafeAreaView>

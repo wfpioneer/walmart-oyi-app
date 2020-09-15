@@ -1,41 +1,40 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import {View, TouchableOpacity, Animated} from "react-native";
-import { useDispatch } from "react-redux";
-import COLOR from "../themes/Color";
+import { Animated, TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { TodoWorklist } from "../screens/Worklist/TodoWorklist";
-import { CompletedWorklist } from "../screens/Worklist/CompletedWorklist";
+import SideMenu from 'react-native-side-menu';
+import COLOR from '../themes/Color';
+import { TodoWorklist } from '../screens/Worklist/TodoWorklist';
+import { CompletedWorklist } from '../screens/Worklist/CompletedWorklist';
 import styles from './WorklistNavigator.style';
-import { toggleMenu } from "../state/actions/Worklist";
-import {useTypedSelector} from "../state/reducers/RootReducer";
-import SideMenu from "react-native-side-menu";
-import {FilterMenu} from "../screens/Worklist/FilterMenu/FilterMenu";
+import { toggleMenu } from '../state/actions/Worklist';
+import { useTypedSelector } from '../state/reducers/RootReducer';
+import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
+import { strings } from '../locales';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
-const worklistTabs = () => {
-  return (
-    <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: COLOR.WHITE,
-        style: { backgroundColor: COLOR.MAIN_THEME_COLOR },
-        indicatorStyle: { backgroundColor: COLOR.WHITE }
-      }}
-    >
-      <Tab.Screen
-        name="Todo"
-        component={TodoWorklist}
-      />
-      <Tab.Screen
-        name="Completed"
-        component={CompletedWorklist}
-      />
-    </Tab.Navigator>
-  );
-}
+const worklistTabs = () => (
+  <Tab.Navigator
+    tabBarOptions={{
+      activeTintColor: COLOR.WHITE,
+      style: { backgroundColor: COLOR.MAIN_THEME_COLOR },
+      indicatorStyle: { backgroundColor: COLOR.WHITE }
+    }}
+  >
+    <Tab.Screen
+      name={strings('WORKLIST.TODO')}
+      component={TodoWorklist}
+    />
+    <Tab.Screen
+      name={strings('WORKLIST.COMPLETED')}
+      component={CompletedWorklist}
+    />
+  </Tab.Navigator>
+);
 
 const onFilterMenuPress = (dispatch: any, menuOpen: boolean) => {
   if (menuOpen) {
@@ -45,22 +44,20 @@ const onFilterMenuPress = (dispatch: any, menuOpen: boolean) => {
   }
 };
 
-const renderHeaderRight = (dispatch: any, menuOpen: boolean) => {
-  return (
-    <View style={styles.headerRightView}>
-      <TouchableOpacity onPress={() => onFilterMenuPress(dispatch, menuOpen)}>
-        <MaterialIcons name='filter-list' size={ 25 } color={COLOR.WHITE} />
-      </TouchableOpacity>
-    </View>
-  )
-}
+const renderHeaderRight = (dispatch: any, menuOpen: boolean) => (
+  <View style={styles.headerRightView}>
+    <TouchableOpacity onPress={() => onFilterMenuPress(dispatch, menuOpen)}>
+      <MaterialIcons name="filter-list" size={25} color={COLOR.WHITE} />
+    </TouchableOpacity>
+  </View>
+);
 
-export const WorklistNavigator  = () => {
+export const WorklistNavigator = () => {
   const dispatch = useDispatch();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
   const menu = (
     <FilterMenu />
-  )
+  );
   return (
     <SideMenu
       menu={menu}
@@ -75,13 +72,13 @@ export const WorklistNavigator  = () => {
     >
       <Stack.Navigator
         headerMode="float"
-        screenOptions={ {
-            headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
-            headerTintColor: COLOR.WHITE
-        } }
+        screenOptions={{
+          headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
+          headerTintColor: COLOR.WHITE
+        }}
       >
         <Stack.Screen
-          name="Work List"
+          name={strings('WORKLIST.WORKLIST')}
           component={worklistTabs}
           options={() => ({
             headerRight: () => renderHeaderRight(dispatch, menuOpen)
@@ -89,5 +86,5 @@ export const WorklistNavigator  = () => {
         />
       </Stack.Navigator>
     </SideMenu>
-  )
-}
+  );
+};

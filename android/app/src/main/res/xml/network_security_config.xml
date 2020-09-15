@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:tools="http://schemas.android.com/tools">
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="user"
+                tools:ignore="AcceptsUserCertificates" />
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+    <domain-config>
+        <domain includeSubdomains="true">walmart.com</domain>
+        <domain includeSubdomains="true">wal-mart.com</domain>
+        <domain includeSubdomains="true">samsclub.com</domain>
+        <domain includeSubdomains="true">samsclubresources.com</domain>
+        <domain-config cleartextTrafficPermitted="true">
+            <domain includeSubdomains="true">localhost</domain>
+            <domain includeSubdomains="true">10.0.2.2</domain>
+            <domain includeSubdomains="true">127.0.0.1</domain>
+            <domain includeSubdomains="true">intl-oyi-item-details-api.dev.walmart.com</domain>
+        </domain-config>
+    </domain-config>
+</network-security-config>

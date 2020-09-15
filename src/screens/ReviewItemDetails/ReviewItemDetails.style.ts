@@ -12,6 +12,19 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center'
   },
+  errorText: {
+    fontSize: 16,
+    textAlign: 'center'
+  },
+  errorButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLOR.RED_300,
+    width: '95%',
+    borderRadius: 4,
+    height: 40,
+    marginVertical: 10
+  },
   safeAreaView: {
     flex: 1
   },
@@ -37,6 +50,16 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: COLOR.MAIN_THEME_COLOR
+  },
+  picklistSuccessText: {
+    color: COLOR.GREEN
+  },
+  picklistErrorView: {
+    alignItems: 'flex-end',
+    justifyContent: 'center'
+  },
+  picklistErrorText: {
+    color: COLOR.RED_500
   }
 });
 
