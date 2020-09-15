@@ -8,6 +8,9 @@ import LocationDetailsCard from '../../components/locationdetailscard/LocationDe
 import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
+import { useDispatch } from "react-redux";
+import { useTypedSelector} from "../../state/reducers/RootReducer";
+import { setCurrentLocation, toggleIsEditing } from "../../state/actions/Location";
 
 
 export interface locationProps {
@@ -19,12 +22,27 @@ const LocationDetails = () => {
   const route = useRoute();
   const locProps: locationProps = route.params ? route.params : {};
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const locationState = useTypedSelector(state => state.Location);
+
+  const handleEditLocation = (loc: Location) => {
+    console.log(loc);
+    dispatch(setCurrentLocation(loc));
+    dispatch(toggleIsEditing());
+    navigation.navigate('SelectLocationType', {editing: true, currentLocation: loc});
+  };
+
+  const handleDeleteLocation = (loc: Location) => {
+    console.log(loc);
+  };
+
   const createLocations = (locationList: [Location]) => {
     return (
       <>
         {locationList.map((loc: Location, index: number) => {
           return (
-            <LocationDetailsCard key={index} locationName={`${loc.zoneName}${loc.aisleName}-${loc.sectionName}`} locationType={loc.type}/>
+            <LocationDetailsCard key={index} locationName={`${loc.zoneName}${loc.aisleName}-${loc.sectionName}`}
+                                 locationType={loc.type} editAction={(e) => handleEditLocation(loc)} deleteAction={(e) => handleDeleteLocation(loc)}/>
           );
         })}
       </>

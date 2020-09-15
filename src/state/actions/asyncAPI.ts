@@ -8,3 +8,6 @@ export const getItemDetails = makeAsyncActionCreators(GET_ITEM_DETAILS);
 
 export const GET_WORKLIST = makeAsyncActionTypes('API/GET_WORKLIST');
 export const getWorklist = makeAsyncActionCreators(GET_WORKLIST);
+
+export const EDIT_LOCATION = makeAsyncActionTypes('API/EDIT_LOCATION');
+export const editLocation = makeAsyncActionCreators(EDIT_LOCATION);

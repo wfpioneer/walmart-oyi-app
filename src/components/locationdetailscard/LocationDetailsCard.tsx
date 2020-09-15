@@ -1,18 +1,19 @@
 import React from "react";
 import styles from "./locationDetailsCard.style";
-import {View, Text, TouchableOpacity} from "react-native";
+import {View, Text, TouchableOpacity, GestureResponderEvent} from "react-native";
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {COLOR} from "../../themes/Color";
+import Location from "../../models/Location";
 
 export interface Props {
   locationName: string,
   locationType: string,
-  editAction?(): void,
-  deleteAction?(): void
+  editAction?(event: GestureResponderEvent): void,
+  deleteAction?(event: GestureResponderEvent): void
 }
 
 function locationDetailsCard(props: Props) {
-  const renderIcon = (name: string, action?: ()=> void) => {
+  const renderIcon = (name: string, action?: (event: GestureResponderEvent)=> void) => {
     return (
       <TouchableOpacity style={styles.icon} onPress={action}>
         <View>
