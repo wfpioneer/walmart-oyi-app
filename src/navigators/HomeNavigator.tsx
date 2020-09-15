@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
 // @ts-ignore
 import WMSSO from 'react-native-wmsso';
-
+import { StackActions } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Home from '../screens/Home/Home';
 import COLOR from '../themes/Color';
@@ -43,7 +43,7 @@ const mapDispatchToProps = {
 
 const Stack = createStackNavigator();
 
-const showSignOutMenu = (props: HomeNavigatorComponentProps, forceUpdateFunc: Function) => {
+const showSignOutMenu = (props: HomeNavigatorComponentProps, forceUpdateFunc: Function, navigation: any) => {
   const options = [
     strings('HOME.CHANGE_LANGUAGE'),
     strings('GENERICS.SIGN_OUT'),
@@ -74,13 +74,13 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, forceUpdateFunc: Fu
         switch (selectedLanguageIndex) {
           case 0:
             setLanguage('en');
-            return forceUpdateFunc();
+            return navigation.dispatch(StackActions.replace('Login'));
           case 1:
             setLanguage('es');
-            return forceUpdateFunc();
+            return navigation.dispatch(StackActions.replace('Login'));
           case 2:
             setLanguage('zh');
-            return forceUpdateFunc();
+            return navigation.dispatch(StackActions.replace('Login'));
           default:
             return null;
         }
@@ -112,8 +112,8 @@ const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: F
   </TouchableOpacity>
 );
 
-const renderHomeMenuButton = (props: HomeNavigatorComponentProps, forceUpdateFunc: Function) => (
-  <TouchableOpacity onPress={() => showSignOutMenu(props, forceUpdateFunc)}>
+const renderHomeMenuButton = (props: HomeNavigatorComponentProps, forceUpdateFunc: Function, navigation: any) => (
+  <TouchableOpacity onPress={() => showSignOutMenu(props, forceUpdateFunc, navigation)}>
     <View style={styles.rightButton}>
       <Image
         style={styles.image}
@@ -139,13 +139,13 @@ const renderStyleGuideMenuButton = (navigation: any, route: any) => (
   </TouchableOpacity>
 );
 
-const renderHomeHeader = (props: HomeNavigatorComponentProps, forceUpdateFunc: Function) => {
+const renderHomeHeader = (props: HomeNavigatorComponentProps, forceUpdateFunc: Function, navigation: any) => {
   const { isManualScanEnabled } = props;
 
   return (
     <View style={styles.headerContainer}>
       {renderHomeScanButton(isManualScanEnabled, props.setManualScan)}
-      {renderHomeMenuButton(props, forceUpdateFunc)}
+      {renderHomeMenuButton(props, forceUpdateFunc, navigation)}
     </View>
   );
 };
@@ -164,15 +164,15 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps) => {
       <Stack.Screen
         name="Home"
         component={Home}
-        options={{
-          headerRight: () => renderHomeHeader(props, forceUpdate),
+        options={({ navigation }) => ({
+          headerRight: () => renderHomeHeader(props, forceUpdate, navigation),
           headerTitle: () => (
             <View>
               <Text style={styles.headerTitle}>{strings('HOME.OWN_YOUR_INVENTORY')}</Text>
               <Text style={styles.headerSubtitle}>{`${strings('GENERICS.CLUB')} ${props.clubNbr}`}</Text>
             </View>
           )
-        }}
+        })}
       />
       <Stack.Screen
         name="Style Guide"
