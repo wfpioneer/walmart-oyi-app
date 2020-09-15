@@ -62,6 +62,8 @@ export default {
     LOCATION: 'Ubicación',
     TO_PICKLIST: 'Add to Droplist',
     RESERVE_NEEDED: 'La ubicación de add to Droplist',
+    ADDED_TO_PICKLIST: 'Elemento agregado a la lista de selección',
+    ADDED_TO_PICKLIST_ERROR: 'El envío de la lista de selección no se realizó correctamente. Inténtalo de nuevo.',
     ITEM_NOT_FOUND: 'No se encontró el elemento escaneado.',
     FLOOR: 'Piso',
     RESERVE: 'Bodega',

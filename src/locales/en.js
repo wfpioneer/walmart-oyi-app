@@ -66,6 +66,8 @@ export default {
     LOCATION: 'Location',
     TO_PICKLIST: ' to picklist',
     RESERVE_NEEDED: 'Reserve location needed to add to picklist',
+    ADDED_TO_PICKLIST: 'Item added to picklist',
+    ADDED_TO_PICKLIST_ERROR: 'Picklist submission unsuccessful. Please try again.',
     FLOOR: 'Floor',
     RESERVE: 'Reserve',
     SALES_METRICS: 'Sales metrics',

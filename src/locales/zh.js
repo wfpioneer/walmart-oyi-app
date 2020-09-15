@@ -63,6 +63,8 @@ export default {
     LOCATION: '位置',
     TO_PICKLIST: '添加到补货清单',
     RESERVE_NEEDED: '高货架位置需要添加到补货清单',
+    ADDED_TO_PICKLIST: '项目已添加到选择列表',
+    ADDED_TO_PICKLIST_ERROR: '选择列表提交失败。 请再试一遍。',
     ITEM_NOT_FOUND: '找不到扫描的项目。',
     FLOOR: '楼面',
     RESERVE: '高货架',

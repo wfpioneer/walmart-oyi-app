@@ -50,6 +50,16 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: COLOR.MAIN_THEME_COLOR
+  },
+  picklistSuccessText: {
+    color: COLOR.GREEN
+  },
+  picklistErrorView: {
+    alignItems: 'flex-end',
+    justifyContent: 'center'
+  },
+  picklistErrorText: {
+    color: COLOR.RED_500
   }
 });
 
