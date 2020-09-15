@@ -6,10 +6,6 @@ export default class UpdateOHQtyService {
     itemNumber: number;
     data: {
       onHandQty: number;
-      salesFloorQty?: number;
-      backroomQty?: number;
-      delta?: boolean;
-      upcNbr?: string;
     };
   }) {
     return Request.enqueue({
