@@ -1,16 +1,27 @@
 import React from 'react';
 import { RadioButton, Text } from 'react-native-paper';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, Modal } from 'react-native';
 import { COLOR } from '../../themes/Color';
 import styles from './SelectLocationType.style';
 import { strings } from '../../locales';
 import Button from '../../components/buttons/Button';
+import EnterLocation from '../../components/enterlocation/EnterLocation';
 
 
 function SelectLocationType() {
   const [type, setType] = React.useState('floor');
+  const [inputLocation, setInputLocation] = React.useState(false);
   return (
     <>
+      <Modal
+        visible={inputLocation}
+        onRequestClose={() => {
+          !inputLocation;
+        }}
+        transparent
+        >
+        <EnterLocation enterLocation={inputLocation} setEnterLocation={setInputLocation} />
+      </Modal>
       <RadioButton.Group onValueChange={value => setType(value)} value={type}>
         <View style={styles.typeListItem}>
           <RadioButton value="floor" status={type === 'floor' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
@@ -38,7 +49,7 @@ function SelectLocationType() {
         </View>
       </RadioButton.Group>
       <View style={styles.container}>
-        <Button title={strings('GENERICS.NEXT')} radius={0} onPress={() => { console.log('Next button pressed.'); }} />
+        <Button title={strings('GENERICS.NEXT')} radius={0} onPress={() => { setInputLocation(true) }} />
       </View>
     </>
   );

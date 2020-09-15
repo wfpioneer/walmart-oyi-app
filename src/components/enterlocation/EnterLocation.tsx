@@ -8,15 +8,16 @@ import COLOR from '../../themes/Color';
 import { strings } from '../../locales'
 import { useDispatch } from 'react-redux';
 
-const EnterLocation = (props:any) => {
+const EnterLocation = (props:{enterLocation:boolean, setEnterLocation:Function}) => {
     const dispatch = useDispatch();
     const [value, onChangeText] = React.useState('');
     const textInputRef: RefObject<TextInput> = createRef();
 
     const onSubmit = (text: string) => {
-        if(text.length > 0) {
+        if(value.length > 3) {
             console.log("This will be a dispatch.")
-        }
+        };
+        props.setEnterLocation(false);
     }
     
     return (
@@ -26,7 +27,7 @@ const EnterLocation = (props:any) => {
                     <IconButton
                         icon={<MaterialCommunityIcon name={'close'} size={16} color={COLOR.GREY_500} />}
                         type={Button.Type.NO_BORDER}
-                        onPress={() => console.log("TODO - close button pressed.")}
+                        onPress={() => props.setEnterLocation(false)}
                     />
                 </View>
                 <View style={styles.scanContainer}>
@@ -37,16 +38,15 @@ const EnterLocation = (props:any) => {
                         onChangeText={(text: string) => onChangeText(text)}
                         selectionColor={COLOR.MAIN_THEME_COLOR}
                         placeholder={strings('GENERICS.INPUT_LOC')}
-                        onSubmitEditing={(event: any) => onSubmit(event.nativeEvent.text)}
-                        keyboardType={props.keyboardType || 'default'}
+                        keyboardType='default'
                     />
                 </View>
                 <Button
                 title={strings('GENERICS.SUBMIT')}
                 type={Button.Type.PRIMARY}
                 style={{width: '100%'}}
-                onPress={console.log("This button will submit the payload.")}
-                disabled={console.log("This will occur if there isn't any content in the location text input.")}
+                onPress={onSubmit}
+                disabled={value.length<4}
                 />
             </View>
         </View>
