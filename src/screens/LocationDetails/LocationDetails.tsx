@@ -13,22 +13,21 @@ import { COLOR } from '../../themes/Color';
 export interface locationProps {
     floorLoc?: [Location];
     resLoc?: [Location];
-  };
+  }
 
-function LocationDetails() {
+const LocationDetails = () => {
   const route = useRoute();
   const locProps: locationProps = route.params ? route.params : {};
   const navigation = useNavigation();
-  function createLocations(locationList: [Location]) {
+  const createLocations = (locationList: [Location]) => {
     return (
       <>
-        {locationList.map(cardMaker)}
+        {locationList.map((loc: Location, index: number) => {
+          return (
+            <LocationDetailsCard key={index} locationName={`${loc.zoneName}${loc.aisleName}-${loc.sectionName}`} locationType={loc.type}/>
+          );
+        })}
       </>
-    );
-  };
-  function cardMaker(loc: Location) {
-    return (
-      <LocationDetailsCard locationName={loc.name} locationType={loc.type} />
     );
   };
   const addNewLocationNav = () => {
