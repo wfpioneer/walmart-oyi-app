@@ -11,6 +11,13 @@ import EnterLocation from '../../components/enterlocation/EnterLocation';
 function SelectLocationType() {
   const [type, setType] = React.useState('floor');
   const [inputLocation, setInputLocation] = React.useState(false);
+  const [loc, setLoc] = React.useState('');
+  const onSubmit = () => {
+    if(loc.length > 3) {
+        console.log("This will be a dispatch.")
+    };
+    setInputLocation(false);
+}
   return (
     <>
       <Modal
@@ -20,7 +27,7 @@ function SelectLocationType() {
         }}
         transparent
         >
-        <EnterLocation enterLocation={inputLocation} setEnterLocation={setInputLocation} />
+        <EnterLocation enterLocation={inputLocation} setEnterLocation={setInputLocation} loc={loc} setLoc={setLoc} onSubmit={onSubmit}/>
       </Modal>
       <RadioButton.Group onValueChange={value => setType(value)} value={type}>
         <View style={styles.typeListItem}>
