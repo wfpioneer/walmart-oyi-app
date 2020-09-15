@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -42,6 +43,7 @@ const ReviewItemDetails = () => {
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
 
   useEffect(() => {
+    dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
     dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
     dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
   }, []);
@@ -121,6 +123,15 @@ const ReviewItemDetails = () => {
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
         </TouchableOpacity>
+      </View>
+    );
+  }
+
+  if (_.get(result, 'status') === 204) {
+    return (
+      <View style={styles.activityIndicator}>
+        <MaterialIcon name="info" size={40} color={COLOR.DISABLED_BLUE} />
+        <Text style={styles.errorText}>{strings('ITEM.ITEM_NOT_FOUND')}</Text>
       </View>
     );
   }
@@ -229,7 +240,7 @@ const ReviewItemDetails = () => {
         <View style={styles.locationDetailsContainer}>
           <Text>{strings('ITEM.FLOOR')}</Text>
           {floor && floor.length >= 1
-            ? <Text>{floor[0].name}</Text>
+            ? <Text>{`${floor[0].zoneName}${floor[0].aisleName}-${floor[0].sectionName}`}</Text>
             : (
               <Button
                 type={3}
@@ -246,7 +257,7 @@ const ReviewItemDetails = () => {
         <View style={styles.locationDetailsContainer}>
           <Text>{strings('ITEM.RESERVE')}</Text>
           {reserve && reserve.length >= 1
-            ? <Text>{reserve[0].name}</Text>
+            ? <Text>{`${reserve[0].zoneName}${reserve[0].aisleName}-${reserve[0].sectionName}`}</Text>
             : (
               <Button
                 type={3}
