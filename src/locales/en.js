@@ -41,12 +41,10 @@ export default {
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
-    WORKLIST_API_ERROR: 'There was an error retrieving the worklist summary.\nPlease try again.',
     WELCOME: 'Welcome',
     HOME: 'Home',
     STYLE_GUIDE: 'Style Guide',
-    CHANGE_LANGUAGE: 'Change Language',
-    ITEMS: 'Items'
+    CHANGE_LANGUAGE: 'Change Language'
   },
   EXCEPTION: {
     PO: 'Price Override',
@@ -55,8 +53,7 @@ export default {
     NO_SALES: 'No Sales',
     NEGATIVE_ON_HANDS: 'Negative on-hands',
     CANCELLED: 'Cancelled',
-    NSFL: 'No sales floor location',
-    UNKNOWN: 'Unknown'
+    NSFL: 'No sales floor location'
   },
   ITEM: {
     TITLE: 'Review item details',
