@@ -15,13 +15,27 @@ export default StyleSheet.create({
     width: '80%'
   },
   safeAreaView: {
-    flex: 1
+    flex: 1,
+    backgroundColor: COLOR.WHITE
   },
   horizontalContainer: {
-    width: '100%',
     flexDirection: 'row',
     backgroundColor: COLOR.WHITE,
     padding: 10,
+    alignItems: 'center',
     justifyContent: 'space-between'
+  },
+  errorText: {
+    paddingVertical: 10,
+    width: '95%',
+    textAlign: 'center'
+  },
+  errorRetryButton: {
+    backgroundColor: COLOR.RED_500,
+    borderRadius: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    width: '95%'
   }
 });
