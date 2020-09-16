@@ -10,7 +10,7 @@ export default interface ItemDetails {
   price: number;
   exceptionType?: string; // This is enumerated
   onHandsQty: number;
-  isOnHandsPending: boolean;
+  pendingOnHandsQty: number;
   replenishment: {
     onOrder: number;
   };
@@ -25,14 +25,14 @@ export default interface ItemDetails {
     daily: [
       {
         day: string;
-        value: number
+        value: number;
       }
     ];
     weeklyAvgSales: number;
     weekly: [
       {
         week: number;
-        value: number
+        value: number;
       }
     ];
   };
