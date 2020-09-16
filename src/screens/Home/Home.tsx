@@ -105,6 +105,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     const renderGoalCircles = () => data.map((goal: any, index: number) => (
       <GoalCircle
+        key={goal.worklistGoal}
         goalTitle={strings('HOME.ITEMS')}
         completionPercentage={goal.worklistGoalPct}
         active={index === this.state.activeGoal}
@@ -140,6 +141,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
         return (
           <WorklistCard
+            key={worklist.worklistType}
             goalTitle={worklistType}
             goal={worklist.totalItems}
             complete={worklist.completedItems}
