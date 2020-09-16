@@ -14,3 +14,6 @@ export const updateOHQty = makeAsyncActionCreators(UPDATE_OH_QTY);
 
 export const ADD_TO_PICKLIST = makeAsyncActionTypes('API/ADD_TO_PICKLIST');
 export const addToPicklist = makeAsyncActionCreators(ADD_TO_PICKLIST);
+
+export const GET_WORKLIST_SUMMARY = makeAsyncActionTypes('API/GET_WORKLIST_SUMMARY');
+export const getWorklistSummary = makeAsyncActionCreators(GET_WORKLIST_SUMMARY);
