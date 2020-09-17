@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import FAB from 'react-native-fab';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './LocationDetails.style';
@@ -8,25 +8,20 @@ import LocationDetailsCard from '../../components/locationdetailscard/LocationDe
 import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
-import { useDispatch } from "react-redux";
 import { useTypedSelector} from "../../state/reducers/RootReducer";
 import {ScrollView} from "react-native";
-import {get} from 'lodash';
-
 
 const LocationDetails = () => {
-  const route = useRoute();
   const navigation = useNavigation();
-  const dispatch = useDispatch();
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
   const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
+
   const handleEditLocation = (loc: Location) => {
-    console.log(loc);
     navigation.navigate('EditLocation', {currentLocation: loc});
   };
 
   const handleDeleteLocation = (loc: Location) => {
-    console.log(loc);
+    //TODO add delete functionality
   };
 
   const createLocations = (locationList: [Location]) => {
@@ -34,16 +29,18 @@ const LocationDetails = () => {
       <>
         {locationList.map((loc: Location, index: number) => {
           return (
-            <LocationDetailsCard key={index} locationName={`${loc.zoneName}${loc.aisleName}-${loc.sectionName}`}
+            <LocationDetailsCard key={index} locationName={loc.locationName}
                                  locationType={loc.type} editAction={(e) => handleEditLocation(loc)} deleteAction={(e) => handleDeleteLocation(loc)}/>
           );
         })}
       </>
     );
   };
+
   const addNewLocationNav = () => {
     navigation.navigate('AddLocation');
   };
+
   return (
     <>
       <ScrollView>

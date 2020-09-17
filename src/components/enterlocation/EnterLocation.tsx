@@ -6,10 +6,8 @@ import IconButton from '../buttons/IconButton';
 import Button from '../buttons/Button';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales'
-import { useDispatch } from 'react-redux';
 
 const EnterLocation = (props:{enterLocation:boolean, setEnterLocation:Function, loc:string, setLoc:Function, onSubmit:Function}) => {
-    const dispatch = useDispatch();
     const [value, setValue] = useState('');
 
     const textInputRef: RefObject<TextInput> = useRef(null);
@@ -36,15 +34,15 @@ const EnterLocation = (props:{enterLocation:boolean, setEnterLocation:Function, 
                     />
                 </View>
                 <Button
-                title={strings('GENERICS.SUBMIT')}
+                title={strings('GENERICS.OK')}
                 type={Button.Type.PRIMARY}
                 style={{width: '100%'}}
-                onPress={() => props.onSubmit(value)}
+                onPress={() => props.onSubmit(value.toUpperCase())}
                 disabled={value.length<4}
                 />
             </View>
         </View>
     )
-}
+};
 
 export default EnterLocation;

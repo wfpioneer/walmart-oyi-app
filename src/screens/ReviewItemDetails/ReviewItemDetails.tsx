@@ -79,7 +79,7 @@ const ReviewItemDetails = () => {
 
   const itemDetails: ItemDetails = (result && result.data);// || getMockItemDetails(scannedEvent.value);
 
-  const locationCount = _.isFinite(_.get(itemDetails, 'location.count')) ? itemDetails.location.count : 0;
+  const locationCount = floorLocations.length + reserveLocations.length;
   const updatedSalesTS = _.get(itemDetails, 'sales.lastUpdateTs')
     ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
     : undefined;
@@ -243,9 +243,6 @@ const ReviewItemDetails = () => {
   };
 
   const renderLocationComponent = () => {
-
-    console.log(floorLocations);
-    console.log(reserveLocations);
     return (
       <View style={{ paddingHorizontal: 8 }}>
         <View style={styles.locationDetailsContainer}>

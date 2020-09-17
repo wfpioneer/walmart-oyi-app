@@ -2,17 +2,6 @@ import { StyleSheet } from 'react-native';
 import {COLOR} from "../../themes/Color";
 
 const styles = StyleSheet.create({
-  instructionLabel: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    padding: 5
-  },
-  instructionCompletedLabel: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    padding: 5,
-    color: 'green'
-  },
   typeListItem: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -25,11 +14,6 @@ const styles = StyleSheet.create({
   },
   labelBox: {
     alignSelf: 'center'
-  },
-  manualcontainer: {
-    width: '50%',
-    flex: 1,
-    padding: 10
   },
   container: {
     width: '100%',
@@ -49,13 +33,41 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   locationText: {
+    fontWeight: 'bold',
+    fontSize: 16,
     textAlign: 'center'
   },
   locationContainer: {
     width: '100%',
     alignContent: 'center',
     justifyContent: 'center',
+    margin: 10,
     padding: 10
+  },
+  errorContainer: {
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    paddingLeft: 10
+  },
+  manualButtonContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    alignContent: 'center',
+    justifyContent: 'center'
+  },
+  manualButton: {
+    width: '50%',
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  errorText: {
+    color: COLOR.RED,
+    fontSize: 16
   }
 });
 
