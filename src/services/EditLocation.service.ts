@@ -1,6 +1,6 @@
 import Request from './Request';
 
-export default class GetItemDetailsService {
+export default class EditLocationService {
   public static editLocation(payload: {headers: object; upc: string, sectionId: string, newSectionId: string,
     locationType: string, prevLocationType: string}) {
     return Request.enqueue({

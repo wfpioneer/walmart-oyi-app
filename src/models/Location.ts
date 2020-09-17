@@ -1,9 +1,11 @@
 export default interface Location {
-  zoneId: string;
-  aisleId: string;
-  sectionId: string;
+  zoneId: number;
+  aisleId: number;
+  sectionId: number;
   zoneName: string;
   aisleName: string;
   sectionName: string;
+  locationName: string;
   type: string;
+  typeNbr: number;
 }

@@ -12,5 +12,8 @@ export const getWorklist = makeAsyncActionCreators(GET_WORKLIST);
 export const EDIT_LOCATION = makeAsyncActionTypes('API/EDIT_LOCATION');
 export const editLocation = makeAsyncActionCreators(EDIT_LOCATION);
 
+export const ADD_LOCATION = makeAsyncActionTypes('API/ADD_LOCATION');
+export const addLocation = makeAsyncActionCreators(ADD_LOCATION);
+
 export const ADD_TO_PICKLIST = makeAsyncActionTypes('API/ADD_TO_PICKLIST');
 export const addToPicklist = makeAsyncActionCreators(ADD_TO_PICKLIST);

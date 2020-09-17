@@ -10,26 +10,19 @@ import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
 import { useDispatch } from "react-redux";
 import { useTypedSelector} from "../../state/reducers/RootReducer";
-import { setCurrentLocation, toggleIsEditing } from "../../state/actions/Location";
+import {ScrollView} from "react-native";
+import {get} from 'lodash';
 
-
-export interface locationProps {
-    floorLoc?: [Location];
-    resLoc?: [Location];
-  }
 
 const LocationDetails = () => {
   const route = useRoute();
-  const locProps: locationProps = route.params ? route.params : {};
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const locationState = useTypedSelector(state => state.Location);
-
+  const floorLocations = useTypedSelector(state => state.Location.floorLocations);
+  const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
   const handleEditLocation = (loc: Location) => {
     console.log(loc);
-    dispatch(setCurrentLocation(loc));
-    dispatch(toggleIsEditing());
-    navigation.navigate('SelectLocationType', {editing: true, currentLocation: loc});
+    navigation.navigate('EditLocation', {currentLocation: loc});
   };
 
   const handleDeleteLocation = (loc: Location) => {
@@ -49,34 +42,33 @@ const LocationDetails = () => {
     );
   };
   const addNewLocationNav = () => {
-    navigation.navigate('SelectLocationType');
+    navigation.navigate('AddLocation');
   };
   return (
     <>
-      {locProps.floorLoc ? (
-        <View style={styles.sectionLabel}>
+      <ScrollView>
+
+        {floorLocations ? <View style={styles.sectionLabel}>
           <Text style={styles.labelText}>
             {strings('LOCATION.FLOOR')}
             {' '}
             (
-            {locProps.floorLoc.length}
+            {floorLocations.length}
             )
           </Text>
-        </View>
-      ) : <View />}
-      {locProps.floorLoc ? createLocations(locProps.floorLoc) : <View />}
-      {locProps.resLoc ? (
-        <View style={styles.sectionLabel}>
+        </View> : <View />}
+        {floorLocations ? createLocations(floorLocations) : <View />}
+        {reserveLocations ? <View style={styles.sectionLabel}>
           <Text style={styles.labelText}>
             {strings('LOCATION.RESERVE')}
             {' '}
             (
-            {locProps.resLoc.length}
+            {reserveLocations.length}
             )
           </Text>
-        </View>
-      ) : <View />}
-      {locProps.resLoc ? createLocations(locProps.resLoc) : <View />}
+        </View> : <View />}
+      {reserveLocations ? createLocations(reserveLocations) : <View />}
+      </ScrollView>
       <View style={styles.container}>
         <View style={styles.button}>
           <FAB buttonColor={COLOR.MAIN_THEME_COLOR} onClickAction={addNewLocationNav} visible={true} iconTextComponent={<MaterialCommunityIcon name="plus" size={40} color={COLOR.WHITE} />} />

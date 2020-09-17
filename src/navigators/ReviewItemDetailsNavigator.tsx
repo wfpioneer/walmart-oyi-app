@@ -101,10 +101,20 @@ const ReviewItemDetailsNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="SelectLocationType"
+        name="EditLocation"
         component={SelectLocationType}
         options={{
-          headerTitle: strings('SELECTLOCATIONTYPE.TITLE'),
+          headerTitle: 'Edit Location',
+          headerTitleAlign: 'center',
+          headerTitleStyle: { fontSize: 18 },
+          headerBackTitleVisible: false
+        }}
+      />
+      <Stack.Screen
+        name="AddLocation"
+        component={SelectLocationType}
+        options={{
+          headerTitle: 'Add New Location',
           headerTitleAlign: 'center',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false

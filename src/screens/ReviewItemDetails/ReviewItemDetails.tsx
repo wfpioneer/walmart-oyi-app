@@ -27,6 +27,7 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
+import {setFloorLocations, setItemLocDetails, setReserveLocations} from "../../state/actions/Location";
 import { showInfoModal } from '../../state/actions/Modal';
 
 const ReviewItemDetails = () => {
@@ -35,6 +36,7 @@ const ReviewItemDetails = () => {
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
   const { userId } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
+  const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const isNavigationFocused = useIsFocused();
@@ -85,6 +87,9 @@ const ReviewItemDetails = () => {
   useEffect(() => {
     if (itemDetails) {
       dispatch(setupScreen(itemDetails.exceptionType));
+      dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr));
+      if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
+      if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
     }
   }, [itemDetails]);
 
@@ -153,10 +158,7 @@ const ReviewItemDetails = () => {
   };
 
   const handleLocationAction = () => {
-    navigation.navigate({
-      name: 'LocationDetails',
-      params: { floorLoc: itemDetails.location.floor, resLoc: itemDetails.location.reserve }
-    });
+    navigation.navigate('LocationDetails');
   };
 
   const handleAddToPicklist = () => {
@@ -232,14 +234,15 @@ const ReviewItemDetails = () => {
   };
 
   const renderLocationComponent = () => {
-    const { floor, reserve } = itemDetails.location;
 
+    console.log(floorLocations);
+    console.log(reserveLocations);
     return (
       <View style={{ paddingHorizontal: 8 }}>
         <View style={styles.locationDetailsContainer}>
           <Text>{strings('ITEM.FLOOR')}</Text>
-          {floor && floor.length >= 1
-            ? <Text>{`${floor[0].zoneName}${floor[0].aisleName}-${floor[0].sectionName}`}</Text>
+          {floorLocations && floorLocations.length >= 1
+            ? <Text>{floorLocations[0].locationName}</Text>
             : (
               <Button
                 type={3}
@@ -255,8 +258,8 @@ const ReviewItemDetails = () => {
         </View>
         <View style={styles.locationDetailsContainer}>
           <Text>{strings('ITEM.RESERVE')}</Text>
-          {reserve && reserve.length >= 1
-            ? <Text>{`${reserve[0].zoneName}${reserve[0].aisleName}-${reserve[0].sectionName}`}</Text>
+          {reserveLocations && reserveLocations.length >= 1
+            ? <Text>{reserveLocations[0].locationName}</Text>
             : (
               <Button
                 type={3}

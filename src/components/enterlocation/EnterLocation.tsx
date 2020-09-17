@@ -1,4 +1,4 @@
-import React, { RefObject, useRef } from 'react';
+import React, { RefObject, useRef, useState } from 'react';
 import { View, TextInput } from 'react-native';
 import styles from './EnterLocation.style';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -10,6 +10,8 @@ import { useDispatch } from 'react-redux';
 
 const EnterLocation = (props:{enterLocation:boolean, setEnterLocation:Function, loc:string, setLoc:Function, onSubmit:Function}) => {
     const dispatch = useDispatch();
+    const [value, setValue] = useState('');
+
     const textInputRef: RefObject<TextInput> = useRef(null);
     
     return (
@@ -26,8 +28,8 @@ const EnterLocation = (props:{enterLocation:boolean, setEnterLocation:Function, 
                     <TextInput
                         ref={textInputRef}
                         style={styles.textInput}
-                        value={props.loc}
-                        onChangeText={(text: string) => props.setLoc(text)}
+                        value={value}
+                        onChangeText={(text: string) => setValue(text)}
                         selectionColor={COLOR.MAIN_THEME_COLOR}
                         placeholder={strings('GENERICS.INPUT_LOC')}
                         keyboardType='default'
@@ -37,8 +39,8 @@ const EnterLocation = (props:{enterLocation:boolean, setEnterLocation:Function, 
                 title={strings('GENERICS.SUBMIT')}
                 type={Button.Type.PRIMARY}
                 style={{width: '100%'}}
-                onPress={props.onSubmit}
-                disabled={props.loc.length<4}
+                onPress={() => props.onSubmit(value)}
+                disabled={value.length<4}
                 />
             </View>
         </View>

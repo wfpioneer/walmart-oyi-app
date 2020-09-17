@@ -1,24 +1,23 @@
 import Location from '../../models/Location';
 
-export const SET_CURRENT_LOCATION = 'LOCATION/SET_CURRENT_LOCATION';
-export const SET_NEW_LOCATION = 'LOCATION/SET_NEW_LOCATION';
-export const RESET_LOCATION = 'LOCATION/RESET_LOCATION';
-export const TOGGLE_IS_EDITING = 'LOCATION/TOGGLE_IS_EDITING';
+export const SET_FLOOR_LOCATIONS = 'LOCATION/SET_FLOOR_LOCATIONS';
+export const SET_RESERVE_LOCATIONS = 'LOCATION/SET_RESERVE_LOCATIONS';
+export const SET_ITEM_LOC_DETAILS = 'LOCATION/SET_ITEM_LOC_DETAILS';
 
-export const setCurrentLocation = (location: Location) => ({
-  type: SET_CURRENT_LOCATION,
-  payload: location
+export const setItemLocDetails = (itemNbr:number, upcNbr:string) => ({
+  type: SET_ITEM_LOC_DETAILS,
+  payload: {
+    itemNbr: itemNbr,
+    upcNbr: upcNbr
+  }
 });
 
-export const setNewLocation = (location: Location) => ({
-  type: SET_NEW_LOCATION,
-  payload: location
+export const setFloorLocations = (floor:[Location]) => ({
+  type: SET_FLOOR_LOCATIONS,
+  payload: floor
 });
 
-export const resetLocation = () => ({
-  type: RESET_LOCATION
-});
-
-export const toggleIsEditing = () => ({
-  type: TOGGLE_IS_EDITING
+export const setReserveLocations = (reserve:[Location]) => ({
+  type: SET_RESERVE_LOCATIONS,
+  payload: reserve
 });

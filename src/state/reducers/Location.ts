@@ -1,68 +1,48 @@
-import {SET_CURRENT_LOCATION, SET_NEW_LOCATION, RESET_LOCATION, TOGGLE_IS_EDITING} from "../actions/Location";
-import LocationType from "../../models/Location"
+import {SET_FLOOR_LOCATIONS, SET_ITEM_LOC_DETAILS, SET_RESERVE_LOCATIONS} from "../actions/Location";
+import LocationType from "../../models/Location";
 
 interface LocationState {
-  currentLocation: LocationType;
-  newLocation: LocationType;
-  isEditing: boolean;
+  floorLocations: Array<LocationType>;
+  reserveLocations: Array<LocationType>;
+  itemLocDetails: {
+    itemNbr: number | null,
+    upcNbr: string | null,
+  }
 }
 
 const initialState: LocationState = {
-  currentLocation: {
-    zoneId: '',
-    aisleId: '',
-    sectionId: '',
-    zoneName: '',
-    aisleName: '',
-    sectionName:'',
-    type: ''
+  itemLocDetails: {
+    itemNbr: null,
+    upcNbr: null
   },
-  newLocation: {
-    zoneId: '',
-    aisleId: '',
-    sectionId: '',
-    zoneName: '',
-    aisleName: '',
-    sectionName:'',
-    type: ''
-  },
-  isEditing: false
+  floorLocations: [],
+  reserveLocations: [],
+
 };
 
 export const Location = (state = initialState, action: any) => {
+  console.log(action.payload);
   switch (action.type) {
-    case SET_CURRENT_LOCATION:
+    case SET_ITEM_LOC_DETAILS:
       return {
         ...state,
-        currentLocation: {
-          zoneId: action.payload.zoneId,
-          aisleId: action.payload.aisleId,
-          sectionId: action.payload.sectionId,
-          zoneName: action.payload.zoneName,
-          aisleName: action.payload.aisleName,
-          sectionName: action.payload.sectionName,
-          type: action.payload.type
-        }
+        itemLocDetails: {...action.payload}
+      }
+    case SET_FLOOR_LOCATIONS:
+      return {
+        ...state,
+        floorLocations: action.payload.map((loc: LocationType) => ({
+          ...loc,
+          locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`
+        }))
       };
-    case SET_NEW_LOCATION:
+    case SET_RESERVE_LOCATIONS:
       return {
         ...state,
-        newLocation: {
-          zoneId: action.payload.zoneId,
-          aisleId: action.payload.aisleId,
-          sectionId: action.payload.sectionId,
-          zoneName: action.payload.zoneName,
-          aisleName: action.payload.aisleName,
-          sectionName: action.payload.sectionName,
-          type: action.payload.type
-        }
-      };
-    case RESET_LOCATION:
-      return initialState;
-    case TOGGLE_IS_EDITING:
-      return {
-        ...state,
-        isEditing: !state.isEditing
+        reserveLocations: action.payload.map((loc: LocationType) => ({
+          ...loc,
+          locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`
+        }))
       };
     default:
       return state;
