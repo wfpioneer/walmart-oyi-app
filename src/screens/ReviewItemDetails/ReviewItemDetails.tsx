@@ -35,7 +35,7 @@ const ReviewItemDetails = () => {
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
   const { userId } = useTypedSelector(state => state.User);
-  const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
+  const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
   const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -86,7 +86,7 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     if (itemDetails) {
-      dispatch(setupScreen(itemDetails.exceptionType));
+      dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty));
       dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr));
       if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
       if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
@@ -171,22 +171,31 @@ const ReviewItemDetails = () => {
     setIsSalesMetricsGraphView(prevState => !prevState);
   };
 
-  const renderOHQtyComponent = () => (
-    <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Text>{strings('ITEM.ON_HANDS')}</Text>
-        <Text>{itemDetails.onHandsQty}</Text>
-      </View>
-      {itemDetails.isOnHandsPending
-        && (
+  const renderOHQtyComponent = () => {
+    if (!pendingOnHandsQty || pendingOnHandsQty === -999) {
+      return (
+        <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Text>{strings('ITEM.ON_HANDS')}</Text>
+            <Text>{itemDetails.onHandsQty}</Text>
+          </View>
+        </View>
+      );
+    }
+
+    return (
+      <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Text>{strings('ITEM.ON_HANDS')}</Text>
+          <Text>{pendingOnHandsQty}</Text>
+        </View>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
           <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={{ paddingRight: 6 }} />
           <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
         </View>
-        )
-        }
-    </View>
-  );
+      </View>
+    );
+  };
 
   const renderAddPicklistButton = () => {
     const { reserve } = itemDetails.location;
@@ -341,7 +350,7 @@ const ReviewItemDetails = () => {
             <SFTCard
               title={strings('ITEM.QUANTITY')}
               iconName="pallet"
-              topRightBtnTxt={strings('GENERICS.CHANGE')}
+              topRightBtnTxt={itemDetails.pendingOnHandsQty === -999 ? strings('GENERICS.CHANGE') : undefined}
               topRightBtnAction={handleUpdateQty}
             >
               {renderOHQtyComponent()}

@@ -41,10 +41,12 @@ export default {
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
+    WORKLIST_API_ERROR: 'There was an error retrieving the worklist summary.\nPlease try again.',
     WELCOME: 'Welcome',
     HOME: 'Home',
     STYLE_GUIDE: 'Style Guide',
-    CHANGE_LANGUAGE: 'Change Language'
+    CHANGE_LANGUAGE: 'Change Language',
+    ITEMS: 'Items'
   },
   EXCEPTION: {
     PO: 'Price Override',
@@ -53,7 +55,8 @@ export default {
     NO_SALES: 'No Sales',
     NEGATIVE_ON_HANDS: 'Negative on-hands',
     CANCELLED: 'Cancelled',
-    NSFL: 'No sales floor location'
+    NSFL: 'No sales floor location',
+    UNKNOWN: 'Unknown'
   },
   ITEM: {
     TITLE: 'Review item details',
@@ -75,6 +78,7 @@ export default {
     SALES_METRICS: 'Sales metrics',
     AVG_SALES: 'average sales',
     OH_UPDATE_ERROR: 'Please enter a number between %{min} and %{max}',
+    OH_UPDATE_API_ERROR: 'There was an error updating the quantity. Please try again.',
     API_ERROR: 'There was an error pulling the item details. Please try again.',
     ITEM_NOT_FOUND: 'The scanned item was not found.',
     SCAN_FOR_NO_ACTION: 'Scan for no action',
