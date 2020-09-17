@@ -114,7 +114,10 @@ export default {
   LOCATION: {
     TITLE: '所有位置',
     FLOOR: '楼面位置',
-    RESERVE: '高货架位置'
+    RESERVE: '高货架位置',
+    ADD_LOCATION_API_ERROR: 'There was an error adding Location. \nPlease try again',
+    ADD_DUPLICATE_ERROR: 'Location and type combination \nalready exist.',
+    MANUAL_ENTRY_BUTTON: 'Manually key in location'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

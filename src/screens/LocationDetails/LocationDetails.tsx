@@ -30,7 +30,8 @@ const LocationDetails = () => {
         {locationList.map((loc: Location, index: number) => {
           return (
             <LocationDetailsCard key={index} locationName={loc.locationName}
-                                 locationType={loc.type} editAction={(e) => handleEditLocation(loc)} deleteAction={(e) => handleDeleteLocation(loc)}/>
+                                 locationType={loc.type} editAction={(e) => handleEditLocation(loc)}
+                                 deleteAction={(e) => handleDeleteLocation(loc)}/>
           );
         })}
       </>
@@ -68,7 +69,8 @@ const LocationDetails = () => {
       </ScrollView>
       <View style={styles.container}>
         <View style={styles.button}>
-          <FAB buttonColor={COLOR.MAIN_THEME_COLOR} onClickAction={addNewLocationNav} visible={true} iconTextComponent={<MaterialCommunityIcon name="plus" size={40} color={COLOR.WHITE} />} />
+          <FAB buttonColor={COLOR.MAIN_THEME_COLOR} onClickAction={addNewLocationNav} visible={true}
+               iconTextComponent={<MaterialCommunityIcon name="plus" size={40} color={COLOR.WHITE} />} />
         </View>
       </View>
     </>

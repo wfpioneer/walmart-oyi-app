@@ -114,7 +114,10 @@ export default {
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
     FLOOR: 'Ubicación en Piso',
-    RESERVE: 'Ubicaciones en Bodega'
+    RESERVE: 'Ubicaciones en Bodega',
+    ADD_LOCATION_API_ERROR: 'There was an error adding Location. \nPlease try again',
+    ADD_DUPLICATE_ERROR: 'Location and type combination \nalready exist.',
+    MANUAL_ENTRY_BUTTON: 'Manually key in location'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
