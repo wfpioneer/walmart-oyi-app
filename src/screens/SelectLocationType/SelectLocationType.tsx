@@ -118,60 +118,64 @@ const SelectLocationType = () => {
 
   return (
     <>
-      <Modal
-        visible={inputLocation}
-        onRequestClose={() => {
-          setInputLocation(false);
-        }}
-        transparent
+      <View style={styles.mainContainer}>
+        <Modal
+          visible={inputLocation}
+          onRequestClose={() => {
+            setInputLocation(false);
+          }}
+          transparent
         >
-        <EnterLocation enterLocation={inputLocation} setEnterLocation={setInputLocation}
-                       loc={loc} setLoc={setLoc} onSubmit={modelOnSubmit}/>
-      </Modal>
-      <View style={styles.sectionLabel}>
-        <Text style={styles.labelText}>{strings('LOCATION.SELECTION_INSTRUCTION')}</Text>
-      </View>
-      <RadioButton.Group onValueChange={value => setType(value)} value={type}>
-        <View style={styles.typeListItem}>
-          <RadioButton value='8' status={type === '8' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
-          <TouchableOpacity style={styles.labelBox} onPress={() => setType('8')}>
-            <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.FLOOR')}</Text>
-          </TouchableOpacity>
+          <EnterLocation enterLocation={inputLocation} setEnterLocation={setInputLocation}
+                         loc={loc} setLoc={setLoc} onSubmit={modelOnSubmit}/>
+        </Modal>
+        <View style={styles.sectionLabel}>
+          <Text style={styles.labelText}>{strings('LOCATION.SELECTION_INSTRUCTION')}</Text>
         </View>
-        <View style={styles.typeListItem}>
-          <RadioButton value='12' status={type === '12' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
-          <TouchableOpacity style={styles.labelBox} onPress={() => setType('12')}>
-            <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.ENDCAP')}</Text>
-          </TouchableOpacity>
+        <RadioButton.Group onValueChange={value => setType(value)} value={type}>
+          <View style={styles.typeListItem}>
+            <RadioButton value='8' status={type === '8' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR}/>
+            <TouchableOpacity style={styles.labelBox} onPress={() => setType('8')}>
+              <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.FLOOR')}</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.typeListItem}>
+            <RadioButton value='12' status={type === '12' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR}/>
+            <TouchableOpacity style={styles.labelBox} onPress={() => setType('12')}>
+              <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.ENDCAP')}</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.typeListItem}>
+            <RadioButton value='13' status={type === '13' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR}/>
+            <TouchableOpacity style={styles.labelBox} onPress={() => setType('13')}>
+              <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.POD')}</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.typeListItem}>
+            <RadioButton value='11' status={type === '11' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR}/>
+            <TouchableOpacity style={styles.labelBox} onPress={() => setType('11')}>
+              <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.DISPLAY')}</Text>
+            </TouchableOpacity>
+          </View>
+        </RadioButton.Group>
+        <View style={styles.sectionLabel}>
+          <Text style={styles.labelText}>{strings('LOCATION.SCAN_INSTRUCTION')}</Text>
         </View>
-        <View style={styles.typeListItem}>
-          <RadioButton value='13' status={type === '13' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
-          <TouchableOpacity style={styles.labelBox} onPress={() => setType('13')}>
-            <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.POD')}</Text>
-          </TouchableOpacity>
+        <View style={styles.locationContainer}>
+          <Text style={styles.locationText}>{loc}</Text>
         </View>
-        <View style={styles.typeListItem}>
-          <RadioButton value='11' status={type === '11' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
-          <TouchableOpacity style={styles.labelBox} onPress={() => setType('11')}>
-            <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.DISPLAY')}</Text>
-          </TouchableOpacity>
+        <View style={styles.manualButtonContainer}>
+          <Button style={styles.manualButton} type={2} title={strings('LOCATION.MANUAL_ENTRY_BUTTON')}
+                  titleColor={COLOR.MAIN_THEME_COLOR} titleFontSize={12}
+                  titleFontWeight="bold" onPress={() => {
+            setInputLocation(true)
+          }}/>
         </View>
-      </RadioButton.Group>
-      <View style={styles.sectionLabel}>
-        <Text style={styles.labelText}>{strings('LOCATION.SCAN_INSTRUCTION')}</Text>
+        {error.error ? <View style={styles.errorContainer}>
+          <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300}/>
+          <Text style={styles.errorText}>{error.message}</Text>
+        </View> : null}
       </View>
-      <View style={styles.locationContainer}>
-        <Text style={styles.locationText}>{loc}</Text>
-      </View>
-      <View style={styles.manualButtonContainer}>
-        <Button style={styles.manualButton} type={2} title={strings('LOCATION.MANUAL_ENTRY_BUTTON')}
-                titleColor={COLOR.MAIN_THEME_COLOR} titleFontSize={12}
-                titleFontWeight="bold" onPress={() => { setInputLocation(true) }}/>
-      </View>
-      {error.error ? <View style={styles.errorContainer}>
-        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
-        <Text style={styles.errorText}>{error.message}</Text>
-      </View> : null}
       <View style={styles.container}>
         <Button title={strings('GENERICS.SUBMIT')} radius={0} onPress={onSubmit} disabled={validateLocation()}/>
       </View>

@@ -68,6 +68,9 @@ const styles = StyleSheet.create({
   errorText: {
     color: COLOR.RED,
     fontSize: 16
+  },
+  mainContainer: {
+    backgroundColor: COLOR.WHITE
   }
 });
 
