@@ -105,7 +105,7 @@ const ReviewItemDetailsNavigator = () => {
         component={SelectLocationType}
         options={{
           headerTitle: 'Edit Location',
-          headerTitleAlign: 'center',
+          headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false
         }}
@@ -115,7 +115,7 @@ const ReviewItemDetailsNavigator = () => {
         component={SelectLocationType}
         options={{
           headerTitle: 'Add New Location',
-          headerTitleAlign: 'center',
+          headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false
         }}
