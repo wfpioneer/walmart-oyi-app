@@ -117,7 +117,9 @@ export default {
     RESERVE: '高货架位置',
     ADD_LOCATION_API_ERROR: 'There was an error adding Location. \nPlease try again',
     ADD_DUPLICATE_ERROR: 'Location and type combination \nalready exist.',
-    MANUAL_ENTRY_BUTTON: 'Manually key in location'
+    MANUAL_ENTRY_BUTTON: 'Manually key in location',
+    SELECTION_INSTRUCTION: '1. Select a location type.',
+    SCAN_INSTRUCTION: '2. Scan location label.'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

@@ -129,7 +129,7 @@ const SelectLocationType = () => {
                        loc={loc} setLoc={setLoc} onSubmit={modelOnSubmit}/>
       </Modal>
       <View style={styles.sectionLabel}>
-        <Text style={styles.labelText}>1. Select a location type</Text>
+        <Text style={styles.labelText}>{strings('LOCATION.SELECTION_INSTRUCTION')}</Text>
       </View>
       <RadioButton.Group onValueChange={value => setType(value)} value={type}>
         <View style={styles.typeListItem}>
@@ -158,7 +158,7 @@ const SelectLocationType = () => {
         </View>
       </RadioButton.Group>
       <View style={styles.sectionLabel}>
-        <Text style={styles.labelText}>2. Scan location label</Text>
+        <Text style={styles.labelText}>{strings('LOCATION.SCAN_INSTRUCTION')}</Text>
       </View>
       <View style={styles.locationContainer}>
         <Text style={styles.locationText}>{loc}</Text>
