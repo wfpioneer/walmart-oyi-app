@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   container: {
     width: '100%',
-    flex: 1,
+    backgroundColor: COLOR.WHITE,
     justifyContent: 'flex-end',
     padding: 10
   },
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   mainContainer: {
+    flex: 1,
     backgroundColor: COLOR.WHITE
   }
 });
