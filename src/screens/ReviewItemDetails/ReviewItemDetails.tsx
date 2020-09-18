@@ -29,7 +29,6 @@ import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { setFloorLocations, setItemLocDetails, setReserveLocations } from '../../state/actions/Location';
 import { showInfoModal } from '../../state/actions/Modal';
-import { getMockItemDetails } from '../../mockData';
 
 const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
@@ -47,7 +46,7 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-    // dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+    dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
     dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
   }, []);
 
