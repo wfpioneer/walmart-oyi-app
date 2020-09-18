@@ -33,12 +33,15 @@ export const renderWorklistItem = (listItem: ListItemI) => {
       <CategorySeparator categoryName={catgName} categoryNumber={catgNbr || 0} numberOfItems={itemCount} />
     );
   }
-  const { exceptionType, itemName, itemNbr } = listItem.item;
+  const {
+    exceptionType, itemName, itemNbr, upcNbr
+  } = listItem.item;
 
   return (
     <WorklistItem
       exceptionType={exceptionType}
       itemDescription={itemName || ''}
+      upcNbr={upcNbr || ''}
       itemNumber={itemNbr || 0}
     />
   );

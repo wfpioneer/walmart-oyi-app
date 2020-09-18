@@ -36,14 +36,16 @@ export default {
     DEFAULT: '默认',
     CLUB: '俱乐部',
     SUBMIT: '递交',
-    RETRY: '重试'
+    RETRY: '重试',
+    GOAL: '目标'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '拥有您的库存',
     HOME: '主页',
     WELCOME: '欢迎',
     STYLE_GUIDE: '页面风格',
-    CHANGE_LANGUAGE: '改变语言'
+    CHANGE_LANGUAGE: '改变语言',
+    WORKLIST_GOAL_COMPLETE: '%{complete}的%{total}项目'
   },
   EXCEPTION: {
     PO: '覆盖原价格',
