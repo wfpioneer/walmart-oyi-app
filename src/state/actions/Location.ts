@@ -5,29 +5,29 @@ export const SET_RESERVE_LOCATIONS = 'LOCATION/SET_RESERVE_LOCATIONS';
 export const SET_ITEM_LOC_DETAILS = 'LOCATION/SET_ITEM_LOC_DETAILS';
 export const ADD_LOCATION_TO_EXISTING = 'LOCATION/ADD_LOCATION_TO_EXISTING';
 
-export const setItemLocDetails = (itemNbr:number, upcNbr:string) => ({
+export const setItemLocDetails = (itemNbr: number, upcNbr: string) => ({
   type: SET_ITEM_LOC_DETAILS,
   payload: {
-    itemNbr: itemNbr,
-    upcNbr: upcNbr
+    itemNbr,
+    upcNbr
   }
 });
 
-export const setFloorLocations = (floor:[Location]) => ({
+export const setFloorLocations = (floor: [Location]) => ({
   type: SET_FLOOR_LOCATIONS,
   payload: floor
 });
 
-export const setReserveLocations = (reserve:[Location]) => ({
+export const setReserveLocations = (reserve: [Location]) => ({
   type: SET_RESERVE_LOCATIONS,
   payload: reserve
 });
 
 export const addLocationToExisting = (locationName: string, locationTypeNbr: number, locationArea: string) => ({
-  type:ADD_LOCATION_TO_EXISTING,
+  type: ADD_LOCATION_TO_EXISTING,
   payload: {
-    locationName: locationName,
-    locationTypeNbr: locationTypeNbr,
-    locationArea: locationArea
+    locationName,
+    locationTypeNbr,
+    locationArea
   }
 });

@@ -1,8 +1,8 @@
 import Request from './Request';
 
 export default class EditLocationService {
-  public static editLocation(payload: {headers: object; upc: string, sectionId: string, newSectionId: string,
-    locationType: string, prevLocationType: string}) {
+  public static editLocation(payload: {headers: object; upc: string; sectionId: string; newSectionId: string;
+    locationType: string; prevLocationType: string}) {
     return Request.enqueue({
       url: `https://intl-oyi-location-api.dev.walmart.com/item/${payload.upc}/location/${payload.sectionId}`,
       method: 'put',

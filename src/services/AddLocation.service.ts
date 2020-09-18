@@ -7,7 +7,7 @@ export default class AddLocationService {
       method: 'post',
       data: {
         sectionId: payload.sectionId,
-        locationTypeNbr: payload.locationTypeNbr,
+        locationTypeNbr: payload.locationTypeNbr
       },
       timeout: 10000,
       headers: payload.headers

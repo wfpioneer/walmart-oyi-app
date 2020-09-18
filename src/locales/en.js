@@ -119,7 +119,7 @@ export default {
     TITLE: 'All locations',
     FLOOR: 'Floor locations',
     RESERVE: 'Reserve locations',
-    ADD_LOCATION_API_ERROR: 'There was an error adding Location. \nPlease try again',
+    ADD_LOCATION_API_ERROR: 'There was an error adding the location. \nPlease try again.',
     ADD_DUPLICATE_ERROR: 'Location and type combination \nalready exist.',
     MANUAL_ENTRY_BUTTON: 'Manually key in location',
     SELECTION_INSTRUCTION: '1. Select a location type.',

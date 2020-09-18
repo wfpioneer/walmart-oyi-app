@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import {COLOR} from "../../themes/Color";
+import { COLOR } from '../../themes/Color';
 
 const styles = StyleSheet.create({
   typeListItem: {
@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
     width: '100%',
     alignContent: 'center',
     justifyContent: 'center',
-    margin: 10,
-    padding: 10
+    marginTop: 10,
+    marginBottom: 10
   },
   errorContainer: {
     flexDirection: 'row',
@@ -58,10 +58,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   manualButton: {
-    width: '50%',
+    width: '50%'
   },
   activityIndicator: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },

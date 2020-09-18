@@ -27,8 +27,9 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
-import {setFloorLocations, setItemLocDetails, setReserveLocations} from "../../state/actions/Location";
+import { setFloorLocations, setItemLocDetails, setReserveLocations } from '../../state/actions/Location';
 import { showInfoModal } from '../../state/actions/Modal';
+import { getMockItemDetails } from '../../mockData';
 
 const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
@@ -46,7 +47,7 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-    dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+    // dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
     dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
   }, []);
 
@@ -77,7 +78,7 @@ const ReviewItemDetails = () => {
     };
   }, []);
 
-  const itemDetails: ItemDetails = (result && result.data);// || getMockItemDetails(scannedEvent.value);
+  const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
 
   const locationCount = floorLocations.length + reserveLocations.length;
   const updatedSalesTS = _.get(itemDetails, 'sales.lastUpdateTs')
@@ -88,8 +89,10 @@ const ReviewItemDetails = () => {
     if (itemDetails) {
       dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty));
       dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr));
-      if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
-      if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
+      if (itemDetails.location) {
+        if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
+        if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
+      }
     }
   }, [itemDetails]);
 
@@ -242,49 +245,47 @@ const ReviewItemDetails = () => {
     return <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>;
   };
 
-  const renderLocationComponent = () => {
-    return (
-      <View style={{ paddingHorizontal: 8 }}>
-        <View style={styles.locationDetailsContainer}>
-          <Text>{strings('ITEM.FLOOR')}</Text>
-          {floorLocations && floorLocations.length >= 1
-            ? <Text>{floorLocations[0].locationName}</Text>
-            : (
-              <Button
-                type={3}
-                title={strings('GENERICS.ADD')}
-                titleColor={COLOR.MAIN_THEME_COLOR}
-                titleFontSize={12}
-                titleFontWeight="bold"
-                height={28}
-                onPress={handleLocationAction}
-              />
-            )
-          }
-        </View>
-        <View style={styles.locationDetailsContainer}>
-          <Text>{strings('ITEM.RESERVE')}</Text>
-          {reserveLocations && reserveLocations.length >= 1
-            ? <Text>{reserveLocations[0].locationName}</Text>
-            : (
-              <Button
-                type={3}
-                title={strings('GENERICS.ADD')}
-                titleColor={COLOR.MAIN_THEME_COLOR}
-                titleFontSize={12}
-                titleFontWeight="bold"
-                height={28}
-                onPress={handleLocationAction}
-              />
-            )
-          }
-        </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingVertical: 8 }}>
-          { renderAddPicklistButton() }
-        </View>
+  const renderLocationComponent = () => (
+    <View style={{ paddingHorizontal: 8 }}>
+      <View style={styles.locationDetailsContainer}>
+        <Text>{strings('ITEM.FLOOR')}</Text>
+        {floorLocations && floorLocations.length >= 1
+          ? <Text>{floorLocations[0].locationName}</Text>
+          : (
+            <Button
+              type={3}
+              title={strings('GENERICS.ADD')}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight="bold"
+              height={28}
+              onPress={handleLocationAction}
+            />
+          )
+        }
       </View>
-    );
-  };
+      <View style={styles.locationDetailsContainer}>
+        <Text>{strings('ITEM.RESERVE')}</Text>
+        {reserveLocations && reserveLocations.length >= 1
+          ? <Text>{reserveLocations[0].locationName}</Text>
+          : (
+            <Button
+              type={3}
+              title={strings('GENERICS.ADD')}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight="bold"
+              height={28}
+              onPress={handleLocationAction}
+            />
+          )
+        }
+      </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingVertical: 8 }}>
+        {renderAddPicklistButton()}
+      </View>
+    </View>
+  );
 
   const completeAction = () => {
     // TODO: reinstantiate when ios device support is needed

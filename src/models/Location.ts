@@ -8,4 +8,4 @@ export default interface Location {
   locationName: string;
   type: string;
   typeNbr: number;
-}
+};

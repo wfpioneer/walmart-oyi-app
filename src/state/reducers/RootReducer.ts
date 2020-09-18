@@ -7,7 +7,7 @@ import { Global } from './Global';
 import { worklist } from './Worklist';
 import { ItemDetailScreen } from './ItemDetailScreen';
 import { Print } from './Print';
-import { Location} from "./Location";
+import { Location } from './Location';
 
 /**
  * This is the root reducers,this RootReducer combine all sub reducers.git
