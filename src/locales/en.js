@@ -37,7 +37,8 @@ export default {
     DEFAULT: 'Default',
     CLUB: 'Club',
     SUBMIT: 'Submit',
-    RETRY: 'Retry'
+    RETRY: 'Retry',
+    GOAL: 'Goal'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -46,7 +47,8 @@ export default {
     HOME: 'Home',
     STYLE_GUIDE: 'Style Guide',
     CHANGE_LANGUAGE: 'Change Language',
-    ITEMS: 'Items'
+    ITEMS: 'Items',
+    WORKLIST_GOAL_COMPLETE: '%{complete} of %{total} items'
   },
   EXCEPTION: {
     PO: 'Price Override',

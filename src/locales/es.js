@@ -36,14 +36,16 @@ export default {
     DEFAULT: 'Default',
     CLUB: 'Club',
     SUBMIT: 'Enviar',
-    RETRY: 'Rever'
+    RETRY: 'Rever',
+    GOAL: 'Objetivo'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Sea dueño de su inventario',
     WELCOME: 'Bienvenidos',
     HOME: 'Casa',
     STYLE_GUIDE: 'Guía de estilo',
-    CHANGE_LANGUAGE: 'Cambiar idioma'
+    CHANGE_LANGUAGE: 'Cambiar idioma',
+    WORKLIST_GOAL_COMPLETE: '%{complete} de %{total} artículos'
   },
   EXCEPTION: {
     PO: 'Anulación de precio',
