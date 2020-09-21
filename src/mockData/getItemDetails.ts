@@ -9,14 +9,71 @@ export default {
     price: 2000.94,
     exceptionType: 'nsfl',
     onHandsQty: 42,
-    isOnHandsPending: true,
+    pendingOnHandsQty: -999,
     replenishment: {
       onOrder: 48
     },
     location: {
-      floor: [],
-      reserve: [],
-      count: 10
+      floor: [
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: null,
+          type: 'Sales Floor',
+          typeNbr: 8
+        },
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '2',
+          locationName: null,
+          type: 'End Cap',
+          typeNbr: 12
+        },
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '3',
+          locationName: null,
+          type: 'Pod',
+          typeNbr: 13
+        },
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '4',
+          locationName: null,
+          type: 'Display',
+          typeNbr: 11
+        }
+      ],
+      reserve: [
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: null,
+          type: 'Reserve',
+          typeNbr: 7
+        }
+      ],
+      count: 5
     },
     sales: {
       lastUpdateTs: '2020-07-15T08:02:17-05:00',
@@ -80,20 +137,71 @@ export default {
     category: '99 - Store Use',
     price: 2000.94,
     onHandsQty: 42,
-    isOnHandsPending: false,
+    pendingOnHandsQty: -999,
     replenishment: {
       onOrder: 48
     },
     location: {
       floor: [
         {
-          id: '1',
-          type: 'pod',
-          name: 'F15-4'
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: null,
+          type: 'Sales Floor',
+          typeNbr: 8
+        },
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '2',
+          locationName: null,
+          type: 'End Cap',
+          typeNbr: 12
+        },
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '3',
+          locationName: null,
+          type: 'Pod',
+          typeNbr: 13
+        },
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '4',
+          locationName: null,
+          type: 'Display',
+          typeNbr: 11
         }
       ],
-      reserve: [],
-      count: 10
+      reserve: [
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: null,
+          type: 'Reserve',
+          typeNbr: 7
+        }
+      ],
+      count: 5
     },
     sales: {
       lastUpdateTs: '2020-07-15T08:02:17-05:00',
@@ -157,20 +265,71 @@ export default {
     category: '19 - Wine',
     price: 2000.94,
     onHandsQty: 42,
-    isOnHandsPending: false,
+    pendingOnHandsQty: -999,
     replenishment: {
       onOrder: 48
     },
     location: {
       floor: [
         {
-          id: '1',
-          type: 'pod',
-          name: 'F15-4'
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: null,
+          type: 'Sales Floor',
+          typeNbr: 8
+        },
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '2',
+          locationName: null,
+          type: 'End Cap',
+          typeNbr: 12
+        },
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '3',
+          locationName: null,
+          type: 'Pod',
+          typeNbr: 13
+        },
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '4',
+          locationName: null,
+          type: 'Display',
+          typeNbr: 11
         }
       ],
-      reserve: [],
-      count: 10
+      reserve: [
+        {
+          zoneId: null,
+          aisleId: null,
+          sectionId: null,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: null,
+          type: 'Reserve',
+          typeNbr: 7
+        }
+      ],
+      count: 5
     },
     sales: {
       lastUpdateTs: '2020-07-15T08:02:17-05:00',
