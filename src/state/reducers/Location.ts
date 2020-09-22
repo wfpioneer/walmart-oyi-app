@@ -1,15 +1,17 @@
-import _ from 'lodash';
 import {
   ADD_LOCATION_TO_EXISTING,
   SET_FLOOR_LOCATIONS,
   SET_ITEM_LOC_DETAILS,
-  SET_RESERVE_LOCATIONS
+  SET_RESERVE_LOCATIONS,
+  EDIT_EXISTING_LOCATION,
+  IS_UPDATING
 } from '../actions/Location';
 import LocationType from '../../models/Location';
 
 interface LocationState {
   floorLocations: Array<LocationType>;
   reserveLocations: Array<LocationType>;
+  isUpdating: boolean;
   itemLocDetails: {
     itemNbr: number | null;
     upcNbr: string | null;
@@ -17,12 +19,13 @@ interface LocationState {
 }
 
 const initialState: LocationState = {
+  floorLocations: [],
+  reserveLocations: [],
+  isUpdating: false,
   itemLocDetails: {
     itemNbr: null,
     upcNbr: null
-  },
-  floorLocations: [],
-  reserveLocations: []
+  }
 };
 
 export const Location = (state = initialState, action: any) => {
@@ -85,6 +88,51 @@ export const Location = (state = initialState, action: any) => {
       }
       return {
         ...state
+      };
+    case EDIT_EXISTING_LOCATION:
+      if (action.payload.locationArea === 'floor') {
+        const editedLocation = {
+          zoneId: 0,
+          aisleId: 0,
+          sectionId: 0,
+          zoneName: '',
+          aisleName: '',
+          sectionName: '',
+          locationName: action.payload.locationName,
+          type: '',
+          typeNbr: action.payload.locationTypeNbr
+        };
+        state.floorLocations.splice(action.payload.locIndex, 1, editedLocation);
+        return {
+          ...state,
+          floorLocations: state.floorLocations
+        }
+      }
+      if (action.payload.locationArea === 'reserve') {
+        const editedLocation = {
+          zoneId: 0,
+          aisleId: 0,
+          sectionId: 0,
+          zoneName: '',
+          aisleName: '',
+          sectionName: '',
+          locationName: action.payload.locationName,
+          type: '',
+          typeNbr: action.payload.locationTypeNbr
+        };
+        state.reserveLocations.splice(action.payload.locIndex, 1, editedLocation);
+        return {
+          ...state,
+          reserveLocations: state.reserveLocations
+        }
+      }
+      return{
+        ...state
+      };
+    case IS_UPDATING:
+      return {
+        ...state,
+        isUpdating: action.payload
       };
     default:
       return state;

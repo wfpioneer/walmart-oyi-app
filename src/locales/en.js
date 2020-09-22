@@ -122,7 +122,9 @@ export default {
     FLOOR: 'Floor locations',
     RESERVE: 'Reserve locations',
     ADD_LOCATION_API_ERROR: 'There was an error adding the location. \nPlease try again.',
+    EDIT_LOCATION_API_ERROR: 'There was an error editing the location. \nPlease try again.',
     ADD_DUPLICATE_ERROR: 'Location and type combination \nalready exist.',
+    EDIT_DUPLICATE_ERROR: 'Location and Type combination \nalready exist.',
     MANUAL_ENTRY_BUTTON: 'Manually key in location',
     SELECTION_INSTRUCTION: '1. Select a location type.',
     SCAN_INSTRUCTION: '2. Scan location label.'

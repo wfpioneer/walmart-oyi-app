@@ -6,7 +6,8 @@ export default interface ItemDetails {
   itemNbr: number;
   upcNbr: string;
   status: string;
-  category: string;
+  categoryNbr: number;
+  categoryDesc: string;
   price: number;
   exceptionType?: string; // This is enumerated
   onHandsQty: number;
@@ -36,4 +37,4 @@ export default interface ItemDetails {
       }
     ];
   };
-}
+};

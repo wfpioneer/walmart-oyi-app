@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { RadioButton, Text } from 'react-native-paper';
-import {
-  ActivityIndicator,
-  Modal,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { ActivityIndicator, EmitterSubscription, Modal, TouchableOpacity, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { strings } from '../../locales';
 import Button from '../../components/buttons/Button';
 import EnterLocation from '../../components/enterlocation/EnterLocation';
 import Location from '../../models/Location';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { addLocation } from '../../state/actions/saga';
-import { addLocationToExisting } from '../../state/actions/Location';
+import { addLocation, editLocation } from '../../state/actions/saga';
+import { addLocationToExisting, editExistingLocation, isUpdating } from '../../state/actions/Location';
+import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { barcodeEmitter, manualScan } from '../../utils/scannerUtils';
+import { strings } from '../../locales';
 import styles from './SelectLocationType.style';
 import { COLOR } from '../../themes/Color';
 
 interface LocParams {
   currentLocation?: Location;
+  locIndex?: number;
 }
-
 
 const SelectLocationType = () => {
   const [type, setType] = useState('8');
@@ -33,29 +30,47 @@ const SelectLocationType = () => {
   const addAPI = useTypedSelector(state => state.async.addLocation);
   const editAPI = useTypedSelector(state => state.async.editLocation);
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
-  const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
   const itemLocDetails = useTypedSelector(state => state.Location.itemLocDetails);
   const route = useRoute();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const routeSource = route.name;
   const locParams: LocParams = route.params ? route.params : {};
+  const currentLocation = {
+    locationName: locParams.currentLocation ? locParams.currentLocation.locationName : '',
+    type: locParams.currentLocation ? locParams.currentLocation.typeNbr.toString() : '',
+    locIndex: locParams.locIndex !== null && locParams.locIndex !== undefined ? locParams.locIndex : -1
+  };
+  let scannedSubscription: EmitterSubscription;
 
   useEffect(() => {
     if (routeSource === 'EditLocation') {
-      locParams.currentLocation ? (locParams.currentLocation.locationName ? setLoc(locParams.currentLocation.locationName) : null) : null;
-      locParams.currentLocation ? setType(locParams.currentLocation.typeNbr.toString()) : null;
+      setLoc(currentLocation.locationName);
+      setType(currentLocation.type);
     }
+  }, []);
+
+  useEffect(() => {
+    scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused()) {
+        dispatch(setScannedEvent(scan));
+        dispatch(setManualScan(false));
+        setLoc(scan.value);
+      }
+    });
+    return () => {
+      dispatch(resetScannedEvent());
+      scannedSubscription.remove();
+    };
   }, []);
 
   useEffect(() => {
     // on api success
     if (apiInProgress && addAPI.isWaiting === false && addAPI.result) {
-      if (type === '8' || type === '11' || type === '12' || type === '13') {
-        dispatch(addLocationToExisting(loc, parseInt(type, 10), 'floor'));
-        setAPIInProgress(false);
-        navigation.navigate('LocationDetails');
-      }
+      dispatch(addLocationToExisting(loc, parseInt(type, 10), 'floor'));
+      setAPIInProgress(false);
+      navigation.navigate('LocationDetails');
+      dispatch(isUpdating(true));
       return undefined;
     }
 
@@ -75,11 +90,33 @@ const SelectLocationType = () => {
   }, [addAPI]);
 
   useEffect(() => {
-    // TODO add logic for edit service
+    // on api success
+    if (apiInProgress && editAPI.isWaiting === false && editAPI.result) {
+      dispatch(editExistingLocation(loc, parseInt(type, 10), 'floor', currentLocation.locIndex));
+      setAPIInProgress(false);
+      navigation.navigate('LocationDetails');
+      dispatch(isUpdating(true));
+      return undefined;
+    }
+
+    // on api failure
+    if (apiInProgress && editAPI.isWaiting === false && editAPI.error) {
+      setAPIInProgress(false);
+      return setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
+    }
+
+    // on api submission
+    if (!apiInProgress && editAPI.isWaiting) {
+      setError({ error: false, message: '' });
+      return setAPIInProgress(true);
+    }
+
+    return undefined;
   }, [editAPI]);
 
   const modelOnSubmit = (value: string) => {
-    setLoc(value);
+    manualScan(value);
+    dispatch(setManualScan(false));
     setInputLocation(false);
   };
 
@@ -97,8 +134,25 @@ const SelectLocationType = () => {
         setError({ error: true, message: strings('LOCATION.ADD_DUPLICATE_ERROR') });
       }
     } else if (routeSource === 'EditLocation') {
-      // TODO add logic for editing
+      setError({ error: false, message: '' });
+      const sameLoc = floorLocations.find((location: Location) => location.locationName === loc && location.typeNbr.toString() === type);
+      if (!sameLoc) {
+        dispatch(editLocation({
+          upc: itemLocDetails.upcNbr,
+          sectionId: currentLocation.locationName,
+          newSectionId: loc,
+          locationTypeNbr: currentLocation.type,
+          newLocationTypeNbr: type
+        }));
+      } else {
+        setError({ error: true, message: strings('LOCATION.EDIT_DUPLICATE_ERROR') });
+      }
     }
+  };
+
+  const handleManualScan = () => {
+    setInputLocation(true);
+    dispatch(setManualScan(true));
   };
 
   const validateLocation = () => {
@@ -155,7 +209,7 @@ const SelectLocationType = () => {
             titleColor={COLOR.MAIN_THEME_COLOR}
             titleFontSize={12}
             titleFontWeight="bold"
-            onPress={() => setInputLocation(true)}
+            onPress={handleManualScan}
           />
         </View>
         {error.error ? (

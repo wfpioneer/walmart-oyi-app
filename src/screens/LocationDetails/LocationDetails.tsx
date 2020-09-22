@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 import FAB from 'react-native-fab';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './LocationDetails.style';
@@ -9,14 +10,26 @@ import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { isUpdating } from '../../state/actions/Location';
 
 const LocationDetails = () => {
   const navigation = useNavigation();
+  const [editUpdatestarted, setEditUpdateStarted] = useState(false);
+  const dispatch = useDispatch();
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
   const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
+  const needsUpdate = useTypedSelector(state => state.Location.isUpdating);
 
-  const handleEditLocation = (loc: Location) => {
-    navigation.navigate('EditLocation', { currentLocation: loc });
+  useEffect(() => {
+    if (editUpdatestarted && needsUpdate) {
+      setEditUpdateStarted(false);
+      dispatch(isUpdating(false));
+    }
+  }, [editUpdatestarted, needsUpdate]);
+
+  const handleEditLocation = (loc: Location, locIndex: number) => {
+    setEditUpdateStarted(true);
+    navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
   };
 
   const handleDeleteLocation = (loc: Location) => {
@@ -30,16 +43,16 @@ const LocationDetails = () => {
           key={index}
           locationName={loc.locationName}
           locationType={loc.type}
-          editAction={() => handleEditLocation(loc)}
+          editAction={() => handleEditLocation(loc, index)}
           deleteAction={() => handleDeleteLocation(loc)}
         />))}
     </>
   );
 
   const addNewLocationNav = () => {
+    setEditUpdateStarted(true);
     navigation.navigate('AddLocation');
   };
-
   return (
     <>
       <ScrollView>
