@@ -54,7 +54,7 @@ export default {
     NO_SALES: 'Sin Venta',
     NEGATIVE_ON_HANDS: 'Existencia negativa',
     CANCELLED: 'Cancelados',
-    NO_SALES_FLOOR_LOCATION: 'Sin Ubicación en Piso de Ventas'
+    NSFL: 'Sin Ubicación en Piso de Ventas'
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',

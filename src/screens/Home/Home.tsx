@@ -15,6 +15,7 @@ import GoalCircle from '../../components/goalcircle/GoalCircle';
 import { strings } from '../../locales';
 import { getWorklistSummary } from '../../state/actions/saga';
 import COLOR from '../../themes/Color';
+import { updateFilterExceptions } from '../../state/actions/Worklist';
 
 const mapStateToProps = (state: any) => ({
   userName: state.User.additional.displayName,
@@ -25,7 +26,8 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = {
   setScannedEvent,
   setManualScan,
-  getWorklistSummary
+  getWorklistSummary,
+  updateFilterExceptions
 };
 
 interface HomeScreenProps {
@@ -36,6 +38,7 @@ interface HomeScreenProps {
   worklistSummaryApiState: any;
   getWorklistSummary: Function;
   navigation: StackNavigationProp<any>;
+  updateFilterExceptions: Function;
 }
 
 interface HomeScreenState {
@@ -139,6 +142,11 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             worklistType = strings('EXCEPTION.UNKNOWN');
         }
 
+        const onWorklistCardPress = () => {
+          this.props.updateFilterExceptions([worklist.worklistType]);
+          this.props.navigation.navigate(strings('WORKLIST.WORKLIST'));
+        };
+
         return (
           <WorklistCard
             key={worklist.worklistType}
@@ -147,6 +155,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             complete={worklist.completedItems}
             completionPercentage={(worklist.completedItems / worklist.totalItems) * 100}
             completionGoal={data[this.state.activeGoal].worklistGoalPct}
+            onPress={onWorklistCardPress}
           />
         );
       });

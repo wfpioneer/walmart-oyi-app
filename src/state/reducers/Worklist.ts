@@ -1,11 +1,11 @@
 import {
-  TOGGLE_MENU,
+  CLEAR_FILTER,
   TOGGLE_CATEGORIES,
   TOGGLE_EXCEPTIONS,
+  TOGGLE_MENU,
   UPDATE_FILTER_CATEGORIES,
-  UPDATE_FILTER_EXCEPTIONS,
-  CLEAR_FILTER
-} from "../actions/Worklist";
+  UPDATE_FILTER_EXCEPTIONS
+} from '../actions/Worklist';
 
 const initialState = {
   menuOpen: false,
@@ -31,23 +31,23 @@ export const worklist = (state = initialState, action: any) => {
       return {
         ...state,
         exceptionOpen: action.payload
-      }
+      };
     case UPDATE_FILTER_CATEGORIES:
       return {
         ...state,
         filterCategories: action.payload
-      }
+      };
     case UPDATE_FILTER_EXCEPTIONS:
       return {
         ...state,
         filterExceptions: action.payload
-      }
+      };
     case CLEAR_FILTER:
       return {
         ...state,
         filterCategories: [],
         filterExceptions: []
-      }
+      };
     default:
       return state;
   }
