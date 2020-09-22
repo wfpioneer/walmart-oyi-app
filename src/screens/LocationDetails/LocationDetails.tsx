@@ -14,21 +14,19 @@ import { isUpdating } from '../../state/actions/Location';
 
 const LocationDetails = () => {
   const navigation = useNavigation();
-  const [editUpdatestarted, setEditUpdateStarted] = useState(false);
   const dispatch = useDispatch();
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
   const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
   const needsUpdate = useTypedSelector(state => state.Location.isUpdating);
 
   useEffect(() => {
-    if (editUpdatestarted && needsUpdate) {
-      setEditUpdateStarted(false);
+    if (needsUpdate) {
       dispatch(isUpdating(false));
     }
-  }, [editUpdatestarted, needsUpdate]);
+  }, [needsUpdate]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {
-    setEditUpdateStarted(true);
+    //setEditUpdateStarted(true);
     navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
   };
 
@@ -50,7 +48,6 @@ const LocationDetails = () => {
   );
 
   const addNewLocationNav = () => {
-    setEditUpdateStarted(true);
     navigation.navigate('AddLocation');
   };
   return (

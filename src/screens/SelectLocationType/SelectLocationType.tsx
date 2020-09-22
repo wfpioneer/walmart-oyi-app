@@ -21,8 +21,15 @@ interface LocParams {
   locIndex?: number;
 }
 
+const LOCATION_TYPES = {
+  SALES_FLOOR: '8',
+  DISPLAY: '11',
+  END_CAP: '12',
+  POD: '13'
+};
+
 const SelectLocationType = () => {
-  const [type, setType] = useState('8');
+  const [type, setType] = useState(LOCATION_TYPES.SALES_FLOOR);
   const [inputLocation, setInputLocation] = useState(false);
   const [loc, setLoc] = useState('');
   const [apiInProgress, setAPIInProgress] = useState(false);
@@ -157,7 +164,7 @@ const SelectLocationType = () => {
 
   const validateLocation = () => {
     // TODO add better validation of location
-    return !((loc.length > 3) && (type === '8' || type === '12' || type === '13' || type === '11'));
+    return !((loc.length > 3) && (type === LOCATION_TYPES.SALES_FLOOR || type === LOCATION_TYPES.POD || type === LOCATION_TYPES.END_CAP || type === LOCATION_TYPES.DISPLAY));
   };
 
   return (
@@ -171,26 +178,26 @@ const SelectLocationType = () => {
         </View>
         <RadioButton.Group onValueChange={value => setType(value)} value={type}>
           <View style={styles.typeListItem}>
-            <RadioButton value="8" status={type === '8' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
-            <TouchableOpacity style={styles.labelBox} onPress={() => setType('8')}>
+            <RadioButton value={LOCATION_TYPES.SALES_FLOOR} status={type === LOCATION_TYPES.SALES_FLOOR ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
+            <TouchableOpacity style={styles.labelBox} onPress={() => setType(LOCATION_TYPES.SALES_FLOOR)}>
               <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.FLOOR')}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.typeListItem}>
-            <RadioButton value="12" status={type === '12' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
-            <TouchableOpacity style={styles.labelBox} onPress={() => setType('12')}>
+            <RadioButton value={LOCATION_TYPES.END_CAP} status={type === LOCATION_TYPES.END_CAP ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
+            <TouchableOpacity style={styles.labelBox} onPress={() => setType(LOCATION_TYPES.END_CAP)}>
               <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.ENDCAP')}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.typeListItem}>
-            <RadioButton value="13" status={type === '13' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
-            <TouchableOpacity style={styles.labelBox} onPress={() => setType('13')}>
+            <RadioButton value={LOCATION_TYPES.POD} status={type === LOCATION_TYPES.POD ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
+            <TouchableOpacity style={styles.labelBox} onPress={() => setType(LOCATION_TYPES.POD)}>
               <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.POD')}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.typeListItem}>
-            <RadioButton value="11" status={type === '11' ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
-            <TouchableOpacity style={styles.labelBox} onPress={() => setType('11')}>
+            <RadioButton value={LOCATION_TYPES.DISPLAY} status={type === LOCATION_TYPES.DISPLAY ? 'checked' : 'unchecked'} color={COLOR.MAIN_THEME_COLOR} />
+            <TouchableOpacity style={styles.labelBox} onPress={() => setType(LOCATION_TYPES.DISPLAY)}>
               <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.DISPLAY')}</Text>
             </TouchableOpacity>
           </View>
