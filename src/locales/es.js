@@ -45,6 +45,7 @@ export default {
     HOME: 'Casa',
     STYLE_GUIDE: 'Guía de estilo',
     CHANGE_LANGUAGE: 'Cambiar idioma',
+    ITEMS: 'Artículos',
     WORKLIST_GOAL_COMPLETE: '%{complete} de %{total} artículos'
   },
   EXCEPTION: {
@@ -65,6 +66,7 @@ export default {
     QUANTITY: 'Cantidad',
     ON_HANDS: 'Existencia',
     ON_ORDER: 'Ordenado',
+    REPLENISHMENT: 'Reposición',
     PENDING_MGR_APPROVAL: 'Pendiente de aprovación de gerente',
     LOCATION: 'Ubicación',
     TO_PICKLIST: 'Add to Droplist',
@@ -76,6 +78,7 @@ export default {
     RESERVE: 'Bodega',
     SALES_METRICS: 'Ventas',
     AVG_SALES: 'Ventas Promedio',
+    TOGGLE_GRAPH: 'Alternar gráfico',
     OH_UPDATE_ERROR: 'Por favor ingresa un número entre %{min} y %{max}',
     OH_UPDATE_API_ERROR: 'Hubo un error al actualizar la cantidad. Inténtalo de nuevo.',
     API_ERROR: 'Hubo un error al extraer los detalles del artículo. Inténtalo de nuevo.',
@@ -100,7 +103,7 @@ export default {
     EMPTY_LIST: 'Nada en la cola de impresión',
     PRINT: 'Imprimir',
     PRINT_ALL: 'Imprimir todo',
-    ADD_TO_QUEUE: 'Add to print list',
+    ADD_TO_QUEUE: 'Agregar a la lista de impresión',
     TOTAL_ITEMS: 'Atrículos totales',
     XSmall: 'Xchico',
     Small: 'Chico',
@@ -131,11 +134,11 @@ export default {
     COMPLETED: 'Terminado'
   },
   SELECTLOCATIONTYPE: {
-    TITLE: 'Select type of location',
-    FLOOR: 'Floor',
-    ENDCAP: 'End cap',
+    TITLE: 'Seleccione el tipo de ubicación',
+    FLOOR: 'Piso',
+    ENDCAP: 'Tapa final',
     POD: 'POD',
-    DISPLAY: 'Display',
-    RESERVE: 'Reserve'
+    DISPLAY: 'Exhibición',
+    RESERVE: 'Reserva'
   }
 };

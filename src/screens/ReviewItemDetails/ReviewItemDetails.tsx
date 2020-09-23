@@ -360,7 +360,7 @@ const ReviewItemDetails = () => {
                   style={{ marginLeft: -4 }}
                 />
 )}
-              title="Replenishment"
+              title={strings('ITEM.REPLENISHMENT')}
             >
               <View style={{
                 flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 8, paddingVertical: 16
@@ -382,7 +382,7 @@ const ReviewItemDetails = () => {
             <SFTCard
               title={strings('ITEM.SALES_METRICS')}
               subTitle={updatedSalesTS}
-              bottomRightBtnTxt={['Toggle graph']}
+              bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
               bottomRightBtnAction={[toggleSalesGraphView]}
             >
               <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />

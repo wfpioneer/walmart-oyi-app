@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 15
   },
   buttonText: {
-    color: COLOR.MAIN_THEME_COLOR
+    color: COLOR.MAIN_THEME_COLOR,
+    textAlign: 'center'
   },
   picklistSuccessText: {
     color: COLOR.GREEN
