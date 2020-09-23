@@ -10,7 +10,7 @@ export default {
     SEND: '发送',
     DISMISS: '忽略',
     TRY_AGAIN: '再试一次',
-    OK: '好',
+    OK: 'Okay',
     ERROR: '报错',
     NOT_STARTED: '尚未开始',
     RESTART: '重启',

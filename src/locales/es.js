@@ -10,7 +10,7 @@ export default {
     SEND: 'Enviar',
     DISMISS: 'Descartar',
     TRY_AGAIN: 'Vuelve a intentarlo',
-    OK: 'Ok',
+    OK: 'Okay',
     ERROR: 'Error',
     NOT_STARTED: 'Sin comenzar',
     RESTART: 'Reiniciar',
