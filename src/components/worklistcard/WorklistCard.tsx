@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet, Text, TouchableOpacity, View
+} from 'react-native';
 import styles from './WorklistCard.style';
 import { strings } from '../../locales';
 
@@ -12,6 +14,7 @@ export interface Props {
     complete: number;
     completionPercentage: number;
     completionGoal?: number;
+    onPress: () => void;
 }
 
 function WorklistCard(Props: Props) {
@@ -22,8 +25,9 @@ function WorklistCard(Props: Props) {
     target = 95;
   }
   const [atGoal] = useState(((Props.completionPercentage >= target) ? styles.barFillAtGoal : styles.barFillNotAtGoal));
+
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={Props.onPress}>
       <View style={styles.head}>
         <Text style={styles.title}>{Props.goalTitle}</Text>
         <Text style={styles.progress}>
@@ -36,7 +40,7 @@ function WorklistCard(Props: Props) {
       <Text style={styles.counter}>
         {strings('HOME.WORKLIST_GOAL_COMPLETE', { complete: Props.complete, total: Props.goal })}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 

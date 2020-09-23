@@ -2,7 +2,7 @@ import { strings } from '../../locales';
 
 export default () => [
   {
-    value: 'NIL_PICK',
+    value: 'np',
     display: strings('EXCEPTION.NIL_PICK')
   },
   {
@@ -10,19 +10,19 @@ export default () => [
     display: strings('EXCEPTION.PRICE_OVERRIDE')
   },
   {
-    value: 'NO_SALES',
+    value: 'ns',
     display: strings('EXCEPTION.NO_SALES')
   },
   {
-    value: 'NEGATIVE_ON_HANDS',
+    value: 'no',
     display: strings('EXCEPTION.NEGATIVE_ON_HANDS')
   },
   {
-    value: 'CANCELLED',
+    value: 'c',
     display: strings('EXCEPTION.CANCELLED')
   },
   {
-    value: 'NO_SALES_FLOOR',
-    display: strings('EXCEPTION.NO_SALES_FLOOR_LOCATION')
+    value: 'nsfl',
+    display: strings('EXCEPTION.NSFL')
   }
 ];

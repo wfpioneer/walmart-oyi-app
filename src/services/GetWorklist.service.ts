@@ -1,6 +1,6 @@
 import Request from './Request';
 // @ts-ignore
-import KEYS from '../../config/KEYS.json'
+import KEYS from '../../config/KEYS.json';
 
 export default class GetWorklistService {
   public static getWorklist() {
@@ -9,10 +9,7 @@ export default class GetWorklistService {
       method: 'get',
       timeout: 10000,
       headers: {
-        'Ocp-Apim-Subscription-Key': KEYS['Ocp-Apim-Subscription-Key'],
-        'userid': '1234',
-        'clubnbr': '1234',
-        'countrycode': 'MX'
+        'Ocp-Apim-Subscription-Key': KEYS['Ocp-Apim-Subscription-Key']
       }
     });
   }
