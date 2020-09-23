@@ -10,7 +10,7 @@ export default {
     SEND: '发送',
     DISMISS: '忽略',
     TRY_AGAIN: '再试一次',
-    OK: 'OK',
+    OK: '好',
     ERROR: '报错',
     NOT_STARTED: '尚未开始',
     RESTART: '重启',
@@ -45,6 +45,7 @@ export default {
     WELCOME: '欢迎',
     STYLE_GUIDE: '页面风格',
     CHANGE_LANGUAGE: '改变语言',
+    ITEMS: '项目',
     WORKLIST_GOAL_COMPLETE: '%{complete}的%{total}项目'
   },
   EXCEPTION: {
@@ -65,6 +66,7 @@ export default {
     QUANTITY: '数量',
     ON_HANDS: '现货',
     ON_ORDER: '已订货',
+    REPLENISHMENT: '补货',
     PENDING_MGR_APPROVAL: '待经理审批',
     LOCATION: '位置',
     TO_PICKLIST: '添加到补货清单',
@@ -76,6 +78,7 @@ export default {
     RESERVE: '高货架',
     SALES_METRICS: '销售',
     AVG_SALES: '平均销售',
+    TOGGLE_GRAPH: '切换图',
     OH_UPDATE_ERROR: '输入数字(%{min}-%{max})',
     OH_UPDATE_API_ERROR: '更新数量时出错。 请再试一遍。',
     API_ERROR: '提取商品详细信息时出错。 请再试一遍。',
@@ -100,7 +103,7 @@ export default {
     EMPTY_LIST: '打印清单为空',
     PRINT: '打印',
     PRINT_ALL: '打印所有',
-    ADD_TO_QUEUE: 'Add to print list',
+    ADD_TO_QUEUE: '添加到打印列表',
     TOTAL_ITEMS: '所有商品',
     XSmall: '加小标签',
     Small: '小标签',
@@ -131,11 +134,11 @@ export default {
     COMPLETED: '已完成'
   },
   SELECTLOCATIONTYPE: {
-    TITLE: 'Select type of location',
-    FLOOR: 'Floor',
-    ENDCAP: 'End cap',
-    POD: 'POD',
-    DISPLAY: 'Display',
-    RESERVE: 'Reserve'
+    TITLE: '选择位置类型',
+    FLOOR: '地面',
+    ENDCAP: '端盖',
+    POD: '荚',
+    DISPLAY: '橱窗',
+    RESERVE: '库存'
   }
 };
