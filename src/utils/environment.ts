@@ -1,5 +1,18 @@
-// @ts-ignore
-const environments = {
+interface Environment {
+  orchestrationURL: string;
+  itemDetailsURL: string;
+  locationURL: string;
+  printingURL: string;
+  worklistURL: string;
+}
+
+export interface Environments {
+  dev: Environment;
+  stage: Environment;
+  prod: Environment;
+}
+
+const environments: Environments = {
   dev: {
     orchestrationURL: 'https://intl-oyi-orchestration-api.dev.walmart.com',
     itemDetailsURL: 'https://intl-oyi-item-details-api.dev.walmart.com',
@@ -23,6 +36,9 @@ const environments = {
   }
 };
 
-const getEnvironment = () => {
-
+const getEnvironment = (): Environment => {
+  // TODO add logic to get environment
+  return environments.dev;
 };
+
+export default getEnvironment();

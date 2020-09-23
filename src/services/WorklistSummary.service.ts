@@ -1,16 +1,12 @@
 import Request from './Request';
-// @ts-ignore
-import KEYS from '../../config/KEYS.json';
+import URLS from '../utils/environment';
 
 export default class WorklistSummaryService {
   public static getWorklistSummary() {
     return Request.enqueue({
-      url: 'https://intl-oyi-worklist-api.dev.walmart.com/worklist/summary',
+      url: `${URLS.worklistURL}/worklist/summary`,
       method: 'get',
-      timeout: 10000,
-      headers: {
-        'Ocp-Apim-Subscription-Key': KEYS['Ocp-Apim-Subscription-Key']
-      }
+      timeout: 10000
     });
   }
 }

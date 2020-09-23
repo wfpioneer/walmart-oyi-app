@@ -1,16 +1,14 @@
 import Request from './Request';
-// @ts-ignore
-import KEYS from '../../config/KEYS.json';
+import URLS from '../utils/environment';
 
 export default class GetWorklistService {
+  // TODO currently the service is hardcoded to only return NSFL when service is corrected and more worklists added will
+  // TODO need to add the payload for the type instead of hardcoding it
   public static getWorklist() {
     return Request.enqueue({
-      url: 'https://intl-dev-ops-common-apim.azure-api.net/oyi/worklist/items',
+      url: `${URLS.worklistURL}/worklist/items?type=NSFL`,
       method: 'get',
-      timeout: 10000,
-      headers: {
-        'Ocp-Apim-Subscription-Key': KEYS['Ocp-Apim-Subscription-Key']
-      }
+      timeout: 10000
     });
   }
 }
