@@ -5,7 +5,7 @@ import {
   ActivityIndicator, BackHandler, Modal, Platform, SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import _ from 'lodash';
-import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -39,7 +39,6 @@ const ReviewItemDetails = () => {
   const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const isNavigationFocused = useIsFocused();
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
@@ -60,7 +59,7 @@ const ReviewItemDetails = () => {
   // Barcode event listener effect
   useEffect(() => {
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (isNavigationFocused) {
+      if (navigation.isFocused()) {
         if (scan.value === scannedEvent.value) {
           dispatch(setActionCompleted());
           navigation.goBack();
@@ -340,7 +339,7 @@ const ReviewItemDetails = () => {
               itemNbr={itemDetails.itemNbr}
               upcNbr={itemDetails.upcNbr}
               status={itemDetails.status}
-              category={itemDetails.category}
+              category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
               price={itemDetails.price}
               exceptionType={itemDetails.exceptionType}
             />

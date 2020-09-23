@@ -4,6 +4,8 @@ export const SET_FLOOR_LOCATIONS = 'LOCATION/SET_FLOOR_LOCATIONS';
 export const SET_RESERVE_LOCATIONS = 'LOCATION/SET_RESERVE_LOCATIONS';
 export const SET_ITEM_LOC_DETAILS = 'LOCATION/SET_ITEM_LOC_DETAILS';
 export const ADD_LOCATION_TO_EXISTING = 'LOCATION/ADD_LOCATION_TO_EXISTING';
+export const EDIT_EXISTING_LOCATION = 'LOCATION/EDIT_EXISTING_LOCATION';
+export const IS_UPDATING = 'LOCATION/IS_UPDATING';
 
 export const setItemLocDetails = (itemNbr: number, upcNbr: string) => ({
   type: SET_ITEM_LOC_DETAILS,
@@ -30,4 +32,19 @@ export const addLocationToExisting = (locationName: string, locationTypeNbr: num
     locationTypeNbr,
     locationArea
   }
+});
+
+export const editExistingLocation = (locationName: string, locationTypeNbr: number, locationArea: string, locIndex: number) => ({
+  type: EDIT_EXISTING_LOCATION,
+  payload: {
+    locationName,
+    locationTypeNbr,
+    locationArea,
+    locIndex
+  }
+});
+
+export const isUpdating = (updating: boolean) => ({
+  type: IS_UPDATING,
+  payload: updating
 });

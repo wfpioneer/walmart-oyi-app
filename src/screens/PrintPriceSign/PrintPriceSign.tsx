@@ -78,9 +78,9 @@ const PrintPriceSign = () => {
   const [isValidQty, setIsValidQty] = useState(true);
 
   const {
-    itemName, itemNbr, upcNbr, category
+    itemName, itemNbr, upcNbr, categoryNbr
   } = (result && result.data) || getMockItemDetails(scannedEvent.value);
-  const catgNbr = parseInt(category.split('-')[0], 10);
+  const catgNbr = categoryNbr;
 
   useLayoutEffect(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
