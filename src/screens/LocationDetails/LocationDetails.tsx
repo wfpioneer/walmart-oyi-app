@@ -10,7 +10,7 @@ import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { isUpdating } from '../../state/actions/Location';
+import { isUpdating, deleteLocationFromExisting } from '../../state/actions/Location';
 
 const LocationDetails = () => {
   const navigation = useNavigation();
@@ -30,8 +30,8 @@ const LocationDetails = () => {
     navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
   };
 
-  const handleDeleteLocation = (loc: Location) => {
-    // TODO add delete functionality
+  const handleDeleteLocation = (locIndex: number) => {
+    dispatch(deleteLocationFromExisting(locIndex));
   };
 
   const createLocations = (locationList: [Location]) => (
@@ -42,7 +42,7 @@ const LocationDetails = () => {
           locationName={loc.locationName}
           locationType={loc.type}
           editAction={() => handleEditLocation(loc, index)}
-          deleteAction={() => handleDeleteLocation(loc)}
+          deleteAction={() => handleDeleteLocation(index)}
         />))}
     </>
   );

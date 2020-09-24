@@ -4,7 +4,8 @@ import {
   SET_ITEM_LOC_DETAILS,
   SET_RESERVE_LOCATIONS,
   EDIT_EXISTING_LOCATION,
-  IS_UPDATING
+  IS_UPDATING,
+  DELETE_LOCATION_FROM_EXISTING
 } from '../actions/Location';
 import LocationType from '../../models/Location';
 
@@ -133,6 +134,24 @@ export const Location = (state = initialState, action: any) => {
       return {
         ...state,
         isUpdating: action.payload
+      };
+    case DELETE_LOCATION_FROM_EXISTING:
+      if (action.payload.locationArea === 'floor') {
+        state.floorLocations.splice(action.payload.locIndex, 1);
+        return {
+          ...state,
+          floorLocations: state.floorLocations
+        };
+      }
+      if (action.payload.locationArea === 'reserve') {
+        state.reserveLocations.splice(action.payload.locIndex, 1);
+        return {
+          ...state,
+          reserveLocations: state.reserveLocations
+        };
+      }
+      return {
+        ...state
       };
     default:
       return state;
