@@ -21,11 +21,11 @@ const environments: Environments = {
     worklistURL: 'https://intl-oyi-worklist-api.dev.walmart.com'
   },
   stage: {
-    orchestrationURL: '',
-    itemDetailsURL: '',
-    locationURL: '',
-    printingURL: '',
-    worklistURL: ''
+    orchestrationURL: 'https://intl-oyi-orchestration-api.stg.walmart.com',
+    itemDetailsURL: 'https://intl-oyi-item-details-api.stg.walmart.com',
+    locationURL: 'https://intl-oyi-location-api.stg.walmart.com',
+    printingURL: 'https://intl-oyi-printing-api.stg.walmart.com',
+    worklistURL: 'https://intl-oyi-worklist-api.stg.walmart.com'
   },
   prod: {
     orchestrationURL: '',

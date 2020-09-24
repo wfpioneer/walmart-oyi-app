@@ -10,6 +10,7 @@ import UpdateOHQtyService from '../../services/UpdateOHQty.service';
 import AddToPicklistService from '../../services/AddToPicklist.service';
 import AddLocationService from '../../services/AddLocation.service';
 import WorklistSummaryService from '../../services/WorklistSummary.service';
+import PrintService from '../../services/Print.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
@@ -19,7 +20,8 @@ const genericSagas = [
   makeAsyncSaga(saga.ADD_TO_PICKLIST, actions.addToPicklist, AddToPicklistService.addToPicklist),
   makeAsyncSaga(saga.ADD_LOCATION, actions.addLocation, AddLocationService.addLocation),
   makeAsyncSaga(saga.UPDATE_OH_QTY, actions.updateOHQty, UpdateOHQtyService.updateOHQty),
-  makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary)
+  makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
+  makeAsyncSaga(saga.PRINT, actions.print, PrintService.print)
 ];
 
 export default function* rootSaga() {
