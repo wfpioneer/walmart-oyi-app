@@ -18,6 +18,7 @@ import { logoutUser } from '../state/actions/User';
 import { hideActivityModal, showActivityModal } from '../state/actions/Modal';
 import StyleGuide from '../screens/StyleGuide/StyleGuide';
 import { setManualScan } from '../state/actions/Global';
+import { trackEvent } from '../utils/AppCenterTool';
 
 interface HomeNavigatorComponentProps {
   logoutUser: Function;
@@ -105,7 +106,15 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
 };
 
 const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: Function) => (
-  <TouchableOpacity onPress={() => { setManualScanFunc(!isManualScanEnabled); }}>
+  <TouchableOpacity onPress={() => {
+    if (isManualScanEnabled) {
+      trackEvent('disable_manual_scan');
+    } else {
+      trackEvent('enable_manual_scan');
+    }
+    setManualScanFunc(!isManualScanEnabled);
+  }}
+  >
     <View style={styles.leftButton}>
       <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
     </View>
