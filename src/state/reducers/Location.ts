@@ -1,11 +1,11 @@
 import {
   ADD_LOCATION_TO_EXISTING,
-  SET_FLOOR_LOCATIONS,
-  SET_ITEM_LOC_DETAILS,
-  SET_RESERVE_LOCATIONS,
+  DELETE_LOCATION_FROM_EXISTING,
   EDIT_EXISTING_LOCATION,
   IS_UPDATING,
-  DELETE_LOCATION_FROM_EXISTING
+  SET_FLOOR_LOCATIONS,
+  SET_ITEM_LOC_DETAILS,
+  SET_RESERVE_LOCATIONS
 } from '../actions/Location';
 import LocationType from '../../models/Location';
 
@@ -107,7 +107,7 @@ export const Location = (state = initialState, action: any) => {
         return {
           ...state,
           floorLocations: state.floorLocations
-        }
+        };
       }
       if (action.payload.locationArea === 'reserve') {
         const editedLocation = {
@@ -125,9 +125,9 @@ export const Location = (state = initialState, action: any) => {
         return {
           ...state,
           reserveLocations: state.reserveLocations
-        }
+        };
       }
-      return{
+      return {
         ...state
       };
     case IS_UPDATING:

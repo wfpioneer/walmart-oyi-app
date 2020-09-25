@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   button: {
-    alignSelf: 'flex-end',
+    alignSelf: 'flex-end'
   },
   activityIndicator: {
     justifyContent: 'center',
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   delButton: {
     flex: 1,
-    paddingHorizontal:10
+    paddingHorizontal: 10
   }
 });
 

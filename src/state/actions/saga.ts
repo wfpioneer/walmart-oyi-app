@@ -16,4 +16,4 @@ export const addLocation = (payload: any) => ({ type: ADD_LOCATION, payload });
 export const updateOHQty = (payload: any) => ({ type: UPDATE_OH_QTY, payload });
 export const addToPicklist = (payload: any) => ({ type: ADD_TO_PICKLIST, payload });
 export const getWorklistSummary = (payload: any) => ({ type: GET_WORKLIST_SUMMARY, payload });
-export const deleteLocation = (payload: any) => ({type: DELETE_LOCATION, payload});
+export const deleteLocation = (payload: any) => ({ type: DELETE_LOCATION, payload });

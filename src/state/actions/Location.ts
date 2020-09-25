@@ -51,7 +51,7 @@ export const deleteLocationFromExisting = (locationArea: string, locIndex: numbe
     locationArea,
     locIndex
   }
-})
+});
 
 export const isUpdating = (updating: boolean) => ({
   type: IS_UPDATING,
