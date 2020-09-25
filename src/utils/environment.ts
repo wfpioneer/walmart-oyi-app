@@ -29,7 +29,7 @@ const environments: Environments = {
 };
 
 const getEnvironment = (): Environment => {
-  return __DEV__ ? environments.stage : environments.prod;
+  return __DEV__ ? environments.stage : environments.stage;
 };
 
 export default getEnvironment();
