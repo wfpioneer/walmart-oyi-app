@@ -49,12 +49,13 @@ export const renderWorklistItem = (listItem: ListItemI) => {
 
 export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boolean): WorklistItemI[] => {
   if (!groupToggle) {
+    const workListItems = data ? data : [];
     return [{
       exceptionType: 'CATEGORY',
       catgName: strings('WORKLIST.ALL'),
-      itemCount: data.length
+      itemCount: workListItems.length
     },
-    ...data];
+    ...workListItems];
   }
 
   const sortedData = data;
@@ -148,7 +149,7 @@ export const Worklist = (props: WorklistProps) => {
     );
   }
 
-  if (props.refreshing || !props.data) {
+  if (props.refreshing && !props.data) {
     return (
       <FlatList data={[]} renderItem={() => null} refreshing onRefresh={() => null} />
     );
@@ -159,13 +160,11 @@ export const Worklist = (props: WorklistProps) => {
   const dispatch = useDispatch();
   const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
   const typedFilterCategories = filterCategories.map((category: number) => ({ type: 'CATEGORY', value: category }));
-
   let filteredData: WorklistItemI[] = props.data;
   if (filterCategories.length !== 0) {
     filteredData = filteredData.filter((worklistItem: WorklistItemI) => filterCategories
       .indexOf(`${worklistItem.catgNbr} - ${worklistItem.catgName}`) !== -1);
   }
-
   if (filterExceptions.length !== 0) {
     filteredData = filteredData.filter((worklistItem: WorklistItemI) => {
       const exceptionTranslation = FullExceptionList().find((exceptionListItem: any) => exceptionListItem.value
