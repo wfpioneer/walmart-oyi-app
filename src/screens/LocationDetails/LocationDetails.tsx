@@ -61,7 +61,7 @@ const LocationDetails = () => {
     }
 
     return undefined;
-  });
+  }, [delAPI]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {
     //setEditUpdateStarted(true);
