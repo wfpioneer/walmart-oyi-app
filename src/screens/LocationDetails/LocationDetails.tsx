@@ -41,6 +41,7 @@ const LocationDetails = () => {
     // on api success
     if (apiInProgress && delAPI.isWaiting === false && delAPI.result) {
       dispatch(deleteLocationFromExisting(deleting.locationArea, deleting.locationIndex));
+      console.log(floorLocations)
       setAPIInProgress(false);
       dispatch(isUpdating(true));
       console.log("needsUpdate status: " + needsUpdate);
@@ -69,7 +70,7 @@ const LocationDetails = () => {
   };
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
-    setLocToConfirm({locationName: loc.locationName, locationArea: loc.type, locationIndex: locIndex, locationTypeNbr: loc.typeNbr})
+    setLocToConfirm({locationName: loc.locationName, locationArea: 'floor', locationIndex: locIndex, locationTypeNbr: loc.typeNbr})
     setDisplayConfirmation(true);
   }
 
