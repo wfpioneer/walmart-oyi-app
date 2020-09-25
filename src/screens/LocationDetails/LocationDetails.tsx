@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, ScrollView, Text, View, Modal } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Button from '../../components/buttons/Button';
 import { useDispatch } from 'react-redux';
 import FAB from 'react-native-fab';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -10,7 +11,7 @@ import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { isUpdating, deleteLocationFromExisting, setItemLocDetails } from '../../state/actions/Location';
+import { isUpdating, deleteLocationFromExisting } from '../../state/actions/Location';
 import { deleteLocation } from '../../state/actions/saga';
 import { State } from 'react-native-gesture-handler';
 
@@ -21,6 +22,14 @@ const LocationDetails = () => {
   const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
   const needsUpdate = useTypedSelector(state => state.Location.isUpdating);
   const itemDetails = useTypedSelector(state => state.Location.itemLocDetails);
+  const [apiInProgress, setAPIInProgress] = useState(false);
+  const [error, setError] = useState(false);
+  const delAPI = useTypedSelector(state => state.async.deleteLocation);
+  const [deleting, setDeleting] = useState({locationArea: '', locationIndex: -1});
+  const [displayConfirmation, setDisplayConfirmation] = useState(false);
+  const [locToConfirm, setLocToConfirm] = useState({
+    locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
+  });
 
   useEffect(() => {
     if (needsUpdate) {
@@ -28,13 +37,45 @@ const LocationDetails = () => {
     }
   }, [needsUpdate]);
 
+  useEffect(() => {
+    // on api success
+    if (apiInProgress && delAPI.isWaiting === false && delAPI.result) {
+      dispatch(deleteLocationFromExisting(deleting.locationArea, deleting.locationIndex));
+      setAPIInProgress(false);
+      dispatch(isUpdating(true));
+      console.log("needsUpdate status: " + needsUpdate);
+      setDisplayConfirmation(false);
+      return undefined;
+    }
+
+    // on api failure
+    if (apiInProgress && delAPI.isWaiting === false && delAPI.error) {
+      setAPIInProgress(false);
+      return setError(true);
+    }
+
+    // on api submission
+    if (!apiInProgress && delAPI.isWaiting) {
+      setError(false);
+      return setAPIInProgress(true);
+    }
+
+    return undefined;
+  });
+
   const handleEditLocation = (loc: Location, locIndex: number) => {
     //setEditUpdateStarted(true);
     navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
   };
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
-    dispatch(deleteLocation({upc: itemDetails.upcNbr, sectionId: loc.locationName, locationTypeNbr: loc.typeNbr}));
+    setLocToConfirm({locationName: loc.locationName, locationArea: loc.type, locationIndex: locIndex, locationTypeNbr: loc.typeNbr})
+    setDisplayConfirmation(true);
+  }
+
+  const deleteConfirmed = () => {
+    dispatch(deleteLocation({upc: itemDetails.upcNbr, sectionId: locToConfirm.locationName, locationTypeNbr: locToConfirm.locationTypeNbr}));
+    setDeleting({locationArea: locToConfirm.locationArea, locationIndex: locToConfirm.locationIndex});
   };
 
   const createLocations = (locationList: [Location]) => (
@@ -55,6 +96,26 @@ const LocationDetails = () => {
   };
   return (
     <>
+      <Modal visible={displayConfirmation} transparent>
+        <View style={styles.delConfirmation}>
+          {delAPI.isWaiting?
+          <ActivityIndicator
+            animating={delAPI.isWaiting}
+            hidesWhenStopped
+            color={COLOR.MAIN_THEME_COLOR}
+            size="large"
+            style={styles.activityIndicator}
+          />:
+          <>
+            <Text style={styles.message}>{error?strings('LOCATION.DELETE_LOCATION_API_ERROR'):`${strings('LOCATION.DELETE_CONFIRMATION')} ${locToConfirm.locationName}`}</Text>
+            <View style={styles.buttonContainer}>
+              <Button style={styles.delButton} title={strings('GENERICS.CANCEL')} backgroundColor={COLOR.TRACKER_RED}  onPress={ () => setDisplayConfirmation(false) }/>
+              <Button style={styles.delButton} title={error?strings('GENERICS.RETRY'):strings('GENERICS.OK')} backgroundColor={COLOR.MAIN_THEME_COLOR} onPress={deleteConfirmed} />
+            </View>
+          </>
+          }
+        </View>
+      </Modal>
       <ScrollView>
         {floorLocations ? (
           <View style={styles.sectionLabel}>
