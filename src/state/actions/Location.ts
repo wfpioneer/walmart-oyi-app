@@ -45,9 +45,10 @@ export const editExistingLocation = (locationName: string, locationTypeNbr: numb
   }
 });
 
-export const deleteLocationFromExisting = (locIndex: number) => ({
+export const deleteLocationFromExisting = (locationArea: string, locIndex: number) => ({
   type: DELETE_LOCATION_FROM_EXISTING,
   payload: {
+    locationArea,
     locIndex
   }
 })

@@ -10,7 +10,9 @@ import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { isUpdating, deleteLocationFromExisting } from '../../state/actions/Location';
+import { isUpdating, deleteLocationFromExisting, setItemLocDetails } from '../../state/actions/Location';
+import { deleteLocation } from '../../state/actions/saga';
+import { State } from 'react-native-gesture-handler';
 
 const LocationDetails = () => {
   const navigation = useNavigation();
@@ -18,6 +20,7 @@ const LocationDetails = () => {
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
   const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
   const needsUpdate = useTypedSelector(state => state.Location.isUpdating);
+  const itemDetails = useTypedSelector(state => state.Location.itemLocDetails);
 
   useEffect(() => {
     if (needsUpdate) {
@@ -30,8 +33,8 @@ const LocationDetails = () => {
     navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
   };
 
-  const handleDeleteLocation = (locIndex: number) => {
-    dispatch(deleteLocationFromExisting(locIndex));
+  const handleDeleteLocation = (loc: Location, locIndex: number) => {
+    dispatch(deleteLocation({upc: itemDetails.upcNbr, sectionId: loc.locationName, locationTypeNbr: loc.typeNbr}));
   };
 
   const createLocations = (locationList: [Location]) => (
@@ -42,7 +45,7 @@ const LocationDetails = () => {
           locationName={loc.locationName}
           locationType={loc.type}
           editAction={() => handleEditLocation(loc, index)}
-          deleteAction={() => handleDeleteLocation(index)}
+          deleteAction={() => handleDeleteLocation(loc, index)}
         />))}
     </>
   );
