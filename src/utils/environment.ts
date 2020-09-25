@@ -7,17 +7,25 @@ interface Environment {
 }
 
 export interface Environments {
+  dev: Environment;
   stage: Environment;
   prod: Environment;
 }
 
 const environments: Environments = {
-  stage: {
+  dev: {
     orchestrationURL: 'https://intl-oyi-orchestration-api.dev.walmart.com',
     itemDetailsURL: 'https://intl-oyi-item-details-api.dev.walmart.com',
     locationURL: 'https://intl-oyi-location-api.dev.walmart.com',
     printingURL: 'https://intl-oyi-printing-api.dev.walmart.com',
     worklistURL: 'https://intl-oyi-worklist-api.dev.walmart.com'
+  },
+  stage: {
+    orchestrationURL: 'https://intl-oyi-orchestration-api.stg.walmart.com',
+    itemDetailsURL: 'https://intl-oyi-item-details-api.stg.walmart.com',
+    locationURL: 'https://intl-oyi-location-api.stg.walmart.com',
+    printingURL: 'https://intl-oyi-printing-api.stg.walmart.com',
+    worklistURL: 'https://intl-oyi-worklist-api.stg.walmart.com'
   },
   prod: {
     orchestrationURL: '',
@@ -29,7 +37,7 @@ const environments: Environments = {
 };
 
 const getEnvironment = (): Environment => {
-  return __DEV__ ? environments.stage : environments.stage;
+  return __DEV__ ? environments.dev : environments.stage;
 };
 
 export default getEnvironment();

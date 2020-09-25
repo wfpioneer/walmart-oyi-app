@@ -96,8 +96,7 @@ export const renderCategoryCollapsibleCard = () => {
   const { categoryOpen, filterCategories } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
 
-  const data = result ? result.data : [];
-
+  const data = result && result.data === typeof Array ? result.data : [];
   const categoryMap = data.map((item: any) => {
     // @ts-ignore
     const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
