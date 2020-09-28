@@ -75,12 +75,15 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
         switch (selectedLanguageIndex) {
           case 0:
             setLanguage('en');
+            trackEvent('change_language', { language: 'en' });
             return navigation.dispatch(StackActions.replace('Login'));
           case 1:
             setLanguage('es');
+            trackEvent('change_language', { language: 'es' });
             return navigation.dispatch(StackActions.replace('Login'));
           case 2:
             setLanguage('zh');
+            trackEvent('change_language', { language: 'zh' });
             return navigation.dispatch(StackActions.replace('Login'));
           default:
             return null;
@@ -89,6 +92,7 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
     }
     if (buttonIndex === 1) {
       props.showActivityModal();
+      trackEvent('user_sign_out');
       WMSSO.signOutUser().then(() => {
         props.navigation.replace('Login');
         props.logoutUser();
