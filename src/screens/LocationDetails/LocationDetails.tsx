@@ -27,7 +27,6 @@ const LocationDetails = () => {
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [error, setError] = useState(false);
   const delAPI = useTypedSelector(state => state.async.deleteLocation);
-  const [deleting, setDeleting] = useState({ locationArea: '', locationIndex: -1 });
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
@@ -42,7 +41,7 @@ const LocationDetails = () => {
   useEffect(() => {
     // on api success
     if (apiInProgress && delAPI.isWaiting === false && delAPI.result) {
-      dispatch(deleteLocationFromExisting(deleting.locationArea, deleting.locationIndex));
+      dispatch(deleteLocationFromExisting(locToConfirm.locationArea, locToConfirm.locationIndex));
       setAPIInProgress(false);
       dispatch(isUpdating(true));
       setDisplayConfirmation(false);
@@ -65,7 +64,6 @@ const LocationDetails = () => {
   }, [delAPI]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {
-    // setEditUpdateStarted(true);
     navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
   };
 
@@ -80,9 +78,6 @@ const LocationDetails = () => {
     dispatch(deleteLocation({
       upc: itemDetails.upcNbr, sectionId: locToConfirm.locationName, locationTypeNbr: locToConfirm.locationTypeNbr
     }));
-    setDeleting({
-      locationArea: locToConfirm.locationArea, locationIndex: locToConfirm.locationIndex
-    });
   };
 
   const createLocations = (locationList: [Location]) => (
