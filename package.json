@@ -8,6 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "build-release": "cd android && ./gradlew clean && ./gradlew assembleRelease",
     "postinstall": "npx jetify"
   },
   "dependencies": {
@@ -40,7 +41,7 @@
     "react-native-svg-charts": "^5.4.0",
     "react-native-tab-view": "^2.15.0",
     "react-native-vector-icons": "^7.0.0",
-    "react-native-wm-barcode": "^1.1.2",
+    "react-native-wm-barcode": "^0.2.1",
     "react-native-wmsso": "^1.3.1",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",

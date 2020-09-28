@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
+
 import { NativeEventEmitter, NativeModules } from 'react-native';
 
-export const WMBarcodeScanner = NativeModules.WMBarcodeScanner;
+export const { WMBarcodeScanner } = NativeModules;
 export const barcodeEmitter = new NativeEventEmitter(WMBarcodeScanner);
 
 let isScannerSet = false;
@@ -8,28 +10,32 @@ let isScannerSet = false;
 export const determineScanner = (isByod: boolean, scannerList: string[]) => {
   // preferred scanner type is "2D Barcode Imager" for club devices
   // TODO figure out logic we want for this
-  return scannerList[0] || "";
-}
+  if (scannerList.indexOf('2D Barcode Imager') !== -1) {
+    return scannerList[scannerList.indexOf('2D Barcode Imager')];
+  }
+  return scannerList[0];
+};
+
 
 export const getInitialScanners = async () => {
   try {
-    return await WMBarcodeScanner.getScannerList()
-  } catch(err) {
-    console.log(`Error getting scanner list: ${err}`)
+    return await WMBarcodeScanner.getScannerList();
+  } catch (err) {
+    console.log(`Error getting scanner list: ${err}`);
     return [];
   }
-}
+};
 
 export const setScanner = (scanner: string) => {
   if (!isScannerSet) {
-    console.log("setting scanner to", scanner);
+    console.log('setting scanner to', scanner);
     WMBarcodeScanner.setScanner(scanner).then(() => {
       isScannerSet = true;
     });
   } else {
-    console.log(`Scanner already set`)
+    console.log('Scanner already set');
   }
-}
+};
 
 export const enableScanner = () => {
   console.log('enabling scanner');
@@ -42,8 +48,9 @@ export const disableScanner = () => {
 };
 
 export const manualScan = (val: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
   mockScanWrapper(val, 'manual');
-}
+};
 
 export const mockScanWrapper = (val: string, type: string) => {
   WMBarcodeScanner.mockScan(val, type);
