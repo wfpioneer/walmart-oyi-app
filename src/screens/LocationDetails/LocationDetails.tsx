@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator, Modal, ScrollView, Text, View
+  ActivityIndicator, ScrollView, Text, View
 } from 'react-native';
+import Modal from 'react-native-modal';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import FAB from 'react-native-fab';
@@ -103,7 +104,7 @@ const LocationDetails = () => {
   };
   return (
     <>
-      <Modal visible={displayConfirmation} transparent>
+      <Modal isVisible={displayConfirmation}>
         <View style={styles.delConfirmation}>
           {delAPI.isWaiting ? (
             <ActivityIndicator
@@ -118,8 +119,7 @@ const LocationDetails = () => {
               <Text style={styles.message}>
                 {error
                   ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
-                  : `${strings('LOCATION.DELETE_CONFIRMATION')} 
-                  ${locToConfirm.locationName}`
+                  : `${strings('LOCATION.DELETE_CONFIRMATION')}${locToConfirm.locationName}`
                 }
               </Text>
               <View style={styles.buttonContainer}>
