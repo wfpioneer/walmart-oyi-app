@@ -119,7 +119,12 @@ export default {
   LOCATION: {
     TITLE: '所有位置',
     FLOOR: '楼面位置',
-    RESERVE: '高货架位置'
+    RESERVE: '高货架位置',
+    ADD_LOCATION_API_ERROR: '添加位置出错，\n请重试',
+    ADD_DUPLICATE_ERROR: '位置和对应类型已经存在',
+    MANUAL_ENTRY_BUTTON: '手工添加位置',
+    SELECTION_INSTRUCTION: '\t选择位置类型',
+    SCAN_INSTRUCTION: '扫描货架标签'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
