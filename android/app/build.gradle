@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.samsclub.intl.reactnativeskeleton"
+        applicationId "com.walmart.intl.oyi"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -200,7 +200,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation "com.walmart.ssae.sms.sso:wmsso:2.5.1"
+    implementation "com.walmart.ssae.sms.sso:wmsso:2.6.0"
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
