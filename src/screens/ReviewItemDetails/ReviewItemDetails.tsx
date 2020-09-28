@@ -27,7 +27,7 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
-import { setFloorLocations, setItemLocDetails, setReserveLocations } from '../../state/actions/Location';
+import {resetLocations, setFloorLocations, setItemLocDetails, setReserveLocations} from '../../state/actions/Location';
 import { showInfoModal } from '../../state/actions/Modal';
 
 const ReviewItemDetails = () => {
@@ -85,6 +85,7 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     if (itemDetails) {
+      dispatch(resetLocations());
       dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty));
       dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr));
       if (itemDetails.location) {

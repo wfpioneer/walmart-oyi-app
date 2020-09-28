@@ -29,7 +29,7 @@ const EnterLocation = (props: { setEnterLocation: Function; onSubmit: Function }
             value={textInput}
             onChangeText={(text: string) => setTextInput(text)}
             selectionColor={COLOR.MAIN_THEME_COLOR}
-            placeholder={strings('GENERICS.INPUT_LOC')}
+            placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')}
             keyboardType="default"
           />
         </View>

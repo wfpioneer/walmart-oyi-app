@@ -3,6 +3,7 @@ import {
   DELETE_LOCATION_FROM_EXISTING,
   EDIT_EXISTING_LOCATION,
   IS_UPDATING,
+  RESET_LOCATIONS,
   SET_FLOOR_LOCATIONS,
   SET_ITEM_LOC_DETAILS,
   SET_RESERVE_LOCATIONS
@@ -30,6 +31,7 @@ const initialState: LocationState = {
 };
 
 export const Location = (state = initialState, action: any) => {
+  console.log(action.type);
   switch (action.type) {
     case SET_ITEM_LOC_DETAILS:
       return {
@@ -153,6 +155,9 @@ export const Location = (state = initialState, action: any) => {
       return {
         ...state
       };
+    case RESET_LOCATIONS:
+      console.log('reseting location');
+      return initialState;
     default:
       return state;
   }
