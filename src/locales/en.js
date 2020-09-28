@@ -131,7 +131,9 @@ export default {
     SELECTION_INSTRUCTION: '1. Select a location type.',
     SCAN_INSTRUCTION: '2. Scan location label.',
     DELETE_CONFIRMATION: 'Confirm: \ndelete location ',
-    DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nRetry?'
+    DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nRetry?',
+    ADD_NEW_LOCATION: 'Add New Location',
+    EDIT_LOCATION: 'Edit Location'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
