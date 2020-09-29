@@ -160,7 +160,7 @@ export const Worklist = (props: WorklistProps) => {
   const dispatch = useDispatch();
   const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
   const typedFilterCategories = filterCategories.map((category: number) => ({ type: 'CATEGORY', value: category }));
-  let filteredData: WorklistItemI[] = props.data;
+  let filteredData: WorklistItemI[] = props.data ? props.data : [];
   if (filterCategories.length !== 0) {
     filteredData = filteredData.filter((worklistItem: WorklistItemI) => filterCategories
       .indexOf(`${worklistItem.catgNbr} - ${worklistItem.catgName}`) !== -1);

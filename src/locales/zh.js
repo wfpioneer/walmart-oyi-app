@@ -34,13 +34,13 @@ export default {
     WEEK: '周',
     TOTAL: '总计',
     DEFAULT: '默认',
-    CLUB: '俱乐部',
+    CLUB: '会员店',
     SUBMIT: '递交',
     RETRY: '重试',
     GOAL: '目标'
   },
   HOME: {
-    OWN_YOUR_INVENTORY: '拥有您的库存',
+    OWN_YOUR_INVENTORY: '管理库存工具',
     HOME: '主页',
     WELCOME: '欢迎',
     STYLE_GUIDE: '页面风格',
@@ -49,7 +49,7 @@ export default {
     WORKLIST_GOAL_COMPLETE: '%{complete}的%{total}项目'
   },
   EXCEPTION: {
-    PO: '覆盖原价格',
+    PO: '价格替代报告',
     NIL_PICK: '未拣货成功清单',
     PRICE_OVERRIDE: '覆盖原价格',
     NO_SALES: '无销售清单',
@@ -124,7 +124,13 @@ export default {
     ADD_DUPLICATE_ERROR: '位置和对应类型已经存在',
     MANUAL_ENTRY_BUTTON: '手工添加位置',
     SELECTION_INSTRUCTION: '\t选择位置类型',
-    SCAN_INSTRUCTION: '扫描货架标签'
+    SCAN_INSTRUCTION: '\t扫描货架标签',
+    EDIT_DUPLICATE_ERROR: '已有位置类型',
+    EDIT_LOCATION_API_ERROR: '编辑位置报错，\n请重试',
+    DELETE_CONFIRMATION: '确认删除位置 ',
+    DELETE_LOCATION_API_ERROR: '删除位置报错，\n请重试',
+    ADD_NEW_LOCATION: '新增位置',
+    EDIT_LOCATION: '修改位置'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
@@ -140,9 +146,9 @@ export default {
   },
   SELECTLOCATIONTYPE: {
     TITLE: '选择位置类型',
-    FLOOR: '地面',
-    ENDCAP: '端盖',
-    POD: '荚',
+    FLOOR: '边柜',
+    ENDCAP: '端头',
+    POD: '堆头',
     DISPLAY: '橱窗',
     RESERVE: '库存'
   }
