@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { Platform, View } from 'react-native';
 // @ts-ignore
-//import WMSSO from 'react-native-wmsso';
+import WMSSO from 'react-native-wmsso';
 import Button from '../../components/buttons/Button';
 import styles from './Login.style';
 import { loginUser } from '../../state/actions/User';
@@ -45,30 +45,11 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
   }
 
   signInUser(): void {
-    //WMSSO.getUser().then((user: User) => {
-    //  this.props.loginUser(user);
-    //  this.props.hideActivityModal();
-    //  this.props.navigation.replace('Tabs');
-    //});
-
-    const user: User = {
-      userId: 't0s00og',
-      token: '',
-      countryCode: 'us',
-      domain: 'homeoffice',
-      siteId: 5597,
-      additional: {
-        displayName: 'Timothy Strickland',
-        clockCheckResult: '',
-        loginId: 't0s00og',
-        mailId: 'timothy.strickland@walmart.com',
-      }
-    };
-
-    this.props.loginUser(user);
-    this.props.hideActivityModal();
-    this.props.navigation.replace('Tabs');
-
+    WMSSO.getUser().then((user: User) => {
+      this.props.loginUser(user);
+      this.props.hideActivityModal();
+      this.props.navigation.replace('Tabs');
+    });
   }
 
   render(): ReactNode {
