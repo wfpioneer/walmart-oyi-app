@@ -22,3 +22,5 @@ export const trackEvent = (eventName: string, params: any = {}) => {
   };
   return AppCenterAnalytics.trackEvent(eventName, submitParams);
 };
+
+export const setUserId = (userId: string) => AppCenter.setUserId(userId);

@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import AppCenter from 'appcenter';
 import { connect } from 'react-redux';
 import { Platform, View } from 'react-native';
 // @ts-ignore
@@ -10,7 +9,7 @@ import { loginUser } from '../../state/actions/User';
 import User from '../../models/User';
 import { strings } from '../../locales';
 import { hideActivityModal } from '../../state/actions/Modal';
-import { trackEvent } from '../../utils/AppCenterTool';
+import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 
 const mapDispatchToProps = {
   loginUser,
@@ -48,7 +47,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
 
   signInUser(): void {
     WMSSO.getUser().then((user: User) => {
-      AppCenter.setUserId(user.userId);
+      setUserId(user.userId);
       this.props.loginUser(user);
       this.props.hideActivityModal();
       trackEvent('user_sign_in', { username: user.userId });
