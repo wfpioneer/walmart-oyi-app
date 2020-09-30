@@ -1,10 +1,12 @@
 import {
   ADD_LOCATION_TO_EXISTING,
+  DELETE_LOCATION_FROM_EXISTING,
+  EDIT_EXISTING_LOCATION,
+  IS_UPDATING,
+  RESET_LOCATIONS,
   SET_FLOOR_LOCATIONS,
   SET_ITEM_LOC_DETAILS,
-  SET_RESERVE_LOCATIONS,
-  EDIT_EXISTING_LOCATION,
-  IS_UPDATING
+  SET_RESERVE_LOCATIONS
 } from '../actions/Location';
 import LocationType from '../../models/Location';
 
@@ -29,6 +31,7 @@ const initialState: LocationState = {
 };
 
 export const Location = (state = initialState, action: any) => {
+  console.log(action.type);
   switch (action.type) {
     case SET_ITEM_LOC_DETAILS:
       return {
@@ -106,7 +109,7 @@ export const Location = (state = initialState, action: any) => {
         return {
           ...state,
           floorLocations: state.floorLocations
-        }
+        };
       }
       if (action.payload.locationArea === 'reserve') {
         const editedLocation = {
@@ -124,9 +127,9 @@ export const Location = (state = initialState, action: any) => {
         return {
           ...state,
           reserveLocations: state.reserveLocations
-        }
+        };
       }
-      return{
+      return {
         ...state
       };
     case IS_UPDATING:
@@ -134,6 +137,27 @@ export const Location = (state = initialState, action: any) => {
         ...state,
         isUpdating: action.payload
       };
+    case DELETE_LOCATION_FROM_EXISTING:
+      if (action.payload.locationArea === 'floor') {
+        state.floorLocations.splice(action.payload.locIndex, 1);
+        return {
+          ...state,
+          floorLocations: state.floorLocations
+        };
+      }
+      if (action.payload.locationArea === 'reserve') {
+        state.reserveLocations.splice(action.payload.locIndex, 1);
+        return {
+          ...state,
+          reserveLocations: state.reserveLocations
+        };
+      }
+      return {
+        ...state
+      };
+    case RESET_LOCATIONS:
+      console.log('reseting location');
+      return initialState;
     default:
       return state;
   }

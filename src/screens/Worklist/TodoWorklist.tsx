@@ -16,7 +16,7 @@ export const TodoWorklist = () => {
   let todoData: WorklistItemI[] | undefined;
 
   if (result && result.data) {
-    todoData = result.data.filter((item: WorklistItemI) => item.isCompleted === false);
+    todoData = result.data.filter((item: WorklistItemI) => item.completed === false);
   }
 
   return (

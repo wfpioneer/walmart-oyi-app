@@ -119,23 +119,23 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const renderWorklistCards = () => data[this.state.activeGoal].worklistTypes
       .map((worklist: { worklistType: string; completedItems: number; totalItems: number }) => {
         let worklistType: string;
-        switch (worklist.worklistType) {
-          case 'nsfl':
+        switch (worklist.worklistType.toUpperCase()) {
+          case 'NSFL':
             worklistType = strings('EXCEPTION.NSFL');
             break;
-          case 'po':
+          case 'PO':
             worklistType = strings('EXCEPTION.PRICE_OVERRIDE');
             break;
-          case 'np':
+          case 'NP':
             worklistType = strings('EXCEPTION.NIL_PICK');
             break;
-          case 'ns':
+          case 'NS':
             worklistType = strings('EXCEPTION.NO_SALES');
             break;
-          case 'no':
+          case 'NO':
             worklistType = strings('EXCEPTION.NEGATIVE_ON_HANDS');
             break;
-          case 'c':
+          case 'C':
             worklistType = strings('EXCEPTION.CANCELLED');
             break;
           default:

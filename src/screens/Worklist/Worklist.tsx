@@ -27,19 +27,19 @@ interface WorklistProps {
 }
 
 export const renderWorklistItem = (listItem: ListItemI) => {
-  if (listItem.item.exceptionType === 'CATEGORY') {
+  if (listItem.item.worklistType === 'CATEGORY') {
     const { catgName, catgNbr, itemCount } = listItem.item;
     return (
       <CategorySeparator categoryName={catgName} categoryNumber={catgNbr || 0} numberOfItems={itemCount} />
     );
   }
   const {
-    exceptionType, itemName, itemNbr, upcNbr
+    worklistType, itemName, itemNbr, upcNbr
   } = listItem.item;
 
   return (
     <WorklistItem
-      exceptionType={exceptionType}
+      exceptionType={worklistType}
       itemDescription={itemName || ''}
       upcNbr={upcNbr || ''}
       itemNumber={itemNbr || 0}
@@ -49,12 +49,13 @@ export const renderWorklistItem = (listItem: ListItemI) => {
 
 export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boolean): WorklistItemI[] => {
   if (!groupToggle) {
+    const workListItems = data ? data : [];
     return [{
-      exceptionType: 'CATEGORY',
+      worklistType: 'CATEGORY',
       catgName: strings('WORKLIST.ALL'),
-      itemCount: data.length
+      itemCount: workListItems.length
     },
-    ...data];
+    ...workListItems];
   }
 
   const sortedData = data;
@@ -76,7 +77,7 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
     if (!previousItem || (previousItem.catgNbr !== item.catgNbr)) {
       previousItem = item;
       returnData.push({
-        exceptionType: 'CATEGORY',
+        worklistType: 'CATEGORY',
         catgName: item.catgName,
         catgNbr: item.catgNbr,
         itemCount: 1
@@ -148,7 +149,7 @@ export const Worklist = (props: WorklistProps) => {
     );
   }
 
-  if (props.refreshing || !props.data) {
+  if (props.refreshing && !props.data) {
     return (
       <FlatList data={[]} renderItem={() => null} refreshing onRefresh={() => null} />
     );
@@ -159,17 +160,15 @@ export const Worklist = (props: WorklistProps) => {
   const dispatch = useDispatch();
   const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
   const typedFilterCategories = filterCategories.map((category: number) => ({ type: 'CATEGORY', value: category }));
-
-  let filteredData: WorklistItemI[] = props.data;
+  let filteredData: WorklistItemI[] = props.data ? props.data : [];
   if (filterCategories.length !== 0) {
     filteredData = filteredData.filter((worklistItem: WorklistItemI) => filterCategories
       .indexOf(`${worklistItem.catgNbr} - ${worklistItem.catgName}`) !== -1);
   }
-
   if (filterExceptions.length !== 0) {
     filteredData = filteredData.filter((worklistItem: WorklistItemI) => {
       const exceptionTranslation = FullExceptionList().find((exceptionListItem: any) => exceptionListItem.value
-        === worklistItem.exceptionType);
+        === worklistItem.worklistType);
       if (exceptionTranslation) {
         return filterExceptions.findIndex((exception: any) => exception === exceptionTranslation.value) !== -1;
       }
@@ -208,11 +207,11 @@ export const Worklist = (props: WorklistProps) => {
       </View>
       <FlatList
         data={convertDataToDisplayList(filteredData, groupToggle)}
-        keyExtractor={(item: any) => {
+        keyExtractor={(item: any, index: number) => {
           if (item.exceptionType === 'CATEGORY') {
             return item.catgName.toString();
           }
-          return item.itemNbr.toString();
+          return item.itemNbr + index.toString();
         }}
         renderItem={renderWorklistItem}
         onRefresh={props.onRefresh}

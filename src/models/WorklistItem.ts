@@ -1,5 +1,5 @@
 export interface WorklistItemI {
-  exceptionType : string;
+  worklistType : string;
   itemName? : string;
   itemNbr? : number;
   upcNbr? : string;
@@ -10,7 +10,7 @@ export interface WorklistItemI {
   subCatgName? : string;
   completedTs? : Date;
   completedUserId? : string;
-  isCompleted? : boolean;
+  completed? : boolean;
   imageURLKey?: string;
   imageBlobKey?: string;
 }
