@@ -119,7 +119,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const renderWorklistCards = () => data[this.state.activeGoal].worklistTypes
       .map((worklist: { worklistType: string; completedItems: number; totalItems: number }) => {
         let worklistType: string;
-        switch (worklist.worklistType.toUpperCase()) {
+        switch (worklist.worklistType ? worklist.worklistType.toUpperCase() : '') {
           case 'NSFL':
             worklistType = strings('EXCEPTION.NSFL');
             break;
@@ -155,7 +155,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             complete={worklist.completedItems}
             completionPercentage={(worklist.completedItems / worklist.totalItems) * 100}
             completionGoal={data[this.state.activeGoal].worklistGoalPct}
-            onPress={onWorklistCardPress}
+            onPress={worklist.worklistType ? onWorklistCardPress : () => {}}
           />
         );
       });

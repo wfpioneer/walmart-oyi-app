@@ -12,7 +12,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { addToPicklist, getItemDetails } from '../../state/actions/saga';
+import { addToPicklist, getItemDetails, noAction } from '../../state/actions/saga';
 
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -23,7 +23,7 @@ import { strings } from '../../locales';
 import Button from '../../components/buttons/Button';
 import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
-import { barcodeEmitter } from '../../utils/scannerUtils';
+import {barcodeEmitter, manualScan} from '../../utils/scannerUtils';
 import { setManualScan } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
@@ -58,23 +58,25 @@ const ReviewItemDetails = () => {
 
   // Barcode event listener effect
   useEffect(() => {
-    const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (navigation.isFocused()) {
-        if (scan.value === scannedEvent.value) {
-          dispatch(setActionCompleted());
-          navigation.goBack();
-        } else {
-          dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+    if (!isWaiting && !error && result) {
+      const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
+        if (navigation.isFocused()) {
+          if (scan.value === scannedEvent.value || scan.value === result.data.upcNbr || scan.value === result.data.itemNbr.toString()) {
+            //dispatch(noAction({upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value}));
+            dispatch(setActionCompleted());
+            navigation.goBack();
+          } else {
+            dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+          }
+          dispatch(setManualScan(false));
         }
-        dispatch(setManualScan(false));
-      }
-    });
-
-    return () => {
-      // eslint-disable-next-line no-unused-expressions
-      scanSubscription?.remove();
-    };
-  }, []);
+      });
+      return () => {
+        // eslint-disable-next-line no-unused-expressions
+        scanSubscription?.remove();
+      };
+    }
+  }, [isWaiting, result]);
 
   const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
 
@@ -293,15 +295,15 @@ const ReviewItemDetails = () => {
   };
 
   const renderScanForNoActionButton = () => {
-    if (!exceptionType) {
-      return null;
-    }
+    //if (!exceptionType) {
+    //  return null;
+    //}
 
     if (Platform.OS === 'android') {
       return (
-        <View style={styles.scanForNoActionButton}>
+        <TouchableOpacity style={styles.scanForNoActionButton} onPress={() => dispatch(setManualScan(!isManualScanEnabled))}>
           <Text style={styles.buttonText}>{strings('ITEM.USE_SCANNER_SCAN_FOR_NO_ACTION')}</Text>
-        </View>
+        </TouchableOpacity>
       );
     }
 
