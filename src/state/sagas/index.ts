@@ -25,7 +25,6 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
   makeAsyncSaga(saga.DELETE_LOCATION, actions.deleteLocation, DeleteLocationService.deleteLocation),
   makeAsyncSaga(saga.NO_ACTION, actions.noAction, NoActionService.noAction),
-  makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
   makeAsyncSaga(saga.PRINT, actions.print, PrintService.print)
 ];
 

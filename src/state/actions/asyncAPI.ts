@@ -24,11 +24,11 @@ export const addToPicklist = makeAsyncActionCreators(ADD_TO_PICKLIST);
 export const GET_WORKLIST_SUMMARY = makeAsyncActionTypes('API/GET_WORKLIST_SUMMARY');
 export const getWorklistSummary = makeAsyncActionCreators(GET_WORKLIST_SUMMARY);
 
-export const PRINT = makeAsyncActionTypes('API/PRINT');
-export const print = makeAsyncActionCreators(PRINT);
-
 export const DELETE_LOCATION = makeAsyncActionTypes('API/DELETE_LOCATION');
 export const deleteLocation = makeAsyncActionCreators(DELETE_LOCATION);
 
 export const NO_ACTION = makeAsyncActionTypes('API/NO_ACTION');
 export const noAction = makeAsyncActionCreators(NO_ACTION);
+
+export const PRINT = makeAsyncActionTypes('API/PRINT');
+export const print = makeAsyncActionCreators(PRINT);

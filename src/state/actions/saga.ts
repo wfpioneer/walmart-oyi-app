@@ -21,3 +21,4 @@ export const getWorklistSummary = (payload: any) => ({ type: GET_WORKLIST_SUMMAR
 export const deleteLocation = (payload: any) => ({ type: DELETE_LOCATION, payload });
 export const noAction = (payload: any) => ({ type: NO_ACTION, payload });
 export const print = (payload: any) => ({type: PRINT, payload});
+
