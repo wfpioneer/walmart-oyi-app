@@ -19,6 +19,7 @@ import RootReducer from './src/state/reducers/RootReducer';
 import rootSaga from './src/state/sagas';
 import Modal from './src/screens/Modal/Modal';
 import AppRoot from './src/components/AppRoot';
+import { initialize } from './src/utils/AppCenterTool';
 
 declare let global: {HermesInternal: null | {}};
 
@@ -32,6 +33,8 @@ export const store = createStore(RootReducer,
   composeEnhancer(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(rootSaga);
+
+initialize();
 
 export default class App extends React.PureComponent {
   constructor(props: Readonly<{}>) {

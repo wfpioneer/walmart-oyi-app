@@ -18,6 +18,7 @@ import { logoutUser } from '../state/actions/User';
 import { hideActivityModal, showActivityModal } from '../state/actions/Modal';
 import StyleGuide from '../screens/StyleGuide/StyleGuide';
 import { setManualScan } from '../state/actions/Global';
+import { trackEvent } from '../utils/AppCenterTool';
 
 interface HomeNavigatorComponentProps {
   logoutUser: Function;
@@ -74,12 +75,15 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
         switch (selectedLanguageIndex) {
           case 0:
             setLanguage('en');
+            trackEvent('change_language', { language: 'en' });
             return navigation.dispatch(StackActions.replace('Login'));
           case 1:
             setLanguage('es');
+            trackEvent('change_language', { language: 'es' });
             return navigation.dispatch(StackActions.replace('Login'));
           case 2:
             setLanguage('zh');
+            trackEvent('change_language', { language: 'zh' });
             return navigation.dispatch(StackActions.replace('Login'));
           default:
             return null;
@@ -88,6 +92,7 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
     }
     if (buttonIndex === 1) {
       props.showActivityModal();
+      trackEvent('user_sign_out');
       WMSSO.signOutUser().then(() => {
         props.navigation.replace('Login');
         props.logoutUser();
@@ -105,7 +110,15 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
 };
 
 const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: Function) => (
-  <TouchableOpacity onPress={() => { setManualScanFunc(!isManualScanEnabled); }}>
+  <TouchableOpacity onPress={() => {
+    if (isManualScanEnabled) {
+      trackEvent('disable_manual_scan');
+    } else {
+      trackEvent('enable_manual_scan');
+    }
+    setManualScanFunc(!isManualScanEnabled);
+  }}
+  >
     <View style={styles.leftButton}>
       <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
     </View>
