@@ -42,7 +42,15 @@ export const strings: (
 export const currencies: (
   value: number,
   options?: I18n.ToCurrencyOptions | undefined
-) => string = (value: number, options: I18n.ToCurrencyOptions | undefined = {}) => I18n.toCurrency(value, options);
+) => string = (value: number, options: I18n.ToCurrencyOptions | undefined = {}) => {
+  if (I18n.locale === 'zh') {
+    return I18n.toCurrency(value, {
+      ...options,
+      unit: '¥'
+    });
+  }
+  return I18n.toCurrency(value, options);
+};
 
 export const numbers: (
   value: number,
