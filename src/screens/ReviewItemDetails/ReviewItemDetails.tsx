@@ -204,7 +204,7 @@ const ReviewItemDetails = () => {
   };
 
   const renderOHQtyComponent = () => {
-    if (!pendingOnHandsQty || pendingOnHandsQty === -999) {
+    if (!(pendingOnHandsQty === 0) || pendingOnHandsQty === -999) {
       return (
         <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -219,7 +219,7 @@ const ReviewItemDetails = () => {
       <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <Text>{strings('ITEM.ON_HANDS')}</Text>
-          <Text>{pendingOnHandsQty}</Text>
+          <Text>{itemDetails.onHandsQty}</Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
           <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={{ paddingRight: 6 }} />
