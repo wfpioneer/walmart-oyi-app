@@ -7,6 +7,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 
 export const CompletedWorklist = () => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
+  const filteredExceptions = useTypedSelector(state => state.Worklist.filterExceptions);
   const dispatch = useDispatch();
 
   let completedData: WorklistItemI[] | undefined;
@@ -19,7 +20,7 @@ export const CompletedWorklist = () => {
     <Worklist
       data={completedData}
       refreshing={isWaiting}
-      onRefresh={() => dispatch(getWorklist())}
+      onRefresh={() => dispatch(getWorklist({worklistType: filteredExceptions}))}
       error={error}
     />
   );

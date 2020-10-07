@@ -8,6 +8,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  completeActivityIndicator: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   container: {
     alignItems: 'stretch',
     justifyContent: 'center'

@@ -7,10 +7,11 @@ import { getWorklist } from '../../state/actions/saga';
 
 export const TodoWorklist = () => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
+  const filteredExceptions = useTypedSelector(state => state.Worklist.filterExceptions);
   const dispatch = useDispatch();
 
   if (!result && !isWaiting && !error) {
-    dispatch(getWorklist());
+    dispatch(getWorklist({worklistType: filteredExceptions}));
   }
 
   let todoData: WorklistItemI[] | undefined;
@@ -23,7 +24,7 @@ export const TodoWorklist = () => {
     <Worklist
       data={todoData}
       refreshing={isWaiting}
-      onRefresh={() => dispatch(getWorklist())}
+      onRefresh={() => dispatch(getWorklist({worklistType: filteredExceptions}))}
       error={error}
     />
   );

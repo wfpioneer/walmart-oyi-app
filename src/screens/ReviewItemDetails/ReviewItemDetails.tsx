@@ -27,13 +27,14 @@ import {barcodeEmitter, manualScan} from '../../utils/scannerUtils';
 import { setManualScan } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
-import {resetLocations, setFloorLocations, setItemLocDetails, setReserveLocations} from '../../state/actions/Location';
+import { resetLocations, setFloorLocations, setItemLocDetails, setReserveLocations } from '../../state/actions/Location';
 import { showInfoModal } from '../../state/actions/Modal';
 
 const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
+  const completeApi = useTypedSelector(state => state.async.noAction);
   const { userId } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
   const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
@@ -42,6 +43,7 @@ const ReviewItemDetails = () => {
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
+  const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
 
   useEffect(() => {
     dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
@@ -62,9 +64,12 @@ const ReviewItemDetails = () => {
       const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
         if (navigation.isFocused()) {
           if (scan.value === scannedEvent.value || scan.value === result.data.upcNbr || scan.value === result.data.itemNbr.toString()) {
-            //dispatch(noAction({upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value}));
-            dispatch(setActionCompleted());
-            navigation.goBack();
+            if (!actionCompleted) {
+              dispatch(noAction({upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value}));
+            } else {
+              dispatch(setActionCompleted());
+              navigation.goBack();
+            }
           } else {
             dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
           }
@@ -96,6 +101,30 @@ const ReviewItemDetails = () => {
       }
     }
   }, [itemDetails]);
+
+  useEffect(() => {
+    // on api success
+    if (completeApiInProgress && completeApi.isWaiting === false && completeApi.result) {
+      setCompleteApiInProgress(false);
+      dispatch(setActionCompleted());
+      navigation.goBack();
+      return undefined;
+    }
+
+    // on api failure
+    if (completeApiInProgress && completeApi.isWaiting === false && completeApi.error) {
+      setCompleteApiInProgress(false);
+      dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
+      return undefined;
+    }
+
+    // on api submission
+    if (!completeApiInProgress && completeApi.isWaiting) {
+      return setCompleteApiInProgress(true);
+    }
+
+    return undefined;
+  }, [completeApi]);
 
   useFocusEffect(
     () => {
@@ -295,9 +324,21 @@ const ReviewItemDetails = () => {
   };
 
   const renderScanForNoActionButton = () => {
-    //if (!exceptionType) {
-    //  return null;
-    //}
+    if (!exceptionType) {
+      return null;
+    }
+
+    if (completeApi.isWaiting) {
+      return (
+        <ActivityIndicator
+          animating={completeApi.isWaiting}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.completeActivityIndicator}
+        />
+      )
+    }
 
     if (Platform.OS === 'android') {
       return (
@@ -344,7 +385,7 @@ const ReviewItemDetails = () => {
               status={itemDetails.status}
               category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
               price={itemDetails.price}
-              exceptionType={itemDetails.exceptionType}
+              exceptionType={!actionCompleted ? itemDetails.exceptionType : undefined}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}
