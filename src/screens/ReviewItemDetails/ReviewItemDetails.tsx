@@ -342,13 +342,15 @@ const ReviewItemDetails = () => {
     if (Platform.OS === 'android') {
       return (
         <TouchableOpacity style={styles.scanForNoActionButton} onPress={() => dispatch(setManualScan(!isManualScanEnabled))}>
-          <Text style={styles.buttonText}>{strings('ITEM.USE_SCANNER_SCAN_FOR_NO_ACTION')}</Text>
+          <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+          <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
         </TouchableOpacity>
       );
     }
 
     return (
       <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
+        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
         <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
       </TouchableOpacity>
     );

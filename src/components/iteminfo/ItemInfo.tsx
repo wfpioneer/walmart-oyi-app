@@ -35,7 +35,7 @@ const ItemInfo = (props: ItemInfoProps) => {
         exceptionString = strings('EXCEPTION.NEGATIVE_ON_HANDS');
         break;
       case 'NSFL':
-        exceptionString = strings('EXCEPTION.UNKNOWN');
+        exceptionString = strings('EXCEPTION.NSFL');
         break;
       case 'NP':
         exceptionString = strings('EXCEPTION.NIL_PICK');

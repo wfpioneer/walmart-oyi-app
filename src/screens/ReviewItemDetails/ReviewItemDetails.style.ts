@@ -41,20 +41,22 @@ const styles = StyleSheet.create({
     paddingVertical: 14
   },
   scanForNoActionButton: {
-    backgroundColor: COLOR.WHITE,
+    backgroundColor: COLOR.MAIN_THEME_COLOR,
     borderRadius: 4,
     borderColor: COLOR.MAIN_THEME_COLOR,
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
     height: 40,
     paddingVertical: 10,
     marginVertical: 10,
     marginHorizontal: 15
   },
   buttonText: {
-    color: COLOR.MAIN_THEME_COLOR,
-    textAlign: 'center'
+    color: COLOR.WHITE,
+    textAlign: 'center',
+    marginLeft: 10
   },
   picklistSuccessText: {
     color: COLOR.GREEN
