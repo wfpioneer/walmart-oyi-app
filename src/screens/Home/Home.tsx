@@ -44,6 +44,7 @@ interface HomeScreenState {
 
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
   private readonly scannedSubscription: EmitterSubscription;
+
   private readonly navigationRemoveListener: Function;
 
   constructor(props: HomeScreenProps) {

@@ -65,7 +65,7 @@ const ReviewItemDetails = () => {
         if (navigation.isFocused()) {
           if (scan.value === scannedEvent.value || scan.value === result.data.upcNbr || scan.value === result.data.itemNbr.toString()) {
             if (!actionCompleted) {
-              dispatch(noAction({upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value}));
+              dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
             } else {
               navigation.goBack();
             }
@@ -80,6 +80,7 @@ const ReviewItemDetails = () => {
         scanSubscription?.remove();
       };
     }
+    return undefined;
   }, [isWaiting, result]);
 
   const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
@@ -204,7 +205,7 @@ const ReviewItemDetails = () => {
   };
 
   const renderOHQtyComponent = () => {
-    if (!(pendingOnHandsQty === 0) || pendingOnHandsQty === -999) {
+    if (!pendingOnHandsQty || pendingOnHandsQty === -999) {
       return (
         <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -219,7 +220,7 @@ const ReviewItemDetails = () => {
       <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <Text>{strings('ITEM.ON_HANDS')}</Text>
-          <Text>{itemDetails.onHandsQty}</Text>
+          <Text>{pendingOnHandsQty}</Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
           <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={{ paddingRight: 6 }} />
@@ -336,7 +337,7 @@ const ReviewItemDetails = () => {
           size="large"
           style={styles.completeActivityIndicator}
         />
-      )
+      );
     }
 
     if (Platform.OS === 'android') {
