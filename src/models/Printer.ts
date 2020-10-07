@@ -17,7 +17,7 @@ export interface PrintQueueItem {
   upcNbr : string;
   catgNbr: number;
   signQty: number;
-  paperSize: LaserPaper | PortablePaper;
+  paperSize: LaserPaper;
 }
 
 export enum LaserPaper {

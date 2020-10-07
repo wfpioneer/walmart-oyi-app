@@ -8,7 +8,6 @@ export const ADD_LOCATION = 'SAGA/ADD_LOCATION';
 export const GET_WORKLIST_SUMMARY = 'SAGA/GET_WORKLIST_SUMMARY';
 export const DELETE_LOCATION = 'SAGA/DELETE_LOCATION';
 export const NO_ACTION = 'SAGA/NO_ACTION';
-export const PRINT = 'SAGA/PRINT';
 
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload });
 export const getItemDetails = (payload: any) => ({ type: GET_ITEM_DETAILS, payload });
@@ -20,5 +19,4 @@ export const addToPicklist = (payload: any) => ({ type: ADD_TO_PICKLIST, payload
 export const getWorklistSummary = (payload: any) => ({ type: GET_WORKLIST_SUMMARY, payload });
 export const deleteLocation = (payload: any) => ({ type: DELETE_LOCATION, payload });
 export const noAction = (payload: any) => ({ type: NO_ACTION, payload });
-export const print = (payload: any) => ({type: PRINT, payload});
 
