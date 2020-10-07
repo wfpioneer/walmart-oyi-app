@@ -10,7 +10,7 @@ export const TodoWorklist = () => {
   const dispatch = useDispatch();
 
   if (!result && !isWaiting && !error) {
-    dispatch(getWorklist({worklistType: []}));
+    dispatch(getWorklist());
   }
 
   let todoData: WorklistItemI[] | undefined;
@@ -23,7 +23,7 @@ export const TodoWorklist = () => {
     <Worklist
       data={todoData}
       refreshing={isWaiting}
-      onRefresh={() => dispatch(getWorklist({worklistType: []}))}
+      onRefresh={() => dispatch(getWorklist())}
       error={error}
     />
   );

@@ -19,7 +19,7 @@ export const CompletedWorklist = () => {
     <Worklist
       data={completedData}
       refreshing={isWaiting}
-      onRefresh={() => dispatch(getWorklist({worklistType: []}))}
+      onRefresh={() => dispatch(getWorklist())}
       error={error}
     />
   );
