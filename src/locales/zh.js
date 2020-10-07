@@ -89,7 +89,9 @@ export default {
     NO_SIGN_PRINTED: '没有印制标志',
     NO_SIGN_PRINTED_DETAILS: '项目未完成，因为您从未打印过新标志',
     NO_FLOOR_LOCATION: '没有楼层位置',
-    NO_FLOOR_LOCATION_DETAILS: '项目未完成，因为您从未添加楼层位置'
+    NO_FLOOR_LOCATION_DETAILS: '项目未完成，因为您从未添加楼层位置',
+    ACTION_COMPLETE_ERROR: '系统错误',
+    ACTION_COMPLETE_ERROR_DETAILS: '系统处理请求错误，请再试一次。'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
