@@ -17,6 +17,7 @@ interface LocationState {
   itemLocDetails: {
     itemNbr: number | null;
     upcNbr: string | null;
+    exceptionType: string | null;
   };
 }
 
@@ -26,7 +27,8 @@ const initialState: LocationState = {
   isUpdating: false,
   itemLocDetails: {
     itemNbr: null,
-    upcNbr: null
+    upcNbr: null,
+    exceptionType: null
   }
 };
 

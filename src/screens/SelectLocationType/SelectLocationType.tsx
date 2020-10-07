@@ -77,7 +77,7 @@ const SelectLocationType = () => {
     // on api success
     if (apiInProgress && addAPI.isWaiting === false && addAPI.result) {
       dispatch(addLocationToExisting(loc, parseInt(type, 10), 'floor'));
-      if (!actionCompleted) dispatch(setActionCompleted());
+      if (!actionCompleted && itemLocDetails.exceptionType === 'NSFL') dispatch(setActionCompleted());
       setAPIInProgress(false);
       navigation.navigate('LocationDetails');
       dispatch(isUpdating(true));

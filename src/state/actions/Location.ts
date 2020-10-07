@@ -9,11 +9,12 @@ export const IS_UPDATING = 'LOCATION/IS_UPDATING';
 export const DELETE_LOCATION_FROM_EXISTING = 'LOCATION/DELETE_LOCATION_FROM_EXISTING';
 export const RESET_LOCATIONS = 'LOCATION/RESET_LOCATIONS';
 
-export const setItemLocDetails = (itemNbr: number, upcNbr: string) => ({
+export const setItemLocDetails = (itemNbr: number, upcNbr: string, exceptionType: string) => ({
   type: SET_ITEM_LOC_DETAILS,
   payload: {
     itemNbr,
-    upcNbr
+    upcNbr,
+    exceptionType
   }
 });
 

@@ -4,7 +4,7 @@ import URLS from '../utils/environment';
 export default class AddLocationService {
   public static addLocation(payload: {headers: object; upc: string; sectionId: string; locationTypeNbr: number}) {
     return Request.enqueue({
-      url: `${URLS.orchestrationURL}/item/${payload.upc}/location/`,
+      url: `${URLS.locationURL}/item/${payload.upc}/location/`,
       method: 'post',
       data: {
         sectionId: payload.sectionId,

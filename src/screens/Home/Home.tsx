@@ -155,7 +155,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             complete={worklist.completedItems}
             completionPercentage={(worklist.completedItems / worklist.totalItems) * 100}
             completionGoal={data[this.state.activeGoal].worklistGoalPct}
-            onPress={worklist.worklistType ? onWorklistCardPress : () => {}}
+            onPress={onWorklistCardPress}
           />
         );
       });
