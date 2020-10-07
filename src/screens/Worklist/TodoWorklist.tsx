@@ -7,7 +7,6 @@ import { getWorklist } from '../../state/actions/saga';
 
 export const TodoWorklist = () => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
-  const filteredExceptions = useTypedSelector(state => state.Worklist.filterExceptions);
   const dispatch = useDispatch();
 
   if (!result && !isWaiting && !error) {
