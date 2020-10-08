@@ -17,6 +17,7 @@ interface LocationState {
   itemLocDetails: {
     itemNbr: number | null;
     upcNbr: string | null;
+    exceptionType: string | null;
   };
 }
 
@@ -26,12 +27,12 @@ const initialState: LocationState = {
   isUpdating: false,
   itemLocDetails: {
     itemNbr: null,
-    upcNbr: null
+    upcNbr: null,
+    exceptionType: null
   }
 };
 
 export const Location = (state = initialState, action: any) => {
-  console.log(action.type);
   switch (action.type) {
     case SET_ITEM_LOC_DETAILS:
       return {
@@ -156,7 +157,6 @@ export const Location = (state = initialState, action: any) => {
         ...state
       };
     case RESET_LOCATIONS:
-      console.log('reseting location');
       return initialState;
     default:
       return state;

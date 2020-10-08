@@ -26,3 +26,6 @@ export const getWorklistSummary = makeAsyncActionCreators(GET_WORKLIST_SUMMARY);
 
 export const DELETE_LOCATION = makeAsyncActionTypes('API/DELETE_LOCATION');
 export const deleteLocation = makeAsyncActionCreators(DELETE_LOCATION);
+
+export const NO_ACTION = makeAsyncActionTypes('API/NO_ACTION');
+export const noAction = makeAsyncActionCreators(NO_ACTION);

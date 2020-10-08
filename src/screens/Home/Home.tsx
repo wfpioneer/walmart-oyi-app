@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  ActivityIndicator,
-  EmitterSubscription, SafeAreaView, ScrollView, Text, TouchableOpacity, View
-} from 'react-native';
+import { ActivityIndicator, EmitterSubscription, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './Home.style';
@@ -48,10 +45,17 @@ interface HomeScreenState {
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
   private readonly scannedSubscription: EmitterSubscription;
 
+  private readonly navigationRemoveListener: Function;
+
   constructor(props: HomeScreenProps) {
     super(props);
 
     this.state = { activeGoal: 0 };
+
+    // addListener returns a function to remove listener
+    this.navigationRemoveListener = this.props.navigation.addListener('focus', () => {
+      this.props.getWorklistSummary();
+    });
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (props.navigation.isFocused()) {
@@ -62,12 +66,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     });
   }
 
-  componentDidMount() {
-    this.props.getWorklistSummary();
-  }
-
   componentWillUnmount() {
     if (this.scannedSubscription) this.scannedSubscription.remove();
+    this.navigationRemoveListener();
   }
 
   render():
@@ -119,7 +120,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const renderWorklistCards = () => data[this.state.activeGoal].worklistTypes
       .map((worklist: { worklistType: string; completedItems: number; totalItems: number }) => {
         let worklistType: string;
-        switch (worklist.worklistType.toUpperCase()) {
+        switch (worklist.worklistType ? worklist.worklistType.toUpperCase() : '') {
           case 'NSFL':
             worklistType = strings('EXCEPTION.NSFL');
             break;

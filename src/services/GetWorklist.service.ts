@@ -2,11 +2,19 @@ import Request from './Request';
 import URLS from '../utils/environment';
 
 export default class GetWorklistService {
-  // TODO currently the service is hardcoded to only return NSFL when service is corrected and more worklists added will
-  // TODO need to add the payload for the type instead of hardcoding it
-  public static getWorklist() {
+  public static getWorklist(payload: {headers: object; worklistType?: [string]}) {
+    let filterUrl = `${URLS.worklistURL}/worklist/items`;
+    if (payload && payload.worklistType) {
+      if (payload.worklistType.length > 0) {
+        const filters = payload.worklistType.reduce((acc, current) => {
+          return acc + '&type=' + current
+        });
+        filterUrl = filterUrl + '?type=' + filters;
+      }
+    }
+    console.log(payload);
     return Request.enqueue({
-      url: `${URLS.worklistURL}/worklist/items?type=NSFL`,
+      url: filterUrl,
       method: 'get',
       timeout: 10000
     });

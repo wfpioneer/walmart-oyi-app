@@ -12,7 +12,8 @@ export const asyncReducer = combineReducers({
   addLocation: makeAsyncReducer(asyncActions.ADD_LOCATION),
   updateOHQty: makeAsyncReducer(asyncActions.UPDATE_OH_QTY),
   getWorklistSummary: makeAsyncReducer(asyncActions.GET_WORKLIST_SUMMARY),
-  deleteLocation: makeAsyncReducer(asyncActions.DELETE_LOCATION)
+  deleteLocation: makeAsyncReducer(asyncActions.DELETE_LOCATION),
+  noAction: makeAsyncReducer(asyncActions.NO_ACTION)
 });
 
 export default asyncReducer;
