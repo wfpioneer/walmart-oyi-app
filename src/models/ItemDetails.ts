@@ -9,7 +9,7 @@ export default interface ItemDetails {
   categoryNbr: number;
   categoryDesc: string;
   price: number;
-  exceptionType: string; // This is enumerated
+  exceptionType?: string; // This is enumerated
   onHandsQty: number;
   pendingOnHandsQty: number;
   replenishment: {

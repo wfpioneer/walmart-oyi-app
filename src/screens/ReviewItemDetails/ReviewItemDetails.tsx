@@ -94,7 +94,7 @@ const ReviewItemDetails = () => {
     if (itemDetails) {
       dispatch(resetLocations());
       dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty));
-      dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr, itemDetails.exceptionType));
+      dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr, itemDetails.exceptionType ? itemDetails.exceptionType : ''));
       if (itemDetails.location) {
         if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
         if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
