@@ -11,6 +11,7 @@ import AddToPicklistService from '../../services/AddToPicklist.service';
 import AddLocationService from '../../services/AddLocation.service';
 import WorklistSummaryService from '../../services/WorklistSummary.service';
 import DeleteLocationService from '../../services/DeleteLocation.service';
+import NoActionService from '../../services/NoAction.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
@@ -21,7 +22,8 @@ const genericSagas = [
   makeAsyncSaga(saga.ADD_LOCATION, actions.addLocation, AddLocationService.addLocation),
   makeAsyncSaga(saga.UPDATE_OH_QTY, actions.updateOHQty, UpdateOHQtyService.updateOHQty),
   makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
-  makeAsyncSaga(saga.DELETE_LOCATION, actions.deleteLocation, DeleteLocationService.deleteLocation)
+  makeAsyncSaga(saga.DELETE_LOCATION, actions.deleteLocation, DeleteLocationService.deleteLocation),
+  makeAsyncSaga(saga.NO_ACTION, actions.noAction, NoActionService.noAction)
 ];
 
 export default function* rootSaga() {

@@ -12,7 +12,7 @@ export const CompletedWorklist = () => {
   let completedData: WorklistItemI[] | undefined;
 
   if (result && result.data) {
-    completedData = result.data.filter((item: WorklistItemI) => item.isCompleted === true);
+    completedData = result.data.filter((item: WorklistItemI) => item.completed === true);
   }
 
   return (

@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { addLocation, editLocation } from '../../state/actions/saga';
 import { addLocationToExisting, editExistingLocation, isUpdating } from '../../state/actions/Location';
+import { setActionCompleted } from "../../state/actions/ItemDetailScreen";
 import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { barcodeEmitter, manualScan } from '../../utils/scannerUtils';
@@ -38,6 +39,7 @@ const SelectLocationType = () => {
   const editAPI = useTypedSelector(state => state.async.editLocation);
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
   const itemLocDetails = useTypedSelector(state => state.Location.itemLocDetails);
+  const { actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const route = useRoute();
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -75,6 +77,7 @@ const SelectLocationType = () => {
     // on api success
     if (apiInProgress && addAPI.isWaiting === false && addAPI.result) {
       dispatch(addLocationToExisting(loc, parseInt(type, 10), 'floor'));
+      if (!actionCompleted && itemLocDetails.exceptionType === 'NSFL') dispatch(setActionCompleted());
       setAPIInProgress(false);
       navigation.navigate('LocationDetails');
       dispatch(isUpdating(true));

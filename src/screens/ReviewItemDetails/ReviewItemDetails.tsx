@@ -12,7 +12,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { addToPicklist, getItemDetails } from '../../state/actions/saga';
+import { addToPicklist, getItemDetails, noAction } from '../../state/actions/saga';
 
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -27,13 +27,14 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
-import {resetLocations, setFloorLocations, setItemLocDetails, setReserveLocations} from '../../state/actions/Location';
+import { resetLocations, setFloorLocations, setItemLocDetails, setReserveLocations } from '../../state/actions/Location';
 import { showInfoModal } from '../../state/actions/Modal';
 
 const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
+  const completeApi = useTypedSelector(state => state.async.noAction);
   const { userId } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
   const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
@@ -42,6 +43,7 @@ const ReviewItemDetails = () => {
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
+  const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
 
   useEffect(() => {
     dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
@@ -58,23 +60,28 @@ const ReviewItemDetails = () => {
 
   // Barcode event listener effect
   useEffect(() => {
-    const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (navigation.isFocused()) {
-        if (scan.value === scannedEvent.value) {
-          dispatch(setActionCompleted());
-          navigation.goBack();
-        } else {
-          dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+    if (!isWaiting && !error && result) {
+      const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
+        if (navigation.isFocused()) {
+          if (scan.value === scannedEvent.value || scan.value === result.data.upcNbr || scan.value === result.data.itemNbr.toString()) {
+            if (!actionCompleted) {
+              dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
+            } else {
+              navigation.goBack();
+            }
+          } else {
+            dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+          }
+          dispatch(setManualScan(false));
         }
-        dispatch(setManualScan(false));
-      }
-    });
-
-    return () => {
-      // eslint-disable-next-line no-unused-expressions
-      scanSubscription?.remove();
-    };
-  }, []);
+      });
+      return () => {
+        // eslint-disable-next-line no-unused-expressions
+        scanSubscription?.remove();
+      };
+    }
+    return undefined;
+  }, [isWaiting, result]);
 
   const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
 
@@ -87,13 +94,37 @@ const ReviewItemDetails = () => {
     if (itemDetails) {
       dispatch(resetLocations());
       dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty));
-      dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr));
+      dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr, itemDetails.exceptionType ? itemDetails.exceptionType : ''));
       if (itemDetails.location) {
         if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
         if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
       }
     }
   }, [itemDetails]);
+
+  useEffect(() => {
+    // on api success
+    if (completeApiInProgress && completeApi.isWaiting === false && completeApi.result) {
+      setCompleteApiInProgress(false);
+      dispatch(setActionCompleted());
+      navigation.goBack();
+      return undefined;
+    }
+
+    // on api failure
+    if (completeApiInProgress && completeApi.isWaiting === false && completeApi.error) {
+      setCompleteApiInProgress(false);
+      dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
+      return undefined;
+    }
+
+    // on api submission
+    if (!completeApiInProgress && completeApi.isWaiting) {
+      return setCompleteApiInProgress(true);
+    }
+
+    return undefined;
+  }, [completeApi]);
 
   useFocusEffect(
     () => {
@@ -297,16 +328,30 @@ const ReviewItemDetails = () => {
       return null;
     }
 
+    if (completeApi.isWaiting) {
+      return (
+        <ActivityIndicator
+          animating={completeApi.isWaiting}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.completeActivityIndicator}
+        />
+      );
+    }
+
     if (Platform.OS === 'android') {
       return (
-        <View style={styles.scanForNoActionButton}>
-          <Text style={styles.buttonText}>{strings('ITEM.USE_SCANNER_SCAN_FOR_NO_ACTION')}</Text>
-        </View>
+        <TouchableOpacity style={styles.scanForNoActionButton} onPress={() => dispatch(setManualScan(!isManualScanEnabled))}>
+          <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+          <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
+        </TouchableOpacity>
       );
     }
 
     return (
       <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
+        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
         <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
       </TouchableOpacity>
     );
@@ -342,7 +387,7 @@ const ReviewItemDetails = () => {
               status={itemDetails.status}
               category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
               price={itemDetails.price}
-              exceptionType={itemDetails.exceptionType}
+              exceptionType={!actionCompleted ? itemDetails.exceptionType : undefined}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}

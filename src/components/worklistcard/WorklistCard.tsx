@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet, Text, TouchableOpacity, View
 } from 'react-native';
@@ -18,14 +18,15 @@ export interface Props {
 }
 
 function WorklistCard(Props: Props) {
-  let target;
-  if (Props.completionGoal) {
-    target = Props.completionGoal;
-  } else {
-    target = 95;
-  }
-  const [atGoal] = useState(((Props.completionPercentage >= target) ? styles.barFillAtGoal : styles.barFillNotAtGoal));
+  const target = 95;
 
+  const getBarFill = () => {
+    console.log(Props);
+    if (Props.goal === 0) {
+      return styles.barFillNoItems;
+    }
+    return Props.completionPercentage >= target ? styles.barFillAtGoal : styles.barFillNotAtGoal
+  };
   return (
     <TouchableOpacity style={styles.card} onPress={Props.onPress}>
       <View style={styles.head}>
@@ -35,7 +36,7 @@ function WorklistCard(Props: Props) {
         </Text>
       </View>
       <View style={styles.progressBar}>
-        <View style={[StyleSheet.absoluteFill, atGoal, { width: `${Props.completionPercentage}%` }]} />
+        <View style={[StyleSheet.absoluteFill, getBarFill(), { width: `${Props.completionPercentage}%` }]} />
       </View>
       <Text style={styles.counter}>
         {strings('HOME.WORKLIST_GOAL_COMPLETE', { complete: Props.complete, total: Props.goal })}

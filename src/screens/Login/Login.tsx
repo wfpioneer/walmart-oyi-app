@@ -9,6 +9,7 @@ import { loginUser } from '../../state/actions/User';
 import User from '../../models/User';
 import { strings } from '../../locales';
 import { hideActivityModal } from '../../state/actions/Modal';
+import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 
 const mapDispatchToProps = {
   loginUser,
@@ -46,8 +47,10 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
 
   signInUser(): void {
     WMSSO.getUser().then((user: User) => {
+      setUserId(user.userId);
       this.props.loginUser(user);
       this.props.hideActivityModal();
+      trackEvent('user_sign_in', { username: user.userId });
       this.props.navigation.replace('Tabs');
     });
   }

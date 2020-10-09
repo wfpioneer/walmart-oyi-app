@@ -28,12 +28,38 @@ const ItemInfo = (props: ItemInfoProps) => {
     navigation.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' });
   };
 
+  let exceptionString = strings('EXCEPTION.UNKNOWN');
+  if (exceptionType) {
+    switch (exceptionType.toUpperCase()) {
+      case 'NO':
+        exceptionString = strings('EXCEPTION.NEGATIVE_ON_HANDS');
+        break;
+      case 'NSFL':
+        exceptionString = strings('EXCEPTION.NSFL');
+        break;
+      case 'NP':
+        exceptionString = strings('EXCEPTION.NIL_PICK');
+        break;
+      case 'NS':
+        exceptionString = strings('EXCEPTION.NO_SALES');
+        break;
+      case 'C':
+        exceptionString = strings('EXCEPTION.CANCELLED');
+        break;
+      case 'PO':
+        exceptionString = strings('EXCEPTION.PO');
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.imageContainer}>
         <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.image} />
       </View>
-      {exceptionType && <Text style={styles.exceptionText}>{strings(`EXCEPTION.${exceptionType.toUpperCase()}`)}</Text>}
+      {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
       <Text style={styles.itemNameText}>{itemName}</Text>
       <View style={styles.nbrContainer}>
         <Text style={styles.itemNbrText}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>

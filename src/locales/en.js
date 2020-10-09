@@ -92,7 +92,9 @@ export default {
     NO_SIGN_PRINTED: 'No sign printed',
     NO_SIGN_PRINTED_DETAILS: 'Item not completed because you never printed a new sign',
     NO_FLOOR_LOCATION: 'No floor location',
-    NO_FLOOR_LOCATION_DETAILS: 'Item not completed because you never added a floor location'
+    NO_FLOOR_LOCATION_DETAILS: 'Item not completed because you never added a floor location',
+    ACTION_COMPLETE_ERROR: 'Error Completing Action',
+    ACTION_COMPLETE_ERROR_DETAILS: 'There was an error completing the action, please try again.'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

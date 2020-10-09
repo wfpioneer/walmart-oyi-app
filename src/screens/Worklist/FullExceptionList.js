@@ -2,27 +2,27 @@ import { strings } from '../../locales';
 
 export default () => [
   {
-    value: 'np',
+    value: 'NP',
     display: strings('EXCEPTION.NIL_PICK')
   },
   {
-    value: 'po',
+    value: 'PO',
     display: strings('EXCEPTION.PRICE_OVERRIDE')
   },
   {
-    value: 'ns',
+    value: 'NS',
     display: strings('EXCEPTION.NO_SALES')
   },
   {
-    value: 'no',
+    value: 'NO',
     display: strings('EXCEPTION.NEGATIVE_ON_HANDS')
   },
   {
-    value: 'c',
+    value: 'C',
     display: strings('EXCEPTION.CANCELLED')
   },
   {
-    value: 'nsfl',
+    value: 'NSFL',
     display: strings('EXCEPTION.NSFL')
   }
 ];
