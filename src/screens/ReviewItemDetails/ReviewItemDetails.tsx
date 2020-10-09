@@ -205,7 +205,7 @@ const ReviewItemDetails = () => {
   };
 
   const renderOHQtyComponent = () => {
-    if (!pendingOnHandsQty || pendingOnHandsQty === -999) {
+    if (pendingOnHandsQty === -999) {
       return (
         <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -365,7 +365,7 @@ const ReviewItemDetails = () => {
         onRequestClose={() => setOhQtyModalVisible(false)}
         transparent
       >
-        <OHQtyUpdate ohQty={itemDetails.onHandsQty} setOhQtyModalVisible={setOhQtyModalVisible} />
+        <OHQtyUpdate ohQty={itemDetails.onHandsQty} setOhQtyModalVisible={setOhQtyModalVisible} exceptionType={itemDetails.exceptionType}/>
       </Modal>
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container}>
         {isWaiting && (
@@ -392,7 +392,7 @@ const ReviewItemDetails = () => {
             <SFTCard
               title={strings('ITEM.QUANTITY')}
               iconName="pallet"
-              topRightBtnTxt={itemDetails.pendingOnHandsQty === -999 ? strings('GENERICS.CHANGE') : undefined}
+              topRightBtnTxt={pendingOnHandsQty === -999 ? strings('GENERICS.CHANGE') : undefined}
               topRightBtnAction={handleUpdateQty}
             >
               {renderOHQtyComponent()}
