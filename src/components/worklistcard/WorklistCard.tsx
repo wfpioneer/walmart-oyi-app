@@ -21,7 +21,6 @@ function WorklistCard(Props: Props) {
   const target = 95;
 
   const getBarFill = () => {
-    console.log(Props);
     if (Props.goal === 0) {
       return styles.barFillNoItems;
     }

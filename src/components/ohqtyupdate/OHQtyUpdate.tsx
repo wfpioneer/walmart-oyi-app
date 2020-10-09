@@ -14,12 +14,13 @@ import Button from '../buttons/Button';
 import IconButton from '../buttons/IconButton';
 import { numbers, strings } from '../../locales';
 import { updateOHQty } from '../../state/actions/saga';
-import { updatePendingOHQty } from '../../state/actions/ItemDetailScreen';
+import { updatePendingOHQty, setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 
 interface OHQtyUpdateProps {
   ohQty: number;
   setOhQtyModalVisible: Function;
+  exceptionType?: string;
 }
 
 const OH_MIN = 0;
@@ -51,6 +52,9 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
     // on api success
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result) {
       dispatch(updatePendingOHQty(newOHQty));
+      if (props.exceptionType === "NO") {
+        dispatch(setActionCompleted());
+      }
       updateApiSubmitting(false);
       return setOhQtyModalVisible(false);
     }
