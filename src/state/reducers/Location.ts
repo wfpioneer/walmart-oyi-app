@@ -157,7 +157,16 @@ export const Location = (state = initialState, action: any) => {
         ...state
       };
     case RESET_LOCATIONS:
-      return initialState;
+      return {
+        floorLocations: [],
+        reserveLocations: [],
+        isUpdating: false,
+        itemLocDetails: {
+          itemNbr: null,
+          upcNbr: null,
+          exceptionType: null
+        }
+      };
     default:
       return state;
   }
