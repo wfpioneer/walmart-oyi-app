@@ -192,8 +192,9 @@ const PrintPriceSign = () => {
         {
           itemNbr,
           qty: signQty,
-          // @ts-ignore
-          code: selectedPrinter.type === PrinterType.LASER ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType],
+          code: selectedPrinter.type === PrinterType.LASER
+            // @ts-ignore
+            ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType],
           description: selectedSignType,
           printerMACAddress: selectedPrinter.id,
           isPortablePrinter: selectedPrinter.type === 1,
@@ -266,40 +267,44 @@ const PrintPriceSign = () => {
             onPress={handleChangePrinter}
           />
         </View>
-        {error.error ?
-          (
+        {error.error
+          ? (
             <View style={styles.errorContainer}>
               <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
               <Text style={styles.errorText}>{error.message}</Text>
             </View>
-          ) :
-          null}
+          )
+          : null}
       </ScrollView>
-      {printAPI.isWaiting ? <View style={styles.footerBtnContainer}>
-        <ActivityIndicator
-          animating={printAPI.isWaiting}
-          hidesWhenStopped
-          color={COLOR.MAIN_THEME_COLOR}
-          size="large"
-          style={styles.activityIndicator}
-        />
-      </View> : <View style={styles.footerBtnContainer}>
-        <Button
-          title={strings('PRINT.ADD_TO_QUEUE')}
-          titleColor={COLOR.MAIN_THEME_COLOR}
-          type={Button.Type.SOLID_WHITE}
-          style={styles.footerBtn}
-          onPress={handleAddPrintList}
-          disabled={!isValidQty || selectedSignType?.length === 0}
-        />
-        <Button
-          title={strings('PRINT.PRINT')}
-          type={Button.Type.PRIMARY}
-          style={styles.footerBtn}
-          onPress={handlePrint}
-          disabled={!isValidQty || selectedSignType?.length === 0}
-        />
-      </View>}
+      {printAPI.isWaiting ? (
+        <View style={styles.footerBtnContainer}>
+          <ActivityIndicator
+            animating={printAPI.isWaiting}
+            hidesWhenStopped
+            color={COLOR.MAIN_THEME_COLOR}
+            size="large"
+            style={styles.activityIndicator}
+          />
+        </View>
+      ) : (
+        <View style={styles.footerBtnContainer}>
+          <Button
+            title={strings('PRINT.ADD_TO_QUEUE')}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            type={Button.Type.SOLID_WHITE}
+            style={styles.footerBtn}
+            onPress={handleAddPrintList}
+            disabled={!isValidQty || selectedSignType?.length === 0}
+          />
+          <Button
+            title={strings('PRINT.PRINT')}
+            type={Button.Type.PRIMARY}
+            style={styles.footerBtn}
+            onPress={handlePrint}
+            disabled={!isValidQty || selectedSignType?.length === 0}
+          />
+        </View>
+      )}
     </SafeAreaView>
   );
 };

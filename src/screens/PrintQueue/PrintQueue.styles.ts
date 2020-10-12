@@ -50,9 +50,11 @@ const styles = StyleSheet.create({
   },
   footerBtnContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-around',
     backgroundColor: COLOR.WHITE,
-    paddingHorizontal: 6,
-    paddingVertical: 12,
+    paddingHorizontal: 4,
+    paddingTop: 8,
+    paddingBottom: 20,
     elevation: 16
   },
   emptyImage: {
@@ -86,6 +88,21 @@ const styles = StyleSheet.create({
   footerBtn: {
     flex: 1,
     paddingHorizontal: 6
+  },
+  activityIndicator: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  errorText: {
+    color: COLOR.RED,
+    fontSize: 16
+  },
+  errorContainer: {
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    paddingLeft: 10
   }
 });
 

@@ -20,4 +20,4 @@ export const addToPicklist = (payload: any) => ({ type: ADD_TO_PICKLIST, payload
 export const getWorklistSummary = (payload: any) => ({ type: GET_WORKLIST_SUMMARY, payload });
 export const deleteLocation = (payload: any) => ({ type: DELETE_LOCATION, payload });
 export const noAction = (payload: any) => ({ type: NO_ACTION, payload });
-export const printSign = (payload: any) => ({type: PRINT_SIGN, payload });
+export const printSign = (payload: any) => ({ type: PRINT_SIGN, payload });
