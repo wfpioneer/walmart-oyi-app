@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import Button from '../../../components/buttons/Button';
 import styles from './ChangePrinter.style';
@@ -13,20 +13,21 @@ import { Printer, PrinterType } from '../../../models/Printer';
 
 export const ChangePrinter = () => {
   const [macAddress, updateMacAddress] = useState('');
-  const isNavigationFocused = useIsFocused();
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const macRegex = /^[0-9a-f]{12}/;
 
   // Barcode event listener effect
   useEffect(() => {
     const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (isNavigationFocused) {
+      if (navigation.isFocused()) {
         console.log('mac address received scan', scan.value, scan.type);
       }
     });
 
     return () => {
       scannedSubscription?.remove();
+      return undefined;
     };
   }, []);
 
@@ -36,7 +37,7 @@ export const ChangePrinter = () => {
         type: PrinterType.PORTABLE,
         name: `${strings('PRINT.PORTABLE_PRINTER')} ${macAddress}`,
         desc: '',
-        id: parseInt(macAddress, 10)
+        id: macAddress
       };
       dispatch(addToPrinterList(newPrinter));
       navigation.goBack();
@@ -65,7 +66,7 @@ export const ChangePrinter = () => {
       <Button
         title={strings('GENERICS.SUBMIT')}
         style={styles.button}
-        disabled={macAddress.length !== 12}
+        disabled={!macAddress.match(macRegex)}
         onPress={submitMacAddress}
       />
     </View>

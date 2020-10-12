@@ -100,6 +100,21 @@ const style = StyleSheet.create({
   footerBtn: {
     flex: 1,
     paddingHorizontal: 4
+  },
+  activityIndicator: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  errorText: {
+    color: COLOR.RED,
+    fontSize: 16
+  },
+  errorContainer: {
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    paddingLeft: 10
   }
 });
 
