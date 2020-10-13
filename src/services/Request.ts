@@ -31,7 +31,8 @@ class RequestDispatch {
       timeout: TIMEOUT,
       headers: {
         'User-Agent': Platform.OS,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept-Encoding': 'gzip'
       }
     });
     this.requestStartTime = 0;
