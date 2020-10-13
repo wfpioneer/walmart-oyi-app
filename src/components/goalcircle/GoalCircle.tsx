@@ -8,7 +8,7 @@ export interface Props {
     completionGoal?: number;
     active: boolean;
     key: string;
-    frequency: string;
+    frequency: 'Daily' | 'Weekly';
 }
 
 function GoalCircle(props: Props) {
@@ -20,7 +20,6 @@ function GoalCircle(props: Props) {
   // Calculate the transformation degrees to correctly position half-circle #2.
   const transfTwo = (props.completionPercentage >= 50) ? (props.completionPercentage * 3.6) : 0;
   const goalStyle = props.active ? styles.goalNameActive : styles.goalNameInactive;
-
   return (
     <View>
       <View style={styles.baseRing}>
