@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ActivityIndicator, EmitterSubscription, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator, EmitterSubscription,
+  SafeAreaView, ScrollView, Text, TouchableOpacity, View
+} from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './Home.style';
@@ -94,7 +97,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         <View style={[styles.container, styles.safeAreaView]}>
           <MaterialCommunityIcons name="alert" size={50} color={COLOR.RED_500} />
           <Text style={styles.errorText}>{strings('HOME.WORKLIST_API_ERROR')}</Text>
-          <TouchableOpacity style={styles.errorRetryButton}>
+          <TouchableOpacity style={styles.errorRetryButton} onPress={() => this.props.getWorklistSummary()}>
             <Text>{strings('GENERICS.RETRY')}</Text>
           </TouchableOpacity>
         </View>

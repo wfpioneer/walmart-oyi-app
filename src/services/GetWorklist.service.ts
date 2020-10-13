@@ -6,13 +6,10 @@ export default class GetWorklistService {
     let filterUrl = `${URLS.worklistURL}/worklist/items`;
     if (payload && payload.worklistType) {
       if (payload.worklistType.length > 0) {
-        const filters = payload.worklistType.reduce((acc, current) => {
-          return acc + '&type=' + current
-        });
-        filterUrl = filterUrl + '?type=' + filters;
+        const filters = payload.worklistType.reduce((acc, current) => `${acc}&type=${current}`);
+        filterUrl = `${filterUrl}?type=${filters}`;
       }
     }
-    console.log(payload);
     return Request.enqueue({
       url: filterUrl,
       method: 'get',
