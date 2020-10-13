@@ -110,15 +110,19 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     const { data } = this.props.worklistSummaryApiState.result;
 
-    const renderGoalCircles = () => data.map((goal: any, index: number) => (
-      <GoalCircle
-        key={goal.worklistGoal}
-        goalTitle={strings('HOME.ITEMS')}
-        completionPercentage={goal.worklistGoalPct}
-        active={index === this.state.activeGoal}
-        frequency={goal.worklistGoal}
-      />
-    ));
+    const renderGoalCircles = () => data.map((goal: any, index: number) => {
+      const frequency = goal.worklistGoal === 'DAILY' ? strings('GENERICS.DAILY') : '';
+
+      return (
+        <GoalCircle
+          key={goal.worklistGoal}
+          goalTitle={strings('HOME.ITEMS')}
+          completionPercentage={goal.worklistGoalPct}
+          active={index === this.state.activeGoal}
+          frequency={frequency}
+        />
+      );
+    });
 
     const renderWorklistCards = () => data[this.state.activeGoal].worklistTypes
       .map((worklist: { worklistType: string; completedItems: number; totalItems: number }) => {
