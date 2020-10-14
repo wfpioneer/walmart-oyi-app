@@ -2,9 +2,9 @@
 import WMSSO from 'react-native-wmsso';
 import { logoutUser } from '../state/actions/User';
 import { store } from '../../App';
-import moment, { duration } from 'moment';
+import moment from 'moment';
 import { trackEvent } from '../utils/AppCenterTool';
-import { clearEndTime, setEndTime } from '../state/actions/SessionTimeout';
+import { clearEndTime } from '../state/actions/SessionTimeout';
 
 const sessionLength=2;
 export const sessionEnd = () => {
