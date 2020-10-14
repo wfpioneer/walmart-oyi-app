@@ -27,8 +27,11 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
-import { resetLocations, setFloorLocations, setItemLocDetails, setReserveLocations } from '../../state/actions/Location';
+import {
+  resetLocations, setFloorLocations, setItemLocDetails, setReserveLocations
+} from '../../state/actions/Location';
 import { showInfoModal } from '../../state/actions/Modal';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
@@ -47,9 +50,24 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+    trackEvent('item_details_api_call', { barcode: scannedEvent.value });
     dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
     dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
   }, []);
+
+  useEffect(() => {
+    if (error) {
+      trackEvent('item_details_api_failure', { barcode: scannedEvent.value });
+    }
+
+    if (_.get(result, 'status') === 204) {
+      trackEvent('item_details_api_not_found', { barcode: scannedEvent.value });
+    }
+
+    if (_.get(result, 'status') === 200) {
+      trackEvent('item_details_api_success', { barcode: scannedEvent.value });
+    }
+  }, [error, result]);
 
   useEffect(() => {
     // Reset to top of screen
@@ -63,13 +81,18 @@ const ReviewItemDetails = () => {
     if (!isWaiting && !error && result) {
       const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
         if (navigation.isFocused()) {
-          if (scan.value === scannedEvent.value || scan.value === result.data.upcNbr || scan.value === result.data.itemNbr.toString()) {
+          trackEvent('item_details_scan', { value: scan.value, type: scan.type });
+          if (scan.value === scannedEvent.value || scan.value === result.data.upcNbr
+            || scan.value === result.data.itemNbr.toString()) {
             if (!actionCompleted) {
+              trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
               dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
             } else {
+              trackEvent('item_details_scan_to_close', { itemDetails: JSON.stringify(result.data) });
               navigation.goBack();
             }
           } else {
+            trackEvent('item_details_scan_no_match', { itemDetails: JSON.stringify(result.data), scanned: scan.value });
             dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
           }
           dispatch(setManualScan(false));
@@ -94,7 +117,8 @@ const ReviewItemDetails = () => {
     if (itemDetails) {
       dispatch(resetLocations());
       dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty));
-      dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr, itemDetails.exceptionType ? itemDetails.exceptionType : ''));
+      dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr,
+        itemDetails.exceptionType ? itemDetails.exceptionType : ''));
       if (itemDetails.location) {
         if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
         if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
@@ -105,6 +129,7 @@ const ReviewItemDetails = () => {
   useEffect(() => {
     // on api success
     if (completeApiInProgress && completeApi.isWaiting === false && completeApi.result) {
+      trackEvent('item_details_action_completed_api_success', { itemDetails: JSON.stringify(itemDetails) });
       setCompleteApiInProgress(false);
       dispatch(setActionCompleted());
       navigation.goBack();
@@ -113,6 +138,7 @@ const ReviewItemDetails = () => {
 
     // on api failure
     if (completeApiInProgress && completeApi.isWaiting === false && completeApi.error) {
+      trackEvent('item_details_action_completed_api_failure', { itemDetails: JSON.stringify(itemDetails) });
       setCompleteApiInProgress(false);
       dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       return undefined;
@@ -120,6 +146,7 @@ const ReviewItemDetails = () => {
 
     // on api submission
     if (!completeApiInProgress && completeApi.isWaiting) {
+      trackEvent('item_details_action_completed_api_call', { itemDetails: JSON.stringify(itemDetails) });
       return setCompleteApiInProgress(true);
     }
 
@@ -131,10 +158,12 @@ const ReviewItemDetails = () => {
       const onBackPress = () => {
         if (!actionCompleted) {
           if (exceptionType === 'po') {
+            trackEvent('item_details_back_press_action_incomplete', { exceptionType });
             dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
             return true;
           }
           if (exceptionType === 'nsfl') {
+            trackEvent('item_details_back_press_action_incomplete', { exceptionType });
             dispatch(showInfoModal(strings('ITEM.NO_FLOOR_LOCATION'), strings('ITEM.NO_FLOOR_LOCATION_DETAILS')));
             return true;
           }
@@ -157,7 +186,10 @@ const ReviewItemDetails = () => {
         <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
         <TouchableOpacity
           style={styles.errorButton}
-          onPress={() => dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }))}
+          onPress={() => {
+            trackEvent('item_details_api_retry', { barcode: scannedEvent.value });
+            return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+          }}
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
         </TouchableOpacity>
@@ -187,20 +219,25 @@ const ReviewItemDetails = () => {
   }
 
   const handleUpdateQty = () => {
+    trackEvent('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
     setOhQtyModalVisible(true);
   };
 
   const handleLocationAction = () => {
+    trackEvent('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
     navigation.navigate('LocationDetails');
   };
 
   const handleAddToPicklist = () => {
+    trackEvent('item_details_add_to_picklist_click', { itemDetails: JSON.stringify(itemDetails) });
     dispatch(addToPicklist({
       itemNumber: itemDetails.itemNbr
     }));
   };
 
   const toggleSalesGraphView = () => {
+    trackEvent('item_details_toggle_graph_click',
+      { itemDetails: JSON.stringify(itemDetails), isGraphView: !isSalesMetricsGraphView });
     setIsSalesMetricsGraphView(prevState => !prevState);
   };
 
@@ -342,7 +379,13 @@ const ReviewItemDetails = () => {
 
     if (Platform.OS === 'android') {
       return (
-        <TouchableOpacity style={styles.scanForNoActionButton} onPress={() => dispatch(setManualScan(!isManualScanEnabled))}>
+        <TouchableOpacity
+          style={styles.scanForNoActionButton}
+          onPress={() => {
+            trackEvent('item_details_scan_for_no_action_button_click', { itemDetails: JSON.stringify(itemDetails) });
+            return dispatch(setManualScan(!isManualScanEnabled));
+          }}
+        >
           <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
           <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
         </TouchableOpacity>
@@ -365,7 +408,11 @@ const ReviewItemDetails = () => {
         onRequestClose={() => setOhQtyModalVisible(false)}
         transparent
       >
-        <OHQtyUpdate ohQty={itemDetails.onHandsQty} setOhQtyModalVisible={setOhQtyModalVisible} exceptionType={itemDetails.exceptionType}/>
+        <OHQtyUpdate
+          ohQty={itemDetails.onHandsQty}
+          setOhQtyModalVisible={setOhQtyModalVisible}
+          exceptionType={itemDetails.exceptionType}
+        />
       </Modal>
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container}>
         {isWaiting && (

@@ -126,7 +126,11 @@ const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: F
 );
 
 const renderHomeMenuButton = (props: HomeNavigatorComponentProps, navigation: any) => (
-  <TouchableOpacity onPress={() => showSignOutMenu(props, navigation)}>
+  <TouchableOpacity onPress={() => {
+    trackEvent('menu_button_click');
+    showSignOutMenu(props, navigation);
+  }}
+  >
     <View style={styles.rightButton}>
       <Image
         style={styles.image}

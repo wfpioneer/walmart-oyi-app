@@ -17,6 +17,7 @@ import {
 } from '../../../state/actions/Worklist';
 import { strings } from '../../../locales';
 import FullExceptionList from '../FullExceptionList';
+import { trackEvent } from '../../../utils/AppCenterTool';
 
 interface MenuCardProps {
   title: string;
@@ -43,12 +44,14 @@ export const MenuCard = (props: MenuCardProps) => {
   );
 };
 
-export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number; catgName: string; selected: boolean } }, dispatch: any, filterCategories: any) => {
+export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number; catgName: string; selected: boolean } },
+  dispatch: any, filterCategories: any) => {
   const { item } = listItem;
   const onItemPress = () => {
     if (item.selected) {
       // @ts-ignore
       filterCategories.splice(filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`), 1);
+      trackEvent('worklist_update_filter_categories', { categories: JSON.stringify(filterCategories) });
       return dispatch(updateFilterCategories(filterCategories));
     }
 
@@ -74,7 +77,10 @@ export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number; ca
 
 export const renderExceptionFilterCard = (listItem: { item: { value: string; display: string; selected: boolean } }, dispatch: any) => {
   const { item } = listItem;
-  const onItemPress = () => dispatch(updateFilterExceptions([item.value]));
+  const onItemPress = () => {
+    trackEvent('worklist_update_filter_exceptions', { exception: item.value });
+    return dispatch(updateFilterExceptions([item.value]));
+  };
   return (
     <TouchableOpacity style={styles.categoryFilterCard} onPress={onItemPress}>
       <View style={styles.selectionView}>
@@ -188,7 +194,10 @@ export const renderExceptionTypeCard = () => {
   );
 };
 
-export const onClearPress = (dispatch: any) => dispatch(clearFilter());
+export const onClearPress = (dispatch: any) => {
+  trackEvent('worklist_clear_filter');
+  return dispatch(clearFilter());
+};
 
 export const FilterMenu = () => {
   const dispatch = useDispatch();

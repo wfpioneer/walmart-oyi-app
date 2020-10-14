@@ -6,6 +6,7 @@ import styles from './ItemInfo.style';
 import { currencies, strings } from '../../locales';
 import Button from '../buttons/Button';
 import COLOR from '../../themes/Color';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 type ItemInfoProps = {
   image?: any;
@@ -25,6 +26,7 @@ const ItemInfo = (props: ItemInfoProps) => {
   const navigation = useNavigation();
 
   const handlePrintPriceSign = () => {
+    trackEvent('item_details_print_sign_button_click', { itemDetails: JSON.stringify(props) });
     navigation.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' });
   };
 

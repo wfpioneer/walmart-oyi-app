@@ -20,6 +20,7 @@ import {
   LaserPaper, PortablePaper, PrintQueueItem, Printer, PrinterType
 } from '../../models/Printer';
 import { printSign } from '../../state/actions/saga';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -102,6 +103,7 @@ const PrintPriceSign = () => {
   useEffect(() => {
     // on api success
     if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
+      trackEvent('print_api_success');
       if (!actionCompleted && exceptionType === 'PO') dispatch(setActionCompleted());
       setAPIInProgress(false);
       navigation.goBack();
@@ -110,6 +112,7 @@ const PrintPriceSign = () => {
 
     // on api failure
     if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
+      trackEvent('print_api_failure');
       setAPIInProgress(false);
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
@@ -156,14 +159,13 @@ const PrintPriceSign = () => {
   };
 
   const handleAddPrintList = () => {
-    console.log('ADD TO PRINT LIST clicked');
-
     // check if the item/size already exists on the print queue
     const itemSizeExists = printQueue.some((printItem: PrintQueueItem) => printItem.itemNbr === itemNbr
       && printItem.paperSize === selectedSignType);
 
     if (itemSizeExists) {
       // TODO show popup if already exists
+      trackEvent('print_already_exists_in_queue', { itemName, selectedSignType });
       console.log(`Sign already exists in queue for  - ${JSON.stringify({ itemName, selectedSignType })}`);
     } else {
       // add to print queue, forcing to use laser
@@ -178,6 +180,7 @@ const PrintPriceSign = () => {
         worklistType: exceptionType,
         paperSize: selectedSignType
       };
+      trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
       dispatch(addToPrintQueue(printQueueItem));
       if (!actionCompleted && exceptionType === 'PO') {
         dispatch(setActionCompleted());
@@ -187,21 +190,21 @@ const PrintPriceSign = () => {
   };
 
   const handlePrint = () => {
-    dispatch(printSign({
-      printlist: [
-        {
-          itemNbr,
-          qty: signQty,
-          code: selectedPrinter.type === PrinterType.LASER
-            // @ts-ignore
-            ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType],
-          description: selectedSignType,
-          printerMACAddress: selectedPrinter.id,
-          isPortablePrinter: selectedPrinter.type === 1,
-          worklistType: exceptionType
-        }
-      ]
-    }));
+    const printlist = [
+      {
+        itemNbr,
+        qty: signQty,
+        code: selectedPrinter.type === PrinterType.LASER
+          // @ts-ignore
+          ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType],
+        description: selectedSignType,
+        printerMACAddress: selectedPrinter.id,
+        isPortablePrinter: selectedPrinter.type === 1,
+        worklistType: exceptionType
+      }
+    ];
+    trackEvent('print_price_sign', JSON.stringify(printlist));
+    dispatch(printSign({ printlist }));
   };
 
   return (
