@@ -28,14 +28,14 @@ const environments: Environments = {
     worklistURL: 'https://intl-oyi-worklist-api.stg.walmart.com'
   },
   prod: {
-    orchestrationURL: '',
-    itemDetailsURL: '',
-    locationURL: '',
-    printingURL: '',
-    worklistURL: ''
+    orchestrationURL: 'https://intl-oyi-orchestration-api.prod.walmart.com',
+    itemDetailsURL: 'https://intl-oyi-item-details-api.prod.walmart.com',
+    locationURL: 'https://intl-oyi-location-api.prod.walmart.com',
+    printingURL: 'https://intl-oyi-printing-api.prod.walmart.com',
+    worklistURL: 'https://intl-oyi-worklist-api.prod.walmart.com'
   }
 };
 
-const getEnvironment = (): Environment => (__DEV__ ? environments.dev : environments.stage);
+const getEnvironment = (): Environment => (__DEV__ ? environments.stage : environments.prod);
 
 export default getEnvironment();
