@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   Image, Modal, SafeAreaView, ScrollView, Text, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -7,13 +8,17 @@ import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './PrintQueue.styles';
-import { PrintQueueItem } from '../../models/Printer';
+import {
+  LaserPaper, PrintQueueItem
+} from '../../models/Printer';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
 import { setPrintQueue } from '../../state/actions/Print';
 import { strings } from '../../locales';
 import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
+import { printSign } from '../../state/actions/saga';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Function, dispatch: Function) => {
   const handleEditAction = (index: number) => () => {
@@ -26,7 +31,10 @@ const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Funct
   };
 
   return printQueue.map((item, index) => (
-    <View key={index} style={[styles.itemContainer, index < printQueue.length - 1 ? styles.itemContainerBorder : {}]}>
+    <View
+      key={`${item.itemNbr}-${item.upcNbr}`}
+      style={[styles.itemContainer, index < printQueue.length - 1 ? styles.itemContainerBorder : {}]}
+    >
       <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.itemImage} />
       <View style={styles.itemDetailsContainer}>
         <Text style={styles.itemDescText}>{item.itemName}</Text>
@@ -54,14 +62,61 @@ const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Funct
 };
 
 const PrintQueue = () => {
-  const { printQueue } = useTypedSelector(state => state.Print);
+  const { printQueue, selectedPrinter } = useTypedSelector(state => state.Print);
+  const printAPI = useTypedSelector(state => state.async.printSign);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const [itemIndexToEdit, setItemIndexToEdit] = useState(-1);
+  const [apiInProgress, setAPIInProgress] = useState(false);
+  const [error, setError] = useState({ error: false, message: '' });
+
+  useEffect(() => {
+    // on api success
+    if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
+      trackEvent('print_queue_api_success');
+      setAPIInProgress(false);
+      dispatch(setPrintQueue([]));
+      navigation.goBack();
+      return undefined;
+    }
+
+    // on api failure
+    if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
+      trackEvent('print_queue_api_failure');
+      setAPIInProgress(false);
+      return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+    }
+
+    // on api submission
+    if (!apiInProgress && printAPI.isWaiting) {
+      setError({ error: false, message: '' });
+      return setAPIInProgress(true);
+    }
+
+    return undefined;
+  }, [printAPI]);
 
   const handlePrint = () => {
-    console.log('Print all clicked');
+    const printArray = printQueue.map((printItem: PrintQueueItem) => {
+      const {
+        itemNbr, signQty, paperSize, worklistType
+      } = printItem;
+      return {
+        itemNbr,
+        qty: signQty,
+        // @ts-ignore
+        code: LaserPaper[paperSize],
+        description: paperSize,
+        printerMACAddress: selectedPrinter.id,
+        isPortablePrinter: false,
+        worklistType
+      };
+    });
+    trackEvent('print_queue', { queue: JSON.stringify(printArray) });
+    dispatch(printSign({
+      printlist: printArray
+    }));
   };
 
   return (printQueue.length === 0
@@ -98,16 +153,36 @@ const PrintQueue = () => {
           <View style={styles.listContainer}>
             {renderPrintItem(printQueue, setItemIndexToEdit, dispatch)}
           </View>
+          {error.error
+            ? (
+              <View style={styles.errorContainer}>
+                <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+                <Text style={styles.errorText}>{error.message}</Text>
+              </View>
+            )
+            : null}
         </ScrollView>
-        <View style={styles.footerBtnContainer}>
-          <Button
-            title={strings('PRINT.PRINT_ALL')}
-            type={Button.Type.PRIMARY}
-            style={styles.footerBtn}
-            onPress={handlePrint}
-            disabled={printQueue.length < 1}
-          />
-        </View>
+        {printAPI.isWaiting ? (
+          <View style={styles.footerBtnContainer}>
+            <ActivityIndicator
+              animating={printAPI.isWaiting}
+              hidesWhenStopped
+              color={COLOR.MAIN_THEME_COLOR}
+              size="large"
+              style={styles.activityIndicator}
+            />
+          </View>
+        ) : (
+          <View style={styles.footerBtnContainer}>
+            <Button
+              title={strings('PRINT.PRINT_ALL')}
+              type={Button.Type.PRIMARY}
+              style={styles.footerBtn}
+              onPress={handlePrint}
+              disabled={printQueue.length < 1}
+            />
+          </View>
+        )}
       </SafeAreaView>
     )
   );

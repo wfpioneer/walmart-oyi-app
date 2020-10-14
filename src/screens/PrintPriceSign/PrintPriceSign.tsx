@@ -1,6 +1,6 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import {
-  Image, SafeAreaView, ScrollView, Text, TextInput, View
+  ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TextInput, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
@@ -19,6 +19,8 @@ import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
   LaserPaper, PortablePaper, PrintQueueItem, Printer, PrinterType
 } from '../../models/Printer';
+import { printSign } from '../../state/actions/saga';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -36,7 +38,6 @@ const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
 
 const renderSignSizeButtons = (selectedPrinter: Printer, catgNbr: number, signType: string, dispatch: Function) => {
   const sizeObject = selectedPrinter.type === PrinterType.LASER ? LaserPaper : PortablePaper;
-
   return (
     <View style={{ flexDirection: 'row', marginVertical: 4 }}>
       {Object.keys(sizeObject).map((key: string) => {
@@ -70,12 +71,15 @@ const PrintPriceSign = () => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const { result } = useTypedSelector(state => state.async.getItemDetails);
+  const printAPI = useTypedSelector(state => state.async.printSign);
   const { selectedPrinter, selectedSignType, printQueue } = useTypedSelector(state => state.Print);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const [signQty, setSignQty] = useState(1);
   const [isValidQty, setIsValidQty] = useState(true);
+  const [apiInProgress, setAPIInProgress] = useState(false);
+  const [error, setError] = useState({ error: false, message: '' });
 
   const {
     itemName, itemNbr, upcNbr, categoryNbr
@@ -89,12 +93,38 @@ const PrintPriceSign = () => {
         type: PrinterType.LASER,
         name: strings('PRINT.FRONT_DESK'),
         desc: strings('GENERICS.DEFAULT'),
-        id: 0
+        id: '000000000000'
       };
       dispatch(setSelectedPrinter(initialPrinter));
       dispatch(addToPrinterList(initialPrinter));
     }
   }, []);
+
+  useEffect(() => {
+    // on api success
+    if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
+      trackEvent('print_api_success');
+      if (!actionCompleted && exceptionType === 'PO') dispatch(setActionCompleted());
+      setAPIInProgress(false);
+      navigation.goBack();
+      return undefined;
+    }
+
+    // on api failure
+    if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
+      trackEvent('print_api_failure');
+      setAPIInProgress(false);
+      return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+    }
+
+    // on api submission
+    if (!apiInProgress && printAPI.isWaiting) {
+      setError({ error: false, message: '' });
+      return setAPIInProgress(true);
+    }
+
+    return undefined;
+  }, [printAPI]);
 
 
   const handleTextChange = (text: string) => {
@@ -129,14 +159,13 @@ const PrintPriceSign = () => {
   };
 
   const handleAddPrintList = () => {
-    console.log('ADD TO PRINT LIST clicked');
-
     // check if the item/size already exists on the print queue
     const itemSizeExists = printQueue.some((printItem: PrintQueueItem) => printItem.itemNbr === itemNbr
       && printItem.paperSize === selectedSignType);
 
     if (itemSizeExists) {
       // TODO show popup if already exists
+      trackEvent('print_already_exists_in_queue', { itemName, selectedSignType });
       console.log(`Sign already exists in queue for  - ${JSON.stringify({ itemName, selectedSignType })}`);
     } else {
       // add to print queue, forcing to use laser
@@ -148,10 +177,12 @@ const PrintPriceSign = () => {
         upcNbr,
         catgNbr,
         signQty,
+        worklistType: exceptionType,
         paperSize: selectedSignType
       };
+      trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
       dispatch(addToPrintQueue(printQueueItem));
-      if (!actionCompleted && exceptionType === 'po') {
+      if (!actionCompleted && exceptionType === 'PO') {
         dispatch(setActionCompleted());
       }
       navigation.goBack();
@@ -159,11 +190,21 @@ const PrintPriceSign = () => {
   };
 
   const handlePrint = () => {
-    if (!actionCompleted && exceptionType === 'po') {
-      dispatch(setActionCompleted());
-    }
-    // TODO: implement printing
-    navigation.goBack();
+    const printlist = [
+      {
+        itemNbr,
+        qty: signQty,
+        code: selectedPrinter.type === PrinterType.LASER
+          // @ts-ignore
+          ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType],
+        description: selectedSignType,
+        printerMACAddress: selectedPrinter.id,
+        isPortablePrinter: selectedPrinter.type === 1,
+        worklistType: exceptionType
+      }
+    ];
+    trackEvent('print_price_sign', JSON.stringify(printlist));
+    dispatch(printSign({ printlist }));
   };
 
   return (
@@ -229,24 +270,44 @@ const PrintPriceSign = () => {
             onPress={handleChangePrinter}
           />
         </View>
+        {error.error
+          ? (
+            <View style={styles.errorContainer}>
+              <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+              <Text style={styles.errorText}>{error.message}</Text>
+            </View>
+          )
+          : null}
       </ScrollView>
-      <View style={styles.footerBtnContainer}>
-        <Button
-          title={strings('PRINT.ADD_TO_QUEUE')}
-          titleColor={COLOR.MAIN_THEME_COLOR}
-          type={Button.Type.SOLID_WHITE}
-          style={styles.footerBtn}
-          onPress={handleAddPrintList}
-          disabled={!isValidQty || selectedSignType?.length === 0}
-        />
-        <Button
-          title={strings('PRINT.PRINT')}
-          type={Button.Type.PRIMARY}
-          style={styles.footerBtn}
-          onPress={handlePrint}
-          disabled={!isValidQty || selectedSignType?.length === 0}
-        />
-      </View>
+      {printAPI.isWaiting ? (
+        <View style={styles.footerBtnContainer}>
+          <ActivityIndicator
+            animating={printAPI.isWaiting}
+            hidesWhenStopped
+            color={COLOR.MAIN_THEME_COLOR}
+            size="large"
+            style={styles.activityIndicator}
+          />
+        </View>
+      ) : (
+        <View style={styles.footerBtnContainer}>
+          <Button
+            title={strings('PRINT.ADD_TO_QUEUE')}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            type={Button.Type.SOLID_WHITE}
+            style={styles.footerBtn}
+            onPress={handleAddPrintList}
+            disabled={!isValidQty || selectedSignType?.length === 0}
+          />
+          <Button
+            title={strings('PRINT.PRINT')}
+            type={Button.Type.PRIMARY}
+            style={styles.footerBtn}
+            onPress={handlePrint}
+            disabled={!isValidQty || selectedSignType?.length === 0}
+          />
+        </View>
+      )}
     </SafeAreaView>
   );
 };

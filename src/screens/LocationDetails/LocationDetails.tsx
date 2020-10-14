@@ -16,6 +16,7 @@ import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { deleteLocationFromExisting, isUpdating } from '../../state/actions/Location';
 import { deleteLocation } from '../../state/actions/saga';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const LocationDetails = () => {
   const navigation = useNavigation();
@@ -41,6 +42,7 @@ const LocationDetails = () => {
   useEffect(() => {
     // on api success
     if (apiInProgress && delAPI.isWaiting === false && delAPI.result) {
+      trackEvent('location_delete_location_api_success');
       dispatch(deleteLocationFromExisting(locToConfirm.locationArea, locToConfirm.locationIndex));
       setAPIInProgress(false);
       dispatch(isUpdating(true));
@@ -50,6 +52,7 @@ const LocationDetails = () => {
 
     // on api failure
     if (apiInProgress && delAPI.isWaiting === false && delAPI.error) {
+      trackEvent('location_delete_location_api_failure');
       setAPIInProgress(false);
       return setError(true);
     }
@@ -64,10 +67,12 @@ const LocationDetails = () => {
   }, [delAPI]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {
+    trackEvent('location_edit_location_click', { location: JSON.stringify(loc), index: locIndex });
     navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
   };
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
+    trackEvent('location_delete_location_click', { location: JSON.stringify(loc), index: locIndex });
     setLocToConfirm({
       locationName: loc.locationName, locationArea: 'floor', locationIndex: locIndex, locationTypeNbr: loc.typeNbr
     });
@@ -75,6 +80,7 @@ const LocationDetails = () => {
   };
 
   const deleteConfirmed = () => {
+    trackEvent('location_delete_location_confirmed');
     dispatch(deleteLocation({
       upc: itemDetails.upcNbr, sectionId: locToConfirm.locationName, locationTypeNbr: locToConfirm.locationTypeNbr
     }));
@@ -95,6 +101,7 @@ const LocationDetails = () => {
   );
 
   const addNewLocationNav = () => {
+    trackEvent('location_fab_button_click');
     navigation.navigate('AddLocation');
   };
   return (
@@ -142,7 +149,8 @@ const LocationDetails = () => {
             <Text style={styles.labelText}>
               {`${strings('LOCATION.FLOOR')} (${floorLocations.length})`}
             </Text>
-          </View>)
+          </View>
+        )
           : <View />}
         {floorLocations ? createLocations(floorLocations) : <View />}
         {reserveLocations ? (
@@ -150,7 +158,8 @@ const LocationDetails = () => {
             <Text style={styles.labelText}>
               {`${strings('LOCATION.RESERVE')} (${reserveLocations.length})`}
             </Text>
-          </View>)
+          </View>
+        )
           : <View />}
         {reserveLocations ? createLocations(reserveLocations) : <View />}
       </ScrollView>

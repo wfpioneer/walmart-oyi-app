@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import styles from './WorklistItem.style';
 import { strings } from '../../locales';
 import { setScannedEvent } from '../../state/actions/Global';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface WorklistItemProps {
   exceptionType: string;
@@ -38,6 +39,11 @@ export const WorklistItem = (props: WorklistItemProps) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const worklistItemOnPress = () => {
+    trackEvent('worklist_item_click', {
+      upc: props.upcNbr,
+      itemNbr: props.itemNumber,
+      itemDescription: props.itemDescription
+    });
     dispatch(setScannedEvent({ type: 'worklist', value: props.upcNbr }));
     navigation.navigate('ReviewItemDetails');
   };
