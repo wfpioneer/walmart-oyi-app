@@ -8,7 +8,7 @@ import { worklist } from './Worklist';
 import { ItemDetailScreen } from './ItemDetailScreen';
 import { Print } from './Print';
 import { Location } from './Location';
-import { SessionTimeout } from './SessionTimeout'
+import { SessionTimeout } from './SessionTimeout';
 
 /**
  * This is the root reducers,this RootReducer combine all sub reducers.git
