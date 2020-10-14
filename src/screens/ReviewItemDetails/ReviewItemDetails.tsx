@@ -29,6 +29,7 @@ import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { resetLocations, setFloorLocations, setItemLocDetails, setReserveLocations } from '../../state/actions/Location';
 import { showInfoModal } from '../../state/actions/Modal';
+import { validateSession } from '../../utils/sessionTimeout';
 
 const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
@@ -46,6 +47,7 @@ const ReviewItemDetails = () => {
   const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
 
   useEffect(() => {
+    validateSession(navigation);
     dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
     dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
     dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
@@ -120,6 +122,7 @@ const ReviewItemDetails = () => {
 
     // on api submission
     if (!completeApiInProgress && completeApi.isWaiting) {
+      validateSession(navigation);
       return setCompleteApiInProgress(true);
     }
 
@@ -129,6 +132,7 @@ const ReviewItemDetails = () => {
   useFocusEffect(
     () => {
       const onBackPress = () => {
+        validateSession(navigation);
         if (!actionCompleted) {
           if (exceptionType === 'po') {
             dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
@@ -187,14 +191,17 @@ const ReviewItemDetails = () => {
   }
 
   const handleUpdateQty = () => {
+    validateSession(navigation);
     setOhQtyModalVisible(true);
   };
 
   const handleLocationAction = () => {
+    validateSession(navigation);
     navigation.navigate('LocationDetails');
   };
 
   const handleAddToPicklist = () => {
+    validateSession(navigation);
     dispatch(addToPicklist({
       itemNumber: itemDetails.itemNbr
     }));
@@ -324,6 +331,7 @@ const ReviewItemDetails = () => {
   };
 
   const renderScanForNoActionButton = () => {
+    validateSession(navigation);
     if (!exceptionType) {
       return null;
     }

@@ -16,6 +16,7 @@ import { strings } from '../../locales';
 import { getWorklistSummary } from '../../state/actions/saga';
 import COLOR from '../../themes/Color';
 import { updateFilterExceptions } from '../../state/actions/Worklist';
+import { validateSession } from '../../utils/sessionTimeout';
 
 const mapStateToProps = (state: any) => ({
   userName: state.User.additional.displayName,
@@ -64,6 +65,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       if (props.navigation.isFocused()) {
         props.setScannedEvent(scan);
         props.setManualScan(false);
+        validateSession(props.navigation);
         props.navigation.navigate('ReviewItemDetails');
       }
     });
@@ -152,6 +154,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
         const onWorklistCardPress = () => {
           this.props.updateFilterExceptions([worklist.worklistType]);
+          validateSession(this.props.navigation);
           this.props.navigation.navigate(strings('WORKLIST.WORKLIST'));
         };
 

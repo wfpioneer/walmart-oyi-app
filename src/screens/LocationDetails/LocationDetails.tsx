@@ -16,6 +16,7 @@ import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { deleteLocationFromExisting, isUpdating } from '../../state/actions/Location';
 import { deleteLocation } from '../../state/actions/saga';
+import { validateSession } from '../../utils/sessionTimeout';
 
 const LocationDetails = () => {
   const navigation = useNavigation();
@@ -64,10 +65,12 @@ const LocationDetails = () => {
   }, [delAPI]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {
+    validateSession(navigation);
     navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
   };
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
+    validateSession(navigation);
     setLocToConfirm({
       locationName: loc.locationName, locationArea: 'floor', locationIndex: locIndex, locationTypeNbr: loc.typeNbr
     });
@@ -95,6 +98,7 @@ const LocationDetails = () => {
   );
 
   const addNewLocationNav = () => {
+    validateSession(navigation);
     navigation.navigate('AddLocation');
   };
   return (

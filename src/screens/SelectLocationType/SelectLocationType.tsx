@@ -16,6 +16,7 @@ import { barcodeEmitter, manualScan } from '../../utils/scannerUtils';
 import { strings } from '../../locales';
 import styles from './SelectLocationType.style';
 import { COLOR } from '../../themes/Color';
+import { validateSession } from '../../utils/sessionTimeout';
 
 interface LocParams {
   currentLocation?: Location;
@@ -92,6 +93,7 @@ const SelectLocationType = () => {
 
     // on api submission
     if (!apiInProgress && addAPI.isWaiting) {
+      validateSession(navigation);
       setError({ error: false, message: '' });
       return setAPIInProgress(true);
     }
@@ -117,6 +119,7 @@ const SelectLocationType = () => {
 
     // on api submission
     if (!apiInProgress && editAPI.isWaiting) {
+      validateSession(navigation);
       setError({ error: false, message: '' });
       return setAPIInProgress(true);
     }

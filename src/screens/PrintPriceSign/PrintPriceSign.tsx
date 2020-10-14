@@ -20,6 +20,7 @@ import {
   LaserPaper, PortablePaper, PrintQueueItem, Printer, PrinterType
 } from '../../models/Printer';
 import { printSign } from '../../state/actions/saga';
+import { validateSession } from '../../utils/sessionTimeout';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -116,6 +117,7 @@ const PrintPriceSign = () => {
 
     // on api submission
     if (!apiInProgress && printAPI.isWaiting) {
+      validateSession(navigation);
       setError({ error: false, message: '' });
       return setAPIInProgress(true);
     }
@@ -152,6 +154,7 @@ const PrintPriceSign = () => {
   };
 
   const handleChangePrinter = () => {
+    validateSession(navigation);
     navigation.navigate('PrinterList');
   };
 
@@ -187,6 +190,7 @@ const PrintPriceSign = () => {
   };
 
   const handlePrint = () => {
+    validateSession(navigation);
     dispatch(printSign({
       printlist: [
         {

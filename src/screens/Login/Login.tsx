@@ -10,16 +10,20 @@ import User from '../../models/User';
 import { strings } from '../../locales';
 import { hideActivityModal } from '../../state/actions/Modal';
 import { setUserId, trackEvent } from '../../utils/AppCenterTool';
+import { sessionEnd } from '../../utils/sessionTimeout';
+import { setEndTime } from '../../state/actions/SessionTimeout';
 
 const mapDispatchToProps = {
   loginUser,
-  hideActivityModal
+  hideActivityModal,
+  setEndTime
 };
 
 interface LoginScreenProps {
   loginUser: Function;
   navigation: Record<string, any>;
   hideActivityModal: Function;
+  setEndTime: Function;
 }
 
 export class LoginScreen extends React.PureComponent<LoginScreenProps> {
@@ -53,6 +57,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       trackEvent('user_sign_in', { username: user.userId });
       this.props.navigation.replace('Tabs');
     });
+    this.props.setEndTime(sessionEnd());
   }
 
   render(): ReactNode {

@@ -18,6 +18,7 @@ import { setPrintQueue } from '../../state/actions/Print';
 import { strings } from '../../locales';
 import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
 import { printSign } from '../../state/actions/saga';
+import { validateSession } from '../../utils/sessionTimeout';
 
 const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Function, dispatch: Function) => {
   const handleEditAction = (index: number) => () => {
@@ -87,6 +88,7 @@ const PrintQueue = () => {
 
     // on api submission
     if (!apiInProgress && printAPI.isWaiting) {
+      validateSession(navigation);
       setError({ error: false, message: '' });
       return setAPIInProgress(true);
     }
