@@ -36,8 +36,6 @@ const environments: Environments = {
   }
 };
 
-const getEnvironment = (): Environment => {
-  return __DEV__ ? environments.dev : environments.stage;
-};
+const getEnvironment = (): Environment => (__DEV__ ? environments.dev : environments.stage);
 
 export default getEnvironment();
