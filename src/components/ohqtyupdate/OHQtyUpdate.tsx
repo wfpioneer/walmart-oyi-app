@@ -14,8 +14,9 @@ import Button from '../buttons/Button';
 import IconButton from '../buttons/IconButton';
 import { numbers, strings } from '../../locales';
 import { updateOHQty } from '../../state/actions/saga';
-import { updatePendingOHQty, setActionCompleted } from '../../state/actions/ItemDetailScreen';
+import { setActionCompleted, updatePendingOHQty } from '../../state/actions/ItemDetailScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface OHQtyUpdateProps {
   ohQty: number;
@@ -51,8 +52,9 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
   useEffect(() => {
     // on api success
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result) {
+      trackEvent('item_details_update_oh_quantity_api_success');
       dispatch(updatePendingOHQty(newOHQty));
-      if (props.exceptionType === "NO") {
+      if (props.exceptionType === 'NO') {
         dispatch(setActionCompleted());
       }
       updateApiSubmitting(false);
@@ -61,6 +63,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
 
     // on api failure
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.error) {
+      trackEvent('item_details_update_oh_quantity_api_failure');
       updateApiSubmitting(false);
       return updateError(strings('ITEM.OH_UPDATE_API_ERROR'));
     }
@@ -75,6 +78,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
   }, [updateQuantityAPIStatus]);
 
   const handleSaveOHQty = () => {
+    trackEvent('item_details_update_oh_quantity_api_call', { newOHQty, itemNbr: itemDetails.itemNbr });
     dispatch(updateOHQty({
       data: { onHandQty: newOHQty },
       itemNumber: itemDetails.itemNbr,

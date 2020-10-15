@@ -9,6 +9,7 @@ import { strings } from '../../locales';
 import Button from '../buttons/Button';
 import ItemDetails from '../../models/ItemDetails';
 import styles from './SalesMetrics.styles';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 // Could possibly be combined with below, but the input keys are different
 const renderDailyList = (dailyList: [{day: string; value: number}]) => (
@@ -110,6 +111,7 @@ const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) =
   }));
 
   const handleDailyTimePeriodChange = (isDaily: boolean) => () => {
+    trackEvent('item_details_sales_metrics_change_period', { itemDetails: JSON.stringify(props.itemDetails), isDaily });
     setIsDailyPeriod(isDaily);
   };
 

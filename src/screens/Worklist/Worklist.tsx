@@ -49,7 +49,7 @@ export const renderWorklistItem = (listItem: ListItemI) => {
 
 export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boolean): WorklistItemI[] => {
   if (!groupToggle) {
-    const workListItems = data ? data : [];
+    const workListItems = data || [];
     return [{
       worklistType: 'CATEGORY',
       catgName: strings('WORKLIST.ALL'),

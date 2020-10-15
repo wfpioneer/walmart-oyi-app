@@ -17,6 +17,7 @@ import { getWorklistSummary } from '../../state/actions/saga';
 import COLOR from '../../themes/Color';
 import { updateFilterExceptions } from '../../state/actions/Worklist';
 import { validateSession } from '../../utils/sessionTimeout';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const mapStateToProps = (state: any) => ({
   userName: state.User.additional.displayName,
@@ -58,17 +59,29 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     // addListener returns a function to remove listener
     this.navigationRemoveListener = this.props.navigation.addListener('focus', () => {
+      trackEvent('home_screen_focus');
       this.props.getWorklistSummary();
     });
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (props.navigation.isFocused()) {
+        trackEvent('home_barcode_scanned', { barcode: scan.value, type: scan.type });
         props.setScannedEvent(scan);
         props.setManualScan(false);
         validateSession(props.navigation);
         props.navigation.navigate('ReviewItemDetails');
       }
     });
+  }
+
+  componentDidUpdate(prevProps: Readonly<HomeScreenProps>, prevState: Readonly<HomeScreenState>, snapshot?: any) {
+    if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
+      trackEvent('home_worklist_summary_api_error');
+    }
+
+    if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.result) {
+      trackEvent('home_worklist_summary_api_success');
+    }
   }
 
   componentWillUnmount() {
@@ -99,7 +112,13 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         <View style={[styles.container, styles.safeAreaView]}>
           <MaterialCommunityIcons name="alert" size={50} color={COLOR.RED_500} />
           <Text style={styles.errorText}>{strings('HOME.WORKLIST_API_ERROR')}</Text>
-          <TouchableOpacity style={styles.errorRetryButton} onPress={() => this.props.getWorklistSummary()}>
+          <TouchableOpacity
+            style={styles.errorRetryButton}
+            onPress={() => {
+              trackEvent('home_worklist_summary_retry_button_click');
+              this.props.getWorklistSummary();
+            }}
+          >
             <Text>{strings('GENERICS.RETRY')}</Text>
           </TouchableOpacity>
         </View>
@@ -153,6 +172,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         }
 
         const onWorklistCardPress = () => {
+          trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
           this.props.updateFilterExceptions([worklist.worklistType]);
           validateSession(this.props.navigation);
           this.props.navigation.navigate(strings('WORKLIST.WORKLIST'));

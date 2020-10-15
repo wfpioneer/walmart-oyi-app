@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { RadioButton, Text } from 'react-native-paper';
-import { ActivityIndicator, EmitterSubscription, Modal, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator, EmitterSubscription, Modal, TouchableOpacity, View
+} from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../../components/buttons/Button';
 import EnterLocation from '../../components/enterlocation/EnterLocation';
 import Location from '../../models/Location';
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { addLocation, editLocation } from '../../state/actions/saga';
 import { addLocationToExisting, editExistingLocation, isUpdating } from '../../state/actions/Location';
-import { setActionCompleted } from "../../state/actions/ItemDetailScreen";
+import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { barcodeEmitter, manualScan } from '../../utils/scannerUtils';
 import { strings } from '../../locales';
 import styles from './SelectLocationType.style';
 import { COLOR } from '../../themes/Color';
 import { validateSession } from '../../utils/sessionTimeout';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface LocParams {
   currentLocation?: Location;
@@ -62,6 +65,7 @@ const SelectLocationType = () => {
 
   useEffect(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
+      trackEvent('select_location_scan', { value: scan.value, type: scan.type });
       if (navigation.isFocused()) {
         dispatch(setScannedEvent(scan));
         dispatch(setManualScan(false));
@@ -77,6 +81,7 @@ const SelectLocationType = () => {
   useEffect(() => {
     // on api success
     if (apiInProgress && addAPI.isWaiting === false && addAPI.result) {
+      trackEvent('select_location_add_api_success');
       dispatch(addLocationToExisting(loc, parseInt(type, 10), 'floor'));
       if (!actionCompleted && itemLocDetails.exceptionType === 'NSFL') dispatch(setActionCompleted());
       setAPIInProgress(false);
@@ -87,6 +92,7 @@ const SelectLocationType = () => {
 
     // on api failure
     if (apiInProgress && addAPI.isWaiting === false && addAPI.error) {
+      trackEvent('select_location_add_api_failure');
       setAPIInProgress(false);
       return setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
     }
@@ -104,6 +110,7 @@ const SelectLocationType = () => {
   useEffect(() => {
     // on api success
     if (apiInProgress && editAPI.isWaiting === false && editAPI.result) {
+      trackEvent('select_location_edit_api_success');
       dispatch(editExistingLocation(loc, parseInt(type, 10), 'floor', currentLocation.locIndex));
       setAPIInProgress(false);
       navigation.navigate('LocationDetails');
@@ -113,6 +120,7 @@ const SelectLocationType = () => {
 
     // on api failure
     if (apiInProgress && editAPI.isWaiting === false && editAPI.error) {
+      trackEvent('select_location_edit_api_failure');
       setAPIInProgress(false);
       return setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
     }
@@ -138,18 +146,23 @@ const SelectLocationType = () => {
       setError({ error: false, message: '' });
       const sameLoc = floorLocations.find((location: Location) => location.locationName === loc && location.typeNbr.toString() === type);
       if (!sameLoc) {
+        trackEvent('select_location_add_api_call',
+          { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
         dispatch(addLocation({
           upc: itemLocDetails.upcNbr,
           sectionId: loc,
           locationTypeNbr: type
         }));
       } else {
+        trackEvent('select_location_add_duplicate');
         setError({ error: true, message: strings('LOCATION.ADD_DUPLICATE_ERROR') });
       }
     } else if (routeSource === 'EditLocation') {
       setError({ error: false, message: '' });
       const sameLoc = floorLocations.find((location: Location) => location.locationName === loc && location.typeNbr.toString() === type);
       if (!sameLoc) {
+        trackEvent('select_location_edit_api_call',
+          { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
         dispatch(editLocation({
           upc: itemLocDetails.upcNbr,
           sectionId: currentLocation.locationName,
@@ -158,6 +171,7 @@ const SelectLocationType = () => {
           newLocationTypeNbr: type
         }));
       } else {
+        trackEvent('select_location_edit_duplicate');
         setError({ error: true, message: strings('LOCATION.EDIT_DUPLICATE_ERROR') });
       }
     }
@@ -168,11 +182,9 @@ const SelectLocationType = () => {
     dispatch(setManualScan(true));
   };
 
-  const validateLocation = () => {
+  const validateLocation = () =>
     // TODO add better validation of location
-    return !((loc.length > 3) && (type === LOCATION_TYPES.SALES_FLOOR || type === LOCATION_TYPES.POD || type === LOCATION_TYPES.END_CAP || type === LOCATION_TYPES.DISPLAY));
-  };
-
+    !((loc.length > 3) && (type === LOCATION_TYPES.SALES_FLOOR || type === LOCATION_TYPES.POD || type === LOCATION_TYPES.END_CAP || type === LOCATION_TYPES.DISPLAY));
   return (
     <>
       <View style={styles.mainContainer}>
@@ -229,19 +241,22 @@ const SelectLocationType = () => {
           <View style={styles.errorContainer}>
             <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
             <Text style={styles.errorText}>{error.message}</Text>
-          </View>) :
-          null}
+          </View>
+        )
+          : null}
       </View>
       <View style={styles.container}>
-        {addAPI.isWaiting || editAPI.isWaiting ?
-          <ActivityIndicator
-            animating={addAPI.isWaiting || editAPI.isWaiting}
-            hidesWhenStopped
-            color={COLOR.MAIN_THEME_COLOR}
-            size="large"
-            style={styles.activityIndicator}
-          /> :
-          <Button title={strings('GENERICS.SUBMIT')} radius={0} onPress={onSubmit} disabled={validateLocation()} />}
+        {addAPI.isWaiting || editAPI.isWaiting
+          ? (
+            <ActivityIndicator
+              animating={addAPI.isWaiting || editAPI.isWaiting}
+              hidesWhenStopped
+              color={COLOR.MAIN_THEME_COLOR}
+              size="large"
+              style={styles.activityIndicator}
+            />
+          )
+          : <Button title={strings('GENERICS.SUBMIT')} radius={0} onPress={onSubmit} disabled={validateLocation()} />}
       </View>
     </>
   );

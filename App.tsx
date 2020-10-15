@@ -13,6 +13,7 @@ import React from 'react';
 import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import SplashScreen from 'react-native-splash-screen';
 import { MainNavigator } from './src/navigators/MainNavigator';
 import { setI18nConfig } from './src/locales';
 import RootReducer from './src/state/reducers/RootReducer';
@@ -40,6 +41,10 @@ export default class App extends React.PureComponent {
   constructor(props: Readonly<{}>) {
     super(props);
     setI18nConfig();
+  }
+
+  componentDidMount() {
+    SplashScreen.hide();
   }
 
 
