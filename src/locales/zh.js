@@ -24,6 +24,7 @@ export default {
     ALL: '所有',
     GET_STARTED: '开始',
     ENTER_UPC_ITEM_NBR: '输入UPC或 商品号',
+    INPUT_LOC: '录入位置标签',
     CHANGE: '更改',
     SEE_ALL: '查看全部',
     ADD: '增加',
@@ -41,6 +42,7 @@ export default {
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
+    WORKLIST_API_ERROR: '检索任务汇总清单错误，请重试',
     HOME: '主页',
     WELCOME: '欢迎',
     STYLE_GUIDE: '页面风格',
@@ -116,7 +118,8 @@ export default {
     CHANGE_PRINTER: '更换打印机',
     MAC_ADDRESS: '输入或扫描MAC地址',
     MAC_ADDRESS_ERROR: 'MAC地址通常是12个数字',
-    PORTABLE_PRINTER: '便携式打印机'
+    PORTABLE_PRINTER: '便携式打印机',
+    PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试'
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -143,7 +146,7 @@ export default {
     ALL: '全部',
     REFINE: '更新',
     CLEAR: '清除',
-    TODO: '去做',
+    TODO: '待完成',
     COMPLETED: '已完成'
   },
   SELECTLOCATIONTYPE: {
