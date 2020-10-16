@@ -44,7 +44,7 @@ export const WorklistItem = (props: WorklistItemProps) => {
       itemNbr: props.itemNumber,
       itemDescription: props.itemDescription
     });
-    dispatch(setScannedEvent({ type: 'worklist', value: props.upcNbr }));
+    dispatch(setScannedEvent({ type: 'worklist', value: props.itemNumber.toString() }));
     navigation.navigate('ReviewItemDetails');
   };
 
