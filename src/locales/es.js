@@ -49,11 +49,11 @@ export default {
     WORKLIST_GOAL_COMPLETE: '%{complete} de %{total} artículos'
   },
   EXCEPTION: {
-    PO: 'Anulación de precio',
+    PO: 'Anulación de Precio',
     NIL_PICK: 'Nil Pick',
-    PRICE_OVERRIDE: 'Anulación de precio',
+    PRICE_OVERRIDE: 'Anulación de Precio',
     NO_SALES: 'Sin Venta',
-    NEGATIVE_ON_HANDS: 'Existencia negativa',
+    NEGATIVE_ON_HANDS: 'Existencia Negativa',
     CANCELLED: 'Cancelados',
     NSFL: 'Sin Ubicación en Piso de Ventas'
   },
