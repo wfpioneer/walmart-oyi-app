@@ -10,6 +10,7 @@ export default interface ItemDetails {
   categoryDesc: string;
   price: number;
   exceptionType?: string; // This is enumerated
+  completed: boolean;
   onHandsQty: number;
   pendingOnHandsQty: number;
   replenishment: {
