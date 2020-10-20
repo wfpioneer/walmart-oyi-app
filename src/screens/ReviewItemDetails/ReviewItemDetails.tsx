@@ -81,7 +81,8 @@ const ReviewItemDetails = () => {
   useEffect(() => {
     if (itemDetails) {
       dispatch(resetLocations());
-      dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty, itemDetails.exceptionType ? itemDetails.completed : true));
+      dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty,
+        itemDetails.exceptionType ? itemDetails.completed : true));
       dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr,
         itemDetails.exceptionType ? itemDetails.exceptionType : ''));
       if (itemDetails.location) {
@@ -93,27 +94,25 @@ const ReviewItemDetails = () => {
 
   // Barcode event listener effect
   useEffect(() => {
-    if (itemDetails) {
-      if (itemDetails.exceptionType && !actionCompleted) {
-        const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
-          if (navigation.isFocused()) {
-            trackEvent('item_details_scan', {value: scan.value, type: scan.type});
-            if (scan.value === itemDetails.upcNbr
-              || scan.value === itemDetails.itemNbr.toString()) {
-              trackEvent('item_details_no_action_api_call', {itemDetails: JSON.stringify(result.data)});
-              dispatch(noAction({upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value}));
-            } else {
-              trackEvent('item_details_scan_no_match', {itemDetails: JSON.stringify(result.data), scanned: scan.value});
-              dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
-            }
-            dispatch(setManualScan(false));
+    if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
+      const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
+        if (navigation.isFocused()) {
+          trackEvent('item_details_scan', { value: scan.value, type: scan.type });
+          if (scan.value === itemDetails.upcNbr
+            || scan.value === itemDetails.itemNbr.toString()) {
+            trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
+            dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
+          } else {
+            trackEvent('item_details_scan_no_match', { itemDetails: JSON.stringify(result.data), scanned: scan.value });
+            dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
           }
-        });
-        return () => {
-          // eslint-disable-next-line no-unused-expressions
-          scanSubscription?.remove();
-        };
-      }
+          dispatch(setManualScan(false));
+        }
+      });
+      return () => {
+        // eslint-disable-next-line no-unused-expressions
+        scanSubscription?.remove();
+      };
     }
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
@@ -182,15 +181,15 @@ const ReviewItemDetails = () => {
   if (error) {
     return (
       <SafeAreaView style={styles.safeAreaView}>
-        {isManualScanEnabled && <ManualScanComponent/>}
+        {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
-          <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300}/>
+          <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
           <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
           <TouchableOpacity
             style={styles.errorButton}
             onPress={() => {
-              trackEvent('item_details_api_retry', {barcode: scannedEvent.value});
-              return dispatch(getItemDetails({headers: {userId}, id: scannedEvent.value}));
+              trackEvent('item_details_api_retry', { barcode: scannedEvent.value });
+              return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
           >
             <Text>{strings('GENERICS.RETRY')}</Text>
@@ -203,9 +202,9 @@ const ReviewItemDetails = () => {
   if (_.get(result, 'status') === 204) {
     return (
       <SafeAreaView style={styles.safeAreaView}>
-        {isManualScanEnabled && <ManualScanComponent/>}
+        {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
-          <MaterialIcon name="info" size={40} color={COLOR.DISABLED_BLUE}/>
+          <MaterialIcon name="info" size={40} color={COLOR.DISABLED_BLUE} />
           <Text style={styles.errorText}>{strings('ITEM.ITEM_NOT_FOUND')}</Text>
         </View>
       </SafeAreaView>
