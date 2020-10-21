@@ -51,13 +51,6 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     validateSession(navigation);
-    dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-    trackEvent('item_details_api_call', { barcode: scannedEvent.value });
-    dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
-    dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
-  }, []);
-
-  useEffect(() => {
     if (navigation.isFocused()) {
       scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
@@ -89,6 +82,7 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     if (itemDetails) {
+      validateSession(navigation);
       dispatch(resetLocations());
       dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty,
         itemDetails.exceptionType ? itemDetails.completed : true));
@@ -124,6 +118,7 @@ const ReviewItemDetails = () => {
       };
     }
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
+      validateSession(navigation);
       if (navigation.isFocused()) {
         dispatch(setScannedEvent(scan));
       }
@@ -154,7 +149,6 @@ const ReviewItemDetails = () => {
 
     // on api submission
     if (!completeApiInProgress && completeApi.isWaiting) {
-      validateSession(navigation);
       trackEvent('item_details_action_completed_api_call', { itemDetails: JSON.stringify(itemDetails) });
       return setCompleteApiInProgress(true);
     }

@@ -27,6 +27,7 @@ const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Funct
   };
 
   const handleDeleteAction = (index: number) => () => {
+    validateSession(useNavigation());
     printQueue.splice(index, 1);
     dispatch(setPrintQueue(printQueue));
   };
@@ -91,7 +92,6 @@ const PrintQueue = () => {
 
     // on api submission
     if (!apiInProgress && printAPI.isWaiting) {
-      validateSession(navigation);
       setError({ error: false, message: '' });
       return setAPIInProgress(true);
     }
@@ -100,6 +100,7 @@ const PrintQueue = () => {
   }, [printAPI]);
 
   const handlePrint = () => {
+    validateSession(navigation);
     const printArray = printQueue.map((printItem: PrintQueueItem) => {
       const {
         itemNbr, signQty, paperSize, worklistType

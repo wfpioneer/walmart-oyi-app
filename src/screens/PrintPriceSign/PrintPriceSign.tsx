@@ -120,7 +120,6 @@ const PrintPriceSign = () => {
 
     // on api submission
     if (!apiInProgress && printAPI.isWaiting) {
-      validateSession(navigation);
       setError({ error: false, message: '' });
       return setAPIInProgress(true);
     }

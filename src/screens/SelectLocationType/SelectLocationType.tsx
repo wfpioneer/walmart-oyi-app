@@ -99,7 +99,6 @@ const SelectLocationType = () => {
 
     // on api submission
     if (!apiInProgress && addAPI.isWaiting) {
-      validateSession(navigation);
       setError({ error: false, message: '' });
       return setAPIInProgress(true);
     }
@@ -127,7 +126,6 @@ const SelectLocationType = () => {
 
     // on api submission
     if (!apiInProgress && editAPI.isWaiting) {
-      validateSession(navigation);
       setError({ error: false, message: '' });
       return setAPIInProgress(true);
     }
@@ -136,12 +134,14 @@ const SelectLocationType = () => {
   }, [editAPI]);
 
   const modelOnSubmit = (value: string) => {
+    validateSession(navigation);
     manualScan(value);
     dispatch(setManualScan(false));
     setInputLocation(false);
   };
 
   const onSubmit = () => {
+    validateSession(navigation);
     if (routeSource === 'AddLocation') {
       setError({ error: false, message: '' });
       const sameLoc = floorLocations.find((location: Location) => location.locationName === loc && location.typeNbr.toString() === type);
@@ -178,6 +178,7 @@ const SelectLocationType = () => {
   };
 
   const handleManualScan = () => {
+    validateSession(navigation);
     setInputLocation(true);
     dispatch(setManualScan(true));
   };

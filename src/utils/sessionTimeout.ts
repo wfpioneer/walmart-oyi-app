@@ -13,10 +13,8 @@ export const sessionEnd = () => {
 };
 
 export function validateSession(navigation: any): (void) {
-  const currentTime = moment();
   const endTime = store.getState().SessionTimeout;
-  const diff = moment.duration(currentTime.diff(endTime));
-  if (diff.get('seconds') > 0) {
+  if (moment().isSameOrAfter(endTime)) {
     trackEvent('user_sign_out');
     clearEndTime();
     WMSSO.signOutUser().then(() => {
