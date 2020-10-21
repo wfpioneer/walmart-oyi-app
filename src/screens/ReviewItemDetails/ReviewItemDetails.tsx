@@ -180,7 +180,7 @@ const ReviewItemDetails = () => {
 
   if (error) {
     return (
-      <SafeAreaView style={styles.safeAreaView}>
+      <View style={styles.safeAreaView}>
         {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
@@ -195,19 +195,19 @@ const ReviewItemDetails = () => {
             <Text>{strings('GENERICS.RETRY')}</Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 
   if (_.get(result, 'status') === 204) {
     return (
-      <SafeAreaView style={styles.safeAreaView}>
+      <View style={styles.safeAreaView}>
         {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
           <MaterialIcon name="info" size={40} color={COLOR.DISABLED_BLUE} />
           <Text style={styles.errorText}>{strings('ITEM.ITEM_NOT_FOUND')}</Text>
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 
@@ -406,7 +406,7 @@ const ReviewItemDetails = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <View style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent />}
       <Modal
         visible={ohQtyModalVisible}
@@ -490,7 +490,7 @@ const ReviewItemDetails = () => {
         }
       </ScrollView>
       { renderScanForNoActionButton() }
-    </SafeAreaView>
+    </View>
   );
 };
 
