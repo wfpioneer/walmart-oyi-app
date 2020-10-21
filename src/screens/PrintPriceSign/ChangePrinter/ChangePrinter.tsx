@@ -10,7 +10,7 @@ import { strings } from '../../../locales';
 import { barcodeEmitter } from '../../../utils/scannerUtils';
 import { addToPrinterList } from '../../../state/actions/Print';
 import { Printer, PrinterType } from '../../../models/Printer';
-import { setManualScan, setScannedEvent } from "../../../state/actions/Global";
+import { setManualScan, setScannedEvent } from '../../../state/actions/Global';
 
 export const ChangePrinter = () => {
   const [macAddress, updateMacAddress] = useState('');
@@ -29,6 +29,7 @@ export const ChangePrinter = () => {
     });
 
     return () => {
+      // eslint-disable-next-line no-unused-expressions
       scannedSubscription?.remove();
       return undefined;
     };
