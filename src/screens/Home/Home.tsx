@@ -65,11 +65,12 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (props.navigation.isFocused()) {
-        trackEvent('home_barcode_scanned', { barcode: scan.value, type: scan.type });
-        props.setScannedEvent(scan);
-        props.setManualScan(false);
-        validateSession(props.navigation);
-        props.navigation.navigate('ReviewItemDetails');
+        validateSession(props.navigation).then(() => {
+          trackEvent('home_barcode_scanned', { barcode: scan.value, type: scan.type });
+          props.setScannedEvent(scan);
+          props.setManualScan(false);
+          props.navigation.navigate('ReviewItemDetails');
+        }).catch(() => {});
       }
     });
   }
