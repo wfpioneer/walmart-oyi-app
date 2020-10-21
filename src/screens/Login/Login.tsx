@@ -56,8 +56,8 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       this.props.hideActivityModal();
       trackEvent('user_sign_in', { username: user.userId });
       this.props.navigation.replace('Tabs');
+      this.props.setEndTime(sessionEnd());
     });
-    this.props.setEndTime(sessionEnd());
   }
 
   render(): ReactNode {
