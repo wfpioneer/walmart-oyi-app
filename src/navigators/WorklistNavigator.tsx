@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Animated, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -13,6 +13,9 @@ import { toggleMenu } from '../state/actions/Worklist';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
 import { strings } from '../locales';
+import { useNavigation } from '@react-navigation/native';
+import { trackEvent } from "../utils/AppCenterTool";
+import { getWorklist } from "../state/actions/saga";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -54,7 +57,16 @@ const renderHeaderRight = (dispatch: any, menuOpen: boolean) => (
 
 export const WorklistNavigator = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
+
+  useEffect(() => {
+    return navigation.addListener('focus', () => {
+      trackEvent('worklist_items_api_call');
+      dispatch(getWorklist());
+    });
+  }, [navigation]);
+
   const menu = (
     <FilterMenu />
   );
