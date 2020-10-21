@@ -83,17 +83,15 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     if (itemDetails) {
-      validateSession(navigation).then(() => {
-        dispatch(resetLocations());
-        dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty,
-          itemDetails.exceptionType ? itemDetails.completed : true));
-        dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr,
-          itemDetails.exceptionType ? itemDetails.exceptionType : ''));
-        if (itemDetails.location) {
-          if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
-          if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
-        }
-      }).catch(() => {});
+      dispatch(resetLocations());
+      dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty,
+        itemDetails.exceptionType ? itemDetails.completed : true));
+      dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr,
+        itemDetails.exceptionType ? itemDetails.exceptionType : ''));
+      if (itemDetails.location) {
+        if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
+        if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
+      }
     }
   }, [itemDetails]);
 
@@ -102,16 +100,18 @@ const ReviewItemDetails = () => {
     if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
       const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
         if (navigation.isFocused()) {
-          trackEvent('item_details_scan', { value: scan.value, type: scan.type });
-          if (scan.value === itemDetails.upcNbr
-            || scan.value === itemDetails.itemNbr.toString()) {
-            trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
-            dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
-          } else {
-            trackEvent('item_details_scan_no_match', { itemDetails: JSON.stringify(result.data), scanned: scan.value });
-            dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
-          }
-          dispatch(setManualScan(false));
+          validateSession(navigation).then(() => {
+            trackEvent('item_details_scan', { value: scan.value, type: scan.type });
+            if (scan.value === itemDetails.upcNbr
+              || scan.value === itemDetails.itemNbr.toString()) {
+              trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
+              dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
+            } else {
+              trackEvent('item_details_scan_no_match', { itemDetails: JSON.stringify(result.data), scanned: scan.value });
+              dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+            }
+            dispatch(setManualScan(false));
+          }).catch(() => {});
         }
       });
       return () => {
@@ -120,11 +120,11 @@ const ReviewItemDetails = () => {
       };
     }
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
-      validateSession(navigation).then(() => {
-        if (navigation.isFocused()) {
+      if (navigation.isFocused()) {
+        validateSession(navigation).then(() => {
           dispatch(setScannedEvent(scan));
-        }
-      }).catch(() => {});
+        }).catch(() => {});
+      }
     });
     return () => {
       // eslint-disable-next-line no-unused-expressions
