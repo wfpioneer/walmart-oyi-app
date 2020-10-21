@@ -37,5 +37,10 @@ export default StyleSheet.create({
     justifyContent: 'center',
     height: 40,
     width: '95%'
+  },
+  versionDisplay: {
+    width: '100%',
+    textAlign: 'center',
+    color: COLOR.GREY_500
   }
 });
