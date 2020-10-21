@@ -10,6 +10,7 @@ import { strings } from '../../../locales';
 import { barcodeEmitter } from '../../../utils/scannerUtils';
 import { addToPrinterList } from '../../../state/actions/Print';
 import { Printer, PrinterType } from '../../../models/Printer';
+import { setManualScan, setScannedEvent } from "../../../state/actions/Global";
 
 export const ChangePrinter = () => {
   const [macAddress, updateMacAddress] = useState('');
@@ -21,7 +22,9 @@ export const ChangePrinter = () => {
   useEffect(() => {
     const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
-        console.log('mac address received scan', scan.value, scan.type);
+        dispatch(setScannedEvent(scan));
+        dispatch(setManualScan(false));
+        updateMacAddress(scan.value);
       }
     });
 
@@ -53,7 +56,6 @@ export const ChangePrinter = () => {
         selectionColor={COLOR.MAIN_THEME_COLOR}
         placeholder={strings('PRINT.MAC_ADDRESS')}
         onSubmitEditing={submitMacAddress}
-        keyboardType="numeric"
       />
       { (macAddress.length > 0 && macAddress.length !== 12)
         && (
