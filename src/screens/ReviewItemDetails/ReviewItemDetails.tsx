@@ -50,13 +50,14 @@ const ReviewItemDetails = () => {
   const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
 
   useEffect(() => {
-    validateSession(navigation);
     if (navigation.isFocused()) {
-      scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
-      dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-      trackEvent('item_details_api_call', { barcode: scannedEvent.value });
-      dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
-      dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
+      validateSession(navigation).then(() => {
+        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
+        dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+        trackEvent('item_details_api_call', { barcode: scannedEvent.value });
+        dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+        dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
+      }).catch(() => {});
     }
   }, [scannedEvent]);
 
@@ -82,16 +83,17 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     if (itemDetails) {
-      validateSession(navigation);
-      dispatch(resetLocations());
-      dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty,
-        itemDetails.exceptionType ? itemDetails.completed : true));
-      dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr,
-        itemDetails.exceptionType ? itemDetails.exceptionType : ''));
-      if (itemDetails.location) {
-        if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
-        if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
-      }
+      validateSession(navigation).then(() => {
+        dispatch(resetLocations());
+        dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty,
+          itemDetails.exceptionType ? itemDetails.completed : true));
+        dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr,
+          itemDetails.exceptionType ? itemDetails.exceptionType : ''));
+        if (itemDetails.location) {
+          if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
+          if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
+        }
+      }).catch(() => {});
     }
   }, [itemDetails]);
 
@@ -118,10 +120,11 @@ const ReviewItemDetails = () => {
       };
     }
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
-      validateSession(navigation);
-      if (navigation.isFocused()) {
-        dispatch(setScannedEvent(scan));
-      }
+      validateSession(navigation).then(() => {
+        if (navigation.isFocused()) {
+          dispatch(setScannedEvent(scan));
+        }
+      }).catch(() => {});
     });
     return () => {
       // eslint-disable-next-line no-unused-expressions
@@ -158,8 +161,7 @@ const ReviewItemDetails = () => {
 
   useFocusEffect(
     () => {
-      const onBackPress = () => {
-        validateSession(navigation);
+      const onBackPress = () => { 
         if (!actionCompleted) {
           if (exceptionType === 'po') {
             trackEvent('item_details_back_press_action_incomplete', { exceptionType });
@@ -229,23 +231,26 @@ const ReviewItemDetails = () => {
   }
 
   const handleUpdateQty = () => {
-    validateSession(navigation);
-    trackEvent('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
-    setOhQtyModalVisible(true);
+    validateSession(navigation).then(() => {
+      trackEvent('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
+      setOhQtyModalVisible(true);
+    }).catch(() => {});
   };
 
   const handleLocationAction = () => {
-    validateSession(navigation);
-    trackEvent('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
-    navigation.navigate('LocationDetails');
+    validateSession(navigation).then(() => {
+      trackEvent('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
+      navigation.navigate('LocationDetails');
+    }).catch(() => {});
   };
 
   const handleAddToPicklist = () => {
-    validateSession(navigation);
-    trackEvent('item_details_add_to_picklist_click', { itemDetails: JSON.stringify(itemDetails) });
-    dispatch(addToPicklist({
-      itemNumber: itemDetails.itemNbr
-    }));
+    validateSession(navigation).then(() => {
+      trackEvent('item_details_add_to_picklist_click', { itemDetails: JSON.stringify(itemDetails) });
+      dispatch(addToPicklist({
+        itemNumber: itemDetails.itemNbr
+      }));
+    }).catch(() => {});
   };
 
   const toggleSalesGraphView = () => {
@@ -374,44 +379,45 @@ const ReviewItemDetails = () => {
   };
 
   const renderScanForNoActionButton = () => {
-    validateSession(navigation);
-    if (actionCompleted) {
-      return null;
-    }
+    validateSession(navigation).then(() => {
+      if (actionCompleted) {
+        return null;
+      }
 
-    if (completeApi.isWaiting) {
-      return (
-        <ActivityIndicator
-          animating={completeApi.isWaiting}
-          hidesWhenStopped
-          color={COLOR.MAIN_THEME_COLOR}
-          size="large"
-          style={styles.completeActivityIndicator}
-        />
-      );
-    }
+      if (completeApi.isWaiting) {
+        return (
+          <ActivityIndicator
+            animating={completeApi.isWaiting}
+            hidesWhenStopped
+            color={COLOR.MAIN_THEME_COLOR}
+            size="large"
+            style={styles.completeActivityIndicator}
+          />
+        );
+      }
 
-    if (Platform.OS === 'android') {
+      if (Platform.OS === 'android') {
+        return (
+          <TouchableOpacity
+            style={styles.scanForNoActionButton}
+            onPress={() => {
+              trackEvent('item_details_scan_for_no_action_button_click', { itemDetails: JSON.stringify(itemDetails) });
+              return dispatch(setManualScan(!isManualScanEnabled));
+            }}
+          >
+            <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+            <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
+          </TouchableOpacity>
+        );
+      }
+
       return (
-        <TouchableOpacity
-          style={styles.scanForNoActionButton}
-          onPress={() => {
-            trackEvent('item_details_scan_for_no_action_button_click', { itemDetails: JSON.stringify(itemDetails) });
-            return dispatch(setManualScan(!isManualScanEnabled));
-          }}
-        >
+        <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
           <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
           <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
         </TouchableOpacity>
       );
-    }
-
-    return (
-      <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
-        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
-        <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
-      </TouchableOpacity>
-    );
+    }).catch(() => {});
   };
 
   return (

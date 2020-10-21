@@ -175,8 +175,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         const onWorklistCardPress = () => {
           trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
           this.props.updateFilterExceptions([worklist.worklistType]);
-          validateSession(this.props.navigation);
-          this.props.navigation.navigate(strings('WORKLIST.WORKLIST'));
+          validateSession(this.props.navigation).then(() => {
+            this.props.navigation.navigate(strings('WORKLIST.WORKLIST'));
+          }).catch(() => {});
         };
 
         return (

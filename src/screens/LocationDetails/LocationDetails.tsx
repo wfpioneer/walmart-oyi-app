@@ -68,18 +68,20 @@ const LocationDetails = () => {
   }, [delAPI]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {
-    validateSession(navigation);
-    trackEvent('location_edit_location_click', { location: JSON.stringify(loc), index: locIndex });
-    navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
+    validateSession(navigation).then(() => {
+      trackEvent('location_edit_location_click', { location: JSON.stringify(loc), index: locIndex });
+      navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
+    }).catch(() => {});
   };
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
-    validateSession(navigation);
-    trackEvent('location_delete_location_click', { location: JSON.stringify(loc), index: locIndex });
-    setLocToConfirm({
-      locationName: loc.locationName, locationArea: 'floor', locationIndex: locIndex, locationTypeNbr: loc.typeNbr
-    });
-    setDisplayConfirmation(true);
+    validateSession(navigation).then(() => {
+      trackEvent('location_delete_location_click', { location: JSON.stringify(loc), index: locIndex });
+      setLocToConfirm({
+        locationName: loc.locationName, locationArea: 'floor', locationIndex: locIndex, locationTypeNbr: loc.typeNbr
+      });
+      setDisplayConfirmation(true);
+    }).catch(() => {});
   };
 
   const deleteConfirmed = () => {
@@ -104,9 +106,10 @@ const LocationDetails = () => {
   );
 
   const addNewLocationNav = () => {
-    validateSession(navigation);
-    trackEvent('location_fab_button_click');
-    navigation.navigate('AddLocation');
+    validateSession(navigation).then(() => {
+      trackEvent('location_fab_button_click');
+      navigation.navigate('AddLocation');
+    }).catch(() => {});
   };
   return (
     <>

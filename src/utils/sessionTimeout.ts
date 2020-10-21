@@ -6,10 +6,10 @@ import { store } from '../../App';
 import { trackEvent } from './AppCenterTool';
 import { clearEndTime } from '../state/actions/SessionTimeout';
 
-const sessionLength = 10;
+const sessionLength = 2;
 export const sessionEnd = () => {
   const endTime = moment();
-  endTime.add(sessionLength, 'seconds');
+  endTime.add(sessionLength, 'hours');
   return endTime.unix();
 };
 
