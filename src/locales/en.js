@@ -55,9 +55,9 @@ export default {
     NIL_PICK: 'Nil Pick',
     PRICE_OVERRIDE: 'Price Override',
     NO_SALES: 'No Sales',
-    NEGATIVE_ON_HANDS: 'Negative on-hands',
+    NEGATIVE_ON_HANDS: 'Negative On-Hands',
     CANCELLED: 'Cancelled',
-    NSFL: 'No sales floor location',
+    NSFL: 'No Sales Floor Location',
     UNKNOWN: 'Unknown'
   },
   ITEM: {
