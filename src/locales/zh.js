@@ -38,7 +38,8 @@ export default {
     CLUB: '会员店',
     SUBMIT: '递交',
     RETRY: '重试',
-    GOAL: '目标'
+    GOAL: '目标',
+    VERSION: '版本'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',

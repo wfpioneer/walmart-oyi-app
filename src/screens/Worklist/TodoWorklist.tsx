@@ -11,11 +11,6 @@ export const TodoWorklist = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    trackEvent('worklist_items_api_call');
-    dispatch(getWorklist());
-  }, []);
-
-  useEffect(() => {
     if (result) {
       trackEvent('worklist_items_api_success');
     }

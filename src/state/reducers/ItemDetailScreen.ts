@@ -8,14 +8,14 @@ const initialState = {
 
 export const ItemDetailScreen = (
   state = initialState,
-  action: { type: string; payload: { exceptionType?: string; pendingOHQty?: number } }
+  action: { type: string; payload: { exceptionType?: string; pendingOHQty?: number; completed: boolean } }
 ) => {
   switch (action.type) {
     case SETUP_SCREEN:
       return {
         exceptionType: action.payload.exceptionType,
         pendingOnHandsQty: action.payload.pendingOHQty,
-        actionCompleted: !action.payload.exceptionType
+        actionCompleted: action.payload.completed
       };
     case UPDATE_PENDING_OH_QTY:
       return {
