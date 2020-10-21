@@ -31,6 +31,8 @@ const mapDispatchToProps = {
   updateFilterExceptions
 };
 
+const pkg = require('../../../package.json');
+
 interface HomeScreenProps {
   userName: string;
   setScannedEvent: Function;
@@ -199,7 +201,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             { renderGoalCircles() }
           </View>
           { renderWorklistCards() }
-        </ScrollView>
+        </ScrollView>  
+        <Text style={styles.versionDisplay}>{strings('GENERICS.VERSION')} {pkg.version}</Text>      
       </SafeAreaView>
     );
   }

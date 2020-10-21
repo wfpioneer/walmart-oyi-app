@@ -38,7 +38,8 @@ export default {
     CLUB: 'Club',
     SUBMIT: 'Submit',
     RETRY: 'Retry',
-    GOAL: 'Goal'
+    GOAL: 'Goal',
+    VERSION: 'Version'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
