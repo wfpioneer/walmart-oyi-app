@@ -44,7 +44,6 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
 
   componentDidMount(): void {
     this.signInUser();
-    console.log('loginscreen created');
     // this following snippet is mostly for iOS, as
     // I need it to automatically call signInUser when we go back to the login screen
     if (Platform.OS === 'ios') {
@@ -60,7 +59,6 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
 
   signInUser(): void {
     WMSSO.getUser().then((user: User) => {
-      console.log(this.props);
       if (!this.props.User.userId) {
         const countryCode = user.countryCode.toLowerCase();
         switch (countryCode) {
