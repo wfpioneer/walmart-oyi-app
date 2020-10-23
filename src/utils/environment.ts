@@ -42,5 +42,5 @@ export const getEnvironment = (): Environment => {
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.prod.walmart.com`
     }
   };
-  return __DEV__ ? environments.stage : environments.stage
+  return __DEV__ ? environments.stage : environments.prod
 };
