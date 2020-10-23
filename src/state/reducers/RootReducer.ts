@@ -8,6 +8,7 @@ import { worklist } from './Worklist';
 import { ItemDetailScreen } from './ItemDetailScreen';
 import { Print } from './Print';
 import { Location } from './Location';
+import { SessionTimeout } from './SessionTimeout';
 
 /**
  * This is the root reducers,this RootReducer combine all sub reducers.git
@@ -20,7 +21,8 @@ const RootReducer = combineReducers({
   Worklist: worklist,
   Print,
   ItemDetailScreen,
-  Location
+  Location,
+  SessionTimeout
 });
 
 export default RootReducer;

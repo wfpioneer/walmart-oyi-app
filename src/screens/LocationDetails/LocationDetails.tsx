@@ -16,6 +16,7 @@ import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { deleteLocationFromExisting, isUpdating } from '../../state/actions/Location';
 import { deleteLocation } from '../../state/actions/saga';
+import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 
 const LocationDetails = () => {
@@ -67,16 +68,20 @@ const LocationDetails = () => {
   }, [delAPI]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {
-    trackEvent('location_edit_location_click', { location: JSON.stringify(loc), index: locIndex });
-    navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
+    validateSession(navigation).then(() => {
+      trackEvent('location_edit_location_click', { location: JSON.stringify(loc), index: locIndex });
+      navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
+    }).catch(() => {});
   };
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
-    trackEvent('location_delete_location_click', { location: JSON.stringify(loc), index: locIndex });
-    setLocToConfirm({
-      locationName: loc.locationName, locationArea: 'floor', locationIndex: locIndex, locationTypeNbr: loc.typeNbr
-    });
-    setDisplayConfirmation(true);
+    validateSession(navigation).then(() => {
+      trackEvent('location_delete_location_click', { location: JSON.stringify(loc), index: locIndex });
+      setLocToConfirm({
+        locationName: loc.locationName, locationArea: 'floor', locationIndex: locIndex, locationTypeNbr: loc.typeNbr
+      });
+      setDisplayConfirmation(true);
+    }).catch(() => {});
   };
 
   const deleteConfirmed = () => {
@@ -101,8 +106,10 @@ const LocationDetails = () => {
   );
 
   const addNewLocationNav = () => {
-    trackEvent('location_fab_button_click');
-    navigation.navigate('AddLocation');
+    validateSession(navigation).then(() => {
+      trackEvent('location_fab_button_click');
+      navigation.navigate('AddLocation');
+    }).catch(() => {});
   };
   return (
     <>

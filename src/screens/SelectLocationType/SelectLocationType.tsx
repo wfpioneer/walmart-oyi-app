@@ -18,6 +18,7 @@ import { barcodeEmitter, manualScan } from '../../utils/scannerUtils';
 import { strings } from '../../locales';
 import styles from './SelectLocationType.style';
 import { COLOR } from '../../themes/Color';
+import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 
 interface LocParams {
@@ -133,50 +134,56 @@ const SelectLocationType = () => {
   }, [editAPI]);
 
   const modelOnSubmit = (value: string) => {
-    manualScan(value);
-    dispatch(setManualScan(false));
-    setInputLocation(false);
+    validateSession(navigation).then(() => {
+      manualScan(value);
+      dispatch(setManualScan(false));
+      setInputLocation(false);
+    }).catch(() => {});
   };
 
   const onSubmit = () => {
-    if (routeSource === 'AddLocation') {
-      setError({ error: false, message: '' });
-      const sameLoc = floorLocations.find((location: Location) => location.locationName === loc && location.typeNbr.toString() === type);
-      if (!sameLoc) {
-        trackEvent('select_location_add_api_call',
-          { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
-        dispatch(addLocation({
-          upc: itemLocDetails.upcNbr,
-          sectionId: loc,
-          locationTypeNbr: type
-        }));
-      } else {
-        trackEvent('select_location_add_duplicate');
-        setError({ error: true, message: strings('LOCATION.ADD_DUPLICATE_ERROR') });
+    validateSession(navigation).then(() => {
+      if (routeSource === 'AddLocation') {
+        setError({ error: false, message: '' });
+        const sameLoc = floorLocations.find((location: Location) => location.locationName === loc && location.typeNbr.toString() === type);
+        if (!sameLoc) {
+          trackEvent('select_location_add_api_call',
+            { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
+          dispatch(addLocation({
+            upc: itemLocDetails.upcNbr,
+            sectionId: loc,
+            locationTypeNbr: type
+          }));
+        } else {
+          trackEvent('select_location_add_duplicate');
+          setError({ error: true, message: strings('LOCATION.ADD_DUPLICATE_ERROR') });
+        }
+      } else if (routeSource === 'EditLocation') {
+        setError({ error: false, message: '' });
+        const sameLoc = floorLocations.find((location: Location) => location.locationName === loc && location.typeNbr.toString() === type);
+        if (!sameLoc) {
+          trackEvent('select_location_edit_api_call',
+            { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
+          dispatch(editLocation({
+            upc: itemLocDetails.upcNbr,
+            sectionId: currentLocation.locationName,
+            newSectionId: loc,
+            locationTypeNbr: currentLocation.type,
+            newLocationTypeNbr: type
+          }));
+        } else {
+          trackEvent('select_location_edit_duplicate');
+          setError({ error: true, message: strings('LOCATION.EDIT_DUPLICATE_ERROR') });
+        }
       }
-    } else if (routeSource === 'EditLocation') {
-      setError({ error: false, message: '' });
-      const sameLoc = floorLocations.find((location: Location) => location.locationName === loc && location.typeNbr.toString() === type);
-      if (!sameLoc) {
-        trackEvent('select_location_edit_api_call',
-          { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
-        dispatch(editLocation({
-          upc: itemLocDetails.upcNbr,
-          sectionId: currentLocation.locationName,
-          newSectionId: loc,
-          locationTypeNbr: currentLocation.type,
-          newLocationTypeNbr: type
-        }));
-      } else {
-        trackEvent('select_location_edit_duplicate');
-        setError({ error: true, message: strings('LOCATION.EDIT_DUPLICATE_ERROR') });
-      }
-    }
+    }).catch(() => {});
   };
 
   const handleManualScan = () => {
-    setInputLocation(true);
-    dispatch(setManualScan(true));
+    validateSession(navigation).then(() => {
+      setInputLocation(true);
+      dispatch(setManualScan(true));
+    }).catch(() => {});
   };
 
   const validateLocation = () =>
