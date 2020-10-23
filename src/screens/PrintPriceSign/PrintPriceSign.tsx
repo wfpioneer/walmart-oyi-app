@@ -20,6 +20,7 @@ import {
   LaserPaper, PortablePaper, PrintQueueItem, Printer, PrinterType
 } from '../../models/Printer';
 import { printSign } from '../../state/actions/saga';
+import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 
 const wineCatgNbr = 19;
@@ -155,7 +156,9 @@ const PrintPriceSign = () => {
   };
 
   const handleChangePrinter = () => {
-    navigation.navigate('PrinterList');
+    validateSession(navigation).then(() => {
+      navigation.navigate('PrinterList');
+    }).catch(() => {});
   };
 
   const handleAddPrintList = () => {
@@ -190,21 +193,23 @@ const PrintPriceSign = () => {
   };
 
   const handlePrint = () => {
-    const printlist = [
-      {
-        itemNbr,
-        qty: signQty,
-        code: selectedPrinter.type === PrinterType.LASER
-          // @ts-ignore
-          ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType],
-        description: selectedSignType,
-        printerMACAddress: selectedPrinter.id,
-        isPortablePrinter: selectedPrinter.type === 1,
-        worklistType: exceptionType
-      }
-    ];
-    trackEvent('print_price_sign', JSON.stringify(printlist));
-    dispatch(printSign({ printlist }));
+    validateSession(navigation).then(() => {
+      const printlist = [
+        {
+          itemNbr,
+          qty: signQty,
+          code: selectedPrinter.type === PrinterType.LASER
+            // @ts-ignore
+            ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType],
+          description: selectedSignType,
+          printerMACAddress: selectedPrinter.id,
+          isPortablePrinter: selectedPrinter.type === 1,
+          worklistType: exceptionType
+        }
+      ];
+      trackEvent('print_price_sign', JSON.stringify(printlist));
+      dispatch(printSign({ printlist }));
+    }).catch(() => {});
   };
 
   return (
