@@ -1,10 +1,11 @@
 import Request from './Request';
-import URLS from '../utils/environment';
+import { getEnvironment, Environment } from "../utils/environment";
 
 export default class GetItemDetailsService {
   public static getItemDetails(payload: {headers: object; id: number}) {
+    const urls: Environment = getEnvironment();
     return Request.enqueue({
-      url: `${URLS.itemDetailsURL}/item/${payload.id}`,
+      url: `${urls.itemDetailsURL}/item/${payload.id}`,
       method: 'get',
       timeout: 10000,
       headers: payload.headers

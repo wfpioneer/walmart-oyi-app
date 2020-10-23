@@ -44,7 +44,7 @@ class RequestDispatch {
         const interceptRequest = await this.settingHeaders(request);
         // console.log(`=====> Network ${request.method} to: ${request.url}`, interceptRequest);
         interceptRequest.headers.userId = store.getState().User.userId;
-        interceptRequest.headers.countryCode = 'CN';
+        interceptRequest.headers.countryCode = store.getState().User.countryCode;
         interceptRequest.headers.clubNbr = store.getState().User.siteId;
         this.requestStartTime = moment().valueOf();
         return interceptRequest;

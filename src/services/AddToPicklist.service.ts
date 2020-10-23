@@ -1,10 +1,11 @@
 import Request from './Request';
-import URLS from '../utils/environment';
+import { getEnvironment, Environment } from "../utils/environment";
 
 export default class AddToPicklistService {
   public static addToPicklist(payload: {headers: object; itemNumber: number}) {
+    const urls: Environment = getEnvironment();
     return Request.enqueue({
-      url: `${URLS.itemDetailsURL}/picklist`,
+      url: `${urls.itemDetailsURL}/picklist`,
       method: 'post',
       data: {
         itemNbr: payload.itemNumber

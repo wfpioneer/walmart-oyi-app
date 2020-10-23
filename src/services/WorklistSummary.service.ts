@@ -1,10 +1,11 @@
 import Request from './Request';
-import URLS from '../utils/environment';
+import { getEnvironment, Environment } from "../utils/environment";
 
 export default class WorklistSummaryService {
   public static getWorklistSummary() {
+    const urls: Environment = getEnvironment();
     return Request.enqueue({
-      url: `${URLS.worklistURL}/worklist/summary`,
+      url: `${urls.worklistURL}/worklist/summary`,
       method: 'get',
       timeout: 10000
     });
