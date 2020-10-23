@@ -6,8 +6,7 @@ export default class WorklistSummaryService {
     const urls: Environment = getEnvironment();
     return Request.enqueue({
       url: `${urls.worklistURL}/worklist/summary`,
-      method: 'get',
-      timeout: 10000
+      method: 'get'
     });
   }
 }

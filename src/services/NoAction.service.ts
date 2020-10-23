@@ -12,7 +12,6 @@ export default class NoActionService {
         worklistItemNbr: payload.itemNbr,
         scannedValue: payload.scannedValue
       },
-      timeout: 10000,
       headers: payload.headers
     });
   }

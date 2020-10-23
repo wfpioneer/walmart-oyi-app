@@ -11,7 +11,6 @@ export default class AddLocationService {
         sectionId: payload.sectionId,
         locationTypeNbr: payload.locationTypeNbr
       },
-      timeout: 10000,
       headers: payload.headers
     });
   }

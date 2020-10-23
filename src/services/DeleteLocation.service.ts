@@ -9,7 +9,6 @@ export default class DeleteLocationService {
       method: 'delete',
       data: {
       },
-      timeout: 10000,
       headers: payload.headers
     });
   }

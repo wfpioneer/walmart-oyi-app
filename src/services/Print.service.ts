@@ -8,7 +8,6 @@ export default class PrintService {
       url: `${urls.orchestrationURL}/print/price-sign`,
       method: 'post',
       data: payload.printlist,
-      timeout: 10000,
       headers: payload.headers
     });
   }

@@ -7,7 +7,6 @@ export default class UpdateOHQtyService {
     return Request.enqueue({
       url: `${urls.orchestrationURL}/item/${payload.itemNumber}/onhands`,
       method: 'put',
-      timeout: 10000,
       headers: payload.headers,
       data: payload.data
     });

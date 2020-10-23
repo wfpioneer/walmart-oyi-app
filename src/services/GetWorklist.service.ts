@@ -14,7 +14,6 @@ export default class GetWorklistService {
     return Request.enqueue({
       url: filterUrl,
       method: 'get',
-      timeout: 10000
     });
   }
 }

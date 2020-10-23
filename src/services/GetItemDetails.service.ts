@@ -7,7 +7,6 @@ export default class GetItemDetailsService {
     return Request.enqueue({
       url: `${urls.itemDetailsURL}/item/${payload.id}`,
       method: 'get',
-      timeout: 10000,
       headers: payload.headers
     });
   }

@@ -12,7 +12,6 @@ export default class EditLocationService {
         sectionId: payload.newSectionId,
         locationTypeNbr: payload.newLocationTypeNbr,
       },
-      timeout: 10000,
       headers: payload.headers
     });
   }
