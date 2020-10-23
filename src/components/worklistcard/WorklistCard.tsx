@@ -24,7 +24,7 @@ function WorklistCard(Props: Props) {
     if (Props.goal === 0) {
       return styles.barFillNoItems;
     }
-    return Props.completionPercentage >= target ? styles.barFillAtGoal : styles.barFillNotAtGoal
+    return Props.completionPercentage >= target ? styles.barFillAtGoal : styles.barFillNotAtGoal;
   };
   return (
     <TouchableOpacity style={styles.card} onPress={Props.onPress}>

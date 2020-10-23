@@ -2,7 +2,7 @@ import React, {
   RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, BackHandler, Modal, Platform, SafeAreaView, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, Modal, Platform, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import _ from 'lodash';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -161,7 +161,7 @@ const ReviewItemDetails = () => {
 
   useFocusEffect(
     () => {
-      const onBackPress = () => { 
+      const onBackPress = () => {
         if (!actionCompleted) {
           if (exceptionType === 'po') {
             trackEvent('item_details_back_press_action_incomplete', { exceptionType });
