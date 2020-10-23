@@ -1,5 +1,5 @@
 import Request from './Request';
-import { getEnvironment, Environment } from "../utils/environment";
+import { getEnvironment, Environment } from '../utils/environment';
 
 export default class AddToPicklistService {
   public static addToPicklist(payload: {headers: object; itemNumber: number}) {

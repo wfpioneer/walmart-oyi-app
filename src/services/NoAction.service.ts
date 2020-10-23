@@ -1,5 +1,5 @@
 import Request from './Request';
-import { getEnvironment, Environment } from "../utils/environment";
+import { getEnvironment, Environment } from '../utils/environment';
 
 export default class NoActionService {
   public static noAction(payload: {headers: object; upc: string; itemNbr: number; scannedValue: string;}) {

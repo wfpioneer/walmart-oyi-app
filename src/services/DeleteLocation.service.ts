@@ -1,5 +1,5 @@
 import Request from './Request';
-import { getEnvironment, Environment } from "../utils/environment";
+import { getEnvironment, Environment } from '../utils/environment';
 
 export default class DeleteLocationService {
   public static deleteLocation(payload: {headers: object; upc: string; sectionId: string; locationTypeNbr: number}) {

@@ -1,5 +1,5 @@
 import Request from './Request';
-import { getEnvironment, Environment } from "../utils/environment";
+import { getEnvironment, Environment } from '../utils/environment';
 
 export default class GetItemDetailsService {
   public static getItemDetails(payload: {headers: object; id: number}) {

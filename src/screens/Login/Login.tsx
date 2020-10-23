@@ -12,8 +12,8 @@ import { hideActivityModal } from '../../state/actions/Modal';
 import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
-import { setLanguage } from "../../locales";
-import { RootState } from "../../state/reducers/RootReducer";
+import { setLanguage } from '../../locales';
+import { RootState } from '../../state/reducers/RootReducer';
 
 const mapDispatchToProps = {
   loginUser,
