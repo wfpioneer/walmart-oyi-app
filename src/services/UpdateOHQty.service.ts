@@ -1,5 +1,5 @@
 import Request from './Request';
-import { getEnvironment, Environment } from '../utils/environment';
+import { Environment, getEnvironment } from '../utils/environment';
 
 export default class UpdateOHQtyService {
   public static updateOHQty(payload: {headers: object; itemNumber: number; data: {onHandQty: number;};}) {

@@ -1,5 +1,5 @@
 import Request from './Request';
-import { getEnvironment, Environment } from '../utils/environment';
+import { Environment, getEnvironment } from '../utils/environment';
 
 export default class EditLocationService {
   public static editLocation(payload: {headers: object; upc: string; sectionId: string; newSectionId: string;

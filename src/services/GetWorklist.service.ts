@@ -1,5 +1,5 @@
 import Request from './Request';
-import { getEnvironment, Environment } from '../utils/environment';
+import { Environment, getEnvironment } from '../utils/environment';
 
 export default class GetWorklistService {
   public static getWorklist(payload: {headers: object; worklistType?: [string]}) {

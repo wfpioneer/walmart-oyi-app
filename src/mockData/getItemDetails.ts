@@ -2,14 +2,13 @@
 export default {
   '123': {
     itemName: 'Test Item That is Really, Really Long (and has parenthesis)',
-    itemNbr: 123,
+    itemNbr: 1234567890,
     upcNbr: '000055559999',
     status: 'Active',
     categoryNbr: 93,
-    categoryDesc: 'Meat PI',
+    category: '93 - Meat PI',
     price: 2000.94,
     exceptionType: 'nsfl',
-    completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
     replenishment: {
