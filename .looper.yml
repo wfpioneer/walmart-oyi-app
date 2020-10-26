@@ -26,11 +26,11 @@ envs:
 
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
-      ANDROID_BUILD_PROFILE: ':app:assembleDebug'
+      ANDROID_BUILD_PROFILE: ':app:assembleRelease'
       # Optional - if your app needs a special command to be built (debug version). Defaults to assembleDebug.
-      ANDROID_BUILD_PR_PROFILE: ':app:assembleRelease'
+      ANDROID_BUILD_PR_PROFILE: ':app:assembleDebug'
       # Optional - if your app needs arguments to be built. It's empty by default.
-      # GRADLE_ARG: ''
+      GRADLE_ARG: ''
 
       #ServiceNow variables
       # whether you want the template to create a ServiceNow CHG or not. Defaults to true
