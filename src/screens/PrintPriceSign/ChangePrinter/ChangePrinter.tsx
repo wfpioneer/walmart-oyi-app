@@ -16,7 +16,7 @@ export const ChangePrinter = () => {
   const [macAddress, updateMacAddress] = useState('');
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const macRegex = /^[0-9a-f]{12}/;
+  const macRegex = /^[0-9a-fA-F]{12}/;
 
   // Barcode event listener effect
   useEffect(() => {
