@@ -75,6 +75,7 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-native": "^3.6.0",
     "jest": "^24.9.0",
+    "jest-sonar-reporter": "^2.0.0",
     "metro-react-native-babel-preset": "^0.58.0",
     "prettier": "^2.0.2",
     "react-test-renderer": "16.11.0",
@@ -91,6 +92,7 @@
       "jsx",
       "json",
       "node"
-    ]
+    ],
+    "testResultsProcessor": "jest-sonar-reporter"
   }
 }
