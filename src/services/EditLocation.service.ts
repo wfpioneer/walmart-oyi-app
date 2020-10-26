@@ -10,7 +10,7 @@ export default class EditLocationService {
       method: 'put',
       data: {
         sectionId: payload.newSectionId,
-        locationTypeNbr: payload.newLocationTypeNbr,
+        locationTypeNbr: payload.newLocationTypeNbr
       },
       headers: payload.headers
     });

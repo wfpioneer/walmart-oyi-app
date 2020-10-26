@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: COLOR.GREY_600
   }
-})
+});
 
 export default styles;
