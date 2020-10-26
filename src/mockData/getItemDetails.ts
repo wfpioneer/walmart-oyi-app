@@ -114,22 +114,22 @@ export default {
       weekly: [
         {
           week: 51,
-          value: 44
+          value: 39
         },
         {
-          week: 1,
+          week: 52,
           value: 26
         },
         {
-          week: 2,
-          value: 50
+          week: 53,
+          value: 45
         },
         {
-          week: 3,
-          value: 42
+          week: 54,
+          value: 34
         },
         {
-          week: 4,
+          week: 55,
           value: 34
         }
       ]

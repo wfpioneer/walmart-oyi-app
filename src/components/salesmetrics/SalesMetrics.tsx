@@ -52,7 +52,7 @@ const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod:
           x={x(index) + (bandwidth / 2)}
           y={entry.value < CUT_OFF ? y(entry.value) - 10 : y(entry.value) + 15}
           fontSize={10}
-          fill={entry.value > CUT_OFF ? 'white' : 'black'}
+          fill={entry.value >= CUT_OFF ? 'white' : 'black'}
           alignmentBaseline="middle"
           textAnchor="middle"
         >
@@ -76,7 +76,7 @@ const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod:
         data={chartData}
         yAccessor={({ item }) => item.value}
         svg={{ fill: COLOR.GREEN }}
-        contentInset={{ top: 10, bottom: 10 }}
+        contentInset={{ top: 20, bottom: 10 }}
         gridMin={0}
       >
         <Grid />
