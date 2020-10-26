@@ -4,7 +4,7 @@ import { COLOR } from '../../themes/Color';
 const styles = StyleSheet.create({
   mainContainer: {
     marginTop: 8,
-    backgroundColor: "white",
+    backgroundColor: COLOR.WHITE,
     alignSelf: 'stretch'
   },
   topRowContainer: {
@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
     color: COLOR.GREY_500,
     fontSize: 18
   }
-})
+});
 
 export default styles;
