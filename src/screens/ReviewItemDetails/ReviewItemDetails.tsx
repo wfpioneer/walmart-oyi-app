@@ -401,11 +401,8 @@ const ReviewItemDetails = () => {
           <TouchableOpacity
             style={styles.scanForNoActionButton}
             onPress={() => {
-              validateSession(navigation).then(() => {
-                trackEvent('item_details_scan_for_no_action_button_click', { itemDetails: JSON.stringify(itemDetails) });
-                return dispatch(setManualScan(!isManualScanEnabled));
-              }).catch(() => {
-              });
+              trackEvent('item_details_scan_for_no_action_button_click', { itemDetails: JSON.stringify(itemDetails) });
+              return dispatch(setManualScan(!isManualScanEnabled));
             }}
           >
             <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
