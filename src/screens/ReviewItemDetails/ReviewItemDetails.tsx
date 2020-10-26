@@ -379,46 +379,48 @@ const ReviewItemDetails = () => {
   };
 
   const renderScanForNoActionButton = () => {
-    if (actionCompleted) {
-      return null;
-    }
+    validateSession(navigation).then(() => {
+      if (actionCompleted) {
+        return null;
+      }
 
-    if (completeApi.isWaiting) {
-      return (
-        <ActivityIndicator
-          animating={completeApi.isWaiting}
-          hidesWhenStopped
-          color={COLOR.MAIN_THEME_COLOR}
-          size="large"
-          style={styles.completeActivityIndicator}
-        />
-      );
-    }
+      if (completeApi.isWaiting) {
+        return (
+          <ActivityIndicator
+            animating={completeApi.isWaiting}
+            hidesWhenStopped
+            color={COLOR.MAIN_THEME_COLOR}
+            size="large"
+            style={styles.completeActivityIndicator}
+          />
+        );
+      }
 
-    if (Platform.OS === 'android') {
+      if (Platform.OS === 'android') {
+        return (
+          <TouchableOpacity
+            style={styles.scanForNoActionButton}
+            onPress={() => {
+              validateSession(navigation).then(() => {
+                trackEvent('item_details_scan_for_no_action_button_click', { itemDetails: JSON.stringify(itemDetails) });
+                return dispatch(setManualScan(!isManualScanEnabled));
+              }).catch(() => {
+              });
+            }}
+          >
+            <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+            <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
+          </TouchableOpacity>
+        );
+      }
+
       return (
-        <TouchableOpacity
-          style={styles.scanForNoActionButton}
-          onPress={() => {
-            validateSession(navigation).then(() => {
-              trackEvent('item_details_scan_for_no_action_button_click', { itemDetails: JSON.stringify(itemDetails) });
-              return dispatch(setManualScan(!isManualScanEnabled));
-            }).catch(() => {
-            });
-          }}
-        >
+        <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
           <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
           <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
         </TouchableOpacity>
       );
-    }
-
-    return (
-      <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
-        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
-        <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
-      </TouchableOpacity>
-    );
+    }).catch(() => {});
   };
 
   return (
