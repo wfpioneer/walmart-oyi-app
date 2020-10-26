@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import moment from 'moment';
 import { BarChart, Grid, XAxis } from 'react-native-svg-charts';
 import { Text as SvgText } from 'react-native-svg';
-import { scaleBand } from "d3-scale";
+import { scaleBand } from 'd3-scale';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import Button from '../buttons/Button';
