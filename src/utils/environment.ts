@@ -14,8 +14,6 @@ export interface Environments {
   prod: Environment;
 }
 
-
-
 export const getEnvironment = (): Environment => {
   const countryCode = store.getState().User.countryCode.toLowerCase();
 
@@ -28,19 +26,19 @@ export const getEnvironment = (): Environment => {
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.dev.walmart.com`
     },
     stage: {
-      orchestrationURL: `https://intl-oyi-orchestration-api.stg.walmart.com`,
+      orchestrationURL: 'https://intl-oyi-orchestration-api.stg.walmart.com',
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.stg.walmart.com`,
       locationURL: `https://intl-oyi-location-api.${countryCode}.stg.walmart.com`,
       printingURL: `https://intl-oyi-printing-api.${countryCode}.stg.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.stg.walmart.com`
     },
     prod: {
-      orchestrationURL: `https://intl-oyi-orchestration-api.prod.walmart.com`,
+      orchestrationURL: 'https://intl-oyi-orchestration-api.prod.walmart.com',
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.prod.walmart.com`,
       locationURL: `https://intl-oyi-location-api.${countryCode}.prod.walmart.com`,
       printingURL: `https://intl-oyi-printing-api.${countryCode}.prod.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.prod.walmart.com`
     }
   };
-  return __DEV__ ? environments.stage : environments.prod
+  return __DEV__ ? environments.stage : environments.prod;
 };

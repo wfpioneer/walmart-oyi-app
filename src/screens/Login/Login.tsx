@@ -7,12 +7,11 @@ import Button from '../../components/buttons/Button';
 import styles from './Login.style';
 import { loginUser } from '../../state/actions/User';
 import User from '../../models/User';
-import { strings } from '../../locales';
+import { setLanguage, strings } from '../../locales';
 import { hideActivityModal } from '../../state/actions/Modal';
 import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
-import { setLanguage } from '../../locales';
 import { RootState } from '../../state/reducers/RootReducer';
 
 const mapDispatchToProps = {
@@ -21,10 +20,7 @@ const mapDispatchToProps = {
   setEndTime
 };
 
-const mapStateToProps = (state: RootState) => {
-  const { User } = state;
-  return { User: User }
-};
+const mapStateToProps = (state: RootState) => ({ User: state.User });
 
 interface LoginScreenProps {
   loginUser: Function;

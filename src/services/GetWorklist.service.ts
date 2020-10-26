@@ -13,7 +13,7 @@ export default class GetWorklistService {
     }
     return Request.enqueue({
       url: filterUrl,
-      method: 'get',
+      method: 'get'
     });
   }
 }
