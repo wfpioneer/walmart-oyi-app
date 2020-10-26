@@ -6,9 +6,10 @@ export default {
     upcNbr: '000055559999',
     status: 'Active',
     categoryNbr: 93,
-    category: '93 - Meat PI',
+    categoryDesc: 'Meat PI',
     price: 2000.94,
     exceptionType: 'nsfl',
+    completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
     replenishment: {
@@ -113,19 +114,23 @@ export default {
       weekly: [
         {
           week: 51,
-          value: 0
+          value: 44
         },
         {
           week: 1,
-          value: 10
+          value: 26
         },
         {
           week: 2,
-          value: 100
+          value: 50
         },
         {
           week: 3,
-          value: 10
+          value: 42
+        },
+        {
+          week: 4,
+          value: 34
         }
       ]
     }

@@ -33,6 +33,7 @@ import {
 import { showInfoModal } from '../../state/actions/Modal';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { getMockItemDetails } from "../../mockData";
 
 const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
@@ -75,7 +76,7 @@ const ReviewItemDetails = () => {
     }
   }, [error, result]);
 
-  const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
+  const itemDetails: ItemDetails = getMockItemDetails(scannedEvent.value);
   const locationCount = floorLocations.length + reserveLocations.length;
   const updatedSalesTS = _.get(itemDetails, 'sales.lastUpdateTs')
     ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
@@ -379,45 +380,47 @@ const ReviewItemDetails = () => {
   };
 
   const renderScanForNoActionButton = () => {
-    validateSession(navigation).then(() => {
-      if (actionCompleted) {
-        return null;
-      }
+    if (actionCompleted) {
+      return null;
+    }
 
-      if (completeApi.isWaiting) {
-        return (
-          <ActivityIndicator
-            animating={completeApi.isWaiting}
-            hidesWhenStopped
-            color={COLOR.MAIN_THEME_COLOR}
-            size="large"
-            style={styles.completeActivityIndicator}
-          />
-        );
-      }
-
-      if (Platform.OS === 'android') {
-        return (
-          <TouchableOpacity
-            style={styles.scanForNoActionButton}
-            onPress={() => {
-              trackEvent('item_details_scan_for_no_action_button_click', { itemDetails: JSON.stringify(itemDetails) });
-              return dispatch(setManualScan(!isManualScanEnabled));
-            }}
-          >
-            <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
-            <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
-          </TouchableOpacity>
-        );
-      }
-
+    if (completeApi.isWaiting) {
       return (
-        <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
-          <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+        <ActivityIndicator
+          animating={completeApi.isWaiting}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.completeActivityIndicator}
+        />
+      );
+    }
+
+    if (Platform.OS === 'android') {
+      return (
+        <TouchableOpacity
+          style={styles.scanForNoActionButton}
+          onPress={() => {
+            validateSession(navigation).then(() => {
+                trackEvent('item_details_scan_for_no_action_button_click', {itemDetails: JSON.stringify(itemDetails)});
+                return dispatch(setManualScan(!isManualScanEnabled));
+              }
+            ).catch(() => {
+            })
+          }}
+        >
+          <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE}/>
           <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
         </TouchableOpacity>
       );
-    }).catch(() => {});
+    }
+
+    return (
+      <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
+        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE}/>
+        <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
+      </TouchableOpacity>
+    );
   };
 
   return (
