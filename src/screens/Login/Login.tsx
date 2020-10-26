@@ -7,11 +7,12 @@ import Button from '../../components/buttons/Button';
 import styles from './Login.style';
 import { loginUser } from '../../state/actions/User';
 import User from '../../models/User';
-import { strings } from '../../locales';
+import { setLanguage, strings } from '../../locales';
 import { hideActivityModal } from '../../state/actions/Modal';
 import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
+import { RootState } from '../../state/reducers/RootReducer';
 
 const mapDispatchToProps = {
   loginUser,
@@ -19,8 +20,11 @@ const mapDispatchToProps = {
   setEndTime
 };
 
+const mapStateToProps = (state: RootState) => ({ User: state.User });
+
 interface LoginScreenProps {
   loginUser: Function;
+  User: User;
   navigation: Record<string, any>;
   hideActivityModal: Function;
   setEndTime: Function;
@@ -51,6 +55,23 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
 
   signInUser(): void {
     WMSSO.getUser().then((user: User) => {
+      if (!this.props.User.userId) {
+        const countryCode = user.countryCode.toLowerCase();
+        switch (countryCode) {
+          case 'us':
+            setLanguage('en');
+            break;
+          case 'cn':
+            setLanguage('zh');
+            break;
+          case 'mx':
+            setLanguage('es');
+            break;
+          default:
+            setLanguage('en');
+            break;
+        }
+      }
       setUserId(user.userId);
       this.props.loginUser(user);
       this.props.hideActivityModal();
@@ -73,4 +94,4 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
