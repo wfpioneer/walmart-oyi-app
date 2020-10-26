@@ -18,6 +18,7 @@ import { setPrintQueue } from '../../state/actions/Print';
 import { strings } from '../../locales';
 import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
 import { printSign } from '../../state/actions/saga';
+import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 
 const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Function, dispatch: Function) => {
@@ -26,8 +27,10 @@ const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Funct
   };
 
   const handleDeleteAction = (index: number) => () => {
-    printQueue.splice(index, 1);
-    dispatch(setPrintQueue(printQueue));
+    validateSession(useNavigation()).then(() => {
+      printQueue.splice(index, 1);
+      dispatch(setPrintQueue(printQueue));
+    }).catch(() => {});
   };
 
   return printQueue.map((item, index) => (
@@ -98,25 +101,27 @@ const PrintQueue = () => {
   }, [printAPI]);
 
   const handlePrint = () => {
-    const printArray = printQueue.map((printItem: PrintQueueItem) => {
-      const {
-        itemNbr, signQty, paperSize, worklistType
-      } = printItem;
-      return {
-        itemNbr,
-        qty: signQty,
-        // @ts-ignore
-        code: LaserPaper[paperSize],
-        description: paperSize,
-        printerMACAddress: selectedPrinter.id,
-        isPortablePrinter: false,
-        worklistType
-      };
-    });
-    trackEvent('print_queue', { queue: JSON.stringify(printArray) });
-    dispatch(printSign({
-      printlist: printArray
-    }));
+    validateSession(navigation).then(() => {
+      const printArray = printQueue.map((printItem: PrintQueueItem) => {
+        const {
+          itemNbr, signQty, paperSize, worklistType
+        } = printItem;
+        return {
+          itemNbr,
+          qty: signQty,
+          // @ts-ignore
+          code: LaserPaper[paperSize],
+          description: paperSize,
+          printerMACAddress: selectedPrinter.id,
+          isPortablePrinter: false,
+          worklistType
+        };
+      });
+      trackEvent('print_queue', { queue: JSON.stringify(printArray) });
+      dispatch(printSign({
+        printlist: printArray
+      }));
+    }).catch(() => {});
   };
 
   return (printQueue.length === 0

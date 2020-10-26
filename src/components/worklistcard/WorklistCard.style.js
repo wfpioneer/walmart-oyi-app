@@ -8,27 +8,27 @@ const styles = StyleSheet.create({
     elevation: 2,
     borderRadius: 10,
     backgroundColor: COLOR.WHITE,
-    width: "95%"
+    width: '95%'
   },
   head: {
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   title: {
     flex: 1
   },
   progress: {
-    textAlign: "right",
-    fontWeight: "bold",
+    textAlign: 'right',
+    fontWeight: 'bold',
     flex: 1
   },
   counter: {
     color: COLOR.TRAINING_BLUE,
-    textAlign: "right"
+    textAlign: 'right'
   },
   progressBar: {
-    flexDirection: "row",
+    flexDirection: 'row',
     height: 10,
-    width: "100%",
+    width: '100%',
     backgroundColor: COLOR.GREY_300,
     borderRadius: 10,
     marginTop: 5,

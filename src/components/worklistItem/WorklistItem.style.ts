@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import COLOR from "../../themes/Color";
+import { StyleSheet } from 'react-native';
+import COLOR from '../../themes/Color';
 
 export default StyleSheet.create({
   container: {
@@ -22,15 +22,15 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-evenly',
     height: 100,
-    flex: 1,
+    flex: 1
   },
   exceptionType: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: COLOR.PINK,
+    color: COLOR.PINK
   },
   itemInfo: {
-    fontSize: 12,
+    fontSize: 12
   },
   itemNumber: {
     fontSize: 12,

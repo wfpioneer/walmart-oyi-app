@@ -2,7 +2,7 @@ import React, {
   RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, BackHandler, Modal, Platform, SafeAreaView, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, Modal, Platform, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import _ from 'lodash';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -31,6 +31,7 @@ import {
   resetLocations, setFloorLocations, setItemLocDetails, setReserveLocations
 } from '../../state/actions/Location';
 import { showInfoModal } from '../../state/actions/Modal';
+import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 
 const ReviewItemDetails = () => {
@@ -50,11 +51,13 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     if (navigation.isFocused()) {
-      scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
-      dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-      trackEvent('item_details_api_call', { barcode: scannedEvent.value });
-      dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
-      dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
+      validateSession(navigation).then(() => {
+        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
+        dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+        trackEvent('item_details_api_call', { barcode: scannedEvent.value });
+        dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+        dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
+      }).catch(() => {});
     }
   }, [scannedEvent]);
 
@@ -97,16 +100,18 @@ const ReviewItemDetails = () => {
     if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
       const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
         if (navigation.isFocused()) {
-          trackEvent('item_details_scan', { value: scan.value, type: scan.type });
-          if (scan.value === itemDetails.upcNbr
-            || scan.value === itemDetails.itemNbr.toString()) {
-            trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
-            dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
-          } else {
-            trackEvent('item_details_scan_no_match', { itemDetails: JSON.stringify(result.data), scanned: scan.value });
-            dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
-          }
-          dispatch(setManualScan(false));
+          validateSession(navigation).then(() => {
+            trackEvent('item_details_scan', { value: scan.value, type: scan.type });
+            if (scan.value === itemDetails.upcNbr
+              || scan.value === itemDetails.itemNbr.toString()) {
+              trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
+              dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
+            } else {
+              trackEvent('item_details_scan_no_match', { itemDetails: JSON.stringify(result.data), scanned: scan.value });
+              dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+            }
+            dispatch(setManualScan(false));
+          }).catch(() => {});
         }
       });
       return () => {
@@ -116,7 +121,9 @@ const ReviewItemDetails = () => {
     }
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
-        dispatch(setScannedEvent(scan));
+        validateSession(navigation).then(() => {
+          dispatch(setScannedEvent(scan));
+        }).catch(() => {});
       }
     });
     return () => {
@@ -224,20 +231,26 @@ const ReviewItemDetails = () => {
   }
 
   const handleUpdateQty = () => {
-    trackEvent('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
-    setOhQtyModalVisible(true);
+    validateSession(navigation).then(() => {
+      trackEvent('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
+      setOhQtyModalVisible(true);
+    }).catch(() => {});
   };
 
   const handleLocationAction = () => {
-    trackEvent('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
-    navigation.navigate('LocationDetails');
+    validateSession(navigation).then(() => {
+      trackEvent('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
+      navigation.navigate('LocationDetails');
+    }).catch(() => {});
   };
 
   const handleAddToPicklist = () => {
-    trackEvent('item_details_add_to_picklist_click', { itemDetails: JSON.stringify(itemDetails) });
-    dispatch(addToPicklist({
-      itemNumber: itemDetails.itemNbr
-    }));
+    validateSession(navigation).then(() => {
+      trackEvent('item_details_add_to_picklist_click', { itemDetails: JSON.stringify(itemDetails) });
+      dispatch(addToPicklist({
+        itemNumber: itemDetails.itemNbr
+      }));
+    }).catch(() => {});
   };
 
   const toggleSalesGraphView = () => {
@@ -387,11 +400,14 @@ const ReviewItemDetails = () => {
         <TouchableOpacity
           style={styles.scanForNoActionButton}
           onPress={() => {
-            trackEvent('item_details_scan_for_no_action_button_click', { itemDetails: JSON.stringify(itemDetails) });
-            return dispatch(setManualScan(!isManualScanEnabled));
+            validateSession(navigation).then(() => {
+              trackEvent('item_details_scan_for_no_action_button_click', {itemDetails: JSON.stringify(itemDetails)});
+              return dispatch(setManualScan(!isManualScanEnabled));
+            }).catch(() => {
+            });
           }}
         >
-          <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+          <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE}/>
           <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
         </TouchableOpacity>
       );
@@ -399,7 +415,7 @@ const ReviewItemDetails = () => {
 
     return (
       <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
-        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE}/>
         <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
       </TouchableOpacity>
     );

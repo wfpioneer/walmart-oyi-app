@@ -1,4 +1,6 @@
-interface Environment {
+import { store } from '../../App';
+
+export interface Environment {
   orchestrationURL: string;
   itemDetailsURL: string;
   locationURL: string;
@@ -12,30 +14,31 @@ export interface Environments {
   prod: Environment;
 }
 
-const environments: Environments = {
-  dev: {
-    orchestrationURL: 'https://intl-oyi-orchestration-api.dev.walmart.com',
-    itemDetailsURL: 'https://intl-oyi-item-details-api.dev.walmart.com',
-    locationURL: 'https://intl-oyi-location-api.dev.walmart.com',
-    printingURL: 'https://intl-oyi-printing-api.dev.walmart.com',
-    worklistURL: 'https://intl-oyi-worklist-api.dev.walmart.com'
-  },
-  stage: {
-    orchestrationURL: 'https://intl-oyi-orchestration-api.stg.walmart.com',
-    itemDetailsURL: 'https://intl-oyi-item-details-api.stg.walmart.com',
-    locationURL: 'https://intl-oyi-location-api.stg.walmart.com',
-    printingURL: 'https://intl-oyi-printing-api.stg.walmart.com',
-    worklistURL: 'https://intl-oyi-worklist-api.stg.walmart.com'
-  },
-  prod: {
-    orchestrationURL: 'https://intl-oyi-orchestration-api.prod.walmart.com',
-    itemDetailsURL: 'https://intl-oyi-item-details-api.prod.walmart.com',
-    locationURL: 'https://intl-oyi-location-api.prod.walmart.com',
-    printingURL: 'https://intl-oyi-printing-api.prod.walmart.com',
-    worklistURL: 'https://intl-oyi-worklist-api.prod.walmart.com'
-  }
+export const getEnvironment = (): Environment => {
+  const countryCode = store.getState().User.countryCode.toLowerCase();
+
+  const environments: Environments = {
+    dev: {
+      orchestrationURL: 'https://intl-oyi-orchestration-api.dev.walmart.com',
+      itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.dev.walmart.com`,
+      locationURL: `https://intl-oyi-location-api.${countryCode}.dev.walmart.com`,
+      printingURL: `https://intl-oyi-printing-api.${countryCode}.dev.walmart.com`,
+      worklistURL: `https://intl-oyi-worklist-api.${countryCode}.dev.walmart.com`
+    },
+    stage: {
+      orchestrationURL: 'https://intl-oyi-orchestration-api.stg.walmart.com',
+      itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.stg.walmart.com`,
+      locationURL: `https://intl-oyi-location-api.${countryCode}.stg.walmart.com`,
+      printingURL: `https://intl-oyi-printing-api.${countryCode}.stg.walmart.com`,
+      worklistURL: `https://intl-oyi-worklist-api.${countryCode}.stg.walmart.com`
+    },
+    prod: {
+      orchestrationURL: 'https://intl-oyi-orchestration-api.prod.walmart.com',
+      itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.prod.walmart.com`,
+      locationURL: `https://intl-oyi-location-api.${countryCode}.prod.walmart.com`,
+      printingURL: `https://intl-oyi-printing-api.${countryCode}.prod.walmart.com`,
+      worklistURL: `https://intl-oyi-worklist-api.${countryCode}.prod.walmart.com`
+    }
+  };
+  return __DEV__ ? environments.stage : environments.prod;
 };
-
-const getEnvironment = (): Environment => (__DEV__ ? environments.stage : environments.prod);
-
-export default getEnvironment();

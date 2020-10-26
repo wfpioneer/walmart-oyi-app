@@ -1,0 +1,129 @@
+inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-v1.1.1
+envs:
+  global:
+    variables:
+      #Template required vars for CI/CD
+      # true / false
+      AIRWATCH_ACTIVATE: false
+      # Cert / Prod
+      AIRWATCH_ENV: Prod
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+      # true / false
+      DEPLOY_TO_AIRWATCH: false
+      # email list where the notification will be sent
+      EMAIL_NOTIFICATION: IntlSamsOYI@wal-mart.com
+
+      CONCORD_API_KEY: ENC[OxuAmTCISPiG5JlhDEp5JDQr/CQY2ry7dsbKqBpA2JI=]
+      # comma separated file that contains the sites information
+      SITES_FILE: sites.txt
+      # whether we should use the old version of BUILD_SUPPORT or not. Defaults to false.
+      USE_OLD_BUILD_SUPPORT: false
+
+      #Slack related vars
+      # Optional - Slack channel for notifications
+      SLACK_CHANNEL: 'intl_sams_oyi_ops_alerts'
+
+      #Android build vars
+      # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
+      ANDROID_BUILD_PROFILE: ':app:assembleRelease'
+      # Optional - if your app needs a special command to be built (debug version). Defaults to assembleDebug.
+      ANDROID_BUILD_PR_PROFILE: ':app:assembleDebug'
+      # Optional - if your app needs arguments to be built. It's empty by default.
+      GRADLE_ARG: ''
+
+      #ServiceNow variables
+      # whether you want the template to create a ServiceNow CHG or not. Defaults to true
+      SN_CREATE_AUTO_CHANGE: false
+      # The ServiceNow requested_by_group field. No default.
+      SN_REQUESTED_BY_GROUP: "IntlSamsTech"
+      # The ServiceNow requested_by_group field. Defaults to Change Managers - US
+      SN_CHG_MANAGER_GROUP: "Change Managers - US Sam's"
+      # risk level to apply in ServiceNow, from 1 (highest) to 5 (none). Defaults to 5
+      SN_RISK: '4'
+      # impact level to apply in ServiceNow, from 1 (highest) to 4 (none). Defaults to 4
+      SN_IMPACT: '4'
+      # Link to test plan documentation
+      SN_TEST_PLAN: "Activate OYI International in Airwatch"
+      # Optional description of the SN change
+      SN_DESCRIPTION: "Deploy OYI to Sam's Pilot Club for UAT"
+
+      #Defaultable vars
+      # Optional - target Organization Group (OG) in AirWatch where the app will reside. Defaults to InternalStore.
+#      DEFAULT_BUSINESS_TYPE: '<BUSINESS_TYPE>'
+      # Optional - if no countries are found in SITES_FILE, this will be used instead (single value). Defaults to "US"
+      DEFAULT_COUNTRY_CODE: "CN"
+      # Optional - version number to use instead of latest found in Proximity.
+#      DEFAULT_CURRENT_VERSION: ''
+      # Optional - cocoapods version to use. Defaults to 1.8.4
+      COCOAPODS_VERSION: '1.8.4'
+
+      #Versioning vars
+      # major / minor / patch / noBump > defaults to patch
+      VERSION_TYPE: 'noBump'
+
+      #Proximity related vars
+      RELEASES_REPO: 'pangaea_releases'
+      # Optional - Promity repo for snapshots & PRs, default is pangaea_snapshots
+      SNAPSHOTS_REPO: 'pangaea_snapshots'
+      # Define what type of repo you want to use (releases/snapshots)
+      PROXIMITY_REPO: 'snapshots'
+      # artifact group id
+      NEXUS_GROUP_ID: 'IntlSamsTech'
+
+      #BetaCrash vars
+      #      betaCrashDetails:
+      #        LOOPER_API_TOKEN: <PROVIDE_A_VALID_API_OKEN>
+      #        APP_TITLE: "<NAME_OF_YOUR_APP>"
+      #        BETACRASH_APP_ID: "<ID_OF_YOUR_APP>"
+
+      projects:
+        - rootDir: './'
+          type: reactnative
+
+#  aos-variables:
+#    variables:
+#      APK_NAME: 'OYI'
+#      ENV_TYPE: "prod"
+
+  aos-tc-variables:
+    variables:
+      APK_NAME: 'OYI-TC'
+      ENV_TYPE: "prodint"
+
+#  ios-variables:
+#    variables:
+#      IPA_NAME: "ReactNativeSkeleton"
+#      ENV_TYPE: "prod/prodint/cert/certint/stage/stageint"
+#      PROFILE: "<MOBILEPROVISION_PROFILE>"
+#      PLIST: "<ENTITLEMENTS.FILE_PATH>"
+#      EXPORT_OPTIONS: "EXPORT_OPTIONS.PLIST_FILE_PATH"
+#      INFO_PLIST: "<PROD_INFO.PLIST_FILE_PATH>"
+#      BUNDLE_ID: "${NEXUS_GROUP_ID}"
+#      # Output archive type. Use 'enterprise' for AirWatch. Use 'app-store' for App Store.
+#      ARCHIVE_TYPE: enterprise
+#      # xcode project location, just update the name and leave the rest as it is
+#      XC_PROJECT: "${WORKSPACE}/${iosDir}/<XC_PROJECT_NAME>.xcodeproj"
+#      # Name of your xcode scheme, required for the IPA build & export
+#      XC_SCHEME: <XC_SCHEME>
+#      # optional: config required to perform an xcode export action. Default is "Release"
+#      XCODE_CONFIG: 'Release'
+
+tools:
+  jdk: 8
+  android:
+    - tools
+    - platform-tools
+    - platforms;android-28
+    - build-tools;28.0.3
+    - extras;android;m2repository
+    - ndk;21.3.6528147
+  gradle: 6.3
+  maven: 3.5.4
+  nodejs: 12.16.0
+  npm: 6.13.4
+  sonarscanner: 3.0.3.778
+
+flows:
+  npm-install-and-coverage:
+    - npm ci

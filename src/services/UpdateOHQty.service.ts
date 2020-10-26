@@ -1,12 +1,12 @@
 import Request from './Request';
-import URLS from '../utils/environment';
+import { Environment, getEnvironment } from '../utils/environment';
 
 export default class UpdateOHQtyService {
-  public static updateOHQty(payload: {headers: object; itemNumber: number; data: {onHandQty: number;};}) {
+  public static updateOHQty(payload: {headers: object; itemNumber: number; data: {onHandQty: number}}) {
+    const urls: Environment = getEnvironment();
     return Request.enqueue({
-      url: `${URLS.orchestrationURL}/item/${payload.itemNumber}/onhands`,
+      url: `${urls.orchestrationURL}/item/${payload.itemNumber}/onhands`,
       method: 'put',
-      timeout: 10000,
       headers: payload.headers,
       data: payload.data
     });

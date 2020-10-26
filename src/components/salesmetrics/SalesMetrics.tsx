@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import moment from 'moment';
 import { BarChart, Grid, XAxis } from 'react-native-svg-charts';
 import { Text as SvgText } from 'react-native-svg';
-import * as scale from 'd3-scale';
+import { scaleBand } from 'd3-scale';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import Button from '../buttons/Button';
@@ -52,7 +52,7 @@ const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod:
           x={x(index) + (bandwidth / 2)}
           y={entry.value < CUT_OFF ? y(entry.value) - 10 : y(entry.value) + 15}
           fontSize={10}
-          fill={entry.value > CUT_OFF ? 'white' : 'black'}
+          fill={entry.value >= CUT_OFF ? 'white' : 'black'}
           alignmentBaseline="middle"
           textAnchor="middle"
         >
@@ -76,7 +76,7 @@ const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod:
         data={chartData}
         yAccessor={({ item }) => item.value}
         svg={{ fill: COLOR.GREEN }}
-        contentInset={{ top: 10, bottom: 10 }}
+        contentInset={{ top: 20, bottom: 10 }}
         gridMin={0}
       >
         <Grid />
@@ -86,7 +86,7 @@ const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod:
       <XAxis
         style={{ marginTop: 10 }}
         data={chartData}
-        scale={scale.scaleBand}
+        scale={scaleBand}
         formatLabel={(value, index) => formatChartLabel(chartData[index].label)}
         svg={{ fontSize: 10, fill: 'black' }}
       />

@@ -16,6 +16,7 @@ import { strings } from '../../locales';
 import { getWorklistSummary } from '../../state/actions/saga';
 import COLOR from '../../themes/Color';
 import { updateFilterExceptions } from '../../state/actions/Worklist';
+import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 
 const mapStateToProps = (state: any) => ({
@@ -66,10 +67,12 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (props.navigation.isFocused()) {
-        trackEvent('home_barcode_scanned', { barcode: scan.value, type: scan.type });
-        props.setScannedEvent(scan);
-        props.setManualScan(false);
-        props.navigation.navigate('ReviewItemDetails');
+        validateSession(props.navigation).then(() => {
+          trackEvent('home_barcode_scanned', { barcode: scan.value, type: scan.type });
+          props.setScannedEvent(scan);
+          props.setManualScan(false);
+          props.navigation.navigate('ReviewItemDetails');
+        }).catch(() => {});
       }
     });
   }
@@ -174,7 +177,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         const onWorklistCardPress = () => {
           trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
           this.props.updateFilterExceptions([worklist.worklistType]);
-          this.props.navigation.navigate(strings('WORKLIST.WORKLIST'));
+          validateSession(this.props.navigation).then(() => {
+            this.props.navigation.navigate(strings('WORKLIST.WORKLIST'));
+          }).catch(() => {});
         };
 
         return (
