@@ -5,7 +5,6 @@ export default {
     itemNbr: 1234567890,
     upcNbr: '000055559999',
     status: 'Active',
-    categoryNbr: 93,
     category: '93 - Meat PI',
     price: 2000.94,
     exceptionType: 'nsfl',
