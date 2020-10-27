@@ -29,6 +29,7 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
 * Clone the repo
 * Go to https://collaboration.wal-mart.com/display/ISCM/Sensitive+Files and copy/paste the file into `config/KEYS.json`
 * Run `npm install`
+* Run `npm start`
 * Open up Android Studio
 * Hit play
 
