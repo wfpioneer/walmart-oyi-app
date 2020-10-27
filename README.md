@@ -1,49 +1,68 @@
-# react-native-skeleton
-This is a barebones app that contains everything you need to jumpstart development on your own app.
+# OYI-Android
+This is the Android version of OYI, currently only designed to be deployed on internal TC devices.
+
+### Currently Supported Devices
+- TC70
+- TC70X
+
+#### Future Supported Devices
+- TC72
+- BYOD devices
 
 ### What this does
-You can login and go to a home screen. That's pretty much it.
+OYI makes it possible to efficiently manage inventory by bringing sales floor worklists and weekly audits into one app. OYI helps club associates in Mexico and China focus their daily activity by using data to quickly identify potential missed sales opportunities and correct them on the sales floor. The audits feature allows clubs to maintain inventory accuracy and spot causes of shrink early.
 
-Really, the point of this app is to provide you the infrastructure and eliminate the setup that you normally have to go through
-to set up many React Native apps.
+Previously, the information club associates needed to manage their inventory came through data in a separate reporting system. There was no tool that took common exceptions from inventory data to the handheld devices associates use during their normal work on the floor. Without a tool to help manage this, clubs lose revenue because there are often delays between identification of issues and taking the necessary steps to correct these issues before they negatively affect sales.
 
-The quantity change components in the OH modal and the print price sign screen need to be generalized and reused.
+OYI uses exceptions, such as no sales and missing location, to generate worklists for sales floor associates. OYI can filter these worklists by location, category, or exception type. The initial version of OYI has replaced one feature of CIM - Sales Floor Tool. In the coming months, the other features of CIM are being built into OYI in the US. This will lead to OYI becoming a suite of inventory apps for associates to use when managing inventory. The backend of OYI uses data coming from the SMART database. After the OYI Pilot, a new initiative will be migrating the data from SMART to the cloud.
 
-### What this contains
-* `react-navigation` version 5
-* `react-native-localize` for your localization pleasure
-* `redux` for your state management
-* `react-native-wmsso` to handle Walmart associate logins
-* `react-native-wm-barcode` to handle barcode scanning on devices [(docs)](https://gecgithub01.walmart.com/Store-Mobility-Services/wm-barcode-scanner/tree/master/react)
+Some of the strategic benefits of OYI are:
+
+- Reduce lost sales - Find and fix inventory issues before they affect your club.
+- Easily manage your inventory - Quickly find your daily list.
+- Be more effective - Take actions without the need for switching apps.
+- See your progress - Use the dashboard to check how you are doing.
+
+For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Your+Inventory
 
 ### To run the app
 * Clone the repo
+* Go to https://collaboration.wal-mart.com/display/ISCM/Sensitive+Files and copy/paste the file into `config/KEYS.json`
 * Run `npm install`
-* For iOS run `cd ios && pod install`
-* Run `npx react-native link` (Needed??)
-* Open up Android Studio/Xcode
+* Open up Android Studio
 * Hit play
 
 ### How the app is structured
 * components
-  * Button, textinput, title (all "stolen" from US apps)
+  * Elements such as the item worklist card, worklist summary cards, and other components used by multiple screens
 * locales
   * Holds your localized strings
+  * Supports en, es, and zh locales
 * mockData
   * Holds mock data
 * models
   * Holds your typescript models
 * navigators
   * Holds your stack and tab navigators to link your screens together
+    * `MainNavigator` is the top level navigator that links to the Login screen as its initial screen
+    * `Tabs` holds the home (Worklist Summary) screen and the Worklist in 2 tabs
+    * `ReviewItemDetails` and `PrintPriceSign` are screens that are not supposed to have tabs showing on them 
 * screens
-  * Holds your UI and connects your screens to redux
+  * Most of the screen names should be self-explanatory
+    * `Home` is the Worklist Summary screen
+    * `Worklist` is divided into 2 sub-tabs which is contained in `TodoWorklist` and `CompletedWorklist` in this sub-directory
+* Services
+  * Holds the `axios`-based Request library to make API calls and has 1 service file per API call
 * state
-  * All the redux actions/reducers
+  * All the redux actions/reducers/sagas
+    * Note: For API calls, all API actions are contained within the `actions/asyncAPI.ts` file, but those actions get dispatched as a result of the async saga being initially dispatched from `actions/saga.ts`
+    * The saga execution (and subsequent API actions) are dispatched from their respective sagas contained in `sagas/index.ts`
+    * See "How to set up an API call" below for further explanation
 * themes
   * Contains color values
 
 ### How to emulate a barcode scan
-1. In your debugger console: `window.mockScan('value', 'type')`
+- In your debugger console: `window.mockScan('value', 'type')`
 
 ### How to use the Manual Scan component
 * Add a button to the screen's header in the navigator
