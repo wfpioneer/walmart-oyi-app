@@ -1,3 +1,4 @@
+import Config from 'react-native-config';
 import { store } from '../../App';
 
 export interface Environment {
@@ -40,5 +41,15 @@ export const getEnvironment = (): Environment => {
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.prod.walmart.com`
     }
   };
-  return __DEV__ ? environments.stage : environments.prod;
+
+  switch (Config.ENVIRONMENT) {
+    case 'dev':
+      return environments.dev;
+    case 'stage':
+      return environments.stage;
+    case 'prod':
+      return environments.prod;
+    default:
+      return environments.stage;
+  }
 };

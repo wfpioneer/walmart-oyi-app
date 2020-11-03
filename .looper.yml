@@ -123,3 +123,5 @@ flows:
     - npm ci
     - (name Remove dev appcenter config) rm android/app/src/main/assets/appcenter-config.json
     - (name Install prod appcenter config) cp android/app/src/main/assets/appcenter-config-prod.json ./android/app/src/main/assets/appcenter-config.json
+    - (name remove dev .env file) rm .env
+    - (name copy .env.prod to .env) cp .env.prod .env
