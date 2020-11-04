@@ -34,6 +34,8 @@ import { showInfoModal } from '../../state/actions/Modal';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 
+const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
+
 const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
@@ -102,14 +104,8 @@ const ReviewItemDetails = () => {
         if (navigation.isFocused()) {
           validateSession(navigation).then(() => {
             trackEvent('item_details_scan', { value: scan.value, type: scan.type });
-            if (scan.value === itemDetails.upcNbr
-              || scan.value === itemDetails.itemNbr.toString()) {
-              trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
-              dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
-            } else {
-              trackEvent('item_details_scan_no_match', { itemDetails: JSON.stringify(result.data), scanned: scan.value });
-              dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
-            }
+            trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
+            dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
             dispatch(setManualScan(false));
           }).catch(() => {});
         }
@@ -135,18 +131,28 @@ const ReviewItemDetails = () => {
   useEffect(() => {
     // on api success
     if (completeApiInProgress && completeApi.isWaiting === false && completeApi.result) {
-      trackEvent('item_details_action_completed_api_success', { itemDetails: JSON.stringify(itemDetails) });
-      setCompleteApiInProgress(false);
-      dispatch(setActionCompleted());
-      navigation.goBack();
+      if (_.get(completeApi.result, 'status') === 204) {
+        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails) });
+        dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+      } else {
+        trackEvent('item_details_action_completed_api_success', { itemDetails: JSON.stringify(itemDetails) });
+        setCompleteApiInProgress(false);
+        dispatch(setActionCompleted());
+        navigation.goBack();
+      }
       return undefined;
     }
 
     // on api failure
     if (completeApiInProgress && completeApi.isWaiting === false && completeApi.error) {
-      trackEvent('item_details_action_completed_api_failure', { itemDetails: JSON.stringify(itemDetails) });
+      if (completeApi.error === COMPLETE_API_409_ERROR) {
+        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails) });
+        dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+      } else {
+        trackEvent('item_details_action_completed_api_failure', { itemDetails: JSON.stringify(itemDetails) });
+        dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
+      }
       setCompleteApiInProgress(false);
-      dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       return undefined;
     }
 
