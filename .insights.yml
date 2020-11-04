@@ -1,0 +1,8 @@
+---
+team:
+- id: "3414"
+product:
+- {}
+cloud:
+- autoRestart: false
+ignoreNotify: false
