@@ -88,7 +88,7 @@ envs:
 
   aos-tc-variables:
     variables:
-      APK_NAME: 'OYI-TC'
+      APK_NAME: 'OYI-International'
       ENV_TYPE: "prodint"
 
 #  ios-variables:

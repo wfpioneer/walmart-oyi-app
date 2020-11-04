@@ -1,6 +1,6 @@
 {
   "name": "OYI",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -29,6 +29,7 @@
     "react": "16.11.0",
     "react-native": "0.62.0",
     "react-native-action-sheet": "^2.2.0",
+    "react-native-config": "^1.4.0",
     "react-native-device-info": "^5.6.2",
     "react-native-fab": "^1.0.17",
     "react-native-gesture-handler": "^1.6.1",
