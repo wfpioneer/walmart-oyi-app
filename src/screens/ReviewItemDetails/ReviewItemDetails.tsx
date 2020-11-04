@@ -145,14 +145,10 @@ const ReviewItemDetails = () => {
 
     // on api failure
     if (completeApiInProgress && completeApi.isWaiting === false && completeApi.error) {
-      console.log(completeApi);
-      console.log(_.get(completeApi.result, 'status'));
       if (completeApi.error === COMPLETE_API_409_ERROR) {
-        console.log('1');
         trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails) });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        console.log('2');
         trackEvent('item_details_action_completed_api_failure', { itemDetails: JSON.stringify(itemDetails) });
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }

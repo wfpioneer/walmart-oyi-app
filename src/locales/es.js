@@ -24,6 +24,7 @@ export default {
     ALL: 'Todo',
     GET_STARTED: 'Empezar',
     ENTER_UPC_ITEM_NBR: 'Ingresa el UPC o Número de Artículo',
+    INPUT_LOC: 'Entrada de Etiqueta de Ubicación.',
     CHANGE: 'Cambiar',
     SEE_ALL: 'Ver todo',
     ADD: 'Agregar',
@@ -120,7 +121,18 @@ export default {
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
     FLOOR: 'Ubicación en Piso',
-    RESERVE: 'Ubicaciones en Bodega'
+    RESERVE: 'Ubicaciones en Bodega',
+    ADD_LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. \nPor favor inténtalo de nuevo.',
+    EDIT_LOCATION_API_ERROR: 'Hubo en un error editando la ubicación. \nPor favor inténtalo de nuevo.',
+    ADD_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
+    EDIT_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
+    MANUAL_ENTRY_BUTTON: 'Ingresa manualmente la ubicación.',
+    SELECTION_INSTRUCTION: '1. Elija un tipo de ubicación.',
+    SCAN_INSTRUCTION: '2. Escanea la etiqueta de Ubicación.',
+    DELETE_CONFIRMATION: 'Confirma la eliminación de \nla ubicación ',
+    DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
+    ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
+    EDIT_LOCATION: 'Editar Ubicación'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
