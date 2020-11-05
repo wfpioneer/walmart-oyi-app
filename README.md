@@ -27,11 +27,12 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
 
 ### To run the app
 * Clone the repo
-* Go to https://collaboration.wal-mart.com/display/ISCM/Sensitive+Files and copy/paste the file into `config/KEYS.json`
 * Run `npm install`
 * Run `npm start`
 * Open up Android Studio
 * Hit play
+  * Note that you must have an emulator set up with Walmart certificates.
+  * For more information go to https://collaboration.wal-mart.com/display/ISCM/Front-End+React+Native+Onboarding
 
 ### How the app is structured
 * components
