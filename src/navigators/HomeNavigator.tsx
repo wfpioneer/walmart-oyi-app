@@ -19,6 +19,8 @@ import { hideActivityModal, showActivityModal } from '../state/actions/Modal';
 import StyleGuide from '../screens/StyleGuide/StyleGuide';
 import { setManualScan } from '../state/actions/Global';
 import { trackEvent } from '../utils/AppCenterTool';
+import {openCamera} from "../utils/scannerUtils";
+import Config from 'react-native-config';
 
 interface HomeNavigatorComponentProps {
   logoutUser: Function;
@@ -125,6 +127,14 @@ const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: F
   </TouchableOpacity>
 );
 
+const renderCamButton = () => (
+  <TouchableOpacity onPress={() => { openCamera() }}>
+    <View style={styles.camButton}>
+      <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
+    </View>
+  </TouchableOpacity>
+);
+
 const renderHomeMenuButton = (props: HomeNavigatorComponentProps, navigation: any) => (
   <TouchableOpacity onPress={() => {
     trackEvent('menu_button_click');
@@ -161,6 +171,7 @@ const renderHomeHeader = (props: HomeNavigatorComponentProps, navigation: any) =
 
   return (
     <View style={styles.headerContainer}>
+      {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
       {renderHomeScanButton(isManualScanEnabled, props.setManualScan)}
       {renderHomeMenuButton(props, navigation)}
     </View>
