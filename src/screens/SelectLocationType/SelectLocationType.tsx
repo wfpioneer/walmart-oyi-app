@@ -67,9 +67,21 @@ const SelectLocationType = () => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       trackEvent('select_location_scan', { value: scan.value, type: scan.type });
       if (navigation.isFocused()) {
-        dispatch(setScannedEvent(scan));
+        const unProcessedScanValue: string = scan.value;
+        switch (scan.type) {
+          case 'manual':
+            dispatch(setScannedEvent(scan));
+            setLoc(scan.value);
+            break;
+          case 'LABEL-TYPE-UPCA':
+            const processedScanValue = parseInt(unProcessedScanValue.substring(1, unProcessedScanValue.length - 1)).toString();
+            dispatch(setScannedEvent({value: processedScanValue, type: scan.type}));
+            setLoc(processedScanValue);
+            break;
+          default:
+            break;
+        }
         dispatch(setManualScan(false));
-        setLoc(scan.value);
       }
     });
     return () => {
@@ -188,7 +200,7 @@ const SelectLocationType = () => {
 
   const validateLocation = () =>
     // TODO add better validation of location
-    !((loc.length > 3) && (type === LOCATION_TYPES.SALES_FLOOR || type === LOCATION_TYPES.POD || type === LOCATION_TYPES.END_CAP || type === LOCATION_TYPES.DISPLAY));
+    !((loc.length > 0) && (type === LOCATION_TYPES.SALES_FLOOR || type === LOCATION_TYPES.POD || type === LOCATION_TYPES.END_CAP || type === LOCATION_TYPES.DISPLAY));
   return (
     <>
       <View style={styles.mainContainer}>

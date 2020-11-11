@@ -63,8 +63,16 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
 * themes
   * Contains color values
 
-### How to emulate a barcode scan
+### How to emulate a barcode scan (value only)
 - In your debugger console: `window.mockScan('value', 'type')`
+
+### How to emulate a barcode scan using the camera on the emulator to scan real barcode
+  1. in AVD manager under tools of android studio make sure the back camera is set to 'VertualScene'(under advanced settings)
+  2. once application is running on emulator select extended controls from side menu
+  3. go to camera menu, you can load 2 images at a time load images with barcodes you wish to test (both upc and shelf label barcodes are UPC-A
+  4. in dev and stage environment there should be a camera icon in the header of any screen that allows scanning, cick on this icon to open camera
+  5. you camera will be looking at a vertual scene, using the option key(for mac) + Q,W,E,A,S,D navigate to the romm behind where you start in scene
+  6. move camera over ether barcode and it should scan the barcode
 
 ### How to use the Manual Scan component
 * Add a button to the screen's header in the navigator
