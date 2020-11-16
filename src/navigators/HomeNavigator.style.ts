@@ -17,6 +17,12 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  camButton: {
+    flex: 1,
+    width: 55,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   image: {
     width: 25,
     height: 25,

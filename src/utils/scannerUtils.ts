@@ -52,8 +52,14 @@ export const manualScan = (val: string) => {
   mockScanWrapper(val, 'manual');
 };
 
+export const openCamera = () => {
+  WMBarcodeScanner.startScan(10).then(() => {
+    console.log('camera scanner started');
+  })
+};
+
 export const mockScanWrapper = (val: string, type: string) => {
-  WMBarcodeScanner.mockScan(val, type);
+  WMBarcodeScanner.mockScan({barcode: val, type: type});
 };
 
 if (__DEV__) {

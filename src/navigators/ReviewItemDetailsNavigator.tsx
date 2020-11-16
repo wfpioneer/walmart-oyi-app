@@ -14,6 +14,8 @@ import styles from './ReviewItemDetailsNavigator.style';
 import LocationDetails from '../screens/LocationDetails/LocationDetails';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { showInfoModal } from '../state/actions/Modal';
+import {openCamera} from "../utils/scannerUtils";
+import Config from 'react-native-config';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +29,14 @@ const ReviewItemDetailsNavigator = () => {
     <TouchableOpacity onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
       <View style={styles.leftButton}>
         <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+      </View>
+    </TouchableOpacity>
+  );
+
+  const renderCamButton = () => (
+    <TouchableOpacity onPress={() => { openCamera() }}>
+      <View style={styles.camButton}>
+        <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
       </View>
     </TouchableOpacity>
   );
@@ -84,6 +94,7 @@ const ReviewItemDetailsNavigator = () => {
           ),
           headerRight: () => (
             <View style={styles.headerContainer}>
+              {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
               {renderScanButton()}
               {renderPrintQueueButton()}
             </View>
@@ -107,7 +118,12 @@ const ReviewItemDetailsNavigator = () => {
           headerTitle: strings('LOCATION.EDIT_LOCATION'),
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
-          headerBackTitleVisible: false
+          headerBackTitleVisible: false,
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
+            </View>
+          )
         }}
       />
       <Stack.Screen
@@ -117,7 +133,12 @@ const ReviewItemDetailsNavigator = () => {
           headerTitle: strings('LOCATION.ADD_NEW_LOCATION'),
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
-          headerBackTitleVisible: false
+          headerBackTitleVisible: false,
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
+            </View>
+          )
         }}
       />
     </Stack.Navigator>
