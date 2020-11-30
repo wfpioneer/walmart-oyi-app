@@ -50,7 +50,7 @@ const ReviewItemDetails = () => {
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
   const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
-  const [refresh, setRefresh] = useState(false)
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
   useEffect(() => {
     if (navigation.isFocused()) {
