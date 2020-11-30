@@ -2,7 +2,7 @@ import React, {
   RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, BackHandler, Modal, Platform, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, Modal, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import _ from 'lodash';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -50,11 +50,12 @@ const ReviewItemDetails = () => {
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
   const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
     if (navigation.isFocused()) {
       validateSession(navigation).then(() => {
-        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
+        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
         dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
         trackEvent('item_details_api_call', { barcode: scannedEvent.value });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
@@ -265,6 +266,18 @@ const ReviewItemDetails = () => {
     setIsSalesMetricsGraphView(prevState => !prevState);
   };
 
+  const handleRefresh = () => {
+    validateSession(navigation).then(() => {
+      setRefresh(true);
+      trackEvent('refresh_item_details', { itemNumber: itemDetails.itemNbr});
+      dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+      trackEvent('item_details_api_call', { itemNumber: itemDetails.itemNbr });
+      dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }))
+    }).catch(() => {}).then(() => {
+      setRefresh(false);
+    });
+  }
+
   const renderOHQtyComponent = () => {
     if (pendingOnHandsQty === -999) {
       return (
@@ -441,7 +454,8 @@ const ReviewItemDetails = () => {
           exceptionType={itemDetails.exceptionType}
         />
       </Modal>
-      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container}>
+      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container} 
+        refreshControl={<RefreshControl refreshing={refresh} onRefresh={handleRefresh} />}>
         {isWaiting && (
         <ActivityIndicator
           animating={isWaiting}
@@ -479,7 +493,7 @@ const ReviewItemDetails = () => {
                   color={COLOR.GREY_700}
                   style={{ marginLeft: -4 }}
                 />
-)}
+              )}
               title={strings('ITEM.REPLENISHMENT')}
             >
               <View style={{
