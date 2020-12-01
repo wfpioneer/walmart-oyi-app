@@ -268,13 +268,13 @@ const ReviewItemDetails = () => {
 
   const handleRefresh = () => {
     validateSession(navigation).then(() => {
-      setRefresh(true);
+      setIsRefreshing(true);
       trackEvent('refresh_item_details', { itemNumber: itemDetails.itemNbr});
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
       trackEvent('item_details_api_call', { itemNumber: itemDetails.itemNbr });
       dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }))
     }).catch(() => {}).then(() => {
-      setRefresh(false);
+      setIsRefreshing(false);
     });
   }
 
@@ -455,7 +455,7 @@ const ReviewItemDetails = () => {
         />
       </Modal>
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container} 
-        refreshControl={<RefreshControl refreshing={refresh} onRefresh={handleRefresh} />}>
+        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}>
         {isWaiting && (
         <ActivityIndicator
           animating={isWaiting}
