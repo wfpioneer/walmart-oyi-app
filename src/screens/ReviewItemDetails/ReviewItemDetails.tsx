@@ -60,7 +60,7 @@ const ReviewItemDetails = () => {
         trackEvent('item_details_api_call', { barcode: scannedEvent.value });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
         dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
-      }).catch(() => {});
+      }).catch(() => {trackEvent('session_timeout', { user: userId })});
     }
   }, [scannedEvent]);
 
@@ -108,7 +108,7 @@ const ReviewItemDetails = () => {
             trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
             dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
             dispatch(setManualScan(false));
-          }).catch(() => {});
+          }).catch(() => {trackEvent('session_timeout', { user: userId })});
         }
       });
       return () => {
@@ -120,7 +120,7 @@ const ReviewItemDetails = () => {
       if (navigation.isFocused()) {
         validateSession(navigation).then(() => {
           dispatch(setScannedEvent(scan));
-        }).catch(() => {});
+        }).catch(() => {trackEvent('session_timeout', { user: userId })});
       }
     });
     return () => {
@@ -241,14 +241,14 @@ const ReviewItemDetails = () => {
     validateSession(navigation).then(() => {
       trackEvent('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
       setOhQtyModalVisible(true);
-    }).catch(() => {});
+    }).catch(() => {trackEvent('session_timeout', { user: userId })});
   };
 
   const handleLocationAction = () => {
     validateSession(navigation).then(() => {
       trackEvent('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
       navigation.navigate('LocationDetails');
-    }).catch(() => {});
+    }).catch(() => {trackEvent('session_timeout', { user: userId })});
   };
 
   const handleAddToPicklist = () => {
@@ -257,7 +257,7 @@ const ReviewItemDetails = () => {
       dispatch(addToPicklist({
         itemNumber: itemDetails.itemNbr
       }));
-    }).catch(() => {});
+    }).catch(() => {trackEvent('session_timeout', { user: userId })});
   };
 
   const toggleSalesGraphView = () => {
@@ -273,7 +273,7 @@ const ReviewItemDetails = () => {
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
       trackEvent('item_details_api_call', { itemNumber: itemDetails.itemNbr });
       dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }))
-    }).catch(() => {}).then(() => {
+    }).catch(() => {trackEvent('session_timeout', { user: userId })}).then(() => {
       setIsRefreshing(false);
     });
   }
@@ -422,7 +422,7 @@ const ReviewItemDetails = () => {
             validateSession(navigation).then(() => {
               trackEvent('item_details_scan_for_no_action_button_click', {itemDetails: JSON.stringify(itemDetails)});
               return dispatch(setManualScan(!isManualScanEnabled));
-            }).catch(() => {
+            }).catch(() => {trackEvent('session_timeout', { user: userId })
             });
           }}
         >
