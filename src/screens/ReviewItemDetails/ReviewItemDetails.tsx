@@ -55,7 +55,7 @@ const ReviewItemDetails = () => {
   useEffect(() => {
     if (navigation.isFocused()) {
       validateSession(navigation).then(() => {
-        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
+        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
         dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
         trackEvent('item_details_api_call', { barcode: scannedEvent.value });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
