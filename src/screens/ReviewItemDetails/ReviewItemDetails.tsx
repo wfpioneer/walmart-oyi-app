@@ -157,9 +157,6 @@ const ReviewItemDetails = () => {
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
       setCompleteApiInProgress(false);
-      if (isRefreshing) {
-        setIsRefreshing(false);
-      }
       return undefined;
     }
 
