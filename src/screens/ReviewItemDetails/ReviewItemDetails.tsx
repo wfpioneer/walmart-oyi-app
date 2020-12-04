@@ -76,6 +76,9 @@ const ReviewItemDetails = () => {
     if (_.get(result, 'status') === 200) {
       trackEvent('item_details_api_success', { barcode: scannedEvent.value });
     }
+    if (isRefreshing) {
+      setIsRefreshing(false);
+    }
   }, [error, result]);
 
   const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
@@ -140,9 +143,6 @@ const ReviewItemDetails = () => {
         setCompleteApiInProgress(false);
         dispatch(setActionCompleted());
         navigation.goBack();
-      }
-      if (isRefreshing) {
-        setIsRefreshing(false);
       }
       return undefined;
     }
