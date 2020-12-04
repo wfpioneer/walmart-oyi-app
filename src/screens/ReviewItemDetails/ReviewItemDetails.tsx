@@ -141,6 +141,9 @@ const ReviewItemDetails = () => {
         dispatch(setActionCompleted());
         navigation.goBack();
       }
+      if (isRefreshing) {
+        setIsRefreshing(false);
+      }
       return undefined;
     }
 
@@ -154,6 +157,9 @@ const ReviewItemDetails = () => {
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
       setCompleteApiInProgress(false);
+      if (isRefreshing) {
+        setIsRefreshing(false);
+      }
       return undefined;
     }
 
@@ -273,9 +279,7 @@ const ReviewItemDetails = () => {
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
       trackEvent('item_details_api_call', { itemNumber: itemDetails.itemNbr });
       dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }))
-    }).catch(() => {trackEvent('session_timeout', { user: userId })}).then(() => {
-      setIsRefreshing(false);
-    });
+    }).catch(() => {trackEvent('session_timeout', { user: userId })});
   }
 
   const renderOHQtyComponent = () => {
