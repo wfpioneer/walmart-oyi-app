@@ -2,7 +2,7 @@ import React, {
   RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, BackHandler, Modal, Platform, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, Modal, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import _ from 'lodash';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -50,6 +50,7 @@ const ReviewItemDetails = () => {
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
   const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
   useEffect(() => {
     if (navigation.isFocused()) {
@@ -59,7 +60,7 @@ const ReviewItemDetails = () => {
         trackEvent('item_details_api_call', { barcode: scannedEvent.value });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
         dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
-      }).catch(() => {});
+      }).catch(() => {trackEvent('session_timeout', { user: userId })});
     }
   }, [scannedEvent]);
 
@@ -74,6 +75,9 @@ const ReviewItemDetails = () => {
 
     if (_.get(result, 'status') === 200) {
       trackEvent('item_details_api_success', { barcode: scannedEvent.value });
+    }
+    if (isRefreshing) {
+      setIsRefreshing(false);
     }
   }, [error, result]);
 
@@ -107,7 +111,7 @@ const ReviewItemDetails = () => {
             trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
             dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
             dispatch(setManualScan(false));
-          }).catch(() => {});
+          }).catch(() => {trackEvent('session_timeout', { user: userId })});
         }
       });
       return () => {
@@ -119,7 +123,7 @@ const ReviewItemDetails = () => {
       if (navigation.isFocused()) {
         validateSession(navigation).then(() => {
           dispatch(setScannedEvent(scan));
-        }).catch(() => {});
+        }).catch(() => {trackEvent('session_timeout', { user: userId })});
       }
     });
     return () => {
@@ -240,14 +244,14 @@ const ReviewItemDetails = () => {
     validateSession(navigation).then(() => {
       trackEvent('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
       setOhQtyModalVisible(true);
-    }).catch(() => {});
+    }).catch(() => {trackEvent('session_timeout', { user: userId })});
   };
 
   const handleLocationAction = () => {
     validateSession(navigation).then(() => {
       trackEvent('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
       navigation.navigate('LocationDetails');
-    }).catch(() => {});
+    }).catch(() => {trackEvent('session_timeout', { user: userId })});
   };
 
   const handleAddToPicklist = () => {
@@ -256,7 +260,7 @@ const ReviewItemDetails = () => {
       dispatch(addToPicklist({
         itemNumber: itemDetails.itemNbr
       }));
-    }).catch(() => {});
+    }).catch(() => {trackEvent('session_timeout', { user: userId })});
   };
 
   const toggleSalesGraphView = () => {
@@ -264,6 +268,16 @@ const ReviewItemDetails = () => {
       { itemDetails: JSON.stringify(itemDetails), isGraphView: !isSalesMetricsGraphView });
     setIsSalesMetricsGraphView(prevState => !prevState);
   };
+
+  const handleRefresh = () => {
+    validateSession(navigation).then(() => {
+      setIsRefreshing(true);
+      trackEvent('refresh_item_details', { itemNumber: itemDetails.itemNbr});
+      dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+      trackEvent('item_details_api_call', { itemNumber: itemDetails.itemNbr });
+      dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }))
+    }).catch(() => {trackEvent('session_timeout', { user: userId })});
+  }
 
   const renderOHQtyComponent = () => {
     if (pendingOnHandsQty === -999) {
@@ -409,7 +423,7 @@ const ReviewItemDetails = () => {
             validateSession(navigation).then(() => {
               trackEvent('item_details_scan_for_no_action_button_click', {itemDetails: JSON.stringify(itemDetails)});
               return dispatch(setManualScan(!isManualScanEnabled));
-            }).catch(() => {
+            }).catch(() => {trackEvent('session_timeout', { user: userId })
             });
           }}
         >
@@ -441,7 +455,8 @@ const ReviewItemDetails = () => {
           exceptionType={itemDetails.exceptionType}
         />
       </Modal>
-      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container}>
+      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container} 
+        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}>
         {isWaiting && (
         <ActivityIndicator
           animating={isWaiting}
@@ -479,7 +494,7 @@ const ReviewItemDetails = () => {
                   color={COLOR.GREY_700}
                   style={{ marginLeft: -4 }}
                 />
-)}
+              )}
               title={strings('ITEM.REPLENISHMENT')}
             >
               <View style={{
