@@ -11,7 +11,7 @@ import EnterLocation from '../../components/enterlocation/EnterLocation';
 import Location from '../../models/Location';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { addLocation, editLocation } from '../../state/actions/saga';
-import { addLocationToExisting, editExistingLocation, isUpdating } from '../../state/actions/Location';
+import { addLocationToExisting, editExistingLocation, isUpdating, getLocationDetails } from '../../state/actions/Location';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter, manualScan } from '../../utils/scannerUtils';
@@ -90,6 +90,7 @@ const SelectLocationType = () => {
     };
   }, []);
 
+  // Add Location API
   useEffect(() => {
     // on api success
     if (apiInProgress && addAPI.isWaiting === false && addAPI.result) {
@@ -97,6 +98,7 @@ const SelectLocationType = () => {
       dispatch(addLocationToExisting(loc, parseInt(type, 10), 'floor'));
       if (!actionCompleted && itemLocDetails.exceptionType === 'NSFL') dispatch(setActionCompleted());
       setAPIInProgress(false);
+      dispatch(getLocationDetails(itemLocDetails.itemNbr));
       navigation.navigate('LocationDetails');
       dispatch(isUpdating(true));
       return undefined;
@@ -118,6 +120,7 @@ const SelectLocationType = () => {
     return undefined;
   }, [addAPI]);
 
+  // Edit Location API
   useEffect(() => {
     // on api success
     if (apiInProgress && editAPI.isWaiting === false && editAPI.result) {
