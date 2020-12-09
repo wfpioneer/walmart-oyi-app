@@ -38,7 +38,7 @@ const EnterLocation = (props: { setEnterLocation: Function; onSubmit: Function }
           type={Button.Type.PRIMARY}
           style={{ width: '100%' }}
           onPress={() => props.onSubmit(textInput.toUpperCase())}
-          disabled={textInput.length < 1}
+          disabled={textInput.length < 4}
         />
       </View>
     </View>

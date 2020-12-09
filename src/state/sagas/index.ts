@@ -13,7 +13,6 @@ import WorklistSummaryService from '../../services/WorklistSummary.service';
 import DeleteLocationService from '../../services/DeleteLocation.service';
 import NoActionService from '../../services/NoAction.service';
 import PrintService from '../../services/Print.service';
-import GetLocationDetailsService from '../../services/GetLocationDetails.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
@@ -26,8 +25,7 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
   makeAsyncSaga(saga.DELETE_LOCATION, actions.deleteLocation, DeleteLocationService.deleteLocation),
   makeAsyncSaga(saga.NO_ACTION, actions.noAction, NoActionService.noAction),
-  makeAsyncSaga(saga.PRINT_SIGN, actions.printSign, PrintService.print),
-  makeAsyncSaga(saga.GET_LOCATION_DETAILS, actions.getLocationDetails, GetLocationDetailsService.getLocation)
+  makeAsyncSaga(saga.PRINT_SIGN, actions.printSign, PrintService.print)
 ];
 
 export default function* rootSaga() {

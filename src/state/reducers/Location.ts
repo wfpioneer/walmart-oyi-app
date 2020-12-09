@@ -9,7 +9,6 @@ import {
   SET_RESERVE_LOCATIONS
 } from '../actions/Location';
 import LocationType from '../../models/Location';
-import { GET_LOCATION_DETAILS } from '../actions/saga';
 
 interface LocationState {
   floorLocations: Array<LocationType>;
@@ -168,12 +167,6 @@ export const Location = (state = initialState, action: any) => {
           exceptionType: null
         }
       };
-      case GET_LOCATION_DETAILS:
-        return {
-          ...state,
-          floorLocations: action.payload.floor,
-          reserveLocations: action.payload.reserve,
-        }
     default:
       return state;
   }

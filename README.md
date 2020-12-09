@@ -30,10 +30,8 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
 * Run `npm install`
 * Run `npm start`
 * Open up Android Studio
-  * Import `oyi-app/android/` as an existing project
 * Hit play
   * Note that you must have an emulator set up with Walmart certificates.
-  * As well as have the WMSSO apk installed on the emulator
   * For more information go to https://collaboration.wal-mart.com/display/ISCM/Front-End+React+Native+Onboarding
 
 ### How the app is structured

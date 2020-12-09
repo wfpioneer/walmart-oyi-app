@@ -8,7 +8,6 @@ export const EDIT_EXISTING_LOCATION = 'LOCATION/EDIT_EXISTING_LOCATION';
 export const IS_UPDATING = 'LOCATION/IS_UPDATING';
 export const DELETE_LOCATION_FROM_EXISTING = 'LOCATION/DELETE_LOCATION_FROM_EXISTING';
 export const RESET_LOCATIONS = 'LOCATION/RESET_LOCATIONS';
-export const GET_LOCATION_DETAILS = 'LOCATION/GET_LOCATION_DETAILS';
 
 export const setItemLocDetails = (itemNbr: number, upcNbr: string, exceptionType: string) => ({
   type: SET_ITEM_LOC_DETAILS,
@@ -63,11 +62,4 @@ export const isUpdating = (updating: boolean) => ({
 
 export const resetLocations = () => ({
   type: RESET_LOCATIONS
-});
-
-export const getLocationDetails = (itemNbr: number) =>({
-  type: GET_LOCATION_DETAILS,
-  payload: {
-    itemNbr
-  }
 });

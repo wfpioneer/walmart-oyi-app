@@ -14,8 +14,7 @@ export const asyncReducer = combineReducers({
   getWorklistSummary: makeAsyncReducer(asyncActions.GET_WORKLIST_SUMMARY),
   deleteLocation: makeAsyncReducer(asyncActions.DELETE_LOCATION),
   noAction: makeAsyncReducer(asyncActions.NO_ACTION),
-  printSign: makeAsyncReducer(asyncActions.PRINT_SIGN),
-  getLocation: makeAsyncReducer(asyncActions.GET_LOCATION_DETAILS)
+  printSign: makeAsyncReducer(asyncActions.PRINT_SIGN)
 });
 
 export default asyncReducer;
