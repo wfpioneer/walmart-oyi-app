@@ -18,7 +18,8 @@ export const trackEvent = (eventName: string, params: any = {}) => {
   const submitParams = {
     ...params,
     userId: userState.userId,
-    clubId: userState.siteId
+    clubId: userState.siteId,
+    country: userState.countryCode
   };
   return AppCenterAnalytics.trackEvent(eventName, submitParams);
 };

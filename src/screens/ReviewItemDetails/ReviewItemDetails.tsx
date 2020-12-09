@@ -66,7 +66,7 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     if (error) {
-      trackEvent('item_details_api_failure', { barcode: scannedEvent.value });
+      trackEvent('item_details_api_failure', { barcode: scannedEvent.value, errorDetails: error.message || error });
     }
 
     if (_.get(result, 'status') === 204) {
