@@ -132,7 +132,7 @@ android {
         applicationId "com.walmart.intl.oyi"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 25
+        versionCode 26
         versionName "1.0.7"
         resValue "string", "build_config_package", "com.samsclub.intl.oyi"
     }
