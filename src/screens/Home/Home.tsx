@@ -79,7 +79,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
   componentDidUpdate(prevProps: Readonly<HomeScreenProps>, prevState: Readonly<HomeScreenState>, snapshot?: any) {
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
-      trackEvent('home_worklist_summary_api_error');
+      trackEvent('home_worklist_summary_api_error', { errorDetails: this.props.worklistSummaryApiState.error.message || this.props.worklistSummaryApiState.error });
     }
 
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.result) {
