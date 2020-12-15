@@ -106,7 +106,11 @@ const SelectLocationType = () => {
 
     // on api failure
     if (apiInProgress && addAPI.isWaiting === false && addAPI.error) {
-      trackEvent('select_location_add_api_failure');
+      trackEvent('select_location_add_api_failure', {
+        upcNbr: addAPI.value.upc,
+        sectionId: addAPI.value.sectionId,
+        errorDetails: addAPI.error.message || addAPI.error
+      });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
     }
@@ -135,7 +139,12 @@ const SelectLocationType = () => {
 
     // on api failure
     if (apiInProgress && editAPI.isWaiting === false && editAPI.error) {
-      trackEvent('select_location_edit_api_failure');
+      trackEvent('select_location_edit_api_failure', {
+        upcNbr: editAPI.value.upc,
+        sectionId: editAPI.value.sectionId,
+        newSectionId: addAPI.value.newSectionId,
+        errorDetails: editAPI.error.message || editAPI.error
+      });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
     }

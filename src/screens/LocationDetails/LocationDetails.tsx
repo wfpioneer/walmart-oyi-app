@@ -14,7 +14,7 @@ import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { deleteLocationFromExisting, getLocationDetails, isUpdating } from '../../state/actions/Location';
+import { deleteLocationFromExisting, isUpdating, setFloorLocations, setReserveLocations } from '../../state/actions/Location';
 import { deleteLocation } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -55,7 +55,11 @@ const LocationDetails = () => {
 
     // on api failure
     if (apiInProgress && delAPI.isWaiting === false && delAPI.error) {
-      trackEvent('location_delete_location_api_failure');
+      trackEvent('location_delete_location_api_failure', {
+        upcNbr: delAPI.value.upc,
+        sectionId: delAPI.value.sectionId,
+        errorDetails: delAPI.error.message || delAPI.error
+      });
       setAPIInProgress(false);
       return setError(true);
     }
@@ -73,7 +77,12 @@ const LocationDetails = () => {
   useEffect(() => {
     // on api success
     if (apiInProgress && locations.isWaiting === false && locations.result) {
+      const locDetails = (locations.result && locations.result.data);
       trackEvent('location_get_location_api_success');
+      if (locDetails.location) {
+        if (locDetails.location.floor) dispatch(setFloorLocations(locDetails.location.floor));
+        if (locDetails.location.reserve) dispatch(setReserveLocations(locDetails.location.reserve));
+      }
       setAPIInProgress(false);
       dispatch(isUpdating(false));
       return;
@@ -81,7 +90,11 @@ const LocationDetails = () => {
 
     // on api failure
     if (apiInProgress && locations.isWaiting === false && locations.error) {
-      trackEvent('location_get_location_api_failure');
+      trackEvent('location_get_location_api_failure',{
+        itemNbr: itemDetails.itemNbr,
+        upcNbr: itemDetails.upcNbr,
+        errorDetails: locations.error.message || locations.error
+      });
       setAPIInProgress(false);
       return setError(true);
     }

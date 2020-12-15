@@ -64,6 +64,7 @@ const ReviewItemDetails = () => {
     }
   }, [scannedEvent]);
 
+  // Get Item Details API
   useEffect(() => {
     if (error) {
       trackEvent('item_details_api_failure', { barcode: scannedEvent.value, errorDetails: error.message || error });
@@ -87,6 +88,7 @@ const ReviewItemDetails = () => {
     ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
     : undefined;
 
+  // Set Item Details
   useEffect(() => {
     if (itemDetails) {
       dispatch(resetLocations());
@@ -132,6 +134,7 @@ const ReviewItemDetails = () => {
     };
   }, [itemDetails, actionCompleted]);
 
+  // Complete API
   useEffect(() => {
     // on api success
     if (completeApiInProgress && completeApi.isWaiting === false && completeApi.result) {

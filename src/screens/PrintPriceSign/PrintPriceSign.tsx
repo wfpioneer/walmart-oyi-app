@@ -101,6 +101,7 @@ const PrintPriceSign = () => {
     }
   }, []);
 
+  // Print API 
   useEffect(() => {
     // on api success
     if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
@@ -113,7 +114,7 @@ const PrintPriceSign = () => {
 
     // on api failure
     if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
-      trackEvent('print_api_failure');
+      trackEvent('print_api_failure', { errorDetails: printAPI.error.message || printAPI.error });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }

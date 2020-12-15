@@ -74,6 +74,7 @@ const PrintQueue = () => {
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
 
+  // Print API (Queue)
   useEffect(() => {
     // on api success
     if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
@@ -86,7 +87,7 @@ const PrintQueue = () => {
 
     // on api failure
     if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
-      trackEvent('print_queue_api_failure');
+      trackEvent('print_queue_api_failure', { errorDetails: printAPI.error.message || printAPI.error });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
