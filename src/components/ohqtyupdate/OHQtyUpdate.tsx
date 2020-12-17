@@ -49,6 +49,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
   const updateQuantityAPIStatus = useTypedSelector(state => state.async.updateOHQty);
   const dispatch = useDispatch();
 
+  // Update Quantity API
   useEffect(() => {
     // on api success
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result) {
@@ -63,7 +64,9 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
 
     // on api failure
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.error) {
-      trackEvent('item_details_update_oh_quantity_api_failure');
+      trackEvent('item_details_update_oh_quantity_api_failure', {
+        errorDetails: updateQuantityAPIStatus.error.message || updateQuantityAPIStatus.error
+      });
       updateApiSubmitting(false);
       return updateError(strings('ITEM.OH_UPDATE_API_ERROR'));
     }

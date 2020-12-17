@@ -10,7 +10,7 @@ import Button from '../../components/buttons/Button';
 import EnterLocation from '../../components/enterlocation/EnterLocation';
 import Location from '../../models/Location';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { addLocation, editLocation } from '../../state/actions/saga';
+import { addLocation, editLocation, getLocationDetails } from '../../state/actions/saga';
 import { addLocationToExisting, editExistingLocation, isUpdating } from '../../state/actions/Location';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
@@ -90,6 +90,7 @@ const SelectLocationType = () => {
     };
   }, []);
 
+  // Add Location API
   useEffect(() => {
     // on api success
     if (apiInProgress && addAPI.isWaiting === false && addAPI.result) {
@@ -97,6 +98,7 @@ const SelectLocationType = () => {
       dispatch(addLocationToExisting(loc, parseInt(type, 10), 'floor'));
       if (!actionCompleted && itemLocDetails.exceptionType === 'NSFL') dispatch(setActionCompleted());
       setAPIInProgress(false);
+      dispatch(getLocationDetails({itemNbr:itemLocDetails.itemNbr}));
       navigation.navigate('LocationDetails');
       dispatch(isUpdating(true));
       return undefined;
@@ -104,7 +106,11 @@ const SelectLocationType = () => {
 
     // on api failure
     if (apiInProgress && addAPI.isWaiting === false && addAPI.error) {
-      trackEvent('select_location_add_api_failure');
+      trackEvent('select_location_add_api_failure', {
+        upcNbr: addAPI.value.upc,
+        sectionId: addAPI.value.sectionId,
+        errorDetails: addAPI.error.message || addAPI.error
+      });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
     }
@@ -118,12 +124,14 @@ const SelectLocationType = () => {
     return undefined;
   }, [addAPI]);
 
+  // Edit Location API
   useEffect(() => {
     // on api success
     if (apiInProgress && editAPI.isWaiting === false && editAPI.result) {
       trackEvent('select_location_edit_api_success');
       dispatch(editExistingLocation(loc, parseInt(type, 10), 'floor', currentLocation.locIndex));
       setAPIInProgress(false);
+      dispatch(getLocationDetails({itemNbr:itemLocDetails.itemNbr}));
       navigation.navigate('LocationDetails');
       dispatch(isUpdating(true));
       return undefined;
@@ -131,7 +139,12 @@ const SelectLocationType = () => {
 
     // on api failure
     if (apiInProgress && editAPI.isWaiting === false && editAPI.error) {
-      trackEvent('select_location_edit_api_failure');
+      trackEvent('select_location_edit_api_failure', {
+        upcNbr: editAPI.value.upc,
+        sectionId: editAPI.value.sectionId,
+        newSectionId: addAPI.value.newSectionId,
+        errorDetails: editAPI.error.message || editAPI.error
+      });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
     }
