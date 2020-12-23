@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../../components/buttons/Button';
 import EnterLocation from '../../components/enterlocation/EnterLocation';
@@ -39,6 +40,8 @@ const SelectLocationType = () => {
   const [loc, setLoc] = useState('');
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
+  const [apiStart, setApiStart] = useState(0);
+  const [apiDuration, setApiDuration] = useState(0);
   const addAPI = useTypedSelector(state => state.async.addLocation);
   const editAPI = useTypedSelector(state => state.async.editLocation);
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
@@ -94,7 +97,8 @@ const SelectLocationType = () => {
   useEffect(() => {
     // on api success
     if (apiInProgress && addAPI.isWaiting === false && addAPI.result) {
-      trackEvent('select_location_add_api_success');
+      setApiDuration(moment().unix()-apiStart);
+      trackEvent('select_location_add_api_success', { duration: apiDuration });
       dispatch(addLocationToExisting(loc, parseInt(type, 10), 'floor'));
       if (!actionCompleted && itemLocDetails.exceptionType === 'NSFL') dispatch(setActionCompleted());
       setAPIInProgress(false);
@@ -106,10 +110,12 @@ const SelectLocationType = () => {
 
     // on api failure
     if (apiInProgress && addAPI.isWaiting === false && addAPI.error) {
+      setApiDuration(moment().unix()-apiStart);
       trackEvent('select_location_add_api_failure', {
         upcNbr: addAPI.value.upc,
         sectionId: addAPI.value.sectionId,
-        errorDetails: addAPI.error.message || addAPI.error
+        errorDetails: addAPI.error.message || addAPI.error,
+        duration: apiDuration
       });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
@@ -128,7 +134,8 @@ const SelectLocationType = () => {
   useEffect(() => {
     // on api success
     if (apiInProgress && editAPI.isWaiting === false && editAPI.result) {
-      trackEvent('select_location_edit_api_success');
+      setApiDuration(moment().unix()-apiStart);
+      trackEvent('select_location_edit_api_success', { duration: apiDuration });
       dispatch(editExistingLocation(loc, parseInt(type, 10), 'floor', currentLocation.locIndex));
       setAPIInProgress(false);
       dispatch(getLocationDetails({itemNbr:itemLocDetails.itemNbr}));
@@ -139,11 +146,13 @@ const SelectLocationType = () => {
 
     // on api failure
     if (apiInProgress && editAPI.isWaiting === false && editAPI.error) {
+      setApiDuration(moment().unix()-apiStart);
       trackEvent('select_location_edit_api_failure', {
         upcNbr: editAPI.value.upc,
         sectionId: editAPI.value.sectionId,
         newSectionId: addAPI.value.newSectionId,
-        errorDetails: editAPI.error.message || editAPI.error
+        errorDetails: editAPI.error.message || editAPI.error,
+        duration: apiDuration
       });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
@@ -174,6 +183,7 @@ const SelectLocationType = () => {
         if (!sameLoc) {
           trackEvent('select_location_add_api_call',
             { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
+          setApiStart(moment().unix());
           dispatch(addLocation({
             upc: itemLocDetails.upcNbr,
             sectionId: loc,
@@ -189,6 +199,7 @@ const SelectLocationType = () => {
         if (!sameLoc) {
           trackEvent('select_location_edit_api_call',
             { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
+          setApiStart(moment().unix());
           dispatch(editLocation({
             upc: itemLocDetails.upcNbr,
             sectionId: currentLocation.locationName,

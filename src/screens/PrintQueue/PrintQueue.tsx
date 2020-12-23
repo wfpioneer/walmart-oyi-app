@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import moment from 'moment';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './PrintQueue.styles';
@@ -73,12 +74,15 @@ const PrintQueue = () => {
   const [itemIndexToEdit, setItemIndexToEdit] = useState(-1);
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
+  const [apiStart, setApiStart] = useState(0);
+  const [apiDuration, setApiDuration] = useState(0);
 
   // Print API (Queue)
   useEffect(() => {
     // on api success
     if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
-      trackEvent('print_queue_api_success');
+      setApiDuration(moment().unix()-apiStart);
+      trackEvent('print_queue_api_success', { duration: apiDuration });
       setAPIInProgress(false);
       dispatch(setPrintQueue([]));
       navigation.goBack();
@@ -87,7 +91,8 @@ const PrintQueue = () => {
 
     // on api failure
     if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
-      trackEvent('print_queue_api_failure', { errorDetails: printAPI.error.message || printAPI.error });
+      setApiDuration(moment().unix()-apiStart);
+      trackEvent('print_queue_api_failure', { errorDetails: printAPI.error.message || printAPI.error, duration: apiDuration });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
@@ -118,6 +123,7 @@ const PrintQueue = () => {
           worklistType
         };
       });
+      setApiStart(moment().unix());
       trackEvent('print_queue', { queue: JSON.stringify(printArray) });
       dispatch(printSign({
         printlist: printArray

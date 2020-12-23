@@ -4,6 +4,7 @@ import {
   ActivityIndicator, EmitterSubscription,
   SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
+import moment from 'moment';
 import { StackNavigationProp } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './Home.style';
@@ -47,6 +48,7 @@ interface HomeScreenProps {
 
 interface HomeScreenState {
   activeGoal: number;
+  getWorklistStart: number;
 }
 
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
@@ -57,12 +59,16 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
   constructor(props: HomeScreenProps) {
     super(props);
 
-    this.state = { activeGoal: 0 };
+    this.state = { activeGoal: 0, getWorklistStart: 0 };
 
     // addListener returns a function to remove listener
     this.navigationRemoveListener = this.props.navigation.addListener('focus', () => {
       trackEvent('home_screen_focus');
       this.props.getWorklistSummary();
+      this.setState({
+        ...this.state,
+        getWorklistStart: moment().unix()
+      })
     });
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -79,11 +85,13 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
   componentDidUpdate(prevProps: Readonly<HomeScreenProps>, prevState: Readonly<HomeScreenState>, snapshot?: any) {
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
-      trackEvent('home_worklist_summary_api_error', { errorDetails: this.props.worklistSummaryApiState.error.message || this.props.worklistSummaryApiState.error });
+      let worklistDuration = moment().unix()-this.state.getWorklistStart;
+      trackEvent('home_worklist_summary_api_error', { errorDetails: this.props.worklistSummaryApiState.error.message || this.props.worklistSummaryApiState.error, duration: worklistDuration });
     }
 
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.result) {
-      trackEvent('home_worklist_summary_api_success');
+      let worklistDuration = moment().unix()-this.state.getWorklistStart;
+      trackEvent('home_worklist_summary_api_success', { duration: worklistDuration });
     }
   }
 
