@@ -5,7 +5,7 @@ import {
   ActivityIndicator, BackHandler, Modal, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import _ from 'lodash';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -44,6 +44,7 @@ const ReviewItemDetails = () => {
   const { userId } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
   const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
+  const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const scrollViewRef: RefObject<ScrollView> = createRef();
@@ -54,7 +55,7 @@ const ReviewItemDetails = () => {
 
   useEffect(() => {
     if (navigation.isFocused()) {
-      validateSession(navigation).then(() => {
+      validateSession(navigation, route.name).then(() => {
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
         dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
         trackEvent('item_details_api_call', { barcode: scannedEvent.value });
@@ -108,7 +109,7 @@ const ReviewItemDetails = () => {
     if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
       const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
         if (navigation.isFocused()) {
-          validateSession(navigation).then(() => {
+          validateSession(navigation, route.name).then(() => {
             trackEvent('item_details_scan', { value: scan.value, type: scan.type });
             trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
             dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
@@ -123,7 +124,7 @@ const ReviewItemDetails = () => {
     }
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
-        validateSession(navigation).then(() => {
+        validateSession(navigation, route.name).then(() => {
           dispatch(setScannedEvent(scan));
         }).catch(() => {trackEvent('session_timeout', { user: userId })});
       }
@@ -244,21 +245,21 @@ const ReviewItemDetails = () => {
   }
 
   const handleUpdateQty = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       trackEvent('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
       setOhQtyModalVisible(true);
     }).catch(() => {trackEvent('session_timeout', { user: userId })});
   };
 
   const handleLocationAction = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       trackEvent('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
       navigation.navigate('LocationDetails');
     }).catch(() => {trackEvent('session_timeout', { user: userId })});
   };
 
   const handleAddToPicklist = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation,route.name).then(() => {
       trackEvent('item_details_add_to_picklist_click', { itemDetails: JSON.stringify(itemDetails) });
       dispatch(addToPicklist({
         itemNumber: itemDetails.itemNbr
@@ -273,7 +274,7 @@ const ReviewItemDetails = () => {
   };
 
   const handleRefresh = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       setIsRefreshing(true);
       trackEvent('refresh_item_details', { itemNumber: itemDetails.itemNbr});
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
@@ -423,7 +424,7 @@ const ReviewItemDetails = () => {
         <TouchableOpacity
           style={styles.scanForNoActionButton}
           onPress={() => {
-            validateSession(navigation).then(() => {
+            validateSession(navigation, route.name).then(() => {
               trackEvent('item_details_scan_for_no_action_button_click', {itemDetails: JSON.stringify(itemDetails)});
               return dispatch(setManualScan(!isManualScanEnabled));
             }).catch(() => {trackEvent('session_timeout', { user: userId })

@@ -18,6 +18,7 @@ import COLOR from '../../themes/Color';
 import { updateFilterExceptions } from '../../state/actions/Worklist';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { RouteProp } from '@react-navigation/native';
 
 const mapStateToProps = (state: any) => ({
   userName: state.User.additional.displayName,
@@ -43,6 +44,7 @@ interface HomeScreenProps {
   getWorklistSummary: Function;
   navigation: StackNavigationProp<any>;
   updateFilterExceptions: Function;
+  route: RouteProp<any, string>;
 }
 
 interface HomeScreenState {
@@ -67,7 +69,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (props.navigation.isFocused()) {
-        validateSession(props.navigation).then(() => {
+        validateSession(props.navigation, props.route.name).then(() => {
           trackEvent('home_barcode_scanned', { barcode: scan.value, type: scan.type });
           props.setScannedEvent(scan);
           props.setManualScan(false);
@@ -83,7 +85,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     }
 
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.result) {
-      trackEvent('home_worklist_summary_api_success');
+      trackEvent('home_worklist_summary_api_success',{ status: this.props.worklistSummaryApiState.result.status });
     }
   }
 
@@ -177,7 +179,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         const onWorklistCardPress = () => {
           trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
           this.props.updateFilterExceptions([worklist.worklistType]);
-          validateSession(this.props.navigation).then(() => {
+          validateSession(this.props.navigation, this.props.route.name).then(() => {
             this.props.navigation.navigate(strings('WORKLIST.WORKLIST'));
           }).catch(() => {});
         };

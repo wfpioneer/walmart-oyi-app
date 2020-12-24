@@ -159,7 +159,7 @@ const SelectLocationType = () => {
   }, [editAPI]);
 
   const modelOnSubmit = (value: string) => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, routeSource).then(() => {
       manualScan(value);
       dispatch(setManualScan(false));
       setInputLocation(false);
@@ -167,7 +167,7 @@ const SelectLocationType = () => {
   };
 
   const onSubmit = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, routeSource).then(() => {
       if (routeSource === 'AddLocation') {
         setError({ error: false, message: '' });
         const sameLoc = floorLocations.find((location: Location) => location.locationName === loc && location.typeNbr.toString() === type);
@@ -205,7 +205,7 @@ const SelectLocationType = () => {
   };
 
   const handleManualScan = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, routeSource).then(() => {
       setInputLocation(true);
       dispatch(setManualScan(true));
     }).catch(() => {});

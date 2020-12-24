@@ -4,7 +4,7 @@ import {
   Image, Modal, SafeAreaView, ScrollView, Text, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './PrintQueue.styles';
@@ -27,7 +27,7 @@ const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Funct
   };
 
   const handleDeleteAction = (index: number) => () => {
-    validateSession(useNavigation()).then(() => {
+    validateSession(useNavigation(), useRoute().name).then(() => {
       printQueue.splice(index, 1);
       dispatch(setPrintQueue(printQueue));
     }).catch(() => {});
@@ -69,7 +69,7 @@ const PrintQueue = () => {
   const printAPI = useTypedSelector(state => state.async.printSign);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
+  const route = useRoute();
   const [itemIndexToEdit, setItemIndexToEdit] = useState(-1);
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
@@ -102,7 +102,7 @@ const PrintQueue = () => {
   }, [printAPI]);
 
   const handlePrint = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       const printArray = printQueue.map((printItem: PrintQueueItem) => {
         const {
           itemNbr, signQty, paperSize, worklistType

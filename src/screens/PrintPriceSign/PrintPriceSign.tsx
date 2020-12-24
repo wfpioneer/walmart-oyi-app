@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
@@ -76,7 +76,7 @@ const PrintPriceSign = () => {
   const { selectedPrinter, selectedSignType, printQueue } = useTypedSelector(state => state.Print);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
+  const route = useRoute();
   const [signQty, setSignQty] = useState(1);
   const [isValidQty, setIsValidQty] = useState(true);
   const [apiInProgress, setAPIInProgress] = useState(false);
@@ -157,7 +157,7 @@ const PrintPriceSign = () => {
   };
 
   const handleChangePrinter = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       navigation.navigate('PrinterList');
     }).catch(() => {});
   };
@@ -194,7 +194,7 @@ const PrintPriceSign = () => {
   };
 
   const handlePrint = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       const printlist = [
         {
           itemNbr,
