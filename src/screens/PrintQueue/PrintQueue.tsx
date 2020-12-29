@@ -75,12 +75,21 @@ const PrintQueue = () => {
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
   const [apiStart, setApiStart] = useState(0);
+<<<<<<< HEAD
+=======
+  const [apiDuration, setApiDuration] = useState(0);
+>>>>>>> 2d6fa83a8d25d4d8a17a7b9933426bba48b2fb49
 
   // Print API (Queue)
   useEffect(() => {
     // on api success
     if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
+<<<<<<< HEAD
       trackEvent('print_queue_api_success', { duration: moment().valueOf()-apiStart });
+=======
+      setApiDuration(moment().unix()-apiStart);
+      trackEvent('print_queue_api_success', { duration: apiDuration });
+>>>>>>> 2d6fa83a8d25d4d8a17a7b9933426bba48b2fb49
       setAPIInProgress(false);
       dispatch(setPrintQueue([]));
       navigation.goBack();
@@ -89,7 +98,12 @@ const PrintQueue = () => {
 
     // on api failure
     if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
+<<<<<<< HEAD
       trackEvent('print_queue_api_failure', { errorDetails: printAPI.error.message || JSON.stringify(printAPI.error), duration: moment().valueOf()-apiStart });
+=======
+      setApiDuration(moment().unix()-apiStart);
+      trackEvent('print_queue_api_failure', { errorDetails: printAPI.error.message || printAPI.error, duration: apiDuration });
+>>>>>>> 2d6fa83a8d25d4d8a17a7b9933426bba48b2fb49
       setAPIInProgress(false);
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
@@ -120,7 +134,11 @@ const PrintQueue = () => {
           worklistType
         };
       });
+<<<<<<< HEAD
       setApiStart(moment().valueOf());
+=======
+      setApiStart(moment().unix());
+>>>>>>> 2d6fa83a8d25d4d8a17a7b9933426bba48b2fb49
       trackEvent('print_queue', { queue: JSON.stringify(printArray) });
       dispatch(printSign({
         printlist: printArray

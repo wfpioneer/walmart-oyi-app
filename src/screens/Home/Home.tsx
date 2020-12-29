@@ -68,6 +68,10 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         getWorklistStart: moment().valueOf()
       })
       this.props.getWorklistSummary();
+      this.setState({
+        ...this.state,
+        getWorklistStart: moment().unix()
+      })
     });
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -84,11 +88,21 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
   componentDidUpdate(prevProps: Readonly<HomeScreenProps>, prevState: Readonly<HomeScreenState>, snapshot?: any) {
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
+<<<<<<< HEAD
       trackEvent('home_worklist_summary_api_error', { errorDetails: this.props.worklistSummaryApiState.error.message || JSON.stringify(this.props.worklistSummaryApiState.error), duration: moment().valueOf()-this.state.getWorklistStart });
     }
 
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.result) {
       trackEvent('home_worklist_summary_api_success', { duration: moment().valueOf()-this.state.getWorklistStart });
+=======
+      let worklistDuration = moment().unix()-this.state.getWorklistStart;
+      trackEvent('home_worklist_summary_api_error', { errorDetails: this.props.worklistSummaryApiState.error.message || this.props.worklistSummaryApiState.error, duration: worklistDuration });
+    }
+
+    if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.result) {
+      let worklistDuration = moment().unix()-this.state.getWorklistStart;
+      trackEvent('home_worklist_summary_api_success', { duration: worklistDuration });
+>>>>>>> 2d6fa83a8d25d4d8a17a7b9933426bba48b2fb49
     }
   }
 
