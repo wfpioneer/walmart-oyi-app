@@ -3,7 +3,7 @@ import {
   ActivityIndicator, ScrollView, Text, View
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import FAB from 'react-native-fab';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -21,6 +21,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 
 const LocationDetails = () => {
   const navigation = useNavigation();
+  const route = useRoute();
   const dispatch = useDispatch();
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
   const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
@@ -110,14 +111,14 @@ const LocationDetails = () => {
   }, [locations]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       trackEvent('location_edit_location_click', { location: JSON.stringify(loc), index: locIndex });
       navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
     }).catch(() => {});
   };
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       trackEvent('location_delete_location_click', { location: JSON.stringify(loc), index: locIndex });
       setLocToConfirm({
         locationName: loc.locationName, locationArea: 'floor', locationIndex: locIndex, locationTypeNbr: loc.typeNbr
@@ -148,7 +149,7 @@ const LocationDetails = () => {
   );
 
   const addNewLocationNav = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       trackEvent('location_fab_button_click');
       navigation.navigate('AddLocation');
     }).catch(() => {});

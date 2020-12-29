@@ -13,15 +13,15 @@ export const sessionEnd = () => {
   return endTime.unix();
 };
 
-export function validateSession(navigation: any): (Promise<void>) {
+export function validateSession(navigation: any, route?: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const endTime = store.getState().SessionTimeout;
     if (moment().isSameOrAfter(moment.unix(endTime))) {
-      trackEvent('user_sign_out');
+      trackEvent('user_session_timed_out', {lastPage: route});
       store.dispatch(clearEndTime());
       WMSSO.signOutUser().then(() => {
+        store.dispatch(logoutUser());
         navigation.replace('Login');
-        logoutUser();
       });
       return reject();
     }
