@@ -83,7 +83,6 @@ const PrintPriceSign = () => {
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
   const [apiStart, setApiStart] = useState(0);
-  const [apiDuration, setApiDuration] = useState(0);
 
   const {
     itemName, itemNbr, upcNbr, categoryNbr
@@ -108,8 +107,7 @@ const PrintPriceSign = () => {
   useEffect(() => {
     // on api success
     if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
-      setApiDuration(moment().unix()-apiStart);
-      trackEvent('print_api_success', { duration: apiDuration });
+      trackEvent('print_api_success', { duration: moment().valueOf()-apiStart });
       if (!actionCompleted && exceptionType === 'PO') dispatch(setActionCompleted());
       setAPIInProgress(false);
       navigation.goBack();
@@ -118,8 +116,7 @@ const PrintPriceSign = () => {
 
     // on api failure
     if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
-      setApiDuration(moment().unix()-apiStart);
-      trackEvent('print_api_failure', { errorDetails: printAPI.error.message || printAPI.error, duration: apiDuration });
+      trackEvent('print_api_failure', { errorDetails: printAPI.error.message || JSON.stringify(printAPI.error), duration: moment().valueOf()-apiStart });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
@@ -213,7 +210,7 @@ const PrintPriceSign = () => {
           worklistType: exceptionType
         }
       ];
-      setApiStart(moment().unix());
+      setApiStart(moment().valueOf());
       trackEvent('print_price_sign', JSON.stringify(printlist));
       dispatch(printSign({ printlist }));
     }).catch(() => {});

@@ -52,14 +52,13 @@ const ReviewItemDetails = () => {
   const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [apiStart, setApiStart] = useState(0);
-  const [apiDuration, setApiDuration] = useState(0);
 
   useEffect(() => {
     if (navigation.isFocused()) {
       validateSession(navigation).then(() => {
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
+        setApiStart(moment().valueOf());
         dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-        setApiStart(moment().unix());
         trackEvent('item_details_api_call', { barcode: scannedEvent.value });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
         dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
@@ -70,18 +69,15 @@ const ReviewItemDetails = () => {
   // Get Item Details API
   useEffect(() => {
     if (error) {
-      setApiDuration(moment().unix()-apiStart);
-      trackEvent('item_details_api_failure', { barcode: scannedEvent.value, errorDetails: error.message || error, duration: apiDuration });
+      trackEvent('item_details_api_failure', { barcode: scannedEvent.value, errorDetails: error.message || JSON.stringify(error), duration: moment().valueOf()-apiStart });
     }
 
     if (_.get(result, 'status') === 204) {
-      setApiDuration(moment().unix()-apiStart);
-      trackEvent('item_details_api_not_found', { barcode: scannedEvent.value, duration: apiDuration });
+      trackEvent('item_details_api_not_found', { barcode: scannedEvent.value, duration: moment().valueOf()-apiStart });
     }
 
     if (_.get(result, 'status') === 200) {
-      setApiDuration(moment().unix()-apiStart);
-      trackEvent('item_details_api_success', { barcode: scannedEvent.value, duration: apiDuration });
+      trackEvent('item_details_api_success', { barcode: scannedEvent.value, duration: moment().valueOf()-apiStart });
     }
     if (isRefreshing) {
       setIsRefreshing(false);
@@ -117,7 +113,7 @@ const ReviewItemDetails = () => {
           validateSession(navigation).then(() => {
             trackEvent('item_details_scan', { value: scan.value, type: scan.type });
             trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
-            setApiStart(moment().unix());
+            setApiStart(moment().valueOf());
             dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
             dispatch(setManualScan(false));
           }).catch(() => {trackEvent('session_timeout', { user: userId })});
@@ -145,12 +141,11 @@ const ReviewItemDetails = () => {
   useEffect(() => {
     // on api success
     if (completeApiInProgress && completeApi.isWaiting === false && completeApi.result) {
-      setApiDuration(moment().unix()-apiStart);
       if (_.get(completeApi.result, 'status') === 204) {
-        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails), duration: apiDuration });
+        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEvent('item_details_action_completed_api_success', { itemDetails: JSON.stringify(itemDetails), duration: apiDuration });
+        trackEvent('item_details_action_completed_api_success', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
         setCompleteApiInProgress(false);
         dispatch(setActionCompleted());
         navigation.goBack();
@@ -160,12 +155,11 @@ const ReviewItemDetails = () => {
 
     // on api failure
     if (completeApiInProgress && completeApi.isWaiting === false && completeApi.error) {
-      setApiDuration(moment().unix()-apiStart);
       if (completeApi.error === COMPLETE_API_409_ERROR) {
-        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails), duration: apiDuration });
+        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEvent('item_details_action_completed_api_failure', { itemDetails: JSON.stringify(itemDetails), duration: apiDuration });
+        trackEvent('item_details_action_completed_api_failure', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
       setCompleteApiInProgress(false);
@@ -217,8 +211,8 @@ const ReviewItemDetails = () => {
           <TouchableOpacity
             style={styles.errorButton}
             onPress={() => {
+              setApiStart(moment().valueOf());
               trackEvent('item_details_api_retry', { barcode: scannedEvent.value });
-              setApiStart(moment().unix());
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
           >
@@ -285,11 +279,11 @@ const ReviewItemDetails = () => {
   const handleRefresh = () => {
     validateSession(navigation).then(() => {
       setIsRefreshing(true);
+      setApiStart(moment().valueOf());
       trackEvent('refresh_item_details', { itemNumber: itemDetails.itemNbr});
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
       trackEvent('item_details_api_call', { itemNumber: itemDetails.itemNbr });
       dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }))
-      setApiStart(moment().unix());
     }).catch(() => {trackEvent('session_timeout', { user: userId })});
   }
 

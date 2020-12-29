@@ -64,11 +64,10 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     // addListener returns a function to remove listener
     this.navigationRemoveListener = this.props.navigation.addListener('focus', () => {
       trackEvent('home_screen_focus');
-      this.props.getWorklistSummary();
       this.setState({
-        ...this.state,
-        getWorklistStart: moment().unix()
+        getWorklistStart: moment().valueOf()
       })
+      this.props.getWorklistSummary();
     });
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -85,13 +84,11 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
   componentDidUpdate(prevProps: Readonly<HomeScreenProps>, prevState: Readonly<HomeScreenState>, snapshot?: any) {
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
-      let worklistDuration = moment().unix()-this.state.getWorklistStart;
-      trackEvent('home_worklist_summary_api_error', { errorDetails: this.props.worklistSummaryApiState.error.message || this.props.worklistSummaryApiState.error, duration: worklistDuration });
+      trackEvent('home_worklist_summary_api_error', { errorDetails: this.props.worklistSummaryApiState.error.message || JSON.stringify(this.props.worklistSummaryApiState.error), duration: moment().valueOf()-this.state.getWorklistStart });
     }
 
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.result) {
-      let worklistDuration = moment().unix()-this.state.getWorklistStart;
-      trackEvent('home_worklist_summary_api_success', { duration: worklistDuration });
+      trackEvent('home_worklist_summary_api_success', { duration: moment().valueOf()-this.state.getWorklistStart });
     }
   }
 
