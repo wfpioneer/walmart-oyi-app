@@ -145,7 +145,9 @@ const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) =
       </View>
       <View style={styles.averageContainer}>
         <Text style={styles.averageQtyNbr}>{isDailyPeriod ? dailyAvgSales : weeklyAvgSales}</Text>
-        <Text style={styles.averageQtyLabel}>{`${salesTimePeriodText} ${strings('ITEM.AVG_SALES')}`}</Text>
+        <Text style={styles.averageQtyLabel}>
+          {isDailyPeriod ? `${salesTimePeriodText} ${strings('ITEM.AVG_SALES')}` : `${strings('ITEM.WEEKLY_AVG_SALES')}`}
+          </Text>
       </View>
       {isDailyPeriod && !props.isGraphView && renderDailyList(daily)}
       {isDailyPeriod && props.isGraphView && renderChart(dailyChartData, isDailyPeriod)}
