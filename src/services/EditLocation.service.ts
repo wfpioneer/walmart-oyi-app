@@ -6,7 +6,7 @@ export default class EditLocationService {
     locationTypeNbr: number; newLocationTypeNbr: number;}) {
     const urls: Environment = getEnvironment();
     return Request.enqueue({
-      url: `${urls.orchestrationURL}/item/${payload.upc}/location/${payload.sectionId}/${payload.locationTypeNbr}`,
+      url: `${urls.orchestrationURL}/location/${payload.sectionId}/${payload.locationTypeNbr}/item/${payload.upc}`,
       method: 'put',
       data: {
         sectionId: payload.newSectionId,
