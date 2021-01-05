@@ -134,7 +134,7 @@ const SelectLocationType = () => {
       trackEvent('select_location_edit_api_success', { duration: moment().valueOf()-apiStart });
       dispatch(editExistingLocation(loc, parseInt(type, 10), 'floor', currentLocation.locIndex));
       setAPIInProgress(false);
-      dispatch(getLocationDetails({itemNbr:itemLocDetails.itemNbr}));
+      dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
       navigation.navigate('LocationDetails');
       dispatch(isUpdating(true));
       return undefined;
@@ -145,7 +145,7 @@ const SelectLocationType = () => {
       trackEvent('select_location_edit_api_failure', {
         upcNbr: editAPI.value.upc,
         sectionId: editAPI.value.sectionId,
-        newSectionId: addAPI.value.newSectionId,
+        newSectionId: editAPI.value.newSectionId,
         errorDetails: editAPI.error.message || editAPI.error,
         duration: moment().valueOf()-apiStart
       });
