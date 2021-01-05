@@ -71,8 +71,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       })
       this.props.getWorklistSummary();
       this.setState({
-        ...this.state,
-        getWorklistStart: moment().unix()
+        getWorklistStart: moment().valueOf()
       })
     });
 

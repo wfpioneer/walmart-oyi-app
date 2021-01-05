@@ -53,10 +53,6 @@ const ReviewItemDetails = () => {
   const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [apiStart, setApiStart] = useState(0);
-<<<<<<< HEAD
-=======
-  const [apiDuration, setApiDuration] = useState(0);
->>>>>>> 2d6fa83a8d25d4d8a17a7b9933426bba48b2fb49
 
   useEffect(() => {
     if (navigation.isFocused()) {
@@ -75,7 +71,6 @@ const ReviewItemDetails = () => {
   // Get Item Details API
   useEffect(() => {
     if (error) {
-<<<<<<< HEAD
       trackEvent('item_details_api_failure', { barcode: scannedEvent.value, errorDetails: error.message || JSON.stringify(error), duration: moment().valueOf()-apiStart });
     }
 
@@ -85,20 +80,6 @@ const ReviewItemDetails = () => {
 
     if (_.get(result, 'status') === 200) {
       trackEvent('item_details_api_success', { barcode: scannedEvent.value, duration: moment().valueOf()-apiStart });
-=======
-      setApiDuration(moment().unix()-apiStart);
-      trackEvent('item_details_api_failure', { barcode: scannedEvent.value, errorDetails: error.message || error, duration: apiDuration });
-    }
-
-    if (_.get(result, 'status') === 204) {
-      setApiDuration(moment().unix()-apiStart);
-      trackEvent('item_details_api_not_found', { barcode: scannedEvent.value, duration: apiDuration });
-    }
-
-    if (_.get(result, 'status') === 200) {
-      setApiDuration(moment().unix()-apiStart);
-      trackEvent('item_details_api_success', { barcode: scannedEvent.value, duration: apiDuration });
->>>>>>> 2d6fa83a8d25d4d8a17a7b9933426bba48b2fb49
     }
     if (isRefreshing) {
       setIsRefreshing(false);
@@ -134,11 +115,7 @@ const ReviewItemDetails = () => {
           validateSession(navigation, route.name).then(() => {
             trackEvent('item_details_scan', { value: scan.value, type: scan.type });
             trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
-<<<<<<< HEAD
             setApiStart(moment().valueOf());
-=======
-            setApiStart(moment().unix());
->>>>>>> 2d6fa83a8d25d4d8a17a7b9933426bba48b2fb49
             dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
             dispatch(setManualScan(false));
           }).catch(() => {trackEvent('session_timeout', { user: userId })});
@@ -166,19 +143,11 @@ const ReviewItemDetails = () => {
   useEffect(() => {
     // on api success
     if (completeApiInProgress && completeApi.isWaiting === false && completeApi.result) {
-      setApiDuration(moment().unix()-apiStart);
       if (_.get(completeApi.result, 'status') === 204) {
-<<<<<<< HEAD
         trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
         trackEvent('item_details_action_completed_api_success', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
-=======
-        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails), duration: apiDuration });
-        dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
-      } else {
-        trackEvent('item_details_action_completed_api_success', { itemDetails: JSON.stringify(itemDetails), duration: apiDuration });
->>>>>>> 2d6fa83a8d25d4d8a17a7b9933426bba48b2fb49
         setCompleteApiInProgress(false);
         dispatch(setActionCompleted());
         navigation.goBack();
@@ -188,19 +157,11 @@ const ReviewItemDetails = () => {
 
     // on api failure
     if (completeApiInProgress && completeApi.isWaiting === false && completeApi.error) {
-      setApiDuration(moment().unix()-apiStart);
       if (completeApi.error === COMPLETE_API_409_ERROR) {
-<<<<<<< HEAD
         trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
         trackEvent('item_details_action_completed_api_failure', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
-=======
-        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails), duration: apiDuration });
-        dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
-      } else {
-        trackEvent('item_details_action_completed_api_failure', { itemDetails: JSON.stringify(itemDetails), duration: apiDuration });
->>>>>>> 2d6fa83a8d25d4d8a17a7b9933426bba48b2fb49
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
       setCompleteApiInProgress(false);
