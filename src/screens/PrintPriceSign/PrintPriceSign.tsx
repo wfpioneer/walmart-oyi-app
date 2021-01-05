@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
@@ -81,6 +82,7 @@ const PrintPriceSign = () => {
   const [isValidQty, setIsValidQty] = useState(true);
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
+  const [apiStart, setApiStart] = useState(0);
 
   const {
     itemName, itemNbr, upcNbr, categoryNbr
@@ -105,7 +107,7 @@ const PrintPriceSign = () => {
   useEffect(() => {
     // on api success
     if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
-      trackEvent('print_api_success');
+      trackEvent('print_api_success', { duration: moment().valueOf()-apiStart });
       if (!actionCompleted && exceptionType === 'PO') dispatch(setActionCompleted());
       setAPIInProgress(false);
       navigation.goBack();
@@ -114,7 +116,7 @@ const PrintPriceSign = () => {
 
     // on api failure
     if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
-      trackEvent('print_api_failure', { errorDetails: printAPI.error.message || printAPI.error });
+      trackEvent('print_api_failure', { errorDetails: printAPI.error.message || JSON.stringify(printAPI.error), duration: moment().valueOf()-apiStart });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
@@ -208,6 +210,7 @@ const PrintPriceSign = () => {
           worklistType: exceptionType
         }
       ];
+      setApiStart(moment().valueOf());
       trackEvent('print_price_sign', JSON.stringify(printlist));
       dispatch(printSign({ printlist }));
     }).catch(() => {});
