@@ -285,7 +285,6 @@ const ReviewItemDetails = () => {
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
       trackEvent('item_details_api_call', { itemNumber: itemDetails.itemNbr });
       dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }))
-      setApiStart(moment().unix());
     }).catch(() => {trackEvent('session_timeout', { user: userId })});
   }
 
