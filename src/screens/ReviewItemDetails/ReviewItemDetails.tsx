@@ -60,7 +60,6 @@ const ReviewItemDetails = () => {
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
         setApiStart(moment().valueOf());
         dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-        setApiStart(moment().unix());
         trackEvent('item_details_api_call', { barcode: scannedEvent.value });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
         dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
@@ -215,7 +214,6 @@ const ReviewItemDetails = () => {
             onPress={() => {
               setApiStart(moment().valueOf());
               trackEvent('item_details_api_retry', { barcode: scannedEvent.value });
-              setApiStart(moment().unix());
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
           >
