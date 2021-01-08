@@ -83,6 +83,9 @@ const ReviewItemDetails = () => {
     if (isRefreshing) {
       setIsRefreshing(false);
     }
+    if (isRefreshing) {
+      setIsRefreshing(false);
+    }
   }, [error, result]);
 
   const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
