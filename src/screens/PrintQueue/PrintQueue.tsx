@@ -4,7 +4,8 @@ import {
   Image, Modal, SafeAreaView, ScrollView, Text, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import moment from 'moment';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './PrintQueue.styles';
@@ -27,7 +28,7 @@ const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Funct
   };
 
   const handleDeleteAction = (index: number) => () => {
-    validateSession(useNavigation()).then(() => {
+    validateSession(useNavigation(), useRoute().name).then(() => {
       printQueue.splice(index, 1);
       dispatch(setPrintQueue(printQueue));
     }).catch(() => {});
@@ -69,16 +70,17 @@ const PrintQueue = () => {
   const printAPI = useTypedSelector(state => state.async.printSign);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
+  const route = useRoute();
   const [itemIndexToEdit, setItemIndexToEdit] = useState(-1);
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
+  const [apiStart, setApiStart] = useState(0);
 
   // Print API (Queue)
   useEffect(() => {
     // on api success
     if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
-      trackEvent('print_queue_api_success');
+      trackEvent('print_queue_api_success', { duration: moment().valueOf()-apiStart });
       setAPIInProgress(false);
       dispatch(setPrintQueue([]));
       navigation.goBack();
@@ -87,7 +89,7 @@ const PrintQueue = () => {
 
     // on api failure
     if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
-      trackEvent('print_queue_api_failure', { errorDetails: printAPI.error.message || printAPI.error });
+      trackEvent('print_queue_api_failure', { errorDetails: printAPI.error.message || JSON.stringify(printAPI.error), duration: moment().valueOf()-apiStart });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
@@ -102,7 +104,7 @@ const PrintQueue = () => {
   }, [printAPI]);
 
   const handlePrint = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       const printArray = printQueue.map((printItem: PrintQueueItem) => {
         const {
           itemNbr, signQty, paperSize, worklistType
@@ -118,6 +120,7 @@ const PrintQueue = () => {
           worklistType
         };
       });
+      setApiStart(moment().valueOf());
       trackEvent('print_queue', { queue: JSON.stringify(printArray) });
       dispatch(printSign({
         printlist: printArray

@@ -94,7 +94,7 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
     }
     if (buttonIndex === 1) {
       props.showActivityModal();
-      trackEvent('user_sign_out');
+      trackEvent('user_sign_out', { lastPage: "Home"});
       WMSSO.signOutUser().then(() => {
         props.navigation.replace('Login');
         props.logoutUser();

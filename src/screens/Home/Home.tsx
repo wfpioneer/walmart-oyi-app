@@ -4,6 +4,7 @@ import {
   ActivityIndicator, EmitterSubscription,
   SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
+import moment from 'moment';
 import { StackNavigationProp } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './Home.style';
@@ -18,6 +19,7 @@ import COLOR from '../../themes/Color';
 import { updateFilterExceptions } from '../../state/actions/Worklist';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { RouteProp } from '@react-navigation/native';
 
 const mapStateToProps = (state: any) => ({
   userName: state.User.additional.displayName,
@@ -43,10 +45,12 @@ interface HomeScreenProps {
   getWorklistSummary: Function;
   navigation: StackNavigationProp<any>;
   updateFilterExceptions: Function;
+  route: RouteProp<any, string>;
 }
 
 interface HomeScreenState {
   activeGoal: number;
+  getWorklistStart: number;
 }
 
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
@@ -57,17 +61,23 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
   constructor(props: HomeScreenProps) {
     super(props);
 
-    this.state = { activeGoal: 0 };
+    this.state = { activeGoal: 0, getWorklistStart: 0 };
 
     // addListener returns a function to remove listener
     this.navigationRemoveListener = this.props.navigation.addListener('focus', () => {
       trackEvent('home_screen_focus');
+      this.setState({
+        getWorklistStart: moment().valueOf()
+      })
       this.props.getWorklistSummary();
+      this.setState({
+        getWorklistStart: moment().valueOf()
+      })
     });
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (props.navigation.isFocused()) {
-        validateSession(props.navigation).then(() => {
+        validateSession(props.navigation, props.route.name).then(() => {
           trackEvent('home_barcode_scanned', { barcode: scan.value, type: scan.type });
           props.setScannedEvent(scan);
           props.setManualScan(false);
@@ -79,11 +89,11 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
   componentDidUpdate(prevProps: Readonly<HomeScreenProps>, prevState: Readonly<HomeScreenState>, snapshot?: any) {
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
-      trackEvent('home_worklist_summary_api_error', { errorDetails: this.props.worklistSummaryApiState.error.message || this.props.worklistSummaryApiState.error });
+      trackEvent('home_worklist_summary_api_error', { errorDetails: this.props.worklistSummaryApiState.error.message || JSON.stringify(this.props.worklistSummaryApiState.error), duration: moment().valueOf()-this.state.getWorklistStart });
     }
 
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.result) {
-      trackEvent('home_worklist_summary_api_success');
+      trackEvent('home_worklist_summary_api_success',{ status: this.props.worklistSummaryApiState.result.status, duration: moment().valueOf()-this.state.getWorklistStart });
     }
   }
 
@@ -177,7 +187,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         const onWorklistCardPress = () => {
           trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
           this.props.updateFilterExceptions([worklist.worklistType]);
-          validateSession(this.props.navigation).then(() => {
+          validateSession(this.props.navigation, this.props.route.name).then(() => {
             this.props.navigation.navigate(strings('WORKLIST.WORKLIST'));
           }).catch(() => {});
         };
