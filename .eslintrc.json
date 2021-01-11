@@ -71,10 +71,12 @@
     "no-useless-constructor": "off",
     "react/destructuring-assignment": 0,
     "no-plusplus": 0,
+    "no-unused-expressions": "off",
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-empty-function": 0,
     "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/ban-ts-ignore": 0
+    "@typescript-eslint/ban-ts-ignore": 0,
+    "@typescript-eslint/no-unused-expressions": ["error"]
   },
   "settings": {
     "import/resolver": {
