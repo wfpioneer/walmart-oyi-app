@@ -76,6 +76,7 @@
     "eslint-plugin-react-native": "^3.6.0",
     "jest": "^24.9.0",
     "jest-sonar-reporter": "^2.0.0",
+    "jest-transform-stub": "^2.0.0",
     "metro-react-native-babel-preset": "^0.58.0",
     "prettier": "^2.0.2",
     "react-test-renderer": "16.11.0",
@@ -93,6 +94,12 @@
       "json",
       "node"
     ],
+    "setupFiles": [
+      "<rootDir>/jest/setup.js"
+    ],
+    "transform": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+    },
     "testResultsProcessor": "jest-sonar-reporter"
   }
 }
