@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrintQueueScreen renders the default snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "paddingVertical": 28,
+    }
+  }
+>
+  <IconButton
+    backgroundColor="#eeeeee"
+    disabled={true}
+    height={250}
+    icon={
+      <mockConstructor
+        color="#9e9e9e"
+        name="printer"
+        size={100}
+      />
+    }
+    radius={250}
+    style={Object {}}
+    type={1}
+    width={250}
+  />
+  <Text
+    style={
+      Object {
+        "color": "#616161",
+        "marginVertical": 16,
+      }
+    }
+  >
+    [missing "en.PRINT.EMPTY_LIST" translation]
+  </Text>
+</View>
+`;
+
+exports[`PrintQueueScreen renders the print queue with 1 item in it 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Component
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={true}
+  >
+    <PrintQueueEdit
+      itemIndexToEdit={0}
+      setItemIndexToEdit={[MockFunction]}
+    />
+  </Component>
+  <ScrollViewMock
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "marginHorizontal": 18,
+          "marginVertical": 8,
+        }
+      }
+    >
+      <Text>
+        1 [missing "en.PRINT.TOTAL_ITEMS" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#9e9e9e",
+          "borderBottomWidth": 1,
+          "paddingHorizontal": 12,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+              "paddingBottom": 6,
+              "paddingTop": 12,
+            },
+            Object {},
+          ]
+        }
+      >
+        <Image
+          source={
+            Object {
+              "testUri": "../../../src/assets/images/sams_logo.jpeg",
+            }
+          }
+          style={
+            Object {
+              "height": 65,
+              "resizeMode": "stretch",
+              "width": 65,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "paddingLeft": 8,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingBottom": 8,
+                "paddingRight": 14,
+              }
+            }
+          >
+            Test item
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "paddingTop": 4,
+              }
+            }
+          >
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.X" translation]
+          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#616161",
+                  "flex": 3,
+                }
+              }
+            >
+              [missing "en.PRINT.COPIES" translation]: 1
+            </Text>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                }
+              }
+            >
+              <IconButton
+                backgroundColor="#0071e9"
+                disabled={false}
+                height={45}
+                icon={
+                  <mockConstructor
+                    color="#616161"
+                    name="pencil"
+                    size={22}
+                  />
+                }
+                onPress={[Function]}
+                radius={5}
+                style={Object {}}
+                type={3}
+                width={-1}
+              />
+              <IconButton
+                backgroundColor="#0071e9"
+                disabled={false}
+                height={45}
+                icon={
+                  <mockConstructor
+                    color="#616161"
+                    name="delete"
+                    size={22}
+                  />
+                }
+                onPress={[Function]}
+                radius={5}
+                style={Object {}}
+                type={3}
+                width={-1}
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </ScrollViewMock>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "elevation": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 20,
+        "paddingHorizontal": 4,
+        "paddingTop": 8,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 6,
+        }
+      }
+      title="[missing \\"en.PRINT.PRINT_ALL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
