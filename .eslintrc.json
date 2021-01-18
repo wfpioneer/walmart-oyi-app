@@ -42,6 +42,7 @@
     ],
     "class-methods-use-this": "off",
     "react/jsx-boolean-value": "off",
+    "react/jsx-no-props-spreading": "off",
     "react/no-did-update-set-state": ["off", { "allow": ["warn"] }],
     "sort-imports": ["error", {
       "ignoreCase": false,

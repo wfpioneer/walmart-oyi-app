@@ -10,6 +10,7 @@ import ActionSheet from 'react-native-action-sheet';
 import WMSSO from 'react-native-wmsso';
 import { StackActions } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Config from 'react-native-config';
 import Home from '../screens/Home/Home';
 import COLOR from '../themes/Color';
 import styles from './HomeNavigator.style';
@@ -19,8 +20,7 @@ import { hideActivityModal, showActivityModal } from '../state/actions/Modal';
 import StyleGuide from '../screens/StyleGuide/StyleGuide';
 import { setManualScan } from '../state/actions/Global';
 import { trackEvent } from '../utils/AppCenterTool';
-import {openCamera} from "../utils/scannerUtils";
-import Config from 'react-native-config';
+import { openCamera } from '../utils/scannerUtils';
 
 interface HomeNavigatorComponentProps {
   logoutUser: Function;
@@ -94,7 +94,7 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
     }
     if (buttonIndex === 1) {
       props.showActivityModal();
-      trackEvent('user_sign_out', { lastPage: "Home"});
+      trackEvent('user_sign_out', { lastPage: 'Home' });
       WMSSO.signOutUser().then(() => {
         props.navigation.replace('Login');
         props.logoutUser();
@@ -128,7 +128,7 @@ const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: F
 );
 
 const renderCamButton = () => (
-  <TouchableOpacity onPress={() => { openCamera() }}>
+  <TouchableOpacity onPress={() => { openCamera(); }}>
     <View style={styles.camButton}>
       <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
     </View>

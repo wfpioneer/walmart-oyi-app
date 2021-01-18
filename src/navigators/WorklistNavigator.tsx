@@ -60,12 +60,10 @@ export const WorklistNavigator = () => {
   const navigation = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
 
-  useEffect(() => {
-    return navigation.addListener('focus', () => {
-      trackEvent('worklist_items_api_call');
-      dispatch(getWorklist());
-    });
-  }, [navigation]);
+  useEffect(() => navigation.addListener('focus', () => {
+    trackEvent('worklist_items_api_call');
+    dispatch(getWorklist());
+  }), [navigation]);
 
   const menu = (
     <FilterMenu />
@@ -79,8 +77,7 @@ export const WorklistNavigator = () => {
         toValue: value,
         friction: 8,
         useNativeDriver: true
-      })
-      }
+      })}
     >
       <Stack.Navigator
         headerMode="float"

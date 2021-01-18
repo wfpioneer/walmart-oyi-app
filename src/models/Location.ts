@@ -1,4 +1,4 @@
-export default interface Location {
+interface Location {
   zoneId: number;
   aisleId: number;
   sectionId: number;
@@ -8,4 +8,6 @@ export default interface Location {
   locationName: string;
   type: string;
   typeNbr: number;
-};
+}
+
+export default Location;

@@ -60,8 +60,7 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
           <TouchableOpacity style={styles.trashCan} onPress={onDeleteClick}>
             <MaterialCommunityIcons name="trash-can" size={20} color={COLOR.BLACK} />
           </TouchableOpacity>
-        )
-        }
+        )}
       </TouchableOpacity>
     );
   };

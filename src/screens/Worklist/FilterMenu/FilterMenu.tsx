@@ -18,6 +18,7 @@ import {
 import { strings } from '../../../locales';
 import FullExceptionList from '../FullExceptionList';
 import { trackEvent } from '../../../utils/AppCenterTool';
+import FilterListItem from '../../../models/FilterListItem';
 
 interface MenuCardProps {
   title: string;
@@ -75,7 +76,7 @@ export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number; ca
   );
 };
 
-export const renderExceptionFilterCard = (listItem: { item: { value: string; display: string; selected: boolean } }, dispatch: any) => {
+export const renderExceptionFilterCard = (listItem: { item: FilterListItem }, dispatch: any) => {
   const { item } = listItem;
   const onItemPress = () => {
     trackEvent('worklist_update_filter_exceptions', { exception: item.value });
