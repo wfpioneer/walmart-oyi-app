@@ -2,18 +2,16 @@ import React, {
   RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, BackHandler, Modal, Platform, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, Modal, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import _ from 'lodash';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { addToPicklist, getItemDetails, noAction } from '../../state/actions/saga';
-
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
@@ -40,40 +38,58 @@ const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
-  const completeApi = useTypedSelector(state => state.async.noAction);
+  const completeItemApi = useTypedSelector(state => state.async.noAction);
   const { userId } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
   const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
+  const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
   const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [apiStart, setApiStart] = useState(0);
 
+  // Scanned Item Event Listener
   useEffect(() => {
     if (navigation.isFocused()) {
-      validateSession(navigation).then(() => {
+      validateSession(navigation, route.name).then(() => {
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
+        setApiStart(moment().valueOf());
         dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
         trackEvent('item_details_api_call', { barcode: scannedEvent.value });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
         dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
-      }).catch(() => {});
+      }).catch(() => { trackEvent('session_timeout', { user: userId }); });
     }
   }, [scannedEvent]);
 
+  // Get Item Details API
   useEffect(() => {
     if (error) {
-      trackEvent('item_details_api_failure', { barcode: scannedEvent.value });
+      trackEvent('item_details_api_failure',
+        {
+          barcode: scannedEvent.value,
+          errorDetails: error.message || JSON.stringify(error),
+          duration: moment().valueOf() - apiStart
+        });
     }
 
     if (_.get(result, 'status') === 204) {
-      trackEvent('item_details_api_not_found', { barcode: scannedEvent.value });
+      trackEvent('item_details_api_not_found',
+        { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
     }
 
     if (_.get(result, 'status') === 200) {
-      trackEvent('item_details_api_success', { barcode: scannedEvent.value });
+      trackEvent('item_details_api_success', { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
+    }
+    if (isRefreshing) {
+      setIsRefreshing(false);
+    }
+    if (isRefreshing) {
+      setIsRefreshing(false);
     }
   }, [error, result]);
 
@@ -83,6 +99,7 @@ const ReviewItemDetails = () => {
     ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
     : undefined;
 
+  // Set Item Details
   useEffect(() => {
     if (itemDetails) {
       dispatch(resetLocations());
@@ -99,43 +116,37 @@ const ReviewItemDetails = () => {
 
   // Barcode event listener effect
   useEffect(() => {
-    if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
-      const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
-        if (navigation.isFocused()) {
-          validateSession(navigation).then(() => {
-            trackEvent('item_details_scan', { value: scan.value, type: scan.type });
-            trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
-            dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
-            dispatch(setManualScan(false));
-          }).catch(() => {});
-        }
-      });
-      return () => {
-        // eslint-disable-next-line no-unused-expressions
-        scanSubscription?.remove();
-      };
-    }
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
-        validateSession(navigation).then(() => {
-          dispatch(setScannedEvent(scan));
-        }).catch(() => {});
+        validateSession(navigation, route.name).then(() => {
+          if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
+            trackEvent('item_details_scan', { value: scan.value, type: scan.type });
+            trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
+            setApiStart(moment().valueOf());
+            dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
+            dispatch(setManualScan(false));
+          } else {
+            dispatch(setScannedEvent(scan));
+          }
+        }).catch(() => { trackEvent('session_timeout', { user: userId }); });
       }
     });
     return () => {
-      // eslint-disable-next-line no-unused-expressions
-      scanSubscription?.remove();
+      scanSubscription.remove();
     };
   }, [itemDetails, actionCompleted]);
 
+  // Complete Item Details API
   useEffect(() => {
     // on api success
-    if (completeApiInProgress && completeApi.isWaiting === false && completeApi.result) {
-      if (_.get(completeApi.result, 'status') === 204) {
-        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails) });
+    if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.result) {
+      if (_.get(completeItemApi.result, 'status') === 204) {
+        trackEvent('item_details_action_completed_api_failure_scan_no_match',
+          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEvent('item_details_action_completed_api_success', { itemDetails: JSON.stringify(itemDetails) });
+        trackEvent('item_details_action_completed_api_success',
+          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         setCompleteApiInProgress(false);
         dispatch(setActionCompleted());
         navigation.goBack();
@@ -144,12 +155,14 @@ const ReviewItemDetails = () => {
     }
 
     // on api failure
-    if (completeApiInProgress && completeApi.isWaiting === false && completeApi.error) {
-      if (completeApi.error === COMPLETE_API_409_ERROR) {
-        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails) });
+    if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.error) {
+      if (completeItemApi.error === COMPLETE_API_409_ERROR) {
+        trackEvent('item_details_action_completed_api_failure_scan_no_match',
+          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEvent('item_details_action_completed_api_failure', { itemDetails: JSON.stringify(itemDetails) });
+        trackEvent('item_details_action_completed_api_failure',
+          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
       setCompleteApiInProgress(false);
@@ -157,13 +170,13 @@ const ReviewItemDetails = () => {
     }
 
     // on api submission
-    if (!completeApiInProgress && completeApi.isWaiting) {
+    if (!completeApiInProgress && completeItemApi.isWaiting) {
       trackEvent('item_details_action_completed_api_call', { itemDetails: JSON.stringify(itemDetails) });
       return setCompleteApiInProgress(true);
     }
 
     return undefined;
-  }, [completeApi]);
+  }, [completeItemApi]);
 
   useFocusEffect(
     () => {
@@ -180,7 +193,6 @@ const ReviewItemDetails = () => {
             return true;
           }
         }
-
         dispatch(setManualScan(false));
         return false;
       };
@@ -191,6 +203,7 @@ const ReviewItemDetails = () => {
     }
   );
 
+  // Get Item Details Error
   if (error) {
     return (
       <View style={styles.safeAreaView}>
@@ -201,6 +214,7 @@ const ReviewItemDetails = () => {
           <TouchableOpacity
             style={styles.errorButton}
             onPress={() => {
+              setApiStart(moment().valueOf());
               trackEvent('item_details_api_retry', { barcode: scannedEvent.value });
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
@@ -217,7 +231,7 @@ const ReviewItemDetails = () => {
       <View style={styles.safeAreaView}>
         {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
-          <MaterialIcon name="info" size={40} color={COLOR.DISABLED_BLUE} />
+          <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
           <Text style={styles.errorText}>{strings('ITEM.ITEM_NOT_FOUND')}</Text>
         </View>
       </View>
@@ -237,26 +251,26 @@ const ReviewItemDetails = () => {
   }
 
   const handleUpdateQty = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       trackEvent('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
       setOhQtyModalVisible(true);
-    }).catch(() => {});
+    }).catch(() => { trackEvent('session_timeout', { user: userId }); });
   };
 
   const handleLocationAction = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       trackEvent('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
       navigation.navigate('LocationDetails');
-    }).catch(() => {});
+    }).catch(() => { trackEvent('session_timeout', { user: userId }); });
   };
 
   const handleAddToPicklist = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       trackEvent('item_details_add_to_picklist_click', { itemDetails: JSON.stringify(itemDetails) });
       dispatch(addToPicklist({
         itemNumber: itemDetails.itemNbr
       }));
-    }).catch(() => {});
+    }).catch(() => { trackEvent('session_timeout', { user: userId }); });
   };
 
   const toggleSalesGraphView = () => {
@@ -265,11 +279,22 @@ const ReviewItemDetails = () => {
     setIsSalesMetricsGraphView(prevState => !prevState);
   };
 
+  const handleRefresh = () => {
+    validateSession(navigation, route.name).then(() => {
+      setIsRefreshing(true);
+      setApiStart(moment().valueOf());
+      trackEvent('refresh_item_details', { itemNumber: itemDetails.itemNbr });
+      dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+      trackEvent('item_details_api_call', { itemNumber: itemDetails.itemNbr });
+      dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }));
+    }).catch(() => { trackEvent('session_timeout', { user: userId }); });
+  };
+
   const renderOHQtyComponent = () => {
     if (pendingOnHandsQty === -999) {
       return (
-        <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={styles.onHandsContainer}>
+          <View style={styles.onHandsView}>
             <Text>{strings('ITEM.ON_HANDS')}</Text>
             <Text>{itemDetails.onHandsQty}</Text>
           </View>
@@ -278,12 +303,12 @@ const ReviewItemDetails = () => {
     }
 
     return (
-      <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      <View style={styles.onHandsContainer}>
+        <View style={styles.onHandsView}>
           <Text>{strings('ITEM.ON_HANDS')}</Text>
           <Text>{pendingOnHandsQty}</Text>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
+        <View style={styles.mgrApprovalView}>
           <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={{ paddingRight: 6 }} />
           <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
         </View>
@@ -352,8 +377,7 @@ const ReviewItemDetails = () => {
               height={28}
               onPress={handleLocationAction}
             />
-          )
-        }
+          )}
       </View>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.RESERVE')}</Text>
@@ -369,10 +393,9 @@ const ReviewItemDetails = () => {
               height={28}
               onPress={handleLocationAction}
             />
-          )
-        }
+          )}
       </View>
-      <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingVertical: 8 }}>
+      <View style={styles.renderPickListContatiner}>
         {renderAddPicklistButton()}
       </View>
     </View>
@@ -389,10 +412,10 @@ const ReviewItemDetails = () => {
       return null;
     }
 
-    if (completeApi.isWaiting) {
+    if (completeItemApi.isWaiting) {
       return (
         <ActivityIndicator
-          animating={completeApi.isWaiting}
+          animating={completeItemApi.isWaiting}
           hidesWhenStopped
           color={COLOR.MAIN_THEME_COLOR}
           size="large"
@@ -406,14 +429,15 @@ const ReviewItemDetails = () => {
         <TouchableOpacity
           style={styles.scanForNoActionButton}
           onPress={() => {
-            validateSession(navigation).then(() => {
-              trackEvent('item_details_scan_for_no_action_button_click', {itemDetails: JSON.stringify(itemDetails)});
+            validateSession(navigation, route.name).then(() => {
+              trackEvent('item_details_scan_for_no_action_button_click', { itemDetails: JSON.stringify(itemDetails) });
               return dispatch(setManualScan(!isManualScanEnabled));
             }).catch(() => {
+              trackEvent('session_timeout', { user: userId });
             });
           }}
         >
-          <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE}/>
+          <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
           <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
         </TouchableOpacity>
       );
@@ -421,7 +445,7 @@ const ReviewItemDetails = () => {
 
     return (
       <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
-        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE}/>
+        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
         <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
       </TouchableOpacity>
     );
@@ -441,7 +465,11 @@ const ReviewItemDetails = () => {
           exceptionType={itemDetails.exceptionType}
         />
       </Modal>
-      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container}>
+      <ScrollView
+        ref={scrollViewRef}
+        contentContainerStyle={styles.container}
+        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}
+      >
         {isWaiting && (
         <ActivityIndicator
           animating={isWaiting}
@@ -479,13 +507,10 @@ const ReviewItemDetails = () => {
                   color={COLOR.GREY_700}
                   style={{ marginLeft: -4 }}
                 />
-)}
+              )}
               title={strings('ITEM.REPLENISHMENT')}
             >
-              <View style={{
-                flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 8, paddingVertical: 16
-              }}
-              >
+              <View style={styles.itemOnOrderView}>
                 <Text>{strings('ITEM.ON_ORDER')}</Text>
                 <Text>{itemDetails.replenishment.onOrder}</Text>
               </View>
@@ -508,8 +533,7 @@ const ReviewItemDetails = () => {
               <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
             </SFTCard>
           </View>
-          )
-        }
+          )}
       </ScrollView>
       { renderScanForNoActionButton() }
     </View>

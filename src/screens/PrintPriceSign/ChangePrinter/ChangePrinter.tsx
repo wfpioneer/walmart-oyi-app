@@ -29,8 +29,7 @@ export const ChangePrinter = () => {
     });
 
     return () => {
-      // eslint-disable-next-line no-unused-expressions
-      scannedSubscription?.remove();
+      scannedSubscription.remove();
       return undefined;
     };
   }, []);

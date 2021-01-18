@@ -32,7 +32,7 @@ export default {
     UPDATED: 'Actualizar',
     DAILY: 'Diario',
     WEEKLY: 'Semanal',
-    WEEK: 'Semanal',
+    WEEK: 'Semana',
     TOTAL: 'Total',
     DEFAULT: 'Default',
     CLUB: 'Club',
@@ -42,8 +42,9 @@ export default {
     VERSION: 'Versión'
   },
   HOME: {
-    OWN_YOUR_INVENTORY: 'Sea dueño de su inventario',
-    WELCOME: 'Bienvenidos',
+    OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
+    WORKLIST_API_ERROR: 'Hubo un error al mostrar el resumen de las Listas de Trabajo. \nPor favor inténtalo de nuevo.',
+    WELCOME: 'Bienvenido',
     HOME: 'Casa',
     STYLE_GUIDE: 'Guía de estilo',
     CHANGE_LANGUAGE: 'Cambiar idioma',
@@ -68,13 +69,13 @@ export default {
     QUANTITY: 'Cantidad',
     ON_HANDS: 'Existencia',
     ON_ORDER: 'Ordenado',
-    REPLENISHMENT: 'Reposición',
+    REPLENISHMENT: 'Resurtido',
     PENDING_MGR_APPROVAL: 'Pendiente de aprovación de gerente',
     LOCATION: 'Ubicación',
-    TO_PICKLIST: 'Add to Droplist',
-    RESERVE_NEEDED: 'La ubicación de add to Droplist',
-    ADDED_TO_PICKLIST: 'Elemento agregado a la lista de selección',
-    ADDED_TO_PICKLIST_ERROR: 'El envío de la lista de selección no se realizó correctamente. Inténtalo de nuevo.',
+    TO_PICKLIST: 'a Lista de Pickeo',
+    RESERVE_NEEDED: 'La ubicación de agregar a Lista de Pickeo',
+    ADDED_TO_PICKLIST: 'Elemento agregado a la lista de Pickeo',
+    ADDED_TO_PICKLIST_ERROR: 'El envío de la lista de Pickeo no se realizó correctamente. Inténtalo de nuevo.',
     ITEM_NOT_FOUND: 'No se encontró el elemento escaneado.',
     FLOOR: 'Piso',
     RESERVE: 'Bodega',
@@ -91,7 +92,10 @@ export default {
     NO_SIGN_PRINTED: 'Ningún cartel impreso',
     NO_SIGN_PRINTED_DETAILS: 'Artículo no completado porque nunca imprimiste un nuevo cartel',
     NO_FLOOR_LOCATION: 'Sin ubicación en el piso',
-    NO_FLOOR_LOCATION_DETAILS: 'El artículo no se completó porque nunca agregó una ubicación en el piso'
+    NO_FLOOR_LOCATION_DETAILS: 'El artículo no se completó porque nunca agregó una ubicación en el piso',
+    ACTION_COMPLETE_ERROR: 'Error completando la acción',
+    ACTION_COMPLETE_ERROR_DETAILS: 'Hubo un error complentando la acción. Por favor inténtalo de nuevo.',
+    WEEKLY_AVG_SALES: 'Ventas Semanales'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -116,7 +120,8 @@ export default {
     CHANGE_PRINTER: 'Cambiar impresora',
     MAC_ADDRESS: 'Ingrese o escanee la dirección MAC',
     MAC_ADDRESS_ERROR: 'La dirección MAC suele ser de 12 números',
-    PORTABLE_PRINTER: 'Impresora portátil'
+    PORTABLE_PRINTER: 'Impresora portátil',
+    PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.'
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',

@@ -3,7 +3,7 @@ import {
   ActivityIndicator, ScrollView, Text, View
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import FAB from 'react-native-fab';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,13 +14,14 @@ import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { deleteLocationFromExisting, isUpdating } from '../../state/actions/Location';
+import { deleteLocationFromExisting, isUpdating, setFloorLocations, setReserveLocations } from '../../state/actions/Location';
 import { deleteLocation } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 
 const LocationDetails = () => {
   const navigation = useNavigation();
+  const route = useRoute();
   const dispatch = useDispatch();
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
   const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
@@ -33,13 +34,15 @@ const LocationDetails = () => {
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
   });
-
+  const locations = useTypedSelector((state) => state.async.getLocation)
+  
   useEffect(() => {
     if (needsUpdate) {
       dispatch(isUpdating(false));
     }
   }, [needsUpdate]);
 
+  // Delete Location API
   useEffect(() => {
     // on api success
     if (apiInProgress && delAPI.isWaiting === false && delAPI.result) {
@@ -53,7 +56,11 @@ const LocationDetails = () => {
 
     // on api failure
     if (apiInProgress && delAPI.isWaiting === false && delAPI.error) {
-      trackEvent('location_delete_location_api_failure');
+      trackEvent('location_delete_location_api_failure', {
+        upcNbr: delAPI.value.upc,
+        sectionId: delAPI.value.sectionId,
+        errorDetails: delAPI.error.message || delAPI.error
+      });
       setAPIInProgress(false);
       return setError(true);
     }
@@ -67,15 +74,51 @@ const LocationDetails = () => {
     return undefined;
   }, [delAPI]);
 
+  // Get Location Details API
+  useEffect(() => {
+    // on api success
+    if (apiInProgress && locations.isWaiting === false && locations.result) {
+      const locDetails = (locations.result && locations.result.data);
+      trackEvent('location_get_location_api_success');
+      if (locDetails.location) {
+        if (locDetails.location.floor) dispatch(setFloorLocations(locDetails.location.floor));
+        if (locDetails.location.reserve) dispatch(setReserveLocations(locDetails.location.reserve));
+      }
+      setAPIInProgress(false);
+      dispatch(isUpdating(false));
+      return;
+    }
+
+    // on api failure
+    if (apiInProgress && locations.isWaiting === false && locations.error) {
+      trackEvent('location_get_location_api_failure',{
+        itemNbr: itemDetails.itemNbr,
+        upcNbr: itemDetails.upcNbr,
+        errorDetails: locations.error.message || locations.error
+      });
+      setAPIInProgress(false);
+      return setError(true);
+    }
+
+    // on api submission
+    if (!apiInProgress && locations.isWaiting) {
+      trackEvent('location_get_location_api_start');
+      setError(false);
+      return setAPIInProgress(true);
+    }
+
+    return undefined;
+  }, [locations]);
+
   const handleEditLocation = (loc: Location, locIndex: number) => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       trackEvent('location_edit_location_click', { location: JSON.stringify(loc), index: locIndex });
       navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
     }).catch(() => {});
   };
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       trackEvent('location_delete_location_click', { location: JSON.stringify(loc), index: locIndex });
       setLocToConfirm({
         locationName: loc.locationName, locationArea: 'floor', locationIndex: locIndex, locationTypeNbr: loc.typeNbr
@@ -106,11 +149,22 @@ const LocationDetails = () => {
   );
 
   const addNewLocationNav = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, route.name).then(() => {
       trackEvent('location_fab_button_click');
       navigation.navigate('AddLocation');
     }).catch(() => {});
   };
+  if (locations.isWaiting){
+    return(
+      <ActivityIndicator
+      animating={locations.isWaiting}
+      hidesWhenStopped
+      color={COLOR.MAIN_THEME_COLOR}
+      size="large"
+      style={styles.activityIndicator}
+    />
+    )
+  }
   return (
     <>
       <Modal isVisible={displayConfirmation}>

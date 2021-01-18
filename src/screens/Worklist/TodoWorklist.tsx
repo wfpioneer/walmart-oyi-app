@@ -16,7 +16,7 @@ export const TodoWorklist = () => {
     }
 
     if (error) {
-      trackEvent('worklist_items_api_error');
+      trackEvent('worklist_items_api_error', {errorDetails: error.message || error});
     }
   }, [result, error]);
 

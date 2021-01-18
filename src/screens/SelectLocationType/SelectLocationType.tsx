@@ -5,12 +5,13 @@ import {
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../../components/buttons/Button';
 import EnterLocation from '../../components/enterlocation/EnterLocation';
 import Location from '../../models/Location';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { addLocation, editLocation } from '../../state/actions/saga';
+import { addLocation, editLocation, getLocationDetails } from '../../state/actions/saga';
 import { addLocationToExisting, editExistingLocation, isUpdating } from '../../state/actions/Location';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
@@ -39,6 +40,7 @@ const SelectLocationType = () => {
   const [loc, setLoc] = useState('');
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
+  const [apiStart, setApiStart] = useState(0);
   const addAPI = useTypedSelector(state => state.async.addLocation);
   const editAPI = useTypedSelector(state => state.async.editLocation);
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
@@ -90,13 +92,15 @@ const SelectLocationType = () => {
     };
   }, []);
 
+  // Add Location API
   useEffect(() => {
     // on api success
     if (apiInProgress && addAPI.isWaiting === false && addAPI.result) {
-      trackEvent('select_location_add_api_success');
+      trackEvent('select_location_add_api_success', { duration: moment().valueOf()-apiStart });
       dispatch(addLocationToExisting(loc, parseInt(type, 10), 'floor'));
       if (!actionCompleted && itemLocDetails.exceptionType === 'NSFL') dispatch(setActionCompleted());
       setAPIInProgress(false);
+      dispatch(getLocationDetails({itemNbr:itemLocDetails.itemNbr}));
       navigation.navigate('LocationDetails');
       dispatch(isUpdating(true));
       return undefined;
@@ -104,7 +108,12 @@ const SelectLocationType = () => {
 
     // on api failure
     if (apiInProgress && addAPI.isWaiting === false && addAPI.error) {
-      trackEvent('select_location_add_api_failure');
+      trackEvent('select_location_add_api_failure', {
+        upcNbr: addAPI.value.upc,
+        sectionId: addAPI.value.sectionId,
+        errorDetails: addAPI.error.message || JSON.stringify(addAPI.error),
+        duration: moment().valueOf()-apiStart
+      });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
     }
@@ -118,12 +127,14 @@ const SelectLocationType = () => {
     return undefined;
   }, [addAPI]);
 
+  // Edit Location API
   useEffect(() => {
     // on api success
     if (apiInProgress && editAPI.isWaiting === false && editAPI.result) {
-      trackEvent('select_location_edit_api_success');
+      trackEvent('select_location_edit_api_success', { duration: moment().valueOf()-apiStart });
       dispatch(editExistingLocation(loc, parseInt(type, 10), 'floor', currentLocation.locIndex));
       setAPIInProgress(false);
+      dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
       navigation.navigate('LocationDetails');
       dispatch(isUpdating(true));
       return undefined;
@@ -131,7 +142,13 @@ const SelectLocationType = () => {
 
     // on api failure
     if (apiInProgress && editAPI.isWaiting === false && editAPI.error) {
-      trackEvent('select_location_edit_api_failure');
+      trackEvent('select_location_edit_api_failure', {
+        upcNbr: editAPI.value.upc,
+        sectionId: editAPI.value.sectionId,
+        newSectionId: editAPI.value.newSectionId,
+        errorDetails: editAPI.error.message || editAPI.error,
+        duration: moment().valueOf()-apiStart
+      });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
     }
@@ -146,7 +163,7 @@ const SelectLocationType = () => {
   }, [editAPI]);
 
   const modelOnSubmit = (value: string) => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, routeSource).then(() => {
       manualScan(value);
       dispatch(setManualScan(false));
       setInputLocation(false);
@@ -154,13 +171,14 @@ const SelectLocationType = () => {
   };
 
   const onSubmit = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, routeSource).then(() => {
       if (routeSource === 'AddLocation') {
         setError({ error: false, message: '' });
         const sameLoc = floorLocations.find((location: Location) => location.locationName === loc && location.typeNbr.toString() === type);
         if (!sameLoc) {
           trackEvent('select_location_add_api_call',
             { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
+          setApiStart(moment().valueOf());
           dispatch(addLocation({
             upc: itemLocDetails.upcNbr,
             sectionId: loc,
@@ -176,6 +194,7 @@ const SelectLocationType = () => {
         if (!sameLoc) {
           trackEvent('select_location_edit_api_call',
             { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
+          setApiStart(moment().valueOf());
           dispatch(editLocation({
             upc: itemLocDetails.upcNbr,
             sectionId: currentLocation.locationName,
@@ -192,7 +211,7 @@ const SelectLocationType = () => {
   };
 
   const handleManualScan = () => {
-    validateSession(navigation).then(() => {
+    validateSession(navigation, routeSource).then(() => {
       setInputLocation(true);
       dispatch(setManualScan(true));
     }).catch(() => {});
