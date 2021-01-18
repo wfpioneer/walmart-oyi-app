@@ -1,0 +1,29 @@
+schemaVersion: 1.0.0
+notify:
+  slack:
+    channelName: intl_sams_oyi_ops_alerts
+applications:
+  - name: OyiAPP
+    key: OYI_APP
+    description: The client-side of the OYI application.
+    organization: intl-sams-tech
+    companyCatalog: true
+    businessCriticality: MAJOR
+    members:
+      - homeoffice\istanse
+      - homeoffice\r0m08be
+      - homeoffice\vn50j9j
+      - homeoffice\a2nair
+      - homeoffice\vn50rhc
+      - homeoffice\vn50wd3
+      - homeoffice\vn50pyy
+      - homeoffice\vn50pz2
+      - homeoffice\t0a009g
+      - homeoffice\vn80416
+    environments:
+      - name: dev
+        type: DEVELOPMENT
+        description: UI dev environment for oyi-app
+        consumerIdInfos:
+          - consumerId: 134c434a-425d-4f9e-8825-99b7ecea728c
+            publicKey: Y5uVT6n2cP084AFMFoe3K4AsPRX8X45s4n4jZ9prTSz5XUP2oloTp2SWOaTFcfkmZxcVAhFw79ONoT2HQZXjfzK1IfkLeZvPlXhTHmHtorVf+WMnPTG7SWvxnkUSLpYgUqA5CGxiq0oQY28n/aig3feDwPmAa+UMAkY0THz6n1e6s+6CG9XXV3QrJYHL/dBdaze2XxZABy18Pn8kHDzALSi2kU+gEf1r+bQ7CbzHLmj43O+GGlQf1f8FwWXEIdcl4m/Toe1HBHHnD8uOnjqIJeQMvTsGdFDA17y7TBx6FdrGsgq+m68uzDChdYcf0BGJkGoXN5jnNrsaVIBM1LzJLyy+vTtp6MyxIekJFChZ/PcQPDr+BZgmjIGS5Mra+t/7XWbowfU4Gv7J1z9KYZ43szMAf8UG2/OczkQvJeh05VQ4RLGknsGNDPQsVExHULZZ4bwvLOgiIWRXVgb+jTNPu/HAKNiuSadxn6btlVGxpusLRf/6DxZd2/8AOpsE4JNXPtGPUBxNmG7giOs/xOsEKeB0frVzTMtkbOEujMcnFuwqTCsQY1Lpq+Ft/paFvUfqdBFHys1Eo/93IqfRqrIKXnsNtA2ohxhV6xrtF2BHdrbg7qXgHFsymxOuNr1ynNS/AQRjcwb2zsEfuaM44rg+opZgWdqDghA/KhdPBNRE3UgrPQsELIVeoFUmQHySDhEtpslBrkiRWZDLVsRDoSDF3MQNlhZF+ekSWZmQemEOoGu1PKQkmOTkMRkKJjy0j9G43evRrFBVGfmWRXKiVNsL/y6Fz6edPDdJKQLL2sAMTPYf/lCPDUuWY9OwnnJJqhrp1kwb+nDrkCKrqLFLIfQgOX1aa7rkNK9vWIVfK33feFTYX8lGPibNAMojYa9Xind99ALhl4KV7sQYrEuSR9dVUNRMkQxGbJFAI6kMOdtOXNJIk1ixyuo6yb/JkY3wGA1JBMKhTkIalascj3UGKAe45iKAVD8ant6sD00P8Ua/O8V8kcHl85HGwzP2YJEV7638f6RMgrNzQqvEFgD9WxriArZLnSEjOukI2HVs1o4M7v/BU5z7BXXcem7bWRYe+m3mk3SFNIbGmQwxEJ9MJ8fZ0z+Y2C201DnVSYAaLPnHvD8F7lHxyCK8u44ltxM81xiX4YYCzKYcIn1a8WKt6xmUGJUMPsaLVGhSSLxWjQU6k2RL53Yd8n8r88T6tjHcC/O/Icmw9ExKKqqS/qQhNWDY1VU44QvCPHpbOQCkwF2hoojwSCjheBFVLi2SV3LZDGKTttwn2v0CW8vqZRRvvYLqNrD+EyUk6oMYXX5jVvWKhi9dMi/yfvkes1zdZuziajcNxNwkjj7goXxB59ILn1+lBxA9vuMFR2O7j78V5VmPqIUsKIjtM66ckf/5xvBaTsMjYRY3JPPdZpAOMm3FoXiS9IeLqXo1IuOrAHdaC7e+sle/9gUfkHFW8Kp4e2zE3bem02MJgap8p5Dt1Z70FQE+GDutLam0G35lgLHKBQXrlPNf++l9Xxql0ob0yml78/V0vuRZKdIJ4EU8UXZYY1EoU9InbQciQD10GofhyV8I6EFkBbwyFmXFsjfqdtqHhHeC
