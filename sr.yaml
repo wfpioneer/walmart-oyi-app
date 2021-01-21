@@ -1,0 +1,29 @@
+schemaVersion: 1.0.0
+notify:
+  slack:
+    channelName: intl_sams_oyi_ops_alerts
+applications:
+  - name: OyiAPP
+    key: OYI_APP
+    description: The client-side of the OYI application.
+    organization: intl-sams-tech
+    companyCatalog: true
+    businessCriticality: MAJOR
+    members:
+      - homeoffice\istanse
+      - homeoffice\r0m08be
+      - homeoffice\vn50j9j
+      - homeoffice\a2nair
+      - homeoffice\vn50rhc
+      - homeoffice\vn50wd3
+      - homeoffice\vn50pyy
+      - homeoffice\vn50pz2
+      - homeoffice\t0a009g
+      - homeoffice\vn80416
+    environments:
+      - name: dev
+        type: DEVELOPMENT
+        description: Dev environment for oyi-app
+        consumerIdInfos:
+          - consumerId: 3b87ba30-529e-4cf7-983f-c3873edc6304
+            publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqxwbSxuOVi7Rupjc2caKhwwQQ+N0RxM5NuKa0zOlS3WdcSyMxmNLbiJO4bs4NW4fMHWIGIGE+BrfEv10/j85XIM0b2yUPKd8nBRT3eZGGSSrRzXPf6ui89ec4m8EfWTwFgk+YncqEnknP0+6c9YYCh/fbbmZbgEObtZAS2RjUUfHig/mh3ikKV1xfzL33CcpbKxCBTj2B0rIdbnoAK0uNKZit3hCy4yULKr1WjljzoGYCaNLS7rkQrKHZZ8bsq4Y5Ja8q3t9G1k2nmRc38WG21hRk5ABAS1Un4i+0KYFIxlNA8P854q+aBjszRIbK6bMS1oDk8bAUjBf79i5y+GKjwIDAQAB
