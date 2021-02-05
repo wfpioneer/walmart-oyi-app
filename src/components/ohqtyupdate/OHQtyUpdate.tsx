@@ -21,7 +21,8 @@ import { trackEvent } from '../../utils/AppCenterTool';
 interface OHQtyUpdateProps {
   ohQty: number;
   setOhQtyModalVisible: Function;
-  exceptionType?: string;
+  exceptionType?: string; // eslint-disable-line react/require-default-props
+  // eslint disabled above because the absence of this prop is used as an evaluator.
 }
 
 const OH_MIN = 0;

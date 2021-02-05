@@ -1,6 +1,6 @@
 import Location from './Location';
 
-export default interface ItemDetails {
+interface ItemDetails {
   image?: any;
   itemName: string;
   itemNbr: number;
@@ -38,4 +38,6 @@ export default interface ItemDetails {
       }
     ];
   };
-};
+}
+
+export default ItemDetails;

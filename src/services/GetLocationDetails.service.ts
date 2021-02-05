@@ -1,5 +1,5 @@
 import Request from './Request';
-import {Environment, getEnvironment} from '../utils/environment';
+import { Environment, getEnvironment } from '../utils/environment';
 
 export default class GetLocationDetailsService {
   public static getLocation(payload: {headers: object; itemNbr: number}) {
@@ -8,7 +8,7 @@ export default class GetLocationDetailsService {
       url: `${urls.orchestrationURL}/location/item/${payload.itemNbr}`,
       method: 'get',
       data: {},
-      headers: payload.headers,
+      headers: payload.headers
     });
   }
 }

@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Config from 'react-native-config';
 import COLOR from '../themes/Color';
 import ReviewItemDetails from '../screens/ReviewItemDetails/ReviewItemDetails';
 import { strings } from '../locales';
@@ -14,8 +15,7 @@ import styles from './ReviewItemDetailsNavigator.style';
 import LocationDetails from '../screens/LocationDetails/LocationDetails';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { showInfoModal } from '../state/actions/Modal';
-import {openCamera} from "../utils/scannerUtils";
-import Config from 'react-native-config';
+import { openCamera } from '../utils/scannerUtils';
 
 const Stack = createStackNavigator();
 
@@ -34,7 +34,7 @@ const ReviewItemDetailsNavigator = () => {
   );
 
   const renderCamButton = () => (
-    <TouchableOpacity onPress={() => { openCamera() }}>
+    <TouchableOpacity onPress={() => { openCamera(); }}>
       <View style={styles.camButton}>
         <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
       </View>

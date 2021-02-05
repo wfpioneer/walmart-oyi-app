@@ -25,7 +25,14 @@ interface HandlePrintProps {
   dispatch: any;
 }
 
-const renderPrintItem = (printQueue: PrintQueueItem[], setItemIndexToEdit: Function, dispatch: Function, navigation: Function, route: Function, validateSession: Function) => {
+const renderPrintItem = (
+  printQueue: PrintQueueItem[],
+  setItemIndexToEdit: Function,
+  dispatch: Function,
+  navigation: Function,
+  route: Function,
+  validateSession: Function
+) => {
   const handleEditAction = (index: number) => () => {
     setItemIndexToEdit(index);
   };
@@ -124,6 +131,8 @@ export const PrintQueueScreen = (
   props: PrintQueueScreenProps
 ) => {
   const {
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    // rule disabled because these vars are used, but not in a manner the linter recognizes.
     printQueue,
     selectedPrinter,
     printAPI,
@@ -152,7 +161,9 @@ export const PrintQueueScreen = (
 
     // on api failure
     if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
-      trackEventCall('print_queue_api_failure', { errorDetails: printAPI.error.message || JSON.stringify(printAPI.error), duration: moment().valueOf() - apiStart });
+      trackEventCall('print_queue_api_failure', {
+        errorDetails: printAPI.error.message || JSON.stringify(printAPI.error), duration: moment().valueOf() - apiStart
+      });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
