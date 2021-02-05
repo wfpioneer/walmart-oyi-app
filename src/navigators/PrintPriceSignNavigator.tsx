@@ -39,7 +39,7 @@ const PrintPriceSignNavigator = () => {
             // Shouldn't need to do this, but not showing on its own for some reason
             // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
             <HeaderBackButton
-              {...props} // eslint-disable-line react/jsx-props-no-spreading
+              {...props}
               onPress={navigateBack}
             />
           )
@@ -80,7 +80,7 @@ const PrintPriceSignNavigator = () => {
             // Shouldn't need to do this, but not showing on its own for some reason
             // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
             <HeaderBackButton
-              {...props} // eslint-disable-line react/jsx-props-no-spreading
+              {...props}
               onPress={navigateBack}
             />
           )
