@@ -137,7 +137,7 @@ const LocationDetails = () => {
     <>
       {locationList.map((loc: Location, index: number) => (
         <LocationDetailsCard
-          key={index}
+          key={loc.locationName}
           locationName={loc.locationName}
           locationType={loc.type}
           editAction={() => handleEditLocation(loc, index)}
@@ -153,16 +153,16 @@ const LocationDetails = () => {
       navigation.navigate('AddLocation');
     }).catch(() => {});
   };
-  if (locations.isWaiting){
-    return(
+  if (locations.isWaiting) {
+    return (
       <ActivityIndicator
-      animating={locations.isWaiting}
-      hidesWhenStopped
-      color={COLOR.MAIN_THEME_COLOR}
-      size="large"
-      style={styles.activityIndicator}
-    />
-    )
+        animating={locations.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
   }
   return (
     <>
@@ -181,8 +181,7 @@ const LocationDetails = () => {
               <Text style={styles.message}>
                 {error
                   ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
-                  : `${strings('LOCATION.DELETE_CONFIRMATION')}${locToConfirm.locationName}`
-                }
+                  : `${strings('LOCATION.DELETE_CONFIRMATION')}${locToConfirm.locationName}`}
               </Text>
               <View style={styles.buttonContainer}>
                 <Button
@@ -199,8 +198,7 @@ const LocationDetails = () => {
                 />
               </View>
             </>
-          )
-          }
+          )}
         </View>
       </Modal>
       <ScrollView>

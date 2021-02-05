@@ -20,7 +20,6 @@ enum Methods {
   PUT = 'put',
 }
 const TIMEOUT = 10000;
-const MAX_USERNAME_LENGTH = 8;
 
 class RequestDispatch {
   public service: AxiosInstance;

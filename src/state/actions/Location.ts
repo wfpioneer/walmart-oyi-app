@@ -38,7 +38,8 @@ export const addLocationToExisting = (locationName: string, locationTypeNbr: num
   }
 });
 
-export const editExistingLocation = (locationName: string, locationTypeNbr: number, locationArea: string, locIndex: number) => ({
+export const editExistingLocation = (locationName: string, locationTypeNbr: number, locationArea: string,
+  locIndex: number) => ({
   type: EDIT_EXISTING_LOCATION,
   payload: {
     locationName,
@@ -65,7 +66,7 @@ export const resetLocations = () => ({
   type: RESET_LOCATIONS
 });
 
-export const getLocationDetails = (itemNbr: number) =>({
+export const getLocationDetails = (itemNbr: number) => ({
   type: GET_LOCATION_DETAILS,
   payload: {
     itemNbr
