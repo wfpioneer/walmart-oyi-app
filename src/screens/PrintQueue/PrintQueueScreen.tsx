@@ -162,9 +162,7 @@ export const PrintQueueScreen = (
     // on api failure
     if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
       trackEventCall('print_queue_api_failure', {
-        errorDetails: printAPI.error.message
-        || JSON.stringify(printAPI.error),
-        duration: moment().valueOf() - apiStart
+        errorDetails: printAPI.error.message || JSON.stringify(printAPI.error), duration: moment().valueOf() - apiStart
       });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
