@@ -444,8 +444,7 @@ class TextInputComponent extends React.Component {
                     width: e.nativeEvent.layout.width,
                     measured: true
                   }
-                })
-                }
+                })}
                 style={[
                   styles.placeholder,
                   styles.placeholderOutlined,
