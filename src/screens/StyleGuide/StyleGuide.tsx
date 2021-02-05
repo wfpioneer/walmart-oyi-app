@@ -77,8 +77,7 @@ export class StyleGuide extends React.PureComponent<StyleGuideProps, StyleGuideS
           toValue: value,
           friction: 8,
           useNativeDriver: true
-        })
-        }
+        })}
       >
         <FlatList
           removeClippedSubviews

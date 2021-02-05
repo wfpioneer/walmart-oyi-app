@@ -14,7 +14,9 @@ import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { deleteLocationFromExisting, isUpdating, setFloorLocations, setReserveLocations } from '../../state/actions/Location';
+import {
+  deleteLocationFromExisting, isUpdating, setFloorLocations, setReserveLocations
+} from '../../state/actions/Location';
 import { deleteLocation } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -34,8 +36,8 @@ const LocationDetails = () => {
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
   });
-  const locations = useTypedSelector((state) => state.async.getLocation)
-  
+  const locations = useTypedSelector(state => state.async.getLocation);
+
   useEffect(() => {
     if (needsUpdate) {
       dispatch(isUpdating(false));
@@ -76,6 +78,8 @@ const LocationDetails = () => {
 
   // Get Location Details API
   useEffect(() => {
+    /* eslint-disable brace-style */
+    // brace style ignored to allow comments to remain.
     // on api success
     if (apiInProgress && locations.isWaiting === false && locations.result) {
       const locDetails = (locations.result && locations.result.data);
@@ -86,28 +90,23 @@ const LocationDetails = () => {
       }
       setAPIInProgress(false);
       dispatch(isUpdating(false));
-      return;
     }
-
     // on api failure
-    if (apiInProgress && locations.isWaiting === false && locations.error) {
-      trackEvent('location_get_location_api_failure',{
+    else if (apiInProgress && locations.isWaiting === false && locations.error) {
+      trackEvent('location_get_location_api_failure', {
         itemNbr: itemDetails.itemNbr,
         upcNbr: itemDetails.upcNbr,
         errorDetails: locations.error.message || locations.error
       });
       setAPIInProgress(false);
-      return setError(true);
+      setError(true);
     }
-
     // on api submission
-    if (!apiInProgress && locations.isWaiting) {
+    else if (!apiInProgress && locations.isWaiting) {
       trackEvent('location_get_location_api_start');
       setError(false);
-      return setAPIInProgress(true);
+      setAPIInProgress(true);
     }
-
-    return undefined;
   }, [locations]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {

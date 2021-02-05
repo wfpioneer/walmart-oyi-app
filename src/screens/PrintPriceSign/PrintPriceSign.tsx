@@ -103,11 +103,11 @@ const PrintPriceSign = () => {
     }
   }, []);
 
-  // Print API 
+  // Print API
   useEffect(() => {
     // on api success
     if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
-      trackEvent('print_api_success', { duration: moment().valueOf()-apiStart });
+      trackEvent('print_api_success', { duration: moment().valueOf() - apiStart });
       if (!actionCompleted && exceptionType === 'PO') dispatch(setActionCompleted());
       setAPIInProgress(false);
       navigation.goBack();
@@ -116,7 +116,9 @@ const PrintPriceSign = () => {
 
     // on api failure
     if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
-      trackEvent('print_api_failure', { errorDetails: printAPI.error.message || JSON.stringify(printAPI.error), duration: moment().valueOf()-apiStart });
+      trackEvent('print_api_failure', {
+        errorDetails: printAPI.error.message || JSON.stringify(printAPI.error), duration: moment().valueOf() - apiStart
+      });
       setAPIInProgress(false);
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
@@ -129,7 +131,6 @@ const PrintPriceSign = () => {
 
     return undefined;
   }, [printAPI]);
-
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
@@ -172,7 +173,6 @@ const PrintPriceSign = () => {
     if (itemSizeExists) {
       // TODO show popup if already exists
       trackEvent('print_already_exists_in_queue', { itemName, selectedSignType });
-      console.log(`Sign already exists in queue for  - ${JSON.stringify({ itemName, selectedSignType })}`);
     } else {
       // add to print queue, forcing to use laser
       // TODO show popup if laser printer is not selected when adding to queue

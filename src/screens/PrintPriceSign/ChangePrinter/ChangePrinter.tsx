@@ -63,8 +63,7 @@ export const ChangePrinter = () => {
           <MaterialCommunityIcons name="alert-circle" size={20} color={COLOR.RED_300} />
           <Text style={styles.errorText}>{strings('PRINT.MAC_ADDRESS_ERROR')}</Text>
         </View>
-        )
-      }
+        )}
       <Button
         title={strings('GENERICS.SUBMIT')}
         style={styles.button}
