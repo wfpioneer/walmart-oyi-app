@@ -3,6 +3,9 @@ import moment from 'moment';
 import qs from 'qs';
 import { Platform } from 'react-native';
 import { store } from '../../App';
+import {
+  getConsumerId, getEnvironment, getWmSvcEnv, svcName
+} from '../utils/environment';
 
 /**
  * Base on Axios network request.
@@ -42,14 +45,24 @@ class RequestDispatch {
 
         // Custom headers here
         const interceptRequest = await this.settingHeaders(request);
-
-        // For use with all of the OYI APIs
-        interceptRequest.headers.worklistDate = currentTime.format('YYYY-MM-DD');
+        const envUrls = getEnvironment();
         interceptRequest.headers.userId = store.getState().User.userId;
         interceptRequest.headers.countryCode = store.getState().User.countryCode;
         interceptRequest.headers.clubNbr = store.getState().User.siteId;
-
-        this.requestStartTime = currentTime.valueOf();
+        if (request.url.includes(envUrls.worklistURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.worklistName;
+        } else if (request.url.includes(envUrls.orchestrationURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.orchestrationName;
+        } else if (request.url.includes(envUrls.itemDetailsURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.itemDetailsName;
+        } else if (request.url.includes(envUrls.locationURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.locationName;
+        } else if (request.url.includes(envUrls.printingURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.printingName;
+        }
+        interceptRequest.headers['wm_consumer.id'] = getConsumerId();
+        interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();
+        this.requestStartTime = moment().valueOf();
         return interceptRequest;
       },
       (err: any) => {

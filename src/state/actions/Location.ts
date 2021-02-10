@@ -19,12 +19,12 @@ export const setItemLocDetails = (itemNbr: number, upcNbr: string, exceptionType
   }
 });
 
-export const setFloorLocations = (floor: [Location]) => ({
+export const setFloorLocations = (floor: Location[]) => ({
   type: SET_FLOOR_LOCATIONS,
   payload: floor
 });
 
-export const setReserveLocations = (reserve: [Location]) => ({
+export const setReserveLocations = (reserve: Location[]) => ({
   type: SET_RESERVE_LOCATIONS,
   payload: reserve
 });

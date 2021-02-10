@@ -15,6 +15,55 @@ export interface Environments {
   prod: Environment;
 }
 
+interface ApplicationKey {
+  orchestrationName: string;
+  itemDetailsName: string;
+  locationName: string;
+  printingName: string;
+  worklistName: string;
+}
+
+export const svcName: ApplicationKey = {
+  orchestrationName: 'INTLSAMS-OYI-ORCHESTRATION-API',
+  itemDetailsName: 'OYI_ITEM_DETAILS_API',
+  locationName: 'OYI_LOCATION_API',
+  printingName: 'OYI_PRINTING_API',
+  worklistName: 'OYI_WORKLIST_API'
+};
+
+type svcEnv = 'stg.1.0.0' | 'stg.2.0.0' | '';
+export const getWmSvcEnv = (): svcEnv => {
+  switch (Config.ENVIRONMENT) {
+    case 'dev':
+      return 'stg.1.0.0';
+    case 'stage':
+      return 'stg.2.0.0';
+    case 'prod':
+      return '';
+    default:
+      return 'stg.2.0.0';
+  }
+};
+
+export const getConsumerId = () => {
+  const consumerId = {
+    dev: '3b87ba30-529e-4cf7-983f-c3873edc6304',
+    stage: '3b87ba30-529e-4cf7-983f-c3873edc6304',
+    prod: ''
+  };
+
+  switch (Config.ENVIRONMENT) {
+    case 'dev':
+      return consumerId.dev;
+    case 'stage':
+      return consumerId.stage;
+    case 'prod':
+      return consumerId.prod;
+    default:
+      return consumerId.stage;
+  }
+};
+
 export const getEnvironment = (): Environment => {
   const countryCode = store.getState().User.countryCode.toLowerCase();
 

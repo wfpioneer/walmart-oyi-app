@@ -17,26 +17,22 @@ interface ItemDetails {
     onOrder: number;
   };
   location: {
-    floor?: [Location];
-    reserve?: [Location];
+    floor?: Location[];
+    reserve?: Location[];
     count: number;
   };
   sales: {
     lastUpdateTs: string;
     dailyAvgSales: number;
-    daily: [
-      {
-        day: string;
-        value: number;
-      }
-    ];
+    daily: {
+      day: string;
+      value: number;
+    }[];
     weeklyAvgSales: number;
-    weekly: [
-      {
-        week: number;
-        value: number;
-      }
-    ];
+    weekly: {
+      week: number;
+      value: number;
+    }[];
   };
 }
 
