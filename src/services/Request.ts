@@ -5,6 +5,9 @@ import moment from 'moment';
 import qs from 'qs';
 import { Platform } from 'react-native';
 import { store } from '../../App';
+import {
+  getConsumerId, getEnvironment, getWmSvcEnv, svcName
+} from '../utils/environment';
 
 /**
  * Base on Axios network request.
@@ -42,10 +45,23 @@ class RequestDispatch {
       async (request: any) => {
         // Custom headers here
         const interceptRequest = await this.settingHeaders(request);
-        // console.log(`=====> Network ${request.method} to: ${request.url}`, interceptRequest);
+        const envUrls = getEnvironment();
         interceptRequest.headers.userId = store.getState().User.userId;
         interceptRequest.headers.countryCode = store.getState().User.countryCode;
         interceptRequest.headers.clubNbr = store.getState().User.siteId;
+        if (request.url.includes(envUrls.worklistURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.worklistName;
+        } else if (request.url.includes(envUrls.orchestrationURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.orchestrationName;
+        } else if (request.url.includes(envUrls.itemDetailsURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.itemDetailsName;
+        } else if (request.url.includes(envUrls.locationURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.locationName;
+        } else if (request.url.includes(envUrls.printingURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.printingName;
+        }
+        interceptRequest.headers['wm_consumer.id'] = getConsumerId();
+        interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();
         this.requestStartTime = moment().valueOf();
         return interceptRequest;
       },
