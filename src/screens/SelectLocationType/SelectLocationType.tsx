@@ -35,9 +35,10 @@ const LOCATION_TYPES = {
 };
 
 const SelectLocationType = () => {
-  const [type, setType] = useState(LOCATION_TYPES.SALES_FLOOR);
+  const [locType, setLocType] = useState(LOCATION_TYPES.SALES_FLOOR);
   const [inputLocation, setInputLocation] = useState(false);
   const [loc, setLoc] = useState('');
+  const [scanType, setScanType] = useState('');
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [error, setError] = useState({ error: false, message: '' });
   const [apiStart, setApiStart] = useState(0);
@@ -58,29 +59,34 @@ const SelectLocationType = () => {
   };
   let scannedSubscription: EmitterSubscription;
 
+  // Set Location Name & Type when Editing location
   useEffect(() => {
     if (routeSource === 'EditLocation') {
       setLoc(currentLocation.locationName);
-      setType(currentLocation.type);
+      setLocType(currentLocation.type);
     }
   }, []);
 
+  // Scanner listener
   useEffect(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       trackEvent('select_location_scan', { value: scan.value, type: scan.type });
       if (navigation.isFocused()) {
         const unProcessedScanValue: string = scan.value;
         switch (scan.type) {
-          case 'manual':
+          case 'manual': {
             dispatch(setScannedEvent(scan));
             setLoc(scan.value);
             break;
-          case 'LABEL-TYPE-UPCA':
+          }
+          case 'LABEL-TYPE-UPCA': {
             const processedScanValue = parseInt(unProcessedScanValue.substring(1,
               unProcessedScanValue.length - 1), 10).toString();
             dispatch(setScannedEvent({ value: processedScanValue, type: scan.type }));
+            setScanType(scan.type);
             setLoc(processedScanValue);
             break;
+          }
           default:
             break;
         }
@@ -98,7 +104,7 @@ const SelectLocationType = () => {
     // on api success
     if (apiInProgress && addAPI.isWaiting === false && addAPI.result) {
       trackEvent('select_location_add_api_success', { duration: moment().valueOf() - apiStart });
-      dispatch(addLocationToExisting(loc, parseInt(type, 10), 'floor'));
+      dispatch(addLocationToExisting(loc, parseInt(locType, 10), 'floor'));
       if (!actionCompleted && itemLocDetails.exceptionType === 'NSFL') dispatch(setActionCompleted());
       setAPIInProgress(false);
       dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
@@ -133,7 +139,7 @@ const SelectLocationType = () => {
     // on api success
     if (apiInProgress && editAPI.isWaiting === false && editAPI.result) {
       trackEvent('select_location_edit_api_success', { duration: moment().valueOf() - apiStart });
-      dispatch(editExistingLocation(loc, parseInt(type, 10), 'floor', currentLocation.locIndex));
+      dispatch(editExistingLocation(loc, parseInt(locType, 10), 'floor', currentLocation.locIndex));
       setAPIInProgress(false);
       dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
       navigation.navigate('LocationDetails');
@@ -176,16 +182,16 @@ const SelectLocationType = () => {
       if (routeSource === 'AddLocation') {
         setError({ error: false, message: '' });
         const sameLoc = floorLocations.find(
-          (location: Location) => location.locationName === loc && location.typeNbr.toString() === type
+          (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
         );
         if (!sameLoc) {
           trackEvent('select_location_add_api_call',
-            { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
+            { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: locType });
           setApiStart(moment().valueOf());
           dispatch(addLocation({
             upc: itemLocDetails.upcNbr,
             sectionId: loc,
-            locationTypeNbr: type
+            locationTypeNbr: locType
           }));
         } else {
           trackEvent('select_location_add_duplicate');
@@ -194,18 +200,18 @@ const SelectLocationType = () => {
       } else if (routeSource === 'EditLocation') {
         setError({ error: false, message: '' });
         const sameLoc = floorLocations.find(
-          (location: Location) => location.locationName === loc && location.typeNbr.toString() === type
+          (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
         );
         if (!sameLoc) {
           trackEvent('select_location_edit_api_call',
-            { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: type });
+            { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: locType });
           setApiStart(moment().valueOf());
           dispatch(editLocation({
             upc: itemLocDetails.upcNbr,
             sectionId: currentLocation.locationName,
             newSectionId: loc,
             locationTypeNbr: currentLocation.type,
-            newLocationTypeNbr: type
+            newLocationTypeNbr: locType
           }));
         } else {
           trackEvent('select_location_edit_duplicate');
@@ -214,6 +220,15 @@ const SelectLocationType = () => {
       }
     }).catch(() => {});
   };
+
+  // Submits Add/Edit Location after Barcode Scan
+  // This useEffect is not grouped with other useEffects only to call 'onSubmit()' from the upper scope.
+  useEffect(() => {
+    if (scanType === 'LABEL-TYPE-UPCA') {
+      onSubmit();
+      setScanType('');
+    }
+  }, [loc]);
 
   const handleManualScan = () => {
     validateSession(navigation, routeSource).then(() => {
@@ -225,8 +240,8 @@ const SelectLocationType = () => {
   const validateLocation = () =>
     /* eslint-disable implicit-arrow-linebreak */
     // TODO add better validation of location - eslint disabled to allow for this comment.
-    !((loc.length > 0) && (type === LOCATION_TYPES.SALES_FLOOR || type === LOCATION_TYPES.POD || type
-      === LOCATION_TYPES.END_CAP || type === LOCATION_TYPES.DISPLAY));
+    !((loc.length > 0) && (locType === LOCATION_TYPES.SALES_FLOOR || locType === LOCATION_TYPES.POD || locType
+      === LOCATION_TYPES.END_CAP || locType === LOCATION_TYPES.DISPLAY));
   return (
     <>
       <View style={styles.mainContainer}>
@@ -236,44 +251,44 @@ const SelectLocationType = () => {
         <View style={styles.sectionLabel}>
           <Text style={styles.labelText}>{strings('LOCATION.SELECTION_INSTRUCTION')}</Text>
         </View>
-        <RadioButton.Group onValueChange={value => setType(value)} value={type}>
+        <RadioButton.Group onValueChange={value => setLocType(value)} value={locType}>
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.SALES_FLOOR}
-              status={type === LOCATION_TYPES.SALES_FLOOR ? 'checked' : 'unchecked'}
+              status={locType === LOCATION_TYPES.SALES_FLOOR ? 'checked' : 'unchecked'}
               color={COLOR.MAIN_THEME_COLOR}
             />
-            <TouchableOpacity style={styles.labelBox} onPress={() => setType(LOCATION_TYPES.SALES_FLOOR)}>
+            <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.SALES_FLOOR)}>
               <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.FLOOR')}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.END_CAP}
-              status={type === LOCATION_TYPES.END_CAP ? 'checked' : 'unchecked'}
+              status={locType === LOCATION_TYPES.END_CAP ? 'checked' : 'unchecked'}
               color={COLOR.MAIN_THEME_COLOR}
             />
-            <TouchableOpacity style={styles.labelBox} onPress={() => setType(LOCATION_TYPES.END_CAP)}>
+            <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.END_CAP)}>
               <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.ENDCAP')}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.POD}
-              status={type === LOCATION_TYPES.POD ? 'checked' : 'unchecked'}
+              status={locType === LOCATION_TYPES.POD ? 'checked' : 'unchecked'}
               color={COLOR.MAIN_THEME_COLOR}
             />
-            <TouchableOpacity style={styles.labelBox} onPress={() => setType(LOCATION_TYPES.POD)}>
+            <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.POD)}>
               <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.POD')}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.DISPLAY}
-              status={type === LOCATION_TYPES.DISPLAY ? 'checked' : 'unchecked'}
+              status={locType === LOCATION_TYPES.DISPLAY ? 'checked' : 'unchecked'}
               color={COLOR.MAIN_THEME_COLOR}
             />
-            <TouchableOpacity style={styles.labelBox} onPress={() => setType(LOCATION_TYPES.DISPLAY)}>
+            <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.DISPLAY)}>
               <Text style={styles.typeLabel}>{strings('SELECTLOCATIONTYPE.DISPLAY')}</Text>
             </TouchableOpacity>
           </View>
