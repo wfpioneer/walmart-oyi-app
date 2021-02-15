@@ -12,7 +12,7 @@ import styles from './SalesMetrics.styles';
 import { trackEvent } from '../../utils/AppCenterTool';
 
 // Could possibly be combined with below, but the input keys are different
-const renderDailyList = (dailyList: [{day: string; value: number}]) => (
+const renderDailyList = (dailyList: {day: string; value: number}[]) => (
   <View style={styles.listContainer}>
     {dailyList.map((row, index) => {
       const formattedDay = moment(row.day).format('ddd, MMM DD');
@@ -28,7 +28,7 @@ const renderDailyList = (dailyList: [{day: string; value: number}]) => (
 );
 
 // Could possibly be combined with above, but the input keys are different
-const renderWeeklyList = (weeklyList: [{week: number; value: number}]) => (
+const renderWeeklyList = (weeklyList: {week: number; value: number}[]) => (
   <View style={styles.listContainer}>
     {weeklyList.map((row, index) => (
       <View key={row.week} style={[styles.listRowContainer, { borderTopWidth: index !== 0 ? 1 : 0 }]}>
