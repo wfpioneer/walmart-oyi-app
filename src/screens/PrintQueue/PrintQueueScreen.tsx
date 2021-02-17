@@ -131,8 +131,6 @@ export const PrintQueueScreen = (
   props: PrintQueueScreenProps
 ) => {
   const {
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    // rule disabled because these vars are used, but not in a manner the linter recognizes.
     printQueue,
     selectedPrinter,
     printAPI,
