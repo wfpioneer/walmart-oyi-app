@@ -31,30 +31,32 @@ export const svcName: ApplicationKey = {
   worklistName: 'OYI_WORKLIST_API'
 };
 
-type svcEnv = 'stg.1.0.0' | 'stg.2.0.0' | '';
-export const getWmSvcEnv = (): svcEnv => {
+type svcEnv = 'dev'|'stg:1.0.0'|'stg:2.0.0'|'stage'|'prod'| '';
+export const getWmSvcEnv = (isOrchApi?: boolean): svcEnv => {
   switch (Config.ENVIRONMENT) {
     case 'dev':
-      return 'stg.1.0.0';
+      return isOrchApi ? 'stg:1.0.0' : 'dev';
     case 'stage':
-      return 'stg.2.0.0';
+      return isOrchApi ? 'stg:2.0.0' : 'stage';
     case 'prod':
-      return '';
+      return 'prod';
     default:
-      return 'stg.2.0.0';
+      return isOrchApi ? 'stg:2.0.0' : 'stage';
   }
 };
 
-export const getConsumerId = () => {
+// this is a temporary change to hit the Orch api for development waiting for BE fixes
+export const getConsumerId = (isOrchApi?: boolean) => {
   const consumerId = {
     dev: '3b87ba30-529e-4cf7-983f-c3873edc6304',
-    stage: '3b87ba30-529e-4cf7-983f-c3873edc6304',
+    stage: '28cd32c8-6c12-40e9-97ec-e06db93fa529',
     prod: ''
   };
 
   switch (Config.ENVIRONMENT) {
     case 'dev':
-      return consumerId.dev;
+      // Service Mesh in Orch Api requires Oyi-app-stage consumerId for its dev(stg:1.0.0) environment
+      return isOrchApi ? consumerId.stage : consumerId.dev;
     case 'stage':
       return consumerId.stage;
     case 'prod':
