@@ -1,6 +1,6 @@
 {
   "name": "OYI",
-  "version": "1.0.16",
+  "version": "1.0.14",
   "private": true,
   "scripts": {
     "android": "react-native run-android",

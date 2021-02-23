@@ -46,22 +46,20 @@ class RequestDispatch {
         // Custom headers here
         const interceptRequest = await this.settingHeaders(request);
         const envUrls = getEnvironment();
+        const isOrchUrl: boolean = request.url.includes(envUrls.orchestrationURL);
         interceptRequest.headers.userId = store.getState().User.userId;
         interceptRequest.headers.countryCode = store.getState().User.countryCode;
         interceptRequest.headers.clubNbr = store.getState().User.siteId;
+
         if (request.url.includes(envUrls.worklistURL)) {
           interceptRequest.headers['wm_svc.name'] = svcName.worklistName;
-        } else if (request.url.includes(envUrls.orchestrationURL)) {
+        } else if (isOrchUrl) {
           interceptRequest.headers['wm_svc.name'] = svcName.orchestrationName;
         } else if (request.url.includes(envUrls.itemDetailsURL)) {
           interceptRequest.headers['wm_svc.name'] = svcName.itemDetailsName;
-        } else if (request.url.includes(envUrls.locationURL)) {
-          interceptRequest.headers['wm_svc.name'] = svcName.locationName;
-        } else if (request.url.includes(envUrls.printingURL)) {
-          interceptRequest.headers['wm_svc.name'] = svcName.printingName;
         }
         interceptRequest.headers['wm_consumer.id'] = getConsumerId();
-        interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();
+        interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);
         this.requestStartTime = moment().valueOf();
         return interceptRequest;
       },

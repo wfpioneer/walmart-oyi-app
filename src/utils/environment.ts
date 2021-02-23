@@ -4,8 +4,6 @@ import { store } from '../../App';
 export interface Environment {
   orchestrationURL: string;
   itemDetailsURL: string;
-  locationURL: string;
-  printingURL: string;
   worklistURL: string;
 }
 
@@ -31,24 +29,24 @@ export const svcName: ApplicationKey = {
   worklistName: 'OYI_WORKLIST_API'
 };
 
-type svcEnv = 'stg.1.0.0' | 'stg.2.0.0' | '';
-export const getWmSvcEnv = (): svcEnv => {
+type svcEnv = 'dev'|'stg:1.0.0'|'stg:2.0.0'|'stage'|'prod'| '';
+export const getWmSvcEnv = (isOrchApi?: boolean): svcEnv => {
   switch (Config.ENVIRONMENT) {
     case 'dev':
-      return 'stg.1.0.0';
+      return isOrchApi ? 'stg:1.0.0' : 'dev';
     case 'stage':
-      return 'stg.2.0.0';
+      return isOrchApi ? 'stg:2.0.0' : 'stage';
     case 'prod':
-      return '';
+      return 'prod';
     default:
-      return 'stg.2.0.0';
+      return isOrchApi ? 'stg:2.0.0' : 'stage';
   }
 };
 
 export const getConsumerId = () => {
   const consumerId = {
     dev: '3b87ba30-529e-4cf7-983f-c3873edc6304',
-    stage: '3b87ba30-529e-4cf7-983f-c3873edc6304',
+    stage: '28cd32c8-6c12-40e9-97ec-e06db93fa529',
     prod: ''
   };
 
@@ -71,22 +69,16 @@ export const getEnvironment = (): Environment => {
     dev: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.dev.walmart.com',
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.dev.walmart.com`,
-      locationURL: `https://intl-oyi-location-api.${countryCode}.dev.walmart.com`,
-      printingURL: `https://intl-oyi-printing-api.${countryCode}.dev.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.dev.walmart.com`
     },
     stage: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.stg.walmart.com',
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.stg.walmart.com`,
-      locationURL: `https://intl-oyi-location-api.${countryCode}.stg.walmart.com`,
-      printingURL: `https://intl-oyi-printing-api.${countryCode}.stg.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.stg.walmart.com`
     },
     prod: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.prod.walmart.com',
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.prod.walmart.com`,
-      locationURL: `https://intl-oyi-location-api.${countryCode}.prod.walmart.com`,
-      printingURL: `https://intl-oyi-printing-api.${countryCode}.prod.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.prod.walmart.com`
     }
   };

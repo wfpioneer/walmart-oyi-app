@@ -126,3 +126,23 @@ TIP: Make sure your barcodeEmitter has a listener setup to receive `scanned` eve
    }
    ```
 
+## Deploying to Airwatch
+
+ Apk builds are automatically deployed & activated in AirWatch after merging
+  into `Development` or `Master`.
+ AirWatch has a set limit of 5 apk's per application and an old product will need to be deleted
+  after a merge into `Development` or `Master`.
+
+1. Finding the Product Name in AirWatch
+    1. Login to [AirWatch](https://mdmadmin.wal-mart.com/)
+    2. Under `Devices` on left side. Click `Provisioning` then `Product List View`.
+    3. In the search bar type `OYI` and view products named `Oyi-International`
+
+2. Deactivating an old product
+    1. Go to the Concord Workflow to [Deactivate a Product](https://collaboration.wal-mart.com/display/MOBILE/Deactivate+a+Product) and click the Workflow link
+    2. Add the Old product name found in AW into `Product Name:` ie.`OYI-International ${VERSION}`or `OYI-International ${environment}${VERSION}`
+    3. Set `AirWatch Environment` to `PROD` and submit
+
+3. Deleting a product
+    1. Then go to [Delete a Product and Smart Group](https://collaboration.wal-mart.com/display/MOBILE/Delete+a+Product+and+Smart+Group) and click the Workflow Link
+    2. Add the same `Product Name` &`AirWatch Environment` and submit the product for deletion.
