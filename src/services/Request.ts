@@ -62,7 +62,7 @@ class RequestDispatch {
         } else if (request.url.includes(envUrls.printingURL)) {
           interceptRequest.headers['wm_svc.name'] = svcName.printingName;
         }
-        interceptRequest.headers['wm_consumer.id'] = getConsumerId(isOrchUrl);
+        interceptRequest.headers['wm_consumer.id'] = getConsumerId();
         interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);
         this.requestStartTime = moment().valueOf();
         return interceptRequest;

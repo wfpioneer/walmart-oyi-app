@@ -45,8 +45,7 @@ export const getWmSvcEnv = (isOrchApi?: boolean): svcEnv => {
   }
 };
 
-// this is a temporary change to hit the Orch api for development waiting for BE fixes
-export const getConsumerId = (isOrchApi?: boolean) => {
+export const getConsumerId = () => {
   const consumerId = {
     dev: '3b87ba30-529e-4cf7-983f-c3873edc6304',
     stage: '28cd32c8-6c12-40e9-97ec-e06db93fa529',
@@ -55,8 +54,7 @@ export const getConsumerId = (isOrchApi?: boolean) => {
 
   switch (Config.ENVIRONMENT) {
     case 'dev':
-      // Service Mesh in Orch Api requires Oyi-app-stage consumerId for its dev(stg:1.0.0) environment
-      return isOrchApi ? consumerId.stage : consumerId.dev;
+      return consumerId.dev;
     case 'stage':
       return consumerId.stage;
     case 'prod':
