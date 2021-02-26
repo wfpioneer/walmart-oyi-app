@@ -22,7 +22,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state: RootState) => ({ User: state.User });
 
-interface LoginScreenProps {
+export interface LoginScreenProps {
   loginUser: Function;
   User: User;
   navigation: Record<string, any>;

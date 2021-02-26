@@ -25,6 +25,7 @@ exports[`LoginScreen renders the snapshot test appropriately 1`] = `
     title="[missing \\"en.GENERICS.SIGN_IN\\" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
+    titleFontWeight="normal"
     type={1}
     width={-1}
   />

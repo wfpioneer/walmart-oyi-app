@@ -142,7 +142,7 @@ exports[`PrintQueueScreen renders the print queue with 1 item in it 1`] = `
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.X" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.S" translation]
           </Text>
           <View
             style={
