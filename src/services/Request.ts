@@ -57,10 +57,6 @@ class RequestDispatch {
           interceptRequest.headers['wm_svc.name'] = svcName.orchestrationName;
         } else if (request.url.includes(envUrls.itemDetailsURL)) {
           interceptRequest.headers['wm_svc.name'] = svcName.itemDetailsName;
-        } else if (request.url.includes(envUrls.locationURL)) {
-          interceptRequest.headers['wm_svc.name'] = svcName.locationName;
-        } else if (request.url.includes(envUrls.printingURL)) {
-          interceptRequest.headers['wm_svc.name'] = svcName.printingName;
         }
         interceptRequest.headers['wm_consumer.id'] = getConsumerId();
         interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);

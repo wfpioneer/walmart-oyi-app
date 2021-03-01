@@ -4,7 +4,7 @@ envs:
     variables:
       #Template required vars for CI/CD
       # true / false
-      AIRWATCH_ACTIVATE: false
+      AIRWATCH_ACTIVATE: true
       # Cert / Prod
       AIRWATCH_ENV: Prod
       # whether the APK should be built or not
@@ -60,7 +60,7 @@ envs:
 
       #Versioning vars
       # major / minor / patch / noBump > defaults to patch
-      VERSION_TYPE: 'noBump'
+      VERSION_TYPE: 'patch'
 
       #Proximity related vars
       RELEASES_REPO: 'pangaea_releases'

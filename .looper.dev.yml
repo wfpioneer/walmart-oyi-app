@@ -4,13 +4,13 @@ envs:
     variables:
       #Template required vars for CI/CD
       # true / false
-      AIRWATCH_ACTIVATE: false
+      AIRWATCH_ACTIVATE: true
       # Cert / Prod
       AIRWATCH_ENV: Prod
       # whether the APK should be built or not
       BUILD_APP_FLAG: true
       # true / false
-      DEPLOY_TO_AIRWATCH: false
+      DEPLOY_TO_AIRWATCH: true
       # email list where the notification will be sent
       EMAIL_NOTIFICATION: IntlSamsOYI@wal-mart.com
 
@@ -60,7 +60,7 @@ envs:
 
       #Versioning vars
       # major / minor / patch / noBump > defaults to patch
-      VERSION_TYPE: 'noBump'
+      VERSION_TYPE: 'patch'
 
       #Proximity related vars
       RELEASES_REPO: 'pangaea_releases'
