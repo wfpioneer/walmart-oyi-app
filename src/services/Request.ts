@@ -47,6 +47,9 @@ class RequestDispatch {
         const interceptRequest = await this.settingHeaders(request);
         const envUrls = getEnvironment();
         const isOrchUrl: boolean = request.url.includes(envUrls.orchestrationURL);
+
+        // For use with all of the OYI APIs
+        interceptRequest.headers.worklistDate = currentTime.format('YYYY-MM-DD');
         interceptRequest.headers.userId = store.getState().User.userId;
         interceptRequest.headers.countryCode = store.getState().User.countryCode;
         interceptRequest.headers.clubNbr = store.getState().User.siteId;
@@ -60,7 +63,7 @@ class RequestDispatch {
         }
         interceptRequest.headers['wm_consumer.id'] = getConsumerId();
         interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);
-        this.requestStartTime = moment().valueOf();
+        this.requestStartTime = currentTime.valueOf();
         return interceptRequest;
       },
       (err: any) => {

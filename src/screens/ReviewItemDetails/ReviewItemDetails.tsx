@@ -314,7 +314,8 @@ export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), 
         style={styles.scanForNoActionButton}
         onPress={() => {
           validateSessionCall(navigation, route.name).then(() => {
-            trackEventCall('item_details_scan_for_no_action_button_click', { itemDetails: JSON.stringify(itemDetails) });
+            trackEventCall('item_details_scan_for_no_action_button_click',
+              { itemDetails: JSON.stringify(itemDetails) });
             return dispatch(setManualScan(!isManualScanEnabled));
           }).catch(() => {
             trackEventCall('session_timeout', { user: userId });
@@ -387,7 +388,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
     }
 
     if (_.get(result, 'status') === 200) {
-      trackEventCall('item_details_api_success', { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
+      trackEventCall('item_details_api_success',
+        { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
     }
     if (isRefreshing) {
       setIsRefreshing(false);
