@@ -11,9 +11,6 @@ export default class GetWorklistService {
         filterUrl = `${filterUrl}?type=${filters}`;
       }
     }
-    return Request.enqueue({
-      url: filterUrl,
-      method: 'get'
-    });
+    return Request.get(filterUrl, undefined);
   }
 }

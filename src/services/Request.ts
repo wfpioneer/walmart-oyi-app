@@ -1,6 +1,8 @@
-import axios, { AxiosInstance, AxiosRequestConfig, Canceler } from 'axios';
+import axios, {
+  AxiosInstance, AxiosRequestConfig, AxiosResponse
+} from 'axios';
 import moment from 'moment';
-import qs from 'qs';
+import Config from 'react-native-config';
 import { Platform } from 'react-native';
 import { store } from '../../App';
 import {
@@ -12,20 +14,12 @@ import {
  *
  */
 
-// Define request type constants
-enum Methods {
-  POST = 'post',
-  GET = 'get',
-  HEAD = 'head',
-  DELETE = 'delete',
-  PUT = 'put',
-}
 const TIMEOUT = 10000;
 
-class RequestDispatch {
-  public service: AxiosInstance;
+class Request {
+  private static instance?: Request;
 
-  private requestStartTime: number;
+  public service: AxiosInstance;
 
   constructor() {
     this.service = axios.create({
@@ -36,7 +30,6 @@ class RequestDispatch {
         'Accept-Encoding': 'gzip'
       }
     });
-    this.requestStartTime = 0;
 
     // Custom request interceptor
     this.service.interceptors.request.use(
@@ -48,22 +41,29 @@ class RequestDispatch {
         const envUrls = getEnvironment();
         const isOrchUrl: boolean = request.url.includes(envUrls.orchestrationURL);
 
-        // For use with all of the OYI APIs
-        interceptRequest.headers.worklistDate = currentTime.format('YYYY-MM-DD');
-        interceptRequest.headers.userId = store.getState().User.userId;
-        interceptRequest.headers.countryCode = store.getState().User.countryCode;
-        interceptRequest.headers.clubNbr = store.getState().User.siteId;
+        if (request.url.includes(envUrls.fluffyURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.fluffyName;
+          interceptRequest.headers['wm_sec.auth_token'] = store.getState().User.token;
+          interceptRequest.headers['wm_consumer.id'] = getConsumerId();
+          interceptRequest.headers['wm_svc.version'] = '1.0.0';
+          interceptRequest.headers['wm_svc.env'] = Config.ENVIRONMENT === 'prod' ? 'prod' : 'stg';
+        } else {
+          // For use with all of the OYI APIs
+          interceptRequest.headers.worklistDate = currentTime.format('YYYY-MM-DD');
+          interceptRequest.headers.userId = store.getState().User.userId;
+          interceptRequest.headers.countryCode = store.getState().User.countryCode;
+          interceptRequest.headers.clubNbr = store.getState().User.siteId;
 
-        if (request.url.includes(envUrls.worklistURL)) {
-          interceptRequest.headers['wm_svc.name'] = svcName.worklistName;
-        } else if (isOrchUrl) {
-          interceptRequest.headers['wm_svc.name'] = svcName.orchestrationName;
-        } else if (request.url.includes(envUrls.itemDetailsURL)) {
-          interceptRequest.headers['wm_svc.name'] = svcName.itemDetailsName;
+          if (request.url.includes(envUrls.worklistURL)) {
+            interceptRequest.headers['wm_svc.name'] = svcName.worklistName;
+          } else if (isOrchUrl) {
+            interceptRequest.headers['wm_svc.name'] = svcName.orchestrationName;
+          } else if (request.url.includes(envUrls.itemDetailsURL)) {
+            interceptRequest.headers['wm_svc.name'] = svcName.itemDetailsName;
+          }
+          interceptRequest.headers['wm_consumer.id'] = getConsumerId();
+          interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);
         }
-        interceptRequest.headers['wm_consumer.id'] = getConsumerId();
-        interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);
-        this.requestStartTime = currentTime.valueOf();
         return interceptRequest;
       },
       (err: any) => {
@@ -77,6 +77,8 @@ class RequestDispatch {
       (response: any) => {
         // eslint-disable-next-line no-console
         console.log('✅ ', response.config.url, '\n', response);
+        // clears the custom timeout if the request completes
+        clearTimeout(this.requestTimeoutId);
         return response;
       },
       (err: any) => {
@@ -86,14 +88,18 @@ class RequestDispatch {
           // eslint-disable-next-line no-console
           console.log('❌ ', err.config.url, err.config, err.response);
         }
-        const message = err.message.toLowerCase();
-        if (!err.response && this.stringContains(message, 'network error')) {
+        const message = err.message.toLowerCase() as string;
+        // Clears the custom timeout if a the Request did not fail due to a timeout
+        if (!message.includes('timeout')) {
+          clearTimeout(this.requestTimeoutId);
+        }
+        if (!err.response && message.includes('network error')) {
           // The site can’t be reached, server IP address could not be found.
           console.warn('IP address could not be found');
-        } else if (!err.response && this.stringContains(message, 'timeout')) {
+        } else if (!err.response && message.includes('timeout')) {
           // Network request timeout
           console.warn('network request timeout');
-        } else if (this.stringContains(message, 'network error')) {
+        } else if (message.includes('network error')) {
           // Network error
           console.warn('network error');
         } else if (err.response.status === 500) {
@@ -121,194 +127,6 @@ class RequestDispatch {
 
   settingHeaders = async (request: any) => request;
 
-  async axiosPromise(config: AxiosRequestConfig) {
-    // this creates a cancelToken for the request
-    const AxiosCancelToken = axios.CancelToken;
-    let cancel: Canceler;
-    config.cancelToken = new AxiosCancelToken(c => {
-      cancel = c;
-    });
-    const timeoutInterval: number = config.timeout ? config.timeout : TIMEOUT;
-
-    // if the request doesn't complete by the specified timeout period, cancel the request and reject the promise
-    const timeoutID = setTimeout(() => {
-      console.warn('service call cancelled', config);
-      cancel('timeout');
-    }, timeoutInterval);
-    const result = await this.service(config);
-    // clear the timeout if the request does complete
-    clearTimeout(timeoutID);
-    return result;
-  }
-
-  /**
-   * Enqueue network request
-   *
-   * @param {string} method Methods.GET Methods.POST Methods.HEAD Methods.PUT Methods.DELETE
-   * @param {string} router like user/login
-   * @param {object} data object
-   * @param {object} cancelToken cancelToken object, can cancel the reuqest
-   */
-  enqueue(method: Methods, router: string, data: any, cancelToken: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      switch (method) {
-        case Methods.GET:
-          this.service.get(`${router}?${qs.stringify(data)}`, { cancelToken })
-            .then(res => {
-              resolve(res);
-            })
-            .catch(e => {
-              reject(e);
-            });
-          break;
-        case Methods.POST:
-          this.service.post(router, qs.stringify(data), { cancelToken })
-            .then(res => {
-              resolve(res);
-            })
-            .catch(e => {
-              reject(e);
-            });
-          break;
-        case Methods.PUT:
-          this.service.put(router, qs.stringify(data), { cancelToken })
-            .then(res => {
-              resolve(res);
-            })
-            .catch(e => {
-              reject(e);
-            });
-          break;
-        case Methods.HEAD:
-          this.service.head(`${router}?${qs.stringify(data)}`, { cancelToken })
-            .then(res => {
-              resolve(res);
-            })
-            .catch(e => {
-              reject(e);
-            });
-          break;
-        case Methods.DELETE:
-          this.service.delete(`${router}?${qs.stringify(data)}`, { cancelToken })
-            .then(res => {
-              resolve(res);
-            })
-            .catch(e => {
-              reject(e);
-            });
-          break;
-        default:
-          break;
-      }
-    });
-  }
-}
-
-/**
- * Base on Axios, support for get/head/post/put/delete requests,
- * support for setting cancellation requests.
- *
- * Universally get reqeust:
- * <pre>
- * Request.get('/login', {
- *   username: '1',
- *   password: '1'
- * }).then((res) => {
- *   // todo
- * }).catch((e) => {
- *   // todo
- * })
- * </pre>
- *
- * You can also add a cancel function to the reqeust.
- * <pre>
- * let cancel;
- * Request.get('/login', {
- *   username: '1',
- *   password: '1'
- * }, (c) => {
- *   cancel = c;
- * }).then((res) => {
- *   // todo
- * }).catch((e) => {
- *   // todo
- * })
- * cancel('cancel message.');
- * </pre>
- *
- * You may without request filed.
- * <pre>
- * let cancel;
- * Request.get('/login', (c) => {
- *   cancel = c;
- * }).then((res) => {
- *   // todo
- * }).catch((e) => {
- *   // todo
- * })
- * cancel('cancel message.');
- * </pre>
- *
- * Custom reqeust
- * `params` is the URL parameter to be sent with the request. 'GET', 'HEAD'.
- * `data` is the data that is sent as the request body, applicable only to
- * these request methods 'PUT', 'POST', and 'PATCH'
- * <code>
- * Request.enqueue({
- *  method: 'get',
- *  url: 'http://172.16.3.86:3002',
- *  headers: {
- *   'X-Custom-Header': 'foobar'
- *  },
- *  params: {
- *     id: 123
- *  },
- *  data: {
- *     username: 'admin'
- *  }
- * }).then((res) => {
- *     console.log(res);
- * }).catch((e) => {
- *
- * });
- * </code>
- * @class Request
- */
-
-const { CancelToken } = axios;
-
-const getParams = (data: any, fn: any) => {
-  let requestData: any;
-  let cancelCallback: any;
-  if (typeof data === 'function') {
-    cancelCallback = data;
-  } else if (typeof fn === 'function') {
-    requestData = data;
-    cancelCallback = fn;
-  } else {
-    requestData = data;
-  }
-  const cancelToken = new CancelToken(c => {
-    if (typeof cancelCallback === 'function') {
-      cancelCallback(c);
-    }
-  });
-
-  return {
-    requestData,
-    cancelToken
-  };
-};
-
-class Request {
-  private static instance?: Request;
-
-  public dispatch: RequestDispatch;
-
-  constructor() {
-    this.dispatch = new RequestDispatch();
-  }
-
   static getInstance() {
     if (!Request.instance) {
       Request.instance = new Request();
@@ -316,34 +134,105 @@ class Request {
     return Request.instance;
   }
 
-  enqueue(config: AxiosRequestConfig) {
-    return this.dispatch.axiosPromise(config);
+   private requestTimeoutId = 0;
+
+   // Creates a CancelToken for the Request
+  getCancelToken = (options?: AxiosRequestConfig) => {
+    const axiosCancelToken = axios.CancelToken.source();
+    const timeoutInterval: number = options?.timeout ? options.timeout : TIMEOUT;
+
+    this.requestTimeoutId = setTimeout(() => {
+      console.warn('service call cancelled');
+      axiosCancelToken.cancel('timeout');
+    }, timeoutInterval);
+
+    return axiosCancelToken.token;
+  };
+
+  /**
+   *
+   * @param url - Path to endpoint
+   * @param data - GET Request data to be query stringified
+   */
+  get<T>(
+    path: string,
+    data?: Record<string, unknown>,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T>> {
+    return this.service.get<T>(path, { ...options, params: data, cancelToken: this.getCancelToken(options) });
   }
 
-  delete(router: string, data: any, fn?: () => {}) {
-    const { requestData, cancelToken } = getParams(data, fn);
-    return this.dispatch.enqueue(Methods.DELETE, router, requestData, cancelToken);
+  post<T>(
+    path: string,
+    data?: any,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T>> {
+    return this.service.post<T>(path, data, { ...options, cancelToken: this.getCancelToken(options) });
   }
 
-  get(router: string, data: any, fn?: () => {}) {
-    const { requestData, cancelToken } = getParams(data, fn);
-    return this.dispatch.enqueue(Methods.GET, router, requestData, cancelToken);
+  delete<T>(
+    path: string,
+    data?: any,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T>> {
+    return this.service.delete<T>(path, {
+      ...options,
+      params: data,
+      cancelToken: this.getCancelToken(options)
+    });
   }
 
-  post(router: string, data: any, fn?: () => {}) {
-    const { requestData, cancelToken } = getParams(data, fn);
-    return this.dispatch.enqueue(Methods.POST, router, requestData, cancelToken);
+  put<T>(
+    path: string,
+    data?: any,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T>> {
+    return this.service.put<T>(path, data, { ...options, cancelToken: this.getCancelToken(options) });
   }
 
-  put(router: string, data: any, fn?: () => {}) {
-    const { requestData, cancelToken } = getParams(data, fn);
-    return this.dispatch.enqueue(Methods.PUT, router, requestData, cancelToken);
+  patch<T>(
+    path: string,
+    data?: any,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T>> {
+    return this.service.patch<T>(path, data, {
+      ...options,
+      cancelToken: this.getCancelToken(options)
+    });
   }
 
-  head(router: string, data: any, fn?: () => {}) {
-    const { requestData, cancelToken } = getParams(data, fn);
-    return this.dispatch.enqueue(Methods.HEAD, router, requestData, cancelToken);
+  head<T>(
+    path: string,
+    data?: any,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T>> {
+    return this.service.head<T>(path, { ...options, params: data, cancelToken: this.getCancelToken(options) })
+      .then(response => response)
+      .catch(err => err);
   }
+}
+// Makes for an easy way to mock different axios responses
+export async function mockAxiosResponse<T>(
+  payload: T,
+  options?: Omit<AxiosResponse, 'data'>,
+): Promise<AxiosResponse<T>> {
+  const config = {
+    ...{
+      config: {},
+      status: 200,
+      headers: {},
+      statusText: 'OK',
+      request: {}
+    },
+    ...options
+  };
+  const response = {
+    data: payload,
+    ...config
+  };
+  return config.status < 400
+    ? Promise.resolve(response)
+    : Promise.reject(response);
 }
 
 export default Request.getInstance();
