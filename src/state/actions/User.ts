@@ -8,3 +8,7 @@ export const loginUser = (userPayload: User) => ({
 export const logoutUser = () => ({
   type: 'USER/LOGOUT'
 });
+
+export const getFluffyRoles = () => ({
+  type: 'USER/GET_FLUFFY_ROLES'
+})

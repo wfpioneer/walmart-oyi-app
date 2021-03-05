@@ -3,6 +3,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, Canceler } from 'axios';
 // @ts-ignore
 import moment from 'moment';
 import qs from 'qs';
+import Config from 'react-native-config';
 import { Platform } from 'react-native';
 import { store } from '../../App';
 import {
@@ -47,19 +48,29 @@ class RequestDispatch {
         const interceptRequest = await this.settingHeaders(request);
         const envUrls = getEnvironment();
         const isOrchUrl: boolean = request.url.includes(envUrls.orchestrationURL);
-        interceptRequest.headers.userId = store.getState().User.userId;
-        interceptRequest.headers.countryCode = store.getState().User.countryCode;
-        interceptRequest.headers.clubNbr = store.getState().User.siteId;
+
+        if (request.url.includes(envUrls.fluffyURL)) {
+          interceptRequest.headers['wm_svc.name'] = svcName.fluffyName;
+          interceptRequest.headers['wm_sec.auth_token'] = store.getState().User.token;
+          interceptRequest.headers['wm.consumer_id'] = Config.ENVIRONMENT == 'prod' ? '' : '28cd32c8-6c12-40e9-97ec-e06db93fa529';
+          interceptRequest.headers['wm_svc.version'] = '1.0.0';
+          interceptRequest.headers['wm_svc.env'] = Config.ENVIRONMENT == 'prod' ? 'prod' : 'stg';
+        }
+        else {
+          interceptRequest.headers.userId = store.getState().User.userId;
+          interceptRequest.headers.countryCode = store.getState().User.countryCode;
+          interceptRequest.headers.clubNbr = store.getState().User.siteId;
 
         if (request.url.includes(envUrls.worklistURL)) {
           interceptRequest.headers['wm_svc.name'] = svcName.worklistName;
         } else if (isOrchUrl) {
-          interceptRequest.headers['wm_svc.name'] = svcName.orchestrationName;
+            interceptRequest.headers['wm_svc.name'] = svcName.orchestrationName;
         } else if (request.url.includes(envUrls.itemDetailsURL)) {
           interceptRequest.headers['wm_svc.name'] = svcName.itemDetailsName;
         }
-        interceptRequest.headers['wm_consumer.id'] = getConsumerId();
-        interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);
+          interceptRequest.headers['wm_consumer.id'] = getConsumerId();
+          interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);
+        }
         this.requestStartTime = moment().valueOf();
         return interceptRequest;
       },

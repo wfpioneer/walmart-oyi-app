@@ -5,7 +5,7 @@ import { Platform, View } from 'react-native';
 import WMSSO from 'react-native-wmsso';
 import Button from '../../components/buttons/Button';
 import styles from './Login.style';
-import { loginUser } from '../../state/actions/User';
+import { loginUser, getFluffyRoles } from '../../state/actions/User';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
 import { hideActivityModal } from '../../state/actions/Modal';
@@ -17,7 +17,8 @@ import { RootState } from '../../state/reducers/RootReducer';
 const mapDispatchToProps = {
   loginUser,
   hideActivityModal,
-  setEndTime
+  setEndTime,
+  getFluffyRoles
 };
 
 const mapStateToProps = (state: RootState) => ({ User: state.User });
@@ -28,6 +29,7 @@ export interface LoginScreenProps {
   navigation: Record<string, any>;
   hideActivityModal: Function;
   setEndTime: Function;
+  getFluffyRoles: Function;
 }
 
 export class LoginScreen extends React.PureComponent<LoginScreenProps> {
@@ -74,6 +76,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       }
       setUserId(user.userId);
       this.props.loginUser(user);
+      this.props.getFluffyRoles();
       this.props.hideActivityModal();
       trackEvent('user_sign_in');
       this.props.navigation.replace('Tabs');

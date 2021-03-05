@@ -11,4 +11,5 @@ export default interface User {
     loginId: string;
     mailId: string;
   };
+  isManager: boolean;
 };
