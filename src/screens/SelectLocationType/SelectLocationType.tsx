@@ -12,7 +12,7 @@ import EnterLocation from '../../components/enterlocation/EnterLocation';
 import Location from '../../models/Location';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { addLocation, editLocation, getLocationDetails } from '../../state/actions/saga';
-import { addLocationToExisting, editExistingLocation, isUpdating } from '../../state/actions/Location';
+import { addLocationToExisting, editExistingLocation } from '../../state/actions/Location';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter, manualScan } from '../../utils/scannerUtils';
@@ -109,7 +109,6 @@ const SelectLocationType = () => {
       setAPIInProgress(false);
       dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
       navigation.navigate('LocationDetails');
-      dispatch(isUpdating(true));
       return undefined;
     }
 
@@ -143,7 +142,6 @@ const SelectLocationType = () => {
       setAPIInProgress(false);
       dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
       navigation.navigate('LocationDetails');
-      dispatch(isUpdating(true));
       return undefined;
     }
 

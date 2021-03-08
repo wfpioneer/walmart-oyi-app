@@ -5,7 +5,6 @@ export const SET_RESERVE_LOCATIONS = 'LOCATION/SET_RESERVE_LOCATIONS';
 export const SET_ITEM_LOC_DETAILS = 'LOCATION/SET_ITEM_LOC_DETAILS';
 export const ADD_LOCATION_TO_EXISTING = 'LOCATION/ADD_LOCATION_TO_EXISTING';
 export const EDIT_EXISTING_LOCATION = 'LOCATION/EDIT_EXISTING_LOCATION';
-export const IS_UPDATING = 'LOCATION/IS_UPDATING';
 export const DELETE_LOCATION_FROM_EXISTING = 'LOCATION/DELETE_LOCATION_FROM_EXISTING';
 export const RESET_LOCATIONS = 'LOCATION/RESET_LOCATIONS';
 export const GET_LOCATION_DETAILS = 'LOCATION/GET_LOCATION_DETAILS';
@@ -55,11 +54,6 @@ export const deleteLocationFromExisting = (locationArea: string, locIndex: numbe
     locationArea,
     locIndex
   }
-});
-
-export const isUpdating = (updating: boolean) => ({
-  type: IS_UPDATING,
-  payload: updating
 });
 
 export const resetLocations = () => ({

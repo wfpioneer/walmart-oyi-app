@@ -2,7 +2,8 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import itemDetail from '../../mockData/getItemDetails';
 import {
-  HandleProps, RenderProps, ReviewItemDetailsScreen, renderAddPicklistButton, renderLocationComponent, renderOHQtyComponent, renderScanForNoActionButton
+  HandleProps, RenderProps, ReviewItemDetailsScreen, renderAddPicklistButton,
+  renderLocationComponent, renderOHQtyComponent, renderScanForNoActionButton
 } from './ReviewItemDetails';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));

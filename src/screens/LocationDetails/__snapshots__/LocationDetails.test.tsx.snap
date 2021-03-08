@@ -1,0 +1,1631 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete Location Confirmation with Location Name  1`] = `
+<React.Fragment>
+  <ReactNativeModal
+    animationIn="slideInUp"
+    animationInTiming={300}
+    animationOut="slideOutDown"
+    animationOutTiming={300}
+    avoidKeyboard={false}
+    backdropColor="black"
+    backdropOpacity={0.7}
+    backdropTransitionInTiming={300}
+    backdropTransitionOutTiming={300}
+    coverScreen={true}
+    customBackdrop={null}
+    deviceHeight={null}
+    deviceWidth={null}
+    hasBackdrop={true}
+    hideModalContentWhileAnimating={false}
+    isVisible={false}
+    onBackButtonPress={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalShow={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    propagateSwipe={false}
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <React.Fragment>
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.LOCATION.DELETE_CONFIRMATION" translation]A1-1
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </View>
+  </ReactNativeModal>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.FLOOR" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.RESERVE" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+  </ScrollViewMock>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "flex-end",
+        }
+      }
+    >
+      <FAB
+        buttonColor="#0071e9"
+        iconTextColor="#FFFFFF"
+        iconTextComponent={
+          <mockConstructor
+            color="#ffffffff"
+            name="plus"
+            size={40}
+          />
+        }
+        onClickAction={[Function]}
+        snackOffset={0}
+        style={Object {}}
+        visible={true}
+      />
+    </View>
+  </View>
+</React.Fragment>
+`;
+
+exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete Location Error 'Retry'  1`] = `
+<React.Fragment>
+  <ReactNativeModal
+    animationIn="slideInUp"
+    animationInTiming={300}
+    animationOut="slideOutDown"
+    animationOutTiming={300}
+    avoidKeyboard={false}
+    backdropColor="black"
+    backdropOpacity={0.7}
+    backdropTransitionInTiming={300}
+    backdropTransitionOutTiming={300}
+    coverScreen={true}
+    customBackdrop={null}
+    deviceHeight={null}
+    deviceWidth={null}
+    hasBackdrop={true}
+    hideModalContentWhileAnimating={false}
+    isVisible={false}
+    onBackButtonPress={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalShow={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    propagateSwipe={false}
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <React.Fragment>
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.LOCATION.DELETE_LOCATION_API_ERROR" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.RETRY\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </View>
+  </ReactNativeModal>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.FLOOR" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.RESERVE" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+  </ScrollViewMock>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "flex-end",
+        }
+      }
+    >
+      <FAB
+        buttonColor="#0071e9"
+        iconTextColor="#FFFFFF"
+        iconTextComponent={
+          <mockConstructor
+            color="#ffffffff"
+            name="plus"
+            size={40}
+          />
+        }
+        onClickAction={[Function]}
+        snackOffset={0}
+        style={Object {}}
+        visible={true}
+      />
+    </View>
+  </View>
+</React.Fragment>
+`;
+
+exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader when waiting for a response from getLocation 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader when waiting for a response to Delete a Location 1`] = `
+<React.Fragment>
+  <ReactNativeModal
+    animationIn="slideInUp"
+    animationInTiming={300}
+    animationOut="slideOutDown"
+    animationOutTiming={300}
+    avoidKeyboard={false}
+    backdropColor="black"
+    backdropOpacity={0.7}
+    backdropTransitionInTiming={300}
+    backdropTransitionOutTiming={300}
+    coverScreen={true}
+    customBackdrop={null}
+    deviceHeight={null}
+    deviceWidth={null}
+    hasBackdrop={true}
+    hideModalContentWhileAnimating={false}
+    isVisible={false}
+    onBackButtonPress={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalShow={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    propagateSwipe={false}
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#0071e9"
+        hidesWhenStopped={true}
+        size="large"
+        style={
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          }
+        }
+      />
+    </View>
+  </ReactNativeModal>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.FLOOR" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.RESERVE" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+  </ScrollViewMock>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "flex-end",
+        }
+      }
+    >
+      <FAB
+        buttonColor="#0071e9"
+        iconTextColor="#FFFFFF"
+        iconTextComponent={
+          <mockConstructor
+            color="#ffffffff"
+            name="plus"
+            size={40}
+          />
+        }
+        onClickAction={[Function]}
+        snackOffset={0}
+        style={Object {}}
+        visible={true}
+      />
+    </View>
+  </View>
+</React.Fragment>
+`;
+
+exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Delete Confirmation Modal (isVisible should be set to true) 1`] = `
+<React.Fragment>
+  <ReactNativeModal
+    animationIn="slideInUp"
+    animationInTiming={300}
+    animationOut="slideOutDown"
+    animationOutTiming={300}
+    avoidKeyboard={false}
+    backdropColor="black"
+    backdropOpacity={0.7}
+    backdropTransitionInTiming={300}
+    backdropTransitionOutTiming={300}
+    coverScreen={true}
+    customBackdrop={null}
+    deviceHeight={null}
+    deviceWidth={null}
+    hasBackdrop={true}
+    hideModalContentWhileAnimating={false}
+    isVisible={true}
+    onBackButtonPress={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalShow={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    propagateSwipe={false}
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <React.Fragment>
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.LOCATION.DELETE_CONFIRMATION" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </View>
+  </ReactNativeModal>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.FLOOR" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.RESERVE" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+  </ScrollViewMock>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "flex-end",
+        }
+      }
+    >
+      <FAB
+        buttonColor="#0071e9"
+        iconTextColor="#FFFFFF"
+        iconTextComponent={
+          <mockConstructor
+            color="#ffffffff"
+            name="plus"
+            size={40}
+          />
+        }
+        onClickAction={[Function]}
+        snackOffset={0}
+        style={Object {}}
+        visible={true}
+      />
+    </View>
+  </View>
+</React.Fragment>
+`;
+
+exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders a List of (1) Reserve location with (0) Floor locations 1`] = `
+<React.Fragment>
+  <ReactNativeModal
+    animationIn="slideInUp"
+    animationInTiming={300}
+    animationOut="slideOutDown"
+    animationOutTiming={300}
+    avoidKeyboard={false}
+    backdropColor="black"
+    backdropOpacity={0.7}
+    backdropTransitionInTiming={300}
+    backdropTransitionOutTiming={300}
+    coverScreen={true}
+    customBackdrop={null}
+    deviceHeight={null}
+    deviceWidth={null}
+    hasBackdrop={true}
+    hideModalContentWhileAnimating={false}
+    isVisible={false}
+    onBackButtonPress={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalShow={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    propagateSwipe={false}
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <React.Fragment>
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.LOCATION.DELETE_CONFIRMATION" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </View>
+  </ReactNativeModal>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.FLOOR" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.RESERVE" translation] (1)
+      </Text>
+    </View>
+    <React.Fragment>
+      <locationDetailsCard
+        deleteAction={[Function]}
+        editAction={[Function]}
+        locationName="A1-1"
+        locationType="Reserve"
+      />
+    </React.Fragment>
+  </ScrollViewMock>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "flex-end",
+        }
+      }
+    >
+      <FAB
+        buttonColor="#0071e9"
+        iconTextColor="#FFFFFF"
+        iconTextComponent={
+          <mockConstructor
+            color="#ffffffff"
+            name="plus"
+            size={40}
+          />
+        }
+        onClickAction={[Function]}
+        snackOffset={0}
+        style={Object {}}
+        visible={true}
+      />
+    </View>
+  </View>
+</React.Fragment>
+`;
+
+exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders a List of (2) Floor locations with (0) Reserve locations 1`] = `
+<React.Fragment>
+  <ReactNativeModal
+    animationIn="slideInUp"
+    animationInTiming={300}
+    animationOut="slideOutDown"
+    animationOutTiming={300}
+    avoidKeyboard={false}
+    backdropColor="black"
+    backdropOpacity={0.7}
+    backdropTransitionInTiming={300}
+    backdropTransitionOutTiming={300}
+    coverScreen={true}
+    customBackdrop={null}
+    deviceHeight={null}
+    deviceWidth={null}
+    hasBackdrop={true}
+    hideModalContentWhileAnimating={false}
+    isVisible={false}
+    onBackButtonPress={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalShow={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    propagateSwipe={false}
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <React.Fragment>
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.LOCATION.DELETE_CONFIRMATION" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </View>
+  </ReactNativeModal>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.FLOOR" translation] (2)
+      </Text>
+    </View>
+    <React.Fragment>
+      <locationDetailsCard
+        deleteAction={[Function]}
+        editAction={[Function]}
+        locationName="A1-2"
+        locationType="Sales Floor"
+      />
+      <locationDetailsCard
+        deleteAction={[Function]}
+        editAction={[Function]}
+        locationName="A1-3"
+        locationType="End Cap"
+      />
+    </React.Fragment>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.RESERVE" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+  </ScrollViewMock>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "flex-end",
+        }
+      }
+    >
+      <FAB
+        buttonColor="#0071e9"
+        iconTextColor="#FFFFFF"
+        iconTextComponent={
+          <mockConstructor
+            color="#ffffffff"
+            name="plus"
+            size={40}
+          />
+        }
+        onClickAction={[Function]}
+        snackOffset={0}
+        style={Object {}}
+        visible={true}
+      />
+    </View>
+  </View>
+</React.Fragment>
+`;
+
+exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders a List of Floor & Reserve Locations 1`] = `
+<React.Fragment>
+  <ReactNativeModal
+    animationIn="slideInUp"
+    animationInTiming={300}
+    animationOut="slideOutDown"
+    animationOutTiming={300}
+    avoidKeyboard={false}
+    backdropColor="black"
+    backdropOpacity={0.7}
+    backdropTransitionInTiming={300}
+    backdropTransitionOutTiming={300}
+    coverScreen={true}
+    customBackdrop={null}
+    deviceHeight={null}
+    deviceWidth={null}
+    hasBackdrop={true}
+    hideModalContentWhileAnimating={false}
+    isVisible={false}
+    onBackButtonPress={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalShow={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    propagateSwipe={false}
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <React.Fragment>
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.LOCATION.DELETE_CONFIRMATION" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </View>
+  </ReactNativeModal>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.FLOOR" translation] (2)
+      </Text>
+    </View>
+    <React.Fragment>
+      <locationDetailsCard
+        deleteAction={[Function]}
+        editAction={[Function]}
+        locationName="A1-2"
+        locationType="Sales Floor"
+      />
+      <locationDetailsCard
+        deleteAction={[Function]}
+        editAction={[Function]}
+        locationName="A1-3"
+        locationType="End Cap"
+      />
+    </React.Fragment>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.RESERVE" translation] (1)
+      </Text>
+    </View>
+    <React.Fragment>
+      <locationDetailsCard
+        deleteAction={[Function]}
+        editAction={[Function]}
+        locationName="A1-1"
+        locationType="Reserve"
+      />
+    </React.Fragment>
+  </ScrollViewMock>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "flex-end",
+        }
+      }
+    >
+      <FAB
+        buttonColor="#0071e9"
+        iconTextColor="#FFFFFF"
+        iconTextComponent={
+          <mockConstructor
+            color="#ffffffff"
+            name="plus"
+            size={40}
+          />
+        }
+        onClickAction={[Function]}
+        snackOffset={0}
+        style={Object {}}
+        visible={true}
+      />
+    </View>
+  </View>
+</React.Fragment>
+`;
+
+exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders a default of (0) Floor & Reserve Locations 1`] = `
+<React.Fragment>
+  <ReactNativeModal
+    animationIn="slideInUp"
+    animationInTiming={300}
+    animationOut="slideOutDown"
+    animationOutTiming={300}
+    avoidKeyboard={false}
+    backdropColor="black"
+    backdropOpacity={0.7}
+    backdropTransitionInTiming={300}
+    backdropTransitionOutTiming={300}
+    coverScreen={true}
+    customBackdrop={null}
+    deviceHeight={null}
+    deviceWidth={null}
+    hasBackdrop={true}
+    hideModalContentWhileAnimating={false}
+    isVisible={false}
+    onBackButtonPress={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalShow={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    propagateSwipe={false}
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <React.Fragment>
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.LOCATION.DELETE_CONFIRMATION" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </View>
+  </ReactNativeModal>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.FLOOR" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.RESERVE" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+  </ScrollViewMock>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "flex-end",
+        }
+      }
+    >
+      <FAB
+        buttonColor="#0071e9"
+        iconTextColor="#FFFFFF"
+        iconTextComponent={
+          <mockConstructor
+            color="#ffffffff"
+            name="plus"
+            size={40}
+          />
+        }
+        onClickAction={[Function]}
+        snackOffset={0}
+        style={Object {}}
+        visible={true}
+      />
+    </View>
+  </View>
+</React.Fragment>
+`;
