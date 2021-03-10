@@ -11,4 +11,4 @@ export const logoutUser = () => ({
 
 export const getFluffyRoles = () => ({
   type: 'USER/GET_FLUFFY_ROLES'
-})
+});

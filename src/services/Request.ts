@@ -55,8 +55,7 @@ class RequestDispatch {
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.version'] = '1.0.0';
           interceptRequest.headers['wm_svc.env'] = Config.ENVIRONMENT === 'prod' ? 'prod' : 'stg';
-        }
-        else {
+        } else {
           interceptRequest.headers.userId = store.getState().User.userId;
           interceptRequest.headers.countryCode = store.getState().User.countryCode;
           interceptRequest.headers.clubNbr = store.getState().User.siteId;

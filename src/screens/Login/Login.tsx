@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Platform, View } from 'react-native';
 // @ts-ignore
 import WMSSO from 'react-native-wmsso';
+import Config from 'react-native-config';
 import Button from '../../components/buttons/Button';
 import styles from './Login.style';
 import { loginUser } from '../../state/actions/User';
@@ -14,7 +15,6 @@ import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { RootState } from '../../state/reducers/RootReducer';
-import Config from 'react-native-config';
 
 const mapDispatchToProps = {
   loginUser,
@@ -103,7 +103,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
             break;
         }
       }
-      user.userId=user.userId.replace('_', ''); // Strip underscore from svc accounts to prevent 400 error.
+      user.userId = user.userId.replace('_', ''); // Strip underscore from svc accounts to prevent 400 error.
       setUserId(user.userId);
       this.props.loginUser(user);
       this.props.getFluffyRoles(user);

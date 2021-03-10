@@ -10,7 +10,7 @@ export const DELETE_LOCATION = 'SAGA/DELETE_LOCATION';
 export const NO_ACTION = 'SAGA/NO_ACTION';
 export const PRINT_SIGN = 'SAGA/PRINT_SIGN';
 export const GET_LOCATION_DETAILS = 'SAGA/GET_LOCATION_DETAILS';
-export const GET_FLUFFY_ROLES = 'SAGA/GET_FLUFFY_ROLES'
+export const GET_FLUFFY_ROLES = 'SAGA/GET_FLUFFY_ROLES';
 
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload });
 export const getItemDetails = (payload: any) => ({ type: GET_ITEM_DETAILS, payload });

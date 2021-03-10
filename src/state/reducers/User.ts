@@ -25,14 +25,14 @@ export const User = (state = initialState, action: any) => {
     case 'GET_FLUFFY_ROLES':
       if (action.payload === 'manager approval') {
         return {
-          ...state, 
-          isManager: true
-          }
-        };
-        return { 
           ...state,
-          isManager: false
+          isManager: true
         };
+      };
+      return {
+        ...state,
+        isManager: false
+      };
     default:
       return state;
   }
