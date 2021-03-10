@@ -111,10 +111,3 @@ describe('ComponentWillUnmount', () => {
     expect(loginScreen['unsubscribe']).toHaveBeenCalled();
   });
 });
-
-describe('ComponentDidUpdate', () => {
-  it('does nothing if the props do not change', () => {
-    const loginScreen = new LoginScreen(defaultTestProp);
-    expect(loginScreen.componentDidUpdate(defaultTestProp)).toBeUndefined();
-  });
-});
