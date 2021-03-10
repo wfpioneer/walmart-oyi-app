@@ -11,6 +11,7 @@ const navigationProp = {
   navigate: jest.fn()
 };
 const testUser: User = {
+  isManager: false,
   additional: {
     clockCheckResult: '',
     displayName: '',
@@ -29,7 +30,13 @@ const defaultTestProp: LoginScreenProps = {
   hideActivityModal: jest.fn(),
   loginUser: jest.fn(),
   navigation: navigationProp,
-  setEndTime: jest.fn()
+  setEndTime: jest.fn(),
+  getFluffyRoles: jest.fn(),
+  fluffyApiState: {
+    isWaiting: false,
+    error: '',
+    result: {}
+  }
 };
 
 describe('LoginScreen', () => {
@@ -41,6 +48,12 @@ describe('LoginScreen', () => {
       hideActivityModal={jest.fn}
       User={testUser}
       setEndTime={jest.fn}
+      getFluffyRoles={jest.fn}
+      fluffyApiState={{
+        isWaiting: false,
+        error: '',
+        result: {}
+      }}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -96,5 +109,12 @@ describe('ComponentWillUnmount', () => {
     loginScreen['unsubscribe'] = jest.fn();
     loginScreen.componentWillUnmount();
     expect(loginScreen['unsubscribe']).toHaveBeenCalled();
+  });
+});
+
+describe('ComponentDidUpdate', () => {
+  it('does nothing if the props do not change', () => {
+    const loginScreen = new LoginScreen(defaultTestProp);
+    expect(loginScreen.componentDidUpdate(defaultTestProp)).toBeUndefined();
   });
 });

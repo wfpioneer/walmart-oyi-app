@@ -24,4 +24,4 @@ export const deleteLocation = (payload: any) => ({ type: DELETE_LOCATION, payloa
 export const noAction = (payload: any) => ({ type: NO_ACTION, payload });
 export const printSign = (payload: any) => ({ type: PRINT_SIGN, payload });
 export const getLocationDetails = (payload: any) => ({ type: GET_LOCATION_DETAILS, payload });
-export const getFluffyRoles = () => ({ type: GET_FLUFFY_ROLES });
+export const getFluffyRoles = (payload: any) => ({ type: GET_FLUFFY_ROLES, payload });

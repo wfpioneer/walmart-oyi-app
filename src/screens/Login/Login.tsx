@@ -5,7 +5,8 @@ import { Platform, View } from 'react-native';
 import WMSSO from 'react-native-wmsso';
 import Button from '../../components/buttons/Button';
 import styles from './Login.style';
-import { loginUser, getFluffyRoles } from '../../state/actions/User';
+import { loginUser } from '../../state/actions/User';
+import { getFluffyRoles } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
 import { hideActivityModal } from '../../state/actions/Modal';
@@ -13,6 +14,7 @@ import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { RootState } from '../../state/reducers/RootReducer';
+import Config from 'react-native-config';
 
 const mapDispatchToProps = {
   loginUser,
@@ -21,7 +23,10 @@ const mapDispatchToProps = {
   getFluffyRoles
 };
 
-const mapStateToProps = (state: RootState) => ({ User: state.User });
+const mapStateToProps = (state: RootState) => ({
+  User: state.User,
+  fluffyApiState: state.async.getFluffyRoles
+});
 
 export interface LoginScreenProps {
   loginUser: Function;
@@ -30,6 +35,7 @@ export interface LoginScreenProps {
   hideActivityModal: Function;
   setEndTime: Function;
   getFluffyRoles: Function;
+  fluffyApiState: any;
 }
 
 export class LoginScreen extends React.PureComponent<LoginScreenProps> {
@@ -51,11 +57,34 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     }
   }
 
+  componentDidUpdate(prevProps: Readonly<LoginScreenProps>) {
+    if (prevProps.fluffyApiState.isWaiting && this.props.fluffyApiState.error) {
+      trackEvent('fluffy_api_error', {
+        errorDetails: this.props.fluffyApiState.error.message || JSON.stringify(this.props.fluffyApiState.error)
+      });
+    }
+
+    if (prevProps.fluffyApiState.isWaiting && this.props.fluffyApiState.result) {
+      trackEvent('fluffy_api_success', {
+        status: this.props.fluffyApiState.result.status
+      });
+      if (this.props.fluffyApiState.result.status === 204) {
+        this.props.User.isManager = false;
+      }
+      if (this.props.fluffyApiState.result === 'manager approval') {
+        this.props.User.isManager = true;
+      }
+    }
+  }
+
   componentWillUnmount(): void {
     return this.unsubscribe && this.unsubscribe();
   }
 
   signInUser(): void {
+    if (Config.ENVIRONMENT !== 'prod') {
+      WMSSO.setEnv('STG');
+    }
     WMSSO.getUser().then((user: User) => {
       if (!this.props.User.userId) {
         const countryCode = user.countryCode.toLowerCase();
@@ -74,9 +103,10 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
             break;
         }
       }
+      user.userId=user.userId.replace('_', ''); // Strip underscore from svc accounts to prevent 400 error.
       setUserId(user.userId);
       this.props.loginUser(user);
-      this.props.getFluffyRoles();
+      this.props.getFluffyRoles(user);
       this.props.hideActivityModal();
       trackEvent('user_sign_in');
       this.props.navigation.replace('Tabs');
