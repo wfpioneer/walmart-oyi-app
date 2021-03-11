@@ -1,12 +1,12 @@
 import React, { ReactNode } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Platform, View } from 'react-native';
 // @ts-ignore
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
 import Button from '../../components/buttons/Button';
 import styles from './Login.style';
-import { loginUser } from '../../state/actions/User';
+import { loginUser, assignFluffyRoles } from '../../state/actions/User';
 import { getFluffyRoles } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
@@ -58,6 +58,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
   }
 
   componentDidUpdate(prevProps: Readonly<LoginScreenProps>) {
+    const dispatch = useDispatch()
     if (prevProps.fluffyApiState.isWaiting && this.props.fluffyApiState.error) {
       trackEvent('fluffy_api_error', {
         errorDetails: this.props.fluffyApiState.error.message || JSON.stringify(this.props.fluffyApiState.error)
@@ -68,12 +69,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       trackEvent('fluffy_api_success', {
         status: this.props.fluffyApiState.result.status
       });
-      if (this.props.fluffyApiState.result.status === 204) {
-        this.props.User.isManager = false;
-      }
-      if (this.props.fluffyApiState.result === 'manager approval') {
-        this.props.User.isManager = true;
-      }
+      dispatch(assignFluffyRoles(this.props.fluffyApiState.result))
     }
   }
 

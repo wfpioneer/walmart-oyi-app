@@ -22,13 +22,13 @@ export const User = (state = initialState, action: any) => {
       };
     case 'USER/LOGOUT':
       return initialState;
-    case 'GET_FLUFFY_ROLES':
-      if (action.payload === 'manager approval') {
+    case 'USER/ASSIGN_FLUFFY_ROLES':
+      if (action.payload === ['manager approval']) {
         return {
           ...state,
           isManager: true
         };
-      };
+      }
       return {
         ...state,
         isManager: false

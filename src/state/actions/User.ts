@@ -9,6 +9,7 @@ export const logoutUser = () => ({
   type: 'USER/LOGOUT'
 });
 
-export const getFluffyRoles = () => ({
-  type: 'USER/GET_FLUFFY_ROLES'
+export const assignFluffyRoles = (resultPayload: any) => ({
+  type: 'USER/ASSIGN_FLUFFY_ROLES',
+  payload: resultPayload
 });
