@@ -1,6 +1,4 @@
 import axios, { AxiosInstance, AxiosRequestConfig, Canceler } from 'axios';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import moment from 'moment';
 import qs from 'qs';
 import { Platform } from 'react-native';
@@ -20,7 +18,6 @@ enum Methods {
   PUT = 'put',
 }
 const TIMEOUT = 10000;
-const MAX_USERNAME_LENGTH = 8;
 
 class RequestDispatch {
   public service: AxiosInstance;
@@ -41,13 +38,18 @@ class RequestDispatch {
     // Custom request interceptor
     this.service.interceptors.request.use(
       async (request: any) => {
+        const currentTime = moment();
+
         // Custom headers here
         const interceptRequest = await this.settingHeaders(request);
-        // console.log(`=====> Network ${request.method} to: ${request.url}`, interceptRequest);
+
+        // For use with all of the OYI APIs
+        interceptRequest.headers.worklistDate = currentTime.format('YYYY-MM-DD');
         interceptRequest.headers.userId = store.getState().User.userId;
         interceptRequest.headers.countryCode = store.getState().User.countryCode;
         interceptRequest.headers.clubNbr = store.getState().User.siteId;
-        this.requestStartTime = moment().valueOf();
+
+        this.requestStartTime = currentTime.valueOf();
         return interceptRequest;
       },
       (err: any) => {
