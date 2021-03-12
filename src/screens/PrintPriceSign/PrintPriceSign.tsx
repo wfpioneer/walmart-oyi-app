@@ -207,7 +207,7 @@ const PrintPriceSign = () => {
           description: selectedSignType,
           printerMACAddress: selectedPrinter.id,
           isPortablePrinter: selectedPrinter.type === 1,
-          worklistType: exceptionType
+          workListTypeCode: exceptionType
         }
       ];
       setApiStart(moment().valueOf());
