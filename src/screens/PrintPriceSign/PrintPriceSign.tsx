@@ -103,7 +103,7 @@ const PrintPriceSign = () => {
     }
   }, []);
 
-  // Print API 
+  // Print API
   useEffect(() => {
     // on api success
     if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
@@ -207,7 +207,7 @@ const PrintPriceSign = () => {
           description: selectedSignType,
           printerMACAddress: selectedPrinter.id,
           isPortablePrinter: selectedPrinter.type === 1,
-          worklistType: exceptionType
+          workListTypeCode: exceptionType
         }
       ];
       setApiStart(moment().valueOf());

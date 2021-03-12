@@ -92,7 +92,7 @@ export const handlePrint = (props: HandlePrintProps) => {
         description: paperSize,
         printerMACAddress: selectedPrinter.id,
         isPortablePrinter: false,
-        worklistType
+        workListTypeCode: worklistType
       };
     });
     setApiStart(moment().valueOf());
