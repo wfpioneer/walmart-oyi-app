@@ -1,6 +1,4 @@
 import axios, { AxiosInstance, AxiosRequestConfig, Canceler } from 'axios';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import moment from 'moment';
 import qs from 'qs';
 import Config from 'react-native-config';
@@ -44,10 +42,18 @@ class RequestDispatch {
     // Custom request interceptor
     this.service.interceptors.request.use(
       async (request: any) => {
+        const currentTime = moment();
+
         // Custom headers here
         const interceptRequest = await this.settingHeaders(request);
         const envUrls = getEnvironment();
         const isOrchUrl: boolean = request.url.includes(envUrls.orchestrationURL);
+
+        // For use with all of the OYI APIs
+        interceptRequest.headers.worklistDate = currentTime.format('YYYY-MM-DD');
+        interceptRequest.headers.userId = store.getState().User.userId;
+        interceptRequest.headers.countryCode = store.getState().User.countryCode;
+        interceptRequest.headers.clubNbr = store.getState().User.siteId;
 
         if (request.url.includes(envUrls.fluffyURL)) {
           interceptRequest.headers['wm_svc.name'] = svcName.fluffyName;
@@ -70,7 +76,9 @@ class RequestDispatch {
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);
         }
-        this.requestStartTime = moment().valueOf();
+        interceptRequest.headers['wm_consumer.id'] = getConsumerId();
+        interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);
+        this.requestStartTime = currentTime.valueOf();
         return interceptRequest;
       },
       (err: any) => {

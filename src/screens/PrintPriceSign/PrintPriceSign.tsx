@@ -5,7 +5,10 @@ import {
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import {
+  NavigationProp, Route, useNavigation, useRoute
+} from '@react-navigation/native';
+import { Dispatch } from 'redux';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
@@ -32,13 +35,15 @@ const ERROR_FORMATTING_OPTIONS = {
   max: numbers(QTY_MAX, { precision: 0 })
 };
 
-const validateQty = (qty: number) => QTY_MIN <= qty && qty <= QTY_MAX;
+export const validateQty = (qty: number) => QTY_MIN <= qty && qty <= QTY_MAX;
 
 const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
   <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
 );
 
-const renderSignSizeButtons = (selectedPrinter: Printer, catgNbr: number, signType: string, dispatch: Function) => {
+export const renderSignSizeButtons = (
+  selectedPrinter: Printer, catgNbr: number, signType: string, dispatch: Function
+) => {
   const sizeObject = selectedPrinter.type === PrinterType.LASER ? LaserPaper : PortablePaper;
   return (
     <View style={{ flexDirection: 'row', marginVertical: 4 }}>
@@ -84,12 +89,73 @@ const PrintPriceSign = () => {
   const [error, setError] = useState({ error: false, message: '' });
   const [apiStart, setApiStart] = useState(0);
 
+  return (
+    <PrintPriceSignScreen
+      scannedEvent={scannedEvent}
+      exceptionType={exceptionType}
+      actionCompleted={actionCompleted}
+      result={result}
+      printAPI={printAPI}
+      selectedPrinter={selectedPrinter}
+      selectedSignType={selectedSignType}
+      printQueue={printQueue}
+      dispatch={dispatch}
+      navigation={navigation}
+      route={route}
+      signQty={signQty}
+      setSignQty={setSignQty}
+      isValidQty={isValidQty}
+      setIsValidQty={setIsValidQty}
+      apiInProgress={apiInProgress}
+      setAPIInProgress={setAPIInProgress}
+      error={error}
+      setError={setError}
+      apiStart={apiStart}
+      setApiStart={setApiStart}
+      useEffectHook={useEffect}
+      useLayoutHook={useLayoutEffect}
+    />
+  );
+};
+interface PriceSignProps {
+  scannedEvent: {value: any; type: any };
+  exceptionType: string;
+  actionCompleted: boolean;
+  result: any;
+  printAPI: {
+    isWaiting: boolean;
+    value: any;
+    error: any;
+    result: any;
+  };
+  selectedPrinter: Printer;
+  selectedSignType: LaserPaper | PortablePaper;
+  printQueue: PrintQueueItem[];
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
+  route: Route<any>;
+  signQty: number; setSignQty: Function;
+  isValidQty: boolean; setIsValidQty: Function;
+  apiInProgress: boolean; setAPIInProgress: Function;
+  error: { error: boolean; message: string };
+  setError: Function;
+  apiStart: number; setApiStart: Function;
+  useEffectHook: Function;
+  useLayoutHook: Function;
+}
+export const PrintPriceSignScreen = (props: PriceSignProps) => {
+  const {
+    scannedEvent, exceptionType, actionCompleted, result,
+    printAPI, selectedPrinter, selectedSignType, printQueue,
+    dispatch, navigation, route, signQty, setSignQty, isValidQty,
+    setIsValidQty, apiInProgress, setAPIInProgress, error,
+    setError, apiStart, setApiStart, useEffectHook, useLayoutHook
+  } = props;
   const {
     itemName, itemNbr, upcNbr, categoryNbr
   } = (result && result.data) || getMockItemDetails(scannedEvent.value);
-  const catgNbr = categoryNbr;
 
-  useLayoutEffect(() => {
+  useLayoutHook(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
     if (selectedPrinter.name === '') {
       const initialPrinter: Printer = {
@@ -102,9 +168,8 @@ const PrintPriceSign = () => {
       dispatch(addToPrinterList(initialPrinter));
     }
   }, []);
-
   // Print API
-  useEffect(() => {
+  useEffectHook(() => {
     // on api success
     if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
       trackEvent('print_api_success', { duration: moment().valueOf() - apiStart });
@@ -134,8 +199,7 @@ const PrintPriceSign = () => {
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
-    // eslint-disable-next-line no-restricted-globals
-    if (!isNaN(newQty)) {
+    if (!Number.isNaN(newQty)) {
       setSignQty(newQty);
       setIsValidQty(validateQty(newQty));
     }
@@ -146,7 +210,7 @@ const PrintPriceSign = () => {
     if (signQty < QTY_MIN) {
       setSignQty(QTY_MIN);
     } else if (signQty < QTY_MAX) {
-      setSignQty((prevState => prevState + 1));
+      setSignQty(((prevState: number) => prevState + 1));
     }
   };
 
@@ -155,7 +219,7 @@ const PrintPriceSign = () => {
     if (signQty > QTY_MAX) {
       setSignQty(QTY_MAX);
     } else if (signQty > QTY_MIN) {
-      setSignQty((prevState => prevState - 1));
+      setSignQty(((prevState: number) => prevState - 1));
     }
   };
 
@@ -181,7 +245,7 @@ const PrintPriceSign = () => {
         itemName,
         itemNbr,
         upcNbr,
-        catgNbr,
+        catgNbr: categoryNbr,
         signQty,
         worklistType: exceptionType,
         paperSize: selectedSignType
@@ -207,7 +271,7 @@ const PrintPriceSign = () => {
           description: selectedSignType,
           printerMACAddress: selectedPrinter.id,
           isPortablePrinter: selectedPrinter.type === 1,
-          worklistType: exceptionType
+          workListTypeCode: exceptionType
         }
       ];
       setApiStart(moment().valueOf());
@@ -260,7 +324,7 @@ const PrintPriceSign = () => {
         </View>
         <View style={styles.signSizeContainer}>
           <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
-          {renderSignSizeButtons(selectedPrinter, catgNbr, selectedSignType, dispatch)}
+          {renderSignSizeButtons(selectedPrinter, categoryNbr, selectedSignType, dispatch)}
         </View>
         <View style={styles.printerContainer}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>

@@ -20,7 +20,7 @@ const initialState: StateType = {
     type: PrinterType.LASER,
     name: '',
     desc: '',
-    id: 0
+    id: '0'
   },
   selectedSignType: '',
   printerList: [],
