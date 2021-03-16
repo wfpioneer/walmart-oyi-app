@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
+import { NavigationProp } from '@react-navigation/native';
 import COLOR from '../../../themes/Color';
 import styles from './PrinterList.style';
 import { deleteFromPrinterList, setSelectedPrinter } from '../../../state/actions/Print';
@@ -26,7 +27,7 @@ interface PrinterListProps {
   printerList: Printer[];
   deleteFromPrinterList: Function;
   setSelectedPrinter: Function;
-  navigation: any;
+  navigation: NavigationProp<any>;
 }
 
 export class PrinterList extends React.PureComponent<PrinterListProps> {
@@ -35,9 +36,8 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
     this.printerListCard = this.printerListCard.bind(this);
   }
 
-  printerListCard = (cardItem: { item: any }) => {
+  printerListCard = (cardItem: { item: Printer }) => {
     const { item } = cardItem;
-
     const onCardClick = () => {
       this.props.setSelectedPrinter(item);
       this.props.navigation.goBack();
@@ -55,7 +55,7 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
         <View style={styles.printerDescription}>
           <Text>{item.name}</Text>
         </View>
-        {item.id !== 0
+        {item.id !== '0'
         && (
           <TouchableOpacity style={styles.trashCan} onPress={onDeleteClick}>
             <MaterialCommunityIcons name="trash-can" size={20} color={COLOR.BLACK} />
