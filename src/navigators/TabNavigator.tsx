@@ -6,6 +6,7 @@ import { HomeNavigator } from './HomeNavigator';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import { WorklistNavigator } from './WorklistNavigator';
+import { ApprovalsNavigator } from './ApprovalsNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,6 +18,8 @@ export const TabNavigator = () => (
           return <MaterialIcons name="home" size={size} color={color} />;
         } if (route.name === strings('WORKLIST.WORKLIST')) {
           return <AntDesign name="profile" size={size} color={color} />;
+        } if (route.name === strings('APPROVALS.APPROVALS')) {
+          return <MaterialIcons name="approvals" size={size} color={color} />;
         }
 
         // You can return any component that you like here!
@@ -36,5 +39,9 @@ export const TabNavigator = () => (
       name={strings('WORKLIST.WORKLIST')}
       component={WorklistNavigator}
     />
+
+    { /* @ts-ignore */ }
+    <Tab.Screen name={strings('APPROVALS.APPROVALS')}
+    component={ApprovalsNavigator} />
   </Tab.Navigator>
 );
