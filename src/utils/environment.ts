@@ -69,25 +69,26 @@ export const getEnvironment = (): Environment => {
   const countryCode = store.getState().User.countryCode.toLowerCase();
 
   const environments: Environments = {
-    /* eslint-disable max-len */
-    // Rule disabled due to the length of the fluffy base URL.
     dev: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.dev.walmart.com',
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.dev.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.dev.walmart.com`,
-      fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com/api-proxy/service/IntlMobileAuthorizationPlatform'
+      fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com'
+        + '/api-proxy/service/IntlMobileAuthorizationPlatform'
     },
     stage: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.stg.walmart.com',
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.stg.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.stg.walmart.com`,
-      fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com/api-proxy/service/IntlMobileAuthorizationPlatform'
+      fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com'
+        + '/api-proxy/service/IntlMobileAuthorizationPlatform'
     },
     prod: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.prod.walmart.com',
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.prod.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.prod.walmart.com`,
-      fluffyURL: 'https://api-proxy.prod.soa-api-proxy.platform.glb.prod.walmart.com/api-proxy/service/IntlMobileAuthorizationPlatform'
+      fluffyURL: 'https://api-proxy.prod.soa-api-proxy.platform.glb.prod.walmart.com'
+        + '/api-proxy/service/IntlMobileAuthorizationPlatform'
     }
   };
 
