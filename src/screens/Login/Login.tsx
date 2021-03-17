@@ -70,7 +70,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       trackEvent('fluffy_api_success', {
         status: this.props.fluffyApiState.result.status
       });
-      this.props.assignFluffyRoles(this.props.fluffyApiState.result);
+      this.props.assignFluffyRoles(this.props.fluffyApiState.result.data);
       this.props.hideActivityModal();
       trackEvent('user_sign_in');
       this.props.navigation.replace('Tabs');

@@ -2,6 +2,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { LoginScreen, LoginScreenProps } from './Login';
 import User from '../../models/User';
+import { assignFluffyRoles } from 'src/state/actions/User';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
@@ -36,7 +37,8 @@ const defaultTestProp: LoginScreenProps = {
     isWaiting: false,
     error: '',
     result: {}
-  }
+  },
+  assignFluffyRoles: jest.fn()
 };
 
 describe('LoginScreen', () => {
@@ -54,6 +56,7 @@ describe('LoginScreen', () => {
         error: '',
         result: {}
       }}
+      assignFluffyRoles={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });

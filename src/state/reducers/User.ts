@@ -23,15 +23,9 @@ export const User = (state = initialState, action: any) => {
     case 'USER/LOGOUT':
       return initialState;
     case 'USER/ASSIGN_FLUFFY_ROLES':
-      if (action.payload === ['manager approval']) {
-        return {
-          ...state,
-          isManager: true
-        };
-      }
       return {
         ...state,
-        isManager: false
+        isManager: action.payload.contains('manager approval')
       };
     default:
       return state;
