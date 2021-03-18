@@ -10,7 +10,7 @@ import { assignFluffyRoles, loginUser } from '../../state/actions/User';
 import { getFluffyRoles } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
-import { hideActivityModal } from '../../state/actions/Modal';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
@@ -21,7 +21,8 @@ const mapDispatchToProps = {
   hideActivityModal,
   setEndTime,
   getFluffyRoles,
-  assignFluffyRoles
+  assignFluffyRoles,
+  showActivityModal
 };
 
 const mapStateToProps = (state: RootState) => ({
@@ -38,6 +39,7 @@ export interface LoginScreenProps {
   getFluffyRoles: Function;
   fluffyApiState: any;
   assignFluffyRoles: Function;
+  showActivityModal: Function;
 }
 
 export class LoginScreen extends React.PureComponent<LoginScreenProps> {
@@ -60,6 +62,9 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
   }
 
   componentDidUpdate(prevProps: Readonly<LoginScreenProps>) {
+    if (this.props.fluffyApiState.isWaiting) {
+      this.props.showActivityModal();
+    }
     if (prevProps.fluffyApiState.isWaiting && this.props.fluffyApiState.error) {
       trackEvent('fluffy_api_error', {
         errorDetails: this.props.fluffyApiState.error.message || JSON.stringify(this.props.fluffyApiState.error)

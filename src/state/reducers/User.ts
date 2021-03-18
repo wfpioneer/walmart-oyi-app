@@ -25,7 +25,7 @@ export const User = (state = initialState, action: any) => {
     case 'USER/ASSIGN_FLUFFY_ROLES':
       return {
         ...state,
-        isManager: action.payload.contains('manager approval')
+        isManager: action.payload.includes('manager approval')
       };
     default:
       return state;

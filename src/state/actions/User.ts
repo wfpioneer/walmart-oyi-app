@@ -9,7 +9,7 @@ export const logoutUser = () => ({
   type: 'USER/LOGOUT'
 });
 
-export const assignFluffyRoles = (resultPayload: String[]) => ({
+export const assignFluffyRoles = (resultPayload: string[]) => ({
   type: 'USER/ASSIGN_FLUFFY_ROLES',
   payload: resultPayload
 });
