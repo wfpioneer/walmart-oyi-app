@@ -1,4 +1,5 @@
 const initialState = {
+  isManager: false,
   additional: {
     clockCheckResult: null,
     displayName: null,
@@ -16,10 +17,16 @@ export const User = (state = initialState, action: any) => {
   switch (action.type) {
     case 'USER/LOGIN':
       return {
-        ...action.payload
+        ...action.payload,
+        isManager: false
       };
     case 'USER/LOGOUT':
       return initialState;
+    case 'USER/ASSIGN_FLUFFY_ROLES':
+      return {
+        ...state,
+        isManager: action.payload.includes('manager approval')
+      };
     default:
       return state;
   }
