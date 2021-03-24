@@ -1,0 +1,517 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApprovalListScreen Tests rendering Approval Api responses Renders Approval Api error message 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="alert"
+    size={40}
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.APPROVAL.APPROVAL_API_ERROR" translation]
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "marginVertical": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`ApprovalListScreen Tests rendering Approval Api responses Renders loading indicator when waiting for Approval Api response 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`ApprovalListScreen Tests rendering the approval list Renders Empty Approval list on response status 204 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingVertical": 28,
+    }
+  }
+>
+  <mockConstructor
+    color="#5FA7F2"
+    name="information"
+    size={40}
+  />
+  <Text>
+     The Approval List is Empty 
+  </Text>
+</View>
+`;
+
+exports[`ApprovalListScreen Tests rendering the approval list Renders a list of Approval Items 1`] = `
+<View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "categoryDescription": "SNACKS",
+          "categoryHeader": true,
+          "categoryNbr": 1,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "SNACKS",
+          "categoryNbr": 1,
+          "dollarChange": 150.5,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-27T00:00:00.000Z",
+          "initiatedUserId": "Associate Employee",
+          "itemName": "Nature Valley Crunchy Cereal Bars ",
+          "itemNbr": 123,
+          "newQuantity": 20,
+          "oldQuantity": 5,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000123,
+        },
+        Object {
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryHeader": true,
+          "categoryNbr": 2,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "dollarChange": 50,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "itemName": "Red Apples",
+          "itemNbr": 456,
+          "newQuantity": 10,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000456,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "dollarChange": 40,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "itemName": "Cabbage",
+          "itemNbr": 457,
+          "newQuantity": 15,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000457,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "dollarChange": 80,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "itemName": "Strawberries",
+          "itemNbr": 458,
+          "newQuantity": 40,
+          "oldQuantity": 20,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000458,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={
+      Array [
+        0,
+        2,
+      ]
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`ApprovalListScreen Tests rendering the approval list renderApprovalItem renders an approval item 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "justifyContent": "flex-start",
+      "marginBottom": 4,
+      "padding": 8,
+    }
+  }
+>
+  <Image
+    source=""
+    style={
+      Object {
+        "height": 100,
+        "resizeMode": "stretch",
+        "width": 100,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#8492a8",
+          "fontSize": 14,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.ITEM.ITEM" translation] 123
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#424242",
+            "fontSize": 20,
+            "fontWeight": "bold",
+            "marginVertical": 8,
+            "width": "80%",
+          }
+        }
+      >
+        Nature Valley Crunchy Cereal Bars 
+      </Text>
+      <View
+        style={
+          Object {
+            "justifyContent": "center",
+            "marginHorizontal": 20,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          onPress={[Function]}
+          status="checked"
+          uncheckedColor="#0071e9"
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginBottom": 6,
+          "width": "40%",
+        }
+      }
+    >
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Object {
+            "color": "#8492a8",
+            "fontSize": 16,
+          }
+        }
+      >
+        Associate Employee
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 16,
+            "marginHorizontal": 4,
+          }
+        }
+      >
+        |
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#B40C00",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+      >
+        [missing "en.APPROVAL.DAYS_LEFT" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderTopColor": "#bdbdbd",
+          "borderTopWidth": 1,
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "flexDirection": "column",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          5
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "flexDirection": "column",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#33691E",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            <Icon
+              allowFontScaling={false}
+              name="arrow-up"
+              size={20}
+            />
+            $150.50
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 4,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "color": "#545F7A",
+                  "fontSize": 16,
+                },
+                Object {
+                  "alignSelf": "flex-start",
+                  "color": "#33691E",
+                  "fontSize": 16,
+                  "fontWeight": "bold",
+                },
+              ]
+            }
+          >
+            15
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#eeeeee",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          20
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`ApprovalListScreen Tests rendering the approval list renderApprovalItem renders the category header 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "elevation": 4,
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "marginBottom": 4,
+      "paddingVertical": 20,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "alignSelf": "center",
+        "color": "#616161",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "justifyContent": "flex-end",
+        "marginHorizontal": 20,
+      }
+    }
+  >
+    1 - SNACKS
+  </Text>
+  <View
+    style={
+      Object {
+        "justifyContent": "center",
+        "marginHorizontal": 7,
+      }
+    }
+  >
+    <ForwardRef
+      color="#0071e9"
+      onPress={[Function]}
+      status="unchecked"
+      uncheckedColor="#0071e9"
+    />
+  </View>
+</View>
+`;

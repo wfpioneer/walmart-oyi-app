@@ -608,7 +608,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
               itemName={itemDetails.itemName}
               itemNbr={itemDetails.itemNbr}
               upcNbr={itemDetails.upcNbr}
-              status={itemDetails.status}
+              status={itemDetails.status || ''}
               category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
               price={itemDetails.price}
               exceptionType={!actionCompleted ? itemDetails.exceptionType : undefined}

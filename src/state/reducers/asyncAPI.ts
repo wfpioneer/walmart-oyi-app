@@ -16,7 +16,8 @@ export const asyncReducer = combineReducers({
   noAction: makeAsyncReducer(asyncActions.NO_ACTION),
   printSign: makeAsyncReducer(asyncActions.PRINT_SIGN),
   getLocation: makeAsyncReducer(asyncActions.GET_LOCATION_DETAILS),
-  getFluffyRoles: makeAsyncReducer(asyncActions.GET_FLUFFY_ROLES)
+  getFluffyRoles: makeAsyncReducer(asyncActions.GET_FLUFFY_ROLES),
+  getApprovalList: makeAsyncReducer(asyncActions.GET_APPROVAL_LIST)
 });
 
 export default asyncReducer;

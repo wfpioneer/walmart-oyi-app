@@ -158,5 +158,18 @@ export default {
     POD: 'POD',
     DISPLAY: 'Exhibición',
     RESERVE: 'Reserva'
+  },
+  // TODO Needs Spanish Translations
+  APPROVAL: {
+    NEW_QUANTITY: 'New Qty',
+    CURRENT_QUANTITY: 'Current qty',
+    DAYS_LEFT: '%{time} day(s) Left',
+    APPROVALS: 'Approvals',
+    APPROVE_ITEMS: 'Approve items',
+    OH_CHANGE: 'On-hands change',
+    SELECT_ALL: 'Select all',
+    DESELECT_ALL: 'Deselect all',
+    APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprovación.\nPor favor inténtalo de nuevo'
+
   }
 };
