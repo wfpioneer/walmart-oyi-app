@@ -159,5 +159,12 @@ export default {
     POD: 'POD',
     DISPLAY: 'Display',
     RESERVE: 'Reserve'
+  },
+  APPROVAL: {
+    NEW_QUANTITY: 'New Qty',
+    CURRENT_QUANTITY: 'Current qty',
+    DAYS_LEFT: '%{time} day(s) Left',
+    APPROVAL_ITEMS: 'Approval Items',
+    OH_CHANGE: 'On-hands change'
   }
 };

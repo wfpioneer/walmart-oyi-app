@@ -6,7 +6,11 @@ import { HomeNavigator } from './HomeNavigator';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import { WorklistNavigator } from './WorklistNavigator';
+<<<<<<< HEAD
 import { ApprovalsNavigator } from './ApprovalsNavigator';
+=======
+import { ApprovalListNavigator } from './ApprovalListNavigator';
+>>>>>>> development
 
 const Tab = createBottomTabNavigator();
 
@@ -39,9 +43,16 @@ export const TabNavigator = () => (
       name={strings('WORKLIST.WORKLIST')}
       component={WorklistNavigator}
     />
+<<<<<<< HEAD
 
     { /* @ts-ignore */ }
     <Tab.Screen name={strings('APPROVALS.APPROVALS')}
     component={ApprovalsNavigator} />
+=======
+    <Tab.Screen
+      name={strings('APPROVAL.APPROVAL_ITEMS')} // Needs translation
+      component={ApprovalListNavigator}
+    />
+>>>>>>> development
   </Tab.Navigator>
 );

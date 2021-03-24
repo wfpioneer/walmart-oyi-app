@@ -11,6 +11,7 @@ const navigationProp = {
   navigate: jest.fn()
 };
 const testUser: User = {
+  isManager: false,
   additional: {
     clockCheckResult: '',
     displayName: '',
@@ -29,7 +30,15 @@ const defaultTestProp: LoginScreenProps = {
   hideActivityModal: jest.fn(),
   loginUser: jest.fn(),
   navigation: navigationProp,
-  setEndTime: jest.fn()
+  setEndTime: jest.fn(),
+  getFluffyRoles: jest.fn(),
+  fluffyApiState: {
+    isWaiting: false,
+    error: '',
+    result: {}
+  },
+  assignFluffyRoles: jest.fn(),
+  showActivityModal: jest.fn()
 };
 
 describe('LoginScreen', () => {
@@ -41,6 +50,14 @@ describe('LoginScreen', () => {
       hideActivityModal={jest.fn}
       User={testUser}
       setEndTime={jest.fn}
+      getFluffyRoles={jest.fn}
+      fluffyApiState={{
+        isWaiting: false,
+        error: '',
+        result: {}
+      }}
+      assignFluffyRoles={jest.fn}
+      showActivityModal={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });

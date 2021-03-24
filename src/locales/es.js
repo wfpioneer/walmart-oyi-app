@@ -158,5 +158,14 @@ export default {
     POD: 'POD',
     DISPLAY: 'Exhibición',
     RESERVE: 'Reserva'
+  },
+  // TODO Needs Spanish Translations
+  APPROVAL: {
+    NEW_QUANTITY: 'New Qty',
+    CURRENT_QUANTITY: 'Current qty',
+    DAYS_LEFT: '%{time} day(s) Left',
+    APPROVAL_ITEMS: 'Approval Items',
+    OH_CHANGE: 'On-hands change'
+
   }
 };

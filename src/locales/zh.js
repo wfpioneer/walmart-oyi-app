@@ -158,5 +158,13 @@ export default {
     POD: '堆头',
     DISPLAY: '橱窗',
     RESERVE: '库存'
+  },
+  // TODO needs Mandarin translations
+  APPROVAL: {
+    NEW_QUANTITY: '新更改数量',
+    CURRENT_QUANTITY: 'Current Qty',
+    DAYS_LEFT: '剩余%{time}天',
+    APPROVAL_ITEMS: '审批商品清单',
+    OH_CHANGE: 'On-Hands change'
   }
 };

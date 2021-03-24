@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrinterList Renders list of Printers in Flatlist  1`] = `
+<FlatList
+  ItemSeparatorComponent={[Function]}
+  data={
+    Array [
+      Object {
+        "desc": "Default",
+        "id": "123000000000",
+        "name": "Front desk printer",
+        "type": 0,
+      },
+      Object {
+        "desc": "Default",
+        "id": "0",
+        "name": "Invalid printer",
+        "type": 0,
+      },
+      Object {
+        "desc": "Default",
+        "id": "456000000000",
+        "name": "Mobile printer",
+        "type": 1,
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onEndReachedThreshold={2}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+    }
+  }
+  updateCellsBatchingPeriod={50}
+  windowSize={21}
+/>
+`;
+
+exports[`PrinterList Renders printer item card with no delete icon 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "height": 40,
+      "justifyContent": "flex-start",
+      "marginVertical": 10,
+      "paddingHorizontal": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#000000"
+    name="printer"
+    size={20}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <Text>
+      Invalid printer
+    </Text>
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`PrinterList Renders the delete icon for PrinterIds not equal to 0 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "height": 40,
+      "justifyContent": "flex-start",
+      "marginVertical": 10,
+      "paddingHorizontal": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#000000"
+    name="printer"
+    size={20}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <Text>
+      Front desk printer
+    </Text>
+  </View>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "paddingLeft": 15,
+        "paddingRight": 5,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#000000"
+      name="trash-can"
+      size={20}
+    />
+  </ForwardRef>
+</TouchableOpacity>
+`;
