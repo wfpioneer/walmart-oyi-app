@@ -50,8 +50,7 @@ const TabNavigator = () => {
             name={strings('APPROVAL.APPROVAL_ITEMS')} // Needs translation
             component={ApprovalListNavigator}
           />
-        ) : <></>
-      }
+        ) : <></>}
     </Tab.Navigator>
   );
 };
