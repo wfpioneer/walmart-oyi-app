@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncompleted worklist items 1`] = `
+<Worklist
+  data={
+    Array [
+      Object {
+        "catgName": "FOODSERVICE",
+        "catgNbr": 93,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "TEST ITEM",
+        "itemNbr": 1234567890,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "000055559999",
+        "worklistType": "NSFL",
+      },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 99,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "ELECTRONIC ITEM",
+        "itemNbr": 987654321,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777555333",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "FRESH BAKERY",
+        "catgNbr": 87,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "BAKERY ITEM",
+        "itemNbr": 123789456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "111122223333",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "WINE",
+        "catgNbr": 19,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "WINE ITEM",
+        "itemNbr": 456789123,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "444455556666",
+        "worklistType": "C",
+      },
+      Object {
+        "catgName": "PHARMACY RX",
+        "catgNbr": 87,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "PHARMACY ITEM",
+        "itemNbr": 789123456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777788889999",
+        "worklistType": "C",
+      },
+    ]
+  }
+  error={null}
+  onRefresh={[Function]}
+  refreshing={false}
+/>
+`;
+
+exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array for completed worklist items  1`] = `
+<Worklist
+  data={Array []}
+  error={null}
+  onRefresh={[Function]}
+  refreshing={false}
+/>
+`;
+
+exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array for zero worklist items 1`] = `
+<Worklist
+  data={Array []}
+  error={null}
+  onRefresh={[Function]}
+  refreshing={false}
+/>
+`;
+
+exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render incomplete items for a WorkList with incomplete & complete items 1`] = `
+<Worklist
+  data={
+    Array [
+      Object {
+        "catgName": "FOODSERVICE",
+        "catgNbr": 93,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "TEST ITEM",
+        "itemNbr": 1234567890,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "000055559999",
+        "worklistType": "NSFL",
+      },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 99,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "ELECTRONIC ITEM",
+        "itemNbr": 987654321,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777555333",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "FRESH BAKERY",
+        "catgNbr": 87,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "BAKERY ITEM",
+        "itemNbr": 123789456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "111122223333",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "WINE",
+        "catgNbr": 19,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "WINE ITEM",
+        "itemNbr": 456789123,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "444455556666",
+        "worklistType": "C",
+      },
+      Object {
+        "catgName": "PHARMACY RX",
+        "catgNbr": 87,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "PHARMACY ITEM",
+        "itemNbr": 789123456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777788889999",
+        "worklistType": "C",
+      },
+    ]
+  }
+  error={null}
+  onRefresh={[Function]}
+  refreshing={false}
+/>
+`;
+
+exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders error message for failed worklist request 1`] = `
+<Worklist
+  error="Network Error"
+  onRefresh={[Function]}
+  refreshing={false}
+/>
+`;
+
+exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders refresh set to true waiting for worklist api response 1`] = `
+<Worklist
+  error={null}
+  onRefresh={[Function]}
+  refreshing={true}
+/>
+`;
