@@ -23,7 +23,7 @@ const TabNavigator = () => {
             return <MaterialIcons name="home" size={size} color={color} />;
           } if (route.name === strings('WORKLIST.WORKLIST')) {
             return <AntDesign name="profile" size={size} color={color} />;
-          } if (route.name === strings('APPROVAL.APPROVAL_ITEMS')) {
+          } if (route.name === strings('APPROVAL.APPROVALS')) {
             return <MaterialCommunityIcons name="clipboard-check" size={size} color={color} />;
           }
 
@@ -47,7 +47,7 @@ const TabNavigator = () => {
       {isManager
         ? (
           <Tab.Screen
-            name={strings('APPROVAL.APPROVAL_ITEMS')} // Needs translation
+            name={strings('APPROVAL.APPROVALS')}
             component={ApprovalListNavigator}
           />
         ) : <></>}
