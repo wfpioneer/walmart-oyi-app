@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './Home.style';
 import { barcodeEmitter } from '../../utils/scannerUtils';
@@ -19,7 +20,6 @@ import COLOR from '../../themes/Color';
 import { updateFilterExceptions } from '../../state/actions/Worklist';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
-import { RouteProp } from '@react-navigation/native';
 
 const mapStateToProps = (state: any) => ({
   userName: state.User.additional.displayName,
@@ -68,11 +68,11 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       trackEvent('home_screen_focus');
       this.setState({
         getWorklistStart: moment().valueOf()
-      })
+      });
       this.props.getWorklistSummary();
       this.setState({
         getWorklistStart: moment().valueOf()
-      })
+      });
     });
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -87,13 +87,22 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     });
   }
 
-  componentDidUpdate(prevProps: Readonly<HomeScreenProps>, prevState: Readonly<HomeScreenState>, snapshot?: any) {
+  // removed prevState and snapshot from componentDidUpdate, as it appears to be unused.
+  // original line read: prevState: Readonly<HomeScreenState>, snapshot?: any
+  componentDidUpdate(prevProps: Readonly<HomeScreenProps>) {
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
-      trackEvent('home_worklist_summary_api_error', { errorDetails: this.props.worklistSummaryApiState.error.message || JSON.stringify(this.props.worklistSummaryApiState.error), duration: moment().valueOf()-this.state.getWorklistStart });
+      trackEvent('home_worklist_summary_api_error', {
+        errorDetails: this.props.worklistSummaryApiState.error.message
+          || JSON.stringify(this.props.worklistSummaryApiState.error),
+        duration: moment().valueOf() - this.state.getWorklistStart
+      });
     }
 
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.result) {
-      trackEvent('home_worklist_summary_api_success',{ status: this.props.worklistSummaryApiState.result.status, duration: moment().valueOf()-this.state.getWorklistStart });
+      trackEvent('home_worklist_summary_api_success', {
+        status: this.props.worklistSummaryApiState.result.status,
+        duration: moment().valueOf() - this.state.getWorklistStart
+      });
     }
   }
 

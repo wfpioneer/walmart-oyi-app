@@ -28,9 +28,9 @@ interface WorklistProps {
 
 export const renderWorklistItem = (listItem: ListItemI) => {
   if (listItem.item.worklistType === 'CATEGORY') {
-    const { catgName, catgNbr, itemCount } = listItem.item;
+    const { catgName, itemCount } = listItem.item;
     return (
-      <CategorySeparator categoryName={catgName} categoryNumber={catgNbr || 0} numberOfItems={itemCount} />
+      <CategorySeparator categoryName={catgName} numberOfItems={itemCount || 0} />
     );
   }
   const {

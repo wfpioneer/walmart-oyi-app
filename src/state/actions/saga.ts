@@ -9,7 +9,8 @@ export const GET_WORKLIST_SUMMARY = 'SAGA/GET_WORKLIST_SUMMARY';
 export const DELETE_LOCATION = 'SAGA/DELETE_LOCATION';
 export const NO_ACTION = 'SAGA/NO_ACTION';
 export const PRINT_SIGN = 'SAGA/PRINT_SIGN';
-export const GET_LOCATION_DETAILS = 'SAGA/GET_LOCATION_DETAILS'
+export const GET_LOCATION_DETAILS = 'SAGA/GET_LOCATION_DETAILS';
+export const GET_FLUFFY_ROLES = 'SAGA/GET_FLUFFY_ROLES';
 
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload });
 export const getItemDetails = (payload: any) => ({ type: GET_ITEM_DETAILS, payload });
@@ -22,4 +23,5 @@ export const getWorklistSummary = (payload: any) => ({ type: GET_WORKLIST_SUMMAR
 export const deleteLocation = (payload: any) => ({ type: DELETE_LOCATION, payload });
 export const noAction = (payload: any) => ({ type: NO_ACTION, payload });
 export const printSign = (payload: any) => ({ type: PRINT_SIGN, payload });
-export const getLocationDetails =  (payload: any) => ({ type: GET_LOCATION_DETAILS, payload });
+export const getLocationDetails = (payload: any) => ({ type: GET_LOCATION_DETAILS, payload });
+export const getFluffyRoles = (payload: any) => ({ type: GET_FLUFFY_ROLES, payload });

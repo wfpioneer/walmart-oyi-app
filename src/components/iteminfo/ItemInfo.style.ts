@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
-
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLOR.WHITE,
@@ -37,7 +36,7 @@ const styles = StyleSheet.create({
   itemNameText: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginVertical: 4,
+    marginVertical: 4
   },
   itemNbrText: {
     color: COLOR.GREY_700,

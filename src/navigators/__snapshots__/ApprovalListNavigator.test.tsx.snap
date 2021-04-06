@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApprovalList Navigator Renders \`items\` translation for an approval list size greater than one 1`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "fontSize": 20,
+        "fontWeight": "bold",
+      }
+    }
+  >
+    [missing "en.APPROVAL.APPROVE_ITEMS" translation]
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "fontSize": 14,
+      }
+    }
+  >
+     5 [missing "en.WORKLIST.ITEMS" translation]
+  </Text>
+</View>
+`;
+
+exports[`ApprovalList Navigator Renders single \`item\` translation for an approval list size of one 1`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "fontSize": 20,
+        "fontWeight": "bold",
+      }
+    }
+  >
+    [missing "en.APPROVAL.APPROVE_ITEMS" translation]
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "fontSize": 14,
+      }
+    }
+  >
+     1 [missing "en.WORKLIST.ITEM" translation]
+  </Text>
+</View>
+`;
+
+exports[`ApprovalList Navigator Renders the approval list navigator component 1`] = `
+<StackNavigator
+  headerMode="float"
+  screenOptions={
+    Object {
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="Approval"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerRightContainerStyle": Object {
+          "paddingRight": 10,
+        },
+        "headerTitle": [Function],
+      }
+    }
+  />
+</StackNavigator>
+`;
+
+exports[`ApprovalList Navigator Renders the select all button header 1`] = `
+<GenericTouchable
+  activeOpacity={0.2}
+  delayLongPress={600}
+  extraButtonProps={
+    Object {
+      "rippleColor": "transparent",
+    }
+  }
+  onStateChange={[Function]}
+  style={
+    Array [
+      Object {},
+      Object {
+        "opacity": 1,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ffffffff",
+          "fontSize": 16,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.SELECT_ALL" translation]
+    </Text>
+  </View>
+</GenericTouchable>
+`;

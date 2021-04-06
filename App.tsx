@@ -47,7 +47,6 @@ export default class App extends React.PureComponent {
     SplashScreen.hide();
   }
 
-
   render() {
     return (
       <Provider store={store}>

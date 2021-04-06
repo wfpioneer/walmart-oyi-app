@@ -159,5 +159,16 @@ export default {
     POD: 'POD',
     DISPLAY: 'Display',
     RESERVE: 'Reserve'
+  },
+  APPROVAL: {
+    NEW_QUANTITY: 'New Qty',
+    CURRENT_QUANTITY: 'Current qty',
+    DAYS_LEFT: '%{time} day(s) Left',
+    APPROVALS: 'Approvals',
+    APPROVE_ITEMS: 'Approve items',
+    OH_CHANGE: 'On-hands change',
+    SELECT_ALL: 'Select all',
+    DESELECT_ALL: 'Deselect all',
+    APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.'
   }
 };

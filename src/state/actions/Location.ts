@@ -5,7 +5,6 @@ export const SET_RESERVE_LOCATIONS = 'LOCATION/SET_RESERVE_LOCATIONS';
 export const SET_ITEM_LOC_DETAILS = 'LOCATION/SET_ITEM_LOC_DETAILS';
 export const ADD_LOCATION_TO_EXISTING = 'LOCATION/ADD_LOCATION_TO_EXISTING';
 export const EDIT_EXISTING_LOCATION = 'LOCATION/EDIT_EXISTING_LOCATION';
-export const IS_UPDATING = 'LOCATION/IS_UPDATING';
 export const DELETE_LOCATION_FROM_EXISTING = 'LOCATION/DELETE_LOCATION_FROM_EXISTING';
 export const RESET_LOCATIONS = 'LOCATION/RESET_LOCATIONS';
 export const GET_LOCATION_DETAILS = 'LOCATION/GET_LOCATION_DETAILS';
@@ -19,12 +18,12 @@ export const setItemLocDetails = (itemNbr: number, upcNbr: string, exceptionType
   }
 });
 
-export const setFloorLocations = (floor: [Location]) => ({
+export const setFloorLocations = (floor: Location[]) => ({
   type: SET_FLOOR_LOCATIONS,
   payload: floor
 });
 
-export const setReserveLocations = (reserve: [Location]) => ({
+export const setReserveLocations = (reserve: Location[]) => ({
   type: SET_RESERVE_LOCATIONS,
   payload: reserve
 });
@@ -38,7 +37,8 @@ export const addLocationToExisting = (locationName: string, locationTypeNbr: num
   }
 });
 
-export const editExistingLocation = (locationName: string, locationTypeNbr: number, locationArea: string, locIndex: number) => ({
+export const editExistingLocation = (locationName: string, locationTypeNbr: number, locationArea: string,
+  locIndex: number) => ({
   type: EDIT_EXISTING_LOCATION,
   payload: {
     locationName,
@@ -56,16 +56,11 @@ export const deleteLocationFromExisting = (locationArea: string, locIndex: numbe
   }
 });
 
-export const isUpdating = (updating: boolean) => ({
-  type: IS_UPDATING,
-  payload: updating
-});
-
 export const resetLocations = () => ({
   type: RESET_LOCATIONS
 });
 
-export const getLocationDetails = (itemNbr: number) =>({
+export const getLocationDetails = (itemNbr: number) => ({
   type: GET_LOCATION_DETAILS,
   payload: {
     itemNbr

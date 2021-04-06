@@ -17,7 +17,7 @@ type ItemInfoProps = {
   category: string;
   price: number;
   exceptionType?: string; // This is enumerated
-}
+};
 
 const ItemInfo = (props: ItemInfoProps) => {
   const {

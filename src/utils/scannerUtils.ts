@@ -18,7 +18,6 @@ export const determineScanner = (isByod: boolean, scannerList: string[]) => {
   return scannerList[0];
 };
 
-
 export const getInitialScanners = async () => {
   try {
     const scanners = await WMBarcodeScanner.getScannerList();
@@ -60,11 +59,11 @@ export const manualScan = (val: string) => {
 export const openCamera = () => {
   WMBarcodeScanner.startScan(10).then(() => {
     console.log('camera scanner started');
-  })
+  });
 };
 
-export const mockScanWrapper = (val: string, type: string) => {
-  WMBarcodeScanner.mockScan({barcode: val, type: type});
+export const mockScanWrapper = (val: string, typeInfo: string) => {
+  WMBarcodeScanner.mockScan({ barcode: val, type: typeInfo });
 };
 
 if (__DEV__) {
