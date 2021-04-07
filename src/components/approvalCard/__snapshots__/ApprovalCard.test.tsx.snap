@@ -7,7 +7,7 @@ exports[`ApprovalCard Component Renders an Approval Item with a decreased change
       "backgroundColor": "#ffffffff",
       "flexDirection": "row",
       "justifyContent": "flex-start",
-      "marginBottom": 2,
+      "marginBottom": 4,
       "padding": 8,
     }
   }
@@ -288,7 +288,7 @@ exports[`ApprovalCard Component Renders an Approval Item with a positive price c
       "backgroundColor": "#ffffffff",
       "flexDirection": "row",
       "justifyContent": "flex-start",
-      "marginBottom": 2,
+      "marginBottom": 4,
       "padding": 8,
     }
   }

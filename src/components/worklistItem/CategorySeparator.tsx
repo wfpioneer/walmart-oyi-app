@@ -7,7 +7,7 @@ interface PropsI {
   categoryName: string;
   numberOfItems: number;
 }
-
+// TODO move & rename Category Separator into it's own folder directory
 export const CategorySeparator = (props: PropsI) => (
   <View style={styles.container}>
     <Text style={styles.categoryName}>

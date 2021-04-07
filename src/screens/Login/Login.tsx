@@ -109,7 +109,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
             break;
         }
       }
-      user.userId = user.userId.replace('_', ''); // Strip underscore from svc accounts to prevent 400 error.
+      user.userId = user.userId.replace(/_/g, ''); // Strip underscore from svc accounts to prevent 400 error.
       setUserId(user.userId);
       this.props.loginUser(user);
       this.props.getFluffyRoles(user);
