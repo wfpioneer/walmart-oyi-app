@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ApprovalListScreen Renders Empty Approval list 1`] = `
+exports[`ApprovalListScreen Tests rendering Approval List Items - Renders Empty Approval list 1`] = `
 <View
   style={
     Object {
@@ -17,40 +17,88 @@ exports[`ApprovalListScreen Renders Empty Approval list 1`] = `
 </View>
 `;
 
-exports[`ApprovalListScreen Renders a list of Approval Items 1`] = `
+exports[`ApprovalListScreen Tests rendering Approval List Items - Renders a list of Approval Items 1`] = `
 <View>
   <FlatList
     data={
       Array [
         Object {
-          "approvalRequestSource": "",
-          "approvalStatus": "Pending",
+          "categoryDescription": "SNACKS",
+          "categoryHeader": true,
           "categoryNbr": 1,
-          "daysLeft": 3,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "pending",
+          "categoryDescription": "SNACKS",
+          "categoryNbr": 1,
           "dollarChange": 150.5,
           "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-27T00:00:00.000Z",
+          "initiatedUserId": "Associate Employee",
           "itemName": "Nature Valley Crunchy Cereal Bars ",
           "itemNbr": 123,
           "newQuantity": 20,
           "oldQuantity": 5,
+          "subCategoryDescription": "",
           "subCategoryNbr": 1,
-          "upcNbr": "40000000123",
-          "userId": "Associate Employee",
+          "upcNbr": 40000000123,
         },
         Object {
-          "approvalRequestSource": "",
-          "approvalStatus": "Pending",
-          "categoryNbr": 1,
-          "daysLeft": 2,
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryHeader": true,
+          "categoryNbr": 2,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
           "dollarChange": 50,
           "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
           "itemName": "Red Apples",
           "itemNbr": 456,
           "newQuantity": 10,
           "oldQuantity": 30,
+          "subCategoryDescription": "",
           "subCategoryNbr": 1,
-          "upcNbr": "40000000456",
-          "userId": "Associate Worker",
+          "upcNbr": 40000000456,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "dollarChange": 40,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "itemName": "Cabbage",
+          "itemNbr": 457,
+          "newQuantity": 15,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000457,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "dollarChange": 80,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "itemName": "Strawberries",
+          "itemNbr": 458,
+          "newQuantity": 40,
+          "oldQuantity": 20,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000458,
         },
       ]
     }
@@ -64,20 +112,26 @@ exports[`ApprovalListScreen Renders a list of Approval Items 1`] = `
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
+    stickyHeaderIndices={
+      Array [
+        0,
+        2,
+      ]
+    }
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
 </View>
 `;
 
-exports[`ApprovalListScreen renderApprovalItem renders an approval item 1`] = `
+exports[`ApprovalListScreen Tests rendering Approval List Items - renderApprovalItem renders an approval item 1`] = `
 <View
   style={
     Object {
       "backgroundColor": "#ffffffff",
       "flexDirection": "row",
       "justifyContent": "flex-start",
-      "marginBottom": 2,
+      "marginBottom": 4,
       "padding": 8,
     }
   }
@@ -343,6 +397,52 @@ exports[`ApprovalListScreen renderApprovalItem renders an approval item 1`] = `
         </Text>
       </View>
     </View>
+  </View>
+</View>
+`;
+
+exports[`ApprovalListScreen Tests rendering Approval List Items - renderApprovalItem renders the category header 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "elevation": 4,
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "marginBottom": 4,
+      "paddingVertical": 20,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "alignSelf": "center",
+        "color": "#616161",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "justifyContent": "flex-end",
+        "marginHorizontal": 20,
+      }
+    }
+  >
+    1 - SNACKS
+  </Text>
+  <View
+    style={
+      Object {
+        "justifyContent": "center",
+        "marginHorizontal": 7,
+      }
+    }
+  >
+    <ForwardRef
+      color="#0071e9"
+      onPress={[Function]}
+      status="unchecked"
+      uncheckedColor="#0071e9"
+    />
   </View>
 </View>
 `;

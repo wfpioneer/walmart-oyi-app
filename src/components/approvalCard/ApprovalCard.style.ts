@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.WHITE,
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    marginBottom: 2,
+    marginBottom: 4,
     padding: 8
   },
   content: {

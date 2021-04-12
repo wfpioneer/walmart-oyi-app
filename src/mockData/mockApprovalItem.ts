@@ -1,32 +1,67 @@
-import { ApprovalListItem } from '../models/ApprovalListItem';
+import { ApprovalListItem, approvalRequestSource, approvalStatus } from '../models/ApprovalListItem';
 
-// Temporary Test Data until we connect with the BackEnd for the Approval API
 export const mockApprovals: ApprovalListItem[] = [{
   imageUrl: undefined,
   itemName: 'Nature Valley Crunchy Cereal Bars ',
   itemNbr: 123,
-  upcNbr: '40000000123',
+  upcNbr: 40000000123,
   categoryNbr: 1,
+  categoryDescription: 'SNACKS',
   subCategoryNbr: 1,
-  userId: 'Associate Employee',
+  subCategoryDescription: '',
   newQuantity: 20,
   oldQuantity: 5,
   dollarChange: 150.50,
-  approvalStatus: 'Pending',
-  approvalRequestSource: '',
-  daysLeft: 3
+  initiatedUserId: 'Associate Employee',
+  initiatedTimestamp: '2021-03-27T00:00:00.000Z',
+  approvalStatus: approvalStatus.Pending,
+  approvalRequestSource: approvalRequestSource.ItemDetails
 }, {
   imageUrl: undefined,
   itemName: 'Red Apples',
   itemNbr: 456,
-  upcNbr: '40000000456',
-  userId: 'Associate Worker',
-  categoryNbr: 1,
+  upcNbr: 40000000456,
+  categoryNbr: 2,
+  categoryDescription: 'FRUITS/VEGETABLES',
   subCategoryNbr: 1,
+  subCategoryDescription: '',
   newQuantity: 10,
   oldQuantity: 30,
   dollarChange: 50.00,
-  approvalStatus: 'Pending',
-  approvalRequestSource: '',
-  daysLeft: 2
+  initiatedUserId: 'Associate Worker',
+  initiatedTimestamp: '2021-03-28T00:00:00.000Z',
+  approvalStatus: approvalStatus.Pending,
+  approvalRequestSource: approvalRequestSource.ItemDetails
+}, {
+  imageUrl: undefined,
+  itemName: 'Cabbage',
+  itemNbr: 457,
+  upcNbr: 40000000457,
+  categoryNbr: 2,
+  categoryDescription: 'FRUITS/VEGETABLES',
+  subCategoryNbr: 1,
+  subCategoryDescription: '',
+  newQuantity: 15,
+  oldQuantity: 30,
+  dollarChange: 40.00,
+  initiatedUserId: 'Associate Worker',
+  initiatedTimestamp: '2021-03-28T00:00:00.000Z',
+  approvalStatus: approvalStatus.Pending,
+  approvalRequestSource: approvalRequestSource.ItemDetails
+}, {
+  imageUrl: undefined,
+  itemName: 'Strawberries',
+  itemNbr: 458,
+  upcNbr: 40000000458,
+  categoryNbr: 2,
+  categoryDescription: 'FRUITS/VEGETABLES',
+  subCategoryNbr: 1,
+  subCategoryDescription: '',
+  newQuantity: 40,
+  oldQuantity: 20,
+  dollarChange: 80.00,
+  initiatedUserId: 'Associate Worker',
+  initiatedTimestamp: '2021-03-28T00:00:00.000Z',
+  approvalStatus: approvalStatus.Pending,
+  approvalRequestSource: approvalRequestSource.ItemDetails
 }];
