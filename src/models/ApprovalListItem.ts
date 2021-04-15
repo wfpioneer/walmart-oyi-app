@@ -17,10 +17,10 @@ export interface ApprovalListItem {
 }
 
 export enum approvalStatus {
-  'Pending' = 'pending',
-  'Approved' = 'approved',
-  'Rejected' = 'rejected',
-  'Expired' = 'expired'
+  'Pending' = 'Pending',
+  'Approved' = 'Approved',
+  'Rejected' = 'Rejected',
+  'Expired' = 'Expired'
 }
 export enum approvalRequestSource {
   'ItemDetails' = 'itemdetails',
