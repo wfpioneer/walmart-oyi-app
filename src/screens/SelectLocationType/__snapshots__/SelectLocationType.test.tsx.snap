@@ -1,0 +1,2636 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API responses Renders Error Message on location api error 1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <Component
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      transparent={true}
+      visible={false}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </Component>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": 20,
+          "paddingLeft": 10,
+        }
+      }
+    >
+      <mockConstructor
+        color="#e57373"
+        name="alert"
+        size={40}
+      />
+      <ForwardRef
+        style={
+          Object {
+            "color": "#ec0439",
+            "fontSize": 16,
+          }
+        }
+      >
+        [missing "en.LOCATION.ADD_LOCATION_API_ERROR" translation]
+      </ForwardRef>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={0}
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API responses Renders the Activity indicator when waiting for response from AddLocation Api 1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <Component
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      transparent={true}
+      visible={false}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </Component>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <ActivityIndicator
+      animating={true}
+      color="#0071e9"
+      hidesWhenStopped={true}
+      size="large"
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API responses Renders the Activity indicator when waiting for response from EditLocation Api 1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <Component
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      transparent={true}
+      visible={false}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </Component>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <ActivityIndicator
+      animating={true}
+      color="#0071e9"
+      hidesWhenStopped={true}
+      size="large"
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen Renders Location Name above manual location enter 1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <Component
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      transparent={true}
+      visible={false}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </Component>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        TestLocation-3
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={0}
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen Renders the DISPLAY location type as "Checked"  1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <Component
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      transparent={true}
+      visible={false}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </Component>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="11"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="checked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={0}
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen Renders the END CAP location type as "Checked" 1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <Component
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      transparent={true}
+      visible={false}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </Component>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="12"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="checked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={0}
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen Renders the EnterLocation Modal as visible  1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <Component
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      transparent={true}
+      visible={true}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </Component>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={0}
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen Renders the POD location type as "Checked"  1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <Component
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      transparent={true}
+      visible={false}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </Component>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="13"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="checked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={0}
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen Renders the SALES FLOOR location type as "Checked"  1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <Component
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      transparent={true}
+      visible={false}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </Component>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <ForwardRef
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <ForwardRef
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </ForwardRef>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <ForwardRef
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={0}
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</React.Fragment>
+`;
