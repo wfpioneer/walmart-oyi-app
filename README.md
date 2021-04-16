@@ -137,11 +137,18 @@ TIP: Make sure your barcodeEmitter has a listener setup to receive `scanned` eve
     * Go to `View -> Tool Windows -> Build Variants`
     * Find the `OYI.app` module and set the build variant to `development/staging/production`Debug
     * Build and run the application
+
 ## Deploying to Airwatch
+
+The below is old (but kept for historical sake). [This](https://collaboration.wal-mart.com/display/ISCM/FE+Airwatch+Release+Process)
+Confluence page should be followed instead, until we get full automation working with "Testing Products" from the AirWatch team.
+
+
+---------OLD!! DO NOT USE!!!-----------
 
  Apk builds are automatically deployed & activated in AirWatch after merging
   into `Development` or `Master`.
- AirWatch has a set limit of 5 apk's per application and an old product will need to be deleted
+ AirWatch has a set limit of 5 apk's per application, and an old product will need to be deleted
   after a merge into `Development` or `Master`.
 
 1. Finding the Product Name in AirWatch
