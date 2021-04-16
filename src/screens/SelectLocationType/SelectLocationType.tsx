@@ -31,10 +31,10 @@ interface LocParams {
 }
 
 export enum LOCATION_TYPES {
-  'SALES_FLOOR'= '8',
-  'DISPLAY'= '11',
-  'END_CAP'= '12',
-  'POD'= '13'
+  SALES_FLOOR = '8',
+  DISPLAY = '11',
+  END_CAP = '12',
+  POD = '13'
 }
 interface AsyncState {
   isWaiting: boolean;
@@ -87,7 +87,7 @@ const SelectLocationType = () => {
   );
 };
 interface SelectLocationProps {
-  locType: string;
+  locType: LOCATION_TYPES;
   setLocType: Function;
   inputLocation: boolean;
   setInputLocation: Function;
@@ -115,10 +115,11 @@ interface SelectLocationProps {
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
 
-// TODO add better validation of an item's location to prevent invalid location names
-export const validateLocation = (loc: string, locType: string) => ((loc.length > 0)
- && (locType === LOCATION_TYPES.SALES_FLOOR || locType === LOCATION_TYPES.POD || locType
-  === LOCATION_TYPES.END_CAP || locType === LOCATION_TYPES.DISPLAY));
+export const validateLocation = (loc: string): boolean => {
+  const locRegex = new RegExp(/^[\d]+$|[A-z][0-9]+-[0-9]+/);
+
+  return loc.length > 0 && locRegex.test(loc);
+};
 
 export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
   const {
@@ -142,6 +143,16 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
       setLoc(currentLocation.locationName);
       setLocType(currentLocation.type);
     }
+  }, []);
+
+  // TODO use beforeRemove listener (5.7+) when updating RN libraries to latest version
+  // Navigation Listener
+  useEffectHook(() => {
+    // Resets location api response data when navigating off-screen
+    navigation.addListener('blur', () => {
+      dispatch({ type: 'API/ADD_LOCATION/RESET' });
+      dispatch({ type: 'API/EDIT_LOCATION/RESET' });
+    });
   }, []);
 
   // Scanner listener
@@ -392,7 +403,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
               title={strings('GENERICS.SUBMIT')}
               radius={0}
               onPress={onSubmit}
-              disabled={!validateLocation(loc, locType)}
+              disabled={!validateLocation(loc)}
             />
           )}
       </View>

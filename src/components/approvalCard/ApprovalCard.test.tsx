@@ -13,7 +13,8 @@ describe('ApprovalCard Component', () => {
       daysLeft: 3,
       newQuantity: 20,
       oldQuantity: 5,
-      dollarChange: 200.00
+      dollarChange: 200.00,
+      dispatch: jest.fn()
     };
     renderer.render(
       <ApprovalCard
@@ -25,6 +26,8 @@ describe('ApprovalCard Component', () => {
         oldQuantity={positiveItem.oldQuantity}
         newQuantity={positiveItem.newQuantity}
         userId={positiveItem.userId}
+        dispatch={jest.fn()}
+        isChecked={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -40,7 +43,8 @@ describe('ApprovalCard Component', () => {
       daysLeft: 1,
       newQuantity: 10,
       oldQuantity: 30,
-      dollarChange: 100.00
+      dollarChange: 100.00,
+      dispatch: jest.fn()
     };
     renderer.render(
       <ApprovalCard
@@ -52,6 +56,44 @@ describe('ApprovalCard Component', () => {
         oldQuantity={negativeItem.oldQuantity}
         newQuantity={negativeItem.newQuantity}
         userId={negativeItem.userId}
+        dispatch={negativeItem.dispatch}
+        isChecked={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the Approval Item CheckBox as "checked" ', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <ApprovalCard
+        dollarChange={0}
+        daysLeft={0}
+        image={undefined}
+        itemName=""
+        itemNbr={0}
+        oldQuantity={0}
+        newQuantity={0}
+        userId=""
+        dispatch={jest.fn()}
+        isChecked={true}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the Approval Item CheckBox as "unchecked" ', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <ApprovalCard
+        dollarChange={0}
+        daysLeft={0}
+        image={undefined}
+        itemName=""
+        itemNbr={0}
+        oldQuantity={0}
+        newQuantity={0}
+        userId=""
+        dispatch={jest.fn()}
+        isChecked={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

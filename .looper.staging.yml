@@ -4,13 +4,13 @@ envs:
     variables:
       #Template required vars for CI/CD
       # true / false
-      AIRWATCH_ACTIVATE: true
+      AIRWATCH_ACTIVATE: false
       # Cert / Prod
       AIRWATCH_ENV: Prod
       # whether the APK should be built or not
       BUILD_APP_FLAG: true
       # true / false
-      DEPLOY_TO_AIRWATCH: true
+      DEPLOY_TO_AIRWATCH: false
       # email list where the notification will be sent
       EMAIL_NOTIFICATION: IntlSamsOYI@wal-mart.com
 
@@ -34,7 +34,7 @@ envs:
 
       #ServiceNow variables
       # whether you want the template to create a ServiceNow CHG or not. Defaults to true
-      SN_CREATE_AUTO_CHANGE: true
+      SN_CREATE_AUTO_CHANGE: false
       # The ServiceNow requested_by_group field. No default.
       SN_REQUESTED_BY_GROUP: "IntlSamsTech"
       # The ServiceNow requested_by_group field. Defaults to Change Managers - US
@@ -60,7 +60,7 @@ envs:
 
       #Versioning vars
       # major / minor / patch / noBump > defaults to patch
-      VERSION_TYPE: 'patch'
+      VERSION_TYPE: 'noBump'
 
       #Proximity related vars
       RELEASES_REPO: 'pangaea_releases'

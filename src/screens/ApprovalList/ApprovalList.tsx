@@ -19,17 +19,21 @@ import { strings } from '../../locales';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { ApprovalCategorySeparator } from '../../components/CategorySeparatorCards/ApprovalCategorySeparator';
 import { validateSession } from '../../utils/sessionTimeout';
+import { setApprovalList } from '../../state/actions/Approvals';
 
-interface ApprovalCategory extends ApprovalListItem {
+export interface ApprovalCategory extends ApprovalListItem {
   categoryHeader?: boolean;
 }
 export interface CategoryFilter {
   filteredData: ApprovalCategory[];
   headerIndices: number[];
 }
-
+interface ApprovalItemProp {
+  item: ApprovalCategory;
+  dispatch: Dispatch<any>;
+}
 export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryFilter => {
-  const sortedData = listData;
+  const sortedData = [...listData];
 
   // Sorts Items by category number
   sortedData.sort((firstItem, secondItem) => firstItem.categoryNbr - secondItem.categoryNbr);
@@ -46,30 +50,38 @@ export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryF
       returnData.push({
         categoryDescription: item.categoryDescription,
         categoryNbr: item.categoryNbr,
-        categoryHeader: true
+        categoryHeader: true,
+        isChecked: false
       });
       headerIndices.push(returnData.length - 1);
-      returnData.push(item);
+      returnData.push({ ...item, isChecked: false });
     } else {
       previousItem = item;
-      returnData.push(item);
+      returnData.push({ ...item, isChecked: false });
     }
   });
 
   return { filteredData: returnData as ApprovalCategory[], headerIndices };
 };
 
-export const renderApprovalItem = (approvalItem: ApprovalCategory) => {
+export const RenderApprovalItem = (props: ApprovalItemProp) => {
   const {
     imageUrl, itemNbr, itemName, oldQuantity,
     newQuantity, dollarChange, initiatedUserId, initiatedTimestamp,
-    categoryHeader, categoryNbr, categoryDescription
-  } = approvalItem;
-
+    categoryHeader, categoryNbr, categoryDescription, isChecked
+  } = props.item;
+  const { dispatch } = props;
   const daysLeft = moment(initiatedTimestamp).diff(moment().format(), 'days');
 
   if (categoryHeader) {
-    return <ApprovalCategorySeparator categoryNbr={categoryNbr} categoryName={categoryDescription} />;
+    return (
+      <ApprovalCategorySeparator
+        categoryNbr={categoryNbr}
+        categoryName={categoryDescription}
+        isChecked={isChecked}
+        dispatch={dispatch}
+      />
+    );
   }
 
   return (
@@ -82,16 +94,21 @@ export const renderApprovalItem = (approvalItem: ApprovalCategory) => {
       oldQuantity={oldQuantity}
       newQuantity={newQuantity}
       userId={initiatedUserId}
+      isChecked={isChecked}
+      dispatch={dispatch}
     />
   );
 };
 const ApprovalList = () => {
   const { result, isWaiting, error } = useTypedSelector(state => state.async.getApprovalList);
+  const { approvalList, categoryIndices } = useTypedSelector(state => state.Approvals);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
   return (
     <ApprovalListScreen
+      filteredList={approvalList}
+      categoryIndices={categoryIndices}
       dispatch={dispatch}
       result={result}
       error={error}
@@ -108,21 +125,24 @@ interface ApprovalListProps {
   error: any;
   isWaiting: boolean;
   result: any;
+  filteredList: ApprovalCategory[];
+  categoryIndices: number[];
   navigation: NavigationProp<any>;
   route: Route<any>;
   useEffectHook: Function;
   trackEventCall: (eventName: string, params?: any) => void;
 }
+
 export const ApprovalListScreen = (props: ApprovalListProps) => {
   const {
     dispatch, error, isWaiting, result, trackEventCall,
-    useEffectHook, navigation, route
+    useEffectHook, navigation, route, filteredList, categoryIndices
   } = props;
 
   // Get Approval List Items
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
-      trackEvent('approval_list_api_call');
+      trackEvent('get_approval_list_api_call');
       dispatch(getApprovalList({}));
     }).catch(() => {});
   }), [navigation]);
@@ -132,6 +152,11 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
     // on api success
     if (!isWaiting && result) {
       trackEvent('get_approval_list_api_success');
+      const approvalItems: ApprovalListItem[] = (result && result.data) || [];
+      if (approvalItems.length !== 0) {
+        const { filteredData, headerIndices } = convertApprovalListData(approvalItems);
+        dispatch(setApprovalList(filteredData, headerIndices));
+      }
     }
 
     // on api failure
@@ -184,21 +209,22 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
       </View>
     );
   }
-  const approvalItems: ApprovalListItem[] = (result && result.data) || [];
-  const { filteredData, headerIndices } = convertApprovalListData(approvalItems);
   // TODO use FlatListEmptyComponent prop for rendering empty data in latest version of RN
   return (
     <View>
       <FlatList
-        data={filteredData}
-        keyExtractor={(item: ApprovalCategory) => {
+        data={filteredList}
+        keyExtractor={(item: ApprovalCategory, index: number) => {
           if (item.categoryHeader) {
             return item.categoryDescription.toString();
           }
-          return item.itemNbr.toString();
+          return item.itemNbr + index.toString();
         }}
-        renderItem={({ item }) => renderApprovalItem(item)}
-        stickyHeaderIndices={headerIndices}
+        renderItem={({ item }) => <RenderApprovalItem item={item} dispatch={dispatch} />}
+        stickyHeaderIndices={categoryIndices.length !== 0 ? categoryIndices : undefined}
+      // Default this is False, Solves flatlist rendering no data because stickyHeader updates at the same time as data
+        removeClippedSubviews={false}
+        extraData={filteredList}
       />
     </View>
   );

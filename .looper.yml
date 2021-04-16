@@ -4,7 +4,7 @@ envs:
     variables:
       #Template required vars for CI/CD
       # true / false
-      AIRWATCH_ACTIVATE: true
+      AIRWATCH_ACTIVATE: false
       # Cert / Prod
       AIRWATCH_ENV: Prod
       # whether the APK should be built or not
@@ -60,7 +60,7 @@ envs:
 
       #Versioning vars
       # major / minor / patch / noBump > defaults to patch
-      VERSION_TYPE: 'patch'
+      VERSION_TYPE: 'noBump'
 
       #Proximity related vars
       RELEASES_REPO: 'pangaea_releases'
@@ -70,7 +70,7 @@ envs:
       PROXIMITY_REPO: 'releases'
       # artifact group id
       NEXUS_GROUP_ID: 'IntlSamsTech'
-      
+
       # Application Portfolio Management
       APM_ID: 'APM0007047'
 

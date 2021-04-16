@@ -169,6 +169,7 @@ export default {
     OH_CHANGE: 'On-hands change',
     SELECT_ALL: 'Select all',
     DESELECT_ALL: 'Deselect all',
+    SELECTED: 'selected',
     APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.'
   }
 };
