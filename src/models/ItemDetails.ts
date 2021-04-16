@@ -5,7 +5,7 @@ interface ItemDetails {
   itemName: string;
   itemNbr: number;
   upcNbr: string;
-  status: string;
+  status?: string;
   categoryNbr: number;
   categoryDesc: string;
   price: number;
