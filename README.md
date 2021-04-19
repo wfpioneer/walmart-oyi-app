@@ -77,6 +77,7 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
   6. move camera over ether barcode and it should scan the barcode
 
 ### How to use the Manual Scan component
+
 * Add a button to the screen's header in the navigator
 * Have the button toggle the `state.Global.isManualScanEnabled` variable
 * Add `{isManualScanEnabled && <ManualScanComponent />}` in your component before the ScrollView
@@ -126,6 +127,16 @@ TIP: Make sure your barcodeEmitter has a listener setup to receive `scanned` eve
    }
    ```
 
+### How to change the working Environment for API calls
+
+1. Open up the environment file called `.env`
+    * Set `ENVIRONMENT= `to either dev/stage/prod
+    * Rebuild and Re-run the App in Android Studio
+
+2. Alternatively in Android Studio
+    * Go to `View -> Tool Windows -> Build Variants`
+    * Find the `OYI.app` module and set the build variant to `development/staging/production`Debug
+    * Build and run the application
 ## Deploying to Airwatch
 
  Apk builds are automatically deployed & activated in AirWatch after merging

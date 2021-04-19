@@ -1,12 +1,17 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { ApprovalListNavigator, renderApprovalTitle, renderSelectAllButton } from './ApprovalListNavigator';
+import { ApprovalListNavigatorStack, renderApprovalTitle, renderSelectAllButton } from './ApprovalListNavigator';
 
+jest.mock('../utils/AppCenterTool.ts', () => jest.requireActual('../utils/__mocks__/AppCenterTool'));
+jest.mock('../utils/sessionTimeout.ts', () => jest.requireActual('../utils/__mocks__/sessTimeout'));
 describe('ApprovalList Navigator', () => {
   it('Renders the approval list navigator component', () => {
     const renderer = ShallowRenderer.createRenderer();
+
     renderer.render(
-      <ApprovalListNavigator />
+      <ApprovalListNavigatorStack
+        result={undefined}
+      />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });

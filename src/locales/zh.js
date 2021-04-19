@@ -162,14 +162,14 @@ export default {
   // TODO needs Mandarin translations
   APPROVAL: {
     NEW_QUANTITY: '新更改数量',
-    CURRENT_QUANTITY: 'Current Qty',
+    CURRENT_QUANTITY: '当前库存数量',
     DAYS_LEFT: '剩余%{time}天',
-    APPROVALS: 'Approvals',
+    APPROVALS: '审批',
     APPROVE_ITEMS: '审批商品清单',
-    OH_CHANGE: 'On-Hands change',
-    SELECT_ALL: 'Select all',
-    DESELECT_ALL: 'Deselect all',
-    APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.'
+    OH_CHANGE: '库存调整',
+    SELECT_ALL: '选择全部',
+    DESELECT_ALL: '取消选择',
+    APPROVAL_API_ERROR: '检索审批列表出错, \n请重试'
 
   }
 };

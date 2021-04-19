@@ -6,7 +6,7 @@ import ApprovalList from '../screens/ApprovalList/ApprovalList';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import styles from './ApprovalListNavigator.style';
-import { mockApprovals } from '../mockData/mockApprovalItem';
+import { useTypedSelector } from '../state/reducers/RootReducer';
 
 const Stack = createStackNavigator();
 export const renderSelectAllButton = () => (
@@ -24,8 +24,25 @@ export const renderApprovalTitle = (approvalAmount: number) => (
     </Text>
   </View>
 );
+
 export const ApprovalListNavigator = () => {
-  const approvalAmount: number = mockApprovals.length ?? 0;
+  const { result } = useTypedSelector(state => state.async.getApprovalList);
+
+  return (
+    <ApprovalListNavigatorStack
+      result={result}
+    />
+  );
+};
+interface ApprovalNavigatorProps {
+  result: any;
+}
+export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps) => {
+  const {
+    result
+  } = props;
+
+  const approvalAmount: number = (result && result.data.length) || 0;
 
   return (
     <Stack.Navigator
