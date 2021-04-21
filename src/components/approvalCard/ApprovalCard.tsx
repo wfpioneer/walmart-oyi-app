@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import Octicons from 'react-native-vector-icons/Octicons';
+import { Dispatch } from 'redux';
 import { currencies, strings } from '../../locales';
 import styles from './ApprovalCard.style';
 import COLOR from '../../themes/Color';
+import { toggleItem } from '../../state/actions/Approvals';
 
 export interface ApprovalCardProps{
   image?: string;
@@ -15,15 +17,16 @@ export interface ApprovalCardProps{
   dollarChange: number;
   userId: string;
   daysLeft: number;
+  isChecked?: boolean;
+  dispatch: Dispatch<any>;
 }
 
 export const ApprovalCard = (props: ApprovalCardProps) => {
   const {
     image, itemNbr, itemName, oldQuantity,
-    newQuantity, dollarChange, userId, daysLeft
+    newQuantity, dollarChange, userId, daysLeft, isChecked, dispatch
   } = props;
   // TODO The CheckBox will need to changed for the `Select/Deselect All` tasks and add a proper tests
-  const [checked, setChecked] = useState(true);
 
   const positiveQtyChange = () => newQuantity > oldQuantity;
   return (
@@ -35,8 +38,8 @@ export const ApprovalCard = (props: ApprovalCardProps) => {
           <Text style={styles.itemDesc}>{itemName}</Text>
           <View style={styles.checkBox}>
             <Checkbox
-              status={checked ? 'checked' : 'unchecked'}
-              onPress={() => setChecked(!checked)}
+              status={isChecked ? 'checked' : 'unchecked'}
+              onPress={() => dispatch(toggleItem(itemNbr, !isChecked))}
               color={COLOR.MAIN_THEME_COLOR}
               uncheckedColor={COLOR.MAIN_THEME_COLOR}
             />
@@ -72,4 +75,9 @@ export const ApprovalCard = (props: ApprovalCardProps) => {
       </View>
     </View>
   );
+};
+
+ApprovalCard.defaultProps = {
+  image: undefined,
+  isChecked: false
 };

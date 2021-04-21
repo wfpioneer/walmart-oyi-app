@@ -4,12 +4,27 @@ import { mockApprovals } from '../../mockData/mockApprovalItem';
 import { ApprovalCategorySeparator } from './ApprovalCategorySeparator';
 
 describe('Approval CategorySeparator Component', () => {
-  it('Renders the approval category header component', () => {
+  const catHeader = mockApprovals[0];
+  it('Renders the approval category header checkbox as "unchecked"', () => {
     const renderer = ShallowRenderer.createRenderer();
-    const catHeader = mockApprovals[0];
-
     renderer.render(
-      <ApprovalCategorySeparator categoryName={catHeader.categoryDescription} categoryNbr={catHeader.categoryNbr} />
+      <ApprovalCategorySeparator
+        categoryName={catHeader.categoryDescription}
+        categoryNbr={catHeader.categoryNbr}
+        isChecked={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders the approval category checkbox as "checked"', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <ApprovalCategorySeparator
+        categoryName={catHeader.categoryDescription}
+        categoryNbr={catHeader.categoryNbr}
+        isChecked={true}
+      />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });

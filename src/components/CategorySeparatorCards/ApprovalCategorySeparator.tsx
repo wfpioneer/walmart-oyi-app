@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import COLOR from '../../themes/Color';
@@ -7,11 +7,11 @@ import styles from './ApprovalCategorySeparator.style';
 interface CategoryProps{
   categoryNbr: number;
   categoryName: string;
+  isChecked?: boolean;
 }
+
 export const ApprovalCategorySeparator = (props: CategoryProps) => {
-  const { categoryName, categoryNbr } = props;
-  // TODO The CheckBox will need to be changed for the `Select/Deselect All` tasks and have proper tests
-  const [checked, setChecked] = useState(false);
+  const { categoryName, categoryNbr, isChecked } = props;
 
   return (
     <View style={styles.categoryContainer}>
@@ -20,12 +20,16 @@ export const ApprovalCategorySeparator = (props: CategoryProps) => {
       </Text>
       <View style={styles.checkBox}>
         <Checkbox
-          status={checked ? 'checked' : 'unchecked'}
-          onPress={() => setChecked(!checked)}
+          status={isChecked ? 'checked' : 'unchecked'}
+          onPress={() => undefined} // TODO toggleItems by Category https://jira.walmart.com/browse/INTLSAOPS-2677
           color={COLOR.MAIN_THEME_COLOR}
           uncheckedColor={COLOR.MAIN_THEME_COLOR}
         />
       </View>
     </View>
   );
+};
+
+ApprovalCategorySeparator.defaultProps = {
+  isChecked: false
 };
