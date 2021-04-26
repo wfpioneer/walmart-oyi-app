@@ -1,13 +1,12 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, Route } from '@react-navigation/native';
-import {
-  ApprovalListScreen, convertApprovalListData, renderApprovalItem
-} from './ApprovalList';
+import { ApprovalListScreen, RenderApprovalItem, convertApprovalListData } from './ApprovalList';
 import { mockApprovals } from '../../mockData/mockApprovalItem';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
+Date.now = jest.fn().mockReturnValue(new Date('2021-03-30T00:00:00.000Z'));
 let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
 describe('ApprovalListScreen', () => {
@@ -18,10 +17,13 @@ describe('ApprovalListScreen', () => {
         data: mockApprovals,
         status: 200
       };
+      const mockListData = convertApprovalListData(mockApprovals);
       renderer.render(
         <ApprovalListScreen
           dispatch={jest.fn()}
           result={approvalResult}
+          categoryIndices={mockListData.headerIndices}
+          filteredList={mockListData.filteredData}
           error={null}
           isWaiting={false}
           navigation={navigationProp}
@@ -44,6 +46,8 @@ describe('ApprovalListScreen', () => {
           result={emptyResultData}
           error={null}
           isWaiting={false}
+          categoryIndices={[]}
+          filteredList={[]}
           navigation={navigationProp}
           route={routeProp}
           useEffectHook={jest.fn()}
@@ -53,18 +57,19 @@ describe('ApprovalListScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renderApprovalItem renders an approval item', () => {
+    it('RenderApprovalItem renders an approval item', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderApprovalItem(mockApprovals[0])
+        <RenderApprovalItem item={mockApprovals[0]} dispatch={jest.fn()} />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renderApprovalItem renders the category header', () => {
+    it('RenderApprovalItem renders the category header', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderApprovalItem({ ...mockApprovals[0], categoryHeader: true })
+        <RenderApprovalItem item={{ ...mockApprovals[0], categoryHeader: true }} dispatch={jest.fn()} />
+
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -79,6 +84,8 @@ describe('ApprovalListScreen', () => {
           result={null}
           error="Network Error"
           isWaiting={false}
+          categoryIndices={[]}
+          filteredList={[]}
           navigation={navigationProp}
           route={routeProp}
           useEffectHook={jest.fn()}
@@ -96,6 +103,8 @@ describe('ApprovalListScreen', () => {
           result={null}
           error={null}
           isWaiting={true}
+          categoryIndices={[]}
+          filteredList={[]}
           navigation={navigationProp}
           route={routeProp}
           useEffectHook={jest.fn()}
@@ -112,7 +121,8 @@ describe('ApprovalListScreen', () => {
         filteredData: [{
           categoryDescription: mockApprovals[0].categoryDescription,
           categoryNbr: mockApprovals[0].categoryNbr,
-          categoryHeader: true
+          categoryHeader: true,
+          isChecked: false
         },
         mockApprovals[0]],
         headerIndices: [0]

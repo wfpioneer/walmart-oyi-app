@@ -15,7 +15,8 @@ export const mockApprovals: ApprovalListItem[] = [{
   initiatedUserId: 'Associate Employee',
   initiatedTimestamp: '2021-03-27T00:00:00.000Z',
   approvalStatus: approvalStatus.Pending,
-  approvalRequestSource: approvalRequestSource.ItemDetails
+  approvalRequestSource: approvalRequestSource.ItemDetails,
+  isChecked: false
 }, {
   imageUrl: undefined,
   itemName: 'Red Apples',
@@ -31,7 +32,8 @@ export const mockApprovals: ApprovalListItem[] = [{
   initiatedUserId: 'Associate Worker',
   initiatedTimestamp: '2021-03-28T00:00:00.000Z',
   approvalStatus: approvalStatus.Pending,
-  approvalRequestSource: approvalRequestSource.ItemDetails
+  approvalRequestSource: approvalRequestSource.ItemDetails,
+  isChecked: false
 }, {
   imageUrl: undefined,
   itemName: 'Cabbage',
@@ -47,7 +49,8 @@ export const mockApprovals: ApprovalListItem[] = [{
   initiatedUserId: 'Associate Worker',
   initiatedTimestamp: '2021-03-28T00:00:00.000Z',
   approvalStatus: approvalStatus.Pending,
-  approvalRequestSource: approvalRequestSource.ItemDetails
+  approvalRequestSource: approvalRequestSource.ItemDetails,
+  isChecked: false
 }, {
   imageUrl: undefined,
   itemName: 'Strawberries',
@@ -63,5 +66,6 @@ export const mockApprovals: ApprovalListItem[] = [{
   initiatedUserId: 'Associate Worker',
   initiatedTimestamp: '2021-03-28T00:00:00.000Z',
   approvalStatus: approvalStatus.Pending,
-  approvalRequestSource: approvalRequestSource.ItemDetails
+  approvalRequestSource: approvalRequestSource.ItemDetails,
+  isChecked: false
 }];

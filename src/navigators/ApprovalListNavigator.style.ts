@@ -14,6 +14,9 @@ export default StyleSheet.create({
   headerRightPadding: {
     paddingRight: 10
   },
+  headerLeftPadding: {
+    paddingLeft: 10
+  },
   selectAllButton: {
     flex: 1,
     flexDirection: 'row',
@@ -26,4 +29,5 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold'
   }
+
 });

@@ -14,6 +14,7 @@ export interface ApprovalListItem {
   initiatedTimestamp: string;
   approvalStatus: approvalStatus;
   approvalRequestSource: approvalRequestSource;
+  isChecked?: boolean;
 }
 
 export enum approvalStatus {
