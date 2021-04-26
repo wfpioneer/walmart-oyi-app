@@ -89,6 +89,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
 
   signInUser(): void {
     if (Config.ENVIRONMENT !== 'prod') {
+      // For use with Fluffy in non-prod
       WMSSO.setEnv('STG');
     }
     WMSSO.getUser().then((user: User) => {
@@ -112,7 +113,13 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       user.userId = user.userId.replace(/_/g, ''); // Strip underscore from svc accounts to prevent 400 error.
       setUserId(user.userId);
       this.props.loginUser(user);
-      this.props.getFluffyRoles(user);
+      // this.props.getFluffyRoles(user);
+
+      // TODO remove when Fluffy call re-enabled
+      this.props.hideActivityModal();
+      trackEvent('user_sign_in');
+      this.props.navigation.replace('Tabs');
+      this.props.setEndTime(sessionEnd());
     });
   }
 

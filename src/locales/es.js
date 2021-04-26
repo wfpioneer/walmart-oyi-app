@@ -85,7 +85,7 @@ export default {
     OH_UPDATE_ERROR: 'Por favor ingresa un número entre %{min} y %{max}',
     OH_UPDATE_API_ERROR: 'Hubo un error al actualizar la cantidad. Inténtalo de nuevo.',
     API_ERROR: 'Hubo un error al extraer los detalles del artículo. Inténtalo de nuevo.',
-    SCAN_FOR_NO_ACTION: 'Escanear en busca de acción',
+    SCAN_FOR_NO_ACTION: 'Finalizar sin cambios',
     USE_SCANNER_SCAN_FOR_NO_ACTION: 'Utilice el escáner de código de barras para escanear sin realizar ninguna acción',
     SCAN_DOESNT_MATCH: 'El escaneo no coincide',
     SCAN_DOESNT_MATCH_DETAILS: 'El elemento escaneado no coincide con el upc del elemento actual',
