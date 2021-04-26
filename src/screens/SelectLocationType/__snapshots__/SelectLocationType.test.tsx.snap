@@ -1170,7 +1170,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
   >
     <Button
       backgroundColor="#0071e9"
-      disabled={false}
+      disabled={true}
       height={45}
       onPress={[Function]}
       radius={0}
