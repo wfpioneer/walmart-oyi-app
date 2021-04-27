@@ -91,7 +91,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
   // original line read: prevState: Readonly<HomeScreenState>, snapshot?: any
   componentDidUpdate(prevProps: Readonly<HomeScreenProps>) {
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
-      trackEvent('home_worklist_summary_api_error', {
+      trackEvent('home_worklist_summary_api_failure', {
         errorDetails: this.props.worklistSummaryApiState.error.message
           || JSON.stringify(this.props.worklistSummaryApiState.error),
         duration: moment().valueOf() - this.state.getWorklistStart
