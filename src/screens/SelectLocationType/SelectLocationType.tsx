@@ -145,6 +145,16 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
     }
   }, []);
 
+  // TODO use beforeRemove listener (5.7+) when updating RN libraries to latest version
+  // Navigation Listener
+  useEffectHook(() => {
+    // Resets location api response data when navigating off-screen
+    navigation.addListener('blur', () => {
+      dispatch({ type: 'API/ADD_LOCATION/RESET' });
+      dispatch({ type: 'API/EDIT_LOCATION/RESET' });
+    });
+  }, []);
+
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
