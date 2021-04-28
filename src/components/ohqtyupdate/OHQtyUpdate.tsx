@@ -66,6 +66,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
     // on api failure
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.error) {
       trackEvent('item_details_update_oh_quantity_api_failure', {
+        itemDetails: JSON.stringify(itemDetails),
         errorDetails: updateQuantityAPIStatus.error.message || updateQuantityAPIStatus.error
       });
       updateApiSubmitting(false);

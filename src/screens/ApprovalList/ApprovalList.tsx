@@ -160,12 +160,9 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
 
     // on api failure
     if (!isWaiting && error) {
-      trackEvent('get_approval_list_api_failure');
-    }
-
-    // on api submission
-    if (isWaiting) {
-      trackEvent('get_approval_list_api_start');
+      trackEvent('get_approval_list_api_failure', {
+        errorDetails: error.message || error
+      });
     }
   }, [error, isWaiting, result]);
 

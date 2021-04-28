@@ -172,7 +172,6 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
     }
     // on api submission
     else if (!apiInProgress && locationsApi.isWaiting) {
-      trackEvent('location_get_location_api_start');
       setApiError(false);
       setAPIInProgress(true);
     }
@@ -199,7 +198,11 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
   };
 
   const deleteConfirmed = () => {
-    trackEvent('location_delete_location_confirmed');
+    trackEvent('location_delete_location_api_call', {
+      upc: itemDetails.upcNbr,
+      sectionId: locToConfirm.locationName,
+      locationTypeNbr: locToConfirm.locationTypeNbr
+    });
     dispatch(
       deleteLocation({
         upc: itemDetails.upcNbr,
