@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
@@ -101,6 +101,7 @@ export const RenderApprovalItem = (props: ApprovalItemProp) => {
 const ApprovalList = () => {
   const { result, isWaiting, error } = useTypedSelector(state => state.async.getApprovalList);
   const { approvalList, categoryIndices } = useTypedSelector(state => state.Approvals);
+  const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -112,6 +113,8 @@ const ApprovalList = () => {
       result={result}
       error={error}
       isWaiting={isWaiting}
+      apiStart={apiStart}
+      setApiStart={setApiStart}
       navigation={navigation}
       route={route}
       useEffectHook={useEffect}
@@ -126,6 +129,8 @@ interface ApprovalListProps {
   result: any;
   filteredList: ApprovalCategory[];
   categoryIndices: number[];
+  apiStart: number;
+  setApiStart: Function;
   navigation: NavigationProp<any>;
   route: Route<any>;
   useEffectHook: Function;
@@ -134,7 +139,7 @@ interface ApprovalListProps {
 
 export const ApprovalListScreen = (props: ApprovalListProps) => {
   const {
-    dispatch, error, isWaiting, result, trackEventCall,
+    dispatch, error, isWaiting, result, trackEventCall, apiStart, setApiStart,
     useEffectHook, navigation, route, filteredList, categoryIndices
   } = props;
 
@@ -142,6 +147,7 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
       trackEvent('get_approval_list_api_call');
+      setApiStart(moment().valueOf());
       dispatch(getApprovalList({}));
     }).catch(() => {});
   }), [navigation]);
@@ -150,7 +156,7 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
   useEffectHook(() => {
     // on api success
     if (!isWaiting && result) {
-      trackEvent('get_approval_list_api_success');
+      trackEvent('get_approval_list_api_success', { duration: moment().valueOf() - apiStart });
       const approvalItems: ApprovalListItem[] = (result && result.data) || [];
       if (approvalItems.length !== 0) {
         const { filteredData, headerIndices } = convertApprovalListData(approvalItems);
@@ -161,7 +167,8 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
     // on api failure
     if (!isWaiting && error) {
       trackEvent('get_approval_list_api_failure', {
-        errorDetails: error.message || error
+        errorDetails: error.message || error,
+        duration: moment().valueOf() - apiStart
       });
     }
   }, [error, isWaiting, result]);

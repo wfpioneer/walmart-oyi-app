@@ -7,6 +7,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import FAB from 'react-native-fab';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import moment from 'moment';
 import Button from '../../components/buttons/Button';
 import styles from './LocationDetails.style';
 import LocationDetailsCard from '../../components/locationdetailscard/LocationDetailsCard';
@@ -36,6 +37,8 @@ interface LocationDetailsProps {
   setAPIInProgress: Function;
   apiError: boolean;
   setApiError: Function;
+  apiStart: number;
+  setApiStart: Function;
   delAPI: {
     isWaiting: boolean;
     value: any;
@@ -68,6 +71,7 @@ const LocationDetails = () => {
   const itemDetails = useTypedSelector(state => state.Location.itemLocDetails);
   const [apiInProgress, setAPIInProgress] = useState(false);
   const [apiError, setApiError] = useState(false);
+  const [apiStart, setApiStart] = useState(0);
   const delAPI = useTypedSelector(state => state.async.deleteLocation);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
@@ -88,6 +92,8 @@ const LocationDetails = () => {
       locationsApi={locations}
       navigation={navigation}
       route={route}
+      apiStart={apiStart}
+      setApiStart={setApiStart}
       setAPIInProgress={setAPIInProgress}
       setDisplayConfirmation={setDisplayConfirmation}
       setApiError={setApiError}
@@ -111,6 +117,8 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
     locationsApi,
     navigation,
     route,
+    apiStart,
+    setApiStart,
     setAPIInProgress,
     setDisplayConfirmation,
     setApiError,
@@ -122,7 +130,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
   useEffectHook(() => {
     // on api success
     if (apiInProgress && delAPI.isWaiting === false && delAPI.result) {
-      trackEvent('location_delete_location_api_success');
+      trackEvent('location_delete_location_api_success', { duration: moment().valueOf() - apiStart });
       dispatch(deleteLocationFromExisting(locToConfirm.locationArea, locToConfirm.locationIndex));
       setAPIInProgress(false);
       setDisplayConfirmation(false);
@@ -133,7 +141,8 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
       trackEvent('location_delete_location_api_failure', {
         upcNbr: delAPI.value.upc,
         sectionId: delAPI.value.sectionId,
-        errorDetails: delAPI.error.message || delAPI.error
+        errorDetails: delAPI.error.message || delAPI.error,
+        duration: moment().valueOf() - apiStart
       });
       setAPIInProgress(false);
       setApiError(true);
@@ -203,6 +212,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
       sectionId: locToConfirm.locationName,
       locationTypeNbr: locToConfirm.locationTypeNbr
     });
+    setApiStart(moment().valueOf());
     dispatch(
       deleteLocation({
         upc: itemDetails.upcNbr,
