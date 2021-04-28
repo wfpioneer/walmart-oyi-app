@@ -391,9 +391,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
       trackEventCall('item_details_api_success',
         { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
     }
-    if (isRefreshing) {
-      setIsRefreshing(false);
-    }
+
     if (isRefreshing) {
       setIsRefreshing(false);
     }
@@ -447,8 +445,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
     // on api success
     if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.result) {
       if (_.get(completeItemApi.result, 'status') === 204) {
-        trackEventCall('item_details_action_completed_api_failure_scan_no_match',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
+        trackEventCall('item_details_action_completed_api_success_scan_no_match',
+          {
+            itemDetails: JSON.stringify(itemDetails),
+            duration: moment().valueOf() - apiStart,
+            status: result.status
+          });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
         trackEventCall('item_details_action_completed_api_success',
@@ -464,11 +466,19 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
     if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.error) {
       if (completeItemApi.error === COMPLETE_API_409_ERROR) {
         trackEventCall('item_details_action_completed_api_failure_scan_no_match',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
+          {
+            itemDetails: JSON.stringify(itemDetails),
+            duration: moment().valueOf() - apiStart,
+            errorDetails: completeItemApi.error.message || completeItemApi.error
+          });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
         trackEventCall('item_details_action_completed_api_failure',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
+          {
+            itemDetails: JSON.stringify(itemDetails),
+            duration: moment().valueOf() - apiStart,
+            errorDetails: completeItemApi.error.message || completeItemApi.error
+          });
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
       setCompleteApiInProgress(false);
@@ -522,6 +532,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
             onPress={() => {
               setApiStart(moment().valueOf());
               trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
+              trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
           >
