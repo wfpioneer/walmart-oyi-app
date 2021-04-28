@@ -69,6 +69,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       this.setState({
         getWorklistStart: moment().valueOf()
       });
+      trackEvent('home_worklist_summary_api_call');
       this.props.getWorklistSummary();
       this.setState({
         getWorklistStart: moment().valueOf()
@@ -138,6 +139,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             style={styles.errorRetryButton}
             onPress={() => {
               trackEvent('home_worklist_summary_retry_button_click');
+              trackEvent('home_worklist_summary_api_call');
               this.props.getWorklistSummary();
             }}
           >
