@@ -105,6 +105,7 @@ export const renderPrintItem = (
 
   const handleDeleteAction = (index: number) => () => {
     validateSessionCall(navigation, route.name).then(() => {
+      trackEvent('print_queue_delete_item', { printItem: JSON.stringify(printQueue[index]) });
       printQueue.splice(index, 1);
       dispatch(setPrintQueue(printQueue));
     }).catch(() => {});

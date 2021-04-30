@@ -238,7 +238,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
 
   const addNewLocationNav = () => {
     validateSession(navigation, route.name).then(() => {
-      trackEvent('location_fab_button_click');
+      trackEvent('location_add_location_click');
       navigation.navigate('AddLocation');
     }).catch(() => {});
   };

@@ -16,6 +16,7 @@ import LocationDetails from '../screens/LocationDetails/LocationDetails';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { showInfoModal } from '../state/actions/Modal';
 import { openCamera } from '../utils/scannerUtils';
+import { trackEvent } from '../utils/AppCenterTool';
 
 const Stack = createStackNavigator();
 
@@ -43,7 +44,11 @@ const ReviewItemDetailsNavigator = () => {
 
   // TODO add "badge" to show signs currently in queue
   const renderPrintQueueButton = () => (
-    <TouchableOpacity onPress={() => navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' })}>
+    <TouchableOpacity onPress={() => {
+      trackEvent('print_queue_list_click');
+      navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' });
+    }}
+    >
       <View style={styles.rightButton}>
         <MaterialCommunityIcon
           name="printer"
