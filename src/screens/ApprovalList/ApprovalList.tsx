@@ -79,6 +79,7 @@ export const RenderApprovalItem = (props: ApprovalItemProp) => {
         categoryNbr={categoryNbr}
         categoryName={categoryDescription}
         isChecked={isChecked}
+        dispatch={dispatch}
       />
     );
   }
@@ -220,7 +221,9 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
           return item.itemNbr + index.toString();
         }}
         renderItem={({ item }) => <RenderApprovalItem item={item} dispatch={dispatch} />}
-        stickyHeaderIndices={categoryIndices.length === 0 ? categoryIndices : undefined}
+        stickyHeaderIndices={categoryIndices.length !== 0 ? categoryIndices : undefined}
+      // Default this is False, Solves flatlist rendering no data because stickyHeader updates at the same time as data
+        removeClippedSubviews={false}
         extraData={filteredList}
       />
     </View>

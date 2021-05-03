@@ -82,6 +82,7 @@ exports[`ApprovalListScreen Tests rendering the approval list RenderApprovalItem
 <ApprovalCategorySeparator
   categoryName="SNACKS"
   categoryNbr={1}
+  dispatch={[MockFunction]}
   isChecked={false}
 />
 `;
@@ -297,6 +298,12 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
+    stickyHeaderIndices={
+      Array [
+        0,
+        2,
+      ]
+    }
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />

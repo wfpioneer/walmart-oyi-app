@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
+import { Dispatch } from 'redux';
+import { toggleCategory } from '../../state/actions/Approvals';
 import COLOR from '../../themes/Color';
 import styles from './ApprovalCategorySeparator.style';
 
@@ -8,10 +10,13 @@ interface CategoryProps{
   categoryNbr: number;
   categoryName: string;
   isChecked?: boolean;
+  dispatch: Dispatch<any>;
 }
 
 export const ApprovalCategorySeparator = (props: CategoryProps) => {
-  const { categoryName, categoryNbr, isChecked } = props;
+  const {
+    categoryName, categoryNbr, isChecked, dispatch
+  } = props;
 
   return (
     <View style={styles.categoryContainer}>
@@ -21,7 +26,7 @@ export const ApprovalCategorySeparator = (props: CategoryProps) => {
       <View style={styles.checkBox}>
         <Checkbox
           status={isChecked ? 'checked' : 'unchecked'}
-          onPress={() => undefined} // TODO toggleItems by Category https://jira.walmart.com/browse/INTLSAOPS-2677
+          onPress={() => dispatch(toggleCategory(categoryNbr, !isChecked))}
           color={COLOR.MAIN_THEME_COLOR}
           uncheckedColor={COLOR.MAIN_THEME_COLOR}
         />
