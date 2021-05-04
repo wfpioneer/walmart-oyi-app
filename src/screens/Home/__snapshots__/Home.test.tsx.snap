@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeScreen rendering renders null when worklistApiState.result.status is 204 1`] = `null`;
+
+exports[`HomeScreen rendering renders null when worklistSummaryApiState.result is null 1`] = `null`;
