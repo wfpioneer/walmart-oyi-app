@@ -14,6 +14,8 @@ import DeleteLocationService from '../../services/DeleteLocation.service';
 import NoActionService from '../../services/NoAction.service';
 import PrintService from '../../services/Print.service';
 import GetLocationDetailsService from '../../services/GetLocationDetails.service';
+import GetFluffyRolesService from '../../services/GetFluffyRoles.service';
+import GetApprovalListService from '../../services/GetApprovalList.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
@@ -27,7 +29,9 @@ const genericSagas = [
   makeAsyncSaga(saga.DELETE_LOCATION, actions.deleteLocation, DeleteLocationService.deleteLocation),
   makeAsyncSaga(saga.NO_ACTION, actions.noAction, NoActionService.noAction),
   makeAsyncSaga(saga.PRINT_SIGN, actions.printSign, PrintService.print),
-  makeAsyncSaga(saga.GET_LOCATION_DETAILS, actions.getLocationDetails, GetLocationDetailsService.getLocation)
+  makeAsyncSaga(saga.GET_LOCATION_DETAILS, actions.getLocationDetails, GetLocationDetailsService.getLocation),
+  makeAsyncSaga(saga.GET_FLUFFY_ROLES, actions.getFluffyRoles, GetFluffyRolesService.getFluffyRoles),
+  makeAsyncSaga(saga.GET_APPROVAL_LIST, actions.getApprovalList, GetApprovalListService.getApprovalList)
 ];
 
 export default function* rootSaga() {

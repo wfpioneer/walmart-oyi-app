@@ -2,7 +2,6 @@ import {
   ADD_LOCATION_TO_EXISTING,
   DELETE_LOCATION_FROM_EXISTING,
   EDIT_EXISTING_LOCATION,
-  IS_UPDATING,
   RESET_LOCATIONS,
   SET_FLOOR_LOCATIONS,
   SET_ITEM_LOC_DETAILS,
@@ -13,22 +12,20 @@ import LocationType from '../../models/Location';
 interface LocationState {
   floorLocations: Array<LocationType>;
   reserveLocations: Array<LocationType>;
-  isUpdating: boolean;
   itemLocDetails: {
-    itemNbr: number | null;
-    upcNbr: string | null;
-    exceptionType: string | null;
+    itemNbr: number;
+    upcNbr: string;
+    exceptionType: string;
   };
 }
 
 const initialState: LocationState = {
   floorLocations: [],
   reserveLocations: [],
-  isUpdating: false,
   itemLocDetails: {
-    itemNbr: null,
-    upcNbr: null,
-    exceptionType: null
+    itemNbr: 0,
+    upcNbr: '',
+    exceptionType: ''
   }
 };
 
@@ -133,11 +130,6 @@ export const Location = (state = initialState, action: any) => {
       return {
         ...state
       };
-    case IS_UPDATING:
-      return {
-        ...state,
-        isUpdating: action.payload
-      };
     case DELETE_LOCATION_FROM_EXISTING:
       if (action.payload.locationArea === 'floor') {
         state.floorLocations.splice(action.payload.locIndex, 1);
@@ -160,7 +152,6 @@ export const Location = (state = initialState, action: any) => {
       return {
         floorLocations: [],
         reserveLocations: [],
-        isUpdating: false,
         itemLocDetails: {
           itemNbr: null,
           upcNbr: null,

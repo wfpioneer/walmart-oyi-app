@@ -1,3 +1,5 @@
+import ItemDetails from '../models/ItemDetails';
+
 /* eslint-disable quote-props */
 export default {
   '123': {
@@ -18,59 +20,59 @@ export default {
     location: {
       floor: [
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '1',
-          locationName: null,
+          locationName: 'A1-1',
           type: 'Sales Floor',
           typeNbr: 8
         },
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 0,
+          sectionId: 2,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '2',
-          locationName: null,
+          locationName: 'A1-2',
           type: 'End Cap',
           typeNbr: 12
         },
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 3,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '3',
-          locationName: null,
+          locationName: 'A1-3',
           type: 'Pod',
           typeNbr: 13
         },
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 4,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '4',
-          locationName: null,
+          locationName: 'A1-4',
           type: 'Display',
           typeNbr: 11
         }
       ],
       reserve: [
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '1',
-          locationName: null,
+          locationName: 'A1-1',
           type: 'Reserve',
           typeNbr: 7
         }
@@ -134,14 +136,16 @@ export default {
         }
       ]
     }
-  },
+  } as ItemDetails,
   '456': {
     itemName: 'Small, Store Use Item',
     itemNbr: 987654321,
     upcNbr: '777555333',
     status: 'Active',
-    category: '99 - Store Use',
+    categoryNbr: 99,
+    categoryDesc: 'Store Use',
     price: 2000.94,
+    completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
     replenishment: {
@@ -150,59 +154,59 @@ export default {
     location: {
       floor: [
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '1',
-          locationName: null,
+          locationName: 'A1-1',
           type: 'Sales Floor',
           typeNbr: 8
         },
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 0,
+          sectionId: 2,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '2',
-          locationName: null,
+          locationName: 'A1-2',
           type: 'End Cap',
           typeNbr: 12
         },
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 3,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '3',
-          locationName: null,
+          locationName: 'A1-3',
           type: 'Pod',
           typeNbr: 13
         },
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 4,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '4',
-          locationName: null,
+          locationName: 'A1-4',
           type: 'Display',
           typeNbr: 11
         }
       ],
       reserve: [
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '1',
-          locationName: null,
+          locationName: 'A1-1',
           type: 'Reserve',
           typeNbr: 7
         }
@@ -262,14 +266,16 @@ export default {
         }
       ]
     }
-  },
+  } as ItemDetails,
   '789': {
     itemName: 'Wine Item',
     itemNbr: 987654321,
     upcNbr: '777555333',
     status: 'Active',
-    category: '19 - Wine',
+    categoryNbr: 19,
+    categoryDesc: 'Wine',
     price: 2000.94,
+    completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
     replenishment: {
@@ -278,59 +284,59 @@ export default {
     location: {
       floor: [
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '1',
-          locationName: null,
+          locationName: 'A1-1',
           type: 'Sales Floor',
           typeNbr: 8
         },
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 0,
+          sectionId: 2,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '2',
-          locationName: null,
+          locationName: 'A1-2',
           type: 'End Cap',
           typeNbr: 12
         },
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 3,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '3',
-          locationName: null,
+          locationName: 'A1-3',
           type: 'Pod',
           typeNbr: 13
         },
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 4,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '4',
-          locationName: null,
+          locationName: 'A1-4',
           type: 'Display',
           typeNbr: 11
         }
       ],
       reserve: [
         {
-          zoneId: null,
-          aisleId: null,
-          sectionId: null,
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
           zoneName: 'A',
           aisleName: '1',
           sectionName: '1',
-          locationName: null,
+          locationName: 'A1-1',
           type: 'Reserve',
           typeNbr: 7
         }
@@ -390,5 +396,5 @@ export default {
         }
       ]
     }
-  }
+  } as ItemDetails
 };

@@ -8,7 +8,7 @@ export interface WorklistItemI {
   itemCount? : number;
   subCatgNbr? : number;
   subCatgName? : string;
-  completedTs? : Date;
+  completedTs? : string;
   completedUserId? : string;
   completed? : boolean;
   imageURLKey?: string;

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 import Button from '../../../components/buttons/Button';
 import styles from './ChangePrinter.style';
 import COLOR from '../../../themes/Color';
@@ -16,10 +17,36 @@ export const ChangePrinter = () => {
   const [macAddress, updateMacAddress] = useState('');
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  return (
+    <ChangePrinterScreen
+      macAddress={macAddress}
+      updateMacAddress={updateMacAddress}
+      dispatch={dispatch}
+      navigation={navigation}
+      useEffectHook={useEffect}
+    />
+  );
+};
+interface ChangePrinterProps {
+  macAddress: string;
+  updateMacAddress: Function;
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
+  useEffectHook: Function;
+}
+export const ChangePrinterScreen = (props: ChangePrinterProps) => {
+  const {
+    macAddress,
+    updateMacAddress,
+    dispatch,
+    navigation,
+    useEffectHook
+  } = props;
   const macRegex = /^[0-9a-fA-F]{12}/;
 
   // Barcode event listener effect
-  useEffect(() => {
+  useEffectHook(() => {
     const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
         dispatch(setScannedEvent(scan));
@@ -29,8 +56,7 @@ export const ChangePrinter = () => {
     });
 
     return () => {
-      // eslint-disable-next-line no-unused-expressions
-      scannedSubscription?.remove();
+      scannedSubscription.remove();
       return undefined;
     };
   }, []);
@@ -59,13 +85,12 @@ export const ChangePrinter = () => {
         onSubmitEditing={submitMacAddress}
       />
       { (macAddress.length > 0 && macAddress.length !== 12)
-        && (
-        <View style={styles.alertView}>
-          <MaterialCommunityIcons name="alert-circle" size={20} color={COLOR.RED_300} />
-          <Text style={styles.errorText}>{strings('PRINT.MAC_ADDRESS_ERROR')}</Text>
-        </View>
-        )
-      }
+      && (
+      <View style={styles.alertView}>
+        <MaterialCommunityIcons name="alert-circle" size={20} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('PRINT.MAC_ADDRESS_ERROR')}</Text>
+      </View>
+      )}
       <Button
         title={strings('GENERICS.SUBMIT')}
         style={styles.button}

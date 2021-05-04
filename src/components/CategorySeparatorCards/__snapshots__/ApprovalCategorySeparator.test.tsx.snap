@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Approval CategorySeparator Component Renders the approval category checkbox as "checked" 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "elevation": 4,
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "marginBottom": 4,
+      "paddingVertical": 20,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "alignSelf": "center",
+        "color": "#616161",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "justifyContent": "flex-end",
+        "marginHorizontal": 20,
+      }
+    }
+  >
+    1 - SNACKS
+  </Text>
+  <View
+    style={
+      Object {
+        "justifyContent": "center",
+        "marginHorizontal": 7,
+      }
+    }
+  >
+    <ForwardRef
+      color="#0071e9"
+      onPress={[Function]}
+      status="checked"
+      uncheckedColor="#0071e9"
+    />
+  </View>
+</View>
+`;
+
+exports[`Approval CategorySeparator Component Renders the approval category header checkbox as "unchecked" 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "elevation": 4,
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "marginBottom": 4,
+      "paddingVertical": 20,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "alignSelf": "center",
+        "color": "#616161",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "justifyContent": "flex-end",
+        "marginHorizontal": 20,
+      }
+    }
+  >
+    1 - SNACKS
+  </Text>
+  <View
+    style={
+      Object {
+        "justifyContent": "center",
+        "marginHorizontal": 7,
+      }
+    }
+  >
+    <ForwardRef
+      color="#0071e9"
+      onPress={[Function]}
+      status="unchecked"
+      uncheckedColor="#0071e9"
+    />
+  </View>
+</View>
+`;

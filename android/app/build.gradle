@@ -80,6 +80,15 @@ import com.android.build.OutputFile
 project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing
 ]
+// Maps builds variants to environment files Defaults to ".env"
+project.ext.envConfigFiles = [
+    debug: ".env",
+    release: ".env",
+    stagingRelease: ".env.staging",
+    stagingDebug: ".env.staging",
+    productionRelease: ".env.prod",
+    productionDebug: ".env.prod",
+]
 
 apply from: "../../node_modules/react-native/react.gradle"
 
@@ -132,8 +141,8 @@ android {
         applicationId "com.walmart.intl.oyi"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 57
-        versionName "1.0.16"
+        versionCode 76
+        versionName "1.0.31"
         resValue "string", "build_config_package", "com.samsclub.intl.oyi"
     }
     splits {
@@ -174,6 +183,18 @@ android {
         }
     }
 
+    flavorDimensions "default"
+    /* Creates a different build variant of the application defined by buildType.
+        ie. devDebug & devRelease
+        Each productFlavor can override its Default Configuration
+    */
+    productFlavors {
+      development {}  
+
+      staging {}
+      
+      production {}
+    }
     packagingOptions {
         pickFirst "lib/armeabi-v7a/libc++_shared.so"
         pickFirst "lib/arm64-v8a/libc++_shared.so"

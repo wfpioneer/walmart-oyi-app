@@ -1,4 +1,4 @@
-inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-v1.1.1
+inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-v1.3.2
 envs:
   global:
     variables:
@@ -26,9 +26,9 @@ envs:
 
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
-      ANDROID_BUILD_PROFILE: ':app:assembleRelease'
+      ANDROID_BUILD_PROFILE: ':app:assembleStagingRelease'
       # Optional - if your app needs a special command to be built (debug version). Defaults to assembleDebug.
-      ANDROID_BUILD_PR_PROFILE: ':app:assembleDebug'
+      ANDROID_BUILD_PR_PROFILE: ':app:assembleStagingDebug'
       # Optional - if your app needs arguments to be built. It's empty by default.
       GRADLE_ARG: ''
 
@@ -76,6 +76,9 @@ envs:
       #        LOOPER_API_TOKEN: <PROVIDE_A_VALID_API_OKEN>
       #        APP_TITLE: "<NAME_OF_YOUR_APP>"
       #        BETACRASH_APP_ID: "<ID_OF_YOUR_APP>"
+
+      # Application Portfolio Management
+      APM_ID: 'APM0007047'
 
       projects:
         - rootDir: './'

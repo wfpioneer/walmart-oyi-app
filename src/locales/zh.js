@@ -158,5 +158,19 @@ export default {
     POD: '堆头',
     DISPLAY: '橱窗',
     RESERVE: '库存'
+  },
+  // TODO needs Mandarin translations
+  APPROVAL: {
+    NEW_QUANTITY: '新更改数量',
+    CURRENT_QUANTITY: '当前库存数量',
+    DAYS_LEFT: '剩余%{time}天',
+    APPROVALS: '审批',
+    APPROVE_ITEMS: '审批商品清单',
+    OH_CHANGE: '库存调整',
+    SELECT_ALL: '选择全部',
+    DESELECT_ALL: '取消选择',
+    SELECTED: 'selected',
+    APPROVAL_API_ERROR: '检索审批列表出错, \n请重试'
+
   }
 };

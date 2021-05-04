@@ -35,3 +35,9 @@ export const printSign = makeAsyncActionCreators(PRINT_SIGN);
 
 export const GET_LOCATION_DETAILS = makeAsyncActionTypes('API/GET_LOCATION_DETAILS');
 export const getLocationDetails = makeAsyncActionCreators(GET_LOCATION_DETAILS);
+
+export const GET_FLUFFY_ROLES = makeAsyncActionTypes('API/GET_FLUFFY_ROLES');
+export const getFluffyRoles = makeAsyncActionCreators(GET_FLUFFY_ROLES);
+
+export const GET_APPROVAL_LIST = makeAsyncActionTypes('API/GET_APPROVAL_LIST');
+export const getApprovalList = makeAsyncActionCreators(GET_APPROVAL_LIST);

@@ -108,7 +108,6 @@ IconButton.propTypes = {
 
 IconButton.defaultProps = {
   onPress: undefined,
-  title: undefined,
   backgroundColor: COLOR.MAIN_THEME_COLOR,
   height: 45,
   width: -1,

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Image, Text, TextInput, View } from 'react-native';
+import {
+  Image, Text, TextInput, View
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -10,7 +12,6 @@ import { numbers, strings } from '../../locales';
 import styles from './PrintQueueEdit.style';
 import { setPrintQueue } from '../../state/actions/Print';
 
-
 const QTY_MIN = 1;
 const QTY_MAX = 100;
 const ERROR_FORMATTING_OPTIONS = {
@@ -18,15 +19,11 @@ const ERROR_FORMATTING_OPTIONS = {
   max: numbers(QTY_MAX, { precision: 0 })
 };
 
-const validateQty = (qty: number) => {
-  return QTY_MIN <= qty && qty <= QTY_MAX;
-};
+const validateQty = (qty: number) => QTY_MIN <= qty && qty <= QTY_MAX;
 
-const renderPlusMinusBtn = (name: 'plus' | 'minus') => {
-  return (
-    <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
-  );
-};
+const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
+  <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
+);
 
 const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Function}) => {
   const { printQueue } = useTypedSelector(state => state.Print);
@@ -37,8 +34,9 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
   const [isValidQty, setIsValidQty] = useState(true);
 
   const handleTextChange = (text: string) => {
-    const newQty: number = parseInt(text);
-    if (!isNaN(newQty)) {
+    const newQty: number = parseInt(text, 10);
+    if (!isNaN(newQty)) { // eslint-disable-line no-restricted-globals
+      // line rule disabled due to isNaN being necessary for this evaluation.
       setSignQty(newQty);
       setIsValidQty(validateQty(newQty));
     }
@@ -73,7 +71,7 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
       <View style={styles.contentContainer}>
         <View style={styles.closeContainer}>
           <IconButton
-            icon={<MaterialCommunityIcon name='close' size={16} color={COLOR.GREY_500} />}
+            icon={<MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />}
             type={Button.Type.NO_BORDER}
             onPress={() => props.setItemIndexToEdit(-1)}
           />
@@ -96,7 +94,7 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
             />
             <TextInput
               style={[styles.copyQtyInput, isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid]}
-              keyboardType='numeric'
+              keyboardType="numeric"
               onChangeText={handleTextChange}
             >
               {signQty}
@@ -111,9 +109,11 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
               onPress={handleIncreaseQty}
             />
           </View>
-          {!isValidQty && <Text style={styles.invalidLabel}>
+          {!isValidQty && (
+          <Text style={styles.invalidLabel}>
             {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
-          </Text>}
+          </Text>
+          )}
         </View>
         <View style={styles.signSizeContainer}>
           <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
@@ -121,7 +121,7 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
         </View>
         <View style={styles.printerContainer}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <MaterialCommunityIcon name='printer-check' size={24} />
+            <MaterialCommunityIcon name="printer-check" size={24} />
             <View style={{ marginLeft: 12 }}>
               <Text>{strings('PRINT.FRONT_DESK')}</Text>
               <Text style={{ fontSize: 12, color: COLOR.GREY_600 }}>{strings('GENERICS.DEFAULT')}</Text>

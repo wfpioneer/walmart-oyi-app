@@ -14,44 +14,118 @@ import { strings } from '../../locales';
 import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { deleteLocationFromExisting, isUpdating, setFloorLocations, setReserveLocations } from '../../state/actions/Location';
+import {
+  deleteLocationFromExisting, setFloorLocations, setReserveLocations
+} from '../../state/actions/Location';
 import { deleteLocation } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 
+interface LocationDetailsProps {
+  navigation: any;
+  route: any;
+  dispatch: any;
+  floorLocations: Location[];
+  reserveLocations: Location[];
+  itemDetails: {
+    itemNbr: number;
+    upcNbr: string;
+    exceptionType: string;
+  };
+  apiInProgress: boolean;
+  setAPIInProgress: Function;
+  apiError: boolean;
+  setApiError: Function;
+  delAPI: {
+    isWaiting: boolean;
+    value: any;
+    error: any;
+    result: any;
+  };
+  displayConfirmation: boolean;
+  setDisplayConfirmation: Function;
+  locToConfirm: {
+    locationName: string;
+    locationArea: string;
+    locationIndex: number;
+    locationTypeNbr: number;
+  };
+  setLocToConfirm: Function;
+  locationsApi: {
+    isWaiting: boolean;
+    value: any;
+    error: any;
+    result: any;
+  };
+  useEffectHook: Function;
+}
 const LocationDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
   const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
-  const needsUpdate = useTypedSelector(state => state.Location.isUpdating);
   const itemDetails = useTypedSelector(state => state.Location.itemLocDetails);
   const [apiInProgress, setAPIInProgress] = useState(false);
-  const [error, setError] = useState(false);
+  const [apiError, setApiError] = useState(false);
   const delAPI = useTypedSelector(state => state.async.deleteLocation);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
   });
-  const locations = useTypedSelector((state) => state.async.getLocation)
-  
-  useEffect(() => {
-    if (needsUpdate) {
-      dispatch(isUpdating(false));
-    }
-  }, [needsUpdate]);
+  const locations = useTypedSelector(state => state.async.getLocation);
+  return (
+    <LocationDetailsScreen
+      apiInProgress={apiInProgress}
+      delAPI={delAPI}
+      dispatch={dispatch}
+      displayConfirmation={displayConfirmation}
+      apiError={apiError}
+      floorLocations={floorLocations}
+      reserveLocations={reserveLocations}
+      itemDetails={itemDetails}
+      locToConfirm={locToConfirm}
+      locationsApi={locations}
+      navigation={navigation}
+      route={route}
+      setAPIInProgress={setAPIInProgress}
+      setDisplayConfirmation={setDisplayConfirmation}
+      setApiError={setApiError}
+      setLocToConfirm={setLocToConfirm}
+      useEffectHook={useEffect}
+    />
+  );
+};
+
+export const LocationDetailsScreen = (props: LocationDetailsProps) => {
+  const {
+    apiInProgress,
+    delAPI,
+    dispatch,
+    displayConfirmation,
+    apiError,
+    floorLocations,
+    reserveLocations,
+    itemDetails,
+    locToConfirm,
+    locationsApi,
+    navigation,
+    route,
+    setAPIInProgress,
+    setDisplayConfirmation,
+    setApiError,
+    setLocToConfirm,
+    useEffectHook
+  } = props;
 
   // Delete Location API
-  useEffect(() => {
+  useEffectHook(() => {
     // on api success
     if (apiInProgress && delAPI.isWaiting === false && delAPI.result) {
       trackEvent('location_delete_location_api_success');
       dispatch(deleteLocationFromExisting(locToConfirm.locationArea, locToConfirm.locationIndex));
       setAPIInProgress(false);
-      dispatch(isUpdating(true));
       setDisplayConfirmation(false);
-      return undefined;
     }
 
     // on api failure
@@ -62,53 +136,47 @@ const LocationDetails = () => {
         errorDetails: delAPI.error.message || delAPI.error
       });
       setAPIInProgress(false);
-      return setError(true);
+      setApiError(true);
     }
 
     // on api submission
     if (!apiInProgress && delAPI.isWaiting) {
-      setError(false);
-      return setAPIInProgress(true);
+      setApiError(false);
+      setAPIInProgress(true);
     }
-
-    return undefined;
   }, [delAPI]);
 
   // Get Location Details API
-  useEffect(() => {
+  useEffectHook(() => {
+    /* eslint-disable brace-style */
+    // brace style ignored to allow comments to remain.
     // on api success
-    if (apiInProgress && locations.isWaiting === false && locations.result) {
-      const locDetails = (locations.result && locations.result.data);
+    if (apiInProgress && locationsApi.isWaiting === false && locationsApi.result) {
+      const locDetails = (locationsApi.result && locationsApi.result.data);
       trackEvent('location_get_location_api_success');
       if (locDetails.location) {
         if (locDetails.location.floor) dispatch(setFloorLocations(locDetails.location.floor));
         if (locDetails.location.reserve) dispatch(setReserveLocations(locDetails.location.reserve));
       }
       setAPIInProgress(false);
-      dispatch(isUpdating(false));
-      return;
     }
-
     // on api failure
-    if (apiInProgress && locations.isWaiting === false && locations.error) {
-      trackEvent('location_get_location_api_failure',{
+    else if (apiInProgress && locationsApi.isWaiting === false && locationsApi.error) {
+      trackEvent('location_get_location_api_failure', {
         itemNbr: itemDetails.itemNbr,
         upcNbr: itemDetails.upcNbr,
-        errorDetails: locations.error.message || locations.error
+        errorDetails: locationsApi.error.message || locationsApi.error
       });
       setAPIInProgress(false);
-      return setError(true);
+      setApiError(true);
     }
-
     // on api submission
-    if (!apiInProgress && locations.isWaiting) {
+    else if (!apiInProgress && locationsApi.isWaiting) {
       trackEvent('location_get_location_api_start');
-      setError(false);
-      return setAPIInProgress(true);
+      setApiError(false);
+      setAPIInProgress(true);
     }
-
-    return undefined;
-  }, [locations]);
+  }, [locationsApi]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
@@ -121,7 +189,10 @@ const LocationDetails = () => {
     validateSession(navigation, route.name).then(() => {
       trackEvent('location_delete_location_click', { location: JSON.stringify(loc), index: locIndex });
       setLocToConfirm({
-        locationName: loc.locationName, locationArea: 'floor', locationIndex: locIndex, locationTypeNbr: loc.typeNbr
+        locationName: loc.locationName,
+        locationArea: 'floor',
+        locationIndex: locIndex,
+        locationTypeNbr: loc.typeNbr
       });
       setDisplayConfirmation(true);
     }).catch(() => {});
@@ -129,16 +200,20 @@ const LocationDetails = () => {
 
   const deleteConfirmed = () => {
     trackEvent('location_delete_location_confirmed');
-    dispatch(deleteLocation({
-      upc: itemDetails.upcNbr, sectionId: locToConfirm.locationName, locationTypeNbr: locToConfirm.locationTypeNbr
-    }));
+    dispatch(
+      deleteLocation({
+        upc: itemDetails.upcNbr,
+        sectionId: locToConfirm.locationName,
+        locationTypeNbr: locToConfirm.locationTypeNbr
+      }),
+    );
   };
 
-  const createLocations = (locationList: [Location]) => (
+  const createLocations = (locationList: Location[]) => (
     <>
       {locationList.map((loc: Location, index: number) => (
         <LocationDetailsCard
-          key={index}
+          key={loc.locationName}
           locationName={loc.locationName}
           locationType={loc.type}
           editAction={() => handleEditLocation(loc, index)}
@@ -154,16 +229,16 @@ const LocationDetails = () => {
       navigation.navigate('AddLocation');
     }).catch(() => {});
   };
-  if (locations.isWaiting){
-    return(
+  if (locationsApi.isWaiting) {
+    return (
       <ActivityIndicator
-      animating={locations.isWaiting}
-      hidesWhenStopped
-      color={COLOR.MAIN_THEME_COLOR}
-      size="large"
-      style={styles.activityIndicator}
-    />
-    )
+        animating={locationsApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
   }
   return (
     <>
@@ -180,10 +255,11 @@ const LocationDetails = () => {
           ) : (
             <>
               <Text style={styles.message}>
-                {error
+                {apiError
                   ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
-                  : `${strings('LOCATION.DELETE_CONFIRMATION')}${locToConfirm.locationName}`
-                }
+                  : `${strings('LOCATION.DELETE_CONFIRMATION')}${
+                    locToConfirm.locationName
+                  }`}
               </Text>
               <View style={styles.buttonContainer}>
                 <Button
@@ -194,35 +270,28 @@ const LocationDetails = () => {
                 />
                 <Button
                   style={styles.delButton}
-                  title={error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+                  title={apiError ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
                   backgroundColor={COLOR.MAIN_THEME_COLOR}
                   onPress={deleteConfirmed}
                 />
               </View>
             </>
-          )
-          }
+          )}
         </View>
       </Modal>
       <ScrollView>
-        {floorLocations ? (
-          <View style={styles.sectionLabel}>
-            <Text style={styles.labelText}>
-              {`${strings('LOCATION.FLOOR')} (${floorLocations.length})`}
-            </Text>
-          </View>
-        )
-          : <View />}
-        {floorLocations ? createLocations(floorLocations) : <View />}
-        {reserveLocations ? (
-          <View style={styles.sectionLabel}>
-            <Text style={styles.labelText}>
-              {`${strings('LOCATION.RESERVE')} (${reserveLocations.length})`}
-            </Text>
-          </View>
-        )
-          : <View />}
-        {reserveLocations ? createLocations(reserveLocations) : <View />}
+        <View style={styles.sectionLabel}>
+          <Text style={styles.labelText}>
+            {`${strings('LOCATION.FLOOR')} (${floorLocations.length})`}
+          </Text>
+        </View>
+        {createLocations(floorLocations)}
+        <View style={styles.sectionLabel}>
+          <Text style={styles.labelText}>
+            {`${strings('LOCATION.RESERVE')} (${reserveLocations.length})`}
+          </Text>
+        </View>
+        {createLocations(reserveLocations)}
       </ScrollView>
       <View style={styles.container}>
         <View style={styles.button}>

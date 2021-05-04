@@ -15,7 +15,6 @@ const Stack = createStackNavigator();
 const PrintPriceSignNavigator = () => {
   const navigation = useNavigation();
 
-
   const navigateBack = () => {
     navigation.goBack();
   };

@@ -8,12 +8,10 @@ import _ from 'lodash';
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { addToPicklist, getItemDetails, noAction } from '../../state/actions/saga';
-
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
@@ -33,14 +31,43 @@ import {
 import { showInfoModal } from '../../state/actions/Modal';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
+import Location from '../../models/Location';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
-
+interface StateAsync {
+    isWaiting: boolean;
+    value: any;
+    error: any;
+    result: any;
+}
+export interface ItemDetailsScreenProps {
+  scannedEvent: any; isManualScanEnabled: boolean;
+  isWaiting: boolean; error: any; result: any;
+  addToPicklistStatus: StateAsync;
+  completeItemApi: StateAsync;
+  userId: string;
+  exceptionType: string; actionCompleted: boolean; pendingOnHandsQty: number;
+  floorLocations?: Location[];
+  reserveLocations?: Location[];
+  route: any;
+  dispatch: Function;
+  navigation: any;
+  scrollViewRef: any;
+  isSalesMetricsGraphView: boolean; setIsSalesMetricsGraphView: Function;
+  ohQtyModalVisible: boolean; setOhQtyModalVisible: Function;
+  completeApiInProgress: boolean; setCompleteApiInProgress: Function;
+  isRefreshing: boolean; setIsRefreshing: Function;
+  apiStart: number; setApiStart: Function;
+  trackEventCall: (eventName: string, params?: any) => void;
+  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
+  useEffectHook: Function;
+  useFocusEffectHook: Function;
+}
 const ReviewItemDetails = () => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
-  const completeApi = useTypedSelector(state => state.async.noAction);
+  const completeItemApi = useTypedSelector(state => state.async.noAction);
   const { userId } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
   const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
@@ -54,31 +81,315 @@ const ReviewItemDetails = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [apiStart, setApiStart] = useState(0);
 
-  useEffect(() => {
+  return (
+    <ReviewItemDetailsScreen
+      scannedEvent={scannedEvent}
+      isManualScanEnabled={isManualScanEnabled}
+      isWaiting={isWaiting}
+      error={error}
+      result={result}
+      addToPicklistStatus={addToPicklistStatus}
+      completeItemApi={completeItemApi}
+      userId={userId}
+      exceptionType={exceptionType}
+      actionCompleted={actionCompleted}
+      pendingOnHandsQty={pendingOnHandsQty}
+      floorLocations={floorLocations}
+      reserveLocations={reserveLocations}
+      route={route}
+      dispatch={dispatch}
+      navigation={navigation}
+      scrollViewRef={scrollViewRef}
+      isSalesMetricsGraphView={isSalesMetricsGraphView}
+      setIsSalesMetricsGraphView={setIsSalesMetricsGraphView}
+      ohQtyModalVisible={ohQtyModalVisible}
+      setOhQtyModalVisible={setOhQtyModalVisible}
+      completeApiInProgress={completeApiInProgress}
+      setCompleteApiInProgress={setCompleteApiInProgress}
+      isRefreshing={isRefreshing}
+      setIsRefreshing={setIsRefreshing}
+      apiStart={apiStart}
+      setApiStart={setApiStart}
+      trackEventCall={trackEvent}
+      validateSessionCall={validateSession}
+      useEffectHook={useEffect}
+      useFocusEffectHook={useFocusEffect}
+    />
+  );
+};
+export interface HandleProps{
+  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
+  trackEventCall: (eventName: string, params?: any) => void;
+  navigation: any;
+  route: any;
+  userId?: string;
+  setOhQtyModalVisible: Function;
+  dispatch: Function;
+}
+export interface RenderProps {
+  actionCompleted: boolean;
+  completeItemApi: StateAsync;
+  addToPicklistStatus: StateAsync;
+  isManualScanEnabled: boolean;
+  floorLocations?: Location[];
+  reserveLocations?: Location[];
+}
+const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
+  const {
+    navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId
+  } = props;
+  validateSessionCall(navigation, route.name).then(() => {
+    trackEventCall('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
+    setOhQtyModalVisible(true);
+  }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+};
+
+const handleLocationAction = (props: HandleProps, itemDetails: ItemDetails) => {
+  const {
+    navigation, trackEventCall, validateSessionCall, route, userId
+  } = props;
+  validateSessionCall(navigation, route.name).then(() => {
+    trackEventCall('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
+    navigation.navigate('LocationDetails');
+  }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+};
+
+const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
+  const {
+    navigation, trackEventCall, validateSessionCall, route, userId, dispatch
+  } = props;
+  validateSessionCall(navigation, route.name).then(() => {
+    trackEventCall('item_details_add_to_picklist_click', { itemDetails: JSON.stringify(itemDetails) });
+    dispatch(addToPicklist({
+      itemNumber: itemDetails.itemNbr
+    }));
+  }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+};
+
+export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: number) => {
+  if (pendingOnHandsQty === -999) {
+    return (
+      <View style={styles.onHandsContainer}>
+        <View style={styles.onHandsView}>
+          <Text>{strings('ITEM.ON_HANDS')}</Text>
+          <Text>{onHandsQty}</Text>
+        </View>
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.onHandsContainer}>
+      <View style={styles.onHandsView}>
+        <Text>{strings('ITEM.ON_HANDS')}</Text>
+        <Text>{pendingOnHandsQty}</Text>
+      </View>
+      <View style={styles.mgrApprovalView}>
+        <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={{ paddingRight: 6 }} />
+        <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
+      </View>
+    </View>
+  );
+};
+
+export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails) => {
+  const { reserve } = itemDetails.location;
+  const { addToPicklistStatus } = props;
+  if (addToPicklistStatus?.isWaiting) {
+    return <ActivityIndicator />;
+  }
+
+  if (addToPicklistStatus?.result) {
+    return <Text style={styles.picklistSuccessText}>{strings('ITEM.ADDED_TO_PICKLIST')}</Text>;
+  }
+
+  if (addToPicklistStatus?.error) {
+    return (
+      <View style={styles.picklistErrorView}>
+        <Text style={styles.picklistErrorText}>{strings('ITEM.ADDED_TO_PICKLIST_ERROR')}</Text>
+        <Button
+          type={3}
+          title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          titleFontSize={12}
+          titleFontWeight="bold"
+          height={28}
+          onPress={() => handleAddToPicklist(props, itemDetails)}
+        />
+      </View>
+    );
+  }
+
+  if (reserve && reserve.length >= 1) {
+    return (
+      <Button
+        type={3}
+        title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
+        titleColor={COLOR.MAIN_THEME_COLOR}
+        titleFontSize={12}
+        titleFontWeight="bold"
+        height={28}
+        onPress={() => handleAddToPicklist(props, itemDetails)}
+      />
+    );
+  }
+
+  return <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>;
+};
+
+export const renderLocationComponent = (props: (RenderProps & HandleProps), itemDetails: ItemDetails) => {
+  const { floorLocations, reserveLocations } = props;
+  return (
+    <View style={{ paddingHorizontal: 8 }}>
+      <View style={styles.locationDetailsContainer}>
+        <Text>{strings('ITEM.FLOOR')}</Text>
+        {floorLocations && floorLocations.length >= 1
+          ? <Text>{floorLocations[0].locationName}</Text>
+          : (
+            <Button
+              type={3}
+              title={strings('GENERICS.ADD')}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight="bold"
+              height={28}
+              onPress={() => handleLocationAction(props, itemDetails)}
+            />
+          )}
+      </View>
+      <View style={styles.locationDetailsContainer}>
+        <Text>{strings('ITEM.RESERVE')}</Text>
+        {reserveLocations && reserveLocations.length >= 1
+          ? <Text>{reserveLocations[0].locationName}</Text>
+          : (
+            <Button
+              type={3}
+              title={strings('GENERICS.ADD')}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight="bold"
+              height={28}
+              onPress={() => handleLocationAction(props, itemDetails)}
+            />
+          )}
+      </View>
+      <View style={styles.renderPickListContatiner}>
+        {renderAddPicklistButton(props, itemDetails)}
+      </View>
+    </View>
+  );
+};
+
+const completeAction = () => {
+  // TODO: reinstantiate when ios device support is needed
+  // dispatch(actionCompletedAction());
+  // dispatch(navigation.goBack());
+};
+
+export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails) => {
+  const {
+    actionCompleted, completeItemApi, validateSessionCall, trackEventCall,
+    dispatch, userId, isManualScanEnabled, navigation, route
+  } = props;
+
+  if (actionCompleted) {
+    return <View />;
+  }
+
+  if (completeItemApi?.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={completeItemApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.completeActivityIndicator}
+      />
+    );
+  }
+
+  if (Platform.OS === 'android') {
+    return (
+      <TouchableOpacity
+        style={styles.scanForNoActionButton}
+        onPress={() => {
+          validateSessionCall(navigation, route.name).then(() => {
+            trackEventCall('item_details_scan_for_no_action_button_click',
+              { itemDetails: JSON.stringify(itemDetails) });
+            return dispatch(setManualScan(!isManualScanEnabled));
+          }).catch(() => {
+            trackEventCall('session_timeout', { user: userId });
+          });
+        }}
+      >
+        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+        <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  return (
+    <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
+      <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+      <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
+    </TouchableOpacity>
+  );
+};
+export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
+  const {
+    scannedEvent, isManualScanEnabled,
+    isWaiting, error, result,
+    completeItemApi,
+    userId,
+    exceptionType, actionCompleted, pendingOnHandsQty,
+    floorLocations, reserveLocations,
+    route,
+    dispatch,
+    navigation,
+    scrollViewRef,
+    isSalesMetricsGraphView, setIsSalesMetricsGraphView,
+    ohQtyModalVisible, setOhQtyModalVisible,
+    completeApiInProgress, setCompleteApiInProgress,
+    isRefreshing, setIsRefreshing,
+    apiStart, setApiStart,
+    trackEventCall,
+    validateSessionCall,
+    useEffectHook,
+    useFocusEffectHook
+  } = props;
+  // Scanned Item Event Listener
+  useEffectHook(() => {
     if (navigation.isFocused()) {
-      validateSession(navigation, route.name).then(() => {
+      validateSessionCall(navigation, route.name).then(() => {
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
         setApiStart(moment().valueOf());
         dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-        trackEvent('item_details_api_call', { barcode: scannedEvent.value });
+        trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
         dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
-      }).catch(() => {trackEvent('session_timeout', { user: userId })});
+      }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
     }
   }, [scannedEvent]);
 
   // Get Item Details API
-  useEffect(() => {
+  useEffectHook(() => {
     if (error) {
-      trackEvent('item_details_api_failure', { barcode: scannedEvent.value, errorDetails: error.message || JSON.stringify(error), duration: moment().valueOf()-apiStart });
+      trackEventCall('item_details_api_failure',
+        {
+          barcode: scannedEvent.value,
+          errorDetails: error.message || JSON.stringify(error),
+          duration: moment().valueOf() - apiStart
+        });
     }
 
     if (_.get(result, 'status') === 204) {
-      trackEvent('item_details_api_not_found', { barcode: scannedEvent.value, duration: moment().valueOf()-apiStart });
+      trackEventCall('item_details_api_not_found',
+        { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
     }
 
     if (_.get(result, 'status') === 200) {
-      trackEvent('item_details_api_success', { barcode: scannedEvent.value, duration: moment().valueOf()-apiStart });
+      trackEventCall('item_details_api_success',
+        { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
     }
     if (isRefreshing) {
       setIsRefreshing(false);
@@ -89,13 +400,13 @@ const ReviewItemDetails = () => {
   }, [error, result]);
 
   const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
-  const locationCount = floorLocations.length + reserveLocations.length;
+  const locationCount = (floorLocations?.length ?? 0) + (reserveLocations?.length ?? 0);
   const updatedSalesTS = _.get(itemDetails, 'sales.lastUpdateTs')
     ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
     : undefined;
 
   // Set Item Details
-  useEffect(() => {
+  useEffectHook(() => {
     if (itemDetails) {
       dispatch(resetLocations());
       dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty,
@@ -110,46 +421,38 @@ const ReviewItemDetails = () => {
   }, [itemDetails]);
 
   // Barcode event listener effect
-  useEffect(() => {
-    if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
-      const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
-        if (navigation.isFocused()) {
-          validateSession(navigation, route.name).then(() => {
-            trackEvent('item_details_scan', { value: scan.value, type: scan.type });
-            trackEvent('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
-            setApiStart(moment().valueOf());
-            dispatch(noAction({ upc: result.data.upcNbr, itemNbr: result.data.itemNbr, scannedValue: scan.value }));
-            dispatch(setManualScan(false));
-          }).catch(() => {trackEvent('session_timeout', { user: userId })});
-        }
-      });
-      return () => {
-        // eslint-disable-next-line no-unused-expressions
-        scanSubscription?.remove();
-      };
-    }
+  useEffectHook(() => {
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
-        validateSession(navigation, route.name).then(() => {
-          dispatch(setScannedEvent(scan));
-        }).catch(() => {trackEvent('session_timeout', { user: userId })});
+        validateSessionCall(navigation, route.name).then(() => {
+          if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
+            trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
+            trackEventCall('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
+            setApiStart(moment().valueOf());
+            dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
+            dispatch(setManualScan(false));
+          } else {
+            dispatch(setScannedEvent(scan));
+          }
+        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
       }
     });
     return () => {
-      // eslint-disable-next-line no-unused-expressions
-      scanSubscription?.remove();
+      scanSubscription.remove();
     };
   }, [itemDetails, actionCompleted]);
 
-  // Complete API
-  useEffect(() => {
+  // Complete Item Details API
+  useEffectHook(() => {
     // on api success
-    if (completeApiInProgress && completeApi.isWaiting === false && completeApi.result) {
-      if (_.get(completeApi.result, 'status') === 204) {
-        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
+    if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.result) {
+      if (_.get(completeItemApi.result, 'status') === 204) {
+        trackEventCall('item_details_action_completed_api_failure_scan_no_match',
+          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEvent('item_details_action_completed_api_success', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
+        trackEventCall('item_details_action_completed_api_success',
+          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         setCompleteApiInProgress(false);
         dispatch(setActionCompleted());
         navigation.goBack();
@@ -158,12 +461,14 @@ const ReviewItemDetails = () => {
     }
 
     // on api failure
-    if (completeApiInProgress && completeApi.isWaiting === false && completeApi.error) {
-      if (completeApi.error === COMPLETE_API_409_ERROR) {
-        trackEvent('item_details_action_completed_api_failure_scan_no_match', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
+    if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.error) {
+      if (completeItemApi.error === COMPLETE_API_409_ERROR) {
+        trackEventCall('item_details_action_completed_api_failure_scan_no_match',
+          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEvent('item_details_action_completed_api_failure', { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf()-apiStart });
+        trackEventCall('item_details_action_completed_api_failure',
+          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
       setCompleteApiInProgress(false);
@@ -171,30 +476,29 @@ const ReviewItemDetails = () => {
     }
 
     // on api submission
-    if (!completeApiInProgress && completeApi.isWaiting) {
-      trackEvent('item_details_action_completed_api_call', { itemDetails: JSON.stringify(itemDetails) });
+    if (!completeApiInProgress && completeItemApi.isWaiting) {
+      trackEventCall('item_details_action_completed_api_call', { itemDetails: JSON.stringify(itemDetails) });
       return setCompleteApiInProgress(true);
     }
 
     return undefined;
-  }, [completeApi]);
+  }, [completeItemApi]);
 
-  useFocusEffect(
+  useFocusEffectHook(
     () => {
       const onBackPress = () => {
         if (!actionCompleted) {
           if (exceptionType === 'po') {
-            trackEvent('item_details_back_press_action_incomplete', { exceptionType });
+            trackEventCall('item_details_back_press_action_incomplete', { exceptionType });
             dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
             return true;
           }
           if (exceptionType === 'nsfl') {
-            trackEvent('item_details_back_press_action_incomplete', { exceptionType });
+            trackEventCall('item_details_back_press_action_incomplete', { exceptionType });
             dispatch(showInfoModal(strings('ITEM.NO_FLOOR_LOCATION'), strings('ITEM.NO_FLOOR_LOCATION_DETAILS')));
             return true;
           }
         }
-
         dispatch(setManualScan(false));
         return false;
       };
@@ -205,6 +509,7 @@ const ReviewItemDetails = () => {
     }
   );
 
+  // Get Item Details Error
   if (error) {
     return (
       <View style={styles.safeAreaView}>
@@ -216,7 +521,7 @@ const ReviewItemDetails = () => {
             style={styles.errorButton}
             onPress={() => {
               setApiStart(moment().valueOf());
-              trackEvent('item_details_api_retry', { barcode: scannedEvent.value });
+              trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
           >
@@ -232,7 +537,7 @@ const ReviewItemDetails = () => {
       <View style={styles.safeAreaView}>
         {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
-          <MaterialIcon name="info" size={40} color={COLOR.DISABLED_BLUE} />
+          <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
           <Text style={styles.errorText}>{strings('ITEM.ITEM_NOT_FOUND')}</Text>
         </View>
       </View>
@@ -251,206 +556,21 @@ const ReviewItemDetails = () => {
     );
   }
 
-  const handleUpdateQty = () => {
-    validateSession(navigation, route.name).then(() => {
-      trackEvent('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
-      setOhQtyModalVisible(true);
-    }).catch(() => {trackEvent('session_timeout', { user: userId })});
-  };
-
-  const handleLocationAction = () => {
-    validateSession(navigation, route.name).then(() => {
-      trackEvent('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
-      navigation.navigate('LocationDetails');
-    }).catch(() => {trackEvent('session_timeout', { user: userId })});
-  };
-
-  const handleAddToPicklist = () => {
-    validateSession(navigation,route.name).then(() => {
-      trackEvent('item_details_add_to_picklist_click', { itemDetails: JSON.stringify(itemDetails) });
-      dispatch(addToPicklist({
-        itemNumber: itemDetails.itemNbr
-      }));
-    }).catch(() => {trackEvent('session_timeout', { user: userId })});
-  };
-
   const toggleSalesGraphView = () => {
-    trackEvent('item_details_toggle_graph_click',
+    trackEventCall('item_details_toggle_graph_click',
       { itemDetails: JSON.stringify(itemDetails), isGraphView: !isSalesMetricsGraphView });
-    setIsSalesMetricsGraphView(prevState => !prevState);
+    setIsSalesMetricsGraphView((prevState: boolean) => !prevState);
   };
 
   const handleRefresh = () => {
-    validateSession(navigation, route.name).then(() => {
+    validateSessionCall(navigation, route.name).then(() => {
       setIsRefreshing(true);
       setApiStart(moment().valueOf());
-      trackEvent('refresh_item_details', { itemNumber: itemDetails.itemNbr});
+      trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-      trackEvent('item_details_api_call', { itemNumber: itemDetails.itemNbr });
-      dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }))
-    }).catch(() => {trackEvent('session_timeout', { user: userId })});
-  }
-
-  const renderOHQtyComponent = () => {
-    if (pendingOnHandsQty === -999) {
-      return (
-        <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text>{strings('ITEM.ON_HANDS')}</Text>
-            <Text>{itemDetails.onHandsQty}</Text>
-          </View>
-        </View>
-      );
-    }
-
-    return (
-      <View style={{ paddingHorizontal: 8, paddingVertical: 16 }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Text>{strings('ITEM.ON_HANDS')}</Text>
-          <Text>{pendingOnHandsQty}</Text>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
-          <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={{ paddingRight: 6 }} />
-          <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
-        </View>
-      </View>
-    );
-  };
-
-  const renderAddPicklistButton = () => {
-    const { reserve } = itemDetails.location;
-
-    if (addToPicklistStatus.isWaiting) {
-      return <ActivityIndicator />;
-    }
-
-    if (addToPicklistStatus.result) {
-      return <Text style={styles.picklistSuccessText}>{strings('ITEM.ADDED_TO_PICKLIST')}</Text>;
-    }
-
-    if (addToPicklistStatus.error) {
-      return (
-        <View style={styles.picklistErrorView}>
-          <Text style={styles.picklistErrorText}>{strings('ITEM.ADDED_TO_PICKLIST_ERROR')}</Text>
-          <Button
-            type={3}
-            title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
-            titleFontSize={12}
-            titleFontWeight="bold"
-            height={28}
-            onPress={handleAddToPicklist}
-          />
-        </View>
-      );
-    }
-
-    if (reserve && reserve.length >= 1) {
-      return (
-        <Button
-          type={3}
-          title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
-          titleColor={COLOR.MAIN_THEME_COLOR}
-          titleFontSize={12}
-          titleFontWeight="bold"
-          height={28}
-          onPress={handleAddToPicklist}
-        />
-      );
-    }
-
-    return <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>;
-  };
-
-  const renderLocationComponent = () => (
-    <View style={{ paddingHorizontal: 8 }}>
-      <View style={styles.locationDetailsContainer}>
-        <Text>{strings('ITEM.FLOOR')}</Text>
-        {floorLocations && floorLocations.length >= 1
-          ? <Text>{floorLocations[0].locationName}</Text>
-          : (
-            <Button
-              type={3}
-              title={strings('GENERICS.ADD')}
-              titleColor={COLOR.MAIN_THEME_COLOR}
-              titleFontSize={12}
-              titleFontWeight="bold"
-              height={28}
-              onPress={handleLocationAction}
-            />
-          )
-        }
-      </View>
-      <View style={styles.locationDetailsContainer}>
-        <Text>{strings('ITEM.RESERVE')}</Text>
-        {reserveLocations && reserveLocations.length >= 1
-          ? <Text>{reserveLocations[0].locationName}</Text>
-          : (
-            <Button
-              type={3}
-              title={strings('GENERICS.ADD')}
-              titleColor={COLOR.MAIN_THEME_COLOR}
-              titleFontSize={12}
-              titleFontWeight="bold"
-              height={28}
-              onPress={handleLocationAction}
-            />
-          )
-        }
-      </View>
-      <View style={{ flexDirection: 'row', justifyContent: 'flex-end', paddingVertical: 8 }}>
-        {renderAddPicklistButton()}
-      </View>
-    </View>
-  );
-
-  const completeAction = () => {
-    // TODO: reinstantiate when ios device support is needed
-    // dispatch(actionCompletedAction());
-    // dispatch(navigation.goBack());
-  };
-
-  const renderScanForNoActionButton = () => {
-    if (actionCompleted) {
-      return null;
-    }
-
-    if (completeApi.isWaiting) {
-      return (
-        <ActivityIndicator
-          animating={completeApi.isWaiting}
-          hidesWhenStopped
-          color={COLOR.MAIN_THEME_COLOR}
-          size="large"
-          style={styles.completeActivityIndicator}
-        />
-      );
-    }
-
-    if (Platform.OS === 'android') {
-      return (
-        <TouchableOpacity
-          style={styles.scanForNoActionButton}
-          onPress={() => {
-            validateSession(navigation, route.name).then(() => {
-              trackEvent('item_details_scan_for_no_action_button_click', {itemDetails: JSON.stringify(itemDetails)});
-              return dispatch(setManualScan(!isManualScanEnabled));
-            }).catch(() => {trackEvent('session_timeout', { user: userId })
-            });
-          }}
-        >
-          <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE}/>
-          <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
-        </TouchableOpacity>
-      );
-    }
-
-    return (
-      <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
-        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE}/>
-        <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
-      </TouchableOpacity>
-    );
+      trackEventCall('item_details_api_call', { itemNumber: itemDetails.itemNbr });
+      dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }));
+    }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 
   return (
@@ -467,8 +587,11 @@ const ReviewItemDetails = () => {
           exceptionType={itemDetails.exceptionType}
         />
       </Modal>
-      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container} 
-        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}>
+      <ScrollView
+        ref={scrollViewRef}
+        contentContainerStyle={styles.container}
+        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}
+      >
         {isWaiting && (
         <ActivityIndicator
           animating={isWaiting}
@@ -485,7 +608,7 @@ const ReviewItemDetails = () => {
               itemName={itemDetails.itemName}
               itemNbr={itemDetails.itemNbr}
               upcNbr={itemDetails.upcNbr}
-              status={itemDetails.status}
+              status={itemDetails.status || ''}
               category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
               price={itemDetails.price}
               exceptionType={!actionCompleted ? itemDetails.exceptionType : undefined}
@@ -494,9 +617,9 @@ const ReviewItemDetails = () => {
               title={strings('ITEM.QUANTITY')}
               iconName="pallet"
               topRightBtnTxt={pendingOnHandsQty === -999 ? strings('GENERICS.CHANGE') : undefined}
-              topRightBtnAction={handleUpdateQty}
+              topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
-              {renderOHQtyComponent()}
+              {renderOHQtyComponent(itemDetails.onHandsQty, pendingOnHandsQty)}
             </SFTCard>
             <SFTCard
               iconProp={(
@@ -509,10 +632,7 @@ const ReviewItemDetails = () => {
               )}
               title={strings('ITEM.REPLENISHMENT')}
             >
-              <View style={{
-                flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 8, paddingVertical: 16
-              }}
-              >
+              <View style={styles.itemOnOrderView}>
                 <Text>{strings('ITEM.ON_ORDER')}</Text>
                 <Text>{itemDetails.replenishment.onOrder}</Text>
               </View>
@@ -522,9 +642,9 @@ const ReviewItemDetails = () => {
               title={`${strings('ITEM.LOCATION')}(${locationCount})`}
               topRightBtnTxt={locationCount && locationCount >= 1
                 ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD')}
-              topRightBtnAction={handleLocationAction}
+              topRightBtnAction={() => handleLocationAction(props, itemDetails)}
             >
-              {renderLocationComponent()}
+              {renderLocationComponent(props, itemDetails)}
             </SFTCard>
             <SFTCard
               title={strings('ITEM.SALES_METRICS')}
@@ -535,10 +655,9 @@ const ReviewItemDetails = () => {
               <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
             </SFTCard>
           </View>
-          )
-        }
+          )}
       </ScrollView>
-      { renderScanForNoActionButton() }
+      {renderScanForNoActionButton(props, itemDetails)}
     </View>
   );
 };

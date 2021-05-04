@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
-
 const styles = StyleSheet.create({
   activityIndicator: {
     flex: 1,
@@ -67,6 +66,30 @@ const styles = StyleSheet.create({
   },
   picklistErrorText: {
     color: COLOR.RED_500
+  },
+  itemOnOrderView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 8,
+    paddingVertical: 16
+  },
+  renderPickListContatiner: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingVertical: 8
+  },
+  onHandsContainer: {
+    paddingHorizontal: 8,
+    paddingVertical: 16
+  },
+  onHandsView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  mgrApprovalView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8
   }
 });
 
