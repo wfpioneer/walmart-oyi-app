@@ -4,7 +4,6 @@
 
 # Xcode
 #
-build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -65,3 +64,4 @@ buck-out/
 
 # JEST
 *coverage
+/test-report.xml
