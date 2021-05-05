@@ -1,4 +1,4 @@
-# OYI-Android
+# OYI-Android 
 This is the Android version of OYI, currently only designed to be deployed on internal TC devices.
 
 ### Currently Supported Devices
@@ -164,3 +164,4 @@ Confluence page should be followed instead, until we get full automation working
 3. Deleting a product
     1. Then go to [Delete a Product and Smart Group](https://collaboration.wal-mart.com/display/MOBILE/Delete+a+Product+and+Smart+Group) and click the Workflow Link
     2. Add the same `Product Name` &`AirWatch Environment` and submit the product for deletion.
+  

@@ -34,7 +34,7 @@ envs:
 
       #ServiceNow variables
       # whether you want the template to create a ServiceNow CHG or not. Defaults to true
-      SN_CREATE_AUTO_CHANGE: true
+      SN_CREATE_AUTO_CHANGE: false
       # The ServiceNow requested_by_group field. No default.
       SN_REQUESTED_BY_GROUP: "IntlSamsTech"
       # The ServiceNow requested_by_group field. Defaults to Change Managers - US
