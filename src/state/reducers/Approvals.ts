@@ -1,14 +1,26 @@
-import { SET_APPROVAL_LIST, TOGGLE_ALL_ITEMS, TOGGLE_ITEM } from '../actions/Approvals';
+import { cloneDeep } from 'lodash';
+import {
+  Actions,
+  SET_APPROVAL_LIST, TOGGLE_ALL_ITEMS, TOGGLE_CATEGORY, TOGGLE_ITEM
+} from '../actions/Approvals';
 import { ApprovalCategory } from '../../screens/ApprovalList/ApprovalList';
 
+type Category = {
+  [key: number]: {
+    checkedItemQty: number;
+    totalItemQty: number;
+  };
+}
 interface ApprovalState {
   approvalList: Array<ApprovalCategory>;
+  categories: Category;
   categoryIndices: Array<number>;
   selectedItemQty: number;
   isAllSelected: boolean;
 }
 const initialState: ApprovalState = {
   approvalList: [],
+  categories: {},
   categoryIndices: [],
   selectedItemQty: 0,
   isAllSelected: false
@@ -16,54 +28,116 @@ const initialState: ApprovalState = {
 
 export const Approvals = (
   state = initialState,
-  action: {type: string; payload: any}
+  action: Actions
 ): ApprovalState => {
   switch (action.type) {
     case SET_APPROVAL_LIST: {
+      const newApprovalList = action.payload.approvals;
+      const newCategories: Category = {};
+
+      newApprovalList.forEach((item: ApprovalCategory) => {
+        if (item.categoryHeader) {
+          newCategories[item.categoryNbr] = {
+            checkedItemQty: 0,
+            totalItemQty: newApprovalList.filter((list: ApprovalCategory) => list.categoryNbr === item.categoryNbr)
+              .length - 1
+          };
+        }
+      });
+
       return {
         ...state,
-        approvalList: action.payload.approvals,
+        approvalList: newApprovalList,
+        categories: newCategories,
         categoryIndices: action.payload.headerIndices,
         selectedItemQty: 0,
         isAllSelected: false
       };
     }
     case TOGGLE_ALL_ITEMS: {
-      const { approvalList, categoryIndices } = state;
+      const { approvalList, categoryIndices, categories } = state;
+      const isChecked = action.payload.selectAll;
       const toggledItems: ApprovalCategory[] = approvalList.map(item => (
-        { ...item, isChecked: action.payload.selectAll }));
+        { ...item, isChecked }));
+
+      // iterates over the checkedItemQty for the categories obj, then converts the array back into an Object
+      const toggledCategories: Category = Object.fromEntries(Object.entries(categories)
+        .map(([catNbr, categoryObj]) => [catNbr, {
+          ...categoryObj,
+          checkedItemQty: isChecked ? categoryObj.totalItemQty : 0
+        }]));
 
       return {
         ...state,
         approvalList: toggledItems,
-        selectedItemQty: action.payload.selectAll ? toggledItems.length - categoryIndices.length : 0,
-        isAllSelected: action.payload.selectAll
+        categories: toggledCategories,
+        selectedItemQty: isChecked ? toggledItems.length - categoryIndices.length : 0,
+        isAllSelected: isChecked
       };
     }
     case TOGGLE_ITEM: {
-      const { approvalList: currApprovalList, selectedItemQty } = state;
-      const itemIndex = currApprovalList.findIndex(item => item.itemNbr === action.payload.itemNbr);
+      const { approvalList: currApprovalList, selectedItemQty, categories } = state;
+      const { isSelected, itemNbr } = action.payload;
+      const itemIdx = currApprovalList.findIndex(item => item.itemNbr === itemNbr);
+      const toggledItem = currApprovalList[itemIdx];
       // Creates a new array and updates an item at that index
       const updatedArr = [
-        ...currApprovalList.slice(0, itemIndex),
-        { ...currApprovalList[itemIndex], isChecked: action.payload.isSelected },
-        ...currApprovalList.slice(itemIndex + 1)];
+        ...currApprovalList.slice(0, itemIdx),
+        { ...toggledItem, isChecked: isSelected },
+        ...currApprovalList.slice(itemIdx + 1)];
 
-      const newSelectedQty = action.payload.isSelected ? selectedItemQty + 1 : selectedItemQty - 1;
-      /* TODO If all items are checked in a category, set categorySelected to true
-      else set categorySelected to false */
-      const isAllChecked = updatedArr.every(item => item.isChecked === true);
+      const newSelectedQty = isSelected ? selectedItemQty + 1 : selectedItemQty - 1;
+
+      // Deep Clone Categories Object
+      const clonedCategories = cloneDeep(categories);
+      const updatedCategory = clonedCategories[toggledItem.categoryNbr];
+      updatedCategory.checkedItemQty += isSelected ? 1 : -1;
+
+      // Updates category header for items with that category
+      const headerIdx = updatedArr.findIndex(item => item.categoryNbr === toggledItem.categoryNbr
+        && item.categoryHeader);
+
+      updatedArr[headerIdx].isChecked = updatedCategory.checkedItemQty === updatedCategory.totalItemQty;
+
+      const isAllChecked = updatedArr.every(item => item.isChecked);
+
       return {
         ...state,
         approvalList: updatedArr,
+        categories: clonedCategories,
         selectedItemQty: newSelectedQty,
         isAllSelected: isAllChecked
       };
     }
-    /* TODO Scenario toggle all items in category
-        - Set select all to false
-          - Set select all to true if this last group of items to be selected
-    */
+    case TOGGLE_CATEGORY: {
+      const { approvalList: currList, categories: currCategories, selectedItemQty: currCheckedQty } = state;
+      const { categoryNbr, isSelected: checked } = action.payload;
+
+      const updatedItemCat: ApprovalCategory[] = [...currList];
+      let selectedQtyToAdd = currCheckedQty;
+
+      updatedItemCat.forEach((item, index) => {
+        if (item.categoryNbr === categoryNbr) {
+          if (!item.categoryHeader) {
+            selectedQtyToAdd += !updatedItemCat[index].isChecked ? 1 : 0;
+          }
+          updatedItemCat[index].isChecked = checked;
+        }
+      });
+      // Deep Clone Categories Object
+      const updatedCategories = cloneDeep(currCategories);
+
+      const totalCategoryQty = updatedCategories[categoryNbr].totalItemQty;
+      updatedCategories[categoryNbr].checkedItemQty = checked ? totalCategoryQty : 0;
+
+      return {
+        ...state,
+        approvalList: updatedItemCat,
+        categories: updatedCategories,
+        selectedItemQty: checked ? selectedQtyToAdd : currCheckedQty - totalCategoryQty,
+        isAllSelected: updatedItemCat.every(item => item.isChecked === true)
+      };
+    }
     default:
       return state;
   }

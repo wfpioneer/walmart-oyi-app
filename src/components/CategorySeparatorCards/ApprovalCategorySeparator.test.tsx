@@ -12,6 +12,7 @@ describe('Approval CategorySeparator Component', () => {
         categoryName={catHeader.categoryDescription}
         categoryNbr={catHeader.categoryNbr}
         isChecked={false}
+        dispatch={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -24,6 +25,7 @@ describe('Approval CategorySeparator Component', () => {
         categoryName={catHeader.categoryDescription}
         categoryNbr={catHeader.categoryNbr}
         isChecked={true}
+        dispatch={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

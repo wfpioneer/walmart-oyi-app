@@ -141,8 +141,8 @@ android {
         applicationId "com.walmart.intl.oyi"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 73
-        versionName "1.0.30"
+        versionCode 78
+        versionName "1.0.31"
         resValue "string", "build_config_package", "com.samsclub.intl.oyi"
     }
     splits {
@@ -189,10 +189,10 @@ android {
         Each productFlavor can override its Default Configuration
     */
     productFlavors {
-      development {}  
+      development {}
 
       staging {}
-      
+
       production {}
     }
     packagingOptions {
