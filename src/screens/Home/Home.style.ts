@@ -7,7 +7,6 @@ export default StyleSheet.create({
   },
   container: {
     alignItems: 'center',
-    // flex: 1,
     justifyContent: 'center'
   },
   pingGoogleButton: {
@@ -74,6 +73,9 @@ export default StyleSheet.create({
   dismissButton: {
     width: '70%',
     marginTop: 16
-
+  },
+  barcodeErrorText: {
+    fontSize: 16,
+    textAlign: 'center'
   }
 });

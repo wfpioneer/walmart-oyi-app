@@ -91,7 +91,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       if (props.navigation.isFocused()) {
         validateSession(props.navigation, props.route.name).then(() => {
           trackEvent('home_barcode_scanned', { barcode: scan.value, type: scan.type });
-          if (!scan.type.includes('QR Code') && !scan.type.includes('QRCODE')) {
+          if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
             props.setScannedEvent(scan);
             props.setManualScan(false);
             props.navigation.navigate('ReviewItemDetails');
@@ -230,7 +230,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           <View style={styles.modalContainer}>
             <View style={styles.barcodeErrorContainer}>
               <MaterialCommunityIcons name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-              <Text style={styles.errorText}>
+              <Text style={styles.barcodeErrorText}>
                 {strings('GENERICS.BARCODE_SCAN_ERROR')}
               </Text>
               <View style={styles.buttonContainer}>
