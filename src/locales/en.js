@@ -39,7 +39,8 @@ export default {
     SUBMIT: 'Submit',
     RETRY: 'Retry',
     GOAL: 'Goal',
-    VERSION: 'Version'
+    VERSION: 'Version',
+    BARCODE_SCAN_ERROR: 'This barcode type is not allowed'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
