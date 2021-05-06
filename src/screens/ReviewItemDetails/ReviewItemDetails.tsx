@@ -338,6 +338,32 @@ export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), 
     </TouchableOpacity>
   );
 };
+
+// Renders scanned barcode error. Temporary fix until Global Modal.tsx is refactored to be flexible
+export const renderBarcodeErrorModal = (isVisible: boolean, setIsVisible: Function) => (
+  <Modal
+    visible={isVisible}
+    transparent
+  >
+    <View style={styles.modalContainer}>
+      <View style={styles.barcodeErrorContainer}>
+        <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+        <Text style={styles.errorText}>
+          {strings('GENERICS.BARCODE_SCAN_ERROR')}
+        </Text>
+        <View style={styles.buttonContainer}>
+          <Button
+            style={styles.dismissButton}
+            title={strings('GENERICS.OK')}
+            backgroundColor={COLOR.TRACKER_RED}
+            onPress={() => setIsVisible(false)}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+);
+
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   const {
     scannedEvent, isManualScanEnabled,
@@ -521,6 +547,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   if (error) {
     return (
       <View style={styles.safeAreaView}>
+        {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
         {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
@@ -543,6 +570,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   if (_.get(result, 'status') === 204) {
     return (
       <View style={styles.safeAreaView}>
+        {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
         {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
@@ -584,27 +612,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   return (
     <View style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent />}
-      <Modal
-        visible={errorModalVisible}
-        transparent
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.barcodeErrorContainer}>
-            <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-            <Text style={styles.errorText}>
-              {strings('GENERICS.BARCODE_SCAN_ERROR')}
-            </Text>
-            <View style={styles.buttonContainer}>
-              <Button
-                style={styles.dismissButton}
-                title={strings('GENERICS.OK')}
-                backgroundColor={COLOR.TRACKER_RED}
-                onPress={() => setErrorModalVisible(false)}
-              />
-            </View>
-          </View>
-        </View>
-      </Modal>
+      {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
       <Modal
         visible={ohQtyModalVisible}
         onRequestClose={() => setOhQtyModalVisible(false)}
