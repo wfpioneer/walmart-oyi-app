@@ -63,6 +63,8 @@ describe('ReviewItemDetailsScreen', () => {
           setIsRefreshing={jest.fn()}
           apiStart={0}
           setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
@@ -108,6 +110,52 @@ describe('ReviewItemDetailsScreen', () => {
           setIsRefreshing={jest.fn()}
           apiStart={0}
           setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn(() => Promise.resolve())}
+          useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('renders the barcodeError Modal as visible', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReviewItemDetailsScreen
+          scannedEvent={undefined}
+          isManualScanEnabled={false}
+          isWaiting={false}
+          error={undefined}
+          result={{
+            data: itemDetail[123],
+            status: 200
+          }}
+          addToPicklistStatus={defaultAsyncState}
+          completeItemApi={defaultAsyncState}
+          userId=""
+          exceptionType="NSFL"
+          actionCompleted={false}
+          pendingOnHandsQty={10}
+          floorLocations={itemDetail[123].location.floor}
+          reserveLocations={itemDetail[123].location.reserve}
+          route={jest.fn()}
+          dispatch={jest.fn()}
+          navigation={jest.fn()}
+          scrollViewRef={jest.fn()}
+          isSalesMetricsGraphView={false}
+          setIsSalesMetricsGraphView={jest.fn()}
+          ohQtyModalVisible={false}
+          setOhQtyModalVisible={jest.fn()}
+          completeApiInProgress={false}
+          setCompleteApiInProgress={jest.fn()}
+          isRefreshing={false}
+          setIsRefreshing={jest.fn()}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          errorModalVisible={true}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
@@ -147,6 +195,8 @@ describe('ReviewItemDetailsScreen', () => {
           setIsRefreshing={jest.fn()}
           apiStart={0}
           setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
@@ -190,6 +240,8 @@ describe('ReviewItemDetailsScreen', () => {
           setIsRefreshing={jest.fn()}
           apiStart={0}
           setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
@@ -229,6 +281,8 @@ describe('ReviewItemDetailsScreen', () => {
           setIsRefreshing={jest.fn()}
           apiStart={0}
           setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
