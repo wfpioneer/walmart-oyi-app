@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
@@ -7,6 +7,8 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 
 export const CompletedWorklist = () => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
+  const [groupToggle, updateGroupToggle] = useState(false);
+  const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
 
   let completedData: WorklistItemI[] | undefined;
@@ -21,6 +23,11 @@ export const CompletedWorklist = () => {
       refreshing={isWaiting}
       onRefresh={() => dispatch(getWorklist())}
       error={error}
+      dispatch={dispatch}
+      filterCategories={filterCategories}
+      filterExceptions={filterExceptions}
+      groupToggle={groupToggle}
+      updateGroupToggle={updateGroupToggle}
     />
   );
 };

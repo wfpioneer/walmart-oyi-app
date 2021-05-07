@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { WorklistItemI } from '../../models/WorklistItem';
@@ -9,6 +9,8 @@ import { trackEvent } from '../../utils/AppCenterTool';
 
 export const TodoWorklist = () => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
+  const [groupToggle, updateGroupToggle] = useState(false);
+  const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
   return (
     <TodoWorklistScreen
@@ -17,6 +19,10 @@ export const TodoWorklist = () => {
       error={error}
       dispatch={dispatch}
       useEffectHook={useEffect}
+      filterCategories={filterCategories}
+      filterExceptions={filterExceptions}
+      groupToggle={groupToggle}
+      updateGroupToggle={updateGroupToggle}
     />
   );
 };
@@ -27,11 +33,16 @@ interface TodoWorklistProps {
   error: any;
   dispatch: Dispatch<any>;
   useEffectHook: Function;
+  groupToggle: boolean;
+  updateGroupToggle: Function;
+  filterExceptions: any;
+  filterCategories: any;
 }
 
 export const TodoWorklistScreen = (props: TodoWorklistProps) => {
   const {
-    isWaiting, result, error, dispatch, useEffectHook
+    isWaiting, result, error, dispatch, useEffectHook,
+    groupToggle, updateGroupToggle, filterCategories, filterExceptions
   } = props;
   useEffectHook(() => {
     if (result) {
@@ -55,6 +66,11 @@ export const TodoWorklistScreen = (props: TodoWorklistProps) => {
       refreshing={isWaiting}
       onRefresh={() => dispatch(getWorklist())}
       error={error}
+      dispatch={dispatch}
+      filterCategories={filterCategories}
+      filterExceptions={filterExceptions}
+      groupToggle={groupToggle}
+      updateGroupToggle={updateGroupToggle}
     />
   );
 };

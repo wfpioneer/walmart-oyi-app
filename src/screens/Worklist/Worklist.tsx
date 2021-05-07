@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FlatList, Text, TouchableOpacity, View
 } from 'react-native';
+import { Dispatch } from 'redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useDispatch } from 'react-redux';
 import { WorklistItem } from '../../components/worklistItem/WorklistItem';
 import COLOR from '../../themes/Color';
 import styles from './Worklist.style';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { CategorySeparator } from '../../components/worklistItem/CategorySeparator';
 import { strings } from '../../locales';
-import { useTypedSelector } from '../../state/reducers/RootReducer';
 import FullExceptionList from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
@@ -24,8 +23,12 @@ interface WorklistProps {
   onRefresh: () => void;
   refreshing: boolean;
   error: any;
+  groupToggle: boolean;
+  updateGroupToggle: Function;
+  filterExceptions: string[];
+  filterCategories: string[];
+  dispatch: Dispatch<any>;
 }
-
 export const renderWorklistItem = (listItem: ListItemI) => {
   if (listItem.item.worklistType === 'CATEGORY') {
     const { catgName, itemCount } = listItem.item;
@@ -67,13 +70,12 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
     return 0;
   });
 
-  const returnData = [];
+  const returnData: WorklistItemI[] = [];
 
   // next, insert into the array where the category numbers change
-  const iterator = sortedData.values();
   let previousItem: WorklistItemI | undefined;
   let previousCategoryIndex: any;
-  for (const item of iterator) {
+  sortedData.forEach(item => {
     if (!previousItem || (previousItem.catgNbr !== item.catgNbr)) {
       previousItem = item;
       returnData.push({
@@ -92,7 +94,7 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
       }
       returnData.push(item);
     }
-  }
+  });
 
   return returnData;
 };
@@ -128,39 +130,40 @@ export const renderFilterPills = (listItem: any, dispatch: any, filterCategories
 };
 
 export const Worklist = (props: WorklistProps) => {
+  const {
+    data, dispatch, error, filterCategories, filterExceptions, groupToggle, onRefresh, refreshing, updateGroupToggle
+  } = props;
   const errorView = () => (
     <View style={styles.errorView}>
       <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
       <Text style={styles.errorText}>An error has occurred. Please try again.</Text>
-      <TouchableOpacity style={styles.errorButton} onPress={props.onRefresh}>
+      <TouchableOpacity style={styles.errorButton} onPress={onRefresh}>
         <Text>Retry</Text>
       </TouchableOpacity>
     </View>
   );
 
-  if (props.error) {
+  if (error) {
     return (
       <FlatList
         data={['error']}
         renderItem={errorView}
         refreshing={false}
-        onRefresh={props.onRefresh}
+        onRefresh={onRefresh}
       />
     );
   }
 
-  if (props.refreshing && !props.data) {
+  if (refreshing && !data) {
     return (
       <FlatList data={[]} renderItem={() => null} refreshing onRefresh={() => null} />
     );
   }
 
-  const [groupToggle, updateGroupToggle] = useState(false);
-  const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
-  const dispatch = useDispatch();
   const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
-  const typedFilterCategories = filterCategories.map((category: number) => ({ type: 'CATEGORY', value: category }));
-  let filteredData: WorklistItemI[] = props.data ? props.data : [];
+  const typedFilterCategories = filterCategories.map((category: string) => ({ type: 'CATEGORY', value: category }));
+  debugger;
+  let filteredData: WorklistItemI[] = data || [];
   if (filterCategories.length !== 0) {
     filteredData = filteredData.filter((worklistItem: WorklistItemI) => filterCategories
       .indexOf(`${worklistItem.catgNbr} - ${worklistItem.catgName}`) !== -1);
@@ -214,8 +217,8 @@ export const Worklist = (props: WorklistProps) => {
           return item.itemNbr + index.toString();
         }}
         renderItem={renderWorklistItem}
-        onRefresh={props.onRefresh}
-        refreshing={props.refreshing}
+        onRefresh={onRefresh}
+        refreshing={refreshing}
         style={styles.list}
       />
     </View>

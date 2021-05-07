@@ -19,6 +19,10 @@ describe('ToDoWorklistScreen', () => {
           error={null}
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
+          filterCategories={[]}
+          filterExceptions={[]}
+          groupToggle={false}
+          updateGroupToggle={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -35,6 +39,10 @@ describe('ToDoWorklistScreen', () => {
           error={null}
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
+          filterCategories={[]}
+          filterExceptions={[]}
+          groupToggle={false}
+          updateGroupToggle={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -51,6 +59,10 @@ describe('ToDoWorklistScreen', () => {
           error={null}
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
+          filterCategories={[]}
+          filterExceptions={[]}
+          groupToggle={false}
+          updateGroupToggle={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -67,6 +79,10 @@ describe('ToDoWorklistScreen', () => {
           error={null}
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
+          filterCategories={[]}
+          filterExceptions={[]}
+          groupToggle={false}
+          updateGroupToggle={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -83,6 +99,10 @@ describe('ToDoWorklistScreen', () => {
           error="Network Error"
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
+          filterCategories={[]}
+          filterExceptions={[]}
+          groupToggle={false}
+          updateGroupToggle={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -97,6 +117,10 @@ describe('ToDoWorklistScreen', () => {
           error={null}
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
+          filterCategories={[]}
+          filterExceptions={[]}
+          groupToggle={false}
+          updateGroupToggle={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
