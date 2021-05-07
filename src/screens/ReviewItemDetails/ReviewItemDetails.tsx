@@ -339,7 +339,7 @@ export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), 
   );
 };
 
-// Renders scanned barcode error. Temporary fix until Global Modal.tsx is refactored to be flexible
+// Renders scanned barcode error. TODO Temporary fix until Modal.tsx is refactored for more flexible usage
 export const renderBarcodeErrorModal = (isVisible: boolean, setIsVisible: Function) => (
   <Modal
     visible={isVisible}
@@ -391,12 +391,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   useEffectHook(() => {
     if (navigation.isFocused()) {
       validateSessionCall(navigation, route.name).then(() => {
-          scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
-          setApiStart(moment().valueOf());
-          dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-          trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
-          dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
-          dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
+       scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
+       setApiStart(moment().valueOf());
+       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+       trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
+       dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+       dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
       }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
     }
   }, [scannedEvent]);

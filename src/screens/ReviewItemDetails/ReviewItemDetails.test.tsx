@@ -440,7 +440,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
-  // Temporary tests until we refactor Modal.tsx for global usage in app
+  // TODO Keep temporary tests until we refactor Modal.tsx for global usage in app
   describe('Tests Rendering Scanned Barcode Error', () => {
     it('Renders the barcodeErrorModal isVisible set to True', () => {
       const renderer = ShallowRenderer.createRenderer();
