@@ -1,0 +1,794 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WorklistScreen Tests rendering Worklist api response Renders Loading indicator waiting for Worklist Data 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="error"
+    size={60}
+  />
+  <Text
+    style={
+      Object {
+        "marginVertical": 10,
+      }
+    }
+  >
+    An error has occurred. Please try again.
+  </Text>
+  <ForwardRef
+    onPress={[MockFunction]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <Text>
+      Retry
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`WorklistScreen Tests rendering Worklist api response Renders error for retrieving the worklist data 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="error"
+    size={60}
+  />
+  <Text
+    style={
+      Object {
+        "marginVertical": 10,
+      }
+    }
+  >
+    An error has occurred. Please try again.
+  </Text>
+  <ForwardRef
+    onPress={[MockFunction]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <Text>
+      Retry
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`WorklistScreen Tests rendering worklist data Renders completed worklist data 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "paddingHorizontal": 15,
+        "paddingVertical": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#000000"
+        name="menu"
+        size={25}
+      />
+    </ForwardRef>
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#c5c5c5"
+        name="list"
+        size={25}
+      />
+    </ForwardRef>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+          "itemCount": 5,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "FOODSERVICE",
+          "catgNbr": 93,
+          "completed": true,
+          "completedTs": "2020-07-15T08:02:17-05:00",
+          "completedUserId": "SVCintlsamsops",
+          "itemName": "TEST ITEM",
+          "itemNbr": 1234567890,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "000055559999",
+          "worklistType": "NSFL",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 99,
+          "completed": true,
+          "completedTs": "2020-07-15T08:02:17-05:00",
+          "completedUserId": "SVCintlsamsops",
+          "itemName": "ELECTRONIC ITEM",
+          "itemNbr": 987654321,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "777555333",
+          "worklistType": "NO",
+        },
+        Object {
+          "catgName": "FRESH BAKERY",
+          "catgNbr": 87,
+          "completed": true,
+          "completedTs": "2020-07-15T08:02:17-05:00",
+          "completedUserId": "SVCintlsamsops",
+          "itemName": "BAKERY ITEM",
+          "itemNbr": 123789456,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "111122223333",
+          "worklistType": "NO",
+        },
+        Object {
+          "catgName": "WINE",
+          "catgNbr": 19,
+          "completed": true,
+          "completedTs": "2020-07-15T08:02:17-05:00",
+          "completedUserId": "SVCintlsamsops",
+          "itemName": "WINE ITEM",
+          "itemNbr": 456789123,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "444455556666",
+          "worklistType": "C",
+        },
+        Object {
+          "catgName": "PHARMACY RX",
+          "catgNbr": 87,
+          "completed": true,
+          "completedTs": "2020-07-15T08:02:17-05:00",
+          "completedUserId": "SVCintlsamsops",
+          "itemName": "PHARMACY ITEM",
+          "itemNbr": 789123456,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "777788889999",
+          "worklistType": "C",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "flex": 1,
+        "width": "100%",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`WorklistScreen Tests rendering worklist data Renders the filtered view an items exception  1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "height": 50,
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <FlatList
+      data={
+        Array [
+          Object {
+            "type": "EXCEPTION",
+            "value": "NSFL",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={true}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      style={
+        Object {
+          "paddingHorizontal": 0,
+        }
+      }
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "paddingHorizontal": 15,
+        "paddingVertical": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#000000"
+        name="menu"
+        size={25}
+      />
+    </ForwardRef>
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#c5c5c5"
+        name="list"
+        size={25}
+      />
+    </ForwardRef>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+          "itemCount": 1,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "FOODSERVICE",
+          "catgNbr": 93,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "TEST ITEM",
+          "itemNbr": 1234567890,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "000055559999",
+          "worklistType": "NSFL",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "flex": 1,
+        "width": "100%",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`WorklistScreen Tests rendering worklist data Renders the filtered view for an items category 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "height": 50,
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <FlatList
+      data={
+        Array [
+          Object {
+            "type": "CATEGORY",
+            "value": "99 - ELECTRONICS",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={true}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      style={
+        Object {
+          "paddingHorizontal": 0,
+        }
+      }
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "paddingHorizontal": 15,
+        "paddingVertical": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#000000"
+        name="menu"
+        size={25}
+      />
+    </ForwardRef>
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#c5c5c5"
+        name="list"
+        size={25}
+      />
+    </ForwardRef>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+          "itemCount": 1,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 99,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "ELECTRONIC ITEM",
+          "itemNbr": 987654321,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "777555333",
+          "worklistType": "NO",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "flex": 1,
+        "width": "100%",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "paddingHorizontal": 15,
+        "paddingVertical": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#000000"
+        name="menu"
+        size={25}
+      />
+    </ForwardRef>
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#c5c5c5"
+        name="list"
+        size={25}
+      />
+    </ForwardRef>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+          "itemCount": 5,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "FOODSERVICE",
+          "catgNbr": 93,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "TEST ITEM",
+          "itemNbr": 1234567890,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "000055559999",
+          "worklistType": "NSFL",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 99,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "ELECTRONIC ITEM",
+          "itemNbr": 987654321,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "777555333",
+          "worklistType": "NO",
+        },
+        Object {
+          "catgName": "FRESH BAKERY",
+          "catgNbr": 87,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "BAKERY ITEM",
+          "itemNbr": 123789456,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "111122223333",
+          "worklistType": "NO",
+        },
+        Object {
+          "catgName": "WINE",
+          "catgNbr": 19,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "WINE ITEM",
+          "itemNbr": 456789123,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "444455556666",
+          "worklistType": "C",
+        },
+        Object {
+          "catgName": "PHARMACY RX",
+          "catgNbr": 87,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "PHARMACY ITEM",
+          "itemNbr": 789123456,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "777788889999",
+          "worklistType": "C",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "flex": 1,
+        "width": "100%",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`WorklistScreen Tests rendering worklist data Renders worklist items toggled by category list  1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "paddingHorizontal": 15,
+        "paddingVertical": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#c5c5c5"
+        name="menu"
+        size={25}
+      />
+    </ForwardRef>
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#000000"
+        name="list"
+        size={25}
+      />
+    </ForwardRef>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "catgName": "WINE",
+          "catgNbr": 19,
+          "itemCount": 1,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "WINE",
+          "catgNbr": 19,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "WINE ITEM",
+          "itemNbr": 456789123,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "444455556666",
+          "worklistType": "C",
+        },
+        Object {
+          "catgName": "FRESH BAKERY",
+          "catgNbr": 87,
+          "itemCount": 2,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "FRESH BAKERY",
+          "catgNbr": 87,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "BAKERY ITEM",
+          "itemNbr": 123789456,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "111122223333",
+          "worklistType": "NO",
+        },
+        Object {
+          "catgName": "PHARMACY RX",
+          "catgNbr": 87,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "PHARMACY ITEM",
+          "itemNbr": 789123456,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "777788889999",
+          "worklistType": "C",
+        },
+        Object {
+          "catgName": "FOODSERVICE",
+          "catgNbr": 93,
+          "itemCount": 1,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "FOODSERVICE",
+          "catgNbr": 93,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "TEST ITEM",
+          "itemNbr": 1234567890,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "000055559999",
+          "worklistType": "NSFL",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 99,
+          "itemCount": 1,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 99,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "ELECTRONIC ITEM",
+          "itemNbr": 987654321,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "777555333",
+          "worklistType": "NO",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "flex": 1,
+        "width": "100%",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;

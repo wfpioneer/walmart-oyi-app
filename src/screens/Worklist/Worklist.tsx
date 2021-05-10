@@ -80,7 +80,7 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
       previousItem = item;
       returnData.push({
         worklistType: 'CATEGORY',
-        catgName: item.catgName,
+        catgName: item.catgName || '',
         catgNbr: item.catgNbr,
         itemCount: 1
       });
