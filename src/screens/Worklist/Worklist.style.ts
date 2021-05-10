@@ -22,7 +22,7 @@ export default StyleSheet.create({
   errorView: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     paddingHorizontal: 15,
     paddingVertical: 15
   },
@@ -47,5 +47,10 @@ export default StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 15,
     flexDirection: 'row'
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

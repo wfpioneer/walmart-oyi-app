@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FlatList, Text, TouchableOpacity, View
+  ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
 import { Dispatch } from 'redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -74,7 +74,7 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
 
   // next, insert into the array where the category numbers change
   let previousItem: WorklistItemI | undefined;
-  let previousCategoryIndex: any;
+  let previousCategoryIndex: number;
   sortedData.forEach(item => {
     if (!previousItem || (previousItem.catgNbr !== item.catgNbr)) {
       previousItem = item;
@@ -99,16 +99,19 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
   return returnData;
 };
 
-export const renderFilterPills = (listItem: any, dispatch: any, filterCategories: any, filterExceptions: any) => {
-  const { item } = listItem;
-
-  if (item.type === 'EXCEPTION') {
-    const exceptionObj = FullExceptionList().find(exceptionListItem => exceptionListItem.value === item.value);
+export const renderFilterPills = (
+  listFilter: { type: string; value: string },
+  dispatch: Dispatch<any>,
+  filterCategories: string[],
+  filterExceptions: string[]
+) => {
+  if (listFilter.type === 'EXCEPTION') {
+    const exceptionObj = FullExceptionList().find(exceptionListItem => exceptionListItem.value === listFilter.value);
 
     if (exceptionObj) {
       const removeFilter = () => {
         const replacementFilter = filterExceptions;
-        replacementFilter.splice(filterExceptions.indexOf(item.value), 1);
+        replacementFilter.splice(filterExceptions.indexOf(listFilter.value), 1);
         dispatch(updateFilterExceptions(replacementFilter));
       };
       return <FilterPillButton filterText={exceptionObj.display} onClosePress={removeFilter} />;
@@ -117,13 +120,13 @@ export const renderFilterPills = (listItem: any, dispatch: any, filterCategories
     return null;
   }
 
-  if (item.type === 'CATEGORY') {
+  if (listFilter.type === 'CATEGORY') {
     const removeFilter = () => {
       const replacementFilter = filterCategories;
-      replacementFilter.splice(filterCategories.indexOf(item.value), 1);
+      replacementFilter.splice(filterCategories.indexOf(listFilter.value), 1);
       dispatch(updateFilterCategories(replacementFilter));
     };
-    return <FilterPillButton filterText={item.value} onClosePress={removeFilter} />;
+    return <FilterPillButton filterText={listFilter.value} onClosePress={removeFilter} />;
   }
 
   return null;
@@ -133,36 +136,33 @@ export const Worklist = (props: WorklistProps) => {
   const {
     data, dispatch, error, filterCategories, filterExceptions, groupToggle, onRefresh, refreshing, updateGroupToggle
   } = props;
-  const errorView = () => (
-    <View style={styles.errorView}>
-      <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
-      <Text style={styles.errorText}>An error has occurred. Please try again.</Text>
-      <TouchableOpacity style={styles.errorButton} onPress={onRefresh}>
-        <Text>Retry</Text>
-      </TouchableOpacity>
-    </View>
-  );
 
   if (error) {
     return (
-      <FlatList
-        data={['error']}
-        renderItem={errorView}
-        refreshing={false}
-        onRefresh={onRefresh}
-      />
+      <View style={styles.errorView}>
+        <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>An error has occurred. Please try again.</Text>
+        <TouchableOpacity style={styles.errorButton} onPress={onRefresh}>
+          <Text>Retry</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 
   if (refreshing && !data) {
     return (
-      <FlatList data={[]} renderItem={() => null} refreshing onRefresh={() => null} />
+      <ActivityIndicator
+        animating={refreshing}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
     );
   }
 
   const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
   const typedFilterCategories = filterCategories.map((category: string) => ({ type: 'CATEGORY', value: category }));
-  debugger;
   let filteredData: WorklistItemI[] = data || [];
   if (filterCategories.length !== 0) {
     filteredData = filteredData.filter((worklistItem: WorklistItemI) => filterCategories
@@ -170,10 +170,10 @@ export const Worklist = (props: WorklistProps) => {
   }
   if (filterExceptions.length !== 0) {
     filteredData = filteredData.filter((worklistItem: WorklistItemI) => {
-      const exceptionTranslation = FullExceptionList().find((exceptionListItem: any) => exceptionListItem.value
+      const exceptionTranslation = FullExceptionList().find(exceptionListItem => exceptionListItem.value
         === worklistItem.worklistType);
       if (exceptionTranslation) {
-        return filterExceptions.findIndex((exception: any) => exception === exceptionTranslation.value) !== -1;
+        return filterExceptions.findIndex((exception: string) => exception === exceptionTranslation.value) !== -1;
       }
       return false;
     });
@@ -186,9 +186,9 @@ export const Worklist = (props: WorklistProps) => {
           <FlatList
             data={[...typedFilterExceptions, ...typedFilterCategories]}
             horizontal
-            renderItem={(item: any) => renderFilterPills(item, dispatch, filterCategories, filterExceptions)}
+            renderItem={({ item }) => renderFilterPills(item, dispatch, filterCategories, filterExceptions)}
             style={styles.filterList}
-            keyExtractor={(item: any) => item.value.toString()}
+            keyExtractor={item => item.value}
           />
         </View>
       ) }
@@ -210,8 +210,8 @@ export const Worklist = (props: WorklistProps) => {
       </View>
       <FlatList
         data={convertDataToDisplayList(filteredData, groupToggle)}
-        keyExtractor={(item: any, index: number) => {
-          if (item.exceptionType === 'CATEGORY') {
+        keyExtractor={(item: WorklistItemI, index: number) => {
+          if (item.worklistType === 'CATEGORY') {
             return item.catgName.toString();
           }
           return item.itemNbr + index.toString();
