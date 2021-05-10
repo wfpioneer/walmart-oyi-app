@@ -56,7 +56,10 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
   useEffect(() => {
     // on api success
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result) {
-      trackEvent('item_details_update_oh_quantity_api_success', { duration: moment().valueOf() - apiStart });
+      trackEvent('item_details_update_oh_quantity_api_success', {
+        itemDetails: JSON.stringify(itemDetails),
+        duration: moment().valueOf() - apiStart
+      });
       dispatch(updatePendingOHQty(newOHQty));
       if (props.exceptionType === 'NO') {
         dispatch(setActionCompleted());
