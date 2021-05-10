@@ -39,7 +39,8 @@ export default {
     SUBMIT: 'Enviar',
     RETRY: 'Rever',
     GOAL: 'Objetivo',
-    VERSION: 'Versión'
+    VERSION: 'Versión',
+    BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
