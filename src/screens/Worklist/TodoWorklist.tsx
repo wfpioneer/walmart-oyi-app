@@ -39,7 +39,7 @@ export const TodoWorklistScreen = (props: TodoWorklistProps) => {
     }
 
     if (error) {
-      trackEvent('worklist_items_api_error', { errorDetails: error.message || JSON.stringify(error) });
+      trackEvent('worklist_items_api_failure', { errorDetails: error.message || JSON.stringify(error) });
     }
   }, [result, error]);
 

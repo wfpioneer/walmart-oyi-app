@@ -11,6 +11,7 @@ import Button from '../buttons/Button';
 import { numbers, strings } from '../../locales';
 import styles from './PrintQueueEdit.style';
 import { setPrintQueue } from '../../state/actions/Print';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const QTY_MIN = 1;
 const QTY_MAX = 100;
@@ -61,6 +62,7 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
   };
 
   const handleSave = () => {
+    trackEvent('print_queue_edit_save', { printItem: JSON.stringify(itemToEdit), newSignQty: signQty });
     printQueue.splice(props.itemIndexToEdit, 1, { ...itemToEdit, signQty });
     dispatch(setPrintQueue(printQueue));
     props.setItemIndexToEdit(-1);

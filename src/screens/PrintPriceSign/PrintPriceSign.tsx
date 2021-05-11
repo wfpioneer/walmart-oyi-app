@@ -225,6 +225,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
 
   const handleChangePrinter = () => {
     validateSession(navigation, route.name).then(() => {
+      trackEvent('print_change_printer_click');
       navigation.navigate('PrinterList');
     }).catch(() => {});
   };

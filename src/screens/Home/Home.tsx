@@ -81,6 +81,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       this.setState({
         getWorklistStart: moment().valueOf()
       });
+      trackEvent('home_worklist_summary_api_call');
       this.props.getWorklistSummary();
       this.setState({
         getWorklistStart: moment().valueOf()
@@ -107,7 +108,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
   // original line read: prevState: Readonly<HomeScreenState>, snapshot?: any
   componentDidUpdate(prevProps: Readonly<HomeScreenProps>) {
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
-      trackEvent('home_worklist_summary_api_error', {
+      trackEvent('home_worklist_summary_api_failure', {
         errorDetails: this.props.worklistSummaryApiState.error.message
           || JSON.stringify(this.props.worklistSummaryApiState.error),
         duration: moment().valueOf() - this.state.getWorklistStart
@@ -145,6 +146,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             style={styles.errorRetryButton}
             onPress={() => {
               trackEvent('home_worklist_summary_retry_button_click');
+              trackEvent('home_worklist_summary_api_call');
               this.props.getWorklistSummary();
             }}
           >
