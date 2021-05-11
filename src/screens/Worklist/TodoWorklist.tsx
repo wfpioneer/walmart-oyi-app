@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getWorklist } from '../../state/actions/saga';
-import { trackEvent } from '../../utils/AppCenterTool';
 
 export const TodoWorklist = () => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
@@ -16,7 +15,6 @@ export const TodoWorklist = () => {
       result={result}
       error={error}
       dispatch={dispatch}
-      useEffectHook={useEffect}
     />
   );
 };
@@ -26,22 +24,12 @@ interface TodoWorklistProps {
   result: any;
   error: any;
   dispatch: Dispatch<any>;
-  useEffectHook: Function;
 }
 
 export const TodoWorklistScreen = (props: TodoWorklistProps) => {
   const {
-    isWaiting, result, error, dispatch, useEffectHook
+    isWaiting, result, error, dispatch
   } = props;
-  useEffectHook(() => {
-    if (result) {
-      trackEvent('worklist_items_api_success');
-    }
-
-    if (error) {
-      trackEvent('worklist_items_api_failure', { errorDetails: error.message || JSON.stringify(error) });
-    }
-  }, [result, error]);
 
   let todoData: WorklistItemI[] | undefined;
 
