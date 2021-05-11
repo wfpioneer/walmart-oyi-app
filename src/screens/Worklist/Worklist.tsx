@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { Dispatch } from 'redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { NavigationProp } from '@react-navigation/native';
 import { WorklistItem } from '../../components/worklistItem/WorklistItem';
 import COLOR from '../../themes/Color';
 import styles from './Worklist.style';
@@ -14,8 +15,10 @@ import FullExceptionList from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
 
-interface ListItemI {
+interface ListItemProps {
   item: WorklistItemI;
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
 }
 
 interface WorklistProps {
@@ -28,17 +31,19 @@ interface WorklistProps {
   filterExceptions: string[];
   filterCategories: string[];
   dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
 }
-export const renderWorklistItem = (listItem: ListItemI) => {
-  if (listItem.item.worklistType === 'CATEGORY') {
-    const { catgName, itemCount } = listItem.item;
+export const RenderWorklistItem = (props: ListItemProps) => {
+  const { dispatch, item, navigation } = props;
+  if (item.worklistType === 'CATEGORY') {
+    const { catgName, itemCount } = item;
     return (
       <CategorySeparator categoryName={catgName} numberOfItems={itemCount || 0} />
     );
   }
   const {
     worklistType, itemName, itemNbr, upcNbr
-  } = listItem.item;
+  } = item;
 
   return (
     <WorklistItem
@@ -46,6 +51,8 @@ export const renderWorklistItem = (listItem: ListItemI) => {
       itemDescription={itemName || ''}
       upcNbr={upcNbr || ''}
       itemNumber={itemNbr || 0}
+      dispatch={dispatch}
+      navigation={navigation}
     />
   );
 };
@@ -117,7 +124,7 @@ export const renderFilterPills = (
       return <FilterPillButton filterText={exceptionObj.display} onClosePress={removeFilter} />;
     }
 
-    return null;
+    return <View />;
   }
 
   if (listFilter.type === 'CATEGORY') {
@@ -129,12 +136,13 @@ export const renderFilterPills = (
     return <FilterPillButton filterText={listFilter.value} onClosePress={removeFilter} />;
   }
 
-  return null;
+  return <View />;
 };
 
 export const Worklist = (props: WorklistProps) => {
   const {
-    data, dispatch, error, filterCategories, filterExceptions, groupToggle, onRefresh, refreshing, updateGroupToggle
+    data, dispatch, error, filterCategories, filterExceptions,
+    groupToggle, onRefresh, refreshing, updateGroupToggle, navigation
   } = props;
 
   if (error) {
@@ -149,7 +157,7 @@ export const Worklist = (props: WorklistProps) => {
     );
   }
 
-  if (refreshing && !data) {
+  if (refreshing || !data) {
     return (
       <ActivityIndicator
         animating={refreshing}
@@ -216,7 +224,7 @@ export const Worklist = (props: WorklistProps) => {
           }
           return item.itemNbr + index.toString();
         }}
-        renderItem={renderWorklistItem}
+        renderItem={({ item }) => <RenderWorklistItem item={item} dispatch={dispatch} navigation={navigation} />}
         onRefresh={onRefresh}
         refreshing={refreshing}
         style={styles.list}

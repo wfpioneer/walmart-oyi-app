@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
 import { getWorklist } from '../../state/actions/saga';
@@ -10,7 +11,7 @@ export const CompletedWorklist = () => {
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
-
+  const navigation = useNavigation();
   let completedData: WorklistItemI[] | undefined;
 
   if (result && result.data) {
@@ -28,6 +29,7 @@ export const CompletedWorklist = () => {
       filterExceptions={filterExceptions}
       groupToggle={groupToggle}
       updateGroupToggle={updateGroupToggle}
+      navigation={navigation}
     />
   );
 };

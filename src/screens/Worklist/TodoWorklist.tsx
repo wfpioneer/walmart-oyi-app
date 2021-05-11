@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -12,6 +13,7 @@ export const TodoWorklist = () => {
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   return (
     <TodoWorklistScreen
       isWaiting={isWaiting}
@@ -23,6 +25,7 @@ export const TodoWorklist = () => {
       filterExceptions={filterExceptions}
       groupToggle={groupToggle}
       updateGroupToggle={updateGroupToggle}
+      navigation={navigation}
     />
   );
 };
@@ -37,11 +40,12 @@ interface TodoWorklistProps {
   updateGroupToggle: Function;
   filterExceptions: any;
   filterCategories: any;
+  navigation: NavigationProp<any>;
 }
 
 export const TodoWorklistScreen = (props: TodoWorklistProps) => {
   const {
-    isWaiting, result, error, dispatch, useEffectHook,
+    isWaiting, result, error, dispatch, useEffectHook, navigation,
     groupToggle, updateGroupToggle, filterCategories, filterExceptions
   } = props;
   useEffectHook(() => {
@@ -71,6 +75,7 @@ export const TodoWorklistScreen = (props: TodoWorklistProps) => {
       filterExceptions={filterExceptions}
       groupToggle={groupToggle}
       updateGroupToggle={updateGroupToggle}
+      navigation={navigation}
     />
   );
 };

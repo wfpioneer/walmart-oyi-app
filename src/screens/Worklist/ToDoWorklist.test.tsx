@@ -1,10 +1,12 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { NavigationProp } from '@react-navigation/native';
 import { TodoWorklistScreen } from './TodoWorklist';
 import { mockWorkListComplete, mockWorkListToDo } from '../../mockData/mockWorkList';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
+let navigationProp: NavigationProp<any>;
 describe('ToDoWorklistScreen', () => {
   describe('Tests rendering Worklist data', () => {
     it('Renders array of uncompleted worklist items', () => {
@@ -23,6 +25,7 @@ describe('ToDoWorklistScreen', () => {
           filterExceptions={[]}
           groupToggle={false}
           updateGroupToggle={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -43,6 +46,7 @@ describe('ToDoWorklistScreen', () => {
           filterExceptions={[]}
           groupToggle={false}
           updateGroupToggle={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -63,6 +67,7 @@ describe('ToDoWorklistScreen', () => {
           filterExceptions={[]}
           groupToggle={false}
           updateGroupToggle={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -83,6 +88,7 @@ describe('ToDoWorklistScreen', () => {
           filterExceptions={[]}
           groupToggle={false}
           updateGroupToggle={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -103,6 +109,7 @@ describe('ToDoWorklistScreen', () => {
           filterExceptions={[]}
           groupToggle={false}
           updateGroupToggle={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -121,6 +128,7 @@ describe('ToDoWorklistScreen', () => {
           filterExceptions={[]}
           groupToggle={false}
           updateGroupToggle={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
