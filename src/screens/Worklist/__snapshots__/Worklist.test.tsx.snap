@@ -329,7 +329,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
 </View>
 `;
 
-exports[`WorklistScreen Tests rendering worklist data Renders the filtered view an items exception  1`] = `
+exports[`WorklistScreen Tests rendering worklist data Renders the filtered view for both filtered categories & exceptions  1`] = `
 <View
   style={
     Object {
@@ -356,6 +356,10 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
           Object {
             "type": "EXCEPTION",
             "value": "NSFL",
+          },
+          Object {
+            "type": "CATEGORY",
+            "value": "99 - ELECTRONICS",
           },
         ]
       }
@@ -415,21 +419,8 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
       Array [
         Object {
           "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
-          "itemCount": 1,
+          "itemCount": 0,
           "worklistType": "CATEGORY",
-        },
-        Object {
-          "catgName": "FOODSERVICE",
-          "catgNbr": 93,
-          "completed": false,
-          "completedTs": undefined,
-          "completedUserId": undefined,
-          "itemName": "TEST ITEM",
-          "itemNbr": 1234567890,
-          "subCatgName": undefined,
-          "subCatgNbr": 0,
-          "upcNbr": "000055559999",
-          "worklistType": "NSFL",
         },
       ]
     }
@@ -457,7 +448,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
 </View>
 `;
 
-exports[`WorklistScreen Tests rendering worklist data Renders the filtered view for an items category 1`] = `
+exports[`WorklistScreen Tests rendering worklist data Renders the filtered view for filtered categories 1`] = `
 <View
   style={
     Object {
@@ -558,6 +549,134 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
           "subCatgNbr": 0,
           "upcNbr": "777555333",
           "worklistType": "NO",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "flex": 1,
+        "width": "100%",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`WorklistScreen Tests rendering worklist data Renders the filtered view for filtered exceptions  1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "height": 50,
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <FlatList
+      data={
+        Array [
+          Object {
+            "type": "EXCEPTION",
+            "value": "NSFL",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={true}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      style={
+        Object {
+          "paddingHorizontal": 0,
+        }
+      }
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "paddingHorizontal": 15,
+        "paddingVertical": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#000000"
+        name="menu"
+        size={25}
+      />
+    </ForwardRef>
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#c5c5c5"
+        name="list"
+        size={25}
+      />
+    </ForwardRef>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+          "itemCount": 1,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "FOODSERVICE",
+          "catgNbr": 93,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "TEST ITEM",
+          "itemNbr": 1234567890,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "000055559999",
+          "worklistType": "NSFL",
         },
       ]
     }

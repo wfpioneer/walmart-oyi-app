@@ -35,8 +35,8 @@ interface TodoWorklistProps {
   dispatch: Dispatch<any>;
   groupToggle: boolean;
   updateGroupToggle: Function;
-  filterExceptions: any;
-  filterCategories: any;
+  filterExceptions: string[];
+  filterCategories: string[];
   navigation: NavigationProp<any>;
 }
 

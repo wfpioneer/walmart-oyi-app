@@ -12,6 +12,8 @@ jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__m
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 let navigationProp: NavigationProp<any>;
 describe('WorklistScreen', () => {
+  const filterCategories = ['99 - ELECTRONICS'];
+  const filterExcepetions = ['NSFL'];
   describe('Tests rendering worklist data', () => {
     it('Renders todo worklist data', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -51,7 +53,7 @@ describe('WorklistScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Renders the filtered view for an items category', () => {
+    it('Renders the filtered view for filtered categories', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <Worklist
@@ -59,7 +61,7 @@ describe('WorklistScreen', () => {
           refreshing={false}
           onRefresh={jest.fn()}
           error={undefined}
-          filterCategories={['99 - ELECTRONICS']}
+          filterCategories={filterCategories}
           filterExceptions={[]}
           groupToggle={false}
           updateGroupToggle={jest.fn()}
@@ -70,7 +72,7 @@ describe('WorklistScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Renders the filtered view an items exception ', () => {
+    it('Renders the filtered view for filtered exceptions ', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <Worklist
@@ -79,7 +81,25 @@ describe('WorklistScreen', () => {
           onRefresh={jest.fn()}
           error={undefined}
           filterCategories={[]}
-          filterExceptions={['NSFL']}
+          filterExceptions={filterExcepetions}
+          groupToggle={false}
+          updateGroupToggle={jest.fn()}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders the filtered view for both filtered categories & exceptions ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <Worklist
+          data={mockWorkListToDo}
+          refreshing={false}
+          onRefresh={jest.fn()}
+          error={undefined}
+          filterCategories={filterCategories}
+          filterExceptions={filterExcepetions}
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
@@ -149,7 +169,7 @@ describe('WorklistScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const exceptionFilter = { type: 'EXCEPTION', value: 'NSFL' };
       renderer.render(
-        renderFilterPills(exceptionFilter, jest.fn(), [], ['NSFL'])
+        renderFilterPills(exceptionFilter, jest.fn(), [], filterExcepetions)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -158,7 +178,7 @@ describe('WorklistScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const categoryFilter = { type: 'CATEGORY', value: '99 - ELECTRONICS' };
       renderer.render(
-        renderFilterPills(categoryFilter, jest.fn(), ['99 - ELECTRONICS'], [])
+        renderFilterPills(categoryFilter, jest.fn(), filterCategories, [])
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
