@@ -1,5 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button for list filter type CATEGORY  1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#0071e9",
+      "borderRadius": 20,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginHorizontal": 5,
+      "marginVertical": 10,
+      "paddingHorizontal": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    99 - ELECTRONICS
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+  >
+    <mockConstructor
+      color="#ffffffff"
+      name="close-circle"
+      size={20}
+    />
+  </ForwardRef>
+</View>
+`;
+
+exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button for list filter type EXCEPTION 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#0071e9",
+      "borderRadius": 20,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginHorizontal": 5,
+      "marginVertical": 10,
+      "paddingHorizontal": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    [missing "en.EXCEPTION.NSFL" translation]
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+  >
+    <mockConstructor
+      color="#ffffffff"
+      name="close-circle"
+      size={20}
+    />
+  </ForwardRef>
+</View>
+`;
+
+exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders empty view element for invalid list filter type 1`] = `<View />`;
+
 exports[`WorklistScreen Tests rendering Worklist api response Renders Loading indicator waiting for Worklist Data 1`] = `
 <View
   style={
@@ -90,6 +168,23 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders error for 
     </Text>
   </ForwardRef>
 </View>
+`;
+
+exports[`WorklistScreen Tests rendering WorklistItem Renders a single worklist item 1`] = `
+<WorklistItem
+  dispatch={[MockFunction]}
+  exceptionType="C"
+  itemDescription="WINE ITEM"
+  itemNumber={456789123}
+  upcNbr="444455556666"
+/>
+`;
+
+exports[`WorklistScreen Tests rendering WorklistItem Renders the category header for worklist type CATEGORY 1`] = `
+<CategorySeparator
+  categoryName="WINE"
+  numberOfItems={1}
+/>
 `;
 
 exports[`WorklistScreen Tests rendering worklist data Renders completed worklist data 1`] = `

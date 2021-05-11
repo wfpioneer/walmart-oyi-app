@@ -1,14 +1,16 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { NavigationProp } from '@react-navigation/native';
 import { strings } from '../../locales';
 import { mockWorkListComplete, mockWorkListToDo } from '../../mockData/mockWorkList';
 import { WorklistItemI } from '../../models/WorklistItem';
 import {
-  Worklist, convertDataToDisplayList
+  RenderWorklistItem, Worklist, convertDataToDisplayList, renderFilterPills
 } from './Worklist';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
+let navigationProp: NavigationProp<any>;
 describe('WorklistScreen', () => {
   describe('Tests rendering worklist data', () => {
     it('Renders todo worklist data', () => {
@@ -24,6 +26,7 @@ describe('WorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -42,6 +45,7 @@ describe('WorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -60,6 +64,7 @@ describe('WorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -78,6 +83,7 @@ describe('WorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -96,7 +102,72 @@ describe('WorklistScreen', () => {
           groupToggle={true}
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
+          navigation={navigationProp}
         />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('Tests rendering WorklistItem', () => {
+    const workListData: WorklistItemI[] = [{
+      worklistType: 'CATEGORY',
+      catgName: 'WINE',
+      catgNbr: 19,
+      itemCount: 1
+    },
+    {
+      worklistType: 'C',
+      itemName: 'WINE ITEM',
+      itemNbr: 456789123,
+      upcNbr: '444455556666',
+      catgNbr: 19,
+      catgName: 'WINE',
+      subCatgNbr: 0,
+      subCatgName: undefined,
+      completedTs: undefined,
+      completedUserId: undefined,
+      completed: false
+    }];
+    it('Renders the category header for worklist type CATEGORY', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <RenderWorklistItem item={workListData[0]} dispatch={jest.fn()} navigation={navigationProp} />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders a single worklist item', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <RenderWorklistItem item={workListData[1]} dispatch={jest.fn()} navigation={navigationProp} />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+
+  describe('Tests rendering Filter `Pills`', () => {
+    it('Renders a filter button for list filter type EXCEPTION', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const exceptionFilter = { type: 'EXCEPTION', value: 'NSFL' };
+      renderer.render(
+        renderFilterPills(exceptionFilter, jest.fn(), [], ['NSFL'])
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders a filter button for list filter type CATEGORY ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const categoryFilter = { type: 'CATEGORY', value: '99 - ELECTRONICS' };
+      renderer.render(
+        renderFilterPills(categoryFilter, jest.fn(), ['99 - ELECTRONICS'], [])
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders empty view element for invalid list filter type', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const invalidFilter = { type: '', value: '' };
+      renderer.render(
+        renderFilterPills(invalidFilter, jest.fn(), [], [])
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -116,6 +187,7 @@ describe('WorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -134,6 +206,7 @@ describe('WorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
