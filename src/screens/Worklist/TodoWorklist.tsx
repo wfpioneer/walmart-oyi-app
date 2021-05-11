@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -6,7 +6,6 @@ import { WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getWorklist } from '../../state/actions/saga';
-import { trackEvent } from '../../utils/AppCenterTool';
 
 export const TodoWorklist = () => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
@@ -20,7 +19,6 @@ export const TodoWorklist = () => {
       result={result}
       error={error}
       dispatch={dispatch}
-      useEffectHook={useEffect}
       filterCategories={filterCategories}
       filterExceptions={filterExceptions}
       groupToggle={groupToggle}
@@ -35,7 +33,6 @@ interface TodoWorklistProps {
   result: any;
   error: any;
   dispatch: Dispatch<any>;
-  useEffectHook: Function;
   groupToggle: boolean;
   updateGroupToggle: Function;
   filterExceptions: any;
@@ -45,18 +42,9 @@ interface TodoWorklistProps {
 
 export const TodoWorklistScreen = (props: TodoWorklistProps) => {
   const {
-    isWaiting, result, error, dispatch, useEffectHook, navigation,
+    isWaiting, result, error, dispatch, navigation,
     groupToggle, updateGroupToggle, filterCategories, filterExceptions
   } = props;
-  useEffectHook(() => {
-    if (result) {
-      trackEvent('worklist_items_api_success');
-    }
-
-    if (error) {
-      trackEvent('worklist_items_api_failure', { errorDetails: error.message || JSON.stringify(error) });
-    }
-  }, [result, error]);
 
   let todoData: WorklistItemI[] | undefined;
 
