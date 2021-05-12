@@ -157,7 +157,7 @@ export const Worklist = (props: WorklistProps) => {
     );
   }
 
-  if (refreshing || !data) {
+  if (refreshing) {
     return (
       <ActivityIndicator
         animating={refreshing}

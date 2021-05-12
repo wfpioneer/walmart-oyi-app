@@ -3,7 +3,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
 import { strings } from '../../locales';
 import {
-  missingCategoryNbrList, mockCategoryList, mockWorkListComplete, mockWorkListToDo
+  missingCategoryNbrList, missingExceptionsWorklist, mockCategoryList, mockWorkListComplete, mockWorkListToDo
 } from '../../mockData/mockWorkList';
 import { WorklistItemI } from '../../models/WorklistItem';
 import {
@@ -79,6 +79,24 @@ describe('WorklistScreen', () => {
       renderer.render(
         <Worklist
           data={mockWorkListToDo}
+          refreshing={false}
+          onRefresh={jest.fn()}
+          error={undefined}
+          filterCategories={[]}
+          filterExceptions={filterExceptions}
+          groupToggle={false}
+          updateGroupToggle={jest.fn()}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders empty data for items with invalid exception type filtered by exceptions', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <Worklist
+          data={missingExceptionsWorklist}
           refreshing={false}
           onRefresh={jest.fn()}
           error={undefined}

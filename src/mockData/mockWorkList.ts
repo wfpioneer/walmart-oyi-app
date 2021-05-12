@@ -298,3 +298,44 @@ export const missingCategoryNbrList = [{
   completedUserId: undefined,
   completed: false
 }];
+
+export const missingExceptionsWorklist: WorklistItemI[] = [
+  {
+    worklistType: 'Non-Exception',
+    itemName: 'TEST ITEM',
+    itemNbr: 1234567890,
+    upcNbr: '000055559999',
+    catgNbr: 93,
+    catgName: 'FOODSERVICE',
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: '2020-07-15T08:02:17-05:00',
+    completedUserId: 'SVCintlsamsops',
+    completed: true
+  },
+  {
+    worklistType: 'Non-Exception',
+    itemName: 'ELECTRONIC ITEM',
+    itemNbr: 987654321,
+    upcNbr: '777555333',
+    catgNbr: 99,
+    catgName: 'ELECTRONICS',
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: '2020-07-15T08:02:17-05:00',
+    completedUserId: 'SVCintlsamsops',
+    completed: true
+  },
+  {
+    worklistType: 'Non-Exception',
+    itemName: 'BAKERY ITEM',
+    itemNbr: 123789456,
+    upcNbr: '111122223333',
+    catgNbr: 88,
+    catgName: 'FRESH BAKERY',
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: '2020-07-15T08:02:17-05:00',
+    completedUserId: 'SVCintlsamsops',
+    completed: true
+  }];
