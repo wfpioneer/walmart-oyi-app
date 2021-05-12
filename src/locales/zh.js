@@ -44,11 +44,13 @@ export default {
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
+    WORKLIST_API_ERROR: '检索任务汇总清单错误，请重试',
     HOME: '主页',
     WELCOME: '欢迎',
     STYLE_GUIDE: '页面风格',
     CHANGE_LANGUAGE: '改变语言',
-    ITEMS: '项目'
+    ITEMS: '项目',
+    WORKLIST_GOAL_COMPLETE: '%{complete}的%{total}项目'
   },
   EXCEPTION: {
     PO: '价格替代报告',
@@ -149,8 +151,6 @@ export default {
     CLEAR: '清除',
     TODO: '待完成',
     COMPLETED: '已完成',
-    WORKLIST_API_ERROR: '检索任务汇总清单错误，请重试',
-    WORKLIST_GOAL_COMPLETE: '%{complete}的%{total}项目',
     WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试'
   },
   SELECTLOCATIONTYPE: {

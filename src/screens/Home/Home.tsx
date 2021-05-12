@@ -141,7 +141,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       return (
         <View style={[styles.container, styles.safeAreaView]}>
           <MaterialCommunityIcons name="alert" size={50} color={COLOR.RED_500} />
-          <Text style={styles.errorText}>{strings('WORKLIST.WORKLIST_API_ERROR')}</Text>
+          <Text style={styles.errorText}>{strings('HOME.WORKLIST_API_ERROR')}</Text>
           <TouchableOpacity
             style={styles.errorRetryButton}
             onPress={() => {

@@ -38,7 +38,7 @@ function WorklistCard(Props: Props) {
         <View style={[StyleSheet.absoluteFill, getBarFill(), { width: `${Props.completionPercentage}%` }]} />
       </View>
       <Text style={styles.counter}>
-        {strings('WORKLIST.WORKLIST_GOAL_COMPLETE', { complete: Props.complete, total: Props.goal })}
+        {strings('HOME.WORKLIST_GOAL_COMPLETE', { complete: Props.complete, total: Props.goal })}
       </Text>
     </TouchableOpacity>
   );
