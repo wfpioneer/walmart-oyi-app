@@ -78,50 +78,22 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
 
 exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders empty view element for invalid list filter type 1`] = `<View />`;
 
+exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders empty view element for non-existing EXCEPTION value 1`] = `<View />`;
+
 exports[`WorklistScreen Tests rendering Worklist api response Renders Loading indicator waiting for Worklist Data 1`] = `
-<View
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
   style={
     Object {
       "alignItems": "center",
       "flex": 1,
-      "justifyContent": "flex-start",
-      "paddingHorizontal": 15,
-      "paddingVertical": 15,
+      "justifyContent": "center",
     }
   }
->
-  <mockConstructor
-    color="#e57373"
-    name="error"
-    size={60}
-  />
-  <Text
-    style={
-      Object {
-        "marginVertical": 10,
-      }
-    }
-  >
-    An error has occurred. Please try again.
-  </Text>
-  <ForwardRef
-    onPress={[MockFunction]}
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#e57373",
-        "borderRadius": 4,
-        "height": 40,
-        "justifyContent": "center",
-        "width": "100%",
-      }
-    }
-  >
-    <Text>
-      Retry
-    </Text>
-  </ForwardRef>
-</View>
+/>
 `;
 
 exports[`WorklistScreen Tests rendering Worklist api response Renders error for retrieving the worklist data 1`] = `
@@ -148,7 +120,7 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders error for 
       }
     }
   >
-    An error has occurred. Please try again.
+    [missing "en.WORKLIST.WORKLIST_ITEM_API_ERROR" translation]
   </Text>
   <ForwardRef
     onPress={[MockFunction]}
@@ -164,7 +136,7 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders error for 
     }
   >
     <Text>
-      Retry
+      [missing "en.GENERICS.RETRY" translation]
     </Text>
   </ForwardRef>
 </View>

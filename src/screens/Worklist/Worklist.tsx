@@ -149,9 +149,9 @@ export const Worklist = (props: WorklistProps) => {
     return (
       <View style={styles.errorView}>
         <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
-        <Text style={styles.errorText}>An error has occurred. Please try again.</Text>
+        <Text style={styles.errorText}>{strings('WORKLIST.WORKLIST_ITEM_API_ERROR')}</Text>
         <TouchableOpacity style={styles.errorButton} onPress={onRefresh}>
-          <Text>Retry</Text>
+          <Text>{strings('GENERICS.RETRY')}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -173,15 +173,15 @@ export const Worklist = (props: WorklistProps) => {
   const typedFilterCategories = filterCategories.map((category: string) => ({ type: 'CATEGORY', value: category }));
   let filteredData: WorklistItemI[] = data || [];
   if (filterCategories.length !== 0) {
-    filteredData = filteredData.filter((worklistItem: WorklistItemI) => filterCategories
+    filteredData = filteredData.filter(worklistItem => filterCategories
       .indexOf(`${worklistItem.catgNbr} - ${worklistItem.catgName}`) !== -1);
   }
   if (filterExceptions.length !== 0) {
-    filteredData = filteredData.filter((worklistItem: WorklistItemI) => {
+    filteredData = filteredData.filter(worklistItem => {
       const exceptionTranslation = FullExceptionList().find(exceptionListItem => exceptionListItem.value
         === worklistItem.worklistType);
       if (exceptionTranslation) {
-        return filterExceptions.findIndex((exception: string) => exception === exceptionTranslation.value) !== -1;
+        return filterExceptions.findIndex(exception => exception === exceptionTranslation.value) !== -1;
       }
       return false;
     });

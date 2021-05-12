@@ -2,7 +2,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
 import { strings } from '../../locales';
-import { mockWorkListComplete, mockWorkListToDo } from '../../mockData/mockWorkList';
+import { mockCategoryList, mockWorkListComplete, mockWorkListToDo } from '../../mockData/mockWorkList';
 import { WorklistItemI } from '../../models/WorklistItem';
 import {
   RenderWorklistItem, Worklist, convertDataToDisplayList, renderFilterPills
@@ -13,7 +13,7 @@ jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils
 let navigationProp: NavigationProp<any>;
 describe('WorklistScreen', () => {
   const filterCategories = ['99 - ELECTRONICS'];
-  const filterExcepetions = ['NSFL'];
+  const filterExceptions = ['NSFL'];
   describe('Tests rendering worklist data', () => {
     it('Renders todo worklist data', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -81,7 +81,7 @@ describe('WorklistScreen', () => {
           onRefresh={jest.fn()}
           error={undefined}
           filterCategories={[]}
-          filterExceptions={filterExcepetions}
+          filterExceptions={filterExceptions}
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
@@ -99,7 +99,7 @@ describe('WorklistScreen', () => {
           onRefresh={jest.fn()}
           error={undefined}
           filterCategories={filterCategories}
-          filterExceptions={filterExcepetions}
+          filterExceptions={filterExceptions}
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
@@ -129,36 +129,17 @@ describe('WorklistScreen', () => {
     });
   });
   describe('Tests rendering WorklistItem', () => {
-    const workListData: WorklistItemI[] = [{
-      worklistType: 'CATEGORY',
-      catgName: 'WINE',
-      catgNbr: 19,
-      itemCount: 1
-    },
-    {
-      worklistType: 'C',
-      itemName: 'WINE ITEM',
-      itemNbr: 456789123,
-      upcNbr: '444455556666',
-      catgNbr: 19,
-      catgName: 'WINE',
-      subCatgNbr: 0,
-      subCatgName: undefined,
-      completedTs: undefined,
-      completedUserId: undefined,
-      completed: false
-    }];
     it('Renders the category header for worklist type CATEGORY', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <RenderWorklistItem item={workListData[0]} dispatch={jest.fn()} navigation={navigationProp} />
+        <RenderWorklistItem item={mockCategoryList[0]} dispatch={jest.fn()} navigation={navigationProp} />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders a single worklist item', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <RenderWorklistItem item={workListData[1]} dispatch={jest.fn()} navigation={navigationProp} />
+        <RenderWorklistItem item={mockCategoryList[1]} dispatch={jest.fn()} navigation={navigationProp} />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -169,7 +150,15 @@ describe('WorklistScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const exceptionFilter = { type: 'EXCEPTION', value: 'NSFL' };
       renderer.render(
-        renderFilterPills(exceptionFilter, jest.fn(), [], filterExcepetions)
+        renderFilterPills(exceptionFilter, jest.fn(), [], filterExceptions)
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders empty view element for non-existing EXCEPTION value', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const exceptionFilter = { type: 'EXCEPTION', value: 'Not An Exception' };
+      renderer.render(
+        renderFilterPills(exceptionFilter, jest.fn(), [], [])
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -218,9 +207,9 @@ describe('WorklistScreen', () => {
       renderer.render(
         <Worklist
           data={undefined}
-          refreshing={false}
+          refreshing={true}
           onRefresh={jest.fn()}
-          error="Network Error"
+          error={undefined}
           filterCategories={[]}
           filterExceptions={[]}
           groupToggle={false}
@@ -234,98 +223,7 @@ describe('WorklistScreen', () => {
   });
   describe('Tests convertDataToDisplayList', () => {
     it('Returns array of Worklist items with Category header indexes', () => {
-      const categoryList: WorklistItemI[] = [
-        {
-          worklistType: 'CATEGORY',
-          catgName: 'WINE',
-          catgNbr: 19,
-          itemCount: 1
-        },
-        {
-          worklistType: 'C',
-          itemName: 'WINE ITEM',
-          itemNbr: 456789123,
-          upcNbr: '444455556666',
-          catgNbr: 19,
-          catgName: 'WINE',
-          subCatgNbr: 0,
-          subCatgName: undefined,
-          completedTs: undefined,
-          completedUserId: undefined,
-          completed: false
-        },
-        {
-          worklistType: 'CATEGORY',
-          catgName: 'FRESH BAKERY',
-          catgNbr: 87,
-          itemCount: 2
-        },
-        {
-          worklistType: 'NO',
-          itemName: 'BAKERY ITEM',
-          itemNbr: 123789456,
-          upcNbr: '111122223333',
-          catgNbr: 87,
-          catgName: 'FRESH BAKERY',
-          subCatgNbr: 0,
-          subCatgName: undefined,
-          completedTs: undefined,
-          completedUserId: undefined,
-          completed: false
-        },
-        {
-          worklistType: 'C',
-          itemName: 'PHARMACY ITEM',
-          itemNbr: 789123456,
-          upcNbr: '777788889999',
-          catgNbr: 87,
-          catgName: 'PHARMACY RX',
-          subCatgNbr: 0,
-          subCatgName: undefined,
-          completedTs: undefined,
-          completedUserId: undefined,
-          completed: false
-        },
-        {
-          worklistType: 'CATEGORY',
-          catgName: 'FOODSERVICE',
-          catgNbr: 93,
-          itemCount: 1
-        },
-        {
-          worklistType: 'NSFL',
-          itemName: 'TEST ITEM',
-          itemNbr: 1234567890,
-          upcNbr: '000055559999',
-          catgNbr: 93,
-          catgName: 'FOODSERVICE',
-          subCatgNbr: 0,
-          subCatgName: undefined,
-          completedTs: undefined,
-          completedUserId: undefined,
-          completed: false
-        },
-        {
-          worklistType: 'CATEGORY',
-          catgName: 'ELECTRONICS',
-          catgNbr: 99,
-          itemCount: 1
-        },
-        {
-          worklistType: 'NO',
-          itemName: 'ELECTRONIC ITEM',
-          itemNbr: 987654321,
-          upcNbr: '777555333',
-          catgNbr: 99,
-          catgName: 'ELECTRONICS',
-          subCatgNbr: 0,
-          subCatgName: undefined,
-          completedTs: undefined,
-          completedUserId: undefined,
-          completed: false
-        }
-      ];
-      expect(convertDataToDisplayList(mockWorkListToDo, true)).toStrictEqual(categoryList);
+      expect(convertDataToDisplayList(mockWorkListToDo, true)).toStrictEqual(mockCategoryList);
     });
     it('Returns array of Worklist items with one single all category', () => {
       const allCategoryList: WorklistItemI[] = [
