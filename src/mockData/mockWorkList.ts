@@ -32,7 +32,7 @@ export const mockWorkListToDo: WorklistItemI[] = [
     itemName: 'BAKERY ITEM',
     itemNbr: 123789456,
     upcNbr: '111122223333',
-    catgNbr: 87,
+    catgNbr: 88,
     catgName: 'FRESH BAKERY',
     subCatgNbr: 0,
     subCatgName: undefined,
@@ -66,7 +66,6 @@ export const mockWorkListToDo: WorklistItemI[] = [
     completedUserId: undefined,
     completed: false
   }
-
 ];
 export const mockWorkListComplete: WorklistItemI[] = [
   {
@@ -100,7 +99,7 @@ export const mockWorkListComplete: WorklistItemI[] = [
     itemName: 'BAKERY ITEM',
     itemNbr: 123789456,
     upcNbr: '111122223333',
-    catgNbr: 87,
+    catgNbr: 88,
     catgName: 'FRESH BAKERY',
     subCatgNbr: 0,
     subCatgName: undefined,
@@ -158,22 +157,9 @@ export const mockCategoryList: WorklistItemI[] = [
   },
   {
     worklistType: 'CATEGORY',
-    catgName: 'FRESH BAKERY',
+    catgName: 'PHARMACY RX',
     catgNbr: 87,
-    itemCount: 2
-  },
-  {
-    worklistType: 'NO',
-    itemName: 'BAKERY ITEM',
-    itemNbr: 123789456,
-    upcNbr: '111122223333',
-    catgNbr: 87,
-    catgName: 'FRESH BAKERY',
-    subCatgNbr: 0,
-    subCatgName: undefined,
-    completedTs: undefined,
-    completedUserId: undefined,
-    completed: false
+    itemCount: 1
   },
   {
     worklistType: 'C',
@@ -182,6 +168,25 @@ export const mockCategoryList: WorklistItemI[] = [
     upcNbr: '777788889999',
     catgNbr: 87,
     catgName: 'PHARMACY RX',
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: undefined,
+    completedUserId: undefined,
+    completed: false
+  },
+  {
+    worklistType: 'CATEGORY',
+    catgName: 'FRESH BAKERY',
+    catgNbr: 88,
+    itemCount: 1
+  },
+  {
+    worklistType: 'NO',
+    itemName: 'BAKERY ITEM',
+    itemNbr: 123789456,
+    upcNbr: '111122223333',
+    catgNbr: 88,
+    catgName: 'FRESH BAKERY',
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,

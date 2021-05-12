@@ -80,7 +80,7 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
   const returnData: WorklistItemI[] = [];
 
   // next, insert into the array where the category numbers change
-  let previousItem: WorklistItemI | undefined;
+  let previousItem: WorklistItemI;
   let previousCategoryIndex: number;
   sortedData.forEach(item => {
     if (!previousItem || (previousItem.catgNbr !== item.catgNbr)) {
