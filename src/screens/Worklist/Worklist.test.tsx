@@ -2,7 +2,9 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
 import { strings } from '../../locales';
-import { mockCategoryList, mockWorkListComplete, mockWorkListToDo } from '../../mockData/mockWorkList';
+import {
+  missingCategoryNbrList, mockCategoryList, mockWorkListComplete, mockWorkListToDo
+} from '../../mockData/mockWorkList';
 import { WorklistItemI } from '../../models/WorklistItem';
 import {
   RenderWorklistItem, Worklist, convertDataToDisplayList, renderFilterPills
@@ -225,6 +227,20 @@ describe('WorklistScreen', () => {
     it('Returns array of Worklist items with Category header indexes', () => {
       expect(convertDataToDisplayList(mockWorkListToDo, true)).toStrictEqual(mockCategoryList);
     });
+
+    it('Returns array of Worklist items with missing Category Numbers under one category', () => {
+      const undefinedCategoryList = [
+        {
+          worklistType: 'CATEGORY',
+          catgName: 'FOODSERVICE',
+          catgNbr: undefined,
+          itemCount: 5
+        },
+        ...missingCategoryNbrList
+      ];
+      expect(convertDataToDisplayList(missingCategoryNbrList, true)).toStrictEqual(undefinedCategoryList);
+    });
+
     it('Returns array of Worklist items with one single all category', () => {
       const allCategoryList: WorklistItemI[] = [
         {

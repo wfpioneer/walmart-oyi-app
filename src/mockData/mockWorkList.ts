@@ -232,3 +232,69 @@ export const mockCategoryList: WorklistItemI[] = [
     completed: false
   }
 ];
+
+export const missingCategoryNbrList = [{
+  worklistType: 'NSFL',
+  itemName: 'TEST ITEM',
+  itemNbr: 1234567890,
+  upcNbr: '000055559999',
+  catgNbr: undefined,
+  catgName: 'FOODSERVICE',
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: undefined,
+  completedUserId: undefined,
+  completed: false
+},
+{
+  worklistType: 'NO',
+  itemName: 'ELECTRONIC ITEM',
+  itemNbr: 987654321,
+  upcNbr: '777555333',
+  catgNbr: undefined,
+  catgName: 'ELECTRONICS',
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: undefined,
+  completedUserId: undefined,
+  completed: false
+},
+{
+  worklistType: 'NO',
+  itemName: 'BAKERY ITEM',
+  itemNbr: 123789456,
+  upcNbr: '111122223333',
+  catgNbr: undefined,
+  catgName: 'FRESH BAKERY',
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: undefined,
+  completedUserId: undefined,
+  completed: false
+},
+{
+  worklistType: 'C',
+  itemName: 'WINE ITEM',
+  itemNbr: 456789123,
+  upcNbr: '444455556666',
+  catgNbr: undefined,
+  catgName: 'WINE',
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: undefined,
+  completedUserId: undefined,
+  completed: false
+},
+{
+  worklistType: 'C',
+  itemName: 'PHARMACY ITEM',
+  itemNbr: 789123456,
+  upcNbr: '777788889999',
+  catgNbr: undefined,
+  catgName: 'PHARMACY RX',
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: undefined,
+  completedUserId: undefined,
+  completed: false
+}];
