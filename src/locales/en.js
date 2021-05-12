@@ -44,13 +44,11 @@ export default {
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
-    WORKLIST_API_ERROR: 'There was an error retrieving the worklist summary.\nPlease try again.',
     WELCOME: 'Welcome',
     HOME: 'Home',
     STYLE_GUIDE: 'Style Guide',
     CHANGE_LANGUAGE: 'Change Language',
-    ITEMS: 'Items',
-    WORKLIST_GOAL_COMPLETE: '%{complete} of %{total} items'
+    ITEMS: 'Items'
   },
   EXCEPTION: {
     PO: 'Price Override',
@@ -151,7 +149,10 @@ export default {
     REFINE: 'Refine',
     CLEAR: 'Clear',
     TODO: 'Todo',
-    COMPLETED: 'Completed'
+    COMPLETED: 'Completed',
+    WORKLIST_API_ERROR: 'There was an error retrieving the worklist summary.\nPlease try again.',
+    WORKLIST_GOAL_COMPLETE: '%{complete} of %{total} items',
+    WORKLIST_ITEM_API_ERROR: 'There was an error retrieving worklist items.\nPlease try again.'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',

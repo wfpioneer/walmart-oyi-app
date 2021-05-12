@@ -44,13 +44,11 @@ export default {
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
-    WORKLIST_API_ERROR: 'Hubo un error al mostrar el resumen de las Listas de Trabajo. \nPor favor inténtalo de nuevo.',
     WELCOME: 'Bienvenido',
     HOME: 'Casa',
     STYLE_GUIDE: 'Guía de estilo',
     CHANGE_LANGUAGE: 'Cambiar idioma',
-    ITEMS: 'Artículos',
-    WORKLIST_GOAL_COMPLETE: '%{complete} de %{total} artículos'
+    ITEMS: 'Artículos'
   },
   EXCEPTION: {
     PO: 'Anulación de Precio',
@@ -150,7 +148,10 @@ export default {
     REFINE: 'Refinar',
     CLEAR: 'Limpiar',
     TODO: 'Que hacer',
-    COMPLETED: 'Terminado'
+    COMPLETED: 'Terminado',
+    WORKLIST_API_ERROR: 'Hubo un error al mostrar el resumen de las Listas de Trabajo. \nPor favor inténtalo de nuevo.',
+    WORKLIST_GOAL_COMPLETE: '%{complete} de %{total} artículos',
+    WORKLIST_ITEM_API_ERROR: 'Hubo un error al mostrar el elementos de las Listas de Trabajo. \nPor favor inténtalo de nuevo.' // TODO temp translation until we get translations from Mexico
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
