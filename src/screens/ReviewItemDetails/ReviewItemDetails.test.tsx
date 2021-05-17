@@ -2,7 +2,8 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import itemDetail from '../../mockData/getItemDetails';
 import {
-  HandleProps, RenderProps, ReviewItemDetailsScreen, renderAddPicklistButton,
+  HandleProps,
+  RenderProps, ReviewItemDetailsScreen, renderAddPicklistButton, renderBarcodeErrorModal,
   renderLocationComponent, renderOHQtyComponent, renderScanForNoActionButton
 } from './ReviewItemDetails';
 
@@ -63,6 +64,8 @@ describe('ReviewItemDetailsScreen', () => {
           setIsRefreshing={jest.fn()}
           apiStart={0}
           setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
@@ -108,6 +111,8 @@ describe('ReviewItemDetailsScreen', () => {
           setIsRefreshing={jest.fn()}
           apiStart={0}
           setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
@@ -147,6 +152,8 @@ describe('ReviewItemDetailsScreen', () => {
           setIsRefreshing={jest.fn()}
           apiStart={0}
           setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
@@ -190,6 +197,8 @@ describe('ReviewItemDetailsScreen', () => {
           setIsRefreshing={jest.fn()}
           apiStart={0}
           setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
@@ -229,6 +238,8 @@ describe('ReviewItemDetailsScreen', () => {
           setIsRefreshing={jest.fn()}
           apiStart={0}
           setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
@@ -425,6 +436,23 @@ describe('ReviewItemDetailsScreen', () => {
         renderAddPicklistButton({
           ...mockHandleProps
         }, noReserveItemDetails)
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  // TODO Keep temporary tests until we refactor Modal.tsx for global usage in app
+  describe('Tests Rendering Scanned Barcode Error', () => {
+    it('Renders the barcodeErrorModal isVisible set to True', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderBarcodeErrorModal(true, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders the barcodeErrorModal isVisible set to False', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderBarcodeErrorModal(false, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

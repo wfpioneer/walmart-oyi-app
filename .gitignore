@@ -28,7 +28,7 @@ build/
 .gradle
 local.properties
 *.iml
-
+/android/java_pid61812.hprof
 # Visual Studio Code
 #
 .vscode/
@@ -65,3 +65,4 @@ buck-out/
 
 # JEST
 *coverage
+/test-report.xml

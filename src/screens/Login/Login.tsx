@@ -66,7 +66,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       this.props.showActivityModal();
     }
     if (prevProps.fluffyApiState.isWaiting && this.props.fluffyApiState.error) {
-      trackEvent('fluffy_api_error', {
+      trackEvent('fluffy_api_failure', {
         errorDetails: this.props.fluffyApiState.error.message || JSON.stringify(this.props.fluffyApiState.error)
       });
     }

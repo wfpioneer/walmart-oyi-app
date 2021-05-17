@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   ActivityIndicator, EmitterSubscription,
+  Modal,
   SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import moment from 'moment';
@@ -20,6 +21,7 @@ import COLOR from '../../themes/Color';
 import { updateFilterExceptions } from '../../state/actions/Worklist';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
+import Button from '../../components/buttons/Button';
 
 const mapStateToProps = (state: any) => ({
   userName: state.User.additional.displayName,
@@ -51,8 +53,18 @@ interface HomeScreenProps {
 interface HomeScreenState {
   activeGoal: number;
   getWorklistStart: number;
+  errorModalVisible: boolean;
 }
-
+type HomeRender =
+| React.ReactElement<any, string | React.JSXElementConstructor<any>>
+| string
+| number
+| {}
+| React.ReactNodeArray
+| React.ReactPortal
+| boolean
+| null
+| undefined;
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
   private readonly scannedSubscription: EmitterSubscription;
 
@@ -61,7 +73,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
   constructor(props: HomeScreenProps) {
     super(props);
 
-    this.state = { activeGoal: 0, getWorklistStart: 0 };
+    this.state = { activeGoal: 0, getWorklistStart: 0, errorModalVisible: false };
 
     // addListener returns a function to remove listener
     this.navigationRemoveListener = this.props.navigation.addListener('focus', () => {
@@ -69,6 +81,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       this.setState({
         getWorklistStart: moment().valueOf()
       });
+      trackEvent('home_worklist_summary_api_call');
       this.props.getWorklistSummary();
       this.setState({
         getWorklistStart: moment().valueOf()
@@ -79,9 +92,13 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       if (props.navigation.isFocused()) {
         validateSession(props.navigation, props.route.name).then(() => {
           trackEvent('home_barcode_scanned', { barcode: scan.value, type: scan.type });
-          props.setScannedEvent(scan);
-          props.setManualScan(false);
-          props.navigation.navigate('ReviewItemDetails');
+          if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
+            props.setScannedEvent(scan);
+            props.setManualScan(false);
+            props.navigation.navigate('ReviewItemDetails');
+          } else {
+            this.setState({ errorModalVisible: true });
+          }
         }).catch(() => {});
       }
     });
@@ -91,7 +108,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
   // original line read: prevState: Readonly<HomeScreenState>, snapshot?: any
   componentDidUpdate(prevProps: Readonly<HomeScreenProps>) {
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
-      trackEvent('home_worklist_summary_api_error', {
+      trackEvent('home_worklist_summary_api_failure', {
         errorDetails: this.props.worklistSummaryApiState.error.message
           || JSON.stringify(this.props.worklistSummaryApiState.error),
         duration: moment().valueOf() - this.state.getWorklistStart
@@ -111,16 +128,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     this.navigationRemoveListener();
   }
 
-  render():
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-    | string
-    | number
-    | {}
-    | React.ReactNodeArray
-    | React.ReactPortal
-    | boolean
-    | null
-    | undefined {
+  render(): HomeRender {
     if (this.props.worklistSummaryApiState.isWaiting) {
       return (
         <View style={[styles.container, styles.safeAreaView]}>
@@ -138,6 +146,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             style={styles.errorRetryButton}
             onPress={() => {
               trackEvent('home_worklist_summary_retry_button_click');
+              trackEvent('home_worklist_summary_api_call');
               this.props.getWorklistSummary();
             }}
           >
@@ -216,6 +225,27 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     return (
       <SafeAreaView style={styles.safeAreaView}>
+        <Modal
+          visible={this.state.errorModalVisible}
+          transparent
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.barcodeErrorContainer}>
+              <MaterialCommunityIcons name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+              <Text style={styles.barcodeErrorText}>
+                {strings('GENERICS.BARCODE_SCAN_ERROR')}
+              </Text>
+              <View style={styles.buttonContainer}>
+                <Button
+                  style={styles.dismissButton}
+                  title={strings('GENERICS.OK')}
+                  backgroundColor={COLOR.TRACKER_RED}
+                  onPress={() => this.setState({ errorModalVisible: false })}
+                />
+              </View>
+            </View>
+          </View>
+        </Modal>
         {this.props.isManualScanEnabled && <ManualScanComponent />}
         <ScrollView contentContainerStyle={styles.container}>
           <Text>

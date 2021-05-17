@@ -221,6 +221,9 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
     if (!editAPI.isWaiting && editAPI.result) {
       trackEventCall('select_location_edit_api_success', { duration: moment().valueOf() - apiStart });
       dispatch(editExistingLocation(loc, parseInt(locType, 10), 'floor', currentLocation.locIndex));
+      trackEvent('location_get_location_api_call', {
+        itemNbr: itemLocDetails.itemNbr
+      });
       dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
       navigation.navigate('LocationDetails');
     }

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 import styles from './OHQtyUpdate.style';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
@@ -44,6 +45,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
   const [newOHQty, setNewOHQty] = useState(ohQty);
   const [apiSubmitting, updateApiSubmitting] = useState(false);
   const [error, updateError] = useState('');
+  const [apiStart, setApiStart] = useState(0);
   const { result } = useTypedSelector(state => state.async.getItemDetails);
   const { userId, siteId, countryCode } = useTypedSelector(state => state.User);
   const itemDetails = result && result.data;
@@ -54,7 +56,10 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
   useEffect(() => {
     // on api success
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result) {
-      trackEvent('item_details_update_oh_quantity_api_success');
+      trackEvent('item_details_update_oh_quantity_api_success', {
+        itemDetails: JSON.stringify(itemDetails),
+        duration: moment().valueOf() - apiStart
+      });
       dispatch(updatePendingOHQty(newOHQty));
       if (props.exceptionType === 'NO') {
         dispatch(setActionCompleted());
@@ -66,7 +71,9 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
     // on api failure
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.error) {
       trackEvent('item_details_update_oh_quantity_api_failure', {
-        errorDetails: updateQuantityAPIStatus.error.message || updateQuantityAPIStatus.error
+        itemDetails: JSON.stringify(itemDetails),
+        errorDetails: updateQuantityAPIStatus.error.message || updateQuantityAPIStatus.error,
+        duration: moment().valueOf() - apiStart
       });
       updateApiSubmitting(false);
       return updateError(strings('ITEM.OH_UPDATE_API_ERROR'));
@@ -83,6 +90,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
 
   const handleSaveOHQty = () => {
     trackEvent('item_details_update_oh_quantity_api_call', { newOHQty, itemNbr: itemDetails.itemNbr });
+    setApiStart(moment().valueOf());
     dispatch(updateOHQty({
       data: { onHandQty: newOHQty },
       itemNumber: itemDetails.itemNbr,
