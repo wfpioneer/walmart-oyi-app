@@ -39,7 +39,8 @@ export default {
     SUBMIT: 'Submit',
     RETRY: 'Retry',
     GOAL: 'Goal',
-    VERSION: 'Version'
+    VERSION: 'Version',
+    BARCODE_SCAN_ERROR: 'This barcode type is not allowed'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -150,7 +151,8 @@ export default {
     REFINE: 'Refine',
     CLEAR: 'Clear',
     TODO: 'Todo',
-    COMPLETED: 'Completed'
+    COMPLETED: 'Completed',
+    WORKLIST_ITEM_API_ERROR: 'There was an error retrieving worklist items.\nPlease try again.'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',

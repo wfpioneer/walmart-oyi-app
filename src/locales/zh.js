@@ -39,7 +39,8 @@ export default {
     SUBMIT: '递交',
     RETRY: '重试',
     GOAL: '目标',
-    VERSION: '版本'
+    VERSION: '版本',
+    BARCODE_SCAN_ERROR: '此条码类型有误'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -149,7 +150,8 @@ export default {
     REFINE: '更新',
     CLEAR: '清除',
     TODO: '待完成',
-    COMPLETED: '已完成'
+    COMPLETED: '已完成',
+    WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试'
   },
   SELECTLOCATIONTYPE: {
     TITLE: '选择位置类型',

@@ -39,7 +39,8 @@ export default {
     SUBMIT: 'Enviar',
     RETRY: 'Rever',
     GOAL: 'Objetivo',
-    VERSION: 'Versión'
+    VERSION: 'Versión',
+    BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -149,7 +150,8 @@ export default {
     REFINE: 'Refinar',
     CLEAR: 'Limpiar',
     TODO: 'Que hacer',
-    COMPLETED: 'Terminado'
+    COMPLETED: 'Terminado',
+    WORKLIST_ITEM_API_ERROR: 'Hubo un error al mostrar el elementos de las Listas de Trabajo. \nPor favor inténtalo de nuevo.' // TODO temp translation until we get translations from Mexico
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',

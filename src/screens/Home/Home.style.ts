@@ -7,7 +7,6 @@ export default StyleSheet.create({
   },
   container: {
     alignItems: 'center',
-    // flex: 1,
     justifyContent: 'center'
   },
   pingGoogleButton: {
@@ -42,5 +41,41 @@ export default StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     color: COLOR.GREY_500
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLOR.BLACK_TRANSPARENT_600
+  },
+  barcodeErrorContainer: {
+    width: '80%',
+    borderRadius: 10,
+    backgroundColor: COLOR.WHITE,
+    borderColor: COLOR.TRACKER_GREY,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    alignContent: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    alignSelf: 'center',
+    minHeight: 150
+  },
+  buttonContainer: {
+    width: '100%',
+    alignContent: 'space-around',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  iconPosition: {
+    alignSelf: 'center'
+  },
+  dismissButton: {
+    width: '70%',
+    marginTop: 16
+  },
+  barcodeErrorText: {
+    fontSize: 16,
+    textAlign: 'center'
   }
 });
