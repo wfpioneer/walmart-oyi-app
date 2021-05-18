@@ -70,9 +70,9 @@ const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod:
   };
 
   return (
-    <View style={{ height: 200, paddingVertical: 16 }}>
+    <View style={styles.chartContainer}>
       <BarChart
-        style={{ flex: 1 }}
+        style={styles.barChartSize}
         data={chartData}
         yAccessor={({ item }) => item.value}
         svg={{ fill: COLOR.GREEN }}
@@ -84,7 +84,7 @@ const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod:
         <Labels />
       </BarChart>
       <XAxis
-        style={{ marginTop: 10 }}
+        style={styles.axisPosition}
         data={chartData}
         scale={scaleBand}
         formatLabel={(value, index) => formatChartLabel(chartData[index].label)}
@@ -127,7 +127,7 @@ const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) =
           height={20}
           width={72}
           radius={50}
-          style={{ marginRight: 4 }}
+          style={styles.timePeriodButton}
           onPress={handleDailyTimePeriodChange(true)}
         />
         <Button
@@ -139,7 +139,7 @@ const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) =
           height={20}
           width={72}
           radius={50}
-          style={{ marginLeft: 4 }}
+          style={styles.timePeriodButton}
           onPress={handleDailyTimePeriodChange(false)}
         />
       </View>

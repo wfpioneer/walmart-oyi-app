@@ -188,7 +188,7 @@ export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: numb
         <Text>{pendingOnHandsQty}</Text>
       </View>
       <View style={styles.mgrApprovalView}>
-        <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={{ paddingRight: 6 }} />
+        <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={styles.infoIcon} />
         <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
       </View>
     </View>
@@ -243,7 +243,7 @@ export const renderAddPicklistButton = (props: (RenderProps & HandleProps), item
 export const renderLocationComponent = (props: (RenderProps & HandleProps), itemDetails: ItemDetails) => {
   const { floorLocations, reserveLocations } = props;
   return (
-    <View style={{ paddingHorizontal: 8 }}>
+    <View style={styles.locationContainer}>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.FLOOR')}</Text>
         {floorLocations && floorLocations.length >= 1
@@ -675,7 +675,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
                   name="label-variant"
                   size={20}
                   color={COLOR.GREY_700}
-                  style={{ marginLeft: -4 }}
+                  style={styles.labelIcon}
                 />
               )}
               title={strings('ITEM.REPLENISHMENT')}

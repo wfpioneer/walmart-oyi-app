@@ -100,6 +100,20 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     fontSize: 12,
     color: COLOR.GREY_500
+  },
+  printerAlignment: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  buttonWidth: {
+    width: '100%'
+  },
+  printerTextMargin: {
+    marginLeft: 12
+  },
+  genericTextLabel: {
+    fontSize: 12,
+    color: COLOR.GREY_600
   }
 });
 

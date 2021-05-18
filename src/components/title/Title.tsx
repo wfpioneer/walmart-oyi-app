@@ -3,7 +3,7 @@ import {
   Image, SafeAreaView, StatusBar, Text, TouchableOpacity, View
 } from 'react-native';
 import COLOR from '../../themes/Color';
-
+import styles from './Title.styles';
 /**
  * According to the Android style component, when the onLeftPress method is set,
  * the left return arrow will be displayed. When the onRightPress method is set,
@@ -52,12 +52,9 @@ export default class Title extends React.PureComponent<Props> {
     const leftButton = onLeftPress
       ? (
         <TouchableOpacity onPress={this.onLeftPress}>
-          <View style={{
-            flex: 1, width: 55, alignItems: 'center', justifyContent: 'center'
-          }}
-          >
+          <View style={styles.buttonViewContainer}>
             <Image
-              style={{ width: 25, height: 25 }}
+              style={styles.iconSize}
               source={onLeftPressIcon || require('../../assets/images/back_icon.png')}
             />
           </View>
@@ -67,12 +64,9 @@ export default class Title extends React.PureComponent<Props> {
     const rightButton = onRightPress
       ? (
         <TouchableOpacity onPress={this.onRightPress}>
-          <View style={{
-            flex: 1, width: 55, alignItems: 'center', justifyContent: 'center'
-          }}
-          >
+          <View style={styles.buttonViewContainer}>
             <Image
-              style={{ width: 25, height: 25, marginRight: 10 }}
+              style={styles.iconSizeRight}
               source={onRightPressIcon || require('../../assets/images/menu.png')}
             />
           </View>
@@ -82,15 +76,11 @@ export default class Title extends React.PureComponent<Props> {
       <SafeAreaView style={{ backgroundColor, height }}>
         <StatusBar backgroundColor={statusBarBgColor} barStyle="light-content" />
         <View
-          style={{
-            backgroundColor, flex: 1, flexDirection: 'row', alignItems: 'center', elevation: 3
-          }}
+          style={[{ backgroundColor }, styles.mainContainer]}
         >
           {leftButton}
           <Text
-            style={{
-              flex: 1, color: titleColor, fontSize: titleFontSize, marginStart: 16
-            }}
+            style={[styles.titleText, { color: titleColor, fontSize: titleFontSize }]}
           >
             {title}
           </Text>
