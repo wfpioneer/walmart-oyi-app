@@ -8,7 +8,7 @@ import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import Button from '../buttons/Button';
 import ItemDetails from '../../models/ItemDetails';
-import styles from './SalesMetrics.styles';
+import styles from './SalesMetrics.style';
 import { trackEvent } from '../../utils/AppCenterTool';
 
 // Could possibly be combined with below, but the input keys are different
