@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator, FlatList, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import {
-  NavigationProp, Route, useNavigation, useRoute
+  NavigationProp, Route, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
 import { ApprovalListItem } from '../../models/ApprovalListItem';
@@ -19,7 +19,7 @@ import { strings } from '../../locales';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { ApprovalCategorySeparator } from '../../components/CategorySeparatorCards/ApprovalCategorySeparator';
 import { validateSession } from '../../utils/sessionTimeout';
-import { setApprovalList } from '../../state/actions/Approvals';
+import { setApprovalList, toggleAllItems } from '../../state/actions/Approvals';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
 export interface ApprovalCategory extends ApprovalListItem {
@@ -120,6 +120,7 @@ const ApprovalList = () => {
       navigation={navigation}
       route={route}
       useEffectHook={useEffect}
+      useFocusEffectHook={useFocusEffect}
       trackEventCall={trackEvent}
       selectedItemQty={selectedItemQty}
     />
@@ -138,13 +139,14 @@ interface ApprovalListProps {
   navigation: NavigationProp<any>;
   route: Route<any>;
   useEffectHook: Function;
+  useFocusEffectHook: Function;
   trackEventCall: (eventName: string, params?: any) => void;
 }
 
 export const ApprovalListScreen = (props: ApprovalListProps) => {
   const {
     dispatch, error, isWaiting, result, trackEventCall, apiStart, setApiStart,
-    useEffectHook, navigation, route, filteredList, categoryIndices, selectedItemQty
+    useEffectHook, useFocusEffectHook, navigation, route, filteredList, categoryIndices, selectedItemQty
   } = props;
 
   // Get Approval List Items
@@ -156,6 +158,20 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
     }).catch(() => {});
   }), [navigation]);
 
+  // Device BackPress Listener
+  useFocusEffectHook(() => {
+    const onBackPress = () => {
+      // Clears selected Approval items on system back press to re-enable bottom tab navigator
+      if (selectedItemQty > 0) {
+        dispatch(toggleAllItems(false));
+        return true;
+      }
+      return false;
+    };
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+  });
   // Get Approval List API
   useEffectHook(() => {
     // on api success
