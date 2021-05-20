@@ -20,7 +20,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { ApprovalCategorySeparator } from '../../components/CategorySeparatorCards/ApprovalCategorySeparator';
 import { validateSession } from '../../utils/sessionTimeout';
 import { setApprovalList } from '../../state/actions/Approvals';
-import { ButtonBottomTab } from '../../components/buttonTab/ButtonTabCard';
+import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
 export interface ApprovalCategory extends ApprovalListItem {
   categoryHeader?: boolean;
@@ -238,9 +238,9 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
       {selectedItemQty > 0
         ? (
           <ButtonBottomTab
-            reject="Reject"
+            reject={strings('APPROVAL.REJECT')}
             onRejectPress={() => undefined}
-            approve="Approve"
+            approve={strings('APPROVAL.APPROVE')}
             onApprovePress={() => undefined}
           />
         ) : null}
