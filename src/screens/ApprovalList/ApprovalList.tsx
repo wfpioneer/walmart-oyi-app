@@ -20,6 +20,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { ApprovalCategorySeparator } from '../../components/CategorySeparatorCards/ApprovalCategorySeparator';
 import { validateSession } from '../../utils/sessionTimeout';
 import { setApprovalList } from '../../state/actions/Approvals';
+import { ButtonBottomTab } from '../../components/buttonTab/ButtonTabCard';
 
 export interface ApprovalCategory extends ApprovalListItem {
   categoryHeader?: boolean;
@@ -101,7 +102,7 @@ export const RenderApprovalItem = (props: ApprovalItemProp) => {
 };
 const ApprovalList = () => {
   const { result, isWaiting, error } = useTypedSelector(state => state.async.getApprovalList);
-  const { approvalList, categoryIndices } = useTypedSelector(state => state.Approvals);
+  const { approvalList, categoryIndices, selectedItemQty } = useTypedSelector(state => state.Approvals);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -120,6 +121,7 @@ const ApprovalList = () => {
       route={route}
       useEffectHook={useEffect}
       trackEventCall={trackEvent}
+      selectedItemQty={selectedItemQty}
     />
   );
 };
@@ -130,6 +132,7 @@ interface ApprovalListProps {
   result: any;
   filteredList: ApprovalCategory[];
   categoryIndices: number[];
+  selectedItemQty: number;
   apiStart: number;
   setApiStart: Function;
   navigation: NavigationProp<any>;
@@ -141,7 +144,7 @@ interface ApprovalListProps {
 export const ApprovalListScreen = (props: ApprovalListProps) => {
   const {
     dispatch, error, isWaiting, result, trackEventCall, apiStart, setApiStart,
-    useEffectHook, navigation, route, filteredList, categoryIndices
+    useEffectHook, navigation, route, filteredList, categoryIndices, selectedItemQty
   } = props;
 
   // Get Approval List Items
@@ -215,21 +218,32 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
   }
   // TODO use FlatListEmptyComponent prop for rendering empty data in latest version of RN
   return (
-    <View>
-      <FlatList
-        data={filteredList}
-        keyExtractor={(item: ApprovalCategory, index: number) => {
-          if (item.categoryHeader) {
-            return item.categoryDescription.toString();
-          }
-          return item.itemNbr + index.toString();
-        }}
-        renderItem={({ item }) => <RenderApprovalItem item={item} dispatch={dispatch} />}
-        stickyHeaderIndices={categoryIndices.length !== 0 ? categoryIndices : undefined}
+    <View style={styles.mainContainer}>
+      <View style={styles.mainContainer}>
+        <FlatList
+          data={filteredList}
+          keyExtractor={(item: ApprovalCategory, index: number) => {
+            if (item.categoryHeader) {
+              return item.categoryDescription.toString();
+            }
+            return item.itemNbr + index.toString();
+          }}
+          renderItem={({ item }) => <RenderApprovalItem item={item} dispatch={dispatch} />}
+          stickyHeaderIndices={categoryIndices.length !== 0 ? categoryIndices : undefined}
       // Default this is False, Solves flatlist rendering no data because stickyHeader updates at the same time as data
-        removeClippedSubviews={false}
-        extraData={filteredList}
-      />
+          removeClippedSubviews={false}
+          extraData={filteredList}
+        />
+      </View>
+      {selectedItemQty > 0
+        ? (
+          <ButtonBottomTab
+            reject="Reject"
+            onRejectPress={() => undefined}
+            approve="Approve"
+            onApprovePress={() => undefined}
+          />
+        ) : null}
     </View>
   );
 };

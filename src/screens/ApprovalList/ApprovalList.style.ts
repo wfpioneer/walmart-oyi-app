@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1
+  },
   emptyContainer: {
     flex: 1,
     alignItems: 'center',

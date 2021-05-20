@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   const isManager = useTypedSelector(state => state.User.isManager);
-
+  const selectedAmount = useTypedSelector(state => state.Approvals.selectedItemQty);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -29,7 +29,8 @@ const TabNavigator = () => {
 
           // You can return any component that you like here!
           return <MaterialIcons name="help" size={size} color={color} />;
-        }
+        },
+        tabBarVisible: selectedAmount <= 0
       })}
       tabBarOptions={{
         activeTintColor: COLOR.MAIN_THEME_COLOR,
