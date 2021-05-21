@@ -174,15 +174,6 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
     }
   }, [error, isWaiting, result]);
 
-  if (result?.status === 204) {
-    return (
-      <View style={styles.emptyContainer}>
-        {/* Placeholder for empty approval list subject to change */}
-        <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
-        <Text> The Approval List is Empty </Text>
-      </View>
-    );
-  }
 
   if (isWaiting) {
     return (
@@ -213,7 +204,7 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
       </View>
     );
   }
-  // TODO use FlatListEmptyComponent prop for rendering empty data in latest version of RN
+  // TODO use FlatListEmptyComponent prop for rendering empty data in latest version of RN!!!
   return (
     <View>
       <FlatList
@@ -228,6 +219,14 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
         stickyHeaderIndices={categoryIndices.length !== 0 ? categoryIndices : undefined}
       // Default this is False, Solves flatlist rendering no data because stickyHeader updates at the same time as data
         removeClippedSubviews={false}
+        ListEmptyComponent={(
+          <View style={styles.emptyContainer}>
+            {/* Placeholder for empty approval list subject to change */}
+            <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
+            <Text> The Approval List is Empty </Text>
+          </View>
+        )}
+        
         extraData={filteredList}
       />
     </View>
