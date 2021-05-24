@@ -266,6 +266,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
             { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: locType });
           setApiStart(moment().valueOf());
           dispatch(addLocation({
+            headers: {itemNbr: itemLocDetails.itemNbr},
             upc: itemLocDetails.upcNbr,
             sectionId: loc,
             locationTypeNbr: locType
@@ -284,6 +285,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
             { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: locType });
           setApiStart(moment().valueOf());
           dispatch(editLocation({
+            headers: {itemNbr: itemLocDetails.itemNbr},
             upc: itemLocDetails.upcNbr,
             sectionId: currentLocation.locationName,
             newSectionId: loc,
