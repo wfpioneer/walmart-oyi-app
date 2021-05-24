@@ -204,7 +204,7 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
       </View>
     );
   }
-  // TODO use FlatListEmptyComponent prop for rendering empty data in latest version of RN!!!
+
   return (
     <View>
       <FlatList
