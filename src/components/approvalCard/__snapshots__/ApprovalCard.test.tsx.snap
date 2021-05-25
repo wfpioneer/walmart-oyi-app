@@ -233,19 +233,12 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
           </Text>
           <Text
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "color": "#545F7A",
-                  "fontSize": 16,
-                },
-                Object {
-                  "alignSelf": "flex-start",
-                  "color": "#ab2703",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                },
-              ]
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#ab2703",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
             }
           >
             -20
@@ -514,19 +507,12 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
           </Text>
           <Text
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "color": "#545F7A",
-                  "fontSize": 16,
-                },
-                Object {
-                  "alignSelf": "flex-start",
-                  "color": "#33691E",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                },
-              ]
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#33691E",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
             }
           >
             15
@@ -764,19 +750,14 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
           <Text
             style={
               Object {
-                "alignSelf": "flex-start",
-                "color": "#ab2703",
+                "alignSelf": "center",
+                "color": "#545F7A",
                 "fontSize": 16,
                 "fontWeight": "bold",
               }
             }
           >
-            <Icon
-              allowFontScaling={false}
-              name="arrow-down"
-              size={20}
-            />
-            $0.00
+            $0
           </Text>
           <Text
             style={
@@ -791,19 +772,12 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
           </Text>
           <Text
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "color": "#545F7A",
-                  "fontSize": 16,
-                },
-                Object {
-                  "alignSelf": "flex-start",
-                  "color": "#ab2703",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                },
-              ]
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
             }
           >
             0
@@ -1041,19 +1015,14 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
           <Text
             style={
               Object {
-                "alignSelf": "flex-start",
-                "color": "#ab2703",
+                "alignSelf": "center",
+                "color": "#545F7A",
                 "fontSize": 16,
                 "fontWeight": "bold",
               }
             }
           >
-            <Icon
-              allowFontScaling={false}
-              name="arrow-down"
-              size={20}
-            />
-            $0.00
+            $0
           </Text>
           <Text
             style={
@@ -1068,19 +1037,12 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
           </Text>
           <Text
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "color": "#545F7A",
-                  "fontSize": 16,
-                },
-                Object {
-                  "alignSelf": "flex-start",
-                  "color": "#ab2703",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                },
-              ]
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
             }
           >
             0
@@ -1112,6 +1074,140 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
         </Text>
       </View>
     </View>
+  </View>
+</View>
+`;
+
+exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Renders all zeroes for qty change if no data is passed 1`] = `
+<View
+  style={
+    Object {
+      "borderTopColor": "#bdbdbd",
+      "borderTopWidth": 1,
+      "flexDirection": "column",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginVertical": 6,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#8492a8",
+          "flexDirection": "column",
+          "fontSize": 14,
+        }
+      }
+    >
+      [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+    </Text>
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#545F7A",
+          "fontSize": 16,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginVertical": 6,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#8492a8",
+          "flexDirection": "column",
+          "fontSize": 14,
+        }
+      }
+    >
+      [missing "en.APPROVAL.OH_CHANGE" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "#545F7A",
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        $0
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 16,
+            "marginHorizontal": 4,
+          }
+        }
+      >
+         | 
+      </Text>
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "#545F7A",
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        0
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#545F7A",
+          "fontSize": 16,
+          "fontWeight": "bold",
+        }
+      }
+    />
   </View>
 </View>
 `;
@@ -1220,19 +1316,12 @@ exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Render
       </Text>
       <Text
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-            },
-            Object {
-              "alignSelf": "flex-start",
-              "color": "#ab2703",
-              "fontSize": 16,
-              "fontWeight": "bold",
-            },
-          ]
+          Object {
+            "alignSelf": "flex-start",
+            "color": "#ab2703",
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
         }
       >
         -20
@@ -1370,19 +1459,12 @@ exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Render
       </Text>
       <Text
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-            },
-            Object {
-              "alignSelf": "flex-start",
-              "color": "#33691E",
-              "fontSize": 16,
-              "fontWeight": "bold",
-            },
-          ]
+          Object {
+            "alignSelf": "flex-start",
+            "color": "#33691E",
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
         }
       >
         15

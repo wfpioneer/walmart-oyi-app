@@ -21,11 +21,9 @@ export interface ApprovalCardProps{
   dispatch: Dispatch<any>;
 }
 
-export const positiveQtyChange = (oldQty: number, newQty:number) => newQty > oldQty;
+export const positiveQtyChange = (oldQty: number, newQty: number) => newQty > oldQty;
 
-export const renderQuantityChange = (oldQty: number, newQty: number, dollarChange:number) => {
-  
-  return (
+export const renderQuantityChange = (oldQty?: number, newQty?: number, dollarChange?: number) => (
   <View style={styles.onHandsContainer}>
     <View style={styles.quantityCalc}>
       <Text style={styles.quantityHeader}>{strings('APPROVAL.CURRENT_QUANTITY')}</Text>
@@ -33,23 +31,32 @@ export const renderQuantityChange = (oldQty: number, newQty: number, dollarChang
     </View>
     <View style={styles.quantityCalc}>
       <Text style={styles.quantityHeader}>{strings('APPROVAL.OH_CHANGE')}</Text>
-      <View style={styles.onHandsChange}>
-        <Text style={positiveQtyChange(oldQty, newQty) ? styles.positiveChange : styles.negativeChange}>
-          <Octicons name={positiveQtyChange(oldQty, newQty) ? 'arrow-up' : 'arrow-down'} size={20} />
-          {currencies(dollarChange)}
-        </Text>
-        <Text style={styles.divider}> | </Text>
-        <Text style={[styles.quantityText, positiveQtyChange(oldQty, newQty) ? styles.positiveChange : styles.negativeChange]}>
-          {newQty - oldQty}
-        </Text>
-      </View>
+      {oldQty && newQty && dollarChange !== undefined
+        ? (
+          <View style={styles.onHandsChange}>
+            <Text style={positiveQtyChange(oldQty, newQty) ? styles.positiveChange : styles.negativeChange}>
+              <Octicons name={positiveQtyChange(oldQty, newQty) ? 'arrow-up' : 'arrow-down'} size={20} />
+              {currencies(dollarChange)}
+            </Text>
+            <Text style={styles.divider}> | </Text>
+            <Text style={positiveQtyChange(oldQty, newQty) ? styles.positiveChange : styles.negativeChange}>
+              {newQty - oldQty}
+            </Text>
+          </View>
+        )
+        : (
+          <View style={styles.onHandsChange}>
+            <Text style={styles.resultText}>$0</Text>
+            <Text style={styles.divider}> | </Text>
+            <Text style={styles.resultText}>{0}</Text>
+          </View>
+        )}
     </View>
     <View style={styles.quantityResult}>
       <Text style={styles.resultText}>{newQty}</Text>
     </View>
   </View>
-  );
-}
+);
 export const ApprovalCard = (props: ApprovalCardProps) => {
   const {
     image, itemNbr, itemName, oldQuantity,

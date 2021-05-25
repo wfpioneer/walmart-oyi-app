@@ -125,6 +125,14 @@ describe('ApprovalCard Component', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('Renders all zeroes for qty change if no data is passed', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderQuantityChange()
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 
   describe('Tests PositiveQtyChange:', () => {
