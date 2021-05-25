@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ApprovalCard Component Renders an Approval Item with a decreased change in quantity 1`] = `
+exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approval Item with a decreased change in quantity 1`] = `
 <View
   style={
     Object {
@@ -281,7 +281,7 @@ exports[`ApprovalCard Component Renders an Approval Item with a decreased change
 </View>
 `;
 
-exports[`ApprovalCard Component Renders an Approval Item with a positive price change 1`] = `
+exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approval Item with a positive price change 1`] = `
 <View
   style={
     Object {
@@ -562,7 +562,7 @@ exports[`ApprovalCard Component Renders an Approval Item with a positive price c
 </View>
 `;
 
-exports[`ApprovalCard Component Renders the Approval Item CheckBox as "checked"  1`] = `
+exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approval Item CheckBox as "checked"  1`] = `
 <View
   style={
     Object {
@@ -839,7 +839,7 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "checked" 
 </View>
 `;
 
-exports[`ApprovalCard Component Renders the Approval Item CheckBox as "unchecked"  1`] = `
+exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approval Item CheckBox as "unchecked"  1`] = `
 <View
   style={
     Object {
@@ -1112,6 +1112,306 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "unchecked
         </Text>
       </View>
     </View>
+  </View>
+</View>
+`;
+
+exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Renders negative change in quantity 1`] = `
+<View
+  style={
+    Object {
+      "borderTopColor": "#bdbdbd",
+      "borderTopWidth": 1,
+      "flexDirection": "column",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginVertical": 6,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#8492a8",
+          "flexDirection": "column",
+          "fontSize": 14,
+        }
+      }
+    >
+      [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+    </Text>
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#545F7A",
+          "fontSize": 16,
+        }
+      }
+    >
+      30
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginVertical": 6,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#8492a8",
+          "flexDirection": "column",
+          "fontSize": 14,
+        }
+      }
+    >
+      [missing "en.APPROVAL.OH_CHANGE" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "flex-start",
+            "color": "#ab2703",
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        <Icon
+          allowFontScaling={false}
+          name="arrow-down"
+          size={20}
+        />
+        $100.00
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 16,
+            "marginHorizontal": 4,
+          }
+        }
+      >
+         | 
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            },
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#ab2703",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            },
+          ]
+        }
+      >
+        -20
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#545F7A",
+          "fontSize": 16,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      10
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Renders positive change in quantity 1`] = `
+<View
+  style={
+    Object {
+      "borderTopColor": "#bdbdbd",
+      "borderTopWidth": 1,
+      "flexDirection": "column",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginVertical": 6,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#8492a8",
+          "flexDirection": "column",
+          "fontSize": 14,
+        }
+      }
+    >
+      [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+    </Text>
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#545F7A",
+          "fontSize": 16,
+        }
+      }
+    >
+      5
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginVertical": 6,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#8492a8",
+          "flexDirection": "column",
+          "fontSize": 14,
+        }
+      }
+    >
+      [missing "en.APPROVAL.OH_CHANGE" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "flex-start",
+            "color": "#33691E",
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        <Icon
+          allowFontScaling={false}
+          name="arrow-up"
+          size={20}
+        />
+        $200.00
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 16,
+            "marginHorizontal": 4,
+          }
+        }
+      >
+         | 
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            },
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#33691E",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            },
+          ]
+        }
+      >
+        15
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "#545F7A",
+          "fontSize": 16,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      20
+    </Text>
   </View>
 </View>
 `;

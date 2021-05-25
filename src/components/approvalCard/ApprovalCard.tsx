@@ -21,6 +21,35 @@ export interface ApprovalCardProps{
   dispatch: Dispatch<any>;
 }
 
+export const positiveQtyChange = (oldQty: number, newQty:number) => newQty > oldQty;
+
+export const renderQuantityChange = (oldQty: number, newQty: number, dollarChange:number) => {
+  
+  return (
+  <View style={styles.onHandsContainer}>
+    <View style={styles.quantityCalc}>
+      <Text style={styles.quantityHeader}>{strings('APPROVAL.CURRENT_QUANTITY')}</Text>
+      <Text style={styles.quantityText}>{oldQty}</Text>
+    </View>
+    <View style={styles.quantityCalc}>
+      <Text style={styles.quantityHeader}>{strings('APPROVAL.OH_CHANGE')}</Text>
+      <View style={styles.onHandsChange}>
+        <Text style={positiveQtyChange(oldQty, newQty) ? styles.positiveChange : styles.negativeChange}>
+          <Octicons name={positiveQtyChange(oldQty, newQty) ? 'arrow-up' : 'arrow-down'} size={20} />
+          {currencies(dollarChange)}
+        </Text>
+        <Text style={styles.divider}> | </Text>
+        <Text style={[styles.quantityText, positiveQtyChange(oldQty, newQty) ? styles.positiveChange : styles.negativeChange]}>
+          {newQty - oldQty}
+        </Text>
+      </View>
+    </View>
+    <View style={styles.quantityResult}>
+      <Text style={styles.resultText}>{newQty}</Text>
+    </View>
+  </View>
+  );
+}
 export const ApprovalCard = (props: ApprovalCardProps) => {
   const {
     image, itemNbr, itemName, oldQuantity,
@@ -28,7 +57,6 @@ export const ApprovalCard = (props: ApprovalCardProps) => {
   } = props;
   // TODO The CheckBox will need to changed for the `Select/Deselect All` tasks and add a proper tests
 
-  const positiveQtyChange = () => newQuantity > oldQuantity;
   return (
     <View style={styles.cardContainer}>
       <Image source={image ? { uri: image } : require('../../assets/images/placeholder.png')} style={styles.image} />
@@ -50,28 +78,7 @@ export const ApprovalCard = (props: ApprovalCardProps) => {
           <Text style={styles.divider}>|</Text>
           <Text style={styles.daysText}>{strings('APPROVAL.DAYS_LEFT', { time: daysLeft })}</Text>
         </View>
-        <View style={styles.onHandsContainer}>
-          <View style={styles.quantityCalc}>
-            <Text style={styles.quantityHeader}>{strings('APPROVAL.CURRENT_QUANTITY')}</Text>
-            <Text style={styles.quantityText}>{oldQuantity}</Text>
-          </View>
-          <View style={styles.quantityCalc}>
-            <Text style={styles.quantityHeader}>{strings('APPROVAL.OH_CHANGE')}</Text>
-            <View style={styles.onHandsChange}>
-              <Text style={positiveQtyChange() ? styles.positiveChange : styles.negativeChange}>
-                <Octicons name={positiveQtyChange() ? 'arrow-up' : 'arrow-down'} size={20} />
-                {currencies(dollarChange)}
-              </Text>
-              <Text style={styles.divider}> | </Text>
-              <Text style={[styles.quantityText, positiveQtyChange() ? styles.positiveChange : styles.negativeChange]}>
-                {newQuantity - oldQuantity}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.quantityResult}>
-            <Text style={styles.resultText}>{newQuantity}</Text>
-          </View>
-        </View>
+        {renderQuantityChange(oldQuantity, newQuantity, dollarChange)}
       </View>
     </View>
   );
