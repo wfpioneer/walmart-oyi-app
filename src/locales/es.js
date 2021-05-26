@@ -173,6 +173,7 @@ export default {
     SELECTED: 'Seleccionado',
     APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprovación.\nPor favor inténtalo de nuevo',
     APPROVE: 'Aprovar',
-    REJECT: 'Rechazar' // TODO needs correct spanish translation
+    REJECT: 'Rechazar',
+    REVIEW: 'Revisar cambios' // Needs proper transaltions
   }
 };

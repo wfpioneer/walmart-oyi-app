@@ -173,7 +173,8 @@ export default {
     DESELECT_ALL: '取消选择',
     SELECTED: '已选择',
     APPROVAL_API_ERROR: '检索审批列表出错, \n请重试',
-    APPROVE: '批准', // TODO needs correct Mandarin translation
-    REJECT: '拒绝'
+    APPROVE: '批准',
+    REJECT: '拒绝',
+    REVIEW: '审阅更改' // Needs proper translations
   }
 };
