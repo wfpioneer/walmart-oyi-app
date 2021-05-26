@@ -1119,7 +1119,9 @@ exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Render
           "fontSize": 16,
         }
       }
-    />
+    >
+      0
+    </Text>
   </View>
   <View
     style={
@@ -1207,7 +1209,9 @@ exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Render
           "fontWeight": "bold",
         }
       }
-    />
+    >
+      0
+    </Text>
   </View>
 </View>
 `;
