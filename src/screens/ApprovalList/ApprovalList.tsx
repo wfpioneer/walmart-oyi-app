@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator, FlatList, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import {
-  NavigationProp, Route, useNavigation, useRoute
+  NavigationProp, Route, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
 import { ApprovalListItem } from '../../models/ApprovalListItem';
@@ -19,7 +19,8 @@ import { strings } from '../../locales';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { ApprovalCategorySeparator } from '../../components/CategorySeparatorCards/ApprovalCategorySeparator';
 import { validateSession } from '../../utils/sessionTimeout';
-import { setApprovalList } from '../../state/actions/Approvals';
+import { setApprovalList, toggleAllItems } from '../../state/actions/Approvals';
+import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
 export interface ApprovalCategory extends ApprovalListItem {
   categoryHeader?: boolean;
@@ -101,7 +102,7 @@ export const RenderApprovalItem = (props: ApprovalItemProp) => {
 };
 const ApprovalList = () => {
   const { result, isWaiting, error } = useTypedSelector(state => state.async.getApprovalList);
-  const { approvalList, categoryIndices } = useTypedSelector(state => state.Approvals);
+  const { approvalList, categoryIndices, selectedItemQty } = useTypedSelector(state => state.Approvals);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -119,7 +120,9 @@ const ApprovalList = () => {
       navigation={navigation}
       route={route}
       useEffectHook={useEffect}
+      useFocusEffectHook={useFocusEffect}
       trackEventCall={trackEvent}
+      selectedItemQty={selectedItemQty}
     />
   );
 };
@@ -130,18 +133,20 @@ interface ApprovalListProps {
   result: any;
   filteredList: ApprovalCategory[];
   categoryIndices: number[];
+  selectedItemQty: number;
   apiStart: number;
   setApiStart: Function;
   navigation: NavigationProp<any>;
   route: Route<any>;
   useEffectHook: Function;
+  useFocusEffectHook: Function;
   trackEventCall: (eventName: string, params?: any) => void;
 }
 
 export const ApprovalListScreen = (props: ApprovalListProps) => {
   const {
     dispatch, error, isWaiting, result, trackEventCall, apiStart, setApiStart,
-    useEffectHook, navigation, route, filteredList, categoryIndices
+    useEffectHook, useFocusEffectHook, navigation, route, filteredList, categoryIndices, selectedItemQty
   } = props;
 
   // Get Approval List Items
@@ -153,6 +158,20 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
     }).catch(() => {});
   }), [navigation]);
 
+  // Device BackPress Listener
+  useFocusEffectHook(() => {
+    const onBackPress = () => {
+      // Clears selected Approval items on system back press to re-enable bottom tab navigator
+      if (selectedItemQty > 0) {
+        dispatch(toggleAllItems(false));
+        return true;
+      }
+      return false;
+    };
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+  });
   // Get Approval List API
   useEffectHook(() => {
     // on api success
@@ -215,21 +234,32 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
   }
   // TODO use FlatListEmptyComponent prop for rendering empty data in latest version of RN
   return (
-    <View>
-      <FlatList
-        data={filteredList}
-        keyExtractor={(item: ApprovalCategory, index: number) => {
-          if (item.categoryHeader) {
-            return item.categoryDescription.toString();
-          }
-          return item.itemNbr + index.toString();
-        }}
-        renderItem={({ item }) => <RenderApprovalItem item={item} dispatch={dispatch} />}
-        stickyHeaderIndices={categoryIndices.length !== 0 ? categoryIndices : undefined}
+    <View style={styles.mainContainer}>
+      <View style={styles.mainContainer}>
+        <FlatList
+          data={filteredList}
+          keyExtractor={(item: ApprovalCategory, index: number) => {
+            if (item.categoryHeader) {
+              return item.categoryDescription.toString();
+            }
+            return item.itemNbr + index.toString();
+          }}
+          renderItem={({ item }) => <RenderApprovalItem item={item} dispatch={dispatch} />}
+          stickyHeaderIndices={categoryIndices.length !== 0 ? categoryIndices : undefined}
       // Default this is False, Solves flatlist rendering no data because stickyHeader updates at the same time as data
-        removeClippedSubviews={false}
-        extraData={filteredList}
-      />
+          removeClippedSubviews={false}
+          extraData={filteredList}
+        />
+      </View>
+      {selectedItemQty > 0
+        ? (
+          <ButtonBottomTab
+            reject={strings('APPROVAL.REJECT')}
+            onRejectPress={() => undefined}
+            approve={strings('APPROVAL.APPROVE')}
+            onApprovePress={() => undefined}
+          />
+        ) : null}
     </View>
   );
 };

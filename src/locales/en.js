@@ -172,6 +172,8 @@ export default {
     SELECT_ALL: 'Select all',
     DESELECT_ALL: 'Deselect all',
     SELECTED: 'selected',
-    APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.'
+    APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.',
+    APPROVE: 'Approve',
+    REJECT: 'Reject'
   }
 };
