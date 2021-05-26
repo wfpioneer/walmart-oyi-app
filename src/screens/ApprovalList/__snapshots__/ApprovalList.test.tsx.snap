@@ -87,7 +87,7 @@ exports[`ApprovalListScreen Tests rendering the approval list RenderApprovalItem
 />
 `;
 
-exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Reject for selected approval items 1`] = `
+exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Reject buttons for selected approval items 1`] = `
 <View
   style={
     Object {
