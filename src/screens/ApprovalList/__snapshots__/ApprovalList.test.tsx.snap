@@ -300,10 +300,10 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
     />
   </View>
   <ButtonBottomTab
-    approve="[missing \\"en.APPROVAL.APPROVE\\" translation]"
-    onApprovePress={[Function]}
-    onRejectPress={[Function]}
-    reject="[missing \\"en.APPROVAL.REJECT\\" translation]"
+    leftTitle="[missing \\"en.APPROVAL.REJECT\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.APPROVE\\" translation]"
   />
 </View>
 `;

@@ -254,10 +254,10 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
       {selectedItemQty > 0
         ? (
           <ButtonBottomTab
-            reject={strings('APPROVAL.REJECT')}
-            onRejectPress={() => undefined}
-            approve={strings('APPROVAL.APPROVE')}
-            onApprovePress={() => undefined}
+            leftTitle={strings('APPROVAL.REJECT')}
+            onLeftPress={() => undefined}
+            rightTitle={strings('APPROVAL.APPROVE')}
+            onRightPress={() => undefined}
           />
         ) : null}
     </View>
