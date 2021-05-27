@@ -127,7 +127,7 @@ const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) =
           height={20}
           width={72}
           radius={50}
-          style={styles.timePeriodButton}
+          style={styles.dailyButton}
           onPress={handleDailyTimePeriodChange(true)}
         />
         <Button
@@ -139,7 +139,7 @@ const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) =
           height={20}
           width={72}
           radius={50}
-          style={styles.timePeriodButton}
+          style={styles.weeklyButton}
           onPress={handleDailyTimePeriodChange(false)}
         />
       </View>

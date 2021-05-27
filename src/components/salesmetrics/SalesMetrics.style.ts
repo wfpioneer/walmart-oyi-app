@@ -43,7 +43,10 @@ const styles = StyleSheet.create({
   axisPosition: {
     marginTop: 10
   },
-  timePeriodButton: {
+  dailyButton: {
+    marginRight: 4
+  },
+  weeklyButton: {
     marginLeft: 4
   }
 });
