@@ -173,8 +173,14 @@ export default {
     DESELECT_ALL: '取消选择',
     SELECTED: '已选择',
     APPROVAL_API_ERROR: '检索审批列表出错, \n请重试',
-    APPROVE: '批准',
+    APPROVE: '审批',
     REJECT: '拒绝',
-    REVIEW: '审阅更改' // Needs proper translations
+    GO_BACK: '返回',
+    CONFIRM: '确认',
+    APPROVE_SUMMARY: '审批汇总',
+    REJECT_SUMMARY: '拒绝汇总',
+    INCREASES: '增加总量',
+    DECREASES: '减少总量',
+    REVIEW: '浏览变化'
   }
 };

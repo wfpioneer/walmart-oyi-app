@@ -175,6 +175,12 @@ export default {
     APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.',
     APPROVE: 'Approve',
     REJECT: 'Reject',
+    GO_BACK: 'Go back',
+    CONFIRM: 'Confirm',
+    APPROVE_SUMMARY: 'Summary of approvals',
+    REJECT_SUMMARY: 'Summary of rejections',
+    INCREASES: 'All increases',
+    DECREASES: 'All Decreases',
     REVIEW: 'Review changes'
   }
 };

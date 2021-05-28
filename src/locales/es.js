@@ -174,6 +174,12 @@ export default {
     APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprovación.\nPor favor inténtalo de nuevo',
     APPROVE: 'Aprovar',
     REJECT: 'Rechazar',
-    REVIEW: 'Revisar cambios' // Needs proper transaltions
+    GO_BACK: 'Ir atrás',
+    CONFIRM: 'Confirmar',
+    APPROVE_SUMMARY: 'Resumen de aprobaciones',
+    REJECT_SUMMARY: 'Resumen de Rechazos',
+    INCREASES: 'Todos los incrementos',
+    DECREASES: 'Todos los incrementos',
+    REVIEW: 'Revisar cambios'
   }
 };
