@@ -5,14 +5,14 @@ import Button from '../buttons/Button';
 import styles from './ButtonTabCard.style';
 
 interface ButtonBottomTabProps{
-  reject: string;
-  onRejectPress: () => void;
-  approve: string;
-  onApprovePress: () => void;
+  leftTitle: string;
+  onLeftPress: () => void;
+  rightTitle: string;
+  onRightPress: () => void;
 }
 export const ButtonBottomTab = (props: ButtonBottomTabProps) => {
   const {
-    reject, onRejectPress, approve, onApprovePress
+    leftTitle, onLeftPress, rightTitle, onRightPress
   } = props;
   return (
     <View style={styles.mainBarContainer}>
@@ -20,14 +20,14 @@ export const ButtonBottomTab = (props: ButtonBottomTabProps) => {
         style={styles.rejectButton}
         backgroundColor={COLOR.WHITE}
         titleColor={COLOR.MAIN_THEME_COLOR}
-        title={reject}
-        onPress={() => onRejectPress}
+        title={leftTitle}
+        onPress={() => onLeftPress()}
       />
       <Button
         style={styles.approveButton}
-        title={approve}
+        title={rightTitle}
         backgroundColor={COLOR.MAIN_THEME_COLOR}
-        onPress={() => onApprovePress}
+        onPress={() => onRightPress()}
       />
     </View>
   );

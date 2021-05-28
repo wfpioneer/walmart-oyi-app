@@ -123,6 +123,7 @@ const ApprovalList = () => {
       useFocusEffectHook={useFocusEffect}
       trackEventCall={trackEvent}
       selectedItemQty={selectedItemQty}
+      validateSessionCall={validateSession}
     />
   );
 };
@@ -141,12 +142,14 @@ interface ApprovalListProps {
   useEffectHook: Function;
   useFocusEffectHook: Function;
   trackEventCall: (eventName: string, params?: any) => void;
+  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
 
 export const ApprovalListScreen = (props: ApprovalListProps) => {
   const {
     dispatch, error, isWaiting, result, trackEventCall, apiStart, setApiStart,
-    useEffectHook, useFocusEffectHook, navigation, route, filteredList, categoryIndices, selectedItemQty
+    useEffectHook, useFocusEffectHook, navigation, route, filteredList,
+    categoryIndices, selectedItemQty, validateSessionCall
   } = props;
 
   // Get Approval List Items
@@ -192,6 +195,19 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
       });
     }
   }, [error, isWaiting, result]);
+
+  const handleApproveSummary = () => {
+    validateSessionCall(navigation, route.name).then(() => {
+      trackEvent('handle_approve_summary_click');
+      navigation.navigate('ApproveSummary');
+    });
+  };
+  const handleRejectSummary = () => {
+    validateSessionCall(navigation, route.name).then(() => {
+      trackEvent('handle_reject_summary_click');
+      navigation.navigate('ApproveSummary');
+    });
+  };
 
   if (result?.status === 204) {
     return (
@@ -254,10 +270,10 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
       {selectedItemQty > 0
         ? (
           <ButtonBottomTab
-            reject={strings('APPROVAL.REJECT')}
-            onRejectPress={() => undefined}
-            approve={strings('APPROVAL.APPROVE')}
-            onApprovePress={() => undefined}
+            leftTitle={strings('APPROVAL.REJECT')}
+            onLeftPress={() => handleRejectSummary()}
+            rightTitle={strings('APPROVAL.APPROVE')}
+            onRightPress={() => handleApproveSummary()}
           />
         ) : null}
     </View>

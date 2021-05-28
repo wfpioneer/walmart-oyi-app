@@ -10,6 +10,7 @@ import { strings } from '../locales';
 import styles from './ApprovalListNavigator.style';
 import { toggleAllItems } from '../state/actions/Approvals';
 import { useTypedSelector } from '../state/reducers/RootReducer';
+import { ApprovalSummary } from '../screens/ApprovalSummary/ApprovalSummary';
 
 const Stack = createStackNavigator();
 
@@ -89,7 +90,20 @@ export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps) => {
           headerLeftContainerStyle: styles.headerLeftPadding,
           headerLeft: (selectedItemQty !== 0 && !selectAll) ? () => renderCloseButton(dispatch) : undefined
         }}
-
+      />
+      <Stack.Screen
+        name="ApproveSummary"
+        component={ApprovalSummary}
+        options={{
+          headerTitle: strings('APPROVAL.REVIEW')
+        }}
+      />
+      <Stack.Screen
+        name="RejectSummary"
+        component={ApprovalSummary}
+        options={{
+          headerTitle: strings('APPROVAL.REVIEW')
+        }}
       />
     </Stack.Navigator>
   );
