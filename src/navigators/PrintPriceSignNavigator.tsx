@@ -9,6 +9,7 @@ import PrintPriceSign from '../screens/PrintPriceSign/PrintPriceSign';
 import PrintQueue from '../screens/PrintQueue/PrintQueue';
 import { ChangePrinter } from '../screens/PrintPriceSign/ChangePrinter/ChangePrinter';
 import PrinterList from '../screens/PrintPriceSign/PrinterList/PrinterList';
+import styles from './PrintPriceSignNavigator.styles';
 
 const Stack = createStackNavigator();
 
@@ -33,7 +34,7 @@ const PrintPriceSignNavigator = () => {
         options={{
           headerTitle: strings('PRINT.MAIN_TITLE'),
           headerTitleAlign: 'left',
-          headerTitleStyle: { fontSize: 18 },
+          headerTitleStyle: styles.headerTitle,
           headerBackTitleVisible: false,
           headerLeft: props => (
             // Shouldn't need to do this, but not showing on its own for some reason
@@ -51,9 +52,9 @@ const PrintPriceSignNavigator = () => {
         options={{
           headerTitle: strings('PRINT.PRINTER_LIST'),
           headerTitleAlign: 'left',
-          headerTitleStyle: { fontSize: 18 },
+          headerTitleStyle: styles.headerTitle,
           headerRight: () => (
-            <TouchableOpacity style={{ paddingHorizontal: 10 }} onPress={() => navigation.navigate('ChangePrinter')}>
+            <TouchableOpacity style={styles.changePrinterButton} onPress={() => navigation.navigate('ChangePrinter')}>
               <MaterialCommunityIcons name="plus" size={30} color={COLOR.WHITE} />
             </TouchableOpacity>
           )
@@ -65,7 +66,7 @@ const PrintPriceSignNavigator = () => {
         options={{
           headerTitle: strings('PRINT.CHANGE_PRINTER'),
           headerTitleAlign: 'left',
-          headerTitleStyle: { fontSize: 18 }
+          headerTitleStyle: styles.headerTitle
         }}
       />
       <Stack.Screen
@@ -74,7 +75,7 @@ const PrintPriceSignNavigator = () => {
         options={{
           headerTitle: strings('PRINT.QUEUE_TITLE'),
           headerTitleAlign: 'left',
-          headerTitleStyle: { fontSize: 18 },
+          headerTitleStyle: styles.headerTitle,
           headerBackTitleVisible: false,
           headerLeft: props => (
             // Shouldn't need to do this, but not showing on its own for some reason

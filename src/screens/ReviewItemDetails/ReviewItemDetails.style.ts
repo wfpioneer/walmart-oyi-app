@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1
   },
+  locationContainer: {
+    paddingHorizontal: 8
+  },
   locationDetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -122,6 +125,12 @@ const styles = StyleSheet.create({
   dismissButton: {
     width: '70%',
     marginTop: 16
+  },
+  infoIcon: {
+    paddingRight: 6
+  },
+  labelIcon: {
+    marginLeft: -4
   }
 });
 
