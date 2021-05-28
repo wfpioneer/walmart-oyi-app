@@ -76,7 +76,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="unchecked"
@@ -350,7 +350,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="unchecked"
@@ -620,7 +620,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="checked"
@@ -885,7 +885,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="unchecked"

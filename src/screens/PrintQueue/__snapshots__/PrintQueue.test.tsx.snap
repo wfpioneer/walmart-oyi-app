@@ -8,7 +8,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
     }
   }
 >
-  <Component
+  <Modal
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
@@ -18,8 +18,8 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
       itemIndexToEdit={0}
       setItemIndexToEdit={[MockFunction]}
     />
-  </Component>
-  <ScrollViewMock
+  </Modal>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "stretch",
@@ -171,7 +171,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
         </View>
       </View>
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -380,7 +380,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
     }
   }
 >
-  <Component
+  <Modal
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
@@ -390,8 +390,8 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       itemIndexToEdit={-1}
       setItemIndexToEdit={[MockFunction]}
     />
-  </Component>
-  <ScrollViewMock
+  </Modal>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "stretch",
@@ -1659,7 +1659,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         </View>
       </View>
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -1704,7 +1704,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
     }
   }
 >
-  <Component
+  <Modal
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
@@ -1714,8 +1714,8 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
       itemIndexToEdit={-1}
       setItemIndexToEdit={[MockFunction]}
     />
-  </Component>
-  <ScrollViewMock
+  </Modal>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "stretch",
@@ -1894,7 +1894,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
         [missing "en.PRINT.PRINT_SERVICE_ERROR" translation]
       </Text>
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -1939,7 +1939,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
     }
   }
 >
-  <Component
+  <Modal
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
@@ -1949,8 +1949,8 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
       itemIndexToEdit={-1}
       setItemIndexToEdit={[MockFunction]}
     />
-  </Component>
-  <ScrollViewMock
+  </Modal>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "stretch",
@@ -2102,7 +2102,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
         </View>
       </View>
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
