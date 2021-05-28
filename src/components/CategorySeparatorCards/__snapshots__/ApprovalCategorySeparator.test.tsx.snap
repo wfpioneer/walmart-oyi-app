@@ -36,7 +36,7 @@ exports[`Approval CategorySeparator Component Renders the approval category chec
       }
     }
   >
-    <ForwardRef
+    <withTheme(Checkbox)
       color="#0071e9"
       onPress={[Function]}
       status="checked"
@@ -82,7 +82,7 @@ exports[`Approval CategorySeparator Component Renders the approval category head
       }
     }
   >
-    <ForwardRef
+    <withTheme(Checkbox)
       color="#0071e9"
       onPress={[Function]}
       status="unchecked"

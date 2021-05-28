@@ -76,7 +76,7 @@ exports[`ApprovalCard Component Renders an Approval Item with a decreased change
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="unchecked"
@@ -357,7 +357,7 @@ exports[`ApprovalCard Component Renders an Approval Item with a positive price c
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="unchecked"
@@ -634,7 +634,7 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "checked" 
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="checked"
@@ -911,7 +911,7 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "unchecked
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="unchecked"
