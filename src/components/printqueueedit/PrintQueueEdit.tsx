@@ -122,18 +122,18 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
           <Text>{`${strings(`PRINT.${itemToEdit.paperSize}`)}`}</Text>
         </View>
         <View style={styles.printerContainer}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.printerAlignment}>
             <MaterialCommunityIcon name="printer-check" size={24} />
-            <View style={{ marginLeft: 12 }}>
+            <View style={styles.printerTextMargin}>
               <Text>{strings('PRINT.FRONT_DESK')}</Text>
-              <Text style={{ fontSize: 12, color: COLOR.GREY_600 }}>{strings('GENERICS.DEFAULT')}</Text>
+              <Text style={styles.genericTextLabel}>{strings('GENERICS.DEFAULT')}</Text>
             </View>
           </View>
         </View>
         <Button
           title={strings('GENERICS.SAVE')}
           type={Button.Type.PRIMARY}
-          style={{ width: '100%' }}
+          style={styles.buttonWidth}
           onPress={handleSave}
           disabled={!isValidQty}
         />

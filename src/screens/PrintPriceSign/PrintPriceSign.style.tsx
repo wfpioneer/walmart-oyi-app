@@ -115,6 +115,24 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
     paddingLeft: 10
+  },
+  sizeBtnContainer: {
+    flexDirection: 'row',
+    marginVertical: 4
+  },
+  sizeBtnMargin: {
+    marginHorizontal: 6
+  },
+  printerNameContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  printTextMargin: {
+    marginLeft: 12
+  },
+  printerDesc: {
+    fontSize: 12,
+    color: COLOR.GREY_600
   }
 });
 
