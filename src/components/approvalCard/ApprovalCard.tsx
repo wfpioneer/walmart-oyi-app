@@ -21,9 +21,9 @@ export interface ApprovalCardProps{
   dispatch: Dispatch<any>;
 }
 
-export const positiveQtyChange = (oldQty: number, newQty: number) => newQty > oldQty;
+export const positiveQtyChange = (oldQty: number, newQty: number): boolean => newQty > oldQty;
 
-export const renderQuantityChange = (oldQuantity?: number, newQuantity?: number, dollarChange?: number) => {
+export const renderQuantityChange = (oldQuantity?: number, newQuantity?: number, dollarChange?: number):JSX.Element => {
   const oldQty = oldQuantity || 0;
   const newQty = newQuantity || 0;
   const priceChange = dollarChange || 0;
@@ -36,7 +36,7 @@ export const renderQuantityChange = (oldQuantity?: number, newQuantity?: number,
       </View>
       <View style={styles.quantityCalc}>
         <Text style={styles.quantityHeader}>{strings('APPROVAL.OH_CHANGE')}</Text>
-        {(oldQty && newQty && priceChange) !== 0
+        {(oldQty || newQty || priceChange) !== 0
           ? (
             <View style={styles.onHandsChange}>
               <Text style={positiveQtyChange(oldQty, newQty) ? styles.positiveChange : styles.negativeChange}>
@@ -63,7 +63,7 @@ export const renderQuantityChange = (oldQuantity?: number, newQuantity?: number,
     </View>
   );
 };
-export const ApprovalCard = (props: ApprovalCardProps) => {
+export const ApprovalCard = (props: ApprovalCardProps):JSX.Element => {
   const {
     image, itemNbr, itemName, oldQuantity,
     newQuantity, dollarChange, userId, daysLeft, isChecked, dispatch
