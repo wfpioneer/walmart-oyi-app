@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator, BackHandler, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
@@ -33,6 +33,23 @@ interface ApprovalItemProp {
   item: ApprovalCategory;
   dispatch: Dispatch<any>;
 }
+interface ApprovalListProps {
+  dispatch: Dispatch<any>;
+  error: any;
+  isWaiting: boolean;
+  result: any;
+  filteredList: ApprovalCategory[];
+  categoryIndices: number[];
+  selectedItemQty: number;
+  apiStart: number;
+  setApiStart: React.Dispatch<React.SetStateAction<number>>;
+  navigation: NavigationProp<any>;
+  route: Route<any>;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useFocusEffectHook: (effect: EffectCallback) => void;
+  trackEventCall: (eventName: string, params?: any) => void;
+}
+
 export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryFilter => {
   const sortedData = [...listData];
 
@@ -65,7 +82,7 @@ export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryF
   return { filteredData: returnData as ApprovalCategory[], headerIndices };
 };
 
-export const RenderApprovalItem = (props: ApprovalItemProp) => {
+export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
   const {
     imageUrl, itemNbr, itemName, oldQuantity,
     newQuantity, dollarChange, initiatedUserId, initiatedTimestamp,
@@ -100,50 +117,8 @@ export const RenderApprovalItem = (props: ApprovalItemProp) => {
     />
   );
 };
-const ApprovalList = () => {
-  const { result, isWaiting, error } = useTypedSelector(state => state.async.getApprovalList);
-  const { approvalList, categoryIndices, selectedItemQty } = useTypedSelector(state => state.Approvals);
-  const [apiStart, setApiStart] = useState(0);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const route = useRoute();
-  return (
-    <ApprovalListScreen
-      filteredList={approvalList}
-      categoryIndices={categoryIndices}
-      dispatch={dispatch}
-      result={result}
-      error={error}
-      isWaiting={isWaiting}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      navigation={navigation}
-      route={route}
-      useEffectHook={useEffect}
-      useFocusEffectHook={useFocusEffect}
-      trackEventCall={trackEvent}
-      selectedItemQty={selectedItemQty}
-    />
-  );
-};
-interface ApprovalListProps {
-  dispatch: Dispatch<any>;
-  error: any;
-  isWaiting: boolean;
-  result: any;
-  filteredList: ApprovalCategory[];
-  categoryIndices: number[];
-  selectedItemQty: number;
-  apiStart: number;
-  setApiStart: Function;
-  navigation: NavigationProp<any>;
-  route: Route<any>;
-  useEffectHook: Function;
-  useFocusEffectHook: Function;
-  trackEventCall: (eventName: string, params?: any) => void;
-}
 
-export const ApprovalListScreen = (props: ApprovalListProps) => {
+export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   const {
     dispatch, error, isWaiting, result, trackEventCall, apiStart, setApiStart,
     useEffectHook, useFocusEffectHook, navigation, route, filteredList, categoryIndices, selectedItemQty
@@ -193,7 +168,6 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
     }
   }, [error, isWaiting, result]);
 
-
   if (isWaiting) {
     return (
       <ActivityIndicator
@@ -238,17 +212,16 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
           renderItem={({ item }) => <RenderApprovalItem item={item} dispatch={dispatch} />}
           stickyHeaderIndices={categoryIndices.length !== 0 ? categoryIndices : undefined}
       // Default this is False, Solves flatlist rendering no data because stickyHeader updates at the same time as data
-      removeClippedSubviews={false}
-      ListEmptyComponent={(
-        <View style={styles.emptyContainer}>
-          {/* Placeholder for empty approval list subject to change */}
-          <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
-          <Text> The Approval List is Empty </Text>
-        </View>
+          removeClippedSubviews={false}
+          ListEmptyComponent={(
+            <View style={styles.emptyContainer}>
+              {/* Placeholder for empty approval list subject to change */}
+              <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
+              <Text> The Approval List is Empty </Text>
+            </View>
       )}
-      
-      extraData={filteredList}
-    />
+          extraData={filteredList}
+        />
       </View>
       {selectedItemQty > 0
         ? (
@@ -260,6 +233,33 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
           />
         ) : null}
     </View>
+  );
+};
+
+const ApprovalList = (): JSX.Element => {
+  const { result, isWaiting, error } = useTypedSelector(state => state.async.getApprovalList);
+  const { approvalList, categoryIndices, selectedItemQty } = useTypedSelector(state => state.Approvals);
+  const [apiStart, setApiStart] = useState(0);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const route = useRoute();
+  return (
+    <ApprovalListScreen
+      filteredList={approvalList}
+      categoryIndices={categoryIndices}
+      dispatch={dispatch}
+      result={result}
+      error={error}
+      isWaiting={isWaiting}
+      apiStart={apiStart}
+      setApiStart={setApiStart}
+      navigation={navigation}
+      route={route}
+      useEffectHook={useEffect}
+      useFocusEffectHook={useFocusEffect}
+      trackEventCall={trackEvent}
+      selectedItemQty={selectedItemQty}
+    />
   );
 };
 
