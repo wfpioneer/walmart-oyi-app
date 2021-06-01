@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
+<View
+  style={
+    Object {
+      "alignContent": "center",
+      "backgroundColor": "#ffffffff",
+      "elevation": 10,
+      "flexDirection": "row",
+      "height": 80,
+      "justifyContent": "space-evenly",
+    }
+  }
+>
+  <Button
+    backgroundColor="#ffffffff"
+    disabled={false}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderColor": "#0071e9",
+        "borderRadius": 10,
+        "borderStyle": "solid",
+        "borderWidth": 2,
+        "width": "45%",
+      }
+    }
+    title="LeftButtonTitle"
+    titleColor="#0071e9"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "alignSelf": "center",
+        "width": "45%",
+      }
+    }
+    title="RightButtonTitle"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+</View>
+`;

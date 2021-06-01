@@ -10,7 +10,8 @@ interface ButtonBottomTabProps{
   rightTitle: string;
   onRightPress: () => void;
 }
-export const ButtonBottomTab = (props: ButtonBottomTabProps) => {
+
+export const ButtonBottomTab = (props: ButtonBottomTabProps): JSX.Element => {
   const {
     leftTitle, onLeftPress, rightTitle, onRightPress
   } = props;
