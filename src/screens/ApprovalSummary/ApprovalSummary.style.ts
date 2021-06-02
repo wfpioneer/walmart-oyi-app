@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flexDirection: 'column',
-    flex: 0.3,
-    justifyContent: 'flex-end',
+    flex: 0.4,
+    justifyContent: 'center',
     marginHorizontal: 15
   },
   titleText: {
@@ -21,12 +21,13 @@ const styles = StyleSheet.create({
   quantityContainer: {
     flex: 1,
     marginHorizontal: 15,
-    justifyContent: 'space-evenly'
+    justifyContent: 'flex-start'
   },
   itemQtyText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: COLOR.GREY_700
+    color: COLOR.GREY_700,
+    marginBottom: 5
   }
 
 });

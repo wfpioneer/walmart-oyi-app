@@ -28,12 +28,11 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps) => {
         <Text style={styles.titleText}>
           {route.name === 'ApproveSummary'
             ? strings('APPROVAL.APPROVE_SUMMARY') : strings('APPROVAL.REJECT_SUMMARY')}
-
         </Text>
       </View>
       <View style={styles.quantityContainer}>
-        <Text style={styles.itemQtyText}>{`${strings('APPROVAL.DECREASES')} (0 items)`}</Text>
-        {renderQuantityChange()}
+        <Text style={styles.itemQtyText}>{`${strings('APPROVAL.DECREASES')} (30 items)`}</Text>
+        {renderQuantityChange(120, 100, 350)}
       </View>
       <View style={styles.quantityContainer}>
         <Text style={styles.itemQtyText}>{`${strings('APPROVAL.INCREASES')} (0 items)`}</Text>

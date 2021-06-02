@@ -176,7 +176,7 @@ export default {
     REJECT: 'Rechazar',
     GO_BACK: 'Ir atrás',
     CONFIRM: 'Confirmar',
-    APPROVE_SUMMARY: 'Resumen de aprobaciones',
+    APPROVE_SUMMARY: 'Resumen de Aprobaciones',
     REJECT_SUMMARY: 'Resumen de Rechazos',
     INCREASES: 'Todos los incrementos',
     DECREASES: 'Todos los incrementos',
