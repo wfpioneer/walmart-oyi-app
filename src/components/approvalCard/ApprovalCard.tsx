@@ -36,7 +36,7 @@ export const renderQuantityChange = (oldQuantity?: number, newQuantity?: number,
       </View>
       <View style={styles.quantityCalc}>
         <Text style={styles.quantityHeader}>{strings('APPROVAL.OH_CHANGE')}</Text>
-        {(oldQty && newQty && priceChange) !== 0
+        {(oldQty || newQty || priceChange) !== 0
           ? (
             <View style={styles.onHandsChange}>
               <Text style={positiveQtyChange(oldQty, newQty) ? styles.positiveChange : styles.negativeChange}>
@@ -51,9 +51,9 @@ export const renderQuantityChange = (oldQuantity?: number, newQuantity?: number,
           )
           : (
             <View style={styles.onHandsChange}>
-              <Text style={styles.resultText}>$0</Text>
+              <Text style={styles.noOHChange}>$0</Text>
               <Text style={styles.divider}> | </Text>
-              <Text style={styles.resultText}>{0}</Text>
+              <Text style={styles.noOHChange}>{0}</Text>
             </View>
           )}
       </View>
@@ -68,7 +68,6 @@ export const ApprovalCard = (props: ApprovalCardProps) => {
     image, itemNbr, itemName, oldQuantity,
     newQuantity, dollarChange, userId, daysLeft, isChecked, dispatch
   } = props;
-  // TODO The CheckBox will need to changed for the `Select/Deselect All` tasks and add a proper tests
 
   return (
     <View style={styles.cardContainer}>
