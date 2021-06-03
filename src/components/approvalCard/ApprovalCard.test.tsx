@@ -1,8 +1,9 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
-  ApprovalCard, ApprovalCardProps, positiveQtyChange, renderQuantityChange
+  ApprovalCard, ApprovalCardProps, renderQuantityChange, qtyStyleChange
 } from './ApprovalCard';
+import styles from './ApprovalCard.style';
 
 describe('ApprovalCard Component', () => {
   const positiveItem: ApprovalCardProps = {
@@ -126,24 +127,28 @@ describe('ApprovalCard Component', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Renders all zeroes for qty change if no data is passed', () => {
+    it('Renders no change arrow if oldOHQuantity and newOHQuantity are zero', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderQuantityChange()
+        renderQuantityChange(0,0,0)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
 
-  describe('Tests PositiveQtyChange:', () => {
-    it('PositiveQtyChange returns true for higher new quantity change', () => {
+  describe('Tests qtyStyleChange function:', () => {
+    it('qtyStyleChange returns positiveChange styling for increased new quantity change', () => {
       const { oldQuantity, newQuantity } = positiveItem;
-      expect(positiveQtyChange(oldQuantity, newQuantity)).toBe(true);
+      expect(qtyStyleChange(oldQuantity, newQuantity)).toBe(styles.positiveChange);
     });
 
-    it('PositiveQtyChange returns false for lower new quantity change', () => {
+    it('qtyStyleChange returns negativeChange styling for decreased new quantity change', () => {
       const { oldQuantity, newQuantity } = negativeItem;
-      expect(positiveQtyChange(oldQuantity, newQuantity)).toBe(false);
+      expect(qtyStyleChange(oldQuantity, newQuantity)).toBe(styles.negativeChange);
+    });
+    it('qtyStyleChange returns noOHChange styling if oldQuantity & newQuantity equal zero ', () => {
+     const zeroQty = 0;
+      expect(qtyStyleChange(zeroQty, zeroQty)).toBe(styles.noOHChange);
     });
   });
 });

@@ -87,6 +87,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: COLOR.TRACKER_GREY
   },
+  noOHChange: {
+    fontSize: 16,
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color: COLOR.TRACKER_GREY
+  },
   negativeChange: {
     fontSize: 16,
     alignSelf: 'flex-start',
