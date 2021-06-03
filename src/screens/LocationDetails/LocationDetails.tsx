@@ -215,6 +215,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
     setApiStart(moment().valueOf());
     dispatch(
       deleteLocation({
+        headers: {itemNbr: itemDetails.itemNbr},
         upc: itemDetails.upcNbr,
         sectionId: locToConfirm.locationName,
         locationTypeNbr: locToConfirm.locationTypeNbr
