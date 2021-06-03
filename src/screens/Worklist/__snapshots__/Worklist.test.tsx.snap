@@ -117,6 +117,7 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders error for 
     style={
       Object {
         "marginVertical": 10,
+        "textAlign": "center",
       }
     }
   >

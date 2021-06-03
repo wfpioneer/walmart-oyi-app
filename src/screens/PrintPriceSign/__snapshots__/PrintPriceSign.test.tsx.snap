@@ -260,7 +260,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     }
   }
 >
-  <ScrollViewMock
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "stretch",
@@ -355,7 +355,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           type={2}
           width={30}
         />
-        <Component
+        <TextInput
           allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
@@ -380,7 +380,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           underlineColorAndroid="transparent"
         >
           1
-        </Component>
+        </TextInput>
         <IconButton
           backgroundColor="#bdbdbd"
           disabled={false}
@@ -564,7 +564,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         width={-1}
       />
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -602,7 +602,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     }
   }
 >
-  <ScrollViewMock
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "stretch",
@@ -697,7 +697,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           type={2}
           width={30}
         />
-        <Component
+        <TextInput
           allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
@@ -722,7 +722,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           underlineColorAndroid="transparent"
         >
           101
-        </Component>
+        </TextInput>
         <IconButton
           backgroundColor="#bdbdbd"
           disabled={false}
@@ -917,7 +917,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         width={-1}
       />
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -981,7 +981,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     }
   }
 >
-  <ScrollViewMock
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "stretch",
@@ -1076,7 +1076,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           type={2}
           width={30}
         />
-        <Component
+        <TextInput
           allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
@@ -1101,7 +1101,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           underlineColorAndroid="transparent"
         >
           1
-        </Component>
+        </TextInput>
         <IconButton
           backgroundColor="#bdbdbd"
           disabled={false}
@@ -1312,7 +1312,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         [missing "en.PRINT.PRINT_SERVICE_ERROR" translation]
       </Text>
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
