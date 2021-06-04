@@ -174,6 +174,7 @@ export default {
     SELECTED: 'selected',
     APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.',
     APPROVE: 'Approve',
-    REJECT: 'Reject'
+    REJECT: 'Reject',
+    LIST_NOT_FOUND: 'The Approval List is Empty'
   }
 };

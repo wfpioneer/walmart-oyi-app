@@ -217,7 +217,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
             <View style={styles.emptyContainer}>
               {/* Placeholder for empty approval list subject to change */}
               <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
-              <Text> The Approval List is Empty </Text>
+              <Text> {strings('APPROVAL.LIST_NOT_FOUND')} </Text>
             </View>
       )}
           extraData={filteredList}
