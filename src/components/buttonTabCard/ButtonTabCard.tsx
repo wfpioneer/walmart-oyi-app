@@ -23,14 +23,12 @@ export const ButtonBottomTab = (props: ButtonBottomTabProps): JSX.Element => {
         title={leftTitle}
         radius={5}
         type={Button.Type.SOLID_WHITE}
-        width={'45%'}
         backgroundColor={COLOR.MAIN_THEME_COLOR}
         onPress={() => onLeftPress()}
       />
       <Button
         style={styles.buttonAlign}
         title={rightTitle}
-        width={'45%'}
         backgroundColor={COLOR.MAIN_THEME_COLOR}
         onPress={() => onRightPress()}
       />

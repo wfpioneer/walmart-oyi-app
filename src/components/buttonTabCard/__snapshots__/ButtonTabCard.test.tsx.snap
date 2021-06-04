@@ -22,6 +22,7 @@ exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
     style={
       Object {
         "alignSelf": "center",
+        "width": "45%",
       }
     }
     title="LeftButtonTitle"
@@ -29,7 +30,7 @@ exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
     titleFontSize={16}
     titleFontWeight="normal"
     type={2}
-    width="45%"
+    width={-1}
   />
   <Button
     backgroundColor="#0071e9"
@@ -40,6 +41,7 @@ exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
     style={
       Object {
         "alignSelf": "center",
+        "width": "45%",
       }
     }
     title="RightButtonTitle"
@@ -47,7 +49,7 @@ exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
     titleFontSize={16}
     titleFontWeight="normal"
     type={1}
-    width="45%"
+    width={-1}
   />
 </View>
 `;

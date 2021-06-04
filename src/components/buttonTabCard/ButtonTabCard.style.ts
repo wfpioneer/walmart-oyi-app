@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
   },
   buttonAlign: {
     alignSelf: 'center',
-  },
+    width: '45%'
+  }
 });
 
 export default styles;
