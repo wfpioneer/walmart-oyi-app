@@ -145,11 +145,10 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
     }
   }, []);
 
-  // TODO use beforeRemove listener (5.7+) when updating RN libraries to latest version
   // Navigation Listener
   useEffectHook(() => {
     // Resets location api response data when navigating off-screen
-    navigation.addListener('blur', () => {
+    navigation.addListener('beforeRemove', () => {
       dispatch({ type: 'API/ADD_LOCATION/RESET' });
       dispatch({ type: 'API/EDIT_LOCATION/RESET' });
     });
@@ -266,6 +265,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
             { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: locType });
           setApiStart(moment().valueOf());
           dispatch(addLocation({
+            headers: {itemNbr: itemLocDetails.itemNbr},
             upc: itemLocDetails.upcNbr,
             sectionId: loc,
             locationTypeNbr: locType
@@ -284,6 +284,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
             { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: locType });
           setApiStart(moment().valueOf());
           dispatch(editLocation({
+            headers: {itemNbr: itemLocDetails.itemNbr},
             upc: itemLocDetails.upcNbr,
             sectionId: currentLocation.locationName,
             newSectionId: loc,

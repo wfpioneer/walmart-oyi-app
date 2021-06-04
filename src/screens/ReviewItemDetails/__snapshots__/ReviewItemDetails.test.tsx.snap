@@ -753,7 +753,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   }
 >
-  <Component
+  <Modal
     hardwareAccelerated={false}
     transparent={true}
     visible={false}
@@ -837,7 +837,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         </View>
       </View>
     </View>
-  </Component>
+  </Modal>
   <View
     style={
       Object {
@@ -892,7 +892,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   }
 >
-  <Component
+  <Modal
     hardwareAccelerated={false}
     transparent={true}
     visible={false}
@@ -976,7 +976,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         </View>
       </View>
     </View>
-  </Component>
+  </Modal>
   <View
     style={
       Object {
@@ -1013,7 +1013,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   }
 >
-  <Component
+  <Modal
     hardwareAccelerated={false}
     transparent={true}
     visible={false}
@@ -1097,8 +1097,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         </View>
       </View>
     </View>
-  </Component>
-  <Component
+  </Modal>
+  <Modal
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
@@ -1109,8 +1109,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       ohQty={42}
       setOhQtyModalVisible={[MockFunction]}
     />
-  </Component>
-  <ScrollViewMock
+  </Modal>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "stretch",
@@ -1456,7 +1456,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <ForwardRef
     onPress={[Function]}
     style={
@@ -1503,7 +1503,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   }
 >
-  <Component
+  <Modal
     hardwareAccelerated={false}
     transparent={true}
     visible={false}
@@ -1587,8 +1587,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         </View>
       </View>
     </View>
-  </Component>
-  <Component
+  </Modal>
+  <Modal
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
@@ -1599,8 +1599,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       ohQty={42}
       setOhQtyModalVisible={[MockFunction]}
     />
-  </Component>
-  <ScrollViewMock
+  </Modal>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "stretch",
@@ -1946,7 +1946,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <ForwardRef
     onPress={[Function]}
     style={
