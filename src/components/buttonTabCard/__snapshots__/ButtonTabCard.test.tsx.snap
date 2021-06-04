@@ -14,7 +14,7 @@ exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
   }
 >
   <Button
-    backgroundColor="#ffffffff"
+    backgroundColor="#0071e9"
     disabled={false}
     height={45}
     onPress={[Function]}
@@ -22,19 +22,14 @@ exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
     style={
       Object {
         "alignSelf": "center",
-        "borderColor": "#0071e9",
-        "borderRadius": 10,
-        "borderStyle": "solid",
-        "borderWidth": 2,
-        "width": "45%",
       }
     }
     title="LeftButtonTitle"
     titleColor="#0071e9"
     titleFontSize={16}
     titleFontWeight="normal"
-    type={1}
-    width={-1}
+    type={2}
+    width="45%"
   />
   <Button
     backgroundColor="#0071e9"
@@ -45,7 +40,6 @@ exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
     style={
       Object {
         "alignSelf": "center",
-        "width": "45%",
       }
     }
     title="RightButtonTitle"
@@ -53,7 +47,7 @@ exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
     titleFontSize={16}
     titleFontWeight="normal"
     type={1}
-    width={-1}
+    width="45%"
   />
 </View>
 `;

@@ -18,15 +18,19 @@ export const ButtonBottomTab = (props: ButtonBottomTabProps): JSX.Element => {
   return (
     <View style={styles.mainBarContainer}>
       <Button
-        style={styles.rejectButton}
-        backgroundColor={COLOR.WHITE}
+        style={styles.buttonAlign}
         titleColor={COLOR.MAIN_THEME_COLOR}
         title={leftTitle}
+        radius={5}
+        type={Button.Type.SOLID_WHITE}
+        width={'45%'}
+        backgroundColor={COLOR.MAIN_THEME_COLOR}
         onPress={() => onLeftPress()}
       />
       <Button
-        style={styles.approveButton}
+        style={styles.buttonAlign}
         title={rightTitle}
+        width={'45%'}
         backgroundColor={COLOR.MAIN_THEME_COLOR}
         onPress={() => onRightPress()}
       />
