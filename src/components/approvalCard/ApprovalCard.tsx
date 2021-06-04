@@ -22,7 +22,7 @@ export interface ApprovalCardProps{
 }
 
 export const qtyStyleChange = (oldQty: number, newQty: number) => {
-  if ((oldQty && newQty) === 0) {
+  if (oldQty === 0 && newQty === 0) {
     return styles.noOHChange;
   }
   if (newQty > oldQty) {
@@ -41,7 +41,7 @@ export const renderQuantityChange = (oldQty: number, newQty: number, dollarChang
       <Text style={styles.quantityHeader}>{strings('APPROVAL.OH_CHANGE')}</Text>
       <View style={styles.onHandsChange}>
         <Text style={qtyStyleChange(oldQty, newQty)}>
-          {(oldQty && newQty) !== 0
+          {(oldQty !== 0 || newQty !== 0)
           && (<Octicons name={newQty > oldQty ? 'arrow-up' : 'arrow-down'} size={20} />)}
           {currencies(dollarChange)}
         </Text>
