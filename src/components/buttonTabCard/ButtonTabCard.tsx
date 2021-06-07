@@ -19,17 +19,15 @@ export const ButtonBottomTab = (props: ButtonBottomTabProps): JSX.Element => {
     <View style={styles.mainBarContainer}>
       <Button
         style={styles.buttonAlign}
-        titleColor={COLOR.MAIN_THEME_COLOR}
         title={leftTitle}
-        radius={5}
+        titleColor={COLOR.MAIN_THEME_COLOR}
         type={Button.Type.SOLID_WHITE}
-        backgroundColor={COLOR.MAIN_THEME_COLOR}
         onPress={() => onLeftPress()}
       />
       <Button
         style={styles.buttonAlign}
         title={rightTitle}
-        backgroundColor={COLOR.MAIN_THEME_COLOR}
+        type={Button.Type.PRIMARY}
         onPress={() => onRightPress()}
       />
     </View>
