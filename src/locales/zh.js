@@ -161,7 +161,6 @@ export default {
     DISPLAY: '橱窗',
     RESERVE: '库存'
   },
-  // TODO needs Mandarin translations
   APPROVAL: {
     NEW_QUANTITY: '新更改数量',
     CURRENT_QUANTITY: '当前库存数量',
@@ -171,8 +170,10 @@ export default {
     OH_CHANGE: '库存调整',
     SELECT_ALL: '选择全部',
     DESELECT_ALL: '取消选择',
-    SELECTED: 'selected',
-    APPROVAL_API_ERROR: '检索审批列表出错, \n请重试'
-
+    SELECTED: '已选择',
+    APPROVAL_API_ERROR: '检索审批列表出错, \n请重试',
+    APPROVE: '审批',
+    REJECT: '拒绝',
+    LIST_NOT_FOUND: '审批清单为空' // TODO needs proper Mandarin translations
   }
 };

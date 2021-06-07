@@ -161,18 +161,19 @@ export default {
     DISPLAY: 'Exhibición',
     RESERVE: 'Reserva'
   },
-  // TODO Needs Spanish Translations
   APPROVAL: {
-    NEW_QUANTITY: 'New Qty',
-    CURRENT_QUANTITY: 'Current qty',
-    DAYS_LEFT: '%{time} day(s) Left',
-    APPROVALS: 'Approvals',
-    APPROVE_ITEMS: 'Approve items',
-    OH_CHANGE: 'On-hands change',
-    SELECT_ALL: 'Select all',
-    DESELECT_ALL: 'Deselect all',
-    SELECTED: 'selected',
-    APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprovación.\nPor favor inténtalo de nuevo'
-
+    NEW_QUANTITY: 'Nueva Cantidad',
+    CURRENT_QUANTITY: 'Cantidad Actual',
+    DAYS_LEFT: '%{time} día(s) restantes',
+    APPROVALS: 'Aprovaciones',
+    APPROVE_ITEMS: 'Aprovar artículos',
+    OH_CHANGE: 'Cambio de Existencia',
+    SELECT_ALL: 'Seleccionar Todo',
+    DESELECT_ALL: 'Deseleccionar Todo',
+    SELECTED: 'Seleccionado',
+    APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprovación.\nPor favor inténtalo de nuevo',
+    APPROVE: 'Aprobar',
+    REJECT: 'Rechazar',
+    LIST_NOT_FOUND: 'La lista de aprobaciones está vacía'  // TODO needs proper Spanish translations
   }
 };
