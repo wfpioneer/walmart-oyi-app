@@ -36,10 +36,15 @@ const styles = StyleSheet.create({
     width: '80%',
     alignSelf: 'center'
   },
-  divider: {
+  quantityDivider: {
     marginHorizontal: 4,
     color: COLOR.GREY_700,
     fontSize: 16
+  },
+  timeLeftDivider: {
+    marginHorizontal: 4,
+    color: COLOR.SHIP_COVE,
+    fontSize: 14
   },
   quantityCalc: {
     flexDirection: 'row',

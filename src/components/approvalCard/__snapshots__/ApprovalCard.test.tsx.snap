@@ -115,8 +115,8 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
       <Text
         style={
           Object {
-            "color": "#616161",
-            "fontSize": 16,
+            "color": "#8492a8",
+            "fontSize": 14,
             "marginHorizontal": 4,
           }
         }
@@ -393,8 +393,8 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
       <Text
         style={
           Object {
-            "color": "#616161",
-            "fontSize": 16,
+            "color": "#8492a8",
+            "fontSize": 14,
             "marginHorizontal": 4,
           }
         }
@@ -667,8 +667,8 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
       <Text
         style={
           Object {
-            "color": "#616161",
-            "fontSize": 16,
+            "color": "#8492a8",
+            "fontSize": 14,
             "marginHorizontal": 4,
           }
         }
@@ -936,8 +936,8 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
       <Text
         style={
           Object {
-            "color": "#616161",
-            "fontSize": 16,
+            "color": "#8492a8",
+            "fontSize": 14,
             "marginHorizontal": 4,
           }
         }

@@ -45,7 +45,7 @@ export const renderQuantityChange = (oldQty: number, newQty: number, dollarChang
           && (<Octicons name={newQty > oldQty ? 'arrow-up' : 'arrow-down'} size={20} />)}
           {currencies(dollarChange)}
         </Text>
-        <Text style={styles.divider}> | </Text>
+        <Text style={styles.quantityDivider}> | </Text>
         <Text style={qtyStyleChange(oldQty, newQty)}>
           {newQty - oldQty}
         </Text>
@@ -82,7 +82,7 @@ export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
         </View>
         <View style={styles.timeLeftContainer}>
           <Text style={styles.userText} ellipsizeMode="tail" numberOfLines={1}>{userId}</Text>
-          <Text style={styles.divider}>|</Text>
+          <Text style={styles.timeLeftDivider}>|</Text>
           <Text style={styles.daysText}>{strings('APPROVAL.DAYS_LEFT', { time: daysLeft })}</Text>
         </View>
         {renderQuantityChange(oldQuantity, newQuantity, dollarChange)}
