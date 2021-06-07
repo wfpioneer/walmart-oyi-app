@@ -180,6 +180,7 @@ export default {
     REJECT_SUMMARY: 'Resumen de Rechazos',
     INCREASES: 'Todos los incrementos',
     DECREASES: 'Todos los decrementos',
-    REVIEW: 'Revisar cambios'
+    REVIEW: 'Revisar cambios',
+    LIST_NOT_FOUND: 'La lista de aprobaciones está vacía' // TODO needs proper Spanish translations
   }
 };

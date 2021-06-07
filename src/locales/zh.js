@@ -161,7 +161,6 @@ export default {
     DISPLAY: '橱窗',
     RESERVE: '库存'
   },
-  // TODO needs Mandarin translations
   APPROVAL: {
     NEW_QUANTITY: '新更改数量',
     CURRENT_QUANTITY: '当前库存数量',
@@ -181,6 +180,7 @@ export default {
     REJECT_SUMMARY: '拒绝汇总',
     INCREASES: '增加总量',
     DECREASES: '减少总量',
-    REVIEW: '浏览变化'
+    REVIEW: '浏览变化',
+    LIST_NOT_FOUND: '审批清单为空' // TODO needs proper Mandarin translations
   }
 };

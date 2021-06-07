@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator, BackHandler, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
@@ -33,6 +33,24 @@ interface ApprovalItemProp {
   item: ApprovalCategory;
   dispatch: Dispatch<any>;
 }
+interface ApprovalListProps {
+  dispatch: Dispatch<any>;
+  error: any;
+  isWaiting: boolean;
+  result: any;
+  filteredList: ApprovalCategory[];
+  categoryIndices: number[];
+  selectedItemQty: number;
+  apiStart: number;
+  setApiStart: React.Dispatch<React.SetStateAction<number>>;
+  navigation: NavigationProp<any>;
+  route: Route<any>;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useFocusEffectHook: (effect: EffectCallback) => void;
+  trackEventCall: (eventName: string, params?: any) => void;
+  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
+}
+
 export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryFilter => {
   const sortedData = [...listData];
 
@@ -101,24 +119,6 @@ export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
   );
 };
 
-interface ApprovalListProps {
-  dispatch: Dispatch<any>;
-  error: any;
-  isWaiting: boolean;
-  result: any;
-  filteredList: ApprovalCategory[];
-  categoryIndices: number[];
-  selectedItemQty: number;
-  apiStart: number;
-  setApiStart: Function;
-  navigation: NavigationProp<any>;
-  route: Route<any>;
-  useEffectHook: Function;
-  useFocusEffectHook: Function;
-  trackEventCall: (eventName: string, params?: any) => void;
-  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
-}
-
 export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   const {
     dispatch, error, isWaiting, result, trackEventCall, apiStart, setApiStart,
@@ -141,14 +141,17 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
       // Clears selected Approval items on system back press to re-enable bottom tab navigator
       if (selectedItemQty > 0) {
         dispatch(toggleAllItems(false));
+        // Prevents the default system back action from executing and events from bubbling up
         return true;
       }
+      // Allows events to bubble up and defaults to the systems back action (Pops screens in the navigation stack)
       return false;
     };
     BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
     return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
   });
+
   // Get Approval List API
   useEffectHook(() => {
     // on api success
@@ -215,38 +218,39 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.mainContainer}>
-        <FlatList
-          data={filteredList}
-          keyExtractor={(item: ApprovalCategory, index: number) => {
-            if (item.categoryHeader) {
-              return item.categoryDescription.toString();
-            }
-            return item.itemNbr + index.toString();
-          }}
-          renderItem={({ item }) => <RenderApprovalItem item={item} dispatch={dispatch} />}
-          stickyHeaderIndices={categoryIndices.length !== 0 ? categoryIndices : undefined}
+      <FlatList
+        data={filteredList}
+        keyExtractor={(item: ApprovalCategory, index: number) => {
+          if (item.categoryHeader) {
+            return item.categoryDescription.toString();
+          }
+          return item.itemNbr + index.toString();
+        }}
+        renderItem={({ item }) => <RenderApprovalItem item={item} dispatch={dispatch} />}
+        stickyHeaderIndices={categoryIndices.length !== 0 ? categoryIndices : undefined}
       // Default this is False, Solves flatlist rendering no data because stickyHeader updates at the same time as data
-          removeClippedSubviews={false}
-          ListEmptyComponent={(
-            <View style={styles.emptyContainer}>
-              {/* Placeholder for empty approval list subject to change */}
-              <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
-              <Text> The Approval List is Empty </Text>
-            </View>
+        removeClippedSubviews={false}
+        ListEmptyComponent={(
+          <View style={styles.emptyContainer}>
+            {/* Placeholder for empty approval list subject to change */}
+            <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
+            <Text>
+              {strings('APPROVAL.LIST_NOT_FOUND')}
+            </Text>
+          </View>
       )}
-          extraData={filteredList}
-        />
-      </View>
+        style={styles.mainContainer}
+        extraData={filteredList}
+      />
       {selectedItemQty > 0
-        ? (
+        && (
           <ButtonBottomTab
             leftTitle={strings('APPROVAL.REJECT')}
             onLeftPress={() => handleRejectSummary()}
             rightTitle={strings('APPROVAL.APPROVE')}
             onRightPress={() => handleApproveSummary()}
           />
-        ) : null}
+        )}
     </View>
   );
 };

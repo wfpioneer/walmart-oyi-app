@@ -181,6 +181,7 @@ export default {
     REJECT_SUMMARY: 'Summary of rejections',
     INCREASES: 'All increases',
     DECREASES: 'All decreases',
-    REVIEW: 'Review changes'
+    REVIEW: 'Review changes',
+    LIST_NOT_FOUND: 'The Approval List is Empty'
   }
 };

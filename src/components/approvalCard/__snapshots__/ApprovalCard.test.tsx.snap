@@ -229,7 +229,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
               }
             }
           >
@@ -508,7 +508,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
               }
             }
           >
@@ -778,7 +778,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
               }
             }
           >
@@ -1048,7 +1048,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
               }
             }
           >
@@ -1190,7 +1190,7 @@ exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Render
           Object {
             "color": "#616161",
             "fontSize": 16,
-            "marginHorizontal": 2,
+            "marginHorizontal": 4,
           }
         }
       >
@@ -1325,7 +1325,7 @@ exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Render
           Object {
             "color": "#616161",
             "fontSize": 16,
-            "marginHorizontal": 2,
+            "marginHorizontal": 4,
           }
         }
       >
@@ -1465,7 +1465,7 @@ exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Render
           Object {
             "color": "#616161",
             "fontSize": 16,
-            "marginHorizontal": 2,
+            "marginHorizontal": 4,
           }
         }
       >
