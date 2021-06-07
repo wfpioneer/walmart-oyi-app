@@ -52,7 +52,29 @@ describe('ApprovalSummaryScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Renders on hands changes for selected approval items', () => {
+    it('Renders increased/decreased on hands changes for selected approval items', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ApprovalSummaryScreen
+          route={approveRoute}
+          navigation={navigationProp}
+          approvalList={mockSelectedApprovals}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders `item` translation for selected approval items with one onHands increase/decrease change ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ApprovalSummaryScreen
+          route={approveRoute}
+          navigation={navigationProp}
+          approvalList={[mockSelectedApprovals[0], mockSelectedApprovals[1]]}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders `items` translation for selected approval items with mulitple onHands changes', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ApprovalSummaryScreen

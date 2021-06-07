@@ -57,13 +57,15 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
       </View>
       <View style={styles.quantityContainer}>
         <Text style={styles.itemQtyText}>
-          {`${strings('APPROVAL.DECREASES')} (${decreaseItems.totalItems} ${strings('HOME.ITEMS')})`}
+          {`${strings('APPROVAL.DECREASES')} (${decreaseItems.totalItems} ${
+            decreaseItems.totalItems === 1 ? strings('WORKLIST.ITEM') : strings('WORKLIST.ITEMS')})`}
         </Text>
         {renderQuantityChange(decreaseItems.oldQty, decreaseItems.newQty, decreaseItems.dollarChange)}
       </View>
       <View style={styles.quantityContainer}>
         <Text style={styles.itemQtyText}>
-          {`${strings('APPROVAL.INCREASES')} (${increaseItems.totalItems} ${strings('HOME.ITEMS')})`}
+          {`${strings('APPROVAL.INCREASES')} (${increaseItems.totalItems} ${
+            increaseItems.totalItems === 1 ? strings('WORKLIST.ITEM') : strings('WORKLIST.ITEMS')})`}
         </Text>
         {renderQuantityChange(increaseItems.oldQty, increaseItems.newQty, increaseItems.dollarChange)}
       </View>

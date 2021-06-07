@@ -179,7 +179,7 @@ export default {
     APPROVE_SUMMARY: 'Resumen de Aprobaciones',
     REJECT_SUMMARY: 'Resumen de Rechazos',
     INCREASES: 'Todos los incrementos',
-    DECREASES: 'Todos los incrementos',
+    DECREASES: 'Todos los decrementos',
     REVIEW: 'Revisar cambios'
   }
 };

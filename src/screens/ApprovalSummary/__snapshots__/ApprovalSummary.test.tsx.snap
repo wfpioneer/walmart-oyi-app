@@ -51,7 +51,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
         }
       }
     >
-      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
     </Text>
     <View
       style={
@@ -132,14 +132,14 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
               }
             }
           >
-            $0
+            $0.00
           </Text>
           <Text
             style={
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
               }
             }
           >
@@ -205,7 +205,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
         }
       }
     >
-      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
     </Text>
     <View
       style={
@@ -286,14 +286,14 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
               }
             }
           >
-            $0
+            $0.00
           </Text>
           <Text
             style={
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
               }
             }
           >
@@ -400,7 +400,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
         }
       }
     >
-      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
     </Text>
     <View
       style={
@@ -481,14 +481,14 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
               }
             }
           >
-            $0
+            $0.00
           </Text>
           <Text
             style={
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
               }
             }
           >
@@ -554,7 +554,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
         }
       }
     >
-      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
     </Text>
     <View
       style={
@@ -635,14 +635,14 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
               }
             }
           >
-            $0
+            $0.00
           </Text>
           <Text
             style={
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
               }
             }
           >
@@ -698,7 +698,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
 </View>
 `;
 
-exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders on hands changes for selected approval items 1`] = `
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders \`item\` translation for selected approval items with one onHands increase/decrease change  1`] = `
 <View
   style={
     Object {
@@ -749,7 +749,366 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders on hands
         }
       }
     >
-      [missing "en.APPROVAL.DECREASES" translation] (2 [missing "en.HOME.ITEMS" translation])
+      [missing "en.APPROVAL.DECREASES" translation] (1 [missing "en.WORKLIST.ITEM" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          30
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#ab2703",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            <Icon
+              allowFontScaling={false}
+              name="arrow-down"
+              size={20}
+            />
+            $50.00
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 4,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#ab2703",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            -20
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          10
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (1 [missing "en.WORKLIST.ITEM" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          5
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#33691E",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            <Icon
+              allowFontScaling={false}
+              name="arrow-up"
+              size={20}
+            />
+            $150.50
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 4,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#33691E",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            15
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          20
+        </Text>
+      </View>
+    </View>
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders \`items\` translation for selected approval items with mulitple onHands changes 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.APPROVE_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (2 [missing "en.WORKLIST.ITEMS" translation])
     </Text>
     <View
       style={
@@ -842,7 +1201,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders on hands
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
               }
             }
           >
@@ -908,7 +1267,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders on hands
         }
       }
     >
-      [missing "en.APPROVAL.INCREASES" translation] (2 [missing "en.HOME.ITEMS" translation])
+      [missing "en.APPROVAL.INCREASES" translation] (2 [missing "en.WORKLIST.ITEMS" translation])
     </Text>
     <View
       style={
@@ -1001,7 +1360,366 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders on hands
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#33691E",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            35
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          60
+        </Text>
+      </View>
+    </View>
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders increased/decreased on hands changes for selected approval items 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.APPROVE_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (2 [missing "en.WORKLIST.ITEMS" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          60
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#ab2703",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            <Icon
+              allowFontScaling={false}
+              name="arrow-down"
+              size={20}
+            />
+            $90.00
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 4,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#ab2703",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            -35
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          25
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (2 [missing "en.WORKLIST.ITEMS" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          25
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#33691E",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            <Icon
+              allowFontScaling={false}
+              name="arrow-up"
+              size={20}
+            />
+            $230.50
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 4,
               }
             }
           >
@@ -1108,7 +1826,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders zeroes f
         }
       }
     >
-      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
     </Text>
     <View
       style={
@@ -1189,14 +1907,14 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders zeroes f
               }
             }
           >
-            $0
+            $0.00
           </Text>
           <Text
             style={
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
               }
             }
           >
@@ -1262,7 +1980,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders zeroes f
         }
       }
     >
-      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
     </Text>
     <View
       style={
@@ -1343,14 +2061,14 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders zeroes f
               }
             }
           >
-            $0
+            $0.00
           </Text>
           <Text
             style={
               Object {
                 "color": "#616161",
                 "fontSize": 16,
-                "marginHorizontal": 2,
+                "marginHorizontal": 4,
               }
             }
           >
