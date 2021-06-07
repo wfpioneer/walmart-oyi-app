@@ -1,0 +1,1407 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary of approvals" translation if Approve route is selected  1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.APPROVE_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            $0
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 2,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            0
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            $0
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 2,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            0
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+    </View>
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary of rejections" translation if Reject route is selected 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.REJECT_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            $0
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 2,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            0
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            $0
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 2,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            0
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+    </View>
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders on hands changes for selected approval items 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.APPROVE_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (2 [missing "en.HOME.ITEMS" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          60
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#ab2703",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            <Icon
+              allowFontScaling={false}
+              name="arrow-down"
+              size={20}
+            />
+            $90.00
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 2,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#ab2703",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            -35
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          25
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (2 [missing "en.HOME.ITEMS" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          25
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#33691E",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            <Icon
+              allowFontScaling={false}
+              name="arrow-up"
+              size={20}
+            />
+            $230.50
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 2,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "color": "#33691E",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            35
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          60
+        </Text>
+      </View>
+    </View>
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders zeroes for all on hands changes if no approval items are selected 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.APPROVE_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            $0
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 2,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            0
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.HOME.ITEMS" translation])
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginVertical": 6,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#8492a8",
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.APPROVAL.OH_CHANGE" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            $0
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 16,
+                "marginHorizontal": 2,
+              }
+            }
+          >
+             | 
+          </Text>
+          <Text
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#545F7A",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            0
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderTopColor": "#bdbdbd",
+            "borderTopWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "paddingTop": 5,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#545F7A",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+    </View>
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
