@@ -65,7 +65,7 @@ export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryF
   return { filteredData: returnData as ApprovalCategory[], headerIndices };
 };
 
-export const RenderApprovalItem = (props: ApprovalItemProp) => {
+export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
   const {
     imageUrl, itemNbr, itemName, oldQuantity,
     newQuantity, dollarChange, initiatedUserId, initiatedTimestamp,
@@ -100,33 +100,7 @@ export const RenderApprovalItem = (props: ApprovalItemProp) => {
     />
   );
 };
-const ApprovalList = () => {
-  const { result, isWaiting, error } = useTypedSelector(state => state.async.getApprovalList);
-  const { approvalList, categoryIndices, selectedItemQty } = useTypedSelector(state => state.Approvals);
-  const [apiStart, setApiStart] = useState(0);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const route = useRoute();
-  return (
-    <ApprovalListScreen
-      filteredList={approvalList}
-      categoryIndices={categoryIndices}
-      dispatch={dispatch}
-      result={result}
-      error={error}
-      isWaiting={isWaiting}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      navigation={navigation}
-      route={route}
-      useEffectHook={useEffect}
-      useFocusEffectHook={useFocusEffect}
-      trackEventCall={trackEvent}
-      selectedItemQty={selectedItemQty}
-      validateSessionCall={validateSession}
-    />
-  );
-};
+
 interface ApprovalListProps {
   dispatch: Dispatch<any>;
   error: any;
@@ -145,7 +119,7 @@ interface ApprovalListProps {
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
 
-export const ApprovalListScreen = (props: ApprovalListProps) => {
+export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   const {
     dispatch, error, isWaiting, result, trackEventCall, apiStart, setApiStart,
     useEffectHook, useFocusEffectHook, navigation, route, filteredList,
@@ -205,7 +179,7 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
   const handleRejectSummary = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEvent('handle_reject_summary_click');
-      navigation.navigate('ApproveSummary');
+      navigation.navigate('RejectSummary');
     });
   };
 
@@ -277,4 +251,31 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
   );
 };
 
+const ApprovalList = (): JSX.Element => {
+  const { result, isWaiting, error } = useTypedSelector(state => state.async.getApprovalList);
+  const { approvalList, categoryIndices, selectedItemQty } = useTypedSelector(state => state.Approvals);
+  const [apiStart, setApiStart] = useState(0);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const route = useRoute();
+  return (
+    <ApprovalListScreen
+      filteredList={approvalList}
+      categoryIndices={categoryIndices}
+      dispatch={dispatch}
+      result={result}
+      error={error}
+      isWaiting={isWaiting}
+      apiStart={apiStart}
+      setApiStart={setApiStart}
+      navigation={navigation}
+      route={route}
+      useEffectHook={useEffect}
+      useFocusEffectHook={useFocusEffect}
+      trackEventCall={trackEvent}
+      selectedItemQty={selectedItemQty}
+      validateSessionCall={validateSession}
+    />
+  );
+};
 export default ApprovalList;

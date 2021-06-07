@@ -14,7 +14,7 @@ import { ApprovalSummary } from '../screens/ApprovalSummary/ApprovalSummary';
 
 const Stack = createStackNavigator();
 
-export const renderSelectAllButton = (dispatch: Dispatch<any>, selectAll: boolean) => (
+export const renderSelectAllButton = (dispatch: Dispatch<any>, selectAll: boolean): JSX.Element => (
   <TouchableOpacity onPress={() => dispatch(toggleAllItems(!selectAll))}>
     <View style={styles.selectAllButton}>
       {selectAll ? <Text style={styles.selectAllText}>{strings('APPROVAL.DESELECT_ALL')}</Text>
@@ -23,7 +23,7 @@ export const renderSelectAllButton = (dispatch: Dispatch<any>, selectAll: boolea
   </TouchableOpacity>
 );
 
-export const renderApprovalTitle = (approvalAmount: number) => (
+export const renderApprovalTitle = (approvalAmount: number): JSX.Element => (
   <View>
     <Text style={styles.headerTitle}>{strings('APPROVAL.APPROVE_ITEMS')}</Text>
     <Text style={styles.headerSubtitle}>
@@ -32,38 +32,24 @@ export const renderApprovalTitle = (approvalAmount: number) => (
   </View>
 );
 
-export const renderSelectedItemQty = (itemQty: number) => (
+export const renderSelectedItemQty = (itemQty: number): JSX.Element => (
   <Text style={styles.headerTitle}>{` ${itemQty} ${strings('APPROVAL.SELECTED')}`}</Text>
 );
 
-export const renderCloseButton = (dispatch: Dispatch<any>) => (
+export const renderCloseButton = (dispatch: Dispatch<any>): JSX.Element => (
   <TouchableOpacity
     onPress={() => dispatch(toggleAllItems(false))}
   >
     <MaterialIcons name="close" size={28} color={COLOR.WHITE} />
   </TouchableOpacity>
 );
-
-export const ApprovalListNavigator = () => {
-  const { result } = useTypedSelector(state => state.async.getApprovalList);
-  const { isAllSelected, selectedItemQty } = useTypedSelector(state => state.Approvals);
-  const dispatch = useDispatch();
-  return (
-    <ApprovalListNavigatorStack
-      result={result}
-      dispatch={dispatch}
-      selectAll={isAllSelected}
-      selectedItemQty={selectedItemQty}
-    />
-  );
-};
 interface ApprovalNavigatorProps {
   result: any;
   dispatch: Dispatch<any>;
   selectAll: boolean;
   selectedItemQty: number;
 }
-export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps) => {
+export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps): JSX.Element => {
   const {
     result, dispatch, selectAll, selectedItemQty
   } = props;
@@ -106,5 +92,19 @@ export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps) => {
         }}
       />
     </Stack.Navigator>
+  );
+};
+
+export const ApprovalListNavigator = (): JSX.Element => {
+  const { result } = useTypedSelector(state => state.async.getApprovalList);
+  const { isAllSelected, selectedItemQty } = useTypedSelector(state => state.Approvals);
+  const dispatch = useDispatch();
+  return (
+    <ApprovalListNavigatorStack
+      result={result}
+      dispatch={dispatch}
+      selectAll={isAllSelected}
+      selectedItemQty={selectedItemQty}
+    />
   );
 };
