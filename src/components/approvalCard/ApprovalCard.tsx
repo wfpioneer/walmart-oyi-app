@@ -21,49 +21,43 @@ export interface ApprovalCardProps{
   dispatch: Dispatch<any>;
 }
 
-export const positiveQtyChange = (oldQty: number, newQty: number) => newQty > oldQty;
+export const qtyStyleChange = (oldQty: number, newQty: number) => {
+  if (oldQty === 0 && newQty === 0) {
+    return styles.noOHChange;
+  }
+  if (newQty > oldQty) {
+    return styles.positiveChange;
+  }
+  return styles.negativeChange;
+};
 
-export const renderQuantityChange = (oldQuantity?: number, newQuantity?: number, dollarChange?: number) => {
-  const oldQty = oldQuantity || 0;
-  const newQty = newQuantity || 0;
-  const priceChange = dollarChange || 0;
-
-  return (
-    <View style={styles.onHandsContainer}>
-      <View style={styles.quantityCalc}>
-        <Text style={styles.quantityHeader}>{strings('APPROVAL.CURRENT_QUANTITY')}</Text>
-        <Text style={styles.quantityText}>{oldQty}</Text>
-      </View>
-      <View style={styles.quantityCalc}>
-        <Text style={styles.quantityHeader}>{strings('APPROVAL.OH_CHANGE')}</Text>
-        {(oldQty || newQty || priceChange) !== 0
-          ? (
-            <View style={styles.onHandsChange}>
-              <Text style={positiveQtyChange(oldQty, newQty) ? styles.positiveChange : styles.negativeChange}>
-                <Octicons name={positiveQtyChange(oldQty, newQty) ? 'arrow-up' : 'arrow-down'} size={20} />
-                {currencies(priceChange)}
-              </Text>
-              <Text style={styles.divider}> | </Text>
-              <Text style={positiveQtyChange(oldQty, newQty) ? styles.positiveChange : styles.negativeChange}>
-                {newQty - oldQty}
-              </Text>
-            </View>
-          )
-          : (
-            <View style={styles.onHandsChange}>
-              <Text style={styles.noOHChange}>$0</Text>
-              <Text style={styles.divider}> | </Text>
-              <Text style={styles.noOHChange}>{0}</Text>
-            </View>
-          )}
-      </View>
-      <View style={styles.quantityResult}>
-        <Text style={styles.resultText}>{newQty}</Text>
+export const renderQuantityChange = (oldQty: number, newQty: number, dollarChange: number): JSX.Element => (
+  <View style={styles.onHandsContainer}>
+    <View style={styles.quantityCalc}>
+      <Text style={styles.quantityHeader}>{strings('APPROVAL.CURRENT_QUANTITY')}</Text>
+      <Text style={styles.quantityText}>{oldQty}</Text>
+    </View>
+    <View style={styles.quantityCalc}>
+      <Text style={styles.quantityHeader}>{strings('APPROVAL.OH_CHANGE')}</Text>
+      <View style={styles.onHandsChange}>
+        <Text style={qtyStyleChange(oldQty, newQty)}>
+          {(oldQty !== 0 || newQty !== 0)
+          && (<Octicons name={newQty > oldQty ? 'arrow-up' : 'arrow-down'} size={20} />)}
+          {currencies(dollarChange)}
+        </Text>
+        <Text style={styles.quantityDivider}> | </Text>
+        <Text style={qtyStyleChange(oldQty, newQty)}>
+          {newQty - oldQty}
+        </Text>
       </View>
     </View>
-  );
-};
-export const ApprovalCard = (props: ApprovalCardProps) => {
+    <View style={styles.quantityResult}>
+      <Text style={styles.resultText}>{newQty}</Text>
+    </View>
+  </View>
+);
+
+export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
   const {
     image, itemNbr, itemName, oldQuantity,
     newQuantity, dollarChange, userId, daysLeft, isChecked, dispatch
@@ -87,7 +81,7 @@ export const ApprovalCard = (props: ApprovalCardProps) => {
         </View>
         <View style={styles.timeLeftContainer}>
           <Text style={styles.userText} ellipsizeMode="tail" numberOfLines={1}>{userId}</Text>
-          <Text style={styles.divider}>|</Text>
+          <Text style={styles.timeLeftDivider}>|</Text>
           <Text style={styles.daysText}>{strings('APPROVAL.DAYS_LEFT', { time: daysLeft })}</Text>
         </View>
         {renderQuantityChange(oldQuantity, newQuantity, dollarChange)}

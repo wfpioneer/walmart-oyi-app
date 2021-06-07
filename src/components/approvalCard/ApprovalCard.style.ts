@@ -31,15 +31,20 @@ const styles = StyleSheet.create({
   },
   itemDesc: {
     color: COLOR.GREY_800,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     width: '80%',
     alignSelf: 'center'
   },
-  divider: {
-    marginHorizontal: 2,
+  quantityDivider: {
+    marginHorizontal: 4,
     color: COLOR.GREY_700,
     fontSize: 16
+  },
+  timeLeftDivider: {
+    marginHorizontal: 4,
+    color: COLOR.SHIP_COVE,
+    fontSize: 14
   },
   quantityCalc: {
     flexDirection: 'row',
