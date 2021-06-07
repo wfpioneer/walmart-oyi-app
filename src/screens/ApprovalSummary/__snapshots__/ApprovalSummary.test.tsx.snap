@@ -162,11 +162,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -316,11 +315,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -511,11 +509,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -665,11 +662,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -865,11 +861,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders \`item\`
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -1024,11 +1019,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders \`item\`
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -1224,11 +1218,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders \`items\
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -1383,11 +1376,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders \`items\
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -1583,11 +1575,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders increase
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -1742,11 +1733,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders increase
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -1937,11 +1927,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders zeroes f
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -2091,11 +2080,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders zeroes f
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }

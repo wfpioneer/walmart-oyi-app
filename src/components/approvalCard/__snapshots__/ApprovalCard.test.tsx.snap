@@ -252,11 +252,10 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -531,11 +530,10 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -801,11 +799,10 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -1071,11 +1068,10 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
       <View
         style={
           Object {
-            "borderTopColor": "#bdbdbd",
+            "borderTopColor": "#eeeeee",
             "borderTopWidth": 1,
             "flexDirection": "row",
             "justifyContent": "flex-end",
-            "paddingTop": 5,
             "width": "100%",
           }
         }
@@ -1213,11 +1209,10 @@ exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Render
   <View
     style={
       Object {
-        "borderTopColor": "#bdbdbd",
+        "borderTopColor": "#eeeeee",
         "borderTopWidth": 1,
         "flexDirection": "row",
         "justifyContent": "flex-end",
-        "paddingTop": 5,
         "width": "100%",
       }
     }
@@ -1348,11 +1343,10 @@ exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Render
   <View
     style={
       Object {
-        "borderTopColor": "#bdbdbd",
+        "borderTopColor": "#eeeeee",
         "borderTopWidth": 1,
         "flexDirection": "row",
         "justifyContent": "flex-end",
-        "paddingTop": 5,
         "width": "100%",
       }
     }
@@ -1488,11 +1482,10 @@ exports[`ApprovalCard Component Tests rendering Quantity On-Hands Change: Render
   <View
     style={
       Object {
-        "borderTopColor": "#bdbdbd",
+        "borderTopColor": "#eeeeee",
         "borderTopWidth": 1,
         "flexDirection": "row",
         "justifyContent": "flex-end",
-        "paddingTop": 5,
         "width": "100%",
       }
     }

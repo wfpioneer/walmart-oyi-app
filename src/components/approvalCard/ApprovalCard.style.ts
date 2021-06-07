@@ -59,9 +59,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     borderTopWidth: 1,
-    borderTopColor: COLOR.GREY_400,
-    width: '100%',
-    paddingTop: 5
+    borderTopColor: COLOR.GREY_200,
+    width: '100%'
   },
   onHandsContainer: {
     flexDirection: 'column',

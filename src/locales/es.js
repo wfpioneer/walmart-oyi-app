@@ -151,7 +151,7 @@ export default {
     CLEAR: 'Limpiar',
     TODO: 'Que hacer',
     COMPLETED: 'Terminado',
-    WORKLIST_ITEM_API_ERROR: 'Hubo un error al mostrar el elementos de las Listas de Trabajo. \nPor favor inténtalo de nuevo.' // TODO temp translation until we get translations from Mexico
+    WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
