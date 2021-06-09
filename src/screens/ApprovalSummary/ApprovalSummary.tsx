@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/native';
 import { renderQuantityChange } from '../../components/approvalCard/ApprovalCard';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
-import { strings } from '../../locales/index';
+import { strings } from '../../locales';
 import styles from './ApprovalSummary.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { ApprovalCategory } from '../ApprovalList/ApprovalList';
@@ -15,16 +15,22 @@ interface ApprovalSummaryProps {
   navigation: NavigationProp<any>;
   approvalList: ApprovalCategory[];
 }
-
+interface ItemQuantity {
+  oldQty: number;
+  newQty: number;
+  dollarChange: number;
+  totalItems: number;
+}
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {
   const { route, navigation, approvalList } = props;
-  const decreaseItems = {
+
+  const decreaseItems: ItemQuantity = {
     oldQty: 0,
     newQty: 0,
     dollarChange: 0,
     totalItems: 0
   };
-  const increaseItems = {
+  const increaseItems: ItemQuantity = {
     oldQty: 0,
     newQty: 0,
     dollarChange: 0,
@@ -73,13 +79,14 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
         leftTitle={strings('APPROVAL.GO_BACK')}
         onLeftPress={() => navigation.goBack()}
         rightTitle={strings('APPROVAL.CONFIRM')}
+        // TODO implement dispatch call to Approve/Reject items https://jira.walmart.com/browse/INTLSAOPS-2390 -2393
         onRightPress={() => undefined}
       />
     </View>
   );
 };
 
-export const ApprovalSummary = () => {
+export const ApprovalSummary = (): JSX.Element => {
   const { approvalList } = useTypedSelector(state => state.Approvals);
   const route = useRoute();
   const navigation = useNavigation();

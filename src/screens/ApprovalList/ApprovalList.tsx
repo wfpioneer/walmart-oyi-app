@@ -7,7 +7,7 @@ import { Dispatch } from 'redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import {
-  NavigationProp, Route, useFocusEffect, useNavigation, useRoute
+  NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
 import { ApprovalListItem } from '../../models/ApprovalListItem';
@@ -44,7 +44,7 @@ interface ApprovalListProps {
   apiStart: number;
   setApiStart: React.Dispatch<React.SetStateAction<number>>;
   navigation: NavigationProp<any>;
-  route: Route<any>;
+  route: RouteProp<any, string>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
   trackEventCall: (eventName: string, params?: any) => void;
