@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
-import { renderQuantityChange } from '../../components/approvalCard/ApprovalCard';
+import { QuantityChange } from '../../components/quantityChange/QuantityChange';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import { strings } from '../../locales';
 import styles from './ApprovalSummary.style';
@@ -66,14 +66,14 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
           {`${strings('APPROVAL.DECREASES')} (${decreaseItems.totalItems} ${
             decreaseItems.totalItems === 1 ? strings('WORKLIST.ITEM') : strings('WORKLIST.ITEMS')})`}
         </Text>
-        {renderQuantityChange(decreaseItems.oldQty, decreaseItems.newQty, decreaseItems.dollarChange)}
+        {QuantityChange(decreaseItems.oldQty, decreaseItems.newQty, decreaseItems.dollarChange)}
       </View>
       <View style={styles.quantityContainer}>
         <Text style={styles.itemQtyText}>
           {`${strings('APPROVAL.INCREASES')} (${increaseItems.totalItems} ${
             increaseItems.totalItems === 1 ? strings('WORKLIST.ITEM') : strings('WORKLIST.ITEMS')})`}
         </Text>
-        {renderQuantityChange(increaseItems.oldQty, increaseItems.newQty, increaseItems.dollarChange)}
+        {QuantityChange(increaseItems.oldQty, increaseItems.newQty, increaseItems.dollarChange)}
       </View>
       <ButtonBottomTab
         leftTitle={strings('APPROVAL.GO_BACK')}

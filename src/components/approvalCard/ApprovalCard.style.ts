@@ -36,35 +36,10 @@ const styles = StyleSheet.create({
     width: '80%',
     alignSelf: 'center'
   },
-  quantityDivider: {
-    marginHorizontal: 4,
-    color: COLOR.GREY_700,
-    fontSize: 16
-  },
   timeLeftDivider: {
     marginHorizontal: 4,
     color: COLOR.SHIP_COVE,
     fontSize: 14
-  },
-  quantityCalc: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginVertical: 6
-  },
-  onHandsChange: {
-    flexDirection: 'row'
-  },
-  quantityResult: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    borderTopWidth: 1,
-    borderTopColor: COLOR.GREY_200,
-    width: '100%'
-  },
-  onHandsContainer: {
-    flexDirection: 'column',
-    width: '100%'
   },
   checkBox: {
     justifyContent: 'center',
@@ -72,40 +47,6 @@ const styles = StyleSheet.create({
   },
   infoColumn: {
     flexDirection: 'column'
-  },
-  quantityHeader: {
-    alignSelf: 'center',
-    color: COLOR.SHIP_COVE,
-    fontSize: 14
-  },
-  quantityText: {
-    fontSize: 16,
-    alignSelf: 'center',
-    color: COLOR.TRACKER_GREY
-  },
-  resultText: {
-    fontSize: 16,
-    alignSelf: 'center',
-    fontWeight: 'bold',
-    color: COLOR.TRACKER_GREY
-  },
-  noOHChange: {
-    fontSize: 16,
-    alignSelf: 'center',
-    fontWeight: 'bold',
-    color: COLOR.TRACKER_GREY
-  },
-  negativeChange: {
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    color: COLOR.RED_550,
-    fontWeight: 'bold'
-  },
-  positiveChange: {
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    color: COLOR.GREEN,
-    fontWeight: 'bold'
   },
   timeLeftContainer: {
     flexDirection: 'row',
