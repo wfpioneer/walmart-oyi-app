@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
-  ApprovalCard, ApprovalCardProps, renderQuantityChange, qtyStyleChange
+  ApprovalCard, ApprovalCardProps, qtyStyleChange, renderQuantityChange
 } from './ApprovalCard';
 import styles from './ApprovalCard.style';
 
@@ -106,6 +106,25 @@ describe('ApprovalCard Component', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('Renders zero if days left is undefined ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ApprovalCard
+          dollarChange={0}
+          daysLeft={undefined}
+          image={undefined}
+          itemName=""
+          itemNbr={0}
+          oldQuantity={0}
+          newQuantity={0}
+          userId=""
+          dispatch={jest.fn()}
+          isChecked={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 
   describe('Tests rendering Quantity On-Hands Change:', () => {
@@ -130,7 +149,7 @@ describe('ApprovalCard Component', () => {
     it('Renders no change arrow if oldOHQuantity and newOHQuantity are zero', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderQuantityChange(0,0,0)
+        renderQuantityChange(0, 0, 0)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -147,7 +166,7 @@ describe('ApprovalCard Component', () => {
       expect(qtyStyleChange(oldQuantity, newQuantity)).toBe(styles.negativeChange);
     });
     it('qtyStyleChange returns noOHChange styling if oldQuantity & newQuantity equal zero ', () => {
-     const zeroQty = 0;
+      const zeroQty = 0;
       expect(qtyStyleChange(zeroQty, zeroQty)).toBe(styles.noOHChange);
     });
   });

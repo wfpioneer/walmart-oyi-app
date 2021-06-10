@@ -16,7 +16,7 @@ export interface ApprovalCardProps{
   newQuantity: number;
   dollarChange: number;
   userId: string;
-  daysLeft: number;
+  daysLeft?: number;
   isChecked?: boolean;
   dispatch: Dispatch<any>;
 }
@@ -83,7 +83,7 @@ export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
         <View style={styles.timeLeftContainer}>
           <Text style={styles.userText} ellipsizeMode="tail" numberOfLines={1}>{userId}</Text>
           <Text style={styles.timeLeftDivider}>|</Text>
-          <Text style={styles.daysText}>{strings('APPROVAL.DAYS_LEFT', { time: daysLeft })}</Text>
+          <Text style={styles.daysText}>{strings('APPROVAL.DAYS_LEFT', { time: daysLeft || 0 })}</Text>
         </View>
         {renderQuantityChange(oldQuantity, newQuantity, dollarChange)}
       </View>

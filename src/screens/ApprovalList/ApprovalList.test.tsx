@@ -6,7 +6,7 @@ import { mockApprovals } from '../../mockData/mockApprovalItem';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
-Date.now = jest.fn().mockReturnValue(new Date('2021-03-30T00:00:00.000Z'));
+
 let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
 describe('ApprovalListScreen', () => {

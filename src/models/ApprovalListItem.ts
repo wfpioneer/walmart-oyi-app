@@ -15,6 +15,7 @@ export interface ApprovalListItem {
   approvalStatus: approvalStatus;
   approvalRequestSource: approvalRequestSource;
   isChecked?: boolean;
+  daysLeft?: number;
 }
 
 export enum approvalStatus {
