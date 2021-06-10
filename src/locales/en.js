@@ -42,7 +42,7 @@ export default {
     VERSION: 'Version',
     BARCODE_SCAN_ERROR: 'This barcode type is not allowed',
     ITEM: 'item',
-    ITEMS: 'items',
+    ITEMS: 'items'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',

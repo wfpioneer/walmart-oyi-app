@@ -42,7 +42,7 @@ export default {
     VERSION: 'Versión',
     BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido',
     ITEM: 'Artículo',
-    ITEMS: 'Artículos',
+    ITEMS: 'Artículos'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',

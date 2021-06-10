@@ -8,7 +8,7 @@ import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import { strings } from '../../locales';
 import styles from './ApprovalSummary.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { ApprovalCategory } from '../ApprovalList/ApprovalList';
+import { ApprovalCategory } from '../../models/ApprovalListItem';
 
 interface ApprovalSummaryProps {
   route: RouteProp<any, string>;

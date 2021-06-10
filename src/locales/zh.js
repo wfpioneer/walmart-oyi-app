@@ -42,7 +42,7 @@ export default {
     VERSION: '版本',
     BARCODE_SCAN_ERROR: '此条码类型有误',
     ITEM: '商品',
-    ITEMS: '多个商品',
+    ITEMS: '多个商品'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
