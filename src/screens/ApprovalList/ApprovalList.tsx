@@ -10,7 +10,7 @@ import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
-import { ApprovalListItem } from '../../models/ApprovalListItem';
+import { ApprovalCategory, ApprovalListItem } from '../../models/ApprovalListItem';
 import styles from './ApprovalList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getApprovalList } from '../../state/actions/saga';
@@ -22,9 +22,6 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { setApprovalList, toggleAllItems } from '../../state/actions/Approvals';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
-export interface ApprovalCategory extends ApprovalListItem {
-  categoryHeader?: boolean;
-}
 export interface CategoryFilter {
   filteredData: ApprovalCategory[];
   headerIndices: number[];
