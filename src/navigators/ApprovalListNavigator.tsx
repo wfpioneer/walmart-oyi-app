@@ -27,7 +27,7 @@ export const renderApprovalTitle = (approvalAmount: number): JSX.Element => (
   <View>
     <Text style={styles.headerTitle}>{strings('APPROVAL.APPROVE_ITEMS')}</Text>
     <Text style={styles.headerSubtitle}>
-      {` ${approvalAmount} ${approvalAmount === 1 ? strings('WORKLIST.ITEM') : strings('WORKLIST.ITEMS')}`}
+      {` ${approvalAmount} ${approvalAmount === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')}`}
     </Text>
   </View>
 );

@@ -51,7 +51,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
         }
       }
     >
-      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
     </Text>
     <View
       style={
@@ -204,7 +204,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
         }
       }
     >
-      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
     </Text>
     <View
       style={
@@ -398,7 +398,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
         }
       }
     >
-      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
     </Text>
     <View
       style={
@@ -551,7 +551,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders "summary
         }
       }
     >
-      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
     </Text>
     <View
       style={
@@ -745,7 +745,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders \`item\`
         }
       }
     >
-      [missing "en.APPROVAL.DECREASES" translation] (1 [missing "en.WORKLIST.ITEM" translation])
+      [missing "en.APPROVAL.DECREASES" translation] (1 [missing "en.GENERICS.ITEM" translation])
     </Text>
     <View
       style={
@@ -903,7 +903,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders \`item\`
         }
       }
     >
-      [missing "en.APPROVAL.INCREASES" translation] (1 [missing "en.WORKLIST.ITEM" translation])
+      [missing "en.APPROVAL.INCREASES" translation] (1 [missing "en.GENERICS.ITEM" translation])
     </Text>
     <View
       style={
@@ -1102,7 +1102,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders \`items\
         }
       }
     >
-      [missing "en.APPROVAL.DECREASES" translation] (2 [missing "en.WORKLIST.ITEMS" translation])
+      [missing "en.APPROVAL.DECREASES" translation] (2 [missing "en.GENERICS.ITEMS" translation])
     </Text>
     <View
       style={
@@ -1260,7 +1260,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders \`items\
         }
       }
     >
-      [missing "en.APPROVAL.INCREASES" translation] (2 [missing "en.WORKLIST.ITEMS" translation])
+      [missing "en.APPROVAL.INCREASES" translation] (2 [missing "en.GENERICS.ITEMS" translation])
     </Text>
     <View
       style={
@@ -1459,7 +1459,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders increase
         }
       }
     >
-      [missing "en.APPROVAL.DECREASES" translation] (2 [missing "en.WORKLIST.ITEMS" translation])
+      [missing "en.APPROVAL.DECREASES" translation] (2 [missing "en.GENERICS.ITEMS" translation])
     </Text>
     <View
       style={
@@ -1617,7 +1617,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders increase
         }
       }
     >
-      [missing "en.APPROVAL.INCREASES" translation] (2 [missing "en.WORKLIST.ITEMS" translation])
+      [missing "en.APPROVAL.INCREASES" translation] (2 [missing "en.GENERICS.ITEMS" translation])
     </Text>
     <View
       style={
@@ -1816,7 +1816,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders zeroes f
         }
       }
     >
-      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
     </Text>
     <View
       style={
@@ -1969,7 +1969,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page Renders zeroes f
         }
       }
     >
-      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.WORKLIST.ITEMS" translation])
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
     </Text>
     <View
       style={

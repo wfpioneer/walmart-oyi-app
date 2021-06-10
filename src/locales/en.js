@@ -40,7 +40,9 @@ export default {
     RETRY: 'Retry',
     GOAL: 'Goal',
     VERSION: 'Version',
-    BARCODE_SCAN_ERROR: 'This barcode type is not allowed'
+    BARCODE_SCAN_ERROR: 'This barcode type is not allowed',
+    ITEM: 'item',
+    ITEMS: 'items',
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -145,8 +147,6 @@ export default {
     WORKLIST: 'Work List',
     CATEGORY: 'Category',
     EXCEPTION_TYPE: 'Exception Type',
-    ITEM: 'item',
-    ITEMS: 'items',
     ALL: 'All',
     REFINE: 'Refine',
     CLEAR: 'Clear',

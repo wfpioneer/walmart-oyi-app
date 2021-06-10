@@ -21,7 +21,7 @@ exports[`ApprovalList Navigator Renders \`items\` translation for an approval li
       }
     }
   >
-     5 [missing "en.WORKLIST.ITEMS" translation]
+     5 [missing "en.GENERICS.ITEMS" translation]
   </Text>
 </View>
 `;
@@ -47,7 +47,7 @@ exports[`ApprovalList Navigator Renders single \`item\` translation for an appro
       }
     }
   >
-     1 [missing "en.WORKLIST.ITEM" translation]
+     1 [missing "en.GENERICS.ITEM" translation]
   </Text>
 </View>
 `;

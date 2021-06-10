@@ -40,7 +40,9 @@ export default {
     RETRY: 'Rever',
     GOAL: 'Objetivo',
     VERSION: 'Versión',
-    BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido'
+    BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido',
+    ITEM: 'Artículo',
+    ITEMS: 'Artículos',
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -144,8 +146,6 @@ export default {
     WORKLIST: 'Lista de Trabajo',
     CATEGORY: 'Categoría',
     EXCEPTION_TYPE: 'Tipo de Excepción',
-    ITEM: 'Artículo',
-    ITEMS: 'Artículos',
     ALL: 'Todo',
     REFINE: 'Refinar',
     CLEAR: 'Limpiar',
