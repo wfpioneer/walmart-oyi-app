@@ -66,14 +66,22 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
           {`${strings('APPROVAL.DECREASES')} (${decreaseItems.totalItems} ${
             decreaseItems.totalItems === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')})`}
         </Text>
-        {QuantityChange(decreaseItems.oldQty, decreaseItems.newQty, decreaseItems.dollarChange)}
+        <QuantityChange
+          oldQty={decreaseItems.oldQty}
+          newQty={decreaseItems.newQty}
+          dollarChange={decreaseItems.dollarChange}
+        />
       </View>
       <View style={styles.quantityContainer}>
         <Text style={styles.itemQtyText}>
           {`${strings('APPROVAL.INCREASES')} (${increaseItems.totalItems} ${
             increaseItems.totalItems === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')})`}
         </Text>
-        {QuantityChange(increaseItems.oldQty, increaseItems.newQty, increaseItems.dollarChange)}
+        <QuantityChange
+          oldQty={increaseItems.oldQty}
+          newQty={increaseItems.newQty}
+          dollarChange={increaseItems.dollarChange}
+        />
       </View>
       <ButtonBottomTab
         leftTitle={strings('APPROVAL.GO_BACK')}

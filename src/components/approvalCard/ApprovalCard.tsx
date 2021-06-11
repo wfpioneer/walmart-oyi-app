@@ -48,7 +48,11 @@ export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
           <Text style={styles.timeLeftDivider}>|</Text>
           <Text style={styles.daysText}>{strings('APPROVAL.DAYS_LEFT', { time: daysLeft })}</Text>
         </View>
-        {QuantityChange(oldQuantity, newQuantity, dollarChange)}
+        <QuantityChange
+          oldQty={oldQuantity}
+          newQty={newQuantity}
+          dollarChange={dollarChange}
+        />
       </View>
     </View>
   );

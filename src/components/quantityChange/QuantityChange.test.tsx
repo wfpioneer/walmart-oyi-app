@@ -1,3 +1,4 @@
+import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { QuantityChange, qtyStyleChange } from './QuantityChange';
 import styles from './QuantityChange.style';
@@ -24,7 +25,11 @@ describe('QuantityChange Component', () => {
       const renderer = ShallowRenderer.createRenderer();
       const { oldQuantity, newQuantity, dollarChange } = positiveItem;
       renderer.render(
-        QuantityChange(oldQuantity, newQuantity, dollarChange)
+        <QuantityChange
+          oldQty={oldQuantity}
+          newQty={newQuantity}
+          dollarChange={dollarChange}
+        />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -33,7 +38,11 @@ describe('QuantityChange Component', () => {
       const renderer = ShallowRenderer.createRenderer();
       const { oldQuantity, newQuantity, dollarChange } = negativeItem;
       renderer.render(
-        QuantityChange(oldQuantity, newQuantity, dollarChange)
+        <QuantityChange
+          oldQty={oldQuantity}
+          newQty={newQuantity}
+          dollarChange={dollarChange}
+        />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -41,7 +50,11 @@ describe('QuantityChange Component', () => {
     it('Renders no change arrow if oldOHQuantity and newOHQuantity are zero', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        QuantityChange(0, 0, 0)
+        <QuantityChange
+          oldQty={0}
+          newQty={0}
+          dollarChange={0}
+        />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

@@ -55,11 +55,12 @@ export const Approvals = (
         filterCheckedList.forEach(checkedItem => {
           const checkedIdx = newApprovalList.findIndex(item => item.itemNbr === checkedItem.itemNbr);
           if (checkedIdx !== -1) {
+            const catg = newCategories[checkedItem.categoryNbr];
+
             newApprovalList[checkedIdx].isChecked = checkedItem.isChecked;
-            const isAllChecked = newCategories[checkedItem.categoryNbr];
-            isAllChecked.checkedItemQty += 1;
+            catg.checkedItemQty += 1;
             // Set CategoryHeader to true if all items in category are selected
-            if (isAllChecked.checkedItemQty === isAllChecked.totalItemQty) {
+            if (catg.checkedItemQty === catg.totalItemQty) {
               const catHeaderIdx = newApprovalList.findIndex(item => item.categoryNbr === checkedItem.categoryNbr
                 && item.categoryHeader);
               newApprovalList[catHeaderIdx].isChecked = true;
