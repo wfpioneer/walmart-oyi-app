@@ -4,7 +4,7 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import { currencies, strings } from '../../locales';
 import styles from './QuantityChange.style';
 
-interface QuantityChangeProps {
+export interface QuantityChangeProps {
   oldQty: number;
   newQty: number;
   dollarChange: number;
