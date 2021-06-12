@@ -71,7 +71,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
 
     if (prevProps.fluffyApiState.isWaiting) {
       if (this.props.fluffyApiState.error) {
-        // TODO Display toast/popup letting user know roles should not be retrieved
+        // TODO Display toast/popup letting user know roles could not be retrieved
         trackEvent('fluffy_api_failure', {
           errorDetails: this.props.fluffyApiState.error.message || JSON.stringify(this.props.fluffyApiState.error)
         });
