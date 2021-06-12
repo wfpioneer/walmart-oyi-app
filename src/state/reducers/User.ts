@@ -1,31 +1,34 @@
-const initialState = {
-  isManager: false,
+import User from '../../models/User';
+import { ASSIGN_FLUFFY_FEATURES, USER_LOGIN, USER_LOGOUT } from '../actions/User';
+
+const initialState: User = {
   additional: {
-    clockCheckResult: null,
-    displayName: null,
-    loginId: null,
-    mailId: null
+    clockCheckResult: '',
+    displayName: '',
+    loginId: '',
+    mailId: ''
   },
-  countryCode: null,
-  domain: null,
-  siteId: null,
-  token: null,
-  userId: null
+  countryCode: '',
+  domain: '',
+  siteId: 0,
+  token: '',
+  userId: '',
+  features: []
 };
 
-export const User = (state = initialState, action: any) => {
+export const UserReducer = (state = initialState, action: any): User => {
   switch (action.type) {
-    case 'USER/LOGIN':
+    case USER_LOGIN:
       return {
         ...action.payload,
-        isManager: false
+        features: []
       };
-    case 'USER/LOGOUT':
+    case USER_LOGOUT:
       return initialState;
-    case 'USER/ASSIGN_FLUFFY_ROLES':
+    case ASSIGN_FLUFFY_FEATURES:
       return {
         ...state,
-        isManager: action.payload.includes('manager approval')
+        features: action.payload
       };
     default:
       return state;
