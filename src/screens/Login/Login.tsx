@@ -44,6 +44,7 @@ export interface LoginScreenProps {
   showActivityModal: () => void;
 }
 
+// TODO convert to Functional Component
 export class LoginScreen extends React.PureComponent<LoginScreenProps> {
   private unsubscribe: (() => void | undefined) | undefined;
 
@@ -117,7 +118,6 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
             break;
         }
       }
-      user.userId = user.userId.replace(/_/g, ''); // Strip underscore from svc accounts to prevent 400 error.
       setUserId(user.userId);
       this.props.loginUser(user);
       trackEvent('user_sign_in');
