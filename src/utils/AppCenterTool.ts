@@ -5,10 +5,10 @@ import { store } from '../../App';
 
 export const initialize = (): void => {
   if (!__DEV__) {
-    AppCenter.setLogLevel(AppCenter.LogLevel.VERBOSE).then();
+    AppCenter.setLogLevel(AppCenter.LogLevel.VERBOSE);
     AppCenterCrashes.notifyUserConfirmation(AppCenterCrashes.UserConfirmation.ALWAYS_SEND);
-    AppCenterCrashes.setEnabled(true).then();
-    AppCenterAnalytics.setEnabled(true).then();
+    AppCenterCrashes.setEnabled(true);
+    AppCenterAnalytics.setEnabled(true);
   }
 };
 
@@ -21,9 +21,9 @@ export const trackEvent = (eventName: string, params: any = {}): void => {
     clubId: userState.siteId,
     country: userState.countryCode
   };
-  AppCenterAnalytics.trackEvent(eventName, submitParams).then();
+  AppCenterAnalytics.trackEvent(eventName, submitParams);
 };
 
 export const setUserId = (userId: string): void => {
-  AppCenter.setUserId(userId).then();
+  AppCenter.setUserId(userId);
 };
