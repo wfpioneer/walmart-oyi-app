@@ -5,15 +5,18 @@ import User from '../models/User';
 
 export default class GetFluffyRolesService {
   public static getFluffyRoles(payload: User): Promise<AxiosResponse> {
+    let { userId, countryCode, siteId: clubNbr } = payload;
+
     // This is to get Fluffy to correctly return features
     if (__DEV__) {
-      payload.userId = 'istanse';
-      payload.countryCode = 'US';
+      userId = 'istanse';
+      countryCode = 'US';
+      clubNbr = 1;
     }
 
     const urls: Environment = getEnvironment();
     return Request.get(
-      `${urls.fluffyURL}/appFeaturesForUser/v2/Intl Oyi/${payload.userId}/${payload.countryCode}`,
+      `${urls.fluffyURL}/featuresForStoreAndAuth/v2/Intl Oyi/${userId}/${countryCode}/${clubNbr}`,
       undefined
     );
   }
