@@ -1,19 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Text, View } from 'react-native';
 import { strings } from '../locales';
+import Tools from '../screens/Tools/Tools';
 import COLOR from '../themes/Color';
 
 const Stack = createStackNavigator();
-
-const renderTools = (): JSX.Element => {
-  const tools = ['location management'];
-  return (
-    <View>
-      <Text>TEMP</Text>
-    </View>
-  );
-};
 
 export const ToolsNavigatorStack = (): JSX.Element => {
 
@@ -28,7 +19,7 @@ export const ToolsNavigatorStack = (): JSX.Element => {
     >
       <Stack.Screen
         name="Tools"
-        component={() => renderTools()}
+        component={Tools}
         options={{
           headerTitle: strings('GENERICS.TOOLS')
         }}
