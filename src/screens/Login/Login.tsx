@@ -68,18 +68,21 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     if (this.props.fluffyApiState.isWaiting) {
       this.props.showActivityModal();
     }
-    if (prevProps.fluffyApiState.isWaiting && this.props.fluffyApiState.error) {
-      // TODO Handle failure!!
-      trackEvent('fluffy_api_failure', {
-        errorDetails: this.props.fluffyApiState.error.message || JSON.stringify(this.props.fluffyApiState.error)
-      });
-    }
 
-    if (prevProps.fluffyApiState.isWaiting && this.props.fluffyApiState.result) {
-      trackEvent('fluffy_api_success', {
-        status: this.props.fluffyApiState.result.status
-      });
-      this.props.assignFluffyRoles(this.props.fluffyApiState.result.data);
+    if (prevProps.fluffyApiState.isWaiting) {
+      if (this.props.fluffyApiState.error) {
+        trackEvent('fluffy_api_failure', {
+          errorDetails: this.props.fluffyApiState.error.message || JSON.stringify(this.props.fluffyApiState.error)
+        });
+      }
+
+      if (this.props.fluffyApiState.result) {
+        trackEvent('fluffy_api_success', {
+          status: this.props.fluffyApiState.result.status
+        });
+        this.props.assignFluffyRoles(this.props.fluffyApiState.result.data);
+      }
+
       this.props.hideActivityModal();
       this.props.navigation.reset({
         index: 0,
