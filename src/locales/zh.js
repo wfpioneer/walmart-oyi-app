@@ -40,7 +40,8 @@ export default {
     RETRY: '重试',
     GOAL: '目标',
     VERSION: '版本',
-    BARCODE_SCAN_ERROR: '此条码类型有误'
+    BARCODE_SCAN_ERROR: '此条码类型有误',
+    TOOLS: 'Tools' // TODO Mandarin Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
