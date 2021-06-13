@@ -1,17 +1,19 @@
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import styles from './ToolsButton.style';
 
-interface ToolsButtonProps {
+export interface ToolsButtonProps {
   title: string;
   destination: string;
-  children: JSX.Element
+  navigation: NavigationProp<any>;
+  children: JSX.Element;
 }
 
 const ToolsButton = (props: ToolsButtonProps): JSX.Element => {
-  const { title, destination, children } = props;
-  const navigation = useNavigation();
+  const {
+    title, destination, navigation, children
+  } = props;
 
   return (
     <TouchableOpacity

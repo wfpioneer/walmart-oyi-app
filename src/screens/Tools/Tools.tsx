@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { ReactElement } from 'react';
 import { View } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,6 +15,7 @@ interface ToolsFeatures {
 }
 
 export const ToolsScreen = (): JSX.Element => {
+  const navigation = useNavigation();
   // Add more objects to the array in the order they need to appear
   const tools: ToolsFeatures[] = [
     {
@@ -34,6 +36,7 @@ export const ToolsScreen = (): JSX.Element => {
           key={tool.key}
           title={tool.title}
           destination={tool.destination}
+          navigation={navigation}
         >
           {tool.icon}
         </ToolsButton>
