@@ -141,7 +141,11 @@ export default {
     DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nRetry?',
     ADD_NEW_LOCATION: 'Add New Location',
     EDIT_LOCATION: 'Edit Location',
-    LOCATION_MANAGEMENT: 'Location Management'
+    LOCATION_MANAGEMENT: 'Location Management',
+    ZONES: 'Zones',
+    AISLES: 'Aisles',
+    SECTIONS: 'Sections',
+    LOCATION_DETAILS: 'Location Details'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

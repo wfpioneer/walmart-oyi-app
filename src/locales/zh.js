@@ -140,7 +140,11 @@ export default {
     DELETE_LOCATION_API_ERROR: '删除位置报错，\n请重试',
     ADD_NEW_LOCATION: '新增位置',
     EDIT_LOCATION: '修改位置',
-    LOCATION_MANAGEMENT: 'Location Management' // TODO Mandarin Translation
+    LOCATION_MANAGEMENT: 'Location Management', // TODO Mandarin Translation
+    ZONES: 'Zones', // TODO Mandarin Translation
+    AISLES: 'Aisles', // TODO Mandarin Translation
+    SECTIONS: 'Sections', // TODO Mandarin Translation
+    LOCATION_DETAILS: 'Location Details' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
