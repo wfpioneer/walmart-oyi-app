@@ -12,10 +12,12 @@ describe('ToolsScreen', () => {
   describe('Tests rendering the Tools Screen', () => {
     it('Renders Tools screen', () => {
       const renderer = ShallowRenderer.createRenderer();
+      const userFeatures = ['location management'];
 
       renderer.render(
         <ToolsScreen
           navigation={navigationProp}
+          userFeatures={userFeatures}
         />
       );
 
