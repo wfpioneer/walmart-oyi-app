@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, { ReactElement } from 'react';
 import { View } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -7,34 +7,39 @@ import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import styles from './Tools.style';
 
+interface ToolsScreenProps {
+  navigation: NavigationProp<any>;
+}
+
 interface ToolsFeatures {
   key: string;
-  title: string;
+  title: string; // This is the translation key to use
   destination: string;
   icon: ReactElement
 }
 
-export const ToolsScreen = (): JSX.Element => {
-  const navigation = useNavigation();
-  // Add more objects to the array in the order they need to appear
-  const tools: ToolsFeatures[] = [
-    {
-      key: 'location management',
-      title: strings('LOCATION.LOCATION_MANAGEMENT'),
-      destination: 'LocationManagement',
-      icon: <MaterialCommunityIcon
-        name="map-marker-outline"
-        size={28}
-        color={COLOR.MAIN_THEME_COLOR}
-      />
-    }];
+// Add more objects to the array in the order they need to appear
+const tools: ToolsFeatures[] = [
+  {
+    key: 'location management',
+    title: 'LOCATION.LOCATION_MANAGEMENT',
+    destination: 'LocationManagement',
+    icon: <MaterialCommunityIcon
+      name="map-marker-outline"
+      size={28}
+      color={COLOR.MAIN_THEME_COLOR}
+    />
+  }];
+
+export const ToolsScreen = (props: ToolsScreenProps): JSX.Element => {
+  const { navigation } = props;
 
   return (
     <View style={styles.mainContainer}>
       {tools.map(tool => (
         <ToolsButton
           key={tool.key}
-          title={tool.title}
+          title={strings(tool.title)}
           destination={tool.destination}
           navigation={navigation}
         >
@@ -45,8 +50,14 @@ export const ToolsScreen = (): JSX.Element => {
   );
 };
 
-const Tools = (): JSX.Element => (
-  <ToolsScreen />
-);
+const Tools = (): JSX.Element => {
+  const navigation = useNavigation();
+
+  return (
+    <ToolsScreen
+      navigation={navigation}
+    />
+  );
+};
 
 export default Tools;
