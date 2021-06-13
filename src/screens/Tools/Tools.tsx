@@ -6,9 +6,6 @@ import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import styles from './Tools.style';
 
-interface ToolsProps {
-}
-
 interface ToolsFeatures {
   key: string;
   title: string;
@@ -16,13 +13,13 @@ interface ToolsFeatures {
   icon: ReactElement
 }
 
-export const ToolsScreen = (props: ToolsProps): JSX.Element => {
+export const ToolsScreen = (): JSX.Element => {
   // Add more objects to the array in the order they need to appear
   const tools: ToolsFeatures[] = [
     {
       key: 'location management',
       title: strings('LOCATION.LOCATION_MANAGEMENT'),
-      destination: '',
+      destination: 'LocationManagement',
       icon: <MaterialCommunityIcon
         name="map-marker-outline"
         size={28}

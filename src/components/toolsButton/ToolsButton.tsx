@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import styles from './ToolsButton.style';
@@ -10,10 +11,11 @@ interface ToolsButtonProps {
 
 const ToolsButton = (props: ToolsButtonProps): JSX.Element => {
   const { title, destination, children } = props;
+  const navigation = useNavigation();
 
   return (
     <TouchableOpacity
-      onPress={() => {}}
+      onPress={() => navigation.navigate(destination)}
       activeOpacity={0.8}
       style={styles.button}
     >

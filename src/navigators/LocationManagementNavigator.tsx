@@ -1,9 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { strings } from '../locales';
-import Tools from '../screens/Tools/Tools';
-import COLOR from '../themes/Color';
 import { Text } from 'react-native';
+import { strings } from '../locales';
+import COLOR from '../themes/Color';
 
 const Stack = createStackNavigator();
 
@@ -18,28 +17,28 @@ export const LocationManagementNavigatorStack = (): JSX.Element => (
   >
     <Stack.Screen
       name="Zones"
-      component={() => (<Text>Zones</Text>)}
+      component={() => (<Text>Zones</Text>)} // Create a screen and replace me!
       options={{
         headerTitle: strings('LOCATION.ZONES')
       }}
     />
     <Stack.Screen
       name="Aisles"
-      component={() => (<Text>Aisles</Text>)}
+      component={() => (<Text>Aisles</Text>)} // Create a screen and replace me!
       options={{
         headerTitle: strings('LOCATION.AISLES')
       }}
     />
     <Stack.Screen
       name="Sections"
-      component={() => (<Text>Sections</Text>)}
+      component={() => (<Text>Sections</Text>)} // Create a screen and replace me!
       options={{
         headerTitle: strings('LOCATION.SECTIONS')
       }}
     />
     <Stack.Screen
       name="LocationDetails"
-      component={() => (<Text>Location Details</Text>)}
+      component={() => (<Text>Location Details</Text>)} // Create a screen and replace me!
       options={{
         headerTitle: strings('LOCATION.LOCATION_DETAILS')
       }}
