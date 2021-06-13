@@ -139,7 +139,8 @@ export default {
     DELETE_CONFIRMATION: 'Confirma la eliminación de \nla ubicación ',
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
-    EDIT_LOCATION: 'Editar Ubicación'
+    EDIT_LOCATION: 'Editar Ubicación',
+    LOCATION_MANAGEMENT: 'Location Management' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -175,6 +176,6 @@ export default {
     APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprovación.\nPor favor inténtalo de nuevo',
     APPROVE: 'Aprobar',
     REJECT: 'Rechazar',
-    LIST_NOT_FOUND: 'La lista de aprobaciones está vacía'  // TODO needs proper Spanish translations
+    LIST_NOT_FOUND: 'La lista de aprobaciones está vacía' // TODO needs proper Spanish translations
   }
 };

@@ -139,7 +139,8 @@ export default {
     DELETE_CONFIRMATION: '确认删除位置 ',
     DELETE_LOCATION_API_ERROR: '删除位置报错，\n请重试',
     ADD_NEW_LOCATION: '新增位置',
-    EDIT_LOCATION: '修改位置'
+    EDIT_LOCATION: '修改位置',
+    LOCATION_MANAGEMENT: 'Location Management' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
