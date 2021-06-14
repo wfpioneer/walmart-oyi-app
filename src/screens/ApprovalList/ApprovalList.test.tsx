@@ -35,6 +35,7 @@ describe('ApprovalListScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -58,6 +59,7 @@ describe('ApprovalListScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -84,6 +86,7 @@ describe('ApprovalListScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -126,6 +129,7 @@ describe('ApprovalListScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -149,6 +153,7 @@ describe('ApprovalListScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

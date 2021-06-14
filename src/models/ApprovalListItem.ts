@@ -18,6 +18,10 @@ export interface ApprovalListItem {
   daysLeft?: number;
 }
 
+export interface ApprovalCategory extends ApprovalListItem {
+  categoryHeader?: boolean;
+}
+
 export enum approvalStatus {
   'Pending' = 'Pending',
   'Approved' = 'Approved',
