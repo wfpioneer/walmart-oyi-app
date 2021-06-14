@@ -1,9 +1,6 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import {
-  ApprovalCard, ApprovalCardProps, renderQuantityChange, qtyStyleChange
-} from './ApprovalCard';
-import styles from './ApprovalCard.style';
+import { ApprovalCard, ApprovalCardProps } from './ApprovalCard';
 
 describe('ApprovalCard Component', () => {
   const positiveItem: ApprovalCardProps = {
@@ -106,49 +103,24 @@ describe('ApprovalCard Component', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-  });
 
-  describe('Tests rendering Quantity On-Hands Change:', () => {
-    it('Renders positive change in quantity', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      const { oldQuantity, newQuantity, dollarChange } = positiveItem;
-      renderer.render(
-        renderQuantityChange(oldQuantity, newQuantity, dollarChange)
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('Renders negative change in quantity', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      const { oldQuantity, newQuantity, dollarChange } = negativeItem;
-      renderer.render(
-        renderQuantityChange(oldQuantity, newQuantity, dollarChange)
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('Renders no change arrow if oldOHQuantity and newOHQuantity are zero', () => {
+    it('Renders zero if days left is undefined ', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderQuantityChange(0,0,0)
+        <ApprovalCard
+          dollarChange={0}
+          daysLeft={undefined}
+          image={undefined}
+          itemName=""
+          itemNbr={0}
+          oldQuantity={0}
+          newQuantity={0}
+          userId=""
+          dispatch={jest.fn()}
+          isChecked={false}
+        />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-  });
-
-  describe('Tests qtyStyleChange function:', () => {
-    it('qtyStyleChange returns positiveChange styling for increased new quantity change', () => {
-      const { oldQuantity, newQuantity } = positiveItem;
-      expect(qtyStyleChange(oldQuantity, newQuantity)).toBe(styles.positiveChange);
-    });
-
-    it('qtyStyleChange returns negativeChange styling for decreased new quantity change', () => {
-      const { oldQuantity, newQuantity } = negativeItem;
-      expect(qtyStyleChange(oldQuantity, newQuantity)).toBe(styles.negativeChange);
-    });
-    it('qtyStyleChange returns noOHChange styling if oldQuantity & newQuantity equal zero ', () => {
-     const zeroQty = 0;
-      expect(qtyStyleChange(zeroQty, zeroQty)).toBe(styles.noOHChange);
     });
   });
 });

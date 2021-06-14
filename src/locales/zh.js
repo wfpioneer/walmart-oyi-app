@@ -41,6 +41,8 @@ export default {
     GOAL: '目标',
     VERSION: '版本',
     BARCODE_SCAN_ERROR: '此条码类型有误',
+    ITEM: '商品',
+    ITEMS: '多个商品',
     TOOLS: 'Tools' // TODO Mandarin Translation
   },
   HOME: {
@@ -150,8 +152,6 @@ export default {
     WORKLIST: '待办任务',
     CATEGORY: '品类',
     EXCEPTION_TYPE: '例外类型',
-    ITEM: '商品',
-    ITEMS: '多个商品',
     ALL: '全部',
     REFINE: '更新',
     CLEAR: '清除',
@@ -180,6 +180,13 @@ export default {
     APPROVAL_API_ERROR: '检索审批列表出错, \n请重试',
     APPROVE: '审批',
     REJECT: '拒绝',
+    GO_BACK: '返回',
+    CONFIRM: '确认',
+    APPROVE_SUMMARY: '审批汇总',
+    REJECT_SUMMARY: '拒绝汇总',
+    INCREASES: '增加总量',
+    DECREASES: '减少总量',
+    REVIEW: '浏览变化',
     LIST_NOT_FOUND: '审批清单为空' // TODO needs proper Mandarin translations
   }
 };
