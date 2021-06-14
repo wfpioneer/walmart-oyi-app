@@ -579,3 +579,146 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
   </View>
 </View>
 `;
+
+exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if days left is undefined  1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "justifyContent": "flex-start",
+      "marginBottom": 4,
+      "padding": 8,
+    }
+  }
+>
+  <Image
+    source=""
+    style={
+      Object {
+        "height": 100,
+        "resizeMode": "stretch",
+        "width": 100,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#8492a8",
+          "fontSize": 14,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.ITEM.ITEM" translation] 0
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "#424242",
+            "fontSize": 18,
+            "fontWeight": "bold",
+            "width": "80%",
+          }
+        }
+      >
+        
+      </Text>
+      <View
+        style={
+          Object {
+            "justifyContent": "center",
+            "marginHorizontal": 20,
+          }
+        }
+      >
+        <withTheme(Checkbox)
+          color="#0071e9"
+          onPress={[Function]}
+          status="unchecked"
+          uncheckedColor="#0071e9"
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "#bdbdbd",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginBottom": 6,
+          "paddingBottom": 6,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Object {
+            "color": "#8492a8",
+            "flexBasis": "auto",
+            "flexGrow": 0,
+            "flexShrink": 1,
+            "fontSize": 14,
+          }
+        }
+      >
+        
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#8492a8",
+            "fontSize": 14,
+            "marginHorizontal": 4,
+          }
+        }
+      >
+        |
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#B40C00",
+            "flexBasis": "60%",
+            "flexGrow": 1,
+            "flexShrink": 0,
+            "fontSize": 14,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.APPROVAL.DAYS_LEFT" translation]
+      </Text>
+    </View>
+    <QuantityChange
+      dollarChange={0}
+      newQty={0}
+      oldQty={0}
+    />
+  </View>
+</View>
+`;

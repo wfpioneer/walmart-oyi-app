@@ -103,5 +103,24 @@ describe('ApprovalCard Component', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('Renders zero if days left is undefined ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ApprovalCard
+          dollarChange={0}
+          daysLeft={undefined}
+          image={undefined}
+          itemName=""
+          itemNbr={0}
+          oldQuantity={0}
+          newQuantity={0}
+          userId=""
+          dispatch={jest.fn()}
+          isChecked={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 });
