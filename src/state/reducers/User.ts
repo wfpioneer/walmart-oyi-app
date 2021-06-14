@@ -1,5 +1,7 @@
 import User from '../../models/User';
-import { ASSIGN_FLUFFY_FEATURES, USER_LOGIN, USER_LOGOUT } from '../actions/User';
+import {
+  ASSIGN_FLUFFY_FEATURES, Actions, USER_LOGIN, USER_LOGOUT
+} from '../actions/User';
 
 const initialState: User = {
   additional: {
@@ -16,7 +18,7 @@ const initialState: User = {
   features: []
 };
 
-export const UserReducer = (state = initialState, action: any): User => {
+export const UserReducer = (state = initialState, action: Actions): User => {
   switch (action.type) {
     case USER_LOGIN:
       return {
