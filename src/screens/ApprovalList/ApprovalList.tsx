@@ -83,11 +83,10 @@ export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryF
 export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
   const {
     imageUrl, itemNbr, itemName, oldQuantity,
-    newQuantity, dollarChange, initiatedUserId, initiatedTimestamp,
+    newQuantity, dollarChange, initiatedUserId, daysLeft,
     categoryHeader, categoryNbr, categoryDescription, isChecked
   } = props.item;
   const { dispatch } = props;
-  const daysLeft = moment(initiatedTimestamp).diff(moment().format(), 'days');
 
   if (categoryHeader) {
     return (
