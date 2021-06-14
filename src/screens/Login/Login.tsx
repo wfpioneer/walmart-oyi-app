@@ -74,7 +74,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
         trackEvent('fluffy_api_success', {
           status: this.props.fluffyApiState.result.status
         });
-        this.props.assignFluffyRoles(this.props.fluffyApiState.result.data);
+        this.props.assignFluffyFeatures(this.props.fluffyApiState.result.data);
       } else if (this.props.fluffyApiState.error) {
         // TODO Display toast/popup letting user know roles could not be retrieved
         trackEvent('fluffy_api_failure', {
