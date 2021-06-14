@@ -1,7 +1,7 @@
 import AppCenter from 'appcenter';
 import AppCenterCrashes from 'appcenter-crashes';
 import AppCenterAnalytics from 'appcenter-analytics';
-import { store } from '../../App';
+import store from '../state/index';
 
 export const initialize = () => {
   if (!__DEV__) {

@@ -1,5 +1,5 @@
 import Config from 'react-native-config';
-import { store } from '../../App';
+import store from '../state/index';
 
 export interface Environment {
   orchestrationURL: string;
