@@ -12,7 +12,7 @@ export const initialize = (): void => {
   }
 };
 
-export const trackEvent = (eventName: string, params: any = {}): Promise<void> => {
+export const trackEvent = (eventName: string, params: any = {}): void => {
   const userState = store.getState().User;
 
   const submitParams = {
@@ -21,7 +21,9 @@ export const trackEvent = (eventName: string, params: any = {}): Promise<void> =
     clubId: userState.siteId,
     country: userState.countryCode
   };
-  return AppCenterAnalytics.trackEvent(eventName, submitParams);
+  AppCenterAnalytics.trackEvent(eventName, submitParams);
 };
 
-export const setUserId = (userId: string): Promise<void> => AppCenter.setUserId(userId);
+export const setUserId = (userId: string): void => {
+  AppCenter.setUserId(userId);
+};

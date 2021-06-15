@@ -12,8 +12,8 @@ import { ApprovalListNavigator } from './ApprovalListNavigator';
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
-  const isManager = useTypedSelector(state => state.User.isManager);
+const TabNavigator = (): JSX.Element => {
+  const userFeatures = useTypedSelector(state => state.User.features);
   const selectedAmount = useTypedSelector(state => state.Approvals.selectedItemQty);
   return (
     <Tab.Navigator
@@ -37,15 +37,14 @@ const TabNavigator = () => {
         inactiveTintColor: COLOR.GREY
       }}
     >
-      { /* @ts-ignore */ }
       <Tab.Screen name={strings('HOME.HOME')} component={HomeNavigator} />
 
-      { /* @ts-ignore */ }
       <Tab.Screen
         name={strings('WORKLIST.WORKLIST')}
         component={WorklistNavigator}
       />
-      {isManager
+
+      {userFeatures.includes('manager approval')
         ? (
           <Tab.Screen
             name={strings('APPROVAL.APPROVALS')}
