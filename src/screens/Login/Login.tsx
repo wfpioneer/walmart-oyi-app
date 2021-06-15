@@ -7,8 +7,8 @@ import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
 import Button from '../../components/buttons/Button';
 import styles from './Login.style';
-import { assignFluffyRoles, loginUser } from '../../state/actions/User';
-import { getFluffyRoles } from '../../state/actions/saga';
+import { assignFluffyFeatures, loginUser } from '../../state/actions/User';
+import { getFluffyFeatures } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -21,8 +21,8 @@ const mapDispatchToProps = {
   loginUser,
   hideActivityModal,
   setEndTime,
-  getFluffyRoles,
-  assignFluffyRoles,
+  getFluffyFeatures,
+  assignFluffyFeatures,
   showActivityModal
 };
 
@@ -38,9 +38,9 @@ export interface LoginScreenProps {
   navigation: NavigationProp<any>;
   hideActivityModal: () => void;
   setEndTime: (sessionEndTime: any) => void;
-  getFluffyRoles: (payload: any) => void;
+  getFluffyFeatures: (payload: any) => void;
   fluffyApiState: any;
-  assignFluffyRoles: (resultPayload: string[]) => void;
+  assignFluffyFeatures: (resultPayload: string[]) => void;
   showActivityModal: () => void;
 }
 
@@ -74,7 +74,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
         trackEvent('fluffy_api_success', {
           status: this.props.fluffyApiState.result.status
         });
-        this.props.assignFluffyRoles(this.props.fluffyApiState.result.data);
+        this.props.assignFluffyFeatures(this.props.fluffyApiState.result.data);
       } else if (this.props.fluffyApiState.error) {
         // TODO Display toast/popup letting user know roles could not be retrieved
         trackEvent('fluffy_api_failure', {
@@ -123,7 +123,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       setUserId(user.userId);
       this.props.loginUser(user);
       trackEvent('user_sign_in');
-      this.props.getFluffyRoles(user);
+      this.props.getFluffyFeatures(user);
     });
   }
 
