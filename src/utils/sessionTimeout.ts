@@ -3,7 +3,7 @@ import WMSSO from 'react-native-wmsso';
 import moment from 'moment';
 import { NavigationProp, StackActions } from '@react-navigation/native';
 import { logoutUser } from '../state/actions/User';
-import store from '../state/index';
+import store from '../state';
 import { trackEvent } from './AppCenterTool';
 import { clearEndTime } from '../state/actions/SessionTimeout';
 

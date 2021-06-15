@@ -17,4 +17,5 @@ function makeStore() {
   return store;
 }
 
-export default makeStore();
+const store = makeStore();
+export default store;
