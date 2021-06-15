@@ -14,6 +14,7 @@ export const PRINT_SIGN = 'SAGA/PRINT_SIGN';
 export const GET_LOCATION_DETAILS = 'SAGA/GET_LOCATION_DETAILS';
 export const GET_FLUFFY_FEATURES = 'SAGA/GET_FLUFFY_FEATURES';
 export const GET_APPROVAL_LIST = 'SAGA/GET_APPROVAL_LIST';
+export const SUBMIT_APPROVAL_LIST = 'SAGA/SUBMIT_APPROVAL_LIST'; // TODO temp name preferably something shorter
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload });
@@ -34,3 +35,5 @@ export const getApprovalList = (payload: {
   status?: approvalStatus;
   approvalRequestSource?: approvalRequestSource;
 }) => ({ type: GET_APPROVAL_LIST, payload });
+// TODO Rename this to something shorter
+export const submitApprovalList = (payload: any) => ({ type: SUBMIT_APPROVAL_LIST, payload });

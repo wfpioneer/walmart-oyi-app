@@ -31,5 +31,10 @@ export enum approvalStatus {
 export enum approvalRequestSource {
   'ItemDetails' = 'itemdetails',
   'Audits' = 'audits',
+}
 
+export enum approvalAction {
+  'Approve' = 'Aprv',
+  'Reject' = 'Rejc',
+  'Expired' = 'Exp'
 }
