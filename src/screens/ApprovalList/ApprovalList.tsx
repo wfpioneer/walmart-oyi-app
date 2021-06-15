@@ -7,10 +7,10 @@ import { Dispatch } from 'redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import {
-  NavigationProp, Route, useFocusEffect, useNavigation, useRoute
+  NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
-import { ApprovalListItem } from '../../models/ApprovalListItem';
+import { ApprovalCategory, ApprovalListItem } from '../../models/ApprovalListItem';
 import styles from './ApprovalList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getApprovalList } from '../../state/actions/saga';
@@ -22,9 +22,6 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { setApprovalList, toggleAllItems } from '../../state/actions/Approvals';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
-export interface ApprovalCategory extends ApprovalListItem {
-  categoryHeader?: boolean;
-}
 export interface CategoryFilter {
   filteredData: ApprovalCategory[];
   headerIndices: number[];
@@ -44,10 +41,11 @@ interface ApprovalListProps {
   apiStart: number;
   setApiStart: React.Dispatch<React.SetStateAction<number>>;
   navigation: NavigationProp<any>;
-  route: Route<any>;
+  route: RouteProp<any, string>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
   trackEventCall: (eventName: string, params?: any) => void;
+  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
 
 export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryFilter => {
@@ -85,11 +83,10 @@ export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryF
 export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
   const {
     imageUrl, itemNbr, itemName, oldQuantity,
-    newQuantity, dollarChange, initiatedUserId, initiatedTimestamp,
+    newQuantity, dollarChange, initiatedUserId, daysLeft,
     categoryHeader, categoryNbr, categoryDescription, isChecked
   } = props.item;
   const { dispatch } = props;
-  const daysLeft = moment(initiatedTimestamp).diff(moment().format(), 'days');
 
   if (categoryHeader) {
     return (
@@ -121,7 +118,8 @@ export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
 export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   const {
     dispatch, error, isWaiting, result, trackEventCall, apiStart, setApiStart,
-    useEffectHook, useFocusEffectHook, navigation, route, filteredList, categoryIndices, selectedItemQty
+    useEffectHook, useFocusEffectHook, navigation, route, filteredList,
+    categoryIndices, selectedItemQty, validateSessionCall
   } = props;
 
   // Get Approval List Items
@@ -170,6 +168,19 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
       });
     }
   }, [error, isWaiting, result]);
+
+  const handleApproveSummary = () => {
+    validateSessionCall(navigation, route.name).then(() => {
+      trackEvent('handle_approve_summary_click');
+      navigation.navigate('ApproveSummary');
+    });
+  };
+  const handleRejectSummary = () => {
+    validateSessionCall(navigation, route.name).then(() => {
+      trackEvent('handle_reject_summary_click');
+      navigation.navigate('RejectSummary');
+    });
+  };
 
   if (isWaiting) {
     return (
@@ -231,9 +242,9 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
         && (
           <ButtonBottomTab
             leftTitle={strings('APPROVAL.REJECT')}
-            onLeftPress={() => undefined}
+            onLeftPress={() => handleRejectSummary()}
             rightTitle={strings('APPROVAL.APPROVE')}
-            onRightPress={() => undefined}
+            onRightPress={() => handleApproveSummary()}
           />
         )}
     </View>
@@ -263,8 +274,8 @@ const ApprovalList = (): JSX.Element => {
       useFocusEffectHook={useFocusEffect}
       trackEventCall={trackEvent}
       selectedItemQty={selectedItemQty}
+      validateSessionCall={validateSession}
     />
   );
 };
-
 export default ApprovalList;
