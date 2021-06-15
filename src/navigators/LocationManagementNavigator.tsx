@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Text } from 'react-native';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
+import ZoneList from '../screens/ZoneList/ZoneList'
 
 const Stack = createStackNavigator();
 
@@ -17,7 +18,7 @@ export const LocationManagementNavigatorStack = (): JSX.Element => (
   >
     <Stack.Screen
       name="Zones"
-      component={() => (<Text>Zones</Text>)} // Create a screen and replace me!
+      component={ZoneList} // Create a screen and replace me!
       options={{
         headerTitle: strings('LOCATION.ZONES')
       }}
