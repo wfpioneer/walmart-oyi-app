@@ -43,7 +43,7 @@ export default {
     BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido',
     ITEM: 'Artículo',
     ITEMS: 'Artículos',
-    TOOLS: 'Tools' // TODO Spanish Translation
+    TOOLS: 'Herramientas'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -142,11 +142,11 @@ export default {
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
-    LOCATION_MANAGEMENT: 'Location Management', // TODO Spanish Translation
-    ZONES: 'Zones', // TODO Spanish Translation
-    AISLES: 'Aisles', // TODO Spanish Translation
-    SECTIONS: 'Sections', // TODO Spanish Translation
-    LOCATION_DETAILS: 'Location Details' // TODO Spanish Translation
+    LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
+    ZONES: 'Zonas',
+    AISLES: 'Pasillos',
+    SECTIONS: 'Secciones',
+    LOCATION_DETAILS: 'Detalles de ubicación'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -187,6 +187,6 @@ export default {
     INCREASES: 'Todos los incrementos',
     DECREASES: 'Todos los decrementos',
     REVIEW: 'Revisar cambios',
-    LIST_NOT_FOUND: 'La lista de aprobaciones está vacía' // TODO needs proper Spanish translations
+    LIST_NOT_FOUND: 'La lista de aprobación está vacía'
   }
 };
