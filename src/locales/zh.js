@@ -42,7 +42,8 @@ export default {
     VERSION: '版本',
     BARCODE_SCAN_ERROR: '此条码类型有误',
     ITEM: '商品',
-    ITEMS: '多个商品'
+    ITEMS: '多个商品',
+    TOOLS: 'Tools' // TODO Mandarin Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -140,7 +141,12 @@ export default {
     DELETE_CONFIRMATION: '确认删除位置 ',
     DELETE_LOCATION_API_ERROR: '删除位置报错，\n请重试',
     ADD_NEW_LOCATION: '新增位置',
-    EDIT_LOCATION: '修改位置'
+    EDIT_LOCATION: '修改位置',
+    LOCATION_MANAGEMENT: 'Location Management', // TODO Mandarin Translation
+    ZONES: 'Zones', // TODO Mandarin Translation
+    AISLES: 'Aisles', // TODO Mandarin Translation
+    SECTIONS: 'Sections', // TODO Mandarin Translation
+    LOCATION_DETAILS: 'Location Details' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

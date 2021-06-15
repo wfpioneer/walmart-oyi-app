@@ -7,6 +7,7 @@ import { useTypedSelector } from '../state/reducers/RootReducer';
 import { HomeNavigator } from './HomeNavigator';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
+import { ToolsNavigator } from './ToolsNavigator';
 import { WorklistNavigator } from './WorklistNavigator';
 import { ApprovalListNavigator } from './ApprovalListNavigator';
 
@@ -23,6 +24,8 @@ const TabNavigator = (): JSX.Element => {
             return <MaterialIcons name="home" size={size} color={color} />;
           } if (route.name === strings('WORKLIST.WORKLIST')) {
             return <AntDesign name="profile" size={size} color={color} />;
+          } if (route.name === strings('GENERICS.TOOLS')) {
+            return <MaterialIcons name="apps" size={size} color={color} />;
           } if (route.name === strings('APPROVAL.APPROVALS')) {
             return <MaterialCommunityIcons name="clipboard-check" size={size} color={color} />;
           }
@@ -42,6 +45,11 @@ const TabNavigator = (): JSX.Element => {
       <Tab.Screen
         name={strings('WORKLIST.WORKLIST')}
         component={WorklistNavigator}
+      />
+
+      <Tab.Screen
+        name={strings('GENERICS.TOOLS')}
+        component={ToolsNavigator}
       />
 
       {userFeatures.includes('manager approval')

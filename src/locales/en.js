@@ -42,7 +42,8 @@ export default {
     VERSION: 'Version',
     BARCODE_SCAN_ERROR: 'This barcode type is not allowed',
     ITEM: 'item',
-    ITEMS: 'items'
+    ITEMS: 'items',
+    TOOLS: 'Tools'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -141,7 +142,12 @@ export default {
     DELETE_CONFIRMATION: 'Confirm: \ndelete location ',
     DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nRetry?',
     ADD_NEW_LOCATION: 'Add New Location',
-    EDIT_LOCATION: 'Edit Location'
+    EDIT_LOCATION: 'Edit Location',
+    LOCATION_MANAGEMENT: 'Location Management',
+    ZONES: 'Zones',
+    AISLES: 'Aisles',
+    SECTIONS: 'Sections',
+    LOCATION_DETAILS: 'Location Details'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
