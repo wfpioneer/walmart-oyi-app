@@ -24,16 +24,16 @@ declare let global: {HermesInternal: null | {}};
 initialize();
 
 export default class App extends React.PureComponent {
-  constructor(props: Readonly<{}>) {
+  constructor(props: Readonly<Record<string, unknown>>) {
     super(props);
     setI18nConfig();
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     SplashScreen.hide();
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <Provider store={store}>
         <AppRoot>
