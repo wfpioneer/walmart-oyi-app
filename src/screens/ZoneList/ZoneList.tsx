@@ -3,7 +3,7 @@ import { SafeAreaView, View, FlatList, Text, TouchableOpacity} from 'react-nativ
 import itemData from "../../mockData/getItemDetails";
 import styles from './ZoneList.style' 
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import style from '../PrintPriceSign/PrintPriceSign.style';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
 
 
 const dataset_one = [
@@ -28,54 +28,44 @@ const dataset_one = [
     "aisles" : 5  
     },
 ]
+const ItemCard = (item: { category: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal 
+    | null | undefined; aisles: string | number | boolean | {} | React.ReactElement<any, string 
+    | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; }) => {
+    return (
+        <TouchableOpacity style={styles.item}>
+            <View style={styles.itemContainer}>
+                <View style={{flex:8}}> 
+                     <Text>{item.category}</Text>
+                    <View>
+                    <Text style={styles.aisleText}> {item.aisles} aisles</Text>
+                    </View>
+               </View>
+               <View style={{flex:1}}>  
+                    <MaterialCommunityIcon name="greater-than" size={18} color="#349beb"/>
+               </View>
+            </View>
+        </TouchableOpacity>
+        )
+} 
 
 
-const dataset_two = [
-    itemData[123], 
-    itemData[456], 
-    itemData[789],
-    itemData[123], 
-    itemData[456], 
-    itemData[789],
-    itemData[123], 
-    itemData[456], 
-    itemData[789],
-    itemData[123], 
-    itemData[456], 
-    itemData[789],
-]
-
-  
 const ZoneList = () => {
+    const siteId = useTypedSelector(state => state.User.siteId)
+
     return (
         <>
         <View style={styles.staticHeader}>
-        <Text>CLUB 5522</Text>
+        <Text>CLUB {siteId}</Text>
         </View>
           <FlatList
             data={dataset_one}
             renderItem={({item}) => {
-                return (
-                <TouchableOpacity style={styles.item}>
-                    <View style={styles.itemContainer}>
-                        <View style={{flex:8}}> 
-                             <Text>{item.category}</Text>
-                            <View>
-                            <Text style={styles.aisleText}> {item.aisles} aisles</Text>
-                            </View>
-                       </View>
-                       <View style={{flex:1}}>  
-                            <MaterialCommunityIcon name="greater-than" size={18} color="#349beb"/>
-                       </View>
-                    </View>
-                </TouchableOpacity>
-                )
+                return ItemCard(item)
             }}
-            keyExtractor={item => item.category}
-          />
+            keyExtractor={item => item.category}/>
         </>
       );
 
 }
 
-export default ZoneList
+export default ZoneList;

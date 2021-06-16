@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#fcfcfc",
+        "borderBottomColor": "#dbdbdb",
+        "borderBottomWidth": 2,
+        "marginHorizontal": 0,
+        "padding": 14,
+        "zIndex": 2,
+      }
+    }
+  >
+    <Text>
+      CLUB 
+    </Text>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "aisles": 4,
+          "category": "B - Backroom",
+          "id": 1,
+        },
+        Object {
+          "aisles": 2,
+          "category": "C - Center",
+          "id": 2,
+        },
+        Object {
+          "aisles": 6,
+          "category": "E - Electronics",
+          "id": 3,
+        },
+        Object {
+          "aisles": 5,
+          "category": "FB - Fresh Bakery",
+          "id": 4,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</React.Fragment>
+`;
