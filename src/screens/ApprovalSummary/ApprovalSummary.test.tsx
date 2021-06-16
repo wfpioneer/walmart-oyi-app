@@ -6,16 +6,21 @@ import { mockApprovals, mockSelectedApprovals } from '../../mockData/mockApprova
 
 let navigationProp: NavigationProp<any>;
 describe('ApprovalSummaryScreen', () => {
-  describe('Tests rendering the Summary Page', () => {
-    const approveRoute:RouteProp<any, string> = {
-      key: '',
-      name: 'ApproveSummary'
-    };
-    const rejectRoute:RouteProp<any, string> = {
-      key: '',
-      name: 'RejectSummary'
-    };
-
+  const approveRoute:RouteProp<any, string> = {
+    key: '',
+    name: 'ApproveSummary'
+  };
+  const rejectRoute:RouteProp<any, string> = {
+    key: '',
+    name: 'RejectSummary'
+  };
+  const defaultAsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: null
+  }
+  describe('Tests rendering the Summary Page: ', () => {
     it('Renders "summary of approvals" translation if Approve route is selected ', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -23,6 +28,13 @@ describe('ApprovalSummaryScreen', () => {
           route={approveRoute}
           navigation={navigationProp}
           approvalList={[]}
+          approvalApi={defaultAsyncState}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -35,6 +47,13 @@ describe('ApprovalSummaryScreen', () => {
           route={rejectRoute}
           navigation={navigationProp}
           approvalList={[]}
+          approvalApi={defaultAsyncState}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -47,6 +66,13 @@ describe('ApprovalSummaryScreen', () => {
           route={approveRoute}
           navigation={navigationProp}
           approvalList={mockApprovals}
+          approvalApi={defaultAsyncState}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -59,6 +85,13 @@ describe('ApprovalSummaryScreen', () => {
           route={approveRoute}
           navigation={navigationProp}
           approvalList={mockSelectedApprovals}
+          approvalApi={defaultAsyncState}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -70,6 +103,13 @@ describe('ApprovalSummaryScreen', () => {
           route={approveRoute}
           navigation={navigationProp}
           approvalList={[mockSelectedApprovals[0], mockSelectedApprovals[1]]}
+          approvalApi={defaultAsyncState}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -81,9 +121,43 @@ describe('ApprovalSummaryScreen', () => {
           route={approveRoute}
           navigation={navigationProp}
           approvalList={mockSelectedApprovals}
+          approvalApi={defaultAsyncState}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
+
+  describe('Tests rendering update approval api response: ', () => {
+    it('Renders loading indicator when waiting for Update Approval Api response ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const updateApprovalIsWaiting = {
+        isWaiting: true,
+        value: null,
+        error: null,
+        result: null
+    }
+      renderer.render(
+        <ApprovalSummaryScreen
+          route={approveRoute}
+          navigation={navigationProp}
+          approvalList={mockSelectedApprovals}
+          approvalApi={updateApprovalIsWaiting}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  })
 });
