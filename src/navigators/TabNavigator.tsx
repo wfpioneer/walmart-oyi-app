@@ -47,18 +47,21 @@ const TabNavigator = (): JSX.Element => {
         component={WorklistNavigator}
       />
 
-      <Tab.Screen
-        name={strings('GENERICS.TOOLS')}
-        component={ToolsNavigator}
-      />
+      {userFeatures.includes('location management')
+        && (
+        <Tab.Screen
+          name={strings('GENERICS.TOOLS')}
+          component={ToolsNavigator}
+        />
+        )}
 
       {userFeatures.includes('manager approval')
-        ? (
+        && (
           <Tab.Screen
             name={strings('APPROVAL.APPROVALS')}
             component={ApprovalListNavigator}
           />
-        ) : <></>}
+        )}
     </Tab.Navigator>
   );
 };
