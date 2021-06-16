@@ -42,6 +42,5 @@ export const getFluffyRoles = makeAsyncActionCreators(GET_FLUFFY_ROLES);
 export const GET_APPROVAL_LIST = makeAsyncActionTypes('API/GET_APPROVAL_LIST');
 export const getApprovalList = makeAsyncActionCreators(GET_APPROVAL_LIST);
 
-// TODO rename this to something shorter if possible
-export const SUMBIT_APPROVAL_LIST = makeAsyncActionTypes('API/SUMBIT_APPROVAL_LIST');
-export const submitApprovalList = makeAsyncActionCreators(SUMBIT_APPROVAL_LIST);
+export const UPDATE_APPROVAL_LIST = makeAsyncActionTypes('API/UPDATE_APPROVAL_LIST');
+export const updateApprovalList = makeAsyncActionCreators(UPDATE_APPROVAL_LIST);

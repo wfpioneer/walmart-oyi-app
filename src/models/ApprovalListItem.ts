@@ -16,6 +16,7 @@ export interface ApprovalListItem {
   approvalRequestSource: approvalRequestSource;
   isChecked?: boolean;
   daysLeft?: number;
+  resolvedTimestamp?: string;
 }
 
 export interface ApprovalCategory extends ApprovalListItem {
