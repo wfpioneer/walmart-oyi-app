@@ -4,38 +4,18 @@ import itemData from "../../mockData/getItemDetails";
 import styles from './ZoneList.style' 
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { Provider } from 'react-redux';
+import {dataset_one, DataSetOne} from "../../mockData/zoneDetails";
 
 
-const dataset_one = [
-    {
-     "id": 1,
-     "category": "B - Backroom",
-     "aisles" : 4   
-    },
-    {
-    "id": 2,
-    "category": "C - Center",
-    "aisles" : 2   
-    },
-    {
-    "id": 3,
-    "category": "E - Electronics",
-    "aisles" : 6   
-    },
-    {
-    "id": 4,
-    "category": "FB - Fresh Bakery",
-    "aisles" : 5  
-    },
-]
-const ItemCard = (item: { category: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal 
-    | null | undefined; aisles: string | number | boolean | {} | React.ReactElement<any, string 
-    | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; }) => {
+
+
+const ItemCard = (item: DataSetOne) => {
     return (
         <TouchableOpacity style={styles.item}>
             <View style={styles.itemContainer}>
                 <View style={{flex:8}}> 
-                     <Text>{item.category}</Text>
+                     <Text>{item.code} - {item.category}</Text>
                     <View>
                     <Text style={styles.aisleText}> {item.aisles} aisles</Text>
                     </View>
@@ -48,9 +28,21 @@ const ItemCard = (item: { category: boolean | React.ReactChild | React.ReactFrag
         )
 } 
 
-
 const ZoneList = () => {
     const siteId = useTypedSelector(state => state.User.siteId)
+    return (<ZoneListScreen dataSet={dataset_one} siteId = {siteId}/>)
+}
+
+
+
+interface ZoneListProps {
+    siteId: number,
+    dataSet: DataSetOne[]
+}
+
+export const ZoneListScreen = (props: ZoneListProps) => {
+    const siteId = props.siteId;
+    const data_set = props.dataSet;
 
     return (
         <>
@@ -58,7 +50,7 @@ const ZoneList = () => {
         <Text>CLUB {siteId}</Text>
         </View>
           <FlatList
-            data={dataset_one}
+            data={data_set}
             renderItem={({item}) => {
                 return ItemCard(item)
             }}

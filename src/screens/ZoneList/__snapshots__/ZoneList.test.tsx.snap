@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`Zone List Renders Zone Screen 1`] = `
 <React.Fragment>
   <View
     style={
@@ -16,6 +16,7 @@ exports[`renders correctly 1`] = `
   >
     <Text>
       CLUB 
+      5522
     </Text>
   </View>
   <FlatList
@@ -24,22 +25,50 @@ exports[`renders correctly 1`] = `
         Object {
           "aisles": 4,
           "category": "B - Backroom",
+          "code": "B",
           "id": 1,
         },
         Object {
           "aisles": 2,
           "category": "C - Center",
+          "code": "C",
           "id": 2,
         },
         Object {
           "aisles": 6,
-          "category": "E - Electronics",
+          "category": "Electronics",
+          "code": "E",
           "id": 3,
         },
         Object {
           "aisles": 5,
-          "category": "FB - Fresh Bakery",
+          "category": "Fresh Bakery",
+          "code": "FB",
           "id": 4,
+        },
+        Object {
+          "aisles": 4,
+          "category": "Fresh Cafe",
+          "code": "FC",
+          "id": 4,
+        },
+        Object {
+          "aisles": 2,
+          "category": "Fresh Freezer/Cooler",
+          "code": "FF",
+          "id": 5,
+        },
+        Object {
+          "aisles": 6,
+          "category": "Fresh Meat, HMS & Deli",
+          "code": "FM",
+          "id": 6,
+        },
+        Object {
+          "aisles": 5,
+          "category": "FB - Fresh Produce",
+          "code": "FP",
+          "id": 7,
         },
       ]
     }
