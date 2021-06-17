@@ -4,15 +4,17 @@ import { View } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ToolsButton from '../../components/toolsButton/ToolsButton';
 import { strings } from '../../locales';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
 import COLOR from '../../themes/Color';
 import styles from './Tools.style';
 
 interface ToolsScreenProps {
   navigation: NavigationProp<any>;
+  userFeatures: string[];
 }
 
 interface ToolsFeatures {
-  key: string;
+  key: string; // This needs to align with features in Fluffy
   title: string; // This is the translation key to use
   destination: string;
   icon: ReactElement
@@ -32,30 +34,35 @@ const tools: ToolsFeatures[] = [
   }];
 
 export const ToolsScreen = (props: ToolsScreenProps): JSX.Element => {
-  const { navigation } = props;
+  const { navigation, userFeatures } = props;
 
   return (
     <View style={styles.mainContainer}>
-      {tools.map(tool => (
-        <ToolsButton
-          key={tool.key}
-          title={strings(tool.title)}
-          destination={tool.destination}
-          navigation={navigation}
-        >
-          {tool.icon}
-        </ToolsButton>
-      ))}
+      {/* Remove any tools which are not enabled for user/club,
+      then map to ToolsButton component */}
+      {tools.filter(tool => userFeatures.includes(tool.key))
+        .map(tool => (
+          <ToolsButton
+            key={tool.key}
+            title={strings(tool.title)}
+            destination={tool.destination}
+            navigation={navigation}
+          >
+            {tool.icon}
+          </ToolsButton>
+        ))}
     </View>
   );
 };
 
 const Tools = (): JSX.Element => {
   const navigation = useNavigation();
+  const userFeatures = useTypedSelector(state => state.User.features);
 
   return (
     <ToolsScreen
       navigation={navigation}
+      userFeatures={userFeatures}
     />
   );
 };
