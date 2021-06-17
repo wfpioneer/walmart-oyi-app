@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToolsButton Component Tests Rendering ToolsButton Renders a ToolButton 1`] = `
+<ForwardRef
+  activeOpacity={0.8}
+  onPress={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "borderBottomWidth": 2,
+      "borderColor": "#e0e0e0",
+      "borderRadius": 8,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "column",
+      "marginHorizontal": 6,
+      "marginVertical": 8,
+      "paddingHorizontal": 8,
+      "paddingVertical": 14,
+      "width": "40%",
+    }
+  }
+>
+  <mockConstructor
+    color="#0071e9"
+    name="map-marker-outline"
+    size={28}
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 12,
+        "marginTop": 6,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.LOCATION.LOCATION_MANAGEMENT" translation]
+  </Text>
+</ForwardRef>
+`;

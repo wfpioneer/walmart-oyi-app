@@ -1,3 +1,4 @@
+import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { LoginScreen, LoginScreenProps } from './Login';
@@ -6,12 +7,21 @@ import User from '../../models/User';
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 
-const navigationProp = {
+const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dangerouslyGetParent: jest.fn(),
+  dangerouslyGetState: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
   navigate: jest.fn()
 };
 const testUser: User = {
-  isManager: false,
   additional: {
     clockCheckResult: '',
     displayName: '',
@@ -22,7 +32,8 @@ const testUser: User = {
   domain: '',
   siteId: 0,
   token: '',
-  userId: ''
+  userId: '',
+  features: []
 };
 
 const defaultTestProp: LoginScreenProps = {
@@ -31,13 +42,13 @@ const defaultTestProp: LoginScreenProps = {
   loginUser: jest.fn(),
   navigation: navigationProp,
   setEndTime: jest.fn(),
-  getFluffyRoles: jest.fn(),
+  getFluffyFeatures: jest.fn(),
   fluffyApiState: {
     isWaiting: false,
     error: '',
     result: {}
   },
-  assignFluffyRoles: jest.fn(),
+  assignFluffyFeatures: jest.fn(),
   showActivityModal: jest.fn()
 };
 
@@ -50,13 +61,13 @@ describe('LoginScreen', () => {
       hideActivityModal={jest.fn}
       User={testUser}
       setEndTime={jest.fn}
-      getFluffyRoles={jest.fn}
+      getFluffyFeatures={jest.fn}
       fluffyApiState={{
         isWaiting: false,
         error: '',
         result: {}
       }}
-      assignFluffyRoles={jest.fn}
+      assignFluffyFeatures={jest.fn}
       showActivityModal={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -67,36 +78,24 @@ describe('SignInUser', () => {
   // IAN doesn't know how to test this, because the promise function of `WMSSO.getUser()` doesn't have the props object
   it.skip('calls WMSSO then navigates to the home screen', async () => {
     const loginUserMock = jest.fn();
-    const navigationMock = {
-      navigate: jest.fn()
-    };
     const hideActivityModalMock = jest.fn();
 
-    const loginScreen = new LoginScreen({
-      loginUser: loginUserMock,
-      navigation: navigationMock,
-      hideActivityModal: hideActivityModalMock
-    });
+    const loginScreen = new LoginScreen(defaultTestProp);
 
     await loginScreen.signInUser();
     expect(loginUserMock).toHaveBeenCalled();
-    expect(navigationMock.navigate).toHaveBeenCalled();
+    expect(navigationProp.navigate).toHaveBeenCalled();
     expect(hideActivityModalMock).toHaveBeenCalled();
   });
 });
 
 describe('ComponentDidMount', () => {
   it('sets up the navigation event listener and calls signInUser', () => {
-    const navigationMock = {
-      addListener: jest.fn()
-    };
-    const loginScreen = new LoginScreen({
-      navigation: navigationMock
-    });
+    const loginScreen = new LoginScreen(defaultTestProp);
     loginScreen.signInUser = jest.fn();
     loginScreen.componentDidMount();
     expect(loginScreen.signInUser).toHaveBeenCalled();
-    expect(navigationMock.addListener).toHaveBeenCalled();
+    expect(defaultTestProp.navigation.addListener).toHaveBeenCalled();
   });
 });
 
@@ -105,7 +104,8 @@ describe('ComponentDidMount', () => {
 describe('ComponentWillUnmount', () => {
   it('does nothing if the unsubscribe function doesnt exist', () => {
     const loginScreen = new LoginScreen(defaultTestProp);
-    expect(loginScreen.componentWillUnmount()).toBeUndefined();
+    loginScreen.componentWillUnmount();
+    expect(loginScreen['unsubscribe']).toBeUndefined();
   });
 
   it('calls the unsubscribe function if it does exist', () => {

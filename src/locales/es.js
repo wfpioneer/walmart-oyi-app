@@ -40,7 +40,10 @@ export default {
     RETRY: 'Rever',
     GOAL: 'Objetivo',
     VERSION: 'Versión',
-    BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido'
+    BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido',
+    ITEM: 'Artículo',
+    ITEMS: 'Artículos',
+    TOOLS: 'Herramientas'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -138,20 +141,23 @@ export default {
     DELETE_CONFIRMATION: 'Confirma la eliminación de \nla ubicación ',
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
-    EDIT_LOCATION: 'Editar Ubicación'
+    EDIT_LOCATION: 'Editar Ubicación',
+    LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
+    ZONES: 'Zonas',
+    AISLES: 'Pasillos',
+    SECTIONS: 'Secciones',
+    LOCATION_DETAILS: 'Detalles de ubicación'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
     CATEGORY: 'Categoría',
     EXCEPTION_TYPE: 'Tipo de Excepción',
-    ITEM: 'Artículo',
-    ITEMS: 'Artículos',
     ALL: 'Todo',
     REFINE: 'Refinar',
     CLEAR: 'Limpiar',
     TODO: 'Que hacer',
     COMPLETED: 'Terminado',
-    WORKLIST_ITEM_API_ERROR: 'Hubo un error al mostrar el elementos de las Listas de Trabajo. \nPor favor inténtalo de nuevo.' // TODO temp translation until we get translations from Mexico
+    WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
@@ -172,8 +178,15 @@ export default {
     DESELECT_ALL: 'Deseleccionar Todo',
     SELECTED: 'Seleccionado',
     APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprovación.\nPor favor inténtalo de nuevo',
-    APPROVE: 'Aprobar',
+    APPROVE: 'Aprovar',
     REJECT: 'Rechazar',
-    LIST_NOT_FOUND: 'La lista de aprobaciones está vacía'  // TODO needs proper Spanish translations
+    GO_BACK: 'Ir atrás',
+    CONFIRM: 'Confirmar',
+    APPROVE_SUMMARY: 'Resumen de Aprobaciones',
+    REJECT_SUMMARY: 'Resumen de Rechazos',
+    INCREASES: 'Todos los incrementos',
+    DECREASES: 'Todos los decrementos',
+    REVIEW: 'Revisar cambios',
+    LIST_NOT_FOUND: 'La lista de aprobación está vacía'
   }
 };

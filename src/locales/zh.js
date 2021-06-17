@@ -40,7 +40,10 @@ export default {
     RETRY: '重试',
     GOAL: '目标',
     VERSION: '版本',
-    BARCODE_SCAN_ERROR: '此条码类型有误'
+    BARCODE_SCAN_ERROR: '此条码类型有误',
+    ITEM: '商品',
+    ITEMS: '多个商品',
+    TOOLS: 'Tools' // TODO Mandarin Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -138,14 +141,17 @@ export default {
     DELETE_CONFIRMATION: '确认删除位置 ',
     DELETE_LOCATION_API_ERROR: '删除位置报错，\n请重试',
     ADD_NEW_LOCATION: '新增位置',
-    EDIT_LOCATION: '修改位置'
+    EDIT_LOCATION: '修改位置',
+    LOCATION_MANAGEMENT: 'Location Management', // TODO Mandarin Translation
+    ZONES: 'Zones', // TODO Mandarin Translation
+    AISLES: 'Aisles', // TODO Mandarin Translation
+    SECTIONS: 'Sections', // TODO Mandarin Translation
+    LOCATION_DETAILS: 'Location Details' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
     CATEGORY: '品类',
     EXCEPTION_TYPE: '例外类型',
-    ITEM: '商品',
-    ITEMS: '多个商品',
     ALL: '全部',
     REFINE: '更新',
     CLEAR: '清除',
@@ -174,6 +180,13 @@ export default {
     APPROVAL_API_ERROR: '检索审批列表出错, \n请重试',
     APPROVE: '审批',
     REJECT: '拒绝',
+    GO_BACK: '返回',
+    CONFIRM: '确认',
+    APPROVE_SUMMARY: '审批汇总',
+    REJECT_SUMMARY: '拒绝汇总',
+    INCREASES: '增加总量',
+    DECREASES: '减少总量',
+    REVIEW: '浏览变化',
     LIST_NOT_FOUND: '审批清单为空' // TODO needs proper Mandarin translations
   }
 };

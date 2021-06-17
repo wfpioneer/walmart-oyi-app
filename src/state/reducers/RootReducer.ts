@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
-import { User } from './User';
+import { UserReducer } from './User';
 import { modal } from './Modal';
 import asyncReducer from './asyncAPI';
 import { Global } from './Global';
@@ -15,7 +15,7 @@ import { Approvals } from './Approvals';
  * This is the root reducers,this RootReducer combine all sub reducers.git
  */
 const RootReducer = combineReducers({
-  User,
+  User: UserReducer,
   modal,
   async: asyncReducer,
   Global,
