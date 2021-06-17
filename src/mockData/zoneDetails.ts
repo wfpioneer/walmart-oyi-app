@@ -11,13 +11,13 @@ export const dataset_one : DataSetOne[] = [
     {
      "id": 1,
      "code": "B",
-     "category": "B - Backroom",
+     "category": "Backroom",
      "aisles" : 4   
     },
     {
     "id": 2,
     "code": "C",
-    "category": "C - Center",
+    "category": "Center",
     "aisles" : 2   
     },
     {
