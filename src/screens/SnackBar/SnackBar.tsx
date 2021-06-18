@@ -22,9 +22,9 @@ const mapDispatchToProps = {
   hideSnackBar
 };
 // TODO refactor this for more customizable styling
-class SnackBarComponent extends React.PureComponent<SnackBarProps> {
+export class SnackBarComponent extends React.PureComponent<SnackBarProps> {
   // TODO look into using SafeAreaInsets to dynamically render SnackBar above bottomTabBar
-  render() {
+  render(): JSX.Element {
     return (
       <Snackbar
         visible={this.props.showSnackBar}
