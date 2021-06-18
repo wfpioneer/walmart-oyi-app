@@ -10,7 +10,7 @@ import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
-import { ApprovalCategory, ApprovalListItem } from '../../models/ApprovalListItem';
+import { ApprovalCategory, ApprovalListItem, approvalStatus } from '../../models/ApprovalListItem';
 import styles from './ApprovalList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getApprovalList } from '../../state/actions/saga';
@@ -127,7 +127,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
     validateSession(navigation, route.name).then(() => {
       trackEventCall('get_approval_list_api_call');
       setApiStart(moment().valueOf());
-      dispatch(getApprovalList({}));
+      dispatch(getApprovalList({ status: approvalStatus.Pending }));
     }).catch(() => {});
   }), [navigation]);
 

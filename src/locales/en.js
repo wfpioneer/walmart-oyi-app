@@ -188,6 +188,8 @@ export default {
     INCREASES: 'All increases',
     DECREASES: 'All decreases',
     REVIEW: 'Review changes',
-    LIST_NOT_FOUND: 'The Approval List is Empty'
+    LIST_NOT_FOUND: 'The Approval List is Empty',
+    UPDATE_APPROVED: 'On-hands update approved',
+    UPDATE_REJECTED: 'On-hands update rejected'
   }
 };

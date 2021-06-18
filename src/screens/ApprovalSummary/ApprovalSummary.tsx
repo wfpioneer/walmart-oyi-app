@@ -17,6 +17,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { resetApprovals } from '../../state/actions/Approvals';
 import COLOR from '../../themes/Color';
 import { updateApprovalList } from '../../state/actions/saga';
+import { showSnackBar } from '../../state/actions/SnackBar';
 
 interface ApprovalSummaryProps {
   route: RouteProp<any, string>;
@@ -42,14 +43,22 @@ interface ItemQuantity {
   totalItems: number;
 }
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {
-  const { route, navigation, approvalList, approvalApi, dispatch, useEffectHook, apiStart, trackEventCall, validateSessionCall } = props;
+  const { route, navigation, approvalList, approvalApi, dispatch, useEffectHook, apiStart, trackEventCall, validateSessionCall } = props;//MIONIONINUBOUBUOBOIUBOIUBIBOU
 
-  //Submit Approvals Api
+  //Update Approval List Api
   useEffectHook(() => {
     if (!approvalApi.isWaiting && approvalApi.result) {
       trackEventCall('submit_approval_list_api_success', { duration: moment().valueOf() - apiStart });
       dispatch(resetApprovals());
-      navigation.goBack()
+      navigation.navigate({
+        name:'Approval',
+        params: {prevRoute: route.name}
+      })
+
+      if(approvalApi.result.status === 200 || approvalApi.result.data.metadata?.success > 0){
+        const message = route.name === 'ApproveSummary'? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED')
+        dispatch(showSnackBar(message, 3000))
+      }
       }
 
     // on api failure
@@ -61,6 +70,14 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
       // TODO handle unhappy path for Approve/Reject https://jira.walmart.com/browse/INTLSAOPS-2392 -2393
     }
   }, [approvalApi])
+
+  //Navigation Listener
+  useEffectHook(() => {
+    // Resets location api response data when navigating off-screen
+    // navigation.addListener('beforeRemove', () =>{
+    //   dispatch({type:'API/UPDATE_APPROVAL_LIST/RESET'})
+    // })
+  })
 
   if (approvalApi.isWaiting) {
     return (
@@ -149,7 +166,6 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
         leftTitle={strings('APPROVAL.GO_BACK')}
         onLeftPress={() => navigation.goBack()}
         rightTitle={strings('APPROVAL.CONFIRM')}
-        // TODO implement dispatch call to Approve/Reject items https://jira.walmart.com/browse/INTLSAOPS-2390 -2393
         onRightPress={() => handleApprovalSubmit()}
       />
     </View>
