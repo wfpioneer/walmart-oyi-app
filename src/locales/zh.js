@@ -188,7 +188,7 @@ export default {
     DECREASES: '减少总量',
     REVIEW: '浏览变化',
     LIST_NOT_FOUND: '无审批清单',
-    UPDATE_APPROVED: 'On-hands update approved', // TODO needs Mandarin translations
-    UPDATE_REJECTED: 'On-hands update rejected'// TODO needs Mandarin translations
+    UPDATE_APPROVED: '审批现货变更',
+    UPDATE_REJECTED: '拒绝现货变更'
   }
 };

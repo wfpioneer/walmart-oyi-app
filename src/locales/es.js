@@ -188,7 +188,7 @@ export default {
     DECREASES: 'Todos los decrementos',
     REVIEW: 'Revisar cambios',
     LIST_NOT_FOUND: 'La lista de aprobación está vacía',
-    UPDATE_APPROVED: 'On-hands update approved', // TODO needs spanish translations
-    UPDATE_REJECTED: 'On-hands update rejected'// TODO needs spanish translations
+    UPDATE_APPROVED: 'Actualización de existencia aprobado',
+    UPDATE_REJECTED: 'Actualización de existencia rechazado'
   }
 };

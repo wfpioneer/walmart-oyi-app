@@ -56,8 +56,8 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
       })
 
       if(approvalApi.result.status === 200 || approvalApi.result.data.metadata?.success > 0){
-        const message = route.name === 'ApproveSummary'? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED')
-        dispatch(showSnackBar(message, 3000))
+        const successMessage = route.name === 'ApproveSummary'? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED')
+        dispatch(showSnackBar(successMessage, 3000))
       }
       }
 
@@ -124,9 +124,9 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
   });
 
  
-  const actionType = route.name === 'ApproveSummary' ? approvalAction.Approve : approvalAction.Reject
   const handleApprovalSubmit = () => {
     validateSessionCall(navigation, route.name).then(() => {
+      const actionType = route.name === 'ApproveSummary' ? approvalAction.Approve : approvalAction.Reject
       trackEventCall('Submit_approval_list_api_call', {approvalAction: actionType})
       dispatch(updateApprovalList({ approvalItems: checkedList, headers:{action: actionType} }))
     })
