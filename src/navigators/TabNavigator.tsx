@@ -56,12 +56,12 @@ const TabNavigator = (): JSX.Element => {
         )}
 
       {userFeatures.includes('manager approval')
-        ? (
+        && (
           <Tab.Screen
             name={strings('APPROVAL.APPROVALS')}
             component={ApprovalListNavigator}
           />
-        ) : <></>}
+        )}
     </Tab.Navigator>
   );
 };

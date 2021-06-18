@@ -41,6 +41,8 @@ export default {
     GOAL: 'Goal',
     VERSION: 'Version',
     BARCODE_SCAN_ERROR: 'This barcode type is not allowed',
+    ITEM: 'item',
+    ITEMS: 'items',
     TOOLS: 'Tools'
   },
   HOME: {
@@ -154,8 +156,6 @@ export default {
     WORKLIST: 'Work List',
     CATEGORY: 'Category',
     EXCEPTION_TYPE: 'Exception Type',
-    ITEM: 'item',
-    ITEMS: 'items',
     ALL: 'All',
     REFINE: 'Refine',
     CLEAR: 'Clear',
@@ -184,6 +184,13 @@ export default {
     APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.',
     APPROVE: 'Approve',
     REJECT: 'Reject',
+    GO_BACK: 'Go back',
+    CONFIRM: 'Confirm',
+    APPROVE_SUMMARY: 'Summary of approvals',
+    REJECT_SUMMARY: 'Summary of rejections',
+    INCREASES: 'All increases',
+    DECREASES: 'All decreases',
+    REVIEW: 'Review changes',
     LIST_NOT_FOUND: 'The Approval List is Empty'
   }
 };
