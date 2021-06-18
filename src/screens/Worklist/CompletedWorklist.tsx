@@ -13,7 +13,7 @@ interface CompletedWorklistProps {
     error: any;
     dispatch: Dispatch<any>;
     groupToggle: boolean;
-    updateGroupToggle: Function;
+    updateGroupToggle: (isToggled: boolean) => void;
     filterExceptions: string[];
     filterCategories: string[];
     navigation: NavigationProp<any>;
@@ -47,17 +47,12 @@ export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Elem
   );
 };
 
-export const CompletedWorklist = () => {
+export const CompletedWorklist = (): JSX.Element => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  let completedData: WorklistItemI[] | undefined;
-
-  if (result && result.data) {
-    completedData = result.data.filter((item: WorklistItemI) => item.completed === true);
-  }
 
   return (
     <CompletedWorklistScreen
