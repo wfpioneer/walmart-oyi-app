@@ -142,22 +142,18 @@ export default {
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
-<<<<<<< HEAD
     LOCATION_MANAGEMENT: 'Location Management', // TODO Spanish Translation
     ZONES: 'Zones', // TODO Spanish Translation
     AISLES: 'Aisles', // TODO Spanish Translation
     SECTIONS: 'Sections', // TODO Spanish Translation
     AREAS: 'Areas', // TODO Spanish Translation
     LOCATION_DETAILS: 'Location Details', // TODO Spanish Translation
-    NO_ZONES_AVAILABLE:'No Zones Available' // TODO Spanish Translation
-
-=======
+    NO_ZONES_AVAILABLE:'No Zones Available', // TODO Spanish Translation
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ZONES: 'Zonas',
     AISLES: 'Pasillos',
     SECTIONS: 'Secciones',
     LOCATION_DETAILS: 'Detalles de ubicación'
->>>>>>> 846e805991318d42d9f2560264af6a33da4fae7e
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
