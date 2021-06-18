@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Text } from 'react-native';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
-import ZoneList from '../screens/ZoneList/ZoneList'
+import ZoneList from '../screens/Zone/ZoneList'
 
 const Stack = createStackNavigator();
 
