@@ -74,10 +74,10 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
   //Navigation Listener
   useEffectHook(() => {
     // Resets location api response data when navigating off-screen
-    // navigation.addListener('beforeRemove', () =>{
-    //   dispatch({type:'API/UPDATE_APPROVAL_LIST/RESET'})
-    // })
-  })
+    navigation.addListener('beforeRemove', () =>{
+      dispatch({type:'API/UPDATE_APPROVAL_LIST/RESET'})
+    })
+  }, [])
 
   if (approvalApi.isWaiting) {
     return (
