@@ -1,15 +1,15 @@
-import React from 'react';
 import { StyleSheet} from 'react-native';
+import {COLOR} from '../../themes/Color';
 
 const styles = StyleSheet.create({
     item: {
-      backgroundColor: '#fcfcfc',
+      backgroundColor: COLOR.WHITE,
       padding: 14,
       marginVertical: 1,
       marginHorizontal: 0,
     },
     aisleText: {
-      color: '#b5b5b5',
+      color: COLOR.GREY_500,
       fontSize: 12,
     },
     itemContainer: {

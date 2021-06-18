@@ -144,7 +144,10 @@ export default {
     ZONES: 'Zones', // TODO Spanish Translation
     AISLES: 'Aisles', // TODO Spanish Translation
     SECTIONS: 'Sections', // TODO Spanish Translation
-    LOCATION_DETAILS: 'Location Details' // TODO Spanish Translation
+    AREAS: 'Areas', // TODO Spanish Translation
+    LOCATION_DETAILS: 'Location Details', // TODO Spanish Translation
+    NO_ZONES_AVAILABLE:'No Zones Available' // TODO Spanish Translation
+
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

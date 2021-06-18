@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Zone List Renders Zone Screen 1`] = `
-<React.Fragment>
+exports[`Test Zone List Renders Zone Screen 1`] = `
+<View>
   <View
     style={
       Object {
-        "backgroundColor": "#fcfcfc",
-        "borderBottomColor": "#dbdbdb",
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
         "borderBottomWidth": 2,
         "marginHorizontal": 0,
         "padding": 14,
@@ -15,60 +15,77 @@ exports[`Zone List Renders Zone Screen 1`] = `
     }
   >
     <Text>
-      CLUB 
+      [missing "en.GENERICS.CLUB" translation]
+       
       5522
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#9e9e9e",
+          "fontSize": 12,
+        }
+      }
+    >
+      10
+       
+      [missing "en.LOCATION.AREAS" translation]
+       
     </Text>
   </View>
   <FlatList
+    ListEmptyComponent={<NoZonesMessage />}
     data={
       Array [
         Object {
-          "aisles": 4,
-          "category": "B - Backroom",
-          "code": "B",
-          "id": 1,
+          "aisleCount": 3,
+          "zoneId": 1,
+          "zoneName": "B - Backroom",
         },
         Object {
-          "aisles": 2,
-          "category": "C - Center",
-          "code": "C",
-          "id": 2,
+          "aisleCount": 2,
+          "zoneId": 2,
+          "zoneName": "C - Center",
         },
         Object {
-          "aisles": 6,
-          "category": "Electronics",
-          "code": "E",
-          "id": 3,
+          "aisleCount": 3,
+          "zoneId": 3,
+          "zoneName": "E - Electronics",
         },
         Object {
-          "aisles": 5,
-          "category": "Fresh Bakery",
-          "code": "FB",
-          "id": 4,
+          "aisleCount": 3,
+          "zoneId": 4,
+          "zoneName": "FB - Fresh Bakery",
         },
         Object {
-          "aisles": 4,
-          "category": "Fresh Cafe",
-          "code": "FC",
-          "id": 4,
+          "aisleCount": 3,
+          "zoneId": 5,
+          "zoneName": "FC - Fresh Cafe",
         },
         Object {
-          "aisles": 2,
-          "category": "Fresh Freezer/Cooler",
-          "code": "FF",
-          "id": 5,
+          "aisleCount": 3,
+          "zoneId": 6,
+          "zoneName": "FF - Fresh Freezer/Cooler",
         },
         Object {
-          "aisles": 6,
-          "category": "Fresh Meat, HMS & Deli",
-          "code": "FM",
-          "id": 6,
+          "aisleCount": 2,
+          "zoneId": 7,
+          "zoneName": "FM - Fresh Meat, HMS & Deli",
         },
         Object {
-          "aisles": 5,
-          "category": "FB - Fresh Produce",
-          "code": "FP",
-          "id": 7,
+          "aisleCount": 3,
+          "zoneId": 8,
+          "zoneName": "FP - Fresh Produce",
+        },
+        Object {
+          "aisleCount": 10,
+          "zoneId": 9,
+          "zoneName": "G - Grocery",
+        },
+        Object {
+          "aisleCount": 3,
+          "zoneId": 10,
+          "zoneName": "H - Home",
         },
       ]
     }
@@ -85,5 +102,57 @@ exports[`Zone List Renders Zone Screen 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-</React.Fragment>
+</View>
+`;
+
+exports[`Test Zone List with empty list Renders empty Zone Screen 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 2,
+        "marginHorizontal": 0,
+        "padding": 14,
+        "zIndex": 2,
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.CLUB" translation]
+       
+      5522
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#9e9e9e",
+          "fontSize": 12,
+        }
+      }
+    >
+      0
+       
+      [missing "en.LOCATION.AREAS" translation]
+       
+    </Text>
+  </View>
+  <FlatList
+    ListEmptyComponent={<NoZonesMessage />}
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
 `;

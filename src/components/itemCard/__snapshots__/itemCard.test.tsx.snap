@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Item Card Renders Item Card 1`] = `
+<ForwardRef
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "marginHorizontal": 0,
+      "marginVertical": 1,
+      "padding": 14,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+        }
+      }
+    >
+      <Text>
+        H - Home
+      </Text>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#9e9e9e",
+              "fontSize": 12,
+            }
+          }
+        >
+           
+          3
+           
+          [missing "en.LOCATION.AISLES" translation]
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <mockConstructor
+        color="#1977d3"
+        name="greater-than"
+        size={18}
+      />
+    </View>
+  </View>
+</ForwardRef>
+`;
+
+exports[`Test Item Card with empty list Should not render any card 1`] = `null`;

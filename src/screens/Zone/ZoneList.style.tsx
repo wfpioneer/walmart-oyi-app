@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {COLOR} from '../../themes/Color';
 
 
 const styles = StyleSheet.create({
@@ -7,22 +7,18 @@ const styles = StyleSheet.create({
       flex: 1,
     },
     item: {
-      backgroundColor: '#fcfcfc',
+      backgroundColor: COLOR.WHITE,
       padding: 14,
       marginVertical: 1,
       marginHorizontal: 0,
     },
     staticHeader: {
-      backgroundColor: '#fcfcfc',
+      backgroundColor: COLOR.WHITE,
       padding: 14,
       marginHorizontal: 0,
       zIndex: 2,
       borderBottomWidth: 2,
-      borderBottomColor: '#dbdbdb'
-      },
-      aisleText: {
-      color: '#b5b5b5',
-      fontSize: 12,
+      borderBottomColor: COLOR.GREY_200
       },
     title: {
       fontSize: 40,
@@ -31,6 +27,15 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: "row",
       alignItems: 'center'
+    },
+    noZones: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    areas: {
+      color: COLOR.GREY_500,
+      fontSize: 12,
     }
   });
   
