@@ -11,8 +11,7 @@ interface ZoneItemCardProp {
 }
 
 const ZoneItemCard = (props: ZoneItemCardProp) : JSX.Element => {
-  const { zoneName } = props;
-  const { aisleCount } = props;
+  const { zoneName, aisleCount } = props;
   return (
     <TouchableOpacity style={styles.item}>
       <View style={styles.itemContainer}>
