@@ -55,8 +55,8 @@ exports[`Test Item Card Renders Item Card 1`] = `
     >
       <mockConstructor
         color="#1977d3"
-        name="greater-than"
-        size={18}
+        name="chevron-right"
+        size={20}
       />
     </View>
   </View>
