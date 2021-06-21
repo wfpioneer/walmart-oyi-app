@@ -1,14 +1,14 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { Zones } from '../../mockData/zoneDetails';
-import ItemCard from './itemCard';
+import { mockZones } from '../../mockData/zoneDetails';
+import ZoneItemCard from './ZoneItemCard';
 import { ZoneItem } from '../../models/ZoneItem';
 
-describe('Test Item Card', () => {
-  it('Renders Item Card', () => {
+describe('Test Item Cards', () => {
+  it('Renders Item Cards', () => {
     const renderer = ShallowRenderer.createRenderer();
-    Zones.forEach(item => renderer.render(
-      <ItemCard
+    mockZones.forEach(item => renderer.render(
+      <ZoneItemCard
         zoneName={item.zoneName}
         aisleCount={item.aisleCount}
       />
@@ -17,12 +17,12 @@ describe('Test Item Card', () => {
   });
 });
 
-describe('Test Item Card with empty list', () => {
+describe('Test Item Cards with empty list', () => {
   const emptyZoneList: ZoneItem[] = [];
-  it('Should not render any card', () => {
+  it('Should not render any cards', () => {
     const renderer = ShallowRenderer.createRenderer();
     emptyZoneList.forEach(item => renderer.render(
-      <ItemCard
+      <ZoneItemCard
         zoneName={item.zoneName}
         aisleCount={item.aisleCount}
       />

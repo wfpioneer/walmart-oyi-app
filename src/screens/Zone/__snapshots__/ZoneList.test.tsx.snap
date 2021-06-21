@@ -15,9 +15,7 @@ exports[`Test Zone List Renders Zone Screen 1`] = `
     }
   >
     <Text>
-      [missing "en.GENERICS.CLUB" translation]
-       
-      5522
+      [missing "en.GENERICS.CLUB" translation] 5522
     </Text>
     <Text
       style={
@@ -27,10 +25,7 @@ exports[`Test Zone List Renders Zone Screen 1`] = `
         }
       }
     >
-      10
-       
-      [missing "en.LOCATION.AREAS" translation]
-       
+      10 [missing "en.LOCATION.AREAS" translation]
     </Text>
   </View>
   <FlatList
@@ -120,9 +115,7 @@ exports[`Test Zone List with empty list Renders empty Zone Screen 1`] = `
     }
   >
     <Text>
-      [missing "en.GENERICS.CLUB" translation]
-       
-      5522
+      [missing "en.GENERICS.CLUB" translation] 5522
     </Text>
     <Text
       style={
@@ -132,10 +125,7 @@ exports[`Test Zone List with empty list Renders empty Zone Screen 1`] = `
         }
       }
     >
-      0
-       
-      [missing "en.LOCATION.AREAS" translation]
-       
+      0 [missing "en.LOCATION.AREAS" translation]
     </Text>
   </View>
   <FlatList

@@ -4,12 +4,12 @@ import {
 } from 'react-native';
 import styles from './ZoneList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { Zones } from '../../mockData/zoneDetails';
+import { mockZones } from '../../mockData/zoneDetails';
 import { ZoneItem } from '../../models/ZoneItem';
-import ItemCard from '../../components/itemCard/itemCard';
+import ZoneItemCard from '../../components/zoneItemCard/ZoneItemCard';
 import { strings } from '../../locales';
 
-const NoZonesMessage = () => (
+const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
     <Text>{strings('LOCATION.NO_ZONES_AVAILABLE')}</Text>
   </View>
@@ -20,7 +20,7 @@ interface ZoneProps {
     zoneList: ZoneItem[]
 }
 
-export const ZoneScreen : React.FunctionComponent<ZoneProps> = (props: ZoneProps) => {
+export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
   const { siteId } = props;
   const { zoneList } = props;
 
@@ -28,21 +28,16 @@ export const ZoneScreen : React.FunctionComponent<ZoneProps> = (props: ZoneProps
     <View>
       <View style={styles.staticHeader}>
         <Text>
-          {strings('GENERICS.CLUB')}
-          {' '}
-          {siteId}
+          {`${strings('GENERICS.CLUB')} ${siteId}`}
         </Text>
         <Text style={styles.areas}>
-          {zoneList.length}
-          {' '}
-          {strings('LOCATION.AREAS')}
-          {' '}
+          {`${zoneList.length} ${strings('LOCATION.AREAS')}`}
         </Text>
       </View>
       <FlatList
         data={zoneList}
         renderItem={({ item }) => (
-          <ItemCard
+          <ZoneItemCard
             zoneName={item.zoneName}
             aisleCount={item.aisleCount}
           />
@@ -54,9 +49,9 @@ export const ZoneScreen : React.FunctionComponent<ZoneProps> = (props: ZoneProps
   );
 };
 
-const ZoneList: React.FunctionComponent<ZoneProps> = () => {
+const ZoneList = (): JSX.Element => {
   const siteId = useTypedSelector(state => state.User.siteId);
-  return (<ZoneScreen zoneList={Zones} siteId={siteId} />);
+  return (<ZoneScreen zoneList={mockZones} siteId={siteId} />);
 };
 
 export default ZoneList;

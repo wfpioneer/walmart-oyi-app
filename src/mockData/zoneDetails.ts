@@ -1,6 +1,6 @@
 import { ZoneItem } from '../models/ZoneItem';
 
-export const Zones : ZoneItem[] = [
+export const mockZones : ZoneItem[] = [
   {
     zoneId: 1,
     zoneName: 'B - Backroom',

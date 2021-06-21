@@ -1,12 +1,18 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import styles from './itemCard.style';
+import styles from './ZoneItemCard.style';
 import { strings } from '../../locales';
 import { COLOR } from '../../themes/Color';
 
-const ItemCard: React.FunctionComponent<any> = (props: any) => {
-  const { zoneName, aisleCount } = props;
+interface ZoneItemCardProp {
+  zoneName: string,
+  aisleCount: number
+}
+
+const ZoneItemCard = (props: ZoneItemCardProp) : JSX.Element => {
+  const { zoneName } = props;
+  const { aisleCount } = props;
   return (
     <TouchableOpacity style={styles.item}>
       <View style={styles.itemContainer}>
@@ -14,10 +20,7 @@ const ItemCard: React.FunctionComponent<any> = (props: any) => {
           <Text>{zoneName}</Text>
           <View>
             <Text style={styles.aisleText}>
-              {' '}
-              {aisleCount}
-              {' '}
-              {strings('LOCATION.AISLES')}
+              {`${aisleCount} ${strings('LOCATION.AISLES')}`}
             </Text>
           </View>
         </View>
@@ -29,4 +32,4 @@ const ItemCard: React.FunctionComponent<any> = (props: any) => {
   );
 };
 
-export default ItemCard;
+export default ZoneItemCard;
