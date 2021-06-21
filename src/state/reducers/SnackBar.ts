@@ -20,11 +20,14 @@ export const SnackBar = (state = initialState, action: Actions): SnackBarState =
         ...state,
         showSnackBar: true,
         messageContent: action.payload.text,
-        duration: action.payload.duration || initialState.duration
+        duration: action.payload.duration
       };
     }
     case HIDE_SNACKBAR: {
-      return initialState;
+      return {
+        ...state,
+        showSnackBar: false
+      };
     }
     default:
       return state;
