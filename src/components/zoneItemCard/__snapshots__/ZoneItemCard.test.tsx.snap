@@ -59,5 +59,3 @@ exports[`Test Item Cards Renders Item Cards 1`] = `
   </View>
 </ForwardRef>
 `;
-
-exports[`Test Item Cards with empty list Should not render any cards 1`] = `null`;

@@ -21,8 +21,7 @@ interface ZoneProps {
 }
 
 export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
-  const { siteId } = props;
-  const { zoneList } = props;
+  const { siteId, zoneList } = props;
 
   return (
     <View>
