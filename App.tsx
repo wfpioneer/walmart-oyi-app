@@ -18,6 +18,7 @@ import Modal from './src/screens/Modal/Modal';
 import AppRoot from './src/components/AppRoot';
 import { initialize } from './src/utils/AppCenterTool';
 import store from './src/state/index';
+import { SnackBar } from './src/screens/SnackBar/SnackBar';
 
 declare let global: {HermesInternal: null | {}};
 
@@ -38,6 +39,7 @@ export default class App extends React.PureComponent {
       <Provider store={store}>
         <AppRoot>
           <Modal />
+          <SnackBar />
           <MainNavigator />
         </AppRoot>
       </Provider>
