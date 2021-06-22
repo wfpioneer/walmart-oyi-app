@@ -147,7 +147,10 @@ export default {
     ZONES: 'Zones',
     AISLES: 'Aisles',
     SECTIONS: 'Sections',
-    LOCATION_DETAILS: 'Location Details'
+    AREAS: 'Areas',
+    LOCATION_DETAILS: 'Location Details',
+    NO_ZONES_AVAILABLE:'No Zones Available',
+  
   },
   WORKLIST: {
     WORKLIST: 'Work List',
