@@ -9,6 +9,7 @@ import moment from 'moment';
 import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
+import Modal from 'react-native-modal';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
 import { ApprovalCategory, ApprovalListItem, approvalStatus } from '../../models/ApprovalListItem';
 import styles from './ApprovalList.style';
@@ -21,6 +22,7 @@ import { ApprovalCategorySeparator } from '../../components/CategorySeparatorCar
 import { validateSession } from '../../utils/sessionTimeout';
 import { setApprovalList, toggleAllItems } from '../../state/actions/Approvals';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
+import Button from '../../components/buttons/Button';
 
 export interface CategoryFilter {
   filteredData: ApprovalCategory[];
@@ -46,8 +48,19 @@ interface ApprovalListProps {
   useFocusEffectHook: (effect: EffectCallback) => void;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
+  updateApprovalApi: {
+    isWaiting: boolean;
+    value: any;
+    error: any;
+    result: any;
+  };
 }
-
+interface UpdateResponse {
+  message?: string;
+  id: number;
+  itemNbr: number;
+  statusCode?: number;
+}
 export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryFilter => {
   const sortedData = [...listData];
 
@@ -119,7 +132,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   const {
     dispatch, error, isWaiting, result, trackEventCall, apiStart, setApiStart,
     useEffectHook, useFocusEffectHook, navigation, route, filteredList,
-    categoryIndices, selectedItemQty, validateSessionCall
+    categoryIndices, selectedItemQty, validateSessionCall, updateApprovalApi
   } = props;
 
   // Get Approval List Items
@@ -212,6 +225,48 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
     );
   }
 
+  if (updateApprovalApi.result?.status === 207) {
+    const { skippedItems, data, metadata: { total } } = updateApprovalApi.result.data;
+    // When there are no failed or successful items data is null
+    const items = data || [];
+    const failedItems = items.filter((item: UpdateResponse) => item.message === 'failure');
+
+    const erroredItems = [...skippedItems, ...failedItems];
+    return (
+      <Modal isVisible={true}>
+        <View style={styles.popUpContainer}>
+          <View style={styles.contentContainer}>
+            <Text style={styles.errorText}>{strings('APPROVAL.FAILED_APPROVE')}</Text>
+            {erroredItems.length <= 5
+              ? (
+                <FlatList
+                  data={erroredItems.slice(0, 5)}
+                  keyExtractor={item => item.id.toString()}
+                  renderItem={({ item }) => (
+                    <Text style={styles.listText}>
+                      {`${strings('GENERICS.ITEM')}: ${item.itemNbr}`}
+                    </Text>
+                  )}
+                  style={styles.listContainer}
+                />
+              )
+              : (
+                <Text style={styles.failedItemText}>
+                  {`${erroredItems.length} / ${total} ${strings('APPROVAL.FAILED_ITEMS')}`}
+                </Text>
+              )}
+            <Button
+              title={strings('APPROVAL.CONFIRM')}
+              type={Button.Type.PRIMARY}
+              style={{ width: '50%' }}
+              onPress={() => dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' })}
+            />
+          </View>
+        </View>
+      </Modal>
+    );
+  }
+
   return (
     <View style={styles.mainContainer}>
       <FlatList
@@ -253,6 +308,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
 
 const ApprovalList = (): JSX.Element => {
   const { result, isWaiting, error } = useTypedSelector(state => state.async.getApprovalList);
+  const updateApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
   const { approvalList, categoryIndices, selectedItemQty } = useTypedSelector(state => state.Approvals);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
@@ -275,6 +331,7 @@ const ApprovalList = (): JSX.Element => {
       trackEventCall={trackEvent}
       selectedItemQty={selectedItemQty}
       validateSessionCall={validateSession}
+      updateApprovalApi={updateApprovalApi}
     />
   );
 };

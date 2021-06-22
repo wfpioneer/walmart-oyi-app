@@ -142,18 +142,12 @@ export default {
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
-    LOCATION_MANAGEMENT: 'Location Management', // TODO Spanish Translation
-    ZONES: 'Zones', // TODO Spanish Translation
-    AISLES: 'Aisles', // TODO Spanish Translation
-    SECTIONS: 'Sections', // TODO Spanish Translation
-    AREAS: 'Areas', // TODO Spanish Translation
-    LOCATION_DETAILS: 'Location Details', // TODO Spanish Translation
-    NO_ZONES_AVAILABLE:'No Zones Available', // TODO Spanish Translation
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ZONES: 'Zonas',
     AISLES: 'Pasillos',
     SECTIONS: 'Secciones',
-    LOCATION_DETAILS: 'Detalles de ubicación'
+    LOCATION_DETAILS: 'Detalles de ubicación',
+    NO_ZONES_AVAILABLE: 'No Zones Available' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -196,6 +190,8 @@ export default {
     REVIEW: 'Revisar cambios',
     LIST_NOT_FOUND: 'La lista de aprobación está vacía',
     UPDATE_APPROVED: 'Actualización de existencia aprobado',
-    UPDATE_REJECTED: 'Actualización de existencia rechazado'
+    UPDATE_REJECTED: 'Actualización de existencia rechazado',
+    FAILED_APPROVE: 'Requests Failed to Approve', // TODO Needs Spanish Translations
+    FAILED_ITEMS: 'Items Failed'// TODO Needs Spanish Translations
   }
 };

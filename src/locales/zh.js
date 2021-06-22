@@ -148,7 +148,7 @@ export default {
     SECTIONS: 'Sections', // TODO Mandarin Translation
     AREAS: 'Areas', // TODO Mandarin Translation
     LOCATION_DETAILS: 'Location Details', // TODO Mandarin Translation
-    NO_ZONES_AVAILABLE:'No Zones Available' // TODO Mandarin Translation
+    NO_ZONES_AVAILABLE: 'No Zones Available' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
@@ -191,6 +191,8 @@ export default {
     REVIEW: '浏览变化',
     LIST_NOT_FOUND: '无审批清单',
     UPDATE_APPROVED: '审批现货变更',
-    UPDATE_REJECTED: '拒绝现货变更'
+    UPDATE_REJECTED: '拒绝现货变更',
+    FAILED_APPROVE: 'Requests Failed to Approve', // TODO needs Mandarin translations
+    FAILED_ITEMS: 'Items Failed' // TODO needs Mandarin translations
   }
 };

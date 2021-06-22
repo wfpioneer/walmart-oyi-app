@@ -149,8 +149,7 @@ export default {
     SECTIONS: 'Sections',
     AREAS: 'Areas',
     LOCATION_DETAILS: 'Location Details',
-    NO_ZONES_AVAILABLE:'No Zones Available',
-  
+    NO_ZONES_AVAILABLE: 'No Zones Available'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
@@ -193,6 +192,8 @@ export default {
     REVIEW: 'Review changes',
     LIST_NOT_FOUND: 'The Approval List is Empty',
     UPDATE_APPROVED: 'On-hands update approved',
-    UPDATE_REJECTED: 'On-hands update rejected'
+    UPDATE_REJECTED: 'On-hands update rejected',
+    FAILED_APPROVE: 'Requests Failed to Approve',
+    FAILED_ITEMS: 'Items Failed'
   }
 };
