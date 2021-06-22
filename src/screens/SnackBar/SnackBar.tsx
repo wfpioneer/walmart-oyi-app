@@ -1,41 +1,44 @@
 import React from 'react';
 import { Snackbar } from 'react-native-paper';
-import { connect } from 'react-redux';
-import { RootState } from '../../state/reducers/RootReducer';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { hideSnackBar } from '../../state/actions/SnackBar';
 import styles from './SnackBar.style';
 
 interface SnackBarProps {
   showSnackBar: boolean;
-  hideSnackBar: () => void;
+  dispatch: Dispatch<any>
   messageContent: string;
   duration: number;
 }
 
-const mapStateToProps = (state: RootState) => ({
-  showSnackBar: state.SnackBar.showSnackBar,
-  messageContent: state.SnackBar.messageContent,
-  duration: state.SnackBar.duration
-});
+export const SnackBarComponent = (props: SnackBarProps): JSX.Element => {
+  const {
+    showSnackBar, dispatch, messageContent, duration
+  } = props;
 
-const mapDispatchToProps = {
-  hideSnackBar
+  return (
+    <Snackbar
+      visible={showSnackBar}
+      onDismiss={() => dispatch(hideSnackBar())}
+      duration={duration}
+      style={styles.snackView}
+    >
+      {messageContent}
+    </Snackbar>
+  );
 };
-// TODO refactor this for more customizable styling
-export class SnackBarComponent extends React.PureComponent<SnackBarProps> {
-  // TODO look into using SafeAreaInsets to dynamically render SnackBar above bottomTabBar
-  render(): JSX.Element {
-    return (
-      <Snackbar
-        visible={this.props.showSnackBar}
-        onDismiss={() => this.props.hideSnackBar()}
-        duration={this.props.duration}
-        style={styles.snackView}
-      >
-        {this.props.messageContent}
-      </Snackbar>
-    );
-  }
-}
 
-export const SnackBar = connect(mapStateToProps, mapDispatchToProps)(SnackBarComponent);
+export const SnackBar = (): JSX.Element => {
+  const { showSnackBar, messageContent, duration } = useTypedSelector(state => state.SnackBar);
+  const dispatch = useDispatch();
+  return (
+    <SnackBarComponent
+      showSnackBar={showSnackBar}
+      dispatch={dispatch}
+      duration={duration}
+      messageContent={messageContent}
+    />
+  );
+};

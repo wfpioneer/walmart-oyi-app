@@ -9,7 +9,7 @@ describe('SnackBarComponent', () => {
     renderer.render(
       <SnackBarComponent
         showSnackBar={false}
-        hideSnackBar={jest.fn()}
+        dispatch={jest.fn()}
         messageContent=""
         duration={5000}
       />
@@ -21,7 +21,7 @@ describe('SnackBarComponent', () => {
     renderer.render(
       <SnackBarComponent
         showSnackBar={true}
-        hideSnackBar={jest.fn()}
+        dispatch={jest.fn()}
         messageContent={strings('GENERICS.UPDATED')}
         duration={5000}
       />
