@@ -3,15 +3,15 @@ import { ActivityIndicator, Text, View } from 'react-native';
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import moment from 'moment';
 import { QuantityChange } from '../../components/quantityChange/QuantityChange';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import { strings } from '../../locales';
 import styles from './ApprovalSummary.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { approvalAction, ApprovalCategory } from '../../models/ApprovalListItem';
-import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
-import moment from 'moment';
+import { ApprovalCategory, approvalAction } from '../../models/ApprovalListItem';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import { resetApprovals } from '../../state/actions/Approvals';
@@ -23,7 +23,7 @@ interface ApprovalSummaryProps {
   route: RouteProp<any, string>;
   navigation: NavigationProp<any>;
   approvalList: ApprovalCategory[];
-  approvalApi:  {
+  approvalApi: {
     isWaiting: boolean;
     value: any;
     error: any;
@@ -43,53 +43,12 @@ interface ItemQuantity {
   totalItems: number;
 }
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {
-  const { route, navigation, approvalList, approvalApi, dispatch, useEffectHook, apiStart, trackEventCall, validateSessionCall } = props;//MIONIONINUBOUBUOBOIUBOIUBIBOU
-
-  //Update Approval List Api
-  useEffectHook(() => {
-    if (!approvalApi.isWaiting && approvalApi.result) {
-      trackEventCall('submit_approval_list_api_success', { duration: moment().valueOf() - apiStart });
-      dispatch(resetApprovals());
-      navigation.navigate({
-        name:'Approval',
-        params: {prevRoute: route.name}
-      })
-
-      if(approvalApi.result.status === 200 || approvalApi.result.data.metadata?.success > 0){
-        const successMessage = route.name === 'ApproveSummary'? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED')
-        dispatch(showSnackBar(successMessage, 3000))
-      }
-      }
-
-    // on api failure
-    if (!approvalApi.isWaiting && approvalApi.error) {
-      trackEventCall('submit_approval_list_api_failure', {
-        errorDetails: approvalApi.error.message || approvalApi.error,
-        duration: moment().valueOf() - apiStart
-      });
-      // TODO handle unhappy path for Approve/Reject https://jira.walmart.com/browse/INTLSAOPS-2392 -2393
-    }
-  }, [approvalApi])
-
-  //Navigation Listener
-  useEffectHook(() => {
-    // Resets location api response data when navigating off-screen
-    navigation.addListener('beforeRemove', () =>{
-      dispatch({type:'API/UPDATE_APPROVAL_LIST/RESET'})
-    })
-  }, [])
-
-  if (approvalApi.isWaiting) {
-    return (
-      <ActivityIndicator
-        animating={approvalApi.isWaiting}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
+  const {
+    route, navigation, approvalList, approvalApi, dispatch, useEffectHook, apiStart, setApiStart,
+    trackEventCall, validateSessionCall
+  } = props;
+  const checkedList: ApprovalCategory[] = [];
+  const resolvedTime = moment().toISOString();
   const decreaseItems: ItemQuantity = {
     oldQty: 0,
     newQty: 0,
@@ -103,12 +62,51 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
     totalItems: 0
   };
 
-  const checkedList: ApprovalCategory[] = [];
-  const resolvedTime = moment().toISOString();
+  // Update Approval List Api
+  useEffectHook(() => {
+    if (!approvalApi.isWaiting && approvalApi.result) {
+      trackEventCall('update_approval_list_api_success', { duration: moment().valueOf() - apiStart });
+      dispatch(resetApprovals());
+      navigation.navigate({
+        name: 'Approval',
+        params: { prevRoute: route.name }
+      });
+
+      if (approvalApi.result.status === 200) {
+        const successMessage = route.name === 'ApproveSummary'
+          ? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED');
+        dispatch(showSnackBar(successMessage, 3000));
+        // Reset update approval api to prevent navigation loop
+        dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
+      }
+    }
+
+    // on api failure
+    if (!approvalApi.isWaiting && approvalApi.error) {
+      trackEventCall('update_approval_list_api_failure', {
+        errorDetails: approvalApi.error.message || approvalApi.error,
+        duration: moment().valueOf() - apiStart
+      });
+      dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
+      // TODO handle unhappy path for Approve/Reject https://jira.walmart.com/browse/INTLSAOPS-2392 -2393
+    }
+  }, [approvalApi]);
+
+  if (approvalApi.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={approvalApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
 
   approvalList.forEach(item => {
     if (item.isChecked && !item.categoryHeader) {
-      checkedList.push({...item, resolvedTimestamp: resolvedTime })
+      checkedList.push({ ...item, resolvedTimestamp: resolvedTime });
       if (item.newQuantity > item.oldQuantity) {
         increaseItems.oldQty += item.oldQuantity;
         increaseItems.newQty += item.newQuantity;
@@ -123,14 +121,14 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
     }
   });
 
- 
   const handleApprovalSubmit = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      const actionType = route.name === 'ApproveSummary' ? approvalAction.Approve : approvalAction.Reject
-      trackEventCall('Submit_approval_list_api_call', {approvalAction: actionType})
-      dispatch(updateApprovalList({ approvalItems: checkedList, headers:{action: actionType} }))
-    })
-  }
+      const actionType = route.name === 'ApproveSummary' ? approvalAction.Approve : approvalAction.Reject;
+      trackEventCall('update_approval_list_api_call', { approvalAction: actionType });
+      setApiStart(moment().valueOf());
+      dispatch(updateApprovalList({ approvalItems: checkedList, headers: { action: actionType } }));
+    });
+  };
 
   return (
     <View style={styles.mainContainer}>
