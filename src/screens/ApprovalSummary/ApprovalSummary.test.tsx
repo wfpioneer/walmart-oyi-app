@@ -15,11 +15,11 @@ describe('ApprovalSummaryScreen', () => {
     name: 'RejectSummary'
   };
   const defaultAsyncState = {
-      isWaiting: false,
-      value: null,
-      error: null,
-      result: null
-  }
+    isWaiting: false,
+    value: null,
+    error: null,
+    result: null
+  };
   describe('Tests rendering the Summary Page: ', () => {
     it('Renders "summary of approvals" translation if Approve route is selected ', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -142,7 +142,7 @@ describe('ApprovalSummaryScreen', () => {
         value: null,
         error: null,
         result: null
-    }
+      };
       renderer.render(
         <ApprovalSummaryScreen
           route={approveRoute}
@@ -159,5 +159,5 @@ describe('ApprovalSummaryScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-  })
+  });
 });

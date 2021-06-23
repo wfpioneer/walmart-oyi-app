@@ -16,7 +16,7 @@ export interface ApprovalListItem {
   approvalRequestSource: approvalRequestSource;
   isChecked?: boolean;
   daysLeft?: number;
-  resolvedTimestamp?: string;
+  resolvedTimestamp?: string; // This is used in the request body for the approve/reject API call
 }
 
 export interface ApprovalCategory extends ApprovalListItem {

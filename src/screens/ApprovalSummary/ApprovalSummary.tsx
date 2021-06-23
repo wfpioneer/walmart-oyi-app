@@ -47,11 +47,25 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
     route, navigation, approvalList, approvalApi, dispatch, useEffectHook, apiStart, setApiStart,
     trackEventCall, validateSessionCall
   } = props;
+  const checkedList: ApprovalCategory[] = [];
+  const resolvedTime = moment().toISOString();
+  const decreaseItems: ItemQuantity = {
+    oldQty: 0,
+    newQty: 0,
+    dollarChange: 0,
+    totalItems: 0
+  };
+  const increaseItems: ItemQuantity = {
+    oldQty: 0,
+    newQty: 0,
+    dollarChange: 0,
+    totalItems: 0
+  };
 
   // Update Approval List Api
   useEffectHook(() => {
     if (!approvalApi.isWaiting && approvalApi.result) {
-      trackEventCall('submit_approval_list_api_success', { duration: moment().valueOf() - apiStart });
+      trackEventCall('update_approval_list_api_success', { duration: moment().valueOf() - apiStart });
       dispatch(resetApprovals());
       navigation.navigate({
         name: 'Approval',
@@ -62,16 +76,18 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
         const successMessage = route.name === 'ApproveSummary'
           ? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED');
         dispatch(showSnackBar(successMessage, 3000));
+        // Reset update approval api state to prevent navigator from looping back to the approvalist screen
         dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
       }
     }
 
     // on api failure
     if (!approvalApi.isWaiting && approvalApi.error) {
-      trackEventCall('submit_approval_list_api_failure', {
+      trackEventCall('update_approval_list_api_failure', {
         errorDetails: approvalApi.error.message || approvalApi.error,
         duration: moment().valueOf() - apiStart
       });
+      dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
       // TODO handle unhappy path for Approve/Reject https://jira.walmart.com/browse/INTLSAOPS-2392 -2393
     }
   }, [approvalApi]);
@@ -87,21 +103,6 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
       />
     );
   }
-  const decreaseItems: ItemQuantity = {
-    oldQty: 0,
-    newQty: 0,
-    dollarChange: 0,
-    totalItems: 0
-  };
-  const increaseItems: ItemQuantity = {
-    oldQty: 0,
-    newQty: 0,
-    dollarChange: 0,
-    totalItems: 0
-  };
-
-  const checkedList: ApprovalCategory[] = [];
-  const resolvedTime = moment().toISOString();
 
   approvalList.forEach(item => {
     if (item.isChecked && !item.categoryHeader) {
@@ -123,7 +124,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
   const handleApprovalSubmit = () => {
     validateSessionCall(navigation, route.name).then(() => {
       const actionType = route.name === 'ApproveSummary' ? approvalAction.Approve : approvalAction.Reject;
-      trackEventCall('submit_approval_list_api_call', { approvalAction: actionType });
+      trackEventCall('update_approval_list_api_call', { approvalAction: actionType });
       setApiStart(moment().valueOf());
       dispatch(updateApprovalList({ approvalItems: checkedList, headers: { action: actionType } }));
     });
