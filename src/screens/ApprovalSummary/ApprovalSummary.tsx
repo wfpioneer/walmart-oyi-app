@@ -76,7 +76,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
         const successMessage = route.name === 'ApproveSummary'
           ? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED');
         dispatch(showSnackBar(successMessage, 3000));
-        // Reset update approval api to prevent navigation loop
+        // Reset update approval api state to prevent navigator from looping back to the approvalist screen
         dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
       }
     }
