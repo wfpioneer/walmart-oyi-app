@@ -8,6 +8,7 @@ import { mockZones } from '../../mockData/zoneDetails';
 import { ZoneItem } from '../../models/ZoneItem';
 import ZoneItemCard from '../../components/zoneItemCard/ZoneItemCard';
 import { strings } from '../../locales';
+import { LocationHeader } from '../../components/locationHeader/LocationHeader';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
@@ -25,14 +26,11 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
 
   return (
     <View>
-      <View style={styles.staticHeader}>
-        <Text>
-          {`${strings('GENERICS.CLUB')} ${siteId}`}
-        </Text>
-        <Text style={styles.areas}>
-          {`${zoneList.length} ${strings('LOCATION.AREAS')}`}
-        </Text>
-      </View>
+      <LocationHeader
+        location={`${strings('GENERICS.CLUB')} ${siteId}`}
+        details={`${zoneList.length} ${strings('LOCATION.AREAS')}`}
+      />
+
       <FlatList
         data={zoneList}
         renderItem={({ item }) => (

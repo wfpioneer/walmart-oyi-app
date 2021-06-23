@@ -5,18 +5,18 @@ import {
 import styles from './LocationHeader.style';
 
 interface LocationHeaderProps {
-title: string,
-details: string
+    location: string,
+    details: string
 }
 
 export const LocationHeader = (props: LocationHeaderProps) : JSX.Element => {
-  const { title, details } = props;
+  const { location, details } = props;
   return (
     <View style={styles.staticHeader}>
       <Text>
-        {title}
+        {location}
       </Text>
-      <Text style={styles.areas}>
+      <Text style={styles.detailsText}>
         {details}
       </Text>
     </View>
