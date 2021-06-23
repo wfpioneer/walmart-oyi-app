@@ -16,6 +16,7 @@ import PrintService from '../../services/Print.service';
 import GetLocationDetailsService from '../../services/GetLocationDetails.service';
 import GetFluffyRolesService from '../../services/GetFluffyRoles.service';
 import GetApprovalListService from '../../services/GetApprovalList.service';
+import UpdateApprovalListService from '../../services/UpdateApprovalList.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
@@ -31,7 +32,8 @@ const genericSagas = [
   makeAsyncSaga(saga.PRINT_SIGN, actions.printSign, PrintService.print),
   makeAsyncSaga(saga.GET_LOCATION_DETAILS, actions.getLocationDetails, GetLocationDetailsService.getLocation),
   makeAsyncSaga(saga.GET_FLUFFY_FEATURES, actions.getFluffyRoles, GetFluffyRolesService.getFluffyRoles),
-  makeAsyncSaga(saga.GET_APPROVAL_LIST, actions.getApprovalList, GetApprovalListService.getApprovalList)
+  makeAsyncSaga(saga.GET_APPROVAL_LIST, actions.getApprovalList, GetApprovalListService.getApprovalList),
+  makeAsyncSaga(saga.UPDATE_APPROVAL_LIST, actions.updateApprovalList, UpdateApprovalListService.updateApprovalList)
 ];
 
 export default function* rootSaga() {

@@ -1,4 +1,6 @@
-import { approvalRequestSource, approvalStatus } from '../../models/ApprovalListItem';
+import {
+  ApprovalListItem, approvalAction, approvalRequestSource, approvalStatus
+} from '../../models/ApprovalListItem';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
@@ -14,6 +16,7 @@ export const PRINT_SIGN = 'SAGA/PRINT_SIGN';
 export const GET_LOCATION_DETAILS = 'SAGA/GET_LOCATION_DETAILS';
 export const GET_FLUFFY_FEATURES = 'SAGA/GET_FLUFFY_FEATURES';
 export const GET_APPROVAL_LIST = 'SAGA/GET_APPROVAL_LIST';
+export const UPDATE_APPROVAL_LIST = 'SAGA/UPDATE_APPROVAL_LIST';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload });
@@ -34,3 +37,7 @@ export const getApprovalList = (payload: {
   status?: approvalStatus;
   approvalRequestSource?: approvalRequestSource;
 }) => ({ type: GET_APPROVAL_LIST, payload });
+export const updateApprovalList = (payload: {
+  approvalItems: ApprovalListItem[]
+  headers: {action: approvalAction},
+}) => ({ type: UPDATE_APPROVAL_LIST, payload });

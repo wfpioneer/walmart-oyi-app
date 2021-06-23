@@ -2,7 +2,7 @@ import React from 'react';
 import { Snackbar } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { RootState, useTypedSelector } from '../../state/reducers/RootReducer';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { hideSnackBar } from '../../state/actions/SnackBar';
 import styles from './SnackBar.style';
 

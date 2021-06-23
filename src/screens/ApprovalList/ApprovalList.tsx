@@ -10,7 +10,7 @@ import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
-import { ApprovalCategory, ApprovalListItem } from '../../models/ApprovalListItem';
+import { ApprovalCategory, ApprovalListItem, approvalStatus } from '../../models/ApprovalListItem';
 import styles from './ApprovalList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getApprovalList } from '../../state/actions/saga';
@@ -125,9 +125,9 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   // Get Approval List Items
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
-      trackEvent('get_approval_list_api_call');
+      trackEventCall('get_approval_list_api_call');
       setApiStart(moment().valueOf());
-      dispatch(getApprovalList({}));
+      dispatch(getApprovalList({ status: approvalStatus.Pending }));
     }).catch(() => {});
   }), [navigation]);
 
@@ -152,7 +152,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!isWaiting && result) {
-      trackEvent('get_approval_list_api_success', { duration: moment().valueOf() - apiStart });
+      trackEventCall('get_approval_list_api_success', { duration: moment().valueOf() - apiStart });
       const approvalItems: ApprovalListItem[] = (result && result.data) || [];
       if (approvalItems.length !== 0) {
         const { filteredData, headerIndices } = convertApprovalListData(approvalItems);
@@ -162,7 +162,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
 
     // on api failure
     if (!isWaiting && error) {
-      trackEvent('get_approval_list_api_failure', {
+      trackEventCall('get_approval_list_api_failure', {
         errorDetails: error.message || error,
         duration: moment().valueOf() - apiStart
       });
@@ -171,13 +171,13 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
 
   const handleApproveSummary = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEvent('handle_approve_summary_click');
+      trackEventCall('handle_approve_summary_click');
       navigation.navigate('ApproveSummary');
     });
   };
   const handleRejectSummary = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEvent('handle_reject_summary_click');
+      trackEventCall('handle_reject_summary_click');
       navigation.navigate('RejectSummary');
     });
   };
