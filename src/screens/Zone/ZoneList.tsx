@@ -28,7 +28,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     <View>
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
-        details={`${zoneList.length} ${strings('LOCATION.AREAS')}`}
+        details={`${zoneList.length} ${strings('LOCATION.ZONES')}`}
       />
 
       <FlatList
