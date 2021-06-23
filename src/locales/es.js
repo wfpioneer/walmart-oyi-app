@@ -142,13 +142,13 @@ export default {
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
-    AREAS: 'Areas', // TODO Spanish Translation
-    NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Spanish Translation
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ZONES: 'Zonas',
     AISLES: 'Pasillos',
     SECTIONS: 'Secciones',
-    LOCATION_DETAILS: 'Detalles de ubicación'
+    AREAS: 'Areas', // TODO Spanish Translation
+    LOCATION_DETAILS: 'Detalles de ubicación',
+    NO_ZONES_AVAILABLE: 'No Zones Available' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

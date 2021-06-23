@@ -11,7 +11,7 @@ describe('Test Location Header in Zone Screen', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(<LocationHeader
       location={`${strings('GENERICS.CLUB')} ${MX_TEST_CLUB_NBR}`}
-      details={`${mockZones.length} ${strings('LOCATION.AREAS')}`}
+      details={`${mockZones.length} ${strings('LOCATION.ZONES')}`}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });

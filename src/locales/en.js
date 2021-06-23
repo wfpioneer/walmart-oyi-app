@@ -150,7 +150,6 @@ export default {
     AREAS: 'Areas',
     LOCATION_DETAILS: 'Location Details',
     NO_ZONES_AVAILABLE: 'No Zones Available'
-
   },
   WORKLIST: {
     WORKLIST: 'Work List',
