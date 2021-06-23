@@ -189,6 +189,8 @@ export default {
     INCREASES: 'Todos los incrementos',
     DECREASES: 'Todos los decrementos',
     REVIEW: 'Revisar cambios',
-    LIST_NOT_FOUND: 'La lista de aprobación está vacía'
+    LIST_NOT_FOUND: 'La lista de aprobación está vacía',
+    UPDATE_APPROVED: 'Actualización de existencia aprobado',
+    UPDATE_REJECTED: 'Actualización de existencia rechazado'
   }
 };

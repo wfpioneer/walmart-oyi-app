@@ -28,8 +28,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: COLOR.GREY_700,
     marginBottom: 5
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
-
 });
 
 export default styles;

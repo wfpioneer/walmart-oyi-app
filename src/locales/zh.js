@@ -189,6 +189,8 @@ export default {
     INCREASES: '增加总量',
     DECREASES: '减少总量',
     REVIEW: '浏览变化',
-    LIST_NOT_FOUND: '审批清单为空' // TODO needs proper Mandarin translations
+    LIST_NOT_FOUND: '无审批清单',
+    UPDATE_APPROVED: '审批现货变更',
+    UPDATE_REJECTED: '拒绝现货变更'
   }
 };
