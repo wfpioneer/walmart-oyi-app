@@ -149,8 +149,7 @@ export default {
     SECTIONS: 'Sections',
     AREAS: 'Areas',
     LOCATION_DETAILS: 'Location Details',
-    NO_ZONES_AVAILABLE:'No Zones Available',
-  
+    NO_ZONES_AVAILABLE: 'No Zones Available'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
