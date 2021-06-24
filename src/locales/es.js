@@ -194,6 +194,6 @@ export default {
     UPDATE_REJECTED: 'Actualización de existencia rechazado',
     FAILED_APPROVE: 'Las solicitudes fallaron al aprobarse',
     FAILED_ITEMS: 'Artículos Fallidos',
-    UPDATE_API_ERROR: 'There was an error updating the approval status \n Please try again.'// TODO Needs Spanish Translations
+    UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo'
   }
 };

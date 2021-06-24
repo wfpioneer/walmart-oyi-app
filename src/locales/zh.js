@@ -192,8 +192,8 @@ export default {
     LIST_NOT_FOUND: '无审批清单',
     UPDATE_APPROVED: '审批现货变更',
     UPDATE_REJECTED: '拒绝现货变更',
-    FAILED_APPROVE: 'Requests Failed to Approve', // TODO needs Mandarin translations
-    FAILED_ITEMS: 'Items Failed', // TODO needs Mandarin translations
-    UPDATE_API_ERROR: 'There was an error updating the approval status \n Please try again.'// TODO needs Mandarin translations
+    FAILED_APPROVE: '审批未成功',
+    FAILED_ITEMS: '此商品未成功审批',
+    UPDATE_API_ERROR: '更新审批状态时发生错误，\n请再试'
   }
 };
