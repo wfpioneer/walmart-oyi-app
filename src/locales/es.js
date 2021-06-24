@@ -191,7 +191,8 @@ export default {
     LIST_NOT_FOUND: 'La lista de aprobación está vacía',
     UPDATE_APPROVED: 'Actualización de existencia aprobado',
     UPDATE_REJECTED: 'Actualización de existencia rechazado',
-    FAILED_APPROVE: 'Requests Failed to Approve', // TODO Needs Spanish Translations
-    FAILED_ITEMS: 'Items Failed'// TODO Needs Spanish Translations
+    FAILED_APPROVE: 'Las solicitudes fallaron al aprobarse',
+    FAILED_ITEMS: 'Artículos Fallidos',
+    UPDATE_API_ERROR: 'There was an error updating the approval status \n Please try again.'// TODO Needs Spanish Translations
   }
 };

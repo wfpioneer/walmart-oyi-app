@@ -32,6 +32,13 @@ interface ApprovalItemProp {
   item: ApprovalCategory;
   dispatch: Dispatch<any>;
 }
+interface AsyncState{
+    isWaiting: boolean;
+    value: any;
+    error: any;
+    result: any;
+  }
+
 interface ApprovalListProps {
   dispatch: Dispatch<any>;
   error: any;
@@ -48,18 +55,17 @@ interface ApprovalListProps {
   useFocusEffectHook: (effect: EffectCallback) => void;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
-  updateApprovalApi: {
-    isWaiting: boolean;
-    value: any;
-    error: any;
-    result: any;
-  };
+  updateApprovalApi: AsyncState
 }
 interface UpdateResponse {
   message?: string;
   id: number;
   itemNbr: number;
   statusCode?: number;
+}
+interface PopUpProps {
+  updateApprovalApi: AsyncState;
+  dispatch:Dispatch<any>;
 }
 export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryFilter => {
   const sortedData = [...listData];
@@ -127,6 +133,49 @@ export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
     />
   );
 };
+// use prop parameter
+export const RenderPopUp = (props: PopUpProps): JSX.Element => {
+  const { updateApprovalApi, dispatch } = props;
+  const data = updateApprovalApi.result?.data?.data || [];
+  const total = updateApprovalApi.result?.data?.metadata?.total || 0;
+  const failedItems = data.filter((item: UpdateResponse) => item.message === 'failure');
+
+  return (
+    <Modal isVisible={true}>
+      <View style={styles.popUpContainer}>
+        <View style={styles.contentContainer}>
+          <Text style={styles.errorText}>{strings('APPROVAL.FAILED_APPROVE')}</Text>
+          {failedItems.length <= 5
+            ? (
+              <FlatList
+                data={failedItems.slice(0, 5)}
+                keyExtractor={item => item.id.toString()}
+                renderItem={({ item }) => (
+                  <Text style={styles.listText}>
+                    {`${strings('GENERICS.ITEM')}: ${item.itemNbr}`}
+                  </Text>
+                )}
+                style={styles.listContainer}
+              />
+            )
+            : (
+              <Text style={styles.failedItemText}>
+                {`${failedItems.length} / ${total} ${strings('APPROVAL.FAILED_ITEMS')}`}
+              </Text>
+            )}
+          <Button
+            title={strings('APPROVAL.CONFIRM')}
+            type={Button.Type.PRIMARY}
+            style={{ width: '50%' }}
+            onPress={() => {
+              dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
+            }}
+          />
+        </View>
+      </View>
+    </Modal>
+  );
+};
 
 export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   const {
@@ -182,6 +231,13 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
     }
   }, [error, isWaiting, result]);
 
+  // Reset update approval list api if there are no failed items in a mixed response
+  useEffectHook(() => {
+    if (updateApprovalApi.result?.status === 207 && updateApprovalApi.result?.data.metadata.failure === 0) {
+      dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
+    }
+  }, [updateApprovalApi]);
+
   const handleApproveSummary = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall('handle_approve_summary_click');
@@ -225,50 +281,11 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
     );
   }
 
-  if (updateApprovalApi.result?.status === 207) {
-    const { skippedItems, data, metadata: { total } } = updateApprovalApi.result.data;
-    // When there are no failed or successful items data is null
-    const items = data || [];
-    const failedItems = items.filter((item: UpdateResponse) => item.message === 'failure');
-
-    const erroredItems = [...skippedItems, ...failedItems];
-    return (
-      <Modal isVisible={true}>
-        <View style={styles.popUpContainer}>
-          <View style={styles.contentContainer}>
-            <Text style={styles.errorText}>{strings('APPROVAL.FAILED_APPROVE')}</Text>
-            {erroredItems.length <= 5
-              ? (
-                <FlatList
-                  data={erroredItems.slice(0, 5)}
-                  keyExtractor={item => item.id.toString()}
-                  renderItem={({ item }) => (
-                    <Text style={styles.listText}>
-                      {`${strings('GENERICS.ITEM')}: ${item.itemNbr}`}
-                    </Text>
-                  )}
-                  style={styles.listContainer}
-                />
-              )
-              : (
-                <Text style={styles.failedItemText}>
-                  {`${erroredItems.length} / ${total} ${strings('APPROVAL.FAILED_ITEMS')}`}
-                </Text>
-              )}
-            <Button
-              title={strings('APPROVAL.CONFIRM')}
-              type={Button.Type.PRIMARY}
-              style={{ width: '50%' }}
-              onPress={() => dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' })}
-            />
-          </View>
-        </View>
-      </Modal>
-    );
-  }
-
   return (
     <View style={styles.mainContainer}>
+      {updateApprovalApi.result?.status === 207 && (
+      <RenderPopUp updateApprovalApi={updateApprovalApi} dispatch={dispatch} />
+      )}
       <FlatList
         data={filteredList}
         keyExtractor={(item: ApprovalCategory, index: number) => {
@@ -322,6 +339,7 @@ const ApprovalList = (): JSX.Element => {
       result={result}
       error={error}
       isWaiting={isWaiting}
+      updateApprovalApi={updateApprovalApi}
       apiStart={apiStart}
       setApiStart={setApiStart}
       navigation={navigation}
@@ -331,7 +349,6 @@ const ApprovalList = (): JSX.Element => {
       trackEventCall={trackEvent}
       selectedItemQty={selectedItemQty}
       validateSessionCall={validateSession}
-      updateApprovalApi={updateApprovalApi}
     />
   );
 };

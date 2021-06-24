@@ -6,6 +6,8 @@ import {
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import moment from 'moment';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Modal from 'react-native-modal';
 import { QuantityChange } from '../../components/quantityChange/QuantityChange';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import { strings } from '../../locales';
@@ -18,6 +20,7 @@ import { resetApprovals } from '../../state/actions/Approvals';
 import COLOR from '../../themes/Color';
 import { updateApprovalList } from '../../state/actions/saga';
 import { showSnackBar } from '../../state/actions/SnackBar';
+import Button from '../../components/buttons/Button';
 
 interface ApprovalSummaryProps {
   route: RouteProp<any, string>;
@@ -31,6 +34,8 @@ interface ApprovalSummaryProps {
   };
   apiStart: number;
   setApiStart: React.Dispatch<React.SetStateAction<number>>
+  errorModalVisible: boolean;
+  setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   dispatch: Dispatch<any>
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
   trackEventCall: (eventName: string, params?: any) => void;
@@ -42,10 +47,38 @@ interface ItemQuantity {
   dollarChange: number;
   totalItems: number;
 }
+interface ErrorModalProps {
+  isVisible: boolean;
+   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export const RenderErrorModal = (props: ErrorModalProps): JSX.Element => {
+  const { isVisible, setIsVisible } = props;
+  return (
+    <Modal isVisible={isVisible}>
+      <View style={styles.modalContainer}>
+        <View style={styles.updateErrorContainer}>
+          <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+          <Text style={styles.errorText}>
+            {strings('APPROVAL.UPDATE_API_ERROR')}
+          </Text>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.dismissButton}
+              title={strings('GENERICS.OK')}
+              backgroundColor={COLOR.TRACKER_RED}
+              onPress={() => setIsVisible(false)}
+            />
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+};
+
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {
   const {
     route, navigation, approvalList, approvalApi, dispatch, useEffectHook, apiStart, setApiStart,
-    trackEventCall, validateSessionCall
+    trackEventCall, validateSessionCall, errorModalVisible, setErrorModalVisible
   } = props;
   const checkedList: ApprovalCategory[] = [];
   const resolvedTime = moment().toISOString();
@@ -87,8 +120,8 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
         errorDetails: approvalApi.error.message || approvalApi.error,
         duration: moment().valueOf() - apiStart
       });
+      setErrorModalVisible(true);
       dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
-      // TODO handle unhappy path for Approve/Reject https://jira.walmart.com/browse/INTLSAOPS-2392 -2393
     }
   }, [approvalApi]);
 
@@ -132,6 +165,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
 
   return (
     <View style={styles.mainContainer}>
+      <RenderErrorModal isVisible={errorModalVisible} setIsVisible={setErrorModalVisible} />
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>
           {route.name === 'ApproveSummary'
@@ -174,6 +208,7 @@ export const ApprovalSummary = (): JSX.Element => {
   const { approvalList } = useTypedSelector(state => state.Approvals);
   const approvalApi = useTypedSelector(state => state.async.updateApprovalList);
   const [apiStart, setApiStart] = useState(0);
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
   const route = useRoute();
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -189,6 +224,8 @@ export const ApprovalSummary = (): JSX.Element => {
       useEffectHook={useEffect}
       trackEventCall={trackEvent}
       validateSessionCall={validateSession}
+      errorModalVisible={errorModalVisible}
+      setErrorModalVisible={setErrorModalVisible}
     />
   );
 };

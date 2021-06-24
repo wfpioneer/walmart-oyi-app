@@ -193,6 +193,7 @@ export default {
     UPDATE_APPROVED: '审批现货变更',
     UPDATE_REJECTED: '拒绝现货变更',
     FAILED_APPROVE: 'Requests Failed to Approve', // TODO needs Mandarin translations
-    FAILED_ITEMS: 'Items Failed' // TODO needs Mandarin translations
+    FAILED_ITEMS: 'Items Failed', // TODO needs Mandarin translations
+    UPDATE_API_ERROR: 'There was an error updating the approval status \n Please try again.'// TODO needs Mandarin translations
   }
 };
