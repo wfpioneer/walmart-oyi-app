@@ -195,6 +195,6 @@ export default {
     UPDATE_REJECTED: 'On-hands update rejected',
     FAILED_APPROVE: 'Requests Failed to Approve',
     FAILED_ITEMS: 'Items Failed',
-    UPDATE_API_ERROR: 'There was an error updating the approval status \n Please try again.'
+    UPDATE_API_ERROR: 'There was an error updating the approval status. \n Please try again.'
   }
 };

@@ -146,6 +146,7 @@ export default {
     ZONES: 'Zonas',
     AISLES: 'Pasillos',
     SECTIONS: 'Secciones',
+    AREAS: 'Areas', // TODO Spanish Translation
     LOCATION_DETAILS: 'Detalles de ubicación',
     NO_ZONES_AVAILABLE: 'No Zones Available' // TODO Spanish Translation
   },
