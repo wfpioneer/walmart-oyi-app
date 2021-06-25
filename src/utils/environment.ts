@@ -35,17 +35,17 @@ export const svcName: ApplicationKey = {
   fluffyName: 'IntlMobileAuthorizationPlatform'
 };
 
-type svcEnv = 'dev'|'stg:1.0.0'|'stg:2.0.0'|'stage'|'prod'| '';
+type svcEnv = 'dev'|'stage'|'prod'| '';
 export const getWmSvcEnv = (isOrchApi?: boolean): svcEnv => {
   switch (Config.ENVIRONMENT) {
     case 'dev':
-      return isOrchApi ? 'stg:1.0.0' : 'dev';
+      return 'dev';
     case 'stage':
-      return isOrchApi ? 'stg:2.0.0' : 'stage';
+      return 'stage';
     case 'prod':
       return 'prod';
     default:
-      return isOrchApi ? 'stg:2.0.0' : 'stage';
+      return 'stage';
   }
 };
 
