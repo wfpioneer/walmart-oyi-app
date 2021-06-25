@@ -14,7 +14,7 @@ export const CategorySeparator = (props: PropsI) => (
       { props.categoryName }
     </Text>
     <Text style={styles.numberOfItems}>
-      { `${props.numberOfItems} ${props.numberOfItems === 1 ? strings('WORKLIST.ITEM') : strings('WORKLIST.ITEMS')}`}
+      { `${props.numberOfItems} ${props.numberOfItems === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')}`}
     </Text>
   </View>
 );

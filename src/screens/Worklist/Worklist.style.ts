@@ -17,7 +17,8 @@ export default StyleSheet.create({
     width: '100%'
   },
   errorText: {
-    marginVertical: 10
+    marginVertical: 10,
+    textAlign: 'center'
   },
   errorView: {
     flex: 1,

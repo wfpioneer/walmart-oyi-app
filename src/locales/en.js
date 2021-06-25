@@ -40,7 +40,10 @@ export default {
     RETRY: 'Retry',
     GOAL: 'Goal',
     VERSION: 'Version',
-    BARCODE_SCAN_ERROR: 'This barcode type is not allowed'
+    BARCODE_SCAN_ERROR: 'This barcode type is not allowed',
+    ITEM: 'item',
+    ITEMS: 'items',
+    TOOLS: 'Tools'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -139,14 +142,19 @@ export default {
     DELETE_CONFIRMATION: 'Confirm: \ndelete location ',
     DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nRetry?',
     ADD_NEW_LOCATION: 'Add New Location',
-    EDIT_LOCATION: 'Edit Location'
+    EDIT_LOCATION: 'Edit Location',
+    LOCATION_MANAGEMENT: 'Location Management',
+    ZONES: 'Zones',
+    AISLES: 'Aisles',
+    SECTIONS: 'Sections',
+    AREAS: 'Areas',
+    LOCATION_DETAILS: 'Location Details',
+    NO_ZONES_AVAILABLE: 'No Zones Available'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
     CATEGORY: 'Category',
     EXCEPTION_TYPE: 'Exception Type',
-    ITEM: 'item',
-    ITEMS: 'items',
     ALL: 'All',
     REFINE: 'Refine',
     CLEAR: 'Clear',
@@ -172,6 +180,18 @@ export default {
     SELECT_ALL: 'Select all',
     DESELECT_ALL: 'Deselect all',
     SELECTED: 'selected',
-    APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.'
+    APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.',
+    APPROVE: 'Approve',
+    REJECT: 'Reject',
+    GO_BACK: 'Go back',
+    CONFIRM: 'Confirm',
+    APPROVE_SUMMARY: 'Summary of approvals',
+    REJECT_SUMMARY: 'Summary of rejections',
+    INCREASES: 'All increases',
+    DECREASES: 'All decreases',
+    REVIEW: 'Review changes',
+    LIST_NOT_FOUND: 'The Approval List is Empty',
+    UPDATE_APPROVED: 'On-hands update approved',
+    UPDATE_REJECTED: 'On-hands update rejected'
   }
 };

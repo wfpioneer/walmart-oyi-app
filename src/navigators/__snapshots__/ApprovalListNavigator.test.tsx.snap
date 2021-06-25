@@ -21,7 +21,7 @@ exports[`ApprovalList Navigator Renders \`items\` translation for an approval li
       }
     }
   >
-     5 [missing "en.WORKLIST.ITEMS" translation]
+     5 [missing "en.GENERICS.ITEMS" translation]
   </Text>
 </View>
 `;
@@ -47,7 +47,7 @@ exports[`ApprovalList Navigator Renders single \`item\` translation for an appro
       }
     }
   >
-     1 [missing "en.WORKLIST.ITEM" translation]
+     1 [missing "en.GENERICS.ITEM" translation]
   </Text>
 </View>
 `;
@@ -92,6 +92,24 @@ exports[`ApprovalList Navigator Renders the approval list navigator component 1`
           "paddingRight": 10,
         },
         "headerTitle": [Function],
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="ApproveSummary"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.APPROVAL.REVIEW\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="RejectSummary"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.APPROVAL.REVIEW\\" translation]",
       }
     }
   />

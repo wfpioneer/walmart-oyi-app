@@ -31,37 +31,15 @@ const styles = StyleSheet.create({
   },
   itemDesc: {
     color: COLOR.GREY_800,
-    fontSize: 20,
-    marginVertical: 8,
+    fontSize: 18,
     fontWeight: 'bold',
-    width: '80%'
+    width: '80%',
+    alignSelf: 'center'
   },
-  divider: {
+  timeLeftDivider: {
     marginHorizontal: 4,
-    color: COLOR.GREY_700,
-    fontSize: 16
-  },
-  quantityCalc: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginVertical: 6
-  },
-  onHandsChange: {
-    flexDirection: 'row'
-  },
-  quantityResult: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    borderTopWidth: 1,
-    borderTopColor: COLOR.GREY_200,
-    width: '100%'
-  },
-  onHandsContainer: {
-    flexDirection: 'column',
-    borderTopWidth: 1,
-    borderTopColor: COLOR.GREY_400,
-    width: '100%'
+    color: COLOR.SHIP_COVE,
+    fontSize: 14
   },
   checkBox: {
     justifyContent: 'center',
@@ -70,50 +48,29 @@ const styles = StyleSheet.create({
   infoColumn: {
     flexDirection: 'column'
   },
-  quantityHeader: {
-    flexDirection: 'column',
-    alignSelf: 'center',
-    color: COLOR.SHIP_COVE,
-    fontSize: 14
-  },
-  quantityText: {
-    fontSize: 16,
-    alignSelf: 'center',
-    color: COLOR.TRACKER_GREY
-  },
-  resultText: {
-    fontSize: 16,
-    alignSelf: 'center',
-    fontWeight: 'bold',
-    color: COLOR.TRACKER_GREY
-  },
-  negativeChange: {
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    color: COLOR.RED_550,
-    fontWeight: 'bold'
-  },
-  positiveChange: {
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    color: COLOR.GREEN,
-    fontWeight: 'bold'
-  },
   timeLeftContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '40%',
-    marginBottom: 6
+    width: '100%',
+    marginBottom: 6,
+    borderBottomWidth: 1,
+    borderBottomColor: COLOR.GREY_400,
+    paddingBottom: 6
   },
   userText: {
     color: COLOR.SHIP_COVE,
-    fontSize: 16
+    fontSize: 14,
+    flexBasis: 'auto',
+    flexGrow: 0,
+    flexShrink: 1
   },
   daysText: {
     color: COLOR.DEEP_RED,
-    textAlign: 'right',
-    fontSize: 16,
-    fontWeight: 'bold'
+    fontSize: 14,
+    fontWeight: 'bold',
+    flexBasis: '60%',
+    flexGrow: 1,
+    flexShrink: 0
   }
 });
 

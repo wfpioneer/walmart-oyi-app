@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Location Header in Zone Screen Renders Location Header In Zone Screen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "borderBottomColor": "#eeeeee",
+      "borderBottomWidth": 2,
+      "marginHorizontal": 0,
+      "padding": 14,
+    }
+  }
+>
+  <Text>
+    [missing "en.GENERICS.CLUB" translation] 5522
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "fontSize": 12,
+      }
+    }
+  >
+    10 [missing "en.LOCATION.ZONES" translation]
+  </Text>
+</View>
+`;

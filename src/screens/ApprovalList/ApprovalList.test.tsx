@@ -6,32 +6,60 @@ import { mockApprovals } from '../../mockData/mockApprovalItem';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
-Date.now = jest.fn().mockReturnValue(new Date('2021-03-30T00:00:00.000Z'));
+
 let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
 describe('ApprovalListScreen', () => {
   describe('Tests rendering the approval list', () => {
+    const approvalResult = {
+      data: mockApprovals,
+      status: 200
+    };
     it('Renders a list of Approval Items', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const approvalResult = {
-        data: mockApprovals,
-        status: 200
-      };
+
       const mockListData = convertApprovalListData(mockApprovals);
       renderer.render(
         <ApprovalListScreen
           dispatch={jest.fn()}
           result={approvalResult}
-          categoryIndices={mockListData.headerIndices}
-          filteredList={mockListData.filteredData}
-          apiStart={0}
-          setApiStart={jest.fn()}
           error={null}
           isWaiting={false}
+          categoryIndices={mockListData.headerIndices}
+          filteredList={mockListData.filteredData}
+          selectedItemQty={0}
+          apiStart={0}
+          setApiStart={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
           useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders Approve/Reject buttons for selected approval items', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const mockListData = convertApprovalListData(mockApprovals);
+      renderer.render(
+        <ApprovalListScreen
+          dispatch={jest.fn()}
+          result={approvalResult}
+          error={null}
+          isWaiting={false}
+          categoryIndices={mockListData.headerIndices}
+          filteredList={mockListData.filteredData}
+          selectedItemQty={3}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -50,12 +78,15 @@ describe('ApprovalListScreen', () => {
           isWaiting={false}
           categoryIndices={[]}
           filteredList={[]}
+          selectedItemQty={0}
           apiStart={0}
           setApiStart={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
           useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -90,12 +121,15 @@ describe('ApprovalListScreen', () => {
           isWaiting={false}
           categoryIndices={[]}
           filteredList={[]}
+          selectedItemQty={0}
           apiStart={0}
           setApiStart={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
           useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -111,12 +145,15 @@ describe('ApprovalListScreen', () => {
           isWaiting={true}
           categoryIndices={[]}
           filteredList={[]}
+          selectedItemQty={0}
           apiStart={0}
           setApiStart={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
           useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
