@@ -62,11 +62,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -262,11 +258,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders a single it
   }
 >
   <Image
-    source={
-      Object {
-        "testUri": "../../../src/assets/images/sams_logo.jpeg",
-      }
-    }
+    source=""
     style={
       Object {
         "height": 65,
@@ -437,11 +429,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -561,11 +549,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -685,11 +669,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -809,11 +789,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -933,11 +909,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -1057,11 +1029,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -1181,11 +1149,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -1305,11 +1269,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -1429,11 +1389,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -1550,11 +1506,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -1758,11 +1710,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,
@@ -1993,11 +1941,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
         }
       >
         <Image
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/sams_logo.jpeg",
-            }
-          }
+          source=""
           style={
             Object {
               "height": 65,

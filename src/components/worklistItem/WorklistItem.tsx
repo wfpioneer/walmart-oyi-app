@@ -37,7 +37,8 @@ const exceptionTypeToDisplayString = (exceptionType: string) => {
   }
 };
 
-export const WorklistItem = (props: WorklistItemProps) => {
+// TODO change this to default export
+export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
   const {
     navigation, dispatch, exceptionType, itemDescription, itemNumber, upcNbr
   } = props;
@@ -54,7 +55,7 @@ export const WorklistItem = (props: WorklistItemProps) => {
   return (
     <TouchableOpacity style={styles.container} onPress={worklistItemOnPress}>
       {/* TODO: Remove image? */}
-      <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.image} />
+      <Image source={require('../../assets/images/placeholder.png')} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.exceptionType}>
           { exceptionTypeToDisplayString(exceptionType) }

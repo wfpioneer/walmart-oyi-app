@@ -9,7 +9,6 @@ import { toggleItem } from '../../state/actions/Approvals';
 import { QuantityChange } from '../quantityChange/QuantityChange';
 
 export interface ApprovalCardProps{
-  image?: string;
   itemNbr: number;
   itemName: string;
   oldQuantity: number;
@@ -21,16 +20,17 @@ export interface ApprovalCardProps{
   dispatch: Dispatch<any>;
 }
 
+// TODO change this to default export
 export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
   const {
-    image, itemNbr, itemName, oldQuantity,
+    itemNbr, itemName, oldQuantity,
     newQuantity, dollarChange, userId, daysLeft, isChecked, dispatch
   } = props;
 
   return (
     <View style={styles.cardContainer}>
       {/* TODO: Remove image? */}
-      <Image source={image ? { uri: image } : require('../../assets/images/placeholder.png')} style={styles.image} />
+      <Image source={require('../../assets/images/placeholder.png')} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.itemNumber}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
         <View style={styles.itemInfoContainer}>
@@ -58,6 +58,5 @@ export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
 };
 
 ApprovalCard.defaultProps = {
-  image: undefined,
   isChecked: false
 };

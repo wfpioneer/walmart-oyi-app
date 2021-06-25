@@ -79,7 +79,8 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
           />
         </View>
         <View style={styles.itemDetailsContainer}>
-          <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.itemImage} />
+          {/* TODO: Remove image? */}
+          <Image source={require('../../assets/images/placeholder.png')} style={styles.itemImage} />
           <Text style={styles.itemNameTxt}>{itemToEdit.itemName}</Text>
         </View>
         <View style={styles.copyQtyContainer}>

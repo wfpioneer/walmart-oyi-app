@@ -14,11 +14,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
   }
 >
   <Image
-    source={
-      Object {
-        "uri": "../../assets/images/placeholder.png",
-      }
-    }
+    source=""
     style={
       Object {
         "height": 80,
@@ -153,11 +149,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
   }
 >
   <Image
-    source={
-      Object {
-        "uri": "../../assets/images/placeholder.png",
-      }
-    }
+    source=""
     style={
       Object {
         "height": 80,

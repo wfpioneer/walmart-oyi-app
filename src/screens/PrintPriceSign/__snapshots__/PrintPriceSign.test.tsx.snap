@@ -279,11 +279,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       }
     >
       <Image
-        source={
-          Object {
-            "testUri": "../../../src/assets/images/sams_logo.jpeg",
-          }
-        }
+        source=""
         style={
           Object {
             "height": 65,
@@ -621,11 +617,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       }
     >
       <Image
-        source={
-          Object {
-            "testUri": "../../../src/assets/images/sams_logo.jpeg",
-          }
-        }
+        source=""
         style={
           Object {
             "height": 65,
@@ -1000,11 +992,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       }
     >
       <Image
-        source={
-          Object {
-            "testUri": "../../../src/assets/images/sams_logo.jpeg",
-          }
-        }
+        source=""
         style={
           Object {
             "height": 65,

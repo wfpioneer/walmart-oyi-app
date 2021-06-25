@@ -285,7 +285,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.itemDetailsContainer}>
-          <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.itemImage} />
+          {/* TODO: Remove image? */}
+          <Image source={require('../../assets/images/placeholder.png')} style={styles.itemImage} />
           <Text style={styles.itemNameTxt}>{itemName}</Text>
         </View>
         <View style={styles.copyQtyContainer}>

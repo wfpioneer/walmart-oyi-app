@@ -9,7 +9,6 @@ import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 
 type ItemInfoProps = {
-  image?: any;
   itemName: string;
   itemNbr: number;
   upcNbr: string;
@@ -19,7 +18,7 @@ type ItemInfoProps = {
   exceptionType?: string; // This is enumerated
 };
 
-const ItemInfo = (props: ItemInfoProps) => {
+const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
     itemName, itemNbr, upcNbr, status, category, price, exceptionType
   } = props;
@@ -60,7 +59,7 @@ const ItemInfo = (props: ItemInfoProps) => {
     <View style={styles.mainContainer}>
       {/* TODO: Remove image? */}
       <View style={styles.imageContainer}>
-        <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.image} />
+        <Image source={require('../../assets/images/placeholder.png')} style={styles.image} />
       </View>
       {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
       <Text style={styles.itemNameText}>{itemName}</Text>
@@ -81,6 +80,10 @@ const ItemInfo = (props: ItemInfoProps) => {
       />
     </View>
   );
+};
+
+ItemInfo.defaultProps = {
+  exceptionType: null
 };
 
 export default ItemInfo;
