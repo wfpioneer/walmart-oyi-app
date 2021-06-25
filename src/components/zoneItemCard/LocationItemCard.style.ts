@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     marginVertical: 1,
     marginHorizontal: 0
   },
-  aisleText: {
+  detailsText: {
     color: COLOR.GREY_500,
     fontSize: 12
   },
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
-  categoryText: {
+  nameText: {
     flex: 8
   },
   arrowIcon: {

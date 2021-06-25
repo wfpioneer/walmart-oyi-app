@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test Item Cards Renders Item Cards 1`] = `
+exports[`Test Location Item Card Renders Location Item Card 1`] = `
 <ForwardRef
   style={
     Object {
@@ -28,7 +28,7 @@ exports[`Test Item Cards Renders Item Cards 1`] = `
       }
     >
       <Text>
-        H - Home
+        G - Grocery
       </Text>
       <View>
         <Text
@@ -39,7 +39,7 @@ exports[`Test Item Cards Renders Item Cards 1`] = `
             }
           }
         >
-          3 [missing "en.LOCATION.AISLES" translation]
+          4 Aisles
         </Text>
       </View>
     </View>

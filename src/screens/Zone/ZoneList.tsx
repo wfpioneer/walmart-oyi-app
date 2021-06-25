@@ -6,7 +6,7 @@ import styles from './ZoneList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { mockZones } from '../../mockData/zoneDetails';
 import { ZoneItem } from '../../models/ZoneItem';
-import ZoneItemCard from '../../components/zoneItemCard/ZoneItemCard';
+import LocationItemCard from '../../components/zoneItemCard/LocationItemCard';
 import { strings } from '../../locales';
 import { LocationHeader } from '../../components/locationHeader/LocationHeader';
 
@@ -34,9 +34,9 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
       <FlatList
         data={zoneList}
         renderItem={({ item }) => (
-          <ZoneItemCard
-            zoneName={item.zoneName}
-            aisleCount={item.aisleCount}
+          <LocationItemCard
+            locationName={item.zoneName}
+            locationDetails={`${item.aisleCount} ${strings('LOCATION.AISLES')}`}
           />
         )}
         keyExtractor={item => item.zoneName}
