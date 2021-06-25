@@ -52,10 +52,10 @@ interface ApprovalListProps {
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
 interface UpdateResponse {
-  message?: string;
+  message: string;
   id: number;
   itemNbr: number;
-  statusCode?: number;
+  statusCode: number;
 }
 
 export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryFilter => {
@@ -127,8 +127,8 @@ export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
 
 export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any>): JSX.Element => {
   const { data, metadata: { total } } = updateApprovalApi.result.data;
-  const items = data || [];
-  const failedItems: UpdateResponse[] = items.filter((item: UpdateResponse) => item.message === 'failure');
+  const items: UpdateResponse[] = data || [];
+  const failedItems = items.filter((item: UpdateResponse) => item.message === 'failure');
 
   return (
   // Used to overlay the pop-up in the screen view
