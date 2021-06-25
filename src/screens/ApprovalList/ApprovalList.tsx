@@ -24,6 +24,7 @@ import { setApprovalList, toggleAllItems } from '../../state/actions/Approvals';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
+import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
 
 export interface CategoryFilter {
   filteredData: ApprovalCategory[];
@@ -157,7 +158,7 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
           type={Button.Type.PRIMARY}
           style={{ width: '50%' }}
           onPress={() => {
-            dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
+            dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
           }}
         />
       </View>
@@ -222,7 +223,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   // Reset update approval list api if there are no failed items in a mixed response
   useEffectHook(() => {
     if (updateApprovalApi.result?.status === 207 && updateApprovalApi.result?.data.metadata.failure === 0) {
-      dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
+      dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
     }
   }, [updateApprovalApi]);
 

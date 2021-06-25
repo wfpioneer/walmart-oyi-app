@@ -22,6 +22,7 @@ import { updateApprovalList } from '../../state/actions/saga';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
+import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
 
 interface ApprovalSummaryProps {
   route: RouteProp<any, string>;
@@ -99,7 +100,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
           ? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED');
         dispatch(showSnackBar(successMessage, 3000));
         // Reset update approval api state to prevent navigator from looping back to the approvalist screen
-        dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
+        dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
       }
     }
 
@@ -110,7 +111,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
         duration: moment().valueOf() - apiStart
       });
       setErrorModalVisible(true);
-      dispatch({ type: 'API/UPDATE_APPROVAL_LIST/RESET' });
+      dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
     }
   }, [approvalApi]);
 
