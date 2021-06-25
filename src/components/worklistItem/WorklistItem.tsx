@@ -53,6 +53,7 @@ export const WorklistItem = (props: WorklistItemProps) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={worklistItemOnPress}>
+      {/* TODO: Remove image? */}
       <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.exceptionType}>

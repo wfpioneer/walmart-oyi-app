@@ -29,19 +29,18 @@ export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
 
   return (
     <View style={styles.cardContainer}>
+      {/* TODO: Remove image? */}
       <Image source={image ? { uri: image } : require('../../assets/images/placeholder.png')} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.itemNumber}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
         <View style={styles.itemInfoContainer}>
           <Text style={styles.itemDesc}>{itemName}</Text>
-          <View style={styles.checkBox}>
-            <Checkbox
-              status={isChecked ? 'checked' : 'unchecked'}
-              onPress={() => dispatch(toggleItem(itemNbr, !isChecked))}
-              color={COLOR.MAIN_THEME_COLOR}
-              uncheckedColor={COLOR.MAIN_THEME_COLOR}
-            />
-          </View>
+          <Checkbox
+            status={isChecked ? 'checked' : 'unchecked'}
+            onPress={() => dispatch(toggleItem(itemNbr, !isChecked))}
+            color={COLOR.MAIN_THEME_COLOR}
+            uncheckedColor={COLOR.MAIN_THEME_COLOR}
+          />
         </View>
         <View style={styles.timeLeftContainer}>
           <Text style={styles.userText} ellipsizeMode="tail" numberOfLines={1}>{userId}</Text>

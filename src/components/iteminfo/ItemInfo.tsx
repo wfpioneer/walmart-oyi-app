@@ -58,6 +58,7 @@ const ItemInfo = (props: ItemInfoProps) => {
 
   return (
     <View style={styles.mainContainer}>
+      {/* TODO: Remove image? */}
       <View style={styles.imageContainer}>
         <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.image} />
       </View>

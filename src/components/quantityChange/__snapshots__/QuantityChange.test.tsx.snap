@@ -15,6 +15,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
+        "paddingRight": 10,
         "width": "100%",
       }
     }
@@ -48,6 +49,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
+        "paddingRight": 10,
         "width": "100%",
       }
     }
@@ -119,6 +121,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
         "borderTopWidth": 1,
         "flexDirection": "row",
         "justifyContent": "flex-end",
+        "paddingRight": 10,
         "width": "100%",
       }
     }
@@ -154,6 +157,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
+        "paddingRight": 10,
         "width": "100%",
       }
     }
@@ -187,6 +191,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
+        "paddingRight": 10,
         "width": "100%",
       }
     }
@@ -253,6 +258,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
         "borderTopWidth": 1,
         "flexDirection": "row",
         "justifyContent": "flex-end",
+        "paddingRight": 10,
         "width": "100%",
       }
     }
@@ -288,6 +294,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
+        "paddingRight": 10,
         "width": "100%",
       }
     }
@@ -321,6 +328,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
+        "paddingRight": 10,
         "width": "100%",
       }
     }
@@ -392,6 +400,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
         "borderTopWidth": 1,
         "flexDirection": "row",
         "justifyContent": "flex-end",
+        "paddingRight": 10,
         "width": "100%",
       }
     }

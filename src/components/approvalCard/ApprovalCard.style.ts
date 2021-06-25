@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'row',
     marginBottom: 4,
-    padding: 8
+    paddingVertical: 8,
+    paddingRight: 8
   },
   content: {
     alignItems: 'flex-start',
@@ -20,8 +21,8 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 80,
+    width: 80,
     resizeMode: 'stretch'
   },
   itemNumber: {
@@ -40,10 +41,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
     color: COLOR.SHIP_COVE,
     fontSize: 14
-  },
-  checkBox: {
-    justifyContent: 'center',
-    marginHorizontal: 20
   },
   infoColumn: {
     flexDirection: 'column'

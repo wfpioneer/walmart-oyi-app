@@ -8,7 +8,8 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
       "flexDirection": "row",
       "justifyContent": "flex-start",
       "marginBottom": 4,
-      "padding": 8,
+      "paddingRight": 8,
+      "paddingVertical": 8,
     }
   }
 >
@@ -20,9 +21,9 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     }
     style={
       Object {
-        "height": 100,
+        "height": 80,
         "resizeMode": "stretch",
-        "width": 100,
+        "width": 80,
       }
     }
   />
@@ -68,21 +69,12 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
       >
         Test Item 456
       </Text>
-      <View
-        style={
-          Object {
-            "justifyContent": "center",
-            "marginHorizontal": 20,
-          }
-        }
-      >
-        <withTheme(Checkbox)
-          color="#0071e9"
-          onPress={[Function]}
-          status="unchecked"
-          uncheckedColor="#0071e9"
-        />
-      </View>
+      <withTheme(Checkbox)
+        color="#0071e9"
+        onPress={[Function]}
+        status="unchecked"
+        uncheckedColor="#0071e9"
+      />
     </View>
     <View
       style={
@@ -155,7 +147,8 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
       "flexDirection": "row",
       "justifyContent": "flex-start",
       "marginBottom": 4,
-      "padding": 8,
+      "paddingRight": 8,
+      "paddingVertical": 8,
     }
   }
 >
@@ -167,9 +160,9 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     }
     style={
       Object {
-        "height": 100,
+        "height": 80,
         "resizeMode": "stretch",
-        "width": 100,
+        "width": 80,
       }
     }
   />
@@ -215,21 +208,12 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
       >
         Test Item 123
       </Text>
-      <View
-        style={
-          Object {
-            "justifyContent": "center",
-            "marginHorizontal": 20,
-          }
-        }
-      >
-        <withTheme(Checkbox)
-          color="#0071e9"
-          onPress={[Function]}
-          status="unchecked"
-          uncheckedColor="#0071e9"
-        />
-      </View>
+      <withTheme(Checkbox)
+        color="#0071e9"
+        onPress={[Function]}
+        status="unchecked"
+        uncheckedColor="#0071e9"
+      />
     </View>
     <View
       style={
@@ -302,7 +286,8 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
       "flexDirection": "row",
       "justifyContent": "flex-start",
       "marginBottom": 4,
-      "padding": 8,
+      "paddingRight": 8,
+      "paddingVertical": 8,
     }
   }
 >
@@ -310,9 +295,9 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
     source=""
     style={
       Object {
-        "height": 100,
+        "height": 80,
         "resizeMode": "stretch",
-        "width": 100,
+        "width": 80,
       }
     }
   />
@@ -358,21 +343,12 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
       >
         
       </Text>
-      <View
-        style={
-          Object {
-            "justifyContent": "center",
-            "marginHorizontal": 20,
-          }
-        }
-      >
-        <withTheme(Checkbox)
-          color="#0071e9"
-          onPress={[Function]}
-          status="checked"
-          uncheckedColor="#0071e9"
-        />
-      </View>
+      <withTheme(Checkbox)
+        color="#0071e9"
+        onPress={[Function]}
+        status="checked"
+        uncheckedColor="#0071e9"
+      />
     </View>
     <View
       style={
@@ -445,7 +421,8 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
       "flexDirection": "row",
       "justifyContent": "flex-start",
       "marginBottom": 4,
-      "padding": 8,
+      "paddingRight": 8,
+      "paddingVertical": 8,
     }
   }
 >
@@ -453,9 +430,9 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
     source=""
     style={
       Object {
-        "height": 100,
+        "height": 80,
         "resizeMode": "stretch",
-        "width": 100,
+        "width": 80,
       }
     }
   />
@@ -501,21 +478,12 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
       >
         
       </Text>
-      <View
-        style={
-          Object {
-            "justifyContent": "center",
-            "marginHorizontal": 20,
-          }
-        }
-      >
-        <withTheme(Checkbox)
-          color="#0071e9"
-          onPress={[Function]}
-          status="unchecked"
-          uncheckedColor="#0071e9"
-        />
-      </View>
+      <withTheme(Checkbox)
+        color="#0071e9"
+        onPress={[Function]}
+        status="unchecked"
+        uncheckedColor="#0071e9"
+      />
     </View>
     <View
       style={
@@ -588,7 +556,8 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
       "flexDirection": "row",
       "justifyContent": "flex-start",
       "marginBottom": 4,
-      "padding": 8,
+      "paddingRight": 8,
+      "paddingVertical": 8,
     }
   }
 >
@@ -596,9 +565,9 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
     source=""
     style={
       Object {
-        "height": 100,
+        "height": 80,
         "resizeMode": "stretch",
-        "width": 100,
+        "width": 80,
       }
     }
   />
@@ -644,21 +613,12 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
       >
         
       </Text>
-      <View
-        style={
-          Object {
-            "justifyContent": "center",
-            "marginHorizontal": 20,
-          }
-        }
-      >
-        <withTheme(Checkbox)
-          color="#0071e9"
-          onPress={[Function]}
-          status="unchecked"
-          uncheckedColor="#0071e9"
-        />
-      </View>
+      <withTheme(Checkbox)
+        color="#0071e9"
+        onPress={[Function]}
+        status="unchecked"
+        uncheckedColor="#0071e9"
+      />
     </View>
     <View
       style={
