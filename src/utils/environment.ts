@@ -36,7 +36,7 @@ export const svcName: ApplicationKey = {
 };
 
 type svcEnv = 'dev'|'stage'|'prod'| '';
-export const getWmSvcEnv = (isOrchApi?: boolean): svcEnv => {
+export const getWmSvcEnv = (): svcEnv => {
   switch (Config.ENVIRONMENT) {
     case 'dev':
       return 'dev';
