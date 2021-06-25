@@ -2,11 +2,13 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, Route } from '@react-navigation/native';
 import {
-  ApprovalListScreen, RenderApprovalItem, RenderPopUp, convertApprovalListData
+  ApprovalListScreen, RenderApprovalItem, convertApprovalListData, renderPopUp
 } from './ApprovalList';
+import { mockApprovals } from '../../mockData/mockApprovalItem';
+import { AsyncState } from '../../models/AsyncState';
 import {
-  mockApprovals, mockFailedData, mockLargeFailedData, mockMixedData
-} from '../../mockData/mockApprovalItem';
+  mockFailedData, mockLargeFailedData, mockMixedData, mockSuccessSkippedData
+} from '../../mockData/mockApprovalResponse';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
@@ -14,7 +16,7 @@ jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils
 let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
 describe('ApprovalListScreen', () => {
-  const defaultAsyncState = {
+  const defaultAsyncState: AsyncState = {
     isWaiting: false,
     value: null,
     error: null,
@@ -25,16 +27,19 @@ describe('ApprovalListScreen', () => {
       data: mockApprovals,
       status: 200
     };
+    const getApprovalSuccess: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: approvalResult
+    };
     it('Renders a list of Approval Items', () => {
       const renderer = ShallowRenderer.createRenderer();
-
       const mockListData = convertApprovalListData(mockApprovals);
       renderer.render(
         <ApprovalListScreen
           dispatch={jest.fn()}
-          result={approvalResult}
-          error={null}
-          isWaiting={false}
+          getApprovalApi={getApprovalSuccess}
           categoryIndices={mockListData.headerIndices}
           filteredList={mockListData.filteredData}
           selectedItemQty={0}
@@ -47,7 +52,6 @@ describe('ApprovalListScreen', () => {
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
           updateApprovalApi={defaultAsyncState}
-
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -58,9 +62,7 @@ describe('ApprovalListScreen', () => {
       renderer.render(
         <ApprovalListScreen
           dispatch={jest.fn()}
-          result={approvalResult}
-          error={null}
-          isWaiting={false}
+          getApprovalApi={getApprovalSuccess}
           categoryIndices={mockListData.headerIndices}
           filteredList={mockListData.filteredData}
           selectedItemQty={3}
@@ -83,12 +85,16 @@ describe('ApprovalListScreen', () => {
         data: '',
         status: 204
       };
+      const getApprovalEmpty: AsyncState = {
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: emptyResultData
+      };
       renderer.render(
         <ApprovalListScreen
           dispatch={jest.fn()}
-          result={emptyResultData}
-          error={null}
-          isWaiting={false}
+          getApprovalApi={getApprovalEmpty}
           categoryIndices={[]}
           filteredList={[]}
           selectedItemQty={0}
@@ -118,7 +124,6 @@ describe('ApprovalListScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <RenderApprovalItem item={{ ...mockApprovals[0], categoryHeader: true }} dispatch={jest.fn()} />
-
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -127,12 +132,16 @@ describe('ApprovalListScreen', () => {
   describe('Tests rendering Get Approval Api responses', () => {
     it('Renders Approval Api error message', () => {
       const renderer = ShallowRenderer.createRenderer();
+      const getApprovalFailure: AsyncState = {
+        isWaiting: false,
+        value: null,
+        error: 'Network Error',
+        result: null
+      };
       renderer.render(
         <ApprovalListScreen
           dispatch={jest.fn()}
-          result={null}
-          error="Network Error"
-          isWaiting={false}
+          getApprovalApi={getApprovalFailure}
           categoryIndices={[]}
           filteredList={[]}
           selectedItemQty={0}
@@ -152,12 +161,16 @@ describe('ApprovalListScreen', () => {
 
     it('Renders loading indicator when waiting for Approval Api response', () => {
       const renderer = ShallowRenderer.createRenderer();
+      const getApprovalIsWaiting: AsyncState = {
+        isWaiting: true,
+        value: null,
+        error: null,
+        result: null
+      };
       renderer.render(
         <ApprovalListScreen
           dispatch={jest.fn()}
-          result={null}
-          error={null}
-          isWaiting={true}
+          getApprovalApi={getApprovalIsWaiting}
           categoryIndices={[]}
           filteredList={[]}
           selectedItemQty={0}
@@ -180,9 +193,7 @@ describe('ApprovalListScreen', () => {
       renderer.render(
         <ApprovalListScreen
           dispatch={jest.fn()}
-          result={null}
-          error={null}
-          isWaiting={false}
+          getApprovalApi={defaultAsyncState}
           categoryIndices={[]}
           filteredList={[]}
           selectedItemQty={0}
@@ -200,13 +211,13 @@ describe('ApprovalListScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
+
   describe('Tests rendering update approval api 207 responses', () => {
     it('Pop up Renders only failed item numbers', () => {
       const renderer = ShallowRenderer.createRenderer();
 
       renderer.render(
-        <RenderPopUp updateApprovalApi={mockFailedData} dispatch={jest.fn()} />
-
+        renderPopUp(mockFailedData, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -214,8 +225,7 @@ describe('ApprovalListScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
 
       renderer.render(
-        <RenderPopUp updateApprovalApi={mockMixedData} dispatch={jest.fn()} />
-
+        renderPopUp(mockMixedData, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -223,11 +233,21 @@ describe('ApprovalListScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
 
       renderer.render(
-        <RenderPopUp updateApprovalApi={mockLargeFailedData} dispatch={jest.fn()} />
+        renderPopUp(mockLargeFailedData, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Pop up renders 0 failed items for a mix of success and skipped items', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        renderPopUp(mockSuccessSkippedData, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
+
   describe('convertApprovalListData Function Tests', () => {
     it('returns filtered approval data with category header indexes', () => {
       const expectedData = {

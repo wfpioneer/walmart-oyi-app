@@ -10,10 +10,6 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
     }
   }
 >
-  <RenderErrorModal
-    isVisible={false}
-    setIsVisible={[MockFunction]}
-  />
   <View
     style={
       Object {
@@ -109,10 +105,6 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
     }
   }
 >
-  <RenderErrorModal
-    isVisible={false}
-    setIsVisible={[MockFunction]}
-  />
   <View
     style={
       Object {
@@ -208,10 +200,6 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
     }
   }
 >
-  <RenderErrorModal
-    isVisible={false}
-    setIsVisible={[MockFunction]}
-  />
   <View
     style={
       Object {
@@ -307,10 +295,6 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
     }
   }
 >
-  <RenderErrorModal
-    isVisible={false}
-    setIsVisible={[MockFunction]}
-  />
   <View
     style={
       Object {
@@ -406,10 +390,6 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increa
     }
   }
 >
-  <RenderErrorModal
-    isVisible={false}
-    setIsVisible={[MockFunction]}
-  />
   <View
     style={
       Object {
@@ -505,10 +485,6 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
     }
   }
 >
-  <RenderErrorModal
-    isVisible={false}
-    setIsVisible={[MockFunction]}
-  />
   <View
     style={
       Object {
@@ -594,247 +570,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
 </View>
 `;
 
-exports[`ApprovalSummaryScreen Tests rendering the update approval api error modal:  Renders the error modal with isVisible is set to True 1`] = `
-<ReactNativeModal
-  animationIn="slideInUp"
-  animationInTiming={300}
-  animationOut="slideOutDown"
-  animationOutTiming={300}
-  avoidKeyboard={false}
-  backdropColor="black"
-  backdropOpacity={0.7}
-  backdropTransitionInTiming={300}
-  backdropTransitionOutTiming={300}
-  coverScreen={true}
-  customBackdrop={null}
-  deviceHeight={null}
-  deviceWidth={null}
-  hasBackdrop={true}
-  hideModalContentWhileAnimating={false}
-  isVisible={true}
-  onBackButtonPress={[Function]}
-  onBackdropPress={[Function]}
-  onModalHide={[Function]}
-  onModalShow={[Function]}
-  onModalWillHide={[Function]}
-  onModalWillShow={[Function]}
-  panResponderThreshold={4}
-  propagateSwipe={false}
-  scrollHorizontal={false}
-  scrollOffset={0}
-  scrollOffsetMax={0}
-  scrollTo={null}
-  supportedOrientations={
-    Array [
-      "portrait",
-      "landscape",
-    ]
-  }
-  swipeThreshold={100}
-  useNativeDriver={false}
->
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-  >
-    <View
-      style={
-        Object {
-          "alignContent": "center",
-          "alignSelf": "center",
-          "backgroundColor": "#ffffffff",
-          "borderColor": "#545F7A",
-          "borderRadius": 10,
-          "borderStyle": "solid",
-          "borderWidth": 1,
-          "justifyContent": "center",
-          "minHeight": 150,
-          "padding": 10,
-          "width": "80%",
-        }
-      }
-    >
-      <mockConstructor
-        color="#f44336"
-        name="alert"
-        size={30}
-        style={
-          Object {
-            "alignSelf": "center",
-          }
-        }
-      />
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.APPROVAL.UPDATE_API_ERROR" translation]
-      </Text>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "justifyContent": "center",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "marginTop": 16,
-              "width": "70%",
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </View>
-  </View>
-</ReactNativeModal>
-`;
-
-exports[`ApprovalSummaryScreen Tests rendering the update approval api error modal:  Renders the error modal with isVisible set to False 1`] = `
-<ReactNativeModal
-  animationIn="slideInUp"
-  animationInTiming={300}
-  animationOut="slideOutDown"
-  animationOutTiming={300}
-  avoidKeyboard={false}
-  backdropColor="black"
-  backdropOpacity={0.7}
-  backdropTransitionInTiming={300}
-  backdropTransitionOutTiming={300}
-  coverScreen={true}
-  customBackdrop={null}
-  deviceHeight={null}
-  deviceWidth={null}
-  hasBackdrop={true}
-  hideModalContentWhileAnimating={false}
-  isVisible={false}
-  onBackButtonPress={[Function]}
-  onBackdropPress={[Function]}
-  onModalHide={[Function]}
-  onModalShow={[Function]}
-  onModalWillHide={[Function]}
-  onModalWillShow={[Function]}
-  panResponderThreshold={4}
-  propagateSwipe={false}
-  scrollHorizontal={false}
-  scrollOffset={0}
-  scrollOffsetMax={0}
-  scrollTo={null}
-  supportedOrientations={
-    Array [
-      "portrait",
-      "landscape",
-    ]
-  }
-  swipeThreshold={100}
-  useNativeDriver={false}
->
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-  >
-    <View
-      style={
-        Object {
-          "alignContent": "center",
-          "alignSelf": "center",
-          "backgroundColor": "#ffffffff",
-          "borderColor": "#545F7A",
-          "borderRadius": 10,
-          "borderStyle": "solid",
-          "borderWidth": 1,
-          "justifyContent": "center",
-          "minHeight": 150,
-          "padding": 10,
-          "width": "80%",
-        }
-      }
-    >
-      <mockConstructor
-        color="#f44336"
-        name="alert"
-        size={30}
-        style={
-          Object {
-            "alignSelf": "center",
-          }
-        }
-      />
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.APPROVAL.UPDATE_API_ERROR" translation]
-      </Text>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "justifyContent": "center",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "marginTop": 16,
-              "width": "70%",
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </View>
-  </View>
-</ReactNativeModal>
-`;
-
-exports[`ApprovalSummaryScreen Tests rendering update approval api response:  Renders error pop-up when update Approval Api request fails  1`] = `
+exports[`ApprovalSummaryScreen Tests rendering the update approval api error modal:  Renders error pop-up if errorModalVisible is set to true  1`] = `
 <View
   style={
     Object {
@@ -844,10 +580,208 @@ exports[`ApprovalSummaryScreen Tests rendering update approval api response:  Re
     }
   }
 >
-  <RenderErrorModal
+  <ReactNativeModal
+    animationIn="slideInUp"
+    animationInTiming={300}
+    animationOut="slideOutDown"
+    animationOutTiming={300}
+    avoidKeyboard={false}
+    backdropColor="black"
+    backdropOpacity={0.7}
+    backdropTransitionInTiming={300}
+    backdropTransitionOutTiming={300}
+    coverScreen={true}
+    customBackdrop={null}
+    deviceHeight={null}
+    deviceWidth={null}
+    hasBackdrop={true}
+    hideModalContentWhileAnimating={false}
     isVisible={true}
-    setIsVisible={[MockFunction]}
+    onBackButtonPress={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalShow={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    panResponderThreshold={4}
+    propagateSwipe={false}
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <mockConstructor
+        color="#f44336"
+        name="alert"
+        size={30}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.APPROVAL.UPDATE_API_ERROR" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "marginTop": 16,
+              "width": "70%",
+            }
+          }
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </ReactNativeModal>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.APPROVE_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (2 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={90}
+      newQty={25}
+      oldQty={60}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (2 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={230.5}
+      newQty={60}
+      oldQty={25}
+    />
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
   />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering the update approval api error modal:  Renders no error pop-up if errorModalVisible is set to false 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
   <View
     style={
       Object {

@@ -21,17 +21,13 @@ import COLOR from '../../themes/Color';
 import { updateApprovalList } from '../../state/actions/saga';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import Button from '../../components/buttons/Button';
+import { AsyncState } from '../../models/AsyncState';
 
 interface ApprovalSummaryProps {
   route: RouteProp<any, string>;
   navigation: NavigationProp<any>;
   approvalList: ApprovalCategory[];
-  approvalApi: {
-    isWaiting: boolean;
-    value: any;
-    error: any;
-    result: any;
-  };
+  approvalApi: AsyncState;
   apiStart: number;
   setApiStart: React.Dispatch<React.SetStateAction<number>>
   errorModalVisible: boolean;
@@ -47,33 +43,26 @@ interface ItemQuantity {
   dollarChange: number;
   totalItems: number;
 }
-interface ErrorModalProps {
-  isVisible: boolean;
-   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}
-export const RenderErrorModal = (props: ErrorModalProps): JSX.Element => {
-  const { isVisible, setIsVisible } = props;
-  return (
-    <Modal isVisible={isVisible}>
-      <View style={styles.modalContainer}>
-        <View style={styles.updateErrorContainer}>
-          <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-          <Text style={styles.errorText}>
-            {strings('APPROVAL.UPDATE_API_ERROR')}
-          </Text>
-          <View style={styles.buttonContainer}>
-            <Button
-              style={styles.dismissButton}
-              title={strings('GENERICS.OK')}
-              backgroundColor={COLOR.TRACKER_RED}
-              onPress={() => setIsVisible(false)}
-            />
-          </View>
-        </View>
+
+export const renderErrorModal = (setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>): JSX.Element => (
+  // Used to overlay the modal in the screen view
+  <Modal isVisible={true}>
+    <View style={styles.updateErrorContainer}>
+      <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+      <Text style={styles.errorText}>
+        {strings('APPROVAL.UPDATE_API_ERROR')}
+      </Text>
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.dismissButton}
+          title={strings('GENERICS.OK')}
+          backgroundColor={COLOR.TRACKER_RED}
+          onPress={() => setErrorModalVisible(false)}
+        />
       </View>
-    </Modal>
-  );
-};
+    </View>
+  </Modal>
+);
 
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {
   const {
@@ -165,7 +154,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
 
   return (
     <View style={styles.mainContainer}>
-      <RenderErrorModal isVisible={errorModalVisible} setIsVisible={setErrorModalVisible} />
+      { errorModalVisible && renderErrorModal(setErrorModalVisible)}
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>
           {route.name === 'ApproveSummary'

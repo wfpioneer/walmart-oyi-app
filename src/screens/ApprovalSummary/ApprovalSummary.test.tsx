@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { ApprovalSummaryScreen, RenderErrorModal } from './ApprovalSummary';
+import { ApprovalSummaryScreen } from './ApprovalSummary';
 import { mockApprovals, mockSelectedApprovals } from '../../mockData/mockApprovalItem';
 
 let navigationProp: NavigationProp<any>;
@@ -173,7 +173,9 @@ describe('ApprovalSummaryScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('Renders error pop-up when update Approval Api request fails ', () => {
+  });
+  describe('Tests rendering the update approval api error modal: ', () => {
+    it('Renders error pop-up if errorModalVisible is set to true ', () => {
       const renderer = ShallowRenderer.createRenderer();
 
       renderer.render(
@@ -194,19 +196,24 @@ describe('ApprovalSummaryScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-  });
-  describe('Tests rendering the update approval api error modal: ', () => {
-    it('Renders the error modal with isVisible is set to True', () => {
+    it('Renders no error pop-up if errorModalVisible is set to false', () => {
       const renderer = ShallowRenderer.createRenderer();
+
       renderer.render(
-        <RenderErrorModal isVisible={true} setIsVisible={jest.fn()} />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-    it('Renders the error modal with isVisible set to False', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <RenderErrorModal isVisible={false} setIsVisible={jest.fn()} />
+        <ApprovalSummaryScreen
+          route={approveRoute}
+          navigation={navigationProp}
+          approvalList={mockSelectedApprovals}
+          approvalApi={defaultAsyncState}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
+        />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

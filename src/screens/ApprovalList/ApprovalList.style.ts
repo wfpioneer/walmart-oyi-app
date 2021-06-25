@@ -12,17 +12,13 @@ const styles = StyleSheet.create({
     paddingVertical: 28
   },
   popUpContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  contentContainer: {
     paddingVertical: 15,
     backgroundColor: COLOR.WHITE,
     borderRadius: 5,
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '80%'
+    width: '80%',
+    alignSelf: 'center'
   },
   listContainer: {
     paddingVertical: 20,

@@ -72,36 +72,117 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
     }
   }
 >
-  <RenderPopUp
-    dispatch={[MockFunction]}
-    updateApprovalApi={
-      Object {
-        "error": null,
-        "isWaiting": false,
-        "result": Object {
-          "data": Object {
-            "data": Array [
-              Object {
-                "id": 4785,
-                "itemNbr": 125,
-                "message": "failure",
-                "statusCode": 500,
-              },
-            ],
-            "metadata": Object {
-              "failure": 1,
-              "skipped": 0,
-              "success": 0,
-              "total": 1,
-            },
-            "skippedItems": Array [],
-          },
-          "status": 207,
-        },
-        "value": null,
-      }
+  <ReactNativeModal
+    animationIn="slideInUp"
+    animationInTiming={300}
+    animationOut="slideOutDown"
+    animationOutTiming={300}
+    avoidKeyboard={false}
+    backdropColor="black"
+    backdropOpacity={0.7}
+    backdropTransitionInTiming={300}
+    backdropTransitionOutTiming={300}
+    coverScreen={true}
+    customBackdrop={null}
+    deviceHeight={null}
+    deviceWidth={null}
+    hasBackdrop={true}
+    hideModalContentWhileAnimating={false}
+    isVisible={true}
+    onBackButtonPress={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalShow={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    panResponderThreshold={4}
+    propagateSwipe={false}
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
     }
-  />
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderRadius": 5,
+          "justifyContent": "space-between",
+          "paddingVertical": 15,
+          "width": "80%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.APPROVAL.FAILED_APPROVE" translation]
+      </Text>
+      <FlatList
+        data={
+          Array [
+            Object {
+              "id": 4785,
+              "itemNbr": 125,
+              "message": "failure",
+              "statusCode": 500,
+            },
+          ]
+        }
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        style={
+          Object {
+            "minHeight": 80,
+            "paddingVertical": 20,
+          }
+        }
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </ReactNativeModal>
   <FlatList
     ListEmptyComponent={
       <View
@@ -712,31 +793,18 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
 `;
 
 exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up Renders only failed item numbers 1`] = `
-<ReactNativeModal
-  animationIn="slideInUp"
-  animationInTiming={300}
-  animationOut="slideOutDown"
-  animationOutTiming={300}
-  avoidKeyboard={false}
-  backdropColor="black"
-  backdropOpacity={0.7}
-  backdropTransitionInTiming={300}
-  backdropTransitionOutTiming={300}
-  coverScreen={true}
-  customBackdrop={null}
+<Modal
+  animationType="none"
   deviceHeight={null}
   deviceWidth={null}
-  hasBackdrop={true}
+  hardwareAccelerated={false}
   hideModalContentWhileAnimating={false}
-  isVisible={true}
-  onBackButtonPress={[Function]}
   onBackdropPress={[Function]}
   onModalHide={[Function]}
-  onModalShow={[Function]}
   onModalWillHide={[Function]}
   onModalWillShow={[Function]}
+  onRequestClose={[Function]}
   panResponderThreshold={4}
-  propagateSwipe={false}
   scrollHorizontal={false}
   scrollOffset={0}
   scrollOffsetMax={0}
@@ -748,21 +816,100 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
     ]
   }
   swipeThreshold={100}
-  useNativeDriver={false}
+  transparent={true}
+  visible={true}
 >
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <withAnimatable(View)
+      delay={0}
+      direction="normal"
+      iterationCount={1}
+      iterationDelay={0}
+      onAnimationBegin={[Function]}
+      onAnimationEnd={[Function]}
+      onTransitionBegin={[Function]}
+      onTransitionEnd={[Function]}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "black",
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Array [
+            Object {
+              "backgroundColor": "black",
+              "height": 1334,
+              "width": 750,
+            },
+          ],
+        ]
       }
+      useNativeDriver={false}
+    />
+  </TouchableWithoutFeedback>
+  <withAnimatable(View)
+    delay={0}
+    deviceHeight={null}
+    deviceWidth={null}
+    direction="normal"
+    hideModalContentWhileAnimating={false}
+    iterationCount={1}
+    iterationDelay={0}
+    onAnimationBegin={[Function]}
+    onAnimationEnd={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    onTransitionBegin={[Function]}
+    onTransitionEnd={[Function]}
+    panResponderThreshold={4}
+    pointerEvents="box-none"
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    style={
+      Array [
+        Object {},
+        Array [
+          Object {
+            "margin": 37.5,
+            "transform": Array [
+              Object {
+                "translateY": 0,
+              },
+            ],
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          undefined,
+        ],
+      ]
     }
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
   >
     <View
       style={
         Object {
           "alignItems": "center",
+          "alignSelf": "center",
           "backgroundColor": "#ffffffff",
           "borderRadius": 5,
           "justifyContent": "space-between",
@@ -830,36 +977,23 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
         width={-1}
       />
     </View>
-  </View>
-</ReactNativeModal>
+  </withAnimatable(View)>
+</Modal>
 `;
 
 exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up renders "##/## Failed Items" for more than 5 failed items  1`] = `
-<ReactNativeModal
-  animationIn="slideInUp"
-  animationInTiming={300}
-  animationOut="slideOutDown"
-  animationOutTiming={300}
-  avoidKeyboard={false}
-  backdropColor="black"
-  backdropOpacity={0.7}
-  backdropTransitionInTiming={300}
-  backdropTransitionOutTiming={300}
-  coverScreen={true}
-  customBackdrop={null}
+<Modal
+  animationType="none"
   deviceHeight={null}
   deviceWidth={null}
-  hasBackdrop={true}
+  hardwareAccelerated={false}
   hideModalContentWhileAnimating={false}
-  isVisible={true}
-  onBackButtonPress={[Function]}
   onBackdropPress={[Function]}
   onModalHide={[Function]}
-  onModalShow={[Function]}
   onModalWillHide={[Function]}
   onModalWillShow={[Function]}
+  onRequestClose={[Function]}
   panResponderThreshold={4}
-  propagateSwipe={false}
   scrollHorizontal={false}
   scrollOffset={0}
   scrollOffsetMax={0}
@@ -871,21 +1005,100 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
     ]
   }
   swipeThreshold={100}
-  useNativeDriver={false}
+  transparent={true}
+  visible={true}
 >
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <withAnimatable(View)
+      delay={0}
+      direction="normal"
+      iterationCount={1}
+      iterationDelay={0}
+      onAnimationBegin={[Function]}
+      onAnimationEnd={[Function]}
+      onTransitionBegin={[Function]}
+      onTransitionEnd={[Function]}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "black",
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Array [
+            Object {
+              "backgroundColor": "black",
+              "height": 1334,
+              "width": 750,
+            },
+          ],
+        ]
       }
+      useNativeDriver={false}
+    />
+  </TouchableWithoutFeedback>
+  <withAnimatable(View)
+    delay={0}
+    deviceHeight={null}
+    deviceWidth={null}
+    direction="normal"
+    hideModalContentWhileAnimating={false}
+    iterationCount={1}
+    iterationDelay={0}
+    onAnimationBegin={[Function]}
+    onAnimationEnd={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    onTransitionBegin={[Function]}
+    onTransitionEnd={[Function]}
+    panResponderThreshold={4}
+    pointerEvents="box-none"
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    style={
+      Array [
+        Object {},
+        Array [
+          Object {
+            "margin": 37.5,
+            "transform": Array [
+              Object {
+                "translateY": 0,
+              },
+            ],
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          undefined,
+        ],
+      ]
     }
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
   >
     <View
       style={
         Object {
           "alignItems": "center",
+          "alignSelf": "center",
           "backgroundColor": "#ffffffff",
           "borderRadius": 5,
           "justifyContent": "space-between",
@@ -932,36 +1145,23 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
         width={-1}
       />
     </View>
-  </View>
-</ReactNativeModal>
+  </withAnimatable(View)>
+</Modal>
 `;
 
-exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up renders only failed item numbers for mix of success and failed items  1`] = `
-<ReactNativeModal
-  animationIn="slideInUp"
-  animationInTiming={300}
-  animationOut="slideOutDown"
-  animationOutTiming={300}
-  avoidKeyboard={false}
-  backdropColor="black"
-  backdropOpacity={0.7}
-  backdropTransitionInTiming={300}
-  backdropTransitionOutTiming={300}
-  coverScreen={true}
-  customBackdrop={null}
+exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up renders 0 failed items for a mix of success and skipped items 1`] = `
+<Modal
+  animationType="none"
   deviceHeight={null}
   deviceWidth={null}
-  hasBackdrop={true}
+  hardwareAccelerated={false}
   hideModalContentWhileAnimating={false}
-  isVisible={true}
-  onBackButtonPress={[Function]}
   onBackdropPress={[Function]}
   onModalHide={[Function]}
-  onModalShow={[Function]}
   onModalWillHide={[Function]}
   onModalWillShow={[Function]}
+  onRequestClose={[Function]}
   panResponderThreshold={4}
-  propagateSwipe={false}
   scrollHorizontal={false}
   scrollOffset={0}
   scrollOffsetMax={0}
@@ -973,21 +1173,280 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
     ]
   }
   swipeThreshold={100}
-  useNativeDriver={false}
+  transparent={true}
+  visible={true}
 >
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <withAnimatable(View)
+      delay={0}
+      direction="normal"
+      iterationCount={1}
+      iterationDelay={0}
+      onAnimationBegin={[Function]}
+      onAnimationEnd={[Function]}
+      onTransitionBegin={[Function]}
+      onTransitionEnd={[Function]}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "black",
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Array [
+            Object {
+              "backgroundColor": "black",
+              "height": 1334,
+              "width": 750,
+            },
+          ],
+        ]
       }
+      useNativeDriver={false}
+    />
+  </TouchableWithoutFeedback>
+  <withAnimatable(View)
+    delay={0}
+    deviceHeight={null}
+    deviceWidth={null}
+    direction="normal"
+    hideModalContentWhileAnimating={false}
+    iterationCount={1}
+    iterationDelay={0}
+    onAnimationBegin={[Function]}
+    onAnimationEnd={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    onTransitionBegin={[Function]}
+    onTransitionEnd={[Function]}
+    panResponderThreshold={4}
+    pointerEvents="box-none"
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    style={
+      Array [
+        Object {},
+        Array [
+          Object {
+            "margin": 37.5,
+            "transform": Array [
+              Object {
+                "translateY": 0,
+              },
+            ],
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          undefined,
+        ],
+      ]
     }
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
   >
     <View
       style={
         Object {
           "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderRadius": 5,
+          "justifyContent": "space-between",
+          "paddingVertical": 15,
+          "width": "80%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.APPROVAL.FAILED_APPROVE" translation]
+      </Text>
+      <FlatList
+        data={Array []}
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        style={
+          Object {
+            "minHeight": 80,
+            "paddingVertical": 20,
+          }
+        }
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </withAnimatable(View)>
+</Modal>
+`;
+
+exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up renders only failed item numbers for mix of success and failed items  1`] = `
+<Modal
+  animationType="none"
+  deviceHeight={null}
+  deviceWidth={null}
+  hardwareAccelerated={false}
+  hideModalContentWhileAnimating={false}
+  onBackdropPress={[Function]}
+  onModalHide={[Function]}
+  onModalWillHide={[Function]}
+  onModalWillShow={[Function]}
+  onRequestClose={[Function]}
+  panResponderThreshold={4}
+  scrollHorizontal={false}
+  scrollOffset={0}
+  scrollOffsetMax={0}
+  scrollTo={null}
+  supportedOrientations={
+    Array [
+      "portrait",
+      "landscape",
+    ]
+  }
+  swipeThreshold={100}
+  transparent={true}
+  visible={true}
+>
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <withAnimatable(View)
+      delay={0}
+      direction="normal"
+      iterationCount={1}
+      iterationDelay={0}
+      onAnimationBegin={[Function]}
+      onAnimationEnd={[Function]}
+      onTransitionBegin={[Function]}
+      onTransitionEnd={[Function]}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "black",
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Array [
+            Object {
+              "backgroundColor": "black",
+              "height": 1334,
+              "width": 750,
+            },
+          ],
+        ]
+      }
+      useNativeDriver={false}
+    />
+  </TouchableWithoutFeedback>
+  <withAnimatable(View)
+    delay={0}
+    deviceHeight={null}
+    deviceWidth={null}
+    direction="normal"
+    hideModalContentWhileAnimating={false}
+    iterationCount={1}
+    iterationDelay={0}
+    onAnimationBegin={[Function]}
+    onAnimationEnd={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    onTransitionBegin={[Function]}
+    onTransitionEnd={[Function]}
+    panResponderThreshold={4}
+    pointerEvents="box-none"
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    style={
+      Array [
+        Object {},
+        Array [
+          Object {
+            "margin": 37.5,
+            "transform": Array [
+              Object {
+                "translateY": 0,
+              },
+            ],
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          undefined,
+        ],
+      ]
+    }
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
           "backgroundColor": "#ffffffff",
           "borderRadius": 5,
           "justifyContent": "space-between",
@@ -1055,6 +1514,6 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
         width={-1}
       />
     </View>
-  </View>
-</ReactNativeModal>
+  </withAnimatable(View)>
+</Modal>
 `;
