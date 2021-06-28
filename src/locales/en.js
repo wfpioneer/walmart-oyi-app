@@ -192,6 +192,9 @@ export default {
     REVIEW: 'Review changes',
     LIST_NOT_FOUND: 'The Approval List is Empty',
     UPDATE_APPROVED: 'On-hands update approved',
-    UPDATE_REJECTED: 'On-hands update rejected'
+    UPDATE_REJECTED: 'On-hands update rejected',
+    FAILED_APPROVE: 'Requests Failed to Approve',
+    FAILED_ITEMS: 'Items Failed',
+    UPDATE_API_ERROR: 'There was an error updating the approval status. \n Please try again.'
   }
 };
