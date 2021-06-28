@@ -66,7 +66,7 @@ exports[`ApprovalListScreen Tests rendering Approval Api responses Renders loadi
 
 exports[`ApprovalListScreen Tests rendering the approval list RenderApprovalItem renders an approval item 1`] = `
 <ApprovalCard
-  daysLeft={-3}
+  daysLeft={3}
   dispatch={[MockFunction]}
   dollarChange={150.5}
   isChecked={false}
@@ -82,35 +82,41 @@ exports[`ApprovalListScreen Tests rendering the approval list RenderApprovalItem
 <ApprovalCategorySeparator
   categoryName="SNACKS"
   categoryNbr={1}
+  dispatch={[MockFunction]}
   isChecked={false}
 />
 `;
 
-exports[`ApprovalListScreen Tests rendering the approval list Renders Empty Approval list on response status 204 1`] = `
+exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Reject buttons for selected approval items 1`] = `
 <View
   style={
     Object {
-      "alignItems": "center",
       "flex": 1,
-      "justifyContent": "center",
-      "paddingVertical": 28,
     }
   }
 >
-  <mockConstructor
-    color="#5FA7F2"
-    name="information"
-    size={40}
-  />
-  <Text>
-     The Approval List is Empty 
-  </Text>
-</View>
-`;
-
-exports[`ApprovalListScreen Tests rendering the approval list Renders a list of Approval Items 1`] = `
-<View>
   <FlatList
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.APPROVAL.LIST_NOT_FOUND" translation]
+        </Text>
+      </View>
+    }
     data={
       Array [
         Object {
@@ -124,6 +130,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "approvalStatus": "Pending",
           "categoryDescription": "SNACKS",
           "categoryNbr": 1,
+          "daysLeft": 3,
           "dollarChange": 150.5,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-27T00:00:00.000Z",
@@ -148,6 +155,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
+          "daysLeft": 2,
           "dollarChange": 50,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
@@ -166,6 +174,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
+          "daysLeft": 2,
           "dollarChange": 40,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
@@ -184,6 +193,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
+          "daysLeft": 2,
           "dollarChange": 80,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
@@ -213,6 +223,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "approvalStatus": "Pending",
           "categoryDescription": "SNACKS",
           "categoryNbr": 1,
+          "daysLeft": 3,
           "dollarChange": 150.5,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-27T00:00:00.000Z",
@@ -237,6 +248,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
+          "daysLeft": 2,
           "dollarChange": 50,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
@@ -255,6 +267,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
+          "daysLeft": 2,
           "dollarChange": 40,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
@@ -273,6 +286,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
+          "daysLeft": 2,
           "dollarChange": 80,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
@@ -297,6 +311,317 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
+    stickyHeaderIndices={
+      Array [
+        0,
+        2,
+      ]
+    }
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.REJECT\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.APPROVE\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalListScreen Tests rendering the approval list Renders Empty Approval list on response status 204 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <FlatList
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.APPROVAL.LIST_NOT_FOUND" translation]
+        </Text>
+      </View>
+    }
+    data={Array []}
+    disableVirtualization={false}
+    extraData={Array []}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`ApprovalListScreen Tests rendering the approval list Renders a list of Approval Items 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <FlatList
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.APPROVAL.LIST_NOT_FOUND" translation]
+        </Text>
+      </View>
+    }
+    data={
+      Array [
+        Object {
+          "categoryDescription": "SNACKS",
+          "categoryHeader": true,
+          "categoryNbr": 1,
+          "isChecked": false,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "SNACKS",
+          "categoryNbr": 1,
+          "daysLeft": 3,
+          "dollarChange": 150.5,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-27T00:00:00.000Z",
+          "initiatedUserId": "Associate Employee",
+          "isChecked": false,
+          "itemName": "Nature Valley Crunchy Cereal Bars ",
+          "itemNbr": 123,
+          "newQuantity": 20,
+          "oldQuantity": 5,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000123,
+        },
+        Object {
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryHeader": true,
+          "categoryNbr": 2,
+          "isChecked": false,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 50,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Red Apples",
+          "itemNbr": 456,
+          "newQuantity": 10,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000456,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 40,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Cabbage",
+          "itemNbr": 457,
+          "newQuantity": 15,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000457,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 80,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Strawberries",
+          "itemNbr": 458,
+          "newQuantity": 40,
+          "oldQuantity": 20,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000458,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    extraData={
+      Array [
+        Object {
+          "categoryDescription": "SNACKS",
+          "categoryHeader": true,
+          "categoryNbr": 1,
+          "isChecked": false,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "SNACKS",
+          "categoryNbr": 1,
+          "daysLeft": 3,
+          "dollarChange": 150.5,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-27T00:00:00.000Z",
+          "initiatedUserId": "Associate Employee",
+          "isChecked": false,
+          "itemName": "Nature Valley Crunchy Cereal Bars ",
+          "itemNbr": 123,
+          "newQuantity": 20,
+          "oldQuantity": 5,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000123,
+        },
+        Object {
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryHeader": true,
+          "categoryNbr": 2,
+          "isChecked": false,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 50,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Red Apples",
+          "itemNbr": 456,
+          "newQuantity": 10,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000456,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 40,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Cabbage",
+          "itemNbr": 457,
+          "newQuantity": 15,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000457,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 80,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Strawberries",
+          "itemNbr": 458,
+          "newQuantity": 40,
+          "oldQuantity": 20,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000458,
+        },
+      ]
+    }
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={
+      Array [
+        0,
+        2,
+      ]
+    }
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />

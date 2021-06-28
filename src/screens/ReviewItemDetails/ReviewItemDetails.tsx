@@ -56,6 +56,7 @@ export interface ItemDetailsScreenProps {
   isSalesMetricsGraphView: boolean; setIsSalesMetricsGraphView: Function;
   ohQtyModalVisible: boolean; setOhQtyModalVisible: Function;
   completeApiInProgress: boolean; setCompleteApiInProgress: Function;
+  errorModalVisible: boolean; setErrorModalVisible: Function;
   isRefreshing: boolean; setIsRefreshing: Function;
   apiStart: number; setApiStart: Function;
   trackEventCall: (eventName: string, params?: any) => void;
@@ -80,7 +81,7 @@ const ReviewItemDetails = () => {
   const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [apiStart, setApiStart] = useState(0);
-
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
   return (
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
@@ -110,6 +111,8 @@ const ReviewItemDetails = () => {
       setIsRefreshing={setIsRefreshing}
       apiStart={apiStart}
       setApiStart={setApiStart}
+      errorModalVisible={errorModalVisible}
+      setErrorModalVisible={setErrorModalVisible}
       trackEventCall={trackEvent}
       validateSessionCall={validateSession}
       useEffectHook={useEffect}
@@ -185,7 +188,7 @@ export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: numb
         <Text>{pendingOnHandsQty}</Text>
       </View>
       <View style={styles.mgrApprovalView}>
-        <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={{ paddingRight: 6 }} />
+        <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={styles.infoIcon} />
         <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
       </View>
     </View>
@@ -240,7 +243,7 @@ export const renderAddPicklistButton = (props: (RenderProps & HandleProps), item
 export const renderLocationComponent = (props: (RenderProps & HandleProps), itemDetails: ItemDetails) => {
   const { floorLocations, reserveLocations } = props;
   return (
-    <View style={{ paddingHorizontal: 8 }}>
+    <View style={styles.locationContainer}>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.FLOOR')}</Text>
         {floorLocations && floorLocations.length >= 1
@@ -335,6 +338,32 @@ export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), 
     </TouchableOpacity>
   );
 };
+
+// Renders scanned barcode error. TODO Temporary fix until Modal.tsx is refactored for more flexible usage
+export const renderBarcodeErrorModal = (isVisible: boolean, setIsVisible: Function) => (
+  <Modal
+    visible={isVisible}
+    transparent
+  >
+    <View style={styles.modalContainer}>
+      <View style={styles.barcodeErrorContainer}>
+        <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+        <Text style={styles.errorText}>
+          {strings('GENERICS.BARCODE_SCAN_ERROR')}
+        </Text>
+        <View style={styles.buttonContainer}>
+          <Button
+            style={styles.dismissButton}
+            title={strings('GENERICS.OK')}
+            backgroundColor={COLOR.TRACKER_RED}
+            onPress={() => setIsVisible(false)}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+);
+
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   const {
     scannedEvent, isManualScanEnabled,
@@ -352,6 +381,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
     completeApiInProgress, setCompleteApiInProgress,
     isRefreshing, setIsRefreshing,
     apiStart, setApiStart,
+    errorModalVisible, setErrorModalVisible,
     trackEventCall,
     validateSessionCall,
     useEffectHook,
@@ -361,12 +391,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   useEffectHook(() => {
     if (navigation.isFocused()) {
       validateSessionCall(navigation, route.name).then(() => {
-        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
-        setApiStart(moment().valueOf());
-        dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-        trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
-        dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
-        dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
+       scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
+       setApiStart(moment().valueOf());
+       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+       trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
+       dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+       dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
       }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
     }
   }, [scannedEvent]);
@@ -391,9 +421,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
       trackEventCall('item_details_api_success',
         { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
     }
-    if (isRefreshing) {
-      setIsRefreshing(false);
-    }
+
     if (isRefreshing) {
       setIsRefreshing(false);
     }
@@ -425,14 +453,18 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
         validateSessionCall(navigation, route.name).then(() => {
-          if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
-            trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
-            trackEventCall('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
-            setApiStart(moment().valueOf());
-            dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
-            dispatch(setManualScan(false));
+          trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
+          if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
+            if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
+              trackEventCall('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
+              setApiStart(moment().valueOf());
+              dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
+              dispatch(setManualScan(false));
+            } else {
+              dispatch(setScannedEvent(scan));
+            }
           } else {
-            dispatch(setScannedEvent(scan));
+            setErrorModalVisible(true);
           }
         }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
       }
@@ -447,8 +479,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
     // on api success
     if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.result) {
       if (_.get(completeItemApi.result, 'status') === 204) {
-        trackEventCall('item_details_action_completed_api_failure_scan_no_match',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
+        trackEventCall('item_details_action_completed_api_success_scan_no_match',
+          {
+            itemDetails: JSON.stringify(itemDetails),
+            duration: moment().valueOf() - apiStart,
+            status: result.status
+          });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
         trackEventCall('item_details_action_completed_api_success',
@@ -464,11 +500,19 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
     if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.error) {
       if (completeItemApi.error === COMPLETE_API_409_ERROR) {
         trackEventCall('item_details_action_completed_api_failure_scan_no_match',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
+          {
+            itemDetails: JSON.stringify(itemDetails),
+            duration: moment().valueOf() - apiStart,
+            errorDetails: completeItemApi.error.message || completeItemApi.error
+          });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
         trackEventCall('item_details_action_completed_api_failure',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
+          {
+            itemDetails: JSON.stringify(itemDetails),
+            duration: moment().valueOf() - apiStart,
+            errorDetails: completeItemApi.error.message || completeItemApi.error
+          });
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
       setCompleteApiInProgress(false);
@@ -513,6 +557,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   if (error) {
     return (
       <View style={styles.safeAreaView}>
+        {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
         {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
@@ -522,6 +567,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
             onPress={() => {
               setApiStart(moment().valueOf());
               trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
+              trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
           >
@@ -535,6 +581,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   if (_.get(result, 'status') === 204) {
     return (
       <View style={styles.safeAreaView}>
+        {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
         {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
@@ -576,6 +623,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   return (
     <View style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent />}
+      {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
       <Modal
         visible={ohQtyModalVisible}
         onRequestClose={() => setOhQtyModalVisible(false)}
@@ -627,7 +675,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
                   name="label-variant"
                   size={20}
                   color={COLOR.GREY_700}
-                  style={{ marginLeft: -4 }}
+                  style={styles.labelIcon}
                 />
               )}
               title={strings('ITEM.REPLENISHMENT')}

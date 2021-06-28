@@ -1,0 +1,587 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summary of approvals" translation if Approve route is selected  1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.APPROVE_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={0}
+      newQty={0}
+      oldQty={0}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={0}
+      newQty={0}
+      oldQty={0}
+    />
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summary of rejections" translation if Reject route is selected 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.REJECT_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={0}
+      newQty={0}
+      oldQty={0}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={0}
+      newQty={0}
+      oldQty={0}
+    />
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item\` translation for selected approval items with one onHands increase/decrease change  1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.APPROVE_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (1 [missing "en.GENERICS.ITEM" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={50}
+      newQty={10}
+      oldQty={30}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (1 [missing "en.GENERICS.ITEM" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={150.5}
+      newQty={20}
+      oldQty={5}
+    />
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`items\` translation for selected approval items with mulitple onHands changes 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.APPROVE_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (2 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={90}
+      newQty={25}
+      oldQty={60}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (2 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={230.5}
+      newQty={60}
+      oldQty={25}
+    />
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increased/decreased on hands changes for selected approval items 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.APPROVE_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (2 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={90}
+      newQty={25}
+      oldQty={60}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (2 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={230.5}
+      newQty={60}
+      oldQty={25}
+    />
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes for all on hands changes if no approval items are selected 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.4,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323a4e",
+          "fontSize": 20,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.APPROVE_SUMMARY" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.DECREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={0}
+      newQty={0}
+      oldQty={0}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginHorizontal": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "marginBottom": 5,
+        }
+      }
+    >
+      [missing "en.APPROVAL.INCREASES" translation] (0 [missing "en.GENERICS.ITEMS" translation])
+    </Text>
+    <QuantityChange
+      dollarChange={0}
+      newQty={0}
+      oldQty={0}
+    />
+  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalSummaryScreen Tests rendering update approval api response:  Renders loading indicator when waiting for Update Approval Api response  1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;

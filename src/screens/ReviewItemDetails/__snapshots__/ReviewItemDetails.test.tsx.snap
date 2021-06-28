@@ -56,6 +56,182 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Ren
 </TouchableOpacity>
 `;
 
+exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders the barcodeErrorModal isVisible set to False 1`] = `
+<Modal
+  hardwareAccelerated={false}
+  transparent={true}
+  visible={false}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <mockConstructor
+        color="#f44336"
+        name="alert"
+        size={30}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "marginTop": 16,
+              "width": "70%",
+            }
+          }
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders the barcodeErrorModal isVisible set to True 1`] = `
+<Modal
+  hardwareAccelerated={false}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <mockConstructor
+        color="#f44336"
+        name="alert"
+        size={30}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "marginTop": 16,
+              "width": "70%",
+            }
+          }
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
 exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Picklist renders 'Add to Picklist Error' Retry 1`] = `
 <View
   style={
@@ -577,6 +753,91 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   }
 >
+  <Modal
+    hardwareAccelerated={false}
+    transparent={true}
+    visible={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#00000099",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          }
+        }
+      >
+        <mockConstructor
+          color="#f44336"
+          name="alert"
+          size={30}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "marginTop": 16,
+                "width": "70%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
   <View
     style={
       Object {
@@ -631,6 +892,91 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   }
 >
+  <Modal
+    hardwareAccelerated={false}
+    transparent={true}
+    visible={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#00000099",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          }
+        }
+      >
+        <mockConstructor
+          color="#f44336"
+          name="alert"
+          size={30}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "marginTop": 16,
+                "width": "70%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
   <View
     style={
       Object {
@@ -667,7 +1013,92 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   }
 >
-  <Component
+  <Modal
+    hardwareAccelerated={false}
+    transparent={true}
+    visible={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#00000099",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          }
+        }
+      >
+        <mockConstructor
+          color="#f44336"
+          name="alert"
+          size={30}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "marginTop": 16,
+                "width": "70%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+  <Modal
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
@@ -678,8 +1109,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       ohQty={42}
       setOhQtyModalVisible={[MockFunction]}
     />
-  </Component>
-  <ScrollViewMock
+  </Modal>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "stretch",
@@ -1025,7 +1456,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <ForwardRef
     onPress={[Function]}
     style={
@@ -1072,7 +1503,92 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   }
 >
-  <Component
+  <Modal
+    hardwareAccelerated={false}
+    transparent={true}
+    visible={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#00000099",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          }
+        }
+      >
+        <mockConstructor
+          color="#f44336"
+          name="alert"
+          size={30}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "marginTop": 16,
+                "width": "70%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+  <Modal
     hardwareAccelerated={false}
     onRequestClose={[Function]}
     transparent={true}
@@ -1083,8 +1599,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       ohQty={42}
       setOhQtyModalVisible={[MockFunction]}
     />
-  </Component>
-  <ScrollViewMock
+  </Modal>
+  <ScrollView
     contentContainerStyle={
       Object {
         "alignItems": "stretch",
@@ -1430,7 +1946,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
     </View>
-  </ScrollViewMock>
+  </ScrollView>
   <ForwardRef
     onPress={[Function]}
     style={

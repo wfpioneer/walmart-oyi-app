@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1
   },
+  locationContainer: {
+    paddingHorizontal: 8
+  },
   locationDetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -90,6 +93,44 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 8
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLOR.BLACK_TRANSPARENT_600
+  },
+  barcodeErrorContainer: {
+    width: '80%',
+    borderRadius: 10,
+    backgroundColor: COLOR.WHITE,
+    borderColor: COLOR.TRACKER_GREY,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    alignContent: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    alignSelf: 'center',
+    minHeight: 150
+  },
+  buttonContainer: {
+    width: '100%',
+    alignContent: 'space-around',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  iconPosition: {
+    alignSelf: 'center'
+  },
+  dismissButton: {
+    width: '70%',
+    marginTop: 16
+  },
+  infoIcon: {
+    paddingRight: 6
+  },
+  labelIcon: {
+    marginLeft: -4
   }
 });
 

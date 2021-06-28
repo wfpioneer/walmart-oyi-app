@@ -39,7 +39,11 @@ export default {
     SUBMIT: 'Enviar',
     RETRY: 'Rever',
     GOAL: 'Objetivo',
-    VERSION: 'Versión'
+    VERSION: 'Versión',
+    BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido',
+    ITEM: 'Artículo',
+    ITEMS: 'Artículos',
+    TOOLS: 'Herramientas'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -137,19 +141,25 @@ export default {
     DELETE_CONFIRMATION: 'Confirma la eliminación de \nla ubicación ',
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
-    EDIT_LOCATION: 'Editar Ubicación'
+    EDIT_LOCATION: 'Editar Ubicación',
+    LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
+    ZONES: 'Zonas',
+    AISLES: 'Pasillos',
+    SECTIONS: 'Secciones',
+    AREAS: 'Areas', // TODO Spanish Translation
+    LOCATION_DETAILS: 'Detalles de ubicación',
+    NO_ZONES_AVAILABLE: 'No Zones Available' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
     CATEGORY: 'Categoría',
     EXCEPTION_TYPE: 'Tipo de Excepción',
-    ITEM: 'Artículo',
-    ITEMS: 'Artículos',
     ALL: 'Todo',
     REFINE: 'Refinar',
     CLEAR: 'Limpiar',
     TODO: 'Que hacer',
-    COMPLETED: 'Terminado'
+    COMPLETED: 'Terminado',
+    WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
@@ -159,18 +169,28 @@ export default {
     DISPLAY: 'Exhibición',
     RESERVE: 'Reserva'
   },
-  // TODO Needs Spanish Translations
   APPROVAL: {
-    NEW_QUANTITY: 'New Qty',
-    CURRENT_QUANTITY: 'Current qty',
-    DAYS_LEFT: '%{time} day(s) Left',
-    APPROVALS: 'Approvals',
-    APPROVE_ITEMS: 'Approve items',
-    OH_CHANGE: 'On-hands change',
-    SELECT_ALL: 'Select all',
-    DESELECT_ALL: 'Deselect all',
-    SELECTED: 'selected',
-    APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprovación.\nPor favor inténtalo de nuevo'
-
+    NEW_QUANTITY: 'Nueva Cantidad',
+    CURRENT_QUANTITY: 'Cantidad Actual',
+    DAYS_LEFT: '%{time} día(s) restantes',
+    APPROVALS: 'Aprovaciones',
+    APPROVE_ITEMS: 'Aprovar artículos',
+    OH_CHANGE: 'Cambio de Existencia',
+    SELECT_ALL: 'Seleccionar Todo',
+    DESELECT_ALL: 'Deseleccionar Todo',
+    SELECTED: 'Seleccionado',
+    APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprovación.\nPor favor inténtalo de nuevo',
+    APPROVE: 'Aprovar',
+    REJECT: 'Rechazar',
+    GO_BACK: 'Ir atrás',
+    CONFIRM: 'Confirmar',
+    APPROVE_SUMMARY: 'Resumen de Aprobaciones',
+    REJECT_SUMMARY: 'Resumen de Rechazos',
+    INCREASES: 'Todos los incrementos',
+    DECREASES: 'Todos los decrementos',
+    REVIEW: 'Revisar cambios',
+    LIST_NOT_FOUND: 'La lista de aprobación está vacía',
+    UPDATE_APPROVED: 'Actualización de existencia aprobado',
+    UPDATE_REJECTED: 'Actualización de existencia rechazado'
   }
 };

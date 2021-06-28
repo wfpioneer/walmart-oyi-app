@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToolsScreen Tests rendering the Tools Screen Renders Tools screen 1`] = `
+<View
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "center",
+      "marginTop": 4,
+      "paddingTop": 8,
+    }
+  }
+>
+  <ToolsButton
+    destination="LocationManagement"
+    title="[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]"
+  >
+    <mockConstructor
+      color="#0071e9"
+      name="map-marker-outline"
+      size={28}
+    />
+  </ToolsButton>
+</View>
+`;

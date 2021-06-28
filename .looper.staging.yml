@@ -1,4 +1,8 @@
 inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-v1.3.2
+
+# Maximum commits to be ShallowCloned by Looper
+gitShallowDepth: 2147483647
+
 envs:
   global:
     variables:
@@ -34,7 +38,7 @@ envs:
 
       #ServiceNow variables
       # whether you want the template to create a ServiceNow CHG or not. Defaults to true
-      SN_CREATE_AUTO_CHANGE: true
+      SN_CREATE_AUTO_CHANGE: false
       # The ServiceNow requested_by_group field. No default.
       SN_REQUESTED_BY_GROUP: "IntlSamsTech"
       # The ServiceNow requested_by_group field. Defaults to Change Managers - US
@@ -117,8 +121,8 @@ tools:
   android:
     - tools
     - platform-tools
-    - platforms;android-28
-    - build-tools;28.0.3
+    - platforms;android-29
+    - build-tools;29.0.3
     - extras;android;m2repository
     - ndk;21.3.6528147
   gradle: 6.3

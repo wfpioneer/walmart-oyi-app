@@ -4,6 +4,7 @@
 
 # Xcode
 #
+build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -27,7 +28,7 @@ build/
 .gradle
 local.properties
 *.iml
-
+/android/java_pid*.hprof
 # Visual Studio Code
 #
 .vscode/

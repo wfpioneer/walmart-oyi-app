@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ApprovalCard Component Renders an Approval Item with a decreased change in quantity 1`] = `
+exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approval Item with a decreased change in quantity 1`] = `
 <View
   style={
     Object {
@@ -58,10 +58,10 @@ exports[`ApprovalCard Component Renders an Approval Item with a decreased change
       <Text
         style={
           Object {
+            "alignSelf": "center",
             "color": "#424242",
-            "fontSize": 20,
+            "fontSize": 18,
             "fontWeight": "bold",
-            "marginVertical": 8,
             "width": "80%",
           }
         }
@@ -76,7 +76,7 @@ exports[`ApprovalCard Component Renders an Approval Item with a decreased change
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="unchecked"
@@ -87,10 +87,13 @@ exports[`ApprovalCard Component Renders an Approval Item with a decreased change
     <View
       style={
         Object {
+          "borderBottomColor": "#bdbdbd",
+          "borderBottomWidth": 1,
           "flexDirection": "row",
           "justifyContent": "space-between",
           "marginBottom": 6,
-          "width": "40%",
+          "paddingBottom": 6,
+          "width": "100%",
         }
       }
     >
@@ -100,7 +103,10 @@ exports[`ApprovalCard Component Renders an Approval Item with a decreased change
         style={
           Object {
             "color": "#8492a8",
-            "fontSize": 16,
+            "flexBasis": "auto",
+            "flexGrow": 0,
+            "flexShrink": 1,
+            "fontSize": 14,
           }
         }
       >
@@ -109,8 +115,8 @@ exports[`ApprovalCard Component Renders an Approval Item with a decreased change
       <Text
         style={
           Object {
-            "color": "#616161",
-            "fontSize": 16,
+            "color": "#8492a8",
+            "fontSize": 14,
             "marginHorizontal": 4,
           }
         }
@@ -121,167 +127,27 @@ exports[`ApprovalCard Component Renders an Approval Item with a decreased change
         style={
           Object {
             "color": "#B40C00",
-            "fontSize": 16,
+            "flexBasis": "60%",
+            "flexGrow": 1,
+            "flexShrink": 0,
+            "fontSize": 14,
             "fontWeight": "bold",
-            "textAlign": "right",
           }
         }
       >
         [missing "en.APPROVAL.DAYS_LEFT" translation]
       </Text>
     </View>
-    <View
-      style={
-        Object {
-          "borderTopColor": "#bdbdbd",
-          "borderTopWidth": 1,
-          "flexDirection": "column",
-          "width": "100%",
-        }
-      }
-    >
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "marginVertical": 6,
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#8492a8",
-              "flexDirection": "column",
-              "fontSize": 14,
-            }
-          }
-        >
-          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-            }
-          }
-        >
-          30
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "marginVertical": 6,
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#8492a8",
-              "flexDirection": "column",
-              "fontSize": 14,
-            }
-          }
-        >
-          [missing "en.APPROVAL.OH_CHANGE" translation]
-        </Text>
-        <View
-          style={
-            Object {
-              "flexDirection": "row",
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "alignSelf": "flex-start",
-                "color": "#ab2703",
-                "fontSize": 16,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            <Icon
-              allowFontScaling={false}
-              name="arrow-down"
-              size={20}
-            />
-            $100.00
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#616161",
-                "fontSize": 16,
-                "marginHorizontal": 4,
-              }
-            }
-          >
-             | 
-          </Text>
-          <Text
-            style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "color": "#545F7A",
-                  "fontSize": 16,
-                },
-                Object {
-                  "alignSelf": "flex-start",
-                  "color": "#ab2703",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                },
-              ]
-            }
-          >
-            -20
-          </Text>
-        </View>
-      </View>
-      <View
-        style={
-          Object {
-            "borderTopColor": "#eeeeee",
-            "borderTopWidth": 1,
-            "flexDirection": "row",
-            "justifyContent": "flex-end",
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          10
-        </Text>
-      </View>
-    </View>
+    <QuantityChange
+      dollarChange={100}
+      newQty={10}
+      oldQty={30}
+    />
   </View>
 </View>
 `;
 
-exports[`ApprovalCard Component Renders an Approval Item with a positive price change 1`] = `
+exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approval Item with a positive price change 1`] = `
 <View
   style={
     Object {
@@ -339,10 +205,10 @@ exports[`ApprovalCard Component Renders an Approval Item with a positive price c
       <Text
         style={
           Object {
+            "alignSelf": "center",
             "color": "#424242",
-            "fontSize": 20,
+            "fontSize": 18,
             "fontWeight": "bold",
-            "marginVertical": 8,
             "width": "80%",
           }
         }
@@ -357,7 +223,7 @@ exports[`ApprovalCard Component Renders an Approval Item with a positive price c
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="unchecked"
@@ -368,10 +234,13 @@ exports[`ApprovalCard Component Renders an Approval Item with a positive price c
     <View
       style={
         Object {
+          "borderBottomColor": "#bdbdbd",
+          "borderBottomWidth": 1,
           "flexDirection": "row",
           "justifyContent": "space-between",
           "marginBottom": 6,
-          "width": "40%",
+          "paddingBottom": 6,
+          "width": "100%",
         }
       }
     >
@@ -381,7 +250,10 @@ exports[`ApprovalCard Component Renders an Approval Item with a positive price c
         style={
           Object {
             "color": "#8492a8",
-            "fontSize": 16,
+            "flexBasis": "auto",
+            "flexGrow": 0,
+            "flexShrink": 1,
+            "fontSize": 14,
           }
         }
       >
@@ -390,8 +262,8 @@ exports[`ApprovalCard Component Renders an Approval Item with a positive price c
       <Text
         style={
           Object {
-            "color": "#616161",
-            "fontSize": 16,
+            "color": "#8492a8",
+            "fontSize": 14,
             "marginHorizontal": 4,
           }
         }
@@ -402,167 +274,27 @@ exports[`ApprovalCard Component Renders an Approval Item with a positive price c
         style={
           Object {
             "color": "#B40C00",
-            "fontSize": 16,
+            "flexBasis": "60%",
+            "flexGrow": 1,
+            "flexShrink": 0,
+            "fontSize": 14,
             "fontWeight": "bold",
-            "textAlign": "right",
           }
         }
       >
         [missing "en.APPROVAL.DAYS_LEFT" translation]
       </Text>
     </View>
-    <View
-      style={
-        Object {
-          "borderTopColor": "#bdbdbd",
-          "borderTopWidth": 1,
-          "flexDirection": "column",
-          "width": "100%",
-        }
-      }
-    >
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "marginVertical": 6,
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#8492a8",
-              "flexDirection": "column",
-              "fontSize": 14,
-            }
-          }
-        >
-          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-            }
-          }
-        >
-          5
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "marginVertical": 6,
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#8492a8",
-              "flexDirection": "column",
-              "fontSize": 14,
-            }
-          }
-        >
-          [missing "en.APPROVAL.OH_CHANGE" translation]
-        </Text>
-        <View
-          style={
-            Object {
-              "flexDirection": "row",
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "alignSelf": "flex-start",
-                "color": "#33691E",
-                "fontSize": 16,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            <Icon
-              allowFontScaling={false}
-              name="arrow-up"
-              size={20}
-            />
-            $200.00
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#616161",
-                "fontSize": 16,
-                "marginHorizontal": 4,
-              }
-            }
-          >
-             | 
-          </Text>
-          <Text
-            style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "color": "#545F7A",
-                  "fontSize": 16,
-                },
-                Object {
-                  "alignSelf": "flex-start",
-                  "color": "#33691E",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                },
-              ]
-            }
-          >
-            15
-          </Text>
-        </View>
-      </View>
-      <View
-        style={
-          Object {
-            "borderTopColor": "#eeeeee",
-            "borderTopWidth": 1,
-            "flexDirection": "row",
-            "justifyContent": "flex-end",
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          20
-        </Text>
-      </View>
-    </View>
+    <QuantityChange
+      dollarChange={200}
+      newQty={20}
+      oldQty={5}
+    />
   </View>
 </View>
 `;
 
-exports[`ApprovalCard Component Renders the Approval Item CheckBox as "checked"  1`] = `
+exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approval Item CheckBox as "checked"  1`] = `
 <View
   style={
     Object {
@@ -616,10 +348,10 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "checked" 
       <Text
         style={
           Object {
+            "alignSelf": "center",
             "color": "#424242",
-            "fontSize": 20,
+            "fontSize": 18,
             "fontWeight": "bold",
-            "marginVertical": 8,
             "width": "80%",
           }
         }
@@ -634,7 +366,7 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "checked" 
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="checked"
@@ -645,10 +377,13 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "checked" 
     <View
       style={
         Object {
+          "borderBottomColor": "#bdbdbd",
+          "borderBottomWidth": 1,
           "flexDirection": "row",
           "justifyContent": "space-between",
           "marginBottom": 6,
-          "width": "40%",
+          "paddingBottom": 6,
+          "width": "100%",
         }
       }
     >
@@ -658,7 +393,10 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "checked" 
         style={
           Object {
             "color": "#8492a8",
-            "fontSize": 16,
+            "flexBasis": "auto",
+            "flexGrow": 0,
+            "flexShrink": 1,
+            "fontSize": 14,
           }
         }
       >
@@ -667,8 +405,8 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "checked" 
       <Text
         style={
           Object {
-            "color": "#616161",
-            "fontSize": 16,
+            "color": "#8492a8",
+            "fontSize": 14,
             "marginHorizontal": 4,
           }
         }
@@ -679,167 +417,27 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "checked" 
         style={
           Object {
             "color": "#B40C00",
-            "fontSize": 16,
+            "flexBasis": "60%",
+            "flexGrow": 1,
+            "flexShrink": 0,
+            "fontSize": 14,
             "fontWeight": "bold",
-            "textAlign": "right",
           }
         }
       >
         [missing "en.APPROVAL.DAYS_LEFT" translation]
       </Text>
     </View>
-    <View
-      style={
-        Object {
-          "borderTopColor": "#bdbdbd",
-          "borderTopWidth": 1,
-          "flexDirection": "column",
-          "width": "100%",
-        }
-      }
-    >
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "marginVertical": 6,
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#8492a8",
-              "flexDirection": "column",
-              "fontSize": 14,
-            }
-          }
-        >
-          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-            }
-          }
-        >
-          0
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "marginVertical": 6,
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#8492a8",
-              "flexDirection": "column",
-              "fontSize": 14,
-            }
-          }
-        >
-          [missing "en.APPROVAL.OH_CHANGE" translation]
-        </Text>
-        <View
-          style={
-            Object {
-              "flexDirection": "row",
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "alignSelf": "flex-start",
-                "color": "#ab2703",
-                "fontSize": 16,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            <Icon
-              allowFontScaling={false}
-              name="arrow-down"
-              size={20}
-            />
-            $0.00
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#616161",
-                "fontSize": 16,
-                "marginHorizontal": 4,
-              }
-            }
-          >
-             | 
-          </Text>
-          <Text
-            style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "color": "#545F7A",
-                  "fontSize": 16,
-                },
-                Object {
-                  "alignSelf": "flex-start",
-                  "color": "#ab2703",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                },
-              ]
-            }
-          >
-            0
-          </Text>
-        </View>
-      </View>
-      <View
-        style={
-          Object {
-            "borderTopColor": "#eeeeee",
-            "borderTopWidth": 1,
-            "flexDirection": "row",
-            "justifyContent": "flex-end",
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          0
-        </Text>
-      </View>
-    </View>
+    <QuantityChange
+      dollarChange={0}
+      newQty={0}
+      oldQty={0}
+    />
   </View>
 </View>
 `;
 
-exports[`ApprovalCard Component Renders the Approval Item CheckBox as "unchecked"  1`] = `
+exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approval Item CheckBox as "unchecked"  1`] = `
 <View
   style={
     Object {
@@ -893,10 +491,10 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "unchecked
       <Text
         style={
           Object {
+            "alignSelf": "center",
             "color": "#424242",
-            "fontSize": 20,
+            "fontSize": 18,
             "fontWeight": "bold",
-            "marginVertical": 8,
             "width": "80%",
           }
         }
@@ -911,7 +509,7 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "unchecked
           }
         }
       >
-        <ForwardRef
+        <withTheme(Checkbox)
           color="#0071e9"
           onPress={[Function]}
           status="unchecked"
@@ -922,10 +520,13 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "unchecked
     <View
       style={
         Object {
+          "borderBottomColor": "#bdbdbd",
+          "borderBottomWidth": 1,
           "flexDirection": "row",
           "justifyContent": "space-between",
           "marginBottom": 6,
-          "width": "40%",
+          "paddingBottom": 6,
+          "width": "100%",
         }
       }
     >
@@ -935,7 +536,10 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "unchecked
         style={
           Object {
             "color": "#8492a8",
-            "fontSize": 16,
+            "flexBasis": "auto",
+            "flexGrow": 0,
+            "flexShrink": 1,
+            "fontSize": 14,
           }
         }
       >
@@ -944,8 +548,8 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "unchecked
       <Text
         style={
           Object {
-            "color": "#616161",
-            "fontSize": 16,
+            "color": "#8492a8",
+            "fontSize": 14,
             "marginHorizontal": 4,
           }
         }
@@ -956,162 +560,165 @@ exports[`ApprovalCard Component Renders the Approval Item CheckBox as "unchecked
         style={
           Object {
             "color": "#B40C00",
-            "fontSize": 16,
+            "flexBasis": "60%",
+            "flexGrow": 1,
+            "flexShrink": 0,
+            "fontSize": 14,
             "fontWeight": "bold",
-            "textAlign": "right",
           }
         }
       >
         [missing "en.APPROVAL.DAYS_LEFT" translation]
       </Text>
     </View>
+    <QuantityChange
+      dollarChange={0}
+      newQty={0}
+      oldQty={0}
+    />
+  </View>
+</View>
+`;
+
+exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if days left is undefined  1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "justifyContent": "flex-start",
+      "marginBottom": 4,
+      "padding": 8,
+    }
+  }
+>
+  <Image
+    source=""
+    style={
+      Object {
+        "height": 100,
+        "resizeMode": "stretch",
+        "width": 100,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#8492a8",
+          "fontSize": 14,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.ITEM.ITEM" translation] 0
+    </Text>
     <View
       style={
         Object {
-          "borderTopColor": "#bdbdbd",
-          "borderTopWidth": 1,
-          "flexDirection": "column",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
           "width": "100%",
         }
       }
     >
-      <View
+      <Text
         style={
           Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "marginVertical": 6,
-            "width": "100%",
+            "alignSelf": "center",
+            "color": "#424242",
+            "fontSize": 18,
+            "fontWeight": "bold",
+            "width": "80%",
           }
         }
       >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#8492a8",
-              "flexDirection": "column",
-              "fontSize": 14,
-            }
-          }
-        >
-          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-            }
-          }
-        >
-          0
-        </Text>
-      </View>
+        
+      </Text>
       <View
         style={
           Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "marginVertical": 6,
-            "width": "100%",
+            "justifyContent": "center",
+            "marginHorizontal": 20,
           }
         }
       >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#8492a8",
-              "flexDirection": "column",
-              "fontSize": 14,
-            }
-          }
-        >
-          [missing "en.APPROVAL.OH_CHANGE" translation]
-        </Text>
-        <View
-          style={
-            Object {
-              "flexDirection": "row",
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "alignSelf": "flex-start",
-                "color": "#ab2703",
-                "fontSize": 16,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            <Icon
-              allowFontScaling={false}
-              name="arrow-down"
-              size={20}
-            />
-            $0.00
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#616161",
-                "fontSize": 16,
-                "marginHorizontal": 4,
-              }
-            }
-          >
-             | 
-          </Text>
-          <Text
-            style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "color": "#545F7A",
-                  "fontSize": 16,
-                },
-                Object {
-                  "alignSelf": "flex-start",
-                  "color": "#ab2703",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                },
-              ]
-            }
-          >
-            0
-          </Text>
-        </View>
-      </View>
-      <View
-        style={
-          Object {
-            "borderTopColor": "#eeeeee",
-            "borderTopWidth": 1,
-            "flexDirection": "row",
-            "justifyContent": "flex-end",
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          0
-        </Text>
+        <withTheme(Checkbox)
+          color="#0071e9"
+          onPress={[Function]}
+          status="unchecked"
+          uncheckedColor="#0071e9"
+        />
       </View>
     </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "#bdbdbd",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginBottom": 6,
+          "paddingBottom": 6,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Object {
+            "color": "#8492a8",
+            "flexBasis": "auto",
+            "flexGrow": 0,
+            "flexShrink": 1,
+            "fontSize": 14,
+          }
+        }
+      >
+        
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#8492a8",
+            "fontSize": 14,
+            "marginHorizontal": 4,
+          }
+        }
+      >
+        |
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#B40C00",
+            "flexBasis": "60%",
+            "flexGrow": 1,
+            "flexShrink": 0,
+            "fontSize": 14,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.APPROVAL.DAYS_LEFT" translation]
+      </Text>
+    </View>
+    <QuantityChange
+      dollarChange={0}
+      newQty={0}
+      oldQty={0}
+    />
   </View>
 </View>
 `;

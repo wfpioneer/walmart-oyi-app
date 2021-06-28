@@ -32,6 +32,22 @@ const styles = StyleSheet.create({
   averageQtyLabel: {
     fontSize: 12,
     color: COLOR.GREY_600
+  },
+  chartContainer: {
+    height: 200,
+    paddingVertical: 16
+  },
+  barChartSize: {
+    flex: 1
+  },
+  axisPosition: {
+    marginTop: 10
+  },
+  dailyButton: {
+    marginRight: 4
+  },
+  weeklyButton: {
+    marginLeft: 4
   }
 });
 

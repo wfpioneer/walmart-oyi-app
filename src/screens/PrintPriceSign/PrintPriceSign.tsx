@@ -46,7 +46,7 @@ export const renderSignSizeButtons = (
 ) => {
   const sizeObject = selectedPrinter.type === PrinterType.LASER ? LaserPaper : PortablePaper;
   return (
-    <View style={{ flexDirection: 'row', marginVertical: 4 }}>
+    <View style={styles.sizeBtnContainer}>
       {Object.keys(sizeObject).map((key: string) => {
         // Only show the wine button if the item's category is appropriate
         if (key !== 'Wine' || (key === 'Wine' && catgNbr === wineCatgNbr)) {
@@ -62,7 +62,7 @@ export const renderSignSizeButtons = (
               radius={20}
               height={25}
               width={56}
-              style={{ marginHorizontal: 6 }}
+              style={styles.sizeBtnMargin}
               onPress={() => dispatch(setSignType(key))}
             />
           );
@@ -225,6 +225,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
 
   const handleChangePrinter = () => {
     validateSession(navigation, route.name).then(() => {
+      trackEvent('print_change_printer_click');
       navigation.navigate('PrinterList');
     }).catch(() => {});
   };
@@ -327,11 +328,11 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
           {renderSignSizeButtons(selectedPrinter, categoryNbr, selectedSignType, dispatch)}
         </View>
         <View style={styles.printerContainer}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.printerNameContainer}>
             <MaterialCommunityIcon name="printer-check" size={24} />
-            <View style={{ marginLeft: 12 }}>
+            <View style={styles.printTextMargin}>
               <Text>{selectedPrinter.name}</Text>
-              <Text style={{ fontSize: 12, color: COLOR.GREY_600 }}>{selectedPrinter.desc}</Text>
+              <Text style={styles.printerDesc}>{selectedPrinter.desc}</Text>
             </View>
           </View>
           <Button

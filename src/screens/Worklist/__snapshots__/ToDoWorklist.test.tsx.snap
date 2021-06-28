@@ -32,7 +32,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
       },
       Object {
         "catgName": "FRESH BAKERY",
-        "catgNbr": 87,
+        "catgNbr": 88,
         "completed": false,
         "completedTs": undefined,
         "completedUserId": undefined,
@@ -71,27 +71,42 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
       },
     ]
   }
+  dispatch={[MockFunction]}
   error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
   onRefresh={[Function]}
   refreshing={false}
+  updateGroupToggle={[MockFunction]}
 />
 `;
 
 exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array for completed worklist items  1`] = `
 <Worklist
   data={Array []}
+  dispatch={[MockFunction]}
   error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
   onRefresh={[Function]}
   refreshing={false}
+  updateGroupToggle={[MockFunction]}
 />
 `;
 
 exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array for zero worklist items 1`] = `
 <Worklist
   data={Array []}
+  dispatch={[MockFunction]}
   error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
   onRefresh={[Function]}
   refreshing={false}
+  updateGroupToggle={[MockFunction]}
 />
 `;
 
@@ -127,7 +142,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
       },
       Object {
         "catgName": "FRESH BAKERY",
-        "catgNbr": 87,
+        "catgNbr": 88,
         "completed": false,
         "completedTs": undefined,
         "completedUserId": undefined,
@@ -166,24 +181,39 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
       },
     ]
   }
+  dispatch={[MockFunction]}
   error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
   onRefresh={[Function]}
   refreshing={false}
+  updateGroupToggle={[MockFunction]}
 />
 `;
 
 exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders error message for failed worklist request 1`] = `
 <Worklist
+  dispatch={[MockFunction]}
   error="Network Error"
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
   onRefresh={[Function]}
   refreshing={false}
+  updateGroupToggle={[MockFunction]}
 />
 `;
 
 exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders refresh set to true waiting for worklist api response 1`] = `
 <Worklist
+  dispatch={[MockFunction]}
   error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
   onRefresh={[Function]}
   refreshing={true}
+  updateGroupToggle={[MockFunction]}
 />
 `;

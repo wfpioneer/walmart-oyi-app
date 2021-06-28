@@ -4,7 +4,7 @@ import axios, {
 import moment from 'moment';
 import Config from 'react-native-config';
 import { Platform } from 'react-native';
-import { store } from '../../App';
+import store from '../state';
 import {
   getConsumerId, getEnvironment, getWmSvcEnv, svcName
 } from '../utils/environment';
@@ -64,7 +64,7 @@ class Request {
             interceptRequest.headers['wm_svc.name'] = svcName.managerApprovalName;
           }
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
-          interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);
+          interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();
         }
         return interceptRequest;
       },
