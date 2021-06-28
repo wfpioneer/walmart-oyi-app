@@ -64,7 +64,7 @@ class Request {
             interceptRequest.headers['wm_svc.name'] = svcName.managerApprovalName;
           }
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
-          interceptRequest.headers['wm_svc.env'] = getWmSvcEnv(isOrchUrl);
+          interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();
         }
         return interceptRequest;
       },
