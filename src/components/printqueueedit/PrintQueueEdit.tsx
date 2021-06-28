@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import image from '../../assets/image';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import IconButton from '../buttons/IconButton';
 import COLOR from '../../themes/Color';
@@ -80,7 +81,7 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
         </View>
         <View style={styles.itemDetailsContainer}>
           {/* TODO: Remove image? */}
-          <Image source={require('../../assets/images/placeholder.png')} style={styles.itemImage} />
+          <Image source={image.placeholder} style={styles.itemImage} />
           <Text style={styles.itemNameTxt}>{itemToEdit.itemName}</Text>
         </View>
         <View style={styles.copyQtyContainer}>

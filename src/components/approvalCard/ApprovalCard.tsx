@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { Dispatch } from 'redux';
+import image from '../../assets/image';
 import { strings } from '../../locales';
 import styles from './ApprovalCard.style';
 import COLOR from '../../themes/Color';
@@ -30,7 +31,7 @@ export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
   return (
     <View style={styles.cardContainer}>
       {/* TODO: Remove image? */}
-      <Image source={require('../../assets/images/placeholder.png')} style={styles.image} />
+      <Image source={image.placeholder} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.itemNumber}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
         <View style={styles.itemInfoContainer}>

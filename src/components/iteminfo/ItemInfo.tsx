@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import image from '../../assets/image';
 
 import styles from './ItemInfo.style';
 import { currencies, strings } from '../../locales';
@@ -59,7 +60,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
     <View style={styles.mainContainer}>
       {/* TODO: Remove image? */}
       <View style={styles.imageContainer}>
-        <Image source={require('../../assets/images/placeholder.png')} style={styles.image} />
+        <Image source={image.placeholder} style={styles.image} />
       </View>
       {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
       <Text style={styles.itemNameText}>{itemName}</Text>

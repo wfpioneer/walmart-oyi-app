@@ -9,6 +9,7 @@ import {
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { Dispatch } from 'redux';
+import image from '../../assets/image';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -117,7 +118,7 @@ export const renderPrintItem = (
       style={[styles.itemContainer, index < printQueue.length - 1 ? styles.itemContainerBorder : {}]}
     >
       {/* TODO: Remove image? */}
-      <Image source={require('../../assets/images/placeholder.png')} style={styles.itemImage} />
+      <Image source={image.placeholder} style={styles.itemImage} />
       <View style={styles.itemDetailsContainer}>
         <Text style={styles.itemDescText}>{item.itemName}</Text>
         <Text style={styles.sizeText}>{`${strings('PRINT.SIGN_SIZE')}: ${strings(`PRINT.${item.paperSize}`)}`}</Text>

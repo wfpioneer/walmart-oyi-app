@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { Dispatch } from 'redux';
+import image from '../../assets/image';
 import styles from './WorklistItem.style';
 import { strings } from '../../locales';
 import { setScannedEvent } from '../../state/actions/Global';
@@ -55,7 +56,7 @@ export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
   return (
     <TouchableOpacity style={styles.container} onPress={worklistItemOnPress}>
       {/* TODO: Remove image? */}
-      <Image source={require('../../assets/images/placeholder.png')} style={styles.image} />
+      <Image source={image.placeholder} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.exceptionType}>
           { exceptionTypeToDisplayString(exceptionType) }

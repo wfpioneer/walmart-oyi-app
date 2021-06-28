@@ -9,6 +9,7 @@ import {
   NavigationProp, Route, useNavigation, useRoute
 } from '@react-navigation/native';
 import { Dispatch } from 'redux';
+import image from '../../assets/image';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
@@ -286,7 +287,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.itemDetailsContainer}>
           {/* TODO: Remove image? */}
-          <Image source={require('../../assets/images/placeholder.png')} style={styles.itemImage} />
+          <Image source={image.placeholder} style={styles.itemImage} />
           <Text style={styles.itemNameTxt}>{itemName}</Text>
         </View>
         <View style={styles.copyQtyContainer}>
