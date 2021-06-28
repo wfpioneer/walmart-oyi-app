@@ -18,7 +18,7 @@ export const LocationManagementNavigatorStack = (): JSX.Element => (
   >
     <Stack.Screen
       name="Zones"
-      component={() => (<ZoneList />)}
+      component={ZoneList}
       options={{
         headerTitle: strings('LOCATION.ZONES')
       }}
