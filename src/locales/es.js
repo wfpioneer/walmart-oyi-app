@@ -191,6 +191,9 @@ export default {
     REVIEW: 'Revisar cambios',
     LIST_NOT_FOUND: 'La lista de aprobación está vacía',
     UPDATE_APPROVED: 'Actualización de existencia aprobado',
-    UPDATE_REJECTED: 'Actualización de existencia rechazado'
+    UPDATE_REJECTED: 'Actualización de existencia rechazado',
+    FAILED_APPROVE: 'Las solicitudes fallaron al aprobarse',
+    FAILED_ITEMS: 'Artículos Fallidos',
+    UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo'
   }
 };

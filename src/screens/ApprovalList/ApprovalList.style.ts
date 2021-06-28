@@ -11,6 +11,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 28
   },
+  popUpContainer: {
+    paddingVertical: 15,
+    backgroundColor: COLOR.WHITE,
+    borderRadius: 5,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '80%',
+    alignSelf: 'center'
+  },
+  listContainer: {
+    paddingVertical: 20,
+    minHeight: 80
+  },
+  listText: {
+    alignSelf: 'center'
+  },
+  failedItemText: {
+    paddingVertical: 20
+  },
+
   activityIndicator: {
     flex: 1,
     justifyContent: 'center',
