@@ -4,11 +4,11 @@ import { NavigationProp, Route } from '@react-navigation/native';
 import {
   ApprovalListScreen, RenderApprovalItem, convertApprovalListData, renderPopUp
 } from './ApprovalList';
-import { mockApprovals } from '../../mockData/mockApprovalItem';
+import { mockApprovals } from '../../mockData/mockApprovalList';
 import { AsyncState } from '../../models/AsyncState';
 import {
   mockFailedData, mockLargeFailedData, mockMixedData, mockSuccessSkippedData
-} from '../../mockData/mockApprovalResponse';
+} from '../../mockData/mockApprovalUpdate';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));

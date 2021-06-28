@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { ApprovalSummaryScreen } from './ApprovalSummary';
-import { mockApprovals, mockSelectedApprovals } from '../../mockData/mockApprovalItem';
+import { mockApprovals, mockSelectedApprovals } from '../../mockData/mockApprovalList';
 
 let navigationProp: NavigationProp<any>;
 describe('ApprovalSummaryScreen', () => {
