@@ -19,8 +19,7 @@ export const asyncReducer = combineReducers({
   getLocation: makeAsyncReducer(asyncActions.GET_LOCATION_DETAILS),
   getFluffyRoles: makeAsyncReducer(asyncActions.GET_FLUFFY_ROLES),
   getApprovalList: makeAsyncReducer(asyncActions.GET_APPROVAL_LIST),
-  updateApprovalList: makeAsyncReducer(asyncActions.UPDATE_APPROVAL_LIST),
-  getZones: makeAsyncReducer(asyncActions.GET_ZONES)
+  updateApprovalList: makeAsyncReducer(asyncActions.UPDATE_APPROVAL_LIST)
 });
 
 export default asyncReducer;
