@@ -17,7 +17,6 @@ import GetLocationDetailsService from '../../services/GetLocationDetails.service
 import GetFluffyRolesService from '../../services/GetFluffyRoles.service';
 import GetApprovalListService from '../../services/GetApprovalList.service';
 import UpdateApprovalListService from '../../services/UpdateApprovalList.service';
-import GetZonesService from '../../services/GetZones.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),

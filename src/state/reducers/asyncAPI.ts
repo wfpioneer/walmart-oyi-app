@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import { makeAsyncReducer } from './generic/makeAsyncReducer';
 import * as asyncActions from '../actions/asyncAPI';
-import { getZones } from '../actions/saga';
 
 // @ts-ignore
 export const asyncReducer = combineReducers({
