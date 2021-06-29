@@ -46,3 +46,16 @@ describe('Test Location Item Card', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 });
+
+describe('Test Location Item Card', () => {
+  it('Renders Location Item Card with mock Section data', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <LocationItemCard
+        locationName={mockSectionItem.sectionName}
+        locationDetails={`${mockSectionItem.itemCount} items, ${mockSectionItem.palletCount} pallets`}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+});
