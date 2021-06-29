@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { ApprovalSummaryScreen } from './ApprovalSummary';
-import { mockApprovals, mockSelectedApprovals } from '../../mockData/mockApprovalItem';
+import { mockApprovals, mockSelectedApprovals } from '../../mockData/mockApprovalList';
 
 let navigationProp: NavigationProp<any>;
 describe('ApprovalSummaryScreen', () => {
@@ -35,6 +35,8 @@ describe('ApprovalSummaryScreen', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -54,6 +56,8 @@ describe('ApprovalSummaryScreen', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -73,6 +77,8 @@ describe('ApprovalSummaryScreen', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -92,6 +98,8 @@ describe('ApprovalSummaryScreen', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -110,6 +118,8 @@ describe('ApprovalSummaryScreen', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -128,6 +138,8 @@ describe('ApprovalSummaryScreen', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -155,6 +167,52 @@ describe('ApprovalSummaryScreen', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('Tests rendering the update approval api error modal: ', () => {
+    it('Renders error pop-up if errorModalVisible is set to true ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ApprovalSummaryScreen
+          route={approveRoute}
+          navigation={navigationProp}
+          approvalList={mockSelectedApprovals}
+          approvalApi={defaultAsyncState}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
+          errorModalVisible={true}
+          setErrorModalVisible={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders no error pop-up if errorModalVisible is set to false', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ApprovalSummaryScreen
+          route={approveRoute}
+          navigation={navigationProp}
+          approvalList={mockSelectedApprovals}
+          approvalApi={defaultAsyncState}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
