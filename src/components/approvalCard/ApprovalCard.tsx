@@ -29,28 +29,26 @@ export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
 
   return (
     <View style={styles.cardContainer}>
-      <View style={styles.content}>
-        <Text style={styles.itemNumber}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
-        <View style={styles.itemInfoContainer}>
-          <Text style={styles.itemDesc}>{itemName}</Text>
-          <Checkbox
-            status={isChecked ? 'checked' : 'unchecked'}
-            onPress={() => dispatch(toggleItem(itemNbr, !isChecked))}
-            color={COLOR.MAIN_THEME_COLOR}
-            uncheckedColor={COLOR.MAIN_THEME_COLOR}
-          />
-        </View>
-        <View style={styles.timeLeftContainer}>
-          <Text style={styles.userText} ellipsizeMode="tail" numberOfLines={1}>{userId}</Text>
-          <Text style={styles.timeLeftDivider}>|</Text>
-          <Text style={styles.daysText}>{strings('APPROVAL.DAYS_LEFT', { time: daysLeft || 0 })}</Text>
-        </View>
-        <QuantityChange
-          oldQty={oldQuantity}
-          newQty={newQuantity}
-          dollarChange={dollarChange}
+      <Text style={styles.itemNumber}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
+      <View style={styles.itemInfoContainer}>
+        <Text style={styles.itemDesc}>{itemName}</Text>
+        <Checkbox
+          status={isChecked ? 'checked' : 'unchecked'}
+          onPress={() => dispatch(toggleItem(itemNbr, !isChecked))}
+          color={COLOR.MAIN_THEME_COLOR}
+          uncheckedColor={COLOR.MAIN_THEME_COLOR}
         />
       </View>
+      <View style={styles.timeLeftContainer}>
+        <Text style={styles.userText} ellipsizeMode="tail" numberOfLines={1}>{userId}</Text>
+        <Text style={styles.timeLeftDivider}>|</Text>
+        <Text style={styles.daysText}>{strings('APPROVAL.DAYS_LEFT', { time: daysLeft || 0 })}</Text>
+      </View>
+      <QuantityChange
+        oldQty={oldQuantity}
+        newQty={newQuantity}
+        dollarChange={dollarChange}
+      />
     </View>
   );
 };

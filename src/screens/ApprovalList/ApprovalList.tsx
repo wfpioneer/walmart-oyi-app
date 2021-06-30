@@ -92,7 +92,7 @@ export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryF
 
 export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
   const {
-    imageUrl, itemNbr, itemName, oldQuantity,
+    itemNbr, itemName, oldQuantity,
     newQuantity, dollarChange, initiatedUserId, daysLeft,
     categoryHeader, categoryNbr, categoryDescription, isChecked
   } = props.item;
@@ -113,7 +113,6 @@ export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
     <ApprovalCard
       dollarChange={dollarChange}
       daysLeft={daysLeft}
-      image={imageUrl}
       itemName={itemName}
       itemNbr={itemNbr}
       oldQuantity={oldQuantity}

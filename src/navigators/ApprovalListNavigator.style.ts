@@ -1,18 +1,20 @@
 import { StyleSheet } from 'react-native';
 import COLOR from '../themes/Color';
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   headerTitle: {
     color: COLOR.WHITE,
     fontWeight: 'bold',
-    fontSize: 20
+    fontSize: 20,
+    marginLeft: -2
   },
   headerSubtitle: {
     color: COLOR.WHITE,
-    fontSize: 14
+    fontSize: 14,
+    marginLeft: -2
   },
   headerRightPadding: {
-    paddingRight: 10
+    paddingRight: 16
   },
   headerLeftPadding: {
     paddingLeft: 10
@@ -29,5 +31,6 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold'
   }
-
 });
+
+export default styles;
