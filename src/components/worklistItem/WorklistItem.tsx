@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Image, Text, TouchableOpacity, View
+  Text, TouchableOpacity, View
 } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { Dispatch } from 'redux';
@@ -37,7 +37,8 @@ const exceptionTypeToDisplayString = (exceptionType: string) => {
   }
 };
 
-export const WorklistItem = (props: WorklistItemProps) => {
+// TODO change this to default export
+export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
   const {
     navigation, dispatch, exceptionType, itemDescription, itemNumber, upcNbr
   } = props;
@@ -53,7 +54,6 @@ export const WorklistItem = (props: WorklistItemProps) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={worklistItemOnPress}>
-      <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.exceptionType}>
           { exceptionTypeToDisplayString(exceptionType) }

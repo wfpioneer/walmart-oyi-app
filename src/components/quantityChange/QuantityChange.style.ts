@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    marginVertical: 6
+    marginVertical: 6,
+    paddingRight: 10
   },
   quantityDivider: {
     marginHorizontal: 4,
@@ -32,7 +33,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     borderTopWidth: 1,
     borderTopColor: COLOR.GREY_200,
-    width: '100%'
+    width: '100%',
+    paddingRight: 10
   },
   resultText: {
     fontSize: 16,
