@@ -1,7 +1,6 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import image from '../../assets/image';
 
 import styles from './ItemInfo.style';
 import { currencies, strings } from '../../locales';

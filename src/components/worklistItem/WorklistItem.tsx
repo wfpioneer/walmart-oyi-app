@@ -1,10 +1,9 @@
 import React from 'react';
 import {
-  Image, Text, TouchableOpacity, View
+  Text, TouchableOpacity, View
 } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { Dispatch } from 'redux';
-import image from '../../assets/image';
 import styles from './WorklistItem.style';
 import { strings } from '../../locales';
 import { setScannedEvent } from '../../state/actions/Global';

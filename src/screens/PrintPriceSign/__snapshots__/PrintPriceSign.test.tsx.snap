@@ -278,16 +278,6 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         }
       }
     >
-      <Image
-        source=""
-        style={
-          Object {
-            "height": 65,
-            "resizeMode": "stretch",
-            "width": 65,
-          }
-        }
-      />
       <Text
         style={
           Object {
@@ -616,16 +606,6 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         }
       }
     >
-      <Image
-        source=""
-        style={
-          Object {
-            "height": 65,
-            "resizeMode": "stretch",
-            "width": 65,
-          }
-        }
-      />
       <Text
         style={
           Object {
@@ -991,16 +971,6 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         }
       }
     >
-      <Image
-        source=""
-        style={
-          Object {
-            "height": 65,
-            "resizeMode": "stretch",
-            "width": 65,
-          }
-        }
-      />
       <Text
         style={
           Object {

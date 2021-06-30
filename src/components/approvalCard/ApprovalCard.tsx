@@ -1,8 +1,7 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { Dispatch } from 'redux';
-import image from '../../assets/image';
 import { strings } from '../../locales';
 import styles from './ApprovalCard.style';
 import COLOR from '../../themes/Color';

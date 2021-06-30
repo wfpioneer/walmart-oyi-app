@@ -4,12 +4,11 @@ import {
   NavigationProp, Route, useNavigation, useRoute
 } from '@react-navigation/native';
 import {
-  ActivityIndicator, Image, Modal, SafeAreaView, ScrollView, Text, View
+  ActivityIndicator, Modal, SafeAreaView, ScrollView, Text, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { Dispatch } from 'redux';
-import image from '../../assets/image';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';

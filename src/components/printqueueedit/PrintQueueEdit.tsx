@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import {
-  Image, Text, TextInput, View
+  Text, TextInput, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import image from '../../assets/image';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import IconButton from '../buttons/IconButton';
 import COLOR from '../../themes/Color';

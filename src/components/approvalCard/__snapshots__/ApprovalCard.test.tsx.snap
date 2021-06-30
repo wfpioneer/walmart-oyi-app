@@ -13,16 +13,6 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     }
   }
 >
-  <Image
-    source=""
-    style={
-      Object {
-        "height": 80,
-        "resizeMode": "stretch",
-        "width": 80,
-      }
-    }
-  />
   <View
     style={
       Object {
@@ -148,16 +138,6 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     }
   }
 >
-  <Image
-    source=""
-    style={
-      Object {
-        "height": 80,
-        "resizeMode": "stretch",
-        "width": 80,
-      }
-    }
-  />
   <View
     style={
       Object {
@@ -283,16 +263,6 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
     }
   }
 >
-  <Image
-    source=""
-    style={
-      Object {
-        "height": 80,
-        "resizeMode": "stretch",
-        "width": 80,
-      }
-    }
-  />
   <View
     style={
       Object {
@@ -418,16 +388,6 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
     }
   }
 >
-  <Image
-    source=""
-    style={
-      Object {
-        "height": 80,
-        "resizeMode": "stretch",
-        "width": 80,
-      }
-    }
-  />
   <View
     style={
       Object {
@@ -553,16 +513,6 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
     }
   }
 >
-  <Image
-    source=""
-    style={
-      Object {
-        "height": 80,
-        "resizeMode": "stretch",
-        "width": 80,
-      }
-    }
-  />
   <View
     style={
       Object {

@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import {
-  ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TextInput, View
+  ActivityIndicator, SafeAreaView, ScrollView, Text, TextInput, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
@@ -9,7 +9,6 @@ import {
   NavigationProp, Route, useNavigation, useRoute
 } from '@react-navigation/native';
 import { Dispatch } from 'redux';
-import image from '../../assets/image';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
