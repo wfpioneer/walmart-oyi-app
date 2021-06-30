@@ -58,10 +58,6 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
 
   return (
     <View style={styles.mainContainer}>
-      {/* TODO: Remove image? */}
-      <View style={styles.imageContainer}>
-        <Image source={image.placeholder} style={styles.image} />
-      </View>
       {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
       <Text style={styles.itemNameText}>{itemName}</Text>
       <View style={styles.nbrContainer}>

@@ -117,8 +117,6 @@ export const renderPrintItem = (
       key={`${item.itemNbr}-${item.upcNbr}`}
       style={[styles.itemContainer, index < printQueue.length - 1 ? styles.itemContainerBorder : {}]}
     >
-      {/* TODO: Remove image? */}
-      <Image source={image.placeholder} style={styles.itemImage} />
       <View style={styles.itemDetailsContainer}>
         <Text style={styles.itemDescText}>{item.itemName}</Text>
         <Text style={styles.sizeText}>{`${strings('PRINT.SIGN_SIZE')}: ${strings(`PRINT.${item.paperSize}`)}`}</Text>

@@ -55,8 +55,6 @@ export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={worklistItemOnPress}>
-      {/* TODO: Remove image? */}
-      <Image source={image.placeholder} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.exceptionType}>
           { exceptionTypeToDisplayString(exceptionType) }

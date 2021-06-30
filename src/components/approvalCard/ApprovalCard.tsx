@@ -30,8 +30,6 @@ export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
 
   return (
     <View style={styles.cardContainer}>
-      {/* TODO: Remove image? */}
-      <Image source={image.placeholder} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.itemNumber}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
         <View style={styles.itemInfoContainer}>

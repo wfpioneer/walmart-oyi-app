@@ -80,8 +80,6 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
           />
         </View>
         <View style={styles.itemDetailsContainer}>
-          {/* TODO: Remove image? */}
-          <Image source={image.placeholder} style={styles.itemImage} />
           <Text style={styles.itemNameTxt}>{itemToEdit.itemName}</Text>
         </View>
         <View style={styles.copyQtyContainer}>
