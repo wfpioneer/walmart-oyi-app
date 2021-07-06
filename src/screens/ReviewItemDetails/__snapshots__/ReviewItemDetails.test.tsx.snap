@@ -1318,6 +1318,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           isGraphView={false}
           itemDetails={
             Object {
+              "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
               "completed": false,
@@ -1808,6 +1809,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           isGraphView={false}
           itemDetails={
             Object {
+              "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
               "completed": false,
