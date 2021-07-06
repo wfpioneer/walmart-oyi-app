@@ -27,20 +27,20 @@ export const renderApprovalTitle = (approvalAmount: number): JSX.Element => (
   <View>
     <Text style={styles.headerTitle}>{strings('APPROVAL.APPROVE_ITEMS')}</Text>
     <Text style={styles.headerSubtitle}>
-      {` ${approvalAmount} ${approvalAmount === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')}`}
+      {`${approvalAmount} ${approvalAmount === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')}`}
     </Text>
   </View>
 );
 
 export const renderSelectedItemQty = (itemQty: number): JSX.Element => (
-  <Text style={styles.headerTitle}>{` ${itemQty} ${strings('APPROVAL.SELECTED')}`}</Text>
+  <Text style={styles.headerTitle}>{`${itemQty} ${strings('APPROVAL.SELECTED')}`}</Text>
 );
 
 export const renderCloseButton = (dispatch: Dispatch<any>): JSX.Element => (
   <TouchableOpacity
     onPress={() => dispatch(toggleAllItems(false))}
   >
-    <MaterialIcons name="close" size={28} color={COLOR.WHITE} />
+    <MaterialIcons name="close" size={22} color={COLOR.WHITE} />
   </TouchableOpacity>
 );
 interface ApprovalNavigatorProps {

@@ -4,14 +4,11 @@ import COLOR from '../../themes/Color';
 const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: COLOR.WHITE,
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
+    flexDirection: 'column',
     marginBottom: 4,
-    padding: 8
-  },
-  content: {
-    alignItems: 'flex-start',
-    justifyContent: 'center',
+    paddingVertical: 8,
+    paddingRight: 8,
+    paddingLeft: 14,
     flex: 1
   },
   itemInfoContainer: {
@@ -20,8 +17,8 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 80,
+    width: 80,
     resizeMode: 'stretch'
   },
   itemNumber: {
@@ -40,10 +37,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
     color: COLOR.SHIP_COVE,
     fontSize: 14
-  },
-  checkBox: {
-    justifyContent: 'center',
-    marginHorizontal: 20
   },
   infoColumn: {
     flexDirection: 'column'

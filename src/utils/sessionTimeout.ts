@@ -6,6 +6,7 @@ import { logoutUser } from '../state/actions/User';
 import store from '../state';
 import { trackEvent } from './AppCenterTool';
 import { clearEndTime } from '../state/actions/SessionTimeout';
+import { resetApprovals } from '../state/actions/Approvals';
 
 const sessionLength = 2;
 export const sessionEnd = (): number => {
@@ -22,6 +23,7 @@ export function validateSession(navigation: NavigationProp<any>, route?: string)
       trackEvent('user_session_timed_out', { lastPage: route });
       store.dispatch(clearEndTime());
       WMSSO.signOutUser().then(() => {
+        store.dispatch(resetApprovals());
         store.dispatch(logoutUser());
         // Replace the current screen with the LoginScreen
         navigation.dispatch(
