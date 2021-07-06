@@ -36,6 +36,7 @@ const ERROR_FORMATTING_OPTIONS = {
 };
 
 const validateQty = (qty: number) => OH_MIN <= qty && qty <= OH_MAX;
+const validateSameQty = (qty: number, newQty: number) => qty === newQty;
 
 const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
   <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
@@ -45,6 +46,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   const { ohQty, setOhQtyModalVisible } = props;
   const [isValidNbr, setIsValidNbr] = useState(validateQty(ohQty));
   const [newOHQty, setNewOHQty] = useState(ohQty);
+  const [isSameQty, setIsSameQty] = useState(validateSameQty(ohQty, newOHQty));
   const [apiSubmitting, updateApiSubmitting] = useState(false);
   const [error, updateError] = useState('');
   const [apiStart, setApiStart] = useState(0);
@@ -114,6 +116,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
     if (!isNaN(newQty)) {
       setNewOHQty(newQty);
       setIsValidNbr(validateQty(newQty));
+      setIsSameQty(validateSameQty(ohQty, newQty));
     }
   };
 
@@ -125,6 +128,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
       setIsValidNbr(true);
       setNewOHQty((prevState => prevState + 1));
     }
+    setIsSameQty(validateSameQty(ohQty, newOHQty + 1));
   };
 
   const handleDecreaseQty = () => {
@@ -135,6 +139,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
       setIsValidNbr(true);
       setNewOHQty((prevState => prevState - 1));
     }
+    setIsSameQty(validateSameQty(ohQty, newOHQty - 1));
   };
 
   if (apiSubmitting) {
@@ -197,7 +202,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
           style={styles.saveBtn}
           title="Save"
           type={Button.Type.PRIMARY}
-          disabled={!isValidNbr}
+          disabled={(!isValidNbr || isSameQty)}
           onPress={handleSaveOHQty}
         />
       </View>
