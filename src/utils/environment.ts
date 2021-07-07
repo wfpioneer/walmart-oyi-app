@@ -53,7 +53,7 @@ export const getConsumerId = () => {
   const consumerId = {
     dev: '3b87ba30-529e-4cf7-983f-c3873edc6304',
     stage: '28cd32c8-6c12-40e9-97ec-e06db93fa529',
-    prod: ''
+    prod: 'cf25a58c-3fdb-4189-974f-8086c7be23d1'
   };
 
   switch (Config.ENVIRONMENT) {
