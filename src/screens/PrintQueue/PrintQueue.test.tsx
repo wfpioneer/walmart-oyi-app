@@ -5,10 +5,13 @@ import { strings } from '../../locales';
 import { LaserPaper, PrintQueueItem, PrinterType } from '../../models/Printer';
 import { PrintQueueScreen, handlePrint, renderPrintItem } from './PrintQueue';
 
+// Something gets into a weird state, and this seems to fix it
+jest.useFakeTimers();
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
+
 describe('PrintQueueScreen', () => {
   const defaultPrinter = {
     type: PrinterType.LASER,

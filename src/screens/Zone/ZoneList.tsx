@@ -10,7 +10,7 @@ import {
 import moment from 'moment';
 import styles from './ZoneList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import ZoneItemCard from '../../components/zoneItemCard/ZoneItemCard';
+import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
 import { LocationHeader } from '../../components/locationHeader/LocationHeader';
 import { getAllZones } from '../../state/actions/saga';
@@ -85,9 +85,9 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
       <FlatList
         data={zoneItems}
         renderItem={({ item }) => (
-          <ZoneItemCard
-            zoneName={item.zoneName}
-            aisleCount={item.aisleCount}
+          <LocationItemCard
+            locationName={item.zoneName}
+            locationDetails={`${item.aisleCount} ${strings('LOCATION.AISLES')}`}
           />
         )}
         keyExtractor={item => item.zoneName}

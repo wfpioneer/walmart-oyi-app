@@ -4,7 +4,6 @@ import { ApprovalCard, ApprovalCardProps } from './ApprovalCard';
 
 describe('ApprovalCard Component', () => {
   const positiveItem: ApprovalCardProps = {
-    image: '../../assets/images/placeholder.png',
     itemNbr: 123,
     itemName: 'Test Item 123',
     userId: 'Associate Employee',
@@ -15,7 +14,6 @@ describe('ApprovalCard Component', () => {
     dispatch: jest.fn()
   };
   const negativeItem: ApprovalCardProps = {
-    image: '../../assets/images/placeholder.png',
     itemNbr: 456,
     itemName: 'Test Item 456',
     userId: 'Associate Worker',
@@ -33,7 +31,6 @@ describe('ApprovalCard Component', () => {
         <ApprovalCard
           dollarChange={positiveItem.dollarChange}
           daysLeft={positiveItem.daysLeft}
-          image={positiveItem.image}
           itemName={positiveItem.itemName}
           itemNbr={positiveItem.itemNbr}
           oldQuantity={positiveItem.oldQuantity}
@@ -53,7 +50,6 @@ describe('ApprovalCard Component', () => {
         <ApprovalCard
           dollarChange={negativeItem.dollarChange}
           daysLeft={negativeItem.daysLeft}
-          image={negativeItem.image}
           itemName={negativeItem.itemName}
           itemNbr={negativeItem.itemNbr}
           oldQuantity={negativeItem.oldQuantity}
@@ -72,7 +68,6 @@ describe('ApprovalCard Component', () => {
         <ApprovalCard
           dollarChange={0}
           daysLeft={0}
-          image={undefined}
           itemName=""
           itemNbr={0}
           oldQuantity={0}
@@ -91,7 +86,6 @@ describe('ApprovalCard Component', () => {
         <ApprovalCard
           dollarChange={0}
           daysLeft={0}
-          image={undefined}
           itemName=""
           itemNbr={0}
           oldQuantity={0}
@@ -110,7 +104,6 @@ describe('ApprovalCard Component', () => {
         <ApprovalCard
           dollarChange={0}
           daysLeft={undefined}
-          image={undefined}
           itemName=""
           itemNbr={0}
           oldQuantity={0}

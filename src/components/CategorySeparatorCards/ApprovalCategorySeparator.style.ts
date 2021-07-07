@@ -17,12 +17,12 @@ const styles = StyleSheet.create({
     color: COLOR.GREY_700,
     fontSize: 16,
     fontWeight: 'bold',
-    marginHorizontal: 20
-
+    marginHorizontal: 14
   },
   checkBox: {
     justifyContent: 'center',
     marginHorizontal: 7
   }
 });
+
 export default styles;

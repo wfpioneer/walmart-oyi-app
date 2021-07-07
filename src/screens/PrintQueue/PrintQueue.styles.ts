@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     backgroundColor: COLOR.WHITE,
-    paddingHorizontal: 12,
+    paddingHorizontal: 10,
     borderBottomWidth: 1,
     borderBottomColor: COLOR.GREY_500
   },

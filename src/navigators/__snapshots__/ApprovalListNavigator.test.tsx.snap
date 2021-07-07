@@ -8,6 +8,7 @@ exports[`ApprovalList Navigator Renders \`items\` translation for an approval li
         "color": "#ffffffff",
         "fontSize": 20,
         "fontWeight": "bold",
+        "marginLeft": -2,
       }
     }
   >
@@ -18,10 +19,11 @@ exports[`ApprovalList Navigator Renders \`items\` translation for an approval li
       Object {
         "color": "#ffffffff",
         "fontSize": 14,
+        "marginLeft": -2,
       }
     }
   >
-     5 [missing "en.GENERICS.ITEMS" translation]
+    5 [missing "en.GENERICS.ITEMS" translation]
   </Text>
 </View>
 `;
@@ -34,6 +36,7 @@ exports[`ApprovalList Navigator Renders single \`item\` translation for an appro
         "color": "#ffffffff",
         "fontSize": 20,
         "fontWeight": "bold",
+        "marginLeft": -2,
       }
     }
   >
@@ -44,10 +47,11 @@ exports[`ApprovalList Navigator Renders single \`item\` translation for an appro
       Object {
         "color": "#ffffffff",
         "fontSize": 14,
+        "marginLeft": -2,
       }
     }
   >
-     1 [missing "en.GENERICS.ITEM" translation]
+    1 [missing "en.GENERICS.ITEM" translation]
   </Text>
 </View>
 `;
@@ -59,10 +63,11 @@ exports[`ApprovalList Navigator Renders the SelectedItemQty component  1`] = `
       "color": "#ffffffff",
       "fontSize": 20,
       "fontWeight": "bold",
+      "marginLeft": -2,
     }
   }
 >
-   4 [missing "en.APPROVAL.SELECTED" translation]
+  4 [missing "en.APPROVAL.SELECTED" translation]
 </Text>
 `;
 
@@ -89,7 +94,7 @@ exports[`ApprovalList Navigator Renders the approval list navigator component 1`
         },
         "headerRight": [Function],
         "headerRightContainerStyle": Object {
-          "paddingRight": 10,
+          "paddingRight": 16,
         },
         "headerTitle": [Function],
       }
@@ -139,7 +144,7 @@ exports[`ApprovalList Navigator Renders the closeButton component  1`] = `
   <mockConstructor
     color="#ffffffff"
     name="close"
-    size={28}
+    size={22}
   />
 </GenericTouchable>
 `;

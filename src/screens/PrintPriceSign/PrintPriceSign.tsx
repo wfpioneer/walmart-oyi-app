@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import {
-  ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TextInput, View
+  ActivityIndicator, SafeAreaView, ScrollView, Text, TextInput, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
@@ -285,7 +285,6 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.itemDetailsContainer}>
-          <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.itemImage} />
           <Text style={styles.itemNameTxt}>{itemName}</Text>
         </View>
         <View style={styles.copyQtyContainer}>
