@@ -17,6 +17,7 @@ export const GET_LOCATION_DETAILS = 'SAGA/GET_LOCATION_DETAILS';
 export const GET_FLUFFY_FEATURES = 'SAGA/GET_FLUFFY_FEATURES';
 export const GET_APPROVAL_LIST = 'SAGA/GET_APPROVAL_LIST';
 export const UPDATE_APPROVAL_LIST = 'SAGA/UPDATE_APPROVAL_LIST';
+export const GET_ALL_ZONES = 'SAGA/GET_ZONES';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload });
@@ -41,3 +42,4 @@ export const updateApprovalList = (payload: {
   approvalItems: ApprovalListItem[]
   headers: {action: approvalAction},
 }) => ({ type: UPDATE_APPROVAL_LIST, payload });
+export const getAllZones = (payload: any) => ({ type: GET_ALL_ZONES, payload });

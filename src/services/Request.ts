@@ -50,7 +50,7 @@ class Request {
         } else {
           // For use with all of the OYI APIs
           interceptRequest.headers.worklistDate = currentTime.format('YYYY-MM-DD');
-          interceptRequest.headers.userId = store.getState().User.userId;
+          interceptRequest.headers.userId = store.getState().User.userId.toLowerCase();
           interceptRequest.headers.countryCode = store.getState().User.countryCode;
           interceptRequest.headers.clubNbr = store.getState().User.siteId;
 
@@ -62,6 +62,8 @@ class Request {
             interceptRequest.headers['wm_svc.name'] = svcName.itemDetailsName;
           } else if (request.url.includes(envUrls.managerApprovalUrl)) {
             interceptRequest.headers['wm_svc.name'] = svcName.managerApprovalName;
+          } else if (request.url.includes(envUrls.locationUrl)) {
+            interceptRequest.headers['wm_svc.name'] = svcName.locationName;
           }
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();

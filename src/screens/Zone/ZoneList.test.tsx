@@ -1,24 +1,94 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { NavigationProp, Route } from '@react-navigation/native';
 import { ZoneScreen } from './ZoneList';
+import { AsyncState } from '../../models/AsyncState';
 import { mockZones } from '../../mockData/zoneDetails';
-import { ZoneItem } from '../../models/ZoneItem';
 
 const MX_TEST_CLUB_NBR = 5522;
+let navigationProp: NavigationProp<any>;
+let routeProp: Route<any>;
 
 describe('Test Zone List', () => {
-  it('Renders Zone Screen', () => {
+  it('Renders Zone Screen with Data', () => {
     const renderer = ShallowRenderer.createRenderer();
-    renderer.render(<ZoneScreen zoneList={mockZones} siteId={MX_TEST_CLUB_NBR} />);
+    const getZonesResult = {
+      data: mockZones,
+      status: 200
+    };
+    const getZoneSuccess: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: getZonesResult
+    };
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        getZoneApi={getZoneSuccess}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders Zone Screen with Empty Data', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getZonesResult = {
+      data: {},
+      status: 200
+    };
+    const getZoneSuccess: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: getZonesResult
+    };
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        getZoneApi={getZoneSuccess}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+      />
+    );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 });
 
-describe('Test Zone List with empty list', () => {
-  const emptyZoneList: ZoneItem[] = [];
-  it('Renders empty Zone Screen', () => {
+describe('Test Get Zone Api Response', () => {
+  it('Renders Zone Api Error Message', () => {
     const renderer = ShallowRenderer.createRenderer();
-    renderer.render(<ZoneScreen zoneList={emptyZoneList} siteId={MX_TEST_CLUB_NBR} />);
+    const getZoneResponseFailure: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: 'Network Error',
+      result: null
+    };
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        getZoneApi={getZoneResponseFailure}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+      />
+    );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 });
