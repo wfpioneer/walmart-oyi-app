@@ -1,5 +1,4 @@
 import ItemDetails from '../models/ItemDetails';
-// TODO add basePrice to test items
 /* eslint-disable quote-props */
 export default {
   '123': {

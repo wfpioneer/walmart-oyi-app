@@ -64,7 +64,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
         duration: moment().valueOf() - apiStart
       });
       dispatch(updatePendingOHQty(newOHQty));
-      if (props.exceptionType === 'NO') {
+      if (props.exceptionType === 'NO' || props.exceptionType === 'C' || props.exceptionType === 'NSFL') {
         dispatch(setActionCompleted());
       }
       updateApiSubmitting(false);
@@ -92,16 +92,19 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   }, [updateQuantityAPIStatus]);
 
   const handleSaveOHQty = () => {
-    const change = itemDetails.basePrice * (newOHQty - itemDetails.onHandsQty);
+    const {
+      basePrice, categoryNbr, itemName, itemNbr, onHandsQty, upcNbr
+    } = itemDetails;
+    const change = basePrice * (newOHQty - itemDetails.onHandsQty);
     trackEvent('item_details_update_oh_quantity_api_call', { newOHQty, itemNbr: itemDetails.itemNbr });
     setApiStart(moment().valueOf());
     dispatch(updateOHQty({
       data: {
-        itemName: itemDetails.itemName,
-        itemNbr: itemDetails.itemNbr,
-        upcNbr: parseInt(itemDetails.upcNbr, 10),
-        categoryNbr: itemDetails.categoryNbr,
-        oldQuantity: itemDetails.onHandsQty,
+        itemName,
+        itemNbr,
+        upcNbr: parseInt(upcNbr, 10),
+        categoryNbr,
+        oldQuantity: onHandsQty,
         newQuantity: newOHQty,
         dollarChange: change,
         initiatedTimestamp: moment().toISOString(),
