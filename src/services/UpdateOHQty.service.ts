@@ -1,13 +1,14 @@
+import { AxiosResponse } from 'axios';
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
+import { ApprovalListItem } from '../models/ApprovalListItem';
 
 export default class UpdateOHQtyService {
-  public static updateOHQty(payload: {headers: object; itemNumber: number; data: {onHandQty: number}}) {
+  public static updateOHQty(payload: { data: ApprovalListItem}): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
-    return Request.put(
-      `${urls.orchestrationURL}/item/${payload.itemNumber}/onhands`,
+    return Request.post(
+      `${urls.orchestrationURL}/managerapproval/items`,
       payload.data,
-      { headers: payload.headers }
     );
   }
 }

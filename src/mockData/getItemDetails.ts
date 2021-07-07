@@ -1,5 +1,4 @@
 import ItemDetails from '../models/ItemDetails';
-
 /* eslint-disable quote-props */
 export default {
   '123': {
@@ -10,6 +9,7 @@ export default {
     categoryNbr: 93,
     categoryDesc: 'Meat PI',
     price: 2000.94,
+    basePrice: 1500.30,
     exceptionType: 'nsfl',
     completed: false,
     onHandsQty: 42,
@@ -145,6 +145,7 @@ export default {
     categoryNbr: 99,
     categoryDesc: 'Store Use',
     price: 2000.94,
+    basePrice: 1500.30,
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
@@ -275,6 +276,7 @@ export default {
     categoryNbr: 19,
     categoryDesc: 'Wine',
     price: 2000.94,
+    basePrice: 1500.30,
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
