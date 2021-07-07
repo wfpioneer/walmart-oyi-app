@@ -33,3 +33,9 @@ applications:
         consumerIdInfos:
           - consumerId: 28cd32c8-6c12-40e9-97ec-e06db93fa529
             publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmBdbDQWIIfBvxWZF/Q4XRMaV3g5hcqyjH8bzifj7+1/MPgqBFF/N72UeeqIdHDwdHnIcx6+kH0Vr4KQjnlxD2FAb0mlGeolLIzGeRCQuYb4zzoQcOKARR+ByydipvC36aEQc6zevBJ+0wFJol30jWb0t6CLxtPQ8L1RMSgufC3znoHV1sy/xfEaAjf1KKL13KpKIMWnMKsvG9RkC6BaFA3YPBmTvq69rQmn71YqxHwF2YgbUvaH2va697RQOXZ4CjO5VrpAuTeBRZvUMi9LHTk3TQ8j9K4cHcsk3x651HBHkUEK1XAEfqf4HKzmnzz87dMvXWWmF0JyUNDsDwogQ9QIDAQAB
+      - name: prod
+        type: PRODUCTION
+        description: Prod environment for oyi-app
+        consumerIdInfos:
+          - consumerId: cf25a58c-3fdb-4189-974f-8086c7be23d1
+            publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxDqyexvYoBqUN1F3CHNP6n70MECJ1oYvtZ+2OhCUaOW8vgbGuRrkc9l6YGu6P3JdeExzrtSHcHvMb1n/UXFMCPsNUKquJXzNjXcFZV1yp8+e9lYlnV8J6QiZJWHtC5IEnBWYVV9h8ryWlYrDD+h3KUIwq78h1Pw+D3SA1Qzdh9vNHaR80k3XkbVm6ChwzEJTkBkxrgNS4I/VoUi2wYCNH0v1n6xhGzEzoAklP3D26T2R+7qkAXH0xKzNL6JWFeYQPTM0c5s7ioAPljG+zysDu7hfvi9qdbB3niIYU0AVsTW0zc7lr4tZXm3PugDa5zizGCbzUfHDMBcXLa0rKcsuLwIDAQAB
