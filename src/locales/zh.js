@@ -62,7 +62,8 @@ export default {
     NO_SALES: '无销售清单',
     NEGATIVE_ON_HANDS: '负现货清单',
     CANCELLED: '取消状态商品清单',
-    NSFL: '无楼面位置商品清单'
+    NSFL: '无楼面位置商品清单',
+    UNKNOWN: 'Unknown' // TODO Mandarin translations
   },
   ITEM: {
     TITLE: '查看商品明细',
