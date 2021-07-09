@@ -1,15 +1,18 @@
 import React, {
-  RefObject, createRef, useEffect, useState
+  EffectCallback, RefObject, createRef, useEffect, useState
 } from 'react';
 import {
   ActivityIndicator, BackHandler, Modal, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import _ from 'lodash';
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
+import {
+  NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
+} from '@react-navigation/native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { addToPicklist, getItemDetails, noAction } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
@@ -32,107 +35,47 @@ import { showInfoModal } from '../../state/actions/Modal';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
+import { AsyncState } from '../../models/AsyncState';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
-interface StateAsync {
-    isWaiting: boolean;
-    value: any;
-    error: any;
-    result: any;
-}
 export interface ItemDetailsScreenProps {
   scannedEvent: any; isManualScanEnabled: boolean;
   isWaiting: boolean; error: any; result: any;
-  addToPicklistStatus: StateAsync;
-  completeItemApi: StateAsync;
+  addToPicklistStatus: AsyncState;
+  completeItemApi: AsyncState;
   userId: string;
   exceptionType: string; actionCompleted: boolean; pendingOnHandsQty: number;
   floorLocations?: Location[];
   reserveLocations?: Location[];
-  route: any;
-  dispatch: Function;
-  navigation: any;
-  scrollViewRef: any;
-  isSalesMetricsGraphView: boolean; setIsSalesMetricsGraphView: Function;
-  ohQtyModalVisible: boolean; setOhQtyModalVisible: Function;
-  completeApiInProgress: boolean; setCompleteApiInProgress: Function;
-  errorModalVisible: boolean; setErrorModalVisible: Function;
-  isRefreshing: boolean; setIsRefreshing: Function;
-  apiStart: number; setApiStart: Function;
+  route: RouteProp<any, string>;
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
+  scrollViewRef: RefObject<ScrollView>;
+  isSalesMetricsGraphView: boolean; setIsSalesMetricsGraphView: React.Dispatch<React.SetStateAction<boolean>>;
+  ohQtyModalVisible: boolean; setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  completeApiInProgress: boolean; setCompleteApiInProgress: React.Dispatch<React.SetStateAction<boolean>>;
+  errorModalVisible: boolean; setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  isRefreshing: boolean; setIsRefreshing: React.Dispatch<React.SetStateAction<boolean>>;
+  apiStart: number; setApiStart: React.Dispatch<React.SetStateAction<number>>;
   trackEventCall: (eventName: string, params?: any) => void;
-  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
-  useEffectHook: Function;
-  useFocusEffectHook: Function;
+  validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useFocusEffectHook: (effect: EffectCallback) => void;
 }
-const ReviewItemDetails = () => {
-  const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
-  const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
-  const completeItemApi = useTypedSelector(state => state.async.noAction);
-  const { userId } = useTypedSelector(state => state.User);
-  const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
-  const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
-  const route = useRoute();
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const scrollViewRef: RefObject<ScrollView> = createRef();
-  const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
-  const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
-  const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [apiStart, setApiStart] = useState(0);
-  const [errorModalVisible, setErrorModalVisible] = useState(false);
-  return (
-    <ReviewItemDetailsScreen
-      scannedEvent={scannedEvent}
-      isManualScanEnabled={isManualScanEnabled}
-      isWaiting={isWaiting}
-      error={error}
-      result={result}
-      addToPicklistStatus={addToPicklistStatus}
-      completeItemApi={completeItemApi}
-      userId={userId}
-      exceptionType={exceptionType}
-      actionCompleted={actionCompleted}
-      pendingOnHandsQty={pendingOnHandsQty}
-      floorLocations={floorLocations}
-      reserveLocations={reserveLocations}
-      route={route}
-      dispatch={dispatch}
-      navigation={navigation}
-      scrollViewRef={scrollViewRef}
-      isSalesMetricsGraphView={isSalesMetricsGraphView}
-      setIsSalesMetricsGraphView={setIsSalesMetricsGraphView}
-      ohQtyModalVisible={ohQtyModalVisible}
-      setOhQtyModalVisible={setOhQtyModalVisible}
-      completeApiInProgress={completeApiInProgress}
-      setCompleteApiInProgress={setCompleteApiInProgress}
-      isRefreshing={isRefreshing}
-      setIsRefreshing={setIsRefreshing}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      errorModalVisible={errorModalVisible}
-      setErrorModalVisible={setErrorModalVisible}
-      trackEventCall={trackEvent}
-      validateSessionCall={validateSession}
-      useEffectHook={useEffect}
-      useFocusEffectHook={useFocusEffect}
-    />
-  );
-};
+
 export interface HandleProps{
-  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
+  validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
   trackEventCall: (eventName: string, params?: any) => void;
-  navigation: any;
-  route: any;
+  navigation: NavigationProp<any>;
+  route: RouteProp<any, string>;
   userId?: string;
-  setOhQtyModalVisible: Function;
-  dispatch: Function;
+  setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  dispatch: Dispatch<any>;
 }
 export interface RenderProps {
   actionCompleted: boolean;
-  completeItemApi: StateAsync;
-  addToPicklistStatus: StateAsync;
+  completeItemApi: AsyncState;
+  addToPicklistStatus: AsyncState;
   isManualScanEnabled: boolean;
   floorLocations?: Location[];
   reserveLocations?: Location[];
@@ -169,7 +112,7 @@ const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
-export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: number) => {
+export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: number): JSX.Element => {
   if (pendingOnHandsQty === -999) {
     return (
       <View style={styles.onHandsContainer}>
@@ -195,7 +138,7 @@ export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: numb
   );
 };
 
-export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails) => {
+export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
   const { reserve } = itemDetails.location;
   const { addToPicklistStatus } = props;
   if (addToPicklistStatus?.isWaiting) {
@@ -240,7 +183,7 @@ export const renderAddPicklistButton = (props: (RenderProps & HandleProps), item
   return <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>;
 };
 
-export const renderLocationComponent = (props: (RenderProps & HandleProps), itemDetails: ItemDetails) => {
+export const renderLocationComponent = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
   const { floorLocations, reserveLocations } = props;
   return (
     <View style={styles.locationContainer}>
@@ -289,7 +232,9 @@ const completeAction = () => {
   // dispatch(navigation.goBack());
 };
 
-export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails) => {
+export const renderScanForNoActionButton = (
+  props: (RenderProps & HandleProps), itemDetails: ItemDetails
+): JSX.Element => {
   const {
     actionCompleted, completeItemApi, validateSessionCall, trackEventCall,
     dispatch, userId, isManualScanEnabled, navigation, route
@@ -340,7 +285,9 @@ export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), 
 };
 
 // Renders scanned barcode error. TODO Temporary fix until Modal.tsx is refactored for more flexible usage
-export const renderBarcodeErrorModal = (isVisible: boolean, setIsVisible: Function) => (
+export const renderBarcodeErrorModal = (
+  isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
+): JSX.Element => (
   <Modal
     visible={isVisible}
     transparent
@@ -364,7 +311,7 @@ export const renderBarcodeErrorModal = (isVisible: boolean, setIsVisible: Functi
   </Modal>
 );
 
-export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
+export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
     isWaiting, error, result,
@@ -391,12 +338,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   useEffectHook(() => {
     if (navigation.isFocused()) {
       validateSessionCall(navigation, route.name).then(() => {
-       scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
-       setApiStart(moment().valueOf());
-       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-       trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
-       dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
-       dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
+        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
+        setApiStart(moment().valueOf());
+        dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+        trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
+        dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+        dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
       }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
     }
   }, [scannedEvent]);
@@ -709,5 +656,60 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
     </View>
   );
 };
-
+const ReviewItemDetails = (): JSX.Element => {
+  const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
+  const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
+  const completeItemApi = useTypedSelector(state => state.async.noAction);
+  const { userId } = useTypedSelector(state => state.User);
+  const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
+  const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
+  const route = useRoute();
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const scrollViewRef: RefObject<ScrollView> = createRef();
+  const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
+  const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
+  const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [apiStart, setApiStart] = useState(0);
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  return (
+    <ReviewItemDetailsScreen
+      scannedEvent={scannedEvent}
+      isManualScanEnabled={isManualScanEnabled}
+      isWaiting={isWaiting}
+      error={error}
+      result={result}
+      addToPicklistStatus={addToPicklistStatus}
+      completeItemApi={completeItemApi}
+      userId={userId}
+      exceptionType={exceptionType}
+      actionCompleted={actionCompleted}
+      pendingOnHandsQty={pendingOnHandsQty}
+      floorLocations={floorLocations}
+      reserveLocations={reserveLocations}
+      route={route}
+      dispatch={dispatch}
+      navigation={navigation}
+      scrollViewRef={scrollViewRef}
+      isSalesMetricsGraphView={isSalesMetricsGraphView}
+      setIsSalesMetricsGraphView={setIsSalesMetricsGraphView}
+      ohQtyModalVisible={ohQtyModalVisible}
+      setOhQtyModalVisible={setOhQtyModalVisible}
+      completeApiInProgress={completeApiInProgress}
+      setCompleteApiInProgress={setCompleteApiInProgress}
+      isRefreshing={isRefreshing}
+      setIsRefreshing={setIsRefreshing}
+      apiStart={apiStart}
+      setApiStart={setApiStart}
+      errorModalVisible={errorModalVisible}
+      setErrorModalVisible={setErrorModalVisible}
+      trackEventCall={trackEvent}
+      validateSessionCall={validateSession}
+      useEffectHook={useEffect}
+      useFocusEffectHook={useFocusEffect}
+    />
+  );
+};
 export default ReviewItemDetails;
