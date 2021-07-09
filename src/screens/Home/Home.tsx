@@ -41,13 +41,13 @@ const pkg = require('../../../package.json');
 
 interface HomeScreenProps {
   userName: string;
-  setScannedEvent: Function;
-  setManualScan: Function;
+  setScannedEvent: (scan: any) => void;
+  setManualScan: (isManualScan: boolean) => void;
   isManualScanEnabled: boolean;
   worklistSummaryApiState: any;
-  getWorklistSummary: Function;
+  getWorklistSummary: () => void;
   navigation: StackNavigationProp<any>;
-  updateFilterExceptions: Function;
+  updateFilterExceptions: (worklistTypes: string[]) => void;
   route: RouteProp<any, string>;
 }
 
@@ -60,7 +60,7 @@ type HomeRender =
 | React.ReactElement<any, string | React.JSXElementConstructor<any>>
 | string
 | number
-| {}
+| Record<string, unknown>
 | React.ReactNodeArray
 | React.ReactPortal
 | boolean
@@ -69,7 +69,7 @@ type HomeRender =
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
   private readonly scannedSubscription: EmitterSubscription;
 
-  private readonly navigationRemoveListener: Function;
+  private readonly navigationRemoveListener: () => void;
 
   constructor(props: HomeScreenProps) {
     super(props);
