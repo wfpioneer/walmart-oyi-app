@@ -102,6 +102,15 @@ describe('HomeScreen', () => {
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('renders ManualScanComponent when enabled', () => {
+      props = createTestProps({ ...homeScreenProps, isManualScanEnabled: true }, {});
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<HomeScreen
+        {...props}
+      />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 
   describe('Constructor', () => {
