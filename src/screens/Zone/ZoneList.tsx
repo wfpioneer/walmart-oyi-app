@@ -51,7 +51,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     trackEventCall
   } = props;
 
-  // calls the zone api when the screen renders
+  // calls the get all zone api
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
       trackEventCall('get_location_api_call');
