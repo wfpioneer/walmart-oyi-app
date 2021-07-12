@@ -48,7 +48,7 @@ exports[`Test Get Zone Api Response Renders Zone Api Error Message 1`] = `
 </View>
 `;
 
-exports[`Test Get Zone Api Response Renders loading indicator when waiting for Approval Api response 1`] = `
+exports[`Test Get Zone Api Response Renders loading indicator when waiting for Zone Api response 1`] = `
 <ActivityIndicator
   animating={true}
   color="#0071e9"
