@@ -38,6 +38,34 @@ let props: any;
 
 describe('HomeScreen', () => {
   describe('rendering', () => {
+    it('renders ActivityIndicator when worklistSummaryApiState.isWaiting is true', () => {
+      props = createTestProps({
+        ...homeScreenProps,
+        worklistSummaryApiState: {
+          ...defaultAsyncState,
+          isWaiting: true
+        }
+      }, {});
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<HomeScreen {...props} />);
+      expect(renderer.getRenderOutput())
+        .toMatchSnapshot();
+    });
+
+    it('renders error View when worklistSummaryApiState.error is not null', () => {
+      props = createTestProps({
+        ...homeScreenProps,
+        worklistSummaryApiState: {
+          ...defaultAsyncState,
+          error: 'An Error'
+        }
+      }, {});
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<HomeScreen {...props} />);
+      expect(renderer.getRenderOutput())
+        .toMatchSnapshot();
+    });
+
     it('renders null when worklistSummaryApiState.result is null', () => {
       props = createTestProps(homeScreenProps, {});
       const renderer = ShallowRenderer.createRenderer();
@@ -60,20 +88,6 @@ describe('HomeScreen', () => {
         {...props}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('renders ActivityIndicator when worklistSummaryApiState.isWaiting is true', () => {
-      props = createTestProps({
-        ...homeScreenProps,
-        worklistSummaryApiState: {
-          ...defaultAsyncState,
-          isWaiting: true
-        }
-      }, {});
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(<HomeScreen {...props} />);
-      expect(renderer.getRenderOutput())
-        .toMatchSnapshot();
     });
   });
 
