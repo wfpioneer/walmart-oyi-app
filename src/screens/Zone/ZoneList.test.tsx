@@ -94,7 +94,7 @@ describe('Test Get Zone Api Response', () => {
 
   it('Renders loading indicator when waiting for Zone Api response', () => {
     const renderer = ShallowRenderer.createRenderer();
-    const getApprovalIsWaiting: AsyncState = {
+    const getZoneIsWaiting: AsyncState = {
       isWaiting: true,
       value: null,
       error: null,
@@ -104,7 +104,7 @@ describe('Test Get Zone Api Response', () => {
       <ZoneScreen
         siteId={MX_TEST_CLUB_NBR}
         dispatch={jest.fn()}
-        getZoneApi={getApprovalIsWaiting}
+        getZoneApi={getZoneIsWaiting}
         apiStart={0}
         setApiStart={jest.fn()}
         navigation={navigationProp}
