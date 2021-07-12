@@ -270,7 +270,7 @@ exports[`Test Zone List Renders Zone Screen with Data 1`] = `
 exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
 <View>
   <LocationHeader
-    details="undefined [missing \\"en.LOCATION.ZONES\\" translation]"
+    details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
     location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
   />
   <FlatList

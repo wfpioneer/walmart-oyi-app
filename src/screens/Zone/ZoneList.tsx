@@ -109,11 +109,11 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     <View>
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
-        details={`${(getZoneApi.result !== null) ? getZoneApi.result.data.length : 0} ${strings('LOCATION.ZONES')}`}
+        details={`${getZoneApi.result?.data.length || 0} ${strings('LOCATION.ZONES')}`}
       />
 
       <FlatList
-        data={(getZoneApi.result !== null) ? getZoneApi.result.data : []}
+        data={getZoneApi.result?.data || []}
         renderItem={({ item }) => (
           <LocationItemCard
             locationName={item.zoneName}
