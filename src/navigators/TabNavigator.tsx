@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { HomeNavigator } from './HomeNavigator';
 import COLOR from '../themes/Color';
@@ -10,12 +11,14 @@ import { strings } from '../locales';
 import { ToolsNavigator } from './ToolsNavigator';
 import { WorklistNavigator } from './WorklistNavigator';
 import { ApprovalListNavigator } from './ApprovalListNavigator';
+import { resetApprovals } from '../state/actions/Approvals';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = (): JSX.Element => {
   const userFeatures = useTypedSelector(state => state.User.features);
   const selectedAmount = useTypedSelector(state => state.Approvals.selectedItemQty);
+  const dispatch = useDispatch();
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -60,6 +63,11 @@ const TabNavigator = (): JSX.Element => {
           <Tab.Screen
             name={strings('APPROVAL.APPROVALS')}
             component={ApprovalListNavigator}
+            listeners={{
+              blur: () => {
+                dispatch(resetApprovals());
+              }
+            }}
           />
         )}
     </Tab.Navigator>
