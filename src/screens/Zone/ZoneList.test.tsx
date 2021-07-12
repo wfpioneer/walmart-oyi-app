@@ -91,4 +91,28 @@ describe('Test Get Zone Api Response', () => {
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
+  it('Renders loading indicator when waiting for Approval Api response', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getApprovalIsWaiting: AsyncState = {
+      isWaiting: true,
+      value: null,
+      error: null,
+      result: null
+    };
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        getZoneApi={getApprovalIsWaiting}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
 });

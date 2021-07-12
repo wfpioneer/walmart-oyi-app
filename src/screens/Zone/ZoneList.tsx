@@ -1,7 +1,8 @@
 import React, { EffectCallback, useEffect, useState } from 'react';
 import {
-  FlatList, Text, View
+  ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import {
@@ -17,7 +18,7 @@ import { getAllZones } from '../../state/actions/saga';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
-import { ZoneItem } from '../../models/ZoneItem';
+import COLOR from '../../themes/Color';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
@@ -49,13 +50,13 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     useEffectHook,
     trackEventCall
   } = props;
-  const [zoneItems, setZoneItems] = useState<ZoneItem[]>([]);
 
+  // calls the zone api when the screen renders
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
       trackEventCall('get_location_api_call');
       setApiStart(moment().valueOf());
-      dispatch(getAllZones({}));
+      dispatch(getAllZones());
     }).catch(() => {});
   }), [navigation]);
 
@@ -63,7 +64,6 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     // on api success
     if (!getZoneApi.isWaiting && getZoneApi.result) {
       trackEventCall('get_location_api_success', { duration: moment().valueOf() - apiStart });
-      setZoneItems(getZoneApi.result.data);
     }
 
     // on api failure
@@ -75,15 +75,45 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     }
   }, [getZoneApi]);
 
+  if (getZoneApi.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={getZoneApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
+
+  if (getZoneApi.error) {
+    return (
+      <View style={styles.errorView}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('LOCATION.LOCATION_API_ERROR')}</Text>
+        <TouchableOpacity
+          style={styles.errorButton}
+          onPress={() => {
+            trackEventCall('location_api_retry',);
+            dispatch(getAllZones());
+          }}
+        >
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
     <View>
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
-        details={`${zoneItems.length} ${strings('LOCATION.ZONES')}`}
+        details={`${(getZoneApi.result !== null) ? getZoneApi.result.data.length : 0} ${strings('LOCATION.ZONES')}`}
       />
 
       <FlatList
-        data={zoneItems}
+        data={(getZoneApi.result !== null) ? getZoneApi.result.data : []}
         renderItem={({ item }) => (
           <LocationItemCard
             locationName={item.zoneName}

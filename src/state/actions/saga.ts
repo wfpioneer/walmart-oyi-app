@@ -1,3 +1,4 @@
+import { AsyncState } from 'src/models/AsyncState';
 import {
   ApprovalListItem, approvalAction, approvalRequestSource, approvalStatus
 } from '../../models/ApprovalListItem';
@@ -42,4 +43,4 @@ export const updateApprovalList = (payload: {
   approvalItems: ApprovalListItem[]
   headers: {action: approvalAction},
 }) => ({ type: UPDATE_APPROVAL_LIST, payload } as const);
-export const getAllZones = (payload: any) => ({ type: GET_ALL_ZONES, payload });
+export const getAllZones = () => ({ type: GET_ALL_ZONES });
