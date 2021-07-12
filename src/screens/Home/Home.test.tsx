@@ -61,7 +61,22 @@ describe('HomeScreen', () => {
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('renders ActivityIndicator when worklistSummaryApiState.isWaiting is true', () => {
+      props = createTestProps({
+        ...homeScreenProps,
+        worklistSummaryApiState: {
+          ...defaultAsyncState,
+          isWaiting: true
+        }
+      }, {});
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<HomeScreen {...props} />);
+      expect(renderer.getRenderOutput())
+        .toMatchSnapshot();
+    });
   });
+
   describe('Constructor', () => {
     it('sets up the navigation listener', () => {
       const navigationMock = {
