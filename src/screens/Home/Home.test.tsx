@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { mockWorklistSummaries } from '../../mockData/mockWorklistSummary';
 import { HomeScreen } from './Home';
 
 const navigationProp = {
@@ -83,6 +84,18 @@ describe('HomeScreen', () => {
         },
         {}
       );
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<HomeScreen
+        {...props}
+      />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('renders worklist summaries when worklistApiState.result.data has summaries', () => {
+      props = createTestProps({
+        ...homeScreenProps,
+        worklistSummaryApiState: { ...defaultAsyncState, result: { status: 200, data: mockWorklistSummaries } }
+      }, {});
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<HomeScreen
         {...props}
