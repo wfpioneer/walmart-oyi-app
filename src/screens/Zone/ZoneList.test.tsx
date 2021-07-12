@@ -92,7 +92,7 @@ describe('Test Get Zone Api Response', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('Renders loading indicator when waiting for Approval Api response', () => {
+  it('Renders loading indicator when waiting for Location Api response', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getApprovalIsWaiting: AsyncState = {
       isWaiting: true,
