@@ -23,7 +23,7 @@ exports[`Test Location Header in Zone Screen Renders Location Header In Zone Scr
       }
     }
   >
-    10 [missing "en.LOCATION.ZONES" translation]
+    35 [missing "en.LOCATION.ZONES" translation]
   </Text>
 </View>
 `;
