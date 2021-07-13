@@ -8,6 +8,9 @@ export const EDIT_EXISTING_LOCATION = 'LOCATION/EDIT_EXISTING_LOCATION';
 export const DELETE_LOCATION_FROM_EXISTING = 'LOCATION/DELETE_LOCATION_FROM_EXISTING';
 export const RESET_LOCATIONS = 'LOCATION/RESET_LOCATIONS';
 export const GET_LOCATION_DETAILS = 'LOCATION/GET_LOCATION_DETAILS';
+export const SELECTED_ZONE = 'LOCATION/SELECTED_ZONE';
+export const SELECTED_AISLE = 'LOCATION/SELECTED_AISLE';
+export const SELECTED_SECTION = 'LOCATION/SELECTED_SECTION';
 
 export const setItemLocDetails = (itemNbr: number, upcNbr: string, exceptionType: string) => ({
   type: SET_ITEM_LOC_DETAILS,
@@ -66,3 +69,27 @@ export const getLocationDetails = (itemNbr: number) => ({
     itemNbr
   }
 });
+
+export const selectedZone = (id: number, name: string) => ({
+  type: SELECTED_ZONE,
+  payload: {
+    id,
+    name
+  }
+} as const);
+
+export const selectedAisle = (id: number, name: string) => ({
+  type: SELECTED_AISLE,
+  payload: {
+    id,
+    name
+  }
+} as const);
+
+export const selectedSection = (id: number, name: string) => ({
+  type: SELECTED_SECTION,
+  payload: {
+    id,
+    name
+  }
+} as const);

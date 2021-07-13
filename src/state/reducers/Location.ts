@@ -3,6 +3,9 @@ import {
   DELETE_LOCATION_FROM_EXISTING,
   EDIT_EXISTING_LOCATION,
   RESET_LOCATIONS,
+  SELECTED_AISLE,
+  SELECTED_SECTION,
+  SELECTED_ZONE,
   SET_FLOOR_LOCATIONS,
   SET_ITEM_LOC_DETAILS,
   SET_RESERVE_LOCATIONS
@@ -17,6 +20,18 @@ interface LocationState {
     upcNbr: string;
     exceptionType: string;
   };
+  selectedZone: {
+    id: number,
+    name: string
+  };
+  selectedAisle: {
+    id: number,
+    name: string
+  };
+  selectedSection: {
+    id: number,
+    name: string
+   }
 }
 
 const initialState: LocationState = {
@@ -26,6 +41,18 @@ const initialState: LocationState = {
     itemNbr: 0,
     upcNbr: '',
     exceptionType: ''
+  },
+  selectedZone: {
+    id: 0,
+    name: ''
+  },
+  selectedAisle: {
+    id: 0,
+    name: ''
+  },
+  selectedSection: {
+    id: 0,
+    name: ''
   }
 };
 
@@ -148,6 +175,34 @@ export const Location = (state = initialState, action: any) => {
       return {
         ...state
       };
+
+    case SELECTED_ZONE: {
+      return {
+        ...state,
+        selectedZone: {
+          id: action.payload.id,
+          name: action.payload.name
+        }
+      };
+    }
+    case SELECTED_AISLE: {
+      return {
+        ...state,
+        selectedAisle: {
+          id: action.payload.id,
+          name: action.payload.name
+        }
+      };
+    }
+    case SELECTED_SECTION: {
+      return {
+        ...state,
+        selectedSection: {
+          id: action.payload.id,
+          name: action.payload.name
+        }
+      };
+    }
     case RESET_LOCATIONS:
       return {
         floorLocations: [],
@@ -156,6 +211,18 @@ export const Location = (state = initialState, action: any) => {
           itemNbr: null,
           upcNbr: null,
           exceptionType: null
+        },
+        selectedZone: {
+          id: 0,
+          name: ''
+        },
+        selectedAisle: {
+          id: 0,
+          name: ''
+        },
+        selectedSection: {
+          id: 0,
+          name: ''
         }
       };
     default:
