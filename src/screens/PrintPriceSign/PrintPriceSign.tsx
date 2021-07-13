@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import {
-  ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TextInput, View
+  ActivityIndicator, SafeAreaView, ScrollView, Text, TextInput, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
@@ -46,7 +46,7 @@ export const renderSignSizeButtons = (
 ) => {
   const sizeObject = selectedPrinter.type === PrinterType.LASER ? LaserPaper : PortablePaper;
   return (
-    <View style={{ flexDirection: 'row', marginVertical: 4 }}>
+    <View style={styles.sizeBtnContainer}>
       {Object.keys(sizeObject).map((key: string) => {
         // Only show the wine button if the item's category is appropriate
         if (key !== 'Wine' || (key === 'Wine' && catgNbr === wineCatgNbr)) {
@@ -62,7 +62,7 @@ export const renderSignSizeButtons = (
               radius={20}
               height={25}
               width={56}
-              style={{ marginHorizontal: 6 }}
+              style={styles.sizeBtnMargin}
               onPress={() => dispatch(setSignType(key))}
             />
           );
@@ -285,7 +285,6 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.itemDetailsContainer}>
-          <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.itemImage} />
           <Text style={styles.itemNameTxt}>{itemName}</Text>
         </View>
         <View style={styles.copyQtyContainer}>
@@ -328,11 +327,11 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
           {renderSignSizeButtons(selectedPrinter, categoryNbr, selectedSignType, dispatch)}
         </View>
         <View style={styles.printerContainer}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.printerNameContainer}>
             <MaterialCommunityIcon name="printer-check" size={24} />
-            <View style={{ marginLeft: 12 }}>
+            <View style={styles.printTextMargin}>
               <Text>{selectedPrinter.name}</Text>
-              <Text style={{ fontSize: 12, color: COLOR.GREY_600 }}>{selectedPrinter.desc}</Text>
+              <Text style={styles.printerDesc}>{selectedPrinter.desc}</Text>
             </View>
           </View>
           <Button

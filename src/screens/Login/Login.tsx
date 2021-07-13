@@ -1,13 +1,14 @@
+import { NavigationProp } from '@react-navigation/native';
 import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { Platform, View } from 'react-native';
-// @ts-ignore
+// @ts-ignore // 'react-native-wmsso' has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
 import Button from '../../components/buttons/Button';
 import styles from './Login.style';
-import { assignFluffyRoles, loginUser } from '../../state/actions/User';
-import { getFluffyRoles } from '../../state/actions/saga';
+import { assignFluffyFeatures, loginUser } from '../../state/actions/User';
+import { getFluffyFeatures } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -20,8 +21,8 @@ const mapDispatchToProps = {
   loginUser,
   hideActivityModal,
   setEndTime,
-  getFluffyRoles,
-  assignFluffyRoles,
+  getFluffyFeatures,
+  assignFluffyFeatures,
   showActivityModal
 };
 
@@ -30,22 +31,24 @@ const mapStateToProps = (state: RootState) => ({
   fluffyApiState: state.async.getFluffyRoles
 });
 
+// TODO correct all the function definitions (specifically return types)
 export interface LoginScreenProps {
-  loginUser: Function;
+  loginUser: (userPayload: User) => void;
   User: User;
-  navigation: Record<string, any>;
-  hideActivityModal: Function;
-  setEndTime: Function;
-  getFluffyRoles: Function;
+  navigation: NavigationProp<any>;
+  hideActivityModal: () => void;
+  setEndTime: (sessionEndTime: any) => void;
+  getFluffyFeatures: (payload: any) => void;
   fluffyApiState: any;
-  assignFluffyRoles: Function;
-  showActivityModal: Function;
+  assignFluffyFeatures: (resultPayload: string[]) => void;
+  showActivityModal: () => void;
 }
 
+// TODO convert to Functional Component
 export class LoginScreen extends React.PureComponent<LoginScreenProps> {
-  private unsubscribe: Function | undefined;
+  private unsubscribe: (() => void | undefined) | undefined;
 
-  constructor(props: any) {
+  constructor(props: LoginScreenProps) {
     super(props);
     this.signInUser = this.signInUser.bind(this);
   }
@@ -61,30 +64,37 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     }
   }
 
-  componentDidUpdate(prevProps: Readonly<LoginScreenProps>) {
+  componentDidUpdate(prevProps: Readonly<LoginScreenProps>): void {
     if (this.props.fluffyApiState.isWaiting) {
       this.props.showActivityModal();
     }
-    if (prevProps.fluffyApiState.isWaiting && this.props.fluffyApiState.error) {
-      trackEvent('fluffy_api_failure', {
-        errorDetails: this.props.fluffyApiState.error.message || JSON.stringify(this.props.fluffyApiState.error)
-      });
-    }
 
-    if (prevProps.fluffyApiState.isWaiting && this.props.fluffyApiState.result) {
-      trackEvent('fluffy_api_success', {
-        status: this.props.fluffyApiState.result.status
-      });
-      this.props.assignFluffyRoles(this.props.fluffyApiState.result.data);
+    if (prevProps.fluffyApiState.isWaiting) {
+      if (this.props.fluffyApiState.result) {
+        trackEvent('fluffy_api_success', {
+          status: this.props.fluffyApiState.result.status
+        });
+        this.props.assignFluffyFeatures(this.props.fluffyApiState.result.data);
+      } else if (this.props.fluffyApiState.error) {
+        // TODO Display toast/popup letting user know roles could not be retrieved
+        trackEvent('fluffy_api_failure', {
+          errorDetails: this.props.fluffyApiState.error.message || JSON.stringify(this.props.fluffyApiState.error)
+        });
+      }
+
       this.props.hideActivityModal();
-      trackEvent('user_sign_in');
-      this.props.navigation.replace('Tabs');
+      this.props.navigation.reset({
+        index: 0,
+        routes: [{ name: 'Tabs' }]
+      });
       this.props.setEndTime(sessionEnd());
     }
   }
 
   componentWillUnmount(): void {
-    return this.unsubscribe && this.unsubscribe();
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 
   signInUser(): void {
@@ -110,16 +120,10 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
             break;
         }
       }
-      user.userId = user.userId.replace(/_/g, ''); // Strip underscore from svc accounts to prevent 400 error.
       setUserId(user.userId);
       this.props.loginUser(user);
-      // this.props.getFluffyRoles(user);
-
-      // TODO remove when Fluffy call re-enabled
-      this.props.hideActivityModal();
       trackEvent('user_sign_in');
-      this.props.navigation.replace('Tabs');
-      this.props.setEndTime(sessionEnd());
+      this.props.getFluffyFeatures(user);
     });
   }
 

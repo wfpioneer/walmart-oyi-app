@@ -9,6 +9,7 @@ interface ItemDetails {
   categoryNbr: number;
   categoryDesc: string;
   price: number;
+  basePrice: number
   exceptionType?: string; // This is enumerated
   completed: boolean;
   onHandsQty: number;

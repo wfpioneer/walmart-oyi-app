@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CompletedWorklistScreen Tests rendering Worklist data Renders every worklist item when all are complete 1`] = `
+<Worklist
+  data={
+    Array [
+      Object {
+        "catgName": "FOODSERVICE",
+        "catgNbr": 93,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "TEST ITEM",
+        "itemNbr": 1234567890,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "000055559999",
+        "worklistType": "NSFL",
+      },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 99,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "ELECTRONIC ITEM",
+        "itemNbr": 987654321,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777555333",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "FRESH BAKERY",
+        "catgNbr": 88,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "BAKERY ITEM",
+        "itemNbr": 123789456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "111122223333",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "WINE",
+        "catgNbr": 19,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "WINE ITEM",
+        "itemNbr": 456789123,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "444455556666",
+        "worklistType": "C",
+      },
+      Object {
+        "catgName": "PHARMACY RX",
+        "catgNbr": 87,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "PHARMACY ITEM",
+        "itemNbr": 789123456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777788889999",
+        "worklistType": "C",
+      },
+    ]
+  }
+  dispatch={[MockFunction]}
+  error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
+  onRefresh={[Function]}
+  refreshing={false}
+  updateGroupToggle={[MockFunction]}
+/>
+`;
+
+exports[`CompletedWorklistScreen Tests rendering Worklist data Renders no worklist items when all are incomplete 1`] = `
+<Worklist
+  data={Array []}
+  dispatch={[MockFunction]}
+  error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
+  onRefresh={[Function]}
+  refreshing={false}
+  updateGroupToggle={[MockFunction]}
+/>
+`;
+
+exports[`CompletedWorklistScreen Tests rendering Worklist data Renders no worklist items when there are none 1`] = `
+<Worklist
+  data={Array []}
+  dispatch={[MockFunction]}
+  error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
+  onRefresh={[Function]}
+  refreshing={false}
+  updateGroupToggle={[MockFunction]}
+/>
+`;
+
+exports[`CompletedWorklistScreen Tests rendering Worklist data Renders only complete worklist items for a Worklist with incomplete & complete items 1`] = `
+<Worklist
+  data={
+    Array [
+      Object {
+        "catgName": "FOODSERVICE",
+        "catgNbr": 93,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "TEST ITEM",
+        "itemNbr": 1234567890,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "000055559999",
+        "worklistType": "NSFL",
+      },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 99,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "ELECTRONIC ITEM",
+        "itemNbr": 987654321,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777555333",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "FRESH BAKERY",
+        "catgNbr": 88,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "BAKERY ITEM",
+        "itemNbr": 123789456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "111122223333",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "WINE",
+        "catgNbr": 19,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "WINE ITEM",
+        "itemNbr": 456789123,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "444455556666",
+        "worklistType": "C",
+      },
+      Object {
+        "catgName": "PHARMACY RX",
+        "catgNbr": 87,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "PHARMACY ITEM",
+        "itemNbr": 789123456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777788889999",
+        "worklistType": "C",
+      },
+    ]
+  }
+  dispatch={[MockFunction]}
+  error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
+  onRefresh={[Function]}
+  refreshing={false}
+  updateGroupToggle={[MockFunction]}
+/>
+`;
+
+exports[`CompletedWorklistScreen Tests rendering worklist api responses Renders error message for failed worklist request 1`] = `
+<Worklist
+  dispatch={[MockFunction]}
+  error="Network Error"
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
+  onRefresh={[Function]}
+  refreshing={false}
+  updateGroupToggle={[MockFunction]}
+/>
+`;
+
+exports[`CompletedWorklistScreen Tests rendering worklist api responses Renders refresh set to true when waiting for worklist api response 1`] = `
+<Worklist
+  dispatch={[MockFunction]}
+  error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
+  onRefresh={[Function]}
+  refreshing={true}
+  updateGroupToggle={[MockFunction]}
+/>
+`;

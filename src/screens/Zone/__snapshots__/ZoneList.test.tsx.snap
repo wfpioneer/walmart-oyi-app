@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Zone List Renders Zone Screen 1`] = `
+<View>
+  <LocationHeader
+    details="10 [missing \\"en.LOCATION.ZONES\\" translation]"
+    location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
+  />
+  <FlatList
+    ListEmptyComponent={<NoZonesMessage />}
+    data={
+      Array [
+        Object {
+          "aisleCount": 3,
+          "zoneId": 1,
+          "zoneName": "B - Backroom",
+        },
+        Object {
+          "aisleCount": 2,
+          "zoneId": 2,
+          "zoneName": "C - Center",
+        },
+        Object {
+          "aisleCount": 3,
+          "zoneId": 3,
+          "zoneName": "E - Electronics",
+        },
+        Object {
+          "aisleCount": 3,
+          "zoneId": 4,
+          "zoneName": "FB - Fresh Bakery",
+        },
+        Object {
+          "aisleCount": 3,
+          "zoneId": 5,
+          "zoneName": "FC - Fresh Cafe",
+        },
+        Object {
+          "aisleCount": 3,
+          "zoneId": 6,
+          "zoneName": "FF - Fresh Freezer/Cooler",
+        },
+        Object {
+          "aisleCount": 2,
+          "zoneId": 7,
+          "zoneName": "FM - Fresh Meat, HMS & Deli",
+        },
+        Object {
+          "aisleCount": 3,
+          "zoneId": 8,
+          "zoneName": "FP - Fresh Produce",
+        },
+        Object {
+          "aisleCount": 10,
+          "zoneId": 9,
+          "zoneName": "G - Grocery",
+        },
+        Object {
+          "aisleCount": 3,
+          "zoneId": 10,
+          "zoneName": "H - Home",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`Test Zone List with empty list Renders empty Zone Screen 1`] = `
+<View>
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
+    location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
+  />
+  <FlatList
+    ListEmptyComponent={<NoZonesMessage />}
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;

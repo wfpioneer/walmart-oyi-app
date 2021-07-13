@@ -1,6 +1,6 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { mockApprovals } from '../../mockData/mockApprovalItem';
+import { mockApprovals } from '../../mockData/mockApprovalList';
 import { ApprovalCategorySeparator } from './ApprovalCategorySeparator';
 
 describe('Approval CategorySeparator Component', () => {

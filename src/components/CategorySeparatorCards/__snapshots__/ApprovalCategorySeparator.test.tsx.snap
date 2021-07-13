@@ -22,7 +22,7 @@ exports[`Approval CategorySeparator Component Renders the approval category chec
         "fontSize": 16,
         "fontWeight": "bold",
         "justifyContent": "flex-end",
-        "marginHorizontal": 20,
+        "marginHorizontal": 14,
       }
     }
   >
@@ -36,7 +36,7 @@ exports[`Approval CategorySeparator Component Renders the approval category chec
       }
     }
   >
-    <ForwardRef
+    <withTheme(Checkbox)
       color="#0071e9"
       onPress={[Function]}
       status="checked"
@@ -68,7 +68,7 @@ exports[`Approval CategorySeparator Component Renders the approval category head
         "fontSize": 16,
         "fontWeight": "bold",
         "justifyContent": "flex-end",
-        "marginHorizontal": 20,
+        "marginHorizontal": 14,
       }
     }
   >
@@ -82,7 +82,7 @@ exports[`Approval CategorySeparator Component Renders the approval category head
       }
     }
   >
-    <ForwardRef
+    <withTheme(Checkbox)
       color="#0071e9"
       onPress={[Function]}
       status="unchecked"

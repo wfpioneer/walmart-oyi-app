@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
-  ActivityIndicator, FlatList, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import {
-  NavigationProp, Route, useNavigation, useRoute
+  NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
+import Modal from 'react-native-modal';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
-import { ApprovalListItem } from '../../models/ApprovalListItem';
+import { ApprovalCategory, ApprovalListItem, approvalStatus } from '../../models/ApprovalListItem';
 import styles from './ApprovalList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getApprovalList } from '../../state/actions/saga';
@@ -19,11 +20,12 @@ import { strings } from '../../locales';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { ApprovalCategorySeparator } from '../../components/CategorySeparatorCards/ApprovalCategorySeparator';
 import { validateSession } from '../../utils/sessionTimeout';
-import { setApprovalList } from '../../state/actions/Approvals';
+import { setApprovalList, toggleAllItems } from '../../state/actions/Approvals';
+import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
+import Button from '../../components/buttons/Button';
+import { AsyncState } from '../../models/AsyncState';
+import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
 
-export interface ApprovalCategory extends ApprovalListItem {
-  categoryHeader?: boolean;
-}
 export interface CategoryFilter {
   filteredData: ApprovalCategory[];
   headerIndices: number[];
@@ -32,6 +34,30 @@ interface ApprovalItemProp {
   item: ApprovalCategory;
   dispatch: Dispatch<any>;
 }
+
+interface ApprovalListProps {
+  dispatch: Dispatch<any>;
+  getApprovalApi: AsyncState;
+  updateApprovalApi: AsyncState;
+  filteredList: ApprovalCategory[];
+  categoryIndices: number[];
+  selectedItemQty: number;
+  apiStart: number;
+  setApiStart: React.Dispatch<React.SetStateAction<number>>;
+  navigation: NavigationProp<any>;
+  route: RouteProp<any, string>;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useFocusEffectHook: (effect: EffectCallback) => void;
+  trackEventCall: (eventName: string, params?: any) => void;
+  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
+}
+interface UpdateResponse {
+  message: string;
+  id: number;
+  itemNbr: number;
+  statusCode: number;
+}
+
 export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryFilter => {
   const sortedData = [...listData];
 
@@ -64,14 +90,13 @@ export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryF
   return { filteredData: returnData as ApprovalCategory[], headerIndices };
 };
 
-export const RenderApprovalItem = (props: ApprovalItemProp) => {
+export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
   const {
-    imageUrl, itemNbr, itemName, oldQuantity,
-    newQuantity, dollarChange, initiatedUserId, initiatedTimestamp,
+    itemNbr, itemName, oldQuantity,
+    newQuantity, dollarChange, initiatedUserId, daysLeft,
     categoryHeader, categoryNbr, categoryDescription, isChecked
   } = props.item;
   const { dispatch } = props;
-  const daysLeft = moment(initiatedTimestamp).diff(moment().format(), 'days');
 
   if (categoryHeader) {
     return (
@@ -88,7 +113,6 @@ export const RenderApprovalItem = (props: ApprovalItemProp) => {
     <ApprovalCard
       dollarChange={dollarChange}
       daysLeft={daysLeft}
-      image={imageUrl}
       itemName={itemName}
       itemNbr={itemNbr}
       oldQuantity={oldQuantity}
@@ -99,66 +123,87 @@ export const RenderApprovalItem = (props: ApprovalItemProp) => {
     />
   );
 };
-const ApprovalList = () => {
-  const { result, isWaiting, error } = useTypedSelector(state => state.async.getApprovalList);
-  const { approvalList, categoryIndices } = useTypedSelector(state => state.Approvals);
-  const [apiStart, setApiStart] = useState(0);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const route = useRoute();
+
+export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any>): JSX.Element => {
+  const { data, metadata: { total } } = updateApprovalApi.result.data;
+  const items: UpdateResponse[] = data || [];
+  const failedItems = items.filter((item: UpdateResponse) => item.message === 'failure');
+
   return (
-    <ApprovalListScreen
-      filteredList={approvalList}
-      categoryIndices={categoryIndices}
-      dispatch={dispatch}
-      result={result}
-      error={error}
-      isWaiting={isWaiting}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      navigation={navigation}
-      route={route}
-      useEffectHook={useEffect}
-      trackEventCall={trackEvent}
-    />
+  // Used to overlay the pop-up in the screen view
+    <Modal isVisible={true}>
+      <View style={styles.popUpContainer}>
+        <Text style={styles.errorText}>{strings('APPROVAL.FAILED_APPROVE')}</Text>
+        {failedItems.length <= 5
+          ? (
+            <FlatList
+              data={failedItems.slice(0, 5)}
+              keyExtractor={item => item.id.toString()}
+              renderItem={({ item }) => (
+                <Text style={styles.listText}>
+                  {`${strings('GENERICS.ITEM')}: ${item.itemNbr}`}
+                </Text>
+              )}
+              style={styles.listContainer}
+            />
+          )
+          : (
+            <Text style={styles.failedItemText}>
+              {`${failedItems.length} / ${total} ${strings('APPROVAL.FAILED_ITEMS')}`}
+            </Text>
+          )}
+        <Button
+          title={strings('APPROVAL.CONFIRM')}
+          type={Button.Type.PRIMARY}
+          style={{ width: '50%' }}
+          onPress={() => {
+            dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
+          }}
+        />
+      </View>
+    </Modal>
   );
 };
-interface ApprovalListProps {
-  dispatch: Dispatch<any>;
-  error: any;
-  isWaiting: boolean;
-  result: any;
-  filteredList: ApprovalCategory[];
-  categoryIndices: number[];
-  apiStart: number;
-  setApiStart: Function;
-  navigation: NavigationProp<any>;
-  route: Route<any>;
-  useEffectHook: Function;
-  trackEventCall: (eventName: string, params?: any) => void;
-}
 
-export const ApprovalListScreen = (props: ApprovalListProps) => {
+export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   const {
-    dispatch, error, isWaiting, result, trackEventCall, apiStart, setApiStart,
-    useEffectHook, navigation, route, filteredList, categoryIndices
+    dispatch, getApprovalApi, trackEventCall, apiStart, setApiStart,
+    useEffectHook, useFocusEffectHook, navigation, route, filteredList,
+    categoryIndices, selectedItemQty, validateSessionCall, updateApprovalApi
   } = props;
 
   // Get Approval List Items
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
-      trackEvent('get_approval_list_api_call');
+      trackEventCall('get_approval_list_api_call');
       setApiStart(moment().valueOf());
-      dispatch(getApprovalList({}));
+      dispatch(getApprovalList({ status: approvalStatus.Pending }));
     }).catch(() => {});
   }), [navigation]);
+
+  // Device BackPress Listener
+  useFocusEffectHook(() => {
+    const onBackPress = () => {
+      // Clears selected Approval items on system back press to re-enable bottom tab navigator
+      if (selectedItemQty > 0) {
+        dispatch(toggleAllItems(false));
+        // Prevents the default system back action from executing and events from bubbling up
+        return true;
+      }
+      // Allows events to bubble up and defaults to the systems back action (Pops screens in the navigation stack)
+      return false;
+    };
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+  });
 
   // Get Approval List API
   useEffectHook(() => {
     // on api success
-    if (!isWaiting && result) {
-      trackEvent('get_approval_list_api_success', { duration: moment().valueOf() - apiStart });
-      const approvalItems: ApprovalListItem[] = (result && result.data) || [];
+    if (!getApprovalApi.isWaiting && getApprovalApi.result) {
+      trackEventCall('get_approval_list_api_success', { duration: moment().valueOf() - apiStart });
+      const approvalItems: ApprovalListItem[] = (getApprovalApi.result && getApprovalApi.result.data) || [];
       if (approvalItems.length !== 0) {
         const { filteredData, headerIndices } = convertApprovalListData(approvalItems);
         dispatch(setApprovalList(filteredData, headerIndices));
@@ -166,28 +211,38 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
     }
 
     // on api failure
-    if (!isWaiting && error) {
-      trackEvent('get_approval_list_api_failure', {
-        errorDetails: error.message || error,
+    if (!getApprovalApi.isWaiting && getApprovalApi.error) {
+      trackEventCall('get_approval_list_api_failure', {
+        errorDetails: getApprovalApi.error.message || getApprovalApi.error,
         duration: moment().valueOf() - apiStart
       });
     }
-  }, [error, isWaiting, result]);
+  }, [getApprovalApi]);
 
-  if (result?.status === 204) {
-    return (
-      <View style={styles.emptyContainer}>
-        {/* Placeholder for empty approval list subject to change */}
-        <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
-        <Text> The Approval List is Empty </Text>
-      </View>
-    );
-  }
+  // Reset update approval list api if there are no failed items in a mixed response
+  useEffectHook(() => {
+    if (updateApprovalApi.result?.status === 207 && updateApprovalApi.result?.data.metadata.failure === 0) {
+      dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
+    }
+  }, [updateApprovalApi]);
 
-  if (isWaiting) {
+  const handleApproveSummary = () => {
+    validateSessionCall(navigation, route.name).then(() => {
+      trackEventCall('handle_approve_summary_click');
+      navigation.navigate('ApproveSummary');
+    });
+  };
+  const handleRejectSummary = () => {
+    validateSessionCall(navigation, route.name).then(() => {
+      trackEventCall('handle_reject_summary_click');
+      navigation.navigate('RejectSummary');
+    });
+  };
+
+  if (getApprovalApi.isWaiting) {
     return (
       <ActivityIndicator
-        animating={isWaiting}
+        animating={getApprovalApi.isWaiting}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -196,7 +251,7 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
     );
   }
 
-  if (error) {
+  if (getApprovalApi.error) {
     return (
       <View style={styles.errorView}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
@@ -213,9 +268,10 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
       </View>
     );
   }
-  // TODO use FlatListEmptyComponent prop for rendering empty data in latest version of RN
+
   return (
-    <View>
+    <View style={styles.mainContainer}>
+      {updateApprovalApi.result?.status === 207 && renderPopUp(updateApprovalApi, dispatch)}
       <FlatList
         data={filteredList}
         keyExtractor={(item: ApprovalCategory, index: number) => {
@@ -228,10 +284,56 @@ export const ApprovalListScreen = (props: ApprovalListProps) => {
         stickyHeaderIndices={categoryIndices.length !== 0 ? categoryIndices : undefined}
       // Default this is False, Solves flatlist rendering no data because stickyHeader updates at the same time as data
         removeClippedSubviews={false}
+        ListEmptyComponent={(
+          <View style={styles.emptyContainer}>
+            {/* Placeholder for empty approval list subject to change */}
+            <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
+            <Text>
+              {strings('APPROVAL.LIST_NOT_FOUND')}
+            </Text>
+          </View>
+      )}
+        style={styles.mainContainer}
         extraData={filteredList}
       />
+      {selectedItemQty > 0
+        && (
+          <ButtonBottomTab
+            leftTitle={strings('APPROVAL.REJECT')}
+            onLeftPress={() => handleRejectSummary()}
+            rightTitle={strings('APPROVAL.APPROVE')}
+            onRightPress={() => handleApproveSummary()}
+          />
+        )}
     </View>
   );
 };
 
+const ApprovalList = (): JSX.Element => {
+  const getApprovalApi = useTypedSelector(state => state.async.getApprovalList);
+  const updateApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
+  const { approvalList, categoryIndices, selectedItemQty } = useTypedSelector(state => state.Approvals);
+  const [apiStart, setApiStart] = useState(0);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const route = useRoute();
+  return (
+    <ApprovalListScreen
+      filteredList={approvalList}
+      categoryIndices={categoryIndices}
+      dispatch={dispatch}
+      getApprovalApi={getApprovalApi}
+      updateApprovalApi={updateApprovalApi}
+      apiStart={apiStart}
+      setApiStart={setApiStart}
+      navigation={navigation}
+      route={route}
+      useEffectHook={useEffect}
+      useFocusEffectHook={useFocusEffect}
+      trackEventCall={trackEvent}
+      selectedItemQty={selectedItemQty}
+      validateSessionCall={validateSession}
+    />
+  );
+};
 export default ApprovalList;

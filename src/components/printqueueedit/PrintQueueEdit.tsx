@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Image, Text, TextInput, View
+  Text, TextInput, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -79,7 +79,6 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
           />
         </View>
         <View style={styles.itemDetailsContainer}>
-          <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.itemImage} />
           <Text style={styles.itemNameTxt}>{itemToEdit.itemName}</Text>
         </View>
         <View style={styles.copyQtyContainer}>
@@ -122,18 +121,18 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
           <Text>{`${strings(`PRINT.${itemToEdit.paperSize}`)}`}</Text>
         </View>
         <View style={styles.printerContainer}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.printerAlignment}>
             <MaterialCommunityIcon name="printer-check" size={24} />
-            <View style={{ marginLeft: 12 }}>
+            <View style={styles.printerTextMargin}>
               <Text>{strings('PRINT.FRONT_DESK')}</Text>
-              <Text style={{ fontSize: 12, color: COLOR.GREY_600 }}>{strings('GENERICS.DEFAULT')}</Text>
+              <Text style={styles.genericTextLabel}>{strings('GENERICS.DEFAULT')}</Text>
             </View>
           </View>
         </View>
         <Button
           title={strings('GENERICS.SAVE')}
           type={Button.Type.PRIMARY}
-          style={{ width: '100%' }}
+          style={styles.buttonWidth}
           onPress={handleSave}
           disabled={!isValidQty}
         />
