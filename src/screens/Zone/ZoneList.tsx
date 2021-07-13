@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
-  FlatList, Text, View
+  ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import {
+  NavigationProp, RouteProp, useNavigation, useRoute
+} from '@react-navigation/native';
+import moment from 'moment';
 import styles from './ZoneList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { mockZones } from '../../mockData/zoneDetails';
-import { ZoneItem } from '../../models/ZoneItem';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
 import { LocationHeader } from '../../components/locationHeader/LocationHeader';
+import { getAllZones } from '../../state/actions/saga';
+import { trackEvent } from '../../utils/AppCenterTool';
+import { validateSession } from '../../utils/sessionTimeout';
+import { AsyncState } from '../../models/AsyncState';
+import COLOR from '../../themes/Color';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
@@ -18,21 +28,92 @@ const NoZonesMessage = () : JSX.Element => (
 
 interface ZoneProps {
     siteId: number,
-    zoneList: ZoneItem[]
+    dispatch: Dispatch<any>,
+    getZoneApi: AsyncState,
+    apiStart: number,
+    setApiStart: React.Dispatch<React.SetStateAction<number>>,
+    navigation: NavigationProp<any>,
+    route: RouteProp<any, string>,
+    useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
+    trackEventCall: (eventName: string, params?: any) => void,
 }
 
 export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
-  const { siteId, zoneList } = props;
+  const {
+    siteId,
+    getZoneApi,
+    apiStart,
+    dispatch,
+    setApiStart,
+    navigation,
+    route,
+    useEffectHook,
+    trackEventCall
+  } = props;
+
+  // calls the get all zone api
+  useEffectHook(() => navigation.addListener('focus', () => {
+    validateSession(navigation, route.name).then(() => {
+      trackEventCall('get_location_api_call');
+      setApiStart(moment().valueOf());
+      dispatch(getAllZones());
+    }).catch(() => {});
+  }), [navigation]);
+
+  useEffectHook(() => {
+    // on api success
+    if (!getZoneApi.isWaiting && getZoneApi.result) {
+      trackEventCall('get_location_api_success', { duration: moment().valueOf() - apiStart });
+    }
+
+    // on api failure
+    if (!getZoneApi.isWaiting && getZoneApi.error) {
+      trackEventCall('get_location_api_failure', {
+        errorDetails: getZoneApi.error.message || getZoneApi.error,
+        duration: moment().valueOf() - apiStart
+      });
+    }
+  }, [getZoneApi]);
+
+  if (getZoneApi.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={getZoneApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
+
+  if (getZoneApi.error) {
+    return (
+      <View style={styles.errorView}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('LOCATION.LOCATION_API_ERROR')}</Text>
+        <TouchableOpacity
+          style={styles.errorButton}
+          onPress={() => {
+            trackEventCall('location_api_retry',);
+            dispatch(getAllZones());
+          }}
+        >
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
     <View>
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
-        details={`${zoneList.length} ${strings('LOCATION.ZONES')}`}
+        details={`${getZoneApi.result?.data.length || 0} ${strings('LOCATION.ZONES')}`}
       />
 
       <FlatList
-        data={zoneList}
+        data={getZoneApi.result?.data || []}
         renderItem={({ item }) => (
           <LocationItemCard
             locationName={item.zoneName}
@@ -48,7 +129,25 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
 
 const ZoneList = (): JSX.Element => {
   const siteId = useTypedSelector(state => state.User.siteId);
-  return (<ZoneScreen zoneList={mockZones} siteId={siteId} />);
+  const getLocationApi = useTypedSelector(state => state.async.getAllZones);
+  const [apiStart, setApiStart] = useState(0);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  return (
+    <ZoneScreen
+      siteId={siteId}
+      dispatch={dispatch}
+      getZoneApi={getLocationApi}
+      apiStart={apiStart}
+      setApiStart={setApiStart}
+      navigation={navigation}
+      route={route}
+      useEffectHook={useEffect}
+      trackEventCall={trackEvent}
+    />
+  );
 };
 
 export default ZoneList;

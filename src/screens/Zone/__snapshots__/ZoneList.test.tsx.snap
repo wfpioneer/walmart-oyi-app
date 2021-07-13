@@ -1,9 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test Zone List Renders Zone Screen 1`] = `
+exports[`Test Get Zone Api Response Renders Zone Api Error Message 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="alert"
+    size={40}
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.LOCATION.LOCATION_API_ERROR" translation]
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "marginVertical": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`Test Get Zone Api Response Renders loading indicator when waiting for Zone Api response 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`Test Zone List Renders Zone Screen with Data 1`] = `
 <View>
   <LocationHeader
-    details="10 [missing \\"en.LOCATION.ZONES\\" translation]"
+    details="35 [missing \\"en.LOCATION.ZONES\\" translation]"
     location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
   />
   <FlatList
@@ -11,54 +75,179 @@ exports[`Test Zone List Renders Zone Screen 1`] = `
     data={
       Array [
         Object {
-          "aisleCount": 3,
-          "zoneId": 1,
-          "zoneName": "B - Backroom",
-        },
-        Object {
-          "aisleCount": 2,
+          "aisleCount": 30,
           "zoneId": 2,
-          "zoneName": "C - Center",
+          "zoneName": "ABAR",
+        },
+        Object {
+          "aisleCount": 0,
+          "zoneId": 1355,
+          "zoneName": "ANEX",
         },
         Object {
           "aisleCount": 3,
-          "zoneId": 3,
-          "zoneName": "E - Electronics",
+          "zoneId": 1079,
+          "zoneName": "BLAN",
+        },
+        Object {
+          "aisleCount": 1,
+          "zoneId": 774,
+          "zoneName": "BUNK",
+        },
+        Object {
+          "aisleCount": 1,
+          "zoneId": 381,
+          "zoneName": "CAJA",
         },
         Object {
           "aisleCount": 3,
-          "zoneId": 4,
-          "zoneName": "FB - Fresh Bakery",
+          "zoneId": 751,
+          "zoneName": "CARN",
         },
         Object {
-          "aisleCount": 3,
-          "zoneId": 5,
-          "zoneName": "FC - Fresh Cafe",
-        },
-        Object {
-          "aisleCount": 3,
-          "zoneId": 6,
-          "zoneName": "FF - Fresh Freezer/Cooler",
+          "aisleCount": 9,
+          "zoneId": 807,
+          "zoneName": "CONG",
         },
         Object {
           "aisleCount": 2,
-          "zoneId": 7,
-          "zoneName": "FM - Fresh Meat, HMS & Deli",
+          "zoneId": 763,
+          "zoneName": "DELI",
+        },
+        Object {
+          "aisleCount": 2,
+          "zoneId": 1455,
+          "zoneName": "DEVO",
+        },
+        Object {
+          "aisleCount": 6,
+          "zoneId": 635,
+          "zoneName": "DULC",
+        },
+        Object {
+          "aisleCount": 9,
+          "zoneId": 873,
+          "zoneName": "ELEC",
+        },
+        Object {
+          "aisleCount": 5,
+          "zoneId": 1394,
+          "zoneName": "FARM",
+        },
+        Object {
+          "aisleCount": 2,
+          "zoneId": 612,
+          "zoneName": "FERR",
+        },
+        Object {
+          "aisleCount": 7,
+          "zoneId": 433,
+          "zoneName": "FLEX",
         },
         Object {
           "aisleCount": 3,
-          "zoneId": 8,
-          "zoneName": "FP - Fresh Produce",
+          "zoneId": 727,
+          "zoneName": "FRUT",
+        },
+        Object {
+          "aisleCount": 2,
+          "zoneId": 995,
+          "zoneName": "GOUR",
+        },
+        Object {
+          "aisleCount": 4,
+          "zoneId": 574,
+          "zoneName": "HOGA",
+        },
+        Object {
+          "aisleCount": 0,
+          "zoneId": 1305,
+          "zoneName": "LLAN",
+        },
+        Object {
+          "aisleCount": 16,
+          "zoneId": 12,
+          "zoneName": "MGEN",
+        },
+        Object {
+          "aisleCount": 2,
+          "zoneId": 986,
+          "zoneName": "MOTO",
+        },
+        Object {
+          "aisleCount": 1,
+          "zoneId": 925,
+          "zoneName": "PAAB",
+        },
+        Object {
+          "aisleCount": 3,
+          "zoneId": 926,
+          "zoneName": "PADE",
+        },
+        Object {
+          "aisleCount": 1,
+          "zoneId": 394,
+          "zoneName": "PAMG",
+        },
+        Object {
+          "aisleCount": 4,
+          "zoneId": 854,
+          "zoneName": "PANA",
+        },
+        Object {
+          "aisleCount": 16,
+          "zoneId": 994,
+          "zoneName": "PODA",
+        },
+        Object {
+          "aisleCount": 15,
+          "zoneId": 993,
+          "zoneName": "PODM",
+        },
+        Object {
+          "aisleCount": 1,
+          "zoneId": 1556,
+          "zoneName": "RECI",
+        },
+        Object {
+          "aisleCount": 5,
+          "zoneId": 780,
+          "zoneName": "REFR",
+        },
+        Object {
+          "aisleCount": 2,
+          "zoneId": 1,
+          "zoneName": "RIEL",
+        },
+        Object {
+          "aisleCount": 24,
+          "zoneId": 476,
+          "zoneName": "ROPA",
+        },
+        Object {
+          "aisleCount": 7,
+          "zoneId": 636,
+          "zoneName": "SERV",
         },
         Object {
           "aisleCount": 10,
-          "zoneId": 9,
-          "zoneName": "G - Grocery",
+          "zoneId": 1218,
+          "zoneName": "TECN",
         },
         Object {
           "aisleCount": 3,
-          "zoneId": 10,
-          "zoneName": "H - Home",
+          "zoneId": 698,
+          "zoneName": "TOCA",
+        },
+        Object {
+          "aisleCount": 7,
+          "zoneId": 992,
+          "zoneName": "VINO",
+        },
+        Object {
+          "aisleCount": 1,
+          "zoneId": 743,
+          "zoneName": "WALK",
         },
       ]
     }
@@ -78,7 +267,7 @@ exports[`Test Zone List Renders Zone Screen 1`] = `
 </View>
 `;
 
-exports[`Test Zone List with empty list Renders empty Zone Screen 1`] = `
+exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
 <View>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
@@ -86,7 +275,7 @@ exports[`Test Zone List with empty list Renders empty Zone Screen 1`] = `
   />
   <FlatList
     ListEmptyComponent={<NoZonesMessage />}
-    data={Array []}
+    data={Object {}}
     disableVirtualization={false}
     horizontal={false}
     initialNumToRender={10}

@@ -149,7 +149,8 @@ export default {
     SECTIONS: 'Sections',
     AREAS: 'Areas',
     LOCATION_DETAILS: 'Location Details',
-    NO_ZONES_AVAILABLE: 'No Zones Available'
+    NO_ZONES_AVAILABLE: 'No Zones Available',
+    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
