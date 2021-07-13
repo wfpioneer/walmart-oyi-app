@@ -30,3 +30,43 @@ const initialState: LocationState = {
     name: ''
   }
 };
+
+export const LocationApi = (
+  state = initialState,
+  action: Actions
+): LocationState => {
+  switch (action.type) {
+    case RESET_LOCATION: {
+      return initialState;
+    }
+    case SELECTED_ZONE: {
+      return {
+        ...state,
+        selectedZone: {
+          id: action.payload.id,
+          name: action.payload.name
+        }
+      };
+    }
+    case SELECTED_AISLE: {
+      return {
+        ...state,
+        selectedAisle: {
+          id: action.payload.id,
+          name: action.payload.name
+        }
+      };
+    }
+    case SELECTED_SECTION: {
+      return {
+        ...state,
+        selectedSection: {
+          id: action.payload.id,
+          name: action.payload.name
+        }
+      };
+    }
+    default:
+      return state;
+  }
+};

@@ -1,5 +1,3 @@
-import { LocationStateTree } from '../../models/LocationStateTree';
-
 export const SELECTED_ZONE = 'LOCATION/SELECT_ZONE';
 export const SELECTED_AISLE = 'LOCATION/SELECTED_AISLE';
 export const SELECTED_SECTION = 'LOCATION/SELECTED_AISLE';
