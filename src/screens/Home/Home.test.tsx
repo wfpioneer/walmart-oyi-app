@@ -134,7 +134,7 @@ describe('HomeScreen', () => {
         navigation: { ...homeScreenProps.navigation, addListener: jest.fn().mockReturnValue(true) }
       });
 
-      // @ts-ignore
+      // @ts-expect-error required due to this property being private and read-only
       expect(homeScreen.navigationRemoveListener).toBeDefined();
     });
 
@@ -142,8 +142,41 @@ describe('HomeScreen', () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const homeScreen = new HomeScreen(homeScreenProps);
 
-      // @ts-ignore
+      // @ts-expect-error required due to this property being private and read-only
       expect(homeScreen.scannedSubscription).toBeDefined();
+    });
+  });
+
+  describe('ComponentWillUnmount', () => {
+    it('calls navigationRemoveListener', () => {
+      const homeScreen = new HomeScreen({
+        ...homeScreenProps,
+        navigation: { ...homeScreenProps.navigation, addListener: jest.fn().mockReturnValue(jest.fn) }
+      });
+
+      // @ts-expect-error a typescript error is expected here due to navigationRemoveListener being private and readonly
+      const spy = jest.spyOn(homeScreen, 'navigationRemoveListener');
+
+      homeScreen.componentWillUnmount();
+
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('calls scannedSubscription.remove if scannedSubscription exists', () => {
+      const homeScreen = new HomeScreen({
+        ...homeScreenProps,
+        navigation: { ...homeScreenProps.navigation, addListener: jest.fn().mockReturnValue(jest.fn) }
+      });
+
+      // @ts-expect-error a typescript error is expected here due to navigationRemoveListener being private and readonly
+      homeScreen.scannedSubscription = {
+        remove: jest.fn()
+      };
+
+      homeScreen.componentWillUnmount();
+
+      // @ts-expect-error a typescript error is expected here due to navigationRemoveListener being private and readonly
+      expect(homeScreen.scannedSubscription.remove).toHaveBeenCalled();
     });
   });
 });
