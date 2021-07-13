@@ -1,31 +1,14 @@
 import { strings } from '../../locales';
 
-export default () => [
-  {
-    value: 'NP',
-    display: strings('EXCEPTION.NIL_PICK')
-  },
-  {
-    value: 'PO',
-    display: strings('EXCEPTION.PRICE_OVERRIDE')
-  },
-  {
-    value: 'NS',
-    display: strings('EXCEPTION.NO_SALES')
-  },
-  {
-    value: 'NO',
-    display: strings('EXCEPTION.NEGATIVE_ON_HANDS')
-  },
-  {
-    value: 'C',
-    display: strings('EXCEPTION.CANCELLED')
-  },
-  {
-    value: 'NSFL',
-    display: strings('EXCEPTION.NSFL')
-  }
-];
+// Needs to be a function to get the proper translations
+export const FullExceptionList = (): Map<string, string> => new Map([
+  ['NP', strings('EXCEPTION.NIL_PICK')],
+  ['PO', strings('EXCEPTION.PRICE_OVERRIDE')],
+  ['NS', strings('EXCEPTION.NO_SALES')],
+  ['NO', strings('EXCEPTION.NEGATIVE_ON_HANDS')],
+  ['C', strings('EXCEPTION.CANCELLED')],
+  ['NSFL', strings('EXCEPTION.NSFL')]
+]);
 
 export const exceptionTypeToDisplayString = (exceptionType: string): string => {
   switch (exceptionType.toUpperCase()) {

@@ -11,7 +11,7 @@ import styles from './Worklist.style';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { CategorySeparator } from '../../components/worklistItem/CategorySeparator';
 import { strings } from '../../locales';
-import FullExceptionList from './FullExceptionList';
+import { FullExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
 
@@ -27,13 +27,13 @@ interface WorklistProps {
   refreshing: boolean;
   error: any;
   groupToggle: boolean;
-  updateGroupToggle: Function;
+  updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
   filterExceptions: string[];
   filterCategories: string[];
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
 }
-export const RenderWorklistItem = (props: ListItemProps) => {
+export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   const { dispatch, item, navigation } = props;
   if (item.worklistType === 'CATEGORY') {
     const { catgName, itemCount } = item;
@@ -111,17 +111,16 @@ export const renderFilterPills = (
   dispatch: Dispatch<any>,
   filterCategories: string[],
   filterExceptions: string[]
-) => {
+): JSX.Element => {
   if (listFilter.type === 'EXCEPTION') {
-    const exceptionObj = FullExceptionList().find(exceptionListItem => exceptionListItem.value === listFilter.value);
-
-    if (exceptionObj) {
+    const exception = FullExceptionList().get(listFilter.value);
+    if (exception) {
       const removeFilter = () => {
         const replacementFilter = filterExceptions;
         replacementFilter.splice(filterExceptions.indexOf(listFilter.value), 1);
         dispatch(updateFilterExceptions(replacementFilter));
       };
-      return <FilterPillButton filterText={exceptionObj.display} onClosePress={removeFilter} />;
+      return <FilterPillButton filterText={exception} onClosePress={removeFilter} />;
     }
 
     return <View />;
@@ -139,7 +138,7 @@ export const renderFilterPills = (
   return <View />;
 };
 
-export const Worklist = (props: WorklistProps) => {
+export const Worklist = (props: WorklistProps): JSX.Element => {
   const {
     data, dispatch, error, filterCategories, filterExceptions,
     groupToggle, onRefresh, refreshing, updateGroupToggle, navigation
@@ -178,10 +177,10 @@ export const Worklist = (props: WorklistProps) => {
   }
   if (filterExceptions.length !== 0) {
     filteredData = filteredData.filter(worklistItem => {
-      const exceptionTranslation = FullExceptionList().find(exceptionListItem => exceptionListItem.value
-        === worklistItem.worklistType);
-      if (exceptionTranslation) {
-        return filterExceptions.findIndex(exception => exception === exceptionTranslation.value) !== -1;
+      const hasWorklistException = FullExceptionList().has(worklistItem.worklistType);
+
+      if (hasWorklistException) {
+        return filterExceptions.findIndex(exception => exception === worklistItem.worklistType) !== -1;
       }
       return false;
     });
