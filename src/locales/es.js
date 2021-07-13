@@ -149,7 +149,8 @@ export default {
     SECTIONS: 'Secciones',
     AREAS: 'Areas', // TODO Spanish Translation
     LOCATION_DETAILS: 'Detalles de ubicación',
-    NO_ZONES_AVAILABLE: 'No Zones Available' // TODO Spanish Translation
+    NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Spanish Translation
+    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

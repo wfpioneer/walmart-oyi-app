@@ -44,3 +44,6 @@ export const getApprovalList = makeAsyncActionCreators(GET_APPROVAL_LIST);
 
 export const UPDATE_APPROVAL_LIST = makeAsyncActionTypes('API/UPDATE_APPROVAL_LIST');
 export const updateApprovalList = makeAsyncActionCreators(UPDATE_APPROVAL_LIST);
+
+export const GET_ALL_ZONES = makeAsyncActionTypes('API/GET_ALL_ZONES');
+export const getAllZones = makeAsyncActionCreators(GET_ALL_ZONES);

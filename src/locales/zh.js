@@ -149,7 +149,8 @@ export default {
     SECTIONS: 'Sections', // TODO Mandarin Translation
     AREAS: 'Areas', // TODO Mandarin Translation
     LOCATION_DETAILS: 'Location Details', // TODO Mandarin Translation
-    NO_ZONES_AVAILABLE: 'No Zones Available' // TODO Mandarin Translation
+    NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Mandarin Translation
+    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
