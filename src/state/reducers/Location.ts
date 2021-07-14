@@ -1,11 +1,12 @@
 import {
   ADD_LOCATION_TO_EXISTING,
+  Actions,
   DELETE_LOCATION_FROM_EXISTING,
   EDIT_EXISTING_LOCATION,
   RESET_LOCATIONS,
-  SELECTED_AISLE,
-  SELECTED_SECTION,
-  SELECTED_ZONE,
+  SELECT_AISLE,
+  SELECT_SECTION,
+  SELECT_ZONE,
   SET_FLOOR_LOCATIONS,
   SET_ITEM_LOC_DETAILS,
   SET_RESERVE_LOCATIONS
@@ -13,21 +14,21 @@ import {
 import LocationType from '../../models/Location';
 
 interface LocationState {
-  floorLocations: Array<LocationType>;
-  reserveLocations: Array<LocationType>;
+  floorLocations: Array<LocationType>,
+  reserveLocations: Array<LocationType>,
   itemLocDetails: {
-    itemNbr: number;
-    upcNbr: string;
-    exceptionType: string;
-  };
+    itemNbr: number,
+    upcNbr: string,
+    exceptionType: string,
+  },
   selectedZone: {
     id: number,
     name: string
-  };
+  },
   selectedAisle: {
     id: number,
     name: string
-  };
+  },
   selectedSection: {
     id: number,
     name: string
@@ -56,7 +57,10 @@ const initialState: LocationState = {
   }
 };
 
-export const Location = (state = initialState, action: any) => {
+export const Location = (
+  state = initialState,
+  action: Actions
+) : LocationState => {
   switch (action.type) {
     case SET_ITEM_LOC_DETAILS:
       return {
@@ -175,8 +179,7 @@ export const Location = (state = initialState, action: any) => {
       return {
         ...state
       };
-
-    case SELECTED_ZONE: {
+    case SELECT_ZONE: {
       return {
         ...state,
         selectedZone: {
@@ -185,7 +188,7 @@ export const Location = (state = initialState, action: any) => {
         }
       };
     }
-    case SELECTED_AISLE: {
+    case SELECT_AISLE: {
       return {
         ...state,
         selectedAisle: {
@@ -194,7 +197,7 @@ export const Location = (state = initialState, action: any) => {
         }
       };
     }
-    case SELECTED_SECTION: {
+    case SELECT_SECTION: {
       return {
         ...state,
         selectedSection: {
@@ -204,27 +207,7 @@ export const Location = (state = initialState, action: any) => {
       };
     }
     case RESET_LOCATIONS:
-      return {
-        floorLocations: [],
-        reserveLocations: [],
-        itemLocDetails: {
-          itemNbr: null,
-          upcNbr: null,
-          exceptionType: null
-        },
-        selectedZone: {
-          id: 0,
-          name: ''
-        },
-        selectedAisle: {
-          id: 0,
-          name: ''
-        },
-        selectedSection: {
-          id: 0,
-          name: ''
-        }
-      };
+      return initialState;
     default:
       return state;
   }
