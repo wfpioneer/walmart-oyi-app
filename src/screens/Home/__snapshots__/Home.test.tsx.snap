@@ -81,7 +81,331 @@ exports[`HomeScreen rendering renders null when worklistApiState.result.status i
 
 exports[`HomeScreen rendering renders null when worklistSummaryApiState.result is null 1`] = `null`;
 
-exports[`HomeScreen rendering renders worklist summaries when worklistApiState.result.data has summaries 1`] = `
+exports[`HomeScreen rendering renders worklist summaries when worklistApiState.result.data has summaries (items 50% complete) 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
+  }
+>
+  <Modal
+    hardwareAccelerated={false}
+    transparent={true}
+    visible={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#00000099",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          }
+        }
+      >
+        <mockConstructor
+          color="#f44336"
+          name="alert"
+          size={30}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "marginTop": 16,
+                "width": "70%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text>
+      [missing "en.HOME.WELCOME" translation] testUser
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <GoalCircle
+        active={true}
+        completionPercentage={50}
+        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
+        goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
+      />
+    </View>
+    <WorklistCard
+      complete={50}
+      completionGoal={50}
+      completionPercentage={50}
+      goal={100}
+      goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={25}
+      completionGoal={50}
+      completionPercentage={50}
+      goal={50}
+      goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={7}
+      completionGoal={50}
+      completionPercentage={50}
+      goal={14}
+      goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
+      onPress={[Function]}
+    />
+  </ScrollView>
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    [missing "en.GENERICS.VERSION" translation] 1.1.0
+  </Text>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`HomeScreen rendering renders worklist summaries when worklistApiState.result.data has summaries (items 100% complete) 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
+  }
+>
+  <Modal
+    hardwareAccelerated={false}
+    transparent={true}
+    visible={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#00000099",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          }
+        }
+      >
+        <mockConstructor
+          color="#f44336"
+          name="alert"
+          size={30}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "marginTop": 16,
+                "width": "70%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text>
+      [missing "en.HOME.WELCOME" translation] testUser
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <GoalCircle
+        active={true}
+        completionPercentage={100}
+        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
+        goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
+      />
+    </View>
+    <WorklistCard
+      complete={100}
+      completionGoal={100}
+      completionPercentage={100}
+      goal={100}
+      goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={50}
+      completionGoal={100}
+      completionPercentage={100}
+      goal={50}
+      goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={14}
+      completionGoal={100}
+      completionPercentage={100}
+      goal={14}
+      goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
+      onPress={[Function]}
+    />
+  </ScrollView>
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    [missing "en.GENERICS.VERSION" translation] 1.1.0
+  </Text>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`HomeScreen rendering renders worklist summaries when worklistApiState.result.data has summaries (zero items complete) 1`] = `
 <ForwardRef(SafeAreaView)
   style={
     Object {

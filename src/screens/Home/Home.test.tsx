@@ -1,7 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { mockWorklistSummaries } from '../../mockData/mockWorklistSummary';
+import {
+  mockAllCompleteWorklistSummaries,
+  mockHalfCompleteWorklistSummaries,
+  mockZeroCompleteWorklistSummaries
+} from '../../mockData/mockWorklistSummary';
 import { HomeScreen } from './Home';
 
 const navigationProp = {
@@ -91,10 +95,52 @@ describe('HomeScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renders worklist summaries when worklistApiState.result.data has summaries', () => {
+    it('renders worklist summaries when worklistApiState.result.data has summaries (zero items complete)', () => {
       props = createTestProps({
         ...homeScreenProps,
-        worklistSummaryApiState: { ...defaultAsyncState, result: { status: 200, data: mockWorklistSummaries } }
+        worklistSummaryApiState: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: mockZeroCompleteWorklistSummaries
+          }
+        }
+      }, {});
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<HomeScreen
+        {...props}
+      />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('renders worklist summaries when worklistApiState.result.data has summaries (items 50% complete)', () => {
+      props = createTestProps({
+        ...homeScreenProps,
+        worklistSummaryApiState: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: mockHalfCompleteWorklistSummaries
+          }
+        }
+      }, {});
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<HomeScreen
+        {...props}
+      />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('renders worklist summaries when worklistApiState.result.data has summaries (items 100% complete)', () => {
+      props = createTestProps({
+        ...homeScreenProps,
+        worklistSummaryApiState: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: mockAllCompleteWorklistSummaries
+          }
+        }
       }, {});
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<HomeScreen

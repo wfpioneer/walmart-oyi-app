@@ -1,6 +1,6 @@
 import { WorklistSummary } from '../models/WorklistSummary';
 
-export const mockWorklistSummaries: WorklistSummary[] = [
+export const mockZeroCompleteWorklistSummaries: WorklistSummary[] = [
   {
     worklistGoal: 'DAILY',
     worklistGoalPct: 0,
@@ -23,5 +23,57 @@ export const mockWorklistSummaries: WorklistSummary[] = [
     ],
     totalItems: 163,
     totalCompletedItems: 0
+  }
+];
+
+export const mockHalfCompleteWorklistSummaries: WorklistSummary[] = [
+  {
+    worklistGoal: 'DAILY',
+    worklistGoalPct: 50,
+    worklistTypes: [
+      {
+        worklistType: 'NSFL',
+        totalItems: 100,
+        completedItems: 50
+      },
+      {
+        worklistType: 'C',
+        totalItems: 50,
+        completedItems: 25
+      },
+      {
+        worklistType: 'NO',
+        totalItems: 14,
+        completedItems: 7
+      }
+    ],
+    totalItems: 164,
+    totalCompletedItems: 82
+  }
+];
+
+export const mockAllCompleteWorklistSummaries: WorklistSummary[] = [
+  {
+    worklistGoal: 'DAILY',
+    worklistGoalPct: 100,
+    worklistTypes: [
+      {
+        worklistType: 'NSFL',
+        totalItems: 100,
+        completedItems: 100
+      },
+      {
+        worklistType: 'C',
+        totalItems: 50,
+        completedItems: 50
+      },
+      {
+        worklistType: 'NO',
+        totalItems: 14,
+        completedItems: 14
+      }
+    ],
+    totalItems: 164,
+    totalCompletedItems: 164
   }
 ];
