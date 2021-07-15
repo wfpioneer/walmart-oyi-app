@@ -11,7 +11,7 @@ import styles from './Worklist.style';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { CategorySeparator } from '../../components/worklistItem/CategorySeparator';
 import { strings } from '../../locales';
-import { FullExceptionList } from './FullExceptionList';
+import { GenerateExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
 
@@ -110,10 +110,11 @@ export const renderFilterPills = (
   listFilter: { type: string; value: string },
   dispatch: Dispatch<any>,
   filterCategories: string[],
-  filterExceptions: string[]
+  filterExceptions: string[],
+  fullExceptionList: Map<string, string>
 ): JSX.Element => {
   if (listFilter.type === 'EXCEPTION') {
-    const exception = FullExceptionList().get(listFilter.value);
+    const exception = fullExceptionList.get(listFilter.value);
     if (exception) {
       const removeFilter = () => {
         const replacementFilter = filterExceptions;
@@ -143,7 +144,7 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
     data, dispatch, error, filterCategories, filterExceptions,
     groupToggle, onRefresh, refreshing, updateGroupToggle, navigation
   } = props;
-
+  const fullExceptionList = GenerateExceptionList.getInstance();
   if (error) {
     return (
       <View style={styles.errorView}>
@@ -177,7 +178,7 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
   }
   if (filterExceptions.length !== 0) {
     filteredData = filteredData.filter(worklistItem => {
-      const hasWorklistException = FullExceptionList().has(worklistItem.worklistType);
+      const hasWorklistException = fullExceptionList.has(worklistItem.worklistType);
 
       if (hasWorklistException) {
         return filterExceptions.findIndex(exception => exception === worklistItem.worklistType) !== -1;
@@ -193,7 +194,9 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
           <FlatList
             data={[...typedFilterExceptions, ...typedFilterCategories]}
             horizontal
-            renderItem={({ item }) => renderFilterPills(item, dispatch, filterCategories, filterExceptions)}
+            renderItem={({ item }) => renderFilterPills(
+              item, dispatch, filterCategories, filterExceptions, fullExceptionList
+            )}
             style={styles.filterList}
             keyExtractor={item => item.value}
           />

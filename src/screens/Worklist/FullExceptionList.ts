@@ -1,30 +1,33 @@
+import I18n from 'i18n-js';
 import { strings } from '../../locales';
 
-// Needs to be a function to get the proper translations
-export const FullExceptionList = (): Map<string, string> => new Map([
-  ['NP', strings('EXCEPTION.NIL_PICK')],
-  ['PO', strings('EXCEPTION.PRICE_OVERRIDE')],
-  ['NS', strings('EXCEPTION.NO_SALES')],
-  ['NO', strings('EXCEPTION.NEGATIVE_ON_HANDS')],
-  ['C', strings('EXCEPTION.CANCELLED')],
-  ['NSFL', strings('EXCEPTION.NSFL')]
-]);
+const multitonMap = new Map();
 
-export const exceptionTypeToDisplayString = (exceptionType: string): string => {
-  switch (exceptionType.toUpperCase()) {
-    case 'NP':
-      return strings('EXCEPTION.NIL_PICK');
-    case 'PO':
-      return strings('EXCEPTION.PRICE_OVERRIDE');
-    case 'NS':
-      return strings('EXCEPTION.NO_SALES');
-    case 'NO':
-      return strings('EXCEPTION.NEGATIVE_ON_HANDS');
-    case 'C':
-      return strings('EXCEPTION.CANCELLED');
-    case 'NSFL':
-      return strings('EXCEPTION.NSFL');
-    default:
-      return strings('EXCEPTION.UNKNOWN');
+export const GenerateExceptionList = (function exceptionInstance() {
+  let instance: Map<string, string>;
+
+  function createInstance() {
+    return new Map([
+      ['NP', strings('EXCEPTION.NIL_PICK',)],
+      ['PO', strings('EXCEPTION.PRICE_OVERRIDE')],
+      ['NS', strings('EXCEPTION.NO_SALES')],
+      ['NO', strings('EXCEPTION.NEGATIVE_ON_HANDS')],
+      ['C', strings('EXCEPTION.CANCELLED')],
+      ['NSFL', strings('EXCEPTION.NSFL')]
+    ]);
   }
-};
+
+  return {
+    getInstance() {
+      // Creates a new map instance if the current language has not been used yet
+      if (!multitonMap.has(I18n.locale) && Object.keys(I18n.translations).length !== 0) {
+        multitonMap.set(I18n.locale, createInstance());
+      }
+      instance = multitonMap.get(I18n.locale);
+      return instance;
+    }
+  };
+}());
+
+export const exceptionTypeToDisplayString = (exceptionType: string):
+string => GenerateExceptionList.getInstance().get(exceptionType) ?? strings('EXCEPTION.UNKNOWN');

@@ -17,7 +17,7 @@ import {
   updateFilterExceptions
 } from '../../../state/actions/Worklist';
 import { strings } from '../../../locales';
-import { FullExceptionList } from '../FullExceptionList';
+import { GenerateExceptionList } from '../FullExceptionList';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import FilterListItem from '../../../models/FilterListItem';
 
@@ -51,7 +51,6 @@ export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number; ca
   const { item } = listItem;
   const onItemPress = () => {
     if (item.selected) {
-      // @ts-ignore
       filterCategories.splice(filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`), 1);
       trackEvent('worklist_update_filter_categories', { categories: JSON.stringify(filterCategories) });
       return dispatch(updateFilterCategories(filterCategories));
@@ -157,9 +156,10 @@ export const renderCategoryCollapsibleCard = (): JSX.Element => {
 export const renderExceptionTypeCard = (): JSX.Element => {
   const { exceptionOpen, filterExceptions } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
-
+  const fullExceptionList = GenerateExceptionList.getInstance();
   const exceptionMap: { value: string; display: string; selected: boolean;}[] = [];
-  FullExceptionList().forEach((value, key) => {
+
+  fullExceptionList.forEach((value, key) => {
     const isSelected = filterExceptions.indexOf(key) !== -1;
     exceptionMap.push({ value: key, display: value, selected: isSelected });
   });
@@ -169,7 +169,7 @@ export const renderExceptionTypeCard = (): JSX.Element => {
     subtext = strings('WORKLIST.ALL');
   } else {
     filterExceptions.forEach((exception: string) => {
-      const exceptionObj = FullExceptionList().get(exception);
+      const exceptionObj = fullExceptionList.get(exception);
       if (exceptionObj && subtext !== '') {
         subtext = `${subtext}\n${exceptionObj}`;
       } else if (exceptionObj) {
