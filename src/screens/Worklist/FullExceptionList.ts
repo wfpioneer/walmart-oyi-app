@@ -19,8 +19,12 @@ export const GenerateExceptionList = (function exceptionInstance() {
 
   return {
     getInstance() {
-      // Creates a new map instance if the current language has not been used yet
+      // Creates a new map instance if the current language has not been used yet and translations are available
       if (!multitonMap.has(I18n.locale) && Object.keys(I18n.translations).length !== 0) {
+        multitonMap.set(I18n.locale, createInstance());
+      }
+      // For Jest TESTS ONLY
+      if (process.env.JEST_WORKER_ID) {
         multitonMap.set(I18n.locale, createInstance());
       }
       instance = multitonMap.get(I18n.locale);

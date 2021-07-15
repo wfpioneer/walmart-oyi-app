@@ -9,6 +9,7 @@ import { WorklistItemI } from '../../models/WorklistItem';
 import {
   RenderWorklistItem, Worklist, convertDataToDisplayList, renderFilterPills
 } from './Worklist';
+import { GenerateExceptionList } from './FullExceptionList';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
@@ -166,11 +167,13 @@ describe('WorklistScreen', () => {
   });
 
   describe('Tests rendering Filter `Pills`', () => {
+    const exceptionList = GenerateExceptionList.getInstance();
+
     it('Renders a filter button for list filter type EXCEPTION', () => {
       const renderer = ShallowRenderer.createRenderer();
       const exceptionFilter = { type: 'EXCEPTION', value: 'NSFL' };
       renderer.render(
-        renderFilterPills(exceptionFilter, jest.fn(), [], filterExceptions)
+        renderFilterPills(exceptionFilter, jest.fn(), [], filterExceptions, exceptionList)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -178,7 +181,7 @@ describe('WorklistScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const exceptionFilter = { type: 'EXCEPTION', value: 'Not An Exception' };
       renderer.render(
-        renderFilterPills(exceptionFilter, jest.fn(), [], [])
+        renderFilterPills(exceptionFilter, jest.fn(), [], [], exceptionList)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -187,7 +190,7 @@ describe('WorklistScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const categoryFilter = { type: 'CATEGORY', value: '99 - ELECTRONICS' };
       renderer.render(
-        renderFilterPills(categoryFilter, jest.fn(), filterCategories, [])
+        renderFilterPills(categoryFilter, jest.fn(), filterCategories, [], exceptionList)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -196,7 +199,7 @@ describe('WorklistScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const invalidFilter = { type: '', value: '' };
       renderer.render(
-        renderFilterPills(invalidFilter, jest.fn(), [], [])
+        renderFilterPills(invalidFilter, jest.fn(), [], [], exceptionList)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
