@@ -1,8 +1,12 @@
 import {
   ADD_LOCATION_TO_EXISTING,
+  Actions,
   DELETE_LOCATION_FROM_EXISTING,
   EDIT_EXISTING_LOCATION,
   RESET_LOCATIONS,
+  SELECT_AISLE,
+  SELECT_SECTION,
+  SELECT_ZONE,
   SET_FLOOR_LOCATIONS,
   SET_ITEM_LOC_DETAILS,
   SET_RESERVE_LOCATIONS
@@ -17,6 +21,18 @@ interface LocationState {
     upcNbr: string;
     exceptionType: string;
   };
+  selectedZone: {
+    id: number;
+    name: string;
+  };
+  selectedAisle: {
+    id: number;
+    name: string;
+  };
+  selectedSection: {
+    id: number;
+    name: string;
+   }
 }
 
 const initialState: LocationState = {
@@ -26,10 +42,25 @@ const initialState: LocationState = {
     itemNbr: 0,
     upcNbr: '',
     exceptionType: ''
+  },
+  selectedZone: {
+    id: 0,
+    name: ''
+  },
+  selectedAisle: {
+    id: 0,
+    name: ''
+  },
+  selectedSection: {
+    id: 0,
+    name: ''
   }
 };
 
-export const Location = (state = initialState, action: any) => {
+export const Location = (
+  state = initialState,
+  action: Actions
+) : LocationState => {
   switch (action.type) {
     case SET_ITEM_LOC_DETAILS:
       return {
@@ -148,16 +179,35 @@ export const Location = (state = initialState, action: any) => {
       return {
         ...state
       };
-    case RESET_LOCATIONS:
+    case SELECT_ZONE: {
       return {
-        floorLocations: [],
-        reserveLocations: [],
-        itemLocDetails: {
-          itemNbr: null,
-          upcNbr: null,
-          exceptionType: null
+        ...state,
+        selectedZone: {
+          id: action.payload.id,
+          name: action.payload.name
         }
       };
+    }
+    case SELECT_AISLE: {
+      return {
+        ...state,
+        selectedAisle: {
+          id: action.payload.id,
+          name: action.payload.name
+        }
+      };
+    }
+    case SELECT_SECTION: {
+      return {
+        ...state,
+        selectedSection: {
+          id: action.payload.id,
+          name: action.payload.name
+        }
+      };
+    }
+    case RESET_LOCATIONS:
+      return initialState;
     default:
       return state;
   }
