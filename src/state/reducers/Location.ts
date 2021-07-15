@@ -14,24 +14,24 @@ import {
 import LocationType from '../../models/Location';
 
 interface LocationState {
-  floorLocations: Array<LocationType>,
-  reserveLocations: Array<LocationType>,
+  floorLocations: Array<LocationType>;
+  reserveLocations: Array<LocationType>;
   itemLocDetails: {
-    itemNbr: number,
-    upcNbr: string,
-    exceptionType: string,
-  },
+    itemNbr: number;
+    upcNbr: string;
+    exceptionType: string;
+  };
   selectedZone: {
-    id: number,
-    name: string
-  },
+    id: number;
+    name: string;
+  };
   selectedAisle: {
-    id: number,
-    name: string
-  },
+    id: number;
+    name: string;
+  };
   selectedSection: {
-    id: number,
-    name: string
+    id: number;
+    name: string;
    }
 }
 
