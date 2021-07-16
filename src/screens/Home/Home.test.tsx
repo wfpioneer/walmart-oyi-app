@@ -32,11 +32,6 @@ const homeScreenProps: any = {
   route: jest.fn()
 };
 
-const createTestProps = (testedProps: Record<string, any>, props: Record<string, any>) => ({
-  ...testedProps,
-  ...props
-});
-
 // opt out of type checking in order to create mocks that don't exactly match
 // expected types: https://stackoverflow.com/a/52619219
 let props: any;
@@ -44,13 +39,13 @@ let props: any;
 describe('HomeScreen', () => {
   describe('rendering', () => {
     it('renders ActivityIndicator when worklistSummaryApiState.isWaiting is true', () => {
-      props = createTestProps({
+      props = {
         ...homeScreenProps,
         worklistSummaryApiState: {
           ...defaultAsyncState,
           isWaiting: true
         }
-      }, {});
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<HomeScreen {...props} />);
       expect(renderer.getRenderOutput())
@@ -58,13 +53,13 @@ describe('HomeScreen', () => {
     });
 
     it('renders error View when worklistSummaryApiState.error is not null', () => {
-      props = createTestProps({
+      props = {
         ...homeScreenProps,
         worklistSummaryApiState: {
           ...defaultAsyncState,
           error: 'An Error'
         }
-      }, {});
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<HomeScreen {...props} />);
       expect(renderer.getRenderOutput())
@@ -72,7 +67,7 @@ describe('HomeScreen', () => {
     });
 
     it('renders null when worklistSummaryApiState.result is null', () => {
-      props = createTestProps(homeScreenProps, {});
+      props = homeScreenProps;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<HomeScreen
         {...props}
@@ -81,13 +76,10 @@ describe('HomeScreen', () => {
     });
 
     it('renders null when worklistApiState.result.status is 204', () => {
-      props = createTestProps(
-        {
-          ...homeScreenProps,
-          worklistSummaryApiState: { ...defaultAsyncState, result: { status: 204 } }
-        },
-        {}
-      );
+      props = {
+        ...homeScreenProps,
+        worklistSummaryApiState: { ...defaultAsyncState, result: { status: 204 } }
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<HomeScreen
         {...props}
@@ -96,7 +88,7 @@ describe('HomeScreen', () => {
     });
 
     it('renders worklist summaries when worklistApiState.result.data has summaries (zero items complete)', () => {
-      props = createTestProps({
+      props = {
         ...homeScreenProps,
         worklistSummaryApiState: {
           ...defaultAsyncState,
@@ -105,7 +97,7 @@ describe('HomeScreen', () => {
             data: mockZeroCompleteWorklistSummaries
           }
         }
-      }, {});
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<HomeScreen
         {...props}
@@ -114,7 +106,7 @@ describe('HomeScreen', () => {
     });
 
     it('renders worklist summaries when worklistApiState.result.data has summaries (items 50% complete)', () => {
-      props = createTestProps({
+      props = {
         ...homeScreenProps,
         worklistSummaryApiState: {
           ...defaultAsyncState,
@@ -123,7 +115,7 @@ describe('HomeScreen', () => {
             data: mockHalfCompleteWorklistSummaries
           }
         }
-      }, {});
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<HomeScreen
         {...props}
@@ -132,7 +124,7 @@ describe('HomeScreen', () => {
     });
 
     it('renders worklist summaries when worklistApiState.result.data has summaries (items 100% complete)', () => {
-      props = createTestProps({
+      props = {
         ...homeScreenProps,
         worklistSummaryApiState: {
           ...defaultAsyncState,
@@ -141,7 +133,7 @@ describe('HomeScreen', () => {
             data: mockAllCompleteWorklistSummaries
           }
         }
-      }, {});
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<HomeScreen
         {...props}
@@ -150,7 +142,7 @@ describe('HomeScreen', () => {
     });
 
     it('renders ManualScanComponent when enabled', () => {
-      props = createTestProps({ ...homeScreenProps, isManualScanEnabled: true }, {});
+      props = { ...homeScreenProps, isManualScanEnabled: true };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<HomeScreen
         {...props}
