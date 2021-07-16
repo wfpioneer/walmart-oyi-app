@@ -7,40 +7,19 @@ import { Worklist } from './Worklist';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getWorklist } from '../../state/actions/saga';
 
-export const TodoWorklist = () => {
-  const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
-  const [groupToggle, updateGroupToggle] = useState(false);
-  const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  return (
-    <TodoWorklistScreen
-      isWaiting={isWaiting}
-      result={result}
-      error={error}
-      dispatch={dispatch}
-      filterCategories={filterCategories}
-      filterExceptions={filterExceptions}
-      groupToggle={groupToggle}
-      updateGroupToggle={updateGroupToggle}
-      navigation={navigation}
-    />
-  );
-};
-
 interface TodoWorklistProps {
   isWaiting: boolean;
   result: any;
   error: any;
   dispatch: Dispatch<any>;
   groupToggle: boolean;
-  updateGroupToggle: Function;
+  updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
   filterExceptions: string[];
   filterCategories: string[];
   navigation: NavigationProp<any>;
 }
 
-export const TodoWorklistScreen = (props: TodoWorklistProps) => {
+export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
     groupToggle, updateGroupToggle, filterCategories, filterExceptions
@@ -57,6 +36,27 @@ export const TodoWorklistScreen = (props: TodoWorklistProps) => {
       data={todoData}
       refreshing={isWaiting}
       onRefresh={() => dispatch(getWorklist())}
+      error={error}
+      dispatch={dispatch}
+      filterCategories={filterCategories}
+      filterExceptions={filterExceptions}
+      groupToggle={groupToggle}
+      updateGroupToggle={updateGroupToggle}
+      navigation={navigation}
+    />
+  );
+};
+
+export const TodoWorklist = (): JSX.Element => {
+  const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
+  const [groupToggle, updateGroupToggle] = useState(false);
+  const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  return (
+    <TodoWorklistScreen
+      isWaiting={isWaiting}
+      result={result}
       error={error}
       dispatch={dispatch}
       filterCategories={filterCategories}

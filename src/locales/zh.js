@@ -43,7 +43,7 @@ export default {
     BARCODE_SCAN_ERROR: '此条码类型有误',
     ITEM: '商品',
     ITEMS: '多个商品',
-    TOOLS: 'Tools' // TODO Mandarin Translation
+    TOOLS: '工具箱'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -62,7 +62,8 @@ export default {
     NO_SALES: '无销售清单',
     NEGATIVE_ON_HANDS: '负现货清单',
     CANCELLED: '取消状态商品清单',
-    NSFL: '无楼面位置商品清单'
+    NSFL: '无楼面位置商品清单',
+    UNKNOWN: '未知错误'
   },
   ITEM: {
     TITLE: '查看商品明细',

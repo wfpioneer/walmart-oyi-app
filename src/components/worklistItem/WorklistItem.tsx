@@ -5,9 +5,9 @@ import {
 import { NavigationProp } from '@react-navigation/native';
 import { Dispatch } from 'redux';
 import styles from './WorklistItem.style';
-import { strings } from '../../locales';
 import { setScannedEvent } from '../../state/actions/Global';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { exceptionTypeToDisplayString } from '../../screens/Worklist/FullExceptionList';
 
 interface WorklistItemProps {
   exceptionType: string;
@@ -17,25 +17,6 @@ interface WorklistItemProps {
   navigation: NavigationProp<any>;
   dispatch: Dispatch<any>;
 }
-
-const exceptionTypeToDisplayString = (exceptionType: string) => {
-  switch (exceptionType.toUpperCase()) {
-    case 'NP':
-      return strings('EXCEPTION.NIL_PICK');
-    case 'PO':
-      return strings('EXCEPTION.PRICE_OVERRIDE');
-    case 'NS':
-      return strings('EXCEPTION.NO_SALES');
-    case 'NO':
-      return strings('EXCEPTION.NEGATIVE_ON_HANDS');
-    case 'C':
-      return strings('EXCEPTION.CANCELLED');
-    case 'NSFL':
-      return strings('EXCEPTION.NSFL');
-    default:
-      return strings('GENERICS.ERROR');
-  }
-};
 
 // TODO change this to default export
 export const WorklistItem = (props: WorklistItemProps): JSX.Element => {

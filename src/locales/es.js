@@ -62,7 +62,8 @@ export default {
     NO_SALES: 'Sin Venta',
     NEGATIVE_ON_HANDS: 'Existencia Negativa',
     CANCELLED: 'Cancelados',
-    NSFL: 'Sin Ubicación en Piso de Ventas'
+    NSFL: 'Sin Ubicación en Piso de Ventas',
+    UNKNOWN: 'desconocida' // TODO needs spanish Translation
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',
