@@ -52,10 +52,9 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
     strings('GENERICS.CANCEL')
   ];
 
-  const cancelButtonIndex = 2;
   ActionSheet.showActionSheetWithOptions({
     options,
-    cancelButtonIndex
+    cancelButtonIndex: 2
   },
   buttonIndex => {
     if (buttonIndex === 0) {
