@@ -7,7 +7,9 @@ export interface WorklistSummary {
 }
 
 export interface WorklistTypeDetails {
-  worklistType: 'NSFL' | 'C' | 'NO' | 'NS' | 'NP' | 'PO',
+  worklistType: WorklistType,
   totalItems: number,
   completedItems: number
 }
+
+export type WorklistType = 'NSFL' | 'C' | 'NO' | 'NS' | 'NP' | 'PO';
