@@ -9,6 +9,7 @@ import moment from 'moment';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AsyncState } from '../../models/AsyncState';
 import { RootState } from '../../state/reducers/RootReducer';
 import styles from './Home.style';
 import { barcodeEmitter } from '../../utils/scannerUtils';
