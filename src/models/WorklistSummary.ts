@@ -1,12 +1,12 @@
 export interface WorklistSummary {
   worklistGoal: 'DAILY' | 'WEEKLY',
   worklistGoalPct: number,
-  worklistTypes: WorklistType[],
+  worklistTypes: WorklistTypeSummary[],
   totalItems: number,
   totalCompletedItems: number
 }
 
-export interface WorklistType {
+export interface WorklistTypeSummary {
   worklistType: 'NSFL' | 'C' | 'NO' | 'NS' | 'NP' | 'PO',
   totalItems: number,
   completedItems: number
