@@ -8,7 +8,7 @@ export class ExceptionList {
 
    private constructor() {}
 
-   private static createInstance() {
+   private static createInstance(): Map<string, string> {
      return new Map([
        ['NP', strings('EXCEPTION.NIL_PICK',)],
        ['PO', strings('EXCEPTION.PRICE_OVERRIDE')],
