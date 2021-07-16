@@ -9,7 +9,7 @@ import { WorklistItemI } from '../../models/WorklistItem';
 import {
   RenderWorklistItem, Worklist, convertDataToDisplayList, renderFilterPills
 } from './Worklist';
-import { GenerateExceptionList } from './FullExceptionList';
+import { ExceptionList } from './FullExceptionList';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
@@ -167,7 +167,7 @@ describe('WorklistScreen', () => {
   });
 
   describe('Tests rendering Filter `Pills`', () => {
-    const exceptionList = GenerateExceptionList.getInstance();
+    const exceptionList = ExceptionList.getInstance();
 
     it('Renders a filter button for list filter type EXCEPTION', () => {
       const renderer = ShallowRenderer.createRenderer();

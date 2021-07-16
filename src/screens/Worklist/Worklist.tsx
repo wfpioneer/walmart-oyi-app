@@ -11,7 +11,7 @@ import styles from './Worklist.style';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { CategorySeparator } from '../../components/worklistItem/CategorySeparator';
 import { strings } from '../../locales';
-import { GenerateExceptionList } from './FullExceptionList';
+import { ExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
 
@@ -144,7 +144,7 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
     data, dispatch, error, filterCategories, filterExceptions,
     groupToggle, onRefresh, refreshing, updateGroupToggle, navigation
   } = props;
-  const fullExceptionList = GenerateExceptionList.getInstance();
+  const fullExceptionList = ExceptionList.getInstance();
   if (error) {
     return (
       <View style={styles.errorView}>

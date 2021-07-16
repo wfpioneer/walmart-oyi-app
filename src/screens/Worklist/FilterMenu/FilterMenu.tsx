@@ -17,7 +17,7 @@ import {
   updateFilterExceptions
 } from '../../../state/actions/Worklist';
 import { strings } from '../../../locales';
-import { GenerateExceptionList } from '../FullExceptionList';
+import { ExceptionList } from '../FullExceptionList';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import FilterListItem from '../../../models/FilterListItem';
 
@@ -156,7 +156,7 @@ export const renderCategoryCollapsibleCard = (): JSX.Element => {
 export const renderExceptionTypeCard = (): JSX.Element => {
   const { exceptionOpen, filterExceptions } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
-  const fullExceptionList = GenerateExceptionList.getInstance();
+  const fullExceptionList = ExceptionList.getInstance();
   const exceptionMap: { value: string; display: string; selected: boolean;}[] = [];
 
   fullExceptionList.forEach((value, key) => {

@@ -1,37 +1,36 @@
 import I18n from 'i18n-js';
 import { strings } from '../../locales';
 
-const multitonMap = new Map();
+export class ExceptionList {
+  private static readonly multitonMap = new Map();
 
-export const GenerateExceptionList = (function exceptionInstance() {
-  let instance: Map<string, string>;
+   private static instance: Map<string, string>
 
-  function createInstance() {
-    return new Map([
-      ['NP', strings('EXCEPTION.NIL_PICK',)],
-      ['PO', strings('EXCEPTION.PRICE_OVERRIDE')],
-      ['NS', strings('EXCEPTION.NO_SALES')],
-      ['NO', strings('EXCEPTION.NEGATIVE_ON_HANDS')],
-      ['C', strings('EXCEPTION.CANCELLED')],
-      ['NSFL', strings('EXCEPTION.NSFL')]
-    ]);
-  }
+   private constructor() {}
 
-  return {
-    getInstance() {
-      // Creates a new map instance if the current language has not been used yet and translations are available
-      if (!multitonMap.has(I18n.locale) && Object.keys(I18n.translations).length !== 0) {
-        multitonMap.set(I18n.locale, createInstance());
-      }
-      // For Jest TESTS ONLY
-      if (process.env.JEST_WORKER_ID) {
-        multitonMap.set(I18n.locale, createInstance());
-      }
-      instance = multitonMap.get(I18n.locale);
-      return instance;
-    }
-  };
-}());
+   private static createInstance() {
+     return new Map([
+       ['NP', strings('EXCEPTION.NIL_PICK',)],
+       ['PO', strings('EXCEPTION.PRICE_OVERRIDE')],
+       ['NS', strings('EXCEPTION.NO_SALES')],
+       ['NO', strings('EXCEPTION.NEGATIVE_ON_HANDS')],
+       ['C', strings('EXCEPTION.CANCELLED')],
+       ['NSFL', strings('EXCEPTION.NSFL')]
+     ]);
+   }
+
+   public static getInstance(): Map<string, string> {
+     /* Creates a new map instance if the current language has not been used yet and translations are available
+      or if Jest tests are being Ran */
+     if ((!this.multitonMap.has(I18n.locale) && Object.keys(I18n.translations).length !== 0)
+     || process.env.JEST_WORKER_ID) {
+       this.multitonMap.set(I18n.locale, this.createInstance());
+     }
+
+     ExceptionList.instance = this.multitonMap.get(I18n.locale);
+     return ExceptionList.instance;
+   }
+}
 
 export const exceptionTypeToDisplayString = (exceptionType: string):
-string => GenerateExceptionList.getInstance().get(exceptionType) ?? strings('EXCEPTION.UNKNOWN');
+string => ExceptionList.getInstance().get(exceptionType) ?? strings('EXCEPTION.UNKNOWN');
