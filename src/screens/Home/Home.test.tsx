@@ -13,7 +13,7 @@ const navigationProp = {
   navigate: jest.fn()
 };
 
-const defaultAsyncState = {
+const defaultAsyncState: AsyncState = {
   isWaiting: false,
   value: null,
   error: null,
