@@ -1,5 +1,6 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { NavigationProp } from '@react-navigation/native';
 import LocationItemCard from './LocationItemCard';
 
 const mockZoneItem = {
@@ -20,6 +21,7 @@ const mockSectionItem = {
   itemCount: 2,
   palletCount: 4
 };
+let navigationProp: NavigationProp<any>;
 
 describe('Test Location Item Card', () => {
   it('Renders Location Item Card with mock Zone data', () => {
@@ -28,6 +30,8 @@ describe('Test Location Item Card', () => {
       <LocationItemCard
         locationName={mockZoneItem.zoneName}
         locationDetails={`${mockZoneItem.aisleCount} Aisles`}
+        navigator={navigationProp}
+        screenName="Zones"
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -41,6 +45,8 @@ describe('Test Location Item Card', () => {
       <LocationItemCard
         locationName={mockAisleItem.aisleName}
         locationDetails={`${mockAisleItem.sectionCount} Sections`}
+        navigator={navigationProp}
+        screenName="Aisles"
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -54,6 +60,8 @@ describe('Test Location Item Card', () => {
       <LocationItemCard
         locationName={mockSectionItem.sectionName}
         locationDetails={`${mockSectionItem.itemCount} items, ${mockSectionItem.palletCount} pallets`}
+        navigator={navigationProp}
+        screenName="Sections"
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

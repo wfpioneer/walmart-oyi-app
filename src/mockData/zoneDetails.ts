@@ -1,4 +1,4 @@
-import { ZoneItem } from '../models/ZoneItem';
+import { ZoneItem } from '../models/LocationItem';
 
 export const mockZones : ZoneItem[] = [
   {

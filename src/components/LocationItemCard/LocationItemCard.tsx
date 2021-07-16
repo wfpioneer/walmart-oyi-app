@@ -1,18 +1,28 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  NavigationProp
+} from '@react-navigation/native';
 import styles from './LocationItemCard.style';
 import { COLOR } from '../../themes/Color';
 
 interface LocationItemCardProp {
   locationName: string,
-  locationDetails : string
+  locationDetails : string,
+  navigator: NavigationProp<any>,
+  screenName: string
 }
 
 const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
-  const { locationName, locationDetails } = props;
+  const {
+    locationName,
+    locationDetails,
+    navigator,
+    screenName
+  } = props;
   return (
-    <TouchableOpacity style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={() => navigator.navigate(screenName)}>
       <View style={styles.itemContainer}>
         <View style={styles.nameText}>
           <Text>{locationName}</Text>
