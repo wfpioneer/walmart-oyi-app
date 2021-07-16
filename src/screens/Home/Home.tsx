@@ -22,6 +22,7 @@ import { updateFilterExceptions } from '../../state/actions/Worklist';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Button from '../../components/buttons/Button';
+import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
 
 const mapStateToProps = (state: any) => ({
   userName: state.User.additional.displayName,
@@ -178,29 +179,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     const renderWorklistCards = () => data[this.state.activeGoal].worklistTypes
       .map((worklist: { worklistType: string; completedItems: number; totalItems: number }) => {
-        let worklistType: string;
-        switch (worklist.worklistType ? worklist.worklistType.toUpperCase() : '') {
-          case 'NSFL':
-            worklistType = strings('EXCEPTION.NSFL');
-            break;
-          case 'PO':
-            worklistType = strings('EXCEPTION.PRICE_OVERRIDE');
-            break;
-          case 'NP':
-            worklistType = strings('EXCEPTION.NIL_PICK');
-            break;
-          case 'NS':
-            worklistType = strings('EXCEPTION.NO_SALES');
-            break;
-          case 'NO':
-            worklistType = strings('EXCEPTION.NEGATIVE_ON_HANDS');
-            break;
-          case 'C':
-            worklistType = strings('EXCEPTION.CANCELLED');
-            break;
-          default:
-            worklistType = strings('EXCEPTION.UNKNOWN');
-        }
+        const worklistType = exceptionTypeToDisplayString(worklist?.worklistType.toUpperCase() ?? '');
 
         const onWorklistCardPress = () => {
           trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });

@@ -13,7 +13,7 @@ interface CompletedWorklistProps {
     error: any;
     dispatch: Dispatch<any>;
     groupToggle: boolean;
-    updateGroupToggle: (isToggled: boolean) => void;
+    updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
     filterExceptions: string[];
     filterCategories: string[];
     navigation: NavigationProp<any>;
