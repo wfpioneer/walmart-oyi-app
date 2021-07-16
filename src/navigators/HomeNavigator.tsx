@@ -17,18 +17,17 @@ import styles from './HomeNavigator.style';
 import { setLanguage, strings } from '../locales';
 import { logoutUser } from '../state/actions/User';
 import { hideActivityModal, showActivityModal } from '../state/actions/Modal';
-import StyleGuide from '../screens/StyleGuide/StyleGuide';
 import { setManualScan } from '../state/actions/Global';
 import { trackEvent } from '../utils/AppCenterTool';
 import { openCamera } from '../utils/scannerUtils';
 
 interface HomeNavigatorComponentProps {
-  logoutUser: Function;
-  showActivityModal: Function;
-  hideActivityModal: Function;
+  logoutUser: () => void;
+  showActivityModal: () => void;
+  hideActivityModal: () => void;
   navigation: Record<string, any>;
   isManualScanEnabled: boolean;
-  setManualScan: Function;
+  setManualScan: (bool: boolean) => void;
   clubNbr: number;
 }
 
@@ -53,11 +52,7 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
     strings('GENERICS.CANCEL')
   ];
 
-  if (__DEV__) {
-    options.splice(2, 0, strings('HOME.STYLE_GUIDE'));
-  }
-
-  const cancelButtonIndex = __DEV__ ? 3 : 2;
+  const cancelButtonIndex = 2;
   ActionSheet.showActionSheetWithOptions({
     options,
     cancelButtonIndex
@@ -102,16 +97,11 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
           props.hideActivityModal();
         }
       });
-      return;
-    }
-
-    if (buttonIndex === 2 && cancelButtonIndex !== 2) {
-      props.navigation.navigate('Style Guide');
     }
   });
 };
 
-const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: Function) => (
+const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: (bool: boolean) => void) => (
   <TouchableOpacity onPress={() => {
     if (isManualScanEnabled) {
       trackEvent('disable_manual_scan');
@@ -150,22 +140,6 @@ const renderHomeMenuButton = (props: HomeNavigatorComponentProps, navigation: an
   </TouchableOpacity>
 );
 
-const onStyleGuideMenuButtonPress = (navigation: any, route: any) => {
-  const menuOpenParam = route.params.menuOpen;
-  navigation.setParams({ menuOpen: !menuOpenParam });
-};
-
-const renderStyleGuideMenuButton = (navigation: any, route: any) => (
-  <TouchableOpacity onPress={() => onStyleGuideMenuButtonPress(navigation, route)}>
-    <View style={styles.rightButton}>
-      <Image
-        style={styles.image}
-        source={require('../assets/images/hamburger.png')}
-      />
-    </View>
-  </TouchableOpacity>
-);
-
 const renderHomeHeader = (props: HomeNavigatorComponentProps, navigation: any) => {
   const { isManualScanEnabled } = props;
 
@@ -178,7 +152,7 @@ const renderHomeHeader = (props: HomeNavigatorComponentProps, navigation: any) =
   );
 };
 
-export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps) => (
+export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.Element => (
   <Stack.Navigator
     headerMode="float"
     screenOptions={{
@@ -198,14 +172,6 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps) => (
           </View>
         )
       })}
-    />
-    <Stack.Screen
-      name="Style Guide"
-      component={StyleGuide}
-      options={({ navigation, route }) => ({
-        headerRight: () => renderStyleGuideMenuButton(navigation, route)
-      })}
-      initialParams={{ scrollIndex: 0, menuOpen: false }}
     />
   </Stack.Navigator>
 );
