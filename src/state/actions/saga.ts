@@ -1,4 +1,3 @@
-import { AsyncState } from 'src/models/AsyncState';
 import {
   ApprovalListItem, approvalAction, approvalRequestSource, approvalStatus
 } from '../../models/ApprovalListItem';
