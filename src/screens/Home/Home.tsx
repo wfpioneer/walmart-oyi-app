@@ -48,7 +48,7 @@ interface HomeScreenProps {
   setManualScan: (isManualScan: boolean) => void;
   isManualScanEnabled: boolean;
   worklistSummaryApiState: AsyncState;
-  getWorklistSummary: (payload?: any) => void;
+  getWorklistSummary: () => void;
   navigation: StackNavigationProp<any>;
   updateFilterExceptions: (worklistTypes: string[]) => void;
   route: RouteProp<any, string>;
