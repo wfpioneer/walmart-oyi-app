@@ -1,4 +1,6 @@
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
+import { ScrollView } from 'react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import itemDetail from '../../mockData/getItemDetails';
 import {
@@ -10,6 +12,9 @@ import {
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 
+let navigationProp: NavigationProp<any>;
+let routeProp: RouteProp<any, string>;
+let scrollViewProp: React.RefObject<ScrollView>;
 describe('ReviewItemDetailsScreen', () => {
   const defaultAsyncState = {
     isWaiting: false,
@@ -20,8 +25,8 @@ describe('ReviewItemDetailsScreen', () => {
   const mockHandleProps: (HandleProps & RenderProps) = {
     validateSessionCall: jest.fn(() => Promise.resolve()),
     trackEventCall: jest.fn(),
-    navigation: jest.fn(),
-    route: jest.fn(),
+    navigation: navigationProp,
+    route: routeProp,
     dispatch: jest.fn(),
     setOhQtyModalVisible: jest.fn(),
     actionCompleted: false,
@@ -50,16 +55,14 @@ describe('ReviewItemDetailsScreen', () => {
           pendingOnHandsQty={10}
           floorLocations={itemDetail[123].location.floor}
           reserveLocations={itemDetail[123].location.reserve}
-          route={jest.fn()}
+          route={routeProp}
           dispatch={jest.fn()}
-          navigation={jest.fn()}
-          scrollViewRef={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
           isSalesMetricsGraphView={false}
           setIsSalesMetricsGraphView={jest.fn()}
           ohQtyModalVisible={false}
           setOhQtyModalVisible={jest.fn()}
-          completeApiInProgress={false}
-          setCompleteApiInProgress={jest.fn()}
           isRefreshing={false}
           setIsRefreshing={jest.fn()}
           apiStart={0}
@@ -97,16 +100,14 @@ describe('ReviewItemDetailsScreen', () => {
           pendingOnHandsQty={10}
           floorLocations={itemDetail[123].location.floor}
           reserveLocations={itemDetail[123].location.reserve}
-          route={jest.fn()}
+          route={routeProp}
           dispatch={jest.fn()}
-          navigation={jest.fn()}
-          scrollViewRef={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
           isSalesMetricsGraphView={false}
           setIsSalesMetricsGraphView={jest.fn()}
           ohQtyModalVisible={false}
           setOhQtyModalVisible={jest.fn()}
-          completeApiInProgress={false}
-          setCompleteApiInProgress={jest.fn()}
           isRefreshing={false}
           setIsRefreshing={jest.fn()}
           apiStart={0}
@@ -138,16 +139,14 @@ describe('ReviewItemDetailsScreen', () => {
           pendingOnHandsQty={0}
           floorLocations={[]}
           reserveLocations={[]}
-          route={jest.fn()}
+          route={routeProp}
           dispatch={jest.fn()}
-          navigation={jest.fn()}
-          scrollViewRef={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
           isSalesMetricsGraphView={false}
           setIsSalesMetricsGraphView={jest.fn()}
           ohQtyModalVisible={false}
           setOhQtyModalVisible={jest.fn()}
-          completeApiInProgress={false}
-          setCompleteApiInProgress={jest.fn()}
           isRefreshing={false}
           setIsRefreshing={jest.fn()}
           apiStart={0}
@@ -183,16 +182,14 @@ describe('ReviewItemDetailsScreen', () => {
           pendingOnHandsQty={0}
           floorLocations={[]}
           reserveLocations={[]}
-          route={jest.fn()}
+          route={routeProp}
           dispatch={jest.fn()}
-          navigation={jest.fn()}
-          scrollViewRef={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
           isSalesMetricsGraphView={false}
           setIsSalesMetricsGraphView={jest.fn()}
           ohQtyModalVisible={false}
           setOhQtyModalVisible={jest.fn()}
-          completeApiInProgress={false}
-          setCompleteApiInProgress={jest.fn()}
           isRefreshing={false}
           setIsRefreshing={jest.fn()}
           apiStart={0}
@@ -224,16 +221,14 @@ describe('ReviewItemDetailsScreen', () => {
           pendingOnHandsQty={0}
           floorLocations={[]}
           reserveLocations={[]}
-          route={jest.fn()}
+          route={routeProp}
           dispatch={jest.fn()}
-          navigation={jest.fn()}
-          scrollViewRef={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
           isSalesMetricsGraphView={false}
           setIsSalesMetricsGraphView={jest.fn()}
           ohQtyModalVisible={false}
           setOhQtyModalVisible={jest.fn()}
-          completeApiInProgress={false}
-          setCompleteApiInProgress={jest.fn()}
           isRefreshing={false}
           setIsRefreshing={jest.fn()}
           apiStart={0}

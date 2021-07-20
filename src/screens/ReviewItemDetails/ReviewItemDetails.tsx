@@ -53,7 +53,6 @@ export interface ItemDetailsScreenProps {
   scrollViewRef: RefObject<ScrollView>;
   isSalesMetricsGraphView: boolean; setIsSalesMetricsGraphView: React.Dispatch<React.SetStateAction<boolean>>;
   ohQtyModalVisible: boolean; setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  completeApiInProgress: boolean; setCompleteApiInProgress: React.Dispatch<React.SetStateAction<boolean>>;
   errorModalVisible: boolean; setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   isRefreshing: boolean; setIsRefreshing: React.Dispatch<React.SetStateAction<boolean>>;
   apiStart: number; setApiStart: React.Dispatch<React.SetStateAction<number>>;
@@ -325,7 +324,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     scrollViewRef,
     isSalesMetricsGraphView, setIsSalesMetricsGraphView,
     ohQtyModalVisible, setOhQtyModalVisible,
-    completeApiInProgress, setCompleteApiInProgress,
     isRefreshing, setIsRefreshing,
     apiStart, setApiStart,
     errorModalVisible, setErrorModalVisible,
@@ -341,7 +339,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
         setApiStart(moment().valueOf());
         dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-        trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
         dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
       }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
@@ -403,7 +400,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
           if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
             if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
-              trackEventCall('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
               setApiStart(moment().valueOf());
               dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
               dispatch(setManualScan(false));
@@ -424,7 +420,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   // Complete Item Details API
   useEffectHook(() => {
     // on api success
-    if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.result) {
+    if (!completeItemApi.isWaiting && completeItemApi.result) {
       if (_.get(completeItemApi.result, 'status') === 204) {
         trackEventCall('item_details_action_completed_api_success_scan_no_match',
           {
@@ -436,15 +432,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       } else {
         trackEventCall('item_details_action_completed_api_success',
           { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
-        setCompleteApiInProgress(false);
         dispatch(setActionCompleted());
         navigation.goBack();
       }
-      return undefined;
     }
 
     // on api failure
-    if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.error) {
+    if (!completeItemApi.isWaiting && completeItemApi.error) {
       if (completeItemApi.error === COMPLETE_API_409_ERROR) {
         trackEventCall('item_details_action_completed_api_failure_scan_no_match',
           {
@@ -462,17 +456,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           });
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
-      setCompleteApiInProgress(false);
-      return undefined;
     }
-
-    // on api submission
-    if (!completeApiInProgress && completeItemApi.isWaiting) {
-      trackEventCall('item_details_action_completed_api_call', { itemDetails: JSON.stringify(itemDetails) });
-      return setCompleteApiInProgress(true);
-    }
-
-    return undefined;
   }, [completeItemApi]);
 
   useFocusEffectHook(
@@ -514,7 +498,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             onPress={() => {
               setApiStart(moment().valueOf());
               trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
-              trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
           >
@@ -562,7 +545,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       setApiStart(moment().valueOf());
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-      trackEventCall('item_details_api_call', { itemNumber: itemDetails.itemNbr });
       dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
@@ -670,7 +652,6 @@ const ReviewItemDetails = (): JSX.Element => {
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
-  const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [apiStart, setApiStart] = useState(0);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
@@ -697,8 +678,6 @@ const ReviewItemDetails = (): JSX.Element => {
       setIsSalesMetricsGraphView={setIsSalesMetricsGraphView}
       ohQtyModalVisible={ohQtyModalVisible}
       setOhQtyModalVisible={setOhQtyModalVisible}
-      completeApiInProgress={completeApiInProgress}
-      setCompleteApiInProgress={setCompleteApiInProgress}
       isRefreshing={isRefreshing}
       setIsRefreshing={setIsRefreshing}
       apiStart={apiStart}

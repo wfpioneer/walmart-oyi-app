@@ -220,9 +220,6 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
     if (!editAPI.isWaiting && editAPI.result) {
       trackEventCall('select_location_edit_api_success', { duration: moment().valueOf() - apiStart });
       dispatch(editExistingLocation(loc, parseInt(locType, 10), 'floor', currentLocation.locIndex));
-      trackEvent('location_get_location_api_call', {
-        itemNbr: itemLocDetails.itemNbr
-      });
       dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
       navigation.navigate('LocationDetails');
     }
@@ -261,11 +258,9 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
           (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
         );
         if (!sameLoc) {
-          trackEventCall('select_location_add_api_call',
-            { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: locType });
           setApiStart(moment().valueOf());
           dispatch(addLocation({
-            headers: {itemNbr: itemLocDetails.itemNbr},
+            headers: { itemNbr: itemLocDetails.itemNbr },
             upc: itemLocDetails.upcNbr,
             sectionId: loc,
             locationTypeNbr: locType
@@ -280,11 +275,9 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
           (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
         );
         if (!sameLoc) {
-          trackEventCall('select_location_edit_api_call',
-            { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: locType });
           setApiStart(moment().valueOf());
           dispatch(editLocation({
-            headers: {itemNbr: itemLocDetails.itemNbr},
+            headers: { itemNbr: itemLocDetails.itemNbr },
             upc: itemLocDetails.upcNbr,
             sectionId: currentLocation.locationName,
             newSectionId: loc,

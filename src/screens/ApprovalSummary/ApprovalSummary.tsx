@@ -147,7 +147,6 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
   const handleApprovalSubmit = () => {
     validateSessionCall(navigation, route.name).then(() => {
       const actionType = route.name === 'ApproveSummary' ? approvalAction.Approve : approvalAction.Reject;
-      trackEventCall('update_approval_list_api_call', { approvalAction: actionType });
       setApiStart(moment().valueOf());
       dispatch(updateApprovalList({ approvalItems: checkedList, headers: { action: actionType } }));
     });

@@ -175,7 +175,6 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   // Get Approval List Items
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
-      trackEventCall('get_approval_list_api_call');
       setApiStart(moment().valueOf());
       dispatch(getApprovalList({ status: approvalStatus.Pending }));
     }).catch(() => {});

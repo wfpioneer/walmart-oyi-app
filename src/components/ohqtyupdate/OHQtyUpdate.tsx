@@ -96,7 +96,6 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
       basePrice, categoryNbr, itemName, itemNbr, onHandsQty, upcNbr
     } = itemDetails;
     const change = basePrice * (newOHQty - itemDetails.onHandsQty);
-    trackEvent('item_details_update_oh_quantity_api_call', { newOHQty, itemNbr: itemDetails.itemNbr });
     setApiStart(moment().valueOf());
     dispatch(updateOHQty({
       data: {

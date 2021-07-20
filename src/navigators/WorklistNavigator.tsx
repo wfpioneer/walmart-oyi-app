@@ -64,7 +64,6 @@ export const WorklistNavigator = () => {
   const [apiStart, setApiStart] = useState(0);
 
   useEffect(() => navigation.addListener('focus', () => {
-    trackEvent('worklist_items_api_call');
     setApiStart(moment().valueOf());
     dispatch(getWorklist());
   }), [navigation]);

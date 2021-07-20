@@ -54,7 +54,6 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
   // calls the get all zone api
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
-      trackEventCall('get_location_api_call');
       setApiStart(moment().valueOf());
       dispatch(getAllZones());
     }).catch(() => {});

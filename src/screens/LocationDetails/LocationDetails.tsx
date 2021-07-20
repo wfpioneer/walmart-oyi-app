@@ -207,15 +207,10 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
   };
 
   const deleteConfirmed = () => {
-    trackEvent('location_delete_location_api_call', {
-      upc: itemDetails.upcNbr,
-      sectionId: locToConfirm.locationName,
-      locationTypeNbr: locToConfirm.locationTypeNbr
-    });
     setApiStart(moment().valueOf());
     dispatch(
       deleteLocation({
-        headers: {itemNbr: itemDetails.itemNbr},
+        headers: { itemNbr: itemDetails.itemNbr },
         upc: itemDetails.upcNbr,
         sectionId: locToConfirm.locationName,
         locationTypeNbr: locToConfirm.locationTypeNbr

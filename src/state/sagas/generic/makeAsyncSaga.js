@@ -12,8 +12,7 @@ export function makeAsyncSaga(INITIATOR, opActions, service, handleError = _.noo
     const eventName = type.slice(5);
     const eventParams = {
       apiName: eventName,
-      barcode: payload?.id,
-      itemNbr: payload?.itemNbr,
+      itemNbr: payload?.itemNbr || payload?.id,
       duration: payload?.duration,
       itemDetails: JSON.stringify(payload?.itemDetails),
       upc: payload?.upc,
