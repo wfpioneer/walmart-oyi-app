@@ -101,6 +101,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -809,6 +810,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   scrollOffset={0}
   scrollOffsetMax={0}
   scrollTo={null}
+  statusBarTranslucent={false}
   supportedOrientations={
     Array [
       "portrait",
@@ -876,6 +878,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     style={
       Array [
         Object {},
@@ -998,6 +1001,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   scrollOffset={0}
   scrollOffsetMax={0}
   scrollTo={null}
+  statusBarTranslucent={false}
   supportedOrientations={
     Array [
       "portrait",
@@ -1065,6 +1069,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     style={
       Array [
         Object {},
@@ -1166,6 +1171,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   scrollOffset={0}
   scrollOffsetMax={0}
   scrollTo={null}
+  statusBarTranslucent={false}
   supportedOrientations={
     Array [
       "portrait",
@@ -1233,6 +1239,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     style={
       Array [
         Object {},
@@ -1346,6 +1353,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   scrollOffset={0}
   scrollOffsetMax={0}
   scrollTo={null}
+  statusBarTranslucent={false}
   supportedOrientations={
     Array [
       "portrait",
@@ -1413,6 +1421,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     style={
       Array [
         Object {},
