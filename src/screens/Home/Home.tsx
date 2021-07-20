@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
 import {
   ActivityIndicator, EmitterSubscription,
@@ -9,6 +9,8 @@ import moment from 'moment';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AsyncState } from '../../models/AsyncState';
+import { RootState } from '../../state/reducers/RootReducer';
 import styles from './Home.style';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
@@ -24,7 +26,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Button from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   userName: state.User.additional.displayName,
   isManualScanEnabled: state.Global.isManualScanEnabled,
   worklistSummaryApiState: state.async.getWorklistSummary
@@ -37,17 +39,18 @@ const mapDispatchToProps = {
   updateFilterExceptions
 };
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../../package.json');
 
 interface HomeScreenProps {
   userName: string;
-  setScannedEvent: Function;
-  setManualScan: Function;
+  setScannedEvent: (scan: any) => void;
+  setManualScan: (isManualScan: boolean) => void;
   isManualScanEnabled: boolean;
-  worklistSummaryApiState: any;
-  getWorklistSummary: Function;
+  worklistSummaryApiState: AsyncState;
+  getWorklistSummary: () => void;
   navigation: StackNavigationProp<any>;
-  updateFilterExceptions: Function;
+  updateFilterExceptions: (worklistTypes: string[]) => void;
   route: RouteProp<any, string>;
 }
 
@@ -56,20 +59,11 @@ interface HomeScreenState {
   getWorklistStart: number;
   errorModalVisible: boolean;
 }
-type HomeRender =
-| React.ReactElement<any, string | React.JSXElementConstructor<any>>
-| string
-| number
-| {}
-| React.ReactNodeArray
-| React.ReactPortal
-| boolean
-| null
-| undefined;
+
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
   private readonly scannedSubscription: EmitterSubscription;
 
-  private readonly navigationRemoveListener: Function;
+  private readonly navigationRemoveListener: () => void;
 
   constructor(props: HomeScreenProps) {
     super(props);
@@ -106,7 +100,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
   // removed prevState and snapshot from componentDidUpdate, as it appears to be unused.
   // original line read: prevState: Readonly<HomeScreenState>, snapshot?: any
-  componentDidUpdate(prevProps: Readonly<HomeScreenProps>) {
+  componentDidUpdate(prevProps: Readonly<HomeScreenProps>): void {
     if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
       trackEvent('home_worklist_summary_api_failure', {
         errorDetails: this.props.worklistSummaryApiState.error.message
@@ -123,12 +117,12 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     if (this.scannedSubscription) this.scannedSubscription.remove();
     this.navigationRemoveListener();
   }
 
-  render(): HomeRender {
+  render(): ReactNode {
     if (this.props.worklistSummaryApiState.isWaiting) {
       return (
         <View style={[styles.container, styles.safeAreaView]}>
