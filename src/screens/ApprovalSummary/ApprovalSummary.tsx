@@ -14,7 +14,6 @@ import { strings } from '../../locales';
 import styles from './ApprovalSummary.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { ApprovalCategory, approvalAction } from '../../models/ApprovalListItem';
-import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import { resetApprovals } from '../../state/actions/Approvals';
 import COLOR from '../../themes/Color';
@@ -29,13 +28,10 @@ interface ApprovalSummaryProps {
   navigation: NavigationProp<any>;
   approvalList: ApprovalCategory[];
   approvalApi: AsyncState;
-  apiStart: number;
-  setApiStart: React.Dispatch<React.SetStateAction<number>>
   errorModalVisible: boolean;
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   dispatch: Dispatch<any>
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
-  trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
 interface ItemQuantity {
@@ -67,8 +63,8 @@ export const renderErrorModal = (setErrorModalVisible: React.Dispatch<React.SetS
 
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {
   const {
-    route, navigation, approvalList, approvalApi, dispatch, useEffectHook, apiStart, setApiStart,
-    trackEventCall, validateSessionCall, errorModalVisible, setErrorModalVisible
+    route, navigation, approvalList, approvalApi, dispatch, useEffectHook,
+    validateSessionCall, errorModalVisible, setErrorModalVisible
   } = props;
   const checkedList: ApprovalCategory[] = [];
   const resolvedTime = moment().toISOString();
@@ -88,7 +84,6 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
   // Update Approval List Api
   useEffectHook(() => {
     if (!approvalApi.isWaiting && approvalApi.result) {
-      trackEventCall('update_approval_list_api_success', { duration: moment().valueOf() - apiStart });
       dispatch(resetApprovals());
       navigation.navigate({
         name: 'Approval',
@@ -106,10 +101,6 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
 
     // on api failure
     if (!approvalApi.isWaiting && approvalApi.error) {
-      trackEventCall('update_approval_list_api_failure', {
-        errorDetails: approvalApi.error.message || approvalApi.error,
-        duration: moment().valueOf() - apiStart
-      });
       setErrorModalVisible(true);
       dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
     }
@@ -147,7 +138,6 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
   const handleApprovalSubmit = () => {
     validateSessionCall(navigation, route.name).then(() => {
       const actionType = route.name === 'ApproveSummary' ? approvalAction.Approve : approvalAction.Reject;
-      setApiStart(moment().valueOf());
       dispatch(updateApprovalList({ approvalItems: checkedList, headers: { action: actionType } }));
     });
   };
@@ -196,7 +186,6 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
 export const ApprovalSummary = (): JSX.Element => {
   const { approvalList } = useTypedSelector(state => state.Approvals);
   const approvalApi = useTypedSelector(state => state.async.updateApprovalList);
-  const [apiStart, setApiStart] = useState(0);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const route = useRoute();
   const navigation = useNavigation();
@@ -207,11 +196,8 @@ export const ApprovalSummary = (): JSX.Element => {
       navigation={navigation}
       approvalList={approvalList}
       approvalApi={approvalApi}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
       dispatch={dispatch}
       useEffectHook={useEffect}
-      trackEventCall={trackEvent}
       validateSessionCall={validateSession}
       errorModalVisible={errorModalVisible}
       setErrorModalVisible={setErrorModalVisible}

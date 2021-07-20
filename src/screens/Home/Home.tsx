@@ -5,7 +5,6 @@ import {
   Modal,
   SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
-import moment from 'moment';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -56,7 +55,6 @@ interface HomeScreenProps {
 
 interface HomeScreenState {
   activeGoal: number;
-  getWorklistStart: number;
   errorModalVisible: boolean;
 }
 
@@ -68,18 +66,12 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
   constructor(props: HomeScreenProps) {
     super(props);
 
-    this.state = { activeGoal: 0, getWorklistStart: 0, errorModalVisible: false };
+    this.state = { activeGoal: 0, errorModalVisible: false };
 
     // addListener returns a function to remove listener
     this.navigationRemoveListener = this.props.navigation.addListener('focus', () => {
       trackEvent('home_screen_focus');
-      this.setState({
-        getWorklistStart: moment().valueOf()
-      });
       this.props.getWorklistSummary();
-      this.setState({
-        getWorklistStart: moment().valueOf()
-      });
     });
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -98,27 +90,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     });
   }
 
-  // removed prevState and snapshot from componentDidUpdate, as it appears to be unused.
-  // original line read: prevState: Readonly<HomeScreenState>, snapshot?: any
-  componentDidUpdate(prevProps: Readonly<HomeScreenProps>): void {
-    if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.error) {
-      trackEvent('home_worklist_summary_api_failure', {
-        errorDetails: this.props.worklistSummaryApiState.error.message
-          || JSON.stringify(this.props.worklistSummaryApiState.error),
-        duration: moment().valueOf() - this.state.getWorklistStart
-      });
-    }
-
-    if (prevProps.worklistSummaryApiState.isWaiting && this.props.worklistSummaryApiState.result) {
-      trackEvent('home_worklist_summary_api_success', {
-        status: this.props.worklistSummaryApiState.result.status,
-        duration: moment().valueOf() - this.state.getWorklistStart
-      });
-    }
-  }
-
   componentWillUnmount(): void {
-    if (this.scannedSubscription) this.scannedSubscription.remove();
+    if (this.scannedSubscription) { this.scannedSubscription.remove(); }
     this.navigationRemoveListener();
   }
 

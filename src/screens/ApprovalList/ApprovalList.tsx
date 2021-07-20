@@ -1,11 +1,10 @@
-import React, { EffectCallback, useEffect, useState } from 'react';
+import React, { EffectCallback, useEffect } from 'react';
 import {
   ActivityIndicator, BackHandler, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import moment from 'moment';
 import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
@@ -42,8 +41,6 @@ interface ApprovalListProps {
   filteredList: ApprovalCategory[];
   categoryIndices: number[];
   selectedItemQty: number;
-  apiStart: number;
-  setApiStart: React.Dispatch<React.SetStateAction<number>>;
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
@@ -167,15 +164,14 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
 
 export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   const {
-    dispatch, getApprovalApi, trackEventCall, apiStart, setApiStart,
-    useEffectHook, useFocusEffectHook, navigation, route, filteredList,
+    dispatch, getApprovalApi, trackEventCall, useEffectHook,
+    useFocusEffectHook, navigation, route, filteredList,
     categoryIndices, selectedItemQty, validateSessionCall, updateApprovalApi
   } = props;
 
   // Get Approval List Items
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
-      setApiStart(moment().valueOf());
       dispatch(getApprovalList({ status: approvalStatus.Pending }));
     }).catch(() => {});
   }), [navigation]);
@@ -201,20 +197,11 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!getApprovalApi.isWaiting && getApprovalApi.result) {
-      trackEventCall('get_approval_list_api_success', { duration: moment().valueOf() - apiStart });
       const approvalItems: ApprovalListItem[] = (getApprovalApi.result && getApprovalApi.result.data) || [];
       if (approvalItems.length !== 0) {
         const { filteredData, headerIndices } = convertApprovalListData(approvalItems);
         dispatch(setApprovalList(filteredData, headerIndices));
       }
-    }
-
-    // on api failure
-    if (!getApprovalApi.isWaiting && getApprovalApi.error) {
-      trackEventCall('get_approval_list_api_failure', {
-        errorDetails: getApprovalApi.error.message || getApprovalApi.error,
-        duration: moment().valueOf() - apiStart
-      });
     }
   }, [getApprovalApi]);
 
@@ -312,7 +299,6 @@ const ApprovalList = (): JSX.Element => {
   const getApprovalApi = useTypedSelector(state => state.async.getApprovalList);
   const updateApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
   const { approvalList, categoryIndices, selectedItemQty } = useTypedSelector(state => state.Approvals);
-  const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -323,8 +309,6 @@ const ApprovalList = (): JSX.Element => {
       dispatch={dispatch}
       getApprovalApi={getApprovalApi}
       updateApprovalApi={updateApprovalApi}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
       navigation={navigation}
       route={route}
       useEffectHook={useEffect}

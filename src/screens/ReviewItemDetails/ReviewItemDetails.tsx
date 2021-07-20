@@ -55,7 +55,6 @@ export interface ItemDetailsScreenProps {
   ohQtyModalVisible: boolean; setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   errorModalVisible: boolean; setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   isRefreshing: boolean; setIsRefreshing: React.Dispatch<React.SetStateAction<boolean>>;
-  apiStart: number; setApiStart: React.Dispatch<React.SetStateAction<number>>;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
@@ -325,7 +324,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     isSalesMetricsGraphView, setIsSalesMetricsGraphView,
     ohQtyModalVisible, setOhQtyModalVisible,
     isRefreshing, setIsRefreshing,
-    apiStart, setApiStart,
     errorModalVisible, setErrorModalVisible,
     trackEventCall,
     validateSessionCall,
@@ -337,39 +335,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     if (navigation.isFocused()) {
       validateSessionCall(navigation, route.name).then(() => {
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
-        setApiStart(moment().valueOf());
         dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
         dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
       }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
     }
   }, [scannedEvent]);
-
-  // Get Item Details API
-  useEffectHook(() => {
-    if (error) {
-      trackEventCall('item_details_api_failure',
-        {
-          barcode: scannedEvent.value,
-          errorDetails: error.message || JSON.stringify(error),
-          duration: moment().valueOf() - apiStart
-        });
-    }
-
-    if (_.get(result, 'status') === 204) {
-      trackEventCall('item_details_api_not_found',
-        { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
-    }
-
-    if (_.get(result, 'status') === 200) {
-      trackEventCall('item_details_api_success',
-        { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
-    }
-
-    if (isRefreshing) {
-      setIsRefreshing(false);
-    }
-  }, [error, result]);
 
   const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
   const locationCount = (floorLocations?.length ?? 0) + (reserveLocations?.length ?? 0);
@@ -400,7 +371,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
           if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
             if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
-              setApiStart(moment().valueOf());
               dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
               dispatch(setManualScan(false));
             } else {
@@ -422,16 +392,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     // on api success
     if (!completeItemApi.isWaiting && completeItemApi.result) {
       if (_.get(completeItemApi.result, 'status') === 204) {
-        trackEventCall('item_details_action_completed_api_success_scan_no_match',
-          {
-            itemDetails: JSON.stringify(itemDetails),
-            duration: moment().valueOf() - apiStart,
-            status: result.status
-          });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEventCall('item_details_action_completed_api_success',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         dispatch(setActionCompleted());
         navigation.goBack();
       }
@@ -440,20 +402,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     // on api failure
     if (!completeItemApi.isWaiting && completeItemApi.error) {
       if (completeItemApi.error === COMPLETE_API_409_ERROR) {
-        trackEventCall('item_details_action_completed_api_failure_scan_no_match',
-          {
-            itemDetails: JSON.stringify(itemDetails),
-            duration: moment().valueOf() - apiStart,
-            errorDetails: completeItemApi.error.message || completeItemApi.error
-          });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEventCall('item_details_action_completed_api_failure',
-          {
-            itemDetails: JSON.stringify(itemDetails),
-            duration: moment().valueOf() - apiStart,
-            errorDetails: completeItemApi.error.message || completeItemApi.error
-          });
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
     }
@@ -496,7 +446,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           <TouchableOpacity
             style={styles.errorButton}
             onPress={() => {
-              setApiStart(moment().valueOf());
               trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
@@ -542,7 +491,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
       setIsRefreshing(true);
-      setApiStart(moment().valueOf());
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
       dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }));
@@ -653,7 +601,6 @@ const ReviewItemDetails = (): JSX.Element => {
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [apiStart, setApiStart] = useState(0);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   return (
     <ReviewItemDetailsScreen
@@ -680,8 +627,6 @@ const ReviewItemDetails = (): JSX.Element => {
       setOhQtyModalVisible={setOhQtyModalVisible}
       isRefreshing={isRefreshing}
       setIsRefreshing={setIsRefreshing}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
       errorModalVisible={errorModalVisible}
       setErrorModalVisible={setErrorModalVisible}
       trackEventCall={trackEvent}

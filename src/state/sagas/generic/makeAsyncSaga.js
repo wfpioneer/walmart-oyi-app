@@ -2,6 +2,7 @@ import {
   call, put, takeLatest
 } from 'redux-saga/effects';
 import _ from 'lodash';
+import moment from 'moment';
 import { trackEvent } from '../../../utils/AppCenterTool';
 
 export function makeAsyncSaga(INITIATOR, opActions, service, handleError = _.noop) {
@@ -23,6 +24,7 @@ export function makeAsyncSaga(INITIATOR, opActions, service, handleError = _.noo
       status: payload?.status,
       onHandsItem: JSON.stringify(payload?.data)
     };
+    const apiStart = moment().valueOf();
     if (!initiatesUsingOpAction) {
       // If we decide to remove saga actions, then this put goes away
 
@@ -32,13 +34,16 @@ export function makeAsyncSaga(INITIATOR, opActions, service, handleError = _.noo
 
     try {
       const serviceResult = yield call(service, payload);
+      const duration = moment().valueOf() - apiStart;
 
-      trackEvent('API_SUCCESS', { ...eventParams, statusCode: serviceResult.status });
+      trackEvent('API_SUCCESS', { ...eventParams, duration, statusCode: serviceResult.status });
       yield put(opActions.succeed(serviceResult));
 
       return serviceResult;
     } catch (error) {
-      trackEvent('API_FAIL', { ...eventParams, errorDetails: error.message || JSON.stringify(error) });
+      const duration = moment().valueOf() - apiStart;
+
+      trackEvent('API_FAIL', { ...eventParams, duration, errorDetails: error.message || JSON.stringify(error) });
       yield put(opActions.fail(error));
       yield call(handleError, error);
 

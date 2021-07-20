@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   NavigationProp, Route, useNavigation, useRoute
@@ -7,7 +7,6 @@ import {
   ActivityIndicator, Modal, SafeAreaView, ScrollView, Text, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import moment from 'moment';
 import { Dispatch } from 'redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -24,47 +23,12 @@ import COLOR from '../../themes/Color';
 import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
 import Button from '../../components/buttons/Button';
 
-export const PrintQueue = () => {
-  const { printQueue, selectedPrinter } = useTypedSelector(state => state.Print);
-  const printAPI = useTypedSelector(state => state.async.printSign);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const route = useRoute();
-  const [itemIndexToEdit, setItemIndexToEdit] = useState(-1);
-  const [apiInProgress, setAPIInProgress] = useState(false);
-  const [error, setError] = useState({ error: false, message: '' });
-  const [apiStart, setApiStart] = useState(0);
-
-  return (
-    <PrintQueueScreen
-      printQueue={printQueue}
-      selectedPrinter={selectedPrinter}
-      printAPI={printAPI}
-      dispatch={dispatch}
-      navigation={navigation}
-      route={route}
-      itemIndexToEdit={itemIndexToEdit}
-      setItemIndexToEdit={setItemIndexToEdit}
-      apiInProgress={apiInProgress}
-      setAPIInProgress={setAPIInProgress}
-      error={error}
-      setError={setError}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      trackEventCall={trackEvent}
-      validateSessionCall={validateSession}
-      useEffectHook={useEffect}
-    />
-  );
-};
-
 interface HandlePrintProps {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: Route<any>;
   printQueue: PrintQueueItem[];
   selectedPrinter: Printer;
-  setApiStart: Function;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
@@ -81,24 +45,22 @@ interface PrintQueueScreenProps {
   navigation: NavigationProp<any>;
   route: Route<any>;
   itemIndexToEdit: number;
-  setItemIndexToEdit: Function;
-  apiInProgress: boolean; setAPIInProgress: Function;
+  setItemIndexToEdit: React.Dispatch<React.SetStateAction<number>>;
   error: { error: boolean; message: string };
-  setError: Function;
-  apiStart: number; setApiStart: Function;
+  setError: React.Dispatch<React.SetStateAction<{error: boolean; message: string;}>>;
   trackEventCall: (eventName: string, params?: any) => void;
-  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
-  useEffectHook: Function;
-};
+  validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+}
 
 export const renderPrintItem = (
   printQueue: PrintQueueItem[],
-  setItemIndexToEdit: Function,
+  setItemIndexToEdit: React.Dispatch<React.SetStateAction<number>>,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   route: Route<any>,
-  validateSessionCall: Function
-) => {
+  validateSessionCall: (nav: NavigationProp<any>, routeName?: string) => Promise<void>,
+): JSX.Element[] => {
   const handleEditAction = (index: number) => () => {
     setItemIndexToEdit(index);
   };
@@ -141,14 +103,13 @@ export const renderPrintItem = (
   ));
 };
 
-export const handlePrint = (props: HandlePrintProps) => {
+export const handlePrint = (props: HandlePrintProps): void => {
   const {
     validateSessionCall,
     navigation,
     route,
     printQueue,
     selectedPrinter,
-    setApiStart,
     trackEventCall,
     dispatch
   } = props;
@@ -168,7 +129,6 @@ export const handlePrint = (props: HandlePrintProps) => {
         workListTypeCode: worklistType
       };
     });
-    setApiStart(moment().valueOf());
     trackEventCall('print_queue', { queue: JSON.stringify(printArray) });
     dispatch(printSign({
       printlist: printArray
@@ -176,9 +136,7 @@ export const handlePrint = (props: HandlePrintProps) => {
   }).catch(() => {});
 };
 
-export const PrintQueueScreen = (
-  props: PrintQueueScreenProps
-) => {
+export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
   const {
     printQueue,
     selectedPrinter,
@@ -188,10 +146,7 @@ export const PrintQueueScreen = (
     route,
     itemIndexToEdit,
     setItemIndexToEdit,
-    apiInProgress, setAPIInProgress,
     error, setError,
-    apiStart,
-    setApiStart,
     trackEventCall,
     validateSessionCall,
     useEffectHook
@@ -199,27 +154,20 @@ export const PrintQueueScreen = (
   // Print API (Queue)
   useEffectHook(() => {
     // on api success
-    if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
-      trackEventCall('print_queue_api_success', { duration: moment().valueOf() - apiStart });
-      setAPIInProgress(false);
+    if (!printAPI.isWaiting && printAPI.result) {
       dispatch(setPrintQueue([]));
       navigation.goBack();
       return undefined;
     }
 
     // on api failure
-    if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
-      trackEventCall('print_queue_api_failure', {
-        errorDetails: printAPI.error.message || JSON.stringify(printAPI.error), duration: moment().valueOf() - apiStart
-      });
-      setAPIInProgress(false);
+    if (!printAPI.isWaiting && printAPI.error) {
       return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
 
     // on api submission
-    if (!apiInProgress && printAPI.isWaiting) {
+    if (printAPI.isWaiting) {
       setError({ error: false, message: '' });
-      return setAPIInProgress(true);
     }
 
     return undefined;
@@ -290,7 +238,6 @@ export const PrintQueueScreen = (
                 selectedPrinter,
                 printQueue,
                 route,
-                setApiStart,
                 trackEventCall,
                 validateSessionCall
               })}
@@ -300,6 +247,34 @@ export const PrintQueueScreen = (
         )}
       </SafeAreaView>
     )
+  );
+};
+
+export const PrintQueue = (): JSX.Element => {
+  const { printQueue, selectedPrinter } = useTypedSelector(state => state.Print);
+  const printAPI = useTypedSelector(state => state.async.printSign);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const route = useRoute();
+  const [itemIndexToEdit, setItemIndexToEdit] = useState(-1);
+  const [error, setError] = useState({ error: false, message: '' });
+
+  return (
+    <PrintQueueScreen
+      printQueue={printQueue}
+      selectedPrinter={selectedPrinter}
+      printAPI={printAPI}
+      dispatch={dispatch}
+      navigation={navigation}
+      route={route}
+      itemIndexToEdit={itemIndexToEdit}
+      setItemIndexToEdit={setItemIndexToEdit}
+      error={error}
+      setError={setError}
+      trackEventCall={trackEvent}
+      validateSessionCall={validateSession}
+      useEffectHook={useEffect}
+    />
   );
 };
 export default PrintQueue;
