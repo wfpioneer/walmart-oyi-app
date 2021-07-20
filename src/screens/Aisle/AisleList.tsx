@@ -33,7 +33,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
   return (
     <View>
       <LocationHeader
-        location="Zone ABC"
+        location="Zone G - Grocery"
         details={`${getMockData.length} ${strings('LOCATION.AISLES')}`}
       />
 
