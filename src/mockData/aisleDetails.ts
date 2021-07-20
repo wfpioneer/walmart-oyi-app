@@ -1,4 +1,4 @@
-import { AisleItem } from '../models/LocationItem';
+import { AisleItem } from '../models/LocationItems';
 
 export const mockAisles: AisleItem[] = [
   {

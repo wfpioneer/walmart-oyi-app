@@ -11,7 +11,7 @@ interface LocationItemCardProp {
   locationName: string,
   locationDetails : string,
   navigator: NavigationProp<any>,
-  screenName: string
+  destinationScreen: string
 }
 
 const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
@@ -19,10 +19,10 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
     locationName,
     locationDetails,
     navigator,
-    screenName
+    destinationScreen
   } = props;
   return (
-    <TouchableOpacity style={styles.item} onPress={() => navigator.navigate(screenName)}>
+    <TouchableOpacity style={styles.item} onPress={() => navigator.navigate(destinationScreen)}>
       <View style={styles.itemContainer}>
         <View style={styles.nameText}>
           <Text>{locationName}</Text>

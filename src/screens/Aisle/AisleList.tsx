@@ -10,7 +10,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
 import { LocationHeader } from '../../components/locationHeader/LocationHeader';
-import { AisleItem } from '../../models/LocationItem';
+import { AisleItem } from '../../models/LocationItems';
 import { mockAisles } from '../../mockData/aisleDetails';
 
 const NoAisleMessage = () : JSX.Element => (
@@ -20,14 +20,12 @@ const NoAisleMessage = () : JSX.Element => (
 );
 
 interface AisleProps {
-    siteId: number,
     getMockData: AisleItem[],
     navigation: NavigationProp<any>
 }
 
 export const AisleScreen = (props: AisleProps) : JSX.Element => {
   const {
-    siteId,
     getMockData,
     navigation
   } = props;
@@ -35,7 +33,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
   return (
     <View>
       <LocationHeader
-        location={`${strings('GENERICS.CLUB')} ${siteId}`}
+        location="Zone ABC"
         details={`${getMockData.length} ${strings('LOCATION.AISLES')}`}
       />
 
@@ -46,7 +44,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
             locationName={item.aisleName}
             locationDetails={`${item.sectionCount} ${strings('LOCATION.SECTIONS')}`}
             navigator={navigation}
-            screenName="Sections"
+            destinationScreen="Sections"
           />
         )}
         keyExtractor={item => item.aisleName}
@@ -57,12 +55,10 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
 };
 
 const AisleList = (): JSX.Element => {
-  const siteId = useTypedSelector(state => state.User.siteId);
   const navigation = useNavigation();
 
   return (
     <AisleScreen
-      siteId={siteId}
       getMockData={mockAisles}
       navigation={navigation}
     />

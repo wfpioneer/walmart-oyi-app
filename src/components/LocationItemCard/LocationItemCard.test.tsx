@@ -31,7 +31,7 @@ describe('Test Location Item Card', () => {
         locationName={mockZoneItem.zoneName}
         locationDetails={`${mockZoneItem.aisleCount} Aisles`}
         navigator={navigationProp}
-        screenName="Zones"
+        destinationScreen="Zones"
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -46,7 +46,7 @@ describe('Test Location Item Card', () => {
         locationName={mockAisleItem.aisleName}
         locationDetails={`${mockAisleItem.sectionCount} Sections`}
         navigator={navigationProp}
-        screenName="Aisles"
+        destinationScreen="Aisles"
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -61,7 +61,7 @@ describe('Test Location Item Card', () => {
         locationName={mockSectionItem.sectionName}
         locationDetails={`${mockSectionItem.itemCount} items, ${mockSectionItem.palletCount} pallets`}
         navigator={navigationProp}
-        screenName="Sections"
+        destinationScreen="Sections"
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
