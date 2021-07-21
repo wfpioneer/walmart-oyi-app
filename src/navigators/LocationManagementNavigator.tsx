@@ -4,6 +4,7 @@ import { Text } from 'react-native';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
 import ZoneList from '../screens/Zone/ZoneList';
+import AisleList from '../screens/Aisle/AisleList';
 
 const Stack = createStackNavigator();
 
@@ -25,7 +26,7 @@ export const LocationManagementNavigatorStack = (): JSX.Element => (
     />
     <Stack.Screen
       name="Aisles"
-      component={() => (<Text>Aisles</Text>)} // Create a screen and replace me!
+      component={AisleList}
       options={{
         headerTitle: strings('LOCATION.AISLES')
       }}

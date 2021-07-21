@@ -96,6 +96,8 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
           <LocationItemCard
             locationName={item.zoneName}
             locationDetails={`${item.aisleCount} ${strings('LOCATION.AISLES')}`}
+            navigator={navigation}
+            destinationScreen="Aisles"
           />
         )}
         keyExtractor={item => item.zoneName}
