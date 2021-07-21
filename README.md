@@ -33,6 +33,7 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
 * Using a version manager like [Node Version Manager](https://github.com/nvm-sh/nvm) makes it simple to manage node versions
   * the command `nvm ls-remote --lts` will list all available stable versions of node
   * to install a desired version, use `nvm install` eg: `nvm install 14.17.3`
+  * to set it as your default node version, use `nvm alias default` eg: `nvm alias default 14.17.3`
   * after installing a new version, get the latest version of NPM via `npm install -g npm`
 
 ### To run the app
