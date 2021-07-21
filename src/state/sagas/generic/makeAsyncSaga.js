@@ -40,8 +40,13 @@ export function makeAsyncSaga(INITIATOR, opActions, service, handleError = _.noo
     try {
       const serviceResult = yield call(service, payload);
       const duration = moment().valueOf() - apiStart;
-
-      trackEvent('API_SUCCESS', { ...eventParams, duration, statusCode: serviceResult.status });
+      let getFluffyResult;
+      if (eventName.includes('FLUFFY')) {
+        getFluffyResult = serviceResult.data;
+      }
+      trackEvent('API_SUCCESS', {
+        ...eventParams, duration, statusCode: serviceResult.status, fluffyRoles: getFluffyResult
+      });
       yield put(opActions.succeed(serviceResult));
 
       return serviceResult;

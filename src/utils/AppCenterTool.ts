@@ -15,9 +15,9 @@ export const initialize = (): void => {
 export const trackEvent = (eventName: string, params: any = {}): void => {
   const userState = store.getState().User;
   // Removes undefined values from the event properties
-  const removeEmptyParams = Object.fromEntries(Object.entries(params).filter(([k, v]) => v !== undefined));
+  const cleanedParams = Object.fromEntries(Object.entries(params).filter(([k, v]) => v !== undefined));
   const submitParams = {
-    ...removeEmptyParams,
+    ...cleanedParams,
     userId: userState.userId,
     clubId: userState.siteId.toString(),
     country: userState.countryCode
