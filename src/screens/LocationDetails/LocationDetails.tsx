@@ -35,8 +35,6 @@ interface LocationDetailsProps {
     upcNbr: string;
     exceptionType: string;
   };
-  apiError: boolean;
-  setApiError: React.Dispatch<React.SetStateAction<boolean>>;
   delAPI: AsyncState
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -61,7 +59,6 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     delAPI,
     dispatch,
     displayConfirmation,
-    apiError,
     floorLocations,
     reserveLocations,
     itemDetails,
@@ -70,7 +67,6 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     navigation,
     route,
     setDisplayConfirmation,
-    setApiError,
     setLocToConfirm,
     useEffectHook
   } = props;
@@ -81,16 +77,6 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     if (!delAPI.isWaiting && delAPI.result) {
       dispatch(deleteLocationFromExisting(locToConfirm.locationArea, locToConfirm.locationIndex));
       setDisplayConfirmation(false);
-    }
-
-    // on api failure
-    if (!delAPI.isWaiting && delAPI.error) {
-      setApiError(true);
-    }
-
-    // on api submission
-    if (delAPI.isWaiting) {
-      setApiError(false);
     }
   }, [delAPI]);
 
@@ -105,14 +91,6 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
         if (locDetails.location.floor) dispatch(setFloorLocations(locDetails.location.floor));
         if (locDetails.location.reserve) dispatch(setReserveLocations(locDetails.location.reserve));
       }
-    }
-    // on api failure
-    else if (!locationsApi.isWaiting && locationsApi.error) {
-      setApiError(true);
-    }
-    // on api submission
-    else if (locationsApi.isWaiting) {
-      setApiError(false);
     }
   }, [locationsApi]);
 
@@ -193,7 +171,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
           ) : (
             <>
               <Text style={styles.message}>
-                {apiError
+                {delAPI.error
                   ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
                   : `${strings('LOCATION.DELETE_CONFIRMATION')}${
                     locToConfirm.locationName
@@ -208,7 +186,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
                 />
                 <Button
                   style={styles.delButton}
-                  title={apiError ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+                  title={delAPI.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
                   backgroundColor={COLOR.MAIN_THEME_COLOR}
                   onPress={deleteConfirmed}
                 />
@@ -252,7 +230,6 @@ const LocationDetails = (): JSX.Element => {
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
   const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
   const itemDetails = useTypedSelector(state => state.Location.itemLocDetails);
-  const [apiError, setApiError] = useState(false);
   const delAPI = useTypedSelector(state => state.async.deleteLocation);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
@@ -264,7 +241,6 @@ const LocationDetails = (): JSX.Element => {
       delAPI={delAPI}
       dispatch={dispatch}
       displayConfirmation={displayConfirmation}
-      apiError={apiError}
       floorLocations={floorLocations}
       reserveLocations={reserveLocations}
       itemDetails={itemDetails}
@@ -273,7 +249,6 @@ const LocationDetails = (): JSX.Element => {
       navigation={navigation}
       route={route}
       setDisplayConfirmation={setDisplayConfirmation}
-      setApiError={setApiError}
       setLocToConfirm={setLocToConfirm}
       useEffectHook={useEffect}
     />
