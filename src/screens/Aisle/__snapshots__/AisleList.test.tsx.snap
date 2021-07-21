@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Aisle List Renders Aisle Screen with Data 1`] = `
+<View>
+  <LocationHeader
+    details="6 [missing \\"en.LOCATION.AISLES\\" translation]"
+    location="Zone G - Grocery"
+  />
+  <FlatList
+    ListEmptyComponent={<NoAisleMessage />}
+    data={
+      Array [
+        Object {
+          "aisleId": 1,
+          "aisleName": "Aisle 1",
+          "sectionCount": 30,
+        },
+        Object {
+          "aisleId": 2,
+          "aisleName": "Aisle 2",
+          "sectionCount": 0,
+        },
+        Object {
+          "aisleId": 3,
+          "aisleName": "Aisle 3",
+          "sectionCount": 2,
+        },
+        Object {
+          "aisleId": 4,
+          "aisleName": "Aisle 4",
+          "sectionCount": 2,
+        },
+        Object {
+          "aisleId": 5,
+          "aisleName": "Aisle 5",
+          "sectionCount": 30,
+        },
+        Object {
+          "aisleId": 6,
+          "aisleName": "Aisle 6",
+          "sectionCount": 0,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`Test Aisle List Renders Aisle Screen with Empty Data 1`] = `
+<View>
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
+    location="Zone G - Grocery"
+  />
+  <FlatList
+    ListEmptyComponent={<NoAisleMessage />}
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;

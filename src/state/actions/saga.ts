@@ -1,4 +1,3 @@
-import { AsyncState } from 'src/models/AsyncState';
 import {
   ApprovalListItem, approvalAction, approvalRequestSource, approvalStatus
 } from '../../models/ApprovalListItem';
@@ -30,7 +29,7 @@ export const editLocation = (payload: any) => ({ type: EDIT_LOCATION, payload } 
 export const addLocation = (payload: any) => ({ type: ADD_LOCATION, payload } as const);
 export const updateOHQty = (payload: { data: Partial<ApprovalListItem>}) => ({ type: UPDATE_OH_QTY, payload } as const);
 export const addToPicklist = (payload: any) => ({ type: ADD_TO_PICKLIST, payload } as const);
-export const getWorklistSummary = (payload: any) => ({ type: GET_WORKLIST_SUMMARY, payload } as const);
+export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
 export const deleteLocation = (payload: any) => ({ type: DELETE_LOCATION, payload } as const);
 export const noAction = (payload: any) => ({ type: NO_ACTION, payload } as const);
 export const printSign = (payload: any) => ({ type: PRINT_SIGN, payload } as const);
