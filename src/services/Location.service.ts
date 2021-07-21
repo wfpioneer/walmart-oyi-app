@@ -10,4 +10,12 @@ export default class LocationService {
       undefined,
     );
   }
+
+  public static getAisle() : Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.locationUrl}/zone`,
+      undefined,
+    );
+  }
 }
