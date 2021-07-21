@@ -27,6 +27,7 @@ import {
 import { printSign } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { AsyncState } from '../../models/AsyncState';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -80,12 +81,7 @@ interface PriceSignProps {
   exceptionType: string;
   actionCompleted: boolean;
   result: any;
-  printAPI: {
-    isWaiting: boolean;
-    value: any;
-    error: any;
-    result: any;
-  };
+  printAPI: AsyncState
   selectedPrinter: Printer;
   selectedSignType: LaserPaper | PortablePaper;
   printQueue: PrintQueueItem[];

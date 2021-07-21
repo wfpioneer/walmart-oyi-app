@@ -22,6 +22,7 @@ import IconButton from '../../components/buttons/IconButton';
 import COLOR from '../../themes/Color';
 import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
 import Button from '../../components/buttons/Button';
+import { AsyncState } from '../../models/AsyncState';
 
 interface HandlePrintProps {
   dispatch: Dispatch<any>;
@@ -29,18 +30,12 @@ interface HandlePrintProps {
   route: Route<any>;
   printQueue: PrintQueueItem[];
   selectedPrinter: Printer;
-  trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
 interface PrintQueueScreenProps {
   printQueue: PrintQueueItem[];
   selectedPrinter: Printer;
-  printAPI: {
-    isWaiting: boolean;
-    value: any;
-    error: any;
-    result: any;
-  };
+  printAPI: AsyncState
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: Route<any>;
@@ -110,7 +105,6 @@ export const handlePrint = (props: HandlePrintProps): void => {
     route,
     printQueue,
     selectedPrinter,
-    trackEventCall,
     dispatch
   } = props;
   validateSessionCall(navigation, route.name).then(() => {
@@ -129,7 +123,6 @@ export const handlePrint = (props: HandlePrintProps): void => {
         workListTypeCode: worklistType
       };
     });
-    trackEventCall('print_queue', { queue: JSON.stringify(printArray) });
     dispatch(printSign({
       printlist: printArray
     }));
@@ -238,7 +231,6 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
                 selectedPrinter,
                 printQueue,
                 route,
-                trackEventCall,
                 validateSessionCall
               })}
               disabled={printQueue.length < 1}

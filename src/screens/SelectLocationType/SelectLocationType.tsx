@@ -23,6 +23,7 @@ import styles from './SelectLocationType.style';
 import { COLOR } from '../../themes/Color';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { AsyncState } from '../../models/AsyncState';
 
 interface LocParams {
   currentLocation?: Location;
@@ -35,22 +36,9 @@ export enum LOCATION_TYPES {
   END_CAP = '12',
   POD = '13'
 }
-export type LocTypes = {
-  SALES_FLOOR: '8',
-  DISPLAY:'11',
-  END_CAP: '12',
-  POD: '13'
- }
-
-interface AsyncState {
-  isWaiting: boolean;
-  error: any;
-  result: any;
-  value: any;
-}
 
 interface SelectLocationProps {
-  locType:string;
+  locType: string;
   setLocType: React.Dispatch<React.SetStateAction<string>>;
   inputLocation: boolean;
   setInputLocation: React.Dispatch<React.SetStateAction<boolean>>;

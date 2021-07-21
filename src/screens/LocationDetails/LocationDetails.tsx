@@ -22,6 +22,7 @@ import {
 import { deleteLocation } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { AsyncState } from '../../models/AsyncState';
 
 interface LocationDetailsProps {
   navigation: NavigationProp<any>;
@@ -34,16 +35,9 @@ interface LocationDetailsProps {
     upcNbr: string;
     exceptionType: string;
   };
-  apiInProgress: boolean;
-  setAPIInProgress: React.Dispatch<React.SetStateAction<boolean>>;
   apiError: boolean;
   setApiError: React.Dispatch<React.SetStateAction<boolean>>;
-  delAPI: {
-    isWaiting: boolean;
-    value: any;
-    error: any;
-    result: any;
-  };
+  delAPI: AsyncState
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
   locToConfirm: {
@@ -58,18 +52,12 @@ interface LocationDetailsProps {
     locationIndex: number;
     locationTypeNbr: number;
   }>>;
-  locationsApi: {
-    isWaiting: boolean;
-    value: any;
-    error: any;
-    result: any;
-  };
+  locationsApi: AsyncState
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
 
 export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element => {
   const {
-    apiInProgress,
     delAPI,
     dispatch,
     displayConfirmation,
@@ -81,7 +69,6 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     locationsApi,
     navigation,
     route,
-    setAPIInProgress,
     setDisplayConfirmation,
     setApiError,
     setLocToConfirm,
@@ -91,22 +78,19 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
   // Delete Location API
   useEffectHook(() => {
     // on api success
-    if (apiInProgress && delAPI.isWaiting === false && delAPI.result) {
+    if (!delAPI.isWaiting && delAPI.result) {
       dispatch(deleteLocationFromExisting(locToConfirm.locationArea, locToConfirm.locationIndex));
-      setAPIInProgress(false);
       setDisplayConfirmation(false);
     }
 
     // on api failure
-    if (apiInProgress && delAPI.isWaiting === false && delAPI.error) {
-      setAPIInProgress(false);
+    if (!delAPI.isWaiting && delAPI.error) {
       setApiError(true);
     }
 
     // on api submission
-    if (!apiInProgress && delAPI.isWaiting) {
+    if (delAPI.isWaiting) {
       setApiError(false);
-      setAPIInProgress(true);
     }
   }, [delAPI]);
 
@@ -121,7 +105,6 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
         if (locDetails.location.floor) dispatch(setFloorLocations(locDetails.location.floor));
         if (locDetails.location.reserve) dispatch(setReserveLocations(locDetails.location.reserve));
       }
-      setAPIInProgress(false);
     }
     // on api failure
     else if (!locationsApi.isWaiting && locationsApi.error) {
@@ -269,7 +252,6 @@ const LocationDetails = (): JSX.Element => {
   const floorLocations = useTypedSelector(state => state.Location.floorLocations);
   const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
   const itemDetails = useTypedSelector(state => state.Location.itemLocDetails);
-  const [apiInProgress, setAPIInProgress] = useState(false);
   const [apiError, setApiError] = useState(false);
   const delAPI = useTypedSelector(state => state.async.deleteLocation);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
@@ -279,7 +261,6 @@ const LocationDetails = (): JSX.Element => {
   const locations = useTypedSelector(state => state.async.getLocation);
   return (
     <LocationDetailsScreen
-      apiInProgress={apiInProgress}
       delAPI={delAPI}
       dispatch={dispatch}
       displayConfirmation={displayConfirmation}
@@ -291,7 +272,6 @@ const LocationDetails = (): JSX.Element => {
       locationsApi={locations}
       navigation={navigation}
       route={route}
-      setAPIInProgress={setAPIInProgress}
       setDisplayConfirmation={setDisplayConfirmation}
       setApiError={setApiError}
       setLocToConfirm={setLocToConfirm}

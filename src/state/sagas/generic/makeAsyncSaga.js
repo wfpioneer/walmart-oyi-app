@@ -10,7 +10,11 @@ export function makeAsyncSaga(INITIATOR, opActions, service, handleError = _.noo
 
   function* worker(initiationAction = {}) {
     const { payload, type } = initiationAction;
+    // Removes SAGA from saga action type
     const eventName = type.slice(5);
+    /* Tracks the request payload data that is sent from saga.ts Actions.
+       New payload data should be added here for tracking if they don't already exist
+    */
     const eventParams = {
       apiName: eventName,
       itemNbr: payload?.itemNbr || payload?.id,
@@ -22,7 +26,8 @@ export function makeAsyncSaga(INITIATOR, opActions, service, handleError = _.noo
       approvalAction: payload?.headers?.action,
       scannedValue: payload?.scannedValue,
       status: payload?.status,
-      onHandsItem: JSON.stringify(payload?.data)
+      onHandsItem: JSON.stringify(payload?.data),
+      printQueue: JSON.stringify(payload?.printList)
     };
     const apiStart = moment().valueOf();
     if (!initiatesUsingOpAction) {

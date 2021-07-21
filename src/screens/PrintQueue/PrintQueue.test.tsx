@@ -241,20 +241,6 @@ describe('PrintQueueScreen', () => {
     });
   });
   describe('HandlePrint', () => {
-    it('calls handlePrint trackEventCall', async () => {
-      const trackEventCall = jest.fn();
-      await handlePrint({
-        validateSessionCall: jest.fn(() => Promise.resolve()),
-        dispatch: jest.fn(),
-        navigation: navigationProp,
-        printQueue: [],
-        route: { key: '', name: 'TEST' },
-        selectedPrinter: defaultPrinter,
-        trackEventCall
-      });
-
-      expect(trackEventCall).toHaveBeenCalled();
-    });
     it('calls handlePrint dispatch ', async () => {
       const dispatch = jest.fn();
       await handlePrint({
@@ -263,8 +249,7 @@ describe('PrintQueueScreen', () => {
         navigation: navigationProp,
         printQueue: [],
         route: { key: '', name: 'TEST' },
-        selectedPrinter: defaultPrinter,
-        trackEventCall: jest.fn()
+        selectedPrinter: defaultPrinter
       });
 
       expect(dispatch).toHaveBeenCalled();
@@ -277,8 +262,7 @@ describe('PrintQueueScreen', () => {
         navigation: navigationProp,
         printQueue: [],
         route: { key: '', name: 'TEST' },
-        selectedPrinter: defaultPrinter,
-        trackEventCall: jest.fn()
+        selectedPrinter: defaultPrinter
       });
 
       expect(validateSessionCall).toHaveBeenCalled();
