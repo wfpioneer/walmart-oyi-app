@@ -174,6 +174,12 @@ Due to some constraints in how Fluffy handles userIds and test stores/clubs, spe
 The below is old (but kept for historical sake). [This](https://collaboration.wal-mart.com/display/ISCM/FE+Airwatch+Release+Process)
 Confluence page should be followed instead, until we get full automation working with "Testing Products" from the AirWatch team.
 
+## TODOs
+
+* Update to the latest versions of `jest` and `babel-jest` once they fix regression or establish a workaround
+    * We are currently not using the latest version of `jest` and `babel-jest` due to
+      a [regression introduced in version 27](https://github.com/facebook/jest/issues/11500) that hits some of our test
+      cases that use an `async` callback in their `it` calls
 
 ---------OLD!! DO NOT USE!!!-----------
 
