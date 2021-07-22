@@ -50,12 +50,8 @@ describe('PrintQueueScreen', () => {
         route={routeProp}
         itemIndexToEdit={-1}
         setItemIndexToEdit={jest.fn()}
-        apiInProgress={false}
-        setAPIInProgress={jest.fn()}
         error={defaultError}
         setError={jest.fn()}
-        apiStart={0}
-        setApiStart={jest.fn()}
         trackEventCall={jest.fn()}
         validateSessionCall={jest.fn(() => Promise.resolve())}
         useEffectHook={jest.fn()}
@@ -154,12 +150,8 @@ describe('PrintQueueScreen', () => {
         route={routeProp}
         itemIndexToEdit={-1}
         setItemIndexToEdit={jest.fn()}
-        apiInProgress={false}
-        setAPIInProgress={jest.fn()}
         error={defaultError}
         setError={jest.fn()}
-        apiStart={0}
-        setApiStart={jest.fn()}
         trackEventCall={jest.fn()}
         validateSessionCall={jest.fn(() => Promise.resolve())}
         useEffectHook={jest.fn()}
@@ -187,12 +179,8 @@ describe('PrintQueueScreen', () => {
         route={routeProp}
         itemIndexToEdit={singleItemToEdit}
         setItemIndexToEdit={jest.fn()}
-        apiInProgress={false}
-        setAPIInProgress={jest.fn()}
         error={defaultError}
         setError={jest.fn()}
-        apiStart={0}
-        setApiStart={jest.fn()}
         trackEventCall={jest.fn()}
         validateSessionCall={jest.fn(() => Promise.resolve())}
         useEffectHook={jest.fn()}
@@ -217,12 +205,8 @@ describe('PrintQueueScreen', () => {
         route={routeProp}
         itemIndexToEdit={-1}
         setItemIndexToEdit={jest.fn()}
-        apiInProgress={false}
-        setAPIInProgress={jest.fn()}
         error={printError}
         setError={jest.fn()}
-        apiStart={0}
-        setApiStart={jest.fn()}
         trackEventCall={jest.fn()}
         validateSessionCall={jest.fn(() => Promise.resolve())}
         useEffectHook={jest.fn()}
@@ -247,12 +231,8 @@ describe('PrintQueueScreen', () => {
         route={routeProp}
         itemIndexToEdit={-1}
         setItemIndexToEdit={jest.fn()}
-        apiInProgress={true}
-        setAPIInProgress={jest.fn()}
         error={defaultError}
         setError={jest.fn()}
-        apiStart={0}
-        setApiStart={jest.fn()}
         trackEventCall={jest.fn()}
         validateSessionCall={jest.fn(() => Promise.resolve())}
         useEffectHook={jest.fn()}
@@ -261,21 +241,6 @@ describe('PrintQueueScreen', () => {
     });
   });
   describe('HandlePrint', () => {
-    it('calls handlePrint trackEventCall', async () => {
-      const trackEventCall = jest.fn();
-      await handlePrint({
-        validateSessionCall: jest.fn(() => Promise.resolve()),
-        dispatch: jest.fn(),
-        navigation: navigationProp,
-        printQueue: [],
-        route: { key: '', name: 'TEST' },
-        selectedPrinter: defaultPrinter,
-        setApiStart: jest.fn(),
-        trackEventCall
-      });
-
-      expect(trackEventCall).toHaveBeenCalled();
-    });
     it('calls handlePrint dispatch ', async () => {
       const dispatch = jest.fn();
       await handlePrint({
@@ -284,9 +249,7 @@ describe('PrintQueueScreen', () => {
         navigation: navigationProp,
         printQueue: [],
         route: { key: '', name: 'TEST' },
-        selectedPrinter: defaultPrinter,
-        setApiStart: jest.fn(),
-        trackEventCall: jest.fn()
+        selectedPrinter: defaultPrinter
       });
 
       expect(dispatch).toHaveBeenCalled();
@@ -299,27 +262,10 @@ describe('PrintQueueScreen', () => {
         navigation: navigationProp,
         printQueue: [],
         route: { key: '', name: 'TEST' },
-        selectedPrinter: defaultPrinter,
-        setApiStart: jest.fn(),
-        trackEventCall: jest.fn()
+        selectedPrinter: defaultPrinter
       });
 
       expect(validateSessionCall).toHaveBeenCalled();
-    });
-    it('calls handlePrint setApiStart', async () => {
-      const setApiStart = jest.fn();
-      await handlePrint({
-        validateSessionCall: jest.fn(() => Promise.resolve()),
-        dispatch: jest.fn(),
-        navigation: navigationProp,
-        printQueue: [],
-        route: { key: '', name: 'TEST' },
-        selectedPrinter: defaultPrinter,
-        setApiStart,
-        trackEventCall: jest.fn()
-      });
-
-      expect(setApiStart).toHaveBeenCalled();
     });
   });
 });

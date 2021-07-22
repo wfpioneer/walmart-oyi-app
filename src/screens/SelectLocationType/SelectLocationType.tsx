@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import { RadioButton, Text } from 'react-native-paper';
 import {
   ActivityIndicator, EmitterSubscription, Modal, TouchableOpacity, View
@@ -7,7 +7,6 @@ import {
   NavigationProp, Route, useNavigation, useRoute
 } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import moment from 'moment';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dispatch } from 'redux';
 import Button from '../../components/buttons/Button';
@@ -24,6 +23,7 @@ import styles from './SelectLocationType.style';
 import { COLOR } from '../../themes/Color';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { AsyncState } from '../../models/AsyncState';
 
 interface LocParams {
   currentLocation?: Location;
@@ -36,68 +36,18 @@ export enum LOCATION_TYPES {
   END_CAP = '12',
   POD = '13'
 }
-interface AsyncState {
-  isWaiting: boolean;
-  error: any;
-  result: any;
-  value: any;
-}
-const SelectLocationType = () => {
-  const [locType, setLocType] = useState(LOCATION_TYPES.SALES_FLOOR);
-  const [inputLocation, setInputLocation] = useState(false);
-  const [loc, setLoc] = useState('');
-  const [scanType, setScanType] = useState('');
-  const [error, setError] = useState({ error: false, message: '' });
-  const [apiStart, setApiStart] = useState(0);
-  const addAPI = useTypedSelector(state => state.async.addLocation);
-  const editAPI = useTypedSelector(state => state.async.editLocation);
-  const floorLocations = useTypedSelector(state => state.Location.floorLocations);
-  const itemLocDetails = useTypedSelector(state => state.Location.itemLocDetails);
-  const { actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
-  const route = useRoute();
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
 
-  return (
-    <SelectLocationTypeScreen
-      locType={locType}
-      setLocType={setLocType}
-      inputLocation={inputLocation}
-      setInputLocation={setInputLocation}
-      loc={loc}
-      setLoc={setLoc}
-      scanType={scanType}
-      setScanType={setScanType}
-      error={error}
-      setError={setError}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      addAPI={addAPI}
-      editAPI={editAPI}
-      floorLocations={floorLocations}
-      itemLocDetails={itemLocDetails}
-      actionCompleted={actionCompleted}
-      route={route}
-      navigation={navigation}
-      dispatch={dispatch}
-      useEffectHook={useEffect}
-      trackEventCall={trackEvent}
-      validateSessionCall={validateSession}
-    />
-  );
-};
 interface SelectLocationProps {
-  locType: LOCATION_TYPES;
-  setLocType: Function;
+  locType: string;
+  setLocType: React.Dispatch<React.SetStateAction<string>>;
   inputLocation: boolean;
-  setInputLocation: Function;
+  setInputLocation: React.Dispatch<React.SetStateAction<boolean>>;
   loc: string;
-  setLoc: Function;
+  setLoc: React.Dispatch<React.SetStateAction<string>>;
   scanType: string;
-  setScanType: Function;
+  setScanType: React.Dispatch<React.SetStateAction<string>>;
   error: { error: boolean; message: string };
-  setError: Function;
-  apiStart: number; setApiStart: Function;
+  setError: React.Dispatch<React.SetStateAction<{error: boolean;message: string;}>>;
   addAPI: AsyncState;
   editAPI: AsyncState;
   floorLocations: Location[];
@@ -110,7 +60,7 @@ interface SelectLocationProps {
   route: Route<any>;
   navigation: NavigationProp<any>;
   dispatch: Dispatch<any>;
-  useEffectHook: Function;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
@@ -121,11 +71,11 @@ export const validateLocation = (loc: string): boolean => {
   return loc.length > 0 && locRegex.test(loc);
 };
 
-export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
+export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Element => {
   const {
     locType, setLocType, inputLocation, setInputLocation, loc, setLoc,
-    scanType, setScanType, error, setError, apiStart, setApiStart,
-    addAPI, editAPI, floorLocations, itemLocDetails, actionCompleted, route,
+    scanType, setScanType, error, setError, addAPI, editAPI,
+    floorLocations, itemLocDetails, actionCompleted, route,
     navigation, dispatch, useEffectHook, trackEventCall, validateSessionCall
   } = props;
   const routeSource: string = route.name;
@@ -190,7 +140,6 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
   useEffectHook(() => {
     // on api success
     if (!addAPI.isWaiting && addAPI.result) {
-      trackEventCall('select_location_add_api_success', { duration: moment().valueOf() - apiStart });
       dispatch(addLocationToExisting(loc, parseInt(locType, 10), 'floor'));
       if (!actionCompleted && itemLocDetails.exceptionType === 'NSFL') dispatch(setActionCompleted());
       dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
@@ -199,12 +148,6 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
 
     // on api failure
     if (!addAPI.isWaiting && addAPI.error) {
-      trackEventCall('select_location_add_api_failure', {
-        upcNbr: addAPI.value.upc,
-        sectionId: addAPI.value.sectionId,
-        errorDetails: addAPI.error.message || JSON.stringify(addAPI.error),
-        duration: moment().valueOf() - apiStart
-      });
       setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
     }
 
@@ -218,24 +161,13 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
   useEffectHook(() => {
     // on api success
     if (!editAPI.isWaiting && editAPI.result) {
-      trackEventCall('select_location_edit_api_success', { duration: moment().valueOf() - apiStart });
       dispatch(editExistingLocation(loc, parseInt(locType, 10), 'floor', currentLocation.locIndex));
-      trackEvent('location_get_location_api_call', {
-        itemNbr: itemLocDetails.itemNbr
-      });
       dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
       navigation.navigate('LocationDetails');
     }
 
     // on api failure
     if (!editAPI.isWaiting && editAPI.error) {
-      trackEventCall('select_location_edit_api_failure', {
-        upcNbr: editAPI.value.upc,
-        sectionId: editAPI.value.sectionId,
-        newSectionId: editAPI.value.newSectionId,
-        errorDetails: editAPI.error.message || editAPI.error,
-        duration: moment().valueOf() - apiStart
-      });
       setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
     }
 
@@ -261,11 +193,8 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
           (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
         );
         if (!sameLoc) {
-          trackEventCall('select_location_add_api_call',
-            { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: locType });
-          setApiStart(moment().valueOf());
           dispatch(addLocation({
-            headers: {itemNbr: itemLocDetails.itemNbr},
+            headers: { itemNbr: itemLocDetails.itemNbr },
             upc: itemLocDetails.upcNbr,
             sectionId: loc,
             locationTypeNbr: locType
@@ -280,11 +209,8 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
           (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
         );
         if (!sameLoc) {
-          trackEventCall('select_location_edit_api_call',
-            { upc: itemLocDetails.upcNbr, sectionId: loc, locationTypeNbr: locType });
-          setApiStart(moment().valueOf());
           dispatch(editLocation({
-            headers: {itemNbr: itemLocDetails.itemNbr},
+            headers: { itemNbr: itemLocDetails.itemNbr },
             upc: itemLocDetails.upcNbr,
             sectionId: currentLocation.locationName,
             newSectionId: loc,
@@ -415,4 +341,46 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps) => {
   );
 };
 
+const SelectLocationType = (): JSX.Element => {
+  // Convert locType to a string To resolve type errors from RadioButtonGroup & currentLocation.type
+  const [locType, setLocType] = useState(LOCATION_TYPES.SALES_FLOOR.toString());
+  const [inputLocation, setInputLocation] = useState(false);
+  const [loc, setLoc] = useState('');
+  const [scanType, setScanType] = useState('');
+  const [error, setError] = useState({ error: false, message: '' });
+  const addAPI = useTypedSelector(state => state.async.addLocation);
+  const editAPI = useTypedSelector(state => state.async.editLocation);
+  const floorLocations = useTypedSelector(state => state.Location.floorLocations);
+  const itemLocDetails = useTypedSelector(state => state.Location.itemLocDetails);
+  const { actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
+  const route = useRoute();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  return (
+    <SelectLocationTypeScreen
+      locType={locType}
+      setLocType={setLocType}
+      inputLocation={inputLocation}
+      setInputLocation={setInputLocation}
+      loc={loc}
+      setLoc={setLoc}
+      scanType={scanType}
+      setScanType={setScanType}
+      error={error}
+      setError={setError}
+      addAPI={addAPI}
+      editAPI={editAPI}
+      floorLocations={floorLocations}
+      itemLocDetails={itemLocDetails}
+      actionCompleted={actionCompleted}
+      route={route}
+      navigation={navigation}
+      dispatch={dispatch}
+      useEffectHook={useEffect}
+      trackEventCall={trackEvent}
+      validateSessionCall={validateSession}
+    />
+  );
+};
 export default SelectLocationType;

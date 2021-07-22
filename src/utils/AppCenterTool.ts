@@ -14,11 +14,12 @@ export const initialize = (): void => {
 
 export const trackEvent = (eventName: string, params: any = {}): void => {
   const userState = store.getState().User;
-
+  // Removes undefined values from the event properties
+  const cleanedParams = Object.fromEntries(Object.entries(params).filter(([k, v]) => v !== undefined));
   const submitParams = {
-    ...params,
+    ...cleanedParams,
     userId: userState.userId,
-    clubId: userState.siteId,
+    clubId: userState.siteId.toString(),
     country: userState.countryCode
   };
   AppCenterAnalytics.trackEvent(eventName, submitParams);
