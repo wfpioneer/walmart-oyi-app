@@ -29,6 +29,13 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
 
 ## Getting Started
 
+### Use the latest stable Node and NPM versions
+* Using a version manager like [Node Version Manager](https://github.com/nvm-sh/nvm) makes it simple to manage node versions
+  * the command `nvm ls-remote --lts` will list all available stable versions of node
+  * to install a desired version, use `nvm install` eg: `nvm install 14.17.3`
+  * to set it as your default node version, use `nvm alias default` eg: `nvm alias default 14.17.3`
+  * after installing a new version, get the latest version of NPM via `npm install -g npm`
+
 ### To run the app
 * Clone the repo
 * Run `npm install`
@@ -167,6 +174,12 @@ Due to some constraints in how Fluffy handles userIds and test stores/clubs, spe
 The below is old (but kept for historical sake). [This](https://collaboration.wal-mart.com/display/ISCM/FE+Airwatch+Release+Process)
 Confluence page should be followed instead, until we get full automation working with "Testing Products" from the AirWatch team.
 
+## TODOs
+
+* Update to the latest versions of `jest` and `babel-jest` once they fix regression or establish a workaround
+    * We are currently not using the latest version of `jest` and `babel-jest` due to
+      a [regression introduced in version 27](https://github.com/facebook/jest/issues/11500) that hits some of our test
+      cases that use an `async` callback in their `it` calls
 
 ---------OLD!! DO NOT USE!!!-----------
 
