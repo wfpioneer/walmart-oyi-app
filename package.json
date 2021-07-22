@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "test:coverage": "jest --collect-coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "build-release": "cd android && ./gradlew clean && ./gradlew assembleRelease",
     "postinstall": "npx jetify"
