@@ -134,3 +134,4 @@ tools:
 flows:
   npm-install-and-coverage:
     - npm ci
+    - npm run test:coverage

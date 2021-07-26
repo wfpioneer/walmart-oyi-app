@@ -31,6 +31,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -235,6 +236,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -454,6 +456,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -609,6 +612,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -813,6 +817,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -1024,6 +1029,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -1241,6 +1247,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -1465,6 +1472,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",

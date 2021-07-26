@@ -1,5 +1,4 @@
-import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Animated, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -15,7 +14,6 @@ import { toggleMenu } from '../state/actions/Worklist';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
 import { strings } from '../locales';
-import { trackEvent } from '../utils/AppCenterTool';
 import { getWorklist } from '../state/actions/saga';
 
 const Stack = createStackNavigator();
@@ -56,34 +54,14 @@ const renderHeaderRight = (dispatch: any, menuOpen: boolean) => (
   </View>
 );
 
-export const WorklistNavigator = () => {
+export const WorklistNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
-  const { result, error } = useTypedSelector(state => state.async.getWorklist);
-  const [apiStart, setApiStart] = useState(0);
 
   useEffect(() => navigation.addListener('focus', () => {
-    trackEvent('worklist_items_api_call');
-    setApiStart(moment().valueOf());
     dispatch(getWorklist());
   }), [navigation]);
-
-  useEffect(() => {
-    if (result) {
-      trackEvent('worklist_items_api_success', {
-        status: result.status,
-        duration: moment().valueOf() - apiStart
-      });
-    }
-
-    if (error) {
-      trackEvent('worklist_items_api_failure', {
-        errorDetails: error.message || JSON.stringify(error),
-        duration: moment().valueOf() - apiStart
-      });
-    }
-  }, [result, error]);
 
   const menu = (
     <FilterMenu />
