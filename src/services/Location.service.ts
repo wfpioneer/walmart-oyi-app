@@ -11,10 +11,10 @@ export default class LocationService {
     );
   }
 
-  public static getAisle() : Promise<AxiosResponse<unknown>> {
+  public static getAisle(payload: {zoneId: number}) : Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.get(
-      `${urls.locationUrl}/zone`,
+      `${urls.locationUrl}/zone/${payload.zoneId}/aisle`,
       undefined,
     );
   }

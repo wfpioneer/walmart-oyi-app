@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
-  FlatList, Text, View
+  ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
-  NavigationProp, useNavigation
+  NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
+import moment from 'moment';
 import styles from './AisleList.style';
-import { useTypedSelector } from '../../state/reducers/RootReducer';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
 import { LocationHeader } from '../../components/locationHeader/LocationHeader';
-import { AisleItem } from '../../models/LocationItems';
-import { mockAisles } from '../../mockData/aisleDetails';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { getAisle } from '../../state/actions/saga';
+import { trackEvent } from '../../utils/AppCenterTool';
+import { validateSession } from '../../utils/sessionTimeout';
+import { AsyncState } from '../../models/AsyncState';
+import COLOR from '../../themes/Color';
 
 const NoAisleMessage = () : JSX.Element => (
   <View style={styles.noAisles}>
@@ -20,35 +27,109 @@ const NoAisleMessage = () : JSX.Element => (
 );
 
 interface AisleProps {
-    getMockData: AisleItem[],
-    navigation: NavigationProp<any>
+    zone: number,
+    zoneName: string,
+    getAllAisles: AsyncState,
+    dispatch: Dispatch<any>,
+    apiStart: number,
+    setApiStart: React.Dispatch<React.SetStateAction<number>>,
+    navigation: NavigationProp<any>,
+    route: RouteProp<any, string>,
+    useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
+    trackEventCall: (eventName: string, params?: any) => void,
 }
 
 export const AisleScreen = (props: AisleProps) : JSX.Element => {
   const {
-    getMockData,
-    navigation
+    zone,
+    zoneName,
+    getAllAisles,
+    navigation,
+    apiStart,
+    dispatch,
+    setApiStart,
+    route,
+    useEffectHook,
+    trackEventCall
   } = props;
+
+  // calls to get all aisles
+  useEffectHook(() => navigation.addListener('focus', () => {
+    validateSession(navigation, route.name).then(() => {
+      trackEventCall('get_location_api_call');
+      setApiStart(moment().valueOf());
+      dispatch(getAisle({ zoneId: zone }));
+    }).catch(() => {});
+  }), [navigation]);
+
+  useEffectHook(() => {
+    // on api success
+    if (!getAllAisles.isWaiting && getAllAisles.result) {
+      trackEventCall('get_aisles_success', { duration: moment().valueOf() - apiStart });
+    }
+
+    // on api failure
+    if (!getAllAisles.isWaiting && getAllAisles.error) {
+      trackEventCall('get_aisles_failure', {
+        errorDetails: getAllAisles.error.message || getAllAisles.error,
+        duration: moment().valueOf() - apiStart
+      });
+    }
+  }, [getAllAisles]);
+
+  if (getAllAisles.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={getAllAisles.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
+
+  if (getAllAisles.error) {
+    return (
+      <View style={styles.errorView}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('LOCATION.LOCATION_API_ERROR')}</Text>
+        <TouchableOpacity
+          style={styles.errorButton}
+          onPress={() => {
+            trackEventCall('location_api_retry',);
+            dispatch(getAisle({ zoneId: zone }));
+          }}
+        >
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
     <View>
       <LocationHeader
-        location="Zone G - Grocery"
-        details={`${getMockData.length} ${strings('LOCATION.AISLES')}`}
+        location={zoneName}
+        details={`${getAllAisles.result?.data.length || 0} ${strings('LOCATION.AISLES')}`}
       />
 
       <FlatList
-        data={getMockData}
+        data={getAllAisles.result?.data || []}
         renderItem={({ item }) => (
           <LocationItemCard
-            locationName={item.aisleName}
+            locationId={item.aisleId}
+            locationName={`${strings('LOCATION.AISLES')} ${item.aisleName}`}
+            locationType="Aisles"
             locationDetails={`${item.sectionCount} ${strings('LOCATION.SECTIONS')}`}
             navigator={navigation}
             destinationScreen="Sections"
+            dispatch={dispatch}
           />
         )}
         keyExtractor={item => item.aisleName}
         ListEmptyComponent={<NoAisleMessage />}
+        contentContainerStyle={{ paddingBottom: 100 }}
       />
     </View>
   );
@@ -56,11 +137,25 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
 
 const AisleList = (): JSX.Element => {
   const navigation = useNavigation();
+  const getLocationApi = useTypedSelector(state => state.async.getAisle);
+  const zoneId = useTypedSelector(state => state.Location.selectedZone.id);
+  const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
+  const [apiStart, setApiStart] = useState(0);
+  const dispatch = useDispatch();
+  const route = useRoute();
 
   return (
     <AisleScreen
-      getMockData={mockAisles}
+      zone={zoneId}
+      zoneName={zoneName}
       navigation={navigation}
+      dispatch={dispatch}
+      getAllAisles={getLocationApi}
+      apiStart={apiStart}
+      setApiStart={setApiStart}
+      route={route}
+      useEffectHook={useEffect}
+      trackEventCall={trackEvent}
     />
   );
 };

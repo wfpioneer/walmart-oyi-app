@@ -20,7 +20,6 @@ export const UPDATE_APPROVAL_LIST = 'SAGA/UPDATE_APPROVAL_LIST';
 export const GET_ALL_ZONES = 'SAGA/GET_ZONES';
 export const GET_AISLE = 'SAGA/GET_AISLE';
 
-
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
 export const getItemDetails = (payload: any) => ({ type: GET_ITEM_DETAILS, payload } as const);
@@ -44,5 +43,5 @@ export const updateApprovalList = (payload: {
   approvalItems: ApprovalListItem[]
   headers: {action: approvalAction},
 }) => ({ type: UPDATE_APPROVAL_LIST, payload } as const);
-export const getAllZones = () => ({ type: GET_ALL_ZONES });
-export const getAisle = () => ({ type: GET_AISLE });
+export const getAllZones = () => ({ type: GET_ALL_ZONES } as const);
+export const getAisle = (payload: {zoneId: number}) => ({ type: GET_AISLE, payload } as const);

@@ -61,67 +61,6 @@ exports[`Test Location Item Card Renders Location Item Card with mock Aisle data
 </ForwardRef>
 `;
 
-exports[`Test Location Item Card Renders Location Item Card with mock Section data 1`] = `
-<ForwardRef
-  onPress={[Function]}
-  style={
-    Object {
-      "backgroundColor": "#ffffffff",
-      "marginHorizontal": 0,
-      "marginVertical": 1,
-      "padding": 14,
-    }
-  }
->
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "row",
-      }
-    }
-  >
-    <View
-      style={
-        Object {
-          "flex": 8,
-        }
-      }
-    >
-      <Text>
-        Section G1-1
-      </Text>
-      <View>
-        <Text
-          style={
-            Object {
-              "color": "#9e9e9e",
-              "fontSize": 12,
-            }
-          }
-        >
-          2 items, 4 pallets
-        </Text>
-      </View>
-    </View>
-    <View
-      style={
-        Object {
-          "flex": 1,
-        }
-      }
-    >
-      <mockConstructor
-        color="#1977d3"
-        name="chevron-right"
-        size={20}
-      />
-    </View>
-  </View>
-</ForwardRef>
-`;
-
 exports[`Test Location Item Card Renders Location Item Card with mock Zone data 1`] = `
 <ForwardRef
   onPress={[Function]}

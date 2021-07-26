@@ -72,6 +72,11 @@ exports[`Test Zone List Renders Zone Screen with Data 1`] = `
   />
   <FlatList
     ListEmptyComponent={<NoZonesMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
     data={
       Array [
         Object {
@@ -275,6 +280,11 @@ exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
   />
   <FlatList
     ListEmptyComponent={<NoZonesMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
     data={Object {}}
     disableVirtualization={false}
     horizontal={false}

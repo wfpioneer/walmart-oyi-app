@@ -116,14 +116,18 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
         data={getZoneApi.result?.data || []}
         renderItem={({ item }) => (
           <LocationItemCard
+            locationId={item.zoneId}
+            locationType="Zones"
             locationName={item.zoneName}
             locationDetails={`${item.aisleCount} ${strings('LOCATION.AISLES')}`}
             navigator={navigation}
             destinationScreen="Aisles"
+            dispatch={dispatch}
           />
         )}
         keyExtractor={item => item.zoneName}
         ListEmptyComponent={<NoZonesMessage />}
+        contentContainerStyle={{ paddingBottom: 100 }}
       />
     </View>
   );
