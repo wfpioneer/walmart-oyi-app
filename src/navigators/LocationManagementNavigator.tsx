@@ -5,6 +5,7 @@ import { strings } from '../locales';
 import COLOR from '../themes/Color';
 import ZoneList from '../screens/Zone/ZoneList';
 import AisleList from '../screens/Aisle/AisleList';
+import SectionList from '../screens/Section/SectionList';
 
 const Stack = createStackNavigator();
 
@@ -33,7 +34,7 @@ export const LocationManagementNavigatorStack = (): JSX.Element => (
     />
     <Stack.Screen
       name="Sections"
-      component={() => (<Text>Sections</Text>)} // Create a screen and replace me!
+      component={SectionList}
       options={{
         headerTitle: strings('LOCATION.SECTIONS')
       }}

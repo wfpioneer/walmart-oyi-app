@@ -22,7 +22,10 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
     destinationScreen
   } = props;
   return (
-    <TouchableOpacity style={styles.item} onPress={() => navigator.navigate(destinationScreen)}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => ((destinationScreen === null) ? navigator.navigate(destinationScreen) : destinationScreen)}
+    >
       <View style={styles.itemContainer}>
         <View style={styles.nameText}>
           <Text>{locationName}</Text>
