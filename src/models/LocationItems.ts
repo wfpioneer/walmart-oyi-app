@@ -9,3 +9,8 @@ export interface AisleItem {
     aisleName: string,
     sectionCount: number
 }
+
+export interface SectionItem {
+    sectionId: number,
+    sectionName: string,
+}
