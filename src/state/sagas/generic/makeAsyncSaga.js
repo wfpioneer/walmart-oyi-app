@@ -45,7 +45,7 @@ export function makeAsyncSaga(INITIATOR, opActions, service, handleError = _.noo
         getFluffyResult = serviceResult.data;
       }
       trackEvent('API_SUCCESS', {
-        ...eventParams, duration, statusCode: serviceResult.status, fluffyRoles: getFluffyResult
+        ...eventParams, duration, statusCode: serviceResult.status, fluffyRoles: JSON.stringify(getFluffyResult)
       });
       yield put(opActions.succeed(serviceResult));
 
