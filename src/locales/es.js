@@ -37,7 +37,7 @@ export default {
     DEFAULT: 'Default',
     CLUB: 'Club',
     SUBMIT: 'Enviar',
-    RETRY: 'Rever',
+    RETRY: 'Reintentar',
     GOAL: 'Objetivo',
     VERSION: 'Versión',
     BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido',
@@ -75,10 +75,10 @@ export default {
     ON_HANDS: 'Existencia',
     ON_ORDER: 'Ordenado',
     REPLENISHMENT: 'Resurtido',
-    PENDING_MGR_APPROVAL: 'Pendiente de aprovación de gerente',
+    PENDING_MGR_APPROVAL: 'Pendiente de aprobación de gerente',
     LOCATION: 'Ubicación',
-    TO_PICKLIST: 'a Lista de Pickeo',
-    RESERVE_NEEDED: 'La ubicación de agregar a Lista de Pickeo',
+    TO_PICKLIST: ' a Lista de Pickeo',
+    RESERVE_NEEDED: 'Ubicación en bodega necesaria para agregar a lista de pickeo',
     ADDED_TO_PICKLIST: 'Elemento agregado a la lista de Pickeo',
     ADDED_TO_PICKLIST_ERROR: 'El envío de la lista de Pickeo no se realizó correctamente. Inténtalo de nuevo.',
     ITEM_NOT_FOUND: 'No se encontró el elemento escaneado.',
@@ -151,7 +151,7 @@ export default {
     LOCATION_DETAILS: 'Detalles de ubicación',
     NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Spanish Translation
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Spanish Translation
-    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.' // TODO Spanish Translation
+    LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -167,7 +167,7 @@ export default {
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
     FLOOR: 'Piso',
-    ENDCAP: 'Tapa final',
+    ENDCAP: 'Cabecera',
     POD: 'POD',
     DISPLAY: 'Exhibición',
     RESERVE: 'Reserva'
@@ -176,14 +176,14 @@ export default {
     NEW_QUANTITY: 'Nueva Cantidad',
     CURRENT_QUANTITY: 'Cantidad Actual',
     DAYS_LEFT: '%{time} día(s) restantes',
-    APPROVALS: 'Aprovaciones',
-    APPROVE_ITEMS: 'Aprovar artículos',
+    APPROVALS: 'Aprobaciones',
+    APPROVE_ITEMS: 'Aprobar artículos',
     OH_CHANGE: 'Cambio de Existencia',
     SELECT_ALL: 'Seleccionar Todo',
     DESELECT_ALL: 'Deseleccionar Todo',
     SELECTED: 'Seleccionado',
-    APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprovación.\nPor favor inténtalo de nuevo',
-    APPROVE: 'Aprovar',
+    APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprobación.\nPor favor inténtalo de nuevo',
+    APPROVE: 'Aprobar',
     REJECT: 'Rechazar',
     GO_BACK: 'Ir atrás',
     CONFIRM: 'Confirmar',
