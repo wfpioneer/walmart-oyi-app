@@ -23,6 +23,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
     case USER_LOGIN:
       return {
         ...action.payload,
+        siteId: action.payload.siteId ?? 0,
         features: []
       };
     case USER_LOGOUT:
