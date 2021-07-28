@@ -19,6 +19,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
+import { LocationType } from '../../models/LocationType';
 
 const NoAisleMessage = () : JSX.Element => (
   <View style={styles.noAisles}>
@@ -120,16 +121,16 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
           <LocationItemCard
             locationId={item.aisleId}
             locationName={`${strings('LOCATION.AISLES')} ${item.aisleName}`}
-            locationType="Aisles"
+            locationType={LocationType.AISLE}
             locationDetails={`${item.sectionCount} ${strings('LOCATION.SECTIONS')}`}
             navigator={navigation}
-            destinationScreen="Sections"
+            destinationScreen={LocationType.SECTION}
             dispatch={dispatch}
           />
         )}
         keyExtractor={item => item.aisleName}
         ListEmptyComponent={<NoAisleMessage />}
-        contentContainerStyle={{ paddingBottom: 100 }}
+        contentContainerStyle={styles.contentPadding}
       />
     </View>
   );

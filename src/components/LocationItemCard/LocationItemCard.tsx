@@ -8,35 +8,22 @@ import { Dispatch } from 'redux';
 import styles from './LocationItemCard.style';
 import { COLOR } from '../../themes/Color';
 import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
+import { LocationType } from '../../models/LocationType';
 
 interface LocationItemCardProp {
   locationId: number,
-  locationType: string,
+  locationType: LocationType,
   locationName: string,
   locationDetails : string,
   navigator: NavigationProp<any>,
-  destinationScreen: string,
+  destinationScreen: LocationType,
   dispatch: Dispatch<any>,
 }
 
-const updateTreeAndNavigate = (
-  locationId: number,
-  LocationName: string,
-  locationType: string,
-  destinationScreen: string,
-  dispatch: Dispatch<any>,
-  navigator: NavigationProp<any>
-) => {
-  if (locationType === 'Zones') {
-    dispatch(selectZone(locationId, LocationName));
-  }
-  if (locationType === 'Aisles') {
-    dispatch(selectAisle(locationId, LocationName));
-  }
-  if (locationType === 'Sections') {
-    dispatch(selectSection(locationId, LocationName));
-  }
-  navigator.navigate(destinationScreen);
+const mapLocTypeToActionCreator = {
+  [LocationType.ZONE]: selectZone,
+  [LocationType.AISLE]: selectAisle,
+  [LocationType.SECTION]: selectSection
 };
 
 const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
@@ -49,11 +36,14 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
     destinationScreen,
     dispatch
   } = props;
+
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => updateTreeAndNavigate(locationId, locationName,
-        locationType, destinationScreen, dispatch, navigator)}
+      onPress={() => {
+        dispatch(mapLocTypeToActionCreator[locationType](locationId, locationName));
+        navigator.navigate(destinationScreen);
+      }}
     >
       <View style={styles.itemContainer}>
         <View style={styles.nameText}>
