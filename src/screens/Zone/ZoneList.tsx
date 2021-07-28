@@ -19,7 +19,6 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
-import style from '../PrintPriceSign/PrintPriceSign.style';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
