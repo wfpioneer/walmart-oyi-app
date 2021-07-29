@@ -23,6 +23,7 @@ import { deleteLocation } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
+import { DELETE_LOCATION, GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
 
 interface LocationDetailsProps {
   navigation: NavigationProp<any>;
@@ -70,6 +71,15 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     setLocToConfirm,
     useEffectHook
   } = props;
+
+  // Navigation Listener
+  useEffectHook(() => {
+    // Resets location api response data when navigating off-screen
+    navigation.addListener('beforeRemove', () => {
+      dispatch({ type: GET_LOCATION_DETAILS.RESET });
+      dispatch({ type: DELETE_LOCATION.RESET });
+    });
+  }, []);
 
   // Delete Location API
   useEffectHook(() => {

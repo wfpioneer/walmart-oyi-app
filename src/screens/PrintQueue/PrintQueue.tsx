@@ -23,6 +23,7 @@ import COLOR from '../../themes/Color';
 import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
 import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
+import { PRINT_SIGN } from '../../state/actions/asyncAPI';
 
 interface HandlePrintProps {
   dispatch: Dispatch<any>;
@@ -140,10 +141,18 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
     itemIndexToEdit,
     setItemIndexToEdit,
     error, setError,
-    trackEventCall,
     validateSessionCall,
     useEffectHook
   } = props;
+
+  // Navigation Listener
+  useEffectHook(() => {
+    // Resets Print api response data when navigating off-screen
+    navigation.addListener('beforeRemove', () => {
+      dispatch({ type: PRINT_SIGN.RESET });
+    });
+  }, []);
+
   // Print API (Queue)
   useEffectHook(() => {
     // on api success
