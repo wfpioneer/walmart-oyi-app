@@ -2,6 +2,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
 import LocationItemCard from './LocationItemCard';
+import { LocationType } from '../../models/LocationType';
 
 const mockZoneItem = {
   zoneId: 1,
@@ -23,12 +24,12 @@ describe('Test Location Item Card', () => {
     renderer.render(
       <LocationItemCard
         locationId={mockZoneItem.zoneId}
-        locationType="Zones"
+        locationType={LocationType.ZONE}
         locationName={mockZoneItem.zoneName}
         dispatch={jest.fn()}
         locationDetails={`${mockZoneItem.aisleCount} Aisles`}
         navigator={navigationProp}
-        destinationScreen="Aisles"
+        destinationScreen={LocationType.AISLE}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -41,12 +42,12 @@ describe('Test Location Item Card', () => {
     renderer.render(
       <LocationItemCard
         locationId={mockAisleItem.aisleID}
-        locationType="Aisles"
+        locationType={LocationType.AISLE}
         locationName={mockAisleItem.aisleName}
         dispatch={jest.fn()}
         locationDetails={`${mockAisleItem.sectionCount} Sections`}
         navigator={navigationProp}
-        destinationScreen="Sections"
+        destinationScreen={LocationType.SECTION}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
