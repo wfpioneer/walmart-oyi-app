@@ -36,6 +36,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
+import { ADD_TO_PICKLIST, GET_ITEM_DETAILS, NO_ACTION } from '../../state/actions/asyncAPI';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 export interface ItemDetailsScreenProps {
@@ -335,9 +336,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     if (navigation.isFocused()) {
       validateSessionCall(navigation, route.name).then(() => {
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
-        dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+        dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
-        dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
+        dispatch({ type: ADD_TO_PICKLIST.RESET });
       }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
     }
   }, [scannedEvent]);
@@ -397,6 +398,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         dispatch(setActionCompleted());
         navigation.goBack();
       }
+      dispatch({ type: NO_ACTION.RESET });
     }
 
     // on api failure
@@ -406,6 +408,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       } else {
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
+      dispatch({ type: NO_ACTION.RESET });
     }
   }, [completeItemApi]);
 
