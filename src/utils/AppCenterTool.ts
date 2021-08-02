@@ -19,7 +19,7 @@ export const trackEvent = (eventName: string, params: any = {}): void => {
   const submitParams = {
     ...cleanedParams,
     userId: userState.userId,
-    clubId: userState.siteId.toString(),
+    clubId: userState.siteId === undefined ? 'undefined' : userState.siteId.toString(),
     country: userState.countryCode
   };
   AppCenterAnalytics.trackEvent(eventName, submitParams);

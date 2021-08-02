@@ -28,6 +28,7 @@ import { printSign } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
+import { PRINT_SIGN } from '../../state/actions/asyncAPI';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -119,26 +120,32 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       dispatch(addToPrinterList(initialPrinter));
     }
   }, []);
+
+  // Navigation Listener
+  useEffectHook(() => {
+    // Resets Print api response data when navigating off-screen
+    navigation.addListener('beforeRemove', () => {
+      dispatch({ type: PRINT_SIGN.RESET });
+    });
+  }, []);
+
   // Print API
   useEffectHook(() => {
     // on api success
     if (!printAPI.isWaiting && printAPI.result) {
       if (!actionCompleted && exceptionType === 'PO') dispatch(setActionCompleted());
       navigation.goBack();
-      return undefined;
     }
 
     // on api failure
     if (!printAPI.isWaiting && printAPI.error) {
-      return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
 
     // on api submission
     if (printAPI.isWaiting) {
       setError({ error: false, message: '' });
     }
-
-    return undefined;
   }, [printAPI]);
 
   const handleTextChange = (text: string) => {
