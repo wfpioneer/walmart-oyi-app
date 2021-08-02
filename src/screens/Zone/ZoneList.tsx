@@ -18,6 +18,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
+import { LocationType } from '../../models/LocationType';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
@@ -94,14 +95,18 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
         data={getZoneApi.result?.data || []}
         renderItem={({ item }) => (
           <LocationItemCard
+            locationId={item.zoneId}
+            locationType={LocationType.ZONE}
             locationName={item.zoneName}
             locationDetails={`${item.aisleCount} ${strings('LOCATION.AISLES')}`}
             navigator={navigation}
-            destinationScreen="Aisles"
+            destinationScreen={LocationType.AISLE}
+            dispatch={dispatch}
           />
         )}
         keyExtractor={item => item.zoneName}
         ListEmptyComponent={<NoZonesMessage />}
+        contentContainerStyle={styles.contentPadding}
       />
     </View>
   );

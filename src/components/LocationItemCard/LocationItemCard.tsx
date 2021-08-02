@@ -4,25 +4,47 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import {
   NavigationProp
 } from '@react-navigation/native';
+import { Dispatch } from 'redux';
 import styles from './LocationItemCard.style';
 import { COLOR } from '../../themes/Color';
+import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
+import { LocationType } from '../../models/LocationType';
 
 interface LocationItemCardProp {
+  locationId: number,
+  locationType: LocationType,
   locationName: string,
   locationDetails : string,
   navigator: NavigationProp<any>,
-  destinationScreen: string
+  destinationScreen: LocationType,
+  dispatch: Dispatch<any>,
 }
+
+const mapLocTypeToActionCreator = {
+  [LocationType.ZONE]: selectZone,
+  [LocationType.AISLE]: selectAisle,
+  [LocationType.SECTION]: selectSection
+};
 
 const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
   const {
+    locationId,
+    locationType,
     locationName,
     locationDetails,
     navigator,
-    destinationScreen
+    destinationScreen,
+    dispatch
   } = props;
+
   return (
-    <TouchableOpacity style={styles.item} onPress={() => navigator.navigate(destinationScreen)}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        dispatch(mapLocTypeToActionCreator[locationType](locationId, locationName));
+        navigator.navigate(destinationScreen);
+      }}
+    >
       <View style={styles.itemContainer}>
         <View style={styles.nameText}>
           <Text>{locationName}</Text>

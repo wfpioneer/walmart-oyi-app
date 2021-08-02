@@ -23,6 +23,34 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  errorView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 15
+  },
+  errorButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLOR.RED_300,
+    width: '95%',
+    borderRadius: 4,
+    height: 40,
+    marginVertical: 10
+  },
+  errorText: {
+    fontSize: 16,
+    textAlign: 'center'
+  },
+  contentPadding: {
+    paddingBottom: 100
   }
 });
 
