@@ -1,8 +1,10 @@
 import { NavigationProp } from '@react-navigation/native';
 import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
-import { Platform, View } from 'react-native';
-// @ts-ignore // 'react-native-wmsso' has no type definition it would seem
+import {
+  Modal, Platform, Text, View
+} from 'react-native';
+// @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
 import Button from '../../components/buttons/Button';
@@ -77,10 +79,12 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       }
 
       this.props.hideActivityModal();
-      this.props.navigation.reset({
-        index: 0,
-        routes: [{ name: 'Tabs' }]
-      });
+      if (this.props.User.siteId) {
+        this.props.navigation.reset({
+          index: 0,
+          routes: [{ name: 'Tabs' }]
+        });
+      }
       this.props.setEndTime(sessionEnd());
     }
   }
@@ -117,13 +121,21 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       setUserId(user.userId);
       this.props.loginUser(user);
       trackEvent('user_sign_in');
-      this.props.getFluffyFeatures(user);
+      if (this.props.User.siteId) {
+        this.props.getFluffyFeatures(user);
+      }
     });
   }
 
   render(): ReactNode {
     return (
       <View style={styles.container}>
+        <Modal
+          visible={true}
+          transparent
+        >
+          <Text>test</Text>
+        </Modal>
         <Button
           title={strings('GENERICS.SIGN_IN')}
           style={styles.signInButton}
