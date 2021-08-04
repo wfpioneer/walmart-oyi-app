@@ -35,7 +35,8 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_FLUFFY_FEATURES, actions.getFluffyRoles, GetFluffyRolesService.getFluffyRoles),
   makeAsyncSaga(saga.GET_APPROVAL_LIST, actions.getApprovalList, GetApprovalListService.getApprovalList),
   makeAsyncSaga(saga.UPDATE_APPROVAL_LIST, actions.updateApprovalList, UpdateApprovalListService.updateApprovalList),
-  makeAsyncSaga(saga.GET_ALL_ZONES, actions.getAllZones, LocationService.getAllZones)
+  makeAsyncSaga(saga.GET_ALL_ZONES, actions.getAllZones, LocationService.getAllZones),
+  makeAsyncSaga(saga.GET_AISLE, actions.getAisle, LocationService.getAisle)
 ];
 
 export default function* rootSaga() {

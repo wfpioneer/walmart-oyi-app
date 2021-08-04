@@ -48,6 +48,9 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 16,
     textAlign: 'center'
+  },
+  contentPadding: {
+    paddingBottom: 100
   }
 });
 
