@@ -5,12 +5,14 @@ import {
 import {
   NavigationProp, useNavigation
 } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 import styles from './SectionList.style';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
 import { LocationHeader } from '../../components/locationHeader/LocationHeader';
 import { SectionItem } from '../../models/LocationItems';
 import { mockSections } from '../../mockData/sectionDetails';
+import { LocationType } from '../../models/LocationType';
 
 const NoSectionMessage = () : JSX.Element => (
   <View style={styles.noSections}>
@@ -40,10 +42,13 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
         data={getMockData}
         renderItem={({ item }) => (
           <LocationItemCard
+            locationId={item.sectionId}
             locationName={item.sectionName}
+            locationType={LocationType.AISLE}
+            dispatch={useDispatch}
             locationDetails=""
             navigator={navigation}
-            destinationScreen=""
+            destinationScreen={LocationType.SECTION}
           />
         )}
         keyExtractor={item => item.sectionName}
