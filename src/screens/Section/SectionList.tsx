@@ -5,6 +5,7 @@ import {
 import {
   NavigationProp, useNavigation
 } from '@react-navigation/native';
+import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import styles from './SectionList.style';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
@@ -22,12 +23,14 @@ const NoSectionMessage = () : JSX.Element => (
 
 interface SectionProps {
     getMockData: SectionItem[],
+    dispatch: Dispatch<any>,
     navigation: NavigationProp<any>
 }
 
 export const SectionScreen = (props: SectionProps) : JSX.Element => {
   const {
     getMockData,
+    dispatch,
     navigation
   } = props;
 
@@ -44,11 +47,11 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
           <LocationItemCard
             locationId={item.sectionId}
             locationName={item.sectionName}
-            locationType={LocationType.AISLE}
-            dispatch={useDispatch}
+            locationType={LocationType.SECTION}
+            dispatch={dispatch}
             locationDetails=""
             navigator={navigation}
-            destinationScreen={LocationType.SECTION}
+            destinationScreen={LocationType.LOCATION_DETAILS}
           />
         )}
         keyExtractor={item => item.sectionName}
@@ -60,11 +63,13 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
 
 const SectionList = (): JSX.Element => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   return (
     <SectionScreen
       getMockData={mockSections}
       navigation={navigation}
+      dispatch={dispatch}
     />
   );
 };
