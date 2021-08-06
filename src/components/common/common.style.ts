@@ -14,11 +14,22 @@ export const modalStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLOR.WHITE,
     borderRadius: 7.5,
-    paddingBottom: 12,
+    paddingVertical: 12,
     paddingHorizontal: 8
   },
   textInput: {
-    flex: 1,
     paddingLeft: 10
+  },
+  affirmButton: {
+    width: '50%',
+    paddingHorizontal: 12
+  },
+  cancelButton: {
+    width: '50%',
+    paddingHorizontal: 12
+  },
+  buttonRow: {
+    flex: 0,
+    flexDirection: 'row'
   }
 });
