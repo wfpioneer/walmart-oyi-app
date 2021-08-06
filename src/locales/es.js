@@ -43,7 +43,8 @@ export default {
     BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido',
     ITEM: 'Artículo',
     ITEMS: 'Artículos',
-    TOOLS: 'Herramientas'
+    TOOLS: 'Herramientas',
+    ENTER_UPC_ITEM_NBR_ERROR: 'Please enter item/upc numbers. No special characters allowed' // TODO spanish translations
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',

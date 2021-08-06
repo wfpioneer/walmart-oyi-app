@@ -43,7 +43,8 @@ export default {
     BARCODE_SCAN_ERROR: 'This barcode type is not allowed',
     ITEM: 'item',
     ITEMS: 'items',
-    TOOLS: 'Tools'
+    TOOLS: 'Tools',
+    ENTER_UPC_ITEM_NBR_ERROR: 'Please enter item/upc numbers. No special characters allowed'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
