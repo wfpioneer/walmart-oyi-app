@@ -2,14 +2,15 @@ import { NavigationProp } from '@react-navigation/native';
 import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
 import {
-  Modal, Platform, Text, View
+  Modal, Platform, View
 } from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
 import Button from '../../components/buttons/Button';
+import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
 import styles from './Login.style';
-import { assignFluffyFeatures, loginUser } from '../../state/actions/User';
+import { assignFluffyFeatures, loginUser, logoutUser } from '../../state/actions/User';
 import { getFluffyFeatures } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
@@ -21,6 +22,7 @@ import { RootState } from '../../state/reducers/RootReducer';
 
 const mapDispatchToProps = {
   loginUser,
+  logoutUser,
   hideActivityModal,
   setEndTime,
   getFluffyFeatures,
@@ -36,6 +38,7 @@ const mapStateToProps = (state: RootState) => ({
 // TODO correct all the function definitions (specifically return types)
 export interface LoginScreenProps {
   loginUser: (userPayload: User) => void;
+  logoutUser: () => void,
   User: User;
   navigation: NavigationProp<any>;
   hideActivityModal: () => void;
@@ -79,12 +82,10 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       }
 
       this.props.hideActivityModal();
-      if (this.props.User.siteId) {
-        this.props.navigation.reset({
-          index: 0,
-          routes: [{ name: 'Tabs' }]
-        });
-      }
+      this.props.navigation.reset({
+        index: 0,
+        routes: [{ name: 'Tabs' }]
+      });
       this.props.setEndTime(sessionEnd());
     }
   }
@@ -93,6 +94,18 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
+  }
+
+  signOutUser(): void {
+    this.props.showActivityModal();
+    trackEvent('user_sign_out', { lastPage: 'Login' });
+    WMSSO.signOutUser().then(() => {
+      this.props.logoutUser();
+      if (Platform.OS === 'android') {
+        this.props.hideActivityModal();
+      }
+      this.signInUser();
+    });
   }
 
   signInUser(): void {
@@ -131,10 +144,17 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     return (
       <View style={styles.container}>
         <Modal
-          visible={true}
+          visible={this.props.User.siteId === undefined}
           transparent
         >
-          <Text>test</Text>
+          <EnterClubNbrForm
+            onSubmit={clubNbr => {
+              const updatedUser = { ...this.props.User, siteId: clubNbr };
+              this.props.loginUser(updatedUser);
+              this.props.getFluffyFeatures(updatedUser);
+            }}
+            onSignOut={() => this.signOutUser()}
+          />
         </Modal>
         <Button
           title={strings('GENERICS.SIGN_IN')}
