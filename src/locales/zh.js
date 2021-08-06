@@ -198,5 +198,9 @@ export default {
     FAILED_APPROVE: '审批未成功',
     FAILED_ITEMS: '此商品未成功审批',
     UPDATE_API_ERROR: '更新审批状态时发生错误，\n请再试'
+  },
+  LOGIN: {
+    CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI', // TODO: Mandarin Translation
+    ENTER_CLUB_NBR: 'Enter a Club Number' // TODO: Mandarin Translation
   }
 };
