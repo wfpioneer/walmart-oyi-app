@@ -19,7 +19,7 @@ export default class LocationService {
     );
   }
 
-  public static getSections(payload: {aisleId: number}) : Promise<AxiosResponse<unknown>> {
+  public static getSections(payload: { aisleId: number}) : Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.get(
       `${urls.locationUrl}/aisle/${payload.aisleId}/section`,

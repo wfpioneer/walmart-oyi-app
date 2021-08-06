@@ -46,4 +46,4 @@ export const updateApprovalList = (payload: {
 }) => ({ type: UPDATE_APPROVAL_LIST, payload } as const);
 export const getAllZones = () => ({ type: GET_ALL_ZONES } as const);
 export const getAisle = (payload: {zoneId: number}) => ({ type: GET_AISLE, payload } as const);
-export const getSections = (payload: {aisleId: number}) => ({ type: GET_SECTIONS, payload } as const);
+export const getSections = (payload: { aisleId: number}) => ({ type: GET_SECTIONS, payload } as const);

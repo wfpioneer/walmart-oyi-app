@@ -151,6 +151,7 @@ export default {
     LOCATION_DETAILS: 'Location Details', // TODO Mandarin Translation
     NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Mandarin Translation
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Mandarin Translation
+    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Mandarin Translation
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.' // TODO Mandarin Translation
   },
   WORKLIST: {
