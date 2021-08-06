@@ -3,15 +3,18 @@ import { COLOR } from '../../themes/Color';
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginBottom: 8,
     backgroundColor: COLOR.WHITE,
-    paddingRight: 16
+    justifyContent: 'flex-start'
+  },
+  textInputContainer: {
+    flexDirection: 'row'
   },
   textInput: {
-    flex: 1,
-    paddingLeft: 10
+    paddingLeft: 10,
+    borderColor: COLOR.GREY,
+    width: '90%'
   }
 });
 
