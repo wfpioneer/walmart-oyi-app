@@ -36,7 +36,7 @@ type WMSSOUser = Pick<Partial<User>, 'siteId'> & Omit<User, 'siteId'>;
 const mapStateToProps = (state: RootState) => ({
   User: state.User,
   fluffyApiState: state.async.getFluffyRoles,
-  userIsSignedIn: getUserIsSignedIn(state)
+  userIsSignedIn: getUserIsSignedIn(state.User)
 });
 
 // TODO correct all the function definitions (specifically return types)

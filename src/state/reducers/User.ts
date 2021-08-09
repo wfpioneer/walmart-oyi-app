@@ -38,4 +38,4 @@ export const UserReducer = (state = initialState, action: Actions): User => {
   }
 };
 
-export const getUserIsSignedIn = (state: RootState): boolean => state.User.userId !== '' && state.User.token !== '';
+export const getUserIsSignedIn = (state: User): boolean => state.userId !== '' && state.token !== '';
