@@ -9,6 +9,7 @@ import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
 import Button from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
+import { getUserIsSignedIn } from '../../state/reducers/User';
 import styles from './Login.style';
 import { assignFluffyFeatures, loginUser, logoutUser } from '../../state/actions/User';
 import { getFluffyFeatures } from '../../state/actions/saga';
@@ -34,7 +35,8 @@ type WMSSOUser = Pick<Partial<User>, 'siteId'> & Omit<User, 'siteId'>;
 
 const mapStateToProps = (state: RootState) => ({
   User: state.User,
-  fluffyApiState: state.async.getFluffyRoles
+  fluffyApiState: state.async.getFluffyRoles,
+  userIsSignedIn: getUserIsSignedIn(state)
 });
 
 // TODO correct all the function definitions (specifically return types)
@@ -42,6 +44,7 @@ export interface LoginScreenProps {
   loginUser: (userPayload: User) => void;
   logoutUser: () => void,
   User: User;
+  userIsSignedIn: boolean;
   navigation: NavigationProp<any>;
   hideActivityModal: () => void;
   setEndTime: (sessionEndTime: any) => void;
@@ -146,7 +149,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     return (
       <View style={styles.container}>
         <Modal
-          visible={!this.props.User.siteId && this.props.User.userId !== '' && this.props.User.token !== ''}
+          visible={!this.props.User.siteId && this.props.userIsSignedIn}
           transparent
         >
           <EnterClubNbrForm

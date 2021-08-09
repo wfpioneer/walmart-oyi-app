@@ -30,7 +30,7 @@ const testUser: User = {
   },
   countryCode: '',
   domain: '',
-  siteId: 0,
+  siteId: 1,
   token: '',
   userId: '',
   features: []
@@ -38,6 +38,7 @@ const testUser: User = {
 
 const defaultTestProp: LoginScreenProps = {
   User: testUser,
+  userIsSignedIn: true,
   hideActivityModal: jest.fn(),
   loginUser: jest.fn(),
   logoutUser: jest.fn(),
@@ -57,6 +58,7 @@ describe('LoginScreen', () => {
   it('renders the snapshot test appropriately', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(<LoginScreen
+      userIsSignedIn={true}
       loginUser={jest.fn}
       logoutUser={jest.fn}
       navigation={navigationProp}
@@ -78,6 +80,7 @@ describe('LoginScreen', () => {
   it('renders the EnterClubNbr modal when a user logs in without a club number', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(<LoginScreen
+      userIsSignedIn={true}
       loginUser={jest.fn}
       logoutUser={jest.fn}
       navigation={navigationProp}
