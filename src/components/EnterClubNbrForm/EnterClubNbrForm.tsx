@@ -16,7 +16,14 @@ interface EnterClubNbrFormProps {
   onSubmit: (input: number) => void
 }
 
-const validate = (inputText: string): boolean => inputText.trim().length !== 0;
+const validate = (inputText: string): boolean => {
+  if (inputText.trim().length === 0) {
+    return false;
+  }
+
+  const parsedClubNbr = parseInt(inputText.trim(), 10);
+  return parsedClubNbr > 0 && parsedClubNbr <= 99999;
+};
 
 const EnterClubNbrForm = (props: EnterClubNbrFormProps): JSX.Element => {
   const [textInput, setTextInput] = useState('');
