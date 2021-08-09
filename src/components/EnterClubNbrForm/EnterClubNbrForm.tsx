@@ -1,13 +1,9 @@
-import React, {
-  RefObject, useRef, useState
-} from 'react';
-import {
-  Text, TextInput, View
-} from 'react-native';
+import React, { useState } from 'react';
+import { Text, TextInput, View } from 'react-native';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
-import { modalStyles } from '../common/common.style';
+import { modalStyles } from './EnterClubNbrForm.style';
 
 const nonNumberRegex = /[^0-9]/;
 
