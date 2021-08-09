@@ -33,7 +33,7 @@ const mapDispatchToProps = {
 
 // This type uses all fields from the User type except it makes siteId optional
 // It is necessary to provide an accurate type to the User object returned
-// from WMSSO.getUser (since its siteId is optional)
+// from WMSSO.getUser (since its siteId is optional and CN users can log in without one)
 type WMSSOUser = Pick<Partial<User>, 'siteId'> & Omit<User, 'siteId'>;
 
 const mapStateToProps = (state: RootState) => ({
