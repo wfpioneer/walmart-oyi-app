@@ -4,7 +4,7 @@ export default interface User {
   token: string;
   countryCode: string;
   domain: string;
-  siteId?: number;
+  siteId: number;
   additional: {
     displayName: string;
     clockCheckResult: string;

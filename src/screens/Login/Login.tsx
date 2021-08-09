@@ -30,6 +30,8 @@ const mapDispatchToProps = {
   showActivityModal
 };
 
+type WMSSOUser = Pick<Partial<User>, 'siteId'> & Omit<User, 'siteId'>;
+
 const mapStateToProps = (state: RootState) => ({
   User: state.User,
   fluffyApiState: state.async.getFluffyRoles
@@ -113,7 +115,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       // For use with Fluffy in non-prod
       WMSSO.setEnv('STG');
     }
-    WMSSO.getUser().then((user: User) => {
+    WMSSO.getUser().then((user: WMSSOUser) => {
       if (!this.props.User.userId) {
         const countryCode = user.countryCode.toLowerCase();
         switch (countryCode) {
@@ -132,9 +134,9 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
         }
       }
       setUserId(user.userId);
-      this.props.loginUser(user);
+      this.props.loginUser({ ...user, siteId: user.siteId ?? 0 });
       trackEvent('user_sign_in');
-      if (this.props.User.siteId) {
+      if (user.siteId) {
         this.props.getFluffyFeatures(user);
       }
     });
@@ -144,7 +146,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     return (
       <View style={styles.container}>
         <Modal
-          visible={this.props.User.siteId === undefined}
+          visible={!this.props.User.siteId && this.props.User.userId !== '' && this.props.User.token !== ''}
           transparent
         >
           <EnterClubNbrForm
