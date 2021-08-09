@@ -151,6 +151,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
             onSubmit={clubNbr => {
               const updatedUser = { ...this.props.User, siteId: clubNbr };
               this.props.loginUser(updatedUser);
+              trackEvent('user_sign_in');
               this.props.getFluffyFeatures(updatedUser);
             }}
             onSignOut={() => this.signOutUser()}
