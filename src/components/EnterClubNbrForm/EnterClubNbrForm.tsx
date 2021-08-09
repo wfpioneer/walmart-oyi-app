@@ -30,15 +30,12 @@ const EnterClubNbrForm = (props: EnterClubNbrFormProps): JSX.Element => {
   const { onSubmit, onSignOut } = props;
   const inputIsValid = validate(textInput);
 
-  const textInputRef: RefObject<TextInput> = useRef(null);
-
   return (
     <View style={modalStyles.container}>
 
       <View style={modalStyles.contentContainer}>
         <Text>{strings('LOGIN.CLUB_NBR_REQUIRED')}</Text>
         <TextInput
-          ref={textInputRef}
           value={textInput}
           onChangeText={input => setTextInput(input.replace(nonNumberRegex, ''))}
           selectionColor={COLOR.MAIN_THEME_COLOR}
