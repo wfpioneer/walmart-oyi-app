@@ -43,8 +43,7 @@ export default {
     BARCODE_SCAN_ERROR: '此条码类型有误',
     ITEM: '商品',
     ITEMS: '多个商品',
-    TOOLS: '工具箱',
-    ENTER_UPC_ITEM_NBR_ERROR: 'Please enter item/upc numbers. No special characters allowed' // TODO Mandarin Translation
+    TOOLS: '工具箱'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',

@@ -12,7 +12,6 @@ import { manualScan } from '../../utils/scannerUtils';
 import Button from '../buttons/Button';
 import { setManualScan } from '../../state/actions/Global';
 import IconButton from '../buttons/IconButton';
-import { showSnackBar } from '../../state/actions/SnackBar';
 
 interface ManualScanProps {
   keyboardType?: 'numeric' | 'default';
@@ -26,7 +25,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
   const [value, onChangeText] = React.useState('');
   const isNavigationFocused = useIsFocused();
   const textInputRef: RefObject<TextInput> = createRef();
-  const itemRegex = new RegExp(/^[0-9]*$/);
+  const itemRegex = new RegExp(/[^0-9]/g);
   // Having to use this to get focus correct past the first screen where this gets shown
   useLayoutEffect(() => {
     if (isNavigationFocused) {
@@ -35,11 +34,9 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
   }, [isNavigationFocused]);
 
   const onSubmit = (text: string) => {
-    if (text.length > 0 && value.match(itemRegex)) {
+    if (text.length > 0) {
       manualScan(text);
       dispatch(setManualScan(false));
-    } else {
-      dispatch(showSnackBar(strings('GENERICS.ENTER_UPC_ITEM_NBR_ERROR'), 3000));
     }
   };
 
@@ -53,7 +50,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
         ref={textInputRef}
         style={styles.textInput}
         value={value}
-        onChangeText={(text: string) => onChangeText(text)}
+        onChangeText={(text: string) => onChangeText(text.replace(itemRegex, ''))}
         selectionColor={COLOR.MAIN_THEME_COLOR}
         placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')}
         onSubmitEditing={(event: any) => onSubmit(event.nativeEvent.text)}
