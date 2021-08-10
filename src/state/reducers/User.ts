@@ -2,7 +2,6 @@ import User from '../../models/User';
 import {
   ASSIGN_FLUFFY_FEATURES, Actions, USER_LOGIN, USER_LOGOUT
 } from '../actions/User';
-import { RootState } from './RootReducer';
 
 const initialState: User = {
   additional: {
@@ -37,5 +36,3 @@ export const UserReducer = (state = initialState, action: Actions): User => {
       return state;
   }
 };
-
-export const getUserIsSignedIn = (state: User): boolean => state.userId !== '' && state.token !== '';
