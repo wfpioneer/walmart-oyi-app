@@ -198,5 +198,9 @@ export default {
     FAILED_APPROVE: 'Requests Failed to Approve',
     FAILED_ITEMS: 'Items Failed',
     UPDATE_API_ERROR: 'There was an error updating the approval status. \n Please try again.'
+  },
+  LOGIN: {
+    CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI',
+    ENTER_CLUB_NBR: 'Enter a Club Number'
   }
 };
