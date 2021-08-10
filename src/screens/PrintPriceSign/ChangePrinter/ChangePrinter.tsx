@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -12,42 +12,31 @@ import { barcodeEmitter } from '../../../utils/scannerUtils';
 import { addToPrinterList } from '../../../state/actions/Print';
 import { Printer, PrinterType } from '../../../models/Printer';
 import { setManualScan, setScannedEvent } from '../../../state/actions/Global';
+import { trackEvent } from '../../../utils/AppCenterTool';
 
-export const ChangePrinter = () => {
-  const [macAddress, updateMacAddress] = useState('');
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-
-  return (
-    <ChangePrinterScreen
-      macAddress={macAddress}
-      updateMacAddress={updateMacAddress}
-      dispatch={dispatch}
-      navigation={navigation}
-      useEffectHook={useEffect}
-    />
-  );
-};
 interface ChangePrinterProps {
   macAddress: string;
-  updateMacAddress: Function;
+  updateMacAddress: React.Dispatch<React.SetStateAction<string>>;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
-  useEffectHook: Function;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  trackEventCall: (eventName: string, params?: any) => void;
 }
-export const ChangePrinterScreen = (props: ChangePrinterProps) => {
+export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
   const {
     macAddress,
     updateMacAddress,
     dispatch,
     navigation,
-    useEffectHook
+    useEffectHook,
+    trackEventCall
   } = props;
   const macRegex = /^[0-9a-fA-F]{12}/;
 
   // Barcode event listener effect
   useEffectHook(() => {
     const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
+      trackEventCall('printer_macAddress_scanned', { barcode: scan.value, type: scan.type });
       if (navigation.isFocused()) {
         dispatch(setScannedEvent(scan));
         dispatch(setManualScan(false));
@@ -69,6 +58,7 @@ export const ChangePrinterScreen = (props: ChangePrinterProps) => {
         desc: '',
         id: macAddress
       };
+      trackEventCall('new_printer', { newPrinter: JSON.stringify(newPrinter) });
       dispatch(addToPrinterList(newPrinter));
       navigation.goBack();
     }
@@ -98,5 +88,22 @@ export const ChangePrinterScreen = (props: ChangePrinterProps) => {
         onPress={submitMacAddress}
       />
     </View>
+  );
+};
+
+export const ChangePrinter = (): JSX.Element => {
+  const [macAddress, updateMacAddress] = useState('');
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  return (
+    <ChangePrinterScreen
+      macAddress={macAddress}
+      updateMacAddress={updateMacAddress}
+      dispatch={dispatch}
+      navigation={navigation}
+      useEffectHook={useEffect}
+      trackEventCall={trackEvent}
+    />
   );
 };
