@@ -85,7 +85,8 @@ export const Location = (
       };
     case ADD_LOCATION_TO_EXISTING:
       if (action.payload.locationArea === 'floor') {
-        state.floorLocations.push({
+        const addFloorLocations = [...state.floorLocations];
+        addFloorLocations.push({
           zoneId: 0,
           aisleId: 0,
           sectionId: 0,
@@ -98,11 +99,12 @@ export const Location = (
         });
         return {
           ...state,
-          floorLocations: state.floorLocations
+          floorLocations: addFloorLocations
         };
       }
       if (action.payload.locationArea === 'reserve') {
-        state.reserveLocations.push({
+        const addReserveLocations = [...state.reserveLocations];
+        addReserveLocations.push({
           zoneId: 0,
           aisleId: 0,
           sectionId: 0,
@@ -115,7 +117,7 @@ export const Location = (
         });
         return {
           ...state,
-          reserveLocations: state.reserveLocations
+          reserveLocations: addReserveLocations
         };
       }
       return {
@@ -134,10 +136,10 @@ export const Location = (
           type: '',
           typeNbr: action.payload.locationTypeNbr
         };
-        state.floorLocations.splice(action.payload.locIndex, 1, editedLocation);
+        const editFloorLocations = [...state.floorLocations].splice(action.payload.locIndex, 1, editedLocation);
         return {
           ...state,
-          floorLocations: state.floorLocations
+          floorLocations: editFloorLocations
         };
       }
       if (action.payload.locationArea === 'reserve') {
@@ -152,10 +154,10 @@ export const Location = (
           type: '',
           typeNbr: action.payload.locationTypeNbr
         };
-        state.reserveLocations.splice(action.payload.locIndex, 1, editedLocation);
+        const editReserveLocations = [...state.reserveLocations].splice(action.payload.locIndex, 1, editedLocation);
         return {
           ...state,
-          reserveLocations: state.reserveLocations
+          reserveLocations: editReserveLocations
         };
       }
       return {
@@ -163,17 +165,17 @@ export const Location = (
       };
     case DELETE_LOCATION_FROM_EXISTING:
       if (action.payload.locationArea === 'floor') {
-        state.floorLocations.splice(action.payload.locIndex, 1);
+        const deleteFloorLocation = [...state.floorLocations].splice(action.payload.locIndex, 1);
         return {
           ...state,
-          floorLocations: state.floorLocations
+          floorLocations: deleteFloorLocation
         };
       }
       if (action.payload.locationArea === 'reserve') {
-        state.reserveLocations.splice(action.payload.locIndex, 1);
+        const deleteReserveLocation = [...state.floorLocations].splice(action.payload.locIndex, 1);
         return {
           ...state,
-          reserveLocations: state.reserveLocations
+          reserveLocations: deleteReserveLocation
         };
       }
       return {
