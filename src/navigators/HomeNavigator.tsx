@@ -72,15 +72,15 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
           case 0:
             setLanguage('en');
             trackEvent('change_language', { language: 'en' });
-            return navigation.dispatch(StackActions.replace('Login'));
+            return navigation.dispatch(StackActions.replace('Tabs'));
           case 1:
             setLanguage('es');
             trackEvent('change_language', { language: 'es' });
-            return navigation.dispatch(StackActions.replace('Login'));
+            return navigation.dispatch(StackActions.replace('Tabs'));
           case 2:
             setLanguage('zh');
             trackEvent('change_language', { language: 'zh' });
-            return navigation.dispatch(StackActions.replace('Login'));
+            return navigation.dispatch(StackActions.replace('Tabs'));
           default:
             return null;
         }
