@@ -226,7 +226,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           workListTypeCode: exceptionType
         }
       ];
-      trackEvent('print_price_sign', { printItem: JSON.stringify(printlist[0]) });
+      trackEvent('print_price_sign', { printItem: JSON.stringify(printlist) });
       dispatch(printSign({ printlist }));
     }).catch(() => {});
   };

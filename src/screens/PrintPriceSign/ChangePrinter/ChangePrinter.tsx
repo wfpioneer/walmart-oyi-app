@@ -36,7 +36,6 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
   // Barcode event listener effect
   useEffectHook(() => {
     const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      trackEventCall('printer_macAddress_scanned', { barcode: scan.value, type: scan.type });
       if (navigation.isFocused()) {
         dispatch(setScannedEvent(scan));
         dispatch(setManualScan(false));
@@ -58,7 +57,7 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
         desc: '',
         id: macAddress
       };
-      trackEventCall('new_printer', { newPrinter: JSON.stringify(newPrinter) });
+      trackEventCall('add_to_printer_list', { newPrinter: JSON.stringify(newPrinter) });
       dispatch(addToPrinterList(newPrinter));
       navigation.goBack();
     }
