@@ -9,7 +9,6 @@ import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
 import Button from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
-import { getUserIsSignedIn } from '../../state/reducers/User';
 import styles from './Login.style';
 import { assignFluffyFeatures, loginUser, logoutUser } from '../../state/actions/User';
 import { getFluffyFeatures } from '../../state/actions/saga';
@@ -38,8 +37,7 @@ type WMSSOUser = Pick<Partial<User>, 'siteId'> & Omit<User, 'siteId'>;
 
 const mapStateToProps = (state: RootState) => ({
   User: state.User,
-  fluffyApiState: state.async.getFluffyRoles,
-  userIsSignedIn: getUserIsSignedIn(state.User)
+  fluffyApiState: state.async.getFluffyRoles
 });
 
 // TODO correct all the function definitions (specifically return types)
@@ -47,7 +45,6 @@ export interface LoginScreenProps {
   loginUser: (userPayload: User) => void;
   logoutUser: () => void,
   User: User;
-  userIsSignedIn: boolean;
   navigation: NavigationProp<any>;
   hideActivityModal: () => void;
   setEndTime: (sessionEndTime: any) => void;
@@ -56,6 +53,8 @@ export interface LoginScreenProps {
   assignFluffyFeatures: (resultPayload: string[]) => void;
   showActivityModal: () => void;
 }
+
+const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
 
 // TODO convert to Functional Component
 export class LoginScreen extends React.PureComponent<LoginScreenProps> {
@@ -152,7 +151,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     return (
       <View style={styles.container}>
         <Modal
-          visible={!this.props.User.siteId && this.props.userIsSignedIn}
+          visible={!this.props.User.siteId && userIsSignedIn(this.props.User)}
           transparent
         >
           <EnterClubNbrForm
