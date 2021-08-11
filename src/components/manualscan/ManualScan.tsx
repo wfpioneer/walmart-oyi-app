@@ -25,7 +25,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
   const [value, onChangeText] = React.useState('');
   const isNavigationFocused = useIsFocused();
   const textInputRef: RefObject<TextInput> = createRef();
-
+  const itemRegex = new RegExp(/[^0-9]/g);
   // Having to use this to get focus correct past the first screen where this gets shown
   useLayoutEffect(() => {
     if (isNavigationFocused) {
@@ -50,7 +50,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
         ref={textInputRef}
         style={styles.textInput}
         value={value}
-        onChangeText={(text: string) => onChangeText(text)}
+        onChangeText={(text: string) => onChangeText(text.replace(itemRegex, ''))}
         selectionColor={COLOR.MAIN_THEME_COLOR}
         placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')}
         onSubmitEditing={(event: any) => onSubmit(event.nativeEvent.text)}
