@@ -85,10 +85,10 @@ envs:
         - rootDir: './'
           type: reactnative
 
-#  aos-variables:
-#    variables:
-#      APK_NAME: 'OYI'
-#      ENV_TYPE: "prod"
+  #  aos-variables:
+  #    variables:
+  #      APK_NAME: 'OYI'
+  #      ENV_TYPE: "prod"
 
   aos-tc-variables:
     variables:
@@ -128,7 +128,7 @@ tools:
   npm: 6.13.4
   sonarscanner: 3.0.3.778
 
-flows:
+rules:
   - before:
       - echo "TestCheck: $APPCENTER_SECRET $APPCENTER_PROD_SECRET"
   - before(build-android):
@@ -136,6 +136,8 @@ flows:
       - echo "{\\n  \"app_secret\": \"$APPCENTER_SECRET\"\\n}" >> android/app/src/main/assets/appcenter-config.json
       - echo "Building android/app/src/main/assets/appcenter-prod-config.json using looper-encrypted secrets"
       - echo "{\\n  \"app_secret\": \"$APPCENTER_PROD_SECRET\"\\n}" >> android/app/src/main/assets/appcenter-config-prod.json
+
+flows:
   npm-install-and-coverage:
     - npm ci
     - npm run test:coverage
