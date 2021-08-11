@@ -147,6 +147,7 @@ export default {
     ZONES: 'Zones',
     AISLES: 'Aisles',
     SECTIONS: 'Sections',
+    SECTION: 'Section',
     AREAS: 'Areas',
     LOCATION_DETAILS: 'Location Details',
     NO_ZONES_AVAILABLE: 'No Zones Available',

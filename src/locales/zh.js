@@ -147,6 +147,7 @@ export default {
     ZONES: 'Zones', // TODO Mandarin Translation
     AISLES: 'Aisles', // TODO Mandarin Translation
     SECTIONS: 'Sections', // TODO Mandarin Translation
+    SECTION: 'Section', // TODO Mandarin Translation
     AREAS: 'Areas', // TODO Mandarin Translation
     LOCATION_DETAILS: 'Location Details', // TODO Mandarin Translation
     NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Mandarin Translation

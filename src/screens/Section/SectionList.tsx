@@ -120,7 +120,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
         renderItem={({ item }) => (
           <LocationItemCard
             locationId={item.sectionId}
-            locationName={item.sectionName}
+            locationName={`${strings('LOCATION.SECTION')} ${item.sectionName}`}
             locationType={LocationType.SECTION}
             dispatch={dispatch}
             locationDetails=""
