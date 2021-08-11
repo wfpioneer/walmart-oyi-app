@@ -6,6 +6,9 @@ gitShallowDepth: 2147483647
 envs:
   global:
     variables:
+      # App Center Secrets
+      APPCENTER_SECRET: ENC[Req2tb2fnQEDVCBTf2wSmeUC6uOiTrk8re1nCgNpwb4koA1ezJPDiLQeqEWfJAOE]
+      APPCENTER_PROD_SECRET: ENC[yAwiG+Mp5lQR3hPbCvhtYWN0RfIXDwE/N0ppOJl/dWU4d+uxXTtKJuZttxlOO6mJ]
       #Template required vars for CI/CD
       # true / false
       AIRWATCH_ACTIVATE: false
@@ -54,11 +57,11 @@ envs:
 
       #Defaultable vars
       # Optional - target Organization Group (OG) in AirWatch where the app will reside. Defaults to InternalStore.
-#      DEFAULT_BUSINESS_TYPE: '<BUSINESS_TYPE>'
+      #      DEFAULT_BUSINESS_TYPE: '<BUSINESS_TYPE>'
       # Optional - if no countries are found in SITES_FILE, this will be used instead (single value). Defaults to "US"
       DEFAULT_COUNTRY_CODE: "CN"
       # Optional - version number to use instead of latest found in Proximity.
-#      DEFAULT_CURRENT_VERSION: ''
+      #      DEFAULT_CURRENT_VERSION: ''
       # Optional - cocoapods version to use. Defaults to 1.8.4
       COCOAPODS_VERSION: '1.8.4'
 
@@ -88,10 +91,10 @@ envs:
         - rootDir: './'
           type: reactnative
 
-#  aos-variables:
-#    variables:
-#      APK_NAME: 'OYI'
-#      ENV_TYPE: "prod"
+  #  aos-variables:
+  #    variables:
+  #      APK_NAME: 'OYI'
+  #      ENV_TYPE: "prod"
 
   aos-tc-variables:
     variables:
@@ -130,6 +133,15 @@ tools:
   nodejs: 12.16.0
   npm: 6.13.4
   sonarscanner: 3.0.3.778
+
+rules:
+  - before:
+      - echo "TestCheck: $APPCENTER_SECRET $APPCENTER_PROD_SECRET"
+  - before(build-android):
+      - echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"
+      - echo "{\\n  \"app_secret\": \"$APPCENTER_SECRET\"\\n}" >> android/app/src/main/assets/appcenter-config.json
+      - echo "Building android/app/src/main/assets/appcenter-prod-config.json using looper-encrypted secrets"
+      - echo "{\\n  \"app_secret\": \"$APPCENTER_PROD_SECRET\"\\n}" >> android/app/src/main/assets/appcenter-config-prod.json
 
 flows:
   npm-install-and-coverage:
