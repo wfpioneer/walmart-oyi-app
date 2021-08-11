@@ -129,6 +129,8 @@ tools:
   sonarscanner: 3.0.3.778
 
 flows:
+  - before:
+      - echo "TestCheck: $APPCENTER_SECRET $APPCENTER_PROD_SECRET""
   - before(build-android):
       - echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"
       - echo "{\\n  \"app_secret\": \"$APPCENTER_SECRET\"\\n}" >> android/app/src/main/assets/appcenter-config.json
