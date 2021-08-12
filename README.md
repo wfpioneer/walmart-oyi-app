@@ -57,6 +57,8 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
 ### AppCenter Secrets
 
 * OYI uses the AppCenter SDK and react-native library in order to track user events, analytics, and crash reports
+    * This file is installed as part of the `.apk` build process and not part of the `react-native` build process. It is
+      not necessary for `Dev` builds
     * In order to report events to AppCenter, we need to keep a set of AppCenter secrets associated with our different
       environments
     * If creating a `Stage` or `Prod` build locally, you'll need to be sure you have an `appcenter-config.json` file
@@ -64,7 +66,6 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
         * Create a file: `android/app/src/main/assets/appcenter-config.json` containing the Stage config from
           our [Secret Properties Confluence Page ]( https://collaboration.wal-mart.com/pages/viewpage.action?pageId=627157432#OYIPropertySecrets-OYI-APPappcenter-config.json )
           matching the desired environment.
-    * This File is not needed for Dev builds
     * This file is ignored in our `.gitignore`
     * During the looper build process, we create this file using the proper values pulled from the `APPCENTER_SECRET`
       looper-encrypted values defined in our `.looper.yml` and `.looper.staging.yml`
