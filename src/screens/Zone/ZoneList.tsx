@@ -95,6 +95,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
         data={getZoneApi.result?.data || []}
         renderItem={({ item }) => (
           <LocationItemCard
+            location={item.zoneName}
             locationId={item.zoneId}
             locationType={LocationType.ZONE}
             locationName={item.zoneName}

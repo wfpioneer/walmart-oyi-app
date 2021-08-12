@@ -145,7 +145,9 @@ export default {
     EDIT_LOCATION: 'Editar Ubicación',
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ZONES: 'Zonas',
+    ZONE: 'Zone', // TODO Spanish Translation
     AISLES: 'Pasillos',
+    AISLE: 'Aisle', // TODO Spanish Translation
     SECTIONS: 'Secciones',
     SECTION: 'Section', // TODO Spanish Translation
     AREAS: 'Areas', // TODO Spanish Translation

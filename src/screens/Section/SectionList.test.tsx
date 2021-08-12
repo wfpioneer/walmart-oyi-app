@@ -8,7 +8,8 @@ import { mockSections } from '../../mockData/sectionDetails';
 let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
 const AISLE_ID = 1;
-const AISLE_NAME = 'Aisle 1';
+const AISLE_NAME = '1';
+const ZONE_NAME = 'CARN';
 
 describe('Test Section List', () => {
   it('Renders Section Screen with Data', () => {
@@ -27,6 +28,7 @@ describe('Test Section List', () => {
       <SectionScreen
         aisle={AISLE_ID}
         aisleName={AISLE_NAME}
+        zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllSections={getSectionSuccess}
         apiStart={0}
@@ -56,6 +58,7 @@ describe('Test Section List', () => {
       <SectionScreen
         aisle={AISLE_ID}
         aisleName={AISLE_NAME}
+        zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllSections={getSectionSuccess}
         apiStart={0}
@@ -83,6 +86,7 @@ describe('Test Get Section Api Response', () => {
       <SectionScreen
         aisle={AISLE_ID}
         aisleName={AISLE_NAME}
+        zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllSections={getSectionResponseFailure}
         apiStart={0}
@@ -108,6 +112,7 @@ describe('Test Get Section Api Response', () => {
       <SectionScreen
         aisle={AISLE_ID}
         aisleName={AISLE_NAME}
+        zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllSections={getSectionIsWaiting}
         apiStart={0}

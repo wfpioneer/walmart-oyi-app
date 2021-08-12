@@ -111,7 +111,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
   return (
     <View>
       <LocationHeader
-        location={zoneName}
+        location={`${strings('LOCATION.ZONE')} ${zoneName}`}
         details={`${getAllAisles.result?.data.length || 0} ${strings('LOCATION.AISLES')}`}
       />
 
@@ -119,8 +119,9 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
         data={getAllAisles.result?.data || []}
         renderItem={({ item }) => (
           <LocationItemCard
+            location={`${strings('LOCATION.AISLE')} ${zoneName}${item.aisleName}`}
             locationId={item.aisleId}
-            locationName={`${strings('LOCATION.AISLES')} ${item.aisleName}`}
+            locationName={item.aisleName}
             locationType={LocationType.AISLE}
             locationDetails={`${item.sectionCount} ${strings('LOCATION.SECTIONS')}`}
             navigator={navigation}

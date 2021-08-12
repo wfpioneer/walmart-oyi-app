@@ -68,7 +68,7 @@ exports[`Test Section List Renders Section Screen with Data 1`] = `
 <View>
   <LocationHeader
     details="6 [missing \\"en.LOCATION.SECTIONS\\" translation]"
-    location="Aisle 1"
+    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
   />
   <FlatList
     ListEmptyComponent={<NoSectionMessage />}
@@ -125,7 +125,7 @@ exports[`Test Section List Renders Section Screen with Empty Data 1`] = `
 <View>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
-    location="Aisle 1"
+    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
   />
   <FlatList
     ListEmptyComponent={<NoSectionMessage />}

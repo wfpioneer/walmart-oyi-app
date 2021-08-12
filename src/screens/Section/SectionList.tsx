@@ -30,6 +30,7 @@ const NoSectionMessage = () : JSX.Element => (
 interface SectionProps {
     aisle: number,
     aisleName: string,
+    zoneName: string,
     getAllSections: AsyncState,
     dispatch: Dispatch<any>,
     apiStart: number,
@@ -44,6 +45,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
   const {
     aisle,
     aisleName,
+    zoneName,
     getAllSections,
     navigation,
     apiStart,
@@ -111,7 +113,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
   return (
     <View>
       <LocationHeader
-        location={aisleName}
+        location={`${strings('LOCATION.AISLE')} ${zoneName}${aisleName}`}
         details={`${getAllSections.result?.data.length || 0} ${strings('LOCATION.SECTIONS')}`}
       />
 
@@ -119,8 +121,9 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
         data={getAllSections.result?.data || []}
         renderItem={({ item }) => (
           <LocationItemCard
+            location={`${strings('LOCATION.SECTION')} ${zoneName}${aisleName}-${item.sectionName}`}
             locationId={item.sectionId}
-            locationName={`${strings('LOCATION.SECTION')} ${item.sectionName}`}
+            locationName={item.sectionName}
             locationType={LocationType.SECTION}
             dispatch={dispatch}
             locationDetails=""
@@ -140,7 +143,8 @@ const SectionList = (): JSX.Element => {
   const navigation = useNavigation();
   const getLocationApi = useTypedSelector(state => state.async.getSections);
   const aisleId = useTypedSelector(state => state.Location.selectedAisle.id);
-  const aisleName = useTypedSelector(state => state.Location.selectedZone.name);
+  const aisleName = useTypedSelector(state => state.Location.selectedAisle.name);
+  const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const route = useRoute();
@@ -149,6 +153,7 @@ const SectionList = (): JSX.Element => {
     <SectionScreen
       aisle={aisleId}
       aisleName={aisleName}
+      zoneName={zoneName}
       navigation={navigation}
       dispatch={dispatch}
       getAllSections={getLocationApi}

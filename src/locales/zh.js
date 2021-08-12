@@ -145,7 +145,9 @@ export default {
     EDIT_LOCATION: '修改位置',
     LOCATION_MANAGEMENT: 'Location Management', // TODO Mandarin Translation
     ZONES: 'Zones', // TODO Mandarin Translation
+    ZONE: 'Zone', // TODO Mandarin Translation
     AISLES: 'Aisles', // TODO Mandarin Translation
+    AISLE: 'Aisle', // TODO Mandarin Translation
     SECTIONS: 'Sections', // TODO Mandarin Translation
     SECTION: 'Section', // TODO Mandarin Translation
     AREAS: 'Areas', // TODO Mandarin Translation
