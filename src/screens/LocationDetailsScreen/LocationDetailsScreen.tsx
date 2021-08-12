@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Text, View
+  Text, TouchableOpacity, View
 } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -8,6 +8,7 @@ import { strings } from '../../locales';
 import { LocationHeader } from '../../components/locationHeader/LocationHeader';
 import { mockLocationDetails } from '../../mockData/locationDetails';
 import { LocationItem } from '../../models/LocationItems';
+import styles from './LocationDetailsScreen.style';
 
 import COLOR from '../../themes/Color';
 
@@ -22,15 +23,18 @@ interface LocationProps {
   mockData: LocationItem
 }
 
-const FloorText = () : JSX.Element => (
-  <View>
-    <Text>{strings('LOCATION.FLOORS')}</Text>
-  </View>
-);
-
-const ReserveText = () : JSX.Element => (
-  <View>
-    <Text>{strings('LOCATION.RESERVES')}</Text>
+const ItemHeader = () : JSX.Element => (
+  <View style={styles.tabHeader}>
+    <Text style={styles.tabHeaderText}>
+      Items
+    </Text>
+    <TouchableOpacity>
+      <Text style={styles.clear}>Clear all</Text>
+    </TouchableOpacity>
+    <Text style={styles.pipe}>|</Text>
+    <TouchableOpacity>
+      <Text style={styles.add}>Add</Text>
+    </TouchableOpacity>
   </View>
 );
 
@@ -47,11 +51,11 @@ const LocationTabs = (props : LocationProps) : JSX.Element => {
     >
       <Tab.Screen
         name={`${strings('LOCATION.FLOORS')} (${mockData.floor.length})`}
-        component={FloorText}
+        component={ItemHeader}
       />
       <Tab.Screen
         name={`${strings('LOCATION.RESERVES')} (${mockData.reserve.length})`}
-        component={ReserveText}
+        component={ItemHeader}
       />
     </Tab.Navigator>
   );

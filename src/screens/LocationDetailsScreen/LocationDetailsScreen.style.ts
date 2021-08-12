@@ -51,6 +51,33 @@ const styles = StyleSheet.create({
   },
   contentPadding: {
     paddingBottom: 100
+  },
+  tabHeader: {
+    backgroundColor: COLOR.WHITE,
+    padding: 14,
+    marginHorizontal: 0,
+    borderBottomWidth: 2,
+    borderBottomColor: COLOR.GREY_200,
+    flexDirection: 'row'
+  },
+  clear: {
+    color: COLOR.MAIN_THEME_COLOR,
+    paddingRight: 14,
+    fontSize: 14
+  },
+  add: {
+    color: COLOR.MAIN_THEME_COLOR,
+    paddingLeft: 14,
+    fontSize: 14
+  },
+  tabHeaderText: {
+    flex: 1,
+    color: COLOR.GREY_600,
+    fontSize: 14
+  },
+  pipe: {
+    color: COLOR.GREY_600,
+    fontSize: 14
   }
 });
 

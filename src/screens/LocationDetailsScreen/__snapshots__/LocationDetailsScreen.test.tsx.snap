@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Location Details Screen Renders Location Details Screen with Mock Data 1`] = `
+<View>
+  <LocationHeader
+    details="1 [missing \\"en.LOCATION.ITEMS\\" translation], 1 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    location="Section G1-1"
+  />
+</View>
+`;
