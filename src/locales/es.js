@@ -202,5 +202,9 @@ export default {
     FAILED_APPROVE: 'Las solicitudes fallaron al aprobarse',
     FAILED_ITEMS: 'Artículos Fallidos',
     UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo'
+  },
+  LOGIN: {
+    CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI', // TODO: Spanish Translation
+    ENTER_CLUB_NBR: 'Enter a Club Number' // TODO: Spansih Translation
   }
 };

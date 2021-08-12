@@ -30,9 +30,9 @@ const testUser: User = {
   },
   countryCode: '',
   domain: '',
-  siteId: 0,
-  token: '',
-  userId: '',
+  siteId: 1,
+  token: 'aFakeToken',
+  userId: 'aFakeUserId',
   features: []
 };
 
@@ -40,6 +40,7 @@ const defaultTestProp: LoginScreenProps = {
   User: testUser,
   hideActivityModal: jest.fn(),
   loginUser: jest.fn(),
+  logoutUser: jest.fn(),
   navigation: navigationProp,
   setEndTime: jest.fn(),
   getFluffyFeatures: jest.fn(),
@@ -57,9 +58,31 @@ describe('LoginScreen', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(<LoginScreen
       loginUser={jest.fn}
+      logoutUser={jest.fn}
       navigation={navigationProp}
       hideActivityModal={jest.fn}
       User={testUser}
+      setEndTime={jest.fn}
+      getFluffyFeatures={jest.fn}
+      fluffyApiState={{
+        isWaiting: false,
+        error: '',
+        result: {}
+      }}
+      assignFluffyFeatures={jest.fn}
+      showActivityModal={jest.fn}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders the EnterClubNbr modal when a user logs in without a club number', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(<LoginScreen
+      loginUser={jest.fn}
+      logoutUser={jest.fn}
+      navigation={navigationProp}
+      hideActivityModal={jest.fn}
+      User={{ ...testUser, siteId: 0 }}
       setEndTime={jest.fn}
       getFluffyFeatures={jest.fn}
       fluffyApiState={{
