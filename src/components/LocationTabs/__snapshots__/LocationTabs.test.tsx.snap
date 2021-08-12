@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Location Details Screen Renders Location Details Screen with Mock Data 1`] = `
+<MaterialTopTabNavigator
+  tabBarOptions={
+    Object {
+      "activeTintColor": "#0071e9",
+      "indicatorStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "style": Object {
+        "backgroundColor": "#ffffffff",
+      },
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.LOCATION.FLOORS\\" translation] (1)"
+  />
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.LOCATION.RESERVES\\" translation] (1)"
+  />
+</MaterialTopTabNavigator>
+`;

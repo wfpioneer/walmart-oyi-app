@@ -155,7 +155,9 @@ export default {
     LOCATION_DETAILS: 'Location Details',
     NO_ZONES_AVAILABLE: 'No Zones Available',
     NO_AISLES_AVAILABLE: 'No Aisles Available',
-    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.'
+    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
+    CLEAR_ALL: 'Clear all',
+    ADD: 'Add'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
