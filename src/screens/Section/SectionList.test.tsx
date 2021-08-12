@@ -26,7 +26,7 @@ describe('Test Section List', () => {
     };
     renderer.render(
       <SectionScreen
-        aisle={AISLE_ID}
+        aisleId={AISLE_ID}
         aisleName={AISLE_NAME}
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
@@ -56,7 +56,7 @@ describe('Test Section List', () => {
     };
     renderer.render(
       <SectionScreen
-        aisle={AISLE_ID}
+        aisleId={AISLE_ID}
         aisleName={AISLE_NAME}
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
@@ -84,7 +84,7 @@ describe('Test Get Section Api Response', () => {
     };
     renderer.render(
       <SectionScreen
-        aisle={AISLE_ID}
+        aisleId={AISLE_ID}
         aisleName={AISLE_NAME}
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
@@ -110,7 +110,7 @@ describe('Test Get Section Api Response', () => {
     };
     renderer.render(
       <SectionScreen
-        aisle={AISLE_ID}
+        aisleId={AISLE_ID}
         aisleName={AISLE_NAME}
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}

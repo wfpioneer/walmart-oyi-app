@@ -28,7 +28,7 @@ const NoSectionMessage = () : JSX.Element => (
 );
 
 interface SectionProps {
-    aisle: number,
+    aisleId: number,
     aisleName: string,
     zoneName: string,
     getAllSections: AsyncState,
@@ -43,7 +43,7 @@ interface SectionProps {
 
 export const SectionScreen = (props: SectionProps) : JSX.Element => {
   const {
-    aisle,
+    aisleId,
     aisleName,
     zoneName,
     getAllSections,
@@ -61,7 +61,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
     validateSession(navigation, route.name).then(() => {
       trackEventCall('get_location_api_call');
       setApiStart(moment().valueOf());
-      dispatch(getSections({ aisleId: aisle }));
+      dispatch(getSections({ aisleId }));
     }).catch(() => {});
   }), [navigation]);
 
@@ -101,7 +101,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
           style={styles.errorButton}
           onPress={() => {
             trackEventCall('location_api_retry',);
-            dispatch(getSections({ aisleId: aisle }));
+            dispatch(getSections({ aisleId }));
           }}
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
@@ -141,7 +141,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
 
 const SectionList = (): JSX.Element => {
   const navigation = useNavigation();
-  const getLocationApi = useTypedSelector(state => state.async.getSections);
+  const getAllSections = useTypedSelector(state => state.async.getSections);
   const aisleId = useTypedSelector(state => state.Location.selectedAisle.id);
   const aisleName = useTypedSelector(state => state.Location.selectedAisle.name);
   const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
@@ -151,12 +151,12 @@ const SectionList = (): JSX.Element => {
 
   return (
     <SectionScreen
-      aisle={aisleId}
+      aisleId={aisleId}
       aisleName={aisleName}
       zoneName={zoneName}
       navigation={navigation}
       dispatch={dispatch}
-      getAllSections={getLocationApi}
+      getAllSections={getAllSections}
       apiStart={apiStart}
       setApiStart={setApiStart}
       route={route}

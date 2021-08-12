@@ -28,7 +28,7 @@ const NoAisleMessage = () : JSX.Element => (
 );
 
 interface AisleProps {
-    zone: number,
+    zoneId: number,
     zoneName: string,
     getAllAisles: AsyncState,
     dispatch: Dispatch<any>,
@@ -42,7 +42,7 @@ interface AisleProps {
 
 export const AisleScreen = (props: AisleProps) : JSX.Element => {
   const {
-    zone,
+    zoneId,
     zoneName,
     getAllAisles,
     navigation,
@@ -59,7 +59,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
     validateSession(navigation, route.name).then(() => {
       trackEventCall('get_location_api_call');
       setApiStart(moment().valueOf());
-      dispatch(getAisle({ zoneId: zone }));
+      dispatch(getAisle({ zoneId }));
     }).catch(() => {});
   }), [navigation]);
 
@@ -99,7 +99,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
           style={styles.errorButton}
           onPress={() => {
             trackEventCall('location_api_retry',);
-            dispatch(getAisle({ zoneId: zone }));
+            dispatch(getAisle({ zoneId }));
           }}
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
@@ -139,7 +139,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
 
 const AisleList = (): JSX.Element => {
   const navigation = useNavigation();
-  const getLocationApi = useTypedSelector(state => state.async.getAisle);
+  const getAllAisles = useTypedSelector(state => state.async.getAisle);
   const zoneId = useTypedSelector(state => state.Location.selectedZone.id);
   const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
   const [apiStart, setApiStart] = useState(0);
@@ -148,11 +148,11 @@ const AisleList = (): JSX.Element => {
 
   return (
     <AisleScreen
-      zone={zoneId}
+      zoneId={zoneId}
       zoneName={zoneName}
       navigation={navigation}
       dispatch={dispatch}
-      getAllAisles={getLocationApi}
+      getAllAisles={getAllAisles}
       apiStart={apiStart}
       setApiStart={setApiStart}
       route={route}
