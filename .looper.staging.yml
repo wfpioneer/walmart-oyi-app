@@ -142,6 +142,8 @@ rules:
       - 'echo "{\\n  \"app_secret\": \"$APPCENTER_SECRET\"\\n}" >> android/app/src/main/assets/appcenter-config.json'
       - 'echo "Building android/app/src/main/assets/appcenter-prod-config.json using looper-encrypted secrets"'
       - 'echo "{\\n  \"app_secret\": \"$APPCENTER_PROD_SECRET\"\\n}" >> android/app/src/main/assets/appcenter-config-prod.json'
+      - 'cat android/app/src/main/assets/appcenter-config.json'
+      - 'cat android/app/src/main/assets/appcenter-prod-config.json'
 
 flows:
   npm-install-and-coverage:
