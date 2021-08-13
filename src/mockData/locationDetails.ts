@@ -34,3 +34,15 @@ export const mockLocationDetails : LocationItem = {
     }
   ]
 };
+
+export const mockLocationDetailsEmpty : LocationItem = {
+  ...mockLocationDetails,
+  floor: [],
+  reserve: []
+};
+
+export const mockLocationDetailsLargeLocationCount : LocationItem = {
+  ...mockLocationDetails,
+  floor: Array.from({ length: 100 }, () => mockLocationDetails.floor[0]),
+  reserve: Array.from({ length: 100 }, () => mockLocationDetails.reserve[0])
+};

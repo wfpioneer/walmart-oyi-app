@@ -15,6 +15,24 @@ export interface SectionItem {
     sectionName: string,
 }
 
+export interface Floor {
+  itemNbr: number,
+  itemDesc: string,
+  price: number
+}
+
+export interface Reserve {
+  palletId: number,
+  palletCreateTS: string,
+  items: [
+    {
+      itemNbr: number,
+      itemDesc: string,
+      price: number
+    }
+  ]
+}
+
 export interface LocationItem {
         zone: {
           id: number,
@@ -28,24 +46,6 @@ export interface LocationItem {
           id: number,
           name: string
         }
-        floor: [
-          {
-            itemNbr: number,
-            itemDesc: string,
-            price: number
-          }
-        ],
-        reserve: [
-          {
-            palletId: number,
-            palletCreateTS: string,
-            items: [
-              {
-                itemNbr: number,
-                itemDesc: string,
-                price: number
-              }
-            ]
-          }
-        ]
+        floor: Floor[],
+        reserve: Reserve[]
       }
