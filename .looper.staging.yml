@@ -142,8 +142,7 @@ tools:
 
 rules:
   before(default):
-    -var(VERSION_TYPE):
-    patch
+    -var(VERSION_TYPE): patch
 flows:
   default:
     - echo bump version to ${VERSION_TYPE}
