@@ -12,9 +12,9 @@ envs:
       # Cert / Prod
       AIRWATCH_ENV: Prod
       # whether the APK should be built or not
-      BUILD_APP_FLAG: true
+      BUILD_APP_FLAG: false
       # true / false
-      DEPLOY_TO_AIRWATCH: true
+      DEPLOY_TO_AIRWATCH: false
       # email list where the notification will be sent
       EMAIL_NOTIFICATION: IntlSamsOYI@wal-mart.com
 
@@ -81,7 +81,14 @@ envs:
       projects:
         - rootDir: './'
           type: reactnative
-
+  prod-deploy:
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+      # true / false
+      DEPLOY_TO_AIRWATCH: true
+  prod-build:
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
 #  aos-variables:
 #    variables:
 #      APK_NAME: 'OYI'
@@ -125,6 +132,14 @@ tools:
   npm: 6.13.4
   sonarscanner: 3.0.3.778
 
+triggers:
+  - manual:
+      name: Build & Deploy Production apk to Airwatch
+      call: reactnative-build(prod-deploy)
+  - manual:
+      name: Build Production apk
+      call: reactnative-build(prod-build)
+  
 flows:
   npm-install-and-coverage:
     - npm ci

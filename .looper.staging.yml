@@ -87,15 +87,31 @@ envs:
       projects:
         - rootDir: './'
           type: reactnative
-  # Override Global Variables
-  stage:
+  # Overrides Global Variable declarations
+  major:
     variables:
-      # true / false
-      AIRWATCH_ACTIVATE: false
       # whether the APK should be built or not
       BUILD_APP_FLAG: true
       # true / false
       DEPLOY_TO_AIRWATCH: true
+      #Versioning vars
+      VERSION_TYPE: 'major'
+  minor:
+    variables:
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+      # true / false
+      DEPLOY_TO_AIRWATCH: true
+      #Versioning vars
+      VERSION_TYPE: 'minor'
+  patch:
+    variables:
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+      # true / false
+      DEPLOY_TO_AIRWATCH: true
+      #Versioning vars
+      VERSION_TYPE: 'patch'
 
 #  aos-variables:
 #    variables:
@@ -140,13 +156,18 @@ tools:
   npm: 6.13.4
   sonarscanner: 3.0.3.778
 
-rules:
-  - before(default):
-      - echo "Retrieving Version type ${VERSION_TYPE}"
-      - var(VERSION_TYPE): 'patch'
+
+triggers:
+  - manual:
+      name: Deploy Stage Major Version to AirWatch
+      call: reactnative-build(major)
+  - manual:
+      name: Deploy Stage Minor Version to AirWatch
+      call: reactnative-build(minor)
+  - manual:
+      name: Deploy Stage Patch Version to AirWatch
+      call: reactnative-build(patch)
 flows:
-  default:
-    - echo "bump version to ${VERSION_TYPE}"
   npm-install-and-coverage:
     - npm ci
     - npm run test:coverage
