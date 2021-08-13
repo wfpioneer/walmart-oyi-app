@@ -10,12 +10,16 @@ import { LocationItem } from '../../models/LocationItems';
 import LocationTabs from '../../components/LocationTabs/LocationTabs';
 
 interface LocationDetailProps {
+  zoneName: string,
+  aisleName: string,
   sectionName: string,
   mockData: LocationItem
 }
 
 export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element => {
   const {
+    zoneName,
+    aisleName,
     sectionName,
     mockData
   } = props;
@@ -26,7 +30,7 @@ export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element 
   return (
     <View>
       <LocationHeader
-        location={sectionName}
+        location={`${strings('LOCATION.SECTION')} ${zoneName}${aisleName}-${sectionName}`}
         details={`${floor} ${strings('LOCATION.ITEMS')}, ${reserve} ${strings('LOCATION.PALLETS')}`}
       />
     </View>
@@ -35,10 +39,14 @@ export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element 
 
 const LocationDetails = (): JSX.Element => {
   const sectionName = useTypedSelector(state => state.Location.selectedSection.name);
+  const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
+  const aisleName = useTypedSelector(state => state.Location.selectedAisle.name);
 
   return (
     <>
       <LocationDetailsScreen
+        zoneName={zoneName}
+        aisleName={aisleName}
         sectionName={sectionName}
         mockData={mockLocationDetails}
       />
