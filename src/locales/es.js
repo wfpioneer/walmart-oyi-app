@@ -158,14 +158,9 @@ export default {
     LOCATION_DETAILS: 'Detalles de ubicación',
     NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Spanish Translation
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Spanish Translation
-<<<<<<< HEAD
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_ALL: 'Clear all', // TODO Spanish Translation
     ADD: 'Add' // TODO Spanish Translation
-=======
-    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Spanish Translation
-    LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.'
->>>>>>> 772562fa3b3ff309d44050795b423fc484a29286
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

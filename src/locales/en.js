@@ -158,14 +158,9 @@ export default {
     LOCATION_DETAILS: 'Location Details',
     NO_ZONES_AVAILABLE: 'No Zones Available',
     NO_AISLES_AVAILABLE: 'No Aisles Available',
-<<<<<<< HEAD
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
     CLEAR_ALL: 'Clear all',
     ADD: 'Add'
-=======
-    NO_SECTIONS_AVAILABLE: 'No Sections Available',
-    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.'
->>>>>>> 772562fa3b3ff309d44050795b423fc484a29286
   },
   WORKLIST: {
     WORKLIST: 'Work List',

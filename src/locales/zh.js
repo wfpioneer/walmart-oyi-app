@@ -158,14 +158,9 @@ export default {
     LOCATION_DETAILS: 'Location Details', // TODO Mandarin Translation
     NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Mandarin Translation
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Mandarin Translation
-<<<<<<< HEAD
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
     CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
     ADD: 'Add' // TODO Mandarin Translation
-=======
-    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Mandarin Translation
-    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.' // TODO Mandarin Translation
->>>>>>> 772562fa3b3ff309d44050795b423fc484a29286
   },
   WORKLIST: {
     WORKLIST: '待办任务',
