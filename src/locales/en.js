@@ -132,6 +132,8 @@ export default {
     TITLE: 'All locations',
     FLOOR: 'Floor locations',
     RESERVE: 'Reserve locations',
+    FLOORS: 'Floor',
+    RESERVES: 'Reserve',
     ADD_LOCATION_API_ERROR: 'There was an error adding the location. \nPlease try again.',
     EDIT_LOCATION_API_ERROR: 'There was an error editing the location. \nPlease try again.',
     ADD_DUPLICATE_ERROR: 'Location and type combination \nalready exists.',
@@ -144,6 +146,8 @@ export default {
     ADD_NEW_LOCATION: 'Add New Location',
     EDIT_LOCATION: 'Edit Location',
     LOCATION_MANAGEMENT: 'Location Management',
+    ITEMS: 'Items',
+    PALLETS: 'Pallets',
     ZONES: 'Zones',
     ZONE: 'Zone',
     AISLES: 'Aisles',
@@ -154,8 +158,9 @@ export default {
     LOCATION_DETAILS: 'Location Details',
     NO_ZONES_AVAILABLE: 'No Zones Available',
     NO_AISLES_AVAILABLE: 'No Aisles Available',
-    NO_SECTIONS_AVAILABLE: 'No Sections Available',
-    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.'
+    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
+    CLEAR_ALL: 'Clear all',
+    ADD: 'Add'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
