@@ -3,7 +3,9 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { LocationDetailsScreen } from './LocationDetailsScreen';
 import { mockLocationDetails } from '../../mockData/locationDetails';
 
-const SECTION_NAME = 'Section G1-1';
+const SECTION_NAME = '1';
+const ZONE_NAME = 'ABAR';
+const AISLE_NAME = '2';
 
 describe('Test Location Details Screen', () => {
   it('Renders Location Details Screen with Mock Data', () => {
@@ -11,6 +13,8 @@ describe('Test Location Details Screen', () => {
     renderer.render(
       <LocationDetailsScreen
         sectionName={SECTION_NAME}
+        zoneName={ZONE_NAME}
+        aisleName={AISLE_NAME}
         mockData={mockLocationDetails}
       />
     );

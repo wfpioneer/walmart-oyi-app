@@ -4,7 +4,7 @@ exports[`Test Location Details Screen Renders Location Details Screen with Mock 
 <View>
   <LocationHeader
     details="1 [missing \\"en.LOCATION.ITEMS\\" translation], 1 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    location="Section G1-1"
+    location="[missing \\"en.LOCATION.SECTION\\" translation] ABAR2-1"
   />
 </View>
 `;
