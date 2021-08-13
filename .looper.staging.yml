@@ -143,7 +143,7 @@ tools:
 rules:
   before(default):
     - echo "Retrieving Version type ${VERSION_TYPE}"
-    -var(VERSION_TYPE): 'patch'
+    - var(VERSION_TYPE): 'patch'
 flows:
   default:
     - echo "bump version to ${VERSION_TYPE}"
