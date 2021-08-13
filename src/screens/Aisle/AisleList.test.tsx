@@ -25,7 +25,7 @@ describe('Test Aisle List', () => {
     };
     renderer.render(
       <AisleScreen
-        zone={ZONE_ID}
+        zoneId={ZONE_ID}
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllAisles={getAisleSuccess}
@@ -54,7 +54,7 @@ describe('Test Aisle List', () => {
     };
     renderer.render(
       <AisleScreen
-        zone={ZONE_ID}
+        zoneId={ZONE_ID}
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllAisles={getAisleSuccess}
@@ -81,7 +81,7 @@ describe('Test Get Aisle Api Response', () => {
     };
     renderer.render(
       <AisleScreen
-        zone={ZONE_ID}
+        zoneId={ZONE_ID}
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllAisles={getAisleResponseFailure}
@@ -106,7 +106,7 @@ describe('Test Get Aisle Api Response', () => {
     };
     renderer.render(
       <AisleScreen
-        zone={ZONE_ID}
+        zoneId={ZONE_ID}
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllAisles={getAisleIsWaiting}

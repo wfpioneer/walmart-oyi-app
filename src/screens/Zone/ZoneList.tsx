@@ -95,6 +95,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
         data={getZoneApi.result?.data || []}
         renderItem={({ item }) => (
           <LocationItemCard
+            location={item.zoneName}
             locationId={item.zoneId}
             locationType={LocationType.ZONE}
             locationName={item.zoneName}
@@ -114,7 +115,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
 
 const ZoneList = (): JSX.Element => {
   const siteId = useTypedSelector(state => state.User.siteId);
-  const getLocationApi = useTypedSelector(state => state.async.getAllZones);
+  const getZoneApi = useTypedSelector(state => state.async.getAllZones);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -123,7 +124,7 @@ const ZoneList = (): JSX.Element => {
     <ZoneScreen
       siteId={siteId}
       dispatch={dispatch}
-      getZoneApi={getLocationApi}
+      getZoneApi={getZoneApi}
       navigation={navigation}
       route={route}
       useEffectHook={useEffect}
