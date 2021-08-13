@@ -4,7 +4,7 @@ exports[`Test Aisle List Renders Aisle Screen with Data 1`] = `
 <View>
   <LocationHeader
     details="6 [missing \\"en.LOCATION.AISLES\\" translation]"
-    location="Grocery"
+    location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
   />
   <FlatList
     ListEmptyComponent={<NoAisleMessage />}
@@ -67,7 +67,7 @@ exports[`Test Aisle List Renders Aisle Screen with Empty Data 1`] = `
 <View>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
-    location="Grocery"
+    location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
   />
   <FlatList
     ListEmptyComponent={<NoAisleMessage />}

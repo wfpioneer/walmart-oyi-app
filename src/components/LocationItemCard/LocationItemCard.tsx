@@ -11,6 +11,7 @@ import { selectAisle, selectSection, selectZone } from '../../state/actions/Loca
 import { LocationType } from '../../models/LocationType';
 
 interface LocationItemCardProp {
+  location: string
   locationId: number,
   locationType: LocationType,
   locationName: string,
@@ -28,6 +29,7 @@ const mapLocTypeToActionCreator = {
 
 const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
   const {
+    location,
     locationId,
     locationType,
     locationName,
@@ -47,7 +49,7 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
     >
       <View style={styles.itemContainer}>
         <View style={styles.nameText}>
-          <Text>{locationName}</Text>
+          <Text>{location}</Text>
           <View>
             <Text style={styles.detailsText}>
               {locationDetails}

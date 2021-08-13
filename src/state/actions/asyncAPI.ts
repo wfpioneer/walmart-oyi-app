@@ -50,3 +50,6 @@ export const getAllZones = makeAsyncActionCreators(GET_ALL_ZONES);
 
 export const GET_AISLE = makeAsyncActionTypes('API/GET_AISLE');
 export const getAisle = makeAsyncActionCreators(GET_AISLE);
+
+export const GET_SECTIONS = makeAsyncActionTypes('API/GET_SECTIONS');
+export const getSections = makeAsyncActionCreators(GET_SECTIONS);

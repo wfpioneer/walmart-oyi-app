@@ -145,12 +145,16 @@ export default {
     EDIT_LOCATION: 'Editar Ubicación',
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ZONES: 'Zonas',
+    ZONE: 'Zone', // TODO Spanish Translation
     AISLES: 'Pasillos',
+    AISLE: 'Aisle', // TODO Spanish Translation
     SECTIONS: 'Secciones',
+    SECTION: 'Section', // TODO Spanish Translation
     AREAS: 'Areas', // TODO Spanish Translation
     LOCATION_DETAILS: 'Detalles de ubicación',
     NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Spanish Translation
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Spanish Translation
+    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Spanish Translation
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.'
   },
   WORKLIST: {
