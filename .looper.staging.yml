@@ -142,10 +142,11 @@ tools:
 
 rules:
   before(default):
-    -var(VERSION_TYPE): patch
+    - echo "Retrieving Version type ${VERSION_TYPE}"
+    -var(VERSION_TYPE): 'patch'
 flows:
   default:
-    - echo bump version to ${VERSION_TYPE}
+    - echo "bump version to ${VERSION_TYPE}"
   npm-install-and-coverage:
     - npm ci
     - npm run test:coverage
