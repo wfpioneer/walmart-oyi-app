@@ -12,7 +12,7 @@ envs:
       # Cert / Prod
       AIRWATCH_ENV: Prod
       # whether the APK should be built or not
-      BUILD_APP_FLAG: true
+      BUILD_APP_FLAG: false
       # true / false
       DEPLOY_TO_AIRWATCH: false
       # email list where the notification will be sent
@@ -87,6 +87,15 @@ envs:
       projects:
         - rootDir: './'
           type: reactnative
+  # Override Global Variables
+  stage:
+    variables:
+      # true / false
+      AIRWATCH_ACTIVATE: false
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+      # true / false
+      DEPLOY_TO_AIRWATCH: true
 
 #  aos-variables:
 #    variables:
@@ -131,7 +140,13 @@ tools:
   npm: 6.13.4
   sonarscanner: 3.0.3.778
 
+rules:
+  before(default):
+    -var(VERSION_TYPE):
+    patch
 flows:
+  default:
+    - echo bump version to ${VERSION_TYPE}
   npm-install-and-coverage:
     - npm ci
     - npm run test:coverage
