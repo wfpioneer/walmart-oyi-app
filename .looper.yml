@@ -6,9 +6,8 @@ gitShallowDepth: 2147483647
 envs:
   global:
     variables:
-      # App Center Secrets
-      APPCENTER_SECRET: ENC[Req2tb2fnQEDVCBTf2wSmeUC6uOiTrk8re1nCgNpwb4koA1ezJPDiLQeqEWfJAOE]
-      APPCENTER_PROD_SECRET: ENC[yAwiG+Mp5lQR3hPbCvhtYWN0RfIXDwE/N0ppOJl/dWU4d+uxXTtKJuZttxlOO6mJ]
+      # App Center Prod Secret
+      APPCENTER_SECRET_PROD: ENC[yAwiG+Mp5lQR3hPbCvhtYWN0RfIXDwE/N0ppOJl/dWU4d+uxXTtKJuZttxlOO6mJ]
       #Template required vars for CI/CD
       # true / false
       AIRWATCH_ACTIVATE: false
@@ -131,13 +130,9 @@ tools:
 rules:
   - before(build-android):
       - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
-      - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET\" }" >> android/app/src/main/assets/appcenter-config.json'
-      - 'echo "Building android/app/src/main/assets/appcenter-prod-config.json using looper-encrypted secrets"'
-      - 'echo "{  \"app_secret\": \"$APPCENTER_PROD_SECRET\" }" >> android/app/src/main/assets/appcenter-config-prod.json'
+      - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_PROD\" }" >> android/app/src/main/assets/appcenter-config.json'
 
 flows:
   npm-install-and-coverage:
     - npm ci
     - npm run test:coverage
-    - (name Remove dev appcenter config) rm android/app/src/main/assets/appcenter-config.json
-    - (name Install prod appcenter config) cp android/app/src/main/assets/appcenter-config-prod.json ./android/app/src/main/assets/appcenter-config.json
