@@ -1,5 +1,2 @@
 # allow codescan access to all OYI devs
 codescanaccess=vn52a6f,vn50wd3,r0m08be,vn50rhc,vn50pz2,vn50j9j,vn80416,istanse,a2nair
-
-# Ignore WMSSO framework binary at the file level
-safefile=ios/WMSSO.framework/WMSSO;This is a binary file included in the ios framework provided by Walmart Single Sign On
