@@ -148,7 +148,7 @@ tools:
   maven: 3.8.2
   nodejs: 14.17.5
   npm: 7.20.6
-  sonarscanner: 3.0.3.778
+  sonarscanner: 4.6.2.2472
 
 
 triggers:
