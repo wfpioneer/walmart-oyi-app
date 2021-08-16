@@ -92,24 +92,18 @@ envs:
     variables:
       # whether the APK should be built or not
       BUILD_APP_FLAG: true
-      # true / false
-      DEPLOY_TO_AIRWATCH: true
       #Versioning vars
       VERSION_TYPE: 'major'
   minor:
     variables:
       # whether the APK should be built or not
       BUILD_APP_FLAG: true
-      # true / false
-      DEPLOY_TO_AIRWATCH: true
       #Versioning vars
       VERSION_TYPE: 'minor'
   patch:
     variables:
       # whether the APK should be built or not
       BUILD_APP_FLAG: true
-      # true / false
-      DEPLOY_TO_AIRWATCH: true
       #Versioning vars
       VERSION_TYPE: 'patch'
 
@@ -159,13 +153,13 @@ tools:
 
 triggers:
   - manual:
-      name: Deploy Stage Major Version to AirWatch
+      name: Build Stage Major Version
       call: reactnative-build(major)
   - manual:
-      name: Deploy Stage Minor Version to AirWatch
+      name: Build Stage Minor Version
       call: reactnative-build(minor)
   - manual:
-      name: Deploy Stage Patch Version to AirWatch
+      name: Build Stage Patch Version
       call: reactnative-build(patch)
 flows:
   npm-install-and-coverage:
