@@ -145,9 +145,9 @@ tools:
     - extras;android;m2repository
     - ndk;21.3.6528147
   gradle: 6.3
-  maven: 3.5.4
-  nodejs: 12.16.0
-  npm: 6.13.4
+  maven: 3.8.2
+  nodejs: 14.17.5
+  npm: 7.20.6
   sonarscanner: 3.0.3.778
 
 
