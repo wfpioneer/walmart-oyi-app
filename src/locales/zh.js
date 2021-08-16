@@ -132,6 +132,8 @@ export default {
     TITLE: '所有位置',
     FLOOR: '楼面位置',
     RESERVE: '高货架位置',
+    FLOORS: 'Floor', // TODO Mandarin Translation
+    RESERVES: 'Reserve', // TODO Mandarin Translation
     ADD_LOCATION_API_ERROR: '添加位置出错，\n请重试',
     ADD_DUPLICATE_ERROR: '位置和对应类型已经存在',
     MANUAL_ENTRY_BUTTON: '手工添加位置',
@@ -144,6 +146,8 @@ export default {
     ADD_NEW_LOCATION: '新增位置',
     EDIT_LOCATION: '修改位置',
     LOCATION_MANAGEMENT: 'Location Management', // TODO Mandarin Translation
+    ITEMS: 'Items', // TODO Mandarin Translation
+    PALLETS: 'Pallets', // TODO Mandarin Translation
     ZONES: 'Zones', // TODO Mandarin Translation
     ZONE: 'Zone', // TODO Mandarin Translation
     AISLES: 'Aisles', // TODO Mandarin Translation
@@ -154,8 +158,9 @@ export default {
     LOCATION_DETAILS: 'Location Details', // TODO Mandarin Translation
     NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Mandarin Translation
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Mandarin Translation
-    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Mandarin Translation
-    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.' // TODO Mandarin Translation
+    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
+    CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
+    ADD: 'Add' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
