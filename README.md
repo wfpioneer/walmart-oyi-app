@@ -118,6 +118,15 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
 * themes
     * Contains color values
 
+#### iOS Directory Removal
+
+* as part of a new security initiative, a secrets-scanning process began finding false positives within the `ios`
+  directory with regard to the `WMSSO.framework`'s `WMSSO` binary
+* the quick and easy solution that we went with was to simply delete the `ios` directory
+    * we are only building/deploying to android devices at this time
+    * if/when OYI needs to support `iOS` devices, we can restore this directory and ignore the `WMSSO` binary via
+      the `.sentinelpolicy` [file-level ignore mechanism](https://gecgithub01.walmart.com/ISRM/wmsecestTraining/blob/0cbe02304e647adf359b9c59ac6f72917d752542/.sentinelpolicy#L62)
+
 ### How to emulate a barcode scan (value only)
 
 - In your debugger console: `window.mockScan('value', 'type')`
