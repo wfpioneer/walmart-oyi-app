@@ -6,6 +6,8 @@ gitShallowDepth: 2147483647
 envs:
   global:
     variables:
+      # App Center Prod Secret
+      APPCENTER_SECRET_PROD: ENC[yAwiG+Mp5lQR3hPbCvhtYWN0RfIXDwE/N0ppOJl/dWU4d+uxXTtKJuZttxlOO6mJ]
       #Template required vars for CI/CD
       # true / false
       AIRWATCH_ACTIVATE: false
@@ -81,14 +83,18 @@ envs:
       projects:
         - rootDir: './'
           type: reactnative
+
   prod-deploy:
+    variables:
       # whether the APK should be built or not
       BUILD_APP_FLAG: true
       # true / false
       DEPLOY_TO_AIRWATCH: true
   prod-build:
+    variables:
       # whether the APK should be built or not
       BUILD_APP_FLAG: true
+
 #  aos-variables:
 #    variables:
 #      APK_NAME: 'OYI'
@@ -139,10 +145,13 @@ triggers:
   - manual:
       name: Build Production apk
       call: reactnative-build(prod-build)
-  
+
+rules:
+  - before(build-android):
+      - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
+      - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_PROD\" }" >> android/app/src/main/assets/appcenter-config.json'
+
 flows:
   npm-install-and-coverage:
     - npm ci
     - npm run test:coverage
-    - (name Remove dev appcenter config) rm android/app/src/main/assets/appcenter-config.json
-    - (name Install prod appcenter config) cp android/app/src/main/assets/appcenter-config-prod.json ./android/app/src/main/assets/appcenter-config.json

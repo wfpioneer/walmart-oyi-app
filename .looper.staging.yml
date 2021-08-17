@@ -6,6 +6,8 @@ gitShallowDepth: 2147483647
 envs:
   global:
     variables:
+      # App Center Stage Secret
+      APPCENTER_SECRET_STAGE: ENC[Req2tb2fnQEDVCBTf2wSmeUC6uOiTrk8re1nCgNpwb4koA1ezJPDiLQeqEWfJAOE]
       #Template required vars for CI/CD
       # true / false
       AIRWATCH_ACTIVATE: false
@@ -54,11 +56,11 @@ envs:
 
       #Defaultable vars
       # Optional - target Organization Group (OG) in AirWatch where the app will reside. Defaults to InternalStore.
-#      DEFAULT_BUSINESS_TYPE: '<BUSINESS_TYPE>'
+      #      DEFAULT_BUSINESS_TYPE: '<BUSINESS_TYPE>'
       # Optional - if no countries are found in SITES_FILE, this will be used instead (single value). Defaults to "US"
       DEFAULT_COUNTRY_CODE: "CN"
       # Optional - version number to use instead of latest found in Proximity.
-#      DEFAULT_CURRENT_VERSION: ''
+      #      DEFAULT_CURRENT_VERSION: ''
       # Optional - cocoapods version to use. Defaults to 1.8.4
       COCOAPODS_VERSION: '1.8.4'
 
@@ -107,10 +109,10 @@ envs:
       #Versioning vars
       VERSION_TYPE: 'patch'
 
-#  aos-variables:
-#    variables:
-#      APK_NAME: 'OYI'
-#      ENV_TYPE: "prod"
+  #  aos-variables:
+  #    variables:
+  #      APK_NAME: 'OYI'
+  #      ENV_TYPE: "prod"
 
   aos-tc-variables:
     variables:
@@ -150,7 +152,6 @@ tools:
   npm: 7.20.6
   sonarscanner: 4.6.2.2472
 
-
 triggers:
   - manual:
       name: Build Stage Major Version
@@ -161,6 +162,12 @@ triggers:
   - manual:
       name: Build Stage Patch Version
       call: reactnative-build(patch)
+
+rules:
+  - before(build-android):
+      - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
+      - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_STAGE\" }" >> android/app/src/main/assets/appcenter-config.json'
+
 flows:
   npm-install-and-coverage:
     - npm ci
