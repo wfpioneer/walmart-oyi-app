@@ -6,7 +6,7 @@ gitShallowDepth: 2147483647
 envs:
   global:
     variables:
-      # Configure react-native-version to only version android
+      # Configure react-native-version to only target android
       RNV: android
       # App Center Stage Secret
       APPCENTER_SECRET_STAGE: ENC[Req2tb2fnQEDVCBTf2wSmeUC6uOiTrk8re1nCgNpwb4koA1ezJPDiLQeqEWfJAOE]

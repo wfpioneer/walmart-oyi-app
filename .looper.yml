@@ -6,7 +6,7 @@ gitShallowDepth: 2147483647
 envs:
   global:
     variables:
-      # Configure react-native-version to only version android
+      # Configure react-native-version to only target android
       RNV: android
       # App Center Prod Secret
       APPCENTER_SECRET_PROD: ENC[yAwiG+Mp5lQR3hPbCvhtYWN0RfIXDwE/N0ppOJl/dWU4d+uxXTtKJuZttxlOO6mJ]
