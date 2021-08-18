@@ -174,7 +174,7 @@ flows:
   pr-preparation:
     - call: validate-pr-repository
     - call: npm-install-and-coverage
-
+    - call: sonar
   npm-install-and-coverage:
     - npm ci
     - npm run test:coverage
