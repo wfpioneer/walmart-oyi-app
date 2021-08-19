@@ -16,9 +16,9 @@ envs:
       # Cert / Prod
       AIRWATCH_ENV: Prod
       # whether the APK should be built or not
-      BUILD_APP_FLAG: true
+      BUILD_APP_FLAG: false
       # true / false
-      DEPLOY_TO_AIRWATCH: true
+      DEPLOY_TO_AIRWATCH: false
       # email list where the notification will be sent
       EMAIL_NOTIFICATION: IntlSamsOYI@wal-mart.com
 
@@ -86,10 +86,21 @@ envs:
         - rootDir: './'
           type: reactnative
 
-  #  aos-variables:
-  #    variables:
-  #      APK_NAME: 'OYI'
-  #      ENV_TYPE: "prod"
+  prod-deploy:
+    variables:
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+      # true / false
+      DEPLOY_TO_AIRWATCH: true
+  prod-build:
+    variables:
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+
+#  aos-variables:
+#    variables:
+#      APK_NAME: 'OYI'
+#      ENV_TYPE: "prod"
 
   aos-tc-variables:
     variables:
@@ -124,10 +135,18 @@ tools:
     - extras;android;m2repository
     - ndk;21.3.6528147
   gradle: 6.3
-  maven: 3.5.4
-  nodejs: 12.16.0
-  npm: 6.13.4
-  sonarscanner: 3.0.3.778
+  maven: 3.8.2
+  nodejs: 14.17.5
+  npm: 7.20.6
+  sonarscanner: 4.6.2.2472
+
+triggers:
+  - manual:
+      name: Build & Deploy Production apk to Airwatch
+      call: reactnative-build(prod-deploy)
+  - manual:
+      name: Build Production apk
+      call: reactnative-build(prod-build)
 
 rules:
   - before(build-android):
@@ -135,6 +154,10 @@ rules:
       - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_PROD\" }" >> android/app/src/main/assets/appcenter-config.json'
 
 flows:
+  pr-preparation:
+    - call: validate-pr-repository
+    - call: npm-install-and-coverage
+    - call: sonar
   npm-install-and-coverage:
     - npm ci
     - npm run test:coverage

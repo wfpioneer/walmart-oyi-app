@@ -16,7 +16,7 @@ envs:
       # Cert / Prod
       AIRWATCH_ENV: Prod
       # whether the APK should be built or not
-      BUILD_APP_FLAG: true
+      BUILD_APP_FLAG: false
       # true / false
       DEPLOY_TO_AIRWATCH: false
       # email list where the notification will be sent
@@ -91,6 +91,25 @@ envs:
       projects:
         - rootDir: './'
           type: reactnative
+  # Overrides Global Variable declarations
+  major:
+    variables:
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+      #Versioning vars
+      VERSION_TYPE: 'major'
+  minor:
+    variables:
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+      #Versioning vars
+      VERSION_TYPE: 'minor'
+  patch:
+    variables:
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+      #Versioning vars
+      VERSION_TYPE: 'patch'
 
   #  aos-variables:
   #    variables:
@@ -130,10 +149,21 @@ tools:
     - extras;android;m2repository
     - ndk;21.3.6528147
   gradle: 6.3
-  maven: 3.5.4
-  nodejs: 12.16.0
-  npm: 6.13.4
-  sonarscanner: 3.0.3.778
+  maven: 3.8.2
+  nodejs: 14.17.5
+  npm: 7.20.6
+  sonarscanner: 4.6.2.2472
+
+triggers:
+  - manual:
+      name: Build Stage Major Version
+      call: reactnative-build(major)
+  - manual:
+      name: Build Stage Minor Version
+      call: reactnative-build(minor)
+  - manual:
+      name: Build Stage Patch Version
+      call: reactnative-build(patch)
 
 rules:
   - before(build-android):
@@ -141,6 +171,10 @@ rules:
       - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_STAGE\" }" >> android/app/src/main/assets/appcenter-config.json'
 
 flows:
+  pr-preparation:
+    - call: validate-pr-repository
+    - call: npm-install-and-coverage
+    - call: sonar
   npm-install-and-coverage:
     - npm ci
     - npm run test:coverage
