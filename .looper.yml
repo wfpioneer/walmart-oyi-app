@@ -141,6 +141,11 @@ tools:
   sonarscanner: 4.6.2.2472
 
 triggers:
+  - push:
+      ignoreMessage: .*\#nobuild
+  - pr:
+      ignoreMessage: .*\#nobuild
+      call: pr-preparation
   - manual:
       name: Build & Deploy Production apk to Airwatch
       call: reactnative-build(prod-deploy)
@@ -154,6 +159,11 @@ rules:
       - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_PROD\" }" >> android/app/src/main/assets/appcenter-config.json'
 
 flows:
+#Overrides RN templates default flow to prevent apk's from building when pushing commits to Master
+  default:
+    - call: npm-install-and-coverage
+    - call: sonar
+#Overrides RN templates default flow to prevent apk's from building when making PR commits.
   pr-preparation:
     - call: validate-pr-repository
     - call: npm-install-and-coverage
