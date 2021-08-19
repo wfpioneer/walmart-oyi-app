@@ -155,9 +155,6 @@ tools:
   sonarscanner: 4.6.2.2472
 
 triggers:
-  - push:
-      ignoreMessage: .*\#nobuild
-      call: newfolw
   - manual:
       name: Build Stage Major Version
       call: reactnative-build(major)
