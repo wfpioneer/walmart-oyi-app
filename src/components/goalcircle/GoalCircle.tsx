@@ -2,24 +2,26 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import styles from './GoalCircle.style';
 
-export interface Props {
+ interface GoalCircleProps {
     goalTitle: string;
     completionPercentage: number;
     completionGoal: number;
     active: boolean;
-    key: string;
     frequency: string;
 }
 
-function GoalCircle(props: Props): JSX.Element {
-  const target = props.completionGoal;
-  const atGoalStyle = (props.completionPercentage >= target) ? styles.goalMet : styles.goalNotMet;
-  const ringTwoStyle = (props.completionPercentage >= 50) ? atGoalStyle : styles.under50;
+function GoalCircle(props: GoalCircleProps): JSX.Element {
+  const {
+    active, completionGoal, completionPercentage, frequency, goalTitle
+  } = props;
+
+  const atGoalStyle = (completionPercentage >= completionGoal) ? styles.goalMet : styles.goalNotMet;
+  const ringTwoStyle = (completionPercentage >= 50) ? atGoalStyle : styles.under50;
   // Calculate the transformation degrees to correctly position half-circle #1.
-  const transfOne = (props.completionPercentage >= 50) ? 180 : (props.completionPercentage * 3.6);
+  const transfOne = (completionPercentage >= 50) ? 180 : (completionPercentage * 3.6);
   // Calculate the transformation degrees to correctly position half-circle #2.
-  const transfTwo = (props.completionPercentage >= 50) ? (props.completionPercentage * 3.6) : 0;
-  const goalStyle = props.active ? styles.goalNameActive : styles.goalNameInactive;
+  const transfTwo = (completionPercentage >= 50) ? (completionPercentage * 3.6) : 0;
+  const goalStyle = active ? styles.goalNameActive : styles.goalNameInactive;
 
   return (
     <View>
@@ -32,13 +34,13 @@ function GoalCircle(props: Props): JSX.Element {
         </View>
         <View style={styles.centerRing}>
           <Text style={styles.goalDisp}>
-            {props.completionPercentage}
+            {completionPercentage}
             %
           </Text>
         </View>
       </View>
-      <Text style={styles.freq}>{props.frequency}</Text>
-      <Text style={goalStyle}>{props.goalTitle}</Text>
+      <Text style={styles.freq}>{frequency}</Text>
+      <Text style={goalStyle}>{goalTitle}</Text>
     </View>
   );
 }

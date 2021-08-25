@@ -134,7 +134,6 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
       return (
         <GoalCircle
-          key={goal.worklistGoal}
           goalTitle={strings('HOME.ITEMS')}
           completionGoal={goal.worklistEndGoalPct}
           completionPercentage={goal.worklistGoalPct}
