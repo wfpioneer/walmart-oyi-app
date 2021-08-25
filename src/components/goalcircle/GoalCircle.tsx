@@ -5,14 +5,14 @@ import styles from './GoalCircle.style';
 export interface Props {
     goalTitle: string;
     completionPercentage: number;
-    completionGoal?: number;
+    completionGoal: number;
     active: boolean;
     key: string;
     frequency: string;
 }
 
-function GoalCircle(props: Props) {
-  const target = (props.completionGoal) ? props.completionGoal : 95;
+function GoalCircle(props: Props): JSX.Element {
+  const target = props.completionGoal;
   const atGoalStyle = (props.completionPercentage >= target) ? styles.goalMet : styles.goalNotMet;
   const ringTwoStyle = (props.completionPercentage >= 50) ? atGoalStyle : styles.under50;
   // Calculate the transformation degrees to correctly position half-circle #1.

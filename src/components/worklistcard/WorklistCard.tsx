@@ -8,17 +8,17 @@ import { strings } from '../../locales';
 /**
  * Basic worklist card component to be populated with worklist items as needed.
  */
-export interface Props {
+export interface WorkListCardProps {
     goalTitle: string;
     goal: number;
     complete: number;
     completionPercentage: number;
-    completionGoal?: number;
+    completionGoal: number;
     onPress: () => void;
 }
 
-function WorklistCard(Props: Props) {
-  const target = 95;
+function WorklistCard(Props: WorkListCardProps): JSX.Element {
+  const target = Props.completionGoal;
 
   const getBarFill = () => {
     if (Props.goal === 0) {
