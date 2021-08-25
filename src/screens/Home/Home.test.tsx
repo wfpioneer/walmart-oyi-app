@@ -6,6 +6,7 @@ import {
   mockHalfCompleteWorklistSummaries,
   mockZeroCompleteWorklistSummaries
 } from '../../mockData/mockWorklistSummary';
+import { AsyncState } from '../../models/AsyncState';
 import { HomeScreen } from './Home';
 
 const navigationProp = {

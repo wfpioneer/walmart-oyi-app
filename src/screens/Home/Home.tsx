@@ -24,6 +24,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Button from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
+import { WorklistSummary } from '../../models/WorklistSummary';
 
 const mapStateToProps = (state: RootState) => ({
   userName: state.User.additional.displayName,
@@ -126,15 +127,16 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       return null;
     }
 
-    const { data } = this.props.worklistSummaryApiState.result;
+    const { data }: { data: WorklistSummary[] } = this.props.worklistSummaryApiState.result;
 
-    const renderGoalCircles = () => data.map((goal: any, index: number) => {
+    const renderGoalCircles = () => data.map((goal, index) => {
       const frequency = goal.worklistGoal === 'DAILY' ? strings('GENERICS.DAILY') : '';
 
       return (
         <GoalCircle
           key={goal.worklistGoal}
           goalTitle={strings('HOME.ITEMS')}
+          completionGoal={goal.worklistEndGoalPct}
           completionPercentage={goal.worklistGoalPct}
           active={index === this.state.activeGoal}
           frequency={frequency}
@@ -142,8 +144,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       );
     });
 
-    const renderWorklistCards = () => data[this.state.activeGoal].worklistTypes
-      .map((worklist: { worklistType: string; completedItems: number; totalItems: number }) => {
+    const dataSummary = data[this.state.activeGoal];
+    const renderWorklistCards = () => dataSummary.worklistTypes
+      .map(worklist => {
         const worklistType = exceptionTypeToDisplayString(worklist?.worklistType.toUpperCase() ?? '');
 
         const onWorklistCardPress = () => {
@@ -161,7 +164,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             goal={worklist.totalItems}
             complete={worklist.completedItems}
             completionPercentage={(worklist.completedItems / worklist.totalItems) * 100}
-            completionGoal={data[this.state.activeGoal].worklistGoalPct}
+            completionGoal={dataSummary.worklistEndGoalPct}
             onPress={onWorklistCardPress}
           />
         );

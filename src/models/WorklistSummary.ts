@@ -1,6 +1,7 @@
 export interface WorklistSummary {
   worklistGoal: 'DAILY' | 'WEEKLY',
   worklistGoalPct: number,
+  worklistEndGoalPct: number,
   worklistTypes: WorklistTypeDetails[],
   totalItems: number,
   totalCompletedItems: number

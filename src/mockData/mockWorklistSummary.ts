@@ -4,6 +4,7 @@ export const mockZeroCompleteWorklistSummaries: WorklistSummary[] = [
   {
     worklistGoal: 'DAILY',
     worklistGoalPct: 0,
+    worklistEndGoalPct: 90,
     worklistTypes: [
       {
         worklistType: 'NSFL',
@@ -30,6 +31,7 @@ export const mockHalfCompleteWorklistSummaries: WorklistSummary[] = [
   {
     worklistGoal: 'DAILY',
     worklistGoalPct: 50,
+    worklistEndGoalPct: 100,
     worklistTypes: [
       {
         worklistType: 'NSFL',
@@ -56,6 +58,7 @@ export const mockAllCompleteWorklistSummaries: WorklistSummary[] = [
   {
     worklistGoal: 'DAILY',
     worklistGoalPct: 100,
+    worklistEndGoalPct: 95,
     worklistTypes: [
       {
         worklistType: 'NSFL',

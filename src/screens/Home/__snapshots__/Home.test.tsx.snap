@@ -199,6 +199,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     >
       <GoalCircle
         active={true}
+        completionGoal={100}
         completionPercentage={50}
         frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
@@ -206,7 +207,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     </View>
     <WorklistCard
       complete={50}
-      completionGoal={50}
+      completionGoal={100}
       completionPercentage={50}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
@@ -214,7 +215,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     />
     <WorklistCard
       complete={25}
-      completionGoal={50}
+      completionGoal={100}
       completionPercentage={50}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
@@ -222,7 +223,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     />
     <WorklistCard
       complete={7}
-      completionGoal={50}
+      completionGoal={100}
       completionPercentage={50}
       goal={14}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
@@ -361,6 +362,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     >
       <GoalCircle
         active={true}
+        completionGoal={95}
         completionPercentage={100}
         frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
@@ -368,7 +370,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     </View>
     <WorklistCard
       complete={100}
-      completionGoal={100}
+      completionGoal={95}
       completionPercentage={100}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
@@ -376,7 +378,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     />
     <WorklistCard
       complete={50}
-      completionGoal={100}
+      completionGoal={95}
       completionPercentage={100}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
@@ -384,7 +386,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     />
     <WorklistCard
       complete={14}
-      completionGoal={100}
+      completionGoal={95}
       completionPercentage={100}
       goal={14}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
@@ -523,6 +525,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     >
       <GoalCircle
         active={true}
+        completionGoal={90}
         completionPercentage={0}
         frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
@@ -530,7 +533,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     </View>
     <WorklistCard
       complete={0}
-      completionGoal={0}
+      completionGoal={90}
       completionPercentage={0}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
@@ -538,7 +541,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     />
     <WorklistCard
       complete={0}
-      completionGoal={0}
+      completionGoal={90}
       completionPercentage={0}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
@@ -546,7 +549,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     />
     <WorklistCard
       complete={0}
-      completionGoal={0}
+      completionGoal={90}
       completionPercentage={0}
       goal={13}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
