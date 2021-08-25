@@ -127,9 +127,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       return null;
     }
 
-    const { data } = this.props.worklistSummaryApiState.result;
+    const { data }: { data: WorklistSummary[] } = this.props.worklistSummaryApiState.result;
 
-    const renderGoalCircles = () => data.map((goal: WorklistSummary, index: number) => {
+    const renderGoalCircles = () => data.map((goal, index) => {
       const frequency = goal.worklistGoal === 'DAILY' ? strings('GENERICS.DAILY') : '';
 
       return (
@@ -144,7 +144,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       );
     });
 
-    const dataSummary: WorklistSummary = data[this.state.activeGoal];
+    const dataSummary = data[this.state.activeGoal];
     const renderWorklistCards = () => dataSummary.worklistTypes
       .map(worklist => {
         const worklistType = exceptionTypeToDisplayString(worklist?.worklistType.toUpperCase() ?? '');
