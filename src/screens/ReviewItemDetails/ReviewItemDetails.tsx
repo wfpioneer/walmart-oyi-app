@@ -60,6 +60,7 @@ export interface ItemDetailsScreenProps {
   validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
+  userFeatures: string[];
 }
 
 export interface HandleProps{
@@ -329,7 +330,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     trackEventCall,
     validateSessionCall,
     useEffectHook,
-    useFocusEffectHook
+    useFocusEffectHook,
+    userFeatures
   } = props;
   // Scanned Item Event Listener
   useEffectHook(() => {
@@ -544,7 +546,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             <SFTCard
               title={strings('ITEM.QUANTITY')}
               iconName="pallet"
-              topRightBtnTxt={pendingOnHandsQty === -999 ? strings('GENERICS.CHANGE') : undefined}
+              topRightBtnTxt={(pendingOnHandsQty === -999 && userFeatures.includes('on hands change'))
+                ? strings('GENERICS.CHANGE') : undefined}
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
               {renderOHQtyComponent(itemDetails.onHandsQty, pendingOnHandsQty)}
@@ -597,6 +600,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const { userId } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
   const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
+  const userFeatures = useTypedSelector(state => state.User.features);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -636,6 +640,7 @@ const ReviewItemDetails = (): JSX.Element => {
       validateSessionCall={validateSession}
       useEffectHook={useEffect}
       useFocusEffectHook={useFocusEffect}
+      userFeatures={userFeatures}
     />
   );
 };
