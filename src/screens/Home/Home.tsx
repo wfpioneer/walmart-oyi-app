@@ -157,9 +157,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           }).catch(() => {});
         };
 
-        const calculationValue = ((worklist.completedItems / worklist.totalItems) * 100);
-        const completionPercentageValue = isFinite(calculationValue) ? calculationValue : 0;
-        
+        const calculationValue = (worklist.completedItems / worklist.totalItems) * 100;
+        const completionPercentageValue = Number.isFinite(calculationValue) ? calculationValue : 0;
         return (
           <WorklistCard
             key={worklist.worklistType}

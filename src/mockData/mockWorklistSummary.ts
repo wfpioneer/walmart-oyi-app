@@ -22,10 +22,10 @@ export const mockZeroCompleteWorklistSummaries: WorklistSummary[] = [
         completedItems: 0
       },
       {
-        worklistType: "NS", 
-        totalItems: 0, 
+        worklistType: 'NS',
+        totalItems: 0,
         completedItems: 0
-      },
+      }
     ],
     totalItems: 163,
     totalCompletedItems: 0
@@ -54,10 +54,10 @@ export const mockHalfCompleteWorklistSummaries: WorklistSummary[] = [
         completedItems: 7
       },
       {
-        worklistType: "NS", 
-        totalItems: 24, 
+        worklistType: 'NS',
+        totalItems: 24,
         completedItems: 12
-      },
+      }
     ],
     totalItems: 188,
     totalCompletedItems: 94
