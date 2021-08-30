@@ -9,6 +9,10 @@ import {
 import { AsyncState } from '../../models/AsyncState';
 import { HomeScreen } from './Home';
 
+jest.mock('../../../package.json', () => ({
+  version: '1.1.0'
+}));
+
 const navigationProp = {
   addListener: jest.fn(),
   navigate: jest.fn()
