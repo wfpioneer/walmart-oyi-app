@@ -65,6 +65,19 @@ export const mockWorkListToDo: WorklistItemI[] = [
     completedTs: undefined,
     completedUserId: undefined,
     completed: false
+  },
+  {
+    worklistType: 'NS',
+    itemName: 'PHARMACY ITEM 1',
+    itemNbr: 789123457,
+    upcNbr: '667788889999',
+    catgNbr: 199,
+    catgName: 'ELECTRONICS',
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: undefined,
+    completedUserId: undefined,
+    completed: false
   }
 ];
 export const mockWorkListComplete: WorklistItemI[] = [
@@ -131,6 +144,19 @@ export const mockWorkListComplete: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: '2020-07-15T08:02:17-05:00',
     completedUserId: 'SVCintlsamsops',
+    completed: true
+  },
+  {
+    worklistType: 'NS',
+    itemName: 'PHARMACY ITEM 1',
+    itemNbr: 789123457,
+    upcNbr: '667788889999',
+    catgNbr: 199,
+    catgName: 'ELECTRONICS',
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: undefined,
+    completedUserId: undefined,
     completed: true
   }
 ];
@@ -224,6 +250,25 @@ export const mockCategoryList: WorklistItemI[] = [
     itemNbr: 987654321,
     upcNbr: '777555333',
     catgNbr: 99,
+    catgName: 'ELECTRONICS',
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: undefined,
+    completedUserId: undefined,
+    completed: false
+  },
+  {
+    worklistType: 'CATEGORY',
+    catgName: 'ELECTRONICS',
+    catgNbr: 199,
+    itemCount: 1
+  },
+  {
+    worklistType: 'NS',
+    itemName: 'PHARMACY ITEM 1',
+    itemNbr: 789123457,
+    upcNbr: '667788889999',
+    catgNbr: 199,
     catgName: 'ELECTRONICS',
     subCatgNbr: 0,
     subCatgName: undefined,
@@ -338,4 +383,18 @@ export const missingExceptionsWorklist: WorklistItemI[] = [
     completedTs: '2020-07-15T08:02:17-05:00',
     completedUserId: 'SVCintlsamsops',
     completed: true
-  }];
+  },
+  {
+    worklistType: 'Non-Exception',
+    itemName: 'PHARMACY ITEM 1',
+    itemNbr: 789123457,
+    upcNbr: '667788889999',
+    catgNbr: 199,
+    catgName: 'ELECTRONICS',
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: undefined,
+    completedUserId: undefined,
+    completed: true
+  }
+];
