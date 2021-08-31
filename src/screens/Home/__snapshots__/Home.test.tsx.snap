@@ -229,6 +229,14 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
       onPress={[Function]}
     />
+    <WorklistCard
+      complete={12}
+      completionGoal={100}
+      completionPercentage={50}
+      goal={24}
+      goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      onPress={[Function]}
+    />
   </ScrollView>
   <Text
     style={
@@ -392,6 +400,14 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
       onPress={[Function]}
     />
+    <WorklistCard
+      complete={20}
+      completionGoal={95}
+      completionPercentage={100}
+      goal={20}
+      goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      onPress={[Function]}
+    />
   </ScrollView>
   <Text
     style={
@@ -553,6 +569,14 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={0}
       goal={13}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={0}
+      goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
       onPress={[Function]}
     />
   </ScrollView>
