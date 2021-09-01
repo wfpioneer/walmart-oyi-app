@@ -14,6 +14,7 @@ export default {
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    cloudQty: 0,
     replenishment: {
       onOrder: 48
     },
@@ -149,6 +150,7 @@ export default {
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    cloudQty: 0,
     replenishment: {
       onOrder: 48
     },
@@ -280,6 +282,7 @@ export default {
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    cloudQty: 0,
     replenishment: {
       onOrder: 48
     },
