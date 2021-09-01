@@ -69,6 +69,19 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders every wor
         "upcNbr": "777788889999",
         "worklistType": "C",
       },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 199,
+        "completed": true,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "PHARMACY ITEM 1",
+        "itemNbr": 789123457,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "667788889999",
+        "worklistType": "NS",
+      },
     ]
   }
   dispatch={[MockFunction]}
@@ -178,6 +191,19 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders only comp
         "subCatgNbr": 0,
         "upcNbr": "777788889999",
         "worklistType": "C",
+      },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 199,
+        "completed": true,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "PHARMACY ITEM 1",
+        "itemNbr": 789123457,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "667788889999",
+        "worklistType": "NS",
       },
     ]
   }

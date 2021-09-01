@@ -20,6 +20,11 @@ export const mockZeroCompleteWorklistSummaries: WorklistSummary[] = [
         worklistType: 'NO',
         totalItems: 13,
         completedItems: 0
+      },
+      {
+        worklistType: 'NS',
+        totalItems: 0,
+        completedItems: 0
       }
     ],
     totalItems: 163,
@@ -47,10 +52,15 @@ export const mockHalfCompleteWorklistSummaries: WorklistSummary[] = [
         worklistType: 'NO',
         totalItems: 14,
         completedItems: 7
+      },
+      {
+        worklistType: 'NS',
+        totalItems: 24,
+        completedItems: 12
       }
     ],
-    totalItems: 164,
-    totalCompletedItems: 82
+    totalItems: 188,
+    totalCompletedItems: 94
   }
 ];
 
@@ -74,9 +84,14 @@ export const mockAllCompleteWorklistSummaries: WorklistSummary[] = [
         worklistType: 'NO',
         totalItems: 14,
         completedItems: 14
+      },
+      {
+        worklistType: 'NS',
+        totalItems: 20,
+        completedItems: 20
       }
     ],
-    totalItems: 164,
-    totalCompletedItems: 164
+    totalItems: 184,
+    totalCompletedItems: 184
   }
 ];

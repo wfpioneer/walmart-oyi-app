@@ -208,7 +208,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
       Array [
         Object {
           "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
-          "itemCount": 5,
+          "itemCount": 6,
           "worklistType": "CATEGORY",
         },
         Object {
@@ -275,6 +275,19 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "subCatgNbr": 0,
           "upcNbr": "777788889999",
           "worklistType": "C",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 199,
+          "completed": true,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "PHARMACY ITEM 1",
+          "itemNbr": 789123457,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "667788889999",
+          "worklistType": "NS",
         },
       ]
     }
@@ -840,7 +853,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
       Array [
         Object {
           "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
-          "itemCount": 5,
+          "itemCount": 6,
           "worklistType": "CATEGORY",
         },
         Object {
@@ -907,6 +920,19 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgNbr": 0,
           "upcNbr": "777788889999",
           "worklistType": "C",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 199,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "PHARMACY ITEM 1",
+          "itemNbr": 789123457,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "667788889999",
+          "worklistType": "NS",
         },
       ]
     }
@@ -1074,6 +1100,25 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "subCatgNbr": 0,
           "upcNbr": "777555333",
           "worklistType": "NO",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 199,
+          "itemCount": 1,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 199,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "PHARMACY ITEM 1",
+          "itemNbr": 789123457,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "667788889999",
+          "worklistType": "NS",
         },
       ]
     }
