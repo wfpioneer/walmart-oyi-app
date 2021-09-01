@@ -1030,6 +1030,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "cloudQty": undefined,
               "completed": false,
               "exceptionType": "nsfl",
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
               "itemNbr": 1234567890,
               "location": Object {
@@ -1579,6 +1581,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     visible={false}
   >
     <OHQtyUpdate
+      exceptionType="nsfl"
       ohQty={42}
       setOhQtyModalVisible={[MockFunction]}
     />
@@ -1600,7 +1603,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <View>
       <ItemInfo
         category="99 - Store Use"
-        exceptionType={null}
+        exceptionType="nsfl"
         itemName="Small, Store Use Item"
         itemNbr={987654321}
         price={2000.94}
@@ -1797,6 +1800,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "categoryNbr": 99,
               "cloudQty": 42,
               "completed": false,
+              "exceptionType": "nsfl",
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
               "itemName": "Small, Store Use Item",
               "itemNbr": 987654321,
               "location": Object {
@@ -2260,6 +2266,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "cloudQty": undefined,
               "completed": false,
               "exceptionType": "nsfl",
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
               "itemNbr": 1234567890,
               "location": Object {
@@ -2727,6 +2735,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "cloudQty": undefined,
               "completed": false,
               "exceptionType": "nsfl",
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
               "itemNbr": 1234567890,
               "location": Object {
