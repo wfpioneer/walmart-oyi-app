@@ -83,7 +83,9 @@ const styles = StyleSheet.create({
   },
   onHandsContainer: {
     paddingHorizontal: 8,
-    paddingVertical: 16
+    paddingVertical: 16,
+    borderBottomWidth: 2,
+    borderBottomColor: COLOR.GREY_100
   },
   onHandsView: {
     flexDirection: 'row',

@@ -112,7 +112,7 @@ const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
-export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: number): JSX.Element => {
+export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: number,): JSX.Element => {
   if (pendingOnHandsQty === -999) {
     return (
       <View style={styles.onHandsContainer}>
@@ -137,6 +137,15 @@ export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: numb
     </View>
   );
 };
+
+export const renderOHQtyNoPending = (onHandsQty: number, onHandsTitle: string): JSX.Element => (
+  <View style={styles.onHandsContainer}>
+    <View style={styles.onHandsView}>
+      <Text>{onHandsTitle}</Text>
+      <Text>{onHandsQty}</Text>
+    </View>
+  </View>
+);
 
 export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
   const { reserve } = itemDetails.location;
@@ -551,6 +560,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
               {renderOHQtyComponent(itemDetails.onHandsQty, pendingOnHandsQty)}
+              {itemDetails.cloudQty && renderOHQtyNoPending(itemDetails.cloudQty, strings('ITEM.OH_CLOUD'))}
             </SFTCard>
             <SFTCard
               iconProp={(
