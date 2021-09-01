@@ -14,7 +14,7 @@ export default {
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
-    cloudQty: 0,
+    cloudQty: undefined,
     replenishment: {
       onOrder: 48
     },
@@ -150,7 +150,7 @@ export default {
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
-    cloudQty: 0,
+    cloudQty: 42,
     replenishment: {
       onOrder: 48
     },
@@ -281,8 +281,8 @@ export default {
     basePrice: 1500.30,
     completed: false,
     onHandsQty: 42,
-    pendingOnHandsQty: -999,
-    cloudQty: 0,
+    pendingOnHandsQty: 35,
+    cloudQty: 42,
     replenishment: {
       onOrder: 48
     },

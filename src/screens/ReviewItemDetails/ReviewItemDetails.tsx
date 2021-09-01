@@ -138,7 +138,7 @@ export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: numb
   );
 };
 
-export const renderOHQtyNoPending = (onHandsQty: number, onHandsTitle: string): JSX.Element => (
+export const renderOHQtyNoPendingComponent = (onHandsQty: number, onHandsTitle: string): JSX.Element => (
   <View style={styles.onHandsContainer}>
     <View style={styles.onHandsView}>
       <Text>{onHandsTitle}</Text>
@@ -560,7 +560,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
               {renderOHQtyComponent(itemDetails.onHandsQty, pendingOnHandsQty)}
-              {itemDetails.cloudQty && renderOHQtyNoPending(itemDetails.cloudQty, strings('ITEM.OH_CLOUD'))}
+              {(itemDetails.cloudQty || itemDetails.cloudQty === 0)
+               && (renderOHQtyNoPendingComponent(itemDetails.cloudQty, strings('ITEM.OH_CLOUD')))}
             </SFTCard>
             <SFTCard
               iconProp={(
