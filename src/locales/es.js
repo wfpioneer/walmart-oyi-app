@@ -161,7 +161,7 @@ export default {
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Spanish Translation
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_ALL: 'Clear all', // TODO Spanish Translation
-    ADD: 'Add' // TODO Spanish Translation
+    ADD: 'Agregar'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -210,7 +210,7 @@ export default {
     UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo'
   },
   LOGIN: {
-    CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI', // TODO: Spanish Translation
-    ENTER_CLUB_NBR: 'Enter a Club Number' // TODO: Spansih Translation
+    CLUB_NBR_REQUIRED: 'Un número de club es necesario para ingresar a OYI',
+    ENTER_CLUB_NBR: 'Ingresa número de club'
   }
 };
