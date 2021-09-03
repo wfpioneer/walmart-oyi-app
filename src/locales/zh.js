@@ -132,8 +132,8 @@ export default {
     TITLE: '所有位置',
     FLOOR: '楼面位置',
     RESERVE: '高货架位置',
-    FLOORS: 'Floor', // TODO Mandarin Translation
-    RESERVES: 'Reserve', // TODO Mandarin Translation
+    FLOORS: '楼面',
+    RESERVES: '高货架',
     ADD_LOCATION_API_ERROR: '添加位置出错，\n请重试',
     ADD_DUPLICATE_ERROR: '位置和对应类型已经存在',
     MANUAL_ENTRY_BUTTON: '手工添加位置',
@@ -145,22 +145,22 @@ export default {
     DELETE_LOCATION_API_ERROR: '删除位置报错，\n请重试',
     ADD_NEW_LOCATION: '新增位置',
     EDIT_LOCATION: '修改位置',
-    LOCATION_MANAGEMENT: 'Location Management', // TODO Mandarin Translation
-    ITEMS: 'Items', // TODO Mandarin Translation
+    LOCATION_MANAGEMENT: '通道管理',
+    ITEMS: '多个商品',
     PALLETS: 'Pallets', // TODO Mandarin Translation
-    ZONES: 'Zones', // TODO Mandarin Translation
+    ZONES: '区域',
     ZONE: 'Zone', // TODO Mandarin Translation
-    AISLES: 'Aisles', // TODO Mandarin Translation
+    AISLES: '通道',
     AISLE: 'Aisle', // TODO Mandarin Translation
-    SECTIONS: 'Sections', // TODO Mandarin Translation
+    SECTIONS: '货架',
     SECTION: 'Section', // TODO Mandarin Translation
-    AREAS: 'Areas', // TODO Mandarin Translation
-    LOCATION_DETAILS: 'Location Details', // TODO Mandarin Translation
+    AREAS: 'Areas',
+    LOCATION_DETAILS: '具体位置',
     NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Mandarin Translation
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Mandarin Translation
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
     CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
-    ADD: 'Add' // TODO Mandarin Translation
+    ADD: '增加'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
@@ -209,7 +209,7 @@ export default {
     UPDATE_API_ERROR: '更新审批状态时发生错误，\n请再试'
   },
   LOGIN: {
-    CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI', // TODO: Mandarin Translation
-    ENTER_CLUB_NBR: 'Enter a Club Number' // TODO: Mandarin Translation
+    CLUB_NBR_REQUIRED: '需店号开启OYI',
+    ENTER_CLUB_NBR: '输入店号'
   }
 };
