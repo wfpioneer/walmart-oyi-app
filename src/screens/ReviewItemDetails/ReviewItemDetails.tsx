@@ -560,8 +560,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
               {renderOHQtyComponent(itemDetails.onHandsQty, pendingOnHandsQty)}
-              {(itemDetails.cloudQty || itemDetails.cloudQty === 0)
-               && (renderOHQtyNoPendingComponent(itemDetails.cloudQty, strings('ITEM.OH_CLOUD')))}
+              {itemDetails.cloudQty !== undefined
+               && (renderOHQtyNoPendingComponent(itemDetails.cloudQty, strings('ITEM.FLY_CLOUD_QTY')))}
             </SFTCard>
             <SFTCard
               iconProp={(

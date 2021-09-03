@@ -101,7 +101,7 @@ export default {
     ACTION_COMPLETE_ERROR: 'Error Completing Action',
     ACTION_COMPLETE_ERROR_DETAILS: 'There was an error completing the action, please try again.',
     WEEKLY_AVG_SALES: 'Weekly average sales',
-    OH_CLOUD: 'Cloud Qty'
+    FLY_CLOUD_QTY: 'Fly Cloud Qty'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

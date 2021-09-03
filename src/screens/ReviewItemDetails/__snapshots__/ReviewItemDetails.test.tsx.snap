@@ -1660,7 +1660,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             }
           >
             <Text>
-              [missing "en.ITEM.OH_CLOUD" translation]
+              [missing "en.ITEM.FLY_CLOUD_QTY" translation]
             </Text>
             <Text>
               42

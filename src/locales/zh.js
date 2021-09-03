@@ -101,7 +101,7 @@ export default {
     ACTION_COMPLETE_ERROR: '系统错误',
     ACTION_COMPLETE_ERROR_DETAILS: '系统处理请求错误，请再试一次。',
     WEEKLY_AVG_SALES: '每周平均销售',
-    OH_CLOUD: 'Cloud Qty' // Needs Manadarin translation
+    FLY_CLOUD_QTY: '云仓库存'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
