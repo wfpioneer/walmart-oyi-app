@@ -101,10 +101,10 @@ export default {
     ACTION_COMPLETE_ERROR: 'Error completando la acción',
     ACTION_COMPLETE_ERROR_DETAILS: 'Hubo un error complentando la acción. Por favor inténtalo de nuevo.',
     WEEKLY_AVG_SALES: 'Ventas Semanales',
-    SALES_FLOOR_QTY: 'Sales Floor Qty', // TODO: Needs Spanish Translation
-    RESERVE_QTY: 'Reserve Qty', // TODO: Needs Spanish Translation
-    CLAIMS_QTY: 'Claims Qty', // TODO: Needs Spanish Translation
-    CONSOLIDATED_QTY: 'Consolidated Qty', // TODO: Needs Spanish Translation
+    SALES_FLOOR_QTY: 'Sales Floor', // TODO: Needs Spanish Translation
+    RESERVE_QTY: 'Reserve', // TODO: Needs Spanish Translation
+    CLAIMS_QTY: 'Claims', // TODO: Needs Spanish Translation
+    CONSOLIDATED_QTY: 'Consolidated', // TODO: Needs Spanish Translation
 
   },
   PRINT: {
