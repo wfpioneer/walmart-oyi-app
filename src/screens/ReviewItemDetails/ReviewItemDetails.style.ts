@@ -76,18 +76,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 16
   },
-  renderPickListContatiner: {
+  renderPickListContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingVertical: 8
   },
   onHandsContainer: {
     paddingHorizontal: 8,
-    paddingVertical: 16
   },
   onHandsView: {
+    paddingVertical: 16,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderBottomColor: COLOR.GREY_100
   },
   mgrApprovalView: {
     flexDirection: 'row',
