@@ -112,13 +112,37 @@ const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
-export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: number): JSX.Element => {
+export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
+  const {
+    pendingOnHandsQty,
+    onHandsQty,
+    backroomQty,
+    claimsOnHandQty,
+    consolidatedOnHandQty,
+  } = itemDetails;
+  const salesFloorQty = onHandsQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty);
   if (pendingOnHandsQty === -999) {
     return (
       <View style={styles.onHandsContainer}>
         <View style={styles.onHandsView}>
           <Text>{strings('ITEM.ON_HANDS')}</Text>
           <Text>{onHandsQty}</Text>
+        </View>
+        <View style={styles.onHandsView}>
+          <Text>{strings('ITEM.SALES_FLOOR_QTY')}</Text>
+          <Text>{salesFloorQty}</Text>
+        </View>
+        <View style={styles.onHandsView}>
+          <Text>{strings('ITEM.RESERVE_QTY')}</Text>
+          <Text>{backroomQty}</Text>
+        </View>
+        <View style={styles.onHandsView}>
+          <Text>{strings('ITEM.CLAIMS_QTY')}</Text>
+          <Text>{claimsOnHandQty}</Text>
+        </View>
+        <View style={styles.onHandsView}>
+          <Text>{strings('ITEM.CONSOLIDATED_QTY')}</Text>
+          <Text>{consolidatedOnHandQty}</Text>
         </View>
       </View>
     );
@@ -219,7 +243,7 @@ export const renderLocationComponent = (props: (RenderProps & HandleProps), item
             />
           )}
       </View>
-      <View style={styles.renderPickListContatiner}>
+      <View style={styles.renderPickListContainer}>
         {renderAddPicklistButton(props, itemDetails)}
       </View>
     </View>
@@ -550,7 +574,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 ? strings('GENERICS.CHANGE') : undefined}
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
-              {renderOHQtyComponent(itemDetails.onHandsQty, pendingOnHandsQty)}
+              {renderOHQtyComponent(itemDetails)}
             </SFTCard>
             <SFTCard
               iconProp={(
