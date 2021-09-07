@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
+import salesMetricsStyles from '../../components/salesmetrics/SalesMetrics.style';
 
 const styles = StyleSheet.create({
   activityIndicator: {
@@ -29,8 +30,7 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   safeAreaView: {
-    flex: 1,
-    backgroundColor: COLOR.GREY_200
+    flex: 1
   },
   locationContainer: {
     paddingHorizontal: 8
@@ -75,28 +75,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 18,
-    paddingVertical: 16,
-    backgroundColor: COLOR.GREY_200
+    paddingVertical: 16
   },
   renderPickListContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingVertical: 8
   },
-  onHandsView: {
-    paddingHorizontal: 18,
-    paddingVertical: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  tintedRow: {
-    backgroundColor: COLOR.GREY_200
-  },
+  onHandsContainer: salesMetricsStyles.listContainer,
+  onHandsView: salesMetricsStyles.listRowContainer,
   mgrApprovalView: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingBottom: 16,
-    paddingLeft: 18
+    paddingLeft: 10
   },
   modalContainer: {
     flex: 1,
@@ -135,7 +127,7 @@ const styles = StyleSheet.create({
   },
   labelIcon: {
     marginLeft: -4
-  }
+  },
 });
 
 export default styles;
