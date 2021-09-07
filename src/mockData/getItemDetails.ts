@@ -14,6 +14,9 @@ export default {
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 10,
+    claimsOnHandQty: 5,
+    backroomQty: 6,
     replenishment: {
       onOrder: 48
     },
@@ -149,6 +152,9 @@ export default {
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 0,
+    claimsOnHandQty: 5,
+    backroomQty: 6,
     replenishment: {
       onOrder: 48
     },
@@ -280,6 +286,9 @@ export default {
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 0,
+    claimsOnHandQty: 0,
+    backroomQty: 6,
     replenishment: {
       onOrder: 48
     },
