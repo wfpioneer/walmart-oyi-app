@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Renders Activoty Indicator waiting for No Action Response 1`] = `
+exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Renders Activity Indicator waiting for No Action Response 1`] = `
 <ActivityIndicator
   animating={true}
   color="#0071e9"
@@ -297,17 +297,24 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
 <View
   style={
     Object {
-      "paddingHorizontal": 8,
-      "paddingVertical": 16,
+      "paddingHorizontal": 10,
     }
   }
 >
   <View
     style={
-      Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-      }
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 0,
+        },
+      ]
     }
   >
     <Text>
@@ -317,6 +324,98 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
       -25
     </Text>
   </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.SALES_FLOOR_QTY" translation]
+    </Text>
+    <Text>
+      -46
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.RESERVE_QTY" translation]
+    </Text>
+    <Text>
+      6
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.CLAIMS_QTY" translation]
+    </Text>
+    <Text>
+      5
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.CONSOLIDATED_QTY" translation]
+    </Text>
+    <Text>
+      10
+    </Text>
+  </View>
 </View>
 `;
 
@@ -324,16 +423,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
 <View
   style={
     Object {
-      "paddingHorizontal": 8,
-      "paddingVertical": 16,
+      "paddingHorizontal": 10,
     }
   }
 >
   <View
     style={
       Object {
+        "borderTopColor": "#e0e0e0",
         "flexDirection": "row",
         "justifyContent": "space-between",
+        "paddingHorizontal": 10,
+        "paddingVertical": 12,
       }
     }
   >
@@ -349,7 +450,8 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
       Object {
         "alignItems": "center",
         "flexDirection": "row",
-        "marginTop": 8,
+        "paddingBottom": 16,
+        "paddingLeft": 10,
       }
     }
   >
@@ -371,24 +473,123 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
       [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
     </Text>
   </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.SALES_FLOOR_QTY" translation]
+    </Text>
+    <Text>
+      -46
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.RESERVE_QTY" translation]
+    </Text>
+    <Text>
+      6
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.CLAIMS_QTY" translation]
+    </Text>
+    <Text>
+      5
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.CONSOLIDATED_QTY" translation]
+    </Text>
+    <Text>
+      10
+    </Text>
+  </View>
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component renders Postive On Hands Quantity 'No Pending Mgr Approval' 1`] = `
+exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component renders Positive On Hands Quantity 'No Pending Mgr Approval' 1`] = `
 <View
   style={
     Object {
-      "paddingHorizontal": 8,
-      "paddingVertical": 16,
+      "paddingHorizontal": 10,
     }
   }
 >
   <View
     style={
-      Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-      }
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 0,
+        },
+      ]
     }
   >
     <Text>
@@ -396,6 +597,98 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
     </Text>
     <Text>
       20
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.SALES_FLOOR_QTY" translation]
+    </Text>
+    <Text>
+      -1
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.RESERVE_QTY" translation]
+    </Text>
+    <Text>
+      6
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.CLAIMS_QTY" translation]
+    </Text>
+    <Text>
+      5
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderTopColor": "#e0e0e0",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 10,
+          "paddingVertical": 12,
+        },
+        Object {
+          "borderTopWidth": 1,
+        },
+      ]
+    }
+  >
+    <Text>
+      [missing "en.ITEM.CONSOLIDATED_QTY" translation]
+    </Text>
+    <Text>
+      10
     </Text>
   </View>
 </View>
@@ -1142,51 +1435,123 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <View
           style={
             Object {
-              "paddingHorizontal": 8,
-              "paddingVertical": 16,
+              "paddingHorizontal": 10,
             }
           }
         >
           <View
             style={
-              Object {
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-              }
+              Array [
+                Object {
+                  "borderTopColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "borderTopWidth": 0,
+                },
+              ]
             }
           >
             <Text>
               [missing "en.ITEM.ON_HANDS" translation]
             </Text>
             <Text>
-              10
+              42
             </Text>
           </View>
           <View
             style={
-              Object {
-                "alignItems": "center",
-                "flexDirection": "row",
-                "marginTop": 8,
-              }
+              Array [
+                Object {
+                  "borderTopColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "borderTopWidth": 1,
+                },
+              ]
             }
           >
-            <IconClass
-              brand={false}
-              color="#616161"
-              light={false}
-              name="info-circle"
-              regular={false}
-              size={12}
-              solid={false}
-              style={
-                Object {
-                  "paddingRight": 6,
-                }
-              }
-            />
             <Text>
-              [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
+              [missing "en.ITEM.SALES_FLOOR_QTY" translation]
+            </Text>
+            <Text>
+              21
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderTopColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "borderTopWidth": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE_QTY" translation]
+            </Text>
+            <Text>
+              6
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderTopColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "borderTopWidth": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              [missing "en.ITEM.CLAIMS_QTY" translation]
+            </Text>
+            <Text>
+              5
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderTopColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "borderTopWidth": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              [missing "en.ITEM.CONSOLIDATED_QTY" translation]
+            </Text>
+            <Text>
+              10
             </Text>
           </View>
         </View>
@@ -1211,7 +1576,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 8,
+              "paddingHorizontal": 18,
               "paddingVertical": 16,
             }
           }
@@ -1318,10 +1683,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           isGraphView={false}
           itemDetails={
             Object {
+              "backroomQty": 6,
               "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
+              "claimsOnHandQty": 5,
               "completed": false,
+              "consolidatedOnHandQty": 10,
               "exceptionType": "nsfl",
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
               "itemNbr": 1234567890,
@@ -1633,51 +2001,123 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <View
           style={
             Object {
-              "paddingHorizontal": 8,
-              "paddingVertical": 16,
+              "paddingHorizontal": 10,
             }
           }
         >
           <View
             style={
-              Object {
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-              }
+              Array [
+                Object {
+                  "borderTopColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "borderTopWidth": 0,
+                },
+              ]
             }
           >
             <Text>
               [missing "en.ITEM.ON_HANDS" translation]
             </Text>
             <Text>
-              10
+              42
             </Text>
           </View>
           <View
             style={
-              Object {
-                "alignItems": "center",
-                "flexDirection": "row",
-                "marginTop": 8,
-              }
+              Array [
+                Object {
+                  "borderTopColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "borderTopWidth": 1,
+                },
+              ]
             }
           >
-            <IconClass
-              brand={false}
-              color="#616161"
-              light={false}
-              name="info-circle"
-              regular={false}
-              size={12}
-              solid={false}
-              style={
-                Object {
-                  "paddingRight": 6,
-                }
-              }
-            />
             <Text>
-              [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
+              [missing "en.ITEM.SALES_FLOOR_QTY" translation]
+            </Text>
+            <Text>
+              21
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderTopColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "borderTopWidth": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE_QTY" translation]
+            </Text>
+            <Text>
+              6
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderTopColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "borderTopWidth": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              [missing "en.ITEM.CLAIMS_QTY" translation]
+            </Text>
+            <Text>
+              5
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderTopColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "borderTopWidth": 1,
+                },
+              ]
+            }
+          >
+            <Text>
+              [missing "en.ITEM.CONSOLIDATED_QTY" translation]
+            </Text>
+            <Text>
+              10
             </Text>
           </View>
         </View>
@@ -1702,7 +2142,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 8,
+              "paddingHorizontal": 18,
               "paddingVertical": 16,
             }
           }
@@ -1809,10 +2249,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           isGraphView={false}
           itemDetails={
             Object {
+              "backroomQty": 6,
               "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
+              "claimsOnHandQty": 5,
               "completed": false,
+              "consolidatedOnHandQty": 10,
               "exceptionType": "nsfl",
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
               "itemNbr": 1234567890,
