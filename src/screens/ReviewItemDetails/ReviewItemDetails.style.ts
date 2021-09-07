@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   safeAreaView: {
-    flex: 1
+    flex: 1,
+    backgroundColor: COLOR.GREY_200
   },
   locationContainer: {
     paddingHorizontal: 8
@@ -73,28 +74,29 @@ const styles = StyleSheet.create({
   itemOnOrderView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 8,
-    paddingVertical: 16
+    paddingHorizontal: 18,
+    paddingVertical: 16,
+    backgroundColor: COLOR.GREY_200
   },
   renderPickListContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingVertical: 8
   },
-  onHandsContainer: {
-    paddingHorizontal: 8,
-  },
   onHandsView: {
+    paddingHorizontal: 18,
     paddingVertical: 16,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderBottomWidth: 1,
-    borderBottomColor: COLOR.GREY_100
+    justifyContent: 'space-between'
+  },
+  tintedRow: {
+    backgroundColor: COLOR.GREY_200
   },
   mgrApprovalView: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 8
+    paddingBottom: 16,
+    paddingLeft: 18
   },
   modalContainer: {
     flex: 1,

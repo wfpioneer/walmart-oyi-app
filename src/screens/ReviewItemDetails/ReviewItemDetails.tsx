@@ -121,43 +121,42 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
     consolidatedOnHandQty,
   } = itemDetails;
   const salesFloorQty = onHandsQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty);
+  const qtyRows = [
+    {label: strings('ITEM.ON_HANDS'), value: onHandsQty},
+    {label: strings('ITEM.SALES_FLOOR_QTY'), value: salesFloorQty},
+    {label: strings('ITEM.RESERVE_QTY'), value: backroomQty},
+    {label: strings('ITEM.CLAIMS_QTY'), value: claimsOnHandQty},
+    {label: strings('ITEM.CONSOLIDATED_QTY'), value: consolidatedOnHandQty}
+  ];
   if (pendingOnHandsQty === -999) {
     return (
-      <View style={styles.onHandsContainer}>
-        <View style={styles.onHandsView}>
-          <Text>{strings('ITEM.ON_HANDS')}</Text>
-          <Text>{onHandsQty}</Text>
-        </View>
-        <View style={styles.onHandsView}>
-          <Text>{strings('ITEM.SALES_FLOOR_QTY')}</Text>
-          <Text>{salesFloorQty}</Text>
-        </View>
-        <View style={styles.onHandsView}>
-          <Text>{strings('ITEM.RESERVE_QTY')}</Text>
-          <Text>{backroomQty}</Text>
-        </View>
-        <View style={styles.onHandsView}>
-          <Text>{strings('ITEM.CLAIMS_QTY')}</Text>
-          <Text>{claimsOnHandQty}</Text>
-        </View>
-        <View style={styles.onHandsView}>
-          <Text>{strings('ITEM.CONSOLIDATED_QTY')}</Text>
-          <Text>{consolidatedOnHandQty}</Text>
-        </View>
+      <View>
+        { qtyRows.map((row, idx) => (
+            <View style={idx % 2 !== 0 ? styles.onHandsView : [styles.onHandsView, styles.tintedRow]} key={row.label}>
+              <Text>{row.label}</Text>
+              <Text>{row.value}</Text>
+            </View>
+        ))}
       </View>
     );
   }
 
   return (
-    <View style={styles.onHandsContainer}>
-      <View style={styles.onHandsView}>
+    <View>
+      <View style={[ styles.onHandsView, styles.tintedRow ]}>
         <Text>{strings('ITEM.ON_HANDS')}</Text>
         <Text>{pendingOnHandsQty}</Text>
       </View>
-      <View style={styles.mgrApprovalView}>
+      <View style={[ styles.mgrApprovalView, styles.tintedRow ]}>
         <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={styles.infoIcon} />
         <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
       </View>
+      { qtyRows.slice(1).map((row, idx) => (
+          <View style={idx % 2 === 0 ? styles.onHandsView : [styles.onHandsView, styles.tintedRow]} key={row.label}>
+            <Text>{row.label}</Text>
+            <Text>{row.value}</Text>
+          </View>
+      ))}
     </View>
   );
 };
