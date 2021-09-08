@@ -112,7 +112,7 @@ const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
-export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: number,): JSX.Element => {
+export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: number): JSX.Element => {
   if (pendingOnHandsQty === -999) {
     return (
       <View style={styles.onHandsContainer}>
