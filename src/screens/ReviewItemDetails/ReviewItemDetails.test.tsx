@@ -52,7 +52,7 @@ describe('ReviewItemDetailsScreen', () => {
           userId=""
           exceptionType="NSFL"
           actionCompleted={false}
-          pendingOnHandsQty={10}
+          pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
           floorLocations={itemDetail[123].location.floor}
           reserveLocations={itemDetail[123].location.reserve}
           route={routeProp}
@@ -71,6 +71,7 @@ describe('ReviewItemDetailsScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          userFeatures={['']}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -95,7 +96,7 @@ describe('ReviewItemDetailsScreen', () => {
           userId=""
           exceptionType="NSFL"
           actionCompleted={false}
-          pendingOnHandsQty={10}
+          pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
           floorLocations={itemDetail[123].location.floor}
           reserveLocations={itemDetail[123].location.reserve}
           route={routeProp}
@@ -114,6 +115,96 @@ describe('ReviewItemDetailsScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          userFeatures={['']}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('renders the On Hands Cloud Qty of 42', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      // Mock Item Number 456 has cloud Qty defined
+      renderer.render(
+        <ReviewItemDetailsScreen
+          scannedEvent={undefined}
+          isManualScanEnabled={false}
+          isWaiting={false}
+          error={undefined}
+          result={{
+            data: {
+              ...itemDetail[456],
+              status: undefined
+            },
+            status: 200
+          }}
+          addToPicklistStatus={defaultAsyncState}
+          completeItemApi={defaultAsyncState}
+          userId=""
+          exceptionType="NSFL"
+          actionCompleted={false}
+          pendingOnHandsQty={itemDetail[456].pendingOnHandsQty}
+          floorLocations={itemDetail[456].location.floor}
+          reserveLocations={itemDetail[456].location.reserve}
+          route={routeProp}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
+          isSalesMetricsGraphView={false}
+          setIsSalesMetricsGraphView={jest.fn()}
+          ohQtyModalVisible={false}
+          setOhQtyModalVisible={jest.fn()}
+          isRefreshing={false}
+          setIsRefreshing={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn(() => Promise.resolve())}
+          useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          userFeatures={['']}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('renders "Generic Change translation" if pendingOH is -999 and user has OH role', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReviewItemDetailsScreen
+          scannedEvent={undefined}
+          isManualScanEnabled={false}
+          isWaiting={false}
+          error={undefined}
+          result={{
+            data: {
+              ...itemDetail[123],
+              status: undefined
+            },
+            status: 200
+          }}
+          addToPicklistStatus={defaultAsyncState}
+          completeItemApi={defaultAsyncState}
+          userId=""
+          exceptionType="NSFL"
+          actionCompleted={false}
+          pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
+          floorLocations={itemDetail[123].location.floor}
+          reserveLocations={itemDetail[123].location.reserve}
+          route={routeProp}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
+          isSalesMetricsGraphView={false}
+          setIsSalesMetricsGraphView={jest.fn()}
+          ohQtyModalVisible={false}
+          setOhQtyModalVisible={jest.fn()}
+          isRefreshing={false}
+          setIsRefreshing={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn(() => Promise.resolve())}
+          useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          userFeatures={['on hands change']}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -151,6 +242,8 @@ describe('ReviewItemDetailsScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          userFeatures={['']}
+
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -192,6 +285,7 @@ describe('ReviewItemDetailsScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          userFeatures={['']}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -229,6 +323,7 @@ describe('ReviewItemDetailsScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          userFeatures={['']}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

@@ -100,7 +100,8 @@ export default {
     NO_FLOOR_LOCATION_DETAILS: 'El artículo no se completó porque nunca agregó una ubicación en el piso',
     ACTION_COMPLETE_ERROR: 'Error completando la acción',
     ACTION_COMPLETE_ERROR_DETAILS: 'Hubo un error complentando la acción. Por favor inténtalo de nuevo.',
-    WEEKLY_AVG_SALES: 'Ventas Semanales'
+    WEEKLY_AVG_SALES: 'Ventas Semanales',
+    FLY_CLOUD_QTY: 'Fly Cloud Qty' // Leaving This as is until MX has a need for Cloud Qty
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',

@@ -100,7 +100,8 @@ export default {
     NO_FLOOR_LOCATION_DETAILS: 'Item not completed because you never added a floor location',
     ACTION_COMPLETE_ERROR: 'Error Completing Action',
     ACTION_COMPLETE_ERROR_DETAILS: 'There was an error completing the action, please try again.',
-    WEEKLY_AVG_SALES: 'Weekly average sales'
+    WEEKLY_AVG_SALES: 'Weekly average sales',
+    FLY_CLOUD_QTY: 'Fly Cloud Qty'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

@@ -76,14 +76,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 16
   },
-  renderPickListContatiner: {
+  renderPickListContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingVertical: 8
   },
   onHandsContainer: {
     paddingHorizontal: 8,
-    paddingVertical: 16
+    paddingVertical: 16,
+    borderBottomWidth: 2,
+    borderBottomColor: COLOR.GREY_100
   },
   onHandsView: {
     flexDirection: 'row',

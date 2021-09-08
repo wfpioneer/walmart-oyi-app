@@ -297,6 +297,8 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
 <View
   style={
     Object {
+      "borderBottomColor": "#f5f5f5",
+      "borderBottomWidth": 2,
       "paddingHorizontal": 8,
       "paddingVertical": 16,
     }
@@ -324,6 +326,8 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
 <View
   style={
     Object {
+      "borderBottomColor": "#f5f5f5",
+      "borderBottomWidth": 2,
       "paddingHorizontal": 8,
       "paddingVertical": 16,
     }
@@ -378,6 +382,8 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
 <View
   style={
     Object {
+      "borderBottomColor": "#f5f5f5",
+      "borderBottomWidth": 2,
       "paddingHorizontal": 8,
       "paddingVertical": 16,
     }
@@ -729,6 +735,476 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
 </View>
 `;
 
+exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders "Generic Change translation" if pendingOH is -999 and user has OH role 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Modal
+    hardwareAccelerated={false}
+    transparent={true}
+    visible={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#00000099",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          }
+        }
+      >
+        <mockConstructor
+          color="#f44336"
+          name="alert"
+          size={30}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "marginTop": 16,
+                "width": "70%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+  <Modal
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  >
+    <OHQtyUpdate
+      exceptionType="nsfl"
+      ohQty={42}
+      setOhQtyModalVisible={[MockFunction]}
+    />
+  </Modal>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+  >
+    <View>
+      <ItemInfo
+        category="93 - Meat PI"
+        exceptionType="nsfl"
+        itemName="Test Item That is Really, Really Long (and has parenthesis)"
+        itemNbr={1234567890}
+        price={2000.94}
+        status=""
+        upcNbr="000055559999"
+      />
+      <SFTCard
+        iconName="pallet"
+        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.CHANGE\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "borderBottomColor": "#f5f5f5",
+              "borderBottomWidth": 2,
+              "paddingHorizontal": 8,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.ON_HANDS" translation]
+            </Text>
+            <Text>
+              42
+            </Text>
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconProp={
+          <mockConstructor
+            color="#616161"
+            name="label-variant"
+            size={20}
+            style={
+              Object {
+                "marginLeft": -4,
+              }
+            }
+          />
+        }
+        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 8,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <Text>
+            [missing "en.ITEM.ON_ORDER" translation]
+          </Text>
+          <Text>
+            48
+          </Text>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconName="map-marker-alt"
+        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.FLOOR" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Button
+              backgroundColor="#0071e9"
+              disabled={false}
+              height={28}
+              onPress={[Function]}
+              radius={5}
+              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+              titleColor="#0071e9"
+              titleFontSize={12}
+              titleFontWeight="bold"
+              type={3}
+              width={-1}
+            />
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        bottomRightBtnAction={
+          Array [
+            [Function],
+          ]
+        }
+        bottomRightBtnTxt={
+          Array [
+            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          ]
+        }
+        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+      >
+        <SalesMetrics
+          isGraphView={false}
+          itemDetails={
+            Object {
+              "basePrice": 1500.3,
+              "categoryDesc": "Meat PI",
+              "categoryNbr": 93,
+              "cloudQty": undefined,
+              "completed": false,
+              "exceptionType": "nsfl",
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
+              "itemNbr": 1234567890,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 100,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 39,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 26,
+                    "week": 52,
+                  },
+                  Object {
+                    "value": 45,
+                    "week": 53,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 54,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 55,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "status": undefined,
+              "upcNbr": "000055559999",
+            }
+          }
+        />
+      </SFTCard>
+    </View>
+  </ScrollView>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#0071e9",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+    <Text
+      style={
+        Object {
+          "color": "#ffffffff",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders 'Activity Indicator' waiting for ItemDetails Response  1`] = `
 <ActivityIndicator
   animating={true}
@@ -1005,6 +1481,497 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 </View>
 `;
 
+exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders the On Hands Cloud Qty of 42 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Modal
+    hardwareAccelerated={false}
+    transparent={true}
+    visible={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#00000099",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          }
+        }
+      >
+        <mockConstructor
+          color="#f44336"
+          name="alert"
+          size={30}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+        </Text>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "width": "100%",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#D6512D"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "marginTop": 16,
+                "width": "70%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+  <Modal
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  >
+    <OHQtyUpdate
+      exceptionType="nsfl"
+      ohQty={42}
+      setOhQtyModalVisible={[MockFunction]}
+    />
+  </Modal>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+  >
+    <View>
+      <ItemInfo
+        category="99 - Store Use"
+        exceptionType="nsfl"
+        itemName="Small, Store Use Item"
+        itemNbr={987654321}
+        price={2000.94}
+        status=""
+        upcNbr="777555333"
+      />
+      <SFTCard
+        iconName="pallet"
+        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        topRightBtnAction={[Function]}
+      >
+        <View
+          style={
+            Object {
+              "borderBottomColor": "#f5f5f5",
+              "borderBottomWidth": 2,
+              "paddingHorizontal": 8,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.ON_HANDS" translation]
+            </Text>
+            <Text>
+              42
+            </Text>
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "borderBottomColor": "#f5f5f5",
+              "borderBottomWidth": 2,
+              "paddingHorizontal": 8,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.FLY_CLOUD_QTY" translation]
+            </Text>
+            <Text>
+              42
+            </Text>
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconProp={
+          <mockConstructor
+            color="#616161"
+            name="label-variant"
+            size={20}
+            style={
+              Object {
+                "marginLeft": -4,
+              }
+            }
+          />
+        }
+        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 8,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <Text>
+            [missing "en.ITEM.ON_ORDER" translation]
+          </Text>
+          <Text>
+            48
+          </Text>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconName="map-marker-alt"
+        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.FLOOR" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Button
+              backgroundColor="#0071e9"
+              disabled={false}
+              height={28}
+              onPress={[Function]}
+              radius={5}
+              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+              titleColor="#0071e9"
+              titleFontSize={12}
+              titleFontWeight="bold"
+              type={3}
+              width={-1}
+            />
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        bottomRightBtnAction={
+          Array [
+            [Function],
+          ]
+        }
+        bottomRightBtnTxt={
+          Array [
+            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          ]
+        }
+        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+      >
+        <SalesMetrics
+          isGraphView={false}
+          itemDetails={
+            Object {
+              "basePrice": 1500.3,
+              "categoryDesc": "Store Use",
+              "categoryNbr": 99,
+              "cloudQty": 42,
+              "completed": false,
+              "exceptionType": "nsfl",
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Small, Store Use Item",
+              "itemNbr": 987654321,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 0,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 10,
+                    "week": 1,
+                  },
+                  Object {
+                    "value": 27,
+                    "week": 2,
+                  },
+                  Object {
+                    "value": 10,
+                    "week": 3,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "status": undefined,
+              "upcNbr": "777555333",
+            }
+          }
+        />
+      </SFTCard>
+    </View>
+  </ScrollView>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#0071e9",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 15,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+    <Text
+      style={
+        Object {
+          "color": "#ffffffff",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders the details for a single item with non-null status 1`] = `
 <View
   style={
@@ -1142,6 +2109,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <View
           style={
             Object {
+              "borderBottomColor": "#f5f5f5",
+              "borderBottomWidth": 2,
               "paddingHorizontal": 8,
               "paddingVertical": 16,
             }
@@ -1159,34 +2128,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               [missing "en.ITEM.ON_HANDS" translation]
             </Text>
             <Text>
-              10
-            </Text>
-          </View>
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flexDirection": "row",
-                "marginTop": 8,
-              }
-            }
-          >
-            <IconClass
-              brand={false}
-              color="#616161"
-              light={false}
-              name="info-circle"
-              regular={false}
-              size={12}
-              solid={false}
-              style={
-                Object {
-                  "paddingRight": 6,
-                }
-              }
-            />
-            <Text>
-              [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
+              42
             </Text>
           </View>
         </View>
@@ -1321,8 +2263,11 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
+              "cloudQty": undefined,
               "completed": false,
               "exceptionType": "nsfl",
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
               "itemNbr": 1234567890,
               "location": Object {
@@ -1633,6 +2578,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <View
           style={
             Object {
+              "borderBottomColor": "#f5f5f5",
+              "borderBottomWidth": 2,
               "paddingHorizontal": 8,
               "paddingVertical": 16,
             }
@@ -1650,34 +2597,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               [missing "en.ITEM.ON_HANDS" translation]
             </Text>
             <Text>
-              10
-            </Text>
-          </View>
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flexDirection": "row",
-                "marginTop": 8,
-              }
-            }
-          >
-            <IconClass
-              brand={false}
-              color="#616161"
-              light={false}
-              name="info-circle"
-              regular={false}
-              size={12}
-              solid={false}
-              style={
-                Object {
-                  "paddingRight": 6,
-                }
-              }
-            />
-            <Text>
-              [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
+              42
             </Text>
           </View>
         </View>
@@ -1812,8 +2732,11 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
+              "cloudQty": undefined,
               "completed": false,
               "exceptionType": "nsfl",
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
               "itemNbr": 1234567890,
               "location": Object {

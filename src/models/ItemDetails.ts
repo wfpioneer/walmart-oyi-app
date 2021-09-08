@@ -1,7 +1,6 @@
 import Location from './Location';
 
 interface ItemDetails {
-  image?: any;
   itemName: string;
   itemNbr: number;
   upcNbr: string;
@@ -11,9 +10,12 @@ interface ItemDetails {
   price: number;
   basePrice: number
   exceptionType?: string; // This is enumerated
+  imageUrlKey?: string;
+  imageBlobKey?: string;
   completed: boolean;
   onHandsQty: number;
   pendingOnHandsQty: number;
+  cloudQty?: number;
   replenishment: {
     onOrder: number;
   };

@@ -11,9 +11,12 @@ export default {
     price: 2000.94,
     basePrice: 1500.30,
     exceptionType: 'nsfl',
+    imageUrlKey: undefined,
+    imageBlobKey: undefined,
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    cloudQty: undefined,
     replenishment: {
       onOrder: 48
     },
@@ -146,9 +149,13 @@ export default {
     categoryDesc: 'Store Use',
     price: 2000.94,
     basePrice: 1500.30,
+    exceptionType: 'nsfl',
+    imageUrlKey: undefined,
+    imageBlobKey: undefined,
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    cloudQty: 42,
     replenishment: {
       onOrder: 48
     },
@@ -277,9 +284,13 @@ export default {
     categoryDesc: 'Wine',
     price: 2000.94,
     basePrice: 1500.30,
+    exceptionType: 'nsfl',
+    imageUrlKey: undefined,
+    imageBlobKey: undefined,
     completed: false,
     onHandsQty: 42,
-    pendingOnHandsQty: -999,
+    pendingOnHandsQty: 35,
+    cloudQty: 42,
     replenishment: {
       onOrder: 48
     },
