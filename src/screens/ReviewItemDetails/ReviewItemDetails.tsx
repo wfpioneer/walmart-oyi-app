@@ -228,7 +228,7 @@ export const renderLocationComponent = (props: (RenderProps & HandleProps), item
             />
           )}
       </View>
-      <View style={styles.renderPickListContatiner}>
+      <View style={styles.renderPickListContainer}>
         {renderAddPicklistButton(props, itemDetails)}
       </View>
     </View>

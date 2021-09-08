@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 16
   },
-  renderPickListContatiner: {
+  renderPickListContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingVertical: 8
