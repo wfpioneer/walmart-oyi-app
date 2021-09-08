@@ -101,10 +101,10 @@ export default {
     ACTION_COMPLETE_ERROR: '系统错误',
     ACTION_COMPLETE_ERROR_DETAILS: '系统处理请求错误，请再试一次。',
     WEEKLY_AVG_SALES: '每周平均销售',
-    SALES_FLOOR_QTY: 'Sales Floor', // TODO: Needs Mandarin Translation
-    RESERVE_QTY: 'Reserve', // TODO: Needs Mandarin Translation
-    CLAIMS_QTY: 'Claims', // TODO: Needs Mandarin Translation
-    CONSOLIDATED_QTY: 'Consolidated', // TODO: Needs Mandarin Translation
+    SALES_FLOOR_QTY: '楼面库存',
+    RESERVE_QTY: '高货架库存',
+    CLAIMS_QTY: '索赔库存',
+    CONSOLIDATED_QTY: '临时外仓'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
