@@ -119,9 +119,13 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
     backroomQty,
     claimsOnHandQty,
     consolidatedOnHandQty,
+    cloudQty
   } = itemDetails;
   const salesFloorQty =
-    onHandsQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty);
+    cloudQty === undefined
+      ? onHandsQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
+      : onHandsQty -
+        (backroomQty + claimsOnHandQty + consolidatedOnHandQty + cloudQty);
   const qtyRows = [
     {label: strings('ITEM.ON_HANDS'), value: onHandsQty},
     {label: strings('ITEM.SALES_FLOOR_QTY'), value: salesFloorQty},
@@ -129,6 +133,11 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
     {label: strings('ITEM.CLAIMS_QTY'), value: claimsOnHandQty},
     {label: strings('ITEM.CONSOLIDATED_QTY'), value: consolidatedOnHandQty},
   ];
+
+  if (cloudQty ) {
+    qtyRows.push({label: strings('ITEM.FLY_CLOUD_QTY'), value: cloudQty});
+  }
+
   if (pendingOnHandsQty === -999) {
     return (
       <View style={styles.onHandsContainer}>
@@ -173,15 +182,6 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
     </View>
   );
 };
-
-export const renderOHQtyNoPendingComponent = (onHandsQty: number, onHandsTitle: string): JSX.Element => (
-  <View style={styles.onHandsContainer}>
-    <View style={styles.onHandsView}>
-      <Text>{onHandsTitle}</Text>
-      <Text>{onHandsQty}</Text>
-    </View>
-  </View>
-);
 
 export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
   const { reserve } = itemDetails.location;
@@ -596,8 +596,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
               {renderOHQtyComponent(itemDetails)}
-              {itemDetails.cloudQty !== undefined
-               && (renderOHQtyNoPendingComponent(itemDetails.cloudQty, strings('ITEM.FLY_CLOUD_QTY')))}
             </SFTCard>
             <SFTCard
               iconProp={(
