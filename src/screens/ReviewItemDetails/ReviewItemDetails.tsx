@@ -174,6 +174,15 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
   );
 };
 
+export const renderOHQtyNoPendingComponent = (onHandsQty: number, onHandsTitle: string): JSX.Element => (
+  <View style={styles.onHandsContainer}>
+    <View style={styles.onHandsView}>
+      <Text>{onHandsTitle}</Text>
+      <Text>{onHandsQty}</Text>
+    </View>
+  </View>
+);
+
 export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
   const { reserve } = itemDetails.location;
   const { addToPicklistStatus } = props;
@@ -587,6 +596,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
               {renderOHQtyComponent(itemDetails)}
+              {itemDetails.cloudQty !== undefined
+               && (renderOHQtyNoPendingComponent(itemDetails.cloudQty, strings('ITEM.FLY_CLOUD_QTY')))}
             </SFTCard>
             <SFTCard
               iconProp={(

@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   labelIcon: {
     marginLeft: -4
-  },
+  }
 });
 
 export default styles;
