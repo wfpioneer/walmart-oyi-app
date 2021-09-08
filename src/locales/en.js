@@ -105,7 +105,7 @@ export default {
     RESERVE_QTY: 'Reserve',
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consolidated',
-    FLY_CLOUD_QTY: 'Fly Cloud Qty',
+    FLY_CLOUD_QTY: 'Fly Cloud',
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
