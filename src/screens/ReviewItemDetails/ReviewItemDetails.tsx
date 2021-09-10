@@ -134,7 +134,7 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
     {label: strings('ITEM.CONSOLIDATED_QTY'), value: consolidatedOnHandQty},
   ];
 
-  if (cloudQty ) {
+  if (cloudQty !== undefined) {
     qtyRows.push({label: strings('ITEM.FLY_CLOUD_QTY'), value: cloudQty});
   }
 
@@ -171,7 +171,7 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
         />
         <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
       </View>
-      {qtyRows.slice(1).map((row, idx) => (
+      {qtyRows.slice(1).map((row) => (
         <View
           style={[styles.onHandsView, {borderTopWidth: 1}]}
           key={row.label}>
