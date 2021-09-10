@@ -8,7 +8,6 @@ import _ from 'lodash';
 import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
@@ -37,6 +36,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import { ADD_TO_PICKLIST, GET_ITEM_DETAILS, NO_ACTION } from '../../state/actions/asyncAPI';
+import ItemDetailsList, {ItemDetailsListRow} from "../../components/ItemDetailsList/ItemDetailsList";
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 export interface ItemDetailsScreenProps {
@@ -126,8 +126,19 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
       ? onHandsQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
       : onHandsQty -
         (backroomQty + claimsOnHandQty + consolidatedOnHandQty + cloudQty);
-  const qtyRows = [
-    {label: strings('ITEM.ON_HANDS'), value: onHandsQty},
+  
+  const onHandsRow: ItemDetailsListRow = {
+    label: strings('ITEM.ON_HANDS'),
+    value: onHandsQty,
+  };
+
+  if (pendingOnHandsQty !== -999) {
+    onHandsRow.value = pendingOnHandsQty;
+    onHandsRow.additionalNote = strings('ITEM.PENDING_MGR_APPROVAL');
+  }
+
+  const qtyRows: ItemDetailsListRow[] = [
+    onHandsRow,
     {label: strings('ITEM.SALES_FLOOR_QTY'), value: salesFloorQty},
     {label: strings('ITEM.RESERVE_QTY'), value: backroomQty},
     {label: strings('ITEM.CLAIMS_QTY'), value: claimsOnHandQty},
@@ -138,49 +149,7 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
     qtyRows.push({label: strings('ITEM.FLY_CLOUD_QTY'), value: cloudQty});
   }
 
-  if (pendingOnHandsQty === -999) {
-    return (
-      <View style={styles.onHandsContainer}>
-        {qtyRows.map((row, idx) => (
-          <View
-            style={[
-              styles.onHandsView,
-              {borderTopWidth: idx === 0 ? 0 : 1},
-            ]}
-            key={row.label}>
-            <Text>{row.label}</Text>
-            <Text>{row.value}</Text>
-          </View>
-        ))}
-      </View>
-    );
-  }
-
-  return (
-    <View style={styles.onHandsContainer}>
-      <View style={styles.onHandsView}>
-        <Text>{strings('ITEM.ON_HANDS')}</Text>
-        <Text>{pendingOnHandsQty}</Text>
-      </View>
-      <View style={styles.mgrApprovalView}>
-        <FontAwesome5Icon
-          name="info-circle"
-          size={12}
-          color={COLOR.GREY_700}
-          style={styles.infoIcon}
-        />
-        <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
-      </View>
-      {qtyRows.slice(1).map((row) => (
-        <View
-          style={[styles.onHandsView, {borderTopWidth: 1}]}
-          key={row.label}>
-          <Text>{row.label}</Text>
-          <Text>{row.value}</Text>
-        </View>
-      ))}
-    </View>
-  );
+  return <ItemDetailsList rows={qtyRows}/>
 };
 
 export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {

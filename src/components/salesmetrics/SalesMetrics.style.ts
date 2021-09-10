@@ -11,16 +11,6 @@ const styles = StyleSheet.create({
     padding: 8,
     marginTop: 12
   },
-  listContainer: {
-    paddingHorizontal: 10
-  },
-  listRowContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderTopColor: COLOR.GREY_300
-  },
   topButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
