@@ -149,7 +149,7 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
     qtyRows.push({label: strings('ITEM.FLY_CLOUD_QTY'), value: cloudQty});
   }
 
-  return <ItemDetailsList rows={qtyRows}/>
+  return <ItemDetailsList rows={qtyRows} indentAfterFirstRow={true}/>
 };
 
 export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
