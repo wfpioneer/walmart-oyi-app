@@ -1,12 +1,11 @@
 import { NavigationProp } from '@react-navigation/native';
 import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
-import {
-  Modal, Platform, View
-} from 'react-native';
+import { Platform, View } from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
+import Modal from 'react-native-modal';
 import Button from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
 import styles from './Login.style';
@@ -151,8 +150,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     return (
       <View style={styles.container}>
         <Modal
-          visible={!this.props.User.siteId && userIsSignedIn(this.props.User)}
-          transparent
+          isVisible={!this.props.User.siteId && userIsSignedIn(this.props.User)}
         >
           <EnterClubNbrForm
             onSubmit={clubNbr => {

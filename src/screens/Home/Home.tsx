@@ -1,13 +1,12 @@
 import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
 import {
-  ActivityIndicator, EmitterSubscription,
-  Modal,
-  SafeAreaView, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator, EmitterSubscription, SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Modal from 'react-native-modal';
 import { AsyncState } from '../../models/AsyncState';
 import { RootState } from '../../state/reducers/RootReducer';
 import styles from './Home.style';
@@ -175,8 +174,12 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <Modal
-          visible={this.state.errorModalVisible}
-          transparent
+          isVisible={this.state.errorModalVisible}
+          backdropOpacity={0.60}
+          onDismiss={() => this.setState({ errorModalVisible: false })}
+          // animationOut="slideOutDown"
+          // animationOutTiming={300}
+          backdropTransitionOutTiming={0}
         >
           <View style={styles.modalContainer}>
             <View style={styles.barcodeErrorContainer}>

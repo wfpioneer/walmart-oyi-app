@@ -5,11 +5,10 @@ export const modalStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: COLOR.BLACK_TRANSPARENT_600
+    alignItems: 'center'
   },
   contentContainer: {
-    width: '80%',
+    width: '90%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLOR.WHITE,
