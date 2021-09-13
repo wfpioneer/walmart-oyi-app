@@ -567,7 +567,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 ? strings('GENERICS.CHANGE') : undefined}
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
-              {renderOHQtyComponent(itemDetails)}
+              {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
             <SFTCard
               iconProp={(
