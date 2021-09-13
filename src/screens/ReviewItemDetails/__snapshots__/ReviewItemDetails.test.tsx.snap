@@ -528,7 +528,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
         [missing "en.ITEM.SALES_FLOOR_QTY" translation]
       </Text>
       <Text>
-        -46
+        19
       </Text>
     </View>
   </React.Fragment>
