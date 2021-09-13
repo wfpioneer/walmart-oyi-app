@@ -80,6 +80,7 @@ export interface RenderProps {
   floorLocations?: Location[];
   reserveLocations?: Location[];
 }
+
 const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
   const {
     navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId
@@ -121,19 +122,21 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
     consolidatedOnHandQty,
     cloudQty
   } = itemDetails;
+
+  const activeOHQty = pendingOnHandsQty === -999 ? onHandsQty : pendingOnHandsQty;
+
   const salesFloorQty =
     cloudQty === undefined
-      ? onHandsQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
-      : onHandsQty -
+      ? activeOHQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
+      : activeOHQty -
         (backroomQty + claimsOnHandQty + consolidatedOnHandQty + cloudQty);
   
   const onHandsRow: ItemDetailsListRow = {
     label: strings('ITEM.ON_HANDS'),
-    value: onHandsQty,
+    value: activeOHQty,
   };
 
   if (pendingOnHandsQty !== -999) {
-    onHandsRow.value = pendingOnHandsQty;
     onHandsRow.additionalNote = strings('ITEM.PENDING_MGR_APPROVAL');
   }
 
