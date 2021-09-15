@@ -15,5 +15,8 @@ export const modalStyles = StyleSheet.create({
   buttonRow: {
     flex: 0,
     flexDirection: 'row'
+  },
+  titleText: {
+    paddingTop: 12
   }
 });

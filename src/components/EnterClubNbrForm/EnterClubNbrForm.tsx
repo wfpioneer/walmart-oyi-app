@@ -28,7 +28,7 @@ const EnterClubNbrForm = (props: EnterClubNbrFormProps): JSX.Element => {
 
   return (
     <>
-      <Text>{strings('LOGIN.CLUB_NBR_REQUIRED')}</Text>
+      <Text style={modalStyles.titleText}>{strings('LOGIN.CLUB_NBR_REQUIRED')}</Text>
       <TextInput
         value={textInput}
         onChangeText={input => setTextInput(input.replace(nonNumberRegex, ''))}

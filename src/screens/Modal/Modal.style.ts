@@ -62,7 +62,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLOR.WHITE,
     borderRadius: 7.5,
-    paddingVertical: 12,
+    paddingBottom: 12,
     paddingHorizontal: 8
   }
 });

@@ -101,7 +101,6 @@ export const CustomModal = (props: CustomModalProps): JSX.Element => {
         : (
           <View style={styles.modalContainer}>
             <View style={stylePicker[modalType]}>
-
               {children}
             </View>
           </View>
