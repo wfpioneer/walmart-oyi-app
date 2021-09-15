@@ -372,7 +372,7 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const pendingOHQty = -999;
       renderer.render(
-        renderOHQtyComponent({...itemDetail[123], onHandsQty: negOnHandsQty, pendingOnHandsQty: pendingOHQty})
+        renderOHQtyComponent({ ...itemDetail[123], onHandsQty: negOnHandsQty, pendingOnHandsQty: pendingOHQty })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -381,7 +381,7 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const pendingOHQty = 40;
       renderer.render(
-        renderOHQtyComponent({...itemDetail[123], onHandsQty: negOnHandsQty, pendingOnHandsQty: pendingOHQty})
+        renderOHQtyComponent({ ...itemDetail[123], onHandsQty: negOnHandsQty, pendingOnHandsQty: pendingOHQty })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -390,7 +390,7 @@ describe('ReviewItemDetailsScreen', () => {
 
       const pendingOHQty = -999;
       renderer.render(
-        renderOHQtyComponent({...itemDetail[123], onHandsQty: posOnHandsQty, pendingOnHandsQty: pendingOHQty})
+        renderOHQtyComponent({ ...itemDetail[123], onHandsQty: posOnHandsQty, pendingOnHandsQty: pendingOHQty })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
