@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import moment from 'moment';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Modal from 'react-native-modal';
 import { QuantityChange } from '../../components/quantityChange/QuantityChange';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import { strings } from '../../locales';
@@ -22,6 +21,7 @@ import { showSnackBar } from '../../state/actions/SnackBar';
 import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
+import { CustomModal } from '../Modal/Modal';
 
 interface ApprovalSummaryProps {
   route: RouteProp<any, string>;
@@ -43,22 +43,20 @@ interface ItemQuantity {
 
 export const renderErrorModal = (setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>): JSX.Element => (
   // Used to overlay the modal in the screen view
-  <Modal isVisible={true}>
-    <View style={styles.updateErrorContainer}>
-      <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-      <Text style={styles.errorText}>
-        {strings('APPROVAL.UPDATE_API_ERROR')}
-      </Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          style={styles.dismissButton}
-          title={strings('GENERICS.OK')}
-          backgroundColor={COLOR.TRACKER_RED}
-          onPress={() => setErrorModalVisible(false)}
-        />
-      </View>
+  <CustomModal isVisible={true} onClose={() => setErrorModalVisible(false)} modalType="Error">
+    <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+    <Text style={styles.errorText}>
+      {strings('APPROVAL.UPDATE_API_ERROR')}
+    </Text>
+    <View style={styles.buttonContainer}>
+      <Button
+        style={styles.dismissButton}
+        title={strings('GENERICS.OK')}
+        backgroundColor={COLOR.TRACKER_RED}
+        onPress={() => setErrorModalVisible(false)}
+      />
     </View>
-  </Modal>
+  </CustomModal>
 );
 
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {

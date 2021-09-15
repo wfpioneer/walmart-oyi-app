@@ -64,5 +64,14 @@ export default StyleSheet.create({
     borderRadius: 7.5,
     paddingBottom: 12,
     paddingHorizontal: 8
+  },
+  popUpContainer: {
+    paddingVertical: 15,
+    backgroundColor: COLOR.WHITE,
+    borderRadius: 7.5,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '75%',
+    alignSelf: 'center'
   }
 });

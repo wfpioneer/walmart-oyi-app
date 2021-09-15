@@ -25,19 +25,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  delConfirmation: {
-    width: '80%',
-    borderRadius: 10,
-    backgroundColor: COLOR.WHITE,
-    borderColor: COLOR.TRACKER_GREY,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    alignContent: 'center',
-    justifyContent: 'center',
-    padding: 10,
-    alignSelf: 'center',
-    minHeight: 150
-  },
   buttonContainer: {
     width: '100%',
     alignContent: 'space-around',

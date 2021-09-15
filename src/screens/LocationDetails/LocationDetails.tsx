@@ -2,7 +2,6 @@ import React, { EffectCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator, ScrollView, Text, View
 } from 'react-native';
-import Modal from 'react-native-modal';
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
@@ -24,6 +23,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
 import { DELETE_LOCATION, GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
+import { CustomModal } from '../Modal/Modal';
 
 interface LocationDetailsProps {
   navigation: NavigationProp<any>;
@@ -168,43 +168,41 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
   }
   return (
     <>
-      <Modal isVisible={displayConfirmation}>
-        <View style={styles.delConfirmation}>
-          {delAPI.isWaiting ? (
-            <ActivityIndicator
-              animating={delAPI.isWaiting}
-              hidesWhenStopped
-              color={COLOR.MAIN_THEME_COLOR}
-              size="large"
-              style={styles.activityIndicator}
-            />
-          ) : (
-            <>
-              <Text style={styles.message}>
-                {delAPI.error
-                  ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
-                  : `${strings('LOCATION.DELETE_CONFIRMATION')}${
-                    locToConfirm.locationName
-                  }`}
-              </Text>
-              <View style={styles.buttonContainer}>
-                <Button
-                  style={styles.delButton}
-                  title={strings('GENERICS.CANCEL')}
-                  backgroundColor={COLOR.TRACKER_RED}
-                  onPress={() => setDisplayConfirmation(false)}
-                />
-                <Button
-                  style={styles.delButton}
-                  title={delAPI.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
-                  backgroundColor={COLOR.MAIN_THEME_COLOR}
-                  onPress={deleteConfirmed}
-                />
-              </View>
-            </>
-          )}
-        </View>
-      </Modal>
+      <CustomModal isVisible={displayConfirmation} onClose={() => setDisplayConfirmation(false)} modalType="Error">
+        {delAPI.isWaiting ? (
+          <ActivityIndicator
+            animating={delAPI.isWaiting}
+            hidesWhenStopped
+            color={COLOR.MAIN_THEME_COLOR}
+            size="large"
+            style={styles.activityIndicator}
+          />
+        ) : (
+          <>
+            <Text style={styles.message}>
+              {delAPI.error
+                ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
+                : `${strings('LOCATION.DELETE_CONFIRMATION')}${
+                  locToConfirm.locationName
+                }`}
+            </Text>
+            <View style={styles.buttonContainer}>
+              <Button
+                style={styles.delButton}
+                title={strings('GENERICS.CANCEL')}
+                backgroundColor={COLOR.TRACKER_RED}
+                onPress={() => setDisplayConfirmation(false)}
+              />
+              <Button
+                style={styles.delButton}
+                title={delAPI.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+                backgroundColor={COLOR.MAIN_THEME_COLOR}
+                onPress={deleteConfirmed}
+              />
+            </View>
+          </>
+        )}
+      </CustomModal>
       <ScrollView>
         <View style={styles.sectionLabel}>
           <Text style={styles.labelText}>

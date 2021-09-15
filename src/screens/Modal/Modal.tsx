@@ -70,7 +70,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ActivityModalCompone
 
 interface CustomModalProps {
   children: ReactNode | ReactElement;
-  modalType: 'Error' | 'Form' | 'Info'| 'Spinner';
+  modalType: 'Error' | 'Form' | 'Info'| 'Spinner' | 'Popup';
   isVisible: boolean
   onClose: () => void;
 }
@@ -78,7 +78,8 @@ const stylePicker = {
   Error: styles.errorContainer,
   Form: styles.contentContainer,
   Info: styles.infoView,
-  Spinner: styles.activityView
+  Spinner: styles.activityView,
+  Popup: styles.popUpContainer
 };
 
 export const CustomModal = (props: CustomModalProps): JSX.Element => {
