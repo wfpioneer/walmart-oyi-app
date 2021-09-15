@@ -11,15 +11,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 28
   },
-  popUpContainer: {
-    paddingVertical: 15,
-    backgroundColor: COLOR.WHITE,
-    borderRadius: 5,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '80%',
-    alignSelf: 'center'
-  },
   listContainer: {
     paddingVertical: 20,
     minHeight: 80
@@ -54,7 +45,8 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingHorizontal: 8
   }
 });
 export default styles;
