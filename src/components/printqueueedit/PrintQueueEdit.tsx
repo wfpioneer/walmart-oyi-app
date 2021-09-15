@@ -69,75 +69,73 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
   };
 
   return (
-    <View style={styles.modalContainer}>
-      <View style={styles.contentContainer}>
-        <View style={styles.closeContainer}>
-          <IconButton
-            icon={<MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />}
-            type={Button.Type.NO_BORDER}
-            onPress={() => props.setItemIndexToEdit(-1)}
-          />
-        </View>
-        <View style={styles.itemDetailsContainer}>
-          <Text style={styles.itemNameTxt}>{itemToEdit.itemName}</Text>
-        </View>
-        <View style={styles.copyQtyContainer}>
-          <Text style={styles.copyQtyLabel}>{strings('PRINT.COPY_QTY')}</Text>
-          <View style={styles.qtyChangeContainer}>
-            <IconButton
-              icon={renderPlusMinusBtn('minus')}
-              type={IconButton.Type.SOLID_WHITE}
-              backgroundColor={COLOR.GREY_400}
-              height={30}
-              width={30}
-              radius={50}
-              onPress={handleDecreaseQty}
-            />
-            <TextInput
-              style={[styles.copyQtyInput, isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid]}
-              keyboardType="numeric"
-              onChangeText={handleTextChange}
-            >
-              {signQty}
-            </TextInput>
-            <IconButton
-              icon={renderPlusMinusBtn('plus')}
-              type={IconButton.Type.SOLID_WHITE}
-              backgroundColor={COLOR.GREY_400}
-              height={30}
-              width={30}
-              radius={50}
-              onPress={handleIncreaseQty}
-            />
-          </View>
-          {!isValidQty && (
-          <Text style={styles.invalidLabel}>
-            {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
-          </Text>
-          )}
-        </View>
-        <View style={styles.signSizeContainer}>
-          <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
-          <Text>{`${strings(`PRINT.${itemToEdit.paperSize}`)}`}</Text>
-        </View>
-        <View style={styles.printerContainer}>
-          <View style={styles.printerAlignment}>
-            <MaterialCommunityIcon name="printer-check" size={24} />
-            <View style={styles.printerTextMargin}>
-              <Text>{strings('PRINT.FRONT_DESK')}</Text>
-              <Text style={styles.genericTextLabel}>{strings('GENERICS.DEFAULT')}</Text>
-            </View>
-          </View>
-        </View>
-        <Button
-          title={strings('GENERICS.SAVE')}
-          type={Button.Type.PRIMARY}
-          style={styles.buttonWidth}
-          onPress={handleSave}
-          disabled={!isValidQty}
+    <>
+      <View style={styles.closeContainer}>
+        <IconButton
+          icon={<MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />}
+          type={Button.Type.NO_BORDER}
+          onPress={() => props.setItemIndexToEdit(-1)}
         />
       </View>
-    </View>
+      <View style={styles.itemDetailsContainer}>
+        <Text style={styles.itemNameTxt}>{itemToEdit.itemName}</Text>
+      </View>
+      <View style={styles.copyQtyContainer}>
+        <Text style={styles.copyQtyLabel}>{strings('PRINT.COPY_QTY')}</Text>
+        <View style={styles.qtyChangeContainer}>
+          <IconButton
+            icon={renderPlusMinusBtn('minus')}
+            type={IconButton.Type.SOLID_WHITE}
+            backgroundColor={COLOR.GREY_400}
+            height={30}
+            width={30}
+            radius={50}
+            onPress={handleDecreaseQty}
+          />
+          <TextInput
+            style={[styles.copyQtyInput, isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid]}
+            keyboardType="numeric"
+            onChangeText={handleTextChange}
+          >
+            {signQty}
+          </TextInput>
+          <IconButton
+            icon={renderPlusMinusBtn('plus')}
+            type={IconButton.Type.SOLID_WHITE}
+            backgroundColor={COLOR.GREY_400}
+            height={30}
+            width={30}
+            radius={50}
+            onPress={handleIncreaseQty}
+          />
+        </View>
+        {!isValidQty && (
+        <Text style={styles.invalidLabel}>
+          {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
+        </Text>
+        )}
+      </View>
+      <View style={styles.signSizeContainer}>
+        <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
+        <Text>{`${strings(`PRINT.${itemToEdit.paperSize}`)}`}</Text>
+      </View>
+      <View style={styles.printerContainer}>
+        <View style={styles.printerAlignment}>
+          <MaterialCommunityIcon name="printer-check" size={24} />
+          <View style={styles.printerTextMargin}>
+            <Text>{strings('PRINT.FRONT_DESK')}</Text>
+            <Text style={styles.genericTextLabel}>{strings('GENERICS.DEFAULT')}</Text>
+          </View>
+        </View>
+      </View>
+      <Button
+        title={strings('GENERICS.SAVE')}
+        type={Button.Type.PRIMARY}
+        style={styles.buttonWidth}
+        onPress={handleSave}
+        disabled={!isValidQty}
+      />
+    </>
   );
 };
 

@@ -8,17 +8,16 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
     }
   }
 >
-  <Modal
-    hardwareAccelerated={false}
-    onRequestClose={[Function]}
-    transparent={true}
-    visible={true}
+  <CustomModal
+    isVisible={true}
+    modalType="Form"
+    onClose={[Function]}
   >
     <PrintQueueEdit
       itemIndexToEdit={0}
       setItemIndexToEdit={[MockFunction]}
     />
-  </Modal>
+  </CustomModal>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -352,17 +351,16 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
     }
   }
 >
-  <Modal
-    hardwareAccelerated={false}
-    onRequestClose={[Function]}
-    transparent={true}
-    visible={false}
+  <CustomModal
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
   >
     <PrintQueueEdit
       itemIndexToEdit={-1}
       setItemIndexToEdit={[MockFunction]}
     />
-  </Modal>
+  </CustomModal>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -1536,17 +1534,16 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
     }
   }
 >
-  <Modal
-    hardwareAccelerated={false}
-    onRequestClose={[Function]}
-    transparent={true}
-    visible={false}
+  <CustomModal
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
   >
     <PrintQueueEdit
       itemIndexToEdit={-1}
       setItemIndexToEdit={[MockFunction]}
     />
-  </Modal>
+  </CustomModal>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -1757,17 +1754,16 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
     }
   }
 >
-  <Modal
-    hardwareAccelerated={false}
-    onRequestClose={[Function]}
-    transparent={true}
-    visible={false}
+  <CustomModal
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
   >
     <PrintQueueEdit
       itemIndexToEdit={-1}
       setItemIndexToEdit={[MockFunction]}
     />
-  </Modal>
+  </CustomModal>
   <ScrollView
     contentContainerStyle={
       Object {

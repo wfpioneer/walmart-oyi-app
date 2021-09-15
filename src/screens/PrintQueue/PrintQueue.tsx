@@ -24,6 +24,7 @@ import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
 import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { PRINT_SIGN } from '../../state/actions/asyncAPI';
+import { CustomModal } from '../Modal/Modal';
 
 interface HandlePrintProps {
   dispatch: Dispatch<any>;
@@ -193,15 +194,15 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
     )
     : (
       <SafeAreaView style={styles.safeAreaView}>
-        <Modal
-          visible={itemIndexToEdit >= 0}
-          onRequestClose={() => {
+        <CustomModal
+          isVisible={itemIndexToEdit >= 0}
+          onClose={() => {
             setItemIndexToEdit(-1);
           }}
-          transparent
+          modalType="Form"
         >
           <PrintQueueEdit itemIndexToEdit={itemIndexToEdit} setItemIndexToEdit={setItemIndexToEdit} />
-        </Modal>
+        </CustomModal>
         <ScrollView contentContainerStyle={styles.container}>
           <View style={styles.totalCountContainer}>
             <Text>{`${printQueue.length} ${strings('PRINT.TOTAL_ITEMS')}`}</Text>
