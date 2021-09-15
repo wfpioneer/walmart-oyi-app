@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import {
-  ActivityIndicator, Platform, Text, TouchableOpacity, View
+  ActivityIndicator, Modal as OrgModal, Platform, Text, TouchableOpacity, View
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
@@ -67,3 +67,45 @@ class ActivityModalComponent extends React.PureComponent<ActivityModalComponentP
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivityModalComponent);
+
+interface CustomModalProps {
+  children: ReactNode | ReactElement;
+  modalType: 'Error' | 'Form' | 'Info'| 'Spinner';
+  isVisible: boolean
+  onClose: () => void;
+}
+const stylePicker = {
+  Error: styles.errorContainer,
+  Form: styles.contentContainer,
+  Info: styles.infoView,
+  Spinner: styles.activityView
+};
+
+export const CustomModal = (props: CustomModalProps): JSX.Element => {
+  const {
+    children, isVisible, modalType, onClose
+  } = props;
+
+  return (
+    <OrgModal
+      onRequestClose={() => onClose()}
+      visible={isVisible}
+      transparent={true}
+    >
+      {modalType === 'Spinner'
+        ? (
+          <View style={styles.activityView}>
+            <ActivityIndicator size="large" color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
+          </View>
+        )
+        : (
+          <View style={styles.modalContainer}>
+            <View style={stylePicker[modalType]}>
+
+              {children}
+            </View>
+          </View>
+        )}
+    </OrgModal>
+  );
+};

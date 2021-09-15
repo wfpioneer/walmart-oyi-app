@@ -36,5 +36,33 @@ export default StyleSheet.create({
   },
   okText: {
     color: COLOR.WHITE
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLOR.BLACK_TRANSPARENT_600
+  },
+  errorContainer: {
+    width: '80%',
+    borderRadius: 10,
+    backgroundColor: COLOR.WHITE,
+    borderColor: COLOR.TRACKER_GREY,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    alignContent: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    alignSelf: 'center',
+    minHeight: 150
+  },
+  contentContainer: {
+    width: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLOR.WHITE,
+    borderRadius: 7.5,
+    paddingVertical: 12,
+    paddingHorizontal: 8
   }
 });
