@@ -36,7 +36,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import { ADD_TO_PICKLIST, GET_ITEM_DETAILS, NO_ACTION } from '../../state/actions/asyncAPI';
-import ItemDetailsList, {ItemDetailsListRow} from "../../components/ItemDetailsList/ItemDetailsList";
+import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 export interface ItemDetailsScreenProps {
@@ -125,15 +125,14 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
 
   const activeOHQty = pendingOnHandsQty === -999 ? onHandsQty : pendingOnHandsQty;
 
-  const salesFloorQty =
-    cloudQty === undefined
-      ? activeOHQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
-      : activeOHQty -
-        (backroomQty + claimsOnHandQty + consolidatedOnHandQty + cloudQty);
-  
+  const salesFloorQty = cloudQty === undefined
+    ? activeOHQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
+    : activeOHQty
+        - (backroomQty + claimsOnHandQty + consolidatedOnHandQty + cloudQty);
+
   const onHandsRow: ItemDetailsListRow = {
     label: strings('ITEM.ON_HANDS'),
-    value: activeOHQty,
+    value: activeOHQty
   };
 
   if (pendingOnHandsQty !== -999) {
@@ -142,17 +141,17 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
 
   const qtyRows: ItemDetailsListRow[] = [
     onHandsRow,
-    {label: strings('ITEM.SALES_FLOOR_QTY'), value: salesFloorQty},
-    {label: strings('ITEM.RESERVE_QTY'), value: backroomQty},
-    {label: strings('ITEM.CLAIMS_QTY'), value: claimsOnHandQty},
-    {label: strings('ITEM.CONSOLIDATED_QTY'), value: consolidatedOnHandQty},
+    { label: strings('ITEM.SALES_FLOOR_QTY'), value: salesFloorQty },
+    { label: strings('ITEM.RESERVE_QTY'), value: backroomQty },
+    { label: strings('ITEM.CLAIMS_QTY'), value: claimsOnHandQty },
+    { label: strings('ITEM.CONSOLIDATED_QTY'), value: consolidatedOnHandQty }
   ];
 
   if (cloudQty !== undefined) {
-    qtyRows.push({label: strings('ITEM.FLY_CLOUD_QTY'), value: cloudQty});
+    qtyRows.push({ label: strings('ITEM.FLY_CLOUD_QTY'), value: cloudQty });
   }
 
-  return <ItemDetailsList rows={qtyRows} indentAfterFirstRow={true}/>
+  return <ItemDetailsList rows={qtyRows} indentAfterFirstRow={true} />;
 };
 
 export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
