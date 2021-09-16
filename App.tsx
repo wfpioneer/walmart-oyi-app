@@ -14,7 +14,7 @@ import { Provider } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import { MainNavigator } from './src/navigators/MainNavigator';
 import { setI18nConfig } from './src/locales';
-import Modal from './src/screens/Modal/Modal';
+import { ActivityModalComponent } from './src/screens/Modal/Modal';
 import AppRoot from './src/components/AppRoot';
 import { initialize } from './src/utils/AppCenterTool';
 import store from './src/state/index';
@@ -38,7 +38,7 @@ export default class App extends React.PureComponent {
     return (
       <Provider store={store}>
         <AppRoot>
-          <Modal />
+          <ActivityModalComponent />
           <SnackBar />
           <MainNavigator />
         </AppRoot>

@@ -4,7 +4,7 @@ import {
   NavigationProp, Route, useNavigation, useRoute
 } from '@react-navigation/native';
 import {
-  ActivityIndicator, Modal, SafeAreaView, ScrollView, Text, View
+  ActivityIndicator, SafeAreaView, ScrollView, Text, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dispatch } from 'redux';
@@ -57,6 +57,7 @@ export const renderPrintItem = (
   navigation: NavigationProp<any>,
   route: Route<any>,
   validateSessionCall: (nav: NavigationProp<any>, routeName?: string) => Promise<void>,
+  trackEventCall: (eventName: string, params?: any) => void
 ): JSX.Element[] => {
   const handleEditAction = (index: number) => () => {
     setItemIndexToEdit(index);
@@ -64,7 +65,7 @@ export const renderPrintItem = (
 
   const handleDeleteAction = (index: number) => () => {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEvent('print_queue_delete_item', { printItem: JSON.stringify(printQueue[index]) });
+      trackEventCall('print_queue_delete_item', { printItem: JSON.stringify(printQueue[index]) });
       printQueue.splice(index, 1);
       dispatch(setPrintQueue(printQueue));
     }).catch(() => {});
@@ -143,6 +144,7 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
     setItemIndexToEdit,
     error, setError,
     validateSessionCall,
+    trackEventCall,
     useEffectHook
   } = props;
 
@@ -208,7 +210,9 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
             <Text>{`${printQueue.length} ${strings('PRINT.TOTAL_ITEMS')}`}</Text>
           </View>
           <View style={styles.listContainer}>
-            {renderPrintItem(printQueue, setItemIndexToEdit, dispatch, navigation, route, validateSession)}
+            {renderPrintItem(
+              printQueue, setItemIndexToEdit, dispatch, navigation, route, validateSession, trackEventCall
+            )}
           </View>
           {error.error
             ? (
