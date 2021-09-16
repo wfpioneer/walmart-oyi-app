@@ -12,7 +12,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 
 interface CustomModalProps {
   children: ReactNode | ReactElement;
-  modalType: 'Error' | 'Form' | 'Info' | 'Popup';
+  modalType: 'Error' | 'Form' | 'Popup';
   isVisible: boolean
   onClose: () => void;
 }
@@ -25,8 +25,6 @@ export const CustomModal = (props: CustomModalProps): JSX.Element => {
   const styleSelector = {
     Error: styles.errorContainer,
     Form: styles.contentContainer,
-    Info: styles.infoView,
-    Spinner: styles.activityView,
     Popup: styles.popUpContainer
   };
 
@@ -45,6 +43,7 @@ export const CustomModal = (props: CustomModalProps): JSX.Element => {
   );
 };
 
+// TODO Brainstorm a way to remove the need for dispatching calls to the global modal
 export const ActivityModalComponent = (): JSX.Element => {
   const dispatch = useDispatch();
   const { showActivity, showModal, content: modalContent } = useTypedSelector(state => state.modal);

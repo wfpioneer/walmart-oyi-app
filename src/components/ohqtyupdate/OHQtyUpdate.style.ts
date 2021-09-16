@@ -2,10 +2,14 @@ import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
 const styles = StyleSheet.create({
+  activityIndicator: {
+    marginTop: 16
+  },
   closeContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     width: '100%',
+    height: 45,
     alignContent: 'flex-start'
   },
   updateContainer: {

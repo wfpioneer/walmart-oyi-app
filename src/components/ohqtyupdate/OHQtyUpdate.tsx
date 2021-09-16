@@ -132,23 +132,16 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
     setIsSameQty(validateSameQty(ohQty, newOHQty - 1));
   };
 
-  // TODO update this Spinner to the base spinner we use for the app
-  if (apiSubmitting) {
-    return (
-      <View style={styles.modalContainer}>
-        <ActivityIndicator color={COLOR.BLACK} />
-      </View>
-    );
-  }
-
   return (
     <>
       <View style={styles.closeContainer}>
+        {!apiSubmitting && (
         <IconButton
           icon={<MaterialCommunityIcon name="close" size={20} color={COLOR.GREY_500} />}
           type={Button.Type.NO_BORDER}
           onPress={() => { setOhQtyModalVisible(false); }}
         />
+        )}
       </View>
       <View style={[styles.updateContainer, isValidNbr ? styles.updateContainerValid
         : styles.updateContainerInvalid]}
@@ -188,13 +181,23 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
         {error}
       </Text>
       )}
-      <Button
-        style={styles.saveBtn}
-        title="Save"
-        type={Button.Type.PRIMARY}
-        disabled={(!isValidNbr || isSameQty)}
-        onPress={handleSaveOHQty}
-      />
+      {apiSubmitting ? (
+        <ActivityIndicator
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.activityIndicator}
+        />
+      )
+        : (
+          <Button
+            style={styles.saveBtn}
+            title="Save"
+            type={Button.Type.PRIMARY}
+            disabled={(!isValidNbr || isSameQty)}
+            onPress={handleSaveOHQty}
+          />
+        )}
     </>
   );
 };
