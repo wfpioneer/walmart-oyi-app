@@ -21,8 +21,28 @@ describe('ItemDetailsList Component', () => {
     renderer.render(<ItemDetailsList rows={mockItemDetailsListRowsNoNote} />);
   });
 
-  it('should indent all rows after the first if indentAfterFirstRow is true', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    renderer.render(<ItemDetailsList rows={mockItemDetailsListRowsNoNote} indentAfterFirstRow={true} />);
+  describe('indenting behavior', () => {
+    it('should indent all rows after the first if indentAfterFirstRow is true', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<ItemDetailsList rows={mockItemDetailsListRowsNoNote} indentAfterFirstRow={true} />);
+    });
+    it('should indent all rows after the first if indentAfterFirstRow is true regardless of additionalNotes', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<ItemDetailsList rows={mockItemDetailsListRowsAdditionalNote} indentAfterFirstRow={true} />);
+    });
+    it('should only indent labels and not additionalNotes', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const mockItemDetailsRowsWithNotes = mockItemDetailsListRowsNoNote
+        .map(row => ({ ...row, additionalNote: 'An Additional Note' }));
+      renderer.render(<ItemDetailsList rows={mockItemDetailsRowsWithNotes} indentAfterFirstRow={true} />);
+    });
+    it('should not indent anything if indentAfterFirstRow is not specified', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<ItemDetailsList rows={mockItemDetailsListRowsNoNote} />);
+    });
+    it('should not indent anything if indentAfterFirstRow is false', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<ItemDetailsList rows={mockItemDetailsListRowsNoNote} indentAfterFirstRow={false} />);
+    });
   });
 });
