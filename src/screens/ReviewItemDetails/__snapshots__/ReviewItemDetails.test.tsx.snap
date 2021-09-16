@@ -472,7 +472,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
         [missing "en.ITEM.ON_HANDS" translation]
       </Text>
       <Text>
-        40
+        -25 (40)
       </Text>
     </View>
     <View
@@ -487,7 +487,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
     >
       <IconClass
         brand={false}
-        color="#616161"
+        color="#e74517"
         light={false}
         name="info-circle"
         regular={false}
@@ -528,7 +528,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
         [missing "en.ITEM.SALES_FLOOR_QTY" translation]
       </Text>
       <Text>
-        19
+        -46
       </Text>
     </View>
   </React.Fragment>
