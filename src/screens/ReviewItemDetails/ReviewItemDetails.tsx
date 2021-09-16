@@ -56,7 +56,6 @@ export interface ItemDetailsScreenProps {
   isSalesMetricsGraphView: boolean; setIsSalesMetricsGraphView: React.Dispatch<React.SetStateAction<boolean>>;
   ohQtyModalVisible: boolean; setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   errorModalVisible: boolean; setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  isRefreshing: boolean; setIsRefreshing: React.Dispatch<React.SetStateAction<boolean>>;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
@@ -340,7 +339,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     scrollViewRef,
     isSalesMetricsGraphView, setIsSalesMetricsGraphView,
     ohQtyModalVisible, setOhQtyModalVisible,
-    isRefreshing, setIsRefreshing,
     errorModalVisible, setErrorModalVisible,
     trackEventCall,
     validateSessionCall,
@@ -510,7 +508,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      setIsRefreshing(true);
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
       dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }));
@@ -535,7 +532,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={styles.container}
-        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}
+        refreshControl={<RefreshControl refreshing={false} onRefresh={handleRefresh} />}
       >
         {isWaiting && (
         <ActivityIndicator
@@ -624,7 +621,6 @@ const ReviewItemDetails = (): JSX.Element => {
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   return (
     <ReviewItemDetailsScreen
@@ -649,8 +645,6 @@ const ReviewItemDetails = (): JSX.Element => {
       setIsSalesMetricsGraphView={setIsSalesMetricsGraphView}
       ohQtyModalVisible={ohQtyModalVisible}
       setOhQtyModalVisible={setOhQtyModalVisible}
-      isRefreshing={isRefreshing}
-      setIsRefreshing={setIsRefreshing}
       errorModalVisible={errorModalVisible}
       setErrorModalVisible={setErrorModalVisible}
       trackEventCall={trackEvent}
