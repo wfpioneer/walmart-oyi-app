@@ -123,19 +123,18 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
     cloudQty
   } = itemDetails;
 
-  const activeOHQty = pendingOnHandsQty === -999 ? onHandsQty : pendingOnHandsQty;
-
   const salesFloorQty = cloudQty === undefined
-    ? activeOHQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
-    : activeOHQty
+    ? onHandsQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
+    : onHandsQty
         - (backroomQty + claimsOnHandQty + consolidatedOnHandQty + cloudQty);
 
   const onHandsRow: ItemDetailsListRow = {
     label: strings('ITEM.ON_HANDS'),
-    value: activeOHQty
+    value: onHandsQty
   };
 
   if (pendingOnHandsQty !== -999) {
+    onHandsRow.value = `${onHandsQty} (${pendingOnHandsQty})`;
     onHandsRow.additionalNote = strings('ITEM.PENDING_MGR_APPROVAL');
   }
 

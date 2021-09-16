@@ -42,7 +42,7 @@ const ItemDetailsList = (props: ItemDetailsListProps): JSX.Element => {
               <FontAwesome5Icon
                 name="info-circle"
                 size={INFO_ICON_SIZE}
-                color={COLOR.GREY_700}
+                color={COLOR.ORANGE}
                 style={styles.infoIcon}
               />
               <Text>{row.additionalNote}</Text>
