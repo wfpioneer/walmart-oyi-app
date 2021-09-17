@@ -16,6 +16,9 @@ export default {
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 10,
+    claimsOnHandQty: 5,
+    backroomQty: 6,
     cloudQty: undefined,
     replenishment: {
       onOrder: 48
@@ -155,6 +158,9 @@ export default {
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 0,
+    claimsOnHandQty: 5,
+    backroomQty: 6,
     cloudQty: 42,
     replenishment: {
       onOrder: 48
@@ -289,6 +295,9 @@ export default {
     imageBlobKey: undefined,
     completed: false,
     onHandsQty: 42,
+    consolidatedOnHandQty: 0,
+    claimsOnHandQty: 0,
+    backroomQty: 6,
     pendingOnHandsQty: 35,
     cloudQty: 42,
     replenishment: {

@@ -8,7 +8,6 @@ import _ from 'lodash';
 import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
@@ -37,6 +36,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import { ADD_TO_PICKLIST, GET_ITEM_DETAILS, NO_ACTION } from '../../state/actions/asyncAPI';
+import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 export interface ItemDetailsScreenProps {
@@ -79,6 +79,7 @@ export interface RenderProps {
   floorLocations?: Location[];
   reserveLocations?: Location[];
 }
+
 const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
   const {
     navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId
@@ -111,40 +112,45 @@ const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
-export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: number): JSX.Element => {
-  if (pendingOnHandsQty === -999) {
-    return (
-      <View style={styles.onHandsContainer}>
-        <View style={styles.onHandsView}>
-          <Text>{strings('ITEM.ON_HANDS')}</Text>
-          <Text>{onHandsQty}</Text>
-        </View>
-      </View>
-    );
+export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
+  const {
+    pendingOnHandsQty,
+    onHandsQty,
+    backroomQty,
+    claimsOnHandQty,
+    consolidatedOnHandQty,
+    cloudQty
+  } = itemDetails;
+
+  const salesFloorQty = cloudQty === undefined
+    ? onHandsQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
+    : onHandsQty
+        - (backroomQty + claimsOnHandQty + consolidatedOnHandQty + cloudQty);
+
+  const onHandsRow: ItemDetailsListRow = {
+    label: strings('ITEM.ON_HANDS'),
+    value: onHandsQty
+  };
+
+  if (pendingOnHandsQty !== -999) {
+    onHandsRow.value = `${onHandsQty} (${pendingOnHandsQty})`;
+    onHandsRow.additionalNote = strings('ITEM.PENDING_MGR_APPROVAL');
   }
 
-  return (
-    <View style={styles.onHandsContainer}>
-      <View style={styles.onHandsView}>
-        <Text>{strings('ITEM.ON_HANDS')}</Text>
-        <Text>{pendingOnHandsQty}</Text>
-      </View>
-      <View style={styles.mgrApprovalView}>
-        <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={styles.infoIcon} />
-        <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
-      </View>
-    </View>
-  );
-};
+  const qtyRows: ItemDetailsListRow[] = [
+    onHandsRow,
+    { label: strings('ITEM.SALES_FLOOR_QTY'), value: salesFloorQty },
+    { label: strings('ITEM.RESERVE_QTY'), value: backroomQty },
+    { label: strings('ITEM.CLAIMS_QTY'), value: claimsOnHandQty },
+    { label: strings('ITEM.CONSOLIDATED_QTY'), value: consolidatedOnHandQty }
+  ];
 
-export const renderOHQtyNoPendingComponent = (onHandsQty: number, onHandsTitle: string): JSX.Element => (
-  <View style={styles.onHandsContainer}>
-    <View style={styles.onHandsView}>
-      <Text>{onHandsTitle}</Text>
-      <Text>{onHandsQty}</Text>
-    </View>
-  </View>
-);
+  if (cloudQty !== undefined) {
+    qtyRows.push({ label: strings('ITEM.FLY_CLOUD_QTY'), value: cloudQty });
+  }
+
+  return <ItemDetailsList rows={qtyRows} indentAfterFirstRow={true} />;
+};
 
 export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
   const { reserve } = itemDetails.location;
@@ -556,9 +562,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 ? strings('GENERICS.CHANGE') : undefined}
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
-              {renderOHQtyComponent(itemDetails.onHandsQty, pendingOnHandsQty)}
-              {itemDetails.cloudQty !== undefined
-               && (renderOHQtyNoPendingComponent(itemDetails.cloudQty, strings('ITEM.FLY_CLOUD_QTY')))}
+              {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
             <SFTCard
               iconProp={(

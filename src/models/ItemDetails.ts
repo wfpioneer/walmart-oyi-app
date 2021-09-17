@@ -15,6 +15,9 @@ interface ItemDetails {
   completed: boolean;
   onHandsQty: number;
   pendingOnHandsQty: number;
+  consolidatedOnHandQty: number;
+  claimsOnHandQty: number;
+  backroomQty: number;
   cloudQty?: number;
   replenishment: {
     onOrder: number;
