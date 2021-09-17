@@ -171,6 +171,13 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
           </View>
         )
       })}
+      listeners={{
+        blur: () => {
+          if (props.isManualScanEnabled) {
+            props.setManualScan(false);
+          }
+        }
+      }}
     />
   </Stack.Navigator>
 );

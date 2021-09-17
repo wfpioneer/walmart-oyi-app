@@ -31,6 +31,7 @@ const EnterLocation = (props: { setEnterLocation: Function; onSubmit: Function }
             selectionColor={COLOR.MAIN_THEME_COLOR}
             placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')}
             keyboardType="default"
+            autoFocus={true}
           />
         </View>
         <Button

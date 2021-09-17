@@ -55,6 +55,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
         placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')}
         onSubmitEditing={(event: any) => onSubmit(event.nativeEvent.text)}
         keyboardType={props.keyboardType}
+        autoFocus={true}
       />
       {value.length > 0 && value !== '' && (
         <IconButton
