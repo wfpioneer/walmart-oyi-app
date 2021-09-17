@@ -73,28 +73,13 @@ const styles = StyleSheet.create({
   itemOnOrderView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 8,
+    paddingHorizontal: 18,
     paddingVertical: 16
   },
   renderPickListContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingVertical: 8
-  },
-  onHandsContainer: {
-    paddingHorizontal: 8,
-    paddingVertical: 16,
-    borderBottomWidth: 2,
-    borderBottomColor: COLOR.GREY_100
-  },
-  onHandsView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  mgrApprovalView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 8
   },
   modalContainer: {
     flex: 1,
@@ -127,9 +112,6 @@ const styles = StyleSheet.create({
   dismissButton: {
     width: '70%',
     marginTop: 16
-  },
-  infoIcon: {
-    paddingRight: 6
   },
   labelIcon: {
     marginLeft: -4

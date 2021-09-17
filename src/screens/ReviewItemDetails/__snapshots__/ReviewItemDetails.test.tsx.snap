@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Renders Activoty Indicator waiting for No Action Response 1`] = `
+exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Renders Activity Indicator waiting for No Action Response 1`] = `
 <ActivityIndicator
   animating={true}
   color="#0071e9"
@@ -306,28 +306,148 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
 <View
   style={
     Object {
-      "borderBottomColor": "#f5f5f5",
-      "borderBottomWidth": 2,
-      "paddingHorizontal": 8,
-      "paddingVertical": 16,
+      "paddingHorizontal": 10,
     }
   }
 >
-  <View
-    style={
-      Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 0,
+          },
+          false,
+        ]
       }
-    }
-  >
-    <Text>
-      [missing "en.ITEM.ON_HANDS" translation]
-    </Text>
-    <Text>
-      -25
-    </Text>
-  </View>
+    >
+      <Text>
+        [missing "en.ITEM.ON_HANDS" translation]
+      </Text>
+      <Text>
+        -25
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.SALES_FLOOR_QTY" translation]
+      </Text>
+      <Text>
+        -46
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.RESERVE_QTY" translation]
+      </Text>
+      <Text>
+        6
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.CLAIMS_QTY" translation]
+      </Text>
+      <Text>
+        5
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.CONSOLIDATED_QTY" translation]
+      </Text>
+      <Text>
+        10
+      </Text>
+    </View>
+  </React.Fragment>
 </View>
 `;
 
@@ -335,84 +455,325 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
 <View
   style={
     Object {
-      "borderBottomColor": "#f5f5f5",
-      "borderBottomWidth": 2,
-      "paddingHorizontal": 8,
-      "paddingVertical": 16,
+      "paddingHorizontal": 10,
     }
   }
 >
-  <View
-    style={
-      Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 0,
+          },
+          false,
+        ]
       }
-    }
-  >
-    <Text>
-      [missing "en.ITEM.ON_HANDS" translation]
-    </Text>
-    <Text>
-      40
-    </Text>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-        "marginTop": 8,
-      }
-    }
-  >
-    <IconClass
-      brand={false}
-      color="#616161"
-      light={false}
-      name="info-circle"
-      regular={false}
-      size={12}
-      solid={false}
+    >
+      <Text>
+        [missing "en.ITEM.ON_HANDS" translation]
+      </Text>
+      <Text>
+        -25 (40)
+      </Text>
+    </View>
+    <View
       style={
         Object {
-          "paddingRight": 6,
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingBottom": 16,
+          "paddingLeft": 10,
         }
       }
-    />
-    <Text>
-      [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
-    </Text>
-  </View>
+    >
+      <IconClass
+        brand={false}
+        color="#e74517"
+        light={false}
+        name="info-circle"
+        regular={false}
+        size={12}
+        solid={false}
+        style={
+          Object {
+            "paddingRight": 6,
+          }
+        }
+      />
+      <Text>
+        [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.SALES_FLOOR_QTY" translation]
+      </Text>
+      <Text>
+        -46
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.RESERVE_QTY" translation]
+      </Text>
+      <Text>
+        6
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.CLAIMS_QTY" translation]
+      </Text>
+      <Text>
+        5
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.CONSOLIDATED_QTY" translation]
+      </Text>
+      <Text>
+        10
+      </Text>
+    </View>
+  </React.Fragment>
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component renders Postive On Hands Quantity 'No Pending Mgr Approval' 1`] = `
+exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component renders Positive On Hands Quantity 'No Pending Mgr Approval' 1`] = `
 <View
   style={
     Object {
-      "borderBottomColor": "#f5f5f5",
-      "borderBottomWidth": 2,
-      "paddingHorizontal": 8,
-      "paddingVertical": 16,
+      "paddingHorizontal": 10,
     }
   }
 >
-  <View
-    style={
-      Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 0,
+          },
+          false,
+        ]
       }
-    }
-  >
-    <Text>
-      [missing "en.ITEM.ON_HANDS" translation]
-    </Text>
-    <Text>
-      20
-    </Text>
-  </View>
+    >
+      <Text>
+        [missing "en.ITEM.ON_HANDS" translation]
+      </Text>
+      <Text>
+        20
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.SALES_FLOOR_QTY" translation]
+      </Text>
+      <Text>
+        -1
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.RESERVE_QTY" translation]
+      </Text>
+      <Text>
+        6
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.CLAIMS_QTY" translation]
+      </Text>
+      <Text>
+        5
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        [missing "en.ITEM.CONSOLIDATED_QTY" translation]
+      </Text>
+      <Text>
+        10
+      </Text>
+    </View>
+  </React.Fragment>
 </View>
 `;
 
@@ -849,32 +1210,33 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         topRightBtnAction={[Function]}
         topRightBtnTxt="[missing \\"en.GENERICS.CHANGE\\" translation]"
       >
-        <View
-          style={
-            Object {
-              "borderBottomColor": "#f5f5f5",
-              "borderBottomWidth": 2,
-              "paddingHorizontal": 8,
-              "paddingVertical": 16,
-            }
-          }
-        >
-          <View
-            style={
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
               Object {
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-              }
-            }
-          >
-            <Text>
-              [missing "en.ITEM.ON_HANDS" translation]
-            </Text>
-            <Text>
-              42
-            </Text>
-          </View>
-        </View>
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": 21,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 10,
+              },
+            ]
+          }
+        />
       </SFTCard>
       <SFTCard
         iconProp={
@@ -896,7 +1258,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 8,
+              "paddingHorizontal": 18,
               "paddingVertical": 16,
             }
           }
@@ -1003,11 +1365,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           isGraphView={false}
           itemDetails={
             Object {
+              "backroomQty": 6,
               "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
+              "claimsOnHandQty": 5,
               "cloudQty": undefined,
               "completed": false,
+              "consolidatedOnHandQty": 10,
               "exceptionType": "nsfl",
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
@@ -1506,58 +1871,37 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         title="[missing \\"en.ITEM.QUANTITY\\" translation]"
         topRightBtnAction={[Function]}
       >
-        <View
-          style={
-            Object {
-              "borderBottomColor": "#f5f5f5",
-              "borderBottomWidth": 2,
-              "paddingHorizontal": 8,
-              "paddingVertical": 16,
-            }
-          }
-        >
-          <View
-            style={
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
               Object {
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-              }
-            }
-          >
-            <Text>
-              [missing "en.ITEM.ON_HANDS" translation]
-            </Text>
-            <Text>
-              42
-            </Text>
-          </View>
-        </View>
-        <View
-          style={
-            Object {
-              "borderBottomColor": "#f5f5f5",
-              "borderBottomWidth": 2,
-              "paddingHorizontal": 8,
-              "paddingVertical": 16,
-            }
-          }
-        >
-          <View
-            style={
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
               Object {
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-              }
-            }
-          >
-            <Text>
-              [missing "en.ITEM.FLY_CLOUD_QTY" translation]
-            </Text>
-            <Text>
-              42
-            </Text>
-          </View>
-        </View>
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": -11,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 0,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.FLY_CLOUD_QTY\\" translation]",
+                "value": 42,
+              },
+            ]
+          }
+        />
       </SFTCard>
       <SFTCard
         iconProp={
@@ -1579,7 +1923,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 8,
+              "paddingHorizontal": 18,
               "paddingVertical": 16,
             }
           }
@@ -1686,11 +2030,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           isGraphView={false}
           itemDetails={
             Object {
+              "backroomQty": 6,
               "basePrice": 1500.3,
               "categoryDesc": "Store Use",
               "categoryNbr": 99,
+              "claimsOnHandQty": 5,
               "cloudQty": 42,
               "completed": false,
+              "consolidatedOnHandQty": 0,
               "exceptionType": "nsfl",
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
@@ -1967,32 +2314,33 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         title="[missing \\"en.ITEM.QUANTITY\\" translation]"
         topRightBtnAction={[Function]}
       >
-        <View
-          style={
-            Object {
-              "borderBottomColor": "#f5f5f5",
-              "borderBottomWidth": 2,
-              "paddingHorizontal": 8,
-              "paddingVertical": 16,
-            }
-          }
-        >
-          <View
-            style={
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
               Object {
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-              }
-            }
-          >
-            <Text>
-              [missing "en.ITEM.ON_HANDS" translation]
-            </Text>
-            <Text>
-              42
-            </Text>
-          </View>
-        </View>
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": 21,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 10,
+              },
+            ]
+          }
+        />
       </SFTCard>
       <SFTCard
         iconProp={
@@ -2014,7 +2362,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 8,
+              "paddingHorizontal": 18,
               "paddingVertical": 16,
             }
           }
@@ -2121,11 +2469,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           isGraphView={false}
           itemDetails={
             Object {
+              "backroomQty": 6,
               "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
+              "claimsOnHandQty": 5,
               "cloudQty": undefined,
               "completed": false,
+              "consolidatedOnHandQty": 10,
               "exceptionType": "nsfl",
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
@@ -2406,32 +2757,33 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         title="[missing \\"en.ITEM.QUANTITY\\" translation]"
         topRightBtnAction={[Function]}
       >
-        <View
-          style={
-            Object {
-              "borderBottomColor": "#f5f5f5",
-              "borderBottomWidth": 2,
-              "paddingHorizontal": 8,
-              "paddingVertical": 16,
-            }
-          }
-        >
-          <View
-            style={
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
               Object {
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-              }
-            }
-          >
-            <Text>
-              [missing "en.ITEM.ON_HANDS" translation]
-            </Text>
-            <Text>
-              42
-            </Text>
-          </View>
-        </View>
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": 21,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 10,
+              },
+            ]
+          }
+        />
       </SFTCard>
       <SFTCard
         iconProp={
@@ -2453,7 +2805,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 8,
+              "paddingHorizontal": 18,
               "paddingVertical": 16,
             }
           }
@@ -2560,11 +2912,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           isGraphView={false}
           itemDetails={
             Object {
+              "backroomQty": 6,
               "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
+              "claimsOnHandQty": 5,
               "cloudQty": undefined,
               "completed": false,
+              "consolidatedOnHandQty": 10,
               "exceptionType": "nsfl",
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,

@@ -1,0 +1,614 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ItemDetailsList Component indenting behavior should indent all rows after the first if indentAfterFirstRow is true 1`] = `
+<View
+  style={
+    Object {
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 0,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label2
+      </Text>
+      <Text>
+        20
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        label3
+      </Text>
+      <Text>
+        30
+      </Text>
+    </View>
+  </React.Fragment>
+</View>
+`;
+
+exports[`ItemDetailsList Component indenting behavior should indent all rows after the first if indentAfterFirstRow is true regardless of additionalNotes 1`] = `
+<View
+  style={
+    Object {
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 0,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label1
+      </Text>
+      <Text>
+        10
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingBottom": 16,
+          "paddingLeft": 10,
+        }
+      }
+    >
+      <IconClass
+        brand={false}
+        color="#e74517"
+        light={false}
+        name="info-circle"
+        regular={false}
+        size={12}
+        solid={false}
+        style={
+          Object {
+            "paddingRight": 6,
+          }
+        }
+      />
+      <Text>
+        Test Note
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        label2
+      </Text>
+      <Text>
+        20
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        label3
+      </Text>
+      <Text>
+        30
+      </Text>
+    </View>
+  </React.Fragment>
+</View>
+`;
+
+exports[`ItemDetailsList Component indenting behavior should not indent anything if indentAfterFirstRow is false 1`] = `
+<View
+  style={
+    Object {
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 0,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label2
+      </Text>
+      <Text>
+        20
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label3
+      </Text>
+      <Text>
+        30
+      </Text>
+    </View>
+  </React.Fragment>
+</View>
+`;
+
+exports[`ItemDetailsList Component indenting behavior should not indent anything if indentAfterFirstRow is not specified 1`] = `
+<View
+  style={
+    Object {
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 0,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label2
+      </Text>
+      <Text>
+        20
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label3
+      </Text>
+      <Text>
+        30
+      </Text>
+    </View>
+  </React.Fragment>
+</View>
+`;
+
+exports[`ItemDetailsList Component indenting behavior should only indent labels and not additionalNotes 1`] = `
+<View
+  style={
+    Object {
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 0,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label2
+      </Text>
+      <Text>
+        20
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingBottom": 16,
+          "paddingLeft": 10,
+        }
+      }
+    >
+      <IconClass
+        brand={false}
+        color="#e74517"
+        light={false}
+        name="info-circle"
+        regular={false}
+        size={12}
+        solid={false}
+        style={
+          Object {
+            "paddingRight": 6,
+          }
+        }
+      />
+      <Text>
+        An Additional Note
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          Object {
+            "paddingLeft": 30,
+          },
+        ]
+      }
+    >
+      <Text>
+        label3
+      </Text>
+      <Text>
+        30
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingBottom": 16,
+          "paddingLeft": 10,
+        }
+      }
+    >
+      <IconClass
+        brand={false}
+        color="#e74517"
+        light={false}
+        name="info-circle"
+        regular={false}
+        size={12}
+        solid={false}
+        style={
+          Object {
+            "paddingRight": 6,
+          }
+        }
+      />
+      <Text>
+        An Additional Note
+      </Text>
+    </View>
+  </React.Fragment>
+</View>
+`;
+
+exports[`ItemDetailsList Component should display an additional note below rows with that property defined 1`] = `
+<View
+  style={
+    Object {
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 0,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label1
+      </Text>
+      <Text>
+        10
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingBottom": 16,
+          "paddingLeft": 10,
+        }
+      }
+    >
+      <IconClass
+        brand={false}
+        color="#e74517"
+        light={false}
+        name="info-circle"
+        regular={false}
+        size={12}
+        solid={false}
+        style={
+          Object {
+            "paddingRight": 6,
+          }
+        }
+      />
+      <Text>
+        Test Note
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label2
+      </Text>
+      <Text>
+        20
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label3
+      </Text>
+      <Text>
+        30
+      </Text>
+    </View>
+  </React.Fragment>
+</View>
+`;
+
+exports[`ItemDetailsList Component should render rows with matching style when additionalNote and indentAfterFirstRow are not defined 1`] = `
+<View
+  style={
+    Object {
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 0,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label2
+      </Text>
+      <Text>
+        20
+      </Text>
+    </View>
+  </React.Fragment>
+  <React.Fragment>
+    <View
+      style={
+        Array [
+          Object {
+            "borderTopColor": "#e0e0e0",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 10,
+            "paddingVertical": 12,
+          },
+          Object {
+            "borderTopWidth": 1,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        label3
+      </Text>
+      <Text>
+        30
+      </Text>
+    </View>
+  </React.Fragment>
+</View>
+`;

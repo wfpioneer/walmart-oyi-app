@@ -69,7 +69,7 @@ describe('ReviewItemDetailsScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
-          userFeatures={['']}
+          userFeatures={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -111,7 +111,7 @@ describe('ReviewItemDetailsScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
-          userFeatures={['']}
+          userFeatures={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -232,8 +232,7 @@ describe('ReviewItemDetailsScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
-          userFeatures={['']}
-
+          userFeatures={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -273,7 +272,7 @@ describe('ReviewItemDetailsScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
-          userFeatures={['']}
+          userFeatures={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -309,7 +308,7 @@ describe('ReviewItemDetailsScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
-          userFeatures={['']}
+          userFeatures={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -323,7 +322,7 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('Renders Activoty Indicator waiting for No Action Response', () => {
+    it('Renders Activity Indicator waiting for No Action Response', () => {
       const renderer = ShallowRenderer.createRenderer();
       const noActionWaiting = {
         isWaiting: true,
@@ -359,7 +358,7 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const pendingOHQty = -999;
       renderer.render(
-        renderOHQtyComponent(negOnHandsQty, pendingOHQty)
+        renderOHQtyComponent({ ...itemDetail[123], onHandsQty: negOnHandsQty, pendingOnHandsQty: pendingOHQty })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -368,16 +367,16 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const pendingOHQty = 40;
       renderer.render(
-        renderOHQtyComponent(negOnHandsQty, pendingOHQty)
+        renderOHQtyComponent({ ...itemDetail[123], onHandsQty: negOnHandsQty, pendingOnHandsQty: pendingOHQty })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('renders Postive On Hands Quantity \'No Pending Mgr Approval\'', () => {
+    it('renders Positive On Hands Quantity \'No Pending Mgr Approval\'', () => {
       const renderer = ShallowRenderer.createRenderer();
 
       const pendingOHQty = -999;
       renderer.render(
-        renderOHQtyComponent(posOnHandsQty, pendingOHQty)
+        renderOHQtyComponent({ ...itemDetail[123], onHandsQty: posOnHandsQty, pendingOnHandsQty: pendingOHQty })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
