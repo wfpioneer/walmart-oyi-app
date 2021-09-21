@@ -167,10 +167,8 @@ android {
 
             tasks.whenTaskAdded { task ->
                 if(task.name.matches(/^assemble.*Debug/) || task.name.matches(/^package.*Debug$/)) {
-                    task.finalizedBy 'signDebugApk'
+                    task.finalizedBy 'signDebugAPK'
                 }
-                if (task.name.matches(/^assemble.*DebugAndroidTest/) || task.name.matches(/^package.*DebugAndroidTest$/))
-                    task.finalizedBy 'signTestAPK'
             }
         }
         release {
@@ -179,7 +177,7 @@ android {
 
             tasks.whenTaskAdded { task ->
                 if(task.name.matches(/^assemble.*Release$/)) {
-                    task.finalizedBy 'signReleaseApk'
+                    task.finalizedBy 'signReleaseAPK'
                 }
             }
         }
