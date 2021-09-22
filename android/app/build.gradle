@@ -167,7 +167,7 @@ android {
 
             tasks.whenTaskAdded { task ->
                 if(task.name.matches(/^assemble.*Debug/) || task.name.matches(/^package.*Debug$/)) {
-                    task.finalizedBy 'signDebugApkTask'
+                    task.finalizedBy 'signDebugAPK'
                 }
             }
         }
@@ -177,7 +177,7 @@ android {
 
             tasks.whenTaskAdded { task ->
                 if(task.name.matches(/^assemble.*Release$/)) {
-                    task.finalizedBy 'signReleaseApkTask'
+                    task.finalizedBy 'signReleaseAPK'
                 }
             }
         }
@@ -255,6 +255,6 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-apply plugin: 'com.walmart.amp.androidsigning'
+apply plugin: 'com.walmart.ssmp.signing'
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
