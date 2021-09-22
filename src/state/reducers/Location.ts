@@ -163,16 +163,22 @@ export const Location = (
       return {
         ...state
       };
-    case DELETE_LOCATION_FROM_EXISTING:
+    case DELETE_LOCATION_FROM_EXISTING: {
+      const { locIndex } = action.payload;
+
       if (action.payload.locationArea === 'floor') {
-        const deleteFloorLocation = [...state.floorLocations].splice(action.payload.locIndex, 1);
+        const deleteFloorLocation = [
+          ...state.floorLocations.slice(0, locIndex),
+          ...state.floorLocations.slice(locIndex + 1)];
         return {
           ...state,
           floorLocations: deleteFloorLocation
         };
       }
       if (action.payload.locationArea === 'reserve') {
-        const deleteReserveLocation = [...state.floorLocations].splice(action.payload.locIndex, 1);
+        const deleteReserveLocation = [
+          ...state.reserveLocations.slice(0, locIndex),
+          ...state.reserveLocations.slice(locIndex + 1)];
         return {
           ...state,
           reserveLocations: deleteReserveLocation
@@ -181,6 +187,7 @@ export const Location = (
       return {
         ...state
       };
+    }
     case SELECT_ZONE: {
       return {
         ...state,
