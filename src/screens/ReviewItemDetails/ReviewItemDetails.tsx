@@ -36,7 +36,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import { ADD_TO_PICKLIST, GET_ITEM_DETAILS, NO_ACTION } from '../../state/actions/asyncAPI';
-import { CustomModal } from '../Modal/Modal';
+import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
@@ -311,7 +311,7 @@ export const renderScanForNoActionButton = (
 export const renderBarcodeErrorModal = (
   isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => (
-  <CustomModal
+  <CustomModalComponent
     isVisible={isVisible}
     modalType="Error"
     onClose={() => setIsVisible(false)}
@@ -328,7 +328,7 @@ export const renderBarcodeErrorModal = (
         onPress={() => setIsVisible(false)}
       />
     </View>
-  </CustomModal>
+  </CustomModalComponent>
 );
 
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
@@ -524,7 +524,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     <View style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent />}
       {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-      <CustomModal
+      <CustomModalComponent
         isVisible={ohQtyModalVisible}
         onClose={() => setOhQtyModalVisible(false)}
         modalType="Form"
@@ -534,7 +534,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           setOhQtyModalVisible={setOhQtyModalVisible}
           exceptionType={itemDetails.exceptionType}
         />
-      </CustomModal>
+      </CustomModalComponent>
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={styles.container}

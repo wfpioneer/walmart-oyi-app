@@ -23,7 +23,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Button from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
 import { WorklistSummary } from '../../models/WorklistSummary';
-import { CustomModal } from '../Modal/Modal';
+import { CustomModalComponent } from '../Modal/Modal';
 
 const mapStateToProps = (state: RootState) => ({
   userName: state.User.additional.displayName,
@@ -173,7 +173,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     return (
       <SafeAreaView style={styles.safeAreaView}>
-        <CustomModal
+        <CustomModalComponent
           isVisible={this.state.errorModalVisible}
           onClose={() => this.setState({ errorModalVisible: false })}
           modalType="Error"
@@ -190,7 +190,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
               onPress={() => this.setState({ errorModalVisible: false })}
             />
           </View>
-        </CustomModal>
+        </CustomModalComponent>
         {this.props.isManualScanEnabled && <ManualScanComponent />}
         <ScrollView contentContainerStyle={styles.container}>
           <Text>

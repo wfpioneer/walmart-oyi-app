@@ -10,7 +10,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
       }
     }
   >
-    <CustomModal
+    <CustomModalComponent
       animationType="none"
       isVisible={false}
       modalType="Form"
@@ -20,7 +20,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </CustomModal>
+    </CustomModalComponent>
     <View
       style={
         Object {
@@ -327,7 +327,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
       }
     }
   >
-    <CustomModal
+    <CustomModalComponent
       animationType="none"
       isVisible={false}
       modalType="Form"
@@ -337,7 +337,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </CustomModal>
+    </CustomModalComponent>
     <View
       style={
         Object {
@@ -616,7 +616,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
       }
     }
   >
-    <CustomModal
+    <CustomModalComponent
       animationType="none"
       isVisible={false}
       modalType="Form"
@@ -626,7 +626,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </CustomModal>
+    </CustomModalComponent>
     <View
       style={
         Object {
@@ -905,7 +905,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <CustomModal
+    <CustomModalComponent
       animationType="none"
       isVisible={false}
       modalType="Form"
@@ -915,7 +915,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </CustomModal>
+    </CustomModalComponent>
     <View
       style={
         Object {
@@ -1195,7 +1195,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <CustomModal
+    <CustomModalComponent
       animationType="none"
       isVisible={false}
       modalType="Form"
@@ -1205,7 +1205,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </CustomModal>
+    </CustomModalComponent>
     <View
       style={
         Object {
@@ -1485,7 +1485,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <CustomModal
+    <CustomModalComponent
       animationType="none"
       isVisible={false}
       modalType="Form"
@@ -1495,7 +1495,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </CustomModal>
+    </CustomModalComponent>
     <View
       style={
         Object {
@@ -1775,7 +1775,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <CustomModal
+    <CustomModalComponent
       animationType="none"
       isVisible={true}
       modalType="Form"
@@ -1785,7 +1785,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </CustomModal>
+    </CustomModalComponent>
     <View
       style={
         Object {
@@ -2065,7 +2065,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <CustomModal
+    <CustomModalComponent
       animationType="none"
       isVisible={false}
       modalType="Form"
@@ -2075,7 +2075,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </CustomModal>
+    </CustomModalComponent>
     <View
       style={
         Object {
@@ -2355,7 +2355,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <CustomModal
+    <CustomModalComponent
       animationType="none"
       isVisible={false}
       modalType="Form"
@@ -2365,7 +2365,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </CustomModal>
+    </CustomModalComponent>
     <View
       style={
         Object {

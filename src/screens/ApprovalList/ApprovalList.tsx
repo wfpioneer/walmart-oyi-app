@@ -23,7 +23,7 @@ import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
-import { CustomModal } from '../Modal/Modal';
+import { CustomModalComponent } from '../Modal/Modal';
 
 export interface CategoryFilter {
   filteredData: ApprovalCategory[];
@@ -128,7 +128,7 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
 
   return (
   // Used to overlay the pop-up in the screen view
-    <CustomModal isVisible={true} modalType="Popup" onClose={() => { dispatch({ type: UPDATE_APPROVAL_LIST.RESET }); }}>
+    <CustomModalComponent isVisible={true} modalType="Popup" onClose={() => { dispatch({ type: UPDATE_APPROVAL_LIST.RESET }); }}>
       <Text style={styles.errorText}>{strings('APPROVAL.FAILED_APPROVE')}</Text>
       {failedItems.length <= 5
         ? (
@@ -156,7 +156,7 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
           dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
         }}
       />
-    </CustomModal>
+    </CustomModalComponent>
   );
 };
 

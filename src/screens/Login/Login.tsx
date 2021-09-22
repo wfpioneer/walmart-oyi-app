@@ -17,7 +17,7 @@ import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { RootState } from '../../state/reducers/RootReducer';
-import { CustomModal } from '../Modal/Modal';
+import { CustomModalComponent } from '../Modal/Modal';
 
 const mapDispatchToProps = {
   loginUser,
@@ -149,7 +149,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
   render(): ReactNode {
     return (
       <View style={styles.container}>
-        <CustomModal
+        <CustomModalComponent
           isVisible={!this.props.User.siteId && userIsSignedIn(this.props.User)}
           onClose={() => this.signOutUser()}
           modalType="Form"
@@ -163,7 +163,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
             }}
             onSignOut={() => this.signOutUser()}
           />
-        </CustomModal>
+        </CustomModalComponent>
         <Button
           title={strings('GENERICS.SIGN_IN')}
           style={styles.signInButton}

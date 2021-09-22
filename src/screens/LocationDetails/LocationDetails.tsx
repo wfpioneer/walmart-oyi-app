@@ -23,7 +23,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
 import { DELETE_LOCATION, GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
-import { CustomModal } from '../Modal/Modal';
+import { CustomModalComponent } from '../Modal/Modal';
 
 interface LocationDetailsProps {
   navigation: NavigationProp<any>;
@@ -168,7 +168,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
   }
   return (
     <>
-      <CustomModal isVisible={displayConfirmation} onClose={() => setDisplayConfirmation(false)} modalType="Error">
+      <CustomModalComponent isVisible={displayConfirmation} onClose={() => setDisplayConfirmation(false)} modalType="Error">
         {delAPI.isWaiting ? (
           <ActivityIndicator
             animating={delAPI.isWaiting}
@@ -202,7 +202,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
             </View>
           </>
         )}
-      </CustomModal>
+      </CustomModalComponent>
       <ScrollView>
         <View style={styles.sectionLabel}>
           <Text style={styles.labelText}>

@@ -24,7 +24,7 @@ import { COLOR } from '../../themes/Color';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
-import { CustomModal } from '../Modal/Modal';
+import { CustomModalComponent } from '../Modal/Modal';
 
 interface LocParams {
   currentLocation?: Location;
@@ -245,9 +245,9 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
   return (
     <>
       <View style={styles.mainContainer}>
-        <CustomModal isVisible={inputLocation} onClose={() => setInputLocation(false)} modalType="Form">
+        <CustomModalComponent isVisible={inputLocation} onClose={() => setInputLocation(false)} modalType="Form">
           <EnterLocation setEnterLocation={setInputLocation} onSubmit={modelOnSubmit} />
-        </CustomModal>
+        </CustomModalComponent>
         <View style={styles.sectionLabel}>
           <Text style={styles.labelText}>{strings('LOCATION.SELECTION_INSTRUCTION')}</Text>
         </View>

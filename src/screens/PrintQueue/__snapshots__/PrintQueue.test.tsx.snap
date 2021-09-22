@@ -8,7 +8,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
     }
   }
 >
-  <CustomModal
+  <CustomModalComponent
     animationType="none"
     isVisible={true}
     modalType="Form"
@@ -18,7 +18,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
       itemIndexToEdit={0}
       setItemIndexToEdit={[MockFunction]}
     />
-  </CustomModal>
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -352,7 +352,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
     }
   }
 >
-  <CustomModal
+  <CustomModalComponent
     animationType="none"
     isVisible={false}
     modalType="Form"
@@ -362,7 +362,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       itemIndexToEdit={-1}
       setItemIndexToEdit={[MockFunction]}
     />
-  </CustomModal>
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -1536,7 +1536,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
     }
   }
 >
-  <CustomModal
+  <CustomModalComponent
     animationType="none"
     isVisible={false}
     modalType="Form"
@@ -1546,7 +1546,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
       itemIndexToEdit={-1}
       setItemIndexToEdit={[MockFunction]}
     />
-  </CustomModal>
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -1757,7 +1757,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
     }
   }
 >
-  <CustomModal
+  <CustomModalComponent
     animationType="none"
     isVisible={false}
     modalType="Form"
@@ -1767,7 +1767,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
       itemIndexToEdit={-1}
       setItemIndexToEdit={[MockFunction]}
     />
-  </CustomModal>
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {

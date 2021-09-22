@@ -73,7 +73,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
     }
   }
 >
-  <CustomModal
+  <CustomModalComponent
     animationType="none"
     isVisible={true}
     modalType="Popup"
@@ -138,7 +138,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
       type={1}
       width={-1}
     />
-  </CustomModal>
+  </CustomModalComponent>
   <FlatList
     ListEmptyComponent={
       <View

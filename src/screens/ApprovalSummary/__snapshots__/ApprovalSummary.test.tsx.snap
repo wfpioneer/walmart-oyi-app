@@ -580,7 +580,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
     }
   }
 >
-  <CustomModal
+  <CustomModalComponent
     animationType="none"
     isVisible={true}
     modalType="Error"
@@ -636,7 +636,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
         width={-1}
       />
     </View>
-  </CustomModal>
+  </CustomModalComponent>
   <View
     style={
       Object {

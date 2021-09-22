@@ -90,7 +90,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     }
   }
 >
-  <CustomModal
+  <CustomModalComponent
     animationType="none"
     isVisible={false}
     modalType="Error"
@@ -146,7 +146,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         width={-1}
       />
     </View>
-  </CustomModal>
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -233,7 +233,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     }
   }
 >
-  <CustomModal
+  <CustomModalComponent
     animationType="none"
     isVisible={false}
     modalType="Error"
@@ -289,7 +289,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         width={-1}
       />
     </View>
-  </CustomModal>
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -376,7 +376,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     }
   }
 >
-  <CustomModal
+  <CustomModalComponent
     animationType="none"
     isVisible={false}
     modalType="Error"
@@ -432,7 +432,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         width={-1}
       />
     </View>
-  </CustomModal>
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {

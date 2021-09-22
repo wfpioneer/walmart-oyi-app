@@ -21,7 +21,7 @@ import { showSnackBar } from '../../state/actions/SnackBar';
 import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
-import { CustomModal } from '../Modal/Modal';
+import { CustomModalComponent } from '../Modal/Modal';
 
 interface ApprovalSummaryProps {
   route: RouteProp<any, string>;
@@ -43,7 +43,7 @@ interface ItemQuantity {
 
 export const renderErrorModal = (setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>): JSX.Element => (
   // Used to overlay the modal in the screen view
-  <CustomModal isVisible={true} onClose={() => setErrorModalVisible(false)} modalType="Error">
+  <CustomModalComponent isVisible={true} onClose={() => setErrorModalVisible(false)} modalType="Error">
     <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
     <Text style={styles.errorText}>
       {strings('APPROVAL.UPDATE_API_ERROR')}
@@ -56,7 +56,7 @@ export const renderErrorModal = (setErrorModalVisible: React.Dispatch<React.SetS
         onPress={() => setErrorModalVisible(false)}
       />
     </View>
-  </CustomModal>
+  </CustomModalComponent>
 );
 
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {
