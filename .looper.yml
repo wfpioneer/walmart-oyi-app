@@ -6,6 +6,8 @@ gitShallowDepth: 2147483647
 envs:
   global:
     variables:
+      # Token generated using SVCintlsamstech service account
+      GITHUB_API_TOKEN: 'ENC[QU2juSbwG+R7HO6mSGqUm/FcINIGG7lWFS3KHR7Lkss9/EYkXSuplj0nGZGtTw9/]'
       # Configure react-native-version to only target android
       RNV: android
       # App Center Prod Secret
