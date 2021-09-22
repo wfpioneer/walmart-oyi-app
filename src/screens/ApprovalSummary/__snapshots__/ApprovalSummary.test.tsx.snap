@@ -581,6 +581,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={true}
     modalType="Error"
     onClose={[Function]}

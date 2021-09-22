@@ -11,6 +11,7 @@ exports[`LoginScreen renders the EnterClubNbr modal when a user logs in without 
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={true}
     modalType="Form"
     onClose={[Function]}
@@ -53,6 +54,7 @@ exports[`LoginScreen renders the snapshot test appropriately 1`] = `
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Form"
     onClose={[Function]}

@@ -137,7 +137,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
       <View style={styles.closeContainer}>
         {!apiSubmitting && (
         <IconButton
-          icon={<MaterialCommunityIcon name="close" size={20} color={COLOR.GREY_500} />}
+          icon={<MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />}
           type={Button.Type.NO_BORDER}
           onPress={() => { setOhQtyModalVisible(false); }}
         />

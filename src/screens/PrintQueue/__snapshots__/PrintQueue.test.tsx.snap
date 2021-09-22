@@ -9,6 +9,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={true}
     modalType="Form"
     onClose={[Function]}
@@ -352,6 +353,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Form"
     onClose={[Function]}
@@ -1535,6 +1537,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Form"
     onClose={[Function]}
@@ -1755,6 +1758,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Form"
     onClose={[Function]}

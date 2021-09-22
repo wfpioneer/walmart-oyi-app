@@ -3,6 +3,7 @@
 exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete Location Confirmation with Location Name  1`] = `
 <React.Fragment>
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -156,6 +157,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
 exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete Location Error 'Retry'  1`] = `
 <React.Fragment>
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -324,6 +326,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
 exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader when waiting for a response to Delete a Location 1`] = `
 <React.Fragment>
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -428,6 +431,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
 exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Delete Confirmation Modal (isVisible should be set to true) 1`] = `
 <React.Fragment>
   <CustomModal
+    animationType="none"
     isVisible={true}
     modalType="Error"
     onClose={[Function]}
@@ -581,6 +585,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
 exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders a List of (1) Reserve location with (0) Floor locations 1`] = `
 <React.Fragment>
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -741,6 +746,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
 exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders a List of (2) Floor locations with (0) Reserve locations 1`] = `
 <React.Fragment>
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -907,6 +913,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
 exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders a List of Floor & Reserve Locations 1`] = `
 <React.Fragment>
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -1080,6 +1087,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
 exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders a default of (0) Floor & Reserve Locations 1`] = `
 <React.Fragment>
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}

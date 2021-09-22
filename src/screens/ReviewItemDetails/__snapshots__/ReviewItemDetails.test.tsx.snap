@@ -58,6 +58,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Ren
 
 exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders the barcodeErrorModal isVisible set to False 1`] = `
 <Modal
+  animationType="none"
   hardwareAccelerated={false}
   onRequestClose={[Function]}
   transparent={true}
@@ -147,6 +148,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
 
 exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders the barcodeErrorModal isVisible set to True 1`] = `
 <Modal
+  animationType="none"
   hardwareAccelerated={false}
   onRequestClose={[Function]}
   transparent={true}
@@ -1114,6 +1116,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -1170,6 +1173,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </View>
   </CustomModal>
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Form"
     onClose={[Function]}
@@ -1574,6 +1578,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -1684,6 +1689,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -1776,6 +1782,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -1832,6 +1839,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </View>
   </CustomModal>
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Form"
     onClose={[Function]}
@@ -2219,6 +2227,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -2275,6 +2284,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </View>
   </CustomModal>
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Form"
     onClose={[Function]}
@@ -2662,6 +2672,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -2718,6 +2729,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </View>
   </CustomModal>
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Form"
     onClose={[Function]}

@@ -91,6 +91,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -233,6 +234,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}
@@ -375,6 +377,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={false}
     modalType="Error"
     onClose={[Function]}

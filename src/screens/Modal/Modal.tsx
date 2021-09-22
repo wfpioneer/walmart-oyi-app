@@ -11,28 +11,30 @@ import { hideInfoModal } from '../../state/actions/Modal';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 
 interface CustomModalProps {
+  animationType?:'fade' | 'slide' | 'none';
   children: ReactNode | ReactElement;
+  isVisible: boolean;
   modalType: 'Error' | 'Form' | 'Popup';
-  isVisible: boolean
   onClose: () => void;
 }
 
-export const CustomModal = (props: CustomModalProps): JSX.Element => {
-  const {
-    children, isVisible, modalType, onClose
-  } = props;
+const styleSelector = {
+  Error: styles.errorContainer,
+  Form: styles.contentContainer,
+  Popup: styles.popUpContainer
+};
 
-  const styleSelector = {
-    Error: styles.errorContainer,
-    Form: styles.contentContainer,
-    Popup: styles.popUpContainer
-  };
+export const CustomModalComponent = (props: CustomModalProps): JSX.Element => {
+  const {
+    children, isVisible, modalType, onClose, animationType
+  } = props;
 
   return (
     <Modal
       onRequestClose={() => onClose()}
       visible={isVisible}
       transparent={true}
+      animationType={animationType}
     >
       <View style={styles.modalContainer}>
         <View style={styleSelector[modalType]}>
@@ -41,6 +43,9 @@ export const CustomModal = (props: CustomModalProps): JSX.Element => {
       </View>
     </Modal>
   );
+};
+CustomModalComponent.defaultProps = {
+  animationType: 'none'
 };
 
 // TODO Brainstorm a way to remove the need for dispatching calls to the global modal

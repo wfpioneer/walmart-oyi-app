@@ -74,6 +74,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
   }
 >
   <CustomModal
+    animationType="none"
     isVisible={true}
     modalType="Popup"
     onClose={[Function]}
@@ -749,6 +750,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
 
 exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up Renders only failed item numbers 1`] = `
 <Modal
+  animationType="none"
   hardwareAccelerated={false}
   onRequestClose={[Function]}
   transparent={true}
@@ -843,6 +845,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
 
 exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up renders "##/## Failed Items" for more than 5 failed items  1`] = `
 <Modal
+  animationType="none"
   hardwareAccelerated={false}
   onRequestClose={[Function]}
   transparent={true}
@@ -916,6 +919,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
 
 exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up renders 0 failed items for a mix of success and skipped items 1`] = `
 <Modal
+  animationType="none"
   hardwareAccelerated={false}
   onRequestClose={[Function]}
   transparent={true}
@@ -1001,6 +1005,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
 
 exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up renders only failed item numbers for mix of success and failed items  1`] = `
 <Modal
+  animationType="none"
   hardwareAccelerated={false}
   onRequestClose={[Function]}
   transparent={true}

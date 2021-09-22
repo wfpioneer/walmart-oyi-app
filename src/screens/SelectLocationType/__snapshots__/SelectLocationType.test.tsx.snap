@@ -11,6 +11,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
     }
   >
     <CustomModal
+      animationType="none"
       isVisible={false}
       modalType="Form"
       onClose={[Function]}
@@ -327,6 +328,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
     }
   >
     <CustomModal
+      animationType="none"
       isVisible={false}
       modalType="Form"
       onClose={[Function]}
@@ -615,6 +617,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
     }
   >
     <CustomModal
+      animationType="none"
       isVisible={false}
       modalType="Form"
       onClose={[Function]}
@@ -903,6 +906,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
     }
   >
     <CustomModal
+      animationType="none"
       isVisible={false}
       modalType="Form"
       onClose={[Function]}
@@ -1192,6 +1196,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
     }
   >
     <CustomModal
+      animationType="none"
       isVisible={false}
       modalType="Form"
       onClose={[Function]}
@@ -1481,6 +1486,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
     }
   >
     <CustomModal
+      animationType="none"
       isVisible={false}
       modalType="Form"
       onClose={[Function]}
@@ -1770,6 +1776,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
     }
   >
     <CustomModal
+      animationType="none"
       isVisible={true}
       modalType="Form"
       onClose={[Function]}
@@ -2059,6 +2066,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
     }
   >
     <CustomModal
+      animationType="none"
       isVisible={false}
       modalType="Form"
       onClose={[Function]}
@@ -2348,6 +2356,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
     }
   >
     <CustomModal
+      animationType="none"
       isVisible={false}
       modalType="Form"
       onClose={[Function]}
