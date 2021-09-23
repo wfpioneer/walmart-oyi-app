@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useDispatch } from 'react-redux';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import COLOR from '../../themes/Color';
 import styles from './Modal.style';
 import { strings } from '../../locales';
@@ -23,6 +24,8 @@ const styleSelector = {
   Form: styles.contentContainer,
   Popup: styles.popUpContainer
 };
+
+export const ModalCloseIcon = <MaterialCommunityIcon name="close" size={20} color={COLOR.GREY_500} />;
 
 export const CustomModalComponent = (props: CustomModalProps): JSX.Element => {
   const {

@@ -1,11 +1,11 @@
 import React, { RefObject, useRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './EnterLocation.style';
 import IconButton from '../buttons/IconButton';
 import Button from '../buttons/Button';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
+import { ModalCloseIcon } from '../../screens/Modal/Modal';
 
 const EnterLocation = (
   props:{ setEnterLocation: React.Dispatch<React.SetStateAction<boolean>>; onSubmit: (value: string) => void }
@@ -18,7 +18,7 @@ const EnterLocation = (
     <>
       <View style={styles.closeContainer}>
         <IconButton
-          icon={<MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />}
+          icon={ModalCloseIcon}
           type={Button.Type.NO_BORDER}
           onPress={() => props.setEnterLocation(false)}
         />

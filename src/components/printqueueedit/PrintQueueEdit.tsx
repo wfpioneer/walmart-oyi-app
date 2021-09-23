@@ -12,6 +12,7 @@ import { numbers, strings } from '../../locales';
 import styles from './PrintQueueEdit.style';
 import { setPrintQueue } from '../../state/actions/Print';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { ModalCloseIcon } from '../../screens/Modal/Modal';
 
 const QTY_MIN = 1;
 const QTY_MAX = 100;
@@ -72,7 +73,7 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
     <>
       <View style={styles.closeContainer}>
         <IconButton
-          icon={<MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />}
+          icon={ModalCloseIcon}
           type={Button.Type.NO_BORDER}
           onPress={() => props.setItemIndexToEdit(-1)}
         />

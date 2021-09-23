@@ -128,7 +128,11 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
 
   return (
   // Used to overlay the pop-up in the screen view
-    <CustomModalComponent isVisible={true} modalType="Popup" onClose={() => { dispatch({ type: UPDATE_APPROVAL_LIST.RESET }); }}>
+    <CustomModalComponent
+      isVisible={true}
+      modalType="Popup"
+      onClose={() => { dispatch({ type: UPDATE_APPROVAL_LIST.RESET }); }}
+    >
       <Text style={styles.errorText}>{strings('APPROVAL.FAILED_APPROVE')}</Text>
       {failedItems.length <= 5
         ? (

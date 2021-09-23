@@ -168,7 +168,11 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
   }
   return (
     <>
-      <CustomModalComponent isVisible={displayConfirmation} onClose={() => setDisplayConfirmation(false)} modalType="Error">
+      <CustomModalComponent
+        isVisible={displayConfirmation}
+        onClose={() => setDisplayConfirmation(false)}
+        modalType="Error"
+      >
         {delAPI.isWaiting ? (
           <ActivityIndicator
             animating={delAPI.isWaiting}
