@@ -25,7 +25,7 @@ const styleSelector = {
   Popup: styles.popUpContainer
 };
 
-export const ModalCloseIcon = <MaterialCommunityIcon name="close" size={20} color={COLOR.GREY_500} />;
+export const ModalCloseIcon = <MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />;
 
 export const CustomModalComponent = (props: CustomModalProps): JSX.Element => {
   const {
