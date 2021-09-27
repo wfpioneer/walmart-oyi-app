@@ -20,6 +20,7 @@ export const UPDATE_APPROVAL_LIST = 'SAGA/UPDATE_APPROVAL_LIST';
 export const GET_ALL_ZONES = 'SAGA/GET_ZONES';
 export const GET_AISLE = 'SAGA/GET_AISLE';
 export const GET_SECTIONS = 'SAGA/GET_SECTIONS';
+export const GET_SECTION_DETAILS = 'SAGA/GET_SECTION_DETAILS';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -36,14 +37,18 @@ export const printSign = (payload: any) => ({ type: PRINT_SIGN, payload } as con
 export const getLocationDetails = (payload: any) => ({ type: GET_LOCATION_DETAILS, payload } as const);
 export const getFluffyFeatures = (payload: any) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
 export const getApprovalList = (payload: {
-  itemNbr?: number;
-  status?: approvalStatus;
+  itemNbr?: number,
+  status?: approvalStatus
   approvalRequestSource?: approvalRequestSource;
 }) => ({ type: GET_APPROVAL_LIST, payload } as const);
 export const updateApprovalList = (payload: {
   approvalItems: ApprovalListItem[]
-  headers: {action: approvalAction},
+  headers: {action: approvalAction}
 }) => ({ type: UPDATE_APPROVAL_LIST, payload } as const);
 export const getAllZones = () => ({ type: GET_ALL_ZONES } as const);
 export const getAisle = (payload: {zoneId: number}) => ({ type: GET_AISLE, payload } as const);
 export const getSections = (payload: { aisleId: number}) => ({ type: GET_SECTIONS, payload } as const);
+export const getSectionDetails = (payload: {
+  sectionName: string,
+  sectionId: number
+}) => ({ type: GET_SECTION_DETAILS, payload } as const);
