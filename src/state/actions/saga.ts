@@ -49,6 +49,5 @@ export const getAllZones = () => ({ type: GET_ALL_ZONES } as const);
 export const getAisle = (payload: {zoneId: number}) => ({ type: GET_AISLE, payload } as const);
 export const getSections = (payload: { aisleId: number}) => ({ type: GET_SECTIONS, payload } as const);
 export const getSectionDetails = (payload: {
-  sectionName: string,
-  sectionId: number
+  sectionId: string,
 }) => ({ type: GET_SECTION_DETAILS, payload } as const);

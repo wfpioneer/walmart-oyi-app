@@ -27,10 +27,10 @@ export default class LocationService {
     );
   }
 
-  public static getSectionDetails(payload: {sectionName: string, sectionId: number}): Promise<AxiosResponse<unknown>> {
+  public static getSectionDetails(payload: {sectionId: string}): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.get(
-      `${urls.locationUrl}/section/${payload.sectionId || payload.sectionName}/detail`
+      `${urls.locationUrl}/section/${payload.sectionId}/detail`
     );
   }
 }
