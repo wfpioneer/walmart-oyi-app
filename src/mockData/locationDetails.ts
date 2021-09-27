@@ -16,9 +16,15 @@ export const mockLocationDetails : LocationItem = {
   floor: [
     {
       itemNbr: 980078597,
-      itemDesc: 'Cabbage',
+      itemDesc: 'Nature Valley Sweet and Salty Granola Bars',
       price: 2.40
+    },
+    {
+      itemNbr: 980011111,
+      itemDesc: 'Nature Valley Honey Bars',
+      price: 5.80
     }
+
   ],
   reserve: [
     {

@@ -19,5 +19,12 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-evenly',
     flex: 1
+  },
+  itemNbr: {
+    color: COLOR.GREY_600,
+    fontSize: 12
+  },
+  price: {
+    color: COLOR.GREY_600
   }
 });

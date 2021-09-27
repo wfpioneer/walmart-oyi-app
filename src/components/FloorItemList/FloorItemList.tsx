@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { FloorItem } from '../../models/LocationItems';
 import styles from './FloorItemRow.style';
+import { currencies, strings } from '../../locales';
 
 export interface FloorItemListProps {
     items: FloorItem[]
@@ -14,11 +15,13 @@ export const FloorItemRow = (props: FloorItemProps): JSX.Element => {
   const { item } = props;
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.content}>
-        <Text>{item.itemNbr}</Text>
+        <Text style={styles.itemNbr}>
+          {`${strings('ITEM.ITEM')} ${item.itemNbr}`}
+        </Text>
         <Text>{item.itemDesc}</Text>
-        <Text>{item.price}</Text>
+        <Text style={styles.price}>{currencies(item.price)}</Text>
       </View>
     </View>
   );
