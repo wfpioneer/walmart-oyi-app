@@ -31,12 +31,13 @@ const EnterLocation = (props: { setEnterLocation: Function; onSubmit: Function }
             selectionColor={COLOR.MAIN_THEME_COLOR}
             placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')}
             keyboardType="default"
+            autoFocus={true}
           />
         </View>
         <Button
           title={strings('GENERICS.OK')}
           type={Button.Type.PRIMARY}
-          style={{ width: '100%' }}
+          style={styles.buttonWidth}
           onPress={() => props.onSubmit(textInput.toUpperCase())}
           disabled={textInput.length < 1}
         />

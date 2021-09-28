@@ -1,8 +1,12 @@
 import {
   ADD_LOCATION_TO_EXISTING,
+  Actions,
   DELETE_LOCATION_FROM_EXISTING,
   EDIT_EXISTING_LOCATION,
   RESET_LOCATIONS,
+  SELECT_AISLE,
+  SELECT_SECTION,
+  SELECT_ZONE,
   SET_FLOOR_LOCATIONS,
   SET_ITEM_LOC_DETAILS,
   SET_RESERVE_LOCATIONS
@@ -17,6 +21,18 @@ interface LocationState {
     upcNbr: string;
     exceptionType: string;
   };
+  selectedZone: {
+    id: number;
+    name: string;
+  };
+  selectedAisle: {
+    id: number;
+    name: string;
+  };
+  selectedSection: {
+    id: number;
+    name: string;
+   }
 }
 
 const initialState: LocationState = {
@@ -26,10 +42,25 @@ const initialState: LocationState = {
     itemNbr: 0,
     upcNbr: '',
     exceptionType: ''
+  },
+  selectedZone: {
+    id: 0,
+    name: ''
+  },
+  selectedAisle: {
+    id: 0,
+    name: ''
+  },
+  selectedSection: {
+    id: 0,
+    name: ''
   }
 };
 
-export const Location = (state = initialState, action: any) => {
+export const Location = (
+  state = initialState,
+  action: Actions
+) : LocationState => {
   switch (action.type) {
     case SET_ITEM_LOC_DETAILS:
       return {
@@ -54,7 +85,8 @@ export const Location = (state = initialState, action: any) => {
       };
     case ADD_LOCATION_TO_EXISTING:
       if (action.payload.locationArea === 'floor') {
-        state.floorLocations.push({
+        const addFloorLocations = [...state.floorLocations];
+        addFloorLocations.push({
           zoneId: 0,
           aisleId: 0,
           sectionId: 0,
@@ -67,11 +99,12 @@ export const Location = (state = initialState, action: any) => {
         });
         return {
           ...state,
-          floorLocations: state.floorLocations
+          floorLocations: addFloorLocations
         };
       }
       if (action.payload.locationArea === 'reserve') {
-        state.reserveLocations.push({
+        const addReserveLocations = [...state.reserveLocations];
+        addReserveLocations.push({
           zoneId: 0,
           aisleId: 0,
           sectionId: 0,
@@ -84,7 +117,7 @@ export const Location = (state = initialState, action: any) => {
         });
         return {
           ...state,
-          reserveLocations: state.reserveLocations
+          reserveLocations: addReserveLocations
         };
       }
       return {
@@ -103,10 +136,10 @@ export const Location = (state = initialState, action: any) => {
           type: '',
           typeNbr: action.payload.locationTypeNbr
         };
-        state.floorLocations.splice(action.payload.locIndex, 1, editedLocation);
+        const editFloorLocations = [...state.floorLocations].splice(action.payload.locIndex, 1, editedLocation);
         return {
           ...state,
-          floorLocations: state.floorLocations
+          floorLocations: editFloorLocations
         };
       }
       if (action.payload.locationArea === 'reserve') {
@@ -121,43 +154,69 @@ export const Location = (state = initialState, action: any) => {
           type: '',
           typeNbr: action.payload.locationTypeNbr
         };
-        state.reserveLocations.splice(action.payload.locIndex, 1, editedLocation);
+        const editReserveLocations = [...state.reserveLocations].splice(action.payload.locIndex, 1, editedLocation);
         return {
           ...state,
-          reserveLocations: state.reserveLocations
+          reserveLocations: editReserveLocations
         };
       }
       return {
         ...state
       };
-    case DELETE_LOCATION_FROM_EXISTING:
+    case DELETE_LOCATION_FROM_EXISTING: {
+      const { locIndex } = action.payload;
+
       if (action.payload.locationArea === 'floor') {
-        state.floorLocations.splice(action.payload.locIndex, 1);
+        const deleteFloorLocation = [
+          ...state.floorLocations.slice(0, locIndex),
+          ...state.floorLocations.slice(locIndex + 1)];
         return {
           ...state,
-          floorLocations: state.floorLocations
+          floorLocations: deleteFloorLocation
         };
       }
       if (action.payload.locationArea === 'reserve') {
-        state.reserveLocations.splice(action.payload.locIndex, 1);
+        const deleteReserveLocation = [
+          ...state.reserveLocations.slice(0, locIndex),
+          ...state.reserveLocations.slice(locIndex + 1)];
         return {
           ...state,
-          reserveLocations: state.reserveLocations
+          reserveLocations: deleteReserveLocation
         };
       }
       return {
         ...state
       };
-    case RESET_LOCATIONS:
+    }
+    case SELECT_ZONE: {
       return {
-        floorLocations: [],
-        reserveLocations: [],
-        itemLocDetails: {
-          itemNbr: null,
-          upcNbr: null,
-          exceptionType: null
+        ...state,
+        selectedZone: {
+          id: action.payload.id,
+          name: action.payload.name
         }
       };
+    }
+    case SELECT_AISLE: {
+      return {
+        ...state,
+        selectedAisle: {
+          id: action.payload.id,
+          name: action.payload.name
+        }
+      };
+    }
+    case SELECT_SECTION: {
+      return {
+        ...state,
+        selectedSection: {
+          id: action.payload.id,
+          name: action.payload.name
+        }
+      };
+    }
+    case RESET_LOCATIONS:
+      return initialState;
     default:
       return state;
   }

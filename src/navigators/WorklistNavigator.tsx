@@ -14,7 +14,6 @@ import { toggleMenu } from '../state/actions/Worklist';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
 import { strings } from '../locales';
-import { trackEvent } from '../utils/AppCenterTool';
 import { getWorklist } from '../state/actions/saga';
 
 const Stack = createStackNavigator();
@@ -55,13 +54,12 @@ const renderHeaderRight = (dispatch: any, menuOpen: boolean) => (
   </View>
 );
 
-export const WorklistNavigator = () => {
+export const WorklistNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
 
   useEffect(() => navigation.addListener('focus', () => {
-    trackEvent('worklist_items_api_call');
     dispatch(getWorklist());
   }), [navigation]);
 

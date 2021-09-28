@@ -1,5 +1,5 @@
 import Config from 'react-native-config';
-import { store } from '../../App';
+import store from '../state';
 
 export interface Environment {
   orchestrationURL: string;
@@ -7,6 +7,7 @@ export interface Environment {
   worklistURL: string;
   fluffyURL: string;
   managerApprovalUrl: string;
+  locationUrl: string;
 }
 
 export interface Environments {
@@ -35,17 +36,17 @@ export const svcName: ApplicationKey = {
   fluffyName: 'IntlMobileAuthorizationPlatform'
 };
 
-type svcEnv = 'dev'|'stg:1.0.0'|'stg:2.0.0'|'stage'|'prod'| '';
-export const getWmSvcEnv = (isOrchApi?: boolean): svcEnv => {
+type svcEnv = 'dev'|'stage'|'prod'| '';
+export const getWmSvcEnv = (): svcEnv => {
   switch (Config.ENVIRONMENT) {
     case 'dev':
-      return isOrchApi ? 'stg:1.0.0' : 'dev';
+      return 'dev';
     case 'stage':
-      return isOrchApi ? 'stg:2.0.0' : 'stage';
+      return 'stage';
     case 'prod':
       return 'prod';
     default:
-      return isOrchApi ? 'stg:2.0.0' : 'stage';
+      return 'stage';
   }
 };
 
@@ -53,7 +54,7 @@ export const getConsumerId = () => {
   const consumerId = {
     dev: '3b87ba30-529e-4cf7-983f-c3873edc6304',
     stage: '28cd32c8-6c12-40e9-97ec-e06db93fa529',
-    prod: ''
+    prod: 'cf25a58c-3fdb-4189-974f-8086c7be23d1'
   };
 
   switch (Config.ENVIRONMENT) {
@@ -78,7 +79,8 @@ export const getEnvironment = (): Environment => {
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.dev.walmart.com`,
       fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com'
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
-      managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.dev.walmart.com`
+      managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.dev.walmart.com`,
+      locationUrl: `https://intl-oyi-location-api.${countryCode}.dev.walmart.com`
     },
     stage: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.stg.walmart.com',
@@ -86,7 +88,8 @@ export const getEnvironment = (): Environment => {
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.stg.walmart.com`,
       fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com'
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
-      managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.stg.walmart.com`
+      managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.stg.walmart.com`,
+      locationUrl: `https://intl-oyi-location-api.${countryCode}.stg.walmart.com`
     },
     prod: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.prod.walmart.com',
@@ -94,7 +97,8 @@ export const getEnvironment = (): Environment => {
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.prod.walmart.com`,
       fluffyURL: 'https://api-proxy.prod.soa-api-proxy.platform.glb.prod.walmart.com'
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
-      managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.prod.walmart.com`
+      managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.prod.walmart.com`,
+      locationUrl: `https://intl-oyi-location-api.${countryCode}.prod.walmart.com`
     }
 
   };

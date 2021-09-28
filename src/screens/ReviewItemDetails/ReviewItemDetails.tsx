@@ -1,15 +1,17 @@
 import React, {
-  RefObject, createRef, useEffect, useState
+  EffectCallback, RefObject, createRef, useEffect, useState
 } from 'react';
 import {
   ActivityIndicator, BackHandler, Modal, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import _ from 'lodash';
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import {
+  NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
+} from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { addToPicklist, getItemDetails, noAction } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
@@ -32,108 +34,52 @@ import { showInfoModal } from '../../state/actions/Modal';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
+import { AsyncState } from '../../models/AsyncState';
+import { ADD_TO_PICKLIST, GET_ITEM_DETAILS, NO_ACTION } from '../../state/actions/asyncAPI';
+import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
-interface StateAsync {
-    isWaiting: boolean;
-    value: any;
-    error: any;
-    result: any;
-}
 export interface ItemDetailsScreenProps {
   scannedEvent: any; isManualScanEnabled: boolean;
   isWaiting: boolean; error: any; result: any;
-  addToPicklistStatus: StateAsync;
-  completeItemApi: StateAsync;
+  addToPicklistStatus: AsyncState;
+  completeItemApi: AsyncState;
   userId: string;
   exceptionType: string; actionCompleted: boolean; pendingOnHandsQty: number;
   floorLocations?: Location[];
   reserveLocations?: Location[];
-  route: any;
-  dispatch: Function;
-  navigation: any;
-  scrollViewRef: any;
-  isSalesMetricsGraphView: boolean; setIsSalesMetricsGraphView: Function;
-  ohQtyModalVisible: boolean; setOhQtyModalVisible: Function;
-  completeApiInProgress: boolean; setCompleteApiInProgress: Function;
-  isRefreshing: boolean; setIsRefreshing: Function;
-  apiStart: number; setApiStart: Function;
+  route: RouteProp<any, string>;
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
+  scrollViewRef: RefObject<ScrollView>;
+  isSalesMetricsGraphView: boolean; setIsSalesMetricsGraphView: React.Dispatch<React.SetStateAction<boolean>>;
+  ohQtyModalVisible: boolean; setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  errorModalVisible: boolean; setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   trackEventCall: (eventName: string, params?: any) => void;
-  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
-  useEffectHook: Function;
-  useFocusEffectHook: Function;
+  validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useFocusEffectHook: (effect: EffectCallback) => void;
+  userFeatures: string[];
 }
-const ReviewItemDetails = () => {
-  const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
-  const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
-  const completeItemApi = useTypedSelector(state => state.async.noAction);
-  const { userId } = useTypedSelector(state => state.User);
-  const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
-  const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
-  const route = useRoute();
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const scrollViewRef: RefObject<ScrollView> = createRef();
-  const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
-  const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
-  const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [apiStart, setApiStart] = useState(0);
 
-  return (
-    <ReviewItemDetailsScreen
-      scannedEvent={scannedEvent}
-      isManualScanEnabled={isManualScanEnabled}
-      isWaiting={isWaiting}
-      error={error}
-      result={result}
-      addToPicklistStatus={addToPicklistStatus}
-      completeItemApi={completeItemApi}
-      userId={userId}
-      exceptionType={exceptionType}
-      actionCompleted={actionCompleted}
-      pendingOnHandsQty={pendingOnHandsQty}
-      floorLocations={floorLocations}
-      reserveLocations={reserveLocations}
-      route={route}
-      dispatch={dispatch}
-      navigation={navigation}
-      scrollViewRef={scrollViewRef}
-      isSalesMetricsGraphView={isSalesMetricsGraphView}
-      setIsSalesMetricsGraphView={setIsSalesMetricsGraphView}
-      ohQtyModalVisible={ohQtyModalVisible}
-      setOhQtyModalVisible={setOhQtyModalVisible}
-      completeApiInProgress={completeApiInProgress}
-      setCompleteApiInProgress={setCompleteApiInProgress}
-      isRefreshing={isRefreshing}
-      setIsRefreshing={setIsRefreshing}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      trackEventCall={trackEvent}
-      validateSessionCall={validateSession}
-      useEffectHook={useEffect}
-      useFocusEffectHook={useFocusEffect}
-    />
-  );
-};
 export interface HandleProps{
-  validateSessionCall: (navigation: any, route?: string) => Promise<void>;
+  validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
   trackEventCall: (eventName: string, params?: any) => void;
-  navigation: any;
-  route: any;
+  navigation: NavigationProp<any>;
+  route: RouteProp<any, string>;
   userId?: string;
-  setOhQtyModalVisible: Function;
-  dispatch: Function;
+  setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  dispatch: Dispatch<any>;
 }
 export interface RenderProps {
   actionCompleted: boolean;
-  completeItemApi: StateAsync;
-  addToPicklistStatus: StateAsync;
+  completeItemApi: AsyncState;
+  addToPicklistStatus: AsyncState;
   isManualScanEnabled: boolean;
   floorLocations?: Location[];
   reserveLocations?: Location[];
 }
+
 const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
   const {
     navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId
@@ -166,33 +112,47 @@ const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
-export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: number) => {
-  if (pendingOnHandsQty === -999) {
-    return (
-      <View style={styles.onHandsContainer}>
-        <View style={styles.onHandsView}>
-          <Text>{strings('ITEM.ON_HANDS')}</Text>
-          <Text>{onHandsQty}</Text>
-        </View>
-      </View>
-    );
+export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
+  const {
+    pendingOnHandsQty,
+    onHandsQty,
+    backroomQty,
+    claimsOnHandQty,
+    consolidatedOnHandQty,
+    cloudQty
+  } = itemDetails;
+
+  const salesFloorQty = cloudQty === undefined
+    ? onHandsQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
+    : onHandsQty
+        - (backroomQty + claimsOnHandQty + consolidatedOnHandQty + cloudQty);
+
+  const onHandsRow: ItemDetailsListRow = {
+    label: strings('ITEM.ON_HANDS'),
+    value: onHandsQty
+  };
+
+  if (pendingOnHandsQty !== -999) {
+    onHandsRow.value = `${onHandsQty} (${pendingOnHandsQty})`;
+    onHandsRow.additionalNote = strings('ITEM.PENDING_MGR_APPROVAL');
   }
 
-  return (
-    <View style={styles.onHandsContainer}>
-      <View style={styles.onHandsView}>
-        <Text>{strings('ITEM.ON_HANDS')}</Text>
-        <Text>{pendingOnHandsQty}</Text>
-      </View>
-      <View style={styles.mgrApprovalView}>
-        <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={{ paddingRight: 6 }} />
-        <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
-      </View>
-    </View>
-  );
+  const qtyRows: ItemDetailsListRow[] = [
+    onHandsRow,
+    { label: strings('ITEM.SALES_FLOOR_QTY'), value: salesFloorQty },
+    { label: strings('ITEM.RESERVE_QTY'), value: backroomQty },
+    { label: strings('ITEM.CLAIMS_QTY'), value: claimsOnHandQty },
+    { label: strings('ITEM.CONSOLIDATED_QTY'), value: consolidatedOnHandQty }
+  ];
+
+  if (cloudQty !== undefined) {
+    qtyRows.push({ label: strings('ITEM.FLY_CLOUD_QTY'), value: cloudQty });
+  }
+
+  return <ItemDetailsList rows={qtyRows} indentAfterFirstRow={true} />;
 };
 
-export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails) => {
+export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
   const { reserve } = itemDetails.location;
   const { addToPicklistStatus } = props;
   if (addToPicklistStatus?.isWaiting) {
@@ -237,10 +197,10 @@ export const renderAddPicklistButton = (props: (RenderProps & HandleProps), item
   return <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>;
 };
 
-export const renderLocationComponent = (props: (RenderProps & HandleProps), itemDetails: ItemDetails) => {
+export const renderLocationComponent = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
   const { floorLocations, reserveLocations } = props;
   return (
-    <View style={{ paddingHorizontal: 8 }}>
+    <View style={styles.locationContainer}>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.FLOOR')}</Text>
         {floorLocations && floorLocations.length >= 1
@@ -273,7 +233,7 @@ export const renderLocationComponent = (props: (RenderProps & HandleProps), item
             />
           )}
       </View>
-      <View style={styles.renderPickListContatiner}>
+      <View style={styles.renderPickListContainer}>
         {renderAddPicklistButton(props, itemDetails)}
       </View>
     </View>
@@ -286,7 +246,9 @@ const completeAction = () => {
   // dispatch(navigation.goBack());
 };
 
-export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails) => {
+export const renderScanForNoActionButton = (
+  props: (RenderProps & HandleProps), itemDetails: ItemDetails
+): JSX.Element => {
   const {
     actionCompleted, completeItemApi, validateSessionCall, trackEventCall,
     dispatch, userId, isManualScanEnabled, navigation, route
@@ -335,7 +297,35 @@ export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), 
     </TouchableOpacity>
   );
 };
-export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
+
+// Renders scanned barcode error. TODO Temporary fix until Modal.tsx is refactored for more flexible usage
+export const renderBarcodeErrorModal = (
+  isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
+): JSX.Element => (
+  <Modal
+    visible={isVisible}
+    transparent
+  >
+    <View style={styles.modalContainer}>
+      <View style={styles.barcodeErrorContainer}>
+        <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+        <Text style={styles.errorText}>
+          {strings('GENERICS.BARCODE_SCAN_ERROR')}
+        </Text>
+        <View style={styles.buttonContainer}>
+          <Button
+            style={styles.dismissButton}
+            title={strings('GENERICS.OK')}
+            backgroundColor={COLOR.TRACKER_RED}
+            onPress={() => setIsVisible(false)}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+);
+
+export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
     isWaiting, error, result,
@@ -349,55 +339,24 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
     scrollViewRef,
     isSalesMetricsGraphView, setIsSalesMetricsGraphView,
     ohQtyModalVisible, setOhQtyModalVisible,
-    completeApiInProgress, setCompleteApiInProgress,
-    isRefreshing, setIsRefreshing,
-    apiStart, setApiStart,
+    errorModalVisible, setErrorModalVisible,
     trackEventCall,
     validateSessionCall,
     useEffectHook,
-    useFocusEffectHook
+    useFocusEffectHook,
+    userFeatures
   } = props;
   // Scanned Item Event Listener
   useEffectHook(() => {
     if (navigation.isFocused()) {
       validateSessionCall(navigation, route.name).then(() => {
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
-        setApiStart(moment().valueOf());
-        dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-        trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
+        dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
-        dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
+        dispatch({ type: ADD_TO_PICKLIST.RESET });
       }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
     }
   }, [scannedEvent]);
-
-  // Get Item Details API
-  useEffectHook(() => {
-    if (error) {
-      trackEventCall('item_details_api_failure',
-        {
-          barcode: scannedEvent.value,
-          errorDetails: error.message || JSON.stringify(error),
-          duration: moment().valueOf() - apiStart
-        });
-    }
-
-    if (_.get(result, 'status') === 204) {
-      trackEventCall('item_details_api_not_found',
-        { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
-    }
-
-    if (_.get(result, 'status') === 200) {
-      trackEventCall('item_details_api_success',
-        { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
-    }
-    if (isRefreshing) {
-      setIsRefreshing(false);
-    }
-    if (isRefreshing) {
-      setIsRefreshing(false);
-    }
-  }, [error, result]);
 
   const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
   const locationCount = (floorLocations?.length ?? 0) + (reserveLocations?.length ?? 0);
@@ -425,14 +384,16 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
         validateSessionCall(navigation, route.name).then(() => {
-          if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
-            trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
-            trackEventCall('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
-            setApiStart(moment().valueOf());
-            dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
-            dispatch(setManualScan(false));
+          trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
+          if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
+            if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
+              dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
+              dispatch(setManualScan(false));
+            } else {
+              dispatch(setScannedEvent(scan));
+            }
           } else {
-            dispatch(setScannedEvent(scan));
+            setErrorModalVisible(true);
           }
         }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
       }
@@ -445,43 +406,25 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   // Complete Item Details API
   useEffectHook(() => {
     // on api success
-    if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.result) {
+    if (!completeItemApi.isWaiting && completeItemApi.result) {
       if (_.get(completeItemApi.result, 'status') === 204) {
-        trackEventCall('item_details_action_completed_api_failure_scan_no_match',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEventCall('item_details_action_completed_api_success',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
-        setCompleteApiInProgress(false);
         dispatch(setActionCompleted());
         navigation.goBack();
       }
-      return undefined;
+      dispatch({ type: NO_ACTION.RESET });
     }
 
     // on api failure
-    if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.error) {
+    if (!completeItemApi.isWaiting && completeItemApi.error) {
       if (completeItemApi.error === COMPLETE_API_409_ERROR) {
-        trackEventCall('item_details_action_completed_api_failure_scan_no_match',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEventCall('item_details_action_completed_api_failure',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
-      setCompleteApiInProgress(false);
-      return undefined;
+      dispatch({ type: NO_ACTION.RESET });
     }
-
-    // on api submission
-    if (!completeApiInProgress && completeItemApi.isWaiting) {
-      trackEventCall('item_details_action_completed_api_call', { itemDetails: JSON.stringify(itemDetails) });
-      return setCompleteApiInProgress(true);
-    }
-
-    return undefined;
   }, [completeItemApi]);
 
   useFocusEffectHook(
@@ -513,6 +456,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   if (error) {
     return (
       <View style={styles.safeAreaView}>
+        {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
         {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
@@ -520,7 +464,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
           <TouchableOpacity
             style={styles.errorButton}
             onPress={() => {
-              setApiStart(moment().valueOf());
               trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
@@ -535,6 +478,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   if (_.get(result, 'status') === 204) {
     return (
       <View style={styles.safeAreaView}>
+        {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
         {isManualScanEnabled && <ManualScanComponent />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
@@ -564,11 +508,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
 
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      setIsRefreshing(true);
-      setApiStart(moment().valueOf());
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-      trackEventCall('item_details_api_call', { itemNumber: itemDetails.itemNbr });
       dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
@@ -576,6 +517,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
   return (
     <View style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent />}
+      {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
       <Modal
         visible={ohQtyModalVisible}
         onRequestClose={() => setOhQtyModalVisible(false)}
@@ -590,7 +532,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={styles.container}
-        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}
+        refreshControl={<RefreshControl refreshing={false} onRefresh={handleRefresh} />}
       >
         {isWaiting && (
         <ActivityIndicator
@@ -608,7 +550,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
               itemName={itemDetails.itemName}
               itemNbr={itemDetails.itemNbr}
               upcNbr={itemDetails.upcNbr}
-              status={itemDetails.status}
+              status={itemDetails.status || ''}
               category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
               price={itemDetails.price}
               exceptionType={!actionCompleted ? itemDetails.exceptionType : undefined}
@@ -616,10 +558,11 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
             <SFTCard
               title={strings('ITEM.QUANTITY')}
               iconName="pallet"
-              topRightBtnTxt={pendingOnHandsQty === -999 ? strings('GENERICS.CHANGE') : undefined}
+              topRightBtnTxt={(pendingOnHandsQty === -999 && userFeatures.includes('on hands change'))
+                ? strings('GENERICS.CHANGE') : undefined}
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
-              {renderOHQtyComponent(itemDetails.onHandsQty, pendingOnHandsQty)}
+              {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
             <SFTCard
               iconProp={(
@@ -627,7 +570,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
                   name="label-variant"
                   size={20}
                   color={COLOR.GREY_700}
-                  style={{ marginLeft: -4 }}
+                  style={styles.labelIcon}
                 />
               )}
               title={strings('ITEM.REPLENISHMENT')}
@@ -661,5 +604,53 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps) => {
     </View>
   );
 };
-
+const ReviewItemDetails = (): JSX.Element => {
+  const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
+  const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
+  const completeItemApi = useTypedSelector(state => state.async.noAction);
+  const { userId } = useTypedSelector(state => state.User);
+  const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
+  const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
+  const userFeatures = useTypedSelector(state => state.User.features);
+  const route = useRoute();
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const scrollViewRef: RefObject<ScrollView> = createRef();
+  const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
+  const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  return (
+    <ReviewItemDetailsScreen
+      scannedEvent={scannedEvent}
+      isManualScanEnabled={isManualScanEnabled}
+      isWaiting={isWaiting}
+      error={error}
+      result={result}
+      addToPicklistStatus={addToPicklistStatus}
+      completeItemApi={completeItemApi}
+      userId={userId}
+      exceptionType={exceptionType}
+      actionCompleted={actionCompleted}
+      pendingOnHandsQty={pendingOnHandsQty}
+      floorLocations={floorLocations}
+      reserveLocations={reserveLocations}
+      route={route}
+      dispatch={dispatch}
+      navigation={navigation}
+      scrollViewRef={scrollViewRef}
+      isSalesMetricsGraphView={isSalesMetricsGraphView}
+      setIsSalesMetricsGraphView={setIsSalesMetricsGraphView}
+      ohQtyModalVisible={ohQtyModalVisible}
+      setOhQtyModalVisible={setOhQtyModalVisible}
+      errorModalVisible={errorModalVisible}
+      setErrorModalVisible={setErrorModalVisible}
+      trackEventCall={trackEvent}
+      validateSessionCall={validateSession}
+      useEffectHook={useEffect}
+      useFocusEffectHook={useFocusEffect}
+      userFeatures={userFeatures}
+    />
+  );
+};
 export default ReviewItemDetails;

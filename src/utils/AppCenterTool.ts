@@ -1,9 +1,9 @@
 import AppCenter from 'appcenter';
 import AppCenterCrashes from 'appcenter-crashes';
 import AppCenterAnalytics from 'appcenter-analytics';
-import { store } from '../../App';
+import store from '../state';
 
-export const initialize = () => {
+export const initialize = (): void => {
   if (!__DEV__) {
     AppCenter.setLogLevel(AppCenter.LogLevel.VERBOSE);
     AppCenterCrashes.notifyUserConfirmation(AppCenterCrashes.UserConfirmation.ALWAYS_SEND);
@@ -12,16 +12,19 @@ export const initialize = () => {
   }
 };
 
-export const trackEvent = (eventName: string, params: any = {}) => {
+export const trackEvent = (eventName: string, params: any = {}): void => {
   const userState = store.getState().User;
-
+  // Removes undefined values from the event properties
+  const cleanedParams = Object.fromEntries(Object.entries(params).filter(([k, v]) => v !== undefined));
   const submitParams = {
-    ...params,
+    ...cleanedParams,
     userId: userState.userId,
-    clubId: userState.siteId,
+    clubId: userState.siteId === undefined ? 'undefined' : userState.siteId.toString(),
     country: userState.countryCode
   };
-  return AppCenterAnalytics.trackEvent(eventName, submitParams);
+  AppCenterAnalytics.trackEvent(eventName, submitParams);
 };
 
-export const setUserId = (userId: string) => AppCenter.setUserId(userId);
+export const setUserId = (userId: string): void => {
+  AppCenter.setUserId(userId);
+};

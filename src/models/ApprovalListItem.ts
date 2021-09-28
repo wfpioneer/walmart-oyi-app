@@ -14,6 +14,13 @@ export interface ApprovalListItem {
   initiatedTimestamp: string;
   approvalStatus: approvalStatus;
   approvalRequestSource: approvalRequestSource;
+  isChecked?: boolean;
+  daysLeft?: number;
+  resolvedTimestamp?: string; // This is used in the request body for the approve/reject API call
+}
+
+export interface ApprovalCategory extends ApprovalListItem {
+  categoryHeader?: boolean;
 }
 
 export enum approvalStatus {
@@ -25,5 +32,10 @@ export enum approvalStatus {
 export enum approvalRequestSource {
   'ItemDetails' = 'itemdetails',
   'Audits' = 'audits',
+}
 
+export enum approvalAction {
+  'Approve' = 'Aprv',
+  'Reject' = 'Rejc',
+  'Expired' = 'Exp'
 }

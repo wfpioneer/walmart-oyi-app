@@ -25,11 +25,13 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     onModalShow={[Function]}
     onModalWillHide={[Function]}
     onModalWillShow={[Function]}
+    panResponderThreshold={4}
     propagateSwipe={false}
     scrollHorizontal={false}
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -119,7 +121,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
       </React.Fragment>
     </View>
   </ReactNativeModal>
-  <ScrollViewMock>
+  <ScrollView>
     <View
       style={
         Object {
@@ -166,7 +168,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
       </Text>
     </View>
     <React.Fragment />
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -228,11 +230,13 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     onModalShow={[Function]}
     onModalWillHide={[Function]}
     onModalWillShow={[Function]}
+    panResponderThreshold={4}
     propagateSwipe={false}
     scrollHorizontal={false}
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -322,7 +326,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
       </React.Fragment>
     </View>
   </ReactNativeModal>
-  <ScrollViewMock>
+  <ScrollView>
     <View
       style={
         Object {
@@ -369,7 +373,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
       </Text>
     </View>
     <React.Fragment />
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -446,11 +450,13 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
     onModalShow={[Function]}
     onModalWillHide={[Function]}
     onModalWillShow={[Function]}
+    panResponderThreshold={4}
     propagateSwipe={false}
     scrollHorizontal={false}
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -491,7 +497,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
       />
     </View>
   </ReactNativeModal>
-  <ScrollViewMock>
+  <ScrollView>
     <View
       style={
         Object {
@@ -538,7 +544,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
       </Text>
     </View>
     <React.Fragment />
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -600,11 +606,13 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
     onModalShow={[Function]}
     onModalWillHide={[Function]}
     onModalWillShow={[Function]}
+    panResponderThreshold={4}
     propagateSwipe={false}
     scrollHorizontal={false}
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -694,7 +702,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
       </React.Fragment>
     </View>
   </ReactNativeModal>
-  <ScrollViewMock>
+  <ScrollView>
     <View
       style={
         Object {
@@ -741,7 +749,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
       </Text>
     </View>
     <React.Fragment />
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -803,11 +811,13 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     onModalShow={[Function]}
     onModalWillHide={[Function]}
     onModalWillShow={[Function]}
+    panResponderThreshold={4}
     propagateSwipe={false}
     scrollHorizontal={false}
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -897,7 +907,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
       </React.Fragment>
     </View>
   </ReactNativeModal>
-  <ScrollViewMock>
+  <ScrollView>
     <View
       style={
         Object {
@@ -951,7 +961,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
         locationType="Reserve"
       />
     </React.Fragment>
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -1013,11 +1023,13 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     onModalShow={[Function]}
     onModalWillHide={[Function]}
     onModalWillShow={[Function]}
+    panResponderThreshold={4}
     propagateSwipe={false}
     scrollHorizontal={false}
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -1107,7 +1119,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
       </React.Fragment>
     </View>
   </ReactNativeModal>
-  <ScrollViewMock>
+  <ScrollView>
     <View
       style={
         Object {
@@ -1167,7 +1179,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
       </Text>
     </View>
     <React.Fragment />
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -1229,11 +1241,13 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     onModalShow={[Function]}
     onModalWillHide={[Function]}
     onModalWillShow={[Function]}
+    panResponderThreshold={4}
     propagateSwipe={false}
     scrollHorizontal={false}
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -1323,7 +1337,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
       </React.Fragment>
     </View>
   </ReactNativeModal>
-  <ScrollViewMock>
+  <ScrollView>
     <View
       style={
         Object {
@@ -1390,7 +1404,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
         locationType="Reserve"
       />
     </React.Fragment>
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {
@@ -1452,11 +1466,13 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     onModalShow={[Function]}
     onModalWillHide={[Function]}
     onModalWillShow={[Function]}
+    panResponderThreshold={4}
     propagateSwipe={false}
     scrollHorizontal={false}
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",
@@ -1546,7 +1562,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
       </React.Fragment>
     </View>
   </ReactNativeModal>
-  <ScrollViewMock>
+  <ScrollView>
     <View
       style={
         Object {
@@ -1593,7 +1609,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
       </Text>
     </View>
     <React.Fragment />
-  </ScrollViewMock>
+  </ScrollView>
   <View
     style={
       Object {

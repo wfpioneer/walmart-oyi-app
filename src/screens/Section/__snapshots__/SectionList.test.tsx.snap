@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Get Section Api Response Renders Section Api Error Message 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="alert"
+    size={40}
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.LOCATION.LOCATION_API_ERROR" translation]
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "marginVertical": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`Test Get Section Api Response Renders loading indicator when waiting for Section Api response 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`Test Section List Renders Section Screen with Data 1`] = `
+<View>
+  <LocationHeader
+    details="6 [missing \\"en.LOCATION.SECTIONS\\" translation]"
+    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
+  />
+  <FlatList
+    ListEmptyComponent={<NoSectionMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
+    data={
+      Array [
+        Object {
+          "sectionId": 1,
+          "sectionName": "Section ABAR1-1",
+        },
+        Object {
+          "sectionId": 2,
+          "sectionName": "Section ABAR1-2",
+        },
+        Object {
+          "sectionId": 3,
+          "sectionName": "Section ABAR1-3",
+        },
+        Object {
+          "sectionId": 4,
+          "sectionName": "Section ABAR1-4",
+        },
+        Object {
+          "sectionId": 5,
+          "sectionName": "Section ABAR1-5",
+        },
+        Object {
+          "sectionId": 6,
+          "sectionName": "Section ABAR1-6",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`Test Section List Renders Section Screen with Empty Data 1`] = `
+<View>
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
+    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
+  />
+  <FlatList
+    ListEmptyComponent={<NoSectionMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
+    data={Object {}}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;

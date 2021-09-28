@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ApprovalListScreen Tests rendering Approval Api responses Renders Approval Api error message 1`] = `
+exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders Approval Api error message 1`] = `
 <View
   style={
     Object {
@@ -48,7 +48,7 @@ exports[`ApprovalListScreen Tests rendering Approval Api responses Renders Appro
 </View>
 `;
 
-exports[`ApprovalListScreen Tests rendering Approval Api responses Renders loading indicator when waiting for Approval Api response 1`] = `
+exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders loading indicator when waiting for Approval Api response 1`] = `
 <ActivityIndicator
   animating={true}
   color="#0071e9"
@@ -64,47 +64,243 @@ exports[`ApprovalListScreen Tests rendering Approval Api responses Renders loadi
 />
 `;
 
-exports[`ApprovalListScreen Tests rendering the approval list Renders Empty Approval list on response status 204 1`] = `
+exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders pop-up on update approval api response status 207 1`] = `
 <View
   style={
     Object {
-      "alignItems": "center",
       "flex": 1,
-      "justifyContent": "center",
-      "paddingVertical": 28,
     }
   }
 >
-  <mockConstructor
-    color="#5FA7F2"
-    name="information"
-    size={40}
+  <ReactNativeModal
+    animationIn="slideInUp"
+    animationInTiming={300}
+    animationOut="slideOutDown"
+    animationOutTiming={300}
+    avoidKeyboard={false}
+    backdropColor="black"
+    backdropOpacity={0.7}
+    backdropTransitionInTiming={300}
+    backdropTransitionOutTiming={300}
+    coverScreen={true}
+    customBackdrop={null}
+    deviceHeight={null}
+    deviceWidth={null}
+    hasBackdrop={true}
+    hideModalContentWhileAnimating={false}
+    isVisible={true}
+    onBackButtonPress={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalShow={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    panResponderThreshold={4}
+    propagateSwipe={false}
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    statusBarTranslucent={false}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderRadius": 5,
+          "justifyContent": "space-between",
+          "paddingVertical": 15,
+          "width": "80%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.APPROVAL.FAILED_APPROVE" translation]
+      </Text>
+      <FlatList
+        data={
+          Array [
+            Object {
+              "id": 4785,
+              "itemNbr": 125,
+              "message": "failure",
+              "statusCode": 500,
+            },
+          ]
+        }
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        style={
+          Object {
+            "minHeight": 80,
+            "paddingVertical": 20,
+          }
+        }
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </ReactNativeModal>
+  <FlatList
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.APPROVAL.LIST_NOT_FOUND" translation]
+        </Text>
+      </View>
+    }
+    data={Array []}
+    disableVirtualization={false}
+    extraData={Array []}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
   />
-  <Text>
-     The Approval List is Empty 
-  </Text>
 </View>
 `;
 
-exports[`ApprovalListScreen Tests rendering the approval list Renders a list of Approval Items 1`] = `
-<View>
+exports[`ApprovalListScreen Tests rendering the approval list RenderApprovalItem renders an approval item 1`] = `
+<ApprovalCard
+  daysLeft={3}
+  dispatch={[MockFunction]}
+  dollarChange={150.5}
+  isChecked={false}
+  itemName="Nature Valley Crunchy Cereal Bars "
+  itemNbr={123}
+  newQuantity={20}
+  oldQuantity={5}
+  userId="Associate Employee"
+/>
+`;
+
+exports[`ApprovalListScreen Tests rendering the approval list RenderApprovalItem renders the category header 1`] = `
+<ApprovalCategorySeparator
+  categoryName="SNACKS"
+  categoryNbr={1}
+  dispatch={[MockFunction]}
+  isChecked={false}
+/>
+`;
+
+exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Reject buttons for selected approval items 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
   <FlatList
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.APPROVAL.LIST_NOT_FOUND" translation]
+        </Text>
+      </View>
+    }
     data={
       Array [
         Object {
           "categoryDescription": "SNACKS",
           "categoryHeader": true,
           "categoryNbr": 1,
+          "isChecked": false,
         },
         Object {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "SNACKS",
           "categoryNbr": 1,
+          "daysLeft": 3,
           "dollarChange": 150.5,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-27T00:00:00.000Z",
           "initiatedUserId": "Associate Employee",
+          "isChecked": false,
           "itemName": "Nature Valley Crunchy Cereal Bars ",
           "itemNbr": 123,
           "newQuantity": 20,
@@ -117,16 +313,19 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryHeader": true,
           "categoryNbr": 2,
+          "isChecked": false,
         },
         Object {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
+          "daysLeft": 2,
           "dollarChange": 50,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
           "initiatedUserId": "Associate Worker",
+          "isChecked": false,
           "itemName": "Red Apples",
           "itemNbr": 456,
           "newQuantity": 10,
@@ -140,10 +339,12 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
+          "daysLeft": 2,
           "dollarChange": 40,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
           "initiatedUserId": "Associate Worker",
+          "isChecked": false,
           "itemName": "Cabbage",
           "itemNbr": 457,
           "newQuantity": 15,
@@ -157,10 +358,12 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
+          "daysLeft": 2,
           "dollarChange": 80,
           "imageUrl": undefined,
           "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
           "initiatedUserId": "Associate Worker",
+          "isChecked": false,
           "itemName": "Strawberries",
           "itemNbr": 458,
           "newQuantity": 40,
@@ -172,6 +375,98 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
       ]
     }
     disableVirtualization={false}
+    extraData={
+      Array [
+        Object {
+          "categoryDescription": "SNACKS",
+          "categoryHeader": true,
+          "categoryNbr": 1,
+          "isChecked": false,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "SNACKS",
+          "categoryNbr": 1,
+          "daysLeft": 3,
+          "dollarChange": 150.5,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-27T00:00:00.000Z",
+          "initiatedUserId": "Associate Employee",
+          "isChecked": false,
+          "itemName": "Nature Valley Crunchy Cereal Bars ",
+          "itemNbr": 123,
+          "newQuantity": 20,
+          "oldQuantity": 5,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000123,
+        },
+        Object {
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryHeader": true,
+          "categoryNbr": 2,
+          "isChecked": false,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 50,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Red Apples",
+          "itemNbr": 456,
+          "newQuantity": 10,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000456,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 40,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Cabbage",
+          "itemNbr": 457,
+          "newQuantity": 15,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000457,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 80,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Strawberries",
+          "itemNbr": 458,
+          "newQuantity": 40,
+          "oldQuantity": 20,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000458,
+        },
+      ]
+    }
     horizontal={false}
     initialNumToRender={10}
     keyExtractor={[Function]}
@@ -187,331 +482,1047 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
         2,
       ]
     }
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.APPROVAL.REJECT\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.APPROVAL.APPROVE\\" translation]"
+  />
+</View>
+`;
+
+exports[`ApprovalListScreen Tests rendering the approval list Renders Empty Approval list on response status 204 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <FlatList
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.APPROVAL.LIST_NOT_FOUND" translation]
+        </Text>
+      </View>
+    }
+    data={Array []}
+    disableVirtualization={false}
+    extraData={Array []}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
 </View>
 `;
 
-exports[`ApprovalListScreen Tests rendering the approval list renderApprovalItem renders an approval item 1`] = `
+exports[`ApprovalListScreen Tests rendering the approval list Renders a list of Approval Items 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#ffffffff",
-      "flexDirection": "row",
-      "justifyContent": "flex-start",
-      "marginBottom": 4,
-      "padding": 8,
+      "flex": 1,
     }
   }
 >
-  <Image
-    source=""
-    style={
-      Object {
-        "height": 100,
-        "resizeMode": "stretch",
-        "width": 100,
-      }
-    }
-  />
-  <View
-    style={
-      Object {
-        "alignItems": "flex-start",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-  >
-    <Text
-      style={
-        Object {
-          "color": "#8492a8",
-          "fontSize": 14,
-          "fontWeight": "bold",
-        }
-      }
-    >
-      [missing "en.ITEM.ITEM" translation] 123
-    </Text>
-    <View
-      style={
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "width": "100%",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#424242",
-            "fontSize": 20,
-            "fontWeight": "bold",
-            "marginVertical": 8,
-            "width": "80%",
-          }
-        }
-      >
-        Nature Valley Crunchy Cereal Bars 
-      </Text>
+  <FlatList
+    ListEmptyComponent={
       <View
         style={
           Object {
+            "alignItems": "center",
+            "flex": 1,
             "justifyContent": "center",
-            "marginHorizontal": 20,
+            "paddingVertical": 28,
           }
         }
       >
-        <ForwardRef
-          color="#0071e9"
-          onPress={[Function]}
-          status="checked"
-          uncheckedColor="#0071e9"
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
         />
+        <Text>
+          [missing "en.APPROVAL.LIST_NOT_FOUND" translation]
+        </Text>
       </View>
-    </View>
-    <View
-      style={
+    }
+    data={
+      Array [
         Object {
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "marginBottom": 6,
-          "width": "40%",
-        }
-      }
-    >
-      <Text
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#8492a8",
-            "fontSize": 16,
-          }
-        }
-      >
-        Associate Employee
-      </Text>
-      <Text
-        style={
-          Object {
-            "color": "#616161",
-            "fontSize": 16,
-            "marginHorizontal": 4,
-          }
-        }
-      >
-        |
-      </Text>
-      <Text
-        style={
-          Object {
-            "color": "#B40C00",
-            "fontSize": 16,
-            "fontWeight": "bold",
-            "textAlign": "right",
-          }
-        }
-      >
-        [missing "en.APPROVAL.DAYS_LEFT" translation]
-      </Text>
-    </View>
-    <View
-      style={
+          "categoryDescription": "SNACKS",
+          "categoryHeader": true,
+          "categoryNbr": 1,
+          "isChecked": false,
+        },
         Object {
-          "borderTopColor": "#bdbdbd",
-          "borderTopWidth": 1,
-          "flexDirection": "column",
-          "width": "100%",
-        }
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "SNACKS",
+          "categoryNbr": 1,
+          "daysLeft": 3,
+          "dollarChange": 150.5,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-27T00:00:00.000Z",
+          "initiatedUserId": "Associate Employee",
+          "isChecked": false,
+          "itemName": "Nature Valley Crunchy Cereal Bars ",
+          "itemNbr": 123,
+          "newQuantity": 20,
+          "oldQuantity": 5,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000123,
+        },
+        Object {
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryHeader": true,
+          "categoryNbr": 2,
+          "isChecked": false,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 50,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Red Apples",
+          "itemNbr": 456,
+          "newQuantity": 10,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000456,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 40,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Cabbage",
+          "itemNbr": 457,
+          "newQuantity": 15,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000457,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 80,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Strawberries",
+          "itemNbr": 458,
+          "newQuantity": 40,
+          "oldQuantity": 20,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000458,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    extraData={
+      Array [
+        Object {
+          "categoryDescription": "SNACKS",
+          "categoryHeader": true,
+          "categoryNbr": 1,
+          "isChecked": false,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "SNACKS",
+          "categoryNbr": 1,
+          "daysLeft": 3,
+          "dollarChange": 150.5,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-27T00:00:00.000Z",
+          "initiatedUserId": "Associate Employee",
+          "isChecked": false,
+          "itemName": "Nature Valley Crunchy Cereal Bars ",
+          "itemNbr": 123,
+          "newQuantity": 20,
+          "oldQuantity": 5,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000123,
+        },
+        Object {
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryHeader": true,
+          "categoryNbr": 2,
+          "isChecked": false,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 50,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Red Apples",
+          "itemNbr": 456,
+          "newQuantity": 10,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000456,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 40,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Cabbage",
+          "itemNbr": 457,
+          "newQuantity": 15,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000457,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 80,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Strawberries",
+          "itemNbr": 458,
+          "newQuantity": 40,
+          "oldQuantity": 20,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000458,
+        },
+      ]
+    }
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={
+      Array [
+        0,
+        2,
+      ]
+    }
+    style={
+      Object {
+        "flex": 1,
       }
-    >
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "marginVertical": 6,
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#8492a8",
-              "flexDirection": "column",
-              "fontSize": 14,
-            }
-          }
-        >
-          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-            }
-          }
-        >
-          5
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "marginVertical": 6,
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#8492a8",
-              "flexDirection": "column",
-              "fontSize": 14,
-            }
-          }
-        >
-          [missing "en.APPROVAL.OH_CHANGE" translation]
-        </Text>
-        <View
-          style={
-            Object {
-              "flexDirection": "row",
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "alignSelf": "flex-start",
-                "color": "#33691E",
-                "fontSize": 16,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            <Icon
-              allowFontScaling={false}
-              name="arrow-up"
-              size={20}
-            />
-            $150.50
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#616161",
-                "fontSize": 16,
-                "marginHorizontal": 4,
-              }
-            }
-          >
-             | 
-          </Text>
-          <Text
-            style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "color": "#545F7A",
-                  "fontSize": 16,
-                },
-                Object {
-                  "alignSelf": "flex-start",
-                  "color": "#33691E",
-                  "fontSize": 16,
-                  "fontWeight": "bold",
-                },
-              ]
-            }
-          >
-            15
-          </Text>
-        </View>
-      </View>
-      <View
-        style={
-          Object {
-            "borderTopColor": "#eeeeee",
-            "borderTopWidth": 1,
-            "flexDirection": "row",
-            "justifyContent": "flex-end",
-            "width": "100%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "alignSelf": "center",
-              "color": "#545F7A",
-              "fontSize": 16,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          20
-        </Text>
-      </View>
-    </View>
-  </View>
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
 </View>
 `;
 
-exports[`ApprovalListScreen Tests rendering the approval list renderApprovalItem renders the category header 1`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "#ffffffff",
-      "elevation": 4,
-      "flex": 1,
-      "flexDirection": "row",
-      "justifyContent": "space-between",
-      "marginBottom": 4,
-      "paddingVertical": 20,
-    }
+exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up Renders only failed item numbers 1`] = `
+<Modal
+  animationType="none"
+  deviceHeight={null}
+  deviceWidth={null}
+  hardwareAccelerated={false}
+  hideModalContentWhileAnimating={false}
+  onBackdropPress={[Function]}
+  onModalHide={[Function]}
+  onModalWillHide={[Function]}
+  onModalWillShow={[Function]}
+  onRequestClose={[Function]}
+  panResponderThreshold={4}
+  scrollHorizontal={false}
+  scrollOffset={0}
+  scrollOffsetMax={0}
+  scrollTo={null}
+  statusBarTranslucent={false}
+  supportedOrientations={
+    Array [
+      "portrait",
+      "landscape",
+    ]
   }
+  swipeThreshold={100}
+  transparent={true}
+  visible={true}
 >
-  <Text
-    style={
-      Object {
-        "alignSelf": "center",
-        "color": "#616161",
-        "fontSize": 16,
-        "fontWeight": "bold",
-        "justifyContent": "flex-end",
-        "marginHorizontal": 20,
-      }
-    }
+  <TouchableWithoutFeedback
+    onPress={[Function]}
   >
-    1 - SNACKS
-  </Text>
-  <View
-    style={
-      Object {
-        "justifyContent": "center",
-        "marginHorizontal": 7,
+    <withAnimatable(View)
+      delay={0}
+      direction="normal"
+      iterationCount={1}
+      iterationDelay={0}
+      onAnimationBegin={[Function]}
+      onAnimationEnd={[Function]}
+      onTransitionBegin={[Function]}
+      onTransitionEnd={[Function]}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "black",
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Array [
+            Object {
+              "backgroundColor": "black",
+              "height": 1334,
+              "width": 750,
+            },
+          ],
+        ]
       }
-    }
-  >
-    <ForwardRef
-      color="#0071e9"
-      onPress={[Function]}
-      status="unchecked"
-      uncheckedColor="#0071e9"
+      useNativeDriver={false}
     />
-  </View>
-</View>
+  </TouchableWithoutFeedback>
+  <withAnimatable(View)
+    delay={0}
+    deviceHeight={null}
+    deviceWidth={null}
+    direction="normal"
+    hideModalContentWhileAnimating={false}
+    iterationCount={1}
+    iterationDelay={0}
+    onAnimationBegin={[Function]}
+    onAnimationEnd={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    onTransitionBegin={[Function]}
+    onTransitionEnd={[Function]}
+    panResponderThreshold={4}
+    pointerEvents="box-none"
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    statusBarTranslucent={false}
+    style={
+      Array [
+        Object {},
+        Array [
+          Object {
+            "margin": 37.5,
+            "transform": Array [
+              Object {
+                "translateY": 0,
+              },
+            ],
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          undefined,
+        ],
+      ]
+    }
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderRadius": 5,
+          "justifyContent": "space-between",
+          "paddingVertical": 15,
+          "width": "80%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.APPROVAL.FAILED_APPROVE" translation]
+      </Text>
+      <FlatList
+        data={
+          Array [
+            Object {
+              "id": 4785,
+              "itemNbr": 125,
+              "message": "failure",
+              "statusCode": 500,
+            },
+          ]
+        }
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        style={
+          Object {
+            "minHeight": 80,
+            "paddingVertical": 20,
+          }
+        }
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </withAnimatable(View)>
+</Modal>
+`;
+
+exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up renders "##/## Failed Items" for more than 5 failed items  1`] = `
+<Modal
+  animationType="none"
+  deviceHeight={null}
+  deviceWidth={null}
+  hardwareAccelerated={false}
+  hideModalContentWhileAnimating={false}
+  onBackdropPress={[Function]}
+  onModalHide={[Function]}
+  onModalWillHide={[Function]}
+  onModalWillShow={[Function]}
+  onRequestClose={[Function]}
+  panResponderThreshold={4}
+  scrollHorizontal={false}
+  scrollOffset={0}
+  scrollOffsetMax={0}
+  scrollTo={null}
+  statusBarTranslucent={false}
+  supportedOrientations={
+    Array [
+      "portrait",
+      "landscape",
+    ]
+  }
+  swipeThreshold={100}
+  transparent={true}
+  visible={true}
+>
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <withAnimatable(View)
+      delay={0}
+      direction="normal"
+      iterationCount={1}
+      iterationDelay={0}
+      onAnimationBegin={[Function]}
+      onAnimationEnd={[Function]}
+      onTransitionBegin={[Function]}
+      onTransitionEnd={[Function]}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "black",
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Array [
+            Object {
+              "backgroundColor": "black",
+              "height": 1334,
+              "width": 750,
+            },
+          ],
+        ]
+      }
+      useNativeDriver={false}
+    />
+  </TouchableWithoutFeedback>
+  <withAnimatable(View)
+    delay={0}
+    deviceHeight={null}
+    deviceWidth={null}
+    direction="normal"
+    hideModalContentWhileAnimating={false}
+    iterationCount={1}
+    iterationDelay={0}
+    onAnimationBegin={[Function]}
+    onAnimationEnd={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    onTransitionBegin={[Function]}
+    onTransitionEnd={[Function]}
+    panResponderThreshold={4}
+    pointerEvents="box-none"
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    statusBarTranslucent={false}
+    style={
+      Array [
+        Object {},
+        Array [
+          Object {
+            "margin": 37.5,
+            "transform": Array [
+              Object {
+                "translateY": 0,
+              },
+            ],
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          undefined,
+        ],
+      ]
+    }
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderRadius": 5,
+          "justifyContent": "space-between",
+          "paddingVertical": 15,
+          "width": "80%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.APPROVAL.FAILED_APPROVE" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "paddingVertical": 20,
+          }
+        }
+      >
+        6 / 6 [missing "en.APPROVAL.FAILED_ITEMS" translation]
+      </Text>
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </withAnimatable(View)>
+</Modal>
+`;
+
+exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up renders 0 failed items for a mix of success and skipped items 1`] = `
+<Modal
+  animationType="none"
+  deviceHeight={null}
+  deviceWidth={null}
+  hardwareAccelerated={false}
+  hideModalContentWhileAnimating={false}
+  onBackdropPress={[Function]}
+  onModalHide={[Function]}
+  onModalWillHide={[Function]}
+  onModalWillShow={[Function]}
+  onRequestClose={[Function]}
+  panResponderThreshold={4}
+  scrollHorizontal={false}
+  scrollOffset={0}
+  scrollOffsetMax={0}
+  scrollTo={null}
+  statusBarTranslucent={false}
+  supportedOrientations={
+    Array [
+      "portrait",
+      "landscape",
+    ]
+  }
+  swipeThreshold={100}
+  transparent={true}
+  visible={true}
+>
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <withAnimatable(View)
+      delay={0}
+      direction="normal"
+      iterationCount={1}
+      iterationDelay={0}
+      onAnimationBegin={[Function]}
+      onAnimationEnd={[Function]}
+      onTransitionBegin={[Function]}
+      onTransitionEnd={[Function]}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "black",
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Array [
+            Object {
+              "backgroundColor": "black",
+              "height": 1334,
+              "width": 750,
+            },
+          ],
+        ]
+      }
+      useNativeDriver={false}
+    />
+  </TouchableWithoutFeedback>
+  <withAnimatable(View)
+    delay={0}
+    deviceHeight={null}
+    deviceWidth={null}
+    direction="normal"
+    hideModalContentWhileAnimating={false}
+    iterationCount={1}
+    iterationDelay={0}
+    onAnimationBegin={[Function]}
+    onAnimationEnd={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    onTransitionBegin={[Function]}
+    onTransitionEnd={[Function]}
+    panResponderThreshold={4}
+    pointerEvents="box-none"
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    statusBarTranslucent={false}
+    style={
+      Array [
+        Object {},
+        Array [
+          Object {
+            "margin": 37.5,
+            "transform": Array [
+              Object {
+                "translateY": 0,
+              },
+            ],
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          undefined,
+        ],
+      ]
+    }
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderRadius": 5,
+          "justifyContent": "space-between",
+          "paddingVertical": 15,
+          "width": "80%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.APPROVAL.FAILED_APPROVE" translation]
+      </Text>
+      <FlatList
+        data={Array []}
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        style={
+          Object {
+            "minHeight": 80,
+            "paddingVertical": 20,
+          }
+        }
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </withAnimatable(View)>
+</Modal>
+`;
+
+exports[`ApprovalListScreen Tests rendering update approval api 207 responses Pop up renders only failed item numbers for mix of success and failed items  1`] = `
+<Modal
+  animationType="none"
+  deviceHeight={null}
+  deviceWidth={null}
+  hardwareAccelerated={false}
+  hideModalContentWhileAnimating={false}
+  onBackdropPress={[Function]}
+  onModalHide={[Function]}
+  onModalWillHide={[Function]}
+  onModalWillShow={[Function]}
+  onRequestClose={[Function]}
+  panResponderThreshold={4}
+  scrollHorizontal={false}
+  scrollOffset={0}
+  scrollOffsetMax={0}
+  scrollTo={null}
+  statusBarTranslucent={false}
+  supportedOrientations={
+    Array [
+      "portrait",
+      "landscape",
+    ]
+  }
+  swipeThreshold={100}
+  transparent={true}
+  visible={true}
+>
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <withAnimatable(View)
+      delay={0}
+      direction="normal"
+      iterationCount={1}
+      iterationDelay={0}
+      onAnimationBegin={[Function]}
+      onAnimationEnd={[Function]}
+      onTransitionBegin={[Function]}
+      onTransitionEnd={[Function]}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "black",
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Array [
+            Object {
+              "backgroundColor": "black",
+              "height": 1334,
+              "width": 750,
+            },
+          ],
+        ]
+      }
+      useNativeDriver={false}
+    />
+  </TouchableWithoutFeedback>
+  <withAnimatable(View)
+    delay={0}
+    deviceHeight={null}
+    deviceWidth={null}
+    direction="normal"
+    hideModalContentWhileAnimating={false}
+    iterationCount={1}
+    iterationDelay={0}
+    onAnimationBegin={[Function]}
+    onAnimationEnd={[Function]}
+    onBackdropPress={[Function]}
+    onModalHide={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    onTransitionBegin={[Function]}
+    onTransitionEnd={[Function]}
+    panResponderThreshold={4}
+    pointerEvents="box-none"
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    statusBarTranslucent={false}
+    style={
+      Array [
+        Object {},
+        Array [
+          Object {
+            "margin": 37.5,
+            "transform": Array [
+              Object {
+                "translateY": 0,
+              },
+            ],
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          undefined,
+        ],
+      ]
+    }
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderRadius": 5,
+          "justifyContent": "space-between",
+          "paddingVertical": 15,
+          "width": "80%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.APPROVAL.FAILED_APPROVE" translation]
+      </Text>
+      <FlatList
+        data={
+          Array [
+            Object {
+              "id": 4785,
+              "itemNbr": 125,
+              "message": "failure",
+              "statusCode": 500,
+            },
+          ]
+        }
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        style={
+          Object {
+            "minHeight": 80,
+            "paddingVertical": 20,
+          }
+        }
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </withAnimatable(View)>
+</Modal>
 `;

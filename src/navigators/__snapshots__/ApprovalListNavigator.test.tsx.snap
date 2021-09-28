@@ -8,6 +8,7 @@ exports[`ApprovalList Navigator Renders \`items\` translation for an approval li
         "color": "#ffffffff",
         "fontSize": 20,
         "fontWeight": "bold",
+        "marginLeft": -2,
       }
     }
   >
@@ -18,10 +19,11 @@ exports[`ApprovalList Navigator Renders \`items\` translation for an approval li
       Object {
         "color": "#ffffffff",
         "fontSize": 14,
+        "marginLeft": -2,
       }
     }
   >
-     5 [missing "en.WORKLIST.ITEMS" translation]
+    5 [missing "en.GENERICS.ITEMS" translation]
   </Text>
 </View>
 `;
@@ -34,6 +36,7 @@ exports[`ApprovalList Navigator Renders single \`item\` translation for an appro
         "color": "#ffffffff",
         "fontSize": 20,
         "fontWeight": "bold",
+        "marginLeft": -2,
       }
     }
   >
@@ -44,12 +47,28 @@ exports[`ApprovalList Navigator Renders single \`item\` translation for an appro
       Object {
         "color": "#ffffffff",
         "fontSize": 14,
+        "marginLeft": -2,
       }
     }
   >
-     1 [missing "en.WORKLIST.ITEM" translation]
+    1 [missing "en.GENERICS.ITEM" translation]
   </Text>
 </View>
+`;
+
+exports[`ApprovalList Navigator Renders the SelectedItemQty component  1`] = `
+<Text
+  style={
+    Object {
+      "color": "#ffffffff",
+      "fontSize": 20,
+      "fontWeight": "bold",
+      "marginLeft": -2,
+    }
+  }
+>
+  4 [missing "en.APPROVAL.SELECTED" translation]
+</Text>
 `;
 
 exports[`ApprovalList Navigator Renders the approval list navigator component 1`] = `
@@ -69,15 +88,111 @@ exports[`ApprovalList Navigator Renders the approval list navigator component 1`
     name="Approval"
     options={
       Object {
+        "headerLeft": undefined,
+        "headerLeftContainerStyle": Object {
+          "paddingLeft": 10,
+        },
         "headerRight": [Function],
         "headerRightContainerStyle": Object {
-          "paddingRight": 10,
+          "paddingRight": 16,
         },
         "headerTitle": [Function],
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="ApproveSummary"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.APPROVAL.REVIEW\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="RejectSummary"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.APPROVAL.REVIEW\\" translation]",
+      }
+    }
+  />
 </StackNavigator>
+`;
+
+exports[`ApprovalList Navigator Renders the closeButton component  1`] = `
+<GenericTouchable
+  activeOpacity={0.2}
+  delayLongPress={600}
+  extraButtonProps={
+    Object {
+      "rippleColor": "transparent",
+    }
+  }
+  onPress={[Function]}
+  onStateChange={[Function]}
+  style={
+    Array [
+      Object {},
+      Object {
+        "opacity": 1,
+      },
+    ]
+  }
+>
+  <mockConstructor
+    color="#ffffffff"
+    name="close"
+    size={22}
+  />
+</GenericTouchable>
+`;
+
+exports[`ApprovalList Navigator Renders the deselect all button header 1`] = `
+<GenericTouchable
+  activeOpacity={0.2}
+  delayLongPress={600}
+  extraButtonProps={
+    Object {
+      "rippleColor": "transparent",
+    }
+  }
+  onPress={[Function]}
+  onStateChange={[Function]}
+  style={
+    Array [
+      Object {},
+      Object {
+        "opacity": 1,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ffffffff",
+          "fontSize": 16,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.APPROVAL.DESELECT_ALL" translation]
+    </Text>
+  </View>
+</GenericTouchable>
 `;
 
 exports[`ApprovalList Navigator Renders the select all button header 1`] = `
@@ -89,6 +204,7 @@ exports[`ApprovalList Navigator Renders the select all button header 1`] = `
       "rippleColor": "transparent",
     }
   }
+  onPress={[Function]}
   onStateChange={[Function]}
   style={
     Array [

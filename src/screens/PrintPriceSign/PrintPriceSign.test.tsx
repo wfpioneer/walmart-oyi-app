@@ -9,6 +9,10 @@ import {
 } from '../../models/Printer';
 import { strings } from '../../locales';
 
+// Something gets into a weird state, and this seems to fix it
+jest.useFakeTimers();
+jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
+jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
 describe('PrintPriceSignScreen', () => {
@@ -60,12 +64,8 @@ describe('PrintPriceSignScreen', () => {
           setSignQty={jest.fn()}
           isValidQty={true}
           setIsValidQty={jest.fn()}
-          apiInProgress={false}
-          setAPIInProgress={jest.fn()}
           error={defaultError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           useEffectHook={jest.fn()}
           useLayoutHook={jest.fn()}
         />
@@ -96,12 +96,8 @@ describe('PrintPriceSignScreen', () => {
           setSignQty={jest.fn()}
           isValidQty={true}
           setIsValidQty={jest.fn()}
-          apiInProgress={false}
-          setAPIInProgress={jest.fn()}
           error={printingError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           useEffectHook={jest.fn()}
           useLayoutHook={jest.fn()}
         />
@@ -130,12 +126,8 @@ describe('PrintPriceSignScreen', () => {
           setSignQty={jest.fn()}
           isValidQty={invalidQty}
           setIsValidQty={jest.fn()}
-          apiInProgress={false}
-          setAPIInProgress={jest.fn()}
           error={defaultError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           useEffectHook={jest.fn()}
           useLayoutHook={jest.fn()}
         />

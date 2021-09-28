@@ -1,10 +1,11 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, {
+  EffectCallback, useEffect, useLayoutEffect, useState
+} from 'react';
 import {
-  ActivityIndicator, Image, SafeAreaView, ScrollView, Text, TextInput, View
+  ActivityIndicator, SafeAreaView, ScrollView, Text, TextInput, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
-import moment from 'moment';
 import {
   NavigationProp, Route, useNavigation, useRoute
 } from '@react-navigation/native';
@@ -26,6 +27,8 @@ import {
 import { printSign } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { AsyncState } from '../../models/AsyncState';
+import { PRINT_SIGN } from '../../state/actions/asyncAPI';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -35,18 +38,18 @@ const ERROR_FORMATTING_OPTIONS = {
   max: numbers(QTY_MAX, { precision: 0 })
 };
 
-export const validateQty = (qty: number) => QTY_MIN <= qty && qty <= QTY_MAX;
+export const validateQty = (qty: number): boolean => QTY_MIN <= qty && qty <= QTY_MAX;
 
 const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
   <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
 );
 
 export const renderSignSizeButtons = (
-  selectedPrinter: Printer, catgNbr: number, signType: string, dispatch: Function
-) => {
+  selectedPrinter: Printer, catgNbr: number, signType: string, dispatch: Dispatch<any>
+): JSX.Element => {
   const sizeObject = selectedPrinter.type === PrinterType.LASER ? LaserPaper : PortablePaper;
   return (
-    <View style={{ flexDirection: 'row', marginVertical: 4 }}>
+    <View style={styles.sizeBtnContainer}>
       {Object.keys(sizeObject).map((key: string) => {
         // Only show the wine button if the item's category is appropriate
         if (key !== 'Wine' || (key === 'Wine' && catgNbr === wineCatgNbr)) {
@@ -62,7 +65,7 @@ export const renderSignSizeButtons = (
               radius={20}
               height={25}
               width={56}
-              style={{ marginHorizontal: 6 }}
+              style={styles.sizeBtnMargin}
               onPress={() => dispatch(setSignType(key))}
             />
           );
@@ -74,82 +77,31 @@ export const renderSignSizeButtons = (
   );
 };
 
-const PrintPriceSign = () => {
-  const { scannedEvent } = useTypedSelector(state => state.Global);
-  const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
-  const { result } = useTypedSelector(state => state.async.getItemDetails);
-  const printAPI = useTypedSelector(state => state.async.printSign);
-  const { selectedPrinter, selectedSignType, printQueue } = useTypedSelector(state => state.Print);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const route = useRoute();
-  const [signQty, setSignQty] = useState(1);
-  const [isValidQty, setIsValidQty] = useState(true);
-  const [apiInProgress, setAPIInProgress] = useState(false);
-  const [error, setError] = useState({ error: false, message: '' });
-  const [apiStart, setApiStart] = useState(0);
-
-  return (
-    <PrintPriceSignScreen
-      scannedEvent={scannedEvent}
-      exceptionType={exceptionType}
-      actionCompleted={actionCompleted}
-      result={result}
-      printAPI={printAPI}
-      selectedPrinter={selectedPrinter}
-      selectedSignType={selectedSignType}
-      printQueue={printQueue}
-      dispatch={dispatch}
-      navigation={navigation}
-      route={route}
-      signQty={signQty}
-      setSignQty={setSignQty}
-      isValidQty={isValidQty}
-      setIsValidQty={setIsValidQty}
-      apiInProgress={apiInProgress}
-      setAPIInProgress={setAPIInProgress}
-      error={error}
-      setError={setError}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      useEffectHook={useEffect}
-      useLayoutHook={useLayoutEffect}
-    />
-  );
-};
 interface PriceSignProps {
   scannedEvent: {value: any; type: any };
   exceptionType: string;
   actionCompleted: boolean;
   result: any;
-  printAPI: {
-    isWaiting: boolean;
-    value: any;
-    error: any;
-    result: any;
-  };
+  printAPI: AsyncState
   selectedPrinter: Printer;
   selectedSignType: LaserPaper | PortablePaper;
   printQueue: PrintQueueItem[];
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: Route<any>;
-  signQty: number; setSignQty: Function;
-  isValidQty: boolean; setIsValidQty: Function;
-  apiInProgress: boolean; setAPIInProgress: Function;
+  signQty: number; setSignQty: React.Dispatch<React.SetStateAction<number>>;
+  isValidQty: boolean; setIsValidQty: React.Dispatch<React.SetStateAction<boolean>>;
   error: { error: boolean; message: string };
-  setError: Function;
-  apiStart: number; setApiStart: Function;
-  useEffectHook: Function;
-  useLayoutHook: Function;
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string }>>;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useLayoutHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
-export const PrintPriceSignScreen = (props: PriceSignProps) => {
+export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
     scannedEvent, exceptionType, actionCompleted, result,
     printAPI, selectedPrinter, selectedSignType, printQueue,
     dispatch, navigation, route, signQty, setSignQty, isValidQty,
-    setIsValidQty, apiInProgress, setAPIInProgress, error,
-    setError, apiStart, setApiStart, useEffectHook, useLayoutHook
+    setIsValidQty, error, setError, useEffectHook, useLayoutHook
   } = props;
   const {
     itemName, itemNbr, upcNbr, categoryNbr
@@ -168,33 +120,32 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
       dispatch(addToPrinterList(initialPrinter));
     }
   }, []);
+
+  // Navigation Listener
+  useEffectHook(() => {
+    // Resets Print api response data when navigating off-screen
+    navigation.addListener('beforeRemove', () => {
+      dispatch({ type: PRINT_SIGN.RESET });
+    });
+  }, []);
+
   // Print API
   useEffectHook(() => {
     // on api success
-    if (apiInProgress && printAPI.isWaiting === false && printAPI.result) {
-      trackEvent('print_api_success', { duration: moment().valueOf() - apiStart });
+    if (!printAPI.isWaiting && printAPI.result) {
       if (!actionCompleted && exceptionType === 'PO') dispatch(setActionCompleted());
-      setAPIInProgress(false);
       navigation.goBack();
-      return undefined;
     }
 
     // on api failure
-    if (apiInProgress && printAPI.isWaiting === false && printAPI.error) {
-      trackEvent('print_api_failure', {
-        errorDetails: printAPI.error.message || JSON.stringify(printAPI.error), duration: moment().valueOf() - apiStart
-      });
-      setAPIInProgress(false);
-      return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+    if (!printAPI.isWaiting && printAPI.error) {
+      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
 
     // on api submission
-    if (!apiInProgress && printAPI.isWaiting) {
+    if (printAPI.isWaiting) {
       setError({ error: false, message: '' });
-      return setAPIInProgress(true);
     }
-
-    return undefined;
   }, [printAPI]);
 
   const handleTextChange = (text: string) => {
@@ -225,6 +176,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
 
   const handleChangePrinter = () => {
     validateSession(navigation, route.name).then(() => {
+      trackEvent('print_change_printer_click');
       navigation.navigate('PrinterList');
     }).catch(() => {});
   };
@@ -274,8 +226,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
           workListTypeCode: exceptionType
         }
       ];
-      setApiStart(moment().valueOf());
-      trackEvent('print_price_sign', JSON.stringify(printlist));
+      trackEvent('print_price_sign', { printItem: JSON.stringify(printlist) });
       dispatch(printSign({ printlist }));
     }).catch(() => {});
   };
@@ -284,7 +235,6 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.itemDetailsContainer}>
-          <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.itemImage} />
           <Text style={styles.itemNameTxt}>{itemName}</Text>
         </View>
         <View style={styles.copyQtyContainer}>
@@ -327,11 +277,11 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
           {renderSignSizeButtons(selectedPrinter, categoryNbr, selectedSignType, dispatch)}
         </View>
         <View style={styles.printerContainer}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.printerNameContainer}>
             <MaterialCommunityIcon name="printer-check" size={24} />
-            <View style={{ marginLeft: 12 }}>
+            <View style={styles.printTextMargin}>
               <Text>{selectedPrinter.name}</Text>
-              <Text style={{ fontSize: 12, color: COLOR.GREY_600 }}>{selectedPrinter.desc}</Text>
+              <Text style={styles.printerDesc}>{selectedPrinter.desc}</Text>
             </View>
           </View>
           <Button
@@ -385,4 +335,41 @@ export const PrintPriceSignScreen = (props: PriceSignProps) => {
   );
 };
 
+const PrintPriceSign = (): JSX.Element => {
+  const { scannedEvent } = useTypedSelector(state => state.Global);
+  const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
+  const { result } = useTypedSelector(state => state.async.getItemDetails);
+  const printAPI = useTypedSelector(state => state.async.printSign);
+  const { selectedPrinter, selectedSignType, printQueue } = useTypedSelector(state => state.Print);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const route = useRoute();
+  const [signQty, setSignQty] = useState(1);
+  const [isValidQty, setIsValidQty] = useState(true);
+  const [error, setError] = useState({ error: false, message: '' });
+
+  return (
+    <PrintPriceSignScreen
+      scannedEvent={scannedEvent}
+      exceptionType={exceptionType}
+      actionCompleted={actionCompleted}
+      result={result}
+      printAPI={printAPI}
+      selectedPrinter={selectedPrinter}
+      selectedSignType={selectedSignType}
+      printQueue={printQueue}
+      dispatch={dispatch}
+      navigation={navigation}
+      route={route}
+      signQty={signQty}
+      setSignQty={setSignQty}
+      isValidQty={isValidQty}
+      setIsValidQty={setIsValidQty}
+      error={error}
+      setError={setError}
+      useEffectHook={useEffect}
+      useLayoutHook={useLayoutEffect}
+    />
+  );
+};
 export default PrintPriceSign;

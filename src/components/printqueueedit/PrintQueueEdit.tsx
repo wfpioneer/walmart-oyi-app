@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Image, Text, TextInput, View
+  Text, TextInput, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -11,6 +11,7 @@ import Button from '../buttons/Button';
 import { numbers, strings } from '../../locales';
 import styles from './PrintQueueEdit.style';
 import { setPrintQueue } from '../../state/actions/Print';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const QTY_MIN = 1;
 const QTY_MAX = 100;
@@ -61,6 +62,7 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
   };
 
   const handleSave = () => {
+    trackEvent('print_queue_edit_save', { printItem: JSON.stringify(itemToEdit), newSignQty: signQty });
     printQueue.splice(props.itemIndexToEdit, 1, { ...itemToEdit, signQty });
     dispatch(setPrintQueue(printQueue));
     props.setItemIndexToEdit(-1);
@@ -77,7 +79,6 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
           />
         </View>
         <View style={styles.itemDetailsContainer}>
-          <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.itemImage} />
           <Text style={styles.itemNameTxt}>{itemToEdit.itemName}</Text>
         </View>
         <View style={styles.copyQtyContainer}>
@@ -120,18 +121,18 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
           <Text>{`${strings(`PRINT.${itemToEdit.paperSize}`)}`}</Text>
         </View>
         <View style={styles.printerContainer}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.printerAlignment}>
             <MaterialCommunityIcon name="printer-check" size={24} />
-            <View style={{ marginLeft: 12 }}>
+            <View style={styles.printerTextMargin}>
               <Text>{strings('PRINT.FRONT_DESK')}</Text>
-              <Text style={{ fontSize: 12, color: COLOR.GREY_600 }}>{strings('GENERICS.DEFAULT')}</Text>
+              <Text style={styles.genericTextLabel}>{strings('GENERICS.DEFAULT')}</Text>
             </View>
           </View>
         </View>
         <Button
           title={strings('GENERICS.SAVE')}
           type={Button.Type.PRIMARY}
-          style={{ width: '100%' }}
+          style={styles.buttonWidth}
           onPress={handleSave}
           disabled={!isValidQty}
         />

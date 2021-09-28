@@ -1,14 +1,20 @@
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
+import { ScrollView } from 'react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import itemDetail from '../../mockData/getItemDetails';
 import {
-  HandleProps, RenderProps, ReviewItemDetailsScreen, renderAddPicklistButton,
+  HandleProps,
+  RenderProps, ReviewItemDetailsScreen, renderAddPicklistButton, renderBarcodeErrorModal,
   renderLocationComponent, renderOHQtyComponent, renderScanForNoActionButton
 } from './ReviewItemDetails';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 
+let navigationProp: NavigationProp<any>;
+let routeProp: RouteProp<any, string>;
+let scrollViewProp: React.RefObject<ScrollView>;
 describe('ReviewItemDetailsScreen', () => {
   const defaultAsyncState = {
     isWaiting: false,
@@ -19,8 +25,8 @@ describe('ReviewItemDetailsScreen', () => {
   const mockHandleProps: (HandleProps & RenderProps) = {
     validateSessionCall: jest.fn(() => Promise.resolve()),
     trackEventCall: jest.fn(),
-    navigation: jest.fn(),
-    route: jest.fn(),
+    navigation: navigationProp,
+    route: routeProp,
     dispatch: jest.fn(),
     setOhQtyModalVisible: jest.fn(),
     actionCompleted: false,
@@ -29,7 +35,7 @@ describe('ReviewItemDetailsScreen', () => {
     completeItemApi: defaultAsyncState
   };
   describe('Tests renders ItemDetails API Responses', () => {
-    it('renders the details for a single item', () => {
+    it('renders the details for a single item with non-null status', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ReviewItemDetailsScreen
@@ -46,27 +52,151 @@ describe('ReviewItemDetailsScreen', () => {
           userId=""
           exceptionType="NSFL"
           actionCompleted={false}
-          pendingOnHandsQty={10}
+          pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
           floorLocations={itemDetail[123].location.floor}
           reserveLocations={itemDetail[123].location.reserve}
-          route={jest.fn()}
+          route={routeProp}
           dispatch={jest.fn()}
-          navigation={jest.fn()}
-          scrollViewRef={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
           isSalesMetricsGraphView={false}
           setIsSalesMetricsGraphView={jest.fn()}
           ohQtyModalVisible={false}
           setOhQtyModalVisible={jest.fn()}
-          completeApiInProgress={false}
-          setCompleteApiInProgress={jest.fn()}
-          isRefreshing={false}
-          setIsRefreshing={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          userFeatures={[]}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('renders the details for a single item with null status', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReviewItemDetailsScreen
+          scannedEvent={undefined}
+          isManualScanEnabled={false}
+          isWaiting={false}
+          error={undefined}
+          result={{
+            data: {
+              ...itemDetail[123],
+              status: undefined
+            },
+            status: 200
+          }}
+          addToPicklistStatus={defaultAsyncState}
+          completeItemApi={defaultAsyncState}
+          userId=""
+          exceptionType="NSFL"
+          actionCompleted={false}
+          pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
+          floorLocations={itemDetail[123].location.floor}
+          reserveLocations={itemDetail[123].location.reserve}
+          route={routeProp}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
+          isSalesMetricsGraphView={false}
+          setIsSalesMetricsGraphView={jest.fn()}
+          ohQtyModalVisible={false}
+          setOhQtyModalVisible={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn(() => Promise.resolve())}
+          useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          userFeatures={[]}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('renders the On Hands Cloud Qty of 42', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      // Mock Item Number 456 has cloud Qty defined
+      renderer.render(
+        <ReviewItemDetailsScreen
+          scannedEvent={undefined}
+          isManualScanEnabled={false}
+          isWaiting={false}
+          error={undefined}
+          result={{
+            data: {
+              ...itemDetail[456],
+              status: undefined
+            },
+            status: 200
+          }}
+          addToPicklistStatus={defaultAsyncState}
+          completeItemApi={defaultAsyncState}
+          userId=""
+          exceptionType="NSFL"
+          actionCompleted={false}
+          pendingOnHandsQty={itemDetail[456].pendingOnHandsQty}
+          floorLocations={itemDetail[456].location.floor}
+          reserveLocations={itemDetail[456].location.reserve}
+          route={routeProp}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
+          isSalesMetricsGraphView={false}
+          setIsSalesMetricsGraphView={jest.fn()}
+          ohQtyModalVisible={false}
+          setOhQtyModalVisible={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn(() => Promise.resolve())}
+          useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          userFeatures={['']}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('renders "Generic Change translation" if pendingOH is -999 and user has OH role', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReviewItemDetailsScreen
+          scannedEvent={undefined}
+          isManualScanEnabled={false}
+          isWaiting={false}
+          error={undefined}
+          result={{
+            data: {
+              ...itemDetail[123],
+              status: undefined
+            },
+            status: 200
+          }}
+          addToPicklistStatus={defaultAsyncState}
+          completeItemApi={defaultAsyncState}
+          userId=""
+          exceptionType="NSFL"
+          actionCompleted={false}
+          pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
+          floorLocations={itemDetail[123].location.floor}
+          reserveLocations={itemDetail[123].location.reserve}
+          route={routeProp}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
+          isSalesMetricsGraphView={false}
+          setIsSalesMetricsGraphView={jest.fn()}
+          ohQtyModalVisible={false}
+          setOhQtyModalVisible={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn(() => Promise.resolve())}
+          useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          userFeatures={['on hands change']}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -88,24 +218,21 @@ describe('ReviewItemDetailsScreen', () => {
           pendingOnHandsQty={0}
           floorLocations={[]}
           reserveLocations={[]}
-          route={jest.fn()}
+          route={routeProp}
           dispatch={jest.fn()}
-          navigation={jest.fn()}
-          scrollViewRef={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
           isSalesMetricsGraphView={false}
           setIsSalesMetricsGraphView={jest.fn()}
           ohQtyModalVisible={false}
           setOhQtyModalVisible={jest.fn()}
-          completeApiInProgress={false}
-          setCompleteApiInProgress={jest.fn()}
-          isRefreshing={false}
-          setIsRefreshing={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          userFeatures={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -131,24 +258,21 @@ describe('ReviewItemDetailsScreen', () => {
           pendingOnHandsQty={0}
           floorLocations={[]}
           reserveLocations={[]}
-          route={jest.fn()}
+          route={routeProp}
           dispatch={jest.fn()}
-          navigation={jest.fn()}
-          scrollViewRef={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
           isSalesMetricsGraphView={false}
           setIsSalesMetricsGraphView={jest.fn()}
           ohQtyModalVisible={false}
           setOhQtyModalVisible={jest.fn()}
-          completeApiInProgress={false}
-          setCompleteApiInProgress={jest.fn()}
-          isRefreshing={false}
-          setIsRefreshing={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          userFeatures={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -170,24 +294,21 @@ describe('ReviewItemDetailsScreen', () => {
           pendingOnHandsQty={0}
           floorLocations={[]}
           reserveLocations={[]}
-          route={jest.fn()}
+          route={routeProp}
           dispatch={jest.fn()}
-          navigation={jest.fn()}
-          scrollViewRef={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
           isSalesMetricsGraphView={false}
           setIsSalesMetricsGraphView={jest.fn()}
           ohQtyModalVisible={false}
           setOhQtyModalVisible={jest.fn()}
-          completeApiInProgress={false}
-          setCompleteApiInProgress={jest.fn()}
-          isRefreshing={false}
-          setIsRefreshing={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          userFeatures={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -201,7 +322,7 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('Renders Activoty Indicator waiting for No Action Response', () => {
+    it('Renders Activity Indicator waiting for No Action Response', () => {
       const renderer = ShallowRenderer.createRenderer();
       const noActionWaiting = {
         isWaiting: true,
@@ -237,7 +358,7 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const pendingOHQty = -999;
       renderer.render(
-        renderOHQtyComponent(negOnHandsQty, pendingOHQty)
+        renderOHQtyComponent({ ...itemDetail[123], onHandsQty: negOnHandsQty, pendingOnHandsQty: pendingOHQty })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -246,16 +367,16 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const pendingOHQty = 40;
       renderer.render(
-        renderOHQtyComponent(negOnHandsQty, pendingOHQty)
+        renderOHQtyComponent({ ...itemDetail[123], onHandsQty: negOnHandsQty, pendingOnHandsQty: pendingOHQty })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('renders Postive On Hands Quantity \'No Pending Mgr Approval\'', () => {
+    it('renders Positive On Hands Quantity \'No Pending Mgr Approval\'', () => {
       const renderer = ShallowRenderer.createRenderer();
 
       const pendingOHQty = -999;
       renderer.render(
-        renderOHQtyComponent(posOnHandsQty, pendingOHQty)
+        renderOHQtyComponent({ ...itemDetail[123], onHandsQty: posOnHandsQty, pendingOnHandsQty: pendingOHQty })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -380,6 +501,23 @@ describe('ReviewItemDetailsScreen', () => {
         renderAddPicklistButton({
           ...mockHandleProps
         }, noReserveItemDetails)
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  // TODO Keep temporary tests until we refactor Modal.tsx for global usage in app
+  describe('Tests Rendering Scanned Barcode Error', () => {
+    it('Renders the barcodeErrorModal isVisible set to True', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderBarcodeErrorModal(true, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders the barcodeErrorModal isVisible set to False', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderBarcodeErrorModal(false, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

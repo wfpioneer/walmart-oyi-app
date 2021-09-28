@@ -10,7 +10,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
       }
     }
   >
-    <Component
+    <Modal
       hardwareAccelerated={false}
       onRequestClose={[Function]}
       transparent={true}
@@ -20,7 +20,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </Component>
+    </Modal>
     <View
       style={
         Object {
@@ -33,7 +33,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -41,7 +41,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <RadioButton.Group
       onValueChange={[Function]}
@@ -56,7 +56,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="checked"
           value="8"
@@ -69,7 +69,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -79,7 +79,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -91,7 +91,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="12"
@@ -104,7 +104,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -114,7 +114,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -126,7 +126,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="13"
@@ -139,7 +139,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -149,7 +149,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.POD" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -161,7 +161,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="11"
@@ -174,7 +174,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -184,7 +184,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
     </RadioButton.Group>
@@ -200,7 +200,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -208,7 +208,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -221,7 +221,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
@@ -231,7 +231,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -278,7 +278,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         name="alert"
         size={40}
       />
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "color": "#ec0439",
@@ -287,7 +287,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         [missing "en.LOCATION.ADD_LOCATION_API_ERROR" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
   </View>
   <View
@@ -327,7 +327,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
       }
     }
   >
-    <Component
+    <Modal
       hardwareAccelerated={false}
       onRequestClose={[Function]}
       transparent={true}
@@ -337,7 +337,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </Component>
+    </Modal>
     <View
       style={
         Object {
@@ -350,7 +350,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -358,7 +358,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <RadioButton.Group
       onValueChange={[Function]}
@@ -373,7 +373,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="checked"
           value="8"
@@ -386,7 +386,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -396,7 +396,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -408,7 +408,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="12"
@@ -421,7 +421,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -431,7 +431,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -443,7 +443,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="13"
@@ -456,7 +456,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -466,7 +466,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.POD" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -478,7 +478,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="11"
@@ -491,7 +491,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -501,7 +501,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
     </RadioButton.Group>
@@ -517,7 +517,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -525,7 +525,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -538,7 +538,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
@@ -548,7 +548,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -616,7 +616,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
       }
     }
   >
-    <Component
+    <Modal
       hardwareAccelerated={false}
       onRequestClose={[Function]}
       transparent={true}
@@ -626,7 +626,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </Component>
+    </Modal>
     <View
       style={
         Object {
@@ -639,7 +639,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -647,7 +647,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <RadioButton.Group
       onValueChange={[Function]}
@@ -662,7 +662,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="checked"
           value="8"
@@ -675,7 +675,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -685,7 +685,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -697,7 +697,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="12"
@@ -710,7 +710,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -720,7 +720,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -732,7 +732,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="13"
@@ -745,7 +745,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -755,7 +755,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.POD" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -767,7 +767,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="11"
@@ -780,7 +780,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -790,7 +790,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
             }
           >
             [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
     </RadioButton.Group>
@@ -806,7 +806,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -814,7 +814,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -827,7 +827,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
@@ -837,7 +837,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -905,7 +905,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <Component
+    <Modal
       hardwareAccelerated={false}
       onRequestClose={[Function]}
       transparent={true}
@@ -915,7 +915,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </Component>
+    </Modal>
     <View
       style={
         Object {
@@ -928,7 +928,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -936,7 +936,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <RadioButton.Group
       onValueChange={[Function]}
@@ -951,7 +951,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="checked"
           value="8"
@@ -964,7 +964,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -974,7 +974,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -986,7 +986,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="12"
@@ -999,7 +999,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1009,7 +1009,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -1021,7 +1021,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="13"
@@ -1034,7 +1034,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1044,7 +1044,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.POD" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -1056,7 +1056,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="11"
@@ -1069,7 +1069,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1079,7 +1079,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
     </RadioButton.Group>
@@ -1095,7 +1095,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -1103,7 +1103,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -1116,7 +1116,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
@@ -1126,7 +1126,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         TestLocation-3
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -1170,7 +1170,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
   >
     <Button
       backgroundColor="#0071e9"
-      disabled={false}
+      disabled={true}
       height={45}
       onPress={[Function]}
       radius={0}
@@ -1195,7 +1195,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <Component
+    <Modal
       hardwareAccelerated={false}
       onRequestClose={[Function]}
       transparent={true}
@@ -1205,7 +1205,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </Component>
+    </Modal>
     <View
       style={
         Object {
@@ -1218,7 +1218,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -1226,7 +1226,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <RadioButton.Group
       onValueChange={[Function]}
@@ -1241,7 +1241,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="8"
@@ -1254,7 +1254,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1264,7 +1264,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -1276,7 +1276,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="12"
@@ -1289,7 +1289,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1299,7 +1299,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -1311,7 +1311,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="13"
@@ -1324,7 +1324,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1334,7 +1334,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.POD" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -1346,7 +1346,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="checked"
           value="11"
@@ -1359,7 +1359,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1369,7 +1369,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
     </RadioButton.Group>
@@ -1385,7 +1385,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -1393,7 +1393,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -1406,7 +1406,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
@@ -1416,7 +1416,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -1485,7 +1485,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <Component
+    <Modal
       hardwareAccelerated={false}
       onRequestClose={[Function]}
       transparent={true}
@@ -1495,7 +1495,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </Component>
+    </Modal>
     <View
       style={
         Object {
@@ -1508,7 +1508,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -1516,7 +1516,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <RadioButton.Group
       onValueChange={[Function]}
@@ -1531,7 +1531,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="8"
@@ -1544,7 +1544,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1554,7 +1554,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -1566,7 +1566,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="checked"
           value="12"
@@ -1579,7 +1579,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1589,7 +1589,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -1601,7 +1601,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="13"
@@ -1614,7 +1614,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1624,7 +1624,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.POD" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -1636,7 +1636,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="11"
@@ -1649,7 +1649,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1659,7 +1659,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
     </RadioButton.Group>
@@ -1675,7 +1675,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -1683,7 +1683,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -1696,7 +1696,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
@@ -1706,7 +1706,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -1775,7 +1775,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <Component
+    <Modal
       hardwareAccelerated={false}
       onRequestClose={[Function]}
       transparent={true}
@@ -1785,7 +1785,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </Component>
+    </Modal>
     <View
       style={
         Object {
@@ -1798,7 +1798,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -1806,7 +1806,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <RadioButton.Group
       onValueChange={[Function]}
@@ -1821,7 +1821,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="checked"
           value="8"
@@ -1834,7 +1834,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1844,7 +1844,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -1856,7 +1856,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="12"
@@ -1869,7 +1869,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1879,7 +1879,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -1891,7 +1891,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="13"
@@ -1904,7 +1904,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1914,7 +1914,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.POD" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -1926,7 +1926,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="11"
@@ -1939,7 +1939,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -1949,7 +1949,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
     </RadioButton.Group>
@@ -1965,7 +1965,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -1973,7 +1973,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -1986,7 +1986,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
@@ -1996,7 +1996,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -2065,7 +2065,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <Component
+    <Modal
       hardwareAccelerated={false}
       onRequestClose={[Function]}
       transparent={true}
@@ -2075,7 +2075,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </Component>
+    </Modal>
     <View
       style={
         Object {
@@ -2088,7 +2088,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -2096,7 +2096,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <RadioButton.Group
       onValueChange={[Function]}
@@ -2111,7 +2111,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="8"
@@ -2124,7 +2124,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -2134,7 +2134,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -2146,7 +2146,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="12"
@@ -2159,7 +2159,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -2169,7 +2169,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -2181,7 +2181,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="checked"
           value="13"
@@ -2194,7 +2194,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -2204,7 +2204,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.POD" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -2216,7 +2216,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="11"
@@ -2229,7 +2229,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -2239,7 +2239,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
     </RadioButton.Group>
@@ -2255,7 +2255,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -2263,7 +2263,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -2276,7 +2276,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
@@ -2286,7 +2286,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -2355,7 +2355,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       }
     }
   >
-    <Component
+    <Modal
       hardwareAccelerated={false}
       onRequestClose={[Function]}
       transparent={true}
@@ -2365,7 +2365,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         onSubmit={[Function]}
         setEnterLocation={[MockFunction]}
       />
-    </Component>
+    </Modal>
     <View
       style={
         Object {
@@ -2378,7 +2378,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -2386,7 +2386,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <RadioButton.Group
       onValueChange={[Function]}
@@ -2401,7 +2401,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="checked"
           value="8"
@@ -2414,7 +2414,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -2424,7 +2424,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -2436,7 +2436,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="12"
@@ -2449,7 +2449,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -2459,7 +2459,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -2471,7 +2471,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="13"
@@ -2484,7 +2484,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -2494,7 +2494,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.POD" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
       <View
@@ -2506,7 +2506,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
           }
         }
       >
-        <ForwardRef
+        <withTheme(RadioButton)
           color="#0071e9"
           status="unchecked"
           value="11"
@@ -2519,7 +2519,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           }
         >
-          <ForwardRef
+          <withTheme(undefined)
             style={
               Object {
                 "fontSize": 16,
@@ -2529,7 +2529,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
             }
           >
             [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
-          </ForwardRef>
+          </withTheme(undefined)>
         </ForwardRef>
       </View>
     </RadioButton.Group>
@@ -2545,7 +2545,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontWeight": "bold",
@@ -2553,7 +2553,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={
@@ -2566,7 +2566,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <ForwardRef
+      <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
@@ -2576,7 +2576,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         
-      </ForwardRef>
+      </withTheme(undefined)>
     </View>
     <View
       style={

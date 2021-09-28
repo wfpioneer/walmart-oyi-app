@@ -8,37 +8,39 @@ import { strings } from '../../locales';
 /**
  * Basic worklist card component to be populated with worklist items as needed.
  */
-export interface Props {
+export interface WorkListCardProps {
     goalTitle: string;
     goal: number;
     complete: number;
     completionPercentage: number;
-    completionGoal?: number;
+    completionGoal: number;
     onPress: () => void;
 }
 
-function WorklistCard(Props: Props) {
-  const target = 95;
+function WorklistCard(props: WorkListCardProps): JSX.Element {
+  const {
+    complete, completionGoal, completionPercentage, goal, goalTitle, onPress
+  } = props;
 
   const getBarFill = () => {
-    if (Props.goal === 0) {
+    if (goal === 0) {
       return styles.barFillNoItems;
     }
-    return Props.completionPercentage >= target ? styles.barFillAtGoal : styles.barFillNotAtGoal;
+    return completionPercentage >= completionGoal ? styles.barFillAtGoal : styles.barFillNotAtGoal;
   };
   return (
-    <TouchableOpacity style={styles.card} onPress={Props.onPress}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
       <View style={styles.head}>
-        <Text style={styles.title}>{Props.goalTitle}</Text>
+        <Text style={styles.title}>{goalTitle}</Text>
         <Text style={styles.progress}>
-          {`${strings('GENERICS.GOAL')} ${target}%`}
+          {`${strings('GENERICS.GOAL')} ${completionGoal}%`}
         </Text>
       </View>
       <View style={styles.progressBar}>
-        <View style={[StyleSheet.absoluteFill, getBarFill(), { width: `${Props.completionPercentage}%` }]} />
+        <View style={[StyleSheet.absoluteFill, getBarFill(), { width: `${completionPercentage}%` }]} />
       </View>
       <Text style={styles.counter}>
-        {strings('HOME.WORKLIST_GOAL_COMPLETE', { complete: Props.complete, total: Props.goal })}
+        {strings('HOME.WORKLIST_GOAL_COMPLETE', { complete, total: goal })}
       </Text>
     </TouchableOpacity>
   );

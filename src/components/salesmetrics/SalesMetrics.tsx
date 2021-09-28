@@ -8,36 +8,28 @@ import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import Button from '../buttons/Button';
 import ItemDetails from '../../models/ItemDetails';
-import styles from './SalesMetrics.styles';
+import styles from './SalesMetrics.style';
 import { trackEvent } from '../../utils/AppCenterTool';
+import ItemDetailsList, { ItemDetailsListRow } from '../ItemDetailsList/ItemDetailsList';
 
 // Could possibly be combined with below, but the input keys are different
-const renderDailyList = (dailyList: {day: string; value: number}[]) => (
-  <View style={styles.listContainer}>
-    {dailyList.map((row, index) => {
-      const formattedDay = moment(row.day).format('ddd, MMM DD');
-      return (
-        // eslint-disable-next-line react/no-array-index-key
-        <View key={index} style={[styles.listRowContainer, { borderTopWidth: index !== 0 ? 1 : 0 }]}>
-          <Text>{formattedDay}</Text>
-          <Text>{row.value}</Text>
-        </View>
-      );
-    })}
-  </View>
-);
+const renderDailyList = (dailyList: {day: string; value: number}[]) => {
+  const rows: ItemDetailsListRow[] = dailyList.map(row => {
+    const formattedDay = moment(row.day).format('ddd, MMM DD');
+    return { label: formattedDay, value: row.value };
+  });
+
+  return <ItemDetailsList rows={rows} />;
+};
 
 // Could possibly be combined with above, but the input keys are different
-const renderWeeklyList = (weeklyList: {week: number; value: number}[]) => (
-  <View style={styles.listContainer}>
-    {weeklyList.map((row, index) => (
-      <View key={row.week} style={[styles.listRowContainer, { borderTopWidth: index !== 0 ? 1 : 0 }]}>
-        <Text>{`${strings('GENERICS.WEEK')} ${row.week}`}</Text>
-        <Text>{row.value}</Text>
-      </View>
-    ))}
-  </View>
-);
+const renderWeeklyList = (weeklyList: {week: number; value: number}[]) => {
+  const rows: ItemDetailsListRow[] = weeklyList.map(row => ({
+    label: `${strings('GENERICS.WEEK')} ${row.week}`,
+    value: row.value
+  }));
+  return <ItemDetailsList rows={rows} />;
+};
 
 const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod: boolean) => {
   const CUT_OFF = 50;
@@ -70,9 +62,9 @@ const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod:
   };
 
   return (
-    <View style={{ height: 200, paddingVertical: 16 }}>
+    <View style={styles.chartContainer}>
       <BarChart
-        style={{ flex: 1 }}
+        style={styles.barChartSize}
         data={chartData}
         yAccessor={({ item }) => item.value}
         svg={{ fill: COLOR.GREEN }}
@@ -80,11 +72,11 @@ const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod:
         gridMin={0}
       >
         <Grid />
-        {/* @ts-ignore because props are passed in from BarChart */}
+        {/* @ts-expect-error because props are passed in from BarChart */}
         <Labels />
       </BarChart>
       <XAxis
-        style={{ marginTop: 10 }}
+        style={styles.axisPosition}
         data={chartData}
         scale={scaleBand}
         formatLabel={(value, index) => formatChartLabel(chartData[index].label)}
@@ -127,7 +119,7 @@ const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) =
           height={20}
           width={72}
           radius={50}
-          style={{ marginRight: 4 }}
+          style={styles.dailyButton}
           onPress={handleDailyTimePeriodChange(true)}
         />
         <Button
@@ -139,7 +131,7 @@ const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) =
           height={20}
           width={72}
           radius={50}
-          style={{ marginLeft: 4 }}
+          style={styles.weeklyButton}
           onPress={handleDailyTimePeriodChange(false)}
         />
       </View>

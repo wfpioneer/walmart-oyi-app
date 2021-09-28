@@ -1,65 +1,49 @@
 import React from 'react';
 import {
-  Image, Text, TouchableOpacity, View
+  Text, TouchableOpacity, View
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
+import { NavigationProp } from '@react-navigation/native';
+import { Dispatch } from 'redux';
 import styles from './WorklistItem.style';
-import { strings } from '../../locales';
 import { setScannedEvent } from '../../state/actions/Global';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { exceptionTypeToDisplayString } from '../../screens/Worklist/FullExceptionList';
 
 interface WorklistItemProps {
   exceptionType: string;
   itemDescription: string;
   itemNumber: number;
   upcNbr: string;
+  navigation: NavigationProp<any>;
+  dispatch: Dispatch<any>;
 }
 
-const exceptionTypeToDisplayString = (exceptionType: string) => {
-  switch (exceptionType.toUpperCase()) {
-    case 'NP':
-      return strings('EXCEPTION.NIL_PICK');
-    case 'PO':
-      return strings('EXCEPTION.PRICE_OVERRIDE');
-    case 'NS':
-      return strings('EXCEPTION.NO_SALES');
-    case 'NO':
-      return strings('EXCEPTION.NEGATIVE_ON_HANDS');
-    case 'C':
-      return strings('EXCEPTION.CANCELLED');
-    case 'NSFL':
-      return strings('EXCEPTION.NSFL');
-    default:
-      return strings('GENERICS.ERROR');
-  }
-};
-
-export const WorklistItem = (props: WorklistItemProps) => {
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
+// TODO change this to default export
+export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
+  const {
+    navigation, dispatch, exceptionType, itemDescription, itemNumber, upcNbr
+  } = props;
   const worklistItemOnPress = () => {
     trackEvent('worklist_item_click', {
-      upc: props.upcNbr,
-      itemNbr: props.itemNumber,
-      itemDescription: props.itemDescription
+      upc: upcNbr,
+      itemNbr: itemNumber,
+      itemDescription
     });
-    dispatch(setScannedEvent({ type: 'worklist', value: props.itemNumber.toString() }));
+    dispatch(setScannedEvent({ type: 'worklist', value: itemNumber.toString() }));
     navigation.navigate('ReviewItemDetails');
   };
 
   return (
     <TouchableOpacity style={styles.container} onPress={worklistItemOnPress}>
-      <Image source={require('../../assets/images/sams_logo.jpeg')} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.exceptionType}>
-          { exceptionTypeToDisplayString(props.exceptionType) }
+          { exceptionTypeToDisplayString(exceptionType) }
         </Text>
         <Text style={styles.itemInfo}>
-          { props.itemDescription }
+          { itemDescription }
         </Text>
         <Text style={styles.itemNumber}>
-          { props.itemNumber }
+          { itemNumber }
         </Text>
       </View>
     </TouchableOpacity>

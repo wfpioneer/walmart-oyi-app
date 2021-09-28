@@ -38,8 +38,6 @@ describe('SelectLocationTypeScreen', () => {
           setScanType={jest.fn()}
           error={defaultError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           addAPI={defaultAsyncState}
           editAPI={defaultAsyncState}
           floorLocations={[]}
@@ -71,8 +69,6 @@ describe('SelectLocationTypeScreen', () => {
           setScanType={jest.fn()}
           error={defaultError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           addAPI={defaultAsyncState}
           editAPI={defaultAsyncState}
           floorLocations={[]}
@@ -104,8 +100,6 @@ describe('SelectLocationTypeScreen', () => {
           setScanType={jest.fn()}
           error={defaultError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           addAPI={defaultAsyncState}
           editAPI={defaultAsyncState}
           floorLocations={[]}
@@ -137,8 +131,6 @@ describe('SelectLocationTypeScreen', () => {
           setScanType={jest.fn()}
           error={defaultError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           addAPI={defaultAsyncState}
           editAPI={defaultAsyncState}
           floorLocations={[]}
@@ -170,8 +162,6 @@ describe('SelectLocationTypeScreen', () => {
           setScanType={jest.fn()}
           error={defaultError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           addAPI={defaultAsyncState}
           editAPI={defaultAsyncState}
           floorLocations={[]}
@@ -190,7 +180,7 @@ describe('SelectLocationTypeScreen', () => {
 
     it('Renders Location Name above manual location enter', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const locationName = "TestLocation-3"
+      const locationName = 'TestLocation-3';
       renderer.render(
         <SelectLocationTypeScreen
           locType={LOCATION_TYPES.SALES_FLOOR}
@@ -203,8 +193,6 @@ describe('SelectLocationTypeScreen', () => {
           setScanType={jest.fn()}
           error={defaultError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           addAPI={defaultAsyncState}
           editAPI={defaultAsyncState}
           floorLocations={[]}
@@ -244,8 +232,6 @@ describe('SelectLocationTypeScreen', () => {
           setScanType={jest.fn()}
           error={defaultError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           addAPI={apiIsWaiting}
           editAPI={defaultAsyncState}
           floorLocations={[]}
@@ -277,8 +263,6 @@ describe('SelectLocationTypeScreen', () => {
           setScanType={jest.fn()}
           error={defaultError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           addAPI={defaultAsyncState}
           editAPI={apiIsWaiting}
           floorLocations={[]}
@@ -313,8 +297,6 @@ describe('SelectLocationTypeScreen', () => {
           setScanType={jest.fn()}
           error={locationError}
           setError={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
           addAPI={defaultAsyncState}
           editAPI={defaultAsyncState}
           floorLocations={[]}
@@ -333,32 +315,21 @@ describe('SelectLocationTypeScreen', () => {
   });
 
   describe('Tests Location Validation', () => {
-    const locationName = 'TestLocation-3'
-    it('validateLocation returns false for invalid location name', () => {
-      const noLocationName = validateLocation('', LOCATION_TYPES.DISPLAY);
+    it('validateLocation returns false for empty location name', () => {
+      const noLocationName = validateLocation('');
       expect(noLocationName).toBe(false);
     });
-    it('validateLocation returns false for invalid location type', () => {
-      const noLocationType = validateLocation(locationName, '');
-      expect(noLocationType).toBe(false);
-    });
-
-    it('validateLocation returns false for invalid location name & location type', () => {
-      const invalidLocation = validateLocation('', '');
+    it('validateLocation returns false for incorrect location name', () => {
+      const invalidLocation = validateLocation('A1 -1');
       expect(invalidLocation).toBe(false);
     });
-    it('validateLocation returns true for valid location name & all location types', () => {
-      const validLocationSalesFloor = validateLocation(locationName, LOCATION_TYPES.SALES_FLOOR);
+    it('validateLocation returns true for valid location name', () => {
+      const validLocationSalesFloor = validateLocation('A1-1');
       expect(validLocationSalesFloor).toBe(true);
-
-      const validLocationDisplay = validateLocation(locationName, LOCATION_TYPES.DISPLAY);
-      expect(validLocationDisplay).toBe(true);
-
-      const validLocationEndCap = validateLocation(locationName, LOCATION_TYPES.END_CAP);
-      expect(validLocationEndCap).toBe(true);
-      
-      const validLocationPod = validateLocation(locationName, LOCATION_TYPES.POD);
-      expect(validLocationPod).toBe(true);
+    });
+    it('validateLocation returns true for valid location number', () => {
+      const validLocationSalesFloor = validateLocation('123456');
+      expect(validLocationSalesFloor).toBe(true);
     });
   });
 });

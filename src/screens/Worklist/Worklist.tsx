@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  FlatList, Text, TouchableOpacity, View
+  ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
+import { Dispatch } from 'redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useDispatch } from 'react-redux';
+import { NavigationProp } from '@react-navigation/native';
 import { WorklistItem } from '../../components/worklistItem/WorklistItem';
 import COLOR from '../../themes/Color';
 import styles from './Worklist.style';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { CategorySeparator } from '../../components/worklistItem/CategorySeparator';
 import { strings } from '../../locales';
-import { useTypedSelector } from '../../state/reducers/RootReducer';
-import FullExceptionList from './FullExceptionList';
+import { ExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
 
-interface ListItemI {
+interface ListItemProps {
   item: WorklistItemI;
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
 }
 
 interface WorklistProps {
@@ -24,18 +26,24 @@ interface WorklistProps {
   onRefresh: () => void;
   refreshing: boolean;
   error: any;
+  groupToggle: boolean;
+  updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  filterExceptions: string[];
+  filterCategories: string[];
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
 }
-
-export const renderWorklistItem = (listItem: ListItemI) => {
-  if (listItem.item.worklistType === 'CATEGORY') {
-    const { catgName, itemCount } = listItem.item;
+export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
+  const { dispatch, item, navigation } = props;
+  if (item.worklistType === 'CATEGORY') {
+    const { catgName, itemCount } = item;
     return (
       <CategorySeparator categoryName={catgName} numberOfItems={itemCount || 0} />
     );
   }
   const {
     worklistType, itemName, itemNbr, upcNbr
-  } = listItem.item;
+  } = item;
 
   return (
     <WorklistItem
@@ -43,6 +51,8 @@ export const renderWorklistItem = (listItem: ListItemI) => {
       itemDescription={itemName || ''}
       upcNbr={upcNbr || ''}
       itemNumber={itemNbr || 0}
+      dispatch={dispatch}
+      navigation={navigation}
     />
   );
 };
@@ -67,18 +77,17 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
     return 0;
   });
 
-  const returnData = [];
+  const returnData: WorklistItemI[] = [];
 
   // next, insert into the array where the category numbers change
-  const iterator = sortedData.values();
-  let previousItem: WorklistItemI | undefined;
-  let previousCategoryIndex: any;
-  for (const item of iterator) {
+  let previousItem: WorklistItemI;
+  let previousCategoryIndex: number;
+  sortedData.forEach(item => {
     if (!previousItem || (previousItem.catgNbr !== item.catgNbr)) {
       previousItem = item;
       returnData.push({
         worklistType: 'CATEGORY',
-        catgName: item.catgName,
+        catgName: item.catgName || '',
         catgNbr: item.catgNbr,
         itemCount: 1
       });
@@ -92,85 +101,87 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
       }
       returnData.push(item);
     }
-  }
+  });
 
   return returnData;
 };
 
-export const renderFilterPills = (listItem: any, dispatch: any, filterCategories: any, filterExceptions: any) => {
-  const { item } = listItem;
-
-  if (item.type === 'EXCEPTION') {
-    const exceptionObj = FullExceptionList().find(exceptionListItem => exceptionListItem.value === item.value);
-
-    if (exceptionObj) {
+export const renderFilterPills = (
+  listFilter: { type: string; value: string },
+  dispatch: Dispatch<any>,
+  filterCategories: string[],
+  filterExceptions: string[],
+  fullExceptionList: Map<string, string>
+): JSX.Element => {
+  if (listFilter.type === 'EXCEPTION') {
+    const exception = fullExceptionList.get(listFilter.value);
+    if (exception) {
       const removeFilter = () => {
         const replacementFilter = filterExceptions;
-        replacementFilter.splice(filterExceptions.indexOf(item.value), 1);
+        replacementFilter.splice(filterExceptions.indexOf(listFilter.value), 1);
         dispatch(updateFilterExceptions(replacementFilter));
       };
-      return <FilterPillButton filterText={exceptionObj.display} onClosePress={removeFilter} />;
+      return <FilterPillButton filterText={exception} onClosePress={removeFilter} />;
     }
 
-    return null;
+    return <View />;
   }
 
-  if (item.type === 'CATEGORY') {
+  if (listFilter.type === 'CATEGORY') {
     const removeFilter = () => {
       const replacementFilter = filterCategories;
-      replacementFilter.splice(filterCategories.indexOf(item.value), 1);
+      replacementFilter.splice(filterCategories.indexOf(listFilter.value), 1);
       dispatch(updateFilterCategories(replacementFilter));
     };
-    return <FilterPillButton filterText={item.value} onClosePress={removeFilter} />;
+    return <FilterPillButton filterText={listFilter.value} onClosePress={removeFilter} />;
   }
 
-  return null;
+  return <View />;
 };
 
-export const Worklist = (props: WorklistProps) => {
-  const errorView = () => (
-    <View style={styles.errorView}>
-      <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
-      <Text style={styles.errorText}>An error has occurred. Please try again.</Text>
-      <TouchableOpacity style={styles.errorButton} onPress={props.onRefresh}>
-        <Text>Retry</Text>
-      </TouchableOpacity>
-    </View>
-  );
-
-  if (props.error) {
+export const Worklist = (props: WorklistProps): JSX.Element => {
+  const {
+    data, dispatch, error, filterCategories, filterExceptions,
+    groupToggle, onRefresh, refreshing, updateGroupToggle, navigation
+  } = props;
+  const fullExceptionList = ExceptionList.getInstance();
+  if (error) {
     return (
-      <FlatList
-        data={['error']}
-        renderItem={errorView}
-        refreshing={false}
-        onRefresh={props.onRefresh}
+      <View style={styles.errorView}>
+        <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('WORKLIST.WORKLIST_ITEM_API_ERROR')}</Text>
+        <TouchableOpacity style={styles.errorButton} onPress={onRefresh}>
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  if (refreshing) {
+    return (
+      <ActivityIndicator
+        animating={refreshing}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
       />
     );
   }
 
-  if (props.refreshing && !props.data) {
-    return (
-      <FlatList data={[]} renderItem={() => null} refreshing onRefresh={() => null} />
-    );
-  }
-
-  const [groupToggle, updateGroupToggle] = useState(false);
-  const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
-  const dispatch = useDispatch();
   const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
-  const typedFilterCategories = filterCategories.map((category: number) => ({ type: 'CATEGORY', value: category }));
-  let filteredData: WorklistItemI[] = props.data ? props.data : [];
+  const typedFilterCategories = filterCategories.map((category: string) => ({ type: 'CATEGORY', value: category }));
+  let filteredData: WorklistItemI[] = data || [];
   if (filterCategories.length !== 0) {
-    filteredData = filteredData.filter((worklistItem: WorklistItemI) => filterCategories
+    filteredData = filteredData.filter(worklistItem => filterCategories
       .indexOf(`${worklistItem.catgNbr} - ${worklistItem.catgName}`) !== -1);
   }
   if (filterExceptions.length !== 0) {
-    filteredData = filteredData.filter((worklistItem: WorklistItemI) => {
-      const exceptionTranslation = FullExceptionList().find((exceptionListItem: any) => exceptionListItem.value
-        === worklistItem.worklistType);
-      if (exceptionTranslation) {
-        return filterExceptions.findIndex((exception: any) => exception === exceptionTranslation.value) !== -1;
+    filteredData = filteredData.filter(worklistItem => {
+      const hasWorklistException = fullExceptionList.has(worklistItem.worklistType);
+
+      if (hasWorklistException) {
+        return filterExceptions.findIndex(exception => exception === worklistItem.worklistType) !== -1;
       }
       return false;
     });
@@ -183,9 +194,11 @@ export const Worklist = (props: WorklistProps) => {
           <FlatList
             data={[...typedFilterExceptions, ...typedFilterCategories]}
             horizontal
-            renderItem={(item: any) => renderFilterPills(item, dispatch, filterCategories, filterExceptions)}
+            renderItem={({ item }) => renderFilterPills(
+              item, dispatch, filterCategories, filterExceptions, fullExceptionList
+            )}
             style={styles.filterList}
-            keyExtractor={(item: any) => item.value.toString()}
+            keyExtractor={item => item.value}
           />
         </View>
       ) }
@@ -207,15 +220,15 @@ export const Worklist = (props: WorklistProps) => {
       </View>
       <FlatList
         data={convertDataToDisplayList(filteredData, groupToggle)}
-        keyExtractor={(item: any, index: number) => {
-          if (item.exceptionType === 'CATEGORY') {
+        keyExtractor={(item: WorklistItemI, index: number) => {
+          if (item.worklistType === 'CATEGORY') {
             return item.catgName.toString();
           }
           return item.itemNbr + index.toString();
         }}
-        renderItem={renderWorklistItem}
-        onRefresh={props.onRefresh}
-        refreshing={props.refreshing}
+        renderItem={({ item }) => <RenderWorklistItem item={item} dispatch={dispatch} navigation={navigation} />}
+        onRefresh={onRefresh}
+        refreshing={refreshing}
         style={styles.list}
       />
     </View>

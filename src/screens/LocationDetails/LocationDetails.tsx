@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator, ScrollView, Text, View
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import {
+  NavigationProp, RouteProp, useNavigation, useRoute
+} from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import FAB from 'react-native-fab';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -20,10 +22,12 @@ import {
 import { deleteLocation } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { AsyncState } from '../../models/AsyncState';
+import { DELETE_LOCATION, GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
 
 interface LocationDetailsProps {
-  navigation: any;
-  route: any;
+  navigation: NavigationProp<any>;
+  route: RouteProp<any, string>;
   dispatch: any;
   floorLocations: Location[];
   reserveLocations: Location[];
@@ -32,78 +36,30 @@ interface LocationDetailsProps {
     upcNbr: string;
     exceptionType: string;
   };
-  apiInProgress: boolean;
-  setAPIInProgress: Function;
-  apiError: boolean;
-  setApiError: Function;
-  delAPI: {
-    isWaiting: boolean;
-    value: any;
-    error: any;
-    result: any;
-  };
+  delAPI: AsyncState
   displayConfirmation: boolean;
-  setDisplayConfirmation: Function;
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
   locToConfirm: {
     locationName: string;
     locationArea: string;
     locationIndex: number;
     locationTypeNbr: number;
   };
-  setLocToConfirm: Function;
-  locationsApi: {
-    isWaiting: boolean;
-    value: any;
-    error: any;
-    result: any;
-  };
-  useEffectHook: Function;
+  setLocToConfirm: React.Dispatch<React.SetStateAction<{
+    locationName: string;
+    locationArea: string;
+    locationIndex: number;
+    locationTypeNbr: number;
+  }>>;
+  locationsApi: AsyncState
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
-const LocationDetails = () => {
-  const navigation = useNavigation();
-  const route = useRoute();
-  const dispatch = useDispatch();
-  const floorLocations = useTypedSelector(state => state.Location.floorLocations);
-  const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
-  const itemDetails = useTypedSelector(state => state.Location.itemLocDetails);
-  const [apiInProgress, setAPIInProgress] = useState(false);
-  const [apiError, setApiError] = useState(false);
-  const delAPI = useTypedSelector(state => state.async.deleteLocation);
-  const [displayConfirmation, setDisplayConfirmation] = useState(false);
-  const [locToConfirm, setLocToConfirm] = useState({
-    locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
-  });
-  const locations = useTypedSelector(state => state.async.getLocation);
-  return (
-    <LocationDetailsScreen
-      apiInProgress={apiInProgress}
-      delAPI={delAPI}
-      dispatch={dispatch}
-      displayConfirmation={displayConfirmation}
-      apiError={apiError}
-      floorLocations={floorLocations}
-      reserveLocations={reserveLocations}
-      itemDetails={itemDetails}
-      locToConfirm={locToConfirm}
-      locationsApi={locations}
-      navigation={navigation}
-      route={route}
-      setAPIInProgress={setAPIInProgress}
-      setDisplayConfirmation={setDisplayConfirmation}
-      setApiError={setApiError}
-      setLocToConfirm={setLocToConfirm}
-      useEffectHook={useEffect}
-    />
-  );
-};
 
-export const LocationDetailsScreen = (props: LocationDetailsProps) => {
+export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element => {
   const {
-    apiInProgress,
     delAPI,
     dispatch,
     displayConfirmation,
-    apiError,
     floorLocations,
     reserveLocations,
     itemDetails,
@@ -111,38 +67,26 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
     locationsApi,
     navigation,
     route,
-    setAPIInProgress,
     setDisplayConfirmation,
-    setApiError,
     setLocToConfirm,
     useEffectHook
   } = props;
 
+  // Navigation Listener
+  useEffectHook(() => {
+    // Resets location api response data when navigating off-screen
+    navigation.addListener('beforeRemove', () => {
+      dispatch({ type: GET_LOCATION_DETAILS.RESET });
+      dispatch({ type: DELETE_LOCATION.RESET });
+    });
+  }, []);
+
   // Delete Location API
   useEffectHook(() => {
     // on api success
-    if (apiInProgress && delAPI.isWaiting === false && delAPI.result) {
-      trackEvent('location_delete_location_api_success');
+    if (!delAPI.isWaiting && delAPI.result) {
       dispatch(deleteLocationFromExisting(locToConfirm.locationArea, locToConfirm.locationIndex));
-      setAPIInProgress(false);
       setDisplayConfirmation(false);
-    }
-
-    // on api failure
-    if (apiInProgress && delAPI.isWaiting === false && delAPI.error) {
-      trackEvent('location_delete_location_api_failure', {
-        upcNbr: delAPI.value.upc,
-        sectionId: delAPI.value.sectionId,
-        errorDetails: delAPI.error.message || delAPI.error
-      });
-      setAPIInProgress(false);
-      setApiError(true);
-    }
-
-    // on api submission
-    if (!apiInProgress && delAPI.isWaiting) {
-      setApiError(false);
-      setAPIInProgress(true);
     }
   }, [delAPI]);
 
@@ -151,30 +95,12 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
     /* eslint-disable brace-style */
     // brace style ignored to allow comments to remain.
     // on api success
-    if (apiInProgress && locationsApi.isWaiting === false && locationsApi.result) {
+    if (!locationsApi.isWaiting && locationsApi.result) {
       const locDetails = (locationsApi.result && locationsApi.result.data);
-      trackEvent('location_get_location_api_success');
       if (locDetails.location) {
         if (locDetails.location.floor) dispatch(setFloorLocations(locDetails.location.floor));
         if (locDetails.location.reserve) dispatch(setReserveLocations(locDetails.location.reserve));
       }
-      setAPIInProgress(false);
-    }
-    // on api failure
-    else if (apiInProgress && locationsApi.isWaiting === false && locationsApi.error) {
-      trackEvent('location_get_location_api_failure', {
-        itemNbr: itemDetails.itemNbr,
-        upcNbr: itemDetails.upcNbr,
-        errorDetails: locationsApi.error.message || locationsApi.error
-      });
-      setAPIInProgress(false);
-      setApiError(true);
-    }
-    // on api submission
-    else if (!apiInProgress && locationsApi.isWaiting) {
-      trackEvent('location_get_location_api_start');
-      setApiError(false);
-      setAPIInProgress(true);
     }
   }, [locationsApi]);
 
@@ -199,9 +125,9 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
   };
 
   const deleteConfirmed = () => {
-    trackEvent('location_delete_location_confirmed');
     dispatch(
       deleteLocation({
+        headers: { itemNbr: itemDetails.itemNbr },
         upc: itemDetails.upcNbr,
         sectionId: locToConfirm.locationName,
         locationTypeNbr: locToConfirm.locationTypeNbr
@@ -225,7 +151,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
 
   const addNewLocationNav = () => {
     validateSession(navigation, route.name).then(() => {
-      trackEvent('location_fab_button_click');
+      trackEvent('location_add_location_click');
       navigation.navigate('AddLocation');
     }).catch(() => {});
   };
@@ -255,7 +181,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
           ) : (
             <>
               <Text style={styles.message}>
-                {apiError
+                {delAPI.error
                   ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
                   : `${strings('LOCATION.DELETE_CONFIRMATION')}${
                     locToConfirm.locationName
@@ -270,7 +196,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
                 />
                 <Button
                   style={styles.delButton}
-                  title={apiError ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+                  title={delAPI.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
                   backgroundColor={COLOR.MAIN_THEME_COLOR}
                   onPress={deleteConfirmed}
                 />
@@ -307,4 +233,35 @@ export const LocationDetailsScreen = (props: LocationDetailsProps) => {
   );
 };
 
+const LocationDetails = (): JSX.Element => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const dispatch = useDispatch();
+  const floorLocations = useTypedSelector(state => state.Location.floorLocations);
+  const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
+  const itemDetails = useTypedSelector(state => state.Location.itemLocDetails);
+  const delAPI = useTypedSelector(state => state.async.deleteLocation);
+  const [displayConfirmation, setDisplayConfirmation] = useState(false);
+  const [locToConfirm, setLocToConfirm] = useState({
+    locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
+  });
+  const locations = useTypedSelector(state => state.async.getLocation);
+  return (
+    <LocationDetailsScreen
+      delAPI={delAPI}
+      dispatch={dispatch}
+      displayConfirmation={displayConfirmation}
+      floorLocations={floorLocations}
+      reserveLocations={reserveLocations}
+      itemDetails={itemDetails}
+      locToConfirm={locToConfirm}
+      locationsApi={locations}
+      navigation={navigation}
+      route={route}
+      setDisplayConfirmation={setDisplayConfirmation}
+      setLocToConfirm={setLocToConfirm}
+      useEffectHook={useEffect}
+    />
+  );
+};
 export default LocationDetails;

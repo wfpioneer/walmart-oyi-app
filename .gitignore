@@ -28,7 +28,7 @@ build/
 .gradle
 local.properties
 *.iml
-
+/android/java_pid*.hprof
 # Visual Studio Code
 #
 .vscode/
@@ -65,3 +65,8 @@ buck-out/
 
 # JEST
 *coverage
+/test-report.xml
+
+# App Center Secrets files
+android/app/src/main/assets/appcenter-config.json
+android/app/src/main/assets/appcenter-config-prod.json

@@ -5,6 +5,7 @@ import {
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Dispatch } from 'redux';
 import styles from './FilterMenu.style';
 import COLOR from '../../../themes/Color';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
@@ -16,7 +17,7 @@ import {
   updateFilterExceptions
 } from '../../../state/actions/Worklist';
 import { strings } from '../../../locales';
-import FullExceptionList from '../FullExceptionList';
+import { ExceptionList } from '../FullExceptionList';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import FilterListItem from '../../../models/FilterListItem';
 
@@ -26,7 +27,7 @@ interface MenuCardProps {
   opened: boolean;
 }
 
-export const MenuCard = (props: MenuCardProps) => {
+export const MenuCard = (props: MenuCardProps): JSX.Element => {
   const iconName = props.opened ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
   return (
     <>
@@ -46,11 +47,10 @@ export const MenuCard = (props: MenuCardProps) => {
 };
 
 export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number; catgName: string; selected: boolean } },
-  dispatch: any, filterCategories: any) => {
+  dispatch: Dispatch<any>, filterCategories: string[]): JSX.Element => {
   const { item } = listItem;
   const onItemPress = () => {
     if (item.selected) {
-      // @ts-ignore
       filterCategories.splice(filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`), 1);
       trackEvent('worklist_update_filter_categories', { categories: JSON.stringify(filterCategories) });
       return dispatch(updateFilterCategories(filterCategories));
@@ -76,7 +76,7 @@ export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number; ca
   );
 };
 
-export const renderExceptionFilterCard = (listItem: { item: FilterListItem }, dispatch: any) => {
+export const renderExceptionFilterCard = (listItem: { item: FilterListItem }, dispatch: Dispatch<any>): JSX.Element => {
   const { item } = listItem;
   const onItemPress = () => {
     trackEvent('worklist_update_filter_exceptions', { exception: item.value });
@@ -98,14 +98,13 @@ export const renderExceptionFilterCard = (listItem: { item: FilterListItem }, di
   );
 };
 
-export const renderCategoryCollapsibleCard = () => {
+export const renderCategoryCollapsibleCard = (): JSX.Element => {
   const { result } = useTypedSelector(state => state.async.getWorklist);
   const { categoryOpen, filterCategories } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
 
   const data = result && result.data && Array.isArray(result.data) ? result.data : [];
   const categoryMap = data.map((item: any) => {
-    // @ts-ignore
     const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
     return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
   });
@@ -154,14 +153,15 @@ export const renderCategoryCollapsibleCard = () => {
   );
 };
 
-export const renderExceptionTypeCard = () => {
+export const renderExceptionTypeCard = (): JSX.Element => {
   const { exceptionOpen, filterExceptions } = useTypedSelector(state => state.Worklist);
   const dispatch = useDispatch();
+  const fullExceptionList = ExceptionList.getInstance();
+  const exceptionMap: { value: string; display: string; selected: boolean;}[] = [];
 
-  const exceptionMap = FullExceptionList().map(item => {
-    // @ts-ignore
-    const isSelected = filterExceptions.indexOf(item.value) !== -1;
-    return { value: item.value, display: item.display, selected: isSelected };
+  fullExceptionList.forEach((value, key) => {
+    const isSelected = filterExceptions.indexOf(key) !== -1;
+    exceptionMap.push({ value: key, display: value, selected: isSelected });
   });
 
   let subtext = '';
@@ -169,11 +169,11 @@ export const renderExceptionTypeCard = () => {
     subtext = strings('WORKLIST.ALL');
   } else {
     filterExceptions.forEach((exception: string) => {
-      const exceptionObj = FullExceptionList().find(exceptionListItem => exceptionListItem.value === exception);
+      const exceptionObj = fullExceptionList.get(exception);
       if (exceptionObj && subtext !== '') {
-        subtext = `${subtext}\n${exceptionObj.display}`;
+        subtext = `${subtext}\n${exceptionObj}`;
       } else if (exceptionObj) {
-        subtext = exceptionObj.display;
+        subtext = exceptionObj;
       }
     });
   }
@@ -195,12 +195,12 @@ export const renderExceptionTypeCard = () => {
   );
 };
 
-export const onClearPress = (dispatch: any) => {
+export const onClearPress = (dispatch: Dispatch<any>): void => {
   trackEvent('worklist_clear_filter');
-  return dispatch(clearFilter());
+  dispatch(clearFilter());
 };
 
-export const FilterMenu = () => {
+export const FilterMenu = (): JSX.Element => {
   const dispatch = useDispatch();
   return (
     <View style={styles.menuContainer}>

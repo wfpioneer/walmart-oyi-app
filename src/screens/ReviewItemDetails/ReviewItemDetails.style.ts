@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1
   },
+  locationContainer: {
+    paddingHorizontal: 8
+  },
   locationDetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -70,26 +73,48 @@ const styles = StyleSheet.create({
   itemOnOrderView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 8,
+    paddingHorizontal: 18,
     paddingVertical: 16
   },
-  renderPickListContatiner: {
+  renderPickListContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingVertical: 8
   },
-  onHandsContainer: {
-    paddingHorizontal: 8,
-    paddingVertical: 16
-  },
-  onHandsView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  mgrApprovalView: {
-    flexDirection: 'row',
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 8
+    backgroundColor: COLOR.BLACK_TRANSPARENT_600
+  },
+  barcodeErrorContainer: {
+    width: '80%',
+    borderRadius: 10,
+    backgroundColor: COLOR.WHITE,
+    borderColor: COLOR.TRACKER_GREY,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    alignContent: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    alignSelf: 'center',
+    minHeight: 150
+  },
+  buttonContainer: {
+    width: '100%',
+    alignContent: 'space-around',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  iconPosition: {
+    alignSelf: 'center'
+  },
+  dismissButton: {
+    width: '70%',
+    marginTop: 16
+  },
+  labelIcon: {
+    marginLeft: -4
   }
 });
 

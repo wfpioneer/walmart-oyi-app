@@ -39,7 +39,11 @@ export default {
     SUBMIT: 'Submit',
     RETRY: 'Retry',
     GOAL: 'Goal',
-    VERSION: 'Version'
+    VERSION: 'Version',
+    BARCODE_SCAN_ERROR: 'This barcode type is not allowed',
+    ITEM: 'item',
+    ITEMS: 'items',
+    TOOLS: 'Tools'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -96,7 +100,12 @@ export default {
     NO_FLOOR_LOCATION_DETAILS: 'Item not completed because you never added a floor location',
     ACTION_COMPLETE_ERROR: 'Error Completing Action',
     ACTION_COMPLETE_ERROR_DETAILS: 'There was an error completing the action, please try again.',
-    WEEKLY_AVG_SALES: 'Weekly average sales'
+    WEEKLY_AVG_SALES: 'Weekly average sales',
+    SALES_FLOOR_QTY: 'Sales Floor',
+    RESERVE_QTY: 'Reserve',
+    CLAIMS_QTY: 'Claims',
+    CONSOLIDATED_QTY: 'Consolidated',
+    FLY_CLOUD_QTY: 'Fly Cloud',
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -128,6 +137,8 @@ export default {
     TITLE: 'All locations',
     FLOOR: 'Floor locations',
     RESERVE: 'Reserve locations',
+    FLOORS: 'Floor',
+    RESERVES: 'Reserve',
     ADD_LOCATION_API_ERROR: 'There was an error adding the location. \nPlease try again.',
     EDIT_LOCATION_API_ERROR: 'There was an error editing the location. \nPlease try again.',
     ADD_DUPLICATE_ERROR: 'Location and type combination \nalready exists.',
@@ -138,19 +149,34 @@ export default {
     DELETE_CONFIRMATION: 'Confirm: \ndelete location ',
     DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nRetry?',
     ADD_NEW_LOCATION: 'Add New Location',
-    EDIT_LOCATION: 'Edit Location'
+    EDIT_LOCATION: 'Edit Location',
+    LOCATION_MANAGEMENT: 'Location Management',
+    ITEMS: 'Items',
+    PALLETS: 'Pallets',
+    ZONES: 'Zones',
+    ZONE: 'Zone',
+    AISLES: 'Aisles',
+    AISLE: 'Aisle',
+    SECTIONS: 'Sections',
+    SECTION: 'Section',
+    AREAS: 'Areas',
+    LOCATION_DETAILS: 'Location Details',
+    NO_ZONES_AVAILABLE: 'No Zones Available',
+    NO_AISLES_AVAILABLE: 'No Aisles Available',
+    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
+    CLEAR_ALL: 'Clear all',
+    ADD: 'Add'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
     CATEGORY: 'Category',
     EXCEPTION_TYPE: 'Exception Type',
-    ITEM: 'item',
-    ITEMS: 'items',
     ALL: 'All',
     REFINE: 'Refine',
     CLEAR: 'Clear',
     TODO: 'Todo',
-    COMPLETED: 'Completed'
+    COMPLETED: 'Completed',
+    WORKLIST_ITEM_API_ERROR: 'There was an error retrieving worklist items.\nPlease try again.'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',
@@ -169,6 +195,26 @@ export default {
     OH_CHANGE: 'On-hands change',
     SELECT_ALL: 'Select all',
     DESELECT_ALL: 'Deselect all',
-    APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.'
+    SELECTED: 'selected',
+    APPROVAL_API_ERROR: 'There was an error pulling the approval list.\nPlease try again.',
+    APPROVE: 'Approve',
+    REJECT: 'Reject',
+    GO_BACK: 'Go back',
+    CONFIRM: 'Confirm',
+    APPROVE_SUMMARY: 'Summary of approvals',
+    REJECT_SUMMARY: 'Summary of rejections',
+    INCREASES: 'All increases',
+    DECREASES: 'All decreases',
+    REVIEW: 'Review changes',
+    LIST_NOT_FOUND: 'The Approval List is Empty',
+    UPDATE_APPROVED: 'On-hands update approved',
+    UPDATE_REJECTED: 'On-hands update rejected',
+    FAILED_APPROVE: 'Requests Failed to Approve',
+    FAILED_ITEMS: 'Items Failed',
+    UPDATE_API_ERROR: 'There was an error updating the approval status. \n Please try again.'
+  },
+  LOGIN: {
+    CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI',
+    ENTER_CLUB_NBR: 'Enter a Club Number'
   }
 };

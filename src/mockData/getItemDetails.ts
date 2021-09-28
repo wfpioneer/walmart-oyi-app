@@ -1,5 +1,4 @@
 import ItemDetails from '../models/ItemDetails';
-
 /* eslint-disable quote-props */
 export default {
   '123': {
@@ -10,10 +9,17 @@ export default {
     categoryNbr: 93,
     categoryDesc: 'Meat PI',
     price: 2000.94,
+    basePrice: 1500.30,
     exceptionType: 'nsfl',
+    imageUrlKey: undefined,
+    imageBlobKey: undefined,
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 10,
+    claimsOnHandQty: 5,
+    backroomQty: 6,
+    cloudQty: undefined,
     replenishment: {
       onOrder: 48
     },
@@ -145,9 +151,17 @@ export default {
     categoryNbr: 99,
     categoryDesc: 'Store Use',
     price: 2000.94,
+    basePrice: 1500.30,
+    exceptionType: 'nsfl',
+    imageUrlKey: undefined,
+    imageBlobKey: undefined,
     completed: false,
     onHandsQty: 42,
     pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 0,
+    claimsOnHandQty: 5,
+    backroomQty: 6,
+    cloudQty: 42,
     replenishment: {
       onOrder: 48
     },
@@ -275,9 +289,17 @@ export default {
     categoryNbr: 19,
     categoryDesc: 'Wine',
     price: 2000.94,
+    basePrice: 1500.30,
+    exceptionType: 'nsfl',
+    imageUrlKey: undefined,
+    imageBlobKey: undefined,
     completed: false,
     onHandsQty: 42,
-    pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 0,
+    claimsOnHandQty: 0,
+    backroomQty: 6,
+    pendingOnHandsQty: 35,
+    cloudQty: 42,
     replenishment: {
       onOrder: 48
     },

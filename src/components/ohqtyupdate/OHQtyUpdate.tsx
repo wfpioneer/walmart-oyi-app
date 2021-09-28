@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 import styles from './OHQtyUpdate.style';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
@@ -16,11 +17,12 @@ import { numbers, strings } from '../../locales';
 import { updateOHQty } from '../../state/actions/saga';
 import { setActionCompleted, updatePendingOHQty } from '../../state/actions/ItemDetailScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { trackEvent } from '../../utils/AppCenterTool';
+import ItemDetails from '../../models/ItemDetails';
+import { approvalRequestSource } from '../../models/ApprovalListItem';
 
 interface OHQtyUpdateProps {
   ohQty: number;
-  setOhQtyModalVisible: Function;
+  setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   exceptionType?: string; // eslint-disable-line react/require-default-props
   // eslint disabled above because the absence of this prop is used as an evaluator.
 }
@@ -33,20 +35,21 @@ const ERROR_FORMATTING_OPTIONS = {
 };
 
 const validateQty = (qty: number) => OH_MIN <= qty && qty <= OH_MAX;
+const validateSameQty = (qty: number, newQty: number) => qty === newQty;
 
 const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
   <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
 );
 
-const OHQtyUpdate = (props: OHQtyUpdateProps) => {
+const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   const { ohQty, setOhQtyModalVisible } = props;
   const [isValidNbr, setIsValidNbr] = useState(validateQty(ohQty));
   const [newOHQty, setNewOHQty] = useState(ohQty);
+  const [isSameQty, setIsSameQty] = useState(validateSameQty(ohQty, newOHQty));
   const [apiSubmitting, updateApiSubmitting] = useState(false);
   const [error, updateError] = useState('');
   const { result } = useTypedSelector(state => state.async.getItemDetails);
-  const { userId, siteId, countryCode } = useTypedSelector(state => state.User);
-  const itemDetails = result && result.data;
+  const itemDetails: ItemDetails = result && result.data;
   const updateQuantityAPIStatus = useTypedSelector(state => state.async.updateOHQty);
   const dispatch = useDispatch();
 
@@ -54,9 +57,8 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
   useEffect(() => {
     // on api success
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result) {
-      trackEvent('item_details_update_oh_quantity_api_success');
       dispatch(updatePendingOHQty(newOHQty));
-      if (props.exceptionType === 'NO') {
+      if (props.exceptionType === 'NO' || props.exceptionType === 'C' || props.exceptionType === 'NSFL') {
         dispatch(setActionCompleted());
       }
       updateApiSubmitting(false);
@@ -65,9 +67,6 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
 
     // on api failure
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.error) {
-      trackEvent('item_details_update_oh_quantity_api_failure', {
-        errorDetails: updateQuantityAPIStatus.error.message || updateQuantityAPIStatus.error
-      });
       updateApiSubmitting(false);
       return updateError(strings('ITEM.OH_UPDATE_API_ERROR'));
     }
@@ -82,14 +81,21 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
   }, [updateQuantityAPIStatus]);
 
   const handleSaveOHQty = () => {
-    trackEvent('item_details_update_oh_quantity_api_call', { newOHQty, itemNbr: itemDetails.itemNbr });
+    const {
+      basePrice, categoryNbr, itemName, itemNbr, onHandsQty, upcNbr
+    } = itemDetails;
+    const change = basePrice * (newOHQty - itemDetails.onHandsQty);
     dispatch(updateOHQty({
-      data: { onHandQty: newOHQty },
-      itemNumber: itemDetails.itemNbr,
-      headers: {
-        userId,
-        clubNbr: siteId,
-        countryCode
+      data: {
+        itemName,
+        itemNbr,
+        upcNbr: parseInt(upcNbr, 10),
+        categoryNbr,
+        oldQuantity: onHandsQty,
+        newQuantity: newOHQty,
+        dollarChange: change,
+        initiatedTimestamp: moment().toISOString(),
+        approvalRequestSource: approvalRequestSource.ItemDetails
       }
     }));
   };
@@ -100,6 +106,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
     if (!isNaN(newQty)) {
       setNewOHQty(newQty);
       setIsValidNbr(validateQty(newQty));
+      setIsSameQty(validateSameQty(ohQty, newQty));
     }
   };
 
@@ -111,6 +118,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
       setIsValidNbr(true);
       setNewOHQty((prevState => prevState + 1));
     }
+    setIsSameQty(validateSameQty(ohQty, newOHQty + 1));
   };
 
   const handleDecreaseQty = () => {
@@ -121,6 +129,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
       setIsValidNbr(true);
       setNewOHQty((prevState => prevState - 1));
     }
+    setIsSameQty(validateSameQty(ohQty, newOHQty - 1));
   };
 
   if (apiSubmitting) {
@@ -183,7 +192,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps) => {
           style={styles.saveBtn}
           title="Save"
           type={Button.Type.PRIMARY}
-          disabled={!isValidNbr}
+          disabled={(!isValidNbr || isSameQty)}
           onPress={handleSaveOHQty}
         />
       </View>
