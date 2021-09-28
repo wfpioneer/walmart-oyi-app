@@ -1,0 +1,7 @@
+// eslint-disable-next-line no-shadow
+export enum LocationType {
+    ZONE = 'Zones',
+    AISLE = 'Aisles',
+    SECTION = 'Sections',
+    LOCATION_DETAILS = 'LocationDetails'
+}

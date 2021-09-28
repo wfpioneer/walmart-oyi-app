@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
+<MaterialTopTabNavigator
+  tabBarOptions={
+    Object {
+      "activeTintColor": "#0071e9",
+      "indicatorStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "style": Object {
+        "backgroundColor": "#ffffffff",
+      },
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.LOCATION.FLOORS\\" translation] (1)"
+  />
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.LOCATION.RESERVES\\" translation] (1)"
+  />
+</MaterialTopTabNavigator>
+`;
+
+exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
+<MaterialTopTabNavigator
+  tabBarOptions={
+    Object {
+      "activeTintColor": "#0071e9",
+      "indicatorStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "style": Object {
+        "backgroundColor": "#ffffffff",
+      },
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.LOCATION.FLOORS\\" translation] (0)"
+  />
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.LOCATION.RESERVES\\" translation] (0)"
+  />
+</MaterialTopTabNavigator>
+`;
+
+exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 1`] = `
+<MaterialTopTabNavigator
+  tabBarOptions={
+    Object {
+      "activeTintColor": "#0071e9",
+      "indicatorStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "style": Object {
+        "backgroundColor": "#ffffffff",
+      },
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.LOCATION.FLOORS\\" translation] (100)"
+  />
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.LOCATION.RESERVES\\" translation] (100)"
+  />
+</MaterialTopTabNavigator>
+`;

@@ -2,6 +2,7 @@
 
 exports[`Test Location Item Card Renders Location Item Card with mock Aisle data 1`] = `
 <ForwardRef
+  onPress={[Function]}
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -62,6 +63,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Aisle data
 
 exports[`Test Location Item Card Renders Location Item Card with mock Section data 1`] = `
 <ForwardRef
+  onPress={[Function]}
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -99,7 +101,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Section da
             }
           }
         >
-          2 items, 4 pallets
+          2 Items, 4 Pallets
         </Text>
       </View>
     </View>
@@ -122,6 +124,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Section da
 
 exports[`Test Location Item Card Renders Location Item Card with mock Zone data 1`] = `
 <ForwardRef
+  onPress={[Function]}
   style={
     Object {
       "backgroundColor": "#ffffffff",

@@ -43,7 +43,7 @@ export default {
     BARCODE_SCAN_ERROR: '此条码类型有误',
     ITEM: '商品',
     ITEMS: '多个商品',
-    TOOLS: 'Tools' // TODO Mandarin Translation
+    TOOLS: '工具箱'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -62,7 +62,8 @@ export default {
     NO_SALES: '无销售清单',
     NEGATIVE_ON_HANDS: '负现货清单',
     CANCELLED: '取消状态商品清单',
-    NSFL: '无楼面位置商品清单'
+    NSFL: '无楼面位置商品清单',
+    UNKNOWN: '未知错误'
   },
   ITEM: {
     TITLE: '查看商品明细',
@@ -99,7 +100,12 @@ export default {
     NO_FLOOR_LOCATION_DETAILS: '项目未完成，因为您从未添加楼层位置',
     ACTION_COMPLETE_ERROR: '系统错误',
     ACTION_COMPLETE_ERROR_DETAILS: '系统处理请求错误，请再试一次。',
-    WEEKLY_AVG_SALES: '每周平均销售'
+    WEEKLY_AVG_SALES: '每周平均销售',
+    SALES_FLOOR_QTY: '楼面库存',
+    RESERVE_QTY: '高货架库存',
+    CLAIMS_QTY: '索赔库存',
+    CONSOLIDATED_QTY: '临时外仓',
+    FLY_CLOUD_QTY: '云仓库存'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
@@ -131,6 +137,8 @@ export default {
     TITLE: '所有位置',
     FLOOR: '楼面位置',
     RESERVE: '高货架位置',
+    FLOORS: '楼面',
+    RESERVES: '高货架',
     ADD_LOCATION_API_ERROR: '添加位置出错，\n请重试',
     ADD_DUPLICATE_ERROR: '位置和对应类型已经存在',
     MANUAL_ENTRY_BUTTON: '手工添加位置',
@@ -142,13 +150,22 @@ export default {
     DELETE_LOCATION_API_ERROR: '删除位置报错，\n请重试',
     ADD_NEW_LOCATION: '新增位置',
     EDIT_LOCATION: '修改位置',
-    LOCATION_MANAGEMENT: 'Location Management', // TODO Mandarin Translation
-    ZONES: 'Zones', // TODO Mandarin Translation
-    AISLES: 'Aisles', // TODO Mandarin Translation
-    SECTIONS: 'Sections', // TODO Mandarin Translation
-    AREAS: 'Areas', // TODO Mandarin Translation
-    LOCATION_DETAILS: 'Location Details', // TODO Mandarin Translation
-    NO_ZONES_AVAILABLE: 'No Zones Available' // TODO Mandarin Translation
+    LOCATION_MANAGEMENT: '通道管理',
+    ITEMS: '多个商品',
+    PALLETS: 'Pallets', // TODO Mandarin Translation
+    ZONES: '区域',
+    ZONE: 'Zone', // TODO Mandarin Translation
+    AISLES: '通道',
+    AISLE: 'Aisle', // TODO Mandarin Translation
+    SECTIONS: '货架',
+    SECTION: 'Section', // TODO Mandarin Translation
+    AREAS: 'Areas',
+    LOCATION_DETAILS: '具体位置',
+    NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Mandarin Translation
+    NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Mandarin Translation
+    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
+    CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
+    ADD: '增加'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
@@ -195,5 +212,9 @@ export default {
     FAILED_APPROVE: '审批未成功',
     FAILED_ITEMS: '此商品未成功审批',
     UPDATE_API_ERROR: '更新审批状态时发生错误，\n请再试'
+  },
+  LOGIN: {
+    CLUB_NBR_REQUIRED: '需店号开启OYI',
+    ENTER_CLUB_NBR: '输入店号'
   }
 };

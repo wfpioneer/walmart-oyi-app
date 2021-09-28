@@ -8,7 +8,6 @@ import _ from 'lodash';
 import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
@@ -36,6 +35,8 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
+import { ADD_TO_PICKLIST, GET_ITEM_DETAILS, NO_ACTION } from '../../state/actions/asyncAPI';
+import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 export interface ItemDetailsScreenProps {
@@ -53,14 +54,12 @@ export interface ItemDetailsScreenProps {
   scrollViewRef: RefObject<ScrollView>;
   isSalesMetricsGraphView: boolean; setIsSalesMetricsGraphView: React.Dispatch<React.SetStateAction<boolean>>;
   ohQtyModalVisible: boolean; setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  completeApiInProgress: boolean; setCompleteApiInProgress: React.Dispatch<React.SetStateAction<boolean>>;
   errorModalVisible: boolean; setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  isRefreshing: boolean; setIsRefreshing: React.Dispatch<React.SetStateAction<boolean>>;
-  apiStart: number; setApiStart: React.Dispatch<React.SetStateAction<number>>;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
+  userFeatures: string[];
 }
 
 export interface HandleProps{
@@ -80,6 +79,7 @@ export interface RenderProps {
   floorLocations?: Location[];
   reserveLocations?: Location[];
 }
+
 const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
   const {
     navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId
@@ -112,30 +112,44 @@ const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
-export const renderOHQtyComponent = (onHandsQty: number, pendingOnHandsQty: number): JSX.Element => {
-  if (pendingOnHandsQty === -999) {
-    return (
-      <View style={styles.onHandsContainer}>
-        <View style={styles.onHandsView}>
-          <Text>{strings('ITEM.ON_HANDS')}</Text>
-          <Text>{onHandsQty}</Text>
-        </View>
-      </View>
-    );
+export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
+  const {
+    pendingOnHandsQty,
+    onHandsQty,
+    backroomQty,
+    claimsOnHandQty,
+    consolidatedOnHandQty,
+    cloudQty
+  } = itemDetails;
+
+  const salesFloorQty = cloudQty === undefined
+    ? onHandsQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
+    : onHandsQty
+        - (backroomQty + claimsOnHandQty + consolidatedOnHandQty + cloudQty);
+
+  const onHandsRow: ItemDetailsListRow = {
+    label: strings('ITEM.ON_HANDS'),
+    value: onHandsQty
+  };
+
+  if (pendingOnHandsQty !== -999) {
+    onHandsRow.value = `${onHandsQty} (${pendingOnHandsQty})`;
+    onHandsRow.additionalNote = strings('ITEM.PENDING_MGR_APPROVAL');
   }
 
-  return (
-    <View style={styles.onHandsContainer}>
-      <View style={styles.onHandsView}>
-        <Text>{strings('ITEM.ON_HANDS')}</Text>
-        <Text>{pendingOnHandsQty}</Text>
-      </View>
-      <View style={styles.mgrApprovalView}>
-        <FontAwesome5Icon name="info-circle" size={12} color={COLOR.GREY_700} style={styles.infoIcon} />
-        <Text>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
-      </View>
-    </View>
-  );
+  const qtyRows: ItemDetailsListRow[] = [
+    onHandsRow,
+    { label: strings('ITEM.SALES_FLOOR_QTY'), value: salesFloorQty },
+    { label: strings('ITEM.RESERVE_QTY'), value: backroomQty },
+    { label: strings('ITEM.CLAIMS_QTY'), value: claimsOnHandQty },
+    { label: strings('ITEM.CONSOLIDATED_QTY'), value: consolidatedOnHandQty }
+  ];
+
+  if (cloudQty !== undefined) {
+    qtyRows.push({ label: strings('ITEM.FLY_CLOUD_QTY'), value: cloudQty });
+  }
+
+  return <ItemDetailsList rows={qtyRows} indentAfterFirstRow={true} />;
 };
 
 export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
@@ -219,7 +233,7 @@ export const renderLocationComponent = (props: (RenderProps & HandleProps), item
             />
           )}
       </View>
-      <View style={styles.renderPickListContatiner}>
+      <View style={styles.renderPickListContainer}>
         {renderAddPicklistButton(props, itemDetails)}
       </View>
     </View>
@@ -325,54 +339,24 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     scrollViewRef,
     isSalesMetricsGraphView, setIsSalesMetricsGraphView,
     ohQtyModalVisible, setOhQtyModalVisible,
-    completeApiInProgress, setCompleteApiInProgress,
-    isRefreshing, setIsRefreshing,
-    apiStart, setApiStart,
     errorModalVisible, setErrorModalVisible,
     trackEventCall,
     validateSessionCall,
     useEffectHook,
-    useFocusEffectHook
+    useFocusEffectHook,
+    userFeatures
   } = props;
   // Scanned Item Event Listener
   useEffectHook(() => {
     if (navigation.isFocused()) {
       validateSessionCall(navigation, route.name).then(() => {
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
-        setApiStart(moment().valueOf());
-        dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-        trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
+        dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
-        dispatch({ type: 'API/ADD_TO_PICKLIST/RESET' });
+        dispatch({ type: ADD_TO_PICKLIST.RESET });
       }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
     }
   }, [scannedEvent]);
-
-  // Get Item Details API
-  useEffectHook(() => {
-    if (error) {
-      trackEventCall('item_details_api_failure',
-        {
-          barcode: scannedEvent.value,
-          errorDetails: error.message || JSON.stringify(error),
-          duration: moment().valueOf() - apiStart
-        });
-    }
-
-    if (_.get(result, 'status') === 204) {
-      trackEventCall('item_details_api_not_found',
-        { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
-    }
-
-    if (_.get(result, 'status') === 200) {
-      trackEventCall('item_details_api_success',
-        { barcode: scannedEvent.value, duration: moment().valueOf() - apiStart });
-    }
-
-    if (isRefreshing) {
-      setIsRefreshing(false);
-    }
-  }, [error, result]);
 
   const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
   const locationCount = (floorLocations?.length ?? 0) + (reserveLocations?.length ?? 0);
@@ -403,8 +387,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
           if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
             if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
-              trackEventCall('item_details_no_action_api_call', { itemDetails: JSON.stringify(result.data) });
-              setApiStart(moment().valueOf());
               dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
               dispatch(setManualScan(false));
             } else {
@@ -424,55 +406,25 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   // Complete Item Details API
   useEffectHook(() => {
     // on api success
-    if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.result) {
+    if (!completeItemApi.isWaiting && completeItemApi.result) {
       if (_.get(completeItemApi.result, 'status') === 204) {
-        trackEventCall('item_details_action_completed_api_success_scan_no_match',
-          {
-            itemDetails: JSON.stringify(itemDetails),
-            duration: moment().valueOf() - apiStart,
-            status: result.status
-          });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEventCall('item_details_action_completed_api_success',
-          { itemDetails: JSON.stringify(itemDetails), duration: moment().valueOf() - apiStart });
-        setCompleteApiInProgress(false);
         dispatch(setActionCompleted());
         navigation.goBack();
       }
-      return undefined;
+      dispatch({ type: NO_ACTION.RESET });
     }
 
     // on api failure
-    if (completeApiInProgress && completeItemApi.isWaiting === false && completeItemApi.error) {
+    if (!completeItemApi.isWaiting && completeItemApi.error) {
       if (completeItemApi.error === COMPLETE_API_409_ERROR) {
-        trackEventCall('item_details_action_completed_api_failure_scan_no_match',
-          {
-            itemDetails: JSON.stringify(itemDetails),
-            duration: moment().valueOf() - apiStart,
-            errorDetails: completeItemApi.error.message || completeItemApi.error
-          });
         dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
       } else {
-        trackEventCall('item_details_action_completed_api_failure',
-          {
-            itemDetails: JSON.stringify(itemDetails),
-            duration: moment().valueOf() - apiStart,
-            errorDetails: completeItemApi.error.message || completeItemApi.error
-          });
         dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
       }
-      setCompleteApiInProgress(false);
-      return undefined;
+      dispatch({ type: NO_ACTION.RESET });
     }
-
-    // on api submission
-    if (!completeApiInProgress && completeItemApi.isWaiting) {
-      trackEventCall('item_details_action_completed_api_call', { itemDetails: JSON.stringify(itemDetails) });
-      return setCompleteApiInProgress(true);
-    }
-
-    return undefined;
   }, [completeItemApi]);
 
   useFocusEffectHook(
@@ -512,9 +464,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           <TouchableOpacity
             style={styles.errorButton}
             onPress={() => {
-              setApiStart(moment().valueOf());
               trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
-              trackEventCall('item_details_api_call', { barcode: scannedEvent.value });
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
           >
@@ -558,11 +508,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      setIsRefreshing(true);
-      setApiStart(moment().valueOf());
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-      trackEventCall('item_details_api_call', { itemNumber: itemDetails.itemNbr });
       dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
@@ -585,7 +532,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={styles.container}
-        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}
+        refreshControl={<RefreshControl refreshing={false} onRefresh={handleRefresh} />}
       >
         {isWaiting && (
         <ActivityIndicator
@@ -611,10 +558,11 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             <SFTCard
               title={strings('ITEM.QUANTITY')}
               iconName="pallet"
-              topRightBtnTxt={pendingOnHandsQty === -999 ? strings('GENERICS.CHANGE') : undefined}
+              topRightBtnTxt={(pendingOnHandsQty === -999 && userFeatures.includes('on hands change'))
+                ? strings('GENERICS.CHANGE') : undefined}
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
-              {renderOHQtyComponent(itemDetails.onHandsQty, pendingOnHandsQty)}
+              {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
             <SFTCard
               iconProp={(
@@ -664,15 +612,13 @@ const ReviewItemDetails = (): JSX.Element => {
   const { userId } = useTypedSelector(state => state.User);
   const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
   const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
+  const userFeatures = useTypedSelector(state => state.User.features);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
-  const [completeApiInProgress, setCompleteApiInProgress] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [apiStart, setApiStart] = useState(0);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   return (
     <ReviewItemDetailsScreen
@@ -697,18 +643,13 @@ const ReviewItemDetails = (): JSX.Element => {
       setIsSalesMetricsGraphView={setIsSalesMetricsGraphView}
       ohQtyModalVisible={ohQtyModalVisible}
       setOhQtyModalVisible={setOhQtyModalVisible}
-      completeApiInProgress={completeApiInProgress}
-      setCompleteApiInProgress={setCompleteApiInProgress}
-      isRefreshing={isRefreshing}
-      setIsRefreshing={setIsRefreshing}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
       errorModalVisible={errorModalVisible}
       setErrorModalVisible={setErrorModalVisible}
       trackEventCall={trackEvent}
       validateSessionCall={validateSession}
       useEffectHook={useEffect}
       useFocusEffectHook={useFocusEffect}
+      userFeatures={userFeatures}
     />
   );
 };

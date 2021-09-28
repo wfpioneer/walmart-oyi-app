@@ -17,6 +17,9 @@ export const GET_LOCATION_DETAILS = 'SAGA/GET_LOCATION_DETAILS';
 export const GET_FLUFFY_FEATURES = 'SAGA/GET_FLUFFY_FEATURES';
 export const GET_APPROVAL_LIST = 'SAGA/GET_APPROVAL_LIST';
 export const UPDATE_APPROVAL_LIST = 'SAGA/UPDATE_APPROVAL_LIST';
+export const GET_ALL_ZONES = 'SAGA/GET_ZONES';
+export const GET_AISLE = 'SAGA/GET_AISLE';
+export const GET_SECTIONS = 'SAGA/GET_SECTIONS';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -26,7 +29,7 @@ export const editLocation = (payload: any) => ({ type: EDIT_LOCATION, payload } 
 export const addLocation = (payload: any) => ({ type: ADD_LOCATION, payload } as const);
 export const updateOHQty = (payload: { data: Partial<ApprovalListItem>}) => ({ type: UPDATE_OH_QTY, payload } as const);
 export const addToPicklist = (payload: any) => ({ type: ADD_TO_PICKLIST, payload } as const);
-export const getWorklistSummary = (payload: any) => ({ type: GET_WORKLIST_SUMMARY, payload } as const);
+export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
 export const deleteLocation = (payload: any) => ({ type: DELETE_LOCATION, payload } as const);
 export const noAction = (payload: any) => ({ type: NO_ACTION, payload } as const);
 export const printSign = (payload: any) => ({ type: PRINT_SIGN, payload } as const);
@@ -41,3 +44,6 @@ export const updateApprovalList = (payload: {
   approvalItems: ApprovalListItem[]
   headers: {action: approvalAction},
 }) => ({ type: UPDATE_APPROVAL_LIST, payload } as const);
+export const getAllZones = () => ({ type: GET_ALL_ZONES } as const);
+export const getAisle = (payload: {zoneId: number}) => ({ type: GET_AISLE, payload } as const);
+export const getSections = (payload: { aisleId: number}) => ({ type: GET_SECTIONS, payload } as const);

@@ -609,6 +609,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
     scrollOffset={0}
     scrollOffsetMax={0}
     scrollTo={null}
+    statusBarTranslucent={false}
     supportedOrientations={
       Array [
         "portrait",

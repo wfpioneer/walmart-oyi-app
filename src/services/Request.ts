@@ -62,6 +62,8 @@ class Request {
             interceptRequest.headers['wm_svc.name'] = svcName.itemDetailsName;
           } else if (request.url.includes(envUrls.managerApprovalUrl)) {
             interceptRequest.headers['wm_svc.name'] = svcName.managerApprovalName;
+          } else if (request.url.includes(envUrls.locationUrl)) {
+            interceptRequest.headers['wm_svc.name'] = svcName.locationName;
           }
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();

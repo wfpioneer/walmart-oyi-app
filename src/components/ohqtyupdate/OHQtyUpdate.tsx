@@ -17,7 +17,6 @@ import { numbers, strings } from '../../locales';
 import { updateOHQty } from '../../state/actions/saga';
 import { setActionCompleted, updatePendingOHQty } from '../../state/actions/ItemDetailScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { trackEvent } from '../../utils/AppCenterTool';
 import ItemDetails from '../../models/ItemDetails';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 
@@ -49,7 +48,6 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   const [isSameQty, setIsSameQty] = useState(validateSameQty(ohQty, newOHQty));
   const [apiSubmitting, updateApiSubmitting] = useState(false);
   const [error, updateError] = useState('');
-  const [apiStart, setApiStart] = useState(0);
   const { result } = useTypedSelector(state => state.async.getItemDetails);
   const itemDetails: ItemDetails = result && result.data;
   const updateQuantityAPIStatus = useTypedSelector(state => state.async.updateOHQty);
@@ -59,10 +57,6 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   useEffect(() => {
     // on api success
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result) {
-      trackEvent('item_details_update_oh_quantity_api_success', {
-        itemDetails: JSON.stringify(itemDetails),
-        duration: moment().valueOf() - apiStart
-      });
       dispatch(updatePendingOHQty(newOHQty));
       if (props.exceptionType === 'NO' || props.exceptionType === 'C' || props.exceptionType === 'NSFL') {
         dispatch(setActionCompleted());
@@ -73,11 +67,6 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
 
     // on api failure
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.error) {
-      trackEvent('item_details_update_oh_quantity_api_failure', {
-        itemDetails: JSON.stringify(itemDetails),
-        errorDetails: updateQuantityAPIStatus.error.message || updateQuantityAPIStatus.error,
-        duration: moment().valueOf() - apiStart
-      });
       updateApiSubmitting(false);
       return updateError(strings('ITEM.OH_UPDATE_API_ERROR'));
     }
@@ -96,8 +85,6 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
       basePrice, categoryNbr, itemName, itemNbr, onHandsQty, upcNbr
     } = itemDetails;
     const change = basePrice * (newOHQty - itemDetails.onHandsQty);
-    trackEvent('item_details_update_oh_quantity_api_call', { newOHQty, itemNbr: itemDetails.itemNbr });
-    setApiStart(moment().valueOf());
     dispatch(updateOHQty({
       data: {
         itemName,

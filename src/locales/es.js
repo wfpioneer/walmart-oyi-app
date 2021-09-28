@@ -37,7 +37,7 @@ export default {
     DEFAULT: 'Default',
     CLUB: 'Club',
     SUBMIT: 'Enviar',
-    RETRY: 'Rever',
+    RETRY: 'Reintentar',
     GOAL: 'Objetivo',
     VERSION: 'Versión',
     BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido',
@@ -62,7 +62,8 @@ export default {
     NO_SALES: 'Sin Venta',
     NEGATIVE_ON_HANDS: 'Existencia Negativa',
     CANCELLED: 'Cancelados',
-    NSFL: 'Sin Ubicación en Piso de Ventas'
+    NSFL: 'Sin Ubicación en Piso de Ventas',
+    UNKNOWN: 'desconocida' // TODO needs spanish Translation
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',
@@ -74,10 +75,10 @@ export default {
     ON_HANDS: 'Existencia',
     ON_ORDER: 'Ordenado',
     REPLENISHMENT: 'Resurtido',
-    PENDING_MGR_APPROVAL: 'Pendiente de aprovación de gerente',
+    PENDING_MGR_APPROVAL: 'Pendiente de aprobación de gerente',
     LOCATION: 'Ubicación',
-    TO_PICKLIST: 'a Lista de Pickeo',
-    RESERVE_NEEDED: 'La ubicación de agregar a Lista de Pickeo',
+    TO_PICKLIST: ' a Lista de Pickeo',
+    RESERVE_NEEDED: 'Ubicación en bodega necesaria para agregar a lista de pickeo',
     ADDED_TO_PICKLIST: 'Elemento agregado a la lista de Pickeo',
     ADDED_TO_PICKLIST_ERROR: 'El envío de la lista de Pickeo no se realizó correctamente. Inténtalo de nuevo.',
     ITEM_NOT_FOUND: 'No se encontró el elemento escaneado.',
@@ -99,7 +100,12 @@ export default {
     NO_FLOOR_LOCATION_DETAILS: 'El artículo no se completó porque nunca agregó una ubicación en el piso',
     ACTION_COMPLETE_ERROR: 'Error completando la acción',
     ACTION_COMPLETE_ERROR_DETAILS: 'Hubo un error complentando la acción. Por favor inténtalo de nuevo.',
-    WEEKLY_AVG_SALES: 'Ventas Semanales'
+    WEEKLY_AVG_SALES: 'Ventas Semanales',
+    SALES_FLOOR_QTY: 'Piso de Venta',
+    RESERVE_QTY: 'Bodega',
+    CLAIMS_QTY: 'Claims',
+    CONSOLIDATED_QTY: 'Consol',
+    FLY_CLOUD_QTY: 'Fly Cloud Qty', // Leaving This as is until MX has a need for Cloud Qty
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -131,6 +137,8 @@ export default {
     TITLE: 'Todas las Ubicaciones',
     FLOOR: 'Ubicación en Piso',
     RESERVE: 'Ubicaciones en Bodega',
+    FLOORS: 'Floor', // TODO Spanish Translation
+    RESERVES: 'Reserve', // TODO Spanish Translation
     ADD_LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. \nPor favor inténtalo de nuevo.',
     EDIT_LOCATION_API_ERROR: 'Hubo en un error editando la ubicación. \nPor favor inténtalo de nuevo.',
     ADD_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
@@ -143,12 +151,21 @@ export default {
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
+    ITEMS: 'Items', // TODO Spanish Translation
+    PALLETS: 'Pallets', // TODO Spanish Translation
     ZONES: 'Zonas',
+    ZONE: 'Zone', // TODO Spanish Translation
     AISLES: 'Pasillos',
+    AISLE: 'Aisle', // TODO Spanish Translation
     SECTIONS: 'Secciones',
+    SECTION: 'Section', // TODO Spanish Translation
     AREAS: 'Areas', // TODO Spanish Translation
     LOCATION_DETAILS: 'Detalles de ubicación',
-    NO_ZONES_AVAILABLE: 'No Zones Available' // TODO Spanish Translation
+    NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Spanish Translation
+    NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Spanish Translation
+    LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
+    CLEAR_ALL: 'Clear all', // TODO Spanish Translation
+    ADD: 'Agregar'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -164,7 +181,7 @@ export default {
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
     FLOOR: 'Piso',
-    ENDCAP: 'Tapa final',
+    ENDCAP: 'Cabecera',
     POD: 'POD',
     DISPLAY: 'Exhibición',
     RESERVE: 'Reserva'
@@ -173,14 +190,14 @@ export default {
     NEW_QUANTITY: 'Nueva Cantidad',
     CURRENT_QUANTITY: 'Cantidad Actual',
     DAYS_LEFT: '%{time} día(s) restantes',
-    APPROVALS: 'Aprovaciones',
-    APPROVE_ITEMS: 'Aprovar artículos',
+    APPROVALS: 'Aprobaciones',
+    APPROVE_ITEMS: 'Aprobar artículos',
     OH_CHANGE: 'Cambio de Existencia',
     SELECT_ALL: 'Seleccionar Todo',
     DESELECT_ALL: 'Deseleccionar Todo',
     SELECTED: 'Seleccionado',
-    APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprovación.\nPor favor inténtalo de nuevo',
-    APPROVE: 'Aprovar',
+    APPROVAL_API_ERROR: 'Hubo un problema  al recuperar la lista de aprobación.\nPor favor inténtalo de nuevo',
+    APPROVE: 'Aprobar',
     REJECT: 'Rechazar',
     GO_BACK: 'Ir atrás',
     CONFIRM: 'Confirmar',
@@ -195,5 +212,9 @@ export default {
     FAILED_APPROVE: 'Las solicitudes fallaron al aprobarse',
     FAILED_ITEMS: 'Artículos Fallidos',
     UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo'
+  },
+  LOGIN: {
+    CLUB_NBR_REQUIRED: 'Un número de club es necesario para ingresar a OYI',
+    ENTER_CLUB_NBR: 'Ingresa número de club'
   }
 };

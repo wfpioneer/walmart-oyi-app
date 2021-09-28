@@ -6,15 +6,21 @@ gitShallowDepth: 2147483647
 envs:
   global:
     variables:
+      # Token generated using SVCintlsamstech service account
+      GITHUB_API_TOKEN: 'ENC[QU2juSbwG+R7HO6mSGqUm/FcINIGG7lWFS3KHR7Lkss9/EYkXSuplj0nGZGtTw9/]'
+      # Configure react-native-version to only target android
+      RNV: android
+      # App Center Prod Secret
+      APPCENTER_SECRET_PROD: ENC[yAwiG+Mp5lQR3hPbCvhtYWN0RfIXDwE/N0ppOJl/dWU4d+uxXTtKJuZttxlOO6mJ]
       #Template required vars for CI/CD
       # true / false
       AIRWATCH_ACTIVATE: false
       # Cert / Prod
       AIRWATCH_ENV: Prod
       # whether the APK should be built or not
-      BUILD_APP_FLAG: true
+      BUILD_APP_FLAG: false
       # true / false
-      DEPLOY_TO_AIRWATCH: true
+      DEPLOY_TO_AIRWATCH: false
       # email list where the notification will be sent
       EMAIL_NOTIFICATION: IntlSamsOYI@wal-mart.com
 
@@ -82,6 +88,17 @@ envs:
         - rootDir: './'
           type: reactnative
 
+  prod-deploy:
+    variables:
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+      # true / false
+      DEPLOY_TO_AIRWATCH: true
+  prod-build:
+    variables:
+      # whether the APK should be built or not
+      BUILD_APP_FLAG: true
+
 #  aos-variables:
 #    variables:
 #      APK_NAME: 'OYI'
@@ -119,14 +136,40 @@ tools:
     - build-tools;29.0.3
     - extras;android;m2repository
     - ndk;21.3.6528147
-  gradle: 6.3
-  maven: 3.5.4
-  nodejs: 12.16.0
-  npm: 6.13.4
-  sonarscanner: 3.0.3.778
+  gradle: 6.7.1
+  maven: 3.8.2
+  nodejs: 14.17.5
+  npm: 7.20.6
+  sonarscanner: 4.6.2.2472
+
+triggers:
+  - push:
+      ignoreMessage: .*\#nobuild
+  - pr:
+      ignoreMessage: .*\#nobuild
+      call: pr-preparation
+  - manual:
+      name: Build & Deploy Production apk to Airwatch
+      call: reactnative-build(prod-deploy)
+  - manual:
+      name: Build Production apk
+      call: reactnative-build(prod-build)
+
+rules:
+  - before(build-android):
+      - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
+      - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_PROD\" }" >> android/app/src/main/assets/appcenter-config.json'
 
 flows:
+#Overrides RN templates default flow to prevent apk's from building when pushing commits to Master
+  default:
+    - call: npm-install-and-coverage
+    - call: sonar
+#Overrides RN templates default flow to prevent apk's from building when making PR commits.
+  pr-preparation:
+    - call: validate-pr-repository
+    - call: npm-install-and-coverage
+    - call: sonar
   npm-install-and-coverage:
     - npm ci
-    - (name Remove dev appcenter config) rm android/app/src/main/assets/appcenter-config.json
-    - (name Install prod appcenter config) cp android/app/src/main/assets/appcenter-config-prod.json ./android/app/src/main/assets/appcenter-config.json
+    - npm run test:coverage

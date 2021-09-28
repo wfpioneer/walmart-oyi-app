@@ -1,8 +1,12 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { NavigationProp, Route } from '@react-navigation/native';
 import { LocationDetailsScreen } from './LocationDetails';
 import Location from '../../models/Location';
+import { AsyncState } from '../../models/AsyncState';
 
+let navigationProp: NavigationProp<any>;
+let routeProp: Route<any>;
 describe('LocationDetailsScreen', () => {
   const defaultAsyncState = {
     isWaiting: false,
@@ -60,23 +64,17 @@ describe('LocationDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <LocationDetailsScreen
-          apiInProgress={false}
           delAPI={defaultAsyncState}
           dispatch={jest.fn()}
           displayConfirmation={false}
-          apiError={false}
           floorLocations={floorLoc}
           reserveLocations={reserveLoc}
           itemDetails={defaultItemLocDetails}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
-          navigation={jest.fn()}
-          route={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          setAPIInProgress={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
           setDisplayConfirmation={jest.fn()}
-          setApiError={jest.fn()}
           setLocToConfirm={jest.fn()}
           useEffectHook={jest.fn()}
         />
@@ -88,23 +86,17 @@ describe('LocationDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <LocationDetailsScreen
-          apiInProgress={false}
           delAPI={defaultAsyncState}
           dispatch={jest.fn()}
           displayConfirmation={false}
-          apiError={false}
           floorLocations={[]}
           reserveLocations={reserveLoc}
           itemDetails={defaultItemLocDetails}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
-          navigation={jest.fn()}
-          route={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          setAPIInProgress={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
           setDisplayConfirmation={jest.fn()}
-          setApiError={jest.fn()}
           setLocToConfirm={jest.fn()}
           useEffectHook={jest.fn()}
         />
@@ -116,23 +108,17 @@ describe('LocationDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <LocationDetailsScreen
-          apiInProgress={false}
           delAPI={defaultAsyncState}
           dispatch={jest.fn()}
           displayConfirmation={false}
-          apiError={false}
           floorLocations={floorLoc}
           reserveLocations={[]}
           itemDetails={defaultItemLocDetails}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
-          navigation={jest.fn()}
-          route={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          setAPIInProgress={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
           setDisplayConfirmation={jest.fn()}
-          setApiError={jest.fn()}
           setLocToConfirm={jest.fn()}
           useEffectHook={jest.fn()}
 
@@ -145,23 +131,17 @@ describe('LocationDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <LocationDetailsScreen
-          apiInProgress={false}
           delAPI={defaultAsyncState}
           dispatch={jest.fn()}
           displayConfirmation={false}
-          apiError={false}
           floorLocations={[]}
           reserveLocations={[]}
           itemDetails={defaultItemLocDetails}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
-          navigation={jest.fn()}
-          route={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          setAPIInProgress={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
           setDisplayConfirmation={jest.fn()}
-          setApiError={jest.fn()}
           setLocToConfirm={jest.fn()}
           useEffectHook={jest.fn()}
         />
@@ -181,23 +161,17 @@ describe('LocationDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <LocationDetailsScreen
-          apiInProgress={false}
           delAPI={delApiIsWaiting}
           dispatch={jest.fn()}
           displayConfirmation={false}
-          apiError={false}
           floorLocations={[]}
           reserveLocations={[]}
           itemDetails={defaultItemLocDetails}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
-          navigation={jest.fn()}
-          route={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          setAPIInProgress={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
           setDisplayConfirmation={jest.fn()}
-          setApiError={jest.fn()}
           setLocToConfirm={jest.fn()}
           useEffectHook={jest.fn()}
         />
@@ -207,25 +181,25 @@ describe('LocationDetailsScreen', () => {
 
     it('Renders Delete Location Error \'Retry\' ', () => {
       const renderer = ShallowRenderer.createRenderer();
+      const deleteLocationError: AsyncState = {
+        isWaiting: false,
+        value: null,
+        error: ' Network Error ',
+        result: null
+      };
       renderer.render(
         <LocationDetailsScreen
-          apiInProgress={false}
-          delAPI={defaultAsyncState}
+          delAPI={deleteLocationError}
           dispatch={jest.fn()}
           displayConfirmation={false}
-          apiError={true}
           floorLocations={[]}
           reserveLocations={[]}
           itemDetails={defaultItemLocDetails}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
-          navigation={jest.fn()}
-          route={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          setAPIInProgress={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
           setDisplayConfirmation={jest.fn()}
-          setApiError={jest.fn()}
           setLocToConfirm={jest.fn()}
           useEffectHook={jest.fn()}
         />
@@ -243,23 +217,17 @@ describe('LocationDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <LocationDetailsScreen
-          apiInProgress={false}
           delAPI={defaultAsyncState}
           dispatch={jest.fn()}
           displayConfirmation={false}
-          apiError={false}
           floorLocations={[]}
           reserveLocations={[]}
           itemDetails={defaultItemLocDetails}
           locToConfirm={locationConfirm}
           locationsApi={defaultAsyncState}
-          navigation={jest.fn()}
-          route={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          setAPIInProgress={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
           setDisplayConfirmation={jest.fn()}
-          setApiError={jest.fn()}
           setLocToConfirm={jest.fn()}
           useEffectHook={jest.fn()}
         />
@@ -272,23 +240,17 @@ describe('LocationDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <LocationDetailsScreen
-          apiInProgress={false}
           delAPI={defaultAsyncState}
           dispatch={jest.fn()}
           displayConfirmation={showConfirmationModal}
-          apiError={false}
           floorLocations={[]}
           reserveLocations={[]}
           itemDetails={defaultItemLocDetails}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
-          navigation={jest.fn()}
-          route={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          setAPIInProgress={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
           setDisplayConfirmation={jest.fn()}
-          setApiError={jest.fn()}
           setLocToConfirm={jest.fn()}
           useEffectHook={jest.fn()}
         />
@@ -306,23 +268,17 @@ describe('LocationDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <LocationDetailsScreen
-          apiInProgress={false}
           delAPI={defaultAsyncState}
           dispatch={jest.fn()}
           displayConfirmation={false}
-          apiError={false}
           floorLocations={[]}
           reserveLocations={[]}
           itemDetails={defaultItemLocDetails}
           locToConfirm={defaultLocConfirm}
           locationsApi={getLocationIsWaiting}
-          navigation={jest.fn()}
-          route={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          setAPIInProgress={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
           setDisplayConfirmation={jest.fn()}
-          setApiError={jest.fn()}
           setLocToConfirm={jest.fn()}
           useEffectHook={jest.fn()}
         />

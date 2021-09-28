@@ -1,13 +1,16 @@
 import { NavigationProp } from '@react-navigation/native';
 import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
-import { Platform, View } from 'react-native';
-// @ts-ignore // 'react-native-wmsso' has no type definition it would seem
+import {
+  Modal, Platform, View
+} from 'react-native';
+// @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
 import Button from '../../components/buttons/Button';
+import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
 import styles from './Login.style';
-import { assignFluffyFeatures, loginUser } from '../../state/actions/User';
+import { assignFluffyFeatures, loginUser, logoutUser } from '../../state/actions/User';
 import { getFluffyFeatures } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
@@ -19,12 +22,18 @@ import { RootState } from '../../state/reducers/RootReducer';
 
 const mapDispatchToProps = {
   loginUser,
+  logoutUser,
   hideActivityModal,
   setEndTime,
   getFluffyFeatures,
   assignFluffyFeatures,
   showActivityModal
 };
+
+// This type uses all fields from the User type except it makes siteId optional
+// It is necessary to provide an accurate type to the User object returned
+// from WMSSO.getUser (since its siteId is optional and CN users can log in without one)
+type WMSSOUser = Pick<Partial<User>, 'siteId'> & Omit<User, 'siteId'>;
 
 const mapStateToProps = (state: RootState) => ({
   User: state.User,
@@ -34,6 +43,7 @@ const mapStateToProps = (state: RootState) => ({
 // TODO correct all the function definitions (specifically return types)
 export interface LoginScreenProps {
   loginUser: (userPayload: User) => void;
+  logoutUser: () => void,
   User: User;
   navigation: NavigationProp<any>;
   hideActivityModal: () => void;
@@ -43,6 +53,8 @@ export interface LoginScreenProps {
   assignFluffyFeatures: (resultPayload: string[]) => void;
   showActivityModal: () => void;
 }
+
+const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
 
 // TODO convert to Functional Component
 export class LoginScreen extends React.PureComponent<LoginScreenProps> {
@@ -71,15 +83,9 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
 
     if (prevProps.fluffyApiState.isWaiting) {
       if (this.props.fluffyApiState.result) {
-        trackEvent('fluffy_api_success', {
-          status: this.props.fluffyApiState.result.status
-        });
         this.props.assignFluffyFeatures(this.props.fluffyApiState.result.data);
       } else if (this.props.fluffyApiState.error) {
         // TODO Display toast/popup letting user know roles could not be retrieved
-        trackEvent('fluffy_api_failure', {
-          errorDetails: this.props.fluffyApiState.error.message || JSON.stringify(this.props.fluffyApiState.error)
-        });
       }
 
       this.props.hideActivityModal();
@@ -97,12 +103,24 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     }
   }
 
+  signOutUser(): void {
+    this.props.showActivityModal();
+    trackEvent('user_sign_out', { lastPage: 'Login' });
+    WMSSO.signOutUser().then(() => {
+      this.props.logoutUser();
+      if (Platform.OS === 'android') {
+        this.props.hideActivityModal();
+      }
+      this.signInUser();
+    });
+  }
+
   signInUser(): void {
     if (Config.ENVIRONMENT !== 'prod') {
       // For use with Fluffy in non-prod
       WMSSO.setEnv('STG');
     }
-    WMSSO.getUser().then((user: User) => {
+    WMSSO.getUser().then((user: WMSSOUser) => {
       if (!this.props.User.userId) {
         const countryCode = user.countryCode.toLowerCase();
         switch (countryCode) {
@@ -121,15 +139,31 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
         }
       }
       setUserId(user.userId);
-      this.props.loginUser(user);
+      this.props.loginUser({ ...user, siteId: user.siteId ?? 0 });
       trackEvent('user_sign_in');
-      this.props.getFluffyFeatures(user);
+      if (user.siteId) {
+        this.props.getFluffyFeatures(user);
+      }
     });
   }
 
   render(): ReactNode {
     return (
       <View style={styles.container}>
+        <Modal
+          visible={!this.props.User.siteId && userIsSignedIn(this.props.User)}
+          transparent
+        >
+          <EnterClubNbrForm
+            onSubmit={clubNbr => {
+              const updatedUser = { ...this.props.User, siteId: clubNbr };
+              this.props.loginUser(updatedUser);
+              trackEvent('user_sign_in');
+              this.props.getFluffyFeatures(updatedUser);
+            }}
+            onSignOut={() => this.signOutUser()}
+          />
+        </Modal>
         <Button
           title={strings('GENERICS.SIGN_IN')}
           style={styles.signInButton}

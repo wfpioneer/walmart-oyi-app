@@ -100,7 +100,12 @@ export default {
     NO_FLOOR_LOCATION_DETAILS: 'Item not completed because you never added a floor location',
     ACTION_COMPLETE_ERROR: 'Error Completing Action',
     ACTION_COMPLETE_ERROR_DETAILS: 'There was an error completing the action, please try again.',
-    WEEKLY_AVG_SALES: 'Weekly average sales'
+    WEEKLY_AVG_SALES: 'Weekly average sales',
+    SALES_FLOOR_QTY: 'Sales Floor',
+    RESERVE_QTY: 'Reserve',
+    CLAIMS_QTY: 'Claims',
+    CONSOLIDATED_QTY: 'Consolidated',
+    FLY_CLOUD_QTY: 'Fly Cloud',
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -132,6 +137,8 @@ export default {
     TITLE: 'All locations',
     FLOOR: 'Floor locations',
     RESERVE: 'Reserve locations',
+    FLOORS: 'Floor',
+    RESERVES: 'Reserve',
     ADD_LOCATION_API_ERROR: 'There was an error adding the location. \nPlease try again.',
     EDIT_LOCATION_API_ERROR: 'There was an error editing the location. \nPlease try again.',
     ADD_DUPLICATE_ERROR: 'Location and type combination \nalready exists.',
@@ -144,12 +151,21 @@ export default {
     ADD_NEW_LOCATION: 'Add New Location',
     EDIT_LOCATION: 'Edit Location',
     LOCATION_MANAGEMENT: 'Location Management',
+    ITEMS: 'Items',
+    PALLETS: 'Pallets',
     ZONES: 'Zones',
+    ZONE: 'Zone',
     AISLES: 'Aisles',
+    AISLE: 'Aisle',
     SECTIONS: 'Sections',
+    SECTION: 'Section',
     AREAS: 'Areas',
     LOCATION_DETAILS: 'Location Details',
-    NO_ZONES_AVAILABLE: 'No Zones Available'
+    NO_ZONES_AVAILABLE: 'No Zones Available',
+    NO_AISLES_AVAILABLE: 'No Aisles Available',
+    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
+    CLEAR_ALL: 'Clear all',
+    ADD: 'Add'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
@@ -196,5 +212,9 @@ export default {
     FAILED_APPROVE: 'Requests Failed to Approve',
     FAILED_ITEMS: 'Items Failed',
     UPDATE_API_ERROR: 'There was an error updating the approval status. \n Please try again.'
+  },
+  LOGIN: {
+    CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI',
+    ENTER_CLUB_NBR: 'Enter a Club Number'
   }
 };
