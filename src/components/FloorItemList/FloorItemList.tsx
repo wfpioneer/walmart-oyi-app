@@ -1,31 +1,11 @@
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { FloorItem } from '../../models/LocationItems';
-import styles from './FloorItemRow.style';
-import { currencies, strings } from '../../locales';
+import FloorItemRow from '../FloorItemRow/FloorItemRow';
 
 export interface FloorItemListProps {
     items: FloorItem[]
 }
-
-// type FloorItemProps = { item: FloorItem, navigation: NavigationProp<any>, dispatch: Dispatch<any>}
-type FloorItemProps = { item: FloorItem };
-
-export const FloorItemRow = (props: FloorItemProps): JSX.Element => {
-  const { item } = props;
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.itemNbr}>
-          {`${strings('ITEM.ITEM')} ${item.itemNbr}`}
-        </Text>
-        <Text style={styles.itemDesc}>{item.itemDesc}</Text>
-        <Text style={styles.price}>{currencies(item.price)}</Text>
-      </View>
-    </View>
-  );
-};
 
 const FloorItemList = (props: FloorItemListProps): JSX.Element => (
   <View>
