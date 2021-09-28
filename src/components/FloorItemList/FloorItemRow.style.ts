@@ -13,7 +13,8 @@ export default StyleSheet.create({
   },
   list: {
     flex: 1,
-    width: '100%'
+    width: '100%',
+    lineHeight: 30
   },
   content: {
     alignItems: 'flex-start',
@@ -22,9 +23,14 @@ export default StyleSheet.create({
   },
   itemNbr: {
     color: COLOR.GREY_600,
-    fontSize: 12
+    fontSize: 12,
+    lineHeight: 22
+  },
+  itemDesc: {
+    lineHeight: 22
   },
   price: {
-    color: COLOR.GREY_600
+    color: COLOR.GREY_600,
+    lineHeight: 22
   }
 });

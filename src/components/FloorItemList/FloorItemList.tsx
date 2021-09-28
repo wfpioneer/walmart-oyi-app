@@ -20,7 +20,7 @@ export const FloorItemRow = (props: FloorItemProps): JSX.Element => {
         <Text style={styles.itemNbr}>
           {`${strings('ITEM.ITEM')} ${item.itemNbr}`}
         </Text>
-        <Text>{item.itemDesc}</Text>
+        <Text style={styles.itemDesc}>{item.itemDesc}</Text>
         <Text style={styles.price}>{currencies(item.price)}</Text>
       </View>
     </View>
