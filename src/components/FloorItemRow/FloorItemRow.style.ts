@@ -22,7 +22,7 @@ export default StyleSheet.create({
     flex: 1
   },
   itemNbr: {
-    color: COLOR.GREY_600,
+    color: COLOR.GREY_500,
     fontSize: 12,
     lineHeight: 22
   },
@@ -30,7 +30,7 @@ export default StyleSheet.create({
     lineHeight: 22
   },
   price: {
-    color: COLOR.GREY_600,
+    color: COLOR.GREY_500,
     lineHeight: 22
   }
 });

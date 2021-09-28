@@ -26,7 +26,7 @@ exports[`FloorItemRow Component Renders a FloorItem 1`] = `
     <Text
       style={
         Object {
-          "color": "#757575",
+          "color": "#9e9e9e",
           "fontSize": 12,
           "lineHeight": 22,
         }
@@ -46,7 +46,7 @@ exports[`FloorItemRow Component Renders a FloorItem 1`] = `
     <Text
       style={
         Object {
-          "color": "#757575",
+          "color": "#9e9e9e",
           "lineHeight": 22,
         }
       }
@@ -83,7 +83,7 @@ exports[`FloorItemRow Component Renders a FloorItem with a long name 1`] = `
     <Text
       style={
         Object {
-          "color": "#757575",
+          "color": "#9e9e9e",
           "fontSize": 12,
           "lineHeight": 22,
         }
@@ -103,7 +103,7 @@ exports[`FloorItemRow Component Renders a FloorItem with a long name 1`] = `
     <Text
       style={
         Object {
-          "color": "#757575",
+          "color": "#9e9e9e",
           "lineHeight": 22,
         }
       }
