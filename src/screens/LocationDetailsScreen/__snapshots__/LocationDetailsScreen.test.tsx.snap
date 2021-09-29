@@ -1,28 +1,1749 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test Location Details Screen Renders Location Details Screen with Mock Data 1`] = `
-<View>
+exports[`Test Location Details Screen Tests rendering Get Section Details api responses Renders Location Details activity indicator when waiting for an api response 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`Test Location Details Screen Tests rendering Get Section Details api responses Renders Location Details error message 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="alert"
+    size={40}
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.LOCATION.LOCATION_API_ERROR" translation]
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "marginVertical": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Mock Data 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
   <LocationHeader
     details="1 [missing \\"en.LOCATION.ITEMS\\" translation], 1 [missing \\"en.LOCATION.PALLETS\\" translation]"
     location="[missing \\"en.LOCATION.SECTION\\" translation] ABAR2-1"
   />
-</View>
-`;
-
-exports[`Test Location Details Screen Renders Location Details Screen with Mock Empty Data 1`] = `
-<View>
-  <LocationHeader
-    details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    location="[missing \\"en.LOCATION.SECTION\\" translation] ABAR2-1"
+  <LocationTabs
+    floorItems={
+      Array [
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+      ]
+    }
+    reserveItems={
+      Array [
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+      ]
+    }
   />
 </View>
 `;
 
-exports[`Test Location Details Screen Renders Location Details Screen with Mock Large Location Data 1`] = `
-<View>
+exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Mock Empty Data 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    location="[missing \\"en.LOCATION.SECTION\\" translation] ABAR2-1"
+  />
+  <LocationTabs
+    floorItems={Array []}
+    reserveItems={Array []}
+  />
+</View>
+`;
+
+exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Mock Large Location Data 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
   <LocationHeader
     details="100 [missing \\"en.LOCATION.ITEMS\\" translation], 100 [missing \\"en.LOCATION.PALLETS\\" translation]"
     location="[missing \\"en.LOCATION.SECTION\\" translation] ABAR2-1"
+  />
+  <LocationTabs
+    floorItems={
+      Array [
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Cabbage",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+      ]
+    }
+    reserveItems={
+      Array [
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
+        },
+      ]
+    }
   />
 </View>
 `;

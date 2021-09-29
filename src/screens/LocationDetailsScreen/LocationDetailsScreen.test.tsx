@@ -24,73 +24,123 @@ describe('Test Location Details Screen', () => {
     error: null,
     result: null
   };
-  it('Renders Location Details Screen with Mock Data', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    renderer.render(
-      <LocationDetailsScreen
-        sectionName={SECTION_NAME}
-        zoneName={ZONE_NAME}
-        aisleName={AISLE_NAME}
-        mockData={mockLocationDetails}
-        getSectionDetailsApi={defaultAsyncState}
-        dispatch={jest.fn()}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
-});
+  describe('Tests rendering location details screen data', () => {
+    it('Renders Location Details Screen with Mock Data', () => {
+      const sectionDetails: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: mockLocationDetails
+        }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <LocationDetailsScreen
+          sectionName={SECTION_NAME}
+          zoneName={ZONE_NAME}
+          aisleName={AISLE_NAME}
+          getSectionDetailsApi={sectionDetails}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
 
-describe('Test Location Details Screen', () => {
-  const defaultAsyncState: AsyncState = {
-    isWaiting: false,
-    value: null,
-    error: null,
-    result: null
-  };
-  it('Renders Location Details Screen with Mock Empty Data', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    renderer.render(
-      <LocationDetailsScreen
-        sectionName={SECTION_NAME}
-        zoneName={ZONE_NAME}
-        aisleName={AISLE_NAME}
-        mockData={mockLocationDetailsEmpty}
-        getSectionDetailsApi={defaultAsyncState}
-        dispatch={jest.fn()}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
-});
+    it('Renders Location Details Screen with Mock Empty Data', () => {
+      const sectionDetailsEmpty: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: mockLocationDetailsEmpty
+        }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <LocationDetailsScreen
+          sectionName={SECTION_NAME}
+          zoneName={ZONE_NAME}
+          aisleName={AISLE_NAME}
+          getSectionDetailsApi={sectionDetailsEmpty}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
 
-describe('Test Location Details Screen', () => {
-  const defaultAsyncState: AsyncState = {
-    isWaiting: false,
-    value: null,
-    error: null,
-    result: null
-  };
-  it('Renders Location Details Screen with Mock Large Location Data', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    renderer.render(
-      <LocationDetailsScreen
-        sectionName={SECTION_NAME}
-        zoneName={ZONE_NAME}
-        aisleName={AISLE_NAME}
-        mockData={mockLocationDetailsLargeLocationCount}
-        getSectionDetailsApi={defaultAsyncState}
-        dispatch={jest.fn()}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+    it('Renders Location Details Screen with Mock Large Location Data', () => {
+      const sectionDetailsLargeLocationCount: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: mockLocationDetailsLargeLocationCount
+        }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <LocationDetailsScreen
+          sectionName={SECTION_NAME}
+          zoneName={ZONE_NAME}
+          aisleName={AISLE_NAME}
+          getSectionDetailsApi={sectionDetailsLargeLocationCount}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+
+  describe('Tests rendering Get Section Details api responses', () => {
+    it('Renders Location Details error message', () => {
+      const getSectionDetailsError: AsyncState = {
+        ...defaultAsyncState,
+        error: 'NetWork Error'
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <LocationDetailsScreen
+          sectionName={SECTION_NAME}
+          zoneName={ZONE_NAME}
+          aisleName={AISLE_NAME}
+          getSectionDetailsApi={getSectionDetailsError}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders Location Details activity indicator when waiting for an api response', () => {
+      const getSectionDetailsIsWaiting: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <LocationDetailsScreen
+          sectionName={SECTION_NAME}
+          zoneName={ZONE_NAME}
+          aisleName={AISLE_NAME}
+          getSectionDetailsApi={getSectionDetailsIsWaiting}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 });
