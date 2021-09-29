@@ -10,33 +10,35 @@ import {
 describe('Test Location Tabs', () => {
   it('Renders Location Tabs with Mock Data', () => {
     const renderer = ShallowRenderer.createRenderer();
+    const { floor, reserve } = mockLocationDetails;
     renderer.render(
       <LocationTabs
-        mockData={mockLocationDetails}
+        floorItems={floor}
+        reserveItems={reserve}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-});
 
-describe('Test Location Tabs', () => {
   it('Renders Location Tabs with Mock Empty Data', () => {
     const renderer = ShallowRenderer.createRenderer();
+    const { floor, reserve } = mockLocationDetailsEmpty;
     renderer.render(
       <LocationTabs
-        mockData={mockLocationDetailsEmpty}
+        floorItems={floor}
+        reserveItems={reserve}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-});
 
-describe('Test Location Tabs', () => {
   it('Renders Location Tabs with Mock Large Location Data', () => {
     const renderer = ShallowRenderer.createRenderer();
+    const { floor, reserve } = mockLocationDetailsLargeLocationCount;
     renderer.render(
       <LocationTabs
-        mockData={mockLocationDetailsLargeLocationCount}
+        floorItems={floor}
+        reserveItems={reserve}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

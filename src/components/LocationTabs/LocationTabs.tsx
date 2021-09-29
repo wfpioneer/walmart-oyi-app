@@ -4,15 +4,16 @@ import {
 } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { strings } from '../../locales';
-import { LocationItem } from '../../models/LocationItems';
+import { Floor, Reserve } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
 import styles from './LocationTabs.style';
 
 const Tab = createMaterialTopTabNavigator();
 
 interface LocationProps {
-    mockData: LocationItem
-  }
+    floorItems: Floor[];
+    reserveItems: Reserve[];
+}
 
 const ItemHeader = () : JSX.Element => (
   <View style={styles.tabHeader}>
@@ -34,7 +35,7 @@ const ItemHeader = () : JSX.Element => (
 );
 
 const LocationTabs = (props : LocationProps) : JSX.Element => {
-  const { mockData } = props;
+  const { floorItems, reserveItems } = props;
 
   return (
     <Tab.Navigator
@@ -45,11 +46,11 @@ const LocationTabs = (props : LocationProps) : JSX.Element => {
       }}
     >
       <Tab.Screen
-        name={`${strings('LOCATION.FLOORS')} (${mockData.floor.length})`}
+        name={`${strings('LOCATION.FLOORS')} (${floorItems.length})`}
         component={ItemHeader}
       />
       <Tab.Screen
-        name={`${strings('LOCATION.RESERVES')} (${mockData.reserve.length})`}
+        name={`${strings('LOCATION.RESERVES')} (${reserveItems.length})`}
         component={ItemHeader}
       />
     </Tab.Navigator>
