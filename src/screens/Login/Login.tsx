@@ -1,9 +1,7 @@
 import { NavigationProp } from '@react-navigation/native';
 import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
-import {
-  Modal, Platform, View
-} from 'react-native';
+import { Platform, View } from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
@@ -19,6 +17,7 @@ import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { RootState } from '../../state/reducers/RootReducer';
+import { CustomModalComponent } from '../Modal/Modal';
 
 const mapDispatchToProps = {
   loginUser,
@@ -150,9 +149,10 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
   render(): ReactNode {
     return (
       <View style={styles.container}>
-        <Modal
-          visible={!this.props.User.siteId && userIsSignedIn(this.props.User)}
-          transparent
+        <CustomModalComponent
+          isVisible={!this.props.User.siteId && userIsSignedIn(this.props.User)}
+          onClose={() => this.signOutUser()}
+          modalType="Form"
         >
           <EnterClubNbrForm
             onSubmit={clubNbr => {
@@ -163,7 +163,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
             }}
             onSignOut={() => this.signOutUser()}
           />
-        </Modal>
+        </CustomModalComponent>
         <Button
           title={strings('GENERICS.SIGN_IN')}
           style={styles.signInButton}

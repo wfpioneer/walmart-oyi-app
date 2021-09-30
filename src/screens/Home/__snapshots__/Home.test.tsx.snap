@@ -90,91 +90,63 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     }
   }
 >
-  <Modal
-    hardwareAccelerated={false}
-    transparent={true}
-    visible={false}
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
   >
-    <View
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#00000099",
-          "flex": 1,
-          "justifyContent": "center",
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
         }
       }
     >
-      <View
+      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
         style={
           Object {
-            "alignContent": "center",
-            "alignSelf": "center",
-            "backgroundColor": "#ffffffff",
-            "borderColor": "#545F7A",
-            "borderRadius": 10,
-            "borderStyle": "solid",
-            "borderWidth": 1,
-            "justifyContent": "center",
-            "minHeight": 150,
-            "padding": 10,
-            "width": "80%",
+            "marginTop": 16,
+            "width": "70%",
           }
         }
-      >
-        <mockConstructor
-          color="#f44336"
-          name="alert"
-          size={30}
-          style={
-            Object {
-              "alignSelf": "center",
-            }
-          }
-        />
-        <Text
-          style={
-            Object {
-              "fontSize": 16,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
-        </Text>
-        <View
-          style={
-            Object {
-              "alignContent": "space-around",
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "width": "100%",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#D6512D"
-            disabled={false}
-            height={45}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "marginTop": 16,
-                "width": "70%",
-              }
-            }
-            title="[missing \\"en.GENERICS.OK\\" translation]"
-            titleColor="#ffffffff"
-            titleFontSize={16}
-            titleFontWeight="normal"
-            type={1}
-            width={-1}
-          />
-        </View>
-      </View>
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
     </View>
-  </Modal>
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -261,91 +233,63 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     }
   }
 >
-  <Modal
-    hardwareAccelerated={false}
-    transparent={true}
-    visible={false}
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
   >
-    <View
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#00000099",
-          "flex": 1,
-          "justifyContent": "center",
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
         }
       }
     >
-      <View
+      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
         style={
           Object {
-            "alignContent": "center",
-            "alignSelf": "center",
-            "backgroundColor": "#ffffffff",
-            "borderColor": "#545F7A",
-            "borderRadius": 10,
-            "borderStyle": "solid",
-            "borderWidth": 1,
-            "justifyContent": "center",
-            "minHeight": 150,
-            "padding": 10,
-            "width": "80%",
+            "marginTop": 16,
+            "width": "70%",
           }
         }
-      >
-        <mockConstructor
-          color="#f44336"
-          name="alert"
-          size={30}
-          style={
-            Object {
-              "alignSelf": "center",
-            }
-          }
-        />
-        <Text
-          style={
-            Object {
-              "fontSize": 16,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
-        </Text>
-        <View
-          style={
-            Object {
-              "alignContent": "space-around",
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "width": "100%",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#D6512D"
-            disabled={false}
-            height={45}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "marginTop": 16,
-                "width": "70%",
-              }
-            }
-            title="[missing \\"en.GENERICS.OK\\" translation]"
-            titleColor="#ffffffff"
-            titleFontSize={16}
-            titleFontWeight="normal"
-            type={1}
-            width={-1}
-          />
-        </View>
-      </View>
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
     </View>
-  </Modal>
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -432,91 +376,63 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
     }
   }
 >
-  <Modal
-    hardwareAccelerated={false}
-    transparent={true}
-    visible={false}
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
   >
-    <View
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#00000099",
-          "flex": 1,
-          "justifyContent": "center",
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
         }
       }
     >
-      <View
+      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
         style={
           Object {
-            "alignContent": "center",
-            "alignSelf": "center",
-            "backgroundColor": "#ffffffff",
-            "borderColor": "#545F7A",
-            "borderRadius": 10,
-            "borderStyle": "solid",
-            "borderWidth": 1,
-            "justifyContent": "center",
-            "minHeight": 150,
-            "padding": 10,
-            "width": "80%",
+            "marginTop": 16,
+            "width": "70%",
           }
         }
-      >
-        <mockConstructor
-          color="#f44336"
-          name="alert"
-          size={30}
-          style={
-            Object {
-              "alignSelf": "center",
-            }
-          }
-        />
-        <Text
-          style={
-            Object {
-              "fontSize": 16,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
-        </Text>
-        <View
-          style={
-            Object {
-              "alignContent": "space-around",
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "width": "100%",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#D6512D"
-            disabled={false}
-            height={45}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "marginTop": 16,
-                "width": "70%",
-              }
-            }
-            title="[missing \\"en.GENERICS.OK\\" translation]"
-            titleColor="#ffffffff"
-            titleFontSize={16}
-            titleFontWeight="normal"
-            type={1}
-            width={-1}
-          />
-        </View>
-      </View>
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
     </View>
-  </Modal>
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {

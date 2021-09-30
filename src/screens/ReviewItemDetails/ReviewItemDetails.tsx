@@ -2,7 +2,7 @@ import React, {
   EffectCallback, RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, BackHandler, Modal, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import _ from 'lodash';
 import {
@@ -36,6 +36,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import { ADD_TO_PICKLIST, GET_ITEM_DETAILS, NO_ACTION } from '../../state/actions/asyncAPI';
+import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
@@ -156,7 +157,15 @@ export const renderAddPicklistButton = (props: (RenderProps & HandleProps), item
   const { reserve } = itemDetails.location;
   const { addToPicklistStatus } = props;
   if (addToPicklistStatus?.isWaiting) {
-    return <ActivityIndicator />;
+    return (
+      <ActivityIndicator
+        animating={addToPicklistStatus?.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
   }
 
   if (addToPicklistStatus?.result) {
@@ -302,27 +311,24 @@ export const renderScanForNoActionButton = (
 export const renderBarcodeErrorModal = (
   isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => (
-  <Modal
-    visible={isVisible}
-    transparent
+  <CustomModalComponent
+    isVisible={isVisible}
+    modalType="Error"
+    onClose={() => setIsVisible(false)}
   >
-    <View style={styles.modalContainer}>
-      <View style={styles.barcodeErrorContainer}>
-        <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-        <Text style={styles.errorText}>
-          {strings('GENERICS.BARCODE_SCAN_ERROR')}
-        </Text>
-        <View style={styles.buttonContainer}>
-          <Button
-            style={styles.dismissButton}
-            title={strings('GENERICS.OK')}
-            backgroundColor={COLOR.TRACKER_RED}
-            onPress={() => setIsVisible(false)}
-          />
-        </View>
-      </View>
+    <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+    <Text style={styles.errorText}>
+      {strings('GENERICS.BARCODE_SCAN_ERROR')}
+    </Text>
+    <View style={styles.buttonContainer}>
+      <Button
+        style={styles.dismissButton}
+        title={strings('GENERICS.OK')}
+        backgroundColor={COLOR.TRACKER_RED}
+        onPress={() => setIsVisible(false)}
+      />
     </View>
-  </Modal>
+  </CustomModalComponent>
 );
 
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
@@ -350,7 +356,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   useEffectHook(() => {
     if (navigation.isFocused()) {
       validateSessionCall(navigation, route.name).then(() => {
-        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
         dispatch({ type: ADD_TO_PICKLIST.RESET });
@@ -373,8 +378,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr,
         itemDetails.exceptionType ? itemDetails.exceptionType : ''));
       if (itemDetails.location) {
-        if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
-        if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
+        if (itemDetails.location.floor) {
+          dispatch(setFloorLocations(itemDetails.location.floor));
+        }
+        if (itemDetails.location.reserve) {
+          dispatch(setReserveLocations(itemDetails.location.reserve));
+        }
       }
     }
   }, [itemDetails]);
@@ -518,17 +527,17 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     <View style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent />}
       {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-      <Modal
-        visible={ohQtyModalVisible}
-        onRequestClose={() => setOhQtyModalVisible(false)}
-        transparent
+      <CustomModalComponent
+        isVisible={ohQtyModalVisible}
+        onClose={() => setOhQtyModalVisible(false)}
+        modalType="Form"
       >
         <OHQtyUpdate
           ohQty={itemDetails.onHandsQty}
           setOhQtyModalVisible={setOhQtyModalVisible}
           exceptionType={itemDetails.exceptionType}
         />
-      </Modal>
+      </CustomModalComponent>
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={styles.container}

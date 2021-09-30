@@ -1,9 +1,7 @@
 import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
 import {
-  ActivityIndicator, EmitterSubscription,
-  Modal,
-  SafeAreaView, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator, EmitterSubscription, SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
@@ -25,6 +23,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Button from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
 import { WorklistSummary } from '../../models/WorklistSummary';
+import { CustomModalComponent } from '../Modal/Modal';
 
 const mapStateToProps = (state: RootState) => ({
   userName: state.User.additional.displayName,
@@ -174,27 +173,24 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     return (
       <SafeAreaView style={styles.safeAreaView}>
-        <Modal
-          visible={this.state.errorModalVisible}
-          transparent
+        <CustomModalComponent
+          isVisible={this.state.errorModalVisible}
+          onClose={() => this.setState({ errorModalVisible: false })}
+          modalType="Error"
         >
-          <View style={styles.modalContainer}>
-            <View style={styles.barcodeErrorContainer}>
-              <MaterialCommunityIcons name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-              <Text style={styles.barcodeErrorText}>
-                {strings('GENERICS.BARCODE_SCAN_ERROR')}
-              </Text>
-              <View style={styles.buttonContainer}>
-                <Button
-                  style={styles.dismissButton}
-                  title={strings('GENERICS.OK')}
-                  backgroundColor={COLOR.TRACKER_RED}
-                  onPress={() => this.setState({ errorModalVisible: false })}
-                />
-              </View>
-            </View>
+          <MaterialCommunityIcons name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+          <Text style={styles.barcodeErrorText}>
+            {strings('GENERICS.BARCODE_SCAN_ERROR')}
+          </Text>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.dismissButton}
+              title={strings('GENERICS.OK')}
+              backgroundColor={COLOR.TRACKER_RED}
+              onPress={() => this.setState({ errorModalVisible: false })}
+            />
           </View>
-        </Modal>
+        </CustomModalComponent>
         {this.props.isManualScanEnabled && <ManualScanComponent />}
         <ScrollView contentContainerStyle={styles.container}>
           <Text>
