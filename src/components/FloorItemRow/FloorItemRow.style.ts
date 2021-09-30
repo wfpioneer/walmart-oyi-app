@@ -11,11 +11,6 @@ export default StyleSheet.create({
     marginBottom: 2,
     flexDirection: 'row'
   },
-  list: {
-    flex: 1,
-    width: '100%',
-    lineHeight: 30
-  },
   content: {
     alignItems: 'flex-start',
     justifyContent: 'space-evenly',
