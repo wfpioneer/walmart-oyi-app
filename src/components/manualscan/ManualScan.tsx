@@ -2,7 +2,6 @@ import React, {
   FC, RefObject, createRef, useLayoutEffect
 } from 'react';
 import { TextInput, View } from 'react-native';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useIsFocused } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { strings } from '../../locales';
@@ -12,6 +11,7 @@ import { manualScan } from '../../utils/scannerUtils';
 import Button from '../buttons/Button';
 import { setManualScan } from '../../state/actions/Global';
 import IconButton from '../buttons/IconButton';
+import { ModalCloseIcon } from '../../screens/Modal/Modal';
 
 interface ManualScanProps {
   keyboardType?: 'numeric' | 'default';
@@ -52,7 +52,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
       />
       {value.length > 0 && value !== '' && (
         <IconButton
-          icon={<MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />}
+          icon={ModalCloseIcon}
           type={Button.Type.NO_BORDER}
           onPress={clearText}
         />

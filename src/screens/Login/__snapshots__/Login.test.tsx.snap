@@ -10,16 +10,17 @@ exports[`LoginScreen renders the EnterClubNbr modal when a user logs in without 
     }
   }
 >
-  <Modal
-    hardwareAccelerated={false}
-    transparent={true}
-    visible={true}
+  <CustomModalComponent
+    animationType="none"
+    isVisible={true}
+    modalType="Form"
+    onClose={[Function]}
   >
     <EnterClubNbrForm
       onSignOut={[Function]}
       onSubmit={[Function]}
     />
-  </Modal>
+  </CustomModalComponent>
   <Button
     backgroundColor="#0071e9"
     disabled={false}
@@ -52,16 +53,17 @@ exports[`LoginScreen renders the snapshot test appropriately 1`] = `
     }
   }
 >
-  <Modal
-    hardwareAccelerated={false}
-    transparent={true}
-    visible={false}
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
   >
     <EnterClubNbrForm
       onSignOut={[Function]}
       onSubmit={[Function]}
     />
-  </Modal>
+  </CustomModalComponent>
   <Button
     backgroundColor="#0071e9"
     disabled={false}

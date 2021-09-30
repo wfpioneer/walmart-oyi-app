@@ -45,11 +45,10 @@ export default StyleSheet.create({
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: COLOR.BLACK_TRANSPARENT_600
+    alignItems: 'center'
   },
   barcodeErrorContainer: {
-    width: '80%',
+    width: '90%',
     borderRadius: 10,
     backgroundColor: COLOR.WHITE,
     borderColor: COLOR.TRACKER_GREY,
