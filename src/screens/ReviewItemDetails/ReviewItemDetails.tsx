@@ -356,7 +356,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   useEffectHook(() => {
     if (navigation.isFocused()) {
       validateSessionCall(navigation, route.name).then(() => {
-        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
         dispatch({ type: ADD_TO_PICKLIST.RESET });
@@ -379,8 +378,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr,
         itemDetails.exceptionType ? itemDetails.exceptionType : ''));
       if (itemDetails.location) {
-        if (itemDetails.location.floor) dispatch(setFloorLocations(itemDetails.location.floor));
-        if (itemDetails.location.reserve) dispatch(setReserveLocations(itemDetails.location.reserve));
+        if (itemDetails.location.floor) {
+          dispatch(setFloorLocations(itemDetails.location.floor));
+        }
+        if (itemDetails.location.reserve) {
+          dispatch(setReserveLocations(itemDetails.location.reserve));
+        }
       }
     }
   }, [itemDetails]);

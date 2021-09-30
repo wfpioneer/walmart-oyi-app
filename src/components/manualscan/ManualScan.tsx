@@ -23,15 +23,8 @@ const defaultProps: ManualScanProps = {
 const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
   const dispatch = useDispatch();
   const [value, onChangeText] = React.useState('');
-  const isNavigationFocused = useIsFocused();
   const textInputRef: RefObject<TextInput> = createRef();
   const itemRegex = new RegExp(/[^0-9]/g);
-  // Having to use this to get focus correct past the first screen where this gets shown
-  useLayoutEffect(() => {
-    if (isNavigationFocused) {
-      textInputRef.current?.focus();
-    }
-  }, [isNavigationFocused]);
 
   const onSubmit = (text: string) => {
     if (text.length > 0) {
