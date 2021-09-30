@@ -1,22 +1,6 @@
 import { StyleSheet } from 'react-native';
-import COLOR from '../../themes/Color';
 
 export const modalStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: COLOR.BLACK_TRANSPARENT_600
-  },
-  contentContainer: {
-    width: '80%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: COLOR.WHITE,
-    borderRadius: 7.5,
-    paddingVertical: 12,
-    paddingHorizontal: 8
-  },
   textInput: {
     paddingLeft: 10
   },
@@ -31,5 +15,8 @@ export const modalStyles = StyleSheet.create({
   buttonRow: {
     flex: 0,
     flexDirection: 'row'
+  },
+  titleText: {
+    paddingTop: 12
   }
 });

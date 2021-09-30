@@ -19,6 +19,7 @@ import { setActionCompleted, updatePendingOHQty } from '../../state/actions/Item
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import ItemDetails from '../../models/ItemDetails';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
+import { ModalCloseIcon } from '../../screens/Modal/Modal';
 
 interface OHQtyUpdateProps {
   ohQty: number;
@@ -132,71 +133,73 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
     setIsSameQty(validateSameQty(ohQty, newOHQty - 1));
   };
 
-  if (apiSubmitting) {
-    return (
-      <View style={styles.modalContainer}>
-        <ActivityIndicator color={COLOR.BLACK} />
-      </View>
-    );
-  }
-
   return (
-    <View style={styles.modalContainer}>
-      <View style={styles.contentContainer}>
-        <View style={styles.closeContainer}>
-          <IconButton
-            icon={<MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />}
-            type={Button.Type.NO_BORDER}
-            onPress={() => { setOhQtyModalVisible(false); }}
-          />
-        </View>
-        <View style={[styles.updateContainer, isValidNbr ? styles.updateContainerValid
-          : styles.updateContainerInvalid]}
+    <>
+      <View style={styles.closeContainer}>
+        {!apiSubmitting && (
+        <IconButton
+          icon={ModalCloseIcon}
+          type={Button.Type.NO_BORDER}
+          onPress={() => { setOhQtyModalVisible(false); }}
+        />
+        )}
+      </View>
+      <View style={[styles.updateContainer, isValidNbr ? styles.updateContainerValid
+        : styles.updateContainerInvalid]}
+      >
+        <IconButton
+          icon={renderPlusMinusBtn('minus')}
+          type={IconButton.Type.NO_BORDER}
+          height={15}
+          width={35}
+          onPress={handleDecreaseQty}
+        />
+        <TextInput
+          style={styles.ohInput}
+          keyboardType="numeric"
+          onChangeText={handleTextChange}
         >
-          <IconButton
-            icon={renderPlusMinusBtn('minus')}
-            type={IconButton.Type.NO_BORDER}
-            height={15}
-            width={35}
-            onPress={handleDecreaseQty}
-          />
-          <TextInput
-            style={styles.ohInput}
-            keyboardType="numeric"
-            onChangeText={handleTextChange}
-          >
-            {newOHQty}
-          </TextInput>
-          <IconButton
-            icon={renderPlusMinusBtn('plus')}
-            type={IconButton.Type.NO_BORDER}
-            height={15}
-            width={35}
-            onPress={handleIncreaseQty}
-          />
-        </View>
-        {!isValidNbr && (
+          {newOHQty}
+        </TextInput>
+        <IconButton
+          icon={renderPlusMinusBtn('plus')}
+          type={IconButton.Type.NO_BORDER}
+          height={15}
+          width={35}
+          onPress={handleIncreaseQty}
+        />
+      </View>
+      {!isValidNbr && (
         <Text style={styles.invalidLabel}>
           {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
         </Text>
-        )}
-        <Text style={styles.ohLabel}>
-          {`${strings('GENERICS.TOTAL')} ${strings('ITEM.ON_HANDS')}`}
-        </Text>
-        {error !== '' && (
-          <Text style={styles.invalidLabel}>
-            {error}
-          </Text>
-        )}
-        <Button
-          style={styles.saveBtn}
-          title="Save"
-          type={Button.Type.PRIMARY}
-          disabled={(!isValidNbr || isSameQty)}
-          onPress={handleSaveOHQty}
+      )}
+      <Text style={styles.ohLabel}>
+        {`${strings('GENERICS.TOTAL')} ${strings('ITEM.ON_HANDS')}`}
+      </Text>
+      {error !== '' && (
+      <Text style={styles.invalidLabel}>
+        {error}
+      </Text>
+      )}
+      {apiSubmitting ? (
+        <ActivityIndicator
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.activityIndicator}
         />
-      </View>
-    </View>
+      )
+        : (
+          <Button
+            style={styles.saveBtn}
+            title="Save"
+            type={Button.Type.PRIMARY}
+            disabled={(!isValidNbr || isSameQty)}
+            onPress={handleSaveOHQty}
+          />
+        )}
+    </>
   );
 };
 
