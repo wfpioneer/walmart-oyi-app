@@ -105,7 +105,7 @@ export default {
     RESERVE_QTY: 'Bodega',
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consol',
-    FLY_CLOUD_QTY: 'Fly Cloud Qty', // Leaving This as is until MX has a need for Cloud Qty
+    FLY_CLOUD_QTY: 'Fly Cloud Qty' // Leaving This as is until MX has a need for Cloud Qty
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -153,6 +153,7 @@ export default {
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ITEMS: 'Items', // TODO Spanish Translation
     PALLETS: 'Pallets', // TODO Spanish Translation
+    PALLET: 'Pallet', // TODO Spanish Translation
     ZONES: 'Zonas',
     ZONE: 'Zone', // TODO Spanish Translation
     AISLES: 'Pasillos',

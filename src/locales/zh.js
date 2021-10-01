@@ -153,6 +153,7 @@ export default {
     LOCATION_MANAGEMENT: '通道管理',
     ITEMS: '多个商品',
     PALLETS: 'Pallets', // TODO Mandarin Translation
+    PALLET: 'Pallet', // TODO Mandarin Translation
     ZONES: '区域',
     ZONE: 'Zone', // TODO Mandarin Translation
     AISLES: '通道',

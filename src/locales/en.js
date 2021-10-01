@@ -105,7 +105,7 @@ export default {
     RESERVE_QTY: 'Reserve',
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consolidated',
-    FLY_CLOUD_QTY: 'Fly Cloud',
+    FLY_CLOUD_QTY: 'Fly Cloud'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -153,6 +153,7 @@ export default {
     LOCATION_MANAGEMENT: 'Location Management',
     ITEMS: 'Items',
     PALLETS: 'Pallets',
+    PALLET: 'Pallet',
     ZONES: 'Zones',
     ZONE: 'Zone',
     AISLES: 'Aisles',
