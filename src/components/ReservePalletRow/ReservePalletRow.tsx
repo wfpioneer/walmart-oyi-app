@@ -23,7 +23,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
             {`${strings('ITEM.ITEM')} ${reservePallet.items[0]?.itemNbr}`}
           </Text>
           <Text>
-            {reservePallet.items[0]?.itemDesc}
+            {reservePallet.items[0].itemDesc}
           </Text>
           { reservePallet.items.length > 1
           && (

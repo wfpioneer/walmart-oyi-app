@@ -9,7 +9,8 @@ export default StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 5,
     marginBottom: 2,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    paddingBottom: 15
   },
   content: {
     alignItems: 'flex-start',
@@ -35,6 +36,6 @@ export default StyleSheet.create({
   },
   itemContainer: {
     paddingLeft: 15,
-    paddingVertical: 15
+    paddingTop: 15
   }
 });
