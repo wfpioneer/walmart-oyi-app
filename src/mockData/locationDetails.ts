@@ -24,7 +24,6 @@ export const mockLocationDetails : LocationItem = {
       itemDesc: 'Nature Valley Honey Bars',
       price: 5.80
     }
-
   ],
   reserve: [
     {
