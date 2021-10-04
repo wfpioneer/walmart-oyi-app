@@ -17,25 +17,24 @@ export default StyleSheet.create({
     flex: 1
   },
   itemNbr: {
-    color: COLOR.GREY_500,
-    fontSize: 12,
-    lineHeight: 22
-  },
-  palletId: {
-    color: COLOR.GREY_500,
+    color: COLOR.GREY_700,
     fontSize: 12,
     lineHeight: 22
   },
   palletCreateTs: {
     color: COLOR.GREY_500,
-    fontSize: 12,
-    lineHeight: 22
+    fontSize: 12
   },
-  itemDesc: {
-    lineHeight: 22
+  moreText: {
+    color: COLOR.GREY_500,
+    fontSize: 12
   },
   price: {
     color: COLOR.GREY_500,
     lineHeight: 22
+  },
+  itemContainer: {
+    paddingLeft: 15,
+    paddingVertical: 15
   }
 });

@@ -1,15 +1,15 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import { Reserve } from '../../models/LocationItems';
+import { LocationDetailsPallet } from '../../models/LocationItems';
 import ReservePalletRow from '../ReservePalletRow/ReservePalletRow';
-// import ReservePalletRow from '../FloorItemRow/FloorItemRow';
+import styles from './ReservePalletList.style';
 
 export interface ReservePalletListProps {
-    reservePallets: Reserve[]
+    reservePallets: LocationDetailsPallet[]
 }
 
 const ReservePalletList = (props: ReservePalletListProps): JSX.Element => (
-  <View>
+  <View style={styles.listContainer}>
     <FlatList
       data={props.reservePallets}
       renderItem={({ item }) => <ReservePalletRow reservePallet={item} />}

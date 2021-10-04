@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import styles from './ReservePalletRow.style';
 import { strings } from '../../locales';
-import { Reserve } from '../../models/LocationItems';
+import { LocationDetailsPallet } from '../../models/LocationItems';
 
-export type ReservePalletRowProps = { reservePallet: Reserve };
+export type ReservePalletRowProps = { reservePallet: LocationDetailsPallet };
 
 const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   const { reservePallet } = props;
@@ -12,24 +12,26 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.palletId}>
-          {`${strings('PALLET.PALLET')} ${reservePallet.palletId}`}
+        <Text>
+          {`${strings('LOCATION.PALLET')} ${reservePallet.palletId}`}
         </Text>
         <Text style={styles.palletCreateTs}>
-          {`${strings('PALLET.CREATE_TS')} ${reservePallet.palletCreateTS}`}
+          {`${strings('LOCATION.CREATED_ON')} ${reservePallet.palletCreateTS}`}
         </Text>
-        <Text style={styles.itemNbr}>
-          {`${strings('GENERAL.ITEM')} ${reservePallet.items[0]?.itemNbr}`}
-        </Text>
-        <Text style={styles.itemDesc}>
-          {reservePallet.items[0]?.itemDesc}
-        </Text>
-        { reservePallet.items.length > 1
-        && (
-        <Text style={styles.itemDesc}>
-          {`+${reservePallet.items.length - 1} ${strings('PALLET.MORE')}`}
-        </Text>
-        )}
+        <View style={styles.itemContainer}>
+          <Text style={styles.itemNbr}>
+            {`${strings('ITEM.ITEM')} ${reservePallet.items[0]?.itemNbr}`}
+          </Text>
+          <Text>
+            {reservePallet.items[0]?.itemDesc}
+          </Text>
+          { reservePallet.items.length > 1
+          && (
+          <Text style={styles.moreText}>
+            {`+${reservePallet.items.length - 1} ${strings('LOCATION.MORE')}`}
+          </Text>
+          )}
+        </View>
       </View>
     </View>
   );
