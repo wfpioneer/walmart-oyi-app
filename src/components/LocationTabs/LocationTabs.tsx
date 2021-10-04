@@ -48,7 +48,12 @@ const LocationTabs = (props : LocationProps) : JSX.Element => {
       <Tab.Screen
         name={`${strings('LOCATION.FLOORS')} (${mockData.floor.length})`}
       >
-        {() => <FloorItemList items={mockData.floor} /> }
+        {() => (
+          <>
+            <ItemHeader />
+            <FloorItemList items={mockData.floor} />
+          </>
+        ) }
       </Tab.Screen>
       <Tab.Screen
         name={`${strings('LOCATION.RESERVES')} (${mockData.reserve.length})`}
