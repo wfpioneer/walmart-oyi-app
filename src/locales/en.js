@@ -165,8 +165,10 @@ export default {
     NO_ZONES_AVAILABLE: 'No Zones Available',
     NO_AISLES_AVAILABLE: 'No Aisles Available',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
-    CLEAR_ALL: 'Clear all',
-    ADD: 'Add'
+    REMOVE_ALL: 'Remove all',
+    ADD: 'Add',
+    CREATED_ON: 'Created on',
+    MORE: 'More'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
