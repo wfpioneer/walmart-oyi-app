@@ -72,7 +72,7 @@ exports[`Test Location Details Screen Tests rendering location details screen da
   }
 >
   <LocationHeader
-    details="1 [missing \\"en.LOCATION.ITEMS\\" translation], 1 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 1 [missing \\"en.LOCATION.PALLETS\\" translation]"
     location="[missing \\"en.LOCATION.SECTION\\" translation] ABAR2-1"
   />
   <LocationTabs
