@@ -15,7 +15,7 @@ export interface SectionItem {
     sectionName: string,
 }
 
-export interface Floor {
+export interface FloorItem {
   itemNbr: number,
   itemDesc: string,
   price: number
@@ -46,6 +46,6 @@ export interface LocationItem {
           id: number,
           name: string
         }
-        floor: Floor[],
+        floor: FloorItem[],
         reserve: Reserve[]
       }
