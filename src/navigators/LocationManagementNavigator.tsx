@@ -5,7 +5,7 @@ import COLOR from '../themes/Color';
 import ZoneList from '../screens/Zone/ZoneList';
 import AisleList from '../screens/Aisle/AisleList';
 import SectionList from '../screens/Section/SectionList';
-import LocationDetailsScreen from '../screens/LocationDetailsScreen/LocationDetailsScreen';
+import LocationTabs from '../components/LocationTabs/LocationTabs';
 
 const Stack = createStackNavigator();
 
@@ -41,7 +41,7 @@ export const LocationManagementNavigatorStack = (): JSX.Element => (
     />
     <Stack.Screen
       name="LocationDetails"
-      component={LocationDetailsScreen}
+      component={LocationTabs}
       options={{
         headerTitle: strings('LOCATION.LOCATION_DETAILS')
       }}

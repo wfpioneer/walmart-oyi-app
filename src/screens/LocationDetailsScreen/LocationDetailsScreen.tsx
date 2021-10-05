@@ -7,13 +7,11 @@ import {
 } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { FlatList } from 'react-native-gesture-handler';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
-import { LocationHeader } from '../../components/locationHeader/LocationHeader';
 import { LocationItem } from '../../models/LocationItems';
-import LocationTabs from '../../components/LocationTabs/LocationTabs';
 import { getSectionDetails } from '../../state/actions/saga';
-import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import styles from './LocationDetailsScreen.style';
 import COLOR from '../../themes/Color';
@@ -43,13 +41,6 @@ export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element 
     trackEventCall,
     useEffectHook
   } = props;
-
-  // Get Section Details
-  useEffectHook(() => {
-    validateSession(navigation, route.name).then(() => {
-      dispatch(getSectionDetails({ sectionId: `${zoneName}${aisleName}-${sectionName}` }));
-    }).catch(() => {});
-  }, [navigation]);
 
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
 
@@ -84,14 +75,7 @@ export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element 
   }
   return (
     <View style={styles.locDetailsScreenContainer}>
-      <LocationHeader
-        location={`${strings('LOCATION.SECTION')} ${zoneName}${aisleName}-${sectionName}`}
-        details={`${locationItem?.floor?.length ?? 0} ${strings('LOCATION.ITEMS')}, ${locationItem?.reserve?.length ?? 0} ${strings('LOCATION.PALLETS')}`}
-      />
-      <LocationTabs
-        floorItems={locationItem?.floor || []}
-        reserveItems={locationItem?.reserve || []}
-      />
+      <Text> PlaceHolder for the List</Text>
     </View>
   );
 };
