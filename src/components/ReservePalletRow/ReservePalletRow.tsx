@@ -18,6 +18,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
         <Text style={styles.palletCreateTs}>
           {`${strings('LOCATION.CREATED_ON')} ${reservePallet.palletCreateTS}`}
         </Text>
+        { reservePallet.items.length > 0 && (
         <View style={styles.itemContainer}>
           <Text style={styles.itemNbr}>
             {`${strings('ITEM.ITEM')} ${reservePallet.items[0]?.itemNbr}`}
@@ -26,12 +27,13 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
             {reservePallet.items[0].itemDesc}
           </Text>
           { reservePallet.items.length > 1
-          && (
-          <Text style={styles.moreText}>
-            {`+${reservePallet.items.length - 1} ${strings('LOCATION.MORE')}`}
-          </Text>
-          )}
+              && (
+              <Text style={styles.moreText}>
+                {`+${reservePallet.items.length - 1} ${strings('LOCATION.MORE')}`}
+              </Text>
+              )}
         </View>
+        )}
       </View>
     </View>
   );
