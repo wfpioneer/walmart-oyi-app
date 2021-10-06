@@ -49,7 +49,7 @@ describe('Test Location Details Screen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Renders Location Details Screen with Mock Empty Data', () => {
+    it('Renders Location Details Screen with Empty Mock Data', () => {
       const sectionDetailsEmpty: AsyncState = {
         ...defaultAsyncState,
         result: {

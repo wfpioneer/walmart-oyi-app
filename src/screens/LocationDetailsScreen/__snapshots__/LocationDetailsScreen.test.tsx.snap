@@ -63,6 +63,22 @@ exports[`Test Location Details Screen Tests rendering Get Section Details api re
 </View>
 `;
 
+exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Empty Mock Data 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ForwardRef
+    data={Array []}
+    keyExtractor={[Function]}
+    renderItem={[Function]}
+  />
+</View>
+`;
+
 exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Mock Data 1`] = `
 <View
   style={
@@ -71,54 +87,23 @@ exports[`Test Location Details Screen Tests rendering location details screen da
     }
   }
 >
-  <LocationHeader
-    details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 1 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    location="[missing \\"en.LOCATION.SECTION\\" translation] ABAR2-1"
-  />
-  <LocationTabs
-    floorItems={
+  <ForwardRef
+    data={
       Array [
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
-      ]
-    }
-    reserveItems={
-      Array [
         Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
+          "itemDesc": "Nature Valley Honey Bars",
+          "itemNbr": 980011111,
+          "price": 5.8,
         },
       ]
     }
-  />
-</View>
-`;
-
-exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Mock Empty Data 1`] = `
-<View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <LocationHeader
-    details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    location="[missing \\"en.LOCATION.SECTION\\" translation] ABAR2-1"
-  />
-  <LocationTabs
-    floorItems={Array []}
-    reserveItems={Array []}
+    keyExtractor={[Function]}
+    renderItem={[Function]}
   />
 </View>
 `;
@@ -131,1619 +116,513 @@ exports[`Test Location Details Screen Tests rendering location details screen da
     }
   }
 >
-  <LocationHeader
-    details="100 [missing \\"en.LOCATION.ITEMS\\" translation], 100 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    location="[missing \\"en.LOCATION.SECTION\\" translation] ABAR2-1"
-  />
-  <LocationTabs
-    floorItems={
+  <ForwardRef
+    data={
       Array [
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
         Object {
-          "itemDesc": "Cabbage",
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
         },
       ]
     }
-    reserveItems={
-      Array [
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
-            },
-          ],
-          "palletCreateTS": "2021-1-1",
-          "palletId": 1,
-        },
-      ]
-    }
+    keyExtractor={[Function]}
+    renderItem={[Function]}
   />
 </View>
 `;

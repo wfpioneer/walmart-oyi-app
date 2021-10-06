@@ -24,6 +24,7 @@ interface LocationProps {
     locationName: string;
 }
 
+// TODO uncomment this when we start implementing the rest of LocationManagement functionality
 const ItemHeader = () : JSX.Element => (
   <View style={styles.tabHeader}>
     <Text style={styles.tabHeaderText}>
@@ -41,6 +42,13 @@ const ItemHeader = () : JSX.Element => (
     {/*  </Text> */}
     {/* </TouchableOpacity> */}
   </View>
+);
+
+const locationDetailsList = () => (
+  <>
+    <ItemHeader />
+    <LocationDetails />
+  </>
 );
 
 export const LocationTabsStack = (props: LocationProps): JSX.Element => {
@@ -61,25 +69,19 @@ export const LocationTabsStack = (props: LocationProps): JSX.Element => {
         }}
       >
         <Tab.Screen
-          name={`${strings('LOCATION.FLOORS')} (${floorItems.length ?? 0})`}
-        >
-          {() => (
-            <>
-              <ItemHeader />
-              <LocationDetails />
-            </>
-          )}
-        </Tab.Screen>
+          name="FloorDetails"
+          component={locationDetailsList}
+          options={{
+            title: `${strings('LOCATION.FLOORS')} (${floorItems.length ?? 0})`
+          }}
+        />
         <Tab.Screen
-          name={`${strings('LOCATION.RESERVES')} (${reserveItems.length ?? 0})`}
-        >
-          {() => (
-            <>
-              <ItemHeader />
-              <LocationDetails />
-            </>
-          )}
-        </Tab.Screen>
+          name="ReserveDetails"
+          component={locationDetailsList}
+          options={{
+            title: `${strings('LOCATION.RESERVES')} (${reserveItems.length ?? 0})`
+          }}
+        />
       </Tab.Navigator>
     </>
   );

@@ -41,6 +41,11 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator 1
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "blur": [Function],
+      }
+    }
     name="LocationDetails"
     options={
       Object {

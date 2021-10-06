@@ -16,6 +16,7 @@ import { AsyncState } from '../../models/AsyncState';
 import styles from './LocationDetailsScreen.style';
 import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
+import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
 
 interface LocationDetailProps {
   zoneName: string;
@@ -73,9 +74,14 @@ export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element 
       </View>
     );
   }
+  // TODO switch between which location list is being used
   return (
     <View style={styles.locDetailsScreenContainer}>
-      <Text> PlaceHolder for the List</Text>
+      <FlatList
+        data={locationItem?.floor}
+        renderItem={({ item }) => <FloorItemRow item={item} />}
+        keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
+      />
     </View>
   );
 };
