@@ -13,7 +13,7 @@ import LocationHeader from '../../components/locationHeader/LocationHeader';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
 import { getSectionDetails } from '../../state/actions/saga';
-import LocationDetails from '../../screens/LocationDetailsScreen/LocationDetailsScreen';
+import SectionDetails from '../../screens/SectionDetails/SectionDetailsScreen';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -46,7 +46,7 @@ const ItemHeader = () : JSX.Element => (
 const locationDetailsList = () => (
   <>
     <ItemHeader />
-    <LocationDetails />
+    <SectionDetails />
   </>
 );
 

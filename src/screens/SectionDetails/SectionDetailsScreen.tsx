@@ -13,13 +13,13 @@ import { strings } from '../../locales';
 import { LocationItem } from '../../models/LocationItems';
 import { getSectionDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
-import styles from './LocationDetailsScreen.style';
+import styles from './SectionDetailsScreen.style';
 import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
 import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
 
-interface LocationDetailProps {
+interface SectionDetailsProps {
   zoneName: string;
   aisleName: string;
   sectionName: string;
@@ -31,7 +31,7 @@ interface LocationDetailProps {
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
 
-export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element => {
+export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element => {
   const {
     zoneName,
     aisleName,
@@ -95,7 +95,7 @@ export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element 
   );
 };
 
-const LocationDetails = (): JSX.Element => {
+const SectionDetails = (): JSX.Element => {
   const sectionName = useTypedSelector(state => state.Location.selectedSection.name);
   const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
   const aisleName = useTypedSelector(state => state.Location.selectedAisle.name);
@@ -105,7 +105,7 @@ const LocationDetails = (): JSX.Element => {
   const dispatch = useDispatch();
   return (
     <>
-      <LocationDetailsScreen
+      <SectionDetailsScreen
         zoneName={zoneName}
         aisleName={aisleName}
         sectionName={sectionName}
@@ -120,4 +120,4 @@ const LocationDetails = (): JSX.Element => {
   );
 };
 
-export default LocationDetails;
+export default SectionDetails;

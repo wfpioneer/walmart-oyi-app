@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, Route } from '@react-navigation/native';
-import { LocationDetailsScreen } from './LocationDetailsScreen';
+import { SectionDetailsScreen } from './SectionDetailsScreen';
 import { AsyncState } from '../../models/AsyncState';
 import {
   mockLocationDetails,
@@ -38,7 +38,7 @@ describe('Test Location Details Screen', () => {
     it('Renders Location Details Screen with Mock Floor Items', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <LocationDetailsScreen
+        <SectionDetailsScreen
           sectionName={SECTION_NAME}
           zoneName={ZONE_NAME}
           aisleName={AISLE_NAME}
@@ -60,7 +60,7 @@ describe('Test Location Details Screen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <LocationDetailsScreen
+        <SectionDetailsScreen
           sectionName={SECTION_NAME}
           zoneName={ZONE_NAME}
           aisleName={AISLE_NAME}
@@ -84,7 +84,7 @@ describe('Test Location Details Screen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <LocationDetailsScreen
+        <SectionDetailsScreen
           sectionName={SECTION_NAME}
           zoneName={ZONE_NAME}
           aisleName={AISLE_NAME}
@@ -108,7 +108,7 @@ describe('Test Location Details Screen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <LocationDetailsScreen
+        <SectionDetailsScreen
           sectionName={SECTION_NAME}
           zoneName={ZONE_NAME}
           aisleName={AISLE_NAME}
@@ -132,7 +132,7 @@ describe('Test Location Details Screen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <LocationDetailsScreen
+        <SectionDetailsScreen
           sectionName={SECTION_NAME}
           zoneName={ZONE_NAME}
           aisleName={AISLE_NAME}
@@ -154,7 +154,7 @@ describe('Test Location Details Screen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <LocationDetailsScreen
+        <SectionDetailsScreen
           sectionName={SECTION_NAME}
           zoneName={ZONE_NAME}
           aisleName={AISLE_NAME}
