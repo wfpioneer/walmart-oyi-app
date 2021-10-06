@@ -1,6 +1,6 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { NavigationProp, Route } from '@react-navigation/native';
+import { Route } from '@react-navigation/native';
 import { LocationDetailsScreen } from './LocationDetailsScreen';
 import { AsyncState } from '../../models/AsyncState';
 import {
@@ -8,9 +8,6 @@ import {
   mockLocationDetailsEmpty,
   mockLocationDetailsLargeLocationCount
 } from '../../mockData/locationDetails';
-
-let navigationProp: NavigationProp<any>;
-let routeProp: Route<any>;
 
 const SECTION_NAME = '1';
 const ZONE_NAME = 'ABAR';
@@ -24,13 +21,39 @@ describe('Test Location Details Screen', () => {
     error: null,
     result: null
   };
+
+  const defaultRouteProp: Route<any> = {
+    key: '',
+    name: 'FloorDetails'
+  };
+
   describe('Tests rendering location details screen data', () => {
-    it('Renders Location Details Screen with Mock Data', () => {
-      const sectionDetails: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          data: mockLocationDetails
-        }
+    const sectionDetails: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: mockLocationDetails
+      }
+    };
+    it('Renders Location Details Screen with Mock Floor Items', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <LocationDetailsScreen
+          sectionName={SECTION_NAME}
+          zoneName={ZONE_NAME}
+          aisleName={AISLE_NAME}
+          getSectionDetailsApi={sectionDetails}
+          dispatch={jest.fn()}
+          route={defaultRouteProp}
+          trackEventCall={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders Location Details Screen with Mock Reserve Items', () => {
+      const routePropReserve: Route<any> = {
+        key: '',
+        name: 'ReserveDetails'
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -40,10 +63,8 @@ describe('Test Location Details Screen', () => {
           aisleName={AISLE_NAME}
           getSectionDetailsApi={sectionDetails}
           dispatch={jest.fn()}
-          navigation={navigationProp}
-          route={routeProp}
+          route={routePropReserve}
           trackEventCall={jest.fn()}
-          useEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -64,10 +85,8 @@ describe('Test Location Details Screen', () => {
           aisleName={AISLE_NAME}
           getSectionDetailsApi={sectionDetailsEmpty}
           dispatch={jest.fn()}
-          navigation={navigationProp}
-          route={routeProp}
+          route={defaultRouteProp}
           trackEventCall={jest.fn()}
-          useEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -88,10 +107,8 @@ describe('Test Location Details Screen', () => {
           aisleName={AISLE_NAME}
           getSectionDetailsApi={sectionDetailsLargeLocationCount}
           dispatch={jest.fn()}
-          navigation={navigationProp}
-          route={routeProp}
+          route={defaultRouteProp}
           trackEventCall={jest.fn()}
-          useEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -112,10 +129,8 @@ describe('Test Location Details Screen', () => {
           aisleName={AISLE_NAME}
           getSectionDetailsApi={getSectionDetailsError}
           dispatch={jest.fn()}
-          navigation={navigationProp}
-          route={routeProp}
+          route={defaultRouteProp}
           trackEventCall={jest.fn()}
-          useEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -134,10 +149,8 @@ describe('Test Location Details Screen', () => {
           aisleName={AISLE_NAME}
           getSectionDetailsApi={getSectionDetailsIsWaiting}
           dispatch={jest.fn()}
-          navigation={navigationProp}
-          route={routeProp}
+          route={defaultRouteProp}
           trackEventCall={jest.fn()}
-          useEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

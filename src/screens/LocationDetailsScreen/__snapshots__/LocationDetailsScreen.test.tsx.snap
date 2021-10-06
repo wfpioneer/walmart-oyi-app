@@ -79,7 +79,7 @@ exports[`Test Location Details Screen Tests rendering location details screen da
 </View>
 `;
 
-exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Mock Data 1`] = `
+exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Mock Floor Items 1`] = `
 <View
   style={
     Object {
@@ -618,6 +618,36 @@ exports[`Test Location Details Screen Tests rendering location details screen da
           "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
+        },
+      ]
+    }
+    keyExtractor={[Function]}
+    renderItem={[Function]}
+  />
+</View>
+`;
+
+exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Mock Reserve Items 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ForwardRef
+    data={
+      Array [
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 1,
+              "price": 2.4,
+            },
+          ],
+          "palletCreateTS": "2021-1-1",
+          "palletId": 1,
         },
       ]
     }

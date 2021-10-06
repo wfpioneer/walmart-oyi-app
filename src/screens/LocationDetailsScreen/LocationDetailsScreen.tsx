@@ -1,10 +1,8 @@
-import React, { Dispatch, EffectCallback, useEffect } from 'react';
+import React, { Dispatch } from 'react';
 import {
   ActivityIndicator, Text, TouchableOpacity, View
 } from 'react-native';
-import {
-  NavigationProp, RouteProp, useNavigation, useRoute
-} from '@react-navigation/native';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
@@ -24,10 +22,8 @@ interface LocationDetailProps {
   sectionName: string;
   getSectionDetailsApi: AsyncState;
   dispatch: Dispatch<any>;
-  navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
   trackEventCall: (eventName: string, params?: any) => void;
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
 
 export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element => {
@@ -36,11 +32,9 @@ export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element 
     aisleName,
     sectionName,
     getSectionDetailsApi,
-    navigation,
     route,
     dispatch,
-    trackEventCall,
-    useEffectHook
+    trackEventCall
   } = props;
 
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
@@ -74,12 +68,12 @@ export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element 
       </View>
     );
   }
-  // TODO switch between which location list is being used
+
   return (
     <View style={styles.locDetailsScreenContainer}>
       <FlatList
-        data={locationItem?.floor}
-        renderItem={({ item }) => <FloorItemRow item={item} />}
+        data={route.name === 'FloorDetails' ? locationItem?.floor : locationItem?.reserve}
+        renderItem={({ item }) => <FloorItemRow item={item} />} // TODO Swap between floor and reserve list component
         keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
       />
     </View>
@@ -91,7 +85,6 @@ const LocationDetails = (): JSX.Element => {
   const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
   const aisleName = useTypedSelector(state => state.Location.selectedAisle.name);
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
-  const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
   return (
@@ -102,10 +95,8 @@ const LocationDetails = (): JSX.Element => {
         sectionName={sectionName}
         getSectionDetailsApi={getSectionDetailsApi}
         dispatch={dispatch}
-        navigation={navigation}
         route={route}
         trackEventCall={trackEvent}
-        useEffectHook={useEffect}
       />
     </>
   );
