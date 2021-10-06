@@ -6,7 +6,7 @@ import COLOR from '../themes/Color';
 import ZoneList from '../screens/Zone/ZoneList';
 import AisleList from '../screens/Aisle/AisleList';
 import SectionList from '../screens/Section/SectionList';
-import LocationTabs from '../components/LocationTabs/LocationTabs';
+import LocationTabs from './LocationTabs/LocationTabNavigator';
 import { GET_SECTION_DETAILS } from '../state/actions/asyncAPI';
 
 const Stack = createStackNavigator();

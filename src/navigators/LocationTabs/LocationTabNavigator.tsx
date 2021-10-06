@@ -8,13 +8,12 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { strings } from '../../locales';
 import { FloorItem, LocationItem, Reserve } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
-import styles from './LocationTabs.style';
-import LocationHeader from '../locationHeader/LocationHeader';
+import styles from './LocationTabNavigator.style';
+import LocationHeader from '../../components/locationHeader/LocationHeader';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
 import { getSectionDetails } from '../../state/actions/saga';
 import LocationDetails from '../../screens/LocationDetailsScreen/LocationDetailsScreen';
-import FloorItemList from '../FloorItemList/FloorItemList';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -51,11 +50,10 @@ const locationDetailsList = () => (
   </>
 );
 
-export const LocationTabsStack = (props: LocationProps): JSX.Element => {
+export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   const { locationName, floorItems, reserveItems } = props;
   return (
     <>
-      {/* Pass this on the location management navigator?? */}
       <LocationHeader
         location={`${strings('LOCATION.SECTION')} ${locationName}`}
         details={`${floorItems.length ?? 0} ${strings('LOCATION.ITEMS')},`
@@ -103,9 +101,8 @@ const LocationTabs = () : JSX.Element => {
     }).catch(() => {});
   }, [navigation]);
 
-  // TODO fix issue where Tab switches to Reserve after re-rendering
   return (
-    <LocationTabsStack
+    <LocationTabsNavigator
       floorItems={locItem?.floor ?? []}
       reserveItems={locItem?.reserve ?? []}
       locationName={locationName}

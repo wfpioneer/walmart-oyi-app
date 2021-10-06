@@ -1,6 +1,6 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { LocationTabsStack } from './LocationTabs';
+import { LocationTabsNavigator } from './LocationTabNavigator';
 import {
   mockLocationDetails,
   mockLocationDetailsEmpty,
@@ -14,7 +14,7 @@ describe('Test Location Tabs', () => {
       floor, reserve, zone, aisle, section
     } = mockLocationDetails;
     renderer.render(
-      <LocationTabsStack
+      <LocationTabsNavigator
         floorItems={floor}
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
@@ -29,7 +29,7 @@ describe('Test Location Tabs', () => {
       floor, reserve, zone, aisle, section
     } = mockLocationDetailsEmpty;
     renderer.render(
-      <LocationTabsStack
+      <LocationTabsNavigator
         floorItems={floor}
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
@@ -44,7 +44,7 @@ describe('Test Location Tabs', () => {
       floor, reserve, zone, aisle, section
     } = mockLocationDetailsLargeLocationCount;
     renderer.render(
-      <LocationTabsStack
+      <LocationTabsNavigator
         floorItems={floor}
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
