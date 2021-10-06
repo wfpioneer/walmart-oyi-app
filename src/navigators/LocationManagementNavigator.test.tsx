@@ -10,9 +10,7 @@ describe('LocationManagement Navigator', () => {
     const renderer = ShallowRenderer.createRenderer();
 
     renderer.render(
-      <LocationManagementNavigatorStack
-        dispatch={jest.fn()}
-      />
+      <LocationManagementNavigatorStack />
     );
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();

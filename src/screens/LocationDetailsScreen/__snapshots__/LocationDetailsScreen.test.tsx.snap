@@ -9,6 +9,7 @@ exports[`Test Location Details Screen Tests rendering Get Section Details api re
   style={
     Object {
       "alignItems": "center",
+      "flex": 1,
       "justifyContent": "center",
     }
   }

@@ -1,8 +1,10 @@
-import React, { Dispatch } from 'react';
+import React, { Dispatch, EffectCallback, useEffect } from 'react';
 import {
   ActivityIndicator, Text, TouchableOpacity, View
 } from 'react-native';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import {
+  NavigationProp, RouteProp, useNavigation, useRoute
+} from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
@@ -15,6 +17,7 @@ import styles from './LocationDetailsScreen.style';
 import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
+import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
 
 interface LocationDetailProps {
   zoneName: string;
@@ -23,7 +26,9 @@ interface LocationDetailProps {
   getSectionDetailsApi: AsyncState;
   dispatch: Dispatch<any>;
   route: RouteProp<any, string>;
+  navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
 
 export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element => {
@@ -34,8 +39,18 @@ export const LocationDetailsScreen = (props: LocationDetailProps) : JSX.Element 
     getSectionDetailsApi,
     route,
     dispatch,
-    trackEventCall
+    navigation,
+    trackEventCall,
+    useEffectHook
   } = props;
+
+  // Navigation Listener
+  useEffectHook(() => {
+    // Resets Get SectionDetails api response data when navigating off-screen
+    navigation.addListener('beforeRemove', () => {
+      dispatch({ type: GET_SECTION_DETAILS.RESET });
+    });
+  }, []);
 
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
 
@@ -85,6 +100,7 @@ const LocationDetails = (): JSX.Element => {
   const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
   const aisleName = useTypedSelector(state => state.Location.selectedAisle.name);
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
+  const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
   return (
@@ -95,8 +111,10 @@ const LocationDetails = (): JSX.Element => {
         sectionName={sectionName}
         getSectionDetailsApi={getSectionDetailsApi}
         dispatch={dispatch}
+        navigation={navigation}
         route={route}
         trackEventCall={trackEvent}
+        useEffectHook={useEffect}
       />
     </>
   );
