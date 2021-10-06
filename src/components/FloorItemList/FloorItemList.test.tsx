@@ -2,7 +2,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import FloorItemList from './FloorItemList';
 import { mockLocationDetails } from '../../mockData/locationDetails';
-import { FloorItem } from '../../models/LocationItems';
+import { LocationDetailsItem } from '../../models/LocationItems';
 
 const mockFloorItems = mockLocationDetails.floor;
 
@@ -17,7 +17,7 @@ describe('FloorItemList Component', () => {
 
   it('Renders a long list of FloorItems', () => {
     const floorItem = mockFloorItems[0];
-    const longFloorItemList: FloorItem[] = new Array(100).fill(floorItem);
+    const longFloorItemList: LocationDetailsItem[] = new Array(100).fill(floorItem);
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <FloorItemList items={longFloorItemList} />

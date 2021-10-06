@@ -1,11 +1,11 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import { FloorItem } from '../../models/LocationItems';
+import { LocationDetailsItem } from '../../models/LocationItems';
 import FloorItemRow from '../FloorItemRow/FloorItemRow';
 import styles from './FloorItemList.style';
 
 export interface FloorItemListProps {
-    items: FloorItem[]
+    items: LocationDetailsItem[]
 }
 
 const FloorItemList = (props: FloorItemListProps): JSX.Element => (
