@@ -15,9 +15,10 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
   }
 >
   <Screen
-    component={[Function]}
-    name="[missing \\"en.LOCATION.FLOORS\\" translation] (1)"
-  />
+    name="[missing \\"en.LOCATION.FLOORS\\" translation] (2)"
+  >
+    [Function]
+  </Screen>
   <Screen
     component={[Function]}
     name="[missing \\"en.LOCATION.RESERVES\\" translation] (1)"
@@ -40,9 +41,10 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
   }
 >
   <Screen
-    component={[Function]}
     name="[missing \\"en.LOCATION.FLOORS\\" translation] (0)"
-  />
+  >
+    [Function]
+  </Screen>
   <Screen
     component={[Function]}
     name="[missing \\"en.LOCATION.RESERVES\\" translation] (0)"
@@ -65,9 +67,10 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
   }
 >
   <Screen
-    component={[Function]}
     name="[missing \\"en.LOCATION.FLOORS\\" translation] (100)"
-  />
+  >
+    [Function]
+  </Screen>
   <Screen
     component={[Function]}
     name="[missing \\"en.LOCATION.RESERVES\\" translation] (100)"

@@ -8,6 +8,7 @@ import { LocationItem } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
 import styles from './LocationTabs.style';
 import ReservePalletList from '../ReservePalletList/ReservePalletList';
+import FloorItemList from '../FloorItemList/FloorItemList';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -68,8 +69,14 @@ const LocationTabs = (props : LocationProps) : JSX.Element => {
     >
       <Tab.Screen
         name={`${strings('LOCATION.FLOORS')} (${mockData.floor.length})`}
-        component={ItemHeader}
-      />
+      >
+        {() => (
+          <>
+            <ItemHeader />
+            <FloorItemList items={mockData.floor} />
+          </>
+        ) }
+      </Tab.Screen>
       <Tab.Screen
         name={`${strings('LOCATION.RESERVES')} (${mockData.reserve.length})`}
       >
