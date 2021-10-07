@@ -1,6 +1,6 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import LocationTabs from './LocationTabs';
+import { LocationTabsNavigator } from './LocationTabNavigator';
 import {
   mockLocationDetails,
   mockLocationDetailsEmpty,
@@ -10,33 +10,44 @@ import {
 describe('Test Location Tabs', () => {
   it('Renders Location Tabs with Mock Data', () => {
     const renderer = ShallowRenderer.createRenderer();
+    const {
+      floor, reserve, zone, aisle, section
+    } = mockLocationDetails;
     renderer.render(
-      <LocationTabs
-        mockData={mockLocationDetails}
+      <LocationTabsNavigator
+        floorItems={floor}
+        reserveItems={reserve}
+        locationName={`${zone.name}${aisle.name}-${section.name}`}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-});
 
-describe('Test Location Tabs', () => {
   it('Renders Location Tabs with Mock Empty Data', () => {
     const renderer = ShallowRenderer.createRenderer();
+    const {
+      floor, reserve, zone, aisle, section
+    } = mockLocationDetailsEmpty;
     renderer.render(
-      <LocationTabs
-        mockData={mockLocationDetailsEmpty}
+      <LocationTabsNavigator
+        floorItems={floor}
+        reserveItems={reserve}
+        locationName={`${zone.name}${aisle.name}-${section.name}`}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-});
 
-describe('Test Location Tabs', () => {
   it('Renders Location Tabs with Mock Large Location Data', () => {
     const renderer = ShallowRenderer.createRenderer();
+    const {
+      floor, reserve, zone, aisle, section
+    } = mockLocationDetailsLargeLocationCount;
     renderer.render(
-      <LocationTabs
-        mockData={mockLocationDetailsLargeLocationCount}
+      <LocationTabsNavigator
+        floorItems={floor}
+        reserveItems={reserve}
+        locationName={`${zone.name}${aisle.name}-${section.name}`}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
