@@ -53,3 +53,6 @@ export const getAisle = makeAsyncActionCreators(GET_AISLE);
 
 export const GET_SECTIONS = makeAsyncActionTypes('API/GET_SECTIONS');
 export const getSections = makeAsyncActionCreators(GET_SECTIONS);
+
+export const GET_SECTION_DETAILS = makeAsyncActionTypes('API/GET_SECTION_DETAILS');
+export const getSectionDetails = makeAsyncActionCreators(GET_SECTION_DETAILS);

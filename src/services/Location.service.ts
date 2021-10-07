@@ -26,4 +26,11 @@ export default class LocationService {
       undefined,
     );
   }
+
+  public static getSectionDetails(payload: {sectionId: string}): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.locationUrl}/section/${payload.sectionId}/detail`
+    );
+  }
 }

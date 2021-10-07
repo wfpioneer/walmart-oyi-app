@@ -21,7 +21,8 @@ export const asyncReducer = combineReducers({
   updateApprovalList: makeAsyncReducer(asyncActions.UPDATE_APPROVAL_LIST),
   getAllZones: makeAsyncReducer(asyncActions.GET_ALL_ZONES),
   getAisle: makeAsyncReducer(asyncActions.GET_AISLE),
-  getSections: makeAsyncReducer(asyncActions.GET_SECTIONS)
+  getSections: makeAsyncReducer(asyncActions.GET_SECTIONS),
+  getSectionDetails: makeAsyncReducer(asyncActions.GET_SECTION_DETAILS)
 });
 
 export default asyncReducer;
