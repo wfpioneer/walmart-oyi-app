@@ -10,6 +10,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
+        "inactiveTintColor": "#616161",
         "indicatorStyle": Object {
           "backgroundColor": "#0071e9",
         },
@@ -51,6 +52,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
+        "inactiveTintColor": "#616161",
         "indicatorStyle": Object {
           "backgroundColor": "#0071e9",
         },
@@ -92,6 +94,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
+        "inactiveTintColor": "#616161",
         "indicatorStyle": Object {
           "backgroundColor": "#0071e9",
         },
