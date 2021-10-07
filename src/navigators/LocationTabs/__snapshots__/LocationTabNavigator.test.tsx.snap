@@ -3,7 +3,7 @@
 exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
 <React.Fragment>
   <LocationHeader
-    details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 1 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
@@ -33,7 +33,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
       name="ReserveDetails"
       options={
         Object {
-          "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (1)",
+          "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (3)",
         }
       }
     />
