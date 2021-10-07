@@ -35,6 +35,26 @@ describe('Test Location Details Screen', () => {
         data: mockLocationDetails
       }
     };
+
+    it('Renders reserve list when reserve tab is selected', () => {
+      const reserveSelectedRouteProp = { ...defaultRouteProp, name: 'ReserveDetails' };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <SectionDetailsScreen
+          sectionName={SECTION_NAME}
+          zoneName={ZONE_NAME}
+          aisleName={AISLE_NAME}
+          getSectionDetailsApi={sectionDetails}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={reserveSelectedRouteProp}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
     it('Renders Location Details Screen with Mock Floor Items', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
