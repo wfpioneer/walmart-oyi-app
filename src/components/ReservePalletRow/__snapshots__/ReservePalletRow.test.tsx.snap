@@ -9,9 +9,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
       "flexDirection": "row",
       "justifyContent": "flex-start",
       "marginBottom": 2,
-      "paddingBottom": 15,
-      "paddingHorizontal": 15,
-      "paddingVertical": 5,
+      "padding": 15,
     }
   }
 >
@@ -83,9 +81,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
       "flexDirection": "row",
       "justifyContent": "flex-start",
       "marginBottom": 2,
-      "paddingBottom": 15,
-      "paddingHorizontal": 15,
-      "paddingVertical": 5,
+      "padding": 15,
     }
   }
 >
@@ -157,9 +153,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = 
       "flexDirection": "row",
       "justifyContent": "flex-start",
       "marginBottom": 2,
-      "paddingBottom": 15,
-      "paddingHorizontal": 15,
-      "paddingVertical": 5,
+      "padding": 15,
     }
   }
 >
