@@ -15,16 +15,16 @@ export interface SectionItem {
   sectionName: string;
 }
 
-export interface LocationDetailsItem {
+export interface SectionDetailsItem {
   itemNbr: number;
   itemDesc: string;
   price: number;
 }
 
-export interface LocationDetailsPallet {
+export interface SectionDetailsPallet {
   palletId: number;
   palletCreateTS: string;
-  items: Omit<LocationDetailsItem, 'price'>[];
+  items: Omit<SectionDetailsItem, 'price'>[];
 }
 
 export interface LocationItem {
@@ -40,6 +40,6 @@ export interface LocationItem {
     id: number;
     name: string;
   };
-  floor: LocationDetailsItem[];
-  reserve: LocationDetailsPallet[];
+  floor: SectionDetailsItem[];
+  reserve: SectionDetailsPallet[];
 }

@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import styles from './ReservePalletRow.style';
 import { strings } from '../../locales';
-import { LocationDetailsPallet } from '../../models/LocationItems';
+import { SectionDetailsPallet } from '../../models/LocationItems';
 
-export type ReservePalletRowProps = { reservePallet: LocationDetailsPallet };
+export type ReservePalletRowProps = { reservePallet: SectionDetailsPallet };
 
 const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   const { reservePallet } = props;
