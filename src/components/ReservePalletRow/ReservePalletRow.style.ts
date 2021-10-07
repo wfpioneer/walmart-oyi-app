@@ -6,11 +6,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: COLOR.WHITE,
-    paddingHorizontal: 15,
-    paddingVertical: 5,
+    padding: 15,
     marginBottom: 2,
-    flexDirection: 'row',
-    paddingBottom: 15
+    flexDirection: 'row'
   },
   content: {
     alignItems: 'flex-start',
