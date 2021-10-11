@@ -5,6 +5,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator 1
   headerMode="float"
   screenOptions={
     Object {
+      "headerRight": [Function],
       "headerStyle": Object {
         "backgroundColor": "#0071e9",
       },
@@ -41,7 +42,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator 1
   />
   <Screen
     component={[Function]}
-    name="LocationDetails"
+    name="SectionDetails"
     options={
       Object {
         "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",

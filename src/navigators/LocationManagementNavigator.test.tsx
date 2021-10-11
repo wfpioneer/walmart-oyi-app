@@ -10,7 +10,10 @@ describe('LocationManagement Navigator', () => {
     const renderer = ShallowRenderer.createRenderer();
 
     renderer.render(
-      <LocationManagementNavigatorStack />
+      <LocationManagementNavigatorStack
+        isManualScanEnabled={false}
+        dispatch={jest.fn()}
+      />
     );
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
