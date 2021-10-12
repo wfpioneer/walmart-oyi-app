@@ -128,7 +128,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
             dispatch={dispatch}
             locationDetails=""
             navigator={navigation}
-            destinationScreen={LocationType.LOCATION_DETAILS}
+            destinationScreen={LocationType.SECTION_DETAILS}
           />
         )}
         keyExtractor={item => item.sectionName}

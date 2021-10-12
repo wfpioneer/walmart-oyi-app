@@ -1,5 +1,6 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { LocationTabsNavigator } from './LocationTabNavigator';
 import {
   mockLocationDetails,
@@ -7,6 +8,8 @@ import {
   mockLocationDetailsLargeLocationCount
 } from '../../mockData/locationDetails';
 
+let navigationProp: NavigationProp<any>;
+let routeProp: RouteProp<any, string>;
 describe('Test Location Tabs', () => {
   it('Renders Location Tabs with Mock Data', () => {
     const renderer = ShallowRenderer.createRenderer();
@@ -18,6 +21,13 @@ describe('Test Location Tabs', () => {
         floorItems={floor}
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        scannedEvent={undefined}
+        trackEventCall={jest.fn()}
+        useEffectHook={jest.fn()}
+        validateSessionCall={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -33,6 +43,13 @@ describe('Test Location Tabs', () => {
         floorItems={floor}
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        scannedEvent={undefined}
+        trackEventCall={jest.fn()}
+        useEffectHook={jest.fn()}
+        validateSessionCall={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -48,6 +65,13 @@ describe('Test Location Tabs', () => {
         floorItems={floor}
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        scannedEvent={undefined}
+        trackEventCall={jest.fn()}
+        useEffectHook={jest.fn()}
+        validateSessionCall={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
