@@ -18,6 +18,7 @@ import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
 import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
+import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
 
 interface SectionDetailsProps {
   zoneName: string;
@@ -51,6 +52,19 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
       dispatch({ type: GET_SECTION_DETAILS.RESET });
     });
   }, []);
+
+  // Get Section Details Api
+  useEffectHook(() => {
+    // on api success
+    if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
+      if (getSectionDetailsApi.result.status === 200) {
+        const { zone, aisle, section } = getSectionDetailsApi.result.data;
+        dispatch(selectZone(zone.id, zone.name));
+        dispatch(selectAisle(aisle.id, aisle.name));
+        dispatch(selectSection(section.id, section.name));
+      }
+    }
+  });
 
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
 

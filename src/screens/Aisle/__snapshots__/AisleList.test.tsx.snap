@@ -1,5 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
+<View>
+  <LocManualScanComponent
+    keyboardType="default"
+  />
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
+    location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
+  />
+  <FlatList
+    ListEmptyComponent={<NoAisleMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
 exports[`Test Aisle List Renders Aisle Screen with Data 1`] = `
 <View>
   <LocationHeader

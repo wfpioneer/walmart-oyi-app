@@ -20,6 +20,9 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
+import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import { barcodeEmitter } from '../../utils/scannerUtils';
+import { LocManualScanComponent } from '../../components/manualscan/ManualScan';
 
 const NoSectionMessage = () : JSX.Element => (
   <View style={styles.noSections}>
@@ -32,6 +35,7 @@ interface SectionProps {
     aisleName: string,
     zoneName: string,
     getAllSections: AsyncState,
+    isManualScanEnabled: boolean,
     dispatch: Dispatch<any>,
     apiStart: number,
     setApiStart: React.Dispatch<React.SetStateAction<number>>,
@@ -47,6 +51,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
     aisleName,
     zoneName,
     getAllSections,
+    isManualScanEnabled,
     navigation,
     apiStart,
     dispatch,
@@ -64,6 +69,23 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
       dispatch(getSections({ aisleId }));
     }).catch(() => {});
   }), [navigation]);
+
+  // scanned event listener
+  useEffectHook(() => {
+    const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused()) {
+        validateSession(navigation, route.name).then(() => {
+          trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
+          dispatch(setScannedEvent(scan));
+          dispatch(setManualScan(false));
+          navigation.navigate('SectionDetails');
+        });
+      }
+    });
+    return () => {
+      scanSubscription.remove();
+    };
+  }, []);
 
   useEffectHook(() => {
   // on api success
@@ -112,11 +134,11 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
 
   return (
     <View>
+      {isManualScanEnabled && <LocManualScanComponent keyboardType="default" />}
       <LocationHeader
         location={`${strings('LOCATION.AISLE')} ${zoneName}${aisleName}`}
         details={`${getAllSections.result?.data.length || 0} ${strings('LOCATION.SECTIONS')}`}
       />
-
       <FlatList
         data={getAllSections.result?.data || []}
         renderItem={({ item }) => (
@@ -145,6 +167,7 @@ const SectionList = (): JSX.Element => {
   const aisleId = useTypedSelector(state => state.Location.selectedAisle.id);
   const aisleName = useTypedSelector(state => state.Location.selectedAisle.name);
   const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
+  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const route = useRoute();
@@ -157,6 +180,7 @@ const SectionList = (): JSX.Element => {
       navigation={navigation}
       dispatch={dispatch}
       getAllSections={getAllSections}
+      isManualScanEnabled={isManualScanEnabled}
       apiStart={apiStart}
       setApiStart={setApiStart}
       route={route}
