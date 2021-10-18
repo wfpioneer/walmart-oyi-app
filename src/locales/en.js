@@ -105,7 +105,7 @@ export default {
     RESERVE_QTY: 'Reserve',
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consolidated',
-    FLY_CLOUD_QTY: 'Fly Cloud',
+    FLY_CLOUD_QTY: 'Fly Cloud'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -165,7 +165,8 @@ export default {
     NO_AISLES_AVAILABLE: 'No Aisles Available',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
     CLEAR_ALL: 'Clear all',
-    ADD: 'Add'
+    ADD: 'Add',
+    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

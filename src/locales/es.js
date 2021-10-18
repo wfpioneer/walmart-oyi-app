@@ -105,7 +105,7 @@ export default {
     RESERVE_QTY: 'Bodega',
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consol',
-    FLY_CLOUD_QTY: 'Fly Cloud Qty', // Leaving This as is until MX has a need for Cloud Qty
+    FLY_CLOUD_QTY: 'Fly Cloud Qty' // Leaving This as is until MX has a need for Cloud Qty
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -137,8 +137,8 @@ export default {
     TITLE: 'Todas las Ubicaciones',
     FLOOR: 'Ubicación en Piso',
     RESERVE: 'Ubicaciones en Bodega',
-    FLOORS: 'Floor', // TODO Spanish Translation
-    RESERVES: 'Reserve', // TODO Spanish Translation
+    FLOORS: 'Piso', // TODO Spanish Translation   DUPLICATE???
+    RESERVES: 'Bodega', // TODO Spanish Translation
     ADD_LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. \nPor favor inténtalo de nuevo.',
     EDIT_LOCATION_API_ERROR: 'Hubo en un error editando la ubicación. \nPor favor inténtalo de nuevo.',
     ADD_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
@@ -165,7 +165,8 @@ export default {
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Spanish Translation
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_ALL: 'Clear all', // TODO Spanish Translation
-    ADD: 'Agregar'
+    ADD: 'Agregar',
+    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

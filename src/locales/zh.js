@@ -165,7 +165,8 @@ export default {
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Mandarin Translation
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
     CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
-    ADD: '增加'
+    ADD: '增加',
+    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
