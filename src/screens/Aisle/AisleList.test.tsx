@@ -18,25 +18,78 @@ const defaultAsyncState: AsyncState = {
 };
 
 describe('Test Aisle List', () => {
-  it('Renders Aisle Screen with Data', () => {
+  describe('Tests rendering Aisle List', () => {
+    it('Renders Aisle Screen with Data', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const getAisleResult = {
+        data: mockAisles,
+        status: 200
+      };
+      const getAisleSuccess: AsyncState = {
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: getAisleResult
+      };
+      renderer.render(
+        <AisleScreen
+          zoneId={ZONE_ID}
+          zoneName={ZONE_NAME}
+          dispatch={jest.fn()}
+          getAllAisles={getAisleSuccess}
+          isManualScanEnabled={false}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders Aisle Screen with Empty Data', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const getAisleResult = {
+        data: {},
+        status: 200
+      };
+      const getAisleSuccess: AsyncState = {
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: getAisleResult
+      };
+      renderer.render(
+        <AisleScreen
+          zoneId={ZONE_ID}
+          zoneName={ZONE_NAME}
+          dispatch={jest.fn()}
+          getAllAisles={getAisleSuccess}
+          isManualScanEnabled={false}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+
+  it('Renders Manual Scan Component when isManualScanEnabled is set to true', () => {
     const renderer = ShallowRenderer.createRenderer();
-    const getAisleResult = {
-      data: mockAisles,
-      status: 200
-    };
-    const getAisleSuccess: AsyncState = {
-      isWaiting: false,
-      value: null,
-      error: null,
-      result: getAisleResult
-    };
+
     renderer.render(
       <AisleScreen
         zoneId={ZONE_ID}
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
-        getAllAisles={getAisleSuccess}
-        isManualScanEnabled={false}
+        getAllAisles={defaultAsyncState}
+        isManualScanEnabled={true}
         apiStart={0}
         setApiStart={jest.fn()}
         navigation={navigationProp}
@@ -47,57 +100,6 @@ describe('Test Aisle List', () => {
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-
-  it('Renders Aisle Screen with Empty Data', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    const getAisleResult = {
-      data: {},
-      status: 200
-    };
-    const getAisleSuccess: AsyncState = {
-      isWaiting: false,
-      value: null,
-      error: null,
-      result: getAisleResult
-    };
-    renderer.render(
-      <AisleScreen
-        zoneId={ZONE_ID}
-        zoneName={ZONE_NAME}
-        dispatch={jest.fn()}
-        getAllAisles={getAisleSuccess}
-        isManualScanEnabled={false}
-        apiStart={0}
-        setApiStart={jest.fn()}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
-});
-
-it('Renders Manual Scan Component when isManualScanEnabled is set to true', () => {
-  const renderer = ShallowRenderer.createRenderer();
-
-  renderer.render(
-    <AisleScreen
-      zoneId={ZONE_ID}
-      zoneName={ZONE_NAME}
-      dispatch={jest.fn()}
-      getAllAisles={defaultAsyncState}
-      isManualScanEnabled={true}
-      apiStart={0}
-      setApiStart={jest.fn()}
-      navigation={navigationProp}
-      route={routeProp}
-      useEffectHook={jest.fn()}
-      trackEventCall={jest.fn()}
-    />
-  );
-  expect(renderer.getRenderOutput()).toMatchSnapshot();
 });
 
 describe('Test Get Aisle Api Response', () => {

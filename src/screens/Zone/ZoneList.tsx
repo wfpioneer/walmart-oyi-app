@@ -19,7 +19,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
-import LocManualScanComponent from '../../components/LocationManualScan/LocationManualScan';
+import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 
@@ -108,7 +108,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
 
   return (
     <View>
-      {isManualScanEnabled && <LocManualScanComponent keyboardType="default" />}
+      {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
         details={`${getZoneApi.result?.data.length || 0} ${strings('LOCATION.ZONES')}`}

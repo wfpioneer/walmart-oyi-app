@@ -22,7 +22,7 @@ import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
-import LocManualScanComponent from '../../components/LocationManualScan/LocationManualScan';
+import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 
 const NoAisleMessage = () : JSX.Element => (
   <View style={styles.noAisles}>
@@ -132,7 +132,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
 
   return (
     <View>
-      {isManualScanEnabled && <LocManualScanComponent keyboardType="default" />}
+      {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('LOCATION.ZONE')} ${zoneName}`}
         details={`${getAllAisles.result?.data.length || 0} ${strings('LOCATION.AISLES')}`}

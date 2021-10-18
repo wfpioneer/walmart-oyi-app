@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
+exports[`Test Aisle List Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
 <View>
   <LocationManualScan
     keyboardType="default"
@@ -33,7 +33,7 @@ exports[`Renders Manual Scan Component when isManualScanEnabled is set to true 1
 </View>
 `;
 
-exports[`Test Aisle List Renders Aisle Screen with Data 1`] = `
+exports[`Test Aisle List Tests rendering Aisle List Renders Aisle Screen with Data 1`] = `
 <View>
   <LocationHeader
     details="6 [missing \\"en.LOCATION.AISLES\\" translation]"
@@ -96,7 +96,7 @@ exports[`Test Aisle List Renders Aisle Screen with Data 1`] = `
 </View>
 `;
 
-exports[`Test Aisle List Renders Aisle Screen with Empty Data 1`] = `
+exports[`Test Aisle List Tests rendering Aisle List Renders Aisle Screen with Empty Data 1`] = `
 <View>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.AISLES\\" translation]"

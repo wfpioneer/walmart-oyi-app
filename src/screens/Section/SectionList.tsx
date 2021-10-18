@@ -22,7 +22,7 @@ import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import LocManualScanComponent from '../../components/LocationManualScan/LocationManualScan';
+import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 
 const NoSectionMessage = () : JSX.Element => (
   <View style={styles.noSections}>
@@ -134,7 +134,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
 
   return (
     <View>
-      {isManualScanEnabled && <LocManualScanComponent keyboardType="default" />}
+      {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('LOCATION.AISLE')} ${zoneName}${aisleName}`}
         details={`${getAllSections.result?.data.length || 0} ${strings('LOCATION.SECTIONS')}`}
