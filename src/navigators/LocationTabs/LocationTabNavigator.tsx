@@ -1,7 +1,5 @@
 import React, { Dispatch, EffectCallback, useEffect } from 'react';
-import {
-  Text, TouchableOpacity, View
-} from 'react-native';
+import { Text, View } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useDispatch } from 'react-redux';
 import {
@@ -19,6 +17,7 @@ import SectionDetails from '../../screens/SectionDetails/SectionDetailsScreen';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -26,6 +25,7 @@ interface LocationProps {
     floorItems: FloorItem[];
     reserveItems: Reserve[];
     locationName: string;
+    isManualScanEnabled: boolean;
     useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
     dispatch: Dispatch<any>;
     navigation: NavigationProp<any>;
@@ -67,6 +67,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     locationName,
     floorItems,
     reserveItems,
+    isManualScanEnabled,
     dispatch,
     navigation,
     scannedEvent,
@@ -102,6 +103,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   }, []);
   return (
     <>
+      {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
+
       <LocationHeader
         location={`${strings('LOCATION.SECTION')} ${locationName}`}
         details={`${floorItems.length ?? 0} ${strings('LOCATION.ITEMS')},`
@@ -136,10 +139,12 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
 const LocationTabs = () : JSX.Element => {
   const { selectedAisle, selectedZone, selectedSection } = useTypedSelector(state => state.Location);
   const { result } = useTypedSelector(state => state.async.getSectionDetails);
+  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { scannedEvent } = useTypedSelector(state => state.Global);
+
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
-  const { scannedEvent } = useTypedSelector(state => state.Global);
   const locItem: LocationItem | undefined = (result && result.data);
   const locationName = `${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`;
 
@@ -148,6 +153,7 @@ const LocationTabs = () : JSX.Element => {
       floorItems={locItem?.floor ?? []}
       reserveItems={locItem?.reserve ?? []}
       locationName={locationName}
+      isManualScanEnabled={isManualScanEnabled}
       useEffectHook={useEffect}
       dispatch={dispatch}
       navigation={navigation}

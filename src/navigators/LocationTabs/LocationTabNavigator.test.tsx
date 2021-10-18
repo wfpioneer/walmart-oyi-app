@@ -32,6 +32,7 @@ describe('Test Location Tabs', () => {
         trackEventCall={jest.fn()}
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
+        isManualScanEnabled={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -54,6 +55,8 @@ describe('Test Location Tabs', () => {
         trackEventCall={jest.fn()}
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
+        isManualScanEnabled={false}
+
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -76,6 +79,30 @@ describe('Test Location Tabs', () => {
         trackEventCall={jest.fn()}
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
+        isManualScanEnabled={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders Manual Scan Component when isManualScanEnabled is set to true', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const {
+      floor, reserve, zone, aisle, section
+    } = mockLocationDetails;
+    renderer.render(
+      <LocationTabsNavigator
+        floorItems={floor}
+        reserveItems={reserve}
+        locationName={`${zone.name}${aisle.name}-${section.name}`}
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        scannedEvent={defaultScannedEvent}
+        trackEventCall={jest.fn()}
+        useEffectHook={jest.fn()}
+        validateSessionCall={jest.fn()}
+        isManualScanEnabled={true}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

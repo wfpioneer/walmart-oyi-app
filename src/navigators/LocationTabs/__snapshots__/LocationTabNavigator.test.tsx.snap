@@ -122,3 +122,47 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
   </MaterialTopTabNavigator>
 </React.Fragment>
 `;
+
+exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
+<React.Fragment>
+  <LocationManualScan
+    keyboardType="default"
+  />
+  <LocationHeader
+    details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 1 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
+  />
+  <MaterialTopTabNavigator
+    tabBarOptions={
+      Object {
+        "activeTintColor": "#0071e9",
+        "indicatorStyle": Object {
+          "backgroundColor": "#0071e9",
+        },
+        "style": Object {
+          "backgroundColor": "#ffffffff",
+        },
+      }
+    }
+  >
+    <Screen
+      component={[Function]}
+      name="FloorDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (2)",
+        }
+      }
+    />
+    <Screen
+      component={[Function]}
+      name="ReserveDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (1)",
+        }
+      }
+    />
+  </MaterialTopTabNavigator>
+</React.Fragment>
+`;
