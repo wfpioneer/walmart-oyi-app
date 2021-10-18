@@ -11,6 +11,10 @@ import {
 let navigationProp: NavigationProp<any>;
 let routeProp: RouteProp<any, string>;
 describe('Test Location Tabs', () => {
+  const defaultScannedEvent = {
+    type: undefined,
+    value: undefined
+  };
   it('Renders Location Tabs with Mock Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const {
@@ -24,7 +28,7 @@ describe('Test Location Tabs', () => {
         dispatch={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
-        scannedEvent={undefined}
+        scannedEvent={defaultScannedEvent}
         trackEventCall={jest.fn()}
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
@@ -46,7 +50,7 @@ describe('Test Location Tabs', () => {
         dispatch={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
-        scannedEvent={undefined}
+        scannedEvent={defaultScannedEvent}
         trackEventCall={jest.fn()}
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
@@ -68,7 +72,7 @@ describe('Test Location Tabs', () => {
         dispatch={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
-        scannedEvent={undefined}
+        scannedEvent={defaultScannedEvent}
         trackEventCall={jest.fn()}
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}

@@ -22,7 +22,7 @@ import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { LocManualScanComponent } from '../../components/manualscan/ManualScan';
+import LocManualScanComponent from '../../components/LocationManualScan/LocationManualScan';
 
 const NoSectionMessage = () : JSX.Element => (
   <View style={styles.noSections}>

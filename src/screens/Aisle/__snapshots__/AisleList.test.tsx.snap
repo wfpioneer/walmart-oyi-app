@@ -2,7 +2,7 @@
 
 exports[`Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
 <View>
-  <LocManualScanComponent
+  <LocationManualScan
     keyboardType="default"
   />
   <LocationHeader

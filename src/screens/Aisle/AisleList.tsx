@@ -22,7 +22,7 @@ import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
-import { LocManualScanComponent } from '../../components/manualscan/ManualScan';
+import LocManualScanComponent from '../../components/LocationManualScan/LocationManualScan';
 
 const NoAisleMessage = () : JSX.Element => (
   <View style={styles.noAisles}>

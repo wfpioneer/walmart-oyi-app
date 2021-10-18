@@ -19,7 +19,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
-import { LocManualScanComponent } from '../../components/manualscan/ManualScan';
+import LocManualScanComponent from '../../components/LocationManualScan/LocationManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 
