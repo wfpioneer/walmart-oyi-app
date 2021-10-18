@@ -1,4 +1,4 @@
-import React, { EffectCallback, useEffect } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
@@ -8,6 +8,7 @@ import { Dispatch } from 'redux';
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
+import moment from 'moment';
 import styles from './ZoneList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
@@ -31,6 +32,8 @@ interface ZoneProps {
     dispatch: Dispatch<any>,
     getZoneApi: AsyncState,
     navigation: NavigationProp<any>,
+    apiStart: number,
+    setApiStart: React.Dispatch<React.SetStateAction<number>>,
     route: RouteProp<any, string>,
     useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
     trackEventCall: (eventName: string, params?: any) => void,
@@ -40,6 +43,8 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
   const {
     siteId,
     getZoneApi,
+    apiStart,
+    setApiStart,
     dispatch,
     navigation,
     route,
@@ -50,9 +55,26 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
   // calls the get all zone api
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
+      trackEventCall('get_zones_api_call');
+      setApiStart(moment().valueOf());
       dispatch(getAllZones());
     }).catch(() => {});
   }), [navigation]);
+
+  useEffectHook(() => {
+    // on api success
+    if (!getZoneApi.isWaiting && getZoneApi.result) {
+      trackEventCall('get_zones_success', { duration: moment().valueOf() - apiStart });
+    }
+
+    // on api failure
+    if (!getZoneApi.isWaiting && getZoneApi.error) {
+      trackEventCall('get_zones_failure', {
+        errorDetails: getZoneApi.error.message || getZoneApi.error,
+        duration: moment().valueOf() - apiStart
+      });
+    }
+  }, [getZoneApi]);
 
   if (getZoneApi.isWaiting) {
     return (
@@ -118,6 +140,7 @@ const ZoneList = (): JSX.Element => {
   const getZoneApi = useTypedSelector(state => state.async.getAllZones);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [apiStart, setApiStart] = useState(0);
   const route = useRoute();
 
   return (
@@ -128,6 +151,8 @@ const ZoneList = (): JSX.Element => {
       navigation={navigation}
       route={route}
       useEffectHook={useEffect}
+      apiStart={apiStart}
+      setApiStart={setApiStart}
       trackEventCall={trackEvent}
     />
   );
