@@ -18,6 +18,7 @@ import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
 import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
+import ReservePalletRow from '../../components/ReservePalletRow/ReservePalletRow';
 
 interface SectionDetailsProps {
   zoneName: string;
@@ -88,7 +89,9 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
     <View style={styles.locDetailsScreenContainer}>
       <FlatList
         data={route.name === 'FloorDetails' ? locationItem?.floor : locationItem?.reserve}
-        renderItem={({ item }) => <FloorItemRow item={item} />} // TODO Swap between floor and reserve list component
+        renderItem={({ item }) => (
+          route.name === 'FloorDetails' ? <FloorItemRow item={item} /> : <ReservePalletRow reservePallet={item} />
+        )}
         keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
       />
     </View>
