@@ -13,7 +13,8 @@ describe('Test Zone List', () => {
   it('Renders Zone Screen with no-zones-message when get all zones response is 204', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getZonesResult = {
-      status: 204
+      status: 204,
+      data: ''
     };
     const getZoneSuccess: AsyncState = {
       isWaiting: false,

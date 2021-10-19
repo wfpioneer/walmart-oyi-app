@@ -23,7 +23,7 @@ import { LocationType } from '../../models/LocationType';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
-    <Text>{strings('LOCATION.NO_ZONES_AVAILABLE')}</Text>
+    <Text style={styles.noZonesText}>{strings('LOCATION.NO_ZONES_AVAILABLE')}</Text>
   </View>
 );
 
@@ -110,7 +110,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     <View>
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
-        details={`${getZoneApi.result?.data?.length || 0} ${strings('LOCATION.ZONES')}`}
+        details={`${getZoneApi.result?.data.length || 0} ${strings('LOCATION.ZONES')}`}
       />
 
       <FlatList

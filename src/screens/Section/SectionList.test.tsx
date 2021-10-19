@@ -12,6 +12,36 @@ const AISLE_NAME = '1';
 const ZONE_NAME = 'CARN';
 
 describe('Test Section List', () => {
+  it('Renders Section Screen with no-section-message when getSections response is 204', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getSectionsResult = {
+      status: 204,
+      data: ''
+    };
+    const getSectionEmptyResponse: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: getSectionsResult
+    };
+    renderer.render(
+      <SectionScreen
+        aisleId={AISLE_ID}
+        aisleName={AISLE_NAME}
+        zoneName={ZONE_NAME}
+        dispatch={jest.fn()}
+        getAllSections={getSectionEmptyResponse}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
   it('Renders Section Screen with Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getSectionResult = {

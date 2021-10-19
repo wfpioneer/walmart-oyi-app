@@ -150,3 +150,33 @@ exports[`Test Section List Renders Section Screen with Empty Data 1`] = `
   />
 </View>
 `;
+
+exports[`Test Section List Renders Section Screen with no-section-message when getSections response is 204 1`] = `
+<View>
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
+    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
+  />
+  <FlatList
+    ListEmptyComponent={<NoSectionMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;

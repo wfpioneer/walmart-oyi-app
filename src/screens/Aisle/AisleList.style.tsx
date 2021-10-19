@@ -20,9 +20,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   noAisles: {
+    paddingTop: 10,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  noAislesText: {
+    color: COLOR.GREY_700
   },
   activityIndicator: {
     flex: 1,

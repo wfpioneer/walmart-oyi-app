@@ -11,6 +11,35 @@ const ZONE_ID = 1;
 const ZONE_NAME = 'Grocery';
 
 describe('Test Aisle List', () => {
+  it('Renders Aisle Screen with no-aisles-message when getAisles response is 204', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getAislesResult = {
+      status: 204,
+      data: ''
+    };
+    const getAisleEmptyResponse: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: getAislesResult
+    };
+    renderer.render(
+      <AisleScreen
+        zoneId={ZONE_ID}
+        zoneName={ZONE_NAME}
+        dispatch={jest.fn()}
+        getAllAisles={getAisleEmptyResponse}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
   it('Renders Aisle Screen with Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getAisleResult = {
