@@ -153,6 +153,7 @@ export default {
     LOCATION_MANAGEMENT: 'Location Management',
     ITEMS: 'Items',
     PALLETS: 'Pallets',
+    PALLET: 'Pallet',
     ZONES: 'Zones',
     ZONE: 'Zone',
     AISLES: 'Aisles',
@@ -165,8 +166,11 @@ export default {
     NO_AISLES_AVAILABLE: 'No Aisles Available',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
     CLEAR_ALL: 'Clear all',
+    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2',
+    REMOVE_ALL: 'Remove all',
     ADD: 'Add',
-    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2'
+    CREATED_ON: 'Created on',
+    MORE: 'More'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

@@ -153,6 +153,7 @@ export default {
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ITEMS: 'Items', // TODO Spanish Translation
     PALLETS: 'Pallets', // TODO Spanish Translation
+    PALLET: 'Pallet', // TODO Spanish Translation
     ZONES: 'Zonas',
     ZONE: 'Zone', // TODO Spanish Translation
     AISLES: 'Pasillos',
@@ -166,7 +167,10 @@ export default {
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_ALL: 'Clear all', // TODO Spanish Translation
     ADD: 'Agregar',
-    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2' // TODO Spanish Translation
+    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2', // TODO Spanish Translation
+    REMOVE_ALL: 'Remove all', // TODO Spanish Translation
+    CREATED_ON: 'Created on', // TODO Spanish Translation
+    MORE: 'More' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

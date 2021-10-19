@@ -9,7 +9,7 @@ export default class GetFluffyRolesService {
 
     if (__DEV__) {
       // This is to get Fluffy to correctly return features
-      userId = 'istanse';
+      userId = 'n0e00s9';
       countryCode = 'US';
       clubNbr = 1;
     } else if (countryCode === 'MX' && clubNbr === 5522) {
