@@ -10,6 +10,32 @@ let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
 
 describe('Test Zone List', () => {
+  it('Renders Zone Screen with no-zones-message when get all zones response is 204', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getZonesResult = {
+      status: 204
+    };
+    const getZoneSuccess: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: getZonesResult
+    };
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        getZoneApi={getZoneSuccess}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
   it('Renders Zone Screen with Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getZonesResult = {

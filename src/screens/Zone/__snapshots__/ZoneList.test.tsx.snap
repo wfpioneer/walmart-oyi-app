@@ -64,6 +64,36 @@ exports[`Test Get Zone Api Response Renders loading indicator when waiting for Z
 />
 `;
 
+exports[`Test Zone List Renders Zone Screen with 204 response 1`] = `
+<View>
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
+    location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
+  />
+  <FlatList
+    ListEmptyComponent={<NoZonesMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
 exports[`Test Zone List Renders Zone Screen with Data 1`] = `
 <View>
   <LocationHeader
@@ -286,6 +316,36 @@ exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
       }
     }
     data={Object {}}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`Test Zone List Renders Zone Screen with no-zones-message when get all zones response is 204 1`] = `
+<View>
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
+    location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
+  />
+  <FlatList
+    ListEmptyComponent={<NoZonesMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
+    data={Array []}
     disableVirtualization={false}
     horizontal={false}
     initialNumToRender={10}
