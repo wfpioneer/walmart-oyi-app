@@ -153,6 +153,7 @@ export default {
     LOCATION_MANAGEMENT: '通道管理',
     ITEMS: '多个商品',
     PALLETS: 'Pallets', // TODO Mandarin Translation
+    PALLET: 'Pallet', // TODO Mandarin Translation
     ZONES: '区域',
     ZONE: 'Zone', // TODO Mandarin Translation
     AISLES: '通道',
@@ -164,8 +165,10 @@ export default {
     NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Mandarin Translation
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Mandarin Translation
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
-    CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
-    ADD: '增加'
+    REMOVE_ALL: 'Remove all', // TODO Mandarin Translation
+    ADD: '增加',
+    CREATED_ON: 'Created on', // TODO Mandarin Translation
+    MORE: 'More' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

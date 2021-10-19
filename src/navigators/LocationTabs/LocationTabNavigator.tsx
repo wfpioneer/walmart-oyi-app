@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import {
-  Text, TouchableOpacity, View
+  Text, View
 } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useDispatch } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { strings } from '../../locales';
-import { FloorItem, LocationItem, Reserve } from '../../models/LocationItems';
+import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
 import styles from './LocationTabNavigator.style';
 import LocationHeader from '../../components/locationHeader/LocationHeader';
@@ -18,8 +18,8 @@ import SectionDetails from '../../screens/SectionDetails/SectionDetailsScreen';
 const Tab = createMaterialTopTabNavigator();
 
 interface LocationProps {
-    floorItems: FloorItem[];
-    reserveItems: Reserve[];
+    floorItems: SectionDetailsItem[];
+    reserveItems: SectionDetailsPallet[];
     locationName: string;
 }
 
@@ -43,9 +43,24 @@ const ItemHeader = () : JSX.Element => (
   </View>
 );
 
-const locationDetailsList = () => (
+const PalletHeader = () : JSX.Element => (
+  <View style={styles.tabHeader}>
+    <Text style={styles.tabHeaderText}>
+      {strings('LOCATION.PALLETS')}
+    </Text>
+  </View>
+);
+
+const floorDetailsList = () => (
   <>
     <ItemHeader />
+    <SectionDetails />
+  </>
+);
+
+const reserveDetailsList = () => (
+  <>
+    <PalletHeader />
     <SectionDetails />
   </>
 );
@@ -62,20 +77,21 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       <Tab.Navigator
         tabBarOptions={{
           activeTintColor: COLOR.MAIN_THEME_COLOR,
+          inactiveTintColor: COLOR.GREY_700,
           style: { backgroundColor: COLOR.WHITE },
           indicatorStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
         }}
       >
         <Tab.Screen
           name="FloorDetails"
-          component={locationDetailsList}
+          component={floorDetailsList}
           options={{
             title: `${strings('LOCATION.FLOORS')} (${floorItems.length ?? 0})`
           }}
         />
         <Tab.Screen
           name="ReserveDetails"
-          component={locationDetailsList}
+          component={reserveDetailsList}
           options={{
             title: `${strings('LOCATION.RESERVES')} (${reserveItems.length ?? 0})`
           }}

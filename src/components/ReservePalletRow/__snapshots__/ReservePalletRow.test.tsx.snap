@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "justifyContent": "flex-start",
+      "marginBottom": 2,
+      "padding": 15,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "justifyContent": "space-evenly",
+      }
+    }
+  >
+    <Text>
+      [missing "en.LOCATION.PALLET" translation] 1
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#9e9e9e",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.LOCATION.CREATED_ON" translation] 2021-01-01
+    </Text>
+    <View
+      style={
+        Object {
+          "paddingLeft": 15,
+          "paddingTop": 15,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 12,
+            "lineHeight": 22,
+          }
+        }
+      >
+        [missing "en.ITEM.ITEM" translation] 500252
+      </Text>
+      <Text>
+        Nature Valley Honey Nut Granola Bars
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#9e9e9e",
+            "fontSize": 12,
+          }
+        }
+      >
+        +1 [missing "en.LOCATION.MORE" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`ReservePalletRow Component Renders a ReservePallet with an item with a long name 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "justifyContent": "flex-start",
+      "marginBottom": 2,
+      "padding": 15,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "justifyContent": "space-evenly",
+      }
+    }
+  >
+    <Text>
+      [missing "en.LOCATION.PALLET" translation] 1
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#9e9e9e",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.LOCATION.CREATED_ON" translation] 2021-01-01
+    </Text>
+    <View
+      style={
+        Object {
+          "paddingLeft": 15,
+          "paddingTop": 15,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 12,
+            "lineHeight": 22,
+          }
+        }
+      >
+        [missing "en.ITEM.ITEM" translation] 500252
+      </Text>
+      <Text>
+        Nature Valley Honey Nut Granola Bars
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#9e9e9e",
+            "fontSize": 12,
+          }
+        }
+      >
+        +2 [missing "en.LOCATION.MORE" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "justifyContent": "flex-start",
+      "marginBottom": 2,
+      "padding": 15,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "justifyContent": "space-evenly",
+      }
+    }
+  >
+    <Text>
+      [missing "en.LOCATION.PALLET" translation] 1
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#9e9e9e",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.LOCATION.CREATED_ON" translation] 2021-01-01
+    </Text>
+  </View>
+</View>
+`;

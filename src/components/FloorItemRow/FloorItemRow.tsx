@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import styles from './FloorItemRow.style';
 import { currencies, strings } from '../../locales';
-import { FloorItem } from '../../models/LocationItems';
+import { SectionDetailsItem } from '../../models/LocationItems';
 
-export type FloorItemRowProps = { item: FloorItem };
+export type FloorItemRowProps = { item: SectionDetailsItem };
 
 const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
   const { item } = props;

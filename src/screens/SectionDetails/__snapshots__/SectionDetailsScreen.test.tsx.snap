@@ -642,13 +642,89 @@ exports[`Test Location Details Screen Tests rendering location details screen da
         Object {
           "items": Array [
             Object {
+              "itemDesc": "Nature Valley Honey Nut Granola Bars",
+              "itemNbr": 500252,
+            },
+            Object {
               "itemDesc": "Cabbage",
-              "itemNbr": 1,
-              "price": 2.4,
+              "itemNbr": 123456,
             },
           ],
-          "palletCreateTS": "2021-1-1",
+          "palletCreateTS": "2021-01-01",
           "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Nature Valley Granola Bars",
+              "itemNbr": 555555,
+            },
+          ],
+          "palletCreateTS": "2021-01-10",
+          "palletId": 123,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 980012,
+            },
+          ],
+          "palletCreateTS": "1999-10-10",
+          "palletId": 456,
+        },
+      ]
+    }
+    keyExtractor={[Function]}
+    renderItem={[Function]}
+  />
+</View>
+`;
+
+exports[`Test Location Details Screen Tests rendering location details screen data Renders reserve list when reserve tab is selected 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ForwardRef
+    data={
+      Array [
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Nature Valley Honey Nut Granola Bars",
+              "itemNbr": 500252,
+            },
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 123456,
+            },
+          ],
+          "palletCreateTS": "2021-01-01",
+          "palletId": 1,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Nature Valley Granola Bars",
+              "itemNbr": 555555,
+            },
+          ],
+          "palletCreateTS": "2021-01-10",
+          "palletId": 123,
+        },
+        Object {
+          "items": Array [
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 980012,
+            },
+          ],
+          "palletCreateTS": "1999-10-10",
+          "palletId": 456,
         },
       ]
     }
