@@ -31,13 +31,13 @@ interface LocationProps {
     dispatch: Dispatch<any>;
     navigation: NavigationProp<any>;
     route: RouteProp<any, string>;
-    scannedEvent: {type?: string, value?: string}
+    scannedEvent: {type?: string; value?: string};
     trackEventCall: (eventName: string, params?: any) => void;
     validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
 }
 
 // TODO uncomment this when we start implementing the rest of LocationManagement functionality
-const ItemHeader = () : JSX.Element => (
+const ItemHeader = (): JSX.Element => (
   <View style={styles.tabHeader}>
     <Text style={styles.tabHeaderText}>
       {strings('LOCATION.ITEMS')}
@@ -56,7 +56,7 @@ const ItemHeader = () : JSX.Element => (
   </View>
 );
 
-const PalletHeader = () : JSX.Element => (
+const PalletHeader = (): JSX.Element => (
   <View style={styles.tabHeader}>
     <Text style={styles.tabHeaderText}>
       {strings('LOCATION.PALLETS')}
@@ -123,7 +123,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     <>
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
-        location={`${strings('LOCATION.SECTION')} ${locationName === '-' ? scannedEvent.value?.toUpperCase() : locationName}`}
+        location={`${strings('LOCATION.SECTION')}`
+         + ` ${locationName === '-' ? scannedEvent.value?.toUpperCase() : locationName}`}
         details={`${floorItems.length ?? 0} ${strings('LOCATION.ITEMS')},`
         + ` ${reserveItems.length ?? 0} ${strings('LOCATION.PALLETS')}`}
       />

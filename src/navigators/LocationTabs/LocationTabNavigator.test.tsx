@@ -107,4 +107,29 @@ describe('Test Location Tabs', () => {
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
+  it('Renders Location header as Scanned Event Value when location name is "-"', (): void => {
+    const renderer = ShallowRenderer.createRenderer();
+    const { floor, reserve } = mockLocationDetails;
+    const mockScannedEvent = {
+      type: 'Test',
+      value: 'SCAN1-1'
+    };
+    renderer.render(
+      <LocationTabsNavigator
+        floorItems={floor}
+        reserveItems={reserve}
+        locationName="-"
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        scannedEvent={mockScannedEvent}
+        trackEventCall={jest.fn()}
+        useEffectHook={jest.fn()}
+        validateSessionCall={jest.fn()}
+        isManualScanEnabled={true}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
 });
