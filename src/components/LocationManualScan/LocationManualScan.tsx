@@ -27,7 +27,7 @@ export const LocationManualScanComponent = (props: LocManualScanProps): JSX.Elem
   const {
     dispatch, value, onChangeText, textInputRef, keyboardType
   } = props;
-  const locRegex = new RegExp(/^[\d]+$|[A-z][0-9]+-[0-9]+/);
+  const locRegex = new RegExp(/^[\d]+$|[A-z][0-9]+-[0-9]+$/);
 
   const onSubmit = (text: string) => {
     if (text.length > 0 && locRegex.test(text)) {

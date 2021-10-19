@@ -16,8 +16,9 @@ import { getSectionDetails } from '../../state/actions/saga';
 import SectionDetails from '../../screens/SectionDetails/SectionDetailsScreen';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import { setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
+import { resetLocations } from '../../state/actions/Location';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -96,6 +97,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   useEffectHook(() => {
     validateSessionCall(navigation, route.name).then(() => {
       if (scannedEvent.value) {
+        // Reset Location State on new getSectionDetails request to update header
+        dispatch(resetLocations());
         dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
       }
     }).catch(() => {});
@@ -108,7 +111,6 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
         validateSession(navigation, route.name).then(() => {
           trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
           dispatch(setScannedEvent(scan));
-          dispatch(setManualScan(false));
         });
       }
     });
@@ -116,12 +118,12 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       scanSubscription.remove();
     };
   }, []);
+
   return (
     <>
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
-
       <LocationHeader
-        location={`${strings('LOCATION.SECTION')} ${locationName}`}
+        location={`${strings('LOCATION.SECTION')} ${locationName === '-' ? scannedEvent.value?.toUpperCase() : locationName}`}
         details={`${floorItems.length ?? 0} ${strings('LOCATION.ITEMS')},`
         + ` ${reserveItems.length ?? 0} ${strings('LOCATION.PALLETS')}`}
       />
