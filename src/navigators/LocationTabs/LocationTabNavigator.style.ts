@@ -22,8 +22,7 @@ const styles = StyleSheet.create({
   },
   tabHeaderText: {
     flex: 1,
-    color: COLOR.GREY_600,
-    fontSize: 14
+    fontSize: 18
   },
   pipe: {
     color: COLOR.GREY_600,

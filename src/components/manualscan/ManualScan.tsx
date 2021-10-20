@@ -2,7 +2,6 @@ import React, {
   FC, RefObject, createRef, useLayoutEffect
 } from 'react';
 import { TextInput, View } from 'react-native';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useIsFocused } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { strings } from '../../locales';
@@ -12,6 +11,7 @@ import { manualScan } from '../../utils/scannerUtils';
 import Button from '../buttons/Button';
 import { setManualScan } from '../../state/actions/Global';
 import IconButton from '../buttons/IconButton';
+import { ModalCloseIcon } from '../../screens/Modal/Modal';
 
 interface ManualScanProps {
   keyboardType?: 'numeric' | 'default';
@@ -23,15 +23,8 @@ const defaultProps: ManualScanProps = {
 const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
   const dispatch = useDispatch();
   const [value, onChangeText] = React.useState('');
-  const isNavigationFocused = useIsFocused();
   const textInputRef: RefObject<TextInput> = createRef();
   const itemRegex = new RegExp(/[^0-9]/g);
-  // Having to use this to get focus correct past the first screen where this gets shown
-  useLayoutEffect(() => {
-    if (isNavigationFocused) {
-      textInputRef.current?.focus();
-    }
-  }, [isNavigationFocused]);
 
   const onSubmit = (text: string) => {
     if (text.length > 0) {
@@ -59,7 +52,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
       />
       {value.length > 0 && value !== '' && (
         <IconButton
-          icon={<MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />}
+          icon={ModalCloseIcon}
           type={Button.Type.NO_BORDER}
           onPress={clearText}
         />

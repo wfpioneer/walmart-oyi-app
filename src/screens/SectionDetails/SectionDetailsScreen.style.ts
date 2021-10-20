@@ -2,26 +2,9 @@ import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  locDetailsScreenContainer: {
     flex: 1
   },
-  emptyContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 28
-  },
-  listContainer: {
-    paddingVertical: 20,
-    minHeight: 80
-  },
-  listText: {
-    alignSelf: 'center'
-  },
-  failedItemText: {
-    paddingVertical: 20
-  },
-
   activityIndicator: {
     flex: 1,
     justifyContent: 'center',
@@ -45,8 +28,8 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    textAlign: 'center',
-    paddingHorizontal: 8
+    textAlign: 'center'
   }
 });
+
 export default styles;

@@ -105,7 +105,7 @@ export default {
     RESERVE_QTY: 'Bodega',
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consol',
-    FLY_CLOUD_QTY: 'Fly Cloud Qty', // Leaving This as is until MX has a need for Cloud Qty
+    FLY_CLOUD_QTY: 'Fly Cloud Qty' // Leaving This as is until MX has a need for Cloud Qty
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -153,6 +153,7 @@ export default {
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ITEMS: 'Items', // TODO Spanish Translation
     PALLETS: 'Pallets', // TODO Spanish Translation
+    PALLET: 'Pallet', // TODO Spanish Translation
     ZONES: 'Zonas',
     ZONE: 'Zone', // TODO Spanish Translation
     AISLES: 'Pasillos',
@@ -164,8 +165,10 @@ export default {
     NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Spanish Translation
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Spanish Translation
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
-    CLEAR_ALL: 'Clear all', // TODO Spanish Translation
-    ADD: 'Agregar'
+    REMOVE_ALL: 'Remove all', // TODO Spanish Translation
+    ADD: 'Agregar',
+    CREATED_ON: 'Created on', // TODO Spanish Translation
+    MORE: 'More' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

@@ -8,7 +8,6 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
-import Modal from 'react-native-modal';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
 import { ApprovalCategory, ApprovalListItem, approvalStatus } from '../../models/ApprovalListItem';
 import styles from './ApprovalList.style';
@@ -24,6 +23,7 @@ import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
+import { CustomModalComponent } from '../Modal/Modal';
 
 export interface CategoryFilter {
   filteredData: ApprovalCategory[];
@@ -128,37 +128,39 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
 
   return (
   // Used to overlay the pop-up in the screen view
-    <Modal isVisible={true}>
-      <View style={styles.popUpContainer}>
-        <Text style={styles.errorText}>{strings('APPROVAL.FAILED_APPROVE')}</Text>
-        {failedItems.length <= 5
-          ? (
-            <FlatList
-              data={failedItems.slice(0, 5)}
-              keyExtractor={item => item.id.toString()}
-              renderItem={({ item }) => (
-                <Text style={styles.listText}>
-                  {`${strings('GENERICS.ITEM')}: ${item.itemNbr}`}
-                </Text>
-              )}
-              style={styles.listContainer}
-            />
-          )
-          : (
-            <Text style={styles.failedItemText}>
-              {`${failedItems.length} / ${total} ${strings('APPROVAL.FAILED_ITEMS')}`}
-            </Text>
-          )}
-        <Button
-          title={strings('APPROVAL.CONFIRM')}
-          type={Button.Type.PRIMARY}
-          style={{ width: '50%' }}
-          onPress={() => {
-            dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
-          }}
-        />
-      </View>
-    </Modal>
+    <CustomModalComponent
+      isVisible={true}
+      modalType="Popup"
+      onClose={() => { dispatch({ type: UPDATE_APPROVAL_LIST.RESET }); }}
+    >
+      <Text style={styles.errorText}>{strings('APPROVAL.FAILED_APPROVE')}</Text>
+      {failedItems.length <= 5
+        ? (
+          <FlatList
+            data={failedItems.slice(0, 5)}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({ item }) => (
+              <Text style={styles.listText}>
+                {`${strings('GENERICS.ITEM')}: ${item.itemNbr}`}
+              </Text>
+            )}
+            style={styles.listContainer}
+          />
+        )
+        : (
+          <Text style={styles.failedItemText}>
+            {`${failedItems.length} / ${total} ${strings('APPROVAL.FAILED_ITEMS')}`}
+          </Text>
+        )}
+      <Button
+        title={strings('APPROVAL.CONFIRM')}
+        type={Button.Type.PRIMARY}
+        style={{ width: '50%' }}
+        onPress={() => {
+          dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
+        }}
+      />
+    </CustomModalComponent>
   );
 };
 

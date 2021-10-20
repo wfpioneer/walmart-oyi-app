@@ -16,19 +16,47 @@ export const mockLocationDetails : LocationItem = {
   floor: [
     {
       itemNbr: 980078597,
-      itemDesc: 'Cabbage',
+      itemDesc: 'Nature Valley Sweet and Salty Granola Bars',
       price: 2.40
+    },
+    {
+      itemNbr: 980011111,
+      itemDesc: 'Nature Valley Honey Bars',
+      price: 5.80
     }
   ],
   reserve: [
     {
       palletId: 1,
-      palletCreateTS: '2021-1-1',
+      palletCreateTS: '2021-01-01',
       items: [
         {
-          itemNbr: 1,
-          itemDesc: 'Cabbage',
-          price: 2.40
+          itemNbr: 500252,
+          itemDesc: 'Nature Valley Honey Nut Granola Bars'
+        },
+        {
+          itemNbr: 123456,
+          itemDesc: 'Cabbage'
+        }
+      ]
+    },
+    {
+      palletId: 123,
+      palletCreateTS: '2021-01-10',
+      items: [
+        {
+          itemNbr: 555555,
+          itemDesc: 'Nature Valley Granola Bars'
+        }
+      ]
+    },
+    {
+      palletId: 456,
+      palletCreateTS: '1999-10-10',
+      items: [
+        {
+          itemNbr: 980012,
+          itemDesc: 'Cabbage'
         }
       ]
     }
