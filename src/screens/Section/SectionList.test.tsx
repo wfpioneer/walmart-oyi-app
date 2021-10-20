@@ -104,6 +104,32 @@ describe('Test Section List', () => {
 });
 
 describe('Test Get Section Api Response', () => {
+  it('Renders Section Api Error Message when get sections request times out', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getSectionsTimeoutResult: AsyncState = {
+      value: null,
+      isWaiting: false,
+      error: 'timeout of 10000ms exceeded',
+      result: null
+    };
+    renderer.render(
+      <SectionScreen
+        aisleId={AISLE_ID}
+        aisleName={AISLE_NAME}
+        zoneName={ZONE_NAME}
+        dispatch={jest.fn()}
+        getAllSections={getSectionsTimeoutResult}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
   it('Renders Section Api Error Message', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getSectionResponseFailure: AsyncState = {

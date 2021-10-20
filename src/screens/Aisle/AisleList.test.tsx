@@ -100,6 +100,31 @@ describe('Test Aisle List', () => {
 });
 
 describe('Test Get Aisle Api Response', () => {
+  it('Renders Aisle Api Error Message when get aisles request times out', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getAisleTimeoutResult: AsyncState = {
+      value: null,
+      isWaiting: false,
+      error: 'timeout of 10000ms exceeded',
+      result: null
+    };
+    renderer.render(
+      <AisleScreen
+        zoneId={ZONE_ID}
+        zoneName={ZONE_NAME}
+        dispatch={jest.fn()}
+        getAllAisles={getAisleTimeoutResult}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
   it('Renders Aisle Api Error Message', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getAisleResponseFailure: AsyncState = {

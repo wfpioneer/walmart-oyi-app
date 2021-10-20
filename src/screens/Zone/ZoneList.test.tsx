@@ -95,6 +95,30 @@ describe('Test Zone List', () => {
 });
 
 describe('Test Get Zone Api Response', () => {
+  it('Renders Zone Api Error Message when get all zones request times out', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getAllZonesTimeoutResult: AsyncState = {
+      value: null,
+      isWaiting: false,
+      error: 'timeout of 10000ms exceeded',
+      result: null
+    };
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        getZoneApi={getAllZonesTimeoutResult}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
   it('Renders Zone Api Error Message', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getZoneResponseFailure: AsyncState = {
