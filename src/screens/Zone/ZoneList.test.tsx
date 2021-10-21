@@ -95,53 +95,38 @@ describe('Test Zone List', () => {
 });
 
 describe('Test Get Zone Api Response', () => {
-  it('Renders Zone Api Error Message when get all zones request times out', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    const getAllZonesTimeoutResult: AsyncState = {
-      value: null,
-      isWaiting: false,
-      error: 'timeout of 10000ms exceeded',
-      result: null
-    };
-    renderer.render(
-      <ZoneScreen
-        siteId={MX_TEST_CLUB_NBR}
-        dispatch={jest.fn()}
-        getZoneApi={getAllZonesTimeoutResult}
-        apiStart={0}
-        setApiStart={jest.fn()}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
+  const possibleErrorResults = [
+    { errorType: 'timeout', message: 'timeout of 10000ms exceeded' },
+    { errorType: 'network', message: 'Network Error' },
+    { errorType: '400', message: 'Request Failed with status code 400' },
+    { errorType: '424', message: 'Request Failed with status code 424' },
+    { errorType: '500', message: 'Request Failed with status code 500' }
+  ];
 
-  it('Renders Zone Api Error Message', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    const getZoneResponseFailure: AsyncState = {
-      isWaiting: false,
-      value: null,
-      error: 'Network Error',
-      result: null
-    };
-    renderer.render(
-      <ZoneScreen
-        siteId={MX_TEST_CLUB_NBR}
-        dispatch={jest.fn()}
-        getZoneApi={getZoneResponseFailure}
-        apiStart={0}
-        setApiStart={jest.fn()}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
+  possibleErrorResults.forEach(errorResult => it(`Renders Error Message when result is ${errorResult.errorType} error`,
+    () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const apiErrorResult: AsyncState = {
+        value: null,
+        isWaiting: false,
+        error: errorResult.message,
+        result: null
+      };
+      renderer.render(
+        <ZoneScreen
+          siteId={MX_TEST_CLUB_NBR}
+          dispatch={jest.fn()}
+          getZoneApi={apiErrorResult}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    }));
 
   it('Renders loading indicator when waiting for Zone Api response', () => {
     const renderer = ShallowRenderer.createRenderer();

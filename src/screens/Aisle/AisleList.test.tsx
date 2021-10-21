@@ -100,6 +100,40 @@ describe('Test Aisle List', () => {
 });
 
 describe('Test Get Aisle Api Response', () => {
+  const possibleErrorResults = [
+    { errorType: 'timeout', message: 'timeout of 10000ms exceeded' },
+    { errorType: 'network', message: 'Network Error' },
+    { errorType: '400', message: 'Request Failed with status code 400' },
+    { errorType: '424', message: 'Request Failed with status code 424' },
+    { errorType: '500', message: 'Request Failed with status code 500' }
+  ];
+
+  possibleErrorResults.forEach(errorResult => it(`Renders Error Message when result is ${errorResult.errorType} error`,
+    () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const apiErrorResult: AsyncState = {
+        value: null,
+        isWaiting: false,
+        error: errorResult.message,
+        result: null
+      };
+      renderer.render(
+        <AisleScreen
+          zoneId={ZONE_ID}
+          zoneName={ZONE_NAME}
+          dispatch={jest.fn()}
+          getAllAisles={apiErrorResult}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    }));
+
   it('Renders Aisle Api Error Message when get aisles request times out', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getAisleTimeoutResult: AsyncState = {

@@ -104,57 +104,40 @@ describe('Test Section List', () => {
 });
 
 describe('Test Get Section Api Response', () => {
-  it('Renders Section Api Error Message when get sections request times out', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    const getSectionsTimeoutResult: AsyncState = {
-      value: null,
-      isWaiting: false,
-      error: 'timeout of 10000ms exceeded',
-      result: null
-    };
-    renderer.render(
-      <SectionScreen
-        aisleId={AISLE_ID}
-        aisleName={AISLE_NAME}
-        zoneName={ZONE_NAME}
-        dispatch={jest.fn()}
-        getAllSections={getSectionsTimeoutResult}
-        apiStart={0}
-        setApiStart={jest.fn()}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
+  const possibleErrorResults = [
+    { errorType: 'timeout', message: 'timeout of 10000ms exceeded' },
+    { errorType: 'network', message: 'Network Error' },
+    { errorType: '400', message: 'Request Failed with status code 400' },
+    { errorType: '424', message: 'Request Failed with status code 424' },
+    { errorType: '500', message: 'Request Failed with status code 500' }
+  ];
 
-  it('Renders Section Api Error Message', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    const getSectionResponseFailure: AsyncState = {
-      isWaiting: false,
-      value: null,
-      error: 'Network Error',
-      result: null
-    };
-    renderer.render(
-      <SectionScreen
-        aisleId={AISLE_ID}
-        aisleName={AISLE_NAME}
-        zoneName={ZONE_NAME}
-        dispatch={jest.fn()}
-        getAllSections={getSectionResponseFailure}
-        apiStart={0}
-        setApiStart={jest.fn()}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
+  possibleErrorResults.forEach(errorResult => it(`Renders Error Message when result is ${errorResult.errorType} error`,
+    () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const apiErrorResult: AsyncState = {
+        value: null,
+        isWaiting: false,
+        error: errorResult.message,
+        result: null
+      };
+      renderer.render(
+        <SectionScreen
+          aisleId={AISLE_ID}
+          aisleName={AISLE_NAME}
+          zoneName={ZONE_NAME}
+          dispatch={jest.fn()}
+          getAllSections={apiErrorResult}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    }));
 
   it('Renders loading indicator when waiting for Section Api response', () => {
     const renderer = ShallowRenderer.createRenderer();
