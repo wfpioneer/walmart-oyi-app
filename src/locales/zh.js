@@ -167,7 +167,7 @@ export default {
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
     CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
     ADD: '增加',
-    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2', // TODO Mandarin Translation
+    SCAN_LOCATION: '无效位置名，如A1-2',
     REMOVE_ALL: 'Remove all', // TODO Mandarin Translation
     CREATED_ON: 'Created on', // TODO Mandarin Translation
     MORE: 'More' // TODO Mandarin Translation

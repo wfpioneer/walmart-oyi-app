@@ -22,23 +22,19 @@ interface LocManualScanProps {
 const defaultProps: Pick<LocManualScanProps, 'keyboardType'> = {
   keyboardType: 'numeric'
 };
+const locRegex = new RegExp(/^[\d]+$|[A-z][0-9]+-[0-9]+$/);
+
+export const onSubmit = (text: string, dispatch: Dispatch<any>): void => {
+  if (text.length > 0 && locRegex.test(text)) {
+    manualScan(text);
+    dispatch(setManualScan(false));
+  }
+};
 
 export const LocationManualScanComponent = (props: LocManualScanProps): JSX.Element => {
   const {
     dispatch, value, onChangeText, textInputRef, keyboardType
   } = props;
-  const locRegex = new RegExp(/^[\d]+$|[A-z][0-9]+-[0-9]+$/);
-
-  const onSubmit = (text: string) => {
-    if (text.length > 0 && locRegex.test(text)) {
-      manualScan(text);
-      dispatch(setManualScan(false));
-    }
-  };
-
-  const clearText = () => {
-    onChangeText('');
-  };
 
   return (
     <View style={styles.container}>
@@ -51,7 +47,7 @@ export const LocationManualScanComponent = (props: LocManualScanProps): JSX.Elem
           selectionColor={COLOR.MAIN_THEME_COLOR}
           placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')}
           onSubmitEditing={(event: any) => {
-            onSubmit(event.nativeEvent.text);
+            onSubmit(event.nativeEvent.text, dispatch);
           }}
           keyboardType={keyboardType}
           autoFocus={true}
@@ -62,7 +58,7 @@ export const LocationManualScanComponent = (props: LocManualScanProps): JSX.Elem
         <IconButton
           icon={ModalCloseIcon}
           type={Button.Type.NO_BORDER}
-          onPress={clearText}
+          onPress={onChangeText('')} // Clear Text
         />
         )}
       </View>

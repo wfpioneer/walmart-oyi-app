@@ -51,7 +51,6 @@ exports[`Test Location Manual Scan Component Renders Error message with Invalid 
           size={16}
         />
       }
-      onPress={[Function]}
       radius={5}
       type={3}
       width={-1}
@@ -140,7 +139,6 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
           size={16}
         />
       }
-      onPress={[Function]}
       radius={5}
       type={3}
       width={-1}
@@ -200,7 +198,6 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
           size={16}
         />
       }
-      onPress={[Function]}
       radius={5}
       type={3}
       width={-1}

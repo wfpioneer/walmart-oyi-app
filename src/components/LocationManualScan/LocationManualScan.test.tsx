@@ -1,9 +1,13 @@
 import React from 'react';
 import { TextInput } from 'react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { LocationManualScanComponent } from './LocationManualScan';
+import { LocationManualScanComponent, onSubmit } from './LocationManualScan';
 
 let textInputProp: React.RefObject<TextInput>;
+jest.mock('../../utils/scannerUtils.ts', () => ({
+  manualScan: () => {}
+}));
+
 describe('Test Location Manual Scan Component', () => {
   it('Renders Manual Scan component with a Valid Section Name', () => {
     const renderer = ShallowRenderer.createRenderer();
@@ -44,5 +48,19 @@ describe('Test Location Manual Scan Component', () => {
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  describe('Tests onSubmit Function', () => {
+    it('Calls Dispatch Function if a valid location name is entered', async () => {
+      const dispatch = jest.fn();
+      onSubmit('ABCD1-2', dispatch);
+      expect(dispatch).toHaveBeenCalled();
+    });
+
+    it('Does not Call Dispatch if an in-valid location name is entered', async () => {
+      const dispatch = jest.fn();
+      onSubmit('Not a Location', dispatch);
+      expect(dispatch).not.toHaveBeenCalled();
+    });
   });
 });
