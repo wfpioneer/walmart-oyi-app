@@ -1,6 +1,198 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test Get Section Api Response Renders Section Api Error Message 1`] = `
+exports[`Test Get Section Api Response Renders Error Message when result is 400 error 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="alert"
+    size={40}
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.LOCATION.LOCATION_API_ERROR" translation]
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "marginVertical": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`Test Get Section Api Response Renders Error Message when result is 424 error 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="alert"
+    size={40}
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.LOCATION.LOCATION_API_ERROR" translation]
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "marginVertical": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`Test Get Section Api Response Renders Error Message when result is 500 error 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="alert"
+    size={40}
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.LOCATION.LOCATION_API_ERROR" translation]
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "marginVertical": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`Test Get Section Api Response Renders Error Message when result is network error 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="alert"
+    size={40}
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.LOCATION.LOCATION_API_ERROR" translation]
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "marginVertical": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`Test Get Section Api Response Renders Error Message when result is timeout error 1`] = `
 <View
   style={
     Object {
@@ -97,7 +289,7 @@ exports[`Test Section List Renders Manual Scan Component when isManualScanEnable
 </View>
 `;
 
-exports[`Test Section List Tests rendering Section List Renders Section Screen with Data 1`] = `
+exports[`Test Section List Renders Section Screen with Data 1`] = `
 <View>
   <LocationHeader
     details="6 [missing \\"en.LOCATION.SECTIONS\\" translation]"
@@ -154,7 +346,7 @@ exports[`Test Section List Tests rendering Section List Renders Section Screen w
 </View>
 `;
 
-exports[`Test Section List Tests rendering Section List Renders Section Screen with Empty Data 1`] = `
+exports[`Test Section List Renders Section Screen with no-section-message when getSections response is 204 1`] = `
 <View>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
@@ -167,7 +359,7 @@ exports[`Test Section List Tests rendering Section List Renders Section Screen w
         "paddingBottom": 100,
       }
     }
-    data={Object {}}
+    data={Array []}
     disableVirtualization={false}
     horizontal={false}
     initialNumToRender={10}

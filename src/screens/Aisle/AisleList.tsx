@@ -26,7 +26,7 @@ import LocationManualScan from '../../components/LocationManualScan/LocationManu
 
 const NoAisleMessage = () : JSX.Element => (
   <View style={styles.noAisles}>
-    <Text>{strings('LOCATION.NO_AISLES_AVAILABLE')}</Text>
+    <Text style={styles.noAislesText}>{strings('LOCATION.NO_AISLES_AVAILABLE')}</Text>
   </View>
 );
 
