@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
 import ZoneList from '../screens/Zone/ZoneList';
@@ -44,6 +45,16 @@ export const LocationManagementNavigatorStack = (): JSX.Element => (
       component={LocationTabs}
       options={{
         headerTitle: strings('LOCATION.LOCATION_DETAILS')
+      }}
+    />
+    <Stack.Screen
+      name="AddLocation"
+      component={SelectLocationType}
+      options={{
+        headerTitle: strings('LOCATION.ADD_NEW_LOCATION'),
+        headerTitleAlign: 'left',
+        headerTitleStyle: { fontSize: 18 },
+        headerBackTitleVisible: false
       }}
     />
   </Stack.Navigator>
