@@ -18,8 +18,7 @@ const BottomSheetBaseCard = (props: BaseCardProps): JSX.Element => {
         <BottomSheetView style={styles.imageView}>
           <Image
             style={styles.image}
-            source={image}
-            defaultSource={require('../../assets/images/placeholder.png')}
+            source={image || require('../../assets/images/placeholder.png')}
           />
         </BottomSheetView>
         <BottomSheetView style={styles.textView}>
