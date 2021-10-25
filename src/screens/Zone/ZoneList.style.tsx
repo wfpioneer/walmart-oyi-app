@@ -20,9 +20,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   noZones: {
+    paddingTop: 10,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  noZonesText: {
+    color: COLOR.GREY_700
   },
   activityIndicator: {
     flex: 1,

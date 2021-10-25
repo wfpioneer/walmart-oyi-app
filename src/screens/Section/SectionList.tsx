@@ -23,7 +23,7 @@ import COLOR from '../../themes/Color';
 
 const NoSectionMessage = () : JSX.Element => (
   <View style={styles.noSections}>
-    <Text>{strings('LOCATION.NO_SECTIONS_AVAILABLE')}</Text>
+    <Text style={styles.noSectionsText}>{strings('LOCATION.NO_SECTIONS_AVAILABLE')}</Text>
   </View>
 );
 
