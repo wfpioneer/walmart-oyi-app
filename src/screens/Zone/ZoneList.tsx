@@ -201,7 +201,7 @@ const ZoneList = (): JSX.Element => {
         <AddCard
           isManagerOption
           isVisible
-          text="add zone"
+          text={strings('LOCATION.ADD_AREA')}
           onPress={() => {}}
         />
       </BottomSheetModal>
