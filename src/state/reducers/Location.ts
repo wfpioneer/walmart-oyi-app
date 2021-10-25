@@ -3,13 +3,15 @@ import {
   Actions,
   DELETE_LOCATION_FROM_EXISTING,
   EDIT_EXISTING_LOCATION,
+  HIDE_LOCATION_POPUP,
   RESET_LOCATIONS,
   SELECT_AISLE,
   SELECT_SECTION,
   SELECT_ZONE,
   SET_FLOOR_LOCATIONS,
   SET_ITEM_LOC_DETAILS,
-  SET_RESERVE_LOCATIONS
+  SET_RESERVE_LOCATIONS,
+  SHOW_LOCATION_POPUP
 } from '../actions/Location';
 import LocationType from '../../models/Location';
 
@@ -32,7 +34,8 @@ interface LocationState {
   selectedSection: {
     id: number;
     name: string;
-   }
+  };
+  locationPopupVisible: boolean
 }
 
 const initialState: LocationState = {
@@ -54,7 +57,8 @@ const initialState: LocationState = {
   selectedSection: {
     id: 0,
     name: ''
-  }
+  },
+  locationPopupVisible: false
 };
 
 export const Location = (
@@ -217,6 +221,16 @@ export const Location = (
     }
     case RESET_LOCATIONS:
       return initialState;
+    case SHOW_LOCATION_POPUP:
+      return {
+        ...state,
+        locationPopupVisible: true
+      };
+    case HIDE_LOCATION_POPUP:
+      return {
+        ...state,
+        locationPopupVisible: false
+      };
     default:
       return state;
   }

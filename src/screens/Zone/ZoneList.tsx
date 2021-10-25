@@ -1,4 +1,10 @@
-import React, { EffectCallback, useEffect } from 'react';
+import React, {
+  EffectCallback,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef
+} from 'react';
 import {
   ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
@@ -8,6 +14,7 @@ import { Dispatch } from 'redux';
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import styles from './ZoneList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
@@ -19,6 +26,8 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
+import { hideLocationPopup } from '../../state/actions/Location';
+import AddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
@@ -34,6 +43,7 @@ interface ZoneProps {
     route: RouteProp<any, string>,
     useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
     trackEventCall: (eventName: string, params?: any) => void,
+    locationPopupVisible: boolean
 }
 
 export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
@@ -44,7 +54,8 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     navigation,
     route,
     useEffectHook,
-    trackEventCall
+    trackEventCall,
+    locationPopupVisible
   } = props;
 
   // calls the get all zone api
@@ -103,6 +114,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
             navigator={navigation}
             destinationScreen={LocationType.AISLE}
             dispatch={dispatch}
+            locationPopupVisible={locationPopupVisible}
           />
         )}
         keyExtractor={item => item.zoneName}
@@ -116,20 +128,58 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
 const ZoneList = (): JSX.Element => {
   const siteId = useTypedSelector(state => state.User.siteId);
   const getZoneApi = useTypedSelector(state => state.async.getAllZones);
+  const location = useTypedSelector(state => state.Location);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
 
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const snapPoints = useMemo(() => ['22%', '50%'], []);
+
+  useEffect(() => {
+    if (navigation.isFocused()) {
+      if (location.locationPopupVisible) {
+        bottomSheetModalRef.current?.present();
+      } else {
+        bottomSheetModalRef.current?.dismiss();
+      }
+    }
+  }, [location]);
+
   return (
-    <ZoneScreen
-      siteId={siteId}
-      dispatch={dispatch}
-      getZoneApi={getZoneApi}
-      navigation={navigation}
-      route={route}
-      useEffectHook={useEffect}
-      trackEventCall={trackEvent}
-    />
+    <BottomSheetModalProvider>
+      <TouchableOpacity
+        onPress={() => dispatch(hideLocationPopup())}
+        activeOpacity={1}
+        disabled={!location.locationPopupVisible}
+      >
+        <ZoneScreen
+          siteId={siteId}
+          dispatch={dispatch}
+          getZoneApi={getZoneApi}
+          navigation={navigation}
+          route={route}
+          useEffectHook={useEffect}
+          trackEventCall={trackEvent}
+          locationPopupVisible={location.locationPopupVisible}
+        />
+      </TouchableOpacity>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={snapPoints}
+        index={0}
+        onDismiss={() => dispatch(hideLocationPopup())}
+        style={styles.bottomSheetModal}
+      >
+        <AddCard
+          isManagerOption
+          isVisible
+          text="add zone"
+          onPress={() => {}}
+        />
+      </BottomSheetModal>
+    </BottomSheetModalProvider>
   );
 };
 

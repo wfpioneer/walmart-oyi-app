@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Base card render tests renders the bottom sheet base card 1`] = `
+<Memo(BottomSheetView)
+  style={
+    Object {
+      "flexDirection": "row",
+      "height": 75,
+    }
+  }
+>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "borderColor": "#eeeeee",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "width": 750,
+      }
+    }
+  >
+    <Memo(BottomSheetView)
+      style={
+        Object {
+          "alignItems": "center",
+          "height": 75,
+          "justifyContent": "center",
+          "width": 75,
+        }
+      }
+    >
+      <Image
+        defaultSource=""
+        source={
+          Object {
+            "testUri": "../../../src/assets/images/sams_logo.jpeg",
+          }
+        }
+        style={
+          Object {
+            "height": 30,
+            "width": 30,
+          }
+        }
+      />
+    </Memo(BottomSheetView)>
+    <Memo(BottomSheetView)
+      style={
+        Object {
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        hello
+      </Text>
+    </Memo(BottomSheetView)>
+  </ForwardRef>
+</Memo(BottomSheetView)>
+`;

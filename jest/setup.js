@@ -12,6 +12,8 @@ jest.mock('react-native-reanimated', () => {
 
   return Reanimated;
 });
+// eslint-disable-next-line no-underscore-dangle
+global.__reanimatedWorkletInit = jest.fn();
 
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');

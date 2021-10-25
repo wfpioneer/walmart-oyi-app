@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
   },
   contentPadding: {
     paddingBottom: 100
+  },
+  bottomSheetModal: {
+    borderColor: COLOR.GREY_200,
+    borderRadius: 5,
+    borderWidth: 2
   }
 });
 
