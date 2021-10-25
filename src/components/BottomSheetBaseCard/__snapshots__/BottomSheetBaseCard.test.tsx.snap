@@ -31,7 +31,6 @@ exports[`Base card render tests renders the bottom sheet base card 1`] = `
       }
     >
       <Image
-        defaultSource=""
         source={
           Object {
             "testUri": "../../../src/assets/images/sams_logo.jpeg",
