@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Image, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { showLocationPopup } from '../state/actions/Location';
+import { hideLocationPopup, showLocationPopup } from '../state/actions/Location';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
 import ZoneList from '../screens/Zone/ZoneList';
@@ -19,15 +19,20 @@ const Stack = createStackNavigator();
 
 interface NavigationStackProps {
   userFeatures: string[],
+  locationPopupVisible: boolean,
   dispatch: Dispatch<any>
 }
 
 export const LocationManagementNavigatorStack = (props: NavigationStackProps): JSX.Element => {
-  const { userFeatures, dispatch } = props;
+  const { userFeatures, locationPopupVisible, dispatch } = props;
 
   const renderLocationKebabButton = (visible: boolean) => (visible ? (
     <TouchableOpacity onPress={() => {
-      dispatch(showLocationPopup());
+      if (locationPopupVisible) {
+        dispatch(hideLocationPopup());
+      } else {
+        dispatch(showLocationPopup());
+      }
       trackEvent('location_menu_button_click');
     }}
     >
@@ -84,10 +89,12 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
 const LocationManagementNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const userFeatures = useTypedSelector(state => state.User.features);
+  const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
   return (
     <LocationManagementNavigatorStack
       dispatch={dispatch}
       userFeatures={userFeatures}
+      locationPopupVisible={locationPopupVisible}
     />
   );
 };
