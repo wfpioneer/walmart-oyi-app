@@ -1,9 +1,10 @@
 import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Image, View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { Image, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-// import { TouchableOpacity } from 'react-native-gesture-handler';
+import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { hideLocationPopup, showLocationPopup } from '../state/actions/Location';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
@@ -106,6 +107,16 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         component={LocationTabs}
         options={{
           headerTitle: strings('LOCATION.LOCATION_DETAILS') // TODO update translation names
+        }}
+      />
+      <Stack.Screen
+        name="AddLocation"
+        component={SelectLocationType}
+        options={{
+          headerTitle: strings('LOCATION.ADD_NEW_LOCATION'),
+          headerTitleAlign: 'left',
+          headerTitleStyle: { fontSize: 18 },
+          headerBackTitleVisible: false
         }}
       />
     </Stack.Navigator>

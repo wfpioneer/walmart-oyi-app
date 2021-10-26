@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
-import { LocationTabsNavigator } from './LocationTabNavigator';
+import { Header, LocationTabsNavigator } from './LocationTabNavigator';
 import {
   mockLocationDetails,
   mockLocationDetailsEmpty,
@@ -10,6 +10,16 @@ import {
 
 let navigationProp: NavigationProp<any>;
 let routeProp: RouteProp<any, string>;
+const mockNavigate = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  const actualNav = jest.requireActual('@react-navigation/native');
+  return {
+    ...actualNav,
+    useNavigation: () => ({
+      navigate: mockNavigate
+    })
+  };
+});
 describe('Test Location Tabs', () => {
   const defaultScannedEvent = {
     type: undefined,
@@ -129,6 +139,21 @@ describe('Test Location Tabs', () => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
       />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders items Header', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <Header headerText="ITEMS" />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders pallet Header', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <Header headerText="PALLETS" />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
