@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add card render tests renders the bottom sheet add card, not visible 1`] = `null`;
+
+exports[`Add card render tests renders the bottom sheet add card, visible, manager option 1`] = `
+<BottomSheetBaseCard
+  image=""
+  onPress={[Function]}
+  text="hello"
+/>
+`;
+
+exports[`Add card render tests renders the bottom sheet add card, visible, non manager option 1`] = `
+<BottomSheetBaseCard
+  image=""
+  onPress={[Function]}
+  text="hello"
+/>
+`;

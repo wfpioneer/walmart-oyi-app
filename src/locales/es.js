@@ -167,6 +167,7 @@ export default {
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     REMOVE_ALL: 'Remove all', // TODO Spanish Translation
     ADD: 'Agregar',
+    ADD_AREA: 'Añadir zona',
     CREATED_ON: 'Created on', // TODO Spanish Translation
     MORE: 'More' // TODO Spanish Translation
   },

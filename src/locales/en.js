@@ -167,6 +167,7 @@ export default {
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
     REMOVE_ALL: 'Remove all',
     ADD: 'Add',
+    ADD_AREA: 'Add an area',
     CREATED_ON: 'Created on',
     MORE: 'More'
   },
