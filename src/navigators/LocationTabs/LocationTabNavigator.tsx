@@ -24,8 +24,12 @@ interface LocationProps {
     locationName: string;
 }
 
-// TODO uncomment this when we start implementing the rest of LocationManagement functionality
-export const ItemHeader = () : JSX.Element => {
+interface HeaderProps {
+    headerText: string;
+}
+
+export const Header = (props: HeaderProps): JSX.Element => {
+  const { headerText } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
@@ -34,31 +38,7 @@ export const ItemHeader = () : JSX.Element => {
     <>
       <View style={styles.tabHeader}>
         <Text style={styles.tabHeaderText}>
-          {strings('LOCATION.ITEMS')}
-        </Text>
-        <Button
-          type={3}
-          title={strings('GENERICS.ADD')}
-          titleColor={COLOR.MAIN_THEME_COLOR}
-          titleFontSize={12}
-          titleFontWeight="bold"
-          height={28}
-          onPress={() => addNewLocation()}
-        />
-      </View>
-    </>
-  );
-};
-export const PalletHeader = () : JSX.Element => {
-  const navigation = useNavigation();
-  const addNewLocation = () => {
-    navigation.navigate('AddLocation');
-  };
-  return (
-    <>
-      <View style={styles.tabHeader}>
-        <Text style={styles.tabHeaderText}>
-          {strings('LOCATION.PALLETS')}
+          {headerText}
         </Text>
         <Button
           type={3}
@@ -76,14 +56,14 @@ export const PalletHeader = () : JSX.Element => {
 
 const floorDetailsList = () => (
   <>
-    <ItemHeader />
+    <Header headerText={strings('LOCATION.ITEMS')} />
     <SectionDetails />
   </>
 );
 
 const reserveDetailsList = () => (
   <>
-    <PalletHeader />
+    <Header headerText={strings('LOCATION.PALLETS')} />
     <SectionDetails />
   </>
 );

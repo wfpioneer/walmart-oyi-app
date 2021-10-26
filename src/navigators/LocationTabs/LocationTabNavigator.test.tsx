@@ -1,6 +1,6 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { ItemHeader, LocationTabsNavigator, PalletHeader } from './LocationTabNavigator';
+import { Header, LocationTabsNavigator } from './LocationTabNavigator';
 import {
   mockLocationDetails,
   mockLocationDetailsEmpty,
@@ -62,18 +62,18 @@ describe('Test Location Tabs', () => {
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-  it('Renders PalletHeader', () => {
+  it('Renders items Header', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <PalletHeader />
+      <Header headerText="ITEMS" />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('Renders PalletHeader', () => {
+  it('Renders pallet Header', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <ItemHeader />
+      <Header headerText="PALLETS" />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
