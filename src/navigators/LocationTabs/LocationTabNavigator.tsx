@@ -25,7 +25,7 @@ interface LocationProps {
 }
 
 // TODO uncomment this when we start implementing the rest of LocationManagement functionality
-const ItemHeader = () : JSX.Element => {
+export const ItemHeader = () : JSX.Element => {
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
@@ -49,7 +49,7 @@ const ItemHeader = () : JSX.Element => {
     </>
   );
 };
-const PalletHeader = () : JSX.Element => {
+export const PalletHeader = () : JSX.Element => {
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
