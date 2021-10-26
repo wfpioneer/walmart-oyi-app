@@ -176,6 +176,7 @@ const ZoneList = (): JSX.Element => {
         onPress={() => dispatch(hideLocationPopup())}
         activeOpacity={1}
         disabled={!location.locationPopupVisible}
+        style={styles.container}
       >
         <ZoneScreen
           siteId={siteId}
@@ -198,8 +199,8 @@ const ZoneList = (): JSX.Element => {
         style={styles.bottomSheetModal}
       >
         <BottomSheetAddCard
-          isManagerOption
-          isVisible
+          isManagerOption={true}
+          isVisible={true}
           text={strings('LOCATION.ADD_AREA')}
           onPress={() => {}}
         />

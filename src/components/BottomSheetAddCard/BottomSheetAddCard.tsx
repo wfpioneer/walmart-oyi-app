@@ -18,13 +18,13 @@ const BottomSheetAddCard = (props: AddCardProps): JSX.Element | null => {
     onPress
   } = props;
   let image;
-  if (isManagerOption && true) {
+  if (isManagerOption && isManagerOption) {
     image = require('../../assets/images/add_circle_dark_grey.png');
   } else {
     image = require('../../assets/images/add_circle_light_grey.png');
   }
 
-  return isVisible && true ? (
+  return isVisible && isVisible ? (
     <BottomSheetBaseCard
       image={image}
       onPress={onPress}
