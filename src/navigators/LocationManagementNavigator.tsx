@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Image, View } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -80,6 +81,16 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
         component={LocationTabs}
         options={{
           headerTitle: strings('LOCATION.LOCATION_DETAILS')
+        }}
+      />
+      <Stack.Screen
+        name="AddLocation"
+        component={SelectLocationType}
+        options={{
+          headerTitle: strings('LOCATION.ADD_NEW_LOCATION'),
+          headerTitleAlign: 'left',
+          headerTitleStyle: { fontSize: 18 },
+          headerBackTitleVisible: false
         }}
       />
     </Stack.Navigator>

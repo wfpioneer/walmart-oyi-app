@@ -49,6 +49,20 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="AddLocation"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
 </StackNavigator>
 `;
 
@@ -98,6 +112,20 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     options={
       Object {
         "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddLocation"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
       }
     }
   />
