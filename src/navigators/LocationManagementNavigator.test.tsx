@@ -18,7 +18,7 @@ describe('LocationManagement Navigator', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('Renders the LocationManagement Navigator, manager', () => {
+  it('Renders the Location Management Navigator, manager', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <LocationManagementNavigatorStack
