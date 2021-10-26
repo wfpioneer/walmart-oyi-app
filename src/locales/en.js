@@ -169,6 +169,7 @@ export default {
     SCAN_LOCATION: 'Invalid location name Ex: ABC1-2',
     REMOVE_ALL: 'Remove all',
     ADD: 'Add',
+    ADD_AREA: 'Add an area',
     CREATED_ON: 'Created on',
     MORE: 'More'
   },

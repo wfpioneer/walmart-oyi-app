@@ -17,85 +17,114 @@ const defaultAsyncState: AsyncState = {
 };
 
 describe('Test Zone List', () => {
-  describe('Tests rendering Zone List', () => {
-    it('Renders Zone Screen with no-zones-message when get all zones response is 204', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      const getZonesResult = {
-        status: 204,
-        data: ''
-      };
-      const getZoneSuccess: AsyncState = {
-        isWaiting: false,
-        value: null,
-        error: null,
-        result: getZonesResult
-      };
-      renderer.render(
-        <ZoneScreen
-          siteId={MX_TEST_CLUB_NBR}
-          dispatch={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          getZoneApi={getZoneSuccess}
-          navigation={navigationProp}
-          route={routeProp}
-          useEffectHook={jest.fn()}
-          trackEventCall={jest.fn()}
-          isManualScanEnabled={false}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-    it('Renders Zone Screen with Data', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      const getZonesResult = {
-        data: mockZones,
-        status: 200
-      };
-      const getZoneSuccess: AsyncState = {
-        isWaiting: false,
-        value: null,
-        error: null,
-        result: getZonesResult
-      };
-      renderer.render(
-        <ZoneScreen
-          siteId={MX_TEST_CLUB_NBR}
-          dispatch={jest.fn()}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          getZoneApi={getZoneSuccess}
-          navigation={navigationProp}
-          route={routeProp}
-          useEffectHook={jest.fn()}
-          trackEventCall={jest.fn()}
-          isManualScanEnabled={false}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('Renders Manual Scan Component when isManualScanEnabled is set to true', () => {
-      const renderer = ShallowRenderer.createRenderer();
-
-      renderer.render(
-        <ZoneScreen
-          siteId={MX_TEST_CLUB_NBR}
-          dispatch={jest.fn()}
-          getZoneApi={defaultAsyncState}
-          apiStart={0}
-          setApiStart={jest.fn()}
-          navigation={navigationProp}
-          route={routeProp}
-          useEffectHook={jest.fn()}
-          trackEventCall={jest.fn()}
-          isManualScanEnabled={true}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
+  it('Renders Zone Screen with no-zones-message when get all zones response is 204', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getZonesResult = {
+      status: 204,
+      data: ''
+    };
+    const getZoneSuccess: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: getZonesResult
+    };
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        getZoneApi={getZoneSuccess}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        isManualScanEnabled={false}
+        locationPopupVisible={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders Zone Screen with Data', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getZonesResult = {
+      data: mockZones,
+      status: 200
+    };
+    const getZoneSuccess: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: getZonesResult
+    };
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        getZoneApi={getZoneSuccess}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        isManualScanEnabled={false}
+        locationPopupVisible={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
+  it('Renders Zone Screen with Empty Data', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getZonesResult = {
+      data: {},
+      status: 200
+    };
+    const getZoneSuccess: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: getZonesResult
+    };
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        getZoneApi={getZoneSuccess}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        isManualScanEnabled={false}
+        locationPopupVisible={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders Manual Scan Component when isManualScanEnabled is set to true', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        getZoneApi={defaultAsyncState}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        isManualScanEnabled={true}
+        locationPopupVisible={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
   describe('Test Get Zone Api Response', () => {
     const possibleErrorResults = [
       { errorType: 'timeout', message: 'timeout of 10000ms exceeded' },
@@ -126,6 +155,7 @@ describe('Test Zone List', () => {
             useEffectHook={jest.fn()}
             trackEventCall={jest.fn()}
             isManualScanEnabled={false}
+            locationPopupVisible={false}
           />
         );
         expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -151,6 +181,7 @@ describe('Test Zone List', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           isManualScanEnabled={false}
+          locationPopupVisible={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

@@ -169,6 +169,7 @@ export default {
     ADD: 'Agregar',
     SCAN_LOCATION: 'Invalid location name Ex: ABC1-2', // TODO Spanish Translation
     REMOVE_ALL: 'Remove all', // TODO Spanish Translation
+    ADD_AREA: 'Añadir zona',
     CREATED_ON: 'Created on', // TODO Spanish Translation
     MORE: 'More' // TODO Spanish Translation
   },

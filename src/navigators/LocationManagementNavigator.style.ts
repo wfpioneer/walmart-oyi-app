@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1
   },
-  scanButton: {
+  rightButton: {
     flex: 1,
     width: 55,
     alignItems: 'center',

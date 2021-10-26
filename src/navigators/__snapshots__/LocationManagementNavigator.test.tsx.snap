@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LocationManagement Navigator Renders the LocationManagement Navigator 1`] = `
+exports[`LocationManagement Navigator Renders the LocationManagement Navigator, manager 1`] = `
 <StackNavigator
   headerMode="float"
   screenOptions={
@@ -18,6 +18,60 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator 1
     name="Zones"
     options={
       Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.ZONES\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="Aisles"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.AISLES\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="Sections"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="SectionDetails"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
+      }
+    }
+  />
+</StackNavigator>
+`;
+
+exports[`LocationManagement Navigator Renders the LocationManagement Navigator, non manager 1`] = `
+<StackNavigator
+  headerMode="float"
+  screenOptions={
+    Object {
+      "headerRight": [Function],
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="Zones"
+    options={
+      Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.ZONES\\" translation]",
       }
     }
