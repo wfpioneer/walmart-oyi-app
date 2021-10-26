@@ -10,7 +10,7 @@ interface AddCardProps {
   onPress: () => void
 }
 
-const AddCard = (props: AddCardProps): JSX.Element | null => {
+const BottomSheetAddCard = (props: AddCardProps): JSX.Element | null => {
   const {
     isManagerOption,
     isVisible,
@@ -33,4 +33,4 @@ const AddCard = (props: AddCardProps): JSX.Element | null => {
   ) : null;
 };
 
-export default AddCard;
+export default BottomSheetAddCard;

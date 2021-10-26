@@ -126,6 +126,7 @@ describe('Test Get Zone Api Response', () => {
           route={routeProp}
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          locationPopupVisible={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

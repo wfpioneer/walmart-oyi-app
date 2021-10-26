@@ -1,6 +1,5 @@
 import React, {
   EffectCallback,
-  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -29,7 +28,7 @@ import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
 import { hideLocationPopup } from '../../state/actions/Location';
-import AddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
+import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
@@ -198,7 +197,7 @@ const ZoneList = (): JSX.Element => {
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}
       >
-        <AddCard
+        <BottomSheetAddCard
           isManagerOption
           isVisible
           text={strings('LOCATION.ADD_AREA')}
