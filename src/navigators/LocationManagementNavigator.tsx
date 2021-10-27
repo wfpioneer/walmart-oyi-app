@@ -79,7 +79,8 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
         name="LocationDetails"
         component={LocationTabs}
         options={{
-          headerTitle: strings('LOCATION.LOCATION_DETAILS')
+          headerTitle: strings('LOCATION.LOCATION_DETAILS'),
+          headerRight: () => renderLocationKebabButton(true)
         }}
       />
     </Stack.Navigator>

@@ -165,6 +165,8 @@ export default {
     NO_ZONES_AVAILABLE: 'No Zones Available',
     NO_AISLES_AVAILABLE: 'No Aisles Available',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
+    CLEAR_BAY: 'Clear this bay',
+    REMOVE_BAY: 'Remove this bay',
     REMOVE_ALL: 'Remove all',
     ADD: 'Add',
     ADD_AREA: 'Add an area',

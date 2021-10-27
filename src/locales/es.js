@@ -165,6 +165,8 @@ export default {
     NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Spanish Translation
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Spanish Translation
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
+    CLEAR_BAY: 'Clear this bay', // TODO Mandarin Translation
+    REMOVE_BAY: 'Remove this bay', // TODO Mandarin Translation
     REMOVE_ALL: 'Remove all', // TODO Spanish Translation
     ADD: 'Agregar',
     ADD_AREA: 'Añadir zona',
