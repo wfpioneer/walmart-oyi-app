@@ -31,6 +31,10 @@ export const onSubmit = (text: string, dispatch: Dispatch<any>): void => {
   }
 };
 
+export const clearText = (onChangeText: React.Dispatch<React.SetStateAction<string>>): void => {
+  onChangeText('');
+};
+
 export const LocationManualScanComponent = (props: LocManualScanProps): JSX.Element => {
   const {
     dispatch, value, onChangeText, textInputRef, keyboardType
@@ -58,7 +62,7 @@ export const LocationManualScanComponent = (props: LocManualScanProps): JSX.Elem
         <IconButton
           icon={ModalCloseIcon}
           type={Button.Type.NO_BORDER}
-          onPress={onChangeText('')} // Clear Text
+          onPress={clearText}
         />
         )}
       </View>

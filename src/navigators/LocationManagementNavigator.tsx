@@ -1,7 +1,6 @@
 import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Image, View } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
@@ -15,8 +14,8 @@ import LocationTabs from './LocationTabs/LocationTabNavigator';
 import { setManualScan } from '../state/actions/Global';
 import { openCamera } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
-import styles from './LocationManagementNavigator.style';
 import { useTypedSelector } from '../state/reducers/RootReducer';
+import styles from './LocationManagementNavigator.style';
 
 const Stack = createStackNavigator();
 interface LocationManagementProps {
@@ -28,7 +27,7 @@ interface LocationManagementProps {
 
 const renderScanButton = (dispatch: Dispatch<any>, isManualScanEnabled: boolean) => (
   <TouchableOpacity onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
-    <View style={styles.rightButton}>
+    <View style={styles.leftButton}>
       <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
     </View>
   </TouchableOpacity>
@@ -71,13 +70,8 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
       headerMode="float"
       screenOptions={{
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
-        headerTintColor: COLOR.WHITE,
-        headerRight: () => (
-          <View style={styles.headerContainer}>
-            {renderCamButton()}
-            {renderScanButton(dispatch, isManualScanEnabled)}
-          </View>
-        )
+        headerTitleStyle: { fontSize: 18 },
+        headerTintColor: COLOR.WHITE
       }}
     >
       <Stack.Screen
@@ -85,28 +79,53 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         component={ZoneList}
         options={{
           headerTitle: strings('LOCATION.ZONES'),
-          headerRight: () => renderLocationKebabButton(userFeatures.includes('manager approval'))
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderCamButton()}
+              {renderScanButton(dispatch, isManualScanEnabled)}
+              {renderLocationKebabButton(userFeatures.includes('manager approval'))}
+            </View>
+          )
         }}
       />
       <Stack.Screen
         name="Aisles"
         component={AisleList}
         options={{
-          headerTitle: strings('LOCATION.AISLES')
+          headerTitle: strings('LOCATION.AISLES'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderCamButton()}
+              {renderScanButton(dispatch, isManualScanEnabled)}
+              {renderLocationKebabButton(userFeatures.includes('manager approval'))}
+            </View>
+          )
         }}
       />
       <Stack.Screen
         name="Sections"
         component={SectionList}
         options={{
-          headerTitle: strings('LOCATION.SECTIONS')
+          headerTitle: strings('LOCATION.SECTIONS'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderCamButton()}
+              {renderScanButton(dispatch, isManualScanEnabled)}
+            </View>
+          )
         }}
       />
       <Stack.Screen
         name="SectionDetails"
         component={LocationTabs}
         options={{
-          headerTitle: strings('LOCATION.LOCATION_DETAILS') // TODO update translation names
+          headerTitle: strings('LOCATION.LOCATION_DETAILS'), // TODO update translation names
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderCamButton()}
+              {renderScanButton(dispatch, isManualScanEnabled)}
+            </View>
+          )
         }}
       />
       <Stack.Screen
@@ -115,7 +134,6 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         options={{
           headerTitle: strings('LOCATION.ADD_NEW_LOCATION'),
           headerTitleAlign: 'left',
-          headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false
         }}
       />

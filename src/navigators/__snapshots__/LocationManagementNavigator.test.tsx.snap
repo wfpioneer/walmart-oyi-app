@@ -5,11 +5,13 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   headerMode="float"
   screenOptions={
     Object {
-      "headerRight": [Function],
       "headerStyle": Object {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
+      "headerTitleStyle": Object {
+        "fontSize": 18,
+      },
     }
   }
 >
@@ -28,6 +30,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="Aisles"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.AISLES\\" translation]",
       }
     }
@@ -37,6 +40,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="Sections"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
       }
     }
@@ -46,6 +50,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="SectionDetails"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
       }
     }
@@ -58,9 +63,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
         "headerBackTitleVisible": false,
         "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
-          "fontSize": 18,
-        },
       }
     }
   />
@@ -72,11 +74,13 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   headerMode="float"
   screenOptions={
     Object {
-      "headerRight": [Function],
       "headerStyle": Object {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
+      "headerTitleStyle": Object {
+        "fontSize": 18,
+      },
     }
   }
 >
@@ -95,6 +99,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="Aisles"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.AISLES\\" translation]",
       }
     }
@@ -104,6 +109,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="Sections"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
       }
     }
@@ -113,6 +119,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="SectionDetails"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
       }
     }
@@ -125,9 +132,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
         "headerBackTitleVisible": false,
         "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
-          "fontSize": 18,
-        },
       }
     }
   />

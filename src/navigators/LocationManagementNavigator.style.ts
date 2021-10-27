@@ -11,8 +11,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  leftButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   camButton: {
     flex: 1,
+    width: 55,
     alignItems: 'center',
     justifyContent: 'center'
   },
