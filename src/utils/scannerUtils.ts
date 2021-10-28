@@ -26,7 +26,6 @@ export const getInitialScanners = async () => {
 };
 
 export const setScanner = (scanner: string) => {
-  console.log(scanner);
   if (!isScannerSet) {
     console.log('setting scanner to', scanner);
     WMBarcodeScanner.setScanner(scanner).then(() => {
@@ -59,7 +58,7 @@ export const openCamera = () => {
 };
 
 export const mockScanWrapper = (val: string, type: string) => {
-  WMBarcodeScanner.mockScan({ barcode: val, type: type });
+  WMBarcodeScanner.mockScan({barcode: val, type: type});
 };
 
 if (__DEV__) {
