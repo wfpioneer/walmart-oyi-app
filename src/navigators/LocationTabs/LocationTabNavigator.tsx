@@ -23,7 +23,7 @@ import Button from '../../components/buttons/Button';
 
 const Tab = createMaterialTopTabNavigator();
 
-interface LocationProps {
+export interface LocationProps {
     floorItems: SectionDetailsItem[];
     reserveItems: SectionDetailsPallet[];
     locationName: string;
@@ -37,11 +37,11 @@ interface LocationProps {
     validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
 }
 
-interface HeaderProps {
+interface TabHeaderProps {
     headerText: string;
 }
 
-export const Header = (props: HeaderProps): JSX.Element => {
+export const TabHeader = (props: TabHeaderProps): JSX.Element => {
   const { headerText } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
@@ -69,14 +69,14 @@ export const Header = (props: HeaderProps): JSX.Element => {
 
 const floorDetailsList = () => (
   <>
-    <Header headerText={strings('LOCATION.ITEMS')} />
+    <TabHeader headerText={strings('LOCATION.ITEMS')} />
     <SectionDetails />
   </>
 );
 
 const reserveDetailsList = () => (
   <>
-    <Header headerText={strings('LOCATION.PALLETS')} />
+    <TabHeader headerText={strings('LOCATION.PALLETS')} />
     <SectionDetails />
   </>
 );
@@ -111,7 +111,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   useEffectHook(() => {
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
-        validateSession(navigation, route.name).then(() => {
+        validateSessionCall(navigation, route.name).then(() => {
           trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
           dispatch(setScannedEvent(scan));
         });
