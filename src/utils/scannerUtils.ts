@@ -57,8 +57,8 @@ export const openCamera = () => {
   });
 };
 
-export const mockScanWrapper = (val: string, type: string) => {
-  WMBarcodeScanner.mockScan({barcode: val, type: type});
+export const mockScanWrapper = (val: string, typeInfo: string) => {
+  WMBarcodeScanner.mockScan({ barcode: val, type: typeInfo });
 };
 
 if (__DEV__) {
