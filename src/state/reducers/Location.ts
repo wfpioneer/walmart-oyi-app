@@ -1,5 +1,6 @@
 import {
   Actions,
+  HIDE_LOCATION_POPUP,
   SELECT_AISLE,
   SELECT_SECTION,
   SELECT_ZONE,
