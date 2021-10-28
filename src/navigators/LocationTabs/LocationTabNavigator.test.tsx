@@ -1,12 +1,22 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { LocationTabsNavigator } from './LocationTabNavigator';
+import { Header, LocationTabsNavigator } from './LocationTabNavigator';
 import {
   mockLocationDetails,
   mockLocationDetailsEmpty,
   mockLocationDetailsLargeLocationCount
 } from '../../mockData/locationDetails';
 
+const mockNavigate = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  const actualNav = jest.requireActual('@react-navigation/native');
+  return {
+    ...actualNav,
+    useNavigation: () => ({
+      navigate: mockNavigate
+    })
+  };
+});
 describe('Test Location Tabs', () => {
   it('Renders Location Tabs with Mock Data', () => {
     const renderer = ShallowRenderer.createRenderer();
@@ -49,6 +59,21 @@ describe('Test Location Tabs', () => {
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
       />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders items Header', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <Header headerText="ITEMS" />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders pallet Header', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <Header headerText="PALLETS" />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
