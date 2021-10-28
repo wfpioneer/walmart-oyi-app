@@ -3,6 +3,7 @@ import {
   SELECT_AISLE,
   SELECT_SECTION,
   SELECT_ZONE,
+  SHOW_LOCATION_POPUP
 } from '../actions/Location';
 
 interface LocationState {
@@ -17,7 +18,8 @@ interface LocationState {
   selectedSection: {
     id: number;
     name: string;
-   }
+  };
+  locationPopupVisible: boolean
 }
 
 const initialState: LocationState = {
@@ -32,7 +34,8 @@ const initialState: LocationState = {
   selectedSection: {
     id: 0,
     name: ''
-  }
+  },
+  locationPopupVisible: false
 };
 
 export const Location = (
@@ -67,6 +70,16 @@ export const Location = (
         }
       };
     }
+    case SHOW_LOCATION_POPUP:
+      return {
+        ...state,
+        locationPopupVisible: true
+      };
+    case HIDE_LOCATION_POPUP:
+      return {
+        ...state,
+        locationPopupVisible: false
+      };
     default:
       return state;
   }

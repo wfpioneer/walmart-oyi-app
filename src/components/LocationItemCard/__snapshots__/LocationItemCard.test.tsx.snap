@@ -2,6 +2,7 @@
 
 exports[`Test Location Item Card Renders Location Item Card with mock Aisle data 1`] = `
 <ForwardRef
+  disabled={false}
   onPress={[Function]}
   style={
     Object {
@@ -63,6 +64,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Aisle data
 
 exports[`Test Location Item Card Renders Location Item Card with mock Section data 1`] = `
 <ForwardRef
+  disabled={false}
   onPress={[Function]}
   style={
     Object {
@@ -124,6 +126,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Section da
 
 exports[`Test Location Item Card Renders Location Item Card with mock Zone data 1`] = `
 <ForwardRef
+  disabled={false}
   onPress={[Function]}
   style={
     Object {
