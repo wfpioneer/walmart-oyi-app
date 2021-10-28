@@ -17,7 +17,8 @@ interface LocationState {
   selectedSection: {
     id: number;
     name: string;
-   }
+  };
+  locationPopupVisible: boolean
 }
 
 const initialState: LocationState = {
@@ -32,7 +33,8 @@ const initialState: LocationState = {
   selectedSection: {
     id: 0,
     name: ''
-  }
+  },
+  locationPopupVisible: false
 };
 
 export const Location = (

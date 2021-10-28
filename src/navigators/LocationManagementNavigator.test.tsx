@@ -6,13 +6,27 @@ jest.mock('../utils/AppCenterTool.ts', () => jest.requireActual('../utils/__mock
 jest.mock('../utils/sessionTimeout.ts', () => jest.requireActual('../utils/__mocks__/sessTimeout'));
 
 describe('LocationManagement Navigator', () => {
-  it('Renders the LocationManagement Navigator', () => {
+  it('Renders the LocationManagement Navigator, non manager', () => {
     const renderer = ShallowRenderer.createRenderer();
-
     renderer.render(
-      <LocationManagementNavigatorStack />
+      <LocationManagementNavigatorStack
+        dispatch={jest.fn()}
+        userFeatures={[]}
+        locationPopupVisible={false}
+      />
     );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
 
+  it('Renders the LocationManagement Navigator, manager', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <LocationManagementNavigatorStack
+        dispatch={jest.fn()}
+        userFeatures={['manager approval']}
+        locationPopupVisible={false}
+      />
+    );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 });
