@@ -189,13 +189,13 @@ const LocationTabs = () : JSX.Element => {
         <BottomSheetView>
           <BottomSheetClearCard
             onPress={() => {}}
-            text={strings('LOCATION.CLEAR_BAY')}
+            text={strings('LOCATION.CLEAR_SECTION')}
             isManagerOption={false}
             isVisible={true}
           />
           <BottomSheetRemoveCard
             onPress={() => {}}
-            text={strings('LOCATION.REMOVE_BAY')}
+            text={strings('LOCATION.REMOVE_SECTION')}
             isVisible={userFeatures.includes('manager approval')}
           />
         </BottomSheetView>
