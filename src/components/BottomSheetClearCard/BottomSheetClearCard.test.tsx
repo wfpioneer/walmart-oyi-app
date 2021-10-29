@@ -1,25 +1,25 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import BottomSheetAddBayCard from './BottomSheetAddBayCard';
+import BottomSheetClearCard from './BottomSheetClearCard';
 
-describe('Add bay card render tests', () => {
-  it('renders the bottom sheet add bay, not visible', () => {
+describe('Clear aisle render tests', () => {
+  it('renders the bottom sheet Clear aisle, non visible, non manager option', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <BottomSheetAddBayCard
+      <BottomSheetClearCard
         onPress={() => {}}
-        text="add bay"
+        text="Clear aisle"
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('renders the bottom sheet add bay, visible, manager and non manager option', () => {
+  it('renders the bottom sheet remove card, visible, manager option', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <BottomSheetAddBayCard
+      <BottomSheetClearCard
         onPress={() => {}}
-        text="add bay"
+        text="Clear aisle"
         isVisible
       />
     );

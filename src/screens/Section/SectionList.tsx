@@ -10,10 +10,9 @@ import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import BottomSheetClearAisle from '../../components/BottomSheetClearAisle/BottomSheetClearAisle';
 import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
-import BottomSheetAddBayCard from '../../components/BottomSheetAddBayCard/BottomSheetAddBayCard';
+import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import styles from './SectionList.style';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
@@ -26,6 +25,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { hideLocationPopup } from '../../state/actions/Location';
+import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 
 const NoSectionMessage = () : JSX.Element => (
   <View style={styles.noSections}>
@@ -205,12 +205,12 @@ const SectionList = (): JSX.Element => {
           text={strings('LOCATION.PRINT_SECTION')}
           onPress={() => {}}
         />
-        <BottomSheetAddBayCard
+        <BottomSheetAddCard
           isVisible={true}
           text={strings('LOCATION.ADD_SECTIONS')}
           onPress={() => {}}
         />
-        <BottomSheetClearAisle
+        <BottomSheetClearCard
           isVisible={userFeatures.includes('manager approval')}
           text={strings('LOCATION.CLEAR_AISLE')}
           onPress={() => {}}
