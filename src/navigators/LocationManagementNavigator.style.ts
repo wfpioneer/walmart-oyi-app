@@ -3,24 +3,20 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
+    justifyContent: 'space-evenly'
   },
   rightButton: {
     flex: 1,
-    width: 55,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingRight: 10
   },
   leftButton: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-  },
-  camButton: {
-    flex: 1,
-    width: 55,
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingHorizontal: 10
   },
   image: {
     width: 25,

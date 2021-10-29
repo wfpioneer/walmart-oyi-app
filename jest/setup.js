@@ -28,7 +28,7 @@ const moment = jest.requireActual('moment-timezone');
 moment.tz.setDefault('America/Chicago');
 jest.setMock('moment', moment);
 
-// Unmounts React trees that were mounted with the "testing-library" render method
+// Unmounts React trees that were mounted with the `testing-library's` render method
 afterEach(() => {
   cleanup();
 });

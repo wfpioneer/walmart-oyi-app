@@ -42,6 +42,7 @@ interface AisleProps {
     route: RouteProp<any, string>,
     useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
     trackEventCall: (eventName: string, params?: any) => void,
+    locationPopupVisible: boolean
 }
 
 export const AisleScreen = (props: AisleProps) : JSX.Element => {
@@ -56,7 +57,8 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
     setApiStart,
     route,
     useEffectHook,
-    trackEventCall
+    trackEventCall,
+    locationPopupVisible
   } = props;
 
   // calls to get all aisles
@@ -149,6 +151,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
             navigator={navigation}
             destinationScreen={LocationType.SECTION}
             dispatch={dispatch}
+            locationPopupVisible={locationPopupVisible}
           />
         )}
         keyExtractor={item => item.aisleName}
@@ -162,9 +165,9 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
 const AisleList = (): JSX.Element => {
   const navigation = useNavigation();
   const getAllAisles = useTypedSelector(state => state.async.getAisle);
-  const zoneId = useTypedSelector(state => state.Location.selectedZone.id);
-  const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
+  const { id: zoneId, name: zoneName } = useTypedSelector(state => state.Location.selectedZone);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const location = useTypedSelector(state => state.Location);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const route = useRoute();
@@ -182,6 +185,7 @@ const AisleList = (): JSX.Element => {
       route={route}
       useEffectHook={useEffect}
       trackEventCall={trackEvent}
+      locationPopupVisible={location.locationPopupVisible}
     />
   );
 };

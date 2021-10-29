@@ -43,6 +43,7 @@ interface SectionProps {
     route: RouteProp<any, string>,
     useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
     trackEventCall: (eventName: string, params?: any) => void,
+    locationPopupVisible: boolean
 }
 
 export const SectionScreen = (props: SectionProps) : JSX.Element => {
@@ -58,7 +59,8 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
     setApiStart,
     route,
     useEffectHook,
-    trackEventCall
+    trackEventCall,
+    locationPopupVisible
   } = props;
 
   // calls to get all sections
@@ -151,6 +153,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
             locationDetails=""
             navigator={navigation}
             destinationScreen={LocationType.SECTION_DETAILS}
+            locationPopupVisible={locationPopupVisible}
           />
         )}
         keyExtractor={item => item.sectionName}
@@ -164,9 +167,9 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
 const SectionList = (): JSX.Element => {
   const navigation = useNavigation();
   const getAllSections = useTypedSelector(state => state.async.getSections);
-  const aisleId = useTypedSelector(state => state.Location.selectedAisle.id);
-  const aisleName = useTypedSelector(state => state.Location.selectedAisle.name);
-  const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
+  const { id: aisleId, name: aisleName } = useTypedSelector(state => state.Location.selectedAisle);
+  const { name: zoneName } = useTypedSelector(state => state.Location.selectedZone);
+  const location = useTypedSelector(state => state.Location);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
@@ -186,6 +189,7 @@ const SectionList = (): JSX.Element => {
       route={route}
       useEffectHook={useEffect}
       trackEventCall={trackEvent}
+      locationPopupVisible={location.locationPopupVisible}
     />
   );
 };

@@ -35,7 +35,7 @@ const renderScanButton = (dispatch: Dispatch<any>, isManualScanEnabled: boolean)
 
 const renderCamButton = () => (
   <TouchableOpacity onPress={() => { openCamera(); }}>
-    <View style={styles.camButton}>
+    <View style={styles.leftButton}>
       <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
     </View>
   </TouchableOpacity>
