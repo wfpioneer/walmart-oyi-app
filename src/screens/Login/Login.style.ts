@@ -5,7 +5,14 @@ export default StyleSheet.create({
   container: {
     alignItems: 'center',
     flex: 1,
-    justifyContent: 'center'
+    flexDirection: 'column',
+    justifyContent: 'flex-end'
+  },
+  buttonContainer: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   signInButton: {
     height: 40,
@@ -15,6 +22,6 @@ export default StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     color: COLOR.GREY_500,
-    marginTop: 20
+    marginBottom: 20
   }
 });

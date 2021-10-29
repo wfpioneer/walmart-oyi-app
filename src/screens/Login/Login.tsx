@@ -168,11 +168,13 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
             onSignOut={() => this.signOutUser()}
           />
         </CustomModalComponent>
-        <Button
-          title={strings('GENERICS.SIGN_IN')}
-          style={styles.signInButton}
-          onPress={this.signInUser}
-        />
+        <View style={styles.buttonContainer}>
+          <Button
+            title={strings('GENERICS.SIGN_IN')}
+            style={styles.signInButton}
+            onPress={this.signInUser}
+          />
+        </View>
         <Text style={styles.versionDisplay}>
           { `${strings('GENERICS.VERSION')} ${pkg.version}${getBuildEnvironment()}` }
         </Text>
