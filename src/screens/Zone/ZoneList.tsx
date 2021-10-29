@@ -163,8 +163,10 @@ const ZoneList = (): JSX.Element => {
   useEffect(() => {
     if (navigation.isFocused()) {
       if (location.locationPopupVisible) {
+        alert(`zone ${location.locationPopupVisible}`)
         bottomSheetModalRef.current?.present();
       } else {
+        alert(`zone ${location.locationPopupVisible}`)
         bottomSheetModalRef.current?.dismiss();
       }
     }

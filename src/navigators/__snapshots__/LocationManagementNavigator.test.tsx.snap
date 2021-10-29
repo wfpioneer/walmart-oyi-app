@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Add card render tests renders the bottom sheet add card, not visible 1`] = `null`;
+
+exports[`Add card render tests renders the bottom sheet add card, visible, manager option 1`] = `
+<BottomSheetBaseCard
+  image=""
+  onPress={[Function]}
+  text="hello"
+/>
+`;
+
+exports[`Add card render tests renders the bottom sheet add card, visible, non manager option 1`] = `
+<BottomSheetBaseCard
+  image=""
+  onPress={[Function]}
+  text="hello"
+/>
+`;
+
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator, manager 1`] = `
 <StackNavigator
   headerMode="float"
@@ -36,6 +54,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="Sections"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
       }
     }
@@ -102,6 +121,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="Sections"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
       }
     }
@@ -130,4 +150,32 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     }
   />
 </StackNavigator>
+`;
+
+exports[`Remove aisle render tests renders the bottom sheet remove aisle, non visible, non manager option 1`] = `null`;
+
+exports[`Remove aisle render tests renders the bottom sheet remove aisle, visible, manager option 1`] = `
+<BottomSheetBaseCard
+  image=""
+  onPress={[Function]}
+  text="Remove aisle"
+/>
+`;
+
+exports[`Remove card render tests renders the bottom sheet add card, not visible 1`] = `null`;
+
+exports[`Remove card render tests renders the bottom sheet add card, visible, manager option 1`] = `
+<BottomSheetBaseCard
+  image=""
+  onPress={[Function]}
+  text="hello"
+/>
+`;
+
+exports[`Remove card render tests renders the bottom sheet add card, visible, non manager option 1`] = `
+<BottomSheetBaseCard
+  image=""
+  onPress={[Function]}
+  text="hello"
+/>
 `;

@@ -169,7 +169,11 @@ export default {
     ADD: '增加',
     ADD_AREA: '添加一个新区域',
     CREATED_ON: 'Created on', // TODO Mandarin Translation
-    MORE: 'More' // TODO Mandarin Translation
+    MORE: 'More', // TODO Mandarin Translation,
+    PRINT_SECTION: 'Print all section location labels', // TODO Mandarin Translation
+    ADD_SECTIONS: 'Add sections', // TODO Mandarin Translation
+    CLEAR_AISLE: 'Clear aisle', // TODO Mandarin Translation
+    REMOVE_AISLE: 'Remove aisle' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

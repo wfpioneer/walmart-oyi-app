@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Image, View } from 'react-native';
+import { Alert, Image, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { hideLocationPopup, showLocationPopup } from '../state/actions/Location';
@@ -73,7 +73,8 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
         name="Sections"
         component={SectionList}
         options={{
-          headerTitle: strings('LOCATION.SECTIONS')
+          headerTitle: strings('LOCATION.SECTIONS'),
+          headerRight: () => renderLocationKebabButton(true)
         }}
       />
       <Stack.Screen
