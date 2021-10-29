@@ -9,21 +9,3 @@ exports[`Add bay card render tests renders the bottom sheet add bay, visible, ma
   text="add bay"
 />
 `;
-
-exports[`Add bay card render tests renders the bottom sheet add card, not visible 1`] = `null`;
-
-exports[`Add bay card render tests renders the bottom sheet add card, visible, manager option 1`] = `
-<BottomSheetBaseCard
-  image=""
-  onPress={[Function]}
-  text="hello"
-/>
-`;
-
-exports[`Add bay card render tests renders the bottom sheet add card, visible, non manager option 1`] = `
-<BottomSheetBaseCard
-  image=""
-  onPress={[Function]}
-  text="hello"
-/>
-`;

@@ -17,7 +17,7 @@ const BottomSheetRemoveCard = (props: RemoveCardProps): JSX.Element | null => {
 
   return isVisible && isVisible ? (
     <BottomSheetBaseCard
-      image={require('../../assets/images/printer_dark_grey.png')}
+      image={require('../../assets/images/trash_can.png')}
       onPress={onPress}
       text={text}
     />
