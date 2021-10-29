@@ -1,5 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`LoginScreen renders pure version number if build environment is production 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <EnterClubNbrForm
+      onSignOut={[Function]}
+      onSubmit={[Function]}
+    />
+  </CustomModalComponent>
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "height": 40,
+        "width": "85%",
+      }
+    }
+    title="[missing \\"en.GENERICS.SIGN_IN\\" translation]"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "marginTop": 20,
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    [missing "en.GENERICS.VERSION" translation] 1.1.0
+  </Text>
+</View>
+`;
+
 exports[`LoginScreen renders the EnterClubNbr modal when a user logs in without a club number 1`] = `
 <View
   style={
@@ -40,6 +95,18 @@ exports[`LoginScreen renders the EnterClubNbr modal when a user logs in without 
     type={1}
     width={-1}
   />
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "marginTop": 20,
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
+  </Text>
 </View>
 `;
 
@@ -83,5 +150,17 @@ exports[`LoginScreen renders the snapshot test appropriately 1`] = `
     type={1}
     width={-1}
   />
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "marginTop": 20,
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
+  </Text>
 </View>
 `;

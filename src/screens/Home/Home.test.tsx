@@ -12,7 +12,13 @@ import { HomeScreen } from './Home';
 jest.mock('../../../package.json', () => ({
   version: '1.1.0'
 }));
-
+jest.mock('react-native-config', () => {
+  const config = jest.requireActual('react-native-config');
+  return {
+    ...config,
+    ENVIRONMENT: ' DEV'
+  };
+});
 const navigationProp = {
   addListener: jest.fn(),
   navigate: jest.fn()
@@ -152,6 +158,28 @@ describe('HomeScreen', () => {
       renderer.render(<HomeScreen
         {...props}
       />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('renders pure version number if build environment is production', () => {
+      props = {
+        ...homeScreenProps,
+        worklistSummaryApiState: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: mockZeroCompleteWorklistSummaries
+          }
+        }
+      };
+      const prodConfig = jest.requireMock('react-native-config');
+      prodConfig.ENVIRONMENT = 'prod';
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <HomeScreen
+          {...props}
+        />
+      );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
