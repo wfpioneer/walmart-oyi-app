@@ -170,10 +170,10 @@ export default {
     ADD_AREA: 'Añadir zona',
     CREATED_ON: 'Created on', // TODO Spanish Translation
     MORE: 'More', // TODO Spanish Translation
-    PRINT_SECTION: 'Print all section location labels', // TODO Spanish Translation
-    ADD_SECTIONS: 'Add sections', // TODO Spanish Translation
-    CLEAR_AISLE: 'Clear aisle', // TODO Spanish Translation
-    REMOVE_AISLE: 'Remove aisle' // TODO Spanish Translation
+    PRINT_SECTION: 'Imprimir todas las etiquetas de la sección',
+    ADD_SECTIONS: 'Agregar secciones',
+    CLEAR_AISLE: 'Limpiar pasillo',
+    REMOVE_AISLE: 'Eliminar pasillo'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
