@@ -127,6 +127,29 @@ describe('LoginScreen', () => {
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
+  ['dev', 'stage'].forEach(testEnv => it(`renders build environment next to version # if ENV is ${testEnv}`, () => {
+    const testConfig = jest.requireMock('react-native-config');
+    testConfig.ENVIRONMENT = testEnv;
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(<LoginScreen
+      loginUser={jest.fn}
+      logoutUser={jest.fn}
+      navigation={navigationProp}
+      hideActivityModal={jest.fn}
+      User={testUser}
+      setEndTime={jest.fn}
+      getFluffyFeatures={jest.fn}
+      fluffyApiState={{
+        isWaiting: false,
+        error: '',
+        result: {}
+      }}
+      assignFluffyFeatures={jest.fn}
+      showActivityModal={jest.fn}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  }));
 });
 
 describe('SignInUser', () => {

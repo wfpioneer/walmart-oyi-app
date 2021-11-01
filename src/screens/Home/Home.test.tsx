@@ -182,6 +182,18 @@ describe('HomeScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    ['dev', 'stage'].forEach(testEnv => it(`renders build environment next to version # if ENV is ${testEnv}`, () => {
+      const testConfig = jest.requireMock('react-native-config');
+      testConfig.ENVIRONMENT = testEnv;
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <HomeScreen
+          {...props}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    }));
   });
 
   describe('Constructor', () => {
