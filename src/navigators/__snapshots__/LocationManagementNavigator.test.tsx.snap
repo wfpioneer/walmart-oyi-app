@@ -45,6 +45,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="LocationDetails"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
       }
     }
@@ -111,6 +112,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="LocationDetails"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
       }
     }

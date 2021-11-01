@@ -10,6 +10,11 @@ const styles = StyleSheet.create({
     borderBottomColor: COLOR.GREY_200,
     flexDirection: 'row'
   },
+  container: {
+    width: '100%',
+    flex: 1,
+    justifyContent: 'flex-end'
+  },
   clear: {
     color: COLOR.MAIN_THEME_COLOR,
     paddingRight: 14,
@@ -27,6 +32,14 @@ const styles = StyleSheet.create({
   pipe: {
     color: COLOR.GREY_600,
     fontSize: 14
+  },
+  bottomSheetView: {
+    flexDirection: 'column'
+  },
+  bottomSheetModal: {
+    borderColor: COLOR.GREY_200,
+    borderRadius: 5,
+    borderWidth: 2
   }
 });
 
