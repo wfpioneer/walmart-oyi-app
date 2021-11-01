@@ -167,9 +167,11 @@ export default {
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_SECTION: 'Limpiar sección',
     REMOVE_SECTION: 'Eliminar sección',
+    REMOVE_AREA: 'Eliminar la zona',
     REMOVE_ALL: 'Remove all', // TODO Spanish Translation
     ADD: 'Agregar',
     ADD_AREA: 'Añadir zona',
+    ADD_AISLES: 'Agregar pasillos',
     CREATED_ON: 'Created on', // TODO Spanish Translation
     MORE: 'More' // TODO Spanish Translation
   },

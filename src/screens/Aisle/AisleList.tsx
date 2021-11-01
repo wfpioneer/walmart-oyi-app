@@ -1,4 +1,10 @@
-import React, { EffectCallback, useEffect, useState } from 'react';
+import React, {
+  EffectCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 import {
   ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
@@ -9,6 +15,7 @@ import {
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 import styles from './AisleList.style';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
@@ -20,6 +27,9 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
+import { hideLocationPopup } from '../../state/actions/Location';
+import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
+import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 
 const NoAisleMessage = () : JSX.Element => (
   <View style={styles.noAisles}>
@@ -127,6 +137,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
             navigator={navigation}
             destinationScreen={LocationType.SECTION}
             dispatch={dispatch}
+            locationPopupVisible={false}
           />
         )}
         keyExtractor={item => item.aisleName}
@@ -142,23 +153,69 @@ const AisleList = (): JSX.Element => {
   const getAllAisles = useTypedSelector(state => state.async.getAisle);
   const zoneId = useTypedSelector(state => state.Location.selectedZone.id);
   const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
+  const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
+  const userFeatures = useTypedSelector(state => state.User.features);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const route = useRoute();
 
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const snapPoints = useMemo(() => ['33%', '50%'], []);
+
+  useEffect(() => {
+    if (navigation.isFocused()) {
+      if (locationPopupVisible) {
+        bottomSheetModalRef.current?.present();
+      } else {
+        bottomSheetModalRef.current?.dismiss();
+      }
+    }
+  }, [locationPopupVisible]);
+
   return (
-    <AisleScreen
-      zoneId={zoneId}
-      zoneName={zoneName}
-      navigation={navigation}
-      dispatch={dispatch}
-      getAllAisles={getAllAisles}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      route={route}
-      useEffectHook={useEffect}
-      trackEventCall={trackEvent}
-    />
+    <BottomSheetModalProvider>
+      <TouchableOpacity
+        onPress={() => dispatch(hideLocationPopup())}
+        activeOpacity={1}
+        disabled={!locationPopupVisible}
+        style={styles.container}
+      >
+        <AisleScreen
+          zoneId={zoneId}
+          zoneName={zoneName}
+          navigation={navigation}
+          dispatch={dispatch}
+          getAllAisles={getAllAisles}
+          apiStart={apiStart}
+          setApiStart={setApiStart}
+          route={route}
+          useEffectHook={useEffect}
+          trackEventCall={trackEvent}
+        />
+      </TouchableOpacity>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={snapPoints}
+        index={0}
+        onDismiss={() => dispatch(hideLocationPopup())}
+        style={styles.bottomSheetModal}
+      >
+        <BottomSheetView>
+          <BottomSheetAddCard
+            onPress={() => {}}
+            text={strings('LOCATION.ADD_AISLES')}
+            isManagerOption={false}
+            isVisible={true}
+          />
+          <BottomSheetRemoveCard
+            onPress={() => {}}
+            text={strings('LOCATION.REMOVE_AREA')}
+            isVisible={userFeatures.includes('manager approval')}
+          />
+        </BottomSheetView>
+      </BottomSheetModal>
+    </BottomSheetModalProvider>
   );
 };
 
