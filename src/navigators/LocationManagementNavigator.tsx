@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Image, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { hideLocationPopup, showLocationPopup } from '../state/actions/Location';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
