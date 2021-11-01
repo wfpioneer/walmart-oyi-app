@@ -28,6 +28,8 @@ describe('Test Location Tabs', () => {
         floorItems={floor}
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
+        dispatch={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -43,6 +45,8 @@ describe('Test Location Tabs', () => {
         floorItems={floor}
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
+        dispatch={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -58,6 +62,8 @@ describe('Test Location Tabs', () => {
         floorItems={floor}
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
+        dispatch={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
