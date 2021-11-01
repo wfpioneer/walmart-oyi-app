@@ -14,7 +14,7 @@ import EnterLocation from '../../components/enterlocation/EnterLocation';
 import Location from '../../models/Location';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { addLocation, editLocation, getLocationDetails } from '../../state/actions/saga';
-import { addLocationToExisting, editExistingLocation } from '../../state/actions/Location';
+import { addLocationToExisting, editExistingLocation } from '../../state/actions/ItemDetailScreen';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter, manualScan } from '../../utils/scannerUtils';
@@ -52,11 +52,9 @@ interface SelectLocationProps {
   addAPI: AsyncState;
   editAPI: AsyncState;
   floorLocations: Location[];
-  itemLocDetails: {
-    itemNbr: number;
-    upcNbr: string;
-    exceptionType: string;
-  };
+  itemNbr: number;
+  upcNbr: string;
+  exceptionType: string | null | undefined;
   actionCompleted: boolean;
   route: Route<any>;
   navigation: NavigationProp<any>;
@@ -68,7 +66,6 @@ interface SelectLocationProps {
 
 export const validateLocation = (loc: string): boolean => {
   const locRegex = new RegExp(/^[\d]+$|[A-z][0-9]+-[0-9]+/);
-
   return loc.length > 0 && locRegex.test(loc);
 };
 
@@ -76,7 +73,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
   const {
     locType, setLocType, inputLocation, setInputLocation, loc, setLoc,
     scanType, setScanType, error, setError, addAPI, editAPI,
-    floorLocations, itemLocDetails, actionCompleted, route,
+    floorLocations, itemNbr, upcNbr, exceptionType, actionCompleted, route,
     navigation, dispatch, useEffectHook, trackEventCall, validateSessionCall
   } = props;
   const routeSource: string = route.name;
@@ -142,8 +139,8 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
     // on api success
     if (!addAPI.isWaiting && addAPI.result) {
       dispatch(addLocationToExisting(loc, parseInt(locType, 10), 'floor'));
-      if (!actionCompleted && itemLocDetails.exceptionType === 'NSFL') dispatch(setActionCompleted());
-      dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
+      if (!actionCompleted && exceptionType === 'NSFL') dispatch(setActionCompleted());
+      dispatch(getLocationDetails({ itemNbr: itemNbr }));
       navigation.navigate('LocationDetails');
     }
 
@@ -163,7 +160,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
     // on api success
     if (!editAPI.isWaiting && editAPI.result) {
       dispatch(editExistingLocation(loc, parseInt(locType, 10), 'floor', currentLocation.locIndex));
-      dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
+      dispatch(getLocationDetails({ itemNbr: itemNbr }));
       navigation.navigate('LocationDetails');
     }
 
@@ -195,8 +192,8 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
         );
         if (!sameLoc) {
           dispatch(addLocation({
-            headers: { itemNbr: itemLocDetails.itemNbr },
-            upc: itemLocDetails.upcNbr,
+            headers: { itemNbr: itemNbr },
+            upc: upcNbr,
             sectionId: loc,
             locationTypeNbr: locType
           }));
@@ -211,8 +208,8 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
         );
         if (!sameLoc) {
           dispatch(editLocation({
-            headers: { itemNbr: itemLocDetails.itemNbr },
-            upc: itemLocDetails.upcNbr,
+            headers: { itemNbr: itemNbr },
+            upc: upcNbr,
             sectionId: currentLocation.locationName,
             newSectionId: loc,
             locationTypeNbr: currentLocation.type,
@@ -351,9 +348,13 @@ const SelectLocationType = (): JSX.Element => {
   const [error, setError] = useState({ error: false, message: '' });
   const addAPI = useTypedSelector(state => state.async.addLocation);
   const editAPI = useTypedSelector(state => state.async.editLocation);
-  const floorLocations = useTypedSelector(state => state.Location.floorLocations);
-  const itemLocDetails = useTypedSelector(state => state.Location.itemLocDetails);
-  const { actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
+  const {
+    floorLocations,
+    itemNbr,
+    upcNbr,
+    exceptionType,
+    actionCompleted
+  } = useTypedSelector(state => state.ItemDetailScreen);
   const route = useRoute();
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -373,7 +374,9 @@ const SelectLocationType = (): JSX.Element => {
       addAPI={addAPI}
       editAPI={editAPI}
       floorLocations={floorLocations}
-      itemLocDetails={itemLocDetails}
+      itemNbr={itemNbr}
+      upcNbr={upcNbr}
+      exceptionType={exceptionType}
       actionCompleted={actionCompleted}
       route={route}
       navigation={navigation}
