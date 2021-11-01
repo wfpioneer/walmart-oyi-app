@@ -18,7 +18,8 @@ export const setupScreen = (
   reserveLocations: Location[],
   exceptionType: string | null | undefined,
   pendingOHQty: number,
-  completed: boolean) => ({
+  completed: boolean
+) => ({
   type: SETUP_SCREEN,
   payload: {
     itemNbr,
@@ -59,8 +60,12 @@ export const addLocationToExisting = (locationName: string, locationTypeNbr: num
   }
 } as const);
 
-export const editExistingLocation = (locationName: string, locationTypeNbr: number, locationArea: string,
-                                     locIndex: number) => ({
+export const editExistingLocation = (
+  locationName: string,
+  locationTypeNbr: number,
+  locationArea: string,
+  locIndex: number
+) => ({
   type: EDIT_EXISTING_LOCATION,
   payload: {
     locationName,

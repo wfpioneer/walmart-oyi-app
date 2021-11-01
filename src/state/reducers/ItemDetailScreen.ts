@@ -1,15 +1,16 @@
 import {
+  ACTION_COMPLETED,
   Actions,
   ADD_LOCATION_TO_EXISTING,
-  ACTION_COMPLETED,
   DELETE_LOCATION_FROM_EXISTING,
   EDIT_EXISTING_LOCATION,
   RESET_LOCATIONS,
   SET_FLOOR_LOCATIONS,
   SET_RESERVE_LOCATIONS,
   SETUP_SCREEN,
-  UPDATE_PENDING_OH_QTY } from '../actions/ItemDetailScreen';
-import LocationType from "../../models/Location";
+  UPDATE_PENDING_OH_QTY
+} from '../actions/ItemDetailScreen';
+import LocationType from '../../models/Location';
 
 interface ItemDetailsState {
   itemNbr: number;
@@ -28,7 +29,7 @@ const initialState : ItemDetailsState = {
   exceptionType: null,
   actionCompleted: false,
   floorLocations: [],
-  reserveLocations: [],
+  reserveLocations: []
 };
 
 export const ItemDetailScreen = (
