@@ -17,7 +17,7 @@ import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
   deleteLocationFromExisting, setFloorLocations, setReserveLocations
-} from '../../state/actions/Location';
+} from '../../state/actions/ItemDetailScreen';
 import { deleteLocation } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -31,11 +31,9 @@ interface LocationDetailsProps {
   dispatch: any;
   floorLocations: Location[];
   reserveLocations: Location[];
-  itemDetails: {
-    itemNbr: number;
-    upcNbr: string;
-    exceptionType: string;
-  };
+  itemNbr: number;
+  upcNbr: string;
+  exceptionType: string | null | undefined;
   delAPI: AsyncState
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -62,7 +60,9 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     displayConfirmation,
     floorLocations,
     reserveLocations,
-    itemDetails,
+    itemNbr,
+    upcNbr,
+    exceptionType,
     locToConfirm,
     locationsApi,
     navigation,
@@ -127,8 +127,8 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
   const deleteConfirmed = () => {
     dispatch(
       deleteLocation({
-        headers: { itemNbr: itemDetails.itemNbr },
-        upc: itemDetails.upcNbr,
+        headers: { itemNbr: itemNbr },
+        upc: upcNbr,
         sectionId: locToConfirm.locationName,
         locationTypeNbr: locToConfirm.locationTypeNbr
       }),
@@ -239,9 +239,13 @@ const LocationDetails = (): JSX.Element => {
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
-  const floorLocations = useTypedSelector(state => state.Location.floorLocations);
-  const reserveLocations = useTypedSelector(state => state.Location.reserveLocations);
-  const itemDetails = useTypedSelector(state => state.Location.itemLocDetails);
+  const {
+    floorLocations,
+    reserveLocations,
+    itemNbr,
+    upcNbr,
+    exceptionType
+  } = useTypedSelector(state => state.ItemDetailScreen);
   const delAPI = useTypedSelector(state => state.async.deleteLocation);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
@@ -255,7 +259,9 @@ const LocationDetails = (): JSX.Element => {
       displayConfirmation={displayConfirmation}
       floorLocations={floorLocations}
       reserveLocations={reserveLocations}
-      itemDetails={itemDetails}
+      itemNbr={itemNbr}
+      upcNbr={upcNbr}
+      exceptionType={exceptionType}
       locToConfirm={locToConfirm}
       locationsApi={locations}
       navigation={navigation}

@@ -11,8 +11,6 @@ export const determineScanner = (isByod: boolean, scannerList: string[]) => {
   // preferred scanner type is "2D Barcode Imager" for club devices
   // TODO figure out logic we want for this
   if (scannerList.indexOf('2D Barcode Imager') !== -1) {
-    console.log(scannerList.indexOf('2D Barcode Imager'));
-    console.log(scannerList.indexOf('Camera Scanner'));
     return scannerList[scannerList.indexOf('2D Barcode Imager')];
   }
   return scannerList[0];
@@ -20,9 +18,7 @@ export const determineScanner = (isByod: boolean, scannerList: string[]) => {
 
 export const getInitialScanners = async () => {
   try {
-    const scanners = await WMBarcodeScanner.getScannerList();
-    console.log(scanners);
-    return scanners;
+    return await WMBarcodeScanner.getScannerList();
   } catch (err) {
     console.log(`Error getting scanner list: ${err}`);
     return [];
@@ -30,7 +26,6 @@ export const getInitialScanners = async () => {
 };
 
 export const setScanner = (scanner: string) => {
-  console.log(scanner);
   if (!isScannerSet) {
     console.log('setting scanner to', scanner);
     WMBarcodeScanner.setScanner(scanner).then(() => {
