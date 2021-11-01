@@ -26,6 +26,292 @@ exports[`HomeScreen rendering renders ActivityIndicator when worklistSummaryApiS
 
 exports[`HomeScreen rendering renders ManualScanComponent when enabled 1`] = `null`;
 
+exports[`HomeScreen rendering renders build environment next to version # if ENV is dev 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "marginTop": 16,
+            "width": "70%",
+          }
+        }
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </CustomModalComponent>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text>
+      [missing "en.HOME.WELCOME" translation] testUser
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <GoalCircle
+        active={true}
+        completionGoal={90}
+        completionPercentage={0}
+        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
+        goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
+      />
+    </View>
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={100}
+      goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={50}
+      goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={13}
+      goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={0}
+      goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      onPress={[Function]}
+    />
+  </ScrollView>
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    [missing "en.GENERICS.VERSION" translation] 1.1.0-DEV
+  </Text>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`HomeScreen rendering renders build environment next to version # if ENV is stage 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "marginTop": 16,
+            "width": "70%",
+          }
+        }
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </CustomModalComponent>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text>
+      [missing "en.HOME.WELCOME" translation] testUser
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <GoalCircle
+        active={true}
+        completionGoal={90}
+        completionPercentage={0}
+        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
+        goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
+      />
+    </View>
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={100}
+      goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={50}
+      goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={13}
+      goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={0}
+      goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      onPress={[Function]}
+    />
+  </ScrollView>
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    [missing "en.GENERICS.VERSION" translation] 1.1.0-STAGE
+  </Text>
+</ForwardRef(SafeAreaView)>
+`;
+
 exports[`HomeScreen rendering renders error View when worklistSummaryApiState.error is not null 1`] = `
 <View
   style={
@@ -80,6 +366,149 @@ exports[`HomeScreen rendering renders error View when worklistSummaryApiState.er
 exports[`HomeScreen rendering renders null when worklistApiState.result.status is 204 1`] = `null`;
 
 exports[`HomeScreen rendering renders null when worklistSummaryApiState.result is null 1`] = `null`;
+
+exports[`HomeScreen rendering renders pure version number if build environment is production 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "marginTop": 16,
+            "width": "70%",
+          }
+        }
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </CustomModalComponent>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text>
+      [missing "en.HOME.WELCOME" translation] testUser
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <GoalCircle
+        active={true}
+        completionGoal={90}
+        completionPercentage={0}
+        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
+        goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
+      />
+    </View>
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={100}
+      goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={50}
+      goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={13}
+      goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={0}
+      completionGoal={90}
+      completionPercentage={0}
+      goal={0}
+      goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      onPress={[Function]}
+    />
+  </ScrollView>
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    [missing "en.GENERICS.VERSION" translation] 1.1.0
+  </Text>
+</ForwardRef(SafeAreaView)>
+`;
 
 exports[`HomeScreen rendering renders worklist summaries when worklistApiState.result.data has summaries (items 50% complete) 1`] = `
 <ForwardRef(SafeAreaView)
@@ -219,7 +648,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       }
     }
   >
-    [missing "en.GENERICS.VERSION" translation] 1.1.0
+    [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
   </Text>
 </ForwardRef(SafeAreaView)>
 `;
@@ -362,7 +791,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       }
     }
   >
-    [missing "en.GENERICS.VERSION" translation] 1.1.0
+    [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
   </Text>
 </ForwardRef(SafeAreaView)>
 `;
@@ -505,7 +934,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       }
     }
   >
-    [missing "en.GENERICS.VERSION" translation] 1.1.0
+    [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
   </Text>
 </ForwardRef(SafeAreaView)>
 `;
