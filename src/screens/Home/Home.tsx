@@ -24,6 +24,7 @@ import Button from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
 import { WorklistSummary } from '../../models/WorklistSummary';
 import { CustomModalComponent } from '../Modal/Modal';
+import { getBuildEnvironment } from '../../utils/environment';
 
 const mapStateToProps = (state: RootState) => ({
   userName: state.User.additional.displayName,
@@ -202,7 +203,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           { renderWorklistCards() }
         </ScrollView>
         <Text style={styles.versionDisplay}>
-          { `${strings('GENERICS.VERSION')} ${pkg.version}` }
+          { `${strings('GENERICS.VERSION')} ${pkg.version}${getBuildEnvironment()}` }
         </Text>
       </SafeAreaView>
     );
