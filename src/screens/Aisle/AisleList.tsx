@@ -41,6 +41,7 @@ interface AisleProps {
     zoneId: number,
     zoneName: string,
     getAllAisles: AsyncState,
+    locationPopupVisible: boolean,
     dispatch: Dispatch<any>,
     apiStart: number,
     setApiStart: React.Dispatch<React.SetStateAction<number>>,
@@ -55,6 +56,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
     zoneId,
     zoneName,
     getAllAisles,
+    locationPopupVisible,
     navigation,
     apiStart,
     dispatch,
@@ -137,7 +139,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
             navigator={navigation}
             destinationScreen={LocationType.SECTION}
             dispatch={dispatch}
-            locationPopupVisible={false}
+            locationPopupVisible={locationPopupVisible}
           />
         )}
         keyExtractor={item => item.aisleName}
@@ -192,6 +194,7 @@ const AisleList = (): JSX.Element => {
           route={route}
           useEffectHook={useEffect}
           trackEventCall={trackEvent}
+          locationPopupVisible={locationPopupVisible}
         />
       </TouchableOpacity>
       <BottomSheetModal
