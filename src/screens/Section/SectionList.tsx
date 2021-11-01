@@ -1,4 +1,9 @@
-import React, { EffectCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  EffectCallback,
+  useEffect,
+  useMemo, useRef,
+  useState
+} from 'react';
 import {
   ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
@@ -159,7 +164,7 @@ const SectionList = (): JSX.Element => {
   const route = useRoute();
   const location = useTypedSelector(state => state.Location);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ['22%', '50%'], []);
+  const snapPoints = useMemo(() => ['27%', '50%'], []);
   const userFeatures = useTypedSelector(state => state.User.features);
   useEffect(() => {
     if (navigation.isFocused()) {
