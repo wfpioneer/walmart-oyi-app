@@ -164,7 +164,7 @@ const SectionList = (): JSX.Element => {
   const route = useRoute();
   const location = useTypedSelector(state => state.Location);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ['27%', '50%'], []);
+  const snapPoints = useMemo(() => ['27%', '60%'], []);
   const userFeatures = useTypedSelector(state => state.User.features);
   useEffect(() => {
     if (navigation.isFocused()) {
