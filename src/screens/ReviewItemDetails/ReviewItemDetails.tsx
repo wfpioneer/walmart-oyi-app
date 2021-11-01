@@ -27,9 +27,6 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
-import {
-  resetLocations, setFloorLocations, setItemLocDetails, setReserveLocations
-} from '../../state/actions/Location';
 import { showInfoModal } from '../../state/actions/Modal';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -46,7 +43,7 @@ export interface ItemDetailsScreenProps {
   addToPicklistStatus: AsyncState;
   completeItemApi: AsyncState;
   userId: string;
-  exceptionType: string; actionCompleted: boolean; pendingOnHandsQty: number;
+  exceptionType: string | null | undefined; actionCompleted: boolean; pendingOnHandsQty: number;
   floorLocations?: Location[];
   reserveLocations?: Location[];
   route: RouteProp<any, string>;
@@ -372,19 +369,15 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   // Set Item Details
   useEffectHook(() => {
     if (itemDetails) {
-      dispatch(resetLocations());
-      dispatch(setupScreen(itemDetails.exceptionType, itemDetails.pendingOnHandsQty,
-        itemDetails.exceptionType ? itemDetails.completed : true));
-      dispatch(setItemLocDetails(itemDetails.itemNbr, itemDetails.upcNbr,
-        itemDetails.exceptionType ? itemDetails.exceptionType : ''));
-      if (itemDetails.location) {
-        if (itemDetails.location.floor) {
-          dispatch(setFloorLocations(itemDetails.location.floor));
-        }
-        if (itemDetails.location.reserve) {
-          dispatch(setReserveLocations(itemDetails.location.reserve));
-        }
-      }
+      dispatch(setupScreen(
+        itemDetails.itemNbr,
+        itemDetails.upcNbr,
+        itemDetails.location && itemDetails.location.floor ? itemDetails.location.floor : [],
+        itemDetails.location && itemDetails.location.reserve ? itemDetails.location.reserve : [],
+        itemDetails.exceptionType,
+        itemDetails.pendingOnHandsQty,
+        itemDetails.exceptionType ? itemDetails.completed : true
+      ));
     }
   }, [itemDetails]);
 
@@ -619,8 +612,13 @@ const ReviewItemDetails = (): JSX.Element => {
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const { userId } = useTypedSelector(state => state.User);
-  const { exceptionType, actionCompleted, pendingOnHandsQty } = useTypedSelector(state => state.ItemDetailScreen);
-  const { floorLocations, reserveLocations } = useTypedSelector(state => state.Location);
+  const {
+    exceptionType,
+    actionCompleted,
+    pendingOnHandsQty,
+    floorLocations,
+    reserveLocations
+  } = useTypedSelector(state => state.ItemDetailScreen);
   const userFeatures = useTypedSelector(state => state.User.features);
   const route = useRoute();
   const dispatch = useDispatch();
