@@ -166,6 +166,9 @@ export default {
     NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Spanish Translation
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_ALL: 'Clear all', // TODO Spanish Translation
+    CLEAR_SECTION: 'Limpiar sección',
+    REMOVE_SECTION: 'Eliminar sección',
+    REMOVE_ALL: 'Remove all', // TODO Spanish Translation
     ADD: 'Agregar',
     SCAN_LOCATION: 'Invalid location name Ex: ABC1-2', // TODO Spanish Translation
     REMOVE_ALL: 'Remove all', // TODO Spanish Translation

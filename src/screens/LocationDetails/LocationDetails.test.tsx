@@ -20,11 +20,11 @@ describe('LocationDetailsScreen', () => {
     locationIndex: -1,
     locationTypeNbr: -1
   };
-  const defaultItemLocDetails = {
-    itemNbr: 0,
-    upcNbr: '',
-    exceptionType: ''
-  };
+
+  const defaultItemNbr = 0;
+  const defaultUpcNbr = '';
+  const defaultExceptionType = '';
+
   const floorLoc: Location[] = [{
     zoneId: 0,
     aisleId: 1,
@@ -69,7 +69,9 @@ describe('LocationDetailsScreen', () => {
           displayConfirmation={false}
           floorLocations={floorLoc}
           reserveLocations={reserveLoc}
-          itemDetails={defaultItemLocDetails}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
           navigation={navigationProp}
@@ -91,7 +93,9 @@ describe('LocationDetailsScreen', () => {
           displayConfirmation={false}
           floorLocations={[]}
           reserveLocations={reserveLoc}
-          itemDetails={defaultItemLocDetails}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
           navigation={navigationProp}
@@ -113,7 +117,9 @@ describe('LocationDetailsScreen', () => {
           displayConfirmation={false}
           floorLocations={floorLoc}
           reserveLocations={[]}
-          itemDetails={defaultItemLocDetails}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
           navigation={navigationProp}
@@ -136,7 +142,9 @@ describe('LocationDetailsScreen', () => {
           displayConfirmation={false}
           floorLocations={[]}
           reserveLocations={[]}
-          itemDetails={defaultItemLocDetails}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
           navigation={navigationProp}
@@ -166,7 +174,9 @@ describe('LocationDetailsScreen', () => {
           displayConfirmation={false}
           floorLocations={[]}
           reserveLocations={[]}
-          itemDetails={defaultItemLocDetails}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
           navigation={navigationProp}
@@ -194,7 +204,9 @@ describe('LocationDetailsScreen', () => {
           displayConfirmation={false}
           floorLocations={[]}
           reserveLocations={[]}
-          itemDetails={defaultItemLocDetails}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
           navigation={navigationProp}
@@ -222,7 +234,9 @@ describe('LocationDetailsScreen', () => {
           displayConfirmation={false}
           floorLocations={[]}
           reserveLocations={[]}
-          itemDetails={defaultItemLocDetails}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
           locToConfirm={locationConfirm}
           locationsApi={defaultAsyncState}
           navigation={navigationProp}
@@ -245,7 +259,9 @@ describe('LocationDetailsScreen', () => {
           displayConfirmation={showConfirmationModal}
           floorLocations={[]}
           reserveLocations={[]}
-          itemDetails={defaultItemLocDetails}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
           navigation={navigationProp}
@@ -273,7 +289,9 @@ describe('LocationDetailsScreen', () => {
           displayConfirmation={false}
           floorLocations={[]}
           reserveLocations={[]}
-          itemDetails={defaultItemLocDetails}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={getLocationIsWaiting}
           navigation={navigationProp}

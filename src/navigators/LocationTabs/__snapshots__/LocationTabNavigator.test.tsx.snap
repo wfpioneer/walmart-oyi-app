@@ -22,6 +22,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
   >
     <Screen
       component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
       name="FloorDetails"
       options={
         Object {
@@ -31,6 +36,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
     />
     <Screen
       component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
       name="ReserveDetails"
       options={
         Object {
@@ -64,6 +74,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
   >
     <Screen
       component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
       name="FloorDetails"
       options={
         Object {
@@ -73,6 +88,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
     />
     <Screen
       component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
       name="ReserveDetails"
       options={
         Object {
@@ -106,6 +126,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
   >
     <Screen
       component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
       name="FloorDetails"
       options={
         Object {
@@ -115,6 +140,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
     />
     <Screen
       component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
       name="ReserveDetails"
       options={
         Object {
@@ -151,6 +181,11 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
   >
     <Screen
       component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
       name="FloorDetails"
       options={
         Object {
@@ -160,6 +195,11 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
     />
     <Screen
       component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
       name="ReserveDetails"
       options={
         Object {
@@ -196,6 +236,11 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
   >
     <Screen
       component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
       name="FloorDetails"
       options={
         Object {
@@ -205,6 +250,11 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
     />
     <Screen
       component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
       name="ReserveDetails"
       options={
         Object {

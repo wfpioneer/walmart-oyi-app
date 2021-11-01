@@ -1,10 +1,16 @@
-import React, { Dispatch, EffectCallback, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import React, {
+  EffectCallback, useEffect, useMemo, useRef
+} from 'react';
+import {
+  Text, TouchableOpacity, View
+} from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useDispatch } from 'react-redux';
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
+import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
+import { Dispatch } from 'redux';
 import { strings } from '../../locales';
 import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
@@ -18,7 +24,10 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import { resetLocations } from '../../state/actions/Location';
+import { hideLocationPopup, resetLocations } from '../../state/actions/Location';
+
+import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
+import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import Button from '../../components/buttons/Button';
 
 const Tab = createMaterialTopTabNavigator();
@@ -35,6 +44,7 @@ export interface LocationProps {
     scannedEvent: {type?: string; value?: string};
     trackEventCall: (eventName: string, params?: any) => void;
     validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
+    locationPopupVisible: boolean;
 }
 
 interface TabHeaderProps {
@@ -84,6 +94,7 @@ const reserveDetailsList = () => (
 export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   const {
     locationName,
+    locationPopupVisible,
     floorItems,
     reserveItems,
     isManualScanEnabled,
@@ -95,7 +106,6 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     useEffectHook,
     validateSessionCall
   } = props;
-
   // Call Get Section Details
   useEffectHook(() => {
     validateSessionCall(navigation, route.name).then(() => {
@@ -145,12 +155,28 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           options={{
             title: `${strings('LOCATION.FLOORS')} (${floorItems.length ?? 0})`
           }}
+          listeners={{
+            tabPress: e => {
+              if (locationPopupVisible) {
+                e.preventDefault();
+                dispatch(hideLocationPopup());
+              }
+            }
+          }}
         />
         <Tab.Screen
           name="ReserveDetails"
           component={reserveDetailsList}
           options={{
             title: `${strings('LOCATION.RESERVES')} (${reserveItems.length ?? 0})`
+          }}
+          listeners={{
+            tabPress: e => {
+              if (locationPopupVisible) {
+                e.preventDefault();
+                dispatch(hideLocationPopup());
+              }
+            }
           }}
         />
       </Tab.Navigator>
@@ -163,27 +189,80 @@ const LocationTabs = () : JSX.Element => {
   const { result } = useTypedSelector(state => state.async.getSectionDetails);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { scannedEvent } = useTypedSelector(state => state.Global);
-
+  const userFeatures = useTypedSelector(state => state.User.features);
+  const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
   const locItem: LocationItem | undefined = (result && result.data);
   const locationName = `${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`;
 
+  const bottomSheetLocationDetailsModalRef = useRef<BottomSheetModal>(null);
+
+  const snapPoints = useMemo(() => ['35%', '50%'], []);
+
+  useEffect(() => {
+    if (navigation.isFocused()) {
+      if (locationPopupVisible) {
+        bottomSheetLocationDetailsModalRef.current?.present();
+      } else {
+        bottomSheetLocationDetailsModalRef.current?.dismiss();
+      }
+    }
+  }, [locationPopupVisible]);
+
+  // Call Get Section Details
+  useEffect(() => {
+    validateSession(navigation, route.name).then(() => {
+      dispatch(getSectionDetails({ sectionId: locationName }));
+    }).catch(() => {});
+  }, [navigation]);
+
   return (
-    <LocationTabsNavigator
-      floorItems={locItem?.floor ?? []}
-      reserveItems={locItem?.reserve ?? []}
-      locationName={locationName}
-      isManualScanEnabled={isManualScanEnabled}
-      useEffectHook={useEffect}
-      dispatch={dispatch}
-      navigation={navigation}
-      route={route}
-      scannedEvent={scannedEvent}
-      trackEventCall={trackEvent}
-      validateSessionCall={validateSession}
-    />
+    <BottomSheetModalProvider>
+      <TouchableOpacity
+        onPress={() => dispatch(hideLocationPopup())}
+        activeOpacity={1}
+        disabled={!locationPopupVisible}
+        style={styles.container}
+      >
+        <LocationTabsNavigator
+          dispatch={dispatch}
+          floorItems={locItem?.floor ?? []}
+          reserveItems={locItem?.reserve ?? []}
+          locationName={locationName}
+          locationPopupVisible={locationPopupVisible}
+          isManualScanEnabled={isManualScanEnabled}
+          useEffectHook={useEffect}
+          navigation={navigation}
+          route={route}
+          scannedEvent={scannedEvent}
+          trackEventCall={trackEvent}
+          validateSessionCall={validateSession}
+        />
+      </TouchableOpacity>
+      <BottomSheetModal
+        ref={bottomSheetLocationDetailsModalRef}
+        snapPoints={snapPoints}
+        index={0}
+        onDismiss={() => dispatch(hideLocationPopup())}
+        style={styles.bottomSheetModal}
+      >
+        <BottomSheetView>
+          <BottomSheetClearCard
+            onPress={() => {}}
+            text={strings('LOCATION.CLEAR_SECTION')}
+            isManagerOption={false}
+            isVisible={true}
+          />
+          <BottomSheetRemoveCard
+            onPress={() => {}}
+            text={strings('LOCATION.REMOVE_SECTION')}
+            isVisible={userFeatures.includes('manager approval')}
+          />
+        </BottomSheetView>
+      </BottomSheetModal>
+    </BottomSheetModalProvider>
   );
 };
 

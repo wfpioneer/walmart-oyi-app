@@ -167,6 +167,8 @@ export default {
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
     CLEAR_ALL: 'Clear all',
     SCAN_LOCATION: 'Invalid location name Ex: ABC1-2',
+    CLEAR_SECTION: 'Clear this section',
+    REMOVE_SECTION: 'Remove this section',
     REMOVE_ALL: 'Remove all',
     ADD: 'Add',
     ADD_AREA: 'Add an area',

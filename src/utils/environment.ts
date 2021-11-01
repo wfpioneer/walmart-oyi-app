@@ -114,3 +114,10 @@ export const getEnvironment = (): Environment => {
       return environments.stage;
   }
 };
+
+export const getBuildEnvironment = (): string => {
+  if (Config.ENVIRONMENT === 'prod') {
+    return '';
+  }
+  return `-${Config.ENVIRONMENT.toUpperCase()}`;
+};

@@ -62,6 +62,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -78,6 +79,7 @@ describe('Test Location Tabs', (): void => {
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
         dispatch={jest.fn()}
+        locationPopupVisible={false}
         navigation={navigationProp}
         route={routeProp}
         scannedEvent={defaultScannedEvent}
@@ -85,7 +87,6 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
-
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -102,6 +103,7 @@ describe('Test Location Tabs', (): void => {
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
         dispatch={jest.fn()}
+        locationPopupVisible={false}
         navigation={navigationProp}
         route={routeProp}
         scannedEvent={defaultScannedEvent}
@@ -125,6 +127,7 @@ describe('Test Location Tabs', (): void => {
         reserveItems={reserve}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
         dispatch={jest.fn()}
+        locationPopupVisible={false}
         navigation={navigationProp}
         route={routeProp}
         scannedEvent={defaultScannedEvent}
@@ -157,6 +160,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -185,6 +189,7 @@ describe('Test Location Tabs', (): void => {
         reserveItems: [],
         locationName: '-',
         dispatch: jest.fn(),
+        locationPopupVisible: false,
         navigation: navigationProp,
         route: routeProp,
         scannedEvent: defaultScannedEvent,
@@ -254,6 +259,7 @@ describe('Test Location Tabs', (): void => {
               reserveItems={[]}
               locationName="-"
               dispatch={jest.fn()}
+              locationPopupVisible={false}
               navigation={mockNavFocused}
               route={routeProp}
               scannedEvent={defaultScannedEvent}
