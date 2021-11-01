@@ -6,7 +6,16 @@ import User from '../../models/User';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
-
+jest.mock('../../../package.json', () => ({
+  version: '1.1.0'
+}));
+jest.mock('react-native-config', () => {
+  const config = jest.requireActual('react-native-config');
+  return {
+    ...config,
+    ENVIRONMENT: ' DEV'
+  };
+});
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
@@ -95,6 +104,52 @@ describe('LoginScreen', () => {
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
+  it('renders pure version number if build environment is production', () => {
+    const prodConfig = jest.requireMock('react-native-config');
+    prodConfig.ENVIRONMENT = 'prod';
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(<LoginScreen
+      loginUser={jest.fn}
+      logoutUser={jest.fn}
+      navigation={navigationProp}
+      hideActivityModal={jest.fn}
+      User={testUser}
+      setEndTime={jest.fn}
+      getFluffyFeatures={jest.fn}
+      fluffyApiState={{
+        isWaiting: false,
+        error: '',
+        result: {}
+      }}
+      assignFluffyFeatures={jest.fn}
+      showActivityModal={jest.fn}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  ['dev', 'stage'].forEach(testEnv => it(`renders build environment next to version # if ENV is ${testEnv}`, () => {
+    const testConfig = jest.requireMock('react-native-config');
+    testConfig.ENVIRONMENT = testEnv;
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(<LoginScreen
+      loginUser={jest.fn}
+      logoutUser={jest.fn}
+      navigation={navigationProp}
+      hideActivityModal={jest.fn}
+      User={testUser}
+      setEndTime={jest.fn}
+      getFluffyFeatures={jest.fn}
+      fluffyApiState={{
+        isWaiting: false,
+        error: '',
+        result: {}
+      }}
+      assignFluffyFeatures={jest.fn}
+      showActivityModal={jest.fn}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  }));
 });
 
 describe('SignInUser', () => {
