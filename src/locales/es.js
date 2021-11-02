@@ -157,13 +157,13 @@ export default {
     ZONES: 'Zonas',
     ZONE: 'Zone', // TODO Spanish Translation
     AISLES: 'Pasillos',
-    AISLE: 'Aisle', // TODO Spanish Translation
+    AISLE: 'Pasillo',
     SECTIONS: 'Secciones',
-    SECTION: 'Section', // TODO Spanish Translation
+    SECTION: 'Sección',
     AREAS: 'Areas', // TODO Spanish Translation
     LOCATION_DETAILS: 'Detalles de ubicación',
-    NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Spanish Translation
-    NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Spanish Translation
+    NO_ZONES_AVAILABLE: 'No hay zonas disponibles',
+    NO_AISLES_AVAILABLE: 'No hay pasillos disponibles',
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_SECTION: 'Limpiar sección',
     REMOVE_SECTION: 'Eliminar sección',
@@ -172,7 +172,7 @@ export default {
     ADD: 'Agregar',
     ADD_AREA: 'Añadir zona',
     ADD_AISLES: 'Agregar pasillos',
-    CREATED_ON: 'Created on', // TODO Spanish Translation
+    CREATED_ON: 'Creado en',
     MORE: 'Más',
     PRINT_SECTION: 'Imprimir todas las etiquetas de la sección',
     ADD_SECTIONS: 'Agregar secciones',
