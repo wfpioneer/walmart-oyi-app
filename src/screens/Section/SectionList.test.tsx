@@ -37,6 +37,7 @@ describe('Test Section List', () => {
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -67,6 +68,7 @@ describe('Test Section List', () => {
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -97,6 +99,7 @@ describe('Test Section List', () => {
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -134,6 +137,7 @@ describe('Test Get Section Api Response', () => {
           route={routeProp}
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          locationPopupVisible={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -160,6 +164,7 @@ describe('Test Get Section Api Response', () => {
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
