@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
     width: 30
   },
   textView: {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flex: 1
   },
   text: {
     fontSize: 16
