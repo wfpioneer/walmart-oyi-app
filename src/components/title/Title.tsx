@@ -36,12 +36,16 @@ export default class Title extends React.PureComponent<Props> {
 
   onLeftPress = (): void => {
     const { onLeftPress } = this.props;
-    if (onLeftPress) onLeftPress();
+    if (onLeftPress) {
+      onLeftPress();
+    }
   };
 
   onRightPress = (): void => {
     const { onRightPress } = this.props;
-    if (onRightPress) onRightPress();
+    if (onRightPress) {
+      onRightPress();
+    }
   };
 
   render() {
