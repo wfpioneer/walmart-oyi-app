@@ -133,7 +133,9 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!printAPI.isWaiting && printAPI.result) {
-      if (!actionCompleted && exceptionType === 'PO') dispatch(setActionCompleted());
+      if (!actionCompleted && exceptionType === 'PO') {
+        dispatch(setActionCompleted());
+      }
       navigation.goBack();
     }
 

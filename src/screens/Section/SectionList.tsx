@@ -1,4 +1,9 @@
-import React, { EffectCallback, useEffect, useState } from 'react';
+import React, {
+  EffectCallback,
+  useEffect,
+  useMemo, useRef,
+  useState
+} from 'react';
 import {
   ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
@@ -9,6 +14,10 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
+import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
+import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import styles from './SectionList.style';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
@@ -23,6 +32,8 @@ import COLOR from '../../themes/Color';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
+import { hideLocationPopup } from '../../state/actions/Location';
+import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 
 const NoSectionMessage = () : JSX.Element => (
   <View style={styles.noSections}>
@@ -171,26 +182,75 @@ const SectionList = (): JSX.Element => {
   const { name: zoneName } = useTypedSelector(state => state.Location.selectedZone);
   const location = useTypedSelector(state => state.Location);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const userFeatures = useTypedSelector(state => state.User.features);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const route = useRoute();
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const snapPoints = useMemo(() => ['27%', '60%'], []);
 
+  useEffect(() => {
+    if (navigation.isFocused()) {
+      if (location.locationPopupVisible) {
+        bottomSheetModalRef.current?.present();
+      } else {
+        bottomSheetModalRef.current?.dismiss();
+      }
+    }
+  }, [location]);
   return (
-    <SectionScreen
-      aisleId={aisleId}
-      aisleName={aisleName}
-      zoneName={zoneName}
-      navigation={navigation}
-      dispatch={dispatch}
-      getAllSections={getAllSections}
-      isManualScanEnabled={isManualScanEnabled}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      route={route}
-      useEffectHook={useEffect}
-      trackEventCall={trackEvent}
-      locationPopupVisible={location.locationPopupVisible}
-    />
+    <BottomSheetModalProvider>
+      <TouchableOpacity
+        onPress={() => dispatch(hideLocationPopup())}
+        activeOpacity={1}
+        disabled={!location.locationPopupVisible}
+        style={styles.container}
+      >
+        <SectionScreen
+          aisleId={aisleId}
+          aisleName={aisleName}
+          zoneName={zoneName}
+          navigation={navigation}
+          dispatch={dispatch}
+          getAllSections={getAllSections}
+          isManualScanEnabled={isManualScanEnabled}
+          apiStart={apiStart}
+          setApiStart={setApiStart}
+          route={route}
+          useEffectHook={useEffect}
+          trackEventCall={trackEvent}
+          locationPopupVisible={location.locationPopupVisible}
+        />
+      </TouchableOpacity>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={snapPoints}
+        index={0}
+        onDismiss={() => dispatch(hideLocationPopup())}
+        style={styles.bottomSheetModal}
+      >
+        <BottomSheetPrintCard
+          isVisible={true}
+          text={strings('LOCATION.PRINT_SECTION')}
+          onPress={() => {}}
+        />
+        <BottomSheetAddCard
+          isVisible={true}
+          text={strings('LOCATION.ADD_SECTIONS')}
+          onPress={() => {}}
+        />
+        <BottomSheetClearCard
+          isVisible={userFeatures.includes('manager approval')}
+          text={strings('LOCATION.CLEAR_AISLE')}
+          onPress={() => {}}
+        />
+        <BottomSheetSectionRemoveCard
+          isVisible={userFeatures.includes('manager approval')}
+          text={strings('LOCATION.REMOVE_AISLE')}
+          onPress={() => {}}
+        />
+      </BottomSheetModal>
+    </BottomSheetModalProvider>
   );
 };
 

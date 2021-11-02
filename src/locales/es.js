@@ -174,7 +174,11 @@ export default {
     REMOVE_ALL: 'Remove all', // TODO Spanish Translation
     ADD_AREA: 'Añadir zona',
     CREATED_ON: 'Created on', // TODO Spanish Translation
-    MORE: 'More' // TODO Spanish Translation
+    MORE: 'Más',
+    PRINT_SECTION: 'Imprimir todas las etiquetas de la sección',
+    ADD_SECTIONS: 'Agregar secciones',
+    CLEAR_AISLE: 'Limpiar pasillo',
+    REMOVE_AISLE: 'Eliminar pasillo'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
