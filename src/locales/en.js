@@ -173,7 +173,11 @@ export default {
     ADD_AREA: 'Add an area',
     ADD_AISLES: 'Add aisles',
     CREATED_ON: 'Created on',
-    MORE: 'More'
+    MORE: 'More',
+    PRINT_SECTION: 'Print all section location labels',
+    ADD_SECTIONS: 'Add sections',
+    CLEAR_AISLE: 'Clear aisle',
+    REMOVE_AISLE: 'Remove aisle'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

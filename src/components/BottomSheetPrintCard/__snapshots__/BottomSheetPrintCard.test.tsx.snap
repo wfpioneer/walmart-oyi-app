@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Print card render tests renders the bottom sheet print card, not visible 1`] = `null`;
+
+exports[`Print card render tests renders the bottom sheet print card, visible, manager and non manager option 1`] = `
+<BottomSheetBaseCard
+  image=""
+  onPress={[Function]}
+  text="print card"
+/>
+`;

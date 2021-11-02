@@ -74,7 +74,8 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
         name="Sections"
         component={SectionList}
         options={{
-          headerTitle: strings('LOCATION.SECTIONS')
+          headerTitle: strings('LOCATION.SECTIONS'),
+          headerRight: () => renderLocationKebabButton(true)
         }}
       />
       <Stack.Screen

@@ -173,7 +173,11 @@ export default {
     ADD_AREA: '添加一个新区域',
     ADD_AISLES: '增加通道',
     CREATED_ON: 'Created on', // TODO Mandarin Translation
-    MORE: 'More' // TODO Mandarin Translation
+    MORE: '更多',
+    PRINT_SECTION: '打印所有已选货架标签',
+    ADD_SECTIONS: '增加货架位置',
+    CLEAR_AISLE: '清除通道',
+    REMOVE_AISLE: '移除通道'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
