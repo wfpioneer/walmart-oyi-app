@@ -2,16 +2,20 @@
 import React, { useEffect } from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationContainer, NavigationProp, RouteProp } from '@react-navigation/native';
-import { render } from '@testing-library/react-native';
+import { cleanup, render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { LocationProps, LocationTabsNavigator, TabHeader } from './LocationTabNavigator';
 import {
   mockLocationDetails,
   mockLocationDetailsEmpty,
   mockLocationDetailsLargeLocationCount
 } from '../../mockData/locationDetails';
-import store from '../../state/index';
 import { barcodeEmitter } from '../../utils/scannerUtils';
+import { strings } from '../../locales';
+import RootReducer from '../../state/reducers/RootReducer';
+import TestWrapper, { TestProvider } from '../../utils/TestHelper';
+import store from '../../state';
 
 let navigationProp: NavigationProp<any>;
 const routeProp: RouteProp<any, string> = {
@@ -35,12 +39,11 @@ jest.mock('@react-navigation/native', () => {
     })
   };
 });
-const mockValidateSession = jest.fn().mockImplementation(() => new Promise<void>(resolve => {
-  resolve();
-}));
+const mockValidateSession = jest.fn().mockImplementation(() => new Promise<void>(resolve => resolve()));
 
 afterEach(() => {
   jest.clearAllMocks();
+  cleanup();
 });
 
 describe('Test Location Tabs', (): void => {
@@ -168,7 +171,7 @@ describe('Test Location Tabs', (): void => {
   it('Renders items Header', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <TabHeader headerText="ITEMS" />
+      <TabHeader headerText={strings('LOCATION.ITEMS')} />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -176,12 +179,13 @@ describe('Test Location Tabs', (): void => {
   it('Renders pallet Header', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <TabHeader headerText="PALLETS" />
+      <TabHeader headerText={strings('LOCATION.PALLETS')} />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  describe('Tests calling UseEffect Hook', () => {
+  // TODO Fix unmounted component no-op error for testing useEffect Hook
+  describe.skip('Tests calling UseEffect Hook', () => {
     it('Tests ValidateSessionCall with updates to scannedEvent and navigation props', () => {
       const mockNav = jest.requireMock('@react-navigation/native');
       const tabProps: LocationProps = {

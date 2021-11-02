@@ -171,7 +171,6 @@ export default {
     REMOVE_ALL: 'Remove all', // TODO Mandarin Translation
     ADD: '增加',
     SCAN_LOCATION: '无效位置名，如A1-2',
-    REMOVE_ALL: 'Remove all', // TODO Mandarin Translation
     ADD_AREA: '添加一个新区域',
     CREATED_ON: 'Created on', // TODO Mandarin Translation
     MORE: '更多',
