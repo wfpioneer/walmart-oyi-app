@@ -13,7 +13,7 @@ export default StyleSheet.create({
     fontSize: 18,
     width: '100%',
     fontWeight: 'bold',
-    marginHorizontal:5,
+    marginHorizontal: 5,
     paddingTop: 5,
     textAlign: 'center'
   },

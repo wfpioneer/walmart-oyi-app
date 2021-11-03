@@ -18,7 +18,7 @@ describe('AddPalletScreen', () => {
         dispatch={jest.fn()}
         navigation={navigationProp}
         useEffectHook={jest.fn()}
-        section={{id: 1, name: '1'}}
+        section={{ id: 1, name: '1' }}
         locationName={locationName}
       />
     );
@@ -33,7 +33,7 @@ describe('AddPalletScreen', () => {
         dispatch={jest.fn()}
         navigation={navigationProp}
         useEffectHook={jest.fn()}
-        section={{id: 1, name: '1'}}
+        section={{ id: 1, name: '1' }}
         locationName={locationName}
       />
     );

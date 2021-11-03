@@ -1,17 +1,17 @@
-import React, {EffectCallback, useEffect, useState} from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import Button from '../../components/buttons/Button';
 import { trackEvent } from '../../utils/AppCenterTool';
-import {useTypedSelector} from '../../state/reducers/RootReducer';
-import {setManualScan, setScannedEvent} from '../../state/actions/Global';
-import {barcodeEmitter} from "../../utils/scannerUtils";
-import {strings} from "../../locales";
-import styles from "./AddPallet.style";
-import COLOR from "../../themes/Color";
+import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import { barcodeEmitter } from '../../utils/scannerUtils';
+import { strings } from '../../locales';
+import styles from './AddPallet.style';
+import COLOR from '../../themes/Color';
 
 interface AddPalletScreenProps {
   palletId: string;
@@ -23,8 +23,16 @@ interface AddPalletScreenProps {
   locationName: string;
 }
 
-export const AddPalletScreen = (props: AddPalletScreenProps) => {
-  const { palletId, updatePalletId, dispatch, navigation, useEffectHook, section, locationName } = props;
+export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
+  const {
+    palletId,
+    updatePalletId,
+    dispatch,
+    navigation,
+    useEffectHook,
+    section,
+    locationName
+  } = props;
 
   const palletIDRegex = /^[0-9]+$/;
 
@@ -47,7 +55,7 @@ export const AddPalletScreen = (props: AddPalletScreenProps) => {
   const submitPalletId = () => {
     // TODO add integration to addPallet api once it is complete on the back end and add trackEvent for service call
     if (palletId.match(palletIDRegex)) {
-      navigation.goBack()
+      navigation.goBack();
     }
   };
 
@@ -79,10 +87,10 @@ export const AddPalletScreen = (props: AddPalletScreenProps) => {
         onPress={submitPalletId}
       />
     </View>
-  )
+  );
 };
 
-const AddPallet = () => {
+const AddPallet = (): JSX.Element => {
   const [palletId, updatePalletId] = useState('');
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -100,7 +108,7 @@ const AddPallet = () => {
       section={section}
       locationName={locationName}
     />
-  )
+  );
 };
 
 export default AddPallet;
