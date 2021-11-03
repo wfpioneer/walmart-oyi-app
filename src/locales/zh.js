@@ -175,7 +175,10 @@ export default {
     PRINT_SECTION: '打印所有已选货架标签',
     ADD_SECTIONS: '增加货架位置',
     CLEAR_AISLE: '清除通道',
-    REMOVE_AISLE: '移除通道'
+    REMOVE_AISLE: '移除通道',
+    SCAN_PALLET: 'Scan Pallet ID', // TODO Mandarin Translation
+    PALLET_VALIDATE_ERROR: 'Pallet ID can only contain numbers', // TODO Mandarin Translation
+    PALLET_PLACEHOLDER: 'Enter or Scan Pallet ID' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

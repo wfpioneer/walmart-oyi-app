@@ -100,7 +100,7 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
         name="AddPallet"
         component={AddPallet}
         options={{
-          headerTitle: 'Scan Pallet ID'
+          headerTitle: strings('LOCATION.SCAN_PALLET')
         }}
       />
     </Stack.Navigator>

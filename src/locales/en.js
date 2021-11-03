@@ -175,7 +175,10 @@ export default {
     PRINT_SECTION: 'Print all section location labels',
     ADD_SECTIONS: 'Add sections',
     CLEAR_AISLE: 'Clear aisle',
-    REMOVE_AISLE: 'Remove aisle'
+    REMOVE_AISLE: 'Remove aisle',
+    SCAN_PALLET: 'Scan Pallet ID',
+    PALLET_VALIDATE_ERROR: 'Pallet ID can only contain numbers',
+    PALLET_PLACEHOLDER: 'Enter or Scan Pallet ID'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

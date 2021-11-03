@@ -33,13 +33,17 @@ interface LocationProps {
 
 interface HeaderProps {
     headerText: string;
+    isReserve: boolean;
 }
 
 export const Header = (props: HeaderProps): JSX.Element => {
-  const { headerText } = props;
+  const { headerText, isReserve } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
+  };
+  const addNewPallet = () => {
+    navigation.navigate('AddPallet');
   };
   return (
     <>
@@ -54,7 +58,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
           titleFontSize={12}
           titleFontWeight="bold"
           height={28}
-          onPress={() => addNewLocation()}
+          onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
         />
       </View>
     </>
@@ -63,14 +67,14 @@ export const Header = (props: HeaderProps): JSX.Element => {
 
 const floorDetailsList = () => (
   <>
-    <Header headerText={strings('LOCATION.ITEMS')} />
+    <Header headerText={strings('LOCATION.ITEMS')} isReserve={false} />
     <SectionDetails />
   </>
 );
 
 const reserveDetailsList = () => (
   <>
-    <Header headerText={strings('LOCATION.PALLETS')} />
+    <Header headerText={strings('LOCATION.PALLETS')} isReserve={true} />
     <SectionDetails />
   </>
 );
