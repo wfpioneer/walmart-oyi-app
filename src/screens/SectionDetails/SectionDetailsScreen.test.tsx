@@ -10,9 +10,6 @@ import {
 } from '../../mockData/locationDetails';
 
 let navigationProp: NavigationProp<any, string>;
-const SECTION_NAME = '1';
-const ZONE_NAME = 'ABAR';
-const AISLE_NAME = '2';
 
 // TODO Adjust Snapshot naming convention Remove on final PR
 describe('Test Location Details Screen', () => {

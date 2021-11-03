@@ -43,6 +43,7 @@ describe('Test Aisle List', () => {
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -73,6 +74,7 @@ describe('Test Aisle List', () => {
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -94,6 +96,7 @@ describe('Test Aisle List', () => {
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -131,6 +134,7 @@ describe('Test Get Aisle Api Response', () => {
           route={routeProp}
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          locationPopupVisible={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -157,6 +161,7 @@ describe('Test Get Aisle Api Response', () => {
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -183,6 +188,7 @@ describe('Test Get Aisle Api Response', () => {
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -209,6 +215,7 @@ describe('Test Get Aisle Api Response', () => {
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

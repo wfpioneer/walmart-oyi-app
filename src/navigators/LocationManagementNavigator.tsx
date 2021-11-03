@@ -25,7 +25,7 @@ interface LocationManagementProps {
   dispatch: Dispatch<any>;
 }
 
-const renderScanButton = (dispatch: Dispatch<any>, isManualScanEnabled: boolean) => (
+export const renderScanButton = (dispatch: Dispatch<any>, isManualScanEnabled: boolean): JSX.Element => (
   <TouchableOpacity onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
     <View style={styles.leftButton}>
       <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
@@ -33,13 +33,19 @@ const renderScanButton = (dispatch: Dispatch<any>, isManualScanEnabled: boolean)
   </TouchableOpacity>
 );
 
-const renderCamButton = () => (
+export const renderCamButton = (): JSX.Element => (
   <TouchableOpacity onPress={() => { openCamera(); }}>
     <View style={styles.leftButton}>
       <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
     </View>
   </TouchableOpacity>
 );
+
+export const resetLocManualScan = (isManualScanEnabled: boolean, dispatch: Dispatch<any>): void => {
+  if (isManualScanEnabled) {
+    dispatch(setManualScan(false));
+  }
+};
 
 export const LocationManagementNavigatorStack = (props: LocationManagementProps): JSX.Element => {
   const {
@@ -87,6 +93,11 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             </View>
           )
         }}
+        listeners={{
+          blur: () => {
+            resetLocManualScan(isManualScanEnabled, dispatch);
+          }
+        }}
       />
       <Stack.Screen
         name="Aisles"
@@ -100,6 +111,14 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               {renderLocationKebabButton(userFeatures.includes('manager approval'))}
             </View>
           )
+        }}
+        listeners={{
+          blur: () => {
+            resetLocManualScan(isManualScanEnabled, dispatch);
+          },
+          beforeRemove: () => {
+            resetLocManualScan(isManualScanEnabled, dispatch);
+          }
         }}
       />
       <Stack.Screen
@@ -115,6 +134,14 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             </View>
           )
         }}
+        listeners={{
+          blur: () => {
+            resetLocManualScan(isManualScanEnabled, dispatch);
+          },
+          beforeRemove: () => {
+            resetLocManualScan(isManualScanEnabled, dispatch);
+          }
+        }}
       />
       <Stack.Screen
         name="SectionDetails"
@@ -128,6 +155,14 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               {renderLocationKebabButton(true)}
             </View>
           )
+        }}
+        listeners={{
+          blur: () => {
+            resetLocManualScan(isManualScanEnabled, dispatch);
+          },
+          beforeRemove: () => {
+            resetLocManualScan(isManualScanEnabled, dispatch);
+          }
         }}
       />
       <Stack.Screen

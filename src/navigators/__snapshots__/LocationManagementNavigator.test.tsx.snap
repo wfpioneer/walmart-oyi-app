@@ -17,6 +17,11 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
 >
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "blur": [Function],
+      }
+    }
     name="Zones"
     options={
       Object {
@@ -27,6 +32,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
     name="Aisles"
     options={
       Object {
@@ -37,6 +48,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
     name="Sections"
     options={
       Object {
@@ -47,6 +64,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
     name="SectionDetails"
     options={
       Object {
@@ -86,6 +109,11 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
 >
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "blur": [Function],
+      }
+    }
     name="Zones"
     options={
       Object {
@@ -96,6 +124,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
     name="Aisles"
     options={
       Object {
@@ -106,6 +140,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
     name="Sections"
     options={
       Object {
@@ -116,6 +156,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
     name="SectionDetails"
     options={
       Object {
@@ -136,4 +182,52 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     }
   />
 </StackNavigator>
+`;
+
+exports[`LocationManagement Navigator Renders the cameraButton header icon 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#ffffffff"
+      name="camera"
+      size={20}
+    />
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`LocationManagement Navigator Renders the scanButton header icon 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+  </View>
+</TouchableOpacity>
 `;

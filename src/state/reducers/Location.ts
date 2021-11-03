@@ -1,6 +1,7 @@
 import {
   Actions,
   HIDE_LOCATION_POPUP,
+  RESET_SECTION_NAME,
   SELECT_AISLE,
   SELECT_SECTION,
   SELECT_ZONE,
@@ -81,6 +82,8 @@ export const Location = (
         ...state,
         locationPopupVisible: false
       };
+    case RESET_SECTION_NAME:
+      return initialState;
     default:
       return state;
   }

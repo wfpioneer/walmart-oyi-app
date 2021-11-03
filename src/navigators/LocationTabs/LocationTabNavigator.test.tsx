@@ -2,9 +2,8 @@
 import React, { useEffect } from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationContainer, NavigationProp, RouteProp } from '@react-navigation/native';
-import { cleanup, render } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { LocationProps, LocationTabsNavigator, TabHeader } from './LocationTabNavigator';
 import {
   mockLocationDetails,
@@ -13,8 +12,6 @@ import {
 } from '../../mockData/locationDetails';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { strings } from '../../locales';
-import RootReducer from '../../state/reducers/RootReducer';
-import TestWrapper, { TestProvider } from '../../utils/TestHelper';
 import store from '../../state';
 
 let navigationProp: NavigationProp<any>;
@@ -43,7 +40,6 @@ const mockValidateSession = jest.fn().mockImplementation(() => new Promise<void>
 
 afterEach(() => {
   jest.clearAllMocks();
-  cleanup();
 });
 
 describe('Test Location Tabs', (): void => {

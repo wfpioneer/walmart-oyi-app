@@ -24,7 +24,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import { hideLocationPopup, resetLocations } from '../../state/actions/Location';
+import { hideLocationPopup, resetSectionName } from '../../state/actions/Location';
 
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
@@ -111,7 +111,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     validateSessionCall(navigation, route.name).then(() => {
       if (scannedEvent.value) {
         // Reset Location State on new getSectionDetails request to update header
-        dispatch(resetLocations());
+        dispatch(resetSectionName());
         dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
       }
     }).catch(() => {});
@@ -210,13 +210,6 @@ const LocationTabs = () : JSX.Element => {
       }
     }
   }, [locationPopupVisible]);
-
-  // Call Get Section Details
-  useEffect(() => {
-    validateSession(navigation, route.name).then(() => {
-      dispatch(getSectionDetails({ sectionId: locationName }));
-    }).catch(() => {});
-  }, [navigation]);
 
   return (
     <BottomSheetModalProvider>
