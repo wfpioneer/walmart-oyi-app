@@ -168,11 +168,13 @@ export default {
     CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
     CLEAR_SECTION: '清除此货架位置',
     REMOVE_SECTION: '移除此货架位置',
+    REMOVE_AREA: '移除此区域',
     REMOVE_ALL: 'Remove all', // TODO Mandarin Translation
     ADD: '增加',
     SCAN_LOCATION: '无效位置名，如A1-2',
     ADD_AREA: '添加一个新区域',
-    CREATED_ON: 'Created on', // TODO Mandarin Translation
+    ADD_AISLES: '增加通道',
+    CREATED_ON: '创建于',
     MORE: '更多',
     PRINT_SECTION: '打印所有已选货架标签',
     ADD_SECTIONS: '增加货架位置',

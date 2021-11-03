@@ -1,4 +1,10 @@
-import React, { EffectCallback, useEffect, useState } from 'react';
+import React, {
+  EffectCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 import {
   ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
@@ -9,6 +15,7 @@ import {
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 import styles from './AisleList.style';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
@@ -23,6 +30,9 @@ import { LocationType } from '../../models/LocationType';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
+import { hideLocationPopup } from '../../state/actions/Location';
+import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
+import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 
 const NoAisleMessage = () : JSX.Element => (
   <View style={styles.noAisles}>
@@ -35,6 +45,7 @@ interface AisleProps {
     zoneName: string,
     getAllAisles: AsyncState,
     isManualScanEnabled: boolean,
+    locationPopupVisible: boolean,
     dispatch: Dispatch<any>,
     apiStart: number,
     setApiStart: React.Dispatch<React.SetStateAction<number>>,
@@ -42,7 +53,6 @@ interface AisleProps {
     route: RouteProp<any, string>,
     useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
     trackEventCall: (eventName: string, params?: any) => void,
-    locationPopupVisible: boolean
 }
 
 export const AisleScreen = (props: AisleProps) : JSX.Element => {
@@ -51,14 +61,14 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
     zoneName,
     getAllAisles,
     isManualScanEnabled,
+    locationPopupVisible,
     navigation,
     apiStart,
     dispatch,
     setApiStart,
     route,
     useEffectHook,
-    trackEventCall,
-    locationPopupVisible
+    trackEventCall
   } = props;
 
   // calls to get all aisles
@@ -167,26 +177,71 @@ const AisleList = (): JSX.Element => {
   const getAllAisles = useTypedSelector(state => state.async.getAisle);
   const { id: zoneId, name: zoneName } = useTypedSelector(state => state.Location.selectedZone);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const location = useTypedSelector(state => state.Location);
+  const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
+  const userFeatures = useTypedSelector(state => state.User.features);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const route = useRoute();
 
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const snapPoints = useMemo(() => ['33%', '50%'], []);
+
+  useEffect(() => {
+    if (navigation.isFocused()) {
+      if (locationPopupVisible) {
+        bottomSheetModalRef.current?.present();
+      } else {
+        bottomSheetModalRef.current?.dismiss();
+      }
+    }
+  }, [locationPopupVisible]);
+
   return (
-    <AisleScreen
-      zoneId={zoneId}
-      zoneName={zoneName}
-      navigation={navigation}
-      dispatch={dispatch}
-      getAllAisles={getAllAisles}
-      isManualScanEnabled={isManualScanEnabled}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      route={route}
-      useEffectHook={useEffect}
-      trackEventCall={trackEvent}
-      locationPopupVisible={location.locationPopupVisible}
-    />
+    <BottomSheetModalProvider>
+      <TouchableOpacity
+        onPress={() => dispatch(hideLocationPopup())}
+        activeOpacity={1}
+        disabled={!locationPopupVisible}
+        style={styles.container}
+      >
+        <AisleScreen
+          zoneId={zoneId}
+          zoneName={zoneName}
+          navigation={navigation}
+          dispatch={dispatch}
+          getAllAisles={getAllAisles}
+          isManualScanEnabled={isManualScanEnabled}
+          apiStart={apiStart}
+          setApiStart={setApiStart}
+          route={route}
+          useEffectHook={useEffect}
+          trackEventCall={trackEvent}
+          locationPopupVisible={locationPopupVisible}
+        />
+      </TouchableOpacity>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={snapPoints}
+        index={0}
+        onDismiss={() => dispatch(hideLocationPopup())}
+        style={styles.bottomSheetModal}
+      >
+        <BottomSheetView>
+          <BottomSheetAddCard
+            onPress={() => {}}
+            text={strings('LOCATION.ADD_AISLES')}
+            isManagerOption={false}
+            isVisible={true}
+          />
+          <BottomSheetRemoveCard
+            onPress={() => {}}
+            text={strings('LOCATION.REMOVE_AREA')}
+            isVisible={userFeatures.includes('manager approval')}
+          />
+        </BottomSheetView>
+      </BottomSheetModal>
+    </BottomSheetModalProvider>
   );
 };
 

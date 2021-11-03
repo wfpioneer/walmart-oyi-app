@@ -108,7 +108,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(userFeatures.includes('manager approval'))}
+              {renderLocationKebabButton(true)}
             </View>
           )
         }}
