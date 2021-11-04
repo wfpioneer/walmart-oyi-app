@@ -178,9 +178,9 @@ export default {
     ADD_SECTIONS: '增加货架位置',
     CLEAR_AISLE: '清除通道',
     REMOVE_AISLE: '移除通道',
-    SCAN_PALLET: 'Scan Pallet ID', // TODO Mandarin Translation
-    PALLET_VALIDATE_ERROR: 'Pallet ID can only contain numbers', // TODO Mandarin Translation
-    PALLET_PLACEHOLDER: 'Enter or Scan Pallet ID' // TODO Mandarin Translation
+    SCAN_PALLET: '扫描卡板标签',
+    PALLET_VALIDATE_ERROR: '卡板号只能是数字',
+    PALLET_PLACEHOLDER: '输入或扫描卡板号'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

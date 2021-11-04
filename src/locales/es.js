@@ -178,9 +178,9 @@ export default {
     ADD_SECTIONS: 'Agregar secciones',
     CLEAR_AISLE: 'Limpiar pasillo',
     REMOVE_AISLE: 'Eliminar pasillo',
-    SCAN_PALLET: 'Scan Pallet ID', // TODO Spanish Translation
-    PALLET_VALIDATE_ERROR: 'Pallet ID can only contain numbers', // TODO Spanish Translation
-    PALLET_PLACEHOLDER: 'Enter or Scan Pallet ID' // TODO Spanish Translation
+    SCAN_PALLET: 'Escanea la etiqueta del Pallet',
+    PALLET_VALIDATE_ERROR: 'El Pallet ID solo puede contener números',
+    PALLET_PLACEHOLDER: 'Ingresa o escanea un pallet ID'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
