@@ -1,15 +1,26 @@
 import ItemDetails from '../models/ItemDetails';
 /* eslint-disable quote-props */
 
-const floorType = 'Sales Floor';
-const salesLastUpdateTs = '2020-07-15T08:02:17-05:00';
-const salesDay1 = '2020-07-08';
-const salesDay2 = '2020-07-09';
-const salesDay3 = '2020-07-10';
-const salesDay4 = '2020-07-11';
-const salesDay5 = '2020-07-12';
-const salesDay6 = '2020-07-13';
-const salesDay7 = '2020-07-14';
+enum LOCATION_TYPES {
+  SALES_FLOOR = 'Sales floor',
+  DISPLAY = 'Display',
+  POD = 'Pod',
+  END_CAP = 'End Cap',
+  RESERVE = 'Reserve'
+}
+
+enum SALES_DAYS {
+  DAY1 = '2020-07-08',
+  Day2 = '2020-07-09',
+  Day3 = '2020-07-10',
+  Day4 = '2020-07-11',
+  Day5 = '2020-07-12',
+  Day6 = '2020-07-13',
+  Day7 = '2020-07-14'
+}
+
+const SALES_LAST_UPDATE_TS = '2020-07-15T08:02:17-05:00';
+
 
 export default {
   '123': {
@@ -44,7 +55,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: floorType,
+          type: LOCATION_TYPES.SALES_FLOOR,
           typeNbr: 8
         },
         {
@@ -55,7 +66,7 @@ export default {
           aisleName: '1',
           sectionName: '2',
           locationName: 'A1-2',
-          type: 'End Cap',
+          type: LOCATION_TYPES.END_CAP,
           typeNbr: 12
         },
         {
@@ -66,7 +77,7 @@ export default {
           aisleName: '1',
           sectionName: '3',
           locationName: 'A1-3',
-          type: 'Pod',
+          type: LOCATION_TYPES.POD,
           typeNbr: 13
         },
         {
@@ -77,7 +88,7 @@ export default {
           aisleName: '1',
           sectionName: '4',
           locationName: 'A1-4',
-          type: 'Display',
+          type: LOCATION_TYPES.DISPLAY,
           typeNbr: 11
         }
       ],
@@ -90,7 +101,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Reserve',
+          type: LOCATION_TYPES.RESERVE,
           typeNbr: 7
         }
       ],
@@ -101,31 +112,31 @@ export default {
       dailyAvgSales: 15,
       daily: [
         {
-          day: salesDay1,
+          day: SALES_DAYS.DAY1,
           value: 100
         },
         {
-          day: salesDay2,
+          day: SALES_DAYS.DAY2,
           value: 0
         },
         {
-          day: salesDay3,
+          day: SALES_DAYS.DAY3,
           value: 10
         },
         {
-          day: salesDay4,
+          day: SALES_DAYS.DAY4,
           value: 10
         },
         {
-          day: salesDay5,
+          day: SALES_DAYS.DAY5,
           value: 42
         },
         {
-          day: salesDay6,
+          day: SALES_DAYS.DAY6,
           value: 5
         },
         {
-          day: salesDay7,
+          day: SALES_DAYS.DAY7,
           value: 1
         }
       ],
@@ -186,7 +197,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: floorType,
+          type: LOCATION_TYPES.SALES_FLOOR,
           typeNbr: 8
         },
         {
@@ -197,7 +208,7 @@ export default {
           aisleName: '1',
           sectionName: '2',
           locationName: 'A1-2',
-          type: 'End Cap',
+          type: LOCATION_TYPES.END_CAP,
           typeNbr: 12
         },
         {
@@ -208,7 +219,7 @@ export default {
           aisleName: '1',
           sectionName: '3',
           locationName: 'A1-3',
-          type: 'Pod',
+          type: LOCATION_TYPES.POD,
           typeNbr: 13
         },
         {
@@ -219,7 +230,7 @@ export default {
           aisleName: '1',
           sectionName: '4',
           locationName: 'A1-4',
-          type: 'Display',
+          type: LOCATION_TYPES.DISPLAY,
           typeNbr: 11
         }
       ],
@@ -232,7 +243,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Reserve',
+          type: LOCATION_TYPES.RESERVE,
           typeNbr: 7
         }
       ],
@@ -243,31 +254,31 @@ export default {
       dailyAvgSales: 15,
       daily: [
         {
-          day: salesDay1,
+          day: SALES_DAYS.DAY1,
           value: 10
         },
         {
-          day: salesDay2,
+          day: SALES_DAYS.DAY2,
           value: 0
         },
         {
-          day: salesDay3,
+          day: SALES_DAYS.DAY3,
           value: 10
         },
         {
-          day: salesDay4,
+          day: SALES_DAYS.DAY4,
           value: 10
         },
         {
-          day: salesDay5,
+          day: SALES_DAYS.DAY5,
           value: 42
         },
         {
-          day: salesDay6,
+          day: SALES_DAYS.DAY6,
           value: 5
         },
         {
-          day: salesDay7,
+          day: SALES_DAYS.DAY7,
           value: 1
         }
       ],
@@ -324,7 +335,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: floorType,
+          type: LOCATION_TYPES.SALES_FLOOR,
           typeNbr: 8
         },
         {
@@ -335,7 +346,7 @@ export default {
           aisleName: '1',
           sectionName: '2',
           locationName: 'A1-2',
-          type: 'End Cap',
+          type: LOCATION_TYPES.END_CAP,
           typeNbr: 12
         },
         {
@@ -346,7 +357,7 @@ export default {
           aisleName: '1',
           sectionName: '3',
           locationName: 'A1-3',
-          type: 'Pod',
+          type: LOCATION_TYPES.POD,
           typeNbr: 13
         },
         {
@@ -357,7 +368,7 @@ export default {
           aisleName: '1',
           sectionName: '4',
           locationName: 'A1-4',
-          type: 'Display',
+          type: LOCATION_TYPES.DISPLAY,
           typeNbr: 11
         }
       ],
@@ -370,7 +381,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Reserve',
+          type: LOCATION_TYPES.RESERVE,
           typeNbr: 7
         }
       ],
@@ -381,31 +392,31 @@ export default {
       dailyAvgSales: 15,
       daily: [
         {
-          day: salesDay1,
+          day: SALES_DAYS.DAY1,
           value: 10
         },
         {
-          day: salesDay2,
+          day: SALES_DAYS.DAY2,
           value: 0
         },
         {
-          day: salesDay3,
+          day: SALES_DAYS.DAY3,
           value: 10
         },
         {
-          day: salesDay4,
+          day: SALES_DAYS.DAY4,
           value: 10
         },
         {
-          day: salesDay5,
+          day: SALES_DAYS.DAY5,
           value: 42
         },
         {
-          day: salesDay6,
+          day: SALES_DAYS.DAY6,
           value: 5
         },
         {
-          day: salesDay7,
+          day: SALES_DAYS.DAY7,
           value: 1
         }
       ],
