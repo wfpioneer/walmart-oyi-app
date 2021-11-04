@@ -33,10 +33,11 @@ interface LocationProps {
 
 interface HeaderProps {
     headerText: string;
+    isEditEnabled: boolean;
 }
 
 export const Header = (props: HeaderProps): JSX.Element => {
-  const { headerText } = props;
+  const { headerText, isEditEnabled } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
@@ -47,7 +48,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
         <Text style={styles.tabHeaderText}>
           {headerText}
         </Text>
-        <Button
+        {isEditEnabled ? <Button
           type={3}
           title={strings('GENERICS.ADD')}
           titleColor={COLOR.MAIN_THEME_COLOR}
@@ -55,25 +56,38 @@ export const Header = (props: HeaderProps): JSX.Element => {
           titleFontWeight="bold"
           height={28}
           onPress={() => addNewLocation()}
-        />
+        /> : null}
+
       </View>
     </>
   );
 };
 
-const floorDetailsList = () => (
-  <>
-    <Header headerText={strings('LOCATION.ITEMS')} />
-    <SectionDetails />
-  </>
-);
+const floorDetailsList = () => {
+  const userFeatures = useTypedSelector(state => state.User.features);
+  return (
+    <>
+      <Header
+        headerText={strings('LOCATION.ITEMS')}
+        isEditEnabled={userFeatures.includes('location management edit')}
+      />
+      <SectionDetails/>
+    </>
+  )
+};
 
-const reserveDetailsList = () => (
-  <>
-    <Header headerText={strings('LOCATION.PALLETS')} />
-    <SectionDetails />
-  </>
-);
+const reserveDetailsList = () => {
+  const userFeatures = useTypedSelector(state => state.User.features);
+  return (
+    <>
+      <Header
+        headerText={strings('LOCATION.PALLETS')}
+        isEditEnabled={userFeatures.includes('location management edit')}
+      />
+      <SectionDetails/>
+    </>
+  )
+};
 
 export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   const {

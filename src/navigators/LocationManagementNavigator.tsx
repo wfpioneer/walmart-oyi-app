@@ -59,7 +59,9 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
         component={ZoneList}
         options={{
           headerTitle: strings('LOCATION.ZONES'),
-          headerRight: () => renderLocationKebabButton(userFeatures.includes('manager approval'))
+          headerRight: () => renderLocationKebabButton(
+            userFeatures.includes('manager approval')
+            && userFeatures.includes('location management edit'))
         }}
       />
       <Stack.Screen
@@ -81,7 +83,7 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
         component={LocationTabs}
         options={{
           headerTitle: strings('LOCATION.LOCATION_DETAILS'),
-          headerRight: () => renderLocationKebabButton(true)
+          headerRight: () => renderLocationKebabButton(userFeatures.includes('location management edit'))
         }}
       />
       <Stack.Screen

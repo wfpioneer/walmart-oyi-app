@@ -16,7 +16,7 @@ interface LocationItemCardProp {
   locationType: LocationType,
   locationName: string,
   locationDetails: string,
-  locationPopupVisible: boolean,
+  locationPopupVisible?: boolean,
   navigator: NavigationProp<any>,
   destinationScreen: LocationType,
   dispatch: Dispatch<any>,
