@@ -1,5 +1,16 @@
 import ItemDetails from '../models/ItemDetails';
 /* eslint-disable quote-props */
+
+const floorType = 'Sales Floor';
+const salesLastUpdateTs = '2020-07-15T08:02:17-05:00';
+const salesDay1 = '2020-07-08';
+const salesDay2 = '2020-07-09';
+const salesDay3 = '2020-07-10';
+const salesDay4 = '2020-07-11';
+const salesDay5 = '2020-07-12';
+const salesDay6 = '2020-07-13';
+const salesDay7 = '2020-07-14';
+
 export default {
   '123': {
     itemName: 'Test Item That is Really, Really Long (and has parenthesis)',
@@ -33,7 +44,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Sales Floor',
+          type: floorType,
           typeNbr: 8
         },
         {
@@ -86,35 +97,35 @@ export default {
       count: 5
     },
     sales: {
-      lastUpdateTs: '2020-07-15T08:02:17-05:00',
+      lastUpdateTs: salesLastUpdateTs,
       dailyAvgSales: 15,
       daily: [
         {
-          day: '2020-07-08',
+          day: salesDay1,
           value: 100
         },
         {
-          day: '2020-07-09',
+          day: salesDay2,
           value: 0
         },
         {
-          day: '2020-07-10',
+          day: salesDay3,
           value: 10
         },
         {
-          day: '2020-07-11',
+          day: salesDay4,
           value: 10
         },
         {
-          day: '2020-07-12',
+          day: salesDay5,
           value: 42
         },
         {
-          day: '2020-07-13',
+          day: salesDay6,
           value: 5
         },
         {
-          day: '2020-07-14',
+          day: salesDay7,
           value: 1
         }
       ],
@@ -175,7 +186,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Sales Floor',
+          type: floorType,
           typeNbr: 8
         },
         {
@@ -228,35 +239,35 @@ export default {
       count: 5
     },
     sales: {
-      lastUpdateTs: '2020-07-15T08:02:17-05:00',
+      lastUpdateTs: salesLastUpdateTs,
       dailyAvgSales: 15,
       daily: [
         {
-          day: '2020-07-08',
+          day: salesDay1,
           value: 10
         },
         {
-          day: '2020-07-09',
+          day: salesDay2,
           value: 0
         },
         {
-          day: '2020-07-10',
+          day: salesDay3,
           value: 10
         },
         {
-          day: '2020-07-11',
+          day: salesDay4,
           value: 10
         },
         {
-          day: '2020-07-12',
+          day: salesDay5,
           value: 42
         },
         {
-          day: '2020-07-13',
+          day: salesDay6,
           value: 5
         },
         {
-          day: '2020-07-14',
+          day: salesDay7,
           value: 1
         }
       ],
@@ -313,7 +324,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Sales Floor',
+          type: floorType,
           typeNbr: 8
         },
         {
@@ -366,35 +377,35 @@ export default {
       count: 5
     },
     sales: {
-      lastUpdateTs: '2020-07-15T08:02:17-05:00',
+      lastUpdateTs: salesLastUpdateTs,
       dailyAvgSales: 15,
       daily: [
         {
-          day: '2020-07-08',
+          day: salesDay1,
           value: 10
         },
         {
-          day: '2020-07-09',
+          day: salesDay2,
           value: 0
         },
         {
-          day: '2020-07-10',
+          day: salesDay3,
           value: 10
         },
         {
-          day: '2020-07-11',
+          day: salesDay4,
           value: 10
         },
         {
-          day: '2020-07-12',
+          day: salesDay5,
           value: 42
         },
         {
-          day: '2020-07-13',
+          day: salesDay6,
           value: 5
         },
         {
-          day: '2020-07-14',
+          day: salesDay7,
           value: 1
         }
       ],
