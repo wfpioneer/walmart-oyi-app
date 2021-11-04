@@ -108,7 +108,7 @@ export default {
       count: 5
     },
     sales: {
-      lastUpdateTs: salesLastUpdateTs,
+      lastUpdateTs: SALES_LAST_UPDATE_TS,
       dailyAvgSales: 15,
       daily: [
         {
@@ -250,7 +250,7 @@ export default {
       count: 5
     },
     sales: {
-      lastUpdateTs: salesLastUpdateTs,
+      lastUpdateTs: SALES_LAST_UPDATE_TS,
       dailyAvgSales: 15,
       daily: [
         {
@@ -388,7 +388,7 @@ export default {
       count: 5
     },
     sales: {
-      lastUpdateTs: salesLastUpdateTs,
+      lastUpdateTs: SALES_LAST_UPDATE_TS,
       dailyAvgSales: 15,
       daily: [
         {
