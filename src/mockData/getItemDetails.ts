@@ -2,7 +2,7 @@ import ItemDetails from '../models/ItemDetails';
 /* eslint-disable quote-props */
 
 enum LOCATION_TYPES {
-  SALES_FLOOR = 'Sales floor',
+  SALES_FLOOR = 'Sales Floor',
   DISPLAY = 'Display',
   POD = 'Pod',
   END_CAP = 'End Cap',
@@ -11,12 +11,12 @@ enum LOCATION_TYPES {
 
 enum SALES_DAYS {
   DAY1 = '2020-07-08',
-  Day2 = '2020-07-09',
-  Day3 = '2020-07-10',
-  Day4 = '2020-07-11',
-  Day5 = '2020-07-12',
-  Day6 = '2020-07-13',
-  Day7 = '2020-07-14'
+  DAY2 = '2020-07-09',
+  DAY3 = '2020-07-10',
+  DAY4 = '2020-07-11',
+  DAY5 = '2020-07-12',
+  DAY6 = '2020-07-13',
+  DAY7 = '2020-07-14'
 }
 
 const SALES_LAST_UPDATE_TS = '2020-07-15T08:02:17-05:00';
