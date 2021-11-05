@@ -49,13 +49,17 @@ export interface LocationProps {
 
 interface TabHeaderProps {
     headerText: string;
+    isReserve: boolean;
 }
 
 export const TabHeader = (props: TabHeaderProps): JSX.Element => {
-  const { headerText } = props;
+  const { headerText, isReserve } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
+  };
+  const addNewPallet = () => {
+    navigation.navigate('AddPallet');
   };
   return (
     <>
@@ -70,7 +74,7 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
           titleFontSize={12}
           titleFontWeight="bold"
           height={28}
-          onPress={() => addNewLocation()}
+          onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
         />
       </View>
     </>
@@ -79,14 +83,14 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
 
 const floorDetailsList = () => (
   <>
-    <TabHeader headerText={strings('LOCATION.ITEMS')} />
+    <TabHeader headerText={strings('LOCATION.ITEMS')} isReserve={false} />
     <SectionDetails />
   </>
 );
 
 const reserveDetailsList = () => (
   <>
-    <TabHeader headerText={strings('LOCATION.PALLETS')} />
+    <TabHeader headerText={strings('LOCATION.PALLETS')} isReserve={true} />
     <SectionDetails />
   </>
 );

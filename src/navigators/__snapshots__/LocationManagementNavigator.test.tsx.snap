@@ -89,6 +89,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="AddPallet"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
+      }
+    }
+  />
 </StackNavigator>
 `;
 
@@ -178,6 +187,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
         "headerBackTitleVisible": false,
         "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
         "headerTitleAlign": "left",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddPallet"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
       }
     }
   />
