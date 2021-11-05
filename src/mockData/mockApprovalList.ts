@@ -9,7 +9,11 @@ enum INITIATED_USER_ID {
   ASSOCIATE_EMPLOYEE = 'Associate Employee',
   ASSOCIATE_WORKER = 'Associate Worker',
 }
-const INITIATED_TIMESTAMP = '2021-03-27T00:00:00.000Z';
+
+enum INITIATED_TIMESTAMP {
+  DAY1 = '2021-03-27T00:00:00.000Z',
+  DAY2 = '2021-03-28T00:00:00.000Z'
+}
 
 export const mockApprovals: ApprovalListItem[] = [{
   imageUrl: undefined,
@@ -24,7 +28,7 @@ export const mockApprovals: ApprovalListItem[] = [{
   oldQuantity: 5,
   dollarChange: 150.50,
   initiatedUserId: INITIATED_USER_ID.ASSOCIATE_EMPLOYEE,
-  initiatedTimestamp: INITIATED_TIMESTAMP,
+  initiatedTimestamp: INITIATED_TIMESTAMP.DAY1,
   approvalStatus: approvalStatus.Pending,
   approvalRequestSource: approvalRequestSource.ItemDetails,
   isChecked: false,
@@ -42,7 +46,7 @@ export const mockApprovals: ApprovalListItem[] = [{
   oldQuantity: 30,
   dollarChange: 50.00,
   initiatedUserId: 'Associate Worker',
-  initiatedTimestamp: INITIATED_TIMESTAMP,
+  initiatedTimestamp: INITIATED_TIMESTAMP.DAY2,
   approvalStatus: approvalStatus.Pending,
   approvalRequestSource: approvalRequestSource.ItemDetails,
   isChecked: false,
@@ -60,7 +64,7 @@ export const mockApprovals: ApprovalListItem[] = [{
   oldQuantity: 30,
   dollarChange: 40.00,
   initiatedUserId: INITIATED_USER_ID.ASSOCIATE_WORKER,
-  initiatedTimestamp: INITIATED_TIMESTAMP,
+  initiatedTimestamp: INITIATED_TIMESTAMP.DAY2,
   approvalStatus: approvalStatus.Pending,
   approvalRequestSource: approvalRequestSource.ItemDetails,
   isChecked: false,
@@ -78,7 +82,7 @@ export const mockApprovals: ApprovalListItem[] = [{
   oldQuantity: 20,
   dollarChange: 80.00,
   initiatedUserId: INITIATED_USER_ID.ASSOCIATE_WORKER,
-  initiatedTimestamp: INITIATED_TIMESTAMP,
+  initiatedTimestamp: INITIATED_TIMESTAMP.DAY2,
   approvalStatus: approvalStatus.Pending,
   approvalRequestSource: approvalRequestSource.ItemDetails,
   isChecked: false,
@@ -98,7 +102,7 @@ export const mockSelectedApprovals: ApprovalListItem[] = [{
   oldQuantity: 5,
   dollarChange: 150.50,
   initiatedUserId: INITIATED_USER_ID.ASSOCIATE_EMPLOYEE,
-  initiatedTimestamp: INITIATED_TIMESTAMP,
+  initiatedTimestamp: INITIATED_TIMESTAMP.DAY1,
   approvalStatus: approvalStatus.Pending,
   approvalRequestSource: approvalRequestSource.ItemDetails,
   isChecked: true
@@ -115,7 +119,7 @@ export const mockSelectedApprovals: ApprovalListItem[] = [{
   oldQuantity: 30,
   dollarChange: 50.00,
   initiatedUserId: INITIATED_USER_ID.ASSOCIATE_WORKER,
-  initiatedTimestamp: INITIATED_TIMESTAMP,
+  initiatedTimestamp: INITIATED_TIMESTAMP.DAY1,
   approvalStatus: approvalStatus.Pending,
   approvalRequestSource: approvalRequestSource.ItemDetails,
   isChecked: true
@@ -132,7 +136,7 @@ export const mockSelectedApprovals: ApprovalListItem[] = [{
   oldQuantity: 30,
   dollarChange: 40.00,
   initiatedUserId: INITIATED_USER_ID.ASSOCIATE_WORKER,
-  initiatedTimestamp: INITIATED_TIMESTAMP,
+  initiatedTimestamp: INITIATED_TIMESTAMP.DAY2,
   approvalStatus: approvalStatus.Pending,
   approvalRequestSource: approvalRequestSource.ItemDetails,
   isChecked: true
@@ -149,7 +153,7 @@ export const mockSelectedApprovals: ApprovalListItem[] = [{
   oldQuantity: 20,
   dollarChange: 80.00,
   initiatedUserId: INITIATED_USER_ID.ASSOCIATE_WORKER,
-  initiatedTimestamp: INITIATED_TIMESTAMP,
+  initiatedTimestamp: INITIATED_TIMESTAMP.DAY2,
   approvalStatus: approvalStatus.Pending,
   approvalRequestSource: approvalRequestSource.ItemDetails,
   isChecked: true
