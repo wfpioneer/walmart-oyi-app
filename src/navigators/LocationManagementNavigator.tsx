@@ -5,6 +5,7 @@ import { Image, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
+import AddPallet from '../screens/AddPallet/AddPallet';
 import { hideLocationPopup, showLocationPopup } from '../state/actions/Location';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
@@ -94,6 +95,13 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false
+        }}
+      />
+      <Stack.Screen
+        name="AddPallet"
+        component={AddPallet}
+        options={{
+          headerTitle: strings('LOCATION.SCAN_PALLET')
         }}
       />
     </Stack.Navigator>

@@ -177,7 +177,10 @@ export default {
     PRINT_SECTION: 'Imprimir todas las etiquetas de la sección',
     ADD_SECTIONS: 'Agregar secciones',
     CLEAR_AISLE: 'Limpiar pasillo',
-    REMOVE_AISLE: 'Eliminar pasillo'
+    REMOVE_AISLE: 'Eliminar pasillo',
+    SCAN_PALLET: 'Escanea la etiqueta del Pallet',
+    PALLET_VALIDATE_ERROR: 'El Pallet ID solo puede contener números',
+    PALLET_PLACEHOLDER: 'Ingresa o escanea un pallet ID'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

@@ -177,7 +177,10 @@ export default {
     PRINT_SECTION: '打印所有已选货架标签',
     ADD_SECTIONS: '增加货架位置',
     CLEAR_AISLE: '清除通道',
-    REMOVE_AISLE: '移除通道'
+    REMOVE_AISLE: '移除通道',
+    SCAN_PALLET: '扫描卡板标签',
+    PALLET_VALIDATE_ERROR: '卡板号只能是数字',
+    PALLET_PLACEHOLDER: '输入或扫描卡板号'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

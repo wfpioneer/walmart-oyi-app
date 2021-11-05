@@ -71,7 +71,7 @@ describe('Test Location Tabs', () => {
   it('Renders items Header', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <Header headerText="ITEMS" />
+      <Header headerText="ITEMS" isReserve={false} />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -79,7 +79,7 @@ describe('Test Location Tabs', () => {
   it('Renders pallet Header', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <Header headerText="PALLETS" />
+      <Header headerText="PALLETS" isReserve={true} />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
