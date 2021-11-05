@@ -98,8 +98,12 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     if (!locationsApi.isWaiting && locationsApi.result) {
       const locDetails = (locationsApi.result && locationsApi.result.data);
       if (locDetails.location) {
-        if (locDetails.location.floor) dispatch(setFloorLocations(locDetails.location.floor));
-        if (locDetails.location.reserve) dispatch(setReserveLocations(locDetails.location.reserve));
+        if (locDetails.location.floor) {
+          dispatch(setFloorLocations(locDetails.location.floor));
+        }
+        if (locDetails.location.reserve) {
+          dispatch(setReserveLocations(locDetails.location.reserve));
+        }
       }
     }
   }, [locationsApi]);

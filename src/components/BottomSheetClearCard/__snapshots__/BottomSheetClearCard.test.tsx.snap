@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Clear aisle render tests renders the bottom sheet Clear aisle, non visible, non manager option 1`] = `null`;
+
+exports[`Clear aisle render tests renders the bottom sheet remove card, visible, manager option 1`] = `
+<BottomSheetBaseCard
+  image=""
+  onPress={[Function]}
+  text="Clear aisle"
+/>
+`;

@@ -167,11 +167,20 @@ export default {
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
     CLEAR_SECTION: 'Clear this section',
     REMOVE_SECTION: 'Remove this section',
+    REMOVE_AREA: 'Remove this area',
     REMOVE_ALL: 'Remove all',
     ADD: 'Add',
     ADD_AREA: 'Add an area',
+    ADD_AISLES: 'Add aisles',
     CREATED_ON: 'Created on',
-    MORE: 'More'
+    MORE: 'More',
+    PRINT_SECTION: 'Print all section location labels',
+    ADD_SECTIONS: 'Add sections',
+    CLEAR_AISLE: 'Clear aisle',
+    REMOVE_AISLE: 'Remove aisle',
+    SCAN_PALLET: 'Scan Pallet ID',
+    PALLET_VALIDATE_ERROR: 'Pallet ID can only contain numbers',
+    PALLET_PLACEHOLDER: 'Enter or Scan Pallet ID'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

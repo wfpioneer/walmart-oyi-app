@@ -167,11 +167,20 @@ export default {
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
     CLEAR_SECTION: '清除此货架位置',
     REMOVE_SECTION: '移除此货架位置',
+    REMOVE_AREA: '移除此区域',
     REMOVE_ALL: 'Remove all', // TODO Mandarin Translation
     ADD: '增加',
     ADD_AREA: '添加一个新区域',
-    CREATED_ON: 'Created on', // TODO Mandarin Translation
-    MORE: 'More' // TODO Mandarin Translation
+    ADD_AISLES: '增加通道',
+    CREATED_ON: '创建于',
+    MORE: '更多',
+    PRINT_SECTION: '打印所有已选货架标签',
+    ADD_SECTIONS: '增加货架位置',
+    CLEAR_AISLE: '清除通道',
+    REMOVE_AISLE: '移除通道',
+    SCAN_PALLET: '扫描卡板标签',
+    PALLET_VALIDATE_ERROR: '卡板号只能是数字',
+    PALLET_PLACEHOLDER: '输入或扫描卡板号'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

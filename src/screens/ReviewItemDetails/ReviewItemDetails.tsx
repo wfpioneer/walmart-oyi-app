@@ -37,6 +37,7 @@ import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
+const  GENERICS_ADD = 'GENERICS.ADD';
 export interface ItemDetailsScreenProps {
   scannedEvent: any; isManualScanEnabled: boolean;
   isWaiting: boolean; error: any; result: any;
@@ -175,7 +176,7 @@ export const renderAddPicklistButton = (props: (RenderProps & HandleProps), item
         <Text style={styles.picklistErrorText}>{strings('ITEM.ADDED_TO_PICKLIST_ERROR')}</Text>
         <Button
           type={3}
-          title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
+          title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
           titleColor={COLOR.MAIN_THEME_COLOR}
           titleFontSize={12}
           titleFontWeight="bold"
@@ -190,7 +191,7 @@ export const renderAddPicklistButton = (props: (RenderProps & HandleProps), item
     return (
       <Button
         type={3}
-        title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
+        title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
         titleColor={COLOR.MAIN_THEME_COLOR}
         titleFontSize={12}
         titleFontWeight="bold"
@@ -214,7 +215,7 @@ export const renderLocationComponent = (props: (RenderProps & HandleProps), item
           : (
             <Button
               type={3}
-              title={strings('GENERICS.ADD')}
+              title={strings(GENERICS_ADD)}
               titleColor={COLOR.MAIN_THEME_COLOR}
               titleFontSize={12}
               titleFontWeight="bold"
@@ -230,7 +231,7 @@ export const renderLocationComponent = (props: (RenderProps & HandleProps), item
           : (
             <Button
               type={3}
-              title={strings('GENERICS.ADD')}
+              title={strings(GENERICS_ADD)}
               titleColor={COLOR.MAIN_THEME_COLOR}
               titleFontSize={12}
               titleFontWeight="bold"
@@ -586,7 +587,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               iconName="map-marker-alt"
               title={`${strings('ITEM.LOCATION')}(${locationCount})`}
               topRightBtnTxt={locationCount && locationCount >= 1
-                ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD')}
+                ? strings('GENERICS.SEE_ALL') : strings(GENERICS_ADD)}
               topRightBtnAction={() => handleLocationAction(props, itemDetails)}
             >
               {renderLocationComponent(props, itemDetails)}

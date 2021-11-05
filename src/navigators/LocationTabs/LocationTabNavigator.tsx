@@ -34,13 +34,18 @@ interface LocationProps {
 interface HeaderProps {
     headerText: string;
     isEditEnabled: boolean;
+    isReserve: boolean;
 }
 
 export const Header = (props: HeaderProps): JSX.Element => {
   const { headerText, isEditEnabled } = props;
+  const { headerText, isReserve } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
+  };
+  const addNewPallet = () => {
+    navigation.navigate('AddPallet');
   };
   return (
     <>
@@ -55,6 +60,8 @@ export const Header = (props: HeaderProps): JSX.Element => {
           titleFontSize={12}
           titleFontWeight="bold"
           height={28}
+          onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
+        />
           onPress={() => addNewLocation()}
         /> : null}
 
@@ -75,6 +82,12 @@ const floorDetailsList = () => {
     </>
   )
 };
+const floorDetailsList = () => (
+  <>
+    <Header headerText={strings('LOCATION.ITEMS')} isReserve={false} />
+    <SectionDetails />
+  </>
+);
 
 const reserveDetailsList = () => {
   const userFeatures = useTypedSelector(state => state.User.features);
@@ -88,6 +101,12 @@ const reserveDetailsList = () => {
     </>
   )
 };
+const reserveDetailsList = () => (
+  <>
+    <Header headerText={strings('LOCATION.PALLETS')} isReserve={true} />
+    <SectionDetails />
+  </>
+);
 
 export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   const {

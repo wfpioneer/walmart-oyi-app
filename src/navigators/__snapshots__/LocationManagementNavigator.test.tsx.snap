@@ -27,6 +27,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="Aisles"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.AISLES\\" translation]",
       }
     }
@@ -36,6 +37,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="Sections"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
       }
     }
@@ -61,6 +63,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
         "headerTitleStyle": Object {
           "fontSize": 18,
         },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddPallet"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
       }
     }
   />
@@ -94,6 +105,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="Aisles"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.AISLES\\" translation]",
       }
     }
@@ -103,6 +115,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="Sections"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
       }
     }
@@ -128,6 +141,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
         "headerTitleStyle": Object {
           "fontSize": 18,
         },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddPallet"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
       }
     }
   />
