@@ -66,6 +66,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="AddPallet"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
+      }
+    }
+  />
 </StackNavigator>
 `;
 
@@ -132,6 +141,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
         "headerTitleStyle": Object {
           "fontSize": 18,
         },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddPallet"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
       }
     }
   />
