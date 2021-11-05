@@ -70,7 +70,7 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
         component={AisleList}
         options={{
           headerTitle: strings('LOCATION.AISLES'),
-          headerRight: () => renderLocationKebabButton(true)
+          headerRight: () => renderLocationKebabButton(userFeatures.includes('location management edit'))
         }}
       />
       <Stack.Screen
@@ -78,7 +78,7 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
         component={SectionList}
         options={{
           headerTitle: strings('LOCATION.SECTIONS'),
-          headerRight: () => renderLocationKebabButton(true)
+          headerRight: () => renderLocationKebabButton(userFeatures.includes('location management edit'))
         }}
       />
       <Stack.Screen
