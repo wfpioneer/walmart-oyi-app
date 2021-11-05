@@ -26,6 +26,8 @@ enum WORKLISTTYPE {
   NON_EXCEPTION = 'Non-Exception'
 }
 
+const COMPLETED_TS = '2020-07-15T08:02:17-05:00';
+
 export const mockWorkListToDo: WorklistItemI[] = [
   {
     worklistType: WORKLISTTYPE.NSFL,
@@ -116,7 +118,7 @@ export const mockWorkListComplete: WorklistItemI[] = [
     catgName: CATEGORY_NAME.FOODSERVICE,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
@@ -129,7 +131,7 @@ export const mockWorkListComplete: WorklistItemI[] = [
     catgName: CATEGORY_NAME.ELECTRONICS,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
@@ -142,7 +144,7 @@ export const mockWorkListComplete: WorklistItemI[] = [
     catgName: CATEGORY_NAME.FRESH_BAKERY,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
@@ -155,7 +157,7 @@ export const mockWorkListComplete: WorklistItemI[] = [
     catgName: CATEGORY_NAME.WINE,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
@@ -168,7 +170,7 @@ export const mockWorkListComplete: WorklistItemI[] = [
     catgName: CATEGORY_NAME.PHARMACY_RX,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
@@ -380,7 +382,7 @@ export const missingExceptionsWorklist: WorklistItemI[] = [
     catgName: CATEGORY_NAME.FOODSERVICE,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
@@ -393,7 +395,7 @@ export const missingExceptionsWorklist: WorklistItemI[] = [
     catgName: CATEGORY_NAME.ELECTRONICS,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
@@ -406,7 +408,7 @@ export const missingExceptionsWorklist: WorklistItemI[] = [
     catgName: CATEGORY_NAME.FRESH_BAKERY,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
