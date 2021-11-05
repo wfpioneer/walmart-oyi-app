@@ -23,8 +23,7 @@ enum WORKLISTTYPE {
   NO = 'NO',
   NS = 'NS',
   CATEGORY = 'CATEGORY',
-  Non_Exception = 'Non-Exception'
-
+  NON_EXCEPTION = 'Non-Exception'
 }
 
 export const mockWorkListToDo: WorklistItemI[] = [
@@ -373,7 +372,7 @@ export const missingCategoryNbrList = [{
 
 export const missingExceptionsWorklist: WorklistItemI[] = [
   {
-    worklistType: WORKLISTTYPE.Non_Exception,
+    worklistType: WORKLISTTYPE.NON_EXCEPTION,
     itemName: ITEM_NAME.TEST_ITEM,
     itemNbr: 1234567890,
     upcNbr: '000055559999',
@@ -386,7 +385,7 @@ export const missingExceptionsWorklist: WorklistItemI[] = [
     completed: true
   },
   {
-    worklistType: WORKLISTTYPE.Non_Exception,
+    worklistType: WORKLISTTYPE.NON_EXCEPTION,
     itemName: ITEM_NAME.ELECTRONIC_ITEM,
     itemNbr: 987654321,
     upcNbr: '777555333',
@@ -399,7 +398,7 @@ export const missingExceptionsWorklist: WorklistItemI[] = [
     completed: true
   },
   {
-    worklistType: WORKLISTTYPE.Non_Exception,
+    worklistType: WORKLISTTYPE.NON_EXCEPTION,
     itemName: ITEM_NAME.BAKERY_ITEM,
     itemNbr: 123789456,
     upcNbr: '111122223333',
@@ -412,7 +411,7 @@ export const missingExceptionsWorklist: WorklistItemI[] = [
     completed: true
   },
   {
-    worklistType: WORKLISTTYPE.Non_Exception,
+    worklistType: WORKLISTTYPE.NON_EXCEPTION,
     itemName: ITEM_NAME.PHARMACY_ITEM_1,
     itemNbr: 789123457,
     upcNbr: '667788889999',
