@@ -17,8 +17,10 @@ import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { RootState } from '../../state/reducers/RootReducer';
-import { CustomModalComponent } from '../Modal/Modal';
+import { CustomModalComponent, ModalCloseIcon } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
+import COLOR from '../../themes/Color';
+import IconButton from '../../components/buttons/IconButton';
 
 const mapDispatchToProps = {
   loginUser,
@@ -144,12 +146,16 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       setUserId(user.userId);
       this.props.loginUser({ ...user, siteId: user.siteId ?? 0 });
       trackEvent('user_sign_in');
-      if (user.siteId) {
-        this.props.getFluffyFeatures(user);
+      if (user.siteId && user.countryCode !== 'US') {
+        // this.props.getFluffyFeatures(user);
       }
     });
   }
 
+  /* TODO enter ClubNbr before entering countrycode. Have the form update the user object props.
+  If either clubnbr or countrycode are valid call fluffy to wrap it up
+  if neither are valid wait for both forms to be complete before calling fluffy
+  */
   render(): ReactNode {
     return (
       <View style={styles.container}>
@@ -163,10 +169,52 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
               const updatedUser = { ...this.props.User, siteId: clubNbr };
               this.props.loginUser(updatedUser);
               trackEvent('user_sign_in');
-              this.props.getFluffyFeatures(updatedUser);
+              if (this.props.User.countryCode !== 'US') {
+                this.props.getFluffyFeatures(updatedUser);
+              }
             }}
             onSignOut={() => this.signOutUser()}
           />
+        </CustomModalComponent>
+        <CustomModalComponent
+          isVisible={this.props.User.siteId !== 0 && this.props.User.countryCode === 'US' && userIsSignedIn(this.props.User)}
+          onClose={() => this.signOutUser()}
+          modalType="Form"
+        >
+          <View style={styles.closeContainer}>
+            <IconButton
+              icon={ModalCloseIcon}
+              type={Button.Type.NO_BORDER}
+              onPress={() => this.signOutUser()}
+              style={styles.closeButton}
+            />
+          </View>
+          <Text style={styles.titleText}>
+            Please select a country to sign into
+          </Text>
+          <View style={styles.buttonRow}>
+            <Button
+              title="MX"
+              onPress={() => {
+                const updatedUser = { ...this.props.User, countryCode: 'MX' };
+                this.props.loginUser(updatedUser);
+                this.props.getFluffyFeatures(updatedUser);
+              }}
+              type={Button.Type.SOLID_WHITE}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              style={styles.affirmButton}
+            />
+            <Button
+              title="CN"
+              onPress={() => {
+                const updatedUser = { ...this.props.User, countryCode: 'CN' };
+                this.props.loginUser(updatedUser);
+                this.props.getFluffyFeatures(updatedUser);
+              }}
+              type={Button.Type.PRIMARY}
+              style={styles.affirmButton}
+            />
+          </View>
         </CustomModalComponent>
         <View style={styles.buttonContainer}>
           <Button
