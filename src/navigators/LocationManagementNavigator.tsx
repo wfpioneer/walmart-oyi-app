@@ -62,7 +62,8 @@ export const LocationManagementNavigatorStack = (props: NavigationStackProps): J
           headerTitle: strings('LOCATION.ZONES'),
           headerRight: () => renderLocationKebabButton(
             userFeatures.includes('manager approval')
-            && userFeatures.includes('location management edit'))
+            && userFeatures.includes('location management edit')
+          )
         }}
       />
       <Stack.Screen

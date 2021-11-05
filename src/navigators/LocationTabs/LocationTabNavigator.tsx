@@ -38,7 +38,7 @@ interface HeaderProps {
 }
 
 export const Header = (props: HeaderProps): JSX.Element => {
-  const {headerText, isEditEnabled, isReserve} = props;
+  const { headerText, isEditEnabled, isReserve } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
@@ -52,15 +52,17 @@ export const Header = (props: HeaderProps): JSX.Element => {
         <Text style={styles.tabHeaderText}>
           {headerText}
         </Text>
-        {isEditEnabled ? <Button
-          type={3}
-          title={strings('GENERICS.ADD')}
-          titleColor={COLOR.MAIN_THEME_COLOR}
-          titleFontSize={12}
-          titleFontWeight="bold"
-          height={28}
-          onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
-        /> : null}
+        {isEditEnabled ? (
+          <Button
+            type={3}
+            title={strings('GENERICS.ADD')}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            titleFontSize={12}
+            titleFontWeight="bold"
+            height={28}
+            onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
+          />
+        ) : null}
       </View>
     </>
   );
@@ -75,9 +77,9 @@ const floorDetailsList = () => {
         isEditEnabled={userFeatures.includes('location management edit')}
         isReserve={false}
       />
-      <SectionDetails/>
+      <SectionDetails />
     </>
-  )
+  );
 };
 
 const reserveDetailsList = () => {
@@ -89,9 +91,9 @@ const reserveDetailsList = () => {
         isEditEnabled={userFeatures.includes('location management edit')}
         isReserve={true}
       />
-      <SectionDetails/>
+      <SectionDetails />
     </>
-  )
+  );
 };
 
 export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
