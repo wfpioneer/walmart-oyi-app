@@ -27,6 +27,9 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
+import { barcodeEmitter } from '../../utils/scannerUtils';
+import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 import { hideLocationPopup } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
@@ -41,6 +44,7 @@ interface AisleProps {
     zoneId: number,
     zoneName: string,
     getAllAisles: AsyncState,
+    isManualScanEnabled: boolean,
     locationPopupVisible: boolean,
     dispatch: Dispatch<any>,
     apiStart: number,
@@ -56,6 +60,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
     zoneId,
     zoneName,
     getAllAisles,
+    isManualScanEnabled,
     locationPopupVisible,
     navigation,
     apiStart,
@@ -74,6 +79,23 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
       dispatch(getAisle({ zoneId }));
     }).catch(() => {});
   }), [navigation]);
+
+  // scanned event listener
+  useEffectHook(() => {
+    const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused()) {
+        validateSession(navigation, route.name).then(() => {
+          trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
+          dispatch(setScannedEvent(scan));
+          dispatch(setManualScan(false));
+          navigation.navigate('SectionDetails');
+        });
+      }
+    });
+    return () => {
+      scanSubscription.remove();
+    };
+  }, []);
 
   useEffectHook(() => {
     // on api success
@@ -122,11 +144,11 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
 
   return (
     <View>
+      {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('LOCATION.ZONE')} ${zoneName}`}
         details={`${getAllAisles.result?.data.length || 0} ${strings('LOCATION.AISLES')}`}
       />
-
       <FlatList
         data={getAllAisles.result?.data || []}
         renderItem={({ item }) => (
@@ -153,8 +175,8 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
 const AisleList = (): JSX.Element => {
   const navigation = useNavigation();
   const getAllAisles = useTypedSelector(state => state.async.getAisle);
-  const zoneId = useTypedSelector(state => state.Location.selectedZone.id);
-  const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
+  const { id: zoneId, name: zoneName } = useTypedSelector(state => state.Location.selectedZone);
+  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
   const userFeatures = useTypedSelector(state => state.User.features);
   const [apiStart, setApiStart] = useState(0);
@@ -189,6 +211,7 @@ const AisleList = (): JSX.Element => {
           navigation={navigation}
           dispatch={dispatch}
           getAllAisles={getAllAisles}
+          isManualScanEnabled={isManualScanEnabled}
           apiStart={apiStart}
           setApiStart={setApiStart}
           route={route}

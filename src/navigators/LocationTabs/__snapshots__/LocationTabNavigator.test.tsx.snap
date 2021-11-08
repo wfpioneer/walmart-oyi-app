@@ -156,6 +156,116 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
 </React.Fragment>
 `;
 
+exports[`Test Location Tabs Renders Location header as Scanned Event Value when location name is "-" 1`] = `
+<React.Fragment>
+  <LocationManualScan
+    keyboardType="default"
+  />
+  <LocationHeader
+    details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    location="[missing \\"en.LOCATION.SECTION\\" translation] SCAN1-1"
+  />
+  <MaterialTopTabNavigator
+    tabBarOptions={
+      Object {
+        "activeTintColor": "#0071e9",
+        "inactiveTintColor": "#616161",
+        "indicatorStyle": Object {
+          "backgroundColor": "#0071e9",
+        },
+        "style": Object {
+          "backgroundColor": "#ffffffff",
+        },
+      }
+    }
+  >
+    <Screen
+      component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
+      name="FloorDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (2)",
+        }
+      }
+    />
+    <Screen
+      component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
+      name="ReserveDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (3)",
+        }
+      }
+    />
+  </MaterialTopTabNavigator>
+</React.Fragment>
+`;
+
+exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
+<React.Fragment>
+  <LocationManualScan
+    keyboardType="default"
+  />
+  <LocationHeader
+    details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
+  />
+  <MaterialTopTabNavigator
+    tabBarOptions={
+      Object {
+        "activeTintColor": "#0071e9",
+        "inactiveTintColor": "#616161",
+        "indicatorStyle": Object {
+          "backgroundColor": "#0071e9",
+        },
+        "style": Object {
+          "backgroundColor": "#ffffffff",
+        },
+      }
+    }
+  >
+    <Screen
+      component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
+      name="FloorDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (2)",
+        }
+      }
+    />
+    <Screen
+      component={[Function]}
+      listeners={
+        Object {
+          "tabPress": [Function],
+        }
+      }
+      name="ReserveDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (3)",
+        }
+      }
+    />
+  </MaterialTopTabNavigator>
+</React.Fragment>
+`;
+
 exports[`Test Location Tabs Renders items Header 1`] = `
 <React.Fragment>
   <View
@@ -178,7 +288,7 @@ exports[`Test Location Tabs Renders items Header 1`] = `
         }
       }
     >
-      ITEMS
+      [missing "en.LOCATION.ITEMS" translation]
     </Text>
     <Button
       backgroundColor="#0071e9"
@@ -219,7 +329,7 @@ exports[`Test Location Tabs Renders pallet Header 1`] = `
         }
       }
     >
-      PALLETS
+      [missing "en.LOCATION.PALLETS" translation]
     </Text>
     <Button
       backgroundColor="#0071e9"

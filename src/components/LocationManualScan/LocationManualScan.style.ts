@@ -3,7 +3,7 @@ import { COLOR } from '../../themes/Color';
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     marginBottom: 8,
     backgroundColor: COLOR.WHITE,
@@ -14,10 +14,21 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: COLOR.BLACK
   },
-  textInputRed: {
-    flex: 1,
-    paddingLeft: 10,
-    color: COLOR.RED
+  alertView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    marginBottom: 5,
+    backgroundColor: COLOR.GREY_100,
+    width: '95%'
+  },
+  errorText: {
+    fontSize: 12,
+    color: COLOR.RED_400,
+    paddingHorizontal: 5
+  },
+  textInputContainer: {
+    flexDirection: 'row'
   }
 });
 
