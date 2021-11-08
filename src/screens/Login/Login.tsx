@@ -60,6 +60,39 @@ export interface LoginScreenProps {
 }
 
 const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
+const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => void, onSubmitCN: () => void}) => {
+  const { onSignOut, onSubmitCN, onSubmitMX } = props;
+  return (
+    <>
+      <View style={styles.closeContainer}>
+        <IconButton
+          icon={ModalCloseIcon}
+          type={Button.Type.NO_BORDER}
+          onPress={() => onSignOut()}
+          style={styles.closeButton}
+        />
+      </View>
+      <Text style={styles.titleText}>
+        Please select a country to sign into
+      </Text>
+      <View style={styles.buttonRow}>
+        <Button
+          title="MX"
+          onPress={() => onSubmitMX()}
+          type={Button.Type.SOLID_WHITE}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          style={styles.affirmButton}
+        />
+        <Button
+          title="CN"
+          onPress={() => onSubmitCN()}
+          type={Button.Type.PRIMARY}
+          style={styles.affirmButton}
+        />
+      </View>
+    </>
+  );
+};
 
 // TODO convert to Functional Component
 export class LoginScreen extends React.PureComponent<LoginScreenProps> {
@@ -152,10 +185,6 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     });
   }
 
-  /* TODO enter ClubNbr before entering countrycode. Have the form update the user object props.
-  If either clubnbr or countrycode are valid call fluffy to wrap it up
-  if neither are valid wait for both forms to be complete before calling fluffy
-  */
   render(): ReactNode {
     return (
       <View style={styles.container}>
@@ -177,44 +206,27 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
           />
         </CustomModalComponent>
         <CustomModalComponent
-          isVisible={this.props.User.siteId !== 0 && this.props.User.countryCode === 'US' && userIsSignedIn(this.props.User)}
+          isVisible={
+            this.props.User.siteId !== 0
+            && this.props.User.countryCode === 'US'
+            && userIsSignedIn(this.props.User)
+          }
           onClose={() => this.signOutUser()}
           modalType="Form"
         >
-          <View style={styles.closeContainer}>
-            <IconButton
-              icon={ModalCloseIcon}
-              type={Button.Type.NO_BORDER}
-              onPress={() => this.signOutUser()}
-              style={styles.closeButton}
-            />
-          </View>
-          <Text style={styles.titleText}>
-            Please select a country to sign into
-          </Text>
-          <View style={styles.buttonRow}>
-            <Button
-              title="MX"
-              onPress={() => {
-                const updatedUser = { ...this.props.User, countryCode: 'MX' };
-                this.props.loginUser(updatedUser);
-                this.props.getFluffyFeatures(updatedUser);
-              }}
-              type={Button.Type.SOLID_WHITE}
-              titleColor={COLOR.MAIN_THEME_COLOR}
-              style={styles.affirmButton}
-            />
-            <Button
-              title="CN"
-              onPress={() => {
-                const updatedUser = { ...this.props.User, countryCode: 'CN' };
-                this.props.loginUser(updatedUser);
-                this.props.getFluffyFeatures(updatedUser);
-              }}
-              type={Button.Type.PRIMARY}
-              style={styles.affirmButton}
-            />
-          </View>
+          <SelectCountryCodeModal
+            onSignOut={() => this.signOutUser()}
+            onSubmitCN={() => {
+              const updatedUser = { ...this.props.User, countryCode: 'CN' };
+              this.props.loginUser(updatedUser);
+              this.props.getFluffyFeatures(updatedUser);
+            }}
+            onSubmitMX={() => {
+              const updatedUser = { ...this.props.User, countryCode: 'MX' };
+              this.props.loginUser(updatedUser);
+              this.props.getFluffyFeatures(updatedUser);
+            }}
+          />
         </CustomModalComponent>
         <View style={styles.buttonContainer}>
           <Button
