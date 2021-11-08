@@ -15,6 +15,7 @@ import {
  */
 
 const TIMEOUT = 10000;
+const NETWORK_ERROR = 'network error';
 
 class Request {
   private static instance?: Request;
@@ -97,15 +98,15 @@ class Request {
         if (!message.includes('timeout')) {
           clearTimeout(this.requestTimeoutId);
         }
-        if (!err.response && message.includes('network error')) {
+        if (!err.response && message.includes(NETWORK_ERROR)) {
           // The site can’t be reached, server IP address could not be found.
           console.warn('IP address could not be found');
         } else if (!err.response && message.includes('timeout')) {
           // Network request timeout
           console.warn('network request timeout');
-        } else if (message.includes('network error')) {
+        } else if (message.includes(NETWORK_ERROR)) {
           // Network error
-          console.warn('network error');
+          console.warn(NETWORK_ERROR);
         } else if (err.response.status === 500) {
           // Request failed with status code 500, Internal Server Error
         } else if (err.response.status === 415) {
