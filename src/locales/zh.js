@@ -165,11 +165,13 @@ export default {
     NO_ZONES_AVAILABLE: '无区域',
     NO_AISLES_AVAILABLE: '无通道',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
+    CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
     CLEAR_SECTION: '清除此货架位置',
     REMOVE_SECTION: '移除此货架位置',
     REMOVE_AREA: '移除此区域',
     REMOVE_ALL: 'Remove all', // TODO Mandarin Translation
     ADD: '增加',
+    SCAN_LOCATION: '无效位置名，如A1-2',
     ADD_AREA: '添加一个新区域',
     ADD_AISLES: '增加通道',
     CREATED_ON: '创建于',

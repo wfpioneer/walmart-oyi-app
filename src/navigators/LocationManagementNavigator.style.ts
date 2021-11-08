@@ -1,11 +1,22 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
+  headerContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-evenly'
+  },
   rightButton: {
     flex: 1,
-    width: 55,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingRight: 10
+  },
+  leftButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 10
   },
   image: {
     width: 25,
@@ -13,3 +24,5 @@ export default StyleSheet.create({
     marginRight: 10
   }
 });
+
+export default styles;

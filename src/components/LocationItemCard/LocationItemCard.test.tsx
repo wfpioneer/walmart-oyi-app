@@ -77,7 +77,7 @@ describe('Test Location Item Card', () => {
         dispatch={jest.fn()}
         locationDetails={`${mockSectionItem.itemCount} Items, ${mockSectionItem.palletCount} Pallets`}
         navigator={navigationProp}
-        destinationScreen={LocationType.LOCATION_DETAILS}
+        destinationScreen={LocationType.SECTION_DETAILS}
         locationPopupVisible={false}
       />
     );
