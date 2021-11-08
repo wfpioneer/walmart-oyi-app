@@ -165,6 +165,8 @@ export default {
     NO_ZONES_AVAILABLE: 'No Zones Available',
     NO_AISLES_AVAILABLE: 'No Aisles Available',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
+    CLEAR_ALL: 'Clear all',
+    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2',
     CLEAR_SECTION: 'Clear this section',
     REMOVE_SECTION: 'Remove this section',
     REMOVE_AREA: 'Remove this area',

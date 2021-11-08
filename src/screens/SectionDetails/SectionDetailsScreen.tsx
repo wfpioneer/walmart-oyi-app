@@ -18,31 +18,28 @@ import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
 import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
+import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
 import ReservePalletRow from '../../components/ReservePalletRow/ReservePalletRow';
 
 interface SectionDetailsProps {
-  zoneName: string;
-  aisleName: string;
-  sectionName: string;
   getSectionDetailsApi: AsyncState;
   dispatch: Dispatch<any>;
   route: RouteProp<any, string>;
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  scannedEvent: {type: string, value: string};
 }
 
 export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element => {
   const {
-    zoneName,
-    aisleName,
-    sectionName,
     getSectionDetailsApi,
     route,
     dispatch,
     navigation,
     trackEventCall,
-    useEffectHook
+    useEffectHook,
+    scannedEvent
   } = props;
 
   // Navigation Listener
@@ -52,6 +49,20 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
       dispatch({ type: GET_SECTION_DETAILS.RESET });
     });
   }, []);
+
+  // Get Section Details Api
+  useEffectHook(() => {
+    // on api success
+    if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
+      // Update Location State on Success
+      if (getSectionDetailsApi.result.status === 200) {
+        const { zone, aisle, section } = getSectionDetailsApi.result.data;
+        dispatch(selectZone(zone.id, zone.name));
+        dispatch(selectAisle(aisle.id, aisle.name));
+        dispatch(selectSection(section.id, section.name));
+      }
+    }
+  });
 
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
 
@@ -76,7 +87,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
           style={styles.errorButton}
           onPress={() => {
             trackEventCall('location_api_retry',);
-            dispatch(getSectionDetails({ sectionId: `${zoneName}${aisleName}-${sectionName}` }));
+            dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
           }}
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
@@ -99,25 +110,21 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
 };
 
 const SectionDetails = (): JSX.Element => {
-  const sectionName = useTypedSelector(state => state.Location.selectedSection.name);
-  const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
-  const aisleName = useTypedSelector(state => state.Location.selectedAisle.name);
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
+  const { scannedEvent } = useTypedSelector(state => state.Global);
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
   return (
     <>
       <SectionDetailsScreen
-        zoneName={zoneName}
-        aisleName={aisleName}
-        sectionName={sectionName}
         getSectionDetailsApi={getSectionDetailsApi}
         dispatch={dispatch}
         navigation={navigation}
         route={route}
         trackEventCall={trackEvent}
         useEffectHook={useEffect}
+        scannedEvent={scannedEvent}
       />
     </>
   );

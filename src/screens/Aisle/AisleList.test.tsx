@@ -10,6 +10,13 @@ let routeProp: Route<any>;
 const ZONE_ID = 1;
 const ZONE_NAME = 'Grocery';
 
+const defaultAsyncState: AsyncState = {
+  isWaiting: false,
+  value: null,
+  error: null,
+  result: null
+};
+
 describe('Test Aisle List', () => {
   it('Renders Aisle Screen with no-aisles-message when getAisles response is 204', () => {
     const renderer = ShallowRenderer.createRenderer();
@@ -29,6 +36,7 @@ describe('Test Aisle List', () => {
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllAisles={getAisleEmptyResponse}
+        isManualScanEnabled={false}
         apiStart={0}
         setApiStart={jest.fn()}
         navigation={navigationProp}
@@ -59,6 +67,7 @@ describe('Test Aisle List', () => {
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllAisles={getAisleSuccess}
+        isManualScanEnabled={false}
         apiStart={0}
         setApiStart={jest.fn()}
         navigation={navigationProp}
@@ -71,24 +80,16 @@ describe('Test Aisle List', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('Renders Aisle Screen with Empty Data', () => {
+  it('Renders Manual Scan Component when isManualScanEnabled is set to true', () => {
     const renderer = ShallowRenderer.createRenderer();
-    const getAisleResult = {
-      data: {},
-      status: 200
-    };
-    const getAisleSuccess: AsyncState = {
-      isWaiting: false,
-      value: null,
-      error: null,
-      result: getAisleResult
-    };
+
     renderer.render(
       <AisleScreen
         zoneId={ZONE_ID}
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
-        getAllAisles={getAisleSuccess}
+        getAllAisles={defaultAsyncState}
+        isManualScanEnabled={true}
         apiStart={0}
         setApiStart={jest.fn()}
         navigation={navigationProp}
@@ -126,6 +127,7 @@ describe('Test Get Aisle Api Response', () => {
           zoneName={ZONE_NAME}
           dispatch={jest.fn()}
           getAllAisles={apiErrorResult}
+          isManualScanEnabled={false}
           apiStart={0}
           setApiStart={jest.fn()}
           navigation={navigationProp}
@@ -152,6 +154,7 @@ describe('Test Get Aisle Api Response', () => {
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllAisles={getAisleTimeoutResult}
+        isManualScanEnabled={false}
         apiStart={0}
         setApiStart={jest.fn()}
         navigation={navigationProp}
@@ -178,6 +181,7 @@ describe('Test Get Aisle Api Response', () => {
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllAisles={getAisleResponseFailure}
+        isManualScanEnabled={false}
         apiStart={0}
         setApiStart={jest.fn()}
         navigation={navigationProp}
@@ -204,6 +208,7 @@ describe('Test Get Aisle Api Response', () => {
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllAisles={getAisleIsWaiting}
+        isManualScanEnabled={false}
         apiStart={0}
         setApiStart={jest.fn()}
         navigation={navigationProp}

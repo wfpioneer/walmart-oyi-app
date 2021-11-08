@@ -9,6 +9,7 @@ import styles from './LocationItemCard.style';
 import { COLOR } from '../../themes/Color';
 import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
 import { LocationType } from '../../models/LocationType';
+import { setScannedEvent } from '../../state/actions/Global';
 
 interface LocationItemCardProp {
   location: string
@@ -48,6 +49,9 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         dispatch(mapLocTypeToActionCreator[locationType](locationId, locationName));
+        if (locationType === LocationType.SECTION) {
+          dispatch(setScannedEvent({ type: 'sectionId', value: locationId.toString() }));
+        }
         navigator.navigate(destinationScreen);
       }}
       disabled={locationPopupVisible}

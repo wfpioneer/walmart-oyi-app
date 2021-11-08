@@ -3,6 +3,7 @@ export const SELECT_AISLE = 'LOCATION/SELECT_AISLE';
 export const SELECT_SECTION = 'LOCATION/SELECT_SECTION';
 export const SHOW_LOCATION_POPUP = 'LOCATION/SHOW_POPUP';
 export const HIDE_LOCATION_POPUP = 'LOCATION/HIDE_POPUP';
+export const RESET_SECTION_NAME = 'LOCATION/RESET_SECTION_NAME';
 
 export const selectZone = (id: number, name: string) => ({
   type: SELECT_ZONE,
@@ -36,9 +37,14 @@ export const hideLocationPopup = () => ({
   type: HIDE_LOCATION_POPUP
 } as const);
 
+export const resetSectionName = () => ({
+  type: RESET_SECTION_NAME
+} as const);
+
 export type Actions =
   ReturnType<typeof selectZone>
   | ReturnType<typeof selectAisle>
   | ReturnType<typeof selectSection>
   | ReturnType<typeof showLocationPopup>
-  | ReturnType<typeof hideLocationPopup>;
+  | ReturnType<typeof hideLocationPopup>
+  | ReturnType<typeof resetSectionName>

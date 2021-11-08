@@ -256,6 +256,39 @@ exports[`Test Get Section Api Response Renders loading indicator when waiting fo
 />
 `;
 
+exports[`Test Section List Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
+<View>
+  <LocationManualScan
+    keyboardType="default"
+  />
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
+    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
+  />
+  <FlatList
+    ListEmptyComponent={<NoSectionMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
 exports[`Test Section List Renders Section Screen with Data 1`] = `
 <View>
   <LocationHeader
@@ -297,36 +330,6 @@ exports[`Test Section List Renders Section Screen with Data 1`] = `
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
-    keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
-    renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
-  />
-</View>
-`;
-
-exports[`Test Section List Renders Section Screen with Empty Data 1`] = `
-<View>
-  <LocationHeader
-    details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
-    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
-  />
-  <FlatList
-    ListEmptyComponent={<NoSectionMessage />}
-    contentContainerStyle={
-      Object {
-        "paddingBottom": 100,
-      }
-    }
-    data={Object {}}
     disableVirtualization={false}
     horizontal={false}
     initialNumToRender={10}
