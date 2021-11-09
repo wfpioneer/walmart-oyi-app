@@ -14,7 +14,7 @@ describe('LocationManagement Navigator', () => {
       <LocationManagementNavigatorStack
         isManualScanEnabled={false}
         dispatch={jest.fn()}
-        userFeatures={[]}
+        userFeatures={['location management edit']}
         locationPopupVisible={false}
       />
     );
@@ -27,7 +27,7 @@ describe('LocationManagement Navigator', () => {
       <LocationManagementNavigatorStack
         isManualScanEnabled={false}
         dispatch={jest.fn()}
-        userFeatures={['manager approval']}
+        userFeatures={['manager approval', 'location management edit']}
         locationPopupVisible={false}
       />
     );

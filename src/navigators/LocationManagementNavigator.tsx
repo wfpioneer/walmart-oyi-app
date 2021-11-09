@@ -90,7 +90,10 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(userFeatures.includes('manager approval'))}
+              {renderLocationKebabButton(
+                userFeatures.includes('manager approval')
+                && userFeatures.includes('location management edit')
+              )}
             </View>
           )
         }}
@@ -109,7 +112,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(true)}
+              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
             </View>
           )
         }}
@@ -131,7 +134,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(true)}
+              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
             </View>
           )
         }}
@@ -148,12 +151,12 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         name="SectionDetails"
         component={LocationTabs}
         options={{
-          headerTitle: strings('LOCATION.LOCATION_DETAILS'), // TODO update translation names
+          headerTitle: strings('LOCATION.LOCATION_DETAILS'),
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(true)}
+              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
             </View>
           )
         }}
