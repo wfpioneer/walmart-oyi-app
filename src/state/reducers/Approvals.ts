@@ -26,23 +26,29 @@ const initialState: ApprovalState = {
   selectedItemQty: 0,
   isAllSelected: false
 };
-const isCheckedElsetotalItemQty = (isChecked: any, categoryObj: any) => (isChecked ? categoryObj.totalItemQty : 0);
+const isCheckedElsetotalItemQty = (isChecked: boolean, categoryObj: {
+  checkedItemQty: number;
+  totalItemQty: number;
+}) => (isChecked ? categoryObj.totalItemQty : 0);
 
-const isCheckedElsetoggledItems = (isChecked: any, toggledItems: any, categoryIndices: any) => (isChecked
+const isCheckedElsetoggledItems = (isChecked: boolean,
+  toggledItems: ApprovalCategory[], categoryIndices: number[]) => (isChecked
   ? toggledItems.length - categoryIndices.length : 0);
 
-const isSelectedItemQty = (isSelected: any, selectedItemQty: any) => (isSelected
+const isSelectedItemQty = (isSelected: boolean, selectedItemQty: number) => (isSelected
   ? selectedItemQty + 1 : selectedItemQty - 1);
 
-const isSelectedItem = (isSelectedItemQuantity: any) => (isSelectedItemQuantity ? 1 : -1);
+const isSelectedItem = (isSelectedItemQuantity: boolean) => (isSelectedItemQuantity ? 1 : -1);
 
-const isCheckedTotalCategoryQty = (checked: any, totalCategoryQty: any) => (checked ? totalCategoryQty : 0);
+const isCheckedTotalCategoryQty = (checked: boolean, totalCategoryQty: number) => (checked ? totalCategoryQty : 0);
 
-const isCheckedSelectedItemQty = (checked: any, selectedQtyToAdd: any,
-  currCheckedQty: any, totalCategoryQty: any) => (checked
+const isCheckedSelectedItemQty = (checked: boolean, selectedQtyToAdd: number,
+  currCheckedQty: number, totalCategoryQty: number) => (checked
   ? selectedQtyToAdd : currCheckedQty - totalCategoryQty);
 
-const isCheckedSelectedQtyToAdd = (updatedItemCat: any, index: any) => (!updatedItemCat[index].isChecked ? 1 : 0);
+const isCheckedSelectedQtyToAdd = (updatedItemCat: ApprovalCategory[],
+  index: number) => (!updatedItemCat[index].isChecked
+  ? 1 : 0);
 
 const filterCheckedListValiddate = (filterCheckedList: ApprovalCategory[], newApprovalList: ApprovalCategory[],
   newCategories: Category) => {

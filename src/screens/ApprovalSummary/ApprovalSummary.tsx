@@ -58,8 +58,8 @@ export const renderErrorModal = (setErrorModalVisible: React.Dispatch<React.SetS
     </View>
   </CustomModalComponent>
 );
-const validateQuantity = (item: any, checkedList: any, increaseItems: any,
-  decreaseItems: any, resolvedTime: any) => {
+const validateQuantity = (item: ApprovalCategory, checkedList: ApprovalCategory[], increaseItems: ItemQuantity,
+  decreaseItems: ItemQuantity, resolvedTime: string) => {
   if (item.isChecked && !item.categoryHeader) {
     checkedList.push({ ...item, resolvedTimestamp: resolvedTime });
     if (item.isChecked && !item.categoryHeader && (item.newQuantity > item.oldQuantity)) {
@@ -77,9 +77,9 @@ const validateQuantity = (item: any, checkedList: any, increaseItems: any,
     }
   }
 };
-const routeName = (route: any) => (route.name === 'ApproveSummary'
+const routeName = (route: RouteProp<any, string>) => (route.name === 'ApproveSummary'
   ? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED'));
-const routeActionType = (route: any) => (route.name === 'ApproveSummary'
+const routeActionType = (route: RouteProp<any, string>) => (route.name === 'ApproveSummary'
   ? approvalAction.Approve : approvalAction.Reject);
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {
   const {

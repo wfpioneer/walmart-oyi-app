@@ -68,7 +68,7 @@ export const validateLocation = (loc: string): boolean => {
   const locRegex = new RegExp(/^[\d]+$|[A-z][0-9]+-[0-9]+/);
   return loc.length > 0 && locRegex.test(loc);
 };
-const onValidateSessionCallResponse = (props: SelectLocationProps, currentLocation: any, routeSource: any) => {
+const onValidateSessionCallResponse = (props: SelectLocationProps, currentLocation: any, routeSource: string) => {
   const {
     locType, loc, setError, floorLocations, itemNbr, upcNbr, dispatch, trackEventCall
   } = props;
@@ -135,7 +135,7 @@ const onBarcodeEmitterResponse = (props: SelectLocationProps, scan: any) => {
     dispatch(setManualScan(false));
   }
 };
-const setLocation = (props: SelectLocationProps, routeSource: any, currentLocation: any) => {
+const setLocation = (props: SelectLocationProps, routeSource: string, currentLocation: any) => {
   const {
     setLocType, setLoc
   } = props;
@@ -158,7 +158,7 @@ const isRouteValid = (props: SelectLocationProps) => {
   } = props;
   return route.params ? route.params : {};
 };
-const getCurrentLocation = (locParams: any) => ({
+const getCurrentLocation = (locParams: LocParams) => ({
   locationName: locParams.currentLocation ? locParams.currentLocation.locationName : '',
   type: locParams.currentLocation ? locParams.currentLocation.typeNbr.toString() : '',
   locIndex: locParams.locIndex !== null && locParams.locIndex !== undefined ? locParams.locIndex : -1

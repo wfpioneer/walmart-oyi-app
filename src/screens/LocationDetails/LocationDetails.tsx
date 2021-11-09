@@ -52,7 +52,7 @@ interface LocationDetailsProps {
   locationsApi: AsyncState
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
-const getlocationsApiResult = (props: LocationDetailsProps, locationsApi: any) => {
+const getlocationsApiResult = (props: LocationDetailsProps, locationsApi: AsyncState) => {
   const {
     dispatch
   } = props;

@@ -42,28 +42,63 @@ const validateSameQty = (qty: number, newQty: number) => qty === newQty;
 const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
   <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
 );
-const validateExceptionType = (exceptionType: any) => exceptionType === 'NO'
-        || exceptionType === 'C' || exceptionType === 'NSFL';
+const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
+  || exceptionType === 'C' || exceptionType === 'NSFL';
 
-const validate = (isValidNbr: any, isSameQty: any) => !isValidNbr || isSameQty;
+const validate = (isValidNbr: boolean, isSameQty: boolean) => !isValidNbr || isSameQty;
 
-const renderView = (isValidNbr: any) => (isValidNbr ? styles.updateContainerValid
+const renderView = (isValidNbr: boolean) => (isValidNbr ? styles.updateContainerValid
   : styles.updateContainerInvalid);
 
-const isValidNbrErrorRequired = (isValidNbr: any) => (
+const isValidNbrErrorRequired = (isValidNbr: boolean) => (
   !isValidNbr && (
     <Text style={styles.invalidLabel}>
       {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
     </Text>
   )
 );
-const isErrorRequired = (error: any) => (
+const isErrorRequired = (error: string) => (
   error !== '' && (
     <Text style={styles.invalidLabel}>
       {error}
     </Text>
   )
 );
+const calculateDecreaseQty = (newOHQty: any, setIsValidNbr: React.Dispatch<React.SetStateAction<boolean>>,
+  setNewOHQty: React.Dispatch<React.SetStateAction<number>>,
+  setIsSameQty: React.Dispatch<React.SetStateAction<boolean>>, ohQty: number) => {
+  if (newOHQty > OH_MAX) {
+    setIsValidNbr(true);
+    setNewOHQty(OH_MAX);
+  } else if (newOHQty > OH_MIN) {
+    setIsValidNbr(true);
+    setNewOHQty((prevState => prevState - 1));
+  }
+  setIsSameQty(validateSameQty(ohQty, newOHQty - 1));
+};
+const assignHandleTextChange = (newQty: any, setIsValidNbr: React.Dispatch<React.SetStateAction<boolean>>,
+  setNewOHQty: React.Dispatch<React.SetStateAction<number>>,
+  setIsSameQty: React.Dispatch<React.SetStateAction<boolean>>, ohQty: number) => {
+  // eslint-disable-next-line no-restricted-globals
+  if (!isNaN(newQty)) {
+    setNewOHQty(newQty);
+    setIsValidNbr(validateQty(newQty));
+    setIsSameQty(validateSameQty(ohQty, newQty));
+  }
+};
+const calculateIncreaseQty = (newOHQty: any, setIsValidNbr: React.Dispatch<React.SetStateAction<boolean>>,
+  setNewOHQty: React.Dispatch<React.SetStateAction<number>>,
+  setIsSameQty: React.Dispatch<React.SetStateAction<boolean>>, ohQty: number) => {
+  if (newOHQty < OH_MIN) {
+    setIsValidNbr(true);
+    setNewOHQty(OH_MIN);
+  } else if (newOHQty < OH_MAX) {
+    setIsValidNbr(true);
+    setNewOHQty((prevState => prevState + 1));
+  }
+  setIsSameQty(validateSameQty(ohQty, newOHQty + 1));
+};
+
 const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   const { ohQty, setOhQtyModalVisible } = props;
   const [isValidNbr, setIsValidNbr] = useState(validateQty(ohQty));
@@ -78,25 +113,26 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   // Update Quantity API
   useEffect(() => {
     // on api success
-    dispatch(updatePendingOHQty(newOHQty));
-    // validateExceptionType(props.exceptionType, dispatch);
-    if (validateExceptionType(props.exceptionType)) {
-      dispatch(setActionCompleted());
+    if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result) {
+      dispatch(updatePendingOHQty(newOHQty));
+      if (validateExceptionType(props.exceptionType)) {
+        dispatch(setActionCompleted());
+      }
+      updateApiSubmitting(false);
+      return setOhQtyModalVisible(false);
     }
-    updateApiSubmitting(false);
-    return setOhQtyModalVisible(false);
-  }, [apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result]);
-
-  useEffect(() => {
-    updateApiSubmitting(false);
-    return updateError(strings('ITEM.OH_UPDATE_API_ERROR'));
-  }, [apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.error]);
-
-  useEffect(() => {
+    // on api failure
+    if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.error) {
+      updateApiSubmitting(false);
+      return updateError(strings('ITEM.OH_UPDATE_API_ERROR'));
+    }
     // on api submission
-    updateError('');
-    return updateApiSubmitting(true);
-  }, [!apiSubmitting && updateQuantityAPIStatus.isWaiting]);
+    if (!apiSubmitting && updateQuantityAPIStatus.isWaiting) {
+      updateError('');
+      return updateApiSubmitting(true);
+    }
+    return undefined;
+  }, [updateQuantityAPIStatus]);
 
   const handleSaveOHQty = () => {
     const {
@@ -120,34 +156,15 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
-    // eslint-disable-next-line no-restricted-globals
-    if (!isNaN(newQty)) {
-      setNewOHQty(newQty);
-      setIsValidNbr(validateQty(newQty));
-      setIsSameQty(validateSameQty(ohQty, newQty));
-    }
+    assignHandleTextChange(newQty, setIsValidNbr, setNewOHQty, setIsSameQty, ohQty);
   };
 
   const handleIncreaseQty = () => {
-    if (newOHQty < OH_MIN) {
-      setIsValidNbr(true);
-      setNewOHQty(OH_MIN);
-    } else if (newOHQty < OH_MAX) {
-      setIsValidNbr(true);
-      setNewOHQty((prevState => prevState + 1));
-    }
-    setIsSameQty(validateSameQty(ohQty, newOHQty + 1));
+    calculateIncreaseQty(newOHQty, setIsValidNbr, setNewOHQty, setIsSameQty, ohQty);
   };
 
   const handleDecreaseQty = () => {
-    if (newOHQty > OH_MAX) {
-      setIsValidNbr(true);
-      setNewOHQty(OH_MAX);
-    } else if (newOHQty > OH_MIN) {
-      setIsValidNbr(true);
-      setNewOHQty((prevState => prevState - 1));
-    }
-    setIsSameQty(validateSameQty(ohQty, newOHQty - 1));
+    calculateDecreaseQty(newOHQty, setIsValidNbr, setNewOHQty, setIsSameQty, ohQty);
   };
 
   return (

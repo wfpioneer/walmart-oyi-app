@@ -97,7 +97,7 @@ interface PriceSignProps {
   useLayoutHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
 
-const getPrinter = (selectedPrinter: any, selectedSignType: LaserPaper | PortablePaper) => (selectedPrinter.type === PrinterType.LASER
+const getPrinter = (selectedPrinter: Printer, selectedSignType: LaserPaper | PortablePaper) => (selectedPrinter.type === PrinterType.LASER
   // @ts-ignore
   ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType]);
 const isValid = (actionCompleted: any, exceptionType: any) => !actionCompleted && exceptionType === 'PO';
@@ -105,32 +105,21 @@ const isItemSizeExists = (printQueue: any, selectedSignType: LaserPaper | Portab
   // eslint-disable-next-line implicit-arrow-linebreak
   printQueue.some((printItem: PrintQueueItem) => printItem.itemNbr === itemNbr
     && printItem.paperSize === selectedSignType);
-const isPrinterAvailable = (selectedPrinter: any) => {
-  if (selectedPrinter.name === '') {
-    return {
-      type: PrinterType.LASER,
-      name: strings('PRINT.FRONT_DESK'),
-      desc: strings('GENERICS.DEFAULT'),
-      id: '000000000000'
-    };
-  }
-  return null;
-};
-const sethandleDecreaseQty = (signQty: any, setSignQty: any) => {
+const sethandleDecreaseQty = (signQty: number, setSignQty: React.Dispatch<React.SetStateAction<number>>) => {
   if (signQty > QTY_MAX) {
     setSignQty(QTY_MAX);
   } else if (signQty > QTY_MIN) {
     setSignQty(((prevState: number) => prevState - 1));
   }
 };
-const sethandleIncreaseQty = (signQty: any, setSignQty: any) => {
+const sethandleIncreaseQty = (signQty: number, setSignQty: React.Dispatch<React.SetStateAction<number>>) => {
   if (signQty < QTY_MIN) {
     setSignQty(QTY_MIN);
   } else if (signQty < QTY_MAX) {
     setSignQty(((prevState: number) => prevState + 1));
   }
 };
-const isErrorRequired = (error: any) => (
+const isErrorRequired = (error: { error: boolean; message: string }) => (
   error.error
     ? (
       <View style={styles.errorContainer}>
@@ -140,21 +129,35 @@ const isErrorRequired = (error: any) => (
     )
     : null
 );
-const validateQuantity = (isValidQty: any) => (
+const validateQuantity = (isValidQty: boolean) => (
   !isValidQty && (
     <Text style={styles.invalidLabel}>
       {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
     </Text>
   )
 );
-const isValidQtyStyle = (isValidQty: any) => (isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid);
-const isAddtoQueueDisabled = (isValidQty: any, selectedSignType: any) => !isValidQty || selectedSignType?.length === 0;
-const checkQuantity = (newQty: any, setIsValidQty: any, setSignQty: any) => {
+const isValidQtyStyle = (isValidQty: boolean) => (isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid);
+const isAddtoQueueDisabled = (isValidQty: boolean, selectedSignType: LaserPaper | PortablePaper) => (!isValidQty
+  || selectedSignType?.length === 0);
+const checkQuantity = (newQty: number, setIsValidQty: React.Dispatch<React.SetStateAction<boolean>>,
+  setSignQty: React.Dispatch<React.SetStateAction<number>>) => {
   if (!Number.isNaN(newQty)) {
     setSignQty(newQty);
     setIsValidQty(validateQty(newQty));
   }
 };
+const isValidDispatch = (props: PriceSignProps, actionCompleted: boolean,
+  exceptionType: string) => {
+  const {
+    dispatch
+  } = props;
+  if (isValid(actionCompleted, exceptionType)) {
+    dispatch(setActionCompleted());
+  }
+};
+const isResultHasData = (result: any) => (
+  (result && result.data)
+);
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
     scannedEvent, exceptionType, actionCompleted, result,
@@ -164,7 +167,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   } = props;
   const {
     itemName, itemNbr, upcNbr, categoryNbr
-  } = (result && result.data) || getMockItemDetails(scannedEvent.value);
+  } = isResultHasData(result) || getMockItemDetails(scannedEvent.value);
 
   useLayoutHook(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
@@ -190,23 +193,18 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
 
   // Print API
   useEffectHook(() => {
-    // on api submission
-    setError({ error: false, message: '' });
-  }, [printAPI.isWaiting]);
-
-  // Print API
-  useEffectHook(() => {
-    setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
-  }, [!printAPI.isWaiting && printAPI.error]);
-
-  // Print API
-  useEffectHook(() => {
     // on api success
-    if (isValid(actionCompleted, exceptionType)) {
-      dispatch(setActionCompleted());
+    if (!printAPI.isWaiting && printAPI.result) {
+      isValidDispatch(props, actionCompleted, exceptionType);
+      navigation.goBack();
     }
-    navigation.goBack();
-  }, [!printAPI.isWaiting && printAPI.result]);
+    if (!printAPI.isWaiting && printAPI.error) {
+      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+    }
+    if (printAPI.isWaiting) {
+      setError({ error: false, message: '' });
+    }
+  }, [printAPI]);
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
@@ -252,9 +250,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       };
       trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
       dispatch(addToPrintQueue(printQueueItem));
-      if (isValid(actionCompleted, exceptionType)) {
-        dispatch(setActionCompleted());
-      }
+      isValidDispatch(props, actionCompleted, exceptionType);
       navigation.goBack();
     }
   };

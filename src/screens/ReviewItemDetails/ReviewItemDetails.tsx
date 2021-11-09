@@ -331,11 +331,11 @@ export const renderBarcodeErrorModal = (
       </View>
     </CustomModalComponent>
   );
-const getFloorItemDetails = (itemDetails: any) => (itemDetails.location && itemDetails.location.floor
+const getFloorItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.floor
   ? itemDetails.location.floor : []);
-const getReserveItemDetails = (itemDetails: any) => (itemDetails.location && itemDetails.location.reserve
+const getReserveItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.reserve
   ? itemDetails.location.reserve : []);
-const isItemDetailsCompleted = (itemDetails: any) => (itemDetails.exceptionType ? itemDetails.completed : true);
+const isItemDetailsCompleted = (itemDetails: ItemDetails) => (itemDetails.exceptionType ? itemDetails.completed : true);
 
 const onValidateItemDetails = (props: ItemDetailsScreenProps, itemDetails: ItemDetails) => {
   const { dispatch } = props;
@@ -411,7 +411,7 @@ const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
 };
-const onIsWaiting = (isWaiting: any) => (
+const onIsWaiting = (isWaiting: boolean) => (
   isWaiting && (
     <ActivityIndicator
       animating={isWaiting}
@@ -422,7 +422,7 @@ const onIsWaiting = (isWaiting: any) => (
     />
   )
 );
-const onValidateCompleteItemApiResultHook = (props: ItemDetailsScreenProps, completeItemApi: any) => {
+const onValidateCompleteItemApiResultHook = (props: ItemDetailsScreenProps, completeItemApi: AsyncState) => {
   const { dispatch, navigation } = props;
   if (_.get(completeItemApi.result, 'status') === 204) {
     dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
@@ -431,7 +431,7 @@ const onValidateCompleteItemApiResultHook = (props: ItemDetailsScreenProps, comp
     navigation.goBack();
   }
 };
-const onValidateCompleteItemApiErrortHook = (props: ItemDetailsScreenProps, completeItemApi: any) => {
+const onValidateCompleteItemApiErrortHook = (props: ItemDetailsScreenProps, completeItemApi: AsyncState) => {
   const { dispatch } = props;
   if (completeItemApi.error === COMPLETE_API_409_ERROR) {
     dispatch(showInfoModal(strings(ITEM_SCAN_DOESNT_MATCH), strings(ITEM_SCAN_DOESNT_MATCH_DETAILS)));
@@ -447,8 +447,9 @@ const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales
   ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
   : undefined);
 
-const isError = (props: ItemDetailsScreenProps, error: any, errorModalVisible: any,
-  setErrorModalVisible: any, isManualScanEnabled: any, scannedEvent: any, userId: any) => {
+const isError = (props: ItemDetailsScreenProps, error: any, errorModalVisible: boolean,
+  setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  isManualScanEnabled: boolean, scannedEvent: any, userId: string) => {
   const { trackEventCall, dispatch } = props;
   if (error) {
     return (
@@ -473,11 +474,11 @@ const isError = (props: ItemDetailsScreenProps, error: any, errorModalVisible: a
   }
   return null;
 };
-const getexceptionType = (actionCompleted: any, itemDetails: any) => (!actionCompleted
+const getexceptionType = (actionCompleted: boolean, itemDetails: ItemDetails) => (!actionCompleted
   ? itemDetails.exceptionType : undefined);
-const gettopRightBtnTxt = (locationCount: any) => (locationCount && locationCount >= 1
+const gettopRightBtnTxt = (locationCount: number) => (locationCount && locationCount >= 1
   ? strings('GENERICS.SEE_ALL') : strings(GENERICS_ADD));
-const getPendingOnHandsQty = (props: ItemDetailsScreenProps, pendingOnHandsQty: any) => {
+const getPendingOnHandsQty = (props: ItemDetailsScreenProps, pendingOnHandsQty: number) => {
   const { userFeatures } = props;
   return (pendingOnHandsQty === -999 && userFeatures.includes('on hands change'));
 };
@@ -486,9 +487,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     scannedEvent, isManualScanEnabled,
     isWaiting, error, result,
     completeItemApi,
-    userId,
-    exceptionType, actionCompleted, pendingOnHandsQty,
-    floorLocations, reserveLocations,
+    userId, actionCompleted, pendingOnHandsQty,
     route,
     dispatch,
     navigation,
@@ -499,8 +498,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     trackEventCall,
     validateSessionCall,
     useEffectHook,
-    useFocusEffectHook,
-    userFeatures
+    useFocusEffectHook
   } = props;
   // Scanned Item Event Listener
   useEffectHook(() => {

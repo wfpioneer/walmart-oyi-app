@@ -163,13 +163,13 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
     </CustomModalComponent>
   );
 };
-const getUpdateApprovalApiResult = (props: ApprovalListProps, updateApprovalApi: any) => {
+const getUpdateApprovalApiResult = (props: ApprovalListProps, updateApprovalApi: AsyncState) => {
   const {
     dispatch
   } = props;
   return updateApprovalApi.result?.status === 207 && renderPopUp(updateApprovalApi, dispatch);
 };
-const getApprovalApiResult = (props: ApprovalListProps, getApprovalApi: any) => {
+const getApprovalApiResult = (props: ApprovalListProps, getApprovalApi: AsyncState) => {
   const {
     dispatch
   } = props;
