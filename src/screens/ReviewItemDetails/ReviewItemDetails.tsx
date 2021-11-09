@@ -40,6 +40,7 @@ const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
 const ITEM_SCAN_DOESNT_MATCH_DETAILS = 'ITEM.SCAN_DOESNT_MATCH_DETAILS';
 
+const GENERICS_ADD = 'GENERICS.ADD';
 export interface ItemDetailsScreenProps {
   scannedEvent: any; isManualScanEnabled: boolean;
   isWaiting: boolean; error: any; result: any;
@@ -178,7 +179,7 @@ export const renderAddPicklistButton = (props: (RenderProps & HandleProps), item
         <Text style={styles.picklistErrorText}>{strings('ITEM.ADDED_TO_PICKLIST_ERROR')}</Text>
         <Button
           type={3}
-          title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
+          title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
           titleColor={COLOR.MAIN_THEME_COLOR}
           titleFontSize={12}
           titleFontWeight="bold"
@@ -193,7 +194,7 @@ export const renderAddPicklistButton = (props: (RenderProps & HandleProps), item
     return (
       <Button
         type={3}
-        title={strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST')}
+        title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
         titleColor={COLOR.MAIN_THEME_COLOR}
         titleFontSize={12}
         titleFontWeight="bold"
@@ -217,7 +218,7 @@ export const renderLocationComponent = (props: (RenderProps & HandleProps), item
           : (
             <Button
               type={3}
-              title={strings('GENERICS.ADD')}
+              title={strings(GENERICS_ADD)}
               titleColor={COLOR.MAIN_THEME_COLOR}
               titleFontSize={12}
               titleFontWeight="bold"
@@ -233,7 +234,7 @@ export const renderLocationComponent = (props: (RenderProps & HandleProps), item
           : (
             <Button
               type={3}
-              title={strings('GENERICS.ADD')}
+              title={strings(GENERICS_ADD)}
               titleColor={COLOR.MAIN_THEME_COLOR}
               titleFontSize={12}
               titleFontWeight="bold"
@@ -475,7 +476,7 @@ const isError = (props: ItemDetailsScreenProps, error: any, errorModalVisible: a
 const getexceptionType = (actionCompleted: any, itemDetails: any) => (!actionCompleted
   ? itemDetails.exceptionType : undefined);
 const gettopRightBtnTxt = (locationCount: any) => (locationCount && locationCount >= 1
-  ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD'));
+  ? strings('GENERICS.SEE_ALL') : strings(GENERICS_ADD));
 const getPendingOnHandsQty = (props: ItemDetailsScreenProps, pendingOnHandsQty: any) => {
   const { userFeatures } = props;
   return (pendingOnHandsQty === -999 && userFeatures.includes('on hands change'));
@@ -613,58 +614,58 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         {onIsWaiting(isWaiting)}
         {!isWaiting && itemDetails
           && (
-            <View>
-              <ItemInfo
-                itemName={itemDetails.itemName}
-                itemNbr={itemDetails.itemNbr}
-                upcNbr={itemDetails.upcNbr}
-                status={itemDetails.status || ''}
-                category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
-                price={itemDetails.price}
-                exceptionType={getexceptionType(actionCompleted, itemDetails)}
-              />
-              <SFTCard
-                title={strings('ITEM.QUANTITY')}
-                iconName="pallet"
-                topRightBtnTxt={getPendingOnHandsQty(props, pendingOnHandsQty)
-                  ? strings('GENERICS.CHANGE') : undefined}
-                topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
-              >
-                {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
-              </SFTCard>
-              <SFTCard
-                iconProp={(
-                  <MaterialCommunityIcon
-                    name="label-variant"
-                    size={20}
-                    color={COLOR.GREY_700}
-                    style={styles.labelIcon}
-                  />
-                )}
-                title={strings('ITEM.REPLENISHMENT')}
-              >
-                <View style={styles.itemOnOrderView}>
-                  <Text>{strings('ITEM.ON_ORDER')}</Text>
-                  <Text>{itemDetails.replenishment.onOrder}</Text>
-                </View>
-              </SFTCard>
-              <SFTCard
-                iconName="map-marker-alt"
-                title={`${strings('ITEM.LOCATION')}(${locationCount})`}
-                topRightBtnTxt={gettopRightBtnTxt(locationCount)}
-                topRightBtnAction={() => handleLocationAction(props, itemDetails)}
-              >
-                {renderLocationComponent(props, itemDetails)}
-              </SFTCard>
-              <SFTCard
-                title={strings('ITEM.SALES_METRICS')}
-                subTitle={updatedSalesTS}
-                bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
-                bottomRightBtnAction={[toggleSalesGraphView]}
-              >
-                <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
-              </SFTCard>
-            </View>
+          <View>
+            <ItemInfo
+              itemName={itemDetails.itemName}
+              itemNbr={itemDetails.itemNbr}
+              upcNbr={itemDetails.upcNbr}
+              status={itemDetails.status || ''}
+              category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
+              price={itemDetails.price}
+              exceptionType={getexceptionType(actionCompleted, itemDetails)}
+            />
+            <SFTCard
+              title={strings('ITEM.QUANTITY')}
+              iconName="pallet"
+              topRightBtnTxt={getPendingOnHandsQty(props, pendingOnHandsQty)
+                ? strings('GENERICS.CHANGE') : undefined}
+              topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
+            >
+              {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
+            </SFTCard>
+            <SFTCard
+              iconProp={(
+                <MaterialCommunityIcon
+                  name="label-variant"
+                  size={20}
+                  color={COLOR.GREY_700}
+                  style={styles.labelIcon}
+                />
+              )}
+              title={strings('ITEM.REPLENISHMENT')}
+            >
+              <View style={styles.itemOnOrderView}>
+                <Text>{strings('ITEM.ON_ORDER')}</Text>
+                <Text>{itemDetails.replenishment.onOrder}</Text>
+              </View>
+            </SFTCard>
+            <SFTCard
+              iconName="map-marker-alt"
+              title={`${strings('ITEM.LOCATION')}(${locationCount})`}
+              topRightBtnTxt={gettopRightBtnTxt(locationCount)}
+              topRightBtnAction={() => handleLocationAction(props, itemDetails)}
+            >
+              {renderLocationComponent(props, itemDetails)}
+            </SFTCard>
+            <SFTCard
+              title={strings('ITEM.SALES_METRICS')}
+              subTitle={updatedSalesTS}
+              bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
+              bottomRightBtnAction={[toggleSalesGraphView]}
+            >
+              <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
+            </SFTCard>
+          </View>
           )}
       </ScrollView>
       {renderScanForNoActionButton(props, itemDetails)}

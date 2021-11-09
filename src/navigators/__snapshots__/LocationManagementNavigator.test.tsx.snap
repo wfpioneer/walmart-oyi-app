@@ -9,11 +9,19 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
+      "headerTitleStyle": Object {
+        "fontSize": 18,
+      },
     }
   }
 >
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "blur": [Function],
+      }
+    }
     name="Zones"
     options={
       Object {
@@ -24,6 +32,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
     name="Aisles"
     options={
       Object {
@@ -34,6 +48,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
     name="Sections"
     options={
       Object {
@@ -44,7 +64,13 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    name="LocationDetails"
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
+    name="SectionDetails"
     options={
       Object {
         "headerRight": [Function],
@@ -60,9 +86,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
         "headerBackTitleVisible": false,
         "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
-          "fontSize": 18,
-        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddPallet"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
       }
     }
   />
@@ -78,11 +110,19 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
+      "headerTitleStyle": Object {
+        "fontSize": 18,
+      },
     }
   }
 >
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "blur": [Function],
+      }
+    }
     name="Zones"
     options={
       Object {
@@ -93,6 +133,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
     name="Aisles"
     options={
       Object {
@@ -103,6 +149,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
     name="Sections"
     options={
       Object {
@@ -113,7 +165,13 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    name="LocationDetails"
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
+    name="SectionDetails"
     options={
       Object {
         "headerRight": [Function],
@@ -129,11 +187,65 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
         "headerBackTitleVisible": false,
         "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
-          "fontSize": 18,
-        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddPallet"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
       }
     }
   />
 </StackNavigator>
+`;
+
+exports[`LocationManagement Navigator Renders the cameraButton header icon 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#ffffffff"
+      name="camera"
+      size={20}
+    />
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`LocationManagement Navigator Renders the scanButton header icon 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+  </View>
+</TouchableOpacity>
 `;

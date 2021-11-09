@@ -25,11 +25,14 @@ const TabNavigator = (): JSX.Element => {
         tabBarIcon: ({ color, size }) => {
           if (route.name === strings('HOME.HOME')) {
             return <MaterialIcons name="home" size={size} color={color} />;
-          } if (route.name === strings('WORKLIST.WORKLIST')) {
+          }
+          if (route.name === strings('WORKLIST.WORKLIST')) {
             return <AntDesign name="profile" size={size} color={color} />;
-          } if (route.name === strings('GENERICS.TOOLS')) {
+          }
+          if (route.name === strings('GENERICS.TOOLS')) {
             return <MaterialIcons name="apps" size={size} color={color} />;
-          } if (route.name === strings('APPROVAL.APPROVALS')) {
+          }
+          if (route.name === strings('APPROVAL.APPROVALS')) {
             return <MaterialCommunityIcons name="clipboard-check" size={size} color={color} />;
           }
 

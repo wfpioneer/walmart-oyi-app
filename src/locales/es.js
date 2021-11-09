@@ -137,8 +137,8 @@ export default {
     TITLE: 'Todas las Ubicaciones',
     FLOOR: 'Ubicación en Piso',
     RESERVE: 'Ubicaciones en Bodega',
-    FLOORS: 'Floor', // TODO Spanish Translation
-    RESERVES: 'Reserve', // TODO Spanish Translation
+    FLOORS: 'Piso', // TODO Spanish Translation   DUPLICATE???
+    RESERVES: 'Bodega', // TODO Spanish Translation
     ADD_LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. \nPor favor inténtalo de nuevo.',
     EDIT_LOCATION_API_ERROR: 'Hubo en un error editando la ubicación. \nPor favor inténtalo de nuevo.',
     ADD_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
@@ -165,11 +165,13 @@ export default {
     NO_ZONES_AVAILABLE: 'No hay zonas disponibles',
     NO_AISLES_AVAILABLE: 'No hay pasillos disponibles',
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
+    CLEAR_ALL: 'Clear all', // TODO Spanish Translation
     CLEAR_SECTION: 'Limpiar sección',
     REMOVE_SECTION: 'Eliminar sección',
     REMOVE_AREA: 'Eliminar la zona',
     REMOVE_ALL: 'Remove all', // TODO Spanish Translation
     ADD: 'Agregar',
+    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2', // TODO Spanish Translation
     ADD_AREA: 'Añadir zona',
     ADD_AISLES: 'Agregar pasillos',
     CREATED_ON: 'Creado en',
@@ -177,7 +179,10 @@ export default {
     PRINT_SECTION: 'Imprimir todas las etiquetas de la sección',
     ADD_SECTIONS: 'Agregar secciones',
     CLEAR_AISLE: 'Limpiar pasillo',
-    REMOVE_AISLE: 'Eliminar pasillo'
+    REMOVE_AISLE: 'Eliminar pasillo',
+    SCAN_PALLET: 'Escanea la etiqueta del Pallet',
+    PALLET_VALIDATE_ERROR: 'El Pallet ID solo puede contener números',
+    PALLET_PLACEHOLDER: 'Ingresa o escanea un pallet ID'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

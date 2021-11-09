@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import COLOR from '../../../themes/Color';
 
+const FLEX_START = 'flex-start';
+
 export default StyleSheet.create({
   arrowView: {
     flex: 0.1
@@ -10,7 +12,7 @@ export default StyleSheet.create({
   },
   categoryFilterCard: {
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: FLEX_START,
     flexDirection: 'row',
     flex: 1,
     height: 40
@@ -28,7 +30,7 @@ export default StyleSheet.create({
   },
   headerBar: {
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: FLEX_START,
     backgroundColor: COLOR.MAIN_THEME_COLOR,
     flexDirection: 'row',
     height: 60,
@@ -37,8 +39,8 @@ export default StyleSheet.create({
   menuContainer: {
     backgroundColor: COLOR.WHITE,
     flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start'
+    alignItems: FLEX_START,
+    justifyContent: FLEX_START
   },
   menuCard: {
     alignItems: 'center',
