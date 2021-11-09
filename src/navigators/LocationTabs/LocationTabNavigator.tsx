@@ -49,11 +49,12 @@ export interface LocationProps {
 
 interface TabHeaderProps {
     headerText: string;
+    isEditEnabled: boolean;
     isReserve: boolean;
 }
 
 export const TabHeader = (props: TabHeaderProps): JSX.Element => {
-  const { headerText, isReserve } = props;
+  const { headerText, isEditEnabled, isReserve } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
@@ -67,33 +68,49 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
         <Text style={styles.tabHeaderText}>
           {headerText}
         </Text>
-        <Button
-          type={3}
-          title={strings('GENERICS.ADD')}
-          titleColor={COLOR.MAIN_THEME_COLOR}
-          titleFontSize={12}
-          titleFontWeight="bold"
-          height={28}
-          onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
-        />
+        {isEditEnabled ? (
+          <Button
+            type={3}
+            title={strings('GENERICS.ADD')}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            titleFontSize={12}
+            titleFontWeight="bold"
+            height={28}
+            onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
+          />
+        ) : null}
       </View>
     </>
   );
 };
 
-const floorDetailsList = () => (
-  <>
-    <TabHeader headerText={strings('LOCATION.ITEMS')} isReserve={false} />
-    <SectionDetails />
-  </>
-);
+const floorDetailsList = () => {
+  const userFeatures = useTypedSelector(state => state.User.features);
+  return (
+    <>
+      <TabHeader
+        headerText={strings('LOCATION.ITEMS')}
+        isEditEnabled={userFeatures.includes('location management edit')}
+        isReserve={false}
+      />
+      <SectionDetails />
+    </>
+  );
+};
 
-const reserveDetailsList = () => (
-  <>
-    <TabHeader headerText={strings('LOCATION.PALLETS')} isReserve={true} />
-    <SectionDetails />
-  </>
-);
+const reserveDetailsList = () => {
+  const userFeatures = useTypedSelector(state => state.User.features);
+  return (
+    <>
+      <TabHeader
+        headerText={strings('LOCATION.PALLETS')}
+        isEditEnabled={userFeatures.includes('location management edit')}
+        isReserve={true}
+      />
+      <SectionDetails />
+    </>
+  );
+};
 
 export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   const {
