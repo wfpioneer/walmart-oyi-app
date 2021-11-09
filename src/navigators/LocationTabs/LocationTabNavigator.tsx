@@ -53,10 +53,8 @@ interface TabHeaderProps {
     isReserve: boolean;
 }
 
-export const Header = (props: HeaderProps): JSX.Element => {
-  const { headerText, isEditEnabled, isReserve } = props;
 export const TabHeader = (props: TabHeaderProps): JSX.Element => {
-  const { headerText, isReserve } = props;
+  const { headerText, isEditEnabled, isReserve } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
@@ -86,17 +84,11 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
   );
 };
 
-const floorDetailsList = () => (
-  <>
-    <TabHeader headerText={strings('LOCATION.ITEMS')} isReserve={false} />
-    <SectionDetails />
-  </>
-);
 const floorDetailsList = () => {
   const userFeatures = useTypedSelector(state => state.User.features);
   return (
     <>
-      <Header
+      <TabHeader
         headerText={strings('LOCATION.ITEMS')}
         isEditEnabled={userFeatures.includes('location management edit')}
         isReserve={false}
@@ -106,17 +98,11 @@ const floorDetailsList = () => {
   );
 };
 
-const reserveDetailsList = () => (
-  <>
-    <TabHeader headerText={strings('LOCATION.PALLETS')} isReserve={true} />
-    <SectionDetails />
-  </>
-);
 const reserveDetailsList = () => {
   const userFeatures = useTypedSelector(state => state.User.features);
   return (
     <>
-      <Header
+      <TabHeader
         headerText={strings('LOCATION.PALLETS')}
         isEditEnabled={userFeatures.includes('location management edit')}
         isReserve={true}

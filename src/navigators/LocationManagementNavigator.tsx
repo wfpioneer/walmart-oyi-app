@@ -86,15 +86,14 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         component={ZoneList}
         options={{
           headerTitle: strings('LOCATION.ZONES'),
-          headerRight: () => renderLocationKebabButton(
-            userFeatures.includes('manager approval')
-            && userFeatures.includes('location management edit')
-          )
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(userFeatures.includes('manager approval'))}
+              {renderLocationKebabButton(
+                userFeatures.includes('manager approval')
+                && userFeatures.includes('location management edit')
+              )}
             </View>
           )
         }}
@@ -109,12 +108,11 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         component={AisleList}
         options={{
           headerTitle: strings('LOCATION.AISLES'),
-          headerRight: () => renderLocationKebabButton(userFeatures.includes('location management edit'))
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(true)}
+              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
             </View>
           )
         }}
@@ -132,12 +130,11 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         component={SectionList}
         options={{
           headerTitle: strings('LOCATION.SECTIONS'),
-          headerRight: () => renderLocationKebabButton(userFeatures.includes('location management edit'))
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(true)}
+              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
             </View>
           )
         }}
@@ -155,13 +152,11 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         component={LocationTabs}
         options={{
           headerTitle: strings('LOCATION.LOCATION_DETAILS'),
-          headerRight: () => renderLocationKebabButton(userFeatures.includes('location management edit'))
-          headerTitle: strings('LOCATION.LOCATION_DETAILS'), // TODO update translation names
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(true)}
+              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
             </View>
           )
         }}
