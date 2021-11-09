@@ -58,7 +58,29 @@ export const renderErrorModal = (setErrorModalVisible: React.Dispatch<React.SetS
     </View>
   </CustomModalComponent>
 );
-
+const validateQuantity = (item: any, checkedList: any, increaseItems: any,
+  decreaseItems: any, resolvedTime: any) => {
+  if (item.isChecked && !item.categoryHeader) {
+    checkedList.push({ ...item, resolvedTimestamp: resolvedTime });
+    if (item.isChecked && !item.categoryHeader && (item.newQuantity > item.oldQuantity)) {
+      checkedList.push({ ...item, resolvedTimestamp: resolvedTime });
+      increaseItems.oldQty += item.oldQuantity;
+      increaseItems.newQty += item.newQuantity;
+      increaseItems.dollarChange += item.dollarChange;
+      increaseItems.totalItems += 1;
+    } else {
+      checkedList.push({ ...item, resolvedTimestamp: resolvedTime });
+      decreaseItems.oldQty += item.oldQuantity;
+      decreaseItems.newQty += item.newQuantity;
+      decreaseItems.dollarChange += item.dollarChange;
+      decreaseItems.totalItems += 1;
+    }
+  }
+};
+const routeName = (route: any) => (route.name === 'ApproveSummary'
+  ? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED'));
+const routeActionType = (route: any) => (route.name === 'ApproveSummary'
+  ? approvalAction.Approve : approvalAction.Reject);
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {
   const {
     route, navigation, approvalList, approvalApi, dispatch, useEffectHook,
@@ -89,8 +111,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
       });
 
       if (approvalApi.result.status === 200) {
-        const successMessage = route.name === 'ApproveSummary'
-          ? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED');
+        const successMessage = routeName(route);
         dispatch(showSnackBar(successMessage, 3000));
         // Reset update approval api state to prevent navigator from looping back to the approvalist screen
         dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
@@ -117,25 +138,12 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
   }
 
   approvalList.forEach(item => {
-    if (item.isChecked && !item.categoryHeader) {
-      checkedList.push({ ...item, resolvedTimestamp: resolvedTime });
-      if (item.newQuantity > item.oldQuantity) {
-        increaseItems.oldQty += item.oldQuantity;
-        increaseItems.newQty += item.newQuantity;
-        increaseItems.dollarChange += item.dollarChange;
-        increaseItems.totalItems += 1;
-      } else {
-        decreaseItems.oldQty += item.oldQuantity;
-        decreaseItems.newQty += item.newQuantity;
-        decreaseItems.dollarChange += item.dollarChange;
-        decreaseItems.totalItems += 1;
-      }
-    }
+    validateQuantity(item, checkedList, increaseItems, decreaseItems, resolvedTime);
   });
 
   const handleApprovalSubmit = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      const actionType = route.name === 'ApproveSummary' ? approvalAction.Approve : approvalAction.Reject;
+      const actionType = routeActionType(route);
       dispatch(updateApprovalList({ approvalItems: checkedList, headers: { action: actionType } }));
     });
   };

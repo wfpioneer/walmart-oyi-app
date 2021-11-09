@@ -1,4 +1,5 @@
 import React, {
+  Dispatch,
   useEffect,
   useState
 } from 'react';
@@ -41,7 +42,28 @@ const validateSameQty = (qty: number, newQty: number) => qty === newQty;
 const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
   <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
 );
+const validateExceptionType = (exceptionType: any) => exceptionType === 'NO'
+        || exceptionType === 'C' || exceptionType === 'NSFL';
 
+const validate = (isValidNbr: any, isSameQty: any) => !isValidNbr || isSameQty;
+
+const renderView = (isValidNbr: any) => (isValidNbr ? styles.updateContainerValid
+  : styles.updateContainerInvalid);
+
+const isValidNbrErrorRequired = (isValidNbr: any) => (
+  !isValidNbr && (
+    <Text style={styles.invalidLabel}>
+      {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
+    </Text>
+  )
+);
+const isErrorRequired = (error: any) => (
+  error !== '' && (
+    <Text style={styles.invalidLabel}>
+      {error}
+    </Text>
+  )
+);
 const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   const { ohQty, setOhQtyModalVisible } = props;
   const [isValidNbr, setIsValidNbr] = useState(validateQty(ohQty));
@@ -50,36 +72,31 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   const [apiSubmitting, updateApiSubmitting] = useState(false);
   const [error, updateError] = useState('');
   const { result } = useTypedSelector(state => state.async.getItemDetails);
-  const itemDetails: ItemDetails = result && result.data;
+  const itemDetails: ItemDetails = result.data;
   const updateQuantityAPIStatus = useTypedSelector(state => state.async.updateOHQty);
   const dispatch = useDispatch();
-
   // Update Quantity API
   useEffect(() => {
     // on api success
-    if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result) {
-      dispatch(updatePendingOHQty(newOHQty));
-      if (props.exceptionType === 'NO' || props.exceptionType === 'C' || props.exceptionType === 'NSFL') {
-        dispatch(setActionCompleted());
-      }
-      updateApiSubmitting(false);
-      return setOhQtyModalVisible(false);
+    dispatch(updatePendingOHQty(newOHQty));
+    // validateExceptionType(props.exceptionType, dispatch);
+    if (validateExceptionType(props.exceptionType)) {
+      dispatch(setActionCompleted());
     }
+    updateApiSubmitting(false);
+    return setOhQtyModalVisible(false);
+  }, [apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result]);
 
-    // on api failure
-    if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.error) {
-      updateApiSubmitting(false);
-      return updateError(strings('ITEM.OH_UPDATE_API_ERROR'));
-    }
+  useEffect(() => {
+    updateApiSubmitting(false);
+    return updateError(strings('ITEM.OH_UPDATE_API_ERROR'));
+  }, [apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.error]);
 
+  useEffect(() => {
     // on api submission
-    if (!apiSubmitting && updateQuantityAPIStatus.isWaiting) {
-      updateError('');
-      return updateApiSubmitting(true);
-    }
-
-    return undefined;
-  }, [updateQuantityAPIStatus]);
+    updateError('');
+    return updateApiSubmitting(true);
+  }, [!apiSubmitting && updateQuantityAPIStatus.isWaiting]);
 
   const handleSaveOHQty = () => {
     const {
@@ -137,16 +154,14 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
     <>
       <View style={styles.closeContainer}>
         {!apiSubmitting && (
-        <IconButton
-          icon={ModalCloseIcon}
-          type={Button.Type.NO_BORDER}
-          onPress={() => { setOhQtyModalVisible(false); }}
-        />
+          <IconButton
+            icon={ModalCloseIcon}
+            type={Button.Type.NO_BORDER}
+            onPress={() => { setOhQtyModalVisible(false); }}
+          />
         )}
       </View>
-      <View style={[styles.updateContainer, isValidNbr ? styles.updateContainerValid
-        : styles.updateContainerInvalid]}
-      >
+      <View style={[styles.updateContainer, renderView(isValidNbr)]}>
         <IconButton
           icon={renderPlusMinusBtn('minus')}
           type={IconButton.Type.NO_BORDER}
@@ -169,19 +184,11 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
           onPress={handleIncreaseQty}
         />
       </View>
-      {!isValidNbr && (
-        <Text style={styles.invalidLabel}>
-          {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
-        </Text>
-      )}
+      {isValidNbrErrorRequired(isValidNbr)}
       <Text style={styles.ohLabel}>
         {`${strings('GENERICS.TOTAL')} ${strings('ITEM.ON_HANDS')}`}
       </Text>
-      {error !== '' && (
-      <Text style={styles.invalidLabel}>
-        {error}
-      </Text>
-      )}
+      {isErrorRequired(error)}
       {apiSubmitting ? (
         <ActivityIndicator
           hidesWhenStopped
@@ -195,7 +202,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
             style={styles.saveBtn}
             title="Save"
             type={Button.Type.PRIMARY}
-            disabled={(!isValidNbr || isSameQty)}
+            disabled={validate(isValidNbr, isSameQty)}
             onPress={handleSaveOHQty}
           />
         )}

@@ -48,7 +48,7 @@ interface SelectLocationProps {
   scanType: string;
   setScanType: React.Dispatch<React.SetStateAction<string>>;
   error: { error: boolean; message: string };
-  setError: React.Dispatch<React.SetStateAction<{error: boolean;message: string;}>>;
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string; }>>;
   addAPI: AsyncState;
   editAPI: AsyncState;
   floorLocations: Location[];
@@ -59,7 +59,7 @@ interface SelectLocationProps {
   route: Route<any>;
   navigation: NavigationProp<any>;
   dispatch: Dispatch<any>;
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
@@ -68,29 +68,116 @@ export const validateLocation = (loc: string): boolean => {
   const locRegex = new RegExp(/^[\d]+$|[A-z][0-9]+-[0-9]+/);
   return loc.length > 0 && locRegex.test(loc);
 };
-
+const onValidateSessionCallResponse = (props: SelectLocationProps, currentLocation: any, routeSource: any) => {
+  const {
+    locType, loc, setError, floorLocations, itemNbr, upcNbr, dispatch, trackEventCall
+  } = props;
+  if (routeSource === 'AddLocation') {
+    setError({ error: false, message: '' });
+    const sameLoc = floorLocations.find(
+      (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
+    );
+    if (!sameLoc) {
+      dispatch(addLocation({
+        headers: { itemNbr: itemNbr },
+        upc: upcNbr,
+        sectionId: loc,
+        locationTypeNbr: locType
+      }));
+    } else {
+      trackEventCall('select_location_add_duplicate');
+      setError({ error: true, message: strings('LOCATION.ADD_DUPLICATE_ERROR') });
+    }
+  } else if (routeSource === 'EditLocation') {
+    setError({ error: false, message: '' });
+    const sameLoc = floorLocations.find(
+      (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
+    );
+    if (!sameLoc) {
+      dispatch(editLocation({
+        headers: { itemNbr: itemNbr },
+        upc: upcNbr,
+        sectionId: currentLocation.locationName,
+        newSectionId: loc,
+        locationTypeNbr: currentLocation.type,
+        newLocationTypeNbr: locType
+      }));
+    } else {
+      trackEventCall('select_location_edit_duplicate');
+      setError({ error: true, message: strings('LOCATION.EDIT_DUPLICATE_ERROR') });
+    }
+  }
+};
+const onBarcodeEmitterResponse = (props: SelectLocationProps, scan: any) => {
+  const {
+    setLoc, setScanType, navigation, dispatch, trackEventCall
+  } = props;
+  trackEventCall('select_location_scan', { value: scan.value, type: scan.type });
+  if (navigation.isFocused()) {
+    const unProcessedScanValue: string = scan.value;
+    switch (scan.type) {
+      case 'manual': {
+        dispatch(setScannedEvent(scan));
+        setLoc(scan.value);
+        break;
+      }
+      case 'LABEL-TYPE-UPCA': {
+        const processedScanValue = parseInt(unProcessedScanValue.substring(1,
+          unProcessedScanValue.length - 1), 10).toString();
+        dispatch(setScannedEvent({ value: processedScanValue, type: scan.type }));
+        setScanType(scan.type);
+        setLoc(processedScanValue);
+        break;
+      }
+      default:
+        break;
+    }
+    dispatch(setManualScan(false));
+  }
+};
+const setLocation = (props: SelectLocationProps, routeSource: any, currentLocation: any) => {
+  const {
+    setLocType, setLoc
+  } = props;
+  if (routeSource === 'EditLocation') {
+    setLoc(currentLocation.locationName);
+    setLocType(currentLocation.type);
+  }
+};
+const isNotActionCompleted = (props: SelectLocationProps) => {
+  const {
+    actionCompleted, dispatch, exceptionType
+  } = props;
+  if (!actionCompleted && exceptionType === 'NSFL') {
+    dispatch(setActionCompleted());
+  }
+};
+const isRouteValid = (props: SelectLocationProps) => {
+  const {
+    route
+  } = props;
+  return route.params ? route.params : {};
+};
+const getCurrentLocation = (locParams: any) => ({
+  locationName: locParams.currentLocation ? locParams.currentLocation.locationName : '',
+  type: locParams.currentLocation ? locParams.currentLocation.typeNbr.toString() : '',
+  locIndex: locParams.locIndex !== null && locParams.locIndex !== undefined ? locParams.locIndex : -1
+});
 export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Element => {
   const {
-    locType, setLocType, inputLocation, setInputLocation, loc, setLoc,
+    locType, setLocType, inputLocation, setInputLocation, loc,
     scanType, setScanType, error, setError, addAPI, editAPI,
-    floorLocations, itemNbr, upcNbr, exceptionType, actionCompleted, route,
-    navigation, dispatch, useEffectHook, trackEventCall, validateSessionCall
+    itemNbr, route,
+    navigation, dispatch, useEffectHook, validateSessionCall
   } = props;
   const routeSource: string = route.name;
-  const locParams: LocParams = route.params ? route.params : {};
-  const currentLocation = {
-    locationName: locParams.currentLocation ? locParams.currentLocation.locationName : '',
-    type: locParams.currentLocation ? locParams.currentLocation.typeNbr.toString() : '',
-    locIndex: locParams.locIndex !== null && locParams.locIndex !== undefined ? locParams.locIndex : -1
-  };
+  const locParams: LocParams = isRouteValid(props);
+  const currentLocation = getCurrentLocation(locParams);
   let scannedSubscription: EmitterSubscription;
 
   // Set Location Name & Type when Editing location
   useEffectHook(() => {
-    if (routeSource === 'EditLocation') {
-      setLoc(currentLocation.locationName);
-      setLocType(currentLocation.type);
-    }
+    setLocation(props, routeSource, currentLocation);
   }, []);
 
   // Navigation Listener
@@ -105,28 +192,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      trackEventCall('select_location_scan', { value: scan.value, type: scan.type });
-      if (navigation.isFocused()) {
-        const unProcessedScanValue: string = scan.value;
-        switch (scan.type) {
-          case 'manual': {
-            dispatch(setScannedEvent(scan));
-            setLoc(scan.value);
-            break;
-          }
-          case 'LABEL-TYPE-UPCA': {
-            const processedScanValue = parseInt(unProcessedScanValue.substring(1,
-              unProcessedScanValue.length - 1), 10).toString();
-            dispatch(setScannedEvent({ value: processedScanValue, type: scan.type }));
-            setScanType(scan.type);
-            setLoc(processedScanValue);
-            break;
-          }
-          default:
-            break;
-        }
-        dispatch(setManualScan(false));
-      }
+      onBarcodeEmitterResponse(props, scan);
     });
     return () => {
       dispatch(resetScannedEvent());
@@ -136,91 +202,54 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
 
   // Add Location API
   useEffectHook(() => {
-    // on api success
-    if (!addAPI.isWaiting && addAPI.result) {
-      dispatch(addLocationToExisting(loc, parseInt(locType, 10), 'floor'));
-      if (!actionCompleted && exceptionType === 'NSFL') dispatch(setActionCompleted());
-      dispatch(getLocationDetails({ itemNbr: itemNbr }));
-      navigation.navigate('LocationDetails');
-    }
-
-    // on api failure
-    if (!addAPI.isWaiting && addAPI.error) {
-      setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
-    }
-
     // on api submission
-    if (addAPI.isWaiting) {
-      setError({ error: false, message: '' });
-    }
-  }, [addAPI]);
+    setError({ error: false, message: '' });
+  }, [addAPI.isWaiting]);
+
+  useEffectHook(() => {
+    // on api success
+    dispatch(addLocationToExisting(loc, parseInt(locType, 10), 'floor'));
+    isNotActionCompleted(props);
+    dispatch(getLocationDetails({ itemNbr: itemNbr }));
+    navigation.navigate('LocationDetails');
+  }, [!addAPI.isWaiting && addAPI.result]);
+
+  useEffectHook(() => {
+    // on api failure
+    setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
+  }, [!addAPI.isWaiting && addAPI.error]);
+
+  // Edit Location API
+  useEffectHook(() => {
+    // on api submission
+    setError({ error: false, message: '' });
+  }, [editAPI.isWaiting]);
 
   // Edit Location API
   useEffectHook(() => {
     // on api success
-    if (!editAPI.isWaiting && editAPI.result) {
-      dispatch(editExistingLocation(loc, parseInt(locType, 10), 'floor', currentLocation.locIndex));
-      dispatch(getLocationDetails({ itemNbr: itemNbr }));
-      navigation.navigate('LocationDetails');
-    }
+    dispatch(editExistingLocation(loc, parseInt(locType, 10), 'floor', currentLocation.locIndex));
+    dispatch(getLocationDetails({ itemNbr: itemNbr }));
+    navigation.navigate('LocationDetails');
+  }, [!editAPI.isWaiting && editAPI.result]);
 
+  useEffectHook(() => {
     // on api failure
-    if (!editAPI.isWaiting && editAPI.error) {
-      setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
-    }
-
-    // on api submission
-    if (editAPI.isWaiting) {
-      setError({ error: false, message: '' });
-    }
-  }, [editAPI]);
+    setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
+  }, [!editAPI.isWaiting && editAPI.error]);
 
   const modelOnSubmit = (value: string) => {
     validateSessionCall(navigation, routeSource).then(() => {
       manualScan(value);
       dispatch(setManualScan(false));
       setInputLocation(false);
-    }).catch(() => {});
+    }).catch(() => { });
   };
 
   const onSubmit = () => {
     validateSessionCall(navigation, routeSource).then(() => {
-      if (routeSource === 'AddLocation') {
-        setError({ error: false, message: '' });
-        const sameLoc = floorLocations.find(
-          (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
-        );
-        if (!sameLoc) {
-          dispatch(addLocation({
-            headers: { itemNbr: itemNbr },
-            upc: upcNbr,
-            sectionId: loc,
-            locationTypeNbr: locType
-          }));
-        } else {
-          trackEventCall('select_location_add_duplicate');
-          setError({ error: true, message: strings('LOCATION.ADD_DUPLICATE_ERROR') });
-        }
-      } else if (routeSource === 'EditLocation') {
-        setError({ error: false, message: '' });
-        const sameLoc = floorLocations.find(
-          (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
-        );
-        if (!sameLoc) {
-          dispatch(editLocation({
-            headers: { itemNbr: itemNbr },
-            upc: upcNbr,
-            sectionId: currentLocation.locationName,
-            newSectionId: loc,
-            locationTypeNbr: currentLocation.type,
-            newLocationTypeNbr: locType
-          }));
-        } else {
-          trackEventCall('select_location_edit_duplicate');
-          setError({ error: true, message: strings('LOCATION.EDIT_DUPLICATE_ERROR') });
-        }
-      }
-    }).catch(() => {});
+      onValidateSessionCallResponse(props, currentLocation, routeSource);
+    }).catch(() => { });
   };
 
   // Submits Add/Edit Location after Barcode Scan
@@ -236,7 +265,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
     validateSessionCall(navigation, routeSource).then(() => {
       setInputLocation(true);
       dispatch(setManualScan(true));
-    }).catch(() => {});
+    }).catch(() => { });
   };
 
   return (

@@ -68,8 +68,8 @@ class TextInputComponent extends React.Component {
     isShowError: false,
     errorLabel: '',
     placeholder: '',
-    onBlur: () => {},
-    onFocus: () => {},
+    onBlur: () => { },
+    onFocus: () => { },
     render: props => <NativeTextInput {...props} />
   };
 
@@ -109,7 +109,7 @@ class TextInputComponent extends React.Component {
     ) {
       // The label should be minimized if the text input is focused, or has text
       // In minimized mode, the label moves up and becomes small
-      if (value || focused || error) {
+      if (this.validate(value, focused, error)) {
         this.minmizeLabel();
       } else {
         this.restoreLabel();
@@ -250,6 +250,9 @@ class TextInputComponent extends React.Component {
     </View>
   ) : null);
 
+  validate = (value, focused, error) => value || focused || error
+
+  errorColor = error => (error ? COLOR.ORANGE_LOWLIGHT : COLOR.MAIN_THEME_COLOR)
   /**
    * Focuses the input.
    */
@@ -278,6 +281,19 @@ class TextInputComponent extends React.Component {
     return this.root && this.root.blur();
   }
 
+  hasActiveOutline = (focused, error) => focused || error;
+
+  outputRange = (value, error) => (value && error ? LABEL_WIGGLE_X_OFFSET : 0)
+
+  borderBottomWidth = hasActiveOutline => (hasActiveOutline ? 2 : 1)
+
+  opacity = (value, focused, labelLayoutMeasure) => {
+    if (value || focused) {
+      return (labelLayoutMeasure ? 1 : 0);
+    }
+    return 1;
+  }
+
   render() {
     const {
       disabled,
@@ -297,7 +313,7 @@ class TextInputComponent extends React.Component {
     } = this.state;
 
     // const fontFamily = 'Roboto-Regular';
-    const hasActiveOutline = focused || error;
+    const hasActiveOutline = this.hasActiveOutline(focused, error);
     const backgroundColor = COLOR.WHITE;
 
     let inputTextColor;
@@ -317,7 +333,7 @@ class TextInputComponent extends React.Component {
       outlineColor = COLOR.MODERATE_BLACK;
     } else {
       inputTextColor = COLOR.GREY_900;
-      activeColor = error ? COLOR.ORANGE_LOWLIGHT : COLOR.MAIN_THEME_COLOR;
+      activeColor = this.errorColor(error);
       placeholderColor = COLOR.MODERATE_BLACK;
       outlineColor = COLOR.MODERATE_BLACK;
     }
@@ -334,7 +350,7 @@ class TextInputComponent extends React.Component {
           // Wiggle the label when there's an error
           translateX: this.state.error.interpolate({
             inputRange: [0, 0.5, 1],
-            outputRange: [0, value && error ? LABEL_WIGGLE_X_OFFSET : 0, 0]
+            outputRange: [0, this.outputRange(value, error), 0]
           })
         },
         {
@@ -360,8 +376,8 @@ class TextInputComponent extends React.Component {
             inputRange: [0, 1],
             outputRange: [
               baseLabelTranslateX
-                - labelHalfWidth / LABEL_PADDING_HORIZONTAL
-                - RANDOM_VALUE_TO_CENTER_LABEL,
+              - labelHalfWidth / LABEL_PADDING_HORIZONTAL
+              - RANDOM_VALUE_TO_CENTER_LABEL,
               0
             ]
           })
@@ -381,7 +397,7 @@ class TextInputComponent extends React.Component {
               styles.outline,
               {
                 borderRadius: 4,
-                borderBottomWidth: hasActiveOutline ? 2 : 1,
+                borderBottomWidth: this.borderBottomWidth(hasActiveOutline),
                 borderBottomColor: hasActiveOutline
                   ? activeColor
                   : outlineColor
@@ -434,7 +450,7 @@ class TextInputComponent extends React.Component {
                   opacity:
                     // Hide the label in minimized state until we measure it's width
                     // eslint-disable-next-line no-nested-ternary
-                    value || focused ? (labelLayout.measured ? 1 : 0) : 1
+                    this.opacityValue(value, focused, labelLayout.measured)
                 }
               ]}
             >

@@ -37,6 +37,9 @@ import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
+const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
+const ITEM_SCAN_DOESNT_MATCH_DETAILS = 'ITEM.SCAN_DOESNT_MATCH_DETAILS';
+
 export interface ItemDetailsScreenProps {
   scannedEvent: any; isManualScanEnabled: boolean;
   isWaiting: boolean; error: any; result: any;
@@ -55,12 +58,12 @@ export interface ItemDetailsScreenProps {
   errorModalVisible: boolean; setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
   userFeatures: string[];
 }
 
-export interface HandleProps{
+export interface HandleProps {
   validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
   trackEventCall: (eventName: string, params?: any) => void;
   navigation: NavigationProp<any>;
@@ -123,7 +126,7 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
   const salesFloorQty = cloudQty === undefined
     ? onHandsQty - (backroomQty + claimsOnHandQty + consolidatedOnHandQty)
     : onHandsQty
-        - (backroomQty + claimsOnHandQty + consolidatedOnHandQty + cloudQty);
+    - (backroomQty + claimsOnHandQty + consolidatedOnHandQty + cloudQty);
 
   const onHandsRow: ItemDetailsListRow = {
     label: strings('ITEM.ON_HANDS'),
@@ -308,26 +311,175 @@ export const renderScanForNoActionButton = (
 export const renderBarcodeErrorModal = (
   isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => (
-  <CustomModalComponent
-    isVisible={isVisible}
-    modalType="Error"
-    onClose={() => setIsVisible(false)}
-  >
-    <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-    <Text style={styles.errorText}>
-      {strings('GENERICS.BARCODE_SCAN_ERROR')}
-    </Text>
-    <View style={styles.buttonContainer}>
-      <Button
-        style={styles.dismissButton}
-        title={strings('GENERICS.OK')}
-        backgroundColor={COLOR.TRACKER_RED}
-        onPress={() => setIsVisible(false)}
-      />
-    </View>
-  </CustomModalComponent>
-);
+    <CustomModalComponent
+      isVisible={isVisible}
+      modalType="Error"
+      onClose={() => setIsVisible(false)}
+    >
+      <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+      <Text style={styles.errorText}>
+        {strings('GENERICS.BARCODE_SCAN_ERROR')}
+      </Text>
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.dismissButton}
+          title={strings('GENERICS.OK')}
+          backgroundColor={COLOR.TRACKER_RED}
+          onPress={() => setIsVisible(false)}
+        />
+      </View>
+    </CustomModalComponent>
+  );
+const getFloorItemDetails = (itemDetails: any) => (itemDetails.location && itemDetails.location.floor
+  ? itemDetails.location.floor : []);
+const getReserveItemDetails = (itemDetails: any) => (itemDetails.location && itemDetails.location.reserve
+  ? itemDetails.location.reserve : []);
+const isItemDetailsCompleted = (itemDetails: any) => (itemDetails.exceptionType ? itemDetails.completed : true);
 
+const onValidateItemDetails = (props: ItemDetailsScreenProps, itemDetails: ItemDetails) => {
+  const { dispatch } = props;
+  if (itemDetails) {
+    dispatch(setupScreen(
+      itemDetails.itemNbr,
+      itemDetails.upcNbr,
+      getFloorItemDetails(itemDetails),
+      getReserveItemDetails(itemDetails),
+      itemDetails.exceptionType,
+      itemDetails.pendingOnHandsQty,
+      isItemDetailsCompleted(itemDetails)
+    ));
+  }
+};
+const callBackbarcodeEmitter = (props: ItemDetailsScreenProps, scan: any, itemDetails: ItemDetails) => {
+  const {
+    userId,
+    actionCompleted,
+    route,
+    dispatch,
+    navigation,
+    setErrorModalVisible,
+    trackEventCall,
+    validateSessionCall
+  } = props;
+  if (navigation.isFocused()) {
+    validateSessionCall(navigation, route.name).then(() => {
+      trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
+      if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
+        if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
+          dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
+          dispatch(setManualScan(false));
+        } else {
+          dispatch(setScannedEvent(scan));
+        }
+      } else {
+        setErrorModalVisible(true);
+      }
+    }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+  }
+};
+const onValidateBackPress = (props: ItemDetailsScreenProps) => {
+  const {
+    exceptionType, actionCompleted, dispatch, trackEventCall
+  } = props;
+  if (!actionCompleted) {
+    if (exceptionType === 'po') {
+      trackEventCall('item_details_back_press_action_incomplete', { exceptionType });
+      dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
+      return true;
+    }
+    if (exceptionType === 'nsfl') {
+      trackEventCall('item_details_back_press_action_incomplete', { exceptionType });
+      dispatch(showInfoModal(strings('ITEM.NO_FLOOR_LOCATION'), strings('ITEM.NO_FLOOR_LOCATION_DETAILS')));
+      return true;
+    }
+  }
+  dispatch(setManualScan(false));
+  return false;
+};
+const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
+  const {
+    scannedEvent, userId, route,
+    dispatch, navigation, trackEventCall,
+    validateSessionCall
+  } = props;
+  if (navigation.isFocused()) {
+    validateSessionCall(navigation, route.name).then(() => {
+      dispatch({ type: GET_ITEM_DETAILS.RESET });
+      dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+      dispatch({ type: ADD_TO_PICKLIST.RESET });
+    }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+  }
+};
+const onIsWaiting = (isWaiting: any) => (
+  isWaiting && (
+    <ActivityIndicator
+      animating={isWaiting}
+      hidesWhenStopped
+      color={COLOR.MAIN_THEME_COLOR}
+      size="large"
+      style={styles.activityIndicator}
+    />
+  )
+);
+const onValidateCompleteItemApiResultHook = (props: ItemDetailsScreenProps, completeItemApi: any) => {
+  const { dispatch, navigation } = props;
+  if (_.get(completeItemApi.result, 'status') === 204) {
+    dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+  } else {
+    dispatch(setActionCompleted());
+    navigation.goBack();
+  }
+};
+const onValidateCompleteItemApiErrortHook = (props: ItemDetailsScreenProps, completeItemApi: any) => {
+  const { dispatch } = props;
+  if (completeItemApi.error === COMPLETE_API_409_ERROR) {
+    dispatch(showInfoModal(strings(ITEM_SCAN_DOESNT_MATCH), strings(ITEM_SCAN_DOESNT_MATCH_DETAILS)));
+  } else {
+    dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
+  }
+};
+const getLocationCount = (props: ItemDetailsScreenProps) => {
+  const { floorLocations, reserveLocations } = props;
+  return (floorLocations?.length ?? 0) + (reserveLocations?.length ?? 0);
+};
+const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales.lastUpdateTs')
+  ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
+  : undefined);
+
+const isError = (props: ItemDetailsScreenProps, error: any, errorModalVisible: any,
+  setErrorModalVisible: any, isManualScanEnabled: any, scannedEvent: any, userId: any) => {
+  const { trackEventCall, dispatch } = props;
+  if (error) {
+    return (
+      <View style={styles.safeAreaView}>
+        {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
+        {isManualScanEnabled && <ManualScanComponent />}
+        <View style={styles.activityIndicator}>
+          <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+          <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
+          <TouchableOpacity
+            style={styles.errorButton}
+            onPress={() => {
+              trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
+              return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+            }}
+          >
+            <Text>{strings('GENERICS.RETRY')}</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+  return null;
+};
+const getexceptionType = (actionCompleted: any, itemDetails: any) => (!actionCompleted
+  ? itemDetails.exceptionType : undefined);
+const gettopRightBtnTxt = (locationCount: any) => (locationCount && locationCount >= 1
+  ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD'));
+const getPendingOnHandsQty = (props: ItemDetailsScreenProps, pendingOnHandsQty: any) => {
+  const { userFeatures } = props;
+  return (pendingOnHandsQty === -999 && userFeatures.includes('on hands change'));
+};
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
@@ -351,102 +503,47 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   } = props;
   // Scanned Item Event Listener
   useEffectHook(() => {
-    if (navigation.isFocused()) {
-      validateSessionCall(navigation, route.name).then(() => {
-        dispatch({ type: GET_ITEM_DETAILS.RESET });
-        dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
-        dispatch({ type: ADD_TO_PICKLIST.RESET });
-      }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
-    }
+    onValidateScannedEvent(props);
   }, [scannedEvent]);
 
   const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
-  const locationCount = (floorLocations?.length ?? 0) + (reserveLocations?.length ?? 0);
-  const updatedSalesTS = _.get(itemDetails, 'sales.lastUpdateTs')
-    ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
-    : undefined;
+  const locationCount = getLocationCount(props);
+  const updatedSalesTS = getUpdatedSales(itemDetails);
 
   // Set Item Details
   useEffectHook(() => {
-    if (itemDetails) {
-      dispatch(setupScreen(
-        itemDetails.itemNbr,
-        itemDetails.upcNbr,
-        itemDetails.location && itemDetails.location.floor ? itemDetails.location.floor : [],
-        itemDetails.location && itemDetails.location.reserve ? itemDetails.location.reserve : [],
-        itemDetails.exceptionType,
-        itemDetails.pendingOnHandsQty,
-        itemDetails.exceptionType ? itemDetails.completed : true
-      ));
-    }
+    onValidateItemDetails(props, itemDetails);
   }, [itemDetails]);
 
   // Barcode event listener effect
   useEffectHook(() => {
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (navigation.isFocused()) {
-        validateSessionCall(navigation, route.name).then(() => {
-          trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
-          if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
-            if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
-              dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
-              dispatch(setManualScan(false));
-            } else {
-              dispatch(setScannedEvent(scan));
-            }
-          } else {
-            setErrorModalVisible(true);
-          }
-        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
-      }
+      callBackbarcodeEmitter(props, scan, itemDetails);
     });
     return () => {
       scanSubscription.remove();
     };
   }, [itemDetails, actionCompleted]);
-
   // Complete Item Details API
   useEffectHook(() => {
     // on api success
     if (!completeItemApi.isWaiting && completeItemApi.result) {
-      if (_.get(completeItemApi.result, 'status') === 204) {
-        dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
-      } else {
-        dispatch(setActionCompleted());
-        navigation.goBack();
-      }
+      onValidateCompleteItemApiResultHook(props, completeItemApi);
       dispatch({ type: NO_ACTION.RESET });
     }
+  }, [completeItemApi]);
 
+  useEffectHook(() => {
     // on api failure
     if (!completeItemApi.isWaiting && completeItemApi.error) {
-      if (completeItemApi.error === COMPLETE_API_409_ERROR) {
-        dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
-      } else {
-        dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
-      }
+      onValidateCompleteItemApiErrortHook(props, completeItemApi);
       dispatch({ type: NO_ACTION.RESET });
     }
   }, [completeItemApi]);
 
   useFocusEffectHook(
     () => {
-      const onBackPress = () => {
-        if (!actionCompleted) {
-          if (exceptionType === 'po') {
-            trackEventCall('item_details_back_press_action_incomplete', { exceptionType });
-            dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
-            return true;
-          }
-          if (exceptionType === 'nsfl') {
-            trackEventCall('item_details_back_press_action_incomplete', { exceptionType });
-            dispatch(showInfoModal(strings('ITEM.NO_FLOOR_LOCATION'), strings('ITEM.NO_FLOOR_LOCATION_DETAILS')));
-            return true;
-          }
-        }
-        dispatch(setManualScan(false));
-        return false;
-      };
+      const onBackPress = () => onValidateBackPress(props);
 
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
@@ -455,28 +552,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   );
 
   // Get Item Details Error
-  if (error) {
-    return (
-      <View style={styles.safeAreaView}>
-        {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-        {isManualScanEnabled && <ManualScanComponent />}
-        <View style={styles.activityIndicator}>
-          <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
-          <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
-          <TouchableOpacity
-            style={styles.errorButton}
-            onPress={() => {
-              trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
-              return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
-            }}
-          >
-            <Text>{strings('GENERICS.RETRY')}</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-
+  isError(props, error, errorModalVisible, setErrorModalVisible, isManualScanEnabled, scannedEvent, userId);
   if (_.get(result, 'status') === 204) {
     return (
       <View style={styles.safeAreaView}>
@@ -489,7 +565,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       </View>
     );
   }
-
   if (isWaiting || !result) {
     return (
       <ActivityIndicator
@@ -501,7 +576,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       />
     );
   }
-
   const toggleSalesGraphView = () => {
     trackEventCall('item_details_toggle_graph_click',
       { itemDetails: JSON.stringify(itemDetails), isGraphView: !isSalesMetricsGraphView });
@@ -536,70 +610,61 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         contentContainerStyle={styles.container}
         refreshControl={<RefreshControl refreshing={false} onRefresh={handleRefresh} />}
       >
-        {isWaiting && (
-        <ActivityIndicator
-          animating={isWaiting}
-          hidesWhenStopped
-          color={COLOR.MAIN_THEME_COLOR}
-          size="large"
-          style={styles.activityIndicator}
-        />
-        )}
+        {onIsWaiting(isWaiting)}
         {!isWaiting && itemDetails
           && (
-          <View>
-            <ItemInfo
-              itemName={itemDetails.itemName}
-              itemNbr={itemDetails.itemNbr}
-              upcNbr={itemDetails.upcNbr}
-              status={itemDetails.status || ''}
-              category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
-              price={itemDetails.price}
-              exceptionType={!actionCompleted ? itemDetails.exceptionType : undefined}
-            />
-            <SFTCard
-              title={strings('ITEM.QUANTITY')}
-              iconName="pallet"
-              topRightBtnTxt={(pendingOnHandsQty === -999 && userFeatures.includes('on hands change'))
-                ? strings('GENERICS.CHANGE') : undefined}
-              topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
-            >
-              {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
-            </SFTCard>
-            <SFTCard
-              iconProp={(
-                <MaterialCommunityIcon
-                  name="label-variant"
-                  size={20}
-                  color={COLOR.GREY_700}
-                  style={styles.labelIcon}
-                />
-              )}
-              title={strings('ITEM.REPLENISHMENT')}
-            >
-              <View style={styles.itemOnOrderView}>
-                <Text>{strings('ITEM.ON_ORDER')}</Text>
-                <Text>{itemDetails.replenishment.onOrder}</Text>
-              </View>
-            </SFTCard>
-            <SFTCard
-              iconName="map-marker-alt"
-              title={`${strings('ITEM.LOCATION')}(${locationCount})`}
-              topRightBtnTxt={locationCount && locationCount >= 1
-                ? strings('GENERICS.SEE_ALL') : strings('GENERICS.ADD')}
-              topRightBtnAction={() => handleLocationAction(props, itemDetails)}
-            >
-              {renderLocationComponent(props, itemDetails)}
-            </SFTCard>
-            <SFTCard
-              title={strings('ITEM.SALES_METRICS')}
-              subTitle={updatedSalesTS}
-              bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
-              bottomRightBtnAction={[toggleSalesGraphView]}
-            >
-              <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
-            </SFTCard>
-          </View>
+            <View>
+              <ItemInfo
+                itemName={itemDetails.itemName}
+                itemNbr={itemDetails.itemNbr}
+                upcNbr={itemDetails.upcNbr}
+                status={itemDetails.status || ''}
+                category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
+                price={itemDetails.price}
+                exceptionType={getexceptionType(actionCompleted, itemDetails)}
+              />
+              <SFTCard
+                title={strings('ITEM.QUANTITY')}
+                iconName="pallet"
+                topRightBtnTxt={getPendingOnHandsQty(props, pendingOnHandsQty)
+                  ? strings('GENERICS.CHANGE') : undefined}
+                topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
+              >
+                {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
+              </SFTCard>
+              <SFTCard
+                iconProp={(
+                  <MaterialCommunityIcon
+                    name="label-variant"
+                    size={20}
+                    color={COLOR.GREY_700}
+                    style={styles.labelIcon}
+                  />
+                )}
+                title={strings('ITEM.REPLENISHMENT')}
+              >
+                <View style={styles.itemOnOrderView}>
+                  <Text>{strings('ITEM.ON_ORDER')}</Text>
+                  <Text>{itemDetails.replenishment.onOrder}</Text>
+                </View>
+              </SFTCard>
+              <SFTCard
+                iconName="map-marker-alt"
+                title={`${strings('ITEM.LOCATION')}(${locationCount})`}
+                topRightBtnTxt={gettopRightBtnTxt(locationCount)}
+                topRightBtnAction={() => handleLocationAction(props, itemDetails)}
+              >
+                {renderLocationComponent(props, itemDetails)}
+              </SFTCard>
+              <SFTCard
+                title={strings('ITEM.SALES_METRICS')}
+                subTitle={updatedSalesTS}
+                bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
+                bottomRightBtnAction={[toggleSalesGraphView]}
+              >
+                <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
+              </SFTCard>
+            </View>
           )}
       </ScrollView>
       {renderScanForNoActionButton(props, itemDetails)}

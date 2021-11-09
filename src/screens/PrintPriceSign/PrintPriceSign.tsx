@@ -78,7 +78,7 @@ export const renderSignSizeButtons = (
 };
 
 interface PriceSignProps {
-  scannedEvent: {value: any; type: any };
+  scannedEvent: { value: any; type: any };
   exceptionType: string;
   actionCompleted: boolean;
   result: any;
@@ -93,9 +93,68 @@ interface PriceSignProps {
   isValidQty: boolean; setIsValidQty: React.Dispatch<React.SetStateAction<boolean>>;
   error: { error: boolean; message: string };
   setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string }>>;
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
-  useLayoutHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
+  useLayoutHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
+
+const getPrinter = (selectedPrinter: any, selectedSignType: LaserPaper | PortablePaper) => (selectedPrinter.type === PrinterType.LASER
+  // @ts-ignore
+  ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType]);
+const isValid = (actionCompleted: any, exceptionType: any) => !actionCompleted && exceptionType === 'PO';
+const isItemSizeExists = (printQueue: any, selectedSignType: LaserPaper | PortablePaper, itemNbr: any) =>
+  // eslint-disable-next-line implicit-arrow-linebreak
+  printQueue.some((printItem: PrintQueueItem) => printItem.itemNbr === itemNbr
+    && printItem.paperSize === selectedSignType);
+const isPrinterAvailable = (selectedPrinter: any) => {
+  if (selectedPrinter.name === '') {
+    return {
+      type: PrinterType.LASER,
+      name: strings('PRINT.FRONT_DESK'),
+      desc: strings('GENERICS.DEFAULT'),
+      id: '000000000000'
+    };
+  }
+  return null;
+};
+const sethandleDecreaseQty = (signQty: any, setSignQty: any) => {
+  if (signQty > QTY_MAX) {
+    setSignQty(QTY_MAX);
+  } else if (signQty > QTY_MIN) {
+    setSignQty(((prevState: number) => prevState - 1));
+  }
+};
+const sethandleIncreaseQty = (signQty: any, setSignQty: any) => {
+  if (signQty < QTY_MIN) {
+    setSignQty(QTY_MIN);
+  } else if (signQty < QTY_MAX) {
+    setSignQty(((prevState: number) => prevState + 1));
+  }
+};
+const isErrorRequired = (error: any) => (
+  error.error
+    ? (
+      <View style={styles.errorContainer}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{error.message}</Text>
+      </View>
+    )
+    : null
+);
+const validateQuantity = (isValidQty: any) => (
+  !isValidQty && (
+    <Text style={styles.invalidLabel}>
+      {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
+    </Text>
+  )
+);
+const isValidQtyStyle = (isValidQty: any) => (isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid);
+const isAddtoQueueDisabled = (isValidQty: any, selectedSignType: any) => !isValidQty || selectedSignType?.length === 0;
+const checkQuantity = (newQty: any, setIsValidQty: any, setSignQty: any) => {
+  if (!Number.isNaN(newQty)) {
+    setSignQty(newQty);
+    setIsValidQty(validateQty(newQty));
+  }
+};
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
     scannedEvent, exceptionType, actionCompleted, result,
@@ -131,62 +190,49 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
 
   // Print API
   useEffectHook(() => {
-    // on api success
-    if (!printAPI.isWaiting && printAPI.result) {
-      if (!actionCompleted && exceptionType === 'PO') {
-        dispatch(setActionCompleted());
-      }
-      navigation.goBack();
-    }
-
-    // on api failure
-    if (!printAPI.isWaiting && printAPI.error) {
-      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
-    }
-
     // on api submission
-    if (printAPI.isWaiting) {
-      setError({ error: false, message: '' });
+    setError({ error: false, message: '' });
+  }, [printAPI.isWaiting]);
+
+  // Print API
+  useEffectHook(() => {
+    setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+  }, [!printAPI.isWaiting && printAPI.error]);
+
+  // Print API
+  useEffectHook(() => {
+    // on api success
+    if (isValid(actionCompleted, exceptionType)) {
+      dispatch(setActionCompleted());
     }
-  }, [printAPI]);
+    navigation.goBack();
+  }, [!printAPI.isWaiting && printAPI.result]);
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
-    if (!Number.isNaN(newQty)) {
-      setSignQty(newQty);
-      setIsValidQty(validateQty(newQty));
-    }
+    checkQuantity(newQty, setIsValidQty, setSignQty);
   };
 
   const handleIncreaseQty = () => {
     setIsValidQty(true);
-    if (signQty < QTY_MIN) {
-      setSignQty(QTY_MIN);
-    } else if (signQty < QTY_MAX) {
-      setSignQty(((prevState: number) => prevState + 1));
-    }
+    sethandleIncreaseQty(signQty, setSignQty);
   };
 
   const handleDecreaseQty = () => {
     setIsValidQty(true);
-    if (signQty > QTY_MAX) {
-      setSignQty(QTY_MAX);
-    } else if (signQty > QTY_MIN) {
-      setSignQty(((prevState: number) => prevState - 1));
-    }
+    sethandleDecreaseQty(signQty, setSignQty);
   };
 
   const handleChangePrinter = () => {
     validateSession(navigation, route.name).then(() => {
       trackEvent('print_change_printer_click');
       navigation.navigate('PrinterList');
-    }).catch(() => {});
+    }).catch(() => { });
   };
 
   const handleAddPrintList = () => {
     // check if the item/size already exists on the print queue
-    const itemSizeExists = printQueue.some((printItem: PrintQueueItem) => printItem.itemNbr === itemNbr
-      && printItem.paperSize === selectedSignType);
+    const itemSizeExists = isItemSizeExists(printQueue, selectedSignType, itemNbr);
 
     if (itemSizeExists) {
       // TODO show popup if already exists
@@ -206,22 +252,19 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       };
       trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
       dispatch(addToPrintQueue(printQueueItem));
-      if (!actionCompleted && exceptionType === 'PO') {
+      if (isValid(actionCompleted, exceptionType)) {
         dispatch(setActionCompleted());
       }
       navigation.goBack();
     }
   };
-
   const handlePrint = () => {
     validateSession(navigation, route.name).then(() => {
       const printlist = [
         {
           itemNbr,
           qty: signQty,
-          code: selectedPrinter.type === PrinterType.LASER
-            // @ts-ignore
-            ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType],
+          code: getPrinter(selectedPrinter, selectedSignType),
           description: selectedSignType,
           printerMACAddress: selectedPrinter.id,
           isPortablePrinter: selectedPrinter.type === 1,
@@ -230,7 +273,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       ];
       trackEvent('print_price_sign', { printItem: JSON.stringify(printlist) });
       dispatch(printSign({ printlist }));
-    }).catch(() => {});
+    }).catch(() => { });
   };
 
   return (
@@ -252,7 +295,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
               onPress={handleDecreaseQty}
             />
             <TextInput
-              style={[styles.copyQtyInput, isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid]}
+              style={[styles.copyQtyInput, isValidQtyStyle(isValidQty)]}
               keyboardType="numeric"
               onChangeText={handleTextChange}
             >
@@ -268,11 +311,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
               onPress={handleIncreaseQty}
             />
           </View>
-          {!isValidQty && (
-          <Text style={styles.invalidLabel}>
-            {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
-          </Text>
-          )}
+          {validateQuantity(isValidQty)}
         </View>
         <View style={styles.signSizeContainer}>
           <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
@@ -295,14 +334,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             onPress={handleChangePrinter}
           />
         </View>
-        {error.error
-          ? (
-            <View style={styles.errorContainer}>
-              <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
-              <Text style={styles.errorText}>{error.message}</Text>
-            </View>
-          )
-          : null}
+        {isErrorRequired(error)}
       </ScrollView>
       {printAPI.isWaiting ? (
         <View style={styles.footerBtnContainer}>
@@ -315,24 +347,24 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           />
         </View>
       ) : (
-        <View style={styles.footerBtnContainer}>
-          <Button
-            title={strings('PRINT.ADD_TO_QUEUE')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
-            type={Button.Type.SOLID_WHITE}
-            style={styles.footerBtn}
-            onPress={handleAddPrintList}
-            disabled={!isValidQty || selectedSignType?.length === 0}
-          />
-          <Button
-            title={strings('PRINT.PRINT')}
-            type={Button.Type.PRIMARY}
-            style={styles.footerBtn}
-            onPress={handlePrint}
-            disabled={!isValidQty || selectedSignType?.length === 0}
-          />
-        </View>
-      )}
+          <View style={styles.footerBtnContainer}>
+            <Button
+              title={strings('PRINT.ADD_TO_QUEUE')}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              type={Button.Type.SOLID_WHITE}
+              style={styles.footerBtn}
+              onPress={handleAddPrintList}
+              disabled={isAddtoQueueDisabled(isValidQty, selectedSignType)}
+            />
+            <Button
+              title={strings('PRINT.PRINT')}
+              type={Button.Type.PRIMARY}
+              style={styles.footerBtn}
+              onPress={handlePrint}
+              disabled={isAddtoQueueDisabled(isValidQty, selectedSignType)}
+            />
+          </View>
+        )}
     </SafeAreaView>
   );
 };

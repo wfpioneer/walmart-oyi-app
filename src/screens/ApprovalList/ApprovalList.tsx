@@ -163,7 +163,22 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
     </CustomModalComponent>
   );
 };
-
+const getUpdateApprovalApiResult = (props: ApprovalListProps, updateApprovalApi: any) => {
+  const {
+    dispatch
+  } = props;
+  return updateApprovalApi.result?.status === 207 && renderPopUp(updateApprovalApi, dispatch);
+};
+const getApprovalApiResult = (props: ApprovalListProps, getApprovalApi: any) => {
+  const {
+    dispatch
+  } = props;
+  const approvalItems: ApprovalListItem[] = (getApprovalApi.result && getApprovalApi.result.data) || [];
+  if (approvalItems.length !== 0) {
+    const { filteredData, headerIndices } = convertApprovalListData(approvalItems);
+    dispatch(setApprovalList(filteredData, headerIndices));
+  }
+};
 export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   const {
     dispatch, getApprovalApi, trackEventCall, useEffectHook,
@@ -199,11 +214,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!getApprovalApi.isWaiting && getApprovalApi.result) {
-      const approvalItems: ApprovalListItem[] = (getApprovalApi.result && getApprovalApi.result.data) || [];
-      if (approvalItems.length !== 0) {
-        const { filteredData, headerIndices } = convertApprovalListData(approvalItems);
-        dispatch(setApprovalList(filteredData, headerIndices));
-      }
+      getApprovalApiResult(props, getApprovalApi);
     }
   }, [getApprovalApi]);
 
@@ -259,7 +270,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
 
   return (
     <View style={styles.mainContainer}>
-      {updateApprovalApi.result?.status === 207 && renderPopUp(updateApprovalApi, dispatch)}
+      {getUpdateApprovalApiResult(props, updateApprovalApi)}
       <FlatList
         data={filteredList}
         keyExtractor={(item: ApprovalCategory, index: number) => {

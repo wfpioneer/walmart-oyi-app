@@ -50,9 +50,22 @@ interface LocationDetailsProps {
     locationTypeNbr: number;
   }>>;
   locationsApi: AsyncState
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
-
+const getlocationsApiResult = (props: LocationDetailsProps, locationsApi: any) => {
+  const {
+    dispatch
+  } = props;
+  const locDetails = (locationsApi.result && locationsApi.result.data);
+  if (locDetails.location) {
+    if (locDetails.location.floor) {
+      dispatch(setFloorLocations(locDetails.location.floor));
+    }
+    if (locDetails.location.reserve) {
+      dispatch(setReserveLocations(locDetails.location.reserve));
+    }
+  }
+};
 export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element => {
   const {
     delAPI,
@@ -96,15 +109,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     // brace style ignored to allow comments to remain.
     // on api success
     if (!locationsApi.isWaiting && locationsApi.result) {
-      const locDetails = (locationsApi.result && locationsApi.result.data);
-      if (locDetails.location) {
-        if (locDetails.location.floor) {
-          dispatch(setFloorLocations(locDetails.location.floor));
-        }
-        if (locDetails.location.reserve) {
-          dispatch(setReserveLocations(locDetails.location.reserve));
-        }
-      }
+      getlocationsApiResult(props, locationsApi);
     }
   }, [locationsApi]);
 
@@ -112,7 +117,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     validateSession(navigation, route.name).then(() => {
       trackEvent('location_edit_location_click', { location: JSON.stringify(loc), index: locIndex });
       navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
-    }).catch(() => {});
+    }).catch(() => { });
   };
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
@@ -125,7 +130,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
         locationTypeNbr: loc.typeNbr
       });
       setDisplayConfirmation(true);
-    }).catch(() => {});
+    }).catch(() => { });
   };
 
   const deleteConfirmed = () => {
@@ -157,7 +162,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     validateSession(navigation, route.name).then(() => {
       trackEvent('location_add_location_click');
       navigation.navigate('AddLocation');
-    }).catch(() => {});
+    }).catch(() => { });
   };
   if (locationsApi.isWaiting) {
     return (
@@ -190,8 +195,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
             <Text style={styles.message}>
               {delAPI.error
                 ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
-                : `${strings('LOCATION.DELETE_CONFIRMATION')}${
-                  locToConfirm.locationName
+                : `${strings('LOCATION.DELETE_CONFIRMATION')}${locToConfirm.locationName
                 }`}
             </Text>
             <View style={styles.buttonContainer}>
