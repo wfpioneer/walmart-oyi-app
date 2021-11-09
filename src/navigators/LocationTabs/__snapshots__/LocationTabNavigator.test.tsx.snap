@@ -288,7 +288,7 @@ exports[`Test Location Tabs Renders items Header 1`] = `
         }
       }
     >
-      [missing "en.LOCATION.ITEMS" translation]
+      ITEMS
     </Text>
     <Button
       backgroundColor="#0071e9"
@@ -329,7 +329,7 @@ exports[`Test Location Tabs Renders pallet Header 1`] = `
         }
       }
     >
-      [missing "en.LOCATION.PALLETS" translation]
+      PALLETS
     </Text>
     <Button
       backgroundColor="#0071e9"
