@@ -63,7 +63,7 @@ exports[`Test Aisle List Renders Aisle Screen with Data 1`] = `
 </View>
 `;
 
-exports[`Test Aisle List Renders Aisle Screen with Empty Data 1`] = `
+exports[`Test Aisle List Renders Aisle Screen with no-aisles-message when getAisles response is 204 1`] = `
 <View>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
@@ -76,7 +76,7 @@ exports[`Test Aisle List Renders Aisle Screen with Empty Data 1`] = `
         "paddingBottom": 100,
       }
     }
-    data={Object {}}
+    data={Array []}
     disableVirtualization={false}
     horizontal={false}
     initialNumToRender={10}
@@ -93,8 +93,11 @@ exports[`Test Aisle List Renders Aisle Screen with Empty Data 1`] = `
 </View>
 `;
 
-exports[`Test Aisle List Renders Aisle Screen with no-aisles-message when getAisles response is 204 1`] = `
+exports[`Test Aisle List Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
 <View>
+  <LocationManualScan
+    keyboardType="default"
+  />
   <LocationHeader
     details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
     location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"

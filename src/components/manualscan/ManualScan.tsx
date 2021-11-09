@@ -1,8 +1,5 @@
-import React, {
-  FC, RefObject, createRef, useLayoutEffect
-} from 'react';
+import React, { FC, RefObject, createRef } from 'react';
 import { TextInput, View } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { strings } from '../../locales';
 import styles from './ManualScan.style';
