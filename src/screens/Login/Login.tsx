@@ -180,7 +180,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       this.props.loginUser({ ...user, siteId: user.siteId ?? 0 });
       trackEvent('user_sign_in');
       if (user.siteId && user.countryCode !== 'US') {
-        // this.props.getFluffyFeatures(user);
+        this.props.getFluffyFeatures(user);
       }
     });
   }
