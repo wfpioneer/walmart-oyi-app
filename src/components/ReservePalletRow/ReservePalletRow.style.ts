@@ -35,5 +35,8 @@ export default StyleSheet.create({
   itemContainer: {
     paddingLeft: 15,
     paddingTop: 15
+  },
+  trachIcon: {
+    paddingLeft: 280
   }
 });

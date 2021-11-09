@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import styles from './ReservePalletRow.style';
 import { strings } from '../../locales';
 import { SectionDetailsPallet } from '../../models/LocationItems';
@@ -32,6 +32,11 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
                 {`+${reservePallet.items.length - 1} ${strings('LOCATION.MORE')}`}
               </Text>
               )}
+          <View style={styles.trachIcon}>
+            <Image
+              source={require('../../assets/images/trash_can.png')}
+            />
+          </View>
         </View>
         )}
       </View>
