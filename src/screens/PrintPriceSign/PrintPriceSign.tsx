@@ -198,9 +198,11 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       isValidDispatch(props, actionCompleted, exceptionType);
       navigation.goBack();
     }
+    // on api failure
     if (!printAPI.isWaiting && printAPI.error) {
       setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
+    // on api submission
     if (printAPI.isWaiting) {
       setError({ error: false, message: '' });
     }

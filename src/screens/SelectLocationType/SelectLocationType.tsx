@@ -163,6 +163,20 @@ const getCurrentLocation = (locParams: LocParams) => ({
   type: locParams.currentLocation ? locParams.currentLocation.typeNbr.toString() : '',
   locIndex: locParams.locIndex !== null && locParams.locIndex !== undefined ? locParams.locIndex : -1
 });
+const isApiError = (api: AsyncState) => !api.isWaiting && api.error;
+const isApiSuccess = (api: AsyncState) => !api.isWaiting && api.result;
+const getLocationTypes = (locType: string, locationTypes: LOCATION_TYPES) => (locType === locationTypes
+  ? 'checked' : 'unchecked');
+const isApiWaiting = (addApi: AsyncState, editApi: AsyncState) => addApi.isWaiting || editApi.isWaiting;
+const isError = (error: { error: boolean; message: string }) => (
+  error.error ? (
+    <View style={styles.errorContainer}>
+      <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+      <Text style={styles.errorText}>{error.message}</Text>
+    </View>
+  )
+    : null
+);
 export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Element => {
   const {
     locType, setLocType, inputLocation, setInputLocation, loc,
@@ -199,44 +213,42 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
       scannedSubscription.remove();
     };
   }, []);
-
-  // Add Location API
+  // Edit Location API
   useEffectHook(() => {
     // on api submission
-    setError({ error: false, message: '' });
-  }, [addAPI.isWaiting]);
-
-  useEffectHook(() => {
-    // on api success
-    dispatch(addLocationToExisting(loc, parseInt(locType, 10), 'floor'));
-    isNotActionCompleted(props);
-    dispatch(getLocationDetails({ itemNbr: itemNbr }));
-    navigation.navigate('LocationDetails');
-  }, [!addAPI.isWaiting && addAPI.result]);
-
-  useEffectHook(() => {
+    if (addAPI.isWaiting) {
+      setError({ error: false, message: '' });
+    }
     // on api failure
-    setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
-  }, [!addAPI.isWaiting && addAPI.error]);
+    if (isApiError(addAPI)) {
+      setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
+    }
+    // on api success
+    if (isApiSuccess(addAPI)) {
+      dispatch(addLocationToExisting(loc, parseInt(locType, 10), 'floor'));
+      isNotActionCompleted(props);
+      dispatch(getLocationDetails({ itemNbr: itemNbr }));
+      navigation.navigate('LocationDetails');
+    }
+  }, [addAPI]);
 
   // Edit Location API
   useEffectHook(() => {
     // on api submission
-    setError({ error: false, message: '' });
-  }, [editAPI.isWaiting]);
-
-  // Edit Location API
-  useEffectHook(() => {
-    // on api success
-    dispatch(editExistingLocation(loc, parseInt(locType, 10), 'floor', currentLocation.locIndex));
-    dispatch(getLocationDetails({ itemNbr: itemNbr }));
-    navigation.navigate('LocationDetails');
-  }, [!editAPI.isWaiting && editAPI.result]);
-
-  useEffectHook(() => {
+    if (editAPI.isWaiting) {
+      setError({ error: false, message: '' });
+    }
     // on api failure
-    setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
-  }, [!editAPI.isWaiting && editAPI.error]);
+    if (isApiError(editAPI)) {
+      setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
+    }
+    // on api success
+    if (isApiSuccess(editAPI)) {
+      dispatch(editExistingLocation(loc, parseInt(locType, 10), 'floor', currentLocation.locIndex));
+      dispatch(getLocationDetails({ itemNbr: itemNbr }));
+      navigation.navigate('LocationDetails');
+    }
+  }, [editAPI]);
 
   const modelOnSubmit = (value: string) => {
     validateSessionCall(navigation, routeSource).then(() => {
@@ -281,7 +293,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.SALES_FLOOR}
-              status={locType === LOCATION_TYPES.SALES_FLOOR ? 'checked' : 'unchecked'}
+              status={getLocationTypes(locType, LOCATION_TYPES.SALES_FLOOR)}
               color={COLOR.MAIN_THEME_COLOR}
             />
             <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.SALES_FLOOR)}>
@@ -291,7 +303,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.END_CAP}
-              status={locType === LOCATION_TYPES.END_CAP ? 'checked' : 'unchecked'}
+              status={getLocationTypes(locType, LOCATION_TYPES.END_CAP)}
               color={COLOR.MAIN_THEME_COLOR}
             />
             <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.END_CAP)}>
@@ -301,7 +313,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.POD}
-              status={locType === LOCATION_TYPES.POD ? 'checked' : 'unchecked'}
+              status={getLocationTypes(locType, LOCATION_TYPES.POD)}
               color={COLOR.MAIN_THEME_COLOR}
             />
             <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.POD)}>
@@ -311,7 +323,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.DISPLAY}
-              status={locType === LOCATION_TYPES.DISPLAY ? 'checked' : 'unchecked'}
+              status={getLocationTypes(locType, LOCATION_TYPES.DISPLAY)}
               color={COLOR.MAIN_THEME_COLOR}
             />
             <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.DISPLAY)}>
@@ -336,19 +348,13 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
             onPress={handleManualScan}
           />
         </View>
-        {error.error ? (
-          <View style={styles.errorContainer}>
-            <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
-            <Text style={styles.errorText}>{error.message}</Text>
-          </View>
-        )
-          : null}
+        {isError(error)}
       </View>
       <View style={styles.container}>
-        {addAPI.isWaiting || editAPI.isWaiting
+        {isApiWaiting(addAPI, editAPI)
           ? (
             <ActivityIndicator
-              animating={addAPI.isWaiting || editAPI.isWaiting}
+              animating={isApiWaiting(addAPI, editAPI)}
               hidesWhenStopped
               color={COLOR.MAIN_THEME_COLOR}
               size="large"
