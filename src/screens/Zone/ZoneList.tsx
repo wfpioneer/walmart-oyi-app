@@ -30,8 +30,15 @@ import { LocationType } from '../../models/LocationType';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
-import { hideLocationPopup } from '../../state/actions/Location';
+import {
+  hideLocationPopup,
+  SET_POSSIBLE_ZONES,
+  SET_ZONES,
+  setPossibleZones,
+  setZones
+} from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
+import { mockPossibleZones } from '../../mockData/mockPossibleZones';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
@@ -97,6 +104,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     // on api success
     if (!getZoneApi.isWaiting && getZoneApi.result) {
       trackEventCall('get_zones_success', { duration: moment().valueOf() - apiStart });
+      dispatch(setZones(getZoneApi.result.data))
     }
 
     // on api failure
@@ -192,6 +200,12 @@ const ZoneList = (): JSX.Element => {
     }
   }, [location]);
 
+  const handleAddZone = () => {
+    dispatch(setPossibleZones(mockPossibleZones));
+    bottomSheetModalRef.current?.dismiss();
+    navigation.navigate('AddZone');
+  };
+
   return (
     <BottomSheetModalProvider>
       <TouchableOpacity
@@ -225,7 +239,7 @@ const ZoneList = (): JSX.Element => {
           isManagerOption={true}
           isVisible={true}
           text={strings('LOCATION.ADD_AREA')}
-          onPress={() => {}}
+          onPress={handleAddZone}
         />
       </BottomSheetModal>
     </BottomSheetModalProvider>

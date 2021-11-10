@@ -13,6 +13,7 @@ import styles from './OHQtyUpdate.style';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
 import IconButton from '../buttons/IconButton';
+import NumericSelector from '../NumericSelector/NumericSelector'
 import { numbers, strings } from '../../locales';
 import { updateOHQty } from '../../state/actions/saga';
 import { setActionCompleted, updatePendingOHQty } from '../../state/actions/ItemDetailScreen';
@@ -144,31 +145,12 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
         />
         )}
       </View>
-      <View style={[styles.updateContainer, isValidNbr ? styles.updateContainerValid
-        : styles.updateContainerInvalid]}
-      >
-        <IconButton
-          icon={renderPlusMinusBtn('minus')}
-          type={IconButton.Type.NO_BORDER}
-          height={15}
-          width={35}
-          onPress={handleDecreaseQty}
-        />
-        <TextInput
-          style={styles.ohInput}
-          keyboardType="numeric"
-          onChangeText={handleTextChange}
-        >
-          {newOHQty}
-        </TextInput>
-        <IconButton
-          icon={renderPlusMinusBtn('plus')}
-          type={IconButton.Type.NO_BORDER}
-          height={15}
-          width={35}
-          onPress={handleIncreaseQty}
-        />
-      </View>
+      <NumericSelector
+        isValid={isValidNbr}
+        onDecreaseQty={handleDecreaseQty}
+        onIncreaseQty={handleIncreaseQty}
+        onTextChange={handleTextChange} value={newOHQty}
+      />
       {!isValidNbr && (
         <Text style={styles.invalidLabel}>
           {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
