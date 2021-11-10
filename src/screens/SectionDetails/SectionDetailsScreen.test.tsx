@@ -10,9 +10,6 @@ import {
 } from '../../mockData/locationDetails';
 
 let navigationProp: NavigationProp<any, string>;
-const SECTION_NAME = '1';
-const ZONE_NAME = 'ABAR';
-const AISLE_NAME = '2';
 
 // TODO Adjust Snapshot naming convention Remove on final PR
 describe('Test Location Details Screen', () => {
@@ -28,6 +25,11 @@ describe('Test Location Details Screen', () => {
     name: 'FloorDetails'
   };
 
+  const defaultScannedEvent = {
+    value: '',
+    type: ''
+  };
+
   describe('Tests rendering location details screen data', () => {
     const sectionDetails: AsyncState = {
       ...defaultAsyncState,
@@ -41,15 +43,13 @@ describe('Test Location Details Screen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
           getSectionDetailsApi={sectionDetails}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={reserveSelectedRouteProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -59,15 +59,13 @@ describe('Test Location Details Screen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
           getSectionDetailsApi={sectionDetails}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={defaultRouteProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -81,15 +79,13 @@ describe('Test Location Details Screen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
           getSectionDetailsApi={sectionDetails}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={routePropReserve}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -105,15 +101,13 @@ describe('Test Location Details Screen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
           getSectionDetailsApi={sectionDetailsEmpty}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={defaultRouteProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -129,15 +123,13 @@ describe('Test Location Details Screen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
           getSectionDetailsApi={sectionDetailsLargeLocationCount}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={defaultRouteProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -153,15 +145,13 @@ describe('Test Location Details Screen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
           getSectionDetailsApi={getSectionDetailsError}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={defaultRouteProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -175,15 +165,13 @@ describe('Test Location Details Screen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
           getSectionDetailsApi={getSectionDetailsIsWaiting}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={defaultRouteProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

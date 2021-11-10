@@ -165,6 +165,8 @@ export default {
     NO_ZONES_AVAILABLE: 'No Zones Available',
     NO_AISLES_AVAILABLE: 'No Aisles Available',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
+    CLEAR_ALL: 'Clear all',
+    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2',
     CLEAR_SECTION: 'Clear this section',
     REMOVE_SECTION: 'Remove this section',
     REMOVE_AREA: 'Remove this area',
@@ -177,7 +179,10 @@ export default {
     PRINT_SECTION: 'Print all section location labels',
     ADD_SECTIONS: 'Add sections',
     CLEAR_AISLE: 'Clear aisle',
-    REMOVE_AISLE: 'Remove aisle'
+    REMOVE_AISLE: 'Remove aisle',
+    SCAN_PALLET: 'Scan Pallet ID',
+    PALLET_VALIDATE_ERROR: 'Pallet ID can only contain numbers',
+    PALLET_PLACEHOLDER: 'Enter or Scan Pallet ID'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

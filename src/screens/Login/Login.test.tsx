@@ -105,6 +105,27 @@ describe('LoginScreen', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
+  it('renders the Select CountryCode modal when a user logs in as US HomeOffice', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(<LoginScreen
+      loginUser={jest.fn}
+      logoutUser={jest.fn}
+      navigation={navigationProp}
+      hideActivityModal={jest.fn}
+      User={{ ...testUser, countryCode: 'US' }}
+      setEndTime={jest.fn}
+      getFluffyFeatures={jest.fn}
+      fluffyApiState={{
+        isWaiting: false,
+        error: '',
+        result: {}
+      }}
+      assignFluffyFeatures={jest.fn}
+      showActivityModal={jest.fn}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
   it('renders pure version number if build environment is production', () => {
     const prodConfig = jest.requireMock('react-native-config');
     prodConfig.ENVIRONMENT = 'prod';

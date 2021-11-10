@@ -1,13 +1,41 @@
 import { WorklistItemI } from '../models/WorklistItem';
 
+enum ITEM_NAME {
+  ELECTRONIC_ITEM = 'ELECTRONIC ITEM',
+  BAKERY_ITEM = 'BAKERY ITEM',
+  WINE_ITEM = 'WINE ITEM',
+  PHARMACY_ITEM = 'PHARMACY ITEM',
+  PHARMACY_ITEM_1 = 'PHARMACY ITEM 1',
+  TEST_ITEM = 'TEST ITEM'
+}
+
+enum CATEGORY_NAME {
+  FOODSERVICE = 'FOODSERVICE',
+  ELECTRONICS = 'ELECTRONICS',
+  FRESH_BAKERY = 'FRESH BAKERY',
+  WINE = 'WINE',
+  PHARMACY_RX = 'PHARMACY RX'
+}
+
+enum WORKLISTTYPE {
+  NSFL = 'NSFL',
+  C = 'C',
+  NO = 'NO',
+  NS = 'NS',
+  CATEGORY = 'CATEGORY',
+  NON_EXCEPTION = 'Non-Exception'
+}
+
+const COMPLETED_TS = '2020-07-15T08:02:17-05:00';
+
 export const mockWorkListToDo: WorklistItemI[] = [
   {
-    worklistType: 'NSFL',
-    itemName: 'TEST ITEM',
+    worklistType: WORKLISTTYPE.NSFL,
+    itemName: ITEM_NAME.TEST_ITEM,
     itemNbr: 1234567890,
     upcNbr: '000055559999',
     catgNbr: 93,
-    catgName: 'FOODSERVICE',
+    catgName: CATEGORY_NAME.FOODSERVICE,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -15,12 +43,12 @@ export const mockWorkListToDo: WorklistItemI[] = [
     completed: false
   },
   {
-    worklistType: 'NO',
-    itemName: 'ELECTRONIC ITEM',
+    worklistType: WORKLISTTYPE.NO,
+    itemName: ITEM_NAME.ELECTRONIC_ITEM,
     itemNbr: 987654321,
     upcNbr: '777555333',
     catgNbr: 99,
-    catgName: 'ELECTRONICS',
+    catgName: CATEGORY_NAME.ELECTRONICS,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -28,12 +56,12 @@ export const mockWorkListToDo: WorklistItemI[] = [
     completed: false
   },
   {
-    worklistType: 'NO',
-    itemName: 'BAKERY ITEM',
+    worklistType: WORKLISTTYPE.NO,
+    itemName: ITEM_NAME.BAKERY_ITEM,
     itemNbr: 123789456,
     upcNbr: '111122223333',
     catgNbr: 88,
-    catgName: 'FRESH BAKERY',
+    catgName: CATEGORY_NAME.FRESH_BAKERY,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -41,12 +69,12 @@ export const mockWorkListToDo: WorklistItemI[] = [
     completed: false
   },
   {
-    worklistType: 'C',
-    itemName: 'WINE ITEM',
+    worklistType: WORKLISTTYPE.C,
+    itemName: ITEM_NAME.WINE_ITEM,
     itemNbr: 456789123,
     upcNbr: '444455556666',
     catgNbr: 19,
-    catgName: 'WINE',
+    catgName: CATEGORY_NAME.WINE,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -54,12 +82,12 @@ export const mockWorkListToDo: WorklistItemI[] = [
     completed: false
   },
   {
-    worklistType: 'C',
-    itemName: 'PHARMACY ITEM',
+    worklistType: WORKLISTTYPE.C,
+    itemName: ITEM_NAME.PHARMACY_ITEM,
     itemNbr: 789123456,
     upcNbr: '777788889999',
     catgNbr: 87,
-    catgName: 'PHARMACY RX',
+    catgName: CATEGORY_NAME.PHARMACY_RX,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -67,12 +95,12 @@ export const mockWorkListToDo: WorklistItemI[] = [
     completed: false
   },
   {
-    worklistType: 'NS',
-    itemName: 'PHARMACY ITEM 1',
+    worklistType: WORKLISTTYPE.NS,
+    itemName: ITEM_NAME.PHARMACY_ITEM_1,
     itemNbr: 789123457,
     upcNbr: '667788889999',
     catgNbr: 199,
-    catgName: 'ELECTRONICS',
+    catgName: CATEGORY_NAME.ELECTRONICS,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -82,77 +110,77 @@ export const mockWorkListToDo: WorklistItemI[] = [
 ];
 export const mockWorkListComplete: WorklistItemI[] = [
   {
-    worklistType: 'NSFL',
-    itemName: 'TEST ITEM',
+    worklistType: WORKLISTTYPE.NSFL,
+    itemName: ITEM_NAME.TEST_ITEM,
     itemNbr: 1234567890,
     upcNbr: '000055559999',
     catgNbr: 93,
-    catgName: 'FOODSERVICE',
+    catgName: CATEGORY_NAME.FOODSERVICE,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
   {
-    worklistType: 'NO',
-    itemName: 'ELECTRONIC ITEM',
+    worklistType: WORKLISTTYPE.NO,
+    itemName: ITEM_NAME.ELECTRONIC_ITEM,
     itemNbr: 987654321,
     upcNbr: '777555333',
     catgNbr: 99,
-    catgName: 'ELECTRONICS',
+    catgName: CATEGORY_NAME.ELECTRONICS,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
   {
-    worklistType: 'NO',
-    itemName: 'BAKERY ITEM',
+    worklistType: WORKLISTTYPE.NO,
+    itemName: ITEM_NAME.BAKERY_ITEM,
     itemNbr: 123789456,
     upcNbr: '111122223333',
     catgNbr: 88,
-    catgName: 'FRESH BAKERY',
+    catgName: CATEGORY_NAME.FRESH_BAKERY,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
   {
-    worklistType: 'C',
-    itemName: 'WINE ITEM',
+    worklistType: WORKLISTTYPE.C,
+    itemName: ITEM_NAME.WINE_ITEM,
     itemNbr: 456789123,
     upcNbr: '444455556666',
     catgNbr: 19,
-    catgName: 'WINE',
+    catgName: CATEGORY_NAME.WINE,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
   {
-    worklistType: 'C',
-    itemName: 'PHARMACY ITEM',
+    worklistType: WORKLISTTYPE.C,
+    itemName: ITEM_NAME.PHARMACY_ITEM,
     itemNbr: 789123456,
     upcNbr: '777788889999',
     catgNbr: 87,
-    catgName: 'PHARMACY RX',
+    catgName: CATEGORY_NAME.PHARMACY_RX,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
   {
-    worklistType: 'NS',
-    itemName: 'PHARMACY ITEM 1',
+    worklistType: WORKLISTTYPE.NS,
+    itemName: ITEM_NAME.PHARMACY_ITEM_1,
     itemNbr: 789123457,
     upcNbr: '667788889999',
     catgNbr: 199,
-    catgName: 'ELECTRONICS',
+    catgName: CATEGORY_NAME.ELECTRONICS,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -163,18 +191,18 @@ export const mockWorkListComplete: WorklistItemI[] = [
 
 export const mockCategoryList: WorklistItemI[] = [
   {
-    worklistType: 'CATEGORY',
-    catgName: 'WINE',
+    worklistType: WORKLISTTYPE.CATEGORY,
+    catgName: CATEGORY_NAME.WINE,
     catgNbr: 19,
     itemCount: 1
   },
   {
-    worklistType: 'C',
-    itemName: 'WINE ITEM',
+    worklistType: WORKLISTTYPE.C,
+    itemName: ITEM_NAME.WINE_ITEM,
     itemNbr: 456789123,
     upcNbr: '444455556666',
     catgNbr: 19,
-    catgName: 'WINE',
+    catgName: CATEGORY_NAME.WINE,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -182,18 +210,18 @@ export const mockCategoryList: WorklistItemI[] = [
     completed: false
   },
   {
-    worklistType: 'CATEGORY',
-    catgName: 'PHARMACY RX',
+    worklistType: WORKLISTTYPE.CATEGORY,
+    catgName: CATEGORY_NAME.PHARMACY_RX,
     catgNbr: 87,
     itemCount: 1
   },
   {
-    worklistType: 'C',
-    itemName: 'PHARMACY ITEM',
+    worklistType: WORKLISTTYPE.C,
+    itemName: ITEM_NAME.PHARMACY_ITEM,
     itemNbr: 789123456,
     upcNbr: '777788889999',
     catgNbr: 87,
-    catgName: 'PHARMACY RX',
+    catgName: CATEGORY_NAME.PHARMACY_RX,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -201,18 +229,18 @@ export const mockCategoryList: WorklistItemI[] = [
     completed: false
   },
   {
-    worklistType: 'CATEGORY',
-    catgName: 'FRESH BAKERY',
+    worklistType: WORKLISTTYPE.CATEGORY,
+    catgName: CATEGORY_NAME.FRESH_BAKERY,
     catgNbr: 88,
     itemCount: 1
   },
   {
-    worklistType: 'NO',
-    itemName: 'BAKERY ITEM',
+    worklistType: WORKLISTTYPE.NO,
+    itemName: ITEM_NAME.BAKERY_ITEM,
     itemNbr: 123789456,
     upcNbr: '111122223333',
     catgNbr: 88,
-    catgName: 'FRESH BAKERY',
+    catgName: CATEGORY_NAME.FRESH_BAKERY,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -220,18 +248,18 @@ export const mockCategoryList: WorklistItemI[] = [
     completed: false
   },
   {
-    worklistType: 'CATEGORY',
-    catgName: 'FOODSERVICE',
+    worklistType: WORKLISTTYPE.CATEGORY,
+    catgName: CATEGORY_NAME.FOODSERVICE,
     catgNbr: 93,
     itemCount: 1
   },
   {
-    worklistType: 'NSFL',
-    itemName: 'TEST ITEM',
+    worklistType: WORKLISTTYPE.NSFL,
+    itemName: ITEM_NAME.TEST_ITEM,
     itemNbr: 1234567890,
     upcNbr: '000055559999',
     catgNbr: 93,
-    catgName: 'FOODSERVICE',
+    catgName: CATEGORY_NAME.FOODSERVICE,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -239,18 +267,18 @@ export const mockCategoryList: WorklistItemI[] = [
     completed: false
   },
   {
-    worklistType: 'CATEGORY',
-    catgName: 'ELECTRONICS',
+    worklistType: WORKLISTTYPE.CATEGORY,
+    catgName: CATEGORY_NAME.ELECTRONICS,
     catgNbr: 99,
     itemCount: 1
   },
   {
-    worklistType: 'NO',
-    itemName: 'ELECTRONIC ITEM',
+    worklistType: WORKLISTTYPE.NO,
+    itemName: ITEM_NAME.ELECTRONIC_ITEM,
     itemNbr: 987654321,
     upcNbr: '777555333',
     catgNbr: 99,
-    catgName: 'ELECTRONICS',
+    catgName: CATEGORY_NAME.ELECTRONICS,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -258,18 +286,18 @@ export const mockCategoryList: WorklistItemI[] = [
     completed: false
   },
   {
-    worklistType: 'CATEGORY',
-    catgName: 'ELECTRONICS',
+    worklistType: WORKLISTTYPE.CATEGORY,
+    catgName: CATEGORY_NAME.ELECTRONICS,
     catgNbr: 199,
     itemCount: 1
   },
   {
-    worklistType: 'NS',
-    itemName: 'PHARMACY ITEM 1',
+    worklistType: WORKLISTTYPE.NS,
+    itemName: ITEM_NAME.PHARMACY_ITEM_1,
     itemNbr: 789123457,
     upcNbr: '667788889999',
     catgNbr: 199,
-    catgName: 'ELECTRONICS',
+    catgName: CATEGORY_NAME.ELECTRONICS,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,
@@ -279,12 +307,12 @@ export const mockCategoryList: WorklistItemI[] = [
 ];
 
 export const missingCategoryNbrList = [{
-  worklistType: 'NSFL',
-  itemName: 'TEST ITEM',
+  worklistType: WORKLISTTYPE.NSFL,
+  itemName: ITEM_NAME.TEST_ITEM,
   itemNbr: 1234567890,
   upcNbr: '000055559999',
   catgNbr: undefined,
-  catgName: 'FOODSERVICE',
+  catgName: CATEGORY_NAME.FOODSERVICE,
   subCatgNbr: 0,
   subCatgName: undefined,
   completedTs: undefined,
@@ -292,12 +320,12 @@ export const missingCategoryNbrList = [{
   completed: false
 },
 {
-  worklistType: 'NO',
-  itemName: 'ELECTRONIC ITEM',
+  worklistType: WORKLISTTYPE.NO,
+  itemName: ITEM_NAME.ELECTRONIC_ITEM,
   itemNbr: 987654321,
   upcNbr: '777555333',
   catgNbr: undefined,
-  catgName: 'ELECTRONICS',
+  catgName: CATEGORY_NAME.ELECTRONICS,
   subCatgNbr: 0,
   subCatgName: undefined,
   completedTs: undefined,
@@ -305,12 +333,12 @@ export const missingCategoryNbrList = [{
   completed: false
 },
 {
-  worklistType: 'NO',
-  itemName: 'BAKERY ITEM',
+  worklistType: WORKLISTTYPE.NO,
+  itemName: ITEM_NAME.BAKERY_ITEM,
   itemNbr: 123789456,
   upcNbr: '111122223333',
   catgNbr: undefined,
-  catgName: 'FRESH BAKERY',
+  catgName: CATEGORY_NAME.FRESH_BAKERY,
   subCatgNbr: 0,
   subCatgName: undefined,
   completedTs: undefined,
@@ -318,12 +346,12 @@ export const missingCategoryNbrList = [{
   completed: false
 },
 {
-  worklistType: 'C',
-  itemName: 'WINE ITEM',
+  worklistType: WORKLISTTYPE.C,
+  itemName: ITEM_NAME.WINE_ITEM,
   itemNbr: 456789123,
   upcNbr: '444455556666',
   catgNbr: undefined,
-  catgName: 'WINE',
+  catgName: CATEGORY_NAME.WINE,
   subCatgNbr: 0,
   subCatgName: undefined,
   completedTs: undefined,
@@ -331,12 +359,12 @@ export const missingCategoryNbrList = [{
   completed: false
 },
 {
-  worklistType: 'C',
-  itemName: 'PHARMACY ITEM',
+  worklistType: WORKLISTTYPE.C,
+  itemName: ITEM_NAME.PHARMACY_ITEM,
   itemNbr: 789123456,
   upcNbr: '777788889999',
   catgNbr: undefined,
-  catgName: 'PHARMACY RX',
+  catgName: CATEGORY_NAME.PHARMACY_RX,
   subCatgNbr: 0,
   subCatgName: undefined,
   completedTs: undefined,
@@ -346,51 +374,51 @@ export const missingCategoryNbrList = [{
 
 export const missingExceptionsWorklist: WorklistItemI[] = [
   {
-    worklistType: 'Non-Exception',
-    itemName: 'TEST ITEM',
+    worklistType: WORKLISTTYPE.NON_EXCEPTION,
+    itemName: ITEM_NAME.TEST_ITEM,
     itemNbr: 1234567890,
     upcNbr: '000055559999',
     catgNbr: 93,
-    catgName: 'FOODSERVICE',
+    catgName: CATEGORY_NAME.FOODSERVICE,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
   {
-    worklistType: 'Non-Exception',
-    itemName: 'ELECTRONIC ITEM',
+    worklistType: WORKLISTTYPE.NON_EXCEPTION,
+    itemName: ITEM_NAME.ELECTRONIC_ITEM,
     itemNbr: 987654321,
     upcNbr: '777555333',
     catgNbr: 99,
-    catgName: 'ELECTRONICS',
+    catgName: CATEGORY_NAME.ELECTRONICS,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
   {
-    worklistType: 'Non-Exception',
-    itemName: 'BAKERY ITEM',
+    worklistType: WORKLISTTYPE.NON_EXCEPTION,
+    itemName: ITEM_NAME.BAKERY_ITEM,
     itemNbr: 123789456,
     upcNbr: '111122223333',
     catgNbr: 88,
-    catgName: 'FRESH BAKERY',
+    catgName: CATEGORY_NAME.FRESH_BAKERY,
     subCatgNbr: 0,
     subCatgName: undefined,
-    completedTs: '2020-07-15T08:02:17-05:00',
+    completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true
   },
   {
-    worklistType: 'Non-Exception',
-    itemName: 'PHARMACY ITEM 1',
+    worklistType: WORKLISTTYPE.NON_EXCEPTION,
+    itemName: ITEM_NAME.PHARMACY_ITEM_1,
     itemNbr: 789123457,
     upcNbr: '667788889999',
     catgNbr: 199,
-    catgName: 'ELECTRONICS',
+    catgName: CATEGORY_NAME.ELECTRONICS,
     subCatgNbr: 0,
     subCatgName: undefined,
     completedTs: undefined,

@@ -27,6 +27,9 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
+import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
+import { barcodeEmitter } from '../../utils/scannerUtils';
+import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { hideLocationPopup } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 
@@ -40,6 +43,7 @@ interface ZoneProps {
     siteId: number,
     dispatch: Dispatch<any>,
     getZoneApi: AsyncState,
+    isManualScanEnabled: boolean,
     navigation: NavigationProp<any>,
     apiStart: number,
     setApiStart: React.Dispatch<React.SetStateAction<number>>,
@@ -53,6 +57,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
   const {
     siteId,
     getZoneApi,
+    isManualScanEnabled,
     apiStart,
     setApiStart,
     dispatch,
@@ -72,6 +77,22 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     }).catch(() => {});
   }), [navigation]);
 
+  // scanned event listener
+  useEffectHook(() => {
+    const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused()) {
+        validateSession(navigation, route.name).then(() => {
+          trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
+          dispatch(setScannedEvent(scan));
+          dispatch(setManualScan(false));
+          navigation.navigate('SectionDetails');
+        });
+      }
+    });
+    return () => {
+      scanSubscription.remove();
+    };
+  }, []);
   useEffectHook(() => {
     // on api success
     if (!getZoneApi.isWaiting && getZoneApi.result) {
@@ -119,11 +140,11 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
 
   return (
     <View>
+      {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
         details={`${getZoneApi.result?.data.length || 0} ${strings('LOCATION.ZONES')}`}
       />
-
       <FlatList
         data={getZoneApi.result?.data || []}
         renderItem={({ item }) => (
@@ -148,6 +169,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
 };
 
 const ZoneList = (): JSX.Element => {
+  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const siteId = useTypedSelector(state => state.User.siteId);
   const getZoneApi = useTypedSelector(state => state.async.getAllZones);
   const location = useTypedSelector(state => state.Location);
@@ -182,6 +204,7 @@ const ZoneList = (): JSX.Element => {
           siteId={siteId}
           dispatch={dispatch}
           getZoneApi={getZoneApi}
+          isManualScanEnabled={isManualScanEnabled}
           navigation={navigation}
           route={route}
           useEffectHook={useEffect}
