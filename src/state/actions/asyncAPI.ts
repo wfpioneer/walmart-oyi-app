@@ -56,3 +56,6 @@ export const getSections = makeAsyncActionCreators(GET_SECTIONS);
 
 export const GET_SECTION_DETAILS = makeAsyncActionTypes('API/GET_SECTION_DETAILS');
 export const getSectionDetails = makeAsyncActionCreators(GET_SECTION_DETAILS);
+
+export const ADD_PALLET = makeAsyncActionTypes('API/ADD_PALLET');
+export const addPallet = makeAsyncActionCreators(ADD_PALLET);
