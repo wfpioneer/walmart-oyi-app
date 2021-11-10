@@ -45,9 +45,8 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
   // Add Location API
   useEffectHook(() => {
     // on api success
-    if (!addAPI.isWaiting && addAPI.result) {
-    
-    }
+    // eslint-disable-next-line no-empty
+    if (!addAPI.isWaiting && addAPI.result) {}
 
     // on api failure
     if (!addAPI.isWaiting && addAPI.error) {
