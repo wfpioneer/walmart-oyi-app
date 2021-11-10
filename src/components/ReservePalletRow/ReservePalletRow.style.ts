@@ -36,7 +36,7 @@ export default StyleSheet.create({
     paddingLeft: 15,
     paddingTop: 15
   },
-  trachIcon: {
+  trashIcon: {
     paddingLeft: 280
   }
 });
