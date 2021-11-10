@@ -12,9 +12,19 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text>
-          {`${strings('LOCATION.PALLET')} ${reservePallet.palletId}`}
-        </Text>
+        <View style={styles.pallet}>
+          <Text style={styles.textHeader}>
+            {`${strings('LOCATION.PALLET')} ${reservePallet.palletId}`}
+          </Text>
+          <View>
+            { !userFeatures.includes('location management edit') && (
+              // TODO: Image controls will be replaced with button in the future.
+              <Image
+                source={require('../../assets/images/trash_can.png')}
+              />
+            )}
+          </View>
+        </View>
         <Text style={styles.palletCreateTs}>
           {`${strings('LOCATION.CREATED_ON')} ${reservePallet.palletCreateTS}`}
         </Text>
@@ -32,13 +42,6 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
                 {`+${reservePallet.items.length - 1} ${strings('LOCATION.MORE')}`}
               </Text>
               )}
-          { userFeatures.includes('location management edit') && (
-          <View style={styles.trashIcon}>
-            <Image
-              source={require('../../assets/images/trash_can.png')}
-            />
-          </View>
-          )}
         </View>
         )}
       </View>

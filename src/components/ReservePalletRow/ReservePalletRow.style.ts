@@ -36,7 +36,10 @@ export default StyleSheet.create({
     paddingLeft: 15,
     paddingTop: 15
   },
-  trashIcon: {
-    paddingLeft: 280
+  textHeader: {
+    flex: 1
+  },
+  pallet: {
+    flexDirection: 'row'
   }
 });
