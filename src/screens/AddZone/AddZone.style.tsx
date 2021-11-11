@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
 export default StyleSheet.create({
+  safeAreaView: {
+    flex: 1
+  },
   zonePickerContainer: {
     borderWidth: 1,
     borderRadius: 10,
@@ -31,7 +34,32 @@ export default StyleSheet.create({
     marginHorizontal: 20
   },
   aisleText: {
-    fontSize: 18,
+    fontSize: 16,
     textAlignVertical: 'center'
+  },
+  continueButton: {
+    backgroundColor: COLOR.MAIN_THEME_COLOR,
+    borderRadius: 4,
+    borderColor: COLOR.MAIN_THEME_COLOR,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    height: 40,
+    paddingVertical: 10,
+    marginVertical: 10,
+    marginHorizontal: 15
+  },
+  buttonText: {
+    color: COLOR.WHITE,
+    textAlign: 'center'
+  },
+  bodyContainer: {
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
+    flex: 0.9
+  },
+  buttonContainer: {
+    flex: 0.1
   }
 });

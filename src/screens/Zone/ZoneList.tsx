@@ -27,13 +27,13 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
+import { CREATE_FLOW } from '../../models/LocationItems';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import {
   hideLocationPopup,
-  SET_POSSIBLE_ZONES,
-  SET_ZONES,
+  setCreateFlow,
   setPossibleZones,
   setZones
 } from '../../state/actions/Location';
@@ -201,6 +201,7 @@ const ZoneList = (): JSX.Element => {
   }, [location]);
 
   const handleAddZone = () => {
+    dispatch(setCreateFlow(CREATE_FLOW.CREATE_ZONE));
     dispatch(setPossibleZones(mockPossibleZones));
     bottomSheetModalRef.current?.dismiss();
     navigation.navigate('AddZone');
