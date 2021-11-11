@@ -35,5 +35,11 @@ export default StyleSheet.create({
   itemContainer: {
     paddingLeft: 15,
     paddingTop: 15
+  },
+  textHeader: {
+    flex: 1
+  },
+  pallet: {
+    flexDirection: 'row'
   }
 });
