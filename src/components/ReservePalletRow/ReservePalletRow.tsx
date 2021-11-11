@@ -17,7 +17,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
             {`${strings('LOCATION.PALLET')} ${reservePallet.palletId}`}
           </Text>
           <View>
-            { !userFeatures.includes('location management edit') && (
+            { userFeatures.includes('location management edit') && (
               // TODO: Image controls will be replaced with button in the future.
               <Image
                 source={require('../../assets/images/trash_can.png')}
