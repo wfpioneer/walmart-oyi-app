@@ -30,7 +30,7 @@ import { LocationType } from '../../models/LocationType';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import {hideLocationPopup, setCreateFlow, setPossibleZones} from '../../state/actions/Location';
+import {hideLocationPopup, setAisles, setCreateFlow, setPossibleZones} from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import {CREATE_FLOW} from "../../models/LocationItems";
@@ -200,6 +200,7 @@ const AisleList = (): JSX.Element => {
   }, [locationPopupVisible]);
 
   const handleAddAisles = () => {
+    dispatch(setAisles(getAllAisles.result.data));
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_AISLE));
     bottomSheetModalRef.current?.dismiss();
     navigation.navigate('AddZone');

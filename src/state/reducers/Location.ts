@@ -7,6 +7,9 @@ import {
   SELECT_ZONE,
   SET_CREATE_FLOW,
   SET_POSSIBLE_ZONES,
+  SET_AISLES,
+  SET_NEW_ZONE,
+  SET_NUMBER_OF_AISLES_TO_CREATE,
   SET_ZONES,
   SHOW_LOCATION_POPUP
 } from '../actions/Location';
@@ -32,9 +35,12 @@ interface LocationState {
     name: string;
   };
   zones: ZoneItem[],
+  aisles: AisleItem[],
   possibleZones: PossibleZone[],
   locationPopupVisible: boolean,
-  createFlow: CREATE_FLOW
+  createFlow: CREATE_FLOW,
+  newZone: string,
+  numberOfAislesToCreate: number
 }
 
 const initialState: LocationState = {
@@ -52,8 +58,11 @@ const initialState: LocationState = {
   },
   zones: [],
   possibleZones: [],
+  aisles: [],
   locationPopupVisible: false,
-  createFlow: CREATE_FLOW.NOT_STARTED
+  createFlow: CREATE_FLOW.NOT_STARTED,
+  newZone: '',
+  numberOfAislesToCreate: 0
 };
 
 export const Location = (
@@ -84,6 +93,11 @@ export const Location = (
         }
       };
     }
+    case SET_AISLES:
+      return {
+        ...state,
+        aisles: action.payload
+      };
     case SELECT_SECTION: {
       return {
         ...state,
@@ -107,11 +121,21 @@ export const Location = (
       return {
         ...state,
         possibleZones: action.payload
-      }
+      };
     case SET_CREATE_FLOW:
       return {
         ...state,
         createFlow: action.payload
+      };
+    case SET_NEW_ZONE:
+      return {
+        ...state,
+        newZone: action.payload
+      };
+    case SET_NUMBER_OF_AISLES_TO_CREATE:
+      return {
+        ...state,
+        numberOfAislesToCreate: action.payload
       };
     case RESET_SECTION_NAME:
       return initialState;

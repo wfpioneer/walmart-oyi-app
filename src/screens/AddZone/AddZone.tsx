@@ -1,11 +1,13 @@
 import React, { EffectCallback, useEffect, useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Picker } from "@react-native-picker/picker";
+import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
 import styles from './AddZone.style';
 import COLOR from '../../themes/Color';
 import { CREATE_FLOW, PossibleZone, ZoneItem } from '../../models/LocationItems';
+import { setNewZone, setNumberOfAislesToCreate } from '../../state/actions/Location';
 
 interface AddZoneScreenProps {
   zones: ZoneItem[];
@@ -16,6 +18,7 @@ interface AddZoneScreenProps {
   setSelectedZone: any;
   numberOfAisles: number;
   setNumberOfAisles: any;
+  dispatch: any;
 }
 
 const NEW_ZONE_AISLE_MIN = 1;
@@ -58,6 +61,18 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
     props.setNumberOfAisles((prevState: number) => prevState - 1)
   };
 
+  const handleContinue = () => {
+    // TODO add navigation to new aisles screen once it is created
+    switch (props.createFlow) {
+      case CREATE_FLOW.CREATE_AISLE:
+        props.dispatch(setNumberOfAislesToCreate(props.numberOfAisles));
+        break;
+      default:
+        props.dispatch(setNumberOfAislesToCreate(props.numberOfAisles));
+        props.dispatch(setNewZone(props.selectedZone));
+    }
+  };
+
   return (
     <View style={styles.safeAreaView}>
       <View style={styles.bodyContainer}>
@@ -80,14 +95,13 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
             isValid={validateNumericInput(props.numberOfAisles)}
             onDecreaseQty={handleDecreaseAisle}
             onIncreaseQty={handleIncreaseAisle}
-            onTextChange={() => {
-            }}
+            onTextChange={() => {}}
             value={props.numberOfAisles}
           />
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.continueButton}>
+        <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
       </View>
@@ -102,6 +116,7 @@ const AddZone = (): JSX.Element => {
   const createFlow = useTypedSelector(state => state.Location.createFlow);
   const [selectedZone, setSelectedZone] = useState('');
   const [numberOfAisles, setNumberOfAisles] = useState(1);
+  const dispatch = useDispatch();
 
   return (
     <AddZoneScreen
@@ -113,6 +128,7 @@ const AddZone = (): JSX.Element => {
       setSelectedZone={setSelectedZone}
       numberOfAisles={numberOfAisles}
       setNumberOfAisles={setNumberOfAisles}
+      dispatch={dispatch}
     />
   )
 };
