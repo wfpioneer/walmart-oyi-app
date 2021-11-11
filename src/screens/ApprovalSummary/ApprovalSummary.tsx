@@ -31,7 +31,7 @@ interface ApprovalSummaryProps {
   errorModalVisible: boolean;
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   dispatch: Dispatch<any>
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
 interface ItemQuantity {
@@ -62,14 +62,12 @@ const validateQuantity = (item: ApprovalCategory, checkedList: ApprovalCategory[
   decreaseItems: ItemQuantity, resolvedTime: string) => {
   if (item.isChecked && !item.categoryHeader) {
     checkedList.push({ ...item, resolvedTimestamp: resolvedTime });
-    if (item.isChecked && !item.categoryHeader && (item.newQuantity > item.oldQuantity)) {
-      checkedList.push({ ...item, resolvedTimestamp: resolvedTime });
+    if (item.newQuantity > item.oldQuantity) {
       increaseItems.oldQty += item.oldQuantity;
       increaseItems.newQty += item.newQuantity;
       increaseItems.dollarChange += item.dollarChange;
       increaseItems.totalItems += 1;
     } else {
-      checkedList.push({ ...item, resolvedTimestamp: resolvedTime });
       decreaseItems.oldQty += item.oldQuantity;
       decreaseItems.newQty += item.newQuantity;
       decreaseItems.dollarChange += item.dollarChange;
@@ -159,8 +157,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
       </View>
       <View style={styles.quantityContainer}>
         <Text style={styles.itemQtyText}>
-          {`${strings('APPROVAL.DECREASES')} (${decreaseItems.totalItems} ${
-            decreaseItems.totalItems === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')})`}
+          {`${strings('APPROVAL.DECREASES')} (${decreaseItems.totalItems} ${decreaseItems.totalItems === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')})`}
         </Text>
         <QuantityChange
           oldQty={decreaseItems.oldQty}
@@ -170,8 +167,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
       </View>
       <View style={styles.quantityContainer}>
         <Text style={styles.itemQtyText}>
-          {`${strings('APPROVAL.INCREASES')} (${increaseItems.totalItems} ${
-            increaseItems.totalItems === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')})`}
+          {`${strings('APPROVAL.INCREASES')} (${increaseItems.totalItems} ${increaseItems.totalItems === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')})`}
         </Text>
         <QuantityChange
           oldQty={increaseItems.oldQty}
