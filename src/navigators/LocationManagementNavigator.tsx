@@ -17,6 +17,7 @@ import { openCamera } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './LocationManagementNavigator.style';
+import PrintPriceSign from '../screens/PrintPriceSign/PrintPriceSign';
 
 const Stack = createStackNavigator();
 interface LocationManagementProps {
@@ -183,6 +184,13 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         component={AddPallet}
         options={{
           headerTitle: strings('LOCATION.SCAN_PALLET')
+        }}
+      />
+      <Stack.Screen
+        name="PrintLabel"
+        component={PrintPriceSign}
+        options={{
+          headerTitle: 'Print Label' // add translations
         }}
       />
     </Stack.Navigator>

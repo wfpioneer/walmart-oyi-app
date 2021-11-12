@@ -79,7 +79,7 @@ export const renderSignSizeButtons = (
 
 interface PriceSignProps {
   scannedEvent: {value: any; type: any };
-  exceptionType: string;
+  exceptionType: string | null | undefined;
   actionCompleted: boolean;
   result: any;
   printAPI: AsyncState
@@ -129,7 +129,28 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     });
   }, []);
 
-  // Print API
+  // Print Sign API
+  useEffectHook(() => {
+    // on api success
+    if (!printAPI.isWaiting && printAPI.result) {
+      if (!actionCompleted && exceptionType === 'PO') {
+        dispatch(setActionCompleted());
+      }
+      navigation.goBack();
+    }
+
+    // on api failure
+    if (!printAPI.isWaiting && printAPI.error) {
+      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+    }
+
+    // on api submission
+    if (printAPI.isWaiting) {
+      setError({ error: false, message: '' });
+    }
+  }, [printAPI]);
+
+  // Print Label API
   useEffectHook(() => {
     // on api success
     if (!printAPI.isWaiting && printAPI.result) {
@@ -201,7 +222,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         upcNbr,
         catgNbr: categoryNbr,
         signQty,
-        worklistType: exceptionType,
+        worklistType: exceptionType ?? '',
         paperSize: selectedSignType
       };
       trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });

@@ -151,6 +151,8 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
       <LocationHeader
         location={`${strings('LOCATION.AISLE')} ${zoneName}${aisleName}`}
         details={`${getAllSections.result?.data.length || 0} ${strings('LOCATION.SECTIONS')}`}
+        navigation={navigation}
+        route={route}
       />
       <FlatList
         data={getAllSections.result?.data || []}

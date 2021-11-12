@@ -148,6 +148,8 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
       <LocationHeader
         location={`${strings('LOCATION.ZONE')} ${zoneName}`}
         details={`${getAllAisles.result?.data.length || 0} ${strings('LOCATION.AISLES')}`}
+        navigation={navigation}
+        route={route}
       />
       <FlatList
         data={getAllAisles.result?.data || []}

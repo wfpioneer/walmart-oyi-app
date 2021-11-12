@@ -158,9 +158,11 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('LOCATION.SECTION')}`
-         + ` ${locationName === '-' ? scannedEvent.value?.toUpperCase() : locationName}`}
+         + ` ${scannedEvent.value?.toUpperCase() ?? locationName}`}
         details={`${floorItems.length ?? 0} ${strings('LOCATION.ITEMS')},`
         + ` ${reserveItems.length ?? 0} ${strings('LOCATION.PALLETS')}`}
+        navigation={navigation}
+        route={route}
       />
       <Tab.Navigator
         tabBarOptions={{

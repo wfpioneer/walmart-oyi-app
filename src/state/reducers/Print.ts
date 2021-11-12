@@ -1,6 +1,7 @@
 import {
   ADD_TO_PRINTER_LIST,
   ADD_TO_PRINT_QUEUE,
+  Actions,
   DELETE_FROM_PRINTER_LIST,
   SET_PRINT_QUEUE,
   SET_SELECTED_PRINTER,
@@ -27,7 +28,7 @@ const initialState: StateType = {
   printQueue: []
 };
 
-export const Print = (state = initialState, action: any) => {
+export const Print = (state = initialState, action: Actions): StateType => {
   const { printerList, printQueue } = state;
   switch (action.type) {
     case SET_SELECTED_PRINTER:
@@ -54,7 +55,9 @@ export const Print = (state = initialState, action: any) => {
       };
     case DELETE_FROM_PRINTER_LIST:
       // eslint-disable-next-line no-case-declarations
-      const deleteIndex = printerList.findIndex(item => item.id === action.payload);
+      const deleteIndex = printerList.findIndex(
+        item => item.id === action.payload
+      );
       printerList.splice(deleteIndex, 1);
       return {
         ...state,
