@@ -48,7 +48,6 @@ export const renderSignSizeButtons = (
   selectedPrinter: Printer, catgNbr: number, signType: string, dispatch: Dispatch<any>
 ): JSX.Element => {
   const sizeObject = selectedPrinter.type === PrinterType.LASER ? LaserPaper : PortablePaper;
-  setSignType('Large')
   return (
     <View style={styles.sizeBtnContainer}>
       {Object.keys(sizeObject).map(key => {

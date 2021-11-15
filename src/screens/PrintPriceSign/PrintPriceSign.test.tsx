@@ -4,9 +4,7 @@ import { NavigationProp, Route } from '@react-navigation/native';
 import ItemDetails from '../../models/ItemDetails';
 import { PrintPriceSignScreen, renderSignSizeButtons, validateQty } from './PrintPriceSign';
 import getItemDetails from '../../mockData/getItemDetails';
-import {
-  LaserPaper, Printer, PrinterType
-} from '../../models/Printer';
+import { Printer, PrinterType } from '../../models/Printer';
 import { strings } from '../../locales';
 
 // Something gets into a weird state, and this seems to fix it
@@ -39,23 +37,54 @@ describe('PrintPriceSignScreen', () => {
   const testItem: ItemDetails = getItemDetails[123];
 
   describe('Tests rendering print Errors/Api responses', () => {
-    it(' Renders Loader waiting for Print Service response  ', () => {
+    // Double Test here???
+    const apiIsWaiting = {
+      isWaiting: true,
+      value: null,
+      error: null,
+      result: null
+    };
+    it(' Renders Loader waiting for Print Sign Service response  ', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const printApiIsWaiting = {
-        isWaiting: true,
-        value: null,
-        error: null,
-        result: null
-      };
       renderer.render(
         <PrintPriceSignScreen
           scannedEvent={defaultScanEvent}
           exceptionType=""
           actionCompleted={false}
           result={testItem}
-          printAPI={printApiIsWaiting}
+          printAPI={apiIsWaiting}
+          printLabelAPI={defaultAsyncState}
           selectedPrinter={defaultPrinter}
-          selectedSignType={LaserPaper.XSmall}
+          selectedSignType="XSmall"
+          printQueue={[]}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          signQty={1}
+          setSignQty={jest.fn()}
+          isValidQty={true}
+          setIsValidQty={jest.fn()}
+          error={defaultError}
+          setError={jest.fn()}
+          useEffectHook={jest.fn()}
+          useLayoutHook={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it(' Renders Loader waiting for Print Label Service response  ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <PrintPriceSignScreen
+          scannedEvent={defaultScanEvent}
+          exceptionType=""
+          actionCompleted={false}
+          result={testItem}
+          printAPI={defaultAsyncState}
+          printLabelAPI={apiIsWaiting}
+          selectedPrinter={defaultPrinter}
+          selectedSignType="XSmall"
           printQueue={[]}
           dispatch={jest.fn()}
           navigation={navigationProp}
@@ -86,8 +115,9 @@ describe('PrintPriceSignScreen', () => {
           actionCompleted={false}
           result={testItem}
           printAPI={defaultAsyncState}
+          printLabelAPI={defaultAsyncState}
           selectedPrinter={defaultPrinter}
-          selectedSignType={LaserPaper.XSmall}
+          selectedSignType="XSmall"
           printQueue={[]}
           dispatch={jest.fn()}
           navigation={navigationProp}
@@ -116,8 +146,9 @@ describe('PrintPriceSignScreen', () => {
           actionCompleted={false}
           result={testItem}
           printAPI={defaultAsyncState}
+          printLabelAPI={defaultAsyncState}
           selectedPrinter={defaultPrinter}
-          selectedSignType={LaserPaper.XSmall}
+          selectedSignType="XSmall"
           printQueue={[]}
           dispatch={jest.fn()}
           navigation={navigationProp}
@@ -137,7 +168,7 @@ describe('PrintPriceSignScreen', () => {
   });
 
   describe('Tests rendering Price Sign Sizes', () => {
-    it(' Renders \'Wine button\' for wine items', () => {
+    it(" Renders 'Wine button' for wine items", () => {
       const renderer = ShallowRenderer.createRenderer();
       const wineItem: ItemDetails = getItemDetails[789];
 

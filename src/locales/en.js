@@ -131,7 +131,8 @@ export default {
     MAC_ADDRESS: 'Enter or Scan MAC Address',
     MAC_ADDRESS_ERROR: 'The MAC address is usually 12 numbers',
     PORTABLE_PRINTER: 'Portable Printer',
-    PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.'
+    PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.',
+    PRINT_LABEL: 'Print label'
   },
   LOCATION: {
     TITLE: 'All locations',

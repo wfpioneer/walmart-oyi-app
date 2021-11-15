@@ -190,7 +190,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         name="PrintLabel"
         component={PrintPriceSign}
         options={{
-          headerTitle: 'Print Label' // add translations
+          headerTitle: strings('PRINT.PRINT_LABEL')
         }}
       />
     </Stack.Navigator>

@@ -131,7 +131,8 @@ export default {
     MAC_ADDRESS: '输入或扫描MAC地址',
     MAC_ADDRESS_ERROR: 'MAC地址通常是12个数字',
     PORTABLE_PRINTER: '便携式打印机',
-    PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试'
+    PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
+    PRINT_LABEL: 'Print label' // TODO Mandarin translation
   },
   LOCATION: {
     TITLE: '所有位置',

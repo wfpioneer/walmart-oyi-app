@@ -98,6 +98,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="PrintLabel"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.PRINT.PRINT_LABEL\\" translation]",
+      }
+    }
+  />
 </StackNavigator>
 `;
 
@@ -196,6 +205,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     options={
       Object {
         "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="PrintLabel"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.PRINT.PRINT_LABEL\\" translation]",
       }
     }
   />

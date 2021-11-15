@@ -3,6 +3,9 @@ import { COLOR } from '../../themes/Color';
 
 const styles = StyleSheet.create({
   staticHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: COLOR.WHITE,
     padding: 14,
     marginHorizontal: 0,
@@ -12,6 +15,9 @@ const styles = StyleSheet.create({
   detailsText: {
     color: COLOR.GREY_500,
     fontSize: 12
+  },
+  buttonLabelText: {
+    color: COLOR.MAIN_THEME_COLOR
   }
 });
 
