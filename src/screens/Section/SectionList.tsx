@@ -35,6 +35,7 @@ import LocationManualScan from '../../components/LocationManualScan/LocationManu
 import { hideLocationPopup } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
+import { LocationName } from '../../models/Location';
 
 const NoSectionMessage = () : JSX.Element => (
   <View style={styles.noSections}>
@@ -235,7 +236,7 @@ const SectionList = (): JSX.Element => {
           text={strings('LOCATION.PRINT_SECTION')}
           onPress={() => {
             dispatch(hideLocationPopup());
-            dispatch(setPrintingLocationLabels('SectionList'));
+            dispatch(setPrintingLocationLabels(LocationName.AISLE));
             navigation.navigate('PrintPriceSign');
           }}
         />

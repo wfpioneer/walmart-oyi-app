@@ -30,6 +30,7 @@ import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSh
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import Button from '../../components/buttons/Button';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
+import { LocationName } from '../../models/Location';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -146,7 +147,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
         details={`${floorItems.length ?? 0} ${strings('LOCATION.ITEMS')},`
         + ` ${reserveItems.length ?? 0} ${strings('LOCATION.PALLETS')}`}
         buttonPress={() => {
-          dispatch(setPrintingLocationLabels('SectionDetails'));
+          dispatch(setPrintingLocationLabels(LocationName.SECTION));
           navigation.navigate('PrintPriceSign');
         }}
         buttonText={strings('LOCATION.PRINT_LABELS')}

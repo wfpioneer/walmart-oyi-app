@@ -10,6 +10,13 @@ export enum PrinterType {
   PORTABLE
 }
 
+// eslint-disable-next-line no-shadow
+export enum PrintQueueItemType {
+  ITEM = 'ITEM',
+  SECTION = 'SECTION',
+  AISLE = 'AISLE'
+}
+
 export interface PrintQueueItem {
   image?: any;
   itemName: string;
@@ -18,7 +25,8 @@ export interface PrintQueueItem {
   catgNbr: number;
   signQty: number;
   paperSize: LaserPaper | PortablePaper;
-  worklistType: string;
+  worklistType?: string;
+  itemType?: PrintQueueItemType
 }
 // TODO mx wine label code is 'W', when implementing multitenetness need to adjust papersizes for the correct market
 export enum LaserPaper {

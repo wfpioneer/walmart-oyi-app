@@ -22,7 +22,7 @@ import {
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
-  LaserPaper, PortablePaper, PrintQueueItem, Printer, PrinterType
+  LaserPaper, PortablePaper, PrintQueueItem, PrintQueueItemType, Printer, PrinterType
 } from '../../models/Printer';
 import { printSign } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -31,6 +31,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { PRINT_SIGN } from '../../state/actions/asyncAPI';
 import ItemDetails from '../../models/ItemDetails';
 import { LocationIdName } from '../../state/reducers/Location';
+import { LocationName } from '../../models/Location';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -206,15 +207,31 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       // add to print queue, forcing to use laser
       // TODO show popup if laser printer is not selected when adding to queue
       // TODO show toast that the item was added to queue
-      const printQueueItem: PrintQueueItem = {
-        itemName,
-        itemNbr,
-        upcNbr,
-        catgNbr: categoryNbr,
-        signQty,
-        worklistType: exceptionType,
-        paperSize: selectedSignType
-      };
+      let printQueueItem: PrintQueueItem;
+      if (!printingLocationLabels) {
+        printQueueItem = {
+          itemName,
+          itemNbr,
+          upcNbr,
+          catgNbr: categoryNbr,
+          signQty,
+          worklistType: exceptionType,
+          paperSize: selectedSignType,
+          itemType: PrintQueueItemType.ITEM
+        };
+      } else {
+        const { name, id } = printingLocationLabels === LocationName.AISLE ? selectedAisle : selectedSection;
+        printQueueItem = {
+          itemName: name,
+          itemNbr: id,
+          upcNbr: '',
+          catgNbr: 0,
+          paperSize: selectedSignType,
+          signQty,
+          itemType: printingLocationLabels === LocationName.AISLE
+            ? PrintQueueItemType.AISLE : PrintQueueItemType.SECTION
+        };
+      }
       trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
       dispatch(addToPrintQueue(printQueueItem));
       if (!actionCompleted && exceptionType === 'PO') {
@@ -255,7 +272,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     : (
       <View style={styles.detailsContainer}>
         <Text>
-          {printingLocationLabels === 'SectionList'
+          {printingLocationLabels === LocationName.AISLE
             ? `${strings('LOCATION.AISLE')} ${selectedAisle.id}`
             : `${strings('LOCATION.SECTION')} ${selectedSection.id}`}
         </Text>
@@ -307,7 +324,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         />
       </View>
     )
-  )
+  );
 
   return (
     <SafeAreaView style={styles.mainContainer}>
