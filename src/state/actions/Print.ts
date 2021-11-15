@@ -1,4 +1,4 @@
-import { PrintQueueItem, Printer } from '../../models/Printer';
+import { PrintPaper, PrintQueueItem, Printer } from '../../models/Printer';
 
 export const SET_SELECTED_PRINTER = 'PRINT/SET_SELECTED_PRINTER';
 export const SET_SELECTED_SIGN_TYPE = 'PRINT/SET_SELECTED_SIGN_TYPE';
@@ -12,7 +12,7 @@ export const setSelectedPrinter = (printer: Printer) => ({
   payload: printer
 } as const);
 
-export const setSignType = (type: string) => ({
+export const setSignType = (type: PrintPaper) => ({
   type: SET_SELECTED_SIGN_TYPE,
   payload: type
 } as const);

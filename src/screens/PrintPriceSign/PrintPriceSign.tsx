@@ -22,7 +22,7 @@ import {
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
-  LaserPaper, PortablePaper, PrintQueueItem, Printer, PrinterType
+  LaserPaper, PortablePaper, PrintPaper, PrintQueueItem, Printer, PrinterType
 } from '../../models/Printer';
 import { printSign } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -48,9 +48,10 @@ export const renderSignSizeButtons = (
   selectedPrinter: Printer, catgNbr: number, signType: string, dispatch: Dispatch<any>
 ): JSX.Element => {
   const sizeObject = selectedPrinter.type === PrinterType.LASER ? LaserPaper : PortablePaper;
+  setSignType('Large')
   return (
     <View style={styles.sizeBtnContainer}>
-      {Object.keys(sizeObject).map((key: string) => {
+      {Object.keys(sizeObject).map(key => {
         // Only show the wine button if the item's category is appropriate
         if (key !== 'Wine' || (key === 'Wine' && catgNbr === wineCatgNbr)) {
           return (
@@ -83,8 +84,9 @@ interface PriceSignProps {
   actionCompleted: boolean;
   result: any;
   printAPI: AsyncState
+  printLabelAPI: AsyncState
   selectedPrinter: Printer;
-  selectedSignType: LaserPaper | PortablePaper;
+  selectedSignType: PrintPaper;
   printQueue: PrintQueueItem[];
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
@@ -97,22 +99,26 @@ interface PriceSignProps {
   useLayoutHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
 
-const getPrinter = (selectedPrinter: Printer, selectedSignType: LaserPaper | PortablePaper) => (selectedPrinter.type === PrinterType.LASER
-  // @ts-ignore
-  ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType]);
+const getPrinter = (selectedPrinter: Printer, selectedSignType: PrintPaper) => (
+  selectedPrinter.type === PrinterType.LASER
+    // @ts-ignore
+    ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType]);
 const isValid = (actionCompleted: any, exceptionType: any) => !actionCompleted && exceptionType === 'PO';
-const isItemSizeExists = (printQueue: any, selectedSignType: LaserPaper | PortablePaper, itemNbr: any) =>
+
+const isItemSizeExists = (printQueue: PrintQueueItem[], selectedSignType: PrintPaper, itemNbr: number) =>
   // eslint-disable-next-line implicit-arrow-linebreak
-  printQueue.some((printItem: PrintQueueItem) => printItem.itemNbr === itemNbr
+  printQueue.some(printItem => printItem.itemNbr === itemNbr
     && printItem.paperSize === selectedSignType);
-const sethandleDecreaseQty = (signQty: number, setSignQty: React.Dispatch<React.SetStateAction<number>>) => {
+
+const setHandleDecreaseQty = (signQty: number, setSignQty: React.Dispatch<React.SetStateAction<number>>) => {
   if (signQty > QTY_MAX) {
     setSignQty(QTY_MAX);
   } else if (signQty > QTY_MIN) {
     setSignQty(((prevState: number) => prevState - 1));
   }
 };
-const sethandleIncreaseQty = (signQty: number, setSignQty: React.Dispatch<React.SetStateAction<number>>) => {
+
+const setHandleIncreaseQty = (signQty: number, setSignQty: React.Dispatch<React.SetStateAction<number>>) => {
   if (signQty < QTY_MIN) {
     setSignQty(QTY_MIN);
   } else if (signQty < QTY_MAX) {
@@ -137,7 +143,7 @@ const validateQuantity = (isValidQty: boolean) => (
   )
 );
 const isValidQtyStyle = (isValidQty: boolean) => (isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid);
-const isAddtoQueueDisabled = (isValidQty: boolean, selectedSignType: LaserPaper | PortablePaper) => (!isValidQty
+const isAddtoQueueDisabled = (isValidQty: boolean, selectedSignType: PrintPaper) => (!isValidQty
   || selectedSignType?.length === 0);
 const checkQuantity = (newQty: number, setIsValidQty: React.Dispatch<React.SetStateAction<boolean>>,
   setSignQty: React.Dispatch<React.SetStateAction<number>>) => {
@@ -161,7 +167,7 @@ const isResultHasData = (result: any) => (
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
     scannedEvent, exceptionType, actionCompleted, result,
-    printAPI, selectedPrinter, selectedSignType, printQueue,
+    printAPI, printLabelAPI, selectedPrinter, selectedSignType, printQueue,
     dispatch, navigation, route, signQty, setSignQty, isValidQty,
     setIsValidQty, error, setError, useEffectHook, useLayoutHook
   } = props;
@@ -215,19 +221,19 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   // Print Label API
   useEffectHook(() => {
     // on api success
-    if (!printAPI.isWaiting && printAPI.result) {
+    if (!printLabelAPI.isWaiting && printLabelAPI.result) {
       isValidDispatch(props, actionCompleted, exceptionType);
       navigation.goBack();
     }
     // on api failure
-    if (!printAPI.isWaiting && printAPI.error) {
+    if (!printLabelAPI.isWaiting && printLabelAPI.error) {
       setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
     // on api submission
-    if (printAPI.isWaiting) {
+    if (printLabelAPI.isWaiting) {
       setError({ error: false, message: '' });
     }
-  }, [printAPI]);
+  }, [printLabelAPI]);
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
@@ -236,12 +242,12 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
 
   const handleIncreaseQty = () => {
     setIsValidQty(true);
-    sethandleIncreaseQty(signQty, setSignQty);
+    setHandleIncreaseQty(signQty, setSignQty);
   };
 
   const handleDecreaseQty = () => {
     setIsValidQty(true);
-    sethandleDecreaseQty(signQty, setSignQty);
+    setHandleDecreaseQty(signQty, setSignQty);
   };
 
   const handleChangePrinter = () => {
@@ -292,6 +298,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       ];
       trackEvent('print_price_sign', { printItem: JSON.stringify(printlist) });
       dispatch(printSign({ printlist }));
+      //  If section label call printLabel
     }).catch(() => { });
   };
 
@@ -355,10 +362,10 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         </View>
         {isErrorRequired(error)}
       </ScrollView>
-      {printAPI.isWaiting ? (
+      {(printAPI.isWaiting || printLabelAPI.isWaiting) ? (
         <View style={styles.footerBtnContainer}>
           <ActivityIndicator
-            animating={printAPI.isWaiting}
+            animating={printAPI.isWaiting || printLabelAPI.isWaiting}
             hidesWhenStopped
             color={COLOR.MAIN_THEME_COLOR}
             size="large"
@@ -394,6 +401,7 @@ const PrintPriceSign = (): JSX.Element => {
   const { result } = useTypedSelector(state => state.async.getItemDetails);
   const printAPI = useTypedSelector(state => state.async.printSign);
   const { selectedPrinter, selectedSignType, printQueue } = useTypedSelector(state => state.Print);
+  const printLabelAPI = useTypedSelector(state => state.async.printLocationLabels);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -408,6 +416,7 @@ const PrintPriceSign = (): JSX.Element => {
       actionCompleted={actionCompleted}
       result={result}
       printAPI={printAPI}
+      printLabelAPI={printLabelAPI}
       selectedPrinter={selectedPrinter}
       selectedSignType={selectedSignType}
       printQueue={printQueue}

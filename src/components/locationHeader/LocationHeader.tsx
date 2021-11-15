@@ -16,6 +16,7 @@ export const LocationHeader = (props: LocationHeaderProps): JSX.Element => {
   const {
     location, details, navigation, route
   } = props;
+  // Temp change to navigate to PrintScreen
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
       <View style={styles.staticHeader}>

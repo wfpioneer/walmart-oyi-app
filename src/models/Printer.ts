@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 export interface Printer {
   type: PrinterType;
   name: string;
@@ -17,7 +18,7 @@ export interface PrintQueueItem {
   upcNbr: string;
   catgNbr: number;
   signQty: number;
-  paperSize: LaserPaper | PortablePaper;
+  paperSize: PrintPaper;
   worklistType: string;
 }
 export interface PrintQueueLabel {
@@ -40,3 +41,5 @@ export enum PortablePaper {
   'Medium' = 'D',
   'Wine' = 'X'
 }
+
+export type PrintPaper = keyof typeof LaserPaper | keyof typeof PortablePaper | '';

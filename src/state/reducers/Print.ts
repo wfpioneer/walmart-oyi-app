@@ -7,11 +7,13 @@ import {
   SET_SELECTED_PRINTER,
   SET_SELECTED_SIGN_TYPE
 } from '../actions/Print';
-import { PrintQueueItem, Printer, PrinterType } from '../../models/Printer';
+import {
+  PrintPaper, PrintQueueItem, Printer, PrinterType
+} from '../../models/Printer';
 
 interface StateType {
   selectedPrinter: Printer;
-  selectedSignType: string;
+  selectedSignType: PrintPaper;
   printerList: Printer[];
   printQueue: PrintQueueItem[];
 }
