@@ -39,7 +39,7 @@ export const LocationHeader = (props: LocationHeaderProps) : JSX.Element => {
 };
 
 LocationHeader.defaultProps = {
-  buttonText: '',
+  buttonText: undefined,
   buttonPress: undefined
 };
 

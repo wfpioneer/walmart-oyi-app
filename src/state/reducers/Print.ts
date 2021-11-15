@@ -10,7 +10,7 @@ import {
 } from '../actions/Print';
 import { PrintQueueItem, Printer, PrinterType } from '../../models/Printer';
 
-export interface PrintStateType {
+interface StateType {
   selectedPrinter: Printer;
   selectedSignType: string;
   printerList: Printer[];
@@ -18,7 +18,7 @@ export interface PrintStateType {
   printingLocationLabels: string;
 }
 
-const initialState: PrintStateType = {
+const initialState: StateType = {
   selectedPrinter: {
     type: PrinterType.LASER,
     name: '',
