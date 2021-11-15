@@ -111,6 +111,7 @@ export default {
     MAIN_TITLE: 'Imprimir Señalización',
     QUEUE_TITLE: 'Cola de Impresión',
     CHANGE_TITLE: 'Impresoras',
+    LOCATION_TITLE: 'Print location labels', // TODO: MX translation
     PRICE_SIGN: 'Imprimir la señalización',
     COPY_QTY: 'Número de Copias',
     COPIES: 'Copias',

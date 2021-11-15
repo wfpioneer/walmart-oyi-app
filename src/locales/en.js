@@ -111,6 +111,7 @@ export default {
     MAIN_TITLE: 'Print price sign',
     QUEUE_TITLE: 'Print list',
     CHANGE_TITLE: 'Printers',
+    LOCATION_TITLE: 'Print location labels',
     PRICE_SIGN: 'Print price sign',
     COPY_QTY: 'Number of copies',
     COPIES: 'Copies',

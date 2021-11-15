@@ -111,6 +111,7 @@ export default {
     MAIN_TITLE: '打印价签',
     QUEUE_TITLE: '打印清单',
     CHANGE_TITLE: '打印机',
+    LOCATION_TITLE: 'Print location labels', // TODO: CN translation
     PRICE_SIGN: '打印价签',
     COPY_QTY: '副本数量',
     COPIES: '副本',
