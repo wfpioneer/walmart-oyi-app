@@ -40,24 +40,11 @@ const ERROR_FORMATTING_OPTIONS = {
 const validateQty = (qty: number) => OH_MIN <= qty && qty <= OH_MAX;
 const validateSameQty = (qty: number, newQty: number) => qty === newQty;
 
-const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
-  <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
-);
 const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
   || exceptionType === 'C' || exceptionType === 'NSFL';
 
 const validate = (isValidNbr: boolean, isSameQty: boolean) => !isValidNbr || isSameQty;
 
-const renderView = (isValidNbr: boolean) => (isValidNbr ? styles.updateContainerValid
-  : styles.updateContainerInvalid);
-
-const isValidNbrErrorRequired = (isValidNbr: boolean) => (
-  !isValidNbr && (
-    <Text style={styles.invalidLabel}>
-      {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
-    </Text>
-  )
-);
 const isErrorRequired = (error: string) => (
   error !== '' && (
     <Text style={styles.invalidLabel}>
@@ -183,7 +170,8 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
         isValid={isValidNbr}
         onDecreaseQty={handleDecreaseQty}
         onIncreaseQty={handleIncreaseQty}
-        onTextChange={handleTextChange} value={newOHQty}
+        onTextChange={handleTextChange}
+        value={newOHQty}
       />
       {!isValidNbr && (
         <Text style={styles.invalidLabel}>
