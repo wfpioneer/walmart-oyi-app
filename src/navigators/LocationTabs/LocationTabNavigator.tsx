@@ -29,6 +29,7 @@ import { hideLocationPopup, resetSectionName } from '../../state/actions/Locatio
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import Button from '../../components/buttons/Button';
+import { setPrintingLocationLabels } from '../../state/actions/Print';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -114,8 +115,6 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   useEffectHook(() => {
     validateSessionCall(navigation, route.name).then(() => {
       if (scannedEvent.value) {
-        // Reset Location State on new getSectionDetails request to update header
-        dispatch(resetSectionName());
         dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
       }
     }).catch(() => {});
@@ -141,9 +140,16 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('LOCATION.SECTION')}`
-         + ` ${locationName === '-' ? scannedEvent.value?.toUpperCase() : locationName}`}
+         + ` ${/* scannedEvent.type === 'sectionId' && scannedEvent.value
+           ? scannedEvent.value?.toUpperCase()
+           : */ locationName}`}
         details={`${floorItems.length ?? 0} ${strings('LOCATION.ITEMS')},`
         + ` ${reserveItems.length ?? 0} ${strings('LOCATION.PALLETS')}`}
+        buttonPress={() => {
+          dispatch(setPrintingLocationLabels('SectionDetails'));
+          navigation.navigate('PrintPriceSign');
+        }}
+        buttonText={strings('LOCATION.PRINT_LABELS')}
       />
       <Tab.Navigator
         tabBarOptions={{

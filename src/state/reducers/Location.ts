@@ -8,19 +8,15 @@ import {
   SHOW_LOCATION_POPUP
 } from '../actions/Location';
 
+export interface LocationIdName {
+  id: number;
+  name: string;
+}
+
 interface LocationState {
-  selectedZone: {
-    id: number;
-    name: string;
-  };
-  selectedAisle: {
-    id: number;
-    name: string;
-  };
-  selectedSection: {
-    id: number;
-    name: string;
-  };
+  selectedZone: LocationIdName;
+  selectedAisle: LocationIdName;
+  selectedSection: LocationIdName;
   locationPopupVisible: boolean
 }
 

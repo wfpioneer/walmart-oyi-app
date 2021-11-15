@@ -2,20 +2,23 @@ import {
   ADD_TO_PRINTER_LIST,
   ADD_TO_PRINT_QUEUE,
   DELETE_FROM_PRINTER_LIST,
+  SET_PRINTING_LOCATION_LABELS,
   SET_PRINT_QUEUE,
   SET_SELECTED_PRINTER,
-  SET_SELECTED_SIGN_TYPE
+  SET_SELECTED_SIGN_TYPE,
+  UNSET_PRINTING_LOCATION_LABELS
 } from '../actions/Print';
 import { PrintQueueItem, Printer, PrinterType } from '../../models/Printer';
 
-interface StateType {
+export interface PrintStateType {
   selectedPrinter: Printer;
   selectedSignType: string;
   printerList: Printer[];
   printQueue: PrintQueueItem[];
+  printingLocationLabels: string;
 }
 
-const initialState: StateType = {
+const initialState: PrintStateType = {
   selectedPrinter: {
     type: PrinterType.LASER,
     name: '',
@@ -24,7 +27,8 @@ const initialState: StateType = {
   },
   selectedSignType: '',
   printerList: [],
-  printQueue: []
+  printQueue: [],
+  printingLocationLabels: ''
 };
 
 export const Print = (state = initialState, action: any) => {
@@ -71,6 +75,16 @@ export const Print = (state = initialState, action: any) => {
       return {
         ...state,
         printQueue: action.payload
+      };
+    case SET_PRINTING_LOCATION_LABELS:
+      return {
+        ...state,
+        printingLocationLabels: action.payload
+      };
+    case UNSET_PRINTING_LOCATION_LABELS:
+      return {
+        ...state,
+        printingLocationLabels: ''
       };
     default:
       return state;

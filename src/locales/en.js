@@ -131,7 +131,8 @@ export default {
     MAC_ADDRESS: 'Enter or Scan MAC Address',
     MAC_ADDRESS_ERROR: 'The MAC address is usually 12 numbers',
     PORTABLE_PRINTER: 'Portable Printer',
-    PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.'
+    PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.',
+    PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer'
   },
   LOCATION: {
     TITLE: 'All locations',
@@ -182,7 +183,8 @@ export default {
     REMOVE_AISLE: 'Remove aisle',
     SCAN_PALLET: 'Scan Pallet ID',
     PALLET_VALIDATE_ERROR: 'Pallet ID can only contain numbers',
-    PALLET_PLACEHOLDER: 'Enter or Scan Pallet ID'
+    PALLET_PLACEHOLDER: 'Enter or Scan Pallet ID',
+    PRINT_LABELS: 'Print labels'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

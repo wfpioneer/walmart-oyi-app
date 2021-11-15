@@ -29,6 +29,8 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
 import { PRINT_SIGN } from '../../state/actions/asyncAPI';
+import ItemDetails from '../../models/ItemDetails';
+import { LocationIdName } from '../../state/reducers/Location';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -86,6 +88,9 @@ interface PriceSignProps {
   selectedPrinter: Printer;
   selectedSignType: LaserPaper | PortablePaper;
   printQueue: PrintQueueItem[];
+  printingLocationLabels: string;
+  selectedAisle: LocationIdName;
+  selectedSection: LocationIdName;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: Route<any>;
@@ -98,14 +103,14 @@ interface PriceSignProps {
 }
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
-    scannedEvent, exceptionType, actionCompleted, result,
-    printAPI, selectedPrinter, selectedSignType, printQueue,
-    dispatch, navigation, route, signQty, setSignQty, isValidQty,
-    setIsValidQty, error, setError, useEffectHook, useLayoutHook
+    scannedEvent, exceptionType, actionCompleted, result, printAPI,
+    selectedPrinter, selectedSignType, printQueue, printingLocationLabels,
+    selectedAisle, selectedSection, dispatch, navigation, route, signQty,
+    setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook
   } = props;
   const {
     itemName, itemNbr, upcNbr, categoryNbr
-  } = (result && result.data) || getMockItemDetails(scannedEvent.value);
+  } = (result && result.data) as ItemDetails || getMockItemDetails(scannedEvent.value);
 
   useLayoutHook(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
@@ -126,6 +131,12 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     // Resets Print api response data when navigating off-screen
     navigation.addListener('beforeRemove', () => {
       dispatch({ type: PRINT_SIGN.RESET });
+    });
+    // set sign type to extra small when coming from loc mgmt screens
+    navigation.addListener('focus', () => {
+      if (printingLocationLabels) {
+        dispatch(setSignType('XSmall'));
+      }
     });
   }, []);
 
@@ -233,12 +244,75 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     }).catch(() => {});
   };
 
+  const detailsView = () => (!printingLocationLabels
+    // Item details view
+    ? (
+      <View style={styles.detailsContainer}>
+        <Text style={styles.itemNameTxt}>{itemName}</Text>
+      </View>
+    )
+    // Section details view
+    : (
+      <View style={styles.detailsContainer}>
+        <Text>
+          {printingLocationLabels === 'SectionList'
+            ? `${strings('LOCATION.AISLE')} ${selectedAisle.id}`
+            : `${strings('LOCATION.SECTION')} ${selectedSection.id}`}
+        </Text>
+      </View>
+    )
+  );
+
+  const sizeView = () => (!printingLocationLabels
+    ? (
+      <View style={styles.signSizeContainer}>
+        <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
+        {renderSignSizeButtons(selectedPrinter, categoryNbr, selectedSignType, dispatch)}
+      </View>
+    )
+    : null
+  );
+
+  // eslint-disable-next-line arrow-body-style
+  const printerView = () => (printingLocationLabels && selectedPrinter.type !== PrinterType.PORTABLE
+    ? (
+      <View style={styles.printerContainer}>
+        <Text>{strings('PRINT.PLEASE_CHOOSE_PORTABLE')}</Text>
+        <Button
+          title={strings('GENERICS.CHANGE')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          titleFontSize={14}
+          type={Button.Type.NO_BORDER}
+          height={20}
+          onPress={handleChangePrinter}
+        />
+      </View>
+    )
+    : (
+      <View style={styles.printerContainer}>
+        <View style={styles.printerNameContainer}>
+          <MaterialCommunityIcon name="printer-check" size={24} />
+          <View style={styles.printTextMargin}>
+            <Text>{selectedPrinter.name}</Text>
+            <Text style={styles.printerDesc}>{selectedPrinter.desc}</Text>
+          </View>
+        </View>
+        <Button
+          title={strings('GENERICS.CHANGE')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          titleFontSize={14}
+          type={Button.Type.NO_BORDER}
+          height={20}
+          onPress={handleChangePrinter}
+        />
+      </View>
+    )
+  )
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.itemDetailsContainer}>
-          <Text style={styles.itemNameTxt}>{itemName}</Text>
-        </View>
+        {detailsView()}
         <View style={styles.copyQtyContainer}>
           <Text style={styles.copyQtyLabel}>{strings('PRINT.COPY_QTY')}</Text>
           <View style={styles.qtyChangeContainer}>
@@ -274,27 +348,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           </Text>
           )}
         </View>
-        <View style={styles.signSizeContainer}>
-          <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
-          {renderSignSizeButtons(selectedPrinter, categoryNbr, selectedSignType, dispatch)}
-        </View>
-        <View style={styles.printerContainer}>
-          <View style={styles.printerNameContainer}>
-            <MaterialCommunityIcon name="printer-check" size={24} />
-            <View style={styles.printTextMargin}>
-              <Text>{selectedPrinter.name}</Text>
-              <Text style={styles.printerDesc}>{selectedPrinter.desc}</Text>
-            </View>
-          </View>
-          <Button
-            title={strings('GENERICS.CHANGE')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
-            titleFontSize={14}
-            type={Button.Type.NO_BORDER}
-            height={20}
-            onPress={handleChangePrinter}
-          />
-        </View>
+        {sizeView()}
+        {printerView()}
         {error.error
           ? (
             <View style={styles.errorContainer}>
@@ -342,7 +397,10 @@ const PrintPriceSign = (): JSX.Element => {
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const { result } = useTypedSelector(state => state.async.getItemDetails);
   const printAPI = useTypedSelector(state => state.async.printSign);
-  const { selectedPrinter, selectedSignType, printQueue } = useTypedSelector(state => state.Print);
+  const {
+    selectedPrinter, selectedSignType, printQueue, printingLocationLabels
+  } = useTypedSelector(state => state.Print);
+  const { selectedAisle, selectedSection } = useTypedSelector(state => state.Location);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -360,6 +418,9 @@ const PrintPriceSign = (): JSX.Element => {
       selectedPrinter={selectedPrinter}
       selectedSignType={selectedSignType}
       printQueue={printQueue}
+      printingLocationLabels={printingLocationLabels}
+      selectedAisle={selectedAisle}
+      selectedSection={selectedSection}
       dispatch={dispatch}
       navigation={navigation}
       route={route}

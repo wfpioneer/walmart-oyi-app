@@ -9,7 +9,7 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'stretch'
   },
-  itemDetailsContainer: {
+  detailsContainer: {
     backgroundColor: COLOR.WHITE,
     flexDirection: 'row',
     paddingHorizontal: 8,

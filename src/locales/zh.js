@@ -131,7 +131,8 @@ export default {
     MAC_ADDRESS: '输入或扫描MAC地址',
     MAC_ADDRESS_ERROR: 'MAC地址通常是12个数字',
     PORTABLE_PRINTER: '便携式打印机',
-    PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试'
+    PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
+    PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer' // TODO: CN translation
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -182,7 +183,8 @@ export default {
     REMOVE_AISLE: '移除通道',
     SCAN_PALLET: '扫描卡板标签',
     PALLET_VALIDATE_ERROR: '卡板号只能是数字',
-    PALLET_PLACEHOLDER: '输入或扫描卡板号'
+    PALLET_PLACEHOLDER: '输入或扫描卡板号',
+    PRINT_LABELS: 'Print labels' // TODO: CN translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
