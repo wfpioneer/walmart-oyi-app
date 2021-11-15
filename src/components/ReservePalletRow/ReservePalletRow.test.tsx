@@ -1,16 +1,27 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { Provider } from 'react-redux';
 import { mockLocationDetails } from '../../mockData/locationDetails';
 import ReservePalletRow from './ReservePalletRow';
 import { SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
+import store from '../../state';
 
 const mockReservePallet = mockLocationDetails.reserve[0];
 
+jest.mock('react-redux', () => {
+  const ActualReactRedux = jest.requireActual('react-redux');
+  return {
+    ...ActualReactRedux,
+    useTypedSelector: jest.fn().mockImplementation(() => { })
+  };
+});
 describe('ReservePalletRow Component', () => {
   it('Renders a ReservePallet', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <ReservePalletRow reservePallet={mockReservePallet} />
+      <Provider store={store}>
+        <ReservePalletRow reservePallet={mockReservePallet} />
+      </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -23,7 +34,9 @@ describe('ReservePalletRow Component', () => {
     };
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <ReservePalletRow reservePallet={mockReservePalletLongFirstItemName} />
+      <Provider store={store}>
+        <ReservePalletRow reservePallet={mockReservePalletLongFirstItemName} />
+      </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -32,7 +45,9 @@ describe('ReservePalletRow Component', () => {
     const mockReservePalletNoItems: SectionDetailsPallet = { ...mockReservePallet, items: [] };
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <ReservePalletRow reservePallet={mockReservePalletNoItems} />
+      <Provider store={store}>
+        <ReservePalletRow reservePallet={mockReservePalletNoItems} />
+      </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
