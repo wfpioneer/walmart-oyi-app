@@ -9,9 +9,9 @@ import { numbers, strings } from '../../locales';
 
 interface NumericSelectorProps {
   isValid: boolean;
-  onDecreaseQty: any;
-  onIncreaseQty: any;
-  onTextChange: any;
+  onDecreaseQty(): void;
+  onIncreaseQty(): void;
+  onTextChange(text: string): void;
   value: number;
 }
 

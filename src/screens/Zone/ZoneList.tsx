@@ -201,6 +201,7 @@ const ZoneList = (): JSX.Element => {
   }, [location]);
 
   const handleAddZone = () => {
+    // TODO integrate getPossibleZones api instead of loading moc data
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_ZONE));
     dispatch(setPossibleZones(mockPossibleZones));
     bottomSheetModalRef.current?.dismiss();

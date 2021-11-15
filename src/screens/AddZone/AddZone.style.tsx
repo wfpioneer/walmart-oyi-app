@@ -29,6 +29,11 @@ export default StyleSheet.create({
     color: COLOR.GREY
   },
   aisleContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginHorizontal: 20
+  },
+  aisleNumericContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: 20
@@ -61,5 +66,11 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     flex: 0.1
+  },
+  invalidLabel: {
+    fontSize: 10,
+    color: COLOR.RED_900,
+    marginBottom: 12,
+    textAlign: 'right'
   }
 });
