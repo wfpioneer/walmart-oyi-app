@@ -182,7 +182,12 @@ export default {
     REMOVE_AISLE: '移除通道',
     SCAN_PALLET: '扫描卡板标签',
     PALLET_VALIDATE_ERROR: '卡板号只能是数字',
-    PALLET_PLACEHOLDER: '输入或扫描卡板号'
+    PALLET_PLACEHOLDER: '输入或扫描卡板号',
+    ADD_PALLET_ERROR: '', // TODO -Need to get translation
+    ADD_PALLET_API_ERROR: '', // TODO -Need to get translation
+    PALLET_ERROR: '', // TODO -Need to get translation
+    PALLET_NOT_FOUND: '', // TODO -Need to get translation
+    PALLET_ADDED: '' // TODO -Need to get translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

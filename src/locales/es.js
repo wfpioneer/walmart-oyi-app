@@ -182,7 +182,12 @@ export default {
     REMOVE_AISLE: 'Eliminar pasillo',
     SCAN_PALLET: 'Escanea la etiqueta del Pallet',
     PALLET_VALIDATE_ERROR: 'El Pallet ID solo puede contener números',
-    PALLET_PLACEHOLDER: 'Ingresa o escanea un pallet ID'
+    PALLET_PLACEHOLDER: 'Ingresa o escanea un pallet ID',
+    ADD_PALLET_ERROR: '', // TODO -Need to get translation
+    ADD_PALLET_API_ERROR: '', // TODO -Need to get translation
+    PALLET_ERROR: '', // TODO -Need to get translation
+    PALLET_NOT_FOUND: '', // TODO -Need to get translation
+    PALLET_ADDED: '' // TODO -Need to get translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

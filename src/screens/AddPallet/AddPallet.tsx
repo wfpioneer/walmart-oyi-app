@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { addPallet } from '../../state/actions/saga';
+import { addPallet, getSectionDetails } from '../../state/actions/saga';
 import Button from '../../components/buttons/Button';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -14,18 +14,22 @@ import { strings } from '../../locales';
 import styles from './AddPallet.style';
 import COLOR from '../../themes/Color';
 import { AsyncState } from '../../models/AsyncState';
+import { LocationType } from '../../models/LocationType';
+import { showSnackBar } from '../../state/actions/SnackBar';
+import { showInfoModal } from '../../state/actions/Modal';
 
+const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 interface AddPalletScreenProps {
   palletId: string;
   updatePalletId: React.Dispatch<React.SetStateAction<string>>;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
-  section: { id: number; name: string; };
+  section: { id: string; name: string; };
   locationName: string;
   addAPI: AsyncState;
   error: { error: boolean; message: string };
-  setError: React.Dispatch<React.SetStateAction<{error: boolean;message: string;}>>;
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string; }>>;
 }
 
 export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
@@ -46,11 +50,19 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     // eslint-disable-next-line no-empty
-    if (!addAPI.isWaiting && addAPI.result) {}
+    if (!addAPI.isWaiting && addAPI.result) {
+      dispatch(getSectionDetails({ sectionId: section.id }));
+      dispatch(showSnackBar(strings('LOCATION.PALLET_ADDED'), 3000));
+      navigation.goBack();
+    }
 
     // on api failure
     if (!addAPI.isWaiting && addAPI.error) {
-      setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
+      if (addAPI.error === COMPLETE_API_409_ERROR) {
+        dispatch(showInfoModal(strings('LOCATION.PALLET_ERROR'), strings('LOCATION.PALLET_NOT_FOUND')));
+      } else {
+        dispatch(showInfoModal(strings('LOCATION.ADD_PALLET_ERROR'), strings('LOCATION.ADD_PALLET_API_ERROR')));
+      }
     }
 
     // on api submission
@@ -58,6 +70,13 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
       setError({ error: false, message: '' });
     }
   }, [addAPI]);
+  // Navigation Listener
+  useEffectHook(() => {
+    // Resets location api response data when navigating off-screen
+    navigation.addListener('beforeRemove', () => {
+      dispatch({ type: 'API/ADD_PALLET/RESET' });
+    });
+  }, []);
   // Barcode event listener effect
   useEffectHook(() => {
     const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -75,13 +94,11 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
   }, []);
 
   const submitPalletId = () => {
-    // TODO add integration to addPallet api once it is complete on the back end and add trackEvent for service call
     if (palletId.match(palletIDRegex)) {
       dispatch(addPallet({
         palletId,
         sectionId: section.id
       }));
-      navigation.goBack();
     }
   };
 
