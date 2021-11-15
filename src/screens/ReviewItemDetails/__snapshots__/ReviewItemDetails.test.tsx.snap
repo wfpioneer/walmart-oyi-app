@@ -1570,114 +1570,19 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 `;
 
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders 'Item Details Api Error' for a failed request  1`] = `
-<View
+<ActivityIndicator
+  animating={false}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
   style={
     Object {
+      "alignItems": "center",
       "flex": 1,
+      "justifyContent": "center",
     }
   }
->
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Error"
-    onClose={[Function]}
-  >
-    <mockConstructor
-      color="#f44336"
-      name="alert"
-      size={30}
-      style={
-        Object {
-          "alignSelf": "center",
-        }
-      }
-    />
-    <Text
-      style={
-        Object {
-          "fontSize": 16,
-          "textAlign": "center",
-        }
-      }
-    >
-      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
-    </Text>
-    <View
-      style={
-        Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "justifyContent": "center",
-          "width": "100%",
-        }
-      }
-    >
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "marginTop": 16,
-            "width": "70%",
-          }
-        }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </CustomModalComponent>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-  >
-    <mockConstructor
-      color="#e57373"
-      name="alert"
-      size={40}
-    />
-    <Text
-      style={
-        Object {
-          "fontSize": 16,
-          "textAlign": "center",
-        }
-      }
-    >
-      [missing "en.ITEM.API_ERROR" translation]
-    </Text>
-    <ForwardRef
-      onPress={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#e57373",
-          "borderRadius": 4,
-          "height": 40,
-          "justifyContent": "center",
-          "marginVertical": 10,
-          "width": "95%",
-        }
-      }
-    >
-      <Text>
-        [missing "en.GENERICS.RETRY" translation]
-      </Text>
-    </ForwardRef>
-  </View>
-</View>
+/>
 `;
 
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders 'Scanned Item Not Found' on request status 204 1`] = `
