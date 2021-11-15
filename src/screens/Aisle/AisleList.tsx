@@ -188,11 +188,11 @@ const AisleList = (): JSX.Element => {
   const snapPoints = useMemo(() => ['33%', '50%'], []);
 
   useEffect(() => {
-    if (navigation.isFocused()) {
+    if (navigation.isFocused() && bottomSheetModalRef.current) {
       if (locationPopupVisible) {
-        bottomSheetModalRef.current?.present();
+        bottomSheetModalRef.current.present();
       } else {
-        bottomSheetModalRef.current?.dismiss();
+        bottomSheetModalRef.current.dismiss();
       }
     }
   }, [locationPopupVisible]);

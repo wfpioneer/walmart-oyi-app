@@ -183,11 +183,11 @@ const ZoneList = (): JSX.Element => {
   const snapPoints = useMemo(() => ['22%', '50%'], []);
 
   useEffect(() => {
-    if (navigation.isFocused()) {
+    if (navigation.isFocused() && bottomSheetModalRef.current) {
       if (location.locationPopupVisible) {
-        bottomSheetModalRef.current?.present();
+        bottomSheetModalRef.current.present();
       } else {
-        bottomSheetModalRef.current?.dismiss();
+        bottomSheetModalRef.current.dismiss();
       }
     }
   }, [location]);
