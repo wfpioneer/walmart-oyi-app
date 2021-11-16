@@ -1,6 +1,7 @@
 import {
   ApprovalListItem, approvalAction, approvalRequestSource, approvalStatus
 } from '../../models/ApprovalListItem';
+import { PrintItemList, PrintLocationList } from '../../models/Printer';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
@@ -36,7 +37,9 @@ export const addToPicklist = (payload: any) => ({ type: ADD_TO_PICKLIST, payload
 export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
 export const deleteLocation = (payload: any) => ({ type: DELETE_LOCATION, payload } as const);
 export const noAction = (payload: any) => ({ type: NO_ACTION, payload } as const);
-export const printSign = (payload: any) => ({ type: PRINT_SIGN, payload } as const);
+export const printSign = (payload: {
+  headers?: Record<string, unknown>;
+  printList: PrintItemList[]}) => ({ type: PRINT_SIGN, payload } as const);
 export const getLocationDetails = (payload: any) => ({ type: GET_LOCATION_DETAILS, payload } as const);
 export const getFluffyFeatures = (payload: any) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
 export const getApprovalList = (payload: {
@@ -53,7 +56,5 @@ export const getAisle = (payload: { zoneId: number }) => ({ type: GET_AISLE, pay
 export const getSections = (payload: { aisleId: number }) => ({ type: GET_SECTIONS, payload } as const);
 export const getSectionDetails = (payload: { sectionId: string }) => ({ type: GET_SECTION_DETAILS, payload } as const);
 export const printLocationLabel = (payload: {
-  locationId: number;
-  qty: number;
-  printerMacAddress: string;
+  printLabelList: PrintLocationList[]
 }) => ({ type: PRINT_LOCATION_LABELS, payload } as const);

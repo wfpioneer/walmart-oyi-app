@@ -5,17 +5,23 @@ import {
   DELETE_FROM_PRINTER_LIST,
   SET_PRINT_QUEUE,
   SET_SELECTED_PRINTER,
-  SET_SELECTED_SIGN_TYPE
+  SET_SELECTED_SIGN_TYPE,
+  TOGGLE_PRINT_SCREEN
 } from '../actions/Print';
+
 import {
-  PrintPaper, PrintQueueItem, Printer, PrinterType
+  PrintPaperSize,
+  PrintQueueItem,
+  Printer,
+  PrinterType
 } from '../../models/Printer';
 
 interface StateType {
   selectedPrinter: Printer;
-  selectedSignType: PrintPaper;
+  selectedSignType: PrintPaperSize;
   printerList: Printer[];
   printQueue: PrintQueueItem[];
+  isPrintLocation: boolean;
 }
 
 const initialState: StateType = {
@@ -27,7 +33,8 @@ const initialState: StateType = {
   },
   selectedSignType: '',
   printerList: [],
-  printQueue: []
+  printQueue: [],
+  isPrintLocation: false
 };
 
 export const Print = (state = initialState, action: Actions): StateType => {
@@ -56,6 +63,7 @@ export const Print = (state = initialState, action: Actions): StateType => {
         printerList
       };
     case DELETE_FROM_PRINTER_LIST:
+      // TODO NEED TO BE ABLE TO DELETE FROM LOCATION LIST
       // eslint-disable-next-line no-case-declarations
       const deleteIndex = printerList.findIndex(
         item => item.id === action.payload
@@ -76,6 +84,11 @@ export const Print = (state = initialState, action: Actions): StateType => {
       return {
         ...state,
         printQueue: action.payload
+      };
+    case TOGGLE_PRINT_SCREEN:
+      return {
+        ...state,
+        isPrintLocation: action.payload
       };
     default:
       return state;

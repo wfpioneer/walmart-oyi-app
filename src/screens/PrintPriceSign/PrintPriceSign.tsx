@@ -22,9 +22,9 @@ import {
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
-  LaserPaper, PortablePaper, PrintPaper, PrintQueueItem, Printer, PrinterType
+  LaserPaper, PortablePaper, PrintItemList, PrintLocationList, PrintPaperSize, PrintQueueItem, Printer, PrinterType
 } from '../../models/Printer';
-import { printSign } from '../../state/actions/saga';
+import { printLocationLabel, printSign } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
@@ -85,7 +85,8 @@ interface PriceSignProps {
   printAPI: AsyncState
   printLabelAPI: AsyncState
   selectedPrinter: Printer;
-  selectedSignType: PrintPaper;
+  selectedSignType: PrintPaperSize;
+  isPrintLocation: boolean;
   printQueue: PrintQueueItem[];
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
@@ -98,13 +99,13 @@ interface PriceSignProps {
   useLayoutHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
 
-const getPrinter = (selectedPrinter: Printer, selectedSignType: PrintPaper) => (
+const getPrinter = (selectedPrinter: Printer, selectedSignType: PrintPaperSize) => (
   selectedPrinter.type === PrinterType.LASER
     // @ts-ignore
     ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType]);
 const isValid = (actionCompleted: any, exceptionType: any) => !actionCompleted && exceptionType === 'PO';
 
-const isItemSizeExists = (printQueue: PrintQueueItem[], selectedSignType: PrintPaper, itemNbr: number) =>
+const isItemSizeExists = (printQueue: PrintQueueItem[], selectedSignType: PrintPaperSize, itemNbr: number) =>
   // eslint-disable-next-line implicit-arrow-linebreak
   printQueue.some(printItem => printItem.itemNbr === itemNbr
     && printItem.paperSize === selectedSignType);
@@ -142,7 +143,7 @@ const validateQuantity = (isValidQty: boolean) => (
   )
 );
 const isValidQtyStyle = (isValidQty: boolean) => (isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid);
-const isAddtoQueueDisabled = (isValidQty: boolean, selectedSignType: PrintPaper) => (!isValidQty
+const isAddtoQueueDisabled = (isValidQty: boolean, selectedSignType: PrintPaperSize) => (!isValidQty
   || selectedSignType?.length === 0);
 const checkQuantity = (newQty: number, setIsValidQty: React.Dispatch<React.SetStateAction<boolean>>,
   setSignQty: React.Dispatch<React.SetStateAction<number>>) => {
@@ -165,7 +166,7 @@ const isResultHasData = (result: any) => (
 );
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
-    scannedEvent, exceptionType, actionCompleted, result,
+    scannedEvent, exceptionType, actionCompleted, result, isPrintLocation,
     printAPI, printLabelAPI, selectedPrinter, selectedSignType, printQueue,
     dispatch, navigation, route, signQty, setSignQty, isValidQty,
     setIsValidQty, error, setError, useEffectHook, useLayoutHook
@@ -256,6 +257,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     }).catch(() => { });
   };
 
+  // TODO CHeck if location size exists in the printQueue
+
   const handleAddPrintList = () => {
     // check if the item/size already exists on the print queue
     const itemSizeExists = isItemSizeExists(printQueue, selectedSignType, itemNbr);
@@ -274,7 +277,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         catgNbr: categoryNbr,
         signQty,
         worklistType: exceptionType ?? '',
-        paperSize: selectedSignType
+        paperSize: selectedSignType,
+        itemType: 'ITEM'
       };
       trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
       dispatch(addToPrintQueue(printQueueItem));
@@ -284,20 +288,29 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   };
   const handlePrint = () => {
     validateSession(navigation, route.name).then(() => {
-      const printlist = [
-        {
-          itemNbr,
+      if (isPrintLocation) {
+        const printLocList: PrintLocationList[] = [{
+          locationId: 0,
           qty: signQty,
-          code: getPrinter(selectedPrinter, selectedSignType),
-          description: selectedSignType,
-          printerMACAddress: selectedPrinter.id,
-          isPortablePrinter: selectedPrinter.type === 1,
-          workListTypeCode: exceptionType
-        }
-      ];
-      trackEvent('print_price_sign', { printItem: JSON.stringify(printlist) });
-      dispatch(printSign({ printlist }));
-      //  If section label call printLabel
+          printerMACAddress: selectedPrinter.id
+        }];
+        trackEvent('print_section_label', { printItem: JSON.stringify(printLocList) });
+        dispatch(printLocationLabel({ printLabelList: printLocList }));
+      } else {
+        const printlist: PrintItemList[] = [
+          {
+            itemNbr,
+            qty: signQty,
+            code: getPrinter(selectedPrinter, selectedSignType),
+            description: selectedSignType,
+            printerMACAddress: selectedPrinter.id,
+            isPortablePrinter: selectedPrinter.type === 1,
+            workListTypeCode: exceptionType
+          }
+        ];
+        trackEvent('print_price_sign', { printItem: JSON.stringify(printlist) });
+        dispatch(printSign({ printList: printlist }));
+      }
     }).catch(() => { });
   };
 
@@ -399,7 +412,9 @@ const PrintPriceSign = (): JSX.Element => {
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const { result } = useTypedSelector(state => state.async.getItemDetails);
   const printAPI = useTypedSelector(state => state.async.printSign);
-  const { selectedPrinter, selectedSignType, printQueue } = useTypedSelector(state => state.Print);
+  const {
+    selectedPrinter, selectedSignType, printQueue, isPrintLocation
+  } = useTypedSelector(state => state.Print);
   const printLabelAPI = useTypedSelector(state => state.async.printLocationLabels);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -419,6 +434,7 @@ const PrintPriceSign = (): JSX.Element => {
       selectedPrinter={selectedPrinter}
       selectedSignType={selectedSignType}
       printQueue={printQueue}
+      isPrintLocation={isPrintLocation}
       dispatch={dispatch}
       navigation={navigation}
       route={route}

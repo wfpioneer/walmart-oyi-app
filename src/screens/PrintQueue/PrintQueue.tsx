@@ -12,12 +12,12 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import {
-  LaserPaper, PrintQueueItem, Printer
+  LaserPaper, PrintItemList, PrintLocationList, PrintQueueItem, Printer
 } from '../../models/Printer';
 import styles from './PrintQueue.styles';
 import { strings } from '../../locales';
 import { setPrintQueue } from '../../state/actions/Print';
-import { printSign } from '../../state/actions/saga';
+import { printLocationLabel, printSign } from '../../state/actions/saga';
 import IconButton from '../../components/buttons/IconButton';
 import COLOR from '../../themes/Color';
 import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
@@ -32,11 +32,13 @@ interface HandlePrintProps {
   route: Route<any>;
   printQueue: PrintQueueItem[];
   selectedPrinter: Printer;
+  isPrintLocation: boolean;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
 interface PrintQueueScreenProps {
   printQueue: PrintQueueItem[];
   selectedPrinter: Printer;
+  isPrintLocation: boolean;
   printAPI: AsyncState;
   printLabelAPI: AsyncState;
   dispatch: Dispatch<any>;
@@ -109,27 +111,42 @@ export const handlePrint = (props: HandlePrintProps): void => {
     route,
     printQueue,
     selectedPrinter,
+    isPrintLocation,
     dispatch
   } = props;
+
   validateSessionCall(navigation, route.name).then(() => {
-    const printArray = printQueue.map((printItem: PrintQueueItem) => {
-      const {
-        itemNbr, signQty, paperSize, worklistType
-      } = printItem;
-      return {
-        itemNbr,
-        qty: signQty,
-        // @ts-ignore
-        code: LaserPaper[paperSize],
-        description: paperSize,
-        printerMACAddress: selectedPrinter.id,
-        isPortablePrinter: false,
-        workListTypeCode: worklistType
-      };
-    });
-    dispatch(printSign({
-      printlist: printArray
-    }));
+    if (isPrintLocation) {
+      const printLocationArray: PrintLocationList[] = printQueue.filter(printLoc => printLoc.itemType === 'LOCATION')
+        .map(printLabel => {
+          const { locationId, signQty } = printLabel;
+          return {
+            locationId: locationId ?? 0,
+            qty: signQty,
+            printerMACAddress: selectedPrinter.id // TODO check if the printer is assigned to these Labels
+          };
+        });
+
+      dispatch(printLocationLabel({ printLabelList: printLocationArray }));
+    } else {
+      const printArray: PrintItemList[] = printQueue.filter(printItem => printItem.itemType === 'ITEM')
+        .map(printItem => {
+          const {
+            itemNbr, signQty, paperSize, worklistType
+          } = printItem;
+          return {
+            itemNbr: itemNbr ?? 0,
+            qty: signQty,
+            // @ts-ignore
+            code: LaserPaper[paperSize],
+            description: paperSize,
+            printerMACAddress: selectedPrinter.id,
+            isPortablePrinter: false,
+            workListTypeCode: worklistType ?? ''
+          };
+        });
+      dispatch(printSign({ printList: printArray }));
+    }
   }).catch(() => {});
 };
 
@@ -137,6 +154,7 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
   const {
     printQueue,
     selectedPrinter,
+    isPrintLocation,
     printAPI,
     printLabelAPI,
     dispatch,
@@ -184,8 +202,7 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!printLabelAPI.isWaiting && printLabelAPI.result) {
-      dispatch(setPrintQueue([])); // This resets the entire queue
-
+      dispatch(setPrintQueue([]));
       navigation.goBack();
     }
     // on api failure
@@ -263,6 +280,7 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
                 navigation,
                 selectedPrinter,
                 printQueue,
+                isPrintLocation,
                 route,
                 validateSessionCall
               })}
@@ -276,7 +294,7 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
 };
 
 export const PrintQueue = (): JSX.Element => {
-  const { printQueue, selectedPrinter } = useTypedSelector(state => state.Print);
+  const { printQueue, selectedPrinter, isPrintLocation } = useTypedSelector(state => state.Print);
   const printAPI = useTypedSelector(state => state.async.printSign);
   const printLabelAPI = useTypedSelector(state => state.async.printLocationLabels);
   const dispatch = useDispatch();
@@ -289,6 +307,7 @@ export const PrintQueue = (): JSX.Element => {
     <PrintQueueScreen
       printQueue={printQueue}
       selectedPrinter={selectedPrinter}
+      isPrintLocation={isPrintLocation}
       printAPI={printAPI}
       printLabelAPI={printLabelAPI}
       dispatch={dispatch}

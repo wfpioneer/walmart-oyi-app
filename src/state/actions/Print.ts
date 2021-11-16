@@ -1,4 +1,4 @@
-import { PrintPaper, PrintQueueItem, Printer } from '../../models/Printer';
+import { PrintPaperSize, PrintQueueItem, Printer } from '../../models/Printer';
 
 export const SET_SELECTED_PRINTER = 'PRINT/SET_SELECTED_PRINTER';
 export const SET_SELECTED_SIGN_TYPE = 'PRINT/SET_SELECTED_SIGN_TYPE';
@@ -6,13 +6,14 @@ export const ADD_TO_PRINTER_LIST = 'PRINT/ADD_TO_PRINTER_LIST';
 export const DELETE_FROM_PRINTER_LIST = 'PRINT/DELETE_FROM_PRINTER_LIST';
 export const ADD_TO_PRINT_QUEUE = 'PRINT/ADD_TO_PRINT_QUEUE';
 export const SET_PRINT_QUEUE = 'PRINT/SET_PRINT_QUEUE';
+export const TOGGLE_PRINT_SCREEN = 'PRINT/TOGGLE_PRINT_SCREEN';
 
 export const setSelectedPrinter = (printer: Printer) => ({
   type: SET_SELECTED_PRINTER,
   payload: printer
 } as const);
 
-export const setSignType = (type: PrintPaper) => ({
+export const setSignType = (type: PrintPaperSize) => ({
   type: SET_SELECTED_SIGN_TYPE,
   payload: type
 } as const);
@@ -37,6 +38,11 @@ export const setPrintQueue = (printQueue: PrintQueueItem[]) => ({
   payload: printQueue
 } as const);
 
+export const togglePrintScreen = (isPrintLocation: boolean) => ({
+  type: TOGGLE_PRINT_SCREEN,
+  payload: isPrintLocation
+} as const);
+
 export type Actions =
 | ReturnType<typeof setSelectedPrinter>
 | ReturnType<typeof setSignType>
@@ -44,3 +50,4 @@ export type Actions =
 | ReturnType<typeof deleteFromPrinterList>
 | ReturnType<typeof addToPrintQueue>
 | ReturnType<typeof setPrintQueue>
+| ReturnType<typeof togglePrintScreen>
