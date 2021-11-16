@@ -35,7 +35,40 @@ describe('PrintPriceSignScreen', () => {
     id: '123000000000'
   };
   const testItem: ItemDetails = getItemDetails[123];
-
+  describe('Renders PrintPriceSign Screen', () => {
+    it(' Renders LocationName if isPrintLocation is true ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const locName = 'TEST2-5';
+      renderer.render(
+        <PrintPriceSignScreen
+          scannedEvent={defaultScanEvent}
+          exceptionType=""
+          actionCompleted={false}
+          result={testItem}
+          printAPI={defaultAsyncState}
+          printLabelAPI={defaultAsyncState}
+          selectedPrinter={defaultPrinter}
+          selectedSignType="XSmall"
+          printQueue={[]}
+          isPrintLocation={false}
+          locationName={locName}
+          sectionId={0}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          signQty={1}
+          setSignQty={jest.fn()}
+          isValidQty={true}
+          setIsValidQty={jest.fn()}
+          error={defaultError}
+          setError={jest.fn()}
+          useEffectHook={jest.fn()}
+          useLayoutHook={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
   describe('Tests rendering print Errors/Api responses', () => {
     // Double Test here???
     const apiIsWaiting = {
@@ -44,6 +77,7 @@ describe('PrintPriceSignScreen', () => {
       error: null,
       result: null
     };
+
     it(' Renders Loader waiting for Print Sign Service response  ', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -57,6 +91,9 @@ describe('PrintPriceSignScreen', () => {
           selectedPrinter={defaultPrinter}
           selectedSignType="XSmall"
           printQueue={[]}
+          isPrintLocation={false}
+          locationName=""
+          sectionId={0}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
@@ -86,6 +123,9 @@ describe('PrintPriceSignScreen', () => {
           selectedPrinter={defaultPrinter}
           selectedSignType="XSmall"
           printQueue={[]}
+          isPrintLocation={false}
+          locationName=""
+          sectionId={0}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
@@ -119,6 +159,9 @@ describe('PrintPriceSignScreen', () => {
           selectedPrinter={defaultPrinter}
           selectedSignType="XSmall"
           printQueue={[]}
+          isPrintLocation={false}
+          locationName=""
+          sectionId={0}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
@@ -150,6 +193,9 @@ describe('PrintPriceSignScreen', () => {
           selectedPrinter={defaultPrinter}
           selectedSignType="XSmall"
           printQueue={[]}
+          isPrintLocation={false}
+          locationName=""
+          sectionId={0}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
