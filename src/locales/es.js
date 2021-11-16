@@ -183,11 +183,11 @@ export default {
     SCAN_PALLET: 'Escanea la etiqueta del Pallet',
     PALLET_VALIDATE_ERROR: 'El Pallet ID solo puede contener números',
     PALLET_PLACEHOLDER: 'Ingresa o escanea un pallet ID',
-    ADD_PALLET_ERROR: '', // TODO -Need to get translation
-    ADD_PALLET_API_ERROR: '', // TODO -Need to get translation
-    PALLET_ERROR: '', // TODO -Need to get translation
-    PALLET_NOT_FOUND: '', // TODO -Need to get translation
-    PALLET_ADDED: '' // TODO -Need to get translation
+    ADD_PALLET_ERROR: 'error al agregar el pallet',
+    ADD_PALLET_API_ERROR: 'Hubo un error al agregar el pallet. Inténtar de nuevo',
+    PALLET_ERROR: 'Pallet no encontrada/Pallet vacía',
+    PALLET_NOT_FOUND: 'Hubo un error debido a que no se encontró el pallet/Pallet vacía',
+    PALLET_ADDED: 'Pallet agregado con éxito'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
