@@ -49,22 +49,31 @@ const addZonesToPicker = (
   }
 };
 
-const validateNumericInput = (aisles: number, existingAisles = 0): boolean =>
-  (aisles >= NEW_ZONE_AISLE_MIN) && (aisles <= (NEW_ZONE_AISLE_MAX - existingAisles));
+const validateNumericInput = (aisles: number, existingAisles = 0): boolean => (aisles >= NEW_ZONE_AISLE_MIN)
+  && (aisles <= (NEW_ZONE_AISLE_MAX - existingAisles));
 
-
-const disableContinue = (aisles: number, existingAisles = 0, selectedZone: string) =>
-  aisles < NEW_ZONE_AISLE_MIN || aisles > (NEW_ZONE_AISLE_MAX - existingAisles) || selectedZone === '';
+const disableContinue = (aisles: number, existingAisles = 0, selectedZone: string) => aisles < NEW_ZONE_AISLE_MIN
+  || aisles > (NEW_ZONE_AISLE_MAX - existingAisles)
+  || selectedZone === '';
 
 export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
   const handleIncreaseAisle = () => {
-    props.setNumberOfAisles((prevState: number) => prevState < NEW_ZONE_AISLE_MAX - props.existingAisles ? prevState + 1 : prevState);
+    props.setNumberOfAisles((prevState: number) => {
+      if (prevState < NEW_ZONE_AISLE_MAX - props.existingAisles) {
+        return prevState + 1;
+      }
+      return prevState;
+    });
   };
 
   const handleDecreaseAisle = () => {
-    props.setNumberOfAisles((prevState: number) => prevState > NEW_ZONE_AISLE_MIN ? prevState - 1 : prevState);
+    props.setNumberOfAisles((prevState: number) => {
+      if (prevState > NEW_ZONE_AISLE_MIN) {
+        return prevState - 1;
+      }
+      return prevState;
+    });
   };
-
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
     if (!Number.isNaN(newQty)) {
@@ -147,8 +156,8 @@ const AddZone = (): JSX.Element => {
 
   if (createFlow === CREATE_FLOW.CREATE_AISLE) {
     const zoneAisles = zones.find(zone => zone.zoneId === currentZone.id);
-    if ( zoneAisles ) {
-      existingAisles = zoneAisles.aisleCount
+    if (zoneAisles) {
+      existingAisles = zoneAisles.aisleCount;
     }
   }
 

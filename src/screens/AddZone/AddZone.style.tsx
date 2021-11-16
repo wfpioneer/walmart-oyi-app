@@ -13,7 +13,7 @@ export default StyleSheet.create({
   },
   container: {
     height: 65,
-    position: 'relative',
+    position: 'relative'
   },
   labelContainer: {
     position: 'absolute',
@@ -22,7 +22,7 @@ export default StyleSheet.create({
     left: 15,
     paddingVertical: 1,
     paddingHorizontal: 5,
-    zIndex: 50,
+    zIndex: 50
   },
   labelText: {
     fontSize: 12,

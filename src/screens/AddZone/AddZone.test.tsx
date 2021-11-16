@@ -4,7 +4,6 @@ import { AddZoneScreen } from './AddZone';
 import { mockPossibleZones } from '../../mockData/mockPossibleZones';
 import { CREATE_FLOW } from '../../models/LocationItems';
 
-
 describe('AddZoneScreen', () => {
   const zones = [{
     zoneId: 1,

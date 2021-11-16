@@ -1,20 +1,12 @@
-import React, {
-  Dispatch,
-  useEffect,
-  useState
-} from 'react';
-
-import {
-  ActivityIndicator, Text, TextInput, View
-} from 'react-native';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import styles from './OHQtyUpdate.style';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
 import IconButton from '../buttons/IconButton';
-import NumericSelector from '../NumericSelector/NumericSelector'
+import NumericSelector from '../NumericSelector/NumericSelector';
 import { numbers, strings } from '../../locales';
 import { updateOHQty } from '../../state/actions/saga';
 import { setActionCompleted, updatePendingOHQty } from '../../state/actions/ItemDetailScreen';

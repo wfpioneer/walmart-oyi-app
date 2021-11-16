@@ -191,7 +191,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         component={AddZone}
         options={{
           headerTitle: 'Add Zone'
-      }}
+        }}
       />
     </Stack.Navigator>
   );
