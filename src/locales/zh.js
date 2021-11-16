@@ -111,7 +111,7 @@ export default {
     MAIN_TITLE: '打印价签',
     QUEUE_TITLE: '打印清单',
     CHANGE_TITLE: '打印机',
-    LOCATION_TITLE: 'Print location labels', // TODO: CN translation
+    LOCATION_TITLE: '打印货架标签',
     PRICE_SIGN: '打印价签',
     COPY_QTY: '副本数量',
     COPIES: '副本',
@@ -133,7 +133,7 @@ export default {
     MAC_ADDRESS_ERROR: 'MAC地址通常是12个数字',
     PORTABLE_PRINTER: '便携式打印机',
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
-    PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer' // TODO: CN translation
+    PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机'
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -185,7 +185,7 @@ export default {
     SCAN_PALLET: '扫描卡板标签',
     PALLET_VALIDATE_ERROR: '卡板号只能是数字',
     PALLET_PLACEHOLDER: '输入或扫描卡板号',
-    PRINT_LABELS: 'Print labels' // TODO: CN translation
+    PRINT_LABELS: '打印标签'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
