@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Dispatch } from 'redux';
-import { Picker } from "@react-native-picker/picker";
+import { Picker } from '@react-native-picker/picker';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
@@ -32,46 +32,43 @@ const addZonesToPicker = (
   currentZone: { id: number; name: string },
   createFlow: CREATE_FLOW
 ) => {
+  const availableZones = possibleZones.filter(possibleZone => !zones.some(zone => possibleZone.name === zone.zoneName));
   switch (createFlow) {
     case CREATE_FLOW.CREATE_AISLE:
       return (
-        <Picker.Item label={currentZone.name} value={currentZone.name}/>
+        <Picker.Item label={currentZone.name} value={currentZone.name} />
       );
     default:
-      const availableZones = possibleZones.filter(possibleZone => !zones.some(zone => possibleZone.name === zone.zoneName));
-      return [<Picker.Item label={''} value={''} key={-1}/>,
+      return [<Picker.Item label="" value="" key={-1} />,
         ...availableZones.map((zone: PossibleZone, index: number) => {
           const zoneLabel = `${zone.name} - ${zone.description}`;
           return (
-            <Picker.Item label={zoneLabel} value={zone.name} key={index}/>
-          )
+            <Picker.Item label={zoneLabel} value={zone.name} key={index} />
+          );
         })];
   }
 };
 
-const validateNumericInput = (aisles: number, existingAisles = 0): boolean => {
-  return (aisles >= NEW_ZONE_AISLE_MIN) && (aisles <= (NEW_ZONE_AISLE_MAX - existingAisles));
-};
+const validateNumericInput = (aisles: number, existingAisles = 0): boolean =>
+  (aisles >= NEW_ZONE_AISLE_MIN) && (aisles <= (NEW_ZONE_AISLE_MAX - existingAisles));
 
-const disableContinue = (aisles: number, existingAisles = 0, selectedZone: string) => {
-  return aisles < NEW_ZONE_AISLE_MIN || aisles > (NEW_ZONE_AISLE_MAX - existingAisles) || selectedZone === ''
-};
 
+const disableContinue = (aisles: number, existingAisles = 0, selectedZone: string) =>
+  aisles < NEW_ZONE_AISLE_MIN || aisles > (NEW_ZONE_AISLE_MAX - existingAisles) || selectedZone === '';
 
 export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
-
   const handleIncreaseAisle = () => {
-    props.setNumberOfAisles((prevState: number) => prevState < NEW_ZONE_AISLE_MAX - props.existingAisles ? prevState + 1 : prevState)
+    props.setNumberOfAisles((prevState: number) => prevState < NEW_ZONE_AISLE_MAX - props.existingAisles ? prevState + 1 : prevState);
   };
 
   const handleDecreaseAisle = () => {
-    props.setNumberOfAisles((prevState: number) => prevState > NEW_ZONE_AISLE_MIN ? prevState - 1 : prevState)
+    props.setNumberOfAisles((prevState: number) => prevState > NEW_ZONE_AISLE_MIN ? prevState - 1 : prevState);
   };
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
-    if (!isNaN(newQty)) {
-      props.setNumberOfAisles(newQty)
+    if (!Number.isNaN(newQty)) {
+      props.setNumberOfAisles(newQty);
     }
   };
 
@@ -134,7 +131,7 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 };
 
 const AddZone = (): JSX.Element => {
@@ -150,7 +147,9 @@ const AddZone = (): JSX.Element => {
 
   if (createFlow === CREATE_FLOW.CREATE_AISLE) {
     const zoneAisles = zones.find(zone => zone.zoneId === currentZone.id);
-    zoneAisles ? existingAisles = zoneAisles.aisleCount : null;
+    if ( zoneAisles ) {
+      existingAisles = zoneAisles.aisleCount
+    }
   }
 
   return (
@@ -166,7 +165,7 @@ const AddZone = (): JSX.Element => {
       existingAisles={existingAisles}
       dispatch={dispatch}
     />
-  )
+  );
 };
 
 export default AddZone;

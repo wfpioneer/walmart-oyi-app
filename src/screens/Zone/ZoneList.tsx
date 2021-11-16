@@ -104,7 +104,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     // on api success
     if (!getZoneApi.isWaiting && getZoneApi.result) {
       trackEventCall('get_zones_success', { duration: moment().valueOf() - apiStart });
-      dispatch(setZones(getZoneApi.result.data))
+      dispatch(setZones(getZoneApi.result.data));
     }
 
     // on api failure
