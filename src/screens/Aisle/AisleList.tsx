@@ -150,6 +150,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
         details={`${getAllAisles.result?.data.length || 0} ${strings('LOCATION.AISLES')}`}
         navigation={navigation}
         route={route}
+        dispatch={dispatch}
       />
       <FlatList
         data={getAllAisles.result?.data || []}

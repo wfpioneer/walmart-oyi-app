@@ -4,6 +4,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
 <React.Fragment>
   <LocationHeader
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    dispatch={[MockFunction]}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
     route={
       Object {
@@ -62,6 +63,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
 <React.Fragment>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    dispatch={[MockFunction]}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
     route={
       Object {
@@ -120,6 +122,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
 <React.Fragment>
   <LocationHeader
     details="100 [missing \\"en.LOCATION.ITEMS\\" translation], 100 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    dispatch={[MockFunction]}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
     route={
       Object {
@@ -181,6 +184,7 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
   />
   <LocationHeader
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    dispatch={[MockFunction]}
     location="[missing \\"en.LOCATION.SECTION\\" translation] SCAN1-1"
     route={
       Object {
@@ -242,6 +246,7 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
   />
   <LocationHeader
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    dispatch={[MockFunction]}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
     route={
       Object {

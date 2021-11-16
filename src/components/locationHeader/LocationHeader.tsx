@@ -1,20 +1,22 @@
 import { NavigationProp, RouteProp } from '@react-navigation/native';
-import React from 'react';
+import React, { Dispatch } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { strings } from '../../locales';
 import styles from './LocationHeader.style';
+import { togglePrintScreen } from '../../state/actions/Print';
 
 interface LocationHeaderProps {
   location: string;
   details: string;
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
+  dispatch: Dispatch<any>
 }
 
 export const LocationHeader = (props: LocationHeaderProps): JSX.Element => {
   const {
-    location, details, navigation, route
+    location, details, navigation, route, dispatch
   } = props;
   // Temp change to navigate to PrintScreen
   return (
@@ -25,7 +27,10 @@ export const LocationHeader = (props: LocationHeaderProps): JSX.Element => {
       </View>
       {route.name === 'SectionDetails' && (
         <TouchableOpacity
-          onPress={() => navigation.navigate('PrintLabel')}
+          onPress={() => {
+            dispatch(togglePrintScreen(true));
+            navigation.navigate('PrintLabel');
+          }}
         >
           <Text style={styles.buttonLabelText}>{strings('PRINT.PRINT_LABEL')}</Text>
         </TouchableOpacity>

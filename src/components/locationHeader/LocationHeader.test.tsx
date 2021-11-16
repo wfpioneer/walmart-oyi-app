@@ -20,6 +20,7 @@ describe('Test Location Header in Zone Screen', () => {
         details={`${mockZones.length} ${strings('LOCATION.ZONES')}`}
         navigation={navigationProp}
         route={routeProp}
+        dispatch={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -37,6 +38,7 @@ describe('Test Location Header in Zone Screen', () => {
         details={`${mockZones.length} ${strings('LOCATION.ZONES')}`}
         navigation={navigationProp}
         route={sectionRoute}
+        dispatch={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

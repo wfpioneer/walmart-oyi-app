@@ -146,6 +146,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
         details={`${getZoneApi.result?.data.length || 0} ${strings('LOCATION.ZONES')}`}
         navigation={navigation}
         route={route}
+        dispatch={dispatch}
       />
       <FlatList
         data={getZoneApi.result?.data || []}

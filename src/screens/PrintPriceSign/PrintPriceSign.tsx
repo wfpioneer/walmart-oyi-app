@@ -18,7 +18,7 @@ import styles from './PrintPriceSign.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getMockItemDetails } from '../../mockData';
 import {
-  addToPrintQueue, addToPrinterList, setSelectedPrinter, setSignType
+  addToPrintQueue, addToPrinterList, setSelectedPrinter, setSignType, togglePrintScreen
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
@@ -194,6 +194,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     // Resets Print api response data when navigating off-screen
     navigation.addListener('beforeRemove', () => {
       dispatch({ type: PRINT_SIGN.RESET });
+      // Set Print Label Toggle back to Item Labels
+      dispatch(togglePrintScreen(false));
     });
   }, []);
 

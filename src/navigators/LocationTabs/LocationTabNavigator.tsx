@@ -163,6 +163,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
         + ` ${reserveItems.length ?? 0} ${strings('LOCATION.PALLETS')}`}
         navigation={navigation}
         route={route}
+        dispatch={dispatch}
       />
       <Tab.Navigator
         tabBarOptions={{
