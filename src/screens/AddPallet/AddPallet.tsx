@@ -1,5 +1,10 @@
 import React, { EffectCallback, useEffect, useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Text,
+  TextInput,
+  View
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -46,6 +51,17 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
   } = props;
 
   const palletIDRegex = /^[0-9]+$/;
+  if (addAPI.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={addAPI.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.completeActivityIndicator}
+      />
+    );
+  }
   // Add Location API
   useEffectHook(() => {
     // on api success
@@ -63,11 +79,6 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
       } else {
         dispatch(showInfoModal(strings('LOCATION.ADD_PALLET_ERROR'), strings('LOCATION.ADD_PALLET_API_ERROR')));
       }
-    }
-
-    // on api submission
-    if (addAPI.isWaiting) {
-      setError({ error: false, message: '' });
     }
   }, [addAPI]);
   // Navigation Listener
@@ -101,7 +112,6 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
       }));
     }
   };
-
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>

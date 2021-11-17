@@ -37,5 +37,10 @@ export default StyleSheet.create({
     fontSize: 12,
     color: COLOR.RED_300,
     marginHorizontal: 5
+  },
+  completeActivityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

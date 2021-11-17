@@ -10,6 +10,16 @@ describe('AddPalletScreen', () => {
   const invalidPalletID = '123abc';
   const validPalletID = '123456';
   const locationName = '1A-1';
+  const addPalletResult = {
+    status: 204,
+    data: ''
+  };
+  const getSectionEmptyResponse: AsyncState = {
+    isWaiting: false,
+    value: null,
+    error: null,
+    result: addPalletResult
+  };
   it('Renders Error for pallet ID containing non number digits', () => {
     renderer.render(
       <AddPalletScreen
@@ -19,6 +29,7 @@ describe('AddPalletScreen', () => {
         navigation={navigationProp}
         useEffectHook={jest.fn()}
         section={{ id: 1, name: '1' }}
+        addAPI={getSectionEmptyResponse}
         locationName={locationName}
       />
     );
@@ -35,6 +46,7 @@ describe('AddPalletScreen', () => {
         useEffectHook={jest.fn()}
         section={{ id: 1, name: '1' }}
         locationName={locationName}
+        addAPI={getSectionEmptyResponse}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -62,16 +74,6 @@ describe('AddPalletScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders the success response from Add pallet API', () => {
-      const addPalletResult = {
-        status: 204,
-        data: ''
-      };
-      const getSectionEmptyResponse: AsyncState = {
-        isWaiting: false,
-        value: null,
-        error: null,
-        result: addPalletResult
-      };
       renderer.render(
         <AddPalletScreen
           palletId={validPalletID}
