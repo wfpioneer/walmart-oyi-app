@@ -107,6 +107,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="AddZone"
+    options={
+      Object {
+        "headerTitle": "Add Zone",
+      }
+    }
+  />
 </StackNavigator>
 `;
 
@@ -214,6 +223,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     options={
       Object {
         "headerTitle": "[missing \\"en.PRINT.PRINT_LABEL\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddZone"
+    options={
+      Object {
+        "headerTitle": "Add Zone",
       }
     }
   />

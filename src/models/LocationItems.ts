@@ -43,3 +43,15 @@ export interface LocationItem {
   floor: SectionDetailsItem[];
   reserve: SectionDetailsPallet[];
 }
+
+export interface PossibleZone {
+  name: string;
+  description: string;
+}
+
+export enum CREATE_FLOW  {
+  CREATE_ZONE = 'CREATE_ZONE',
+  CREATE_AISLE = 'CREATE_AISLE',
+  CREATE_SECTION = 'CREATE_SECTION',
+  NOT_STARTED = 'NOT_STARTED'
+}
