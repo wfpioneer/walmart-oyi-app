@@ -29,6 +29,7 @@ interface SectionDetailsProps {
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
   scannedEvent: {type: string, value: string};
+  addAPI: AsyncState;
 }
 
 export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element => {
@@ -39,7 +40,8 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
     navigation,
     trackEventCall,
     useEffectHook,
-    scannedEvent
+    scannedEvent,
+    addAPI
   } = props;
 
   // Navigation Listener
@@ -63,7 +65,6 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
       }
     }
   });
-
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
 
   if (getSectionDetailsApi.isWaiting) {
@@ -115,10 +116,12 @@ const SectionDetails = (): JSX.Element => {
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
+  const addAPI = useTypedSelector(state => state.async.addPallet);
   return (
     <>
       <SectionDetailsScreen
         getSectionDetailsApi={getSectionDetailsApi}
+        addAPI={addAPI}
         dispatch={dispatch}
         navigation={navigation}
         route={route}

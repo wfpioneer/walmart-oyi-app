@@ -1,4 +1,5 @@
 import { all, call } from 'redux-saga/effects';
+import AddPalletService from '../../services/AddPallet.service';
 import { makeAsyncSaga } from './generic/makeAsyncSaga';
 import * as saga from '../actions/saga';
 import * as actions from '../actions/asyncAPI';
@@ -39,7 +40,8 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_AISLE, actions.getAisle, LocationService.getAisle),
   makeAsyncSaga(saga.GET_SECTIONS, actions.getSections, LocationService.getSections),
   makeAsyncSaga(saga.GET_SECTION_DETAILS, actions.getSectionDetails, LocationService.getSectionDetails),
-  makeAsyncSaga(saga.PRINT_LOCATION_LABELS, actions.printLocationLabels, PrintService.printLabels)
+  makeAsyncSaga(saga.PRINT_LOCATION_LABELS, actions.printLocationLabels, PrintService.printLabels),
+  makeAsyncSaga(saga.ADD_PALLET, actions.addPallet, AddPalletService.addPallet)
 ];
 
 export default function* rootSaga() {

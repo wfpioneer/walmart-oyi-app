@@ -183,7 +183,12 @@ export default {
     REMOVE_AISLE: '移除通道',
     SCAN_PALLET: '扫描卡板标签',
     PALLET_VALIDATE_ERROR: '卡板号只能是数字',
-    PALLET_PLACEHOLDER: '输入或扫描卡板号'
+    PALLET_PLACEHOLDER: '输入或扫描卡板号',
+    ADD_PALLET_ERROR: '添加卡板时出错',
+    ADD_PALLET_API_ERROR: '错误添加卡板标签，请重试',
+    PALLET_ERROR: '卡板未找到/空卡板',
+    PALLET_NOT_FOUND: '因未找到卡板/卡板为空系统报错',
+    PALLET_ADDED: '卡板添加成功'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
