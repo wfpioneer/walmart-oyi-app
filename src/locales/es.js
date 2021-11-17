@@ -185,7 +185,7 @@ export default {
     SCAN_PALLET: 'Escanea la etiqueta del Pallet',
     PALLET_VALIDATE_ERROR: 'El Pallet ID solo puede contener números',
     PALLET_PLACEHOLDER: 'Ingresa o escanea un pallet ID',
-    PRINT_LABELS: 'Imprimir etiquetas'
+    PRINT_LABELS: 'Imprimir etiquetas',
     ADD_PALLET_ERROR: 'error al agregar el pallet',
     ADD_PALLET_API_ERROR: 'Hubo un error al agregar el pallet. Inténtar de nuevo',
     PALLET_ERROR: 'Pallet no encontrada/Pallet vacía',

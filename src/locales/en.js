@@ -185,7 +185,7 @@ export default {
     SCAN_PALLET: 'Scan Pallet ID',
     PALLET_VALIDATE_ERROR: 'Pallet ID can only contain numbers',
     PALLET_PLACEHOLDER: 'Enter or Scan Pallet ID',
-    PRINT_LABELS: 'Print labels'
+    PRINT_LABELS: 'Print labels',
     ADD_PALLET_ERROR: 'Error adding the pallet',
     ADD_PALLET_API_ERROR: 'There was an error adding the pallet. \nPlease try again.',
     PALLET_ERROR: 'Pallet not found/Empty Pallet',

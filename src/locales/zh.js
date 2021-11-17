@@ -185,7 +185,7 @@ export default {
     SCAN_PALLET: '扫描卡板标签',
     PALLET_VALIDATE_ERROR: '卡板号只能是数字',
     PALLET_PLACEHOLDER: '输入或扫描卡板号',
-    PRINT_LABELS: '打印标签'
+    PRINT_LABELS: '打印标签',
     ADD_PALLET_ERROR: '添加卡板时出错',
     ADD_PALLET_API_ERROR: '错误添加卡板标签，请重试',
     PALLET_ERROR: '卡板未找到/空卡板',
