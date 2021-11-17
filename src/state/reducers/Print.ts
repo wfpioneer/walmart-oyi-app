@@ -1,4 +1,5 @@
 import {
+  ADD_MULTIPLE_TO_PRINT_QUEUE,
   ADD_TO_PRINTER_LIST,
   ADD_TO_PRINT_QUEUE,
   DELETE_FROM_PRINTER_LIST,
@@ -70,6 +71,11 @@ export const Print = (state = initialState, action: any) => {
       return {
         ...state,
         printQueue
+      };
+    case ADD_MULTIPLE_TO_PRINT_QUEUE:
+      return {
+        ...state,
+        printQueue: printQueue.concat(action.payload)
       };
     case SET_PRINT_QUEUE:
       return {

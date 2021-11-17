@@ -18,7 +18,7 @@ import styles from './PrintPriceSign.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getMockItemDetails } from '../../mockData';
 import {
-  addToPrintQueue, addToPrinterList, setSelectedPrinter, setSignType
+  addMultipleToPrintQueue, addToPrintQueue, addToPrinterList, setSelectedPrinter, setSignType
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
@@ -84,14 +84,16 @@ interface PriceSignProps {
   scannedEvent: { value: any; type: any };
   exceptionType: string;
   actionCompleted: boolean;
-  result: any;
-  printAPI: AsyncState
+  itemResult: any;
+  printAPI: AsyncState;
+  sectionsResult: any;
   selectedPrinter: Printer;
   selectedSignType: LaserPaper | PortablePaper;
   printQueue: PrintQueueItem[];
   printingLocationLabels: string;
   selectedAisle: LocationIdName;
   selectedSection: LocationIdName;
+  selectedZone: LocationIdName;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: Route<any>;
@@ -162,19 +164,27 @@ const isValidDispatch = (props: PriceSignProps, actionCompleted: boolean,
     dispatch(setActionCompleted());
   }
 };
-const isResultHasData = (result: any) => (
-  (result && result.data)
+const isitemResultHasData = (itemResult: any) => (
+  (itemResult && itemResult.data)
 );
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
-    scannedEvent, exceptionType, actionCompleted, result, printAPI,
-    selectedPrinter, selectedSignType, printQueue, printingLocationLabels,
-    selectedAisle, selectedSection, dispatch, navigation, route, signQty,
+    scannedEvent, exceptionType, actionCompleted, itemResult, printAPI, sectionsResult,
+    selectedPrinter, selectedSignType, printQueue, printingLocationLabels, selectedAisle,
+    selectedSection, selectedZone, dispatch, navigation, route, signQty,
     setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook
   } = props;
   const {
     itemName, itemNbr, upcNbr, categoryNbr
-  } = isResultHasData(result) as ItemDetails || getMockItemDetails(scannedEvent.value);
+  } = isitemResultHasData(itemResult) as ItemDetails || getMockItemDetails(scannedEvent.value);
+  const { data: sectionsList } = sectionsResult || { data: [] };
+
+  const getLocationName = () => (printingLocationLabels === LocationName.AISLE
+    ? `${strings('LOCATION.AISLE')} ${selectedZone.name}${selectedAisle.name}`
+    : `${strings('LOCATION.SECTION')} ${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`);
+
+  const getFullSectionName = (sectionName: string) => (
+    `${strings('LOCATION.SECTION')} ${selectedZone.name}${selectedAisle.name}-${sectionName}`);
 
   useLayoutHook(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
@@ -266,21 +276,39 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           paperSize: selectedSignType,
           itemType: PrintQueueItemType.ITEM
         };
+        trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
+        dispatch(addToPrintQueue(printQueueItem));
+      }
+      if (printingLocationLabels === LocationName.AISLE) {
+        const printQueueItems: PrintQueueItem[] = [];
+        sectionsList.forEach((section: any) => {
+          const printQueueArrayItem: PrintQueueItem = {
+            itemName: getFullSectionName(section.sectionName),
+            itemNbr: section.sectionId,
+            upcNbr: '',
+            catgNbr: 0,
+            paperSize: selectedSignType,
+            signQty,
+            itemType: PrintQueueItemType.SECTION
+          };
+          printQueueItems.push(printQueueArrayItem);
+        });
+        trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItems) });
+        dispatch(addMultipleToPrintQueue(printQueueItems));
       } else {
-        const { name, id } = printingLocationLabels === LocationName.AISLE ? selectedAisle : selectedSection;
+        const { id } = selectedSection;
         printQueueItem = {
-          itemName: name,
+          itemName: getLocationName(),
           itemNbr: id,
           upcNbr: '',
           catgNbr: 0,
           paperSize: selectedSignType,
           signQty,
-          itemType: printingLocationLabels === LocationName.AISLE
-            ? PrintQueueItemType.AISLE : PrintQueueItemType.SECTION
+          itemType: PrintQueueItemType.SECTION
         };
+        trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
+        dispatch(addToPrintQueue(printQueueItem));
       }
-      trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
-      dispatch(addToPrintQueue(printQueueItem));
       isValidDispatch(props, actionCompleted, exceptionType);
       navigation.goBack();
     }
@@ -300,7 +328,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       ];
       trackEvent('print_price_sign', { printItem: JSON.stringify(printlist) });
       dispatch(printSign({ printlist }));
-    }).catch(() => { });
+    }).catch(() => {});
   };
 
   const detailsView = () => (!printingLocationLabels
@@ -443,12 +471,13 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
 const PrintPriceSign = (): JSX.Element => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
-  const { result } = useTypedSelector(state => state.async.getItemDetails);
+  const { result: itemResult } = useTypedSelector(state => state.async.getItemDetails);
   const printAPI = useTypedSelector(state => state.async.printSign);
+  const { result: sectionsResult } = useTypedSelector(state => state.async.getSections);
   const {
     selectedPrinter, selectedSignType, printQueue, printingLocationLabels
   } = useTypedSelector(state => state.Print);
-  const { selectedAisle, selectedSection } = useTypedSelector(state => state.Location);
+  const { selectedAisle, selectedSection, selectedZone } = useTypedSelector(state => state.Location);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -461,14 +490,16 @@ const PrintPriceSign = (): JSX.Element => {
       scannedEvent={scannedEvent}
       exceptionType={exceptionType}
       actionCompleted={actionCompleted}
-      result={result}
+      itemResult={itemResult}
       printAPI={printAPI}
+      sectionsResult={sectionsResult}
       selectedPrinter={selectedPrinter}
       selectedSignType={selectedSignType}
       printQueue={printQueue}
       printingLocationLabels={printingLocationLabels}
       selectedAisle={selectedAisle}
       selectedSection={selectedSection}
+      selectedZone={selectedZone}
       dispatch={dispatch}
       navigation={navigation}
       route={route}
