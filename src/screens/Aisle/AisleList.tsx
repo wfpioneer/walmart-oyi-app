@@ -30,9 +30,10 @@ import { LocationType } from '../../models/LocationType';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import { hideLocationPopup } from '../../state/actions/Location';
+import  {hideLocationPopup, setAisles, setCreateFlow } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
+import { CREATE_FLOW } from '../../models/LocationItems';
 
 const NoAisleMessage = () : JSX.Element => (
   <View style={styles.noAisles}>
@@ -197,6 +198,13 @@ const AisleList = (): JSX.Element => {
     }
   }, [locationPopupVisible]);
 
+  const handleAddAisles = () => {
+    dispatch(setAisles(getAllAisles.result.data));
+    dispatch(setCreateFlow(CREATE_FLOW.CREATE_AISLE));
+    bottomSheetModalRef.current?.dismiss();
+    navigation.navigate('AddZone');
+  };
+
   return (
     <BottomSheetModalProvider>
       <TouchableOpacity
@@ -229,7 +237,7 @@ const AisleList = (): JSX.Element => {
       >
         <BottomSheetView>
           <BottomSheetAddCard
-            onPress={() => {}}
+            onPress={handleAddAisles}
             text={strings('LOCATION.ADD_AISLES')}
             isManagerOption={false}
             isVisible={true}
