@@ -105,7 +105,8 @@ export default {
     RESERVE_QTY: 'Reserve',
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consolidated',
-    FLY_CLOUD_QTY: 'Fly Cloud'
+    FLY_CLOUD_QTY: 'Fly Cloud',
+    ERROR_SALES_HISTORY: 'Unable to retrieve sales history'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
