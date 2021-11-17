@@ -1,19 +1,12 @@
-import React, {
-  Dispatch,
-  useEffect,
-  useState
-} from 'react';
-
-import {
-  ActivityIndicator, Text, TextInput, View
-} from 'react-native';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import styles from './OHQtyUpdate.style';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
 import IconButton from '../buttons/IconButton';
+import NumericSelector from '../NumericSelector/NumericSelector';
 import { numbers, strings } from '../../locales';
 import { updateOHQty } from '../../state/actions/saga';
 import { setActionCompleted, updatePendingOHQty } from '../../state/actions/ItemDetailScreen';
@@ -39,24 +32,11 @@ const ERROR_FORMATTING_OPTIONS = {
 const validateQty = (qty: number) => OH_MIN <= qty && qty <= OH_MAX;
 const validateSameQty = (qty: number, newQty: number) => qty === newQty;
 
-const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
-  <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
-);
 const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
   || exceptionType === 'C' || exceptionType === 'NSFL';
 
 const validate = (isValidNbr: boolean, isSameQty: boolean) => !isValidNbr || isSameQty;
 
-const renderView = (isValidNbr: boolean) => (isValidNbr ? styles.updateContainerValid
-  : styles.updateContainerInvalid);
-
-const isValidNbrErrorRequired = (isValidNbr: boolean) => (
-  !isValidNbr && (
-    <Text style={styles.invalidLabel}>
-      {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
-    </Text>
-  )
-);
 const isErrorRequired = (error: string) => (
   error !== '' && (
     <Text style={styles.invalidLabel}>
@@ -178,30 +158,18 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
           />
         )}
       </View>
-      <View style={[styles.updateContainer, renderView(isValidNbr)]}>
-        <IconButton
-          icon={renderPlusMinusBtn('minus')}
-          type={IconButton.Type.NO_BORDER}
-          height={15}
-          width={35}
-          onPress={handleDecreaseQty}
-        />
-        <TextInput
-          style={styles.ohInput}
-          keyboardType="numeric"
-          onChangeText={handleTextChange}
-        >
-          {newOHQty}
-        </TextInput>
-        <IconButton
-          icon={renderPlusMinusBtn('plus')}
-          type={IconButton.Type.NO_BORDER}
-          height={15}
-          width={35}
-          onPress={handleIncreaseQty}
-        />
-      </View>
-      {isValidNbrErrorRequired(isValidNbr)}
+      <NumericSelector
+        isValid={isValidNbr}
+        onDecreaseQty={handleDecreaseQty}
+        onIncreaseQty={handleIncreaseQty}
+        onTextChange={handleTextChange}
+        value={newOHQty}
+      />
+      {!isValidNbr && (
+        <Text style={styles.invalidLabel}>
+          {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
+        </Text>
+      )}
       <Text style={styles.ohLabel}>
         {`${strings('GENERICS.TOTAL')} ${strings('ITEM.ON_HANDS')}`}
       </Text>

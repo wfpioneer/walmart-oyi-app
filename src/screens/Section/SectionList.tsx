@@ -190,14 +190,15 @@ const SectionList = (): JSX.Element => {
   const snapPoints = useMemo(() => ['27%', '60%'], []);
 
   useEffect(() => {
-    if (navigation.isFocused()) {
+    if (navigation.isFocused() && bottomSheetModalRef.current) {
       if (location.locationPopupVisible) {
-        bottomSheetModalRef.current?.present();
+        bottomSheetModalRef.current.present();
       } else {
-        bottomSheetModalRef.current?.dismiss();
+        bottomSheetModalRef.current.dismiss();
       }
     }
   }, [location]);
+
   return (
     <BottomSheetModalProvider>
       <TouchableOpacity

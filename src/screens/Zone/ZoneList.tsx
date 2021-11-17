@@ -27,11 +27,18 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
+import { CREATE_FLOW } from '../../models/LocationItems';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
-import { hideLocationPopup } from '../../state/actions/Location';
+import {
+  hideLocationPopup,
+  setCreateFlow,
+  setPossibleZones,
+  setZones
+} from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
+import { mockPossibleZones } from '../../mockData/mockPossibleZones';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
@@ -97,6 +104,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     // on api success
     if (!getZoneApi.isWaiting && getZoneApi.result) {
       trackEventCall('get_zones_success', { duration: moment().valueOf() - apiStart });
+      dispatch(setZones(getZoneApi.result.data));
     }
 
     // on api failure
@@ -183,14 +191,22 @@ const ZoneList = (): JSX.Element => {
   const snapPoints = useMemo(() => ['22%', '50%'], []);
 
   useEffect(() => {
-    if (navigation.isFocused()) {
+    if (navigation.isFocused() && bottomSheetModalRef.current) {
       if (location.locationPopupVisible) {
-        bottomSheetModalRef.current?.present();
+        bottomSheetModalRef.current.present();
       } else {
-        bottomSheetModalRef.current?.dismiss();
+        bottomSheetModalRef.current.dismiss();
       }
     }
   }, [location]);
+
+  const handleAddZone = () => {
+    // TODO integrate getPossibleZones api instead of loading moc data
+    dispatch(setCreateFlow(CREATE_FLOW.CREATE_ZONE));
+    dispatch(setPossibleZones(mockPossibleZones));
+    bottomSheetModalRef.current?.dismiss();
+    navigation.navigate('AddZone');
+  };
 
   return (
     <BottomSheetModalProvider>
@@ -225,7 +241,7 @@ const ZoneList = (): JSX.Element => {
           isManagerOption={true}
           isVisible={true}
           text={strings('LOCATION.ADD_AREA')}
-          onPress={() => {}}
+          onPress={handleAddZone}
         />
       </BottomSheetModal>
     </BottomSheetModalProvider>
