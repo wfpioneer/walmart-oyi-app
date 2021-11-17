@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import AddPallet from '../screens/AddPallet/AddPallet';
+import AddZone from '../screens/AddZone/AddZone';
 import { hideLocationPopup, showLocationPopup } from '../state/actions/Location';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
@@ -183,6 +184,13 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         component={AddPallet}
         options={{
           headerTitle: strings('LOCATION.SCAN_PALLET')
+        }}
+      />
+      <Stack.Screen
+        name="AddZone"
+        component={AddZone}
+        options={{
+          headerTitle: 'Add Zone'
         }}
       />
     </Stack.Navigator>
