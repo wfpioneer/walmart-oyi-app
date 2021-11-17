@@ -223,11 +223,11 @@ const LocationTabs = () : JSX.Element => {
   const snapPoints = useMemo(() => ['35%', '50%'], []);
 
   useEffect(() => {
-    if (navigation.isFocused()) {
+    if (navigation.isFocused() && bottomSheetLocationDetailsModalRef.current) {
       if (locationPopupVisible) {
-        bottomSheetLocationDetailsModalRef.current?.present();
+        bottomSheetLocationDetailsModalRef.current.present();
       } else {
-        bottomSheetLocationDetailsModalRef.current?.dismiss();
+        bottomSheetLocationDetailsModalRef.current.dismiss();
       }
     }
   }, [locationPopupVisible]);
