@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavigationProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
   LocationManagementNavigatorStack, renderCamButton, renderScanButton, resetLocManualScan
@@ -6,6 +7,7 @@ import {
 
 jest.mock('../utils/AppCenterTool.ts', () => jest.requireActual('../utils/__mocks__/AppCenterTool'));
 jest.mock('../utils/sessionTimeout.ts', () => jest.requireActual('../utils/__mocks__/sessTimeout'));
+let navigationProp: NavigationProp<any>;
 
 describe('LocationManagement Navigator', () => {
   it('Renders the LocationManagement Navigator, non manager', () => {
@@ -14,6 +16,7 @@ describe('LocationManagement Navigator', () => {
       <LocationManagementNavigatorStack
         isManualScanEnabled={false}
         dispatch={jest.fn()}
+        navigation={navigationProp}
         userFeatures={['location management edit']}
         locationPopupVisible={false}
       />
@@ -27,6 +30,7 @@ describe('LocationManagement Navigator', () => {
       <LocationManagementNavigatorStack
         isManualScanEnabled={false}
         dispatch={jest.fn()}
+        navigation={navigationProp}
         userFeatures={['manager approval', 'location management edit']}
         locationPopupVisible={false}
       />
