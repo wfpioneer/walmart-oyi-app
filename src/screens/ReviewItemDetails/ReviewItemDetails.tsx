@@ -252,7 +252,7 @@ export const renderLocationComponent = (props: (RenderProps & HandleProps), item
 const MULTI_STATUS = 207;
 export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
   result: any, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
-  if (result.status === MULTI_STATUS) {
+  if (result && result.status !== MULTI_STATUS) {
     return (
       <SFTCard
         title={strings('ITEM.SALES_METRICS')}
@@ -267,7 +267,7 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
   return (
     <View>
       <View style={styles.activityIndicator}>
-        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
         <Text>{strings('ITEM.ERROR_SALES_HISTORY')}</Text>
       </View>
     </View>
