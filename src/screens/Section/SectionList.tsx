@@ -34,6 +34,8 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 import { hideLocationPopup } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
+import { setPrintingLocationLabels } from '../../state/actions/Print';
+import { LocationName } from '../../models/Location';
 
 const NoSectionMessage = () : JSX.Element => (
   <View style={styles.noSections}>
@@ -233,7 +235,11 @@ const SectionList = (): JSX.Element => {
         <BottomSheetPrintCard
           isVisible={true}
           text={strings('LOCATION.PRINT_SECTION')}
-          onPress={() => {}}
+          onPress={() => {
+            dispatch(hideLocationPopup());
+            dispatch(setPrintingLocationLabels(LocationName.AISLE));
+            navigation.navigate('PrintPriceSign');
+          }}
         />
         <BottomSheetAddCard
           isVisible={true}

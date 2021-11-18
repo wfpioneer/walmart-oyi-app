@@ -7,9 +7,9 @@ import {
   SELECT_ZONE,
   SET_AISLES,
   SET_CREATE_FLOW,
-  SET_POSSIBLE_ZONES,
   SET_NEW_ZONE,
   SET_NUMBER_OF_AISLES_TO_CREATE,
+  SET_POSSIBLE_ZONES,
   SET_ZONES,
   SHOW_LOCATION_POPUP
 } from '../actions/Location';
@@ -21,19 +21,15 @@ import {
   ZoneItem
 } from '../../models/LocationItems';
 
+export interface LocationIdName {
+  id: number;
+  name: string;
+}
+
 interface LocationState {
-  selectedZone: {
-    id: number;
-    name: string;
-  };
-  selectedAisle: {
-    id: number;
-    name: string;
-  };
-  selectedSection: {
-    id: number;
-    name: string;
-  };
+  selectedZone: LocationIdName;
+  selectedAisle: LocationIdName;
+  selectedSection: LocationIdName;
   zones: ZoneItem[],
   aisles: AisleItem[],
   possibleZones: PossibleZone[],

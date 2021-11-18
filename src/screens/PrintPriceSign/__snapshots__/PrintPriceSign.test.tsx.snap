@@ -1325,3 +1325,441 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
   </View>
 </ForwardRef(SafeAreaView)>
 `;
+
+exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle labels 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "paddingHorizontal": 8,
+          "paddingVertical": 16,
+        }
+      }
+    >
+      <Text>
+        [missing "en.LOCATION.AISLE" translation] 1
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 16,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#9e9e9e",
+            "fontSize": 12,
+            "marginVertical": 8,
+          }
+        }
+      >
+        [missing "en.PRINT.COPY_QTY" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 12,
+            "marginTop": 6,
+          }
+        }
+      >
+        <IconButton
+          backgroundColor="#bdbdbd"
+          disabled={false}
+          height={30}
+          icon={
+            <mockConstructor
+              color="#0071e9"
+              name="minus"
+              size={18}
+            />
+          }
+          onPress={[Function]}
+          radius={50}
+          type={2}
+          width={30}
+        />
+        <TextInput
+          allowFontScaling={true}
+          keyboardType="numeric"
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          style={
+            Array [
+              Object {
+                "borderColor": "#0071e9",
+                "borderWidth": 1,
+                "fontSize": 12,
+                "height": 30,
+                "marginHorizontal": 12,
+                "minWidth": "15%",
+                "padding": 6,
+                "textAlign": "center",
+              },
+              Object {
+                "borderColor": "#b71c1c",
+              },
+            ]
+          }
+          underlineColorAndroid="transparent"
+        >
+          1
+        </TextInput>
+        <IconButton
+          backgroundColor="#bdbdbd"
+          disabled={false}
+          height={30}
+          icon={
+            <mockConstructor
+              color="#0071e9"
+              name="plus"
+              size={18}
+            />
+          }
+          onPress={[Function]}
+          radius={50}
+          type={2}
+          width={30}
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#b71c1c",
+            "fontSize": 10,
+            "marginBottom": 12,
+          }
+        }
+      >
+        [missing "en.ITEM.OH_UPDATE_ERROR" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PRINT.PLEASE_CHOOSE_PORTABLE" translation]
+      </Text>
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={20}
+        onPress={[Function]}
+        radius={5}
+        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={14}
+        titleFontWeight="normal"
+        type={3}
+        width={-1}
+      />
+    </View>
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "elevation": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 20,
+        "paddingHorizontal": 4,
+        "paddingTop": 8,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 4,
+        }
+      }
+      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
+      titleColor="#0071e9"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={2}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 4,
+        }
+      }
+      title="[missing \\"en.PRINT.PRINT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section labels 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "paddingHorizontal": 8,
+          "paddingVertical": 16,
+        }
+      }
+    >
+      <Text>
+        [missing "en.LOCATION.SECTION" translation] 1
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 16,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#9e9e9e",
+            "fontSize": 12,
+            "marginVertical": 8,
+          }
+        }
+      >
+        [missing "en.PRINT.COPY_QTY" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 12,
+            "marginTop": 6,
+          }
+        }
+      >
+        <IconButton
+          backgroundColor="#bdbdbd"
+          disabled={false}
+          height={30}
+          icon={
+            <mockConstructor
+              color="#0071e9"
+              name="minus"
+              size={18}
+            />
+          }
+          onPress={[Function]}
+          radius={50}
+          type={2}
+          width={30}
+        />
+        <TextInput
+          allowFontScaling={true}
+          keyboardType="numeric"
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          style={
+            Array [
+              Object {
+                "borderColor": "#0071e9",
+                "borderWidth": 1,
+                "fontSize": 12,
+                "height": 30,
+                "marginHorizontal": 12,
+                "minWidth": "15%",
+                "padding": 6,
+                "textAlign": "center",
+              },
+              Object {
+                "borderColor": "#b71c1c",
+              },
+            ]
+          }
+          underlineColorAndroid="transparent"
+        >
+          1
+        </TextInput>
+        <IconButton
+          backgroundColor="#bdbdbd"
+          disabled={false}
+          height={30}
+          icon={
+            <mockConstructor
+              color="#0071e9"
+              name="plus"
+              size={18}
+            />
+          }
+          onPress={[Function]}
+          radius={50}
+          type={2}
+          width={30}
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#b71c1c",
+            "fontSize": 10,
+            "marginBottom": 12,
+          }
+        }
+      >
+        [missing "en.ITEM.OH_UPDATE_ERROR" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PRINT.PLEASE_CHOOSE_PORTABLE" translation]
+      </Text>
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={20}
+        onPress={[Function]}
+        radius={5}
+        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={14}
+        titleFontWeight="normal"
+        type={3}
+        width={-1}
+      />
+    </View>
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "elevation": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 20,
+        "paddingHorizontal": 4,
+        "paddingTop": 8,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 4,
+        }
+      }
+      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
+      titleColor="#0071e9"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={2}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 4,
+        }
+      }
+      title="[missing \\"en.PRINT.PRINT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
