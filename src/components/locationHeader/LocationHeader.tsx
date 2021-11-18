@@ -29,7 +29,7 @@ export const LocationHeader = (props: LocationHeaderProps): JSX.Element => {
         <TouchableOpacity
           onPress={() => {
             dispatch(togglePrintScreen(true));
-            navigation.navigate('PrintPriceSign');
+            navigation.navigate('PrintLabel');
           }}
         >
           <Text style={styles.buttonLabelText}>{strings('PRINT.PRINT_LABEL')}</Text>
