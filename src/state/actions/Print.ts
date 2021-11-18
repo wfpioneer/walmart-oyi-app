@@ -5,8 +5,10 @@ export const SET_SELECTED_SIGN_TYPE = 'PRINT/SET_SELECTED_SIGN_TYPE';
 export const ADD_TO_PRINTER_LIST = 'PRINT/ADD_TO_PRINTER_LIST';
 export const DELETE_FROM_PRINTER_LIST = 'PRINT/DELETE_FROM_PRINTER_LIST';
 export const ADD_TO_PRINT_QUEUE = 'PRINT/ADD_TO_PRINT_QUEUE';
+export const ADD_MULTIPLE_TO_PRINT_QUEUE = 'PRINT/ADD_MULTIPLE_TO_PRINT_QUEUE';
 export const SET_PRINT_QUEUE = 'PRINT/SET_PRINT_QUEUE';
-export const TOGGLE_PRINT_SCREEN = 'PRINT/TOGGLE_PRINT_SCREEN';
+export const SET_PRINTING_LOCATION_LABELS = 'PRINT/SET_PRINTING_LOCATION_LABELS';
+export const UNSET_PRINTING_LOCATION_LABELS = 'PRINT/UNSET_PRINTING_LOCATION_LABELS';
 
 export const setSelectedPrinter = (printer: Printer) => ({
   type: SET_SELECTED_PRINTER,
@@ -28,9 +30,14 @@ export const deleteFromPrinterList = (printerId: string) => ({
   payload: printerId
 } as const);
 
-export const addToPrintQueue = (label: PrintQueueItem[]) => ({
+export const addToPrintQueue = (label: PrintQueueItem) => ({
   type: ADD_TO_PRINT_QUEUE,
   payload: label
+} as const);
+
+export const addMultipleToPrintQueue = (labels: PrintQueueItem[]) => ({
+  type: ADD_MULTIPLE_TO_PRINT_QUEUE,
+  payload: labels
 } as const);
 
 export const setPrintQueue = (printQueue: PrintQueueItem[]) => ({
@@ -38,9 +45,13 @@ export const setPrintQueue = (printQueue: PrintQueueItem[]) => ({
   payload: printQueue
 } as const);
 
-export const togglePrintScreen = (isPrintLocation: boolean) => ({
-  type: TOGGLE_PRINT_SCREEN,
-  payload: isPrintLocation
+export const setPrintingLocationLabels = (screen: string) => ({
+  type: SET_PRINTING_LOCATION_LABELS,
+  payload: screen
+} as const);
+
+export const unsetPrintingLocationLabels = () => ({
+  type: UNSET_PRINTING_LOCATION_LABELS
 } as const);
 
 export type Actions =
@@ -49,5 +60,7 @@ export type Actions =
 | ReturnType<typeof addToPrinterList>
 | ReturnType<typeof deleteFromPrinterList>
 | ReturnType<typeof addToPrintQueue>
+| ReturnType<typeof addMultipleToPrintQueue>
 | ReturnType<typeof setPrintQueue>
-| ReturnType<typeof togglePrintScreen>
+| ReturnType<typeof setPrintingLocationLabels>
+| ReturnType<typeof unsetPrintingLocationLabels>

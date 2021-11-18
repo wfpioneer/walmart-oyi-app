@@ -10,4 +10,11 @@ interface Location {
   typeNbr: number;
 }
 
+// eslint-disable-next-line no-shadow
+export enum LocationName {
+  ZONE = 'Zone',
+  AISLE = 'Aisle',
+  SECTION = 'Section'
+}
+
 export default Location;

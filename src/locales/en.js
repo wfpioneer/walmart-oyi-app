@@ -111,6 +111,7 @@ export default {
     MAIN_TITLE: 'Print price sign',
     QUEUE_TITLE: 'Print list',
     CHANGE_TITLE: 'Printers',
+    LOCATION_TITLE: 'Print location labels',
     PRICE_SIGN: 'Print price sign',
     COPY_QTY: 'Number of copies',
     COPIES: 'Copies',
@@ -132,7 +133,8 @@ export default {
     MAC_ADDRESS_ERROR: 'The MAC address is usually 12 numbers',
     PORTABLE_PRINTER: 'Portable Printer',
     PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.',
-    PRINT_LABEL: 'Print label'
+    PRINT_LABEL: 'Print label',
+    PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer'
   },
   LOCATION: {
     TITLE: 'All locations',
@@ -184,6 +186,7 @@ export default {
     SCAN_PALLET: 'Scan Pallet ID',
     PALLET_VALIDATE_ERROR: 'Pallet ID can only contain numbers',
     PALLET_PLACEHOLDER: 'Enter or Scan Pallet ID',
+    PRINT_LABELS: 'Print labels',
     ADD_PALLET_ERROR: 'Error adding the pallet',
     ADD_PALLET_API_ERROR: 'There was an error adding the pallet. \nPlease try again.',
     PALLET_ERROR: 'Pallet not found/Empty Pallet',

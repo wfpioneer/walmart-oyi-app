@@ -12,7 +12,7 @@ const routeProp: RouteProp<any, string> = {
   name: ''
 };
 describe('Test Location Header in Zone Screen', () => {
-  it('Renders Location Header In Zone Screen', () => {
+  it('Renders Location Header In Zone Screen, no button', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <LocationHeader
@@ -41,6 +41,17 @@ describe('Test Location Header in Zone Screen', () => {
         dispatch={jest.fn()}
       />
     );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders Location header with button', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(<LocationHeader
+      location="yes"
+      details="no"
+      buttonPress={() => {}}
+      buttonText="i is button"
+    />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 });

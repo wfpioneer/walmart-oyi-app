@@ -1,42 +1,44 @@
-import { NavigationProp, RouteProp } from '@react-navigation/native';
-import React, { Dispatch } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { strings } from '../../locales';
 import styles from './LocationHeader.style';
-import { togglePrintScreen } from '../../state/actions/Print';
 
 interface LocationHeaderProps {
-  location: string;
-  details: string;
-  navigation: NavigationProp<any>;
-  route: RouteProp<any, string>;
-  dispatch: Dispatch<any>
+  location: string,
+  details: string,
+  buttonText?: string,
+  buttonPress?: () => void
 }
 
-export const LocationHeader = (props: LocationHeaderProps): JSX.Element => {
+export const LocationHeader = (props: LocationHeaderProps) : JSX.Element => {
   const {
-    location, details, navigation, route, dispatch
+    location, details, buttonText, buttonPress
   } = props;
-  // Temp change to navigate to PrintScreen
+
+  const buttonView = () => (buttonText ? (
+    <TouchableOpacity onPress={buttonPress}>
+      <Text style={styles.buttonText}>{buttonText}</Text>
+    </TouchableOpacity>
+  ) : null);
+
   return (
-    <View style={styles.staticHeader}>
-      <View>
-        <Text>{location}</Text>
-        <Text style={styles.detailsText}>{details}</Text>
+    <View style={styles.headerContainer}>
+      <View style={styles.headerText}>
+        <Text>
+          {location}
+        </Text>
+        <Text style={styles.detailsText}>
+          {details}
+        </Text>
       </View>
-      {route.name === 'SectionDetails' && (
-        <TouchableOpacity
-          onPress={() => {
-            dispatch(togglePrintScreen(true));
-            navigation.navigate('PrintLabel');
-          }}
-        >
-          <Text style={styles.buttonLabelText}>{strings('PRINT.PRINT_LABEL')}</Text>
-        </TouchableOpacity>
-      )}
+      {buttonView()}
     </View>
   );
+};
+
+LocationHeader.defaultProps = {
+  buttonText: undefined,
+  buttonPress: undefined
 };
 
 export default LocationHeader;

@@ -21,26 +21,22 @@ import {
   ZoneItem
 } from '../../models/LocationItems';
 
+export interface LocationIdName {
+  id: number;
+  name: string;
+}
+
 interface LocationState {
-  selectedZone: {
-    id: number;
-    name: string;
-  };
-  selectedAisle: {
-    id: number;
-    name: string;
-  };
-  selectedSection: {
-    id: number;
-    name: string;
-  };
+  selectedZone: LocationIdName;
+  selectedAisle: LocationIdName;
+  selectedSection: LocationIdName;
   zones: ZoneItem[];
   aisles: AisleItem[];
   possibleZones: PossibleZone[];
   locationPopupVisible: boolean;
   createFlow: CREATE_FLOW;
   newZone: string;
-  numberOfAislesToCreate: number;
+  numberOfAislesToCreate: number
 }
 
 const initialState: LocationState = {

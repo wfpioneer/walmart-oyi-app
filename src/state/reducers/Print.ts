@@ -1,12 +1,14 @@
 import {
+  ADD_MULTIPLE_TO_PRINT_QUEUE,
   ADD_TO_PRINTER_LIST,
   ADD_TO_PRINT_QUEUE,
   Actions,
   DELETE_FROM_PRINTER_LIST,
+  SET_PRINTING_LOCATION_LABELS,
   SET_PRINT_QUEUE,
   SET_SELECTED_PRINTER,
   SET_SELECTED_SIGN_TYPE,
-  TOGGLE_PRINT_SCREEN
+  UNSET_PRINTING_LOCATION_LABELS
 } from '../actions/Print';
 
 import {
@@ -21,7 +23,7 @@ interface StateType {
   selectedSignType: PrintPaperSize;
   printerList: Printer[];
   printQueue: PrintQueueItem[];
-  isPrintLocation: boolean;
+  printingLocationLabels: string;
 }
 
 const initialState: StateType = {
@@ -34,7 +36,7 @@ const initialState: StateType = {
   selectedSignType: '',
   printerList: [],
   printQueue: [],
-  isPrintLocation: false
+  printingLocationLabels: ''
 };
 
 export const Print = (state = initialState, action: Actions): StateType => {
@@ -63,7 +65,7 @@ export const Print = (state = initialState, action: Actions): StateType => {
         printerList
       };
     case DELETE_FROM_PRINTER_LIST:
-      // TODO NEED TO BE ABLE TO DELETE FROM LOCATION LIST
+      // TODO NEED TO BE ABLE TO DELETE LOCATION FROM LIST
       // eslint-disable-next-line no-case-declarations
       const deleteIndex = printerList.findIndex(
         item => item.id === action.payload
@@ -73,23 +75,32 @@ export const Print = (state = initialState, action: Actions): StateType => {
         ...state,
         printerList
       };
-    case ADD_TO_PRINT_QUEUE: {
-      const updatedPrintQueue = [...printQueue, ...action.payload];
-      // Push array
+    case ADD_TO_PRINT_QUEUE:
+      printQueue.push(action.payload);
+
       return {
         ...state,
-        printQueue: updatedPrintQueue
+        printQueue
       };
-    }
+    case ADD_MULTIPLE_TO_PRINT_QUEUE:
+      return {
+        ...state,
+        printQueue: printQueue.concat(action.payload)
+      };
     case SET_PRINT_QUEUE:
       return {
         ...state,
         printQueue: action.payload
       };
-    case TOGGLE_PRINT_SCREEN:
+    case SET_PRINTING_LOCATION_LABELS:
       return {
         ...state,
-        isPrintLocation: action.payload
+        printingLocationLabels: action.payload
+      };
+    case UNSET_PRINTING_LOCATION_LABELS:
+      return {
+        ...state,
+        printingLocationLabels: ''
       };
     default:
       return state;

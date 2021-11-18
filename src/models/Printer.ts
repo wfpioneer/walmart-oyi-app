@@ -11,7 +11,12 @@ export enum PrinterType {
   PORTABLE
 }
 
-export type PrintQueueListType = 'ITEM' | 'LOCATION';
+// eslint-disable-next-line no-shadow
+export enum PrintQueueItemType {
+  ITEM = 'ITEM',
+  SECTION = 'SECTION',
+  AISLE = 'AISLE'
+}
 
 export interface PrintQueueItem {
   image?: any;
@@ -23,7 +28,7 @@ export interface PrintQueueItem {
   paperSize: PrintPaperSize;
   worklistType?: string;
   locationId?: number;
-  itemType: PrintQueueListType;
+  itemType?: PrintQueueItemType
 }
 export interface PrintLocationList {
   locationId: number;

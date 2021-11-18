@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Image, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import AddPallet from '../screens/AddPallet/AddPallet';
 import AddZone from '../screens/AddZone/AddZone';
@@ -27,8 +28,9 @@ import { PRINT_SIGN } from '../state/actions/asyncAPI';
 const Stack = createStackNavigator();
 interface LocationManagementProps {
   isManualScanEnabled: boolean;
-  userFeatures: string[];
-  locationPopupVisible: boolean;
+  userFeatures: string[],
+  locationPopupVisible: boolean,
+  navigation: NavigationProp<any>
   dispatch: Dispatch<any>;
 }
 
@@ -70,31 +72,46 @@ export const resetLocManualScan = (
   }
 };
 
-export const LocationManagementNavigatorStack = (
-  props: LocationManagementProps
-): JSX.Element => {
-  const { isManualScanEnabled, userFeatures, locationPopupVisible, dispatch } =
-    props;
+export const LocationManagementNavigatorStack = (props: LocationManagementProps): JSX.Element => {
+  const {
+    isManualScanEnabled, userFeatures, locationPopupVisible, navigation, dispatch
+  } = props;
 
-  const renderLocationKebabButton = (visible: boolean) =>
-    visible ? (
-      <TouchableOpacity
-        onPress={() => {
-          if (locationPopupVisible) {
-            dispatch(hideLocationPopup());
-          } else {
-            dispatch(showLocationPopup());
-          }
-          trackEvent('location_menu_button_click');
-        }}>
-        <View style={styles.rightButton}>
-          <Image
-            style={styles.image}
-            source={require('../assets/images/menu.png')}
-          />
-        </View>
-      </TouchableOpacity>
-    ) : null;
+  // TODO add "badge" to show signs currently in queue
+  const renderPrintQueueButton = () => (
+    <TouchableOpacity onPress={() => {
+      trackEvent('print_queue_list_click');
+      navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' });
+    }}
+    >
+      <View style={styles.rightButton}>
+        <MaterialCommunityIcon
+          name="printer"
+          size={20}
+          color={COLOR.WHITE}
+        />
+      </View>
+    </TouchableOpacity>
+  );
+
+  const renderLocationKebabButton = (visible: boolean) => (visible ? (
+    <TouchableOpacity onPress={() => {
+      if (locationPopupVisible) {
+        dispatch(hideLocationPopup());
+      } else {
+        dispatch(showLocationPopup());
+      }
+      trackEvent('location_menu_button_click');
+    }}
+    >
+      <View style={styles.rightButton}>
+        <Image
+          style={styles.image}
+          source={require('../assets/images/menu.png')}
+        />
+      </View>
+    </TouchableOpacity>
+  ) : null);
 
   return (
     <Stack.Navigator
@@ -158,6 +175,7 @@ export const LocationManagementNavigatorStack = (
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
+              {renderPrintQueueButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
                 userFeatures.includes('location management edit')
@@ -182,6 +200,7 @@ export const LocationManagementNavigatorStack = (
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
+              {renderPrintQueueButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
                 userFeatures.includes('location management edit')
@@ -244,12 +263,14 @@ const LocationManagementNavigator = (): JSX.Element => {
     state => state.Location.locationPopupVisible
   );
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   return (
     <LocationManagementNavigatorStack
       isManualScanEnabled={isManualScanEnabled}
       dispatch={dispatch}
       userFeatures={userFeatures}
+      navigation={navigation}
       locationPopupVisible={locationPopupVisible}
     />
   );

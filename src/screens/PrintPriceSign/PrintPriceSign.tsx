@@ -1,24 +1,13 @@
 import React, {
-  EffectCallback,
-  useEffect,
-  useLayoutEffect,
-  useState
+  EffectCallback, useEffect, useLayoutEffect, useState
 } from 'react';
 import {
-  ActivityIndicator,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TextInput,
-  View
+  ActivityIndicator, SafeAreaView, ScrollView, Text, TextInput, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import {
-  NavigationProp,
-  Route,
-  useNavigation,
-  useRoute
+  NavigationProp, Route, useNavigation, useRoute
 } from '@react-navigation/native';
 import { Dispatch } from 'redux';
 import IconButton from '../../components/buttons/IconButton';
@@ -29,28 +18,21 @@ import styles from './PrintPriceSign.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getMockItemDetails } from '../../mockData';
 import {
-  addToPrintQueue,
-  addToPrinterList,
-  setSelectedPrinter,
-  setSignType,
-  togglePrintScreen
+  addMultipleToPrintQueue, addToPrintQueue, addToPrinterList, setSelectedPrinter, setSignType
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
-  LaserPaper,
-  PortablePaper,
-  PrintItemList,
-  PrintLocationList,
-  PrintPaperSize,
-  PrintQueueItem,
-  Printer,
-  PrinterType
+  LaserPaper, PortablePaper, PrintItemList, PrintLocationList, PrintPaperSize, PrintQueueItem, PrintQueueItemType, Printer, PrinterType
 } from '../../models/Printer';
+
 import { printLocationLabel, printSign } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
 import { PRINT_SIGN } from '../../state/actions/asyncAPI';
+import ItemDetails from '../../models/ItemDetails';
+import { LocationIdName } from '../../state/reducers/Location';
+import { LocationName } from '../../models/Location';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -108,16 +90,17 @@ interface PriceSignProps {
   scannedEvent: { value: any; type: any };
   exceptionType: string;
   actionCompleted: boolean;
-  result: any;
+  itemResult: any;
   printAPI: AsyncState;
-  printLabelAPI: AsyncState;
-  getSectionsAPI: AsyncState;
+  printLabelAPI: AsyncState
+  sectionsResult: any;
   selectedPrinter: Printer;
   selectedSignType: PrintPaperSize;
-  isPrintLocation: boolean;
-  locationName: string;
-  sectionId: number;
   printQueue: PrintQueueItem[];
+  printingLocationLabels: string;
+  selectedAisle: LocationIdName;
+  selectedSection: LocationIdName;
+  selectedZone: LocationIdName;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: Route<any>;
@@ -133,13 +116,10 @@ interface PriceSignProps {
   useLayoutHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
 
-const getPrinter = (
-  selectedPrinter: Printer,
-  selectedSignType: PrintPaperSize
-) => (selectedPrinter.type === PrinterType.LASER
-  ? // @ts-ignore
-  LaserPaper[selectedSignType]
-  : PortablePaper[selectedSignType]);
+const getPrinter = (selectedPrinter: Printer, selectedSignType: PrintPaperSize) => (
+  selectedPrinter.type === PrinterType.LASER
+  // @ts-ignore
+    ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType]);
 const isValid = (actionCompleted: any, exceptionType: any) => !actionCompleted && exceptionType === 'PO';
 
 const isItemSizeExists = (
@@ -209,38 +189,27 @@ const isValidDispatch = (
     dispatch(setActionCompleted());
   }
 };
-const isResultHasData = (result: any) => result && result.data;
-
+const isitemResultHasData = (itemResult: any) => (
+  (itemResult && itemResult.data)
+);
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
-    scannedEvent,
-    exceptionType,
-    actionCompleted,
-    result,
-    isPrintLocation,
-    printAPI,
-    printLabelAPI,
-    selectedPrinter,
-    selectedSignType,
-    printQueue,
-    dispatch,
-    navigation,
-    route,
-    signQty,
-    setSignQty,
-    isValidQty,
-    setIsValidQty,
-    error,
-    setError,
-    useEffectHook,
-    useLayoutHook,
-    sectionId,
-    locationName,
-    getSectionsAPI
+    scannedEvent, exceptionType, actionCompleted, itemResult, printAPI, printLabelAPI,
+    sectionsResult, selectedPrinter, selectedSignType, printQueue, printingLocationLabels,
+    selectedAisle, selectedSection, selectedZone, dispatch, navigation, route, signQty,
+    setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook
   } = props;
   const {
     itemName, itemNbr, upcNbr, categoryNbr
-  } = isResultHasData(result) || getMockItemDetails(scannedEvent.value);
+  } = isitemResultHasData(itemResult) as ItemDetails || getMockItemDetails(scannedEvent.value);
+  const { data: sectionsList } = sectionsResult || { data: [] };
+
+  const getLocationName = () => (printingLocationLabels === LocationName.AISLE
+    ? `${strings('LOCATION.AISLE')} ${selectedZone.name}${selectedAisle.name}`
+    : `${strings('LOCATION.SECTION')} ${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`);
+
+  const getFullSectionName = (sectionName: string) => (
+    `${strings('LOCATION.SECTION')} ${selectedZone.name}${selectedAisle.name}-${sectionName}`);
 
   useLayoutHook(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
@@ -261,8 +230,12 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     // Resets Print api response data when navigating off-screen
     navigation.addListener('beforeRemove', () => {
       dispatch({ type: PRINT_SIGN.RESET });
-      // Set Print Label Toggle back to Item Labels
-      dispatch(togglePrintScreen(false));
+    });
+    // set sign type to extra small when coming from loc mgmt screens
+    navigation.addListener('focus', () => {
+      if (printingLocationLabels) {
+        dispatch(setSignType('XSmall'));
+      }
     });
   }, []);
 
@@ -335,51 +308,60 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       selectedSignType,
       itemNbr
     );
-    const locationLabelExists = aisleSectionExists(printQueue, sectionId);
-    let printQueueItem: PrintQueueItem[];
+    const locationLabelExists = aisleSectionExists(printQueue, selectedSection.id);
+    // TODO Move LocationLabelCheck to allow some items to pass through
     if (itemSizeExists || locationLabelExists) {
       // TODO show popup if already exists
-      trackEvent('print_already_exists_in_queue', {
-        itemName,
-        selectedSignType
-      });
+      trackEvent('print_already_exists_in_queue', { itemName, selectedSignType });
     } else {
-      // TODO properly set selectedsignType to permanently be XSMALL https://jira.walmart.com/browse/INTLSAOPS-4221
-      const printSection = true;
-      if (isPrintLocation) {
-        if (printSection) {
-          const allSections = getSectionsAPI.result.data || [];
-          printQueueItem = allSections;
-        }
-        printQueueItem = [
-          {
-            itemType: 'LOCATION',
-            locationId: sectionId,
-            paperSize: 'XSmall',
-            signQty
-          }
-        ];
-      } else {
-        // add to print queue, forcing to use laser
-        // TODO show popup if laser printer is not selected when adding to queue
-        // TODO show toast that the item was added to queue
-        printQueueItem = [
-          {
-            itemName,
-            itemNbr,
-            upcNbr,
-            catgNbr: categoryNbr,
-            signQty,
-            worklistType: exceptionType ?? '',
-            paperSize: selectedSignType,
-            itemType: 'ITEM'
-          }
-        ];
+      // add to print queue, forcing to use laser
+      // TODO show popup if laser printer is not selected when adding to queue
+      // TODO show toast that the item was added to queue
+      let printQueueItem: PrintQueueItem;
+      if (!printingLocationLabels) {
+        printQueueItem = {
+          itemName,
+          itemNbr,
+          upcNbr,
+          catgNbr: categoryNbr,
+          signQty,
+          worklistType: exceptionType,
+          paperSize: selectedSignType,
+          itemType: PrintQueueItemType.ITEM
+        };
+        trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
+        dispatch(addToPrintQueue(printQueueItem));
       }
-      trackEvent('print_add_to_print_queue', {
-        printQueueItem: JSON.stringify(printQueueItem)
-      });
-      dispatch(addToPrintQueue(printQueueItem));
+      if (printingLocationLabels === LocationName.AISLE) {
+        const printQueueItems: PrintQueueItem[] = [];
+        sectionsList.forEach((section: any) => {
+          const printQueueArrayItem: PrintQueueItem = {
+            itemName: getFullSectionName(section.sectionName),
+            itemNbr: section.sectionId,
+            upcNbr: '',
+            catgNbr: 0,
+            paperSize: selectedSignType,
+            signQty,
+            itemType: PrintQueueItemType.SECTION
+          };
+          printQueueItems.push(printQueueArrayItem);
+        });
+        trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItems) });
+        dispatch(addMultipleToPrintQueue(printQueueItems));
+      } else {
+        const { id } = selectedSection;
+        printQueueItem = {
+          itemName: getLocationName(),
+          itemNbr: id,
+          upcNbr: '',
+          catgNbr: 0,
+          paperSize: selectedSignType,
+          signQty,
+          itemType: PrintQueueItemType.SECTION
+        };
+        trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
+        dispatch(addToPrintQueue(printQueueItem));
+      }
       isValidDispatch(props, actionCompleted, exceptionType);
       navigation.goBack();
     }
@@ -388,11 +370,10 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const handlePrint = () => {
     validateSession(navigation, route.name)
       .then(() => {
-        if (isPrintLocation) {
+        if (printingLocationLabels) {
           const printLocList: PrintLocationList[] = [];
-          if (route.params?.location === 'Aisle') {
-            const sectionList = (getSectionsAPI.result && getSectionsAPI.result.data) || [];
-            sectionList.forEach(section => {
+          if (printingLocationLabels === LocationName.AISLE) {
+            sectionsList.forEach((section: any) => { // TODO Resolve Any
               const printQueueArrayItem: PrintLocationList = {
                 locationId: section.id,
                 qty: signQty,
@@ -401,9 +382,9 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
               };
               printLocList.push(printQueueArrayItem);
             });
-          } else { 
+          } else {
             printLocList.push({
-              locationId: sectionId,
+              locationId: selectedSection.id,
               qty: signQty,
               printerMACAddress: selectedPrinter.id
             });
@@ -413,7 +394,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           });
           dispatch(printLocationLabel({ printLabelList: printLocList }));
         } else {
-          const printlist: PrintItemList[] = [
+          const printList: PrintItemList[] = [
             {
               itemNbr,
               qty: signQty,
@@ -424,23 +405,81 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
               workListTypeCode: exceptionType
             }
           ];
-          trackEvent('print_price_sign', {
-            printItem: JSON.stringify(printlist)
-          });
-          dispatch(printSign({ printList: printlist }));
+          trackEvent('print_price_sign', { printItem: JSON.stringify(printList) });
+          dispatch(printSign({ printList }));
         }
-      })
-      .catch(() => {});
+      }).catch(() => {});
   };
+
+  const detailsView = () => (!printingLocationLabels
+    // Item details view
+    ? (
+      <View style={styles.detailsContainer}>
+        <Text style={styles.itemNameTxt}>{itemName}</Text>
+      </View>
+    )
+    // Section details view
+    : (
+      <View style={styles.detailsContainer}>
+        <Text>
+          {printingLocationLabels === LocationName.AISLE
+            ? `${strings('LOCATION.AISLE')} ${selectedAisle.id}`
+            : `${strings('LOCATION.SECTION')} ${selectedSection.id}`}
+        </Text>
+      </View>
+    )
+  );
+
+  const sizeView = () => (!printingLocationLabels
+    ? (
+      <View style={styles.signSizeContainer}>
+        <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
+        {renderSignSizeButtons(selectedPrinter, categoryNbr, selectedSignType, dispatch)}
+      </View>
+    )
+    : null
+  );
+
+  // eslint-disable-next-line arrow-body-style
+  const printerView = () => (printingLocationLabels && selectedPrinter.type !== PrinterType.PORTABLE
+    ? (
+      <View style={styles.printerContainer}>
+        <Text>{strings('PRINT.PLEASE_CHOOSE_PORTABLE')}</Text>
+        <Button
+          title={strings('GENERICS.CHANGE')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          titleFontSize={14}
+          type={Button.Type.NO_BORDER}
+          height={20}
+          onPress={handleChangePrinter}
+        />
+      </View>
+    )
+    : (
+      <View style={styles.printerContainer}>
+        <View style={styles.printerNameContainer}>
+          <MaterialCommunityIcon name="printer-check" size={24} />
+          <View style={styles.printTextMargin}>
+            <Text>{selectedPrinter.name}</Text>
+            <Text style={styles.printerDesc}>{selectedPrinter.desc}</Text>
+          </View>
+        </View>
+        <Button
+          title={strings('GENERICS.CHANGE')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          titleFontSize={14}
+          type={Button.Type.NO_BORDER}
+          height={20}
+          onPress={handleChangePrinter}
+        />
+      </View>
+    )
+  );
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.itemDetailsContainer}>
-          <Text style={styles.itemNameTxt}>
-            {isPrintLocation ? locationName : itemName}
-          </Text>
-        </View>
+        {detailsView()}
         <View style={styles.copyQtyContainer}>
           <Text style={styles.copyQtyLabel}>{strings('PRINT.COPY_QTY')}</Text>
           <View style={styles.qtyChangeContainer}>
@@ -472,32 +511,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           </View>
           {validateQuantity(isValidQty)}
         </View>
-        <View style={styles.signSizeContainer}>
-          <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
-          {renderSignSizeButtons(
-            selectedPrinter,
-            categoryNbr,
-            selectedSignType,
-            dispatch
-          )}
-        </View>
-        <View style={styles.printerContainer}>
-          <View style={styles.printerNameContainer}>
-            <MaterialCommunityIcon name="printer-check" size={24} />
-            <View style={styles.printTextMargin}>
-              <Text>{selectedPrinter.name}</Text>
-              <Text style={styles.printerDesc}>{selectedPrinter.desc}</Text>
-            </View>
-          </View>
-          <Button
-            title={strings('GENERICS.CHANGE')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
-            titleFontSize={14}
-            type={Button.Type.NO_BORDER}
-            height={20}
-            onPress={handleChangePrinter}
-          />
-        </View>
+        {sizeView()}
+        {printerView()}
         {isErrorRequired(error)}
       </ScrollView>
       {printAPI.isWaiting || printLabelAPI.isWaiting ? (
@@ -535,22 +550,15 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
 
 const PrintPriceSign = (): JSX.Element => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
-  const { exceptionType, actionCompleted } = useTypedSelector(
-    state => state.ItemDetailScreen
-  );
-  const { result } = useTypedSelector(state => state.async.getItemDetails);
+  const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
+  const { result: itemResult } = useTypedSelector(state => state.async.getItemDetails);
   const printAPI = useTypedSelector(state => state.async.printSign);
-  // Pull getSections Result for adding all sections to the PrintQueue
-  const getSectionsAPI = useTypedSelector(state => state.async.getSections);
+  const { result: sectionsResult } = useTypedSelector(state => state.async.getSections);
+  const printLabelAPI = useTypedSelector(state => state.async.printLocationLabels);
   const {
-    selectedPrinter, selectedSignType, printQueue, isPrintLocation
+    selectedPrinter, selectedSignType, printQueue, printingLocationLabels
   } = useTypedSelector(state => state.Print);
-  const printLabelAPI = useTypedSelector(
-    state => state.async.printLocationLabels
-  );
-  const { selectedAisle, selectedZone, selectedSection } = useTypedSelector(
-    state => state.Location
-  );
+  const { selectedAisle, selectedSection, selectedZone } = useTypedSelector(state => state.Location);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -565,16 +573,17 @@ const PrintPriceSign = (): JSX.Element => {
       scannedEvent={scannedEvent}
       exceptionType={exceptionType ?? ''}
       actionCompleted={actionCompleted}
-      result={result}
+      itemResult={itemResult}
       printAPI={printAPI}
       printLabelAPI={printLabelAPI}
-      getSectionsAPI={getSectionsAPI}
-      sectionId={selectedSection.id} 
+      sectionsResult={sectionsResult}
       selectedPrinter={selectedPrinter}
       selectedSignType={selectedSignType}
       printQueue={printQueue}
-      isPrintLocation={isPrintLocation}
-      locationName={locationName}
+      printingLocationLabels={printingLocationLabels}
+      selectedAisle={selectedAisle}
+      selectedSection={selectedSection}
+      selectedZone={selectedZone}
       dispatch={dispatch}
       navigation={navigation}
       route={route}
