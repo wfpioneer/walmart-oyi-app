@@ -263,7 +263,6 @@ exports[`Test Section List Renders Manual Scan Component when isManualScanEnable
   />
   <LocationHeader
     details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
-    dispatch={[MockFunction]}
     location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
   />
   <FlatList
@@ -294,7 +293,6 @@ exports[`Test Section List Renders Section Screen with Data 1`] = `
 <View>
   <LocationHeader
     details="6 [missing \\"en.LOCATION.SECTIONS\\" translation]"
-    dispatch={[MockFunction]}
     location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
   />
   <FlatList
@@ -352,7 +350,6 @@ exports[`Test Section List Renders Section Screen with no-section-message when g
 <View>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
-    dispatch={[MockFunction]}
     location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
   />
   <FlatList

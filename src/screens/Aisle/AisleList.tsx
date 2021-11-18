@@ -30,7 +30,7 @@ import { LocationType } from '../../models/LocationType';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import  {hideLocationPopup, setAisles, setCreateFlow } from '../../state/actions/Location';
+import { hideLocationPopup, setAisles, setCreateFlow } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import { CREATE_FLOW } from '../../models/LocationItems';
@@ -149,9 +149,6 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
       <LocationHeader
         location={`${strings('LOCATION.ZONE')} ${zoneName}`}
         details={`${getAllAisles.result?.data.length || 0} ${strings('LOCATION.AISLES')}`}
-        navigation={navigation}
-        route={route}
-        dispatch={dispatch}
       />
       <FlatList
         data={getAllAisles.result?.data || []}

@@ -152,9 +152,6 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
         details={`${getZoneApi.result?.data.length || 0} ${strings('LOCATION.ZONES')}`}
-        navigation={navigation}
-        route={route}
-        dispatch={dispatch}
       />
       <FlatList
         data={getZoneApi.result?.data || []}

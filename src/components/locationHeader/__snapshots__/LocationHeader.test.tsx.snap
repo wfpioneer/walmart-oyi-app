@@ -1,45 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test Location Header in Zone Screen Renders Location Header In Zone Screen, no button 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#ffffffff",
-      "borderBottomColor": "#eeeeee",
-      "borderBottomWidth": 2,
-      "flexDirection": "row",
-      "justifyContent": "space-between",
-      "marginHorizontal": 0,
-      "padding": 14,
-    }
-  }
->
-  <View
-    style={
-      Object {
-        "flexDirection": "column",
-      }
-    }
-    onPress={[Function]}
-  >
-    <Text>
-      [missing "en.GENERICS.CLUB" translation] 5522
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "#9e9e9e",
-          "fontSize": 12,
-        }
-      }
-    >
-      35 [missing "en.LOCATION.ZONES" translation]
-    </Text>
-  </View>
-</View>
-`;
-
 exports[`Test Location Header in Zone Screen Renders Location header with button 1`] = `
 <View
   style={

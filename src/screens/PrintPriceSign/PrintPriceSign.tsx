@@ -29,10 +29,11 @@ import { printLocationLabel, printSign } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
-import { PRINT_SIGN } from '../../state/actions/asyncAPI';
+import { PRINT_LOCATION_LABELS, PRINT_SIGN } from '../../state/actions/asyncAPI';
 import ItemDetails from '../../models/ItemDetails';
 import { LocationIdName } from '../../state/reducers/Location';
 import { LocationName } from '../../models/Location';
+import { SectionItem } from '../../models/LocationItems';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -202,7 +203,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
     itemName, itemNbr, upcNbr, categoryNbr
   } = isitemResultHasData(itemResult) as ItemDetails || getMockItemDetails(scannedEvent.value);
-  const { data: sectionsList } = sectionsResult || { data: [] };
+  const sectionsList: SectionItem[] = (sectionsResult && sectionsResult.data) || [];
 
   const getLocationName = () => (printingLocationLabels === LocationName.AISLE
     ? `${strings('LOCATION.AISLE')} ${selectedZone.name}${selectedAisle.name}`
@@ -230,6 +231,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     // Resets Print api response data when navigating off-screen
     navigation.addListener('beforeRemove', () => {
       dispatch({ type: PRINT_SIGN.RESET });
+      dispatch({ type: PRINT_LOCATION_LABELS.RESET });
     });
     // set sign type to extra small when coming from loc mgmt screens
     navigation.addListener('focus', () => {
@@ -243,17 +245,13 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!printAPI.isWaiting && printAPI.result) {
-      if (!actionCompleted && exceptionType === 'PO') {
-        dispatch(setActionCompleted());
-      }
+      isValidDispatch(props, actionCompleted, exceptionType);
       navigation.goBack();
     }
-
     // on api failure
     if (!printAPI.isWaiting && printAPI.error) {
       setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
     }
-
     // on api submission
     if (printAPI.isWaiting) {
       setError({ error: false, message: '' });
@@ -264,7 +262,6 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!printLabelAPI.isWaiting && printLabelAPI.result) {
-      isValidDispatch(props, actionCompleted, exceptionType);
       navigation.goBack();
     }
     // on api failure
@@ -293,21 +290,15 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   };
 
   const handleChangePrinter = () => {
-    validateSession(navigation, route.name)
-      .then(() => {
-        trackEvent('print_change_printer_click');
-        navigation.navigate('PrinterList');
-      })
-      .catch(() => {});
+    validateSession(navigation, route.name).then(() => {
+      trackEvent('print_change_printer_click');
+      navigation.navigate('PrinterList');
+    }).catch(() => {});
   };
 
   const handleAddPrintList = () => {
-    // IF Printing all sections add list of sections to print queue
-    const itemSizeExists = isItemSizeExists(
-      printQueue,
-      selectedSignType,
-      itemNbr
-    );
+    // check if the item/size already exists on the print queue
+    const itemSizeExists = isItemSizeExists(printQueue, selectedSignType, itemNbr);
     const locationLabelExists = aisleSectionExists(printQueue, selectedSection.id);
     // TODO Move LocationLabelCheck to allow some items to pass through
     if (itemSizeExists || locationLabelExists) {
@@ -334,12 +325,11 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       }
       if (printingLocationLabels === LocationName.AISLE) {
         const printQueueItems: PrintQueueItem[] = [];
-        sectionsList.forEach((section: any) => {
+        // Add Get Sections response to print queue
+        sectionsList.forEach(section => {
           const printQueueArrayItem: PrintQueueItem = {
             itemName: getFullSectionName(section.sectionName),
-            itemNbr: section.sectionId,
-            upcNbr: '',
-            catgNbr: 0,
+            locationId: section.sectionId,
             paperSize: selectedSignType,
             signQty,
             itemType: PrintQueueItemType.SECTION
@@ -352,9 +342,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         const { id } = selectedSection;
         printQueueItem = {
           itemName: getLocationName(),
-          itemNbr: id,
-          upcNbr: '',
-          catgNbr: 0,
+          locationId: id,
           paperSize: selectedSignType,
           signQty,
           itemType: PrintQueueItemType.SECTION
@@ -373,12 +361,12 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         if (printingLocationLabels) {
           const printLocList: PrintLocationList[] = [];
           if (printingLocationLabels === LocationName.AISLE) {
-            sectionsList.forEach((section: any) => { // TODO Resolve Any
+            // Add Get Sections response to print list body
+            sectionsList.forEach(section => {
               const printQueueArrayItem: PrintLocationList = {
-                locationId: section.id,
+                locationId: section.sectionId,
                 qty: signQty,
                 printerMACAddress: selectedPrinter.id
-
               };
               printLocList.push(printQueueArrayItem);
             });
@@ -423,8 +411,9 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       <View style={styles.detailsContainer}>
         <Text>
           {printingLocationLabels === LocationName.AISLE
-            ? `${strings('LOCATION.AISLE')} ${selectedAisle.id}`
-            : `${strings('LOCATION.SECTION')} ${selectedSection.id}`}
+            ? `${strings('LOCATION.AISLE')} ${selectedZone.name}${selectedAisle.name} (${sectionsList.length} `
+            + `${sectionsList.length === 1 ? strings('LOCATION.SECTION') : strings('LOCATION.SECTIONS')})`
+            : `${strings('LOCATION.SECTION')} ${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`}
         </Text>
       </View>
     )

@@ -24,6 +24,8 @@ import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './LocationManagementNavigator.style';
 import PrintPriceSign from '../screens/PrintPriceSign/PrintPriceSign';
 import { PRINT_SIGN } from '../state/actions/asyncAPI';
+import { setPrintingLocationLabels } from '../state/actions/Print';
+import { LocationName } from '../models/Location';
 
 const Stack = createStackNavigator();
 interface LocationManagementProps {
@@ -41,7 +43,8 @@ export const renderScanButton = (
   <TouchableOpacity
     onPress={() => {
       dispatch(setManualScan(!isManualScanEnabled));
-    }}>
+    }}
+  >
     <View style={styles.leftButton}>
       <MaterialCommunityIcon
         name="barcode-scan"
@@ -56,7 +59,8 @@ export const renderCamButton = (): JSX.Element => (
   <TouchableOpacity
     onPress={() => {
       openCamera();
-    }}>
+    }}
+  >
     <View style={styles.leftButton}>
       <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
     </View>
@@ -81,6 +85,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
   const renderPrintQueueButton = () => (
     <TouchableOpacity onPress={() => {
       trackEvent('print_queue_list_click');
+      dispatch(setPrintingLocationLabels(LocationName.SECTION));
       navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' });
     }}
     >
@@ -131,8 +136,8 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
-                userFeatures.includes('manager approval') &&
-                  userFeatures.includes('location management edit')
+                userFeatures.includes('manager approval')
+                && userFeatures.includes('location management edit')
               )}
             </View>
           )

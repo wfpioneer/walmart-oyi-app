@@ -7,7 +7,6 @@ exports[`Test Zone List Renders Manual Scan Component when isManualScanEnabled i
   />
   <LocationHeader
     details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
-    dispatch={[MockFunction]}
     location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
   />
   <FlatList
@@ -38,7 +37,6 @@ exports[`Test Zone List Renders Zone Screen with Data 1`] = `
 <View>
   <LocationHeader
     details="35 [missing \\"en.LOCATION.ZONES\\" translation]"
-    dispatch={[MockFunction]}
     location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
   />
   <FlatList
@@ -247,7 +245,6 @@ exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
 <View>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
-    dispatch={[MockFunction]}
     location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
   />
   <FlatList
@@ -278,7 +275,6 @@ exports[`Test Zone List Renders Zone Screen with no-zones-message when get all z
 <View>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
-    dispatch={[MockFunction]}
     location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
   />
   <FlatList

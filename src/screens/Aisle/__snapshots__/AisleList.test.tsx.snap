@@ -4,7 +4,6 @@ exports[`Test Aisle List Renders Aisle Screen with Data 1`] = `
 <View>
   <LocationHeader
     details="6 [missing \\"en.LOCATION.AISLES\\" translation]"
-    dispatch={[MockFunction]}
     location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
   />
   <FlatList
@@ -68,7 +67,6 @@ exports[`Test Aisle List Renders Aisle Screen with no-aisles-message when getAis
 <View>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
-    dispatch={[MockFunction]}
     location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
   />
   <FlatList
@@ -102,7 +100,6 @@ exports[`Test Aisle List Renders Manual Scan Component when isManualScanEnabled 
   />
   <LocationHeader
     details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
-    dispatch={[MockFunction]}
     location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
   />
   <FlatList
