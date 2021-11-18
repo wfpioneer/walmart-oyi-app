@@ -6,7 +6,10 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import AddPallet from '../screens/AddPallet/AddPallet';
 import AddZone from '../screens/AddZone/AddZone';
-import { hideLocationPopup, showLocationPopup } from '../state/actions/Location';
+import {
+  hideLocationPopup,
+  showLocationPopup
+} from '../state/actions/Location';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
 import ZoneList from '../screens/Zone/ZoneList';
@@ -19,60 +22,79 @@ import { trackEvent } from '../utils/AppCenterTool';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './LocationManagementNavigator.style';
 import PrintPriceSign from '../screens/PrintPriceSign/PrintPriceSign';
+import { PRINT_SIGN } from '../state/actions/asyncAPI';
 
 const Stack = createStackNavigator();
 interface LocationManagementProps {
   isManualScanEnabled: boolean;
-  userFeatures: string[],
-  locationPopupVisible: boolean,
+  userFeatures: string[];
+  locationPopupVisible: boolean;
   dispatch: Dispatch<any>;
 }
 
-export const renderScanButton = (dispatch: Dispatch<any>, isManualScanEnabled: boolean): JSX.Element => (
-  <TouchableOpacity onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
+export const renderScanButton = (
+  dispatch: Dispatch<any>,
+  isManualScanEnabled: boolean
+): JSX.Element => (
+  <TouchableOpacity
+    onPress={() => {
+      dispatch(setManualScan(!isManualScanEnabled));
+    }}>
     <View style={styles.leftButton}>
-      <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+      <MaterialCommunityIcon
+        name="barcode-scan"
+        size={20}
+        color={COLOR.WHITE}
+      />
     </View>
   </TouchableOpacity>
 );
 
 export const renderCamButton = (): JSX.Element => (
-  <TouchableOpacity onPress={() => { openCamera(); }}>
+  <TouchableOpacity
+    onPress={() => {
+      openCamera();
+    }}>
     <View style={styles.leftButton}>
       <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
     </View>
   </TouchableOpacity>
 );
 
-export const resetLocManualScan = (isManualScanEnabled: boolean, dispatch: Dispatch<any>): void => {
+export const resetLocManualScan = (
+  isManualScanEnabled: boolean,
+  dispatch: Dispatch<any>
+): void => {
   if (isManualScanEnabled) {
     dispatch(setManualScan(false));
   }
 };
 
-export const LocationManagementNavigatorStack = (props: LocationManagementProps): JSX.Element => {
-  const {
-    isManualScanEnabled, userFeatures, locationPopupVisible, dispatch
-  } = props;
+export const LocationManagementNavigatorStack = (
+  props: LocationManagementProps
+): JSX.Element => {
+  const { isManualScanEnabled, userFeatures, locationPopupVisible, dispatch } =
+    props;
 
-  const renderLocationKebabButton = (visible: boolean) => (visible ? (
-    <TouchableOpacity onPress={() => {
-      if (locationPopupVisible) {
-        dispatch(hideLocationPopup());
-      } else {
-        dispatch(showLocationPopup());
-      }
-      trackEvent('location_menu_button_click');
-    }}
-    >
-      <View style={styles.rightButton}>
-        <Image
-          style={styles.image}
-          source={require('../assets/images/menu.png')}
-        />
-      </View>
-    </TouchableOpacity>
-  ) : null);
+  const renderLocationKebabButton = (visible: boolean) =>
+    visible ? (
+      <TouchableOpacity
+        onPress={() => {
+          if (locationPopupVisible) {
+            dispatch(hideLocationPopup());
+          } else {
+            dispatch(showLocationPopup());
+          }
+          trackEvent('location_menu_button_click');
+        }}>
+        <View style={styles.rightButton}>
+          <Image
+            style={styles.image}
+            source={require('../assets/images/menu.png')}
+          />
+        </View>
+      </TouchableOpacity>
+    ) : null;
 
   return (
     <Stack.Navigator
@@ -81,8 +103,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
         headerTitleStyle: { fontSize: 18 },
         headerTintColor: COLOR.WHITE
-      }}
-    >
+      }}>
       <Stack.Screen
         name="Zones"
         component={ZoneList}
@@ -93,8 +114,8 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
-                userFeatures.includes('manager approval')
-                && userFeatures.includes('location management edit')
+                userFeatures.includes('manager approval') &&
+                  userFeatures.includes('location management edit')
               )}
             </View>
           )
@@ -114,7 +135,9 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
+              {renderLocationKebabButton(
+                userFeatures.includes('location management edit')
+              )}
             </View>
           )
         }}
@@ -136,7 +159,9 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
+              {renderLocationKebabButton(
+                userFeatures.includes('location management edit')
+              )}
             </View>
           )
         }}
@@ -158,7 +183,9 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
+              {renderLocationKebabButton(
+                userFeatures.includes('location management edit')
+              )}
             </View>
           )
         }}
@@ -193,6 +220,11 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         options={{
           headerTitle: strings('PRINT.PRINT_LABEL')
         }}
+        listeners={{
+          blur: () => {
+            dispatch({ type: PRINT_SIGN.RESET });
+          }
+        }}
       />
       <Stack.Screen
         name="AddZone"
@@ -208,7 +240,9 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
 const LocationManagementNavigator = (): JSX.Element => {
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const userFeatures = useTypedSelector(state => state.User.features);
-  const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
+  const locationPopupVisible = useTypedSelector(
+    state => state.Location.locationPopupVisible
+  );
   const dispatch = useDispatch();
 
   return (

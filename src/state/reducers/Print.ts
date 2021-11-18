@@ -73,13 +73,14 @@ export const Print = (state = initialState, action: Actions): StateType => {
         ...state,
         printerList
       };
-    case ADD_TO_PRINT_QUEUE:
-      printQueue.push(action.payload);
-
+    case ADD_TO_PRINT_QUEUE: {
+      const updatedPrintQueue = [...printQueue, ...action.payload];
+      // Push array
       return {
         ...state,
-        printQueue
+        printQueue: updatedPrintQueue
       };
+    }
     case SET_PRINT_QUEUE:
       return {
         ...state,

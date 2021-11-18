@@ -22,7 +22,7 @@ export default class PrintService {
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.post(
-      `${urls.orchestrationURL}/print/location-sign`,
+      `${urls.printingUrl}/print/location-sign`,
       payload.printLabelList,
       {
         headers: payload.headers

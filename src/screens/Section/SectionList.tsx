@@ -240,7 +240,7 @@ const SectionList = (): JSX.Element => {
           onPress={() => {
             dispatch(hideLocationPopup());
             dispatch(togglePrintScreen(true));
-            navigation.navigate('PrintLabel');
+            navigation.navigate('PrintLabel', { location: 'Aisle' });
           }}
         />
         <BottomSheetAddCard

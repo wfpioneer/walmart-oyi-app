@@ -7,9 +7,9 @@ import {
   SELECT_ZONE,
   SET_AISLES,
   SET_CREATE_FLOW,
-  SET_POSSIBLE_ZONES,
   SET_NEW_ZONE,
   SET_NUMBER_OF_AISLES_TO_CREATE,
+  SET_POSSIBLE_ZONES,
   SET_ZONES,
   SHOW_LOCATION_POPUP
 } from '../actions/Location';
@@ -34,13 +34,13 @@ interface LocationState {
     id: number;
     name: string;
   };
-  zones: ZoneItem[],
-  aisles: AisleItem[],
-  possibleZones: PossibleZone[],
-  locationPopupVisible: boolean,
-  createFlow: CREATE_FLOW,
-  newZone: string,
-  numberOfAislesToCreate: number
+  zones: ZoneItem[];
+  aisles: AisleItem[];
+  possibleZones: PossibleZone[];
+  locationPopupVisible: boolean;
+  createFlow: CREATE_FLOW;
+  newZone: string;
+  numberOfAislesToCreate: number;
 }
 
 const initialState: LocationState = {
@@ -68,7 +68,7 @@ const initialState: LocationState = {
 export const Location = (
   state = initialState,
   action: Actions
-) : LocationState => {
+): LocationState => {
   switch (action.type) {
     case SELECT_ZONE: {
       return {

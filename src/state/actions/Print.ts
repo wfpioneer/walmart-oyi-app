@@ -28,7 +28,7 @@ export const deleteFromPrinterList = (printerId: string) => ({
   payload: printerId
 } as const);
 
-export const addToPrintQueue = (label: PrintQueueItem) => ({
+export const addToPrintQueue = (label: PrintQueueItem[]) => ({
   type: ADD_TO_PRINT_QUEUE,
   payload: label
 } as const);
