@@ -167,7 +167,7 @@ export default {
     NO_ZONES_AVAILABLE: '无区域',
     NO_AISLES_AVAILABLE: '无通道',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
-    CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
+    CLEAR_ALL: '全部清除',
     CLEAR_SECTION: '清除此货架位置',
     REMOVE_SECTION: '移除此货架位置',
     REMOVE_AREA: '移除此区域',
@@ -185,7 +185,7 @@ export default {
     SCAN_PALLET: '扫描卡板标签',
     PALLET_VALIDATE_ERROR: '卡板号只能是数字',
     PALLET_PLACEHOLDER: '输入或扫描卡板号',
-    PRINT_LABEL: 'Print label', // TODO Mandarin translation
+    PRINT_LABEL: '打印标签',
     PRINT_LABELS: '打印标签',
     ADD_PALLET_ERROR: '添加卡板时出错',
     ADD_PALLET_API_ERROR: '错误添加卡板标签，请重试',
