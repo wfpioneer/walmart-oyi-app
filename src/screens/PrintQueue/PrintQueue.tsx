@@ -25,6 +25,7 @@ import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { PRINT_LOCATION_LABELS, PRINT_SIGN } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
+import { showSnackBar } from '../../state/actions/SnackBar';
 
 interface HandlePrintProps {
   dispatch: Dispatch<any>;
@@ -177,7 +178,9 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
     navigation.addListener('beforeRemove', () => {
       dispatch({ type: PRINT_SIGN.RESET });
       dispatch({ type: PRINT_LOCATION_LABELS.RESET });
-      dispatch(unsetPrintingLocationLabels());
+      if (printingLocationLabels) {
+        dispatch(unsetPrintingLocationLabels());
+      }
     });
   }, []);
 
@@ -210,6 +213,7 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
     if (!printLabelAPI.isWaiting && printLabelAPI.result) {
       // TODO future task only remove print label items from print queue
       dispatch(setPrintQueue([]));
+      dispatch(showSnackBar(strings('PRINT.LOCATION_SUCCESS'), 3000));
       navigation.goBack();
     }
     // on api failure

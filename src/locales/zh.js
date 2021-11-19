@@ -133,7 +133,8 @@ export default {
     MAC_ADDRESS_ERROR: 'MAC地址通常是12个数字',
     PORTABLE_PRINTER: '便携式打印机',
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
-    PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机'
+    PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
+    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Mandarin Translation
   },
   LOCATION: {
     TITLE: '所有位置',

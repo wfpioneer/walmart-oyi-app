@@ -133,7 +133,8 @@ export default {
     MAC_ADDRESS_ERROR: 'La dirección MAC suele ser de 12 números',
     PORTABLE_PRINTER: 'Impresora portátil',
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
-    PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil'
+    PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
+    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',

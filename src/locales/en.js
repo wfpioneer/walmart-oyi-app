@@ -133,7 +133,8 @@ export default {
     MAC_ADDRESS_ERROR: 'The MAC address is usually 12 numbers',
     PORTABLE_PRINTER: 'Portable Printer',
     PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.',
-    PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer'
+    PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer',
+    LOCATION_SUCCESS: 'Section Label Successfully Printed'
   },
   LOCATION: {
     TITLE: 'All locations',

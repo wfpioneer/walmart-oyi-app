@@ -18,11 +18,13 @@ import styles from './PrintPriceSign.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getMockItemDetails } from '../../mockData';
 import {
-  addMultipleToPrintQueue, addToPrintQueue, addToPrinterList, setSelectedPrinter, setSignType
+  addMultipleToPrintQueue, addToPrintQueue, addToPrinterList,
+  setSelectedPrinter, setSignType, unsetPrintingLocationLabels
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
-  LaserPaper, PortablePaper, PrintItemList, PrintLocationList, PrintPaperSize, PrintQueueItem, PrintQueueItemType, Printer, PrinterType
+  LaserPaper, PortablePaper, PrintItemList, PrintLocationList,
+  PrintPaperSize, PrintQueueItem, PrintQueueItemType, Printer, PrinterType
 } from '../../models/Printer';
 
 import { printLocationLabel, printSign } from '../../state/actions/saga';
@@ -34,6 +36,7 @@ import ItemDetails from '../../models/ItemDetails';
 import { LocationIdName } from '../../state/reducers/Location';
 import { LocationName } from '../../models/Location';
 import { SectionItem } from '../../models/LocationItems';
+import { showSnackBar } from '../../state/actions/SnackBar';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -121,6 +124,7 @@ const getPrinter = (selectedPrinter: Printer, selectedSignType: PrintPaperSize) 
   selectedPrinter.type === PrinterType.LASER
   // @ts-ignore
     ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType]);
+
 const isValid = (actionCompleted: any, exceptionType: any) => !actionCompleted && exceptionType === 'PO';
 
 const isItemSizeExists = (
@@ -131,7 +135,8 @@ const isItemSizeExists = (
   printItem => printItem.itemNbr === itemNbr && printItem.paperSize === selectedSignType
 );
 
-const aisleSectionExists = (printQueue: PrintQueueItem[], locationId: number) => printQueue.some(printLoc => printLoc.locationId === locationId);
+const aisleSectionExists = (printQueue: PrintQueueItem[], locationId: number) => printQueue
+  .some(printLoc => printLoc.locationId === locationId);
 
 const setHandleDecreaseQty = (
   signQty: number,
@@ -160,16 +165,20 @@ const isErrorRequired = (error: { error: boolean; message: string }) => (error.e
     <Text style={styles.errorText}>{error.message}</Text>
   </View>
 ) : null);
+
 const validateQuantity = (isValidQty: boolean) => !isValidQty && (
 <Text style={styles.invalidLabel}>
   {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
 </Text>
 );
+
 const isValidQtyStyle = (isValidQty: boolean) => (isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid);
+
 const isAddtoQueueDisabled = (
   isValidQty: boolean,
   selectedSignType: PrintPaperSize
 ) => !isValidQty || selectedSignType?.length === 0;
+
 const checkQuantity = (
   newQty: number,
   setIsValidQty: React.Dispatch<React.SetStateAction<boolean>>,
@@ -180,6 +189,7 @@ const checkQuantity = (
     setIsValidQty(validateQty(newQty));
   }
 };
+
 const isValidDispatch = (
   props: PriceSignProps,
   actionCompleted: boolean,
@@ -190,6 +200,7 @@ const isValidDispatch = (
     dispatch(setActionCompleted());
   }
 };
+
 const isitemResultHasData = (itemResult: any) => (
   (itemResult && itemResult.data)
 );
@@ -232,6 +243,9 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     navigation.addListener('beforeRemove', () => {
       dispatch({ type: PRINT_SIGN.RESET });
       dispatch({ type: PRINT_LOCATION_LABELS.RESET });
+      if (printingLocationLabels) {
+        dispatch(unsetPrintingLocationLabels());
+      }
     });
     // set sign type to extra small when coming from loc mgmt screens
     navigation.addListener('focus', () => {
@@ -262,6 +276,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!printLabelAPI.isWaiting && printLabelAPI.result) {
+      dispatch(showSnackBar(strings('PRINT.LOCATION_SUCCESS'), 3000));
       navigation.goBack();
     }
     // on api failure
@@ -300,7 +315,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     // check if the item/size already exists on the print queue
     const itemSizeExists = isItemSizeExists(printQueue, selectedSignType, itemNbr);
     const locationLabelExists = aisleSectionExists(printQueue, selectedSection.id);
-    // TODO Move LocationLabelCheck to allow some items to pass through
+
+    // TODO Use LocationLabelCheck to allow some items to be added to the print queue
     if (itemSizeExists || locationLabelExists) {
       // TODO show popup if already exists
       trackEvent('print_already_exists_in_queue', { itemName, selectedSignType });
@@ -516,13 +532,14 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         </View>
       ) : (
         <View style={styles.footerBtnContainer}>
+          {/* Disable add to print queue from location management until re-design */}
           <Button
             title={strings('PRINT.ADD_TO_QUEUE')}
             titleColor={COLOR.MAIN_THEME_COLOR}
             type={Button.Type.SOLID_WHITE}
             style={styles.footerBtn}
             onPress={handleAddPrintList}
-            disabled={isAddtoQueueDisabled(isValidQty, selectedSignType)}
+            disabled={(isAddtoQueueDisabled(isValidQty, selectedSignType) || printingLocationLabels !== '')}
           />
           <Button
             title={strings('PRINT.PRINT')}
@@ -554,8 +571,6 @@ const PrintPriceSign = (): JSX.Element => {
   const [signQty, setSignQty] = useState(1);
   const [isValidQty, setIsValidQty] = useState(true);
   const [error, setError] = useState({ error: false, message: '' });
-  const sectionName = selectedSection.name && `-${selectedSection.name}`;
-  const locationName = `${selectedZone.name}${selectedAisle.name}${sectionName}`;
 
   return (
     <PrintPriceSignScreen
