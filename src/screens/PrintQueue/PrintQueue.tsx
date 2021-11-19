@@ -12,7 +12,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import {
-  LaserPaper, PrintItemList, PrintLocationList, PrintQueueItem, PrintQueueItemType, Printer
+  LaserPaper, PrintItemList, PrintLocationList, PrintQueueItem, PrintQueueItemType, Printer, PrinterType
 } from '../../models/Printer';
 import styles from './PrintQueue.styles';
 import { strings } from '../../locales';
