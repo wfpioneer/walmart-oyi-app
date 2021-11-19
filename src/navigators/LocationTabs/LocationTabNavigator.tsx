@@ -167,7 +167,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           dispatch(setPrintingLocationLabels(LocationName.SECTION));
           navigation.navigate('PrintPriceSign');
         }}
-        buttonText={strings('LOCATION.PRINT_LABELS')}
+        buttonText={strings('LOCATION.PRINT_LABEL')}
       />
       <Tab.Navigator
         tabBarOptions={{

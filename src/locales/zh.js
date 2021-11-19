@@ -133,7 +133,6 @@ export default {
     MAC_ADDRESS_ERROR: 'MAC地址通常是12个数字',
     PORTABLE_PRINTER: '便携式打印机',
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
-    PRINT_LABEL: 'Print label', // TODO Mandarin translation
     PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机'
   },
   LOCATION: {
@@ -186,6 +185,7 @@ export default {
     SCAN_PALLET: '扫描卡板标签',
     PALLET_VALIDATE_ERROR: '卡板号只能是数字',
     PALLET_PLACEHOLDER: '输入或扫描卡板号',
+    PRINT_LABEL: 'Print label', // TODO Mandarin translation
     PRINT_LABELS: '打印标签',
     ADD_PALLET_ERROR: '添加卡板时出错',
     ADD_PALLET_API_ERROR: '错误添加卡板标签，请重试',

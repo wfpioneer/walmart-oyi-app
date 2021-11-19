@@ -65,7 +65,6 @@ export const Print = (state = initialState, action: Actions): StateType => {
         printerList
       };
     case DELETE_FROM_PRINTER_LIST:
-      // TODO NEED TO BE ABLE TO DELETE LOCATION FROM LIST
       // eslint-disable-next-line no-case-declarations
       const deleteIndex = printerList.findIndex(
         item => item.id === action.payload

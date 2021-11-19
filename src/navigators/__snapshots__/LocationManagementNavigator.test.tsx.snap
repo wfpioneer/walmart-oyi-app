@@ -100,20 +100,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "blur": [Function],
-      }
-    }
-    name="PrintLabel"
-    options={
-      Object {
-        "headerTitle": "[missing \\"en.PRINT.PRINT_LABEL\\" translation]",
-      }
-    }
-  />
-  <Screen
-    component={[Function]}
     name="AddZone"
     options={
       Object {
@@ -219,20 +205,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     options={
       Object {
         "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
-      }
-    }
-  />
-  <Screen
-    component={[Function]}
-    listeners={
-      Object {
-        "blur": [Function],
-      }
-    }
-    name="PrintLabel"
-    options={
-      Object {
-        "headerTitle": "[missing \\"en.PRINT.PRINT_LABEL\\" translation]",
       }
     }
   />

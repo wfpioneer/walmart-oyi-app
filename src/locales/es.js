@@ -133,7 +133,6 @@ export default {
     MAC_ADDRESS_ERROR: 'La dirección MAC suele ser de 12 números',
     PORTABLE_PRINTER: 'Impresora portátil',
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
-    PRINT_LABEL: 'Print label', // TODO Spanish translation
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil'
   },
   LOCATION: {
@@ -186,6 +185,7 @@ export default {
     SCAN_PALLET: 'Escanea la etiqueta del Pallet',
     PALLET_VALIDATE_ERROR: 'El Pallet ID solo puede contener números',
     PALLET_PLACEHOLDER: 'Ingresa o escanea un pallet ID',
+    PRINT_LABEL: 'Print label', // TODO Spanish translation
     PRINT_LABELS: 'Imprimir etiquetas',
     ADD_PALLET_ERROR: 'error al agregar el pallet',
     ADD_PALLET_API_ERROR: 'Hubo un error al agregar el pallet. Inténtar de nuevo',

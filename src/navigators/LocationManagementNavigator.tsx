@@ -7,10 +7,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import AddPallet from '../screens/AddPallet/AddPallet';
 import AddZone from '../screens/AddZone/AddZone';
-import {
-  hideLocationPopup,
-  showLocationPopup
-} from '../state/actions/Location';
+import { hideLocationPopup, showLocationPopup } from '../state/actions/Location';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
 import ZoneList from '../screens/Zone/ZoneList';
@@ -125,7 +122,8 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
         headerTitleStyle: { fontSize: 18 },
         headerTintColor: COLOR.WHITE
-      }}>
+      }}
+    >
       <Stack.Screen
         name="Zones"
         component={ZoneList}
@@ -236,18 +234,6 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         component={AddPallet}
         options={{
           headerTitle: strings('LOCATION.SCAN_PALLET')
-        }}
-      />
-      <Stack.Screen
-        name="PrintLabel"
-        component={PrintPriceSign}
-        options={{
-          headerTitle: strings('PRINT.PRINT_LABEL')
-        }}
-        listeners={{
-          blur: () => {
-            dispatch({ type: PRINT_SIGN.RESET });
-          }
         }}
       />
       <Stack.Screen

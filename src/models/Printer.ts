@@ -11,7 +11,6 @@ export enum PrinterType {
   PORTABLE
 }
 
-// eslint-disable-next-line no-shadow
 export enum PrintQueueItemType {
   ITEM = 'ITEM',
   SECTION = 'SECTION',
