@@ -190,7 +190,8 @@ export default {
     ADD_PALLET_API_ERROR: '错误添加卡板标签，请重试',
     PALLET_ERROR: '卡板未找到/空卡板',
     PALLET_NOT_FOUND: '因未找到卡板/卡板为空系统报错',
-    PALLET_ADDED: '卡板添加成功'
+    PALLET_ADDED: '卡板添加成功',
+    PALLET_DELETE_CONFIRMATION: ''
   },
   WORKLIST: {
     WORKLIST: '待办任务',

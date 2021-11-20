@@ -23,7 +23,8 @@ export const asyncReducer = combineReducers({
   getAisle: makeAsyncReducer(asyncActions.GET_AISLE),
   getSections: makeAsyncReducer(asyncActions.GET_SECTIONS),
   getSectionDetails: makeAsyncReducer(asyncActions.GET_SECTION_DETAILS),
-  addPallet: makeAsyncReducer(asyncActions.ADD_PALLET)
+  addPallet: makeAsyncReducer(asyncActions.ADD_PALLET),
+  deletePallet: makeAsyncReducer(asyncActions.DELETE_PALLET)
 });
 
 export default asyncReducer;

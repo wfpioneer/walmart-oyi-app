@@ -47,6 +47,12 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
         "palletId": 1,
       }
     }
+    section={
+      Object {
+        "id": 1,
+        "name": "Section 1",
+      }
+    }
   />
 </Context.Provider>
 `;
@@ -103,6 +109,12 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
         "palletId": 1,
       }
     }
+    section={
+      Object {
+        "id": 1,
+        "name": "Section 1",
+      }
+    }
   />
 </Context.Provider>
 `;
@@ -143,6 +155,12 @@ exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = 
         "items": Array [],
         "palletCreateTS": "2021-01-01",
         "palletId": 1,
+      }
+    }
+    section={
+      Object {
+        "id": 1,
+        "name": "Section 1",
       }
     }
   />

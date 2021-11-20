@@ -59,3 +59,6 @@ export const getSectionDetails = makeAsyncActionCreators(GET_SECTION_DETAILS);
 
 export const ADD_PALLET = makeAsyncActionTypes('API/ADD_PALLET');
 export const addPallet = makeAsyncActionCreators(ADD_PALLET);
+
+export const DELETE_PALLET = makeAsyncActionTypes('API/DELETE_PALLET');
+export const deletePallet = makeAsyncActionCreators(DELETE_PALLET);
