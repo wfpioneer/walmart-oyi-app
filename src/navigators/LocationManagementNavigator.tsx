@@ -7,6 +7,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import AddPallet from '../screens/AddPallet/AddPallet';
 import AddZone from '../screens/AddZone/AddZone';
+import AddSection from '../screens/AddSection/AddSection';
 import { hideLocationPopup, showLocationPopup } from '../state/actions/Location';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
@@ -240,7 +241,14 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         name="AddZone"
         component={AddZone}
         options={{
-          headerTitle: 'Add Zone'
+          headerTitle: strings('LOCATION.ADD_AREA')
+        }}
+      />
+      <Stack.Screen
+        name="AddSection"
+        component={AddSection}
+        options={{
+          headerTitle: strings('LOCATION.ADD_SECTIONS')
         }}
       />
     </Stack.Navigator>

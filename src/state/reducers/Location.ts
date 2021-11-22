@@ -10,6 +10,7 @@ import {
   SET_NEW_ZONE,
   SET_NUMBER_OF_AISLES_TO_CREATE,
   SET_POSSIBLE_ZONES,
+  SET_SECTIONS,
   SET_ZONES,
   SHOW_LOCATION_POPUP
 } from '../actions/Location';
@@ -32,6 +33,7 @@ interface LocationState {
   selectedSection: LocationIdName;
   zones: ZoneItem[];
   aisles: AisleItem[];
+  sections: SectionItem[];
   possibleZones: PossibleZone[];
   locationPopupVisible: boolean;
   createFlow: CREATE_FLOW;
@@ -55,6 +57,7 @@ const initialState: LocationState = {
   zones: [],
   possibleZones: [],
   aisles: [],
+  sections: [],
   locationPopupVisible: false,
   createFlow: CREATE_FLOW.NOT_STARTED,
   newZone: '',
@@ -103,6 +106,11 @@ export const Location = (
         }
       };
     }
+    case SET_SECTIONS:
+      return {
+        ...state,
+        sections: action.payload
+      };
     case SHOW_LOCATION_POPUP:
       return {
         ...state,
