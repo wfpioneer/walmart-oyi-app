@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { Dispatch } from 'redux';
 import { Picker } from '@react-native-picker/picker';
 import { useDispatch } from 'react-redux';
@@ -21,6 +22,7 @@ interface AddZoneScreenProps {
   setNumberOfAisles: React.Dispatch<React.SetStateAction<number>>;
   existingAisles: number;
   dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
 }
 
 const NEW_ZONE_AISLE_MIN = 1;
@@ -82,7 +84,6 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
   };
 
   const handleContinue = () => {
-    // TODO add navigation to new aisles screen once it is created
     switch (props.createFlow) {
       case CREATE_FLOW.CREATE_AISLE:
         props.dispatch(setNumberOfAislesToCreate(props.numberOfAisles));
@@ -91,6 +92,7 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
         props.dispatch(setNumberOfAislesToCreate(props.numberOfAisles));
         props.dispatch(setNewZone(props.selectedZone));
     }
+    props.navigation.navigate('AddSection');
   };
 
   return (
@@ -148,9 +150,10 @@ const AddZone = (): JSX.Element => {
   const possibleZones = useTypedSelector(state => state.Location.possibleZones);
   const currentZone = useTypedSelector(state => state.Location.selectedZone);
   const createFlow = useTypedSelector(state => state.Location.createFlow);
-  const [selectedZone, setSelectedZone] = useState('');
+  const [selectedZone, setSelectedZone] = useState(createFlow === CREATE_FLOW.CREATE_AISLE ? currentZone.name : '');
   const [numberOfAisles, setNumberOfAisles] = useState(1);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   let existingAisles = 0;
 
@@ -173,6 +176,7 @@ const AddZone = (): JSX.Element => {
       setNumberOfAisles={setNumberOfAisles}
       existingAisles={existingAisles}
       dispatch={dispatch}
+      navigation={navigation}
     />
   );
 };

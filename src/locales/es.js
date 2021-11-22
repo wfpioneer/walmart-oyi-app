@@ -105,7 +105,8 @@ export default {
     RESERVE_QTY: 'Bodega',
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consol',
-    FLY_CLOUD_QTY: 'Fly Cloud Qty' // Leaving This as is until MX has a need for Cloud Qty
+    FLY_CLOUD_QTY: 'Fly Cloud Qty', // Leaving This as is until MX has a need for Cloud Qty
+    ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',

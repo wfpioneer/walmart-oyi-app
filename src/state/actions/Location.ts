@@ -11,6 +11,7 @@ export const SET_ZONES = 'LOCATION/SET_ZONES';
 export const SELECT_AISLE = 'LOCATION/SELECT_AISLE';
 export const SET_AISLES = 'LOCATION/SET_AISLES';
 export const SELECT_SECTION = 'LOCATION/SELECT_SECTION';
+export const SET_SECTIONS = 'LOCATION/SET_SECTIONS';
 export const SHOW_LOCATION_POPUP = 'LOCATION/SHOW_POPUP';
 export const HIDE_LOCATION_POPUP = 'LOCATION/HIDE_POPUP';
 export const RESET_SECTION_NAME = 'LOCATION/RESET_SECTION_NAME';
@@ -53,6 +54,11 @@ export const selectSection = (id: number, name: string) => ({
   }
 } as const);
 
+export const setSections = (sections: SectionItem[]) => ({
+  type: SET_SECTIONS,
+  payload: sections
+} as const);
+
 export const showLocationPopup = () => ({
   type: SHOW_LOCATION_POPUP
 } as const);
@@ -91,6 +97,7 @@ export type Actions =
   | ReturnType<typeof selectAisle>
   | ReturnType<typeof setAisles>
   | ReturnType<typeof selectSection>
+  | ReturnType<typeof setSections>
   | ReturnType<typeof showLocationPopup>
   | ReturnType<typeof hideLocationPopup>
   | ReturnType<typeof resetSectionName>

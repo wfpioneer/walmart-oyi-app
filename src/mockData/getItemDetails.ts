@@ -440,5 +440,93 @@ export default {
         }
       ]
     }
-  } as ItemDetails
+  } as ItemDetails,
+  '321': {
+    itemName: 'Test Item That is Really, Really Long (and has parenthesis)',
+    itemNbr: 1234567890,
+    upcNbr: '000055559999',
+    status: 'Active',
+    categoryNbr: 93,
+    categoryDesc: 'Meat PI',
+    price: 2000.94,
+    basePrice: 1500.30,
+    exceptionType: 'nsfl',
+    imageUrlKey: undefined,
+    imageBlobKey: undefined,
+    completed: false,
+    onHandsQty: 42,
+    pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 10,
+    claimsOnHandQty: 5,
+    backroomQty: 6,
+    cloudQty: undefined,
+    replenishment: {
+      onOrder: 48
+    },
+    location: {
+      floor: [
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: 'A1-1',
+          type: LOCATION_TYPES.SALES_FLOOR,
+          typeNbr: 8
+        },
+        {
+          zoneId: 0,
+          aisleId: 0,
+          sectionId: 2,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '2',
+          locationName: 'A1-2',
+          type: LOCATION_TYPES.END_CAP,
+          typeNbr: 12
+        },
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 3,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '3',
+          locationName: 'A1-3',
+          type: LOCATION_TYPES.POD,
+          typeNbr: 13
+        },
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 4,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '4',
+          locationName: 'A1-4',
+          type: LOCATION_TYPES.DISPLAY,
+          typeNbr: 11
+        }
+      ],
+      reserve: [
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: 'A1-1',
+          type: LOCATION_TYPES.RESERVE,
+          typeNbr: 7
+        }
+      ],
+      count: 5
+    },
+    sales: {
+      error: ''
+    }
+  }
 };
