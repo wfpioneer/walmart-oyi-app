@@ -1,8 +1,11 @@
 import React from 'react';
+import { NavigationProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { AddZoneScreen } from './AddZone';
 import { mockPossibleZones } from '../../mockData/mockPossibleZones';
 import { CREATE_FLOW } from '../../models/LocationItems';
+
+let navigationProp: NavigationProp<any>;
 
 describe('AddZoneScreen', () => {
   const zones = [{
@@ -37,6 +40,7 @@ describe('AddZoneScreen', () => {
       setNumberOfAisles={jest.fn()}
       existingAisles={defaultExistingAisles}
       dispatch={jest.fn()}
+      navigation={navigationProp}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -52,6 +56,7 @@ describe('AddZoneScreen', () => {
       setNumberOfAisles={jest.fn()}
       existingAisles={existingAisles}
       dispatch={jest.fn()}
+      navigation={navigationProp}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -67,6 +72,7 @@ describe('AddZoneScreen', () => {
       setNumberOfAisles={jest.fn()}
       existingAisles={defaultExistingAisles}
       dispatch={jest.fn()}
+      navigation={navigationProp}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -82,6 +88,7 @@ describe('AddZoneScreen', () => {
       setNumberOfAisles={jest.fn()}
       existingAisles={existingAisles}
       dispatch={jest.fn()}
+      navigation={navigationProp}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
