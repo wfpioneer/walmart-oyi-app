@@ -338,8 +338,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         };
         trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
         dispatch(addToPrintQueue(printQueueItem));
-      }
-      if (printingLocationLabels === LocationName.AISLE) {
+      } else if (printingLocationLabels === LocationName.AISLE) {
         const printQueueItems: PrintQueueItem[] = [];
         // Add Get Sections response to print queue
         sectionsList.forEach(section => {
