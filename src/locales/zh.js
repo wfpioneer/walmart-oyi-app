@@ -105,7 +105,8 @@ export default {
     RESERVE_QTY: '高货架库存',
     CLAIMS_QTY: '索赔库存',
     CONSOLIDATED_QTY: '临时外仓',
-    FLY_CLOUD_QTY: '云仓库存'
+    FLY_CLOUD_QTY: '云仓库存',
+    ERROR_SALES_HISTORY: '无法获取历史销售'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
