@@ -191,7 +191,7 @@ export default {
     PALLET_ERROR: 'Pallet no encontrada/Pallet vacía',
     PALLET_NOT_FOUND: 'Hubo un error debido a que no se encontró el pallet/Pallet vacía',
     PALLET_ADDED: 'Pallet agregado con éxito',
-    PALLET_DELETE_CONFIRMATION: ''
+    PALLET_DELETE_CONFIRMATION: 'Confirmar: Borrar pallet'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
