@@ -1,6 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, Route } from '@react-navigation/native';
+import _ from 'lodash';
 import ItemDetails from '../../models/ItemDetails';
 import { PrintPriceSignScreen, renderSignSizeButtons, validateQty } from './PrintPriceSign';
 import getItemDetails from '../../mockData/getItemDetails';
@@ -8,6 +9,7 @@ import {
   LaserPaper, Printer, PrinterType
 } from '../../models/Printer';
 import { strings } from '../../locales';
+import { LocationName } from '../../models/Location';
 
 // Something gets into a weird state, and this seems to fix it
 jest.useFakeTimers();
@@ -37,6 +39,8 @@ describe('PrintPriceSignScreen', () => {
     id: '123000000000'
   };
   const testItem: ItemDetails = getItemDetails[123];
+  const emptyLocation = { id: 0, name: '' };
+  const nonemptyLocation = { id: 1, name: 'yes' };
 
   describe('Tests rendering print Errors/Api responses', () => {
     it(' Renders Loader waiting for Print Service response  ', () => {
@@ -52,11 +56,16 @@ describe('PrintPriceSignScreen', () => {
           scannedEvent={defaultScanEvent}
           exceptionType=""
           actionCompleted={false}
-          result={testItem}
+          itemResult={testItem}
           printAPI={printApiIsWaiting}
+          sectionsResult={null}
           selectedPrinter={defaultPrinter}
           selectedSignType={LaserPaper.XSmall}
           printQueue={[]}
+          printingLocationLabels=""
+          selectedAisle={_.cloneDeep(emptyLocation)}
+          selectedSection={_.cloneDeep(emptyLocation)}
+          selectedZone={_.cloneDeep(emptyLocation)}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
@@ -84,11 +93,16 @@ describe('PrintPriceSignScreen', () => {
           scannedEvent={defaultScanEvent}
           exceptionType=""
           actionCompleted={false}
-          result={testItem}
+          itemResult={testItem}
           printAPI={defaultAsyncState}
+          sectionsResult={null}
           selectedPrinter={defaultPrinter}
           selectedSignType={LaserPaper.XSmall}
           printQueue={[]}
+          printingLocationLabels=""
+          selectedAisle={_.cloneDeep(emptyLocation)}
+          selectedSection={_.cloneDeep(emptyLocation)}
+          selectedZone={_.cloneDeep(emptyLocation)}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
@@ -114,11 +128,16 @@ describe('PrintPriceSignScreen', () => {
           scannedEvent={defaultScanEvent}
           exceptionType=""
           actionCompleted={false}
-          result={testItem}
+          itemResult={testItem}
           printAPI={defaultAsyncState}
+          sectionsResult={null}
           selectedPrinter={defaultPrinter}
           selectedSignType={LaserPaper.XSmall}
           printQueue={[]}
+          printingLocationLabels=""
+          selectedAisle={_.cloneDeep(emptyLocation)}
+          selectedSection={_.cloneDeep(emptyLocation)}
+          selectedZone={_.cloneDeep(emptyLocation)}
           dispatch={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
@@ -134,6 +153,74 @@ describe('PrintPriceSignScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+  });
+
+  it('renders the Print Price Sign Screen when section labels', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const invalidQty = false;
+    renderer.render(
+      <PrintPriceSignScreen
+        scannedEvent={defaultScanEvent}
+        exceptionType=""
+        actionCompleted={false}
+        itemResult={null}
+        printAPI={defaultAsyncState}
+        sectionsResult={[]}
+        selectedPrinter={defaultPrinter}
+        selectedSignType={LaserPaper.XSmall}
+        printQueue={[]}
+        printingLocationLabels={LocationName.SECTION}
+        selectedAisle={_.cloneDeep(nonemptyLocation)}
+        selectedSection={_.cloneDeep(nonemptyLocation)}
+        selectedZone={_.cloneDeep(nonemptyLocation)}
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        signQty={1}
+        setSignQty={jest.fn()}
+        isValidQty={invalidQty}
+        setIsValidQty={jest.fn()}
+        error={defaultError}
+        setError={jest.fn()}
+        useEffectHook={jest.fn()}
+        useLayoutHook={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders the Print Price Sign Screen when aisle labels', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const invalidQty = false;
+    renderer.render(
+      <PrintPriceSignScreen
+        scannedEvent={defaultScanEvent}
+        exceptionType=""
+        actionCompleted={false}
+        itemResult={testItem}
+        printAPI={defaultAsyncState}
+        sectionsResult={[]}
+        selectedPrinter={defaultPrinter}
+        selectedSignType={LaserPaper.XSmall}
+        printQueue={[]}
+        printingLocationLabels={LocationName.AISLE}
+        selectedAisle={_.cloneDeep(nonemptyLocation)}
+        selectedSection={_.cloneDeep(nonemptyLocation)}
+        selectedZone={_.cloneDeep(nonemptyLocation)}
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        signQty={1}
+        setSignQty={jest.fn()}
+        isValidQty={invalidQty}
+        setIsValidQty={jest.fn()}
+        error={defaultError}
+        setError={jest.fn()}
+        useEffectHook={jest.fn()}
+        useLayoutHook={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
   describe('Tests rendering Price Sign Sizes', () => {

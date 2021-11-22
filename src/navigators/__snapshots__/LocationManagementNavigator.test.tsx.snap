@@ -103,7 +103,16 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="AddZone"
     options={
       Object {
-        "headerTitle": "Add Zone",
+        "headerTitle": "[missing \\"en.LOCATION.ADD_AREA\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddSection"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.ADD_SECTIONS\\" translation]",
       }
     }
   />
@@ -213,7 +222,16 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="AddZone"
     options={
       Object {
-        "headerTitle": "Add Zone",
+        "headerTitle": "[missing \\"en.LOCATION.ADD_AREA\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddSection"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.ADD_SECTIONS\\" translation]",
       }
     }
   />

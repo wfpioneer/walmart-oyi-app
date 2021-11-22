@@ -5,7 +5,10 @@ export const SET_SELECTED_SIGN_TYPE = 'PRINT/SET_SELECTED_SIGN_TYPE';
 export const ADD_TO_PRINTER_LIST = 'PRINT/ADD_TO_PRINTER_LIST';
 export const DELETE_FROM_PRINTER_LIST = 'PRINT/DELETE_FROM_PRINTER_LIST';
 export const ADD_TO_PRINT_QUEUE = 'PRINT/ADD_TO_PRINT_QUEUE';
+export const ADD_MULTIPLE_TO_PRINT_QUEUE = 'PRINT/ADD_MULTIPLE_TO_PRINT_QUEUE';
 export const SET_PRINT_QUEUE = 'PRINT/SET_PRINT_QUEUE';
+export const SET_PRINTING_LOCATION_LABELS = 'PRINT/SET_PRINTING_LOCATION_LABELS';
+export const UNSET_PRINTING_LOCATION_LABELS = 'PRINT/UNSET_PRINTING_LOCATION_LABELS';
 
 export const setSelectedPrinter = (printer: Printer) => ({
   type: SET_SELECTED_PRINTER,
@@ -32,7 +35,21 @@ export const addToPrintQueue = (label: PrintQueueItem) => ({
   payload: label
 });
 
+export const addMultipleToPrintQueue = (labels: PrintQueueItem[]) => ({
+  type: ADD_MULTIPLE_TO_PRINT_QUEUE,
+  payload: labels
+});
+
 export const setPrintQueue = (printQueue: PrintQueueItem[]) => ({
   type: SET_PRINT_QUEUE,
   payload: printQueue
+});
+
+export const setPrintingLocationLabels = (screen: string) => ({
+  type: SET_PRINTING_LOCATION_LABELS,
+  payload: screen
+});
+
+export const unsetPrintingLocationLabels = () => ({
+  type: UNSET_PRINTING_LOCATION_LABELS
 });
