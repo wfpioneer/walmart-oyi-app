@@ -1633,7 +1633,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     />
     <Button
       backgroundColor="#0071e9"
-      disabled={false}
+      disabled={true}
       height={45}
       onPress={[Function]}
       radius={5}
