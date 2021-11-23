@@ -4,7 +4,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
 <React.Fragment>
   <LocationHeader
     buttonPress={[Function]}
-    buttonText="[missing \\"en.LOCATION.PRINT_LABELS\\" translation]"
+    buttonText="[missing \\"en.LOCATION.PRINT_LABEL\\" translation]"
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
@@ -58,7 +58,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
 <React.Fragment>
   <LocationHeader
     buttonPress={[Function]}
-    buttonText="[missing \\"en.LOCATION.PRINT_LABELS\\" translation]"
+    buttonText="[missing \\"en.LOCATION.PRINT_LABEL\\" translation]"
     details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
@@ -112,7 +112,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
 <React.Fragment>
   <LocationHeader
     buttonPress={[Function]}
-    buttonText="[missing \\"en.LOCATION.PRINT_LABELS\\" translation]"
+    buttonText="[missing \\"en.LOCATION.PRINT_LABEL\\" translation]"
     details="100 [missing \\"en.LOCATION.ITEMS\\" translation], 100 [missing \\"en.LOCATION.PALLETS\\" translation]"
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
@@ -169,7 +169,7 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
   />
   <LocationHeader
     buttonPress={[Function]}
-    buttonText="[missing \\"en.LOCATION.PRINT_LABELS\\" translation]"
+    buttonText="[missing \\"en.LOCATION.PRINT_LABEL\\" translation]"
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
@@ -226,7 +226,7 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
   />
   <LocationHeader
     buttonPress={[Function]}
-    buttonText="[missing \\"en.LOCATION.PRINT_LABELS\\" translation]"
+    buttonText="[missing \\"en.LOCATION.PRINT_LABEL\\" translation]"
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />

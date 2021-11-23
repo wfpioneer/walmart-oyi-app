@@ -11,7 +11,6 @@ import {
   mockLocationDetailsLargeLocationCount
 } from '../../mockData/locationDetails';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { strings } from '../../locales';
 import store from '../../state';
 
 let navigationProp: NavigationProp<any>;

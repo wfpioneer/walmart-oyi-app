@@ -134,7 +134,8 @@ export default {
     MAC_ADDRESS_ERROR: 'La dirección MAC suele ser de 12 números',
     PORTABLE_PRINTER: 'Impresora portátil',
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
-    PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil'
+    PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
+    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -168,13 +169,13 @@ export default {
     NO_ZONES_AVAILABLE: 'No hay zonas disponibles',
     NO_AISLES_AVAILABLE: 'No hay pasillos disponibles',
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
-    CLEAR_ALL: 'Clear all', // TODO Spanish Translation
+    CLEAR_ALL: 'Limpiar',
     CLEAR_SECTION: 'Limpiar sección',
     REMOVE_SECTION: 'Eliminar sección',
     REMOVE_AREA: 'Eliminar la zona',
     REMOVE_ALL: 'Remove all', // TODO Spanish Translation
     ADD: 'Agregar',
-    SCAN_LOCATION: 'Invalid location name Ex: ABC1-2', // TODO Spanish Translation
+    SCAN_LOCATION: 'Nombre de ubicación invalida e.g: ABCD1-2',
     ADD_AREA: 'Añadir zona',
     ADD_AISLES: 'Agregar pasillos',
     CREATED_ON: 'Creado en',
@@ -186,6 +187,7 @@ export default {
     SCAN_PALLET: 'Escanea la etiqueta del Pallet',
     PALLET_VALIDATE_ERROR: 'El Pallet ID solo puede contener números',
     PALLET_PLACEHOLDER: 'Ingresa o escanea un pallet ID',
+    PRINT_LABEL: 'Imprimir etiqueta',
     PRINT_LABELS: 'Imprimir etiquetas',
     ADD_PALLET_ERROR: 'error al agregar el pallet',
     ADD_PALLET_API_ERROR: 'Hubo un error al agregar el pallet. Inténtar de nuevo',

@@ -30,7 +30,7 @@ import { LocationType } from '../../models/LocationType';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import  {hideLocationPopup, setAisles, setCreateFlow } from '../../state/actions/Location';
+import { hideLocationPopup, setAisles, setCreateFlow } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import { CREATE_FLOW } from '../../models/LocationItems';
