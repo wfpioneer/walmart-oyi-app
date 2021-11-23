@@ -170,11 +170,11 @@ export default {
     CLEAR_ALL: 'Clear all', // TODO Spanish Translation
     CLEAR_SECTION: 'Limpiar sección',
     REMOVE_SECTION: 'Eliminar sección',
-    REMOVE_AREA: 'Eliminar la zona',
+    REMOVE_ZONE: 'Eliminar la zona',
     REMOVE_ALL: 'Remove all', // TODO Spanish Translation
     ADD: 'Agregar',
     SCAN_LOCATION: 'Invalid location name Ex: ABC1-2', // TODO Spanish Translation
-    ADD_AREA: 'Añadir zona',
+    ADD_ZONE: 'Añadir zona',
     ADD_AISLES: 'Agregar pasillos',
     CREATED_ON: 'Creado en',
     MORE: 'Más',

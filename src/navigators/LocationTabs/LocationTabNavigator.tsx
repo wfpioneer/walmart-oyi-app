@@ -227,7 +227,8 @@ const LocationTabs = () : JSX.Element => {
 
   const bottomSheetLocationDetailsModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['35%', '50%'], []);
+  const managerSnapPoints = useMemo(() => ['30%'], []);
+  const associateSnapPoints = useMemo(() => ['15%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetLocationDetailsModalRef.current) {
@@ -245,7 +246,7 @@ const LocationTabs = () : JSX.Element => {
         onPress={() => dispatch(hideLocationPopup())}
         activeOpacity={1}
         disabled={!locationPopupVisible}
-        style={styles.container}
+        style={locationPopupVisible ? styles.disabledContainer : styles.container}
       >
         <LocationTabsNavigator
           dispatch={dispatch}
@@ -264,7 +265,7 @@ const LocationTabs = () : JSX.Element => {
       </TouchableOpacity>
       <BottomSheetModal
         ref={bottomSheetLocationDetailsModalRef}
-        snapPoints={snapPoints}
+        snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
         index={0}
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}
