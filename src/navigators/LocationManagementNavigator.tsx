@@ -80,7 +80,8 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
   } = props;
 
   // TODO add "badge" to show signs currently in queue
-  const renderPrintQueueButton = () => (
+  const renderPrintQueueButton = (isVisible: boolean) => (isVisible && (
+
     <TouchableOpacity onPress={() => {
       trackEvent('print_queue_list_click');
       dispatch(setPrintingLocationLabels(LocationName.SECTION));
@@ -95,9 +96,10 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         />
       </View>
     </TouchableOpacity>
+  )
   );
 
-  const renderLocationKebabButton = (visible: boolean) => (visible ? (
+  const renderLocationKebabButton = (isVisible: boolean) => (isVisible && (
     <TouchableOpacity onPress={() => {
       if (locationPopupVisible) {
         dispatch(hideLocationPopup());
@@ -114,7 +116,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         />
       </View>
     </TouchableOpacity>
-  ) : null);
+  ));
 
   return (
     <Stack.Navigator
@@ -179,7 +181,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
-              {renderPrintQueueButton()}
+              {renderPrintQueueButton(userFeatures.includes('location printing'))}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
                 userFeatures.includes('location management edit')
@@ -204,7 +206,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
-              {renderPrintQueueButton()}
+              {renderPrintQueueButton(userFeatures.includes('location printing'))}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
                 userFeatures.includes('location management edit')
