@@ -23,7 +23,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   };
   useEffect(() => {
     // on api success
-    if (!delPalletAPI.isWaiting && delPalletAPI.result) {
+    if (!delPalletAPI.isWaiting && delPalletAPI.result && displayConfirmation) {
       setDisplayConfirmation(false);
       dispatch(getSectionDetails({ sectionId: section.id }));
       dispatch({ type: 'API/DELETE_PALLET/RESET' });
