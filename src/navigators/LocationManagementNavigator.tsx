@@ -20,6 +20,10 @@ import { openCamera } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './LocationManagementNavigator.style';
+import PrintPriceSign from '../screens/PrintPriceSign/PrintPriceSign';
+import { PRINT_SIGN } from '../state/actions/asyncAPI';
+import { setPrintingLocationLabels } from '../state/actions/Print';
+import { LocationName } from '../models/Location';
 
 const Stack = createStackNavigator();
 interface LocationManagementProps {
@@ -30,23 +34,41 @@ interface LocationManagementProps {
   dispatch: Dispatch<any>;
 }
 
-export const renderScanButton = (dispatch: Dispatch<any>, isManualScanEnabled: boolean): JSX.Element => (
-  <TouchableOpacity onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
+export const renderScanButton = (
+  dispatch: Dispatch<any>,
+  isManualScanEnabled: boolean
+): JSX.Element => (
+  <TouchableOpacity
+    onPress={() => {
+      dispatch(setManualScan(!isManualScanEnabled));
+    }}
+  >
     <View style={styles.leftButton}>
-      <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+      <MaterialCommunityIcon
+        name="barcode-scan"
+        size={20}
+        color={COLOR.WHITE}
+      />
     </View>
   </TouchableOpacity>
 );
 
 export const renderCamButton = (): JSX.Element => (
-  <TouchableOpacity onPress={() => { openCamera(); }}>
+  <TouchableOpacity
+    onPress={() => {
+      openCamera();
+    }}
+  >
     <View style={styles.leftButton}>
       <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
     </View>
   </TouchableOpacity>
 );
 
-export const resetLocManualScan = (isManualScanEnabled: boolean, dispatch: Dispatch<any>): void => {
+export const resetLocManualScan = (
+  isManualScanEnabled: boolean,
+  dispatch: Dispatch<any>
+): void => {
   if (isManualScanEnabled) {
     dispatch(setManualScan(false));
   }
@@ -58,9 +80,11 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
   } = props;
 
   // TODO add "badge" to show signs currently in queue
-  const renderPrintQueueButton = () => (
+  const renderPrintQueueButton = (isVisible: boolean) => (isVisible && (
+
     <TouchableOpacity onPress={() => {
       trackEvent('print_queue_list_click');
+      dispatch(setPrintingLocationLabels(LocationName.SECTION));
       navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' });
     }}
     >
@@ -72,9 +96,10 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         />
       </View>
     </TouchableOpacity>
+  )
   );
 
-  const renderLocationKebabButton = (visible: boolean) => (visible ? (
+  const renderLocationKebabButton = (isVisible: boolean) => (isVisible && (
     <TouchableOpacity onPress={() => {
       if (locationPopupVisible) {
         dispatch(hideLocationPopup());
@@ -91,7 +116,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         />
       </View>
     </TouchableOpacity>
-  ) : null);
+  ));
 
   return (
     <Stack.Navigator
@@ -133,7 +158,9 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             <View style={styles.headerContainer}>
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
+              {renderLocationKebabButton(
+                userFeatures.includes('location management edit')
+              )}
             </View>
           )
         }}
@@ -154,9 +181,11 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
-              {renderPrintQueueButton()}
+              {renderPrintQueueButton(userFeatures.includes('location printing'))}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
+              {renderLocationKebabButton(
+                userFeatures.includes('location management edit')
+              )}
             </View>
           )
         }}
@@ -177,9 +206,11 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
-              {renderPrintQueueButton()}
+              {renderPrintQueueButton(userFeatures.includes('location printing'))}
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderLocationKebabButton(userFeatures.includes('location management edit'))}
+              {renderLocationKebabButton(
+                userFeatures.includes('location management edit')
+              )}
             </View>
           )
         }}
@@ -229,7 +260,9 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
 const LocationManagementNavigator = (): JSX.Element => {
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const userFeatures = useTypedSelector(state => state.User.features);
-  const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
+  const locationPopupVisible = useTypedSelector(
+    state => state.Location.locationPopupVisible
+  );
   const dispatch = useDispatch();
   const navigation = useNavigation();
 

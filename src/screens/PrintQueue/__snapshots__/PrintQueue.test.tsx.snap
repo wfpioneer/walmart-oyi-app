@@ -88,7 +88,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.S" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Small" translation]
           </Text>
           <View
             style={
@@ -274,7 +274,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders a single it
         }
       }
     >
-      [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.S" translation]
+      [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Small" translation]
     </Text>
     <View
       style={
@@ -435,7 +435,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.X" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.XSmall" translation]
           </Text>
           <View
             style={
@@ -545,7 +545,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.S" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Small" translation]
           </Text>
           <View
             style={
@@ -655,7 +655,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.F" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Medium" translation]
           </Text>
           <View
             style={
@@ -765,7 +765,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.H" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Large" translation]
           </Text>
           <View
             style={
@@ -875,7 +875,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.X" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Wine" translation]
           </Text>
           <View
             style={
@@ -985,7 +985,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.X" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.XSmall" translation]
           </Text>
           <View
             style={
@@ -1095,7 +1095,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.S" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Small" translation]
           </Text>
           <View
             style={
@@ -1205,7 +1205,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.F" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Medium" translation]
           </Text>
           <View
             style={
@@ -1315,7 +1315,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.H" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Large" translation]
           </Text>
           <View
             style={
@@ -1422,7 +1422,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.X" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Wine" translation]
           </Text>
           <View
             style={
@@ -1616,7 +1616,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.S" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Small" translation]
           </Text>
           <View
             style={
@@ -1837,7 +1837,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
               }
             }
           >
-            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.S" translation]
+            [missing "en.PRINT.SIGN_SIZE" translation]: [missing "en.PRINT.Small" translation]
           </Text>
           <View
             style={

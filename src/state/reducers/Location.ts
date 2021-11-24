@@ -31,13 +31,13 @@ interface LocationState {
   selectedZone: LocationIdName;
   selectedAisle: LocationIdName;
   selectedSection: LocationIdName;
-  zones: ZoneItem[],
-  aisles: AisleItem[],
-  sections: SectionItem[],
-  possibleZones: PossibleZone[],
-  locationPopupVisible: boolean,
-  createFlow: CREATE_FLOW,
-  newZone: string,
+  zones: ZoneItem[];
+  aisles: AisleItem[];
+  sections: SectionItem[];
+  possibleZones: PossibleZone[];
+  locationPopupVisible: boolean;
+  createFlow: CREATE_FLOW;
+  newZone: string;
   numberOfAislesToCreate: number
 }
 
@@ -67,7 +67,7 @@ const initialState: LocationState = {
 export const Location = (
   state = initialState,
   action: Actions
-) : LocationState => {
+): LocationState => {
   switch (action.type) {
     case SELECT_ZONE: {
       return {

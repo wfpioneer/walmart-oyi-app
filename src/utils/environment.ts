@@ -5,6 +5,7 @@ export interface Environment {
   orchestrationURL: string;
   itemDetailsURL: string;
   worklistURL: string;
+  printingUrl: string;
   fluffyURL: string;
   managerApprovalUrl: string;
   locationUrl: string;
@@ -80,7 +81,9 @@ export const getEnvironment = (): Environment => {
       fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com'
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
       managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.dev.walmart.com`,
-      locationUrl: `https://intl-oyi-location-api.${countryCode}.dev.walmart.com`
+      locationUrl: `https://intl-oyi-location-api.${countryCode}.dev.walmart.com`,
+      printingUrl: `https://intl-oyi-printing-api.${countryCode}.dev.walmart.com`
+
     },
     stage: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.stg.walmart.com',
@@ -89,7 +92,9 @@ export const getEnvironment = (): Environment => {
       fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com'
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
       managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.stg.walmart.com`,
-      locationUrl: `https://intl-oyi-location-api.${countryCode}.stg.walmart.com`
+      locationUrl: `https://intl-oyi-location-api.${countryCode}.stg.walmart.com`,
+      printingUrl: `https://intl-oyi-printing-api.${countryCode}.stg.walmart.com`
+
     },
     prod: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.prod.walmart.com',
@@ -98,7 +103,9 @@ export const getEnvironment = (): Environment => {
       fluffyURL: 'https://api-proxy.prod.soa-api-proxy.platform.glb.prod.walmart.com'
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
       managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.prod.walmart.com`,
-      locationUrl: `https://intl-oyi-location-api.${countryCode}.prod.walmart.com`
+      locationUrl: `https://intl-oyi-location-api.${countryCode}.prod.walmart.com`,
+      printingUrl: `https://intl-oyi-printing-api.${countryCode}.prod.walmart.com`
+
     }
 
   };

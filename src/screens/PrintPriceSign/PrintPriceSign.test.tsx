@@ -5,9 +5,7 @@ import _ from 'lodash';
 import ItemDetails from '../../models/ItemDetails';
 import { PrintPriceSignScreen, renderSignSizeButtons, validateQty } from './PrintPriceSign';
 import getItemDetails from '../../mockData/getItemDetails';
-import {
-  LaserPaper, Printer, PrinterType
-} from '../../models/Printer';
+import { Printer, PrinterType } from '../../models/Printer';
 import { strings } from '../../locales';
 import { LocationName } from '../../models/Location';
 
@@ -43,24 +41,61 @@ describe('PrintPriceSignScreen', () => {
   const nonemptyLocation = { id: 1, name: 'yes' };
 
   describe('Tests rendering print Errors/Api responses', () => {
-    it(' Renders Loader waiting for Print Service response  ', () => {
+    // Double Test here???
+    const apiIsWaiting = {
+      isWaiting: true,
+      value: null,
+      error: null,
+      result: null
+    };
+
+    it(' Renders Loader waiting for Print Sign Service response  ', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const printApiIsWaiting = {
-        isWaiting: true,
-        value: null,
-        error: null,
-        result: null
-      };
       renderer.render(
         <PrintPriceSignScreen
           scannedEvent={defaultScanEvent}
           exceptionType=""
           actionCompleted={false}
+          printAPI={apiIsWaiting}
+          printLabelAPI={defaultAsyncState}
           itemResult={testItem}
-          printAPI={printApiIsWaiting}
           sectionsResult={null}
           selectedPrinter={defaultPrinter}
-          selectedSignType={LaserPaper.XSmall}
+          selectedSignType="XSmall"
+          printQueue={[]}
+          printingLocationLabels=""
+          selectedAisle={_.cloneDeep(emptyLocation)}
+          selectedSection={_.cloneDeep(emptyLocation)}
+          selectedZone={_.cloneDeep(emptyLocation)}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          signQty={1}
+          setSignQty={jest.fn()}
+          isValidQty={true}
+          setIsValidQty={jest.fn()}
+          error={defaultError}
+          setError={jest.fn()}
+          useEffectHook={jest.fn()}
+          useLayoutHook={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it(' Renders Loader waiting for Print Label Service response  ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <PrintPriceSignScreen
+          scannedEvent={defaultScanEvent}
+          exceptionType=""
+          actionCompleted={false}
+          printAPI={defaultAsyncState}
+          printLabelAPI={apiIsWaiting}
+          itemResult={testItem}
+          sectionsResult={null}
+          selectedPrinter={defaultPrinter}
+          selectedSignType="XSmall"
           printQueue={[]}
           printingLocationLabels=""
           selectedAisle={_.cloneDeep(emptyLocation)}
@@ -95,9 +130,10 @@ describe('PrintPriceSignScreen', () => {
           actionCompleted={false}
           itemResult={testItem}
           printAPI={defaultAsyncState}
+          printLabelAPI={defaultAsyncState}
           sectionsResult={null}
           selectedPrinter={defaultPrinter}
-          selectedSignType={LaserPaper.XSmall}
+          selectedSignType="XSmall"
           printQueue={[]}
           printingLocationLabels=""
           selectedAisle={_.cloneDeep(emptyLocation)}
@@ -130,9 +166,10 @@ describe('PrintPriceSignScreen', () => {
           actionCompleted={false}
           itemResult={testItem}
           printAPI={defaultAsyncState}
+          printLabelAPI={defaultAsyncState}
           sectionsResult={null}
           selectedPrinter={defaultPrinter}
-          selectedSignType={LaserPaper.XSmall}
+          selectedSignType="XSmall"
           printQueue={[]}
           printingLocationLabels=""
           selectedAisle={_.cloneDeep(emptyLocation)}
@@ -165,9 +202,10 @@ describe('PrintPriceSignScreen', () => {
         actionCompleted={false}
         itemResult={null}
         printAPI={defaultAsyncState}
+        printLabelAPI={defaultAsyncState}
         sectionsResult={[]}
         selectedPrinter={defaultPrinter}
-        selectedSignType={LaserPaper.XSmall}
+        selectedSignType="XSmall"
         printQueue={[]}
         printingLocationLabels={LocationName.SECTION}
         selectedAisle={_.cloneDeep(nonemptyLocation)}
@@ -199,9 +237,10 @@ describe('PrintPriceSignScreen', () => {
         actionCompleted={false}
         itemResult={testItem}
         printAPI={defaultAsyncState}
+        printLabelAPI={defaultAsyncState}
         sectionsResult={[]}
         selectedPrinter={defaultPrinter}
-        selectedSignType={LaserPaper.XSmall}
+        selectedSignType="XSmall"
         printQueue={[]}
         printingLocationLabels={LocationName.AISLE}
         selectedAisle={_.cloneDeep(nonemptyLocation)}
@@ -224,7 +263,7 @@ describe('PrintPriceSignScreen', () => {
   });
 
   describe('Tests rendering Price Sign Sizes', () => {
-    it(' Renders \'Wine button\' for wine items', () => {
+    it(" Renders 'Wine button' for wine items", () => {
       const renderer = ShallowRenderer.createRenderer();
       const wineItem: ItemDetails = getItemDetails[789];
 
