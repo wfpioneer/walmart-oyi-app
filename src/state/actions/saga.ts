@@ -24,7 +24,7 @@ export const GET_SECTIONS = 'SAGA/GET_SECTIONS';
 export const GET_SECTION_DETAILS = 'SAGA/GET_SECTION_DETAILS';
 export const PRINT_LOCATION_LABELS = 'SAGA/PRINT_SECTION_LABELS';
 export const ADD_PALLET = 'SAGA/ADD_PALLET';
-
+export const DELETE_PALLET = 'SAGA/DELETE_PALLET';
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
 export const getItemDetails = (payload: any) => ({ type: GET_ITEM_DETAILS, payload } as const);
@@ -60,3 +60,4 @@ export const printLocationLabel = (payload: {
   printLabelList: PrintLocationList[]
 }) => ({ type: PRINT_LOCATION_LABELS, payload } as const);
 export const addPallet = (payload: any) => ({ type: ADD_PALLET, payload } as const);
+export const deletePallet = (payload: any) => ({ type: DELETE_PALLET, payload } as const);

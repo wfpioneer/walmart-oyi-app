@@ -109,7 +109,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
                 dispatch={dispatch}
                 navigation={navigation}
               />
-            ) : <ReservePalletRow reservePallet={item} />
+            ) : <ReservePalletRow section={locationItem?.section} reservePallet={item} />
         )}
         keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
       />
