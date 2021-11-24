@@ -49,12 +49,12 @@ const mapStateToProps = (state: RootState) => ({
 // to all successful fluffy responses for CN
 // If we encounter future scenarios, we can modify this set of Associate roles
 // NOTE: This is only a stop-gap until a better solution is found
-const CNAssociateRoleOverrides = ['on hands change'];
+const CN_ASSOCIATE_ROLES = ['on hands change'];
 
 // This method merges our hard-coded Associate roles with our fluffy response
 const addCNAssociateRoleOverrides = (
   fluffyRoles: string[]
-): string[] => Array.from(new Set([...fluffyRoles, ...CNAssociateRoleOverrides]));
+): string[] => Array.from(new Set([...fluffyRoles, ...CN_ASSOCIATE_ROLES]));
 
 // TODO correct all the function definitions (specifically return types)
 export interface LoginScreenProps {
