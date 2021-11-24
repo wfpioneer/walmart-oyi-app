@@ -335,25 +335,25 @@ export const renderScanForNoActionButton = (
 export const renderBarcodeErrorModal = (
   isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => (
-    <CustomModalComponent
-      isVisible={isVisible}
-      modalType="Error"
-      onClose={() => setIsVisible(false)}
-    >
-      <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-      <Text style={styles.errorText}>
-        {strings('GENERICS.BARCODE_SCAN_ERROR')}
-      </Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          style={styles.dismissButton}
-          title={strings('GENERICS.OK')}
-          backgroundColor={COLOR.TRACKER_RED}
-          onPress={() => setIsVisible(false)}
-        />
-      </View>
-    </CustomModalComponent>
-  );
+  <CustomModalComponent
+    isVisible={isVisible}
+    modalType="Error"
+    onClose={() => setIsVisible(false)}
+  >
+    <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+    <Text style={styles.errorText}>
+      {strings('GENERICS.BARCODE_SCAN_ERROR')}
+    </Text>
+    <View style={styles.buttonContainer}>
+      <Button
+        style={styles.dismissButton}
+        title={strings('GENERICS.OK')}
+        backgroundColor={COLOR.TRACKER_RED}
+        onPress={() => setIsVisible(false)}
+      />
+    </View>
+  </CustomModalComponent>
+);
 const getFloorItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.floor
   ? itemDetails.location.floor : []);
 const getReserveItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.reserve
