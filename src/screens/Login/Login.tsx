@@ -45,6 +45,15 @@ const mapStateToProps = (state: RootState) => ({
   fluffyApiState: state.async.getFluffyRoles
 });
 
+// Since CN Associate JobCodes are inconsistent, this set of roles will be added
+// to all successful fluffy responses for CN
+const CNAssociateRoleOverrides = ['on hands change'];
+
+// This method merges our hard-coded Associate roles with our fluffy response
+const addCNAssociateRoleOverrides = (
+  fluffyRoles: string[]
+): string[] => Array.from(new Set([...fluffyRoles, ...CNAssociateRoleOverrides]));
+
 // TODO correct all the function definitions (specifically return types)
 export interface LoginScreenProps {
   loginUser: (userPayload: User) => void;
@@ -121,7 +130,11 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
 
     if (prevProps.fluffyApiState.isWaiting) {
       if (this.props.fluffyApiState.result) {
-        this.props.assignFluffyFeatures(this.props.fluffyApiState.result.data);
+        const userCountryCode = this.props.User.countryCode.toUpperCase();
+        const fluffyResultData = this.props.fluffyApiState.result.data;
+        const fluffyFeatures = userCountryCode === 'CN' ? addCNAssociateRoleOverrides(fluffyResultData)
+          : fluffyResultData;
+        this.props.assignFluffyFeatures(fluffyFeatures);
       } else if (this.props.fluffyApiState.error) {
         // TODO Display toast/popup letting user know roles could not be retrieved
       }

@@ -62,7 +62,6 @@ export interface ItemDetailsScreenProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
   userFeatures: string[];
-  countryCode: string;
 }
 
 export interface HandleProps {
@@ -503,9 +502,8 @@ const getexceptionType = (actionCompleted: boolean, itemDetails: ItemDetails) =>
 const gettopRightBtnTxt = (locationCount: number) => (locationCount && locationCount >= 1
   ? strings('GENERICS.SEE_ALL') : strings(GENERICS_ADD));
 const getPendingOnHandsQty = (props: ItemDetailsScreenProps, pendingOnHandsQty: number) => {
-  const { userFeatures, countryCode } = props;
-  return (pendingOnHandsQty === -999
-      && (userFeatures.includes('on hands change') || countryCode.toUpperCase() === 'CN'));
+  const { userFeatures } = props;
+  return (pendingOnHandsQty === -999 && userFeatures.includes('on hands change'));
 };
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
   const {
@@ -694,7 +692,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
-  const { userId, countryCode } = useTypedSelector(state => state.User);
+  const { userId } = useTypedSelector(state => state.User);
   const {
     exceptionType,
     actionCompleted,
@@ -740,7 +738,6 @@ const ReviewItemDetails = (): JSX.Element => {
       useEffectHook={useEffect}
       useFocusEffectHook={useFocusEffect}
       userFeatures={userFeatures}
-      countryCode={countryCode}
     />
   );
 };

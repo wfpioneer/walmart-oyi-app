@@ -15,8 +15,6 @@ jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils
 let navigationProp: NavigationProp<any>;
 let routeProp: RouteProp<any, string>;
 let scrollViewProp: React.RefObject<ScrollView>;
-const CN_COUNTRY_CODE = 'CN';
-const MX_COUNTRY_CODE = 'MX';
 describe('ReviewItemDetailsScreen', () => {
   const defaultAsyncState = {
     isWaiting: false,
@@ -72,7 +70,6 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
-          countryCode={MX_COUNTRY_CODE}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -115,7 +112,6 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
-          countryCode={MX_COUNTRY_CODE}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -159,56 +155,11 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={['']}
-          countryCode={MX_COUNTRY_CODE}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('renders "Generic Change translation" if pendingOH is -999, user does not have OH role, and Country Code is CN',
-      () => {
-        const renderer = ShallowRenderer.createRenderer();
-        renderer.render(
-          <ReviewItemDetailsScreen
-            scannedEvent={undefined}
-            isManualScanEnabled={false}
-            isWaiting={false}
-            error={undefined}
-            result={{
-              data: {
-                ...itemDetail[123],
-                status: undefined
-              },
-              status: 200
-            }}
-            addToPicklistStatus={defaultAsyncState}
-            completeItemApi={defaultAsyncState}
-            userId=""
-            exceptionType="NSFL"
-            actionCompleted={false}
-            pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
-            floorLocations={itemDetail[123].location.floor}
-            reserveLocations={itemDetail[123].location.reserve}
-            route={routeProp}
-            dispatch={jest.fn()}
-            navigation={navigationProp}
-            scrollViewRef={scrollViewProp}
-            isSalesMetricsGraphView={false}
-            setIsSalesMetricsGraphView={jest.fn()}
-            ohQtyModalVisible={false}
-            setOhQtyModalVisible={jest.fn()}
-            errorModalVisible={false}
-            setErrorModalVisible={jest.fn()}
-            trackEventCall={jest.fn()}
-            validateSessionCall={jest.fn(() => Promise.resolve())}
-            useEffectHook={jest.fn()}
-            useFocusEffectHook={jest.fn()}
-            userFeatures={[]}
-            countryCode={CN_COUNTRY_CODE}
-          />
-        );
-        expect(renderer.getRenderOutput()).toMatchSnapshot();
-      });
-    it('renders "Generic Change translation" if pendingOH is -999 and user has OH role and Country Code is MX', () => {
+    it('renders "Generic Change translation" if pendingOH is -999 and user has OH role', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ReviewItemDetailsScreen
@@ -246,7 +197,6 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={['on hands change']}
-          countryCode={MX_COUNTRY_CODE}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -283,7 +233,6 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
-          countryCode={MX_COUNTRY_CODE}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -324,7 +273,6 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
-          countryCode={MX_COUNTRY_CODE}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -361,12 +309,11 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
-          countryCode={MX_COUNTRY_CODE}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('renders the details for a item with multi status 207(error retrieving sales history)', () => {
+    it('renders the details for a item with multi status 207(error retreiving sales history)', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ReviewItemDetailsScreen
@@ -401,7 +348,6 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
-          countryCode={MX_COUNTRY_CODE}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
