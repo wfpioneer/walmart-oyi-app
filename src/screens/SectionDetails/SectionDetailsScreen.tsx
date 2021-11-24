@@ -108,8 +108,8 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
                 item={item}
                 dispatch={dispatch}
                 navigation={navigation}
-              />
-            ) : <ReservePalletRow section={locationItem?.section} reservePallet={item} />
+              /> // Resolves type error, Section Id will never be zero in our case
+            ) : <ReservePalletRow sectionId={locationItem?.section.id || 0} reservePallet={item} />
         )}
         keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
       />
