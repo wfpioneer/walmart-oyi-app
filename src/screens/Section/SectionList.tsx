@@ -32,10 +32,11 @@ import COLOR from '../../themes/Color';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import { hideLocationPopup } from '../../state/actions/Location';
+import { hideLocationPopup, setCreateFlow, setSections } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
 import { LocationName } from '../../models/Location';
+import { CREATE_FLOW } from '../../models/LocationItems';
 
 const NoSectionMessage = () : JSX.Element => (
   <View style={styles.noSections}>
@@ -201,6 +202,13 @@ const SectionList = (): JSX.Element => {
     }
   }, [location]);
 
+  const handleAddSections = () => {
+    dispatch(setSections(getAllSections.result.data));
+    dispatch(setCreateFlow(CREATE_FLOW.CREATE_SECTION));
+    bottomSheetModalRef.current?.dismiss();
+    navigation.navigate('AddSection');
+  };
+
   return (
     <BottomSheetModalProvider>
       <TouchableOpacity
@@ -244,7 +252,7 @@ const SectionList = (): JSX.Element => {
         <BottomSheetAddCard
           isVisible={true}
           text={strings('LOCATION.ADD_SECTIONS')}
-          onPress={() => {}}
+          onPress={handleAddSections}
         />
         <BottomSheetClearCard
           isVisible={userFeatures.includes('manager approval')}

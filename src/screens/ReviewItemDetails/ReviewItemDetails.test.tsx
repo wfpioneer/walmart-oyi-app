@@ -313,6 +313,45 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+    it('renders the details for a item with multi status 207(error retreiving sales history)', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReviewItemDetailsScreen
+          scannedEvent={undefined}
+          isManualScanEnabled={false}
+          isWaiting={false}
+          error={undefined}
+          result={{
+            data: itemDetail[321],
+            status: 207
+          }}
+          addToPicklistStatus={defaultAsyncState}
+          completeItemApi={defaultAsyncState}
+          userId=""
+          exceptionType="NSFL"
+          actionCompleted={false}
+          pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
+          floorLocations={itemDetail[123].location.floor}
+          reserveLocations={itemDetail[123].location.reserve}
+          route={routeProp}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          scrollViewRef={scrollViewProp}
+          isSalesMetricsGraphView={false}
+          setIsSalesMetricsGraphView={jest.fn()}
+          ohQtyModalVisible={false}
+          setOhQtyModalVisible={jest.fn()}
+          errorModalVisible={false}
+          setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn(() => Promise.resolve())}
+          useEffectHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          userFeatures={[]}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
   describe('Tests Rendering \'Scan for No Action Button\'', () => {
     it('Renders Nothing for\' Scan for No Action\' button', () => {
