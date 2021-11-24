@@ -2,7 +2,7 @@ import { NavigationProp, Route } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { strings } from '../../locales';
-import { LaserPaper, PrintQueueItem, PrinterType } from '../../models/Printer';
+import { PrintQueueItem, PrinterType } from '../../models/Printer';
 import { PrintQueueScreen, handlePrint, renderPrintItem } from './PrintQueue';
 
 // Something gets into a weird state, and this seems to fix it
@@ -35,7 +35,7 @@ describe('PrintQueueScreen', () => {
     upcNbr: '123456',
     catgNbr: 2,
     signQty: 1,
-    paperSize: LaserPaper.Small,
+    paperSize: 'Small',
     worklistType: 'NSFL'
   }];
   describe('Test rendering items in printQueue', () => {
@@ -45,6 +45,8 @@ describe('PrintQueueScreen', () => {
         printQueue={[]}
         selectedPrinter={defaultPrinter}
         printAPI={defaultAsyncState}
+        printLabelAPI={defaultAsyncState}
+        printingLocationLabels=""
         dispatch={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
@@ -60,21 +62,13 @@ describe('PrintQueueScreen', () => {
     });
     it('Renders the print queue with 10 items in it', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const largePrintQueue = [{
+      const largePrintQueue: PrintQueueItem[] = [{
         itemName: 'Test item',
         itemNbr: 123456,
         upcNbr: '123456',
         catgNbr: 2,
         signQty: 1,
-        paperSize: LaserPaper.XSmall,
-        worklistType: 'NSFL'
-      }, {
-        itemName: 'Test item',
-        itemNbr: 123456,
-        upcNbr: '123456',
-        catgNbr: 2,
-        signQty: 1,
-        paperSize: LaserPaper.Small,
+        paperSize: 'XSmall',
         worklistType: 'NSFL'
       }, {
         itemName: 'Test item',
@@ -82,7 +76,7 @@ describe('PrintQueueScreen', () => {
         upcNbr: '123456',
         catgNbr: 2,
         signQty: 1,
-        paperSize: LaserPaper.Medium,
+        paperSize: 'Small',
         worklistType: 'NSFL'
       }, {
         itemName: 'Test item',
@@ -90,7 +84,7 @@ describe('PrintQueueScreen', () => {
         upcNbr: '123456',
         catgNbr: 2,
         signQty: 1,
-        paperSize: LaserPaper.Large,
+        paperSize: 'Medium',
         worklistType: 'NSFL'
       }, {
         itemName: 'Test item',
@@ -98,7 +92,15 @@ describe('PrintQueueScreen', () => {
         upcNbr: '123456',
         catgNbr: 2,
         signQty: 1,
-        paperSize: LaserPaper.Wine,
+        paperSize: 'Large',
+        worklistType: 'NSFL'
+      }, {
+        itemName: 'Test item',
+        itemNbr: 123456,
+        upcNbr: '123456',
+        catgNbr: 2,
+        signQty: 1,
+        paperSize: 'Wine',
         worklistType: 'NSFL'
       }, {
         itemName: 'Store Use Item',
@@ -106,7 +108,7 @@ describe('PrintQueueScreen', () => {
         upcNbr: '789012',
         catgNbr: 2,
         signQty: 1,
-        paperSize: LaserPaper.XSmall,
+        paperSize: 'XSmall',
         worklistType: 'NSFL'
       }, {
         itemName: 'Store Use Item',
@@ -114,7 +116,7 @@ describe('PrintQueueScreen', () => {
         upcNbr: '789012',
         catgNbr: 2,
         signQty: 1,
-        paperSize: LaserPaper.Small,
+        paperSize: 'Small',
         worklistType: 'NSFL'
       }, {
         itemName: 'Store Use Item',
@@ -122,7 +124,7 @@ describe('PrintQueueScreen', () => {
         upcNbr: '789012',
         catgNbr: 2,
         signQty: 1,
-        paperSize: LaserPaper.Medium,
+        paperSize: 'Medium',
         worklistType: 'NSFL'
       }, {
         itemName: 'Store Use Item',
@@ -130,7 +132,7 @@ describe('PrintQueueScreen', () => {
         upcNbr: '789012',
         catgNbr: 2,
         signQty: 1,
-        paperSize: LaserPaper.Large,
+        paperSize: 'Large',
         worklistType: 'NSFL'
       }, {
         itemName: 'Store Use Item',
@@ -138,13 +140,15 @@ describe('PrintQueueScreen', () => {
         upcNbr: '789012',
         catgNbr: 2,
         signQty: 1,
-        paperSize: LaserPaper.Wine,
+        paperSize: 'Wine',
         worklistType: 'NSFL'
       }];
       renderer.render(<PrintQueueScreen
         printQueue={largePrintQueue}
         selectedPrinter={defaultPrinter}
         printAPI={defaultAsyncState}
+        printLabelAPI={defaultAsyncState}
+        printingLocationLabels=""
         dispatch={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
@@ -162,7 +166,7 @@ describe('PrintQueueScreen', () => {
     it('Renders a single item for renderPrintItem', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPrintItem(mockPrintQueue, jest.fn(), jest.fn(), navigationProp, routeProp, jest.fn())[0]
+        renderPrintItem(mockPrintQueue, jest.fn(), jest.fn(), navigationProp, routeProp, jest.fn(), jest.fn())[0]
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -174,6 +178,8 @@ describe('PrintQueueScreen', () => {
         printQueue={mockPrintQueue}
         selectedPrinter={defaultPrinter}
         printAPI={defaultAsyncState}
+        printLabelAPI={defaultAsyncState}
+        printingLocationLabels=""
         dispatch={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
@@ -200,6 +206,8 @@ describe('PrintQueueScreen', () => {
         printQueue={mockPrintQueue}
         selectedPrinter={defaultPrinter}
         printAPI={defaultAsyncState}
+        printLabelAPI={defaultAsyncState}
+        printingLocationLabels=""
         dispatch={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
@@ -227,6 +235,8 @@ describe('PrintQueueScreen', () => {
         selectedPrinter={defaultPrinter}
         printAPI={printApiIsWaiting}
         dispatch={jest.fn()}
+        printLabelAPI={defaultAsyncState}
+        printingLocationLabels=""
         navigation={navigationProp}
         route={routeProp}
         itemIndexToEdit={-1}
@@ -249,7 +259,8 @@ describe('PrintQueueScreen', () => {
         navigation: navigationProp,
         printQueue: [],
         route: { key: '', name: 'TEST' },
-        selectedPrinter: defaultPrinter
+        selectedPrinter: defaultPrinter,
+        printingLocationLabels: ''
       });
 
       expect(dispatch).toHaveBeenCalled();
@@ -262,7 +273,8 @@ describe('PrintQueueScreen', () => {
         navigation: navigationProp,
         printQueue: [],
         route: { key: '', name: 'TEST' },
-        selectedPrinter: defaultPrinter
+        selectedPrinter: defaultPrinter,
+        printingLocationLabels: ''
       });
 
       expect(validateSessionCall).toHaveBeenCalled();

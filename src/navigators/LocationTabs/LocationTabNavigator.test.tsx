@@ -11,7 +11,6 @@ import {
   mockLocationDetailsLargeLocationCount
 } from '../../mockData/locationDetails';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { strings } from '../../locales';
 import store from '../../state';
 
 let navigationProp: NavigationProp<any>;
@@ -62,6 +61,7 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
         locationPopupVisible={false}
+        userFeatures={[]}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -86,6 +86,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
+        userFeatures={[]}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -110,6 +111,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
+        userFeatures={[]}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -134,6 +136,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
+        userFeatures={[]}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -160,6 +163,29 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
         locationPopupVisible={false}
+        userFeatures={[]}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders Print Label button if "location printing" feature is enabled', (): void => {
+    const renderer = ShallowRenderer.createRenderer();
+    const { floor, reserve } = mockLocationDetails;
+    renderer.render(
+      <LocationTabsNavigator
+        floorItems={floor}
+        reserveItems={reserve}
+        locationName="-"
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        scannedEvent={defaultScannedEvent}
+        trackEventCall={jest.fn()}
+        useEffectHook={jest.fn()}
+        validateSessionCall={jest.fn()}
+        isManualScanEnabled={true}
+        locationPopupVisible={false}
+        userFeatures={['location printing']}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -196,7 +222,8 @@ describe('Test Location Tabs', (): void => {
         trackEventCall: jest.fn(),
         useEffectHook: useEffect,
         validateSessionCall: mockValidateSession,
-        isManualScanEnabled: false
+        isManualScanEnabled: false,
+        userFeatures: []
       };
       const scannedEventUpdate = {
         type: 'manualscan',
@@ -206,9 +233,7 @@ describe('Test Location Tabs', (): void => {
       const { update } = render(
         <Provider store={store}>
           <NavigationContainer>
-            <LocationTabsNavigator
-              {...tabProps}
-            />
+            <LocationTabsNavigator {...tabProps} />
           </NavigationContainer>
         </Provider>
       );
@@ -241,15 +266,20 @@ describe('Test Location Tabs', (): void => {
     });
 
     it('Test if barcodeEmitter is called with "scanned" event', () => {
-      const mockNavFocused = { ...jest.requireMock('@react-navigation/native'), isFocused: jest.fn(() => true) };
+      const mockNavFocused = {
+        ...jest.requireMock('@react-navigation/native'),
+        isFocused: jest.fn(() => true)
+      };
 
       jest.spyOn(barcodeEmitter, 'addListener');
-      barcodeEmitter.addListener = jest.fn().mockImplementation((event, callback) => {
-        callback();
-        return {
-          remove: jest.fn()
-        };
-      });
+      barcodeEmitter.addListener = jest
+        .fn()
+        .mockImplementation((event, callback) => {
+          callback();
+          return {
+            remove: jest.fn()
+          };
+        });
 
       render(
         <Provider store={store}>
@@ -271,7 +301,10 @@ describe('Test Location Tabs', (): void => {
           </NavigationContainer>
         </Provider>
       );
-      expect(barcodeEmitter.addListener).toBeCalledWith('scanned', expect.any(Function));
+      expect(barcodeEmitter.addListener).toBeCalledWith(
+        'scanned',
+        expect.any(Function)
+      );
       expect(mockValidateSession).toBeCalledTimes(2);
     });
   });
