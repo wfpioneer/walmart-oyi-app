@@ -47,6 +47,8 @@ const mapStateToProps = (state: RootState) => ({
 
 // Since CN Associate JobCodes are inconsistent, this set of roles will be added
 // to all successful fluffy responses for CN
+// If we encounter future scenarios, we can modify this set of Associate roles
+// NOTE: This is only a stop-gap until a better solution is found
 const CNAssociateRoleOverrides = ['on hands change'];
 
 // This method merges our hard-coded Associate roles with our fluffy response
