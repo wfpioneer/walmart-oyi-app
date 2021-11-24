@@ -62,6 +62,7 @@ export interface ItemDetailsScreenProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
   userFeatures: string[];
+  countryCode: string;
 }
 
 export interface HandleProps {
@@ -335,25 +336,25 @@ export const renderScanForNoActionButton = (
 export const renderBarcodeErrorModal = (
   isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => (
-    <CustomModalComponent
-      isVisible={isVisible}
-      modalType="Error"
-      onClose={() => setIsVisible(false)}
-    >
-      <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-      <Text style={styles.errorText}>
-        {strings('GENERICS.BARCODE_SCAN_ERROR')}
-      </Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          style={styles.dismissButton}
-          title={strings('GENERICS.OK')}
-          backgroundColor={COLOR.TRACKER_RED}
-          onPress={() => setIsVisible(false)}
-        />
-      </View>
-    </CustomModalComponent>
-  );
+  <CustomModalComponent
+    isVisible={isVisible}
+    modalType="Error"
+    onClose={() => setIsVisible(false)}
+  >
+    <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+    <Text style={styles.errorText}>
+      {strings('GENERICS.BARCODE_SCAN_ERROR')}
+    </Text>
+    <View style={styles.buttonContainer}>
+      <Button
+        style={styles.dismissButton}
+        title={strings('GENERICS.OK')}
+        backgroundColor={COLOR.TRACKER_RED}
+        onPress={() => setIsVisible(false)}
+      />
+    </View>
+  </CustomModalComponent>
+);
 const getFloorItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.floor
   ? itemDetails.location.floor : []);
 const getReserveItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.reserve
@@ -502,8 +503,9 @@ const getexceptionType = (actionCompleted: boolean, itemDetails: ItemDetails) =>
 const gettopRightBtnTxt = (locationCount: number) => (locationCount && locationCount >= 1
   ? strings('GENERICS.SEE_ALL') : strings(GENERICS_ADD));
 const getPendingOnHandsQty = (props: ItemDetailsScreenProps, pendingOnHandsQty: number) => {
-  const { userFeatures } = props;
-  return (pendingOnHandsQty === -999 && userFeatures.includes('on hands change'));
+  const { userFeatures, countryCode } = props;
+  return (pendingOnHandsQty === -999
+      && (userFeatures.includes('on hands change') || countryCode.toUpperCase() === 'CN'));
 };
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
   const {
@@ -692,7 +694,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
-  const { userId } = useTypedSelector(state => state.User);
+  const { userId, countryCode } = useTypedSelector(state => state.User);
   const {
     exceptionType,
     actionCompleted,
@@ -738,6 +740,7 @@ const ReviewItemDetails = (): JSX.Element => {
       useEffectHook={useEffect}
       useFocusEffectHook={useFocusEffect}
       userFeatures={userFeatures}
+      countryCode={countryCode}
     />
   );
 };
