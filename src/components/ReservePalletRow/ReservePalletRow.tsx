@@ -10,8 +10,9 @@ import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
 import { deletePallet, getSectionDetails } from '../../state/actions/saga';
 import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
+import { LocationIdName } from '../../state/reducers/Location';
 
-export type ReservePalletRowProps = { section: any, reservePallet: SectionDetailsPallet };
+export type ReservePalletRowProps = { section: LocationIdName, reservePallet: SectionDetailsPallet };
 const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   const { section, reservePallet } = props;
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
     // on api success
     if (!delPalletAPI.isWaiting && delPalletAPI.result && displayConfirmation) {
       setDisplayConfirmation(false);
-      dispatch(getSectionDetails({ sectionId: section.id }));
+      dispatch(getSectionDetails({ sectionId: section.id.toString() }));
       dispatch({ type: 'API/DELETE_PALLET/RESET' });
     }
   }, [delPalletAPI]);
