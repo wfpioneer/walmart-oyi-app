@@ -193,7 +193,8 @@ export default {
     ADD_PALLET_API_ERROR: 'There was an error adding the pallet. \nPlease try again.',
     PALLET_ERROR: 'Pallet not found/Empty Pallet',
     PALLET_NOT_FOUND: 'There was an error due to Pallet not found/Empty Pallet',
-    PALLET_ADDED: 'Pallet Successfully Added'
+    PALLET_ADDED: 'Pallet Successfully Added',
+    PALLET_DELETE_CONFIRMATION: 'Confirm: \nDelete pallet'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
