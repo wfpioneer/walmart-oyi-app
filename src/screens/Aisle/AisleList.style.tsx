@@ -5,6 +5,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  disabledContainer: {
+    flex: 1,
+    opacity: 0.2
+  },
   item: {
     backgroundColor: COLOR.WHITE,
     padding: 14,
