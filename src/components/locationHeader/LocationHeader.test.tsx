@@ -18,12 +18,14 @@ describe('Test Location Header in Zone Screen', () => {
 
   it('Renders Location header with button', () => {
     const renderer = ShallowRenderer.createRenderer();
-    renderer.render(<LocationHeader
-      location="yes"
-      details="no"
-      buttonPress={() => {}}
-      buttonText="i is button"
-    />);
+    renderer.render(
+      <LocationHeader
+        location="yes"
+        details="no"
+        buttonPress={() => {}}
+        buttonText="i is button"
+      />
+    );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 });

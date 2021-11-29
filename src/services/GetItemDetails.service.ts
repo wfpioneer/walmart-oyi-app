@@ -7,7 +7,7 @@ export default class GetItemDetailsService {
   public static getItemDetails(payload: {headers: object; id: number}) {
     const urls: Environment = getEnvironment();
     return Request.get(
-      `${urls.itemDetailsURL}/item/${payload.id}`,
+      `${urls.itemDetailsURL}/v2/item/${payload.id}`,
       undefined,
       { headers: payload.headers, timeout: TIMEOUT }
     );

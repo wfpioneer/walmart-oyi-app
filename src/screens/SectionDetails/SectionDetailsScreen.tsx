@@ -102,7 +102,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
       <FlatList
         data={route.name === 'FloorDetails' ? locationItem?.floor : locationItem?.reserve}
         renderItem={({ item }) => (
-          route.name === 'FloorDetails' ? <FloorItemRow item={item} /> : <ReservePalletRow reservePallet={item} />
+          route.name === 'FloorDetails' ? <FloorItemRow item={item} /> : <ReservePalletRow section={locationItem?.section} reservePallet={item} />
         )}
         keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
       />

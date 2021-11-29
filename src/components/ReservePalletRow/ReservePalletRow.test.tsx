@@ -7,6 +7,7 @@ import { SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationI
 import store from '../../state';
 
 const mockReservePallet = mockLocationDetails.reserve[0];
+const mockSection = mockLocationDetails.section;
 
 jest.mock('react-redux', () => {
   const ActualReactRedux = jest.requireActual('react-redux');
@@ -20,7 +21,7 @@ describe('ReservePalletRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <ReservePalletRow reservePallet={mockReservePallet} />
+        <ReservePalletRow section={mockSection} reservePallet={mockReservePallet} />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -35,7 +36,7 @@ describe('ReservePalletRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <ReservePalletRow reservePallet={mockReservePalletLongFirstItemName} />
+        <ReservePalletRow section={mockSection} reservePallet={mockReservePalletLongFirstItemName} />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -46,7 +47,7 @@ describe('ReservePalletRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <ReservePalletRow reservePallet={mockReservePalletNoItems} />
+        <ReservePalletRow section={mockSection} reservePallet={mockReservePalletNoItems} />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

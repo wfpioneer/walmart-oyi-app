@@ -105,7 +105,8 @@ export default {
     RESERVE_QTY: 'Reserve',
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consolidated',
-    FLY_CLOUD_QTY: 'Fly Cloud'
+    FLY_CLOUD_QTY: 'Fly Cloud',
+    ERROR_SALES_HISTORY: 'Unable to retrieve sales history'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -133,7 +134,8 @@ export default {
     MAC_ADDRESS_ERROR: 'The MAC address is usually 12 numbers',
     PORTABLE_PRINTER: 'Portable Printer',
     PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.',
-    PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer'
+    PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer',
+    LOCATION_SUCCESS: 'Section Label Successfully Printed'
   },
   LOCATION: {
     TITLE: 'All locations',
@@ -185,12 +187,14 @@ export default {
     SCAN_PALLET: 'Scan Pallet ID',
     PALLET_VALIDATE_ERROR: 'Pallet ID can only contain numbers',
     PALLET_PLACEHOLDER: 'Enter or Scan Pallet ID',
+    PRINT_LABEL: 'Print label',
     PRINT_LABELS: 'Print labels',
     ADD_PALLET_ERROR: 'Error adding the pallet',
     ADD_PALLET_API_ERROR: 'There was an error adding the pallet. \nPlease try again.',
     PALLET_ERROR: 'Pallet not found/Empty Pallet',
     PALLET_NOT_FOUND: 'There was an error due to Pallet not found/Empty Pallet',
-    PALLET_ADDED: 'Pallet Successfully Added'
+    PALLET_ADDED: 'Pallet Successfully Added',
+    PALLET_DELETE_CONFIRMATION: 'Confirm: \nDelete pallet'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

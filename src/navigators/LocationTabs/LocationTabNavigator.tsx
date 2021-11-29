@@ -47,6 +47,7 @@ export interface LocationProps {
     trackEventCall: (eventName: string, params?: any) => void;
     validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
     locationPopupVisible: boolean;
+    userFeatures: string[];
 }
 
 interface TabHeaderProps {
@@ -127,7 +128,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     route,
     trackEventCall,
     useEffectHook,
-    validateSessionCall
+    validateSessionCall,
+    userFeatures
   } = props;
   // Call Get Section Details
   useEffectHook(() => {
@@ -167,7 +169,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           dispatch(setPrintingLocationLabels(LocationName.SECTION));
           navigation.navigate('PrintPriceSign');
         }}
-        buttonText={strings('LOCATION.PRINT_LABELS')}
+        buttonText={userFeatures.includes('location printing') ? strings('LOCATION.PRINT_LABEL') : undefined}
       />
       <Tab.Navigator
         tabBarOptions={{
@@ -261,6 +263,7 @@ const LocationTabs = () : JSX.Element => {
           scannedEvent={scannedEvent}
           trackEventCall={trackEvent}
           validateSessionCall={validateSession}
+          userFeatures={userFeatures}
         />
       </TouchableOpacity>
       <BottomSheetModal

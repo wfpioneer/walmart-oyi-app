@@ -242,7 +242,7 @@ const SectionList = (): JSX.Element => {
         style={styles.bottomSheetModal}
       >
         <BottomSheetPrintCard
-          isVisible={true}
+          isVisible={userFeatures.includes('location printing')}
           text={strings('LOCATION.PRINT_SECTION')}
           onPress={() => {
             dispatch(hideLocationPopup());

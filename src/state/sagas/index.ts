@@ -19,6 +19,7 @@ import GetFluffyRolesService from '../../services/GetFluffyRoles.service';
 import GetApprovalListService from '../../services/GetApprovalList.service';
 import UpdateApprovalListService from '../../services/UpdateApprovalList.service';
 import LocationService from '../../services/Location.service';
+import DeletePalletService from '../../services/DeletePallet.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
@@ -40,7 +41,9 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_AISLE, actions.getAisle, LocationService.getAisle),
   makeAsyncSaga(saga.GET_SECTIONS, actions.getSections, LocationService.getSections),
   makeAsyncSaga(saga.GET_SECTION_DETAILS, actions.getSectionDetails, LocationService.getSectionDetails),
-  makeAsyncSaga(saga.ADD_PALLET, actions.addPallet, AddPalletService.addPallet)
+  makeAsyncSaga(saga.ADD_PALLET, actions.addPallet, AddPalletService.addPallet),
+  makeAsyncSaga(saga.DELETE_PALLET, actions.deletePallet, DeletePalletService.deletePallet),
+  makeAsyncSaga(saga.PRINT_LOCATION_LABELS, actions.printLocationLabels, PrintService.printLabels)
 ];
 
 export default function* rootSaga() {

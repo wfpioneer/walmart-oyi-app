@@ -105,7 +105,8 @@ export default {
     RESERVE_QTY: '高货架库存',
     CLAIMS_QTY: '索赔库存',
     CONSOLIDATED_QTY: '临时外仓',
-    FLY_CLOUD_QTY: '云仓库存'
+    FLY_CLOUD_QTY: '云仓库存',
+    ERROR_SALES_HISTORY: '无法获取历史销售'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
@@ -133,7 +134,8 @@ export default {
     MAC_ADDRESS_ERROR: 'MAC地址通常是12个数字',
     PORTABLE_PRINTER: '便携式打印机',
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
-    PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机'
+    PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
+    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Mandarin Translation
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -167,7 +169,7 @@ export default {
     NO_ZONES_AVAILABLE: '无区域',
     NO_AISLES_AVAILABLE: '无通道',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
-    CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
+    CLEAR_ALL: '全部清除',
     CLEAR_SECTION: '清除此货架位置',
     REMOVE_SECTION: '移除此货架位置',
     REMOVE_ZONE: '移除此区域',
@@ -185,12 +187,14 @@ export default {
     SCAN_PALLET: '扫描卡板标签',
     PALLET_VALIDATE_ERROR: '卡板号只能是数字',
     PALLET_PLACEHOLDER: '输入或扫描卡板号',
+    PRINT_LABEL: '打印标签',
     PRINT_LABELS: '打印标签',
     ADD_PALLET_ERROR: '添加卡板时出错',
     ADD_PALLET_API_ERROR: '错误添加卡板标签，请重试',
     PALLET_ERROR: '卡板未找到/空卡板',
     PALLET_NOT_FOUND: '因未找到卡板/卡板为空系统报错',
-    PALLET_ADDED: '卡板添加成功'
+    PALLET_ADDED: '卡板添加成功',
+    PALLET_DELETE_CONFIRMATION: '确认：删除卡板'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

@@ -249,7 +249,30 @@ export const renderLocationComponent = (props: (RenderProps & HandleProps), item
     </View>
   );
 };
-
+const MULTI_STATUS = 207;
+export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
+  result: any, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
+  if (result && result.status !== MULTI_STATUS) {
+    return (
+      <SFTCard
+        title={strings('ITEM.SALES_METRICS')}
+        subTitle={updatedSalesTS}
+        bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
+        bottomRightBtnAction={[toggleSalesGraphView]}
+      >
+        <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
+      </SFTCard>
+    );
+  }
+  return (
+    <View>
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
+        <Text>{strings('ITEM.ERROR_SALES_HISTORY')}</Text>
+      </View>
+    </View>
+  );
+};
 const completeAction = () => {
   // TODO: reinstantiate when ios device support is needed
   // dispatch(actionCompletedAction());
@@ -312,25 +335,25 @@ export const renderScanForNoActionButton = (
 export const renderBarcodeErrorModal = (
   isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => (
-    <CustomModalComponent
-      isVisible={isVisible}
-      modalType="Error"
-      onClose={() => setIsVisible(false)}
-    >
-      <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-      <Text style={styles.errorText}>
-        {strings('GENERICS.BARCODE_SCAN_ERROR')}
-      </Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          style={styles.dismissButton}
-          title={strings('GENERICS.OK')}
-          backgroundColor={COLOR.TRACKER_RED}
-          onPress={() => setIsVisible(false)}
-        />
-      </View>
-    </CustomModalComponent>
-  );
+  <CustomModalComponent
+    isVisible={isVisible}
+    modalType="Error"
+    onClose={() => setIsVisible(false)}
+  >
+    <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+    <Text style={styles.errorText}>
+      {strings('GENERICS.BARCODE_SCAN_ERROR')}
+    </Text>
+    <View style={styles.buttonContainer}>
+      <Button
+        style={styles.dismissButton}
+        title={strings('GENERICS.OK')}
+        backgroundColor={COLOR.TRACKER_RED}
+        onPress={() => setIsVisible(false)}
+      />
+    </View>
+  </CustomModalComponent>
+);
 const getFloorItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.floor
   ? itemDetails.location.floor : []);
 const getReserveItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.reserve
@@ -655,14 +678,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderLocationComponent(props, itemDetails)}
             </SFTCard>
-            <SFTCard
-              title={strings('ITEM.SALES_METRICS')}
-              subTitle={updatedSalesTS}
-              bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
-              bottomRightBtnAction={[toggleSalesGraphView]}
-            >
-              <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
-            </SFTCard>
+            {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
+              itemDetails, isSalesMetricsGraphView)}
           </View>
           )}
       </ScrollView>
