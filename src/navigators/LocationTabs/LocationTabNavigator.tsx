@@ -134,7 +134,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   // Call Get Section Details
   useEffectHook(() => {
     validateSessionCall(navigation, route.name).then(() => {
-      if (scannedEvent.value) {
+      // Handles scanned event changes if the screen is in focus
+      if (scannedEvent.value && navigation.isFocused()) {
         dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
       }
     }).catch(() => {});
