@@ -18,6 +18,7 @@ describe('ChangePrinterScreen', () => {
         navigation={navigationProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        printers={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -32,6 +33,7 @@ describe('ChangePrinterScreen', () => {
         navigation={navigationProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        printers={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

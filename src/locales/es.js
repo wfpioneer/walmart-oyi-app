@@ -135,7 +135,8 @@ export default {
     PORTABLE_PRINTER: 'Impresora portátil',
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Spanish translation
+    LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Spanish translation
+    DUPLICATE_PRINTER: '' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -172,11 +173,11 @@ export default {
     CLEAR_ALL: 'Limpiar',
     CLEAR_SECTION: 'Limpiar sección',
     REMOVE_SECTION: 'Eliminar sección',
-    REMOVE_ZONE: 'Eliminar la zona',
+    REMOVE_AREA: 'Eliminar la zona',
     REMOVE_ALL: 'Remove all', // TODO Spanish Translation
     ADD: 'Agregar',
     SCAN_LOCATION: 'Nombre de ubicación invalida e.g: ABCD1-2',
-    ADD_ZONE: 'Añadir zona',
+    ADD_AREA: 'Añadir zona',
     ADD_AISLES: 'Agregar pasillos',
     CREATED_ON: 'Creado en',
     MORE: 'Más',

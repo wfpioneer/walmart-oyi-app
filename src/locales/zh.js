@@ -135,7 +135,8 @@ export default {
     PORTABLE_PRINTER: '便携式打印机',
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
     PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Mandarin Translation
+    LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Mandarin Translation
+    DUPLICATE_PRINTER: '' // TODO Mandarin translation
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -172,11 +173,11 @@ export default {
     CLEAR_ALL: '全部清除',
     CLEAR_SECTION: '清除此货架位置',
     REMOVE_SECTION: '移除此货架位置',
-    REMOVE_ZONE: '移除此区域',
+    REMOVE_AREA: '移除此区域',
     REMOVE_ALL: 'Remove all', // TODO Mandarin Translation
     ADD: '增加',
     SCAN_LOCATION: '无效位置名，如A1-2',
-    ADD_ZONE: '添加一个新区域',
+    ADD_AREA: '添加一个新区域',
     ADD_AISLES: '增加通道',
     CREATED_ON: '创建于',
     MORE: '更多',

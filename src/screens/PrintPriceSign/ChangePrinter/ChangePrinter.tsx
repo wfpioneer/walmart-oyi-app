@@ -13,6 +13,7 @@ import { addToPrinterList } from '../../../state/actions/Print';
 import { Printer, PrinterType } from '../../../models/Printer';
 import { setManualScan, setScannedEvent } from '../../../state/actions/Global';
 import { trackEvent } from '../../../utils/AppCenterTool';
+import { useTypedSelector } from '../../../state/reducers/RootReducer';
 
 interface ChangePrinterProps {
   macAddress: string;
@@ -21,6 +22,7 @@ interface ChangePrinterProps {
   navigation: NavigationProp<any>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
   trackEventCall: (eventName: string, params?: any) => void;
+  printers: Printer[]
 }
 export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
   const {
@@ -29,7 +31,8 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
     dispatch,
     navigation,
     useEffectHook,
-    trackEventCall
+    trackEventCall,
+    printers
   } = props;
   const macRegex = /^[0-9a-fA-F]{12}/;
 
@@ -80,6 +83,13 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
         <Text style={styles.errorText}>{strings('PRINT.MAC_ADDRESS_ERROR')}</Text>
       </View>
       )}
+      { (printers.length > 0 && printers.find(print => print.id === macAddress))
+      && (
+      <View style={styles.alertView}>
+        <MaterialCommunityIcons name="alert-circle" size={20} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('PRINT.DUPLICATE_PRINTER')}</Text>
+      </View>
+      )}
       <Button
         title={strings('GENERICS.SUBMIT')}
         style={styles.button}
@@ -94,7 +104,7 @@ export const ChangePrinter = (): JSX.Element => {
   const [macAddress, updateMacAddress] = useState('');
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
+  const printers = useTypedSelector(state => state.Print.printerList);
   return (
     <ChangePrinterScreen
       macAddress={macAddress}
@@ -103,6 +113,7 @@ export const ChangePrinter = (): JSX.Element => {
       navigation={navigation}
       useEffectHook={useEffect}
       trackEventCall={trackEvent}
+      printers={printers}
     />
   );
 };

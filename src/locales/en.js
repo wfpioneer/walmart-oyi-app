@@ -135,7 +135,8 @@ export default {
     PORTABLE_PRINTER: 'Portable Printer',
     PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.',
     PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed'
+    LOCATION_SUCCESS: 'Section Label Successfully Printed',
+    DUPLICATE_PRINTER: 'Already a printer exists'
   },
   LOCATION: {
     TITLE: 'All locations',
@@ -173,10 +174,10 @@ export default {
     SCAN_LOCATION: 'Invalid location name Ex: ABC1-2',
     CLEAR_SECTION: 'Clear this section',
     REMOVE_SECTION: 'Remove this section',
-    REMOVE_ZONE: 'Remove this zone',
+    REMOVE_AREA: 'Remove this area',
     REMOVE_ALL: 'Remove all',
     ADD: 'Add',
-    ADD_ZONE: 'Add a zone',
+    ADD_AREA: 'Add an area',
     ADD_AISLES: 'Add aisles',
     CREATED_ON: 'Created on',
     MORE: 'More',
