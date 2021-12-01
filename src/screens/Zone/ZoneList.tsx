@@ -190,7 +190,7 @@ const ZoneList = (): JSX.Element => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['22%', '50%'], []);
+  const snapPoints = useMemo(() => ['15%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {
@@ -218,7 +218,7 @@ const ZoneList = (): JSX.Element => {
         onPress={() => dispatch(hideLocationPopup())}
         activeOpacity={1}
         disabled={!location.locationPopupVisible}
-        style={styles.container}
+        style={location.locationPopupVisible ? styles.disabledContainer : styles.container}
       >
         <ZoneScreen
           siteId={siteId}
@@ -244,7 +244,7 @@ const ZoneList = (): JSX.Element => {
         <BottomSheetAddCard
           isManagerOption={true}
           isVisible={true}
-          text={strings('LOCATION.ADD_AREA')}
+          text={strings('LOCATION.ADD_ZONE')}
           onPress={handleAddZone}
         />
       </BottomSheetModal>

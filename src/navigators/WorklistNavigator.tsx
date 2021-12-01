@@ -4,7 +4,7 @@ import { Animated, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import SideMenu from 'react-native-side-menu';
+import SideMenu from 'react-native-side-menu-updated';
 import { useNavigation } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { TodoWorklist } from '../screens/Worklist/TodoWorklist';

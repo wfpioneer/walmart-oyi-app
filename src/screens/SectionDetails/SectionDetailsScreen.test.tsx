@@ -39,7 +39,10 @@ describe('Test Location Details Screen', () => {
     };
 
     it('Renders reserve list when reserve tab is selected', () => {
-      const reserveSelectedRouteProp = { ...defaultRouteProp, name: 'ReserveDetails' };
+      const reserveSelectedRouteProp = {
+        ...defaultRouteProp,
+        name: 'ReserveDetails'
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
@@ -50,6 +53,7 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
+          addAPI={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -86,6 +90,7 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
+          addAPI={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -108,6 +113,7 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
+          addAPI={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -130,6 +136,7 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
+          addAPI={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -152,6 +159,7 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
+          addAPI={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -172,6 +180,7 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
+          addAPI={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

@@ -195,7 +195,8 @@ const SectionList = (): JSX.Element => {
   const dispatch = useDispatch();
   const route = useRoute();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ['27%', '60%'], []);
+  const managerSnapPoints = useMemo(() => ['60%'], []);
+  const associateSnapPoints = useMemo(() => ['30%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {
@@ -221,7 +222,7 @@ const SectionList = (): JSX.Element => {
         onPress={() => dispatch(hideLocationPopup())}
         activeOpacity={1}
         disabled={!location.locationPopupVisible}
-        style={styles.container}
+        style={location.locationPopupVisible ? styles.disabledContainer : styles.container}
       >
         <SectionScreen
           aisleId={aisleId}
@@ -241,7 +242,7 @@ const SectionList = (): JSX.Element => {
       </TouchableOpacity>
       <BottomSheetModal
         ref={bottomSheetModalRef}
-        snapPoints={snapPoints}
+        snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
         index={0}
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}

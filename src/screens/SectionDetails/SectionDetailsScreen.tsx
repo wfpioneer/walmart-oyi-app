@@ -64,7 +64,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
         dispatch(selectSection(section.id, section.name));
       }
     }
-  });
+  }, []);
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
 
   if (getSectionDetailsApi.isWaiting) {
@@ -102,7 +102,14 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
       <FlatList
         data={route.name === 'FloorDetails' ? locationItem?.floor : locationItem?.reserve}
         renderItem={({ item }) => (
-          route.name === 'FloorDetails' ? <FloorItemRow item={item} /> : <ReservePalletRow section={locationItem?.section} reservePallet={item} />
+          route.name === 'FloorDetails'
+            ? (
+              <FloorItemRow
+                item={item}
+                dispatch={dispatch}
+                navigation={navigation}
+              /> // Resolves type error, Section Id will never be zero in our case
+            ) : <ReservePalletRow sectionId={locationItem?.section.id || 0} reservePallet={item} />
         )}
         keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
       />

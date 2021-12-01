@@ -105,7 +105,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       );
     }
 
-    if (this.props.worklistSummaryApiState.error) {
+    if (this.props.worklistSummaryApiState.error
+      || (this.props.worklistSummaryApiState.result && this.props.worklistSummaryApiState.result.status === 204)) {
       return (
         <View style={[styles.container, styles.safeAreaView]}>
           <MaterialCommunityIcons name="alert" size={50} color={COLOR.RED_500} />

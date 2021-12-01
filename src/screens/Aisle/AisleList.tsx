@@ -186,7 +186,8 @@ const AisleList = (): JSX.Element => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['33%', '50%'], []);
+  const managerSnapPoints = useMemo(() => ['30%'], []);
+  const associateSnapPoints = useMemo(() => ['15%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {
@@ -211,7 +212,7 @@ const AisleList = (): JSX.Element => {
         onPress={() => dispatch(hideLocationPopup())}
         activeOpacity={1}
         disabled={!locationPopupVisible}
-        style={styles.container}
+        style={locationPopupVisible ? styles.disabledContainer : styles.container}
       >
         <AisleScreen
           zoneId={zoneId}
@@ -230,7 +231,7 @@ const AisleList = (): JSX.Element => {
       </TouchableOpacity>
       <BottomSheetModal
         ref={bottomSheetModalRef}
-        snapPoints={snapPoints}
+        snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
         index={0}
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}
@@ -244,7 +245,7 @@ const AisleList = (): JSX.Element => {
           />
           <BottomSheetRemoveCard
             onPress={() => {}}
-            text={strings('LOCATION.REMOVE_AREA')}
+            text={strings('LOCATION.REMOVE_ZONE')}
             isVisible={userFeatures.includes('manager approval')}
           />
         </BottomSheetView>

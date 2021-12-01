@@ -243,7 +243,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         name="AddZone"
         component={AddZone}
         options={{
-          headerTitle: strings('LOCATION.ADD_AREA')
+          headerTitle: strings('LOCATION.ADD_ZONE')
         }}
       />
       <Stack.Screen

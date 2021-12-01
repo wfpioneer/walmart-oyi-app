@@ -103,7 +103,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="AddZone"
     options={
       Object {
-        "headerTitle": "[missing \\"en.LOCATION.ADD_AREA\\" translation]",
+        "headerTitle": "[missing \\"en.LOCATION.ADD_ZONE\\" translation]",
       }
     }
   />
@@ -222,7 +222,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="AddZone"
     options={
       Object {
-        "headerTitle": "[missing \\"en.LOCATION.ADD_AREA\\" translation]",
+        "headerTitle": "[missing \\"en.LOCATION.ADD_ZONE\\" translation]",
       }
     }
   />
