@@ -43,21 +43,7 @@ export default StyleSheet.create({
     textAlignVertical: 'center'
   },
   doneButton: {
-    backgroundColor: COLOR.MAIN_THEME_COLOR,
-    borderRadius: 4,
-    borderColor: COLOR.MAIN_THEME_COLOR,
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    height: 40,
-    paddingVertical: 10,
-    marginVertical: 10,
-    marginHorizontal: 15
-  },
-  buttonText: {
-    color: COLOR.WHITE,
-    textAlign: 'center'
+    margin: 15
   },
   bodyContainer: {
     alignItems: 'stretch',
@@ -66,7 +52,8 @@ export default StyleSheet.create({
     marginTop: 5
   },
   buttonContainer: {
-    flex: 0.1
+    flex: 0.1,
+    marginBottom: 10
   },
   invalidLabel: {
     fontSize: 10,

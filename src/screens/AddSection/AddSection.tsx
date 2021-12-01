@@ -6,6 +6,7 @@ import { strings } from '../../locales';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { CreateAisles, LocationIdName } from '../../state/reducers/Location';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
+import Button from '../../components/buttons/Button';
 import { CREATE_FLOW } from '../../models/LocationItems';
 import { useDispatch } from 'react-redux';
 import { setAisleSectionCount } from '../../state/actions/Location';
@@ -137,13 +138,12 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
+        <Button
+          title={strings('GENERICS.CONTINUE')}
           style={styles.doneButton}
           onPress={handleContinue}
           disabled={!validateSectionCounts(props.aislesToCreate, props.existingSections)}
-        >
-          <Text style={styles.buttonText}>{strings('GENERICS.CONTINUE')}</Text>
-        </TouchableOpacity>
+        />
       </View>
     </View>
   );
