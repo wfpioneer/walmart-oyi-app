@@ -40,8 +40,8 @@ export interface LocationItem {
     id: number;
     name: string;
   };
-  floor: SectionDetailsItem[];
-  reserve: SectionDetailsPallet[];
+  items: SectionDetailsItem[];
+  pallets: SectionDetailsPallet[];
 }
 
 export interface PossibleZone {
@@ -49,7 +49,7 @@ export interface PossibleZone {
   description: string;
 }
 
-export enum CREATE_FLOW  {
+export enum CREATE_FLOW {
   CREATE_ZONE = 'CREATE_ZONE',
   CREATE_AISLE = 'CREATE_AISLE',
   CREATE_SECTION = 'CREATE_SECTION',
