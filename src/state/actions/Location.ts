@@ -5,6 +5,7 @@ import {
   SectionItem,
   ZoneItem
 } from '../../models/LocationItems';
+import { LocationIdName } from '../reducers/Location';
 
 export const SELECT_ZONE = 'LOCATION/SELECT_ZONE';
 export const SET_ZONES = 'LOCATION/SET_ZONES';
@@ -18,7 +19,9 @@ export const RESET_SECTION_NAME = 'LOCATION/RESET_SECTION_NAME';
 export const SET_POSSIBLE_ZONES = 'LOCATION/SET_POSSIBLE_ZONES';
 export const SET_CREATE_FLOW = 'LOCATION/SET_CREATE_FLOW';
 export const SET_NEW_ZONE = 'LOCATION/SET_NEW_ZONE';
-export const SET_NUMBER_OF_AISLES_TO_CREATE = 'LOCATION/SET_NUMBER_OF_AISLES_TO_CREATE';
+export const SET_AISLES_TO_CREATE = 'LOCATION/SET_NUMBER_OF_AISLES_TO_CREATE';
+export const SET_AISLES_TO_CREATE_TO_EXISTING_AISLE = 'LOCATION/SET_AISLES_TO_CREATE_TO_EXISTING_AISLE';
+export const SET_AISLE_SECTION_COUNT = 'LOCATION/SET_AISLE_SECTION_COUNT';
 
 export const selectZone = (id: number, name: string) => ({
   type: SELECT_ZONE,
@@ -81,14 +84,27 @@ export const setCreateFlow = (createFlow: CREATE_FLOW) => ({
   payload: createFlow
 } as const);
 
-export const setNumberOfAislesToCreate = (aisles: number) => ({
-  type: SET_NUMBER_OF_AISLES_TO_CREATE,
+export const setAislesToCreate = (aisles: number) => ({
+  type: SET_AISLES_TO_CREATE,
   payload: aisles
+} as const);
+
+export const setAislesToCreateToExistingAisle = (existingAisle: LocationIdName) => ({
+  type: SET_AISLES_TO_CREATE_TO_EXISTING_AISLE,
+  payload: existingAisle
 } as const);
 
 export const setNewZone = (name: string) => ({
   type: SET_NEW_ZONE,
   payload: name
+} as const);
+
+export const setAisleSectionCount = (aisleIndex: number, sectionCount: number) => ({
+  type: SET_AISLE_SECTION_COUNT,
+  payload: {
+    aisleIndex,
+    sectionCount
+  }
 } as const);
 
 export type Actions =
@@ -104,4 +120,6 @@ export type Actions =
   | ReturnType<typeof setPossibleZones>
   | ReturnType<typeof setCreateFlow>
   | ReturnType<typeof setNewZone>
-  | ReturnType<typeof setNumberOfAislesToCreate>
+  | ReturnType<typeof setAislesToCreate>
+  | ReturnType<typeof setAislesToCreateToExistingAisle>
+  | ReturnType<typeof setAisleSectionCount>

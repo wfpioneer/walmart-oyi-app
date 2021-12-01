@@ -32,7 +32,12 @@ import COLOR from '../../themes/Color';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import { hideLocationPopup, setCreateFlow, setSections } from '../../state/actions/Location';
+import {
+  hideLocationPopup,
+  setAislesToCreateToExistingAisle,
+  setCreateFlow,
+  setSections
+} from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
 import { LocationName } from '../../models/Location';
@@ -205,6 +210,7 @@ const SectionList = (): JSX.Element => {
   const handleAddSections = () => {
     dispatch(setSections(getAllSections.result.data));
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_SECTION));
+    dispatch(setAislesToCreateToExistingAisle({ id: aisleId, name: aisleName }));
     bottomSheetModalRef.current?.dismiss();
     navigation.navigate('AddSection');
   };
