@@ -56,7 +56,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
         <Text style={styles.palletCreateTs}>
           {`${strings('LOCATION.CREATED_ON')} ${reservePallet.palletCreateTS}`}
         </Text>
-        { reservePallet.items.length > 0 && (
+        { reservePallet.items && reservePallet.items.length > 0 && (
         <View style={styles.itemContainer}>
           <Text style={styles.itemNbr}>
             {`${strings('ITEM.ITEM')} ${reservePallet.items[0]?.itemNbr}`}

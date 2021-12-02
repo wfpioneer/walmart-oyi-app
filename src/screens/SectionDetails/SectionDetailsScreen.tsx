@@ -107,7 +107,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
   return (
     <View style={styles.locDetailsScreenContainer}>
       <FlatList
-        data={route.name === 'FloorDetails' ? locationItem?.items : locationItem?.pallets}
+        data={route.name === 'FloorDetails' ? locationItem?.items.sectionItems : locationItem?.pallets.palletData}
         renderItem={({ item }) => (
           route.name === 'FloorDetails'
             ? <FloorItemRow item={item} />

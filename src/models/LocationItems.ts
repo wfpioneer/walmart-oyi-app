@@ -24,7 +24,7 @@ export interface SectionDetailsItem {
 export interface SectionDetailsPallet {
   palletId: number;
   palletCreateTS: string;
-  items: Omit<SectionDetailsItem, 'price'>[];
+  items?: Omit<SectionDetailsItem, 'price'>[];
 }
 
 export interface LocationItem {
@@ -40,8 +40,8 @@ export interface LocationItem {
     id: number;
     name: string;
   };
-  items: SectionDetailsItem[];
-  pallets: SectionDetailsPallet[];
+  items: { sectionItems: SectionDetailsItem[] };
+  pallets: { palletData: SectionDetailsPallet[] };
 }
 
 export interface PossibleZone {

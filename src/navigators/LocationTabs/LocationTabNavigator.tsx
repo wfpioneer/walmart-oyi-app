@@ -251,8 +251,8 @@ const LocationTabs = () : JSX.Element => {
       >
         <LocationTabsNavigator
           dispatch={dispatch}
-          floorItems={locItem?.items ?? []}
-          reserveItems={locItem?.pallets ?? []}
+          floorItems={locItem?.items.sectionItems ?? []}
+          reserveItems={locItem?.pallets.palletData ?? []}
           locationName={locationName}
           locationPopupVisible={locationPopupVisible}
           isManualScanEnabled={isManualScanEnabled}
