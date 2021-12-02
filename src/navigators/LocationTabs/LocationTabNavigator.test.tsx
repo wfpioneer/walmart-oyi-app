@@ -45,12 +45,12 @@ describe('Test Location Tabs', (): void => {
   it('Renders Location Tabs with Mock Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const {
-      floor, reserve, zone, aisle, section
+      items, pallets, zone, aisle, section
     } = mockLocationDetails;
     renderer.render(
       <LocationTabsNavigator
-        floorItems={floor}
-        reserveItems={reserve}
+        floorItems={items.sectionItems}
+        reserveItems={pallets.palletData}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
         dispatch={jest.fn()}
         navigation={navigationProp}
@@ -70,12 +70,12 @@ describe('Test Location Tabs', (): void => {
   it('Renders Location Tabs with Mock Empty Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const {
-      floor, reserve, zone, aisle, section
+      items, pallets, zone, aisle, section
     } = mockLocationDetailsEmpty;
     renderer.render(
       <LocationTabsNavigator
-        floorItems={floor}
-        reserveItems={reserve}
+        floorItems={items.sectionItems}
+        reserveItems={pallets.palletData}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
         dispatch={jest.fn()}
         locationPopupVisible={false}
@@ -95,12 +95,12 @@ describe('Test Location Tabs', (): void => {
   it('Renders Location Tabs with Mock Large Location Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const {
-      floor, reserve, zone, aisle, section
+      items, pallets, zone, aisle, section
     } = mockLocationDetailsLargeLocationCount;
     renderer.render(
       <LocationTabsNavigator
-        floorItems={floor}
-        reserveItems={reserve}
+        floorItems={items.sectionItems}
+        reserveItems={pallets.palletData}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
         dispatch={jest.fn()}
         locationPopupVisible={false}
@@ -120,12 +120,12 @@ describe('Test Location Tabs', (): void => {
   it('Renders Manual Scan Component when isManualScanEnabled is set to true', () => {
     const renderer = ShallowRenderer.createRenderer();
     const {
-      floor, reserve, zone, aisle, section
+      items, pallets, zone, aisle, section
     } = mockLocationDetails;
     renderer.render(
       <LocationTabsNavigator
-        floorItems={floor}
-        reserveItems={reserve}
+        floorItems={items.sectionItems}
+        reserveItems={pallets.palletData}
         locationName={`${zone.name}${aisle.name}-${section.name}`}
         dispatch={jest.fn()}
         locationPopupVisible={false}
@@ -144,15 +144,15 @@ describe('Test Location Tabs', (): void => {
 
   it('Renders Location header as Scanned Event Value when location name is "-"', (): void => {
     const renderer = ShallowRenderer.createRenderer();
-    const { floor, reserve } = mockLocationDetails;
+    const { items, pallets } = mockLocationDetails;
     const mockScannedEvent = {
       type: 'Test',
       value: 'SCAN1-1'
     };
     renderer.render(
       <LocationTabsNavigator
-        floorItems={floor}
-        reserveItems={reserve}
+        floorItems={items.sectionItems}
+        reserveItems={pallets.palletData}
         locationName="-"
         dispatch={jest.fn()}
         navigation={navigationProp}
@@ -170,11 +170,11 @@ describe('Test Location Tabs', (): void => {
   });
   it('Renders Print Label button if "location printing" feature is enabled', (): void => {
     const renderer = ShallowRenderer.createRenderer();
-    const { floor, reserve } = mockLocationDetails;
+    const { items, pallets } = mockLocationDetails;
     renderer.render(
       <LocationTabsNavigator
-        floorItems={floor}
-        reserveItems={reserve}
+        floorItems={items.sectionItems}
+        reserveItems={pallets.palletData}
         locationName="-"
         dispatch={jest.fn()}
         navigation={navigationProp}
