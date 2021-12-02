@@ -43,17 +43,7 @@ export default StyleSheet.create({
     textAlignVertical: 'center'
   },
   continueButton: {
-    backgroundColor: COLOR.MAIN_THEME_COLOR,
-    borderRadius: 4,
-    borderColor: COLOR.MAIN_THEME_COLOR,
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    height: 40,
-    paddingVertical: 10,
-    marginVertical: 10,
-    marginHorizontal: 15
+    margin: 15
   },
   buttonText: {
     color: COLOR.WHITE,
@@ -65,7 +55,8 @@ export default StyleSheet.create({
     flex: 0.9
   },
   buttonContainer: {
-    flex: 0.1
+    flex: 0.1,
+    marginBottom: 15
   },
   invalidLabel: {
     fontSize: 10,

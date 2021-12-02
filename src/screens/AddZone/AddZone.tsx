@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import React, { useLayoutEffect, useState } from 'react';
+import { Keyboard, KeyboardAvoidingView, Text, View } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { Dispatch } from 'redux';
 import { Picker } from '@react-native-picker/picker';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
+import Button from '../../components/buttons/Button';
 import styles from './AddZone.style';
 import { CREATE_FLOW, PossibleZone, ZoneItem } from '../../models/LocationItems';
 import { setAislesToCreate, setNewZone } from '../../state/actions/Location';
@@ -59,6 +60,21 @@ const disableContinue = (aisles: number, existingAisles = 0, selectedZone: strin
   || selectedZone === '';
 
 export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
+  useLayoutEffect(() => {
+    if (props.navigation.isFocused()) {
+      if (props.createFlow === CREATE_FLOW.CREATE_AISLE) {
+        props.navigation.setOptions({
+          headerTitle: strings('LOCATION.ADD_AISLES')
+        });
+      }
+      else {
+        props.navigation.setOptions({
+          headerTitle: strings('LOCATION.ADD_ZONE')
+        });
+      }
+    }
+  },[]);
+
   const handleIncreaseAisle = () => {
     props.setNumberOfAisles((prevState: number) => {
       if (prevState < NEW_ZONE_AISLE_MAX - props.existingAisles) {
@@ -95,8 +111,18 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
     props.navigation.navigate('AddSection');
   };
 
+  const handleUnhandledTouches = () => {
+    Keyboard.dismiss();
+    return false
+  };
+
   return (
-    <View style={styles.safeAreaView}>
+    <KeyboardAvoidingView
+      style={styles.safeAreaView}
+      behavior="height"
+      keyboardVerticalOffset={110}
+      onStartShouldSetResponder={handleUnhandledTouches}
+    >
       <View style={styles.bodyContainer}>
         <View style={styles.zonePickerContainer}>
           <View style={styles.labelContainer}>
@@ -133,15 +159,14 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.continueButton}
-          disabled={disableContinue(props.numberOfAisles, props.existingAisles, props.selectedZone)}
+        <Button
+          title={strings('GENERICS.CONTINUE')}
           onPress={handleContinue}
-        >
-          <Text style={styles.buttonText}>{strings('GENERICS.CONTINUE')}</Text>
-        </TouchableOpacity>
+          disabled={disableContinue(props.numberOfAisles, props.existingAisles, props.selectedZone)}
+          style={styles.continueButton}
+        />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

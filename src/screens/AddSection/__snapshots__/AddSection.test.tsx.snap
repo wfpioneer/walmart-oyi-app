@@ -45,7 +45,7 @@ exports[`AddZoneScreen AddSectionScreen with invalid section count 1`] = `
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 10,
+        "marginBottom": 15,
       }
     }
   >
@@ -124,7 +124,7 @@ exports[`AddZoneScreen AddSectionScreen with valid input from add aisle 1`] = `
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 10,
+        "marginBottom": 15,
       }
     }
   >
@@ -195,7 +195,7 @@ exports[`AddZoneScreen AddSectionScreen with valid input from add section 1`] = 
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 10,
+        "marginBottom": 15,
       }
     }
   >
@@ -274,7 +274,7 @@ exports[`AddZoneScreen AddSectionScreen with valid input from add zone 1`] = `
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 10,
+        "marginBottom": 15,
       }
     }
   >
