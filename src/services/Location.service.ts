@@ -30,7 +30,7 @@ export default class LocationService {
   public static getSectionDetails(payload: {sectionId: string}): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.get(
-      `${urls.locationUrl}/section/${payload.sectionId}/detail`
+      `${urls.locationUrl}/v1/section/${payload.sectionId}/detail`
     );
   }
 }
