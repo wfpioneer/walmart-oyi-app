@@ -1,5 +1,10 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, Text, View } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Text,
+  View
+} from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { Dispatch } from 'redux';
 import { Picker } from '@react-native-picker/picker';
@@ -43,10 +48,10 @@ const addZonesToPicker = (
       );
     default:
       return [<Picker.Item label="" value="" key={-1} />,
-        ...availableZones.map((zone: PossibleZone, index: number) => {
+        ...availableZones.map((zone: PossibleZone) => {
           const zoneLabel = `${zone.name} - ${zone.description}`;
           return (
-            <Picker.Item label={zoneLabel} value={zone.name} key={zoneLabel + index} />
+            <Picker.Item label={zoneLabel} value={zone.name} key={zoneLabel} />
           );
         })];
   }
@@ -66,14 +71,13 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
         props.navigation.setOptions({
           headerTitle: strings('LOCATION.ADD_AISLES')
         });
-      }
-      else {
+      } else {
         props.navigation.setOptions({
           headerTitle: strings('LOCATION.ADD_ZONE')
         });
       }
     }
-  },[]);
+  }, []);
 
   const handleIncreaseAisle = () => {
     props.setNumberOfAisles((prevState: number) => {
@@ -113,7 +117,7 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
 
   const handleUnhandledTouches = () => {
     Keyboard.dismiss();
-    return false
+    return false;
   };
 
   return (
