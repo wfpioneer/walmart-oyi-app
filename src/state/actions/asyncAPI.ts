@@ -65,3 +65,6 @@ export const addPallet = makeAsyncActionCreators(ADD_PALLET);
 
 export const DELETE_PALLET = makeAsyncActionTypes('API/DELETE_PALLET');
 export const deletePallet = makeAsyncActionCreators(DELETE_PALLET);
+
+export const CREATE_SECTIONS = makeAsyncActionTypes('API/CREATE_SECTIONS');
+export const createSections = makeAsyncActionCreators(CREATE_SECTIONS);
