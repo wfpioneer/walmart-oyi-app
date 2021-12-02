@@ -15,6 +15,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end'
   },
+  disabledContainer: {
+    width: '100%',
+    flex: 1,
+    justifyContent: 'flex-end',
+    opacity: 0.2
+  },
   clear: {
     color: COLOR.MAIN_THEME_COLOR,
     paddingRight: 14,

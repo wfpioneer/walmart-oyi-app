@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Image, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator, Image, Text, TouchableOpacity, View
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './ReservePalletRow.style';
@@ -9,12 +11,10 @@ import { CustomModalComponent } from '../../screens/Modal/Modal';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
 import { deletePallet, getSectionDetails } from '../../state/actions/saga';
-import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
-import { LocationIdName } from '../../state/reducers/Location';
 
-export type ReservePalletRowProps = { section: LocationIdName, reservePallet: SectionDetailsPallet };
+export type ReservePalletRowProps = { sectionId: number, reservePallet: SectionDetailsPallet };
 const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
-  const { section, reservePallet } = props;
+  const { sectionId, reservePallet } = props;
   const dispatch = useDispatch();
   const userFeatures = useTypedSelector(state => state.User.features);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
@@ -26,7 +26,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
     // on api success
     if (!delPalletAPI.isWaiting && delPalletAPI.result && displayConfirmation) {
       setDisplayConfirmation(false);
-      dispatch(getSectionDetails({ sectionId: section.id.toString() }));
+      dispatch(getSectionDetails({ sectionId: sectionId.toString() }));
       dispatch({ type: 'API/DELETE_PALLET/RESET' });
     }
   }, [delPalletAPI]);

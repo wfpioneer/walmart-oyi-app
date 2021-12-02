@@ -71,7 +71,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
         default: break;
       }
     }
-  });
+  }, []);
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
 
   if (getSectionDetailsApi.isWaiting) {
@@ -110,10 +110,13 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
         data={route.name === 'FloorDetails' ? locationItem?.items.sectionItems : locationItem?.pallets.palletData}
         renderItem={({ item }) => (
           route.name === 'FloorDetails'
-            ? <FloorItemRow item={item} />
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            : <ReservePalletRow section={locationItem?.section} reservePallet={item} />
+            ? (
+              <FloorItemRow
+                item={item}
+                dispatch={dispatch}
+                navigation={navigation}
+              /> // Resolves type error, Section Id will never be zero in our case
+            ) : <ReservePalletRow sectionId={locationItem?.section.id || 0} reservePallet={item} />
         )}
         keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
       />

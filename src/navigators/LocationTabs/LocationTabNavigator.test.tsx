@@ -297,6 +297,7 @@ describe('Test Location Tabs', (): void => {
               useEffectHook={useEffect}
               validateSessionCall={mockValidateSession}
               isManualScanEnabled={false}
+              userFeatures={[]}
             />
           </NavigationContainer>
         </Provider>

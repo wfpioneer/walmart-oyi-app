@@ -32,7 +32,12 @@ import COLOR from '../../themes/Color';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import { hideLocationPopup, setCreateFlow, setSections } from '../../state/actions/Location';
+import {
+  hideLocationPopup,
+  setAislesToCreateToExistingAisle,
+  setCreateFlow,
+  setSections
+} from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
 import { LocationName } from '../../models/Location';
@@ -190,7 +195,8 @@ const SectionList = (): JSX.Element => {
   const dispatch = useDispatch();
   const route = useRoute();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ['27%', '60%'], []);
+  const managerSnapPoints = useMemo(() => ['60%'], []);
+  const associateSnapPoints = useMemo(() => ['30%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {
@@ -205,6 +211,7 @@ const SectionList = (): JSX.Element => {
   const handleAddSections = () => {
     dispatch(setSections(getAllSections.result.data));
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_SECTION));
+    dispatch(setAislesToCreateToExistingAisle({ id: aisleId, name: aisleName }));
     bottomSheetModalRef.current?.dismiss();
     navigation.navigate('AddSection');
   };
@@ -215,7 +222,7 @@ const SectionList = (): JSX.Element => {
         onPress={() => dispatch(hideLocationPopup())}
         activeOpacity={1}
         disabled={!location.locationPopupVisible}
-        style={styles.container}
+        style={location.locationPopupVisible ? styles.disabledContainer : styles.container}
       >
         <SectionScreen
           aisleId={aisleId}
@@ -235,7 +242,7 @@ const SectionList = (): JSX.Element => {
       </TouchableOpacity>
       <BottomSheetModal
         ref={bottomSheetModalRef}
-        snapPoints={snapPoints}
+        snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
         index={0}
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}

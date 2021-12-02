@@ -33,6 +33,8 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import {
   hideLocationPopup,
+  setAisles,
+  setAislesToCreate,
   setCreateFlow,
   setPossibleZones,
   setZones
@@ -188,7 +190,7 @@ const ZoneList = (): JSX.Element => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['22%', '50%'], []);
+  const snapPoints = useMemo(() => ['15%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {
@@ -204,6 +206,8 @@ const ZoneList = (): JSX.Element => {
     // TODO integrate getPossibleZones api instead of loading moc data
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_ZONE));
     dispatch(setPossibleZones(mockPossibleZones));
+    dispatch(setAisles([]));
+    dispatch(setAislesToCreate(0));
     bottomSheetModalRef.current?.dismiss();
     navigation.navigate('AddZone');
   };
@@ -214,7 +218,7 @@ const ZoneList = (): JSX.Element => {
         onPress={() => dispatch(hideLocationPopup())}
         activeOpacity={1}
         disabled={!location.locationPopupVisible}
-        style={styles.container}
+        style={location.locationPopupVisible ? styles.disabledContainer : styles.container}
       >
         <ZoneScreen
           siteId={siteId}
@@ -240,7 +244,7 @@ const ZoneList = (): JSX.Element => {
         <BottomSheetAddCard
           isManagerOption={true}
           isVisible={true}
-          text={strings('LOCATION.ADD_AREA')}
+          text={strings('LOCATION.ADD_ZONE')}
           onPress={handleAddZone}
         />
       </BottomSheetModal>
