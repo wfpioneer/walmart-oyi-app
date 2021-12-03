@@ -3,10 +3,11 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { Provider } from 'react-redux';
 import { mockLocationDetails } from '../../mockData/locationDetails';
 import ReservePalletRow from './ReservePalletRow';
-import { SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
+import { ReserveDetailsPallet, SectionDetailsItem } from '../../models/LocationItems';
 import store from '../../state';
+import { mockCombinedReserveData } from '../../mockData/getPalletDetails';
 
-const mockReservePallet = mockLocationDetails.pallets.palletData[0];
+const mockReservePallet = mockCombinedReserveData[0];
 const mockSection = mockLocationDetails.section;
 
 jest.mock('react-redux', () => {
@@ -32,7 +33,7 @@ describe('ReservePalletRow Component', () => {
     const mockFloorItemLongName: SectionDetailsItem = {
       ...mockLocationDetails.items.sectionItems[0], itemDesc: longItemDesc
     };
-    const mockReservePalletLongFirstItemName: SectionDetailsPallet = {
+    const mockReservePalletLongFirstItemName: ReserveDetailsPallet = {
       // changed due to items becoming optional on pallet
       ...mockReservePallet, items: [...(mockReservePallet.items || []), mockFloorItemLongName]
     };
@@ -46,7 +47,7 @@ describe('ReservePalletRow Component', () => {
   });
 
   it('Renders a ReservePallet with no items', () => {
-    const mockReservePalletNoItems: SectionDetailsPallet = { ...mockReservePallet, items: [] };
+    const mockReservePalletNoItems: ReserveDetailsPallet = { ...mockReservePallet, items: [] };
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>

@@ -2,9 +2,7 @@ import React, { Dispatch, EffectCallback, useEffect } from 'react';
 import {
   ActivityIndicator, Text, TouchableOpacity, View
 } from 'react-native';
-import {
-  NavigationProp, RouteProp, useNavigation, useRoute
-} from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
@@ -24,7 +22,6 @@ interface ReserveSectionDetailsProps {
   getSectionDetailsApi: AsyncState;
   getPalletDetailsApi: AsyncState;
   dispatch: Dispatch<any>;
-  route: RouteProp<any, string>;
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
@@ -49,7 +46,6 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
   const {
     getSectionDetailsApi,
     getPalletDetailsApi,
-    route,
     dispatch,
     navigation,
     trackEventCall,
@@ -136,7 +132,6 @@ const ReserveSectionDetails = (props: { palletIds: number[]}): JSX.Element => {
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const navigation = useNavigation();
-  const route = useRoute();
   const dispatch = useDispatch();
   const addAPI = useTypedSelector(state => state.async.addPallet);
   return (
@@ -147,7 +142,6 @@ const ReserveSectionDetails = (props: { palletIds: number[]}): JSX.Element => {
         addAPI={addAPI}
         dispatch={dispatch}
         navigation={navigation}
-        route={route}
         trackEventCall={trackEvent}
         useEffectHook={useEffect}
         palletIds={props.palletIds}

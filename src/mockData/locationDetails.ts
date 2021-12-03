@@ -31,17 +31,7 @@ export const mockLocationDetails : LocationItem = {
     palletData: [
       {
         palletId: 1,
-        palletCreateTS: '2021-01-01',
-        items: [
-          {
-            itemNbr: 500252,
-            itemDesc: 'Nature Valley Honey Nut Granola Bars'
-          },
-          {
-            itemNbr: 123456,
-            itemDesc: 'Cabbage'
-          }
-        ]
+        palletCreateTS: '2021-01-01'
       },
       {
         palletId: 123,
@@ -49,13 +39,7 @@ export const mockLocationDetails : LocationItem = {
       },
       {
         palletId: 456,
-        palletCreateTS: '1999-10-10',
-        items: [
-          {
-            itemNbr: 980012,
-            itemDesc: 'Cabbage'
-          }
-        ]
+        palletCreateTS: '1999-10-10'
       }
     ]
   }

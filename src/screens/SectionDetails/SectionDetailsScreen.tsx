@@ -2,9 +2,7 @@ import React, { Dispatch, EffectCallback, useEffect } from 'react';
 import {
   ActivityIndicator, Text, TouchableOpacity, View
 } from 'react-native';
-import {
-  NavigationProp, RouteProp, useNavigation, useRoute
-} from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
@@ -19,12 +17,9 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
 import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
 import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
-import ReservePalletRow from '../../components/ReservePalletRow/ReservePalletRow';
-
 interface SectionDetailsProps {
   getSectionDetailsApi: AsyncState;
   dispatch: Dispatch<any>;
-  route: RouteProp<any, string>;
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
@@ -35,7 +30,6 @@ interface SectionDetailsProps {
 export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element => {
   const {
     getSectionDetailsApi,
-    route,
     dispatch,
     navigation,
     trackEventCall,
@@ -131,7 +125,6 @@ const SectionDetails = (): JSX.Element => {
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const navigation = useNavigation();
-  const route = useRoute();
   const dispatch = useDispatch();
   const addAPI = useTypedSelector(state => state.async.addPallet);
   return (
@@ -141,7 +134,6 @@ const SectionDetails = (): JSX.Element => {
         addAPI={addAPI}
         dispatch={dispatch}
         navigation={navigation}
-        route={route}
         trackEventCall={trackEvent}
         useEffectHook={useEffect}
         scannedEvent={scannedEvent}
