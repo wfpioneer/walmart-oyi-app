@@ -10,68 +10,66 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import { FlatList } from 'react-native-gesture-handler';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
-import { LocationItem } from '../../models/LocationItems';
-import { getSectionDetails } from '../../state/actions/saga';
+import { LocationItem, ReserveDetailsPallet } from '../../models/LocationItems';
+import { getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import styles from './SectionDetailsScreen.style';
 import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
-import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
-import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
-import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
+import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 import ReservePalletRow from '../../components/ReservePalletRow/ReservePalletRow';
 
-interface SectionDetailsProps {
+interface ReserveSectionDetailsProps {
   getSectionDetailsApi: AsyncState;
+  getPalletDetailsApi: AsyncState;
   dispatch: Dispatch<any>;
   route: RouteProp<any, string>;
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
-  scannedEvent: {type: string, value: string};
   addAPI: AsyncState;
+  palletIds: number[];
 }
 
-export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element => {
+export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) : JSX.Element => {
   const {
     getSectionDetailsApi,
+    getPalletDetailsApi,
     route,
     dispatch,
     navigation,
     trackEventCall,
     useEffectHook,
-    scannedEvent,
-    addAPI
+    addAPI,
+    palletIds
   } = props;
 
   // Navigation Listener
   useEffectHook(() => {
     // Resets Get SectionDetails api response data when navigating off-screen
     navigation.addListener('beforeRemove', () => {
-      dispatch({ type: GET_SECTION_DETAILS.RESET });
+      dispatch({ type: GET_PALLET_DETAILS.RESET });
     });
   }, []);
 
-  // Get Section Details Api
+  // Get Pallet Details Api
   useEffectHook(() => {
     // on api success
-    if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
+    if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
       // Update Location State on Success
-      const { status } = getSectionDetailsApi.result;
-      if (status === 200 || status === 207) {
-        const { zone, aisle, section } = getSectionDetailsApi.result.data;
-        dispatch(selectZone(zone.id, zone.name));
-        dispatch(selectAisle(aisle.id, aisle.name));
-        dispatch(selectSection(section.id, section.name));
+      if (getPalletDetailsApi.result.status === 207) {
+        // Display toast message
       }
     }
   }, []);
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
+  const reservePallets: ReserveDetailsPallet[] | undefined = (
+    getPalletDetailsApi.result && getPalletDetailsApi.result.data.pallets);
 
-  if (getSectionDetailsApi.isWaiting) {
+  if (getPalletDetailsApi.isWaiting) {
     return (
       <ActivityIndicator
-        animating={getSectionDetailsApi.isWaiting}
+        animating={getPalletDetailsApi.isWaiting}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -80,7 +78,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
     );
   }
 
-  if (getSectionDetailsApi.error) {
+  if (getPalletDetailsApi.error) {
     return (
       <View style={styles.errorView}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
@@ -89,7 +87,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
           style={styles.errorButton}
           onPress={() => {
             trackEventCall('location_api_retry',);
-            dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
+            dispatch(getPalletDetails({ palletIds }));
           }}
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
@@ -101,18 +99,11 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
   return (
     <View style={styles.locDetailsScreenContainer}>
       <FlatList
-        data={route.name === 'FloorDetails' ? locationItem?.floor : locationItem?.reserve}
+        data={reservePallets}
         renderItem={({ item }) => (
-          route.name === 'FloorDetails'
-            ? (
-              <FloorItemRow
-                item={item}
-                dispatch={dispatch}
-                navigation={navigation}
-              /> // Resolves type error, Section Id will never be zero in our case
-            ) : <ReservePalletRow sectionId={locationItem?.section.id || 0} reservePallet={item} />
+          <ReservePalletRow sectionId={locationItem?.section.id || 0} reservePallet={item} />
         )}
-        keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
+        keyExtractor={(item, idx) => `${item.id}${idx}`}
         ListEmptyComponent={(
           <View style={styles.emptyContainer}>
             <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
@@ -126,28 +117,29 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
     </View>
   );
 };
-
-const SectionDetails = (): JSX.Element => {
+// Passing Down PalletIds to avoid unnecessarily remapping the response data
+const ReserveSectionDetails = (props: { palletIds: number[]}): JSX.Element => {
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
-  const { scannedEvent } = useTypedSelector(state => state.Global);
+  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
   const addAPI = useTypedSelector(state => state.async.addPallet);
   return (
     <>
-      <SectionDetailsScreen
+      <ReserveSectionDetailsScreen
         getSectionDetailsApi={getSectionDetailsApi}
+        getPalletDetailsApi={getPalletDetailsApi}
         addAPI={addAPI}
         dispatch={dispatch}
         navigation={navigation}
         route={route}
         trackEventCall={trackEvent}
         useEffectHook={useEffect}
-        scannedEvent={scannedEvent}
+        palletIds={props.palletIds}
       />
     </>
   );
 };
 
-export default SectionDetails;
+export default ReserveSectionDetails;
