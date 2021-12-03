@@ -33,6 +33,8 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import {
   hideLocationPopup,
+  setAisles,
+  setAislesToCreate,
   setCreateFlow,
   setPossibleZones,
   setZones
@@ -204,6 +206,8 @@ const ZoneList = (): JSX.Element => {
     // TODO integrate getPossibleZones api instead of loading moc data
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_ZONE));
     dispatch(setPossibleZones(mockPossibleZones));
+    dispatch(setAisles([]));
+    dispatch(setAislesToCreate(0));
     bottomSheetModalRef.current?.dismiss();
     navigation.navigate('AddZone');
   };

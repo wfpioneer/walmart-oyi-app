@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash';
 import {
   Actions,
   HIDE_LOCATION_POPUP,
@@ -5,10 +6,12 @@ import {
   SELECT_AISLE,
   SELECT_SECTION,
   SELECT_ZONE,
+  SET_AISLE_SECTION_COUNT,
   SET_AISLES,
+  SET_AISLES_TO_CREATE,
+  SET_AISLES_TO_CREATE_TO_EXISTING_AISLE,
   SET_CREATE_FLOW,
   SET_NEW_ZONE,
-  SET_NUMBER_OF_AISLES_TO_CREATE,
   SET_POSSIBLE_ZONES,
   SET_SECTIONS,
   SET_ZONES,
@@ -27,6 +30,11 @@ export interface LocationIdName {
   name: string;
 }
 
+export interface CreateAisles {
+  name: number | string;
+  sectionCount: number;
+}
+
 interface LocationState {
   selectedZone: LocationIdName;
   selectedAisle: LocationIdName;
@@ -38,7 +46,7 @@ interface LocationState {
   locationPopupVisible: boolean;
   createFlow: CREATE_FLOW;
   newZone: string;
-  numberOfAislesToCreate: number
+  aislesToCreate: CreateAisles[];
 }
 
 const initialState: LocationState = {
@@ -61,13 +69,16 @@ const initialState: LocationState = {
   locationPopupVisible: false,
   createFlow: CREATE_FLOW.NOT_STARTED,
   newZone: '',
-  numberOfAislesToCreate: 0
+  aislesToCreate: []
 };
 
 export const Location = (
   state = initialState,
   action: Actions
 ): LocationState => {
+  const aislesToCreate: CreateAisles[] = [];
+  let aisleCount = 1;
+  let aisles = [];
   switch (action.type) {
     case SELECT_ZONE: {
       return {
@@ -136,13 +147,37 @@ export const Location = (
         ...state,
         newZone: action.payload
       };
-    case SET_NUMBER_OF_AISLES_TO_CREATE:
+    case SET_AISLES_TO_CREATE:
+      while (aislesToCreate.length < action.payload) {
+        if (!state.aisles.find(aisle => aisleCount === parseInt(aisle.aisleName, 10))) {
+          aislesToCreate.push({
+            name: aisleCount,
+            sectionCount: 1
+          });
+        }
+        aisleCount += 1;
+      }
       return {
         ...state,
-        numberOfAislesToCreate: action.payload
+        aislesToCreate
+      };
+    case SET_AISLE_SECTION_COUNT:
+      aisles = cloneDeep(state.aislesToCreate);
+      aisles[action.payload.aisleIndex].sectionCount = action.payload.sectionCount;
+      return {
+        ...state,
+        aislesToCreate: aisles
       };
     case RESET_SECTION_NAME:
       return initialState;
+    case SET_AISLES_TO_CREATE_TO_EXISTING_AISLE:
+      return {
+        ...state,
+        aislesToCreate: [{
+          name: action.payload.name,
+          sectionCount: 1
+        }]
+      };
     default:
       return state;
   }

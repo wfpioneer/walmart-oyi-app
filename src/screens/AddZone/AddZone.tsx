@@ -8,7 +8,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
 import styles from './AddZone.style';
 import { CREATE_FLOW, PossibleZone, ZoneItem } from '../../models/LocationItems';
-import { setNewZone, setNumberOfAislesToCreate } from '../../state/actions/Location';
+import { setAislesToCreate, setNewZone } from '../../state/actions/Location';
 import { strings } from '../../locales';
 
 interface AddZoneScreenProps {
@@ -45,7 +45,7 @@ const addZonesToPicker = (
         ...availableZones.map((zone: PossibleZone, index: number) => {
           const zoneLabel = `${zone.name} - ${zone.description}`;
           return (
-            <Picker.Item label={zoneLabel} value={zone.name} key={index} />
+            <Picker.Item label={zoneLabel} value={zone.name} key={zoneLabel + index} />
           );
         })];
   }
@@ -86,10 +86,10 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
   const handleContinue = () => {
     switch (props.createFlow) {
       case CREATE_FLOW.CREATE_AISLE:
-        props.dispatch(setNumberOfAislesToCreate(props.numberOfAisles));
+        props.dispatch(setAislesToCreate(props.numberOfAisles));
         break;
       default:
-        props.dispatch(setNumberOfAislesToCreate(props.numberOfAisles));
+        props.dispatch(setAislesToCreate(props.numberOfAisles));
         props.dispatch(setNewZone(props.selectedZone));
     }
     props.navigation.navigate('AddSection');
