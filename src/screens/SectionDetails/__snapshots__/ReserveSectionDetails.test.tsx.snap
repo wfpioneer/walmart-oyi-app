@@ -209,7 +209,54 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
         </Text>
       </View>
     }
-    data={Array []}
+    data={
+      Array [
+        Object {
+          "id": 1,
+          "items": Array [
+            Object {
+              "itemDesc": "Nature Valley Honey Nut Granola Bars",
+              "itemNbr": 500252,
+              "price": 0,
+            },
+            Object {
+              "itemDesc": "Cabbage",
+              "itemNbr": 123456,
+              "price": 0,
+            },
+          ],
+          "palletCreateTS": "2021-01-01",
+          "palletId": 1,
+          "statusCode": 200,
+        },
+        Object {
+          "id": 123,
+          "items": Array [
+            Object {
+              "itemDesc": "Nature Valley Granola Bars",
+              "itemNbr": 456789,
+              "price": 1298,
+            },
+          ],
+          "palletCreateTS": "2021-01-10",
+          "palletId": 123,
+          "statusCode": 200,
+        },
+        Object {
+          "id": 456,
+          "items": Array [
+            Object {
+              "itemDesc": "MM电池5号24粒.",
+              "itemNbr": 123789,
+              "price": 29.9,
+            },
+          ],
+          "palletCreateTS": "1999-10-10",
+          "palletId": 456,
+          "statusCode": 200,
+        },
+      ]
+    }
     keyExtractor={[Function]}
     renderItem={[Function]}
   />
