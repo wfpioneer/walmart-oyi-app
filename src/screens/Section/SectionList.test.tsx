@@ -11,7 +11,46 @@ const AISLE_ID = 1;
 const AISLE_NAME = '1';
 const ZONE_NAME = 'CARN';
 
+const defaultAsyncState: AsyncState = {
+  isWaiting: false,
+  value: null,
+  error: null,
+  result: null
+};
+
 describe('Test Section List', () => {
+  it('Renders Section Screen with no-section-message when getSections response is 204', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getSectionsResult = {
+      status: 204,
+      data: ''
+    };
+    const getSectionEmptyResponse: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: getSectionsResult
+    };
+    renderer.render(
+      <SectionScreen
+        aisleId={AISLE_ID}
+        aisleName={AISLE_NAME}
+        zoneName={ZONE_NAME}
+        dispatch={jest.fn()}
+        getAllSections={getSectionEmptyResponse}
+        isManualScanEnabled={false}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        locationPopupVisible={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
   it('Renders Section Screen with Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getSectionResult = {
@@ -31,42 +70,37 @@ describe('Test Section List', () => {
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllSections={getSectionSuccess}
+        isManualScanEnabled={false}
         apiStart={0}
         setApiStart={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('Renders Section Screen with Empty Data', () => {
+  it('Renders Manual Scan Component when isManualScanEnabled is set to true', () => {
     const renderer = ShallowRenderer.createRenderer();
-    const getSectionResult = {
-      data: {},
-      status: 200
-    };
-    const getSectionSuccess: AsyncState = {
-      isWaiting: false,
-      value: null,
-      error: null,
-      result: getSectionResult
-    };
+
     renderer.render(
       <SectionScreen
         aisleId={AISLE_ID}
         aisleName={AISLE_NAME}
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
-        getAllSections={getSectionSuccess}
+        getAllSections={defaultAsyncState}
+        isManualScanEnabled={true}
         apiStart={0}
         setApiStart={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -74,31 +108,42 @@ describe('Test Section List', () => {
 });
 
 describe('Test Get Section Api Response', () => {
-  it('Renders Section Api Error Message', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    const getSectionResponseFailure: AsyncState = {
-      isWaiting: false,
-      value: null,
-      error: 'Network Error',
-      result: null
-    };
-    renderer.render(
-      <SectionScreen
-        aisleId={AISLE_ID}
-        aisleName={AISLE_NAME}
-        zoneName={ZONE_NAME}
-        dispatch={jest.fn()}
-        getAllSections={getSectionResponseFailure}
-        apiStart={0}
-        setApiStart={jest.fn()}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
+  const possibleErrorResults = [
+    { errorType: 'timeout', message: 'timeout of 10000ms exceeded' },
+    { errorType: 'network', message: 'Network Error' },
+    { errorType: '400', message: 'Request Failed with status code 400' },
+    { errorType: '424', message: 'Request Failed with status code 424' },
+    { errorType: '500', message: 'Request Failed with status code 500' }
+  ];
+
+  possibleErrorResults.forEach(errorResult => it(`Renders Error Message when result is ${errorResult.errorType} error`,
+    () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const apiErrorResult: AsyncState = {
+        value: null,
+        isWaiting: false,
+        error: errorResult.message,
+        result: null
+      };
+      renderer.render(
+        <SectionScreen
+          aisleId={AISLE_ID}
+          aisleName={AISLE_NAME}
+          zoneName={ZONE_NAME}
+          dispatch={jest.fn()}
+          getAllSections={apiErrorResult}
+          isManualScanEnabled={false}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          locationPopupVisible={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    }));
 
   it('Renders loading indicator when waiting for Section Api response', () => {
     const renderer = ShallowRenderer.createRenderer();
@@ -115,12 +160,14 @@ describe('Test Get Section Api Response', () => {
         zoneName={ZONE_NAME}
         dispatch={jest.fn()}
         getAllSections={getSectionIsWaiting}
+        isManualScanEnabled={false}
         apiStart={0}
         setApiStart={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

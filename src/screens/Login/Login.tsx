@@ -1,9 +1,7 @@
 import { NavigationProp } from '@react-navigation/native';
 import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
-import {
-  Modal, Platform, View
-} from 'react-native';
+import { Platform, Text, View } from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
@@ -19,6 +17,10 @@ import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { RootState } from '../../state/reducers/RootReducer';
+import { CustomModalComponent, ModalCloseIcon } from '../Modal/Modal';
+import { getBuildEnvironment } from '../../utils/environment';
+import COLOR from '../../themes/Color';
+import IconButton from '../../components/buttons/IconButton';
 
 const mapDispatchToProps = {
   loginUser,
@@ -35,10 +37,24 @@ const mapDispatchToProps = {
 // from WMSSO.getUser (since its siteId is optional and CN users can log in without one)
 type WMSSOUser = Pick<Partial<User>, 'siteId'> & Omit<User, 'siteId'>;
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const pkg = require('../../../package.json');
+
 const mapStateToProps = (state: RootState) => ({
   User: state.User,
   fluffyApiState: state.async.getFluffyRoles
 });
+
+// Since CN Associate JobCodes are inconsistent, this set of roles will be added
+// to all successful fluffy responses for CN
+// If we encounter future scenarios, we can modify this set of Associate roles
+// NOTE: This is only a stop-gap until a better solution is found
+const CN_ASSOCIATE_ROLES = ['on hands change'];
+
+// This method merges our hard-coded Associate roles with our fluffy response
+const addCNAssociateRoleOverrides = (
+  fluffyRoles: string[]
+): string[] => Array.from(new Set([...fluffyRoles, ...CN_ASSOCIATE_ROLES]));
 
 // TODO correct all the function definitions (specifically return types)
 export interface LoginScreenProps {
@@ -55,6 +71,39 @@ export interface LoginScreenProps {
 }
 
 const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
+const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => void, onSubmitCN: () => void}) => {
+  const { onSignOut, onSubmitCN, onSubmitMX } = props;
+  return (
+    <>
+      <View style={styles.closeContainer}>
+        <IconButton
+          icon={ModalCloseIcon}
+          type={Button.Type.NO_BORDER}
+          onPress={() => onSignOut()}
+          style={styles.closeButton}
+        />
+      </View>
+      <Text style={styles.titleText}>
+        Please select a country to sign into
+      </Text>
+      <View style={styles.buttonRow}>
+        <Button
+          title="MX"
+          onPress={() => onSubmitMX()}
+          type={Button.Type.SOLID_WHITE}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          style={styles.affirmButton}
+        />
+        <Button
+          title="CN"
+          onPress={() => onSubmitCN()}
+          type={Button.Type.PRIMARY}
+          style={styles.affirmButton}
+        />
+      </View>
+    </>
+  );
+};
 
 // TODO convert to Functional Component
 export class LoginScreen extends React.PureComponent<LoginScreenProps> {
@@ -83,7 +132,11 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
 
     if (prevProps.fluffyApiState.isWaiting) {
       if (this.props.fluffyApiState.result) {
-        this.props.assignFluffyFeatures(this.props.fluffyApiState.result.data);
+        const userCountryCode = this.props.User.countryCode.toUpperCase();
+        const fluffyResultData = this.props.fluffyApiState.result.data;
+        const fluffyFeatures = userCountryCode === 'CN' ? addCNAssociateRoleOverrides(fluffyResultData)
+          : fluffyResultData;
+        this.props.assignFluffyFeatures(fluffyFeatures);
       } else if (this.props.fluffyApiState.error) {
         // TODO Display toast/popup letting user know roles could not be retrieved
       }
@@ -141,7 +194,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       setUserId(user.userId);
       this.props.loginUser({ ...user, siteId: user.siteId ?? 0 });
       trackEvent('user_sign_in');
-      if (user.siteId) {
+      if (user.siteId && user.countryCode !== 'US') {
         this.props.getFluffyFeatures(user);
       }
     });
@@ -150,25 +203,56 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
   render(): ReactNode {
     return (
       <View style={styles.container}>
-        <Modal
-          visible={!this.props.User.siteId && userIsSignedIn(this.props.User)}
-          transparent
+        <CustomModalComponent
+          isVisible={!this.props.User.siteId && userIsSignedIn(this.props.User)}
+          onClose={() => this.signOutUser()}
+          modalType="Form"
         >
           <EnterClubNbrForm
             onSubmit={clubNbr => {
               const updatedUser = { ...this.props.User, siteId: clubNbr };
               this.props.loginUser(updatedUser);
               trackEvent('user_sign_in');
-              this.props.getFluffyFeatures(updatedUser);
+              if (this.props.User.countryCode !== 'US') {
+                this.props.getFluffyFeatures(updatedUser);
+              }
             }}
             onSignOut={() => this.signOutUser()}
           />
-        </Modal>
-        <Button
-          title={strings('GENERICS.SIGN_IN')}
-          style={styles.signInButton}
-          onPress={this.signInUser}
-        />
+        </CustomModalComponent>
+        <CustomModalComponent
+          isVisible={
+            this.props.User.siteId !== 0
+            && this.props.User.countryCode === 'US'
+            && userIsSignedIn(this.props.User)
+          }
+          onClose={() => this.signOutUser()}
+          modalType="Form"
+        >
+          <SelectCountryCodeModal
+            onSignOut={() => this.signOutUser()}
+            onSubmitCN={() => {
+              const updatedUser = { ...this.props.User, countryCode: 'CN' };
+              this.props.loginUser(updatedUser);
+              this.props.getFluffyFeatures(updatedUser);
+            }}
+            onSubmitMX={() => {
+              const updatedUser = { ...this.props.User, countryCode: 'MX' };
+              this.props.loginUser(updatedUser);
+              this.props.getFluffyFeatures(updatedUser);
+            }}
+          />
+        </CustomModalComponent>
+        <View style={styles.buttonContainer}>
+          <Button
+            title={strings('GENERICS.SIGN_IN')}
+            style={styles.signInButton}
+            onPress={this.signInUser}
+          />
+        </View>
+        <Text style={styles.versionDisplay}>
+          { `${strings('GENERICS.VERSION')} ${pkg.version}${getBuildEnvironment()}` }
+        </Text>
       </View>
     );
   }

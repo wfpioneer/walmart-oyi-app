@@ -1,74 +1,27 @@
-import Location from '../../models/Location';
+import {
+  AisleItem,
+  CREATE_FLOW,
+  PossibleZone,
+  SectionItem,
+  ZoneItem
+} from '../../models/LocationItems';
+import { LocationIdName } from '../reducers/Location';
 
-export const SET_FLOOR_LOCATIONS = 'LOCATION/SET_FLOOR_LOCATIONS';
-export const SET_RESERVE_LOCATIONS = 'LOCATION/SET_RESERVE_LOCATIONS';
-export const SET_ITEM_LOC_DETAILS = 'LOCATION/SET_ITEM_LOC_DETAILS';
-export const ADD_LOCATION_TO_EXISTING = 'LOCATION/ADD_LOCATION_TO_EXISTING';
-export const EDIT_EXISTING_LOCATION = 'LOCATION/EDIT_EXISTING_LOCATION';
-export const DELETE_LOCATION_FROM_EXISTING = 'LOCATION/DELETE_LOCATION_FROM_EXISTING';
-export const RESET_LOCATIONS = 'LOCATION/RESET_LOCATIONS';
-export const GET_LOCATION_DETAILS = 'LOCATION/GET_LOCATION_DETAILS';
 export const SELECT_ZONE = 'LOCATION/SELECT_ZONE';
+export const SET_ZONES = 'LOCATION/SET_ZONES';
 export const SELECT_AISLE = 'LOCATION/SELECT_AISLE';
+export const SET_AISLES = 'LOCATION/SET_AISLES';
 export const SELECT_SECTION = 'LOCATION/SELECT_SECTION';
-
-export const setItemLocDetails = (itemNbr: number, upcNbr: string, exceptionType: string) => ({
-  type: SET_ITEM_LOC_DETAILS,
-  payload: {
-    itemNbr,
-    upcNbr,
-    exceptionType
-  }
-} as const);
-
-export const setFloorLocations = (floor: Location[]) => ({
-  type: SET_FLOOR_LOCATIONS,
-  payload: floor
-} as const);
-
-export const setReserveLocations = (reserve: Location[]) => ({
-  type: SET_RESERVE_LOCATIONS,
-  payload: reserve
-} as const);
-
-export const addLocationToExisting = (locationName: string, locationTypeNbr: number, locationArea: string) => ({
-  type: ADD_LOCATION_TO_EXISTING,
-  payload: {
-    locationName,
-    locationTypeNbr,
-    locationArea
-  }
-} as const);
-
-export const editExistingLocation = (locationName: string, locationTypeNbr: number, locationArea: string,
-  locIndex: number) => ({
-  type: EDIT_EXISTING_LOCATION,
-  payload: {
-    locationName,
-    locationTypeNbr,
-    locationArea,
-    locIndex
-  }
-} as const);
-
-export const deleteLocationFromExisting = (locationArea: string, locIndex: number) => ({
-  type: DELETE_LOCATION_FROM_EXISTING,
-  payload: {
-    locationArea,
-    locIndex
-  }
-} as const);
-
-export const resetLocations = () => ({
-  type: RESET_LOCATIONS
-} as const);
-
-export const getLocationDetails = (itemNbr: number) => ({
-  type: GET_LOCATION_DETAILS,
-  payload: {
-    itemNbr
-  }
-} as const);
+export const SET_SECTIONS = 'LOCATION/SET_SECTIONS';
+export const SHOW_LOCATION_POPUP = 'LOCATION/SHOW_POPUP';
+export const HIDE_LOCATION_POPUP = 'LOCATION/HIDE_POPUP';
+export const RESET_SECTION_NAME = 'LOCATION/RESET_SECTION_NAME';
+export const SET_POSSIBLE_ZONES = 'LOCATION/SET_POSSIBLE_ZONES';
+export const SET_CREATE_FLOW = 'LOCATION/SET_CREATE_FLOW';
+export const SET_NEW_ZONE = 'LOCATION/SET_NEW_ZONE';
+export const SET_AISLES_TO_CREATE = 'LOCATION/SET_NUMBER_OF_AISLES_TO_CREATE';
+export const SET_AISLES_TO_CREATE_TO_EXISTING_AISLE = 'LOCATION/SET_AISLES_TO_CREATE_TO_EXISTING_AISLE';
+export const SET_AISLE_SECTION_COUNT = 'LOCATION/SET_AISLE_SECTION_COUNT';
 
 export const selectZone = (id: number, name: string) => ({
   type: SELECT_ZONE,
@@ -76,6 +29,11 @@ export const selectZone = (id: number, name: string) => ({
     id,
     name
   }
+} as const);
+
+export const setZones = (zones: ZoneItem[]) => ({
+  type: SET_ZONES,
+  payload: zones
 } as const);
 
 export const selectAisle = (id: number, name: string) => ({
@@ -86,6 +44,11 @@ export const selectAisle = (id: number, name: string) => ({
   }
 } as const);
 
+export const setAisles = (aisles: AisleItem[]) => ({
+  type: SET_AISLES,
+  payload: aisles
+} as const);
+
 export const selectSection = (id: number, name: string) => ({
   type: SELECT_SECTION,
   payload: {
@@ -94,15 +57,69 @@ export const selectSection = (id: number, name: string) => ({
   }
 } as const);
 
+export const setSections = (sections: SectionItem[]) => ({
+  type: SET_SECTIONS,
+  payload: sections
+} as const);
+
+export const showLocationPopup = () => ({
+  type: SHOW_LOCATION_POPUP
+} as const);
+
+export const hideLocationPopup = () => ({
+  type: HIDE_LOCATION_POPUP
+} as const);
+
+export const resetSectionName = () => ({
+  type: RESET_SECTION_NAME
+} as const);
+
+export const setPossibleZones = (zoneArray: PossibleZone[]) => ({
+  type: SET_POSSIBLE_ZONES,
+  payload: zoneArray
+} as const);
+
+export const setCreateFlow = (createFlow: CREATE_FLOW) => ({
+  type: SET_CREATE_FLOW,
+  payload: createFlow
+} as const);
+
+export const setAislesToCreate = (aisles: number) => ({
+  type: SET_AISLES_TO_CREATE,
+  payload: aisles
+} as const);
+
+export const setAislesToCreateToExistingAisle = (existingAisle: LocationIdName) => ({
+  type: SET_AISLES_TO_CREATE_TO_EXISTING_AISLE,
+  payload: existingAisle
+} as const);
+
+export const setNewZone = (name: string) => ({
+  type: SET_NEW_ZONE,
+  payload: name
+} as const);
+
+export const setAisleSectionCount = (aisleIndex: number, sectionCount: number) => ({
+  type: SET_AISLE_SECTION_COUNT,
+  payload: {
+    aisleIndex,
+    sectionCount
+  }
+} as const);
+
 export type Actions =
-  | ReturnType<typeof setItemLocDetails>
-  | ReturnType<typeof setFloorLocations>
-  | ReturnType<typeof setReserveLocations>
-  | ReturnType<typeof addLocationToExisting>
-  | ReturnType<typeof editExistingLocation>
-  | ReturnType<typeof deleteLocationFromExisting>
-  | ReturnType<typeof getLocationDetails>
-  | ReturnType<typeof resetLocations>
-  | ReturnType<typeof selectZone>
+  ReturnType<typeof selectZone>
+  | ReturnType<typeof setZones>
   | ReturnType<typeof selectAisle>
-  | ReturnType<typeof selectSection>;
+  | ReturnType<typeof setAisles>
+  | ReturnType<typeof selectSection>
+  | ReturnType<typeof setSections>
+  | ReturnType<typeof showLocationPopup>
+  | ReturnType<typeof hideLocationPopup>
+  | ReturnType<typeof resetSectionName>
+  | ReturnType<typeof setPossibleZones>
+  | ReturnType<typeof setCreateFlow>
+  | ReturnType<typeof setNewZone>
+  | ReturnType<typeof setAislesToCreate>
+  | ReturnType<typeof setAislesToCreateToExistingAisle>
+  | ReturnType<typeof setAisleSectionCount>

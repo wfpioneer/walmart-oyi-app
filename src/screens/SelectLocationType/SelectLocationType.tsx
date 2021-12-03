@@ -1,7 +1,7 @@
 import React, { EffectCallback, useEffect, useState } from 'react';
 import { RadioButton, Text } from 'react-native-paper';
 import {
-  ActivityIndicator, EmitterSubscription, Modal, TouchableOpacity, View
+  ActivityIndicator, EmitterSubscription, TouchableOpacity, View
 } from 'react-native';
 import {
   NavigationProp, Route, useNavigation, useRoute
@@ -14,7 +14,7 @@ import EnterLocation from '../../components/enterlocation/EnterLocation';
 import Location from '../../models/Location';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { addLocation, editLocation, getLocationDetails } from '../../state/actions/saga';
-import { addLocationToExisting, editExistingLocation } from '../../state/actions/Location';
+import { addLocationToExisting, editExistingLocation } from '../../state/actions/ItemDetailScreen';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter, manualScan } from '../../utils/scannerUtils';
@@ -24,6 +24,7 @@ import { COLOR } from '../../themes/Color';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
+import { CustomModalComponent } from '../Modal/Modal';
 
 interface LocParams {
   currentLocation?: Location;
@@ -47,52 +48,150 @@ interface SelectLocationProps {
   scanType: string;
   setScanType: React.Dispatch<React.SetStateAction<string>>;
   error: { error: boolean; message: string };
-  setError: React.Dispatch<React.SetStateAction<{error: boolean;message: string;}>>;
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string; }>>;
   addAPI: AsyncState;
   editAPI: AsyncState;
   floorLocations: Location[];
-  itemLocDetails: {
-    itemNbr: number;
-    upcNbr: string;
-    exceptionType: string;
-  };
+  itemNbr: number;
+  upcNbr: string;
+  exceptionType: string | null | undefined;
   actionCompleted: boolean;
   route: Route<any>;
   navigation: NavigationProp<any>;
   dispatch: Dispatch<any>;
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
 
 export const validateLocation = (loc: string): boolean => {
   const locRegex = new RegExp(/^[\d]+$|[A-z][0-9]+-[0-9]+/);
-
   return loc.length > 0 && locRegex.test(loc);
 };
-
+const onValidateSessionCallResponse = (props: SelectLocationProps, currentLocation: any, routeSource: string) => {
+  const {
+    locType, loc, setError, floorLocations, itemNbr, upcNbr, dispatch, trackEventCall
+  } = props;
+  if (routeSource === 'AddLocation') {
+    setError({ error: false, message: '' });
+    const sameLoc = floorLocations.find(
+      (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
+    );
+    if (!sameLoc) {
+      dispatch(addLocation({
+        headers: { itemNbr: itemNbr },
+        upc: upcNbr,
+        sectionId: loc,
+        locationTypeNbr: locType
+      }));
+    } else {
+      trackEventCall('select_location_add_duplicate');
+      setError({ error: true, message: strings('LOCATION.ADD_DUPLICATE_ERROR') });
+    }
+  } else if (routeSource === 'EditLocation') {
+    setError({ error: false, message: '' });
+    const sameLoc = floorLocations.find(
+      (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
+    );
+    if (!sameLoc) {
+      dispatch(editLocation({
+        headers: { itemNbr: itemNbr },
+        upc: upcNbr,
+        sectionId: currentLocation.locationName,
+        newSectionId: loc,
+        locationTypeNbr: currentLocation.type,
+        newLocationTypeNbr: locType
+      }));
+    } else {
+      trackEventCall('select_location_edit_duplicate');
+      setError({ error: true, message: strings('LOCATION.EDIT_DUPLICATE_ERROR') });
+    }
+  }
+};
+const onBarcodeEmitterResponse = (props: SelectLocationProps, scan: any) => {
+  const {
+    setLoc, setScanType, navigation, dispatch, trackEventCall
+  } = props;
+  trackEventCall('select_location_scan', { value: scan.value, type: scan.type });
+  if (navigation.isFocused()) {
+    const unProcessedScanValue: string = scan.value;
+    switch (scan.type) {
+      case 'manual': {
+        dispatch(setScannedEvent(scan));
+        setLoc(scan.value);
+        break;
+      }
+      case 'LABEL-TYPE-UPCA': {
+        const processedScanValue = parseInt(unProcessedScanValue.substring(1,
+          unProcessedScanValue.length - 1), 10).toString();
+        dispatch(setScannedEvent({ value: processedScanValue, type: scan.type }));
+        setScanType(scan.type);
+        setLoc(processedScanValue);
+        break;
+      }
+      default:
+        break;
+    }
+    dispatch(setManualScan(false));
+  }
+};
+const setLocation = (props: SelectLocationProps, routeSource: string, currentLocation: any) => {
+  const {
+    setLocType, setLoc
+  } = props;
+  if (routeSource === 'EditLocation') {
+    setLoc(currentLocation.locationName);
+    setLocType(currentLocation.type);
+  }
+};
+const isNotActionCompleted = (props: SelectLocationProps) => {
+  const {
+    actionCompleted, dispatch, exceptionType
+  } = props;
+  if (!actionCompleted && exceptionType === 'NSFL') {
+    dispatch(setActionCompleted());
+  }
+};
+const isRouteValid = (props: SelectLocationProps) => {
+  const {
+    route
+  } = props;
+  return route.params ? route.params : {};
+};
+const getCurrentLocation = (locParams: LocParams) => ({
+  locationName: locParams.currentLocation ? locParams.currentLocation.locationName : '',
+  type: locParams.currentLocation ? locParams.currentLocation.typeNbr.toString() : '',
+  locIndex: locParams.locIndex !== null && locParams.locIndex !== undefined ? locParams.locIndex : -1
+});
+const isApiError = (api: AsyncState) => !api.isWaiting && api.error;
+const isApiSuccess = (api: AsyncState) => !api.isWaiting && api.result;
+const getLocationTypes = (locType: string, locationTypes: LOCATION_TYPES) => (locType === locationTypes
+  ? 'checked' : 'unchecked');
+const isApiWaiting = (addApi: AsyncState, editApi: AsyncState) => addApi.isWaiting || editApi.isWaiting;
+const isError = (error: { error: boolean; message: string }) => (
+  error.error ? (
+    <View style={styles.errorContainer}>
+      <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+      <Text style={styles.errorText}>{error.message}</Text>
+    </View>
+  )
+    : null
+);
 export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Element => {
   const {
-    locType, setLocType, inputLocation, setInputLocation, loc, setLoc,
+    locType, setLocType, inputLocation, setInputLocation, loc,
     scanType, setScanType, error, setError, addAPI, editAPI,
-    floorLocations, itemLocDetails, actionCompleted, route,
-    navigation, dispatch, useEffectHook, trackEventCall, validateSessionCall
+    itemNbr, route,
+    navigation, dispatch, useEffectHook, validateSessionCall
   } = props;
   const routeSource: string = route.name;
-  const locParams: LocParams = route.params ? route.params : {};
-  const currentLocation = {
-    locationName: locParams.currentLocation ? locParams.currentLocation.locationName : '',
-    type: locParams.currentLocation ? locParams.currentLocation.typeNbr.toString() : '',
-    locIndex: locParams.locIndex !== null && locParams.locIndex !== undefined ? locParams.locIndex : -1
-  };
+  const locParams: LocParams = isRouteValid(props);
+  const currentLocation = getCurrentLocation(locParams);
   let scannedSubscription: EmitterSubscription;
 
   // Set Location Name & Type when Editing location
   useEffectHook(() => {
-    if (routeSource === 'EditLocation') {
-      setLoc(currentLocation.locationName);
-      setLocType(currentLocation.type);
-    }
+    setLocation(props, routeSource, currentLocation);
   }, []);
 
   // Navigation Listener
@@ -107,73 +206,47 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      trackEventCall('select_location_scan', { value: scan.value, type: scan.type });
-      if (navigation.isFocused()) {
-        const unProcessedScanValue: string = scan.value;
-        switch (scan.type) {
-          case 'manual': {
-            dispatch(setScannedEvent(scan));
-            setLoc(scan.value);
-            break;
-          }
-          case 'LABEL-TYPE-UPCA': {
-            const processedScanValue = parseInt(unProcessedScanValue.substring(1,
-              unProcessedScanValue.length - 1), 10).toString();
-            dispatch(setScannedEvent({ value: processedScanValue, type: scan.type }));
-            setScanType(scan.type);
-            setLoc(processedScanValue);
-            break;
-          }
-          default:
-            break;
-        }
-        dispatch(setManualScan(false));
-      }
+      onBarcodeEmitterResponse(props, scan);
     });
     return () => {
       dispatch(resetScannedEvent());
       scannedSubscription.remove();
     };
   }, []);
-
-  // Add Location API
+  // Edit Location API
   useEffectHook(() => {
-    // on api success
-    if (!addAPI.isWaiting && addAPI.result) {
-      dispatch(addLocationToExisting(loc, parseInt(locType, 10), 'floor'));
-      if (!actionCompleted && itemLocDetails.exceptionType === 'NSFL') dispatch(setActionCompleted());
-      dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
-      navigation.navigate('LocationDetails');
-    }
-
-    // on api failure
-    if (!addAPI.isWaiting && addAPI.error) {
-      setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
-    }
-
     // on api submission
     if (addAPI.isWaiting) {
       setError({ error: false, message: '' });
+    }
+    // on api failure
+    if (isApiError(addAPI)) {
+      setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
+    }
+    // on api success
+    if (isApiSuccess(addAPI)) {
+      dispatch(addLocationToExisting(loc, parseInt(locType, 10), 'floor'));
+      isNotActionCompleted(props);
+      dispatch(getLocationDetails({ itemNbr: itemNbr }));
+      navigation.navigate('LocationDetails');
     }
   }, [addAPI]);
 
   // Edit Location API
   useEffectHook(() => {
-    // on api success
-    if (!editAPI.isWaiting && editAPI.result) {
-      dispatch(editExistingLocation(loc, parseInt(locType, 10), 'floor', currentLocation.locIndex));
-      dispatch(getLocationDetails({ itemNbr: itemLocDetails.itemNbr }));
-      navigation.navigate('LocationDetails');
-    }
-
-    // on api failure
-    if (!editAPI.isWaiting && editAPI.error) {
-      setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
-    }
-
     // on api submission
     if (editAPI.isWaiting) {
       setError({ error: false, message: '' });
+    }
+    // on api failure
+    if (isApiError(editAPI)) {
+      setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
+    }
+    // on api success
+    if (isApiSuccess(editAPI)) {
+      dispatch(editExistingLocation(loc, parseInt(locType, 10), 'floor', currentLocation.locIndex));
+      dispatch(getLocationDetails({ itemNbr: itemNbr }));
+      navigation.navigate('LocationDetails');
     }
   }, [editAPI]);
 
@@ -182,47 +255,13 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
       manualScan(value);
       dispatch(setManualScan(false));
       setInputLocation(false);
-    }).catch(() => {});
+    }).catch(() => { });
   };
 
   const onSubmit = () => {
     validateSessionCall(navigation, routeSource).then(() => {
-      if (routeSource === 'AddLocation') {
-        setError({ error: false, message: '' });
-        const sameLoc = floorLocations.find(
-          (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
-        );
-        if (!sameLoc) {
-          dispatch(addLocation({
-            headers: { itemNbr: itemLocDetails.itemNbr },
-            upc: itemLocDetails.upcNbr,
-            sectionId: loc,
-            locationTypeNbr: locType
-          }));
-        } else {
-          trackEventCall('select_location_add_duplicate');
-          setError({ error: true, message: strings('LOCATION.ADD_DUPLICATE_ERROR') });
-        }
-      } else if (routeSource === 'EditLocation') {
-        setError({ error: false, message: '' });
-        const sameLoc = floorLocations.find(
-          (location: Location) => location.locationName === loc && location.typeNbr.toString() === locType
-        );
-        if (!sameLoc) {
-          dispatch(editLocation({
-            headers: { itemNbr: itemLocDetails.itemNbr },
-            upc: itemLocDetails.upcNbr,
-            sectionId: currentLocation.locationName,
-            newSectionId: loc,
-            locationTypeNbr: currentLocation.type,
-            newLocationTypeNbr: locType
-          }));
-        } else {
-          trackEventCall('select_location_edit_duplicate');
-          setError({ error: true, message: strings('LOCATION.EDIT_DUPLICATE_ERROR') });
-        }
-      }
-    }).catch(() => {});
+      onValidateSessionCallResponse(props, currentLocation, routeSource);
+    }).catch(() => { });
   };
 
   // Submits Add/Edit Location after Barcode Scan
@@ -238,15 +277,15 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
     validateSessionCall(navigation, routeSource).then(() => {
       setInputLocation(true);
       dispatch(setManualScan(true));
-    }).catch(() => {});
+    }).catch(() => { });
   };
 
   return (
     <>
       <View style={styles.mainContainer}>
-        <Modal visible={inputLocation} onRequestClose={() => setInputLocation(false)} transparent>
+        <CustomModalComponent isVisible={inputLocation} onClose={() => setInputLocation(false)} modalType="Form">
           <EnterLocation setEnterLocation={setInputLocation} onSubmit={modelOnSubmit} />
-        </Modal>
+        </CustomModalComponent>
         <View style={styles.sectionLabel}>
           <Text style={styles.labelText}>{strings('LOCATION.SELECTION_INSTRUCTION')}</Text>
         </View>
@@ -254,7 +293,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.SALES_FLOOR}
-              status={locType === LOCATION_TYPES.SALES_FLOOR ? 'checked' : 'unchecked'}
+              status={getLocationTypes(locType, LOCATION_TYPES.SALES_FLOOR)}
               color={COLOR.MAIN_THEME_COLOR}
             />
             <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.SALES_FLOOR)}>
@@ -264,7 +303,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.END_CAP}
-              status={locType === LOCATION_TYPES.END_CAP ? 'checked' : 'unchecked'}
+              status={getLocationTypes(locType, LOCATION_TYPES.END_CAP)}
               color={COLOR.MAIN_THEME_COLOR}
             />
             <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.END_CAP)}>
@@ -274,7 +313,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.POD}
-              status={locType === LOCATION_TYPES.POD ? 'checked' : 'unchecked'}
+              status={getLocationTypes(locType, LOCATION_TYPES.POD)}
               color={COLOR.MAIN_THEME_COLOR}
             />
             <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.POD)}>
@@ -284,7 +323,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
           <View style={styles.typeListItem}>
             <RadioButton
               value={LOCATION_TYPES.DISPLAY}
-              status={locType === LOCATION_TYPES.DISPLAY ? 'checked' : 'unchecked'}
+              status={getLocationTypes(locType, LOCATION_TYPES.DISPLAY)}
               color={COLOR.MAIN_THEME_COLOR}
             />
             <TouchableOpacity style={styles.labelBox} onPress={() => setLocType(LOCATION_TYPES.DISPLAY)}>
@@ -309,19 +348,13 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
             onPress={handleManualScan}
           />
         </View>
-        {error.error ? (
-          <View style={styles.errorContainer}>
-            <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
-            <Text style={styles.errorText}>{error.message}</Text>
-          </View>
-        )
-          : null}
+        {isError(error)}
       </View>
       <View style={styles.container}>
-        {addAPI.isWaiting || editAPI.isWaiting
+        {isApiWaiting(addAPI, editAPI)
           ? (
             <ActivityIndicator
-              animating={addAPI.isWaiting || editAPI.isWaiting}
+              animating={isApiWaiting(addAPI, editAPI)}
               hidesWhenStopped
               color={COLOR.MAIN_THEME_COLOR}
               size="large"
@@ -350,9 +383,13 @@ const SelectLocationType = (): JSX.Element => {
   const [error, setError] = useState({ error: false, message: '' });
   const addAPI = useTypedSelector(state => state.async.addLocation);
   const editAPI = useTypedSelector(state => state.async.editLocation);
-  const floorLocations = useTypedSelector(state => state.Location.floorLocations);
-  const itemLocDetails = useTypedSelector(state => state.Location.itemLocDetails);
-  const { actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
+  const {
+    floorLocations,
+    itemNbr,
+    upcNbr,
+    exceptionType,
+    actionCompleted
+  } = useTypedSelector(state => state.ItemDetailScreen);
   const route = useRoute();
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -372,7 +409,9 @@ const SelectLocationType = (): JSX.Element => {
       addAPI={addAPI}
       editAPI={editAPI}
       floorLocations={floorLocations}
-      itemLocDetails={itemLocDetails}
+      itemNbr={itemNbr}
+      upcNbr={upcNbr}
+      exceptionType={exceptionType}
       actionCompleted={actionCompleted}
       route={route}
       navigation={navigation}

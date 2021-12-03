@@ -1,69 +1,82 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import {
-  ActivityIndicator, Platform, Text, TouchableOpacity, View
+  ActivityIndicator, Modal, Platform, Text, TouchableOpacity, View
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Modal from 'react-native-modal';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import COLOR from '../../themes/Color';
 import styles from './Modal.style';
 import { strings } from '../../locales';
 import { hideInfoModal } from '../../state/actions/Modal';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
 
-const mapStateToProps = (state: any) => ({
-  showModal: state.modal.showModal,
-  showActivity: state.modal.showActivity,
-  modalContent: state.modal.content
-});
+interface CustomModalProps {
+  animationType?:'fade' | 'slide' | 'none';
+  children: ReactNode | ReactElement;
+  isVisible: boolean;
+  modalType: 'Error' | 'Form' | 'Popup';
+  onClose: () => void;
+}
 
-const mapDispatchToProps = {
-  hideInfoModal
+const styleSelector = {
+  Error: styles.errorContainer,
+  Form: styles.contentContainer,
+  Popup: styles.popUpContainer
 };
 
-interface ActivityModalComponentProps {
-  showModal: boolean;
-  showActivity: boolean;
-  modalContent: any;
-  hideInfoModal: Function;
-}
+export const ModalCloseIcon = <MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />;
 
-class ActivityModalComponent extends React.PureComponent<ActivityModalComponentProps> {
-  renderActivityIndicator() {
-    if (!this.props.showActivity) {
-      return null;
-    }
-    return (
-      <View style={styles.activityView}>
-        <ActivityIndicator size="large" color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
+export const CustomModalComponent = (props: CustomModalProps): JSX.Element => {
+  const {
+    children, isVisible, modalType, onClose, animationType
+  } = props;
+
+  return (
+    <Modal
+      onRequestClose={() => onClose()}
+      visible={isVisible}
+      transparent={true}
+      animationType={animationType}
+    >
+      <View style={styles.modalContainer}>
+        <View style={styleSelector[modalType]}>
+          {children}
+        </View>
       </View>
-    );
-  }
+    </Modal>
+  );
+};
+CustomModalComponent.defaultProps = {
+  animationType: 'none'
+};
 
-  renderContentView() {
-    if (!this.props.modalContent) {
-      return null;
-    }
+// TODO Brainstorm a way to remove the need for dispatching calls to the global modal
+export const ActivityModalComponent = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const { showActivity, showModal, content: modalContent } = useTypedSelector(state => state.modal);
+  const renderActivityIndicator = () => (
+    <View style={styles.activityView}>
+      <ActivityIndicator size="large" color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
+    </View>
+  );
 
-    return (
-      <View style={styles.infoView}>
-        <MaterialIcons name="info" size={30} color={COLOR.MAIN_THEME_COLOR} style={styles.normalText} />
-        <Text style={styles.titleText}>{this.props.modalContent.title}</Text>
-        <Text style={styles.normalText}>{this.props.modalContent.text}</Text>
-        <TouchableOpacity style={styles.okButton} onPress={() => this.props.hideInfoModal()}>
-          <Text style={styles.okText}>{strings('GENERICS.OK')}</Text>
-        </TouchableOpacity>
+  const renderContentView = () => (
+    <View style={styles.infoView}>
+      <MaterialIcons name="info" size={30} color={COLOR.MAIN_THEME_COLOR} style={styles.normalText} />
+      <Text style={styles.titleText}>{modalContent.title}</Text>
+      <Text style={styles.normalText}>{modalContent.text}</Text>
+      <TouchableOpacity style={styles.okButton} onPress={() => dispatch(hideInfoModal())}>
+        <Text style={styles.okText}>{strings('GENERICS.OK')}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+  return (
+    <Modal visible={showModal} transparent>
+      <View style={styles.modalContainer}>
+        { showActivity && renderActivityIndicator() }
+        { modalContent && renderContentView() }
       </View>
-    );
-  }
-
-  render() {
-    return (
-      <Modal isVisible={this.props.showModal} useNativeDriver animationInTiming={0}>
-        { this.renderActivityIndicator() }
-        { this.renderContentView() }
-      </Modal>
-    );
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ActivityModalComponent);
+    </Modal>
+  );
+};

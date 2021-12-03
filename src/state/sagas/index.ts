@@ -1,4 +1,5 @@
 import { all, call } from 'redux-saga/effects';
+import AddPalletService from '../../services/AddPallet.service';
 import { makeAsyncSaga } from './generic/makeAsyncSaga';
 import * as saga from '../actions/saga';
 import * as actions from '../actions/asyncAPI';
@@ -18,6 +19,7 @@ import GetFluffyRolesService from '../../services/GetFluffyRoles.service';
 import GetApprovalListService from '../../services/GetApprovalList.service';
 import UpdateApprovalListService from '../../services/UpdateApprovalList.service';
 import LocationService from '../../services/Location.service';
+import DeletePalletService from '../../services/DeletePallet.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
@@ -37,7 +39,12 @@ const genericSagas = [
   makeAsyncSaga(saga.UPDATE_APPROVAL_LIST, actions.updateApprovalList, UpdateApprovalListService.updateApprovalList),
   makeAsyncSaga(saga.GET_ALL_ZONES, actions.getAllZones, LocationService.getAllZones),
   makeAsyncSaga(saga.GET_AISLE, actions.getAisle, LocationService.getAisle),
-  makeAsyncSaga(saga.GET_SECTIONS, actions.getSections, LocationService.getSections)
+  makeAsyncSaga(saga.GET_SECTIONS, actions.getSections, LocationService.getSections),
+  makeAsyncSaga(saga.GET_SECTION_DETAILS, actions.getSectionDetails, LocationService.getSectionDetails),
+  makeAsyncSaga(saga.ADD_PALLET, actions.addPallet, AddPalletService.addPallet),
+  makeAsyncSaga(saga.DELETE_PALLET, actions.deletePallet, DeletePalletService.deletePallet),
+  makeAsyncSaga(saga.PRINT_LOCATION_LABELS, actions.printLocationLabels, PrintService.printLabels),
+  makeAsyncSaga(saga.GET_PALLET_DETAILS, actions.getPalletDetails, LocationService.getPalletDetails)
 ];
 
 export default function* rootSaga() {

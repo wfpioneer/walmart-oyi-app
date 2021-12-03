@@ -5,6 +5,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  disabledContainer: {
+    flex: 1,
+    opacity: 0.2
+  },
   item: {
     backgroundColor: COLOR.WHITE,
     padding: 14,
@@ -20,9 +24,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   noAisles: {
+    paddingTop: 10,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  noAislesText: {
+    color: COLOR.GREY_700
   },
   activityIndicator: {
     flex: 1,
@@ -51,6 +59,11 @@ const styles = StyleSheet.create({
   },
   contentPadding: {
     paddingBottom: 100
+  },
+  bottomSheetModal: {
+    borderColor: COLOR.GREY_200,
+    borderRadius: 5,
+    borderWidth: 2
   }
 });
 

@@ -1,6 +1,7 @@
 import {
   ApprovalListItem, approvalAction, approvalRequestSource, approvalStatus
 } from '../../models/ApprovalListItem';
+import { PrintItemList, PrintLocationList } from '../../models/Printer';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
@@ -20,6 +21,11 @@ export const UPDATE_APPROVAL_LIST = 'SAGA/UPDATE_APPROVAL_LIST';
 export const GET_ALL_ZONES = 'SAGA/GET_ZONES';
 export const GET_AISLE = 'SAGA/GET_AISLE';
 export const GET_SECTIONS = 'SAGA/GET_SECTIONS';
+export const GET_SECTION_DETAILS = 'SAGA/GET_SECTION_DETAILS';
+export const PRINT_LOCATION_LABELS = 'SAGA/PRINT_SECTION_LABELS';
+export const ADD_PALLET = 'SAGA/ADD_PALLET';
+export const DELETE_PALLET = 'SAGA/DELETE_PALLET';
+export const GET_PALLET_DETAILS = 'SAGA/GET_PALLET_DETAILS';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -27,12 +33,16 @@ export const getItemDetails = (payload: any) => ({ type: GET_ITEM_DETAILS, paylo
 export const getWorklist = (payload?: any) => ({ type: GET_WORKLIST, payload } as const);
 export const editLocation = (payload: any) => ({ type: EDIT_LOCATION, payload } as const);
 export const addLocation = (payload: any) => ({ type: ADD_LOCATION, payload } as const);
-export const updateOHQty = (payload: { data: Partial<ApprovalListItem>}) => ({ type: UPDATE_OH_QTY, payload } as const);
+export const updateOHQty = (payload: {
+  data: Partial<ApprovalListItem>
+}) => ({ type: UPDATE_OH_QTY, payload } as const);
 export const addToPicklist = (payload: any) => ({ type: ADD_TO_PICKLIST, payload } as const);
 export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
 export const deleteLocation = (payload: any) => ({ type: DELETE_LOCATION, payload } as const);
 export const noAction = (payload: any) => ({ type: NO_ACTION, payload } as const);
-export const printSign = (payload: any) => ({ type: PRINT_SIGN, payload } as const);
+export const printSign = (payload: {
+  headers?: Record<string, unknown>;
+  printList: PrintItemList[]}) => ({ type: PRINT_SIGN, payload } as const);
 export const getLocationDetails = (payload: any) => ({ type: GET_LOCATION_DETAILS, payload } as const);
 export const getFluffyFeatures = (payload: any) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
 export const getApprovalList = (payload: {
@@ -41,9 +51,16 @@ export const getApprovalList = (payload: {
   approvalRequestSource?: approvalRequestSource;
 }) => ({ type: GET_APPROVAL_LIST, payload } as const);
 export const updateApprovalList = (payload: {
-  approvalItems: ApprovalListItem[]
-  headers: {action: approvalAction},
+  approvalItems: ApprovalListItem[];
+  headers: { action: approvalAction };
 }) => ({ type: UPDATE_APPROVAL_LIST, payload } as const);
 export const getAllZones = () => ({ type: GET_ALL_ZONES } as const);
-export const getAisle = (payload: {zoneId: number}) => ({ type: GET_AISLE, payload } as const);
-export const getSections = (payload: { aisleId: number}) => ({ type: GET_SECTIONS, payload } as const);
+export const getAisle = (payload: { zoneId: number }) => ({ type: GET_AISLE, payload } as const);
+export const getSections = (payload: { aisleId: number }) => ({ type: GET_SECTIONS, payload } as const);
+export const getSectionDetails = (payload: { sectionId: string }) => ({ type: GET_SECTION_DETAILS, payload } as const);
+export const printLocationLabel = (payload: {
+  printLabelList: PrintLocationList[]
+}) => ({ type: PRINT_LOCATION_LABELS, payload } as const);
+export const addPallet = (payload: any) => ({ type: ADD_PALLET, payload } as const);
+export const deletePallet = (payload: any) => ({ type: DELETE_PALLET, payload } as const);
+export const getPalletDetails = (payload: {palletIds: number[]}) => ({ type: GET_PALLET_DETAILS, payload } as const);

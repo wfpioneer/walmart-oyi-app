@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "@@observable": [Function],
+          "dispatch": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
+>
+  <ReservePalletRow
+    reservePallet={
+      Object {
+        "id": 1,
+        "items": Array [
+          Object {
+            "itemDesc": "Nature Valley Honey Nut Granola Bars",
+            "itemNbr": 500252,
+            "price": 0,
+          },
+          Object {
+            "itemDesc": "Cabbage",
+            "itemNbr": 123456,
+            "price": 0,
+          },
+        ],
+        "palletCreateTS": "2021-01-01",
+        "palletId": 1,
+        "statusCode": 200,
+      }
+    }
+    sectionId={1}
+  />
+</Context.Provider>
+`;
+
+exports[`ReservePalletRow Component Renders a ReservePallet with an item with a long name 1`] = `
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "@@observable": [Function],
+          "dispatch": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
+>
+  <ReservePalletRow
+    reservePallet={
+      Object {
+        "id": 1,
+        "items": Array [
+          Object {
+            "itemDesc": "Nature Valley Honey Nut Granola Bars",
+            "itemNbr": 500252,
+            "price": 0,
+          },
+          Object {
+            "itemDesc": "Cabbage",
+            "itemNbr": 123456,
+            "price": 0,
+          },
+          Object {
+            "itemDesc": "An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description",
+            "itemNbr": 980078597,
+            "price": 2.4,
+          },
+        ],
+        "palletCreateTS": "2021-01-01",
+        "palletId": 1,
+        "statusCode": 200,
+      }
+    }
+    sectionId={1}
+  />
+</Context.Provider>
+`;
+
+exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = `
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "@@observable": [Function],
+          "dispatch": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
+>
+  <ReservePalletRow
+    reservePallet={
+      Object {
+        "id": 1,
+        "items": Array [],
+        "palletCreateTS": "2021-01-01",
+        "palletId": 1,
+        "statusCode": 200,
+      }
+    }
+    sectionId={1}
+  />
+</Context.Provider>
+`;

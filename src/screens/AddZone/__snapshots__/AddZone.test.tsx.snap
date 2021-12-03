@@ -1,0 +1,929 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 0.9,
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "borderColor": "#c5c5c5",
+          "borderRadius": 10,
+          "borderWidth": 1,
+          "margin": 20,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(242, 242, 242)",
+            "left": 15,
+            "paddingHorizontal": 5,
+            "paddingVertical": 1,
+            "position": "absolute",
+            "top": -12,
+            "zIndex": 50,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#c5c5c5",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.LOCATION.ZONE" translation]
+        </Text>
+      </View>
+      <Picker
+        mode="dialog"
+        onValueChange={[Function]}
+        selectedValue="A"
+      >
+        <PickerItem
+          label="A"
+          value="A"
+        />
+      </Picker>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "marginHorizontal": 20,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginHorizontal": 20,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlignVertical": "center",
+            }
+          }
+        >
+          [missing "en.LOCATION.ADD_AISLES" translation]
+        </Text>
+        <NumericSelector
+          isValid={false}
+          onDecreaseQty={[Function]}
+          onIncreaseQty={[Function]}
+          onTextChange={[Function]}
+          value={100}
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#b71c1c",
+            "fontSize": 10,
+            "marginBottom": 12,
+            "textAlign": "right",
+          }
+        }
+      >
+        [missing "en.ITEM.OH_UPDATE_ERROR" translation]
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 0.9,
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "borderColor": "#c5c5c5",
+          "borderRadius": 10,
+          "borderWidth": 1,
+          "margin": 20,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(242, 242, 242)",
+            "left": 15,
+            "paddingHorizontal": 5,
+            "paddingVertical": 1,
+            "position": "absolute",
+            "top": -12,
+            "zIndex": 50,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#c5c5c5",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.LOCATION.ZONE" translation]
+        </Text>
+      </View>
+      <Picker
+        mode="dialog"
+        onValueChange={[Function]}
+        selectedValue=""
+      >
+        <PickerItem
+          label=""
+          value=""
+        />
+        <PickerItem
+          label="B - Electronics"
+          value="B"
+        />
+        <PickerItem
+          label="C - Hardlines"
+          value="C"
+        />
+        <PickerItem
+          label="D - Variable(Club Specific)"
+          value="D"
+        />
+        <PickerItem
+          label="E - Center Section (Front)"
+          value="E"
+        />
+        <PickerItem
+          label="F - Center Section (Middle)"
+          value="F"
+        />
+        <PickerItem
+          label="G - Wine - Center Section (Back)"
+          value="G"
+        />
+        <PickerItem
+          label="H - Fresh (Behind Center)"
+          value="H"
+        />
+        <PickerItem
+          label="I - Grocerry (Front)"
+          value="I"
+        />
+        <PickerItem
+          label="J - Grocerry (Middle)"
+          value="J"
+        />
+        <PickerItem
+          label="K - Variable(Club Specific)"
+          value="K"
+        />
+        <PickerItem
+          label="L - Freezer/Cooler"
+          value="L"
+        />
+        <PickerItem
+          label="M - Variable(Club Specific)"
+          value="M"
+        />
+        <PickerItem
+          label="N - Variable(Club Specific)"
+          value="N"
+        />
+        <PickerItem
+          label="O - Variable(Club Specific)"
+          value="O"
+        />
+        <PickerItem
+          label="P - Variable(Club Specific)"
+          value="P"
+        />
+        <PickerItem
+          label="Q - Variable(Club Specific)"
+          value="Q"
+        />
+        <PickerItem
+          label="R - Liquor"
+          value="R"
+        />
+        <PickerItem
+          label="S - Tobacco"
+          value="S"
+        />
+        <PickerItem
+          label="T - Optical"
+          value="T"
+        />
+        <PickerItem
+          label="U - Photo"
+          value="U"
+        />
+        <PickerItem
+          label="V - Hearing"
+          value="V"
+        />
+        <PickerItem
+          label="W - Membership"
+          value="W"
+        />
+        <PickerItem
+          label="X - Tire and Battery center"
+          value="X"
+        />
+        <PickerItem
+          label="Y - Cafe"
+          value="Y"
+        />
+        <PickerItem
+          label="Z - Registers"
+          value="Z"
+        />
+        <PickerItem
+          label="1BAK - 1BAK"
+          value="1BAK"
+        />
+        <PickerItem
+          label="2BAK - Bakery - Freezer"
+          value="2BAK"
+        />
+        <PickerItem
+          label="1CAF - Cafe   - Cooler"
+          value="1CAF"
+        />
+        <PickerItem
+          label="2CAF - Cafe - Freezer"
+          value="2CAF"
+        />
+        <PickerItem
+          label="1LOC - Lockup Cages - Front"
+          value="1LOC"
+        />
+        <PickerItem
+          label="2LOC - Lockup Cages - Other"
+          value="2LOC"
+        />
+        <PickerItem
+          label="1MEA - Meat - Cooler"
+          value="1MEA"
+        />
+        <PickerItem
+          label="2MEA - Meat - Freezer"
+          value="2MEA"
+        />
+        <PickerItem
+          label="BULK - Club Pickup"
+          value="BULK"
+        />
+        <PickerItem
+          label="CLMS - Claims"
+          value="CLMS"
+        />
+        <PickerItem
+          label="JWLY - Jewelry - Backstock"
+          value="JWLY"
+        />
+        <PickerItem
+          label="PHAR - Pharmacy - Backstock"
+          value="PHAR"
+        />
+        <PickerItem
+          label="PROD - Produce - Cooler/Backroom"
+          value="PROD"
+        />
+        <PickerItem
+          label="RECV - Receiving"
+          value="RECV"
+        />
+        <PickerItem
+          label="REST - Restrooms"
+          value="REST"
+        />
+        <PickerItem
+          label="1TBC - Tire - Backroom (1st Floor)"
+          value="1TBC"
+        />
+        <PickerItem
+          label="2TBC - Tire -  Backroom (2nd Floor)"
+          value="2TBC"
+        />
+        <PickerItem
+          label="TOBC - Tobacco"
+          value="TOBC"
+        />
+        <PickerItem
+          label="1CPU - Club Pickup"
+          value="1CPU"
+        />
+        <PickerItem
+          label="2CPU - Club Pickup"
+          value="2CPU"
+        />
+        <PickerItem
+          label="3CPU - Club Pickup"
+          value="3CPU"
+        />
+      </Picker>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "marginHorizontal": 20,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginHorizontal": 20,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlignVertical": "center",
+            }
+          }
+        >
+          [missing "en.LOCATION.ADD_AISLES" translation]
+        </Text>
+        <NumericSelector
+          isValid={false}
+          onDecreaseQty={[Function]}
+          onIncreaseQty={[Function]}
+          onTextChange={[Function]}
+          value={100}
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#b71c1c",
+            "fontSize": 10,
+            "marginBottom": 12,
+            "textAlign": "right",
+          }
+        }
+      >
+        [missing "en.ITEM.OH_UPDATE_ERROR" translation]
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 0.9,
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "borderColor": "#c5c5c5",
+          "borderRadius": 10,
+          "borderWidth": 1,
+          "margin": 20,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(242, 242, 242)",
+            "left": 15,
+            "paddingHorizontal": 5,
+            "paddingVertical": 1,
+            "position": "absolute",
+            "top": -12,
+            "zIndex": 50,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#c5c5c5",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.LOCATION.ZONE" translation]
+        </Text>
+      </View>
+      <Picker
+        mode="dialog"
+        onValueChange={[Function]}
+        selectedValue="A"
+      >
+        <PickerItem
+          label="A"
+          value="A"
+        />
+      </Picker>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "marginHorizontal": 20,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginHorizontal": 20,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlignVertical": "center",
+            }
+          }
+        >
+          [missing "en.LOCATION.ADD_AISLES" translation]
+        </Text>
+        <NumericSelector
+          isValid={true}
+          onDecreaseQty={[Function]}
+          onIncreaseQty={[Function]}
+          onTextChange={[Function]}
+          value={1}
+        />
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 0.9,
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "borderColor": "#c5c5c5",
+          "borderRadius": 10,
+          "borderWidth": 1,
+          "margin": 20,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgb(242, 242, 242)",
+            "left": 15,
+            "paddingHorizontal": 5,
+            "paddingVertical": 1,
+            "position": "absolute",
+            "top": -12,
+            "zIndex": 50,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#c5c5c5",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.LOCATION.ZONE" translation]
+        </Text>
+      </View>
+      <Picker
+        mode="dialog"
+        onValueChange={[Function]}
+        selectedValue=""
+      >
+        <PickerItem
+          label=""
+          value=""
+        />
+        <PickerItem
+          label="B - Electronics"
+          value="B"
+        />
+        <PickerItem
+          label="C - Hardlines"
+          value="C"
+        />
+        <PickerItem
+          label="D - Variable(Club Specific)"
+          value="D"
+        />
+        <PickerItem
+          label="E - Center Section (Front)"
+          value="E"
+        />
+        <PickerItem
+          label="F - Center Section (Middle)"
+          value="F"
+        />
+        <PickerItem
+          label="G - Wine - Center Section (Back)"
+          value="G"
+        />
+        <PickerItem
+          label="H - Fresh (Behind Center)"
+          value="H"
+        />
+        <PickerItem
+          label="I - Grocerry (Front)"
+          value="I"
+        />
+        <PickerItem
+          label="J - Grocerry (Middle)"
+          value="J"
+        />
+        <PickerItem
+          label="K - Variable(Club Specific)"
+          value="K"
+        />
+        <PickerItem
+          label="L - Freezer/Cooler"
+          value="L"
+        />
+        <PickerItem
+          label="M - Variable(Club Specific)"
+          value="M"
+        />
+        <PickerItem
+          label="N - Variable(Club Specific)"
+          value="N"
+        />
+        <PickerItem
+          label="O - Variable(Club Specific)"
+          value="O"
+        />
+        <PickerItem
+          label="P - Variable(Club Specific)"
+          value="P"
+        />
+        <PickerItem
+          label="Q - Variable(Club Specific)"
+          value="Q"
+        />
+        <PickerItem
+          label="R - Liquor"
+          value="R"
+        />
+        <PickerItem
+          label="S - Tobacco"
+          value="S"
+        />
+        <PickerItem
+          label="T - Optical"
+          value="T"
+        />
+        <PickerItem
+          label="U - Photo"
+          value="U"
+        />
+        <PickerItem
+          label="V - Hearing"
+          value="V"
+        />
+        <PickerItem
+          label="W - Membership"
+          value="W"
+        />
+        <PickerItem
+          label="X - Tire and Battery center"
+          value="X"
+        />
+        <PickerItem
+          label="Y - Cafe"
+          value="Y"
+        />
+        <PickerItem
+          label="Z - Registers"
+          value="Z"
+        />
+        <PickerItem
+          label="1BAK - 1BAK"
+          value="1BAK"
+        />
+        <PickerItem
+          label="2BAK - Bakery - Freezer"
+          value="2BAK"
+        />
+        <PickerItem
+          label="1CAF - Cafe   - Cooler"
+          value="1CAF"
+        />
+        <PickerItem
+          label="2CAF - Cafe - Freezer"
+          value="2CAF"
+        />
+        <PickerItem
+          label="1LOC - Lockup Cages - Front"
+          value="1LOC"
+        />
+        <PickerItem
+          label="2LOC - Lockup Cages - Other"
+          value="2LOC"
+        />
+        <PickerItem
+          label="1MEA - Meat - Cooler"
+          value="1MEA"
+        />
+        <PickerItem
+          label="2MEA - Meat - Freezer"
+          value="2MEA"
+        />
+        <PickerItem
+          label="BULK - Club Pickup"
+          value="BULK"
+        />
+        <PickerItem
+          label="CLMS - Claims"
+          value="CLMS"
+        />
+        <PickerItem
+          label="JWLY - Jewelry - Backstock"
+          value="JWLY"
+        />
+        <PickerItem
+          label="PHAR - Pharmacy - Backstock"
+          value="PHAR"
+        />
+        <PickerItem
+          label="PROD - Produce - Cooler/Backroom"
+          value="PROD"
+        />
+        <PickerItem
+          label="RECV - Receiving"
+          value="RECV"
+        />
+        <PickerItem
+          label="REST - Restrooms"
+          value="REST"
+        />
+        <PickerItem
+          label="1TBC - Tire - Backroom (1st Floor)"
+          value="1TBC"
+        />
+        <PickerItem
+          label="2TBC - Tire -  Backroom (2nd Floor)"
+          value="2TBC"
+        />
+        <PickerItem
+          label="TOBC - Tobacco"
+          value="TOBC"
+        />
+        <PickerItem
+          label="1CPU - Club Pickup"
+          value="1CPU"
+        />
+        <PickerItem
+          label="2CPU - Club Pickup"
+          value="2CPU"
+        />
+        <PickerItem
+          label="3CPU - Club Pickup"
+          value="3CPU"
+        />
+      </Picker>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "marginHorizontal": 20,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginHorizontal": 20,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "textAlignVertical": "center",
+            }
+          }
+        >
+          [missing "en.LOCATION.ADD_AISLES" translation]
+        </Text>
+        <NumericSelector
+          isValid={true}
+          onDecreaseQty={[Function]}
+          onIncreaseQty={[Function]}
+          onTextChange={[Function]}
+          value={1}
+        />
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;

@@ -1,29 +1,100 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test Location Header in Zone Screen Renders Location Header In Zone Screen 1`] = `
+exports[`Test Location Header in Zone Screen Renders Location Header In Zone Screen, no button 1`] = `
 <View
   style={
     Object {
+      "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "borderBottomColor": "#eeeeee",
       "borderBottomWidth": 2,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
       "marginHorizontal": 0,
       "padding": 14,
     }
   }
 >
-  <Text>
-    [missing "en.GENERICS.CLUB" translation] 5522
-  </Text>
-  <Text
+  <View
     style={
       Object {
-        "color": "#9e9e9e",
-        "fontSize": 12,
+        "flexDirection": "column",
       }
     }
   >
-    35 [missing "en.LOCATION.ZONES" translation]
-  </Text>
+    <Text>
+      [missing "en.GENERICS.CLUB" translation] 5522
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#9e9e9e",
+          "fontSize": 12,
+        }
+      }
+    >
+      35 [missing "en.LOCATION.ZONES" translation]
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Test Location Header in Zone Screen Renders Location header with button 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "borderBottomColor": "#eeeeee",
+      "borderBottomWidth": 2,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "marginHorizontal": 0,
+      "padding": 14,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text>
+      yes
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#9e9e9e",
+          "fontSize": 12,
+        }
+      }
+    >
+      no
+    </Text>
+  </View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    delayLongPress={600}
+    extraButtonProps={
+      Object {
+        "rippleColor": "transparent",
+      }
+    }
+    onPress={[Function]}
+  >
+    <Text
+      style={
+        Object {
+          "color": "#0071e9",
+          "fontSize": 16,
+        }
+      }
+    >
+      i is button
+    </Text>
+  </TouchableOpacity>
 </View>
 `;

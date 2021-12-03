@@ -141,8 +141,8 @@ android {
         applicationId "com.walmart.intl.oyi"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 136
-        versionName "1.1.2"
+        versionCode 144
+        versionName "4.1.0"
         resValue "string", "build_config_package", "com.samsclub.intl.oyi"
     }
     splits {

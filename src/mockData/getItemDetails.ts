@@ -1,5 +1,27 @@
 import ItemDetails from '../models/ItemDetails';
 /* eslint-disable quote-props */
+
+enum LOCATION_TYPES {
+  SALES_FLOOR = 'Sales Floor',
+  DISPLAY = 'Display',
+  POD = 'Pod',
+  END_CAP = 'End Cap',
+  RESERVE = 'Reserve'
+}
+
+enum SALES_DAYS {
+  DAY1 = '2020-07-08',
+  DAY2 = '2020-07-09',
+  DAY3 = '2020-07-10',
+  DAY4 = '2020-07-11',
+  DAY5 = '2020-07-12',
+  DAY6 = '2020-07-13',
+  DAY7 = '2020-07-14'
+}
+
+const SALES_LAST_UPDATE_TS = '2020-07-15T08:02:17-05:00';
+
+
 export default {
   '123': {
     itemName: 'Test Item That is Really, Really Long (and has parenthesis)',
@@ -33,7 +55,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Sales Floor',
+          type: LOCATION_TYPES.SALES_FLOOR,
           typeNbr: 8
         },
         {
@@ -44,7 +66,7 @@ export default {
           aisleName: '1',
           sectionName: '2',
           locationName: 'A1-2',
-          type: 'End Cap',
+          type: LOCATION_TYPES.END_CAP,
           typeNbr: 12
         },
         {
@@ -55,7 +77,7 @@ export default {
           aisleName: '1',
           sectionName: '3',
           locationName: 'A1-3',
-          type: 'Pod',
+          type: LOCATION_TYPES.POD,
           typeNbr: 13
         },
         {
@@ -66,7 +88,7 @@ export default {
           aisleName: '1',
           sectionName: '4',
           locationName: 'A1-4',
-          type: 'Display',
+          type: LOCATION_TYPES.DISPLAY,
           typeNbr: 11
         }
       ],
@@ -79,42 +101,42 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Reserve',
+          type: LOCATION_TYPES.RESERVE,
           typeNbr: 7
         }
       ],
       count: 5
     },
     sales: {
-      lastUpdateTs: '2020-07-15T08:02:17-05:00',
+      lastUpdateTs: SALES_LAST_UPDATE_TS,
       dailyAvgSales: 15,
       daily: [
         {
-          day: '2020-07-08',
+          day: SALES_DAYS.DAY1,
           value: 100
         },
         {
-          day: '2020-07-09',
+          day: SALES_DAYS.DAY2,
           value: 0
         },
         {
-          day: '2020-07-10',
+          day: SALES_DAYS.DAY3,
           value: 10
         },
         {
-          day: '2020-07-11',
+          day: SALES_DAYS.DAY4,
           value: 10
         },
         {
-          day: '2020-07-12',
+          day: SALES_DAYS.DAY5,
           value: 42
         },
         {
-          day: '2020-07-13',
+          day: SALES_DAYS.DAY6,
           value: 5
         },
         {
-          day: '2020-07-14',
+          day: SALES_DAYS.DAY7,
           value: 1
         }
       ],
@@ -175,7 +197,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Sales Floor',
+          type: LOCATION_TYPES.SALES_FLOOR,
           typeNbr: 8
         },
         {
@@ -186,7 +208,7 @@ export default {
           aisleName: '1',
           sectionName: '2',
           locationName: 'A1-2',
-          type: 'End Cap',
+          type: LOCATION_TYPES.END_CAP,
           typeNbr: 12
         },
         {
@@ -197,7 +219,7 @@ export default {
           aisleName: '1',
           sectionName: '3',
           locationName: 'A1-3',
-          type: 'Pod',
+          type: LOCATION_TYPES.POD,
           typeNbr: 13
         },
         {
@@ -208,7 +230,7 @@ export default {
           aisleName: '1',
           sectionName: '4',
           locationName: 'A1-4',
-          type: 'Display',
+          type: LOCATION_TYPES.DISPLAY,
           typeNbr: 11
         }
       ],
@@ -221,42 +243,42 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Reserve',
+          type: LOCATION_TYPES.RESERVE,
           typeNbr: 7
         }
       ],
       count: 5
     },
     sales: {
-      lastUpdateTs: '2020-07-15T08:02:17-05:00',
+      lastUpdateTs: SALES_LAST_UPDATE_TS,
       dailyAvgSales: 15,
       daily: [
         {
-          day: '2020-07-08',
+          day: SALES_DAYS.DAY1,
           value: 10
         },
         {
-          day: '2020-07-09',
+          day: SALES_DAYS.DAY2,
           value: 0
         },
         {
-          day: '2020-07-10',
+          day: SALES_DAYS.DAY3,
           value: 10
         },
         {
-          day: '2020-07-11',
+          day: SALES_DAYS.DAY4,
           value: 10
         },
         {
-          day: '2020-07-12',
+          day: SALES_DAYS.DAY5,
           value: 42
         },
         {
-          day: '2020-07-13',
+          day: SALES_DAYS.DAY6,
           value: 5
         },
         {
-          day: '2020-07-14',
+          day: SALES_DAYS.DAY7,
           value: 1
         }
       ],
@@ -313,7 +335,7 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Sales Floor',
+          type: LOCATION_TYPES.SALES_FLOOR,
           typeNbr: 8
         },
         {
@@ -324,7 +346,7 @@ export default {
           aisleName: '1',
           sectionName: '2',
           locationName: 'A1-2',
-          type: 'End Cap',
+          type: LOCATION_TYPES.END_CAP,
           typeNbr: 12
         },
         {
@@ -335,7 +357,7 @@ export default {
           aisleName: '1',
           sectionName: '3',
           locationName: 'A1-3',
-          type: 'Pod',
+          type: LOCATION_TYPES.POD,
           typeNbr: 13
         },
         {
@@ -346,7 +368,7 @@ export default {
           aisleName: '1',
           sectionName: '4',
           locationName: 'A1-4',
-          type: 'Display',
+          type: LOCATION_TYPES.DISPLAY,
           typeNbr: 11
         }
       ],
@@ -359,42 +381,42 @@ export default {
           aisleName: '1',
           sectionName: '1',
           locationName: 'A1-1',
-          type: 'Reserve',
+          type: LOCATION_TYPES.RESERVE,
           typeNbr: 7
         }
       ],
       count: 5
     },
     sales: {
-      lastUpdateTs: '2020-07-15T08:02:17-05:00',
+      lastUpdateTs: SALES_LAST_UPDATE_TS,
       dailyAvgSales: 15,
       daily: [
         {
-          day: '2020-07-08',
+          day: SALES_DAYS.DAY1,
           value: 10
         },
         {
-          day: '2020-07-09',
+          day: SALES_DAYS.DAY2,
           value: 0
         },
         {
-          day: '2020-07-10',
+          day: SALES_DAYS.DAY3,
           value: 10
         },
         {
-          day: '2020-07-11',
+          day: SALES_DAYS.DAY4,
           value: 10
         },
         {
-          day: '2020-07-12',
+          day: SALES_DAYS.DAY5,
           value: 42
         },
         {
-          day: '2020-07-13',
+          day: SALES_DAYS.DAY6,
           value: 5
         },
         {
-          day: '2020-07-14',
+          day: SALES_DAYS.DAY7,
           value: 1
         }
       ],
@@ -418,5 +440,93 @@ export default {
         }
       ]
     }
-  } as ItemDetails
+  } as ItemDetails,
+  '321': {
+    itemName: 'Test Item That is Really, Really Long (and has parenthesis)',
+    itemNbr: 1234567890,
+    upcNbr: '000055559999',
+    status: 'Active',
+    categoryNbr: 93,
+    categoryDesc: 'Meat PI',
+    price: 2000.94,
+    basePrice: 1500.30,
+    exceptionType: 'nsfl',
+    imageUrlKey: undefined,
+    imageBlobKey: undefined,
+    completed: false,
+    onHandsQty: 42,
+    pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 10,
+    claimsOnHandQty: 5,
+    backroomQty: 6,
+    cloudQty: undefined,
+    replenishment: {
+      onOrder: 48
+    },
+    location: {
+      floor: [
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: 'A1-1',
+          type: LOCATION_TYPES.SALES_FLOOR,
+          typeNbr: 8
+        },
+        {
+          zoneId: 0,
+          aisleId: 0,
+          sectionId: 2,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '2',
+          locationName: 'A1-2',
+          type: LOCATION_TYPES.END_CAP,
+          typeNbr: 12
+        },
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 3,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '3',
+          locationName: 'A1-3',
+          type: LOCATION_TYPES.POD,
+          typeNbr: 13
+        },
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 4,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '4',
+          locationName: 'A1-4',
+          type: LOCATION_TYPES.DISPLAY,
+          typeNbr: 11
+        }
+      ],
+      reserve: [
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: 'A1-1',
+          type: LOCATION_TYPES.RESERVE,
+          typeNbr: 7
+        }
+      ],
+      count: 5
+    },
+    sales: {
+      error: ''
+    }
+  }
 };

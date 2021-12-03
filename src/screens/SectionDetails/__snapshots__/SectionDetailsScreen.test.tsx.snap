@@ -1,0 +1,692 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Location Details Screen Tests rendering Get Section Details api responses Renders Location Details activity indicator when waiting for an api response 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`Test Location Details Screen Tests rendering Get Section Details api responses Renders Location Details error message 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="alert"
+    size={40}
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.LOCATION.LOCATION_API_ERROR" translation]
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "marginVertical": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Empty Mock Data 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ForwardRef
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.LOCATION.FLOOR_EMPTY" translation]
+        </Text>
+      </View>
+    }
+    data={Array []}
+    keyExtractor={[Function]}
+    renderItem={[Function]}
+  />
+</View>
+`;
+
+exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Mock Floor Items 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ForwardRef
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.LOCATION.FLOOR_EMPTY" translation]
+        </Text>
+      </View>
+    }
+    data={
+      Array [
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Honey Bars",
+          "itemNbr": 980011111,
+          "price": 5.8,
+        },
+      ]
+    }
+    keyExtractor={[Function]}
+    renderItem={[Function]}
+  />
+</View>
+`;
+
+exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Mock Large Location Data 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ForwardRef
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.LOCATION.FLOOR_EMPTY" translation]
+        </Text>
+      </View>
+    }
+    data={
+      Array [
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+        Object {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
+        },
+      ]
+    }
+    keyExtractor={[Function]}
+    renderItem={[Function]}
+  />
+</View>
+`;

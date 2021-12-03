@@ -105,12 +105,14 @@ export default {
     RESERVE_QTY: '高货架库存',
     CLAIMS_QTY: '索赔库存',
     CONSOLIDATED_QTY: '临时外仓',
-    FLY_CLOUD_QTY: '云仓库存'
+    FLY_CLOUD_QTY: '云仓库存',
+    ERROR_SALES_HISTORY: '无法获取历史销售'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
     QUEUE_TITLE: '打印清单',
     CHANGE_TITLE: '打印机',
+    LOCATION_TITLE: '打印货架标签',
     PRICE_SIGN: '打印价签',
     COPY_QTY: '副本数量',
     COPIES: '副本',
@@ -131,7 +133,9 @@ export default {
     MAC_ADDRESS: '输入或扫描MAC地址',
     MAC_ADDRESS_ERROR: 'MAC地址通常是12个数字',
     PORTABLE_PRINTER: '便携式打印机',
-    PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试'
+    PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
+    PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
+    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Mandarin Translation
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -153,6 +157,7 @@ export default {
     LOCATION_MANAGEMENT: '通道管理',
     ITEMS: '多个商品',
     PALLETS: 'Pallets', // TODO Mandarin Translation
+    PALLET: 'Pallet', // TODO Mandarin Translation
     ZONES: '区域',
     ZONE: 'Zone', // TODO Mandarin Translation
     AISLES: '通道',
@@ -161,11 +166,38 @@ export default {
     SECTION: 'Section', // TODO Mandarin Translation
     AREAS: 'Areas',
     LOCATION_DETAILS: '具体位置',
-    NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Mandarin Translation
-    NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Mandarin Translation
+    NO_ZONES_AVAILABLE: '无区域',
+    NO_AISLES_AVAILABLE: '无通道',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
-    CLEAR_ALL: 'Clear all', // TODO Mandarin Translation
-    ADD: '增加'
+    CLEAR_ALL: '全部清除',
+    CLEAR_SECTION: '清除此货架位置',
+    REMOVE_SECTION: '移除此货架位置',
+    REMOVE_ZONE: '移除此区域',
+    REMOVE_ALL: 'Remove all', // TODO Mandarin Translation
+    ADD: '增加',
+    SCAN_LOCATION: '无效位置名，如A1-2',
+    ADD_ZONE: '添加一个新区域',
+    ADD_AISLES: '增加通道',
+    CREATED_ON: '创建于',
+    MORE: '更多',
+    PRINT_SECTION: '打印所有已选货架标签',
+    ADD_SECTIONS: '增加货架位置',
+    CLEAR_AISLE: '清除通道',
+    REMOVE_AISLE: '移除通道',
+    SCAN_PALLET: '扫描卡板标签',
+    PALLET_VALIDATE_ERROR: '卡板号只能是数字',
+    PALLET_PLACEHOLDER: '输入或扫描卡板号',
+    PRINT_LABEL: '打印标签',
+    PRINT_LABELS: '打印标签',
+    ADD_PALLET_ERROR: '添加卡板时出错',
+    ADD_PALLET_API_ERROR: '错误添加卡板标签，请重试',
+    PALLET_ERROR: '卡板未找到/空卡板',
+    PALLET_NOT_FOUND: '因未找到卡板/卡板为空系统报错',
+    PALLET_ADDED: '卡板添加成功',
+    PALLET_DELETE_CONFIRMATION: '确认：删除卡板',
+    FLOOR_EMPTY: '楼面清单无商品',
+    RESERVE_EMPTY: '存储区域无卡板',
+    GET_FAILED_PALLETS: '获取 %{amount} 卡板失败'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

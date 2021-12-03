@@ -580,114 +580,63 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
     }
   }
 >
-  <ReactNativeModal
-    animationIn="slideInUp"
-    animationInTiming={300}
-    animationOut="slideOutDown"
-    animationOutTiming={300}
-    avoidKeyboard={false}
-    backdropColor="black"
-    backdropOpacity={0.7}
-    backdropTransitionInTiming={300}
-    backdropTransitionOutTiming={300}
-    coverScreen={true}
-    customBackdrop={null}
-    deviceHeight={null}
-    deviceWidth={null}
-    hasBackdrop={true}
-    hideModalContentWhileAnimating={false}
+  <CustomModalComponent
+    animationType="none"
     isVisible={true}
-    onBackButtonPress={[Function]}
-    onBackdropPress={[Function]}
-    onModalHide={[Function]}
-    onModalShow={[Function]}
-    onModalWillHide={[Function]}
-    onModalWillShow={[Function]}
-    panResponderThreshold={4}
-    propagateSwipe={false}
-    scrollHorizontal={false}
-    scrollOffset={0}
-    scrollOffsetMax={0}
-    scrollTo={null}
-    statusBarTranslucent={false}
-    supportedOrientations={
-      Array [
-        "portrait",
-        "landscape",
-      ]
-    }
-    swipeThreshold={100}
-    useNativeDriver={false}
+    modalType="Error"
+    onClose={[Function]}
   >
-    <View
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
       style={
         Object {
-          "alignContent": "center",
           "alignSelf": "center",
-          "backgroundColor": "#ffffffff",
-          "borderColor": "#545F7A",
-          "borderRadius": 10,
-          "borderStyle": "solid",
-          "borderWidth": 1,
-          "justifyContent": "center",
-          "minHeight": 150,
-          "padding": 10,
-          "width": "80%",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
         }
       }
     >
-      <mockConstructor
-        color="#f44336"
-        name="alert"
-        size={30}
+      [missing "en.APPROVAL.UPDATE_API_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
         style={
           Object {
-            "alignSelf": "center",
+            "marginTop": 16,
+            "width": "70%",
           }
         }
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
       />
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.APPROVAL.UPDATE_API_ERROR" translation]
-      </Text>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "justifyContent": "center",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "marginTop": 16,
-              "width": "70%",
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
     </View>
-  </ReactNativeModal>
+  </CustomModalComponent>
   <View
     style={
       Object {

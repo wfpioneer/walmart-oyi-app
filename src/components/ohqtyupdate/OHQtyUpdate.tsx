@@ -1,24 +1,19 @@
-import React, {
-  useEffect,
-  useState
-} from 'react';
-
-import {
-  ActivityIndicator, Text, TextInput, View
-} from 'react-native';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import styles from './OHQtyUpdate.style';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
 import IconButton from '../buttons/IconButton';
+import NumericSelector from '../NumericSelector/NumericSelector';
 import { numbers, strings } from '../../locales';
 import { updateOHQty } from '../../state/actions/saga';
 import { setActionCompleted, updatePendingOHQty } from '../../state/actions/ItemDetailScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import ItemDetails from '../../models/ItemDetails';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
+import { ModalCloseIcon } from '../../screens/Modal/Modal';
 
 interface OHQtyUpdateProps {
   ohQty: number;
@@ -37,9 +32,52 @@ const ERROR_FORMATTING_OPTIONS = {
 const validateQty = (qty: number) => OH_MIN <= qty && qty <= OH_MAX;
 const validateSameQty = (qty: number, newQty: number) => qty === newQty;
 
-const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
-  <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
+const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
+  || exceptionType === 'C' || exceptionType === 'NSFL';
+
+const validate = (isValidNbr: boolean, isSameQty: boolean) => !isValidNbr || isSameQty;
+
+const isErrorRequired = (error: string) => (
+  error !== '' && (
+    <Text style={styles.invalidLabel}>
+      {error}
+    </Text>
+  )
 );
+const calculateDecreaseQty = (newOHQty: any, setIsValidNbr: React.Dispatch<React.SetStateAction<boolean>>,
+  setNewOHQty: React.Dispatch<React.SetStateAction<number>>,
+  setIsSameQty: React.Dispatch<React.SetStateAction<boolean>>, ohQty: number) => {
+  if (newOHQty > OH_MAX) {
+    setIsValidNbr(true);
+    setNewOHQty(OH_MAX);
+  } else if (newOHQty > OH_MIN) {
+    setIsValidNbr(true);
+    setNewOHQty((prevState => prevState - 1));
+  }
+  setIsSameQty(validateSameQty(ohQty, newOHQty - 1));
+};
+const assignHandleTextChange = (newQty: any, setIsValidNbr: React.Dispatch<React.SetStateAction<boolean>>,
+  setNewOHQty: React.Dispatch<React.SetStateAction<number>>,
+  setIsSameQty: React.Dispatch<React.SetStateAction<boolean>>, ohQty: number) => {
+  // eslint-disable-next-line no-restricted-globals
+  if (!isNaN(newQty)) {
+    setNewOHQty(newQty);
+    setIsValidNbr(validateQty(newQty));
+    setIsSameQty(validateSameQty(ohQty, newQty));
+  }
+};
+const calculateIncreaseQty = (newOHQty: any, setIsValidNbr: React.Dispatch<React.SetStateAction<boolean>>,
+  setNewOHQty: React.Dispatch<React.SetStateAction<number>>,
+  setIsSameQty: React.Dispatch<React.SetStateAction<boolean>>, ohQty: number) => {
+  if (newOHQty < OH_MIN) {
+    setIsValidNbr(true);
+    setNewOHQty(OH_MIN);
+  } else if (newOHQty < OH_MAX) {
+    setIsValidNbr(true);
+    setNewOHQty((prevState => prevState + 1));
+  }
+  setIsSameQty(validateSameQty(ohQty, newOHQty + 1));
+};
 
 const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   const { ohQty, setOhQtyModalVisible } = props;
@@ -49,34 +87,30 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   const [apiSubmitting, updateApiSubmitting] = useState(false);
   const [error, updateError] = useState('');
   const { result } = useTypedSelector(state => state.async.getItemDetails);
-  const itemDetails: ItemDetails = result && result.data;
+  const itemDetails: ItemDetails = result.data;
   const updateQuantityAPIStatus = useTypedSelector(state => state.async.updateOHQty);
   const dispatch = useDispatch();
-
   // Update Quantity API
   useEffect(() => {
     // on api success
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.result) {
       dispatch(updatePendingOHQty(newOHQty));
-      if (props.exceptionType === 'NO' || props.exceptionType === 'C' || props.exceptionType === 'NSFL') {
+      if (validateExceptionType(props.exceptionType)) {
         dispatch(setActionCompleted());
       }
       updateApiSubmitting(false);
       return setOhQtyModalVisible(false);
     }
-
     // on api failure
     if (apiSubmitting && updateQuantityAPIStatus.isWaiting === false && updateQuantityAPIStatus.error) {
       updateApiSubmitting(false);
       return updateError(strings('ITEM.OH_UPDATE_API_ERROR'));
     }
-
     // on api submission
     if (!apiSubmitting && updateQuantityAPIStatus.isWaiting) {
       updateError('');
       return updateApiSubmitting(true);
     }
-
     return undefined;
   }, [updateQuantityAPIStatus]);
 
@@ -102,101 +136,62 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
-    // eslint-disable-next-line no-restricted-globals
-    if (!isNaN(newQty)) {
-      setNewOHQty(newQty);
-      setIsValidNbr(validateQty(newQty));
-      setIsSameQty(validateSameQty(ohQty, newQty));
-    }
+    assignHandleTextChange(newQty, setIsValidNbr, setNewOHQty, setIsSameQty, ohQty);
   };
 
   const handleIncreaseQty = () => {
-    if (newOHQty < OH_MIN) {
-      setIsValidNbr(true);
-      setNewOHQty(OH_MIN);
-    } else if (newOHQty < OH_MAX) {
-      setIsValidNbr(true);
-      setNewOHQty((prevState => prevState + 1));
-    }
-    setIsSameQty(validateSameQty(ohQty, newOHQty + 1));
+    calculateIncreaseQty(newOHQty, setIsValidNbr, setNewOHQty, setIsSameQty, ohQty);
   };
 
   const handleDecreaseQty = () => {
-    if (newOHQty > OH_MAX) {
-      setIsValidNbr(true);
-      setNewOHQty(OH_MAX);
-    } else if (newOHQty > OH_MIN) {
-      setIsValidNbr(true);
-      setNewOHQty((prevState => prevState - 1));
-    }
-    setIsSameQty(validateSameQty(ohQty, newOHQty - 1));
+    calculateDecreaseQty(newOHQty, setIsValidNbr, setNewOHQty, setIsSameQty, ohQty);
   };
 
-  if (apiSubmitting) {
-    return (
-      <View style={styles.modalContainer}>
-        <ActivityIndicator color={COLOR.BLACK} />
-      </View>
-    );
-  }
-
   return (
-    <View style={styles.modalContainer}>
-      <View style={styles.contentContainer}>
-        <View style={styles.closeContainer}>
+    <>
+      <View style={styles.closeContainer}>
+        {!apiSubmitting && (
           <IconButton
-            icon={<MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />}
+            icon={ModalCloseIcon}
             type={Button.Type.NO_BORDER}
             onPress={() => { setOhQtyModalVisible(false); }}
           />
-        </View>
-        <View style={[styles.updateContainer, isValidNbr ? styles.updateContainerValid
-          : styles.updateContainerInvalid]}
-        >
-          <IconButton
-            icon={renderPlusMinusBtn('minus')}
-            type={IconButton.Type.NO_BORDER}
-            height={15}
-            width={35}
-            onPress={handleDecreaseQty}
-          />
-          <TextInput
-            style={styles.ohInput}
-            keyboardType="numeric"
-            onChangeText={handleTextChange}
-          >
-            {newOHQty}
-          </TextInput>
-          <IconButton
-            icon={renderPlusMinusBtn('plus')}
-            type={IconButton.Type.NO_BORDER}
-            height={15}
-            width={35}
-            onPress={handleIncreaseQty}
-          />
-        </View>
-        {!isValidNbr && (
+        )}
+      </View>
+      <NumericSelector
+        isValid={isValidNbr}
+        onDecreaseQty={handleDecreaseQty}
+        onIncreaseQty={handleIncreaseQty}
+        onTextChange={handleTextChange}
+        value={newOHQty}
+      />
+      {!isValidNbr && (
         <Text style={styles.invalidLabel}>
           {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}
         </Text>
-        )}
-        <Text style={styles.ohLabel}>
-          {`${strings('GENERICS.TOTAL')} ${strings('ITEM.ON_HANDS')}`}
-        </Text>
-        {error !== '' && (
-          <Text style={styles.invalidLabel}>
-            {error}
-          </Text>
-        )}
-        <Button
-          style={styles.saveBtn}
-          title="Save"
-          type={Button.Type.PRIMARY}
-          disabled={(!isValidNbr || isSameQty)}
-          onPress={handleSaveOHQty}
+      )}
+      <Text style={styles.ohLabel}>
+        {`${strings('GENERICS.TOTAL')} ${strings('ITEM.ON_HANDS')}`}
+      </Text>
+      {isErrorRequired(error)}
+      {apiSubmitting ? (
+        <ActivityIndicator
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.activityIndicator}
         />
-      </View>
-    </View>
+      )
+        : (
+          <Button
+            style={styles.saveBtn}
+            title="Save"
+            type={Button.Type.PRIMARY}
+            disabled={validate(isValidNbr, isSameQty)}
+            onPress={handleSaveOHQty}
+          />
+        )}
+    </>
   );
 };
 

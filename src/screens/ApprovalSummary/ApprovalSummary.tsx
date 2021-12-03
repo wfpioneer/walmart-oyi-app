@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import moment from 'moment';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Modal from 'react-native-modal';
 import { QuantityChange } from '../../components/quantityChange/QuantityChange';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import { strings } from '../../locales';
@@ -22,6 +21,7 @@ import { showSnackBar } from '../../state/actions/SnackBar';
 import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
+import { CustomModalComponent } from '../Modal/Modal';
 
 interface ApprovalSummaryProps {
   route: RouteProp<any, string>;
@@ -31,7 +31,7 @@ interface ApprovalSummaryProps {
   errorModalVisible: boolean;
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>
   dispatch: Dispatch<any>
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
 interface ItemQuantity {
@@ -43,24 +43,42 @@ interface ItemQuantity {
 
 export const renderErrorModal = (setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>): JSX.Element => (
   // Used to overlay the modal in the screen view
-  <Modal isVisible={true}>
-    <View style={styles.updateErrorContainer}>
-      <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-      <Text style={styles.errorText}>
-        {strings('APPROVAL.UPDATE_API_ERROR')}
-      </Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          style={styles.dismissButton}
-          title={strings('GENERICS.OK')}
-          backgroundColor={COLOR.TRACKER_RED}
-          onPress={() => setErrorModalVisible(false)}
-        />
-      </View>
+  <CustomModalComponent isVisible={true} onClose={() => setErrorModalVisible(false)} modalType="Error">
+    <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+    <Text style={styles.errorText}>
+      {strings('APPROVAL.UPDATE_API_ERROR')}
+    </Text>
+    <View style={styles.buttonContainer}>
+      <Button
+        style={styles.dismissButton}
+        title={strings('GENERICS.OK')}
+        backgroundColor={COLOR.TRACKER_RED}
+        onPress={() => setErrorModalVisible(false)}
+      />
     </View>
-  </Modal>
+  </CustomModalComponent>
 );
-
+const validateQuantity = (item: ApprovalCategory, checkedList: ApprovalCategory[], increaseItems: ItemQuantity,
+  decreaseItems: ItemQuantity, resolvedTime: string) => {
+  if (item.isChecked && !item.categoryHeader) {
+    checkedList.push({ ...item, resolvedTimestamp: resolvedTime });
+    if (item.newQuantity > item.oldQuantity) {
+      increaseItems.oldQty += item.oldQuantity;
+      increaseItems.newQty += item.newQuantity;
+      increaseItems.dollarChange += item.dollarChange;
+      increaseItems.totalItems += 1;
+    } else {
+      decreaseItems.oldQty += item.oldQuantity;
+      decreaseItems.newQty += item.newQuantity;
+      decreaseItems.dollarChange += item.dollarChange;
+      decreaseItems.totalItems += 1;
+    }
+  }
+};
+const routeName = (route: RouteProp<any, string>) => (route.name === 'ApproveSummary'
+  ? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED'));
+const routeActionType = (route: RouteProp<any, string>) => (route.name === 'ApproveSummary'
+  ? approvalAction.Approve : approvalAction.Reject);
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {
   const {
     route, navigation, approvalList, approvalApi, dispatch, useEffectHook,
@@ -91,8 +109,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
       });
 
       if (approvalApi.result.status === 200) {
-        const successMessage = route.name === 'ApproveSummary'
-          ? strings('APPROVAL.UPDATE_APPROVED') : strings('APPROVAL.UPDATE_REJECTED');
+        const successMessage = routeName(route);
         dispatch(showSnackBar(successMessage, 3000));
         // Reset update approval api state to prevent navigator from looping back to the approvalist screen
         dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
@@ -119,25 +136,12 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
   }
 
   approvalList.forEach(item => {
-    if (item.isChecked && !item.categoryHeader) {
-      checkedList.push({ ...item, resolvedTimestamp: resolvedTime });
-      if (item.newQuantity > item.oldQuantity) {
-        increaseItems.oldQty += item.oldQuantity;
-        increaseItems.newQty += item.newQuantity;
-        increaseItems.dollarChange += item.dollarChange;
-        increaseItems.totalItems += 1;
-      } else {
-        decreaseItems.oldQty += item.oldQuantity;
-        decreaseItems.newQty += item.newQuantity;
-        decreaseItems.dollarChange += item.dollarChange;
-        decreaseItems.totalItems += 1;
-      }
-    }
+    validateQuantity(item, checkedList, increaseItems, decreaseItems, resolvedTime);
   });
 
   const handleApprovalSubmit = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      const actionType = route.name === 'ApproveSummary' ? approvalAction.Approve : approvalAction.Reject;
+      const actionType = routeActionType(route);
       dispatch(updateApprovalList({ approvalItems: checkedList, headers: { action: actionType } }));
     });
   };
@@ -153,8 +157,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
       </View>
       <View style={styles.quantityContainer}>
         <Text style={styles.itemQtyText}>
-          {`${strings('APPROVAL.DECREASES')} (${decreaseItems.totalItems} ${
-            decreaseItems.totalItems === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')})`}
+          {`${strings('APPROVAL.DECREASES')} (${decreaseItems.totalItems} ${decreaseItems.totalItems === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')})`}
         </Text>
         <QuantityChange
           oldQty={decreaseItems.oldQty}
@@ -164,8 +167,7 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
       </View>
       <View style={styles.quantityContainer}>
         <Text style={styles.itemQtyText}>
-          {`${strings('APPROVAL.INCREASES')} (${increaseItems.totalItems} ${
-            increaseItems.totalItems === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')})`}
+          {`${strings('APPROVAL.INCREASES')} (${increaseItems.totalItems} ${increaseItems.totalItems === 1 ? strings('GENERICS.ITEM') : strings('GENERICS.ITEMS')})`}
         </Text>
         <QuantityChange
           oldQty={increaseItems.oldQty}

@@ -53,3 +53,18 @@ export const getAisle = makeAsyncActionCreators(GET_AISLE);
 
 export const GET_SECTIONS = makeAsyncActionTypes('API/GET_SECTIONS');
 export const getSections = makeAsyncActionCreators(GET_SECTIONS);
+
+export const GET_SECTION_DETAILS = makeAsyncActionTypes('API/GET_SECTION_DETAILS');
+export const getSectionDetails = makeAsyncActionCreators(GET_SECTION_DETAILS);
+
+export const PRINT_LOCATION_LABELS = makeAsyncActionTypes('API/PRINT_LOCATION_LABELS');
+export const printLocationLabels = makeAsyncActionCreators(PRINT_LOCATION_LABELS);
+
+export const ADD_PALLET = makeAsyncActionTypes('API/ADD_PALLET');
+export const addPallet = makeAsyncActionCreators(ADD_PALLET);
+
+export const DELETE_PALLET = makeAsyncActionTypes('API/DELETE_PALLET');
+export const deletePallet = makeAsyncActionCreators(DELETE_PALLET);
+
+export const GET_PALLET_DETAILS = makeAsyncActionTypes('API/GET_PALLET_DETAILS');
+export const getPalletDetails = makeAsyncActionCreators(GET_PALLET_DETAILS);

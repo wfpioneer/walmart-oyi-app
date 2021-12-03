@@ -9,7 +9,6 @@ export default class GetFluffyRolesService {
 
     if (__DEV__) {
       // This is to get Fluffy to correctly return features
-      userId = 'istanse';
       countryCode = 'US';
       clubNbr = 1;
     } else if (countryCode === 'MX' && clubNbr === 5522) {

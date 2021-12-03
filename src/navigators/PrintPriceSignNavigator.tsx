@@ -10,11 +10,13 @@ import PrintQueue from '../screens/PrintQueue/PrintQueue';
 import { ChangePrinter } from '../screens/PrintPriceSign/ChangePrinter/ChangePrinter';
 import PrinterList from '../screens/PrintPriceSign/PrinterList/PrinterList';
 import styles from './PrintPriceSignNavigator.styles';
+import { useTypedSelector } from '../state/reducers/RootReducer';
 
 const Stack = createStackNavigator();
 
 const PrintPriceSignNavigator = () => {
   const navigation = useNavigation();
+  const { printingLocationLabels } = useTypedSelector(state => state.Print);
 
   const navigateBack = () => {
     navigation.goBack();
@@ -32,7 +34,7 @@ const PrintPriceSignNavigator = () => {
         name="PrintPriceSignScreen"
         component={PrintPriceSign}
         options={{
-          headerTitle: strings('PRINT.MAIN_TITLE'),
+          headerTitle: !printingLocationLabels ? strings('PRINT.MAIN_TITLE') : strings('PRINT.LOCATION_TITLE'),
           headerTitleAlign: 'left',
           headerTitleStyle: styles.headerTitle,
           headerBackTitleVisible: false,

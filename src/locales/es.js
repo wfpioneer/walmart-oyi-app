@@ -106,11 +106,13 @@ export default {
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consol',
     FLY_CLOUD_QTY: 'Fly Cloud Qty', // Leaving This as is until MX has a need for Cloud Qty
+    ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
     QUEUE_TITLE: 'Cola de Impresión',
     CHANGE_TITLE: 'Impresoras',
+    LOCATION_TITLE: 'Imprimir Etiquetas de Ubicación',
     PRICE_SIGN: 'Imprimir la señalización',
     COPY_QTY: 'Número de Copias',
     COPIES: 'Copias',
@@ -131,14 +133,16 @@ export default {
     MAC_ADDRESS: 'Ingrese o escanee la dirección MAC',
     MAC_ADDRESS_ERROR: 'La dirección MAC suele ser de 12 números',
     PORTABLE_PRINTER: 'Impresora portátil',
-    PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.'
+    PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
+    PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
+    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
     FLOOR: 'Ubicación en Piso',
     RESERVE: 'Ubicaciones en Bodega',
-    FLOORS: 'Floor', // TODO Spanish Translation
-    RESERVES: 'Reserve', // TODO Spanish Translation
+    FLOORS: 'Piso', // TODO Spanish Translation   DUPLICATE???
+    RESERVES: 'Bodega', // TODO Spanish Translation
     ADD_LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. \nPor favor inténtalo de nuevo.',
     EDIT_LOCATION_API_ERROR: 'Hubo en un error editando la ubicación. \nPor favor inténtalo de nuevo.',
     ADD_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
@@ -153,19 +157,47 @@ export default {
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ITEMS: 'Items', // TODO Spanish Translation
     PALLETS: 'Pallets', // TODO Spanish Translation
+    PALLET: 'Pallet', // TODO Spanish Translation
     ZONES: 'Zonas',
     ZONE: 'Zone', // TODO Spanish Translation
     AISLES: 'Pasillos',
-    AISLE: 'Aisle', // TODO Spanish Translation
+    AISLE: 'Pasillo',
     SECTIONS: 'Secciones',
-    SECTION: 'Section', // TODO Spanish Translation
+    SECTION: 'Sección',
     AREAS: 'Areas', // TODO Spanish Translation
     LOCATION_DETAILS: 'Detalles de ubicación',
-    NO_ZONES_AVAILABLE: 'No Zones Available', // TODO Spanish Translation
-    NO_AISLES_AVAILABLE: 'No Aisles Available', // TODO Spanish Translation
+    NO_ZONES_AVAILABLE: 'No hay zonas disponibles',
+    NO_AISLES_AVAILABLE: 'No hay pasillos disponibles',
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
-    CLEAR_ALL: 'Clear all', // TODO Spanish Translation
-    ADD: 'Agregar'
+    CLEAR_ALL: 'Limpiar',
+    CLEAR_SECTION: 'Limpiar sección',
+    REMOVE_SECTION: 'Eliminar sección',
+    REMOVE_ZONE: 'Eliminar la zona',
+    REMOVE_ALL: 'Remove all', // TODO Spanish Translation
+    ADD: 'Agregar',
+    SCAN_LOCATION: 'Nombre de ubicación invalida e.g: ABCD1-2',
+    ADD_ZONE: 'Añadir zona',
+    ADD_AISLES: 'Agregar pasillos',
+    CREATED_ON: 'Creado en',
+    MORE: 'Más',
+    PRINT_SECTION: 'Imprimir todas las etiquetas de la sección',
+    ADD_SECTIONS: 'Agregar secciones',
+    CLEAR_AISLE: 'Limpiar pasillo',
+    REMOVE_AISLE: 'Eliminar pasillo',
+    SCAN_PALLET: 'Escanea la etiqueta del Pallet',
+    PALLET_VALIDATE_ERROR: 'El Pallet ID solo puede contener números',
+    PALLET_PLACEHOLDER: 'Ingresa o escanea un pallet ID',
+    PRINT_LABEL: 'Imprimir etiqueta',
+    PRINT_LABELS: 'Imprimir etiquetas',
+    ADD_PALLET_ERROR: 'error al agregar el pallet',
+    ADD_PALLET_API_ERROR: 'Hubo un error al agregar el pallet. Inténtar de nuevo',
+    PALLET_ERROR: 'Pallet no encontrada/Pallet vacía',
+    PALLET_NOT_FOUND: 'Hubo un error debido a que no se encontró el pallet/Pallet vacía',
+    PALLET_ADDED: 'Pallet agregado con éxito',
+    PALLET_DELETE_CONFIRMATION: 'Confirmar: Borrar pallet',
+    FLOOR_EMPTY: 'La lista de Piso está vacía',
+    RESERVE_EMPTY: 'La lista de Bodega está vacía',
+    GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

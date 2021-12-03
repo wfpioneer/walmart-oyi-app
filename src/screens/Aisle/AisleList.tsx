@@ -1,4 +1,10 @@
-import React, { EffectCallback, useEffect, useState } from 'react';
+import React, {
+  EffectCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 import {
   ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
@@ -9,6 +15,7 @@ import {
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 import styles from './AisleList.style';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
@@ -20,10 +27,17 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
+import { barcodeEmitter } from '../../utils/scannerUtils';
+import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
+import { hideLocationPopup, setAisles, setCreateFlow } from '../../state/actions/Location';
+import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
+import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
+import { CREATE_FLOW } from '../../models/LocationItems';
 
 const NoAisleMessage = () : JSX.Element => (
   <View style={styles.noAisles}>
-    <Text>{strings('LOCATION.NO_AISLES_AVAILABLE')}</Text>
+    <Text style={styles.noAislesText}>{strings('LOCATION.NO_AISLES_AVAILABLE')}</Text>
   </View>
 );
 
@@ -31,6 +45,8 @@ interface AisleProps {
     zoneId: number,
     zoneName: string,
     getAllAisles: AsyncState,
+    isManualScanEnabled: boolean,
+    locationPopupVisible: boolean,
     dispatch: Dispatch<any>,
     apiStart: number,
     setApiStart: React.Dispatch<React.SetStateAction<number>>,
@@ -45,6 +61,8 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
     zoneId,
     zoneName,
     getAllAisles,
+    isManualScanEnabled,
+    locationPopupVisible,
     navigation,
     apiStart,
     dispatch,
@@ -62,6 +80,23 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
       dispatch(getAisle({ zoneId }));
     }).catch(() => {});
   }), [navigation]);
+
+  // scanned event listener
+  useEffectHook(() => {
+    const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused()) {
+        validateSession(navigation, route.name).then(() => {
+          trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
+          dispatch(setScannedEvent(scan));
+          dispatch(setManualScan(false));
+          navigation.navigate('SectionDetails');
+        });
+      }
+    });
+    return () => {
+      scanSubscription.remove();
+    };
+  }, []);
 
   useEffectHook(() => {
     // on api success
@@ -110,11 +145,11 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
 
   return (
     <View>
+      {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('LOCATION.ZONE')} ${zoneName}`}
         details={`${getAllAisles.result?.data.length || 0} ${strings('LOCATION.AISLES')}`}
       />
-
       <FlatList
         data={getAllAisles.result?.data || []}
         renderItem={({ item }) => (
@@ -127,6 +162,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
             navigator={navigation}
             destinationScreen={LocationType.SECTION}
             dispatch={dispatch}
+            locationPopupVisible={locationPopupVisible}
           />
         )}
         keyExtractor={item => item.aisleName}
@@ -140,25 +176,81 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
 const AisleList = (): JSX.Element => {
   const navigation = useNavigation();
   const getAllAisles = useTypedSelector(state => state.async.getAisle);
-  const zoneId = useTypedSelector(state => state.Location.selectedZone.id);
-  const zoneName = useTypedSelector(state => state.Location.selectedZone.name);
+  const { id: zoneId, name: zoneName } = useTypedSelector(state => state.Location.selectedZone);
+  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
+  const userFeatures = useTypedSelector(state => state.User.features);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const route = useRoute();
 
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const managerSnapPoints = useMemo(() => ['30%'], []);
+  const associateSnapPoints = useMemo(() => ['15%'], []);
+
+  useEffect(() => {
+    if (navigation.isFocused() && bottomSheetModalRef.current) {
+      if (locationPopupVisible) {
+        bottomSheetModalRef.current.present();
+      } else {
+        bottomSheetModalRef.current.dismiss();
+      }
+    }
+  }, [locationPopupVisible]);
+
+  const handleAddAisles = () => {
+    dispatch(setAisles(getAllAisles.result.data));
+    dispatch(setCreateFlow(CREATE_FLOW.CREATE_AISLE));
+    bottomSheetModalRef.current?.dismiss();
+    navigation.navigate('AddZone');
+  };
+
   return (
-    <AisleScreen
-      zoneId={zoneId}
-      zoneName={zoneName}
-      navigation={navigation}
-      dispatch={dispatch}
-      getAllAisles={getAllAisles}
-      apiStart={apiStart}
-      setApiStart={setApiStart}
-      route={route}
-      useEffectHook={useEffect}
-      trackEventCall={trackEvent}
-    />
+    <BottomSheetModalProvider>
+      <TouchableOpacity
+        onPress={() => dispatch(hideLocationPopup())}
+        activeOpacity={1}
+        disabled={!locationPopupVisible}
+        style={locationPopupVisible ? styles.disabledContainer : styles.container}
+      >
+        <AisleScreen
+          zoneId={zoneId}
+          zoneName={zoneName}
+          navigation={navigation}
+          dispatch={dispatch}
+          getAllAisles={getAllAisles}
+          isManualScanEnabled={isManualScanEnabled}
+          apiStart={apiStart}
+          setApiStart={setApiStart}
+          route={route}
+          useEffectHook={useEffect}
+          trackEventCall={trackEvent}
+          locationPopupVisible={locationPopupVisible}
+        />
+      </TouchableOpacity>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
+        index={0}
+        onDismiss={() => dispatch(hideLocationPopup())}
+        style={styles.bottomSheetModal}
+      >
+        <BottomSheetView>
+          <BottomSheetAddCard
+            onPress={handleAddAisles}
+            text={strings('LOCATION.ADD_AISLES')}
+            isManagerOption={false}
+            isVisible={true}
+          />
+          <BottomSheetRemoveCard
+            onPress={() => {}}
+            text={strings('LOCATION.REMOVE_ZONE')}
+            isVisible={userFeatures.includes('manager approval')}
+          />
+        </BottomSheetView>
+      </BottomSheetModal>
+    </BottomSheetModalProvider>
   );
 };
 

@@ -9,7 +9,43 @@ const MX_TEST_CLUB_NBR = 5522;
 let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
 
+const defaultAsyncState: AsyncState = {
+  isWaiting: false,
+  value: null,
+  error: null,
+  result: null
+};
+
 describe('Test Zone List', () => {
+  it('Renders Zone Screen with no-zones-message when get all zones response is 204', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const getZonesResult = {
+      status: 204,
+      data: ''
+    };
+    const getZoneSuccess: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: getZonesResult
+    };
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        getZoneApi={getZoneSuccess}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        isManualScanEnabled={false}
+        locationPopupVisible={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
   it('Renders Zone Screen with Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getZonesResult = {
@@ -26,11 +62,15 @@ describe('Test Zone List', () => {
       <ZoneScreen
         siteId={MX_TEST_CLUB_NBR}
         dispatch={jest.fn()}
+        apiStart={0}
+        setApiStart={jest.fn()}
         getZoneApi={getZoneSuccess}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        isManualScanEnabled={false}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -53,58 +93,98 @@ describe('Test Zone List', () => {
         siteId={MX_TEST_CLUB_NBR}
         dispatch={jest.fn()}
         getZoneApi={getZoneSuccess}
+        apiStart={0}
+        setApiStart={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        isManualScanEnabled={false}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-});
-
-describe('Test Get Zone Api Response', () => {
-  it('Renders Zone Api Error Message', () => {
+  it('Renders Manual Scan Component when isManualScanEnabled is set to true', () => {
     const renderer = ShallowRenderer.createRenderer();
-    const getZoneResponseFailure: AsyncState = {
-      isWaiting: false,
-      value: null,
-      error: 'Network Error',
-      result: null
-    };
+
     renderer.render(
       <ZoneScreen
         siteId={MX_TEST_CLUB_NBR}
         dispatch={jest.fn()}
-        getZoneApi={getZoneResponseFailure}
+        getZoneApi={defaultAsyncState}
+        apiStart={0}
+        setApiStart={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
+        isManualScanEnabled={true}
+        locationPopupVisible={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+  describe('Test Get Zone Api Response', () => {
+    const possibleErrorResults = [
+      { errorType: 'timeout', message: 'timeout of 10000ms exceeded' },
+      { errorType: 'network', message: 'Network Error' },
+      { errorType: '400', message: 'Request Failed with status code 400' },
+      { errorType: '424', message: 'Request Failed with status code 424' },
+      { errorType: '500', message: 'Request Failed with status code 500' }
+    ];
 
-  it('Renders loading indicator when waiting for Zone Api response', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    const getZoneIsWaiting: AsyncState = {
-      isWaiting: true,
-      value: null,
-      error: null,
-      result: null
-    };
-    renderer.render(
-      <ZoneScreen
-        siteId={MX_TEST_CLUB_NBR}
-        dispatch={jest.fn()}
-        getZoneApi={getZoneIsWaiting}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+    possibleErrorResults.forEach(errorResult => it(`Renders Error Message when result is ${errorResult.errorType} error`,
+      () => {
+        const renderer = ShallowRenderer.createRenderer();
+        const apiErrorResult: AsyncState = {
+          value: null,
+          isWaiting: false,
+          error: errorResult.message,
+          result: null
+        };
+        renderer.render(
+          <ZoneScreen
+            siteId={MX_TEST_CLUB_NBR}
+            dispatch={jest.fn()}
+            getZoneApi={apiErrorResult}
+            apiStart={0}
+            setApiStart={jest.fn()}
+            navigation={navigationProp}
+            route={routeProp}
+            useEffectHook={jest.fn()}
+            trackEventCall={jest.fn()}
+            isManualScanEnabled={false}
+            locationPopupVisible={false}
+          />
+        );
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      }));
+
+    it('Renders loading indicator when waiting for Zone Api response', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const getZoneIsWaiting: AsyncState = {
+        isWaiting: true,
+        value: null,
+        error: null,
+        result: null
+      };
+      renderer.render(
+        <ZoneScreen
+          siteId={MX_TEST_CLUB_NBR}
+          dispatch={jest.fn()}
+          getZoneApi={getZoneIsWaiting}
+          apiStart={0}
+          setApiStart={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          isManualScanEnabled={false}
+          locationPopupVisible={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 });
