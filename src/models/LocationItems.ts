@@ -24,7 +24,7 @@ export interface SectionDetailsItem {
 export interface SectionDetailsPallet {
   palletId: number;
   palletCreateTS: string;
-  items: Omit<SectionDetailsItem, 'price'>[];
+  items?: Omit<SectionDetailsItem, 'price'>[];
 }
 
 export interface LocationItem {
@@ -40,8 +40,8 @@ export interface LocationItem {
     id: number;
     name: string;
   };
-  floor: SectionDetailsItem[];
-  reserve: SectionDetailsPallet[];
+  items: { sectionItems: SectionDetailsItem[] };
+  pallets: { palletData: SectionDetailsPallet[] };
 }
 
 export interface PossibleZone {
@@ -49,7 +49,7 @@ export interface PossibleZone {
   description: string;
 }
 
-export enum CREATE_FLOW  {
+export enum CREATE_FLOW {
   CREATE_ZONE = 'CREATE_ZONE',
   CREATE_AISLE = 'CREATE_AISLE',
   CREATE_SECTION = 'CREATE_SECTION',
