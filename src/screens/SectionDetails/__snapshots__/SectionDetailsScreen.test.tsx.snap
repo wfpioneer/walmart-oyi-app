@@ -654,12 +654,6 @@ exports[`Test Location Details Screen Tests rendering location details screen da
           "palletId": 1,
         },
         Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Nature Valley Granola Bars",
-              "itemNbr": 555555,
-            },
-          ],
           "palletCreateTS": "2021-01-10",
           "palletId": 123,
         },
@@ -707,12 +701,6 @@ exports[`Test Location Details Screen Tests rendering location details screen da
           "palletId": 1,
         },
         Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Nature Valley Granola Bars",
-              "itemNbr": 555555,
-            },
-          ],
           "palletCreateTS": "2021-01-10",
           "palletId": 123,
         },
