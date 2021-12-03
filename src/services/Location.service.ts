@@ -33,4 +33,13 @@ export default class LocationService {
       `${urls.locationUrl}/v1/section/${payload.sectionId}/detail`
     );
   }
+
+  public static getPalletDetails(payload: {palletIds: number[]}): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    const queryParam = payload.palletIds.join(',');
+
+    return Request.get(
+      `${urls.locationUrl}/pallet/items/itemdetails?palletIds=${queryParam}`
+    );
+  }
 }

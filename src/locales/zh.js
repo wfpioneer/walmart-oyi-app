@@ -194,7 +194,10 @@ export default {
     PALLET_ERROR: '卡板未找到/空卡板',
     PALLET_NOT_FOUND: '因未找到卡板/卡板为空系统报错',
     PALLET_ADDED: '卡板添加成功',
-    PALLET_DELETE_CONFIRMATION: '确认：删除卡板'
+    PALLET_DELETE_CONFIRMATION: '确认：删除卡板',
+    FLOOR_EMPTY: '楼面清单无商品',
+    RESERVE_EMPTY: '存储区域无卡板',
+    GET_FAILED_PALLETS: '获取 %{amount} 卡板失败'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
