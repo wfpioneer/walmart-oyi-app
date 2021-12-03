@@ -1,6 +1,14 @@
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import {
+  FlatList,
+  Keyboard,
+  KeyboardAvoidingView,
+  Text,
+  View
+} from 'react-native';
 import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
+import { Header } from '@react-navigation/stack';
 import styles from './addSection.style';
 import { strings } from '../../locales';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -8,7 +16,6 @@ import { CreateAisles, LocationIdName } from '../../state/reducers/Location';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
 import Button from '../../components/buttons/Button';
 import { CREATE_FLOW } from '../../models/LocationItems';
-import { useDispatch } from 'react-redux';
 import { setAisleSectionCount } from '../../state/actions/Location';
 
 interface AddSectionProps {
@@ -128,13 +135,24 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
     }
   };
 
+  const handleUnhandledTouches = () => {
+    Keyboard.dismiss();
+    return false;
+  };
+
   return (
-    <View style={styles.safeAreaView}>
+    <KeyboardAvoidingView
+      style={styles.safeAreaView}
+      behavior="height"
+      keyboardVerticalOffset={110}
+      onStartShouldSetResponder={handleUnhandledTouches}
+    >
       <View style={styles.bodyContainer}>
         <FlatList
           data={props.aislesToCreate}
           renderItem={renderAisles}
           keyExtractor={(item) => item.name.toString()}
+          removeClippedSubviews={false}
         />
       </View>
       <View style={styles.buttonContainer}>
@@ -145,7 +163,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
           disabled={!validateSectionCounts(props.aislesToCreate, props.existingSections)}
         />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

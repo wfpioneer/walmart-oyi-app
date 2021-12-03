@@ -6,7 +6,7 @@ import ReservePalletRow from './ReservePalletRow';
 import { SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import store from '../../state';
 
-const mockReservePallet = mockLocationDetails.reserve[0];
+const mockReservePallet = mockLocationDetails.pallets.palletData[0];
 const mockSection = mockLocationDetails.section;
 
 jest.mock('react-redux', () => {
@@ -29,9 +29,12 @@ describe('ReservePalletRow Component', () => {
 
   it('Renders a ReservePallet with an item with a long name', () => {
     const longItemDesc = new Array(5).fill('An Item With A Very Long Item Description').join(' ');
-    const mockFloorItemLongName: SectionDetailsItem = { ...mockLocationDetails.floor[0], itemDesc: longItemDesc };
+    const mockFloorItemLongName: SectionDetailsItem = {
+      ...mockLocationDetails.items.sectionItems[0], itemDesc: longItemDesc
+    };
     const mockReservePalletLongFirstItemName: SectionDetailsPallet = {
-      ...mockReservePallet, items: [...mockReservePallet.items, mockFloorItemLongName]
+      // changed due to items becoming optional on pallet
+      ...mockReservePallet, items: [...(mockReservePallet.items || []), mockFloorItemLongName]
     };
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(

@@ -57,12 +57,18 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
     // on api success
     if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
       // Update Location State on Success
-      const { status } = getSectionDetailsApi.result;
-      if (status === 200 || status === 207) {
-        const { zone, aisle, section } = getSectionDetailsApi.result.data;
-        dispatch(selectZone(zone.id, zone.name));
-        dispatch(selectAisle(aisle.id, aisle.name));
-        dispatch(selectSection(section.id, section.name));
+      switch (getSectionDetailsApi.result.status) {
+        case 200:
+        case 207:
+          // eslint-disable-next-line no-case-declarations
+          const { zone, aisle, section } = getSectionDetailsApi.result.data;
+          dispatch(selectZone(zone.id || 0, zone.name || ''));
+          dispatch(selectAisle(aisle.id || 0, aisle.name || ''));
+          dispatch(selectSection(section.id, section.name));
+          break;
+        case 204:
+          break;
+        default: break;
       }
     }
   }, []);
@@ -101,7 +107,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
   return (
     <View style={styles.locDetailsScreenContainer}>
       <FlatList
-        data={locationItem?.floor}
+        data={locationItem?.items.sectionItems}
         renderItem={({ item }) => (
           <FloorItemRow
             item={item}
