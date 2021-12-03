@@ -70,6 +70,7 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
+          addAPI={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
