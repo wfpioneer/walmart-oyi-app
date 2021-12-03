@@ -195,9 +195,9 @@ export default {
     PALLET_NOT_FOUND: '因未找到卡板/卡板为空系统报错',
     PALLET_ADDED: '卡板添加成功',
     PALLET_DELETE_CONFIRMATION: '确认：删除卡板',
-    FLOOR_EMPTY: 'The Floor List is empty', // TODO Mandarin Translation
-    RESERVE_EMPTY: 'The Reserve List is empty', // TODO Mandarin Translation
-    GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallets' // TODO Mandarin Translation
+    FLOOR_EMPTY: '楼面清单无商品',
+    RESERVE_EMPTY: '存储区域无卡板',
+    GET_FAILED_PALLETS: '获取 %{amount} 卡板失败'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

@@ -10,7 +10,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import { FlatList } from 'react-native-gesture-handler';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
-import { LocationItem, ReserveDetailsPallet } from '../../models/LocationItems';
+import { LocationItem, ReserveDetailsPallet, SectionDetailsPallet } from '../../models/LocationItems';
 import { getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import styles from './SectionDetailsScreen.style';
@@ -18,6 +18,7 @@ import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 import ReservePalletRow from '../../components/ReservePalletRow/ReservePalletRow';
+import { showSnackBar } from '../../state/actions/SnackBar';
 
 interface ReserveSectionDetailsProps {
   getSectionDetailsApi: AsyncState;
@@ -30,6 +31,19 @@ interface ReserveSectionDetailsProps {
   addAPI: AsyncState;
   palletIds: number[];
 }
+// Combines the Reserve Response data from the get pallet/sectionDetails api to display creation date.
+export const combineReserveArrays = (
+  reserveDetails?: ReserveDetailsPallet[], palletData?: Omit<SectionDetailsPallet, 'items'>[]
+) => {
+  let palletDetails: ReserveDetailsPallet[] = [];
+  if (reserveDetails && palletData) {
+    palletDetails = reserveDetails.map(pallet => {
+      const sectionReserve = palletData.find(loc => loc.palletId === pallet.id);
+      return { ...pallet, ...sectionReserve };
+    });
+  }
+  return palletDetails;
+};
 
 export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) : JSX.Element => {
   const {
@@ -43,6 +57,9 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
     addAPI,
     palletIds
   } = props;
+  const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
+  const reservePallets: ReserveDetailsPallet[] | undefined = (
+    getPalletDetailsApi.result && getPalletDetailsApi.result.data.pallets);
 
   // Navigation Listener
   useEffectHook(() => {
@@ -56,15 +73,14 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
   useEffectHook(() => {
     // on api success
     if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
+      const failedPallets = reservePallets?.filter(pallet => pallet.statusCode !== 200).length;
       // Update Location State on Success
       if (getPalletDetailsApi.result.status === 207) {
         // Display toast message
+        dispatch(showSnackBar(strings('LOCATION.GET_FAILED_PALLETS', { amount: failedPallets }), 5000));
       }
     }
-  }, []);
-  const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
-  const reservePallets: ReserveDetailsPallet[] | undefined = (
-    getPalletDetailsApi.result && getPalletDetailsApi.result.data.pallets);
+  }, [getPalletDetailsApi]);
 
   if (getPalletDetailsApi.isWaiting) {
     return (
@@ -99,7 +115,7 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
   return (
     <View style={styles.locDetailsScreenContainer}>
       <FlatList
-        data={reservePallets}
+        data={combineReserveArrays(reservePallets, locationItem?.pallets.palletData)}
         renderItem={({ item }) => (
           <ReservePalletRow sectionId={locationItem?.section.id || 0} reservePallet={item} />
         )}

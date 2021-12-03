@@ -31,6 +31,7 @@ export interface ReserveDetailsPallet{
   id: number;
   palletCreateTS?: string;
   items: SectionDetailsItem[];
+  statusCode: number;
 }
 
 export interface LocationItem {
