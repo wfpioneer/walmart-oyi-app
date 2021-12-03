@@ -73,6 +73,27 @@ exports[`Test Location Details Screen Tests rendering location details screen da
   }
 >
   <ForwardRef
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.LOCATION.FLOOR_EMPTY" translation]
+        </Text>
+      </View>
+    }
     data={Array []}
     keyExtractor={[Function]}
     renderItem={[Function]}
@@ -89,6 +110,27 @@ exports[`Test Location Details Screen Tests rendering location details screen da
   }
 >
   <ForwardRef
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.LOCATION.FLOOR_EMPTY" translation]
+        </Text>
+      </View>
+    }
     data={
       Array [
         Object {
@@ -118,6 +160,27 @@ exports[`Test Location Details Screen Tests rendering location details screen da
   }
 >
   <ForwardRef
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.LOCATION.FLOOR_EMPTY" translation]
+        </Text>
+      </View>
+    }
     data={
       Array [
         Object {
@@ -619,59 +682,6 @@ exports[`Test Location Details Screen Tests rendering location details screen da
           "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
           "itemNbr": 980078597,
           "price": 2.4,
-        },
-      ]
-    }
-    keyExtractor={[Function]}
-    renderItem={[Function]}
-  />
-</View>
-`;
-
-exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Mock Reserve Items 1`] = `
-<View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <ForwardRef
-    data={
-      Array [
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Nature Valley Honey Nut Granola Bars",
-              "itemNbr": 500252,
-            },
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 123456,
-            },
-          ],
-          "palletCreateTS": "2021-01-01",
-          "palletId": 1,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Nature Valley Granola Bars",
-              "itemNbr": 555555,
-            },
-          ],
-          "palletCreateTS": "2021-01-10",
-          "palletId": 123,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 980012,
-            },
-          ],
-          "palletCreateTS": "1999-10-10",
-          "palletId": 456,
         },
       ]
     }
@@ -690,41 +700,38 @@ exports[`Test Location Details Screen Tests rendering location details screen da
   }
 >
   <ForwardRef
+    ListEmptyComponent={
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.LOCATION.FLOOR_EMPTY" translation]
+        </Text>
+      </View>
+    }
     data={
       Array [
         Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Nature Valley Honey Nut Granola Bars",
-              "itemNbr": 500252,
-            },
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 123456,
-            },
-          ],
-          "palletCreateTS": "2021-01-01",
-          "palletId": 1,
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "price": 2.4,
         },
         Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Nature Valley Granola Bars",
-              "itemNbr": 555555,
-            },
-          ],
-          "palletCreateTS": "2021-01-10",
-          "palletId": 123,
-        },
-        Object {
-          "items": Array [
-            Object {
-              "itemDesc": "Cabbage",
-              "itemNbr": 980012,
-            },
-          ],
-          "palletCreateTS": "1999-10-10",
-          "palletId": 456,
+          "itemDesc": "Nature Valley Honey Bars",
+          "itemNbr": 980011111,
+          "price": 5.8,
         },
       ]
     }

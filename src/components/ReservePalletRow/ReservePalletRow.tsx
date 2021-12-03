@@ -3,6 +3,7 @@ import {
   ActivityIndicator, Image, Text, TouchableOpacity, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './ReservePalletRow.style';
 import { strings } from '../../locales';
@@ -35,6 +36,8 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
       palletId: reservePallet.id
     }));
   };
+  const createdDate = moment(reservePallet.palletCreateTS).format('YYYY-MM-DD');
+
   // TODO Map Pallet and Reserve Response and pass the array into this Component
   return (
     <View style={styles.container}>
@@ -54,7 +57,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
           )}
         </View>
         <Text style={styles.palletCreateTs}>
-          {`${strings('LOCATION.CREATED_ON')} ${reservePallet?.palletCreateTS || undefined}`}
+          {`${strings('LOCATION.CREATED_ON')} ${createdDate}`}
         </Text>
         { reservePallet.items.length > 0 && (
         <View style={styles.itemContainer}>

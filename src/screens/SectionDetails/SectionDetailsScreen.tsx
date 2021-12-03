@@ -101,25 +101,19 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
   return (
     <View style={styles.locDetailsScreenContainer}>
       <FlatList
-        data={route.name === 'FloorDetails' ? locationItem?.floor : locationItem?.reserve}
+        data={locationItem?.floor}
         renderItem={({ item }) => (
-          route.name === 'FloorDetails'
-            ? (
-              <FloorItemRow
-                item={item}
-                dispatch={dispatch}
-                navigation={navigation}
-              /> // Resolves type error, Section Id will never be zero in our case
-            ) : <ReservePalletRow sectionId={locationItem?.section.id || 0} reservePallet={item} />
+          <FloorItemRow
+            item={item}
+            dispatch={dispatch}
+            navigation={navigation}
+          />
         )}
         keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
         ListEmptyComponent={(
           <View style={styles.emptyContainer}>
             <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
-            <Text>
-              {route.name === 'FloorDetails'
-                ? strings('LOCATION.FLOOR_EMPTY') : strings('LOCATION.RESERVE_EMPTY')}
-            </Text>
+            <Text>{strings('LOCATION.FLOOR_EMPTY')}</Text>
           </View>
         )}
       />

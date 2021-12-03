@@ -70,26 +70,6 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('Renders Location Details Screen with Mock Reserve Items', () => {
-      const routePropReserve: Route<any> = {
-        key: '',
-        name: 'ReserveDetails'
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <SectionDetailsScreen
-          getSectionDetailsApi={sectionDetails}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          route={routePropReserve}
-          trackEventCall={jest.fn()}
-          useEffectHook={jest.fn()}
-          scannedEvent={defaultScannedEvent}
           addAPI={defaultAsyncState}
         />
       );

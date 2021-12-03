@@ -117,16 +117,14 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
       <FlatList
         data={combineReserveArrays(reservePallets, locationItem?.pallets.palletData)}
         renderItem={({ item }) => (
+          // Resolves type error, Section Id will never be zero in our case
           <ReservePalletRow sectionId={locationItem?.section.id || 0} reservePallet={item} />
         )}
         keyExtractor={(item, idx) => `${item.id}${idx}`}
         ListEmptyComponent={(
           <View style={styles.emptyContainer}>
             <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
-            <Text>
-              {route.name === 'FloorDetails'
-                ? strings('LOCATION.FLOOR_EMPTY') : strings('LOCATION.RESERVE_EMPTY')}
-            </Text>
+            <Text>{strings('LOCATION.RESERVE_EMPTY')}</Text>
           </View>
         )}
       />
