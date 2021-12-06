@@ -65,6 +65,7 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
       navigation.goBack();
     }
   };
+  const isPrinterExists = () => printers.length > 0 && printers.find(print => print.id === macAddress);
 
   return (
     <View style={styles.container}>
@@ -83,7 +84,7 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
         <Text style={styles.errorText}>{strings('PRINT.MAC_ADDRESS_ERROR')}</Text>
       </View>
       )}
-      { (printers.length > 0 && printers.find(print => print.id === macAddress))
+      { isPrinterExists()
       && (
       <View style={styles.alertView}>
         <MaterialCommunityIcons name="alert-circle" size={20} color={COLOR.RED_300} />
@@ -93,7 +94,7 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
       <Button
         title={strings('GENERICS.SUBMIT')}
         style={styles.button}
-        disabled={!macAddress.match(macRegex)}
+        disabled={!macAddress.match(macRegex) || isPrinterExists()}
         onPress={submitMacAddress}
       />
     </View>
