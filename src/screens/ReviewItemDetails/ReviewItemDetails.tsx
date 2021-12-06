@@ -337,8 +337,6 @@ export const renderScanForNoActionButton = (
 export const renderBarcodeErrorModal = (
   isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element =>{
-  console.log('error 3');
-  console.log(isVisible);
   return (
   <CustomModalComponent
     isVisible={isVisible}
@@ -464,7 +462,6 @@ const onValidateCompleteItemApiErrortHook = (props: ItemDetailsScreenProps, comp
   if (completeItemApi.error === COMPLETE_API_409_ERROR) {
     dispatch(showInfoModal(strings(ITEM_SCAN_DOESNT_MATCH), strings(ITEM_SCAN_DOESNT_MATCH_DETAILS)));
   } else {
-    console.log('dispatch');
     dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
   }
 };
@@ -480,10 +477,7 @@ const isError = (props: ItemDetailsScreenProps, error: any, errorModalVisible: b
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   isManualScanEnabled: boolean, scannedEvent: any, userId: string, setShowError:React.Dispatch<React.SetStateAction<boolean>>) => {
   const { trackEventCall, dispatch } = props;
-  console.log('error');
-  console.log(error);
   if (error) {
-    console.log('error 2', error);
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
@@ -505,7 +499,6 @@ const isError = (props: ItemDetailsScreenProps, error: any, errorModalVisible: b
       </View>
     );
   }
-  console.log('return null');
   return (
     <View/>
   );
