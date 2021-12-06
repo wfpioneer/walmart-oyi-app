@@ -62,6 +62,8 @@ export interface ItemDetailsScreenProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
   userFeatures: string[];
+  showError: boolean;
+  setShowError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface HandleProps {
@@ -470,10 +472,17 @@ const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales
   ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
   : undefined);
 
-const isError = (props: ItemDetailsScreenProps, error: any, errorModalVisible: boolean,
+const isError = (
+  error: any,
+  errorModalVisible: boolean,
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
-  isManualScanEnabled: boolean, scannedEvent: any, userId: string) => {
-  const { trackEventCall, dispatch } = props;
+  isManualScanEnabled: boolean,
+  scannedEvent: any,
+  userId: string,
+  setShowError:React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>,
+  trackEventCall: (eventName: string, params?: any) => void
+) => {
   if (error) {
     return (
       <View style={styles.safeAreaView}>
@@ -486,6 +495,7 @@ const isError = (props: ItemDetailsScreenProps, error: any, errorModalVisible: b
             style={styles.errorButton}
             onPress={() => {
               trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
+              setShowError(false);
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
           >
@@ -495,7 +505,9 @@ const isError = (props: ItemDetailsScreenProps, error: any, errorModalVisible: b
       </View>
     );
   }
-  return null;
+  return (
+    <View/>
+  );
 };
 const getexceptionType = (actionCompleted: boolean, itemDetails: ItemDetails) => (!actionCompleted
   ? itemDetails.exceptionType : undefined);
@@ -521,7 +533,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     trackEventCall,
     validateSessionCall,
     useEffectHook,
-    useFocusEffectHook
+    useFocusEffectHook,
+    showError,
+    setShowError
   } = props;
   // Scanned Item Event Listener
   useEffectHook(() => {
@@ -536,6 +550,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   useEffectHook(() => {
     onValidateItemDetails(props, itemDetails);
   }, [itemDetails]);
+
+  useEffectHook(() => {
+    if(error) {
+      setShowError(true);
+    }
+  }, [error]);
 
   // Barcode event listener effect
   useEffectHook(() => {
@@ -574,7 +594,20 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   );
 
   // Get Item Details Error
-  isError(props, error, errorModalVisible, setErrorModalVisible, isManualScanEnabled, scannedEvent, userId);
+  if (showError) {
+    return isError(
+      error,
+      errorModalVisible,
+      setErrorModalVisible,
+      isManualScanEnabled,
+      scannedEvent,
+      userId,
+      setShowError,
+      dispatch,
+      trackEventCall
+    );
+  }
+
   if (_.get(result, 'status') === 204) {
     return (
       <View style={styles.safeAreaView}>
@@ -708,6 +741,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [showError, setShowError] = useState(false);
   return (
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
@@ -738,6 +772,8 @@ const ReviewItemDetails = (): JSX.Element => {
       useEffectHook={useEffect}
       useFocusEffectHook={useFocusEffect}
       userFeatures={userFeatures}
+      showError={showError}
+      setShowError={setShowError}
     />
   );
 };

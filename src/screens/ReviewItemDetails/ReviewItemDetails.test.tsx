@@ -70,6 +70,8 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          showError={false}
+          setShowError={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -112,6 +114,8 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          showError={false}
+          setShowError={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -155,6 +159,8 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={['']}
+          showError={false}
+          setShowError={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -197,6 +203,8 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={['on hands change']}
+          showError={false}
+          setShowError={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -233,6 +241,8 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          showError={true}
+          setShowError={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -273,6 +283,8 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          showError={false}
+          setShowError={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -309,6 +321,8 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          showError={false}
+          setShowError={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -348,6 +362,8 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          showError={false}
+          setShowError={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
