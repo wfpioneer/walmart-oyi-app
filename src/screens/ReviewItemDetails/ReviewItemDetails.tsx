@@ -336,8 +336,7 @@ export const renderScanForNoActionButton = (
 // Renders scanned barcode error. TODO Temporary fix until Modal.tsx is refactored for more flexible usage
 export const renderBarcodeErrorModal = (
   isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
-): JSX.Element =>{
-  return (
+): JSX.Element => (
   <CustomModalComponent
     isVisible={isVisible}
     modalType="Error"
@@ -356,7 +355,7 @@ export const renderBarcodeErrorModal = (
       />
     </View>
   </CustomModalComponent>
-)};
+);
 const getFloorItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.floor
   ? itemDetails.location.floor : []);
 const getReserveItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.reserve
@@ -473,9 +472,16 @@ const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales
   ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
   : undefined);
 
-const isError = (props: ItemDetailsScreenProps, error: any, errorModalVisible: boolean,
+const isError = (
+  props: ItemDetailsScreenProps,
+  error: any,
+  errorModalVisible: boolean,
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
-  isManualScanEnabled: boolean, scannedEvent: any, userId: string, setShowError:React.Dispatch<React.SetStateAction<boolean>>) => {
+  isManualScanEnabled: boolean,
+  scannedEvent: any,
+  userId: string,
+  setShowError:React.Dispatch<React.SetStateAction<boolean>>
+) => {
   const { trackEventCall, dispatch } = props;
   if (error) {
     return (
