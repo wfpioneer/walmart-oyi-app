@@ -8,70 +8,80 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import { FlatList } from 'react-native-gesture-handler';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
-import { LocationItem } from '../../models/LocationItems';
-import { getSectionDetails } from '../../state/actions/saga';
+import { LocationItem, ReserveDetailsPallet, SectionDetailsPallet } from '../../models/LocationItems';
+import { getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import styles from './SectionDetailsScreen.style';
 import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
-import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
-import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
-import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
-interface SectionDetailsProps {
+import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
+import ReservePalletRow from '../../components/ReservePalletRow/ReservePalletRow';
+import { showSnackBar } from '../../state/actions/SnackBar';
+
+interface ReserveSectionDetailsProps {
   getSectionDetailsApi: AsyncState;
+  getPalletDetailsApi: AsyncState;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
-  scannedEvent: {type: string, value: string};
   addAPI: AsyncState;
+  palletIds: number[];
 }
+// Combines the Reserve Response data from the get pallet/sectionDetails api to display creation date.
+export const combineReserveArrays = (
+  reserveDetails?: ReserveDetailsPallet[], palletData?: Omit<SectionDetailsPallet, 'items'>[]
+) => {
+  let palletDetails: ReserveDetailsPallet[] = [];
+  if (reserveDetails && palletData) {
+    palletDetails = reserveDetails.map(pallet => {
+      const sectionReserve = palletData.find(loc => loc.palletId === pallet.id);
+      return { ...pallet, ...sectionReserve };
+    });
+  }
+  return palletDetails;
+};
 
-export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element => {
+export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) : JSX.Element => {
   const {
     getSectionDetailsApi,
+    getPalletDetailsApi,
     dispatch,
     navigation,
     trackEventCall,
     useEffectHook,
-    scannedEvent,
-    addAPI
+    addAPI,
+    palletIds
   } = props;
+  const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
+  const reservePallets: ReserveDetailsPallet[] | undefined = (
+    getPalletDetailsApi.result && getPalletDetailsApi.result.data.pallets);
 
   // Navigation Listener
   useEffectHook(() => {
     // Resets Get SectionDetails api response data when navigating off-screen
     navigation.addListener('beforeRemove', () => {
-      dispatch({ type: GET_SECTION_DETAILS.RESET });
+      dispatch({ type: GET_PALLET_DETAILS.RESET });
     });
   }, []);
 
-  // Get Section Details Api
+  // Get Pallet Details Api
   useEffectHook(() => {
     // on api success
-    if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
+    if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
+      const failedPallets = reservePallets?.filter(pallet => pallet.statusCode !== 200).length;
       // Update Location State on Success
-      switch (getSectionDetailsApi.result.status) {
-        case 200:
-        case 207:
-          // eslint-disable-next-line no-case-declarations
-          const { zone, aisle, section } = getSectionDetailsApi.result.data;
-          dispatch(selectZone(zone.id || 0, zone.name || ''));
-          dispatch(selectAisle(aisle.id || 0, aisle.name || ''));
-          dispatch(selectSection(section.id, section.name));
-          break;
-        case 204:
-          break;
-        default: break;
+      if (getPalletDetailsApi.result.status === 207) {
+        // Display toast message
+        dispatch(showSnackBar(strings('LOCATION.GET_FAILED_PALLETS', { amount: failedPallets }), 5000));
       }
     }
-  }, []);
-  const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
+  }, [getPalletDetailsApi]);
 
-  if (getSectionDetailsApi.isWaiting) {
+  if (getPalletDetailsApi.isWaiting) {
     return (
       <ActivityIndicator
-        animating={getSectionDetailsApi.isWaiting}
+        animating={getPalletDetailsApi.isWaiting}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -80,7 +90,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
     );
   }
 
-  if (getSectionDetailsApi.error) {
+  if (getPalletDetailsApi.error) {
     return (
       <View style={styles.errorView}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
@@ -89,7 +99,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
           style={styles.errorButton}
           onPress={() => {
             trackEventCall('location_api_retry',);
-            dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
+            dispatch(getPalletDetails({ palletIds }));
           }}
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
@@ -101,45 +111,43 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
   return (
     <View style={styles.locDetailsScreenContainer}>
       <FlatList
-        data={locationItem?.items.sectionItems}
+        data={combineReserveArrays(reservePallets, locationItem?.pallets.palletData)}
         renderItem={({ item }) => (
-          <FloorItemRow
-            item={item}
-            dispatch={dispatch}
-            navigation={navigation}
-          />
+          // Resolves type error, Section Id will never be zero in our case
+          <ReservePalletRow sectionId={locationItem?.section.id || 0} reservePallet={item} />
         )}
-        keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
+        keyExtractor={(item, idx) => `${item.id}${idx}`}
         ListEmptyComponent={(
           <View style={styles.emptyContainer}>
             <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
-            <Text>{strings('LOCATION.FLOOR_EMPTY')}</Text>
+            <Text>{strings('LOCATION.RESERVE_EMPTY')}</Text>
           </View>
         )}
       />
     </View>
   );
 };
-
-const SectionDetails = (): JSX.Element => {
+// Passing Down PalletIds to avoid unnecessarily remapping the response data
+const ReserveSectionDetails = (props: { palletIds: number[]}): JSX.Element => {
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
-  const { scannedEvent } = useTypedSelector(state => state.Global);
+  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const addAPI = useTypedSelector(state => state.async.addPallet);
   return (
     <>
-      <SectionDetailsScreen
+      <ReserveSectionDetailsScreen
         getSectionDetailsApi={getSectionDetailsApi}
+        getPalletDetailsApi={getPalletDetailsApi}
         addAPI={addAPI}
         dispatch={dispatch}
         navigation={navigation}
         trackEventCall={trackEvent}
         useEffectHook={useEffect}
-        scannedEvent={scannedEvent}
+        palletIds={props.palletIds}
       />
     </>
   );
 };
 
-export default SectionDetails;
+export default ReserveSectionDetails;

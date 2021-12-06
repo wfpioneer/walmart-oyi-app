@@ -29,6 +29,12 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 16,
     textAlign: 'center'
+  },
+  emptyContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 28
   }
 });
 
