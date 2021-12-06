@@ -473,16 +473,16 @@ const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales
   : undefined);
 
 const isError = (
-  props: ItemDetailsScreenProps,
   error: any,
   errorModalVisible: boolean,
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   isManualScanEnabled: boolean,
   scannedEvent: any,
   userId: string,
-  setShowError:React.Dispatch<React.SetStateAction<boolean>>
+  setShowError:React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>,
+  trackEventCall: (eventName: string, params?: any) => void
 ) => {
-  const { trackEventCall, dispatch } = props;
   if (error) {
     return (
       <View style={styles.safeAreaView}>
@@ -596,14 +596,15 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   // Get Item Details Error
   if (showError) {
     return isError(
-      props,
       error,
       errorModalVisible,
       setErrorModalVisible,
       isManualScanEnabled,
       scannedEvent,
       userId,
-      setShowError
+      setShowError,
+      dispatch,
+      trackEventCall
     );
   }
 
