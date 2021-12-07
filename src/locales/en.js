@@ -135,7 +135,8 @@ export default {
     PORTABLE_PRINTER: 'Portable Printer',
     PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.',
     PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed'
+    LOCATION_SUCCESS: 'Section Label Successfully Printed',
+    DUPLICATE_PRINTER: 'A Printer currently exists'
   },
   LOCATION: {
     TITLE: 'All locations',
