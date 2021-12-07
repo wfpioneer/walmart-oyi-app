@@ -65,7 +65,7 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
       navigation.goBack();
     }
   };
-  const isPrinterExists = () => printers.length > 0 && printers.find(print => print.id === macAddress);
+  const isPrinterExists = () => printers.length > 0 && printers.some(print => print.id === macAddress);
 
   return (
     <View style={styles.container}>
