@@ -67,6 +67,7 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
     // on api success
     // eslint-disable-next-line no-empty
     if (!addAPI.isWaiting && addAPI.result) {
+      // TODO Call GET PALLET DETAILS after adding pallet
       dispatch(getSectionDetails({ sectionId: section.id }));
       dispatch(showSnackBar(strings('LOCATION.PALLET_ADDED'), 3000));
       navigation.goBack();

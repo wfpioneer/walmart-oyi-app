@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
@@ -116,45 +120,38 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
     style={
       Object {
         "flex": 0.1,
+        "marginBottom": 15,
       }
     }
   >
-    <ForwardRef
+    <Button
+      backgroundColor="#0071e9"
       disabled={true}
+      height={45}
       onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#0071e9",
-          "borderColor": "#0071e9",
-          "borderRadius": 4,
-          "borderWidth": 1,
-          "flexDirection": "row",
-          "height": 40,
-          "justifyContent": "center",
-          "marginHorizontal": 15,
-          "marginVertical": 10,
-          "paddingVertical": 10,
+          "margin": 15,
         }
       }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#ffffffff",
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.GENERICS.CONTINUE" translation]
-      </Text>
-    </ForwardRef>
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
   </View>
-</View>
+</KeyboardAvoidingView>
 `;
 
 exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
@@ -453,45 +450,38 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
     style={
       Object {
         "flex": 0.1,
+        "marginBottom": 15,
       }
     }
   >
-    <ForwardRef
+    <Button
+      backgroundColor="#0071e9"
       disabled={true}
+      height={45}
       onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#0071e9",
-          "borderColor": "#0071e9",
-          "borderRadius": 4,
-          "borderWidth": 1,
-          "flexDirection": "row",
-          "height": 40,
-          "justifyContent": "center",
-          "marginHorizontal": 15,
-          "marginVertical": 10,
-          "paddingVertical": 10,
+          "margin": 15,
         }
       }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#ffffffff",
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.GENERICS.CONTINUE" translation]
-      </Text>
-    </ForwardRef>
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
   </View>
-</View>
+</KeyboardAvoidingView>
 `;
 
 exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
@@ -594,45 +584,38 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
     style={
       Object {
         "flex": 0.1,
+        "marginBottom": 15,
       }
     }
   >
-    <ForwardRef
+    <Button
+      backgroundColor="#0071e9"
       disabled={false}
+      height={45}
       onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#0071e9",
-          "borderColor": "#0071e9",
-          "borderRadius": 4,
-          "borderWidth": 1,
-          "flexDirection": "row",
-          "height": 40,
-          "justifyContent": "center",
-          "marginHorizontal": 15,
-          "marginVertical": 10,
-          "paddingVertical": 10,
+          "margin": 15,
         }
       }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#ffffffff",
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.GENERICS.CONTINUE" translation]
-      </Text>
-    </ForwardRef>
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
   </View>
-</View>
+</KeyboardAvoidingView>
 `;
 
 exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
@@ -919,39 +902,28 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
     style={
       Object {
         "flex": 0.1,
+        "marginBottom": 15,
       }
     }
   >
-    <ForwardRef
+    <Button
+      backgroundColor="#0071e9"
       disabled={true}
+      height={45}
       onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#0071e9",
-          "borderColor": "#0071e9",
-          "borderRadius": 4,
-          "borderWidth": 1,
-          "flexDirection": "row",
-          "height": 40,
-          "justifyContent": "center",
-          "marginHorizontal": 15,
-          "marginVertical": 10,
-          "paddingVertical": 10,
+          "margin": 15,
         }
       }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#ffffffff",
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.GENERICS.CONTINUE" translation]
-      </Text>
-    </ForwardRef>
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
   </View>
-</View>
+</KeyboardAvoidingView>
 `;

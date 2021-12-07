@@ -33,18 +33,22 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
   <ReservePalletRow
     reservePallet={
       Object {
+        "id": 1,
         "items": Array [
           Object {
             "itemDesc": "Nature Valley Honey Nut Granola Bars",
             "itemNbr": 500252,
+            "price": 0,
           },
           Object {
             "itemDesc": "Cabbage",
             "itemNbr": 123456,
+            "price": 0,
           },
         ],
         "palletCreateTS": "2021-01-01",
         "palletId": 1,
+        "statusCode": 200,
       }
     }
     sectionId={1}
@@ -85,14 +89,17 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
   <ReservePalletRow
     reservePallet={
       Object {
+        "id": 1,
         "items": Array [
           Object {
             "itemDesc": "Nature Valley Honey Nut Granola Bars",
             "itemNbr": 500252,
+            "price": 0,
           },
           Object {
             "itemDesc": "Cabbage",
             "itemNbr": 123456,
+            "price": 0,
           },
           Object {
             "itemDesc": "An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description",
@@ -102,6 +109,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
         ],
         "palletCreateTS": "2021-01-01",
         "palletId": 1,
+        "statusCode": 200,
       }
     }
     sectionId={1}
@@ -142,9 +150,11 @@ exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = 
   <ReservePalletRow
     reservePallet={
       Object {
+        "id": 1,
         "items": Array [],
         "palletCreateTS": "2021-01-01",
         "palletId": 1,
+        "statusCode": 200,
       }
     }
     sectionId={1}

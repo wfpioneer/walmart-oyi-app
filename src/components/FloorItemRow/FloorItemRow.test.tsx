@@ -4,7 +4,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { mockLocationDetails } from '../../mockData/locationDetails';
 import FloorItemRow from './FloorItemRow';
 
-const mockFloorItem = mockLocationDetails.floor[0];
+const mockFloorItem = mockLocationDetails.items.sectionItems[0];
 let navigationProp: NavigationProp<any>;
 
 describe('FloorItemRow Component', () => {

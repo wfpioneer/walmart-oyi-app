@@ -3,16 +3,17 @@ import {
   ActivityIndicator, Image, Text, TouchableOpacity, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './ReservePalletRow.style';
 import { strings } from '../../locales';
-import { SectionDetailsPallet } from '../../models/LocationItems';
+import { ReserveDetailsPallet } from '../../models/LocationItems';
 import { CustomModalComponent } from '../../screens/Modal/Modal';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
 import { deletePallet, getSectionDetails } from '../../state/actions/saga';
 
-export type ReservePalletRowProps = { sectionId: number, reservePallet: SectionDetailsPallet };
+export type ReservePalletRowProps = { sectionId: number, reservePallet: ReserveDetailsPallet };
 const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   const { sectionId, reservePallet } = props;
   const dispatch = useDispatch();
@@ -30,18 +31,20 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
       dispatch({ type: 'API/DELETE_PALLET/RESET' });
     }
   }, [delPalletAPI]);
-
   const deleteConfirmed = () => {
     dispatch(deletePallet({
-      palletId: reservePallet.palletId
+      palletId: reservePallet.id
     }));
   };
+  const createdDate = moment(reservePallet.palletCreateTS).format('YYYY-MM-DD');
+
+  // TODO Map Pallet and Reserve Response and pass the array into this Component
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <View style={styles.pallet}>
           <Text style={styles.textHeader}>
-            {`${strings('LOCATION.PALLET')} ${reservePallet.palletId}`}
+            {`${strings('LOCATION.PALLET')} ${reservePallet.id}`}
           </Text>
           { userFeatures.includes('location management edit') && (
             <TouchableOpacity onPress={() => deletePalletConfirmation()}>
@@ -54,9 +57,9 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
           )}
         </View>
         <Text style={styles.palletCreateTs}>
-          {`${strings('LOCATION.CREATED_ON')} ${reservePallet.palletCreateTS}`}
+          {`${strings('LOCATION.CREATED_ON')} ${createdDate}`}
         </Text>
-        { reservePallet.items.length > 0 && (
+        { reservePallet.items && reservePallet.items.length > 0 && (
         <View style={styles.itemContainer}>
           <Text style={styles.itemNbr}>
             {`${strings('ITEM.ITEM')} ${reservePallet.items[0]?.itemNbr}`}
@@ -89,7 +92,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
         ) : (
           <>
             <Text style={styles.message}>
-              {`${strings('LOCATION.PALLET_DELETE_CONFIRMATION')}${reservePallet.palletId}`}
+              {`${strings('LOCATION.PALLET_DELETE_CONFIRMATION')}${reservePallet.id}`}
             </Text>
             <View style={styles.buttonContainer}>
               <Button
