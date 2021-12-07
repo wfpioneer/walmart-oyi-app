@@ -53,7 +53,7 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     flex: 0.1,
-    marginBottom: 10
+    marginBottom: 15
   },
   invalidLabel: {
     fontSize: 10,

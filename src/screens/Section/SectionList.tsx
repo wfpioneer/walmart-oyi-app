@@ -252,6 +252,7 @@ const SectionList = (): JSX.Element => {
           text={strings('LOCATION.PRINT_SECTION')}
           onPress={() => {
             dispatch(hideLocationPopup());
+            bottomSheetModalRef.current?.dismiss();
             dispatch(setPrintingLocationLabels(LocationName.AISLE));
             navigation.navigate('PrintPriceSign');
           }}

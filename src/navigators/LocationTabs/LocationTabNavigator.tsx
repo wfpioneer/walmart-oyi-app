@@ -18,7 +18,7 @@ import styles from './LocationTabNavigator.style';
 import LocationHeader from '../../components/locationHeader/LocationHeader';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
-import { getSectionDetails } from '../../state/actions/saga';
+import { getPalletDetails, getSectionDetails } from '../../state/actions/saga';
 import SectionDetails from '../../screens/SectionDetails/SectionDetailsScreen';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
@@ -31,6 +31,7 @@ import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/Bottom
 import Button from '../../components/buttons/Button';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
 import { LocationName } from '../../models/Location';
+import ReserveSectionDetails from '../../screens/SectionDetails/ReserveSectionDetails';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -103,6 +104,24 @@ const floorDetailsList = () => {
 
 const reserveDetailsList = () => {
   const userFeatures = useTypedSelector(state => state.User.features);
+  const navigation = useNavigation();
+  const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
+  const dispatch = useDispatch();
+
+  let palletIds: number[] = [];
+  // Call Get Pallet Details API
+  useEffect(() => navigation.addListener('focus', () => {
+    // Call if SectionDetails returned successfully and tab is in focus
+    if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
+      const { pallets } = getSectionDetailsApi.result.data;
+      if (pallets.palletData.length !== 0) {
+        palletIds = pallets.palletData.map(
+          (item: Omit<SectionDetailsPallet, 'items'>) => item.palletId
+        );
+        dispatch(getPalletDetails({ palletIds }));
+      }
+    }
+  }), [getSectionDetailsApi]);
   return (
     <>
       <TabHeader
@@ -110,7 +129,7 @@ const reserveDetailsList = () => {
         isEditEnabled={userFeatures.includes('location management edit')}
         isReserve={true}
       />
-      <SectionDetails />
+      <ReserveSectionDetails palletIds={palletIds} />
     </>
   );
 };
@@ -253,8 +272,8 @@ const LocationTabs = () : JSX.Element => {
       >
         <LocationTabsNavigator
           dispatch={dispatch}
-          floorItems={locItem?.floor ?? []}
-          reserveItems={locItem?.reserve ?? []}
+          floorItems={locItem?.items.sectionItems ?? []}
+          reserveItems={locItem?.pallets.palletData ?? []}
           locationName={locationName}
           locationPopupVisible={locationPopupVisible}
           isManualScanEnabled={isManualScanEnabled}

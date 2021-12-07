@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddZoneScreen AddSectionScreen with invalid section count 1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
@@ -45,7 +49,7 @@ exports[`AddZoneScreen AddSectionScreen with invalid section count 1`] = `
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 10,
+        "marginBottom": 15,
       }
     }
   >
@@ -68,11 +72,15 @@ exports[`AddZoneScreen AddSectionScreen with invalid section count 1`] = `
       width={-1}
     />
   </View>
-</View>
+</KeyboardAvoidingView>
 `;
 
 exports[`AddZoneScreen AddSectionScreen with valid input from add aisle 1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
@@ -124,7 +132,7 @@ exports[`AddZoneScreen AddSectionScreen with valid input from add aisle 1`] = `
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 10,
+        "marginBottom": 15,
       }
     }
   >
@@ -147,11 +155,15 @@ exports[`AddZoneScreen AddSectionScreen with valid input from add aisle 1`] = `
       width={-1}
     />
   </View>
-</View>
+</KeyboardAvoidingView>
 `;
 
 exports[`AddZoneScreen AddSectionScreen with valid input from add section 1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
@@ -195,7 +207,7 @@ exports[`AddZoneScreen AddSectionScreen with valid input from add section 1`] = 
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 10,
+        "marginBottom": 15,
       }
     }
   >
@@ -218,11 +230,15 @@ exports[`AddZoneScreen AddSectionScreen with valid input from add section 1`] = 
       width={-1}
     />
   </View>
-</View>
+</KeyboardAvoidingView>
 `;
 
 exports[`AddZoneScreen AddSectionScreen with valid input from add zone 1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
@@ -274,7 +290,7 @@ exports[`AddZoneScreen AddSectionScreen with valid input from add zone 1`] = `
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 10,
+        "marginBottom": 15,
       }
     }
   >
@@ -297,5 +313,5 @@ exports[`AddZoneScreen AddSectionScreen with valid input from add zone 1`] = `
       width={-1}
     />
   </View>
-</View>
+</KeyboardAvoidingView>
 `;
