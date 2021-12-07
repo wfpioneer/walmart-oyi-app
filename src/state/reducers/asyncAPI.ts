@@ -26,7 +26,8 @@ export const asyncReducer = combineReducers({
   addPallet: makeAsyncReducer(asyncActions.ADD_PALLET),
   deletePallet: makeAsyncReducer(asyncActions.DELETE_PALLET),
   printLocationLabels: makeAsyncReducer(asyncActions.PRINT_LOCATION_LABELS),
-  getPalletDetails: makeAsyncReducer(asyncActions.GET_PALLET_DETAILS)
+  getPalletDetails: makeAsyncReducer(asyncActions.GET_PALLET_DETAILS),
+  postCreateAisles: makeAsyncReducer(asyncActions.POST_CREATE_AISLES)
 });
 
 export default asyncReducer;

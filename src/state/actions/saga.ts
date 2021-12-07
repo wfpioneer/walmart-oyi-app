@@ -1,3 +1,4 @@
+import { CreateAisleRequest } from '../../models/CreateZoneAisleSection.d';
 import {
   ApprovalListItem, approvalAction, approvalRequestSource, approvalStatus
 } from '../../models/ApprovalListItem';
@@ -26,6 +27,7 @@ export const PRINT_LOCATION_LABELS = 'SAGA/PRINT_SECTION_LABELS';
 export const ADD_PALLET = 'SAGA/ADD_PALLET';
 export const DELETE_PALLET = 'SAGA/DELETE_PALLET';
 export const GET_PALLET_DETAILS = 'SAGA/GET_PALLET_DETAILS';
+export const POST_CREATE_AISLES = 'SAGA/POST_CREATE_AISLES';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -64,3 +66,6 @@ export const printLocationLabel = (payload: {
 export const addPallet = (payload: any) => ({ type: ADD_PALLET, payload } as const);
 export const deletePallet = (payload: any) => ({ type: DELETE_PALLET, payload } as const);
 export const getPalletDetails = (payload: {palletIds: number[]}) => ({ type: GET_PALLET_DETAILS, payload } as const);
+export const postCreateAisles = (payload: {
+  aislesToCreate: CreateAisleRequest
+}) => ({ type: POST_CREATE_AISLES, payload } as const);

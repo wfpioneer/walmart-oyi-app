@@ -197,7 +197,11 @@ export default {
     PALLET_DELETE_CONFIRMATION: 'Confirmar: Borrar pallet',
     FLOOR_EMPTY: 'La lista de Piso está vacía',
     RESERVE_EMPTY: 'La lista de Bodega está vacía',
-    GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)'
+    GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
+    AISLES_ADDED: '{number} pasillos agregados',
+    INCOMPLETE_AISLES_ADDED: 'No todos los pasillos/secciones se crearon. Sólo {number} pasillos/secciones se agregaron',
+    INCOMPLETE_AISLES_PLEASE_CHECK: 'Por favor revisa la lista de pasillos y secciones que se crearon',
+    ADD_AISLES_ERROR: 'Hubo un error agregando pasillos/secciones. Por favor inténtalo de nuevo'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

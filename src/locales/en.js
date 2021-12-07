@@ -197,7 +197,11 @@ export default {
     PALLET_DELETE_CONFIRMATION: 'Confirm: \nDelete pallet',
     FLOOR_EMPTY: 'The Floor List is empty',
     RESERVE_EMPTY: 'The Reserve List is empty',
-    GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallet(s)'
+    GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallet(s)',
+    AISLES_ADDED: '{number} aisles added',
+    INCOMPLETE_AISLES_ADDED: 'Not all aisles/sections were created. Only {number} aisles/sections were added',
+    INCOMPLETE_AISLES_PLEASE_CHECK: 'Please check the list of aisles and sections that were created',
+    ADD_AISLES_ERROR: 'There was an error adding the aisles/sections.  Please try again'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

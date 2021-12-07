@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
+import { CreateAisleRequest, CreateAisleResponse } from '../models/CreateZoneAisleSection.d';
 
 export default class LocationService {
   public static getAllZones() : Promise<AxiosResponse<unknown>> {
@@ -40,6 +41,16 @@ export default class LocationService {
 
     return Request.get(
       `${urls.locationUrl}/pallet/items/itemdetails?palletIds=${queryParam}`
+    );
+  }
+
+  public static createLocationAislesSection(payload: { aislesToCreate: CreateAisleRequest }):
+    Promise<AxiosResponse<Array<CreateAisleResponse>>> {
+    const urls: Environment = getEnvironment();
+
+    return Request.post(
+      `${urls.locationUrl}/aisle/section`,
+      payload.aislesToCreate
     );
   }
 }

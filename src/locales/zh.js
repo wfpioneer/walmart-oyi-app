@@ -197,7 +197,11 @@ export default {
     PALLET_DELETE_CONFIRMATION: '确认：删除卡板',
     FLOOR_EMPTY: '楼面清单无商品',
     RESERVE_EMPTY: '存储区域无卡板',
-    GET_FAILED_PALLETS: '获取 %{amount} 卡板失败'
+    GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
+    AISLES_ADDED: '通道号{number}已添加',
+    INCOMPLETE_AISLES_ADDED: '创建通道/货架位置数量缺失，只创建了{number}通道/货架',
+    INCOMPLETE_AISLES_PLEASE_CHECK: '请确认已创建的通道和货架清单',
+    ADD_AISLES_ERROR: '添加通道/货架时出错,请再试一次。'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

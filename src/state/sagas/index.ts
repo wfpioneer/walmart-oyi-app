@@ -44,7 +44,8 @@ const genericSagas = [
   makeAsyncSaga(saga.ADD_PALLET, actions.addPallet, AddPalletService.addPallet),
   makeAsyncSaga(saga.DELETE_PALLET, actions.deletePallet, DeletePalletService.deletePallet),
   makeAsyncSaga(saga.PRINT_LOCATION_LABELS, actions.printLocationLabels, PrintService.printLabels),
-  makeAsyncSaga(saga.GET_PALLET_DETAILS, actions.getPalletDetails, LocationService.getPalletDetails)
+  makeAsyncSaga(saga.GET_PALLET_DETAILS, actions.getPalletDetails, LocationService.getPalletDetails),
+  makeAsyncSaga(saga.POST_CREATE_AISLES, actions.postCreateAisles, LocationService.createLocationAislesSection)
 ];
 
 export default function* rootSaga() {

@@ -6,10 +6,10 @@ import {
   SELECT_AISLE,
   SELECT_SECTION,
   SELECT_ZONE,
-  SET_AISLE_SECTION_COUNT,
   SET_AISLES,
   SET_AISLES_TO_CREATE,
   SET_AISLES_TO_CREATE_TO_EXISTING_AISLE,
+  SET_AISLE_SECTION_COUNT,
   SET_CREATE_FLOW,
   SET_NEW_ZONE,
   SET_POSSIBLE_ZONES,
@@ -31,7 +31,7 @@ export interface LocationIdName {
 }
 
 export interface CreateAisles {
-  name: number | string;
+  aisleName: number | string;
   sectionCount: number;
 }
 
@@ -151,7 +151,7 @@ export const Location = (
       while (aislesToCreate.length < action.payload) {
         if (!state.aisles.find(aisle => aisleCount === parseInt(aisle.aisleName, 10))) {
           aislesToCreate.push({
-            name: aisleCount,
+            aisleName: aisleCount,
             sectionCount: 1
           });
         }
@@ -174,7 +174,7 @@ export const Location = (
       return {
         ...state,
         aislesToCreate: [{
-          name: action.payload.name,
+          aisleName: action.payload.name,
           sectionCount: 1
         }]
       };
