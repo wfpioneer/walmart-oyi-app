@@ -113,12 +113,14 @@ const reserveDetailsList = () => {
   useEffect(() => navigation.addListener('focus', () => {
     // Call if SectionDetails returned successfully and tab is in focus
     if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
-      const { pallets } = getSectionDetailsApi.result.data;
-      if (pallets.palletData.length !== 0) {
-        palletIds = pallets.palletData.map(
-          (item: Omit<SectionDetailsPallet, 'items'>) => item.palletId
-        );
-        dispatch(getPalletDetails({ palletIds }));
+      if (getSectionDetailsApi.result.status !== 204) {
+        const { pallets } = getSectionDetailsApi.result.data;
+        if (pallets.palletData.length !== 0) {
+          palletIds = pallets.palletData.map(
+            (item: Omit<SectionDetailsPallet, 'items'>) => item.palletId
+          );
+          dispatch(getPalletDetails({ palletIds }));
+        }
       }
     }
   }), [getSectionDetailsApi]);
@@ -272,8 +274,8 @@ const LocationTabs = () : JSX.Element => {
       >
         <LocationTabsNavigator
           dispatch={dispatch}
-          floorItems={locItem?.items.sectionItems ?? []}
-          reserveItems={locItem?.pallets.palletData ?? []}
+          floorItems={locItem?.items?.sectionItems ?? []}
+          reserveItems={locItem?.pallets?.palletData ?? []}
           locationName={locationName}
           locationPopupVisible={locationPopupVisible}
           isManualScanEnabled={isManualScanEnabled}

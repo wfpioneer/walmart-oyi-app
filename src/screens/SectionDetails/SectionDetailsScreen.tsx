@@ -17,6 +17,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
 import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
 import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
+
 interface SectionDetailsProps {
   getSectionDetailsApi: AsyncState;
   dispatch: Dispatch<any>;
@@ -66,7 +67,8 @@ export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element =
       }
     }
   }, []);
-  const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
+  const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data)
+  || undefined;
 
   if (getSectionDetailsApi.isWaiting) {
     return (
