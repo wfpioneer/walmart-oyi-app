@@ -184,7 +184,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               {renderPrintQueueButton(userFeatures.includes('location printing'))}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
-                !userFeatures.includes('location management edit')
+                userFeatures.includes('location management edit')
               )}
             </View>
           )
@@ -209,7 +209,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               {renderPrintQueueButton(userFeatures.includes('location printing'))}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
-                !userFeatures.includes('location management edit')
+                userFeatures.includes('location management edit')
               )}
             </View>
           )
