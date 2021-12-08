@@ -32,7 +32,7 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
             <Text style={styles.itemNbr}>
               {`${strings('ITEM.ITEM')} ${item.itemNbr}`}
             </Text>
-            {!userFeatures.includes('location management edit') && (
+            {userFeatures.includes('location management edit') && (
               <TouchableOpacity onPress={() => {
                 if (location.itemPopupVisible) {
                   dispatch(hideItemPopup());
