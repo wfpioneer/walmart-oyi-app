@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Edit item render tests renders the bottom sheet edit item, visible 1`] = `
+<BottomSheetBaseCard
+  image=""
+  onPress={[Function]}
+  text="Edit an item"
+/>
+`;

@@ -1,6 +1,8 @@
 import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
+import { Provider } from 'react-redux';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import store from '../../state';
 import { mockLocationDetails } from '../../mockData/locationDetails';
 import FloorItemRow from './FloorItemRow';
 
@@ -11,7 +13,9 @@ describe('FloorItemRow Component', () => {
   it('Renders a FloorItem', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <FloorItemRow item={mockFloorItem} dispatch={jest.fn()} navigation={navigationProp} />
+      <Provider store={store}>
+        <FloorItemRow item={mockFloorItem} dispatch={jest.fn()} navigation={navigationProp} />
+      </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -21,7 +25,9 @@ describe('FloorItemRow Component', () => {
     const mockFloorItemLongName = { ...mockFloorItem, itemDesc: longItemDesc };
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <FloorItemRow item={mockFloorItemLongName} dispatch={jest.fn()} navigation={navigationProp} />
+      <Provider store={store}>
+        <FloorItemRow item={mockFloorItemLongName} dispatch={jest.fn()} navigation={navigationProp} />
+      </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });

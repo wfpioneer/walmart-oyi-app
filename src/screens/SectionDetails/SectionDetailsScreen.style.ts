@@ -35,6 +35,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 28
+  },
+  bottomSheetModal: {
+    borderColor: COLOR.GREY_200,
+    borderRadius: 5,
+    borderWidth: 2
+  },
+  disabledContainer: {
+    flex: 1,
+    opacity: 0.2
+  },
+  container: {
+    flex: 1
   }
 });
 
