@@ -197,7 +197,9 @@ export default {
     PALLET_DELETE_CONFIRMATION: 'Confirmar: Borrar pallet',
     FLOOR_EMPTY: 'La lista de Piso está vacía',
     RESERVE_EMPTY: 'La lista de Bodega está vacía',
-    GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)'
+    GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
+    SECTIONS_ADDED: '%{number} secciones agregadas',
+    ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

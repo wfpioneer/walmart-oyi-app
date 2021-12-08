@@ -197,7 +197,9 @@ export default {
     PALLET_DELETE_CONFIRMATION: '确认：删除卡板',
     FLOOR_EMPTY: '楼面清单无商品',
     RESERVE_EMPTY: '存储区域无卡板',
-    GET_FAILED_PALLETS: '获取 %{amount} 卡板失败'
+    GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
+    SECTIONS_ADDED: '已添加 %{number} 个货架位置',
+    ADD_SECTIONS_ERROR: '添加货架时错误，请重试.'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
