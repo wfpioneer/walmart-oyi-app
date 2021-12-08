@@ -33,20 +33,16 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   rightButton: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingRight: 10
+    paddingVertical: 3
   },
   leftButton: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 10
+    justifyContent: 'center'
   },
   image: {
     width: 25,
-    height: 25,
+    height: 20,
     backgroundColor: COLOR.WHITE
   }
 });
