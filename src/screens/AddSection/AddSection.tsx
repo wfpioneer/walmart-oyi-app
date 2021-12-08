@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
   FlatList,
   Keyboard,
@@ -10,6 +10,7 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { Header } from '@react-navigation/stack';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import moment from 'moment';
 import styles from './addSection.style';
 import { strings } from '../../locales';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -23,6 +24,7 @@ import { hideActivityModal, showActivityModal } from '../../state/actions/Modal'
 import { CreateAisleRequest, CreateAisleResponse } from '../../models/CreateZoneAisleSection.d';
 import { AsyncState } from '../../models/AsyncState';
 import { showSnackBar } from '../../state/actions/SnackBar';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface AddSectionProps {
   aislesToCreate: CreateAisles[];
@@ -35,6 +37,9 @@ interface AddSectionProps {
   currentAisle: LocationIdName;
   modal: any;
   createAislesApi: AsyncState;
+  createAislesApiStart: number;
+  setCreateAislesApiStart: React.Dispatch<React.SetStateAction<number>>;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
 
 interface RenderAisles {
@@ -58,13 +63,80 @@ const validateSectionCounts = (aislesToCreate: CreateAisles[], existingSections:
   return validation;
 };
 
-export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
-  const { createAislesApi, dispatch, navigation } = props;
+export const createAisleSectionsEffect = (
+  createAislesApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  createAislesApiStart: number,
+  trackApiEvents: (eventName: string, params: any) => void
+): void => {
+  if (navigation.isFocused() && !createAislesApi.isWaiting) {
+    // Success
+    if (createAislesApi.result) {
+      const createdAisles = createAislesApi.result.data as Array<CreateAisleResponse>;
+      switch (createAislesApi.result.status) {
+        case 200:
+          trackApiEvents('create_aisles_success', { duration: moment().valueOf() - createAislesApiStart });
+          dispatch(showSnackBar(
+            strings('LOCATION.AISLES_ADDED').replace('{number}', createdAisles.length.toString()),
+            2000
+          ));
+          dispatch({ type: 'API/POST_CREATE_AISLES/RESET' });
+          navigation.navigate('Aisles');
+          break;
+        case 207: {
+          let succeeded = 0;
+          createdAisles.forEach(aisle => {
+            if (aisle.status === 200) {
+              succeeded++;
+            }
+          });
+          trackApiEvents('create_aisles_partial_success', {
+            duration: moment().valueOf() - createAislesApiStart,
+            succeeded,
+            total: createdAisles.length
+          });
+          dispatch(showSnackBar(
+            `${strings('LOCATION.INCOMPLETE_AISLES_ADDED').replace('{number}', succeeded.toString())}`
+            + `\n${strings('LOCATION.INCOMPLETE_AISLES_PLEASE_CHECK')}`,
+            3000
+          ));
+          dispatch({ type: 'API/POST_CREATE_AISLES/RESET' });
+          navigation.navigate('Aisles');
+          break;
+        }
+        default:
+      }
+    }
 
-  const navigateBack = () => {
-    dispatch({ type: 'API/POST_CREATE_AISLES/RESET' });
-    navigation.navigate('Aisles');
-  };
+    // Failure
+    if (createAislesApi.error) {
+      trackApiEvents('create_aisles_failure', {
+        duration: moment().valueOf() - createAislesApiStart,
+        errorDetails: createAislesApi.error.message || createAislesApi.error.status.toString()
+      });
+      dispatch(showSnackBar(strings('LOCATION.ADD_AISLES_ERROR'), 2000));
+    }
+  }
+};
+
+export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
+  const {
+    createAislesApi,
+    createAislesApiStart,
+    setCreateAislesApiStart,
+    dispatch,
+    navigation,
+    useEffectHook
+  } = props;
+
+  useEffectHook(() => createAisleSectionsEffect(
+    createAislesApi,
+    dispatch,
+    navigation,
+    createAislesApiStart,
+    trackEvent
+  ), [createAislesApi]);
 
   const handleAisleSectionCountIncrement = (aisleIndex: number, sectionCount: number) => {
     if (sectionCount < NEW_SECTION_MAX - props.existingSections) {
@@ -136,6 +208,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
           zoneId: props.selectedZone.id,
           aisles: props.aislesToCreate
         };
+        setCreateAislesApiStart(moment().valueOf());
         dispatch(postCreateAisles({ aislesToCreate: createAisleSectionRequest }));
         break;
       }
@@ -171,45 +244,6 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
       }
     }
   }, [props.modal, createAislesApi]);
-
-  // Create Aisles and Sections API
-  useEffect(() => {
-    if (navigation.isFocused() && !createAislesApi.isWaiting) {
-      // Success
-      if (createAislesApi.result) {
-        const createdAisles = createAislesApi.result.data as Array<CreateAisleResponse>;
-        switch (createAislesApi.result.status) {
-          case 200:
-            dispatch(showSnackBar(
-              strings('LOCATION.AISLES_ADDED').replace('{number}', createdAisles.length.toString()),
-              2000
-            ));
-            navigateBack();
-            break;
-          case 207: {
-            let succeeded = 0;
-            createdAisles.forEach(aisle => {
-              if (aisle.status === 200) {
-                succeeded++;
-              }
-            });
-            dispatch(showSnackBar(
-              `${strings('LOCATION.INCOMPLETE_AISLES_ADDED').replace('{number}', succeeded.toString())}`
-              + `\n${strings('LOCATION.INCOMPLETE_AISLES_PLEASE_CHECK')}`,
-              3000
-            ));
-            break;
-          }
-          default:
-        }
-      }
-
-      // Failure
-      if (createAislesApi.error) {
-        dispatch(showSnackBar(strings('LOCATION.ADD_AISLES_ERROR'), 2000));
-      }
-    }
-  }, [createAislesApi, navigation]);
 
   return (
     <KeyboardAvoidingView
@@ -249,6 +283,7 @@ const AddSection = (): JSX.Element => {
   const createAislesApi = useTypedSelector(state => state.async.postCreateAisles);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [createAislesApiStart, setCreateAislesApiStart] = useState(0);
 
   let existingSections = 0;
   if (createFlow === CREATE_FLOW.CREATE_SECTION) {
@@ -270,6 +305,9 @@ const AddSection = (): JSX.Element => {
       currentAisle={currentAisle}
       modal={modal}
       createAislesApi={createAislesApi}
+      createAislesApiStart={createAislesApiStart}
+      setCreateAislesApiStart={setCreateAislesApiStart}
+      useEffectHook={useEffect}
     />
   );
 };
