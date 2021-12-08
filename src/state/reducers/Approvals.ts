@@ -120,7 +120,7 @@ export const Approvals = (
         ...state,
         approvalList: toggledItems,
         categories: toggledCategories,
-        selectedItemQty: isCheckedElsetoggledItems(isChecked, toggledItems, categoryIndices.length),
+        selectedItemQty: isCheckedElsetoggledItems(isChecked, toggledItems, categoryIndices),
         isAllSelected: isChecked
       };
     }
