@@ -1,4 +1,6 @@
-import React, { Dispatch, EffectCallback, useEffect } from 'react';
+import React, {
+  Dispatch, EffectCallback, useEffect, useMemo, useRef
+} from 'react';
 import {
   ActivityIndicator, Text, TouchableOpacity, View
 } from 'react-native';
@@ -6,6 +8,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
 import { LocationItem } from '../../models/LocationItems';
@@ -16,19 +19,23 @@ import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
 import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
-import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
+import {
+  hideItemPopup, selectAisle, selectSection, selectZone
+} from '../../state/actions/Location';
+import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
+import BottomSheetEditCard from '../../components/BottomSheetEditCard/BottomSheetEditCard';
 
 interface SectionDetailsProps {
   getSectionDetailsApi: AsyncState;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
-  scannedEvent: {type: string, value: string};
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
+  scannedEvent: { type: string, value: string };
   addAPI: AsyncState;
 }
 
-export const SectionDetailsScreen = (props: SectionDetailsProps) : JSX.Element => {
+export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element => {
   const {
     getSectionDetailsApi,
     dispatch,
@@ -129,18 +136,55 @@ const SectionDetails = (): JSX.Element => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const addAPI = useTypedSelector(state => state.async.addPallet);
+  const location = useTypedSelector(state => state.Location);
+  const snapPoints = useMemo(() => ['40%'], []);
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  useEffect(() => {
+    if (navigation.isFocused() && bottomSheetModalRef.current) {
+      if (location.itemPopupVisible) {
+        bottomSheetModalRef.current.present();
+      } else {
+        bottomSheetModalRef.current.dismiss();
+      }
+    }
+  }, [location]);
   return (
-    <>
-      <SectionDetailsScreen
-        getSectionDetailsApi={getSectionDetailsApi}
-        addAPI={addAPI}
-        dispatch={dispatch}
-        navigation={navigation}
-        trackEventCall={trackEvent}
-        useEffectHook={useEffect}
-        scannedEvent={scannedEvent}
-      />
-    </>
+    <BottomSheetModalProvider>
+      <TouchableOpacity
+        onPress={() => dispatch(hideItemPopup())}
+        disabled={!location.itemPopupVisible}
+        activeOpacity={1}
+        style={location.itemPopupVisible ? styles.disabledContainer : styles.container}
+      >
+        <SectionDetailsScreen
+          getSectionDetailsApi={getSectionDetailsApi}
+          addAPI={addAPI}
+          dispatch={dispatch}
+          navigation={navigation}
+          trackEventCall={trackEvent}
+          useEffectHook={useEffect}
+          scannedEvent={scannedEvent}
+        />
+      </TouchableOpacity>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        index={0}
+        snapPoints={snapPoints}
+        onDismiss={() => dispatch(hideItemPopup())}
+        style={styles.bottomSheetModal}
+      >
+        <BottomSheetEditCard
+          isVisible={true}
+          text={strings('LOCATION.EDIT_ITEM')}
+          onPress={() => { }}
+        />
+        <BottomSheetSectionRemoveCard
+          isVisible={true}
+          text={strings('LOCATION.REMOVE_ITEM')}
+          onPress={() => {}}
+        />
+      </BottomSheetModal>
+    </BottomSheetModalProvider>
   );
 };
 

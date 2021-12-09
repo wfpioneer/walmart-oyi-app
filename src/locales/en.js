@@ -198,7 +198,9 @@ export default {
     PALLET_DELETE_CONFIRMATION: 'Confirm: \nDelete pallet',
     FLOOR_EMPTY: 'The Floor List is empty',
     RESERVE_EMPTY: 'The Reserve List is empty',
-    GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallet(s)'
+    GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallet(s)',
+    EDIT_ITEM: 'Edit an item',
+    REMOVE_ITEM: 'Remove an item'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

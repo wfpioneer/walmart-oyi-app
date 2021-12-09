@@ -198,7 +198,9 @@ export default {
     PALLET_DELETE_CONFIRMATION: 'Confirmar: Borrar pallet',
     FLOOR_EMPTY: 'La lista de Piso está vacía',
     RESERVE_EMPTY: 'La lista de Bodega está vacía',
-    GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)'
+    GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
+    EDIT_ITEM: '', // TODO Spanish Translation
+    REMOVE_ITEM: '' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
