@@ -50,7 +50,7 @@ export interface LocationProps {
     locationPopupVisible: boolean;
     userFeatures: string[];
     itemPopupVisible:boolean;
-    result: any;
+    sectionResult: any;
 }
 
 interface TabHeaderProps {
@@ -81,7 +81,7 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
           <Button
             type={3}
             title={strings('GENERICS.ADD')}
-            titleColor={ isDisabled ? COLOR.DISABLED_BLUE : COLOR.MAIN_THEME_COLOR}
+            titleColor={isDisabled ? COLOR.DISABLED_BLUE : COLOR.MAIN_THEME_COLOR}
             titleFontSize={12}
             titleFontWeight="bold"
             height={28}
@@ -163,9 +163,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     validateSessionCall,
     userFeatures,
     itemPopupVisible,
-    result
+    sectionResult
   } = props;
-  const sectionExists = (result && result.status !== 204);
+  const sectionExists: boolean = (sectionResult && sectionResult.status !== 204);
 
   // Call Get Section Details
   useEffectHook(() => {
@@ -309,7 +309,7 @@ const LocationTabs = () : JSX.Element => {
           validateSessionCall={validateSession}
           userFeatures={userFeatures}
           itemPopupVisible={itemPopupVisible}
-          result={result}
+          sectionResult={result}
         />
       </TouchableOpacity>
       <BottomSheetModal
