@@ -184,6 +184,15 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
     useEffectHook
   } = props;
 
+  // activity modal
+  useEffectHook(() => activityModalEffect(
+    navigation,
+    props.modal,
+    createAislesApi,
+    createSectionsAPI,
+    dispatch
+  ), [props.modal, createAislesApi, createSectionsAPI]);
+
   useEffectHook(() => createAisleSectionsEffect(
     createAislesApi,
     dispatch,
@@ -202,15 +211,6 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
       trackEvent
     );
   }, [createSectionsAPI]);
-
-  // activity modal
-  useEffectHook(() => activityModalEffect(
-    navigation,
-    props.modal,
-    createAislesApi,
-    createSectionsAPI,
-    dispatch
-  ), [props.modal, createAislesApi, createSectionsAPI]);
 
   const handleAisleSectionCountIncrement = (aisleIndex: number, sectionCount: number) => {
     if (sectionCount < NEW_SECTION_MAX - props.existingSections) {
