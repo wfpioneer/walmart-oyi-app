@@ -1,6 +1,7 @@
 import { cloneDeep } from 'lodash';
 import {
   Actions,
+  HIDE_ITEM_POPUP,
   HIDE_LOCATION_POPUP,
   RESET_SECTION_NAME,
   SELECT_AISLE,
@@ -15,6 +16,7 @@ import {
   SET_POSSIBLE_ZONES,
   SET_SECTIONS,
   SET_ZONES,
+  SHOW_ITEM_POPUP,
   SHOW_LOCATION_POPUP
 } from '../actions/Location';
 import {
@@ -47,6 +49,7 @@ interface LocationState {
   createFlow: CREATE_FLOW;
   newZone: string;
   aislesToCreate: CreateAisles[];
+  itemPopupVisible: boolean
 }
 
 const initialState: LocationState = {
@@ -69,7 +72,8 @@ const initialState: LocationState = {
   locationPopupVisible: false,
   createFlow: CREATE_FLOW.NOT_STARTED,
   newZone: '',
-  aislesToCreate: []
+  aislesToCreate: [],
+  itemPopupVisible: false
 };
 
 export const Location = (
@@ -131,6 +135,16 @@ export const Location = (
       return {
         ...state,
         locationPopupVisible: false
+      };
+    case SHOW_ITEM_POPUP:
+      return {
+        ...state,
+        itemPopupVisible: true
+      };
+    case HIDE_ITEM_POPUP:
+      return {
+        ...state,
+        itemPopupVisible: false
       };
     case SET_POSSIBLE_ZONES:
       return {

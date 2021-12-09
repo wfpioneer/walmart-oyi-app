@@ -135,7 +135,8 @@ export default {
     PORTABLE_PRINTER: 'Portable Printer',
     PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.',
     PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed'
+    LOCATION_SUCCESS: 'Section Label Successfully Printed',
+    DUPLICATE_PRINTER: 'A Printer currently exists'
   },
   LOCATION: {
     TITLE: 'All locations',
@@ -201,7 +202,11 @@ export default {
     AISLES_ADDED: '{number} aisles added',
     INCOMPLETE_AISLES_ADDED: 'Not all aisles/sections were created. Only {number} aisles/sections were added',
     INCOMPLETE_AISLES_PLEASE_CHECK: 'Please check the list of aisles and sections that were created',
-    ADD_AISLES_ERROR: 'There was an error adding the aisles/sections.  Please try again'
+    ADD_AISLES_ERROR: 'There was an error adding the aisles/sections.  Please try again',
+    EDIT_ITEM: 'Edit an item',
+    REMOVE_ITEM: 'Remove an item',
+    SECTIONS_ADDED: '%{number} section(s) added',
+    ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

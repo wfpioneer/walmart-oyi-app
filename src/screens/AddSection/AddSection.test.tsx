@@ -1,9 +1,15 @@
 import React from 'react';
-import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
-import { AddSectionScreen, createAisleSectionsEffect } from './AddSection';
+import ShallowRenderer from 'react-test-renderer/shallow';
 import { CREATE_FLOW } from '../../models/LocationItems';
 import { AsyncState } from '../../models/AsyncState';
+import {
+  AddSectionScreen,
+  createAisleSectionsEffect,
+  createSectionsAPIEffect,
+  validateNumericInput,
+  validateSectionCounts
+} from './AddSection';
 
 let navigationProp: NavigationProp<any>;
 const defaultCreateAisleSectionApi: AsyncState = {
@@ -67,31 +73,64 @@ const createAisleSectionFailApi: AsyncState = {
   isWaiting: false,
   result: null
 };
+const defaultCreateSectionsAPI: AsyncState = {
+  result: null,
+  isWaiting: false,
+  error: null,
+  value: null
+};
+const createSectionsAPIWaiting: AsyncState = {
+  result: null,
+  isWaiting: true,
+  error: null,
+  value: [{
+    aisleId: 1,
+    sectionCount: 4
+  }]
+};
+const createSectionsAPISuccess: AsyncState = {
+  result: 'test',
+  isWaiting: false,
+  error: null,
+  value: [{
+    aisleId: 1,
+    sectionCount: 4
+  }]
+};
+const createSectionsAPIFailure: AsyncState = {
+  result: null,
+  isWaiting: false,
+  error: 'test error',
+  value: [{
+    aisleId: 1,
+    sectionCount: 4
+  }]
+};
+const aisleWithInvilidSectionCount = [
+  {
+    aisleName: 1,
+    sectionCount: 100
+  }
+];
+const aislesToCreate = [
+  {
+    aisleName: 1,
+    sectionCount: 1
+  },
+  {
+    aisleName: 2,
+    sectionCount: 1
+  },
+  {
+    aisleName: 3,
+    sectionCount: 1
+  }
+];
 describe('AddSection Screen render tests', () => {
-  const aislesToCreate = [
-    {
-      aisleName: 1,
-      sectionCount: 1
-    },
-    {
-      aisleName: 2,
-      sectionCount: 1
-    },
-    {
-      aisleName: 3,
-      sectionCount: 1
-    }
-  ];
-  const exiistingAisleToCreate = [
+  const existingAisleToCreate = [
     {
       aisleName: '1',
       sectionCount: 4
-    }
-  ];
-  const aisleWithInvilidSectionCount = [
-    {
-      aisleName: 1,
-      sectionCount: 100
     }
   ];
   const currentZone = {
@@ -119,6 +158,9 @@ describe('AddSection Screen render tests', () => {
       navigation={navigationProp}
       createAislesApiStart={0}
       setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={defaultCreateSectionsAPI}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
       useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -137,13 +179,16 @@ describe('AddSection Screen render tests', () => {
       navigation={navigationProp}
       createAislesApiStart={0}
       setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={defaultCreateSectionsAPI}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
       useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
   it('AddSectionScreen with valid input from add section', () => {
     renderer.render(<AddSectionScreen
-      aislesToCreate={exiistingAisleToCreate}
+      aislesToCreate={existingAisleToCreate}
       selectedZone={currentZone}
       newZone={selectedZone}
       createFlow={CREATE_FLOW.CREATE_SECTION}
@@ -155,6 +200,9 @@ describe('AddSection Screen render tests', () => {
       navigation={navigationProp}
       createAislesApiStart={0}
       setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={defaultCreateSectionsAPI}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
       useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -173,6 +221,9 @@ describe('AddSection Screen render tests', () => {
       navigation={navigationProp}
       createAislesApiStart={0}
       setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={defaultCreateSectionsAPI}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
       useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -187,10 +238,35 @@ describe('AddSection Screen render tests', () => {
       existingSections={defaultExistingSections}
       currentAisle={currentAisle}
       createAislesApi={createAislesSectionWaitingApi}
-      modal={{ showActivity: false }}
-      navigation={navigationProp}
       createAislesApiStart={0}
       setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={defaultCreateSectionsAPI}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
+      modal={{ showActivity: false }}
+      navigation={navigationProp}
+      useEffectHook={jest.fn()}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('addSectionScreen while waiting for api to finish', () => {
+    renderer.render(<AddSectionScreen
+      aislesToCreate={existingAisleToCreate}
+      selectedZone={currentZone}
+      newZone={selectedZone}
+      createFlow={CREATE_FLOW.CREATE_SECTION}
+      dispatch={jest.fn()}
+      existingSections={defaultExistingSections}
+      currentAisle={currentAisle}
+      createAislesApi={createAislesSectionWaitingApi}
+      createAislesApiStart={0}
+      setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={createSectionsAPIWaiting}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
+      navigation={navigationProp}
+      modal={{ showActivity: false }}
       useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -205,10 +281,35 @@ describe('AddSection Screen render tests', () => {
       existingSections={defaultExistingSections}
       currentAisle={currentAisle}
       createAislesApi={createAisleSectionSuccessApi}
-      modal={{ showActivity: false }}
-      navigation={navigationProp}
       createAislesApiStart={0}
       setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={defaultCreateSectionsAPI}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
+      modal={{ showActivity: false }}
+      navigation={navigationProp}
+      useEffectHook={jest.fn()}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('addSectionScreen after createSections api called and successful', () => {
+    renderer.render(<AddSectionScreen
+      aislesToCreate={existingAisleToCreate}
+      selectedZone={currentZone}
+      newZone={selectedZone}
+      createFlow={CREATE_FLOW.CREATE_SECTION}
+      dispatch={jest.fn()}
+      existingSections={defaultExistingSections}
+      currentAisle={currentAisle}
+      createAislesApi={createAisleSectionSuccessApi}
+      createAislesApiStart={0}
+      setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={createSectionsAPISuccess}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
+      navigation={navigationProp}
+      modal={{ showActivity: false }}
       useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -223,10 +324,35 @@ describe('AddSection Screen render tests', () => {
       existingSections={defaultExistingSections}
       currentAisle={currentAisle}
       createAislesApi={createAisleSectionPartialSuccessApi}
-      modal={{ showActivity: false }}
-      navigation={navigationProp}
       createAislesApiStart={0}
       setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={defaultCreateSectionsAPI}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
+      modal={{ showActivity: false }}
+      navigation={navigationProp}
+      useEffectHook={jest.fn()}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('addSectionScreen after createSections api called and failed', () => {
+    renderer.render(<AddSectionScreen
+      aislesToCreate={existingAisleToCreate}
+      selectedZone={currentZone}
+      newZone={selectedZone}
+      createFlow={CREATE_FLOW.CREATE_SECTION}
+      dispatch={jest.fn()}
+      existingSections={defaultExistingSections}
+      currentAisle={currentAisle}
+      createAislesApi={createAislesSectionWaitingApi}
+      createAislesApiStart={0}
+      setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={createSectionsAPIFailure}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
+      navigation={navigationProp}
+      modal={{ showActivity: false }}
       useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -241,10 +367,13 @@ describe('AddSection Screen render tests', () => {
       existingSections={defaultExistingSections}
       currentAisle={currentAisle}
       createAislesApi={createAisleSectionFailApi}
-      modal={{ showActivity: false }}
-      navigation={navigationProp}
       createAislesApiStart={0}
       setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={defaultCreateSectionsAPI}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
+      modal={{ showActivity: false }}
+      navigation={navigationProp}
       useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -288,5 +417,31 @@ describe('AddSection screen externalized function tests', () => {
     expect(mockTrackApiEvent).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(mockNavigate).toBeCalledTimes(0);
+  });
+
+  it('testing functions', () => {
+    const validateNumericInputValidResult = validateNumericInput(10);
+    expect(validateNumericInputValidResult === true);
+    const validateNumericInputInvalidResult = validateNumericInput(100);
+    expect(validateNumericInputInvalidResult === false);
+    const validateSectionCountsValidResult = validateSectionCounts(aislesToCreate, 0);
+    expect(validateSectionCountsValidResult === true);
+    const validateSectionCountsInvalidResult = validateSectionCounts(aisleWithInvilidSectionCount, 0);
+    expect(validateSectionCountsInvalidResult === false);
+    const mockDispatch = jest.fn();
+    const mockGoBack = jest.fn();
+    // we need to ignore this typescript error as the navigationProp is expecting serveral properties
+    // but we only need to mock the goBack
+    // @ts-ignore
+    navigationProp = { goBack: mockGoBack };
+    createSectionsAPIEffect(createSectionsAPISuccess, mockDispatch, navigationProp, 0, 0, jest.fn());
+    expect(mockDispatch.mock.calls.length).toBe(3);
+    expect(mockGoBack.mock.calls.length).toBe(1);
+    mockDispatch.mockClear();
+    createSectionsAPIEffect(createSectionsAPIFailure, mockDispatch, navigationProp, 0, 0, jest.fn());
+    expect(mockDispatch.mock.calls.length).toBe(2);
+    mockDispatch.mockClear();
+    createSectionsAPIEffect(createSectionsAPIWaiting, mockDispatch, navigationProp, 0, 0, jest.fn());
+    expect(mockDispatch.mock.calls.length).toBe(1);
   });
 });

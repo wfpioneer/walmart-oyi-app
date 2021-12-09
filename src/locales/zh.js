@@ -135,7 +135,8 @@ export default {
     PORTABLE_PRINTER: '便携式打印机',
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
     PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Mandarin Translation
+    LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Mandarin Translation
+    DUPLICATE_PRINTER: '现存打印机'
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -201,7 +202,11 @@ export default {
     AISLES_ADDED: '通道号{number}已添加',
     INCOMPLETE_AISLES_ADDED: '创建通道/货架位置数量缺失，只创建了{number}通道/货架',
     INCOMPLETE_AISLES_PLEASE_CHECK: '请确认已创建的通道和货架清单',
-    ADD_AISLES_ERROR: '添加通道/货架时出错,请再试一次。'
+    ADD_AISLES_ERROR: '添加通道/货架时出错,请再试一次。',
+    SECTIONS_ADDED: '已添加 %{number} 个货架位置',
+    ADD_SECTIONS_ERROR: '添加货架时错误，请重试.',
+    EDIT_ITEM: '编辑商品',
+    REMOVE_ITEM: '删除商品'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

@@ -8,23 +8,23 @@ import {
 } from 'react-native';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
-import { Header } from '@react-navigation/stack';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import moment from 'moment';
+import { showSnackBar } from '../../state/actions/SnackBar';
 import styles from './addSection.style';
 import { strings } from '../../locales';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { CreateAisles, LocationIdName } from '../../state/reducers/Location';
+import { createSections, postCreateAisles } from '../../state/actions/saga';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
 import Button from '../../components/buttons/Button';
-import { CREATE_FLOW } from '../../models/LocationItems';
-import { setAisleSectionCount } from '../../state/actions/Location';
-import { postCreateAisles } from '../../state/actions/saga';
-import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
-import { CreateAisleRequest, CreateAisleResponse } from '../../models/CreateZoneAisleSection.d';
-import { AsyncState } from '../../models/AsyncState';
-import { showSnackBar } from '../../state/actions/SnackBar';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { validateSession } from '../../utils/sessionTimeout';
+import { CREATE_FLOW } from '../../models/LocationItems';
+import { AsyncState } from '../../models/AsyncState';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { setAisleSectionCount } from '../../state/actions/Location';
+import { CreateAisleRequest, CreateAisleResponse } from '../../models/CreateZoneAisleSection.d';
 
 interface AddSectionProps {
   aislesToCreate: CreateAisles[];
@@ -40,6 +40,9 @@ interface AddSectionProps {
   createAislesApiStart: number;
   setCreateAislesApiStart: React.Dispatch<React.SetStateAction<number>>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  createSectionsAPI: AsyncState;
+  createSectionsAPIStart: number;
+  setCreateSectionsAPIStart: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface RenderAisles {
@@ -50,10 +53,10 @@ interface RenderAisles {
 const NEW_SECTION_MAX = 99;
 const SECTION_MIN = 1;
 
-const validateNumericInput = (sections: number, existingSections = 0): boolean => (sections >= SECTION_MIN)
+export const validateNumericInput = (sections: number, existingSections = 0): boolean => (sections >= SECTION_MIN)
   && (sections <= (NEW_SECTION_MAX - existingSections));
 
-const validateSectionCounts = (aislesToCreate: CreateAisles[], existingSections: number): boolean => {
+export const validateSectionCounts = (aislesToCreate: CreateAisles[], existingSections: number): boolean => {
   let validation = true;
   aislesToCreate.forEach(aisle => {
     if ((aisle.sectionCount < SECTION_MIN) || (aisle.sectionCount > (NEW_SECTION_MAX - existingSections))) {
@@ -61,6 +64,24 @@ const validateSectionCounts = (aislesToCreate: CreateAisles[], existingSections:
     }
   });
   return validation;
+};
+
+export const activityModalEffect = (
+  navigation: NavigationProp<any>,
+  modal: { showActivity: boolean; showModal: boolean; content: any },
+  createAislesApi: AsyncState,
+  createSectionsAPI: AsyncState,
+  dispatch: Dispatch<any>
+): void => {
+  if (navigation.isFocused()) {
+    if (!modal.showActivity) {
+      if (createAislesApi.isWaiting || createSectionsAPI.isWaiting) {
+        dispatch(showActivityModal());
+      }
+    } else if (!createAislesApi.isWaiting && !createSectionsAPI.isWaiting) {
+      dispatch(hideActivityModal());
+    }
+  }
 };
 
 export const createAisleSectionsEffect = (
@@ -120,10 +141,43 @@ export const createAisleSectionsEffect = (
   }
 };
 
+export const createSectionsAPIEffect = (
+  createSectionsAPI: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  createSectionsAPIStart: number,
+  aisleSectionCount: number,
+  trackAPIEvents: (eventName: string, params: any) => void
+): void => {
+  // on api success
+  if (!createSectionsAPI.isWaiting && createSectionsAPI.result) {
+    trackAPIEvents('create_sections_success', { duration: moment().valueOf() - createSectionsAPIStart });
+    dispatch(
+      showSnackBar(strings('LOCATION.SECTIONS_ADDED', { number: aisleSectionCount }), 3000)
+    );
+    dispatch({ type: 'API/CREATE_SECTIONS/RESET' });
+    navigation.goBack();
+  }
+
+  // on api failure
+  if (!createSectionsAPI.isWaiting && createSectionsAPI.error) {
+    trackAPIEvents(
+      'create_sections_failure',
+      {
+        errorDetails: createSectionsAPI.error.message || createSectionsAPI.error,
+        duration: moment().valueOf() - createSectionsAPIStart
+      }
+    );
+    dispatch(showSnackBar(strings('LOCATION.ADD_SECTIONS_ERROR'), 3000));
+  }
+};
+
 export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
   const {
     createAislesApi,
+    createSectionsAPI,
     createAislesApiStart,
+    createSectionsAPIStart,
     setCreateAislesApiStart,
     dispatch,
     navigation,
@@ -137,6 +191,26 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
     createAislesApiStart,
     trackEvent
   ), [createAislesApi]);
+
+  useEffectHook(() => {
+    createSectionsAPIEffect(
+      createSectionsAPI,
+      dispatch,
+      navigation,
+      createSectionsAPIStart,
+      props.aislesToCreate[0].sectionCount,
+      trackEvent
+    );
+  }, [createSectionsAPI]);
+
+  // activity modal
+  useEffectHook(() => activityModalEffect(
+    navigation,
+    props.modal,
+    createAislesApi,
+    createSectionsAPI,
+    dispatch
+  ), [props.modal, createAislesApi, createSectionsAPI]);
 
   const handleAisleSectionCountIncrement = (aisleIndex: number, sectionCount: number) => {
     if (sectionCount < NEW_SECTION_MAX - props.existingSections) {
@@ -193,57 +267,43 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
   };
 
   const handleContinue = () => {
-    console.log('continue pressed');
-    switch (props.createFlow) {
-      case CREATE_FLOW.CREATE_ZONE: {
-        // TODO implement createZoneAisleSection
-        const createZoneAisleSectionRequest = {
-          zoneName: props.newZone,
-          aisles: props.aislesToCreate
-        };
-        break;
-      }
-      case CREATE_FLOW.CREATE_AISLE: {
-        const createAisleSectionRequest: CreateAisleRequest = {
-          zoneId: props.selectedZone.id,
-          aisles: props.aislesToCreate
-        };
-        setCreateAislesApiStart(moment().valueOf());
-        dispatch(postCreateAisles({ aislesToCreate: createAisleSectionRequest }));
-        break;
-      }
-      case CREATE_FLOW.CREATE_SECTION: {
-        // TODO implement createSection
-        const createSectionRequest = {
-          aisles: [{
+    validateSession(props.navigation).then(() => {
+      switch (props.createFlow) {
+        case CREATE_FLOW.CREATE_ZONE: {
+          // TODO implement createZoneAisleSection
+          const createZoneAisleSectionRequest = {
+            zoneName: props.newZone,
+            aisles: props.aislesToCreate
+          };
+          break;
+        }
+        case CREATE_FLOW.CREATE_AISLE: {
+          const createAisleSectionRequest: CreateAisleRequest = {
+            zoneId: props.selectedZone.id,
+            aisles: props.aislesToCreate
+          };
+          setCreateAislesApiStart(moment().valueOf());
+          dispatch(postCreateAisles({ aislesToCreate: createAisleSectionRequest }));
+          break;
+        }
+        case CREATE_FLOW.CREATE_SECTION: {
+          props.setCreateSectionsAPIStart(moment().valueOf());
+          props.dispatch(createSections([{
             aisleId: props.currentAisle.id,
             sectionCount: props.aislesToCreate[0].sectionCount
-          }]
-        };
-        break;
+          }]));
+          break;
+        }
+        default:
+          break;
       }
-      default:
-        break;
-    }
+    });
   };
 
   const handleUnhandledTouches = () => {
     Keyboard.dismiss();
     return false;
   };
-
-  // activity modal
-  useEffect(() => {
-    if (navigation.isFocused()) {
-      if (!props.modal.showActivity) {
-        if (createAislesApi.isWaiting) {
-          dispatch(showActivityModal());
-        }
-      } else if (!createAislesApi.isWaiting) {
-        dispatch(hideActivityModal());
-      }
-    }
-  }, [props.modal, createAislesApi]);
 
   return (
     <KeyboardAvoidingView
@@ -273,6 +333,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
 };
 
 const AddSection = (): JSX.Element => {
+  const createSectionsAPI = useTypedSelector(state => state.async.createSections);
   const aisles = useTypedSelector(state => state.Location.aisles);
   const currentAisle = useTypedSelector(state => state.Location.selectedAisle);
   const aislesToCreate = useTypedSelector(state => state.Location.aislesToCreate);
@@ -284,6 +345,7 @@ const AddSection = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [createAislesApiStart, setCreateAislesApiStart] = useState(0);
+  const [createSectionsAPIStart, setCreateSectionsAPIStart] = useState(0);
 
   let existingSections = 0;
   if (createFlow === CREATE_FLOW.CREATE_SECTION) {
@@ -308,6 +370,9 @@ const AddSection = (): JSX.Element => {
       createAislesApiStart={createAislesApiStart}
       setCreateAislesApiStart={setCreateAislesApiStart}
       useEffectHook={useEffect}
+      createSectionsAPI={createSectionsAPI}
+      createSectionsAPIStart={createSectionsAPIStart}
+      setCreateSectionsAPIStart={setCreateSectionsAPIStart}
     />
   );
 };

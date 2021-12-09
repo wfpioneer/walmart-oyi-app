@@ -316,6 +316,231 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
 </KeyboardAvoidingView>
 `;
 
+exports[`AddSection Screen render tests addSectionScreen after createSections api called and failed 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 0.9,
+        "justifyContent": "flex-start",
+        "marginTop": 5,
+      }
+    }
+  >
+    <FlatList
+      data={
+        Array [
+          Object {
+            "aisleName": "1",
+            "sectionCount": 4,
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`AddSection Screen render tests addSectionScreen after createSections api called and successful 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 0.9,
+        "justifyContent": "flex-start",
+        "marginTop": 5,
+      }
+    }
+  >
+    <FlatList
+      data={
+        Array [
+          Object {
+            "aisleName": "1",
+            "sectionCount": 4,
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`AddSection Screen render tests addSectionScreen while waiting for api to finish 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 0.9,
+        "justifyContent": "flex-start",
+        "marginTop": 5,
+      }
+    }
+  >
+    <FlatList
+      data={
+        Array [
+          Object {
+            "aisleName": "1",
+            "sectionCount": 4,
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
 exports[`AddSection Screen render tests failed on the create aisles/sections api 1`] = `
 <KeyboardAvoidingView
   behavior="height"

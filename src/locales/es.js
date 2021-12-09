@@ -135,7 +135,8 @@ export default {
     PORTABLE_PRINTER: 'Impresora portátil',
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Spanish translation
+    LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Spanish translation
+    DUPLICATE_PRINTER: 'Una impresora ya existe' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -201,7 +202,11 @@ export default {
     AISLES_ADDED: '{number} pasillos agregados',
     INCOMPLETE_AISLES_ADDED: 'No todos los pasillos/secciones se crearon. Sólo {number} pasillos/secciones se agregaron',
     INCOMPLETE_AISLES_PLEASE_CHECK: 'Por favor revisa la lista de pasillos y secciones que se crearon',
-    ADD_AISLES_ERROR: 'Hubo un error agregando pasillos/secciones. Por favor inténtalo de nuevo'
+    ADD_AISLES_ERROR: 'Hubo un error agregando pasillos/secciones. Por favor inténtalo de nuevo',
+    EDIT_ITEM: 'Editar Artículo',
+    REMOVE_ITEM: 'Borrar Artículo',
+    SECTIONS_ADDED: '%{number} secciones agregadas',
+    ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

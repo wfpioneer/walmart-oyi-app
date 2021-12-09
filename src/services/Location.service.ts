@@ -3,6 +3,11 @@ import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
 import { CreateAisleRequest, CreateAisleResponse } from '../models/CreateZoneAisleSection.d';
 
+interface Aisle {
+  aisleId: number;
+  sectionCount: number;
+}
+
 export default class LocationService {
   public static getAllZones() : Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
@@ -51,6 +56,14 @@ export default class LocationService {
     return Request.post(
       `${urls.locationUrl}/aisle/section`,
       payload.aislesToCreate
+    );
+  }
+
+  public static createSections(payload: Aisle[] ) {
+    const urls: Environment = getEnvironment();
+    return Request.post(
+      `${urls.locationUrl}/section`,
+      payload
     );
   }
 }
