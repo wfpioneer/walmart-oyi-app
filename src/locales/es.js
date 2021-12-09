@@ -200,7 +200,8 @@ export default {
     RESERVE_EMPTY: 'La lista de Bodega está vacía',
     GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
     EDIT_ITEM: '', // TODO Spanish Translation
-    REMOVE_ITEM: '' // TODO Spanish Translation
+    REMOVE_ITEM: '', // TODO Spanish Translation
+    SECTION_NOT_FOUND: 'The Scanned Section was not found.' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

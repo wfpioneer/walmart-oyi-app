@@ -107,6 +107,15 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
     );
   }
 
+  if (getSectionDetailsApi.result?.status === 204) {
+    return (
+      <View style={styles.emptyContainer}>
+        <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
+        <Text>{strings('LOCATION.SECTION_NOT_FOUND')}</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.locDetailsScreenContainer}>
       <FlatList

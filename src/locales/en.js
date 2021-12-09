@@ -200,7 +200,8 @@ export default {
     RESERVE_EMPTY: 'The Reserve List is empty',
     GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallet(s)',
     EDIT_ITEM: 'Edit an item',
-    REMOVE_ITEM: 'Remove an item'
+    REMOVE_ITEM: 'Remove an item',
+    SECTION_NOT_FOUND: 'The Scanned Section was not found.'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
