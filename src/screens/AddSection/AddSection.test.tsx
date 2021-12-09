@@ -4,6 +4,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { CREATE_FLOW } from '../../models/LocationItems';
 import { AsyncState } from '../../models/AsyncState';
 import {
+  activityModalEffect,
   AddSectionScreen,
   createAisleSectionsEffect,
   createSectionsAPIEffect,
@@ -126,6 +127,16 @@ const aislesToCreate = [
     sectionCount: 1
   }
 ];
+const activityModalShowing = {
+  showModal: false,
+  showActivity: true,
+  content: null
+};
+const activityModalHidden = {
+  showModal: false,
+  showActivity: false,
+  content: null
+};
 describe('AddSection Screen render tests', () => {
   const existingAisleToCreate = [
     {
@@ -419,6 +430,72 @@ describe('AddSection screen externalized function tests', () => {
     expect(mockNavigate).toBeCalledTimes(0);
   });
 
+  it('verifies that activity modal works with aisle creation', () => {
+    const mockDispatch = jest.fn();
+    // @ts-ignore
+    navigationProp = { isFocused: () => true };
+
+    // service call start
+    activityModalEffect(
+      navigationProp, activityModalHidden, createAislesSectionWaitingApi, defaultCreateSectionsAPI, mockDispatch
+    );
+    expect(mockDispatch).toBeCalledTimes(1);
+    mockDispatch.mockClear();
+
+    // service call in progress
+    activityModalEffect(
+      navigationProp, activityModalShowing, createAislesSectionWaitingApi, defaultCreateSectionsAPI, mockDispatch
+    );
+    expect(mockDispatch).toBeCalledTimes(0);
+    mockDispatch.mockClear();
+
+    // service call end
+    activityModalEffect(
+      navigationProp, activityModalShowing, createAisleSectionSuccessApi, defaultCreateSectionsAPI, mockDispatch
+    );
+    expect(mockDispatch).toBeCalledTimes(1);
+    mockDispatch.mockClear();
+
+    // no service call
+    activityModalEffect(
+      navigationProp, activityModalHidden, defaultCreateAisleSectionApi, defaultCreateSectionsAPI, mockDispatch
+    );
+    expect(mockDispatch).toBeCalledTimes(0);
+  });
+
+  it('verifies that activity modal works with section creation', () => {
+    const mockDispatch = jest.fn();
+    // @ts-ignore
+    navigationProp = { isFocused: () => true };
+
+    // service call start
+    activityModalEffect(
+      navigationProp, activityModalHidden, defaultCreateAisleSectionApi, createSectionsAPIWaiting, mockDispatch
+    );
+    expect(mockDispatch).toBeCalledTimes(1);
+    mockDispatch.mockClear();
+
+    // service call in progress
+    activityModalEffect(
+      navigationProp, activityModalShowing, defaultCreateAisleSectionApi, createSectionsAPIWaiting, mockDispatch
+    );
+    expect(mockDispatch).toBeCalledTimes(0);
+    mockDispatch.mockClear();
+
+    // service call end
+    activityModalEffect(
+      navigationProp, activityModalShowing, defaultCreateAisleSectionApi, createSectionsAPISuccess, mockDispatch
+    );
+    expect(mockDispatch).toBeCalledTimes(1);
+    mockDispatch.mockClear();
+
+    // no service call
+    activityModalEffect(
+      navigationProp, activityModalHidden, defaultCreateAisleSectionApi, defaultCreateSectionsAPI, mockDispatch
+    );
+    expect(mockDispatch).toBeCalledTimes(0);
+  });
+
   it('testing functions', () => {
     const validateNumericInputValidResult = validateNumericInput(10);
     expect(validateNumericInputValidResult === true);
@@ -435,13 +512,13 @@ describe('AddSection screen externalized function tests', () => {
     // @ts-ignore
     navigationProp = { goBack: mockGoBack };
     createSectionsAPIEffect(createSectionsAPISuccess, mockDispatch, navigationProp, 0, 0, jest.fn());
-    expect(mockDispatch.mock.calls.length).toBe(3);
+    expect(mockDispatch.mock.calls.length).toBe(2);
     expect(mockGoBack.mock.calls.length).toBe(1);
     mockDispatch.mockClear();
     createSectionsAPIEffect(createSectionsAPIFailure, mockDispatch, navigationProp, 0, 0, jest.fn());
-    expect(mockDispatch.mock.calls.length).toBe(2);
+    expect(mockDispatch.mock.calls.length).toBe(1);
     mockDispatch.mockClear();
     createSectionsAPIEffect(createSectionsAPIWaiting, mockDispatch, navigationProp, 0, 0, jest.fn());
-    expect(mockDispatch.mock.calls.length).toBe(1);
+    expect(mockDispatch.mock.calls.length).toBe(0);
   });
 });
