@@ -135,7 +135,8 @@ export default {
     PORTABLE_PRINTER: 'Portable Printer',
     PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.',
     PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed'
+    LOCATION_SUCCESS: 'Section Label Successfully Printed',
+    DUPLICATE_PRINTER: 'A Printer currently exists'
   },
   LOCATION: {
     TITLE: 'All locations',
@@ -198,6 +199,8 @@ export default {
     FLOOR_EMPTY: 'The Floor List is empty',
     RESERVE_EMPTY: 'The Reserve List is empty',
     GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallet(s)',
+    EDIT_ITEM: 'Edit an item',
+    REMOVE_ITEM: 'Remove an item',
     SECTIONS_ADDED: '%{number} section(s) added',
     ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again'
   },

@@ -19,7 +19,8 @@ export default StyleSheet.create({
   itemNbr: {
     color: COLOR.GREY_500,
     fontSize: 12,
-    lineHeight: 22
+    lineHeight: 22,
+    flex: 1
   },
   itemDesc: {
     lineHeight: 22
@@ -27,5 +28,21 @@ export default StyleSheet.create({
   price: {
     color: COLOR.GREY_500,
     lineHeight: 22
+  },
+  pallet: {
+    flexDirection: 'row'
+  },
+  rightButton: {
+    paddingVertical: 3
+  },
+  leftButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  image: {
+    width: 25,
+    height: 20,
+    backgroundColor: COLOR.WHITE
   }
 });

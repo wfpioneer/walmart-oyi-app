@@ -135,7 +135,8 @@ export default {
     PORTABLE_PRINTER: 'Impresora portátil',
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Spanish translation
+    LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Spanish translation
+    DUPLICATE_PRINTER: 'Una impresora ya existe' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -198,6 +199,8 @@ export default {
     FLOOR_EMPTY: 'La lista de Piso está vacía',
     RESERVE_EMPTY: 'La lista de Bodega está vacía',
     GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
+    EDIT_ITEM: '', // TODO Spanish Translation
+    REMOVE_ITEM: '', // TODO Spanish Translation
     SECTIONS_ADDED: '%{number} secciones agregadas',
     ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo'
   },

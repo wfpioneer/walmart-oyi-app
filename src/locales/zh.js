@@ -135,7 +135,8 @@ export default {
     PORTABLE_PRINTER: '便携式打印机',
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
     PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed' // TODO Mandarin Translation
+    LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Mandarin Translation
+    DUPLICATE_PRINTER: '现存打印机'
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -199,7 +200,9 @@ export default {
     RESERVE_EMPTY: '存储区域无卡板',
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
     SECTIONS_ADDED: '已添加 %{number} 个货架位置',
-    ADD_SECTIONS_ERROR: '添加货架时错误，请重试.'
+    ADD_SECTIONS_ERROR: '添加货架时错误，请重试.',
+    EDIT_ITEM: '', // TODO Mandarin Translation
+    REMOVE_ITEM: '' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
