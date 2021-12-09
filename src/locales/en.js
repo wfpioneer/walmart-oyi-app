@@ -201,7 +201,9 @@ export default {
     GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallet(s)',
     EDIT_ITEM: 'Edit an item',
     REMOVE_ITEM: 'Remove an item',
-    SECTION_NOT_FOUND: 'The Scanned Section was not found.'
+    SECTION_NOT_FOUND: 'The Scanned Section was not found.',
+    SECTIONS_ADDED: '%{number} section(s) added',
+    ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
