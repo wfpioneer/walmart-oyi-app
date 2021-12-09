@@ -78,6 +78,7 @@ exports[`Test Location Header in Zone Screen Renders Location header with button
   <TouchableOpacity
     activeOpacity={0.2}
     delayLongPress={600}
+    disabled={false}
     extraButtonProps={
       Object {
         "rippleColor": "transparent",

@@ -50,16 +50,20 @@ export interface LocationProps {
     locationPopupVisible: boolean;
     userFeatures: string[];
     itemPopupVisible:boolean;
+    result: any;
 }
 
 interface TabHeaderProps {
     headerText: string;
     isEditEnabled: boolean;
     isReserve: boolean;
+    isDisabled: boolean;
 }
 
 export const TabHeader = (props: TabHeaderProps): JSX.Element => {
-  const { headerText, isEditEnabled, isReserve } = props;
+  const {
+    headerText, isEditEnabled, isReserve, isDisabled
+  } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
@@ -77,11 +81,12 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
           <Button
             type={3}
             title={strings('GENERICS.ADD')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
+            titleColor={ isDisabled ? COLOR.DISABLED_BLUE : COLOR.MAIN_THEME_COLOR}
             titleFontSize={12}
             titleFontWeight="bold"
             height={28}
             onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
+            disabled={isDisabled}
           />
         ) : null}
       </View>
@@ -89,25 +94,28 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
   );
 };
 
-const floorDetailsList = () => {
+const FloorDetailsList = (props: {sectionExists: boolean}) => {
   const userFeatures = useTypedSelector(state => state.User.features);
+  const { sectionExists } = props;
   return (
     <>
       <TabHeader
         headerText={strings('LOCATION.ITEMS')}
         isEditEnabled={userFeatures.includes('location management edit')}
         isReserve={false}
+        isDisabled={!sectionExists}
       />
       <SectionDetails />
     </>
   );
 };
 
-const reserveDetailsList = () => {
+const ReserveDetailsList = (props: {sectionExists: boolean}) => {
   const userFeatures = useTypedSelector(state => state.User.features);
   const navigation = useNavigation();
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
   const dispatch = useDispatch();
+  const { sectionExists } = props;
 
   let palletIds: number[] = [];
   // Call Get Pallet Details API
@@ -125,12 +133,14 @@ const reserveDetailsList = () => {
       }
     }
   }), [getSectionDetailsApi]);
+
   return (
     <>
       <TabHeader
         headerText={strings('LOCATION.PALLETS')}
         isEditEnabled={userFeatures.includes('location management edit')}
         isReserve={true}
+        isDisabled={!sectionExists}
       />
       <ReserveSectionDetails palletIds={palletIds} />
     </>
@@ -152,8 +162,11 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     useEffectHook,
     validateSessionCall,
     userFeatures,
-    itemPopupVisible
+    itemPopupVisible,
+    result
   } = props;
+  const sectionExists = (result && result.status !== 204);
+
   // Call Get Section Details
   useEffectHook(() => {
     validateSessionCall(navigation, route.name).then(() => {
@@ -194,6 +207,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           navigation.navigate('PrintPriceSign');
         }}
         buttonText={userFeatures.includes('location printing') ? strings('LOCATION.PRINT_LABEL') : undefined}
+        isDisabled={!sectionExists}
       />
       <Tab.Navigator
         tabBarOptions={{
@@ -205,7 +219,6 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       >
         <Tab.Screen
           name="FloorDetails"
-          component={floorDetailsList}
           options={{
             title: `${strings('LOCATION.FLOORS')} (${floorItems.length ?? 0})`
           }}
@@ -217,10 +230,11 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
               }
             }
           }}
-        />
+        >
+          { () => <FloorDetailsList sectionExists={sectionExists} />}
+        </Tab.Screen>
         <Tab.Screen
           name="ReserveDetails"
-          component={reserveDetailsList}
           options={{
             title: `${strings('LOCATION.RESERVES')} (${reserveItems.length ?? 0})`
           }}
@@ -235,7 +249,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
               }
             }
           }}
-        />
+        >
+          {() => <ReserveDetailsList sectionExists={sectionExists} />}
+        </Tab.Screen>
       </Tab.Navigator>
     </>
   );
@@ -293,6 +309,7 @@ const LocationTabs = () : JSX.Element => {
           validateSessionCall={validateSession}
           userFeatures={userFeatures}
           itemPopupVisible={itemPopupVisible}
+          result={result}
         />
       </TouchableOpacity>
       <BottomSheetModal
