@@ -200,7 +200,9 @@ export default {
     RESERVE_EMPTY: 'The Reserve List is empty',
     GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallet(s)',
     EDIT_ITEM: 'Edit an item',
-    REMOVE_ITEM: 'Remove an item'
+    REMOVE_ITEM: 'Remove an item',
+    PRINT_LABEL_EXISTS_HEADER: 'Print Label Exists',
+    PRINT_LABEL_EXISTS: 'This Print Label already Exists in the Print Queue'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

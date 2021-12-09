@@ -200,7 +200,9 @@ export default {
     RESERVE_EMPTY: '存储区域无卡板',
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
     EDIT_ITEM: '', // TODO Mandarin Translation
-    REMOVE_ITEM: '' // TODO Mandarin Translation
+    REMOVE_ITEM: '', // TODO Mandarin Translation
+    PRINT_LABEL_EXISTS_HEADER: '', // TODO Mandarin Translation
+    PRINT_LABEL_EXISTS: '' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
