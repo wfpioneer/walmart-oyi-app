@@ -62,8 +62,6 @@ export interface ItemDetailsScreenProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
   userFeatures: string[];
-  showError: boolean;
-  setShowError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface HandleProps {
@@ -479,7 +477,6 @@ const isError = (
   isManualScanEnabled: boolean,
   scannedEvent: any,
   userId: string,
-  setShowError:React.Dispatch<React.SetStateAction<boolean>>,
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void
 ) => {
@@ -495,7 +492,6 @@ const isError = (
             style={styles.errorButton}
             onPress={() => {
               trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
-              setShowError(false);
               return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
             }}
           >
@@ -533,9 +529,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     trackEventCall,
     validateSessionCall,
     useEffectHook,
-    useFocusEffectHook,
-    showError,
-    setShowError
+    useFocusEffectHook
   } = props;
   // Scanned Item Event Listener
   useEffectHook(() => {
@@ -550,12 +544,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   useEffectHook(() => {
     onValidateItemDetails(props, itemDetails);
   }, [itemDetails]);
-
-  useEffectHook(() => {
-    if(error) {
-      setShowError(true);
-    }
-  }, [error]);
 
   // Barcode event listener effect
   useEffectHook(() => {
@@ -594,7 +582,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   );
 
   // Get Item Details Error
-  if (showError) {
+  if (!isWaiting && error) {
     return isError(
       error,
       errorModalVisible,
@@ -602,7 +590,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       isManualScanEnabled,
       scannedEvent,
       userId,
-      setShowError,
       dispatch,
       trackEventCall
     );
@@ -620,6 +607,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       </View>
     );
   }
+
   if (isWaiting || !result) {
     return (
       <ActivityIndicator
@@ -631,6 +619,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       />
     );
   }
+
   const toggleSalesGraphView = () => {
     trackEventCall('item_details_toggle_graph_click',
       { itemDetails: JSON.stringify(itemDetails), isGraphView: !isSalesMetricsGraphView });
@@ -741,7 +730,6 @@ const ReviewItemDetails = (): JSX.Element => {
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
-  const [showError, setShowError] = useState(false);
   return (
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
@@ -772,8 +760,6 @@ const ReviewItemDetails = (): JSX.Element => {
       useEffectHook={useEffect}
       useFocusEffectHook={useFocusEffect}
       userFeatures={userFeatures}
-      showError={showError}
-      setShowError={setShowError}
     />
   );
 };
