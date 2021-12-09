@@ -199,8 +199,8 @@ export default {
     FLOOR_EMPTY: 'La lista de Piso está vacía',
     RESERVE_EMPTY: 'La lista de Bodega está vacía',
     GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
-    EDIT_ITEM: '', // TODO Spanish Translation
-    REMOVE_ITEM: '', // TODO Spanish Translation
+    EDIT_ITEM: 'Editar Artículo',
+    REMOVE_ITEM: 'Borrar Artículo',
     SECTIONS_ADDED: '%{number} secciones agregadas',
     ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo'
   },

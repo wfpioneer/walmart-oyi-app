@@ -201,8 +201,8 @@ export default {
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
     SECTIONS_ADDED: '已添加 %{number} 个货架位置',
     ADD_SECTIONS_ERROR: '添加货架时错误，请重试.',
-    EDIT_ITEM: '', // TODO Mandarin Translation
-    REMOVE_ITEM: '' // TODO Mandarin Translation
+    EDIT_ITEM: '编辑商品',
+    REMOVE_ITEM: '删除商品'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
