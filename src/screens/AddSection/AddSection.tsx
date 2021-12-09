@@ -113,7 +113,7 @@ export const createAisleSectionsEffect = (
     if (createAislesApi.error) {
       trackApiEvents('create_aisles_failure', {
         duration: moment().valueOf() - createAislesApiStart,
-        errorDetails: createAislesApi.error.message || createAislesApi.error.status.toString()
+        errorDetails: createAislesApi.error.message || createAislesApi.error.toString()
       });
       dispatch(showSnackBar(strings('LOCATION.ADD_AISLES_ERROR'), 2000));
     }
