@@ -201,6 +201,8 @@ export default {
     GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallet(s)',
     EDIT_ITEM: 'Edit an item',
     REMOVE_ITEM: 'Remove an item',
+    PRINT_LABEL_EXISTS_HEADER: 'Print Label Exists',
+    PRINT_LABEL_EXISTS: 'This Print Label already Exists in the Print Queue',
     SECTIONS_ADDED: '%{number} section(s) added',
     ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again'
   },
