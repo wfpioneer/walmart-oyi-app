@@ -173,6 +173,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       // Handles scanned event changes if the screen is in focus
       if (scannedEvent.value && navigation.isFocused()) {
         dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
+        navigation.navigate('FloorDetails');
       }
     }).catch(() => {});
   }, [navigation, scannedEvent]);

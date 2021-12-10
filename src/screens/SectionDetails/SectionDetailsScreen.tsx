@@ -18,7 +18,7 @@ import styles from './SectionDetailsScreen.style';
 import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
-import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
+import { GET_PALLET_DETAILS, GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
 import {
   hideItemPopup, selectAisle, selectSection, selectZone
 } from '../../state/actions/Location';
@@ -58,6 +58,8 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
   useEffectHook(() => {
     // on api success
     if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
+      // Clear Pallet Data on on success ( Case when scanning a new section, stale data could remain)
+      dispatch({ type: GET_PALLET_DETAILS.RESET });
       // Update Location State on Success
       switch (getSectionDetailsApi.result.status) {
         case 200:
@@ -73,7 +75,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
         default: break;
       }
     }
-  }, []);
+  }, [getSectionDetailsApi]);
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data)
   || undefined;
 
