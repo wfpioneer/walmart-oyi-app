@@ -199,7 +199,7 @@ export default {
     FLOOR_EMPTY: 'La lista de Piso está vacía',
     RESERVE_EMPTY: 'La lista de Bodega está vacía',
     GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
-    SECTION_NOT_FOUND: 'The Scanned Section was not found.', // TODO Spanish Translation
+    SECTION_NOT_FOUND: 'La sección escaneada no se encontró',
     EDIT_ITEM: 'Editar Artículo',
     REMOVE_ITEM: 'Borrar Artículo',
     PRINT_LABEL_EXISTS_HEADER: 'Esta etiqueta ya se mandó a imprimir',

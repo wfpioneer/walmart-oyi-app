@@ -181,6 +181,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   useEffectHook(() => {
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
+        // TODO when scanning for a new location we should reset to the Floor Tab
         validateSessionCall(navigation, route.name).then(() => {
           trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
           dispatch(setScannedEvent(scan));
@@ -216,6 +217,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           style: { backgroundColor: COLOR.WHITE },
           indicatorStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
         }}
+        swipeEnabled={sectionExists}
       >
         <Tab.Screen
           name="FloorDetails"
@@ -240,6 +242,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           }}
           listeners={{
             tabPress: e => {
+              if (!sectionExists) {
+                e.preventDefault();
+              }
               if (locationPopupVisible) {
                 e.preventDefault();
                 dispatch(hideLocationPopup());

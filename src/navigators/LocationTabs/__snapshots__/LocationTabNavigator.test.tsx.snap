@@ -9,6 +9,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -65,6 +66,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -121,6 +123,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -180,6 +183,7 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -239,6 +243,7 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -299,6 +304,7 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
