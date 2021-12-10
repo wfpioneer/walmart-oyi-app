@@ -201,8 +201,8 @@ export default {
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
     EDIT_ITEM: '', // TODO Mandarin Translation
     REMOVE_ITEM: '', // TODO Mandarin Translation
-    PRINT_LABEL_EXISTS_HEADER: '', // TODO Mandarin Translation
-    PRINT_LABEL_EXISTS: '' // TODO Mandarin Translation
+    PRINT_LABEL_EXISTS_HEADER: '打印既有标签', // TODO Mandarin Translation
+    PRINT_LABEL_EXISTS: '此标签已经在打印清单中' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

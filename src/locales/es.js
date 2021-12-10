@@ -201,8 +201,8 @@ export default {
     GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
     EDIT_ITEM: '', // TODO Spanish Translation
     REMOVE_ITEM: '', // TODO Spanish Translation
-    PRINT_LABEL_EXISTS_HEADER: '', // TODO Spanish Translation
-    PRINT_LABEL_EXISTS: '' // TODO Spanish Translation
+    PRINT_LABEL_EXISTS_HEADER: 'Esta etiqueta ya se mandó a imprimir', // TODO Spanish Translation
+    PRINT_LABEL_EXISTS: 'Esta etiqueta ya existe en la cola de impresión' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
