@@ -22,6 +22,8 @@ export const SET_NEW_ZONE = 'LOCATION/SET_NEW_ZONE';
 export const SET_AISLES_TO_CREATE = 'LOCATION/SET_NUMBER_OF_AISLES_TO_CREATE';
 export const SET_AISLES_TO_CREATE_TO_EXISTING_AISLE = 'LOCATION/SET_AISLES_TO_CREATE_TO_EXISTING_AISLE';
 export const SET_AISLE_SECTION_COUNT = 'LOCATION/SET_AISLE_SECTION_COUNT';
+export const SHOW_ITEM_POPUP = 'LOCATION/SHOW_ITEM_POPUP';
+export const HIDE_ITEM_POPUP = 'LOCATION/HIDE_ITEM_POPUP';
 
 export const selectZone = (id: number, name: string) => ({
   type: SELECT_ZONE,
@@ -105,6 +107,14 @@ export const setAisleSectionCount = (aisleIndex: number, sectionCount: number) =
     aisleIndex,
     sectionCount
   }
+} as const);
+
+export const showItemPopup = () => ({
+  type: SHOW_ITEM_POPUP
+} as const);
+
+export const hideItemPopup = () => ({
+  type: HIDE_ITEM_POPUP
 } as const);
 
 export type Actions =

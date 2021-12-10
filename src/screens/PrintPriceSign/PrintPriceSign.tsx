@@ -37,6 +37,7 @@ import { LocationIdName } from '../../state/reducers/Location';
 import { LocationName } from '../../models/Location';
 import { SectionItem } from '../../models/LocationItems';
 import { showSnackBar } from '../../state/actions/SnackBar';
+import { showInfoModal } from '../../state/actions/Modal';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -319,6 +320,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     // TODO Use LocationLabelCheck to allow some items to be added to the print queue
     if (itemSizeExists || locationLabelExists) {
       // TODO show popup if already exists
+      dispatch(showInfoModal(strings('LOCATION.PRINT_LABEL_EXISTS_HEADER'), strings('LOCATION.PRINT_LABEL_EXISTS')));
       trackEvent('print_already_exists_in_queue', { itemName, selectedSignType });
     } else {
       // add to print queue, forcing to use laser

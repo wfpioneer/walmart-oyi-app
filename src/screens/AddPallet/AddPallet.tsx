@@ -30,11 +30,9 @@ interface AddPalletScreenProps {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
-  section: { id: string; name: string; };
+  section: { id: number | string; name: string; };
   locationName: string;
   addAPI: AsyncState;
-  error: { error: boolean; message: string };
-  setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string; }>>;
 }
 
 export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
@@ -46,8 +44,7 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
     useEffectHook,
     section,
     locationName,
-    addAPI,
-    setError
+    addAPI
   } = props;
 
   const palletIDRegex = /^[0-9]+$/;
@@ -68,7 +65,7 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
     // eslint-disable-next-line no-empty
     if (!addAPI.isWaiting && addAPI.result) {
       // TODO Call GET PALLET DETAILS after adding pallet
-      dispatch(getSectionDetails({ sectionId: section.id }));
+      dispatch(getSectionDetails({ sectionId: section.id.toString() }));
       dispatch(showSnackBar(strings('LOCATION.PALLET_ADDED'), 3000));
       navigation.goBack();
     }
@@ -153,7 +150,6 @@ const AddPallet = (): JSX.Element => {
   const section = useTypedSelector(state => state.Location.selectedSection);
   const locationName = `${zone.name}${aisle.name}-${section.name}`;
   const addAPI = useTypedSelector(state => state.async.addPallet);
-  const [error, setError] = useState({ error: false, message: '' });
   return (
     <AddPalletScreen
       palletId={palletId}
@@ -164,8 +160,6 @@ const AddPallet = (): JSX.Element => {
       section={section}
       locationName={locationName}
       addAPI={addAPI}
-      setError={setError}
-      error={error}
     />
   );
 };

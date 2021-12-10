@@ -130,3 +130,161 @@ exports[`ChangePrinterScreen Renders Error for Printer MacAddress not equal to 1
   />
 </View>
 `;
+
+exports[`ChangePrinterScreen Renders enabled submit button if no duplicate printers exist 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "paddingHorizontal": 15,
+    }
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholder="[missing \\"en.PRINT.MAC_ADDRESS\\" translation]"
+    rejectResponderTermination={true}
+    selectionColor="#0071e9"
+    style={
+      Object {
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "marginTop": 10,
+        "width": "100%",
+      }
+    }
+    underlineColorAndroid="transparent"
+    value="123456"
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "marginVertical": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#e57373"
+      name="alert-circle"
+      size={20}
+    />
+    <Text
+      style={
+        Object {
+          "color": "#e57373",
+          "fontSize": 12,
+          "marginHorizontal": 5,
+        }
+      }
+    >
+      [missing "en.PRINT.MAC_ADDRESS_ERROR" translation]
+    </Text>
+  </View>
+  <Button
+    backgroundColor="#0071e9"
+    disabled={true}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "marginTop": 10,
+        "width": "100%",
+      }
+    }
+    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+</View>
+`;
+
+exports[`ChangePrinterScreen Renders error if duplicate printers exist 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "paddingHorizontal": 15,
+    }
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholder="[missing \\"en.PRINT.MAC_ADDRESS\\" translation]"
+    rejectResponderTermination={true}
+    selectionColor="#0071e9"
+    style={
+      Object {
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "marginTop": 10,
+        "width": "100%",
+      }
+    }
+    underlineColorAndroid="transparent"
+    value="123456"
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "marginVertical": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#e57373"
+      name="alert-circle"
+      size={20}
+    />
+    <Text
+      style={
+        Object {
+          "color": "#e57373",
+          "fontSize": 12,
+          "marginHorizontal": 5,
+        }
+      }
+    >
+      [missing "en.PRINT.MAC_ADDRESS_ERROR" translation]
+    </Text>
+  </View>
+  <Button
+    backgroundColor="#0071e9"
+    disabled={true}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "marginTop": 10,
+        "width": "100%",
+      }
+    }
+    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+</View>
+`;

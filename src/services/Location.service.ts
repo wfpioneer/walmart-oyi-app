@@ -2,6 +2,11 @@ import { AxiosResponse } from 'axios';
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
 
+interface Aisle {
+  aisleId: number;
+  sectionCount: number;
+}
+
 export default class LocationService {
   public static getAllZones() : Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
@@ -40,6 +45,14 @@ export default class LocationService {
 
     return Request.get(
       `${urls.locationUrl}/pallet/items/itemdetails?palletIds=${queryParam}`
+    );
+  }
+
+  public static createSections(payload: Aisle[] ) {
+    const urls: Environment = getEnvironment();
+    return Request.post(
+      `${urls.locationUrl}/section`,
+      payload
     );
   }
 }

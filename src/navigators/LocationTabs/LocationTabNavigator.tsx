@@ -24,7 +24,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import { hideLocationPopup } from '../../state/actions/Location';
+import { hideItemPopup, hideLocationPopup } from '../../state/actions/Location';
 
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
@@ -49,6 +49,7 @@ export interface LocationProps {
     validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
     locationPopupVisible: boolean;
     userFeatures: string[];
+    itemPopupVisible:boolean;
 }
 
 interface TabHeaderProps {
@@ -148,7 +149,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     trackEventCall,
     useEffectHook,
     validateSessionCall,
-    userFeatures
+    userFeatures,
+    itemPopupVisible
   } = props;
   // Call Get Section Details
   useEffectHook(() => {
@@ -226,6 +228,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
                 e.preventDefault();
                 dispatch(hideLocationPopup());
               }
+              if (itemPopupVisible) {
+                dispatch(hideItemPopup());
+              }
             }
           }}
         />
@@ -241,6 +246,7 @@ const LocationTabs = () : JSX.Element => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const userFeatures = useTypedSelector(state => state.User.features);
   const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
+  const itemPopupVisible = useTypedSelector(state => state.Location.itemPopupVisible);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -284,6 +290,7 @@ const LocationTabs = () : JSX.Element => {
           trackEventCall={trackEvent}
           validateSessionCall={validateSession}
           userFeatures={userFeatures}
+          itemPopupVisible={itemPopupVisible}
         />
       </TouchableOpacity>
       <BottomSheetModal
