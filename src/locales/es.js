@@ -202,6 +202,8 @@ export default {
     SECTION_NOT_FOUND: 'The Scanned Section was not found.', // TODO Spanish Translation
     EDIT_ITEM: 'Editar Artículo',
     REMOVE_ITEM: 'Borrar Artículo',
+    PRINT_LABEL_EXISTS_HEADER: 'Esta etiqueta ya se mandó a imprimir',
+    PRINT_LABEL_EXISTS: 'Esta etiqueta ya existe en la cola de impresión',
     SECTIONS_ADDED: '%{number} secciones agregadas',
     ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo'
   },
