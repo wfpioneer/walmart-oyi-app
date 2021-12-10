@@ -202,7 +202,9 @@ export default {
     EDIT_ITEM: '', // TODO Mandarin Translation
     REMOVE_ITEM: '', // TODO Mandarin Translation
     PRINT_LABEL_EXISTS_HEADER: '打印既有标签', // TODO Mandarin Translation
-    PRINT_LABEL_EXISTS: '此标签已经在打印清单中' // TODO Mandarin Translation
+    PRINT_LABEL_EXISTS: '此标签已经在打印清单中', // TODO Mandarin Translation
+    SECTIONS_ADDED: '已添加 %{number} 个货架位置',
+    ADD_SECTIONS_ERROR: '添加货架时错误，请重试.'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

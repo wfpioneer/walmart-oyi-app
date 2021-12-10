@@ -202,7 +202,9 @@ export default {
     EDIT_ITEM: '', // TODO Spanish Translation
     REMOVE_ITEM: '', // TODO Spanish Translation
     PRINT_LABEL_EXISTS_HEADER: 'Esta etiqueta ya se mandó a imprimir', // TODO Spanish Translation
-    PRINT_LABEL_EXISTS: 'Esta etiqueta ya existe en la cola de impresión' // TODO Spanish Translation
+    PRINT_LABEL_EXISTS: 'Esta etiqueta ya existe en la cola de impresión', // TODO Spanish Translation
+    SECTIONS_ADDED: '%{number} secciones agregadas',
+    ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
