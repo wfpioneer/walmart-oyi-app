@@ -502,7 +502,7 @@ const isError = (
     );
   }
   return (
-    <View/>
+    <View />
   );
 };
 const getexceptionType = (actionCompleted: boolean, itemDetails: ItemDetails) => (!actionCompleted
