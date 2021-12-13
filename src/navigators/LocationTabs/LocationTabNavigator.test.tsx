@@ -62,6 +62,8 @@ describe('Test Location Tabs', (): void => {
         isManualScanEnabled={false}
         locationPopupVisible={false}
         userFeatures={[]}
+        itemPopupVisible={false}
+        sectionResult={null}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -87,6 +89,8 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
         userFeatures={[]}
+        itemPopupVisible={false}
+        sectionResult={null}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -112,6 +116,8 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
         userFeatures={[]}
+        itemPopupVisible={false}
+        sectionResult={null}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -137,6 +143,8 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
         userFeatures={[]}
+        itemPopupVisible={false}
+        sectionResult={null}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -164,6 +172,8 @@ describe('Test Location Tabs', (): void => {
         isManualScanEnabled={true}
         locationPopupVisible={false}
         userFeatures={[]}
+        itemPopupVisible={false}
+        sectionResult={null}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -186,6 +196,8 @@ describe('Test Location Tabs', (): void => {
         isManualScanEnabled={true}
         locationPopupVisible={false}
         userFeatures={['location printing']}
+        itemPopupVisible={false}
+        sectionResult={null}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -193,7 +205,7 @@ describe('Test Location Tabs', (): void => {
   it('Renders items Header', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <TabHeader headerText="ITEMS" isReserve={false} isEditEnabled={true} />
+      <TabHeader headerText="ITEMS" isReserve={false} isEditEnabled={true} isDisabled={false}/>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -201,7 +213,7 @@ describe('Test Location Tabs', (): void => {
   it('Renders pallet Header', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <TabHeader headerText="PALLETS" isReserve={true} isEditEnabled={true} />
+      <TabHeader headerText="PALLETS" isReserve={true} isEditEnabled={true} isDisabled={false}/>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -223,7 +235,9 @@ describe('Test Location Tabs', (): void => {
         useEffectHook: useEffect,
         validateSessionCall: mockValidateSession,
         isManualScanEnabled: false,
-        userFeatures: []
+        userFeatures: [],
+        itemPopupVisible: false,
+        sectionResult: null
       };
       const scannedEventUpdate = {
         type: 'manualscan',
@@ -298,6 +312,8 @@ describe('Test Location Tabs', (): void => {
               validateSessionCall={mockValidateSession}
               isManualScanEnabled={false}
               userFeatures={[]}
+              itemPopupVisible={false}
+              sectionResult={null}
             />
           </NavigationContainer>
         </Provider>

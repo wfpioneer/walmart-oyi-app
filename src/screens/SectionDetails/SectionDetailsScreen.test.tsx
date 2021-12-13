@@ -134,5 +134,28 @@ describe('Test Location Details Screen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('Renders Section Not found when getSectionDetails responds with a 204 status code', () => {
+      const getSectionDetailsEmpty: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <SectionDetailsScreen
+          getSectionDetailsApi={getSectionDetailsEmpty}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
+          addAPI={defaultAsyncState}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 });

@@ -64,6 +64,28 @@ exports[`Test Location Details Screen Tests rendering Get Section Details api re
 </View>
 `;
 
+exports[`Test Location Details Screen Tests rendering Get Section Details api responses Renders Section Not found when getSectionDetails responds with a 204 status code 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingVertical": 28,
+    }
+  }
+>
+  <mockConstructor
+    color="#5FA7F2"
+    name="information"
+    size={40}
+  />
+  <Text>
+    [missing "en.LOCATION.SECTION_NOT_FOUND" translation]
+  </Text>
+</View>
+`;
+
 exports[`Test Location Details Screen Tests rendering location details screen data Renders Location Details Screen with Empty Mock Data 1`] = `
 <View
   style={

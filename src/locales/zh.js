@@ -199,6 +199,7 @@ export default {
     FLOOR_EMPTY: '楼面清单无商品',
     RESERVE_EMPTY: '存储区域无卡板',
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
+    SECTION_NOT_FOUND: 'The Scanned Section was not found.', // TODO Mandarin Translation
     EDIT_ITEM: '编辑商品',
     REMOVE_ITEM: '删除商品',
     PRINT_LABEL_EXISTS_HEADER: '打印既有标签',
