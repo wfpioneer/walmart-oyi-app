@@ -1,5 +1,243 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`LocationManagement Navigator Renders the LocationManagement Navigator with LocationKebabMenu disabled 1`] = `
+<StackNavigator
+  headerMode="float"
+  screenOptions={
+    Object {
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+      "headerTitleStyle": Object {
+        "fontSize": 18,
+      },
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    listeners={
+      Object {
+        "blur": [Function],
+      }
+    }
+    name="Zones"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.ZONES\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
+    name="Aisles"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.AISLES\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
+    name="Sections"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
+    name="SectionDetails"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddLocation"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitleAlign": "left",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddPallet"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddZone"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.ADD_ZONE\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddSection"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.ADD_SECTIONS\\" translation]",
+      }
+    }
+  />
+</StackNavigator>
+`;
+
+exports[`LocationManagement Navigator Renders the LocationManagement Navigator with Print List Button 1`] = `
+<StackNavigator
+  headerMode="float"
+  screenOptions={
+    Object {
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+      "headerTitleStyle": Object {
+        "fontSize": 18,
+      },
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    listeners={
+      Object {
+        "blur": [Function],
+      }
+    }
+    name="Zones"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.ZONES\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
+    name="Aisles"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.AISLES\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
+    name="Sections"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
+    name="SectionDetails"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddLocation"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitleAlign": "left",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddPallet"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddZone"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.ADD_ZONE\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddSection"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.ADD_SECTIONS\\" translation]",
+      }
+    }
+  />
+</StackNavigator>
+`;
+
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator, manager 1`] = `
 <StackNavigator
   headerMode="float"

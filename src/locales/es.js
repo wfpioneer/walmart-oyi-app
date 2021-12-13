@@ -203,8 +203,11 @@ export default {
     INCOMPLETE_AISLES_ADDED: 'No todos los pasillos/secciones se crearon. Sólo {number} pasillos/secciones se agregaron',
     INCOMPLETE_AISLES_PLEASE_CHECK: 'Por favor revisa la lista de pasillos y secciones que se crearon',
     ADD_AISLES_ERROR: 'Hubo un error agregando pasillos/secciones. Por favor inténtalo de nuevo',
+    SECTION_NOT_FOUND: 'La sección escaneada no se encontró',
     EDIT_ITEM: 'Editar Artículo',
     REMOVE_ITEM: 'Borrar Artículo',
+    PRINT_LABEL_EXISTS_HEADER: 'Esta etiqueta ya se mandó a imprimir',
+    PRINT_LABEL_EXISTS: 'Esta etiqueta ya existe en la cola de impresión',
     SECTIONS_ADDED: '%{number} secciones agregadas',
     ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo'
   },

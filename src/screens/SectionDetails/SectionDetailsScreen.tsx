@@ -1,4 +1,6 @@
-import React, { Dispatch, EffectCallback, useEffect, useMemo, useRef } from 'react';
+import React, {
+  Dispatch, EffectCallback, useEffect, useMemo, useRef
+} from 'react';
 import {
   ActivityIndicator, Text, TouchableOpacity, View
 } from 'react-native';
@@ -16,8 +18,10 @@ import styles from './SectionDetailsScreen.style';
 import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
-import { GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
-import { hideItemPopup, selectAisle, selectSection, selectZone } from '../../state/actions/Location';
+import { GET_PALLET_DETAILS, GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
+import {
+  hideItemPopup, selectAisle, selectSection, selectZone
+} from '../../state/actions/Location';
 import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import BottomSheetEditCard from '../../components/BottomSheetEditCard/BottomSheetEditCard';
 
@@ -54,6 +58,8 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
   useEffectHook(() => {
     // on api success
     if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
+      // Clear Pallet Data on on success ( Case when scanning a new section, stale data could remain)
+      dispatch({ type: GET_PALLET_DETAILS.RESET });
       // Update Location State on Success
       switch (getSectionDetailsApi.result.status) {
         case 200:
@@ -69,8 +75,9 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
         default: break;
       }
     }
-  }, []);
-  const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
+  }, [getSectionDetailsApi]);
+  const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data)
+  || undefined;
 
   if (getSectionDetailsApi.isWaiting) {
     return (
@@ -98,6 +105,15 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
         </TouchableOpacity>
+      </View>
+    );
+  }
+
+  if (getSectionDetailsApi.result?.status === 204) {
+    return (
+      <View style={styles.emptyContainer}>
+        <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
+        <Text>{strings('LOCATION.SECTION_NOT_FOUND')}</Text>
       </View>
     );
   }

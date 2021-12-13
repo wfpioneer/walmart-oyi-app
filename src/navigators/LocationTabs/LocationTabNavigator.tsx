@@ -50,16 +50,20 @@ export interface LocationProps {
     locationPopupVisible: boolean;
     userFeatures: string[];
     itemPopupVisible:boolean;
+    sectionResult: any;
 }
 
 interface TabHeaderProps {
     headerText: string;
     isEditEnabled: boolean;
     isReserve: boolean;
+    isDisabled: boolean;
 }
 
 export const TabHeader = (props: TabHeaderProps): JSX.Element => {
-  const { headerText, isEditEnabled, isReserve } = props;
+  const {
+    headerText, isEditEnabled, isReserve, isDisabled
+  } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddLocation');
@@ -77,11 +81,12 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
           <Button
             type={3}
             title={strings('GENERICS.ADD')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
+            titleColor={isDisabled ? COLOR.DISABLED_BLUE : COLOR.MAIN_THEME_COLOR}
             titleFontSize={12}
             titleFontWeight="bold"
             height={28}
             onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
+            disabled={isDisabled}
           />
         ) : null}
       </View>
@@ -89,46 +94,53 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
   );
 };
 
-const floorDetailsList = () => {
+const FloorDetailsList = (props: {sectionExists: boolean}) => {
   const userFeatures = useTypedSelector(state => state.User.features);
+  const { sectionExists } = props;
   return (
     <>
       <TabHeader
         headerText={strings('LOCATION.ITEMS')}
         isEditEnabled={userFeatures.includes('location management edit')}
         isReserve={false}
+        isDisabled={!sectionExists}
       />
       <SectionDetails />
     </>
   );
 };
 
-const reserveDetailsList = () => {
+const ReserveDetailsList = (props: {sectionExists: boolean}) => {
   const userFeatures = useTypedSelector(state => state.User.features);
   const navigation = useNavigation();
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
   const dispatch = useDispatch();
+  const { sectionExists } = props;
 
   let palletIds: number[] = [];
   // Call Get Pallet Details API
   useEffect(() => navigation.addListener('focus', () => {
     // Call if SectionDetails returned successfully and tab is in focus
     if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
-      const { pallets } = getSectionDetailsApi.result.data;
-      if (pallets.palletData.length !== 0) {
-        palletIds = pallets.palletData.map(
-          (item: Omit<SectionDetailsPallet, 'items'>) => item.palletId
-        );
-        dispatch(getPalletDetails({ palletIds }));
+      if (getSectionDetailsApi.result.status !== 204) {
+        const { pallets } = getSectionDetailsApi.result.data;
+        if (pallets.palletData.length !== 0) {
+          palletIds = pallets.palletData.map(
+            (item: Omit<SectionDetailsPallet, 'items'>) => item.palletId
+          );
+          dispatch(getPalletDetails({ palletIds }));
+        }
       }
     }
   }), [getSectionDetailsApi]);
+
   return (
     <>
       <TabHeader
         headerText={strings('LOCATION.PALLETS')}
         isEditEnabled={userFeatures.includes('location management edit')}
         isReserve={true}
+        isDisabled={!sectionExists}
       />
       <ReserveSectionDetails palletIds={palletIds} />
     </>
@@ -150,14 +162,18 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     useEffectHook,
     validateSessionCall,
     userFeatures,
-    itemPopupVisible
+    itemPopupVisible,
+    sectionResult
   } = props;
+  const sectionExists: boolean = (sectionResult && sectionResult.status !== 204);
+
   // Call Get Section Details
   useEffectHook(() => {
     validateSessionCall(navigation, route.name).then(() => {
       // Handles scanned event changes if the screen is in focus
       if (scannedEvent.value && navigation.isFocused()) {
         dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
+        navigation.navigate('FloorDetails');
       }
     }).catch(() => {});
   }, [navigation, scannedEvent]);
@@ -166,6 +182,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   useEffectHook(() => {
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
+        // TODO when scanning for a new location we should reset to the Floor Tab
         validateSessionCall(navigation, route.name).then(() => {
           trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
           dispatch(setScannedEvent(scan));
@@ -192,6 +209,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           navigation.navigate('PrintPriceSign');
         }}
         buttonText={userFeatures.includes('location printing') ? strings('LOCATION.PRINT_LABEL') : undefined}
+        isDisabled={!sectionExists}
       />
       <Tab.Navigator
         tabBarOptions={{
@@ -200,10 +218,10 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           style: { backgroundColor: COLOR.WHITE },
           indicatorStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
         }}
+        swipeEnabled={sectionExists}
       >
         <Tab.Screen
           name="FloorDetails"
-          component={floorDetailsList}
           options={{
             title: `${strings('LOCATION.FLOORS')} (${floorItems.length ?? 0})`
           }}
@@ -215,15 +233,19 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
               }
             }
           }}
-        />
+        >
+          { () => <FloorDetailsList sectionExists={sectionExists} />}
+        </Tab.Screen>
         <Tab.Screen
           name="ReserveDetails"
-          component={reserveDetailsList}
           options={{
             title: `${strings('LOCATION.RESERVES')} (${reserveItems.length ?? 0})`
           }}
           listeners={{
             tabPress: e => {
+              if (!sectionExists) {
+                e.preventDefault();
+              }
               if (locationPopupVisible) {
                 e.preventDefault();
                 dispatch(hideLocationPopup());
@@ -233,7 +255,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
               }
             }
           }}
-        />
+        >
+          {() => <ReserveDetailsList sectionExists={sectionExists} />}
+        </Tab.Screen>
       </Tab.Navigator>
     </>
   );
@@ -278,8 +302,8 @@ const LocationTabs = () : JSX.Element => {
       >
         <LocationTabsNavigator
           dispatch={dispatch}
-          floorItems={locItem?.items.sectionItems ?? []}
-          reserveItems={locItem?.pallets.palletData ?? []}
+          floorItems={locItem?.items?.sectionItems ?? []}
+          reserveItems={locItem?.pallets?.palletData ?? []}
           locationName={locationName}
           locationPopupVisible={locationPopupVisible}
           isManualScanEnabled={isManualScanEnabled}
@@ -291,6 +315,7 @@ const LocationTabs = () : JSX.Element => {
           validateSessionCall={validateSession}
           userFeatures={userFeatures}
           itemPopupVisible={itemPopupVisible}
+          sectionResult={result}
         />
       </TouchableOpacity>
       <BottomSheetModal
