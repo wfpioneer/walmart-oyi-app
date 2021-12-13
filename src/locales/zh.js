@@ -202,7 +202,9 @@ export default {
     SECTIONS_ADDED: '已添加 %{number} 个货架位置',
     ADD_SECTIONS_ERROR: '添加货架时错误，请重试.',
     EDIT_ITEM: '编辑商品',
-    REMOVE_ITEM: '删除商品'
+    REMOVE_ITEM: '删除商品',
+    REMOVE_ZONE_CONFIRMATION: 'Are you sure you want to remove this zone?', // TODO CN translation
+    REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'This will also remove all aisles and sections associated with it' // TODO CN translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

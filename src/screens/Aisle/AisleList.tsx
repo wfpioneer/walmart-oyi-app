@@ -33,6 +33,8 @@ import LocationManualScan from '../../components/LocationManualScan/LocationManu
 import { hideLocationPopup, setAisles, setCreateFlow } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
+import Button from '../../components/buttons/Button';
+import { CustomModalComponent } from '../Modal/Modal';
 import { CREATE_FLOW } from '../../models/LocationItems';
 
 const NoAisleMessage = () : JSX.Element => (
@@ -176,11 +178,13 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
 const AisleList = (): JSX.Element => {
   const navigation = useNavigation();
   const getAllAisles = useTypedSelector(state => state.async.getAisle);
+  const deleteZoneApi = useTypedSelector(state => state.async.deleteZone);
   const { id: zoneId, name: zoneName } = useTypedSelector(state => state.Location.selectedZone);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
   const userFeatures = useTypedSelector(state => state.User.features);
   const [apiStart, setApiStart] = useState(0);
+  const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const dispatch = useDispatch();
   const route = useRoute();
 
@@ -205,6 +209,49 @@ const AisleList = (): JSX.Element => {
     bottomSheetModalRef.current?.dismiss();
     navigation.navigate('AddZone');
   };
+
+  const handleDeleteZone = () => {
+    // gibberish
+  };
+
+  const deleteZoneModalView = () => (
+    <CustomModalComponent
+      isVisible={displayConfirmation}
+      onClose={() => setDisplayConfirmation(false)}
+      modalType="Error"
+    >
+      {deleteZoneApi.isWaiting ? (
+        <ActivityIndicator
+          animating={deleteZoneApi.isWaiting}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.activityIndicator}
+        />
+      ) : (
+        <>
+          <Text style={styles.message}>
+            {`${strings('LOCATION.REMOVE_ZONE_CONFIRMATION')}`}
+            {`${strings('LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS')}`}
+          </Text>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.delButton}
+              title={strings('GENERICS.CANCEL')}
+              backgroundColor={COLOR.TRACKER_RED}
+              onPress={() => setDisplayConfirmation(false)}
+            />
+            <Button
+              style={styles.delButton}
+              title={deleteZoneApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+              backgroundColor={COLOR.MAIN_THEME_COLOR}
+              onPress={handleDeleteZone}
+            />
+          </View>
+        </>
+      )}
+    </CustomModalComponent>
+  );
 
   return (
     <BottomSheetModalProvider>

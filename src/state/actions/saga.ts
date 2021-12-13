@@ -27,6 +27,7 @@ export const ADD_PALLET = 'SAGA/ADD_PALLET';
 export const DELETE_PALLET = 'SAGA/DELETE_PALLET';
 export const GET_PALLET_DETAILS = 'SAGA/GET_PALLET_DETAILS';
 export const CREATE_SECTIONS = 'SAGA/CREATE_SECTIONS';
+export const DELETE_ZONE = 'SAGA/DELETE_ZONE';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -66,3 +67,4 @@ export const addPallet = (payload: any) => ({ type: ADD_PALLET, payload } as con
 export const deletePallet = (payload: any) => ({ type: DELETE_PALLET, payload } as const);
 export const createSections = (payload: any) => ({ type: CREATE_SECTIONS, payload } as const);
 export const getPalletDetails = (payload: {palletIds: number[]}) => ({ type: GET_PALLET_DETAILS, payload } as const);
+export const deleteZone = (payload: number) => ({ type: DELETE_ZONE, payload } as const);

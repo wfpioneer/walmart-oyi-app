@@ -64,6 +64,20 @@ const styles = StyleSheet.create({
     borderColor: COLOR.GREY_200,
     borderRadius: 5,
     borderWidth: 2
+  },
+  message: {
+    textAlign: 'center',
+    fontSize: 18,
+    padding: 15
+  },
+  buttonContainer: {
+    width: '100%',
+    alignContent: 'space-around',
+    flexDirection: 'row'
+  },
+  delButton: {
+    flex: 1,
+    paddingHorizontal: 10
   }
 });
 

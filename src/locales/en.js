@@ -202,7 +202,9 @@ export default {
     EDIT_ITEM: 'Edit an item',
     REMOVE_ITEM: 'Remove an item',
     SECTIONS_ADDED: '%{number} section(s) added',
-    ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again'
+    ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again',
+    REMOVE_ZONE_CONFIRMATION: 'Are you sure you want to remove this zone?',
+    REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'This will also remove all aisles and sections associated with it'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
