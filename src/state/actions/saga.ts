@@ -1,3 +1,4 @@
+import { CreateAisleRequest } from '../../models/CreateZoneAisleSection.d';
 import {
   ApprovalListItem, approvalAction, approvalRequestSource, approvalStatus
 } from '../../models/ApprovalListItem';
@@ -26,6 +27,7 @@ export const PRINT_LOCATION_LABELS = 'SAGA/PRINT_SECTION_LABELS';
 export const ADD_PALLET = 'SAGA/ADD_PALLET';
 export const DELETE_PALLET = 'SAGA/DELETE_PALLET';
 export const GET_PALLET_DETAILS = 'SAGA/GET_PALLET_DETAILS';
+export const POST_CREATE_AISLES = 'SAGA/POST_CREATE_AISLES';
 export const CREATE_SECTIONS = 'SAGA/CREATE_SECTIONS';
 export const DELETE_ZONE = 'SAGA/DELETE_ZONE';
 
@@ -68,3 +70,6 @@ export const deletePallet = (payload: any) => ({ type: DELETE_PALLET, payload } 
 export const createSections = (payload: any) => ({ type: CREATE_SECTIONS, payload } as const);
 export const getPalletDetails = (payload: {palletIds: number[]}) => ({ type: GET_PALLET_DETAILS, payload } as const);
 export const deleteZone = (payload: number) => ({ type: DELETE_ZONE, payload } as const);
+export const postCreateAisles = (payload: {
+  aislesToCreate: CreateAisleRequest
+}) => ({ type: POST_CREATE_AISLES, payload } as const);
