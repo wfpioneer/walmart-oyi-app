@@ -2,7 +2,12 @@ import React, { Dispatch } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { hideItemPopup, showItemPopup } from '../../state/actions/Location';
+import {
+  clearSelectedItem,
+  hideItemPopup,
+  setSelectedItem,
+  showItemPopup
+} from '../../state/actions/Location';
 import styles from './FloorItemRow.style';
 import { currencies, strings } from '../../locales';
 import { SectionDetailsItem } from '../../models/LocationItems';
@@ -35,8 +40,10 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
             {userFeatures.includes('location management edit') && (
               <TouchableOpacity onPress={() => {
                 if (location.itemPopupVisible) {
+                  dispatch(clearSelectedItem());
                   dispatch(hideItemPopup());
                 } else {
+                  dispatch(setSelectedItem(item));
                   dispatch(showItemPopup());
                 }
               }}

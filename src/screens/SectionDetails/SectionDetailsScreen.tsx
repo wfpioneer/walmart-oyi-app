@@ -11,8 +11,8 @@ import { FlatList } from 'react-native-gesture-handler';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
-import { LocationItem } from '../../models/LocationItems';
-import { getSectionDetails } from '../../state/actions/saga';
+import {LocationItem, SectionDetailsItem} from '../../models/LocationItems';
+import {deleteLocation, getSectionDetails} from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import styles from './SectionDetailsScreen.style';
 import COLOR from '../../themes/Color';
@@ -27,6 +27,7 @@ import BottomSheetEditCard from '../../components/BottomSheetEditCard/BottomShee
 
 interface SectionDetailsProps {
   getSectionDetailsApi: AsyncState;
+  deleteLocationApi: AsyncState;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
@@ -34,6 +35,13 @@ interface SectionDetailsProps {
   scannedEvent: { type: string, value: string };
   addAPI: AsyncState;
 }
+
+export const handleDeleteItem = (selectedItem: SectionDetailsItem | null, sectionId: number, dispatch: Dispatch<any>): void => {
+  if (selectedItem) {
+
+  }
+
+};
 
 export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element => {
   const {
@@ -143,6 +151,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
 
 const SectionDetails = (): JSX.Element => {
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
+  const deleteLocationApi = useTypedSelector(state => state.async.deleteLocation);
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -169,6 +178,7 @@ const SectionDetails = (): JSX.Element => {
       >
         <SectionDetailsScreen
           getSectionDetailsApi={getSectionDetailsApi}
+          deleteLocationApi={deleteLocationApi}
           addAPI={addAPI}
           dispatch={dispatch}
           navigation={navigation}
@@ -192,7 +202,7 @@ const SectionDetails = (): JSX.Element => {
         <BottomSheetSectionRemoveCard
           isVisible={true}
           text={strings('LOCATION.REMOVE_ITEM')}
-          onPress={() => {}}
+          onPress={() => handleDeleteItem(location.selectedItem, location.selectedSection.id, dispatch)}
         />
       </BottomSheetModal>
     </BottomSheetModalProvider>
