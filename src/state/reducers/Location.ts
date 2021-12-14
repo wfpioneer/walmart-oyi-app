@@ -36,7 +36,7 @@ export interface LocationIdName {
 }
 
 export interface CreateAisles {
-  name: number | string;
+  aisleName: number | string;
   sectionCount: number;
 }
 
@@ -170,7 +170,7 @@ export const Location = (
       while (aislesToCreate.length < action.payload) {
         if (!state.aisles.find(aisle => aisleCount === parseInt(aisle.aisleName, 10))) {
           aislesToCreate.push({
-            name: aisleCount,
+            aisleName: aisleCount,
             sectionCount: 1
           });
         }
@@ -193,7 +193,7 @@ export const Location = (
       return {
         ...state,
         aislesToCreate: [{
-          name: action.payload.name,
+          aisleName: action.payload.name,
           sectionCount: 1
         }]
       };

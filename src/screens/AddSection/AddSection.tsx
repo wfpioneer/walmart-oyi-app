@@ -10,11 +10,12 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import moment from 'moment';
+import { showSnackBar } from '../../state/actions/SnackBar';
 import styles from './addSection.style';
 import { strings } from '../../locales';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { CreateAisles, LocationIdName } from '../../state/reducers/Location';
-import { createSections } from '../../state/actions/saga';
+import { createSections, postCreateAisles } from '../../state/actions/saga';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
 import Button from '../../components/buttons/Button';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -23,7 +24,7 @@ import { CREATE_FLOW } from '../../models/LocationItems';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setAisleSectionCount } from '../../state/actions/Location';
-import { showSnackBar } from '../../state/actions/SnackBar';
+import { CreateAisleRequest, CreateAisleResponse } from '../../models/CreateZoneAisleSection.d';
 
 interface AddSectionProps {
   aislesToCreate: CreateAisles[];
@@ -31,11 +32,15 @@ interface AddSectionProps {
   newZone: string;
   createFlow: CREATE_FLOW;
   dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
   existingSections: number;
   currentAisle: LocationIdName;
-  createSectionsAPI: AsyncState;
+  modal: any;
+  createAislesApi: AsyncState;
+  createAislesApiStart: number;
+  setCreateAislesApiStart: React.Dispatch<React.SetStateAction<number>>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
-  navigation: NavigationProp<any>;
+  createSectionsAPI: AsyncState;
   createSectionsAPIStart: number;
   setCreateSectionsAPIStart: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -61,6 +66,81 @@ export const validateSectionCounts = (aislesToCreate: CreateAisles[], existingSe
   return validation;
 };
 
+export const activityModalEffect = (
+  navigation: NavigationProp<any>,
+  modal: { showActivity: boolean; showModal: boolean; content: any },
+  createAislesApi: AsyncState,
+  createSectionsAPI: AsyncState,
+  dispatch: Dispatch<any>
+): void => {
+  if (navigation.isFocused()) {
+    if (!modal.showActivity) {
+      if (createAislesApi.isWaiting || createSectionsAPI.isWaiting) {
+        dispatch(showActivityModal());
+      }
+    } else if (!createAislesApi.isWaiting && !createSectionsAPI.isWaiting) {
+      dispatch(hideActivityModal());
+    }
+  }
+};
+
+export const createAisleSectionsEffect = (
+  createAislesApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  createAislesApiStart: number,
+  trackApiEvents: (eventName: string, params: any) => void
+): void => {
+  if (navigation.isFocused() && !createAislesApi.isWaiting) {
+    // Success
+    if (createAislesApi.result) {
+      const createdAisles = createAislesApi.result.data as Array<CreateAisleResponse>;
+      switch (createAislesApi.result.status) {
+        case 200:
+          trackApiEvents('create_aisles_success', { duration: moment().valueOf() - createAislesApiStart });
+          dispatch(showSnackBar(
+            strings('LOCATION.AISLES_ADDED').replace('{number}', createdAisles.length.toString()),
+            2000
+          ));
+          dispatch({ type: 'API/POST_CREATE_AISLES/RESET' });
+          navigation.navigate('Aisles');
+          break;
+        case 207: {
+          let succeeded = 0;
+          createdAisles.forEach(aisle => {
+            if (aisle.status === 200) {
+              succeeded++;
+            }
+          });
+          trackApiEvents('create_aisles_partial_success', {
+            duration: moment().valueOf() - createAislesApiStart,
+            succeeded,
+            total: createdAisles.length
+          });
+          dispatch(showSnackBar(
+            `${strings('LOCATION.INCOMPLETE_AISLES_ADDED').replace('{number}', succeeded.toString())}`
+            + `\n${strings('LOCATION.INCOMPLETE_AISLES_PLEASE_CHECK')}`,
+            3000
+          ));
+          dispatch({ type: 'API/POST_CREATE_AISLES/RESET' });
+          navigation.navigate('Aisles');
+          break;
+        }
+        default:
+      }
+    }
+
+    // Failure
+    if (createAislesApi.error) {
+      trackApiEvents('create_aisles_failure', {
+        duration: moment().valueOf() - createAislesApiStart,
+        errorDetails: createAislesApi.error.message || createAislesApi.error.toString()
+      });
+      dispatch(showSnackBar(strings('LOCATION.ADD_AISLES_ERROR'), 2000));
+    }
+  }
+};
+
 export const createSectionsAPIEffect = (
   createSectionsAPI: AsyncState,
   dispatch: Dispatch<any>,
@@ -71,7 +151,6 @@ export const createSectionsAPIEffect = (
 ): void => {
   // on api success
   if (!createSectionsAPI.isWaiting && createSectionsAPI.result) {
-    dispatch(hideActivityModal());
     trackAPIEvents('create_sections_success', { duration: moment().valueOf() - createSectionsAPIStart });
     dispatch(
       showSnackBar(strings('LOCATION.SECTIONS_ADDED', { number: aisleSectionCount }), 3000)
@@ -82,7 +161,6 @@ export const createSectionsAPIEffect = (
 
   // on api failure
   if (!createSectionsAPI.isWaiting && createSectionsAPI.error) {
-    dispatch(hideActivityModal());
     trackAPIEvents(
       'create_sections_failure',
       {
@@ -92,24 +170,47 @@ export const createSectionsAPIEffect = (
     );
     dispatch(showSnackBar(strings('LOCATION.ADD_SECTIONS_ERROR'), 3000));
   }
-
-  // isWaiting
-  if (createSectionsAPI.isWaiting) {
-    dispatch(showActivityModal());
-  }
 };
 
 export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
-  props.useEffectHook(() => {
+  const {
+    createAislesApi,
+    createSectionsAPI,
+    createAislesApiStart,
+    createSectionsAPIStart,
+    setCreateAislesApiStart,
+    dispatch,
+    navigation,
+    useEffectHook
+  } = props;
+
+  // activity modal
+  useEffectHook(() => activityModalEffect(
+    navigation,
+    props.modal,
+    createAislesApi,
+    createSectionsAPI,
+    dispatch
+  ), [props.modal, createAislesApi, createSectionsAPI]);
+
+  useEffectHook(() => createAisleSectionsEffect(
+    createAislesApi,
+    dispatch,
+    navigation,
+    createAislesApiStart,
+    trackEvent
+  ), [createAislesApi]);
+
+  useEffectHook(() => {
     createSectionsAPIEffect(
-      props.createSectionsAPI,
-      props.dispatch,
-      props.navigation,
-      props.createSectionsAPIStart,
+      createSectionsAPI,
+      dispatch,
+      navigation,
+      createSectionsAPIStart,
       props.aislesToCreate[0].sectionCount,
       trackEvent
     );
-  }, [props.createSectionsAPI]);
+  }, [createSectionsAPI]);
 
   const handleAisleSectionCountIncrement = (aisleIndex: number, sectionCount: number) => {
     if (sectionCount < NEW_SECTION_MAX - props.existingSections) {
@@ -132,7 +233,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
 
   const renderAisles = (aisle: RenderAisles) => {
     const zoneName = props.createFlow === CREATE_FLOW.CREATE_ZONE ? props.newZone : props.selectedZone.name;
-    const fullAisleName = `${strings('LOCATION.AISLE')} ${zoneName}${aisle.item.name}`;
+    const fullAisleName = `${strings('LOCATION.AISLE')} ${zoneName}${aisle.item.aisleName}`;
     return (
       <View style={styles.aisleContainer} key={fullAisleName}>
         <View style={styles.aisleNumericContainer}>
@@ -168,27 +269,31 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
   const handleContinue = () => {
     validateSession(props.navigation).then(() => {
       switch (props.createFlow) {
-        case CREATE_FLOW.CREATE_ZONE:
+        case CREATE_FLOW.CREATE_ZONE: {
           // TODO implement createZoneAisleSection
           const createZoneAisleSectionRequest = {
             zoneName: props.newZone,
             aisles: props.aislesToCreate
           };
           break;
-        case CREATE_FLOW.CREATE_AISLE:
-          // TODO implement createAisleSection
-          const createAisleSectionRequest = {
+        }
+        case CREATE_FLOW.CREATE_AISLE: {
+          const createAisleSectionRequest: CreateAisleRequest = {
             zoneId: props.selectedZone.id,
             aisles: props.aislesToCreate
           };
+          setCreateAislesApiStart(moment().valueOf());
+          dispatch(postCreateAisles({ aislesToCreate: createAisleSectionRequest }));
           break;
-        case CREATE_FLOW.CREATE_SECTION:
+        }
+        case CREATE_FLOW.CREATE_SECTION: {
           props.setCreateSectionsAPIStart(moment().valueOf());
           props.dispatch(createSections([{
             aisleId: props.currentAisle.id,
             sectionCount: props.aislesToCreate[0].sectionCount
           }]));
           break;
+        }
         default:
           break;
       }
@@ -211,7 +316,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
         <FlatList
           data={props.aislesToCreate}
           renderItem={renderAisles}
-          keyExtractor={item => item.name.toString()}
+          keyExtractor={item => item.aisleName.toString()}
           removeClippedSubviews={false}
         />
       </View>
@@ -235,8 +340,11 @@ const AddSection = (): JSX.Element => {
   const selectedZone = useTypedSelector(state => state.Location.selectedZone);
   const newZone = useTypedSelector(state => state.Location.newZone);
   const createFlow = useTypedSelector(state => state.Location.createFlow);
+  const modal = useTypedSelector(state => state.modal);
+  const createAislesApi = useTypedSelector(state => state.async.postCreateAisles);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [createAislesApiStart, setCreateAislesApiStart] = useState(0);
   const [createSectionsAPIStart, setCreateSectionsAPIStart] = useState(0);
 
   let existingSections = 0;
@@ -254,11 +362,15 @@ const AddSection = (): JSX.Element => {
       newZone={newZone}
       createFlow={createFlow}
       dispatch={dispatch}
+      navigation={navigation}
       existingSections={existingSections}
       currentAisle={currentAisle}
-      createSectionsAPI={createSectionsAPI}
+      modal={modal}
+      createAislesApi={createAislesApi}
+      createAislesApiStart={createAislesApiStart}
+      setCreateAislesApiStart={setCreateAislesApiStart}
       useEffectHook={useEffect}
-      navigation={navigation}
+      createSectionsAPI={createSectionsAPI}
       createSectionsAPIStart={createSectionsAPIStart}
       setCreateSectionsAPIStart={setCreateSectionsAPIStart}
     />
