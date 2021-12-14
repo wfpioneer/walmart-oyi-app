@@ -1,6 +1,7 @@
 import { cloneDeep } from 'lodash';
 import {
   Actions,
+  CLEAR_SELECTED_ITEM,
   HIDE_ITEM_POPUP,
   HIDE_LOCATION_POPUP,
   RESET_SECTION_NAME,
@@ -15,6 +16,7 @@ import {
   SET_NEW_ZONE,
   SET_POSSIBLE_ZONES,
   SET_SECTIONS,
+  SET_SELECTED_ITEM,
   SET_ZONES,
   SHOW_ITEM_POPUP,
   SHOW_LOCATION_POPUP
@@ -23,6 +25,7 @@ import {
   AisleItem,
   CREATE_FLOW,
   PossibleZone,
+  SectionDetailsItem,
   SectionItem,
   ZoneItem
 } from '../../models/LocationItems';
@@ -49,7 +52,8 @@ interface LocationState {
   createFlow: CREATE_FLOW;
   newZone: string;
   aislesToCreate: CreateAisles[];
-  itemPopupVisible: boolean
+  itemPopupVisible: boolean;
+  selectedItem: SectionDetailsItem | null;
 }
 
 const initialState: LocationState = {
@@ -73,7 +77,8 @@ const initialState: LocationState = {
   createFlow: CREATE_FLOW.NOT_STARTED,
   newZone: '',
   aislesToCreate: [],
-  itemPopupVisible: false
+  itemPopupVisible: false,
+  selectedItem: null
 };
 
 export const Location = (
@@ -191,6 +196,16 @@ export const Location = (
           aisleName: action.payload.name,
           sectionCount: 1
         }]
+      };
+    case SET_SELECTED_ITEM:
+      return {
+        ...state,
+        selectedItem: action.payload
+      };
+    case CLEAR_SELECTED_ITEM:
+      return {
+        ...state,
+        selectedItem: null
       };
     default:
       return state;
