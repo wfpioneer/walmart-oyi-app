@@ -209,7 +209,9 @@ export default {
     PRINT_LABEL_EXISTS_HEADER: 'Print Label Exists',
     PRINT_LABEL_EXISTS: 'This Print Label already Exists in the Print Queue',
     SECTIONS_ADDED: '%{number} section(s) added',
-    ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again'
+    ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again',
+    DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}',
+    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

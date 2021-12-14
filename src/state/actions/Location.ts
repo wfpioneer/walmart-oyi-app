@@ -2,6 +2,7 @@ import {
   AisleItem,
   CREATE_FLOW,
   PossibleZone,
+  SectionDetailsItem,
   SectionItem,
   ZoneItem
 } from '../../models/LocationItems';
@@ -24,6 +25,8 @@ export const SET_AISLES_TO_CREATE_TO_EXISTING_AISLE = 'LOCATION/SET_AISLES_TO_CR
 export const SET_AISLE_SECTION_COUNT = 'LOCATION/SET_AISLE_SECTION_COUNT';
 export const SHOW_ITEM_POPUP = 'LOCATION/SHOW_ITEM_POPUP';
 export const HIDE_ITEM_POPUP = 'LOCATION/HIDE_ITEM_POPUP';
+export const SET_SELECTED_ITEM = 'LOCATION/SET_SELECTED_ITEM';
+export const CLEAR_SELECTED_ITEM = 'LOCATION/CLEAR_SELECTED_ITEM';
 
 export const selectZone = (id: number, name: string) => ({
   type: SELECT_ZONE,
@@ -72,7 +75,7 @@ export const hideLocationPopup = () => ({
   type: HIDE_LOCATION_POPUP
 } as const);
 
-export const resetSectionName = () => ({
+export const resetLocationAll = () => ({
   type: RESET_SECTION_NAME
 } as const);
 
@@ -117,6 +120,15 @@ export const hideItemPopup = () => ({
   type: HIDE_ITEM_POPUP
 } as const);
 
+export const setSelectedItem = (selectedItem: SectionDetailsItem) => ({
+  type: SET_SELECTED_ITEM,
+  payload: selectedItem
+} as const);
+
+export const clearSelectedItem = () => ({
+  type: CLEAR_SELECTED_ITEM
+} as const);
+
 export type Actions =
   ReturnType<typeof selectZone>
   | ReturnType<typeof setZones>
@@ -126,10 +138,14 @@ export type Actions =
   | ReturnType<typeof setSections>
   | ReturnType<typeof showLocationPopup>
   | ReturnType<typeof hideLocationPopup>
-  | ReturnType<typeof resetSectionName>
+  | ReturnType<typeof resetLocationAll>
   | ReturnType<typeof setPossibleZones>
   | ReturnType<typeof setCreateFlow>
   | ReturnType<typeof setNewZone>
   | ReturnType<typeof setAislesToCreate>
   | ReturnType<typeof setAislesToCreateToExistingAisle>
   | ReturnType<typeof setAisleSectionCount>
+  | ReturnType<typeof showItemPopup>
+  | ReturnType<typeof hideItemPopup>
+  | ReturnType<typeof setSelectedItem>
+  | ReturnType<typeof clearSelectedItem>
