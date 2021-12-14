@@ -210,8 +210,8 @@ export default {
     SECTION_NOT_FOUND: 'The Scanned Section was not found.', // TODO Mandarin Translation
     PRINT_LABEL_EXISTS_HEADER: '打印既有标签',
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
-    REMOVE_ZONE_CONFIRMATION: 'Are you sure you want to remove this zone?', // TODO CN translation
-    REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'This will also remove all aisles and sections associated with it' // TODO CN translation
+    REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',
+    REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: '移除所有通道和此通道内的货架号'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

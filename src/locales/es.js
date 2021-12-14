@@ -210,8 +210,8 @@ export default {
     PRINT_LABEL_EXISTS: 'Esta etiqueta ya existe en la cola de impresión',
     SECTIONS_ADDED: '%{number} secciones agregadas',
     ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo',
-    REMOVE_ZONE_CONFIRMATION: 'Are you sure you want to remove this zone?', // TODO MX translation
-    REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'This will also remove all aisles and sections associated with it' // TODO MX translation
+    REMOVE_ZONE_CONFIRMATION: '¿Estas seguro que quieres eliminar esta zona?',
+    REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'Esto eliminará todos los pasillos y secciones asociados'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

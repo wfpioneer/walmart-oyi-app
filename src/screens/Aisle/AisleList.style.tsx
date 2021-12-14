@@ -65,10 +65,21 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 2
   },
-  message: {
+  confirmationTextView: {
+    flexDirection: 'column'
+  },
+  confirmation: {
     textAlign: 'center',
     fontSize: 18,
-    padding: 15
+    paddingHorizontal: 15,
+    paddingTop: 15,
+    paddingBottom: 5
+  },
+  confirmationExtraText: {
+    textAlign: 'center',
+    fontSize: 14,
+    paddingHorizontal: 15,
+    paddingBottom: 15
   },
   buttonContainer: {
     width: '100%',

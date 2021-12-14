@@ -21,7 +21,7 @@ import LocationItemCard from '../../components/LocationItemCard/LocationItemCard
 import { strings } from '../../locales';
 import { LocationHeader } from '../../components/locationHeader/LocationHeader';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { getAisle } from '../../state/actions/saga';
+import { deleteZone, getAisle } from '../../state/actions/saga';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
@@ -43,15 +43,59 @@ const NoAisleMessage = () : JSX.Element => (
   </View>
 );
 
+export const handleModalClose = (
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  setDeleteZoneApiStart: React.Dispatch<React.SetStateAction<number>>,
+  dispatch: Dispatch<any>
+): void => {
+  setDisplayConfirmation(false);
+  setDeleteZoneApiStart(0);
+  dispatch({ type: 'API/DELETE_ZONE/RESET' });
+};
+
+export const deleteZoneApiEffect = (
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  deleteZoneApi: AsyncState,
+  deleteZoneApiStart: number,
+  setDeleteZoneApiStart: React.Dispatch<React.SetStateAction<number>>,
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  trackApiEvent: (eventName: string, params?: any) => void
+): void => {
+  if (navigation.isFocused() && !deleteZoneApi.isWaiting) {
+    if (deleteZoneApi.result) {
+      // Success
+      trackApiEvent('delete_zone_success', {
+        duration: moment().valueOf() - deleteZoneApiStart
+      });
+      handleModalClose(setDisplayConfirmation, setDeleteZoneApiStart, dispatch);
+      navigation.goBack();
+    }
+
+    if (deleteZoneApi.error) {
+      // Failure
+      trackApiEvent('delete_zone_fail', {
+        duration: moment().valueOf() - deleteZoneApiStart,
+        reason: deleteZoneApi.error.message || deleteZoneApi.error.toString()
+      });
+    }
+  }
+};
+
 interface AisleProps {
     zoneId: number,
     zoneName: string,
     getAllAisles: AsyncState,
+    deleteZoneApi: AsyncState,
     isManualScanEnabled: boolean,
     locationPopupVisible: boolean,
     dispatch: Dispatch<any>,
-    apiStart: number,
-    setApiStart: React.Dispatch<React.SetStateAction<number>>,
+    getAislesApiStart: number,
+    setGetAislesApiStart: React.Dispatch<React.SetStateAction<number>>,
+    deleteZoneApiStart: number,
+    setDeleteZoneApiStart: React.Dispatch<React.SetStateAction<number>>,
+    displayConfirmation: boolean,
+    setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
     navigation: NavigationProp<any>,
     route: RouteProp<any, string>,
     useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
@@ -63,12 +107,17 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
     zoneId,
     zoneName,
     getAllAisles,
+    deleteZoneApi,
     isManualScanEnabled,
     locationPopupVisible,
     navigation,
-    apiStart,
     dispatch,
-    setApiStart,
+    getAislesApiStart,
+    setGetAislesApiStart,
+    deleteZoneApiStart,
+    setDeleteZoneApiStart,
+    displayConfirmation,
+    setDisplayConfirmation,
     route,
     useEffectHook,
     trackEventCall
@@ -78,7 +127,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
       trackEventCall('get_location_api_call');
-      setApiStart(moment().valueOf());
+      setGetAislesApiStart(moment().valueOf());
       dispatch(getAisle({ zoneId }));
     }).catch(() => {});
   }), [navigation]);
@@ -103,17 +152,76 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!getAllAisles.isWaiting && getAllAisles.result) {
-      trackEventCall('get_aisles_success', { duration: moment().valueOf() - apiStart });
+      trackEventCall('get_aisles_success', { duration: moment().valueOf() - getAislesApiStart });
     }
 
     // on api failure
     if (!getAllAisles.isWaiting && getAllAisles.error) {
       trackEventCall('get_aisles_failure', {
         errorDetails: getAllAisles.error.message || getAllAisles.error,
-        duration: moment().valueOf() - apiStart
+        duration: moment().valueOf() - getAislesApiStart
       });
     }
   }, [getAllAisles]);
+
+  useEffectHook(() => deleteZoneApiEffect(
+    dispatch,
+    navigation,
+    deleteZoneApi,
+    deleteZoneApiStart,
+    setDeleteZoneApiStart,
+    setDisplayConfirmation,
+    trackEventCall
+  ), [deleteZoneApi]);
+
+  const handleDeleteZone = () => {
+    setDeleteZoneApiStart(moment().valueOf());
+    dispatch(deleteZone(zoneId));
+  };
+
+  const deleteZoneModalView = () => (
+    <CustomModalComponent
+      isVisible={displayConfirmation}
+      onClose={() => handleModalClose(setDisplayConfirmation, setDeleteZoneApiStart, dispatch)}
+      modalType="Error"
+    >
+      {deleteZoneApi.isWaiting ? (
+        <ActivityIndicator
+          animating={deleteZoneApi.isWaiting}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.activityIndicator}
+        />
+      ) : (
+        <>
+          <View style={styles.confirmationTextView}>
+            <Text style={styles.confirmation}>
+              {`${strings('LOCATION.REMOVE_ZONE_CONFIRMATION')}`}
+            </Text>
+            <Text style={styles.confirmationExtraText}>
+              {`${strings('LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS')}`}
+            </Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.delButton}
+              title={strings('GENERICS.CANCEL')}
+              backgroundColor={COLOR.TRACKER_RED}
+              // No need for modal close fn because no apis have been sent
+              onPress={() => setDisplayConfirmation(false)}
+            />
+            <Button
+              style={styles.delButton}
+              title={deleteZoneApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+              backgroundColor={COLOR.MAIN_THEME_COLOR}
+              onPress={handleDeleteZone}
+            />
+          </View>
+        </>
+      )}
+    </CustomModalComponent>
+  );
 
   if (getAllAisles.isWaiting) {
     return (
@@ -147,6 +255,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
 
   return (
     <View>
+      {deleteZoneModalView()}
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('LOCATION.ZONE')} ${zoneName}`}
@@ -183,7 +292,8 @@ const AisleList = (): JSX.Element => {
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
   const userFeatures = useTypedSelector(state => state.User.features);
-  const [apiStart, setApiStart] = useState(0);
+  const [getAislesApiStart, setGetAislesApiStart] = useState(0);
+  const [deleteZoneApiStart, setDeleteZoneApiStart] = useState(0);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const dispatch = useDispatch();
   const route = useRoute();
@@ -210,49 +320,6 @@ const AisleList = (): JSX.Element => {
     navigation.navigate('AddZone');
   };
 
-  const handleDeleteZone = () => {
-    // gibberish
-  };
-
-  const deleteZoneModalView = () => (
-    <CustomModalComponent
-      isVisible={displayConfirmation}
-      onClose={() => setDisplayConfirmation(false)}
-      modalType="Error"
-    >
-      {deleteZoneApi.isWaiting ? (
-        <ActivityIndicator
-          animating={deleteZoneApi.isWaiting}
-          hidesWhenStopped
-          color={COLOR.MAIN_THEME_COLOR}
-          size="large"
-          style={styles.activityIndicator}
-        />
-      ) : (
-        <>
-          <Text style={styles.message}>
-            {`${strings('LOCATION.REMOVE_ZONE_CONFIRMATION')}`}
-            {`${strings('LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS')}`}
-          </Text>
-          <View style={styles.buttonContainer}>
-            <Button
-              style={styles.delButton}
-              title={strings('GENERICS.CANCEL')}
-              backgroundColor={COLOR.TRACKER_RED}
-              onPress={() => setDisplayConfirmation(false)}
-            />
-            <Button
-              style={styles.delButton}
-              title={deleteZoneApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
-              backgroundColor={COLOR.MAIN_THEME_COLOR}
-              onPress={handleDeleteZone}
-            />
-          </View>
-        </>
-      )}
-    </CustomModalComponent>
-  );
-
   return (
     <BottomSheetModalProvider>
       <TouchableOpacity
@@ -267,9 +334,14 @@ const AisleList = (): JSX.Element => {
           navigation={navigation}
           dispatch={dispatch}
           getAllAisles={getAllAisles}
+          deleteZoneApi={deleteZoneApi}
           isManualScanEnabled={isManualScanEnabled}
-          apiStart={apiStart}
-          setApiStart={setApiStart}
+          getAislesApiStart={getAislesApiStart}
+          setGetAislesApiStart={setGetAislesApiStart}
+          deleteZoneApiStart={deleteZoneApiStart}
+          setDeleteZoneApiStart={setDeleteZoneApiStart}
+          displayConfirmation={displayConfirmation}
+          setDisplayConfirmation={setDisplayConfirmation}
           route={route}
           useEffectHook={useEffect}
           trackEventCall={trackEvent}
@@ -291,7 +363,10 @@ const AisleList = (): JSX.Element => {
             isVisible={true}
           />
           <BottomSheetRemoveCard
-            onPress={() => {}}
+            onPress={() => {
+              dispatch(hideLocationPopup());
+              setDisplayConfirmation(true);
+            }}
             text={strings('LOCATION.REMOVE_ZONE')}
             isVisible={userFeatures.includes('manager approval')}
           />
