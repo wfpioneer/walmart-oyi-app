@@ -47,6 +47,20 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1
+  },
+  message: {
+    textAlign: 'center',
+    fontSize: 18,
+    padding: 15
+  },
+  buttonContainer: {
+    width: '100%',
+    alignContent: 'space-around',
+    flexDirection: 'row'
+  },
+  delButton: {
+    flex: 1,
+    paddingHorizontal: 10
   }
 });
 

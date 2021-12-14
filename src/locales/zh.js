@@ -205,7 +205,9 @@ export default {
     PRINT_LABEL_EXISTS_HEADER: '打印既有标签',
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
     SECTIONS_ADDED: '已添加 %{number} 个货架位置',
-    ADD_SECTIONS_ERROR: '添加货架时错误，请重试.'
+    ADD_SECTIONS_ERROR: '添加货架时错误，请重试.',
+    DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}', // TODO add translation
+    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again' // TODO add translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

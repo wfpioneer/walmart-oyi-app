@@ -200,7 +200,7 @@ export const Location = (
     case SET_SELECTED_ITEM:
       return {
         ...state,
-        selectedItem:action.payload
+        selectedItem: action.payload
       };
     case CLEAR_SELECTED_ITEM:
       return {
