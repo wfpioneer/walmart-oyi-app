@@ -66,4 +66,9 @@ export default class LocationService {
       payload
     );
   }
+
+  public static deleteZone(payload: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.delete(`${urls.locationUrl}/zone/${payload}`);
+  }
 }
