@@ -212,6 +212,7 @@ export default {
     ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo',
     REMOVE_ZONE_CONFIRMATION: '¿Estas seguro que quieres eliminar esta zona?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'Esto eliminará todos los pasillos y secciones asociados',
+    REMOVE_ZONE_FAIL: 'Hubo un error eliminando la zona. Por favor inténtalo de nuevo',
     DELETE_ITEM: 'Borrar %{itemNbr} \n%{itemName}',
     ERROR_DELETE_ITEM: 'Hubo un error borrando el artículo. Por favor inténtalo de nuevo'
   },

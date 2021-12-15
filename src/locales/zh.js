@@ -212,6 +212,7 @@ export default {
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
     REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: '移除所有通道和此通道内的货架号',
+    REMOVE_ZONE_FAIL: 'There was an error removing the zone.  Please try again', // TODO add CN translation
     DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}', // TODO add translation
     ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again' // TODO add translation
   },

@@ -414,7 +414,7 @@ describe('Aisle list externalized function tests', () => {
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockSetDisplayConfirmation).toBeCalledTimes(0);
     expect(mockSetDeleteZoneApiStart).toBeCalledTimes(0);
-    expect(mockDispatch).toBeCalledTimes(0);
+    expect(mockDispatch).toBeCalledTimes(1);
     expect(mockGoBack).toBeCalledTimes(0);
     expect(mockTrackApiEvent).toBeCalledTimes(1);
   });

@@ -212,6 +212,7 @@ export default {
     ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again',
     REMOVE_ZONE_CONFIRMATION: 'Are you sure you want to remove this zone?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'This will also remove all aisles and sections associated with it',
+    REMOVE_ZONE_FAIL: 'There was an error removing the zone.  Please try again',
     DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}',
     ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again'
   },

@@ -36,6 +36,7 @@ import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/Bottom
 import Button from '../../components/buttons/Button';
 import { CustomModalComponent } from '../Modal/Modal';
 import { CREATE_FLOW } from '../../models/LocationItems';
+import { showSnackBar } from '../../state/actions/SnackBar';
 
 const NoAisleMessage = () : JSX.Element => (
   <View style={styles.noAisles}>
@@ -78,6 +79,7 @@ export const deleteZoneApiEffect = (
         duration: moment().valueOf() - deleteZoneApiStart,
         reason: deleteZoneApi.error.message || deleteZoneApi.error.toString()
       });
+      dispatch(showSnackBar(strings('LOCATION.REMOVE_ZONE_FAIL'), 3000));
     }
   }
 };
@@ -209,7 +211,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
               title={strings('GENERICS.CANCEL')}
               backgroundColor={COLOR.TRACKER_RED}
               // No need for modal close fn because no apis have been sent
-              onPress={() => setDisplayConfirmation(false)}
+              onPress={() => handleModalClose(setDisplayConfirmation, setDeleteZoneApiStart, dispatch)}
             />
             <Button
               style={styles.delButton}
