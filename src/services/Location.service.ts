@@ -8,6 +8,14 @@ interface Aisle {
   sectionCount: number;
 }
 
+interface createZoneRequest {
+  zoneName: string;
+  aisles: [{
+    aisleName: number,
+    sectionCount: number
+  }];
+}
+
 export default class LocationService {
   public static getAllZones() : Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
@@ -63,6 +71,14 @@ export default class LocationService {
     const urls: Environment = getEnvironment();
     return Request.post(
       `${urls.locationUrl}/section`,
+      payload
+    );
+  }
+
+  public static createZone(payload: createZoneRequest ) {
+    const urls: Environment = getEnvironment();
+    return Request.post(
+      `${urls.locationUrl}/zone/aisle/section`,
       payload
     );
   }

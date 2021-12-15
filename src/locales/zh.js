@@ -209,7 +209,11 @@ export default {
     EDIT_ITEM: '编辑商品',
     REMOVE_ITEM: '删除商品',
     PRINT_LABEL_EXISTS_HEADER: '打印既有标签',
-    PRINT_LABEL_EXISTS: '此标签已经在打印清单中'
+    PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
+    ZONE_ADDED: '', // TODO Mandarin Translation
+    ADD_ZONE_ERROR: '', // TODO Mandarin Translation
+    INCOMPLETE_ZONE_ADDED: '', // TODO Mandarin Translation
+    INCOMPLETE_ZONE_PLEASE_CHECK: '' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

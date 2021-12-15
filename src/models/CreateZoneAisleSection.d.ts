@@ -5,6 +5,21 @@ export interface CreateAisleRequest {
   aisles: CreateAisles[]
 }
 
+export interface ZoneAislesSectionResponse {
+  aisleId: number;
+  aisleName: number;
+  createdSectionsResponseDto: CreateAisleSectionsResponse;
+  sectionCount: number;
+  status: number;
+}
+
+export interface CreateZoneAisleSectionResponse {
+  aisles: ZoneAislesSectionResponse[];
+  status: number;
+  zoneId: number;
+  zoneName: string;
+}
+
 export interface CreateAisleResponse {
   aisleId: number;
   aisleName: number;

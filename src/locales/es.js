@@ -209,7 +209,11 @@ export default {
     PRINT_LABEL_EXISTS_HEADER: 'Esta etiqueta ya se mandó a imprimir',
     PRINT_LABEL_EXISTS: 'Esta etiqueta ya existe en la cola de impresión',
     SECTIONS_ADDED: '%{number} secciones agregadas',
-    ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo'
+    ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo',
+    ZONE_ADDED: 'Zona %{name} agregada',
+    ADD_ZONE_ERROR: 'Hubo un error agregando la zona. Por favor inténtalo de nuevo',
+    INCOMPLETE_ZONE_ADDED: 'Zona %{name} agregada, pero no todos los pasillos y secciones se crearon. Por favor revisa la lista de los que si se crearon',
+    INCOMPLETE_ZONE_PLEASE_CHECK: 'Por favor revisa la lista de pasillos y secciones que se crearon'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
