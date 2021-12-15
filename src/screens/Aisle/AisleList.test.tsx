@@ -1,8 +1,9 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, Route } from '@react-navigation/native';
+import _ from 'lodash';
 import { AsyncState } from '../../models/AsyncState';
-import { AisleScreen } from './AisleList';
+import { AisleScreen, deleteZoneApiEffect, handleModalClose } from './AisleList';
 import { mockAisles } from '../../mockData/aisleDetails';
 
 let navigationProp: NavigationProp<any>;
@@ -17,7 +18,7 @@ const defaultAsyncState: AsyncState = {
   result: null
 };
 
-describe('Test Aisle List', () => {
+describe('Aisle List basic render tests', () => {
   it('Renders Aisle Screen with no-aisles-message when getAisles response is 204', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getAislesResult = {
@@ -37,8 +38,13 @@ describe('Test Aisle List', () => {
         dispatch={jest.fn()}
         getAllAisles={getAisleEmptyResponse}
         isManualScanEnabled={false}
-        apiStart={0}
-        setApiStart={jest.fn()}
+        getAislesApiStart={0}
+        setGetAislesApiStart={jest.fn()}
+        deleteZoneApi={_.cloneDeep(defaultAsyncState)}
+        deleteZoneApiStart={0}
+        displayConfirmation={false}
+        setDeleteZoneApiStart={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
@@ -68,8 +74,13 @@ describe('Test Aisle List', () => {
         dispatch={jest.fn()}
         getAllAisles={getAisleSuccess}
         isManualScanEnabled={false}
-        apiStart={0}
-        setApiStart={jest.fn()}
+        getAislesApiStart={0}
+        setGetAislesApiStart={jest.fn()}
+        deleteZoneApi={defaultAsyncState}
+        deleteZoneApiStart={0}
+        displayConfirmation={false}
+        setDeleteZoneApiStart={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
@@ -90,8 +101,100 @@ describe('Test Aisle List', () => {
         dispatch={jest.fn()}
         getAllAisles={defaultAsyncState}
         isManualScanEnabled={true}
-        apiStart={0}
-        setApiStart={jest.fn()}
+        getAislesApiStart={0}
+        setGetAislesApiStart={jest.fn()}
+        deleteZoneApi={defaultAsyncState}
+        deleteZoneApiStart={0}
+        displayConfirmation={false}
+        setDeleteZoneApiStart={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        locationPopupVisible={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders correctly with remove zone modal preconfirm', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    renderer.render(
+      <AisleScreen
+        zoneId={ZONE_ID}
+        zoneName={ZONE_NAME}
+        dispatch={jest.fn()}
+        getAllAisles={defaultAsyncState}
+        isManualScanEnabled={true}
+        getAislesApiStart={0}
+        setGetAislesApiStart={jest.fn()}
+        deleteZoneApi={defaultAsyncState}
+        deleteZoneApiStart={0}
+        displayConfirmation={true}
+        setDeleteZoneApiStart={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        locationPopupVisible={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders correctly with remove zone modal waiting for api', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const waiting = _.cloneDeep(defaultAsyncState);
+    waiting.isWaiting = true;
+
+    renderer.render(
+      <AisleScreen
+        zoneId={ZONE_ID}
+        zoneName={ZONE_NAME}
+        dispatch={jest.fn()}
+        getAllAisles={defaultAsyncState}
+        isManualScanEnabled={true}
+        getAislesApiStart={0}
+        setGetAislesApiStart={jest.fn()}
+        deleteZoneApi={waiting}
+        deleteZoneApiStart={0}
+        displayConfirmation={true}
+        setDeleteZoneApiStart={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        locationPopupVisible={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders correctly with remove zone modal after api errors', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const waiting = _.cloneDeep(defaultAsyncState);
+    waiting.error = 'timeout';
+
+    renderer.render(
+      <AisleScreen
+        zoneId={ZONE_ID}
+        zoneName={ZONE_NAME}
+        dispatch={jest.fn()}
+        getAllAisles={defaultAsyncState}
+        isManualScanEnabled={true}
+        getAislesApiStart={0}
+        setGetAislesApiStart={jest.fn()}
+        deleteZoneApi={waiting}
+        deleteZoneApiStart={0}
+        displayConfirmation={true}
+        setDeleteZoneApiStart={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
@@ -128,8 +231,13 @@ describe('Test Get Aisle Api Response', () => {
           dispatch={jest.fn()}
           getAllAisles={apiErrorResult}
           isManualScanEnabled={false}
-          apiStart={0}
-          setApiStart={jest.fn()}
+          getAislesApiStart={0}
+          setGetAislesApiStart={jest.fn()}
+          deleteZoneApi={defaultAsyncState}
+          deleteZoneApiStart={0}
+          displayConfirmation={false}
+          setDeleteZoneApiStart={jest.fn()}
+          setDisplayConfirmation={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
           useEffectHook={jest.fn()}
@@ -155,8 +263,13 @@ describe('Test Get Aisle Api Response', () => {
         dispatch={jest.fn()}
         getAllAisles={getAisleTimeoutResult}
         isManualScanEnabled={false}
-        apiStart={0}
-        setApiStart={jest.fn()}
+        getAislesApiStart={0}
+        setGetAislesApiStart={jest.fn()}
+        deleteZoneApi={defaultAsyncState}
+        deleteZoneApiStart={0}
+        displayConfirmation={false}
+        setDeleteZoneApiStart={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
@@ -182,8 +295,13 @@ describe('Test Get Aisle Api Response', () => {
         dispatch={jest.fn()}
         getAllAisles={getAisleResponseFailure}
         isManualScanEnabled={false}
-        apiStart={0}
-        setApiStart={jest.fn()}
+        getAislesApiStart={0}
+        setGetAislesApiStart={jest.fn()}
+        deleteZoneApi={defaultAsyncState}
+        deleteZoneApiStart={0}
+        displayConfirmation={false}
+        setDeleteZoneApiStart={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
@@ -209,8 +327,13 @@ describe('Test Get Aisle Api Response', () => {
         dispatch={jest.fn()}
         getAllAisles={getAisleIsWaiting}
         isManualScanEnabled={false}
-        apiStart={0}
-        setApiStart={jest.fn()}
+        getAislesApiStart={0}
+        setGetAislesApiStart={jest.fn()}
+        deleteZoneApi={defaultAsyncState}
+        deleteZoneApiStart={0}
+        displayConfirmation={false}
+        setDeleteZoneApiStart={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
         useEffectHook={jest.fn()}
@@ -219,5 +342,80 @@ describe('Test Get Aisle Api Response', () => {
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+});
+
+describe('Aisle list externalized function tests', () => {
+  it('ensures handleModalClose calls the correct amount of functions', () => {
+    const mockSetDisplayConfirmation = jest.fn();
+    const mockSetDeleteZoneApiStart = jest.fn();
+    const mockDispatch = jest.fn();
+
+    handleModalClose(mockSetDisplayConfirmation, mockSetDeleteZoneApiStart, mockDispatch);
+    expect(mockSetDisplayConfirmation).toBeCalledWith(false);
+    expect(mockSetDeleteZoneApiStart).toBeCalledWith(0);
+    expect(mockDispatch).toBeCalledWith({ type: 'API/DELETE_ZONE/RESET' });
+  });
+
+  it('ensures delete zone API works on success', () => {
+    const mockDispatch = jest.fn();
+    const mockSetDeleteZoneApiStart = jest.fn();
+    const mockSetDisplayConfirmation = jest.fn();
+    const mockTrackApiEvent = jest.fn();
+    const deleteZoneApiSuccess = _.cloneDeep(defaultAsyncState);
+    deleteZoneApiSuccess.result = { status: 204 };
+    const mockGoBack = jest.fn();
+    const mockIsFocused = jest.fn(() => true);
+
+    // @ts-ignore
+    navigationProp = { goBack: mockGoBack, isFocused: mockIsFocused };
+
+    deleteZoneApiEffect(
+      mockDispatch,
+      navigationProp,
+      deleteZoneApiSuccess,
+      0,
+      mockSetDeleteZoneApiStart,
+      mockSetDisplayConfirmation,
+      mockTrackApiEvent
+    );
+
+    expect(mockIsFocused).toBeCalledTimes(1);
+    expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
+    expect(mockSetDeleteZoneApiStart).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledTimes(1);
+    expect(mockGoBack).toBeCalledTimes(1);
+    expect(mockTrackApiEvent).toBeCalledTimes(1);
+  });
+
+  it('ensures delete zone API works on fail', () => {
+    const mockDispatch = jest.fn();
+    const mockSetDeleteZoneApiStart = jest.fn();
+    const mockSetDisplayConfirmation = jest.fn();
+    const mockTrackApiEvent = jest.fn();
+    const deleteZoneApiSuccess = _.cloneDeep(defaultAsyncState);
+    deleteZoneApiSuccess.error = { status: 400, message: 'bad request' };
+    const mockGoBack = jest.fn();
+    const mockIsFocused = jest.fn(() => true);
+
+    // @ts-ignore
+    navigationProp = { goBack: mockGoBack, isFocused: mockIsFocused };
+
+    deleteZoneApiEffect(
+      mockDispatch,
+      navigationProp,
+      deleteZoneApiSuccess,
+      0,
+      mockSetDeleteZoneApiStart,
+      mockSetDisplayConfirmation,
+      mockTrackApiEvent
+    );
+
+    expect(mockIsFocused).toBeCalledTimes(1);
+    expect(mockSetDisplayConfirmation).toBeCalledTimes(0);
+    expect(mockSetDeleteZoneApiStart).toBeCalledTimes(0);
+    expect(mockDispatch).toBeCalledTimes(1);
+    expect(mockGoBack).toBeCalledTimes(0);
+    expect(mockTrackApiEvent).toBeCalledTimes(1);
   });
 });

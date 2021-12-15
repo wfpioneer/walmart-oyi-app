@@ -17,7 +17,7 @@ interface createZoneRequest {
 }
 
 export default class LocationService {
-  public static getAllZones() : Promise<AxiosResponse<unknown>> {
+  public static getAllZones(): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.get(
       `${urls.locationUrl}/zone`,
@@ -25,7 +25,7 @@ export default class LocationService {
     );
   }
 
-  public static getAisle(payload: {zoneId: number}) : Promise<AxiosResponse<unknown>> {
+  public static getAisle(payload: { zoneId: number }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.get(
       `${urls.locationUrl}/zone/${payload.zoneId}/aisle`,
@@ -33,7 +33,7 @@ export default class LocationService {
     );
   }
 
-  public static getSections(payload: { aisleId: number}) : Promise<AxiosResponse<unknown>> {
+  public static getSections(payload: { aisleId: number }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.get(
       `${urls.locationUrl}/aisle/${payload.aisleId}/section`,
@@ -41,14 +41,14 @@ export default class LocationService {
     );
   }
 
-  public static getSectionDetails(payload: {sectionId: string}): Promise<AxiosResponse<unknown>> {
+  public static getSectionDetails(payload: { sectionId: string }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.get(
       `${urls.locationUrl}/v1/section/${payload.sectionId}/detail`
     );
   }
 
-  public static getPalletDetails(payload: {palletIds: number[]}): Promise<AxiosResponse<unknown>> {
+  public static getPalletDetails(payload: { palletIds: number[] }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     const queryParam = payload.palletIds.join(',');
 
@@ -67,7 +67,7 @@ export default class LocationService {
     );
   }
 
-  public static createSections(payload: Aisle[] ) {
+  public static createSections(payload: Aisle[]) {
     const urls: Environment = getEnvironment();
     return Request.post(
       `${urls.locationUrl}/section`,
@@ -75,11 +75,16 @@ export default class LocationService {
     );
   }
 
-  public static createZone(payload: createZoneRequest ) {
+  public static createZone(payload: createZoneRequest) {
     const urls: Environment = getEnvironment();
     return Request.post(
       `${urls.locationUrl}/zone/aisle/section`,
       payload
     );
+  }
+
+  public static deleteZone(payload: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.delete(`${urls.locationUrl}/zone/${payload}`);
   }
 }
