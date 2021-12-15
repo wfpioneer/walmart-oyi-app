@@ -212,8 +212,7 @@ export default {
     ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again',
     ZONE_ADDED: 'Zone %{name} added',
     ADD_ZONE_ERROR: 'There was an error adding the zone. Please try again',
-    INCOMPLETE_ZONE_ADDED: 'Zone %{name} added, but not all aisles/sections were created. Please check the list of aisles and sections that were created',
-    INCOMPLETE_ZONE_PLEASE_CHECK: 'Please check the list of aisles and sections that were created'
+    INCOMPLETE_ZONE_ADDED: 'Zone %{name} added, but not all aisles/sections were created. Please check the list of aisles and sections that were created'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

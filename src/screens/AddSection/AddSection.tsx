@@ -238,22 +238,25 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
   props.useEffectHook(() => {
     if (!props.createZoneAPI.isWaiting && props.createZoneAPI.result) {
       props.dispatch(hideActivityModal());
-      const createdZoneAislesSection = createZoneAPI.result.data as Array<CreateZoneAisleSectionResponse>;
       switch (props.createZoneAPI.result.status) {
         case 200:
           props.dispatch(
-            showSnackBar(strings('LOCATION.ZONE_ADDED', { name: props.possibleZones.find(zone => zone.name === props.newZone)?.description }), 3000)
+            showSnackBar(strings('LOCATION.ZONE_ADDED', {
+              name:
+              props.possibleZones.find(zone => zone.name === props.newZone)?.description
+            }), 3000)
           );
           props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
           props.navigation.navigate('Zones');
           break;
         case 207: {
-          dispatch(showSnackBar(
-            `${strings('LOCATION.INCOMPLETE_ZONE_ADDED').replace('{name}', props.possibleZones.find(zone => zone.name === props.newZone)?.description)}`
-            + `\n${strings('LOCATION.INCOMPLETE_ZONE_PLEASE_CHECK')}`,
-            3000
-          ));
-          dispatch({ type: 'API/POST_CREATE_ZONE/RESET' });
+          props.dispatch(
+            showSnackBar(strings('LOCATION.INCOMPLETE_ZONE_ADDED', {
+              name:
+              props.possibleZones.find(zone => zone.name === props.newZone)?.description
+            }), 3000)
+          );
+          props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
           navigation.navigate('Zones');
           break;
         }
