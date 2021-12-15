@@ -212,7 +212,9 @@ export default {
     ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again',
     ZONE_ADDED: 'Zone %{name} added',
     ADD_ZONE_ERROR: 'There was an error adding the zone. Please try again',
-    INCOMPLETE_ZONE_ADDED: 'Zone %{name} added, but not all aisles/sections were created. Please check the list of aisles and sections that were created'
+    INCOMPLETE_ZONE_ADDED: 'Zone %{name} added, but not all aisles/sections were created. Please check the list of aisles and sections that were created',
+    DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}',
+    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

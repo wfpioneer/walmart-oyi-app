@@ -212,7 +212,9 @@ export default {
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
     ZONE_ADDED: '', // TODO Mandarin Translation
     ADD_ZONE_ERROR: '', // TODO Mandarin Translation
-    INCOMPLETE_ZONE_ADDED: '' // TODO Mandarin Translation
+    INCOMPLETE_ZONE_ADDED: '', // TODO Mandarin Translation
+    DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}', // TODO add translation
+    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again' // TODO add translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
