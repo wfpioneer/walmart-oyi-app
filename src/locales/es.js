@@ -199,12 +199,22 @@ export default {
     FLOOR_EMPTY: 'La lista de Piso está vacía',
     RESERVE_EMPTY: 'La lista de Bodega está vacía',
     GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
+    AISLES_ADDED: '{number} pasillos agregados',
+    INCOMPLETE_AISLES_ADDED: 'No todos los pasillos/secciones se crearon. Sólo {number} pasillos/secciones se agregaron',
+    INCOMPLETE_AISLES_PLEASE_CHECK: 'Por favor revisa la lista de pasillos y secciones que se crearon',
+    ADD_AISLES_ERROR: 'Hubo un error agregando pasillos/secciones. Por favor inténtalo de nuevo',
+    SECTION_NOT_FOUND: 'La sección escaneada no se encontró',
     EDIT_ITEM: 'Editar Artículo',
     REMOVE_ITEM: 'Borrar Artículo',
     PRINT_LABEL_EXISTS_HEADER: 'Esta etiqueta ya se mandó a imprimir',
     PRINT_LABEL_EXISTS: 'Esta etiqueta ya existe en la cola de impresión',
     SECTIONS_ADDED: '%{number} secciones agregadas',
-    ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo'
+    ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo',
+    REMOVE_ZONE_CONFIRMATION: '¿Estas seguro que quieres eliminar esta zona?',
+    REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'Esto eliminará todos los pasillos y secciones asociados',
+    REMOVE_ZONE_FAIL: 'Hubo un error eliminando la zona. Por favor inténtalo de nuevo',
+    DELETE_ITEM: 'Borrar %{itemNbr} \n%{itemName}',
+    ERROR_DELETE_ITEM: 'Hubo un error borrando el artículo. Por favor inténtalo de nuevo'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

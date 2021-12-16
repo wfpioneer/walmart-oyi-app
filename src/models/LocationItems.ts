@@ -19,6 +19,8 @@ export interface SectionDetailsItem {
   itemNbr: number;
   itemDesc: string;
   price: number;
+  upcNbr: string;
+  locationType: number;
 }
 
 export interface SectionDetailsPallet {

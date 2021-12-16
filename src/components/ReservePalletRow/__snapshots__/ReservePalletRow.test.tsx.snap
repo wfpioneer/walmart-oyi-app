@@ -104,7 +104,9 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
           Object {
             "itemDesc": "An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description",
             "itemNbr": 980078597,
+            "locationType": 8,
             "price": 2.4,
+            "upcNbr": "123456789098",
           },
         ],
         "palletCreateTS": "2021-01-01",

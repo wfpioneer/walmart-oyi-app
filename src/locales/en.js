@@ -199,12 +199,22 @@ export default {
     FLOOR_EMPTY: 'The Floor List is empty',
     RESERVE_EMPTY: 'The Reserve List is empty',
     GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallet(s)',
+    AISLES_ADDED: '{number} aisles added',
+    INCOMPLETE_AISLES_ADDED: 'Not all aisles/sections were created. Only {number} aisles/sections were added',
+    INCOMPLETE_AISLES_PLEASE_CHECK: 'Please check the list of aisles and sections that were created',
+    ADD_AISLES_ERROR: 'There was an error adding the aisles/sections.  Please try again',
     EDIT_ITEM: 'Edit an item',
     REMOVE_ITEM: 'Remove an item',
+    SECTION_NOT_FOUND: 'The Scanned Section was not found.',
     PRINT_LABEL_EXISTS_HEADER: 'Print Label Exists',
     PRINT_LABEL_EXISTS: 'This Print Label already Exists in the Print Queue',
     SECTIONS_ADDED: '%{number} section(s) added',
-    ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again'
+    ADD_SECTIONS_ERROR: 'There was an error adding the sections. Please try again',
+    REMOVE_ZONE_CONFIRMATION: 'Are you sure you want to remove this zone?',
+    REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'This will also remove all aisles and sections associated with it',
+    REMOVE_ZONE_FAIL: 'There was an error removing the zone.  Please try again',
+    DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}',
+    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
