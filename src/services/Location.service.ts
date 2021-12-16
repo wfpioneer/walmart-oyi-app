@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
+import { CreateAisleRequest, CreateAisleResponse } from '../models/CreateZoneAisleSection.d';
 
 interface Aisle {
   aisleId: number;
@@ -48,11 +49,26 @@ export default class LocationService {
     );
   }
 
+  public static createLocationAislesSection(payload: { aislesToCreate: CreateAisleRequest }):
+    Promise<AxiosResponse<Array<CreateAisleResponse>>> {
+    const urls: Environment = getEnvironment();
+
+    return Request.post(
+      `${urls.locationUrl}/aisle/section`,
+      payload.aislesToCreate
+    );
+  }
+
   public static createSections(payload: Aisle[] ) {
     const urls: Environment = getEnvironment();
     return Request.post(
       `${urls.locationUrl}/section`,
       payload
     );
+  }
+
+  public static deleteZone(payload: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.delete(`${urls.locationUrl}/zone/${payload}`);
   }
 }

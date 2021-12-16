@@ -5,9 +5,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
   <LocationHeader
     buttonPress={[Function]}
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    isDisabled={true}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -22,7 +24,6 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
     }
   >
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -34,9 +35,10 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
           "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (2)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -48,7 +50,9 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
           "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (3)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
   </MaterialTopTabNavigator>
 </React.Fragment>
 `;
@@ -58,9 +62,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
   <LocationHeader
     buttonPress={[Function]}
     details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    isDisabled={true}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -75,7 +81,6 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
     }
   >
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -87,9 +92,10 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
           "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (0)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -101,7 +107,9 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
           "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (0)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
   </MaterialTopTabNavigator>
 </React.Fragment>
 `;
@@ -111,9 +119,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
   <LocationHeader
     buttonPress={[Function]}
     details="100 [missing \\"en.LOCATION.ITEMS\\" translation], 100 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    isDisabled={true}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -128,7 +138,6 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
     }
   >
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -140,9 +149,10 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
           "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (100)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -154,7 +164,9 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
           "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (100)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
   </MaterialTopTabNavigator>
 </React.Fragment>
 `;
@@ -167,9 +179,11 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
   <LocationHeader
     buttonPress={[Function]}
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    isDisabled={true}
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -184,7 +198,6 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
     }
   >
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -196,9 +209,10 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
           "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (2)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -210,7 +224,9 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
           "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (3)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
   </MaterialTopTabNavigator>
 </React.Fragment>
 `;
@@ -223,9 +239,11 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
   <LocationHeader
     buttonPress={[Function]}
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    isDisabled={true}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -240,7 +258,6 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
     }
   >
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -252,9 +269,10 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
           "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (2)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -266,7 +284,9 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
           "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (3)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
   </MaterialTopTabNavigator>
 </React.Fragment>
 `;
@@ -280,9 +300,11 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
     buttonPress={[Function]}
     buttonText="[missing \\"en.LOCATION.PRINT_LABEL\\" translation]"
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    isDisabled={true}
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
+    swipeEnabled={null}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -297,7 +319,6 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
     }
   >
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -309,9 +330,10 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
           "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (2)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
     <Screen
-      component={[Function]}
       listeners={
         Object {
           "tabPress": [Function],
@@ -323,7 +345,9 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
           "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (3)",
         }
       }
-    />
+    >
+      [Function]
+    </Screen>
   </MaterialTopTabNavigator>
 </React.Fragment>
 `;

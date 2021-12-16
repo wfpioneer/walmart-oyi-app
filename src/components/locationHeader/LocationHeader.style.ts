@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: COLOR.MAIN_THEME_COLOR,
     fontSize: 16
+  },
+  disabledButton: {
+    color: COLOR.DISABLED_BLUE,
+    fontSize: 16
   }
 });
 

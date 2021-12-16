@@ -31,7 +31,7 @@ interface ReserveSectionDetailsProps {
 // Combines the Reserve Response data from the get pallet/sectionDetails api to display creation date.
 export const combineReserveArrays = (
   reserveDetails?: ReserveDetailsPallet[], palletData?: Omit<SectionDetailsPallet, 'items'>[]
-) => {
+): ReserveDetailsPallet[] => {
   let palletDetails: ReserveDetailsPallet[] = [];
   if (reserveDetails && palletData) {
     palletDetails = reserveDetails.map(pallet => {
@@ -53,7 +53,8 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
     addAPI,
     palletIds
   } = props;
-  const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
+  const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data)
+  || undefined;
   const reservePallets: ReserveDetailsPallet[] | undefined = (
     getPalletDetailsApi.result && getPalletDetailsApi.result.data.pallets);
 

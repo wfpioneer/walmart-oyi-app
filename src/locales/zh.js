@@ -199,12 +199,22 @@ export default {
     FLOOR_EMPTY: '楼面清单无商品',
     RESERVE_EMPTY: '存储区域无卡板',
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
+    AISLES_ADDED: '通道号{number}已添加',
+    INCOMPLETE_AISLES_ADDED: '创建通道/货架位置数量缺失，只创建了{number}通道/货架',
+    INCOMPLETE_AISLES_PLEASE_CHECK: '请确认已创建的通道和货架清单',
+    ADD_AISLES_ERROR: '添加通道/货架时出错,请再试一次。',
+    SECTIONS_ADDED: '已添加 %{number} 个货架位置',
+    ADD_SECTIONS_ERROR: '添加货架时错误，请重试.',
     EDIT_ITEM: '编辑商品',
     REMOVE_ITEM: '删除商品',
+    SECTION_NOT_FOUND: 'The Scanned Section was not found.', // TODO Mandarin Translation
     PRINT_LABEL_EXISTS_HEADER: '打印既有标签',
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
-    SECTIONS_ADDED: '已添加 %{number} 个货架位置',
-    ADD_SECTIONS_ERROR: '添加货架时错误，请重试.'
+    REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',
+    REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: '移除所有通道和此通道内的货架号',
+    REMOVE_ZONE_FAIL: 'There was an error removing the zone.  Please try again', // TODO add CN translation
+    DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}', // TODO add translation
+    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again' // TODO add translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

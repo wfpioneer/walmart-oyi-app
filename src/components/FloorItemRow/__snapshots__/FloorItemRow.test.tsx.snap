@@ -36,7 +36,9 @@ exports[`FloorItemRow Component Renders a FloorItem 1`] = `
       Object {
         "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
         "itemNbr": 980078597,
+        "locationType": 8,
         "price": 2.4,
+        "upcNbr": "123456789098",
       }
     }
   />
@@ -79,7 +81,9 @@ exports[`FloorItemRow Component Renders a FloorItem with a long name 1`] = `
       Object {
         "itemDesc": "An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description",
         "itemNbr": 980078597,
+        "locationType": 8,
         "price": 2.4,
+        "upcNbr": "123456789098",
       }
     }
   />

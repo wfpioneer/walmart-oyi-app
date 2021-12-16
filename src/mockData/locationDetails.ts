@@ -18,12 +18,16 @@ export const mockLocationDetails : LocationItem = {
       {
         itemNbr: 980078597,
         itemDesc: 'Nature Valley Sweet and Salty Granola Bars',
-        price: 2.40
+        price: 2.40,
+        upcNbr: '123456789098',
+        locationType: 8
       },
       {
         itemNbr: 980011111,
         itemDesc: 'Nature Valley Honey Bars',
-        price: 5.80
+        price: 5.80,
+        upcNbr: '123456789099',
+        locationType: 8
       }
     ]
   },

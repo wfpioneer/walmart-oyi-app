@@ -7,17 +7,18 @@ interface LocationHeaderProps {
   location: string,
   details: string,
   buttonText?: string,
-  buttonPress?: () => void
+  buttonPress?: () => void,
+  isDisabled?: boolean
 }
 
 export const LocationHeader = (props: LocationHeaderProps) : JSX.Element => {
   const {
-    location, details, buttonText, buttonPress
+    location, details, buttonText, buttonPress, isDisabled
   } = props;
 
   const buttonView = () => (buttonText ? (
-    <TouchableOpacity onPress={buttonPress}>
-      <Text style={styles.buttonText}>{buttonText}</Text>
+    <TouchableOpacity onPress={buttonPress} disabled={isDisabled}>
+      <Text style={isDisabled ? styles.disabledButton : styles.buttonText}>{buttonText}</Text>
     </TouchableOpacity>
   ) : null);
 
@@ -38,7 +39,8 @@ export const LocationHeader = (props: LocationHeaderProps) : JSX.Element => {
 
 LocationHeader.defaultProps = {
   buttonText: undefined,
-  buttonPress: undefined
+  buttonPress: undefined,
+  isDisabled: false
 };
 
 export default LocationHeader;
