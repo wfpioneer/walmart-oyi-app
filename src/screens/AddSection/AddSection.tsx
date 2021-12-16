@@ -25,6 +25,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setAisleSectionCount } from '../../state/actions/Location';
 import { CreateAisleRequest, CreateAisleResponse, CreateZoneAisleSectionResponse } from '../../models/CreateZoneAisleSection.d';
+import { snackBarTimeout } from '../../utils/global';
 
 interface AddSectionProps {
   aislesToCreate: CreateAisles[];
@@ -243,8 +244,9 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
           props.dispatch(
             showSnackBar(strings('LOCATION.ZONE_ADDED', {
               name:
-              props.possibleZones.find(zone => zone.name === props.newZone)?.description
-            }), 3000)
+              props.possibleZones.filter(zone => zone.description != null)
+                .find(zone => zone.name === props.newZone)?.description
+            }), snackBarTimeout)
           );
           props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
           props.navigation.navigate('Zones');
@@ -253,8 +255,9 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
           props.dispatch(
             showSnackBar(strings('LOCATION.INCOMPLETE_ZONE_ADDED', {
               name:
-              props.possibleZones.find(zone => zone.name === props.newZone)?.description
-            }), 3000)
+              props.possibleZones.filter(zone => zone.description != null)
+                .find(zone => zone.name === props.newZone)?.description
+            }), snackBarTimeout)
           );
           props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
           navigation.navigate('Zones');
@@ -364,7 +367,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          title={strings('GENERICS.CONTINUE')}
+          title={strings('GENERICS.SUBMIT')}
           style={styles.doneButton}
           onPress={handleContinue}
           disabled={!validateSectionCounts(props.aislesToCreate, props.existingSections)}

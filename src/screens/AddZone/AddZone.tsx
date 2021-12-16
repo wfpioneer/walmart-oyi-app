@@ -51,7 +51,7 @@ const addZonesToPicker = (
       );
     default:
       return [<Picker.Item label="" value="" key={-1} />,
-      ...availableZones.map((zone: PossibleZone) => {
+      ...availableZones.filter(zone => zone.description != null).map((zone: PossibleZone) => {
         const zoneLabel = `${zone.name} - ${zone.description}`;
         return (
           <Picker.Item label={zoneLabel} value={zone.name} key={zoneLabel} />

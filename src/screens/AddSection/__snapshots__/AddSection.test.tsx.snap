@@ -64,7 +64,7 @@ exports[`AddSection Screen render tests AddSectionScreen with invalid section co
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -147,7 +147,7 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -222,7 +222,7 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -305,7 +305,7 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -380,7 +380,7 @@ exports[`AddSection Screen render tests Waits on the create zone/aisles/sections
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -455,7 +455,7 @@ exports[`AddSection Screen render tests addSectionScreen after createSections ap
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -530,7 +530,7 @@ exports[`AddSection Screen render tests addSectionScreen after createSections ap
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -605,7 +605,7 @@ exports[`AddSection Screen render tests addSectionScreen while waiting for api t
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -680,7 +680,7 @@ exports[`AddSection Screen render tests failed on the create aisles/sections api
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -755,7 +755,7 @@ exports[`AddSection Screen render tests partially succeeded on the create aisles
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -830,7 +830,7 @@ exports[`AddSection Screen render tests partially succeeded on the create aisles
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -905,7 +905,7 @@ exports[`AddSection Screen render tests succeeded on the create aisles/sections 
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -980,7 +980,7 @@ exports[`AddSection Screen render tests succeeded on the create zone/aisles/sect
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -1055,7 +1055,7 @@ exports[`AddSection Screen render tests waits on the create aisles/sections api 
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
