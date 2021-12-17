@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { CREATE_FLOW } from '../../models/LocationItems';
+import { CREATE_FLOW, PossibleZone } from '../../models/LocationItems';
 import { AsyncState } from '../../models/AsyncState';
 import {
   activityModalEffect,
@@ -11,6 +11,7 @@ import {
   validateNumericInput,
   validateSectionCounts
 } from './AddSection';
+import { ZoneAislesSectionResponse } from '../../models/CreateZoneAisleSection.d';
 
 let navigationProp: NavigationProp<any>;
 const defaultCreateAisleSectionApi: AsyncState = {
@@ -20,6 +21,62 @@ const defaultCreateAisleSectionApi: AsyncState = {
   result: null
 };
 const createAislesSectionWaitingApi: AsyncState = {
+  value: {},
+  error: null,
+  isWaiting: true,
+  result: null
+};
+const defaultCreateZoneAisleSectionApi: AsyncState = {
+  value: null,
+  error: null,
+  isWaiting: false,
+  result: null
+};
+const createZoneAisleSectionSuccessApi: AsyncState = {
+  value: {},
+  error: null,
+  isWaiting: false,
+  result: {
+    data: {
+      aisles: [{
+        aisleId: 1,
+        aisleName: 'Name',
+        createdSectionsResponseDto: {
+          aisleId: 1,
+          status: 200,
+          message: 'string',
+          createdSections: ['123', '456']
+        }
+      }],
+      status: 200,
+      zoneId: 35391,
+      zoneName: 'PHAR'
+    }
+  }
+};
+const createZoneAisleSectionPartialSuccessApi: AsyncState = {
+  value: {},
+  error: null,
+  isWaiting: false,
+  result: {
+    data: {
+      aisles: [{
+        aisleId: 1,
+        aisleName: 'Name',
+        createdSectionsResponseDto: {
+          aisleId: 1,
+          status: 200,
+          message: 'string',
+          createdSections: ['123', '456']
+        }
+      }],
+      status: 207,
+      zoneId: 35391,
+      zoneName: 'PHAR'
+    }
+  }
+};
+const createZoneAislesSectionWaitingApi: AsyncState = {
   value: {},
   error: null,
   isWaiting: true,
@@ -155,6 +212,10 @@ describe('AddSection Screen render tests', () => {
   const defaultExistingSections = 0;
   const selectedZone = 'A';
   const renderer = ShallowRenderer.createRenderer();
+  const posssibleZones: PossibleZone[] = [
+    { name: 'A', description: 'TestA' },
+    { name: 'B', description: 'TestB' }
+  ]
   it('AddSectionScreen with valid input from add zone', () => {
     renderer.render(<AddSectionScreen
       aislesToCreate={aislesToCreate}
@@ -173,6 +234,8 @@ describe('AddSection Screen render tests', () => {
       createSectionsAPIStart={0}
       setCreateSectionsAPIStart={jest.fn()}
       useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={defaultCreateZoneAisleSectionApi}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -194,6 +257,8 @@ describe('AddSection Screen render tests', () => {
       createSectionsAPIStart={0}
       setCreateSectionsAPIStart={jest.fn()}
       useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={defaultCreateZoneAisleSectionApi}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -215,6 +280,8 @@ describe('AddSection Screen render tests', () => {
       createSectionsAPIStart={0}
       setCreateSectionsAPIStart={jest.fn()}
       useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={defaultCreateZoneAisleSectionApi}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -236,6 +303,8 @@ describe('AddSection Screen render tests', () => {
       createSectionsAPIStart={0}
       setCreateSectionsAPIStart={jest.fn()}
       useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={defaultCreateZoneAisleSectionApi}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -257,6 +326,8 @@ describe('AddSection Screen render tests', () => {
       modal={{ showActivity: false }}
       navigation={navigationProp}
       useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={defaultCreateZoneAisleSectionApi}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -279,6 +350,8 @@ describe('AddSection Screen render tests', () => {
       navigation={navigationProp}
       modal={{ showActivity: false }}
       useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={defaultCreateZoneAisleSectionApi}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -300,6 +373,8 @@ describe('AddSection Screen render tests', () => {
       modal={{ showActivity: false }}
       navigation={navigationProp}
       useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={defaultCreateZoneAisleSectionApi}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -322,6 +397,8 @@ describe('AddSection Screen render tests', () => {
       navigation={navigationProp}
       modal={{ showActivity: false }}
       useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={defaultCreateZoneAisleSectionApi}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -343,6 +420,8 @@ describe('AddSection Screen render tests', () => {
       modal={{ showActivity: false }}
       navigation={navigationProp}
       useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={defaultCreateZoneAisleSectionApi}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -365,6 +444,8 @@ describe('AddSection Screen render tests', () => {
       navigation={navigationProp}
       modal={{ showActivity: false }}
       useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={defaultCreateZoneAisleSectionApi}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -386,6 +467,78 @@ describe('AddSection Screen render tests', () => {
       modal={{ showActivity: false }}
       navigation={navigationProp}
       useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={defaultCreateZoneAisleSectionApi}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Waits on the create zone/aisles/sections api', () => {
+    renderer.render(<AddSectionScreen
+      aislesToCreate={aisleWithInvilidSectionCount}
+      selectedZone={currentZone}
+      newZone={selectedZone}
+      createFlow={CREATE_FLOW.CREATE_ZONE}
+      dispatch={jest.fn()}
+      existingSections={defaultExistingSections}
+      currentAisle={currentAisle}
+      createAislesApi={defaultCreateAisleSectionApi}
+      createAislesApiStart={0}
+      setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={defaultCreateSectionsAPI}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
+      modal={{ showActivity: false }}
+      navigation={navigationProp}
+      useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={createZoneAislesSectionWaitingApi}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('succeeded on the create zone/aisles/sections api', () => {
+    renderer.render(<AddSectionScreen
+      aislesToCreate={aisleWithInvilidSectionCount}
+      selectedZone={currentZone}
+      newZone={selectedZone}
+      createFlow={CREATE_FLOW.CREATE_ZONE}
+      dispatch={jest.fn()}
+      existingSections={defaultExistingSections}
+      currentAisle={currentAisle}
+      createAislesApi={defaultCreateAisleSectionApi}
+      createAislesApiStart={0}
+      setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={defaultCreateSectionsAPI}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
+      modal={{ showActivity: false }}
+      navigation={navigationProp}
+      useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={createZoneAisleSectionSuccessApi}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('partially succeeded on the create aisles/sections api', () => {
+    renderer.render(<AddSectionScreen
+      aislesToCreate={aisleWithInvilidSectionCount}
+      selectedZone={currentZone}
+      newZone={selectedZone}
+      createFlow={CREATE_FLOW.CREATE_ZONE}
+      dispatch={jest.fn()}
+      existingSections={defaultExistingSections}
+      currentAisle={currentAisle}
+      createAislesApi={defaultCreateAisleSectionApi}
+      createAislesApiStart={0}
+      setCreateAislesApiStart={jest.fn()}
+      createSectionsAPI={defaultCreateSectionsAPI}
+      createSectionsAPIStart={0}
+      setCreateSectionsAPIStart={jest.fn()}
+      modal={{ showActivity: false }}
+      navigation={navigationProp}
+      useEffectHook={jest.fn()}
+      possibleZones={posssibleZones}
+      createZoneAPI={createZoneAisleSectionPartialSuccessApi}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -437,28 +590,28 @@ describe('AddSection screen externalized function tests', () => {
 
     // service call start
     activityModalEffect(
-      navigationProp, activityModalHidden, createAislesSectionWaitingApi, defaultCreateSectionsAPI, mockDispatch
+      navigationProp, activityModalHidden, createAislesSectionWaitingApi, defaultCreateSectionsAPI, mockDispatch, defaultCreateZoneAisleSectionApi
     );
     expect(mockDispatch).toBeCalledTimes(1);
     mockDispatch.mockClear();
 
     // service call in progress
     activityModalEffect(
-      navigationProp, activityModalShowing, createAislesSectionWaitingApi, defaultCreateSectionsAPI, mockDispatch
+      navigationProp, activityModalShowing, createAislesSectionWaitingApi, defaultCreateSectionsAPI, mockDispatch, defaultCreateZoneAisleSectionApi
     );
     expect(mockDispatch).toBeCalledTimes(0);
     mockDispatch.mockClear();
 
     // service call end
     activityModalEffect(
-      navigationProp, activityModalShowing, createAisleSectionSuccessApi, defaultCreateSectionsAPI, mockDispatch
+      navigationProp, activityModalShowing, createAisleSectionSuccessApi, defaultCreateSectionsAPI, mockDispatch, defaultCreateZoneAisleSectionApi
     );
     expect(mockDispatch).toBeCalledTimes(1);
     mockDispatch.mockClear();
 
     // no service call
     activityModalEffect(
-      navigationProp, activityModalHidden, defaultCreateAisleSectionApi, defaultCreateSectionsAPI, mockDispatch
+      navigationProp, activityModalHidden, defaultCreateAisleSectionApi, defaultCreateSectionsAPI, mockDispatch, defaultCreateZoneAisleSectionApi
     );
     expect(mockDispatch).toBeCalledTimes(0);
   });
@@ -470,28 +623,28 @@ describe('AddSection screen externalized function tests', () => {
 
     // service call start
     activityModalEffect(
-      navigationProp, activityModalHidden, defaultCreateAisleSectionApi, createSectionsAPIWaiting, mockDispatch
+      navigationProp, activityModalHidden, defaultCreateAisleSectionApi, createSectionsAPIWaiting, mockDispatch, defaultCreateZoneAisleSectionApi
     );
     expect(mockDispatch).toBeCalledTimes(1);
     mockDispatch.mockClear();
 
     // service call in progress
     activityModalEffect(
-      navigationProp, activityModalShowing, defaultCreateAisleSectionApi, createSectionsAPIWaiting, mockDispatch
+      navigationProp, activityModalShowing, defaultCreateAisleSectionApi, createSectionsAPIWaiting, mockDispatch, defaultCreateZoneAisleSectionApi
     );
     expect(mockDispatch).toBeCalledTimes(0);
     mockDispatch.mockClear();
 
     // service call end
     activityModalEffect(
-      navigationProp, activityModalShowing, defaultCreateAisleSectionApi, createSectionsAPISuccess, mockDispatch
+      navigationProp, activityModalShowing, defaultCreateAisleSectionApi, createSectionsAPISuccess, mockDispatch, defaultCreateZoneAisleSectionApi
     );
     expect(mockDispatch).toBeCalledTimes(1);
     mockDispatch.mockClear();
 
     // no service call
     activityModalEffect(
-      navigationProp, activityModalHidden, defaultCreateAisleSectionApi, defaultCreateSectionsAPI, mockDispatch
+      navigationProp, activityModalHidden, defaultCreateAisleSectionApi, defaultCreateSectionsAPI, mockDispatch, defaultCreateZoneAisleSectionApi
     );
     expect(mockDispatch).toBeCalledTimes(0);
   });

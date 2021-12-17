@@ -34,6 +34,11 @@ export interface LocationIdName {
   id: number;
   name: string;
 }
+export interface CreateZoneRequest {
+  zoneName: string;
+  description: string
+  aisles: CreateAisles[]
+}
 
 export interface CreateAisles {
   aisleName: number | string;
