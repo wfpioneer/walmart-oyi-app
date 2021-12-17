@@ -25,7 +25,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setAisleSectionCount } from '../../state/actions/Location';
 import { CreateAisleRequest, CreateAisleResponse, CreateZoneAisleSectionResponse } from '../../models/CreateZoneAisleSection.d';
-import { snackBarTimeout } from '../../utils/global';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 interface AddSectionProps {
   aislesToCreate: CreateAisles[];
@@ -40,7 +40,7 @@ interface AddSectionProps {
   createAislesApi: AsyncState;
   createAislesApiStart: number;
   setCreateAislesApiStart: React.Dispatch<React.SetStateAction<number>>;
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   createSectionsAPI: AsyncState;
   createSectionsAPIStart: number;
   setCreateSectionsAPIStart: React.Dispatch<React.SetStateAction<number>>;
@@ -244,9 +244,9 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
           props.dispatch(
             showSnackBar(strings('LOCATION.ZONE_ADDED', {
               name:
-              props.possibleZones.filter(zone => zone.description != null)
-                .find(zone => zone.name === props.newZone)?.description
-            }), snackBarTimeout)
+                props.possibleZones.filter(zone => zone.description != null)
+                  .find(zone => zone.name === props.newZone)?.description
+            }), SNACKBAR_TIMEOUT)
           );
           props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
           props.navigation.navigate('Zones');
@@ -255,9 +255,9 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
           props.dispatch(
             showSnackBar(strings('LOCATION.INCOMPLETE_ZONE_ADDED', {
               name:
-              props.possibleZones.filter(zone => zone.description != null)
-                .find(zone => zone.name === props.newZone)?.description
-            }), snackBarTimeout)
+                props.possibleZones.filter(zone => zone.description != null)
+                  .find(zone => zone.name === props.newZone)?.description
+            }), SNACKBAR_TIMEOUT)
           );
           props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
           navigation.navigate('Zones');
