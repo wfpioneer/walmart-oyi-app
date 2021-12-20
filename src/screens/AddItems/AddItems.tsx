@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { trackEvent } from 'appcenter-analytics';
+import moment from 'moment';
 import { addLocation, addPallet, getSectionDetails } from '../../state/actions/saga';
 import Button from '../../components/buttons/Button';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -23,7 +25,7 @@ import { hideActivityModal, showInfoModal } from '../../state/actions/Modal';
 import { LOCATION_TYPES } from '../SelectLocationType/SelectLocationType';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
-interface AddItensScreenProps {
+interface AddItemsScreenProps {
   upc: string;
   updateUPC: React.Dispatch<React.SetStateAction<string>>;
   dispatch: Dispatch<any>;
@@ -31,9 +33,11 @@ interface AddItensScreenProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   section: { id: number | string; name: string; };
   addAPI: AsyncState;
+  createItemsToSectionApiStart: number;
+  setcreateItemsToSectionApiStart: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const AddItemsScreen = (props: AddItensScreenProps): JSX.Element => {
+export const AddItemsScreen = (props: AddItemsScreenProps): JSX.Element => {
   const {
     upc,
     updateUPC,
@@ -41,7 +45,9 @@ export const AddItemsScreen = (props: AddItensScreenProps): JSX.Element => {
     navigation,
     useEffectHook,
     section,
-    addAPI
+    addAPI,
+    createItemsToSectionApiStart,
+    setcreateItemsToSectionApiStart
   } = props;
 
   const itemIDRegex = /^[0-9]+$/;
@@ -62,6 +68,7 @@ export const AddItemsScreen = (props: AddItensScreenProps): JSX.Element => {
     // eslint-disable-next-line no-empty
     if (!addAPI.isWaiting && addAPI.result) {
       props.dispatch(hideActivityModal());
+      trackEvent('create_items_to_section_success', { duration: moment().valueOf() - createItemsToSectionApiStart });
       dispatch(getSectionDetails({ sectionId: section.id.toString() }));
       dispatch(showSnackBar(strings('LOCATION.ITEM_ADDED'), SNACKBAR_TIMEOUT));
       navigation.goBack();
@@ -70,6 +77,13 @@ export const AddItemsScreen = (props: AddItensScreenProps): JSX.Element => {
     // on api failure
     if (!addAPI.isWaiting && addAPI.error) {
       props.dispatch(hideActivityModal());
+      trackEvent(
+        'create_items_to_section_failure',
+        {
+          errorDetails: addAPI.error.message || addAPI.error,
+          duration: moment().valueOf() - createItemsToSectionApiStart
+        }
+      );
       dispatch(showInfoModal(strings('LOCATION.ADD_ITEM_ERROR'), strings('LOCATION.ADD_ITEM_API_ERROR')));
     }
   }, [addAPI]);
@@ -98,6 +112,7 @@ export const AddItemsScreen = (props: AddItensScreenProps): JSX.Element => {
 
   const submitUpc = () => {
     if (upc.match(itemIDRegex)) {
+      setcreateItemsToSectionApiStart(moment().valueOf());
       dispatch(addLocation({
         upc,
         sectionId: section.id,
@@ -139,6 +154,7 @@ const AddItems = (): JSX.Element => {
   const navigation = useNavigation();
   const section = useTypedSelector(state => state.Location.selectedSection);
   const addAPI = useTypedSelector(state => state.async.addLocation);
+  const [createItemsToSectionApiStart, setcreateItemsToSectionApiStart] = useState(0);
   return (
     <AddItemsScreen
       upc={upc}
@@ -148,6 +164,8 @@ const AddItems = (): JSX.Element => {
       useEffectHook={useEffect}
       section={section}
       addAPI={addAPI}
+      createItemsToSectionApiStart={createItemsToSectionApiStart}
+      setcreateItemsToSectionApiStart={setcreateItemsToSectionApiStart}
     />
   );
 };
