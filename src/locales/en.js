@@ -222,7 +222,10 @@ export default {
     SCAN_ITEM: 'Scan Item',
     ITEM_ADDED: 'Item Successfully Added',
     ADD_ITEM_ERROR: 'Error adding the item',
-    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.'
+    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.',
+    REMOVE_AISLE_CONFIRMATION: 'Are you sure you want to remove this aisle?',
+    REMOVE_AISLE_WILL_REMOVE_SECTIONS: 'This will also remove all sections associated with it',
+    REMOVE_AISLE_FAIL: 'There was an error removing the aisle.  Please try again'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

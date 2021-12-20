@@ -30,7 +30,8 @@ export const asyncReducer = combineReducers({
   postCreateAisles: makeAsyncReducer(asyncActions.POST_CREATE_AISLES),
   createSections: makeAsyncReducer(asyncActions.CREATE_SECTIONS),
   postCreateZone: makeAsyncReducer(asyncActions.CREATE_ZONE),
-  deleteZone: makeAsyncReducer(asyncActions.DELETE_ZONE)
+  deleteZone: makeAsyncReducer(asyncActions.DELETE_ZONE),
+  deleteAisle: makeAsyncReducer(asyncActions.DELETE_AISLE)
 });
 
 export default asyncReducer;
