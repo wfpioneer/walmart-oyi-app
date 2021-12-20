@@ -217,7 +217,12 @@ export default {
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'This will also remove all aisles and sections associated with it',
     REMOVE_ZONE_FAIL: 'There was an error removing the zone.  Please try again',
     DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}',
-    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again'
+    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again',
+    UPC_VALIDATE_ERROR: 'UPC can only contain numbers',
+    SCAN_ITEM: 'Scan Item',
+    ITEM_ADDED: 'Item Successfully Added',
+    ADD_ITEM_ERROR: 'Error adding the item',
+    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

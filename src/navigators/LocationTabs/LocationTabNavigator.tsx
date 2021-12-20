@@ -66,7 +66,7 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
   } = props;
   const navigation = useNavigation();
   const addNewLocation = () => {
-    navigation.navigate('AddLocation');
+    navigation.navigate('AddItems');
   };
   const addNewPallet = () => {
     navigation.navigate('AddPallet');
