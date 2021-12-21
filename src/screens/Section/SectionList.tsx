@@ -113,6 +113,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
           duration: moment().valueOf() - deleteAisleApiStart
         });
         handleModalClose(setDisplayConfirmation, setDeleteAisleApiStart, dispatch);
+        dispatch(showSnackBar(strings('LOCATION.AISLE_REMOVED'), SNACKBAR_TIMEOUT));
         navigation.goBack();
       }
       if (deleteAisleApi.error) {

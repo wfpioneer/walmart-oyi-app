@@ -225,7 +225,8 @@ export default {
     ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.',
     REMOVE_AISLE_CONFIRMATION: 'Are you sure you want to remove this aisle?',
     REMOVE_AISLE_WILL_REMOVE_SECTIONS: 'This will also remove all sections associated with it',
-    REMOVE_AISLE_FAIL: 'There was an error removing the aisle.  Please try again'
+    REMOVE_AISLE_FAIL: 'There was an error removing the aisle.  Please try again',
+    AISLE_REMOVED: 'Aisle removed successfully'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

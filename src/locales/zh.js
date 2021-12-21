@@ -210,9 +210,9 @@ export default {
     SECTION_NOT_FOUND: 'The Scanned Section was not found.', // TODO Mandarin Translation
     PRINT_LABEL_EXISTS_HEADER: '打印既有标签',
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
-    ZONE_ADDED: 'Zone %{name} added', // TODO Mandarin Translation
-    ADD_ZONE_ERROR: 'There was an error adding the zone. Please try again', // TODO Mandarin Translation
-    INCOMPLETE_ZONE_ADDED: 'Zone %{name} added, but not all aisles/sections were created. Please check the list of aisles and sections that were created', // TODO Mandarin Translation
+    ZONE_ADDED: '区域 %{name} 已添加',
+    ADD_ZONE_ERROR: '添加区域失败，请重试。',
+    INCOMPLETE_ZONE_ADDED: '区域 %{name} 已添加， 但是仅部分通道/货架创建成功，请检查已创建的通道/货架清单',
     REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: '移除所有通道和此通道内的货架号',
     REMOVE_ZONE_FAIL: 'There was an error removing the zone.  Please try again', // TODO add CN translation
@@ -225,7 +225,8 @@ export default {
     ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.', // TODO Mandarin Translation
     REMOVE_AISLE_CONFIRMATION: 'Are you sure you want to remove this aisle?', // TODO Mandarin Translation
     REMOVE_AISLE_WILL_REMOVE_SECTIONS: 'This will also remove all sections associated with it', // TODO Mandarin Translation
-    REMOVE_AISLE_FAIL: 'There was an error removing the aisle.  Please try again' // TODO Mandarin Translation
+    REMOVE_AISLE_FAIL: 'There was an error removing the aisle.  Please try again', // TODO Mandarin Translation
+    AISLE_REMOVED: 'Aisle removed successfully' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
