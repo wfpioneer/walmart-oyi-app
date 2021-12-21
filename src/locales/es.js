@@ -137,7 +137,7 @@ export default {
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Spanish translation
     DUPLICATE_PRINTER: 'Una impresora ya existe',
-    SOME_PRINTS_FAILED: 'Some items failed to print' // TODO Spanish translation
+    SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
