@@ -116,6 +116,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="AddItems"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
+      }
+    }
+  />
 </StackNavigator>
 `;
 
@@ -232,6 +241,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     options={
       Object {
         "headerTitle": "[missing \\"en.LOCATION.ADD_SECTIONS\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddItems"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
       }
     }
   />
@@ -354,6 +372,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="AddItems"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
+      }
+    }
+  />
 </StackNavigator>
 `;
 
@@ -470,6 +497,15 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     options={
       Object {
         "headerTitle": "[missing \\"en.LOCATION.ADD_SECTIONS\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddItems"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
       }
     }
   />

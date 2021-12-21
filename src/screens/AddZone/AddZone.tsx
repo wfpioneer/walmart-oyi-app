@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { EffectCallback, useEffect, useLayoutEffect, useState } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -16,6 +16,9 @@ import styles from './AddZone.style';
 import { CREATE_FLOW, PossibleZone, ZoneItem } from '../../models/LocationItems';
 import { setAislesToCreate, setNewZone } from '../../state/actions/Location';
 import { strings } from '../../locales';
+import { AsyncState } from '../../models/AsyncState';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { showSnackBar } from '../../state/actions/SnackBar';
 
 interface AddZoneScreenProps {
   zones: ZoneItem[];
@@ -48,12 +51,12 @@ const addZonesToPicker = (
       );
     default:
       return [<Picker.Item label="" value="" key={-1} />,
-        ...availableZones.map((zone: PossibleZone) => {
-          const zoneLabel = `${zone.name} - ${zone.description}`;
-          return (
-            <Picker.Item label={zoneLabel} value={zone.name} key={zoneLabel} />
-          );
-        })];
+      ...availableZones.filter(zone => zone.description != null).map((zone: PossibleZone) => {
+        const zoneLabel = `${zone.name} - ${zone.description}`;
+        return (
+          <Picker.Item label={zoneLabel} value={zone.name} key={zoneLabel} />
+        );
+      })];
   }
 };
 
@@ -206,6 +209,7 @@ const AddZone = (): JSX.Element => {
       existingAisles={existingAisles}
       dispatch={dispatch}
       navigation={navigation}
+      useEffectHook={useEffect}
     />
   );
 };

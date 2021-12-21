@@ -64,7 +64,7 @@ exports[`AddSection Screen render tests AddSectionScreen with invalid section co
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -147,7 +147,7 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -222,7 +222,7 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -305,7 +305,82 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`AddSection Screen render tests Waits on the create zone/aisles/sections api 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 0.9,
+        "justifyContent": "flex-start",
+        "marginTop": 5,
+      }
+    }
+  >
+    <FlatList
+      data={
+        Array [
+          Object {
+            "aisleName": 1,
+            "sectionCount": 100,
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -380,7 +455,7 @@ exports[`AddSection Screen render tests addSectionScreen after createSections ap
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -455,7 +530,7 @@ exports[`AddSection Screen render tests addSectionScreen after createSections ap
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -530,7 +605,7 @@ exports[`AddSection Screen render tests addSectionScreen while waiting for api t
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -605,7 +680,7 @@ exports[`AddSection Screen render tests failed on the create aisles/sections api
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -680,7 +755,82 @@ exports[`AddSection Screen render tests partially succeeded on the create aisles
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`AddSection Screen render tests partially succeeded on the create aisles/sections api 2`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 0.9,
+        "justifyContent": "flex-start",
+        "marginTop": 5,
+      }
+    }
+  >
+    <FlatList
+      data={
+        Array [
+          Object {
+            "aisleName": 1,
+            "sectionCount": 100,
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -755,7 +905,82 @@ exports[`AddSection Screen render tests succeeded on the create aisles/sections 
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`AddSection Screen render tests succeeded on the create zone/aisles/sections api 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 0.9,
+        "justifyContent": "flex-start",
+        "marginTop": 5,
+      }
+    }
+  >
+    <FlatList
+      data={
+        Array [
+          Object {
+            "aisleName": 1,
+            "sectionCount": 100,
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -830,7 +1055,7 @@ exports[`AddSection Screen render tests waits on the create aisles/sections api 
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
