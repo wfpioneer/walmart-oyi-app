@@ -4,6 +4,8 @@ import {
   ADD_TO_PRINT_QUEUE,
   Actions,
   DELETE_FROM_PRINTER_LIST,
+  REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR,
+  REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC,
   SET_PRINTING_LOCATION_LABELS,
   SET_PRINT_QUEUE,
   SET_SELECTED_PRINTER,
@@ -86,6 +88,30 @@ export const Print = (state = initialState, action: Actions): StateType => {
         ...state,
         printQueue: printQueue.concat(action.payload)
       };
+    case REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR: {
+      const newQueue: PrintQueueItem[] = [];
+      printQueue.forEach(item => {
+        if (!item.itemNbr || (item.itemNbr && !action.payload.includes(item.itemNbr))) {
+          newQueue.push(item);
+        }
+      });
+      return {
+        ...state,
+        printQueue: newQueue
+      };
+    }
+    case REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC: {
+      const newQueue: PrintQueueItem[] = [];
+      printQueue.forEach(item => {
+        if (!item.upcNbr || (item.upcNbr && !action.payload.includes(item.upcNbr))) {
+          newQueue.push(item);
+        }
+      });
+      return {
+        ...state,
+        printQueue: newQueue
+      };
+    }
     case SET_PRINT_QUEUE:
       return {
         ...state,

@@ -136,7 +136,8 @@ export default {
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
     PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Mandarin Translation
-    DUPLICATE_PRINTER: '现存打印机'
+    DUPLICATE_PRINTER: '现存打印机',
+    SOME_PRINTS_FAILED: '有些商品打印失败'
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -207,7 +208,7 @@ export default {
     ADD_SECTIONS_ERROR: '添加货架时错误，请重试.',
     EDIT_ITEM: '编辑商品',
     REMOVE_ITEM: '删除商品',
-    SECTION_NOT_FOUND: 'The Scanned Section was not found.', // TODO Mandarin Translation
+    SECTION_NOT_FOUND: '扫描的货架标签没收到',
     PRINT_LABEL_EXISTS_HEADER: '打印既有标签',
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
     REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',

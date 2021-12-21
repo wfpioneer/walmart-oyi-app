@@ -6,6 +6,8 @@ export const ADD_TO_PRINTER_LIST = 'PRINT/ADD_TO_PRINTER_LIST';
 export const DELETE_FROM_PRINTER_LIST = 'PRINT/DELETE_FROM_PRINTER_LIST';
 export const ADD_TO_PRINT_QUEUE = 'PRINT/ADD_TO_PRINT_QUEUE';
 export const ADD_MULTIPLE_TO_PRINT_QUEUE = 'PRINT/ADD_MULTIPLE_TO_PRINT_QUEUE';
+export const REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR = 'PRINT/REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR';
+export const REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC = 'PRINT/REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC';
 export const SET_PRINT_QUEUE = 'PRINT/SET_PRINT_QUEUE';
 export const SET_PRINTING_LOCATION_LABELS = 'PRINT/SET_PRINTING_LOCATION_LABELS';
 export const UNSET_PRINTING_LOCATION_LABELS = 'PRINT/UNSET_PRINTING_LOCATION_LABELS';
@@ -40,6 +42,16 @@ export const addMultipleToPrintQueue = (labels: PrintQueueItem[]) => ({
   payload: labels
 } as const);
 
+export const removeMultipleFromPrintQueueByItemNbr = (itemNbrs: number[]) => ({
+  type: REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR,
+  payload: itemNbrs
+} as const);
+
+export const removeMultipleFromPrintQueueByUpc = (upcs: string[]) => ({
+  type: REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC,
+  payload: upcs
+} as const);
+
 export const setPrintQueue = (printQueue: PrintQueueItem[]) => ({
   type: SET_PRINT_QUEUE,
   payload: printQueue
@@ -61,6 +73,8 @@ export type Actions =
 | ReturnType<typeof deleteFromPrinterList>
 | ReturnType<typeof addToPrintQueue>
 | ReturnType<typeof addMultipleToPrintQueue>
+| ReturnType<typeof removeMultipleFromPrintQueueByItemNbr>
+| ReturnType<typeof removeMultipleFromPrintQueueByUpc>
 | ReturnType<typeof setPrintQueue>
 | ReturnType<typeof setPrintingLocationLabels>
 | ReturnType<typeof unsetPrintingLocationLabels>

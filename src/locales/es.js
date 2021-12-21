@@ -136,7 +136,8 @@ export default {
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Spanish translation
-    DUPLICATE_PRINTER: 'Una impresora ya existe' // TODO Spanish translation
+    DUPLICATE_PRINTER: 'Una impresora ya existe',
+    SOME_PRINTS_FAILED: 'Some items failed to print' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
