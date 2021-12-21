@@ -120,7 +120,7 @@ export const Location = (
     case SET_AISLES:
       return {
         ...state,
-        aisles: action.payload
+        aisles: action.payload || [] // Set aisles to empty array if payload is falsy
       };
     case SELECT_SECTION: {
       return {
