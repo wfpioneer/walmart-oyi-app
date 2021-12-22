@@ -1,7 +1,8 @@
 import React, {
-  EffectCallback, useEffect, useMemo, useRef
+  EffectCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
+  ActivityIndicator,
   Text, TouchableOpacity, View
 } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -32,6 +33,7 @@ import Button from '../../components/buttons/Button';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
 import { LocationName } from '../../models/Location';
 import ReserveSectionDetails from '../../screens/SectionDetails/ReserveSectionDetails';
+import { CustomModalComponent } from '../../screens/Modal/Modal';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -276,6 +278,8 @@ const LocationTabs = () : JSX.Element => {
   const route = useRoute();
   const locItem: LocationItem | undefined = (result && result.data);
   const locationName = `${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`;
+  const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
+  const [clearSectionApiStart, setClearSectionApiStart] = useState(0);
 
   const bottomSheetLocationDetailsModalRef = useRef<BottomSheetModal>(null);
 
@@ -291,6 +295,53 @@ const LocationTabs = () : JSX.Element => {
       }
     }
   }, [locationPopupVisible]);
+
+  const clearSectionModalView = () => (
+    <CustomModalComponent
+      isVisible={displayClearConfirmation}
+      onClose={() => handleModalClose(setDisplayClearConfirmation, setClearSectionApiStart, dispatch)}
+      modalType="Error"
+    >
+      {deleteZoneApi.isWaiting ? (
+        <ActivityIndicator
+          animating={deleteZoneApi.isWaiting}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.activityIndicator}
+        />
+      ) : (
+        <>
+          <View style={styles.confirmationTextView}>
+            <Text style={styles.confirmation}>
+              {`${strings('LOCATION.CLEAR_SECTION_CONFIRMATION')}`}
+            </Text>
+            <Text style={styles.confirmationExtraText}>
+              {`${strings('LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS')}`}
+            </Text>
+            <Text style={styles.confirmationExtraText}>
+              {`${strings('LOCATION.CLEAR_SECTION_WONT_DELETE')}`}
+            </Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.delButton}
+              title={strings('GENERICS.CANCEL')}
+              backgroundColor={COLOR.TRACKER_RED}
+              // No need for modal close fn because no apis have been sent
+              onPress={() => handleModalClose(setDisplayClearConfirmation, setClearSectionApiStart, dispatch)}
+            />
+            <Button
+              style={styles.delButton}
+              title={deleteZoneApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+              backgroundColor={COLOR.MAIN_THEME_COLOR}
+              onPress={handleDeleteZone}
+            />
+          </View>
+        </>
+      )}
+    </CustomModalComponent>
+  );
 
   return (
     <BottomSheetModalProvider>

@@ -222,7 +222,12 @@ export default {
     SCAN_ITEM: 'Scan Item',
     ITEM_ADDED: 'Item Successfully Added',
     ADD_ITEM_ERROR: 'Error adding the item',
-    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.'
+    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.',
+    CLEAR_SECTION_CONFIRMATION: 'Are you sure you want to clear this section?',
+    CLEAR_SECTION_SALES_FLOOR_MESSAGE: 'This will clear all sales floor items from this section',
+    CLEAR_SECTION_RESERVE_MESSAGE: 'This will clear all reserve pallets from this section',
+    CLEAR_SECTION_WONT_DELETE: 'This will not delete the section',
+    CLEAR_SECTION_FAIL: 'There was an error clearing the section. Please try again'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
