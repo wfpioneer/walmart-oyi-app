@@ -210,11 +210,19 @@ export default {
     SECTION_NOT_FOUND: 'The Scanned Section was not found.', // TODO Mandarin Translation
     PRINT_LABEL_EXISTS_HEADER: '打印既有标签',
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
+    ZONE_ADDED: 'Zone %{name} added', // TODO Mandarin Translation
+    ADD_ZONE_ERROR: 'There was an error adding the zone. Please try again', // TODO Mandarin Translation
+    INCOMPLETE_ZONE_ADDED: 'Zone %{name} added, but not all aisles/sections were created. Please check the list of aisles and sections that were created', // TODO Mandarin Translation
     REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: '移除所有通道和此通道内的货架号',
     REMOVE_ZONE_FAIL: 'There was an error removing the zone.  Please try again', // TODO add CN translation
     DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}', // TODO add translation
-    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again' // TODO add translation
+    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again', // TODO add translation
+    UPC_VALIDATE_ERROR: 'UPC can only contain numbers', // TODO Mandarin Translation
+    SCAN_ITEM: 'Scan Item', // TODO Mandarin Translation
+    ITEM_ADDED: 'Item Successfully Added', // TODO Mandarin Translation
+    ADD_ITEM_ERROR: 'Error adding the item', // TODO Mandarin Translation
+    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

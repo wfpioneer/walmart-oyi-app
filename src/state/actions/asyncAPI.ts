@@ -75,5 +75,7 @@ export const postCreateAisles = makeAsyncActionCreators(POST_CREATE_AISLES);
 export const CREATE_SECTIONS = makeAsyncActionTypes('API/CREATE_SECTIONS');
 export const createSections = makeAsyncActionCreators(CREATE_SECTIONS);
 
+export const CREATE_ZONE = makeAsyncActionTypes('API/CREATE_ZONE');
+export const createZone = makeAsyncActionCreators(CREATE_ZONE);
 export const DELETE_ZONE = makeAsyncActionTypes('API/DELETE_ZONE');
 export const deleteZone = makeAsyncActionCreators(DELETE_ZONE);

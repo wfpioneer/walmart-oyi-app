@@ -210,11 +210,19 @@ export default {
     PRINT_LABEL_EXISTS: 'Esta etiqueta ya existe en la cola de impresión',
     SECTIONS_ADDED: '%{number} secciones agregadas',
     ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo',
+    ZONE_ADDED: 'Zona %{name} agregada',
+    ADD_ZONE_ERROR: 'Hubo un error agregando la zona. Por favor inténtalo de nuevo',
+    INCOMPLETE_ZONE_ADDED: 'Zona %{name} agregada, pero no todos los pasillos y secciones se crearon. Por favor revisa la lista de los que si se crearon',
     REMOVE_ZONE_CONFIRMATION: '¿Estas seguro que quieres eliminar esta zona?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'Esto eliminará todos los pasillos y secciones asociados',
     REMOVE_ZONE_FAIL: 'Hubo un error eliminando la zona. Por favor inténtalo de nuevo',
     DELETE_ITEM: 'Borrar %{itemNbr} \n%{itemName}',
-    ERROR_DELETE_ITEM: 'Hubo un error borrando el artículo. Por favor inténtalo de nuevo'
+    ERROR_DELETE_ITEM: 'Hubo un error borrando el artículo. Por favor inténtalo de nuevo',
+    UPC_VALIDATE_ERROR: 'UPC can only contain numbers', // TODO Spanish Translation
+    SCAN_ITEM: 'Scan Item', // TODO Spanish Translation
+    ITEM_ADDED: 'Item Successfully Added', // TODO Spanish Translation
+    ADD_ITEM_ERROR: 'Error adding the item', // TODO Spanish Translation
+    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

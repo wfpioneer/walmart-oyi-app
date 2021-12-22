@@ -47,6 +47,7 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_PALLET_DETAILS, actions.getPalletDetails, LocationService.getPalletDetails),
   makeAsyncSaga(saga.POST_CREATE_AISLES, actions.postCreateAisles, LocationService.createLocationAislesSection),
   makeAsyncSaga(saga.CREATE_SECTIONS, actions.createSections, LocationService.createSections),
+  makeAsyncSaga(saga.CREATE_ZONE, actions.createZone, LocationService.createZone),
   makeAsyncSaga(saga.DELETE_ZONE, actions.deleteZone, LocationService.deleteZone)
 ];
 
