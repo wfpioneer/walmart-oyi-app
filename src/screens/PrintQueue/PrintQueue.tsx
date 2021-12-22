@@ -18,8 +18,7 @@ import {
   PrintQueueAPIMultistatus,
   PrintQueueItem,
   PrintQueueItemType,
-  Printer,
-  PrinterType
+  Printer
 } from '../../models/Printer';
 import styles from './PrintQueue.styles';
 import { strings } from '../../locales';
@@ -153,7 +152,8 @@ export const handlePrint = (props: HandlePrintProps): void => {
           return {
             itemNbr: itemNbr ?? 0,
             qty: signQty,
-            // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore needed because typechecking error
             code: LaserPaper[paperSize],
             description: paperSize,
             printerMACAddress: selectedPrinter.id,
