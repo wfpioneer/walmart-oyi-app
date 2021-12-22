@@ -16,7 +16,7 @@ import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  deleteLocationFromExisting, setFloorLocations, setReserveLocations, setSelectedLocation
+  deleteLocationFromExisting, setFloorLocations, setReserveLocations
 } from '../../state/actions/ItemDetailScreen';
 import { deleteLocation } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -33,6 +33,7 @@ interface LocationDetailsProps {
   reserveLocations: Location[];
   itemNbr: number;
   upcNbr: string;
+  exceptionType: string | null | undefined;
   delAPI: AsyncState
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -74,6 +75,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     reserveLocations,
     itemNbr,
     upcNbr,
+    exceptionType,
     locToConfirm,
     locationsApi,
     navigation,
@@ -114,8 +116,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
   const handleEditLocation = (loc: Location, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
       trackEvent('location_edit_location_click', { location: JSON.stringify(loc), index: locIndex });
-      dispatch(setSelectedLocation(loc));
-      navigation.navigate('EditLocation');
+      navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
     }).catch(() => { });
   };
 
@@ -250,7 +251,8 @@ const LocationDetails = (): JSX.Element => {
     floorLocations,
     reserveLocations,
     itemNbr,
-    upcNbr
+    upcNbr,
+    exceptionType
   } = useTypedSelector(state => state.ItemDetailScreen);
   const delAPI = useTypedSelector(state => state.async.deleteLocation);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
@@ -267,6 +269,7 @@ const LocationDetails = (): JSX.Element => {
       reserveLocations={reserveLocations}
       itemNbr={itemNbr}
       upcNbr={upcNbr}
+      exceptionType={exceptionType}
       locToConfirm={locToConfirm}
       locationsApi={locations}
       navigation={navigation}

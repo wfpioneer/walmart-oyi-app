@@ -5,12 +5,11 @@ export const ACTION_COMPLETED = 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED';
 export const UPDATE_PENDING_OH_QTY = 'ITEM_DETAILS_SCREEN/UPDATE_PENDING_OH_QTY';
 export const SET_FLOOR_LOCATIONS = 'LOCATION/SET_FLOOR_LOCATIONS';
 export const SET_RESERVE_LOCATIONS = 'LOCATION/SET_RESERVE_LOCATIONS';
+export const ADD_LOCATION_TO_EXISTING = 'LOCATION/ADD_LOCATION_TO_EXISTING';
+export const EDIT_EXISTING_LOCATION = 'LOCATION/EDIT_EXISTING_LOCATION';
 export const DELETE_LOCATION_FROM_EXISTING = 'LOCATION/DELETE_LOCATION_FROM_EXISTING';
 export const RESET_LOCATIONS = 'LOCATION/RESET_LOCATIONS';
 export const GET_LOCATION_DETAILS = 'LOCATION/GET_LOCATION_DETAILS';
-export const SET_SELECTED_LOCATION = 'LOCATION/SET_SELECTED_LOCATION';
-export const CLEAR_SELECTED_LOCATION = 'LOCATION/CLEAR_SELECTED_LOCATION';
-export const SET_UPC = 'LOCATION/SET_UPC';
 
 export const setupScreen = (
   itemNbr: number,
@@ -19,8 +18,7 @@ export const setupScreen = (
   reserveLocations: Location[],
   exceptionType: string | null | undefined,
   pendingOHQty: number,
-  completed: boolean,
-  salesFloor: boolean
+  completed: boolean
 ) => ({
   type: SETUP_SCREEN,
   payload: {
@@ -30,8 +28,7 @@ export const setupScreen = (
     reserveLocations,
     exceptionType,
     pendingOHQty,
-    completed,
-    salesFloor
+    completed
   }
 } as const);
 
@@ -54,6 +51,30 @@ export const setReserveLocations = (reserve: Location[]) => ({
   payload: reserve
 } as const);
 
+export const addLocationToExisting = (locationName: string, locationTypeNbr: number, locationArea: string) => ({
+  type: ADD_LOCATION_TO_EXISTING,
+  payload: {
+    locationName,
+    locationTypeNbr,
+    locationArea
+  }
+} as const);
+
+export const editExistingLocation = (
+  locationName: string,
+  locationTypeNbr: number,
+  locationArea: string,
+  locIndex: number
+) => ({
+  type: EDIT_EXISTING_LOCATION,
+  payload: {
+    locationName,
+    locationTypeNbr,
+    locationArea,
+    locIndex
+  }
+} as const);
+
 export const deleteLocationFromExisting = (locationArea: string, locIndex: number) => ({
   type: DELETE_LOCATION_FROM_EXISTING,
   payload: {
@@ -73,33 +94,14 @@ export const getLocationDetails = (itemNbr: number) => ({
   }
 } as const);
 
-export const setSelectedLocation = (location: Location) => ({
-  type: SET_SELECTED_LOCATION,
-  payload: {
-    location
-  }
-} as const);
-
-export const clearSelectedLocation = () => ({
-  type: CLEAR_SELECTED_LOCATION
-} as const);
-
-export const setUPC = (upc: string) => ({
-  type: SET_UPC,
-  payload: {
-    upc
-  }
-} as const);
-
 export type Actions =
   ReturnType<typeof setupScreen>
   | ReturnType<typeof updatePendingOHQty>
   | ReturnType<typeof setActionCompleted>
   | ReturnType<typeof setFloorLocations>
   | ReturnType<typeof setReserveLocations>
+  | ReturnType<typeof addLocationToExisting>
+  | ReturnType<typeof editExistingLocation>
   | ReturnType<typeof deleteLocationFromExisting>
   | ReturnType<typeof resetLocations>
-  | ReturnType<typeof getLocationDetails>
-  | ReturnType<typeof setSelectedLocation>
-  | ReturnType<typeof clearSelectedLocation>
-  | ReturnType<typeof setUPC>
+  | ReturnType<typeof getLocationDetails>;

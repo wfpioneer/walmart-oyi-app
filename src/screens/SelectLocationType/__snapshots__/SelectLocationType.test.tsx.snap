@@ -25,9 +25,9 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
       style={
         Object {
           "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
           "justifyContent": "center",
-          "marginBottom": 10,
-          "marginTop": 10,
           "padding": 10,
           "width": "100%",
         }
@@ -37,18 +37,195 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         style={
           Object {
             "fontWeight": "bold",
-            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
           }
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
       </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
       <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
-            "paddingTop": 10,
             "textAlign": "center",
           }
         }
@@ -165,9 +342,9 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
       style={
         Object {
           "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
           "justifyContent": "center",
-          "marginBottom": 10,
-          "marginTop": 10,
           "padding": 10,
           "width": "100%",
         }
@@ -177,18 +354,195 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         style={
           Object {
             "fontWeight": "bold",
-            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
           }
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
       </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
       <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
-            "paddingTop": 10,
             "textAlign": "center",
           }
         }
@@ -277,9 +631,9 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
       style={
         Object {
           "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
           "justifyContent": "center",
-          "marginBottom": 10,
-          "marginTop": 10,
           "padding": 10,
           "width": "100%",
         }
@@ -289,18 +643,195 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         style={
           Object {
             "fontWeight": "bold",
-            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
           }
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
       </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
       <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
-            "paddingTop": 10,
             "textAlign": "center",
           }
         }
@@ -389,9 +920,9 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       style={
         Object {
           "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
           "justifyContent": "center",
-          "marginBottom": 10,
-          "marginTop": 10,
           "padding": 10,
           "width": "100%",
         }
@@ -401,23 +932,780 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         style={
           Object {
             "fontWeight": "bold",
-            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
           }
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
       </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
       <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
-            "paddingTop": 10,
             "textAlign": "center",
           }
         }
       >
         TestLocation-3
+      </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={0}
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen Renders the DISPLAY location type as "Checked"  1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <CustomModalComponent
+      animationType="none"
+      isVisible={false}
+      modalType="Form"
+      onClose={[Function]}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </CustomModalComponent>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="11"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="checked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={0}
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen Renders the END CAP location type as "Checked" 1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <CustomModalComponent
+      animationType="none"
+      isVisible={false}
+      modalType="Form"
+      onClose={[Function]}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </CustomModalComponent>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="12"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="checked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        
       </withTheme(undefined)>
     </View>
     <View
@@ -502,9 +1790,9 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       style={
         Object {
           "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
           "justifyContent": "center",
-          "marginBottom": 10,
-          "marginTop": 10,
           "padding": 10,
           "width": "100%",
         }
@@ -514,18 +1802,195 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         style={
           Object {
             "fontWeight": "bold",
-            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
           }
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
       </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
       <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
-            "paddingTop": 10,
             "textAlign": "center",
           }
         }
@@ -590,7 +2055,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
 </React.Fragment>
 `;
 
-exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen Renders the selectLocationScreen default  1`] = `
+exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen Renders the POD location type as "Checked"  1`] = `
 <React.Fragment>
   <View
     style={
@@ -615,9 +2080,9 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
       style={
         Object {
           "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
           "justifyContent": "center",
-          "marginBottom": 10,
-          "marginTop": 10,
           "padding": 10,
           "width": "100%",
         }
@@ -627,18 +2092,485 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         style={
           Object {
             "fontWeight": "bold",
-            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="13"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="checked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
           }
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
       </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
       <withTheme(undefined)
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
-            "paddingTop": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={12}
+        titleFontWeight="bold"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "justifyContent": "flex-end",
+        "padding": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={0}
+      title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen Renders the SALES FLOOR location type as "Checked"  1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+      }
+    }
+  >
+    <CustomModalComponent
+      animationType="none"
+      isVisible={false}
+      modalType="Form"
+      onClose={[Function]}
+    >
+      <EnterLocation
+        onSubmit={[Function]}
+        setEnterLocation={[MockFunction]}
+      />
+    </CustomModalComponent>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SELECTION_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <RadioButton.Group
+      onValueChange={[Function]}
+      value="8"
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="checked"
+          value="8"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.FLOOR" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="12"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.ENDCAP" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="13"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.POD" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "padding": 5,
+          }
+        }
+      >
+        <withTheme(RadioButton)
+          color="#0071e9"
+          status="unchecked"
+          value="11"
+        />
+        <ForwardRef
+          onPress={[Function]}
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
+          <withTheme(undefined)
+            style={
+              Object {
+                "fontSize": 16,
+                "paddingLeft": 5,
+                "textAlignVertical": "center",
+              }
+            }
+          >
+            [missing "en.SELECTLOCATIONTYPE.DISPLAY" translation]
+          </withTheme(undefined)>
+        </ForwardRef>
+      </View>
+    </RadioButton.Group>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </withTheme(undefined)>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <withTheme(undefined)
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
             "textAlign": "center",
           }
         }
