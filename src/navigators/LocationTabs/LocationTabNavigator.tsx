@@ -213,6 +213,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     if (!removeSectionApi.isWaiting && removeSectionApi.result) {
       setDisplayConfirmation(false);
       dispatch({ type: REMOVE_SECTION.RESET });
+      dispatch(hideLocationPopup());
       navigation.goBack();
     }
   });

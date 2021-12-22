@@ -66,14 +66,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingHorizontal: 15,
     paddingTop: 15,
-    paddingBottom: 5
+    paddingBottom: 10
   },
   confirmationExtraText: {
     textAlign: 'center',
     fontSize: 14,
     paddingHorizontal: 15,
     paddingBottom: 15
-  },
+  }
 });
 
 export default styles;

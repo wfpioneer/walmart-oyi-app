@@ -20,7 +20,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
           style={
             Object {
               "fontSize": 18,
-              "paddingBottom": 5,
+              "paddingBottom": 10,
               "paddingHorizontal": 15,
               "paddingTop": 15,
               "textAlign": "center",
@@ -155,7 +155,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
           style={
             Object {
               "fontSize": 18,
-              "paddingBottom": 5,
+              "paddingBottom": 10,
               "paddingHorizontal": 15,
               "paddingTop": 15,
               "textAlign": "center",
@@ -290,7 +290,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
           style={
             Object {
               "fontSize": 18,
-              "paddingBottom": 5,
+              "paddingBottom": 10,
               "paddingHorizontal": 15,
               "paddingTop": 15,
               "textAlign": "center",
@@ -425,7 +425,7 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
           style={
             Object {
               "fontSize": 18,
-              "paddingBottom": 5,
+              "paddingBottom": 10,
               "paddingHorizontal": 15,
               "paddingTop": 15,
               "textAlign": "center",
@@ -563,7 +563,7 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
           style={
             Object {
               "fontSize": 18,
-              "paddingBottom": 5,
+              "paddingBottom": 10,
               "paddingHorizontal": 15,
               "paddingTop": 15,
               "textAlign": "center",
@@ -701,7 +701,7 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
           style={
             Object {
               "fontSize": 18,
-              "paddingBottom": 5,
+              "paddingBottom": 10,
               "paddingHorizontal": 15,
               "paddingTop": 15,
               "textAlign": "center",
