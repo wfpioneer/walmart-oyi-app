@@ -169,6 +169,7 @@ export default {
     LOCATION_DETAILS: '具体位置',
     NO_ZONES_AVAILABLE: '无区域',
     NO_AISLES_AVAILABLE: '无通道',
+    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Mandarin Translation
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
     CLEAR_ALL: '全部清除',
     CLEAR_SECTION: '清除此货架位置',
@@ -223,8 +224,9 @@ export default {
     ITEM_ADDED: 'Item Successfully Added', // TODO Mandarin Translation
     ADD_ITEM_ERROR: 'Error adding the item', // TODO Mandarin Translation
     ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.', // TODO Mandarin Translation
-    REMOVE_SECTION_CONFIRMATION: 'Are you sure you want to delete section %{sectionName}', // TODO Mandarin Translation
-    REMOVE_SECTION_FAIL: 'There was an error removing the section. \nPlease try again.' // TODO Mandarin Translation
+    REMOVE_SECTION_CONFIRMATION: 'Are you sure you want to delete section: %{sectionName}?', // TODO Mandarin Translation
+    REMOVE_SECTION_FAIL: 'There was an error removing the section. \nPlease try again.', // TODO Mandarin Translation
+    SECTION_REMOVED: 'Section Removed Successfully' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

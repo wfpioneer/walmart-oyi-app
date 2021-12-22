@@ -1,5 +1,5 @@
 import React, {
-  EffectCallback, useEffect, useMemo, useRef
+  EffectCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
   Text, TouchableOpacity, View
@@ -11,6 +11,7 @@ import {
 } from '@react-navigation/native';
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 import { Dispatch } from 'redux';
+import { ActivityIndicator } from 'react-native-paper';
 import { strings } from '../../locales';
 import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
@@ -18,7 +19,7 @@ import styles from './LocationTabNavigator.style';
 import LocationHeader from '../../components/locationHeader/LocationHeader';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
-import { getPalletDetails, getSectionDetails } from '../../state/actions/saga';
+import { getPalletDetails, getSectionDetails, removeSection } from '../../state/actions/saga';
 import SectionDetails from '../../screens/SectionDetails/SectionDetailsScreen';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
@@ -32,6 +33,10 @@ import Button from '../../components/buttons/Button';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
 import { LocationName } from '../../models/Location';
 import ReserveSectionDetails from '../../screens/SectionDetails/ReserveSectionDetails';
+import { CustomModalComponent } from '../../screens/Modal/Modal';
+import { AsyncState } from '../../models/AsyncState';
+import { LocationIdName } from '../../state/reducers/Location';
+import { REMOVE_SECTION } from '../../state/actions/asyncAPI';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -51,6 +56,10 @@ export interface LocationProps {
     userFeatures: string[];
     itemPopupVisible:boolean;
     sectionResult: any;
+    removeSectionApi: AsyncState;
+    displayConfirmation: boolean;
+    setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
+    section: LocationIdName
 }
 
 interface TabHeaderProps {
@@ -163,7 +172,11 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     validateSessionCall,
     userFeatures,
     itemPopupVisible,
-    sectionResult
+    sectionResult,
+    removeSectionApi,
+    displayConfirmation,
+    setDisplayConfirmation,
+    section
   } = props;
   const sectionExists: boolean = (sectionResult && sectionResult.status !== 204);
 
@@ -194,8 +207,58 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     };
   }, []);
 
+  // Remove Section Api
+  useEffectHook(() => {
+    // on api success
+    if (!removeSectionApi.isWaiting && removeSectionApi.result) {
+      setDisplayConfirmation(false);
+      dispatch({ type: REMOVE_SECTION.RESET });
+      navigation.goBack();
+    }
+  })
+
+  const removeSectionModal = () => (
+    <CustomModalComponent
+      isVisible={displayConfirmation}
+      onClose={() => setDisplayConfirmation(false)}
+      modalType="Error"
+    >
+      {removeSectionApi.isWaiting ? (
+        <ActivityIndicator
+          animating={removeSectionApi.isWaiting}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.activityIndicator}
+        />
+      ) : (
+        <>
+          <View style={styles.confirmationView}>
+            <Text style={styles.confirmationText}>
+              {`${strings('LOCATION.REMOVE_SECTION_CONFIRMATION', { sectionName: locationName })}`}
+            </Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.delButton}
+              title={strings('GENERICS.CANCEL')}
+              backgroundColor={COLOR.TRACKER_RED}
+              onPress={() => setDisplayConfirmation(false)}
+            />
+            <Button
+              style={styles.delButton}
+              title={removeSectionApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+              backgroundColor={COLOR.MAIN_THEME_COLOR}
+              onPress={() => dispatch(removeSection(section.id))}
+            />
+          </View>
+        </>
+      )}
+    </CustomModalComponent>
+  );
   return (
     <>
+      {removeSectionModal()}
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('LOCATION.SECTION')}`
@@ -266,11 +329,13 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
 const LocationTabs = () : JSX.Element => {
   const { selectedAisle, selectedZone, selectedSection } = useTypedSelector(state => state.Location);
   const { result } = useTypedSelector(state => state.async.getSectionDetails);
+  const removeSectionApi = useTypedSelector(state => state.async.removeSection);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const userFeatures = useTypedSelector(state => state.User.features);
   const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
   const itemPopupVisible = useTypedSelector(state => state.Location.itemPopupVisible);
+  const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -304,6 +369,7 @@ const LocationTabs = () : JSX.Element => {
           dispatch={dispatch}
           floorItems={locItem?.items?.sectionItems ?? []}
           reserveItems={locItem?.pallets?.palletData ?? []}
+          section={selectedSection}
           locationName={locationName}
           locationPopupVisible={locationPopupVisible}
           isManualScanEnabled={isManualScanEnabled}
@@ -316,6 +382,9 @@ const LocationTabs = () : JSX.Element => {
           userFeatures={userFeatures}
           itemPopupVisible={itemPopupVisible}
           sectionResult={result}
+          removeSectionApi={removeSectionApi}
+          displayConfirmation={displayConfirmation}
+          setDisplayConfirmation={setDisplayConfirmation}
         />
       </TouchableOpacity>
       <BottomSheetModal
@@ -333,7 +402,7 @@ const LocationTabs = () : JSX.Element => {
             isVisible={true}
           />
           <BottomSheetRemoveCard
-            onPress={() => {}}
+            onPress={() => setDisplayConfirmation(true)}
             text={strings('LOCATION.REMOVE_SECTION')}
             isVisible={userFeatures.includes('manager approval')}
           />

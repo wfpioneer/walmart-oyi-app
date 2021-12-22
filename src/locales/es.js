@@ -169,6 +169,7 @@ export default {
     LOCATION_DETAILS: 'Detalles de ubicación',
     NO_ZONES_AVAILABLE: 'No hay zonas disponibles',
     NO_AISLES_AVAILABLE: 'No hay pasillos disponibles',
+    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Spanish Translation
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_ALL: 'Limpiar',
     CLEAR_SECTION: 'Limpiar sección',
@@ -223,8 +224,9 @@ export default {
     ITEM_ADDED: 'Item Successfully Added', // TODO Spanish Translation
     ADD_ITEM_ERROR: 'Error adding the item', // TODO Spanish Translation
     ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.', // TODO Spanish Translation
-    REMOVE_SECTION_CONFIRMATION: 'Are you sure you want to delete section %{sectionName}', // TODO Spanish Translation
-    REMOVE_SECTION_FAIL: 'There was an error removing the section. \nPlease try again.'// TODO Spanish Translation
+    REMOVE_SECTION_CONFIRMATION: 'Are you sure you want to delete section: %{sectionName}?', // TODO Spanish Translation
+    REMOVE_SECTION_FAIL: 'There was an error removing the section. \nPlease try again.', // TODO Spanish Translation
+    SECTION_REMOVED: 'Section Removed Successfully' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
