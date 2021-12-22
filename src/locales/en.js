@@ -150,7 +150,7 @@ export default {
     EDIT_DUPLICATE_ERROR: 'Location and type combination \nalready exists.',
     MANUAL_ENTRY_BUTTON: 'Manually key in location',
     SELECTION_INSTRUCTION: '1. Select a location type.',
-    SCAN_INSTRUCTION: '2. Scan location label.',
+    SCAN_INSTRUCTION: 'Scan location label.',
     DELETE_CONFIRMATION: 'Confirm: \ndelete location ',
     DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nRetry?',
     ADD_NEW_LOCATION: 'Add New Location',
