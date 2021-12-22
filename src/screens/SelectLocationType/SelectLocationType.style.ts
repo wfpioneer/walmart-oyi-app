@@ -24,25 +24,27 @@ const styles = StyleSheet.create({
   sectionLabel: {
     height: 70,
     width: '100%',
-    backgroundColor: COLOR.GREY_300,
     alignContent: 'center',
     justifyContent: 'center',
     padding: 10
   },
   labelText: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   locationText: {
     fontWeight: 'bold',
     fontSize: 16,
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingTop: 10
   },
   locationContainer: {
     width: '100%',
     alignContent: 'center',
     justifyContent: 'center',
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    padding: 10
   },
   errorContainer: {
     flexDirection: 'row',
