@@ -1,8 +1,8 @@
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationProp, Route } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { strings } from '../../locales';
-import { SelectLocationTypeScreen, validateLocation } from './SelectLocationType';
+import { LOCATION_TYPES, SelectLocationTypeScreen, validateLocation } from './SelectLocationType';
 
 let navigationProp: NavigationProp<any>;
 describe('SelectLocationTypeScreen', () => {
@@ -17,28 +17,19 @@ describe('SelectLocationTypeScreen', () => {
     result: null
   };
 
-  const selectedLocation = {
-    zoneId: 1,
-    aisleId: 2,
-    sectionId: 3,
-    zoneName: 'A',
-    aisleName: '1',
-    sectionName: '1',
-    locationName: 'A1-1',
-    type: '8',
-    typeNbr: 8
-  };
-
   const defaultItemNbr = 0;
   const defaultUpcNbr = '';
   const defaultExceptionType = '';
 
+  const defaultRoute: Route<any> = { key: '', name: 'AddLocation' };
   describe('Tests rendering the SelectLocationType Screen', () => {
-    it('Renders the selectLocationScreen default ', () => {
+    it('Renders the SALES FLOOR location type as "Checked" ', () => {
       const renderer = ShallowRenderer.createRenderer();
 
       renderer.render(
         <SelectLocationTypeScreen
+          locType={LOCATION_TYPES.SALES_FLOOR}
+          setLocType={jest.fn()}
           inputLocation={false}
           setInputLocation={jest.fn()}
           loc=""
@@ -54,13 +45,111 @@ describe('SelectLocationTypeScreen', () => {
           upcNbr={defaultUpcNbr}
           exceptionType={defaultExceptionType}
           actionCompleted={false}
+          route={defaultRoute}
           navigation={navigationProp}
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
-          selectedLocation={null}
-          salesFloor={true}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders the DISPLAY location type as "Checked" ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <SelectLocationTypeScreen
+          locType={LOCATION_TYPES.DISPLAY}
+          setLocType={jest.fn()}
+          inputLocation={false}
+          setInputLocation={jest.fn()}
+          loc=""
+          setLoc={jest.fn()}
+          scanType=""
+          setScanType={jest.fn()}
+          error={defaultError}
+          setError={jest.fn()}
+          addAPI={defaultAsyncState}
+          editAPI={defaultAsyncState}
+          floorLocations={[]}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
+          actionCompleted={false}
+          route={defaultRoute}
+          navigation={navigationProp}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn(() => Promise.resolve())}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders the END CAP location type as "Checked"', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <SelectLocationTypeScreen
+          locType={LOCATION_TYPES.END_CAP}
+          setLocType={jest.fn()}
+          inputLocation={false}
+          setInputLocation={jest.fn()}
+          loc=""
+          setLoc={jest.fn()}
+          scanType=""
+          setScanType={jest.fn()}
+          error={defaultError}
+          setError={jest.fn()}
+          addAPI={defaultAsyncState}
+          editAPI={defaultAsyncState}
+          floorLocations={[]}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
+          actionCompleted={false}
+          route={defaultRoute}
+          navigation={navigationProp}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn(() => Promise.resolve())}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders the POD location type as "Checked" ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <SelectLocationTypeScreen
+          locType={LOCATION_TYPES.POD}
+          setLocType={jest.fn()}
+          inputLocation={false}
+          setInputLocation={jest.fn()}
+          loc=""
+          setLoc={jest.fn()}
+          scanType=""
+          setScanType={jest.fn()}
+          error={defaultError}
+          setError={jest.fn()}
+          addAPI={defaultAsyncState}
+          editAPI={defaultAsyncState}
+          floorLocations={[]}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          exceptionType={defaultExceptionType}
+          actionCompleted={false}
+          route={defaultRoute}
+          navigation={navigationProp}
+          dispatch={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          validateSessionCall={jest.fn(() => Promise.resolve())}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -71,6 +160,8 @@ describe('SelectLocationTypeScreen', () => {
       const inputLocation = true;
       renderer.render(
         <SelectLocationTypeScreen
+          locType={LOCATION_TYPES.SALES_FLOOR}
+          setLocType={jest.fn()}
           inputLocation={inputLocation}
           setInputLocation={jest.fn()}
           loc=""
@@ -86,13 +177,12 @@ describe('SelectLocationTypeScreen', () => {
           upcNbr={defaultUpcNbr}
           exceptionType={defaultExceptionType}
           actionCompleted={false}
+          route={defaultRoute}
           navigation={navigationProp}
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
-          selectedLocation={null}
-          salesFloor={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -103,6 +193,8 @@ describe('SelectLocationTypeScreen', () => {
       const locationName = 'TestLocation-3';
       renderer.render(
         <SelectLocationTypeScreen
+          locType={LOCATION_TYPES.SALES_FLOOR}
+          setLocType={jest.fn()}
           inputLocation={false}
           setInputLocation={jest.fn()}
           loc={locationName}
@@ -118,13 +210,12 @@ describe('SelectLocationTypeScreen', () => {
           upcNbr={defaultUpcNbr}
           exceptionType={defaultExceptionType}
           actionCompleted={false}
+          route={defaultRoute}
           navigation={navigationProp}
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
-          selectedLocation={null}
-          salesFloor={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -143,6 +234,8 @@ describe('SelectLocationTypeScreen', () => {
 
       renderer.render(
         <SelectLocationTypeScreen
+          locType={LOCATION_TYPES.SALES_FLOOR}
+          setLocType={jest.fn()}
           inputLocation={false}
           setInputLocation={jest.fn()}
           loc=""
@@ -158,13 +251,12 @@ describe('SelectLocationTypeScreen', () => {
           upcNbr={defaultUpcNbr}
           exceptionType={defaultExceptionType}
           actionCompleted={false}
+          route={defaultRoute}
           navigation={navigationProp}
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
-          selectedLocation={null}
-          salesFloor={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -175,6 +267,8 @@ describe('SelectLocationTypeScreen', () => {
 
       renderer.render(
         <SelectLocationTypeScreen
+          locType={LOCATION_TYPES.SALES_FLOOR}
+          setLocType={jest.fn()}
           inputLocation={false}
           setInputLocation={jest.fn()}
           loc=""
@@ -190,13 +284,12 @@ describe('SelectLocationTypeScreen', () => {
           upcNbr={defaultUpcNbr}
           exceptionType={defaultExceptionType}
           actionCompleted={false}
+          route={defaultRoute}
           navigation={navigationProp}
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
-          selectedLocation={selectedLocation}
-          salesFloor={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -210,6 +303,8 @@ describe('SelectLocationTypeScreen', () => {
       };
       renderer.render(
         <SelectLocationTypeScreen
+          locType={LOCATION_TYPES.SALES_FLOOR}
+          setLocType={jest.fn()}
           inputLocation={false}
           setInputLocation={jest.fn()}
           loc=""
@@ -225,13 +320,12 @@ describe('SelectLocationTypeScreen', () => {
           upcNbr={defaultUpcNbr}
           exceptionType={defaultExceptionType}
           actionCompleted={false}
+          route={defaultRoute}
           navigation={navigationProp}
           dispatch={jest.fn()}
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn(() => Promise.resolve())}
-          selectedLocation={null}
-          salesFloor={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

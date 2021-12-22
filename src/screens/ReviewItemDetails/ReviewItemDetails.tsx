@@ -26,7 +26,7 @@ import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
-import { resetLocations, setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
+import { setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { showInfoModal } from '../../state/actions/Modal';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -370,8 +370,7 @@ const onValidateItemDetails = (props: ItemDetailsScreenProps, itemDetails: ItemD
       getReserveItemDetails(itemDetails),
       itemDetails.exceptionType,
       itemDetails.pendingOnHandsQty,
-      isItemDetailsCompleted(itemDetails),
-      true
+      isItemDetailsCompleted(itemDetails)
     ));
   }
 };
@@ -532,13 +531,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     useEffectHook,
     useFocusEffectHook
   } = props;
-
-  useEffectHook(() => {
-    return () => {
-      dispatch(resetLocations());
-    };
-  }, []);
-
   // Scanned Item Event Listener
   useEffectHook(() => {
     onValidateScannedEvent(props);
