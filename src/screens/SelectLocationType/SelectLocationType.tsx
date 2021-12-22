@@ -13,7 +13,12 @@ import Button from '../../components/buttons/Button';
 import EnterLocation from '../../components/enterlocation/EnterLocation';
 import Location from '../../models/Location';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { addLocation, editLocation, getLocationDetails } from '../../state/actions/saga';
+import {
+  addLocation,
+  editLocation,
+  getLocationDetails,
+  getSectionDetails
+} from '../../state/actions/saga';
 import { clearSelectedLocation, setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter, manualScan } from '../../utils/scannerUtils';
@@ -217,6 +222,8 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
     if (isApiSuccess(editAPI)) {
       if (salesFloor) {
         dispatch(getLocationDetails({ itemNbr }));
+      } else {
+        dispatch(getSectionDetails({ sectionId: selectedLocation ? selectedLocation.sectionId.toString() : '' }));
       }
       navigation.goBack();
     }

@@ -80,7 +80,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
-    name="AddLocation"
+    name="EditLocation"
     options={
       Object {
         "headerBackTitleVisible": false,
@@ -208,7 +208,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
-    name="AddLocation"
+    name="EditLocation"
     options={
       Object {
         "headerBackTitleVisible": false,
@@ -336,7 +336,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    name="AddLocation"
+    name="EditLocation"
     options={
       Object {
         "headerBackTitleVisible": false,
@@ -464,7 +464,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    name="AddLocation"
+    name="EditLocation"
     options={
       Object {
         "headerBackTitleVisible": false,
