@@ -215,7 +215,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       dispatch({ type: REMOVE_SECTION.RESET });
       navigation.goBack();
     }
-  })
+  });
 
   const removeSectionModal = () => (
     <CustomModalComponent
