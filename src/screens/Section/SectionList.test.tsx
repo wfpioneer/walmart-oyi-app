@@ -46,6 +46,11 @@ describe('Test Section List', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        displayConfirmation={false}
+        setDisplayConfirmation={jest.fn()}
+        deleteAisleApi={defaultAsyncState}
+        deleteAisleApiStart={0}
+        setDeleteAisleApiStart={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -78,6 +83,11 @@ describe('Test Section List', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        displayConfirmation={false}
+        setDisplayConfirmation={jest.fn()}
+        deleteAisleApi={defaultAsyncState}
+        deleteAisleApiStart={0}
+        setDeleteAisleApiStart={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -101,6 +111,11 @@ describe('Test Section List', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        displayConfirmation={false}
+        setDisplayConfirmation={jest.fn()}
+        deleteAisleApi={defaultAsyncState}
+        deleteAisleApiStart={0}
+        setDeleteAisleApiStart={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -168,6 +183,81 @@ describe('Test Get Section Api Response', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        displayConfirmation={false}
+        setDisplayConfirmation={jest.fn()}
+        deleteAisleApi={defaultAsyncState}
+        deleteAisleApiStart={0}
+        setDeleteAisleApiStart={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+});
+describe('Rendering Remove Aisle responses', () => {
+  it('Renders the waiting for response from Remove Aisle', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const removeAisleIsWaiting: AsyncState = {
+      isWaiting: true,
+      value: null,
+      error: null,
+      result: null
+    };
+    renderer.render(
+      <SectionScreen
+        aisleId={AISLE_ID}
+        aisleName={AISLE_NAME}
+        zoneName={ZONE_NAME}
+        dispatch={jest.fn()}
+        getAllSections={defaultAsyncState}
+        isManualScanEnabled={false}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        locationPopupVisible={false}
+        displayConfirmation={false}
+        setDisplayConfirmation={jest.fn()}
+        deleteAisleApi={removeAisleIsWaiting}
+        deleteAisleApiStart={0}
+        setDeleteAisleApiStart={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the success response from Remove Aisle', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const removeAisleResult = {
+      status: 204,
+      data: ''
+    };
+    const removeAisleSuccess: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: null,
+      result: removeAisleResult
+    };
+    renderer.render(
+      <SectionScreen
+        aisleId={AISLE_ID}
+        aisleName={AISLE_NAME}
+        zoneName={ZONE_NAME}
+        dispatch={jest.fn()}
+        getAllSections={defaultAsyncState}
+        isManualScanEnabled={false}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        locationPopupVisible={false}
+        displayConfirmation={false}
+        setDisplayConfirmation={jest.fn()}
+        deleteAisleApi={removeAisleSuccess}
+        deleteAisleApiStart={0}
+        setDeleteAisleApiStart={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
