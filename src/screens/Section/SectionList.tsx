@@ -122,6 +122,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
           duration: moment().valueOf() - deleteAisleApiStart,
           reason: deleteAisleApi.error.message || deleteAisleApi.error.toString()
         });
+        handleModalClose(setDisplayConfirmation, setDeleteAisleApiStart, dispatch);
         dispatch(showSnackBar(strings('LOCATION.REMOVE_AISLE_FAIL'), SNACKBAR_TIMEOUT));
       }
     }
@@ -240,7 +241,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
             />
             <Button
               style={styles.delButton}
-              title={deleteAisleApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+              title={strings('GENERICS.OK')}
               backgroundColor={COLOR.MAIN_THEME_COLOR}
               onPress={handleDeleteAisle}
             />
