@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import { makeAsyncReducer } from './generic/makeAsyncReducer';
 import * as asyncActions from '../actions/asyncAPI';
 
-// @ts-ignore
 export const asyncReducer = combineReducers({
   hitGoogle: makeAsyncReducer(asyncActions.HIT_GOOGLE),
   getItemDetails: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS),
@@ -30,7 +29,8 @@ export const asyncReducer = combineReducers({
   postCreateAisles: makeAsyncReducer(asyncActions.POST_CREATE_AISLES),
   createSections: makeAsyncReducer(asyncActions.CREATE_SECTIONS),
   postCreateZone: makeAsyncReducer(asyncActions.CREATE_ZONE),
-  deleteZone: makeAsyncReducer(asyncActions.DELETE_ZONE)
+  deleteZone: makeAsyncReducer(asyncActions.DELETE_ZONE),
+  removeSection: makeAsyncReducer(asyncActions.REMOVE_SECTION)
 });
 
 export default asyncReducer;
