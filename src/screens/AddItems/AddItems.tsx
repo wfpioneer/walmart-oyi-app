@@ -22,7 +22,7 @@ import COLOR from '../../themes/Color';
 import { AsyncState } from '../../models/AsyncState';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import { hideActivityModal, showInfoModal } from '../../state/actions/Modal';
-import { LOCATION_TYPES } from '../SelectLocationType/SelectLocationType';
+import { SALES_FLOOR_LOCATION_TYPE } from '../SelectLocationType/SelectLocationType';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 interface AddItemsScreenProps {
@@ -116,7 +116,7 @@ export const AddItemsScreen = (props: AddItemsScreenProps): JSX.Element => {
       dispatch(addLocation({
         upc,
         sectionId: section.id,
-        locationTypeNbr: LOCATION_TYPES.SALES_FLOOR.toString()
+        locationTypeNbr: SALES_FLOOR_LOCATION_TYPE
       }));
     }
   };
