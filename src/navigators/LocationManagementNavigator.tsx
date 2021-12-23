@@ -229,7 +229,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         name="EditLocation"
         component={SelectLocationType}
         options={{
-          headerTitle: strings('LOCATION.ADD_NEW_LOCATION'),
+          headerTitle: strings('LOCATION.EDIT_LOCATION'),
           headerTitleAlign: 'left',
           headerBackTitleVisible: false
         }}
