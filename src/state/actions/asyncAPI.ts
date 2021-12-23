@@ -77,5 +77,9 @@ export const createSections = makeAsyncActionCreators(CREATE_SECTIONS);
 
 export const CREATE_ZONE = makeAsyncActionTypes('API/CREATE_ZONE');
 export const createZone = makeAsyncActionCreators(CREATE_ZONE);
+
 export const DELETE_ZONE = makeAsyncActionTypes('API/DELETE_ZONE');
 export const deleteZone = makeAsyncActionCreators(DELETE_ZONE);
+
+export const REMOVE_SECTION = makeAsyncActionTypes('API/REMOVE_SECTION');
+export const removeSection = makeAsyncActionCreators(REMOVE_SECTION);
