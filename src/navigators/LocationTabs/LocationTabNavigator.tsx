@@ -2,7 +2,6 @@ import React, {
   EffectCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
-  ActivityIndicator,
   Text, TouchableOpacity, View
 } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -32,9 +31,11 @@ import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSh
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import Button from '../../components/buttons/Button';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
-import { LocationName } from '../../models/Location';
+import { ClearLocationTarget, LocationName } from '../../models/Location';
 import ReserveSectionDetails from '../../screens/SectionDetails/ReserveSectionDetails';
-import { CustomModalComponent } from '../../screens/Modal/Modal';
+import ApiConfirmationModal from '../../screens/Modal/ApiConfirmationModal';
+import { AsyncState } from '../../models/AsyncState';
+import { showSnackBar } from '../../state/actions/SnackBar';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -54,7 +55,12 @@ export interface LocationProps {
     userFeatures: string[];
     itemPopupVisible:boolean;
     sectionResult: any;
+    clearSectionApi: AsyncState;
+    clearSectionApiStart: number;
+    setClearSectionApiStart: React.Dispatch<React.SetStateAction<number>>;
     setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
+    setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
+    trackApiEvent: (eventName: string, params: any) => void
 }
 
 interface TabHeaderProps {
@@ -72,6 +78,36 @@ export const handleModalClose = (
   setDisplayConfirmation(false);
   setClearSectionApiStart(0);
   dispatch({ type: 'API/CLEAR_SECTION/RESET' });
+};
+
+export const clearSectionApiEffect = (
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  clearSectionApi: AsyncState,
+  clearSectionApiStart: number,
+  setClearSectionApiStart: React.Dispatch<React.SetStateAction<number>>,
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  trackApiEvent: (eventName: string, params?: any) => void
+): void => {
+  if (navigation.isFocused() && !clearSectionApi.isWaiting) {
+    if (clearSectionApi.result) {
+      // Success
+      trackApiEvent('delete_zone_success', {
+        duration: moment().valueOf() - clearSectionApiStart
+      });
+      handleModalClose(setDisplayConfirmation, setClearSectionApiStart, dispatch);
+      navigation.goBack();
+    }
+
+    if (clearSectionApi.error) {
+      // Failure
+      trackApiEvent('delete_zone_fail', {
+        duration: moment().valueOf() - clearSectionApiStart,
+        reason: clearSectionApi.error.message || clearSectionApi.error.toString()
+      });
+      dispatch(showSnackBar(strings('LOCATION.REMOVE_ZONE_FAIL'), 3000));
+    }
+  }
 };
 
 export const TabHeader = (props: TabHeaderProps): JSX.Element => {
@@ -178,7 +214,12 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     userFeatures,
     itemPopupVisible,
     sectionResult,
-    setSelectedTab
+    setSelectedTab,
+    clearSectionApi,
+    clearSectionApiStart,
+    setClearSectionApiStart,
+    setDisplayClearConfirmation,
+    trackApiEvent
   } = props;
   const sectionExists: boolean = (sectionResult && sectionResult.status !== 204);
 
@@ -192,6 +233,17 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       }
     }).catch(() => {});
   }, [navigation, scannedEvent]);
+
+  // Clear Section API
+  useEffectHook(() => clearSectionApiEffect(
+    dispatch,
+    navigation,
+    clearSectionApi,
+    clearSectionApiStart,
+    setClearSectionApiStart,
+    setDisplayClearConfirmation,
+    trackApiEvent
+  ), [clearSectionApi]);
 
   // scanned event listener
   useEffectHook(() => {
@@ -247,7 +299,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
                 dispatch(hideLocationPopup());
               }
             },
-            focus: () => setSelectedTab('Floor')
+            focus: () => setSelectedTab(ClearLocationTarget.FLOOR)
           }}
         >
           { () => <FloorDetailsList sectionExists={sectionExists} />}
@@ -270,7 +322,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
                 dispatch(hideItemPopup());
               }
             },
-            focus: () => setSelectedTab('Reserve')
+            focus: () => setSelectedTab(ClearLocationTarget.RESERVE)
           }}
         >
           {() => <ReserveDetailsList sectionExists={sectionExists} />}
@@ -318,53 +370,6 @@ const LocationTabs = () : JSX.Element => {
     dispatch(clearLocation({ locationId: selectedSection.id, target: selectedTab }));
   };
 
-  const clearSectionModalView = () => (
-    <CustomModalComponent
-      isVisible={displayClearConfirmation}
-      onClose={() => handleModalClose(setDisplayClearConfirmation, setClearSectionApiStart, dispatch)}
-      modalType="Error"
-    >
-      {clearSectionApi.isWaiting ? (
-        <ActivityIndicator
-          animating={clearSectionApi.isWaiting}
-          hidesWhenStopped
-          color={COLOR.MAIN_THEME_COLOR}
-          size="large"
-          style={styles.activityIndicator}
-        />
-      ) : (
-        <>
-          <View style={styles.confirmationTextView}>
-            <Text style={styles.confirmation}>
-              {`${strings('LOCATION.CLEAR_SECTION_CONFIRMATION')}`}
-            </Text>
-            <Text style={styles.confirmationExtraText}>
-              {`${strings('LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS')}`}
-            </Text>
-            <Text style={styles.confirmationExtraText}>
-              {`${strings('LOCATION.CLEAR_SECTION_WONT_DELETE')}`}
-            </Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <Button
-              style={styles.delButton}
-              title={strings('GENERICS.CANCEL')}
-              backgroundColor={COLOR.TRACKER_RED}
-              // No need for modal close fn because no apis have been sent
-              onPress={() => handleModalClose(setDisplayClearConfirmation, setClearSectionApiStart, dispatch)}
-            />
-            <Button
-              style={styles.delButton}
-              title={clearSectionApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
-              backgroundColor={COLOR.MAIN_THEME_COLOR}
-              onPress={handleClearSection}
-            />
-          </View>
-        </>
-      )}
-    </CustomModalComponent>
-  );
-
   return (
     <BottomSheetModalProvider>
       <TouchableOpacity
@@ -390,8 +395,24 @@ const LocationTabs = () : JSX.Element => {
           itemPopupVisible={itemPopupVisible}
           sectionResult={result}
           setSelectedTab={setSelectedTab}
+          clearSectionApi={clearSectionApi}
+          clearSectionApiStart={clearSectionApiStart}
+          setClearSectionApiStart={setClearSectionApiStart}
+          setDisplayClearConfirmation={setDisplayClearConfirmation}
+          trackApiEvent={trackEvent}
         />
       </TouchableOpacity>
+      <ApiConfirmationModal
+        isVisible={displayClearConfirmation}
+        onClose={() => handleModalClose(setDisplayClearConfirmation, setClearSectionApiStart, dispatch)}
+        api={clearSectionApi}
+        mainText={strings('LOCATION.CLEAR_SECTION_CONFIRMATION')}
+        subtext1={selectedTab === ClearLocationTarget.FLOOR
+          ? strings('LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE')
+          : strings('LOCATION.CLEAR_SECTION_RESERVE_MESSAGE')}
+        subtext2={strings('LOCATION.CLEAR_SECTION_WONT_DELETE')}
+        handleConfirm={() => handleClearSection()}
+      />
       <BottomSheetModal
         ref={bottomSheetLocationDetailsModalRef}
         snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
