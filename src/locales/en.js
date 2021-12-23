@@ -151,7 +151,7 @@ export default {
     EDIT_DUPLICATE_ERROR: 'Location and type combination \nalready exists.',
     MANUAL_ENTRY_BUTTON: 'Manually key in location',
     SELECTION_INSTRUCTION: '1. Select a location type.',
-    SCAN_INSTRUCTION: '2. Scan location label.',
+    SCAN_INSTRUCTION: 'Scan location label.',
     DELETE_CONFIRMATION: 'Confirm: \ndelete location ',
     DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nRetry?',
     ADD_NEW_LOCATION: 'Add New Location',
@@ -170,6 +170,7 @@ export default {
     LOCATION_DETAILS: 'Location Details',
     NO_ZONES_AVAILABLE: 'No Zones Available',
     NO_AISLES_AVAILABLE: 'No Aisles Available',
+    NO_SECTIONS_AVAILABLE: 'No Sections Available',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
     CLEAR_ALL: 'Clear all',
     SCAN_LOCATION: 'Invalid location name Ex: ABC1-2',
@@ -223,7 +224,10 @@ export default {
     SCAN_ITEM: 'Scan Item',
     ITEM_ADDED: 'Item Successfully Added',
     ADD_ITEM_ERROR: 'Error adding the item',
-    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.'
+    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.',
+    REMOVE_SECTION_CONFIRMATION: 'Are you sure you want to delete section: %{sectionName}?',
+    REMOVE_SECTION_FAIL: 'There was an error removing the section. \nPlease try again.',
+    SECTION_REMOVED: 'Section Removed Successfully'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

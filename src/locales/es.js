@@ -151,7 +151,7 @@ export default {
     EDIT_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
     MANUAL_ENTRY_BUTTON: 'Ingresa manualmente la ubicación.',
     SELECTION_INSTRUCTION: '1. Elija un tipo de ubicación.',
-    SCAN_INSTRUCTION: '2. Escanea la etiqueta de Ubicación.',
+    SCAN_INSTRUCTION: 'Escanea la etiqueta de Ubicación.',
     DELETE_CONFIRMATION: 'Confirma la eliminación de \nla ubicación ',
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
@@ -170,6 +170,7 @@ export default {
     LOCATION_DETAILS: 'Detalles de ubicación',
     NO_ZONES_AVAILABLE: 'No hay zonas disponibles',
     NO_AISLES_AVAILABLE: 'No hay pasillos disponibles',
+    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Spanish Translation
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_ALL: 'Limpiar',
     CLEAR_SECTION: 'Limpiar sección',
@@ -223,7 +224,10 @@ export default {
     SCAN_ITEM: 'Scan Item', // TODO Spanish Translation
     ITEM_ADDED: 'Item Successfully Added', // TODO Spanish Translation
     ADD_ITEM_ERROR: 'Error adding the item', // TODO Spanish Translation
-    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.' // TODO Spanish Translation
+    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.', // TODO Spanish Translation
+    REMOVE_SECTION_CONFIRMATION: 'Are you sure you want to delete section: %{sectionName}?', // TODO Spanish Translation
+    REMOVE_SECTION_FAIL: 'There was an error removing the section. \nPlease try again.', // TODO Spanish Translation
+    SECTION_REMOVED: 'Section Removed Successfully' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
