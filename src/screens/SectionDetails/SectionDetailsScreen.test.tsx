@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
-import { SectionDetailsScreen } from './SectionDetailsScreen';
+import { SectionDetailsScreen, handleEditItem } from './SectionDetailsScreen';
 import { AsyncState } from '../../models/AsyncState';
 import {
   mockLocationDetails,
@@ -285,6 +285,47 @@ describe('Test Location Details Screen', () => {
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('tests functions', () => {
+    it('tests handleEditLocation function', () => {
+      const mockDispatch = jest.fn();
+      const mockNavigate = jest.fn();
+      // we need to ignore this typescript error as the navigationProp is expecting serveral properties
+      // but we only need to mock the navigate
+      // @ts-ignore
+      navigationProp = { navigate: mockNavigate };
+      const mockSelectedItem = {
+        itemNbr: 123,
+        itemDesc: 'test',
+        price: 2.00,
+        upcNbr: '123',
+        locationType: 8
+      };
+      const mockZone = {
+        id: 1,
+        name: 'A'
+      };
+      const mockAisle = {
+        id: 2,
+        name: '1'
+      };
+      const mockSection = {
+        id: 3,
+        name: '1'
+      };
+      handleEditItem(
+        mockSelectedItem,
+        mockDispatch,
+        navigationProp,
+        mockZone,
+        mockAisle,
+        mockSection
+      );
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: 'ITEM_DETAILS_SCREEN/SETUP' }));
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: 'LOCATION/SET_SELECTED_LOCATION' }));
+      expect(mockDispatch).lastCalledWith({ type: 'LOCATION/HIDE_ITEM_POPUP' });
+      expect(mockNavigate).toBeCalledWith('EditLocation');
     });
   });
 });

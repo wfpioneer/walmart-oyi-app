@@ -24,6 +24,7 @@ import { DELETE_LOCATION, GET_PALLET_DETAILS, GET_SECTION_DETAILS } from '../../
 import {
   hideItemPopup, selectAisle, selectSection, selectZone
 } from '../../state/actions/Location';
+import { setSelectedLocation, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import BottomSheetEditCard from '../../components/BottomSheetEditCard/BottomSheetEditCard';
@@ -44,7 +45,11 @@ interface SectionDetailsProps {
   selectedSection: LocationIdName;
 }
 
-export const handleDeleteItem = (selectedItem: SectionDetailsItem | null, sectionId: number, dispatch: Dispatch<any>): void => {
+export const handleDeleteItem = (
+  selectedItem: SectionDetailsItem | null,
+  sectionId: number,
+  dispatch: Dispatch<any>
+): void => {
   if (selectedItem) {
     dispatch(
       deleteLocation({
@@ -55,6 +60,40 @@ export const handleDeleteItem = (selectedItem: SectionDetailsItem | null, sectio
       })
     );
   }
+};
+
+export const handleEditItem = (
+  selectedItem: SectionDetailsItem | null,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  selectedZone: LocationIdName,
+  selectedAisle: LocationIdName,
+  selectedSection: LocationIdName
+): void => {
+  const currentSection = {
+    zoneId: selectedZone.id,
+    aisleId: selectedAisle.id,
+    sectionId: selectedSection.id,
+    zoneName: selectedZone.name,
+    aisleName: selectedAisle.name,
+    sectionName: selectedSection.name,
+    locationName: `${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`,
+    type: '8',
+    typeNbr: 8
+  };
+  dispatch(setupScreen(
+    selectedItem ? selectedItem.itemNbr : 0,
+    selectedItem ? selectedItem.upcNbr : '',
+    [currentSection],
+    [],
+    null,
+    -999,
+    false,
+    false
+  ));
+  dispatch(setSelectedLocation(currentSection));
+  dispatch(hideItemPopup());
+  navigation.navigate('EditLocation');
 };
 
 export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element => {
@@ -74,12 +113,11 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
   } = props;
 
   // Navigation Listener
-  useEffectHook(() => {
-    // Resets Get SectionDetails api response data when navigating off-screen
-    navigation.addListener('beforeRemove', () => {
-      dispatch({ type: GET_SECTION_DETAILS.RESET });
-    });
-  }, []);
+  // Resets Get SectionDetails api response data when navigating off-screen
+  useEffectHook(() => navigation.addListener('beforeRemove', () => {
+    dispatch(hideItemPopup());
+    dispatch({type: GET_SECTION_DETAILS.RESET});
+  }), []);
 
   // Get Section Details Api
   useEffectHook(() => {
@@ -199,8 +237,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
                 {
                   itemNbr: selectedItem ? selectedItem.itemNbr : '',
                   itemName: selectedItem ? selectedItem.itemDesc : ''
-                })
-              }
+                })}
             </Text>
             <View style={styles.buttonContainer}>
               <Button
@@ -230,12 +267,18 @@ const SectionDetails = (): JSX.Element => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const addAPI = useTypedSelector(state => state.async.addPallet);
-  const { itemPopupVisible, selectedItem, selectedSection } = useTypedSelector(state => state.Location);
+  const {
+    itemPopupVisible,
+    selectedItem,
+    selectedZone,
+    selectedAisle,
+    selectedSection
+  } = useTypedSelector(state => state.Location);
   const snapPoints = useMemo(() => ['40%'], []);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   useEffect(() => {
-    if (navigation.isFocused() && bottomSheetModalRef.current) {
+    if (bottomSheetModalRef.current) {
       if (itemPopupVisible) {
         bottomSheetModalRef.current.present();
       } else {
@@ -276,7 +319,9 @@ const SectionDetails = (): JSX.Element => {
         <BottomSheetEditCard
           isVisible={true}
           text={strings('LOCATION.EDIT_ITEM')}
-          onPress={() => { }}
+          onPress={() => {
+            handleEditItem(selectedItem, dispatch, navigation, selectedZone, selectedAisle, selectedSection);
+          }}
         />
         <BottomSheetSectionRemoveCard
           isVisible={true}

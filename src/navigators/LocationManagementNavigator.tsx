@@ -39,20 +39,20 @@ export const renderScanButton = (
   dispatch: Dispatch<any>,
   isManualScanEnabled: boolean
 ): JSX.Element => (
-    <TouchableOpacity
-      onPress={() => {
-        dispatch(setManualScan(!isManualScanEnabled));
-      }}
-    >
-      <View style={styles.leftButton}>
-        <MaterialCommunityIcon
-          name="barcode-scan"
-          size={20}
-          color={COLOR.WHITE}
-        />
-      </View>
-    </TouchableOpacity>
-  );
+  <TouchableOpacity
+    onPress={() => {
+      dispatch(setManualScan(!isManualScanEnabled));
+    }}
+  >
+    <View style={styles.leftButton}>
+      <MaterialCommunityIcon
+        name="barcode-scan"
+        size={20}
+        color={COLOR.WHITE}
+      />
+    </View>
+  </TouchableOpacity>
+);
 
 export const renderCamButton = (): JSX.Element => (
   <TouchableOpacity
@@ -226,10 +226,10 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         }}
       />
       <Stack.Screen
-        name="AddLocation"
+        name="EditLocation"
         component={SelectLocationType}
         options={{
-          headerTitle: strings('LOCATION.ADD_NEW_LOCATION'),
+          headerTitle: strings('LOCATION.EDIT_LOCATION'),
           headerTitleAlign: 'left',
           headerBackTitleVisible: false
         }}
