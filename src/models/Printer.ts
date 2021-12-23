@@ -61,3 +61,9 @@ export enum PortablePaper {
 }
 
 export type PrintPaperSize = keyof typeof LaserPaper | keyof typeof PortablePaper | '';
+
+export interface PrintQueueAPIMultistatus {
+  itemNbr: number;
+  upcNbr: string;
+  completed: boolean;
+}
