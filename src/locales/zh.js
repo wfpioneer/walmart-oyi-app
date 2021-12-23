@@ -217,21 +217,21 @@ export default {
     INCOMPLETE_ZONE_ADDED: '区域 %{name} 已添加， 但是仅部分通道/货架创建成功，请检查已创建的通道/货架清单',
     REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: '移除所有通道和此通道内的货架号',
-    REMOVE_ZONE_FAIL: 'There was an error removing the zone.  Please try again', // TODO add CN translation
-    DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}', // TODO add translation
-    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again', // TODO add translation
-    UPC_VALIDATE_ERROR: 'UPC can only contain numbers', // TODO Mandarin Translation
-    SCAN_ITEM: 'Scan Item', // TODO Mandarin Translation
-    ITEM_ADDED: 'Item Successfully Added', // TODO Mandarin Translation
-    ADD_ITEM_ERROR: 'Error adding the item', // TODO Mandarin Translation
-    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.', // TODO Mandarin Translation
-    REMOVE_AISLE_CONFIRMATION: 'Are you sure you want to remove this aisle?', // TODO Mandarin Translation
-    REMOVE_AISLE_WILL_REMOVE_SECTIONS: 'This will also remove all sections associated with it', // TODO Mandarin Translation
-    REMOVE_AISLE_FAIL: 'There was an error removing the aisle.  Please try again', // TODO Mandarin Translation
-    AISLE_REMOVED: 'Aisle removed successfully', // TODO Mandarin Translation
-    REMOVE_SECTION_CONFIRMATION: 'Are you sure you want to delete section: %{sectionName}?', // TODO Mandarin Translation
-    REMOVE_SECTION_FAIL: 'There was an error removing the section. \nPlease try again.', // TODO Mandarin Translation
-    SECTION_REMOVED: 'Section Removed Successfully' // TODO Mandarin Translation
+    REMOVE_ZONE_FAIL: '移除此区域失败，请重试。',
+    DELETE_ITEM: '删除%{itemNBR} \n%{itemName}',
+    ERROR_DELETE_ITEM: '删除商品失败，请重试',
+    UPC_VALIDATE_ERROR: 'UPC只能是数字',
+    SCAN_ITEM: '扫描商品',
+    ITEM_ADDED: '商品添加成功',
+    ADD_ITEM_ERROR: '商品添加成功',
+    ADD_ITEM_API_ERROR: '添加商品时出错，请重试',
+    REMOVE_AISLE_CONFIRMATION: '确定移除此通道？',
+    REMOVE_AISLE_WILL_REMOVE_SECTIONS: '将移除此通道下所有货架标签信息',
+    REMOVE_AISLE_FAIL: '移除通道时出错，请重试',
+    AISLE_REMOVED: '通道移除成功',
+    REMOVE_SECTION_CONFIRMATION: '确定删除此货架标签:%{sectionName}?',
+    REMOVE_SECTION_FAIL: '移除货架号发生错误,请重试',
+    SECTION_REMOVED: '货架移除成功'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

@@ -220,18 +220,18 @@ export default {
     REMOVE_ZONE_FAIL: 'Hubo un error eliminando la zona. Por favor inténtalo de nuevo',
     DELETE_ITEM: 'Borrar %{itemNbr} \n%{itemName}',
     ERROR_DELETE_ITEM: 'Hubo un error borrando el artículo. Por favor inténtalo de nuevo',
-    UPC_VALIDATE_ERROR: 'UPC can only contain numbers', // TODO Spanish Translation
-    SCAN_ITEM: 'Scan Item', // TODO Spanish Translation
-    ITEM_ADDED: 'Item Successfully Added', // TODO Spanish Translation
-    ADD_ITEM_ERROR: 'Error adding the item', // TODO Spanish Translation
-    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.', // TODO Spanish Translation
-    REMOVE_AISLE_CONFIRMATION: 'Are you sure you want to remove this aisle?', // TODO Spanish Translation
-    REMOVE_AISLE_WILL_REMOVE_SECTIONS: 'This will also remove all sections associated with it', // TODO Spanish Translation
-    REMOVE_AISLE_FAIL: 'There was an error removing the aisle.  Please try again', // TODO Spanish Translation
-    AISLE_REMOVED: 'Aisle removed successfully', // TODO Spanish Translation
-    REMOVE_SECTION_CONFIRMATION: 'Are you sure you want to delete section: %{sectionName}?', // TODO Spanish Translation
-    REMOVE_SECTION_FAIL: 'There was an error removing the section. \nPlease try again.', // TODO Spanish Translation
-    SECTION_REMOVED: 'Section Removed Successfully' // TODO Spanish Translation
+    UPC_VALIDATE_ERROR: 'El UPC solo puede contener números',
+    SCAN_ITEM: 'Escanear artículo',
+    ITEM_ADDED: 'Artículo agregado correctamente',
+    ADD_ITEM_ERROR: 'Error agregando artículo',
+    ADD_ITEM_API_ERROR: 'Hubo un error agregando el artículo. \nPor favor Inténtalo de nuevo',
+    REMOVE_AISLE_CONFIRMATION: '¿Estás seguro que quieres eliminar el pasillo?',
+    REMOVE_AISLE_WILL_REMOVE_SECTIONS: 'Esto eliminará todas las secciones asociadas',
+    REMOVE_AISLE_FAIL: 'Hubo un error eliminando el pasillo. Por favor inténtalo de nuevo',
+    AISLE_REMOVED: 'Pasillo eliminado correctamente',
+    REMOVE_SECTION_CONFIRMATION: '¿Estas seguro que quieres borrar la sección %{sectionName}?',
+    REMOVE_SECTION_FAIL: 'Hubo un error eliminando la sección. Por favor inténtalo de nuevo',
+    SECTION_REMOVED: 'Sección eliminada correctamente'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
