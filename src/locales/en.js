@@ -169,6 +169,7 @@ export default {
     LOCATION_DETAILS: 'Location Details',
     NO_ZONES_AVAILABLE: 'No Zones Available',
     NO_AISLES_AVAILABLE: 'No Aisles Available',
+    NO_SECTIONS_AVAILABLE: 'No Sections Available',
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.',
     CLEAR_ALL: 'Clear all',
     SCAN_LOCATION: 'Invalid location name Ex: ABC1-2',
@@ -226,7 +227,10 @@ export default {
     REMOVE_AISLE_CONFIRMATION: 'Are you sure you want to remove this aisle?',
     REMOVE_AISLE_WILL_REMOVE_SECTIONS: 'This will also remove all sections associated with it',
     REMOVE_AISLE_FAIL: 'There was an error removing the aisle.  Please try again',
-    AISLE_REMOVED: 'Aisle removed successfully'
+    AISLE_REMOVED: 'Aisle removed successfully',
+    REMOVE_SECTION_CONFIRMATION: 'Are you sure you want to delete section: %{sectionName}?',
+    REMOVE_SECTION_FAIL: 'There was an error removing the section. \nPlease try again.',
+    SECTION_REMOVED: 'Section Removed Successfully'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

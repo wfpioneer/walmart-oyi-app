@@ -83,3 +83,6 @@ export const deleteZone = makeAsyncActionCreators(DELETE_ZONE);
 
 export const DELETE_AISLE = makeAsyncActionTypes('API/DELETE_AISLE');
 export const deleteAisle = makeAsyncActionCreators(DELETE_AISLE);
+
+export const REMOVE_SECTION = makeAsyncActionTypes('API/REMOVE_SECTION');
+export const removeSection = makeAsyncActionCreators(REMOVE_SECTION);

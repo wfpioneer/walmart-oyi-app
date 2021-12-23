@@ -33,6 +33,7 @@ export const CREATE_SECTIONS = 'SAGA/CREATE_SECTIONS';
 export const CREATE_ZONE = 'SAGA/CREATE_ZONE';
 export const DELETE_ZONE = 'SAGA/DELETE_ZONE';
 export const DELETE_AISLE = 'SAGA/DELETE_AISLE';
+export const REMOVE_SECTION = 'SAGA/REMOVE_SECTION';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -78,3 +79,4 @@ export const postCreateAisles = (payload: {
 }) => ({ type: POST_CREATE_AISLES, payload } as const);
 export const postCreateZone = (payload: CreateZoneRequest) => ({ type: CREATE_ZONE, payload } as const);
 export const deleteAisle = (payload: any) => ({ type: DELETE_AISLE, payload } as const);
+export const removeSection = (payload: number) => ({ type: REMOVE_SECTION, payload } as const);
