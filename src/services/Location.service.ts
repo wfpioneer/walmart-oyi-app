@@ -87,4 +87,10 @@ export default class LocationService {
     const urls: Environment = getEnvironment();
     return Request.delete(`${urls.locationUrl}/zone/${payload}`);
   }
+
+  public static clearLocation(payload: { locationId: number, target: string }):
+    Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.delete(`${urls.locationUrl}/location/${payload.locationId}/${payload.target}`)
+  }
 }

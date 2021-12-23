@@ -79,3 +79,6 @@ export const CREATE_ZONE = makeAsyncActionTypes('API/CREATE_ZONE');
 export const createZone = makeAsyncActionCreators(CREATE_ZONE);
 export const DELETE_ZONE = makeAsyncActionTypes('API/DELETE_ZONE');
 export const deleteZone = makeAsyncActionCreators(DELETE_ZONE);
+
+export const CLEAR_LOCATION = makeAsyncActionTypes('API/CLEAR_LOCATION');
+export const clearLocation = makeAsyncActionCreators(CLEAR_LOCATION);

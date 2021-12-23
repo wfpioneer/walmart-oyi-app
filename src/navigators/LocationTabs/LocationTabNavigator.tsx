@@ -12,6 +12,7 @@ import {
 } from '@react-navigation/native';
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 import { Dispatch } from 'redux';
+import moment from 'moment';
 import { strings } from '../../locales';
 import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
@@ -19,7 +20,7 @@ import styles from './LocationTabNavigator.style';
 import LocationHeader from '../../components/locationHeader/LocationHeader';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
-import { getPalletDetails, getSectionDetails } from '../../state/actions/saga';
+import { clearLocation, getPalletDetails, getSectionDetails } from '../../state/actions/saga';
 import SectionDetails from '../../screens/SectionDetails/SectionDetailsScreen';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
@@ -53,6 +54,7 @@ export interface LocationProps {
     userFeatures: string[];
     itemPopupVisible:boolean;
     sectionResult: any;
+    setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface TabHeaderProps {
@@ -61,6 +63,16 @@ interface TabHeaderProps {
     isReserve: boolean;
     isDisabled: boolean;
 }
+
+export const handleModalClose = (
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  setClearSectionApiStart: React.Dispatch<React.SetStateAction<number>>,
+  dispatch: Dispatch<any>
+): void => {
+  setDisplayConfirmation(false);
+  setClearSectionApiStart(0);
+  dispatch({ type: 'API/CLEAR_SECTION/RESET' });
+};
 
 export const TabHeader = (props: TabHeaderProps): JSX.Element => {
   const {
@@ -165,7 +177,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     validateSessionCall,
     userFeatures,
     itemPopupVisible,
-    sectionResult
+    sectionResult,
+    setSelectedTab
   } = props;
   const sectionExists: boolean = (sectionResult && sectionResult.status !== 204);
 
@@ -233,7 +246,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
                 e.preventDefault();
                 dispatch(hideLocationPopup());
               }
-            }
+            },
+            focus: () => setSelectedTab('Floor')
           }}
         >
           { () => <FloorDetailsList sectionExists={sectionExists} />}
@@ -255,7 +269,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
               if (itemPopupVisible) {
                 dispatch(hideItemPopup());
               }
-            }
+            },
+            focus: () => setSelectedTab('Reserve')
           }}
         >
           {() => <ReserveDetailsList sectionExists={sectionExists} />}
@@ -268,6 +283,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
 const LocationTabs = () : JSX.Element => {
   const { selectedAisle, selectedZone, selectedSection } = useTypedSelector(state => state.Location);
   const { result } = useTypedSelector(state => state.async.getSectionDetails);
+  const clearSectionApi = useTypedSelector(state => state.async.clearLocation);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const userFeatures = useTypedSelector(state => state.User.features);
@@ -279,6 +295,7 @@ const LocationTabs = () : JSX.Element => {
   const locItem: LocationItem | undefined = (result && result.data);
   const locationName = `${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`;
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
+  const [selectedTab, setSelectedTab] = useState('');
   const [clearSectionApiStart, setClearSectionApiStart] = useState(0);
 
   const bottomSheetLocationDetailsModalRef = useRef<BottomSheetModal>(null);
@@ -296,15 +313,20 @@ const LocationTabs = () : JSX.Element => {
     }
   }, [locationPopupVisible]);
 
+  const handleClearSection = () => {
+    setClearSectionApiStart(moment().valueOf());
+    dispatch(clearLocation({ locationId: selectedSection.id, target: selectedTab }));
+  };
+
   const clearSectionModalView = () => (
     <CustomModalComponent
       isVisible={displayClearConfirmation}
       onClose={() => handleModalClose(setDisplayClearConfirmation, setClearSectionApiStart, dispatch)}
       modalType="Error"
     >
-      {deleteZoneApi.isWaiting ? (
+      {clearSectionApi.isWaiting ? (
         <ActivityIndicator
-          animating={deleteZoneApi.isWaiting}
+          animating={clearSectionApi.isWaiting}
           hidesWhenStopped
           color={COLOR.MAIN_THEME_COLOR}
           size="large"
@@ -333,9 +355,9 @@ const LocationTabs = () : JSX.Element => {
             />
             <Button
               style={styles.delButton}
-              title={deleteZoneApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+              title={clearSectionApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
               backgroundColor={COLOR.MAIN_THEME_COLOR}
-              onPress={handleDeleteZone}
+              onPress={handleClearSection}
             />
           </View>
         </>
@@ -367,6 +389,7 @@ const LocationTabs = () : JSX.Element => {
           userFeatures={userFeatures}
           itemPopupVisible={itemPopupVisible}
           sectionResult={result}
+          setSelectedTab={setSelectedTab}
         />
       </TouchableOpacity>
       <BottomSheetModal

@@ -32,6 +32,7 @@ export const POST_CREATE_AISLES = 'SAGA/POST_CREATE_AISLES';
 export const CREATE_SECTIONS = 'SAGA/CREATE_SECTIONS';
 export const CREATE_ZONE = 'SAGA/CREATE_ZONE';
 export const DELETE_ZONE = 'SAGA/DELETE_ZONE';
+export const CLEAR_LOCATION = 'SAGA/CLEAR_LOCATION';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -76,3 +77,6 @@ export const postCreateAisles = (payload: {
   aislesToCreate: CreateAisleRequest
 }) => ({ type: POST_CREATE_AISLES, payload } as const);
 export const postCreateZone = (payload: CreateZoneRequest) => ({ type: CREATE_ZONE, payload } as const);
+export const clearLocation = (payload: {
+  locationId: number, target: string
+}) => ({ type: CLEAR_LOCATION, payload } as const);
