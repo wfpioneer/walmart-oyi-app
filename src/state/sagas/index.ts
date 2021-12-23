@@ -20,6 +20,7 @@ import GetApprovalListService from '../../services/GetApprovalList.service';
 import UpdateApprovalListService from '../../services/UpdateApprovalList.service';
 import LocationService from '../../services/Location.service';
 import DeletePalletService from '../../services/DeletePallet.service';
+import DeleteAisleService from '../../services/DeleteAisle.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
@@ -49,6 +50,7 @@ const genericSagas = [
   makeAsyncSaga(saga.CREATE_SECTIONS, actions.createSections, LocationService.createSections),
   makeAsyncSaga(saga.CREATE_ZONE, actions.createZone, LocationService.createZone),
   makeAsyncSaga(saga.DELETE_ZONE, actions.deleteZone, LocationService.deleteZone),
+  makeAsyncSaga(saga.DELETE_AISLE, actions.deleteAisle, DeleteAisleService.deleteAisle),
   makeAsyncSaga(saga.REMOVE_SECTION, actions.removeSection, LocationService.removeSection)
 ];
 
