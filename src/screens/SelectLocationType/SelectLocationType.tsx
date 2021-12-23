@@ -30,7 +30,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
 import { CustomModalComponent } from '../Modal/Modal';
 
-const SALES_FLOOR_LOCATION_TYPE = '8';
+export const SALES_FLOOR_LOCATION_TYPE = '8';
 
 interface SelectLocationProps {
   inputLocation: boolean;
