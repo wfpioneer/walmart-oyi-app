@@ -80,11 +80,11 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
-    name="AddLocation"
+    name="EditLocation"
     options={
       Object {
         "headerBackTitleVisible": false,
-        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitle": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
         "headerTitleAlign": "left",
       }
     }
@@ -208,11 +208,11 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
-    name="AddLocation"
+    name="EditLocation"
     options={
       Object {
         "headerBackTitleVisible": false,
-        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitle": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
         "headerTitleAlign": "left",
       }
     }
@@ -336,11 +336,11 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    name="AddLocation"
+    name="EditLocation"
     options={
       Object {
         "headerBackTitleVisible": false,
-        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitle": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
         "headerTitleAlign": "left",
       }
     }
@@ -464,11 +464,11 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    name="AddLocation"
+    name="EditLocation"
     options={
       Object {
         "headerBackTitleVisible": false,
-        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitle": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
         "headerTitleAlign": "left",
       }
     }
