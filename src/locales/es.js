@@ -136,7 +136,8 @@ export default {
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Spanish translation
-    DUPLICATE_PRINTER: 'Una impresora ya existe' // TODO Spanish translation
+    DUPLICATE_PRINTER: 'Una impresora ya existe',
+    SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -150,7 +151,7 @@ export default {
     EDIT_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
     MANUAL_ENTRY_BUTTON: 'Ingresa manualmente la ubicación.',
     SELECTION_INSTRUCTION: '1. Elija un tipo de ubicación.',
-    SCAN_INSTRUCTION: '2. Escanea la etiqueta de Ubicación.',
+    SCAN_INSTRUCTION: 'Escanea la etiqueta de Ubicación.',
     DELETE_CONFIRMATION: 'Confirma la eliminación de \nla ubicación ',
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
@@ -169,6 +170,7 @@ export default {
     LOCATION_DETAILS: 'Detalles de ubicación',
     NO_ZONES_AVAILABLE: 'No hay zonas disponibles',
     NO_AISLES_AVAILABLE: 'No hay pasillos disponibles',
+    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Spanish Translation
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_ALL: 'Limpiar',
     CLEAR_SECTION: 'Limpiar sección',
@@ -218,16 +220,23 @@ export default {
     REMOVE_ZONE_FAIL: 'Hubo un error eliminando la zona. Por favor inténtalo de nuevo',
     DELETE_ITEM: 'Borrar %{itemNbr} \n%{itemName}',
     ERROR_DELETE_ITEM: 'Hubo un error borrando el artículo. Por favor inténtalo de nuevo',
-    UPC_VALIDATE_ERROR: 'UPC can only contain numbers', // TODO Spanish Translation
-    SCAN_ITEM: 'Scan Item', // TODO Spanish Translation
-    ITEM_ADDED: 'Item Successfully Added', // TODO Spanish Translation
-    ADD_ITEM_ERROR: 'Error adding the item', // TODO Spanish Translation
-    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.', // TODO Spanish Translation
+    UPC_VALIDATE_ERROR: 'El UPC solo puede contener números',
+    SCAN_ITEM: 'Escanear artículo',
+    ITEM_ADDED: 'Artículo agregado correctamente',
+    ADD_ITEM_ERROR: 'Error agregando artículo',
+    ADD_ITEM_API_ERROR: 'Hubo un error agregando el artículo. \nPor favor Inténtalo de nuevo',
     CLEAR_SECTION_CONFIRMATION: '¿Estas seguro de que quieres limpiar la sección?',
     CLEAR_SECTION_SALES_FLOOR_MESSAGE: 'Esto eliminará los artículos en Piso de esta sección',
     CLEAR_SECTION_RESERVE_MESSAGE: 'Esto eliminará los pallets en bodega de esta sección',
     CLEAR_SECTION_WONT_DELETE: 'Esto no eliminará la sección',
-    CLEAR_SECTION_FAIL: 'Hubo un error eliminando la sección. Por favor inténtalo de nuevo'
+    CLEAR_SECTION_FAIL: 'Hubo un error eliminando la sección. Por favor inténtalo de nuevo',
+    REMOVE_AISLE_CONFIRMATION: '¿Estás seguro que quieres eliminar el pasillo?',
+    REMOVE_AISLE_WILL_REMOVE_SECTIONS: 'Esto eliminará todas las secciones asociadas',
+    REMOVE_AISLE_FAIL: 'Hubo un error eliminando el pasillo. Por favor inténtalo de nuevo',
+    AISLE_REMOVED: 'Pasillo eliminado correctamente',
+    REMOVE_SECTION_CONFIRMATION: '¿Estas seguro que quieres borrar la sección %{sectionName}?',
+    REMOVE_SECTION_FAIL: 'Hubo un error eliminando la sección. Por favor inténtalo de nuevo',
+    SECTION_REMOVED: 'Sección eliminada correctamente'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

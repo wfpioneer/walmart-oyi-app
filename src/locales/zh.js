@@ -136,7 +136,8 @@ export default {
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
     PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Mandarin Translation
-    DUPLICATE_PRINTER: '现存打印机'
+    DUPLICATE_PRINTER: '现存打印机',
+    SOME_PRINTS_FAILED: '有些商品打印失败'
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -148,7 +149,7 @@ export default {
     ADD_DUPLICATE_ERROR: '位置和对应类型已经存在',
     MANUAL_ENTRY_BUTTON: '手工添加位置',
     SELECTION_INSTRUCTION: '\t选择位置类型',
-    SCAN_INSTRUCTION: '\t扫描货架标签',
+    SCAN_INSTRUCTION: '扫描货架标签',
     EDIT_DUPLICATE_ERROR: '已有位置类型',
     EDIT_LOCATION_API_ERROR: '编辑位置报错，\n请重试',
     DELETE_CONFIRMATION: '确认删除位置 ',
@@ -169,6 +170,7 @@ export default {
     LOCATION_DETAILS: '具体位置',
     NO_ZONES_AVAILABLE: '无区域',
     NO_AISLES_AVAILABLE: '无通道',
+    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Mandarin Translation
     LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
     CLEAR_ALL: '全部清除',
     CLEAR_SECTION: '清除此货架位置',
@@ -207,27 +209,34 @@ export default {
     ADD_SECTIONS_ERROR: '添加货架时错误，请重试.',
     EDIT_ITEM: '编辑商品',
     REMOVE_ITEM: '删除商品',
-    SECTION_NOT_FOUND: 'The Scanned Section was not found.', // TODO Mandarin Translation
+    SECTION_NOT_FOUND: '扫描的货架标签没收到',
     PRINT_LABEL_EXISTS_HEADER: '打印既有标签',
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
-    ZONE_ADDED: 'Zone %{name} added', // TODO Mandarin Translation
-    ADD_ZONE_ERROR: 'There was an error adding the zone. Please try again', // TODO Mandarin Translation
-    INCOMPLETE_ZONE_ADDED: 'Zone %{name} added, but not all aisles/sections were created. Please check the list of aisles and sections that were created', // TODO Mandarin Translation
+    ZONE_ADDED: '区域 %{name} 已添加',
+    ADD_ZONE_ERROR: '添加区域失败，请重试。',
+    INCOMPLETE_ZONE_ADDED: '区域 %{name} 已添加， 但是仅部分通道/货架创建成功，请检查已创建的通道/货架清单',
     REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: '移除所有通道和此通道内的货架号',
-    REMOVE_ZONE_FAIL: 'There was an error removing the zone.  Please try again', // TODO add CN translation
-    DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}', // TODO add translation
-    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again', // TODO add translation
-    UPC_VALIDATE_ERROR: 'UPC can only contain numbers', // TODO Mandarin Translation
-    SCAN_ITEM: 'Scan Item', // TODO Mandarin Translation
-    ITEM_ADDED: 'Item Successfully Added', // TODO Mandarin Translation
-    ADD_ITEM_ERROR: 'Error adding the item', // TODO Mandarin Translation
-    ADD_ITEM_API_ERROR: 'There was an error adding the item. \nPlease try again.', // TODO Mandarin Translation
+    REMOVE_ZONE_FAIL: '移除此区域失败，请重试。',
+    DELETE_ITEM: '删除%{itemNBR} \n%{itemName}',
+    ERROR_DELETE_ITEM: '删除商品失败，请重试',
+    UPC_VALIDATE_ERROR: 'UPC只能是数字',
+    SCAN_ITEM: '扫描商品',
+    ITEM_ADDED: '商品添加成功',
+    ADD_ITEM_ERROR: '商品添加成功',
+    ADD_ITEM_API_ERROR: '添加商品时出错，请重试',
     CLEAR_SECTION_CONFIRMATION: '确定清除此货架标签下所有内容？',
     CLEAR_SECTION_SALES_FLOOR_MESSAGE: '将清除此货架标签下所有楼面商品',
     CLEAR_SECTION_RESERVE_MESSAGE: '将清除此货架标签下所有卡板',
     CLEAR_SECTION_WONT_DELETE: '将不删除此货架标签',
-    CLEAR_SECTION_FAIL: '清除货架标签信息时出错，请重试'
+    CLEAR_SECTION_FAIL: '清除货架标签信息时出错，请重试',
+    REMOVE_AISLE_CONFIRMATION: '确定移除此通道？',
+    REMOVE_AISLE_WILL_REMOVE_SECTIONS: '将移除此通道下所有货架标签信息',
+    REMOVE_AISLE_FAIL: '移除通道时出错，请重试',
+    AISLE_REMOVED: '通道移除成功',
+    REMOVE_SECTION_CONFIRMATION: '确定删除此货架标签:%{sectionName}?',
+    REMOVE_SECTION_FAIL: '移除货架号发生错误,请重试',
+    SECTION_REMOVED: '货架移除成功'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

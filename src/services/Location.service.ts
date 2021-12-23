@@ -93,4 +93,9 @@ export default class LocationService {
     const urls: Environment = getEnvironment();
     return Request.delete(`${urls.locationUrl}/location/${payload.locationId}/${payload.target}`)
   }
+
+  public static removeSection(payload: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.delete(`${urls.locationUrl}/section/${payload}`);
+  }
 }

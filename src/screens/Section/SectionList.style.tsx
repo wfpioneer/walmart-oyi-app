@@ -64,6 +64,31 @@ const styles = StyleSheet.create({
     borderColor: COLOR.GREY_200,
     borderRadius: 5,
     borderWidth: 2
+  },
+  confirmationTextView: {
+    flexDirection: 'column'
+  },
+  confirmation: {
+    textAlign: 'center',
+    fontSize: 18,
+    paddingHorizontal: 15,
+    paddingTop: 15,
+    paddingBottom: 5
+  },
+  confirmationExtraText: {
+    textAlign: 'center',
+    fontSize: 14,
+    paddingHorizontal: 15,
+    paddingBottom: 15
+  },
+  buttonContainer: {
+    width: '100%',
+    alignContent: 'space-around',
+    flexDirection: 'row'
+  },
+  delButton: {
+    flex: 1,
+    paddingHorizontal: 10
   }
 });
 

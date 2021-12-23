@@ -12,11 +12,22 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import {
-  LaserPaper, PrintItemList, PrintLocationList, PrintQueueItem, PrintQueueItemType, Printer, PrinterType
+  LaserPaper,
+  PrintItemList,
+  PrintLocationList,
+  PrintQueueAPIMultistatus,
+  PrintQueueItem,
+  PrintQueueItemType,
+  Printer
 } from '../../models/Printer';
 import styles from './PrintQueue.styles';
 import { strings } from '../../locales';
-import { setPrintQueue, unsetPrintingLocationLabels } from '../../state/actions/Print';
+import {
+  removeMultipleFromPrintQueueByItemNbr,
+  removeMultipleFromPrintQueueByUpc,
+  setPrintQueue,
+  unsetPrintingLocationLabels
+} from '../../state/actions/Print';
 import { printLocationLabel, printSign } from '../../state/actions/saga';
 import IconButton from '../../components/buttons/IconButton';
 import COLOR from '../../themes/Color';
@@ -36,6 +47,7 @@ interface HandlePrintProps {
   selectedPrinter: Printer;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
+
 interface PrintQueueScreenProps {
   printQueue: PrintQueueItem[];
   selectedPrinter: Printer;
@@ -141,7 +153,8 @@ export const handlePrint = (props: HandlePrintProps): void => {
           return {
             itemNbr: itemNbr ?? 0,
             qty: signQty,
-            // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore needed because typechecking error
             code: LaserPaper[paperSize],
             description: paperSize,
             printerMACAddress: selectedPrinter.id,
@@ -152,6 +165,71 @@ export const handlePrint = (props: HandlePrintProps): void => {
       dispatch(printSign({ printList: printArray }));
     }
   }).catch(() => {});
+};
+
+export const printItemApiEffect = (
+  printAPI: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean, message: string }>>
+): void => {
+  if (!printAPI.isWaiting && printAPI.result) {
+    if (printAPI.result.status === 207) {
+      const { data } = printAPI.result;
+      const succeededItemNbrs: number[] = [];
+      const succeededUpcs: string[] = [];
+      data.filter((item: PrintQueueAPIMultistatus) => item.completed)
+        .forEach((item: PrintQueueAPIMultistatus) => {
+          if (item.itemNbr) {
+            succeededItemNbrs.push(item.itemNbr);
+          } else {
+            succeededUpcs.push(item.upcNbr);
+          }
+        });
+      dispatch(removeMultipleFromPrintQueueByItemNbr(succeededItemNbrs));
+      dispatch(removeMultipleFromPrintQueueByUpc(succeededUpcs));
+      dispatch(showSnackBar(strings('PRINT.SOME_PRINTS_FAILED'), 2500));
+    } else {
+      dispatch(setPrintQueue([]));
+      navigation.goBack();
+    }
+    return undefined;
+  }
+
+  // on api failure
+  if (!printAPI.isWaiting && printAPI.error) {
+    return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+  }
+
+  // on api submission
+  if (printAPI.isWaiting) {
+    setError({ error: false, message: '' });
+  }
+
+  return undefined;
+};
+
+export const locationLabelsApiEffect = (
+  printLabelAPI: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean, message: string }>>
+): void => {
+  // on api success
+  if (!printLabelAPI.isWaiting && printLabelAPI.result) {
+    // TODO future task only remove print label items from print queue
+    dispatch(setPrintQueue([]));
+    dispatch(showSnackBar(strings('PRINT.LOCATION_SUCCESS'), 3000));
+    navigation.goBack();
+  }
+  // on api failure
+  if (!printLabelAPI.isWaiting && printLabelAPI.error) {
+    setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+  }
+  // on api submission
+  if (printLabelAPI.isWaiting) {
+    setError({ error: false, message: '' });
+  }
 };
 
 export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
@@ -185,46 +263,21 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
   }, []);
 
   // Print API (Queue)
-  useEffectHook(() => {
-    // on api success
-    if (!printAPI.isWaiting && printAPI.result) {
-      // TODO future task only remove successful items from the print queue
-      dispatch(setPrintQueue([]));
-      navigation.goBack();
-      return undefined;
-    }
-
-    // on api failure
-    if (!printAPI.isWaiting && printAPI.error) {
-      return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
-    }
-
-    // on api submission
-    if (printAPI.isWaiting) {
-      setError({ error: false, message: '' });
-    }
-
-    return undefined;
-  }, [printAPI]);
+  useEffectHook(() => printItemApiEffect(
+    printAPI,
+    dispatch,
+    navigation,
+    setError
+  ), [printAPI]);
 
   // Print Label API
-  useEffectHook(() => {
-    // on api success
-    if (!printLabelAPI.isWaiting && printLabelAPI.result) {
-      // TODO future task only remove print label items from print queue
-      dispatch(setPrintQueue([]));
-      dispatch(showSnackBar(strings('PRINT.LOCATION_SUCCESS'), 3000));
-      navigation.goBack();
-    }
-    // on api failure
-    if (!printLabelAPI.isWaiting && printLabelAPI.error) {
-      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
-    }
-    // on api submission
-    if (printLabelAPI.isWaiting) {
-      setError({ error: false, message: '' });
-    }
-  }, [printLabelAPI]);
+  useEffectHook(() => locationLabelsApiEffect(
+    printLabelAPI,
+    dispatch,
+    navigation,
+    setError
+  ), [printLabelAPI]);
+
   return (printQueue.length === 0
     ? (
       <View style={styles.emptyContainer}>

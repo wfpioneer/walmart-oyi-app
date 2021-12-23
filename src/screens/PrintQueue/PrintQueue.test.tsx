@@ -3,7 +3,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { strings } from '../../locales';
 import { PrintQueueItem, PrinterType } from '../../models/Printer';
-import { PrintQueueScreen, handlePrint, renderPrintItem } from './PrintQueue';
+import { PrintQueueScreen, handlePrint, renderPrintItem, printItemApiEffect } from './PrintQueue';
 
 // Something gets into a weird state, and this seems to fix it
 jest.useFakeTimers();
@@ -250,7 +250,7 @@ describe('PrintQueueScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
-  describe('HandlePrint', () => {
+  describe('Print Queue externalized function tests', () => {
     it('calls handlePrint dispatch ', async () => {
       const dispatch = jest.fn();
       await handlePrint({
@@ -279,5 +279,93 @@ describe('PrintQueueScreen', () => {
 
       expect(validateSessionCall).toHaveBeenCalled();
     });
+  });
+
+  it('ensures that print API works on 200 success', () => {
+    const mockDispatch = jest.fn();
+    const printAPI = {
+      value: {},
+      isWaiting: false,
+      result: {
+        data: [
+          {
+            itemNbr: 252465123,
+            upcNbr: null,
+            completed: true
+          },
+          {
+            itemNbr: 250061,
+            upcNbr: null,
+            completed: true
+          }
+        ],
+        status: 200
+      },
+      error: null
+    };
+    const mockSetError = jest.fn();
+
+    const mockGoBack = jest.fn();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    navigationProp = { goBack: mockGoBack };
+    printItemApiEffect(printAPI, mockDispatch, navigationProp, mockSetError);
+    expect(mockDispatch).toBeCalledTimes(1);
+    expect(mockGoBack).toBeCalledTimes(1);
+    expect(mockSetError).toBeCalledTimes(0);
+  });
+
+  it('ensures that print API works on 207 success', () => {
+    const mockDispatch = jest.fn();
+    const printAPI = {
+      value: {},
+      isWaiting: false,
+      result: {
+        data: [
+          {
+            itemNbr: 252465123,
+            upcNbr: null,
+            completed: false
+          },
+          {
+            itemNbr: 250061,
+            upcNbr: null,
+            completed: true
+          }
+        ],
+        status: 207
+      },
+      error: null
+    };
+    const mockSetError = jest.fn();
+
+    const mockGoBack = jest.fn();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    navigationProp = { goBack: mockGoBack };
+    printItemApiEffect(printAPI, mockDispatch, navigationProp, mockSetError);
+    expect(mockDispatch).toBeCalledTimes(3);
+    expect(mockGoBack).toBeCalledTimes(0);
+    expect(mockSetError).toBeCalledTimes(0);
+  });
+
+  it('ensures that print API works on fail', () => {
+    const mockDispatch = jest.fn();
+    const printAPI = {
+      value: {},
+      isWaiting: false,
+      result: null,
+      error: 'timeout'
+    };
+    const mockSetError = jest.fn();
+
+    const mockGoBack = jest.fn();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    navigationProp = { goBack: mockGoBack };
+    printItemApiEffect(printAPI, mockDispatch, navigationProp, mockSetError);
+    expect(mockDispatch).toBeCalledTimes(0);
+    expect(mockGoBack).toBeCalledTimes(0);
+    expect(mockSetError).toBeCalledTimes(1);
   });
 });
