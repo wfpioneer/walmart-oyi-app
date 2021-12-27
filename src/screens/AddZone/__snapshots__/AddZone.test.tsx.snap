@@ -211,6 +211,10 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
           value=""
         />
         <PickerItem
+          label="A - First Feature"
+          value="A"
+        />
+        <PickerItem
           label="B - Electronics"
           value="B"
         />
@@ -673,6 +677,10 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
         <PickerItem
           label=""
           value=""
+        />
+        <PickerItem
+          label="A - First Feature"
+          value="A"
         />
         <PickerItem
           label="B - Electronics"
