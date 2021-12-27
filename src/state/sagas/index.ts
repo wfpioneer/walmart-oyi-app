@@ -51,7 +51,8 @@ const genericSagas = [
   makeAsyncSaga(saga.CREATE_ZONE, actions.createZone, LocationService.createZone),
   makeAsyncSaga(saga.DELETE_ZONE, actions.deleteZone, LocationService.deleteZone),
   makeAsyncSaga(saga.DELETE_AISLE, actions.deleteAisle, DeleteAisleService.deleteAisle),
-  makeAsyncSaga(saga.REMOVE_SECTION, actions.removeSection, LocationService.removeSection)
+  makeAsyncSaga(saga.REMOVE_SECTION, actions.removeSection, LocationService.removeSection),
+  makeAsyncSaga(saga.GET_ZONE_NAMES, actions.getZoneNames, LocationService.getZoneNames)
 ];
 
 export default function* rootSaga() {
