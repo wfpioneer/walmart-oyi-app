@@ -231,7 +231,8 @@ export default {
     AISLE_REMOVED: 'Aisle removed successfully',
     REMOVE_SECTION_CONFIRMATION: 'Are you sure you want to delete section: %{sectionName}?',
     REMOVE_SECTION_FAIL: 'There was an error removing the section. \nPlease try again.',
-    SECTION_REMOVED: 'Section Removed Successfully'
+    SECTION_REMOVED: 'Section Removed Successfully',
+    ZONE_NAME_ERROR: 'There was an error retrieving the possible zone names. \nPlease try again.'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

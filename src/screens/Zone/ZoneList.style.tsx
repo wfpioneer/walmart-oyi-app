@@ -64,6 +64,20 @@ const styles = StyleSheet.create({
     borderColor: COLOR.GREY_200,
     borderRadius: 5,
     borderWidth: 2
+  },
+  iconPosition: {
+    alignSelf: 'center'
+  },
+  buttonContainer: {
+    width: '100%',
+    alignContent: 'space-around',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10
+  },
+  modalButton: {
+    flex: 1,
+    paddingHorizontal: 10
   }
 });
 

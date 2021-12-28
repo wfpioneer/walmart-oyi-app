@@ -40,6 +40,8 @@ import {
   setZones
 } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
+import { CustomModalComponent } from '../Modal/Modal';
+import Button from '../../components/buttons/Button';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
@@ -56,6 +58,8 @@ interface ZoneProps {
     navigation: NavigationProp<any>,
     apiStart: number,
     setApiStart: React.Dispatch<React.SetStateAction<number>>,
+    errorVisible: boolean,
+    setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
     route: RouteProp<any, string>,
     useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
     trackEventCall: (eventName: string, params?: any) => void,
@@ -75,7 +79,9 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     useEffectHook,
     trackEventCall,
     locationPopupVisible,
-    getZoneNamesApi
+    getZoneNamesApi,
+    errorVisible,
+    setErrorVisible
   } = props;
 
   // calls the get all zone api
@@ -126,14 +132,19 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
       trackEventCall('get_zones_success', { duration: moment().valueOf() - apiStart });
       // 204
       dispatch(setPossibleZones(getZoneNamesApi.result.data));
+      // TODO FILTER ZONE NAMES THAT ALREADY EXIST
       dispatch(setAisles([]));
       dispatch(setAislesToCreate(0));
+      if (errorVisible) {
+        setErrorVisible(false);
+      }
       navigation.navigate('AddZone');
     }
 
     // on api failure
     if (!getZoneNamesApi.isWaiting && getZoneNamesApi.error) {
-        // Alert Modal
+      // Alert Modal
+      setErrorVisible(true);
     }
   }, [getZoneNamesApi]);
 
@@ -166,9 +177,36 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
       </View>
     );
   }
+  const getZoneFailure = (): JSX.Element => (
+    <CustomModalComponent
+      isVisible={errorVisible}
+      onClose={() => setErrorVisible(false)}
+      modalType="Error"
+    >
+      <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+      <Text style={styles.errorText}>
+        {strings('LOCATION.ZONE_NAME_ERROR')}
+      </Text>
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.modalButton}
+          title={strings('GENERICS.CANCEL')}
+          backgroundColor={COLOR.TRACKER_RED}
+          onPress={() => setErrorVisible(false)}
+        />
+        <Button
+          style={styles.modalButton}
+          title={strings('GENERICS.RETRY')}
+          backgroundColor={COLOR.MAIN_THEME_COLOR}
+          onPress={() => dispatch(getZoneNames())}
+        />
+      </View>
+    </CustomModalComponent>
+  );
 
   return (
     <View>
+      {getZoneFailure()}
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
@@ -206,6 +244,7 @@ const ZoneList = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [apiStart, setApiStart] = useState(0);
+  const [errorVisible, setErrorVisible] = useState(true);
   const route = useRoute();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -250,6 +289,8 @@ const ZoneList = (): JSX.Element => {
           trackEventCall={trackEvent}
           locationPopupVisible={location.locationPopupVisible}
           getZoneNamesApi={getZoneNamesApi}
+          errorVisible={errorVisible}
+          setErrorVisible={setErrorVisible}
         />
       </TouchableOpacity>
       <BottomSheetModal
