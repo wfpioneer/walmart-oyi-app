@@ -246,7 +246,7 @@ const ZoneList = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [apiStart, setApiStart] = useState(0);
-  const [errorVisible, setErrorVisible] = useState(true);
+  const [errorVisible, setErrorVisible] = useState(false);
   const route = useRoute();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
