@@ -163,7 +163,7 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
       trackEventCall('get_location_api_call');
       setApiStart(moment().valueOf());
       dispatch(getSections({ aisleId }));
-    }).catch(() => { });
+    });
   }), [navigation]);
 
   // scanned event listener
@@ -275,14 +275,14 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
             <Button
               style={styles.delButton}
               title={strings('GENERICS.CANCEL')}
-              backgroundColor={COLOR.TRACKER_RED}
+              backgroundColor={COLOR.MAIN_THEME_COLOR}
                 // No need for modal close fn because no apis have been sent
               onPress={() => setDisplayConfirmation(false)}
             />
             <Button
               style={styles.delButton}
               title={strings('GENERICS.OK')}
-              backgroundColor={COLOR.MAIN_THEME_COLOR}
+              backgroundColor={COLOR.TRACKER_RED}
               onPress={isClearAisle ? handleClearAisle : handleDeleteAisle}
             />
           </View>

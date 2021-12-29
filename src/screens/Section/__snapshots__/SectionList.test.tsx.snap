@@ -52,7 +52,7 @@ exports[`Rendering Remove Aisle responses Renders the success response from Remo
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -71,7 +71,7 @@ exports[`Rendering Remove Aisle responses Renders the success response from Remo
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -224,7 +224,7 @@ exports[`Rendering clear Aisle responses Renders the success response from Remov
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -243,7 +243,7 @@ exports[`Rendering clear Aisle responses Renders the success response from Remov
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -652,7 +652,7 @@ exports[`Test Section List Renders Manual Scan Component when isManualScanEnable
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -671,7 +671,7 @@ exports[`Test Section List Renders Manual Scan Component when isManualScanEnable
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -776,7 +776,7 @@ exports[`Test Section List Renders Section Screen with Data 1`] = `
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -795,7 +795,7 @@ exports[`Test Section List Renders Section Screen with Data 1`] = `
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -924,7 +924,7 @@ exports[`Test Section List Renders Section Screen with no-section-message when g
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -943,7 +943,7 @@ exports[`Test Section List Renders Section Screen with no-section-message when g
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}
