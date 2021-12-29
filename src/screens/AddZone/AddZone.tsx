@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -40,7 +40,9 @@ const addZonesToPicker = (
   currentZone: { id: number; name: string },
   createFlow: CREATE_FLOW
 ) => {
-  const availableZones = possibleZones.filter(possibleZone => !zones.some(zone => possibleZone.name === zone.zoneName));
+  const availableZones = possibleZones.filter(
+    possibleZone => !zones.some(zone => possibleZone.zoneName === zone.zoneName)
+  );
   switch (createFlow) {
     case CREATE_FLOW.CREATE_AISLE:
       return (
@@ -206,7 +208,6 @@ const AddZone = (): JSX.Element => {
       existingAisles={existingAisles}
       dispatch={dispatch}
       navigation={navigation}
-      useEffectHook={useEffect}
     />
   );
 };
