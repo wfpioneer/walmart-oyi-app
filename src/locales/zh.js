@@ -158,20 +158,20 @@ export default {
     EDIT_LOCATION: '修改位置',
     LOCATION_MANAGEMENT: '通道管理',
     ITEMS: '多个商品',
-    PALLETS: 'Pallets', // TODO Mandarin Translation
-    PALLET: 'Pallet', // TODO Mandarin Translation
+    PALLETS: '卡板',
+    PALLET: '卡板',
     ZONES: '区域',
-    ZONE: 'Zone', // TODO Mandarin Translation
+    ZONE: '区域',
     AISLES: '通道',
-    AISLE: 'Aisle', // TODO Mandarin Translation
+    AISLE: '通道',
     SECTIONS: '货架',
-    SECTION: 'Section', // TODO Mandarin Translation
+    SECTION: '货架',
     AREAS: 'Areas',
     LOCATION_DETAILS: '具体位置',
     NO_ZONES_AVAILABLE: '无区域',
     NO_AISLES_AVAILABLE: '无通道',
-    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Mandarin Translation
-    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
+    NO_SECTIONS_AVAILABLE: '无货架信息可获取',
+    LOCATION_API_ERROR: '获取位置数据失败，\n请重试',
     CLEAR_ALL: '全部清除',
     CLEAR_SECTION: '清除此货架位置',
     REMOVE_SECTION: '移除此货架位置',
@@ -202,7 +202,8 @@ export default {
     RESERVE_EMPTY: '存储区域无卡板',
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
     AISLES_ADDED: '通道号{number}已添加',
-    INCOMPLETE_AISLES_ADDED: '创建通道/货架位置数量缺失，只创建了{number}通道/货架',
+    INCOMPLETE_AISLES_ADDED:
+      '创建通道/货架位置数量缺失，只创建了{number}通道/货架',
     INCOMPLETE_AISLES_PLEASE_CHECK: '请确认已创建的通道和货架清单',
     ADD_AISLES_ERROR: '添加通道/货架时出错,请再试一次。',
     SECTIONS_ADDED: '已添加 %{number} 个货架位置',
@@ -214,7 +215,8 @@ export default {
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
     ZONE_ADDED: '区域 %{name} 已添加',
     ADD_ZONE_ERROR: '添加区域失败，请重试。',
-    INCOMPLETE_ZONE_ADDED: '区域 %{name} 已添加， 但是仅部分通道/货架创建成功，请检查已创建的通道/货架清单',
+    INCOMPLETE_ZONE_ADDED:
+      '区域 %{name} 已添加， 但是仅部分通道/货架创建成功，请检查已创建的通道/货架清单',
     REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: '移除所有通道和此通道内的货架号',
     REMOVE_ZONE_FAIL: '移除此区域失败，请重试。',
@@ -232,7 +234,8 @@ export default {
     REMOVE_SECTION_CONFIRMATION: '确定删除此货架标签:%{sectionName}?',
     REMOVE_SECTION_FAIL: '移除货架号发生错误,请重试',
     SECTION_REMOVED: '货架移除成功',
-    ZONE_NAME_ERROR: 'There was an error retrieving the possible zone names. \nPlease try again.' // TODO mandarin translation
+    ZONE_NAME_ERROR: '重置区域名称出错，\n请重试',
+    SELECT_ZONE: 'Select Zone' // TODO mandarin translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

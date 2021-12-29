@@ -161,7 +161,7 @@ export default {
     PALLETS: 'Pallets', // TODO Spanish Translation
     PALLET: 'Pallet', // TODO Spanish Translation
     ZONES: 'Zonas',
-    ZONE: 'Zone', // TODO Spanish Translation
+    ZONE: 'Zona', // TODO Spanish Translation
     AISLES: 'Pasillos',
     AISLE: 'Pasillo',
     SECTIONS: 'Secciones',
@@ -232,7 +232,8 @@ export default {
     REMOVE_SECTION_CONFIRMATION: '¿Estas seguro que quieres borrar la sección %{sectionName}?',
     REMOVE_SECTION_FAIL: 'Hubo un error eliminando la sección. Por favor inténtalo de nuevo',
     SECTION_REMOVED: 'Sección eliminada correctamente',
-    ZONE_NAME_ERROR: 'There was an error retrieving the possible zone names. \nPlease try again.' // TODO spanish translation
+    ZONE_NAME_ERROR: 'There was an error retrieving the possible zone names. \nPlease try again.', // TODO spanish translation
+    SELECT_ZONE: 'Select Zone' // TODO spanish translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
