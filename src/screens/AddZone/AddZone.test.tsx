@@ -41,6 +41,7 @@ describe('AddZoneScreen', () => {
       existingAisles={defaultExistingAisles}
       dispatch={jest.fn()}
       navigation={navigationProp}
+      useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -57,6 +58,7 @@ describe('AddZoneScreen', () => {
       existingAisles={existingAisles}
       dispatch={jest.fn()}
       navigation={navigationProp}
+      useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -73,6 +75,7 @@ describe('AddZoneScreen', () => {
       existingAisles={defaultExistingAisles}
       dispatch={jest.fn()}
       navigation={navigationProp}
+      useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -89,6 +92,7 @@ describe('AddZoneScreen', () => {
       existingAisles={existingAisles}
       dispatch={jest.fn()}
       navigation={navigationProp}
+      useEffectHook={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });

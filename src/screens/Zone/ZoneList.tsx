@@ -176,10 +176,10 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     }
   }, [getZoneNamesApi]);
 
-  if (getZoneApi.isWaiting) {
+  if (getZoneApi.isWaiting || getZoneNamesApi.isWaiting) {
     return (
       <ActivityIndicator
-        animating={getZoneApi.isWaiting}
+        animating={getZoneApi.isWaiting || getZoneNamesApi.isWaiting}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -246,7 +246,7 @@ const ZoneList = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [apiStart, setApiStart] = useState(0);
-  const [errorVisible, setErrorVisible] = useState(false);
+  const [errorVisible, setErrorVisible] = useState(true);
   const route = useRoute();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -264,10 +264,9 @@ const ZoneList = (): JSX.Element => {
   }, [location]);
 
   const handleAddZone = () => {
-    // TODO integrate getPossibleZones api instead of loading moc data
+    bottomSheetModalRef.current?.dismiss();
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_ZONE));
     dispatch(getZoneNames());
-    bottomSheetModalRef.current?.dismiss();
   };
 
   return (
