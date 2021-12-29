@@ -21,7 +21,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
 import { LocationHeader } from '../../components/locationHeader/LocationHeader';
-import { getAllZones } from '../../state/actions/saga';
+import { getAllZones, getZoneNames } from '../../state/actions/saga';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
@@ -40,7 +40,8 @@ import {
   setZones
 } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
-import { mockPossibleZones } from '../../mockData/mockPossibleZones';
+import { CustomModalComponent } from '../Modal/Modal';
+import Button from '../../components/buttons/Button';
 
 const NoZonesMessage = () : JSX.Element => (
   <View style={styles.noZones}>
@@ -52,15 +53,50 @@ interface ZoneProps {
     siteId: number,
     dispatch: Dispatch<any>,
     getZoneApi: AsyncState,
+    getZoneNamesApi: AsyncState,
     isManualScanEnabled: boolean,
     navigation: NavigationProp<any>,
     apiStart: number,
     setApiStart: React.Dispatch<React.SetStateAction<number>>,
+    errorVisible: boolean,
+    setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
+    isLoading: boolean,
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
     route: RouteProp<any, string>,
     useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
     trackEventCall: (eventName: string, params?: any) => void,
     locationPopupVisible: boolean
 }
+const getZoneErrorModal = (
+  errorVisible: boolean,
+  setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
+): JSX.Element => (
+  <CustomModalComponent
+    isVisible={errorVisible}
+    onClose={() => setErrorVisible(false)}
+    modalType="Error"
+  >
+    <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+    <Text style={styles.errorText}>
+      {strings('LOCATION.ZONE_NAME_ERROR')}
+    </Text>
+    <View style={styles.buttonContainer}>
+      <Button
+        style={styles.modalButton}
+        title={strings('GENERICS.CANCEL')}
+        backgroundColor={COLOR.TRACKER_RED}
+        onPress={() => setErrorVisible(false)}
+      />
+      <Button
+        style={styles.modalButton}
+        title={strings('GENERICS.RETRY')}
+        backgroundColor={COLOR.MAIN_THEME_COLOR}
+        onPress={() => dispatch(getZoneNames())}
+      />
+    </View>
+  </CustomModalComponent>
+);
 
 export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
   const {
@@ -74,7 +110,12 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     route,
     useEffectHook,
     trackEventCall,
-    locationPopupVisible
+    locationPopupVisible,
+    getZoneNamesApi,
+    errorVisible,
+    setErrorVisible,
+    isLoading,
+    setIsLoading
   } = props;
 
   // calls the get all zone api
@@ -102,11 +143,12 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
       scanSubscription.remove();
     };
   }, []);
+  // Get Zone Api
   useEffectHook(() => {
     // on api success
     if (!getZoneApi.isWaiting && getZoneApi.result) {
-      trackEventCall('get_zones_success', { duration: moment().valueOf() - apiStart });
       dispatch(setZones(getZoneApi.result.data));
+      setIsLoading(false);
     }
 
     // on api failure
@@ -115,13 +157,48 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
         errorDetails: getZoneApi.error.message || getZoneApi.error,
         duration: moment().valueOf() - apiStart
       });
+      setIsLoading(false);
+    }
+
+    // on api call
+    if (getZoneApi.isWaiting) {
+      setIsLoading(true);
     }
   }, [getZoneApi]);
+  // Get Zone Names Api
+  useEffectHook(() => {
+    // on api success
+    if (!getZoneNamesApi.isWaiting && getZoneNamesApi.result) {
+      dispatch(setPossibleZones(getZoneNamesApi.result.data));
+      dispatch(setAisles([]));
+      dispatch(setAislesToCreate(0));
+      if (errorVisible) {
+        setErrorVisible(false);
+      }
+      navigation.navigate('AddZone');
+      // Delay loading indicator to prevent screen flicker on navigation.
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 0);
+    }
 
-  if (getZoneApi.isWaiting) {
+    // on api failure
+    if (!getZoneNamesApi.isWaiting && getZoneNamesApi.error) {
+      setIsLoading(false);
+      // Alert Modal
+      setErrorVisible(true);
+    }
+
+    // on api call
+    if (getZoneNamesApi.isWaiting) {
+      setIsLoading(true);
+    }
+  }, [getZoneNamesApi]);
+
+  if (isLoading) {
     return (
       <ActivityIndicator
-        animating={getZoneApi.isWaiting}
+        animating={isLoading}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -150,6 +227,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
 
   return (
     <View>
+      {getZoneErrorModal(errorVisible, setErrorVisible, dispatch)}
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
@@ -182,10 +260,13 @@ const ZoneList = (): JSX.Element => {
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const siteId = useTypedSelector(state => state.User.siteId);
   const getZoneApi = useTypedSelector(state => state.async.getAllZones);
+  const getZoneNamesApi = useTypedSelector(state => state.async.getZoneNames);
   const location = useTypedSelector(state => state.Location);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [apiStart, setApiStart] = useState(0);
+  const [errorVisible, setErrorVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const route = useRoute();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -203,13 +284,10 @@ const ZoneList = (): JSX.Element => {
   }, [location]);
 
   const handleAddZone = () => {
-    // TODO integrate getPossibleZones api instead of loading moc data
-    dispatch(setCreateFlow(CREATE_FLOW.CREATE_ZONE));
-    dispatch(setPossibleZones(mockPossibleZones));
-    dispatch(setAisles([]));
-    dispatch(setAislesToCreate(0));
+    dispatch(hideLocationPopup());
     bottomSheetModalRef.current?.dismiss();
-    navigation.navigate('AddZone');
+    dispatch(setCreateFlow(CREATE_FLOW.CREATE_ZONE));
+    dispatch(getZoneNames());
   };
 
   return (
@@ -232,6 +310,11 @@ const ZoneList = (): JSX.Element => {
           setApiStart={setApiStart}
           trackEventCall={trackEvent}
           locationPopupVisible={location.locationPopupVisible}
+          getZoneNamesApi={getZoneNamesApi}
+          errorVisible={errorVisible}
+          setErrorVisible={setErrorVisible}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
         />
       </TouchableOpacity>
       <BottomSheetModal

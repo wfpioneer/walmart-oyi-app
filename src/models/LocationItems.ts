@@ -56,7 +56,7 @@ export interface LocationItem {
 }
 
 export interface PossibleZone {
-  name: string;
+  zoneName: string;
   description: string;
 }
 

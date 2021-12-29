@@ -67,7 +67,7 @@ export default class LocationService {
     );
   }
 
-  public static createSections(payload: Aisle[]) {
+  public static createSections(payload: Aisle[]): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.post(
       `${urls.locationUrl}/section`,
@@ -75,7 +75,7 @@ export default class LocationService {
     );
   }
 
-  public static createZone(payload: createZoneRequest) {
+  public static createZone(payload: createZoneRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.post(
       `${urls.locationUrl}/zone/aisle/section`,
@@ -91,5 +91,10 @@ export default class LocationService {
   public static removeSection(payload: number): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.delete(`${urls.locationUrl}/section/${payload}`);
+  }
+
+  public static getZoneNames(): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+  return Request.get(`${urls.locationUrl}/zone/names`);
   }
 }

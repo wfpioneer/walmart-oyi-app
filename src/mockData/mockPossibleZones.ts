@@ -1,190 +1,192 @@
-export const mockPossibleZones = [
+import { PossibleZone } from '../models/LocationItems';
+
+export const mockPossibleZones: PossibleZone[] = [
   {
-    name: 'A',
+    zoneName: 'A',
     description: 'First Feature'
   },
   {
-    name: 'B',
+    zoneName: 'B',
     description: 'Electronics'
   },
   {
-    name: 'C',
+    zoneName: 'C',
     description: 'Hardlines'
   },
   {
-    name: 'D',
+    zoneName: 'D',
     description: 'Variable(Club Specific)'
   },
   {
-    name: 'E',
+    zoneName: 'E',
     description: 'Center Section (Front)'
   },
   {
-    name: 'F',
+    zoneName: 'F',
     description: 'Center Section (Middle)'
   },
   {
-    name: 'G',
+    zoneName: 'G',
     description: 'Wine - Center Section (Back)'
   },
   {
-    name: 'H',
+    zoneName: 'H',
     description: 'Fresh (Behind Center)'
   },
   {
-    name: 'I',
+    zoneName: 'I',
     description: 'Grocerry (Front)'
   },
   {
-    name: 'J',
+    zoneName: 'J',
     description: 'Grocerry (Middle)'
   },
   {
-    name: 'K',
+    zoneName: 'K',
     description: 'Variable(Club Specific)'
   },
   {
-    name: 'L',
+    zoneName: 'L',
     description: 'Freezer/Cooler'
   },
   {
-    name: 'M',
+    zoneName: 'M',
     description: 'Variable(Club Specific)'
   },
   {
-    name: 'N',
+    zoneName: 'N',
     description: 'Variable(Club Specific)'
   },
   {
-    name: 'O',
+    zoneName: 'O',
     description: 'Variable(Club Specific)'
   },
   {
-    name: 'P',
+    zoneName: 'P',
     description: 'Variable(Club Specific)'
   },
   {
-    name: 'Q',
+    zoneName: 'Q',
     description: 'Variable(Club Specific)'
   },
   {
-    name: 'R',
+    zoneName: 'R',
     description: 'Liquor'
   },
   {
-    name: 'S',
+    zoneName: 'S',
     description: 'Tobacco'
   },
   {
-    name: 'T',
+    zoneName: 'T',
     description: 'Optical'
   },
   {
-    name: 'U',
+    zoneName: 'U',
     description: 'Photo'
   },
   {
-    name: 'V',
+    zoneName: 'V',
     description: 'Hearing'
   },
   {
-    name: 'W',
+    zoneName: 'W',
     description: 'Membership'
   },
   {
-    name: 'X',
+    zoneName: 'X',
     description: 'Tire and Battery center'
   },
   {
-    name: 'Y',
+    zoneName: 'Y',
     description: 'Cafe'
   },
   {
-    name: 'Z',
+    zoneName: 'Z',
     description: 'Registers'
   },
   {
-    name: '1BAK',
+    zoneName: '1BAK',
     description: '1BAK'
   },
   {
-    name: '2BAK',
+    zoneName: '2BAK',
     description: 'Bakery - Freezer'
   },
   {
-    name: '1CAF',
+    zoneName: '1CAF',
     description: 'Cafe   - Cooler'
   },
   {
-    name: '2CAF',
+    zoneName: '2CAF',
     description: 'Cafe - Freezer'
   },
   {
-    name: '1LOC',
+    zoneName: '1LOC',
     description: 'Lockup Cages - Front'
   },
   {
-    name: '2LOC',
+    zoneName: '2LOC',
     description: 'Lockup Cages - Other'
   },
   {
-    name: '1MEA',
+    zoneName: '1MEA',
     description: 'Meat - Cooler'
   },
   {
-    name: '2MEA',
+    zoneName: '2MEA',
     description: 'Meat - Freezer'
   },
   {
-    name: 'BULK',
+    zoneName: 'BULK',
     description: 'Club Pickup'
   },
   {
-    name: 'CLMS',
+    zoneName: 'CLMS',
     description: 'Claims'
   },
   {
-    name: 'JWLY',
+    zoneName: 'JWLY',
     description: 'Jewelry - Backstock'
   },
   {
-    name: 'PHAR',
+    zoneName: 'PHAR',
     description: 'Pharmacy - Backstock'
   },
   {
-    name: 'PROD',
+    zoneName: 'PROD',
     description: 'Produce - Cooler/Backroom'
   },
   {
-    name: 'RECV',
+    zoneName: 'RECV',
     description: 'Receiving'
   },
   {
-    name: 'REST',
+    zoneName: 'REST',
     description: 'Restrooms'
   },
   {
-    name: '1TBC',
+    zoneName: '1TBC',
     description: 'Tire - Backroom (1st Floor)'
   },
   {
-    name: '2TBC',
+    zoneName: '2TBC',
     description: 'Tire -  Backroom (2nd Floor)'
   },
   {
-    name: 'TOBC',
+    zoneName: 'TOBC',
     description: 'Tobacco'
   },
   {
-    name: '1CPU',
+    zoneName: '1CPU',
     description: 'Club Pickup'
   },
   {
-    name: '2CPU',
+    zoneName: '2CPU',
     description: 'Club Pickup'
   },
   {
-    name: '3CPU',
+    zoneName: '3CPU',
     description: 'Club Pickup'
   }
 ];
