@@ -160,9 +160,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     // on api success
     if (!getZoneNamesApi.isWaiting && getZoneNamesApi.result) {
       trackEventCall('get_zones_success', { duration: moment().valueOf() - apiStart });
-      // 204
       dispatch(setPossibleZones(getZoneNamesApi.result.data));
-      // TODO FILTER ZONE NAMES THAT ALREADY EXIST
       dispatch(setAisles([]));
       dispatch(setAislesToCreate(0));
       if (errorVisible) {
@@ -248,7 +246,7 @@ const ZoneList = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [apiStart, setApiStart] = useState(0);
-  const [errorVisible, setErrorVisible] = useState(true);
+  const [errorVisible, setErrorVisible] = useState(false);
   const route = useRoute();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
