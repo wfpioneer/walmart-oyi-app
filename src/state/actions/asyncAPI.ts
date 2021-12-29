@@ -89,3 +89,6 @@ export const removeSection = makeAsyncActionCreators(REMOVE_SECTION);
 
 export const CLEAR_AISLE = makeAsyncActionTypes('API/CLEAR_AISLE');
 export const clearAisle = makeAsyncActionCreators(CLEAR_AISLE);
+
+export const GET_ZONE_NAMES = makeAsyncActionTypes('API/GET_ZONE_NAMES');
+export const getZoneNames = makeAsyncActionCreators(GET_ZONE_NAMES);

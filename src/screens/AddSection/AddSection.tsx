@@ -245,7 +245,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
             showSnackBar(strings('LOCATION.ZONE_ADDED', {
               name:
                 props.possibleZones.filter(zone => zone.description != null)
-                  .find(zone => zone.name === props.newZone)?.description
+                  .find(zone => zone.zoneName === props.newZone)?.description
             }), SNACKBAR_TIMEOUT)
           );
           props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
@@ -256,7 +256,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
             showSnackBar(strings('LOCATION.INCOMPLETE_ZONE_ADDED', {
               name:
                 props.possibleZones.filter(zone => zone.description != null)
-                  .find(zone => zone.name === props.newZone)?.description
+                  .find(zone => zone.zoneName === props.newZone)?.description
             }), SNACKBAR_TIMEOUT)
           );
           props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
@@ -316,7 +316,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
           // TODO implement createZoneAisleSection
           const createZoneAisleSectionRequest: CreateZoneRequest = {
             zoneName: props.newZone,
-            description: props.possibleZones.find(zone => zone.name === props.newZone)?.description ?? '',
+            description: props.possibleZones.find(zone => zone.zoneName === props.newZone)?.description ?? '',
             aisles: props.aislesToCreate
           };
           props.dispatch(postCreateZone(createZoneAisleSectionRequest));

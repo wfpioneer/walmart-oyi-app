@@ -159,7 +159,7 @@ export const Location = (
     case SET_POSSIBLE_ZONES:
       return {
         ...state,
-        possibleZones: action.payload
+        possibleZones: action.payload || []
       };
     case SET_CREATE_FLOW:
       return {
