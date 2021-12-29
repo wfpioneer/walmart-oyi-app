@@ -60,6 +60,8 @@ interface ZoneProps {
     setApiStart: React.Dispatch<React.SetStateAction<number>>,
     errorVisible: boolean,
     setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
+    isLoading: boolean,
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
     route: RouteProp<any, string>,
     useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
     trackEventCall: (eventName: string, params?: any) => void,
@@ -111,7 +113,9 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     locationPopupVisible,
     getZoneNamesApi,
     errorVisible,
-    setErrorVisible
+    setErrorVisible,
+    isLoading,
+    setIsLoading
   } = props;
 
   // calls the get all zone api
@@ -143,8 +147,8 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!getZoneApi.isWaiting && getZoneApi.result) {
-      trackEventCall('get_zones_success', { duration: moment().valueOf() - apiStart });
       dispatch(setZones(getZoneApi.result.data));
+      setIsLoading(false);
     }
 
     // on api failure
@@ -153,13 +157,18 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
         errorDetails: getZoneApi.error.message || getZoneApi.error,
         duration: moment().valueOf() - apiStart
       });
+      setIsLoading(false);
+    }
+
+    // on api call
+    if (getZoneApi.isWaiting) {
+      setIsLoading(true);
     }
   }, [getZoneApi]);
   // Get Zone Names Api
   useEffectHook(() => {
     // on api success
     if (!getZoneNamesApi.isWaiting && getZoneNamesApi.result) {
-      trackEventCall('get_zones_success', { duration: moment().valueOf() - apiStart });
       dispatch(setPossibleZones(getZoneNamesApi.result.data));
       dispatch(setAisles([]));
       dispatch(setAislesToCreate(0));
@@ -167,19 +176,29 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
         setErrorVisible(false);
       }
       navigation.navigate('AddZone');
+      // Delay loading indicator to prevent screen flicker on navigation.
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 0);
     }
 
     // on api failure
     if (!getZoneNamesApi.isWaiting && getZoneNamesApi.error) {
+      setIsLoading(false);
       // Alert Modal
       setErrorVisible(true);
     }
+
+    // on api call
+    if (getZoneNamesApi.isWaiting) {
+      setIsLoading(true);
+    }
   }, [getZoneNamesApi]);
 
-  if (getZoneApi.isWaiting || getZoneNamesApi.isWaiting) {
+  if (isLoading) {
     return (
       <ActivityIndicator
-        animating={getZoneApi.isWaiting || getZoneNamesApi.isWaiting}
+        animating={isLoading}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -247,6 +266,7 @@ const ZoneList = (): JSX.Element => {
   const navigation = useNavigation();
   const [apiStart, setApiStart] = useState(0);
   const [errorVisible, setErrorVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const route = useRoute();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -264,6 +284,7 @@ const ZoneList = (): JSX.Element => {
   }, [location]);
 
   const handleAddZone = () => {
+    dispatch(hideLocationPopup());
     bottomSheetModalRef.current?.dismiss();
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_ZONE));
     dispatch(getZoneNames());
@@ -292,6 +313,8 @@ const ZoneList = (): JSX.Element => {
           getZoneNamesApi={getZoneNamesApi}
           errorVisible={errorVisible}
           setErrorVisible={setErrorVisible}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
         />
       </TouchableOpacity>
       <BottomSheetModal

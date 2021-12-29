@@ -45,6 +45,8 @@ describe('Test Zone List', () => {
         getZoneNamesApi={defaultAsyncState}
         errorVisible={false}
         setErrorVisible={jest.fn()}
+        isLoading={false}
+        setIsLoading={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -77,6 +79,8 @@ describe('Test Zone List', () => {
         getZoneNamesApi={defaultAsyncState}
         errorVisible={false}
         setErrorVisible={jest.fn()}
+        isLoading={false}
+        setIsLoading={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -110,6 +114,8 @@ describe('Test Zone List', () => {
         getZoneNamesApi={defaultAsyncState}
         errorVisible={false}
         setErrorVisible={jest.fn()}
+        isLoading={false}
+        setIsLoading={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -133,6 +139,8 @@ describe('Test Zone List', () => {
         getZoneNamesApi={defaultAsyncState}
         errorVisible={false}
         setErrorVisible={jest.fn()}
+        isLoading={false}
+        setIsLoading={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -155,8 +163,10 @@ describe('Test Zone List', () => {
         isManualScanEnabled={false}
         locationPopupVisible={false}
         getZoneNamesApi={defaultAsyncState}
-        errorVisible={false}
+        errorVisible={true}
         setErrorVisible={jest.fn()}
+        isLoading={false}
+        setIsLoading={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -195,6 +205,8 @@ describe('Test Zone List', () => {
             getZoneNamesApi={defaultAsyncState}
             errorVisible={false}
             setErrorVisible={jest.fn()}
+            isLoading={false}
+            setIsLoading={jest.fn()}
           />
         );
         expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -202,17 +214,11 @@ describe('Test Zone List', () => {
 
     it('Renders loading indicator when waiting for Zone Api response', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const getZoneIsWaiting: AsyncState = {
-        isWaiting: true,
-        value: null,
-        error: null,
-        result: null
-      };
       renderer.render(
         <ZoneScreen
           siteId={MX_TEST_CLUB_NBR}
           dispatch={jest.fn()}
-          getZoneApi={getZoneIsWaiting}
+          getZoneApi={defaultAsyncState}
           apiStart={0}
           setApiStart={jest.fn()}
           navigation={navigationProp}
@@ -224,6 +230,8 @@ describe('Test Zone List', () => {
           getZoneNamesApi={defaultAsyncState}
           errorVisible={false}
           setErrorVisible={jest.fn()}
+          isLoading={true}
+          setIsLoading={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
