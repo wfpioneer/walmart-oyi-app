@@ -207,7 +207,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
         selectedValue=""
       >
         <PickerItem
-          label=""
+          label="[missing \\"en.LOCATION.SELECT_ZONE\\" translation]"
           value=""
         />
         <PickerItem
@@ -671,7 +671,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
         selectedValue=""
       >
         <PickerItem
-          label=""
+          label="[missing \\"en.LOCATION.SELECT_ZONE\\" translation]"
           value=""
         />
         <PickerItem

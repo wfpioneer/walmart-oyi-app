@@ -51,7 +51,7 @@ const addZonesToPicker = (
     case CREATE_FLOW.CREATE_AISLE:
       return <Picker.Item label={currentZone.name} value={currentZone.name} />;
     default:
-      return [<Picker.Item label="" value="" key={-1} />,
+      return [<Picker.Item label={strings('LOCATION.SELECT_ZONE')} value="" key={-1} />,
         ...availableZones.filter(zone => zone.description != null).map((zone: PossibleZone) => {
           const zoneLabel = `${zone.zoneName} - ${zone.description}`;
           return (
