@@ -235,7 +235,11 @@ export default {
     REMOVE_SECTION_FAIL: '移除货架号发生错误,请重试',
     SECTION_REMOVED: '货架移除成功',
     ZONE_NAME_ERROR: '重置区域名称出错，\n请重试',
-    SELECT_ZONE: 'Select Zone' // TODO mandarin translation
+    SELECT_ZONE: 'Select Zone', // TODO mandarin translation
+    CLEAR_AISLE_CONFIRMATION: 'Are you sure you want to clear this aisle?', // TODO Mandarin Translation
+    CLEAR_AISLE_WILL_REMOVE_SECTIONS: 'This will also clear all items and pallet associated with this aisle', // TODO Mandarin Translation
+    CLEAR_AISLE_FAIL: 'There was an error clearing the aisle.  Please try again', // TODO Mandarin Translation
+    AISLE_CLEARED: 'Aisle cleared successfully' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
