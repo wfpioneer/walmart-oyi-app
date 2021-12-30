@@ -232,11 +232,12 @@ export default {
     REMOVE_SECTION_CONFIRMATION: 'Are you sure you want to delete section: %{sectionName}?',
     REMOVE_SECTION_FAIL: 'There was an error removing the section. \nPlease try again.',
     SECTION_REMOVED: 'Section Removed Successfully',
+    ZONE_NAME_ERROR: 'There was an error retrieving the possible zone names. \nPlease try again.',
+    SELECT_ZONE: 'Select Zone',
     CLEAR_AISLE_CONFIRMATION: 'Are you sure you want to clear this aisle?',
     CLEAR_AISLE_WILL_REMOVE_SECTIONS: 'This will also clear all items and pallet associated with this aisle',
     CLEAR_AISLE_FAIL: 'There was an error clearing the aisle.  Please try again',
-    AISLE_CLEARED: 'Aisle cleared successfully',
-    ZONE_NAME_ERROR: 'There was an error retrieving the possible zone names. \nPlease try again.'
+    AISLE_CLEARED: 'Aisle cleared successfully'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
