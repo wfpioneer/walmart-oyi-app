@@ -197,7 +197,7 @@ export default {
     PALLET_ERROR: 'Pallet not found/Empty Pallet',
     PALLET_NOT_FOUND: 'There was an error due to Pallet not found/Empty Pallet',
     PALLET_ADDED: 'Pallet Successfully Added',
-    PALLET_DELETE_CONFIRMATION: 'Confirm: \nDelete pallet',
+    PALLET_DELETE_CONFIRMATION: 'Are you sure you want to remove Pallet %{pallet} from Section %{section}?',
     FLOOR_EMPTY: 'The Floor List is empty',
     RESERVE_EMPTY: 'The Reserve List is empty',
     GET_FAILED_PALLETS: 'Failed to Retrieve %{amount} Pallet(s)',
