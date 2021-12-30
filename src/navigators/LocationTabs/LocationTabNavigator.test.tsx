@@ -477,8 +477,8 @@ describe('Test Location Tabs', (): void => {
         mockSetDisplayClearConfirmation
       );
       expect(mockIsFocused).toBeCalledTimes(1);
-      // called twice because of handleClearModalClose
-      expect(mockDispatch).toBeCalledTimes(2);
+      // called thrice because of handleClearModalClose
+      expect(mockDispatch).toBeCalledTimes(3);
     });
 
     it('ensures clearSectionApiEffect works properly on failure', () => {
@@ -502,7 +502,7 @@ describe('Test Location Tabs', (): void => {
         mockSetDisplayClearConfirmation
       );
       expect(mockIsFocused).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(0);
     });
   });
 
