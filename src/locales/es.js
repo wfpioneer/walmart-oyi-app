@@ -229,6 +229,8 @@ export default {
     CLEAR_SECTION_SALES_FLOOR_MESSAGE: 'Esto eliminará los artículos en Piso de esta sección',
     CLEAR_SECTION_RESERVE_MESSAGE: 'Esto eliminará los pallets en bodega de esta sección',
     CLEAR_SECTION_WONT_DELETE: 'Esto no eliminará la sección',
+    CLEAR_SECTION_SALES_FLOOR_SUCCEED: 'All sales floor items successfully cleared from this section', // TODO MX translation
+    CLEAR_SECTION_RESERVE_SUCCEED: 'All reserve pallets successfully cleared from this section', // TODO MX translation
     CLEAR_SECTION_FAIL: 'Hubo un error eliminando la sección. Por favor inténtalo de nuevo',
     REMOVE_AISLE_CONFIRMATION: '¿Estás seguro que quieres eliminar el pasillo?',
     REMOVE_AISLE_WILL_REMOVE_SECTIONS: 'Esto eliminará todas las secciones asociadas',

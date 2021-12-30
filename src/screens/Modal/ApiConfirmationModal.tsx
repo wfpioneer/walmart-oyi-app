@@ -12,7 +12,7 @@ interface ApiConfirmationModalProps {
   onClose: () => void;
   api: AsyncState;
   mainText: string;
-  subtext1: string;
+  subtext1?: string;
   subtext2?: string;
   handleConfirm: () => void;
 }
@@ -38,12 +38,14 @@ const ApiConfirmationModal = (props: ApiConfirmationModalProps): JSX.Element => 
       ) : (
         <>
           <View style={styles.confirmationTextView}>
-            <Text style={styles.confirmation}>
+            <Text style={subtext1 ? styles.confirmationTextWithSubtext : styles.confirmationText}>
               {mainText}
             </Text>
-            <Text style={styles.confirmationExtraText}>
-              {subtext1}
-            </Text>
+            {subtext1 && (
+              <Text style={styles.confirmationExtraText}>
+                {subtext1}
+              </Text>
+            )}
             {subtext2 && (
               <Text style={styles.confirmationExtraText}>
                 {subtext2}
@@ -71,6 +73,7 @@ const ApiConfirmationModal = (props: ApiConfirmationModalProps): JSX.Element => 
 };
 
 ApiConfirmationModal.defaultProps = {
+  subtext1: null,
   subtext2: null
 };
 

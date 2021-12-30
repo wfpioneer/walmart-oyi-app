@@ -10,7 +10,12 @@ const styles = StyleSheet.create({
   confirmationTextView: {
     flexDirection: 'column'
   },
-  confirmation: {
+  confirmationText: {
+    textAlign: 'center',
+    fontSize: 18,
+    padding: 15
+  },
+  confirmationTextWithSubtext: {
     textAlign: 'center',
     fontSize: 18,
     paddingHorizontal: 15,

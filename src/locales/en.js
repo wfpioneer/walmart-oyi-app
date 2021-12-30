@@ -229,6 +229,8 @@ export default {
     CLEAR_SECTION_SALES_FLOOR_MESSAGE: 'This will clear all sales floor items from this section',
     CLEAR_SECTION_RESERVE_MESSAGE: 'This will clear all reserve pallets from this section',
     CLEAR_SECTION_WONT_DELETE: 'This will not delete the section',
+    CLEAR_SECTION_SALES_FLOOR_SUCCEED: 'All sales floor items successfully cleared from this section',
+    CLEAR_SECTION_RESERVE_SUCCEED: 'All reserve pallets successfully cleared from this section',
     CLEAR_SECTION_FAIL: 'There was an error clearing the section. Please try again',
     REMOVE_AISLE_CONFIRMATION: 'Are you sure you want to remove this aisle?',
     REMOVE_AISLE_WILL_REMOVE_SECTIONS: 'This will also remove all sections associated with it',
