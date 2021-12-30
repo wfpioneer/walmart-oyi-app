@@ -143,8 +143,8 @@ export default {
     TITLE: 'Todas las Ubicaciones',
     FLOOR: 'Ubicación en Piso',
     RESERVE: 'Ubicaciones en Bodega',
-    FLOORS: 'Piso', // TODO Spanish Translation   DUPLICATE???
-    RESERVES: 'Bodega', // TODO Spanish Translation
+    FLOORS: 'Piso',
+    RESERVES: 'Bodega',
     ADD_LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. \nPor favor inténtalo de nuevo.',
     EDIT_LOCATION_API_ERROR: 'Hubo en un error editando la ubicación. \nPor favor inténtalo de nuevo.',
     ADD_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
@@ -238,7 +238,12 @@ export default {
     AISLE_REMOVED: 'Pasillo eliminado correctamente',
     REMOVE_SECTION_CONFIRMATION: '¿Estas seguro que quieres borrar la sección %{sectionName}?',
     REMOVE_SECTION_FAIL: 'Hubo un error eliminando la sección. Por favor inténtalo de nuevo',
-    SECTION_REMOVED: 'Sección eliminada correctamente'
+    SECTION_REMOVED: 'Sección eliminada correctamente',
+    CLEAR_AISLE_CONFIRMATION: 'Are you sure you want to clear this aisle?', // TODO Spanish Translation
+    CLEAR_AISLE_WILL_REMOVE_SECTIONS: 'This will also clear all items and pallet associated with this aisle', // TODO Spanish Translation
+    CLEAR_AISLE_FAIL: 'There was an error clearing the aisle.  Please try again', // TODO Spanish Translation
+    AISLE_CLEARED: 'Aisle cleared successfully', // TODO Spanish Translation
+    ZONE_NAME_ERROR: 'There was an error retrieving the possible zone names. \nPlease try again.' // TODO spanish translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

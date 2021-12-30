@@ -213,8 +213,8 @@ describe('AddSection Screen render tests', () => {
   const selectedZone = 'A';
   const renderer = ShallowRenderer.createRenderer();
   const posssibleZones: PossibleZone[] = [
-    { name: 'A', description: 'TestA' },
-    { name: 'B', description: 'TestB' }
+    { zoneName: 'A', description: 'TestA' },
+    { zoneName: 'B', description: 'TestB' }
   ]
   it('AddSectionScreen with valid input from add zone', () => {
     renderer.render(<AddSectionScreen
