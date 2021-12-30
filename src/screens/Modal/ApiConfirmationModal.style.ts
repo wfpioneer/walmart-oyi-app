@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 15
   },
+  iconPosition: {
+    alignSelf: 'center'
+  },
   confirmationTextWithSubtext: {
     textAlign: 'center',
     fontSize: 18,

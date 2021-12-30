@@ -94,10 +94,9 @@ describe('Api Confirmation Modal render tests', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('renders correctly when the api has failed', () => {
+  it('renders correctly when the api has failed, no error text', () => {
     const renderer = ShallowRenderer.createRenderer();
     const failedAsyncState = _.cloneDeep(defaultAsyncState);
-    failedAsyncState.isWaiting = true;
     failedAsyncState.value = {};
     failedAsyncState.error = { status: 400, message: 'bad request' };
     renderer.render(
@@ -107,6 +106,26 @@ describe('Api Confirmation Modal render tests', () => {
         isVisible={true}
         mainText="I am the main text"
         subtext1="I am the secondary line of text"
+        onClose={jest.fn()}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders correctly when the api has failed, error text', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const failedAsyncState = _.cloneDeep(defaultAsyncState);
+    failedAsyncState.value = {};
+    failedAsyncState.error = { status: 400, message: 'bad request' };
+    renderer.render(
+      <ApiConfirmationModal
+        api={failedAsyncState}
+        handleConfirm={jest.fn()}
+        isVisible={true}
+        mainText="I am the main text"
+        subtext1="I am the secondary line of text"
+        errorText="I am the text of error"
         onClose={jest.fn()}
       />
     );

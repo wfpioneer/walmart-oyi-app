@@ -105,7 +105,6 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
-        trackApiEvent={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -144,7 +143,6 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
-        trackApiEvent={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -183,7 +181,6 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
-        trackApiEvent={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -222,7 +219,6 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
-        trackApiEvent={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -263,7 +259,6 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
-        trackApiEvent={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -300,7 +295,6 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
-        trackApiEvent={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -343,7 +337,6 @@ describe('Test Location Tabs', (): void => {
           setDisplayClearConfirmation={jest.fn()}
           selectedTab={ClearLocationTarget.FLOOR}
           setSelectedTab={jest.fn()}
-          trackApiEvent={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -385,7 +378,6 @@ describe('Test Location Tabs', (): void => {
           setDisplayClearConfirmation={jest.fn()}
           selectedTab={ClearLocationTarget.FLOOR}
           setSelectedTab={jest.fn()}
-          trackApiEvent={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -424,7 +416,6 @@ describe('Test Location Tabs', (): void => {
     const mockSetClearSectionApiStart = jest.fn();
     const mockSetDisplayClearConfirmation = jest.fn();
     const mockDispatch = jest.fn();
-    const mockTrackApiEvent = jest.fn();
     it('ensures handleClearSection works properly', () => {
       handleClearSection(mockSetClearSectionApiStart, mockDispatch, 1, ClearLocationTarget.FLOOR);
 
@@ -483,11 +474,9 @@ describe('Test Location Tabs', (): void => {
         mockDispatch, navigationProp,
         salesFloorSuccess, 0,
         mockSetClearSectionApiStart,
-        mockSetDisplayClearConfirmation,
-        mockTrackApiEvent
+        mockSetDisplayClearConfirmation
       );
       expect(mockIsFocused).toBeCalledTimes(1);
-      expect(mockTrackApiEvent).toBeCalledTimes(1);
       // called twice because of handleClearModalClose
       expect(mockDispatch).toBeCalledTimes(2);
     });
@@ -510,11 +499,9 @@ describe('Test Location Tabs', (): void => {
         mockDispatch, navigationProp,
         salesFloorFail, 0,
         mockSetClearSectionApiStart,
-        mockSetDisplayClearConfirmation,
-        mockTrackApiEvent
+        mockSetDisplayClearConfirmation
       );
       expect(mockIsFocused).toBeCalledTimes(1);
-      expect(mockTrackApiEvent).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
     });
   });
@@ -549,8 +536,7 @@ describe('Test Location Tabs', (): void => {
         displayClearConfirmation: false,
         setDisplayClearConfirmation: jest.fn(),
         selectedTab: ClearLocationTarget.FLOOR,
-        setSelectedTab: jest.fn(),
-        trackApiEvent: jest.fn()
+        setSelectedTab: jest.fn()
       };
       const scannedEventUpdate = {
         type: 'manualscan',
@@ -638,7 +624,6 @@ describe('Test Location Tabs', (): void => {
               setDisplayClearConfirmation={jest.fn()}
               selectedTab={ClearLocationTarget.FLOOR}
               setSelectedTab={jest.fn()}
-              trackApiEvent={jest.fn()}
             />
           </NavigationContainer>
         </Provider>
