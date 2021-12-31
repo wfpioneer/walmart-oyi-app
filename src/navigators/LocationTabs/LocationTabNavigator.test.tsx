@@ -99,8 +99,6 @@ describe('Test Location Tabs', (): void => {
         displayRemoveConfirmation={false}
         setDisplayRemoveConfirmation={jest.fn()}
         clearSectionApi={defaultAsyncState}
-        clearSectionApiStart={0}
-        setClearSectionApiStart={jest.fn()}
         displayClearConfirmation={false}
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
@@ -137,8 +135,6 @@ describe('Test Location Tabs', (): void => {
         displayRemoveConfirmation={false}
         setDisplayRemoveConfirmation={jest.fn()}
         clearSectionApi={defaultAsyncState}
-        clearSectionApiStart={0}
-        setClearSectionApiStart={jest.fn()}
         displayClearConfirmation={false}
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
@@ -175,8 +171,6 @@ describe('Test Location Tabs', (): void => {
         displayRemoveConfirmation={false}
         setDisplayRemoveConfirmation={jest.fn()}
         clearSectionApi={defaultAsyncState}
-        clearSectionApiStart={0}
-        setClearSectionApiStart={jest.fn()}
         displayClearConfirmation={false}
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
@@ -213,8 +207,6 @@ describe('Test Location Tabs', (): void => {
         displayRemoveConfirmation={false}
         setDisplayRemoveConfirmation={jest.fn()}
         clearSectionApi={defaultAsyncState}
-        clearSectionApiStart={0}
-        setClearSectionApiStart={jest.fn()}
         displayClearConfirmation={false}
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
@@ -253,8 +245,6 @@ describe('Test Location Tabs', (): void => {
         displayRemoveConfirmation={false}
         setDisplayRemoveConfirmation={jest.fn()}
         clearSectionApi={defaultAsyncState}
-        clearSectionApiStart={0}
-        setClearSectionApiStart={jest.fn()}
         displayClearConfirmation={false}
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
@@ -289,8 +279,6 @@ describe('Test Location Tabs', (): void => {
         displayRemoveConfirmation={false}
         setDisplayRemoveConfirmation={jest.fn()}
         clearSectionApi={defaultAsyncState}
-        clearSectionApiStart={0}
-        setClearSectionApiStart={jest.fn()}
         displayClearConfirmation={false}
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
@@ -331,8 +319,6 @@ describe('Test Location Tabs', (): void => {
           displayRemoveConfirmation={true}
           setDisplayRemoveConfirmation={jest.fn()}
           clearSectionApi={defaultAsyncState}
-          clearSectionApiStart={0}
-          setClearSectionApiStart={jest.fn()}
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
           selectedTab={ClearLocationTarget.FLOOR}
@@ -372,8 +358,6 @@ describe('Test Location Tabs', (): void => {
           displayRemoveConfirmation={true}
           setDisplayRemoveConfirmation={jest.fn()}
           clearSectionApi={defaultAsyncState}
-          clearSectionApiStart={0}
-          setClearSectionApiStart={jest.fn()}
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
           selectedTab={ClearLocationTarget.FLOOR}
@@ -413,29 +397,24 @@ describe('Test Location Tabs', (): void => {
   });
 
   describe('Location Tabs Navigator (section details) externalized function tests', () => {
-    const mockSetClearSectionApiStart = jest.fn();
     const mockSetDisplayClearConfirmation = jest.fn();
     const mockDispatch = jest.fn();
     it('ensures handleClearSection works properly', () => {
-      handleClearSection(mockSetClearSectionApiStart, mockDispatch, 1, ClearLocationTarget.FLOOR);
+      handleClearSection(mockDispatch, 1, ClearLocationTarget.FLOOR);
 
-      expect(mockSetClearSectionApiStart).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
 
       mockDispatch.mockClear();
-      mockSetClearSectionApiStart.mockClear();
     });
 
     it('ensures handleClearModalClose works properly', () => {
-      handleClearModalClose(mockSetDisplayClearConfirmation, mockSetClearSectionApiStart, mockDispatch);
+      handleClearModalClose(mockSetDisplayClearConfirmation, mockDispatch);
 
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockSetClearSectionApiStart).toBeCalledTimes(1);
       expect(mockSetDisplayClearConfirmation).toBeCalledTimes(1);
 
       mockDispatch.mockClear();
       mockSetDisplayClearConfirmation.mockClear();
-      mockSetClearSectionApiStart.mockClear();
     });
 
     it('ensures getSectionDetailsEffect works properly on success', () => {
@@ -456,7 +435,7 @@ describe('Test Location Tabs', (): void => {
       mockNavigate.mockClear();
     });
 
-    it('ensures clearSectionApiEffect works properly on success', () => {
+    it('ensures clearSectionApiEffect works properly on success, sales floor', () => {
       const salesFloorSuccess = _.cloneDeep(defaultAsyncState);
       salesFloorSuccess.value = {
         locationId: 12453,
@@ -469,11 +448,44 @@ describe('Test Location Tabs', (): void => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       navigationProp = { isFocused: mockIsFocused };
+      const section: LocationIdName = {
+        id: 13234,
+        name: 'yes'
+      };
 
       clearSectionApiEffect(
         mockDispatch, navigationProp,
-        salesFloorSuccess, 0,
-        mockSetClearSectionApiStart,
+        salesFloorSuccess,
+        section,
+        mockSetDisplayClearConfirmation
+      );
+      expect(mockIsFocused).toBeCalledTimes(1);
+      // called thrice because of handleClearModalClose
+      expect(mockDispatch).toBeCalledTimes(4);
+    });
+
+    it('ensures clearSectionApiEffect works properly on success, reserve', () => {
+      const salesFloorSuccess = _.cloneDeep(defaultAsyncState);
+      salesFloorSuccess.value = {
+        locationId: 12453,
+        target: 'pallets'
+      };
+      salesFloorSuccess.result = {
+        data: '',
+        status: 204
+      };
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      navigationProp = { isFocused: mockIsFocused };
+      const section: LocationIdName = {
+        id: 13234,
+        name: 'yes'
+      };
+
+      clearSectionApiEffect(
+        mockDispatch, navigationProp,
+        salesFloorSuccess,
+        section,
         mockSetDisplayClearConfirmation
       );
       expect(mockIsFocused).toBeCalledTimes(1);
@@ -494,11 +506,15 @@ describe('Test Location Tabs', (): void => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       navigationProp = { isFocused: mockIsFocused };
+      const section: LocationIdName = {
+        id: 13234,
+        name: 'yes'
+      };
 
       clearSectionApiEffect(
         mockDispatch, navigationProp,
-        salesFloorFail, 0,
-        mockSetClearSectionApiStart,
+        salesFloorFail,
+        section,
         mockSetDisplayClearConfirmation
       );
       expect(mockIsFocused).toBeCalledTimes(1);
@@ -531,8 +547,6 @@ describe('Test Location Tabs', (): void => {
         displayRemoveConfirmation: false,
         setDisplayRemoveConfirmation: jest.fn(),
         clearSectionApi: defaultAsyncState,
-        clearSectionApiStart: 0,
-        setClearSectionApiStart: jest.fn(),
         displayClearConfirmation: false,
         setDisplayClearConfirmation: jest.fn(),
         selectedTab: ClearLocationTarget.FLOOR,
@@ -618,8 +632,6 @@ describe('Test Location Tabs', (): void => {
               displayRemoveConfirmation={false}
               setDisplayRemoveConfirmation={jest.fn()}
               clearSectionApi={defaultAsyncState}
-              clearSectionApiStart={0}
-              setClearSectionApiStart={jest.fn()}
               displayClearConfirmation={false}
               setDisplayClearConfirmation={jest.fn()}
               selectedTab={ClearLocationTarget.FLOOR}
