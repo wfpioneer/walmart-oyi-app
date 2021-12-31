@@ -101,6 +101,6 @@ export default class LocationService {
 
   public static getZoneNames(): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
-  return Request.get(`${urls.locationUrl}/zone/names`);
+    return Request.get(`${urls.locationUrl}/zone/names`);
   }
 }

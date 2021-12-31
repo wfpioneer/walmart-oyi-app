@@ -60,8 +60,6 @@ export interface LocationProps {
     itemPopupVisible:boolean;
     sectionResult: any;
     clearSectionApi: AsyncState;
-    clearSectionApiStart: number;
-    setClearSectionApiStart: React.Dispatch<React.SetStateAction<number>>;
     setSelectedTab: React.Dispatch<React.SetStateAction<ClearLocationTarget | undefined>>;
     setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
     removeSectionApi: AsyncState;
@@ -80,22 +78,18 @@ interface TabHeaderProps {
 }
 
 export const handleClearSection = (
-  setClearSectionApiStart: React.Dispatch<React.SetStateAction<number>>,
   dispatch: Dispatch<any>,
   locationId: number,
   target: ClearLocationTarget
 ): void => {
-  setClearSectionApiStart(moment().valueOf());
   dispatch(clearLocation({ locationId, target }));
 };
 
 export const handleClearModalClose = (
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
-  setClearSectionApiStart: React.Dispatch<React.SetStateAction<number>>,
   dispatch: Dispatch<any>
 ): void => {
   setDisplayClearConfirmation(false);
-  setClearSectionApiStart(0);
   dispatch({ type: 'API/CLEAR_LOCATION/RESET' });
 };
 
@@ -119,17 +113,19 @@ export const clearSectionApiEffect = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   clearSectionApi: AsyncState,
-  clearSectionApiStart: number,
-  setClearSectionApiStart: React.Dispatch<React.SetStateAction<number>>,
+  section: LocationIdName,
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>
 ): void => {
   if (navigation.isFocused() && !clearSectionApi.isWaiting) {
     if (clearSectionApi.result) {
       // Success
-      handleClearModalClose(setDisplayClearConfirmation, setClearSectionApiStart, dispatch);
+      handleClearModalClose(setDisplayClearConfirmation, dispatch);
       const selectedTab: ClearLocationTarget = clearSectionApi.value.target;
       if (selectedTab === ClearLocationTarget.FLOOR) {
+        // TODO refactor screen to put section details information into redux so we
+        // need to clear only that for this part
         dispatch({ type: 'API/GET_SECTION_DETAILS/RESET' });
+        dispatch(getSectionDetails({ sectionId: section.id.toString() }));
       } else {
         dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
       }
@@ -246,8 +242,6 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     sectionResult,
     setSelectedTab,
     clearSectionApi,
-    clearSectionApiStart,
-    setClearSectionApiStart,
     displayClearConfirmation,
     setDisplayClearConfirmation,
     removeSectionApi,
@@ -272,8 +266,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     dispatch,
     navigation,
     clearSectionApi,
-    clearSectionApiStart,
-    setClearSectionApiStart,
+    section,
     setDisplayClearConfirmation
   ), [clearSectionApi]);
 
@@ -315,7 +308,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       />
       <ApiConfirmationModal
         isVisible={displayClearConfirmation}
-        onClose={() => handleClearModalClose(setDisplayClearConfirmation, setClearSectionApiStart, dispatch)}
+        onClose={() => handleClearModalClose(setDisplayClearConfirmation, dispatch)}
         api={clearSectionApi}
         mainText={strings('LOCATION.CLEAR_SECTION_CONFIRMATION')}
         subtext1={selectedTab === ClearLocationTarget.FLOOR
@@ -323,7 +316,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           : strings('LOCATION.CLEAR_SECTION_RESERVE_MESSAGE')}
         subtext2={strings('LOCATION.CLEAR_SECTION_WONT_DELETE')}
         handleConfirm={() => selectedTab
-          && handleClearSection(setClearSectionApiStart, dispatch, section.id, selectedTab)}
+          && handleClearSection(dispatch, section.id, selectedTab)}
         errorText={strings('LOCATION.CLEAR_SECTION_FAIL')}
       />
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
@@ -413,7 +406,6 @@ const LocationTabs = () : JSX.Element => {
   const locationName = `${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`;
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const [selectedTab, setSelectedTab] = useState<ClearLocationTarget>();
-  const [clearSectionApiStart, setClearSectionApiStart] = useState(0);
 
   const bottomSheetLocationDetailsModalRef = useRef<BottomSheetModal>(null);
 
@@ -457,8 +449,6 @@ const LocationTabs = () : JSX.Element => {
           sectionResult={result}
           setSelectedTab={setSelectedTab}
           clearSectionApi={clearSectionApi}
-          clearSectionApiStart={clearSectionApiStart}
-          setClearSectionApiStart={setClearSectionApiStart}
           removeSectionApi={removeSectionApi}
           displayRemoveConfirmation={displayRemoveConfirmation}
           setDisplayRemoveConfirmation={setDisplayRemoveConfirmation}
