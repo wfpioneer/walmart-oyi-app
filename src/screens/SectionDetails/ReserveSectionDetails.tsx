@@ -115,7 +115,7 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
         data={combineReserveArrays(reservePallets, locationItem?.pallets.palletData)}
         renderItem={({ item }) => (
           // Resolves type error, Section Id will never be zero in our case
-          <ReservePalletRow sectionId={locationItem?.section.id || 0} reservePallet={item} />
+          <ReservePalletRow section={locationItem?.section || { id: 0, name: '' }} reservePallet={item} />
         )}
         keyExtractor={(item, idx) => `${item.id}${idx}`}
         ListEmptyComponent={(
