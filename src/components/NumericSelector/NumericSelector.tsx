@@ -47,7 +47,8 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
         type={IconButton.Type.NO_BORDER}
         height={15}
         width={35}
-        onPress={isMinimum ? undefined : onDecreaseQty}
+        disabled={isMinimum}
+        onPress={onDecreaseQty}
       />
       <TextInput
         style={styles.input}
@@ -61,7 +62,8 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
         type={IconButton.Type.NO_BORDER}
         height={15}
         width={35}
-        onPress={isMaximum ? undefined : onIncreaseQty}
+        disabled={isMaximum}
+        onPress={onIncreaseQty}
       />
     </View>
   );
