@@ -56,6 +56,7 @@ export interface LocationProps {
     userFeatures: string[];
     itemPopupVisible:boolean;
     sectionResult: any;
+    sectionIsWaiting: boolean;
     removeSectionApi: AsyncState;
     displayConfirmation: boolean;
     setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -173,6 +174,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     userFeatures,
     itemPopupVisible,
     sectionResult,
+    sectionIsWaiting,
     removeSectionApi,
     displayConfirmation,
     setDisplayConfirmation,
@@ -218,6 +220,25 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     }
   });
 
+  const getLocationName = (isWaiting: boolean, sectionExists: boolean, newLocationName: string): string => {
+    if (isWaiting || !sectionExists) {
+      return `${strings('LOCATION.SECTION')} -`;
+    }
+    return `${strings('LOCATION.SECTION')} ${newLocationName}`;
+  };
+
+  const getSectionDetailsLable = (
+    isWaiting: boolean,
+    floorItems: SectionDetailsItem[],
+    reserveItems: SectionDetailsPallet[]
+  ): string => {
+    const floorItemNbr = floorItems.length ?? 0;
+    const reserveItemNbr = reserveItems.length ?? 0;
+    if (isWaiting) {
+      return `0 ${strings('LOCATION.ITEMS')}, 0 ${strings('LOCATION.PALLETS')}`;
+    }
+    return `${floorItemNbr} ${strings('LOCATION.ITEMS')}, ${reserveItemNbr} ${strings('LOCATION.PALLETS')}`;
+  };
   const removeSectionModal = () => (
     <CustomModalComponent
       isVisible={displayConfirmation}
@@ -262,12 +283,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       {removeSectionModal()}
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
-        location={`${strings('LOCATION.SECTION')}`
-         + ` ${/* scannedEvent.type === 'sectionId' && scannedEvent.value
-           ? scannedEvent.value?.toUpperCase()
-           : */ locationName}`}
-        details={`${floorItems.length ?? 0} ${strings('LOCATION.ITEMS')},`
-        + ` ${reserveItems.length ?? 0} ${strings('LOCATION.PALLETS')}`}
+        location={getLocationName(sectionIsWaiting, sectionExists, locationName)}
+        details={getSectionDetailsLable(sectionIsWaiting, floorItems, reserveItems)}
         buttonPress={() => {
           dispatch(setPrintingLocationLabels(LocationName.SECTION));
           navigation.navigate('PrintPriceSign');
@@ -329,7 +346,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
 
 const LocationTabs = () : JSX.Element => {
   const { selectedAisle, selectedZone, selectedSection } = useTypedSelector(state => state.Location);
-  const { result } = useTypedSelector(state => state.async.getSectionDetails);
+  const { result, isWaiting } = useTypedSelector(state => state.async.getSectionDetails);
   const removeSectionApi = useTypedSelector(state => state.async.removeSection);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { scannedEvent } = useTypedSelector(state => state.Global);
@@ -383,6 +400,7 @@ const LocationTabs = () : JSX.Element => {
           userFeatures={userFeatures}
           itemPopupVisible={itemPopupVisible}
           sectionResult={result}
+          sectionIsWaiting={isWaiting}
           removeSectionApi={removeSectionApi}
           displayConfirmation={displayConfirmation}
           setDisplayConfirmation={setDisplayConfirmation}

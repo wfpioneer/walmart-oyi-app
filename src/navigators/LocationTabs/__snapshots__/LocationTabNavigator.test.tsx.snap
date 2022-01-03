@@ -83,11 +83,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
   <LocationHeader
     buttonPress={[Function]}
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -218,11 +218,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
   <LocationHeader
     buttonPress={[Function]}
     details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -353,11 +353,11 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
   <LocationHeader
     buttonPress={[Function]}
     details="100 [missing \\"en.LOCATION.ITEMS\\" translation], 100 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -491,11 +491,11 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
   <LocationHeader
     buttonPress={[Function]}
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -629,11 +629,11 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
   <LocationHeader
     buttonPress={[Function]}
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -768,11 +768,11 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
     buttonPress={[Function]}
     buttonText="[missing \\"en.LOCATION.PRINT_LABEL\\" translation]"
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
