@@ -46,33 +46,6 @@ const styles = StyleSheet.create({
     borderColor: COLOR.GREY_200,
     borderRadius: 5,
     borderWidth: 2
-  },
-  activityIndicator: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonContainer: {
-    width: '100%',
-    alignContent: 'space-around',
-    flexDirection: 'row'
-  },
-  delButton: {
-    flex: 1,
-    paddingHorizontal: 10
-  },
-  confirmationText: {
-    textAlign: 'center',
-    fontSize: 18,
-    paddingHorizontal: 15,
-    paddingTop: 15,
-    paddingBottom: 10
-  },
-  confirmationExtraText: {
-    textAlign: 'center',
-    fontSize: 14,
-    paddingHorizontal: 15,
-    paddingBottom: 15
   }
 });
 
