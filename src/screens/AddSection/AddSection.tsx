@@ -274,11 +274,16 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
       props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
     }
   }, [props.createZoneAPI]);
+
+  const aisleDivider = () => (
+    <View style={styles.aisleSeparator}/>
+  );
+
   const renderAisles = (aisle: RenderAisles) => {
     const zoneName = props.createFlow === CREATE_FLOW.CREATE_ZONE ? props.newZone : props.selectedZone.name;
     const fullAisleName = `${strings('LOCATION.AISLE')} ${zoneName}${aisle.item.aisleName}`;
     return (
-      <View style={styles.aisleContainer} key={fullAisleName}>
+      <View style={[styles.aisleContainer ]} key={fullAisleName}>
         <View style={styles.aisleNumericContainer}>
           <Text style={styles.aisleText}>
             {fullAisleName}
@@ -363,6 +368,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
           renderItem={renderAisles}
           keyExtractor={item => item.aisleName.toString()}
           removeClippedSubviews={false}
+          ItemSeparatorComponent={aisleDivider}
         />
       </View>
       <View style={styles.buttonContainer}>

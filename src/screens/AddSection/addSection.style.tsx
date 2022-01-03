@@ -31,7 +31,8 @@ export default StyleSheet.create({
   aisleContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    paddingVertical: 10
   },
   aisleNumericContainer: {
     flexDirection: 'row',
@@ -41,6 +42,11 @@ export default StyleSheet.create({
   aisleText: {
     fontSize: 16,
     textAlignVertical: 'center'
+  },
+  aisleSeparator: {
+    backgroundColor: COLOR.GREY_300,
+    width: '100%',
+    height: 2
   },
   doneButton: {
     margin: 15
