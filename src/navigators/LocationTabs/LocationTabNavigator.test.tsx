@@ -8,7 +8,6 @@ import {
 } from '@react-navigation/native';
 import { render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
-import _ from 'lodash';
 import {
   LocationProps,
   LocationTabsNavigator,
@@ -436,14 +435,16 @@ describe('Test Location Tabs', (): void => {
     });
 
     it('ensures clearSectionApiEffect works properly on success, sales floor', () => {
-      const salesFloorSuccess = _.cloneDeep(defaultAsyncState);
-      salesFloorSuccess.value = {
-        locationId: 12453,
-        target: 'items'
-      };
-      salesFloorSuccess.result = {
-        data: '',
-        status: 204
+      const salesFloorSuccess: AsyncState = {
+        ...defaultAsyncState,
+        value: {
+          locationId: 12453,
+          target: 'items'
+        },
+        result: {
+          data: '',
+          status: 204
+        }
       };
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -465,14 +466,16 @@ describe('Test Location Tabs', (): void => {
     });
 
     it('ensures clearSectionApiEffect works properly on success, reserve', () => {
-      const salesFloorSuccess = _.cloneDeep(defaultAsyncState);
-      salesFloorSuccess.value = {
-        locationId: 12453,
-        target: 'pallets'
-      };
-      salesFloorSuccess.result = {
-        data: '',
-        status: 204
+      const salesFloorSuccess: AsyncState = {
+        ...defaultAsyncState,
+        value: {
+          locationId: 12453,
+          target: 'pallets'
+        },
+        result: {
+          data: '',
+          status: 204
+        }
       };
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -494,14 +497,16 @@ describe('Test Location Tabs', (): void => {
     });
 
     it('ensures clearSectionApiEffect works properly on failure', () => {
-      const salesFloorFail = _.cloneDeep(defaultAsyncState);
-      salesFloorFail.value = {
-        locationId: 12453,
-        target: 'items'
-      };
-      salesFloorFail.error = {
-        status: 400,
-        message: 'bad request'
+      const salesFloorFail = {
+        ...defaultAsyncState,
+        value: {
+          locationId: 12453,
+          target: 'items'
+        },
+        error: {
+          status: 400,
+          message: 'bad request'
+        }
       };
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
