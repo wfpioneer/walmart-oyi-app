@@ -43,62 +43,62 @@ import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetA
 import { CustomModalComponent } from '../Modal/Modal';
 import Button from '../../components/buttons/Button';
 
-const NoZonesMessage = () : JSX.Element => (
+const NoZonesMessage = (): JSX.Element => (
   <View style={styles.noZones}>
     <Text style={styles.noZonesText}>{strings('LOCATION.NO_ZONES_AVAILABLE')}</Text>
   </View>
 );
 
 interface ZoneProps {
-    siteId: number,
-    dispatch: Dispatch<any>,
-    getZoneApi: AsyncState,
-    getZoneNamesApi: AsyncState,
-    isManualScanEnabled: boolean,
-    navigation: NavigationProp<any>,
-    apiStart: number,
-    setApiStart: React.Dispatch<React.SetStateAction<number>>,
-    errorVisible: boolean,
-    setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
-    isLoading: boolean,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    route: RouteProp<any, string>,
-    useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
-    trackEventCall: (eventName: string, params?: any) => void,
-    locationPopupVisible: boolean
+  siteId: number,
+  dispatch: Dispatch<any>,
+  getZoneApi: AsyncState,
+  getZoneNamesApi: AsyncState,
+  isManualScanEnabled: boolean,
+  navigation: NavigationProp<any>,
+  apiStart: number,
+  setApiStart: React.Dispatch<React.SetStateAction<number>>,
+  errorVisible: boolean,
+  setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  isLoading: boolean,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  route: RouteProp<any, string>,
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void,
+  trackEventCall: (eventName: string, params?: any) => void,
+  locationPopupVisible: boolean
 }
 const getZoneErrorModal = (
   errorVisible: boolean,
   setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
   dispatch: Dispatch<any>
 ): JSX.Element => (
-  <CustomModalComponent
-    isVisible={errorVisible}
-    onClose={() => setErrorVisible(false)}
-    modalType="Error"
-  >
-    <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-    <Text style={styles.errorText}>
-      {strings('LOCATION.ZONE_NAME_ERROR')}
-    </Text>
-    <View style={styles.buttonContainer}>
-      <Button
-        style={styles.modalButton}
-        title={strings('GENERICS.CANCEL')}
-        backgroundColor={COLOR.TRACKER_RED}
-        onPress={() => setErrorVisible(false)}
-      />
-      <Button
-        style={styles.modalButton}
-        title={strings('GENERICS.RETRY')}
-        backgroundColor={COLOR.MAIN_THEME_COLOR}
-        onPress={() => dispatch(getZoneNames())}
-      />
-    </View>
-  </CustomModalComponent>
-);
+    <CustomModalComponent
+      isVisible={errorVisible}
+      onClose={() => setErrorVisible(false)}
+      modalType="Error"
+    >
+      <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+      <Text style={styles.errorText}>
+        {strings('LOCATION.ZONE_NAME_ERROR')}
+      </Text>
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.modalButton}
+          title={strings('GENERICS.CANCEL')}
+          backgroundColor={COLOR.TRACKER_RED}
+          onPress={() => setErrorVisible(false)}
+        />
+        <Button
+          style={styles.modalButton}
+          title={strings('GENERICS.RETRY')}
+          backgroundColor={COLOR.MAIN_THEME_COLOR}
+          onPress={() => dispatch(getZoneNames())}
+        />
+      </View>
+    </CustomModalComponent>
+  );
 
-export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
+export const ZoneScreen = (props: ZoneProps): JSX.Element => {
   const {
     siteId,
     getZoneApi,
@@ -124,7 +124,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
       trackEventCall('get_zones_api_call');
       setApiStart(moment().valueOf());
       dispatch(getAllZones());
-    }).catch(() => {});
+    }).catch(() => { });
   }), [navigation]);
 
   // scanned event listener
@@ -224,6 +224,18 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
       </View>
     );
   }
+  const sortZone = (firstItem: any, secondItem: any) => {
+    if (firstItem.zoneName < secondItem.zoneName) {
+      return -1;
+    }
+    if (firstItem.zoneName > secondItem.zoneName) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const getZoneSorted = () => (getZoneApi.result && getZoneApi.result.data
+    && Array.isArray(getZoneApi.result.data) ? getZoneApi.result?.data.sort(sortZone) : []);
 
   return (
     <View>
@@ -234,7 +246,7 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
         details={`${getZoneApi.result?.data.length || 0} ${strings('LOCATION.ZONES')}`}
       />
       <FlatList
-        data={getZoneApi.result?.data || []}
+        data={getZoneSorted()}
         renderItem={({ item }) => (
           <LocationItemCard
             location={item.zoneName}
