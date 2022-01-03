@@ -88,6 +88,12 @@ export default class LocationService {
     return Request.delete(`${urls.locationUrl}/zone/${payload}`);
   }
 
+  public static clearLocation(payload: { locationId: number, target: string }):
+    Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.delete(`${urls.locationUrl}/location/${payload.locationId}/${payload.target}`);
+  }
+
   public static removeSection(payload: number): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.delete(`${urls.locationUrl}/section/${payload}`);
@@ -95,6 +101,6 @@ export default class LocationService {
 
   public static getZoneNames(): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
-  return Request.get(`${urls.locationUrl}/zone/names`);
+    return Request.get(`${urls.locationUrl}/zone/names`);
   }
 }
