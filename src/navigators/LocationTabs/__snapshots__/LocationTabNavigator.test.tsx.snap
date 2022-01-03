@@ -2,84 +2,40 @@
 
 exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
 <React.Fragment>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 10,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_SECTION_CONFIRMATION" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationHeader
     buttonPress={[Function]}
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
@@ -104,6 +60,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -119,6 +76,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -137,84 +95,40 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
 
 exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
 <React.Fragment>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 10,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_SECTION_CONFIRMATION" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationHeader
     buttonPress={[Function]}
     details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
@@ -239,6 +153,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -254,6 +169,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -272,84 +188,40 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
 
 exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 1`] = `
 <React.Fragment>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 10,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_SECTION_CONFIRMATION" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationHeader
     buttonPress={[Function]}
     details="100 [missing \\"en.LOCATION.ITEMS\\" translation], 100 [missing \\"en.LOCATION.PALLETS\\" translation]"
@@ -374,6 +246,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -389,6 +262,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -407,84 +281,40 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
 
 exports[`Test Location Tabs Renders Location header as Scanned Event Value when location name is "-" 1`] = `
 <React.Fragment>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 10,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_SECTION_CONFIRMATION" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationManualScan
     keyboardType="default"
   />
@@ -512,6 +342,7 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -527,6 +358,7 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -545,84 +377,40 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
 
 exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
 <React.Fragment>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 10,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_SECTION_CONFIRMATION" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationManualScan
     keyboardType="default"
   />
@@ -650,6 +438,7 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -665,6 +454,7 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -683,84 +473,40 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
 
 exports[`Test Location Tabs Renders Print Label button if "location printing" feature is enabled 1`] = `
 <React.Fragment>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 10,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_SECTION_CONFIRMATION" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationManualScan
     keyboardType="default"
   />
@@ -789,6 +535,7 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -804,6 +551,7 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -904,26 +652,40 @@ exports[`Test Location Tabs Tests rendering Tab Headers Renders pallet Header 1`
 
 exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading Indicator for Remove Section Modal 1`] = `
 <React.Fragment>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={true}
-    modalType="Error"
-    onClose={[Function]}
-  >
-    <withTheme(ActivityIndicator)
-      animating={true}
-      color="#0071e9"
-      hidesWhenStopped={true}
-      size="large"
-      style={
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        }
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": true,
+        "result": null,
+        "value": null,
       }
-    />
-  </CustomModalComponent>
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationManualScan
     keyboardType="default"
   />
@@ -951,6 +713,7 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading I
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -966,6 +729,7 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading I
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -984,26 +748,40 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading I
 
 exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry button on Modal if remove section api returns an error 1`] = `
 <React.Fragment>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={true}
-    modalType="Error"
-    onClose={[Function]}
-  >
-    <withTheme(ActivityIndicator)
-      animating={true}
-      color="#0071e9"
-      hidesWhenStopped={true}
-      size="large"
-      style={
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        }
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": "Network Error",
+        "isWaiting": true,
+        "result": null,
+        "value": null,
       }
-    />
-  </CustomModalComponent>
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationManualScan
     keyboardType="default"
   />
@@ -1031,6 +809,7 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry but
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -1046,6 +825,7 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry but
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }

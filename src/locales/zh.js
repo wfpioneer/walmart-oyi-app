@@ -227,6 +227,13 @@ export default {
     ITEM_ADDED: '商品添加成功',
     ADD_ITEM_ERROR: '商品添加成功',
     ADD_ITEM_API_ERROR: '添加商品时出错，请重试',
+    CLEAR_SECTION_CONFIRMATION: '确定清除此货架标签下所有内容？',
+    CLEAR_SECTION_SALES_FLOOR_MESSAGE: '将清除此货架标签下所有楼面商品',
+    CLEAR_SECTION_RESERVE_MESSAGE: '将清除此货架标签下所有卡板',
+    CLEAR_SECTION_WONT_DELETE: '将不删除此货架标签',
+    CLEAR_SECTION_SALES_FLOOR_SUCCEED: 'All sales floor items successfully cleared from this section', // TODO CN translation
+    CLEAR_SECTION_RESERVE_SUCCEED: 'All reserve pallets successfully cleared from this section', // TODO CN translation
+    CLEAR_SECTION_FAIL: '清除货架标签信息时出错，请重试',
     REMOVE_AISLE_CONFIRMATION: '确定移除此通道？',
     REMOVE_AISLE_WILL_REMOVE_SECTIONS: '将移除此通道下所有货架标签信息',
     REMOVE_AISLE_FAIL: '移除通道时出错，请重试',
