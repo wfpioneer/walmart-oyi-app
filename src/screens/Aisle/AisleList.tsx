@@ -38,7 +38,7 @@ import { CustomModalComponent } from '../Modal/Modal';
 import { CREATE_FLOW } from '../../models/LocationItems';
 import { showSnackBar } from '../../state/actions/SnackBar';
 
-const NoAisleMessage = () : JSX.Element => (
+const NoAisleMessage = (): JSX.Element => (
   <View style={styles.noAisles}>
     <Text style={styles.noAislesText}>{strings('LOCATION.NO_AISLES_AVAILABLE')}</Text>
   </View>
@@ -85,26 +85,26 @@ export const deleteZoneApiEffect = (
 };
 
 interface AisleProps {
-    zoneId: number,
-    zoneName: string,
-    getAllAisles: AsyncState,
-    deleteZoneApi: AsyncState,
-    isManualScanEnabled: boolean,
-    locationPopupVisible: boolean,
-    dispatch: Dispatch<any>,
-    getAislesApiStart: number,
-    setGetAislesApiStart: React.Dispatch<React.SetStateAction<number>>,
-    deleteZoneApiStart: number,
-    setDeleteZoneApiStart: React.Dispatch<React.SetStateAction<number>>,
-    displayConfirmation: boolean,
-    setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
-    navigation: NavigationProp<any>,
-    route: RouteProp<any, string>,
-    useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
-    trackEventCall: (eventName: string, params?: any) => void,
+  zoneId: number,
+  zoneName: string,
+  getAllAisles: AsyncState,
+  deleteZoneApi: AsyncState,
+  isManualScanEnabled: boolean,
+  locationPopupVisible: boolean,
+  dispatch: Dispatch<any>,
+  getAislesApiStart: number,
+  setGetAislesApiStart: React.Dispatch<React.SetStateAction<number>>,
+  deleteZoneApiStart: number,
+  setDeleteZoneApiStart: React.Dispatch<React.SetStateAction<number>>,
+  displayConfirmation: boolean,
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>,
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void,
+  trackEventCall: (eventName: string, params?: any) => void,
 }
 
-export const AisleScreen = (props: AisleProps) : JSX.Element => {
+export const AisleScreen = (props: AisleProps): JSX.Element => {
   const {
     zoneId,
     zoneName,
@@ -131,7 +131,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
       trackEventCall('get_location_api_call');
       setGetAislesApiStart(moment().valueOf());
       dispatch(getAisle({ zoneId }));
-    }).catch(() => {});
+    }).catch(() => { });
   }), [navigation]);
 
   // scanned event listener
@@ -196,32 +196,32 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
           style={styles.activityIndicator}
         />
       ) : (
-        <>
-          <View style={styles.confirmationTextView}>
-            <Text style={styles.confirmation}>
-              {`${strings('LOCATION.REMOVE_ZONE_CONFIRMATION')}`}
-            </Text>
-            <Text style={styles.confirmationExtraText}>
-              {`${strings('LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS')}`}
-            </Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <Button
-              style={styles.delButton}
-              title={strings('GENERICS.CANCEL')}
-              backgroundColor={COLOR.TRACKER_RED}
-              // No need for modal close fn because no apis have been sent
-              onPress={() => handleModalClose(setDisplayConfirmation, setDeleteZoneApiStart, dispatch)}
-            />
-            <Button
-              style={styles.delButton}
-              title={deleteZoneApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
-              backgroundColor={COLOR.MAIN_THEME_COLOR}
-              onPress={handleDeleteZone}
-            />
-          </View>
-        </>
-      )}
+          <>
+            <View style={styles.confirmationTextView}>
+              <Text style={styles.confirmation}>
+                {`${strings('LOCATION.REMOVE_ZONE_CONFIRMATION')}`}
+              </Text>
+              <Text style={styles.confirmationExtraText}>
+                {`${strings('LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS')}`}
+              </Text>
+            </View>
+            <View style={styles.buttonContainer}>
+              <Button
+                style={styles.delButton}
+                title={strings('GENERICS.CANCEL')}
+                backgroundColor={COLOR.TRACKER_RED}
+                // No need for modal close fn because no apis have been sent
+                onPress={() => handleModalClose(setDisplayConfirmation, setDeleteZoneApiStart, dispatch)}
+              />
+              <Button
+                style={styles.delButton}
+                title={deleteZoneApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+                backgroundColor={COLOR.MAIN_THEME_COLOR}
+                onPress={handleDeleteZone}
+              />
+            </View>
+          </>
+        )}
     </CustomModalComponent>
   );
 
@@ -254,7 +254,9 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
       </View>
     );
   }
-
+  const sortAisle = (firstItem: any, secondItem: any) => firstItem.aisleName - secondItem.aisleName;
+  const getAisleSorted = () => (getAllAisles.result && getAllAisles.result.data
+    && Array.isArray(getAllAisles.result.data) ? getAllAisles.result?.data.sort(sortAisle) : []);
   return (
     <View>
       {deleteZoneModalView()}
@@ -264,7 +266,7 @@ export const AisleScreen = (props: AisleProps) : JSX.Element => {
         details={`${getAllAisles.result?.data.length || 0} ${strings('LOCATION.AISLES')}`}
       />
       <FlatList
-        data={getAllAisles.result?.data || []}
+        data={getAisleSorted()}
         renderItem={({ item }) => (
           <LocationItemCard
             location={`${strings('LOCATION.AISLE')} ${zoneName}${item.aisleName}`}

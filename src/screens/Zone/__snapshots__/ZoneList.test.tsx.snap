@@ -596,7 +596,7 @@ exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
         "paddingBottom": 100,
       }
     }
-    data={Object {}}
+    data={Array []}
     disableVirtualization={false}
     horizontal={false}
     initialNumToRender={10}
