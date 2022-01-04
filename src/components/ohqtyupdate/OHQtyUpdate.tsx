@@ -163,6 +163,8 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
         onDecreaseQty={handleDecreaseQty}
         onIncreaseQty={handleIncreaseQty}
         onTextChange={handleTextChange}
+        minValue={OH_MIN}
+        maxValue={OH_MAX}
         value={newOHQty}
       />
       {!isValidNbr && (

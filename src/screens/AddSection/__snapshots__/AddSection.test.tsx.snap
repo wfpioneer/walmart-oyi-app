@@ -23,6 +23,7 @@ exports[`AddSection Screen render tests AddSectionScreen with invalid section co
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -98,6 +99,7 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -181,6 +183,7 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -256,6 +259,7 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -339,6 +343,7 @@ exports[`AddSection Screen render tests Waits on the create zone/aisles/sections
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -414,6 +419,7 @@ exports[`AddSection Screen render tests addSectionScreen after createSections ap
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -489,6 +495,7 @@ exports[`AddSection Screen render tests addSectionScreen after createSections ap
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -564,6 +571,7 @@ exports[`AddSection Screen render tests addSectionScreen while waiting for api t
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -639,6 +647,7 @@ exports[`AddSection Screen render tests failed on the create aisles/sections api
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -714,6 +723,7 @@ exports[`AddSection Screen render tests partially succeeded on the create aisles
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -789,6 +799,7 @@ exports[`AddSection Screen render tests partially succeeded on the create aisles
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -864,6 +875,7 @@ exports[`AddSection Screen render tests succeeded on the create aisles/sections 
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -939,6 +951,7 @@ exports[`AddSection Screen render tests succeeded on the create zone/aisles/sect
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {
@@ -1014,6 +1027,7 @@ exports[`AddSection Screen render tests waits on the create aisles/sections api 
     }
   >
     <FlatList
+      ItemSeparatorComponent={[Function]}
       data={
         Array [
           Object {

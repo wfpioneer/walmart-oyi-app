@@ -10,39 +10,63 @@ interface NumericSelectorProps {
   onDecreaseQty(): void;
   onIncreaseQty(): void;
   onTextChange(text: string): void;
+  minValue: number;
+  maxValue: number;
   value: number;
 }
 
-const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
-  <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
+const renderPlusMinusBtn = (name: 'plus' | 'minus', isDisabled: boolean) => (
+  <MaterialCommunityIcon
+    name={name}
+    color={isDisabled ? COLOR.DISABLED_BLUE : COLOR.MAIN_THEME_COLOR}
+    size={18}
+  />
 );
 
-const NumericSelector = (props: NumericSelectorProps): JSX.Element => (
-  <View
-    style={[styles.updateContainer, props.isValid ? styles.updateContainerValid : styles.updateContainerInvalid]}
-  >
-    <IconButton
-      icon={renderPlusMinusBtn('minus')}
-      type={IconButton.Type.NO_BORDER}
-      height={15}
-      width={35}
-      onPress={props.onDecreaseQty}
-    />
-    <TextInput
-      style={styles.input}
-      keyboardType="numeric"
-      onChangeText={props.onTextChange}
+const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
+  const {
+    isValid,
+    onDecreaseQty,
+    onIncreaseQty,
+    onTextChange,
+    minValue,
+    maxValue,
+    value
+  } = props;
+  const isMinimum = value <= minValue;
+  const isMaximum = value >= maxValue;
+  return (
+    <View
+      style={[
+        styles.updateContainer,
+        isValid ? styles.updateContainerValid : styles.updateContainerInvalid
+      ]}
     >
-      {props.value}
-    </TextInput>
-    <IconButton
-      icon={renderPlusMinusBtn('plus')}
-      type={IconButton.Type.NO_BORDER}
-      height={15}
-      width={35}
-      onPress={props.onIncreaseQty}
-    />
-  </View>
-);
+      <IconButton
+        icon={renderPlusMinusBtn('minus', isMinimum)}
+        type={IconButton.Type.NO_BORDER}
+        height={15}
+        width={35}
+        disabled={isMinimum}
+        onPress={onDecreaseQty}
+      />
+      <TextInput
+        style={styles.input}
+        keyboardType="numeric"
+        onChangeText={onTextChange}
+      >
+        {value}
+      </TextInput>
+      <IconButton
+        icon={renderPlusMinusBtn('plus', isMaximum)}
+        type={IconButton.Type.NO_BORDER}
+        height={15}
+        width={35}
+        disabled={isMaximum}
+        onPress={onIncreaseQty}
+      />
+    </View>
+  );
+};
 
 export default NumericSelector;
