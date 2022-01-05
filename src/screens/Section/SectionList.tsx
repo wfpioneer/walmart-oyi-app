@@ -106,7 +106,7 @@ export const clearAisleApiEffect = (
     if (clearSectionApi.result) {
       // Success
       handleClearModalClose(setDisplayClearConfirmation, dispatch);
-      dispatch(showSnackBar(strings('LOCATION.CLEAR_AISLES_ITEMS_SUCCEED'), 3000));
+      dispatch(showSnackBar(strings('LOCATION.CLEAR_AISLE_ITEMS_SUCCEED'), 3000));
     }
   }
 };
