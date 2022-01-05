@@ -79,6 +79,22 @@ exports[`PrinterList Renders printer item card with no delete icon 1`] = `
       Invalid printer
     </Text>
   </View>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "paddingLeft": 15,
+        "paddingRight": 5,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#000000"
+      name="trash-can"
+      size={20}
+    />
+  </ForwardRef>
 </TouchableOpacity>
 `;
 
