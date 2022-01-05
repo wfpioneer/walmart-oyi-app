@@ -39,6 +39,7 @@ import { LocationIdName } from '../../state/reducers/Location';
 import { REMOVE_SECTION } from '../../state/actions/asyncAPI';
 
 const Tab = createMaterialTopTabNavigator();
+const LOCATION_EDIT_FLAG = 'location management edit';
 
 export interface LocationProps {
     floorItems: SectionDetailsItem[];
@@ -111,7 +112,7 @@ const FloorDetailsList = (props: {sectionExists: boolean}) => {
     <>
       <TabHeader
         headerText={strings('LOCATION.ITEMS')}
-        isEditEnabled={userFeatures.includes('location management edit')}
+        isEditEnabled={userFeatures.includes(LOCATION_EDIT_FLAG)}
         isReserve={false}
         isDisabled={!sectionExists}
       />
@@ -148,13 +149,32 @@ const ReserveDetailsList = (props: {sectionExists: boolean}) => {
     <>
       <TabHeader
         headerText={strings('LOCATION.PALLETS')}
-        isEditEnabled={userFeatures.includes('location management edit')}
+        isEditEnabled={userFeatures.includes(LOCATION_EDIT_FLAG)}
         isReserve={true}
         isDisabled={!sectionExists}
       />
       <ReserveSectionDetails palletIds={palletIds} />
     </>
   );
+};
+const getSectionDetailsLabel = (
+  isWaiting: boolean,
+  floorItems: SectionDetailsItem[],
+  reserveItems: SectionDetailsPallet[]
+): string => {
+  const floorItemNbr = floorItems.length || 0;
+  const reserveItemNbr = reserveItems.length || 0;
+  if (isWaiting) {
+    return `0 ${strings('LOCATION.ITEMS')}, 0 ${strings('LOCATION.PALLETS')}`;
+  }
+  return `${floorItemNbr} ${strings('LOCATION.ITEMS')}, ${reserveItemNbr} ${strings('LOCATION.PALLETS')}`;
+};
+
+const getLocationName = (isWaiting: boolean, sectionExists: boolean, newLocationName: string): string => {
+  if (isWaiting || !sectionExists) {
+    return `${strings('LOCATION.SECTION')} -`;
+  }
+  return `${strings('LOCATION.SECTION')} ${newLocationName}`;
 };
 
 export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
@@ -220,25 +240,6 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     }
   });
 
-  const getLocationName = (isWaiting: boolean, sectionExists: boolean, newLocationName: string): string => {
-    if (isWaiting || !sectionExists) {
-      return `${strings('LOCATION.SECTION')} -`;
-    }
-    return `${strings('LOCATION.SECTION')} ${newLocationName}`;
-  };
-
-  const getSectionDetailsLable = (
-    isWaiting: boolean,
-    floorItems: SectionDetailsItem[],
-    reserveItems: SectionDetailsPallet[]
-  ): string => {
-    const floorItemNbr = floorItems.length ?? 0;
-    const reserveItemNbr = reserveItems.length ?? 0;
-    if (isWaiting) {
-      return `0 ${strings('LOCATION.ITEMS')}, 0 ${strings('LOCATION.PALLETS')}`;
-    }
-    return `${floorItemNbr} ${strings('LOCATION.ITEMS')}, ${reserveItemNbr} ${strings('LOCATION.PALLETS')}`;
-  };
   const removeSectionModal = () => (
     <CustomModalComponent
       isVisible={displayConfirmation}
@@ -284,7 +285,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={getLocationName(sectionIsWaiting, sectionExists, locationName)}
-        details={getSectionDetailsLable(sectionIsWaiting, floorItems, reserveItems)}
+        details={getSectionDetailsLabel(sectionIsWaiting, floorItems, reserveItems)}
         buttonPress={() => {
           dispatch(setPrintingLocationLabels(LocationName.SECTION));
           navigation.navigate('PrintPriceSign');
