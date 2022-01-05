@@ -24,8 +24,9 @@ import { CREATE_FLOW, PossibleZone } from '../../models/LocationItems';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setAisleSectionCount } from '../../state/actions/Location';
-import { CreateAisleRequest, CreateAisleResponse, CreateZoneAisleSectionResponse } from '../../models/CreateZoneAisleSection.d';
+import { CreateAisleRequest, CreateAisleResponse } from '../../models/CreateZoneAisleSection.d';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { CREATE_SECTIONS, CREATE_ZONE, POST_CREATE_AISLES } from '../../state/actions/asyncAPI';
 
 interface AddSectionProps {
   aislesToCreate: CreateAisles[];
@@ -106,7 +107,7 @@ export const createAisleSectionsEffect = (
             strings('LOCATION.AISLES_ADDED').replace('{number}', createdAisles.length.toString()),
             2000
           ));
-          dispatch({ type: 'API/POST_CREATE_AISLES/RESET' });
+          dispatch({ type: POST_CREATE_AISLES.RESET });
           navigation.navigate('Aisles');
           break;
         case 207: {
@@ -126,7 +127,7 @@ export const createAisleSectionsEffect = (
             + `\n${strings('LOCATION.INCOMPLETE_AISLES_PLEASE_CHECK')}`,
             3000
           ));
-          dispatch({ type: 'API/POST_CREATE_AISLES/RESET' });
+          dispatch({ type: POST_CREATE_AISLES.RESET });
           navigation.navigate('Aisles');
           break;
         }
@@ -159,7 +160,7 @@ export const createSectionsAPIEffect = (
     dispatch(
       showSnackBar(strings('LOCATION.SECTIONS_ADDED', { number: aisleSectionCount }), 3000)
     );
-    dispatch({ type: 'API/CREATE_SECTIONS/RESET' });
+    dispatch({ type: CREATE_SECTIONS.RESET });
     navigation.goBack();
   }
 
@@ -248,7 +249,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
                   .find(zone => zone.zoneName === props.newZone)?.description
             }), SNACKBAR_TIMEOUT)
           );
-          props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
+          props.dispatch({ type: CREATE_ZONE.RESET });
           props.navigation.navigate('Zones');
           break;
         case 207: {
@@ -259,7 +260,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
                   .find(zone => zone.zoneName === props.newZone)?.description
             }), SNACKBAR_TIMEOUT)
           );
-          props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
+          props.dispatch({ type: CREATE_ZONE.RESET });
           navigation.navigate('Zones');
           break;
         }
@@ -274,6 +275,11 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
       props.dispatch({ type: 'API/CREATE_ZONE/RESET' });
     }
   }, [props.createZoneAPI]);
+
+  const aisleDivider = () => (
+    <View style={styles.aisleSeparator} />
+  );
+
   const renderAisles = (aisle: RenderAisles) => {
     const zoneName = props.createFlow === CREATE_FLOW.CREATE_ZONE ? props.newZone : props.selectedZone.name;
     const fullAisleName = `${strings('LOCATION.AISLE')} ${zoneName}${aisle.item.aisleName}`;
@@ -294,6 +300,8 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
             onTextChange={(text: string) => {
               handleTextSectionCountChange(text, aisle.index);
             }}
+            minValue={SECTION_MIN}
+            maxValue={NEW_SECTION_MAX}
             value={aisle.item.sectionCount}
           />
         </View>
@@ -363,6 +371,7 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
           renderItem={renderAisles}
           keyExtractor={item => item.aisleName.toString()}
           removeClippedSubviews={false}
+          ItemSeparatorComponent={aisleDivider}
         />
       </View>
       <View style={styles.buttonContainer}>

@@ -197,7 +197,7 @@ export default {
     PALLET_ERROR: 'Pallet no encontrada/Pallet vacía',
     PALLET_NOT_FOUND: 'Hubo un error debido a que no se encontró el pallet/Pallet vacía',
     PALLET_ADDED: 'Pallet agregado con éxito',
-    PALLET_DELETE_CONFIRMATION: 'Confirmar: Borrar pallet',
+    PALLET_DELETE_CONFIRMATION: 'Are you sure you want to remove Pallet %{pallet} from Section %{section}?', // TODO spanish translation
     FLOOR_EMPTY: 'La lista de Piso está vacía',
     RESERVE_EMPTY: 'La lista de Bodega está vacía',
     GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
