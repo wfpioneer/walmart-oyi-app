@@ -240,11 +240,12 @@ export default {
     REMOVE_SECTION_FAIL: 'Hubo un error eliminando la sección. Por favor inténtalo de nuevo',
     SECTION_REMOVED: 'Sección eliminada correctamente',
     ZONE_NAME_ERROR: 'There was an error retrieving the possible zone names. \nPlease try again.', // TODO spanish translation
-    SELECT_ZONE: 'Select Zone', // TODO spanish translation
-    CLEAR_AISLE_CONFIRMATION: 'Are you sure you want to clear this aisle?', // TODO Spanish Translation
-    CLEAR_AISLE_WILL_REMOVE_SECTIONS: 'This will also clear all items and pallet associated with this aisle', // TODO Spanish Translation
-    CLEAR_AISLE_FAIL: 'There was an error clearing the aisle.  Please try again', // TODO Spanish Translation
-    AISLE_CLEARED: 'Aisle cleared successfully' // TODO Spanish Translation
+    SELECT_ZONE: 'Selecciona la Zona',
+    CLEAR_AISLE_ITEMS_CONFIRMATION: '¿Estás seguro que quieres limpiar todos los artículos del pasillo?',
+    CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE: 'Por favor selecciona Piso, bodega o ambos para limpiar',
+    CLEAR_AISLE_ITEMS_WONT_DELETE: 'Esto no eliminará las secciones del pasillo',
+    CLEAR_AISLE_ITEMS_SUCCEED: 'Todos los artículos seleccionados fueron limpiados del pasillo',
+    CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
