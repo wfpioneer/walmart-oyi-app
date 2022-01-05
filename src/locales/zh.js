@@ -197,7 +197,7 @@ export default {
     PALLET_ERROR: '卡板未找到/空卡板',
     PALLET_NOT_FOUND: '因未找到卡板/卡板为空系统报错',
     PALLET_ADDED: '卡板添加成功',
-    PALLET_DELETE_CONFIRMATION: '确认：删除卡板',
+    PALLET_DELETE_CONFIRMATION: 'Are you sure you want to remove Pallet %{pallet} from Section %{section}?', // TODO mandarin translation
     FLOOR_EMPTY: '楼面清单无商品',
     RESERVE_EMPTY: '存储区域无卡板',
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
@@ -227,6 +227,13 @@ export default {
     ITEM_ADDED: '商品添加成功',
     ADD_ITEM_ERROR: '商品添加成功',
     ADD_ITEM_API_ERROR: '添加商品时出错，请重试',
+    CLEAR_SECTION_CONFIRMATION: '确定清除此货架标签下所有内容？',
+    CLEAR_SECTION_SALES_FLOOR_MESSAGE: '将清除此货架标签下所有楼面商品',
+    CLEAR_SECTION_RESERVE_MESSAGE: '将清除此货架标签下所有卡板',
+    CLEAR_SECTION_WONT_DELETE: '将不删除此货架标签',
+    CLEAR_SECTION_SALES_FLOOR_SUCCEED: 'All sales floor items successfully cleared from this section', // TODO CN translation
+    CLEAR_SECTION_RESERVE_SUCCEED: 'All reserve pallets successfully cleared from this section', // TODO CN translation
+    CLEAR_SECTION_FAIL: '清除货架标签信息时出错，请重试',
     REMOVE_AISLE_CONFIRMATION: '确定移除此通道？',
     REMOVE_AISLE_WILL_REMOVE_SECTIONS: '将移除此通道下所有货架标签信息',
     REMOVE_AISLE_FAIL: '移除通道时出错，请重试',
@@ -236,10 +243,10 @@ export default {
     SECTION_REMOVED: '货架移除成功',
     ZONE_NAME_ERROR: '重置区域名称出错，\n请重试',
     SELECT_ZONE: 'Select Zone', // TODO mandarin translation
-    CLEAR_AISLE_CONFIRMATION: 'Are you sure you want to clear this aisle?', // TODO Mandarin Translation
-    CLEAR_AISLE_WILL_REMOVE_SECTIONS: 'This will also clear all items and pallet associated with this aisle', // TODO Mandarin Translation
-    CLEAR_AISLE_FAIL: 'There was an error clearing the aisle.  Please try again', // TODO Mandarin Translation
-    AISLE_CLEARED: 'Aisle cleared successfully' // TODO Mandarin Translation
+    CLEAR_AISLE_CONFIRMATION: '确定要清除此通道？',
+    CLEAR_AISLE_WILL_REMOVE_SECTIONS: '这会清除此通道下的所有商品和卡板',
+    CLEAR_AISLE_FAIL: '清除通道时出错，请重试',
+    AISLE_CLEARED: '成功清除通道'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

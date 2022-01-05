@@ -17,4 +17,11 @@ export enum LocationName {
   SECTION = 'Section'
 }
 
+// eslint-disable-next-line no-shadow
+export enum ClearLocationTarget {
+  FLOOR = 'items',
+  RESERVE = 'pallets',
+  FLOORANDRESERVE = 'items-and-pallets'
+}
+
 export default Location;

@@ -11,7 +11,7 @@ import {
 } from '@react-navigation/native';
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 import { Dispatch } from 'redux';
-import { ActivityIndicator } from 'react-native-paper';
+import moment from 'moment';
 import { strings } from '../../locales';
 import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
@@ -19,7 +19,9 @@ import styles from './LocationTabNavigator.style';
 import LocationHeader from '../../components/locationHeader/LocationHeader';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
-import { getPalletDetails, getSectionDetails, removeSection } from '../../state/actions/saga';
+import {
+  clearLocation, getPalletDetails, getSectionDetails, removeSection
+} from '../../state/actions/saga';
 import SectionDetails from '../../screens/SectionDetails/SectionDetailsScreen';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
@@ -31,10 +33,11 @@ import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSh
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import Button from '../../components/buttons/Button';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
-import { LocationName } from '../../models/Location';
+import { ClearLocationTarget, LocationName } from '../../models/Location';
 import ReserveSectionDetails from '../../screens/SectionDetails/ReserveSectionDetails';
-import { CustomModalComponent } from '../../screens/Modal/Modal';
+import ApiConfirmationModal from '../../screens/Modal/ApiConfirmationModal';
 import { AsyncState } from '../../models/AsyncState';
+import { showSnackBar } from '../../state/actions/SnackBar';
 import { LocationIdName } from '../../state/reducers/Location';
 import { REMOVE_SECTION } from '../../state/actions/asyncAPI';
 
@@ -58,10 +61,15 @@ export interface LocationProps {
     itemPopupVisible:boolean;
     sectionResult: any;
     sectionIsWaiting: boolean;
+    clearSectionApi: AsyncState;
+    setSelectedTab: React.Dispatch<React.SetStateAction<ClearLocationTarget | undefined>>;
+    setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
     removeSectionApi: AsyncState;
-    displayConfirmation: boolean;
-    setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
-    section: LocationIdName
+    displayRemoveConfirmation: boolean;
+    setDisplayRemoveConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
+    section: LocationIdName;
+    displayClearConfirmation: boolean;
+    selectedTab: ClearLocationTarget | undefined;
 }
 
 interface TabHeaderProps {
@@ -70,6 +78,65 @@ interface TabHeaderProps {
     isReserve: boolean;
     isDisabled: boolean;
 }
+
+export const handleClearSection = (
+  dispatch: Dispatch<any>,
+  locationId: number,
+  target: ClearLocationTarget
+): void => {
+  dispatch(clearLocation({ locationId, target }));
+};
+
+export const handleClearModalClose = (
+  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
+): void => {
+  setDisplayClearConfirmation(false);
+  dispatch({ type: 'API/CLEAR_LOCATION/RESET' });
+};
+
+export const getSectionDetailsEffect = (
+  validateSessionCall: (navigation: NavigationProp<any>, routeName: any) => any,
+  route: RouteProp<any, string>,
+  scannedEvent: { value?: string, type?: string },
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
+): void => {
+  validateSessionCall(navigation, route.name).then(() => {
+    // Handles scanned event changes if the screen is in focus
+    if (scannedEvent.value && navigation.isFocused()) {
+      dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
+      navigation.navigate('FloorDetails');
+    }
+  }).catch(() => {});
+};
+
+export const clearSectionApiEffect = (
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  clearSectionApi: AsyncState,
+  section: LocationIdName,
+  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>
+): void => {
+  if (navigation.isFocused() && !clearSectionApi.isWaiting) {
+    if (clearSectionApi.result) {
+      // Success
+      handleClearModalClose(setDisplayClearConfirmation, dispatch);
+      const selectedTab: ClearLocationTarget = clearSectionApi.value.target;
+      if (selectedTab === ClearLocationTarget.FLOOR) {
+        // TODO refactor screen to put section details information into redux so we
+        // need to clear only that for this part
+        dispatch({ type: 'API/GET_SECTION_DETAILS/RESET' });
+        dispatch(getSectionDetails({ sectionId: section.id.toString() }));
+      } else {
+        dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+      }
+      dispatch(showSnackBar(selectedTab === ClearLocationTarget.FLOOR
+        ? strings('LOCATION.CLEAR_SECTION_SALES_FLOOR_SUCCEED')
+        : strings('LOCATION.CLEAR_SECTION_RESERVE_SUCCEED'), 3000));
+    }
+  }
+};
 
 export const TabHeader = (props: TabHeaderProps): JSX.Element => {
   const {
@@ -194,24 +261,36 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     userFeatures,
     itemPopupVisible,
     sectionResult,
+    setSelectedTab,
+    clearSectionApi,
+    displayClearConfirmation,
+    setDisplayClearConfirmation,
     sectionIsWaiting,
     removeSectionApi,
-    displayConfirmation,
-    setDisplayConfirmation,
-    section
+    displayRemoveConfirmation,
+    setDisplayRemoveConfirmation,
+    section,
+    selectedTab
   } = props;
   const sectionExists: boolean = (sectionResult && sectionResult.status !== 204);
 
   // Call Get Section Details
-  useEffectHook(() => {
-    validateSessionCall(navigation, route.name).then(() => {
-      // Handles scanned event changes if the screen is in focus
-      if (scannedEvent.value && navigation.isFocused()) {
-        dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
-        navigation.navigate('FloorDetails');
-      }
-    }).catch(() => {});
-  }, [navigation, scannedEvent]);
+  useEffectHook(() => getSectionDetailsEffect(
+    validateSessionCall,
+    route,
+    scannedEvent,
+    navigation,
+    dispatch
+  ), [navigation, scannedEvent]);
+
+  // Clear Section API
+  useEffectHook(() => clearSectionApiEffect(
+    dispatch,
+    navigation,
+    clearSectionApi,
+    section,
+    setDisplayClearConfirmation
+  ), [clearSectionApi]);
 
   // scanned event listener
   useEffectHook(() => {
@@ -233,55 +312,35 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!removeSectionApi.isWaiting && removeSectionApi.result) {
-      setDisplayConfirmation(false);
+      setDisplayRemoveConfirmation(false);
       dispatch({ type: REMOVE_SECTION.RESET });
       dispatch(hideLocationPopup());
       navigation.goBack();
     }
   });
 
-  const removeSectionModal = () => (
-    <CustomModalComponent
-      isVisible={displayConfirmation}
-      onClose={() => setDisplayConfirmation(false)}
-      modalType="Error"
-    >
-      {removeSectionApi.isWaiting ? (
-        <ActivityIndicator
-          animating={removeSectionApi.isWaiting}
-          hidesWhenStopped
-          color={COLOR.MAIN_THEME_COLOR}
-          size="large"
-          style={styles.activityIndicator}
-        />
-      ) : (
-        <>
-          <View style={styles.confirmationView}>
-            <Text style={styles.confirmationText}>
-              {`${strings('LOCATION.REMOVE_SECTION_CONFIRMATION', { sectionName: locationName })}`}
-            </Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <Button
-              style={styles.delButton}
-              title={strings('GENERICS.CANCEL')}
-              backgroundColor={COLOR.TRACKER_RED}
-              onPress={() => setDisplayConfirmation(false)}
-            />
-            <Button
-              style={styles.delButton}
-              title={removeSectionApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
-              backgroundColor={COLOR.MAIN_THEME_COLOR}
-              onPress={() => dispatch(removeSection(section.id))}
-            />
-          </View>
-        </>
-      )}
-    </CustomModalComponent>
-  );
   return (
     <>
-      {removeSectionModal()}
+      <ApiConfirmationModal
+        api={removeSectionApi}
+        handleConfirm={() => dispatch(removeSection(section.id))}
+        isVisible={displayRemoveConfirmation}
+        mainText={`${strings('LOCATION.REMOVE_SECTION_CONFIRMATION', { sectionName: locationName })}`}
+        onClose={() => setDisplayRemoveConfirmation(false)}
+      />
+      <ApiConfirmationModal
+        isVisible={displayClearConfirmation}
+        onClose={() => handleClearModalClose(setDisplayClearConfirmation, dispatch)}
+        api={clearSectionApi}
+        mainText={strings('LOCATION.CLEAR_SECTION_CONFIRMATION')}
+        subtext1={selectedTab === ClearLocationTarget.FLOOR
+          ? strings('LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE')
+          : strings('LOCATION.CLEAR_SECTION_RESERVE_MESSAGE')}
+        subtext2={strings('LOCATION.CLEAR_SECTION_WONT_DELETE')}
+        handleConfirm={() => selectedTab
+          && handleClearSection(dispatch, section.id, selectedTab)}
+        errorText={strings('LOCATION.CLEAR_SECTION_FAIL')}
+      />
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={getLocationName(sectionIsWaiting, sectionExists, locationName)}
@@ -313,7 +372,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
                 e.preventDefault();
                 dispatch(hideLocationPopup());
               }
-            }
+            },
+            focus: () => setSelectedTab(ClearLocationTarget.FLOOR)
           }}
         >
           { () => <FloorDetailsList sectionExists={sectionExists} />}
@@ -335,7 +395,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
               if (itemPopupVisible) {
                 dispatch(hideItemPopup());
               }
-            }
+            },
+            focus: () => setSelectedTab(ClearLocationTarget.RESERVE)
           }}
         >
           {() => <ReserveDetailsList sectionExists={sectionExists} />}
@@ -348,18 +409,21 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
 const LocationTabs = () : JSX.Element => {
   const { selectedAisle, selectedZone, selectedSection } = useTypedSelector(state => state.Location);
   const { result, isWaiting } = useTypedSelector(state => state.async.getSectionDetails);
+  const clearSectionApi = useTypedSelector(state => state.async.clearLocation);
   const removeSectionApi = useTypedSelector(state => state.async.removeSection);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const userFeatures = useTypedSelector(state => state.User.features);
   const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
   const itemPopupVisible = useTypedSelector(state => state.Location.itemPopupVisible);
-  const [displayConfirmation, setDisplayConfirmation] = useState(false);
+  const [displayRemoveConfirmation, setDisplayRemoveConfirmation] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
   const locItem: LocationItem | undefined = (result && result.data);
   const locationName = `${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`;
+  const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
+  const [selectedTab, setSelectedTab] = useState<ClearLocationTarget>();
 
   const bottomSheetLocationDetailsModalRef = useRef<BottomSheetModal>(null);
 
@@ -402,9 +466,14 @@ const LocationTabs = () : JSX.Element => {
           itemPopupVisible={itemPopupVisible}
           sectionResult={result}
           sectionIsWaiting={isWaiting}
+          setSelectedTab={setSelectedTab}
+          clearSectionApi={clearSectionApi}
           removeSectionApi={removeSectionApi}
-          displayConfirmation={displayConfirmation}
-          setDisplayConfirmation={setDisplayConfirmation}
+          displayRemoveConfirmation={displayRemoveConfirmation}
+          setDisplayRemoveConfirmation={setDisplayRemoveConfirmation}
+          displayClearConfirmation={displayClearConfirmation}
+          setDisplayClearConfirmation={setDisplayClearConfirmation}
+          selectedTab={selectedTab}
         />
       </TouchableOpacity>
       <BottomSheetModal
@@ -416,13 +485,16 @@ const LocationTabs = () : JSX.Element => {
       >
         <BottomSheetView>
           <BottomSheetClearCard
-            onPress={() => {}}
+            onPress={() => {
+              setDisplayClearConfirmation(true);
+              dispatch(hideLocationPopup());
+            }}
             text={strings('LOCATION.CLEAR_SECTION')}
             isManagerOption={false}
             isVisible={true}
           />
           <BottomSheetRemoveCard
-            onPress={() => setDisplayConfirmation(true)}
+            onPress={() => setDisplayRemoveConfirmation(true)}
             text={strings('LOCATION.REMOVE_SECTION')}
             isVisible={userFeatures.includes('manager approval')}
           />
