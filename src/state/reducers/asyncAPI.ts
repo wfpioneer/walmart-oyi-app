@@ -33,7 +33,6 @@ export const asyncReducer = combineReducers({
   clearLocation: makeAsyncReducer(asyncActions.CLEAR_LOCATION),
   deleteAisle: makeAsyncReducer(asyncActions.DELETE_AISLE),
   removeSection: makeAsyncReducer(asyncActions.REMOVE_SECTION),
-  clearAisle: makeAsyncReducer(asyncActions.CLEAR_AISLE),
   getZoneNames: makeAsyncReducer(asyncActions.GET_ZONE_NAMES)
 });
 
