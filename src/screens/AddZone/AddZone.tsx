@@ -173,6 +173,8 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
               onDecreaseQty={handleDecreaseAisle}
               onIncreaseQty={handleIncreaseAisle}
               onTextChange={handleTextChange}
+              minValue={NEW_ZONE_AISLE_MIN}
+              maxValue={NEW_ZONE_AISLE_MAX}
               value={numberOfAisles}
             />
           </View>
