@@ -189,6 +189,7 @@ export const ClearItemsModal = (props: ClearItemsModalProps): JSX.Element => {
             </View>
           ) : (
             <View style={styles.confirmationTextView}>
+              <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
               <Text style={styles.confirmation}>
                 {strings('LOCATION.CLEAR_AISLE_ITEMS_FAIL')}
               </Text>
