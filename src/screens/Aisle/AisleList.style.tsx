@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
   },
   disabledContainer: {
     flex: 1,
-    opacity: 0.2
+    opacity: 0.2,
+    backgroundColor: COLOR.BLACK_TRANSPARENT_200
   },
   item: {
     backgroundColor: COLOR.WHITE,

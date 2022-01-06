@@ -41,6 +41,7 @@ import { LocationIdName } from '../../state/reducers/Location';
 import { REMOVE_SECTION } from '../../state/actions/asyncAPI';
 
 const Tab = createMaterialTopTabNavigator();
+const LOCATION_EDIT_FLAG = 'location management edit';
 
 export interface LocationProps {
     floorItems: SectionDetailsItem[];
@@ -58,6 +59,7 @@ export interface LocationProps {
     userFeatures: string[];
     itemPopupVisible:boolean;
     sectionResult: any;
+    sectionIsWaiting: boolean;
     clearSectionApi: AsyncState;
     setSelectedTab: React.Dispatch<React.SetStateAction<ClearLocationTarget | undefined>>;
     setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -176,7 +178,7 @@ const FloorDetailsList = (props: {sectionExists: boolean}) => {
     <>
       <TabHeader
         headerText={strings('LOCATION.ITEMS')}
-        isEditEnabled={userFeatures.includes('location management edit')}
+        isEditEnabled={userFeatures.includes(LOCATION_EDIT_FLAG)}
         isReserve={false}
         isDisabled={!sectionExists}
       />
@@ -194,13 +196,32 @@ const ReserveDetailsList = (props: {sectionExists: boolean}) => {
     <>
       <TabHeader
         headerText={strings('LOCATION.PALLETS')}
-        isEditEnabled={userFeatures.includes('location management edit')}
+        isEditEnabled={userFeatures.includes(LOCATION_EDIT_FLAG)}
         isReserve={true}
         isDisabled={!sectionExists}
       />
       <ReserveSectionDetails />
     </>
   );
+};
+const getSectionDetailsLabel = (
+  isWaiting: boolean,
+  floorItems: SectionDetailsItem[],
+  reserveItems: SectionDetailsPallet[]
+): string => {
+  const floorItemNbr = floorItems.length || 0;
+  const reserveItemNbr = reserveItems.length || 0;
+  if (isWaiting) {
+    return `0 ${strings('LOCATION.ITEMS')}, 0 ${strings('LOCATION.PALLETS')}`;
+  }
+  return `${floorItemNbr} ${strings('LOCATION.ITEMS')}, ${reserveItemNbr} ${strings('LOCATION.PALLETS')}`;
+};
+
+const getLocationName = (isWaiting: boolean, sectionExists: boolean, newLocationName: string): string => {
+  if (isWaiting || !sectionExists) {
+    return `${strings('LOCATION.SECTION')} -`;
+  }
+  return `${strings('LOCATION.SECTION')} ${newLocationName}`;
 };
 
 export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
@@ -224,6 +245,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     clearSectionApi,
     displayClearConfirmation,
     setDisplayClearConfirmation,
+    sectionIsWaiting,
     removeSectionApi,
     displayRemoveConfirmation,
     setDisplayRemoveConfirmation,
@@ -301,12 +323,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       />
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
-        location={`${strings('LOCATION.SECTION')}`
-         + ` ${/* scannedEvent.type === 'sectionId' && scannedEvent.value
-           ? scannedEvent.value?.toUpperCase()
-           : */ locationName}`}
-        details={`${floorItems.length ?? 0} ${strings('LOCATION.ITEMS')},`
-        + ` ${reserveItems.length ?? 0} ${strings('LOCATION.PALLETS')}`}
+        location={getLocationName(sectionIsWaiting, sectionExists, locationName)}
+        details={getSectionDetailsLabel(sectionIsWaiting, floorItems, reserveItems)}
         buttonPress={() => {
           dispatch(setPrintingLocationLabels(LocationName.SECTION));
           navigation.navigate('PrintPriceSign');
@@ -370,7 +388,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
 
 const LocationTabs = () : JSX.Element => {
   const { selectedAisle, selectedZone, selectedSection } = useTypedSelector(state => state.Location);
-  const { result } = useTypedSelector(state => state.async.getSectionDetails);
+  const { result, isWaiting } = useTypedSelector(state => state.async.getSectionDetails);
   const clearSectionApi = useTypedSelector(state => state.async.clearLocation);
   const removeSectionApi = useTypedSelector(state => state.async.removeSection);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
@@ -427,6 +445,7 @@ const LocationTabs = () : JSX.Element => {
           userFeatures={userFeatures}
           itemPopupVisible={itemPopupVisible}
           sectionResult={result}
+          sectionIsWaiting={isWaiting}
           setSelectedTab={setSelectedTab}
           clearSectionApi={clearSectionApi}
           removeSectionApi={removeSectionApi}
