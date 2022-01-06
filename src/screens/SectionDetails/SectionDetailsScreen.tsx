@@ -132,31 +132,18 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
       // Clear Pallet Data on on success ( Case for when scanning a new section, stale data could remain)
       dispatch({ type: GET_PALLET_DETAILS.RESET });
       // Update Location State on Success
-      const { pallets } = getSectionDetailsApi.result.data;
-      const palletIdList = palletDataToIds(pallets.palletData);
-      switch (getSectionDetailsApi.result.status) {
-        case 200: {
-          dispatch(setPalletIds(palletIdList));
-          if (palletIdList.length !== 0) {
-            dispatch(getPalletDetails({ palletIds: palletIdList }));
-          }
-          break;
+      if (getSectionDetailsApi.result.status !== 204) {
+        const {
+          pallets, zone, aisle, section
+        } = getSectionDetailsApi.result.data;
+        const palletIdList = palletDataToIds(pallets.palletData);
+        dispatch(selectZone(zone.id, zone.name));
+        dispatch(selectAisle(aisle.id, aisle.name));
+        dispatch(selectSection(section.id, section.name));
+        dispatch(setPalletIds(palletIdList));
+        if (palletIdList.length !== 0) {
+          dispatch(getPalletDetails({ palletIds: palletIdList }));
         }
-        case 207: {
-          // eslint-disable-next-line no-case-declarations
-          const { zone, aisle, section } = getSectionDetailsApi.result.data;
-          dispatch(selectZone(zone.id || 0, zone.name || ''));
-          dispatch(selectAisle(aisle.id || 0, aisle.name || ''));
-          dispatch(selectSection(section.id, section.name));
-          dispatch(setPalletIds(palletIdList));
-          if (palletIdList.length !== 0) {
-            dispatch(getPalletDetails({ palletIds: palletIdList }));
-          }
-          break;
-        }
-        case 204:
-          break;
-        default: break;
       }
     }
 

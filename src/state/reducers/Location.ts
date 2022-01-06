@@ -174,7 +174,7 @@ export const Location = (
         ...state,
         newZone: action.payload
       };
-    case SET_AISLES_TO_CREATE: // TODO refactor to not mutate aisleToCreate array less priority
+    case SET_AISLES_TO_CREATE:
       while (aislesToCreate.length < action.payload) {
         if (!state.aisles.find(aisle => aisleCount === parseInt(aisle.aisleName, 10))) {
           aislesToCreate.push({
