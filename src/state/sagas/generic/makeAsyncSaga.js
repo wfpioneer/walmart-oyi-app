@@ -21,13 +21,18 @@ export function makeAsyncSaga(INITIATOR, opActions, service, handleError = _.noo
       duration: payload?.duration,
       itemDetails: JSON.stringify(payload?.itemDetails),
       upc: payload?.upc,
+      zoneId: payload?.zoneId,
+      aisleId: payload?.aisleId,
       sectionId: payload?.sectionId,
       locationTypeNbr: payload?.locationTypeNbr,
       approvalAction: payload?.headers?.action,
       scannedValue: payload?.scannedValue,
       status: payload?.status,
       onHandsItem: JSON.stringify(payload?.data),
-      printQueue: JSON.stringify(payload?.printList)
+      printQueue: JSON.stringify(payload?.printList),
+      locationId: payload?.locationId,
+      palletId: payload?.palletId,
+      palletIds: JSON.stringify(payload?.palletIds)
     };
     const apiStart = moment().valueOf();
     if (!initiatesUsingOpAction) {
