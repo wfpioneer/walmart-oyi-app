@@ -37,8 +37,8 @@ export interface LocationIdName {
 }
 export interface CreateZoneRequest {
   zoneName: string;
-  description: string
-  aisles: CreateAisles[]
+  description: string;
+  aisles: CreateAisles[];
 }
 
 export interface CreateAisles {
@@ -195,7 +195,7 @@ export const Location = (
         ...state,
         aislesToCreate: aisles
       };
-    case RESET_SECTION_NAME: // TODO Reset only zone, aisle, section
+    case RESET_SECTION_NAME:
       return initialState;
     case SET_PALLET_IDS: {
       return {

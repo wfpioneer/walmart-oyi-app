@@ -11,7 +11,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
-import { LocationItem, SectionDetailsItem } from '../../models/LocationItems';
+import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import { deleteLocation, getPalletDetails, getSectionDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import styles from './SectionDetailsScreen.style';
@@ -29,7 +29,6 @@ import { showSnackBar } from '../../state/actions/SnackBar';
 import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import BottomSheetEditCard from '../../components/BottomSheetEditCard/BottomSheetEditCard';
 import { LocationIdName } from '../../state/reducers/Location';
-import { palletDataToIds } from '../../navigators/LocationTabs/LocationTabNavigator';
 
 interface SectionDetailsProps {
   getSectionDetailsApi: AsyncState;
@@ -39,7 +38,6 @@ interface SectionDetailsProps {
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   scannedEvent: { type: string, value: string };
-  addAPI: AsyncState;
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
   selectedItem: SectionDetailsItem | null;
@@ -97,6 +95,14 @@ export const handleEditItem = (
   navigation.navigate('EditLocation');
 };
 
+export const palletDataToIds = (palletData: SectionDetailsPallet[]): number[] => {
+  let palletIds = [];
+  palletIds = palletData.map(
+    (item: Omit<SectionDetailsPallet, 'items'>) => item.palletId
+  );
+  return palletIds;
+};
+
 export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element => {
   const {
     getSectionDetailsApi,
@@ -106,7 +112,6 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
     trackEventCall,
     useEffectHook,
     scannedEvent,
-    addAPI,
     displayConfirmation,
     setDisplayConfirmation,
     selectedItem,
@@ -286,7 +291,6 @@ const SectionDetails = (): JSX.Element => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const addAPI = useTypedSelector(state => state.async.addPallet);
   const {
     itemPopupVisible,
     selectedItem,
@@ -317,7 +321,6 @@ const SectionDetails = (): JSX.Element => {
         <SectionDetailsScreen
           getSectionDetailsApi={getSectionDetailsApi}
           deleteLocationApi={deleteLocationApi}
-          addAPI={addAPI}
           dispatch={dispatch}
           navigation={navigation}
           trackEventCall={trackEvent}

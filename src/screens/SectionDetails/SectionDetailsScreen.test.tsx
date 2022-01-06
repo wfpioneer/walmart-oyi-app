@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
-import { SectionDetailsScreen, handleEditItem } from './SectionDetailsScreen';
+import { SectionDetailsScreen, handleEditItem, palletDataToIds } from './SectionDetailsScreen';
 import { AsyncState } from '../../models/AsyncState';
 import {
   mockLocationDetails,
@@ -59,7 +59,6 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
-          addAPI={defaultAsyncState}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -86,7 +85,6 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
-          addAPI={defaultAsyncState}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -113,7 +111,6 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
-          addAPI={defaultAsyncState}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -140,7 +137,6 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
-          addAPI={defaultAsyncState}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -165,7 +161,6 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
-          addAPI={defaultAsyncState}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -193,7 +188,6 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
-          addAPI={defaultAsyncState}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -235,7 +229,6 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
-          addAPI={defaultAsyncState}
           displayConfirmation={true}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -256,7 +249,6 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
-          addAPI={defaultAsyncState}
           displayConfirmation={true}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -277,7 +269,6 @@ describe('Test Location Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           scannedEvent={defaultScannedEvent}
-          addAPI={defaultAsyncState}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -291,9 +282,7 @@ describe('Test Location Details Screen', () => {
     it('tests handleEditLocation function', () => {
       const mockDispatch = jest.fn();
       const mockNavigate = jest.fn();
-      // we need to ignore this typescript error as the navigationProp is expecting serveral properties
-      // but we only need to mock the navigate
-      // @ts-ignore
+      // @ts-expect-error we need to ignore this typescript error as the navigationProp is expecting several properties
       navigationProp = { navigate: mockNavigate };
       const mockSelectedItem = {
         itemNbr: 123,
@@ -326,6 +315,12 @@ describe('Test Location Details Screen', () => {
       expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: 'LOCATION/SET_SELECTED_LOCATION' }));
       expect(mockDispatch).lastCalledWith({ type: 'LOCATION/HIDE_ITEM_POPUP' });
       expect(mockNavigate).toBeCalledWith('EditLocation');
+    });
+
+    it('tests palletDataToIds function', () => {
+      const palletIds = palletDataToIds(mockLocationDetails.pallets.palletData);
+      const listOfIds = [1, 123, 456];
+      expect(palletIds).toStrictEqual(listOfIds);
     });
   });
 });

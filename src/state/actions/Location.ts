@@ -77,7 +77,7 @@ export const hideLocationPopup = () => ({
 } as const);
 
 export const resetLocationAll = () => ({
-  type: RESET_SECTION_NAME
+  type: RESET_SECTION_NAME // TODO rename type to match variable name
 } as const);
 
 export const setPossibleZones = (zoneArray: PossibleZone[]) => ({
