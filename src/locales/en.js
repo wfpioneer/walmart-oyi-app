@@ -245,7 +245,8 @@ export default {
     CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE: 'Please choose sales floor, reserve, or both to clear',
     CLEAR_AISLE_ITEMS_WONT_DELETE: 'This will not delete the sections from this aisle',
     CLEAR_AISLE_ITEMS_SUCCEED: 'All selected items successfully cleared from this aisle',
-    CLEAR_AISLE_ITEMS_FAIL: 'There was an error clearing items from this aisle.  Please try again'
+    CLEAR_AISLE_ITEMS_FAIL: 'There was an error clearing items from this aisle.  Please try again',
+    PALLET_MANAGEMENT: 'Pallet Management'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

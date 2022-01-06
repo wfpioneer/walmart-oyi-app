@@ -245,7 +245,8 @@ export default {
     CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE: 'Por favor selecciona Piso, bodega o ambos para limpiar',
     CLEAR_AISLE_ITEMS_WONT_DELETE: 'Esto no eliminará las secciones del pasillo',
     CLEAR_AISLE_ITEMS_SUCCEED: 'Todos los artículos seleccionados fueron limpiados del pasillo',
-    CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo'
+    CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo',
+    PALLET_MANAGEMENT: 'Pallet Management' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

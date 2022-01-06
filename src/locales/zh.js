@@ -247,7 +247,8 @@ export default {
     CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE: '请选择楼面，高货架或者两个都选进行清除',
     CLEAR_AISLE_ITEMS_WONT_DELETE: '删除此通道的货架信息',
     CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
-    CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试'
+    CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
+    PALLET_MANAGEMENT: 'Pallet Management' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

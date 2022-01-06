@@ -31,6 +31,16 @@ const tools: ToolsFeatures[] = [
       size={28}
       color={COLOR.MAIN_THEME_COLOR}
     />
+  },
+  {
+    key: 'pallet management',
+    title: 'LOCATION.PALLET_MANAGEMENT',
+    destination: 'PalletManagement',
+    icon: <MaterialCommunityIcon
+      name="cube-outline"
+      size={28}
+      color={COLOR.MAIN_THEME_COLOR}
+    />
   }];
 
 export const ToolsScreen = (props: ToolsScreenProps): JSX.Element => {
