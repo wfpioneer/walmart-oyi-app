@@ -11,7 +11,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { addPallet, getSectionDetails } from '../../state/actions/saga';
 import Button from '../../components/buttons/Button';
-import { trackEvent } from '../../utils/AppCenterTool';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter } from '../../utils/scannerUtils';
@@ -19,9 +18,9 @@ import { strings } from '../../locales';
 import styles from './AddPallet.style';
 import COLOR from '../../themes/Color';
 import { AsyncState } from '../../models/AsyncState';
-import { LocationType } from '../../models/LocationType';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import { showInfoModal } from '../../state/actions/Modal';
+import { LocationIdName } from '../../state/reducers/Location';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 interface AddPalletScreenProps {
@@ -30,7 +29,7 @@ interface AddPalletScreenProps {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
-  section: { id: number | string; name: string; };
+  section: LocationIdName;
   locationName: string;
   addAPI: AsyncState;
 }
@@ -64,7 +63,6 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
     // on api success
     // eslint-disable-next-line no-empty
     if (!addAPI.isWaiting && addAPI.result) {
-      // TODO Call GET PALLET DETAILS after adding pallet
       dispatch(getSectionDetails({ sectionId: section.id.toString() }));
       dispatch(showSnackBar(strings('LOCATION.PALLET_ADDED'), 3000));
       navigation.goBack();

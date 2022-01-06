@@ -22,7 +22,7 @@ describe('ReservePalletRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <ReservePalletRow sectionId={mockSection.id} reservePallet={mockReservePallet} />
+        <ReservePalletRow section={mockSection} reservePallet={mockReservePallet} />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -40,7 +40,7 @@ describe('ReservePalletRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <ReservePalletRow sectionId={mockSection.id} reservePallet={mockReservePalletLongFirstItemName} />
+        <ReservePalletRow section={mockSection} reservePallet={mockReservePalletLongFirstItemName} />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -51,7 +51,7 @@ describe('ReservePalletRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <ReservePalletRow sectionId={mockSection.id} reservePallet={mockReservePalletNoItems} />
+        <ReservePalletRow section={mockSection} reservePallet={mockReservePalletNoItems} />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

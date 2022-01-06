@@ -1,21 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tests Reserve Section Details Screen Tests rendering Get Section Details api responses Renders Location Details activity indicator when waiting for an api response 1`] = `
-<ActivityIndicator
-  animating={true}
-  color="#0071e9"
-  hidesWhenStopped={true}
-  size="large"
-  style={
-    Object {
-      "alignItems": "center",
-      "flex": 1,
-      "justifyContent": "center",
-    }
-  }
-/>
-`;
-
 exports[`Tests Reserve Section Details Screen Tests rendering Get Section Details api responses Renders Location Details error message 1`] = `
 <View
   style={
@@ -62,6 +46,38 @@ exports[`Tests Reserve Section Details Screen Tests rendering Get Section Detail
     </Text>
   </ForwardRef>
 </View>
+`;
+
+exports[`Tests Reserve Section Details Screen Tests rendering Get Section Details api responses Renders activity indicator when waiting for get pallet details api response 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`Tests Reserve Section Details Screen Tests rendering Get Section Details api responses Renders activity indicator when waiting for get section details api response 1`] = `
+<ActivityIndicator
+  animating={false}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
 `;
 
 exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section details screen data Renders List Empty Component if palletDetails returns with no data 1`] = `
