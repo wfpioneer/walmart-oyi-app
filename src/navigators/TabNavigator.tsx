@@ -18,7 +18,6 @@ const Tab = createBottomTabNavigator();
 
 const isToolsEnabled = (userFeatures: string[]) => {
   const enabledTools =  AVAILABLE_TOOLS.filter(feature => userFeatures.includes(feature));
-  console.log(enabledTools);
   return enabledTools.length > 0;
 };
 
