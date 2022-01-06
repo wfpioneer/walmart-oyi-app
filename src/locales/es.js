@@ -241,10 +241,10 @@ export default {
     SECTION_REMOVED: 'Sección eliminada correctamente',
     ZONE_NAME_ERROR: 'There was an error retrieving the possible zone names. \nPlease try again.', // TODO spanish translation
     SELECT_ZONE: 'Select Zone', // TODO spanish translation
-    CLEAR_AISLE_CONFIRMATION: 'Are you sure you want to clear this aisle?', // TODO Spanish Translation
-    CLEAR_AISLE_WILL_REMOVE_SECTIONS: 'This will also clear all items and pallet associated with this aisle', // TODO Spanish Translation
-    CLEAR_AISLE_FAIL: 'There was an error clearing the aisle.  Please try again', // TODO Spanish Translation
-    AISLE_CLEARED: 'Aisle cleared successfully' // TODO Spanish Translation
+    CLEAR_AISLE_CONFIRMATION: '¿Estas seguro que quieres limpiar este pasillo?',
+    CLEAR_AISLE_WILL_REMOVE_SECTIONS: 'Esto también eliminará los artículos y pallets asociados a este pasillo',
+    CLEAR_AISLE_FAIL: 'Hubo un error limpiando el pasillo. Por favor inténtalo de nuevo',
+    AISLE_CLEARED: 'Pasillo limpiado correctamente'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
