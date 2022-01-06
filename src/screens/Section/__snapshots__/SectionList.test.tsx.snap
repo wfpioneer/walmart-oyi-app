@@ -326,6 +326,11 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
         }
       }
     >
+      <mockConstructor
+        color="#f44336"
+        name="alert"
+        size={30}
+      />
       <Text
         style={
           Object {
