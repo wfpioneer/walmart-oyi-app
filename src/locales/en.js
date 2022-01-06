@@ -244,7 +244,8 @@ export default {
     CLEAR_AISLE_CONFIRMATION: 'Are you sure you want to clear this aisle?',
     CLEAR_AISLE_WILL_REMOVE_SECTIONS: 'This will also clear all items and pallet associated with this aisle',
     CLEAR_AISLE_FAIL: 'There was an error clearing the aisle.  Please try again',
-    AISLE_CLEARED: 'Aisle cleared successfully'
+    AISLE_CLEARED: 'Aisle cleared successfully',
+    PALLET_MANAGEMENT: 'Pallet Management'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

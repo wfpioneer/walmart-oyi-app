@@ -246,7 +246,8 @@ export default {
     CLEAR_AISLE_CONFIRMATION: '确定要清除此通道？',
     CLEAR_AISLE_WILL_REMOVE_SECTIONS: '这会清除此通道下的所有商品和卡板',
     CLEAR_AISLE_FAIL: '清除通道时出错，请重试',
-    AISLE_CLEARED: '成功清除通道'
+    AISLE_CLEARED: '成功清除通道',
+    PALLET_MANAGEMENT: 'Pallet Management' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
