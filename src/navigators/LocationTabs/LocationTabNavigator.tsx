@@ -185,14 +185,6 @@ const FloorDetailsList = (props: {sectionExists: boolean}) => {
   );
 };
 
-export const palletDataToIds = (palletData: SectionDetailsPallet[]) => {
-  let palletIds = [];
-  palletIds = palletData.map(
-    (item: Omit<SectionDetailsPallet, 'items'>) => item.palletId
-  );
-  return palletIds;
-};
-
 const ReserveDetailsList = (props: {sectionExists: boolean}) => {
   const userFeatures = useTypedSelector(state => state.User.features);
   const { sectionExists } = props;

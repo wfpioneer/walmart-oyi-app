@@ -51,7 +51,12 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
         "statusCode": 200,
       }
     }
-    sectionId={1}
+    section={
+      Object {
+        "id": 1,
+        "name": "Section 1",
+      }
+    }
   />
 </Context.Provider>
 `;
@@ -114,7 +119,12 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
         "statusCode": 200,
       }
     }
-    sectionId={1}
+    section={
+      Object {
+        "id": 1,
+        "name": "Section 1",
+      }
+    }
   />
 </Context.Provider>
 `;
@@ -159,7 +169,12 @@ exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = 
         "statusCode": 200,
       }
     }
-    sectionId={1}
+    section={
+      Object {
+        "id": 1,
+        "name": "Section 1",
+      }
+    }
   />
 </Context.Provider>
 `;
