@@ -244,7 +244,8 @@ export default {
     CLEAR_AISLE_CONFIRMATION: '¿Estas seguro que quieres limpiar este pasillo?',
     CLEAR_AISLE_WILL_REMOVE_SECTIONS: 'Esto también eliminará los artículos y pallets asociados a este pasillo',
     CLEAR_AISLE_FAIL: 'Hubo un error limpiando el pasillo. Por favor inténtalo de nuevo',
-    AISLE_CLEARED: 'Pasillo limpiado correctamente'
+    AISLE_CLEARED: 'Pasillo limpiado correctamente',
+    PALLET_MANAGEMENT: 'Pallet Management' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
