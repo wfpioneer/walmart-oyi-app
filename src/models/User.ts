@@ -13,3 +13,5 @@ export default interface User {
   };
   features: string[]
 }
+
+export const AVAILABLE_TOOLS = ['location management', 'pallet management', 'picking', 'binning'];

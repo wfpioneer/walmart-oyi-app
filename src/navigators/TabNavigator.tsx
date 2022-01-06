@@ -12,10 +12,18 @@ import { ToolsNavigator } from './ToolsNavigator';
 import { WorklistNavigator } from './WorklistNavigator';
 import { ApprovalListNavigator } from './ApprovalListNavigator';
 import { resetApprovals } from '../state/actions/Approvals';
+import { AVAILABLE_TOOLS } from "../models/User";
 
 const Tab = createBottomTabNavigator();
 
+const isToolsEnabled = (userFeatures: string[]) => {
+  const enabledTools =  AVAILABLE_TOOLS.filter(feature => userFeatures.includes(feature));
+  console.log(enabledTools);
+  return enabledTools.length > 0;
+};
+
 const TabNavigator = (): JSX.Element => {
+  // TODO combine userFeatures from both fluffy and config service once it is implemented
   const userFeatures = useTypedSelector(state => state.User.features);
   const selectedAmount = useTypedSelector(state => state.Approvals.selectedItemQty);
   const dispatch = useDispatch();
@@ -53,7 +61,7 @@ const TabNavigator = (): JSX.Element => {
         component={WorklistNavigator}
       />
 
-      {userFeatures.includes('location management')
+      {isToolsEnabled(userFeatures)
         && (
         <Tab.Screen
           name={strings('GENERICS.TOOLS')}
