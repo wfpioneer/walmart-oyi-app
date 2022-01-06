@@ -12,7 +12,7 @@ import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
 import { LocationItem, SectionDetailsItem } from '../../models/LocationItems';
-import { deleteLocation, getSectionDetails } from '../../state/actions/saga';
+import { deleteLocation, getPalletDetails, getSectionDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import styles from './SectionDetailsScreen.style';
 import COLOR from '../../themes/Color';
@@ -22,13 +22,14 @@ import Button from '../../components/buttons/Button';
 import { CustomModalComponent } from '../Modal/Modal';
 import { DELETE_LOCATION, GET_PALLET_DETAILS, GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
 import {
-  hideItemPopup, selectAisle, selectSection, selectZone
+  hideItemPopup, selectAisle, selectSection, selectZone, setPalletIds
 } from '../../state/actions/Location';
 import { setSelectedLocation, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import BottomSheetEditCard from '../../components/BottomSheetEditCard/BottomSheetEditCard';
 import { LocationIdName } from '../../state/reducers/Location';
+import { palletDataToIds } from '../../navigators/LocationTabs/LocationTabNavigator';
 
 interface SectionDetailsProps {
   getSectionDetailsApi: AsyncState;
@@ -116,28 +117,47 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
   // Resets Get SectionDetails api response data when navigating off-screen
   useEffectHook(() => navigation.addListener('beforeRemove', () => {
     dispatch(hideItemPopup());
-    dispatch({type: GET_SECTION_DETAILS.RESET});
+    dispatch({ type: GET_SECTION_DETAILS.RESET });
   }), []);
 
   // Get Section Details Api
   useEffectHook(() => {
     // on api success
     if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
-      // Clear Pallet Data on on success ( Case when scanning a new section, stale data could remain)
+      // Clear Pallet Data on on success ( Case for when scanning a new section, stale data could remain)
       dispatch({ type: GET_PALLET_DETAILS.RESET });
       // Update Location State on Success
+      const { pallets } = getSectionDetailsApi.result.data;
+      const palletIdList = palletDataToIds(pallets.palletData);
       switch (getSectionDetailsApi.result.status) {
-        case 200:
-        case 207:
+        case 200: {
+          dispatch(setPalletIds(palletIdList));
+          if (palletIdList.length !== 0) {
+            dispatch(getPalletDetails({ palletIds: palletIdList }));
+          }
+          break;
+        }
+        case 207: {
           // eslint-disable-next-line no-case-declarations
           const { zone, aisle, section } = getSectionDetailsApi.result.data;
           dispatch(selectZone(zone.id || 0, zone.name || ''));
           dispatch(selectAisle(aisle.id || 0, aisle.name || ''));
           dispatch(selectSection(section.id, section.name));
+          dispatch(setPalletIds(palletIdList));
+          if (palletIdList.length !== 0) {
+            dispatch(getPalletDetails({ palletIds: palletIdList }));
+          }
           break;
+        }
         case 204:
           break;
         default: break;
+      }
+    }
+
+    if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.error) {
+      if (!navigation.isFocused()) {
+        navigation.navigate('FloorDetails');
       }
     }
   }, [getSectionDetailsApi]);

@@ -11,7 +11,6 @@ import {
 } from '@react-navigation/native';
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 import { Dispatch } from 'redux';
-import moment from 'moment';
 import { strings } from '../../locales';
 import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
@@ -20,7 +19,7 @@ import LocationHeader from '../../components/locationHeader/LocationHeader';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
 import {
-  clearLocation, getPalletDetails, getSectionDetails, removeSection
+  clearLocation, getSectionDetails, removeSection
 } from '../../state/actions/saga';
 import SectionDetails from '../../screens/SectionDetails/SectionDetailsScreen';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -186,29 +185,18 @@ const FloorDetailsList = (props: {sectionExists: boolean}) => {
   );
 };
 
+export const palletDataToIds = (palletData: SectionDetailsPallet[]) => {
+  let palletIds = [];
+  palletIds = palletData.map(
+    (item: Omit<SectionDetailsPallet, 'items'>) => item.palletId
+  );
+  return palletIds;
+};
+
 const ReserveDetailsList = (props: {sectionExists: boolean}) => {
   const userFeatures = useTypedSelector(state => state.User.features);
-  const navigation = useNavigation();
-  const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
-  const dispatch = useDispatch();
   const { sectionExists } = props;
 
-  let palletIds: number[] = [];
-  // Call Get Pallet Details API
-  useEffect(() => navigation.addListener('focus', () => {
-    // Call if SectionDetails returned successfully and tab is in focus
-    if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
-      if (getSectionDetailsApi.result.status !== 204) {
-        const { pallets } = getSectionDetailsApi.result.data;
-        if (pallets.palletData.length !== 0) {
-          palletIds = pallets.palletData.map(
-            (item: Omit<SectionDetailsPallet, 'items'>) => item.palletId
-          );
-          dispatch(getPalletDetails({ palletIds }));
-        }
-      }
-    }
-  }), [getSectionDetailsApi]);
 
   return (
     <>
@@ -218,7 +206,7 @@ const ReserveDetailsList = (props: {sectionExists: boolean}) => {
         isReserve={true}
         isDisabled={!sectionExists}
       />
-      <ReserveSectionDetails palletIds={palletIds} />
+      <ReserveSectionDetails />
     </>
   );
 };

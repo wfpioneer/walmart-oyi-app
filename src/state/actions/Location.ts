@@ -27,6 +27,7 @@ export const SHOW_ITEM_POPUP = 'LOCATION/SHOW_ITEM_POPUP';
 export const HIDE_ITEM_POPUP = 'LOCATION/HIDE_ITEM_POPUP';
 export const SET_SELECTED_ITEM = 'LOCATION/SET_SELECTED_ITEM';
 export const CLEAR_SELECTED_ITEM = 'LOCATION/CLEAR_SELECTED_ITEM';
+export const SET_PALLET_IDS = 'LOCATION/SET_PALLET_IDS';
 
 export const selectZone = (id: number, name: string) => ({
   type: SELECT_ZONE,
@@ -112,6 +113,11 @@ export const setAisleSectionCount = (aisleIndex: number, sectionCount: number) =
   }
 } as const);
 
+export const setPalletIds = (pallets: number[]) => ({
+  type: SET_PALLET_IDS,
+  payload: pallets
+} as const);
+
 export const showItemPopup = () => ({
   type: SHOW_ITEM_POPUP
 } as const);
@@ -149,3 +155,4 @@ export type Actions =
   | ReturnType<typeof hideItemPopup>
   | ReturnType<typeof setSelectedItem>
   | ReturnType<typeof clearSelectedItem>
+  | ReturnType<typeof setPalletIds>

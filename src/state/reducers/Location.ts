@@ -14,6 +14,7 @@ import {
   SET_AISLE_SECTION_COUNT,
   SET_CREATE_FLOW,
   SET_NEW_ZONE,
+  SET_PALLET_IDS,
   SET_POSSIBLE_ZONES,
   SET_SECTIONS,
   SET_SELECTED_ITEM,
@@ -52,6 +53,7 @@ interface LocationState {
   zones: ZoneItem[];
   aisles: AisleItem[];
   sections: SectionItem[];
+  palletIds: number[];
   possibleZones: PossibleZone[];
   locationPopupVisible: boolean;
   createFlow: CREATE_FLOW;
@@ -78,6 +80,7 @@ const initialState: LocationState = {
   possibleZones: [],
   aisles: [],
   sections: [],
+  palletIds: [],
   locationPopupVisible: false,
   createFlow: CREATE_FLOW.NOT_STARTED,
   newZone: '',
@@ -171,7 +174,7 @@ export const Location = (
         ...state,
         newZone: action.payload
       };
-    case SET_AISLES_TO_CREATE:
+    case SET_AISLES_TO_CREATE: // TODO refactor to not mutate aisleToCreate array less priority
       while (aislesToCreate.length < action.payload) {
         if (!state.aisles.find(aisle => aisleCount === parseInt(aisle.aisleName, 10))) {
           aislesToCreate.push({
@@ -192,8 +195,14 @@ export const Location = (
         ...state,
         aislesToCreate: aisles
       };
-    case RESET_SECTION_NAME:
+    case RESET_SECTION_NAME: // TODO Reset only zone, aisle, section
       return initialState;
+    case SET_PALLET_IDS: {
+      return {
+        ...state,
+        palletIds: action.payload
+      };
+    }
     case SET_AISLES_TO_CREATE_TO_EXISTING_AISLE:
       return {
         ...state,
