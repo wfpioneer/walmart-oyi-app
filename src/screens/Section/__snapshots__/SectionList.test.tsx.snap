@@ -2,96 +2,42 @@
 
 exports[`Rendering Remove Aisle responses Renders the success response from Remove Aisle 1`] = `
 <View>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": Object {
+          "data": "",
+          "status": 204,
+        },
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_AISLE_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 5,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_AISLE_CONFIRMATION" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 14,
-              "paddingBottom": 15,
-              "paddingHorizontal": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1="[missing \\"en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS\\" translation]"
+    subtext2={null}
+  />
+  <ClearItemsModal
+    clearAisleApi={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    clearLocationTarget="items"
+    displayConfirmation={false}
+    handleClearItems={[Function]}
+    isClearAisle={false}
+    setClearLocationTarget={[MockFunction]}
+    setDisplayConfirmation={[MockFunction]}
+  />
   <LocationHeader
     details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
     isDisabled={false}
@@ -123,26 +69,39 @@ exports[`Rendering Remove Aisle responses Renders the success response from Remo
 
 exports[`Rendering Remove Aisle responses Renders the waiting for response from Remove Aisle 1`] = `
 <View>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Error"
-    onClose={[Function]}
-  >
-    <ActivityIndicator
-      animating={true}
-      color="#0071e9"
-      hidesWhenStopped={true}
-      size="large"
-      style={
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        }
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": true,
+        "result": null,
+        "value": null,
       }
-    />
-  </CustomModalComponent>
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.REMOVE_AISLE_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS\\" translation]"
+    subtext2={null}
+  />
+  <ClearItemsModal
+    clearAisleApi={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    clearLocationTarget="items"
+    displayConfirmation={false}
+    handleClearItems={[Function]}
+    isClearAisle={false}
+    setClearLocationTarget={[MockFunction]}
+    setDisplayConfirmation={[MockFunction]}
+  />
   <LocationHeader
     details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
     isDisabled={false}
@@ -172,176 +131,740 @@ exports[`Rendering Remove Aisle responses Renders the waiting for response from 
 </View>
 `;
 
-exports[`Rendering clear Aisle responses Renders the success response from Remove Aisle 1`] = `
-<View>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Error"
-    onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
+exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not show when not clear aisle 1`] = `
+<CustomModalComponent
+  animationType="none"
+  isVisible={false}
+  modalType="Error"
+  onClose={[Function]}
+>
+  <React.Fragment>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
         }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 5,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.CLEAR_AISLE_CONFIRMATION" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 14,
-              "paddingBottom": 15,
-              "paddingHorizontal": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.CLEAR_AISLE_WILL_REMOVE_SECTIONS" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
-  <LocationHeader
-    details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
-    isDisabled={false}
-    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
-  />
-  <FlatList
-    ListEmptyComponent={<NoSectionMessage />}
-    contentContainerStyle={
-      Object {
-        "paddingBottom": 100,
       }
-    }
-    data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
-    keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
-    renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
-  />
-</View>
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "paddingBottom": 5,
+            "paddingHorizontal": 15,
+            "paddingTop": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CONFIRMATION" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 14,
+            "paddingBottom": 15,
+            "paddingHorizontal": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.ITEM.FLOOR\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#545F7A"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.ITEM.RESERVE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#545F7A"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.ALL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 14,
+            "paddingBottom": 15,
+            "paddingHorizontal": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[MockFunction]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
+</CustomModalComponent>
+`;
+
+exports[`Rendering clear Aisle responses Renders the failed response from clear aisle 1`] = `
+<CustomModalComponent
+  animationType="none"
+  isVisible={true}
+  modalType="Error"
+  onClose={[Function]}
+>
+  <React.Fragment>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <mockConstructor
+        color="#f44336"
+        name="alert"
+        size={30}
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "paddingBottom": 5,
+            "paddingHorizontal": 15,
+            "paddingTop": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_FAIL" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.ITEM.FLOOR\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#545F7A"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.ITEM.RESERVE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#545F7A"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.ALL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 14,
+            "paddingBottom": 15,
+            "paddingHorizontal": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[MockFunction]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
+</CustomModalComponent>
+`;
+
+exports[`Rendering clear Aisle responses Renders the preflight view of clearAisleModal 1`] = `
+<CustomModalComponent
+  animationType="none"
+  isVisible={true}
+  modalType="Error"
+  onClose={[Function]}
+>
+  <React.Fragment>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "paddingBottom": 5,
+            "paddingHorizontal": 15,
+            "paddingTop": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CONFIRMATION" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 14,
+            "paddingBottom": 15,
+            "paddingHorizontal": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.ITEM.FLOOR\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#545F7A"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.ITEM.RESERVE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#545F7A"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.ALL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 14,
+            "paddingBottom": 15,
+            "paddingHorizontal": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[MockFunction]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
+</CustomModalComponent>
+`;
+
+exports[`Rendering clear Aisle responses Renders the success response from clear Aisle 1`] = `
+<CustomModalComponent
+  animationType="none"
+  isVisible={true}
+  modalType="Error"
+  onClose={[Function]}
+>
+  <React.Fragment>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "paddingBottom": 5,
+            "paddingHorizontal": 15,
+            "paddingTop": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CONFIRMATION" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 14,
+            "paddingBottom": 15,
+            "paddingHorizontal": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.ITEM.FLOOR\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#545F7A"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.ITEM.RESERVE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#545F7A"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.ALL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 14,
+            "paddingBottom": 15,
+            "paddingHorizontal": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[MockFunction]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
+</CustomModalComponent>
 `;
 
 exports[`Rendering clear Aisle responses Renders the waiting for response from clear Aisle 1`] = `
-<View>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Error"
-    onClose={[Function]}
-  >
-    <ActivityIndicator
-      animating={true}
-      color="#0071e9"
-      hidesWhenStopped={true}
-      size="large"
-      style={
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        }
-      }
-    />
-  </CustomModalComponent>
-  <LocationHeader
-    details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
-    isDisabled={false}
-    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
-  />
-  <FlatList
-    ListEmptyComponent={<NoSectionMessage />}
-    contentContainerStyle={
+<CustomModalComponent
+  animationType="none"
+  isVisible={true}
+  modalType="Error"
+  onClose={[Function]}
+>
+  <ActivityIndicator
+    animating={true}
+    color="#0071e9"
+    hidesWhenStopped={true}
+    size="large"
+    style={
       Object {
-        "paddingBottom": 100,
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
       }
     }
-    data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
-    keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
-    renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
-</View>
+</CustomModalComponent>
 `;
 
 exports[`Test Get Section Api Response Renders Error Message when result is 400 error 1`] = `
@@ -602,96 +1125,39 @@ exports[`Test Get Section Api Response Renders loading indicator when waiting fo
 
 exports[`Test Section List Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
 <View>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_AISLE_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 5,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_AISLE_CONFIRMATION" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 14,
-              "paddingBottom": 15,
-              "paddingHorizontal": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1="[missing \\"en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS\\" translation]"
+    subtext2={null}
+  />
+  <ClearItemsModal
+    clearAisleApi={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    clearLocationTarget="items"
+    displayConfirmation={false}
+    handleClearItems={[Function]}
+    isClearAisle={false}
+    setClearLocationTarget={[MockFunction]}
+    setDisplayConfirmation={[MockFunction]}
+  />
   <LocationManualScan
     keyboardType="default"
   />
@@ -726,96 +1192,39 @@ exports[`Test Section List Renders Manual Scan Component when isManualScanEnable
 
 exports[`Test Section List Renders Section Screen with Data 1`] = `
 <View>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_AISLE_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 5,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_AISLE_CONFIRMATION" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 14,
-              "paddingBottom": 15,
-              "paddingHorizontal": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1="[missing \\"en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS\\" translation]"
+    subtext2={null}
+  />
+  <ClearItemsModal
+    clearAisleApi={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    clearLocationTarget="items"
+    displayConfirmation={false}
+    handleClearItems={[Function]}
+    isClearAisle={false}
+    setClearLocationTarget={[MockFunction]}
+    setDisplayConfirmation={[MockFunction]}
+  />
   <LocationHeader
     details="6 [missing \\"en.LOCATION.SECTIONS\\" translation]"
     isDisabled={false}
@@ -874,96 +1283,39 @@ exports[`Test Section List Renders Section Screen with Data 1`] = `
 
 exports[`Test Section List Renders Section Screen with no-section-message when getSections response is 204 1`] = `
 <View>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_AISLE_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 5,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_AISLE_CONFIRMATION" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 14,
-              "paddingBottom": 15,
-              "paddingHorizontal": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1="[missing \\"en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS\\" translation]"
+    subtext2={null}
+  />
+  <ClearItemsModal
+    clearAisleApi={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    clearLocationTarget="items"
+    displayConfirmation={false}
+    handleClearItems={[Function]}
+    isClearAisle={false}
+    setClearLocationTarget={[MockFunction]}
+    setDisplayConfirmation={[MockFunction]}
+  />
   <LocationHeader
     details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
     isDisabled={false}
