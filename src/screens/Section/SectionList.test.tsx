@@ -2,8 +2,17 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, Route } from '@react-navigation/native';
 import { AsyncState } from '../../models/AsyncState';
-import { SectionScreen } from './SectionList';
+import {
+  ClearItemsModal,
+  SectionScreen,
+  clearAisleApiEffect,
+  deleteAisleApiEffect,
+  getSectionsApiEffect,
+  handleClearModalClose,
+  handleModalClose
+} from './SectionList';
 import { mockSections } from '../../mockData/sectionDetails';
+import { ClearLocationTarget } from '../../models/Location';
 
 let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
@@ -52,8 +61,9 @@ describe('Test Section List', () => {
         deleteAisleApiStart={0}
         setDeleteAisleApiStart={jest.fn()}
         isClearAisle={false}
-        setIsClearAisle={jest.fn()}
         clearAisleApi={defaultAsyncState}
+        clearLocationTarget={ClearLocationTarget.FLOOR}
+        setClearLocationTarget={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -92,8 +102,9 @@ describe('Test Section List', () => {
         deleteAisleApiStart={0}
         setDeleteAisleApiStart={jest.fn()}
         isClearAisle={false}
-        setIsClearAisle={jest.fn()}
         clearAisleApi={defaultAsyncState}
+        clearLocationTarget={ClearLocationTarget.FLOOR}
+        setClearLocationTarget={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -123,7 +134,8 @@ describe('Test Section List', () => {
         deleteAisleApiStart={0}
         setDeleteAisleApiStart={jest.fn()}
         isClearAisle={false}
-        setIsClearAisle={jest.fn()}
+        clearLocationTarget={ClearLocationTarget.FLOOR}
+        setClearLocationTarget={jest.fn()}
         clearAisleApi={defaultAsyncState}
       />
     );
@@ -170,7 +182,8 @@ describe('Test Get Section Api Response', () => {
           deleteAisleApiStart={0}
           setDeleteAisleApiStart={jest.fn()}
           isClearAisle={false}
-          setIsClearAisle={jest.fn()}
+          clearLocationTarget={ClearLocationTarget.FLOOR}
+          setClearLocationTarget={jest.fn()}
           clearAisleApi={defaultAsyncState}
         />
       );
@@ -206,7 +219,8 @@ describe('Test Get Section Api Response', () => {
         deleteAisleApiStart={0}
         setDeleteAisleApiStart={jest.fn()}
         isClearAisle={false}
-        setIsClearAisle={jest.fn()}
+        clearLocationTarget={ClearLocationTarget.FLOOR}
+        setClearLocationTarget={jest.fn()}
         clearAisleApi={defaultAsyncState}
       />
     );
@@ -243,7 +257,8 @@ describe('Rendering Remove Aisle responses', () => {
         deleteAisleApiStart={0}
         setDeleteAisleApiStart={jest.fn()}
         isClearAisle={false}
-        setIsClearAisle={jest.fn()}
+        clearLocationTarget={ClearLocationTarget.FLOOR}
+        setClearLocationTarget={jest.fn()}
         clearAisleApi={defaultAsyncState}
       />
     );
@@ -282,7 +297,8 @@ describe('Rendering Remove Aisle responses', () => {
         deleteAisleApiStart={0}
         setDeleteAisleApiStart={jest.fn()}
         isClearAisle={false}
-        setIsClearAisle={jest.fn()}
+        clearLocationTarget={ClearLocationTarget.FLOOR}
+        setClearLocationTarget={jest.fn()}
         clearAisleApi={defaultAsyncState}
       />
     );
@@ -291,6 +307,38 @@ describe('Rendering Remove Aisle responses', () => {
 });
 
 describe('Rendering clear Aisle responses', () => {
+  it('Renders the preflight view of clearAisleModal', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <ClearItemsModal
+        clearAisleApi={defaultAsyncState}
+        clearLocationTarget={ClearLocationTarget.FLOOR}
+        displayConfirmation={true}
+        handleClearItems={jest.fn()}
+        isClearAisle={true}
+        setClearLocationTarget={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Ensures the clearAisleModal does not show when not clear aisle', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <ClearItemsModal
+        clearAisleApi={defaultAsyncState}
+        clearLocationTarget={ClearLocationTarget.FLOOR}
+        displayConfirmation={true}
+        handleClearItems={jest.fn()}
+        isClearAisle={false}
+        setClearLocationTarget={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
   it('Renders the waiting for response from clear Aisle', () => {
     const renderer = ShallowRenderer.createRenderer();
     const clearAisleIsWaiting: AsyncState = {
@@ -300,33 +348,20 @@ describe('Rendering clear Aisle responses', () => {
       result: null
     };
     renderer.render(
-      <SectionScreen
-        aisleId={AISLE_ID}
-        aisleName={AISLE_NAME}
-        zoneName={ZONE_NAME}
-        dispatch={jest.fn()}
-        getAllSections={defaultAsyncState}
-        isManualScanEnabled={false}
-        apiStart={0}
-        setApiStart={jest.fn()}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-        locationPopupVisible={false}
-        displayConfirmation={false}
-        setDisplayConfirmation={jest.fn()}
-        deleteAisleApi={defaultAsyncState}
-        deleteAisleApiStart={0}
-        setDeleteAisleApiStart={jest.fn()}
-        isClearAisle={true}
-        setIsClearAisle={jest.fn()}
+      <ClearItemsModal
         clearAisleApi={clearAisleIsWaiting}
+        clearLocationTarget={ClearLocationTarget.FLOOR}
+        displayConfirmation={true}
+        handleClearItems={jest.fn()}
+        isClearAisle={true}
+        setClearLocationTarget={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-  it('Renders the success response from Remove Aisle', () => {
+
+  it('Renders the success response from clear Aisle', () => {
     const renderer = ShallowRenderer.createRenderer();
     const clearAisleResult = {
       status: 204,
@@ -339,30 +374,188 @@ describe('Rendering clear Aisle responses', () => {
       result: clearAisleResult
     };
     renderer.render(
-      <SectionScreen
-        aisleId={AISLE_ID}
-        aisleName={AISLE_NAME}
-        zoneName={ZONE_NAME}
-        dispatch={jest.fn()}
-        getAllSections={defaultAsyncState}
-        isManualScanEnabled={false}
-        apiStart={0}
-        setApiStart={jest.fn()}
-        navigation={navigationProp}
-        route={routeProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-        locationPopupVisible={false}
-        displayConfirmation={false}
-        setDisplayConfirmation={jest.fn()}
-        deleteAisleApi={defaultAsyncState}
-        deleteAisleApiStart={0}
-        setDeleteAisleApiStart={jest.fn()}
-        isClearAisle={true}
-        setIsClearAisle={jest.fn()}
+      <ClearItemsModal
         clearAisleApi={clearAisleSuccess}
+        clearLocationTarget={ClearLocationTarget.FLOOR}
+        displayConfirmation={true}
+        handleClearItems={jest.fn()}
+        isClearAisle={true}
+        setClearLocationTarget={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders the failed response from clear aisle', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const clearAisleFail: AsyncState = {
+      isWaiting: false,
+      value: null,
+      error: { status: 418, message: 'I am a tea pot' },
+      result: null
+    };
+    renderer.render(
+      <ClearItemsModal
+        clearAisleApi={clearAisleFail}
+        clearLocationTarget={ClearLocationTarget.FLOOR}
+        displayConfirmation={true}
+        handleClearItems={jest.fn()}
+        isClearAisle={true}
+        setClearLocationTarget={jest.fn()}
+        setDisplayConfirmation={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+});
+
+describe('Section List externalized function tests', () => {
+  const mockDispatch = jest.fn();
+
+  it('tests handleModalClose', () => {
+    const mockSetDisplayConfirmation = jest.fn();
+    const mockSetDeleteZoneApiStart = jest.fn();
+
+    handleModalClose(mockSetDisplayConfirmation, mockSetDeleteZoneApiStart, mockDispatch);
+    expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
+    expect(mockSetDeleteZoneApiStart).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledTimes(1);
+
+    mockDispatch.mockClear();
+  });
+
+  it('tests handleClearModalClose', () => {
+    const mockSetDisplayConfirmation = jest.fn();
+
+    handleClearModalClose(mockSetDisplayConfirmation, mockDispatch);
+    expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledTimes(1);
+
+    mockDispatch.mockClear();
+  });
+
+  it('tests getSectionsApiEffect, success', () => {
+    const mockTrackEventCall = jest.fn();
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {}
+    };
+
+    getSectionsApiEffect(successApi, 0, mockTrackEventCall);
+    expect(mockTrackEventCall).toBeCalledTimes(1);
+  });
+
+  it('tests getSectionsApiEffect, fail', () => {
+    const mockTrackEventCall = jest.fn();
+    const failApi: AsyncState = {
+      ...defaultAsyncState,
+      error: {}
+    };
+
+    getSectionsApiEffect(failApi, 0, mockTrackEventCall);
+    expect(mockTrackEventCall).toBeCalledTimes(1);
+  });
+
+  it('tests clearAisleApiEffect, success', () => {
+    const mockIsFocused = jest.fn(() => true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    navigationProp = { isFocused: mockIsFocused };
+    const mockSetDisplayConfirmation = jest.fn();
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {}
+    };
+
+    clearAisleApiEffect(mockDispatch, navigationProp, successApi, mockSetDisplayConfirmation);
+
+    expect(mockDispatch).toBeCalledTimes(2);
+    expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
+    expect(mockIsFocused).toBeCalledTimes(1);
+
+    mockDispatch.mockClear();
+  });
+
+  it('tests clearAisleApiEffect, fail', () => {
+    const mockIsFocused = jest.fn(() => true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    navigationProp = { isFocused: mockIsFocused };
+    const mockSetDisplayConfirmation = jest.fn();
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      error: {}
+    };
+
+    clearAisleApiEffect(mockDispatch, navigationProp, successApi, mockSetDisplayConfirmation);
+
+    expect(mockDispatch).toBeCalledTimes(0);
+    expect(mockSetDisplayConfirmation).toBeCalledTimes(0);
+    expect(mockIsFocused).toBeCalledTimes(1);
+
+    mockDispatch.mockClear();
+  });
+
+  it('tests deleteAisleApiEffect, success', () => {
+    const mockIsFocused = jest.fn(() => true);
+    const mockGoBack = jest.fn();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    navigationProp = { isFocused: mockIsFocused, goBack: mockGoBack };
+    const mockSetDisplayConfirmation = jest.fn();
+    const mockSetDeleteAisleApiStart = jest.fn();
+    const mockTrackEventCall = jest.fn();
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {}
+    };
+
+    deleteAisleApiEffect(
+      navigationProp, successApi, 0,
+      mockSetDeleteAisleApiStart,
+      mockSetDisplayConfirmation,
+      mockDispatch, mockTrackEventCall
+    );
+
+    expect(mockIsFocused).toBeCalledTimes(1);
+    expect(mockTrackEventCall).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledTimes(2);
+    expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
+    expect(mockSetDeleteAisleApiStart).toBeCalledTimes(1);
+    expect(mockGoBack).toBeCalledTimes(1);
+
+    mockDispatch.mockClear();
+  });
+
+  it('tests deleteAisleApiEffect, fail', () => {
+    const mockIsFocused = jest.fn(() => true);
+    const mockGoBack = jest.fn();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    navigationProp = { isFocused: mockIsFocused, goBack: mockGoBack };
+    const mockSetDisplayConfirmation = jest.fn();
+    const mockSetDeleteAisleApiStart = jest.fn();
+    const mockTrackEventCall = jest.fn();
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      error: {}
+    };
+
+    deleteAisleApiEffect(
+      navigationProp, successApi, 0,
+      mockSetDeleteAisleApiStart,
+      mockSetDisplayConfirmation,
+      mockDispatch, mockTrackEventCall
+    );
+
+    expect(mockIsFocused).toBeCalledTimes(1);
+    expect(mockTrackEventCall).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledTimes(2);
+    expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
+    expect(mockSetDeleteAisleApiStart).toBeCalledTimes(1);
+    expect(mockGoBack).toBeCalledTimes(0);
+
+    mockDispatch.mockClear();
   });
 });

@@ -242,11 +242,13 @@ export default {
     REMOVE_SECTION_FAIL: '移除货架号发生错误,请重试',
     SECTION_REMOVED: '货架移除成功',
     ZONE_NAME_ERROR: '重置区域名称出错，\n请重试',
-    SELECT_ZONE: 'Select Zone', // TODO mandarin translation
-    CLEAR_AISLE_CONFIRMATION: '确定要清除此通道？',
-    CLEAR_AISLE_WILL_REMOVE_SECTIONS: '这会清除此通道下的所有商品和卡板',
-    CLEAR_AISLE_FAIL: '清除通道时出错，请重试',
-    AISLE_CLEARED: '成功清除通道'
+    SELECT_ZONE: '选择区域',
+    CLEAR_AISLE_ITEMS_CONFIRMATION: '确定要移除此通道所有商品吗？',
+    CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE: '请选择楼面，高货架或者两个都选进行清除',
+    CLEAR_AISLE_ITEMS_WONT_DELETE: '删除此通道的货架信息',
+    CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
+    CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
+    PALLET_MANAGEMENT: 'Pallet Management' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
