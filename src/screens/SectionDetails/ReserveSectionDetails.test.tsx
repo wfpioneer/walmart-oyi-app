@@ -49,7 +49,6 @@ describe('Tests Reserve Section Details Screen', () => {
           navigation={navigationProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          addAPI={defaultAsyncState}
           palletIds={[]}
         />
       );
@@ -72,7 +71,6 @@ describe('Tests Reserve Section Details Screen', () => {
           navigation={navigationProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          addAPI={defaultAsyncState}
           palletIds={[]}
         />
       );
@@ -97,7 +95,6 @@ describe('Tests Reserve Section Details Screen', () => {
           navigation={navigationProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          addAPI={defaultAsyncState}
           palletIds={[]}
         />
       );
@@ -120,14 +117,13 @@ describe('Tests Reserve Section Details Screen', () => {
           navigation={navigationProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          addAPI={defaultAsyncState}
           palletIds={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Renders Location Details activity indicator when waiting for an api response', () => {
+    it('Renders activity indicator when waiting for get pallet details api response', () => {
       const getPalletDetailsIsWaiting: AsyncState = {
         ...defaultAsyncState,
         isWaiting: true
@@ -141,7 +137,25 @@ describe('Tests Reserve Section Details Screen', () => {
           navigation={navigationProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          addAPI={defaultAsyncState}
+          palletIds={[]}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders activity indicator when waiting for get section details api response', () => {
+      const getSectionDetailsIsWaiting: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReserveSectionDetailsScreen
+          getSectionDetailsApi={getSectionDetailsIsWaiting}
+          getPalletDetailsApi={defaultAsyncState}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
           palletIds={[]}
         />
       );
