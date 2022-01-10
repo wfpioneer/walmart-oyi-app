@@ -92,3 +92,6 @@ export const removeSection = makeAsyncActionCreators(REMOVE_SECTION);
 
 export const GET_ZONE_NAMES = makeAsyncActionTypes('API/GET_ZONE_NAMES');
 export const getZoneNames = makeAsyncActionCreators(GET_ZONE_NAMES);
+
+export const GET_PALLET_UPCS = makeAsyncActionTypes('API/GET_PALLET_UPCS');
+export const getPalletUpcs = makeAsyncActionCreators(GET_PALLET_UPCS);
