@@ -151,7 +151,7 @@ export default {
     EDIT_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
     MANUAL_ENTRY_BUTTON: 'Ingresa manualmente la ubicación.',
     SELECTION_INSTRUCTION: '1. Elija un tipo de ubicación.',
-    SCAN_INSTRUCTION: 'Escanea la etiqueta de Ubicación.',
+    SCAN_INSTRUCTION: '2. Escanea la etiqueta de Ubicación.',
     DELETE_CONFIRMATION: 'Confirma la eliminación de \nla ubicación ',
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
