@@ -149,7 +149,7 @@ export default {
     ADD_DUPLICATE_ERROR: '位置和对应类型已经存在',
     MANUAL_ENTRY_BUTTON: '手工添加位置',
     SELECTION_INSTRUCTION: '\t选择位置类型',
-    SCAN_INSTRUCTION: '\t扫描货架标签',
+    SCAN_INSTRUCTION: '扫描货架标签',
     EDIT_DUPLICATE_ERROR: '已有位置类型',
     EDIT_LOCATION_API_ERROR: '编辑位置报错，\n请重试',
     DELETE_CONFIRMATION: '确认删除位置 ',
