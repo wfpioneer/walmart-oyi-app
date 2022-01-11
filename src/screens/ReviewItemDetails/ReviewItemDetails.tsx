@@ -533,10 +533,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     useFocusEffectHook
   } = props;
 
-  useEffectHook(() => {
-    return () => {
-      dispatch(resetLocations());
-    };
+  useEffectHook(() => () => {
+    dispatch(resetLocations());
   }, []);
 
   // Scanned Item Event Listener

@@ -20,6 +20,12 @@ applications:
       - homeoffice\vn50pz2
       - homeoffice\t0a009g
       - homeoffice\vn80416
+      - homeoffice\rthom33
+      - homeoffice\vn50pz3
+      - homeoffice\vn50pz4
+      - homeoffice\n0e00s9
+      - homeoffice\t0s00og
+      - homeoffice\s0d08wb
     environments:
       - name: dev
         type: DEVELOPMENT
