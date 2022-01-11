@@ -135,7 +135,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
   const deleteConfirmed = () => {
     dispatch(
       deleteLocation({
-        headers: { itemNbr: itemNbr },
+        headers: { itemNbr },
         upc: upcNbr,
         sectionId: locToConfirm.locationName,
         locationTypeNbr: locToConfirm.locationTypeNbr
