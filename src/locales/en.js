@@ -43,7 +43,8 @@ export default {
     BARCODE_SCAN_ERROR: 'This barcode type is not allowed',
     ITEM: 'item',
     ITEMS: 'items',
-    TOOLS: 'Tools'
+    TOOLS: 'Tools',
+    OR: 'OR'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -138,6 +139,10 @@ export default {
     LOCATION_SUCCESS: 'Section Label Successfully Printed',
     DUPLICATE_PRINTER: 'A Printer currently exists',
     SOME_PRINTS_FAILED: 'Some items failed to print'
+  },
+  PALLET: {
+    ENTER_PALLET_ID: 'Type a pallet ID',
+    SCAN_PALLET: 'Scan a pallet'
   },
   LOCATION: {
     TITLE: 'All locations',
