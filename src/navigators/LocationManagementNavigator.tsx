@@ -24,11 +24,12 @@ import { setPrintingLocationLabels } from '../state/actions/Print';
 import { LocationName } from '../models/Location';
 import { AsyncState } from '../models/AsyncState';
 import AddItems from '../screens/AddItems/AddItems';
+import User from '../models/User';
 
 const Stack = createStackNavigator();
 interface LocationManagementProps {
   isManualScanEnabled: boolean;
-  userFeatures: string[],
+  user: User,
   locationPopupVisible: boolean,
   navigation: NavigationProp<any>
   dispatch: Dispatch<any>;
@@ -77,8 +78,13 @@ export const resetLocManualScan = (
 
 export const LocationManagementNavigatorStack = (props: LocationManagementProps): JSX.Element => {
   const {
-    isManualScanEnabled, userFeatures, locationPopupVisible, navigation, dispatch, getSectionDetailsApi
+    isManualScanEnabled, user, locationPopupVisible, navigation, dispatch, getSectionDetailsApi
   } = props;
+  const userFeatures = user.features;
+
+  const locationManagementEdit = () => user.features.includes('location management edit')
+    || user.configs.locationManagementEdit;
+
   // Disable Location Management Edit if the section details api 204's
   const sectionExists: boolean = (getSectionDetailsApi.result && getSectionDetailsApi.result?.status !== 204);
   // TODO add "badge" to show signs currently in queue
@@ -140,7 +146,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
                 userFeatures.includes('manager approval')
-                && userFeatures.includes('location management edit')
+                && locationManagementEdit()
               )}
             </View>
           )
@@ -161,7 +167,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               {renderCamButton()}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
-                userFeatures.includes('location management edit')
+                locationManagementEdit()
               )}
             </View>
           )
@@ -186,7 +192,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               {renderPrintQueueButton(userFeatures.includes('location printing'))}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
-                userFeatures.includes('location management edit')
+                locationManagementEdit()
               )}
             </View>
           )
@@ -211,7 +217,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               {renderPrintQueueButton(userFeatures.includes('location printing'))}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
-                userFeatures.includes('location management edit') && sectionExists
+                locationManagementEdit() && sectionExists
               )}
             </View>
           )
@@ -269,7 +275,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
 const LocationManagementNavigator = (): JSX.Element => {
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const userFeatures = useTypedSelector(state => state.User.features);
+  const user = useTypedSelector(state => state.User);
   const locationPopupVisible = useTypedSelector(
     state => state.Location.locationPopupVisible
   );
@@ -280,7 +286,7 @@ const LocationManagementNavigator = (): JSX.Element => {
     <LocationManagementNavigatorStack
       isManualScanEnabled={isManualScanEnabled}
       dispatch={dispatch}
-      userFeatures={userFeatures}
+      user={user}
       navigation={navigation}
       locationPopupVisible={locationPopupVisible}
       getSectionDetailsApi={getSectionDetailsApi}

@@ -17,7 +17,7 @@ export type ReservePalletRowProps = { section: { id: number, name: string }, res
 const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   const { section, reservePallet } = props;
   const dispatch = useDispatch();
-  const userFeatures = useTypedSelector(state => state.User.features);
+  const user = useTypedSelector(state => state.User);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const delPalletAPI = useTypedSelector(state => state.async.deletePallet);
   const deletePalletConfirmation = () => {
@@ -38,6 +38,9 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   };
   const createdDate = moment(reservePallet.palletCreateTS).format('YYYY-MM-DD');
 
+  const locationManagementEdit = () => user.features.includes('location management edit')
+    || user.configs.locationManagementEdit;
+
   // TODO Map Pallet and Reserve Response and pass the array into this Component
   return (
     <View style={styles.container}>
@@ -46,7 +49,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
           <Text style={styles.textHeader}>
             {`${strings('LOCATION.PALLET')} ${reservePallet.id}`}
           </Text>
-          { userFeatures.includes('location management edit') && (
+          { locationManagementEdit() && (
             <TouchableOpacity onPress={() => deletePalletConfirmation()}>
               <View>
                 <Image
