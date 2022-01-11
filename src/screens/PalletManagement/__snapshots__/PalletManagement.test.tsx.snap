@@ -18,7 +18,7 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
     <mockConstructor
       color="#000000"
       name="barcode-scan"
-      size={70}
+      size={100}
     />
   </ForwardRef>
   <View
@@ -47,6 +47,7 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
     style={
       Object {
         "paddingTop": 20,
+        "width": 200,
       }
     }
   >
