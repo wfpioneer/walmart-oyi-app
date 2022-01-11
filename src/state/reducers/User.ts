@@ -18,7 +18,8 @@ const initialState: User = {
   features: [],
   configs: {
     locationManagement: false,
-    locationManagementEdit: false
+    locationManagementEdit: false,
+    palletManagement: false
   }
 };
 
@@ -40,8 +41,9 @@ export const UserReducer = (state = initialState, action: Actions): User => {
       return {
         ...state,
         configs: {
-          locationManagement: action.payload.locationManagement,
-          locationManagementEdit: action.payload.locMgmtEdit
+          locationManagement: action.payload.locationManagement || false,
+          locationManagementEdit: action.payload.locMgmtEdit || false,
+          palletManagement: action.payload.palletManagement || false
         }
       };
     default:

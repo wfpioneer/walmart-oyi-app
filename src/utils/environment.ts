@@ -26,6 +26,7 @@ interface ApplicationKey {
   worklistName: string;
   managerApprovalName: string;
   fluffyName: string;
+  configName: string;
 }
 
 export const svcName: ApplicationKey = {
@@ -34,6 +35,7 @@ export const svcName: ApplicationKey = {
   locationName: 'OYI_LOCATION_API',
   printingName: 'OYI_PRINTING_API',
   worklistName: 'OYI_WORKLIST_API',
+  configName: 'OYI_CONFIG_API',
   managerApprovalName: 'OYI_MANAGER_APPROVAL_API',
   fluffyName: 'IntlMobileAuthorizationPlatform'
 };

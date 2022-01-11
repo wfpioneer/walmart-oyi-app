@@ -8,8 +8,10 @@ import Config from 'react-native-config';
 import Button from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
 import styles from './Login.style';
-import { assignFluffyFeatures, loginUser, logoutUser } from '../../state/actions/User';
-import { getFluffyFeatures } from '../../state/actions/saga';
+import {
+  assignFluffyFeatures, loginUser, logoutUser, setConfigs
+} from '../../state/actions/User';
+import { getClubConfig, getFluffyFeatures } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -21,6 +23,8 @@ import { CustomModalComponent, ModalCloseIcon } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 import COLOR from '../../themes/Color';
 import IconButton from '../../components/buttons/IconButton';
+import { AsyncState } from '../../models/AsyncState';
+import { ConfigResponse } from '../../services/Config.service';
 
 const mapDispatchToProps = {
   loginUser,
@@ -29,6 +33,8 @@ const mapDispatchToProps = {
   setEndTime,
   getFluffyFeatures,
   assignFluffyFeatures,
+  getClubConfig,
+  setConfigs,
   showActivityModal
 };
 
@@ -42,7 +48,8 @@ const pkg = require('../../../package.json');
 
 const mapStateToProps = (state: RootState) => ({
   User: state.User,
-  fluffyApiState: state.async.getFluffyRoles
+  fluffyApiState: state.async.getFluffyRoles,
+  getClubConfigApiState: state.async.getClubConfig
 });
 
 // Since CN Associate JobCodes are inconsistent, this set of roles will be added
@@ -67,6 +74,9 @@ export interface LoginScreenProps {
   getFluffyFeatures: (payload: any) => void;
   fluffyApiState: any;
   assignFluffyFeatures: (resultPayload: string[]) => void;
+  getClubConfig: () => void;
+  getClubConfigApiState: AsyncState;
+  setConfigs: (configs: ConfigResponse) => void;
   showActivityModal: () => void;
 }
 
@@ -126,7 +136,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
   }
 
   componentDidUpdate(prevProps: Readonly<LoginScreenProps>): void {
-    if (this.props.fluffyApiState.isWaiting) {
+    if (this.props.fluffyApiState.isWaiting || this.props.getClubConfigApiState.isWaiting) {
       this.props.showActivityModal();
     }
 
@@ -139,6 +149,16 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
         this.props.assignFluffyFeatures(fluffyFeatures);
       } else if (this.props.fluffyApiState.error) {
         // TODO Display toast/popup letting user know roles could not be retrieved
+      }
+
+      this.props.getClubConfig();
+    }
+
+    if (prevProps.getClubConfigApiState.isWaiting) {
+      if (this.props.getClubConfigApiState.result) {
+        this.props.setConfigs(this.props.getClubConfigApiState.result.data);
+      } else if (this.props.getClubConfigApiState.error) {
+        // TODO Display toast/popup for error
       }
 
       this.props.hideActivityModal();

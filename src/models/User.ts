@@ -18,6 +18,7 @@ export default interface User {
 export interface Configurations {
   locationManagement: boolean;
   locationManagementEdit: boolean;
+  palletManagement: boolean;
 }
 
 export const AVAILABLE_TOOLS = ['location management', 'pallet management', 'picking', 'binning'];

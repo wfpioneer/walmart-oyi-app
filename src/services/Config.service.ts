@@ -5,6 +5,7 @@ import { Environment, getEnvironment } from '../utils/environment';
 export interface ConfigResponse {
   locationManagement: boolean;
   locMgmtEdit: boolean;
+  palletManagement: boolean;
 }
 
 export default class ConfigService {
