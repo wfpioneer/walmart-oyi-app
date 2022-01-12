@@ -28,7 +28,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
     case USER_LOGIN:
       return {
         ...action.payload,
-        features: []
+        features: [],
+        configs: initialState.configs
       };
     case USER_LOGOUT:
       return initialState;
