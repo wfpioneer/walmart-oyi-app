@@ -189,7 +189,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
-              {renderPrintQueueButton(userFeatures.includes('location printing'))}
+              {renderPrintQueueButton(locationManagementEdit())}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
                 locationManagementEdit()
@@ -214,7 +214,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderCamButton()}
-              {renderPrintQueueButton(userFeatures.includes('location printing'))}
+              {renderPrintQueueButton(locationManagementEdit())}
               {renderScanButton(dispatch, isManualScanEnabled)}
               {renderLocationKebabButton(
                 locationManagementEdit() && sectionExists

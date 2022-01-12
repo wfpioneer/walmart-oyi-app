@@ -27,6 +27,7 @@ import store from '../../state';
 import { AsyncState } from '../../models/AsyncState';
 import { LocationIdName } from '../../state/reducers/Location';
 import { ClearLocationTarget } from '../../models/Location';
+import User from '../../models/User';
 
 let navigationProp: NavigationProp<any>;
 const routeProp: RouteProp<any, string> = {
@@ -60,6 +61,26 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
+const user: User = {
+  userId: 'vn50pz4',
+  additional: {
+    clockCheckResult: 'yo',
+    displayName: 'Kyle Welch',
+    loginId: 'vn50pz4',
+    mailId: 'vn50pz4@homeoffice.wal-mart.com'
+  },
+  configs: {
+    locationManagement: false,
+    locationManagementEdit: false,
+    palletManagement: false
+  },
+  countryCode: 'CN',
+  domain: 'Homeoffice',
+  features: [],
+  siteId: 5597,
+  token: 'gibberish'
+};
+
 describe('Test Location Tabs', (): void => {
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
@@ -90,7 +111,7 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
         locationPopupVisible={false}
-        userFeatures={[]}
+        user={user}
         itemPopupVisible={false}
         sectionResult={mockLocationDetails}
         sectionIsWaiting={false}
@@ -127,7 +148,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
-        userFeatures={[]}
+        user={user}
         itemPopupVisible={false}
         sectionResult={mockLocationDetailsEmpty}
         sectionIsWaiting={false}
@@ -164,7 +185,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
-        userFeatures={[]}
+        user={user}
         itemPopupVisible={false}
         sectionResult={mockLocationDetailsLargeLocationCount}
         sectionIsWaiting={false}
@@ -201,7 +222,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
-        userFeatures={[]}
+        user={user}
         itemPopupVisible={false}
         sectionResult={mockLocationDetails}
         sectionIsWaiting={false}
@@ -240,7 +261,7 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
         locationPopupVisible={false}
-        userFeatures={[]}
+        user={user}
         itemPopupVisible={false}
         sectionResult={mockLocationDetails}
         sectionIsWaiting={false}
@@ -275,7 +296,7 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
         locationPopupVisible={false}
-        userFeatures={['location printing']}
+        user={{ ...user, features: ['location management edit'] }}
         itemPopupVisible={false}
         sectionResult={mockLocationDetails}
         sectionIsWaiting={false}
@@ -316,7 +337,7 @@ describe('Test Location Tabs', (): void => {
           validateSessionCall={jest.fn()}
           isManualScanEnabled={true}
           locationPopupVisible={false}
-          userFeatures={['']}
+          user={user}
           itemPopupVisible={false}
           sectionResult={null}
           sectionIsWaiting={false}
@@ -356,7 +377,7 @@ describe('Test Location Tabs', (): void => {
           validateSessionCall={jest.fn()}
           isManualScanEnabled={true}
           locationPopupVisible={false}
-          userFeatures={['']}
+          user={user}
           itemPopupVisible={false}
           sectionResult={null}
           sectionIsWaiting={false}
@@ -552,7 +573,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook: useEffect,
         validateSessionCall: mockValidateSession,
         isManualScanEnabled: false,
-        userFeatures: [],
+        user,
         itemPopupVisible: false,
         sectionResult: null,
         sectionIsWaiting: false,
@@ -638,7 +659,7 @@ describe('Test Location Tabs', (): void => {
               useEffectHook={useEffect}
               validateSessionCall={mockValidateSession}
               isManualScanEnabled={false}
-              userFeatures={[]}
+              user={user}
               itemPopupVisible={false}
               sectionResult={null}
               sectionIsWaiting={false}

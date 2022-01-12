@@ -90,7 +90,7 @@ describe('LocationManagement Navigator', () => {
         isManualScanEnabled={false}
         dispatch={jest.fn()}
         navigation={navigationProp}
-        user={{ ...user, features: ['location printing'] }}
+        user={{ ...user, features: ['location management edit'] }}
         locationPopupVisible={false}
         getSectionDetailsApi={defaultAsyncState}
       />
