@@ -139,6 +139,10 @@ export default {
     DUPLICATE_PRINTER: 'Una impresora ya existe',
     SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
   },
+  PALLET: {
+    ENTER_PALLET_ID: 'Type a pallet ID', // TODO Spanish translation
+    SCAN_PALLET: 'Scan a pallet' // TODO Spanish translation
+  },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
     FLOOR: 'Ubicación en Piso',
