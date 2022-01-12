@@ -17,6 +17,8 @@ import {
 const TIMEOUT = 10000;
 const NETWORK_ERROR = 'network error';
 
+const WM_SVC_NAME = 'wm_svc.name';
+
 class Request {
   private static instance?: Request;
 
@@ -43,7 +45,7 @@ class Request {
         const isOrchUrl: boolean = request.url.includes(envUrls.orchestrationURL);
 
         if (request.url.includes(envUrls.fluffyURL)) {
-          interceptRequest.headers['wm_svc.name'] = svcName.fluffyName;
+          interceptRequest.headers[WM_SVC_NAME] = svcName.fluffyName;
           interceptRequest.headers['wm_sec.auth_token'] = store.getState().User.token;
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.version'] = '1.0.0';
@@ -56,17 +58,19 @@ class Request {
           interceptRequest.headers.clubNbr = store.getState().User.siteId;
 
           if (request.url.includes(envUrls.worklistURL)) {
-            interceptRequest.headers['wm_svc.name'] = svcName.worklistName;
+            interceptRequest.headers[WM_SVC_NAME] = svcName.worklistName;
           } else if (isOrchUrl) {
-            interceptRequest.headers['wm_svc.name'] = svcName.orchestrationName;
+            interceptRequest.headers[WM_SVC_NAME] = svcName.orchestrationName;
           } else if (request.url.includes(envUrls.itemDetailsURL)) {
-            interceptRequest.headers['wm_svc.name'] = svcName.itemDetailsName;
+            interceptRequest.headers[WM_SVC_NAME] = svcName.itemDetailsName;
           } else if (request.url.includes(envUrls.managerApprovalUrl)) {
-            interceptRequest.headers['wm_svc.name'] = svcName.managerApprovalName;
+            interceptRequest.headers[WM_SVC_NAME] = svcName.managerApprovalName;
           } else if (request.url.includes(envUrls.locationUrl)) {
-            interceptRequest.headers['wm_svc.name'] = svcName.locationName;
+            interceptRequest.headers[WM_SVC_NAME] = svcName.locationName;
           } else if (request.url.includes(envUrls.printingUrl)) {
-            interceptRequest.headers['wm_svc.name'] = svcName.printingName;
+            interceptRequest.headers[WM_SVC_NAME] = svcName.printingName;
+          } else if (request.url.includes(envUrls.configUrl)) {
+            interceptRequest.headers[WM_SVC_NAME] = svcName.configName;
           }
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();

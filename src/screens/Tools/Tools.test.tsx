@@ -1,6 +1,7 @@
 import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import User from '../../models/User';
 import { ToolsScreen } from './Tools';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
@@ -10,17 +11,55 @@ describe('ToolsScreen', () => {
   let navigationProp: NavigationProp<any>;
 
   describe('Tests rendering the Tools Screen', () => {
-    it('Renders Tools screen', () => {
+    const testUser: User = {
+      additional: {
+        clockCheckResult: '',
+        displayName: '',
+        loginId: '',
+        mailId: ''
+      },
+      countryCode: '',
+      domain: '',
+      siteId: 1,
+      token: 'aFakeToken',
+      userId: 'aFakeUserId',
+      features: [],
+      configs: {
+        locationManagement: false,
+        locationManagementEdit: false,
+        palletManagement: false
+      }
+    };
+    it('Renders Tools screen, location management enabled by fluffy', () => {
       const renderer = ShallowRenderer.createRenderer();
       const userFeatures = ['location management'];
 
       renderer.render(
         <ToolsScreen
           navigation={navigationProp}
-          userFeatures={userFeatures}
+          user={{ ...testUser, features: userFeatures }}
         />
       );
 
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders tools screen, location management enabled by config', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ToolsScreen
+          navigation={navigationProp}
+          user={{
+            ...testUser,
+            configs: {
+              locationManagement: true,
+              locationManagementEdit: false,
+              palletManagement: false
+            }
+          }}
+        />
+      );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
