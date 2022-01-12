@@ -139,6 +139,10 @@ export default {
     DUPLICATE_PRINTER: '现存打印机',
     SOME_PRINTS_FAILED: '有些商品打印失败'
   },
+  PALLET: {
+    ENTER_PALLET_ID: 'Type a pallet ID', // TODO Mandarin Translation
+    SCAN_PALLET: 'Scan a pallet' // TODO Mandarin Translation
+  },
   LOCATION: {
     TITLE: '所有位置',
     FLOOR: '楼面位置',
