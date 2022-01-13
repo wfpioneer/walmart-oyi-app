@@ -39,6 +39,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import { LocationIdName } from '../../state/reducers/Location';
 import { REMOVE_SECTION } from '../../state/actions/asyncAPI';
+import User from '../../models/User';
 
 const Tab = createMaterialTopTabNavigator();
 const LOCATION_EDIT_FLAG = 'location management edit';
@@ -56,7 +57,7 @@ export interface LocationProps {
     trackEventCall: (eventName: string, params?: any) => void;
     validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
     locationPopupVisible: boolean;
-    userFeatures: string[];
+    user: User;
     itemPopupVisible:boolean;
     sectionResult: any;
     sectionIsWaiting: boolean;
@@ -172,13 +173,16 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
 };
 
 const FloorDetailsList = (props: {sectionExists: boolean}) => {
-  const userFeatures = useTypedSelector(state => state.User.features);
+  const user = useTypedSelector(state => state.User);
   const { sectionExists } = props;
+  const locationManagementEdit = () => user.features.includes(LOCATION_EDIT_FLAG)
+  || user.configs.locationManagementEdit;
+
   return (
     <>
       <TabHeader
         headerText={strings('LOCATION.ITEMS')}
-        isEditEnabled={userFeatures.includes(LOCATION_EDIT_FLAG)}
+        isEditEnabled={locationManagementEdit()}
         isReserve={false}
         isDisabled={!sectionExists}
       />
@@ -188,15 +192,16 @@ const FloorDetailsList = (props: {sectionExists: boolean}) => {
 };
 
 const ReserveDetailsList = (props: {sectionExists: boolean}) => {
-  const userFeatures = useTypedSelector(state => state.User.features);
+  const user = useTypedSelector(state => state.User);
   const { sectionExists } = props;
-
+  const locationManagementEdit = () => user.features.includes(LOCATION_EDIT_FLAG)
+    || user.configs.locationManagementEdit;
 
   return (
     <>
       <TabHeader
         headerText={strings('LOCATION.PALLETS')}
-        isEditEnabled={userFeatures.includes(LOCATION_EDIT_FLAG)}
+        isEditEnabled={locationManagementEdit()}
         isReserve={true}
         isDisabled={!sectionExists}
       />
@@ -238,7 +243,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     trackEventCall,
     useEffectHook,
     validateSessionCall,
-    userFeatures,
+    user,
     itemPopupVisible,
     sectionResult,
     setSelectedTab,
@@ -253,6 +258,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     selectedTab
   } = props;
   const sectionExists: boolean = (sectionResult && sectionResult.status !== 204);
+
+  const locationManagementEdit = () => user.features.includes(LOCATION_EDIT_FLAG)
+    || user.configs.locationManagementEdit;
 
   // Call Get Section Details
   useEffectHook(() => getSectionDetailsEffect(
@@ -329,7 +337,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           dispatch(setPrintingLocationLabels(LocationName.SECTION));
           navigation.navigate('PrintPriceSign');
         }}
-        buttonText={userFeatures.includes('location printing') ? strings('LOCATION.PRINT_LABEL') : undefined}
+        buttonText={locationManagementEdit() ? strings('LOCATION.PRINT_LABEL') : undefined}
         isDisabled={!sectionExists}
       />
       <Tab.Navigator
@@ -393,7 +401,7 @@ const LocationTabs = () : JSX.Element => {
   const removeSectionApi = useTypedSelector(state => state.async.removeSection);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { scannedEvent } = useTypedSelector(state => state.Global);
-  const userFeatures = useTypedSelector(state => state.User.features);
+  const user = useTypedSelector(state => state.User);
   const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
   const itemPopupVisible = useTypedSelector(state => state.Location.itemPopupVisible);
   const [displayRemoveConfirmation, setDisplayRemoveConfirmation] = useState(false);
@@ -442,7 +450,7 @@ const LocationTabs = () : JSX.Element => {
           scannedEvent={scannedEvent}
           trackEventCall={trackEvent}
           validateSessionCall={validateSession}
-          userFeatures={userFeatures}
+          user={user}
           itemPopupVisible={itemPopupVisible}
           sectionResult={result}
           sectionIsWaiting={isWaiting}
@@ -458,7 +466,7 @@ const LocationTabs = () : JSX.Element => {
       </TouchableOpacity>
       <BottomSheetModal
         ref={bottomSheetLocationDetailsModalRef}
-        snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
+        snapPoints={user.features.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
         index={0}
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}
@@ -476,7 +484,7 @@ const LocationTabs = () : JSX.Element => {
           <BottomSheetRemoveCard
             onPress={() => setDisplayRemoveConfirmation(true)}
             text={strings('LOCATION.REMOVE_SECTION')}
-            isVisible={userFeatures.includes('manager approval')}
+            isVisible={user.features.includes('manager approval')}
           />
         </BottomSheetView>
       </BottomSheetModal>

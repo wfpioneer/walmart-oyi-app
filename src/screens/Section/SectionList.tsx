@@ -444,7 +444,7 @@ const SectionList = (): JSX.Element => {
   const { name: zoneName } = useTypedSelector(state => state.Location.selectedZone);
   const location = useTypedSelector(state => state.Location);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const userFeatures = useTypedSelector(state => state.User.features);
+  const user = useTypedSelector(state => state.User);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const route = useRoute();
@@ -467,6 +467,9 @@ const SectionList = (): JSX.Element => {
       }
     }
   }, [location]);
+
+  const locationManagementEdit = () => user.features.includes('location management edit')
+    || user.configs.locationManagementEdit;
 
   const handleAddSections = () => {
     dispatch(setSections(getAllSections.result.data));
@@ -513,13 +516,13 @@ const SectionList = (): JSX.Element => {
       </TouchableOpacity>
       <BottomSheetModal
         ref={bottomSheetModalRef}
-        snapPoints={userFeatures.includes(MANAGER_APPROVAL) ? managerSnapPoints : associateSnapPoints}
+        snapPoints={user.features.includes(MANAGER_APPROVAL) ? managerSnapPoints : associateSnapPoints}
         index={0}
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}
       >
         <BottomSheetPrintCard
-          isVisible={userFeatures.includes('location printing')}
+          isVisible={locationManagementEdit()}
           text={strings('LOCATION.PRINT_SECTION')}
           onPress={() => {
             dispatch(hideLocationPopup());
@@ -536,7 +539,7 @@ const SectionList = (): JSX.Element => {
           onPress={handleAddSections}
         />
         <BottomSheetClearCard
-          isVisible={userFeatures.includes(MANAGER_APPROVAL)}
+          isVisible={user.features.includes(MANAGER_APPROVAL)}
           text={strings('LOCATION.CLEAR_AISLE')}
           onPress={() => {
             dispatch(hideLocationPopup());
@@ -545,7 +548,7 @@ const SectionList = (): JSX.Element => {
           }}
         />
         <BottomSheetSectionRemoveCard
-          isVisible={userFeatures.includes(MANAGER_APPROVAL)}
+          isVisible={user.features.includes(MANAGER_APPROVAL)}
           text={strings('LOCATION.REMOVE_AISLE')}
           onPress={() => {
             dispatch(hideLocationPopup());

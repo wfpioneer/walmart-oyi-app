@@ -9,6 +9,7 @@ export interface Environment {
   fluffyURL: string;
   managerApprovalUrl: string;
   locationUrl: string;
+  configUrl: string;
 }
 
 export interface Environments {
@@ -25,6 +26,7 @@ interface ApplicationKey {
   worklistName: string;
   managerApprovalName: string;
   fluffyName: string;
+  configName: string;
 }
 
 export const svcName: ApplicationKey = {
@@ -33,6 +35,7 @@ export const svcName: ApplicationKey = {
   locationName: 'OYI_LOCATION_API',
   printingName: 'OYI_PRINTING_API',
   worklistName: 'OYI_WORKLIST_API',
+  configName: 'OYI_CONFIG_API',
   managerApprovalName: 'OYI_MANAGER_APPROVAL_API',
   fluffyName: 'IntlMobileAuthorizationPlatform'
 };
@@ -82,7 +85,8 @@ export const getEnvironment = (): Environment => {
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
       managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.dev.walmart.com`,
       locationUrl: `https://intl-oyi-location-api.${countryCode}.dev.walmart.com`,
-      printingUrl: `https://intl-oyi-printing-api.${countryCode}.dev.walmart.com`
+      printingUrl: `https://intl-oyi-printing-api.${countryCode}.dev.walmart.com`,
+      configUrl: `https://intl-oyi-config-api.${countryCode}.dev.walmart.com`
 
     },
     stage: {
@@ -93,7 +97,8 @@ export const getEnvironment = (): Environment => {
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
       managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.stg.walmart.com`,
       locationUrl: `https://intl-oyi-location-api.${countryCode}.stg.walmart.com`,
-      printingUrl: `https://intl-oyi-printing-api.${countryCode}.stg.walmart.com`
+      printingUrl: `https://intl-oyi-printing-api.${countryCode}.stg.walmart.com`,
+      configUrl: `https://intl-oyi-config-api.${countryCode}.stg.walmart.com`
 
     },
     prod: {
@@ -104,7 +109,8 @@ export const getEnvironment = (): Environment => {
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
       managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.prod.walmart.com`,
       locationUrl: `https://intl-oyi-location-api.${countryCode}.prod.walmart.com`,
-      printingUrl: `https://intl-oyi-printing-api.${countryCode}.prod.walmart.com`
+      printingUrl: `https://intl-oyi-printing-api.${countryCode}.prod.walmart.com`,
+      configUrl: `https://intl-oyi-config-api.${countryCode}.prod.walmart.com`
 
     }
 

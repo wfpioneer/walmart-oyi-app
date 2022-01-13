@@ -5,6 +5,7 @@ import {
   LocationManagementNavigatorStack, renderCamButton, renderScanButton, resetLocManualScan
 } from './LocationManagementNavigator';
 import { AsyncState } from '../models/AsyncState';
+import User from '../models/User';
 
 jest.mock('../utils/AppCenterTool.ts', () => jest.requireActual('../utils/__mocks__/AppCenterTool'));
 jest.mock('../utils/sessionTimeout.ts', () => jest.requireActual('../utils/__mocks__/sessTimeout'));
@@ -17,6 +18,25 @@ describe('LocationManagement Navigator', () => {
     value: null,
     result: null
   };
+  const user: User = {
+    userId: 'vn50pz4',
+    additional: {
+      clockCheckResult: 'yo',
+      displayName: 'Kyle Welch',
+      loginId: 'vn50pz4',
+      mailId: 'vn50pz4@homeoffice.wal-mart.com'
+    },
+    configs: {
+      locationManagement: false,
+      locationManagementEdit: false,
+      palletManagement: false
+    },
+    countryCode: 'CN',
+    domain: 'Homeoffice',
+    features: [],
+    siteId: 5597,
+    token: 'gibberish'
+  };
   // TODO we are not able to currentlt test the navigator's headers through simple snapshot tests
   it('Renders the LocationManagement Navigator, non manager', () => {
     const renderer = ShallowRenderer.createRenderer();
@@ -25,7 +45,7 @@ describe('LocationManagement Navigator', () => {
         isManualScanEnabled={false}
         dispatch={jest.fn()}
         navigation={navigationProp}
-        userFeatures={['location management edit']}
+        user={{ ...user, features: ['location management edit'] }}
         locationPopupVisible={false}
         getSectionDetailsApi={defaultAsyncState}
       />
@@ -40,7 +60,7 @@ describe('LocationManagement Navigator', () => {
         isManualScanEnabled={false}
         dispatch={jest.fn()}
         navigation={navigationProp}
-        userFeatures={['manager approval', 'location management edit']}
+        user={{ ...user, features: ['manager approval', 'location management edit'] }}
         locationPopupVisible={false}
         getSectionDetailsApi={defaultAsyncState}
       />
@@ -55,7 +75,7 @@ describe('LocationManagement Navigator', () => {
         isManualScanEnabled={false}
         dispatch={jest.fn()}
         navigation={navigationProp}
-        userFeatures={[]}
+        user={user}
         locationPopupVisible={false}
         getSectionDetailsApi={defaultAsyncState}
       />
@@ -70,7 +90,7 @@ describe('LocationManagement Navigator', () => {
         isManualScanEnabled={false}
         dispatch={jest.fn()}
         navigation={navigationProp}
-        userFeatures={['location printing']}
+        user={{ ...user, features: ['location management edit'] }}
         locationPopupVisible={false}
         getSectionDetailsApi={defaultAsyncState}
       />
