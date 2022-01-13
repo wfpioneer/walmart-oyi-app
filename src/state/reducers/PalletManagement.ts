@@ -12,7 +12,8 @@ interface PalletManagementState {
 
 const initialState: PalletManagementState = {
   palletInfo: {
-    palletId: 0
+    palletId: 0,
+    expirationDate: ''
   },
   items: []
 };
@@ -23,9 +24,13 @@ export const PalletManagement = (
 ): PalletManagementState => {
   switch (action.type) {
     case SET_PALLET_INFO: {
+      const { palletId, expirationDate } = action.payload;
       return {
         ...state,
-        palletInfo: action.payload
+        palletInfo: {
+          palletId,
+          expirationDate: expirationDate ?? ''
+        }
       };
     }
     case SET_PALLET_ITEMS: {
