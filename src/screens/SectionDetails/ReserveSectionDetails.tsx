@@ -25,7 +25,6 @@ interface ReserveSectionDetailsProps {
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
-  addAPI: AsyncState;
   palletIds: number[];
 }
 // Combines the Reserve Response data from the get pallet/sectionDetails api to display creation date.
@@ -50,7 +49,6 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
     navigation,
     trackEventCall,
     useEffectHook,
-    addAPI,
     palletIds
   } = props;
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data)
@@ -60,7 +58,7 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
 
   // Navigation Listener
   useEffectHook(() => {
-    // Resets Get SectionDetails api response data when navigating off-screen
+    // Resets Get PalletDetails api response data when navigating off-screen
     navigation.addListener('beforeRemove', () => {
       dispatch({ type: GET_PALLET_DETAILS.RESET });
     });
@@ -79,7 +77,7 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
     }
   }, [getPalletDetailsApi]);
 
-  if (getPalletDetailsApi.isWaiting) {
+  if (getPalletDetailsApi.isWaiting || getSectionDetailsApi.isWaiting) {
     return (
       <ActivityIndicator
         animating={getPalletDetailsApi.isWaiting}
@@ -115,7 +113,7 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
         data={combineReserveArrays(reservePallets, locationItem?.pallets.palletData)}
         renderItem={({ item }) => (
           // Resolves type error, Section Id will never be zero in our case
-          <ReservePalletRow sectionId={locationItem?.section.id || 0} reservePallet={item} />
+          <ReservePalletRow section={locationItem?.section || { id: 0, name: '' }} reservePallet={item} />
         )}
         keyExtractor={(item, idx) => `${item.id}${idx}`}
         ListEmptyComponent={(
@@ -128,24 +126,23 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
     </View>
   );
 };
-// Passing Down PalletIds to avoid unnecessarily remapping the response data
-const ReserveSectionDetails = (props: { palletIds: number[]}): JSX.Element => {
+
+const ReserveSectionDetails = (): JSX.Element => {
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const addAPI = useTypedSelector(state => state.async.addPallet);
+  const { palletIds } = useTypedSelector(state => state.Location);
   return (
     <>
       <ReserveSectionDetailsScreen
         getSectionDetailsApi={getSectionDetailsApi}
         getPalletDetailsApi={getPalletDetailsApi}
-        addAPI={addAPI}
         dispatch={dispatch}
         navigation={navigation}
         trackEventCall={trackEvent}
         useEffectHook={useEffect}
-        palletIds={props.palletIds}
+        palletIds={palletIds}
       />
     </>
   );

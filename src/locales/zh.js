@@ -136,7 +136,12 @@ export default {
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
     PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Mandarin Translation
-    DUPLICATE_PRINTER: '现存打印机'
+    DUPLICATE_PRINTER: '现存打印机',
+    SOME_PRINTS_FAILED: '有些商品打印失败'
+  },
+  PALLET: {
+    ENTER_PALLET_ID: 'Type a pallet ID', // TODO Mandarin Translation
+    SCAN_PALLET: 'Scan a pallet' // TODO Mandarin Translation
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -148,7 +153,7 @@ export default {
     ADD_DUPLICATE_ERROR: '位置和对应类型已经存在',
     MANUAL_ENTRY_BUTTON: '手工添加位置',
     SELECTION_INSTRUCTION: '\t选择位置类型',
-    SCAN_INSTRUCTION: '\t扫描货架标签',
+    SCAN_INSTRUCTION: '扫描货架标签',
     EDIT_DUPLICATE_ERROR: '已有位置类型',
     EDIT_LOCATION_API_ERROR: '编辑位置报错，\n请重试',
     DELETE_CONFIRMATION: '确认删除位置 ',
@@ -157,19 +162,20 @@ export default {
     EDIT_LOCATION: '修改位置',
     LOCATION_MANAGEMENT: '通道管理',
     ITEMS: '多个商品',
-    PALLETS: 'Pallets', // TODO Mandarin Translation
-    PALLET: 'Pallet', // TODO Mandarin Translation
+    PALLETS: '卡板',
+    PALLET: '卡板',
     ZONES: '区域',
-    ZONE: 'Zone', // TODO Mandarin Translation
+    ZONE: '区域',
     AISLES: '通道',
-    AISLE: 'Aisle', // TODO Mandarin Translation
+    AISLE: '通道',
     SECTIONS: '货架',
-    SECTION: 'Section', // TODO Mandarin Translation
+    SECTION: '货架',
     AREAS: 'Areas',
     LOCATION_DETAILS: '具体位置',
     NO_ZONES_AVAILABLE: '无区域',
     NO_AISLES_AVAILABLE: '无通道',
-    LOCATION_API_ERROR: 'There was an error pulling the location data.\nPlease try again.', // TODO Mandarin Translation
+    NO_SECTIONS_AVAILABLE: '无货架信息可获取',
+    LOCATION_API_ERROR: '获取位置数据失败，\n请重试',
     CLEAR_ALL: '全部清除',
     CLEAR_SECTION: '清除此货架位置',
     REMOVE_SECTION: '移除此货架位置',
@@ -195,26 +201,58 @@ export default {
     PALLET_ERROR: '卡板未找到/空卡板',
     PALLET_NOT_FOUND: '因未找到卡板/卡板为空系统报错',
     PALLET_ADDED: '卡板添加成功',
-    PALLET_DELETE_CONFIRMATION: '确认：删除卡板',
+    PALLET_DELETE_CONFIRMATION: 'Are you sure you want to remove Pallet %{pallet} from Section %{section}?', // TODO mandarin translation
     FLOOR_EMPTY: '楼面清单无商品',
     RESERVE_EMPTY: '存储区域无卡板',
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
     AISLES_ADDED: '通道号{number}已添加',
-    INCOMPLETE_AISLES_ADDED: '创建通道/货架位置数量缺失，只创建了{number}通道/货架',
+    INCOMPLETE_AISLES_ADDED:
+      '创建通道/货架位置数量缺失，只创建了{number}通道/货架',
     INCOMPLETE_AISLES_PLEASE_CHECK: '请确认已创建的通道和货架清单',
     ADD_AISLES_ERROR: '添加通道/货架时出错,请再试一次。',
     SECTIONS_ADDED: '已添加 %{number} 个货架位置',
     ADD_SECTIONS_ERROR: '添加货架时错误，请重试.',
     EDIT_ITEM: '编辑商品',
     REMOVE_ITEM: '删除商品',
-    SECTION_NOT_FOUND: 'The Scanned Section was not found.', // TODO Mandarin Translation
+    SECTION_NOT_FOUND: '扫描的货架标签没收到',
     PRINT_LABEL_EXISTS_HEADER: '打印既有标签',
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
+    ZONE_ADDED: '区域 %{name} 已添加',
+    ADD_ZONE_ERROR: '添加区域失败，请重试。',
+    INCOMPLETE_ZONE_ADDED:
+      '区域 %{name} 已添加， 但是仅部分通道/货架创建成功，请检查已创建的通道/货架清单',
     REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: '移除所有通道和此通道内的货架号',
-    REMOVE_ZONE_FAIL: 'There was an error removing the zone.  Please try again', // TODO add CN translation
-    DELETE_ITEM: 'Delete %{itemNbr} \n%{itemName}', // TODO add translation
-    ERROR_DELETE_ITEM: 'There was an error deleting the item. Please try again' // TODO add translation
+    REMOVE_ZONE_FAIL: '移除此区域失败，请重试。',
+    DELETE_ITEM: '删除%{itemNBR} \n%{itemName}',
+    ERROR_DELETE_ITEM: '删除商品失败，请重试',
+    UPC_VALIDATE_ERROR: 'UPC只能是数字',
+    SCAN_ITEM: '扫描商品',
+    ITEM_ADDED: '商品添加成功',
+    ADD_ITEM_ERROR: '商品添加成功',
+    ADD_ITEM_API_ERROR: '添加商品时出错，请重试',
+    CLEAR_SECTION_CONFIRMATION: '确定清除此货架标签下所有内容？',
+    CLEAR_SECTION_SALES_FLOOR_MESSAGE: '将清除此货架标签下所有楼面商品',
+    CLEAR_SECTION_RESERVE_MESSAGE: '将清除此货架标签下所有卡板',
+    CLEAR_SECTION_WONT_DELETE: '将不删除此货架标签',
+    CLEAR_SECTION_SALES_FLOOR_SUCCEED: 'All sales floor items successfully cleared from this section', // TODO CN translation
+    CLEAR_SECTION_RESERVE_SUCCEED: 'All reserve pallets successfully cleared from this section', // TODO CN translation
+    CLEAR_SECTION_FAIL: '清除货架标签信息时出错，请重试',
+    REMOVE_AISLE_CONFIRMATION: '确定移除此通道？',
+    REMOVE_AISLE_WILL_REMOVE_SECTIONS: '将移除此通道下所有货架标签信息',
+    REMOVE_AISLE_FAIL: '移除通道时出错，请重试',
+    AISLE_REMOVED: '通道移除成功',
+    REMOVE_SECTION_CONFIRMATION: '确定删除此货架标签:%{sectionName}?',
+    REMOVE_SECTION_FAIL: '移除货架号发生错误,请重试',
+    SECTION_REMOVED: '货架移除成功',
+    ZONE_NAME_ERROR: '重置区域名称出错，\n请重试',
+    SELECT_ZONE: '选择区域',
+    CLEAR_AISLE_ITEMS_CONFIRMATION: '确定要移除此通道所有商品吗？',
+    CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE: '请选择楼面，高货架或者两个都选进行清除',
+    CLEAR_AISLE_ITEMS_WONT_DELETE: '删除此通道的货架信息',
+    CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
+    CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
+    PALLET_MANAGEMENT: 'Pallet Management' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

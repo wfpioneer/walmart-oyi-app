@@ -1,4 +1,6 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, {
+  EffectCallback, useEffect, useLayoutEffect, useState
+} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -16,11 +18,12 @@ import styles from './AddZone.style';
 import { CREATE_FLOW, PossibleZone, ZoneItem } from '../../models/LocationItems';
 import { setAislesToCreate, setNewZone } from '../../state/actions/Location';
 import { strings } from '../../locales';
+import { GET_ZONE_NAMES } from '../../state/actions/asyncAPI';
 
 interface AddZoneScreenProps {
   zones: ZoneItem[];
   possibleZones: PossibleZone[];
-  currentZone: { id: number; name: string; }
+  currentZone: { id: number; name: string };
   createFlow: CREATE_FLOW;
   selectedZone: string;
   setSelectedZone: React.Dispatch<React.SetStateAction<string>>;
@@ -29,6 +32,7 @@ interface AddZoneScreenProps {
   existingAisles: number;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
 
 const NEW_ZONE_AISLE_MIN = 1;
@@ -40,18 +44,18 @@ const addZonesToPicker = (
   currentZone: { id: number; name: string },
   createFlow: CREATE_FLOW
 ) => {
-  const availableZones = possibleZones.filter(possibleZone => !zones.some(zone => possibleZone.name === zone.zoneName));
+  const availableZones = possibleZones.filter(
+    possibleZone => !zones.some(zone => possibleZone.zoneName === zone.zoneName)
+  );
   switch (createFlow) {
     case CREATE_FLOW.CREATE_AISLE:
-      return (
-        <Picker.Item label={currentZone.name} value={currentZone.name} />
-      );
+      return <Picker.Item label={currentZone.name} value={currentZone.name} />;
     default:
-      return [<Picker.Item label="" value="" key={-1} />,
-        ...availableZones.map((zone: PossibleZone) => {
-          const zoneLabel = `${zone.name} - ${zone.description}`;
+      return [<Picker.Item label={strings('LOCATION.SELECT_ZONE')} value="" key={-1} />,
+        ...availableZones.filter(zone => zone.description != null).map((zone: PossibleZone) => {
+          const zoneLabel = `${zone.zoneName} - ${zone.description}`;
           return (
-            <Picker.Item label={zoneLabel} value={zone.name} key={zoneLabel} />
+            <Picker.Item label={zoneLabel} value={zone.zoneName} key={zoneLabel} />
           );
         })];
   }
@@ -65,14 +69,34 @@ const disableContinue = (aisles: number, existingAisles = 0, selectedZone: strin
   || selectedZone === '';
 
 export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
+  const {
+    createFlow,
+    currentZone,
+    dispatch,
+    existingAisles,
+    navigation,
+    numberOfAisles,
+    possibleZones,
+    selectedZone,
+    setNumberOfAisles,
+    setSelectedZone,
+    useEffectHook,
+    zones
+  } = props;
+
+  // Navigation Listener clear zone name api when leaving this screen
+  useEffectHook(() => navigation.addListener('beforeRemove', () => {
+    dispatch({ type: GET_ZONE_NAMES.RESET });
+  }), []);
+
   useLayoutEffect(() => {
-    if (props.navigation.isFocused()) {
-      if (props.createFlow === CREATE_FLOW.CREATE_AISLE) {
-        props.navigation.setOptions({
+    if (navigation.isFocused()) {
+      if (createFlow === CREATE_FLOW.CREATE_AISLE) {
+        navigation.setOptions({
           headerTitle: strings('LOCATION.ADD_AISLES')
         });
       } else {
-        props.navigation.setOptions({
+        navigation.setOptions({
           headerTitle: strings('LOCATION.ADD_ZONE')
         });
       }
@@ -80,8 +104,8 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
   }, []);
 
   const handleIncreaseAisle = () => {
-    props.setNumberOfAisles((prevState: number) => {
-      if (prevState < NEW_ZONE_AISLE_MAX - props.existingAisles) {
+    setNumberOfAisles((prevState: number) => {
+      if (prevState < NEW_ZONE_AISLE_MAX - existingAisles) {
         return prevState + 1;
       }
       return prevState;
@@ -89,7 +113,7 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
   };
 
   const handleDecreaseAisle = () => {
-    props.setNumberOfAisles((prevState: number) => {
+    setNumberOfAisles((prevState: number) => {
       if (prevState > NEW_ZONE_AISLE_MIN) {
         return prevState - 1;
       }
@@ -99,20 +123,20 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
     if (!Number.isNaN(newQty)) {
-      props.setNumberOfAisles(newQty);
+      setNumberOfAisles(newQty);
     }
   };
 
   const handleContinue = () => {
-    switch (props.createFlow) {
+    switch (createFlow) {
       case CREATE_FLOW.CREATE_AISLE:
-        props.dispatch(setAislesToCreate(props.numberOfAisles));
+        dispatch(setAislesToCreate(numberOfAisles));
         break;
       default:
-        props.dispatch(setAislesToCreate(props.numberOfAisles));
-        props.dispatch(setNewZone(props.selectedZone));
+        dispatch(setAislesToCreate(numberOfAisles));
+        dispatch(setNewZone(selectedZone));
     }
-    props.navigation.navigate('AddSection');
+    navigation.navigate('AddSection');
   };
 
   const handleUnhandledTouches = () => {
@@ -133,10 +157,10 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
             <Text style={styles.labelText}>{strings('LOCATION.ZONE')}</Text>
           </View>
           <Picker
-            selectedValue={props.selectedZone}
-            onValueChange={zone => props.setSelectedZone(zone)}
+            selectedValue={selectedZone}
+            onValueChange={zone => setSelectedZone(zone)}
           >
-            {addZonesToPicker(props.zones, props.possibleZones, props.currentZone, props.createFlow)}
+            {addZonesToPicker(zones, possibleZones, currentZone, createFlow)}
           </Picker>
         </View>
         <View style={styles.aisleContainer}>
@@ -145,18 +169,20 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
               {strings('LOCATION.ADD_AISLES')}
             </Text>
             <NumericSelector
-              isValid={validateNumericInput(props.numberOfAisles, props.existingAisles)}
+              isValid={validateNumericInput(numberOfAisles, existingAisles)}
               onDecreaseQty={handleDecreaseAisle}
               onIncreaseQty={handleIncreaseAisle}
               onTextChange={handleTextChange}
-              value={props.numberOfAisles}
+              minValue={NEW_ZONE_AISLE_MIN}
+              maxValue={NEW_ZONE_AISLE_MAX}
+              value={numberOfAisles}
             />
           </View>
-          {!validateNumericInput(props.numberOfAisles, props.existingAisles) && (
+          {!validateNumericInput(numberOfAisles, existingAisles) && (
             <Text style={styles.invalidLabel}>
               {strings('ITEM.OH_UPDATE_ERROR', {
                 min: NEW_ZONE_AISLE_MIN,
-                max: NEW_ZONE_AISLE_MAX - props.existingAisles
+                max: NEW_ZONE_AISLE_MAX - existingAisles
               })}
             </Text>
           )}
@@ -166,7 +192,7 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
         <Button
           title={strings('GENERICS.CONTINUE')}
           onPress={handleContinue}
-          disabled={disableContinue(props.numberOfAisles, props.existingAisles, props.selectedZone)}
+          disabled={disableContinue(numberOfAisles, existingAisles, selectedZone)}
           style={styles.continueButton}
         />
       </View>
@@ -206,6 +232,7 @@ const AddZone = (): JSX.Element => {
       existingAisles={existingAisles}
       dispatch={dispatch}
       navigation={navigation}
+      useEffectHook={useEffect}
     />
   );
 };

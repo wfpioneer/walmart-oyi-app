@@ -42,6 +42,11 @@ describe('Test Zone List', () => {
         trackEventCall={jest.fn()}
         isManualScanEnabled={false}
         locationPopupVisible={false}
+        getZoneNamesApi={defaultAsyncState}
+        errorVisible={false}
+        setErrorVisible={jest.fn()}
+        isLoading={false}
+        setIsLoading={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -71,6 +76,11 @@ describe('Test Zone List', () => {
         trackEventCall={jest.fn()}
         isManualScanEnabled={false}
         locationPopupVisible={false}
+        getZoneNamesApi={defaultAsyncState}
+        errorVisible={false}
+        setErrorVisible={jest.fn()}
+        isLoading={false}
+        setIsLoading={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -101,6 +111,11 @@ describe('Test Zone List', () => {
         trackEventCall={jest.fn()}
         isManualScanEnabled={false}
         locationPopupVisible={false}
+        getZoneNamesApi={defaultAsyncState}
+        errorVisible={false}
+        setErrorVisible={jest.fn()}
+        isLoading={false}
+        setIsLoading={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -121,6 +136,37 @@ describe('Test Zone List', () => {
         trackEventCall={jest.fn()}
         isManualScanEnabled={true}
         locationPopupVisible={false}
+        getZoneNamesApi={defaultAsyncState}
+        errorVisible={false}
+        setErrorVisible={jest.fn()}
+        isLoading={false}
+        setIsLoading={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders Get Zone Name Error Modal if errorVisible is set to true', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    renderer.render(
+      <ZoneScreen
+        siteId={MX_TEST_CLUB_NBR}
+        dispatch={jest.fn()}
+        getZoneApi={defaultAsyncState}
+        apiStart={0}
+        setApiStart={jest.fn()}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn()}
+        trackEventCall={jest.fn()}
+        isManualScanEnabled={false}
+        locationPopupVisible={false}
+        getZoneNamesApi={defaultAsyncState}
+        errorVisible={true}
+        setErrorVisible={jest.fn()}
+        isLoading={false}
+        setIsLoading={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -156,6 +202,11 @@ describe('Test Zone List', () => {
             trackEventCall={jest.fn()}
             isManualScanEnabled={false}
             locationPopupVisible={false}
+            getZoneNamesApi={defaultAsyncState}
+            errorVisible={false}
+            setErrorVisible={jest.fn()}
+            isLoading={false}
+            setIsLoading={jest.fn()}
           />
         );
         expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -163,17 +214,11 @@ describe('Test Zone List', () => {
 
     it('Renders loading indicator when waiting for Zone Api response', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const getZoneIsWaiting: AsyncState = {
-        isWaiting: true,
-        value: null,
-        error: null,
-        result: null
-      };
       renderer.render(
         <ZoneScreen
           siteId={MX_TEST_CLUB_NBR}
           dispatch={jest.fn()}
-          getZoneApi={getZoneIsWaiting}
+          getZoneApi={defaultAsyncState}
           apiStart={0}
           setApiStart={jest.fn()}
           navigation={navigationProp}
@@ -182,6 +227,11 @@ describe('Test Zone List', () => {
           trackEventCall={jest.fn()}
           isManualScanEnabled={false}
           locationPopupVisible={false}
+          getZoneNamesApi={defaultAsyncState}
+          errorVisible={false}
+          setErrorVisible={jest.fn()}
+          isLoading={true}
+          setIsLoading={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

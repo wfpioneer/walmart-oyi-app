@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddItemScreen Rendering Add Item responses Renders the success response from Add Item 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "paddingHorizontal": 15,
+    }
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+    rejectResponderTermination={true}
+    selectionColor="#0071e9"
+    style={
+      Object {
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "marginTop": 10,
+        "width": "100%",
+      }
+    }
+    underlineColorAndroid="transparent"
+    value="123456"
+  />
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "marginTop": 10,
+        "width": "100%",
+      }
+    }
+    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+</View>
+`;
+
+exports[`AddItemScreen Rendering Add Item responses Renders the waiting for response from Add Item 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`AddItemScreen Renders Enabled Submit button for Item containing only numeric digits 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "paddingHorizontal": 15,
+    }
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+    rejectResponderTermination={true}
+    selectionColor="#0071e9"
+    style={
+      Object {
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "marginTop": 10,
+        "width": "100%",
+      }
+    }
+    underlineColorAndroid="transparent"
+    value="123456"
+  />
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "marginTop": 10,
+        "width": "100%",
+      }
+    }
+    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+</View>
+`;
+
+exports[`AddItemScreen Renders Error for Item containing non number digits 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "paddingHorizontal": 15,
+    }
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+    rejectResponderTermination={true}
+    selectionColor="#0071e9"
+    style={
+      Object {
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "marginTop": 10,
+        "width": "100%",
+      }
+    }
+    underlineColorAndroid="transparent"
+    value="123abc"
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "marginVertical": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#e57373"
+      name="alert-circle"
+      size={20}
+    />
+    <Text
+      style={
+        Object {
+          "color": "#e57373",
+          "fontSize": 12,
+          "marginHorizontal": 5,
+        }
+      }
+    >
+      [missing "en.LOCATION.UPC_VALIDATE_ERROR" translation]
+    </Text>
+  </View>
+  <Button
+    backgroundColor="#0071e9"
+    disabled={true}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "marginTop": 10,
+        "width": "100%",
+      }
+    }
+    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+</View>
+`;

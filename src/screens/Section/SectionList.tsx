@@ -24,7 +24,11 @@ import { strings } from '../../locales';
 import { LocationHeader } from '../../components/locationHeader/LocationHeader';
 import { LocationType } from '../../models/LocationType';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { getSections } from '../../state/actions/saga';
+import {
+  clearLocation,
+  deleteAisle,
+  getSections
+} from '../../state/actions/saga';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
@@ -40,32 +44,235 @@ import {
 } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
-import { LocationName } from '../../models/Location';
+import { ClearLocationTarget, LocationName } from '../../models/Location';
 import { CREATE_FLOW } from '../../models/LocationItems';
+import { CustomModalComponent } from '../Modal/Modal';
+import Button from '../../components/buttons/Button';
+import { showSnackBar } from '../../state/actions/SnackBar';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 
-const NoSectionMessage = () : JSX.Element => (
+const MANAGER_APPROVAL = 'manager approval';
+
+const NoSectionMessage = (): JSX.Element => (
   <View style={styles.noSections}>
     <Text style={styles.noSectionsText}>{strings('LOCATION.NO_SECTIONS_AVAILABLE')}</Text>
   </View>
 );
+export const handleModalClose = (
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  setDeleteZoneApiStart: React.Dispatch<React.SetStateAction<number>>,
+  dispatch: Dispatch<any>
+): void => {
+  setDisplayConfirmation(false);
+  setDeleteZoneApiStart(0);
+  dispatch({ type: 'API/DELETE_AISLE/RESET' });
+};
 
-interface SectionProps {
-    aisleId: number,
-    aisleName: string,
-    zoneName: string,
-    getAllSections: AsyncState,
-    isManualScanEnabled: boolean,
-    dispatch: Dispatch<any>,
-    apiStart: number,
-    setApiStart: React.Dispatch<React.SetStateAction<number>>,
-    navigation: NavigationProp<any>,
-    route: RouteProp<any, string>,
-    useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
-    trackEventCall: (eventName: string, params?: any) => void,
-    locationPopupVisible: boolean
+export const handleClearModalClose = (
+  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
+): void => {
+  setDisplayClearConfirmation(false);
+  dispatch({ type: 'API/CLEAR_LOCATION/RESET' });
+};
+
+export const getSectionsApiEffect = (
+  getAllSections: AsyncState,
+  apiStart: number,
+  trackEventCall: (name: string, params: any) => void
+): void => {
+  // on api success
+  if (!getAllSections.isWaiting && getAllSections.result) {
+    trackEventCall('get_sections_success', { duration: moment().valueOf() - apiStart });
+  }
+
+  // on api failure
+  if (!getAllSections.isWaiting && getAllSections.error) {
+    trackEventCall('get_sections_failure', {
+      errorDetails: getAllSections.error.message || getAllSections.error,
+      duration: moment().valueOf() - apiStart
+    });
+  }
+};
+
+export const clearAisleApiEffect = (
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  clearSectionApi: AsyncState,
+  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>
+): void => {
+  if (navigation.isFocused() && !clearSectionApi.isWaiting) {
+    if (clearSectionApi.result) {
+      // Success
+      handleClearModalClose(setDisplayClearConfirmation, dispatch);
+      dispatch(showSnackBar(strings('LOCATION.CLEAR_AISLE_ITEMS_SUCCEED'), 3000));
+    }
+  }
+};
+
+export const deleteAisleApiEffect = (
+  navigation: NavigationProp<any>,
+  deleteAisleApi: AsyncState,
+  deleteAisleApiStart: number,
+  setDeleteAisleApiStart: React.Dispatch<React.SetStateAction<number>>,
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>,
+  trackEventCall: (name: string, params: any) => void
+): void => {
+  if (navigation.isFocused() && !deleteAisleApi.isWaiting) {
+    if (deleteAisleApi.result) {
+      // Success
+      trackEventCall('delete_aisle_success', {
+        duration: moment().valueOf() - deleteAisleApiStart
+      });
+      handleModalClose(setDisplayConfirmation, setDeleteAisleApiStart, dispatch);
+      dispatch(showSnackBar(strings('LOCATION.AISLE_REMOVED'), SNACKBAR_TIMEOUT));
+      navigation.goBack();
+    }
+    if (deleteAisleApi.error) {
+      // Failure
+      trackEventCall('delete_aisle_fail', {
+        duration: moment().valueOf() - deleteAisleApiStart,
+        reason: deleteAisleApi.error.message || deleteAisleApi.error.toString()
+      });
+      handleModalClose(setDisplayConfirmation, setDeleteAisleApiStart, dispatch);
+      dispatch(showSnackBar(strings('LOCATION.REMOVE_AISLE_FAIL'), SNACKBAR_TIMEOUT));
+    }
+  }
+};
+
+interface ClearItemsModalProps {
+  displayConfirmation: boolean,
+  isClearAisle: boolean,
+  clearAisleApi: AsyncState,
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  clearLocationTarget: ClearLocationTarget,
+  setClearLocationTarget: React.Dispatch<React.SetStateAction<ClearLocationTarget>>,
+  handleClearItems: () => void
 }
 
-export const SectionScreen = (props: SectionProps) : JSX.Element => {
+export const ClearItemsModal = (props: ClearItemsModalProps): JSX.Element => {
+  const {
+    displayConfirmation,
+    isClearAisle,
+    clearAisleApi,
+    setDisplayConfirmation,
+    clearLocationTarget,
+    setClearLocationTarget,
+    handleClearItems
+  } = props;
+  return (
+    <CustomModalComponent
+      isVisible={displayConfirmation && isClearAisle}
+      onClose={() => setDisplayConfirmation(false)}
+      modalType="Error"
+    >
+      {clearAisleApi.isWaiting ? (
+        <ActivityIndicator
+          animating={clearAisleApi.isWaiting}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.activityIndicator}
+        />
+      ) : (
+        <>
+          {!clearAisleApi.error ? (
+            <View style={styles.confirmationTextView}>
+              <Text style={styles.confirmation}>
+                {strings('LOCATION.CLEAR_AISLE_ITEMS_CONFIRMATION')}
+              </Text>
+              <Text style={styles.confirmationExtraText}>
+                {strings('LOCATION.CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE')}
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.confirmationTextView}>
+              <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+              <Text style={styles.confirmation}>
+                {strings('LOCATION.CLEAR_AISLE_ITEMS_FAIL')}
+              </Text>
+            </View>
+          )}
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.delButton}
+              title={strings('ITEM.FLOOR')}
+              backgroundColor={clearLocationTarget === ClearLocationTarget.FLOOR
+                ? COLOR.MAIN_THEME_COLOR
+                : COLOR.TRACKER_GREY}
+              onPress={() => setClearLocationTarget(ClearLocationTarget.FLOOR)}
+            />
+            <Button
+              style={styles.delButton}
+              title={strings('ITEM.RESERVE')}
+              backgroundColor={clearLocationTarget === ClearLocationTarget.RESERVE
+                ? COLOR.MAIN_THEME_COLOR
+                : COLOR.TRACKER_GREY}
+              onPress={() => setClearLocationTarget(ClearLocationTarget.RESERVE)}
+            />
+            <Button
+              style={styles.delButton}
+              title={strings('GENERICS.ALL')}
+              backgroundColor={clearLocationTarget === ClearLocationTarget.FLOORANDRESERVE
+                ? COLOR.MAIN_THEME_COLOR
+                : COLOR.TRACKER_GREY}
+              onPress={() => setClearLocationTarget(ClearLocationTarget.FLOORANDRESERVE)}
+            />
+          </View>
+          <View style={styles.confirmationTextView}>
+            <Text style={styles.confirmationExtraText}>
+              {strings('LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE')}
+            </Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.delButton}
+              title={strings('GENERICS.CANCEL')}
+              backgroundColor={COLOR.MAIN_THEME_COLOR}
+                // No need for modal close fn because no apis have been sent
+              onPress={() => setDisplayConfirmation(false)}
+            />
+            <Button
+              style={styles.delButton}
+              title={strings('GENERICS.OK')}
+              backgroundColor={COLOR.TRACKER_RED}
+              onPress={handleClearItems}
+            />
+          </View>
+        </>
+      )}
+    </CustomModalComponent>
+  );
+};
+
+interface SectionProps {
+  aisleId: number,
+  aisleName: string,
+  zoneName: string,
+  getAllSections: AsyncState,
+  isManualScanEnabled: boolean,
+  dispatch: Dispatch<any>,
+  apiStart: number,
+  setApiStart: React.Dispatch<React.SetStateAction<number>>,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>,
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void,
+  trackEventCall: (eventName: string, params?: any) => void,
+  locationPopupVisible: boolean,
+  displayConfirmation: boolean,
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  deleteAisleApi: AsyncState,
+  deleteAisleApiStart: number,
+  setDeleteAisleApiStart: React.Dispatch<React.SetStateAction<number>>,
+  isClearAisle: boolean,
+  clearAisleApi: AsyncState,
+  clearLocationTarget: ClearLocationTarget,
+  setClearLocationTarget: React.Dispatch<React.SetStateAction<ClearLocationTarget>>
+}
+
+export const SectionScreen = (props: SectionProps): JSX.Element => {
   const {
     aisleId,
     aisleName,
@@ -79,8 +286,34 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
     route,
     useEffectHook,
     trackEventCall,
-    locationPopupVisible
+    locationPopupVisible,
+    displayConfirmation,
+    setDisplayConfirmation,
+    deleteAisleApi,
+    deleteAisleApiStart,
+    setDeleteAisleApiStart,
+    isClearAisle,
+    clearAisleApi,
+    clearLocationTarget,
+    setClearLocationTarget
   } = props;
+
+  useEffectHook(() => deleteAisleApiEffect(
+    navigation,
+    deleteAisleApi,
+    deleteAisleApiStart,
+    setDeleteAisleApiStart,
+    setDisplayConfirmation,
+    dispatch,
+    trackEventCall
+  ), [deleteAisleApi]);
+
+  useEffectHook(() => clearAisleApiEffect(
+    dispatch,
+    navigation,
+    clearAisleApi,
+    setDisplayConfirmation
+  ), [clearAisleApi]);
 
   // calls to get all sections
   useEffectHook(() => navigation.addListener('focus', () => {
@@ -88,7 +321,7 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
       trackEventCall('get_location_api_call');
       setApiStart(moment().valueOf());
       dispatch(getSections({ aisleId }));
-    }).catch(() => {});
+    });
   }), [navigation]);
 
   // scanned event listener
@@ -108,20 +341,11 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
     };
   }, []);
 
-  useEffectHook(() => {
-  // on api success
-    if (!getAllSections.isWaiting && getAllSections.result) {
-      trackEventCall('get_sections_success', { duration: moment().valueOf() - apiStart });
-    }
-
-    // on api failure
-    if (!getAllSections.isWaiting && getAllSections.error) {
-      trackEventCall('get_sections_failure', {
-        errorDetails: getAllSections.error.message || getAllSections.error,
-        duration: moment().valueOf() - apiStart
-      });
-    }
-  }, [getAllSections]);
+  useEffectHook(() => getSectionsApiEffect(
+    getAllSections,
+    apiStart,
+    trackEventCall
+  ), [getAllSections]);
 
   if (getAllSections.isWaiting) {
     return (
@@ -153,8 +377,38 @@ export const SectionScreen = (props: SectionProps) : JSX.Element => {
     );
   }
 
+  const handleDeleteAisle = () => {
+    setDeleteAisleApiStart(moment().valueOf());
+    dispatch(
+      deleteAisle({
+        aisleId
+      })
+    );
+  };
+
+  const handleClearItems = () => {
+    dispatch(clearLocation({ locationId: aisleId, target: clearLocationTarget }));
+  };
+
   return (
     <View>
+      <ApiConfirmationModal
+        api={deleteAisleApi}
+        handleConfirm={handleDeleteAisle}
+        isVisible={displayConfirmation && !isClearAisle}
+        mainText={strings('LOCATION.REMOVE_AISLE_CONFIRMATION')}
+        subtext1={strings('LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS')}
+        onClose={() => setDisplayConfirmation(false)}
+      />
+      <ClearItemsModal
+        clearAisleApi={clearAisleApi}
+        handleClearItems={handleClearItems}
+        isClearAisle={isClearAisle}
+        clearLocationTarget={clearLocationTarget}
+        setClearLocationTarget={setClearLocationTarget}
+        displayConfirmation={displayConfirmation}
+        setDisplayConfirmation={setDisplayConfirmation}
+      />
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('LOCATION.AISLE')} ${zoneName}${aisleName}`}
@@ -190,13 +444,19 @@ const SectionList = (): JSX.Element => {
   const { name: zoneName } = useTypedSelector(state => state.Location.selectedZone);
   const location = useTypedSelector(state => state.Location);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const userFeatures = useTypedSelector(state => state.User.features);
+  const user = useTypedSelector(state => state.User);
   const [apiStart, setApiStart] = useState(0);
   const dispatch = useDispatch();
   const route = useRoute();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const managerSnapPoints = useMemo(() => ['60%'], []);
   const associateSnapPoints = useMemo(() => ['30%'], []);
+  const deleteAisleApi = useTypedSelector(state => state.async.deleteAisle);
+  const [displayConfirmation, setDisplayConfirmation] = useState(false);
+  const [isClearAisle, setIsClearAisle] = useState(false);
+  const [deleteAisleApiStart, setDeleteAisleApiStart] = useState(0);
+  const clearAisleApi = useTypedSelector(state => state.async.clearLocation);
+  const [clearLocationTarget, setClearLocationTarget] = useState<ClearLocationTarget>(ClearLocationTarget.FLOOR);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {
@@ -208,11 +468,16 @@ const SectionList = (): JSX.Element => {
     }
   }, [location]);
 
+  const locationManagementEdit = () => user.features.includes('location management edit')
+    || user.configs.locationManagementEdit;
+
   const handleAddSections = () => {
     dispatch(setSections(getAllSections.result.data));
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_SECTION));
     dispatch(setAislesToCreateToExistingAisle({ id: aisleId, name: aisleName }));
-    bottomSheetModalRef.current?.dismiss();
+    if (bottomSheetModalRef.current) {
+      bottomSheetModalRef.current.dismiss();
+    }
     navigation.navigate('AddSection');
   };
 
@@ -238,21 +503,32 @@ const SectionList = (): JSX.Element => {
           useEffectHook={useEffect}
           trackEventCall={trackEvent}
           locationPopupVisible={location.locationPopupVisible}
+          displayConfirmation={displayConfirmation}
+          setDisplayConfirmation={setDisplayConfirmation}
+          deleteAisleApi={deleteAisleApi}
+          deleteAisleApiStart={deleteAisleApiStart}
+          setDeleteAisleApiStart={setDeleteAisleApiStart}
+          isClearAisle={isClearAisle}
+          clearAisleApi={clearAisleApi}
+          clearLocationTarget={clearLocationTarget}
+          setClearLocationTarget={setClearLocationTarget}
         />
       </TouchableOpacity>
       <BottomSheetModal
         ref={bottomSheetModalRef}
-        snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
+        snapPoints={user.features.includes(MANAGER_APPROVAL) ? managerSnapPoints : associateSnapPoints}
         index={0}
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}
       >
         <BottomSheetPrintCard
-          isVisible={userFeatures.includes('location printing')}
+          isVisible={locationManagementEdit()}
           text={strings('LOCATION.PRINT_SECTION')}
           onPress={() => {
             dispatch(hideLocationPopup());
-            bottomSheetModalRef.current?.dismiss();
+            if (bottomSheetModalRef.current) {
+              bottomSheetModalRef.current.dismiss();
+            }
             dispatch(setPrintingLocationLabels(LocationName.AISLE));
             navigation.navigate('PrintPriceSign');
           }}
@@ -263,14 +539,22 @@ const SectionList = (): JSX.Element => {
           onPress={handleAddSections}
         />
         <BottomSheetClearCard
-          isVisible={userFeatures.includes('manager approval')}
+          isVisible={user.features.includes(MANAGER_APPROVAL)}
           text={strings('LOCATION.CLEAR_AISLE')}
-          onPress={() => {}}
+          onPress={() => {
+            dispatch(hideLocationPopup());
+            setDisplayConfirmation(true);
+            setIsClearAisle(true);
+          }}
         />
         <BottomSheetSectionRemoveCard
-          isVisible={userFeatures.includes('manager approval')}
+          isVisible={user.features.includes(MANAGER_APPROVAL)}
           text={strings('LOCATION.REMOVE_AISLE')}
-          onPress={() => {}}
+          onPress={() => {
+            dispatch(hideLocationPopup());
+            setDisplayConfirmation(true);
+            setIsClearAisle(false);
+          }}
         />
       </BottomSheetModal>
     </BottomSheetModalProvider>

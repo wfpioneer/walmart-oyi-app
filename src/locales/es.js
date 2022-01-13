@@ -136,21 +136,26 @@ export default {
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Spanish translation
-    DUPLICATE_PRINTER: 'Una impresora ya existe' // TODO Spanish translation
+    DUPLICATE_PRINTER: 'Una impresora ya existe',
+    SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
+  },
+  PALLET: {
+    ENTER_PALLET_ID: 'Type a pallet ID', // TODO Spanish translation
+    SCAN_PALLET: 'Scan a pallet' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
     FLOOR: 'Ubicación en Piso',
     RESERVE: 'Ubicaciones en Bodega',
-    FLOORS: 'Piso', // TODO Spanish Translation   DUPLICATE???
-    RESERVES: 'Bodega', // TODO Spanish Translation
+    FLOORS: 'Piso',
+    RESERVES: 'Bodega',
     ADD_LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. \nPor favor inténtalo de nuevo.',
     EDIT_LOCATION_API_ERROR: 'Hubo en un error editando la ubicación. \nPor favor inténtalo de nuevo.',
     ADD_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
     EDIT_DUPLICATE_ERROR: 'La combinación de ubicación y el tipo, \nya existen.',
     MANUAL_ENTRY_BUTTON: 'Ingresa manualmente la ubicación.',
     SELECTION_INSTRUCTION: '1. Elija un tipo de ubicación.',
-    SCAN_INSTRUCTION: '2. Escanea la etiqueta de Ubicación.',
+    SCAN_INSTRUCTION: 'Escanea la etiqueta de Ubicación.',
     DELETE_CONFIRMATION: 'Confirma la eliminación de \nla ubicación ',
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
@@ -160,7 +165,7 @@ export default {
     PALLETS: 'Pallets', // TODO Spanish Translation
     PALLET: 'Pallet', // TODO Spanish Translation
     ZONES: 'Zonas',
-    ZONE: 'Zone', // TODO Spanish Translation
+    ZONE: 'Zona', // TODO Spanish Translation
     AISLES: 'Pasillos',
     AISLE: 'Pasillo',
     SECTIONS: 'Secciones',
@@ -169,6 +174,7 @@ export default {
     LOCATION_DETAILS: 'Detalles de ubicación',
     NO_ZONES_AVAILABLE: 'No hay zonas disponibles',
     NO_AISLES_AVAILABLE: 'No hay pasillos disponibles',
+    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Spanish Translation
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_ALL: 'Limpiar',
     CLEAR_SECTION: 'Limpiar sección',
@@ -195,7 +201,7 @@ export default {
     PALLET_ERROR: 'Pallet no encontrada/Pallet vacía',
     PALLET_NOT_FOUND: 'Hubo un error debido a que no se encontró el pallet/Pallet vacía',
     PALLET_ADDED: 'Pallet agregado con éxito',
-    PALLET_DELETE_CONFIRMATION: 'Confirmar: Borrar pallet',
+    PALLET_DELETE_CONFIRMATION: 'Are you sure you want to remove Pallet %{pallet} from Section %{section}?', // TODO spanish translation
     FLOOR_EMPTY: 'La lista de Piso está vacía',
     RESERVE_EMPTY: 'La lista de Bodega está vacía',
     GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
@@ -210,11 +216,41 @@ export default {
     PRINT_LABEL_EXISTS: 'Esta etiqueta ya existe en la cola de impresión',
     SECTIONS_ADDED: '%{number} secciones agregadas',
     ADD_SECTIONS_ERROR: 'Hubo un error agregando las secciones. Por favor inténtalo de nuevo',
+    ZONE_ADDED: 'Zona %{name} agregada',
+    ADD_ZONE_ERROR: 'Hubo un error agregando la zona. Por favor inténtalo de nuevo',
+    INCOMPLETE_ZONE_ADDED: 'Zona %{name} agregada, pero no todos los pasillos y secciones se crearon. Por favor revisa la lista de los que si se crearon',
     REMOVE_ZONE_CONFIRMATION: '¿Estas seguro que quieres eliminar esta zona?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: 'Esto eliminará todos los pasillos y secciones asociados',
     REMOVE_ZONE_FAIL: 'Hubo un error eliminando la zona. Por favor inténtalo de nuevo',
     DELETE_ITEM: 'Borrar %{itemNbr} \n%{itemName}',
-    ERROR_DELETE_ITEM: 'Hubo un error borrando el artículo. Por favor inténtalo de nuevo'
+    ERROR_DELETE_ITEM: 'Hubo un error borrando el artículo. Por favor inténtalo de nuevo',
+    UPC_VALIDATE_ERROR: 'El UPC solo puede contener números',
+    SCAN_ITEM: 'Escanear artículo',
+    ITEM_ADDED: 'Artículo agregado correctamente',
+    ADD_ITEM_ERROR: 'Error agregando artículo',
+    ADD_ITEM_API_ERROR: 'Hubo un error agregando el artículo. \nPor favor Inténtalo de nuevo',
+    CLEAR_SECTION_CONFIRMATION: '¿Estas seguro de que quieres limpiar la sección?',
+    CLEAR_SECTION_SALES_FLOOR_MESSAGE: 'Esto eliminará los artículos en Piso de esta sección',
+    CLEAR_SECTION_RESERVE_MESSAGE: 'Esto eliminará los pallets en bodega de esta sección',
+    CLEAR_SECTION_WONT_DELETE: 'Esto no eliminará la sección',
+    CLEAR_SECTION_SALES_FLOOR_SUCCEED: 'Todos los artículos del piso fueron limpiados correctamente',
+    CLEAR_SECTION_RESERVE_SUCCEED: 'Todos los pallets de la bodega fueron limpiados correctamente',
+    CLEAR_SECTION_FAIL: 'Hubo un error eliminando la sección. Por favor inténtalo de nuevo',
+    REMOVE_AISLE_CONFIRMATION: '¿Estás seguro que quieres eliminar el pasillo?',
+    REMOVE_AISLE_WILL_REMOVE_SECTIONS: 'Esto eliminará todas las secciones asociadas',
+    REMOVE_AISLE_FAIL: 'Hubo un error eliminando el pasillo. Por favor inténtalo de nuevo',
+    AISLE_REMOVED: 'Pasillo eliminado correctamente',
+    REMOVE_SECTION_CONFIRMATION: '¿Estas seguro que quieres borrar la sección %{sectionName}?',
+    REMOVE_SECTION_FAIL: 'Hubo un error eliminando la sección. Por favor inténtalo de nuevo',
+    SECTION_REMOVED: 'Sección eliminada correctamente',
+    ZONE_NAME_ERROR: 'There was an error retrieving the possible zone names. \nPlease try again.', // TODO spanish translation
+    SELECT_ZONE: 'Selecciona la Zona',
+    CLEAR_AISLE_ITEMS_CONFIRMATION: '¿Estás seguro que quieres limpiar todos los artículos del pasillo?',
+    CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE: 'Por favor selecciona Piso, bodega o ambos para limpiar',
+    CLEAR_AISLE_ITEMS_WONT_DELETE: 'Esto no eliminará las secciones del pasillo',
+    CLEAR_AISLE_ITEMS_SUCCEED: 'Todos los artículos seleccionados fueron limpiados del pasillo',
+    CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo',
+    PALLET_MANAGEMENT: 'Pallet Management' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

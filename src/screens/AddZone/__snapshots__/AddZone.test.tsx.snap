@@ -96,6 +96,8 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
         </Text>
         <NumericSelector
           isValid={false}
+          maxValue={99}
+          minValue={1}
           onDecreaseQty={[Function]}
           onIncreaseQty={[Function]}
           onTextChange={[Function]}
@@ -207,7 +209,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
         selectedValue=""
       >
         <PickerItem
-          label=""
+          label="[missing \\"en.LOCATION.SELECT_ZONE\\" translation]"
           value=""
         />
         <PickerItem
@@ -426,6 +428,8 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
         </Text>
         <NumericSelector
           isValid={false}
+          maxValue={99}
+          minValue={1}
           onDecreaseQty={[Function]}
           onIncreaseQty={[Function]}
           onTextChange={[Function]}
@@ -572,6 +576,8 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
         </Text>
         <NumericSelector
           isValid={true}
+          maxValue={99}
+          minValue={1}
           onDecreaseQty={[Function]}
           onIncreaseQty={[Function]}
           onTextChange={[Function]}
@@ -671,7 +677,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
         selectedValue=""
       >
         <PickerItem
-          label=""
+          label="[missing \\"en.LOCATION.SELECT_ZONE\\" translation]"
           value=""
         />
         <PickerItem
@@ -890,6 +896,8 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
         </Text>
         <NumericSelector
           isValid={true}
+          maxValue={99}
+          minValue={1}
           onDecreaseQty={[Function]}
           onIncreaseQty={[Function]}
           onTextChange={[Function]}

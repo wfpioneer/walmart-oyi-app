@@ -1,7 +1,192 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Test Zone List Renders Get Zone Name Error Modal if errorVisible is set to true 1`] = `
+<View>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={true}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.LOCATION.ZONE_NAME_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.RETRY\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </CustomModalComponent>
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
+    isDisabled={false}
+    location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
+  />
+  <FlatList
+    ListEmptyComponent={<NoZonesMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
 exports[`Test Zone List Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
 <View>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.LOCATION.ZONE_NAME_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.RETRY\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </CustomModalComponent>
   <LocationManualScan
     keyboardType="default"
   />
@@ -36,6 +221,83 @@ exports[`Test Zone List Renders Manual Scan Component when isManualScanEnabled i
 
 exports[`Test Zone List Renders Zone Screen with Data 1`] = `
 <View>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.LOCATION.ZONE_NAME_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.RETRY\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </CustomModalComponent>
   <LocationHeader
     details="35 [missing \\"en.LOCATION.ZONES\\" translation]"
     isDisabled={false}
@@ -245,6 +507,83 @@ exports[`Test Zone List Renders Zone Screen with Data 1`] = `
 
 exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
 <View>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.LOCATION.ZONE_NAME_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.RETRY\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </CustomModalComponent>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
     isDisabled={false}
@@ -257,7 +596,7 @@ exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
         "paddingBottom": 100,
       }
     }
-    data={Object {}}
+    data={Array []}
     disableVirtualization={false}
     horizontal={false}
     initialNumToRender={10}
@@ -276,6 +615,83 @@ exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
 
 exports[`Test Zone List Renders Zone Screen with no-zones-message when get all zones response is 204 1`] = `
 <View>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.LOCATION.ZONE_NAME_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.RETRY\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </CustomModalComponent>
   <LocationHeader
     details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
     isDisabled={false}

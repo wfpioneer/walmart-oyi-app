@@ -42,7 +42,12 @@ const testUser: User = {
   siteId: 1,
   token: 'aFakeToken',
   userId: 'aFakeUserId',
-  features: []
+  features: [],
+  configs: {
+    locationManagement: false,
+    locationManagementEdit: false,
+    palletManagement: false
+  }
 };
 
 const defaultTestProp: LoginScreenProps = {
@@ -59,6 +64,14 @@ const defaultTestProp: LoginScreenProps = {
     result: {}
   },
   assignFluffyFeatures: jest.fn(),
+  getClubConfig: jest.fn(),
+  getClubConfigApiState: {
+    isWaiting: false,
+    value: null,
+    error: null,
+    result: null
+  },
+  setConfigs: jest.fn(),
   showActivityModal: jest.fn()
 };
 
@@ -79,6 +92,14 @@ describe('LoginScreen', () => {
         result: {}
       }}
       assignFluffyFeatures={jest.fn}
+      getClubConfig={jest.fn()}
+      getClubConfigApiState={{
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: null
+      }}
+      setConfigs={jest.fn()}
       showActivityModal={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -100,6 +121,14 @@ describe('LoginScreen', () => {
         result: {}
       }}
       assignFluffyFeatures={jest.fn}
+      getClubConfig={jest.fn()}
+      getClubConfigApiState={{
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: null
+      }}
+      setConfigs={jest.fn()}
       showActivityModal={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -121,6 +150,14 @@ describe('LoginScreen', () => {
         result: {}
       }}
       assignFluffyFeatures={jest.fn}
+      getClubConfig={jest.fn()}
+      getClubConfigApiState={{
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: null
+      }}
+      setConfigs={jest.fn()}
       showActivityModal={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -144,6 +181,14 @@ describe('LoginScreen', () => {
         result: {}
       }}
       assignFluffyFeatures={jest.fn}
+      getClubConfig={jest.fn()}
+      getClubConfigApiState={{
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: null
+      }}
+      setConfigs={jest.fn()}
       showActivityModal={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -167,6 +212,14 @@ describe('LoginScreen', () => {
         result: {}
       }}
       assignFluffyFeatures={jest.fn}
+      getClubConfig={jest.fn()}
+      getClubConfigApiState={{
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: null
+      }}
+      setConfigs={jest.fn()}
       showActivityModal={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();

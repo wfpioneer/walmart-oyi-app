@@ -1,6 +1,6 @@
 import User from '../../models/User';
 import {
-  ASSIGN_FLUFFY_FEATURES, Actions, USER_LOGIN, USER_LOGOUT
+  ASSIGN_FLUFFY_FEATURES, Actions, SET_CONFIGS, USER_LOGIN, USER_LOGOUT
 } from '../actions/User';
 
 const initialState: User = {
@@ -15,7 +15,12 @@ const initialState: User = {
   siteId: 0,
   token: '',
   userId: '',
-  features: []
+  features: [],
+  configs: {
+    locationManagement: false,
+    locationManagementEdit: false,
+    palletManagement: false
+  }
 };
 
 export const UserReducer = (state = initialState, action: Actions): User => {
@@ -23,7 +28,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
     case USER_LOGIN:
       return {
         ...action.payload,
-        features: []
+        features: [],
+        configs: initialState.configs
       };
     case USER_LOGOUT:
       return initialState;
@@ -31,6 +37,15 @@ export const UserReducer = (state = initialState, action: Actions): User => {
       return {
         ...state,
         features: action.payload
+      };
+    case SET_CONFIGS:
+      return {
+        ...state,
+        configs: {
+          locationManagement: action.payload.locationManagement || false,
+          locationManagementEdit: action.payload.locMgmtEdit || false,
+          palletManagement: action.payload.palletManagement || false
+        }
       };
     default:
       return state;

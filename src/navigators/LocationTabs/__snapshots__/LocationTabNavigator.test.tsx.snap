@@ -2,14 +2,48 @@
 
 exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
 <React.Fragment>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationHeader
     buttonPress={[Function]}
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -26,6 +60,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -41,6 +76,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -59,14 +95,48 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
 
 exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
 <React.Fragment>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationHeader
     buttonPress={[Function]}
     details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -83,6 +153,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -98,6 +169,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -116,14 +188,48 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
 
 exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 1`] = `
 <React.Fragment>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationHeader
     buttonPress={[Function]}
     details="100 [missing \\"en.LOCATION.ITEMS\\" translation], 100 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -140,6 +246,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -155,6 +262,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -173,17 +281,51 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
 
 exports[`Test Location Tabs Renders Location header as Scanned Event Value when location name is "-" 1`] = `
 <React.Fragment>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationManualScan
     keyboardType="default"
   />
   <LocationHeader
     buttonPress={[Function]}
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -200,6 +342,7 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -215,6 +358,7 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -233,17 +377,51 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
 
 exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
 <React.Fragment>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationManualScan
     keyboardType="default"
   />
   <LocationHeader
     buttonPress={[Function]}
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -260,6 +438,7 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -275,6 +454,7 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -293,6 +473,40 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
 
 exports[`Test Location Tabs Renders Print Label button if "location printing" feature is enabled 1`] = `
 <React.Fragment>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
   <LocationManualScan
     keyboardType="default"
   />
@@ -300,11 +514,11 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
     buttonPress={[Function]}
     buttonText="[missing \\"en.LOCATION.PRINT_LABEL\\" translation]"
     details="2 [missing \\"en.LOCATION.ITEMS\\" translation], 3 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -321,6 +535,7 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -336,6 +551,7 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
     <Screen
       listeners={
         Object {
+          "focus": [Function],
           "tabPress": [Function],
         }
       }
@@ -352,7 +568,7 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
 </React.Fragment>
 `;
 
-exports[`Test Location Tabs Renders items Header 1`] = `
+exports[`Test Location Tabs Tests rendering Tab Headers Renders items Header 1`] = `
 <React.Fragment>
   <View
     style={
@@ -393,7 +609,7 @@ exports[`Test Location Tabs Renders items Header 1`] = `
 </React.Fragment>
 `;
 
-exports[`Test Location Tabs Renders pallet Header 1`] = `
+exports[`Test Location Tabs Tests rendering Tab Headers Renders pallet Header 1`] = `
 <React.Fragment>
   <View
     style={
@@ -431,5 +647,197 @@ exports[`Test Location Tabs Renders pallet Header 1`] = `
       width={-1}
     />
   </View>
+</React.Fragment>
+`;
+
+exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading Indicator for Remove Section Modal 1`] = `
+<React.Fragment>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": true,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
+  <LocationManualScan
+    keyboardType="default"
+  />
+  <LocationHeader
+    buttonPress={[Function]}
+    details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    isDisabled={true}
+    location="[missing \\"en.LOCATION.SECTION\\" translation] -"
+  />
+  <MaterialTopTabNavigator
+    swipeEnabled={null}
+    tabBarOptions={
+      Object {
+        "activeTintColor": "#0071e9",
+        "inactiveTintColor": "#616161",
+        "indicatorStyle": Object {
+          "backgroundColor": "#0071e9",
+        },
+        "style": Object {
+          "backgroundColor": "#ffffffff",
+        },
+      }
+    }
+  >
+    <Screen
+      listeners={
+        Object {
+          "focus": [Function],
+          "tabPress": [Function],
+        }
+      }
+      name="FloorDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (0)",
+        }
+      }
+    >
+      [Function]
+    </Screen>
+    <Screen
+      listeners={
+        Object {
+          "focus": [Function],
+          "tabPress": [Function],
+        }
+      }
+      name="ReserveDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (0)",
+        }
+      }
+    >
+      [Function]
+    </Screen>
+  </MaterialTopTabNavigator>
+</React.Fragment>
+`;
+
+exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry button on Modal if remove section api returns an error 1`] = `
+<React.Fragment>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": "Network Error",
+        "isWaiting": true,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
+  <LocationManualScan
+    keyboardType="default"
+  />
+  <LocationHeader
+    buttonPress={[Function]}
+    details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    isDisabled={true}
+    location="[missing \\"en.LOCATION.SECTION\\" translation] -"
+  />
+  <MaterialTopTabNavigator
+    swipeEnabled={null}
+    tabBarOptions={
+      Object {
+        "activeTintColor": "#0071e9",
+        "inactiveTintColor": "#616161",
+        "indicatorStyle": Object {
+          "backgroundColor": "#0071e9",
+        },
+        "style": Object {
+          "backgroundColor": "#ffffffff",
+        },
+      }
+    }
+  >
+    <Screen
+      listeners={
+        Object {
+          "focus": [Function],
+          "tabPress": [Function],
+        }
+      }
+      name="FloorDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (0)",
+        }
+      }
+    >
+      [Function]
+    </Screen>
+    <Screen
+      listeners={
+        Object {
+          "focus": [Function],
+          "tabPress": [Function],
+        }
+      }
+      name="ReserveDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (0)",
+        }
+      }
+    >
+      [Function]
+    </Screen>
+  </MaterialTopTabNavigator>
 </React.Fragment>
 `;

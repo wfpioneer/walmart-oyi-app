@@ -1,10 +1,22 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { NavigationContainer, NavigationProp, RouteProp } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  NavigationProp,
+  RouteProp
+} from '@react-navigation/native';
 import { render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
-import { LocationProps, LocationTabsNavigator, TabHeader } from './LocationTabNavigator';
+import {
+  LocationProps,
+  LocationTabsNavigator,
+  TabHeader,
+  clearSectionApiEffect,
+  getSectionDetailsEffect,
+  handleClearModalClose,
+  handleClearSection
+} from './LocationTabNavigator';
 import {
   mockLocationDetails,
   mockLocationDetailsEmpty,
@@ -12,6 +24,10 @@ import {
 } from '../../mockData/locationDetails';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import store from '../../state';
+import { AsyncState } from '../../models/AsyncState';
+import { LocationIdName } from '../../state/reducers/Location';
+import { ClearLocationTarget } from '../../models/Location';
+import User from '../../models/User';
 
 let navigationProp: NavigationProp<any>;
 const routeProp: RouteProp<any, string> = {
@@ -25,23 +41,57 @@ const defaultScannedEvent = {
 };
 
 const mockNavigate = jest.fn();
+const mockIsFocused = jest.fn(() => true);
 jest.mock('@react-navigation/native', () => {
   const actualNav = jest.requireActual('@react-navigation/native');
   return {
     ...actualNav,
     useNavigation: () => ({
       navigate: mockNavigate,
+      isFocused: mockIsFocused,
       addListener: jest.fn()
     })
   };
 });
-const mockValidateSession = jest.fn().mockImplementation(() => new Promise<void>(resolve => resolve()));
+const mockValidateSession = jest
+  .fn()
+  .mockImplementation(() => new Promise<void>(resolve => resolve()));
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
+const user: User = {
+  userId: 'vn50pz4',
+  additional: {
+    clockCheckResult: 'yo',
+    displayName: 'Kyle Welch',
+    loginId: 'vn50pz4',
+    mailId: 'vn50pz4@homeoffice.wal-mart.com'
+  },
+  configs: {
+    locationManagement: false,
+    locationManagementEdit: false,
+    palletManagement: false
+  },
+  countryCode: 'CN',
+  domain: 'Homeoffice',
+  features: [],
+  siteId: 5597,
+  token: 'gibberish'
+};
+
 describe('Test Location Tabs', (): void => {
+  const defaultAsyncState: AsyncState = {
+    isWaiting: false,
+    value: null,
+    error: null,
+    result: null
+  };
+  const defaultSection: LocationIdName = {
+    id: 0,
+    name: '0'
+  };
   it('Renders Location Tabs with Mock Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const {
@@ -61,9 +111,19 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
         locationPopupVisible={false}
-        userFeatures={[]}
+        user={user}
         itemPopupVisible={false}
-        sectionResult={null}
+        sectionResult={mockLocationDetails}
+        sectionIsWaiting={false}
+        section={defaultSection}
+        removeSectionApi={defaultAsyncState}
+        displayRemoveConfirmation={false}
+        setDisplayRemoveConfirmation={jest.fn()}
+        clearSectionApi={defaultAsyncState}
+        displayClearConfirmation={false}
+        setDisplayClearConfirmation={jest.fn()}
+        selectedTab={ClearLocationTarget.FLOOR}
+        setSelectedTab={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -88,9 +148,19 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
-        userFeatures={[]}
+        user={user}
         itemPopupVisible={false}
-        sectionResult={null}
+        sectionResult={mockLocationDetailsEmpty}
+        sectionIsWaiting={false}
+        section={defaultSection}
+        removeSectionApi={defaultAsyncState}
+        displayRemoveConfirmation={false}
+        setDisplayRemoveConfirmation={jest.fn()}
+        clearSectionApi={defaultAsyncState}
+        displayClearConfirmation={false}
+        setDisplayClearConfirmation={jest.fn()}
+        selectedTab={ClearLocationTarget.FLOOR}
+        setSelectedTab={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -115,9 +185,19 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
-        userFeatures={[]}
+        user={user}
         itemPopupVisible={false}
-        sectionResult={null}
+        sectionResult={mockLocationDetailsLargeLocationCount}
+        sectionIsWaiting={false}
+        section={defaultSection}
+        removeSectionApi={defaultAsyncState}
+        displayRemoveConfirmation={false}
+        setDisplayRemoveConfirmation={jest.fn()}
+        clearSectionApi={defaultAsyncState}
+        displayClearConfirmation={false}
+        setDisplayClearConfirmation={jest.fn()}
+        selectedTab={ClearLocationTarget.FLOOR}
+        setSelectedTab={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -142,9 +222,19 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
-        userFeatures={[]}
+        user={user}
         itemPopupVisible={false}
-        sectionResult={null}
+        sectionResult={mockLocationDetails}
+        sectionIsWaiting={false}
+        section={defaultSection}
+        removeSectionApi={defaultAsyncState}
+        displayRemoveConfirmation={false}
+        setDisplayRemoveConfirmation={jest.fn()}
+        clearSectionApi={defaultAsyncState}
+        displayClearConfirmation={false}
+        setDisplayClearConfirmation={jest.fn()}
+        selectedTab={ClearLocationTarget.FLOOR}
+        setSelectedTab={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -171,13 +261,24 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
         locationPopupVisible={false}
-        userFeatures={[]}
+        user={user}
         itemPopupVisible={false}
-        sectionResult={null}
+        sectionResult={mockLocationDetails}
+        sectionIsWaiting={false}
+        section={defaultSection}
+        removeSectionApi={defaultAsyncState}
+        displayRemoveConfirmation={false}
+        setDisplayRemoveConfirmation={jest.fn()}
+        clearSectionApi={defaultAsyncState}
+        displayClearConfirmation={false}
+        setDisplayClearConfirmation={jest.fn()}
+        selectedTab={ClearLocationTarget.FLOOR}
+        setSelectedTab={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
   it('Renders Print Label button if "location printing" feature is enabled', (): void => {
     const renderer = ShallowRenderer.createRenderer();
     const { items, pallets } = mockLocationDetails;
@@ -195,27 +296,264 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
         locationPopupVisible={false}
-        userFeatures={['location printing']}
+        user={{ ...user, features: ['location management edit'] }}
         itemPopupVisible={false}
-        sectionResult={null}
+        sectionResult={mockLocationDetails}
+        sectionIsWaiting={false}
+        section={defaultSection}
+        removeSectionApi={defaultAsyncState}
+        displayRemoveConfirmation={false}
+        setDisplayRemoveConfirmation={jest.fn()}
+        clearSectionApi={defaultAsyncState}
+        displayClearConfirmation={false}
+        setDisplayClearConfirmation={jest.fn()}
+        selectedTab={ClearLocationTarget.FLOOR}
+        setSelectedTab={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-  it('Renders items Header', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    renderer.render(
-      <TabHeader headerText="ITEMS" isReserve={false} isEditEnabled={true} isDisabled={false}/>
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+
+  describe('Tests rendering removeSectionModal', () => {
+    it('Renders Loading Indicator for Remove Section Modal', (): void => {
+      const renderer = ShallowRenderer.createRenderer();
+      const deleteSectionIsWaiting: AsyncState = {
+        isWaiting: true,
+        value: null,
+        error: null,
+        result: null
+      };
+      renderer.render(
+        <LocationTabsNavigator
+          floorItems={[]}
+          reserveItems={[]}
+          locationName="-"
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          scannedEvent={defaultScannedEvent}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+          validateSessionCall={jest.fn()}
+          isManualScanEnabled={true}
+          locationPopupVisible={false}
+          user={user}
+          itemPopupVisible={false}
+          sectionResult={null}
+          sectionIsWaiting={false}
+          section={defaultSection}
+          removeSectionApi={deleteSectionIsWaiting}
+          displayRemoveConfirmation={true}
+          setDisplayRemoveConfirmation={jest.fn()}
+          clearSectionApi={defaultAsyncState}
+          displayClearConfirmation={false}
+          setDisplayClearConfirmation={jest.fn()}
+          selectedTab={ClearLocationTarget.FLOOR}
+          setSelectedTab={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders Retry button on Modal if remove section api returns an error', (): void => {
+      const renderer = ShallowRenderer.createRenderer();
+      const deleteSectionError: AsyncState = {
+        isWaiting: true,
+        value: null,
+        error: 'Network Error',
+        result: null
+      };
+      renderer.render(
+        <LocationTabsNavigator
+          floorItems={[]}
+          reserveItems={[]}
+          locationName="-"
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          scannedEvent={defaultScannedEvent}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+          validateSessionCall={jest.fn()}
+          isManualScanEnabled={true}
+          locationPopupVisible={false}
+          user={user}
+          itemPopupVisible={false}
+          sectionResult={null}
+          sectionIsWaiting={false}
+          section={defaultSection}
+          removeSectionApi={deleteSectionError}
+          displayRemoveConfirmation={true}
+          setDisplayRemoveConfirmation={jest.fn()}
+          clearSectionApi={defaultAsyncState}
+          displayClearConfirmation={false}
+          setDisplayClearConfirmation={jest.fn()}
+          selectedTab={ClearLocationTarget.FLOOR}
+          setSelectedTab={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 
-  it('Renders pallet Header', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    renderer.render(
-      <TabHeader headerText="PALLETS" isReserve={true} isEditEnabled={true} isDisabled={false}/>
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  describe('Tests rendering Tab Headers', () => {
+    it('Renders items Header', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <TabHeader
+          headerText="ITEMS"
+          isReserve={false}
+          isEditEnabled={true}
+          isDisabled={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders pallet Header', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <TabHeader
+          headerText="PALLETS"
+          isReserve={true}
+          isEditEnabled={true}
+          isDisabled={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+
+  describe('Location Tabs Navigator (section details) externalized function tests', () => {
+    const mockSetDisplayClearConfirmation = jest.fn();
+    const mockDispatch = jest.fn();
+    it('ensures handleClearSection works properly', () => {
+      handleClearSection(mockDispatch, 1, ClearLocationTarget.FLOOR);
+
+      expect(mockDispatch).toBeCalledTimes(1);
+
+      mockDispatch.mockClear();
+    });
+
+    it('ensures handleClearModalClose works properly', () => {
+      handleClearModalClose(mockSetDisplayClearConfirmation, mockDispatch);
+
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetDisplayClearConfirmation).toBeCalledTimes(1);
+
+      mockDispatch.mockClear();
+      mockSetDisplayClearConfirmation.mockClear();
+    });
+
+    it('ensures getSectionDetailsEffect works properly on success', () => {
+      const somethingScanned = {
+        type: 'CODE-128',
+        value: '12345'
+      };
+      getSectionDetailsEffect(mockValidateSession, routeProp, somethingScanned, navigationProp, mockDispatch);
+
+      expect(mockValidateSession).toBeCalledTimes(1);
+      // Unsure of how to make promise return
+      // expect(mockIsFocused).toBeCalledTimes(1);
+      // expect(mockDispatch).toBeCalledTimes(1);
+      // expect(mockNavigate).toBeCalledTimes(1);
+      // expect(mockNavigate).toBeCalledWith('FloorDetails');
+
+      mockDispatch.mockClear();
+      mockNavigate.mockClear();
+    });
+
+    it('ensures clearSectionApiEffect works properly on success, sales floor', () => {
+      const salesFloorSuccess: AsyncState = {
+        ...defaultAsyncState,
+        value: {
+          locationId: 12453,
+          target: 'items'
+        },
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      navigationProp = { isFocused: mockIsFocused };
+      const section: LocationIdName = {
+        id: 13234,
+        name: 'yes'
+      };
+
+      clearSectionApiEffect(
+        mockDispatch, navigationProp,
+        salesFloorSuccess,
+        section,
+        mockSetDisplayClearConfirmation
+      );
+      expect(mockIsFocused).toBeCalledTimes(1);
+      // called thrice because of handleClearModalClose
+      expect(mockDispatch).toBeCalledTimes(4);
+    });
+
+    it('ensures clearSectionApiEffect works properly on success, reserve', () => {
+      const salesFloorSuccess: AsyncState = {
+        ...defaultAsyncState,
+        value: {
+          locationId: 12453,
+          target: 'pallets'
+        },
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      navigationProp = { isFocused: mockIsFocused };
+      const section: LocationIdName = {
+        id: 13234,
+        name: 'yes'
+      };
+
+      clearSectionApiEffect(
+        mockDispatch, navigationProp,
+        salesFloorSuccess,
+        section,
+        mockSetDisplayClearConfirmation
+      );
+      expect(mockIsFocused).toBeCalledTimes(1);
+      // called thrice because of handleClearModalClose
+      expect(mockDispatch).toBeCalledTimes(3);
+    });
+
+    it('ensures clearSectionApiEffect works properly on failure', () => {
+      const salesFloorFail = {
+        ...defaultAsyncState,
+        value: {
+          locationId: 12453,
+          target: 'items'
+        },
+        error: {
+          status: 400,
+          message: 'bad request'
+        }
+      };
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      navigationProp = { isFocused: mockIsFocused };
+      const section: LocationIdName = {
+        id: 13234,
+        name: 'yes'
+      };
+
+      clearSectionApiEffect(
+        mockDispatch, navigationProp,
+        salesFloorFail,
+        section,
+        mockSetDisplayClearConfirmation
+      );
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(0);
+    });
   });
 
   // TODO Fix unmounted component no-op error for testing useEffect Hook
@@ -235,9 +573,19 @@ describe('Test Location Tabs', (): void => {
         useEffectHook: useEffect,
         validateSessionCall: mockValidateSession,
         isManualScanEnabled: false,
-        userFeatures: [],
+        user,
         itemPopupVisible: false,
-        sectionResult: null
+        sectionResult: null,
+        sectionIsWaiting: false,
+        section: defaultSection,
+        removeSectionApi: defaultAsyncState,
+        displayRemoveConfirmation: false,
+        setDisplayRemoveConfirmation: jest.fn(),
+        clearSectionApi: defaultAsyncState,
+        displayClearConfirmation: false,
+        setDisplayClearConfirmation: jest.fn(),
+        selectedTab: ClearLocationTarget.FLOOR,
+        setSelectedTab: jest.fn()
       };
       const scannedEventUpdate = {
         type: 'manualscan',
@@ -311,9 +659,19 @@ describe('Test Location Tabs', (): void => {
               useEffectHook={useEffect}
               validateSessionCall={mockValidateSession}
               isManualScanEnabled={false}
-              userFeatures={[]}
+              user={user}
               itemPopupVisible={false}
               sectionResult={null}
+              sectionIsWaiting={false}
+              section={defaultSection}
+              removeSectionApi={defaultAsyncState}
+              displayRemoveConfirmation={false}
+              setDisplayRemoveConfirmation={jest.fn()}
+              clearSectionApi={defaultAsyncState}
+              displayClearConfirmation={false}
+              setDisplayClearConfirmation={jest.fn()}
+              selectedTab={ClearLocationTarget.FLOOR}
+              setSelectedTab={jest.fn()}
             />
           </NavigationContainer>
         </Provider>

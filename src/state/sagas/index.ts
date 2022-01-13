@@ -20,6 +20,8 @@ import GetApprovalListService from '../../services/GetApprovalList.service';
 import UpdateApprovalListService from '../../services/UpdateApprovalList.service';
 import LocationService from '../../services/Location.service';
 import DeletePalletService from '../../services/DeletePallet.service';
+import DeleteAisleService from '../../services/DeleteAisle.service';
+import ConfigService from '../../services/Config.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
@@ -47,7 +49,13 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_PALLET_DETAILS, actions.getPalletDetails, LocationService.getPalletDetails),
   makeAsyncSaga(saga.POST_CREATE_AISLES, actions.postCreateAisles, LocationService.createLocationAislesSection),
   makeAsyncSaga(saga.CREATE_SECTIONS, actions.createSections, LocationService.createSections),
-  makeAsyncSaga(saga.DELETE_ZONE, actions.deleteZone, LocationService.deleteZone)
+  makeAsyncSaga(saga.CREATE_ZONE, actions.createZone, LocationService.createZone),
+  makeAsyncSaga(saga.DELETE_ZONE, actions.deleteZone, LocationService.deleteZone),
+  makeAsyncSaga(saga.CLEAR_LOCATION, actions.clearLocation, LocationService.clearLocation),
+  makeAsyncSaga(saga.DELETE_AISLE, actions.deleteAisle, DeleteAisleService.deleteAisle),
+  makeAsyncSaga(saga.REMOVE_SECTION, actions.removeSection, LocationService.removeSection),
+  makeAsyncSaga(saga.GET_ZONE_NAMES, actions.getZoneNames, LocationService.getZoneNames),
+  makeAsyncSaga(saga.GET_CLUB_CONFIG, actions.getClubConfig, ConfigService.getConfigByClub)
 ];
 
 export default function* rootSaga() {

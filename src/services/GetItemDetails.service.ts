@@ -1,7 +1,7 @@
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
 
-const TIMEOUT = 15000; // ms
+const TIMEOUT = 30000; // ms
 
 export default class GetItemDetailsService {
   public static getItemDetails(payload: {headers: object; id: number}) {

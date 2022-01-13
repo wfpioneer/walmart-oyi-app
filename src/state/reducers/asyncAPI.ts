@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import { makeAsyncReducer } from './generic/makeAsyncReducer';
 import * as asyncActions from '../actions/asyncAPI';
 
-// @ts-ignore
 export const asyncReducer = combineReducers({
   hitGoogle: makeAsyncReducer(asyncActions.HIT_GOOGLE),
   getItemDetails: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS),
@@ -29,7 +28,13 @@ export const asyncReducer = combineReducers({
   getPalletDetails: makeAsyncReducer(asyncActions.GET_PALLET_DETAILS),
   postCreateAisles: makeAsyncReducer(asyncActions.POST_CREATE_AISLES),
   createSections: makeAsyncReducer(asyncActions.CREATE_SECTIONS),
-  deleteZone: makeAsyncReducer(asyncActions.DELETE_ZONE)
+  postCreateZone: makeAsyncReducer(asyncActions.CREATE_ZONE),
+  deleteZone: makeAsyncReducer(asyncActions.DELETE_ZONE),
+  clearLocation: makeAsyncReducer(asyncActions.CLEAR_LOCATION),
+  deleteAisle: makeAsyncReducer(asyncActions.DELETE_AISLE),
+  removeSection: makeAsyncReducer(asyncActions.REMOVE_SECTION),
+  getZoneNames: makeAsyncReducer(asyncActions.GET_ZONE_NAMES),
+  getClubConfig: makeAsyncReducer(asyncActions.GET_CLUB_CONFIG)
 });
 
 export default asyncReducer;

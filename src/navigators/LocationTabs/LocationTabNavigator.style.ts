@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     color: COLOR.GREY_600,
     fontSize: 14
   },
-  bottomSheetView: {
+  confirmationView: {
     flexDirection: 'column'
   },
   bottomSheetModal: {

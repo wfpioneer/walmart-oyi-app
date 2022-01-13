@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
   },
   disabledContainer: {
     flex: 1,
-    opacity: 0.2
+    opacity: 0.2,
+    backgroundColor: COLOR.BLACK_TRANSPARENT_200
   },
   item: {
     backgroundColor: COLOR.WHITE,
@@ -64,6 +65,31 @@ const styles = StyleSheet.create({
     borderColor: COLOR.GREY_200,
     borderRadius: 5,
     borderWidth: 2
+  },
+  confirmationTextView: {
+    flexDirection: 'column'
+  },
+  confirmation: {
+    textAlign: 'center',
+    fontSize: 18,
+    paddingHorizontal: 15,
+    paddingTop: 15,
+    paddingBottom: 5
+  },
+  confirmationExtraText: {
+    textAlign: 'center',
+    fontSize: 14,
+    paddingHorizontal: 15,
+    paddingBottom: 15
+  },
+  buttonContainer: {
+    width: '100%',
+    alignContent: 'space-around',
+    flexDirection: 'row'
+  },
+  delButton: {
+    flex: 1,
+    paddingHorizontal: 10
   }
 });
 

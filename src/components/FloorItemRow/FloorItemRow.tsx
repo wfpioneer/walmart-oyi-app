@@ -26,7 +26,7 @@ export type FloorItemRowProps = {
 
 const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
   const { item, dispatch, navigation } = props;
-  const userFeatures = useTypedSelector(state => state.User.features);
+  const user = useTypedSelector(state => state.User);
   const location = useTypedSelector(state => state.Location);
   const itemOnPress = () => {
     dispatch(
@@ -34,6 +34,10 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
     );
     navigation.navigate('ReviewItemDetails');
   };
+
+  const locationManagementEdit = () => user.features.includes('location management edit')
+    || user.configs.locationManagementEdit;
+
   return (
     <TouchableOpacity disabled={location.itemPopupVisible} onPress={() => itemOnPress()}>
       <View style={styles.container}>
@@ -42,7 +46,7 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
             <Text style={styles.itemNbr}>
               {`${strings('ITEM.ITEM')} ${item.itemNbr}`}
             </Text>
-            {userFeatures.includes('location management edit') && (
+            {locationManagementEdit() && (
               <TouchableOpacity onPress={() => {
                 if (location.itemPopupVisible) {
                   dispatch(clearSelectedItem());

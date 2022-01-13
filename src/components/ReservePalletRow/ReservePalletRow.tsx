@@ -7,17 +7,17 @@ import moment from 'moment';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './ReservePalletRow.style';
 import { strings } from '../../locales';
-import { ReserveDetailsPallet } from '../../models/LocationItems';
+import { LocationItem, ReserveDetailsPallet } from '../../models/LocationItems';
 import { CustomModalComponent } from '../../screens/Modal/Modal';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
 import { deletePallet, getSectionDetails } from '../../state/actions/saga';
 
-export type ReservePalletRowProps = { sectionId: number, reservePallet: ReserveDetailsPallet };
+export type ReservePalletRowProps = { section: { id: number, name: string }, reservePallet: ReserveDetailsPallet };
 const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
-  const { sectionId, reservePallet } = props;
+  const { section, reservePallet } = props;
   const dispatch = useDispatch();
-  const userFeatures = useTypedSelector(state => state.User.features);
+  const user = useTypedSelector(state => state.User);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const delPalletAPI = useTypedSelector(state => state.async.deletePallet);
   const deletePalletConfirmation = () => {
@@ -27,7 +27,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
     // on api success
     if (!delPalletAPI.isWaiting && delPalletAPI.result && displayConfirmation) {
       setDisplayConfirmation(false);
-      dispatch(getSectionDetails({ sectionId: sectionId.toString() }));
+      dispatch(getSectionDetails({ sectionId: section.id.toString() }));
       dispatch({ type: 'API/DELETE_PALLET/RESET' });
     }
   }, [delPalletAPI]);
@@ -38,6 +38,9 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   };
   const createdDate = moment(reservePallet.palletCreateTS).format('YYYY-MM-DD');
 
+  const locationManagementEdit = () => user.features.includes('location management edit')
+    || user.configs.locationManagementEdit;
+
   // TODO Map Pallet and Reserve Response and pass the array into this Component
   return (
     <View style={styles.container}>
@@ -46,7 +49,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
           <Text style={styles.textHeader}>
             {`${strings('LOCATION.PALLET')} ${reservePallet.id}`}
           </Text>
-          { userFeatures.includes('location management edit') && (
+          { locationManagementEdit() && (
             <TouchableOpacity onPress={() => deletePalletConfirmation()}>
               <View>
                 <Image
@@ -92,19 +95,22 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
         ) : (
           <>
             <Text style={styles.message}>
-              {`${strings('LOCATION.PALLET_DELETE_CONFIRMATION')}${reservePallet.id}`}
+              {`${strings('LOCATION.PALLET_DELETE_CONFIRMATION', {
+                pallet: reservePallet.id.toString(),
+                section: section.name
+              })}`}
             </Text>
             <View style={styles.buttonContainer}>
               <Button
                 style={styles.delButton}
                 title={strings('GENERICS.CANCEL')}
-                backgroundColor={COLOR.TRACKER_RED}
+                backgroundColor={COLOR.MAIN_THEME_COLOR}
                 onPress={() => setDisplayConfirmation(false)}
               />
               <Button
                 style={styles.delButton}
                 title={delPalletAPI.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
-                backgroundColor={COLOR.MAIN_THEME_COLOR}
+                backgroundColor={COLOR.TRACKER_RED}
                 onPress={deleteConfirmed}
               />
             </View>

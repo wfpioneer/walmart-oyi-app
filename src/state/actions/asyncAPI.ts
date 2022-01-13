@@ -75,5 +75,23 @@ export const postCreateAisles = makeAsyncActionCreators(POST_CREATE_AISLES);
 export const CREATE_SECTIONS = makeAsyncActionTypes('API/CREATE_SECTIONS');
 export const createSections = makeAsyncActionCreators(CREATE_SECTIONS);
 
+export const CREATE_ZONE = makeAsyncActionTypes('API/CREATE_ZONE');
+export const createZone = makeAsyncActionCreators(CREATE_ZONE);
+
 export const DELETE_ZONE = makeAsyncActionTypes('API/DELETE_ZONE');
 export const deleteZone = makeAsyncActionCreators(DELETE_ZONE);
+
+export const CLEAR_LOCATION = makeAsyncActionTypes('API/CLEAR_LOCATION');
+export const clearLocation = makeAsyncActionCreators(CLEAR_LOCATION);
+
+export const DELETE_AISLE = makeAsyncActionTypes('API/DELETE_AISLE');
+export const deleteAisle = makeAsyncActionCreators(DELETE_AISLE);
+
+export const REMOVE_SECTION = makeAsyncActionTypes('API/REMOVE_SECTION');
+export const removeSection = makeAsyncActionCreators(REMOVE_SECTION);
+
+export const GET_ZONE_NAMES = makeAsyncActionTypes('API/GET_ZONE_NAMES');
+export const getZoneNames = makeAsyncActionCreators(GET_ZONE_NAMES);
+
+export const GET_CLUB_CONFIG = makeAsyncActionTypes('API/GET_CLUB_CONFIG');
+export const getClubConfig = makeAsyncActionCreators(GET_CLUB_CONFIG);

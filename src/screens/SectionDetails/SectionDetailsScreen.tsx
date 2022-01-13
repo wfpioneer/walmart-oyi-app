@@ -11,8 +11,8 @@ import { FlatList } from 'react-native-gesture-handler';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
-import { LocationItem, SectionDetailsItem } from '../../models/LocationItems';
-import { deleteLocation, getSectionDetails } from '../../state/actions/saga';
+import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
+import { deleteLocation, getPalletDetails, getSectionDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import styles from './SectionDetailsScreen.style';
 import COLOR from '../../themes/Color';
@@ -22,8 +22,9 @@ import Button from '../../components/buttons/Button';
 import { CustomModalComponent } from '../Modal/Modal';
 import { DELETE_LOCATION, GET_PALLET_DETAILS, GET_SECTION_DETAILS } from '../../state/actions/asyncAPI';
 import {
-  hideItemPopup, selectAisle, selectSection, selectZone
+  hideItemPopup, selectAisle, selectSection, selectZone, setPalletIds
 } from '../../state/actions/Location';
+import { setSelectedLocation, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import BottomSheetEditCard from '../../components/BottomSheetEditCard/BottomSheetEditCard';
@@ -37,14 +38,17 @@ interface SectionDetailsProps {
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   scannedEvent: { type: string, value: string };
-  addAPI: AsyncState;
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
   selectedItem: SectionDetailsItem | null;
   selectedSection: LocationIdName;
 }
 
-export const handleDeleteItem = (selectedItem: SectionDetailsItem | null, sectionId: number, dispatch: Dispatch<any>): void => {
+export const handleDeleteItem = (
+  selectedItem: SectionDetailsItem | null,
+  sectionId: number,
+  dispatch: Dispatch<any>
+): void => {
   if (selectedItem) {
     dispatch(
       deleteLocation({
@@ -57,6 +61,48 @@ export const handleDeleteItem = (selectedItem: SectionDetailsItem | null, sectio
   }
 };
 
+export const handleEditItem = (
+  selectedItem: SectionDetailsItem | null,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  selectedZone: LocationIdName,
+  selectedAisle: LocationIdName,
+  selectedSection: LocationIdName
+): void => {
+  const currentSection = {
+    zoneId: selectedZone.id,
+    aisleId: selectedAisle.id,
+    sectionId: selectedSection.id,
+    zoneName: selectedZone.name,
+    aisleName: selectedAisle.name,
+    sectionName: selectedSection.name,
+    locationName: `${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`,
+    type: '8',
+    typeNbr: 8
+  };
+  dispatch(setupScreen(
+    selectedItem ? selectedItem.itemNbr : 0,
+    selectedItem ? selectedItem.upcNbr : '',
+    [currentSection],
+    [],
+    null,
+    -999,
+    false,
+    false
+  ));
+  dispatch(setSelectedLocation(currentSection));
+  dispatch(hideItemPopup());
+  navigation.navigate('EditLocation');
+};
+
+export const palletDataToIds = (palletData: SectionDetailsPallet[]): number[] => {
+  let palletIds = [];
+  palletIds = palletData.map(
+    (item: Omit<SectionDetailsPallet, 'items'>) => item.palletId
+  );
+  return palletIds;
+};
+
 export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element => {
   const {
     getSectionDetailsApi,
@@ -66,7 +112,6 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
     trackEventCall,
     useEffectHook,
     scannedEvent,
-    addAPI,
     displayConfirmation,
     setDisplayConfirmation,
     selectedItem,
@@ -74,32 +119,37 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
   } = props;
 
   // Navigation Listener
-  useEffectHook(() => {
-    // Resets Get SectionDetails api response data when navigating off-screen
-    navigation.addListener('beforeRemove', () => {
-      dispatch({ type: GET_SECTION_DETAILS.RESET });
-    });
-  }, []);
+  // Resets Get SectionDetails api response data when navigating off-screen
+  useEffectHook(() => navigation.addListener('beforeRemove', () => {
+    dispatch(hideItemPopup());
+    dispatch({ type: GET_SECTION_DETAILS.RESET });
+  }), []);
 
   // Get Section Details Api
   useEffectHook(() => {
     // on api success
     if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.result) {
-      // Clear Pallet Data on on success ( Case when scanning a new section, stale data could remain)
+      // Clear Pallet Data on on success ( Case for when scanning a new section, stale data could remain)
       dispatch({ type: GET_PALLET_DETAILS.RESET });
       // Update Location State on Success
-      switch (getSectionDetailsApi.result.status) {
-        case 200:
-        case 207:
-          // eslint-disable-next-line no-case-declarations
-          const { zone, aisle, section } = getSectionDetailsApi.result.data;
-          dispatch(selectZone(zone.id || 0, zone.name || ''));
-          dispatch(selectAisle(aisle.id || 0, aisle.name || ''));
-          dispatch(selectSection(section.id, section.name));
-          break;
-        case 204:
-          break;
-        default: break;
+      if (getSectionDetailsApi.result.status !== 204) {
+        const {
+          pallets, zone, aisle, section
+        } = getSectionDetailsApi.result.data;
+        const palletIdList = palletDataToIds(pallets.palletData);
+        dispatch(selectZone(zone.id, zone.name));
+        dispatch(selectAisle(aisle.id, aisle.name));
+        dispatch(selectSection(section.id, section.name));
+        dispatch(setPalletIds(palletIdList));
+        if (palletIdList.length !== 0) {
+          dispatch(getPalletDetails({ palletIds: palletIdList }));
+        }
+      }
+    }
+
+    if (!getSectionDetailsApi.isWaiting && getSectionDetailsApi.error) {
+      if (!navigation.isFocused()) {
+        navigation.navigate('FloorDetails');
       }
     }
   }, [getSectionDetailsApi]);
@@ -199,8 +249,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
                 {
                   itemNbr: selectedItem ? selectedItem.itemNbr : '',
                   itemName: selectedItem ? selectedItem.itemDesc : ''
-                })
-              }
+                })}
             </Text>
             <View style={styles.buttonContainer}>
               <Button
@@ -229,13 +278,18 @@ const SectionDetails = (): JSX.Element => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const addAPI = useTypedSelector(state => state.async.addPallet);
-  const { itemPopupVisible, selectedItem, selectedSection } = useTypedSelector(state => state.Location);
+  const {
+    itemPopupVisible,
+    selectedItem,
+    selectedZone,
+    selectedAisle,
+    selectedSection
+  } = useTypedSelector(state => state.Location);
   const snapPoints = useMemo(() => ['40%'], []);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   useEffect(() => {
-    if (navigation.isFocused() && bottomSheetModalRef.current) {
+    if (bottomSheetModalRef.current) {
       if (itemPopupVisible) {
         bottomSheetModalRef.current.present();
       } else {
@@ -254,7 +308,6 @@ const SectionDetails = (): JSX.Element => {
         <SectionDetailsScreen
           getSectionDetailsApi={getSectionDetailsApi}
           deleteLocationApi={deleteLocationApi}
-          addAPI={addAPI}
           dispatch={dispatch}
           navigation={navigation}
           trackEventCall={trackEvent}
@@ -276,7 +329,9 @@ const SectionDetails = (): JSX.Element => {
         <BottomSheetEditCard
           isVisible={true}
           text={strings('LOCATION.EDIT_ITEM')}
-          onPress={() => { }}
+          onPress={() => {
+            handleEditItem(selectedItem, dispatch, navigation, selectedZone, selectedAisle, selectedSection);
+          }}
         />
         <BottomSheetSectionRemoveCard
           isVisible={true}
