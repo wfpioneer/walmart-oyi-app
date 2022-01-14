@@ -142,7 +142,8 @@ export default {
   },
   PALLET: {
     ENTER_PALLET_ID: 'Type a pallet ID',
-    SCAN_PALLET: 'Scan a pallet'
+    SCAN_PALLET: 'Scan a pallet',
+    MANAGE_PALLET: 'Manage Pallet'
   },
   LOCATION: {
     TITLE: 'All locations',
