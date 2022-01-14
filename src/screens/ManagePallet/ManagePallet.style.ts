@@ -2,26 +2,56 @@ import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
 export default StyleSheet.create({
-  scanContainer: {
+  safeAreaView: {
+    flex: 1
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 10,
+    marginBottom: 5
+  },
+  headerItem: {
     flexDirection: 'column',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 370
+    alignItems: 'center'
   },
-  textInput: {
-    paddingLeft: 10,
-    color: COLOR.BLACK,
-    borderWidth: 1
+  headerText: {
+    fontSize: 18,
+    fontWeight: 'bold'
   },
-  scanText: {
-    paddingTop: 30
+  headerItemText: {
+    fontSize: 16
   },
-  orText: {
-    paddingTop: 20
+  instructionLabel: {
+    borderColor: COLOR.BLACK,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    padding: 5,
+    alignItems: 'center'
   },
-  textView: {
-    width: 200,
-    paddingTop: 20
+  instructionLabelText: {
+    fontSize: 16
+  },
+  deletedBanner: {
+    backgroundColor: COLOR.DEEP_RED,
+    padding: 5,
+    alignItems: 'center'
+  },
+  deleteBannerText: {
+    fontSize: 16,
+    color: COLOR.WHITE
+  },
+  bodyContainer: {
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
+    flex: 0.9,
+    marginTop: 5
+  },
+  buttonContainer: {
+    flex: 0.1,
+    marginBottom: 15
+  },
+  saveButton: {
+    margin: 15
   }
 });
