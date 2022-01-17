@@ -68,7 +68,7 @@ export const PalletManagementNavigatorStack = (props: PalletManageMentNavigatorP
         name="PalletManagement"
         component={PalletManagement}
         options={{
-          headerTitle: 'Pallet Management'
+          headerTitle: strings('PALLET.PALLET_MANAGEMENT')
         }}
       />
       <Stack.Screen

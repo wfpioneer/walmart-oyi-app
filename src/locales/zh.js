@@ -140,6 +140,7 @@ export default {
     SOME_PRINTS_FAILED: '有些商品打印失败'
   },
   PALLET: {
+    PALLET_MANAGEMENT: 'Pallet Management', // TODO Mandarin Translation
     ENTER_PALLET_ID: 'Type a pallet ID', // TODO Mandarin Translation
     SCAN_PALLET: 'Scan a pallet', // TODO Mandarin Translation
     MANAGE_PALLET: 'Manage Pallet', // TODO Mandarin Translation

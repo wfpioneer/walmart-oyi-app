@@ -141,6 +141,7 @@ export default {
     SOME_PRINTS_FAILED: 'Some items failed to print'
   },
   PALLET: {
+    PALLET_MANAGEMENT: 'Pallet Management',
     ENTER_PALLET_ID: 'Type a pallet ID',
     SCAN_PALLET: 'Scan a pallet',
     MANAGE_PALLET: 'Manage Pallet',
