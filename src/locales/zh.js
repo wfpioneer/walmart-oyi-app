@@ -141,7 +141,10 @@ export default {
   },
   PALLET: {
     ENTER_PALLET_ID: 'Type a pallet ID', // TODO Mandarin Translation
-    SCAN_PALLET: 'Scan a pallet' // TODO Mandarin Translation
+    SCAN_PALLET: 'Scan a pallet', // TODO Mandarin Translation
+    PALLET_ID: 'Pallet ID', // TODO Mandarin Translation
+    EXPIRATION: 'Expiration Date', // TODO Mandarin Translation
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet' // TODO Mandarin Translation
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -201,7 +204,8 @@ export default {
     PALLET_ERROR: '卡板未找到/空卡板',
     PALLET_NOT_FOUND: '因未找到卡板/卡板为空系统报错',
     PALLET_ADDED: '卡板添加成功',
-    PALLET_DELETE_CONFIRMATION: 'Are you sure you want to remove Pallet %{pallet} from Section %{section}?', // TODO mandarin translation
+    PALLET_DELETE_CONFIRMATION:
+      'Are you sure you want to remove Pallet %{pallet} from Section %{section}?', // TODO mandarin translation
     FLOOR_EMPTY: '楼面清单无商品',
     RESERVE_EMPTY: '存储区域无卡板',
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
@@ -235,8 +239,10 @@ export default {
     CLEAR_SECTION_SALES_FLOOR_MESSAGE: '将清除此货架标签下所有楼面商品',
     CLEAR_SECTION_RESERVE_MESSAGE: '将清除此货架标签下所有卡板',
     CLEAR_SECTION_WONT_DELETE: '将不删除此货架标签',
-    CLEAR_SECTION_SALES_FLOOR_SUCCEED: 'All sales floor items successfully cleared from this section', // TODO CN translation
-    CLEAR_SECTION_RESERVE_SUCCEED: 'All reserve pallets successfully cleared from this section', // TODO CN translation
+    CLEAR_SECTION_SALES_FLOOR_SUCCEED:
+      'All sales floor items successfully cleared from this section', // TODO CN translation
+    CLEAR_SECTION_RESERVE_SUCCEED:
+      'All reserve pallets successfully cleared from this section', // TODO CN translation
     CLEAR_SECTION_FAIL: '清除货架标签信息时出错，请重试',
     REMOVE_AISLE_CONFIRMATION: '确定移除此通道？',
     REMOVE_AISLE_WILL_REMOVE_SECTIONS: '将移除此通道下所有货架标签信息',
@@ -248,7 +254,8 @@ export default {
     ZONE_NAME_ERROR: '重置区域名称出错，\n请重试',
     SELECT_ZONE: '选择区域',
     CLEAR_AISLE_ITEMS_CONFIRMATION: '确定要移除此通道所有商品吗？',
-    CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE: '请选择楼面，高货架或者两个都选进行清除',
+    CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE:
+      '请选择楼面，高货架或者两个都选进行清除',
     CLEAR_AISLE_ITEMS_WONT_DELETE: '删除此通道的货架信息',
     CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
     CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
