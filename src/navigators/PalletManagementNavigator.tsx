@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { ManagePallet } from '../screens/ManagePallet/ManagePallet';
 import PalletManagement from '../screens/PalletManagement/PalletManagement';
 import COLOR from '../themes/Color';
 
@@ -19,6 +20,13 @@ export const PalletManagementNavigatorStack = (): JSX.Element => (
       component={PalletManagement}
       options={{
         headerTitle: 'Pallet Management'
+      }}
+    />
+    <Stack.Screen
+      name="ManagePallet"
+      component={ManagePallet}
+      options={{
+        headerTitle: 'Manage Pallet'
       }}
     />
   </Stack.Navigator>

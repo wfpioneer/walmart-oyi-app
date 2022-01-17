@@ -80,9 +80,9 @@ export const PalletManagementScreen = (
     // on api success
     if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
       const palletDetails = getPalletDetailsApi.result.data.pallets[0];
-      // Navigate to ManagePallet
       dispatch(setPalletItems(palletDetails.items));
       dispatch(setPalletInfo(palletDetails));
+      navigation.navigate('ManagePallet');
     }
     if (getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
       // react-native-toast-message

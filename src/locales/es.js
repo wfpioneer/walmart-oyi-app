@@ -141,7 +141,9 @@ export default {
   },
   PALLET: {
     ENTER_PALLET_ID: 'Type a pallet ID', // TODO Spanish translation
-    SCAN_PALLET: 'Scan a pallet' // TODO Spanish translation
+    SCAN_PALLET: 'Scan a pallet', // TODO Spanish translation
+    PALLET_ID: 'Pallet ID', // TODO Spanish translation
+    EXPIRATION: 'Expiration Date' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',

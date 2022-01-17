@@ -41,8 +41,8 @@ export default {
     GOAL: 'Goal',
     VERSION: 'Version',
     BARCODE_SCAN_ERROR: 'This barcode type is not allowed',
-    ITEM: 'item',
-    ITEMS: 'items',
+    ITEM: 'Item',
+    ITEMS: 'Items',
     TOOLS: 'Tools',
     OR: 'OR'
   },
@@ -142,7 +142,9 @@ export default {
   },
   PALLET: {
     ENTER_PALLET_ID: 'Type a pallet ID',
-    SCAN_PALLET: 'Scan a pallet'
+    SCAN_PALLET: 'Scan a pallet',
+    PALLET_ID: 'Pallet ID',
+    EXPIRATION: 'Expiration Date'
   },
   LOCATION: {
     TITLE: 'All locations',
