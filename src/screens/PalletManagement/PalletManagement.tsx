@@ -27,11 +27,9 @@ import { getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
-import {
-  setPalletInfo,
-  setPalletItems
-} from '../../state/actions/PalletManagement';
+import { setupPallet } from '../../state/actions/PalletManagement';
 import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
+import { Pallet } from '../../models/PalletManagementTypes';
 
 interface PalletManagementProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
@@ -103,24 +101,26 @@ export const PalletManagementScreen = (
   useEffectHook(() => {
     // on api success
     if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
-      const palletDetails = getPalletDetailsApi.result.data.pallets[0];
-      dispatch(setPalletItems(palletDetails.items));
-      dispatch(setPalletInfo(palletDetails));
+      const {
+        id, createDate, expirationDate, items
+      } = getPalletDetailsApi.result.data.pallets[0];
+      const palletDetails: Pallet = {
+        palletInfo: {
+          id,
+          createDate,
+          expirationDate
+        },
+        items
+      };
+      dispatch(setupPallet(palletDetails));
       navigation.navigate('ManagePallet');
     }
     // on api error
     if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
-      // react-native-toast-message
       Toast.show({
         type: 'error',
         text1: strings('PALLET.PALLET_DETAILS_ERROR'),
-        text2: strings('GENERICS.RETRY').concat('?'),
-        onPress: () => dispatch(
-          getPalletDetails({
-            palletIds: [Number.parseInt(searchText, 10)],
-            isAllItems: true
-          })
-        ),
+        text2: strings('GENERICS.TRY_AGAIN'),
         visibilityTime: 4000,
         position: 'bottom'
       });
@@ -153,15 +153,13 @@ export const PalletManagementScreen = (
       <View style={styles.textView}>
         <TextInput
           value={searchText}
-          onChangeText={(text: string) => setSearchText(text.replace(nonNumRegex, ''))} // add regex
+          onChangeText={(text: string) => setSearchText(text.replace(nonNumRegex, ''))}
           style={styles.textInput}
           keyboardType="numeric"
           placeholder={strings('PALLET.ENTER_PALLET_ID')}
           onSubmitEditing={() => onSubmit(searchText, dispatch)}
         />
       </View>
-      {/* TODO Replace All instances of SnackBar with RN-Toast-Message */}
-      <Toast />
     </View>
   );
 };

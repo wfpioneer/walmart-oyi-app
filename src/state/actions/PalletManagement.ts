@@ -1,18 +1,16 @@
-import { PalletInfo, PalletItems } from '../../models/PalletItem';
+import { Pallet } from '../../models/PalletManagementTypes';
 
-export const SET_PALLET_INFO = 'PALLET/SET_PALLET_INFO';
-export const SET_PALLET_ITEMS = 'PALLET/SET_PALLET_ITEMS';
+export const SETUP_PALLET = 'PALLET_MANAGEMENT/SETUP_PALLET';
+export const CLEAR_PALLET_MANAGEMENT = 'PALLET_MANAGEMENT/CLEAR_PALLET_MANAGEMENT';
 
-export const setPalletInfo = (palletInfo: PalletInfo) => ({
-  type: SET_PALLET_INFO,
-  payload: palletInfo
+export const setupPallet = (pallet: Pallet) => ({
+  type: SETUP_PALLET,
+  payload: pallet
 } as const);
 
-export const setPalletItems = (palletItems: PalletItems[]) => ({
-  type: SET_PALLET_ITEMS,
-  payload: palletItems
+export const clearPalletManagement = () => ({
+  type: CLEAR_PALLET_MANAGEMENT
 } as const);
-
 export type Actions =
-  ReturnType<typeof setPalletInfo>
-  | ReturnType<typeof setPalletItems>
+  ReturnType<typeof setupPallet>
+| ReturnType<typeof clearPalletManagement>;

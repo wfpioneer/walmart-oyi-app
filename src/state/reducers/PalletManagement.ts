@@ -1,13 +1,13 @@
-import { PalletInfo, PalletItems } from '../../models/PalletItem';
+import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 import {
   Actions,
-  SET_PALLET_INFO,
-  SET_PALLET_ITEMS
+  CLEAR_PALLET_MANAGEMENT,
+  SETUP_PALLET
 } from '../actions/PalletManagement';
 
 interface PalletManagementState {
   palletInfo: PalletInfo;
-  items: PalletItems[];
+  items: PalletItem[];
 }
 
 const initialState: PalletManagementState = {
@@ -24,24 +24,17 @@ export const PalletManagement = (
   action: Actions
 ): PalletManagementState => {
   switch (action.type) {
-    case SET_PALLET_INFO: {
-      const { createDate, expirationDate, id } = action.payload;
+    case SETUP_PALLET: {
       return {
-        ...state,
-        palletInfo: {
-          createDate,
-          expirationDate,
-          id
-        }
+        ...initialState,
+        ...action.payload
       };
     }
-    case SET_PALLET_ITEMS: {
-      return {
-        ...state,
-        items: action.payload
-      };
-    }
+    case CLEAR_PALLET_MANAGEMENT:
+      return initialState;
     default:
-      return state;
+      return {
+        ...state
+      };
   }
 };

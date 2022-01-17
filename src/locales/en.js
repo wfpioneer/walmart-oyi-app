@@ -145,7 +145,7 @@ export default {
     SCAN_PALLET: 'Scan a pallet',
     PALLET_ID: 'Pallet ID',
     EXPIRATION: 'Expiration Date',
-    PALLET_DETAILS_ERROR: 'There was an error retrieving Pallet Info, Please try again.'
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet'
   },
   LOCATION: {
     TITLE: 'All locations',

@@ -144,7 +144,7 @@ export default {
     SCAN_PALLET: 'Scan a pallet', // TODO Spanish translation
     PALLET_ID: 'Pallet ID', // TODO Spanish translation
     EXPIRATION: 'Expiration Date', // TODO Spanish translation
-    PALLET_DETAILS_ERROR: 'There was an error retrieving Pallet Info, Please try again.' // TODO Spanish translation
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',

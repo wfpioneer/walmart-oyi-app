@@ -85,6 +85,5 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
       value=""
     />
   </View>
-  <Toast />
 </View>
 `;
