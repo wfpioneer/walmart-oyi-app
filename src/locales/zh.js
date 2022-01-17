@@ -143,7 +143,8 @@ export default {
     ENTER_PALLET_ID: 'Type a pallet ID', // TODO Mandarin Translation
     SCAN_PALLET: 'Scan a pallet', // TODO Mandarin Translation
     PALLET_ID: 'Pallet ID', // TODO Mandarin Translation
-    EXPIRATION: 'Expiration Date' // TODO Mandarin Translation
+    EXPIRATION: 'Expiration Date', // TODO Mandarin Translation
+    PALLET_DETAILS_ERROR: 'There was an error retrieving Pallet Info, Please try again.' // TODO Mandarin Translation
   },
   LOCATION: {
     TITLE: '所有位置',

@@ -144,7 +144,8 @@ export default {
     ENTER_PALLET_ID: 'Type a pallet ID',
     SCAN_PALLET: 'Scan a pallet',
     PALLET_ID: 'Pallet ID',
-    EXPIRATION: 'Expiration Date'
+    EXPIRATION: 'Expiration Date',
+    PALLET_DETAILS_ERROR: 'There was an error retrieving Pallet Info, Please try again.'
   },
   LOCATION: {
     TITLE: 'All locations',

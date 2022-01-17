@@ -17,6 +17,7 @@ import {
   useRoute
 } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+import Toast from 'react-native-toast-message';
 import COLOR from '../../themes/Color';
 import styles from './PalletManagement.style';
 import { strings } from '../../locales';
@@ -84,8 +85,17 @@ export const PalletManagementScreen = (
       dispatch(setPalletInfo(palletDetails));
       navigation.navigate('ManagePallet');
     }
-    if (getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
+    // on api error
+    if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
       // react-native-toast-message
+      Toast.show({
+        type: 'error',
+        text1: strings('PALLET.PALLET_DETAILS_ERROR'),
+        text2: strings('GENERICS.RETRY').concat('?'),
+        onPress: () => dispatch(getPalletDetails({ palletIds: [Number.parseInt(searchText, 10)] })),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
     }
   }, [getPalletDetailsApi]);
 
@@ -128,6 +138,8 @@ export const PalletManagementScreen = (
           onSubmitEditing={onSubmit}
         />
       </View>
+      {/* TODO Replace All instances of SnackBar with RN-Toast-Message */}
+      <Toast />
     </View>
   );
 };
