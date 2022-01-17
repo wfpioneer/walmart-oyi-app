@@ -1,6 +1,6 @@
 {
   "name": "OYI",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -48,6 +48,7 @@
     "react-native-svg": "^12.1.0",
     "react-native-svg-charts": "^5.4.0",
     "react-native-tab-view": "^3.0.1",
+    "react-native-toast-message": "^2.1.1",
     "react-native-vector-icons": "^8.1.0",
     "react-native-wm-barcode": "^2.29.0",
     "react-native-wmsso": "^1.4.6",

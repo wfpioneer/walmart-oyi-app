@@ -34,6 +34,7 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         ...initialState,
         ...action.payload
       };
+    }
     case CLEAR_PALLET_MANAGEMENT:
       return initialState;
     default:

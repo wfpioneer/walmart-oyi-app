@@ -1,12 +1,12 @@
 export interface PalletItem {
-  upc: string;
+  upcNbr: string;
   itemNbr: number | string;
   price: number;
-  description: string;
-  category: number;
-  categoryDesc: string;
+  itemDesc: string;
+  category?: number;
+  categoryDesc?: string;
   quantity: number;
-  newQuantity: number;
+  newQuantity?: number;
   deleted: boolean;
   added: boolean;
 }
@@ -17,7 +17,8 @@ export interface CombinePallet {
 }
 
 export interface PalletInfo {
-  palletId: number;
+  id: number;
+  createDate?: string;
   expirationDate?: string;
 }
 

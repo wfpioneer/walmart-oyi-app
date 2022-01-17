@@ -41,8 +41,8 @@ export default {
     GOAL: 'Goal',
     VERSION: 'Version',
     BARCODE_SCAN_ERROR: 'This barcode type is not allowed',
-    ITEM: 'item',
-    ITEMS: 'items',
+    ITEM: 'Item',
+    ITEMS: 'Items',
     TOOLS: 'Tools',
     OR: 'OR'
   },
@@ -150,7 +150,9 @@ export default {
     SCAN_INSTRUCTIONS: 'Scan UPC to add an item',
     ITEM_DELETE: '1 item pending deletion',
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion',
-    SAVE: 'SAVE'
+    SAVE: 'SAVE',
+    EXPIRATION: 'Expiration Date',
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet'
   },
   LOCATION: {
     TITLE: 'All locations',
