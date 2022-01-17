@@ -99,7 +99,7 @@ export const PalletManagementScreen = (
     };
   }, []);
 
-  // GetPalletUpcs Api
+  // Get Pallet Details Api
   useEffectHook(() => {
     // on api success
     if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
