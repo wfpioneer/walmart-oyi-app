@@ -76,7 +76,9 @@ export const printLocationLabel = (payload: {
 export const addPallet = (payload: any) => ({ type: ADD_PALLET, payload } as const);
 export const deletePallet = (payload: any) => ({ type: DELETE_PALLET, payload } as const);
 export const createSections = (payload: any) => ({ type: CREATE_SECTIONS, payload } as const);
-export const getPalletDetails = (payload: {palletIds: number[]}) => ({ type: GET_PALLET_DETAILS, payload } as const);
+export const getPalletDetails = (payload: {
+  palletIds: number[], isAllItems?: boolean
+}) => ({ type: GET_PALLET_DETAILS, payload } as const);
 export const deleteZone = (payload: number) => ({ type: DELETE_ZONE, payload } as const);
 export const postCreateAisles = (payload: {
   aislesToCreate: CreateAisleRequest

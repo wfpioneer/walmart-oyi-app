@@ -48,7 +48,10 @@ const nonNumRegex = new RegExp(/[^0-9]/g);
 export const onSubmit = (searchText: string, dispatch: Dispatch<any>): void => {
   if (searchText.match(palletIDRegex)) {
     dispatch(
-      getPalletDetails({ palletIds: [Number.parseInt(searchText, 10)] })
+      getPalletDetails({
+        palletIds: [Number.parseInt(searchText, 10)],
+        isAllItems: true
+      })
     );
   }
 };
@@ -85,7 +88,9 @@ export const PalletManagementScreen = (
             type: scan.type
           });
           setSearchText(scan.value);
-          dispatch(getPalletDetails({ palletIds: [scan.value] }));
+          dispatch(
+            getPalletDetails({ palletIds: [scan.value], isAllItems: true })
+          );
         });
       }
     });
@@ -110,7 +115,12 @@ export const PalletManagementScreen = (
         type: 'error',
         text1: strings('PALLET.PALLET_DETAILS_ERROR'),
         text2: strings('GENERICS.RETRY').concat('?'),
-        onPress: () => dispatch(getPalletDetails({ palletIds: [Number.parseInt(searchText, 10)] })),
+        onPress: () => dispatch(
+          getPalletDetails({
+            palletIds: [Number.parseInt(searchText, 10)],
+            isAllItems: true
+          })
+        ),
         visibilityTime: 4000,
         position: 'bottom'
       });

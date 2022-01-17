@@ -1,4 +1,3 @@
-import { create } from 'react-test-renderer';
 import { ReserveDetailsPallet } from '../models/LocationItems';
 import { mockLocationDetails } from './locationDetails';
 

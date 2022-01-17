@@ -48,12 +48,14 @@ export default class LocationService {
     );
   }
 
-  public static getPalletDetails(payload: { palletIds: number[] }): Promise<AxiosResponse<unknown>> {
+  public static getPalletDetails(payload: {
+    palletIds: number[], isAllItems?: boolean
+  }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     const queryParam = payload.palletIds.join(',');
-
+    const allItems = payload.isAllItems || false;
     return Request.get(
-      `${urls.locationUrl}/pallet/items/itemdetails?palletIds=${queryParam}`
+      `${urls.locationUrl}/pallet/items/itemdetails?palletIds=${queryParam}&allItems=${allItems}`,
     );
   }
 
