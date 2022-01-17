@@ -84,7 +84,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           ) : null}
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>
-              {strings('PALLET.ITEMS')}
+              {strings('LOCATION.ITEMS')}
             </Text>
             <Text style={styles.headerItemText}>
               {items.length}
@@ -115,7 +115,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       {enableSave(items) ? (
         <View style={styles.buttonContainer}>
           <Button
-            title={strings('PALLET.SAVE')}
+            title={strings('GENERICS.SAVE')}
             style={styles.saveButton}
             backgroundColor={COLOR.GREEN}
           />
