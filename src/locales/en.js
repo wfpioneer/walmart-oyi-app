@@ -142,7 +142,10 @@ export default {
   },
   PALLET: {
     ENTER_PALLET_ID: 'Type a pallet ID',
-    SCAN_PALLET: 'Scan a pallet'
+    SCAN_PALLET: 'Scan a pallet',
+    PRINT_PALLET: 'Print pallet',
+    COMBINE_PALLETS: 'Combine pallets',
+    CLEAR_PALLET: 'Clear pallets'
   },
   LOCATION: {
     TITLE: 'All locations',

@@ -141,7 +141,10 @@ export default {
   },
   PALLET: {
     ENTER_PALLET_ID: 'Type a pallet ID', // TODO Spanish translation
-    SCAN_PALLET: 'Scan a pallet' // TODO Spanish translation
+    SCAN_PALLET: 'Scan a pallet', // TODO MX translations
+    PRINT_PALLET: 'Print pallet', // TODO MX translations
+    COMBINE_PALLETS: 'Combine pallets', // TODO MX translations
+    CLEAR_PALLET: 'Clear pallets' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',

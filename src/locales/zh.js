@@ -141,7 +141,10 @@ export default {
   },
   PALLET: {
     ENTER_PALLET_ID: 'Type a pallet ID', // TODO Mandarin Translation
-    SCAN_PALLET: 'Scan a pallet' // TODO Mandarin Translation
+    SCAN_PALLET: 'Scan a pallet', // TODO CN translation
+    PRINT_PALLET: 'Print pallet', // TODO CN translation
+    COMBINE_PALLETS: 'Combine pallets', // TODO CN translation
+    CLEAR_PALLET: 'Clear pallets' // TODO Mandarin Translation
   },
   LOCATION: {
     TITLE: '所有位置',

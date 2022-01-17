@@ -7,6 +7,7 @@ import { Global } from './Global';
 import { worklist } from './Worklist';
 import { ItemDetailScreen } from './ItemDetailScreen';
 import { Print } from './Print';
+import { Pallets } from './PalletManagement';
 import { Location } from './Location';
 import { SessionTimeout } from './SessionTimeout';
 import { Approvals } from './Approvals';
@@ -22,6 +23,7 @@ const RootReducer = combineReducers({
   Global,
   Worklist: worklist,
   Print,
+  Pallets,
   ItemDetailScreen,
   Location,
   SessionTimeout,
