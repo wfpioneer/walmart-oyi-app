@@ -40,6 +40,7 @@ const tempItemCard = ({ item }: { item: PalletItem }) => {
 
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const { useEffectHook, isManualScanEnabled, palletInfo, items } = props;
+  const { palletId, expirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
   // Scanner listener
   useEffectHook(() => {
@@ -60,17 +61,17 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               {strings('PALLET.PALLET_ID')}
             </Text>
             <Text style={styles.headerItemText}>
-              {palletInfo.palletId ? palletInfo.palletId : null}
+              {palletId}
             </Text>
           </View>
-          <View style={styles.headerItem}>
+          {expirationDate && expirationDate.length > 0 ? <View style={styles.headerItem}>
             <Text style={styles.headerText}>
               {strings('PALLET.EXPIRATION_DATE')}
             </Text>
             <Text style={styles.headerItemText}>
-              {palletInfo.expirationDate ? palletInfo.expirationDate : null}
+              {expirationDate}
             </Text>
-          </View>
+          </View> : null}
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>
               {strings('PALLET.ITEMS')}

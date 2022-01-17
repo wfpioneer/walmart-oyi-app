@@ -7,7 +7,7 @@ export default StyleSheet.create({
   },
   headerContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     marginHorizontal: 10,
     marginBottom: 5
   },

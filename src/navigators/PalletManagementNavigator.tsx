@@ -64,13 +64,13 @@ export const PalletManagementNavigatorStack = (props: PalletManageMentNavigatorP
 
       }}
     >
-     {/* <Stack.Screen
+     <Stack.Screen
         name="PalletManagement"
         component={PalletManagement}
         options={{
           headerTitle: 'Pallet Management'
         }}
-      />*/}
+      />
       <Stack.Screen
         name="ManagePallet"
         component={ManagePallet}
