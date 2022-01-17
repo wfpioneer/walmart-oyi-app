@@ -31,7 +31,8 @@ export interface SectionDetailsPallet {
 
 export interface ReserveDetailsPallet{
   id: number;
-  palletCreateTS?: string;
+  createDate: string;
+  expirationDate: string;
   items: SectionDetailsItem[];
   statusCode: number;
 }

@@ -9,12 +9,13 @@ interface ManagePalletProps {
   palletInfo: PalletInfo;
   palletItems: PalletItems[];
 }
-type PalletHeader = {
+type PalletHeaderProps = {
   palletInfo: PalletInfo;
   palletItems: PalletItems[];
-}
-const PalletHeader = (props: PalletHeader): JSX.Element => {
+};
+const PalletHeader = (props: PalletHeaderProps): JSX.Element => {
   const { palletInfo, palletItems } = props;
+
   return (
     <View style={styles.headerContainer}>
       <View>
@@ -34,6 +35,7 @@ const PalletHeader = (props: PalletHeader): JSX.Element => {
 };
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const { palletInfo, palletItems } = props;
+
   return (
     <View>
       <PalletHeader palletInfo={palletInfo} palletItems={palletItems} />

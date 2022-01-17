@@ -31,6 +31,7 @@ import {
   setPalletInfo,
   setPalletItems
 } from '../../state/actions/PalletManagement';
+import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 
 interface PalletManagementProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
@@ -43,6 +44,15 @@ interface PalletManagementProps {
 }
 const palletIDRegex = new RegExp(/^[0-9]+$/);
 const nonNumRegex = new RegExp(/[^0-9]/g);
+
+export const onSubmit = (searchText: string, dispatch: Dispatch<any>): void => {
+  if (searchText.match(palletIDRegex)) {
+    dispatch(
+      getPalletDetails({ palletIds: [Number.parseInt(searchText, 10)] })
+    );
+  }
+};
+
 export const PalletManagementScreen = (
   props: PalletManagementProps
 ): JSX.Element => {
@@ -55,7 +65,16 @@ export const PalletManagementScreen = (
     dispatch,
     getPalletDetailsApi
   } = props;
+
   let scannedSubscription: EmitterSubscription;
+
+  // Resets Get PalletDetails api state when navigating off-screen
+  useEffectHook(() => {
+    navigation.addListener('beforeRemove', () => {
+      dispatch({ type: GET_PALLET_DETAILS.RESET });
+    });
+  }, []);
+
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -66,7 +85,6 @@ export const PalletManagementScreen = (
             type: scan.type
           });
           setSearchText(scan.value);
-          // TODO Replace getPalletDetails with /{palletId} endpoint i
           dispatch(getPalletDetails({ palletIds: [scan.value] }));
         });
       }
@@ -110,13 +128,7 @@ export const PalletManagementScreen = (
       />
     );
   }
-  const onSubmit = () => {
-    if (searchText.match(palletIDRegex)) {
-      dispatch(
-        getPalletDetails({ palletIds: [Number.parseInt(searchText, 10)] })
-      );
-    }
-  };
+
   return (
     <View style={styles.scanContainer}>
       <TouchableOpacity onPress={() => openCamera()}>
@@ -135,7 +147,7 @@ export const PalletManagementScreen = (
           style={styles.textInput}
           keyboardType="numeric"
           placeholder={strings('PALLET.ENTER_PALLET_ID')}
-          onSubmitEditing={onSubmit}
+          onSubmitEditing={() => onSubmit(searchText, dispatch)}
         />
       </View>
       {/* TODO Replace All instances of SnackBar with RN-Toast-Message */}

@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PalletManagementScreen Tests rendering Get Pallet Details Api responses Renders Loading indicator if get pallet details waiting for an api response 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
 exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Renders the PalletManagement default  1`] = `
 <View
   style={
@@ -54,6 +70,8 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
     <TextInput
       allowFontScaling={true}
       keyboardType="numeric"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
       placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
       rejectResponderTermination={true}
       style={
@@ -67,5 +85,6 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
       value=""
     />
   </View>
+  <Toast />
 </View>
 `;
