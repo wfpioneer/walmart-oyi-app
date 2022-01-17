@@ -11,18 +11,19 @@ describe('ManagePalletScreen', () => {
         palletId: 1514,
         expirationDate: '01/31/2022'
       };
-      const mockItems = [{
-        itemNbr: 1234,
-        upc: '1234567890',
-        description: 'test',
-        quantity: 3,
-        newQuantity: 3,
-        price: 10.00,
-        category: 54,
-        categoryDesc: 'test cat',
-        deleted: true,
-        added: false
-      },
+      const mockItems = [
+        {
+          itemNbr: 1234,
+          upc: '1234567890',
+          description: 'test',
+          quantity: 3,
+          newQuantity: 3,
+          price: 10.00,
+          category: 54,
+          categoryDesc: 'test cat',
+          deleted: true,
+          added: false
+        },
         {
           itemNbr: 1234,
           upc: '12345678901',
@@ -34,7 +35,8 @@ describe('ManagePalletScreen', () => {
           categoryDesc: 'test cat',
           deleted: false,
           added: false
-        }];
+        }
+      ];
 
       renderer.render(<ManagePalletScreen
         useEffectHook={jest.fn}

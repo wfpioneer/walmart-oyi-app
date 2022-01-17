@@ -1,4 +1,5 @@
-import { Actions,
+import {
+  Actions,
   CLEAR_PALLET_MANAGEMENT,
   SETUP_PALLET,
   SHOW_MANAGE_PALLET_MENU

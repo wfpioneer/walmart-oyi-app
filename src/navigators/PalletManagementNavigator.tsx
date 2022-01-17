@@ -10,7 +10,7 @@ import { strings } from '../locales';
 import { setManualScan } from '../state/actions/Global';
 import { showManagePalletMenu } from '../state/actions/PalletManagement';
 import { useTypedSelector } from '../state/reducers/RootReducer';
-import styles from "./PalletManagementNavigator.style";
+import styles from './PalletManagementNavigator.style';
 
 interface PalletManageMentNavigatorProps {
   isManualScanEnabled: boolean;
@@ -54,17 +54,17 @@ const renderManagePalletKebabButton = (managePalletMenu: boolean, dispatch: Disp
 );
 
 export const PalletManagementNavigatorStack = (props: PalletManageMentNavigatorProps): JSX.Element => {
-  const { isManualScanEnabled, managePalletMenu, dispatch } = props;
+  const {isManualScanEnabled, managePalletMenu, dispatch} = props;
   return (
     <Stack.Navigator
       headerMode="float"
       screenOptions={{
-        headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
+        headerStyle: {backgroundColor: COLOR.MAIN_THEME_COLOR},
         headerTintColor: COLOR.WHITE
 
       }}
     >
-     <Stack.Screen
+      <Stack.Screen
         name="PalletManagement"
         component={PalletManagement}
         options={{

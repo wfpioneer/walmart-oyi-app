@@ -1,5 +1,10 @@
 import React, { EffectCallback, useEffect } from 'react';
-import { EmitterSubscription, FlatList, Text, View } from 'react-native';
+import {
+  EmitterSubscription,
+  FlatList,
+  Text,
+  View
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './ManagePallet.style';
@@ -18,34 +23,34 @@ interface ManagePalletProps {
   items: PalletItem[];
 }
 
-const getNumberOfDeleted = (items: PalletItem[]): number =>
-  items.reduce((previousValue, currentValue) => previousValue + +currentValue.deleted, 0);
-
+const getNumberOfDeleted = (items: PalletItem[]): number => items.reduce((previousValue, currentValue) =>
+  previousValue + +currentValue.deleted, 0);
 
 const enableSave = (items: PalletItem[]): boolean => {
-  const modifiedArray = items.filter((item: PalletItem) => item.quantity !== item.newQuantity || item.deleted || item.added);
-  return modifiedArray.length > 0
+  const modifiedArray = items.filter((item: PalletItem) => item.quantity !== item.newQuantity
+    || item.deleted || item.added);
+  return modifiedArray.length > 0;
 };
 
 // TODO implement palletItemCard
-const tempItemCard = ({ item }: { item: PalletItem }) => {
-  return (
-    <View>
-      <Text>
-        {item.description}
-      </Text>
-    </View>
-  )
-};
+const tempItemCard = ({ item }: { item: PalletItem }) => (
+  <View>
+    <Text>
+      {item.description}
+    </Text>
+  </View>
+);
 
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
-  const { useEffectHook, isManualScanEnabled, palletInfo, items } = props;
+  const {
+    useEffectHook, isManualScanEnabled, palletInfo, items
+  } = props;
   const { palletId, expirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      //TODO implement scanning items and calling get item service
+      // TODO implement scanning items and calling get item service
     });
     return () => {
       scannedSubscription.remove();
@@ -54,7 +59,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   return (
     <View style={styles.safeAreaView}>
       <View style={styles.bodyContainer}>
-        {isManualScanEnabled && <ManualScan/>}
+        {isManualScanEnabled && <ManualScan />}
         <View style={styles.headerContainer}>
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>
@@ -64,14 +69,16 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               {palletId}
             </Text>
           </View>
-          {expirationDate && expirationDate.length > 0 ? <View style={styles.headerItem}>
-            <Text style={styles.headerText}>
-              {strings('PALLET.EXPIRATION_DATE')}
-            </Text>
-            <Text style={styles.headerItemText}>
-              {expirationDate}
-            </Text>
-          </View> : null}
+          {expirationDate && expirationDate.length > 0 ? (
+            <View style={styles.headerItem}>
+              <Text style={styles.headerText}>
+                {strings('PALLET.EXPIRATION_DATE')}
+              </Text>
+              <Text style={styles.headerItemText}>
+                {expirationDate}
+              </Text>
+            </View>
+          ) : null}
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>
               {strings('PALLET.ITEMS')}
@@ -86,13 +93,14 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             {strings('PALLET.SCAN_INSTRUCTIONS')}
           </Text>
         </View>
-        {getNumberOfDeleted(items) > 0 ?
+        {getNumberOfDeleted(items) > 0 ? (
           <View style={styles.deletedBanner}>
             <Text style={styles.deleteBannerText}>
-              {getNumberOfDeleted(items) === 1 ? strings('PALLET.ITEM_DELETE') :
-                strings('PALLET.X_ITEMS_DELETE', {nbrOfItems: getNumberOfDeleted(items)})}
+              {getNumberOfDeleted(items) === 1 ? strings('PALLET.ITEM_DELETE')
+                : strings('PALLET.X_ITEMS_DELETE', { nbrOfItems: getNumberOfDeleted(items) })}
             </Text>
-          </View> : null}
+          </View>
+        ) : null}
         <View>
           <FlatList
             data={items}
@@ -101,13 +109,15 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           />
         </View>
       </View>
-      {enableSave(items) ? <View style={styles.buttonContainer}>
-        <Button
-          title={strings('PALLET.SAVE')}
-          style={styles.saveButton}
-          backgroundColor={COLOR.GREEN}
-        />
-      </View> : null}
+      {enableSave(items) ? (
+        <View style={styles.buttonContainer}>
+          <Button
+            title={strings('PALLET.SAVE')}
+            style={styles.saveButton}
+            backgroundColor={COLOR.GREEN}
+          />
+        </View>
+      ) : null}
     </View>
   );
 };
@@ -136,20 +146,8 @@ const ManagePallet = (): JSX.Element => {
         categoryDesc: 'test cat',
         deleted: true,
         added: false
-      },
-        {
-          itemNbr: 1234,
-          upc: '12345678901',
-          description: 'test',
-          quantity: 3,
-          newQuantity: 3,
-          price: 10.00,
-          category: 54,
-          categoryDesc: 'test cat',
-          deleted: false,
-          added: false
-        }]
-    }))
+      }]
+    }));
   }, []);
   return (
     <ManagePalletScreen
