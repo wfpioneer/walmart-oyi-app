@@ -146,12 +146,9 @@ export default {
     MANAGE_PALLET: 'Manage Pallet', // TODO Mandarin Translation
     PALLET_ID: 'Pallet ID', // TODO Mandarin Translation
     EXPIRATION_DATE: 'Expiration Date', // TODO Mandarin Translation
-    ITEMS: 'Items', // TODO Mandarin Translation
     SCAN_INSTRUCTIONS: 'Scan UPC to add an item', // TODO Mandarin Translation
     ITEM_DELETE: '1 item pending deletion', // TODO Mandarin Translation
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion', // TODO Mandarin Translation
-    SAVE: 'SAVE', // TODO Mandarin Translation
-    EXPIRATION: 'Expiration Date', // TODO Mandarin Translation
     PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet' // TODO Mandarin Translation
   },
   LOCATION: {

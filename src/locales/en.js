@@ -147,12 +147,9 @@ export default {
     MANAGE_PALLET: 'Manage Pallet',
     PALLET_ID: 'Pallet ID',
     EXPIRATION_DATE: 'Expiration Date',
-    ITEMS: 'Items',
     SCAN_INSTRUCTIONS: 'Scan UPC to add an item',
     ITEM_DELETE: '1 item pending deletion',
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion',
-    SAVE: 'SAVE',
-    EXPIRATION: 'Expiration Date',
     PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet'
   },
   LOCATION: {
