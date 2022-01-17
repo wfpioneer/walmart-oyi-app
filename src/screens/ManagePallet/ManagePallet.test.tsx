@@ -1,21 +1,22 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { ManagePalletScreen } from './ManagePallet';
+import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 
 describe('ManagePalletScreen', () => {
   describe('Tests rendering the PalletManagement Screen', () => {
     it('Renders the PalletManagement default ', () => {
       const renderer = ShallowRenderer.createRenderer();
 
-      const mockPalletInfo = {
-        palletId: 1514,
+      const mockPalletInfo: PalletInfo = {
+        id: 1514,
         expirationDate: '01/31/2022'
       };
-      const mockItems = [
+      const mockItems: PalletItem[] = [
         {
           itemNbr: 1234,
-          upc: '1234567890',
-          description: 'test',
+          upcNbr: '1234567890',
+          itemDesc: 'test',
           quantity: 3,
           newQuantity: 3,
           price: 10.00,
@@ -26,8 +27,8 @@ describe('ManagePalletScreen', () => {
         },
         {
           itemNbr: 1234,
-          upc: '12345678901',
-          description: 'test',
+          upcNbr: '12345678901',
+          itemDesc: 'test',
           quantity: 3,
           newQuantity: 3,
           price: 10.00,

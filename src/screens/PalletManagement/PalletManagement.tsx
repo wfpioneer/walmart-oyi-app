@@ -29,7 +29,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { setupPallet } from '../../state/actions/PalletManagement';
 import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
-import { Pallet } from '../../models/PalletManagementTypes';
+import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
 
 interface PalletManagementProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
@@ -104,13 +104,20 @@ export const PalletManagementScreen = (
       const {
         id, createDate, expirationDate, items
       } = getPalletDetailsApi.result.data.pallets[0];
+      const palletItems = items.map((item: PalletItem) => ({
+        ...item,
+        quantity: item.quantity || 0,
+        newQuantity: item.quantity || 0,
+        deleted: false,
+        added: false
+      }));
       const palletDetails: Pallet = {
         palletInfo: {
           id,
           createDate,
           expirationDate
         },
-        items
+        items: palletItems
       };
       dispatch(setupPallet(palletDetails));
       navigation.navigate('ManagePallet');

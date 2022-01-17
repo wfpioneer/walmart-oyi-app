@@ -16,7 +16,7 @@ interface PalletManagementState {
 const initialState: PalletManagementState = {
   managePalletMenu: false,
   palletInfo: {
-    palletId: 0
+    id: 0
   },
   items: [],
   combinePallets: []
@@ -34,7 +34,6 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         ...initialState,
         ...action.payload
       };
-    }
     case CLEAR_PALLET_MANAGEMENT:
       return initialState;
     default:

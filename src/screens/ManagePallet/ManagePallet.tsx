@@ -5,7 +5,6 @@ import {
   Text,
   View
 } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './ManagePallet.style';
 import { strings } from '../../locales';
@@ -13,7 +12,6 @@ import ManualScan from '../../components/manualscan/ManualScan';
 import Button from '../../components/buttons/Button';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
-import { setupPallet } from '../../state/actions/PalletManagement';
 import COLOR from '../../themes/Color';
 
 interface ManagePalletProps {
@@ -33,19 +31,24 @@ const enableSave = (items: PalletItem[]): boolean => {
 };
 
 // TODO implement palletItemCard
-const tempItemCard = ({ item }: { item: PalletItem }) => (
-  <View>
-    <Text>
-      {item.description}
-    </Text>
-  </View>
-);
+const tempItemCard = ({ item }: { item: PalletItem }) => {
+  if (!item.deleted) {
+    return (
+      <View>
+        <Text>
+          {item.itemDesc}
+        </Text>
+      </View>
+    );
+  }
+  return null;
+};
 
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items
   } = props;
-  const { palletId, expirationDate } = palletInfo;
+  const { id, expirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
   // Scanner listener
   useEffectHook(() => {
@@ -66,7 +69,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               {strings('PALLET.PALLET_ID')}
             </Text>
             <Text style={styles.headerItemText}>
-              {palletId}
+              {id}
             </Text>
           </View>
           {expirationDate && expirationDate.length > 0 ? (
@@ -105,7 +108,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           <FlatList
             data={items}
             renderItem={tempItemCard}
-            keyExtractor={(item: PalletItem) => item.upc}
+            keyExtractor={(item: PalletItem) => item.upcNbr}
           />
         </View>
       </View>
@@ -126,29 +129,7 @@ const ManagePallet = (): JSX.Element => {
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const palletInfo = useTypedSelector(state => state.PalletManagement.palletInfo);
   const items = useTypedSelector(state => state.PalletManagement.items);
-  const dispatch = useDispatch();
-  // TODO remove this mock data when service to get pallet details has been impemented as when that service
-  // TODO is complete the setupPallet action will be dispatched before navigating to this screen
-  useEffect(() => {
-    dispatch(setupPallet({
-      palletInfo: {
-        palletId: 1514,
-        expirationDate: '01/31/2022'
-      },
-      items: [{
-        itemNbr: 1234,
-        upc: '1234567890',
-        description: 'test',
-        quantity: 3,
-        newQuantity: 3,
-        price: 10.00,
-        category: 54,
-        categoryDesc: 'test cat',
-        deleted: true,
-        added: false
-      }]
-    }));
-  }, []);
+
   return (
     <ManagePalletScreen
       useEffectHook={useEffect}
