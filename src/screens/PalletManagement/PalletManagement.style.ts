@@ -23,5 +23,10 @@ export default StyleSheet.create({
   textView: {
     width: 200,
     paddingTop: 20
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

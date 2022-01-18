@@ -41,8 +41,8 @@ export default {
     GOAL: 'Goal',
     VERSION: 'Version',
     BARCODE_SCAN_ERROR: 'This barcode type is not allowed',
-    ITEM: 'item',
-    ITEMS: 'items',
+    ITEM: 'Item',
+    ITEMS: 'Items',
     TOOLS: 'Tools',
     OR: 'OR'
   },
@@ -107,7 +107,8 @@ export default {
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consolidated',
     FLY_CLOUD_QTY: 'Fly Cloud',
-    ERROR_SALES_HISTORY: 'Unable to retrieve sales history'
+    ERROR_SALES_HISTORY: 'Unable to retrieve sales history',
+    ITEM_NUMBER: 'Item Number'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -141,11 +142,19 @@ export default {
     SOME_PRINTS_FAILED: 'Some items failed to print'
   },
   PALLET: {
+    PALLET_MANAGEMENT: 'Pallet Management',
     ENTER_PALLET_ID: 'Type a pallet ID',
     SCAN_PALLET: 'Scan a pallet',
     PRINT_PALLET: 'Print pallet',
     COMBINE_PALLETS: 'Combine pallets',
-    CLEAR_PALLET: 'Clear pallets'
+    CLEAR_PALLET: 'Clear pallets',
+    MANAGE_PALLET: 'Manage Pallet',
+    PALLET_ID: 'Pallet ID',
+    EXPIRATION_DATE: 'Expiration Date',
+    SCAN_INSTRUCTIONS: 'Scan UPC to add an item',
+    ITEM_DELETE: '1 item pending deletion',
+    X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion',
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet'
   },
   LOCATION: {
     TITLE: 'All locations',

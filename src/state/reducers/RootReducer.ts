@@ -7,11 +7,11 @@ import { Global } from './Global';
 import { worklist } from './Worklist';
 import { ItemDetailScreen } from './ItemDetailScreen';
 import { Print } from './Print';
-import { Pallets } from './PalletManagement';
 import { Location } from './Location';
 import { SessionTimeout } from './SessionTimeout';
 import { Approvals } from './Approvals';
 import { SnackBar } from './SnackBar';
+import { PalletManagement } from './PalletManagement';
 
 /**
  * This is the root reducers,this RootReducer combine all sub reducers.git
@@ -23,12 +23,12 @@ const RootReducer = combineReducers({
   Global,
   Worklist: worklist,
   Print,
-  Pallets,
   ItemDetailScreen,
   Location,
   SessionTimeout,
   Approvals,
-  SnackBar
+  SnackBar,
+  PalletManagement
 });
 
 export default RootReducer;

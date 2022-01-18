@@ -106,7 +106,8 @@ export default {
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consol',
     FLY_CLOUD_QTY: 'Fly Cloud Qty', // Leaving This as is until MX has a need for Cloud Qty
-    ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas'
+    ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas',
+    ITEM_NUMBER: 'Item Number' // TODO Spanish translation
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -140,11 +141,19 @@ export default {
     SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
   },
   PALLET: {
+    PALLET_MANAGEMENT: 'Pallet Management', // TODO Spanish translation
     ENTER_PALLET_ID: 'Type a pallet ID', // TODO Spanish translation
     SCAN_PALLET: 'Scan a pallet', // TODO MX translations
     PRINT_PALLET: 'Print pallet', // TODO MX translations
     COMBINE_PALLETS: 'Combine pallets', // TODO MX translations
-    CLEAR_PALLET: 'Clear pallets' // TODO Spanish translation
+    CLEAR_PALLET: 'Clear pallets', // TODO Spanish translation
+    MANAGE_PALLET: 'Manage Pallet', // TODO Spanish translation
+    PALLET_ID: 'Pallet ID', // TODO Spanish translation
+    EXPIRATION_DATE: 'Expiration Date', // TODO Spanish translation
+    SCAN_INSTRUCTIONS: 'Scan UPC to add an item', // TODO Spanish translation
+    ITEM_DELETE: '1 item pending deletion', // TODO Spanish translation
+    X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion', // TODO Spanish translation
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',

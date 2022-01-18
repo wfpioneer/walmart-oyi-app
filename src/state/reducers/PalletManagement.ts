@@ -1,62 +1,50 @@
 import {
   Actions,
-  HIDE_PALLET_MANAGEMENT_POPUP,
-  SHOW_PALLET_MANAGEMENT_POPUP,
+  CLEAR_PALLET_MANAGEMENT,
+  SETUP_PALLET,
+  SHOW_MANAGE_PALLET_MENU,
   TOGGLE_PALLET_MANAGEMENT_POPUP
 } from '../actions/PalletManagement';
+import { CombinePallet, PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 
 interface PalletManagementState {
   managePalletMenu: boolean;
-  palletInfo: {
-    palletId: number;
-    expirationDate?: string;
-  }
-  items: {
-    description: string;
-    price: number;
-    upc: string;
-    itemNbr: string;
-    category: number;
-    categoryDesc: string;
-    quantity: number;
-    newQuantity: number;
-    deleted: boolean;
-    added: boolean;
-  }[],
-  combinePallets: {
-    palletId: number;
-    itemCount: number
-  }[]
+  palletInfo: PalletInfo
+  items: PalletItem[];
+  combinePallets: CombinePallet[]
 }
 
 const initialState: PalletManagementState = {
   managePalletMenu: false,
   palletInfo: {
-    palletId: 0,
-    expirationDate: undefined
+    id: 0
   },
   items: [],
   combinePallets: []
 };
 
-export const Pallets = (state = initialState, action: Actions): PalletManagementState => {
+export const PalletManagement = (state = initialState, action: Actions): PalletManagementState => {
   switch (action.type) {
-    case SHOW_PALLET_MANAGEMENT_POPUP:
+    case SHOW_MANAGE_PALLET_MENU:
       return {
         ...state,
-        managePalletMenu: true
-      };
-    case HIDE_PALLET_MANAGEMENT_POPUP:
-      return {
-        ...state,
-        managePalletMenu: false
+        managePalletMenu: action.payload
       };
     case TOGGLE_PALLET_MANAGEMENT_POPUP:
       return {
         ...state,
         managePalletMenu: !state.managePalletMenu
       };
-    default:
-      return state;
+    case SETUP_PALLET:
+      return {
+        ...initialState,
+        ...action.payload
+      };
+    case CLEAR_PALLET_MANAGEMENT:
+      return initialState;
+      default:
+    return {
+      ...state
+    };
   }
 };

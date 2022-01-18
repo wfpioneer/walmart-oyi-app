@@ -1,35 +1,61 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { Dispatch } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import PalletManagement from '../screens/PalletManagement/PalletManagement';
+import ManagePallet from '../screens/ManagePallet/ManagePallet';
 import COLOR from '../themes/Color';
 import { togglePalletPopup } from '../state/actions/PalletManagement';
-import styles from './PalletManagementNavigator.style';
 import { trackEvent } from '../utils/AppCenterTool';
-import ManagePallet from '../screens/ManagePallet/ManagePallet';
 import { strings } from '../locales';
+import { setManualScan } from '../state/actions/Global';
+import { useTypedSelector } from '../state/reducers/RootReducer';
+import styles from './PalletManagementNavigator.style';
+
+interface PalletManageMentNavigatorProps {
+  isManualScanEnabled: boolean;
+  dispatch: Dispatch<any>;
+}
 
 const Stack = createStackNavigator();
 
-export const PalletManagementNavigatorStack = (): JSX.Element => {
-  const dispatch = useDispatch();
-
-  const renderPalletKebabButton = (isVisible: boolean) => (isVisible && (
-    <TouchableOpacity onPress={() => {
-      dispatch(togglePalletPopup());
-      trackEvent('pallet_menu_button_click');
+export const renderScanButton = (
+  dispatch: Dispatch<any>,
+  isManualScanEnabled: boolean
+): JSX.Element => (
+  <TouchableOpacity
+    onPress={() => {
+      dispatch(setManualScan(!isManualScanEnabled));
     }}
-    >
-      <View style={styles.rightButton}>
-        <Image
-          style={styles.image}
-          source={require('../assets/images/menu.png')}
-        />
-      </View>
-    </TouchableOpacity>
-  ));
+  >
+    <View style={styles.leftButton}>
+      <MaterialCommunityIcon
+        name="barcode-scan"
+        size={20}
+        color={COLOR.WHITE}
+      />
+    </View>
+  </TouchableOpacity>
+);
 
+const renderManagePalletKebabButton = (dispatch: Dispatch<any>) => (
+  <TouchableOpacity onPress={() => {
+    dispatch(togglePalletPopup());
+    trackEvent('pallet_menu_button_click');
+  }}
+  >
+    <View style={styles.rightButton}>
+      <Image
+        style={styles.image}
+        source={require('../assets/images/menu.png')}
+      />
+    </View>
+  </TouchableOpacity>
+);
+
+export const PalletManagementNavigatorStack = (props: PalletManageMentNavigatorProps): JSX.Element => {
+  const {isManualScanEnabled, dispatch } = props;
   return (
     <Stack.Navigator
       headerMode="float"
@@ -42,8 +68,7 @@ export const PalletManagementNavigatorStack = (): JSX.Element => {
         name="PalletManagement"
         component={PalletManagement}
         options={{
-          headerTitle: 'Pallet Management',
-          headerRight: () => renderPalletKebabButton(true)
+          headerTitle: strings('PALLET.PALLET_MANAGEMENT')
         }}
       />
       <Stack.Screen
@@ -54,7 +79,7 @@ export const PalletManagementNavigatorStack = (): JSX.Element => {
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderManagePalletKebabButton(managePalletMenu, dispatch)}
+              {renderManagePalletKebabButton(dispatch)}
             </View>
           )
         }}
@@ -63,8 +88,15 @@ export const PalletManagementNavigatorStack = (): JSX.Element => {
   );
 };
 
-const PalletManagementNavigator = (): JSX.Element => (
-  <PalletManagementNavigatorStack />
-);
+const PalletManagementNavigator = (): JSX.Element => {
+  const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
+  const dispatch = useDispatch();
+  return (
+    <PalletManagementNavigatorStack
+      isManualScanEnabled={isManualScanEnabled}
+      dispatch={dispatch}
+    />
+  );
+};
 
 export default PalletManagementNavigator;

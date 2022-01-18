@@ -106,7 +106,8 @@ export default {
     CLAIMS_QTY: '索赔库存',
     CONSOLIDATED_QTY: '临时外仓',
     FLY_CLOUD_QTY: '云仓库存',
-    ERROR_SALES_HISTORY: '无法获取历史销售'
+    ERROR_SALES_HISTORY: '无法获取历史销售',
+    ITEM_NUMBER: 'Item Number'// TODO Mandarin Translation
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
@@ -140,11 +141,20 @@ export default {
     SOME_PRINTS_FAILED: '有些商品打印失败'
   },
   PALLET: {
+    PALLET_MANAGEMENT: 'Pallet Management', // TODO Mandarin Translation
     ENTER_PALLET_ID: 'Type a pallet ID', // TODO Mandarin Translation
     SCAN_PALLET: 'Scan a pallet', // TODO CN translation
     PRINT_PALLET: 'Print pallet', // TODO CN translation
     COMBINE_PALLETS: 'Combine pallets', // TODO CN translation
-    CLEAR_PALLET: 'Clear pallets' // TODO Mandarin Translation
+    CLEAR_PALLET: 'Clear pallets', // TODO Mandarin Translation
+    SCAN_PALLET: 'Scan a pallet', // TODO Mandarin Translation
+    MANAGE_PALLET: 'Manage Pallet', // TODO Mandarin Translation
+    PALLET_ID: 'Pallet ID', // TODO Mandarin Translation
+    EXPIRATION_DATE: 'Expiration Date', // TODO Mandarin Translation
+    SCAN_INSTRUCTIONS: 'Scan UPC to add an item', // TODO Mandarin Translation
+    ITEM_DELETE: '1 item pending deletion', // TODO Mandarin Translation
+    X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion', // TODO Mandarin Translation
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet' // TODO Mandarin Translation
   },
   LOCATION: {
     TITLE: '所有位置',
