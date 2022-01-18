@@ -103,7 +103,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
             }
           }
         >
-          [missing "en.PALLET.ITEMS" translation]
+          [missing "en.LOCATION.ITEMS" translation]
         </Text>
         <Text
           style={
@@ -220,7 +220,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "margin": 15,
         }
       }
-      title="[missing \\"en.PALLET.SAVE\\" translation]"
+      title="[missing \\"en.GENERICS.SAVE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
