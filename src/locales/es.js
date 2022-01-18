@@ -141,10 +141,15 @@ export default {
     SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
   },
   PALLET: {
+    PALLET_MANAGEMENT: 'Pallet Management', // TODO Spanish translation
     ENTER_PALLET_ID: 'Type a pallet ID', // TODO Spanish translation
     SCAN_PALLET: 'Scan a pallet', // TODO Spanish translation
+    MANAGE_PALLET: 'Manage Pallet', // TODO Spanish translation
     PALLET_ID: 'Pallet ID', // TODO Spanish translation
-    EXPIRATION: 'Expiration Date', // TODO Spanish translation
+    EXPIRATION_DATE: 'Expiration Date', // TODO Spanish translation
+    SCAN_INSTRUCTIONS: 'Scan UPC to add an item', // TODO Spanish translation
+    ITEM_DELETE: '1 item pending deletion', // TODO Spanish translation
+    X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion', // TODO Spanish translation
     PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet' // TODO Spanish translation
   },
   LOCATION: {

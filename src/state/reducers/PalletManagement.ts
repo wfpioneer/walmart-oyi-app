@@ -1,35 +1,39 @@
-import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 import {
   Actions,
   CLEAR_PALLET_MANAGEMENT,
-  SETUP_PALLET
+  SETUP_PALLET,
+  SHOW_MANAGE_PALLET_MENU
 } from '../actions/PalletManagement';
+import { CombinePallet, PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 
 interface PalletManagementState {
-  palletInfo: PalletInfo;
+  managePalletMenu: boolean;
+  palletInfo: PalletInfo
   items: PalletItem[];
+  combinePallets: CombinePallet[]
 }
 
 const initialState: PalletManagementState = {
+  managePalletMenu: false,
   palletInfo: {
-    createDate: '',
-    expirationDate: '',
     id: 0
   },
-  items: []
+  items: [],
+  combinePallets: []
 };
 
-export const PalletManagement = (
-  state = initialState,
-  action: Actions
-): PalletManagementState => {
+export const PalletManagement = (state = initialState, action: Actions): PalletManagementState => {
   switch (action.type) {
-    case SETUP_PALLET: {
+    case SHOW_MANAGE_PALLET_MENU:
+      return {
+        ...state,
+        managePalletMenu: action.payload
+      };
+    case SETUP_PALLET:
       return {
         ...initialState,
         ...action.payload
       };
-    }
     case CLEAR_PALLET_MANAGEMENT:
       return initialState;
     default:

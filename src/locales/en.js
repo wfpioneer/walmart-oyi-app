@@ -142,10 +142,15 @@ export default {
     SOME_PRINTS_FAILED: 'Some items failed to print'
   },
   PALLET: {
+    PALLET_MANAGEMENT: 'Pallet Management',
     ENTER_PALLET_ID: 'Type a pallet ID',
     SCAN_PALLET: 'Scan a pallet',
+    MANAGE_PALLET: 'Manage Pallet',
     PALLET_ID: 'Pallet ID',
-    EXPIRATION: 'Expiration Date',
+    EXPIRATION_DATE: 'Expiration Date',
+    SCAN_INSTRUCTIONS: 'Scan UPC to add an item',
+    ITEM_DELETE: '1 item pending deletion',
+    X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion',
     PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet'
   },
   LOCATION: {
