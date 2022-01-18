@@ -106,7 +106,8 @@ export default {
     CLAIMS_QTY: '索赔库存',
     CONSOLIDATED_QTY: '临时外仓',
     FLY_CLOUD_QTY: '云仓库存',
-    ERROR_SALES_HISTORY: '无法获取历史销售'
+    ERROR_SALES_HISTORY: '无法获取历史销售',
+    ITEM_NUMBER: 'Item Number'// TODO Mandarin Translation
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
