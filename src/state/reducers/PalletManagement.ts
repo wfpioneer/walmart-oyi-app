@@ -42,9 +42,9 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       };
     case CLEAR_PALLET_MANAGEMENT:
       return initialState;
-      default:
-    return {
-      ...state
-    };
+    default:
+      return {
+        ...state
+      };
   }
 };
