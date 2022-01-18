@@ -151,14 +151,17 @@ const ManagePallet = (): JSX.Element => {
   }, [pallets]);
 
   const handlePrintPallet = () => {
+    dispatch(showManagePalletMenu(false));
     // TODO Integration
   };
 
   const handleCombinePallets = () => {
+    dispatch(showManagePalletMenu(false));
     // TODO Integration
   };
 
   const handleClearPallet = () => {
+    dispatch(showManagePalletMenu(false));
     // TODO Integration
   };
 
@@ -198,7 +201,7 @@ const ManagePallet = (): JSX.Element => {
         <BottomSheetClearCard
           isManagerOption={false}
           isVisible={true}
-          text={strings('LOCATION.CLEAR_PALLET')}
+          text={strings('PALLET.CLEAR_PALLET')}
           onPress={handleClearPallet}
         />
       </BottomSheetModal>

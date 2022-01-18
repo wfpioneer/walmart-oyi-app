@@ -55,7 +55,7 @@ const renderManagePalletKebabButton = (dispatch: Dispatch<any>) => (
 );
 
 export const PalletManagementNavigatorStack = (props: PalletManageMentNavigatorProps): JSX.Element => {
-  const {isManualScanEnabled, dispatch } = props;
+  const { isManualScanEnabled, dispatch } = props;
   return (
     <Stack.Navigator
       headerMode="float"
