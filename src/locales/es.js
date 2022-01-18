@@ -106,7 +106,8 @@ export default {
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consol',
     FLY_CLOUD_QTY: 'Fly Cloud Qty', // Leaving This as is until MX has a need for Cloud Qty
-    ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas'
+    ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas',
+    ITEM_NUMBER: 'Item Number' // TODO Spanish translation
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
