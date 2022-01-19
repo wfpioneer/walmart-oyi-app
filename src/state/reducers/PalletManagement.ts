@@ -1,5 +1,7 @@
 import {
+  ADD_COMBINE_PALLET,
   Actions,
+  CLEAR_COMBINE_PALLET,
   CLEAR_PALLET_MANAGEMENT,
   SETUP_PALLET,
   SHOW_MANAGE_PALLET_MENU
@@ -33,6 +35,16 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       return {
         ...initialState,
         ...action.payload
+      };
+    case ADD_COMBINE_PALLET:
+      return {
+        ...state,
+        combinePallets: [...state.combinePallets, action.payload]
+      };
+    case CLEAR_COMBINE_PALLET:
+      return {
+        ...state,
+        combinePallets: []
       };
     case CLEAR_PALLET_MANAGEMENT:
       return initialState;

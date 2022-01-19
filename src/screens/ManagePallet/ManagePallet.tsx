@@ -163,7 +163,6 @@ const ManagePallet = (): JSX.Element => {
           ref={bottomSheetModalRef}
           snapPoints={snapPoints}
           index={0}
-          onDismiss={() => console.log('close bottom sheet')}
           style={styles.bottomSheetModal}
         >
           <BottomSheetAddCard

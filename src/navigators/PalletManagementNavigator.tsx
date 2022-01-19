@@ -12,11 +12,13 @@ import { showManagePalletMenu } from '../state/actions/PalletManagement';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './PalletManagementNavigator.style';
 import CombinePallets from '../screens/CombinePallets/CombinePallets';
+import { CombinePallet } from '../models/PalletManagementTypes';
 
 interface PalletManageMentNavigatorProps {
   isManualScanEnabled: boolean;
   managePalletMenu: boolean;
   dispatch: Dispatch<any>;
+  combinePallets: CombinePallet[];
 }
 
 const Stack = createStackNavigator();
@@ -39,7 +41,7 @@ export const renderScanButton = (
     </View>
   </TouchableOpacity>
 );
-// rename kebab menu button?
+// TODO rename kebab menu button?
 const renderManagePalletKebabButton = (managePalletMenu: boolean, dispatch: Dispatch<any>) => (
   <TouchableOpacity onPress={() => {
     dispatch(showManagePalletMenu(!managePalletMenu));
@@ -55,7 +57,9 @@ const renderManagePalletKebabButton = (managePalletMenu: boolean, dispatch: Disp
 );
 
 export const PalletManagementNavigatorStack = (props: PalletManageMentNavigatorProps): JSX.Element => {
-  const { isManualScanEnabled, managePalletMenu, dispatch } = props;
+  const {
+    isManualScanEnabled, managePalletMenu, dispatch, combinePallets
+  } = props;
   return (
     <Stack.Navigator
       headerMode="float"
@@ -91,10 +95,10 @@ export const PalletManagementNavigatorStack = (props: PalletManageMentNavigatorP
           headerTitle: strings('PALLET.COMBINE_PALLETS'),
           headerRight: () => (
             <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled)}
+              {combinePallets.length === 1 ? renderScanButton(dispatch, isManualScanEnabled) : null}
               {renderManagePalletKebabButton(managePalletMenu, dispatch)}
             </View>
-          ) // Make headerRight it's own function
+          )
         }}
       />
     </Stack.Navigator>
@@ -105,8 +109,8 @@ const PalletManagementNavigator = (): JSX.Element => {
   const isManualScanEnabled = useTypedSelector(
     state => state.Global.isManualScanEnabled
   );
-  const managePalletMenu = useTypedSelector(
-    state => state.PalletManagement.managePalletMenu
+  const { managePalletMenu, combinePallets } = useTypedSelector(
+    state => state.PalletManagement
   );
   const dispatch = useDispatch();
   return (
@@ -114,6 +118,7 @@ const PalletManagementNavigator = (): JSX.Element => {
       isManualScanEnabled={isManualScanEnabled}
       managePalletMenu={managePalletMenu}
       dispatch={dispatch}
+      combinePallets={combinePallets}
     />
   );
 };
