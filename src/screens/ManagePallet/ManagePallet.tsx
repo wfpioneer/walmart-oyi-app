@@ -1,24 +1,38 @@
-import React, { EffectCallback, useEffect } from 'react';
+import React, { Dispatch, EffectCallback, useEffect } from 'react';
 import {
+  ActivityIndicator,
   EmitterSubscription,
   FlatList,
   Text,
   View
 } from 'react-native';
+import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { trackEvent } from 'appcenter-analytics';
+import { useDispatch } from 'react-redux';
+import { validateSession } from '../../utils/sessionTimeout';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './ManagePallet.style';
 import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import Button from '../../components/buttons/Button';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
+import { Pallet, PalletInfo } from '../../models/PalletManagementTypes';
+import { PalletItem } from "../../models/PalletItem";
 import COLOR from '../../themes/Color';
+import { getItemDetailsUPC } from '../../state/actions/saga';
+import { AsyncState } from '../../models/AsyncState';
+import Toast from 'react-native-toast-message';
+import { addPallet, setupPallet } from '../../state/actions/PalletManagement';
 
 interface ManagePalletProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   isManualScanEnabled: boolean;
   palletInfo: PalletInfo;
   items: PalletItem[];
+  navigation: NavigationProp<any>;
+  route: RouteProp<any, string>;
+  dispatch: Dispatch<any>;
+  getItemDetailsfromUpcApi: AsyncState;
 }
 
 const getNumberOfDeleted = (items: PalletItem[]): number => items.reduce((previousValue, currentValue) =>
@@ -46,19 +60,95 @@ const tempItemCard = ({ item }: { item: PalletItem }) => {
 
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
-    useEffectHook, isManualScanEnabled, palletInfo, items
+    useEffectHook, isManualScanEnabled, palletInfo, items, navigation, route, dispatch,
+    getItemDetailsfromUpcApi
   } = props;
   const { id, expirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      // TODO implement scanning items and calling get item service
+      if (navigation.isFocused()) {
+        validateSession(navigation, route.name).then(() => {
+          trackEvent('Items_Details_scanned', {
+            barcode: scan.value,
+            type: scan.type
+          });
+          dispatch(
+            getItemDetailsUPC({ upc: scan.value })
+          );
+        });
+      }
     });
     return () => {
       scannedSubscription.remove();
     };
   }, []);
+  useEffectHook(() => {
+    // on api success
+    if (!getItemDetailsfromUpcApi.isWaiting && getItemDetailsfromUpcApi.result) {
+      if (getItemDetailsfromUpcApi.result.status === 200) {
+        const {
+          data
+        } = getItemDetailsfromUpcApi.result;
+        const palletItem = items.filter(item => item.itemNbr === data.itemNbr);
+        if (palletItem.length > 0) {
+          Toast.show({
+            type: 'info',
+            text1: strings('PALLET.ITEMS_DETAILS_EXIST'),
+            visibilityTime: 4000,
+            position: 'bottom'
+          });
+        } else {
+          const {
+            upcNbr,
+            itemNbr,
+            price,
+            itemDesc
+          } = data;
+          const pallet : PalletItem = {
+            upcNbr,
+            itemNbr,
+            price,
+            itemDesc,
+            quantity: 1,
+            deleted: false,
+            added: true
+          };
+          dispatch(addPallet(pallet));
+        }
+      } else if (getItemDetailsfromUpcApi.result.status === 204) {
+        Toast.show({
+          type: 'info',
+          text1: strings('PALLET.ITEMS_NOT_FOUND'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      }
+    }
+    // on api error
+    if (!getItemDetailsfromUpcApi.isWaiting && getItemDetailsfromUpcApi.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+  }, [getItemDetailsfromUpcApi]);
+
+  if (getItemDetailsfromUpcApi.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={getItemDetailsfromUpcApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
   return (
     <View style={styles.safeAreaView}>
       <View style={styles.bodyContainer}>
@@ -112,7 +202,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           />
         </View>
       </View>
-      {enableSave(items) ? (
+      {items && enableSave(items) ? (
         <View style={styles.buttonContainer}>
           <Button
             title={strings('GENERICS.SAVE')}
@@ -129,13 +219,22 @@ const ManagePallet = (): JSX.Element => {
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const palletInfo = useTypedSelector(state => state.PalletManagement.palletInfo);
   const items = useTypedSelector(state => state.PalletManagement.items);
-
+  const navigation = useNavigation();
+  const route = useRoute();
+  const dispatch = useDispatch();
+  const getItemDetailsfromUpcApi = useTypedSelector(
+    state => state.async.getItemDetailsUPC
+  );
   return (
     <ManagePalletScreen
       useEffectHook={useEffect}
       isManualScanEnabled={isManualScanEnabled}
       palletInfo={palletInfo}
       items={items}
+      navigation={navigation}
+      route={route}
+      dispatch={dispatch}
+      getItemDetailsfromUpcApi={getItemDetailsfromUpcApi}
     />
   );
 };

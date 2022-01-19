@@ -53,5 +53,10 @@ export default StyleSheet.create({
   },
   saveButton: {
     margin: 15
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

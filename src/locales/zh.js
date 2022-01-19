@@ -150,7 +150,9 @@ export default {
     SCAN_INSTRUCTIONS: 'Scan UPC to add an item', // TODO Mandarin Translation
     ITEM_DELETE: '1 item pending deletion', // TODO Mandarin Translation
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion', // TODO Mandarin Translation
-    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet' // TODO Mandarin Translation
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet', // TODO Mandarin Translation
+    ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Mandarin translation
+    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC' // TODO Mandarin translation
   },
   LOCATION: {
     TITLE: '所有位置',
