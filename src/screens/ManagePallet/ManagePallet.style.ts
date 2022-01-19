@@ -53,5 +53,15 @@ export default StyleSheet.create({
   },
   saveButton: {
     margin: 15
+  },
+  bottomSheetModal: {
+    borderColor: COLOR.GREY_200,
+    borderRadius: 5,
+    borderWidth: 2
+  },
+  disabledContainer: {
+    flex: 1,
+    opacity: 0.2,
+    backgroundColor: COLOR.BLACK_TRANSPARENT_200
   }
 });

@@ -150,7 +150,8 @@ export default {
     SCAN_INSTRUCTIONS: 'Scan UPC to add an item', // TODO Spanish translation
     ITEM_DELETE: '1 item pending deletion', // TODO Spanish translation
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion', // TODO Spanish translation
-    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet' // TODO Spanish translation
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet', // TODO Spanish translation
+    COMBINE_PALLETS: 'Combine Pallets' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',

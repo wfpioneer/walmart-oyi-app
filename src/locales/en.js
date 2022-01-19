@@ -151,7 +151,8 @@ export default {
     SCAN_INSTRUCTIONS: 'Scan UPC to add an item',
     ITEM_DELETE: '1 item pending deletion',
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion',
-    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet'
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet',
+    COMBINE_PALLETS: 'Combine Pallets'
   },
   LOCATION: {
     TITLE: 'All locations',
