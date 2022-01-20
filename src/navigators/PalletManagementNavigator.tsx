@@ -13,7 +13,7 @@ import { setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './PalletManagementNavigator.style';
 
-interface PalletManageMentNavigatorProps {
+interface PalletManagementNavigatorProps {
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
 }
@@ -54,7 +54,7 @@ const renderManagePalletKebabButton = (dispatch: Dispatch<any>) => (
   </TouchableOpacity>
 );
 
-export const PalletManagementNavigatorStack = (props: PalletManageMentNavigatorProps): JSX.Element => {
+export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorProps): JSX.Element => {
   const { isManualScanEnabled, dispatch } = props;
   return (
     <Stack.Navigator
