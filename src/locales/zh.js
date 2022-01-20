@@ -154,7 +154,8 @@ export default {
     SCAN_INSTRUCTIONS: '扫描UPC添加商品',
     ITEM_DELETE: '1个商品待删除',
     X_ITEMS_DELETE: '%{nbrOfItems} 商品待删除',
-    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet' // TODO Mandarin Translation
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet', // TODO CN Translation
+    CANNOT_HAVE_NEGATIVE_QTY: 'Item cannot have negative quantity' // TODO Mandarin Translation
   },
   LOCATION: {
     TITLE: '所有位置',
