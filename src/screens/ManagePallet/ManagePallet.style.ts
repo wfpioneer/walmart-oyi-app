@@ -5,6 +5,14 @@ export default StyleSheet.create({
   safeAreaView: {
     flex: 1
   },
+  container: {
+    flex: 1
+  },
+  disabledContainer: {
+    flex: 1,
+    opacity: 0.2,
+    backgroundColor: COLOR.BLACK_TRANSPARENT_200
+  },
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -53,5 +61,10 @@ export default StyleSheet.create({
   },
   saveButton: {
     margin: 15
+  },
+  bottomSheetModal: {
+    borderColor: COLOR.GREY_200,
+    borderRadius: 5,
+    borderWidth: 2
   }
 });
