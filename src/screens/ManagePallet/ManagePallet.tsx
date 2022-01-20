@@ -149,6 +149,7 @@ const ManagePallet = (): JSX.Element => {
 
   const handleCombinePallets = () => {
     dispatch(showManagePalletMenu(false));
+    bottomSheetModalRef.current?.dismiss();
     navigation.navigate('CombinePallets');
   };
 
