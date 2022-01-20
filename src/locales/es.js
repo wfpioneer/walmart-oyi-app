@@ -43,7 +43,8 @@ export default {
     BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido',
     ITEM: 'Artículo',
     ITEMS: 'Artículos',
-    TOOLS: 'Herramientas'
+    TOOLS: 'Herramientas',
+    CURRENCY_SYMBOL: '$'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',

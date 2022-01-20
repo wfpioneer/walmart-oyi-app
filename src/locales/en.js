@@ -44,7 +44,8 @@ export default {
     ITEM: 'Item',
     ITEMS: 'Items',
     TOOLS: 'Tools',
-    OR: 'OR'
+    OR: 'OR',
+    CURRENCY_SYMBOL: '$'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -154,7 +155,8 @@ export default {
     SCAN_INSTRUCTIONS: 'Scan UPC to add an item',
     ITEM_DELETE: '1 item pending deletion',
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion',
-    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet'
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet',
+    CANNOT_HAVE_NEGATIVE_QTY: 'Item cannot have negative quantity'
   },
   LOCATION: {
     TITLE: 'All locations',

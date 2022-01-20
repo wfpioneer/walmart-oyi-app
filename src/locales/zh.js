@@ -43,7 +43,8 @@ export default {
     BARCODE_SCAN_ERROR: '此条码类型有误',
     ITEM: '商品',
     ITEMS: '多个商品',
-    TOOLS: '工具箱'
+    TOOLS: '工具箱',
+    CURRENCY_SYMBOL: '¥'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
