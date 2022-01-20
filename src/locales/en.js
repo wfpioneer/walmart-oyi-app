@@ -145,6 +145,9 @@ export default {
     PALLET_MANAGEMENT: 'Pallet Management',
     ENTER_PALLET_ID: 'Type a pallet ID',
     SCAN_PALLET: 'Scan a pallet',
+    PRINT_PALLET: 'Print pallet',
+    COMBINE_PALLETS: 'Combine Pallets',
+    CLEAR_PALLET: 'Clear pallets',
     MANAGE_PALLET: 'Manage Pallet',
     PALLET_ID: 'Pallet ID',
     EXPIRATION_DATE: 'Expiration Date',
@@ -152,7 +155,6 @@ export default {
     ITEM_DELETE: '1 item pending deletion',
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion',
     PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet',
-    COMBINE_PALLETS: 'Combine Pallets',
     PALLET_MERGE: 'will be merged into'
   },
   LOCATION: {

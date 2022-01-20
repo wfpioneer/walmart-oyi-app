@@ -1,11 +1,16 @@
 import { CombinePallet, Pallet } from '../../models/PalletManagementTypes';
 
+export const TOGGLE_PALLET_MANAGEMENT_POPUP = 'PALLET_MANAGEMENT/TOGGLE_POPUP';
 export const SHOW_MANAGE_PALLET_MENU = 'PALLET_MANAGEMENT/SHOW_MANAGE_PALLET_MENU';
 export const SETUP_PALLET = 'PALLET_MANAGEMENT/SETUP_PALLET';
 export const CLEAR_PALLET_MANAGEMENT = 'PALLET_MANAGEMENT/CLEAR_PALLET_MANAGEMENT';
 export const ADD_COMBINE_PALLET = 'PALLET_MANAGEMENT/ADD_COMBINE_PALLET';
 export const CLEAR_COMBINE_PALLET = 'PALLET_MANAGEMENT/CLEAR_COMBINE_PALLET';
 export const REMOVE_COMBINE_PALLET = 'PALLET_MANAGEMENT/REMOVE_COMBINE_PALLET';
+
+export const togglePalletPopup = () => ({
+  type: TOGGLE_PALLET_MANAGEMENT_POPUP
+} as const);
 
 export const showManagePalletMenu = (show: boolean) => ({
   type: SHOW_MANAGE_PALLET_MENU,
@@ -36,9 +41,10 @@ export const removeCombinePallet = (palletId: number) => ({
 } as const);
 
 export type Actions =
-  ReturnType<typeof showManagePalletMenu>
+ReturnType<typeof showManagePalletMenu>
   | ReturnType<typeof setupPallet>
   | ReturnType<typeof clearPalletManagement>
   | ReturnType<typeof addCombinePallet>
   | ReturnType<typeof clearCombinePallet>
-  | ReturnType<typeof removeCombinePallet>;
+  | ReturnType<typeof removeCombinePallet>
+  | ReturnType<typeof togglePalletPopup>;

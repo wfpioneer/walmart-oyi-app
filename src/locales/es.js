@@ -143,7 +143,10 @@ export default {
   PALLET: {
     PALLET_MANAGEMENT: 'Pallet Management', // TODO Spanish translation
     ENTER_PALLET_ID: 'Type a pallet ID', // TODO Spanish translation
-    SCAN_PALLET: 'Scan a pallet', // TODO Spanish translation
+    SCAN_PALLET: 'Scan a pallet', // TODO MX translations
+    PRINT_PALLET: 'Print pallet', // TODO MX translations
+    COMBINE_PALLETS: 'Combine Pallets', // TODO MX translations
+    CLEAR_PALLET: 'Clear pallets', // TODO Spanish translation
     MANAGE_PALLET: 'Manage Pallet', // TODO Spanish translation
     PALLET_ID: 'Pallet ID', // TODO Spanish translation
     EXPIRATION_DATE: 'Expiration Date', // TODO Spanish translation
@@ -151,7 +154,6 @@ export default {
     ITEM_DELETE: '1 item pending deletion', // TODO Spanish translation
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion', // TODO Spanish translation
     PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet', // TODO Spanish translation
-    COMBINE_PALLETS: 'Combine Pallets', // TODO Spanish translation
     PALLET_MERGE: 'will be merged into' // TODO Spanish translation
   },
   LOCATION: {

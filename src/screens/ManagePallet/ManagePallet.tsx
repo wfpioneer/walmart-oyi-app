@@ -4,21 +4,20 @@ import React, {
 import {
   EmitterSubscription, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
-import {
-  BottomSheetModal,
-  BottomSheetModalProvider
-} from '@gorhom/bottom-sheet';
-import { useNavigation } from '@react-navigation/native';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import COLOR from '../../themes/Color';
 import styles from './ManagePallet.style';
 import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
-import Button from '../../components/buttons/Button';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
-import COLOR from '../../themes/Color';
+import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
+import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
+import Button from '../../components/buttons/Button';
+import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 import { showManagePalletMenu } from '../../state/actions/PalletManagement';
 
 interface ManagePalletProps {
@@ -129,8 +128,9 @@ const ManagePallet = (): JSX.Element => {
   const items = useTypedSelector(state => state.PalletManagement.items);
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ['15%'], []);
+  const snapPoints = useMemo(() => ['45%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {
@@ -141,10 +141,22 @@ const ManagePallet = (): JSX.Element => {
       }
     }
   }, [managePalletMenu]);
+
+  const handlePrintPallet = () => {
+    dispatch(showManagePalletMenu(false));
+    // TODO Integration
+  };
+
   const handleCombinePallets = () => {
-    bottomSheetModalRef.current?.dismiss();
+    dispatch(showManagePalletMenu(false));
     navigation.navigate('CombinePallets');
   };
+
+  const handleClearPallet = () => {
+    dispatch(showManagePalletMenu(false));
+    // TODO Integration
+  };
+
   return (
     <BottomSheetModalProvider>
       <TouchableOpacity
@@ -165,11 +177,22 @@ const ManagePallet = (): JSX.Element => {
           index={0}
           style={styles.bottomSheetModal}
         >
+          <BottomSheetPrintCard
+            isVisible={true}
+            onPress={handlePrintPallet}
+            text={strings('PALLET.PRINT_PALLET')}
+          />
           <BottomSheetAddCard
-            isManagerOption={true}
+            isManagerOption={false}
             isVisible={true}
             text={strings('PALLET.COMBINE_PALLETS')}
             onPress={handleCombinePallets}
+          />
+          <BottomSheetClearCard
+            isManagerOption={false}
+            isVisible={true}
+            text={strings('PALLET.CLEAR_PALLET')}
+            onPress={handleClearPallet}
           />
         </BottomSheetModal>
       </TouchableOpacity>
