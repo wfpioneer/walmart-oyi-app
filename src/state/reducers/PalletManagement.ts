@@ -20,17 +20,7 @@ const initialState: PalletManagementState = {
   palletInfo: {
     id: 0
   },
-  items: [
-    {
-      added: false,
-      deleted: false,
-      itemDesc: 'food',
-      itemNbr: '1234',
-      price: 2.34,
-      quantity: 3,
-      upcNbr: '9876543212345'
-    }
-  ],
+  items: [],
   combinePallets: []
 };
 
