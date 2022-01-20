@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test CombinePalletCard Component Renders the Combine Pallet Card 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#757575",
+      "borderBottomWidth": 2,
+      "flexDirection": "row",
+      "justifyContent": "flex-start",
+      "paddingHorizontal": 10,
+      "paddingVertical": 10,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+        }
+      }
+    >
+      [missing "en.PALLET.PALLET_ID" translation]: 123
+    </Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 14,
+        }
+      }
+    >
+      [missing "en.GENERICS.ITEMS" translation]: 5
+    </Text>
+  </View>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "justifyContent": "center",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#545F7A"
+      name="trash-can"
+      size={30}
+    />
+  </ForwardRef>
+</View>
+`;

@@ -3,6 +3,7 @@ import {
   Actions,
   CLEAR_COMBINE_PALLET,
   CLEAR_PALLET_MANAGEMENT,
+  REMOVE_COMBINE_PALLET,
   SETUP_PALLET,
   SHOW_MANAGE_PALLET_MENU
 } from '../actions/PalletManagement';
@@ -46,6 +47,16 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         ...state,
         combinePallets: []
       };
+    case REMOVE_COMBINE_PALLET: {
+      const deleteIndex = state.combinePallets.findIndex(item => item.palletId === action.payload);
+      const updatedPallets = [
+        ...state.combinePallets.slice(0, deleteIndex),
+        ...state.combinePallets.slice(deleteIndex + 1)
+      ];
+      return {
+        ...state,
+        combinePallets: updatedPallets
+      }; }
     case CLEAR_PALLET_MANAGEMENT:
       return initialState;
     default:

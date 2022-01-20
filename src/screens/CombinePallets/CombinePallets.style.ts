@@ -28,14 +28,7 @@ const styles = StyleSheet.create({
     width: 200,
     paddingTop: 20
   },
-  palletCardContainer: {
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    borderBottomWidth: 2,
-    borderBottomColor: COLOR.GREY_600
-  },
+
   palletContainer: {
     flexDirection: 'column',
     alignItems: 'flex-start'
@@ -62,10 +55,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginBottom: 15
-  },
-  trashIcon: {
-    justifyContent: 'center',
-    paddingHorizontal: 10
   }
 });
 

@@ -28,6 +28,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { setScannedEvent } from '../../state/actions/Global';
 import { clearCombinePallet } from '../../state/actions/PalletManagement';
+import CombinePalletCard from '../../components/CombinePalletCard/CombinePalletCard';
 
 interface CombinePalletsProps {
   combinePallets: CombinePallet[];
@@ -42,22 +43,6 @@ interface CombinePalletsProps {
   setScanText: React.Dispatch<React.SetStateAction<string>>;
 }
 const nonNumRegex = new RegExp(/[^0-9]/g);
-
-const PalletCard = ({ item }: { item: CombinePallet }) => (
-  <View style={styles.palletCardContainer}>
-    <View style={styles.textContainer}>
-      <Text style={styles.palletText}>
-        {`${strings('PALLET.PALLET_ID')}: ${item.palletId}`}
-      </Text>
-      <Text style={styles.itemText}>
-        {`${strings('GENERICS.ITEMS')}: ${item.itemCount}`}
-      </Text>
-    </View>
-    <TouchableOpacity style={styles.trashIcon} onPress={undefined}>
-      <Icon name="trash-can" size={30} color={COLOR.TRACKER_GREY} />
-    </TouchableOpacity>
-  </View>
-);
 
 const ScanPalletComponent = (
   scanText: string,
@@ -136,7 +121,7 @@ export const CombinePalletsScreen = (
           {isManualScanEnabled && <LocationManualScan />}
           <FlatList
             data={combinePallets}
-            renderItem={PalletCard}
+            renderItem={({ item }) => <CombinePalletCard item={item} dispatch={dispatch} />}
             keyExtractor={(item: CombinePallet) => item.palletId.toString()}
           />
           <View style={styles.palletContainer}>
@@ -156,7 +141,7 @@ export const CombinePalletsScreen = (
                 title={strings('GENERICS.SAVE')}
                 type={Button.Type.PRIMARY}
                 style={{ width: '90%' }}
-                onPress={() => undefined} // TODO add dispatch call to Combine Pallet
+                onPress={() => undefined} // TODO add dispatch call to Combine Pallet Api
               />
             </View>
           </View>

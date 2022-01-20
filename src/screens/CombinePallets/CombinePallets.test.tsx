@@ -1,5 +1,5 @@
-import { NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { CombinePalletsScreen } from './CombinePallets';
 import { CombinePallet, PalletItem } from '../../models/PalletManagementTypes';
