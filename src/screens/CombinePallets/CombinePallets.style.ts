@@ -28,6 +28,14 @@ const styles = StyleSheet.create({
     width: 200,
     paddingTop: 20
   },
+  palletCardContainer: {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: COLOR.GREY_600
+  },
   palletContainer: {
     flexDirection: 'column',
     alignItems: 'flex-start'
@@ -35,6 +43,9 @@ const styles = StyleSheet.create({
   palletInfoHeader: {
     paddingHorizontal: 20,
     marginVertical: 20
+  },
+  textContainer: {
+    flex: 1
   },
   palletText: {
     fontSize: 18
@@ -46,11 +57,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 16
   },
-  buttonContainer: {
+  saveButton: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
     marginBottom: 15
+  },
+  trashIcon: {
+    justifyContent: 'center',
+    paddingHorizontal: 10
   }
 });
 

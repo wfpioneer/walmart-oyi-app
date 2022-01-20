@@ -152,7 +152,8 @@ export default {
     ITEM_DELETE: '1 item pending deletion',
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion',
     PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet',
-    COMBINE_PALLETS: 'Combine Pallets'
+    COMBINE_PALLETS: 'Combine Pallets',
+    PALLET_MERGE: 'will be merged into'
   },
   LOCATION: {
     TITLE: 'All locations',

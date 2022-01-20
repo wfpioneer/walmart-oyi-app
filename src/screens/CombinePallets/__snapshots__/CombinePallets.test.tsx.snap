@@ -1,0 +1,196 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CombinePalletsScreen Renders Combine Pallet Merge screen if combine pallets has data 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
+  }
+>
+  <React.Fragment>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "itemCount": 7,
+            "palletId": 789,
+          },
+          Object {
+            "itemCount": 4,
+            "palletId": 902,
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "flex-start",
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 16,
+          }
+        }
+      >
+        [missing "en.PALLET.PALLET_MERGE" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "marginVertical": 20,
+            "paddingHorizontal": 20,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+            }
+          }
+        >
+          [missing "en.LOCATION.PALLET" translation]: 1
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 14,
+            }
+          }
+        >
+          [missing "en.GENERICS.ITEMS" translation]: 2
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginBottom": 15,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "width": "90%",
+            }
+          }
+          title="[missing \\"en.GENERICS.SAVE\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </React.Fragment>
+</View>
+`;
+
+exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders Scan Pallet ID screen if combine pallets is empty 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "width": 370,
+      }
+    }
+  >
+    <ForwardRef
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#000000"
+        name="barcode-scan"
+        size={100}
+      />
+    </ForwardRef>
+    <View
+      style={
+        Object {
+          "paddingTop": 30,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PALLET.SCAN_PALLET" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "paddingTop": 20,
+        }
+      }
+    >
+      <Text>
+        [missing "en.GENERICS.OR" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "paddingTop": 20,
+          "width": 200,
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        keyboardType="numeric"
+        onChangeText={[Function]}
+        placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "borderWidth": 1,
+            "color": "#000000",
+            "paddingLeft": 10,
+          }
+        }
+        underlineColorAndroid="transparent"
+        value=""
+      />
+    </View>
+  </View>
+</View>
+`;

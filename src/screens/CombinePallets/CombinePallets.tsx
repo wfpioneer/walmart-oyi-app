@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
+  EmitterSubscription,
   FlatList,
   Text,
   TextInput,
@@ -7,44 +8,62 @@ import {
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute
+} from '@react-navigation/native';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
-import { openCamera } from '../../utils/scannerUtils';
+import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import styles from './CombinePallets.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { CombinePallet, PalletItem } from '../../models/PalletManagementTypes';
 import Button from '../../components/buttons/Button';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
+import { validateSession } from '../../utils/sessionTimeout';
+import { trackEvent } from '../../utils/AppCenterTool';
+import { setScannedEvent } from '../../state/actions/Global';
+import { clearCombinePallet } from '../../state/actions/PalletManagement';
 
 interface CombinePalletsProps {
   combinePallets: CombinePallet[];
   palletId: number;
   palletItems: PalletItem[];
   isManualScanEnabled: boolean;
+  navigation: NavigationProp<any>;
+  route: RouteProp<any, string>;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
+  dispatch: Dispatch<any>;
+  scanText: string;
+  setScanText: React.Dispatch<React.SetStateAction<string>>;
 }
+const nonNumRegex = new RegExp(/[^0-9]/g);
+
 const PalletCard = ({ item }: { item: CombinePallet }) => (
-  <View
-    style={{
-      justifyContent: 'flex-start',
-      flexDirection: 'row',
-      paddingVertical: 10,
-      paddingHorizontal: 10,
-      borderBottomWidth: 2,
-      borderBottomColor: COLOR.GREY_600
-    }}
-  >
-    <View>
+  <View style={styles.palletCardContainer}>
+    <View style={styles.textContainer}>
       <Text style={styles.palletText}>
-        {strings('PALLET.PALLET_ID')}: {item.palletId}
+        {`${strings('PALLET.PALLET_ID')}: ${item.palletId}`}
       </Text>
       <Text style={styles.itemText}>
-        {strings('GENERICS.ITEMS')}: {item.itemCount}
+        {`${strings('GENERICS.ITEMS')}: ${item.itemCount}`}
       </Text>
     </View>
+    <TouchableOpacity style={styles.trashIcon} onPress={undefined}>
+      <Icon name="trash-can" size={30} color={COLOR.TRACKER_GREY} />
+    </TouchableOpacity>
   </View>
 );
 
-const ScanPalletComponent = (): JSX.Element => (
+const ScanPalletComponent = (
+  scanText: string,
+  setScanText: React.Dispatch<React.SetStateAction<string>>,
+  onPress?: () => void
+): JSX.Element => (
   <View style={styles.scanContainer}>
     <TouchableOpacity onPress={() => openCamera()}>
       <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
@@ -57,12 +76,12 @@ const ScanPalletComponent = (): JSX.Element => (
     </View>
     <View style={styles.textView}>
       <TextInput
-        value=""
-        onChangeText={(text: string) => console.log('Setting Text')/* setSearchText(text.replace(nonNumRegex, '')) */}
+        value={scanText}
+        onChangeText={(text: string) => setScanText(text.replace(nonNumRegex, ''))}
         style={styles.textInput}
         keyboardType="numeric"
         placeholder={strings('PALLET.ENTER_PALLET_ID')}
-        onSubmitEditing={() => console.log('Scanning a pallet Id')}
+        onSubmitEditing={onPress}
       />
     </View>
   </View>
@@ -70,8 +89,46 @@ const ScanPalletComponent = (): JSX.Element => (
 export const CombinePalletsScreen = (
   props: CombinePalletsProps
 ): JSX.Element => {
-  const { combinePallets, palletId, palletItems, isManualScanEnabled } = props;
-  // Make this a generic Button as it will be used in multiple screens
+  const {
+    combinePallets,
+    palletId,
+    palletItems,
+    isManualScanEnabled,
+    useEffectHook,
+    route,
+    navigation,
+    dispatch,
+    scanText,
+    setScanText
+  } = props;
+  let scannedSubscription: EmitterSubscription;
+
+  // Scanner listener
+  useEffectHook(() => {
+    scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused() && combinePallets.length < 2) {
+        validateSession(navigation, route.name).then(() => {
+          trackEvent('combine_pallet_scanned', {
+            barcode: scan.value,
+            type: scan.type
+          });
+          dispatch(setScannedEvent(scan));
+          setScanText(scan.value);
+        });
+      }
+    });
+    return () => {
+      scannedSubscription.remove();
+    };
+  }, []);
+
+  // TODO clear combine pallets API when implemented
+  useEffectHook(() => {
+    navigation.addListener('beforeRemove', () => {
+      // Clear Combine Pallets state
+      dispatch(clearCombinePallet());
+    });
+  }, []);
   return (
     <View style={styles.container}>
       {combinePallets.length !== 0 ? (
@@ -83,27 +140,29 @@ export const CombinePalletsScreen = (
             keyExtractor={(item: CombinePallet) => item.palletId.toString()}
           />
           <View style={styles.palletContainer}>
-            <Text style={styles.mergeText}>will be merged into</Text>
+            <Text style={styles.mergeText}>
+              {strings('PALLET.PALLET_MERGE')}
+            </Text>
             <View style={styles.palletInfoHeader}>
               <Text style={styles.palletText}>
-                {strings('LOCATION.PALLET')}: {palletId}
+                {`${strings('LOCATION.PALLET')}: ${palletId}`}
               </Text>
               <Text style={styles.itemText}>
-                {strings('GENERICS.ITEMS')}: {palletItems.length}
+                {`${strings('GENERICS.ITEMS')}: ${palletItems.length}`}
               </Text>
             </View>
-            <View style={styles.buttonContainer}>
+            <View style={styles.saveButton}>
               <Button
                 title={strings('GENERICS.SAVE')}
                 type={Button.Type.PRIMARY}
                 style={{ width: '90%' }}
-                onPress={() => console.log('Combine Pallets Save')}
+                onPress={() => undefined} // TODO add dispatch call to Combine Pallet
               />
             </View>
           </View>
         </>
       ) : (
-        <ScanPalletComponent />
+        ScanPalletComponent(scanText, setScanText, undefined)
       )}
     </View>
   );
@@ -115,12 +174,22 @@ const CombinePallets = (): JSX.Element => {
   const isManualScanEnabled = useTypedSelector(
     state => state.Global.isManualScanEnabled
   );
+  const [scanText, setScanText] = useState('');
+  const navigation = useNavigation();
+  const route = useRoute();
+  const dispatch = useDispatch();
   return (
     <CombinePalletsScreen
       combinePallets={combinePallets}
       palletId={palletInfo.id}
       palletItems={items}
       isManualScanEnabled={isManualScanEnabled}
+      useEffectHook={useEffect}
+      route={route}
+      navigation={navigation}
+      dispatch={dispatch}
+      scanText={scanText}
+      setScanText={setScanText}
     />
   );
 };

@@ -151,7 +151,8 @@ export default {
     ITEM_DELETE: '1 item pending deletion', // TODO Mandarin Translation
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion', // TODO Mandarin Translation
     PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet', // TODO Mandarin Translation
-    COMBINE_PALLETS: 'Combine Pallets' // TODO Mandarin translation
+    COMBINE_PALLETS: 'Combine Pallets', // TODO Mandarin translation
+    PALLET_MERGE: 'will be merged into' // TODO Mandarin translation
   },
   LOCATION: {
     TITLE: '所有位置',
