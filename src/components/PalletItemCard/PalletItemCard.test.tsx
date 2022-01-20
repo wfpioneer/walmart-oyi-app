@@ -7,7 +7,7 @@ describe('PalletItemCard', () => {
   it('PalletItemCard with valid input', () => {
     renderer.render(<PalletItemCard
       itemName="Item1"
-      amount="$12.78"
+      price={12.78}
       upc="23423423423"
       itemNumber="234234234"
       decreaseQuantity={jest.fn()}
@@ -15,7 +15,26 @@ describe('PalletItemCard', () => {
       numberOfItems={1}
       deleteItem={jest.fn()}
       onTextChange={jest.fn()}
-      markDelete={false}
+      markEdited={false}
+      minValue={1}
+      maxValue={2}
+      isValid={true}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders the card with edited true', () => {
+    renderer.render(<PalletItemCard
+      itemName="Item1"
+      price={12.78}
+      upc="23423423423"
+      itemNumber="234234234"
+      decreaseQuantity={jest.fn()}
+      increaseQuantity={jest.fn()}
+      numberOfItems={1}
+      deleteItem={jest.fn()}
+      onTextChange={jest.fn()}
+      markEdited={true}
       minValue={1}
       maxValue={2}
       isValid={true}
