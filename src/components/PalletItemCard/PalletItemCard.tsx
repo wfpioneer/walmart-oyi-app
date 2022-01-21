@@ -10,24 +10,24 @@ import NumericSelector from '../NumericSelector/NumericSelector';
 import styles from './PalletItemCard.style';
 
 interface PalletItemCardProp {
-    itemName: string,
-    amount: string,
-    upc: string,
-    itemNumber: string,
-    decreaseQuantity(): void,
-    increaseQuantity(): void,
-    onTextChange(): void,
-    numberOfItems: number,
-    deleteItem(): void,
-    markDelete: boolean,
-    minValue : number,
-    maxValue : number,
-    isValid: boolean
+    itemName: string;
+    price: number;
+    upc: string;
+    itemNumber: string;
+    decreaseQuantity(): void;
+    increaseQuantity(): void;
+    onTextChange(text: string): void;
+    numberOfItems: number;
+    deleteItem(): void;
+    markEdited: boolean;
+    minValue: number;
+    maxValue: number;
+    isValid: boolean;
   }
 const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
   const {
     itemName,
-    amount,
+    price,
     upc,
     itemNumber,
     decreaseQuantity,
@@ -35,20 +35,20 @@ const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
     onTextChange,
     numberOfItems,
     deleteItem,
-    markDelete,
+    markEdited,
     minValue,
     maxValue,
     isValid
   } = props;
   return (
-    <View style={markDelete ? styles.deletedContainer : styles.container}>
+    <View style={markEdited ? styles.deletedContainer : styles.container}>
       <View style={styles.content}>
         <View style={styles.itemHeader}>
           <Text style={styles.textHeader}>
             {itemName}
           </Text>
           <Text style={styles.itemContainer}>
-            {amount}
+            {`${strings('GENERICS.CURRENCY_SYMBOL')} ${price}`}
           </Text>
         </View>
         <View style={styles.itemHeaderFirstRow}>

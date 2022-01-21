@@ -36,7 +36,7 @@ exports[`AddZoneScreen NumericSelector minus button is disabled if value is less
   <TextInput
     allowFontScaling={true}
     keyboardType="numeric"
-    onChangeText={[MockFunction]}
+    onChangeText={[Function]}
     rejectResponderTermination={true}
     style={
       Object {
@@ -105,7 +105,7 @@ exports[`AddZoneScreen NumericSelector plus button is disabled if value is great
   <TextInput
     allowFontScaling={true}
     keyboardType="numeric"
-    onChangeText={[MockFunction]}
+    onChangeText={[Function]}
     rejectResponderTermination={true}
     style={
       Object {
@@ -174,7 +174,7 @@ exports[`AddZoneScreen NumericSelector with invalid input 1`] = `
   <TextInput
     allowFontScaling={true}
     keyboardType="numeric"
-    onChangeText={[MockFunction]}
+    onChangeText={[Function]}
     rejectResponderTermination={true}
     style={
       Object {
@@ -243,7 +243,7 @@ exports[`AddZoneScreen NumericSelector with valid input 1`] = `
   <TextInput
     allowFontScaling={true}
     keyboardType="numeric"
-    onChangeText={[MockFunction]}
+    onChangeText={[Function]}
     rejectResponderTermination={true}
     style={
       Object {

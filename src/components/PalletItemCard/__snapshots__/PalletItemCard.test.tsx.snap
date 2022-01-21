@@ -46,7 +46,164 @@ exports[`PalletItemCard PalletItemCard with valid input 1`] = `
           }
         }
       >
-        $12.78
+        [missing "en.GENERICS.CURRENCY_SYMBOL" translation] 12.78
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+          "fontSize": 8,
+          "paddingTop": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "flex": 1,
+            "fontSize": 10,
+          }
+        }
+      >
+        [missing "en.ITEM.UPC" translation]
+      </Text>
+      <View>
+        <Text
+          style={
+            Object {
+              "flex": 1,
+              "fontSize": 10,
+            }
+          }
+        >
+          [missing "en.ITEM.ITEM_NUMBER" translation]
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+          "fontSize": 8,
+          "paddingTop": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "flex": 1,
+            "fontSize": 10,
+          }
+        }
+      >
+        23423423423
+      </Text>
+      <View>
+        <Text
+          style={
+            Object {
+              "flex": 1,
+              "fontSize": 10,
+            }
+          }
+        >
+          234234234
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "paddingTop": 10,
+        }
+      }
+    >
+      <View>
+        <NumericSelector
+          isValid={true}
+          maxValue={2}
+          minValue={1}
+          onDecreaseQty={[MockFunction]}
+          onIncreaseQty={[MockFunction]}
+          onTextChange={[MockFunction]}
+          value={1}
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "justifyContent": "center",
+            "paddingLeft": 180,
+          }
+        }
+      >
+        <ForwardRef
+          onPress={[Function]}
+        >
+          <View>
+            <Image
+              source=""
+            />
+          </View>
+        </ForwardRef>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`PalletItemCard renders the card with edited true 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFFFE0",
+      "flexDirection": "row",
+      "justifyContent": "flex-start",
+      "marginBottom": 2,
+      "padding": 15,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "justifyContent": "space-evenly",
+        "marginRight": 20,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        Item1
+      </Text>
+      <Text
+        style={
+          Object {
+            "paddingRight": 15,
+          }
+        }
+      >
+        [missing "en.GENERICS.CURRENCY_SYMBOL" translation] 12.78
       </Text>
     </View>
     <View

@@ -44,7 +44,8 @@ export default {
     ITEM: 'Item',
     ITEMS: 'Items',
     TOOLS: 'Tools',
-    OR: 'OR'
+    OR: 'OR',
+    CURRENCY_SYMBOL: '$'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -155,7 +156,11 @@ export default {
     ITEM_DELETE: '1 item pending deletion',
     X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion',
     PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet',
-    PALLET_MERGE: 'will be merged into'
+    PALLET_MERGE: 'will be merged into',
+    CANNOT_HAVE_NEGATIVE_QTY: 'Item cannot have negative quantity',
+    ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet',
+    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC',
+    ITEMS_NOT_FOUND: 'Item Not found'
   },
   LOCATION: {
     TITLE: 'All locations',

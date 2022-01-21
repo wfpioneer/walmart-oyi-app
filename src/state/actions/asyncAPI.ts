@@ -95,3 +95,6 @@ export const getZoneNames = makeAsyncActionCreators(GET_ZONE_NAMES);
 
 export const GET_CLUB_CONFIG = makeAsyncActionTypes('API/GET_CLUB_CONFIG');
 export const getClubConfig = makeAsyncActionCreators(GET_CLUB_CONFIG);
+
+export const GET_ITEM_DETAIL_UPC = makeAsyncActionTypes('API/GET_ITEM_DETAIL_UPC');
+export const getItemDetailsUPC = makeAsyncActionCreators(GET_ITEM_DETAIL_UPC);
