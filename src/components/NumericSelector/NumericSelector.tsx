@@ -16,7 +16,7 @@ interface NumericSelectorProps {
 }
 
 // Move to stringUtils file if we make one
-export const numberInputFilter = (text: string): string => text.replace(/[^0-9]/g, '');
+export const numberInputFilter = (text: string): string => text.replace(/[^-]\D/g, '');
 
 const renderPlusMinusBtn = (name: 'plus' | 'minus', isDisabled: boolean) => (
   <MaterialCommunityIcon

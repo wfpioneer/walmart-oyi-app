@@ -66,7 +66,7 @@ const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text: strin
   } else if (newQuantity < 0) {
     Toast.show({
       type: 'error',
-      text1: strings('HOME.FAILED_TO_GET_CONFIG'),
+      text1: strings('PALLET.CANNOT_HAVE_NEGATIVE_QTY'),
       position: 'bottom',
       visibilityTime: 3000
     });
