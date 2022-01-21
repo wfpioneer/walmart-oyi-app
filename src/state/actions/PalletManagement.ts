@@ -6,6 +6,7 @@ export const SETUP_PALLET = 'PALLET_MANAGEMENT/SETUP_PALLET';
 export const CLEAR_PALLET_MANAGEMENT = 'PALLET_MANAGEMENT/CLEAR_PALLET_MANAGEMENT';
 export const SET_ITEM_NEW_QUANTITY = 'PALLET_MANAGEMENT/SET_ITEM_NEW_QUANTITY';
 export const ADD_PALLET = 'PALLET_MANAGEMENT/ADD_PALLET';
+export const DELETE_ITEM = 'PALLET_MANAGEMENT/DELETE_ITEM';
 
 export const togglePalletPopup = () => ({
   type: TOGGLE_PALLET_MANAGEMENT_POPUP
@@ -35,10 +36,16 @@ export const addItemToPallet = (palletItem: PalletItem) => ({
   payload: palletItem
 } as const);
 
+export const deleteItem = (itemNbr: string) => ({
+  type: DELETE_ITEM,
+  payload: { itemNbr }
+} as const);
+
 export type Actions =
 ReturnType<typeof showManagePalletMenu>
   | ReturnType<typeof setupPallet>
   | ReturnType<typeof togglePalletPopup>
   | ReturnType<typeof clearPalletManagement>
   | ReturnType<typeof setPalletItemNewQuantity>
-  | ReturnType<typeof addItemToPallet>;
+  | ReturnType<typeof addItemToPallet>
+  | ReturnType<typeof deleteItem>;

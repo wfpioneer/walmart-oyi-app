@@ -31,7 +31,7 @@ import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetA
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import Button from '../../components/buttons/Button';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
-import { addItemToPallet, setPalletItemNewQuantity, showManagePalletMenu } from '../../state/actions/PalletManagement';
+import { addItemToPallet, setPalletItemNewQuantity, deleteItem, showManagePalletMenu } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 
 interface ManagePalletProps {
@@ -89,6 +89,10 @@ const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text: strin
   }
 };
 
+const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
+  dispatch(deleteItem(item.itemNbr.toString()));
+};
+// TODO implement palletItemCard
 const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   if (!item.deleted) {
     return (
@@ -96,7 +100,7 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
         decreaseQuantity={() => handleDecreaseQuantity(item, dispatch)}
         increaseQuantity={() => handleIncreaseQuantity(item, dispatch)}
         onTextChange={text => handleTextChange(item, dispatch, text)}
-        deleteItem={() => {}}
+        deleteItem={() => deleteItemDetail(item, dispatch)}
         isValid={true}
         itemName={item.itemDesc}
         itemNumber={item.itemNbr.toString()}
@@ -111,7 +115,6 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   }
   return null;
 };
-
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation, route, dispatch,
