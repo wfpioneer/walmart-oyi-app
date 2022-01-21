@@ -1,11 +1,13 @@
 import {
+  ADD_PALLET,
   Actions,
   CLEAR_PALLET_MANAGEMENT,
   SETUP_PALLET,
   SHOW_MANAGE_PALLET_MENU,
   TOGGLE_PALLET_MANAGEMENT_POPUP
 } from '../actions/PalletManagement';
-import { CombinePallet, PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
+import { CombinePallet, PalletInfo } from '../../models/PalletManagementTypes';
+import { PalletItem } from '../../models/PalletItem';
 
 interface PalletManagementState {
   managePalletMenu: boolean;
@@ -39,6 +41,11 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       return {
         ...initialState,
         ...action.payload
+      };
+    case ADD_PALLET:
+      return {
+        ...state,
+        items: [...state.items, action.payload]
       };
     case CLEAR_PALLET_MANAGEMENT:
       return initialState;
