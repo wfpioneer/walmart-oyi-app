@@ -1,11 +1,13 @@
 import {
+  ADD_COMBINE_PALLET,
   ADD_PALLET,
   Actions,
+  CLEAR_COMBINE_PALLET,
   CLEAR_PALLET_MANAGEMENT,
+  REMOVE_COMBINE_PALLET,
   SETUP_PALLET,
-  SET_ITEM_NEW_QUANTITY,
   SHOW_MANAGE_PALLET_MENU,
-  TOGGLE_PALLET_MANAGEMENT_POPUP
+  SET_ITEM_NEW_QUANTITY,
 } from '../actions/PalletManagement';
 import { CombinePallet, PalletInfo } from '../../models/PalletManagementTypes';
 import { PalletItem } from '../../models/PalletItem';
@@ -33,16 +35,31 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         ...state,
         managePalletMenu: action.payload
       };
-    case TOGGLE_PALLET_MANAGEMENT_POPUP:
-      return {
-        ...state,
-        managePalletMenu: !state.managePalletMenu
-      };
     case SETUP_PALLET:
       return {
         ...initialState,
         ...action.payload
       };
+    case ADD_COMBINE_PALLET:
+      return {
+        ...state,
+        combinePallets: [...state.combinePallets, action.payload]
+      };
+    case CLEAR_COMBINE_PALLET:
+      return {
+        ...state,
+        combinePallets: []
+      };
+    case REMOVE_COMBINE_PALLET: {
+      const deleteIndex = state.combinePallets.findIndex(item => item.palletId === action.payload);
+      const updatedPallets = [
+        ...state.combinePallets.slice(0, deleteIndex),
+        ...state.combinePallets.slice(deleteIndex + 1)
+      ];
+      return {
+        ...state,
+        combinePallets: updatedPallets
+      }; }
     case ADD_PALLET:
       return {
         ...state,

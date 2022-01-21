@@ -209,30 +209,20 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         {isManualScanEnabled && <ManualScan />}
         <View style={styles.headerContainer}>
           <View style={styles.headerItem}>
-            <Text style={styles.headerText}>
-              {strings('PALLET.PALLET_ID')}
-            </Text>
-            <Text style={styles.headerItemText}>
-              {id}
-            </Text>
+            <Text style={styles.headerText}>{strings('PALLET.PALLET_ID')}</Text>
+            <Text style={styles.headerItemText}>{id}</Text>
           </View>
           {expirationDate && expirationDate.length > 0 ? (
             <View style={styles.headerItem}>
               <Text style={styles.headerText}>
                 {strings('PALLET.EXPIRATION_DATE')}
               </Text>
-              <Text style={styles.headerItemText}>
-                {expirationDate}
-              </Text>
+              <Text style={styles.headerItemText}>{expirationDate}</Text>
             </View>
           ) : null}
           <View style={styles.headerItem}>
-            <Text style={styles.headerText}>
-              {strings('LOCATION.ITEMS')}
-            </Text>
-            <Text style={styles.headerItemText}>
-              {items.length}
-            </Text>
+            <Text style={styles.headerText}>{strings('LOCATION.ITEMS')}</Text>
+            <Text style={styles.headerItemText}>{items.length}</Text>
           </View>
         </View>
         <View style={styles.instructionLabel}>
@@ -270,7 +260,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 };
 
 const ManagePallet = (): JSX.Element => {
-  const pallets = useTypedSelector(state => state.PalletManagement);
+  const { palletInfo, managePalletMenu, items } = useTypedSelector(state => state.PalletManagement);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const navigation = useNavigation();
   const route = useRoute();
@@ -283,13 +273,13 @@ const ManagePallet = (): JSX.Element => {
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {
-      if (pallets.managePalletMenu) {
+      if (managePalletMenu) {
         bottomSheetModalRef.current.present();
       } else {
         bottomSheetModalRef.current.dismiss();
       }
     }
-  }, [pallets]);
+  }, [managePalletMenu]);
 
   const handlePrintPallet = () => {
     dispatch(showManagePalletMenu(false));
@@ -298,7 +288,8 @@ const ManagePallet = (): JSX.Element => {
 
   const handleCombinePallets = () => {
     dispatch(showManagePalletMenu(false));
-    // TODO Integration
+    bottomSheetModalRef.current?.dismiss();
+    navigation.navigate('CombinePallets');
   };
 
   const handleClearPallet = () => {
@@ -309,47 +300,46 @@ const ManagePallet = (): JSX.Element => {
   return (
     <BottomSheetModalProvider>
       <TouchableOpacity
-        onPress={() => dispatch(showManagePalletMenu(false))}
+        onPress={() => dispatch(showManagePalletMenu(!managePalletMenu))}
         activeOpacity={1}
-        disabled={!pallets.managePalletMenu}
-        style={pallets.managePalletMenu ? styles.disabledContainer : styles.container}
+        disabled={!managePalletMenu}
+        style={managePalletMenu ? styles.disabledContainer : styles.safeAreaView}
       >
         <ManagePalletScreen
           dispatch={dispatch}
           useEffectHook={useEffect}
           isManualScanEnabled={isManualScanEnabled}
-          palletInfo={pallets.palletInfo}
-          items={pallets.items}
+          palletInfo={palletInfo}
+          items={items}
           navigation={navigation}
           route={route}
           getItemDetailsfromUpcApi={getItemDetailsfromUpcApi}
         />
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          snapPoints={snapPoints}
+          index={0}
+          style={styles.bottomSheetModal}
+        >
+          <BottomSheetPrintCard
+            isVisible={true}
+            onPress={handlePrintPallet}
+            text={strings('PALLET.PRINT_PALLET')}
+          />
+          <BottomSheetAddCard
+            isManagerOption={false}
+            isVisible={true}
+            text={strings('PALLET.COMBINE_PALLETS')}
+            onPress={handleCombinePallets}
+          />
+          <BottomSheetClearCard
+            isManagerOption={false}
+            isVisible={true}
+            text={strings('PALLET.CLEAR_PALLET')}
+            onPress={handleClearPallet}
+          />
+        </BottomSheetModal>
       </TouchableOpacity>
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        snapPoints={snapPoints}
-        index={0}
-        onDismiss={() => dispatch(showManagePalletMenu(false))}
-        style={styles.bottomSheetModal}
-      >
-        <BottomSheetPrintCard
-          isVisible={true}
-          onPress={handlePrintPallet}
-          text={strings('PALLET.PRINT_PALLET')}
-        />
-        <BottomSheetAddCard
-          isManagerOption={false}
-          isVisible={true}
-          text={strings('PALLET.COMBINE_PALLETS')}
-          onPress={handleCombinePallets}
-        />
-        <BottomSheetClearCard
-          isManagerOption={false}
-          isVisible={true}
-          text={strings('PALLET.CLEAR_PALLET')}
-          onPress={handleClearPallet}
-        />
-      </BottomSheetModal>
     </BottomSheetModalProvider>
   );
 };

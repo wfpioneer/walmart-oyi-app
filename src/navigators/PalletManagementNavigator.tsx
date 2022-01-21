@@ -6,15 +6,17 @@ import { useDispatch } from 'react-redux';
 import PalletManagement from '../screens/PalletManagement/PalletManagement';
 import ManagePallet from '../screens/ManagePallet/ManagePallet';
 import COLOR from '../themes/Color';
-import { togglePalletPopup } from '../state/actions/PalletManagement';
+import { showManagePalletMenu } from '../state/actions/PalletManagement';
 import { trackEvent } from '../utils/AppCenterTool';
 import { strings } from '../locales';
 import { setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './PalletManagementNavigator.style';
+import CombinePallets from '../screens/CombinePallets/CombinePallets';
 
 interface PalletManagementNavigatorProps {
   isManualScanEnabled: boolean;
+  managePalletMenu: boolean;
   dispatch: Dispatch<any>;
 }
 
@@ -39,9 +41,9 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
-const renderManagePalletKebabButton = (dispatch: Dispatch<any>) => (
+const renderManagePalletKebabButton = (managePalletMenu: boolean, dispatch: Dispatch<any>) => (
   <TouchableOpacity onPress={() => {
-    dispatch(togglePalletPopup());
+    dispatch(showManagePalletMenu(!managePalletMenu));
     trackEvent('pallet_menu_button_click');
   }}
   >
@@ -55,7 +57,9 @@ const renderManagePalletKebabButton = (dispatch: Dispatch<any>) => (
 );
 
 export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorProps): JSX.Element => {
-  const { isManualScanEnabled, dispatch } = props;
+  const {
+    isManualScanEnabled, managePalletMenu, dispatch
+  } = props;
   return (
     <Stack.Navigator
       headerMode="float"
@@ -79,7 +83,19 @@ export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorP
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderManagePalletKebabButton(dispatch)}
+              {renderManagePalletKebabButton(managePalletMenu, dispatch)}
+            </View>
+          )
+        }}
+      />
+      <Stack.Screen
+        name="CombinePallets"
+        component={CombinePallets}
+        options={{
+          headerTitle: strings('PALLET.COMBINE_PALLETS'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderScanButton(dispatch, isManualScanEnabled)}
             </View>
           )
         }}
@@ -90,10 +106,12 @@ export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorP
 
 const PalletManagementNavigator = (): JSX.Element => {
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
+  const { managePalletMenu } = useTypedSelector(state => state.PalletManagement);
   const dispatch = useDispatch();
   return (
     <PalletManagementNavigatorStack
       isManualScanEnabled={isManualScanEnabled}
+      managePalletMenu={managePalletMenu}
       dispatch={dispatch}
     />
   );
