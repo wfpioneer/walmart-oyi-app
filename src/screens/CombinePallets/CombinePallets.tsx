@@ -18,7 +18,7 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
-import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
+import { barcodeEmitter } from '../../utils/scannerUtils';
 import styles from './CombinePallets.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { CombinePallet, PalletItem } from '../../models/PalletManagementTypes';
@@ -39,36 +39,12 @@ interface CombinePalletsProps {
   route: RouteProp<any, string>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   dispatch: Dispatch<any>;
-  scanText: string;
-  setScanText: React.Dispatch<React.SetStateAction<string>>;
 }
-const nonNumRegex = new RegExp(/[^0-9]/g);
 
-const ScanPalletComponent = (
-  scanText: string,
-  setScanText: React.Dispatch<React.SetStateAction<string>>,
-  onPress?: () => void
-): JSX.Element => (
+const ScanPalletComponent = (): JSX.Element => (
   <View style={styles.scanContainer}>
-    <TouchableOpacity onPress={() => openCamera()}>
-      <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
-    </TouchableOpacity>
-    <View style={styles.scanText}>
-      <Text>{strings('PALLET.SCAN_PALLET')}</Text>
-    </View>
-    <View style={styles.orText}>
-      <Text>{strings('GENERICS.OR')}</Text>
-    </View>
-    <View style={styles.textView}>
-      <TextInput
-        value={scanText}
-        onChangeText={(text: string) => setScanText(text.replace(nonNumRegex, ''))}
-        style={styles.textInput}
-        keyboardType="numeric"
-        placeholder={strings('PALLET.ENTER_PALLET_ID')}
-        onSubmitEditing={onPress}
-      />
-    </View>
+    <Icon name="information" size={40} color={COLOR.DISABLED_BLUE} />
+    <Text style={styles.scanText}>{strings('PALLET.SCAN_PALLET')}</Text>
   </View>
 );
 export const CombinePalletsScreen = (
@@ -82,9 +58,7 @@ export const CombinePalletsScreen = (
     useEffectHook,
     route,
     navigation,
-    dispatch,
-    scanText,
-    setScanText
+    dispatch
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -98,7 +72,6 @@ export const CombinePalletsScreen = (
             type: scan.type
           });
           dispatch(setScannedEvent(scan));
-          setScanText(scan.value);
         });
       }
     });
@@ -116,39 +89,43 @@ export const CombinePalletsScreen = (
   }, []);
   return (
     <View style={styles.container}>
-      {combinePallets.length !== 0 ? (
-        <>
-          {isManualScanEnabled && <LocationManualScan />}
-          <FlatList
-            data={combinePallets}
-            renderItem={({ item }) => <CombinePalletCard item={item} dispatch={dispatch} />}
-            keyExtractor={(item: CombinePallet) => item.palletId.toString()}
-          />
-          <View style={styles.palletContainer}>
-            <Text style={styles.mergeText}>
-              {strings('PALLET.PALLET_MERGE')}
-            </Text>
-            <View style={styles.palletInfoHeader}>
-              <Text style={styles.palletText}>
-                {`${strings('LOCATION.PALLET')}: ${palletId}`}
-              </Text>
-              <Text style={styles.itemText}>
-                {`${strings('GENERICS.ITEMS')}: ${palletItems.length}`}
-              </Text>
-            </View>
-            <View style={styles.saveButton}>
-              <Button
-                title={strings('GENERICS.SAVE')}
-                type={Button.Type.PRIMARY}
-                style={{ width: '90%' }}
-                onPress={() => undefined} // TODO add dispatch call to Combine Pallet Api
-              />
-            </View>
-          </View>
-        </>
-      ) : (
-        ScanPalletComponent(scanText, setScanText, undefined)
+      {/* TODO add change to pass Placeholder text to ManualScan component */}
+      {isManualScanEnabled && <LocationManualScan />}
+      {combinePallets.length > 0 && (
+        <View style={styles.scanView}>
+          <Text style={styles.scanText}>{strings('PALLET.SCAN_PALLET')}</Text>
+        </View>
       )}
+      <FlatList
+        data={combinePallets}
+        renderItem={({ item }) => (
+          <CombinePalletCard item={item} dispatch={dispatch} />
+        )}
+        keyExtractor={(item: CombinePallet) => item.palletId.toString()}
+        ListEmptyComponent={ScanPalletComponent()}
+      />
+      <View style={styles.palletContainer}>
+        {combinePallets.length > 0 && (
+          <Text style={styles.mergeText}>{strings('PALLET.PALLET_MERGE')}</Text>
+        )}
+        <View style={styles.palletInfoHeader}>
+          <Text style={styles.palletText}>
+            {`${strings('LOCATION.PALLET')}: ${palletId}`}
+          </Text>
+          <Text style={styles.itemText}>
+            {`${strings('GENERICS.ITEMS')}: ${palletItems.length}`}
+          </Text>
+        </View>
+        <View style={styles.saveButton}>
+          <Button
+            title={strings('GENERICS.SAVE')}
+            type={Button.Type.PRIMARY}
+            style={{ width: '90%' }}
+            onPress={() => undefined} // TODO add dispatch call to Combine Pallet Api
+            disabled={combinePallets.length === 0}
+          />
+        </View>
+      </View>
     </View>
   );
 };
@@ -159,7 +136,6 @@ const CombinePallets = (): JSX.Element => {
   const isManualScanEnabled = useTypedSelector(
     state => state.Global.isManualScanEnabled
   );
-  const [scanText, setScanText] = useState('');
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
@@ -173,8 +149,6 @@ const CombinePallets = (): JSX.Element => {
       route={route}
       navigation={navigation}
       dispatch={dispatch}
-      scanText={scanText}
-      setScanText={setScanText}
     />
   );
 };

@@ -13,13 +13,11 @@ import { setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './PalletManagementNavigator.style';
 import CombinePallets from '../screens/CombinePallets/CombinePallets';
-import { CombinePallet } from '../models/PalletManagementTypes';
 
 interface PalletManagementNavigatorProps {
   isManualScanEnabled: boolean;
   managePalletMenu: boolean;
   dispatch: Dispatch<any>;
-  combinePallets: CombinePallet[];
 }
 
 const Stack = createStackNavigator();
@@ -60,7 +58,7 @@ const renderManagePalletKebabButton = (managePalletMenu: boolean, dispatch: Disp
 
 export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorProps): JSX.Element => {
   const {
-    isManualScanEnabled, managePalletMenu, dispatch, combinePallets
+    isManualScanEnabled, managePalletMenu, dispatch
   } = props;
   return (
     <Stack.Navigator
@@ -97,7 +95,7 @@ export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorP
           headerTitle: strings('PALLET.COMBINE_PALLETS'),
           headerRight: () => (
             <View style={styles.headerContainer}>
-              {combinePallets.length === 1 ? renderScanButton(dispatch, isManualScanEnabled) : null}
+              {renderScanButton(dispatch, isManualScanEnabled)}
               {renderManagePalletKebabButton(managePalletMenu, dispatch)}
             </View>
           )
@@ -109,14 +107,13 @@ export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorP
 
 const PalletManagementNavigator = (): JSX.Element => {
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
-  const { managePalletMenu, combinePallets } = useTypedSelector(state => state.PalletManagement);
+  const { managePalletMenu } = useTypedSelector(state => state.PalletManagement);
   const dispatch = useDispatch();
   return (
     <PalletManagementNavigatorStack
       isManualScanEnabled={isManualScanEnabled}
       managePalletMenu={managePalletMenu}
       dispatch={dispatch}
-      combinePallets={combinePallets}
     />
   );
 };

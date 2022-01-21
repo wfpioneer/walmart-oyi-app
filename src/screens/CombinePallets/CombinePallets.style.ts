@@ -11,24 +11,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 370
+    paddingVertical: 30
   },
-  textInput: {
-    paddingLeft: 10,
-    color: COLOR.BLACK,
-    borderWidth: 1
+  scanView: {
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+    borderColor: COLOR.GREY_600
   },
   scanText: {
-    paddingTop: 30
+    fontSize: 18
   },
-  orText: {
-    paddingTop: 20
-  },
-  textView: {
-    width: 200,
-    paddingTop: 20
-  },
-
   palletContainer: {
     flexDirection: 'column',
     alignItems: 'flex-start'
@@ -36,9 +29,6 @@ const styles = StyleSheet.create({
   palletInfoHeader: {
     paddingHorizontal: 20,
     marginVertical: 20
-  },
-  textContainer: {
-    flex: 1
   },
   palletText: {
     fontSize: 18

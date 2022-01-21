@@ -34,7 +34,7 @@ describe('CombinePalletsScreen', () => {
     }
   ];
   describe('Tests rendering the CombinePallets Screen', () => {
-    it('Renders Scan Pallet ID screen if combine pallets is empty', () => {
+    it('Renders Save button as "Disabled" if combine pallets is empty', () => {
       const renderer = ShallowRenderer.createRenderer();
 
       renderer.render(
@@ -47,15 +47,13 @@ describe('CombinePalletsScreen', () => {
           route={routeProp}
           navigation={navigationProp}
           dispatch={jest.fn()}
-          scanText=""
-          setScanText={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
 
-  it('Renders Combine Pallet Merge screen if combine pallets has data', () => {
+  it('Renders Combine Pallet Merge Text if combine pallets has data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const mockCombinePallets: CombinePallet[] = [
       {
@@ -77,8 +75,6 @@ describe('CombinePalletsScreen', () => {
         route={routeProp}
         navigation={navigationProp}
         dispatch={jest.fn()}
-        scanText=""
-        setScanText={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
