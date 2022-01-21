@@ -3,6 +3,7 @@ import {
   Actions,
   CLEAR_PALLET_MANAGEMENT,
   SETUP_PALLET,
+  SET_ITEM_NEW_QUANTITY,
   SHOW_MANAGE_PALLET_MENU,
   TOGGLE_PALLET_MANAGEMENT_POPUP
 } from '../actions/PalletManagement';
@@ -49,6 +50,19 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       };
     case CLEAR_PALLET_MANAGEMENT:
       return initialState;
+    case SET_ITEM_NEW_QUANTITY: {
+      const newItems = state.items.map(item => {
+        if (item.itemNbr.toString() === action.payload.itemNbr) {
+          item.newQuantity = action.payload.newQuantity;
+          return item;
+        }
+        return item;
+      });
+      return {
+        ...state,
+        items: newItems
+      };
+    }
     default:
       return {
         ...state

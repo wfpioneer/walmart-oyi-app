@@ -43,7 +43,8 @@ export default {
     BARCODE_SCAN_ERROR: '此条码类型有误',
     ITEM: '商品',
     ITEMS: '多个商品',
-    TOOLS: '工具箱'
+    TOOLS: '工具箱',
+    CURRENCY_SYMBOL: '¥'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -141,16 +142,20 @@ export default {
     SOME_PRINTS_FAILED: '有些商品打印失败'
   },
   PALLET: {
-    PALLET_MANAGEMENT: 'Pallet Management', // TODO Mandarin Translation
-    ENTER_PALLET_ID: 'Type a pallet ID', // TODO Mandarin Translation
-    SCAN_PALLET: 'Scan a pallet', // TODO Mandarin Translation
-    MANAGE_PALLET: 'Manage Pallet', // TODO Mandarin Translation
-    PALLET_ID: 'Pallet ID', // TODO Mandarin Translation
-    EXPIRATION_DATE: 'Expiration Date', // TODO Mandarin Translation
-    SCAN_INSTRUCTIONS: 'Scan UPC to add an item', // TODO Mandarin Translation
-    ITEM_DELETE: '1 item pending deletion', // TODO Mandarin Translation
-    X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion', // TODO Mandarin Translation
-    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet', // TODO Mandarin Translation
+    PALLET_MANAGEMENT: '卡板管理',
+    ENTER_PALLET_ID: '输入卡板ID',
+    SCAN_PALLET: '扫描卡板标签',
+    PRINT_PALLET: '打印卡板',
+    COMBINE_PALLETS: '合并卡板',
+    CLEAR_PALLET: '清空卡板信息',
+    MANAGE_PALLET: '管理卡板',
+    PALLET_ID: '卡板号',
+    EXPIRATION_DATE: '到期日',
+    SCAN_INSTRUCTIONS: '扫描UPC添加商品',
+    ITEM_DELETE: '1个商品待删除',
+    X_ITEMS_DELETE: '%{nbrOfItems} 商品待删除',
+    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet', // TODO CN Translation
+    CANNOT_HAVE_NEGATIVE_QTY: 'Item cannot have negative quantity', // TODO Mandarin Translation
     ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Mandarin translation
     ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC' // TODO Mandarin translation
   },

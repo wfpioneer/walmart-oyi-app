@@ -43,7 +43,8 @@ export default {
     BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido',
     ITEM: 'Artículo',
     ITEMS: 'Artículos',
-    TOOLS: 'Herramientas'
+    TOOLS: 'Herramientas',
+    CURRENCY_SYMBOL: '$'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -141,19 +142,20 @@ export default {
     SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
   },
   PALLET: {
-    PALLET_MANAGEMENT: 'Pallet Management', // TODO Spanish translation
-    ENTER_PALLET_ID: 'Type a pallet ID', // TODO Spanish translation
-    SCAN_PALLET: 'Scan a pallet', // TODO MX translations
-    PRINT_PALLET: 'Print pallet', // TODO MX translations
-    COMBINE_PALLETS: 'Combine pallets', // TODO MX translations
-    CLEAR_PALLET: 'Clear pallets', // TODO Spanish translation
-    MANAGE_PALLET: 'Manage Pallet', // TODO Spanish translation
-    PALLET_ID: 'Pallet ID', // TODO Spanish translation
-    EXPIRATION_DATE: 'Expiration Date', // TODO Spanish translation
-    SCAN_INSTRUCTIONS: 'Scan UPC to add an item', // TODO Spanish translation
-    ITEM_DELETE: '1 item pending deletion', // TODO Spanish translation
-    X_ITEMS_DELETE: '%{nbrOfItems} items pending deletion', // TODO Spanish translation
-    PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet', // TODO Spanish translation
+    PALLET_MANAGEMENT: 'Administración de Pallet',
+    ENTER_PALLET_ID: 'Ingresa el Pallet ID',
+    SCAN_PALLET: 'Escanea un pallet',
+    PRINT_PALLET: 'Imprimir pallet',
+    COMBINE_PALLETS: 'Combinar pallets',
+    CLEAR_PALLET: 'Vaciar pallets',
+    MANAGE_PALLET: 'Administrar Pallet',
+    PALLET_ID: 'Pallet ID',
+    EXPIRATION_DATE: 'Fecha de caducidad',
+    SCAN_INSTRUCTIONS: 'Escanea el UPC para agregar artículos',
+    ITEM_DELETE: '1 eliminación de artículo pendiente',
+    X_ITEMS_DELETE: '%{nbrOfItems} eliminación de artículos pendientes',
+    PALLET_DETAILS_ERROR: 'Error: incapaz de encontrar Pallet',
+    CANNOT_HAVE_NEGATIVE_QTY: 'El artículo no puede teener cantidad negativa',
     ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Spanish translation
     ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC' // TODO Spanish translation
   },

@@ -1,4 +1,7 @@
-import React, { Dispatch, EffectCallback, useEffect, useMemo, useRef } from 'react';
+import React, {
+  Dispatch,
+  EffectCallback, useEffect, useMemo, useRef
+} from 'react';
 import {
   ActivityIndicator,
   EmitterSubscription,
@@ -7,7 +10,9 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import {
+  NavigationProp, RouteProp, useNavigation, useRoute
+} from '@react-navigation/native';
 import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
@@ -26,37 +31,82 @@ import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetA
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import Button from '../../components/buttons/Button';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
-import { addItemToPallet, showManagePalletMenu } from '../../state/actions/PalletManagement';
+import { addItemToPallet, setPalletItemNewQuantity, showManagePalletMenu } from '../../state/actions/PalletManagement';
+import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 
 interface ManagePalletProps {
+  dispatch: Dispatch<any>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   isManualScanEnabled: boolean;
   palletInfo: PalletInfo;
   items: PalletItem[];
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
-  dispatch: Dispatch<any>;
   getItemDetailsfromUpcApi: AsyncState;
 }
 
-const getNumberOfDeleted = (items: PalletItem[]): number => items.reduce((previousValue, currentValue) =>
-  previousValue + +currentValue.deleted, 0);
+const getNumberOfDeleted = (items: PalletItem[]): number => items.reduce(
+  (previousValue, currentValue) => previousValue + +currentValue.deleted, 0
+);
+
+const isQuantityChanged = (item: PalletItem): boolean => !!(item.newQuantity && item.newQuantity !== item.quantity);
 
 const enableSave = (items: PalletItem[]): boolean => {
-  const modifiedArray = items.filter((item: PalletItem) => item.quantity !== item.newQuantity
+  const modifiedArray = items.filter((item: PalletItem) => isQuantityChanged(item)
     || item.deleted || item.added);
   return modifiedArray.length > 0;
 };
 
-// TODO implement palletItemCard
-const tempItemCard = ({ item }: { item: PalletItem }) => {
+const handleDecreaseQuantity = (item: PalletItem, dispatch: Dispatch<any>) => {
+  const currentQuantity = item.newQuantity || item.quantity;
+  if (currentQuantity === 1) {
+    // TODO delete item flow
+    // don't forget to ask user if want to delete
+  } else {
+    dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), currentQuantity - 1));
+  }
+};
+
+const handleIncreaseQuantity = (item: PalletItem, dispatch: Dispatch<any>) => {
+  const currentQuantity = item.newQuantity || item.quantity;
+  dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), currentQuantity + 1));
+};
+
+const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text: string) => {
+  // have had issues with not putting 10 as radix with parseInt
+  const newQuantity = Number.parseInt(text, 10);
+  if (newQuantity === 0) {
+    // TODO delete item flow
+  } else if (newQuantity < 0) {
+    Toast.show({
+      type: 'error',
+      text1: strings('PALLET.CANNOT_HAVE_NEGATIVE_QTY'),
+      position: 'bottom',
+      visibilityTime: 3000
+    });
+  } else {
+    dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), newQuantity));
+  }
+};
+
+const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   if (!item.deleted) {
     return (
-      <View>
-        <Text>
-          {item.itemDesc}
-        </Text>
-      </View>
+      <PalletItemCard
+        decreaseQuantity={() => handleDecreaseQuantity(item, dispatch)}
+        increaseQuantity={() => handleIncreaseQuantity(item, dispatch)}
+        onTextChange={text => handleTextChange(item, dispatch, text)}
+        deleteItem={() => {}}
+        isValid={true}
+        itemName={item.itemDesc}
+        itemNumber={item.itemNbr.toString()}
+        markEdited={isQuantityChanged(item)}
+        maxValue={99}
+        minValue={0}
+        numberOfItems={item.newQuantity || item.quantity}
+        price={item.price}
+        upc={item.upcNbr}
+      />
     );
   }
   return null;
@@ -201,7 +251,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         <View>
           <FlatList
             data={items}
-            renderItem={tempItemCard}
+            renderItem={item => itemCard(item, dispatch)}
             keyExtractor={(item: PalletItem) => item.upcNbr}
           />
         </View>
@@ -265,13 +315,13 @@ const ManagePallet = (): JSX.Element => {
         style={pallets.managePalletMenu ? styles.disabledContainer : styles.container}
       >
         <ManagePalletScreen
+          dispatch={dispatch}
           useEffectHook={useEffect}
           isManualScanEnabled={isManualScanEnabled}
           palletInfo={pallets.palletInfo}
           items={pallets.items}
           navigation={navigation}
           route={route}
-          dispatch={dispatch}
           getItemDetailsfromUpcApi={getItemDetailsfromUpcApi}
         />
       </TouchableOpacity>
