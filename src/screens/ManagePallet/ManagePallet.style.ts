@@ -62,6 +62,11 @@ export default StyleSheet.create({
   saveButton: {
     margin: 15
   },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   bottomSheetModal: {
     borderColor: COLOR.GREY_200,
     borderRadius: 5,

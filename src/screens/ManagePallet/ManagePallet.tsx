@@ -3,24 +3,35 @@ import React, {
   EffectCallback, useEffect, useMemo, useRef
 } from 'react';
 import {
-  EmitterSubscription, FlatList, Text, TouchableOpacity, View
+  ActivityIndicator,
+  EmitterSubscription,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import {
+  NavigationProp, RouteProp, useNavigation, useRoute
+} from '@react-navigation/native';
+import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { validateSession } from '../../utils/sessionTimeout';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import COLOR from '../../themes/Color';
 import styles from './ManagePallet.style';
 import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
+import { getItemDetailsUPC } from '../../state/actions/saga';
+import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import Button from '../../components/buttons/Button';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
-import { setPalletItemNewQuantity, showManagePalletMenu } from '../../state/actions/PalletManagement';
+import { addItemToPallet, setPalletItemNewQuantity, showManagePalletMenu } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 
 interface ManagePalletProps {
@@ -29,6 +40,9 @@ interface ManagePalletProps {
   isManualScanEnabled: boolean;
   palletInfo: PalletInfo;
   items: PalletItem[];
+  navigation: NavigationProp<any>;
+  route: RouteProp<any, string>;
+  getItemDetailsfromUpcApi: AsyncState;
 }
 
 const getNumberOfDeleted = (items: PalletItem[]): number => items.reduce(
@@ -100,19 +114,95 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
 
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
-    dispatch, useEffectHook, isManualScanEnabled, palletInfo, items
+    useEffectHook, isManualScanEnabled, palletInfo, items, navigation, route, dispatch,
+    getItemDetailsfromUpcApi
   } = props;
   const { id, expirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      // TODO implement scanning items and calling get item service
+      if (navigation.isFocused()) {
+        validateSession(navigation, route.name).then(() => {
+          trackEvent('Items_Details_scanned', {
+            barcode: scan.value,
+            type: scan.type
+          });
+          dispatch(
+            getItemDetailsUPC({ upc: scan.value })
+          );
+        });
+      }
     });
     return () => {
       scannedSubscription.remove();
     };
   }, []);
+  useEffectHook(() => {
+    // on api success
+    if (!getItemDetailsfromUpcApi.isWaiting && getItemDetailsfromUpcApi.result) {
+      if (getItemDetailsfromUpcApi.result.status === 200) {
+        const {
+          data
+        } = getItemDetailsfromUpcApi.result;
+        const palletItem = items.filter(item => item.itemNbr === data.itemNbr);
+        if (palletItem.length > 0) {
+          Toast.show({
+            type: 'info',
+            text1: strings('PALLET.ITEMS_DETAILS_EXIST'),
+            visibilityTime: 4000,
+            position: 'bottom'
+          });
+        } else {
+          const {
+            upcNbr,
+            itemNbr,
+            price,
+            itemDesc
+          } = data;
+          const pallet : PalletItem = {
+            upcNbr,
+            itemNbr,
+            price,
+            itemDesc,
+            quantity: 1,
+            deleted: false,
+            added: true
+          };
+          dispatch(addItemToPallet(pallet));
+        }
+      } else if (getItemDetailsfromUpcApi.result.status === 204) {
+        Toast.show({
+          type: 'info',
+          text1: strings('PALLET.ITEMS_NOT_FOUND'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      }
+    }
+    // on api error
+    if (!getItemDetailsfromUpcApi.isWaiting && getItemDetailsfromUpcApi.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+  }, [getItemDetailsfromUpcApi]);
+
+  if (getItemDetailsfromUpcApi.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={getItemDetailsfromUpcApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
   return (
     <View style={styles.safeAreaView}>
       <View style={styles.bodyContainer}>
@@ -166,7 +256,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           />
         </View>
       </View>
-      {enableSave(items) ? (
+      {items && enableSave(items) ? (
         <View style={styles.buttonContainer}>
           <Button
             title={strings('GENERICS.SAVE')}
@@ -181,10 +271,13 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
 const ManagePallet = (): JSX.Element => {
   const pallets = useTypedSelector(state => state.PalletManagement);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
-
+  const navigation = useNavigation();
+  const route = useRoute();
+  const dispatch = useDispatch();
+  const getItemDetailsfromUpcApi = useTypedSelector(
+    state => state.async.getItemDetailsUPC
+  );
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
 
@@ -227,6 +320,9 @@ const ManagePallet = (): JSX.Element => {
           isManualScanEnabled={isManualScanEnabled}
           palletInfo={pallets.palletInfo}
           items={pallets.items}
+          navigation={navigation}
+          route={route}
+          getItemDetailsfromUpcApi={getItemDetailsfromUpcApi}
         />
       </TouchableOpacity>
       <BottomSheetModal

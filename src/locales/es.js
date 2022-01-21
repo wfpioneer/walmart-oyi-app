@@ -155,7 +155,9 @@ export default {
     ITEM_DELETE: '1 eliminación de artículo pendiente',
     X_ITEMS_DELETE: '%{nbrOfItems} eliminación de artículos pendientes',
     PALLET_DETAILS_ERROR: 'Error: incapaz de encontrar Pallet',
-    CANNOT_HAVE_NEGATIVE_QTY: 'El artículo no puede teener cantidad negativa'
+    CANNOT_HAVE_NEGATIVE_QTY: 'El artículo no puede teener cantidad negativa',
+    ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Spanish translation
+    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',

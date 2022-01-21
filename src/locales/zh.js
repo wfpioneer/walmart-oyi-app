@@ -155,7 +155,9 @@ export default {
     ITEM_DELETE: '1个商品待删除',
     X_ITEMS_DELETE: '%{nbrOfItems} 商品待删除',
     PALLET_DETAILS_ERROR: 'Error Unable to Find Pallet', // TODO CN Translation
-    CANNOT_HAVE_NEGATIVE_QTY: 'Item cannot have negative quantity' // TODO Mandarin Translation
+    CANNOT_HAVE_NEGATIVE_QTY: 'Item cannot have negative quantity', // TODO Mandarin Translation
+    ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Mandarin translation
+    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC' // TODO Mandarin translation
   },
   LOCATION: {
     TITLE: '所有位置',
