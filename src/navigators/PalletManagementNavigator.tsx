@@ -96,7 +96,6 @@ export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorP
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderManagePalletKebabButton(managePalletMenu, dispatch)}
             </View>
           )
         }}
