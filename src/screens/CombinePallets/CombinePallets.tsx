@@ -23,12 +23,12 @@ import styles from './CombinePallets.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { CombinePallet, PalletItem } from '../../models/PalletManagementTypes';
 import Button from '../../components/buttons/Button';
-import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { setScannedEvent } from '../../state/actions/Global';
 import { clearCombinePallet } from '../../state/actions/PalletManagement';
 import CombinePalletCard from '../../components/CombinePalletCard/CombinePalletCard';
+import ManualScanComponent from '../../components/manualscan/ManualScan';
 
 interface CombinePalletsProps {
   combinePallets: CombinePallet[];
@@ -90,7 +90,7 @@ export const CombinePalletsScreen = (
   return (
     <View style={styles.container}>
       {/* TODO add change to pass Placeholder text to ManualScan component */}
-      {isManualScanEnabled && <LocationManualScan />}
+      {isManualScanEnabled && <ManualScanComponent />}
       {combinePallets.length > 0 && (
         <View style={styles.scanView}>
           <Text style={styles.scanText}>{strings('PALLET.SCAN_PALLET')}</Text>
