@@ -22,7 +22,7 @@ import COLOR from '../../themes/Color';
 import { getItemDetailsUPC } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import Toast from 'react-native-toast-message';
-import { addPallet, setupPallet } from '../../state/actions/PalletManagement';
+import { addItemToPallet, setupPallet } from '../../state/actions/PalletManagement';
 
 interface ManagePalletProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
@@ -115,7 +115,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             deleted: false,
             added: true
           };
-          dispatch(addPallet(pallet));
+          dispatch(addItemToPallet(pallet));
         }
       } else if (getItemDetailsfromUpcApi.result.status === 204) {
         Toast.show({

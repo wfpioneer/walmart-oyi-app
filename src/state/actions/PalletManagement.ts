@@ -19,7 +19,7 @@ export const clearPalletManagement = () => ({
   type: CLEAR_PALLET_MANAGEMENT
 } as const);
 
-export const addPallet = (palletItem: PalletItem) => ({
+export const addItemToPallet = (palletItem: PalletItem) => ({
   type: ADD_PALLET,
   payload: palletItem
 } as const);
@@ -28,4 +28,4 @@ export type Actions =
   ReturnType<typeof showManagePalletMenu>
   | ReturnType<typeof setupPallet>
   | ReturnType<typeof clearPalletManagement>
-  | ReturnType<typeof addPallet>;
+  | ReturnType<typeof addItemToPallet>;
