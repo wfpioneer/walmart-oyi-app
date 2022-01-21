@@ -44,7 +44,8 @@ export default {
     ITEM: '商品',
     ITEMS: '多个商品',
     TOOLS: '工具箱',
-    CURRENCY_SYMBOL: '¥'
+    CURRENCY_SYMBOL: '¥',
+    UNDO: 'Undo' // TODO Mandarin Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',

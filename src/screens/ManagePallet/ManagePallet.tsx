@@ -1,6 +1,6 @@
 import React, {
   Dispatch,
-  EffectCallback, useEffect, useMemo, useRef
+  EffectCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
   ActivityIndicator,
@@ -31,7 +31,7 @@ import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetA
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import Button from '../../components/buttons/Button';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
-import { addItemToPallet, setPalletItemNewQuantity, deleteItem, showManagePalletMenu } from '../../state/actions/PalletManagement';
+import { addItemToPallet, setPalletItemNewQuantity, deleteItem, showManagePalletMenu, resetItems } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 
 interface ManagePalletProps {
@@ -88,9 +88,11 @@ const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text: strin
     dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), newQuantity));
   }
 };
-
 const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
   dispatch(deleteItem(item.itemNbr.toString()));
+};
+const undoDelete = (dispatch: Dispatch<any>) => {
+  dispatch(resetItems());
 };
 // TODO implement palletItemCard
 const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
@@ -122,6 +124,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   } = props;
   const { id, expirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
+  const [deletedItems, setdeletedItems] = useState(items);
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -249,6 +252,12 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               {getNumberOfDeleted(items) === 1 ? strings('PALLET.ITEM_DELETE')
                 : strings('PALLET.X_ITEMS_DELETE', { nbrOfItems: getNumberOfDeleted(items) })}
             </Text>
+            <Button
+              title={strings('GENERICS.UNDO')}
+              style={styles.undoButton}
+              backgroundColor={COLOR.GREEN}
+              onPress={() => undoDelete(dispatch)}
+            />
           </View>
         ) : null}
         <View>

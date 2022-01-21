@@ -45,7 +45,8 @@ export default {
     ITEMS: 'Items',
     TOOLS: 'Tools',
     OR: 'OR',
-    CURRENCY_SYMBOL: '$'
+    CURRENCY_SYMBOL: '$',
+    UNDO: 'Undo'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
