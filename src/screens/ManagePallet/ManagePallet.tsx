@@ -1,28 +1,32 @@
-import React, { Dispatch, EffectCallback, useEffect } from 'react';
+import React, { Dispatch, EffectCallback, useEffect, useMemo, useRef } from 'react';
 import {
   ActivityIndicator,
   EmitterSubscription,
   FlatList,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
+import Toast from 'react-native-toast-message';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { validateSession } from '../../utils/sessionTimeout';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import COLOR from '../../themes/Color';
 import styles from './ManagePallet.style';
 import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
-import Button from '../../components/buttons/Button';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { Pallet, PalletInfo } from '../../models/PalletManagementTypes';
-import { PalletItem } from "../../models/PalletItem";
-import COLOR from '../../themes/Color';
 import { getItemDetailsUPC } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
-import Toast from 'react-native-toast-message';
-import { addItemToPallet, setupPallet } from '../../state/actions/PalletManagement';
+import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
+import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
+import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
+import Button from '../../components/buttons/Button';
+import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
+import { addItemToPallet, showManagePalletMenu } from '../../state/actions/PalletManagement';
 
 interface ManagePalletProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
@@ -216,26 +220,87 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 };
 
 const ManagePallet = (): JSX.Element => {
+  const pallets = useTypedSelector(state => state.PalletManagement);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
-  const palletInfo = useTypedSelector(state => state.PalletManagement.palletInfo);
-  const items = useTypedSelector(state => state.PalletManagement.items);
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
   const getItemDetailsfromUpcApi = useTypedSelector(
     state => state.async.getItemDetailsUPC
   );
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const snapPoints = useMemo(() => ['45%'], []);
+
+  useEffect(() => {
+    if (navigation.isFocused() && bottomSheetModalRef.current) {
+      if (pallets.managePalletMenu) {
+        bottomSheetModalRef.current.present();
+      } else {
+        bottomSheetModalRef.current.dismiss();
+      }
+    }
+  }, [pallets]);
+
+  const handlePrintPallet = () => {
+    dispatch(showManagePalletMenu(false));
+    // TODO Integration
+  };
+
+  const handleCombinePallets = () => {
+    dispatch(showManagePalletMenu(false));
+    // TODO Integration
+  };
+
+  const handleClearPallet = () => {
+    dispatch(showManagePalletMenu(false));
+    // TODO Integration
+  };
+
   return (
-    <ManagePalletScreen
-      useEffectHook={useEffect}
-      isManualScanEnabled={isManualScanEnabled}
-      palletInfo={palletInfo}
-      items={items}
-      navigation={navigation}
-      route={route}
-      dispatch={dispatch}
-      getItemDetailsfromUpcApi={getItemDetailsfromUpcApi}
-    />
+    <BottomSheetModalProvider>
+      <TouchableOpacity
+        onPress={() => dispatch(showManagePalletMenu(false))}
+        activeOpacity={1}
+        disabled={!pallets.managePalletMenu}
+        style={pallets.managePalletMenu ? styles.disabledContainer : styles.container}
+      >
+        <ManagePalletScreen
+          useEffectHook={useEffect}
+          isManualScanEnabled={isManualScanEnabled}
+          palletInfo={pallets.palletInfo}
+          items={pallets.items}
+          navigation={navigation}
+          route={route}
+          dispatch={dispatch}
+          getItemDetailsfromUpcApi={getItemDetailsfromUpcApi}
+        />
+      </TouchableOpacity>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={snapPoints}
+        index={0}
+        onDismiss={() => dispatch(showManagePalletMenu(false))}
+        style={styles.bottomSheetModal}
+      >
+        <BottomSheetPrintCard
+          isVisible={true}
+          onPress={handlePrintPallet}
+          text={strings('PALLET.PRINT_PALLET')}
+        />
+        <BottomSheetAddCard
+          isManagerOption={false}
+          isVisible={true}
+          text={strings('PALLET.COMBINE_PALLETS')}
+          onPress={handleCombinePallets}
+        />
+        <BottomSheetClearCard
+          isManagerOption={false}
+          isVisible={true}
+          text={strings('PALLET.CLEAR_PALLET')}
+          onPress={handleClearPallet}
+        />
+      </BottomSheetModal>
+    </BottomSheetModalProvider>
   );
 };
 

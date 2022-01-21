@@ -1,9 +1,14 @@
 import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
 
+export const TOGGLE_PALLET_MANAGEMENT_POPUP = 'PALLET_MANAGEMENT/TOGGLE_POPUP';
 export const SHOW_MANAGE_PALLET_MENU = 'PALLET_MANAGEMENT/SHOW_MANAGE_PALLET_MENU';
 export const SETUP_PALLET = 'PALLET_MANAGEMENT/SETUP_PALLET';
 export const CLEAR_PALLET_MANAGEMENT = 'PALLET_MANAGEMENT/CLEAR_PALLET_MANAGEMENT';
 export const ADD_PALLET = 'PALLET_MANAGEMENT/ADD_PALLET';
+
+export const togglePalletPopup = () => ({
+  type: TOGGLE_PALLET_MANAGEMENT_POPUP
+} as const);
 
 export const showManagePalletMenu = (show: boolean) => ({
   type: SHOW_MANAGE_PALLET_MENU,
@@ -25,7 +30,8 @@ export const addItemToPallet = (palletItem: PalletItem) => ({
 } as const);
 
 export type Actions =
-  ReturnType<typeof showManagePalletMenu>
+ReturnType<typeof showManagePalletMenu>
   | ReturnType<typeof setupPallet>
   | ReturnType<typeof clearPalletManagement>
-  | ReturnType<typeof addItemToPallet>;
+  | ReturnType<typeof addItemToPallet>
+  | ReturnType<typeof togglePalletPopup>;

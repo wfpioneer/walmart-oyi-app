@@ -3,7 +3,8 @@ import {
   Actions,
   CLEAR_PALLET_MANAGEMENT,
   SETUP_PALLET,
-  SHOW_MANAGE_PALLET_MENU
+  SHOW_MANAGE_PALLET_MENU,
+  TOGGLE_PALLET_MANAGEMENT_POPUP
 } from '../actions/PalletManagement';
 import { CombinePallet, PalletInfo } from '../../models/PalletManagementTypes';
 import { PalletItem } from '../../models/PalletItem';
@@ -30,6 +31,11 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       return {
         ...state,
         managePalletMenu: action.payload
+      };
+    case TOGGLE_PALLET_MANAGEMENT_POPUP:
+      return {
+        ...state,
+        managePalletMenu: !state.managePalletMenu
       };
     case SETUP_PALLET:
       return {

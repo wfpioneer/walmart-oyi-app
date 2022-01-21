@@ -143,7 +143,10 @@ export default {
   PALLET: {
     PALLET_MANAGEMENT: 'Pallet Management', // TODO Spanish translation
     ENTER_PALLET_ID: 'Type a pallet ID', // TODO Spanish translation
-    SCAN_PALLET: 'Scan a pallet', // TODO Spanish translation
+    SCAN_PALLET: 'Scan a pallet', // TODO MX translations
+    PRINT_PALLET: 'Print pallet', // TODO MX translations
+    COMBINE_PALLETS: 'Combine pallets', // TODO MX translations
+    CLEAR_PALLET: 'Clear pallets', // TODO Spanish translation
     MANAGE_PALLET: 'Manage Pallet', // TODO Spanish translation
     PALLET_ID: 'Pallet ID', // TODO Spanish translation
     EXPIRATION_DATE: 'Expiration Date', // TODO Spanish translation
