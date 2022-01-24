@@ -4,10 +4,12 @@ import {
   Actions,
   CLEAR_COMBINE_PALLET,
   CLEAR_PALLET_MANAGEMENT,
+  DELETE_ITEM,
   REMOVE_COMBINE_PALLET,
+  RESET_PALLET,
   SETUP_PALLET,
-  SHOW_MANAGE_PALLET_MENU,
   SET_ITEM_NEW_QUANTITY,
+  SHOW_MANAGE_PALLET_MENU
 } from '../actions/PalletManagement';
 import { CombinePallet, PalletInfo } from '../../models/PalletManagementTypes';
 import { PalletItem } from '../../models/PalletItem';
@@ -64,6 +66,27 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       return {
         ...state,
         items: [...state.items, action.payload]
+      };
+    case RESET_PALLET:
+      const resetItems = state.items.map(item => {
+       item.deleted = false;
+       return item;
+      })
+      return {
+        ...state,
+        items: resetItems
+      };
+    case DELETE_ITEM:
+      const updatedItems = state.items.map(item => {
+        if (item.itemNbr.toString() === action.payload.itemNbr) {
+          item.deleted = true;
+          return item;
+        }
+        return item;
+      })
+      return {
+        ...state,
+        items: updatedItems
       };
     case CLEAR_PALLET_MANAGEMENT:
       return initialState;

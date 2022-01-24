@@ -44,7 +44,8 @@ export default {
     ITEM: 'Artículo',
     ITEMS: 'Artículos',
     TOOLS: 'Herramientas',
-    CURRENCY_SYMBOL: '$'
+    CURRENCY_SYMBOL: '$',
+    UNDO: 'Undo' // TODO spanish Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
