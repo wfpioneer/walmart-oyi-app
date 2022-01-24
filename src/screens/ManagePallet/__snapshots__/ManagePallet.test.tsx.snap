@@ -128,7 +128,7 @@ exports[`ManagePalletScreen Tests rendering Get Items Details Api responses Rend
             }
           }
         >
-          2
+          3
         </Text>
       </View>
     </View>
@@ -196,10 +196,22 @@ exports[`ManagePalletScreen Tests rendering Get Items Details Api responses Rend
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
-              "newQuantity": 3,
+              "newQuantity": 4,
               "price": 10,
               "quantity": 3,
               "upcNbr": "12345678901",
+            },
+            Object {
+              "added": false,
+              "category": 72,
+              "categoryDesc": "deli",
+              "deleted": false,
+              "itemDesc": "food",
+              "itemNbr": 4221,
+              "newQuantity": 1,
+              "price": 3.49,
+              "quantity": 2,
+              "upcNbr": "765432123456",
             },
           ]
         }
@@ -230,6 +242,7 @@ exports[`ManagePalletScreen Tests rendering Get Items Details Api responses Rend
       backgroundColor="#33691E"
       disabled={false}
       height={45}
+      onPress={[Function]}
       radius={5}
       style={
         Object {
@@ -359,7 +372,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
             }
           }
         >
-          2
+          3
         </Text>
       </View>
     </View>
@@ -427,10 +440,22 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
-              "newQuantity": 3,
+              "newQuantity": 4,
               "price": 10,
               "quantity": 3,
               "upcNbr": "12345678901",
+            },
+            Object {
+              "added": false,
+              "category": 72,
+              "categoryDesc": "deli",
+              "deleted": false,
+              "itemDesc": "food",
+              "itemNbr": 4221,
+              "newQuantity": 1,
+              "price": 3.49,
+              "quantity": 2,
+              "upcNbr": "765432123456",
             },
           ]
         }
@@ -461,6 +486,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       backgroundColor="#33691E"
       disabled={false}
       height={45}
+      onPress={[Function]}
       radius={5}
       style={
         Object {

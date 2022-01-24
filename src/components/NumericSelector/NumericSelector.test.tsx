@@ -2,7 +2,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import NumericSelector from './NumericSelector';
 
-describe('AddZoneScreen', () => {
+describe('Numeric selector component', () => {
   const value = 10;
   const renderer = ShallowRenderer.createRenderer();
   it('NumericSelector with valid input', () => {
