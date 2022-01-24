@@ -1,17 +1,15 @@
-import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
+import { CombinePallet, Pallet, PalletItem } from '../../models/PalletManagementTypes';
 
-export const TOGGLE_PALLET_MANAGEMENT_POPUP = 'PALLET_MANAGEMENT/TOGGLE_POPUP';
 export const SHOW_MANAGE_PALLET_MENU = 'PALLET_MANAGEMENT/SHOW_MANAGE_PALLET_MENU';
 export const SETUP_PALLET = 'PALLET_MANAGEMENT/SETUP_PALLET';
 export const CLEAR_PALLET_MANAGEMENT = 'PALLET_MANAGEMENT/CLEAR_PALLET_MANAGEMENT';
+export const ADD_COMBINE_PALLET = 'PALLET_MANAGEMENT/ADD_COMBINE_PALLET';
+export const CLEAR_COMBINE_PALLET = 'PALLET_MANAGEMENT/CLEAR_COMBINE_PALLET';
+export const REMOVE_COMBINE_PALLET = 'PALLET_MANAGEMENT/REMOVE_COMBINE_PALLET';
 export const SET_ITEM_NEW_QUANTITY = 'PALLET_MANAGEMENT/SET_ITEM_NEW_QUANTITY';
 export const ADD_PALLET = 'PALLET_MANAGEMENT/ADD_PALLET';
 export const DELETE_ITEM = 'PALLET_MANAGEMENT/DELETE_ITEM';
 export const RESET_PALLET = 'PALLET_MANAGEMENT/RESET_PALLET';
-
-export const togglePalletPopup = () => ({
-  type: TOGGLE_PALLET_MANAGEMENT_POPUP
-} as const);
 
 export const showManagePalletMenu = (show: boolean) => ({
   type: SHOW_MANAGE_PALLET_MENU,
@@ -25,6 +23,20 @@ export const setupPallet = (pallet: Pallet) => ({
 
 export const clearPalletManagement = () => ({
   type: CLEAR_PALLET_MANAGEMENT
+} as const);
+
+export const addCombinePallet = (pallet: CombinePallet) => ({
+  type: ADD_COMBINE_PALLET,
+  payload: pallet
+} as const);
+
+export const clearCombinePallet = () => ({
+  type: CLEAR_COMBINE_PALLET
+} as const);
+
+export const removeCombinePallet = (palletId: number) => ({
+  type: REMOVE_COMBINE_PALLET,
+  payload: palletId
 } as const);
 
 export const setPalletItemNewQuantity = (itemNbr: string, newQuantity: number) => ({
@@ -49,8 +61,10 @@ export const resetItems = () => ({
 export type Actions =
 ReturnType<typeof showManagePalletMenu>
   | ReturnType<typeof setupPallet>
-  | ReturnType<typeof togglePalletPopup>
   | ReturnType<typeof clearPalletManagement>
+  | ReturnType<typeof addCombinePallet>
+  | ReturnType<typeof clearCombinePallet>
+  | ReturnType<typeof removeCombinePallet>
   | ReturnType<typeof setPalletItemNewQuantity>
   | ReturnType<typeof addItemToPallet>
   | ReturnType<typeof deleteItem>
