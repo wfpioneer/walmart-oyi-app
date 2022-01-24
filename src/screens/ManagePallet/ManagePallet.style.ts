@@ -43,11 +43,13 @@ export default StyleSheet.create({
   deletedBanner: {
     backgroundColor: COLOR.DEEP_RED,
     padding: 5,
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'row'
   },
   deleteBannerText: {
     fontSize: 16,
-    color: COLOR.WHITE
+    color: COLOR.WHITE,
+    marginLeft: 40
   },
   bodyContainer: {
     alignItems: 'stretch',
@@ -58,6 +60,11 @@ export default StyleSheet.create({
   buttonContainer: {
     flex: 0.1,
     marginBottom: 15
+  },
+  undoButton: {
+    flex: 1,
+    width: 50,
+    height: 30
   },
   saveButton: {
     margin: 15

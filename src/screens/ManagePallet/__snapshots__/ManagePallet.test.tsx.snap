@@ -158,6 +158,7 @@ exports[`ManagePalletScreen Tests rendering Get Items Details Api responses Rend
         Object {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
+          "flexDirection": "row",
           "padding": 5,
         }
       }
@@ -167,11 +168,32 @@ exports[`ManagePalletScreen Tests rendering Get Items Details Api responses Rend
           Object {
             "color": "#ffffffff",
             "fontSize": 16,
+            "marginLeft": 40,
           }
         }
       >
         [missing "en.PALLET.ITEM_DELETE" translation]
       </Text>
+      <Button
+        backgroundColor="#33691E"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "height": 30,
+            "width": 50,
+          }
+        }
+        title="[missing \\"en.GENERICS.UNDO\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
     </View>
     <View>
       <FlatList
@@ -402,6 +424,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         Object {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
+          "flexDirection": "row",
           "padding": 5,
         }
       }
@@ -411,11 +434,32 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "color": "#ffffffff",
             "fontSize": 16,
+            "marginLeft": 40,
           }
         }
       >
         [missing "en.PALLET.ITEM_DELETE" translation]
       </Text>
+      <Button
+        backgroundColor="#33691E"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "height": 30,
+            "width": 50,
+          }
+        }
+        title="[missing \\"en.GENERICS.UNDO\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
     </View>
     <View>
       <FlatList
