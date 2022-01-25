@@ -1,6 +1,6 @@
 import React, {
   Dispatch,
-  EffectCallback, useEffect, useMemo, useRef
+  EffectCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
   ActivityIndicator,
@@ -31,7 +31,7 @@ import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetA
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import Button from '../../components/buttons/Button';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
-import { addItemToPallet, setPalletItemNewQuantity, showManagePalletMenu } from '../../state/actions/PalletManagement';
+import { addItemToPallet, setPalletItemNewQuantity, deleteItem, showManagePalletMenu, resetItems } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 
 interface ManagePalletProps {
@@ -88,7 +88,13 @@ const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text: strin
     dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), newQuantity));
   }
 };
-
+const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
+  dispatch(deleteItem(item.itemNbr.toString()));
+};
+const undoDelete = (dispatch: Dispatch<any>) => {
+  dispatch(resetItems());
+};
+// TODO implement palletItemCard
 const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   if (!item.deleted) {
     return (
@@ -96,7 +102,7 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
         decreaseQuantity={() => handleDecreaseQuantity(item, dispatch)}
         increaseQuantity={() => handleIncreaseQuantity(item, dispatch)}
         onTextChange={text => handleTextChange(item, dispatch, text)}
-        deleteItem={() => {}}
+        deleteItem={() => deleteItemDetail(item, dispatch)}
         isValid={true}
         itemName={item.itemDesc}
         itemNumber={item.itemNbr.toString()}
@@ -111,7 +117,6 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   }
   return null;
 };
-
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation, route, dispatch,
@@ -119,6 +124,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   } = props;
   const { id, expirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
+  const [deletedItems, setdeletedItems] = useState(items);
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -209,30 +215,20 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         {isManualScanEnabled && <ManualScan />}
         <View style={styles.headerContainer}>
           <View style={styles.headerItem}>
-            <Text style={styles.headerText}>
-              {strings('PALLET.PALLET_ID')}
-            </Text>
-            <Text style={styles.headerItemText}>
-              {id}
-            </Text>
+            <Text style={styles.headerText}>{strings('PALLET.PALLET_ID')}</Text>
+            <Text style={styles.headerItemText}>{id}</Text>
           </View>
           {expirationDate && expirationDate.length > 0 ? (
             <View style={styles.headerItem}>
               <Text style={styles.headerText}>
                 {strings('PALLET.EXPIRATION_DATE')}
               </Text>
-              <Text style={styles.headerItemText}>
-                {expirationDate}
-              </Text>
+              <Text style={styles.headerItemText}>{expirationDate}</Text>
             </View>
           ) : null}
           <View style={styles.headerItem}>
-            <Text style={styles.headerText}>
-              {strings('LOCATION.ITEMS')}
-            </Text>
-            <Text style={styles.headerItemText}>
-              {items.length}
-            </Text>
+            <Text style={styles.headerText}>{strings('LOCATION.ITEMS')}</Text>
+            <Text style={styles.headerItemText}>{items.length}</Text>
           </View>
         </View>
         <View style={styles.instructionLabel}>
@@ -246,6 +242,12 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               {getNumberOfDeleted(items) === 1 ? strings('PALLET.ITEM_DELETE')
                 : strings('PALLET.X_ITEMS_DELETE', { nbrOfItems: getNumberOfDeleted(items) })}
             </Text>
+            <Button
+              title={strings('GENERICS.UNDO')}
+              style={styles.undoButton}
+              backgroundColor={COLOR.GREEN}
+              onPress={() => undoDelete(dispatch)}
+            />
           </View>
         ) : null}
         <View>
@@ -270,7 +272,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 };
 
 const ManagePallet = (): JSX.Element => {
-  const pallets = useTypedSelector(state => state.PalletManagement);
+  const { palletInfo, managePalletMenu, items } = useTypedSelector(state => state.PalletManagement);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const navigation = useNavigation();
   const route = useRoute();
@@ -283,13 +285,13 @@ const ManagePallet = (): JSX.Element => {
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {
-      if (pallets.managePalletMenu) {
+      if (managePalletMenu) {
         bottomSheetModalRef.current.present();
       } else {
         bottomSheetModalRef.current.dismiss();
       }
     }
-  }, [pallets]);
+  }, [managePalletMenu]);
 
   const handlePrintPallet = () => {
     dispatch(showManagePalletMenu(false));
@@ -298,7 +300,8 @@ const ManagePallet = (): JSX.Element => {
 
   const handleCombinePallets = () => {
     dispatch(showManagePalletMenu(false));
-    // TODO Integration
+    bottomSheetModalRef.current?.dismiss();
+    navigation.navigate('CombinePallets');
   };
 
   const handleClearPallet = () => {
@@ -309,47 +312,46 @@ const ManagePallet = (): JSX.Element => {
   return (
     <BottomSheetModalProvider>
       <TouchableOpacity
-        onPress={() => dispatch(showManagePalletMenu(false))}
+        onPress={() => dispatch(showManagePalletMenu(!managePalletMenu))}
         activeOpacity={1}
-        disabled={!pallets.managePalletMenu}
-        style={pallets.managePalletMenu ? styles.disabledContainer : styles.container}
+        disabled={!managePalletMenu}
+        style={managePalletMenu ? styles.disabledContainer : styles.safeAreaView}
       >
         <ManagePalletScreen
           dispatch={dispatch}
           useEffectHook={useEffect}
           isManualScanEnabled={isManualScanEnabled}
-          palletInfo={pallets.palletInfo}
-          items={pallets.items}
+          palletInfo={palletInfo}
+          items={items}
           navigation={navigation}
           route={route}
           getItemDetailsfromUpcApi={getItemDetailsfromUpcApi}
         />
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          snapPoints={snapPoints}
+          index={0}
+          style={styles.bottomSheetModal}
+        >
+          <BottomSheetPrintCard
+            isVisible={true}
+            onPress={handlePrintPallet}
+            text={strings('PALLET.PRINT_PALLET')}
+          />
+          <BottomSheetAddCard
+            isManagerOption={false}
+            isVisible={true}
+            text={strings('PALLET.COMBINE_PALLETS')}
+            onPress={handleCombinePallets}
+          />
+          <BottomSheetClearCard
+            isManagerOption={false}
+            isVisible={true}
+            text={strings('PALLET.CLEAR_PALLET')}
+            onPress={handleClearPallet}
+          />
+        </BottomSheetModal>
       </TouchableOpacity>
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        snapPoints={snapPoints}
-        index={0}
-        onDismiss={() => dispatch(showManagePalletMenu(false))}
-        style={styles.bottomSheetModal}
-      >
-        <BottomSheetPrintCard
-          isVisible={true}
-          onPress={handlePrintPallet}
-          text={strings('PALLET.PRINT_PALLET')}
-        />
-        <BottomSheetAddCard
-          isManagerOption={false}
-          isVisible={true}
-          text={strings('PALLET.COMBINE_PALLETS')}
-          onPress={handleCombinePallets}
-        />
-        <BottomSheetClearCard
-          isManagerOption={false}
-          isVisible={true}
-          text={strings('PALLET.CLEAR_PALLET')}
-          onPress={handleClearPallet}
-        />
-      </BottomSheetModal>
     </BottomSheetModalProvider>
   );
 };
