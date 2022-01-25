@@ -24,7 +24,7 @@ import styles from './ManagePallet.style';
 import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { getItemDetailsUPC, updatePalletItemQty } from '../../state/actions/saga';
+import { deleteUpcs, getItemDetailsUPC, updatePalletItemQty } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
@@ -32,7 +32,13 @@ import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSh
 import Button from '../../components/buttons/Button';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 import {
-  addItemToPallet, deleteItem, resetItems, setPalletItemNewQuantity, setPalletItemQuantity, showManagePalletMenu
+  addItemToPallet, 
+  setPalletItemQuantity,
+  deleteItem,
+  resetItems,
+  setPalletItemNewQuantity,
+  showManagePalletMenu,
+  updateItems
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 
@@ -48,6 +54,7 @@ interface ManagePalletProps {
   itemSaveIndex: number;
   setItemSaveIndex: React.Dispatch<React.SetStateAction<number>>;
   updateItemQtyAPI: AsyncState;
+  deleteUpcsApi: AsyncState
 }
 
 export const getNumberOfDeleted = (items: PalletItem[]): number => items.reduce(
@@ -180,12 +187,11 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items,
     navigation, route, dispatch, getItemDetailsfromUpcApi,
-    itemSaveIndex, setItemSaveIndex, updateItemQtyAPI
+    itemSaveIndex, setItemSaveIndex, updateItemQtyAPI, deleteUpcsApi
   } = props;
   const { id, expirationDate } = palletInfo;
 
   let scannedSubscription: EmitterSubscription;
-  const [deletedItems, setdeletedItems] = useState(items);
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -260,10 +266,26 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     }
   }, [getItemDetailsfromUpcApi]);
 
-  if (getItemDetailsfromUpcApi.isWaiting) {
+  useEffectHook(() => {
+    // on api success
+    if (!deleteUpcsApi.isWaiting && deleteUpcsApi.result) {
+      if (deleteUpcsApi.result.status === 200) {
+        const updatedItems = items.filter(item => !item.deleted);
+        updateItems(updatedItems);
+      } else if (deleteUpcsApi.result.status === 204) {
+        // TODO
+      }
+    }
+    // on api error
+    if (!deleteUpcsApi.isWaiting && deleteUpcsApi.error) {
+      // TODO
+    }
+  }, [deleteUpcsApi]);
+
+  if (deleteUpcsApi.isWaiting) {
     return (
       <ActivityIndicator
-        animating={getItemDetailsfromUpcApi.isWaiting}
+        animating={deleteUpcsApi.isWaiting}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -282,7 +304,14 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     dispatch
   ), [updateItemQtyAPI]);
 
-  const handleSave = () => {
+  const submit = () => {
+    const reducerInitialValue: string[] = [];
+    const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
+      reducer.push(current.upcNbr);
+      return reducer;
+    }, reducerInitialValue);
+    const palletId = id;
+    dispatch(deleteUpcs({ palletId, upcs }));
     handleSaveItem(items, palletInfo.id, itemSaveIndex, setItemSaveIndex, dispatch);
   };
 
@@ -341,7 +370,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             title={strings('GENERICS.SAVE')}
             style={styles.saveButton}
             backgroundColor={COLOR.GREEN}
-            onPress={handleSave}
+            onPress={() => submit()}
           />
         </View>
       ) : null}
@@ -361,6 +390,9 @@ const ManagePallet = (): JSX.Element => {
   const updateItemQtyAPI = useTypedSelector(state => state.async.updatePalletItemQty);
   const [itemSaveIndex, setItemSaveIndex] = useState(0);
 
+  const deleteUpcsApi = useTypedSelector(
+    state => state.async.deleteUpcs
+  );
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
 
@@ -410,6 +442,7 @@ const ManagePallet = (): JSX.Element => {
           itemSaveIndex={itemSaveIndex}
           setItemSaveIndex={setItemSaveIndex}
           updateItemQtyAPI={updateItemQtyAPI}
+          deleteUpcsApi={deleteUpcsApi}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

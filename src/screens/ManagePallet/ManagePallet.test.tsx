@@ -83,6 +83,7 @@ describe('ManagePalletScreen', () => {
         itemSaveIndex={0}
         setItemSaveIndex={jest.fn()}
         updateItemQtyAPI={defaultAsyncState}
+        deleteUpcsApi={defaultAsyncState}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -106,6 +107,7 @@ describe('ManagePalletScreen', () => {
         itemSaveIndex={0}
         setItemSaveIndex={jest.fn()}
         updateItemQtyAPI={defaultAsyncState}
+        deleteUpcsApi={defaultAsyncState}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -134,6 +136,7 @@ describe('ManagePalletScreen', () => {
         itemSaveIndex={0}
         setItemSaveIndex={jest.fn()}
         updateItemQtyAPI={defaultAsyncState}
+        deleteUpcsApi={defaultAsyncState}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
