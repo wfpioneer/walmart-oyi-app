@@ -58,6 +58,7 @@ describe('ManagePalletScreen', () => {
         route={routeProp}
         dispatch={jest.fn()}
         getItemDetailsfromUpcApi={defaultAsyncState}
+        deleteUpcsApi={defaultAsyncState}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -78,6 +79,7 @@ describe('ManagePalletScreen', () => {
         route={routeProp}
         dispatch={jest.fn()}
         getItemDetailsfromUpcApi={itemsDetailsIsWaiting}
+        deleteUpcsApi={defaultAsyncState}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -103,6 +105,7 @@ describe('ManagePalletScreen', () => {
         route={routeProp}
         dispatch={jest.fn()}
         getItemDetailsfromUpcApi={sucessAsyncState}
+        deleteUpcsApi={defaultAsyncState}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

@@ -9,7 +9,8 @@ import {
   RESET_PALLET,
   SETUP_PALLET,
   SET_ITEM_NEW_QUANTITY,
-  SHOW_MANAGE_PALLET_MENU
+  SHOW_MANAGE_PALLET_MENU,
+  UPDATE_PALLET
 } from '../actions/PalletManagement';
 import { CombinePallet, PalletInfo } from '../../models/PalletManagementTypes';
 import { PalletItem } from '../../models/PalletItem';
@@ -87,6 +88,11 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       return {
         ...state,
         items: updatedItems
+      };
+    case UPDATE_PALLET:
+      return {
+        ...state,
+        items: [...action.payload]
       };
     case CLEAR_PALLET_MANAGEMENT:
       return initialState;

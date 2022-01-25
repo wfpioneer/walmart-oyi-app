@@ -38,6 +38,7 @@ export const REMOVE_SECTION = 'SAGA/REMOVE_SECTION';
 export const GET_ZONE_NAMES = 'SAGA/GET_ZONE_NAMES';
 export const GET_CLUB_CONFIG = 'SAGA/GET_CLUB_CONFIG';
 export const GET_ITEM_DETAIL_UPC = 'SAGA/GET_ITEM_DETAIL_UPC';
+export const DELETE_UPCS = 'SAGA/DELETE_UPCS';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -92,3 +93,4 @@ export const removeSection = (payload: number) => ({ type: REMOVE_SECTION, paylo
 export const getZoneNames = () => ({ type: GET_ZONE_NAMES } as const);
 export const getClubConfig = () => ({ type: GET_CLUB_CONFIG } as const);
 export const getItemDetailsUPC = (payload: { upc: number }) => ({ type: GET_ITEM_DETAIL_UPC, payload } as const);
+export const deleteUpcs = (payload: { palletId: number; upcs: string[] }) => ({ type: DELETE_UPCS, payload } as const);
