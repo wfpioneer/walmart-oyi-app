@@ -98,3 +98,6 @@ export const getClubConfig = makeAsyncActionCreators(GET_CLUB_CONFIG);
 
 export const GET_ITEM_DETAIL_UPC = makeAsyncActionTypes('API/GET_ITEM_DETAIL_UPC');
 export const getItemDetailsUPC = makeAsyncActionCreators(GET_ITEM_DETAIL_UPC);
+
+export const ADD_PALLET_UPCS = makeAsyncActionTypes('API/ADD_PALLET_UPCS');
+export const addPalletUPCs = makeAsyncActionCreators(ADD_PALLET_UPCS);

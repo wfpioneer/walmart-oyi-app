@@ -35,7 +35,8 @@ export const asyncReducer = combineReducers({
   removeSection: makeAsyncReducer(asyncActions.REMOVE_SECTION),
   getZoneNames: makeAsyncReducer(asyncActions.GET_ZONE_NAMES),
   getClubConfig: makeAsyncReducer(asyncActions.GET_CLUB_CONFIG),
-  getItemDetailsUPC: makeAsyncReducer(asyncActions.GET_ITEM_DETAIL_UPC)
+  getItemDetailsUPC: makeAsyncReducer(asyncActions.GET_ITEM_DETAIL_UPC),
+  addPalletUPCs: makeAsyncReducer(asyncActions.ADD_PALLET_UPCS)
 });
 
 export default asyncReducer;

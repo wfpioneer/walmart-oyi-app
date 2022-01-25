@@ -4,6 +4,7 @@ import {
 } from '../../models/ApprovalListItem';
 import { PrintItemList, PrintLocationList } from '../../models/Printer';
 import { CreateZoneRequest } from '../reducers/Location';
+import { PalletItem } from '../../models/PalletItem';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
@@ -38,6 +39,7 @@ export const REMOVE_SECTION = 'SAGA/REMOVE_SECTION';
 export const GET_ZONE_NAMES = 'SAGA/GET_ZONE_NAMES';
 export const GET_CLUB_CONFIG = 'SAGA/GET_CLUB_CONFIG';
 export const GET_ITEM_DETAIL_UPC = 'SAGA/GET_ITEM_DETAIL_UPC';
+export const ADD_PALLET_UPCS = 'SAGA/ADD_PALLET_UPCS';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -92,3 +94,6 @@ export const removeSection = (payload: number) => ({ type: REMOVE_SECTION, paylo
 export const getZoneNames = () => ({ type: GET_ZONE_NAMES } as const);
 export const getClubConfig = () => ({ type: GET_CLUB_CONFIG } as const);
 export const getItemDetailsUPC = (payload: { upc: number }) => ({ type: GET_ITEM_DETAIL_UPC, payload } as const);
+export const addPalletUPCs = (payload: {
+  palletId: number, item: PalletItem[]
+}) => ({ type: ADD_PALLET_UPCS, payload } as const);

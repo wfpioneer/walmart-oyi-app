@@ -57,7 +57,8 @@ const genericSagas = [
   makeAsyncSaga(saga.REMOVE_SECTION, actions.removeSection, LocationService.removeSection),
   makeAsyncSaga(saga.GET_ZONE_NAMES, actions.getZoneNames, LocationService.getZoneNames),
   makeAsyncSaga(saga.GET_CLUB_CONFIG, actions.getClubConfig, ConfigService.getConfigByClub),
-  makeAsyncSaga(saga.GET_ITEM_DETAIL_UPC, actions.getItemDetailsUPC, GetItemDetailsUPCService.getItemDetailsUPC)
+  makeAsyncSaga(saga.GET_ITEM_DETAIL_UPC, actions.getItemDetailsUPC, GetItemDetailsUPCService.getItemDetailsUPC),
+  makeAsyncSaga(saga.ADD_PALLET_UPCS, actions.addPalletUPCs, AddPalletService.addPalletUPCs)
 ];
 
 export default function* rootSaga() {
