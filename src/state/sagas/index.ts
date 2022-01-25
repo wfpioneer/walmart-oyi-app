@@ -23,6 +23,7 @@ import DeletePalletService from '../../services/DeletePallet.service';
 import DeleteAisleService from '../../services/DeleteAisle.service';
 import ConfigService from '../../services/Config.service';
 import GetItemDetailsUPCService from '../../services/GetItemDetailsUPCService';
+import PalletManagementService from '../../services/PalletManagement.service';
 import DeletePalletUPCsService from '../../services/DeletePalletUPCs.service';
 
 const genericSagas = [
@@ -59,6 +60,7 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_ZONE_NAMES, actions.getZoneNames, LocationService.getZoneNames),
   makeAsyncSaga(saga.GET_CLUB_CONFIG, actions.getClubConfig, ConfigService.getConfigByClub),
   makeAsyncSaga(saga.GET_ITEM_DETAIL_UPC, actions.getItemDetailsUPC, GetItemDetailsUPCService.getItemDetailsUPC),
+  makeAsyncSaga(saga.UPDATE_PALLET_ITEM_QTY, actions.updatePalletItemQty, PalletManagementService.updateItemQuantity),
   makeAsyncSaga(saga.DELETE_UPCS, actions.deleteUpcs, DeletePalletUPCsService.deletePalletUPCs)
 ];
 

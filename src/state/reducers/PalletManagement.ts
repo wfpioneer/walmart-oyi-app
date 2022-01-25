@@ -9,6 +9,7 @@ import {
   RESET_PALLET,
   SETUP_PALLET,
   SET_ITEM_NEW_QUANTITY,
+  SET_ITEM_QUANTITY,
   SHOW_MANAGE_PALLET_MENU,
   UPDATE_PALLET
 } from '../actions/PalletManagement';
@@ -68,27 +69,29 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         ...state,
         items: [...state.items, action.payload]
       };
-    case RESET_PALLET:
+    case RESET_PALLET: {
       const resetItems = state.items.map(item => {
-       item.deleted = false;
-       return item;
-      })
+        item.deleted = false;
+        return item;
+      });
       return {
         ...state,
         items: resetItems
       };
-    case DELETE_ITEM:
+    }
+    case DELETE_ITEM: {
       const updatedItems = state.items.map(item => {
         if (item.itemNbr.toString() === action.payload.itemNbr) {
           item.deleted = true;
           return item;
         }
         return item;
-      })
+      });
       return {
         ...state,
         items: updatedItems
       };
+    }
     case UPDATE_PALLET:
       return {
         ...state,
@@ -100,6 +103,19 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       const newItems = state.items.map(item => {
         if (item.itemNbr.toString() === action.payload.itemNbr) {
           item.newQuantity = action.payload.newQuantity;
+          return item;
+        }
+        return item;
+      });
+      return {
+        ...state,
+        items: newItems
+      };
+    }
+    case SET_ITEM_QUANTITY: {
+      const newItems = state.items.map(item => {
+        if (item.itemNbr.toString() === action.payload.itemNbr && item.newQuantity) {
+          item.quantity = item.newQuantity;
           return item;
         }
         return item;

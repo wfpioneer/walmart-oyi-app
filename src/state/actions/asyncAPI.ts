@@ -99,5 +99,8 @@ export const getClubConfig = makeAsyncActionCreators(GET_CLUB_CONFIG);
 export const GET_ITEM_DETAIL_UPC = makeAsyncActionTypes('API/GET_ITEM_DETAIL_UPC');
 export const getItemDetailsUPC = makeAsyncActionCreators(GET_ITEM_DETAIL_UPC);
 
+export const UPDATE_PALLET_ITEM_QTY = makeAsyncActionTypes('API/PATCH_PALLET_ITEM_QTY');
+export const updatePalletItemQty = makeAsyncActionCreators(UPDATE_PALLET_ITEM_QTY);
+
 export const DELETE_UPCS = makeAsyncActionTypes('API/DELETE_UPCS');
 export const deleteUpcs = makeAsyncActionCreators(DELETE_UPCS);

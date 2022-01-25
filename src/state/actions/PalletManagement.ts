@@ -7,6 +7,7 @@ export const ADD_COMBINE_PALLET = 'PALLET_MANAGEMENT/ADD_COMBINE_PALLET';
 export const CLEAR_COMBINE_PALLET = 'PALLET_MANAGEMENT/CLEAR_COMBINE_PALLET';
 export const REMOVE_COMBINE_PALLET = 'PALLET_MANAGEMENT/REMOVE_COMBINE_PALLET';
 export const SET_ITEM_NEW_QUANTITY = 'PALLET_MANAGEMENT/SET_ITEM_NEW_QUANTITY';
+export const SET_ITEM_QUANTITY = 'PALLET_MANAGEMENT/SET_ITEM_QUANTITY';
 export const ADD_PALLET = 'PALLET_MANAGEMENT/ADD_PALLET';
 export const DELETE_ITEM = 'PALLET_MANAGEMENT/DELETE_ITEM';
 export const RESET_PALLET = 'PALLET_MANAGEMENT/RESET_PALLET';
@@ -45,6 +46,11 @@ export const setPalletItemNewQuantity = (itemNbr: string, newQuantity: number) =
   payload: { itemNbr, newQuantity }
 } as const);
 
+export const setPalletItemQuantity = (itemNbr: string) => ({
+  type: SET_ITEM_QUANTITY,
+  payload: { itemNbr }
+} as const);
+
 export const addItemToPallet = (palletItem: PalletItem) => ({
   type: ADD_PALLET,
   payload: palletItem
@@ -72,6 +78,8 @@ ReturnType<typeof showManagePalletMenu>
   | ReturnType<typeof clearCombinePallet>
   | ReturnType<typeof removeCombinePallet>
   | ReturnType<typeof setPalletItemNewQuantity>
+  | ReturnType<typeof setPalletItemQuantity>
+  | ReturnType<typeof addItemToPallet>
   | ReturnType<typeof addItemToPallet>
   | ReturnType<typeof deleteItem>
   | ReturnType<typeof resetItems>
