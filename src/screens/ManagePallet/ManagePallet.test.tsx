@@ -1,10 +1,10 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { ManagePalletScreen } from './ManagePallet';
-import { PalletInfo } from '../../models/PalletManagementTypes';
-import { PalletItem } from "../../models/PalletItem";
-import { AsyncState } from 'src/models/AsyncState';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
+import { ManagePalletScreen, onSavePress } from './ManagePallet';
+import { PalletInfo } from '../../models/PalletManagementTypes';
+import { PalletItem } from '../../models/PalletItem';
+import { AsyncState } from '../../models/AsyncState';
 
 describe('ManagePalletScreen', () => {
   const mockPalletInfo: PalletInfo = {
@@ -58,12 +58,15 @@ describe('ManagePalletScreen', () => {
         route={routeProp}
         dispatch={jest.fn()}
         getItemDetailsfromUpcApi={defaultAsyncState}
+        addPalletUpcApi={defaultAsyncState}
+        isLoading={false}
+        setIsLoading={jest.fn()}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
-  describe('Tests rendering Get Items Details Api responses', () => {
-    it('Renders Loading indicator if get pallet details waiting for an api response', () => {
+  describe('Tests rendering Api responses', () => {
+    it('Renders Loading indicator when waiting for an addUPC or getItemDetailsUpc api response', () => {
       const renderer = ShallowRenderer.createRenderer();
       const itemsDetailsIsWaiting: AsyncState = {
         ...defaultAsyncState,
@@ -78,6 +81,9 @@ describe('ManagePalletScreen', () => {
         route={routeProp}
         dispatch={jest.fn()}
         getItemDetailsfromUpcApi={itemsDetailsIsWaiting}
+        addPalletUpcApi={defaultAsyncState}
+        isLoading={true}
+        setIsLoading={jest.fn()}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -103,8 +109,32 @@ describe('ManagePalletScreen', () => {
         route={routeProp}
         dispatch={jest.fn()}
         getItemDetailsfromUpcApi={sucessAsyncState}
+        addPalletUpcApi={defaultAsyncState}
+        isLoading={false}
+        setIsLoading={jest.fn()}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
+
+  describe('Tests onSavePress function', () => {
+    const palletId = 1;
+    it('Calls dispatch if the "added" flag is true for at least one palletItem', () => {
+      const dispatch = jest.fn();
+      const mockAddPallet: PalletItem[] = [
+        ...mockItems,
+        {
+          ...mockItems[1],
+          added: true
+        }
+      ];
+      onSavePress(palletId, mockAddPallet, dispatch);
+      expect(dispatch).toHaveBeenCalled();
+    });
+    it('Does not call dispatch if the "added" flag is false for all palletItems', () => {
+      const dispatch = jest.fn();
+      onSavePress(palletId, mockItems, dispatch);
+      expect(dispatch).not.toHaveBeenCalled();
+    });
+  })
 });

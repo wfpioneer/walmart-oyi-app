@@ -47,6 +47,8 @@ interface ManagePalletProps {
   route: RouteProp<any, string>;
   getItemDetailsfromUpcApi: AsyncState;
   addPalletUpcApi: AsyncState;
+  isLoading: boolean,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const getNumberOfDeleted = (items: PalletItem[]): number => items.reduce(
@@ -121,15 +123,21 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   }
   return null;
 };
+
+export const onSavePress = (id: number, items: PalletItem[], dispatch: Dispatch<any>): void => {
+  const addPalletItems = items.filter(item => item.added === true)
+    .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
+  if (addPalletItems.length > 0) {
+    dispatch(addPalletUPCs({ palletId: id, items: addPalletItems }));
+  }
+};
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation, route, dispatch,
-    getItemDetailsfromUpcApi, addPalletUpcApi
+    getItemDetailsfromUpcApi, addPalletUpcApi, isLoading, setIsLoading
   } = props;
   const { id, expirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
-  const [deletedItems, setdeletedItems] = useState(items);
-  const apiIsLoading = addPalletUpcApi.isWaiting || getItemDetailsfromUpcApi.isWaiting;
 
   // Clear API state before leaving this screen
   useEffectHook(() => navigation.addListener('beforeRemove', () => {
@@ -198,9 +206,11 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           position: 'bottom'
         });
       }
+      setIsLoading(false);
     }
     // on api error
     if (!getItemDetailsfromUpcApi.isWaiting && getItemDetailsfromUpcApi.error) {
+      setIsLoading(false);
       Toast.show({
         type: 'error',
         text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
@@ -208,6 +218,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         visibilityTime: 4000,
         position: 'bottom'
       });
+    }
+    if (getItemDetailsfromUpcApi.isWaiting) {
+      setIsLoading(true);
     }
   }, [getItemDetailsfromUpcApi]);
   // Add Pallet UPCs api
@@ -242,6 +255,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           position: 'bottom'
         });
       }
+      setIsLoading(false);
     }
     // on api error
     if (!addPalletUpcApi.isWaiting && addPalletUpcApi.error) {
@@ -252,13 +266,18 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         visibilityTime: 4000,
         position: 'bottom'
       });
+      setIsLoading(false);
+    }
+
+    if (addPalletUpcApi.isWaiting) {
+      setIsLoading(true);
     }
   }, [addPalletUpcApi]);
 
-  if (apiIsLoading) {
+  if (isLoading) {
     return (
       <ActivityIndicator
-        animating={apiIsLoading}
+        animating={isLoading}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -267,13 +286,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     );
   }
 
-  const onSavePress = () => {
-    const addPalletItems = items.filter(item => item.added === true)
-      .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
-    if (addPalletItems.length > 0) {
-      dispatch(addPalletUPCs({ palletId: palletInfo.id, items: addPalletItems }));
-    }
-  };
   return (
     <View style={styles.safeAreaView}>
       <View style={styles.bodyContainer}>
@@ -329,7 +341,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             title={strings('GENERICS.SAVE')}
             style={styles.saveButton}
             backgroundColor={COLOR.GREEN}
-            onPress={() => onSavePress()}
+            onPress={() => onSavePress(id, items, dispatch)}
           />
         </View>
       ) : null}
@@ -343,10 +355,10 @@ const ManagePallet = (): JSX.Element => {
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
-  const getItemDetailsfromUpcApi = useTypedSelector(
-    state => state.async.getItemDetailsUPC
-  );
+  const getItemDetailsfromUpcApi = useTypedSelector(state => state.async.getItemDetailsUPC);
   const addPalletUpcApi = useTypedSelector(state => state.async.addPalletUPCs);
+  const [isLoading, setIsLoading] = useState(false);
+
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
 
@@ -394,6 +406,8 @@ const ManagePallet = (): JSX.Element => {
           route={route}
           getItemDetailsfromUpcApi={getItemDetailsfromUpcApi}
           addPalletUpcApi={addPalletUpcApi}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ManagePalletScreen Tests rendering Get Items Details Api responses Renders Loading indicator if get pallet details waiting for an api response 1`] = `
+exports[`ManagePalletScreen Tests rendering Api responses Renders Loading indicator when waiting for an addUPC or getItemDetailsUpc api response 1`] = `
 <ActivityIndicator
   animating={true}
   color="#0071e9"
@@ -16,7 +16,7 @@ exports[`ManagePalletScreen Tests rendering Get Items Details Api responses Rend
 />
 `;
 
-exports[`ManagePalletScreen Tests rendering Get Items Details Api responses Renders screen with newly added if get items details response sent sucesss 1`] = `
+exports[`ManagePalletScreen Tests rendering Api responses Renders screen with newly added if get items details response sent sucesss 1`] = `
 <View
   style={
     Object {
@@ -252,6 +252,7 @@ exports[`ManagePalletScreen Tests rendering Get Items Details Api responses Rend
       backgroundColor="#33691E"
       disabled={false}
       height={45}
+      onPress={[Function]}
       radius={5}
       style={
         Object {
@@ -505,6 +506,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       backgroundColor="#33691E"
       disabled={false}
       height={45}
+      onPress={[Function]}
       radius={5}
       style={
         Object {
