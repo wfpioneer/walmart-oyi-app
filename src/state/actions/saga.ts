@@ -95,5 +95,5 @@ export const getZoneNames = () => ({ type: GET_ZONE_NAMES } as const);
 export const getClubConfig = () => ({ type: GET_CLUB_CONFIG } as const);
 export const getItemDetailsUPC = (payload: { upc: number }) => ({ type: GET_ITEM_DETAIL_UPC, payload } as const);
 export const addPalletUPCs = (payload: {
-  palletId: number, item: PalletItem[]
+  palletId: number, items: PalletItem[]
 }) => ({ type: ADD_PALLET_UPCS, payload } as const);

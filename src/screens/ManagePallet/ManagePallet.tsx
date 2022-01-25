@@ -24,15 +24,18 @@ import styles from './ManagePallet.style';
 import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { getItemDetailsUPC } from '../../state/actions/saga';
+import { addPalletUPCs, getItemDetailsUPC } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import Button from '../../components/buttons/Button';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
-import { addItemToPallet, setPalletItemNewQuantity, deleteItem, showManagePalletMenu, resetItems } from '../../state/actions/PalletManagement';
+import {
+  addItemToPallet, deleteItem, resetItems, setPalletItemNewQuantity, setPalletItems, showManagePalletMenu
+} from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
+import { ADD_PALLET_UPCS, GET_ITEM_DETAIL_UPC } from '../../state/actions/asyncAPI';
 
 interface ManagePalletProps {
   dispatch: Dispatch<any>;
@@ -43,6 +46,7 @@ interface ManagePalletProps {
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
   getItemDetailsfromUpcApi: AsyncState;
+  addPalletUpcApi: AsyncState;
 }
 
 const getNumberOfDeleted = (items: PalletItem[]): number => items.reduce(
@@ -120,11 +124,18 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation, route, dispatch,
-    getItemDetailsfromUpcApi
+    getItemDetailsfromUpcApi, addPalletUpcApi
   } = props;
   const { id, expirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
   const [deletedItems, setdeletedItems] = useState(items);
+
+  // Clear API state before leaving this screen
+  useEffectHook(() => navigation.addListener('beforeRemove', () => {
+    // Suggestion add confirmation before leaving screen if they want to undo unsaved changes
+    dispatch({ type: GET_ITEM_DETAIL_UPC.RESET });
+    dispatch({ type: ADD_PALLET_UPCS.RESET });
+  }));
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -144,6 +155,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       scannedSubscription.remove();
     };
   }, []);
+  // Get Item Details UPC api
   useEffectHook(() => {
     // on api success
     if (!getItemDetailsfromUpcApi.isWaiting && getItemDetailsfromUpcApi.result) {
@@ -197,6 +209,50 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       });
     }
   }, [getItemDetailsfromUpcApi]);
+  // Add Pallet UPCs api
+  useEffectHook(() => {
+    // on api success
+    if (!addPalletUpcApi.isWaiting && addPalletUpcApi.result) {
+      if (addPalletUpcApi.result.status === 200) {
+        Toast.show({
+          type: 'success',
+          text1: 'Pallet successfully updated',
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+        // Set added item flags to false and update quantity with new quantity
+        const updatedPalletItems = items.map(item => {
+          if (item.added) {
+            return {
+              ...item,
+              added: false,
+              quantity: item.newQuantity ?? item.quantity
+            };
+          }
+          return item;
+        });
+        dispatch(setPalletItems(updatedPalletItems));
+      }
+      if (addPalletUpcApi.result.status === 204) {
+        Toast.show({
+          type: 'info',
+          text1: 'Unable to Find Pallet or UPC',
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      }
+    }
+    // on api error
+    if (!addPalletUpcApi.isWaiting && addPalletUpcApi.error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Failed to add UPCs to the Pallet',
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+  }, [addPalletUpcApi]);
 
   if (getItemDetailsfromUpcApi.isWaiting) {
     return (
@@ -209,6 +265,14 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       />
     );
   }
+
+  const onSavePress = () => {
+    const addPalletItems = items.filter(item => item.added === true)
+      .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
+    if (addPalletItems.length > 0) {
+      dispatch(addPalletUPCs({ palletId: palletInfo.id, items: addPalletItems }));
+    }
+  };
   return (
     <View style={styles.safeAreaView}>
       <View style={styles.bodyContainer}>
@@ -264,6 +328,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             title={strings('GENERICS.SAVE')}
             style={styles.saveButton}
             backgroundColor={COLOR.GREEN}
+            onPress={() => onSavePress()}
           />
         </View>
       ) : null}
@@ -280,6 +345,7 @@ const ManagePallet = (): JSX.Element => {
   const getItemDetailsfromUpcApi = useTypedSelector(
     state => state.async.getItemDetailsUPC
   );
+  const addPalletUpcApi = useTypedSelector(state => state.async.addPalletUPCs);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
 
@@ -326,6 +392,7 @@ const ManagePallet = (): JSX.Element => {
           navigation={navigation}
           route={route}
           getItemDetailsfromUpcApi={getItemDetailsfromUpcApi}
+          addPalletUpcApi={addPalletUpcApi}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}
