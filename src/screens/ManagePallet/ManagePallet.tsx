@@ -129,6 +129,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const { id, expirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
   const [deletedItems, setdeletedItems] = useState(items);
+  const apiIsLoading = addPalletUpcApi.isWaiting || getItemDetailsfromUpcApi.isWaiting;
 
   // Clear API state before leaving this screen
   useEffectHook(() => navigation.addListener('beforeRemove', () => {
@@ -216,7 +217,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       if (addPalletUpcApi.result.status === 200) {
         Toast.show({
           type: 'success',
-          text1: 'Pallet successfully updated',
+          text1: strings('PALLET.ADD_UPC_SUCCESS'),
           visibilityTime: 4000,
           position: 'bottom'
         });
@@ -236,7 +237,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       if (addPalletUpcApi.result.status === 204) {
         Toast.show({
           type: 'info',
-          text1: 'Unable to Find Pallet or UPC',
+          text1: strings('PALLET.PALLET_UPC_NOT_FOUND'),
           visibilityTime: 4000,
           position: 'bottom'
         });
@@ -246,7 +247,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     if (!addPalletUpcApi.isWaiting && addPalletUpcApi.error) {
       Toast.show({
         type: 'error',
-        text1: 'Failed to add UPCs to the Pallet',
+        text1: strings('PALLET.ADD_UPC_ERROR'),
         text2: strings('GENERICS.TRY_AGAIN'),
         visibilityTime: 4000,
         position: 'bottom'
@@ -254,10 +255,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     }
   }, [addPalletUpcApi]);
 
-  if (getItemDetailsfromUpcApi.isWaiting) {
+  if (apiIsLoading) {
     return (
       <ActivityIndicator
-        animating={getItemDetailsfromUpcApi.isWaiting}
+        animating={apiIsLoading}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"

@@ -159,7 +159,10 @@ export default {
     PALLET_MERGE: 'will be merged into', // TODO Spanish translation
     CANNOT_HAVE_NEGATIVE_QTY: 'El artículo no puede teener cantidad negativa',
     ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Spanish translation
-    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC' // TODO Spanish translation
+    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC', // TODO Spanish translation
+    PALLET_UPC_NOT_FOUND: 'The Pallet or a UPC was not found', // TODO Spanish translation
+    ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet', // TODO Spanish translation
+    ADD_UPC_ERROR: 'Error adding items to the Pallet' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
