@@ -36,7 +36,8 @@ import {
   deleteItem,
   resetItems,
   setPalletItemNewQuantity,
-  showManagePalletMenu
+  showManagePalletMenu,
+  updateItems
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 
@@ -208,7 +209,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     // on api success
     if (!deleteUpcsApi.isWaiting && deleteUpcsApi.result) {
       if (deleteUpcsApi.result.status === 200) {
-        // TODO
+        const updatedItems = items.filter(item => !item.deleted);
+        updateItems(updatedItems);
       } else if (deleteUpcsApi.result.status === 204) {
         // TODO
       }
