@@ -161,7 +161,10 @@ export default {
     CANNOT_HAVE_NEGATIVE_QTY: 'Item cannot have negative quantity',
     ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet',
     ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC',
-    ITEMS_NOT_FOUND: 'Item Not found'
+    ITEMS_NOT_FOUND: 'Item Not found',
+    PALLET_UPC_NOT_FOUND: 'The Pallet or a UPC was not found',
+    ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet',
+    ADD_UPC_ERROR: 'Error adding items to the Pallet'
   },
   LOCATION: {
     TITLE: 'All locations',

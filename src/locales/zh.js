@@ -159,7 +159,10 @@ export default {
     PALLET_MERGE: 'will be merged into', // TODO Mandarin translation
     CANNOT_HAVE_NEGATIVE_QTY: '商品库存不可是负',
     ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Mandarin translation
-    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC' // TODO Mandarin translation
+    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC', // TODO Mandarin translation
+    PALLET_UPC_NOT_FOUND: 'The Pallet or a UPC was not found', // TODO Mandarin translation
+    ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet', // TODO Mandarin translation
+    ADD_UPC_ERROR: 'Error adding items to the Pallet' // TODO Mandarin translation
   },
   LOCATION: {
     TITLE: '所有位置',

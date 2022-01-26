@@ -24,7 +24,10 @@ import styles from './ManagePallet.style';
 import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { deleteUpcs, getItemDetailsUPC, updatePalletItemQty } from '../../state/actions/saga';
+import {
+  addPalletUPCs, deleteUpcs, getItemDetailsUPC, updatePalletItemQty
+} from '../../state/actions/saga';
+
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
@@ -32,15 +35,18 @@ import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSh
 import Button from '../../components/buttons/Button';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 import {
-  addItemToPallet, 
-  setPalletItemQuantity,
+  addItemToPallet,
   deleteItem,
   resetItems,
   setPalletItemNewQuantity,
+  setPalletItemQuantity,
   showManagePalletMenu,
   updateItems
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
+import {
+  ADD_PALLET_UPCS, DELETE_UPCS, GET_ITEM_DETAIL_UPC, UPDATE_PALLET_ITEM_QTY
+} from '../../state/actions/asyncAPI';
 
 interface ManagePalletProps {
   dispatch: Dispatch<any>;
@@ -51,6 +57,9 @@ interface ManagePalletProps {
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
   getItemDetailsfromUpcApi: AsyncState;
+  addPalletUpcApi: AsyncState;
+  isLoading: boolean,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
   itemSaveIndex: number;
   setItemSaveIndex: React.Dispatch<React.SetStateAction<number>>;
   updateItemQtyAPI: AsyncState;
@@ -131,7 +140,9 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   }
   return null;
 };
-
+/* Update Pallet ItemQty api is able to take in an array of quantity changes.
+         which maybe better than recursively calling the api.
+         This could potentially use a refactor */
 export const handleSaveItem = (
   items: PalletItem[],
   palletId: number,
@@ -144,8 +155,9 @@ export const handleSaveItem = (
   if (currentIndex < items.length) {
     const currentItem = items[currentIndex];
     setItemSaveIndex(currentIndex + 1);
-
-    if (isQuantityChanged(currentItem) && currentItem.newQuantity) {
+    // Skip item if either flag is true. Temp change
+    const hasNoFlags = !currentItem.added && !currentItem.deleted;
+    if (isQuantityChanged(currentItem) && currentItem.newQuantity && hasNoFlags) {
       dispatch(updatePalletItemQty({
         palletId, quantity: currentItem.newQuantity, upc: currentItem.upcNbr
       }));
@@ -155,7 +167,7 @@ export const handleSaveItem = (
     }
   } else {
     setItemSaveIndex(0);
-    dispatch({ type: 'API/PATCH_PALLET_ITEM_QTY/RESET' });
+    dispatch({ type: UPDATE_PALLET_ITEM_QTY.RESET });
   }
 };
 
@@ -165,7 +177,8 @@ export const updateItemQuantityApiHook = (
   palletId: number,
   itemSaveIndex: number,
   setItemSaveIndex: React.Dispatch<React.SetStateAction<number>>,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 ): void => {
   if (!updateItemQtyAPI.isWaiting) {
     // Success
@@ -173,13 +186,27 @@ export const updateItemQuantityApiHook = (
       // have to do - 1 because we already incremented it
       dispatch(setPalletItemQuantity(items[itemSaveIndex - 1].itemNbr.toString()));
       handleSaveItem(items, palletId, itemSaveIndex, setItemSaveIndex, dispatch);
+      setIsLoading(false);
     }
 
     // Failure
     if (updateItemQtyAPI.error) {
       // TODO count the fails
       handleSaveItem(items, palletId, itemSaveIndex, setItemSaveIndex, dispatch);
+      setIsLoading(false);
     }
+  }
+  // on api request
+  if (updateItemQtyAPI.isWaiting) {
+    setIsLoading(true);
+  }
+};
+export const handleAddItems = (id: number, items: PalletItem[], dispatch: Dispatch<any>): void => {
+  // Filter Items by added flag
+  const addPalletItems = items.filter(item => item.added === true)
+    .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
+  if (addPalletItems.length > 0) {
+    dispatch(addPalletUPCs({ palletId: id, items: addPalletItems }));
   }
 };
 
@@ -187,11 +214,21 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items,
     navigation, route, dispatch, getItemDetailsfromUpcApi,
-    itemSaveIndex, setItemSaveIndex, updateItemQtyAPI, deleteUpcsApi
+    itemSaveIndex, setItemSaveIndex, updateItemQtyAPI, deleteUpcsApi,
+    addPalletUpcApi, isLoading, setIsLoading
   } = props;
   const { id, expirationDate } = palletInfo;
 
   let scannedSubscription: EmitterSubscription;
+
+  // Clear API state before leaving this screen
+  useEffectHook(() => navigation.addListener('beforeRemove', () => {
+    // Suggestion add confirmation before leaving screen if they want to undo unsaved changes
+    dispatch({ type: GET_ITEM_DETAIL_UPC.RESET });
+    dispatch({ type: ADD_PALLET_UPCS.RESET });
+    dispatch({ type: DELETE_UPCS.RESET });
+  }), []);
+
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -212,6 +249,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     };
   }, []);
 
+  // Get Item Details UPC api
   useEffectHook(() => {
     // on api success
     if (!getItemDetailsfromUpcApi.isWaiting && getItemDetailsfromUpcApi.result) {
@@ -253,9 +291,11 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           position: 'bottom'
         });
       }
+      setIsLoading(false);
     }
     // on api error
     if (!getItemDetailsfromUpcApi.isWaiting && getItemDetailsfromUpcApi.error) {
+      setIsLoading(false);
       Toast.show({
         type: 'error',
         text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
@@ -264,35 +304,83 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         position: 'bottom'
       });
     }
+    // on api request
+    if (getItemDetailsfromUpcApi.isWaiting) {
+      setIsLoading(true);
+    }
   }, [getItemDetailsfromUpcApi]);
+  // Add Pallet UPCs api
+  useEffectHook(() => {
+    // on api success
+    if (!addPalletUpcApi.isWaiting && addPalletUpcApi.result) {
+      if (addPalletUpcApi.result.status === 200) {
+        Toast.show({
+          type: 'success',
+          text1: strings('PALLET.ADD_UPC_SUCCESS'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+        // Set added item flags to false and update quantity with new quantity
+        const updatedPalletItems = items.map(item => {
+          if (item.added) {
+            return {
+              ...item,
+              added: false,
+              quantity: item.newQuantity ?? item.quantity
+            };
+          }
+          return item;
+        });
+        dispatch(updateItems(updatedPalletItems));
+      }
+      if (addPalletUpcApi.result.status === 204) {
+        Toast.show({
+          type: 'info',
+          text1: strings('PALLET.PALLET_UPC_NOT_FOUND'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      }
+      setIsLoading(false);
+    }
+    // on api error
+    if (!addPalletUpcApi.isWaiting && addPalletUpcApi.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('PALLET.ADD_UPC_ERROR'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      setIsLoading(false);
+    }
+    // on api request
+    if (addPalletUpcApi.isWaiting) {
+      setIsLoading(true);
+    }
+  }, [addPalletUpcApi]);
 
   useEffectHook(() => {
     // on api success
     if (!deleteUpcsApi.isWaiting && deleteUpcsApi.result) {
       if (deleteUpcsApi.result.status === 200) {
         const updatedItems = items.filter(item => !item.deleted);
-        updateItems(updatedItems);
+        dispatch(updateItems(updatedItems));
       } else if (deleteUpcsApi.result.status === 204) {
         // TODO
       }
+      setIsLoading(false);
     }
     // on api error
     if (!deleteUpcsApi.isWaiting && deleteUpcsApi.error) {
       // TODO
+      setIsLoading(false);
+    }
+    // on api request
+    if (deleteUpcsApi.isWaiting) {
+      setIsLoading(true);
     }
   }, [deleteUpcsApi]);
-
-  if (deleteUpcsApi.isWaiting) {
-    return (
-      <ActivityIndicator
-        animating={deleteUpcsApi.isWaiting}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
 
   // update item quantity api
   useEffectHook(() => updateItemQuantityApiHook(
@@ -301,20 +389,40 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     palletInfo.id,
     itemSaveIndex,
     setItemSaveIndex,
-    dispatch
+    dispatch,
+    setIsLoading
   ), [updateItemQtyAPI]);
 
+  // TODO setIsLoading should be orchestrated to check if all apis have finished their request or alternative solution
+  if (isLoading) {
+    return (
+      <ActivityIndicator
+        animating={isLoading}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
   const submit = () => {
+    const palletId = id;
     const reducerInitialValue: string[] = [];
+    // Filter Items by deleted flag
     const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
       reducer.push(current.upcNbr);
       return reducer;
     }, reducerInitialValue);
-    const palletId = id;
-    dispatch(deleteUpcs({ palletId, upcs }));
+
+    if (upcs.length > 0) {
+      dispatch(deleteUpcs({ palletId, upcs }));
+    }
+    // Calls add items to pallet via api
+    handleAddItems(palletId, items, dispatch);
+    // Calls update pallet item qty api
     handleSaveItem(items, palletInfo.id, itemSaveIndex, setItemSaveIndex, dispatch);
   };
-
+  // TODO Flatlist can use a flex container of 1. The pallet items can trail off of the screen
   return (
     <View style={styles.safeAreaView}>
       <View style={styles.bodyContainer}>
@@ -384,15 +492,14 @@ const ManagePallet = (): JSX.Element => {
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
-  const getItemDetailsfromUpcApi = useTypedSelector(
-    state => state.async.getItemDetailsUPC
-  );
+  const getItemDetailsfromUpcApi = useTypedSelector(state => state.async.getItemDetailsUPC);
+  const addPalletUpcApi = useTypedSelector(state => state.async.addPalletUPCs);
   const updateItemQtyAPI = useTypedSelector(state => state.async.updatePalletItemQty);
-  const [itemSaveIndex, setItemSaveIndex] = useState(0);
+  const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
 
-  const deleteUpcsApi = useTypedSelector(
-    state => state.async.deleteUpcs
-  );
+  const [itemSaveIndex, setItemSaveIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
 
@@ -439,6 +546,9 @@ const ManagePallet = (): JSX.Element => {
           navigation={navigation}
           route={route}
           getItemDetailsfromUpcApi={getItemDetailsfromUpcApi}
+          addPalletUpcApi={addPalletUpcApi}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
           itemSaveIndex={itemSaveIndex}
           setItemSaveIndex={setItemSaveIndex}
           updateItemQtyAPI={updateItemQtyAPI}
