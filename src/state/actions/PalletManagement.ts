@@ -66,11 +66,6 @@ export const resetItems = () => ({
   type: RESET_PALLET
 } as const);
 
-export const setPalletItems = (palletItems: PalletItem[]) => ({
-  type: SET_PALLET_ITEMS,
-  payload: palletItems
-} as const);
-
 export const updateItems = (palletItem: PalletItem[]) => ({
   type: UPDATE_PALLET,
   payload: palletItem
@@ -89,6 +84,4 @@ ReturnType<typeof showManagePalletMenu>
   | ReturnType<typeof addItemToPallet>
   | ReturnType<typeof deleteItem>
   | ReturnType<typeof resetItems>
-  | ReturnType<typeof setPalletItems>
   | ReturnType<typeof updateItems>;
-

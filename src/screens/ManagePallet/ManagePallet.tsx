@@ -40,12 +40,13 @@ import {
   resetItems,
   setPalletItemNewQuantity,
   setPalletItemQuantity,
-  setPalletItems,
   showManagePalletMenu,
   updateItems
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
-import { ADD_PALLET_UPCS, GET_ITEM_DETAIL_UPC } from '../../state/actions/asyncAPI';
+import {
+  ADD_PALLET_UPCS, DELETE_UPCS, GET_ITEM_DETAIL_UPC, UPDATE_PALLET_ITEM_QTY
+} from '../../state/actions/asyncAPI';
 
 interface ManagePalletProps {
   dispatch: Dispatch<any>;
@@ -166,7 +167,7 @@ export const handleSaveItem = (
     }
   } else {
     setItemSaveIndex(0);
-    dispatch({ type: 'API/PATCH_PALLET_ITEM_QTY/RESET' });
+    dispatch({ type: UPDATE_PALLET_ITEM_QTY.RESET });
   }
 };
 
@@ -225,6 +226,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     // Suggestion add confirmation before leaving screen if they want to undo unsaved changes
     dispatch({ type: GET_ITEM_DETAIL_UPC.RESET });
     dispatch({ type: ADD_PALLET_UPCS.RESET });
+    dispatch({ type: DELETE_UPCS.RESET });
   }), []);
 
   // Scanner listener
@@ -329,7 +331,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           }
           return item;
         });
-        dispatch(setPalletItems(updatedPalletItems));
+        dispatch(updateItems(updatedPalletItems));
       }
       if (addPalletUpcApi.result.status === 204) {
         Toast.show({

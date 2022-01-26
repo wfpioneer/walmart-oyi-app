@@ -10,7 +10,6 @@ import {
   SETUP_PALLET,
   SET_ITEM_NEW_QUANTITY,
   SET_ITEM_QUANTITY,
-  SET_PALLET_ITEMS,
   SHOW_MANAGE_PALLET_MENU,
   UPDATE_PALLET
 } from '../actions/PalletManagement';
@@ -113,11 +112,6 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         items: newItems
       };
     }
-    case SET_PALLET_ITEMS:
-      return {
-        ...state,
-        items: action.payload
-      };
     case SET_ITEM_QUANTITY: {
       const newItems = state.items.map(item => {
         if (item.itemNbr.toString() === action.payload.itemNbr && item.newQuantity) {
