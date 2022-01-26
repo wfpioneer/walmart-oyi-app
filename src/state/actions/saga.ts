@@ -5,6 +5,7 @@ import {
 import { PrintItemList, PrintLocationList } from '../../models/Printer';
 import { CreateZoneRequest } from '../reducers/Location';
 import { PalletItem } from '../../models/PalletItem';
+import { UpdateItemQuantityRequest } from '../../services/PalletManagement.service';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
@@ -40,6 +41,8 @@ export const GET_ZONE_NAMES = 'SAGA/GET_ZONE_NAMES';
 export const GET_CLUB_CONFIG = 'SAGA/GET_CLUB_CONFIG';
 export const GET_ITEM_DETAIL_UPC = 'SAGA/GET_ITEM_DETAIL_UPC';
 export const ADD_PALLET_UPCS = 'SAGA/ADD_PALLET_UPCS';
+export const UPDATE_PALLET_ITEM_QTY = 'SAGA/UPDATE_PALLET_ITEM_QTY';
+export const DELETE_UPCS = 'SAGA/DELETE_UPCS';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -97,3 +100,7 @@ export const getItemDetailsUPC = (payload: { upc: number }) => ({ type: GET_ITEM
 export const addPalletUPCs = (payload: {
   palletId: number, items: PalletItem[]
 }) => ({ type: ADD_PALLET_UPCS, payload } as const);
+export const updatePalletItemQty = (payload: UpdateItemQuantityRequest) => ({
+  type: UPDATE_PALLET_ITEM_QTY, payload
+} as const);
+export const deleteUpcs = (payload: { palletId: number; upcs: string[] }) => ({ type: DELETE_UPCS, payload } as const);

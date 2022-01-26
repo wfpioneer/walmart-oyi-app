@@ -101,3 +101,9 @@ export const getItemDetailsUPC = makeAsyncActionCreators(GET_ITEM_DETAIL_UPC);
 
 export const ADD_PALLET_UPCS = makeAsyncActionTypes('API/ADD_PALLET_UPCS');
 export const addPalletUPCs = makeAsyncActionCreators(ADD_PALLET_UPCS);
+
+export const UPDATE_PALLET_ITEM_QTY = makeAsyncActionTypes('API/PATCH_PALLET_ITEM_QTY');
+export const updatePalletItemQty = makeAsyncActionCreators(UPDATE_PALLET_ITEM_QTY);
+
+export const DELETE_UPCS = makeAsyncActionTypes('API/DELETE_UPCS');
+export const deleteUpcs = makeAsyncActionCreators(DELETE_UPCS);

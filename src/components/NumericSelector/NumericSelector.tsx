@@ -16,7 +16,7 @@ interface NumericSelectorProps {
 }
 
 // Move to stringUtils file if we make one
-export const numberInputFilter = (text: string): string => text.replace(/[^-]\D/g, '');
+export const numberInputFilter = (text: string): string => text.replace(/[^0-9-]/g, '').replace(/(?!^)-/g, '');
 
 const renderPlusMinusBtn = (name: 'plus' | 'minus', isDisabled: boolean) => (
   <MaterialCommunityIcon
@@ -57,9 +57,8 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
         style={styles.input}
         keyboardType="numeric"
         onChangeText={text => onTextChange(numberInputFilter(text))}
-      >
-        {value}
-      </TextInput>
+        value={value.toString()}
+      />
       <IconButton
         icon={renderPlusMinusBtn('plus', isMaximum)}
         type={IconButton.Type.NO_BORDER}
