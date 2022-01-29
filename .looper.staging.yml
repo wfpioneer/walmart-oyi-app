@@ -38,7 +38,7 @@ envs:
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
       ANDROID_BUILD_PROFILE: ':app:assembleStagingRelease'
       # Optional - if your app needs a special command to be built (debug version). Defaults to assembleDebug.
-      ANDROID_BUILD_PR_PROFILE: ':app:assembleStagingDebug'
+      ANDROID_BUILD_PR_PROFILE: ':app:assembleStagingRelease'
       # Optional - if your app needs arguments to be built. It's empty by default.
       GRADLE_ARG: ''
 
