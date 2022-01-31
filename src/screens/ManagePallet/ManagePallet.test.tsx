@@ -5,6 +5,7 @@ import Toast from 'react-native-toast-message';
 import {
   ManagePalletScreen,
   getNumberOfDeleted,
+  getPalletDetailsApiHook,
   handleAddItems,
   handleDecreaseQuantity,
   handleIncreaseQuantity,
@@ -88,6 +89,8 @@ describe('ManagePalletScreen', () => {
         setItemSaveIndex={jest.fn()}
         updateItemQtyAPI={defaultAsyncState}
         deleteUpcsApi={defaultAsyncState}
+        activityModal={false}
+        getPalletDetailsApi={defaultAsyncState}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -112,6 +115,8 @@ describe('ManagePalletScreen', () => {
         setItemSaveIndex={jest.fn()}
         updateItemQtyAPI={defaultAsyncState}
         deleteUpcsApi={defaultAsyncState}
+        activityModal={false}
+        getPalletDetailsApi={defaultAsyncState}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -144,6 +149,8 @@ describe('ManagePalletScreen', () => {
         setItemSaveIndex={jest.fn()}
         updateItemQtyAPI={defaultAsyncState}
         deleteUpcsApi={defaultAsyncState}
+        activityModal={false}
+        getPalletDetailsApi={defaultAsyncState}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -152,6 +159,10 @@ describe('ManagePalletScreen', () => {
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
     const palletId = 3;
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
 
     it('tests getNumberOfDeleted', () => {
       const deletedResult = getNumberOfDeleted(mockItems);
@@ -175,15 +186,12 @@ describe('ManagePalletScreen', () => {
 
       handleDecreaseQuantity(mockItems[1], mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
-
-      mockDispatch.mockClear();
     });
 
     it('tests increaseQuantity', () => {
       handleIncreaseQuantity(mockItems[0], mockDispatch);
 
       expect(mockDispatch).toBeCalledTimes(1);
-      mockDispatch.mockClear();
     });
 
     it('tests quantity textChange', () => {
@@ -209,7 +217,6 @@ describe('ManagePalletScreen', () => {
       handleSaveItem(items, palletId, itemSaveIndex, mockSetItemSaveIndex, mockDispatch);
       expect(mockSetItemSaveIndex).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
-      mockDispatch.mockClear();
     });
     it('tests handleSaveItem on onsavable item, recurses and calls self with indexOnSkip', () => {
       const items = [...mockItems];
@@ -220,7 +227,6 @@ describe('ManagePalletScreen', () => {
       expect(mockSetItemSaveIndex).toBeCalledTimes(2);
       // calls mockDispatch on second time
       expect(mockDispatch).toBeCalledTimes(1);
-      mockDispatch.mockClear();
     });
     it('tests handleSaveItem after last iteration, resetting variables', () => {
       const items = [...mockItems];
@@ -230,7 +236,6 @@ describe('ManagePalletScreen', () => {
       handleSaveItem(items, palletId, itemSaveIndex, mockSetItemSaveIndex, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockSetItemSaveIndex).toBeCalledWith(0);
-      mockDispatch.mockClear();
     });
 
     it('tests updateItemQuantityHook', () => {
@@ -274,6 +279,36 @@ describe('ManagePalletScreen', () => {
       const dispatch = jest.fn();
       handleAddItems(palletId, mockItems, dispatch);
       expect(dispatch).not.toHaveBeenCalled();
+    });
+
+    it('Tests getPalletDetailsApiHook on success', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: {
+            pallets: [
+              {
+                id: 1,
+                createDate: 'today',
+                expirationDate: 'tomorrow',
+                items: []
+              }
+            ]
+          }
+        }
+      };
+
+      getPalletDetailsApiHook(successApi, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(0);
+    });
+
+    it('Tests getPalletDetailsApiHook on fail', () => {
+      const failApi: AsyncState = { ...defaultAsyncState, error: {} };
+
+      getPalletDetailsApiHook(failApi, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(0);
+      expect(Toast.show).toBeCalledTimes(1);
     });
   });
 });

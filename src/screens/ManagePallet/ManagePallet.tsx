@@ -460,7 +460,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
   /**
    * API modal
-   * Note: Put api effects above this
    */
   useEffectHook(() => {
     if (navigation.isFocused()) {

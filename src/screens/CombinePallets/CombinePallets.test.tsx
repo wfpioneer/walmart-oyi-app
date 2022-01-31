@@ -1,11 +1,21 @@
 import React from 'react';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { CombinePalletsScreen } from './CombinePallets';
+import Toast from 'react-native-toast-message';
+import { CombinePalletsScreen, combinePalletsApiEffect } from './CombinePallets';
 import { CombinePallet, PalletItem } from '../../models/PalletManagementTypes';
+import { AsyncState } from '../../models/AsyncState';
 
 let navigationProp: NavigationProp<any>;
 let routeProp: RouteProp<any, string>;
+
+const defaultAsyncState: AsyncState = {
+  isWaiting: false,
+  value: null,
+  error: null,
+  result: null
+};
+
 describe('CombinePalletsScreen', () => {
   const mockPalletItems: PalletItem[] = [
     {
@@ -47,6 +57,8 @@ describe('CombinePalletsScreen', () => {
           route={routeProp}
           navigation={navigationProp}
           dispatch={jest.fn()}
+          activityModal={false}
+          combinePalletsApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -75,8 +87,40 @@ describe('CombinePalletsScreen', () => {
         route={routeProp}
         navigation={navigationProp}
         dispatch={jest.fn()}
+        activityModal={false}
+        combinePalletsApi={defaultAsyncState}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+});
+
+describe('Combine Pallets externalized function tests', () => {
+  const mockDispatch = jest.fn();
+  const mockGoBack = jest.fn();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  navigationProp = { goBack: mockGoBack };
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('Tests the combine pallets api effect, on success', () => {
+    const successApi: AsyncState = { ...defaultAsyncState, result: {} };
+
+    combinePalletsApiEffect(successApi, navigationProp, mockDispatch);
+    expect(mockDispatch).toBeCalledTimes(1);
+    expect(mockGoBack).toBeCalledTimes(1);
+    expect(Toast.show).toBeCalledTimes(1);
+  });
+
+  it('Tests the combine pallets api effect, on fail', () => {
+    const successApi: AsyncState = { ...defaultAsyncState, error: {} };
+
+    combinePalletsApiEffect(successApi, navigationProp, mockDispatch);
+    expect(mockDispatch).toBeCalledTimes(1);
+    expect(mockGoBack).toBeCalledTimes(0);
+    expect(Toast.show).toBeCalledTimes(1);
   });
 });
