@@ -156,13 +156,15 @@ export default {
     ITEM_DELETE: '1个商品待删除',
     X_ITEMS_DELETE: '%{nbrOfItems} 商品待删除',
     PALLET_DETAILS_ERROR: '报错：无法找到卡板',
-    PALLET_MERGE: 'will be merged into', // TODO Mandarin translation
+    PALLET_MERGE: '将合并到',
     CANNOT_HAVE_NEGATIVE_QTY: '商品库存不可是负',
     ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Mandarin translation
     ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC', // TODO Mandarin translation
     PALLET_UPC_NOT_FOUND: 'The Pallet or a UPC was not found', // TODO Mandarin translation
     ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet', // TODO Mandarin translation
-    ADD_UPC_ERROR: 'Error adding items to the Pallet' // TODO Mandarin translation
+    ADD_UPC_ERROR: 'Error adding items to the Pallet', // TODO Mandarin translation
+    COMBINE_PALLET_SUCCESS: '卡板合并成功',
+    COMBINE_PALLET_FAILURE: '卡板合并失败，请重试'
   },
   LOCATION: {
     TITLE: '所有位置',

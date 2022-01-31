@@ -1,10 +1,8 @@
-import React, { EffectCallback, useEffect, useState } from 'react';
+import React, { EffectCallback, useEffect } from 'react';
 import {
   EmitterSubscription,
   FlatList,
   Text,
-  TextInput,
-  TouchableOpacity,
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -16,6 +14,7 @@ import {
 } from '@react-navigation/native';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
+import Toast from 'react-native-toast-message';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import { barcodeEmitter } from '../../utils/scannerUtils';
@@ -29,6 +28,9 @@ import { setScannedEvent } from '../../state/actions/Global';
 import { clearCombinePallet } from '../../state/actions/PalletManagement';
 import CombinePalletCard from '../../components/CombinePalletCard/CombinePalletCard';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
+import { combinePallets as combinePalletsSaga, getPalletDetails } from '../../state/actions/saga';
+import { AsyncState } from '../../models/AsyncState';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 
 interface CombinePalletsProps {
   combinePallets: CombinePallet[];
@@ -39,6 +41,8 @@ interface CombinePalletsProps {
   route: RouteProp<any, string>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   dispatch: Dispatch<any>;
+  activityModal: boolean;
+  combinePalletsApi: AsyncState;
 }
 
 const ScanPalletComponent = (): JSX.Element => (
@@ -47,6 +51,36 @@ const ScanPalletComponent = (): JSX.Element => (
     <Text style={styles.scanText}>{strings('PALLET.SCAN_PALLET')}</Text>
   </View>
 );
+
+export const combinePalletsApiEffect = (
+  combinePalletsApi: AsyncState,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
+): void => {
+  if (!combinePalletsApi.isWaiting) {
+    // Success
+    if (combinePalletsApi.result) {
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('PALLET.COMBINE_PALLET_SUCCESS')
+      });
+      dispatch({ type: 'API/PATCH_COMBINE_PALLETS/RESET' });
+      navigation.goBack();
+    }
+
+    // Failure
+    if (combinePalletsApi.error) {
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('PALLET.COMBINE_PALLET_FAILURE')
+      });
+      dispatch({ type: 'API/PATCH_COMBINE_PALLETS/RESET' });
+    }
+  }
+};
+
 export const CombinePalletsScreen = (
   props: CombinePalletsProps
 ): JSX.Element => {
@@ -58,7 +92,9 @@ export const CombinePalletsScreen = (
     useEffectHook,
     route,
     navigation,
-    dispatch
+    dispatch,
+    activityModal,
+    combinePalletsApi
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -80,13 +116,35 @@ export const CombinePalletsScreen = (
     };
   }, []);
 
-  // TODO clear combine pallets API when implemented
   useEffectHook(() => {
     navigation.addListener('beforeRemove', () => {
       // Clear Combine Pallets state
       dispatch(clearCombinePallet());
+      dispatch(getPalletDetails({ palletIds: [palletId], isAllItems: true }));
     });
   }, []);
+
+  /**
+   * API modal
+   */
+  useEffectHook(() => {
+    if (navigation.isFocused()) {
+      if (!activityModal) {
+        if (combinePalletsApi.isWaiting) {
+          dispatch(showActivityModal());
+        }
+      } else if (!combinePalletsApi.isWaiting) {
+        dispatch(hideActivityModal());
+      }
+    }
+  }, [activityModal, combinePalletsApi]);
+
+  useEffectHook(() => combinePalletsApiEffect(
+    combinePalletsApi,
+    navigation,
+    dispatch
+  ), [combinePalletsApi]);
+
   return (
     <View style={styles.container}>
       {/* TODO add change to pass Placeholder text to ManualScan component */}
@@ -121,7 +179,12 @@ export const CombinePalletsScreen = (
             title={strings('GENERICS.SAVE')}
             type={Button.Type.PRIMARY}
             style={{ width: '90%' }}
-            onPress={() => undefined} // TODO add dispatch call to Combine Pallet Api
+            onPress={() => dispatch(combinePalletsSaga({
+              targetPallet: palletId,
+              combinePallets: combinePallets.reduce(
+                (prevVal: number[], currVal) => prevVal.concat(currVal.palletId), []
+              )
+            }))}
             disabled={combinePallets.length === 0}
           />
         </View>
@@ -129,6 +192,7 @@ export const CombinePalletsScreen = (
     </View>
   );
 };
+
 const CombinePallets = (): JSX.Element => {
   const { combinePallets, palletInfo, items } = useTypedSelector(
     state => state.PalletManagement
@@ -136,9 +200,12 @@ const CombinePallets = (): JSX.Element => {
   const isManualScanEnabled = useTypedSelector(
     state => state.Global.isManualScanEnabled
   );
+  const activityModal = useTypedSelector(state => state.modal.showActivity);
+  const combinePalletsApi = useTypedSelector(state => state.async.combinePallets);
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
+
   return (
     <CombinePalletsScreen
       combinePallets={combinePallets}
@@ -149,6 +216,8 @@ const CombinePallets = (): JSX.Element => {
       route={route}
       navigation={navigation}
       dispatch={dispatch}
+      activityModal={activityModal}
+      combinePalletsApi={combinePalletsApi}
     />
   );
 };
