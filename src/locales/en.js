@@ -164,7 +164,9 @@ export default {
     ITEMS_NOT_FOUND: 'Item Not found',
     PALLET_UPC_NOT_FOUND: 'The Pallet or a UPC was not found',
     ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet',
-    ADD_UPC_ERROR: 'Error adding items to the Pallet'
+    ADD_UPC_ERROR: 'Error adding items to the Pallet',
+    COMBINE_PALLET_SUCCESS: 'Pallets combined sucessfully',
+    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again'
   },
   LOCATION: {
     TITLE: 'All locations',

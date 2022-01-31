@@ -4,8 +4,8 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { CREATE_FLOW, PossibleZone } from '../../models/LocationItems';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  activityModalEffect,
   AddSectionScreen,
+  activityModalEffect,
   createAisleSectionsEffect,
   createSectionsAPIEffect,
   validateNumericInput,
