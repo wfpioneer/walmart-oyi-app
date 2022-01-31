@@ -445,19 +445,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     dispatch
   ), [getPalletDetailsApi]);
 
-  // TODO setIsLoading should be orchestrated to check if all apis have finished their request or alternative solution
-  if (isLoading) {
-    return (
-      <ActivityIndicator
-        animating={isLoading}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
-
   /**
    * API modal
    */
@@ -475,6 +462,19 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     activityModal,
     getPalletDetailsApi
   ]);
+
+  // TODO setIsLoading should be orchestrated to check if all apis have finished their request or alternative solution
+  if (isLoading) {
+    return (
+      <ActivityIndicator
+        animating={isLoading}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
 
   const submit = () => {
     const palletId = id;
