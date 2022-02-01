@@ -164,7 +164,8 @@ export default {
     ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet', // TODO Spanish translation
     ADD_UPC_ERROR: 'Error adding items to the Pallet', // TODO Spanish translation
     COMBINE_PALLET_SUCCESS: 'Pallets combined sucessfully', // TODO Spanish translation
-    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again' // TODO Spanish translation
+    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again',
+    PALLET_EXISTS: 'This pallet has already been scanned' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',

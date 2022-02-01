@@ -164,7 +164,8 @@ export default {
     ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet', // TODO Mandarin translation
     ADD_UPC_ERROR: 'Error adding items to the Pallet', // TODO Mandarin translation
     COMBINE_PALLET_SUCCESS: '卡板合并成功',
-    COMBINE_PALLET_FAILURE: '卡板合并失败，请重试'
+    COMBINE_PALLET_FAILURE: '卡板合并失败，请重试',
+    PALLET_EXISTS: 'This pallet has already been scanned'
   },
   LOCATION: {
     TITLE: '所有位置',

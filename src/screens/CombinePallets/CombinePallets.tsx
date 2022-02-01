@@ -25,7 +25,7 @@ import Button from '../../components/buttons/Button';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { setScannedEvent } from '../../state/actions/Global';
-import { clearCombinePallet } from '../../state/actions/PalletManagement';
+import { addCombinePallet, clearCombinePallet } from '../../state/actions/PalletManagement';
 import CombinePalletCard from '../../components/CombinePalletCard/CombinePalletCard';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { combinePallets as combinePalletsSaga, getPalletDetails } from '../../state/actions/saga';
@@ -42,6 +42,7 @@ interface CombinePalletsProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   dispatch: Dispatch<any>;
   activityModal: boolean;
+  getPalletDetailsApi: AsyncState;
   combinePalletsApi: AsyncState;
 }
 
@@ -51,6 +52,44 @@ const ScanPalletComponent = (): JSX.Element => (
     <Text style={styles.scanText}>{strings('PALLET.SCAN_PALLET')}</Text>
   </View>
 );
+
+export const getPalletDetailsApiEffect = (
+  palletDetailsApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+): void => {
+  if (!palletDetailsApi.isWaiting && navigation.isFocused()) {
+    // Success
+    if (palletDetailsApi.result) {
+      const { result } = palletDetailsApi;
+      if (result.status === 204) {
+        Toast.show({
+          type: 'info',
+          position: 'bottom',
+          text1: strings('PALLET.PALLET_DOESNT_EXIST'),
+          visibilityTime: 4000
+        });
+      } else {
+        dispatch(addCombinePallet({
+          itemCount: result.data.pallets[0].items.length,
+          palletId: result.data.pallets[0].id
+        }));
+      }
+      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+    }
+
+    // Failure
+    if (palletDetailsApi.error) {
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('PALLET.PALLET_DETAILS_ERROR'),
+        visibilityTime: 4000
+      });
+      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+    }
+  }
+};
 
 export const combinePalletsApiEffect = (
   combinePalletsApi: AsyncState,
@@ -94,6 +133,7 @@ export const CombinePalletsScreen = (
     navigation,
     dispatch,
     activityModal,
+    getPalletDetailsApi,
     combinePalletsApi
   } = props;
   let scannedSubscription: EmitterSubscription;
@@ -101,13 +141,25 @@ export const CombinePalletsScreen = (
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (navigation.isFocused() && combinePallets.length < 2) {
+      if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
+          const alreadyScanned = palletId.toString() === scan.value
+             || combinePallets.some(pallet => pallet.palletId.toString() === scan.value);
           trackEvent('combine_pallet_scanned', {
             barcode: scan.value,
-            type: scan.type
+            type: scan.type,
+            alreadyScanned
           });
-          dispatch(setScannedEvent(scan));
+          if (alreadyScanned) {
+            Toast.show({
+              type: 'error',
+              position: 'bottom',
+              text1: strings('PALLET.PALLET_EXISTS'),
+              visibilityTime: 3000
+            });
+          } else {
+            dispatch(getPalletDetails({ palletIds: [scan.value], isAllItems: true }));
+          }
         });
       }
     });
@@ -144,6 +196,8 @@ export const CombinePalletsScreen = (
     navigation,
     dispatch
   ), [combinePalletsApi]);
+
+  useEffectHook(() => getPalletDetailsApiEffect(getPalletDetailsApi, dispatch, navigation), [getPalletDetailsApi]);
 
   return (
     <View style={styles.container}>
@@ -201,6 +255,7 @@ const CombinePallets = (): JSX.Element => {
     state => state.Global.isManualScanEnabled
   );
   const activityModal = useTypedSelector(state => state.modal.showActivity);
+  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const combinePalletsApi = useTypedSelector(state => state.async.combinePallets);
   const navigation = useNavigation();
   const route = useRoute();
@@ -217,6 +272,7 @@ const CombinePallets = (): JSX.Element => {
       navigation={navigation}
       dispatch={dispatch}
       activityModal={activityModal}
+      getPalletDetailsApi={getPalletDetailsApi}
       combinePalletsApi={combinePalletsApi}
     />
   );
