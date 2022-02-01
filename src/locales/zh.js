@@ -160,9 +160,9 @@ export default {
     CANNOT_HAVE_NEGATIVE_QTY: '商品库存不可是负',
     ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Mandarin translation
     ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC', // TODO Mandarin translation
-    PALLET_UPC_NOT_FOUND: 'The Pallet or a UPC was not found', // TODO Mandarin translation
-    ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet', // TODO Mandarin translation
-    ADD_UPC_ERROR: 'Error adding items to the Pallet', // TODO Mandarin translation
+    PALLET_UPC_NOT_FOUND: '未找到卡板或者UPC',
+    ADD_UPC_SUCCESS: '所有商品成功添加到卡板',
+    ADD_UPC_ERROR: '添加商品到卡板时出错',
     COMBINE_PALLET_SUCCESS: '卡板合并成功',
     COMBINE_PALLET_FAILURE: '卡板合并失败，请重试'
   },

@@ -9,13 +9,13 @@ import {
   handleAddItems,
   handleDecreaseQuantity,
   handleIncreaseQuantity,
-  handleSaveItem,
   handleTextChange,
+  handleUpdateItems,
   isQuantityChanged,
   updateItemQuantityApiHook
 } from './ManagePallet';
 import { PalletInfo } from '../../models/PalletManagementTypes';
-import { PalletItem } from '../../models/PalletItem';
+import { PalletItem } from '../../models/PalletItem'; // use ^
 import { AsyncState } from '../../models/AsyncState';
 
 describe('ManagePalletScreen', () => {
@@ -30,7 +30,7 @@ describe('ManagePalletScreen', () => {
       itemDesc: 'test',
       quantity: 3,
       newQuantity: 3,
-      price: 10.00,
+      price: 10.0,
       category: 54,
       categoryDesc: 'test cat',
       deleted: true,
@@ -42,7 +42,7 @@ describe('ManagePalletScreen', () => {
       itemDesc: 'test',
       quantity: 3,
       newQuantity: 4,
-      price: 10.00,
+      price: 10.0,
       category: 54,
       categoryDesc: 'test cat',
       deleted: false,
@@ -73,25 +73,25 @@ describe('ManagePalletScreen', () => {
     it('Renders the PalletManagement default ', () => {
       const renderer = ShallowRenderer.createRenderer();
 
-      renderer.render(<ManagePalletScreen
-        useEffectHook={jest.fn}
-        isManualScanEnabled={true}
-        palletInfo={mockPalletInfo}
-        items={mockItems}
-        navigation={navigationProp}
-        route={routeProp}
-        dispatch={jest.fn()}
-        getItemDetailsfromUpcApi={defaultAsyncState}
-        addPalletUpcApi={defaultAsyncState}
-        isLoading={false}
-        setIsLoading={jest.fn()}
-        itemSaveIndex={0}
-        setItemSaveIndex={jest.fn()}
-        updateItemQtyAPI={defaultAsyncState}
-        deleteUpcsApi={defaultAsyncState}
-        activityModal={false}
-        getPalletDetailsApi={defaultAsyncState}
-      />);
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsfromUpcApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          isLoading={false}
+          setIsLoading={jest.fn()}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          activityModal={false}
+          getPalletDetailsApi={defaultAsyncState}
+        />
+      );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
@@ -99,25 +99,25 @@ describe('ManagePalletScreen', () => {
     it('Renders Loading indicator when waiting for an addUPC or getItemDetailsUpc api response', () => {
       const ApiIsLoading = true;
       const renderer = ShallowRenderer.createRenderer();
-      renderer.render(<ManagePalletScreen
-        useEffectHook={jest.fn}
-        isManualScanEnabled={true}
-        palletInfo={mockPalletInfo}
-        items={mockItems}
-        navigation={navigationProp}
-        route={routeProp}
-        dispatch={jest.fn()}
-        getItemDetailsfromUpcApi={defaultAsyncState}
-        addPalletUpcApi={defaultAsyncState}
-        isLoading={ApiIsLoading}
-        setIsLoading={jest.fn()}
-        itemSaveIndex={0}
-        setItemSaveIndex={jest.fn()}
-        updateItemQtyAPI={defaultAsyncState}
-        deleteUpcsApi={defaultAsyncState}
-        activityModal={false}
-        getPalletDetailsApi={defaultAsyncState}
-      />);
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsfromUpcApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          isLoading={ApiIsLoading}
+          setIsLoading={jest.fn()}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          activityModal={false}
+          getPalletDetailsApi={defaultAsyncState}
+        />
+      );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders screen with newly added if get items details response sent sucesss', () => {
@@ -133,25 +133,25 @@ describe('ManagePalletScreen', () => {
           itemDesc: 'ItemDesc'
         }
       };
-      renderer.render(<ManagePalletScreen
-        useEffectHook={jest.fn}
-        isManualScanEnabled={true}
-        palletInfo={mockPalletInfo}
-        items={mockItems}
-        navigation={navigationProp}
-        route={routeProp}
-        dispatch={jest.fn()}
-        getItemDetailsfromUpcApi={sucessAsyncState}
-        addPalletUpcApi={defaultAsyncState}
-        isLoading={false}
-        setIsLoading={jest.fn()}
-        itemSaveIndex={0}
-        setItemSaveIndex={jest.fn()}
-        updateItemQtyAPI={defaultAsyncState}
-        deleteUpcsApi={defaultAsyncState}
-        activityModal={false}
-        getPalletDetailsApi={defaultAsyncState}
-      />);
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsfromUpcApi={sucessAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          isLoading={false}
+          setIsLoading={jest.fn()}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          activityModal={false}
+          getPalletDetailsApi={defaultAsyncState}
+        />
+      );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
@@ -209,58 +209,45 @@ describe('ManagePalletScreen', () => {
       expect(Toast.show).toBeCalledTimes(1);
     });
 
-    it('tests handleSaveItem on next savable item after api call (no indexOnSkip)', () => {
+    it('tests handleUpdateItems calls dispatch if added/deleted flags are false and has newQty', () => {
       const items = [...mockItems];
-      const itemSaveIndex = 1;
-      const mockSetItemSaveIndex = jest.fn();
-
-      handleSaveItem(items, palletId, itemSaveIndex, mockSetItemSaveIndex, mockDispatch);
-      expect(mockSetItemSaveIndex).toBeCalledTimes(1);
+      handleUpdateItems(items, palletId, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
     });
-    it('tests handleSaveItem on onsavable item, recurses and calls self with indexOnSkip', () => {
-      const items = [...mockItems];
-      const itemSaveIndex = 0;
-      const mockSetItemSaveIndex = jest.fn();
-
-      handleSaveItem(items, palletId, itemSaveIndex, mockSetItemSaveIndex, mockDispatch);
-      expect(mockSetItemSaveIndex).toBeCalledTimes(2);
-      // calls mockDispatch on second time
-      expect(mockDispatch).toBeCalledTimes(1);
-    });
-    it('tests handleSaveItem after last iteration, resetting variables', () => {
-      const items = [...mockItems];
-      const itemSaveIndex = 3;
-      const mockSetItemSaveIndex = jest.fn();
-
-      handleSaveItem(items, palletId, itemSaveIndex, mockSetItemSaveIndex, mockDispatch);
-      expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockSetItemSaveIndex).toBeCalledWith(0);
+    it('tests handleUpdateItems does not call dispatch if either add/deleted flag is true or has no newQty', () => {
+      const items = [
+        { ...mockItems[0], deleted: false },
+        { ...mockItems[1], added: true },
+        { ...mockItems[2], deleted: true }
+      ];
+      handleUpdateItems(items, palletId, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
     });
 
     it('tests updateItemQuantityHook', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
-        result: { status: 204 }
+        result: {
+          status: 204,
+          config: {
+            data: JSON.stringify([mockItems[1], mockItems[2]])
+          }
+        }
       };
       const failApi: AsyncState = {
         ...defaultAsyncState,
         error: { status: 400 }
       };
-      const items = [...mockItems];
-      const itemSaveIndex = 1;
-      const mockSetItemSaveIndex = jest.fn();
-      const mockSetIsLoading = jest.fn();
-      updateItemQuantityApiHook(
-        successApi, items, palletId, itemSaveIndex, mockSetItemSaveIndex, mockDispatch, mockSetIsLoading
-      );
-      expect(mockDispatch).toBeCalledTimes(2);
-      mockDispatch.mockClear();
 
-      updateItemQuantityApiHook(
-        failApi, items, palletId, itemSaveIndex, mockSetItemSaveIndex, mockDispatch, mockSetIsLoading
-      );
-      expect(mockDispatch).toBeCalledTimes(1);
+      const mockSetIsLoading = jest.fn();
+      updateItemQuantityApiHook(successApi, mockDispatch, mockSetIsLoading);
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockSetIsLoading).toBeCalledTimes(1);
+      mockDispatch.mockClear();
+      mockSetIsLoading.mockClear();
+
+      updateItemQuantityApiHook(failApi, mockDispatch, mockSetIsLoading);
+      expect(mockSetIsLoading).toBeCalledTimes(1);
     });
 
     it('Calls dispatch if the "added" flag is true for at least one palletItem', () => {

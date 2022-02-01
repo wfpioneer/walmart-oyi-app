@@ -64,8 +64,6 @@ interface ManagePalletProps {
   addPalletUpcApi: AsyncState;
   isLoading: boolean,
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  itemSaveIndex: number;
-  setItemSaveIndex: React.Dispatch<React.SetStateAction<number>>;
   updateItemQtyAPI: AsyncState;
   deleteUpcsApi: AsyncState;
   getPalletDetailsApi: AsyncState;
@@ -146,59 +144,32 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   }
   return null;
 };
-/* Update Pallet ItemQty api is able to take in an array of quantity changes.
-         which maybe better than recursively calling the api.
-         This could potentially use a refactor */
-export const handleSaveItem = (
-  items: PalletItem[],
-  palletId: number,
-  itemSaveIndex: number,
-  setItemSaveIndex: React.Dispatch<React.SetStateAction<number>>,
-  dispatch: Dispatch<any>,
-  indexOnSkip?: number
-): void => {
-  const currentIndex = indexOnSkip || itemSaveIndex;
-  if (currentIndex < items.length) {
-    const currentItem = items[currentIndex];
-    setItemSaveIndex(currentIndex + 1);
-    // Skip item if either flag is true. Temp change
-    const hasNoFlags = !currentItem.added && !currentItem.deleted;
-    if (isQuantityChanged(currentItem) && currentItem.newQuantity && hasNoFlags) {
-      dispatch(updatePalletItemQty({
-        palletId, quantity: currentItem.newQuantity, upc: currentItem.upcNbr
-      }));
-    } else {
-      // Need to give it the new index as setState doesn't update fast enough
-      handleSaveItem(items, palletId, itemSaveIndex, setItemSaveIndex, dispatch, currentIndex + 1);
-    }
-  } else {
-    setItemSaveIndex(0);
-    dispatch({ type: UPDATE_PALLET_ITEM_QTY.RESET });
+
+export const handleUpdateItems = (items: PalletItem[], palletId: number, dispatch: Dispatch<any>): void => {
+  const updatePalletItems = items.filter(item => isQuantityChanged(item) && !item.added && !item.deleted)
+    .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
+
+  if (updatePalletItems.length > 0) {
+    dispatch(updatePalletItemQty({ palletId, palletItem: updatePalletItems }));
   }
 };
-
 export const updateItemQuantityApiHook = (
   updateItemQtyAPI: AsyncState,
-  items: PalletItem[],
-  palletId: number,
-  itemSaveIndex: number,
-  setItemSaveIndex: React.Dispatch<React.SetStateAction<number>>,
   dispatch: Dispatch<any>,
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 ): void => {
   if (!updateItemQtyAPI.isWaiting) {
     // Success
     if (updateItemQtyAPI.result) {
-      // have to do - 1 because we already incremented it
-      dispatch(setPalletItemQuantity(items[itemSaveIndex - 1].itemNbr.toString()));
-      handleSaveItem(items, palletId, itemSaveIndex, setItemSaveIndex, dispatch);
+      // Items passed into the request body
+      const { data } = updateItemQtyAPI.result.config;
+      const updatedItemQtys: PalletItem[] = JSON.parse(data);
+      updatedItemQtys.forEach(item => dispatch(setPalletItemQuantity(item.itemNbr.toString())));
       setIsLoading(false);
     }
 
     // Failure
     if (updateItemQtyAPI.error) {
-      // TODO count the fails
-      handleSaveItem(items, palletId, itemSaveIndex, setItemSaveIndex, dispatch);
       setIsLoading(false);
     }
   }
@@ -257,9 +228,8 @@ export const getPalletDetailsApiHook = (
 
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
-    useEffectHook, isManualScanEnabled, palletInfo, items,
-    navigation, route, dispatch, getItemDetailsfromUpcApi,
-    itemSaveIndex, setItemSaveIndex, updateItemQtyAPI, deleteUpcsApi,
+    useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
+    route, dispatch, getItemDetailsfromUpcApi, updateItemQtyAPI, deleteUpcsApi,
     addPalletUpcApi, isLoading, setIsLoading, activityModal, getPalletDetailsApi
   } = props;
   const { id, expirationDate } = palletInfo;
@@ -431,10 +401,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   // update item quantity api
   useEffectHook(() => updateItemQuantityApiHook(
     updateItemQtyAPI,
-    items,
-    palletInfo.id,
-    itemSaveIndex,
-    setItemSaveIndex,
     dispatch,
     setIsLoading
   ), [updateItemQtyAPI]);
@@ -491,7 +457,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     // Calls add items to pallet via api
     handleAddItems(palletId, items, dispatch);
     // Calls update pallet item qty api
-    handleSaveItem(items, palletInfo.id, itemSaveIndex, setItemSaveIndex, dispatch);
+    handleUpdateItems(items, id, dispatch);
   };
   // TODO Flatlist can use a flex container of 1. The pallet items can trail off of the screen
   return (
@@ -570,7 +536,6 @@ const ManagePallet = (): JSX.Element => {
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
 
-  const [itemSaveIndex, setItemSaveIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -622,8 +587,6 @@ const ManagePallet = (): JSX.Element => {
           addPalletUpcApi={addPalletUpcApi}
           isLoading={isLoading}
           setIsLoading={setIsLoading}
-          itemSaveIndex={itemSaveIndex}
-          setItemSaveIndex={setItemSaveIndex}
           updateItemQtyAPI={updateItemQtyAPI}
           deleteUpcsApi={deleteUpcsApi}
           getPalletDetailsApi={getPalletDetailsApi}
