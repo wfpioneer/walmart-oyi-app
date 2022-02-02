@@ -93,6 +93,7 @@ export const getPalletDetailsApiEffect = (
 
 export const combinePalletsApiEffect = (
   combinePalletsApi: AsyncState,
+  palletId: number,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>
 ): void => {
@@ -105,6 +106,7 @@ export const combinePalletsApiEffect = (
         text1: strings('PALLET.COMBINE_PALLET_SUCCESS')
       });
       dispatch({ type: 'API/PATCH_COMBINE_PALLETS/RESET' });
+      dispatch(getPalletDetails({ palletIds: [palletId], isAllItems: true }));
       navigation.goBack();
     }
 
@@ -166,13 +168,12 @@ export const CombinePalletsScreen = (
     return () => {
       scannedSubscription.remove();
     };
-  }, []);
+  }, [combinePallets]);
 
   useEffectHook(() => {
     navigation.addListener('beforeRemove', () => {
       // Clear Combine Pallets state
       dispatch(clearCombinePallet());
-      dispatch(getPalletDetails({ palletIds: [palletId], isAllItems: true }));
     });
   }, []);
 
@@ -182,17 +183,20 @@ export const CombinePalletsScreen = (
   useEffectHook(() => {
     if (navigation.isFocused()) {
       if (!activityModal) {
-        if (combinePalletsApi.isWaiting) {
+        if (combinePalletsApi.isWaiting
+          || getPalletDetailsApi.isWaiting) {
           dispatch(showActivityModal());
         }
-      } else if (!combinePalletsApi.isWaiting) {
+      } else if (!combinePalletsApi.isWaiting
+        && !getPalletDetailsApi.isWaiting) {
         dispatch(hideActivityModal());
       }
     }
-  }, [activityModal, combinePalletsApi]);
+  }, [activityModal, combinePalletsApi, getPalletDetailsApi]);
 
   useEffectHook(() => combinePalletsApiEffect(
     combinePalletsApi,
+    palletId,
     navigation,
     dispatch
   ), [combinePalletsApi]);

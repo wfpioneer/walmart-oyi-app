@@ -112,8 +112,8 @@ describe('Combine Pallets externalized function tests', () => {
   it('Tests the combine pallets api effect, on success', () => {
     const successApi: AsyncState = { ...defaultAsyncState, result: {} };
 
-    combinePalletsApiEffect(successApi, navigationProp, mockDispatch);
-    expect(mockDispatch).toBeCalledTimes(1);
+    combinePalletsApiEffect(successApi, 12, navigationProp, mockDispatch);
+    expect(mockDispatch).toBeCalledTimes(2);
     expect(mockGoBack).toBeCalledTimes(1);
     expect(Toast.show).toBeCalledTimes(1);
   });
@@ -121,7 +121,7 @@ describe('Combine Pallets externalized function tests', () => {
   it('Tests the combine pallets api effect, on fail', () => {
     const failApi: AsyncState = { ...defaultAsyncState, error: {} };
 
-    combinePalletsApiEffect(failApi, navigationProp, mockDispatch);
+    combinePalletsApiEffect(failApi, 12, navigationProp, mockDispatch);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(mockGoBack).toBeCalledTimes(0);
     expect(Toast.show).toBeCalledTimes(1);
