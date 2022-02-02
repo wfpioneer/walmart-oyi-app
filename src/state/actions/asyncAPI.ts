@@ -107,3 +107,6 @@ export const updatePalletItemQty = makeAsyncActionCreators(UPDATE_PALLET_ITEM_QT
 
 export const DELETE_UPCS = makeAsyncActionTypes('API/DELETE_UPCS');
 export const deleteUpcs = makeAsyncActionCreators(DELETE_UPCS);
+
+export const COMBINE_PALLETS = makeAsyncActionTypes('API/PATCH_COMBINE_PALLETS');
+export const combinePallets = makeAsyncActionCreators(COMBINE_PALLETS);
