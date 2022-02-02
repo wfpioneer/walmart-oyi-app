@@ -12,12 +12,20 @@ import {
   handleTextChange,
   handleUpdateItems,
   isQuantityChanged,
-  updateItemQuantityApiHook
+  updatePalletApisHook
 } from './ManagePallet';
-import { PalletInfo } from '../../models/PalletManagementTypes';
-import { PalletItem } from '../../models/PalletItem'; // use ^
+import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 import { AsyncState } from '../../models/AsyncState';
+import {
+  hideActivityModal,
+  showActivityModal
+} from '../../state/actions/Modal';
+import { strings } from '../../locales';
 
+jest.mock('../../state/actions/Modal', () => ({
+  showActivityModal: jest.fn(),
+  hideActivityModal: jest.fn()
+}));
 describe('ManagePalletScreen', () => {
   const mockPalletInfo: PalletInfo = {
     id: 1514,
@@ -82,10 +90,8 @@ describe('ManagePalletScreen', () => {
           navigation={navigationProp}
           route={routeProp}
           dispatch={jest.fn()}
-          getItemDetailsfromUpcApi={defaultAsyncState}
+          getItemDetailsFromUpcApi={defaultAsyncState}
           addPalletUpcApi={defaultAsyncState}
-          isLoading={false}
-          setIsLoading={jest.fn()}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
           activityModal={false}
@@ -96,30 +102,6 @@ describe('ManagePalletScreen', () => {
     });
   });
   describe('Tests rendering Api responses', () => {
-    it('Renders Loading indicator when waiting for an addUPC or getItemDetailsUpc api response', () => {
-      const ApiIsLoading = true;
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <ManagePalletScreen
-          useEffectHook={jest.fn}
-          isManualScanEnabled={true}
-          palletInfo={mockPalletInfo}
-          items={mockItems}
-          navigation={navigationProp}
-          route={routeProp}
-          dispatch={jest.fn()}
-          getItemDetailsfromUpcApi={defaultAsyncState}
-          addPalletUpcApi={defaultAsyncState}
-          isLoading={ApiIsLoading}
-          setIsLoading={jest.fn()}
-          updateItemQtyAPI={defaultAsyncState}
-          deleteUpcsApi={defaultAsyncState}
-          activityModal={false}
-          getPalletDetailsApi={defaultAsyncState}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
     it('Renders screen with newly added if get items details response sent sucesss', () => {
       const renderer = ShallowRenderer.createRenderer();
       const sucessAsyncState: AsyncState = {
@@ -142,10 +124,8 @@ describe('ManagePalletScreen', () => {
           navigation={navigationProp}
           route={routeProp}
           dispatch={jest.fn()}
-          getItemDetailsfromUpcApi={sucessAsyncState}
+          getItemDetailsFromUpcApi={sucessAsyncState}
           addPalletUpcApi={defaultAsyncState}
-          isLoading={false}
-          setIsLoading={jest.fn()}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
           activityModal={false}
@@ -159,6 +139,18 @@ describe('ManagePalletScreen', () => {
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
     const palletId = 3;
+
+    const onSuccessApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: '',
+        status: 200
+      }
+    };
+    const onFailureApi: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Request failed validation, 400'
+    };
 
     afterEach(() => {
       jest.clearAllMocks();
@@ -214,6 +206,7 @@ describe('ManagePalletScreen', () => {
       handleUpdateItems(items, palletId, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
     });
+
     it('tests handleUpdateItems does not call dispatch if either add/deleted flag is true or has no newQty', () => {
       const items = [
         { ...mockItems[0], deleted: false },
@@ -222,32 +215,6 @@ describe('ManagePalletScreen', () => {
       ];
       handleUpdateItems(items, palletId, mockDispatch);
       expect(mockDispatch).not.toHaveBeenCalled();
-    });
-
-    it('tests updateItemQuantityHook', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          status: 204,
-          config: {
-            data: JSON.stringify([mockItems[1], mockItems[2]])
-          }
-        }
-      };
-      const failApi: AsyncState = {
-        ...defaultAsyncState,
-        error: { status: 400 }
-      };
-
-      const mockSetIsLoading = jest.fn();
-      updateItemQuantityApiHook(successApi, mockDispatch, mockSetIsLoading);
-      expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockSetIsLoading).toBeCalledTimes(1);
-      mockDispatch.mockClear();
-      mockSetIsLoading.mockClear();
-
-      updateItemQuantityApiHook(failApi, mockDispatch, mockSetIsLoading);
-      expect(mockSetIsLoading).toBeCalledTimes(1);
     });
 
     it('Calls dispatch if the "added" flag is true for at least one palletItem', () => {
@@ -296,6 +263,84 @@ describe('ManagePalletScreen', () => {
       getPalletDetailsApiHook(failApi, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(0);
       expect(Toast.show).toBeCalledTimes(1);
+    });
+
+    it('Tests updatePalletApisHook isLoading', () => {
+      const apiIsWaiting: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      updatePalletApisHook(
+        apiIsWaiting,
+        defaultAsyncState,
+        defaultAsyncState,
+        mockItems,
+        mockDispatch
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(showActivityModal).toBeCalledTimes(1);
+    });
+    it('Tests updatePalletApisHook with Successful responses', () => {
+      const successToastProps = {
+        type: 'success',
+        text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
+        position: 'bottom'
+      };
+      updatePalletApisHook(
+        onSuccessApi,
+        onSuccessApi,
+        onSuccessApi,
+        mockItems,
+        mockDispatch
+      );
+      expect(mockDispatch).toBeCalledTimes(5);
+      expect(hideActivityModal).toBeCalledTimes(1);
+
+      expect(Toast.show).toHaveBeenCalledWith(
+        expect.objectContaining(successToastProps)
+      );
+    });
+    it('Tests updatePalletApisHook with Partial successful and error responses', () => {
+      const partialToastProps = {
+        type: 'info',
+        text1: strings('PALLET.SAVE_PALLET_PARTIAL'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        position: 'bottom'
+      };
+      updatePalletApisHook(
+        onFailureApi,
+        onSuccessApi,
+        onFailureApi,
+        mockItems,
+        mockDispatch
+      );
+      expect(mockDispatch).toBeCalledTimes(5);
+      expect(hideActivityModal).toBeCalledTimes(1);
+
+      expect(Toast.show).toHaveBeenCalledWith(
+        expect.objectContaining(partialToastProps)
+      );
+    });
+    it('Tests updatePalletApisHook with all error responses', () => {
+      const errorToastProps = {
+        type: 'error',
+        text1: strings('PALLET.SAVE_PALLET_FAILURE'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        position: 'bottom'
+      };
+      updatePalletApisHook(
+        onFailureApi,
+        onFailureApi,
+        onFailureApi,
+        mockItems,
+        mockDispatch
+      );
+      expect(mockDispatch).toBeCalledTimes(5);
+      expect(hideActivityModal).toBeCalledTimes(1);
+
+      expect(Toast.show).toHaveBeenCalledWith(
+        expect.objectContaining(errorToastProps)
+      );
     });
   });
 });

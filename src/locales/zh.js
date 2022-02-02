@@ -164,7 +164,10 @@ export default {
     ADD_UPC_SUCCESS: '所有商品成功添加到卡板',
     ADD_UPC_ERROR: '添加商品到卡板时出错',
     COMBINE_PALLET_SUCCESS: '卡板合并成功',
-    COMBINE_PALLET_FAILURE: '卡板合并失败，请重试'
+    COMBINE_PALLET_FAILURE: '卡板合并失败，请重试',
+    SAVE_PALLET_SUCCESS: 'Pallet update successful', // TODO Mandarin translation
+    SAVE_PALLET_PARTIAL: 'Pallet update partially successful', // TODO Mandarin translation
+    SAVE_PALLET_FAILURE: 'Pallet update failed' // TODO Mandarin translation
   },
   LOCATION: {
     TITLE: '所有位置',

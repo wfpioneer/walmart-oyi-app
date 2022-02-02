@@ -166,7 +166,10 @@ export default {
     ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet',
     ADD_UPC_ERROR: 'Error adding items to the Pallet',
     COMBINE_PALLET_SUCCESS: 'Pallets combined sucessfully',
-    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again'
+    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again',
+    SAVE_PALLET_SUCCESS: 'Pallet update successful',
+    SAVE_PALLET_PARTIAL: 'Pallet update partially successful',
+    SAVE_PALLET_FAILURE: 'Pallet update failed'
   },
   LOCATION: {
     TITLE: 'All locations',

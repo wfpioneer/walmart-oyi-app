@@ -1,9 +1,7 @@
 import React, {
-  Dispatch,
-  EffectCallback, useEffect, useMemo, useRef, useState
+  Dispatch, EffectCallback, useEffect, useMemo, useRef
 } from 'react';
 import {
-  ActivityIndicator,
   EmitterSubscription,
   FlatList,
   Text,
@@ -62,12 +60,17 @@ interface ManagePalletProps {
   route: RouteProp<any, string>;
   getItemDetailsFromUpcApi: AsyncState;
   addPalletUpcApi: AsyncState;
-  isLoading: boolean,
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
   updateItemQtyAPI: AsyncState;
   deleteUpcsApi: AsyncState;
   getPalletDetailsApi: AsyncState;
   activityModal: boolean;
+}
+interface ApiResult {
+  data: any;
+  status: number;
+  headers: Record<string, any>;
+  config: any;
+  request: Record<string, any>;
 }
 
 export const getNumberOfDeleted = (items: PalletItem[]): number => items.reduce(
@@ -153,33 +156,6 @@ export const handleUpdateItems = (items: PalletItem[], palletId: number, dispatc
     dispatch(updatePalletItemQty({ palletId, palletItem: updatePalletItems }));
   }
 };
-export const updateItemQuantityApiHook = (
-  updateItemQtyAPI: AsyncState,
-  dispatch: Dispatch<any>,
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
-): void => {
-  if (!updateItemQtyAPI.isWaiting) {
-    // Success
-    if (updateItemQtyAPI.result) {
-      // Items passed into the request body
-      const { data } = updateItemQtyAPI.result.config;
-
-      // TODO WE CAN JUST USE VALUE instead of CONFIG.DATA
-      const updatedItemQtys: PalletItem[] = JSON.parse(data);
-      updatedItemQtys.forEach(item => dispatch(setPalletItemQuantity(item.itemNbr.toString())));
-      setIsLoading(false);
-    }
-
-    // Failure
-    if (updateItemQtyAPI.error) {
-      setIsLoading(false);
-    }
-  }
-  // on api request
-  if (updateItemQtyAPI.isWaiting) {
-    setIsLoading(true);
-  }
-};
 
 export const handleAddItems = (id: number, items: PalletItem[], dispatch: Dispatch<any>): void => {
   // Filter Items by added flag
@@ -227,18 +203,119 @@ export const getPalletDetailsApiHook = (
     });
   }
 };
-interface ApiResult {
-  data: any;
-  status: number;
-  headers: Record<string, any>;
-  config: any;
-  request: Record<string, any>;
-}
+// Api response type guard
+const isSuccessResult = (response: ApiResult | string): response is ApiResult => (
+  typeof (response) === 'object');
+
+export const updatePalletApisHook = (
+  addPalletUpcApi: AsyncState,
+  updateItemQtyAPI: AsyncState,
+  deleteUpcsApi: AsyncState,
+  items: PalletItem[],
+  dispatch: Dispatch<any>
+): void => {
+  const addResponse: ApiResult | string = (addPalletUpcApi.result ?? addPalletUpcApi.error);
+  const updateResponse: ApiResult | string = (updateItemQtyAPI.result ?? updateItemQtyAPI.error);
+  const deleteResponse: ApiResult | string = (deleteUpcsApi.result ?? deleteUpcsApi.error);
+
+  const isLoading = addPalletUpcApi.isWaiting || deleteUpcsApi.isWaiting || updateItemQtyAPI.isWaiting;
+  const totalResponses: Map<'ERROR' | 'SUCCESS', any> = new Map();
+
+  let newPalletItems = [...items];
+  if (isLoading) {
+    dispatch(showActivityModal());
+  }
+
+  if (!isLoading && addResponse) {
+    if (isSuccessResult(addResponse) && addResponse.status === 200) {
+      totalResponses.set('SUCCESS', addResponse);
+      newPalletItems = newPalletItems.map(item => {
+        if (item.added) {
+          return {
+            ...item,
+            added: false,
+            quantity: item.newQuantity ?? item.quantity
+          };
+        }
+        return item;
+      });
+    } else {
+      totalResponses.set('ERROR', addResponse);
+    }
+  }
+  if (!isLoading && updateResponse) {
+    if (isSuccessResult(updateResponse) && updateResponse.status === 200) {
+      totalResponses.set('SUCCESS', updateResponse);
+      newPalletItems = newPalletItems.map(item => {
+        if (!item.added && !item.deleted) {
+          return {
+            ...item,
+            quantity: item.newQuantity ?? item.quantity
+          };
+        }
+        return item;
+      });
+    } else {
+      totalResponses.set('ERROR', updateResponse);
+    }
+  }
+  if (!isLoading && deleteResponse) {
+    if (isSuccessResult(deleteResponse) && deleteResponse.status === 200) {
+      totalResponses.set('SUCCESS', deleteResponse);
+      const deleteIndexes: number[] = [];
+      // Finds Index for each deleted item
+      newPalletItems.forEach((item, index) => {
+        if (item.deleted) {
+          deleteIndexes.push(index);
+        }
+      });
+      // Reverses the array of indexes to remove the correct elements
+      if (deleteIndexes.length > 1) {
+        deleteIndexes.reverse();
+      }
+      deleteIndexes.forEach(index => newPalletItems.splice(index, 1));
+    } else {
+      totalResponses.set('ERROR', deleteResponse);
+    }
+  }
+  if (!isLoading && (addResponse || updateResponse || deleteResponse)) {
+    // Updates Pallet Items State with successful responses
+    dispatch(updateItems(newPalletItems));
+    // Orchestrates Toast Message Response
+    if (totalResponses.size > 1) {
+      Toast.show({
+        type: 'info',
+        text1: strings('PALLET.SAVE_PALLET_PARTIAL'),
+        text2: strings(TRY_AGAIN),
+        position: 'bottom'
+      });
+    } else if (totalResponses.keys().next().value === 'SUCCESS') {
+      Toast.show({
+        type: 'success',
+        text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
+        position: 'bottom'
+      });
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: strings('PALLET.SAVE_PALLET_FAILURE'),
+        text2: strings(TRY_AGAIN),
+        position: 'bottom'
+      });
+    }
+    // Clear APIs
+    dispatch({ type: ADD_PALLET_UPCS.RESET });
+    dispatch({ type: UPDATE_PALLET_ITEM_QTY.RESET });
+    dispatch({ type: DELETE_UPCS.RESET });
+    dispatch(hideActivityModal());
+  }
+};
+
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
     route, dispatch, getItemDetailsFromUpcApi, updateItemQtyAPI, deleteUpcsApi,
-    addPalletUpcApi, isLoading, setIsLoading, activityModal, getPalletDetailsApi
+    addPalletUpcApi, activityModal, getPalletDetailsApi
   } = props;
   const { id, expirationDate } = palletInfo;
 
@@ -248,8 +325,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   useEffectHook(() => navigation.addListener('beforeRemove', () => {
     // Suggestion add confirmation before leaving screen if they want to undo unsaved changes
     dispatch({ type: GET_ITEM_DETAIL_UPC.RESET });
-    dispatch({ type: ADD_PALLET_UPCS.RESET });
-    dispatch({ type: DELETE_UPCS.RESET });
   }), []);
 
   // Scanner listener
@@ -271,110 +346,15 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       scannedSubscription.remove();
     };
   }, []);
-  const updatePalletResult = (response: ApiResult | string | null, updatedItems: PalletItem[]) => {
-    if (response && typeof (response) === 'object') {
-      const palletData: PalletItem[] = JSON.parse(response.config.data);
-    }
-  };
-  const isSuccessResult = (response: ApiResult | string): response is ApiResult => (
-    typeof (response) === 'object');
+
   // Orchestrated API Calls
-  useEffectHook(() => {
-    const addResponse: ApiResult | string = (addPalletUpcApi.result ?? addPalletUpcApi.error);
-    const updateResponse: ApiResult | string = (updateItemQtyAPI.result ?? updateItemQtyAPI.error);
-    const deleteResponse: ApiResult | string = (deleteUpcsApi.result ?? deleteUpcsApi.error);
-
-    const isLoadingx = addPalletUpcApi.isWaiting || deleteUpcsApi.isWaiting || updateItemQtyAPI.isWaiting;
-    const totalResponses: Map<'ERROR' | 'SUCCESS', any> = new Map();
-
-    let newPalletItems = [...items];
-    if (isLoadingx) {
-      console.log('Showing Activity Modal');
-      dispatch(showActivityModal());
-    }
-    // IF response update newPalletItems
-    if (!isLoadingx && addResponse) {
-      if (isSuccessResult(addResponse) && addResponse.status === 200) {
-        totalResponses.set('SUCCESS', addResponse);
-        newPalletItems = newPalletItems.map(item => {
-          if (item.added) {
-            return {
-              ...item,
-              added: false,
-              quantity: item.newQuantity ?? item.quantity
-            };
-          }
-          return item;
-        });
-      } else {
-        totalResponses.set('ERROR', addResponse);
-      }
-    }
-    if (!isLoadingx && updateResponse) {
-      if (isSuccessResult(updateResponse) && updateResponse.status === 200) {
-        totalResponses.set('SUCCESS', updateResponse);
-        newPalletItems = newPalletItems.map(item => {
-          if (!item.added && !item.deleted) {
-            return {
-              ...item,
-              quantity: item.newQuantity ?? item.quantity
-            };
-          }
-          return item;
-        });
-      } else {
-        totalResponses.set('ERROR', updateResponse);
-      }
-    }
-    if (!isLoadingx && deleteResponse) {
-      if (isSuccessResult(deleteResponse) && deleteResponse.status === 200) {
-        totalResponses.set('SUCCESS', deleteResponse);
-        const deleteIndexes: number[] = [];
-        // Finds Index for each deleted item
-        newPalletItems.forEach((item, index) => {
-          if (item.deleted) {
-            deleteIndexes.push(index);
-          }
-        });
-        deleteIndexes.forEach(index => newPalletItems.splice(index, 1));
-      } else {
-        totalResponses.set('ERROR', deleteResponse);
-      }
-    }
-    if (!isLoadingx && (addResponse || updateResponse || deleteResponse)) {
-      // Updates Pallet Items State with successful responses
-      dispatch(updateItems(newPalletItems));
-      // Orchestrates Toast Message Response
-      if (totalResponses.size > 1) {
-        Toast.show({
-          type: 'info',
-          text1: 'Pallet update partially successful',
-          text2: strings(TRY_AGAIN),
-          position: 'bottom'
-        });
-      } else if (totalResponses.keys().next().value === 'SUCCESS') {
-        Toast.show({
-          type: 'success',
-          text1: 'Pallet update successful',
-          position: 'bottom'
-        });
-      } else {
-        Toast.show({
-          type: 'error',
-          text1: 'Pallet update failed',
-          text2: strings(TRY_AGAIN),
-          position: 'bottom'
-        });
-      }
-      // Clear APIs
-      dispatch({ type: ADD_PALLET_UPCS.RESET });
-      dispatch({ type: UPDATE_PALLET_ITEM_QTY.RESET });
-      dispatch({ type: DELETE_UPCS.RESET });
-      dispatch(hideActivityModal());
-      // Function to check result and push to items to new list
-    }
-    // After Above is finished Display appropriate Toast message
-  }, [addPalletUpcApi, deleteUpcsApi, updateItemQtyAPI]);
+  useEffectHook(() => updatePalletApisHook(
+    addPalletUpcApi,
+    updateItemQtyAPI,
+    deleteUpcsApi,
+    items,
+    dispatch
+  ), [addPalletUpcApi, deleteUpcsApi, updateItemQtyAPI]);
   // Get Item Details UPC api
   useEffectHook(() => {
     // on api success
@@ -417,11 +397,11 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           position: 'bottom'
         });
       }
-      setIsLoading(false);
+      dispatch(hideActivityModal());
     }
     // on api error
     if (!getItemDetailsFromUpcApi.isWaiting && getItemDetailsFromUpcApi.error) {
-      setIsLoading(false);
+      dispatch(hideActivityModal());
       Toast.show({
         type: 'error',
         text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
@@ -432,7 +412,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     }
     // on api request
     if (getItemDetailsFromUpcApi.isWaiting) {
-      setIsLoading(true);
+      dispatch(showActivityModal());
     }
   }, [getItemDetailsFromUpcApi]);
 
@@ -460,19 +440,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     getPalletDetailsApi
   ]);
 
-  // TODO setIsLoading should be orchestrated to check if all apis have finished their request or alternative solution
-  if (isLoading) {
-    return (
-      <ActivityIndicator
-        animating={isLoading}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
-
   const submit = () => {
     const palletId = id;
     const reducerInitialValue: string[] = [];
@@ -490,7 +457,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     // Calls update pallet item qty api
     handleUpdateItems(items, id, dispatch);
   };
-  // TODO Flatlist can use a flex container of 1. The pallet items can trail off of the screen
+
   return (
     <View style={styles.safeAreaView}>
       <View style={styles.bodyContainer}>
@@ -532,7 +499,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             />
           </View>
         ) : null}
-        <View style={{ flex: 1 }}>
+        <View style={styles.container}>
           <FlatList
             data={items}
             renderItem={item => itemCard(item, dispatch)}
@@ -566,8 +533,6 @@ const ManagePallet = (): JSX.Element => {
   const updateItemQtyAPI = useTypedSelector(state => state.async.updatePalletItemQty);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
@@ -616,8 +581,6 @@ const ManagePallet = (): JSX.Element => {
           route={route}
           getItemDetailsFromUpcApi={getItemDetailsFromUpcApi}
           addPalletUpcApi={addPalletUpcApi}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
           updateItemQtyAPI={updateItemQtyAPI}
           deleteUpcsApi={deleteUpcsApi}
           getPalletDetailsApi={getPalletDetailsApi}

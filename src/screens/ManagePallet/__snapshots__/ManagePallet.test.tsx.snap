@@ -1,21 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ManagePalletScreen Tests rendering Api responses Renders Loading indicator when waiting for an addUPC or getItemDetailsUpc api response 1`] = `
-<ActivityIndicator
-  animating={true}
-  color="#0071e9"
-  hidesWhenStopped={true}
-  size="large"
-  style={
-    Object {
-      "alignItems": "center",
-      "flex": 1,
-      "justifyContent": "center",
-    }
-  }
-/>
-`;
-
 exports[`ManagePalletScreen Tests rendering Api responses Renders screen with newly added if get items details response sent sucesss 1`] = `
 <View
   style={
@@ -28,7 +12,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
     style={
       Object {
         "alignItems": "stretch",
-        "flex": 0.9,
+        "flex": 1,
         "justifyContent": "flex-start",
         "marginTop": 5,
       }
@@ -195,7 +179,13 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
         width={-1}
       />
     </View>
-    <View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
       <FlatList
         data={
           Array [
@@ -294,7 +284,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
     style={
       Object {
         "alignItems": "stretch",
-        "flex": 0.9,
+        "flex": 1,
         "justifyContent": "flex-start",
         "marginTop": 5,
       }
@@ -461,7 +451,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         width={-1}
       />
     </View>
-    <View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
       <FlatList
         data={
           Array [
