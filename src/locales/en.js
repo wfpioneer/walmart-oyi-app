@@ -46,7 +46,9 @@ export default {
     TOOLS: 'Tools',
     OR: 'OR',
     CURRENCY_SYMBOL: '$',
-    UNDO: 'Undo'
+    UNDO: 'Undo',
+    YES: 'Yes',
+    NO: 'No'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -166,7 +168,9 @@ export default {
     ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet',
     ADD_UPC_ERROR: 'Error adding items to the Pallet',
     COMBINE_PALLET_SUCCESS: 'Pallets combined sucessfully',
-    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again'
+    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again',
+    CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?',
+    CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful'
   },
   LOCATION: {
     TITLE: 'All locations',

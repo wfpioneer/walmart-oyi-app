@@ -45,7 +45,9 @@ export default {
     ITEMS: '多个商品',
     TOOLS: '工具箱',
     CURRENCY_SYMBOL: '¥',
-    UNDO: 'Undo' // TODO Mandarin Translation
+    UNDO: 'Undo', // TODO Mandarin Translation
+    YES: 'Yes', // TODO Mandarin Translation
+    NO: 'No' // TODO Mandarin Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -275,7 +277,9 @@ export default {
     CLEAR_AISLE_ITEMS_WONT_DELETE: '删除此通道的货架信息',
     CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
     CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
-    PALLET_MANAGEMENT: 'Pallet Management' // TODO Mandarin Translation
+    PALLET_MANAGEMENT: 'Pallet Management', // TODO Mandarin Translation
+    CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?', // TODO Mandarin Translation
+    CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

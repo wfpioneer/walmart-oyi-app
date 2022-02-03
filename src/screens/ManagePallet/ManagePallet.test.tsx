@@ -73,25 +73,60 @@ describe('ManagePalletScreen', () => {
     it('Renders the PalletManagement default ', () => {
       const renderer = ShallowRenderer.createRenderer();
 
-      renderer.render(<ManagePalletScreen
-        useEffectHook={jest.fn}
-        isManualScanEnabled={true}
-        palletInfo={mockPalletInfo}
-        items={mockItems}
-        navigation={navigationProp}
-        route={routeProp}
-        dispatch={jest.fn()}
-        getItemDetailsfromUpcApi={defaultAsyncState}
-        addPalletUpcApi={defaultAsyncState}
-        isLoading={false}
-        setIsLoading={jest.fn()}
-        itemSaveIndex={0}
-        setItemSaveIndex={jest.fn()}
-        updateItemQtyAPI={defaultAsyncState}
-        deleteUpcsApi={defaultAsyncState}
-        activityModal={false}
-        getPalletDetailsApi={defaultAsyncState}
-      />);
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsfromUpcApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          isLoading={false}
+          setIsLoading={jest.fn()}
+          itemSaveIndex={0}
+          setItemSaveIndex={jest.fn()}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          activityModal={false}
+          getPalletDetailsApi={defaultAsyncState}
+          deletePalletApi={defaultAsyncState}
+          displayClearConfirmation={false}
+          setDisplayClearConfirmation={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders the PalletManagement with Clear Pallet Confirmation Modal ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsfromUpcApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          isLoading={false}
+          setIsLoading={jest.fn()}
+          itemSaveIndex={0}
+          setItemSaveIndex={jest.fn()}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          activityModal={false}
+          getPalletDetailsApi={defaultAsyncState}
+          deletePalletApi={defaultAsyncState}
+          displayClearConfirmation={true}
+          setDisplayClearConfirmation={jest.fn()}
+        />
+      );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
@@ -117,6 +152,9 @@ describe('ManagePalletScreen', () => {
         deleteUpcsApi={defaultAsyncState}
         activityModal={false}
         getPalletDetailsApi={defaultAsyncState}
+        deletePalletApi={defaultAsyncState}
+        displayClearConfirmation={false}
+        setDisplayClearConfirmation={jest.fn()}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -151,6 +189,9 @@ describe('ManagePalletScreen', () => {
         deleteUpcsApi={defaultAsyncState}
         activityModal={false}
         getPalletDetailsApi={defaultAsyncState}
+        deletePalletApi={defaultAsyncState}
+        displayClearConfirmation={false}
+        setDisplayClearConfirmation={jest.fn()}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

@@ -16,12 +16,14 @@ interface ApiConfirmationModalProps {
   subtext1?: string;
   subtext2?: string;
   errorText?: string;
+  cancelText?: string;
+  confirmText?: string;
   handleConfirm: () => void;
 }
 
 const ApiConfirmationModal = (props: ApiConfirmationModalProps): JSX.Element => {
   const {
-    isVisible, onClose, api, mainText, subtext1, subtext2, errorText, handleConfirm
+    isVisible, onClose, api, mainText, subtext1, subtext2, errorText, handleConfirm, cancelText, confirmText
   } = props;
 
   const textView = () => !(errorText && api.error) && (
@@ -72,13 +74,13 @@ const ApiConfirmationModal = (props: ApiConfirmationModalProps): JSX.Element => 
           <View style={styles.buttonContainer}>
             <Button
               style={styles.delButton}
-              title={strings('GENERICS.CANCEL')}
+              title={cancelText ?? strings('GENERICS.CANCEL')}
               backgroundColor={COLOR.TRACKER_RED}
               onPress={() => onClose()}
             />
             <Button
               style={styles.delButton}
-              title={api.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+              title={api.error ? strings('GENERICS.RETRY') : (confirmText ?? strings('GENERICS.OK'))}
               backgroundColor={COLOR.MAIN_THEME_COLOR}
               onPress={handleConfirm}
             />
@@ -92,7 +94,9 @@ const ApiConfirmationModal = (props: ApiConfirmationModalProps): JSX.Element => 
 ApiConfirmationModal.defaultProps = {
   subtext1: null,
   subtext2: null,
-  errorText: null
+  errorText: null,
+  cancelText: null,
+  confirmText: null
 };
 
 export default ApiConfirmationModal;
