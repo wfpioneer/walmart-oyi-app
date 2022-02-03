@@ -11,6 +11,8 @@ import {
 } from '@react-navigation/native';
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 import { Dispatch } from 'redux';
+import { ActivityIndicator } from 'react-native-paper';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { strings } from '../../locales';
 import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
@@ -38,11 +40,13 @@ import ApiConfirmationModal from '../../screens/Modal/ApiConfirmationModal';
 import { AsyncState } from '../../models/AsyncState';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import { LocationIdName } from '../../state/reducers/Location';
-import { REMOVE_SECTION } from '../../state/actions/asyncAPI';
+import { GET_SECTION_DETAILS, REMOVE_SECTION } from '../../state/actions/asyncAPI';
 import User from '../../models/User';
 
 const Tab = createMaterialTopTabNavigator();
 const LOCATION_EDIT_FLAG = 'location management edit';
+const LOCATION_PALLETS = 'LOCATION.PALLETS';
+const LOCATION_ITEMS = 'LOCATION.ITEMS';
 
 export interface LocationProps {
     floorItems: SectionDetailsItem[];
@@ -59,8 +63,7 @@ export interface LocationProps {
     locationPopupVisible: boolean;
     user: User;
     itemPopupVisible:boolean;
-    sectionResult: any;
-    sectionIsWaiting: boolean;
+    getSectionDetailsApi: AsyncState;
     clearSectionApi: AsyncState;
     setSelectedTab: React.Dispatch<React.SetStateAction<ClearLocationTarget | undefined>>;
     setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -106,7 +109,6 @@ export const getSectionDetailsEffect = (
     // Handles scanned event changes if the screen is in focus
     if (scannedEvent.value && navigation.isFocused()) {
       dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
-      navigation.navigate('FloorDetails');
     }
   }).catch(() => {});
 };
@@ -181,7 +183,7 @@ const FloorDetailsList = (props: {sectionExists: boolean}) => {
   return (
     <>
       <TabHeader
-        headerText={strings('LOCATION.ITEMS')}
+        headerText={strings(LOCATION_ITEMS)}
         isEditEnabled={locationManagementEdit()}
         isReserve={false}
         isDisabled={!sectionExists}
@@ -200,7 +202,7 @@ const ReserveDetailsList = (props: {sectionExists: boolean}) => {
   return (
     <>
       <TabHeader
-        headerText={strings('LOCATION.PALLETS')}
+        headerText={strings(LOCATION_PALLETS)}
         isEditEnabled={locationManagementEdit()}
         isReserve={true}
         isDisabled={!sectionExists}
@@ -217,9 +219,9 @@ const getSectionDetailsLabel = (
   const floorItemNbr = floorItems.length || 0;
   const reserveItemNbr = reserveItems.length || 0;
   if (isWaiting) {
-    return `0 ${strings('LOCATION.ITEMS')}, 0 ${strings('LOCATION.PALLETS')}`;
+    return `0 ${strings(LOCATION_ITEMS)}, 0 ${strings(LOCATION_PALLETS)}`;
   }
-  return `${floorItemNbr} ${strings('LOCATION.ITEMS')}, ${reserveItemNbr} ${strings('LOCATION.PALLETS')}`;
+  return `${floorItemNbr} ${strings(LOCATION_ITEMS)}, ${reserveItemNbr} ${strings(LOCATION_PALLETS)}`;
 };
 
 const getLocationName = (isWaiting: boolean, sectionExists: boolean, newLocationName: string): string => {
@@ -245,24 +247,23 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     validateSessionCall,
     user,
     itemPopupVisible,
-    sectionResult,
+    getSectionDetailsApi,
     setSelectedTab,
     clearSectionApi,
     displayClearConfirmation,
     setDisplayClearConfirmation,
-    sectionIsWaiting,
     removeSectionApi,
     displayRemoveConfirmation,
     setDisplayRemoveConfirmation,
     section,
     selectedTab
   } = props;
-  const sectionExists: boolean = (sectionResult && sectionResult.status !== 204);
+  const sectionExists: boolean = (getSectionDetailsApi.result && getSectionDetailsApi.result.status !== 204);
 
   const locationManagementEdit = () => user.features.includes(LOCATION_EDIT_FLAG)
     || user.configs.locationManagementEdit;
 
-  // Call Get Section Details
+  // Call Get Section Details on scan
   useEffectHook(() => getSectionDetailsEffect(
     validateSessionCall,
     route,
@@ -279,6 +280,21 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     section,
     setDisplayClearConfirmation
   ), [clearSectionApi]);
+
+  // Call get section details on select from list
+  useEffectHook(() => {
+    navigation.addListener('focus', () => {
+      validateSession(navigation, route.name).then(() => {
+        if (!scannedEvent.value) {
+          dispatch(getSectionDetails({ sectionId: section.id.toString() }));
+        }
+      });
+    });
+    navigation.addListener('blur', () => {
+      dispatch(hideItemPopup());
+      dispatch({ type: GET_SECTION_DETAILS.RESET });
+    });
+  }, [navigation, scannedEvent]);
 
   // scanned event listener
   useEffectHook(() => {
@@ -307,6 +323,36 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     }
   });
 
+  if (getSectionDetailsApi.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={true}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
+
+  if (getSectionDetailsApi.error) {
+    return (
+      <View style={styles.errorView}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('LOCATION.LOCATION_API_ERROR')}</Text>
+        <TouchableOpacity
+          style={styles.errorButton}
+          onPress={() => {
+            trackEventCall('location_api_retry',);
+            dispatch(getSectionDetails({ sectionId: scannedEvent.value || section.id.toString() }));
+          }}
+        >
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
     <>
       <ApiConfirmationModal
@@ -331,8 +377,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       />
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
-        location={getLocationName(sectionIsWaiting, sectionExists, locationName)}
-        details={getSectionDetailsLabel(sectionIsWaiting, floorItems, reserveItems)}
+        location={getLocationName(getSectionDetailsApi.isWaiting, sectionExists, locationName)}
+        details={getSectionDetailsLabel(getSectionDetailsApi.isWaiting, floorItems, reserveItems)}
         buttonPress={() => {
           dispatch(setPrintingLocationLabels(LocationName.SECTION));
           navigation.navigate('PrintPriceSign');
@@ -348,6 +394,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           indicatorStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
         }}
         swipeEnabled={sectionExists}
+        initialRouteName="FloorDetails"
       >
         <Tab.Screen
           name="FloorDetails"
@@ -396,7 +443,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
 
 const LocationTabs = () : JSX.Element => {
   const { selectedAisle, selectedZone, selectedSection } = useTypedSelector(state => state.Location);
-  const { result, isWaiting } = useTypedSelector(state => state.async.getSectionDetails);
+  const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
   const clearSectionApi = useTypedSelector(state => state.async.clearLocation);
   const removeSectionApi = useTypedSelector(state => state.async.removeSection);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
@@ -408,7 +455,7 @@ const LocationTabs = () : JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
-  const locItem: LocationItem | undefined = (result && result.data);
+  const locItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
   const locationName = `${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`;
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const [selectedTab, setSelectedTab] = useState<ClearLocationTarget>();
@@ -452,8 +499,7 @@ const LocationTabs = () : JSX.Element => {
           validateSessionCall={validateSession}
           user={user}
           itemPopupVisible={itemPopupVisible}
-          sectionResult={result}
-          sectionIsWaiting={isWaiting}
+          getSectionDetailsApi={getSectionDetailsApi}
           setSelectedTab={setSelectedTab}
           clearSectionApi={clearSectionApi}
           removeSectionApi={removeSectionApi}
