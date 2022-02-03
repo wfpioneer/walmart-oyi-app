@@ -35,9 +35,9 @@ import { Pallet, PalletInfo, PalletItem } from '../../models/PalletManagementTyp
 import {
   addItemToPallet,
   deleteItem,
+  removeItem,
   resetItems,
   setPalletItemNewQuantity,
-  setPalletItemQuantity,
   setupPallet,
   showManagePalletMenu,
   updateItems
@@ -118,7 +118,12 @@ export const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text
   }
 };
 const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
-  dispatch(deleteItem(item.itemNbr.toString()));
+  // Remove item from redux if this item was being added to pallet
+  if (item.added) {
+    dispatch(removeItem(item.itemNbr.toString()));
+  } else {
+    dispatch(deleteItem(item.itemNbr.toString()));
+  }
 };
 const undoDelete = (dispatch: Dispatch<any>) => {
   dispatch(resetItems());
@@ -384,7 +389,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             price,
             itemDesc
           } = data;
-          const pallet : PalletItem = {
+          const pallet: PalletItem = {
             upcNbr,
             itemNbr,
             price,
