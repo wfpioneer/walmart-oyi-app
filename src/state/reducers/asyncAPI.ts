@@ -23,7 +23,7 @@ export const asyncReducer = combineReducers({
   getSections: makeAsyncReducer(asyncActions.GET_SECTIONS),
   getSectionDetails: makeAsyncReducer(asyncActions.GET_SECTION_DETAILS),
   addPallet: makeAsyncReducer(asyncActions.ADD_PALLET),
-  deletePallet: makeAsyncReducer(asyncActions.DELETE_PALLET),
+  removePallet: makeAsyncReducer(asyncActions.REMOVE_PALLET),
   printLocationLabels: makeAsyncReducer(asyncActions.PRINT_LOCATION_LABELS),
   getPalletDetails: makeAsyncReducer(asyncActions.GET_PALLET_DETAILS),
   postCreateAisles: makeAsyncReducer(asyncActions.POST_CREATE_AISLES),
@@ -39,7 +39,8 @@ export const asyncReducer = combineReducers({
   addPalletUPCs: makeAsyncReducer(asyncActions.ADD_PALLET_UPCS),
   updatePalletItemQty: makeAsyncReducer(asyncActions.UPDATE_PALLET_ITEM_QTY),
   deleteUpcs: makeAsyncReducer(asyncActions.DELETE_UPCS),
-  combinePallets: makeAsyncReducer(asyncActions.COMBINE_PALLETS)
+  combinePallets: makeAsyncReducer(asyncActions.COMBINE_PALLETS),
+  deletePallet: makeAsyncReducer(asyncActions.DELETE_PALLET)
 });
 
 export default asyncReducer;
