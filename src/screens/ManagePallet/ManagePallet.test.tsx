@@ -94,7 +94,6 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          activityModal={false}
           getPalletDetailsApi={defaultAsyncState}
         />
       );
@@ -128,7 +127,6 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          activityModal={false}
           getPalletDetailsApi={defaultAsyncState}
         />
       );
@@ -253,7 +251,7 @@ describe('ManagePalletScreen', () => {
       };
 
       getPalletDetailsApiHook(successApi, mockDispatch);
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(0);
     });
 
@@ -261,7 +259,7 @@ describe('ManagePalletScreen', () => {
       const failApi: AsyncState = { ...defaultAsyncState, error: {} };
 
       getPalletDetailsApiHook(failApi, mockDispatch);
-      expect(mockDispatch).toBeCalledTimes(0);
+      expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
     });
 

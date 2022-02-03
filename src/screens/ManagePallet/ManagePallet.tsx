@@ -63,7 +63,6 @@ interface ManagePalletProps {
   updateItemQtyAPI: AsyncState;
   deleteUpcsApi: AsyncState;
   getPalletDetailsApi: AsyncState;
-  activityModal: boolean;
 }
 interface ApiResult {
   data: any;
@@ -159,8 +158,9 @@ export const handleUpdateItems = (items: PalletItem[], palletId: number, dispatc
 
 export const handleAddItems = (id: number, items: PalletItem[], dispatch: Dispatch<any>): void => {
   // Filter Items by added flag
-  const addPalletItems = items.filter(item => item.added === true)
+  const addPalletItems = items.filter(item => item.added)
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
+
   if (addPalletItems.length > 0) {
     dispatch(addPalletUPCs({ palletId: id, items: addPalletItems }));
   }
@@ -191,9 +191,11 @@ export const getPalletDetailsApiHook = (
       items: palletItems
     };
     dispatch(setupPallet(palletDetails));
+    dispatch(hideActivityModal());
   }
   // on api error
   if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
+    dispatch(hideActivityModal());
     Toast.show({
       type: 'error',
       text1: strings('PALLET.PALLET_DETAILS_ERROR'),
@@ -201,6 +203,10 @@ export const getPalletDetailsApiHook = (
       visibilityTime: 4000,
       position: 'bottom'
     });
+  }
+  // api is Loading
+  if (getPalletDetailsApi.isWaiting) {
+    dispatch(showActivityModal());
   }
 };
 // Api response type guard
@@ -212,7 +218,7 @@ export const updatePalletApisHook = (
   updateItemQtyAPI: AsyncState,
   deleteUpcsApi: AsyncState,
   items: PalletItem[],
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
 ): void => {
   const addResponse: ApiResult | string = (addPalletUpcApi.result ?? addPalletUpcApi.error);
   const updateResponse: ApiResult | string = (updateItemQtyAPI.result ?? updateItemQtyAPI.error);
@@ -304,18 +310,18 @@ export const updatePalletApisHook = (
       });
     }
     // Clear APIs
+    dispatch(hideActivityModal());
     dispatch({ type: ADD_PALLET_UPCS.RESET });
     dispatch({ type: UPDATE_PALLET_ITEM_QTY.RESET });
     dispatch({ type: DELETE_UPCS.RESET });
-    dispatch(hideActivityModal());
   }
 };
 
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
-    route, dispatch, getItemDetailsFromUpcApi, updateItemQtyAPI, deleteUpcsApi,
-    addPalletUpcApi, activityModal, getPalletDetailsApi
+    route, dispatch, getItemDetailsFromUpcApi, updateItemQtyAPI,
+    deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi
   } = props;
   const { id, expirationDate } = palletInfo;
 
@@ -422,24 +428,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     dispatch
   ), [getPalletDetailsApi]);
 
-  /**
-   * API modal
-   */
-  useEffectHook(() => {
-    if (navigation.isFocused()) {
-      if (!activityModal) {
-        if (getPalletDetailsApi.isWaiting) {
-          dispatch(showActivityModal());
-        }
-      } else if (!getPalletDetailsApi.isWaiting) {
-        dispatch(hideActivityModal());
-      }
-    }
-  }, [
-    activityModal,
-    getPalletDetailsApi
-  ]);
-
   const submit = () => {
     const palletId = id;
     const reducerInitialValue: string[] = [];
@@ -524,7 +512,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 const ManagePallet = (): JSX.Element => {
   const { palletInfo, managePalletMenu, items } = useTypedSelector(state => state.PalletManagement);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
-  const activityModal = useTypedSelector(state => state.modal.showActivity);
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
@@ -584,7 +571,6 @@ const ManagePallet = (): JSX.Element => {
           updateItemQtyAPI={updateItemQtyAPI}
           deleteUpcsApi={deleteUpcsApi}
           getPalletDetailsApi={getPalletDetailsApi}
-          activityModal={activityModal}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}
