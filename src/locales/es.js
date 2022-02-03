@@ -166,7 +166,10 @@ export default {
     ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet', // TODO Spanish translation
     ADD_UPC_ERROR: 'Error adding items to the Pallet', // TODO Spanish translation
     COMBINE_PALLET_SUCCESS: 'Pallets combined sucessfully', // TODO Spanish translation
-    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again' // TODO Spanish translation
+    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again', // TODO Spanish translation
+    CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?', // TODO Spanish Translation
+    CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful', // TODO Spanish Translation
+    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -275,9 +278,7 @@ export default {
     CLEAR_AISLE_ITEMS_WONT_DELETE: 'Esto no eliminará las secciones del pasillo',
     CLEAR_AISLE_ITEMS_SUCCEED: 'Todos los artículos seleccionados fueron limpiados del pasillo',
     CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo',
-    PALLET_MANAGEMENT: 'Pallet Management', // TODO Spanish Translation
-    CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?', // TODO Spanish Translation
-    CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful' // TODO Spanish Translation
+    PALLET_MANAGEMENT: 'Pallet Management' // TODO Spanish Translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',

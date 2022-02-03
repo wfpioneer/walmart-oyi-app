@@ -166,7 +166,10 @@ export default {
     ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet', // TODO Mandarin translation
     ADD_UPC_ERROR: 'Error adding items to the Pallet', // TODO Mandarin translation
     COMBINE_PALLET_SUCCESS: '卡板合并成功',
-    COMBINE_PALLET_FAILURE: '卡板合并失败，请重试'
+    COMBINE_PALLET_FAILURE: '卡板合并失败，请重试',
+    CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?', // TODO Mandarin Translation
+    CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful', // TODO Mandarin Translation
+    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared' // TODO Mandarin translation
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -277,9 +280,7 @@ export default {
     CLEAR_AISLE_ITEMS_WONT_DELETE: '删除此通道的货架信息',
     CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
     CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
-    PALLET_MANAGEMENT: 'Pallet Management', // TODO Mandarin Translation
-    CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?', // TODO Mandarin Translation
-    CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful' // TODO Mandarin Translation
+    PALLET_MANAGEMENT: 'Pallet Management' // TODO Mandarin Translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

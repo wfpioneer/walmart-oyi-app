@@ -170,7 +170,8 @@ export default {
     COMBINE_PALLET_SUCCESS: 'Pallets combined sucessfully',
     COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again',
     CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?',
-    CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful'
+    CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful',
+    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared'
   },
   LOCATION: {
     TITLE: 'All locations',

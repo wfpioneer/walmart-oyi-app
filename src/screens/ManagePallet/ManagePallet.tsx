@@ -455,6 +455,11 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       navigation.goBack();
       setDisplayClearConfirmation(false);
       dispatch({ type: CLEAR_PALLET.RESET });
+      Toast.show({
+        type: 'success',
+        text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId: id }),
+        position: 'bottom'
+      });
     }
     // Failure
     if (!clearPalletApi.isWaiting && clearPalletApi.error) {
