@@ -25,7 +25,7 @@ import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, deletePallet, deleteUpcs, getItemDetailsUPC, updatePalletItemQty
+  addPalletUPCs, clearPallet, deleteUpcs, getItemDetailsUPC, updatePalletItemQty
 } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
@@ -45,7 +45,7 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, DELETE_PALLET, DELETE_UPCS, GET_ITEM_DETAIL_UPC, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAIL_UPC, UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
@@ -69,7 +69,7 @@ interface ManagePalletProps {
   updateItemQtyAPI: AsyncState;
   deleteUpcsApi: AsyncState;
   getPalletDetailsApi: AsyncState;
-  deletePalletApi: AsyncState;
+  clearPalletApi: AsyncState;
   activityModal: boolean;
   displayClearConfirmation: boolean;
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -261,7 +261,7 @@ export const getPalletDetailsApiHook = (
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items,
-    navigation, route, dispatch, getItemDetailsfromUpcApi, deletePalletApi,
+    navigation, route, dispatch, getItemDetailsfromUpcApi, clearPalletApi,
     itemSaveIndex, setItemSaveIndex, updateItemQtyAPI, deleteUpcsApi,
     addPalletUpcApi, isLoading, setIsLoading, activityModal, getPalletDetailsApi,
     displayClearConfirmation, setDisplayClearConfirmation
@@ -451,15 +451,15 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
   useEffectHook(() => {
     // Success
-    if (!deletePalletApi.isWaiting && deletePalletApi.result) {
+    if (!clearPalletApi.isWaiting && clearPalletApi.result) {
       navigation.goBack();
       setDisplayClearConfirmation(false);
-      dispatch({ type: DELETE_PALLET.RESET });
+      dispatch({ type: CLEAR_PALLET.RESET });
     }
     // Failure
-    if (!deletePalletApi.isWaiting && deletePalletApi.error) {
+    if (!clearPalletApi.isWaiting && clearPalletApi.error) {
       setDisplayClearConfirmation(false);
-      dispatch({ type: DELETE_PALLET.RESET });
+      dispatch({ type: CLEAR_PALLET.RESET });
       Toast.show({
         type: 'error',
         text1: strings('PALLET.CLEAR_PALLET_ERROR'),
@@ -467,7 +467,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         position: 'bottom'
       });
     }
-  }, [deletePalletApi]);
+  }, [clearPalletApi]);
   /**
    * API modal
    */
@@ -524,9 +524,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         isVisible={displayClearConfirmation}
         onClose={() => setDisplayClearConfirmation(false)}
         cancelText={strings('GENERICS.NO')}
-        api={deletePalletApi}
+        api={clearPalletApi}
         mainText={strings('PALLET.CLEAR_PALLET_CONFIRMATION')}
-        handleConfirm={() => dispatch(deletePallet({ palletId: id }))}
+        handleConfirm={() => dispatch(clearPallet({ palletId: id }))}
         confirmText={strings('GENERICS.YES')}
       />
       <View style={styles.bodyContainer}>
@@ -602,7 +602,7 @@ const ManagePallet = (): JSX.Element => {
   const updateItemQtyAPI = useTypedSelector(state => state.async.updatePalletItemQty);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
-  const deletePalletApi = useTypedSelector(state => state.async.deletePallet);
+  const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
 
   const [itemSaveIndex, setItemSaveIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -662,7 +662,7 @@ const ManagePallet = (): JSX.Element => {
           updateItemQtyAPI={updateItemQtyAPI}
           deleteUpcsApi={deleteUpcsApi}
           getPalletDetailsApi={getPalletDetailsApi}
-          deletePalletApi={deletePalletApi}
+          clearPalletApi={clearPalletApi}
           activityModal={activityModal}
           displayClearConfirmation={displayClearConfirmation}
           setDisplayClearConfirmation={setDisplayClearConfirmation}

@@ -47,7 +47,7 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_SECTIONS, actions.getSections, LocationService.getSections),
   makeAsyncSaga(saga.GET_SECTION_DETAILS, actions.getSectionDetails, LocationService.getSectionDetails),
   makeAsyncSaga(saga.ADD_PALLET, actions.addPallet, AddPalletService.addPallet),
-  makeAsyncSaga(saga.REMOVE_PALLET, actions.removePallet, DeletePalletService.removePallet),
+  makeAsyncSaga(saga.DELETE_PALLET, actions.deletePallet, DeletePalletService.deletePallet),
   makeAsyncSaga(saga.PRINT_LOCATION_LABELS, actions.printLocationLabels, PrintService.printLabels),
   makeAsyncSaga(saga.GET_PALLET_DETAILS, actions.getPalletDetails, LocationService.getPalletDetails),
   makeAsyncSaga(saga.POST_CREATE_AISLES, actions.postCreateAisles, LocationService.createLocationAislesSection),
@@ -64,7 +64,7 @@ const genericSagas = [
   makeAsyncSaga(saga.UPDATE_PALLET_ITEM_QTY, actions.updatePalletItemQty, PalletManagementService.updateItemQuantity),
   makeAsyncSaga(saga.DELETE_UPCS, actions.deleteUpcs, DeletePalletUPCsService.deletePalletUPCs),
   makeAsyncSaga(saga.COMBINE_PALLETS, actions.combinePallets, PalletManagementService.combinePallets),
-  makeAsyncSaga(saga.DELETE_PALLET, actions.deletePallet, DeletePalletService.deletePallet)
+  makeAsyncSaga(saga.CLEAR_PALLET, actions.clearPallet, DeletePalletService.clearPallet)
 ];
 
 export default function* rootSaga() {

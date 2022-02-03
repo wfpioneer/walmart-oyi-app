@@ -92,7 +92,7 @@ describe('ManagePalletScreen', () => {
           deleteUpcsApi={defaultAsyncState}
           activityModal={false}
           getPalletDetailsApi={defaultAsyncState}
-          deletePalletApi={defaultAsyncState}
+          clearPalletApi={defaultAsyncState}
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
         />
@@ -122,7 +122,7 @@ describe('ManagePalletScreen', () => {
           deleteUpcsApi={defaultAsyncState}
           activityModal={false}
           getPalletDetailsApi={defaultAsyncState}
-          deletePalletApi={defaultAsyncState}
+          clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
         />
@@ -152,7 +152,7 @@ describe('ManagePalletScreen', () => {
         deleteUpcsApi={defaultAsyncState}
         activityModal={false}
         getPalletDetailsApi={defaultAsyncState}
-        deletePalletApi={defaultAsyncState}
+        clearPalletApi={defaultAsyncState}
         displayClearConfirmation={false}
         setDisplayClearConfirmation={jest.fn()}
       />);
@@ -189,7 +189,7 @@ describe('ManagePalletScreen', () => {
         deleteUpcsApi={defaultAsyncState}
         activityModal={false}
         getPalletDetailsApi={defaultAsyncState}
-        deletePalletApi={defaultAsyncState}
+        clearPalletApi={defaultAsyncState}
         displayClearConfirmation={false}
         setDisplayClearConfirmation={jest.fn()}
       />);

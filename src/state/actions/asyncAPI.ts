@@ -63,8 +63,8 @@ export const printLocationLabels = makeAsyncActionCreators(PRINT_LOCATION_LABELS
 export const ADD_PALLET = makeAsyncActionTypes('API/ADD_PALLET');
 export const addPallet = makeAsyncActionCreators(ADD_PALLET);
 
-export const REMOVE_PALLET = makeAsyncActionTypes('API/REMOVE_PALLET');
-export const removePallet = makeAsyncActionCreators(REMOVE_PALLET);
+export const DELETE_PALLET = makeAsyncActionTypes('API/DELETE_PALLET');
+export const deletePallet = makeAsyncActionCreators(DELETE_PALLET);
 
 export const GET_PALLET_DETAILS = makeAsyncActionTypes('API/GET_PALLET_DETAILS');
 export const getPalletDetails = makeAsyncActionCreators(GET_PALLET_DETAILS);
@@ -111,5 +111,5 @@ export const deleteUpcs = makeAsyncActionCreators(DELETE_UPCS);
 export const COMBINE_PALLETS = makeAsyncActionTypes('API/PATCH_COMBINE_PALLETS');
 export const combinePallets = makeAsyncActionCreators(COMBINE_PALLETS);
 
-export const DELETE_PALLET = makeAsyncActionTypes('API/DELETE_PALLET');
-export const deletePallet = makeAsyncActionCreators(DELETE_PALLET);
+export const CLEAR_PALLET = makeAsyncActionTypes('API/CLEAR_PALLET');
+export const clearPallet = makeAsyncActionCreators(CLEAR_PALLET);
