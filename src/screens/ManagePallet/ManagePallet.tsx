@@ -257,7 +257,36 @@ export const getPalletDetailsApiHook = (
     });
   }
 };
-
+export const clearPalletApiHook = (
+  clearPalletApi: AsyncState,
+  palletId: number,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+): void => {
+  // Success
+  if (!clearPalletApi.isWaiting && clearPalletApi.result) {
+    navigation.goBack();
+    setDisplayClearConfirmation(false);
+    dispatch({ type: CLEAR_PALLET.RESET });
+    Toast.show({
+      type: 'success',
+      text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
+      position: 'bottom'
+    });
+  }
+  // Failure
+  if (!clearPalletApi.isWaiting && clearPalletApi.error) {
+    setDisplayClearConfirmation(false);
+    dispatch({ type: CLEAR_PALLET.RESET });
+    Toast.show({
+      type: 'error',
+      text1: strings('PALLET.CLEAR_PALLET_ERROR'),
+      text2: strings(TRY_AGAIN),
+      position: 'bottom'
+    });
+  }
+}
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items,
@@ -449,30 +478,14 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     dispatch
   ), [getPalletDetailsApi]);
 
-  useEffectHook(() => {
-    // Success
-    if (!clearPalletApi.isWaiting && clearPalletApi.result) {
-      navigation.goBack();
-      setDisplayClearConfirmation(false);
-      dispatch({ type: CLEAR_PALLET.RESET });
-      Toast.show({
-        type: 'success',
-        text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId: id }),
-        position: 'bottom'
-      });
-    }
-    // Failure
-    if (!clearPalletApi.isWaiting && clearPalletApi.error) {
-      setDisplayClearConfirmation(false);
-      dispatch({ type: CLEAR_PALLET.RESET });
-      Toast.show({
-        type: 'error',
-        text1: strings('PALLET.CLEAR_PALLET_ERROR'),
-        text2: strings(TRY_AGAIN),
-        position: 'bottom'
-      });
-    }
-  }, [clearPalletApi]);
+  useEffectHook(() => clearPalletApiHook(
+    clearPalletApi,
+    id,
+    navigation,
+    dispatch,
+    setDisplayClearConfirmation
+  ), [clearPalletApi]);
+
   /**
    * API modal
    */

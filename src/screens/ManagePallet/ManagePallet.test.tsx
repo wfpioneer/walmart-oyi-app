@@ -4,6 +4,7 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import {
   ManagePalletScreen,
+  clearPalletApiHook,
   getNumberOfDeleted,
   getPalletDetailsApiHook,
   handleAddItems,
@@ -17,6 +18,7 @@ import {
 import { PalletInfo } from '../../models/PalletManagementTypes';
 import { PalletItem } from '../../models/PalletItem';
 import { AsyncState } from '../../models/AsyncState';
+import { strings } from '../../locales';
 
 describe('ManagePalletScreen', () => {
   const mockPalletInfo: PalletInfo = {
@@ -67,7 +69,20 @@ describe('ManagePalletScreen', () => {
     error: null,
     result: null
   };
-  let navigationProp: NavigationProp<any>;
+  const navigationProp: NavigationProp<any> = {
+    addListener: jest.fn(),
+    canGoBack: jest.fn(),
+    dangerouslyGetParent: jest.fn(),
+    dangerouslyGetState: jest.fn(),
+    dispatch: jest.fn(),
+    goBack: jest.fn(),
+    isFocused: jest.fn(),
+    removeListener: jest.fn(),
+    reset: jest.fn(),
+    setOptions: jest.fn(),
+    setParams: jest.fn(),
+    navigate: jest.fn()
+  };
   let routeProp: RouteProp<any, string>;
   describe('Tests rendering the PalletManagement Screen', () => {
     it('Renders the PalletManagement default ', () => {
@@ -350,6 +365,46 @@ describe('ManagePalletScreen', () => {
       getPalletDetailsApiHook(failApi, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(0);
       expect(Toast.show).toBeCalledTimes(1);
+    });
+    it('Test clearPalletApi hook on success', () => {
+      const clearPalletSuccess: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      const mockSetDisplayConfirmation = jest.fn();
+      const successToast = {
+        type: 'success',
+        text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
+        position: 'bottom'
+      }
+      clearPalletApiHook(clearPalletSuccess, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
+      expect(navigationProp.goBack).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(successToast))
+    });
+
+    it('Test clearPalletApi hook on failure', () => {
+      const clearPalletFailure: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Error communicating with SOAP service'
+      };
+      // mock navigate go back
+      const mockSetDisplayConfirmation = jest.fn();
+      const failedToast = {
+        type: 'error',
+        text1: strings('PALLET.CLEAR_PALLET_ERROR'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        position: 'bottom'
+      }
+      clearPalletApiHook(clearPalletFailure, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
+      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(failedToast))
     });
   });
 });
