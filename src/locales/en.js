@@ -166,7 +166,10 @@ export default {
     ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet',
     ADD_UPC_ERROR: 'Error adding items to the Pallet',
     COMBINE_PALLET_SUCCESS: 'Pallets combined sucessfully',
-    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again'
+    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again',
+    PALLET_EXISTS: 'This pallet has already been scanned',
+    PALLET_EXISTS_AS_TARGET: 'This pallet is already the target pallet',
+    PALLET_DOESNT_EXIST: 'The scanned pallet does not exist in our data'
   },
   LOCATION: {
     TITLE: 'All locations',

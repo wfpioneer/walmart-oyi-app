@@ -219,39 +219,44 @@ export const handleAddItems = (id: number, items: PalletItem[], dispatch: Dispat
 
 export const getPalletDetailsApiHook = (
   getPalletDetailsApi: AsyncState,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
 ): void => {
-  // on api success
-  if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
-    const {
-      id, createDate, expirationDate, items
-    } = getPalletDetailsApi.result.data.pallets[0];
-    const palletItems = items.map((item: PalletItem) => ({
-      ...item,
-      quantity: item.quantity || 0,
-      newQuantity: item.quantity || 0,
-      deleted: false,
-      added: false
-    }));
-    const palletDetails: Pallet = {
-      palletInfo: {
-        id,
-        createDate,
-        expirationDate
-      },
-      items: palletItems
-    };
-    dispatch(setupPallet(palletDetails));
-  }
-  // on api error
-  if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
-    Toast.show({
-      type: 'error',
-      text1: strings('PALLET.PALLET_DETAILS_ERROR'),
-      text2: strings(TRY_AGAIN),
-      visibilityTime: 4000,
-      position: 'bottom'
-    });
+  if (navigation.isFocused() && !getPalletDetailsApi.isWaiting) {
+    // on api success
+    if (getPalletDetailsApi.result) {
+      const {
+        id, createDate, expirationDate, items
+      } = getPalletDetailsApi.result.data.pallets[0];
+      const palletItems = items.map((item: PalletItem) => ({
+        ...item,
+        quantity: item.quantity || 0,
+        newQuantity: item.quantity || 0,
+        deleted: false,
+        added: false
+      }));
+      const palletDetails: Pallet = {
+        palletInfo: {
+          id,
+          createDate,
+          expirationDate
+        },
+        items: palletItems
+      };
+      dispatch(setupPallet(palletDetails));
+      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+    }
+    // on api error
+    if (getPalletDetailsApi.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('PALLET.PALLET_DETAILS_ERROR'),
+        text2: strings(TRY_AGAIN),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+    }
   }
 };
 
@@ -442,7 +447,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   // update pallet hook (get pallet details api)
   useEffectHook(() => getPalletDetailsApiHook(
     getPalletDetailsApi,
-    dispatch
+    dispatch,
+    navigation
   ), [getPalletDetailsApi]);
 
   /**
