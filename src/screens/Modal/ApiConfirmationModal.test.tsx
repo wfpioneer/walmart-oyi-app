@@ -74,6 +74,38 @@ describe('Api Confirmation Modal render tests', () => {
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+  it('renders correctly when the api is at rest, cancel button custom text', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <ApiConfirmationModal
+        api={defaultAsyncState}
+        handleConfirm={jest.fn()}
+        isVisible={true}
+        mainText="I am the main text"
+        subtext1="I am the secondary line of text"
+        cancelText="Custom Cancel Text"
+        onClose={jest.fn()}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('renders correctly when the api is at rest, Confirm button custom text', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <ApiConfirmationModal
+        api={defaultAsyncState}
+        handleConfirm={jest.fn()}
+        isVisible={true}
+        mainText="I am the main text"
+        subtext1="I am the secondary line of text"
+        confirmText="Custom Confirmation Text"
+        onClose={jest.fn()}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
 
   it('renders correctly when the api is in flight', () => {
     const renderer = ShallowRenderer.createRenderer();

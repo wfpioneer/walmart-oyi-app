@@ -45,7 +45,9 @@ export default {
     ITEMS: 'Artículos',
     TOOLS: 'Herramientas',
     CURRENCY_SYMBOL: '$',
-    UNDO: 'Undo' // TODO spanish Translation
+    UNDO: 'Undo', // TODO spanish Translation
+    YES: 'Si', // TODO spanish Translation
+    NO: 'No' // TODO spanish Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -167,7 +169,10 @@ export default {
     COMBINE_PALLET_FAILURE: 'Falló la combinación de pallets, por favor inténtalo de nuevo',
     PALLET_EXISTS: 'Este palles ya ha sido escaneado',
     PALLET_EXISTS_AS_TARGET: 'This pallet is already the target pallet', // TODO MX translation
-    PALLET_DOESNT_EXIST: 'El pallet escaneado no existe'
+    PALLET_DOESNT_EXIST: 'El pallet escaneado no existe',
+    CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
+    CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
+    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
