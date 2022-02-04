@@ -76,7 +76,7 @@ describe('ManagePalletScreen', () => {
     dangerouslyGetState: jest.fn(),
     dispatch: jest.fn(),
     goBack: jest.fn(),
-    isFocused: jest.fn(),
+    isFocused: jest.fn(() => true),
     removeListener: jest.fn(),
     reset: jest.fn(),
     setOptions: jest.fn(),
@@ -215,8 +215,6 @@ describe('ManagePalletScreen', () => {
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
     const palletId = 3;
-    const mockIsFocused = jest.fn(() => true);
-    navigationProp = { ...navigationProp, isFocused: mockIsFocused };
 
     afterEach(() => {
       jest.clearAllMocks();
@@ -357,7 +355,7 @@ describe('ManagePalletScreen', () => {
       };
 
       getPalletDetailsApiHook(successApi, mockDispatch, navigationProp);
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(0);
     });
@@ -366,7 +364,7 @@ describe('ManagePalletScreen', () => {
       const failApi: AsyncState = { ...defaultAsyncState, error: {} };
 
       getPalletDetailsApiHook(failApi, mockDispatch, navigationProp);
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
     });
