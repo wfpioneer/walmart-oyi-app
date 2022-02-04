@@ -54,7 +54,7 @@ export default StyleSheet.create({
   bodyContainer: {
     alignItems: 'stretch',
     justifyContent: 'flex-start',
-    flex: 0.9,
+    flex: 1,
     marginTop: 5
   },
   buttonContainer: {

@@ -1,11 +1,12 @@
 import {
   ADD_COMBINE_PALLET,
-  ADD_PALLET,
+  ADD_ITEM,
   Actions,
   CLEAR_COMBINE_PALLET,
   CLEAR_PALLET_MANAGEMENT,
   DELETE_ITEM,
   REMOVE_COMBINE_PALLET,
+  REMOVE_ITEM,
   RESET_PALLET,
   SETUP_PALLET,
   SET_ITEM_NEW_QUANTITY,
@@ -64,7 +65,7 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         ...state,
         combinePallets: updatedPallets
       }; }
-    case ADD_PALLET:
+    case ADD_ITEM:
       return {
         ...state,
         items: [...state.items, action.payload]
@@ -123,6 +124,15 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       return {
         ...state,
         items: newItems
+      };
+    }
+    case REMOVE_ITEM: {
+      const { items: palletItems } = state;
+      const itemIdx = palletItems.findIndex(item => item.itemNbr.toString() === action.payload.itemNbr);
+      const updatedItems = [...palletItems.slice(0, itemIdx), ...palletItems.slice(itemIdx + 1)];
+      return {
+        ...state,
+        items: updatedItems
       };
     }
     default:

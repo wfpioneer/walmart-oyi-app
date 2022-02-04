@@ -1,11 +1,11 @@
 import { AxiosResponse } from 'axios';
+import { PalletItem } from '../models/PalletManagementTypes';
 import { Environment, getEnvironment } from '../utils/environment';
 import Request from './Request';
 
 export interface UpdateItemQuantityRequest {
-  upc: string;
-  quantity: number;
-  palletId: number;
+  palletId: number
+  palletItem: Pick<PalletItem, 'quantity' | 'upcNbr'>[]
 }
 
 export interface CombinePalletsRequest {
@@ -16,10 +16,7 @@ export interface CombinePalletsRequest {
 export default class PalletManagementService {
   public static updateItemQuantity(payload: UpdateItemQuantityRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
-    return Request.patch(`${urls.locationUrl}/pallet/${payload.palletId}/upc/qty`, {
-      upcNbr: payload.upc,
-      quantity: payload.quantity
-    });
+    return Request.patch(`${urls.locationUrl}/pallet/${payload.palletId}/upc/qtys`, payload.palletItem);
   }
 
   public static combinePallets(payload: CombinePalletsRequest): Promise<AxiosResponse<unknown>> {
