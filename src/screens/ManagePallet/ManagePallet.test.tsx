@@ -215,6 +215,8 @@ describe('ManagePalletScreen', () => {
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
     const palletId = 3;
+    const mockIsFocused = jest.fn(() => true);
+    navigationProp = { ...navigationProp, isFocused: mockIsFocused };
 
     afterEach(() => {
       jest.clearAllMocks();
@@ -354,16 +356,18 @@ describe('ManagePalletScreen', () => {
         }
       };
 
-      getPalletDetailsApiHook(successApi, mockDispatch);
-      expect(mockDispatch).toBeCalledTimes(1);
+      getPalletDetailsApiHook(successApi, mockDispatch, navigationProp);
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(0);
     });
 
     it('Tests getPalletDetailsApiHook on fail', () => {
       const failApi: AsyncState = { ...defaultAsyncState, error: {} };
 
-      getPalletDetailsApiHook(failApi, mockDispatch);
-      expect(mockDispatch).toBeCalledTimes(0);
+      getPalletDetailsApiHook(failApi, mockDispatch, navigationProp);
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
     });
     it('Test clearPalletApi hook on success', () => {
