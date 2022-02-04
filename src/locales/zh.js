@@ -165,7 +165,8 @@ export default {
     ADD_UPC_ERROR: 'Error adding items to the Pallet', // TODO Mandarin translation
     COMBINE_PALLET_SUCCESS: '卡板合并成功',
     COMBINE_PALLET_FAILURE: '卡板合并失败，请重试',
-    PALLET_EXISTS: 'This pallet has already been scanned', // TODO Mandarin translation
+    PALLET_EXISTS: 'This pallet has already been scanned', // TODO CN translation
+    PALLET_EXISTS_AS_TARGET: 'This pallet is already the target pallet', // TODO Mandarin translation
     PALLET_DOESNT_EXIST: 'The pallet does not exist in our data' // TODO Mandarin translation
   },
   LOCATION: {

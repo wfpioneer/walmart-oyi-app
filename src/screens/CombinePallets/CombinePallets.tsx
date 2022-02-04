@@ -156,7 +156,9 @@ export const CombinePalletsScreen = (
             Toast.show({
               type: 'error',
               position: 'bottom',
-              text1: strings('PALLET.PALLET_EXISTS'),
+              text1: strings(palletId.toString() === scan.value
+                ? 'PALLET.PALLET_EXISTS_AS_TARGET'
+                : 'PALLET.PALLET_EXISTS'),
               visibilityTime: SNACKBAR_TIMEOUT
             });
           } else {
