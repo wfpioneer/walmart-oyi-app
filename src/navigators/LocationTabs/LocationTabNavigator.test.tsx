@@ -357,7 +357,7 @@ describe('Test Location Tabs', (): void => {
           locationPopupVisible={false}
           user={user}
           itemPopupVisible={false}
-          getSectionDetailsApi={deleteSectionIsWaiting}
+          getSectionDetailsApi={defaultAsyncState}
           section={defaultSection}
           removeSectionApi={deleteSectionIsWaiting}
           displayRemoveConfirmation={true}
@@ -396,9 +396,89 @@ describe('Test Location Tabs', (): void => {
           locationPopupVisible={false}
           user={user}
           itemPopupVisible={false}
-          getSectionDetailsApi={deleteSectionError}
+          getSectionDetailsApi={defaultAsyncState}
           section={defaultSection}
           removeSectionApi={deleteSectionError}
+          displayRemoveConfirmation={true}
+          setDisplayRemoveConfirmation={jest.fn()}
+          clearSectionApi={defaultAsyncState}
+          displayClearConfirmation={false}
+          setDisplayClearConfirmation={jest.fn()}
+          selectedTab={ClearLocationTarget.FLOOR}
+          setSelectedTab={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+
+  describe('Tests rendering getSectionsDetails api', () => {
+    it('Renders Loading Indicator for get Section details', (): void => {
+      const renderer = ShallowRenderer.createRenderer();
+      const getSectionDetailsApiLoading: AsyncState = {
+        isWaiting: true,
+        value: null,
+        error: null,
+        result: null
+      };
+      renderer.render(
+        <LocationTabsNavigator
+          floorItems={[]}
+          reserveItems={[]}
+          locationName="-"
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          scannedEvent={defaultScannedEvent}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+          validateSessionCall={jest.fn()}
+          isManualScanEnabled={true}
+          locationPopupVisible={false}
+          user={user}
+          itemPopupVisible={false}
+          getSectionDetailsApi={getSectionDetailsApiLoading}
+          section={defaultSection}
+          removeSectionApi={defaultAsyncState}
+          displayRemoveConfirmation={true}
+          setDisplayRemoveConfirmation={jest.fn()}
+          clearSectionApi={defaultAsyncState}
+          displayClearConfirmation={false}
+          setDisplayClearConfirmation={jest.fn()}
+          selectedTab={ClearLocationTarget.FLOOR}
+          setSelectedTab={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders Retry button if get section details api returns an error', (): void => {
+      const renderer = ShallowRenderer.createRenderer();
+      const getSectionDetailsApiError: AsyncState = {
+        isWaiting: false,
+        value: null,
+        error: 'Network Error',
+        result: null
+      };
+      renderer.render(
+        <LocationTabsNavigator
+          floorItems={[]}
+          reserveItems={[]}
+          locationName="-"
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          scannedEvent={defaultScannedEvent}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+          validateSessionCall={jest.fn()}
+          isManualScanEnabled={true}
+          locationPopupVisible={false}
+          user={user}
+          itemPopupVisible={false}
+          getSectionDetailsApi={getSectionDetailsApiError}
+          section={defaultSection}
+          removeSectionApi={defaultAsyncState}
           displayRemoveConfirmation={true}
           setDisplayRemoveConfirmation={jest.fn()}
           clearSectionApi={defaultAsyncState}
@@ -591,8 +671,7 @@ describe('Test Location Tabs', (): void => {
         isManualScanEnabled: false,
         user,
         itemPopupVisible: false,
-        sectionResult: null,
-        sectionIsWaiting: false,
+        getSectionDetailsApi: defaultAsyncState,
         section: defaultSection,
         removeSectionApi: defaultAsyncState,
         displayRemoveConfirmation: false,
@@ -677,8 +756,7 @@ describe('Test Location Tabs', (): void => {
               isManualScanEnabled={false}
               user={user}
               itemPopupVisible={false}
-              sectionResult={null}
-              sectionIsWaiting={false}
+              getSectionDetailsApi={defaultAsyncState}
               section={defaultSection}
               removeSectionApi={defaultAsyncState}
               displayRemoveConfirmation={false}

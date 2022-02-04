@@ -656,7 +656,7 @@ exports[`Test Location Tabs Tests rendering Tab Headers Renders pallet Header 1`
 </React.Fragment>
 `;
 
-exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading Indicator for Remove Section Modal 1`] = `
+exports[`Test Location Tabs Tests rendering getSectionsDetails api Renders Loading Indicator for get Section details 1`] = `
 <withTheme(ActivityIndicator)
   animating={true}
   color="#0071e9"
@@ -672,7 +672,7 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading I
 />
 `;
 
-exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry button on Modal if remove section api returns an error 1`] = `
+exports[`Test Location Tabs Tests rendering getSectionsDetails api Renders Retry button if get section details api returns an error 1`] = `
 <View
   style={
     Object {
@@ -718,4 +718,198 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry but
     </Text>
   </ForwardRef>
 </View>
+`;
+
+exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading Indicator for Remove Section Modal 1`] = `
+<React.Fragment>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": true,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
+  <LocationManualScan
+    keyboardType="default"
+  />
+  <LocationHeader
+    buttonPress={[Function]}
+    details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    isDisabled={true}
+    location="[missing \\"en.LOCATION.SECTION\\" translation] -"
+  />
+  <MaterialTopTabNavigator
+    initialRouteName="FloorDetails"
+    swipeEnabled={null}
+    tabBarOptions={
+      Object {
+        "activeTintColor": "#0071e9",
+        "inactiveTintColor": "#616161",
+        "indicatorStyle": Object {
+          "backgroundColor": "#0071e9",
+        },
+        "style": Object {
+          "backgroundColor": "#ffffffff",
+        },
+      }
+    }
+  >
+    <Screen
+      listeners={
+        Object {
+          "focus": [Function],
+          "tabPress": [Function],
+        }
+      }
+      name="FloorDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (0)",
+        }
+      }
+    >
+      [Function]
+    </Screen>
+    <Screen
+      listeners={
+        Object {
+          "focus": [Function],
+          "tabPress": [Function],
+        }
+      }
+      name="ReserveDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (0)",
+        }
+      }
+    >
+      [Function]
+    </Screen>
+  </MaterialTopTabNavigator>
+</React.Fragment>
+`;
+
+exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry button on Modal if remove section api returns an error 1`] = `
+<React.Fragment>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": "Network Error",
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.LOCATION.REMOVE_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.CLEAR_SECTION_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.CLEAR_SECTION_SALES_FLOOR_MESSAGE\\" translation]"
+    subtext2="[missing \\"en.LOCATION.CLEAR_SECTION_WONT_DELETE\\" translation]"
+  />
+  <LocationManualScan
+    keyboardType="default"
+  />
+  <LocationHeader
+    buttonPress={[Function]}
+    details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
+    isDisabled={true}
+    location="[missing \\"en.LOCATION.SECTION\\" translation] -"
+  />
+  <MaterialTopTabNavigator
+    initialRouteName="FloorDetails"
+    swipeEnabled={null}
+    tabBarOptions={
+      Object {
+        "activeTintColor": "#0071e9",
+        "inactiveTintColor": "#616161",
+        "indicatorStyle": Object {
+          "backgroundColor": "#0071e9",
+        },
+        "style": Object {
+          "backgroundColor": "#ffffffff",
+        },
+      }
+    }
+  >
+    <Screen
+      listeners={
+        Object {
+          "focus": [Function],
+          "tabPress": [Function],
+        }
+      }
+      name="FloorDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.FLOORS\\" translation] (0)",
+        }
+      }
+    >
+      [Function]
+    </Screen>
+    <Screen
+      listeners={
+        Object {
+          "focus": [Function],
+          "tabPress": [Function],
+        }
+      }
+      name="ReserveDetails"
+      options={
+        Object {
+          "title": "[missing \\"en.LOCATION.RESERVES\\" translation] (0)",
+        }
+      }
+    >
+      [Function]
+    </Screen>
+  </MaterialTopTabNavigator>
+</React.Fragment>
 `;
