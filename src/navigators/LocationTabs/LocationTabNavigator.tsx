@@ -282,6 +282,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   ), [clearSectionApi]);
 
   // Call get section details on select from list
+  // adjusted to work from loc management state instead of scanned
   useEffectHook(() => {
     navigation.addListener('focus', () => {
       validateSession(navigation, route.name).then(() => {
