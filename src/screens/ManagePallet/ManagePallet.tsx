@@ -1,5 +1,5 @@
 import React, {
-  Dispatch, EffectCallback, useEffect, useMemo, useRef
+  Dispatch, EffectCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
   EmitterSubscription,
@@ -23,9 +23,8 @@ import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, deleteUpcs, getItemDetailsUPC, updatePalletItemQty
+  addPalletUPCs, clearPallet, deleteUpcs, getItemDetailsUPC, updatePalletItemQty
 } from '../../state/actions/saga';
-
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
@@ -44,9 +43,10 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, DELETE_UPCS, GET_ITEM_DETAIL_UPC, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAIL_UPC, UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 
@@ -63,6 +63,9 @@ interface ManagePalletProps {
   updateItemQtyAPI: AsyncState;
   deleteUpcsApi: AsyncState;
   getPalletDetailsApi: AsyncState;
+  clearPalletApi: AsyncState;
+  displayClearConfirmation: boolean;
+  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface ApiResult {
   data: any;
@@ -327,11 +330,43 @@ export const updatePalletApisHook = (
   }
 };
 
+export const clearPalletApiHook = (
+  clearPalletApi: AsyncState,
+  palletId: number,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+): void => {
+  // Success
+  if (!clearPalletApi.isWaiting && clearPalletApi.result) {
+    navigation.goBack();
+    setDisplayClearConfirmation(false);
+    dispatch({ type: CLEAR_PALLET.RESET });
+    Toast.show({
+      type: 'success',
+      text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
+      position: 'bottom'
+    });
+  }
+  // Failure
+  if (!clearPalletApi.isWaiting && clearPalletApi.error) {
+    setDisplayClearConfirmation(false);
+    dispatch({ type: CLEAR_PALLET.RESET });
+    Toast.show({
+      type: 'error',
+      text1: strings('PALLET.CLEAR_PALLET_ERROR'),
+      text2: strings(TRY_AGAIN),
+      position: 'bottom'
+    });
+  }
+};
+
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
     route, dispatch, getItemDetailsFromUpcApi, updateItemQtyAPI,
-    deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi
+    deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
+    displayClearConfirmation, setDisplayClearConfirmation
   } = props;
   const { id, expirationDate } = palletInfo;
 
@@ -439,6 +474,14 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     navigation
   ), [getPalletDetailsApi]);
 
+  useEffectHook(() => clearPalletApiHook(
+    clearPalletApi,
+    id,
+    navigation,
+    dispatch,
+    setDisplayClearConfirmation
+  ), [clearPalletApi]);
+
   const submit = () => {
     const palletId = id;
     const reducerInitialValue: string[] = [];
@@ -459,6 +502,15 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
   return (
     <View style={styles.safeAreaView}>
+      <ApiConfirmationModal
+        isVisible={displayClearConfirmation}
+        onClose={() => setDisplayClearConfirmation(false)}
+        cancelText={strings('GENERICS.NO')}
+        api={clearPalletApi}
+        mainText={strings('PALLET.CLEAR_PALLET_CONFIRMATION')}
+        handleConfirm={() => dispatch(clearPallet({ palletId: id }))}
+        confirmText={strings('GENERICS.YES')}
+      />
       <View style={styles.bodyContainer}>
         {isManualScanEnabled && <ManualScan />}
         <View style={styles.headerContainer}>
@@ -531,6 +583,8 @@ const ManagePallet = (): JSX.Element => {
   const updateItemQtyAPI = useTypedSelector(state => state.async.updatePalletItemQty);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
+  const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
+  const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
@@ -558,7 +612,7 @@ const ManagePallet = (): JSX.Element => {
 
   const handleClearPallet = () => {
     dispatch(showManagePalletMenu(false));
-    // TODO Integration
+    setDisplayClearConfirmation(true);
   };
 
   return (
@@ -582,6 +636,9 @@ const ManagePallet = (): JSX.Element => {
           updateItemQtyAPI={updateItemQtyAPI}
           deleteUpcsApi={deleteUpcsApi}
           getPalletDetailsApi={getPalletDetailsApi}
+          clearPalletApi={clearPalletApi}
+          displayClearConfirmation={displayClearConfirmation}
+          setDisplayClearConfirmation={setDisplayClearConfirmation}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

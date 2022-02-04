@@ -45,7 +45,9 @@ export default {
     ITEMS: '多个商品',
     TOOLS: '工具箱',
     CURRENCY_SYMBOL: '¥',
-    UNDO: 'Undo' // TODO Mandarin Translation
+    UNDO: 'Undo', // TODO Mandarin Translation
+    YES: 'Yes', // TODO Mandarin Translation
+    NO: 'No' // TODO Mandarin Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -170,7 +172,10 @@ export default {
     PALLET_DOESNT_EXIST: 'The pallet does not exist in our data', // TODO Mandarin translation
     SAVE_PALLET_SUCCESS: 'Pallet update successful', // TODO Mandarin translation
     SAVE_PALLET_PARTIAL: 'Pallet update partially successful', // TODO Mandarin translation
-    SAVE_PALLET_FAILURE: 'Pallet update failed' // TODO Mandarin translation
+    SAVE_PALLET_FAILURE: 'Pallet update failed', // TODO Mandarin translation
+    CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?', // TODO Mandarin Translation
+    CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful', // TODO Mandarin Translation
+    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared' // TODO Mandarin translation
   },
   LOCATION: {
     TITLE: '所有位置',
