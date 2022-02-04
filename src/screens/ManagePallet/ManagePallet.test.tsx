@@ -4,6 +4,7 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import {
   ManagePalletScreen,
+  clearPalletApiHook,
   getNumberOfDeleted,
   getPalletDetailsApiHook,
   handleAddItems,
@@ -17,6 +18,7 @@ import {
 import { PalletInfo } from '../../models/PalletManagementTypes';
 import { PalletItem } from '../../models/PalletItem';
 import { AsyncState } from '../../models/AsyncState';
+import { strings } from '../../locales';
 
 describe('ManagePalletScreen', () => {
   const mockPalletInfo: PalletInfo = {
@@ -67,31 +69,79 @@ describe('ManagePalletScreen', () => {
     error: null,
     result: null
   };
-  let navigationProp: NavigationProp<any>;
+  const navigationProp: NavigationProp<any> = {
+    addListener: jest.fn(),
+    canGoBack: jest.fn(),
+    dangerouslyGetParent: jest.fn(),
+    dangerouslyGetState: jest.fn(),
+    dispatch: jest.fn(),
+    goBack: jest.fn(),
+    isFocused: jest.fn(() => true),
+    removeListener: jest.fn(),
+    reset: jest.fn(),
+    setOptions: jest.fn(),
+    setParams: jest.fn(),
+    navigate: jest.fn()
+  };
   let routeProp: RouteProp<any, string>;
   describe('Tests rendering the PalletManagement Screen', () => {
     it('Renders the PalletManagement default ', () => {
       const renderer = ShallowRenderer.createRenderer();
 
-      renderer.render(<ManagePalletScreen
-        useEffectHook={jest.fn}
-        isManualScanEnabled={true}
-        palletInfo={mockPalletInfo}
-        items={mockItems}
-        navigation={navigationProp}
-        route={routeProp}
-        dispatch={jest.fn()}
-        getItemDetailsfromUpcApi={defaultAsyncState}
-        addPalletUpcApi={defaultAsyncState}
-        isLoading={false}
-        setIsLoading={jest.fn()}
-        itemSaveIndex={0}
-        setItemSaveIndex={jest.fn()}
-        updateItemQtyAPI={defaultAsyncState}
-        deleteUpcsApi={defaultAsyncState}
-        activityModal={false}
-        getPalletDetailsApi={defaultAsyncState}
-      />);
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsfromUpcApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          isLoading={false}
+          setIsLoading={jest.fn()}
+          itemSaveIndex={0}
+          setItemSaveIndex={jest.fn()}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          activityModal={false}
+          getPalletDetailsApi={defaultAsyncState}
+          clearPalletApi={defaultAsyncState}
+          displayClearConfirmation={false}
+          setDisplayClearConfirmation={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders the PalletManagement with Clear Pallet Confirmation Modal ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsfromUpcApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          isLoading={false}
+          setIsLoading={jest.fn()}
+          itemSaveIndex={0}
+          setItemSaveIndex={jest.fn()}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          activityModal={false}
+          getPalletDetailsApi={defaultAsyncState}
+          clearPalletApi={defaultAsyncState}
+          displayClearConfirmation={true}
+          setDisplayClearConfirmation={jest.fn()}
+        />
+      );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
@@ -117,6 +167,9 @@ describe('ManagePalletScreen', () => {
         deleteUpcsApi={defaultAsyncState}
         activityModal={false}
         getPalletDetailsApi={defaultAsyncState}
+        clearPalletApi={defaultAsyncState}
+        displayClearConfirmation={false}
+        setDisplayClearConfirmation={jest.fn()}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -151,6 +204,9 @@ describe('ManagePalletScreen', () => {
         deleteUpcsApi={defaultAsyncState}
         activityModal={false}
         getPalletDetailsApi={defaultAsyncState}
+        clearPalletApi={defaultAsyncState}
+        displayClearConfirmation={false}
+        setDisplayClearConfirmation={jest.fn()}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -159,8 +215,6 @@ describe('ManagePalletScreen', () => {
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
     const palletId = 3;
-    const mockIsFocused = jest.fn(() => true);
-    navigationProp = { ...navigationProp, isFocused: mockIsFocused };
 
     afterEach(() => {
       jest.clearAllMocks();
@@ -301,7 +355,7 @@ describe('ManagePalletScreen', () => {
       };
 
       getPalletDetailsApiHook(successApi, mockDispatch, navigationProp);
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(0);
     });
@@ -310,9 +364,49 @@ describe('ManagePalletScreen', () => {
       const failApi: AsyncState = { ...defaultAsyncState, error: {} };
 
       getPalletDetailsApiHook(failApi, mockDispatch, navigationProp);
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
+    });
+    it('Test clearPalletApi hook on success', () => {
+      const clearPalletSuccess: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      const mockSetDisplayConfirmation = jest.fn();
+      const successToast = {
+        type: 'success',
+        text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
+        position: 'bottom'
+      }
+      clearPalletApiHook(clearPalletSuccess, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
+      expect(navigationProp.goBack).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(successToast))
+    });
+
+    it('Test clearPalletApi hook on failure', () => {
+      const clearPalletFailure: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Error communicating with SOAP service'
+      };
+      // mock navigate go back
+      const mockSetDisplayConfirmation = jest.fn();
+      const failedToast = {
+        type: 'error',
+        text1: strings('PALLET.CLEAR_PALLET_ERROR'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        position: 'bottom'
+      }
+      clearPalletApiHook(clearPalletFailure, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
+      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(failedToast))
     });
   });
 });
