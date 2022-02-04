@@ -139,6 +139,7 @@ export default {
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
     PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Mandarin Translation
+    PALLET_SUCCESS: 'Pallet Label Successfully Printed', // TODO Mandarin Translation
     DUPLICATE_PRINTER: '现存打印机',
     SOME_PRINTS_FAILED: '有些商品打印失败'
   },

@@ -139,6 +139,7 @@ export default {
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Spanish translation
+    PALLET_SUCCESS: 'Etiqueta de Pallet impresa correctamente',
     DUPLICATE_PRINTER: 'Una impresora ya existe',
     SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
   },

@@ -140,6 +140,7 @@ export default {
     PRINT_SERVICE_ERROR: 'There was an error printing the label, \nPlease try again.',
     PLEASE_CHOOSE_PORTABLE: 'Please choose portable printer',
     LOCATION_SUCCESS: 'Section Label Successfully Printed',
+    PALLET_SUCCESS: 'Pallet Label Successfully Printed',
     DUPLICATE_PRINTER: 'A Printer currently exists',
     SOME_PRINTS_FAILED: 'Some items failed to print'
   },

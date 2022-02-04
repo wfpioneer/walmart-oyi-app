@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
-import { PrintItemList, PrintLocationList } from '../models/Printer';
+import { PrintItemList, PrintLocationList, PrintPalletList } from '../models/Printer';
 
 export default class PrintService {
   public static print(payload: {
@@ -24,6 +24,20 @@ export default class PrintService {
     return Request.post(
       `${urls.printingUrl}/print/location-sign`,
       payload.printLabelList,
+      {
+        headers: payload.headers
+      }
+    );
+  }
+
+  public static printPallet(payload: {
+    headers: Record<string, unknown>;
+    printPalletList: PrintPalletList[];
+  }): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.post(
+      `${urls.printingUrl}/print/pallet`,
+      payload.printPalletList,
       {
         headers: payload.headers
       }
