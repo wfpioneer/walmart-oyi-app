@@ -24,13 +24,13 @@ import { CombinePallet, PalletItem } from '../../models/PalletManagementTypes';
 import Button from '../../components/buttons/Button';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
-import { setScannedEvent } from '../../state/actions/Global';
 import { addCombinePallet, clearCombinePallet } from '../../state/actions/PalletManagement';
 import CombinePalletCard from '../../components/CombinePalletCard/CombinePalletCard';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { combinePallets as combinePalletsSaga, getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 interface CombinePalletsProps {
   combinePallets: CombinePallet[];
@@ -67,7 +67,7 @@ export const getPalletDetailsApiEffect = (
           type: 'info',
           position: 'bottom',
           text1: strings('PALLET.PALLET_DOESNT_EXIST'),
-          visibilityTime: 4000
+          visibilityTime: SNACKBAR_TIMEOUT + 1000
         });
       } else {
         dispatch(addCombinePallet({
@@ -84,7 +84,7 @@ export const getPalletDetailsApiEffect = (
         type: 'error',
         position: 'bottom',
         text1: strings('PALLET.PALLET_DETAILS_ERROR'),
-        visibilityTime: 4000
+        visibilityTime: SNACKBAR_TIMEOUT + 1000
       });
       dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
     }
@@ -157,7 +157,7 @@ export const CombinePalletsScreen = (
               type: 'error',
               position: 'bottom',
               text1: strings('PALLET.PALLET_EXISTS'),
-              visibilityTime: 3000
+              visibilityTime: SNACKBAR_TIMEOUT
             });
           } else {
             dispatch(getPalletDetails({ palletIds: [scan.value], isAllItems: true }));
