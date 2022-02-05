@@ -170,6 +170,9 @@ export default {
     PALLET_EXISTS: 'Este palles ya ha sido escaneado',
     PALLET_EXISTS_AS_TARGET: 'This pallet is already the target pallet', // TODO MX translation
     PALLET_DOESNT_EXIST: 'El pallet escaneado no existe',
+    SAVE_PALLET_SUCCESS: 'Pallet update successful', // TODO Spanish translation
+    SAVE_PALLET_PARTIAL: 'Pallet update partially successful', // TODO Spanish translation
+    SAVE_PALLET_FAILURE: 'Pallet update failed', // TODO Spanish translation
     CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
     CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
     CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared' // TODO Spanish translation

@@ -170,6 +170,9 @@ export default {
     PALLET_EXISTS: 'This pallet has already been scanned', // TODO CN translation
     PALLET_EXISTS_AS_TARGET: 'This pallet is already the target pallet', // TODO Mandarin translation
     PALLET_DOESNT_EXIST: 'The pallet does not exist in our data', // TODO Mandarin translation
+    SAVE_PALLET_SUCCESS: 'Pallet update successful', // TODO Mandarin translation
+    SAVE_PALLET_PARTIAL: 'Pallet update partially successful', // TODO Mandarin translation
+    SAVE_PALLET_FAILURE: 'Pallet update failed', // TODO Mandarin translation
     CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?', // TODO Mandarin Translation
     CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful', // TODO Mandarin Translation
     CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared' // TODO Mandarin translation
