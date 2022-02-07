@@ -11,6 +11,8 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
@@ -28,6 +30,8 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
     handleConfirm={[Function]}
     isVisible={false}
@@ -104,6 +108,8 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
@@ -121,6 +127,8 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
     handleConfirm={[Function]}
     isVisible={false}
@@ -197,6 +205,8 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
@@ -214,6 +224,8 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
     handleConfirm={[Function]}
     isVisible={false}
@@ -290,6 +302,8 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
@@ -307,6 +321,8 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
     handleConfirm={[Function]}
     isVisible={false}
@@ -386,6 +402,8 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
@@ -403,6 +421,8 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
     handleConfirm={[Function]}
     isVisible={false}
@@ -482,6 +502,8 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
@@ -499,6 +521,8 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
     handleConfirm={[Function]}
     isVisible={false}
@@ -661,6 +685,8 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading I
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={true}
@@ -678,6 +704,8 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading I
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
     handleConfirm={[Function]}
     isVisible={false}
@@ -757,6 +785,8 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry but
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={true}
@@ -774,6 +804,8 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry but
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText="[missing \\"en.LOCATION.CLEAR_SECTION_FAIL\\" translation]"
     handleConfirm={[Function]}
     isVisible={false}

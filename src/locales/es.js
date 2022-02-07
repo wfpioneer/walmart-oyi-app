@@ -45,7 +45,9 @@ export default {
     ITEMS: 'Artículos',
     TOOLS: 'Herramientas',
     CURRENCY_SYMBOL: '$',
-    UNDO: 'Undo' // TODO spanish Translation
+    UNDO: 'Undo', // TODO spanish Translation
+    YES: 'Si', // TODO spanish Translation
+    NO: 'No' // TODO spanish Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -157,15 +159,24 @@ export default {
     ITEM_DELETE: '1 eliminación de artículo pendiente',
     X_ITEMS_DELETE: '%{nbrOfItems} eliminación de artículos pendientes',
     PALLET_DETAILS_ERROR: 'Error: incapaz de encontrar Pallet',
-    PALLET_MERGE: 'will be merged into', // TODO Spanish translation
+    PALLET_MERGE: 'será combinado con',
     CANNOT_HAVE_NEGATIVE_QTY: 'El artículo no puede teener cantidad negativa',
     ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Spanish translation
     ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC', // TODO Spanish translation
-    PALLET_UPC_NOT_FOUND: 'The Pallet or a UPC was not found', // TODO Spanish translation
-    ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet', // TODO Spanish translation
-    ADD_UPC_ERROR: 'Error adding items to the Pallet', // TODO Spanish translation
-    COMBINE_PALLET_SUCCESS: 'Pallets combined sucessfully', // TODO Spanish translation
-    COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again' // TODO Spanish translation
+    PALLET_UPC_NOT_FOUND: 'El pallet o un UPC no se encontraron',
+    ADD_UPC_SUCCESS: 'Todos los artículos se agregaron satisfactoriamente al pallet',
+    ADD_UPC_ERROR: 'Error agregando artículos al pallet',
+    COMBINE_PALLET_SUCCESS: 'Pallets combinados con éxito',
+    COMBINE_PALLET_FAILURE: 'Falló la combinación de pallets, por favor inténtalo de nuevo',
+    PALLET_EXISTS: 'Este palles ya ha sido escaneado',
+    PALLET_EXISTS_AS_TARGET: 'This pallet is already the target pallet', // TODO MX translation
+    PALLET_DOESNT_EXIST: 'El pallet escaneado no existe',
+    SAVE_PALLET_SUCCESS: 'Pallet update successful', // TODO Spanish translation
+    SAVE_PALLET_PARTIAL: 'Pallet update partially successful', // TODO Spanish translation
+    SAVE_PALLET_FAILURE: 'Pallet update failed', // TODO Spanish translation
+    CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
+    CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
+    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',

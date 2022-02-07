@@ -45,6 +45,7 @@ export const UPDATE_PALLET_ITEM_QTY = 'SAGA/UPDATE_PALLET_ITEM_QTY';
 export const DELETE_UPCS = 'SAGA/DELETE_UPCS';
 export const COMBINE_PALLETS = 'SAGA/COMBINE_PALLETS';
 export const PRINT_PALLET_LABEL = 'SAGA/PRINT_PALLET_LABEL';
+export const CLEAR_PALLET = 'SAGA/CLEAR_PALLET';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -81,7 +82,7 @@ export const printLocationLabel = (payload: {
   printLabelList: PrintLocationList[]
 }) => ({ type: PRINT_LOCATION_LABELS, payload } as const);
 export const addPallet = (payload: any) => ({ type: ADD_PALLET, payload } as const);
-export const deletePallet = (payload: any) => ({ type: DELETE_PALLET, payload } as const);
+export const deletePallet = (payload: {palletId: number}) => ({ type: DELETE_PALLET, payload } as const);
 export const createSections = (payload: any) => ({ type: CREATE_SECTIONS, payload } as const);
 export const getPalletDetails = (payload: {
   palletIds: number[], isAllItems?: boolean
@@ -112,3 +113,6 @@ export const combinePallets = (payload: CombinePalletsRequest) => ({
 export const printPalletLabel = (payload: {
   printPalletList: PrintPalletList[]
 }) => ({ type: PRINT_PALLET_LABEL, payload } as const);
+export const clearPallet = (payload: {palletId: number}) => ({
+  type: CLEAR_PALLET, payload
+} as const);

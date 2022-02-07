@@ -71,10 +71,12 @@ export const PalletManagementScreen = (
 
   // Resets Get PalletDetails api state when navigating off-screen
   useEffectHook(() => {
-    navigation.addListener('beforeRemove', () => {
-      dispatch({ type: GET_PALLET_DETAILS.RESET });
+    navigation.addListener('blur', () => {
+      if (getPalletDetailsApi.value) {
+        dispatch({ type: GET_PALLET_DETAILS.RESET });
+      }
     });
-  }, []);
+  }, [getPalletDetailsApi]);
 
   // Scanner listener
   useEffectHook(() => {
@@ -99,38 +101,40 @@ export const PalletManagementScreen = (
 
   // Get Pallet Details Api
   useEffectHook(() => {
-    // on api success
-    if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
-      const {
-        id, createDate, expirationDate, items
-      } = getPalletDetailsApi.result.data.pallets[0];
-      const palletItems = items.map((item: PalletItem) => ({
-        ...item,
-        quantity: item.quantity || 0,
-        newQuantity: item.quantity || 0,
-        deleted: false,
-        added: false
-      }));
-      const palletDetails: Pallet = {
-        palletInfo: {
-          id,
-          createDate,
-          expirationDate
-        },
-        items: palletItems
-      };
-      dispatch(setupPallet(palletDetails));
-      navigation.navigate('ManagePallet');
-    }
-    // on api error
-    if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
-      Toast.show({
-        type: 'error',
-        text1: strings('PALLET.PALLET_DETAILS_ERROR'),
-        text2: strings('GENERICS.TRY_AGAIN'),
-        visibilityTime: 4000,
-        position: 'bottom'
-      });
+    if (navigation.isFocused()) {
+      // on api success
+      if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
+        const {
+          id, createDate, expirationDate, items
+        } = getPalletDetailsApi.result.data.pallets[0];
+        const palletItems = items.map((item: PalletItem) => ({
+          ...item,
+          quantity: item.quantity || 0,
+          newQuantity: item.quantity || 0,
+          deleted: false,
+          added: false
+        }));
+        const palletDetails: Pallet = {
+          palletInfo: {
+            id,
+            createDate,
+            expirationDate
+          },
+          items: palletItems
+        };
+        dispatch(setupPallet(palletDetails));
+        navigation.navigate('ManagePallet');
+      }
+      // on api error
+      if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
+        Toast.show({
+          type: 'error',
+          text1: strings('PALLET.PALLET_DETAILS_ERROR'),
+          text2: strings('GENERICS.TRY_AGAIN'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      }
     }
   }, [getPalletDetailsApi]);
 
