@@ -10,6 +10,7 @@ import {
   NavigationProp, Route, useNavigation, useRoute
 } from '@react-navigation/native';
 import { Dispatch } from 'redux';
+import Toast from 'react-native-toast-message';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
@@ -36,7 +37,6 @@ import ItemDetails from '../../models/ItemDetails';
 import { LocationIdName } from '../../state/reducers/Location';
 import { LocationName } from '../../models/Location';
 import { SectionItem } from '../../models/LocationItems';
-import { showSnackBar } from '../../state/actions/SnackBar';
 import { showInfoModal } from '../../state/actions/Modal';
 
 const wineCatgNbr = 19;
@@ -284,7 +284,12 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!printLabelAPI.isWaiting && printLabelAPI.result) {
-      dispatch(showSnackBar(strings('PRINT.LOCATION_SUCCESS'), 3000));
+      Toast.show({
+        type: 'success',
+        text1: strings('PRINT.LOCATION_SUCCESS'),
+        position: 'bottom',
+        visibilityTime: 3000
+      });
       navigation.goBack();
     }
     // on api failure
@@ -301,7 +306,12 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!printPalletAPI.isWaiting && printPalletAPI.result) {
-      dispatch(showSnackBar(strings('PRINT.PALLET_SUCCESS'), 3000));
+      Toast.show({
+        type: 'success',
+        text1: strings('PRINT.PALLET_SUCCESS'),
+        position: 'bottom',
+        visibilityTime: 3000
+      });
       navigation.goBack();
     }
     // on api failure
@@ -580,18 +590,17 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         </View>
       ) : (
         <View style={styles.footerBtnContainer}>
-          {/* Disable add to print queue from location management until re-design */}
+          {!(printingLocationLabels || printingPalletLabel)
+          && (
           <Button
             title={strings('PRINT.ADD_TO_QUEUE')}
             titleColor={COLOR.MAIN_THEME_COLOR}
             type={Button.Type.SOLID_WHITE}
             style={styles.footerBtn}
             onPress={handleAddPrintList}
-            disabled={
-              (isAddtoQueueDisabled(isValidQty, selectedSignType) || printingLocationLabels !== ''
-              || printingPalletLabel)
-            }
+            disabled={isAddtoQueueDisabled(isValidQty, selectedSignType)}
           />
+          )}
           <Button
             title={strings('PRINT.PRINT')}
             type={Button.Type.PRIMARY}

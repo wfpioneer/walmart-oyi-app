@@ -118,6 +118,7 @@ export default {
     QUEUE_TITLE: 'Cola de Impresión',
     CHANGE_TITLE: 'Impresoras',
     LOCATION_TITLE: 'Imprimir Etiquetas de Ubicación',
+    PALLET_TITLE: 'Print pallet label', // TODO Spanish translation
     PRICE_SIGN: 'Imprimir la señalización',
     COPY_QTY: 'Número de Copias',
     COPIES: 'Copias',

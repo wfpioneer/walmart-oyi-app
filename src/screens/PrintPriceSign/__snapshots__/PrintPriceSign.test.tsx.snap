@@ -1919,25 +1919,6 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
           "paddingHorizontal": 4,
         }
       }
-      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
-      titleColor="#0071e9"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={2}
-      width={-1}
-    />
-    <Button
-      backgroundColor="#0071e9"
-      disabled={true}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "flex": 1,
-          "paddingHorizontal": 4,
-        }
-      }
       title="[missing \\"en.PRINT.PRINT\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -2009,25 +1990,6 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing 
       }
     }
   >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={true}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "flex": 1,
-          "paddingHorizontal": 4,
-        }
-      }
-      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
-      titleColor="#0071e9"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={2}
-      width={-1}
-    />
     <Button
       backgroundColor="#0071e9"
       disabled={false}
@@ -2228,25 +2190,6 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
       }
     }
   >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={true}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "flex": 1,
-          "paddingHorizontal": 4,
-        }
-      }
-      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
-      titleColor="#0071e9"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={2}
-      width={-1}
-    />
     <Button
       backgroundColor="#0071e9"
       disabled={true}

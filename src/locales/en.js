@@ -119,6 +119,7 @@ export default {
     QUEUE_TITLE: 'Print list',
     CHANGE_TITLE: 'Printers',
     LOCATION_TITLE: 'Print location labels',
+    PALLET_TITLE: 'Print pallet label',
     PRICE_SIGN: 'Print price sign',
     COPY_QTY: 'Number of copies',
     COPIES: 'Copies',
