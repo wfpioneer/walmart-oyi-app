@@ -1992,7 +1992,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing 
   >
     <Button
       backgroundColor="#0071e9"
-      disabled={false}
+      disabled={true}
       height={45}
       onPress={[Function]}
       radius={5}

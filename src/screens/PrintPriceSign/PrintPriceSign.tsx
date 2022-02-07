@@ -606,7 +606,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             type={Button.Type.PRIMARY}
             style={styles.footerBtn}
             onPress={handlePrint}
-            disabled={(isAddtoQueueDisabled(isValidQty, selectedSignType)) && !printingPalletLabel}
+            disabled={printingPalletLabel ? selectedPrinter.type !== PrinterType.PORTABLE
+              : (isAddtoQueueDisabled(isValidQty, selectedSignType))}
           />
         </View>
       )}
