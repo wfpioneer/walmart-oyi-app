@@ -47,6 +47,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    initialRouteName="FloorDetails"
     swipeEnabled={true}
     tabBarOptions={
       Object {
@@ -144,6 +145,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    initialRouteName="FloorDetails"
     swipeEnabled={true}
     tabBarOptions={
       Object {
@@ -241,6 +243,7 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    initialRouteName="FloorDetails"
     swipeEnabled={true}
     tabBarOptions={
       Object {
@@ -341,6 +344,7 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
+    initialRouteName="FloorDetails"
     swipeEnabled={true}
     tabBarOptions={
       Object {
@@ -441,6 +445,7 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
     location="[missing \\"en.LOCATION.SECTION\\" translation] G - GroceryAisle 1-Section 1"
   />
   <MaterialTopTabNavigator
+    initialRouteName="FloorDetails"
     swipeEnabled={true}
     tabBarOptions={
       Object {
@@ -542,6 +547,7 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
+    initialRouteName="FloorDetails"
     swipeEnabled={true}
     tabBarOptions={
       Object {
@@ -674,6 +680,70 @@ exports[`Test Location Tabs Tests rendering Tab Headers Renders pallet Header 1`
 </React.Fragment>
 `;
 
+exports[`Test Location Tabs Tests rendering getSectionsDetails api Renders Loading Indicator for get Section details 1`] = `
+<withTheme(ActivityIndicator)
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`Test Location Tabs Tests rendering getSectionsDetails api Renders Retry button if get section details api returns an error 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="alert"
+    size={40}
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.LOCATION.LOCATION_API_ERROR" translation]
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "marginVertical": 10,
+        "width": "95%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
 exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading Indicator for Remove Section Modal 1`] = `
 <React.Fragment>
   <ApiConfirmationModal
@@ -724,6 +794,7 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading I
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
+    initialRouteName="FloorDetails"
     swipeEnabled={null}
     tabBarOptions={
       Object {
@@ -780,7 +851,7 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry but
     api={
       Object {
         "error": "Network Error",
-        "isWaiting": true,
+        "isWaiting": false,
         "result": null,
         "value": null,
       }
@@ -824,6 +895,7 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry but
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
+    initialRouteName="FloorDetails"
     swipeEnabled={null}
     tabBarOptions={
       Object {

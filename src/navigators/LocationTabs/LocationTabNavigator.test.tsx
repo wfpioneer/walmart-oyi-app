@@ -97,6 +97,10 @@ describe('Test Location Tabs', (): void => {
     const {
       items, pallets, zone, aisle, section
     } = mockLocationDetails;
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: mockLocationDetails
+    };
     renderer.render(
       <LocationTabsNavigator
         floorItems={items.sectionItems}
@@ -113,8 +117,7 @@ describe('Test Location Tabs', (): void => {
         locationPopupVisible={false}
         user={user}
         itemPopupVisible={false}
-        sectionResult={mockLocationDetails}
-        sectionIsWaiting={false}
+        getSectionDetailsApi={successApi}
         section={defaultSection}
         removeSectionApi={defaultAsyncState}
         displayRemoveConfirmation={false}
@@ -134,6 +137,10 @@ describe('Test Location Tabs', (): void => {
     const {
       items, pallets, zone, aisle, section
     } = mockLocationDetailsEmpty;
+    const emptyApi: AsyncState = {
+      ...defaultAsyncState,
+      result: mockLocationDetailsEmpty
+    };
     renderer.render(
       <LocationTabsNavigator
         floorItems={items.sectionItems}
@@ -150,8 +157,7 @@ describe('Test Location Tabs', (): void => {
         isManualScanEnabled={false}
         user={user}
         itemPopupVisible={false}
-        sectionResult={mockLocationDetailsEmpty}
-        sectionIsWaiting={false}
+        getSectionDetailsApi={emptyApi}
         section={defaultSection}
         removeSectionApi={defaultAsyncState}
         displayRemoveConfirmation={false}
@@ -171,6 +177,10 @@ describe('Test Location Tabs', (): void => {
     const {
       items, pallets, zone, aisle, section
     } = mockLocationDetailsLargeLocationCount;
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: mockLocationDetailsLargeLocationCount
+    };
     renderer.render(
       <LocationTabsNavigator
         floorItems={items.sectionItems}
@@ -187,8 +197,7 @@ describe('Test Location Tabs', (): void => {
         isManualScanEnabled={false}
         user={user}
         itemPopupVisible={false}
-        sectionResult={mockLocationDetailsLargeLocationCount}
-        sectionIsWaiting={false}
+        getSectionDetailsApi={successApi}
         section={defaultSection}
         removeSectionApi={defaultAsyncState}
         displayRemoveConfirmation={false}
@@ -208,6 +217,10 @@ describe('Test Location Tabs', (): void => {
     const {
       items, pallets, zone, aisle, section
     } = mockLocationDetails;
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: mockLocationDetails
+    };
     renderer.render(
       <LocationTabsNavigator
         floorItems={items.sectionItems}
@@ -224,8 +237,7 @@ describe('Test Location Tabs', (): void => {
         isManualScanEnabled={true}
         user={user}
         itemPopupVisible={false}
-        sectionResult={mockLocationDetails}
-        sectionIsWaiting={false}
+        getSectionDetailsApi={successApi}
         section={defaultSection}
         removeSectionApi={defaultAsyncState}
         displayRemoveConfirmation={false}
@@ -247,6 +259,10 @@ describe('Test Location Tabs', (): void => {
       type: 'Test',
       value: 'SCAN1-1'
     };
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: mockLocationDetails
+    };
     renderer.render(
       <LocationTabsNavigator
         floorItems={items.sectionItems}
@@ -263,8 +279,7 @@ describe('Test Location Tabs', (): void => {
         locationPopupVisible={false}
         user={user}
         itemPopupVisible={false}
-        sectionResult={mockLocationDetails}
-        sectionIsWaiting={false}
+        getSectionDetailsApi={successApi}
         section={defaultSection}
         removeSectionApi={defaultAsyncState}
         displayRemoveConfirmation={false}
@@ -282,6 +297,10 @@ describe('Test Location Tabs', (): void => {
   it('Renders Print Label button if "location printing" feature is enabled', (): void => {
     const renderer = ShallowRenderer.createRenderer();
     const { items, pallets } = mockLocationDetails;
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: mockLocationDetails
+    };
     renderer.render(
       <LocationTabsNavigator
         floorItems={items.sectionItems}
@@ -298,8 +317,7 @@ describe('Test Location Tabs', (): void => {
         locationPopupVisible={false}
         user={{ ...user, features: ['location management edit'] }}
         itemPopupVisible={false}
-        sectionResult={mockLocationDetails}
-        sectionIsWaiting={false}
+        getSectionDetailsApi={successApi}
         section={defaultSection}
         removeSectionApi={defaultAsyncState}
         displayRemoveConfirmation={false}
@@ -339,8 +357,7 @@ describe('Test Location Tabs', (): void => {
           locationPopupVisible={false}
           user={user}
           itemPopupVisible={false}
-          sectionResult={null}
-          sectionIsWaiting={false}
+          getSectionDetailsApi={defaultAsyncState}
           section={defaultSection}
           removeSectionApi={deleteSectionIsWaiting}
           displayRemoveConfirmation={true}
@@ -358,7 +375,7 @@ describe('Test Location Tabs', (): void => {
     it('Renders Retry button on Modal if remove section api returns an error', (): void => {
       const renderer = ShallowRenderer.createRenderer();
       const deleteSectionError: AsyncState = {
-        isWaiting: true,
+        isWaiting: false,
         value: null,
         error: 'Network Error',
         result: null
@@ -379,10 +396,89 @@ describe('Test Location Tabs', (): void => {
           locationPopupVisible={false}
           user={user}
           itemPopupVisible={false}
-          sectionResult={null}
-          sectionIsWaiting={false}
+          getSectionDetailsApi={defaultAsyncState}
           section={defaultSection}
           removeSectionApi={deleteSectionError}
+          displayRemoveConfirmation={true}
+          setDisplayRemoveConfirmation={jest.fn()}
+          clearSectionApi={defaultAsyncState}
+          displayClearConfirmation={false}
+          setDisplayClearConfirmation={jest.fn()}
+          selectedTab={ClearLocationTarget.FLOOR}
+          setSelectedTab={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+
+  describe('Tests rendering getSectionsDetails api', () => {
+    it('Renders Loading Indicator for get Section details', (): void => {
+      const renderer = ShallowRenderer.createRenderer();
+      const getSectionDetailsApiLoading: AsyncState = {
+        isWaiting: true,
+        value: null,
+        error: null,
+        result: null
+      };
+      renderer.render(
+        <LocationTabsNavigator
+          floorItems={[]}
+          reserveItems={[]}
+          locationName="-"
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          scannedEvent={defaultScannedEvent}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+          validateSessionCall={jest.fn()}
+          isManualScanEnabled={true}
+          locationPopupVisible={false}
+          user={user}
+          itemPopupVisible={false}
+          getSectionDetailsApi={getSectionDetailsApiLoading}
+          section={defaultSection}
+          removeSectionApi={defaultAsyncState}
+          displayRemoveConfirmation={true}
+          setDisplayRemoveConfirmation={jest.fn()}
+          clearSectionApi={defaultAsyncState}
+          displayClearConfirmation={false}
+          setDisplayClearConfirmation={jest.fn()}
+          selectedTab={ClearLocationTarget.FLOOR}
+          setSelectedTab={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders Retry button if get section details api returns an error', (): void => {
+      const renderer = ShallowRenderer.createRenderer();
+      const getSectionDetailsApiError: AsyncState = {
+        isWaiting: false,
+        value: null,
+        error: 'Network Error',
+        result: null
+      };
+      renderer.render(
+        <LocationTabsNavigator
+          floorItems={[]}
+          reserveItems={[]}
+          locationName="-"
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          scannedEvent={defaultScannedEvent}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+          validateSessionCall={jest.fn()}
+          isManualScanEnabled={true}
+          locationPopupVisible={false}
+          user={user}
+          itemPopupVisible={false}
+          getSectionDetailsApi={getSectionDetailsApiError}
+          section={defaultSection}
+          removeSectionApi={defaultAsyncState}
           displayRemoveConfirmation={true}
           setDisplayRemoveConfirmation={jest.fn()}
           clearSectionApi={defaultAsyncState}
@@ -575,8 +671,7 @@ describe('Test Location Tabs', (): void => {
         isManualScanEnabled: false,
         user,
         itemPopupVisible: false,
-        sectionResult: null,
-        sectionIsWaiting: false,
+        getSectionDetailsApi: defaultAsyncState,
         section: defaultSection,
         removeSectionApi: defaultAsyncState,
         displayRemoveConfirmation: false,
@@ -661,8 +756,7 @@ describe('Test Location Tabs', (): void => {
               isManualScanEnabled={false}
               user={user}
               itemPopupVisible={false}
-              sectionResult={null}
-              sectionIsWaiting={false}
+              getSectionDetailsApi={defaultAsyncState}
               section={defaultSection}
               removeSectionApi={defaultAsyncState}
               displayRemoveConfirmation={false}
