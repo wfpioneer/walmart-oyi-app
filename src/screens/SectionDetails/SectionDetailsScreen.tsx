@@ -171,36 +171,6 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data)
   || undefined;
 
-  if (getSectionDetailsApi.isWaiting) {
-    return (
-      <ActivityIndicator
-        animating={getSectionDetailsApi.isWaiting}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
-
-  if (getSectionDetailsApi.error) {
-    return (
-      <View style={styles.errorView}>
-        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
-        <Text style={styles.errorText}>{strings('LOCATION.LOCATION_API_ERROR')}</Text>
-        <TouchableOpacity
-          style={styles.errorButton}
-          onPress={() => {
-            trackEventCall('location_api_retry',);
-            dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
-          }}
-        >
-          <Text>{strings('GENERICS.RETRY')}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
   if (getSectionDetailsApi.result?.status === 204) {
     return (
       <View style={styles.emptyContainer}>
