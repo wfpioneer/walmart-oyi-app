@@ -11,6 +11,8 @@ export const REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC = 'PRINT/REMOVE_MULT_FROM_PRINT
 export const SET_PRINT_QUEUE = 'PRINT/SET_PRINT_QUEUE';
 export const SET_PRINTING_LOCATION_LABELS = 'PRINT/SET_PRINTING_LOCATION_LABELS';
 export const UNSET_PRINTING_LOCATION_LABELS = 'PRINT/UNSET_PRINTING_LOCATION_LABELS';
+export const SET_PRINTING_PALLET_LABEL = 'PRINT/SET_PRINTING_PALLET_LABEL';
+export const UNSET_PRINTING_PALLET_LABEL = 'PRINT/UNSET_PRINTING_PALLET_LABEL';
 
 export const setSelectedPrinter = (printer: Printer) => ({
   type: SET_SELECTED_PRINTER,
@@ -66,6 +68,14 @@ export const unsetPrintingLocationLabels = () => ({
   type: UNSET_PRINTING_LOCATION_LABELS
 } as const);
 
+export const setPrintingPalletLabel = () => ({
+  type: SET_PRINTING_PALLET_LABEL
+} as const);
+
+export const unsetPrintingPalletLabel = () => ({
+  type: UNSET_PRINTING_PALLET_LABEL
+} as const);
+
 export type Actions =
 | ReturnType<typeof setSelectedPrinter>
 | ReturnType<typeof setSignType>
@@ -78,3 +88,5 @@ export type Actions =
 | ReturnType<typeof setPrintQueue>
 | ReturnType<typeof setPrintingLocationLabels>
 | ReturnType<typeof unsetPrintingLocationLabels>
+| ReturnType<typeof setPrintingPalletLabel>
+| ReturnType<typeof unsetPrintingPalletLabel>

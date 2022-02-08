@@ -122,54 +122,6 @@ describe('Test Location Details Screen', () => {
   });
 
   describe('Tests rendering Get Section Details api responses', () => {
-    it('Renders Location Details error message', () => {
-      const getSectionDetailsError: AsyncState = {
-        ...defaultAsyncState,
-        error: 'NetWork Error'
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <SectionDetailsScreen
-          getSectionDetailsApi={getSectionDetailsError}
-          deleteLocationApi={defaultAsyncState}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          trackEventCall={jest.fn()}
-          useEffectHook={jest.fn()}
-          scannedEvent={defaultScannedEvent}
-          displayConfirmation={false}
-          setDisplayConfirmation={jest.fn()}
-          selectedItem={defaultSelectedItem}
-          selectedSection={defaultSection}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('Renders Location Details activity indicator when waiting for an api response', () => {
-      const getSectionDetailsIsWaiting: AsyncState = {
-        ...defaultAsyncState,
-        isWaiting: true
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <SectionDetailsScreen
-          getSectionDetailsApi={getSectionDetailsIsWaiting}
-          deleteLocationApi={defaultAsyncState}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          trackEventCall={jest.fn()}
-          useEffectHook={jest.fn()}
-          scannedEvent={defaultScannedEvent}
-          displayConfirmation={false}
-          setDisplayConfirmation={jest.fn()}
-          selectedItem={defaultSelectedItem}
-          selectedSection={defaultSection}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
     it('Renders Section Not found when getSectionDetails responds with a 204 status code', () => {
       const getSectionDetailsEmpty: AsyncState = {
         ...defaultAsyncState,

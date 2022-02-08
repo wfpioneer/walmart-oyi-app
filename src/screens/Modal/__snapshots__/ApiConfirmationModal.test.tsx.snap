@@ -261,6 +261,192 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
 </CustomModalComponent>
 `;
 
+exports[`Api Confirmation Modal render tests renders correctly when the api is at rest, Confirm button custom text 1`] = `
+<CustomModalComponent
+  animationType="none"
+  isVisible={true}
+  modalType="Error"
+  onClose={[Function]}
+>
+  <React.Fragment>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "paddingBottom": 5,
+            "paddingHorizontal": 15,
+            "paddingTop": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        I am the main text
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 14,
+            "paddingBottom": 15,
+            "paddingHorizontal": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        I am the secondary line of text
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[MockFunction]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="Custom Confirmation Text"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
+</CustomModalComponent>
+`;
+
+exports[`Api Confirmation Modal render tests renders correctly when the api is at rest, cancel button custom text 1`] = `
+<CustomModalComponent
+  animationType="none"
+  isVisible={true}
+  modalType="Error"
+  onClose={[Function]}
+>
+  <React.Fragment>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "paddingBottom": 5,
+            "paddingHorizontal": 15,
+            "paddingTop": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        I am the main text
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 14,
+            "paddingBottom": 15,
+            "paddingHorizontal": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        I am the secondary line of text
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="Custom Cancel Text"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[MockFunction]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
+</CustomModalComponent>
+`;
+
 exports[`Api Confirmation Modal render tests renders correctly when the api is at rest, three lines of text 1`] = `
 <CustomModalComponent
   animationType="none"

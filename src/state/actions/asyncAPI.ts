@@ -110,3 +110,9 @@ export const deleteUpcs = makeAsyncActionCreators(DELETE_UPCS);
 
 export const COMBINE_PALLETS = makeAsyncActionTypes('API/PATCH_COMBINE_PALLETS');
 export const combinePallets = makeAsyncActionCreators(COMBINE_PALLETS);
+
+export const PRINT_PALLET_LABEL = makeAsyncActionTypes('API/PRINT_PALLET_LABEL');
+export const printPalletLabel = makeAsyncActionCreators(PRINT_PALLET_LABEL);
+
+export const CLEAR_PALLET = makeAsyncActionTypes('API/CLEAR_PALLET');
+export const clearPallet = makeAsyncActionCreators(CLEAR_PALLET);

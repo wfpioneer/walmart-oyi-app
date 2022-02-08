@@ -45,7 +45,9 @@ export default {
     ITEMS: '多个商品',
     TOOLS: '工具箱',
     CURRENCY_SYMBOL: '¥',
-    UNDO: 'Undo' // TODO Mandarin Translation
+    UNDO: 'Undo', // TODO Mandarin Translation
+    YES: 'Yes', // TODO Mandarin Translation
+    NO: 'No' // TODO Mandarin Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -116,6 +118,7 @@ export default {
     QUEUE_TITLE: '打印清单',
     CHANGE_TITLE: '打印机',
     LOCATION_TITLE: '打印货架标签',
+    PALLET_TITLE: '打印卡板标签',
     PRICE_SIGN: '打印价签',
     COPY_QTY: '副本数量',
     COPIES: '副本',
@@ -139,6 +142,7 @@ export default {
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
     PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Mandarin Translation
+    PALLET_SUCCESS: '卡板标签打印成功',
     DUPLICATE_PRINTER: '现存打印机',
     SOME_PRINTS_FAILED: '有些商品打印失败'
   },
@@ -160,11 +164,20 @@ export default {
     CANNOT_HAVE_NEGATIVE_QTY: '商品库存不可是负',
     ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Mandarin translation
     ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC', // TODO Mandarin translation
-    PALLET_UPC_NOT_FOUND: 'The Pallet or a UPC was not found', // TODO Mandarin translation
-    ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet', // TODO Mandarin translation
-    ADD_UPC_ERROR: 'Error adding items to the Pallet', // TODO Mandarin translation
+    PALLET_UPC_NOT_FOUND: '未找到卡板或者UPC',
+    ADD_UPC_SUCCESS: '所有商品成功添加到卡板',
+    ADD_UPC_ERROR: '添加商品到卡板时出错',
     COMBINE_PALLET_SUCCESS: '卡板合并成功',
-    COMBINE_PALLET_FAILURE: '卡板合并失败，请重试'
+    COMBINE_PALLET_FAILURE: '卡板合并失败，请重试',
+    PALLET_EXISTS: 'This pallet has already been scanned', // TODO CN translation
+    PALLET_EXISTS_AS_TARGET: 'This pallet is already the target pallet', // TODO Mandarin translation
+    PALLET_DOESNT_EXIST: 'The pallet does not exist in our data', // TODO Mandarin translation
+    SAVE_PALLET_SUCCESS: 'Pallet update successful', // TODO Mandarin translation
+    SAVE_PALLET_PARTIAL: 'Pallet update partially successful', // TODO Mandarin translation
+    SAVE_PALLET_FAILURE: 'Pallet update failed', // TODO Mandarin translation
+    CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?', // TODO Mandarin Translation
+    CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful', // TODO Mandarin Translation
+    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared' // TODO Mandarin translation
   },
   LOCATION: {
     TITLE: '所有位置',
