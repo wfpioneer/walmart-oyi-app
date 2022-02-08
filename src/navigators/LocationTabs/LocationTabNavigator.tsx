@@ -42,6 +42,7 @@ import { showSnackBar } from '../../state/actions/SnackBar';
 import { LocationIdName } from '../../state/reducers/Location';
 import { GET_SECTION_DETAILS, REMOVE_SECTION } from '../../state/actions/asyncAPI';
 import User from '../../models/User';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 
 const Tab = createMaterialTopTabNavigator();
 const LOCATION_EDIT_FLAG = 'location management edit';
@@ -73,6 +74,7 @@ export interface LocationProps {
     section: LocationIdName;
     displayClearConfirmation: boolean;
     selectedTab: ClearLocationTarget | undefined;
+    activityModal: boolean;
 }
 
 interface TabHeaderProps {
@@ -85,8 +87,10 @@ interface TabHeaderProps {
 export const handleClearSection = (
   dispatch: Dispatch<any>,
   locationId: number,
-  target: ClearLocationTarget
+  target: ClearLocationTarget,
+  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>
 ): void => {
+  setDisplayClearConfirmation(false);
   dispatch(clearLocation({ locationId, target }));
 };
 
@@ -136,6 +140,24 @@ export const clearSectionApiEffect = (
       dispatch(showSnackBar(selectedTab === ClearLocationTarget.FLOOR
         ? strings('LOCATION.CLEAR_SECTION_SALES_FLOOR_SUCCEED')
         : strings('LOCATION.CLEAR_SECTION_RESERVE_SUCCEED'), 3000));
+    }
+  }
+};
+
+const activityModalEffect = (
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+  activityModal: boolean,
+  removeSectionApi: AsyncState,
+  clearSectionApi: AsyncState
+): void => {
+  if (navigation.isFocused()) {
+    if (!activityModal) {
+      if (removeSectionApi.isWaiting || clearSectionApi.isWaiting) {
+        dispatch(showActivityModal());
+      }
+    } else if (!removeSectionApi.isWaiting && !clearSectionApi.isWaiting) {
+      dispatch(hideActivityModal());
     }
   }
 };
@@ -256,7 +278,8 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     displayRemoveConfirmation,
     setDisplayRemoveConfirmation,
     section,
-    selectedTab
+    selectedTab,
+    activityModal
   } = props;
   const sectionExists: boolean = (getSectionDetailsApi.result && getSectionDetailsApi.result.status !== 204);
 
@@ -324,6 +347,10 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     }
   });
 
+  useEffectHook(() => activityModalEffect(
+    navigation, dispatch, activityModal, removeSectionApi, clearSectionApi
+  ), [activityModal, removeSectionApi, clearSectionApi]);
+
   if (getSectionDetailsApi.isWaiting) {
     return (
       <ActivityIndicator
@@ -354,11 +381,16 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     );
   }
 
+  const handleRemoveSection = () => {
+    setDisplayRemoveConfirmation(false);
+    dispatch(removeSection(section.id));
+  };
+
   return (
     <>
       <ApiConfirmationModal
         api={removeSectionApi}
-        handleConfirm={() => dispatch(removeSection(section.id))}
+        handleConfirm={handleRemoveSection}
         isVisible={displayRemoveConfirmation}
         mainText={`${strings('LOCATION.REMOVE_SECTION_CONFIRMATION', { sectionName: locationName })}`}
         onClose={() => setDisplayRemoveConfirmation(false)}
@@ -373,7 +405,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           : strings('LOCATION.CLEAR_SECTION_RESERVE_MESSAGE')}
         subtext2={strings('LOCATION.CLEAR_SECTION_WONT_DELETE')}
         handleConfirm={() => selectedTab
-          && handleClearSection(dispatch, section.id, selectedTab)}
+          && handleClearSection(dispatch, section.id, selectedTab, setDisplayClearConfirmation)}
         errorText={strings('LOCATION.CLEAR_SECTION_FAIL')}
       />
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
@@ -452,6 +484,7 @@ const LocationTabs = () : JSX.Element => {
   const user = useTypedSelector(state => state.User);
   const locationPopupVisible = useTypedSelector(state => state.Location.locationPopupVisible);
   const itemPopupVisible = useTypedSelector(state => state.Location.itemPopupVisible);
+  const activityModal = useTypedSelector(state => state.modal.showActivity);
   const [displayRemoveConfirmation, setDisplayRemoveConfirmation] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -509,6 +542,7 @@ const LocationTabs = () : JSX.Element => {
           displayClearConfirmation={displayClearConfirmation}
           setDisplayClearConfirmation={setDisplayClearConfirmation}
           selectedTab={selectedTab}
+          activityModal={activityModal}
         />
       </TouchableOpacity>
       <BottomSheetModal
