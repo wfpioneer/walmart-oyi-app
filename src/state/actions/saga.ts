@@ -2,7 +2,7 @@ import { CreateAisleRequest } from '../../models/CreateZoneAisleSection.d';
 import {
   ApprovalListItem, approvalAction, approvalRequestSource, approvalStatus
 } from '../../models/ApprovalListItem';
-import { PrintItemList, PrintLocationList } from '../../models/Printer';
+import { PrintItemList, PrintLocationList, PrintPalletList } from '../../models/Printer';
 import { CreateZoneRequest } from '../reducers/Location';
 import { PalletItem } from '../../models/PalletItem';
 import { CombinePalletsRequest, UpdateItemQuantityRequest } from '../../services/PalletManagement.service';
@@ -44,6 +44,7 @@ export const ADD_PALLET_UPCS = 'SAGA/ADD_PALLET_UPCS';
 export const UPDATE_PALLET_ITEM_QTY = 'SAGA/UPDATE_PALLET_ITEM_QTY';
 export const DELETE_UPCS = 'SAGA/DELETE_UPCS';
 export const COMBINE_PALLETS = 'SAGA/COMBINE_PALLETS';
+export const PRINT_PALLET_LABEL = 'SAGA/PRINT_PALLET_LABEL';
 export const CLEAR_PALLET = 'SAGA/CLEAR_PALLET';
 
 // TODO add types for each service payload
@@ -109,6 +110,9 @@ export const deleteUpcs = (payload: { palletId: number; upcs: string[] }) => ({ 
 export const combinePallets = (payload: CombinePalletsRequest) => ({
   type: COMBINE_PALLETS, payload
 } as const);
+export const printPalletLabel = (payload: {
+  printPalletList: PrintPalletList[]
+}) => ({ type: PRINT_PALLET_LABEL, payload } as const);
 export const clearPallet = (payload: {palletId: number}) => ({
   type: CLEAR_PALLET, payload
 } as const);

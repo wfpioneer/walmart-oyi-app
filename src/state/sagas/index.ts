@@ -64,6 +64,7 @@ const genericSagas = [
   makeAsyncSaga(saga.UPDATE_PALLET_ITEM_QTY, actions.updatePalletItemQty, PalletManagementService.updateItemQuantity),
   makeAsyncSaga(saga.DELETE_UPCS, actions.deleteUpcs, DeletePalletUPCsService.deletePalletUPCs),
   makeAsyncSaga(saga.COMBINE_PALLETS, actions.combinePallets, PalletManagementService.combinePallets),
+  makeAsyncSaga(saga.PRINT_PALLET_LABEL, actions.printPalletLabel, PrintService.printPallet),
   makeAsyncSaga(saga.CLEAR_PALLET, actions.clearPallet, DeletePalletService.clearPallet)
 ];
 

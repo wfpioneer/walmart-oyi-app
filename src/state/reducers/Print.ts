@@ -7,10 +7,12 @@ import {
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR,
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC,
   SET_PRINTING_LOCATION_LABELS,
+  SET_PRINTING_PALLET_LABEL,
   SET_PRINT_QUEUE,
   SET_SELECTED_PRINTER,
   SET_SELECTED_SIGN_TYPE,
-  UNSET_PRINTING_LOCATION_LABELS
+  UNSET_PRINTING_LOCATION_LABELS,
+  UNSET_PRINTING_PALLET_LABEL
 } from '../actions/Print';
 
 import {
@@ -26,6 +28,7 @@ interface StateType {
   printerList: Printer[];
   printQueue: PrintQueueItem[];
   printingLocationLabels: string;
+  printingPalletLabel: boolean;
 }
 
 const initialState: StateType = {
@@ -38,7 +41,8 @@ const initialState: StateType = {
   selectedSignType: '',
   printerList: [],
   printQueue: [],
-  printingLocationLabels: ''
+  printingLocationLabels: '',
+  printingPalletLabel: false
 };
 
 export const Print = (state = initialState, action: Actions): StateType => {
@@ -126,6 +130,16 @@ export const Print = (state = initialState, action: Actions): StateType => {
       return {
         ...state,
         printingLocationLabels: ''
+      };
+    case SET_PRINTING_PALLET_LABEL:
+      return {
+        ...state,
+        printingPalletLabel: true
+      };
+    case UNSET_PRINTING_PALLET_LABEL:
+      return {
+        ...state,
+        printingPalletLabel: false
       };
     default:
       return state;
