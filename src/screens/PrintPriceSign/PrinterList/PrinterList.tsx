@@ -9,10 +9,9 @@ import COLOR from '../../../themes/Color';
 import styles from './PrinterList.style';
 import { deleteFromPrinterList, setSelectedPrinter } from '../../../state/actions/Print';
 import { Printer } from '../../../models/Printer';
+import { deletePrinter } from '../../../utils/asyncStorageUtils';
 
-const ItemSeparator = () => (
-  <View style={styles.separator} />
-);
+const ItemSeparator = () => <View style={styles.separator} />;
 
 const mapStateToProps = (state: any) => ({
   printerList: state.Print.printerList
@@ -25,8 +24,8 @@ const mapDispatchToProps = {
 
 interface PrinterListProps {
   printerList: Printer[];
-  deleteFromPrinterList: Function;
-  setSelectedPrinter: Function;
+  deleteFromPrinterList: (printerId: string) => void;
+  setSelectedPrinter: (printer: Printer) => void;
   navigation: NavigationProp<any>;
 }
 
@@ -45,6 +44,7 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
 
     const onDeleteClick = () => {
       this.props.deleteFromPrinterList(item.id);
+      deletePrinter(item.id);
       // TODO: remove this to replace with some better update after
       this.forceUpdate();
     };
@@ -55,10 +55,13 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
         <View style={styles.printerDescription}>
           <Text>{item.name}</Text>
         </View>
-        {item.id !== '000000000000'
-        && (
+        {item.id !== '000000000000' && (
           <TouchableOpacity style={styles.trashCan} onPress={onDeleteClick}>
-            <MaterialCommunityIcons name="trash-can" size={20} color={COLOR.BLACK} />
+            <MaterialCommunityIcons
+              name="trash-can"
+              size={20}
+              color={COLOR.BLACK}
+            />
           </TouchableOpacity>
         )}
       </TouchableOpacity>

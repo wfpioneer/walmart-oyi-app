@@ -14,15 +14,23 @@ import { Printer, PrinterType } from '../../../models/Printer';
 import { setManualScan, setScannedEvent } from '../../../state/actions/Global';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
+import {
+  savePrinter,
+  setLocationLabelPrinter,
+  setPalletLabelPrinter,
+  setPriceLabelPrinter
+} from '../../../utils/asyncStorageUtils';
 
 interface ChangePrinterProps {
   macAddress: string;
   updateMacAddress: React.Dispatch<React.SetStateAction<string>>;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   trackEventCall: (eventName: string, params?: any) => void;
-  printers: Printer[]
+  printers: Printer[];
+  printingLocationLabels: string;
+  printingPalletLabel: boolean;
 }
 export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
   const {
@@ -32,7 +40,9 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
     navigation,
     useEffectHook,
     trackEventCall,
-    printers
+    printers,
+    printingLocationLabels,
+    printingPalletLabel
   } = props;
   const macRegex = /^[0-9a-fA-F]{12}/;
 
@@ -60,8 +70,19 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
         desc: '',
         id: macAddress
       };
-      trackEventCall('add_to_printer_list', { newPrinter: JSON.stringify(newPrinter) });
+      trackEventCall('add_to_printer_list', {
+        newPrinter: JSON.stringify(newPrinter)
+      });
       dispatch(addToPrinterList(newPrinter));
+      savePrinter(newPrinter);
+
+      if (printingPalletLabel) {
+        setPalletLabelPrinter(newPrinter);
+      } else if (printingLocationLabels !== '') {
+        setLocationLabelPrinter(newPrinter);
+      } else {
+        setPriceLabelPrinter(newPrinter);
+      }
       navigation.goBack();
     }
   };
@@ -77,19 +98,29 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
         placeholder={strings('PRINT.MAC_ADDRESS')}
         onSubmitEditing={submitMacAddress}
       />
-      { (macAddress.length > 0 && macAddress.length !== 12)
-      && (
-      <View style={styles.alertView}>
-        <MaterialCommunityIcons name="alert-circle" size={20} color={COLOR.RED_300} />
-        <Text style={styles.errorText}>{strings('PRINT.MAC_ADDRESS_ERROR')}</Text>
-      </View>
+      {macAddress.length > 0 && macAddress.length !== 12 && (
+        <View style={styles.alertView}>
+          <MaterialCommunityIcons
+            name="alert-circle"
+            size={20}
+            color={COLOR.RED_300}
+          />
+          <Text style={styles.errorText}>
+            {strings('PRINT.MAC_ADDRESS_ERROR')}
+          </Text>
+        </View>
       )}
-      { isPrinterExists()
-      && (
-      <View style={styles.alertView}>
-        <MaterialCommunityIcons name="alert-circle" size={20} color={COLOR.RED_300} />
-        <Text style={styles.errorText}>{strings('PRINT.DUPLICATE_PRINTER')}</Text>
-      </View>
+      {isPrinterExists() && (
+        <View style={styles.alertView}>
+          <MaterialCommunityIcons
+            name="alert-circle"
+            size={20}
+            color={COLOR.RED_300}
+          />
+          <Text style={styles.errorText}>
+            {strings('PRINT.DUPLICATE_PRINTER')}
+          </Text>
+        </View>
       )}
       <Button
         title={strings('GENERICS.SUBMIT')}
@@ -105,7 +136,8 @@ export const ChangePrinter = (): JSX.Element => {
   const [macAddress, updateMacAddress] = useState('');
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const printers = useTypedSelector(state => state.Print.printerList);
+  const { printerList, printingLocationLabels, printingPalletLabel } =
+    useTypedSelector(state => state.Print);
   return (
     <ChangePrinterScreen
       macAddress={macAddress}
@@ -114,7 +146,9 @@ export const ChangePrinter = (): JSX.Element => {
       navigation={navigation}
       useEffectHook={useEffect}
       trackEventCall={trackEvent}
-      printers={printers}
+      printers={printerList}
+      printingLocationLabels={printingLocationLabels}
+      printingPalletLabel={printingPalletLabel}
     />
   );
 };
