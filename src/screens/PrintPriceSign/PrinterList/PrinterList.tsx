@@ -9,7 +9,9 @@ import COLOR from '../../../themes/Color';
 import styles from './PrinterList.style';
 import { deleteFromPrinterList, setSelectedPrinter } from '../../../state/actions/Print';
 import { Printer } from '../../../models/Printer';
-import { deletePrinter } from '../../../utils/asyncStorageUtils';
+import {
+  deletePrinter, setLocationLabelPrinter, setPalletLabelPrinter, setPriceLabelPrinter
+} from '../../../utils/asyncStorageUtils';
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -27,6 +29,8 @@ interface PrinterListProps {
   deleteFromPrinterList: (printerId: string) => void;
   setSelectedPrinter: (printer: Printer) => void;
   navigation: NavigationProp<any>;
+  printingLocationLabels: string;
+  printingPalletLabel: boolean;
 }
 
 export class PrinterList extends React.PureComponent<PrinterListProps> {
@@ -35,10 +39,17 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
     this.printerListCard = this.printerListCard.bind(this);
   }
 
-  printerListCard = (cardItem: { item: Printer }) => {
+  printerListCard = (cardItem: { item: Printer }): JSX.Element => {
     const { item } = cardItem;
     const onCardClick = () => {
       this.props.setSelectedPrinter(item);
+      if (this.props.printingPalletLabel) {
+        setPalletLabelPrinter(item);
+      } else if (this.props.printingLocationLabels !== '') {
+        setLocationLabelPrinter(item);
+      } else {
+        setPriceLabelPrinter(item);
+      }
       this.props.navigation.goBack();
     };
 
@@ -68,7 +79,7 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
     );
   };
 
-  render() {
+  render(): JSX.Element {
     return (
       <FlatList
         data={this.props.printerList}

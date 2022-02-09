@@ -2,9 +2,32 @@ import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { Printer, PrinterType } from '../../../models/Printer';
-import { ChangePrinterScreen } from './ChangePrinter';
+import { ChangePrinterScreen, isPrinterExists, submitMacAddress } from './ChangePrinter';
 
-let navigationProp: NavigationProp<any>;
+jest.mock('../../../utils/asyncStorageUtils', () => {
+  const asycnUtils = jest.requireActual('../../../utils/asyncStorageUtils');
+  return {
+    ...asycnUtils,
+    setLocationLabelPrinter: jest.fn(),
+    savePrinter: jest.fn(),
+    setPalletLabelPrinter: jest.fn(),
+    setPriceLabelPrinter: jest.fn()
+  };
+});
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dangerouslyGetParent: jest.fn(),
+  dangerouslyGetState: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn()
+};
 describe('ChangePrinterScreen', () => {
   const renderer = ShallowRenderer.createRenderer();
   const invalidMacAddress = '123456';
@@ -19,63 +42,156 @@ describe('ChangePrinterScreen', () => {
   }, {
     type: PrinterType.LASER, name: '', desc: '', id: '777888999001'
   }];
-  it('Renders Error for Printer MacAddress not equal to 12 characters', () => {
-    renderer.render(
-      <ChangePrinterScreen
-        macAddress={invalidMacAddress}
-        updateMacAddress={jest.fn()}
-        dispatch={jest.fn()}
-        navigation={navigationProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-        printers={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  describe('Tests ChangePrinterScreen ', () => {
+    it('Renders Error for Printer MacAddress not equal to 12 characters', () => {
+      renderer.render(
+        <ChangePrinterScreen
+          macAddress={invalidMacAddress}
+          updateMacAddress={jest.fn()}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          printers={[]}
+          printingLocationLabels=""
+          printingPalletLabel={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders Enabled Submit button for MacAddress equal to 12 characters', () => {
+      renderer.render(
+        <ChangePrinterScreen
+          macAddress={validMacAddress}
+          updateMacAddress={jest.fn()}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          printers={[]}
+          printingLocationLabels=""
+          printingPalletLabel={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders error if duplicate printers exist', () => {
+      renderer.render(
+        <ChangePrinterScreen
+          macAddress={invalidMacAddress}
+          updateMacAddress={jest.fn()}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          printers={duplicatePrinter}
+          printingLocationLabels=""
+          printingPalletLabel={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders enabled submit button if no duplicate printers exist', () => {
+      renderer.render(
+        <ChangePrinterScreen
+          macAddress={invalidMacAddress}
+          updateMacAddress={jest.fn()}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          printers={noDuplicatePrinter}
+          printingLocationLabels=""
+          printingPalletLabel={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 
-  it('Renders Enabled Submit button for MacAddress equal to 12 characters', () => {
-    renderer.render(
-      <ChangePrinterScreen
-        macAddress={validMacAddress}
-        updateMacAddress={jest.fn()}
-        dispatch={jest.fn()}
-        navigation={navigationProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-        printers={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  describe('Tests submitMacAddress function', () => {
+    const mockDispatch = jest.fn();
+    const mockTrackEvent = jest.fn();
+    const asyncPrinter = jest.requireMock('../../../utils/asyncStorageUtils');
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    it('submitMacAddress calls zero functions if macAddress length is less than 12', () => {
+      submitMacAddress(
+        invalidMacAddress,
+        mockTrackEvent,
+        mockDispatch,
+        navigationProp,
+        false,
+        ''
+      );
+      expect(mockDispatch).not.toHaveBeenCalled();
+      expect(mockTrackEvent).not.toHaveBeenCalled();
+      expect(asyncPrinter.savePrinter).not.toHaveBeenCalled();
+      expect(asyncPrinter.setPriceLabelPrinter).not.toHaveBeenCalled();
+    });
+    it('submitMacAddress calls setPalletLabelPrinter if printPalletLabel is true', () => {
+      const palletLabelTrue = true;
+      submitMacAddress(
+        validMacAddress,
+        mockTrackEvent,
+        mockDispatch,
+        navigationProp,
+        palletLabelTrue,
+        ''
+      );
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(mockTrackEvent).toHaveBeenCalledTimes(1);
+      expect(asyncPrinter.savePrinter).toHaveBeenCalled();
+      expect(asyncPrinter.setPalletLabelPrinter).toHaveBeenCalledTimes(1);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+    it('submitMacAddress calls setLocationLabelPrinter if printingLocationLabels is not empty', () => {
+      const locationLabel = 'AISLE';
+      submitMacAddress(
+        validMacAddress,
+        mockTrackEvent,
+        mockDispatch,
+        navigationProp,
+        false,
+        locationLabel
+      );
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(mockTrackEvent).toHaveBeenCalledTimes(1);
+      expect(asyncPrinter.savePrinter).toHaveBeenCalled();
+      expect(asyncPrinter.setLocationLabelPrinter).toHaveBeenCalledTimes(1);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+    it('submitMacAddress calls setPriceLabelPrinter if both print PalletLabel and LocationLabels are falsy', () => {
+      submitMacAddress(
+        validMacAddress,
+        mockTrackEvent,
+        mockDispatch,
+        navigationProp,
+        false,
+        ''
+      );
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(mockTrackEvent).toHaveBeenCalledTimes(1);
+      expect(asyncPrinter.savePrinter).toHaveBeenCalled();
+      expect(asyncPrinter.setPriceLabelPrinter).toHaveBeenCalledTimes(1);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+    });
   });
 
-  it('Renders error if duplicate printers exist', () => {
-    renderer.render(
-      <ChangePrinterScreen
-        macAddress={invalidMacAddress}
-        updateMacAddress={jest.fn()}
-        dispatch={jest.fn()}
-        navigation={navigationProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-        printers={duplicatePrinter}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
-
-  it('Renders enabled submit button if no duplicate printers exist', () => {
-    renderer.render(
-      <ChangePrinterScreen
-        macAddress={invalidMacAddress}
-        updateMacAddress={jest.fn()}
-        dispatch={jest.fn()}
-        navigation={navigationProp}
-        useEffectHook={jest.fn()}
-        trackEventCall={jest.fn()}
-        printers={noDuplicatePrinter}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  describe('Tests isPrinterExists function', () => {
+    it('isPrinterExists returns false if the printerList has zero printers', () => {
+      expect(isPrinterExists([], validMacAddress)).toBeFalsy();
+    });
+    it('isPrinterExists returns false if the printerList has no matching macAddress', () => {
+      expect(isPrinterExists(noDuplicatePrinter, invalidMacAddress)).toBeFalsy();
+    });
+    it('isPrinterExists returns true if the printerList has printers with at least one matching macAddress', () => {
+      expect(isPrinterExists(noDuplicatePrinter, validMacAddress)).toBeTruthy();
+    });
   });
 });
