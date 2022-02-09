@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import Toast from 'react-native-toast-message';
 import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
@@ -48,7 +49,6 @@ import { ClearLocationTarget, LocationName } from '../../models/Location';
 import { CREATE_FLOW } from '../../models/LocationItems';
 import { CustomModalComponent } from '../Modal/Modal';
 import Button from '../../components/buttons/Button';
-import { showSnackBar } from '../../state/actions/SnackBar';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -107,7 +107,22 @@ export const clearAisleApiEffect = (
     if (clearSectionApi.result) {
       // Success
       handleClearModalClose(setDisplayClearConfirmation, dispatch);
-      dispatch(showSnackBar(strings('LOCATION.CLEAR_AISLE_ITEMS_SUCCEED'), 3000));
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('LOCATION.CLEAR_AISLE_ITEMS_SUCCEED'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+    }
+
+    if (clearSectionApi.error) {
+      // Failure
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('LOCATION.CLEAR_AISLE_ITEMS_FAIL'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
     }
   }
 };
@@ -128,7 +143,12 @@ export const deleteAisleApiEffect = (
         duration: moment().valueOf() - deleteAisleApiStart
       });
       handleModalClose(setDisplayConfirmation, setDeleteAisleApiStart, dispatch);
-      dispatch(showSnackBar(strings('LOCATION.AISLE_REMOVED'), SNACKBAR_TIMEOUT));
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('LOCATION_AISLES_REMOVED'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
       navigation.goBack();
     }
     if (deleteAisleApi.error) {
@@ -138,7 +158,12 @@ export const deleteAisleApiEffect = (
         reason: deleteAisleApi.error.message || deleteAisleApi.error.toString()
       });
       handleModalClose(setDisplayConfirmation, setDeleteAisleApiStart, dispatch);
-      dispatch(showSnackBar(strings('LOCATION.REMOVE_AISLE_FAIL'), SNACKBAR_TIMEOUT));
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('LOCATION.REMOVE_AISLE_FAIL'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
     }
   }
 };

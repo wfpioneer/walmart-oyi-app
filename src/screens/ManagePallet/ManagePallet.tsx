@@ -340,7 +340,7 @@ export const clearPalletApiHook = (
   if (navigation.isFocused()) {
     if (!clearPalletApi.isWaiting) {
       // Success
-      if (!clearPalletApi.isWaiting && clearPalletApi.result) {
+      if (clearPalletApi.result) {
         dispatch(hideActivityModal());
         setDisplayClearConfirmation(false);
         dispatch({ type: CLEAR_PALLET.RESET });
@@ -353,7 +353,7 @@ export const clearPalletApiHook = (
       }
 
       // Failure
-      if (!clearPalletApi.isWaiting && clearPalletApi.error) {
+      if (clearPalletApi.error) {
         dispatch(hideActivityModal());
         setDisplayClearConfirmation(false);
         dispatch({ type: CLEAR_PALLET.RESET });

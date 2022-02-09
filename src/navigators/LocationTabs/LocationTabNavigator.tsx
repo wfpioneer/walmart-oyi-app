@@ -13,6 +13,7 @@ import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@go
 import { Dispatch } from 'redux';
 import { ActivityIndicator } from 'react-native-paper';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Toast from 'react-native-toast-message';
 import { strings } from '../../locales';
 import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
@@ -38,7 +39,7 @@ import { ClearLocationTarget, LocationName } from '../../models/Location';
 import ReserveSectionDetails from '../../screens/SectionDetails/ReserveSectionDetails';
 import ApiConfirmationModal from '../../screens/Modal/ApiConfirmationModal';
 import { AsyncState } from '../../models/AsyncState';
-import { showSnackBar } from '../../state/actions/SnackBar';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { LocationIdName } from '../../state/reducers/Location';
 import { GET_SECTION_DETAILS, REMOVE_SECTION } from '../../state/actions/asyncAPI';
 import User from '../../models/User';
@@ -137,9 +138,58 @@ export const clearSectionApiEffect = (
       } else {
         dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
       }
-      dispatch(showSnackBar(selectedTab === ClearLocationTarget.FLOOR
-        ? strings('LOCATION.CLEAR_SECTION_SALES_FLOOR_SUCCEED')
-        : strings('LOCATION.CLEAR_SECTION_RESERVE_SUCCEED'), 3000));
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: selectedTab === ClearLocationTarget.FLOOR
+          ? strings('LOCATION.CLEAR_SECTION_SALES_FLOOR_SUCCEED')
+          : strings('LOCATION.CLEAR_SECTION_RESERVE_SUCCEED'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+    }
+
+    if (clearSectionApi.error) {
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('LOCATION.CLEAR_SECTION_FAIL'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+    }
+  }
+};
+
+export const removeSectionApiEffect = (
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+  removeSectionApi: AsyncState,
+  setDisplayRemoveConfirmation: React.Dispatch<React.SetStateAction<boolean>>
+): void => {
+  if (navigation.isFocused()) {
+    if (!removeSectionApi.isWaiting) {
+      // on api success
+      if (removeSectionApi.result) {
+        setDisplayRemoveConfirmation(false);
+        dispatch({ type: REMOVE_SECTION.RESET });
+        dispatch(hideLocationPopup());
+        Toast.show({
+          type: 'success',
+          position: 'bottom',
+          text1: strings('LOCATION.SECTION_REMOVED'),
+          visibilityTime: SNACKBAR_TIMEOUT
+        });
+        navigation.goBack();
+      }
+
+      // on api failure
+      if (removeSectionApi.error) {
+        Toast.show({
+          type: 'error',
+          position: 'bottom',
+          text1: strings('LOCATION.REMOVE_SECTION_FAIL'),
+          visibilityTime: SNACKBAR_TIMEOUT
+        });
+      }
     }
   }
 };
@@ -297,12 +347,18 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
 
   // Clear Section API
   useEffectHook(() => clearSectionApiEffect(
-    dispatch,
-    navigation,
-    clearSectionApi,
-    section,
-    setDisplayClearConfirmation
+    dispatch, navigation, clearSectionApi,
+    section, setDisplayClearConfirmation
   ), [clearSectionApi]);
+
+  // Remove Section Api
+  useEffectHook(() => removeSectionApiEffect(
+    navigation, dispatch, removeSectionApi, setDisplayRemoveConfirmation
+  ), [removeSectionApi]);
+
+  useEffectHook(() => activityModalEffect(
+    navigation, dispatch, activityModal, removeSectionApi, clearSectionApi
+  ), [activityModal, removeSectionApi, clearSectionApi]);
 
   // Call get section details on select from list
   // adjusted to work from loc management state instead of scanned
@@ -335,21 +391,6 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       scanSubscription.remove();
     };
   }, []);
-
-  // Remove Section Api
-  useEffectHook(() => {
-    // on api success
-    if (!removeSectionApi.isWaiting && removeSectionApi.result) {
-      setDisplayRemoveConfirmation(false);
-      dispatch({ type: REMOVE_SECTION.RESET });
-      dispatch(hideLocationPopup());
-      navigation.goBack();
-    }
-  });
-
-  useEffectHook(() => activityModalEffect(
-    navigation, dispatch, activityModal, removeSectionApi, clearSectionApi
-  ), [activityModal, removeSectionApi, clearSectionApi]);
 
   if (getSectionDetailsApi.isWaiting) {
     return (
