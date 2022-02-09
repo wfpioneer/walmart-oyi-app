@@ -8,6 +8,7 @@ import {
 } from '@react-navigation/native';
 import { render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
+import Toast from 'react-native-toast-message';
 import {
   LocationProps,
   LocationTabsNavigator,
@@ -127,6 +128,7 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -167,6 +169,7 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -207,6 +210,7 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -247,6 +251,7 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -289,6 +294,7 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -327,6 +333,7 @@ describe('Test Location Tabs', (): void => {
         setDisplayClearConfirmation={jest.fn()}
         selectedTab={ClearLocationTarget.FLOOR}
         setSelectedTab={jest.fn()}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -367,6 +374,7 @@ describe('Test Location Tabs', (): void => {
           setDisplayClearConfirmation={jest.fn()}
           selectedTab={ClearLocationTarget.FLOOR}
           setSelectedTab={jest.fn()}
+          activityModal={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -406,6 +414,7 @@ describe('Test Location Tabs', (): void => {
           setDisplayClearConfirmation={jest.fn()}
           selectedTab={ClearLocationTarget.FLOOR}
           setSelectedTab={jest.fn()}
+          activityModal={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -447,6 +456,7 @@ describe('Test Location Tabs', (): void => {
           setDisplayClearConfirmation={jest.fn()}
           selectedTab={ClearLocationTarget.FLOOR}
           setSelectedTab={jest.fn()}
+          activityModal={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -486,6 +496,7 @@ describe('Test Location Tabs', (): void => {
           setDisplayClearConfirmation={jest.fn()}
           selectedTab={ClearLocationTarget.FLOOR}
           setSelectedTab={jest.fn()}
+          activityModal={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -523,12 +534,24 @@ describe('Test Location Tabs', (): void => {
   describe('Location Tabs Navigator (section details) externalized function tests', () => {
     const mockSetDisplayClearConfirmation = jest.fn();
     const mockDispatch = jest.fn();
+    const mockGoBack = jest.fn();
+
+    navigationProp = {
+      ...navigationProp, isFocused: mockIsFocused, navigate: mockNavigate, goBack: mockGoBack
+    };
+
+    afterEach(() => {
+      jest.clearAllMocks();
+
+      // doesn't seem to clear mocks not defined in the current describe
+      mockIsFocused.mockClear();
+      mockNavigate.mockClear();
+    });
+
     it('ensures handleClearSection works properly', () => {
-      handleClearSection(mockDispatch, 1, ClearLocationTarget.FLOOR);
+      handleClearSection(mockDispatch, 1, ClearLocationTarget.FLOOR, mockSetDisplayClearConfirmation);
 
       expect(mockDispatch).toBeCalledTimes(1);
-
-      mockDispatch.mockClear();
     });
 
     it('ensures handleClearModalClose works properly', () => {
@@ -536,9 +559,6 @@ describe('Test Location Tabs', (): void => {
 
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockSetDisplayClearConfirmation).toBeCalledTimes(1);
-
-      mockDispatch.mockClear();
-      mockSetDisplayClearConfirmation.mockClear();
     });
 
     it('ensures getSectionDetailsEffect works properly on success', () => {
@@ -554,9 +574,6 @@ describe('Test Location Tabs', (): void => {
       // expect(mockDispatch).toBeCalledTimes(1);
       // expect(mockNavigate).toBeCalledTimes(1);
       // expect(mockNavigate).toBeCalledWith('FloorDetails');
-
-      mockDispatch.mockClear();
-      mockNavigate.mockClear();
     });
 
     it('ensures clearSectionApiEffect works properly on success, sales floor', () => {
@@ -571,40 +588,6 @@ describe('Test Location Tabs', (): void => {
           status: 204
         }
       };
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      navigationProp = { isFocused: mockIsFocused };
-      const section: LocationIdName = {
-        id: 13234,
-        name: 'yes'
-      };
-
-      clearSectionApiEffect(
-        mockDispatch, navigationProp,
-        salesFloorSuccess,
-        section,
-        mockSetDisplayClearConfirmation
-      );
-      expect(mockIsFocused).toBeCalledTimes(1);
-      // called thrice because of handleClearModalClose
-      expect(mockDispatch).toBeCalledTimes(4);
-    });
-
-    it('ensures clearSectionApiEffect works properly on success, reserve', () => {
-      const salesFloorSuccess: AsyncState = {
-        ...defaultAsyncState,
-        value: {
-          locationId: 12453,
-          target: 'pallets'
-        },
-        result: {
-          data: '',
-          status: 204
-        }
-      };
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      navigationProp = { isFocused: mockIsFocused };
       const section: LocationIdName = {
         id: 13234,
         name: 'yes'
@@ -619,6 +602,38 @@ describe('Test Location Tabs', (): void => {
       expect(mockIsFocused).toBeCalledTimes(1);
       // called thrice because of handleClearModalClose
       expect(mockDispatch).toBeCalledTimes(3);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
+    });
+
+    it('ensures clearSectionApiEffect works properly on success, reserve', () => {
+      const salesFloorSuccess: AsyncState = {
+        ...defaultAsyncState,
+        value: {
+          locationId: 12453,
+          target: 'pallets'
+        },
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      const section: LocationIdName = {
+        id: 13234,
+        name: 'yes'
+      };
+
+      clearSectionApiEffect(
+        mockDispatch, navigationProp,
+        salesFloorSuccess,
+        section,
+        mockSetDisplayClearConfirmation
+      );
+      expect(mockIsFocused).toBeCalledTimes(1);
+      // called thrice because of handleClearModalClose
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
     });
 
     it('ensures clearSectionApiEffect works properly on failure', () => {
@@ -633,9 +648,6 @@ describe('Test Location Tabs', (): void => {
           message: 'bad request'
         }
       };
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      navigationProp = { isFocused: mockIsFocused };
       const section: LocationIdName = {
         id: 13234,
         name: 'yes'
@@ -649,7 +661,13 @@ describe('Test Location Tabs', (): void => {
       );
       expect(mockIsFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(0);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
     });
+
+    it('ensures removeSectionApiEffect works properly on success', () => {
+
+    })
   });
 
   // TODO Fix unmounted component no-op error for testing useEffect Hook
@@ -680,7 +698,8 @@ describe('Test Location Tabs', (): void => {
         displayClearConfirmation: false,
         setDisplayClearConfirmation: jest.fn(),
         selectedTab: ClearLocationTarget.FLOOR,
-        setSelectedTab: jest.fn()
+        setSelectedTab: jest.fn(),
+        activityModal: false
       };
       const scannedEventUpdate = {
         type: 'manualscan',
@@ -766,6 +785,7 @@ describe('Test Location Tabs', (): void => {
               setDisplayClearConfirmation={jest.fn()}
               selectedTab={ClearLocationTarget.FLOOR}
               setSelectedTab={jest.fn()}
+              activityModal={false}
             />
           </NavigationContainer>
         </Provider>
