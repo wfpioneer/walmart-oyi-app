@@ -46,6 +46,7 @@ import {
   ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAIL_UPC, UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
@@ -601,7 +602,9 @@ const ManagePallet = (): JSX.Element => {
 
   const handlePrintPallet = () => {
     dispatch(showManagePalletMenu(false));
-    // TODO Integration
+    bottomSheetModalRef.current?.dismiss();
+    dispatch(setPrintingPalletLabel());
+    navigation.navigate('PrintPriceSign');
   };
 
   const handleCombinePallets = () => {
