@@ -16,7 +16,7 @@ export const savePrinter = async (printer: Printer): Promise<boolean> => {
 };
 
 export const deletePrinter = async (printerId: string): Promise<boolean> => {
-  /* when deleting a printer you need to check if that printer is
+  /* TODO when deleting a printer you need to check if that printer is
   currently set as one of the printers being used and if so remove that printer from the printer setting */
   try {
     await AsyncStorage.removeItem(`printer-${printerId}`);
@@ -48,7 +48,6 @@ export const getPrinterList = async (): Promise<null | Printer[]> => {
 };
 
 export const clearPrinterList = async (): Promise<boolean> => {
-  /* Clear all that start with printer */
   try {
     const printerKeys: string[] = [];
     (await AsyncStorage.getAllKeys()).forEach(key => {

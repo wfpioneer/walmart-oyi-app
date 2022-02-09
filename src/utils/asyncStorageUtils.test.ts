@@ -14,7 +14,7 @@ import {
   setLocationLabelPrinter,
   setPalletLabelPrinter,
   setPriceLabelPrinter
-} from './asycnStorageUtils';
+} from './asyncStorageUtils';
 
 describe.only('Tests Async Storage: ', () => {
   describe('Testing Printer Functions', () => {
