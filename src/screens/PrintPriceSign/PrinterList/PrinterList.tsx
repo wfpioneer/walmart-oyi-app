@@ -7,8 +7,11 @@ import { connect } from 'react-redux';
 import { NavigationProp } from '@react-navigation/native';
 import COLOR from '../../../themes/Color';
 import styles from './PrinterList.style';
-import { deleteFromPrinterList, setSelectedPrinter } from '../../../state/actions/Print';
-import { Printer } from '../../../models/Printer';
+import {
+  clearPortableLabelPrinter, deleteFromPrinterList, setLocationLabelPrinter,
+  setPalletLabelPrinter, setPriceLabelPrinter, setSelectedPrinter
+} from '../../../state/actions/Print';
+import { Printer, PrinterType } from '../../../models/Printer';
 
 const ItemSeparator = () => (
   <View style={styles.separator} />
@@ -20,13 +23,21 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = {
   setSelectedPrinter,
-  deleteFromPrinterList
+  deleteFromPrinterList,
+  setLocationLabelPrinter,
+  setPriceLabelPrinter,
+  setPalletLabelPrinter,
+  clearPortableLabelPrinter
 };
 
 interface PrinterListProps {
   printerList: Printer[];
   deleteFromPrinterList: Function;
   setSelectedPrinter: Function;
+  setLocationLabelPrinter: Function;
+  setPriceLabelPrinter: Function;
+  setPalletLabelPrinter: Function;
+  clearPortableLabelPrinter: Function;
   navigation: NavigationProp<any>;
 }
 
@@ -38,8 +49,21 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
 
   printerListCard = (cardItem: { item: Printer }) => {
     const { item } = cardItem;
+
+    const setPortablePrinterForAllLabels = (printer: Printer) => {
+      this.props.setPriceLabelPrinter(printer);
+      this.props.setLocationLabelPrinter(printer);
+      this.props.setPalletLabelPrinter(printer);
+    };
+
     const onCardClick = () => {
       this.props.setSelectedPrinter(item);
+      // set the printer to all 3 printers in redux if it is a portable printer to mimic current functionality
+      if (item.type === PrinterType.PORTABLE) {
+        setPortablePrinterForAllLabels(item);
+      } else {
+        this.props.clearPortableLabelPrinter();
+      }
       this.props.navigation.goBack();
     };
 

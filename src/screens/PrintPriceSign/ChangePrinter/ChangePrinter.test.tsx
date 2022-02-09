@@ -10,14 +10,14 @@ describe('ChangePrinterScreen', () => {
   const invalidMacAddress = '123456';
   const validMacAddress = '777888999000';
   const duplicatePrinter: Printer[] = [{
-    type: PrinterType.LASER, name: '', desc: '', id: '777888999000'
+    type: PrinterType.LASER, name: '', desc: '', id: '777888999000', labelsAvailable: ['price']
   }, {
-    type: PrinterType.LASER, name: '', desc: '', id: '777888999000'
+    type: PrinterType.LASER, name: '', desc: '', id: '777888999000', labelsAvailable: ['price']
   }];
   const noDuplicatePrinter: Printer[] = [{
-    type: PrinterType.LASER, name: '', desc: '', id: '777888999000'
+    type: PrinterType.LASER, name: '', desc: '', id: '777888999000', labelsAvailable: ['price']
   }, {
-    type: PrinterType.LASER, name: '', desc: '', id: '777888999001'
+    type: PrinterType.LASER, name: '', desc: '', id: '777888999001', labelsAvailable: ['price']
   }];
   it('Renders Error for Printer MacAddress not equal to 12 characters', () => {
     renderer.render(

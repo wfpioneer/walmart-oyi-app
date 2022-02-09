@@ -10,17 +10,20 @@ describe('PrinterList', () => {
     type: PrinterType.LASER,
     name: 'Front desk printer',
     desc: 'Default',
-    id: '123000000000'
+    id: '123000000000',
+    labelsAvailable: ['price']
   }, {
     type: PrinterType.LASER,
     name: 'Invalid printer',
     desc: 'Default',
-    id: '0'
+    id: '0',
+    labelsAvailable: ['price']
   }, {
     type: PrinterType.PORTABLE,
     name: 'Mobile printer',
     desc: 'Default',
-    id: '456000000000'
+    id: '456000000000',
+    labelsAvailable: ['price', 'location', 'pallet']
   }];
 
   const printerList = new PrinterList({

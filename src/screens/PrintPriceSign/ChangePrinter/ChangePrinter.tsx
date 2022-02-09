@@ -58,7 +58,8 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
         type: PrinterType.PORTABLE,
         name: `${strings('PRINT.PORTABLE_PRINTER')} ${macAddress}`,
         desc: '',
-        id: macAddress
+        id: macAddress,
+        labelsAvailable: ['price', 'location', 'pallet']
       };
       trackEventCall('add_to_printer_list', { newPrinter: JSON.stringify(newPrinter) });
       dispatch(addToPrinterList(newPrinter));

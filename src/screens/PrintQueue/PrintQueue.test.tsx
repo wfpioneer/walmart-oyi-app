@@ -3,7 +3,9 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { strings } from '../../locales';
 import { PrintQueueItem, PrinterType } from '../../models/Printer';
-import { PrintQueueScreen, handlePrint, renderPrintItem, printItemApiEffect } from './PrintQueue';
+import {
+  PrintQueueScreen, handlePrint, printItemApiEffect, renderPrintItem
+} from './PrintQueue';
 
 // Something gets into a weird state, and this seems to fix it
 jest.useFakeTimers();
@@ -17,7 +19,8 @@ describe('PrintQueueScreen', () => {
     type: PrinterType.LASER,
     name: 'Front Desk Printer',
     desc: 'Default',
-    id: '000000000000'
+    id: '000000000000',
+    labelsAvailable: ['price']
   };
   const defaultAsyncState = {
     isWaiting: false,
