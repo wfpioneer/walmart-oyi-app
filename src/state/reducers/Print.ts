@@ -5,7 +5,6 @@ import {
   ADD_TO_PRINT_QUEUE,
   Actions,
   CLEAR_LOCATION_PRINT_QUEUE,
-  CLEAR_PORTABLE_LABEL_PRINTER,
   DELETE_FROM_PRINTER_LIST,
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR,
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC,
@@ -188,13 +187,6 @@ export const Print = (state = initialState, action: Actions): StateType => {
       return {
         ...state,
         palletLabelPrinter: action.payload
-      };
-    case CLEAR_PORTABLE_LABEL_PRINTER:
-      return {
-        ...state,
-        palletLabelPrinter: initialState.palletLabelPrinter,
-        locationLabelPrinter: initialState.locationLabelPrinter,
-        priceLabelPrinter: initialState.priceLabelPrinter
       };
     default:
       return state;

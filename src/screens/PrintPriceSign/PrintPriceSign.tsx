@@ -20,7 +20,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getMockItemDetails } from '../../mockData';
 import {
   addMultipleToPrintQueue, addToPrintQueue, addToPrinterList,
-  setPriceLabelPrinter, setSelectedPrinter, setSignType, unsetPrintingLocationLabels, unsetPrintingPalletLabel
+  setPriceLabelPrinter, setSignType, unsetPrintingLocationLabels, unsetPrintingPalletLabel
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
@@ -109,6 +109,7 @@ interface PriceSignProps {
   selectedAisle: LocationIdName;
   selectedSection: LocationIdName;
   selectedZone: LocationIdName;
+  printerList: Printer[];
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: Route<any>;
@@ -122,9 +123,6 @@ interface PriceSignProps {
   >;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   useLayoutHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
-  /* priceLabelPrinter: Printer;
-  locationLabelPrinter: Printer;
-  palletLabelPrinter: Printer; */
 }
 
 const getPrinter = (selectedPrinter: Printer | null, selectedSignType: PrintPaperSize) => (
@@ -216,8 +214,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     scannedEvent, exceptionType, actionCompleted, itemResult, printAPI, printLabelAPI, printPalletAPI,
     sectionsResult, selectedPrinter, selectedSignType, printQueue, printingLocationLabels, printingPalletLabel,
     selectedAisle, selectedSection, selectedZone, dispatch, navigation, route, signQty, palletInfo,
-    setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook
-    /* priceLabelPrinter, locationLabelPrinter, palletLabelPrinter */
+    setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook, printerList
   } = props;
   const {
     itemName, itemNbr, upcNbr, categoryNbr
@@ -233,7 +230,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
 
   useLayoutHook(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
-    if (selectedPrinter?.name === '') {
+    const printListHasLaserPrinter = printerList.some(printer => printer.type === PrinterType.LASER);
+    if (selectedPrinter?.name === '' || !printListHasLaserPrinter) {
       const initialPrinter: Printer = {
         type: PrinterType.LASER,
         name: strings('PRINT.FRONT_DESK'),
@@ -242,8 +240,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         labelsAvailable: ['price']
       };
       dispatch(setPriceLabelPrinter(initialPrinter));
-      dispatch(setSelectedPrinter(initialPrinter));
-      dispatch(addToPrinterList(initialPrinter));
+      if (!printListHasLaserPrinter) dispatch(addToPrinterList(initialPrinter));
     }
   }, []);
 
@@ -631,7 +628,7 @@ const PrintPriceSign = (): JSX.Element => {
   const printPalletAPI = useTypedSelector(state => state.async.printPalletLabel);
   const { palletInfo } = useTypedSelector(state => state.PalletManagement);
   const {
-    selectedSignType, printQueue, printingLocationLabels,
+    selectedSignType, printQueue, printingLocationLabels, printerList,
     printingPalletLabel, priceLabelPrinter, locationLabelPrinter, palletLabelPrinter
   } = useTypedSelector(state => state.Print);
   const { selectedAisle, selectedSection, selectedZone } = useTypedSelector(state => state.Location);
@@ -684,9 +681,7 @@ const PrintPriceSign = (): JSX.Element => {
       useEffectHook={useEffect}
       useLayoutHook={useLayoutEffect}
       palletInfo={palletInfo}
-      /* priceLabelPrinter={priceLabelPrinter}
-      locationLabelPrinter={locationLabelPrinter}
-      palletLabelPrinter={palletLabelPrinter} */
+      printerList={printerList}
     />
   );
 };

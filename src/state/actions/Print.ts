@@ -106,10 +106,6 @@ export const setPalletLabelPrinter = (printer : Printer) => ({
   payload: printer
 } as const);
 
-export const clearPortableLabelPrinter = () => ({
-  type: CLEAR_PORTABLE_LABEL_PRINTER
-} as const);
-
 export type Actions =
 | ReturnType<typeof setSelectedPrinter>
 | ReturnType<typeof setSignType>
@@ -129,4 +125,3 @@ export type Actions =
 | ReturnType<typeof setPriceLabelPrinter>
 | ReturnType<typeof setLocationLabelPrinter>
 | ReturnType<typeof setPalletLabelPrinter>
-| ReturnType<typeof clearPortableLabelPrinter>
