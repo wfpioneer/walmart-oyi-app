@@ -9,7 +9,7 @@ import styles from './LocationItemCard.style';
 import { COLOR } from '../../themes/Color';
 import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
 import { LocationType } from '../../models/LocationType';
-import { setScannedEvent } from '../../state/actions/Global';
+import { resetScannedEvent } from '../../state/actions/Global';
 
 interface LocationItemCardProp {
   location: string
@@ -50,7 +50,7 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
         // @ts-ignore
         dispatch(mapLocTypeToActionCreator[locationType](locationId, locationName));
         if (locationType === LocationType.SECTION) {
-          dispatch(setScannedEvent({ type: 'sectionId', value: locationId.toString() }));
+          dispatch(resetScannedEvent());
         }
         navigator.navigate(destinationScreen);
       }}

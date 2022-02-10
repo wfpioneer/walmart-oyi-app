@@ -150,39 +150,53 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
     data={
       Array [
         Object {
+          "createDate": "2022-01-05T12:04:50.000Z",
+          "expirationDate": "12/31/2022",
           "id": 1,
           "items": Array [
             Object {
               "itemDesc": "Nature Valley Honey Nut Granola Bars",
               "itemNbr": 500252,
+              "locationType": 8,
               "price": 0,
+              "upcNbr": "750500252570",
             },
             Object {
               "itemDesc": "Cabbage",
               "itemNbr": 123456,
+              "locationType": 8,
               "price": 0,
+              "upcNbr": "123456000789",
             },
           ],
           "statusCode": 200,
         },
         Object {
+          "createDate": "2022-01-05T12:04:50.000Z",
+          "expirationDate": "12/31/2022",
           "id": 123,
           "items": Array [
             Object {
               "itemDesc": "Nature Valley Granola Bars",
               "itemNbr": 456789,
+              "locationType": 8,
               "price": 1298,
+              "upcNbr": "456789000123",
             },
           ],
           "statusCode": 200,
         },
         Object {
+          "createDate": "2022-01-05T12:04:50.000Z",
+          "expirationDate": "12/31/2022",
           "id": 456,
           "items": Array [
             Object {
               "itemDesc": "MM电池5号24粒.",
               "itemNbr": 123789,
+              "locationType": 8,
               "price": 29.9,
+              "upcNbr": "123789000456",
             },
           ],
           "statusCode": 200,
@@ -228,17 +242,23 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
     data={
       Array [
         Object {
+          "createDate": "2022-01-05T12:04:50.000Z",
+          "expirationDate": "12/31/2022",
           "id": 1,
           "items": Array [
             Object {
               "itemDesc": "Nature Valley Honey Nut Granola Bars",
               "itemNbr": 500252,
+              "locationType": 8,
               "price": 0,
+              "upcNbr": "750500252570",
             },
             Object {
               "itemDesc": "Cabbage",
               "itemNbr": 123456,
+              "locationType": 8,
               "price": 0,
+              "upcNbr": "123456000789",
             },
           ],
           "palletCreateTS": "2021-01-01",
@@ -246,12 +266,16 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
           "statusCode": 200,
         },
         Object {
+          "createDate": "2022-01-05T12:04:50.000Z",
+          "expirationDate": "12/31/2022",
           "id": 123,
           "items": Array [
             Object {
               "itemDesc": "Nature Valley Granola Bars",
               "itemNbr": 456789,
+              "locationType": 8,
               "price": 1298,
+              "upcNbr": "456789000123",
             },
           ],
           "palletCreateTS": "2021-01-10",
@@ -259,12 +283,16 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
           "statusCode": 200,
         },
         Object {
+          "createDate": "2022-01-05T12:04:50.000Z",
+          "expirationDate": "12/31/2022",
           "id": 456,
           "items": Array [
             Object {
               "itemDesc": "MM电池5号24粒.",
               "itemNbr": 123789,
+              "locationType": 8,
               "price": 29.9,
+              "upcNbr": "123789000456",
             },
           ],
           "palletCreateTS": "1999-10-10",

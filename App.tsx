@@ -12,6 +12,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { Provider } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
+import Toast from 'react-native-toast-message';
 import { MainNavigator } from './src/navigators/MainNavigator';
 import { setI18nConfig } from './src/locales';
 import { ActivityModalComponent } from './src/screens/Modal/Modal';
@@ -20,7 +21,8 @@ import { initialize } from './src/utils/AppCenterTool';
 import store from './src/state/index';
 import { SnackBar } from './src/screens/SnackBar/SnackBar';
 
-declare let global: {HermesInternal: null | {}};
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+declare let global: { HermesInternal: null | {} };
 
 initialize();
 
@@ -41,6 +43,8 @@ export default class App extends React.PureComponent {
           <ActivityModalComponent />
           <SnackBar />
           <MainNavigator />
+          {/* TODO Replace All instances of SnackBar with RN-Toast-Message */}
+          <Toast />
         </AppRoot>
       </Provider>
     );

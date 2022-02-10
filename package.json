@@ -1,6 +1,6 @@
 {
   "name": "OYI",
-  "version": "4.2.1",
+  "version": "4.3.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^2.4.1",
+    "@react-native-async-storage/async-storage": "^1.15.17",
     "@react-native-community/masked-view": "^0.1.7",
     "@react-native-picker/picker": "2.2.0",
     "@react-navigation/bottom-tabs": "^5.11.11",
@@ -48,6 +49,7 @@
     "react-native-svg": "^12.1.0",
     "react-native-svg-charts": "^5.4.0",
     "react-native-tab-view": "^3.0.1",
+    "react-native-toast-message": "^2.1.1",
     "react-native-vector-icons": "^8.1.0",
     "react-native-wm-barcode": "^2.29.0",
     "react-native-wmsso": "^1.4.6",

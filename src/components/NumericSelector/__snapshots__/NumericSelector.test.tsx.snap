@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddZoneScreen NumericSelector minus button is disabled if value is less than or equal to minValue 1`] = `
+exports[`Numeric selector component NumericSelector minus button is disabled if value is less than or equal to minValue 1`] = `
 <View
   style={
     Array [
@@ -36,7 +36,7 @@ exports[`AddZoneScreen NumericSelector minus button is disabled if value is less
   <TextInput
     allowFontScaling={true}
     keyboardType="numeric"
-    onChangeText={[MockFunction]}
+    onChangeText={[Function]}
     rejectResponderTermination={true}
     style={
       Object {
@@ -47,9 +47,8 @@ exports[`AddZoneScreen NumericSelector minus button is disabled if value is less
       }
     }
     underlineColorAndroid="transparent"
-  >
-    10
-  </TextInput>
+    value="10"
+  />
   <IconButton
     backgroundColor="#0071e9"
     disabled={false}
@@ -69,7 +68,7 @@ exports[`AddZoneScreen NumericSelector minus button is disabled if value is less
 </View>
 `;
 
-exports[`AddZoneScreen NumericSelector plus button is disabled if value is greater than or equal to maxValue 1`] = `
+exports[`Numeric selector component NumericSelector plus button is disabled if value is greater than or equal to maxValue 1`] = `
 <View
   style={
     Array [
@@ -105,7 +104,7 @@ exports[`AddZoneScreen NumericSelector plus button is disabled if value is great
   <TextInput
     allowFontScaling={true}
     keyboardType="numeric"
-    onChangeText={[MockFunction]}
+    onChangeText={[Function]}
     rejectResponderTermination={true}
     style={
       Object {
@@ -116,9 +115,8 @@ exports[`AddZoneScreen NumericSelector plus button is disabled if value is great
       }
     }
     underlineColorAndroid="transparent"
-  >
-    10
-  </TextInput>
+    value="10"
+  />
   <IconButton
     backgroundColor="#0071e9"
     disabled={true}
@@ -138,7 +136,7 @@ exports[`AddZoneScreen NumericSelector plus button is disabled if value is great
 </View>
 `;
 
-exports[`AddZoneScreen NumericSelector with invalid input 1`] = `
+exports[`Numeric selector component NumericSelector with invalid input 1`] = `
 <View
   style={
     Array [
@@ -174,7 +172,7 @@ exports[`AddZoneScreen NumericSelector with invalid input 1`] = `
   <TextInput
     allowFontScaling={true}
     keyboardType="numeric"
-    onChangeText={[MockFunction]}
+    onChangeText={[Function]}
     rejectResponderTermination={true}
     style={
       Object {
@@ -185,9 +183,8 @@ exports[`AddZoneScreen NumericSelector with invalid input 1`] = `
       }
     }
     underlineColorAndroid="transparent"
-  >
-    10
-  </TextInput>
+    value="10"
+  />
   <IconButton
     backgroundColor="#0071e9"
     disabled={false}
@@ -207,7 +204,7 @@ exports[`AddZoneScreen NumericSelector with invalid input 1`] = `
 </View>
 `;
 
-exports[`AddZoneScreen NumericSelector with valid input 1`] = `
+exports[`Numeric selector component NumericSelector with valid input 1`] = `
 <View
   style={
     Array [
@@ -243,7 +240,7 @@ exports[`AddZoneScreen NumericSelector with valid input 1`] = `
   <TextInput
     allowFontScaling={true}
     keyboardType="numeric"
-    onChangeText={[MockFunction]}
+    onChangeText={[Function]}
     rejectResponderTermination={true}
     style={
       Object {
@@ -254,9 +251,8 @@ exports[`AddZoneScreen NumericSelector with valid input 1`] = `
       }
     }
     underlineColorAndroid="transparent"
-  >
-    10
-  </TextInput>
+    value="10"
+  />
   <IconButton
     backgroundColor="#0071e9"
     disabled={false}

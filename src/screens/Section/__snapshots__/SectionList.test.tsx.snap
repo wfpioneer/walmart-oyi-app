@@ -14,6 +14,8 @@ exports[`Rendering Remove Aisle responses Renders the success response from Remo
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
@@ -78,6 +80,8 @@ exports[`Rendering Remove Aisle responses Renders the waiting for response from 
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
@@ -1134,6 +1138,8 @@ exports[`Test Section List Renders Manual Scan Component when isManualScanEnable
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
@@ -1201,6 +1207,8 @@ exports[`Test Section List Renders Section Screen with Data 1`] = `
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
@@ -1292,6 +1300,8 @@ exports[`Test Section List Renders Section Screen with no-section-message when g
         "value": null,
       }
     }
+    cancelText={null}
+    confirmText={null}
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}

@@ -43,7 +43,11 @@ export default {
     BARCODE_SCAN_ERROR: 'Este formato de código de barras no es válido',
     ITEM: 'Artículo',
     ITEMS: 'Artículos',
-    TOOLS: 'Herramientas'
+    TOOLS: 'Herramientas',
+    CURRENCY_SYMBOL: '$',
+    UNDO: 'Undo', // TODO spanish Translation
+    YES: 'Si', // TODO spanish Translation
+    NO: 'No' // TODO spanish Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -106,13 +110,15 @@ export default {
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consol',
     FLY_CLOUD_QTY: 'Fly Cloud Qty', // Leaving This as is until MX has a need for Cloud Qty
-    ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas'
+    ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas',
+    ITEM_NUMBER: 'Item Number' // TODO Spanish translation
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
     QUEUE_TITLE: 'Cola de Impresión',
     CHANGE_TITLE: 'Impresoras',
     LOCATION_TITLE: 'Imprimir Etiquetas de Ubicación',
+    PALLET_TITLE: 'Print pallet label', // TODO Spanish translation
     PRICE_SIGN: 'Imprimir la señalización',
     COPY_QTY: 'Número de Copias',
     COPIES: 'Copias',
@@ -136,12 +142,42 @@ export default {
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Spanish translation
+    PALLET_SUCCESS: 'Etiqueta de Pallet impresa correctamente',
     DUPLICATE_PRINTER: 'Una impresora ya existe',
     SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
   },
   PALLET: {
-    ENTER_PALLET_ID: 'Type a pallet ID', // TODO Spanish translation
-    SCAN_PALLET: 'Scan a pallet' // TODO Spanish translation
+    PALLET_MANAGEMENT: 'Administración de Pallet',
+    ENTER_PALLET_ID: 'Ingresa el Pallet ID',
+    SCAN_PALLET: 'Escanea un pallet',
+    PRINT_PALLET: 'Imprimir pallet',
+    COMBINE_PALLETS: 'Combinar pallets',
+    CLEAR_PALLET: 'Vaciar pallets',
+    MANAGE_PALLET: 'Administrar Pallet',
+    PALLET_ID: 'Pallet ID',
+    EXPIRATION_DATE: 'Fecha de caducidad',
+    SCAN_INSTRUCTIONS: 'Escanea el UPC para agregar artículos',
+    ITEM_DELETE: '1 eliminación de artículo pendiente',
+    X_ITEMS_DELETE: '%{nbrOfItems} eliminación de artículos pendientes',
+    PALLET_DETAILS_ERROR: 'Error: incapaz de encontrar Pallet',
+    PALLET_MERGE: 'será combinado con',
+    CANNOT_HAVE_NEGATIVE_QTY: 'El artículo no puede teener cantidad negativa',
+    ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Spanish translation
+    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC', // TODO Spanish translation
+    PALLET_UPC_NOT_FOUND: 'El pallet o un UPC no se encontraron',
+    ADD_UPC_SUCCESS: 'Todos los artículos se agregaron satisfactoriamente al pallet',
+    ADD_UPC_ERROR: 'Error agregando artículos al pallet',
+    COMBINE_PALLET_SUCCESS: 'Pallets combinados con éxito',
+    COMBINE_PALLET_FAILURE: 'Falló la combinación de pallets, por favor inténtalo de nuevo',
+    PALLET_EXISTS: 'Este palles ya ha sido escaneado',
+    PALLET_EXISTS_AS_TARGET: 'This pallet is already the target pallet', // TODO MX translation
+    PALLET_DOESNT_EXIST: 'El pallet escaneado no existe',
+    SAVE_PALLET_SUCCESS: 'Pallet update successful', // TODO Spanish translation
+    SAVE_PALLET_PARTIAL: 'Pallet update partially successful', // TODO Spanish translation
+    SAVE_PALLET_FAILURE: 'Pallet update failed', // TODO Spanish translation
+    CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
+    CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
+    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared' // TODO Spanish translation
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
