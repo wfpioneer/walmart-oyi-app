@@ -56,7 +56,7 @@ jest.mock('@react-navigation/native', () => {
 });
 const mockValidateSession = jest
   .fn()
-  .mockImplementation(() => new Promise<void>(resolve => resolve()));
+  .mockImplementation(() => Promise.resolve());
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -535,17 +535,17 @@ describe('Test Location Tabs', (): void => {
     const mockSetDisplayClearConfirmation = jest.fn();
     const mockDispatch = jest.fn();
     const mockGoBack = jest.fn();
+    const mockIsFocused2 = jest.fn(() => true);
+    const mockNavigate2 = jest.fn();
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     navigationProp = {
-      ...navigationProp, isFocused: mockIsFocused, navigate: mockNavigate, goBack: mockGoBack
+      isFocused: mockIsFocused2, navigate: mockNavigate2, goBack: mockGoBack
     };
 
     afterEach(() => {
       jest.clearAllMocks();
-
-      // doesn't seem to clear mocks not defined in the current describe
-      mockIsFocused.mockClear();
-      mockNavigate.mockClear();
     });
 
     it('ensures handleClearSection works properly', () => {
@@ -561,19 +561,18 @@ describe('Test Location Tabs', (): void => {
       expect(mockSetDisplayClearConfirmation).toBeCalledTimes(1);
     });
 
-    it('ensures getSectionDetailsEffect works properly on success', () => {
+    // async done is needed to test .then() of validateSession
+    it('ensures getSectionDetailsEffect works properly on success', async done => {
+      const doneDispatch = jest.fn(() => done());
       const somethingScanned = {
         type: 'CODE-128',
         value: '12345'
       };
-      getSectionDetailsEffect(mockValidateSession, routeProp, somethingScanned, navigationProp, mockDispatch);
+      getSectionDetailsEffect(mockValidateSession, routeProp, somethingScanned, navigationProp, doneDispatch);
 
       expect(mockValidateSession).toBeCalledTimes(1);
-      // Unsure of how to make promise return
-      // expect(mockIsFocused).toBeCalledTimes(1);
-      // expect(mockDispatch).toBeCalledTimes(1);
-      // expect(mockNavigate).toBeCalledTimes(1);
-      // expect(mockNavigate).toBeCalledWith('FloorDetails');
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(doneDispatch).toBeCalledTimes(1);
     });
 
     it('ensures clearSectionApiEffect works properly on success, sales floor', () => {
@@ -599,7 +598,7 @@ describe('Test Location Tabs', (): void => {
         section,
         mockSetDisplayClearConfirmation
       );
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockIsFocused2).toBeCalledTimes(1);
       // called thrice because of handleClearModalClose
       expect(mockDispatch).toBeCalledTimes(3);
       expect(Toast.show).toBeCalledTimes(1);
@@ -629,7 +628,7 @@ describe('Test Location Tabs', (): void => {
         section,
         mockSetDisplayClearConfirmation
       );
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockIsFocused2).toBeCalledTimes(1);
       // called thrice because of handleClearModalClose
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
@@ -659,7 +658,7 @@ describe('Test Location Tabs', (): void => {
         section,
         mockSetDisplayClearConfirmation
       );
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockIsFocused2).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(0);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
@@ -667,7 +666,7 @@ describe('Test Location Tabs', (): void => {
 
     it('ensures removeSectionApiEffect works properly on success', () => {
 
-    })
+    });
   });
 
   // TODO Fix unmounted component no-op error for testing useEffect Hook
