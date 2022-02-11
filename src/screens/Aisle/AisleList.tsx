@@ -161,6 +161,18 @@ export const AisleScreen = (props: AisleProps): JSX.Element => {
   }, []);
 
   useEffectHook(() => {
+    if (navigation.isFocused()) {
+      if (!activityModal) {
+        if (deleteZoneApi.isWaiting) {
+          dispatch(showActivityModal());
+        }
+      } else if (!deleteZoneApi.isWaiting) {
+        dispatch(hideActivityModal());
+      }
+    }
+  }, [activityModal, deleteZoneApi]);
+
+  useEffectHook(() => {
     // on api success
     if (!getAllAisles.isWaiting && getAllAisles.result) {
       trackEventCall('get_aisles_success', { duration: moment().valueOf() - getAislesApiStart });
@@ -190,18 +202,6 @@ export const AisleScreen = (props: AisleProps): JSX.Element => {
     setDisplayConfirmation(false);
     dispatch(deleteZone(zoneId));
   };
-
-  useEffectHook(() => {
-    if (navigation.isFocused()) {
-      if (!activityModal) {
-        if (deleteZoneApi.isWaiting) {
-          dispatch(showActivityModal());
-        }
-      } else if (!deleteZoneApi.isWaiting) {
-        dispatch(hideActivityModal());
-      }
-    }
-  }, [activityModal, deleteZoneApi]);
 
   if (getAllAisles.isWaiting) {
     return (

@@ -345,6 +345,10 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     dispatch
   ), [navigation, scannedEvent]);
 
+  useEffectHook(() => activityModalEffect(
+    navigation, dispatch, activityModal, removeSectionApi, clearSectionApi
+  ), [activityModal, removeSectionApi, clearSectionApi]);
+
   // Clear Section API
   useEffectHook(() => clearSectionApiEffect(
     dispatch, navigation, clearSectionApi,
@@ -355,10 +359,6 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   useEffectHook(() => removeSectionApiEffect(
     navigation, dispatch, removeSectionApi, setDisplayRemoveConfirmation
   ), [removeSectionApi]);
-
-  useEffectHook(() => activityModalEffect(
-    navigation, dispatch, activityModal, removeSectionApi, clearSectionApi
-  ), [activityModal, removeSectionApi, clearSectionApi]);
 
   // Call get section details on select from list
   // adjusted to work from loc management state instead of scanned

@@ -332,6 +332,10 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
     activityModal
   } = props;
 
+  useEffectHook(() => activityModalEffect(
+    navigation, activityModal, deleteAisleApi, clearAisleApi, dispatch
+  ), [activityModal, deleteAisleApi, clearAisleApi]);
+
   useEffectHook(() => deleteAisleApiEffect(
     navigation,
     deleteAisleApi,
@@ -380,10 +384,6 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
     apiStart,
     trackEventCall
   ), [getAllSections]);
-
-  useEffectHook(() => activityModalEffect(
-    navigation, activityModal, deleteAisleApi, clearAisleApi, dispatch
-  ), [activityModal, deleteAisleApi, clearAisleApi]);
 
   if (getAllSections.isWaiting) {
     return (
