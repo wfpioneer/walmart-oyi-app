@@ -34,6 +34,11 @@ export interface PrintLocationList {
   qty: number;
   printerMACAddress: string;
 }
+export interface PrintPalletList {
+  palletId: number;
+  qty: number;
+  printerMACAddress: string;
+}
 export interface PrintItemList {
   itemNbr: number;
   qty: number;

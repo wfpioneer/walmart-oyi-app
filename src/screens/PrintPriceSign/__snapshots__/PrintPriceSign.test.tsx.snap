@@ -580,6 +580,82 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
 </ForwardRef(SafeAreaView)>
 `;
 
+exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Pallet Label Service response   1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PRINT.PLEASE_CHOOSE_PORTABLE" translation]
+      </Text>
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={20}
+        onPress={[Function]}
+        radius={5}
+        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={14}
+        titleFontWeight="normal"
+        type={3}
+        width={-1}
+      />
+    </View>
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "elevation": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 20,
+        "paddingHorizontal": 4,
+        "paddingTop": 8,
+      }
+    }
+  >
+    <ActivityIndicator
+      animating={true}
+      color="#0071e9"
+      hidesWhenStopped={true}
+      size="large"
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
 exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Sign Service response   1`] = `
 <ForwardRef(SafeAreaView)
   style={
@@ -1843,13 +1919,77 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
           "paddingHorizontal": 4,
         }
       }
-      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
-      titleColor="#0071e9"
+      title="[missing \\"en.PRINT.PRINT\\" translation]"
+      titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
-      type={2}
+      type={1}
       width={-1}
     />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing the pallets 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PRINT.PLEASE_CHOOSE_PORTABLE" translation]
+      </Text>
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={20}
+        onPress={[Function]}
+        radius={5}
+        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={14}
+        titleFontWeight="normal"
+        type={3}
+        width={-1}
+      />
+    </View>
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "elevation": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 20,
+        "paddingHorizontal": 4,
+        "paddingTop": 8,
+      }
+    }
+  >
     <Button
       backgroundColor="#0071e9"
       disabled={true}
@@ -2050,25 +2190,6 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
       }
     }
   >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={true}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "flex": 1,
-          "paddingHorizontal": 4,
-        }
-      }
-      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
-      titleColor="#0071e9"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={2}
-      width={-1}
-    />
     <Button
       backgroundColor="#0071e9"
       disabled={true}

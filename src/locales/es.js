@@ -118,6 +118,7 @@ export default {
     QUEUE_TITLE: 'Cola de Impresión',
     CHANGE_TITLE: 'Impresoras',
     LOCATION_TITLE: 'Imprimir Etiquetas de Ubicación',
+    PALLET_TITLE: 'Print pallet label', // TODO Spanish translation
     PRICE_SIGN: 'Imprimir la señalización',
     COPY_QTY: 'Número de Copias',
     COPIES: 'Copias',
@@ -141,6 +142,7 @@ export default {
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
     LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Spanish translation
+    PALLET_SUCCESS: 'Etiqueta de Pallet impresa correctamente',
     DUPLICATE_PRINTER: 'Una impresora ya existe',
     SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
   },

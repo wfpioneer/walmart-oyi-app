@@ -16,10 +16,22 @@ const Stack = createStackNavigator();
 
 const PrintPriceSignNavigator = () => {
   const navigation = useNavigation();
-  const { printingLocationLabels } = useTypedSelector(state => state.Print);
+  const { printingLocationLabels, printingPalletLabel } = useTypedSelector(state => state.Print);
 
   const navigateBack = () => {
     navigation.goBack();
+  };
+
+  const getHeaderTitle = () => {
+    let title;
+    if (printingLocationLabels) {
+      title = strings('PRINT.LOCATION_TITLE');
+    } else if (printingPalletLabel) {
+      title = strings('PRINT.PALLET_TITLE');
+    } else {
+      title = strings('PRINT.MAIN_TITLE');
+    }
+    return title;
   };
 
   return (
@@ -34,7 +46,7 @@ const PrintPriceSignNavigator = () => {
         name="PrintPriceSignScreen"
         component={PrintPriceSign}
         options={{
-          headerTitle: !printingLocationLabels ? strings('PRINT.MAIN_TITLE') : strings('PRINT.LOCATION_TITLE'),
+          headerTitle: getHeaderTitle(),
           headerTitleAlign: 'left',
           headerTitleStyle: styles.headerTitle,
           headerBackTitleVisible: false,

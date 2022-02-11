@@ -37,7 +37,6 @@ interface SectionDetailsProps {
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
-  scannedEvent: { type: string, value: string };
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
   selectedItem: SectionDetailsItem | null;
@@ -111,7 +110,6 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
     navigation,
     trackEventCall,
     useEffectHook,
-    scannedEvent,
     displayConfirmation,
     setDisplayConfirmation,
     selectedItem,
@@ -160,7 +158,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
     if (!deleteLocationApi.isWaiting && deleteLocationApi.result) {
       setDisplayConfirmation(false);
       dispatch({ type: DELETE_LOCATION.RESET });
-      dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
+      dispatch(getSectionDetails({ sectionId: selectedSection.id.toString() }));
     }
 
     // on api failure
@@ -245,7 +243,6 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
 const SectionDetails = (): JSX.Element => {
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
   const deleteLocationApi = useTypedSelector(state => state.async.deleteLocation);
-  const { scannedEvent } = useTypedSelector(state => state.Global);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {
@@ -282,7 +279,6 @@ const SectionDetails = (): JSX.Element => {
           navigation={navigation}
           trackEventCall={trackEvent}
           useEffectHook={useEffect}
-          scannedEvent={scannedEvent}
           displayConfirmation={displayConfirmation}
           setDisplayConfirmation={setDisplayConfirmation}
           selectedItem={selectedItem}
