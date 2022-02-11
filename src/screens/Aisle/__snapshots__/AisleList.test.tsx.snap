@@ -2,96 +2,25 @@
 
 exports[`Aisle List basic render tests Renders Aisle Screen with Data 1`] = `
 <View>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 5,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_ZONE_CONFIRMATION" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 14,
-              "paddingBottom": 15,
-              "paddingHorizontal": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
   <LocationHeader
     details="6 [missing \\"en.LOCATION.AISLES\\" translation]"
     isDisabled={false}
@@ -156,96 +85,25 @@ exports[`Aisle List basic render tests Renders Aisle Screen with Data 1`] = `
 
 exports[`Aisle List basic render tests Renders Aisle Screen with no-aisles-message when getAisles response is 204 1`] = `
 <View>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 5,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_ZONE_CONFIRMATION" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 14,
-              "paddingBottom": 15,
-              "paddingHorizontal": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
   <LocationHeader
     details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
     isDisabled={false}
@@ -277,96 +135,25 @@ exports[`Aisle List basic render tests Renders Aisle Screen with no-aisles-messa
 
 exports[`Aisle List basic render tests Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
 <View>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={false}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 5,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_ZONE_CONFIRMATION" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 14,
-              "paddingBottom": 15,
-              "paddingHorizontal": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
   <LocationManualScan
     keyboardType="default"
   />
@@ -401,96 +188,25 @@ exports[`Aisle List basic render tests Renders Manual Scan Component when isManu
 
 exports[`Aisle List basic render tests renders correctly with remove zone modal after api errors 1`] = `
 <View>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": "timeout",
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={true}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 5,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_ZONE_CONFIRMATION" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 14,
-              "paddingBottom": 15,
-              "paddingHorizontal": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.RETRY\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
   <LocationManualScan
     keyboardType="default"
   />
@@ -525,96 +241,25 @@ exports[`Aisle List basic render tests renders correctly with remove zone modal 
 
 exports[`Aisle List basic render tests renders correctly with remove zone modal preconfirm 1`] = `
 <View>
-  <CustomModalComponent
-    animationType="none"
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
     isVisible={true}
-    modalType="Error"
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
     onClose={[Function]}
-  >
-    <React.Fragment>
-      <View
-        style={
-          Object {
-            "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "paddingBottom": 5,
-              "paddingHorizontal": 15,
-              "paddingTop": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_ZONE_CONFIRMATION" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 14,
-              "paddingBottom": 15,
-              "paddingHorizontal": 15,
-              "textAlign": "center",
-            }
-          }
-        >
-          [missing "en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS" translation]
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignContent": "space-around",
-            "flexDirection": "row",
-            "width": "100%",
-          }
-        }
-      >
-        <Button
-          backgroundColor="#D6512D"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-        <Button
-          backgroundColor="#0071e9"
-          disabled={false}
-          height={45}
-          onPress={[Function]}
-          radius={5}
-          style={
-            Object {
-              "flex": 1,
-              "paddingHorizontal": 10,
-            }
-          }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
-          titleColor="#ffffffff"
-          titleFontSize={16}
-          titleFontWeight="normal"
-          type={1}
-          width={-1}
-        />
-      </View>
-    </React.Fragment>
-  </CustomModalComponent>
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
   <LocationManualScan
     keyboardType="default"
   />
@@ -649,26 +294,25 @@ exports[`Aisle List basic render tests renders correctly with remove zone modal 
 
 exports[`Aisle List basic render tests renders correctly with remove zone modal waiting for api 1`] = `
 <View>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={true}
-    modalType="Error"
-    onClose={[Function]}
-  >
-    <ActivityIndicator
-      animating={true}
-      color="#0071e9"
-      hidesWhenStopped={true}
-      size="large"
-      style={
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        }
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": true,
+        "result": null,
+        "value": null,
       }
-    />
-  </CustomModalComponent>
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
   <LocationManualScan
     keyboardType="default"
   />
