@@ -8,10 +8,7 @@ jest.mock('../../../utils/asyncStorageUtils', () => {
   const asycnUtils = jest.requireActual('../../../utils/asyncStorageUtils');
   return {
     ...asycnUtils,
-    setLocationLabelPrinter: jest.fn(),
-    savePrinter: jest.fn(),
-    setPalletLabelPrinter: jest.fn(),
-    setPriceLabelPrinter: jest.fn()
+    savePrinter: jest.fn()
   };
 });
 const navigationProp: NavigationProp<any> = {
@@ -53,8 +50,6 @@ describe('ChangePrinterScreen', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           printers={[]}
-          printingLocationLabels=""
-          printingPalletLabel={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -70,8 +65,6 @@ describe('ChangePrinterScreen', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           printers={[]}
-          printingLocationLabels=""
-          printingPalletLabel={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -87,8 +80,6 @@ describe('ChangePrinterScreen', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           printers={duplicatePrinter}
-          printingLocationLabels=""
-          printingPalletLabel={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -104,8 +95,7 @@ describe('ChangePrinterScreen', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           printers={noDuplicatePrinter}
-          printingLocationLabels=""
-          printingPalletLabel={false}
+
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -126,59 +116,21 @@ describe('ChangePrinterScreen', () => {
         mockTrackEvent,
         mockDispatch,
         navigationProp,
-        false,
-        ''
       );
       expect(mockDispatch).not.toHaveBeenCalled();
       expect(mockTrackEvent).not.toHaveBeenCalled();
       expect(asyncPrinter.savePrinter).not.toHaveBeenCalled();
-      expect(asyncPrinter.setPriceLabelPrinter).not.toHaveBeenCalled();
     });
-    it('submitMacAddress calls setPalletLabelPrinter if printPalletLabel is true', () => {
-      const palletLabelTrue = true;
+    it('submitMacAddress calls savePrinter dispatch functions if the macAddress length is 12', () => {
       submitMacAddress(
         validMacAddress,
         mockTrackEvent,
         mockDispatch,
         navigationProp,
-        palletLabelTrue,
-        ''
       );
       expect(mockDispatch).toHaveBeenCalledTimes(1);
       expect(mockTrackEvent).toHaveBeenCalledTimes(1);
       expect(asyncPrinter.savePrinter).toHaveBeenCalled();
-      expect(asyncPrinter.setPalletLabelPrinter).toHaveBeenCalledTimes(1);
-      expect(navigationProp.goBack).toHaveBeenCalled();
-    });
-    it('submitMacAddress calls setLocationLabelPrinter if printingLocationLabels is not empty', () => {
-      const locationLabel = 'AISLE';
-      submitMacAddress(
-        validMacAddress,
-        mockTrackEvent,
-        mockDispatch,
-        navigationProp,
-        false,
-        locationLabel
-      );
-      expect(mockDispatch).toHaveBeenCalledTimes(1);
-      expect(mockTrackEvent).toHaveBeenCalledTimes(1);
-      expect(asyncPrinter.savePrinter).toHaveBeenCalled();
-      expect(asyncPrinter.setLocationLabelPrinter).toHaveBeenCalledTimes(1);
-      expect(navigationProp.goBack).toHaveBeenCalled();
-    });
-    it('submitMacAddress calls setPriceLabelPrinter if both print PalletLabel and LocationLabels are falsy', () => {
-      submitMacAddress(
-        validMacAddress,
-        mockTrackEvent,
-        mockDispatch,
-        navigationProp,
-        false,
-        ''
-      );
-      expect(mockDispatch).toHaveBeenCalledTimes(1);
-      expect(mockTrackEvent).toHaveBeenCalledTimes(1);
-      expect(asyncPrinter.savePrinter).toHaveBeenCalled();
-      expect(asyncPrinter.setPriceLabelPrinter).toHaveBeenCalledTimes(1);
       expect(navigationProp.goBack).toHaveBeenCalled();
     });
   });

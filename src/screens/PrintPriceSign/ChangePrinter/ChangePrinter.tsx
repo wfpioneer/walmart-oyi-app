@@ -14,12 +14,7 @@ import { Printer, PrinterType } from '../../../models/Printer';
 import { setManualScan, setScannedEvent } from '../../../state/actions/Global';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
-import {
-  savePrinter,
-  setLocationLabelPrinter,
-  setPalletLabelPrinter,
-  setPriceLabelPrinter
-} from '../../../utils/asyncStorageUtils';
+import { savePrinter } from '../../../utils/asyncStorageUtils';
 
 interface ChangePrinterProps {
   macAddress: string;
@@ -29,8 +24,6 @@ interface ChangePrinterProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   trackEventCall: (eventName: string, params?: any) => void;
   printers: Printer[];
-  printingLocationLabels: string;
-  printingPalletLabel: boolean;
 }
 
 export const submitMacAddress = (
@@ -38,8 +31,6 @@ export const submitMacAddress = (
   trackEventCall:(eventName: string, params?: any) => void,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  printingPalletLabel: boolean,
-  printingLocationLabels: string
 ): void => {
   if (macAddress.length === 12) {
     const newPrinter: Printer = {
@@ -53,14 +44,6 @@ export const submitMacAddress = (
     });
     dispatch(addToPrinterList(newPrinter));
     savePrinter(newPrinter);
-
-    if (printingPalletLabel) {
-      setPalletLabelPrinter(newPrinter);
-    } else if (printingLocationLabels !== '') {
-      setLocationLabelPrinter(newPrinter);
-    } else {
-      setPriceLabelPrinter(newPrinter);
-    }
     navigation.goBack();
   }
 };
@@ -76,9 +59,7 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
     navigation,
     useEffectHook,
     trackEventCall,
-    printers,
-    printingLocationLabels,
-    printingPalletLabel
+    printers
   } = props;
   const macRegex = /^[0-9a-fA-F]{12}/;
 
@@ -107,7 +88,7 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
         selectionColor={COLOR.MAIN_THEME_COLOR}
         placeholder={strings('PRINT.MAC_ADDRESS')}
         onSubmitEditing={() => submitMacAddress(
-          macAddress, trackEventCall, dispatch, navigation, printingPalletLabel, printingLocationLabels
+          macAddress, trackEventCall, dispatch, navigation,
         )}
       />
       {macAddress.length > 0 && macAddress.length !== 12 && (
@@ -148,7 +129,7 @@ export const ChangePrinter = (): JSX.Element => {
   const [macAddress, updateMacAddress] = useState('');
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { printerList, printingLocationLabels, printingPalletLabel } = useTypedSelector(state => state.Print);
+  const { printerList } = useTypedSelector(state => state.Print);
   return (
     <ChangePrinterScreen
       macAddress={macAddress}
@@ -158,8 +139,6 @@ export const ChangePrinter = (): JSX.Element => {
       useEffectHook={useEffect}
       trackEventCall={trackEvent}
       printers={printerList}
-      printingLocationLabels={printingLocationLabels}
-      printingPalletLabel={printingPalletLabel}
     />
   );
 };
