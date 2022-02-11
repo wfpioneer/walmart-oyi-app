@@ -4,6 +4,8 @@ import React, {
 import {
   EmitterSubscription,
   FlatList,
+  Keyboard,
+  KeyboardAvoidingView,
   Text,
   TouchableOpacity,
   View
@@ -501,8 +503,18 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     handleUpdateItems(items, id, dispatch);
   };
 
+  const handleUnhandledTouches = () => {
+    Keyboard.dismiss();
+    return false;
+  };
+
   return (
-    <View style={styles.safeAreaView}>
+    <KeyboardAvoidingView
+      style={styles.safeAreaView}
+      behavior="height"
+      keyboardVerticalOffset={110}
+      onStartShouldSetResponder={handleUnhandledTouches}
+    >
       <ApiConfirmationModal
         isVisible={displayClearConfirmation}
         onClose={() => setDisplayClearConfirmation(false)}
@@ -554,6 +566,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         <View style={styles.container}>
           <FlatList
             data={items}
+            removeClippedSubviews={false}
             renderItem={item => itemCard(item, dispatch)}
             keyExtractor={(item: PalletItem) => item.upcNbr}
           />
@@ -569,7 +582,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           />
         </View>
       ) : null}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

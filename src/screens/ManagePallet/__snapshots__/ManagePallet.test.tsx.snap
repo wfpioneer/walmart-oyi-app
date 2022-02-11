@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ManagePalletScreen Tests rendering Api responses Renders screen with newly added if get items details response sent sucesss 1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
@@ -288,11 +292,15 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
       width={-1}
     />
   </View>
-</View>
+</KeyboardAvoidingView>
 `;
 
 exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the PalletManagement default  1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
@@ -579,11 +587,15 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       width={-1}
     />
   </View>
-</View>
+</KeyboardAvoidingView>
 `;
 
 exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the PalletManagement with Clear Pallet Confirmation Modal  1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
@@ -870,5 +882,5 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       width={-1}
     />
   </View>
-</View>
+</KeyboardAvoidingView>
 `;
