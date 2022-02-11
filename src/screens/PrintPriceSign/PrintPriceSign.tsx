@@ -240,7 +240,9 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         labelsAvailable: ['price']
       };
       dispatch(setPriceLabelPrinter(initialPrinter));
-      if (!printListHasLaserPrinter) dispatch(addToPrinterList(initialPrinter));
+      if (!printListHasLaserPrinter) {
+        dispatch(addToPrinterList(initialPrinter));
+      }
     }
   }, []);
 
@@ -565,6 +567,13 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     </View>
   );
 
+  const disablePrint = () => {
+    if (printingPalletLabel || printingLocationLabels) {
+      return selectedPrinter?.type !== PrinterType.PORTABLE;
+    }
+    return isAddtoQueueDisabled(isValidQty, selectedSignType);
+  };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       { printingPalletLabel ? (
@@ -609,8 +618,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             type={Button.Type.PRIMARY}
             style={styles.footerBtn}
             onPress={handlePrint}
-            disabled={(printingPalletLabel || printingLocationLabels) ? selectedPrinter?.type !== PrinterType.PORTABLE
-              : (isAddtoQueueDisabled(isValidQty, selectedSignType))}
+            disabled={disablePrint()}
           />
         </View>
       )}
@@ -640,15 +648,12 @@ const PrintPriceSign = (): JSX.Element => {
   const [error, setError] = useState({ error: false, message: '' });
 
   const getSelectedPrinterBasedOnLabel = () => {
-    let selectedPrinter;
     if (printingLocationLabels) {
-      selectedPrinter = locationLabelPrinter;
-    } else if (printingPalletLabel) {
-      selectedPrinter = palletLabelPrinter;
-    } else {
-      selectedPrinter = priceLabelPrinter;
+      return locationLabelPrinter;
+    } if (printingPalletLabel) {
+      return palletLabelPrinter;
     }
-    return selectedPrinter;
+    return priceLabelPrinter;
   };
 
   return (
