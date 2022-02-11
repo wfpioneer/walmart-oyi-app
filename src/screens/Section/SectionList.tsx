@@ -146,7 +146,7 @@ export const deleteAisleApiEffect = (
       Toast.show({
         type: 'success',
         position: 'bottom',
-        text1: strings('LOCATION_AISLES_REMOVED'),
+        text1: strings('LOCATION.AISLE_REMOVED'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
       navigation.goBack();
