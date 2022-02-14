@@ -107,25 +107,6 @@ describe('Api Confirmation Modal render tests', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('renders correctly when the api is in flight', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    const inFlightAsyncState = _.cloneDeep(defaultAsyncState);
-    inFlightAsyncState.isWaiting = true;
-    inFlightAsyncState.value = {};
-    renderer.render(
-      <ApiConfirmationModal
-        api={inFlightAsyncState}
-        handleConfirm={jest.fn()}
-        isVisible={true}
-        mainText="I am the main text"
-        subtext1="I am the secondary line of text"
-        onClose={jest.fn()}
-      />
-    );
-
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
-
   it('renders correctly when the api has failed, no error text', () => {
     const renderer = ShallowRenderer.createRenderer();
     const failedAsyncState = _.cloneDeep(defaultAsyncState);

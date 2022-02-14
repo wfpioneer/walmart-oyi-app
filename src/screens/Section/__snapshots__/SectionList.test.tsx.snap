@@ -142,176 +142,174 @@ exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not sh
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
       style={
         Object {
-          "flexDirection": "column",
+          "fontSize": 18,
+          "paddingBottom": 5,
+          "paddingHorizontal": 15,
+          "paddingTop": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "paddingBottom": 5,
-            "paddingHorizontal": 15,
-            "paddingTop": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CONFIRMATION" translation]
-      </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE" translation]
-      </Text>
-    </View>
-    <View
+      [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CONFIRMATION" translation]
+    </Text>
+    <Text
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.ITEM.FLOOR\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#545F7A"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.ITEM.RESERVE\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#545F7A"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.ALL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-    <View
+      [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "flexDirection": "column",
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.ITEM.FLOOR\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#545F7A"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.ITEM.RESERVE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#545F7A"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.ALL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
-      </Text>
-    </View>
-    <View
+      [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
       }
-    >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
+      }
+      title="[missing \\"en.GENERICS.OK\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
 
@@ -322,169 +320,172 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
       style={
         Object {
-          "flexDirection": "column",
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+          "paddingBottom": 5,
+          "paddingHorizontal": 15,
+          "paddingTop": 15,
+          "textAlign": "center",
         }
       }
     >
-      <mockConstructor
-        color="#f44336"
-        name="alert"
-        size={30}
-      />
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "paddingBottom": 5,
-            "paddingHorizontal": 15,
-            "paddingTop": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_FAIL" translation]
-      </Text>
-    </View>
-    <View
+      [missing "en.LOCATION.CLEAR_AISLE_ITEMS_FAIL" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.ITEM.FLOOR\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#545F7A"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.ITEM.RESERVE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#545F7A"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.ALL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.ITEM.FLOOR\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#545F7A"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.ITEM.RESERVE\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#545F7A"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.ALL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-    <View
+      [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "flexDirection": "column",
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
       }
-    >
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
-      </Text>
-    </View>
-    <View
+      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
       }
-    >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
+      title="[missing \\"en.GENERICS.OK\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
 
@@ -495,176 +496,174 @@ exports[`Rendering clear Aisle responses Renders the preflight view of clearAisl
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
       style={
         Object {
-          "flexDirection": "column",
+          "fontSize": 18,
+          "paddingBottom": 5,
+          "paddingHorizontal": 15,
+          "paddingTop": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "paddingBottom": 5,
-            "paddingHorizontal": 15,
-            "paddingTop": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CONFIRMATION" translation]
-      </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE" translation]
-      </Text>
-    </View>
-    <View
+      [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CONFIRMATION" translation]
+    </Text>
+    <Text
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.ITEM.FLOOR\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#545F7A"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.ITEM.RESERVE\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#545F7A"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.ALL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-    <View
+      [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "flexDirection": "column",
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.ITEM.FLOOR\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#545F7A"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.ITEM.RESERVE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#545F7A"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.ALL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
-      </Text>
-    </View>
-    <View
+      [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
       }
-    >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
+      }
+      title="[missing \\"en.GENERICS.OK\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
 
@@ -675,199 +674,174 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
-      style={
-        Object {
-          "flexDirection": "column",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "paddingBottom": 5,
-            "paddingHorizontal": 15,
-            "paddingTop": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CONFIRMATION" translation]
-      </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE" translation]
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
-        }
-      }
-    >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.ITEM.FLOOR\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#545F7A"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.ITEM.RESERVE\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#545F7A"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.ALL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "flexDirection": "column",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
-        }
-      }
-    >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
-</CustomModalComponent>
-`;
-
-exports[`Rendering clear Aisle responses Renders the waiting for response from clear Aisle 1`] = `
-<CustomModalComponent
-  animationType="none"
-  isVisible={true}
-  modalType="Error"
-  onClose={[Function]}
->
-  <ActivityIndicator
-    animating={true}
-    color="#0071e9"
-    hidesWhenStopped={true}
-    size="large"
+  <View
     style={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "flexDirection": "column",
       }
     }
-  />
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+          "paddingBottom": 5,
+          "paddingHorizontal": 15,
+          "paddingTop": 15,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CONFIRMATION" translation]
+    </Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.LOCATION.CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.ITEM.FLOOR\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#545F7A"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.ITEM.RESERVE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#545F7A"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.ALL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.LOCATION.CLEAR_AISLE_ITEMS_WONT_DELETE" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.OK\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
 

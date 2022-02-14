@@ -72,31 +72,31 @@ const getZoneErrorModal = (
   setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
   dispatch: Dispatch<any>
 ): JSX.Element => (
-    <CustomModalComponent
-      isVisible={errorVisible}
-      onClose={() => setErrorVisible(false)}
-      modalType="Error"
-    >
-      <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
-      <Text style={styles.errorText}>
-        {strings('LOCATION.ZONE_NAME_ERROR')}
-      </Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          style={styles.modalButton}
-          title={strings('GENERICS.CANCEL')}
-          backgroundColor={COLOR.TRACKER_RED}
-          onPress={() => setErrorVisible(false)}
-        />
-        <Button
-          style={styles.modalButton}
-          title={strings('GENERICS.RETRY')}
-          backgroundColor={COLOR.MAIN_THEME_COLOR}
-          onPress={() => dispatch(getZoneNames())}
-        />
-      </View>
-    </CustomModalComponent>
-  );
+  <CustomModalComponent
+    isVisible={errorVisible}
+    onClose={() => setErrorVisible(false)}
+    modalType="Error"
+  >
+    <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+    <Text style={styles.errorText}>
+      {strings('LOCATION.ZONE_NAME_ERROR')}
+    </Text>
+    <View style={styles.buttonContainer}>
+      <Button
+        style={styles.modalButton}
+        title={strings('GENERICS.CANCEL')}
+        backgroundColor={COLOR.TRACKER_RED}
+        onPress={() => setErrorVisible(false)}
+      />
+      <Button
+        style={styles.modalButton}
+        title={strings('GENERICS.RETRY')}
+        backgroundColor={COLOR.MAIN_THEME_COLOR}
+        onPress={() => dispatch(getZoneNames())}
+      />
+    </View>
+  </CustomModalComponent>
+);
 
 export const ZoneScreen = (props: ZoneProps): JSX.Element => {
   const {
