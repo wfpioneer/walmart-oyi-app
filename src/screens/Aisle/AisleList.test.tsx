@@ -1,6 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, Route } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 import _ from 'lodash';
 import { AsyncState } from '../../models/AsyncState';
 import { AisleScreen, deleteZoneApiEffect, handleModalClose } from './AisleList';
@@ -50,6 +51,7 @@ describe('Aisle List basic render tests', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -86,6 +88,7 @@ describe('Aisle List basic render tests', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -113,6 +116,7 @@ describe('Aisle List basic render tests', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -140,6 +144,7 @@ describe('Aisle List basic render tests', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -170,6 +175,7 @@ describe('Aisle List basic render tests', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -200,6 +206,7 @@ describe('Aisle List basic render tests', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -243,6 +250,7 @@ describe('Test Get Aisle Api Response', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           locationPopupVisible={false}
+          activityModal={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -275,6 +283,7 @@ describe('Test Get Aisle Api Response', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -307,6 +316,7 @@ describe('Test Get Aisle Api Response', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -339,6 +349,7 @@ describe('Test Get Aisle Api Response', () => {
         useEffectHook={jest.fn()}
         trackEventCall={jest.fn()}
         locationPopupVisible={false}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -346,10 +357,21 @@ describe('Test Get Aisle Api Response', () => {
 });
 
 describe('Aisle list externalized function tests', () => {
+  const mockDispatch = jest.fn();
+  const mockGoBack = jest.fn();
+  const mockIsFocused = jest.fn(() => true);
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  navigationProp = { goBack: mockGoBack, isFocused: mockIsFocused };
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('ensures handleModalClose calls the correct amount of functions', () => {
     const mockSetDisplayConfirmation = jest.fn();
     const mockSetDeleteZoneApiStart = jest.fn();
-    const mockDispatch = jest.fn();
 
     handleModalClose(mockSetDisplayConfirmation, mockSetDeleteZoneApiStart, mockDispatch);
     expect(mockSetDisplayConfirmation).toBeCalledWith(false);
@@ -358,17 +380,11 @@ describe('Aisle list externalized function tests', () => {
   });
 
   it('ensures delete zone API works on success', () => {
-    const mockDispatch = jest.fn();
     const mockSetDeleteZoneApiStart = jest.fn();
     const mockSetDisplayConfirmation = jest.fn();
     const mockTrackApiEvent = jest.fn();
     const deleteZoneApiSuccess = _.cloneDeep(defaultAsyncState);
     deleteZoneApiSuccess.result = { status: 204 };
-    const mockGoBack = jest.fn();
-    const mockIsFocused = jest.fn(() => true);
-
-    // @ts-ignore
-    navigationProp = { goBack: mockGoBack, isFocused: mockIsFocused };
 
     deleteZoneApiEffect(
       mockDispatch,
@@ -389,17 +405,11 @@ describe('Aisle list externalized function tests', () => {
   });
 
   it('ensures delete zone API works on fail', () => {
-    const mockDispatch = jest.fn();
     const mockSetDeleteZoneApiStart = jest.fn();
     const mockSetDisplayConfirmation = jest.fn();
     const mockTrackApiEvent = jest.fn();
     const deleteZoneApiSuccess = _.cloneDeep(defaultAsyncState);
     deleteZoneApiSuccess.error = { status: 400, message: 'bad request' };
-    const mockGoBack = jest.fn();
-    const mockIsFocused = jest.fn(() => true);
-
-    // @ts-ignore
-    navigationProp = { goBack: mockGoBack, isFocused: mockIsFocused };
 
     deleteZoneApiEffect(
       mockDispatch,
@@ -412,10 +422,12 @@ describe('Aisle list externalized function tests', () => {
     );
 
     expect(mockIsFocused).toBeCalledTimes(1);
-    expect(mockSetDisplayConfirmation).toBeCalledTimes(0);
-    expect(mockSetDeleteZoneApiStart).toBeCalledTimes(0);
+    expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
+    expect(mockSetDeleteZoneApiStart).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(mockGoBack).toBeCalledTimes(0);
     expect(mockTrackApiEvent).toBeCalledTimes(1);
+    expect(Toast.show).toBeCalledTimes(1);
+    expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
   });
 });

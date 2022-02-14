@@ -58,6 +58,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center'
   },
+  iconPosition: {
+    alignSelf: 'center'
+  },
   contentPadding: {
     paddingBottom: 100
   },
