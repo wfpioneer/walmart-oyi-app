@@ -46,7 +46,7 @@ export default {
     TOOLS: 'Herramientas',
     CURRENCY_SYMBOL: '$',
     UNDO: 'Undo', // TODO spanish Translation
-    YES: 'Si',
+    YES: 'Sí',
     NO: 'No'
   },
   HOME: {
