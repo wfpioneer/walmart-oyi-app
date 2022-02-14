@@ -141,6 +141,7 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
         increaseQuantity={() => handleIncreaseQuantity(item, dispatch)}
         onTextChange={text => handleTextChange(item, dispatch, text)}
         deleteItem={() => deleteItemDetail(item, dispatch)}
+        isAdded={item.added}
         isValid={true}
         itemName={item.itemDesc}
         itemNumber={item.itemNbr.toString()}
