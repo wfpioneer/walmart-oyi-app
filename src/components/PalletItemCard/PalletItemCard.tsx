@@ -23,7 +23,16 @@ interface PalletItemCardProp {
     minValue: number;
     maxValue: number;
     isValid: boolean;
+    isAdded: boolean;
   }
+
+export const styleSelector = (isAdded: boolean, isEdited: boolean): Record<string, any> => {
+  if (isAdded) {
+    return styles.addedContainer;
+  }
+  return isEdited ? styles.editedContainer : styles.container;
+};
+
 const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
   const {
     itemName,
@@ -38,10 +47,11 @@ const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
     markEdited,
     minValue,
     maxValue,
-    isValid
+    isValid,
+    isAdded
   } = props;
   return (
-    <View style={markEdited ? styles.deletedContainer : styles.container}>
+    <View style={styleSelector(isAdded, markEdited)}>
       <View style={styles.content}>
         <View style={styles.itemHeader}>
           <Text style={styles.textHeader}>

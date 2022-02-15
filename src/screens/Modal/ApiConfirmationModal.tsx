@@ -59,34 +59,22 @@ const ApiConfirmationModal = (props: ApiConfirmationModalProps): JSX.Element => 
       onClose={() => onClose()}
       modalType="Error"
     >
-      {api.isWaiting ? (
-        <ActivityIndicator
-          animating={api.isWaiting}
-          hidesWhenStopped
-          color={COLOR.MAIN_THEME_COLOR}
-          size="large"
-          style={styles.activityIndicator}
+      {textView()}
+      {errorView()}
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.delButton}
+          title={cancelText ?? strings('GENERICS.CANCEL')}
+          backgroundColor={COLOR.TRACKER_RED}
+          onPress={() => onClose()}
         />
-      ) : (
-        <>
-          {textView()}
-          {errorView()}
-          <View style={styles.buttonContainer}>
-            <Button
-              style={styles.delButton}
-              title={cancelText ?? strings('GENERICS.CANCEL')}
-              backgroundColor={COLOR.TRACKER_RED}
-              onPress={() => onClose()}
-            />
-            <Button
-              style={styles.delButton}
-              title={api.error ? strings('GENERICS.RETRY') : (confirmText ?? strings('GENERICS.OK'))}
-              backgroundColor={COLOR.MAIN_THEME_COLOR}
-              onPress={handleConfirm}
-            />
-          </View>
-        </>
-      )}
+        <Button
+          style={styles.delButton}
+          title={api.error ? strings('GENERICS.RETRY') : (confirmText ?? strings('GENERICS.OK'))}
+          backgroundColor={COLOR.MAIN_THEME_COLOR}
+          onPress={handleConfirm}
+        />
+      </View>
     </CustomModalComponent>
   );
 };
