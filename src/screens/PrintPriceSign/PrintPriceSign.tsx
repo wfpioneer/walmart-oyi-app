@@ -38,6 +38,7 @@ import { LocationIdName } from '../../state/reducers/Location';
 import { LocationName } from '../../models/Location';
 import { SectionItem } from '../../models/LocationItems';
 import { showInfoModal } from '../../state/actions/Modal';
+import { savePrinter } from '../../utils/asyncStorageUtils';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -243,6 +244,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       if (!printListHasLaserPrinter) {
         dispatch(addToPrinterList(initialPrinter));
       }
+      savePrinter(initialPrinter);
     }
   }, []);
 

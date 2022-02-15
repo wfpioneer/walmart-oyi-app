@@ -30,7 +30,9 @@ describe('PrinterList', () => {
     printerList: defaultPrinterList,
     deleteFromPrinterList: jest.fn(),
     setSelectedPrinter: jest.fn(),
-    navigation: navigationProp
+    navigation: navigationProp,
+    printingLocationLabels: '',
+    printingPalletLabel: false
   });
 
   it('Renders the delete icon for PrinterIds not equal to 0', () => {
@@ -56,6 +58,8 @@ describe('PrinterList', () => {
         deleteFromPrinterList={jest.fn()}
         setSelectedPrinter={jest.fn()}
         navigation={navigationProp}
+        printingLocationLabels=""
+        printingPalletLabel={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
