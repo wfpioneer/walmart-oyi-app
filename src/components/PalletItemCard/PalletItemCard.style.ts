@@ -12,10 +12,18 @@ export default StyleSheet.create({
     marginBottom: 2,
     flexDirection: 'row'
   },
-  deletedContainer: {
+  editedContainer: {
     alignItems: 'center',
     justifyContent,
     backgroundColor: COLOR.YELLOW,
+    padding: 15,
+    marginBottom: 2,
+    flexDirection: 'row'
+  },
+  addedContainer: {
+    alignItems: 'center',
+    justifyContent,
+    backgroundColor: COLOR.PALE_GREEN,
     padding: 15,
     marginBottom: 2,
     flexDirection: 'row'

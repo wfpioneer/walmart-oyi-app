@@ -143,6 +143,7 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
         increaseQuantity={() => handleIncreaseQuantity(item, dispatch)}
         onTextChange={text => handleTextChange(item, dispatch, text)}
         deleteItem={() => deleteItemDetail(item, dispatch)}
+        isAdded={item.added}
         isValid={true}
         itemName={item.itemDesc}
         itemNumber={item.itemNbr.toString()}
@@ -340,27 +341,36 @@ export const clearPalletApiHook = (
   dispatch: Dispatch<any>,
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
 ): void => {
-  // Success
-  if (!clearPalletApi.isWaiting && clearPalletApi.result) {
-    navigation.goBack();
-    setDisplayClearConfirmation(false);
-    dispatch({ type: CLEAR_PALLET.RESET });
-    Toast.show({
-      type: 'success',
-      text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
-      position: 'bottom'
-    });
-  }
-  // Failure
-  if (!clearPalletApi.isWaiting && clearPalletApi.error) {
-    setDisplayClearConfirmation(false);
-    dispatch({ type: CLEAR_PALLET.RESET });
-    Toast.show({
-      type: 'error',
-      text1: strings('PALLET.CLEAR_PALLET_ERROR'),
-      text2: strings(TRY_AGAIN),
-      position: 'bottom'
-    });
+  if (navigation.isFocused()) {
+    if (!clearPalletApi.isWaiting) {
+      // Success
+      if (clearPalletApi.result) {
+        dispatch(hideActivityModal());
+        setDisplayClearConfirmation(false);
+        dispatch({ type: CLEAR_PALLET.RESET });
+        Toast.show({
+          type: 'success',
+          text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
+          position: 'bottom'
+        });
+        navigation.goBack();
+      }
+
+      // Failure
+      if (clearPalletApi.error) {
+        dispatch(hideActivityModal());
+        setDisplayClearConfirmation(false);
+        dispatch({ type: CLEAR_PALLET.RESET });
+        Toast.show({
+          type: 'error',
+          text1: strings('PALLET.CLEAR_PALLET_ERROR'),
+          text2: strings(TRY_AGAIN),
+          position: 'bottom'
+        });
+      }
+    } else {
+      dispatch(showActivityModal());
+    }
   }
 };
 
@@ -521,7 +531,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         cancelText={strings('GENERICS.NO')}
         api={clearPalletApi}
         mainText={strings('PALLET.CLEAR_PALLET_CONFIRMATION')}
-        handleConfirm={() => dispatch(clearPallet({ palletId: id }))}
+        handleConfirm={() => {
+          setDisplayClearConfirmation(false);
+          dispatch(clearPallet({ palletId: id }));
+        }}
         confirmText={strings('GENERICS.YES')}
       />
       <View style={styles.bodyContainer}>

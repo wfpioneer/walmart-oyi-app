@@ -1,6 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, Route } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 import { AsyncState } from '../../models/AsyncState';
 import {
   ClearItemsModal,
@@ -13,6 +14,9 @@ import {
 } from './SectionList';
 import { mockSections } from '../../mockData/sectionDetails';
 import { ClearLocationTarget } from '../../models/Location';
+
+const SUCCESS_TOAST = { type: 'success' };
+const ERROR_TOAST = { type: 'error' };
 
 let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
@@ -64,6 +68,7 @@ describe('Test Section List', () => {
         clearAisleApi={defaultAsyncState}
         clearLocationTarget={ClearLocationTarget.FLOOR}
         setClearLocationTarget={jest.fn()}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -105,6 +110,7 @@ describe('Test Section List', () => {
         clearAisleApi={defaultAsyncState}
         clearLocationTarget={ClearLocationTarget.FLOOR}
         setClearLocationTarget={jest.fn()}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -137,6 +143,7 @@ describe('Test Section List', () => {
         clearLocationTarget={ClearLocationTarget.FLOOR}
         setClearLocationTarget={jest.fn()}
         clearAisleApi={defaultAsyncState}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -185,6 +192,7 @@ describe('Test Get Section Api Response', () => {
           clearLocationTarget={ClearLocationTarget.FLOOR}
           setClearLocationTarget={jest.fn()}
           clearAisleApi={defaultAsyncState}
+          activityModal={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -222,6 +230,7 @@ describe('Test Get Section Api Response', () => {
         clearLocationTarget={ClearLocationTarget.FLOOR}
         setClearLocationTarget={jest.fn()}
         clearAisleApi={defaultAsyncState}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -260,6 +269,7 @@ describe('Rendering Remove Aisle responses', () => {
         clearLocationTarget={ClearLocationTarget.FLOOR}
         setClearLocationTarget={jest.fn()}
         clearAisleApi={defaultAsyncState}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -300,6 +310,7 @@ describe('Rendering Remove Aisle responses', () => {
         clearLocationTarget={ClearLocationTarget.FLOOR}
         setClearLocationTarget={jest.fn()}
         clearAisleApi={defaultAsyncState}
+        activityModal={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -332,28 +343,6 @@ describe('Rendering clear Aisle responses', () => {
         displayConfirmation={true}
         handleClearItems={jest.fn()}
         isClearAisle={false}
-        setClearLocationTarget={jest.fn()}
-        setDisplayConfirmation={jest.fn()}
-      />
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
-
-  it('Renders the waiting for response from clear Aisle', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    const clearAisleIsWaiting: AsyncState = {
-      isWaiting: true,
-      value: null,
-      error: null,
-      result: null
-    };
-    renderer.render(
-      <ClearItemsModal
-        clearAisleApi={clearAisleIsWaiting}
-        clearLocationTarget={ClearLocationTarget.FLOOR}
-        displayConfirmation={true}
-        handleClearItems={jest.fn()}
-        isClearAisle={true}
         setClearLocationTarget={jest.fn()}
         setDisplayConfirmation={jest.fn()}
       />
@@ -413,6 +402,10 @@ describe('Rendering clear Aisle responses', () => {
 describe('Section List externalized function tests', () => {
   const mockDispatch = jest.fn();
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('tests handleModalClose', () => {
     const mockSetDisplayConfirmation = jest.fn();
     const mockSetDeleteZoneApiStart = jest.fn();
@@ -421,8 +414,6 @@ describe('Section List externalized function tests', () => {
     expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
     expect(mockSetDeleteZoneApiStart).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(1);
-
-    mockDispatch.mockClear();
   });
 
   it('tests handleClearModalClose', () => {
@@ -431,8 +422,6 @@ describe('Section List externalized function tests', () => {
     handleClearModalClose(mockSetDisplayConfirmation, mockDispatch);
     expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(1);
-
-    mockDispatch.mockClear();
   });
 
   it('tests getSectionsApiEffect, success', () => {
@@ -470,11 +459,11 @@ describe('Section List externalized function tests', () => {
 
     clearAisleApiEffect(mockDispatch, navigationProp, successApi, mockSetDisplayConfirmation);
 
-    expect(mockDispatch).toBeCalledTimes(2);
+    expect(mockDispatch).toBeCalledTimes(1);
     expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
     expect(mockIsFocused).toBeCalledTimes(1);
-
-    mockDispatch.mockClear();
+    expect(Toast.show).toBeCalledTimes(1);
+    expect(Toast.show).toBeCalledWith(expect.objectContaining(SUCCESS_TOAST));
   });
 
   it('tests clearAisleApiEffect, fail', () => {
@@ -493,8 +482,8 @@ describe('Section List externalized function tests', () => {
     expect(mockDispatch).toBeCalledTimes(0);
     expect(mockSetDisplayConfirmation).toBeCalledTimes(0);
     expect(mockIsFocused).toBeCalledTimes(1);
-
-    mockDispatch.mockClear();
+    expect(Toast.show).toBeCalledTimes(1);
+    expect(Toast.show).toBeCalledWith(expect.objectContaining(ERROR_TOAST));
   });
 
   it('tests deleteAisleApiEffect, success', () => {
@@ -520,12 +509,12 @@ describe('Section List externalized function tests', () => {
 
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockTrackEventCall).toBeCalledTimes(1);
-    expect(mockDispatch).toBeCalledTimes(2);
+    expect(mockDispatch).toBeCalledTimes(1);
     expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
     expect(mockSetDeleteAisleApiStart).toBeCalledTimes(1);
+    expect(Toast.show).toBeCalledTimes(1);
+    expect(Toast.show).toBeCalledWith(expect.objectContaining(SUCCESS_TOAST));
     expect(mockGoBack).toBeCalledTimes(1);
-
-    mockDispatch.mockClear();
   });
 
   it('tests deleteAisleApiEffect, fail', () => {
@@ -551,11 +540,11 @@ describe('Section List externalized function tests', () => {
 
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockTrackEventCall).toBeCalledTimes(1);
-    expect(mockDispatch).toBeCalledTimes(2);
+    expect(mockDispatch).toBeCalledTimes(1);
     expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
     expect(mockSetDeleteAisleApiStart).toBeCalledTimes(1);
+    expect(Toast.show).toBeCalledTimes(1);
+    expect(Toast.show).toBeCalledWith(expect.objectContaining(ERROR_TOAST));
     expect(mockGoBack).toBeCalledTimes(0);
-
-    mockDispatch.mockClear();
   });
 });
