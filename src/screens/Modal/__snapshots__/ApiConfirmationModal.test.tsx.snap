@@ -7,75 +7,73 @@ exports[`Api Confirmation Modal render tests does not show when isVisible is set
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
       style={
         Object {
-          "flexDirection": "column",
+          "fontSize": 18,
+          "padding": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "padding": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the main text
-      </Text>
-    </View>
-    <View
+      I am the main text
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
       }
-    >
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
+      }
+      title="[missing \\"en.GENERICS.OK\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
 
@@ -86,85 +84,83 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
       style={
         Object {
-          "flexDirection": "column",
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+          "padding": 15,
+          "textAlign": "center",
         }
       }
     >
-      <mockConstructor
-        color="#f44336"
-        name="alert"
-        size={30}
-        style={
-          Object {
-            "alignSelf": "center",
-          }
-        }
-      />
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "padding": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the text of error
-      </Text>
-    </View>
-    <View
+      I am the text of error
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
       }
-    >
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.RETRY\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
+      }
+      title="[missing \\"en.GENERICS.RETRY\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
 
@@ -175,89 +171,87 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
       style={
         Object {
-          "flexDirection": "column",
+          "fontSize": 18,
+          "paddingBottom": 5,
+          "paddingHorizontal": 15,
+          "paddingTop": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "paddingBottom": 5,
-            "paddingHorizontal": 15,
-            "paddingTop": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the main text
-      </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the secondary line of text
-      </Text>
-    </View>
-    <View
+      I am the main text
+    </Text>
+    <Text
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      I am the secondary line of text
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      }
+      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="[missing \\"en.GENERICS.RETRY\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
+      }
+      title="[missing \\"en.GENERICS.RETRY\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
 
@@ -268,89 +262,87 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
       style={
         Object {
-          "flexDirection": "column",
+          "fontSize": 18,
+          "paddingBottom": 5,
+          "paddingHorizontal": 15,
+          "paddingTop": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "paddingBottom": 5,
-            "paddingHorizontal": 15,
-            "paddingTop": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the main text
-      </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the secondary line of text
-      </Text>
-    </View>
-    <View
+      I am the main text
+    </Text>
+    <Text
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      I am the secondary line of text
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      }
+      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="Custom Confirmation Text"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
+      }
+      title="Custom Confirmation Text"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
 
@@ -361,89 +353,87 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
       style={
         Object {
-          "flexDirection": "column",
+          "fontSize": 18,
+          "paddingBottom": 5,
+          "paddingHorizontal": 15,
+          "paddingTop": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "paddingBottom": 5,
-            "paddingHorizontal": 15,
-            "paddingTop": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the main text
-      </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the secondary line of text
-      </Text>
-    </View>
-    <View
+      I am the main text
+    </Text>
+    <Text
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      I am the secondary line of text
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="Custom Cancel Text"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      }
+      title="Custom Cancel Text"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
+      }
+      title="[missing \\"en.GENERICS.OK\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
 
@@ -454,101 +444,99 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
       style={
         Object {
-          "flexDirection": "column",
+          "fontSize": 18,
+          "paddingBottom": 5,
+          "paddingHorizontal": 15,
+          "paddingTop": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "paddingBottom": 5,
-            "paddingHorizontal": 15,
-            "paddingTop": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the main text
-      </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the secondary line of text
-      </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the tertiary line of text
-      </Text>
-    </View>
-    <View
+      I am the main text
+    </Text>
+    <Text
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      I am the secondary line of text
+    </Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
         }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      }
+    >
+      I am the tertiary line of text
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
+      }
+      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.OK\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
 
@@ -559,112 +547,87 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
-      style={
-        Object {
-          "flexDirection": "column",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "paddingBottom": 5,
-            "paddingHorizontal": 15,
-            "paddingTop": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the main text
-      </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 14,
-            "paddingBottom": 15,
-            "paddingHorizontal": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the secondary line of text
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
-        }
-      }
-    >
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
-</CustomModalComponent>
-`;
-
-exports[`Api Confirmation Modal render tests renders correctly when the api is in flight 1`] = `
-<CustomModalComponent
-  animationType="none"
-  isVisible={true}
-  modalType="Error"
-  onClose={[Function]}
->
-  <ActivityIndicator
-    animating={true}
-    color="#0071e9"
-    hidesWhenStopped={true}
-    size="large"
+  <View
     style={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "flexDirection": "column",
       }
     }
-  />
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+          "paddingBottom": 5,
+          "paddingHorizontal": 15,
+          "paddingTop": 15,
+          "textAlign": "center",
+        }
+      }
+    >
+      I am the main text
+    </Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 14,
+          "paddingBottom": 15,
+          "paddingHorizontal": 15,
+          "textAlign": "center",
+        }
+      }
+    >
+      I am the secondary line of text
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.OK\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
 
@@ -675,74 +638,72 @@ exports[`Api Confirmation Modal render tests renders correctly when the the api 
   modalType="Error"
   onClose={[Function]}
 >
-  <React.Fragment>
-    <View
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
       style={
         Object {
-          "flexDirection": "column",
+          "fontSize": 18,
+          "padding": 15,
+          "textAlign": "center",
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "fontSize": 18,
-            "padding": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        I am the main text
-      </Text>
-    </View>
-    <View
+      I am the main text
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-around",
+        "flexDirection": "row",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#D6512D"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
       style={
         Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "width": "100%",
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
       }
-    >
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
+      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[MockFunction]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 10,
         }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[MockFunction]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "paddingHorizontal": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </React.Fragment>
+      }
+      title="[missing \\"en.GENERICS.OK\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </CustomModalComponent>
 `;
