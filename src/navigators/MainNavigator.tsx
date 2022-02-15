@@ -7,6 +7,7 @@ import TabNavigator from './TabNavigator';
 import ReviewItemDetailsNavigator from './ReviewItemDetailsNavigator';
 import PrintPriceSignNavigator from './PrintPriceSignNavigator';
 import PalletManagementNavigator from './PalletManagementNavigator';
+import SettingsToolNavigator from './SettingsToolNavigator';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ export const MainNavigator = () => (
       <Stack.Screen name="PrintPriceSign" component={PrintPriceSignNavigator} />
       <Stack.Screen name="LocationManagement" component={LocationManagementNavigator} />
       <Stack.Screen name="PalletManagement" component={PalletManagementNavigator} />
+      <Stack.Screen name="SettingsTool" component={SettingsToolNavigator} />
     </Stack.Navigator>
   </NavigationContainer>
 );

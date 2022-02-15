@@ -339,5 +339,8 @@ export default {
   LOGIN: {
     CLUB_NBR_REQUIRED: '需店号开启OYI',
     ENTER_CLUB_NBR: '输入店号'
+  },
+  SETTINGS: {
+    TITLE: 'Settings' // TODO Mandarin Translation
   }
 };

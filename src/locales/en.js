@@ -339,5 +339,8 @@ export default {
   LOGIN: {
     CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI',
     ENTER_CLUB_NBR: 'Enter a Club Number'
+  },
+  SETTINGS: {
+    TITLE: 'Settings'
   }
 };
