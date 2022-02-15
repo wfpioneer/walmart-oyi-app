@@ -4,6 +4,8 @@ import React, {
 import {
   EmitterSubscription,
   FlatList,
+  Keyboard,
+  KeyboardAvoidingView,
   Text,
   TouchableOpacity,
   View
@@ -511,8 +513,18 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     handleUpdateItems(items, id, dispatch);
   };
 
+  const handleUnhandledTouches = () => {
+    Keyboard.dismiss();
+    return false;
+  };
+
   return (
-    <View style={styles.safeAreaView}>
+    <KeyboardAvoidingView
+      style={styles.safeAreaView}
+      behavior="height"
+      keyboardVerticalOffset={110}
+      onStartShouldSetResponder={handleUnhandledTouches}
+    >
       <ApiConfirmationModal
         isVisible={displayClearConfirmation}
         onClose={() => setDisplayClearConfirmation(false)}
@@ -556,17 +568,15 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               {getNumberOfDeleted(items) === 1 ? strings('PALLET.ITEM_DELETE')
                 : strings('PALLET.X_ITEMS_DELETE', { nbrOfItems: getNumberOfDeleted(items) })}
             </Text>
-            <Button
-              title={strings('GENERICS.UNDO')}
-              style={styles.undoButton}
-              backgroundColor={COLOR.GREEN}
-              onPress={() => undoDelete(dispatch)}
-            />
+            <TouchableOpacity onPress={() => undoDelete(dispatch)}>
+              <Text style={styles.undoText}>{strings('GENERICS.UNDO')}</Text>
+            </TouchableOpacity>
           </View>
         ) : null}
         <View style={styles.container}>
           <FlatList
             data={items}
+            removeClippedSubviews={false}
             renderItem={item => itemCard(item, dispatch)}
             keyExtractor={(item: PalletItem) => item.upcNbr}
           />
@@ -582,7 +592,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           />
         </View>
       ) : null}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
