@@ -7,8 +7,15 @@ import { connect } from 'react-redux';
 import { NavigationProp } from '@react-navigation/native';
 import COLOR from '../../../themes/Color';
 import styles from './PrinterList.style';
-import { deleteFromPrinterList, setSelectedPrinter } from '../../../state/actions/Print';
-import { Printer } from '../../../models/Printer';
+import {
+  deleteFromPrinterList,
+  setLocationLabelPrinter as setLocationLabelPrinterAction,
+  setPalletLabelPrinter as setPalletLabelPrinterAction,
+  setPriceLabelPrinter as setPriceLabelPrinterAction,
+  setSelectedPrinter
+} from '../../../state/actions/Print';
+import { Printer, PrinterType } from '../../../models/Printer';
+import { strings } from '../../../locales';
 import {
   deletePrinter, setLocationLabelPrinter, setPalletLabelPrinter, setPriceLabelPrinter
 } from '../../../utils/asyncStorageUtils';
@@ -21,13 +28,21 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = {
   setSelectedPrinter,
-  deleteFromPrinterList
+  deleteFromPrinterList,
+  setLocationLabelPrinterAction,
+  setPalletLabelPrinterAction,
+  setPriceLabelPrinterAction
 };
+
+type setPrinterFn = (printer: Printer) => ({ type: string, payload: Printer});
 
 interface PrinterListProps {
   printerList: Printer[];
-  deleteFromPrinterList: (printerId: string) => void;
-  setSelectedPrinter: (printer: Printer) => void;
+  deleteFromPrinterList: (printerId: string) => ({ type: string, payload: string});
+  setSelectedPrinter: setPrinterFn;
+  setLocationLabelPrinterAction: setPrinterFn;
+  setPriceLabelPrinterAction: setPrinterFn;
+  setPalletLabelPrinterAction: setPrinterFn;
   navigation: NavigationProp<any>;
   printingLocationLabels: string;
   printingPalletLabel: boolean;
@@ -41,8 +56,28 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
 
   printerListCard = (cardItem: { item: Printer }): JSX.Element => {
     const { item } = cardItem;
+
+    const setPortablePrinterForAllLabels = (printer: Printer) => {
+      this.props.setPriceLabelPrinterAction(printer);
+      this.props.setLocationLabelPrinterAction(printer);
+      this.props.setPalletLabelPrinterAction(printer);
+    };
+
     const onCardClick = () => {
       this.props.setSelectedPrinter(item);
+      // set the printer to all 3 printers in redux if it is a portable printer to mimic current functionality
+      if (item.type === PrinterType.PORTABLE) {
+        setPortablePrinterForAllLabels(item);
+      } else {
+        // when the user switch back to main laser from portable printer for printing price sign
+        this.props.setPriceLabelPrinterAction({
+          type: PrinterType.LASER,
+          name: strings('PRINT.FRONT_DESK'),
+          desc: strings('GENERICS.DEFAULT'),
+          id: '000000000000',
+          labelsAvailable: ['price']
+        });
+      }
       if (this.props.printingPalletLabel) {
         setPalletLabelPrinter(item);
       } else if (this.props.printingLocationLabels !== '') {

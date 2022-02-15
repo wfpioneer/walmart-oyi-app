@@ -13,6 +13,11 @@ export const SET_PRINTING_LOCATION_LABELS = 'PRINT/SET_PRINTING_LOCATION_LABELS'
 export const UNSET_PRINTING_LOCATION_LABELS = 'PRINT/UNSET_PRINTING_LOCATION_LABELS';
 export const SET_PRINTING_PALLET_LABEL = 'PRINT/SET_PRINTING_PALLET_LABEL';
 export const UNSET_PRINTING_PALLET_LABEL = 'PRINT/UNSET_PRINTING_PALLET_LABEL';
+export const ADD_LOCATION_PRINT_QUEUE = 'PRINT/ADD_LOCATION_PRINT_QUEUE';
+export const CLEAR_LOCATION_PRINT_QUEUE = 'PRINT/CLEAR_LOCATION_PRINT_QUEUE';
+export const SET_PRICE_LABEL_PRINTER = 'PRINT/SET_PRICE_LABEL_PRINTER';
+export const SET_LOCATION_LABEL_PRINTER = 'PRINT/SET_LOCATION_LABEL_PRINTER';
+export const SET_PALLET_LABEL_PRINTER = 'PRINT/SET_PALLET_LABEL_PRINTER';
 
 export const setSelectedPrinter = (printer: Printer) => ({
   type: SET_SELECTED_PRINTER,
@@ -76,6 +81,30 @@ export const unsetPrintingPalletLabel = () => ({
   type: UNSET_PRINTING_PALLET_LABEL
 } as const);
 
+export const addLocationPrintQueue = (locationLabel: PrintQueueItem) => ({
+  type: ADD_LOCATION_PRINT_QUEUE,
+  payload: locationLabel
+} as const);
+
+export const clearLocationPrintQueue = () => ({
+  type: CLEAR_LOCATION_PRINT_QUEUE
+} as const);
+
+export const setPriceLabelPrinter = (printer : Printer) => ({
+  type: SET_PRICE_LABEL_PRINTER,
+  payload: printer
+} as const);
+
+export const setLocationLabelPrinter = (printer : Printer) => ({
+  type: SET_LOCATION_LABEL_PRINTER,
+  payload: printer
+} as const);
+
+export const setPalletLabelPrinter = (printer : Printer) => ({
+  type: SET_PALLET_LABEL_PRINTER,
+  payload: printer
+} as const);
+
 export type Actions =
 | ReturnType<typeof setSelectedPrinter>
 | ReturnType<typeof setSignType>
@@ -90,3 +119,8 @@ export type Actions =
 | ReturnType<typeof unsetPrintingLocationLabels>
 | ReturnType<typeof setPrintingPalletLabel>
 | ReturnType<typeof unsetPrintingPalletLabel>
+| ReturnType<typeof addLocationPrintQueue>
+| ReturnType<typeof clearLocationPrintQueue>
+| ReturnType<typeof setPriceLabelPrinter>
+| ReturnType<typeof setLocationLabelPrinter>
+| ReturnType<typeof setPalletLabelPrinter>

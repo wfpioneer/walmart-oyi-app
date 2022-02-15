@@ -8,18 +8,29 @@ exports[`PrinterList Renders list of Printers in Flatlist  1`] = `
       Object {
         "desc": "Default",
         "id": "123000000000",
+        "labelsAvailable": Array [
+          "price",
+        ],
         "name": "Front desk printer",
         "type": 0,
       },
       Object {
         "desc": "Default",
         "id": "0",
+        "labelsAvailable": Array [
+          "price",
+        ],
         "name": "Invalid printer",
         "type": 0,
       },
       Object {
         "desc": "Default",
         "id": "456000000000",
+        "labelsAvailable": Array [
+          "price",
+          "location",
+          "pallet",
+        ],
         "name": "Mobile printer",
         "type": 1,
       },
