@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ChangePrinterScreen Renders Enabled Submit button for MacAddress equal to 12 characters 1`] = `
+exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Enabled Submit button for MacAddress equal to 12 characters 1`] = `
 <View
   style={
     Object {
@@ -52,7 +52,7 @@ exports[`ChangePrinterScreen Renders Enabled Submit button for MacAddress equal 
 </View>
 `;
 
-exports[`ChangePrinterScreen Renders Error for Printer MacAddress not equal to 12 characters 1`] = `
+exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Error for Printer MacAddress not equal to 12 characters 1`] = `
 <View
   style={
     Object {
@@ -131,7 +131,7 @@ exports[`ChangePrinterScreen Renders Error for Printer MacAddress not equal to 1
 </View>
 `;
 
-exports[`ChangePrinterScreen Renders enabled submit button if no duplicate printers exist 1`] = `
+exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders enabled submit button if no duplicate printers exist 1`] = `
 <View
   style={
     Object {
@@ -210,7 +210,7 @@ exports[`ChangePrinterScreen Renders enabled submit button if no duplicate print
 </View>
 `;
 
-exports[`ChangePrinterScreen Renders error if duplicate printers exist 1`] = `
+exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders error if duplicate printers exist 1`] = `
 <View
   style={
     Object {

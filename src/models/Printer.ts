@@ -4,6 +4,7 @@ export interface Printer {
   name: string;
   desc: string;
   id: string;
+  labelsAvailable: string[];
 }
 
 export enum PrinterType {

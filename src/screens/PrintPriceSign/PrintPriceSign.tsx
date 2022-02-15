@@ -20,7 +20,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getMockItemDetails } from '../../mockData';
 import {
   addMultipleToPrintQueue, addToPrintQueue, addToPrinterList,
-  setSelectedPrinter, setSignType, unsetPrintingLocationLabels, unsetPrintingPalletLabel
+  setPriceLabelPrinter, setSignType, unsetPrintingLocationLabels, unsetPrintingPalletLabel
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
@@ -38,6 +38,7 @@ import { LocationIdName } from '../../state/reducers/Location';
 import { LocationName } from '../../models/Location';
 import { SectionItem } from '../../models/LocationItems';
 import { showInfoModal } from '../../state/actions/Modal';
+import { savePrinter } from '../../utils/asyncStorageUtils';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -54,12 +55,12 @@ const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
 );
 
 export const renderSignSizeButtons = (
-  selectedPrinter: Printer,
+  selectedPrinter: Printer | null,
   catgNbr: number,
   signType: string,
   dispatch: Dispatch<any>
 ): JSX.Element => {
-  const sizeObject = selectedPrinter.type === PrinterType.LASER ? LaserPaper : PortablePaper;
+  const sizeObject = selectedPrinter?.type === PrinterType.LASER ? LaserPaper : PortablePaper;
   return (
     <View style={styles.sizeBtnContainer}>
       {Object.keys(sizeObject).map(key => {
@@ -101,7 +102,7 @@ interface PriceSignProps {
   printPalletAPI: AsyncState;
   sectionsResult: any;
   palletInfo: any;
-  selectedPrinter: Printer;
+  selectedPrinter: Printer | null;
   selectedSignType: PrintPaperSize;
   printQueue: PrintQueueItem[];
   printingLocationLabels: string;
@@ -109,6 +110,7 @@ interface PriceSignProps {
   selectedAisle: LocationIdName;
   selectedSection: LocationIdName;
   selectedZone: LocationIdName;
+  printerList: Printer[];
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: Route<any>;
@@ -124,8 +126,8 @@ interface PriceSignProps {
   useLayoutHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
 
-const getPrinter = (selectedPrinter: Printer, selectedSignType: PrintPaperSize) => (
-  selectedPrinter.type === PrinterType.LASER
+const getPrinter = (selectedPrinter: Printer | null, selectedSignType: PrintPaperSize) => (
+  selectedPrinter?.type === PrinterType.LASER
   // @ts-ignore
     ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType]);
 
@@ -213,7 +215,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     scannedEvent, exceptionType, actionCompleted, itemResult, printAPI, printLabelAPI, printPalletAPI,
     sectionsResult, selectedPrinter, selectedSignType, printQueue, printingLocationLabels, printingPalletLabel,
     selectedAisle, selectedSection, selectedZone, dispatch, navigation, route, signQty, palletInfo,
-    setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook
+    setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook, printerList
   } = props;
   const {
     itemName, itemNbr, upcNbr, categoryNbr
@@ -229,15 +231,20 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
 
   useLayoutHook(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
-    if (selectedPrinter.name === '') {
+    const printListHasLaserPrinter = printerList.some(printer => printer.type === PrinterType.LASER);
+    if (selectedPrinter?.name === '' || !printListHasLaserPrinter) {
       const initialPrinter: Printer = {
         type: PrinterType.LASER,
         name: strings('PRINT.FRONT_DESK'),
         desc: strings('GENERICS.DEFAULT'),
-        id: '000000000000'
+        id: '000000000000',
+        labelsAvailable: ['price']
       };
-      dispatch(setSelectedPrinter(initialPrinter));
-      dispatch(addToPrinterList(initialPrinter));
+      dispatch(setPriceLabelPrinter(initialPrinter));
+      if (!printListHasLaserPrinter) {
+        dispatch(addToPrinterList(initialPrinter));
+      }
+      savePrinter(initialPrinter);
     }
   }, []);
 
@@ -417,7 +424,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
               const printQueueArrayItem: PrintLocationList = {
                 locationId: section.sectionId,
                 qty: signQty,
-                printerMACAddress: selectedPrinter.id
+                printerMACAddress: selectedPrinter?.id || ''
               };
               printLocList.push(printQueueArrayItem);
             });
@@ -425,7 +432,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             printLocList.push({
               locationId: selectedSection.id,
               qty: signQty,
-              printerMACAddress: selectedPrinter.id
+              printerMACAddress: selectedPrinter?.id || ''
             });
           }
           trackEvent('print_section_label', {
@@ -437,7 +444,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           printPalletList.push({
             palletId: palletInfo.id,
             qty: signQty,
-            printerMACAddress: selectedPrinter.id
+            printerMACAddress: selectedPrinter?.id || ''
           });
           trackEvent('print_pallet', {
             printItem: JSON.stringify(printPalletList)
@@ -450,8 +457,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
               qty: signQty,
               code: getPrinter(selectedPrinter, selectedSignType),
               description: selectedSignType,
-              printerMACAddress: selectedPrinter.id,
-              isPortablePrinter: selectedPrinter.type === 1,
+              printerMACAddress: selectedPrinter?.id || '',
+              isPortablePrinter: selectedPrinter?.type === 1,
               workListTypeCode: exceptionType
             }
           ];
@@ -493,7 +500,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
 
   // eslint-disable-next-line arrow-body-style
   const printerView = () => (
-    (printingLocationLabels || printingPalletLabel) && selectedPrinter.type !== PrinterType.PORTABLE
+    (printingLocationLabels || printingPalletLabel) && selectedPrinter?.type !== PrinterType.PORTABLE
       ? (
         <View style={styles.printerContainer}>
           <Text>{strings('PRINT.PLEASE_CHOOSE_PORTABLE')}</Text>
@@ -512,8 +519,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           <View style={styles.printerNameContainer}>
             <MaterialCommunityIcon name="printer-check" size={24} />
             <View style={styles.printTextMargin}>
-              <Text>{selectedPrinter.name}</Text>
-              <Text style={styles.printerDesc}>{selectedPrinter.desc}</Text>
+              <Text>{selectedPrinter?.name}</Text>
+              <Text style={styles.printerDesc}>{selectedPrinter?.desc}</Text>
             </View>
           </View>
           <Button
@@ -562,6 +569,13 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     </View>
   );
 
+  const disablePrint = () => {
+    if (printingPalletLabel || printingLocationLabels) {
+      return selectedPrinter?.type !== PrinterType.PORTABLE;
+    }
+    return isAddtoQueueDisabled(isValidQty, selectedSignType);
+  };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       { printingPalletLabel ? (
@@ -606,8 +620,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             type={Button.Type.PRIMARY}
             style={styles.footerBtn}
             onPress={handlePrint}
-            disabled={printingPalletLabel ? selectedPrinter.type !== PrinterType.PORTABLE
-              : (isAddtoQueueDisabled(isValidQty, selectedSignType))}
+            disabled={disablePrint()}
           />
         </View>
       )}
@@ -625,7 +638,8 @@ const PrintPriceSign = (): JSX.Element => {
   const printPalletAPI = useTypedSelector(state => state.async.printPalletLabel);
   const { palletInfo } = useTypedSelector(state => state.PalletManagement);
   const {
-    selectedPrinter, selectedSignType, printQueue, printingLocationLabels, printingPalletLabel
+    selectedSignType, printQueue, printingLocationLabels, printerList,
+    printingPalletLabel, priceLabelPrinter, locationLabelPrinter, palletLabelPrinter
   } = useTypedSelector(state => state.Print);
   const { selectedAisle, selectedSection, selectedZone } = useTypedSelector(state => state.Location);
   const dispatch = useDispatch();
@@ -634,6 +648,15 @@ const PrintPriceSign = (): JSX.Element => {
   const [signQty, setSignQty] = useState(1);
   const [isValidQty, setIsValidQty] = useState(true);
   const [error, setError] = useState({ error: false, message: '' });
+
+  const getSelectedPrinterBasedOnLabel = () => {
+    if (printingLocationLabels) {
+      return locationLabelPrinter;
+    } if (printingPalletLabel) {
+      return palletLabelPrinter;
+    }
+    return priceLabelPrinter;
+  };
 
   return (
     <PrintPriceSignScreen
@@ -645,7 +668,7 @@ const PrintPriceSign = (): JSX.Element => {
       printLabelAPI={printLabelAPI}
       printPalletAPI={printPalletAPI}
       sectionsResult={sectionsResult}
-      selectedPrinter={selectedPrinter}
+      selectedPrinter={getSelectedPrinterBasedOnLabel()}
       selectedSignType={selectedSignType}
       printQueue={printQueue}
       printingLocationLabels={printingLocationLabels}
@@ -665,6 +688,7 @@ const PrintPriceSign = (): JSX.Element => {
       useEffectHook={useEffect}
       useLayoutHook={useLayoutEffect}
       palletInfo={palletInfo}
+      printerList={printerList}
     />
   );
 };

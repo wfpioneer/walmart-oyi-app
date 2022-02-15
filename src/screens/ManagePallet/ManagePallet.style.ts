@@ -44,12 +44,12 @@ export default StyleSheet.create({
     backgroundColor: COLOR.DEEP_RED,
     padding: 5,
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   deleteBannerText: {
     fontSize: 16,
-    color: COLOR.WHITE,
-    marginLeft: 40
+    color: COLOR.WHITE
   },
   bodyContainer: {
     alignItems: 'stretch',
@@ -61,10 +61,10 @@ export default StyleSheet.create({
     flex: 0.1,
     marginBottom: 15
   },
-  undoButton: {
-    flex: 1,
-    width: 50,
-    height: 30
+  undoText: {
+    fontSize: 16,
+    color: COLOR.WHITE,
+    textDecorationLine: 'underline'
   },
   saveButton: {
     margin: 15

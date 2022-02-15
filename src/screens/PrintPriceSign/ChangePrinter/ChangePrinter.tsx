@@ -14,16 +14,44 @@ import { Printer, PrinterType } from '../../../models/Printer';
 import { setManualScan, setScannedEvent } from '../../../state/actions/Global';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
+import { savePrinter } from '../../../utils/asyncStorageUtils';
 
 interface ChangePrinterProps {
   macAddress: string;
   updateMacAddress: React.Dispatch<React.SetStateAction<string>>;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   trackEventCall: (eventName: string, params?: any) => void;
-  printers: Printer[]
+  printers: Printer[];
 }
+
+export const submitMacAddress = (
+  macAddress: string,
+  trackEventCall:(eventName: string, params?: any) => void,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+): void => {
+  if (macAddress.length === 12) {
+    const newPrinter: Printer = {
+      type: PrinterType.PORTABLE,
+      name: `${strings('PRINT.PORTABLE_PRINTER')} ${macAddress}`,
+      labelsAvailable: ['price', 'location', 'pallet'],
+      desc: '',
+      id: macAddress
+    };
+    trackEventCall('add_to_printer_list', {
+      newPrinter: JSON.stringify(newPrinter)
+    });
+    dispatch(addToPrinterList(newPrinter));
+    savePrinter(newPrinter);
+    navigation.goBack();
+  }
+};
+
+export const isPrinterExists = (printers: Printer[], macAddress: string): boolean => printers.length > 0
+  && printers.some(print => print.id === macAddress);
+
 export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
   const {
     macAddress,
@@ -52,21 +80,6 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
     };
   }, []);
 
-  const submitMacAddress = () => {
-    if (macAddress.length === 12) {
-      const newPrinter: Printer = {
-        type: PrinterType.PORTABLE,
-        name: `${strings('PRINT.PORTABLE_PRINTER')} ${macAddress}`,
-        desc: '',
-        id: macAddress
-      };
-      trackEventCall('add_to_printer_list', { newPrinter: JSON.stringify(newPrinter) });
-      dispatch(addToPrinterList(newPrinter));
-      navigation.goBack();
-    }
-  };
-  const isPrinterExists = () => printers.length > 0 && printers.some(print => print.id === macAddress);
-
   return (
     <View style={styles.container}>
       <TextInput
@@ -75,27 +88,41 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
         onChangeText={(text: string) => updateMacAddress(text)}
         selectionColor={COLOR.MAIN_THEME_COLOR}
         placeholder={strings('PRINT.MAC_ADDRESS')}
-        onSubmitEditing={submitMacAddress}
+        onSubmitEditing={() => submitMacAddress(
+          macAddress, trackEventCall, dispatch, navigation,
+        )}
       />
-      { (macAddress.length > 0 && macAddress.length !== 12)
-      && (
-      <View style={styles.alertView}>
-        <MaterialCommunityIcons name="alert-circle" size={20} color={COLOR.RED_300} />
-        <Text style={styles.errorText}>{strings('PRINT.MAC_ADDRESS_ERROR')}</Text>
-      </View>
+      {macAddress.length > 0 && macAddress.length !== 12 && (
+        <View style={styles.alertView}>
+          <MaterialCommunityIcons
+            name="alert-circle"
+            size={20}
+            color={COLOR.RED_300}
+          />
+          <Text style={styles.errorText}>
+            {strings('PRINT.MAC_ADDRESS_ERROR')}
+          </Text>
+        </View>
       )}
-      { isPrinterExists()
-      && (
-      <View style={styles.alertView}>
-        <MaterialCommunityIcons name="alert-circle" size={20} color={COLOR.RED_300} />
-        <Text style={styles.errorText}>{strings('PRINT.DUPLICATE_PRINTER')}</Text>
-      </View>
+      {isPrinterExists(printers, macAddress) && (
+        <View style={styles.alertView}>
+          <MaterialCommunityIcons
+            name="alert-circle"
+            size={20}
+            color={COLOR.RED_300}
+          />
+          <Text style={styles.errorText}>
+            {strings('PRINT.DUPLICATE_PRINTER')}
+          </Text>
+        </View>
       )}
       <Button
         title={strings('GENERICS.SUBMIT')}
         style={styles.button}
-        disabled={!macAddress.match(macRegex) || isPrinterExists()}
-        onPress={submitMacAddress}
+        disabled={!macAddress.match(macRegex) || isPrinterExists(printers, macAddress)}
+        onPress={() => submitMacAddress(
+          macAddress, trackEventCall, dispatch, navigation,
+        )}
       />
     </View>
   );
@@ -105,7 +132,7 @@ export const ChangePrinter = (): JSX.Element => {
   const [macAddress, updateMacAddress] = useState('');
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const printers = useTypedSelector(state => state.Print.printerList);
+  const { printerList } = useTypedSelector(state => state.Print);
   return (
     <ChangePrinterScreen
       macAddress={macAddress}
@@ -114,7 +141,7 @@ export const ChangePrinter = (): JSX.Element => {
       navigation={navigation}
       useEffectHook={useEffect}
       trackEventCall={trackEvent}
-      printers={printers}
+      printers={printerList}
     />
   );
 };

@@ -34,7 +34,8 @@ describe('PrintPriceSignScreen', () => {
     type: PrinterType.LASER,
     name: 'Front desk printer',
     desc: 'Default',
-    id: '123000000000'
+    id: '123000000000',
+    labelsAvailable: ['price']
   };
   const testItem: ItemDetails = getItemDetails[123];
   const emptyLocation = { id: 0, name: '' };
