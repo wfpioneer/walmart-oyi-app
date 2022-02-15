@@ -568,12 +568,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               {getNumberOfDeleted(items) === 1 ? strings('PALLET.ITEM_DELETE')
                 : strings('PALLET.X_ITEMS_DELETE', { nbrOfItems: getNumberOfDeleted(items) })}
             </Text>
-            <Button
-              title={strings('GENERICS.UNDO')}
-              style={styles.undoButton}
-              backgroundColor={COLOR.GREEN}
-              onPress={() => undoDelete(dispatch)}
-            />
+            <TouchableOpacity onPress={() => undoDelete(dispatch)}>
+              <Text style={styles.undoText}>{strings('GENERICS.UNDO')}</Text>
+            </TouchableOpacity>
           </View>
         ) : null}
         <View style={styles.container}>

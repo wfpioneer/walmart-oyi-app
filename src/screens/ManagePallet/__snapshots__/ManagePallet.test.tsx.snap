@@ -166,6 +166,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
+          "justifyContent": "space-around",
           "padding": 5,
         }
       }
@@ -175,32 +176,26 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           Object {
             "color": "#ffffffff",
             "fontSize": 16,
-            "marginLeft": 40,
           }
         }
       >
         [missing "en.PALLET.ITEM_DELETE" translation]
       </Text>
-      <Button
-        backgroundColor="#33691E"
-        disabled={false}
-        height={45}
+      <ForwardRef
         onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "height": 30,
-            "width": 50,
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 16,
+              "textDecorationLine": "underline",
+            }
           }
-        }
-        title="[missing \\"en.GENERICS.UNDO\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
+        >
+          [missing "en.GENERICS.UNDO" translation]
+        </Text>
+      </ForwardRef>
     </View>
     <View
       style={
@@ -461,6 +456,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
+          "justifyContent": "space-around",
           "padding": 5,
         }
       }
@@ -470,32 +466,26 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "color": "#ffffffff",
             "fontSize": 16,
-            "marginLeft": 40,
           }
         }
       >
         [missing "en.PALLET.ITEM_DELETE" translation]
       </Text>
-      <Button
-        backgroundColor="#33691E"
-        disabled={false}
-        height={45}
+      <ForwardRef
         onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "height": 30,
-            "width": 50,
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 16,
+              "textDecorationLine": "underline",
+            }
           }
-        }
-        title="[missing \\"en.GENERICS.UNDO\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
+        >
+          [missing "en.GENERICS.UNDO" translation]
+        </Text>
+      </ForwardRef>
     </View>
     <View
       style={
@@ -756,6 +746,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
+          "justifyContent": "space-around",
           "padding": 5,
         }
       }
@@ -765,32 +756,26 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "color": "#ffffffff",
             "fontSize": 16,
-            "marginLeft": 40,
           }
         }
       >
         [missing "en.PALLET.ITEM_DELETE" translation]
       </Text>
-      <Button
-        backgroundColor="#33691E"
-        disabled={false}
-        height={45}
+      <ForwardRef
         onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "height": 30,
-            "width": 50,
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 16,
+              "textDecorationLine": "underline",
+            }
           }
-        }
-        title="[missing \\"en.GENERICS.UNDO\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
+        >
+          [missing "en.GENERICS.UNDO" translation]
+        </Text>
+      </ForwardRef>
     </View>
     <View
       style={
