@@ -23,13 +23,13 @@ interface CollapsibleCardProps {
   isOpened: boolean;
   toggleIsOpened: React.Dispatch<React.SetStateAction<boolean>>
 }
-const featuresCard = (featureName: string, isEnabled: boolean) => (
+export const featureCard = (featureName: string, isEnabled: boolean): JSX.Element => (
   <View style={styles.featureCardContainer}>
     <Text style={styles.featureText}>{featureName}</Text>
     <Text style={styles.featureText}>{isEnabled ? strings('GENERICS.ENABLED') : strings('GENERICS.DISABLED')}</Text>
   </View>
 );
-const printerCard = (printerTitle: string, printer: Printer | null, changePrinter: () => void) => (
+export const printerCard = (printerTitle: string, printer: Printer | null, changePrinter: () => void): JSX.Element => (
   <View style={styles.printCardContainer}>
     <View>
       <Text style={styles.printCardText}>{printerTitle}</Text>
@@ -44,7 +44,7 @@ const printerCard = (printerTitle: string, printer: Printer | null, changePrinte
   </View>
 );
 
-const CollapsibleCard = (props: CollapsibleCardProps) => {
+export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
   const { title, isOpened, toggleIsOpened } = props;
   const iconName = isOpened ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
 
@@ -60,7 +60,7 @@ const CollapsibleCard = (props: CollapsibleCardProps) => {
   );
 };
 
-export const SettingsScreen = (props: SettingsScreenProps) => {
+export const SettingsScreen = (props: SettingsScreenProps): JSX.Element => {
   const {
     featuresOpen, printerOpen, toggleFeaturesList, togglePrinterList,
     locationLabelPrinter, palletLabelPrinter, priceLabelPrinter, userFeatures
@@ -69,7 +69,7 @@ export const SettingsScreen = (props: SettingsScreenProps) => {
   const changePrinter = () => {
     // TODO add functionality to change printers
   };
-  const appFeatures = [
+  const appFeatures: Array<{key: string, name:string}> = [
     {
       key: 'manager approval',
       name: strings('APPROVAL.MANAGER_APPROVAL')
@@ -125,7 +125,7 @@ export const SettingsScreen = (props: SettingsScreenProps) => {
       {featuresOpen && (
       <FlatList
         data={appFeatures}
-        renderItem={({ item }) => featuresCard(item.name, userFeatures.some(feature => feature === item.key))}
+        renderItem={({ item }) => featureCard(item.name, userFeatures.some(feature => feature === item.key))}
         keyExtractor={item => item.key}
         ListFooterComponent={<View />}
         ListFooterComponentStyle={styles.footer}

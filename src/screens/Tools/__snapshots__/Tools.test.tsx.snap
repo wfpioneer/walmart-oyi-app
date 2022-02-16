@@ -23,6 +23,16 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders Tools screen, loca
       size={28}
     />
   </ToolsButton>
+  <ToolsButton
+    destination="Settings"
+    title="[missing \\"en.GENERICS.SETTINGS\\" translation]"
+  >
+    <mockConstructor
+      color="#0071e9"
+      name="cog-outline"
+      size={28}
+    />
+  </ToolsButton>
 </View>
 `;
 
@@ -46,6 +56,16 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, loca
     <mockConstructor
       color="#0071e9"
       name="map-marker-outline"
+      size={28}
+    />
+  </ToolsButton>
+  <ToolsButton
+    destination="Settings"
+    title="[missing \\"en.GENERICS.SETTINGS\\" translation]"
+  >
+    <mockConstructor
+      color="#0071e9"
+      name="cog-outline"
       size={28}
     />
   </ToolsButton>
