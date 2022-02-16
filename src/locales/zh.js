@@ -45,9 +45,12 @@ export default {
     ITEMS: '多个商品',
     TOOLS: '工具箱',
     CURRENCY_SYMBOL: '¥',
-    UNDO: '撤消', // TODO replace with Proper Mandarin translation
+    UNDO: '未处理',
     YES: '是',
-    NO: '否'
+    NO: '否',
+    SETTINGS: 'Settings', // TODO Mandarin Translation
+    ENABLED: 'Enabled', // TODO Mandarin Translation
+    DISABLED: 'Disabled' // TODO Mandarin Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -111,7 +114,7 @@ export default {
     CONSOLIDATED_QTY: '临时外仓',
     FLY_CLOUD_QTY: '云仓库存',
     ERROR_SALES_HISTORY: '无法获取历史销售',
-    ITEM_NUMBER: 'Item Number'// TODO Mandarin Translation
+    ITEM_NUMBER: '商品号'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
@@ -144,7 +147,11 @@ export default {
     LOCATION_SUCCESS: '货架标签打印成功',
     PALLET_SUCCESS: '卡板标签打印成功',
     DUPLICATE_PRINTER: '现存打印机',
-    SOME_PRINTS_FAILED: '有些商品打印失败'
+    SOME_PRINTS_FAILED: '有些商品打印失败',
+    PRICE_SIGN_PRINTER: 'Price Sign Printer', // TODO Mandarin Translation
+    LOCATION_LABEL_PRINTER: 'Location Label Printer', // TODO Mandarin Translation
+    PALLET_LABEL_PRINTER: 'Pallet Label Printer', // TODO Mandarin Translation
+    LOCATION_PRINTING: 'Location Printing' // TODO spanish Translation
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',
@@ -162,8 +169,8 @@ export default {
     PALLET_DETAILS_ERROR: '报错：无法找到卡板',
     PALLET_MERGE: '将合并到',
     CANNOT_HAVE_NEGATIVE_QTY: '商品库存不可是负',
-    ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Mandarin translation
-    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC', // TODO Mandarin translation
+    ITEMS_DETAILS_EXIST: '扫描的商品已经在此卡板',
+    ITEMS_DETAILS_ERROR: '报错:无法找到此商品UPC信息',
     PALLET_UPC_NOT_FOUND: '未找到卡板或者UPC',
     ADD_UPC_SUCCESS: '所有商品成功添加到卡板',
     ADD_UPC_ERROR: '添加商品到卡板时出错',
@@ -206,7 +213,7 @@ export default {
     AISLE: '通道',
     SECTIONS: '货架',
     SECTION: '货架',
-    AREAS: 'Areas',
+    AREAS: '区域',
     LOCATION_DETAILS: '具体位置',
     NO_ZONES_AVAILABLE: '无区域',
     NO_AISLES_AVAILABLE: '无通道',
@@ -269,8 +276,8 @@ export default {
     CLEAR_SECTION_SALES_FLOOR_MESSAGE: '将清除此货架标签下所有楼面商品',
     CLEAR_SECTION_RESERVE_MESSAGE: '将清除此货架标签下所有卡板',
     CLEAR_SECTION_WONT_DELETE: '将不删除此货架标签',
-    CLEAR_SECTION_SALES_FLOOR_SUCCEED: 'All sales floor items successfully cleared from this section', // TODO CN translation
-    CLEAR_SECTION_RESERVE_SUCCEED: 'All reserve pallets successfully cleared from this section', // TODO CN translation
+    CLEAR_SECTION_SALES_FLOOR_SUCCEED: 'All sales floor items successfully cleared from this section', // TODO Mandarin translation
+    CLEAR_SECTION_RESERVE_SUCCEED: 'All reserve pallets successfully cleared from this section', // TODO Mandarin translation
     CLEAR_SECTION_FAIL: '清除货架标签信息时出错，请重试',
     REMOVE_AISLE_CONFIRMATION: '确定移除此通道？',
     REMOVE_AISLE_WILL_REMOVE_SECTIONS: '将移除此通道下所有货架标签信息',
@@ -286,7 +293,8 @@ export default {
     CLEAR_AISLE_ITEMS_WONT_DELETE: '删除此通道的货架信息',
     CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
     CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
-    PALLET_MANAGEMENT: '卡板管理'
+    PALLET_MANAGEMENT: '卡板管理',
+    LOCATION_MGMT_EDIT: 'Location Management Edit' // TODO Mandarin translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',
@@ -332,10 +340,17 @@ export default {
     UPDATE_REJECTED: '拒绝现货变更',
     FAILED_APPROVE: '审批未成功',
     FAILED_ITEMS: '此商品未成功审批',
-    UPDATE_API_ERROR: '更新审批状态时发生错误，\n请再试'
+    UPDATE_API_ERROR: '更新审批状态时发生错误，\n请再试',
+    MANAGER_APPROVAL: 'Manager Approval' // TODO Mandarin translation
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: '需店号开启OYI',
     ENTER_CLUB_NBR: '输入店号'
+  },
+  PICKING: {
+    PICKING: 'Picking' // TODO Mandarin translation
+  },
+  BINNING: {
+    BINNING: 'Binning'// TODO Mandarin translation
   }
 };
