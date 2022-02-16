@@ -4,7 +4,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { FlatList } from 'react-native-gesture-handler';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
-import { MenuCard } from '../Worklist/FilterMenu/FilterMenu';
 import styles from './Settings.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { Printer } from '../../models/Printer';
