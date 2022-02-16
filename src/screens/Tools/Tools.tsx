@@ -23,7 +23,7 @@ interface ToolsFeatures {
 
 const LOCATION_MANAGEMENT = 'location management';
 const PALLET_MANAGEMENT = 'pallet management';
-
+const SETTINGS = 'settings';
 // Add more objects to the array in the order they need to appear
 const tools: ToolsFeatures[] = [
   {
@@ -45,12 +45,23 @@ const tools: ToolsFeatures[] = [
       size={28}
       color={COLOR.MAIN_THEME_COLOR}
     />
-  }];
+  },
+  {
+    key: SETTINGS, // Should always be last in the list
+    title: 'GENERICS.SETTINGS',
+    destination: 'Settings',
+    icon: <MaterialCommunityIcon
+      name="cog-outline"
+      size={28}
+      color={COLOR.MAIN_THEME_COLOR}
+    />
+  }
+];
 
 export const ToolsScreen = (props: ToolsScreenProps): JSX.Element => {
   const { navigation, user } = props;
 
-  const userFeatures = [...user.features];
+  const userFeatures = [...user.features, 'settings'];
   if (user.configs.locationManagement && !userFeatures.includes(LOCATION_MANAGEMENT)) {
     userFeatures.push(LOCATION_MANAGEMENT);
   }
