@@ -40,6 +40,46 @@ exports[`SettingsScreen Tests rendering CollapsibleCard component CollapsibleCar
 </React.Fragment>
 `;
 
+exports[`SettingsScreen Tests rendering CollapsibleCard component CollapsibleCard functions renders up-arrow  if isOpened is true 1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      
+    </Text>
+  </View>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "flex": 0.1,
+        "paddingLeft": 5,
+      }
+    }
+  >
+    <mockConstructor
+      color="#616161"
+      name="keyboard-arrow-up"
+      size={25}
+    />
+  </ForwardRef>
+</React.Fragment>
+`;
+
 exports[`SettingsScreen Tests rendering featureCard component featureCard function renders "Disabled" translation if isEnabled is set to False 1`] = `
 <View
   style={
