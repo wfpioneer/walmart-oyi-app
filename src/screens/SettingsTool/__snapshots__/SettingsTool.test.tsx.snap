@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SettingsScreen Tests rendering CollapsibleCard component CollapsibleCard functions renders down-arrow  if isOpened is false 1`] = `
+exports[`SettingsToolScreen Tests rendering CollapsibleCard component CollapsibleCard functions renders down-arrow  if isOpened is false 1`] = `
 <React.Fragment>
   <View
     style={
@@ -40,7 +40,7 @@ exports[`SettingsScreen Tests rendering CollapsibleCard component CollapsibleCar
 </React.Fragment>
 `;
 
-exports[`SettingsScreen Tests rendering CollapsibleCard component CollapsibleCard functions renders up-arrow  if isOpened is true 1`] = `
+exports[`SettingsToolScreen Tests rendering CollapsibleCard component CollapsibleCard functions renders up-arrow  if isOpened is true 1`] = `
 <React.Fragment>
   <View
     style={
@@ -80,7 +80,7 @@ exports[`SettingsScreen Tests rendering CollapsibleCard component CollapsibleCar
 </React.Fragment>
 `;
 
-exports[`SettingsScreen Tests rendering featureCard component featureCard function renders "Disabled" translation if isEnabled is set to False 1`] = `
+exports[`SettingsToolScreen Tests rendering featureCard component featureCard function renders "Disabled" translation if isEnabled is set to False 1`] = `
 <View
   style={
     Object {
@@ -116,7 +116,7 @@ exports[`SettingsScreen Tests rendering featureCard component featureCard functi
 </View>
 `;
 
-exports[`SettingsScreen Tests rendering featureCard component featureCard function renders "Enabled" translation if isEnabled is set to True 1`] = `
+exports[`SettingsToolScreen Tests rendering featureCard component featureCard function renders "Enabled" translation if isEnabled is set to True 1`] = `
 <View
   style={
     Object {
@@ -152,7 +152,7 @@ exports[`SettingsScreen Tests rendering featureCard component featureCard functi
 </View>
 `;
 
-exports[`SettingsScreen Tests rendering printerCard component printerCard functions renders "Not Assigned" translation if Printer is null 1`] = `
+exports[`SettingsToolScreen Tests rendering printerCard component printerCard functions renders "Not Assigned" translation if Printer is null 1`] = `
 <View
   style={
     Object {
@@ -202,7 +202,7 @@ exports[`SettingsScreen Tests rendering printerCard component printerCard functi
 </View>
 `;
 
-exports[`SettingsScreen Tests rendering printerCard component printerCard functions renders Printer Name if Printer is not null 1`] = `
+exports[`SettingsToolScreen Tests rendering printerCard component printerCard functions renders Printer Name if Printer is not null 1`] = `
 <View
   style={
     Object {
@@ -252,7 +252,7 @@ exports[`SettingsScreen Tests rendering printerCard component printerCard functi
 </View>
 `;
 
-exports[`SettingsScreen Tests rendering the SettingsScreen component Test renders the SettingsScreen with Selected Printers 1`] = `
+exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Test renders the SettingsToolScreen with Selected Printers 1`] = `
 <View
   style={
     Object {
@@ -487,7 +487,7 @@ exports[`SettingsScreen Tests rendering the SettingsScreen component Test render
 </View>
 `;
 
-exports[`SettingsScreen Tests rendering the SettingsScreen component Test renders the SettingsScreen with the Feature List collapsed 1`] = `
+exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Test renders the SettingsToolScreen with the Feature List collapsed 1`] = `
 <View
   style={
     Object {
@@ -676,7 +676,7 @@ exports[`SettingsScreen Tests rendering the SettingsScreen component Test render
 </View>
 `;
 
-exports[`SettingsScreen Tests rendering the SettingsScreen component Test renders the SettingsScreen with the Printer List collapsed 1`] = `
+exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Test renders the SettingsToolScreen with the Printer List collapsed 1`] = `
 <View
   style={
     Object {
@@ -770,7 +770,7 @@ exports[`SettingsScreen Tests rendering the SettingsScreen component Test render
 </View>
 `;
 
-exports[`SettingsScreen Tests rendering the SettingsScreen component Test renders the default SettingsScreen  1`] = `
+exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Test renders the default SettingsToolScreen  1`] = `
 <View
   style={
     Object {

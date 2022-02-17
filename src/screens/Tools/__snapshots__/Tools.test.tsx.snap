@@ -23,9 +23,25 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders Tools screen, loca
       size={28}
     />
   </ToolsButton>
+</View>
+`;
+
+exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, SettingsTool enabled by config 1`] = `
+<View
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "center",
+      "marginTop": 4,
+      "paddingTop": 8,
+    }
+  }
+>
   <ToolsButton
-    destination="Settings"
-    title="[missing \\"en.GENERICS.SETTINGS\\" translation]"
+    destination="SettingsTool"
+    title="[missing \\"en.SETTINGS.TITLE\\" translation]"
   >
     <mockConstructor
       color="#0071e9"
@@ -59,13 +75,29 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, loca
       size={28}
     />
   </ToolsButton>
+</View>
+`;
+
+exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, pallet management enabled by config 1`] = `
+<View
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "center",
+      "marginTop": 4,
+      "paddingTop": 8,
+    }
+  }
+>
   <ToolsButton
-    destination="Settings"
-    title="[missing \\"en.GENERICS.SETTINGS\\" translation]"
+    destination="PalletManagement"
+    title="[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]"
   >
     <mockConstructor
       color="#0071e9"
-      name="cog-outline"
+      name="cube-outline"
       size={28}
     />
   </ToolsButton>

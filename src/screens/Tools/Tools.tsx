@@ -50,7 +50,7 @@ const tools: ToolsFeatures[] = [
   { // Should always be last in the list
     key: SETTINGS_TOOL,
     title: 'SETTINGS.TITLE',
-    destination: 'Settings',
+    destination: 'SettingsTool',
     icon: <MaterialCommunityIcon
       name="cog-outline"
       size={28}

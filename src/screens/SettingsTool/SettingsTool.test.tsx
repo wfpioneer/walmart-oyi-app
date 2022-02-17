@@ -1,16 +1,16 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
-  CollapsibleCard, SettingsScreen, featureCard, printerCard
-} from './Settings';
+  CollapsibleCard, SettingsToolScreen, featureCard, printerCard
+} from './SettingsTool';
 import { mockPrinterList } from '../../mockData/mockPrinterList';
 
-describe('SettingsScreen', () => {
-  describe('Tests rendering the SettingsScreen component', () => {
-    it('Test renders the default SettingsScreen ', () => {
+describe('SettingsToolScreen', () => {
+  describe('Tests rendering the SettingsToolScreen component', () => {
+    it('Test renders the default SettingsToolScreen ', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <SettingsScreen
+        <SettingsToolScreen
           printerOpen={true}
           togglePrinterList={jest.fn()}
           featuresOpen={true}
@@ -24,10 +24,10 @@ describe('SettingsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Test renders the SettingsScreen with Selected Printers', () => {
+    it('Test renders the SettingsToolScreen with Selected Printers', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <SettingsScreen
+        <SettingsToolScreen
           printerOpen={true}
           togglePrinterList={jest.fn()}
           featuresOpen={true}
@@ -41,10 +41,10 @@ describe('SettingsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Test renders the SettingsScreen with the Printer List collapsed', () => {
+    it('Test renders the SettingsToolScreen with the Printer List collapsed', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <SettingsScreen
+        <SettingsToolScreen
           printerOpen={false}
           togglePrinterList={jest.fn()}
           featuresOpen={true}
@@ -58,10 +58,10 @@ describe('SettingsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Test renders the SettingsScreen with the Feature List collapsed', () => {
+    it('Test renders the SettingsToolScreen with the Feature List collapsed', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <SettingsScreen
+        <SettingsToolScreen
           printerOpen={true}
           togglePrinterList={jest.fn()}
           featuresOpen={false}
