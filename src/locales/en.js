@@ -49,7 +49,6 @@ export default {
     UNDO: 'Undo',
     YES: 'Yes',
     NO: 'No',
-    SETTINGS: 'Settings',
     ENABLED: 'Enabled',
     DISABLED: 'Disabled'
   },
@@ -354,5 +353,8 @@ export default {
   },
   BINNING: {
     BINNING: 'Binning'
+  },
+  SETTINGS: {
+    TITLE: 'Settings'
   }
 };

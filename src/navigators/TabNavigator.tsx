@@ -17,7 +17,7 @@ import { AVAILABLE_TOOLS, Configurations } from '../models/User';
 const Tab = createBottomTabNavigator();
 
 const isToolsEnabled = (userFeatures: string[], configurations: Configurations) => {
-  if (configurations.locationManagement || configurations.palletManagement) {
+  if (configurations.locationManagement || configurations.palletManagement || configurations.settingsTool) {
     return true;
   }
   const enabledTools = AVAILABLE_TOOLS.filter(feature => userFeatures.includes(feature));

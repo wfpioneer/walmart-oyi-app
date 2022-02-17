@@ -48,7 +48,6 @@ export default {
     UNDO: 'Deshacer',
     YES: 'Sí',
     NO: 'No',
-    SETTINGS: 'Settings', // TODO spanish Translation
     ENABLED: 'Enabled', // TODO spanish Translation
     DISABLED: 'Disabled'// TODO spanish Translation
   },
@@ -352,5 +351,8 @@ export default {
   },
   BINNING: {
     BINNING: 'Binning'// TODO spanish translation
+  },
+  SETTINGS: {
+    TITLE: 'Settings' // TODO: Spanish translation
   }
 };

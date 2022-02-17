@@ -7,9 +7,7 @@ import TabNavigator from './TabNavigator';
 import ReviewItemDetailsNavigator from './ReviewItemDetailsNavigator';
 import PrintPriceSignNavigator from './PrintPriceSignNavigator';
 import PalletManagementNavigator from './PalletManagementNavigator';
-import Settings from '../screens/Settings/Settings';
-import { strings } from '../locales';
-import COLOR from '../themes/Color';
+import SettingsToolNavigator from './SettingsToolNavigator';
 
 const Stack = createStackNavigator();
 
@@ -25,16 +23,7 @@ export const MainNavigator = (): JSX.Element => (
       <Stack.Screen name="PrintPriceSign" component={PrintPriceSignNavigator} />
       <Stack.Screen name="LocationManagement" component={LocationManagementNavigator} />
       <Stack.Screen name="PalletManagement" component={PalletManagementNavigator} />
-      <Stack.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          headerTitle: strings('GENERICS.SETTINGS'),
-          headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
-          headerTintColor: COLOR.WHITE,
-          headerShown: true
-        }}
-      />
+      <Stack.Screen name="SettingsTool" component={SettingsToolNavigator} />
     </Stack.Navigator>
   </NavigationContainer>
 );

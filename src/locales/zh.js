@@ -352,5 +352,8 @@ export default {
   },
   BINNING: {
     BINNING: 'Binning'// TODO Mandarin translation
+  },
+  SETTINGS: {
+    TITLE: 'Settings' // TODO Mandarin Translation
   }
 };
