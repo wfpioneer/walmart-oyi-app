@@ -1,4 +1,4 @@
-import { PrintPaperSize, PrintQueueItem, Printer } from '../../models/Printer';
+import { PrintPaperSize, PrintQueueItem, Printer, PrintingType } from '../../models/Printer';
 
 export const SET_SELECTED_PRINTER = 'PRINT/SET_SELECTED_PRINTER';
 export const SET_SELECTED_SIGN_TYPE = 'PRINT/SET_SELECTED_SIGN_TYPE';
@@ -18,6 +18,7 @@ export const CLEAR_LOCATION_PRINT_QUEUE = 'PRINT/CLEAR_LOCATION_PRINT_QUEUE';
 export const SET_PRICE_LABEL_PRINTER = 'PRINT/SET_PRICE_LABEL_PRINTER';
 export const SET_LOCATION_LABEL_PRINTER = 'PRINT/SET_LOCATION_LABEL_PRINTER';
 export const SET_PALLET_LABEL_PRINTER = 'PRINT/SET_PALLET_LABEL_PRINTER';
+export const SET_PRINTING_TYPE = 'PRINT/SET_PRINTING_TYPE';
 
 export const setSelectedPrinter = (printer: Printer) => ({
   type: SET_SELECTED_PRINTER,
@@ -105,6 +106,11 @@ export const setPalletLabelPrinter = (printer : Printer) => ({
   payload: printer
 } as const);
 
+export const setPrintingType = (printingType: PrintingType) => ({
+  type: SET_PRINTING_TYPE,
+  payload: printingType
+} as const);
+
 export type Actions =
 | ReturnType<typeof setSelectedPrinter>
 | ReturnType<typeof setSignType>
@@ -124,3 +130,4 @@ export type Actions =
 | ReturnType<typeof setPriceLabelPrinter>
 | ReturnType<typeof setLocationLabelPrinter>
 | ReturnType<typeof setPalletLabelPrinter>
+| ReturnType<typeof setPrintingType>

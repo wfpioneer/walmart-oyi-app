@@ -13,6 +13,7 @@ import {
   SET_PRICE_LABEL_PRINTER,
   SET_PRINTING_LOCATION_LABELS,
   SET_PRINTING_PALLET_LABEL,
+  SET_PRINTING_TYPE,
   SET_PRINT_QUEUE,
   SET_SELECTED_PRINTER,
   SET_SELECTED_SIGN_TYPE,
@@ -24,7 +25,8 @@ import {
   PrintPaperSize,
   PrintQueueItem,
   Printer,
-  PrinterType
+  PrinterType,
+  PrintingType
 } from '../../models/Printer';
 
 interface StateType {
@@ -37,7 +39,8 @@ interface StateType {
   locationPrintQueue: PrintQueueItem[];
   priceLabelPrinter: Printer | null;
   locationLabelPrinter: Printer | null;
-  palletLabelPrinter: Printer | null
+  palletLabelPrinter: Printer | null;
+  selectedPrintingType: PrintingType | null;
 }
 
 const initialState: StateType = {
@@ -62,7 +65,8 @@ const initialState: StateType = {
     labelsAvailable: ['price']
   },
   locationLabelPrinter: null,
-  palletLabelPrinter: null
+  palletLabelPrinter: null,
+  selectedPrintingType: null
 };
 
 export const Print = (state = initialState, action: Actions): StateType => {
@@ -187,6 +191,11 @@ export const Print = (state = initialState, action: Actions): StateType => {
       return {
         ...state,
         palletLabelPrinter: action.payload
+      };
+    case SET_PRINTING_TYPE:
+      return {
+        ...state,
+        selectedPrintingType: action.payload
       };
     default:
       return state;

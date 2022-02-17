@@ -73,3 +73,9 @@ export interface PrintQueueAPIMultistatus {
   upcNbr: string;
   completed: boolean;
 }
+
+export enum PrintingType {
+  PRICE_SIGN = 'Price Sign',
+  LOCATION = 'Location',
+  PALLET = 'Pallet'
+}

@@ -14,7 +14,7 @@ import {
   setPriceLabelPrinter as setPriceLabelPrinterAction,
   setSelectedPrinter
 } from '../../../state/actions/Print';
-import { Printer, PrinterType } from '../../../models/Printer';
+import { Printer, PrinterType, PrintingType } from '../../../models/Printer';
 import { strings } from '../../../locales';
 import {
   deletePrinter, setLocationLabelPrinter, setPalletLabelPrinter, setPriceLabelPrinter
@@ -23,7 +23,8 @@ import {
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const mapStateToProps = (state: any) => ({
-  printerList: state.Print.printerList
+  printerList: state.Print.printerList,
+  printingType: state.Print.selectedPrintingType
 });
 
 const mapDispatchToProps = {
@@ -38,6 +39,7 @@ type setPrinterFn = (printer: Printer) => ({ type: string, payload: Printer});
 
 interface PrinterListProps {
   printerList: Printer[];
+  printingType: PrintingType | null;
   deleteFromPrinterList: (printerId: string) => ({ type: string, payload: string});
   setSelectedPrinter: setPrinterFn;
   setLocationLabelPrinterAction: setPrinterFn;
@@ -63,27 +65,49 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
       this.props.setPalletLabelPrinterAction(printer);
     };
 
+    // printingType will only be set if settingsTool is active
+    // so we don't have to worry about if settingsTool is enabled here
+    const disabled = () => this.props.printingType
+      && this.props.printingType !== PrintingType.PRICE_SIGN
+      && item.type === PrinterType.LASER;
+
     const onCardClick = () => {
-      this.props.setSelectedPrinter(item);
-      // set the printer to all 3 printers in redux if it is a portable printer to mimic current functionality
-      if (item.type === PrinterType.PORTABLE) {
-        setPortablePrinterForAllLabels(item);
+      if (this.props.printingType) {
+        switch (this.props.printingType) {
+          case PrintingType.PRICE_SIGN:
+            setPriceLabelPrinter(item);
+            break;
+          case PrintingType.LOCATION:
+            setLocationLabelPrinter(item);
+            break;
+          case PrintingType.PALLET:
+            setPalletLabelPrinter(item);
+            break;
+          default:
+            break;
+        }
       } else {
-        // when the user switch back to main laser from portable printer for printing price sign
-        this.props.setPriceLabelPrinterAction({
-          type: PrinterType.LASER,
-          name: strings('PRINT.FRONT_DESK'),
-          desc: strings('GENERICS.DEFAULT'),
-          id: '000000000000',
-          labelsAvailable: ['price']
-        });
-      }
-      if (this.props.printingPalletLabel) {
-        setPalletLabelPrinter(item);
-      } else if (this.props.printingLocationLabels !== '') {
-        setLocationLabelPrinter(item);
-      } else {
-        setPriceLabelPrinter(item);
+        this.props.setSelectedPrinter(item);
+        // set the printer to all 3 printers in redux if it is a portable printer to mimic current functionality
+        if (item.type === PrinterType.PORTABLE) {
+          setPortablePrinterForAllLabels(item);
+        } else {
+          // when the user switch back to main laser from portable printer for printing price sign
+          this.props.setPriceLabelPrinterAction({
+            type: PrinterType.LASER,
+            name: strings('PRINT.FRONT_DESK'),
+            desc: strings('GENERICS.DEFAULT'),
+            id: '000000000000',
+            labelsAvailable: ['price']
+          });
+        }
+        if (this.props.printingPalletLabel) {
+          setPalletLabelPrinter(item);
+        } else if (this.props.printingLocationLabels !== '') {
+          setLocationLabelPrinter(item);
+        } else {
+          setPriceLabelPrinter(item);
+        }
       }
       this.props.navigation.goBack();
     };
@@ -96,7 +120,11 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
     };
 
     return (
-      <TouchableOpacity style={styles.cardContainer} onPress={onCardClick}>
+      <TouchableOpacity
+        style={disabled() ? styles.disabledCardContainer : styles.cardContainer}
+        onPress={onCardClick}
+        disabled={disabled()}
+      >
         <MaterialCommunityIcons name="printer" size={20} color={COLOR.BLACK} />
         <View style={styles.printerDescription}>
           <Text>{item.name}</Text>
