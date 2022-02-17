@@ -10,7 +10,7 @@ export default {
     SEND: '发送',
     DISMISS: '忽略',
     TRY_AGAIN: '再试一次',
-    OK: 'Okay',
+    OK: 'OK',
     ERROR: '报错',
     NOT_STARTED: '尚未开始',
     RESTART: '重启',
@@ -45,9 +45,9 @@ export default {
     ITEMS: '多个商品',
     TOOLS: '工具箱',
     CURRENCY_SYMBOL: '¥',
-    UNDO: 'Undo', // TODO Mandarin Translation
-    YES: 'Yes', // TODO Mandarin Translation
-    NO: 'No' // TODO Mandarin Translation
+    UNDO: '撤消', // TODO replace with Proper Mandarin translation
+    YES: '是',
+    NO: '否'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -141,7 +141,7 @@ export default {
     PORTABLE_PRINTER: '便携式打印机',
     PRINT_SERVICE_ERROR: '打印标签时发生错误，请重试',
     PLEASE_CHOOSE_PORTABLE: '请选择便携式打印机',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Mandarin Translation
+    LOCATION_SUCCESS: '货架标签打印成功',
     PALLET_SUCCESS: '卡板标签打印成功',
     DUPLICATE_PRINTER: '现存打印机',
     SOME_PRINTS_FAILED: '有些商品打印失败'
@@ -169,15 +169,15 @@ export default {
     ADD_UPC_ERROR: '添加商品到卡板时出错',
     COMBINE_PALLET_SUCCESS: '卡板合并成功',
     COMBINE_PALLET_FAILURE: '卡板合并失败，请重试',
-    PALLET_EXISTS: 'This pallet has already been scanned', // TODO CN translation
-    PALLET_EXISTS_AS_TARGET: 'This pallet is already the target pallet', // TODO Mandarin translation
-    PALLET_DOESNT_EXIST: 'The pallet does not exist in our data', // TODO Mandarin translation
-    SAVE_PALLET_SUCCESS: 'Pallet update successful', // TODO Mandarin translation
-    SAVE_PALLET_PARTIAL: 'Pallet update partially successful', // TODO Mandarin translation
-    SAVE_PALLET_FAILURE: 'Pallet update failed', // TODO Mandarin translation
-    CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?', // TODO Mandarin Translation
-    CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful', // TODO Mandarin Translation
-    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared' // TODO Mandarin translation
+    PALLET_EXISTS: '已经扫描到此卡板',
+    PALLET_EXISTS_AS_TARGET: '此卡板是目标卡板',
+    PALLET_DOESNT_EXIST: '扫描卡板不存在',
+    SAVE_PALLET_SUCCESS: '卡板更新成功',
+    SAVE_PALLET_PARTIAL: '部分卡板更新成功',
+    SAVE_PALLET_FAILURE: '卡板更新失败',
+    CLEAR_PALLET_CONFIRMATION: '确定要清除此卡板信息?',
+    CLEAR_PALLET_ERROR: '清除卡板信息发生错误导致失败',
+    CLEAR_PALLET_SUCCESS: '卡板%{palletId}清理失败'
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -237,13 +237,12 @@ export default {
     PALLET_ERROR: '卡板未找到/空卡板',
     PALLET_NOT_FOUND: '因未找到卡板/卡板为空系统报错',
     PALLET_ADDED: '卡板添加成功',
-    PALLET_DELETE_CONFIRMATION: 'Are you sure you want to remove Pallet %{pallet} from Section %{section}?', // TODO mandarin translation
+    PALLET_DELETE_CONFIRMATION: '确定要从货架%{section}移除卡板 %{pallet}吗?',
     FLOOR_EMPTY: '楼面清单无商品',
     RESERVE_EMPTY: '存储区域无卡板',
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
     AISLES_ADDED: '通道号{number}已添加',
-    INCOMPLETE_AISLES_ADDED:
-      '创建通道/货架位置数量缺失，只创建了{number}通道/货架',
+    INCOMPLETE_AISLES_ADDED: '创建通道/货架位置数量缺失，只创建了{number}通道/货架',
     INCOMPLETE_AISLES_PLEASE_CHECK: '请确认已创建的通道和货架清单',
     ADD_AISLES_ERROR: '添加通道/货架时出错,请再试一次。',
     SECTIONS_ADDED: '已添加 %{number} 个货架位置',
@@ -255,12 +254,11 @@ export default {
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
     ZONE_ADDED: '区域 %{name} 已添加',
     ADD_ZONE_ERROR: '添加区域失败，请重试。',
-    INCOMPLETE_ZONE_ADDED:
-      '区域 %{name} 已添加， 但是仅部分通道/货架创建成功，请检查已创建的通道/货架清单',
+    INCOMPLETE_ZONE_ADDED: '区域 %{name} 已添加， 但是仅部分通道/货架创建成功，请检查已创建的通道/货架清单',
     REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: '移除所有通道和此通道内的货架号',
     REMOVE_ZONE_FAIL: '移除此区域失败，请重试。',
-    DELETE_ITEM: '删除%{itemNBR} \n%{itemName}',
+    DELETE_ITEM: '删除%{itemNbr} \n%{itemName}',
     ERROR_DELETE_ITEM: '删除商品失败，请重试',
     UPC_VALIDATE_ERROR: 'UPC只能是数字',
     SCAN_ITEM: '扫描商品',
@@ -288,7 +286,7 @@ export default {
     CLEAR_AISLE_ITEMS_WONT_DELETE: '删除此通道的货架信息',
     CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
     CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
-    PALLET_MANAGEMENT: 'Pallet Management' // TODO Mandarin Translation
+    PALLET_MANAGEMENT: '卡板管理'
   },
   WORKLIST: {
     WORKLIST: '待办任务',

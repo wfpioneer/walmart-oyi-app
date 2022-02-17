@@ -36,6 +36,7 @@ export const submitMacAddress = (
     const newPrinter: Printer = {
       type: PrinterType.PORTABLE,
       name: `${strings('PRINT.PORTABLE_PRINTER')} ${macAddress}`,
+      labelsAvailable: ['price', 'location', 'pallet'],
       desc: '',
       id: macAddress
     };
@@ -119,7 +120,9 @@ export const ChangePrinterScreen = (props: ChangePrinterProps): JSX.Element => {
         title={strings('GENERICS.SUBMIT')}
         style={styles.button}
         disabled={!macAddress.match(macRegex) || isPrinterExists(printers, macAddress)}
-        onPress={submitMacAddress}
+        onPress={() => submitMacAddress(
+          macAddress, trackEventCall, dispatch, navigation,
+        )}
       />
     </View>
   );
