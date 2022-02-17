@@ -48,9 +48,8 @@ export default {
     UNDO: '未处理',
     YES: '是',
     NO: '否',
-    SETTINGS: 'Settings', // TODO Mandarin Translation
-    ENABLED: 'Enabled', // TODO Mandarin Translation
-    DISABLED: 'Disabled' // TODO Mandarin Translation
+    ENABLED: '激活',
+    DISABLED: '不可用'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -276,8 +275,8 @@ export default {
     CLEAR_SECTION_SALES_FLOOR_MESSAGE: '将清除此货架标签下所有楼面商品',
     CLEAR_SECTION_RESERVE_MESSAGE: '将清除此货架标签下所有卡板',
     CLEAR_SECTION_WONT_DELETE: '将不删除此货架标签',
-    CLEAR_SECTION_SALES_FLOOR_SUCCEED: 'All sales floor items successfully cleared from this section', // TODO Mandarin translation
-    CLEAR_SECTION_RESERVE_SUCCEED: 'All reserve pallets successfully cleared from this section', // TODO Mandarin translation
+    CLEAR_SECTION_SALES_FLOOR_SUCCEED: '此货架所有楼面商品都被清除',
+    CLEAR_SECTION_RESERVE_SUCCEED: '此货架所有卡板信息都被清除',
     CLEAR_SECTION_FAIL: '清除货架标签信息时出错，请重试',
     REMOVE_AISLE_CONFIRMATION: '确定移除此通道？',
     REMOVE_AISLE_WILL_REMOVE_SECTIONS: '将移除此通道下所有货架标签信息',
@@ -354,6 +353,6 @@ export default {
     BINNING: 'Binning'// TODO Mandarin translation
   },
   SETTINGS: {
-    TITLE: 'Settings' // TODO Mandarin Translation
+    TITLE: '设置'
   }
 };
