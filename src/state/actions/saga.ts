@@ -6,6 +6,7 @@ import { PrintItemList, PrintLocationList, PrintPalletList } from '../../models/
 import { CreateZoneRequest } from '../reducers/Location';
 import { PalletItem } from '../../models/PalletItem';
 import { CombinePalletsRequest, UpdateItemQuantityRequest } from '../../services/PalletManagement.service';
+import { GetItemDetailsPayload } from '../../services/GetItemDetails.service';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
@@ -49,7 +50,7 @@ export const CLEAR_PALLET = 'SAGA/CLEAR_PALLET';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
-export const getItemDetails = (payload: any) => ({ type: GET_ITEM_DETAILS, payload } as const);
+export const getItemDetails = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS, payload } as const);
 export const getWorklist = (payload?: any) => ({ type: GET_WORKLIST, payload } as const);
 export const editLocation = (payload: any) => ({ type: EDIT_LOCATION, payload } as const);
 export const addLocation = (payload: any) => ({ type: ADD_LOCATION, payload } as const);
