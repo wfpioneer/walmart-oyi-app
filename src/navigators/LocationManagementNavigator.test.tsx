@@ -29,7 +29,9 @@ describe('LocationManagement Navigator', () => {
     configs: {
       locationManagement: false,
       locationManagementEdit: false,
-      palletManagement: false
+      palletManagement: false,
+      settingsTool: false,
+      printingUpdate: false
     },
     countryCode: 'CN',
     domain: 'Homeoffice',

@@ -27,7 +27,9 @@ describe('ToolsScreen', () => {
       configs: {
         locationManagement: false,
         locationManagementEdit: false,
-        palletManagement: false
+        palletManagement: false,
+        settingsTool: false,
+        printingUpdate: false
       }
     };
     it('Renders Tools screen, location management enabled by fluffy', () => {
@@ -55,7 +57,30 @@ describe('ToolsScreen', () => {
             configs: {
               locationManagement: true,
               locationManagementEdit: false,
-              palletManagement: false
+              palletManagement: false,
+              settingsTool: false,
+              printingUpdate: false
+            }
+          }}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders Settings screen, settings tool enabled by config', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ToolsScreen
+          navigation={navigationProp}
+          user={{
+            ...testUser,
+            configs: {
+              locationManagement: false,
+              locationManagementEdit: false,
+              palletManagement: false,
+              settingsTool: true,
+              printingUpdate: false
             }
           }}
         />
