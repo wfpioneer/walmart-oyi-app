@@ -9,7 +9,13 @@ jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils
 
 describe('ToolsScreen', () => {
   let navigationProp: NavigationProp<any>;
-
+  const mockConfigs = {
+    locationManagement: false,
+    locationManagementEdit: false,
+    palletManagement: false,
+    settingsTool: false,
+    printingUpdate: false
+  };
   describe('Tests rendering the Tools Screen', () => {
     const testUser: User = {
       additional: {
@@ -25,11 +31,7 @@ describe('ToolsScreen', () => {
       userId: 'aFakeUserId',
       features: [],
       configs: {
-        locationManagement: false,
-        locationManagementEdit: false,
-        palletManagement: false,
-        settingsTool: false,
-        printingUpdate: false
+        ...mockConfigs
       }
     };
     it('Renders Tools screen, location management enabled by fluffy', () => {
@@ -55,19 +57,15 @@ describe('ToolsScreen', () => {
           user={{
             ...testUser,
             configs: {
-              locationManagement: true,
-              locationManagementEdit: false,
-              palletManagement: false,
-              settingsTool: false,
-              printingUpdate: false
+              ...mockConfigs,
+              locationManagement: true
             }
           }}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-
-    it('Renders Settings screen, settings tool enabled by config', () => {
+    it('Renders tools screen, pallet management enabled by config', () => {
       const renderer = ShallowRenderer.createRenderer();
 
       renderer.render(
@@ -76,11 +74,25 @@ describe('ToolsScreen', () => {
           user={{
             ...testUser,
             configs: {
-              locationManagement: false,
-              locationManagementEdit: false,
-              palletManagement: false,
-              settingsTool: true,
-              printingUpdate: false
+              ...mockConfigs,
+              palletManagement: true
+            }
+          }}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders tools screen, SettingsTool enabled by config', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ToolsScreen
+          navigation={navigationProp}
+          user={{
+            ...testUser,
+            configs: {
+              ...mockConfigs,
+              settingsTool: true
             }
           }}
         />

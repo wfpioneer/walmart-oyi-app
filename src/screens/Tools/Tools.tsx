@@ -47,7 +47,7 @@ const tools: ToolsFeatures[] = [
       color={COLOR.MAIN_THEME_COLOR}
     />
   },
-  {
+  { // Should always be last in the list
     key: SETTINGS_TOOL,
     title: 'SETTINGS.TITLE',
     destination: 'SettingsTool',
