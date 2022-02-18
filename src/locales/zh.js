@@ -147,10 +147,10 @@ export default {
     PALLET_SUCCESS: '卡板标签打印成功',
     DUPLICATE_PRINTER: '现存打印机',
     SOME_PRINTS_FAILED: '有些商品打印失败',
-    PRICE_SIGN_PRINTER: 'Price Sign Printer', // TODO Mandarin Translation
-    LOCATION_LABEL_PRINTER: 'Location Label Printer', // TODO Mandarin Translation
-    PALLET_LABEL_PRINTER: 'Pallet Label Printer', // TODO Mandarin Translation
-    LOCATION_PRINTING: 'Location Printing', // TODO Mandarin Translation
+    PRICE_SIGN_PRINTER: '价格标签打印机',
+    LOCATION_LABEL_PRINTER: '货架标签打印机',
+    PALLET_LABEL_PRINTER: '卡板标签打印机',
+    LOCATION_PRINTING: '正在打印货架标签',
     PRICE_SIGNS: 'Price Signs', // TODO Mandarin Translation
     LOCATIONS: 'Locations' // TODO Mandarin Translation
   },
@@ -224,7 +224,7 @@ export default {
     CLEAR_SECTION: '清除此货架位置',
     REMOVE_SECTION: '移除此货架位置',
     REMOVE_ZONE: '移除此区域',
-    REMOVE_ALL: 'Remove all', // TODO Mandarin Translation
+    REMOVE_ALL: 'Remove all',
     ADD: '增加',
     SCAN_LOCATION: '无效位置名，如A1-2',
     ADD_ZONE: '添加一个新区域',
@@ -295,7 +295,7 @@ export default {
     CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
     CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
     PALLET_MANAGEMENT: '卡板管理',
-    LOCATION_MGMT_EDIT: 'Location Management Edit' // TODO Mandarin translation
+    LOCATION_MGMT_EDIT: '编辑位置管理'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
@@ -342,17 +342,17 @@ export default {
     FAILED_APPROVE: '审批未成功',
     FAILED_ITEMS: '此商品未成功审批',
     UPDATE_API_ERROR: '更新审批状态时发生错误，\n请再试',
-    MANAGER_APPROVAL: 'Manager Approval' // TODO Mandarin translation
+    MANAGER_APPROVAL: '副总审批'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: '需店号开启OYI',
     ENTER_CLUB_NBR: '输入店号'
   },
   PICKING: {
-    PICKING: 'Picking' // TODO Mandarin translation
+    PICKING: '楼面补货'
   },
   BINNING: {
-    BINNING: 'Binning'// TODO Mandarin translation
+    BINNING: '上架'
   },
   SETTINGS: {
     TITLE: '设置'
