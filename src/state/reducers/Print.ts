@@ -11,6 +11,7 @@ import {
   SET_LOCATION_LABEL_PRINTER,
   SET_PALLET_LABEL_PRINTER,
   SET_PRICE_LABEL_PRINTER,
+  SET_PRINTER_LIST,
   SET_PRINTING_LOCATION_LABELS,
   SET_PRINTING_PALLET_LABEL,
   SET_PRINTING_TYPE,
@@ -196,6 +197,11 @@ export const Print = (state = initialState, action: Actions): StateType => {
       return {
         ...state,
         selectedPrintingType: action.payload
+      };
+    case SET_PRINTER_LIST:
+      return {
+        ...state,
+        printerList: action.payload
       };
     default:
       return state;

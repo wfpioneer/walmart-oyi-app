@@ -19,6 +19,7 @@ export const SET_PRICE_LABEL_PRINTER = 'PRINT/SET_PRICE_LABEL_PRINTER';
 export const SET_LOCATION_LABEL_PRINTER = 'PRINT/SET_LOCATION_LABEL_PRINTER';
 export const SET_PALLET_LABEL_PRINTER = 'PRINT/SET_PALLET_LABEL_PRINTER';
 export const SET_PRINTING_TYPE = 'PRINT/SET_PRINTING_TYPE';
+export const SET_PRINTER_LIST = 'PRINT/SET_PRINTER_LIST';
 
 export const setSelectedPrinter = (printer: Printer) => ({
   type: SET_SELECTED_PRINTER,
@@ -91,17 +92,17 @@ export const clearLocationPrintQueue = () => ({
   type: CLEAR_LOCATION_PRINT_QUEUE
 } as const);
 
-export const setPriceLabelPrinter = (printer : Printer) => ({
+export const setPriceLabelPrinter = (printer : Printer | null) => ({
   type: SET_PRICE_LABEL_PRINTER,
   payload: printer
 } as const);
 
-export const setLocationLabelPrinter = (printer : Printer) => ({
+export const setLocationLabelPrinter = (printer : Printer | null) => ({
   type: SET_LOCATION_LABEL_PRINTER,
   payload: printer
 } as const);
 
-export const setPalletLabelPrinter = (printer : Printer) => ({
+export const setPalletLabelPrinter = (printer : Printer | null) => ({
   type: SET_PALLET_LABEL_PRINTER,
   payload: printer
 } as const);
@@ -109,6 +110,11 @@ export const setPalletLabelPrinter = (printer : Printer) => ({
 export const setPrintingType = (printingType: PrintingType) => ({
   type: SET_PRINTING_TYPE,
   payload: printingType
+} as const);
+
+export const setPrinterList = (printerList: Printer[]) => ({
+  type: SET_PRINTER_LIST,
+  payload: printerList
 } as const);
 
 export type Actions =
@@ -131,3 +137,4 @@ export type Actions =
 | ReturnType<typeof setLocationLabelPrinter>
 | ReturnType<typeof setPalletLabelPrinter>
 | ReturnType<typeof setPrintingType>
+| ReturnType<typeof setPrinterList>

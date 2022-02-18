@@ -45,9 +45,11 @@ export default {
     ITEMS: 'Artículos',
     TOOLS: 'Herramientas',
     CURRENCY_SYMBOL: '$',
-    UNDO: 'Undo', // TODO spanish Translation
+    UNDO: 'Deshacer',
     YES: 'Sí',
-    NO: 'No'
+    NO: 'No',
+    ENABLED: 'Activado',
+    DISABLED: 'Desactivado'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -109,16 +111,16 @@ export default {
     RESERVE_QTY: 'Bodega',
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consol',
-    FLY_CLOUD_QTY: 'Fly Cloud Qty', // Leaving This as is until MX has a need for Cloud Qty
+    FLY_CLOUD_QTY: 'Cantidad Cloud', // Leaving This as is until MX has a need for Cloud Qty
     ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas',
-    ITEM_NUMBER: 'Item Number' // TODO Spanish translation
+    ITEM_NUMBER: 'Número de Artículo'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
     QUEUE_TITLE: 'Cola de Impresión',
     CHANGE_TITLE: 'Impresoras',
     LOCATION_TITLE: 'Imprimir Etiquetas de Ubicación',
-    PALLET_TITLE: 'Print pallet label', // TODO Spanish translation
+    PALLET_TITLE: 'Imprimir etiqueta de pallet',
     PRICE_SIGN: 'Imprimir la señalización',
     COPY_QTY: 'Número de Copias',
     COPIES: 'Copias',
@@ -147,7 +149,11 @@ export default {
     LOCATION_SUCCESS: 'Etiqueta de sección impresa correctamente',
     PALLET_SUCCESS: 'Etiqueta de Pallet impresa correctamente',
     DUPLICATE_PRINTER: 'Una impresora ya existe',
-    SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
+    SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse',
+    PRICE_SIGN_PRINTER: 'Impresora de Señalización',
+    LOCATION_LABEL_PRINTER: 'Impresora de etiquetas de ubicación',
+    PALLET_LABEL_PRINTER: 'Impresora de etiquetas de pallet',
+    LOCATION_PRINTING: 'Impresión de Ubicaciones'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -165,8 +171,8 @@ export default {
     PALLET_DETAILS_ERROR: 'Error: incapaz de encontrar Pallet',
     PALLET_MERGE: 'será combinado con',
     CANNOT_HAVE_NEGATIVE_QTY: 'El artículo no puede teener cantidad negativa',
-    ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Spanish translation
-    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC', // TODO Spanish translation
+    ITEMS_DETAILS_EXIST: 'El artículo escaneado ya existe en el pallet',
+    ITEMS_DETAILS_ERROR: 'Error. No es posible encontrar el UPC',
     PALLET_UPC_NOT_FOUND: 'El pallet o un UPC no se encontraron',
     ADD_UPC_SUCCESS: 'Todos los artículos se agregaron satisfactoriamente al pallet',
     ADD_UPC_ERROR: 'Error agregando artículos al pallet',
@@ -201,15 +207,15 @@ export default {
     EDIT_LOCATION: 'Editar Ubicación',
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ITEMS: 'Artículos',
-    PALLETS: 'Pallets', // TODO Spanish Translation
-    PALLET: 'Pallet', // TODO Spanish Translation
+    PALLETS: 'Pallets',
+    PALLET: 'Pallet',
     ZONES: 'Zonas',
     ZONE: 'Zona',
     AISLES: 'Pasillos',
     AISLE: 'Pasillo',
     SECTIONS: 'Secciones',
     SECTION: 'Sección',
-    AREAS: 'Areas', // TODO Spanish Translation
+    AREAS: 'Áreas',
     LOCATION_DETAILS: 'Detalles de ubicación',
     NO_ZONES_AVAILABLE: 'No hay zonas disponibles',
     NO_AISLES_AVAILABLE: 'No hay pasillos disponibles',
@@ -289,7 +295,8 @@ export default {
     CLEAR_AISLE_ITEMS_WONT_DELETE: 'Esto no eliminará las secciones del pasillo',
     CLEAR_AISLE_ITEMS_SUCCEED: 'Todos los artículos seleccionados fueron limpiados del pasillo',
     CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo',
-    PALLET_MANAGEMENT: 'Administración de Pallet'
+    PALLET_MANAGEMENT: 'Administración de Pallet',
+    LOCATION_MGMT_EDIT: 'Editar Administración de Pallet'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -335,10 +342,20 @@ export default {
     UPDATE_REJECTED: 'Actualización de existencia rechazado',
     FAILED_APPROVE: 'Las solicitudes fallaron al aprobarse',
     FAILED_ITEMS: 'Artículos Fallidos',
-    UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo'
+    UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo',
+    MANAGER_APPROVAL: 'Aprobación de Gerencia'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'Un número de club es necesario para ingresar a OYI',
     ENTER_CLUB_NBR: 'Ingresa número de club'
+  },
+  PICKING: {
+    PICKING: 'Pickeo'
+  },
+  BINNING: {
+    BINNING: 'Bodega'
+  },
+  SETTINGS: {
+    TITLE: 'Ajustes' // TODO: Spanish translation
   }
 };
