@@ -7,7 +7,7 @@ exports[`PrintListTab Navigator Renders the PrintListTab navigator component 1`]
     name="PriceSigns"
     options={
       Object {
-        "title": "Price Signs",
+        "title": "[missing \\"en.PRINT.PRICE_SIGNS\\" translation]",
       }
     }
   />
@@ -16,7 +16,7 @@ exports[`PrintListTab Navigator Renders the PrintListTab navigator component 1`]
     name="Locations"
     options={
       Object {
-        "title": "Locations",
+        "title": "[missing \\"en.PRINT.LOCATIONS\\" translation]",
       }
     }
   />
