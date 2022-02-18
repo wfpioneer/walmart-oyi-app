@@ -23,7 +23,9 @@ import {
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const mapStateToProps = (state: any) => ({
-  printerList: state.Print.printerList
+  printerList: state.Print.printerList,
+  printingLocationLabels: state.Print.printingLocationLabels,
+  printingPalletLabel: state.Print.printingPalletLabel
 });
 
 const mapDispatchToProps = {
