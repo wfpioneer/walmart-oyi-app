@@ -1,5 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ToolsScreen Tests rendering the Tools Screen Renders Settings screen, settings tool enabled by config 1`] = `
+<View
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "center",
+      "marginTop": 4,
+      "paddingTop": 8,
+    }
+  }
+>
+  <ToolsButton
+    destination="SettingsTool"
+    title="[missing \\"en.SETTINGS.TITLE\\" translation]"
+  >
+    <mockConstructor
+      color="#0071e9"
+      name="cog-outline"
+      size={28}
+    />
+  </ToolsButton>
+</View>
+`;
+
 exports[`ToolsScreen Tests rendering the Tools Screen Renders Tools screen, location management enabled by fluffy 1`] = `
 <View
   style={
