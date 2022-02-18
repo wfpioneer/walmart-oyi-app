@@ -135,6 +135,9 @@ export default {
     Medium: '中标签',
     Large: '大标签',
     PRINTER_LIST: '打印机清单',
+    PRINTER_LIST_PRICE: '选择商品价签打印',
+    PRINTER_LIST_LOCATION: '选择货架标签打印',
+    PRINTER_LIST_PALLET: '选择卡板标签打印',
     CHANGE_PRINTER: '更换打印机',
     MAC_ADDRESS: '输入或扫描MAC地址',
     MAC_ADDRESS_ERROR: 'MAC地址通常是12个数字',
@@ -162,8 +165,8 @@ export default {
     PALLET_DETAILS_ERROR: '报错：无法找到卡板',
     PALLET_MERGE: '将合并到',
     CANNOT_HAVE_NEGATIVE_QTY: '商品库存不可是负',
-    ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Mandarin translation
-    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC', // TODO Mandarin translation
+    ITEMS_DETAILS_EXIST: '扫描的商品已经在此卡板',
+    ITEMS_DETAILS_ERROR: '报错:无法找到此商品UPC信息',
     PALLET_UPC_NOT_FOUND: '未找到卡板或者UPC',
     ADD_UPC_SUCCESS: '所有商品成功添加到卡板',
     ADD_UPC_ERROR: '添加商品到卡板时出错',

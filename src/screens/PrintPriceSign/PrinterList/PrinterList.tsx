@@ -61,8 +61,11 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
 
     const setPortablePrinterForAllLabels = (printer: Printer) => {
       this.props.setPriceLabelPrinterAction(printer);
+      setPriceLabelPrinter(printer);
       this.props.setLocationLabelPrinterAction(printer);
+      setLocationLabelPrinter(printer);
       this.props.setPalletLabelPrinterAction(printer);
+      setPalletLabelPrinter(printer);
     };
 
     // printingType will only be set if settingsTool is active
@@ -76,12 +79,15 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
         switch (this.props.printingType) {
           case PrintingType.PRICE_SIGN:
             setPriceLabelPrinter(item);
+            this.props.setPriceLabelPrinterAction(item);
             break;
           case PrintingType.LOCATION:
             setLocationLabelPrinter(item);
+            this.props.setLocationLabelPrinterAction(item);
             break;
           case PrintingType.PALLET:
             setPalletLabelPrinter(item);
+            this.props.setPalletLabelPrinterAction(item);
             break;
           default:
             break;
@@ -142,15 +148,37 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
     );
   };
 
+  selectPrinterMessage = (printingType: PrintingType | null): JSX.Element => {
+    switch (printingType) {
+      case PrintingType.PRICE_SIGN:
+        return (
+          <Text>{strings('PRINT.PRINTER_LIST_PRICE')}</Text>
+        );
+      case PrintingType.LOCATION:
+        return (
+          <Text>{strings('PRINT.PRINTER_LIST_LOCATION')}</Text>
+        );
+      case PrintingType.PALLET:
+        return (
+          <Text>{strings('PRINT.PRINTER_LIST_PALLET')}</Text>
+        );
+      default:
+        return (<></>);
+    }
+  };
+
   render(): JSX.Element {
     return (
-      <FlatList
-        data={this.props.printerList}
-        ItemSeparatorComponent={ItemSeparator}
-        renderItem={this.printerListCard}
-        style={styles.flatList}
-        keyExtractor={(item: any) => item.id.toString()}
-      />
+      <>
+        {this.selectPrinterMessage(this.props.printingType)}
+        <FlatList
+          data={this.props.printerList}
+          ItemSeparatorComponent={ItemSeparator}
+          renderItem={this.printerListCard}
+          style={styles.flatList}
+          keyExtractor={(item: any) => item.id.toString()}
+        />
+      </>
     );
   }
 }
