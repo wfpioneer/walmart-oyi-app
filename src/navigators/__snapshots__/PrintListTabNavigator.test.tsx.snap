@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrintListTab Navigator Renders the PrintListTab navigator component 1`] = `
+<MaterialTopTabNavigator>
+  <Screen
+    component={[Function]}
+    name="PriceSigns"
+    options={
+      Object {
+        "title": "Price Signs",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="Locations"
+    options={
+      Object {
+        "title": "Locations",
+      }
+    }
+  />
+</MaterialTopTabNavigator>
+`;

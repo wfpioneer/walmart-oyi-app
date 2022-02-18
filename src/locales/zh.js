@@ -150,7 +150,9 @@ export default {
     PRICE_SIGN_PRINTER: 'Price Sign Printer', // TODO Mandarin Translation
     LOCATION_LABEL_PRINTER: 'Location Label Printer', // TODO Mandarin Translation
     PALLET_LABEL_PRINTER: 'Pallet Label Printer', // TODO Mandarin Translation
-    LOCATION_PRINTING: 'Location Printing' // TODO spanish Translation
+    LOCATION_PRINTING: 'Location Printing', // TODO Mandarin Translation
+    PRICE_SIGNS: 'Price Signs', // TODO Mandarin Translation
+    LOCATIONS: 'Locations' // TODO Mandarin Translation
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',

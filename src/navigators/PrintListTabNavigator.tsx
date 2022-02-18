@@ -1,27 +1,26 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React from 'react';
+import { strings } from '../locales';
 import PrintLists from '../screens/PrintList/PrintList';
 
 const Tab = createMaterialTopTabNavigator();
 
-const PrintListTabNavigator = (props: any): JSX.Element => (
+export const PrintListTabNavigator = (): JSX.Element => (
   <Tab.Navigator>
     <Tab.Screen
       name="PriceSigns"
+      component={PrintLists}
       options={{
-        title: 'Price Signs'
+        title: strings('PRINT.PRICE_SIGNS')
       }}
-    >
-      {() => <PrintLists />}
-    </Tab.Screen>
+    />
     <Tab.Screen
       name="Locations"
+      component={PrintLists}
       options={{
-        title: 'Locations'
+        title: strings('PRINT.LOCATIONS')
       }}
-    >
-      {() => <PrintLists />}
-    </Tab.Screen>
+    />
   </Tab.Navigator>
 );
 
