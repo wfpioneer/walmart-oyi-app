@@ -48,8 +48,8 @@ export default {
     UNDO: 'Deshacer',
     YES: 'Sí',
     NO: 'No',
-    ENABLED: 'Enabled', // TODO spanish Translation
-    DISABLED: 'Disabled'// TODO spanish Translation
+    ENABLED: 'Activado',
+    DISABLED: 'Desactivado'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -147,10 +147,10 @@ export default {
     PALLET_SUCCESS: 'Etiqueta de Pallet impresa correctamente',
     DUPLICATE_PRINTER: 'Una impresora ya existe',
     SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse',
-    PRICE_SIGN_PRINTER: 'Price Sign Printer', // TODO spanish Translation
-    LOCATION_LABEL_PRINTER: 'Location Label Printer', // TODO spanish Translation
-    PALLET_LABEL_PRINTER: 'Pallet Label Printer', // TODO spanish Translation
-    LOCATION_PRINTING: 'Location Printing' // TODO spanish Translation
+    PRICE_SIGN_PRINTER: 'Impresora de Señalización',
+    LOCATION_LABEL_PRINTER: 'Impresora de etiquetas de ubicación',
+    PALLET_LABEL_PRINTER: 'Impresora de etiquetas de pallet',
+    LOCATION_PRINTING: 'Impresión de Ubicaciones'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -293,7 +293,7 @@ export default {
     CLEAR_AISLE_ITEMS_SUCCEED: 'Todos los artículos seleccionados fueron limpiados del pasillo',
     CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo',
     PALLET_MANAGEMENT: 'Administración de Pallet',
-    LOCATION_MGMT_EDIT: 'Location Management Edit' // TODO spanish translation
+    LOCATION_MGMT_EDIT: 'Editar Administración de Pallet'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -340,19 +340,19 @@ export default {
     FAILED_APPROVE: 'Las solicitudes fallaron al aprobarse',
     FAILED_ITEMS: 'Artículos Fallidos',
     UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo',
-    MANAGER_APPROVAL: 'Manager Approval' // TODO spanish translation
+    MANAGER_APPROVAL: 'Aprobación de Gerencia'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'Un número de club es necesario para ingresar a OYI',
     ENTER_CLUB_NBR: 'Ingresa número de club'
   },
   PICKING: {
-    PICKING: 'Picking' // TODO spanish translation
+    PICKING: 'Pickeo'
   },
   BINNING: {
-    BINNING: 'Binning'// TODO spanish translation
+    BINNING: 'Bodega'
   },
   SETTINGS: {
-    TITLE: 'Settings' // TODO: Spanish translation
+    TITLE: 'Ajustes' // TODO: Spanish translation
   }
 };
