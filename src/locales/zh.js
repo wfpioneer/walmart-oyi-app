@@ -150,7 +150,9 @@ export default {
     PRICE_SIGN_PRINTER: '价格标签打印机',
     LOCATION_LABEL_PRINTER: '货架标签打印机',
     PALLET_LABEL_PRINTER: '卡板标签打印机',
-    LOCATION_PRINTING: '正在打印货架标签' // TODO spanish Translation
+    LOCATION_PRINTING: '正在打印货架标签',
+    PRICE_SIGNS: '价格标签',
+    LOCATIONS: '位置'
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',
