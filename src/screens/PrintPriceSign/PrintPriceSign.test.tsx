@@ -41,6 +41,20 @@ describe('PrintPriceSignScreen', () => {
   const emptyLocation = { id: 0, name: '' };
   const nonemptyLocation = { id: 1, name: 'yes' };
   const mockPalletInfo = { id: 6 };
+  const mockPrinterList = [{
+    type: 0,
+    name: 'Front desk printer',
+    desc: 'Default',
+    labelsAvailable: ['price'],
+    id: '000000000000'
+  }];
+  const mockUserConfig = {
+    locationManagement: true,
+    locationManagementEdit: false,
+    palletManagement: true,
+    settingsTool: false,
+    printingUpdate: true
+  };
 
   describe('Tests rendering print Errors/Api responses', () => {
     // Double Test here???
@@ -83,6 +97,8 @@ describe('PrintPriceSignScreen', () => {
           setError={jest.fn()}
           useEffectHook={jest.fn()}
           useLayoutHook={jest.fn()}
+          printerList={mockPrinterList}
+          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -120,6 +136,8 @@ describe('PrintPriceSignScreen', () => {
           setError={jest.fn()}
           useEffectHook={jest.fn()}
           useLayoutHook={jest.fn()}
+          printerList={mockPrinterList}
+          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -157,6 +175,8 @@ describe('PrintPriceSignScreen', () => {
           setError={jest.fn()}
           useEffectHook={jest.fn()}
           useLayoutHook={jest.fn()}
+          printerList={mockPrinterList}
+          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -198,6 +218,8 @@ describe('PrintPriceSignScreen', () => {
           setError={jest.fn()}
           useEffectHook={jest.fn()}
           useLayoutHook={jest.fn()}
+          printerList={mockPrinterList}
+          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -237,6 +259,8 @@ describe('PrintPriceSignScreen', () => {
           setError={jest.fn()}
           useEffectHook={jest.fn()}
           useLayoutHook={jest.fn()}
+          printerList={mockPrinterList}
+          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -276,6 +300,8 @@ describe('PrintPriceSignScreen', () => {
         setError={jest.fn()}
         useEffectHook={jest.fn()}
         useLayoutHook={jest.fn()}
+        printerList={mockPrinterList}
+        userConfig={mockUserConfig}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -314,6 +340,8 @@ describe('PrintPriceSignScreen', () => {
         setError={jest.fn()}
         useEffectHook={jest.fn()}
         useLayoutHook={jest.fn()}
+        printerList={mockPrinterList}
+        userConfig={mockUserConfig}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -352,6 +380,8 @@ describe('PrintPriceSignScreen', () => {
         setError={jest.fn()}
         useEffectHook={jest.fn()}
         useLayoutHook={jest.fn()}
+        printerList={mockPrinterList}
+        userConfig={mockUserConfig}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -382,6 +412,7 @@ describe('PrintPriceSignScreen', () => {
       const portablePrinter = {
         type: PrinterType.PORTABLE,
         name: 'Mobile printer',
+        labelsAvailable: ['price'],
         desc: 'Default',
         id: '456000000000'
       };
