@@ -154,7 +154,9 @@ export default {
     PRICE_SIGN_PRINTER: 'Price Sign Printer',
     LOCATION_LABEL_PRINTER: 'Location Label Printer',
     PALLET_LABEL_PRINTER: 'Pallet Label Printer',
-    LOCATION_PRINTING: 'Location Printing'
+    LOCATION_PRINTING: 'Location Printing',
+    PRICE_SIGNS: 'Price Signs',
+    LOCATIONS: 'Locations'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Pallet Management',
