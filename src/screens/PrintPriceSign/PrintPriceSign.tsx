@@ -25,7 +25,7 @@ import {
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
   LaserPaper, PortablePaper, PrintItemList, PrintLocationList,
-  PrintPalletList, PrintPaperSize, PrintQueueItem, PrintQueueItemType, Printer, PrinterType
+  PrintPalletList, PrintPaperSize, PrintQueueItem, PrintQueueItemType, Printer, PrinterType, defaultPrinter
 } from '../../models/Printer';
 
 import { printLocationLabel, printPalletLabel, printSign } from '../../state/actions/saga';
@@ -233,18 +233,11 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     // Just used to set the default printer the first time, since redux loads before the translations
     const printListHasLaserPrinter = printerList.some(printer => printer.type === PrinterType.LASER);
     if (selectedPrinter?.name === '' || !printListHasLaserPrinter) {
-      const initialPrinter: Printer = {
-        type: PrinterType.LASER,
-        name: strings('PRINT.FRONT_DESK'),
-        desc: strings('GENERICS.DEFAULT'),
-        id: '000000000000',
-        labelsAvailable: ['price']
-      };
-      dispatch(setPriceLabelPrinter(initialPrinter));
+      dispatch(setPriceLabelPrinter(defaultPrinter));
       if (!printListHasLaserPrinter) {
-        dispatch(addToPrinterList(initialPrinter));
+        dispatch(addToPrinterList(defaultPrinter));
       }
-      savePrinter(initialPrinter);
+      savePrinter(defaultPrinter);
     }
   }, []);
 

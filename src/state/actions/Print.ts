@@ -1,4 +1,6 @@
-import { PrintPaperSize, PrintQueueItem, Printer, PrintingType } from '../../models/Printer';
+import {
+  PrintPaperSize, PrintQueueItem, Printer, PrintingType
+} from '../../models/Printer';
 
 export const SET_SELECTED_PRINTER = 'PRINT/SET_SELECTED_PRINTER';
 export const SET_SELECTED_SIGN_TYPE = 'PRINT/SET_SELECTED_SIGN_TYPE';

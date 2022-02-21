@@ -1,63 +1,386 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PrinterList Renders list of Printers in Flatlist  1`] = `
-<FlatList
-  ItemSeparatorComponent={[Function]}
-  data={
-    Array [
+<React.Fragment>
+  <React.Fragment />
+  <FlatList
+    ItemSeparatorComponent={[Function]}
+    data={
+      Array [
+        Object {
+          "desc": "Default",
+          "id": "123000000000",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Front desk printer",
+          "type": 0,
+        },
+        Object {
+          "desc": "Default",
+          "id": "0",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Invalid printer",
+          "type": 0,
+        },
+        Object {
+          "desc": "Default",
+          "id": "456000000000",
+          "labelsAvailable": Array [
+            "price",
+            "location",
+            "pallet",
+          ],
+          "name": "Mobile printer",
+          "type": 1,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
       Object {
-        "desc": "Default",
-        "id": "123000000000",
-        "labelsAvailable": Array [
-          "price",
-        ],
-        "name": "Front desk printer",
-        "type": 0,
-      },
+        "backgroundColor": "#ffffffff",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</React.Fragment>
+`;
+
+exports[`PrinterList Renders list of Printers in Flatlist setting location 1`] = `
+<React.Fragment>
+  <Text
+    style={
       Object {
-        "desc": "Default",
-        "id": "0",
-        "labelsAvailable": Array [
-          "price",
-        ],
-        "name": "Invalid printer",
-        "type": 0,
-      },
+        "alignSelf": "center",
+        "fontSize": 16,
+        "margin": 15,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.PRINT.PRINTER_LIST_LOCATION" translation]
+  </Text>
+  <FlatList
+    ItemSeparatorComponent={[Function]}
+    data={
+      Array [
+        Object {
+          "desc": "Default",
+          "id": "123000000000",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Front desk printer",
+          "type": 0,
+        },
+        Object {
+          "desc": "Default",
+          "id": "0",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Invalid printer",
+          "type": 0,
+        },
+        Object {
+          "desc": "Default",
+          "id": "456000000000",
+          "labelsAvailable": Array [
+            "price",
+            "location",
+            "pallet",
+          ],
+          "name": "Mobile printer",
+          "type": 1,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
       Object {
-        "desc": "Default",
-        "id": "456000000000",
-        "labelsAvailable": Array [
-          "price",
-          "location",
-          "pallet",
-        ],
-        "name": "Mobile printer",
-        "type": 1,
-      },
-    ]
-  }
-  disableVirtualization={false}
-  horizontal={false}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onEndReachedThreshold={2}
-  removeClippedSubviews={false}
-  renderItem={[Function]}
-  scrollEventThrottle={50}
+        "backgroundColor": "#ffffffff",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</React.Fragment>
+`;
+
+exports[`PrinterList Renders list of Printers in Flatlist setting pallet 1`] = `
+<React.Fragment>
+  <Text
+    style={
+      Object {
+        "alignSelf": "center",
+        "fontSize": 16,
+        "margin": 15,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.PRINT.PRINTER_LIST_PALLET" translation]
+  </Text>
+  <FlatList
+    ItemSeparatorComponent={[Function]}
+    data={
+      Array [
+        Object {
+          "desc": "Default",
+          "id": "123000000000",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Front desk printer",
+          "type": 0,
+        },
+        Object {
+          "desc": "Default",
+          "id": "0",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Invalid printer",
+          "type": 0,
+        },
+        Object {
+          "desc": "Default",
+          "id": "456000000000",
+          "labelsAvailable": Array [
+            "price",
+            "location",
+            "pallet",
+          ],
+          "name": "Mobile printer",
+          "type": 1,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</React.Fragment>
+`;
+
+exports[`PrinterList Renders list of Printers in Flatlist setting price sign 1`] = `
+<React.Fragment>
+  <Text
+    style={
+      Object {
+        "alignSelf": "center",
+        "fontSize": 16,
+        "margin": 15,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.PRINT.PRINTER_LIST_PRICE" translation]
+  </Text>
+  <FlatList
+    ItemSeparatorComponent={[Function]}
+    data={
+      Array [
+        Object {
+          "desc": "Default",
+          "id": "123000000000",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Front desk printer",
+          "type": 0,
+        },
+        Object {
+          "desc": "Default",
+          "id": "0",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Invalid printer",
+          "type": 0,
+        },
+        Object {
+          "desc": "Default",
+          "id": "456000000000",
+          "labelsAvailable": Array [
+            "price",
+            "location",
+            "pallet",
+          ],
+          "name": "Mobile printer",
+          "type": 1,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</React.Fragment>
+`;
+
+exports[`PrinterList Renders printer item card that is disabled 1`] = `
+<TouchableOpacity
+  disabled={true}
+  hostRef={null}
+  onPress={[Function]}
   style={
     Object {
-      "backgroundColor": "#ffffffff",
+      "alignItems": "center",
+      "flexDirection": "row",
+      "height": 40,
+      "justifyContent": "flex-start",
+      "marginVertical": 10,
+      "opacity": 0.5,
+      "paddingHorizontal": 15,
     }
   }
-  updateCellsBatchingPeriod={50}
-  windowSize={21}
-/>
+>
+  <mockConstructor
+    color="#000000"
+    name="printer"
+    size={20}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <Text>
+      Invalid printer
+    </Text>
+  </View>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "paddingLeft": 15,
+        "paddingRight": 5,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#000000"
+      name="trash-can"
+      size={20}
+    />
+  </ForwardRef>
+</TouchableOpacity>
+`;
+
+exports[`PrinterList Renders printer item card that is not disabled when location 1`] = `
+<TouchableOpacity
+  disabled={false}
+  hostRef={null}
+  onPress={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "height": 40,
+      "justifyContent": "flex-start",
+      "marginVertical": 10,
+      "paddingHorizontal": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#000000"
+    name="printer"
+    size={20}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <Text>
+      Mobile printer
+    </Text>
+  </View>
+  <ForwardRef
+    onPress={[Function]}
+    style={
+      Object {
+        "paddingLeft": 15,
+        "paddingRight": 5,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockConstructor
+      color="#000000"
+      name="trash-can"
+      size={20}
+    />
+  </ForwardRef>
+</TouchableOpacity>
 `;
 
 exports[`PrinterList Renders printer item card with no delete icon 1`] = `
 <TouchableOpacity
+  disabled={null}
   hostRef={null}
   onPress={[Function]}
   style={
@@ -111,6 +434,7 @@ exports[`PrinterList Renders printer item card with no delete icon 1`] = `
 
 exports[`PrinterList Renders the delete icon for PrinterIds not equal to 0 1`] = `
 <TouchableOpacity
+  disabled={null}
   hostRef={null}
   onPress={[Function]}
   style={

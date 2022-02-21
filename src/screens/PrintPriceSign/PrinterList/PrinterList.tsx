@@ -14,7 +14,9 @@ import {
   setPriceLabelPrinter as setPriceLabelPrinterAction,
   setSelectedPrinter
 } from '../../../state/actions/Print';
-import { Printer, PrinterType, PrintingType } from '../../../models/Printer';
+import {
+  Printer, PrinterType, PrintingType, defaultPrinter
+} from '../../../models/Printer';
 import { strings } from '../../../locales';
 import {
   deletePrinter, setLocationLabelPrinter, setPalletLabelPrinter, setPriceLabelPrinter
@@ -38,18 +40,19 @@ const mapDispatchToProps = {
 };
 
 type setPrinterFn = (printer: Printer) => ({ type: string, payload: Printer});
+type setTypePrinterFn = (printer: Printer | null) => ({ type: string, payload: Printer | null });
 
 interface PrinterListProps {
   printerList: Printer[];
   printingType: PrintingType | null;
-  deleteFromPrinterList: (printerId: string) => ({ type: string, payload: string});
-  setSelectedPrinter: setPrinterFn;
-  setLocationLabelPrinterAction: setPrinterFn;
-  setPriceLabelPrinterAction: setPrinterFn;
-  setPalletLabelPrinterAction: setPrinterFn;
-  navigation: NavigationProp<any>;
   printingLocationLabels: string;
   printingPalletLabel: boolean;
+  deleteFromPrinterList: (printerId: string) => ({ type: string, payload: string});
+  setSelectedPrinter: setPrinterFn;
+  setLocationLabelPrinterAction: setTypePrinterFn;
+  setPriceLabelPrinterAction: setTypePrinterFn;
+  setPalletLabelPrinterAction: setTypePrinterFn;
+  navigation: NavigationProp<any>;
 }
 
 export class PrinterList extends React.PureComponent<PrinterListProps> {
@@ -101,20 +104,18 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
           setPortablePrinterForAllLabels(item);
         } else {
           // when the user switch back to main laser from portable printer for printing price sign
-          this.props.setPriceLabelPrinterAction({
-            type: PrinterType.LASER,
-            name: strings('PRINT.FRONT_DESK'),
-            desc: strings('GENERICS.DEFAULT'),
-            id: '000000000000',
-            labelsAvailable: ['price']
-          });
+          this.props.setPriceLabelPrinterAction(defaultPrinter);
+          setPriceLabelPrinter(defaultPrinter);
         }
         if (this.props.printingPalletLabel) {
           setPalletLabelPrinter(item);
+          this.props.setPalletLabelPrinterAction(item);
         } else if (this.props.printingLocationLabels !== '') {
           setLocationLabelPrinter(item);
+          this.props.setLocationLabelPrinterAction(item);
         } else {
           setPriceLabelPrinter(item);
+          this.props.setPriceLabelPrinterAction(item);
         }
       }
       this.props.navigation.goBack();
@@ -154,15 +155,15 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
     switch (printingType) {
       case PrintingType.PRICE_SIGN:
         return (
-          <Text>{strings('PRINT.PRINTER_LIST_PRICE')}</Text>
+          <Text style={styles.helperText}>{strings('PRINT.PRINTER_LIST_PRICE')}</Text>
         );
       case PrintingType.LOCATION:
         return (
-          <Text>{strings('PRINT.PRINTER_LIST_LOCATION')}</Text>
+          <Text style={styles.helperText}>{strings('PRINT.PRINTER_LIST_LOCATION')}</Text>
         );
       case PrintingType.PALLET:
         return (
-          <Text>{strings('PRINT.PRINTER_LIST_PALLET')}</Text>
+          <Text style={styles.helperText}>{strings('PRINT.PRINTER_LIST_PALLET')}</Text>
         );
       default:
         return (<></>);

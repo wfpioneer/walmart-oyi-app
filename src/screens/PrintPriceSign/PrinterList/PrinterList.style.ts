@@ -5,6 +5,11 @@ const flexStart = 'flex-start';
 const center = 'center';
 
 export default StyleSheet.create({
+  helperText: {
+    fontSize: 16,
+    textAlign: 'center',
+    margin: 15
+  },
   flatList: {
     backgroundColor: COLOR.WHITE
   },
