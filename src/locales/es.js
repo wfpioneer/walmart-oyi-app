@@ -151,8 +151,8 @@ export default {
     LOCATION_LABEL_PRINTER: 'Impresora de etiquetas de ubicación',
     PALLET_LABEL_PRINTER: 'Impresora de etiquetas de pallet',
     LOCATION_PRINTING: 'Impresión de Ubicaciones',
-    PRICE_SIGNS: 'Price Signs', // TODO spanish Translation
-    LOCATIONS: 'Locations' // TODO spanish Translation
+    PRICE_SIGNS: 'Señalización Precios',
+    LOCATIONS: 'Ubicaciones'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',

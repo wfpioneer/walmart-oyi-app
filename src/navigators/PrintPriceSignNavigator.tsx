@@ -18,8 +18,8 @@ const Stack = createStackNavigator();
 const PrintPriceSignNavigator = (): JSX.Element => {
   const navigation = useNavigation();
   const { printingLocationLabels, printingPalletLabel } = useTypedSelector(state => state.Print);
-  const userFeatures = useTypedSelector(state => state.User.features);
-  const isPrintUpdate = userFeatures.includes('printing update');
+  const user = useTypedSelector(state => state.User);
+  const isPrintUpdate = user.features.includes('printing update') || user.configs.printingUpdate;
   const navigateBack = () => {
     navigation.goBack();
   };
