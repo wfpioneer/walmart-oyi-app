@@ -1,6 +1,6 @@
 import {
   ADD_LOCATION_PRINT_QUEUE,
-  ADD_MULTIPLE_TO_PRINT_QUEUE,
+  ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE,
   ADD_TO_PRINTER_LIST,
   ADD_TO_PRINT_QUEUE,
   Actions,
@@ -109,10 +109,14 @@ export const Print = (state = initialState, action: Actions): StateType => {
         ...state,
         printQueue
       };
-    case ADD_MULTIPLE_TO_PRINT_QUEUE:
+    case ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE:
+      // eslint-disable-next-line no-case-declarations
+      const newLocationPrintQueue: PrintQueueItem[] = printQueue.concat(action.payload);
       return {
         ...state,
-        printQueue: printQueue.concat(action.payload)
+        locationPrintQueue: newLocationPrintQueue,
+        // TODO: This needs to removed once PrintQueue component got integrated with new redux state.
+        printQueue: newLocationPrintQueue
       };
     case REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR: {
       const newQueue: PrintQueueItem[] = [];
