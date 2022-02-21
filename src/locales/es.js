@@ -339,6 +339,6 @@ export default {
     ENTER_CLUB_NBR: 'Ingresa número de club'
   },
   SETTINGS: {
-    TITLE: 'Settings' // TODO: Spanish translation
+    TITLE: 'Ajustes'
   }
 };

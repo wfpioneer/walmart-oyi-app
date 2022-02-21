@@ -339,6 +339,6 @@ export default {
     ENTER_CLUB_NBR: '输入店号'
   },
   SETTINGS: {
-    TITLE: 'Settings' // TODO Mandarin Translation
+    TITLE: '设置'
   }
 };
