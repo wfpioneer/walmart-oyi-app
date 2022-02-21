@@ -49,10 +49,7 @@ allprojects {
             url("$rootDir/../node_modules/jsc-android/dist")
         }
 
-        maven { url 'http://repo.wal-mart.com/content/repositories/snapshots' }
-        maven {
-            url "http://repo.wal-mart.com/content/repositories/walmart"
-        }
+        maven { url " [https://repository.walmart.com/repository/gradle_distros] " }
         maven {
             url "https://repository.walmart.com/content/repositories/dl_google/dl/android/maven2"
         }
