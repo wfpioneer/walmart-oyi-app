@@ -11,9 +11,12 @@ import SettingsToolNavigator from './SettingsToolNavigator';
 
 const Stack = createStackNavigator();
 
-export const MainNavigator = () => (
+export const MainNavigator = (): JSX.Element => (
   <NavigationContainer>
-    <Stack.Navigator headerMode="none">
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}
+    >
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Tabs" component={TabNavigator} />
       <Stack.Screen name="ReviewItemDetails" component={ReviewItemDetailsNavigator} />

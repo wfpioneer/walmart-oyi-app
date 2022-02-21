@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsTool Navigator Renders the settings tool navigator component 1`] = `
+<StackNavigator
+  headerMode="float"
+  screenOptions={
+    Object {
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="SettingsTool"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.SETTINGS.TITLE\\" translation]",
+      }
+    }
+  />
+</StackNavigator>
+`;
