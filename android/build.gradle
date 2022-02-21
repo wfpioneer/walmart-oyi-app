@@ -8,10 +8,7 @@ buildscript {
         targetSdkVersion = 29
     }
     repositories {
-        maven { url 'http://repo.wal-mart.com/content/repositories/snapshots' }
-        maven {
-            url "http://repo.wal-mart.com/content/repositories/walmart"
-        }
+        maven { url " [https://repository.walmart.com/repository/gradle_distros] " }
         maven {
             url 'https://repository.walmart.com/content/repositories/pangaea_snapshots'
         }
@@ -67,10 +64,7 @@ allprojects {
 
     buildscript {
         repositories {
-            maven { url 'http://repo.wal-mart.com/content/repositories/snapshots' }
-            maven {
-                url "http://repo.wal-mart.com/content/repositories/walmart"
-            }
+            maven { url " [https://repository.walmart.com/repository/gradle_distros] " }
             maven {
                 url 'https://repository.walmart.com/content/repositories/pangaea_snapshots'
             }
