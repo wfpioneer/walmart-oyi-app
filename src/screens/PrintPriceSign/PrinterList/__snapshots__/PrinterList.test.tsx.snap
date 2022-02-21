@@ -64,7 +64,6 @@ exports[`PrinterList Renders list of Printers in Flatlist setting location 1`] =
   <Text
     style={
       Object {
-        "alignSelf": "center",
         "fontSize": 16,
         "margin": 15,
         "textAlign": "center",
@@ -134,7 +133,6 @@ exports[`PrinterList Renders list of Printers in Flatlist setting pallet 1`] = `
   <Text
     style={
       Object {
-        "alignSelf": "center",
         "fontSize": 16,
         "margin": 15,
         "textAlign": "center",
@@ -204,7 +202,6 @@ exports[`PrinterList Renders list of Printers in Flatlist setting price sign 1`]
   <Text
     style={
       Object {
-        "alignSelf": "center",
         "fontSize": 16,
         "margin": 15,
         "textAlign": "center",
