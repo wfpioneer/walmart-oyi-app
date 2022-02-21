@@ -5,7 +5,7 @@ export const SET_SELECTED_SIGN_TYPE = 'PRINT/SET_SELECTED_SIGN_TYPE';
 export const ADD_TO_PRINTER_LIST = 'PRINT/ADD_TO_PRINTER_LIST';
 export const DELETE_FROM_PRINTER_LIST = 'PRINT/DELETE_FROM_PRINTER_LIST';
 export const ADD_TO_PRINT_QUEUE = 'PRINT/ADD_TO_PRINT_QUEUE';
-export const ADD_MULTIPLE_TO_PRINT_QUEUE = 'PRINT/ADD_MULTIPLE_TO_PRINT_QUEUE';
+export const ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE = 'PRINT/ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE';
 export const REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR = 'PRINT/REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR';
 export const REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC = 'PRINT/REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC';
 export const SET_PRINT_QUEUE = 'PRINT/SET_PRINT_QUEUE';
@@ -45,8 +45,8 @@ export const addToPrintQueue = (label: PrintQueueItem) => ({
   payload: label
 } as const);
 
-export const addMultipleToPrintQueue = (labels: PrintQueueItem[]) => ({
-  type: ADD_MULTIPLE_TO_PRINT_QUEUE,
+export const addMultipleToLocationPrintQueue = (labels: PrintQueueItem[]) => ({
+  type: ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE,
   payload: labels
 } as const);
 
@@ -117,7 +117,7 @@ export type Actions =
 | ReturnType<typeof addToPrinterList>
 | ReturnType<typeof deleteFromPrinterList>
 | ReturnType<typeof addToPrintQueue>
-| ReturnType<typeof addMultipleToPrintQueue>
+| ReturnType<typeof addMultipleToLocationPrintQueue>
 | ReturnType<typeof removeMultipleFromPrintQueueByItemNbr>
 | ReturnType<typeof removeMultipleFromPrintQueueByUpc>
 | ReturnType<typeof setPrintQueue>
