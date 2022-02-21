@@ -39,6 +39,25 @@ const mapDispatchToProps = {
   setPriceLabelPrinterAction
 };
 
+const printingTypeSwitch = (printingType: PrintingType, item: Printer) => {
+  switch (printingType) {
+    case PrintingType.PRICE_SIGN:
+      setPriceLabelPrinter(item);
+      setPriceLabelPrinterAction(item);
+      break;
+    case PrintingType.LOCATION:
+      setLocationLabelPrinter(item);
+      setLocationLabelPrinterAction(item);
+      break;
+    case PrintingType.PALLET:
+      setPalletLabelPrinter(item);
+      setPalletLabelPrinterAction(item);
+      break;
+    default:
+      break;
+  }
+};
+
 type setPrinterFn = (printer: Printer) => ({ type: string, payload: Printer});
 type setTypePrinterFn = (printer: Printer | null) => ({ type: string, payload: Printer | null });
 
@@ -81,22 +100,7 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
 
     const onCardClick = () => {
       if (this.props.printingType) {
-        switch (this.props.printingType) {
-          case PrintingType.PRICE_SIGN:
-            setPriceLabelPrinter(item);
-            this.props.setPriceLabelPrinterAction(item);
-            break;
-          case PrintingType.LOCATION:
-            setLocationLabelPrinter(item);
-            this.props.setLocationLabelPrinterAction(item);
-            break;
-          case PrintingType.PALLET:
-            setPalletLabelPrinter(item);
-            this.props.setPalletLabelPrinterAction(item);
-            break;
-          default:
-            break;
-        }
+        printingTypeSwitch(this.props.printingType, item);
       } else {
         this.props.setSelectedPrinter(item);
         // set the printer to all 3 printers in redux if it is a portable printer to mimic current functionality
