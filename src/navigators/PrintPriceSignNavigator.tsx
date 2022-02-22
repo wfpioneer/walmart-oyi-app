@@ -11,13 +11,15 @@ import { ChangePrinter } from '../screens/PrintPriceSign/ChangePrinter/ChangePri
 import PrinterList from '../screens/PrintPriceSign/PrinterList/PrinterList';
 import styles from './PrintPriceSignNavigator.styles';
 import { useTypedSelector } from '../state/reducers/RootReducer';
+import PrintListTabs from './PrintListTabNavigator';
 
 const Stack = createStackNavigator();
 
-const PrintPriceSignNavigator = () => {
+const PrintPriceSignNavigator = (): JSX.Element => {
   const navigation = useNavigation();
   const { printingLocationLabels, printingPalletLabel } = useTypedSelector(state => state.Print);
-
+  const user = useTypedSelector(state => state.User);
+  const isPrintUpdate = user.features.includes('printing update') || user.configs.printingUpdate;
   const navigateBack = () => {
     navigation.goBack();
   };
@@ -85,7 +87,7 @@ const PrintPriceSignNavigator = () => {
       />
       <Stack.Screen
         name="PrintQueue"
-        component={PrintQueue}
+        component={isPrintUpdate ? PrintListTabs : PrintQueue}
         options={{
           headerTitle: strings('PRINT.QUEUE_TITLE'),
           headerTitleAlign: 'left',

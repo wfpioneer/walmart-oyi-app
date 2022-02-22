@@ -150,7 +150,9 @@ export default {
     PRICE_SIGN_PRINTER: 'Impresora de Señalización',
     LOCATION_LABEL_PRINTER: 'Impresora de etiquetas de ubicación',
     PALLET_LABEL_PRINTER: 'Impresora de etiquetas de pallet',
-    LOCATION_PRINTING: 'Impresión de Ubicaciones'
+    LOCATION_PRINTING: 'Impresión de Ubicaciones',
+    PRICE_SIGNS: 'Señalización Precios',
+    LOCATIONS: 'Ubicaciones'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
