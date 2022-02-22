@@ -9,13 +9,25 @@ const mockPrintQueueItem = {
 };
 
 describe('Test Print Queue Item Card', () => {
-  it('Renders Print Queue Item Card with mock print queue items', () => {
+  it('Renders Print Queue Item Card with mock print queue item', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <PrintQueueItemCard
         jobName={mockPrintQueueItem.jobName}
         nbrOfCopies={mockPrintQueueItem.nbrOfCopies}
         size={mockPrintQueueItem.size}
+        editCallback={jest.fn}
+        deleteCallback={jest.fn}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders Print Queue Item Card with mock print queue item without size prop', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PrintQueueItemCard
+        jobName={mockPrintQueueItem.jobName}
+        nbrOfCopies={mockPrintQueueItem.nbrOfCopies}
         editCallback={jest.fn}
         deleteCallback={jest.fn}
       />
