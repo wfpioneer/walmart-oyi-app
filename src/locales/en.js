@@ -113,6 +113,7 @@ export default {
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consolidated',
     FLY_CLOUD_QTY: 'Fly Cloud',
+    IN_TRANSIT_FLY_QTY: 'In Transit Fly Cloud Qty',
     ERROR_SALES_HISTORY: 'Unable to retrieve sales history',
     ITEM_NUMBER: 'Item Number'
   },

@@ -121,7 +121,8 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
     backroomQty,
     claimsOnHandQty,
     consolidatedOnHandQty,
-    cloudQty
+    cloudQty,
+    inTransitCloudQty
   } = itemDetails;
 
   const salesFloorQty = cloudQty === undefined
@@ -149,6 +150,10 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
 
   if (cloudQty !== undefined) {
     qtyRows.push({ label: strings('ITEM.FLY_CLOUD_QTY'), value: cloudQty });
+  }
+
+  if (inTransitCloudQty !== undefined) {
+    qtyRows.push({ label: strings('ITEM.IN_TRANSIT_FLY_QTY'), value: inTransitCloudQty });
   }
 
   return <ItemDetailsList rows={qtyRows} indentAfterFirstRow={true} />;

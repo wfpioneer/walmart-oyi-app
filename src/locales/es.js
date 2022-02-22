@@ -112,6 +112,7 @@ export default {
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consol',
     FLY_CLOUD_QTY: 'Cantidad Cloud', // Leaving This as is until MX has a need for Cloud Qty
+    IN_TRANSIT_FLY_QTY: 'In Transit Fly Cloud Qty',
     ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas',
     ITEM_NUMBER: 'Número de Artículo'
   },
