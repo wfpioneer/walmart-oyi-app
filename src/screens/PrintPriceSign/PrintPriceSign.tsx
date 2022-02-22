@@ -358,6 +358,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const handleAddPrintList = () => {
     // check if the item/size already exists on the print queue
     const itemSizeExists = isItemSizeExists(printQueue, selectedSignType, itemNbr);
+    // TODO Disable check on price sign screen and vice versa
     const locationLabelExists = aisleSectionExists(printQueue, selectedSection.id);
 
     // TODO Use LocationLabelCheck to allow some items to be added to the print queue

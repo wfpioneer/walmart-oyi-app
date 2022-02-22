@@ -20,7 +20,7 @@ export enum PrintQueueItemType {
 
 export interface PrintQueueItem {
   image?: any;
-  itemName?: string;
+  itemName: string;
   itemNbr?: number;
   upcNbr?: string;
   catgNbr?: number;
