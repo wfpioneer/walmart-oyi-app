@@ -122,7 +122,7 @@ export default {
     CHANGE_TITLE: 'Printers',
     LOCATION_TITLE: 'Print location labels',
     PALLET_TITLE: 'Print pallet label',
-    P: 'Print price sign',
+    PRICE_SIGN: 'Print price sign',
     COPY_QTY: 'Number of copies',
     COPIES: 'Copies',
     SIGN_SIZE: 'Sign size',
