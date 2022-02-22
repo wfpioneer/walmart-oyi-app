@@ -81,11 +81,3 @@ export enum PrintingType {
   LOCATION = 'Location',
   PALLET = 'Pallet'
 }
-
-export const defaultPrinter: Printer = {
-  type: PrinterType.LASER,
-  name: strings('PRINT.FRONT_DESK'),
-  desc: strings('GENERICS.DEFAULT'),
-  id: '000000000000',
-  labelsAvailable: ['price']
-};

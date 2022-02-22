@@ -5,7 +5,7 @@ import { Platform, Text, View } from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
-import { Printer, defaultPrinter } from '../../models/Printer';
+import { Printer, PrinterType } from '../../models/Printer';
 import Button from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
 import styles from './Login.style';
@@ -209,6 +209,13 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     if (printerList && printerList.length > 0) {
       this.props.setPrinterList(printerList);
     } else {
+      const defaultPrinter: Printer = {
+        type: PrinterType.LASER,
+        name: strings('PRINT.FRONT_DESK'),
+        desc: strings('GENERICS.DEFAULT'),
+        id: '000000000000',
+        labelsAvailable: ['price']
+      };
       this.props.setPrinterList([defaultPrinter]);
       savePrinter(defaultPrinter);
     }
