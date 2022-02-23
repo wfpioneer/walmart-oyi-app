@@ -87,7 +87,7 @@ const PrintPriceSignNavigator = (): JSX.Element => {
       />
       <Stack.Screen
         name="PrintQueue"
-        component={isPrintUpdate ? PrintListTabs : PrintQueue}
+        component={/* isPrintUpdate ? PrintListTabs : */ PrintQueue}
         options={{
           headerTitle: strings('PRINT.QUEUE_TITLE'),
           headerTitleAlign: 'left',
