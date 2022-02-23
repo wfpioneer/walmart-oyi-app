@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { FlatList } from 'react-native-gesture-handler';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import styles from './SettingsTool.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { Printer } from '../../models/Printer';
+import { Printer, PrintingType } from '../../models/Printer';
+import { setPrintingType } from '../../state/actions/Print';
 
 interface SettingsToolProps {
   printerOpen: boolean;
@@ -17,6 +21,8 @@ interface SettingsToolProps {
   locationLabelPrinter: Printer | null;
   palletLabelPrinter: Printer | null;
   userFeatures: string[];
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
 }
 interface CollapsibleCardProps {
   title: string;
@@ -63,12 +69,15 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
 export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
   const {
     featuresOpen, printerOpen, toggleFeaturesList, togglePrinterList,
-    locationLabelPrinter, palletLabelPrinter, priceLabelPrinter, userFeatures
+    locationLabelPrinter, palletLabelPrinter, priceLabelPrinter,
+    userFeatures, dispatch, navigation
   } = props;
 
-  const changePrinter = () => {
-    // TODO add functionality to change printers
+  const changePrinter = (printerType: PrintingType) => {
+    dispatch(setPrintingType(printerType));
+    navigation.navigate('PrintPriceSign', { screen: 'PrinterList' });
   };
+
   const appFeatures: Array<{key: string, name:string}> = [
     {
       key: 'manager approval',
@@ -103,6 +112,7 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       name: strings('BINNING.BINNING')
     }
   ];
+
   return (
     <View style={styles.container}>
       <View style={styles.menuContainer}>
@@ -112,9 +122,21 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
           toggleIsOpened={togglePrinterList}
         />
       </View>
-      {printerOpen && (printerCard(strings('PRINT.PRICE_SIGN_PRINTER'), priceLabelPrinter, changePrinter))}
-      {printerOpen && (printerCard(strings('PRINT.LOCATION_LABEL_PRINTER'), locationLabelPrinter, changePrinter))}
-      {printerOpen && (printerCard(strings('PRINT.PALLET_LABEL_PRINTER'), palletLabelPrinter, changePrinter))}
+      {printerOpen && (printerCard(
+        strings('PRINT.PRICE_SIGN_PRINTER'),
+        priceLabelPrinter,
+        () => changePrinter(PrintingType.PRICE_SIGN)
+      ))}
+      {printerOpen && (printerCard(
+        strings('PRINT.LOCATION_LABEL_PRINTER'),
+        locationLabelPrinter,
+        () => changePrinter(PrintingType.LOCATION)
+      ))}
+      {printerOpen && (printerCard(
+        strings('PRINT.PALLET_LABEL_PRINTER'),
+        palletLabelPrinter,
+        () => changePrinter(PrintingType.PALLET)
+      ))}
       <View style={styles.menuContainer}>
         <CollapsibleCard
           title="Features"
@@ -139,6 +161,9 @@ const SettingsTool = (): JSX.Element => {
   const [featuresOpen, toggleFeatureList] = useState(true);
   const { priceLabelPrinter, locationLabelPrinter, palletLabelPrinter } = useTypedSelector(state => state.Print);
   const userFeatures = useTypedSelector(state => state.User.features);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   return (
     <SettingsToolScreen
       printerOpen={printerOpen}
@@ -149,6 +174,8 @@ const SettingsTool = (): JSX.Element => {
       locationLabelPrinter={locationLabelPrinter}
       palletLabelPrinter={palletLabelPrinter}
       userFeatures={userFeatures}
+      dispatch={dispatch}
+      navigation={navigation}
     />
   );
 };

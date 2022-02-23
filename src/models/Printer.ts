@@ -1,3 +1,5 @@
+import { strings } from '../locales';
+
 /* eslint-disable no-shadow */
 export interface Printer {
   type: PrinterType;
@@ -72,4 +74,10 @@ export interface PrintQueueAPIMultistatus {
   itemNbr: number;
   upcNbr: string;
   completed: boolean;
+}
+
+export enum PrintingType {
+  PRICE_SIGN = 'Price Sign',
+  LOCATION = 'Location',
+  PALLET = 'Pallet'
 }
