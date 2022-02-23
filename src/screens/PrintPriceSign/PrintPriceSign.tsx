@@ -106,6 +106,7 @@ interface PriceSignProps {
   selectedPrinter: Printer | null;
   selectedSignType: PrintPaperSize;
   printQueue: PrintQueueItem[];
+  locationPrintQueue: PrintQueueItem[];
   printingLocationLabels: string;
   printingPalletLabel: boolean;
   selectedAisle: LocationIdName;
@@ -216,7 +217,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
     scannedEvent, exceptionType, actionCompleted, itemResult, printAPI, printLabelAPI, printPalletAPI,
     sectionsResult, selectedPrinter, selectedSignType, printQueue, printingLocationLabels, printingPalletLabel,
-    selectedAisle, selectedSection, selectedZone, dispatch, navigation, route, signQty, palletInfo,
+    selectedAisle, selectedSection, selectedZone, dispatch, navigation, route, signQty, palletInfo, locationPrintQueue,
     setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook, printerList, userConfig
   } = props;
   const {
@@ -359,10 +360,9 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     // check if the item/size already exists on the print queue
     const itemSizeExists = isItemSizeExists(printQueue, selectedSignType, itemNbr);
     // TODO Disable check on price sign screen and vice versa
-    const locationLabelExists = aisleSectionExists(printQueue, selectedSection.id);
-
+    const locationLabelExists = aisleSectionExists(locationPrintQueue, selectedSection.id);
     // TODO Use LocationLabelCheck to allow some items to be added to the print queue
-    if (itemSizeExists || locationLabelExists) {
+    if (itemSizeExists || (locationLabelExists && printingLocationLabels === LocationName.SECTION)) {
       // TODO show popup if already exists
       dispatch(showInfoModal(strings('LOCATION.PRINT_LABEL_EXISTS_HEADER'), strings('LOCATION.PRINT_LABEL_EXISTS')));
       trackEvent('print_already_exists_in_queue', { itemName, selectedSignType });
@@ -388,14 +388,16 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         const printQueueItems: PrintQueueItem[] = [];
         // Add Get Sections response to print queue
         sectionsList.forEach(section => {
-          const printQueueArrayItem: PrintQueueItem = {
-            itemName: getFullSectionName(section.sectionName),
-            locationId: section.sectionId,
-            paperSize: selectedSignType,
-            signQty,
-            itemType: PrintQueueItemType.SECTION
-          };
-          printQueueItems.push(printQueueArrayItem);
+          if (!aisleSectionExists(locationPrintQueue, section.sectionId)) {
+            const printQueueArrayItem: PrintQueueItem = {
+              itemName: getFullSectionName(section.sectionName),
+              locationId: section.sectionId,
+              paperSize: selectedSignType,
+              signQty,
+              itemType: PrintQueueItemType.SECTION
+            };
+            printQueueItems.push(printQueueArrayItem);
+          }
         });
         trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItems) });
         dispatch(addMultipleToLocationPrintQueue(printQueueItems));
@@ -642,7 +644,7 @@ const PrintPriceSign = (): JSX.Element => {
   const { palletInfo } = useTypedSelector(state => state.PalletManagement);
   const userConfig = useTypedSelector(state => state.User.configs);
   const {
-    selectedSignType, printQueue, printingLocationLabels, printerList,
+    selectedSignType, printQueue, printingLocationLabels, printerList, locationPrintQueue,
     printingPalletLabel, priceLabelPrinter, locationLabelPrinter, palletLabelPrinter
   } = useTypedSelector(state => state.Print);
   const { selectedAisle, selectedSection, selectedZone } = useTypedSelector(state => state.Location);
@@ -675,6 +677,7 @@ const PrintPriceSign = (): JSX.Element => {
       selectedPrinter={getSelectedPrinterBasedOnLabel()}
       selectedSignType={selectedSignType}
       printQueue={printQueue}
+      locationPrintQueue={locationPrintQueue}
       printingLocationLabels={printingLocationLabels}
       printingPalletLabel={printingPalletLabel}
       selectedAisle={selectedAisle}

@@ -116,7 +116,7 @@ export const Print = (state = initialState, action: Actions): StateType => {
       };
     case ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE:
       // eslint-disable-next-line no-case-declarations
-      const newLocationPrintQueue: PrintQueueItem[] = printQueue.concat(action.payload);
+      const newLocationPrintQueue: PrintQueueItem[] = locationPrintQueue.concat(action.payload);
       return {
         ...state,
         locationPrintQueue: newLocationPrintQueue
