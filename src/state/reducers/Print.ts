@@ -114,9 +114,7 @@ export const Print = (state = initialState, action: Actions): StateType => {
       const newLocationPrintQueue: PrintQueueItem[] = printQueue.concat(action.payload);
       return {
         ...state,
-        locationPrintQueue: newLocationPrintQueue,
-        // TODO: This needs to removed once PrintQueue component got integrated with new redux state.
-        printQueue: newLocationPrintQueue
+        locationPrintQueue: newLocationPrintQueue
       };
     case REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR: {
       const newQueue: PrintQueueItem[] = [];

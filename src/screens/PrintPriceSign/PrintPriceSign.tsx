@@ -397,7 +397,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           };
           printQueueItems.push(printQueueArrayItem);
         });
-        trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItems) });
+        trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItems) });
         dispatch(addMultipleToLocationPrintQueue(printQueueItems));
       } else {
         const { id } = selectedSection;
@@ -408,8 +408,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           signQty,
           itemType: PrintQueueItemType.SECTION
         };
-        trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
-        dispatch(addToPrintQueue(printQueueItem));
+        trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
         dispatch(addLocationPrintQueue(printQueueItem));
       }
       isValidDispatch(props, actionCompleted, exceptionType);
