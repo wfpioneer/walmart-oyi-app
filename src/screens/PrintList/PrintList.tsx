@@ -281,7 +281,7 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
       {printAPI.isWaiting || printLocationAPI.isWaiting ? (
         <View style={styles.footerContainer}>
           <ActivityIndicator
-            animating={printAPI.isWaiting}
+            animating={printAPI.isWaiting || printLocationAPI.isWaiting}
             hidesWhenStopped
             color={COLOR.MAIN_THEME_COLOR}
             size="large"
