@@ -1,4 +1,4 @@
-import React, { EffectCallback, useEffect } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
@@ -10,7 +10,6 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import Button from '../../components/buttons/Button';
-import PrintListCard from '../../components/PrintListCard/PrintListCard';
 import { strings } from '../../locales';
 import styles from './PrintList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -23,13 +22,17 @@ import { printLocationLabel, printSign } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import {
   clearLocationPrintQueue, removeMultipleFromPrintQueueByItemNbr, removeMultipleFromPrintQueueByUpc,
+  setLocationPrintQueue,
   setPrintQueue, unsetPrintingLocationLabels
 } from '../../state/actions/Print';
 import IconButton from '../../components/buttons/IconButton';
 import COLOR from '../../themes/Color';
 import { PRINT_LOCATION_LABELS, PRINT_SIGN } from '../../state/actions/asyncAPI';
+import PrintQueueItemCard from '../../components/PrintQueueItemCard/PrintQueueItemCard';
+import { CustomModalComponent } from '../Modal/Modal';
+import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
 
-type PrintTab = 'PRICESIGN' | 'LOCATION';
+export type PrintTab = 'PRICESIGN' | 'LOCATION';
 interface PrintListProps {
   selectedPrinter: Printer | null;
   printQueue: PrintQueueItem[];
@@ -41,6 +44,8 @@ interface PrintListProps {
   printAPI: AsyncState;
   printLocationAPI: AsyncState;
   printingLocationLabels: string;
+  itemIndexToEdit: number;
+  setItemIndexToEdit: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const printItemApiEffect = (
@@ -124,7 +129,33 @@ export const locationLabelsApiEffect = (
   }
 };
 
-const NoPrintQueueMessage = (): JSX.Element => (
+export const handleEditAction = (
+  index: number, setItemIndexToEdit: React.Dispatch<React.SetStateAction<number>>
+) => (): void => {
+  setItemIndexToEdit(index);
+};
+
+export const handleDeleteAction = (
+  index: number,
+  printQueue: PrintQueueItem[],
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>,
+  dispatch: Dispatch<any>,
+  queueName: PrintTab
+) => () => {
+  validateSession(navigation, route.name).then(() => {
+    const newPrintQueue = printQueue;
+    trackEvent('print_queue_delete_item', { printItem: JSON.stringify(printQueue[index]) });
+    newPrintQueue.splice(index, 1);
+    if (queueName === 'LOCATION') {
+      dispatch(setLocationPrintQueue(newPrintQueue));
+    } else {
+      dispatch(setPrintQueue(newPrintQueue));
+    }
+  }).catch(() => {});
+};
+
+export const NoPrintQueueMessage = (): JSX.Element => (
   <View style={styles.emptyContainer}>
     <IconButton
       icon={<MaterialCommunityIcons name="printer" color={COLOR.GREY_500} size={100} />}
@@ -138,10 +169,11 @@ const NoPrintQueueMessage = (): JSX.Element => (
     <Text style={styles.emptyText}>{strings('PRINT.EMPTY_LIST')}</Text>
   </View>
 );
+
 export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
   const {
     selectedPrinter, printQueue, navigation, route, dispatch, tabName, useEffectHook,
-    printAPI, printLocationAPI, printingLocationLabels
+    printAPI, printLocationAPI, printingLocationLabels, itemIndexToEdit, setItemIndexToEdit
   } = props;
   const queueLength = printQueue.length;
 
@@ -214,6 +246,20 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
   };
   return (
     <View style={styles.container}>
+      <CustomModalComponent
+        isVisible={itemIndexToEdit >= 0}
+        onClose={() => {
+          setItemIndexToEdit(-1);
+        }}
+        modalType="Form"
+      >
+        <PrintQueueEdit
+          itemIndexToEdit={itemIndexToEdit}
+          setItemIndexToEdit={setItemIndexToEdit}
+          printQueue={printQueue}
+          queueName={tabName}
+        />
+      </CustomModalComponent>
       {printQueue.length !== 0 && (
       <Text style={styles.itemText}>
         {`${queueLength} ${queueLength !== 1
@@ -223,7 +269,15 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
       <FlatList
         data={printQueue}
         keyExtractor={(item: PrintQueueItem) => item?.itemName + item?.paperSize}
-        renderItem={({ item }) => <PrintListCard item={item} />}
+        renderItem={({ item, index }) => (
+          <PrintQueueItemCard
+            jobName={item.itemName}
+            nbrOfCopies={item.signQty}
+            size={item.paperSize}
+            editCallback={handleEditAction(index, setItemIndexToEdit)}
+            deleteCallback={handleDeleteAction(index, printQueue, navigation, route, dispatch, tabName)}
+          />
+        )}
         ListEmptyComponent={<NoPrintQueueMessage />}
       />
       {printAPI.isWaiting ? (
@@ -270,6 +324,7 @@ const PrintLists = (props: {tab: PrintTab}): JSX.Element => {
   const route = useRoute();
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const [itemIndexToEdit, setItemIndexToEdit] = useState(-1);
 
   // Filter by tab
   const getSelectedPrinterBasedOnLabel = () => {
@@ -290,6 +345,8 @@ const PrintLists = (props: {tab: PrintTab}): JSX.Element => {
       printAPI={printSignLabel}
       printLocationAPI={printLocationLabels}
       printingLocationLabels={printingLocationLabels}
+      itemIndexToEdit={itemIndexToEdit}
+      setItemIndexToEdit={setItemIndexToEdit}
     />
   );
 };

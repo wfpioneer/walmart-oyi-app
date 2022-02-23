@@ -4,15 +4,16 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useTypedSelector } from '../../state/reducers/RootReducer';
 import IconButton from '../buttons/IconButton';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
 import { numbers, strings } from '../../locales';
 import styles from './PrintQueueEdit.style';
-import { setPrintQueue } from '../../state/actions/Print';
+import { setLocationPrintQueue, setPrintQueue } from '../../state/actions/Print';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { ModalCloseIcon } from '../../screens/Modal/Modal';
+import { PrintTab } from '../../screens/PrintList/PrintList';
+import { PrintQueueItem } from '../../models/Printer';
 
 const QTY_MIN = 1;
 const QTY_MAX = 100;
@@ -27,9 +28,16 @@ const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
   <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
 );
 
-const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Function}) => {
-  const { printQueue } = useTypedSelector(state => state.Print);
-  const itemToEdit = printQueue[props.itemIndexToEdit];
+const PrintQueueEdit = (props: {
+  itemIndexToEdit: number;
+  printQueue: PrintQueueItem[]
+  setItemIndexToEdit: React.Dispatch<React.SetStateAction<number>>;
+  queueName?: PrintTab
+}): JSX.Element => {
+  const {
+    itemIndexToEdit, printQueue, setItemIndexToEdit, queueName
+  } = props;
+  const itemToEdit = printQueue[itemIndexToEdit];
   const dispatch = useDispatch();
 
   const [signQty, setSignQty] = useState<number>(itemToEdit.signQty);
@@ -64,9 +72,13 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
 
   const handleSave = () => {
     trackEvent('print_queue_edit_save', { printItem: JSON.stringify(itemToEdit), newSignQty: signQty });
-    printQueue.splice(props.itemIndexToEdit, 1, { ...itemToEdit, signQty });
-    dispatch(setPrintQueue(printQueue));
-    props.setItemIndexToEdit(-1);
+    printQueue.splice(itemIndexToEdit, 1, { ...itemToEdit, signQty });
+    if (queueName === 'LOCATION') {
+      dispatch(setLocationPrintQueue(printQueue));
+    } else {
+      dispatch(setPrintQueue(printQueue));
+    }
+    setItemIndexToEdit(-1);
   };
 
   return (
@@ -75,7 +87,7 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
         <IconButton
           icon={ModalCloseIcon}
           type={Button.Type.NO_BORDER}
-          onPress={() => props.setItemIndexToEdit(-1)}
+          onPress={() => setItemIndexToEdit(-1)}
         />
       </View>
       <View style={styles.itemDetailsContainer}>
@@ -140,4 +152,7 @@ const PrintQueueEdit = (props: {itemIndexToEdit: number; setItemIndexToEdit: Fun
   );
 };
 
+PrintQueueEdit.defaultProps = {
+  queueName: 'PRICESIGN'
+};
 export default PrintQueueEdit;

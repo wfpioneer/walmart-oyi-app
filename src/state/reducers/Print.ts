@@ -9,6 +9,7 @@ import {
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR,
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC,
   SET_LOCATION_LABEL_PRINTER,
+  SET_LOCATION_PRINT_QUEUE,
   SET_PALLET_LABEL_PRINTER,
   SET_PRICE_LABEL_PRINTER,
   SET_PRINTER_LIST,
@@ -179,6 +180,11 @@ export const Print = (state = initialState, action: Actions): StateType => {
       return {
         ...state,
         locationPrintQueue: initialState.locationPrintQueue
+      };
+    case SET_LOCATION_PRINT_QUEUE:
+      return {
+        ...state,
+        locationPrintQueue: action.payload
       };
     case SET_PRICE_LABEL_PRINTER:
       return {
