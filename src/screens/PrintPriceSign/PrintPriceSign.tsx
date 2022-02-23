@@ -235,18 +235,18 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     // Just used to set the default printer the first time, since redux loads before the translations
     const printListHasLaserPrinter = printerList.some(printer => printer.type === PrinterType.LASER);
     if (selectedPrinter?.name === '' || !printListHasLaserPrinter) {
-      const initialPrinter: Printer = {
+      const defaultPrinter: Printer = {
         type: PrinterType.LASER,
         name: strings('PRINT.FRONT_DESK'),
         desc: strings('GENERICS.DEFAULT'),
         id: '000000000000',
         labelsAvailable: ['price']
       };
-      dispatch(setPriceLabelPrinter(initialPrinter));
+      dispatch(setPriceLabelPrinter(defaultPrinter));
       if (!printListHasLaserPrinter) {
-        dispatch(addToPrinterList(initialPrinter));
+        dispatch(addToPrinterList(defaultPrinter));
       }
-      savePrinter(initialPrinter);
+      savePrinter(defaultPrinter);
     }
   }, []);
 
