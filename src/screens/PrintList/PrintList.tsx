@@ -89,7 +89,6 @@ export const printItemApiEffect = (
 
   // on api failure
   if (!printAPI.isWaiting && printAPI.error) {
-    // Snack Bar
     Toast.show({
       type: 'error',
       text1: strings('PRINT.PRINT_SERVICE_ERROR'),
@@ -119,7 +118,6 @@ export const locationLabelsApiEffect = (
   }
   // on api failure
   if (!printLabelAPI.isWaiting && printLabelAPI.error) {
-    // Snack Bar
     Toast.show({
       type: 'error',
       text1: strings('PRINT.PRINT_SERVICE_ERROR'),
@@ -142,7 +140,7 @@ export const handleDeleteAction = (
   route: RouteProp<any, string>,
   dispatch: Dispatch<any>,
   queueName: PrintTab
-) => () => {
+) => (): void => {
   validateSession(navigation, route.name).then(() => {
     const newPrintQueue = printQueue;
     trackEvent('print_queue_delete_item', { printItem: JSON.stringify(printQueue[index]) });
@@ -280,7 +278,7 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
         )}
         ListEmptyComponent={<NoPrintQueueMessage />}
       />
-      {printAPI.isWaiting ? (
+      {printAPI.isWaiting || printLocationAPI.isWaiting ? (
         <View style={styles.footerContainer}>
           <ActivityIndicator
             animating={printAPI.isWaiting}
