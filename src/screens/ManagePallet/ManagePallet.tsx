@@ -25,7 +25,7 @@ import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, clearPallet, deleteUpcs, getItemDetailsUPC, updatePalletItemQty
+  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, updatePalletItemQty
 } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
@@ -45,7 +45,7 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAIL_UPC, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
@@ -61,7 +61,7 @@ interface ManagePalletProps {
   items: PalletItem[];
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
-  getItemDetailsFromUpcApi: AsyncState;
+  getItemDetailsApi: AsyncState;
   addPalletUpcApi: AsyncState;
   updateItemQtyAPI: AsyncState;
   deleteUpcsApi: AsyncState;
@@ -377,7 +377,7 @@ export const clearPalletApiHook = (
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
-    route, dispatch, getItemDetailsFromUpcApi, updateItemQtyAPI,
+    route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation
   } = props;
@@ -388,7 +388,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   // Clear API state before leaving this screen
   useEffectHook(() => navigation.addListener('beforeRemove', () => {
     // Suggestion add confirmation before leaving screen if they want to undo unsaved changes
-    dispatch({ type: GET_ITEM_DETAIL_UPC.RESET });
+    dispatch({ type: GET_ITEM_DETAILS.RESET });
   }), []);
 
   // Scanner listener
@@ -400,9 +400,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             barcode: scan.value,
             type: scan.type
           });
-          dispatch(
-            getItemDetailsUPC({ upc: scan.value })
-          );
+          dispatch(getItemDetails({ id: scan.value, getSummary: true }));
         });
       }
     });
@@ -422,11 +420,11 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   // Get Item Details UPC api
   useEffectHook(() => {
     // on api success
-    if (!getItemDetailsFromUpcApi.isWaiting && getItemDetailsFromUpcApi.result) {
-      if (getItemDetailsFromUpcApi.result.status === 200) {
+    if (!getItemDetailsApi.isWaiting && getItemDetailsApi.result) {
+      if (getItemDetailsApi.result.status === 200) {
         const {
           data
-        } = getItemDetailsFromUpcApi.result;
+        } = getItemDetailsApi.result;
         const palletItem = items.filter(item => item.itemNbr === data.itemNbr);
         if (palletItem.length > 0) {
           Toast.show({
@@ -440,20 +438,20 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             upcNbr,
             itemNbr,
             price,
-            itemDesc
+            itemName
           } = data;
           const pallet: PalletItem = {
             upcNbr,
             itemNbr,
             price,
-            itemDesc,
+            itemDesc: itemName,
             quantity: 1,
             deleted: false,
             added: true
           };
           dispatch(addItemToPallet(pallet));
         }
-      } else if (getItemDetailsFromUpcApi.result.status === 204) {
+      } else if (getItemDetailsApi.result.status === 204) {
         Toast.show({
           type: 'info',
           text1: strings('PALLET.ITEMS_NOT_FOUND'),
@@ -464,7 +462,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       dispatch(hideActivityModal());
     }
     // on api error
-    if (!getItemDetailsFromUpcApi.isWaiting && getItemDetailsFromUpcApi.error) {
+    if (!getItemDetailsApi.isWaiting && getItemDetailsApi.error) {
       dispatch(hideActivityModal());
       Toast.show({
         type: 'error',
@@ -475,10 +473,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       });
     }
     // on api request
-    if (getItemDetailsFromUpcApi.isWaiting) {
+    if (getItemDetailsApi.isWaiting) {
       dispatch(showActivityModal());
     }
-  }, [getItemDetailsFromUpcApi]);
+  }, [getItemDetailsApi]);
 
   // update pallet hook (get pallet details api)
   useEffectHook(() => getPalletDetailsApiHook(
@@ -602,7 +600,7 @@ const ManagePallet = (): JSX.Element => {
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
-  const getItemDetailsFromUpcApi = useTypedSelector(state => state.async.getItemDetailsUPC);
+  const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const addPalletUpcApi = useTypedSelector(state => state.async.addPalletUPCs);
   const updateItemQtyAPI = useTypedSelector(state => state.async.updatePalletItemQty);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
@@ -657,7 +655,7 @@ const ManagePallet = (): JSX.Element => {
           items={items}
           navigation={navigation}
           route={route}
-          getItemDetailsFromUpcApi={getItemDetailsFromUpcApi}
+          getItemDetailsApi={getItemDetailsApi}
           addPalletUpcApi={addPalletUpcApi}
           updateItemQtyAPI={updateItemQtyAPI}
           deleteUpcsApi={deleteUpcsApi}

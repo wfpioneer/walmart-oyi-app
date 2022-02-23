@@ -48,7 +48,9 @@ export default {
     CURRENCY_SYMBOL: '$',
     UNDO: 'Undo',
     YES: 'Yes',
-    NO: 'No'
+    NO: 'No',
+    ENABLED: 'Enabled',
+    DISABLED: 'Disabled'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -136,6 +138,9 @@ export default {
     Medium: 'Med',
     Large: 'Large',
     PRINTER_LIST: 'Printer List',
+    PRINTER_LIST_PRICE: 'Select item price sign printer',
+    PRINTER_LIST_LOCATION: 'Select location labels printer',
+    PRINTER_LIST_PALLET: 'Select pallet labels printer',
     CHANGE_PRINTER: 'Change Printer',
     MAC_ADDRESS: 'Enter or Scan MAC Address',
     MAC_ADDRESS_ERROR: 'The MAC address is usually 12 numbers',
@@ -145,7 +150,13 @@ export default {
     LOCATION_SUCCESS: 'Section Label Successfully Printed',
     PALLET_SUCCESS: 'Pallet Label Successfully Printed',
     DUPLICATE_PRINTER: 'A Printer currently exists',
-    SOME_PRINTS_FAILED: 'Some items failed to print'
+    SOME_PRINTS_FAILED: 'Some items failed to print',
+    PRICE_SIGN_PRINTER: 'Price Sign Printer',
+    LOCATION_LABEL_PRINTER: 'Location Label Printer',
+    PALLET_LABEL_PRINTER: 'Pallet Label Printer',
+    LOCATION_PRINTING: 'Location Printing',
+    PRICE_SIGNS: 'Price Signs',
+    LOCATIONS: 'Locations'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Pallet Management',
@@ -288,7 +299,8 @@ export default {
     CLEAR_AISLE_ITEMS_WONT_DELETE: 'This will not delete the sections from this aisle',
     CLEAR_AISLE_ITEMS_SUCCEED: 'All selected items successfully cleared from this aisle',
     CLEAR_AISLE_ITEMS_FAIL: 'There was an error clearing items from this aisle.  Please try again',
-    PALLET_MANAGEMENT: 'Pallet Management'
+    PALLET_MANAGEMENT: 'Pallet Management',
+    LOCATION_MGMT_EDIT: 'Location Management Edit'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
@@ -334,10 +346,20 @@ export default {
     UPDATE_REJECTED: 'On-hands update rejected',
     FAILED_APPROVE: 'Requests Failed to Approve',
     FAILED_ITEMS: 'Items Failed',
-    UPDATE_API_ERROR: 'There was an error updating the approval status. \n Please try again.'
+    UPDATE_API_ERROR: 'There was an error updating the approval status. \n Please try again.',
+    MANAGER_APPROVAL: 'Manager Approval'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI',
     ENTER_CLUB_NBR: 'Enter a Club Number'
+  },
+  PICKING: {
+    PICKING: 'Picking'
+  },
+  BINNING: {
+    BINNING: 'Binning'
+  },
+  SETTINGS: {
+    TITLE: 'Settings'
   }
 };
