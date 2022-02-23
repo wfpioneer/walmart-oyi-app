@@ -23,7 +23,11 @@ const styles = StyleSheet.create({
   },
   sizeText: {
     color: COLOR.GREY_700,
-    paddingTop: 4
+    paddingBottom: 8,
+    paddingRight: 14,
+    alignContent: 'flex-start',
+    alignSelf: 'flex-end'
+    // alignItems: 'flex-end'
   },
   copiesText: {
     flex: 3,
@@ -37,6 +41,10 @@ const styles = StyleSheet.create({
   itemContainerBorder: {
     borderBottomWidth: 1,
     borderBottomColor: COLOR.GREY_300
+  },
+  printDescContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 });
 

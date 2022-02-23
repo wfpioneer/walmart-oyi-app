@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 5
   },
-  printTextMargin: {
+  printTextPadding: {
     paddingLeft: 10,
     justifyContent: 'flex-start',
     flexDirection: 'row'
@@ -38,11 +38,30 @@ const styles = StyleSheet.create({
   },
   changeButton: {
     fontSize: 14,
-    color: COLOR.TRAINING_BLUE_DARK,
+    color: COLOR.MAIN_THEME_COLOR,
     paddingRight: 10
   },
   buttonView: {
     flexDirection: 'row'
+  },
+  itemText: {
+    paddingLeft: 10,
+    borderBottomWidth: 1,
+    fontSize: 16
+  },
+  emptyContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingVertical: 28
+  },
+  emptyText: {
+    marginVertical: 16,
+    color: COLOR.GREY_700
+  },
+  activityIndicator: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

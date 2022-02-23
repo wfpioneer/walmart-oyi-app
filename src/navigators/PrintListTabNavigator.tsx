@@ -1,17 +1,11 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React from 'react';
 import { strings } from '../locales';
-import { PrintQueueItem } from '../models/Printer';
 import PrintLists from '../screens/PrintList/PrintList';
-import { useTypedSelector } from '../state/reducers/RootReducer';
 
-interface PrintListNavigatorProps {
-  locationPrintQueue: PrintQueueItem[];
-  printQueue: PrintQueueItem[];
-}
 const Tab = createMaterialTopTabNavigator();
 
-export const PrintListTabNavigator = (props: PrintListNavigatorProps): JSX.Element => (
+export const PrintListTabNavigator = (): JSX.Element => (
   <Tab.Navigator>
     <Tab.Screen
       name="PriceSigns"
@@ -19,7 +13,7 @@ export const PrintListTabNavigator = (props: PrintListNavigatorProps): JSX.Eleme
         title: strings('PRINT.PRICE_SIGNS')
       }}
     >
-      {() => <PrintLists printQueue={props.printQueue} />}
+      {() => <PrintLists tab="PRICESIGN" />}
     </Tab.Screen>
     <Tab.Screen
       name="Locations"
@@ -27,19 +21,13 @@ export const PrintListTabNavigator = (props: PrintListNavigatorProps): JSX.Eleme
         title: strings('PRINT.LOCATIONS')
       }}
     >
-      {() => <PrintLists printQueue={props.locationPrintQueue} />}
+      {() => <PrintLists tab="LOCATION" />}
     </Tab.Screen>
   </Tab.Navigator>
 );
 
-const PrintListTabs = (): JSX.Element => {
-  const { locationPrintQueue, printQueue } = useTypedSelector(state => state.Print);
-  return (
-    <PrintListTabNavigator
-      locationPrintQueue={locationPrintQueue}
-      printQueue={printQueue}
-    />
-  );
-};
+const PrintListTabs = (): JSX.Element => (
+  <PrintListTabNavigator />
+);
 
 export default PrintListTabs;

@@ -43,8 +43,10 @@ const PrintListCard = (props: PrintListCardProps): JSX.Element => {
   return (
     <View style={[styles.itemContainer, styles.itemContainerBorder]}>
       <View style={styles.itemDetailsContainer}>
-        <Text style={styles.itemDescText}>{item.itemName}</Text>
-        <Text style={styles.sizeText}>{`${strings('PRINT.SIGN_SIZE')}: ${strings(`PRINT.${item.paperSize}`)}`}</Text>
+        <View style={styles.printDescContainer}>
+          <Text style={styles.itemDescText}>{item.itemName}</Text>
+          <Text style={styles.sizeText}>{`${strings('PRINT.SIGN_SIZE')}: ${strings(`PRINT.${item.paperSize}`)}`}</Text>
+        </View>
         <View style={styles.itemBottomRowContainer}>
           <Text style={styles.copiesText}>{`${strings('PRINT.COPIES')}: ${item.signQty}`}</Text>
           <View style={styles.actionBtnContainer}>
