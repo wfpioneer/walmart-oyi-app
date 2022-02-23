@@ -121,7 +121,8 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
     backroomQty,
     claimsOnHandQty,
     consolidatedOnHandQty,
-    cloudQty
+    cloudQty,
+    inTransitCloudQty
   } = itemDetails;
 
   const salesFloorQty = cloudQty === undefined
@@ -149,6 +150,10 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
 
   if (cloudQty !== undefined) {
     qtyRows.push({ label: strings('ITEM.FLY_CLOUD_QTY'), value: cloudQty });
+  }
+
+  if (inTransitCloudQty !== undefined) {
+    qtyRows.push({ label: strings('ITEM.IN_TRANSIT_FLY_QTY'), value: inTransitCloudQty });
   }
 
   return <ItemDetailsList rows={qtyRows} indentAfterFirstRow={true} />;
@@ -430,7 +435,7 @@ const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
   if (navigation.isFocused()) {
     validateSessionCall(navigation, route.name).then(() => {
       dispatch({ type: GET_ITEM_DETAILS.RESET });
-      dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+      dispatch(getItemDetails({ id: scannedEvent.value }));
       dispatch({ type: ADD_TO_PICKLIST.RESET });
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
@@ -493,7 +498,7 @@ const isError = (
             style={styles.errorButton}
             onPress={() => {
               trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
-              return dispatch(getItemDetails({ headers: { userId }, id: scannedEvent.value }));
+              return dispatch(getItemDetails({ id: scannedEvent.value }));
             }}
           >
             <Text>{strings('GENERICS.RETRY')}</Text>
@@ -636,7 +641,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
       dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
-      dispatch(getItemDetails({ headers: { userId }, id: itemDetails.itemNbr }));
+      dispatch(getItemDetails({ id: itemDetails.itemNbr }));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 

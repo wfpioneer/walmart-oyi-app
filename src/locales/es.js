@@ -45,9 +45,11 @@ export default {
     ITEMS: 'Artículos',
     TOOLS: 'Herramientas',
     CURRENCY_SYMBOL: '$',
-    UNDO: 'Undo', // TODO spanish Translation
-    YES: 'Si', // TODO spanish Translation
-    NO: 'No' // TODO spanish Translation
+    UNDO: 'Deshacer',
+    YES: 'Sí',
+    NO: 'No',
+    ENABLED: 'Activado',
+    DISABLED: 'Desactivado'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -67,7 +69,7 @@ export default {
     NEGATIVE_ON_HANDS: 'Existencia Negativa',
     CANCELLED: 'Cancelados',
     NSFL: 'Sin Ubicación en Piso de Ventas',
-    UNKNOWN: 'desconocida' // TODO needs spanish Translation
+    UNKNOWN: 'desconocida'
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',
@@ -109,16 +111,17 @@ export default {
     RESERVE_QTY: 'Bodega',
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consol',
-    FLY_CLOUD_QTY: 'Fly Cloud Qty', // Leaving This as is until MX has a need for Cloud Qty
+    FLY_CLOUD_QTY: 'Cantidad Cloud', // Leaving This as is until MX has a need for Cloud Qty
+    IN_TRANSIT_FLY_QTY: 'En Tránsito Cloud',
     ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas',
-    ITEM_NUMBER: 'Item Number' // TODO Spanish translation
+    ITEM_NUMBER: 'Número de Artículo'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
     QUEUE_TITLE: 'Cola de Impresión',
     CHANGE_TITLE: 'Impresoras',
     LOCATION_TITLE: 'Imprimir Etiquetas de Ubicación',
-    PALLET_TITLE: 'Print pallet label', // TODO Spanish translation
+    PALLET_TITLE: 'Imprimir etiqueta de pallet',
     PRICE_SIGN: 'Imprimir la señalización',
     COPY_QTY: 'Número de Copias',
     COPIES: 'Copias',
@@ -135,16 +138,25 @@ export default {
     Medium: 'Mediano',
     Large: 'Grande',
     PRINTER_LIST: 'Lista de impresoras',
+    PRINTER_LIST_PRICE: 'Selecciona la impresora de señalización',
+    PRINTER_LIST_LOCATION: 'Selecciona la impresora para ubicaciones',
+    PRINTER_LIST_PALLET: 'Selecciona la impresora de etiquetas de pallet',
     CHANGE_PRINTER: 'Cambiar impresora',
     MAC_ADDRESS: 'Ingrese o escanee la dirección MAC',
     MAC_ADDRESS_ERROR: 'La dirección MAC suele ser de 12 números',
     PORTABLE_PRINTER: 'Impresora portátil',
     PRINT_SERVICE_ERROR: 'Hubo un error al imprimir la señalización. \nPor favor inténtalo de nuevo.',
     PLEASE_CHOOSE_PORTABLE: 'Por favor elija impresora portátil',
-    LOCATION_SUCCESS: 'Section Label Successfully Printed', // TODO Spanish translation
+    LOCATION_SUCCESS: 'Etiqueta de sección impresa correctamente',
     PALLET_SUCCESS: 'Etiqueta de Pallet impresa correctamente',
     DUPLICATE_PRINTER: 'Una impresora ya existe',
-    SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse'
+    SOME_PRINTS_FAILED: 'Algunos artículos fallaron al imprimirse',
+    PRICE_SIGN_PRINTER: 'Impresora de Señalización',
+    LOCATION_LABEL_PRINTER: 'Impresora de etiquetas de ubicación',
+    PALLET_LABEL_PRINTER: 'Impresora de etiquetas de pallet',
+    LOCATION_PRINTING: 'Impresión de Ubicaciones',
+    PRICE_SIGNS: 'Señalización Precios',
+    LOCATIONS: 'Ubicaciones'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -162,22 +174,22 @@ export default {
     PALLET_DETAILS_ERROR: 'Error: incapaz de encontrar Pallet',
     PALLET_MERGE: 'será combinado con',
     CANNOT_HAVE_NEGATIVE_QTY: 'El artículo no puede teener cantidad negativa',
-    ITEMS_DETAILS_EXIST: 'The scanned item already exists on the pallet', // TODO Spanish translation
-    ITEMS_DETAILS_ERROR: 'Error Unable to Find Item with the UPC', // TODO Spanish translation
+    ITEMS_DETAILS_EXIST: 'El artículo escaneado ya existe en el pallet',
+    ITEMS_DETAILS_ERROR: 'Error. No es posible encontrar el UPC',
     PALLET_UPC_NOT_FOUND: 'El pallet o un UPC no se encontraron',
     ADD_UPC_SUCCESS: 'Todos los artículos se agregaron satisfactoriamente al pallet',
     ADD_UPC_ERROR: 'Error agregando artículos al pallet',
     COMBINE_PALLET_SUCCESS: 'Pallets combinados con éxito',
     COMBINE_PALLET_FAILURE: 'Falló la combinación de pallets, por favor inténtalo de nuevo',
     PALLET_EXISTS: 'Este palles ya ha sido escaneado',
-    PALLET_EXISTS_AS_TARGET: 'This pallet is already the target pallet', // TODO MX translation
+    PALLET_EXISTS_AS_TARGET: 'Este pallet ya es el pallet objetivo',
     PALLET_DOESNT_EXIST: 'El pallet escaneado no existe',
-    SAVE_PALLET_SUCCESS: 'Pallet update successful', // TODO Spanish translation
-    SAVE_PALLET_PARTIAL: 'Pallet update partially successful', // TODO Spanish translation
-    SAVE_PALLET_FAILURE: 'Pallet update failed', // TODO Spanish translation
+    SAVE_PALLET_SUCCESS: 'Pallet actualizado correctamente',
+    SAVE_PALLET_PARTIAL: 'Pallet parcial actualizado correctamente',
+    SAVE_PALLET_FAILURE: 'Falló la actualización de pallet',
     CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
     CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
-    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared' // TODO Spanish translation
+    CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente'
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -197,26 +209,26 @@ export default {
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
-    ITEMS: 'Items', // TODO Spanish Translation
-    PALLETS: 'Pallets', // TODO Spanish Translation
-    PALLET: 'Pallet', // TODO Spanish Translation
+    ITEMS: 'Artículos',
+    PALLETS: 'Pallets',
+    PALLET: 'Pallet',
     ZONES: 'Zonas',
-    ZONE: 'Zona', // TODO Spanish Translation
+    ZONE: 'Zona',
     AISLES: 'Pasillos',
     AISLE: 'Pasillo',
     SECTIONS: 'Secciones',
     SECTION: 'Sección',
-    AREAS: 'Areas', // TODO Spanish Translation
+    AREAS: 'Áreas',
     LOCATION_DETAILS: 'Detalles de ubicación',
     NO_ZONES_AVAILABLE: 'No hay zonas disponibles',
     NO_AISLES_AVAILABLE: 'No hay pasillos disponibles',
-    NO_SECTIONS_AVAILABLE: 'No Sections Available', // TODO Spanish Translation
+    NO_SECTIONS_AVAILABLE: 'No hay Secciones disponibles',
     LOCATION_API_ERROR: 'Hubo un error agregando la ubicación. Por favor inténtalo de nuevo.',
     CLEAR_ALL: 'Limpiar',
     CLEAR_SECTION: 'Limpiar sección',
     REMOVE_SECTION: 'Eliminar sección',
     REMOVE_ZONE: 'Eliminar la zona',
-    REMOVE_ALL: 'Remove all', // TODO Spanish Translation
+    REMOVE_ALL: 'Remove all', // TODO Spanish Translation (unused)
     ADD: 'Agregar',
     SCAN_LOCATION: 'Nombre de ubicación invalida e.g: ABCD1-2',
     ADD_ZONE: 'Añadir zona',
@@ -237,7 +249,7 @@ export default {
     PALLET_ERROR: 'Pallet no encontrada/Pallet vacía',
     PALLET_NOT_FOUND: 'Hubo un error debido a que no se encontró el pallet/Pallet vacía',
     PALLET_ADDED: 'Pallet agregado con éxito',
-    PALLET_DELETE_CONFIRMATION: 'Are you sure you want to remove Pallet %{pallet} from Section %{section}?', // TODO spanish translation
+    PALLET_DELETE_CONFIRMATION: '¿Estás seguro que quieres eliminar el Pallet %{pallet} de la Sección %{section}?',
     FLOOR_EMPTY: 'La lista de Piso está vacía',
     RESERVE_EMPTY: 'La lista de Bodega está vacía',
     GET_FAILED_PALLETS: 'No se pudieron recuperar %{amount} Pallet(s)',
@@ -279,14 +291,15 @@ export default {
     REMOVE_SECTION_CONFIRMATION: '¿Estas seguro que quieres borrar la sección %{sectionName}?',
     REMOVE_SECTION_FAIL: 'Hubo un error eliminando la sección. Por favor inténtalo de nuevo',
     SECTION_REMOVED: 'Sección eliminada correctamente',
-    ZONE_NAME_ERROR: 'There was an error retrieving the possible zone names. \nPlease try again.', // TODO spanish translation
+    ZONE_NAME_ERROR: 'Hubo un error al extraer los nombres de zonas. \nPor favor inténtalo de nuevo',
     SELECT_ZONE: 'Selecciona la Zona',
     CLEAR_AISLE_ITEMS_CONFIRMATION: '¿Estás seguro que quieres limpiar todos los artículos del pasillo?',
     CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE: 'Por favor selecciona Piso, bodega o ambos para limpiar',
     CLEAR_AISLE_ITEMS_WONT_DELETE: 'Esto no eliminará las secciones del pasillo',
     CLEAR_AISLE_ITEMS_SUCCEED: 'Todos los artículos seleccionados fueron limpiados del pasillo',
     CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo',
-    PALLET_MANAGEMENT: 'Pallet Management' // TODO Spanish Translation
+    PALLET_MANAGEMENT: 'Administración de Pallet',
+    LOCATION_MGMT_EDIT: 'Editar Administración de Pallet'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -332,10 +345,20 @@ export default {
     UPDATE_REJECTED: 'Actualización de existencia rechazado',
     FAILED_APPROVE: 'Las solicitudes fallaron al aprobarse',
     FAILED_ITEMS: 'Artículos Fallidos',
-    UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo'
+    UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo',
+    MANAGER_APPROVAL: 'Aprobación de Gerencia'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'Un número de club es necesario para ingresar a OYI',
     ENTER_CLUB_NBR: 'Ingresa número de club'
+  },
+  PICKING: {
+    PICKING: 'Pickeo'
+  },
+  BINNING: {
+    BINNING: 'Bodega'
+  },
+  SETTINGS: {
+    TITLE: 'Ajustes'
   }
 };

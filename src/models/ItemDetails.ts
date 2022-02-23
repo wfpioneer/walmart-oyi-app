@@ -19,6 +19,7 @@ interface ItemDetails {
   claimsOnHandQty: number;
   backroomQty: number;
   cloudQty?: number;
+  inTransitCloudQty?: number;
   replenishment: {
     onOrder: number;
   };

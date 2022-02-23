@@ -6,6 +6,8 @@ export interface ConfigResponse {
   locationManagement: boolean;
   locMgmtEdit: boolean;
   palletManagement: boolean;
+  settingsTool: boolean;
+  printingUpdate: boolean;
 }
 
 export default class ConfigService {
