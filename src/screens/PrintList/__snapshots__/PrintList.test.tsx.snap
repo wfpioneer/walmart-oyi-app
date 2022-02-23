@@ -1031,7 +1031,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
     }
   >
     <ActivityIndicator
-      animating={false}
+      animating={true}
       color="#0071e9"
       hidesWhenStopped={true}
       size="large"
