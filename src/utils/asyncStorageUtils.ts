@@ -73,7 +73,7 @@ export const setPriceLabelPrinter = async (
   }
 };
 
-export const getPriceLabelPrinter = async (): Promise<string | null> => {
+export const getPriceLabelPrinter = async (): Promise<Printer | null> => {
   try {
     const priceLabelResult = await AsyncStorage.getItem(PRICE_LABEL);
     return priceLabelResult ? JSON.parse(priceLabelResult) : null;
@@ -102,7 +102,7 @@ export const setLocationLabelPrinter = async (
   }
 };
 
-export const getLocationLabelPrinter = async (): Promise<string | null> => {
+export const getLocationLabelPrinter = async (): Promise<Printer | null> => {
   try {
     const locationLabelResult = await AsyncStorage.getItem(LOCATION_LABEL);
     return locationLabelResult ? JSON.parse(locationLabelResult) : null;
@@ -131,7 +131,7 @@ export const setPalletLabelPrinter = async (
   }
 };
 
-export const getPalletLabelPrinter = async (): Promise<string | null> => {
+export const getPalletLabelPrinter = async (): Promise<Printer | null> => {
   try {
     const palletLabelResult = await AsyncStorage.getItem(PALLET_LABEL);
     return palletLabelResult ? JSON.parse(palletLabelResult) : null;

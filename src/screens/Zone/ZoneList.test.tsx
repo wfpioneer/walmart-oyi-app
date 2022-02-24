@@ -180,37 +180,38 @@ describe('Test Zone List', () => {
       { errorType: '500', message: 'Request Failed with status code 500' }
     ];
 
-    possibleErrorResults.forEach(errorResult => it(`Renders Error Message when result is ${errorResult.errorType} error`,
-      () => {
-        const renderer = ShallowRenderer.createRenderer();
-        const apiErrorResult: AsyncState = {
-          value: null,
-          isWaiting: false,
-          error: errorResult.message,
-          result: null
-        };
-        renderer.render(
-          <ZoneScreen
-            siteId={MX_TEST_CLUB_NBR}
-            dispatch={jest.fn()}
-            getZoneApi={apiErrorResult}
-            apiStart={0}
-            setApiStart={jest.fn()}
-            navigation={navigationProp}
-            route={routeProp}
-            useEffectHook={jest.fn()}
-            trackEventCall={jest.fn()}
-            isManualScanEnabled={false}
-            locationPopupVisible={false}
-            getZoneNamesApi={defaultAsyncState}
-            errorVisible={false}
-            setErrorVisible={jest.fn()}
-            isLoading={false}
-            setIsLoading={jest.fn()}
-          />
-        );
-        expect(renderer.getRenderOutput()).toMatchSnapshot();
-      }));
+    possibleErrorResults
+      .forEach(errorResult => it(`Renders Error Message when result is ${errorResult.errorType} error`,
+        () => {
+          const renderer = ShallowRenderer.createRenderer();
+          const apiErrorResult: AsyncState = {
+            value: null,
+            isWaiting: false,
+            error: errorResult.message,
+            result: null
+          };
+          renderer.render(
+            <ZoneScreen
+              siteId={MX_TEST_CLUB_NBR}
+              dispatch={jest.fn()}
+              getZoneApi={apiErrorResult}
+              apiStart={0}
+              setApiStart={jest.fn()}
+              navigation={navigationProp}
+              route={routeProp}
+              useEffectHook={jest.fn()}
+              trackEventCall={jest.fn()}
+              isManualScanEnabled={false}
+              locationPopupVisible={false}
+              getZoneNamesApi={defaultAsyncState}
+              errorVisible={false}
+              setErrorVisible={jest.fn()}
+              isLoading={false}
+              setIsLoading={jest.fn()}
+            />
+          );
+          expect(renderer.getRenderOutput()).toMatchSnapshot();
+        }));
 
     it('Renders loading indicator when waiting for Zone Api response', () => {
       const renderer = ShallowRenderer.createRenderer();

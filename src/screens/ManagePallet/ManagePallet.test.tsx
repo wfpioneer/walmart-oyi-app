@@ -104,7 +104,7 @@ describe('ManagePalletScreen', () => {
           navigation={navigationProp}
           route={routeProp}
           dispatch={jest.fn()}
-          getItemDetailsFromUpcApi={defaultAsyncState}
+          getItemDetailsApi={defaultAsyncState}
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
@@ -129,7 +129,7 @@ describe('ManagePalletScreen', () => {
           navigation={navigationProp}
           route={routeProp}
           dispatch={jest.fn()}
-          getItemDetailsFromUpcApi={defaultAsyncState}
+          getItemDetailsApi={defaultAsyncState}
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
@@ -165,7 +165,7 @@ describe('ManagePalletScreen', () => {
           navigation={navigationProp}
           route={routeProp}
           dispatch={jest.fn()}
-          getItemDetailsFromUpcApi={sucessAsyncState}
+          getItemDetailsApi={sucessAsyncState}
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
@@ -405,10 +405,10 @@ describe('ManagePalletScreen', () => {
       };
       clearPalletApiHook(clearPalletSuccess, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
 
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
       expect(navigationProp.goBack).toBeCalledTimes(1);
-      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(successToast))
+      expect(Toast.show).toHaveBeenCalledWith(successToast);
     });
 
     it('Test clearPalletApi hook on failure', () => {
@@ -426,9 +426,9 @@ describe('ManagePalletScreen', () => {
       };
       clearPalletApiHook(clearPalletFailure, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
 
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
-      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(failedToast))
+      expect(Toast.show).toHaveBeenCalledWith(failedToast);
     });
   });
 });

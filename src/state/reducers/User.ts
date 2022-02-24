@@ -19,7 +19,9 @@ const initialState: User = {
   configs: {
     locationManagement: false,
     locationManagementEdit: false,
-    palletManagement: false
+    palletManagement: false,
+    settingsTool: false,
+    printingUpdate: false
   }
 };
 
@@ -44,7 +46,9 @@ export const UserReducer = (state = initialState, action: Actions): User => {
         configs: {
           locationManagement: action.payload.locationManagement || false,
           locationManagementEdit: action.payload.locMgmtEdit || false,
-          palletManagement: action.payload.palletManagement || false
+          palletManagement: action.payload.palletManagement || false,
+          settingsTool: action.payload.settingsTool || false,
+          printingUpdate: action.payload.printingUpdate || false
         }
       };
     default:

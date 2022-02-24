@@ -1,13 +1,20 @@
 import {
-  ADD_MULTIPLE_TO_PRINT_QUEUE,
+  ADD_LOCATION_PRINT_QUEUE,
+  ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE,
   ADD_TO_PRINTER_LIST,
   ADD_TO_PRINT_QUEUE,
   Actions,
+  CLEAR_LOCATION_PRINT_QUEUE,
   DELETE_FROM_PRINTER_LIST,
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR,
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC,
+  SET_LOCATION_LABEL_PRINTER,
+  SET_PALLET_LABEL_PRINTER,
+  SET_PRICE_LABEL_PRINTER,
+  SET_PRINTER_LIST,
   SET_PRINTING_LOCATION_LABELS,
   SET_PRINTING_PALLET_LABEL,
+  SET_PRINTING_TYPE,
   SET_PRINT_QUEUE,
   SET_SELECTED_PRINTER,
   SET_SELECTED_SIGN_TYPE,
@@ -19,7 +26,8 @@ import {
   PrintPaperSize,
   PrintQueueItem,
   Printer,
-  PrinterType
+  PrinterType,
+  PrintingType
 } from '../../models/Printer';
 
 interface StateType {
@@ -29,6 +37,11 @@ interface StateType {
   printQueue: PrintQueueItem[];
   printingLocationLabels: string;
   printingPalletLabel: boolean;
+  locationPrintQueue: PrintQueueItem[];
+  priceLabelPrinter: Printer | null;
+  locationLabelPrinter: Printer | null;
+  palletLabelPrinter: Printer | null;
+  selectedPrintingType: PrintingType | null;
 }
 
 const initialState: StateType = {
@@ -36,17 +49,29 @@ const initialState: StateType = {
     type: PrinterType.LASER,
     name: '',
     desc: '',
-    id: '0'
+    id: '0',
+    labelsAvailable: ['price']
   },
   selectedSignType: '',
   printerList: [],
   printQueue: [],
   printingLocationLabels: '',
-  printingPalletLabel: false
+  printingPalletLabel: false,
+  locationPrintQueue: [],
+  priceLabelPrinter: {
+    type: PrinterType.LASER,
+    name: '',
+    desc: '',
+    id: '0',
+    labelsAvailable: ['price']
+  },
+  locationLabelPrinter: null,
+  palletLabelPrinter: null,
+  selectedPrintingType: null
 };
 
 export const Print = (state = initialState, action: Actions): StateType => {
-  const { printerList, printQueue } = state;
+  const { printerList, printQueue, locationPrintQueue } = state;
   switch (action.type) {
     case SET_SELECTED_PRINTER:
       return {
@@ -55,7 +80,8 @@ export const Print = (state = initialState, action: Actions): StateType => {
           type: action.payload.type,
           name: action.payload.name,
           desc: action.payload.desc,
-          id: action.payload.id
+          id: action.payload.id,
+          labelsAvailable: action.payload.labelsAvailable
         }
       };
     case SET_SELECTED_SIGN_TYPE:
@@ -87,10 +113,14 @@ export const Print = (state = initialState, action: Actions): StateType => {
         ...state,
         printQueue
       };
-    case ADD_MULTIPLE_TO_PRINT_QUEUE:
+    case ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE:
+      // eslint-disable-next-line no-case-declarations
+      const newLocationPrintQueue: PrintQueueItem[] = printQueue.concat(action.payload);
       return {
         ...state,
-        printQueue: printQueue.concat(action.payload)
+        locationPrintQueue: newLocationPrintQueue,
+        // TODO: This needs to removed once PrintQueue component got integrated with new redux state.
+        printQueue: newLocationPrintQueue
       };
     case REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR: {
       const newQueue: PrintQueueItem[] = [];
@@ -140,6 +170,42 @@ export const Print = (state = initialState, action: Actions): StateType => {
       return {
         ...state,
         printingPalletLabel: false
+      };
+    case ADD_LOCATION_PRINT_QUEUE:
+      locationPrintQueue.push(action.payload);
+      return {
+        ...state,
+        locationPrintQueue
+      };
+    case CLEAR_LOCATION_PRINT_QUEUE:
+      return {
+        ...state,
+        locationPrintQueue: initialState.locationPrintQueue
+      };
+    case SET_PRICE_LABEL_PRINTER:
+      return {
+        ...state,
+        priceLabelPrinter: action.payload
+      };
+    case SET_LOCATION_LABEL_PRINTER:
+      return {
+        ...state,
+        locationLabelPrinter: action.payload
+      };
+    case SET_PALLET_LABEL_PRINTER:
+      return {
+        ...state,
+        palletLabelPrinter: action.payload
+      };
+    case SET_PRINTING_TYPE:
+      return {
+        ...state,
+        selectedPrintingType: action.payload
+      };
+    case SET_PRINTER_LIST:
+      return {
+        ...state,
+        printerList: action.payload
       };
     default:
       return state;

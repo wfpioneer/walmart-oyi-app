@@ -5,6 +5,7 @@ import { Platform, Text, View } from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
+import { Printer, PrinterType } from '../../models/Printer';
 import Button from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
 import styles from './Login.style';
@@ -25,6 +26,19 @@ import COLOR from '../../themes/Color';
 import IconButton from '../../components/buttons/IconButton';
 import { AsyncState } from '../../models/AsyncState';
 import { ConfigResponse } from '../../services/Config.service';
+import {
+  getLocationLabelPrinter,
+  getPalletLabelPrinter,
+  getPriceLabelPrinter,
+  getPrinterList,
+  savePrinter
+} from '../../utils/asyncStorageUtils';
+import {
+  setLocationLabelPrinter,
+  setPalletLabelPrinter,
+  setPriceLabelPrinter,
+  setPrinterList
+} from '../../state/actions/Print';
 
 const mapDispatchToProps = {
   loginUser,
@@ -35,7 +49,11 @@ const mapDispatchToProps = {
   assignFluffyFeatures,
   getClubConfig,
   setConfigs,
-  showActivityModal
+  showActivityModal,
+  setLocationLabelPrinter,
+  setPalletLabelPrinter,
+  setPriceLabelPrinter,
+  setPrinterList
 };
 
 // This type uses all fields from the User type except it makes siteId optional
@@ -78,6 +96,10 @@ export interface LoginScreenProps {
   getClubConfigApiState: AsyncState;
   setConfigs: (configs: ConfigResponse) => void;
   showActivityModal: () => void;
+  setPrinterList: (payload: Printer[]) => void;
+  setPriceLabelPrinter: (payload: Printer | null) => void;
+  setLocationLabelPrinter: (payload: Printer | null) => void;
+  setPalletLabelPrinter: (payload: Printer | null) => void;
 }
 
 const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
@@ -157,6 +179,9 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     if (prevProps.getClubConfigApiState.isWaiting) {
       if (this.props.getClubConfigApiState.result) {
         this.props.setConfigs(this.props.getClubConfigApiState.result.data);
+        if (this.props.getClubConfigApiState.result.data.printingUpdate) {
+          this.getPrinterDetailsFromAsyncStorage();
+        }
       } else if (this.props.getClubConfigApiState.error) {
         // TODO Display toast/popup for error
       }
@@ -174,6 +199,29 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
+  }
+
+  async getPrinterDetailsFromAsyncStorage(): Promise<void> {
+    const printerList = await getPrinterList();
+    const priceLabelPrinter = await getPriceLabelPrinter();
+    const palletLabelPrinter = await getPalletLabelPrinter();
+    const locationLabelPrinter = await getLocationLabelPrinter();
+    if (printerList && printerList.length > 0) {
+      this.props.setPrinterList(printerList);
+    } else {
+      const defaultPrinter: Printer = {
+        type: PrinterType.LASER,
+        name: strings('PRINT.FRONT_DESK'),
+        desc: strings('GENERICS.DEFAULT'),
+        id: '000000000000',
+        labelsAvailable: ['price']
+      };
+      this.props.setPrinterList([defaultPrinter]);
+      savePrinter(defaultPrinter);
+    }
+    this.props.setPriceLabelPrinter(priceLabelPrinter);
+    this.props.setPalletLabelPrinter(palletLabelPrinter);
+    this.props.setLocationLabelPrinter(locationLabelPrinter);
   }
 
   signOutUser(): void {
