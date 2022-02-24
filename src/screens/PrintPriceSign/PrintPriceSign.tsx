@@ -609,7 +609,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         </View>
       ) : (
         <View style={styles.footerBtnContainer}>
-          {userConfig.printingUpdate && !printingPalletLabel
+          {!(printingLocationLabels || printingPalletLabel)
           && (
           <Button
             title={strings('PRINT.ADD_TO_QUEUE')}
