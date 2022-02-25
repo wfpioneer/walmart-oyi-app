@@ -157,7 +157,7 @@ export default {
     LOCATION_PRINTING: '正在打印货架标签',
     PRICE_SIGNS: '价格标签',
     LOCATIONS: '位置',
-    PRICE_SIGN_SUCCESS: 'Price Sign Label Successfully Printed' // TODO Mandarin Translations
+    PRICE_SIGN_SUCCESS: '价格标签打印成功'
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',
