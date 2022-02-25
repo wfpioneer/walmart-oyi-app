@@ -167,7 +167,50 @@ export const NoPrintQueueMessage = (): JSX.Element => (
     <Text style={styles.emptyText}>{strings('PRINT.EMPTY_LIST')}</Text>
   </View>
 );
-
+const handlePrint = (
+  printQueue: PrintQueueItem[],
+  tabName: PrintTab,
+  selectedPrinterId: string | undefined,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>,
+  dispatch: Dispatch<any>
+): void => {
+  validateSession(navigation, route.name).then(() => {
+    if (tabName === 'LOCATION') {
+      const printLocationArray: PrintLocationList[] = printQueue
+        .filter(printLoc => printLoc.itemType !== PrintQueueItemType.ITEM)
+        .map(printLabel => {
+          const { locationId, signQty } = printLabel;
+          return {
+            locationId: locationId ?? 0,
+            qty: signQty,
+            printerMACAddress: selectedPrinterId || ''
+          };
+        });
+      dispatch(printLocationLabel({ printLabelList: printLocationArray }));
+    } else {
+      const printArray: PrintItemList[] = printQueue
+        .filter(printItem => printItem.itemType === PrintQueueItemType.ITEM)
+        .map(printItem => {
+          const {
+            itemNbr, signQty, paperSize, worklistType
+          } = printItem;
+          return {
+            itemNbr: itemNbr ?? 0,
+            qty: signQty,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore needed because typechecking error
+            code: LaserPaper[paperSize],
+            description: paperSize,
+            printerMACAddress: selectedPrinterId || '',
+            isPortablePrinter: false,
+            workListTypeCode: worklistType ?? ''
+          };
+        });
+      dispatch(printSign({ printList: printArray }));
+    }
+  }).catch(() => {});
+};
 export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
   const {
     selectedPrinter, printQueue, navigation, route, dispatch, tabName, useEffectHook,
@@ -205,43 +248,7 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
       navigation.navigate('PrinterList');
     }).catch(() => {});
   };
-  const handlePrint = () => {
-    validateSession(navigation, route.name).then(() => {
-      if (tabName === 'LOCATION') {
-        const printLocationArray: PrintLocationList[] = printQueue
-          .filter(printLoc => printLoc.itemType !== PrintQueueItemType.ITEM)
-          .map(printLabel => {
-            const { locationId, signQty } = printLabel;
-            return {
-              locationId: locationId ?? 0,
-              qty: signQty,
-              printerMACAddress: selectedPrinter?.id || ''
-            };
-          });
-        dispatch(printLocationLabel({ printLabelList: printLocationArray }));
-      } else {
-        const printArray: PrintItemList[] = printQueue
-          .filter(printItem => printItem.itemType === PrintQueueItemType.ITEM)
-          .map(printItem => {
-            const {
-              itemNbr, signQty, paperSize, worklistType
-            } = printItem;
-            return {
-              itemNbr: itemNbr ?? 0,
-              qty: signQty,
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore needed because typechecking error
-              code: LaserPaper[paperSize],
-              description: paperSize,
-              printerMACAddress: selectedPrinter?.id || '',
-              isPortablePrinter: false,
-              workListTypeCode: worklistType ?? ''
-            };
-          });
-        dispatch(printSign({ printList: printArray }));
-      }
-    }).catch(() => {});
-  };
+
   return (
     <View style={styles.container}>
       <CustomModalComponent
@@ -304,7 +311,7 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
               title={strings('PRINT.PRINT')}
               type={Button.Type.PRIMARY}
               style={styles.footerBtn}
-              onPress={handlePrint}
+              onPress={() => handlePrint(printQueue, tabName, selectedPrinter?.id, navigation, route, dispatch)}
               disabled={printQueue.length < 1}
             />
           </View>
@@ -326,7 +333,7 @@ const PrintLists = (props: {tab: PrintTab}): JSX.Element => {
 
   // Filter by tab
   const getSelectedPrinterBasedOnLabel = () => {
-    if (printingLocationLabels) {
+    if (props.tab === 'LOCATION') {
       return locationLabelPrinter;
     }
     return priceLabelPrinter;

@@ -48,6 +48,8 @@ const ERROR_FORMATTING_OPTIONS = {
   min: QTY_MIN,
   max: numbers(QTY_MAX, { precision: 0 })
 };
+const LOCATION_SECTION = 'LOCATION.SECTION';
+const PRINT_ERROR = 'PRINT.PRINT_SERVICE_ERROR';
 
 export const validateQty = (qty: number): boolean => QTY_MIN <= qty && qty <= QTY_MAX;
 
@@ -211,7 +213,7 @@ const isValidDispatch = (
 };
 
 const isitemResultHasData = (itemResult: any) => (
-  (itemResult && itemResult.data)
+  itemResult && itemResult.data
 );
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
@@ -227,10 +229,10 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
 
   const getLocationName = () => (printingLocationLabels === LocationName.AISLE
     ? `${strings('LOCATION.AISLE')} ${selectedZone.name}${selectedAisle.name}`
-    : `${strings('LOCATION.SECTION')} ${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`);
+    : `${strings(LOCATION_SECTION)} ${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`);
 
   const getFullSectionName = (sectionName: string) => (
-    `${strings('LOCATION.SECTION')} ${selectedZone.name}${selectedAisle.name}-${sectionName}`);
+    `${strings(LOCATION_SECTION)} ${selectedZone.name}${selectedAisle.name}-${sectionName}`);
 
   useLayoutHook(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
@@ -282,7 +284,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     }
     // on api failure
     if (!printAPI.isWaiting && printAPI.error) {
-      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+      setError({ error: true, message: strings(PRINT_ERROR) });
     }
     // on api submission
     if (printAPI.isWaiting) {
@@ -304,7 +306,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     }
     // on api failure
     if (!printLabelAPI.isWaiting && printLabelAPI.error) {
-      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+      setError({ error: true, message: strings(PRINT_ERROR) });
     }
     // on api submission
     if (printLabelAPI.isWaiting) {
@@ -326,7 +328,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     }
     // on api failure
     if (!printPalletAPI.isWaiting && printPalletAPI.error) {
-      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+      setError({ error: true, message: strings(PRINT_ERROR) });
     }
     // on api submission
     if (printPalletAPI.isWaiting) {
@@ -486,8 +488,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         <Text>
           {printingLocationLabels === LocationName.AISLE
             ? `${strings('LOCATION.AISLE')} ${selectedZone.name}${selectedAisle.name} (${sectionsList.length} `
-            + `${sectionsList.length === 1 ? strings('LOCATION.SECTION') : strings('LOCATION.SECTIONS')})`
-            : `${strings('LOCATION.SECTION')} ${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`}
+            + `${sectionsList.length === 1 ? strings(LOCATION_SECTION) : strings('LOCATION.SECTIONS')})`
+            : `${strings(LOCATION_SECTION)} ${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`}
         </Text>
       </View>
     )
