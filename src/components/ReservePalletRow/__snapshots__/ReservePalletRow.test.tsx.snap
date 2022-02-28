@@ -11,21 +11,15 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Subscription {
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
         "handleChangeWrapper": [Function],
-        "listeners": Object {
-          "notify": [Function],
-        },
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
         "onStateChange": [Function],
-        "parentSub": undefined,
-        "store": Object {
-          "@@observable": [Function],
-          "dispatch": [Function],
-          "getState": [Function],
-          "replaceReducer": [Function],
-          "subscribe": [Function],
-        },
-        "unsubscribe": null,
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
       },
     }
   }
@@ -78,21 +72,15 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Subscription {
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
         "handleChangeWrapper": [Function],
-        "listeners": Object {
-          "notify": [Function],
-        },
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
         "onStateChange": [Function],
-        "parentSub": undefined,
-        "store": Object {
-          "@@observable": [Function],
-          "dispatch": [Function],
-          "getState": [Function],
-          "replaceReducer": [Function],
-          "subscribe": [Function],
-        },
-        "unsubscribe": null,
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
       },
     }
   }
@@ -152,21 +140,15 @@ exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = 
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Subscription {
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
         "handleChangeWrapper": [Function],
-        "listeners": Object {
-          "notify": [Function],
-        },
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
         "onStateChange": [Function],
-        "parentSub": undefined,
-        "store": Object {
-          "@@observable": [Function],
-          "dispatch": [Function],
-          "getState": [Function],
-          "replaceReducer": [Function],
-          "subscribe": [Function],
-        },
-        "unsubscribe": null,
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
       },
     }
   }
