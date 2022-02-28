@@ -92,52 +92,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
 };
 const Binning = (): JSX.Element => {
   // TODO: pallets and binLocation needs to be connected to Redux
-  const pallets: Pallet[] = [{
-    palletId: 123456,
-    expirationDate: '10-3-2022',
-    firstItem: {
-      itemDesc: 'itemDesc',
-      price: 123,
-      upcNbr: '12343534',
-      quantity: 2
-    }
-  }, {
-    palletId: 345345,
-    expirationDate: '10-3-2022',
-    firstItem: {
-      itemDesc: 'itemDesc',
-      price: 123,
-      upcNbr: '345345',
-      quantity: 2
-    }
-  }, {
-    palletId: 345344,
-    expirationDate: '10-3-2022',
-    firstItem: {
-      itemDesc: 'itemDesc',
-      price: 123,
-      upcNbr: '345345',
-      quantity: 2
-    }
-  }, {
-    palletId: 435653,
-    expirationDate: '10-3-2022',
-    firstItem: {
-      itemDesc: 'itemDesc',
-      price: 123,
-      upcNbr: '345345',
-      quantity: 2
-    }
-  }, {
-    palletId: 345354,
-    expirationDate: '10-3-2022',
-    firstItem: {
-      itemDesc: 'itemDesc',
-      price: 123,
-      upcNbr: '345345',
-      quantity: 2
-    }
-  }];
+  const pallets: Pallet[] = [];
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
