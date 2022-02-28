@@ -8,7 +8,6 @@ export interface ConfigResponse {
   palletManagement: boolean;
   settingsTool: boolean;
   printingUpdate: boolean;
-  binning: boolean;
 }
 
 export default class ConfigService {

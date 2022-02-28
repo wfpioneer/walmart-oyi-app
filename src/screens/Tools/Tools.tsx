@@ -24,7 +24,6 @@ interface ToolsFeatures {
 const LOCATION_MANAGEMENT = 'location management';
 const PALLET_MANAGEMENT = 'pallet management';
 const SETTINGS_TOOL = 'settings tool';
-const BINNING = 'binning';
 
 // Add more objects to the array in the order they need to appear
 const tools: ToolsFeatures[] = [
@@ -46,17 +45,6 @@ const tools: ToolsFeatures[] = [
       name="cube-outline"
       size={28}
       color={COLOR.MAIN_THEME_COLOR}
-    />
-  },
-  {
-    key: BINNING,
-    title: 'BINNING.BINNING',
-    destination: 'Binning',
-    icon: <MaterialCommunityIcon
-      name="login-variant"
-      size={28}
-      color={COLOR.MAIN_THEME_COLOR}
-      style={{ transform: [{ rotate: '270deg' }] }}
     />
   },
   { // Should always be last in the list
@@ -82,9 +70,6 @@ export const ToolsScreen = (props: ToolsScreenProps): JSX.Element => {
   }
   if (user.configs.settingsTool && !userFeatures.includes(SETTINGS_TOOL)) {
     userFeatures.push(SETTINGS_TOOL);
-  }
-  if (user.configs.binning && !userFeatures.includes(BINNING)) {
-    userFeatures.push(BINNING);
   }
 
   return (

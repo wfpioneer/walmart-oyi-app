@@ -21,8 +21,7 @@ const initialState: User = {
     locationManagementEdit: false,
     palletManagement: false,
     settingsTool: false,
-    printingUpdate: false,
-    binning: false
+    printingUpdate: false
   }
 };
 
@@ -49,8 +48,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           locationManagementEdit: action.payload.locMgmtEdit || false,
           palletManagement: action.payload.palletManagement || false,
           settingsTool: action.payload.settingsTool || false,
-          printingUpdate: action.payload.printingUpdate || false,
-          binning: action.payload.binning
+          printingUpdate: action.payload.printingUpdate || false
         }
       };
     default:
