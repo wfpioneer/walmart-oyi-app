@@ -3,8 +3,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import {
-  NoPrintQueueMessage, PrintListsScreen, handleEditAction,
-  locationLabelsApiEffect, printItemApiEffect
+  NoPrintQueueMessage, PrintListsScreen, locationLabelsApiEffect, printItemApiEffect
 } from './PrintList';
 import { Printer, PrinterType } from '../../models/Printer';
 import { mockLargePrintQueue, mockPrintQueue } from '../../mockData/mockPrintQueue';
@@ -218,6 +217,11 @@ describe('PrintListScreen', () => {
               itemNbr: 250061,
               upcNbr: null,
               completed: true
+            },
+            {
+              itemNbr: null,
+              upcNbr: 5432178439,
+              completed: true
             }
           ],
           status: 207
@@ -283,12 +287,6 @@ describe('PrintListScreen', () => {
 
       locationLabelsApiEffect(printApiError, mockDispatch, navigationProp);
       expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(printError));
-    });
-    // Set Item should be getting called once but it is not for some reason
-    it.skip('Tests handleEditAction function', () => {
-      const setItemIndexEdit = jest.fn();
-      handleEditAction(0, setItemIndexEdit);
-      expect(setItemIndexEdit).toBeCalledTimes(1);
     });
   });
 });

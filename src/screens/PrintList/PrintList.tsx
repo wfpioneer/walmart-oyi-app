@@ -127,12 +127,6 @@ export const locationLabelsApiEffect = (
   }
 };
 
-export const handleEditAction = (
-  index: number, setItemIndexToEdit: React.Dispatch<React.SetStateAction<number>>
-) => (): void => {
-  setItemIndexToEdit(index);
-};
-
 export const handleDeleteAction = (
   index: number,
   printQueue: PrintQueueItem[],
@@ -279,7 +273,7 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
             jobName={item.itemName}
             nbrOfCopies={item.signQty}
             size={item.paperSize}
-            editCallback={handleEditAction(index, setItemIndexToEdit)}
+            editCallback={() => setItemIndexToEdit(index)}
             deleteCallback={handleDeleteAction(index, printQueue, navigation, route, dispatch, tabName)}
           />
         )}
