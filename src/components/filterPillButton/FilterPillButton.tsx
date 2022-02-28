@@ -11,12 +11,12 @@ interface FilterPillButtonProps {
   onClosePress: (event: GestureResponderEvent) => void;
 }
 
-export const FilterPillButton = (props: FilterPillButtonProps) => (
+export const FilterPillButton = (props: FilterPillButtonProps): JSX.Element => (
   <View style={styles.container}>
     <Text style={styles.filterText}>
       { props.filterText }
     </Text>
-    <TouchableOpacity onPress={props.onClosePress}>
+    <TouchableOpacity testID="button" onPress={props.onClosePress}>
       <MaterialCommunityIcons name="close-circle" size={20} color={COLOR.WHITE} />
     </TouchableOpacity>
   </View>
