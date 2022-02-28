@@ -356,7 +356,11 @@ export default {
     PICKING: 'Pickeo'
   },
   BINNING: {
-    BINNING: 'Bodega'
+    BINNING: 'Bodega',
+    SCAN_PALLET: 'Scan a Pallet to begin',
+    SCAN_PALLET_BIN: 'Scan Pallet/s to Bin',
+    ASSIGN_LOCATION: 'Assign Location',
+    SCAN_LOCATION: 'Scan Location to Bin Pallet/s'
   },
   SETTINGS: {
     TITLE: 'Ajustes'
