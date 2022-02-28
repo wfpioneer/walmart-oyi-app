@@ -358,7 +358,10 @@ export default {
     PICKING: 'Picking'
   },
   BINNING: {
-    BINNING: 'Binning'
+    BINNING: 'Binning',
+    ASSIGN_LOCATION: 'Assign Location',
+    SCAN_LOCATION: 'Scan location to bin pallet',
+    SCAN_LOCATION_PLURAL: 'Scan location to bin pallets'
   },
   SETTINGS: {
     TITLE: 'Settings'
