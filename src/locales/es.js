@@ -357,10 +357,10 @@ export default {
   },
   BINNING: {
     BINNING: 'Bodega',
-    SCAN_PALLET: 'Scan a Pallet to begin',
-    SCAN_PALLET_BIN: 'Scan Pallet/s to Bin',
-    ASSIGN_LOCATION: 'Assign Location',
-    SCAN_LOCATION: 'Scan Location to Bin Pallet/s'
+    SCAN_PALLET: 'Escanear el pallet para comenzar',
+    SCAN_PALLET_BIN: 'Escanear pallet a contenedor',
+    ASSIGN_LOCATION: 'Asignar ubicación',
+    SCAN_LOCATION: 'Escanear la ubicación al pallet de contenedores'
   },
   SETTINGS: {
     TITLE: 'Ajustes'
