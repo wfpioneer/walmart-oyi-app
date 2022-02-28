@@ -48,6 +48,8 @@ const ERROR_FORMATTING_OPTIONS = {
   min: QTY_MIN,
   max: numbers(QTY_MAX, { precision: 0 })
 };
+const LOCATION_SECTION = 'LOCATION.SECTION';
+const PRINT_ERROR = 'PRINT.PRINT_SERVICE_ERROR';
 
 export const validateQty = (qty: number): boolean => QTY_MIN <= qty && qty <= QTY_MAX;
 
@@ -106,6 +108,7 @@ interface PriceSignProps {
   selectedPrinter: Printer | null;
   selectedSignType: PrintPaperSize;
   printQueue: PrintQueueItem[];
+  locationPrintQueue: PrintQueueItem[];
   printingLocationLabels: string;
   printingPalletLabel: boolean;
   selectedAisle: LocationIdName;
@@ -210,13 +213,13 @@ const isValidDispatch = (
 };
 
 const isitemResultHasData = (itemResult: any) => (
-  (itemResult && itemResult.data)
+  itemResult && itemResult.data
 );
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
     scannedEvent, exceptionType, actionCompleted, itemResult, printAPI, printLabelAPI, printPalletAPI,
     sectionsResult, selectedPrinter, selectedSignType, printQueue, printingLocationLabels, printingPalletLabel,
-    selectedAisle, selectedSection, selectedZone, dispatch, navigation, route, signQty, palletInfo,
+    selectedAisle, selectedSection, selectedZone, dispatch, navigation, route, signQty, palletInfo, locationPrintQueue,
     setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook, printerList, userConfig
   } = props;
   const {
@@ -226,10 +229,10 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
 
   const getLocationName = () => (printingLocationLabels === LocationName.AISLE
     ? `${strings('LOCATION.AISLE')} ${selectedZone.name}${selectedAisle.name}`
-    : `${strings('LOCATION.SECTION')} ${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`);
+    : `${strings(LOCATION_SECTION)} ${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`);
 
   const getFullSectionName = (sectionName: string) => (
-    `${strings('LOCATION.SECTION')} ${selectedZone.name}${selectedAisle.name}-${sectionName}`);
+    `${strings(LOCATION_SECTION)} ${selectedZone.name}${selectedAisle.name}-${sectionName}`);
 
   useLayoutHook(() => {
     // Just used to set the default printer the first time, since redux loads before the translations
@@ -281,7 +284,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     }
     // on api failure
     if (!printAPI.isWaiting && printAPI.error) {
-      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+      setError({ error: true, message: strings(PRINT_ERROR) });
     }
     // on api submission
     if (printAPI.isWaiting) {
@@ -303,7 +306,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     }
     // on api failure
     if (!printLabelAPI.isWaiting && printLabelAPI.error) {
-      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+      setError({ error: true, message: strings(PRINT_ERROR) });
     }
     // on api submission
     if (printLabelAPI.isWaiting) {
@@ -325,7 +328,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     }
     // on api failure
     if (!printPalletAPI.isWaiting && printPalletAPI.error) {
-      setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+      setError({ error: true, message: strings(PRINT_ERROR) });
     }
     // on api submission
     if (printPalletAPI.isWaiting) {
@@ -358,10 +361,10 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const handleAddPrintList = () => {
     // check if the item/size already exists on the print queue
     const itemSizeExists = isItemSizeExists(printQueue, selectedSignType, itemNbr);
-    const locationLabelExists = aisleSectionExists(printQueue, selectedSection.id);
-
+    // TODO Disable check on price sign screen and vice versa
+    const locationLabelExists = aisleSectionExists(locationPrintQueue, selectedSection.id);
     // TODO Use LocationLabelCheck to allow some items to be added to the print queue
-    if (itemSizeExists || locationLabelExists) {
+    if (itemSizeExists || (locationLabelExists && printingLocationLabels === LocationName.SECTION)) {
       // TODO show popup if already exists
       dispatch(showInfoModal(strings('LOCATION.PRINT_LABEL_EXISTS_HEADER'), strings('LOCATION.PRINT_LABEL_EXISTS')));
       trackEvent('print_already_exists_in_queue', { itemName, selectedSignType });
@@ -387,16 +390,18 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         const printQueueItems: PrintQueueItem[] = [];
         // Add Get Sections response to print queue
         sectionsList.forEach(section => {
-          const printQueueArrayItem: PrintQueueItem = {
-            itemName: getFullSectionName(section.sectionName),
-            locationId: section.sectionId,
-            paperSize: selectedSignType,
-            signQty,
-            itemType: PrintQueueItemType.SECTION
-          };
-          printQueueItems.push(printQueueArrayItem);
+          if (!aisleSectionExists(locationPrintQueue, section.sectionId)) {
+            const printQueueArrayItem: PrintQueueItem = {
+              itemName: getFullSectionName(section.sectionName),
+              locationId: section.sectionId,
+              paperSize: selectedSignType,
+              signQty,
+              itemType: PrintQueueItemType.SECTION
+            };
+            printQueueItems.push(printQueueArrayItem);
+          }
         });
-        trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItems) });
+        trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItems) });
         dispatch(addMultipleToLocationPrintQueue(printQueueItems));
       } else {
         const { id } = selectedSection;
@@ -407,8 +412,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           signQty,
           itemType: PrintQueueItemType.SECTION
         };
-        trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
-        dispatch(addToPrintQueue(printQueueItem));
+        trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
         dispatch(addLocationPrintQueue(printQueueItem));
       }
       isValidDispatch(props, actionCompleted, exceptionType);
@@ -484,8 +488,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         <Text>
           {printingLocationLabels === LocationName.AISLE
             ? `${strings('LOCATION.AISLE')} ${selectedZone.name}${selectedAisle.name} (${sectionsList.length} `
-            + `${sectionsList.length === 1 ? strings('LOCATION.SECTION') : strings('LOCATION.SECTIONS')})`
-            : `${strings('LOCATION.SECTION')} ${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`}
+            + `${sectionsList.length === 1 ? strings(LOCATION_SECTION) : strings('LOCATION.SECTIONS')})`
+            : `${strings(LOCATION_SECTION)} ${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`}
         </Text>
       </View>
     )
@@ -607,7 +611,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
         </View>
       ) : (
         <View style={styles.footerBtnContainer}>
-          {!(printingLocationLabels || printingPalletLabel)
+          {userConfig.printingUpdate && !printingPalletLabel
           && (
           <Button
             title={strings('PRINT.ADD_TO_QUEUE')}
@@ -642,7 +646,7 @@ const PrintPriceSign = (): JSX.Element => {
   const { palletInfo } = useTypedSelector(state => state.PalletManagement);
   const userConfig = useTypedSelector(state => state.User.configs);
   const {
-    selectedSignType, printQueue, printingLocationLabels, printerList,
+    selectedSignType, printQueue, printingLocationLabels, printerList, locationPrintQueue,
     printingPalletLabel, priceLabelPrinter, locationLabelPrinter, palletLabelPrinter
   } = useTypedSelector(state => state.Print);
   const { selectedAisle, selectedSection, selectedZone } = useTypedSelector(state => state.Location);
@@ -675,6 +679,7 @@ const PrintPriceSign = (): JSX.Element => {
       selectedPrinter={getSelectedPrinterBasedOnLabel()}
       selectedSignType={selectedSignType}
       printQueue={printQueue}
+      locationPrintQueue={locationPrintQueue}
       printingLocationLabels={printingLocationLabels}
       printingPalletLabel={printingPalletLabel}
       selectedAisle={selectedAisle}
