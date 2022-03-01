@@ -2,7 +2,8 @@ import { NavigationProp, Route } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { strings } from '../../locales';
-import { PrintQueueItem, PrinterType } from '../../models/Printer';
+import { mockLargePrintQueue, mockPrintQueue } from '../../mockData/mockPrintQueue';
+import { PrinterType } from '../../models/Printer';
 import {
   PrintQueueScreen, handlePrint, printItemApiEffect, renderPrintItem
 } from './PrintQueue';
@@ -32,15 +33,7 @@ describe('PrintQueueScreen', () => {
     error: false,
     message: ''
   };
-  const mockPrintQueue: PrintQueueItem[] = [{
-    itemName: 'Test item',
-    itemNbr: 123456,
-    upcNbr: '123456',
-    catgNbr: 2,
-    signQty: 1,
-    paperSize: 'Small',
-    worklistType: 'NSFL'
-  }];
+
   describe('Test rendering items in printQueue', () => {
     it('Renders Empty Print list for Zero Items in queue', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -65,89 +58,9 @@ describe('PrintQueueScreen', () => {
     });
     it('Renders the print queue with 10 items in it', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const largePrintQueue: PrintQueueItem[] = [{
-        itemName: 'Test item',
-        itemNbr: 123456,
-        upcNbr: '123456',
-        catgNbr: 2,
-        signQty: 1,
-        paperSize: 'XSmall',
-        worklistType: 'NSFL'
-      }, {
-        itemName: 'Test item',
-        itemNbr: 123456,
-        upcNbr: '123456',
-        catgNbr: 2,
-        signQty: 1,
-        paperSize: 'Small',
-        worklistType: 'NSFL'
-      }, {
-        itemName: 'Test item',
-        itemNbr: 123456,
-        upcNbr: '123456',
-        catgNbr: 2,
-        signQty: 1,
-        paperSize: 'Medium',
-        worklistType: 'NSFL'
-      }, {
-        itemName: 'Test item',
-        itemNbr: 123456,
-        upcNbr: '123456',
-        catgNbr: 2,
-        signQty: 1,
-        paperSize: 'Large',
-        worklistType: 'NSFL'
-      }, {
-        itemName: 'Test item',
-        itemNbr: 123456,
-        upcNbr: '123456',
-        catgNbr: 2,
-        signQty: 1,
-        paperSize: 'Wine',
-        worklistType: 'NSFL'
-      }, {
-        itemName: 'Store Use Item',
-        itemNbr: 789012,
-        upcNbr: '789012',
-        catgNbr: 2,
-        signQty: 1,
-        paperSize: 'XSmall',
-        worklistType: 'NSFL'
-      }, {
-        itemName: 'Store Use Item',
-        itemNbr: 789012,
-        upcNbr: '789012',
-        catgNbr: 2,
-        signQty: 1,
-        paperSize: 'Small',
-        worklistType: 'NSFL'
-      }, {
-        itemName: 'Store Use Item',
-        itemNbr: 789012,
-        upcNbr: '789012',
-        catgNbr: 2,
-        signQty: 1,
-        paperSize: 'Medium',
-        worklistType: 'NSFL'
-      }, {
-        itemName: 'Store Use Item',
-        itemNbr: 789012,
-        upcNbr: '789012',
-        catgNbr: 2,
-        signQty: 1,
-        paperSize: 'Large',
-        worklistType: 'NSFL'
-      }, {
-        itemName: 'Store Use Item',
-        itemNbr: 789012,
-        upcNbr: '789012',
-        catgNbr: 2,
-        signQty: 1,
-        paperSize: 'Wine',
-        worklistType: 'NSFL'
-      }];
+
       renderer.render(<PrintQueueScreen
-        printQueue={largePrintQueue}
+        printQueue={mockLargePrintQueue}
         selectedPrinter={defaultPrinter}
         printAPI={defaultAsyncState}
         printLabelAPI={defaultAsyncState}

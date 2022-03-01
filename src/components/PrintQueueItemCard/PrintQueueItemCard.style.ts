@@ -10,7 +10,9 @@ export default StyleSheet.create({
     backgroundColor: COLOR.WHITE,
     padding: 15,
     marginBottom: 2,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: COLOR.GREY_300
   },
   content: {
     alignItems: 'flex-start',
@@ -24,23 +26,24 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   textHeader: {
-    flex: 1
+    flex: 1,
+    fontSize: 16
   },
   itemSize: {
     textAlign: 'right'
   },
   textHeaderRows: {
     flex: 1,
-    fontSize: 10
+    color: COLOR.GREY_800
   },
   itemHeaderFirstRow: {
     paddingTop: 10,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-around'
   },
   icon: {
-    paddingBottom: 5,
-    paddingTop: 5,
-    paddingLeft: 5
+    paddingVertical: 5,
+    paddingHorizontal: 5
   }
 });

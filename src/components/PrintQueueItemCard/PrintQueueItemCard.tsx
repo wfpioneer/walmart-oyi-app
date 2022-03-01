@@ -27,7 +27,7 @@ const PrintQueueItemCard = (props: PrintQueueItemCardProp) : JSX.Element => {
   const renderActionIcon = (name: string, action?: (event: GestureResponderEvent) => void) => (
     <TouchableOpacity style={styles.icon} onPress={action}>
       <View>
-        <MaterialCommunityIcon name={name} size={20} color={COLOR.TRACKER_GREY} />
+        <MaterialCommunityIcon name={name} size={26} color={COLOR.TRACKER_GREY} />
       </View>
     </TouchableOpacity>
   );
@@ -40,7 +40,7 @@ const PrintQueueItemCard = (props: PrintQueueItemCardProp) : JSX.Element => {
             {jobName}
           </Text>
           <Text style={styles.itemSize}>
-            {size}
+            {strings(`PRINT.${size}`)}
           </Text>
         </View>
         <View style={styles.itemHeaderFirstRow}>

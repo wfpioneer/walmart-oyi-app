@@ -303,7 +303,11 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
           }}
           modalType="Form"
         >
-          <PrintQueueEdit itemIndexToEdit={itemIndexToEdit} setItemIndexToEdit={setItemIndexToEdit} />
+          <PrintQueueEdit
+            itemIndexToEdit={itemIndexToEdit}
+            setItemIndexToEdit={setItemIndexToEdit}
+            printQueue={printQueue}
+          />
         </CustomModalComponent>
         <ScrollView contentContainerStyle={styles.container}>
           <View style={styles.totalCountContainer}>
