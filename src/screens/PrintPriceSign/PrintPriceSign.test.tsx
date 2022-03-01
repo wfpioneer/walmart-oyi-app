@@ -53,7 +53,8 @@ describe('PrintPriceSignScreen', () => {
     locationManagementEdit: false,
     palletManagement: true,
     settingsTool: false,
-    printingUpdate: true
+    printingUpdate: true,
+    binning: false
   };
 
   describe('Tests rendering print Errors/Api responses', () => {
