@@ -9,21 +9,25 @@ export const PrintListTabNavigator = (): JSX.Element => (
   <Tab.Navigator>
     <Tab.Screen
       name="PriceSigns"
-      component={PrintLists}
       options={{
         title: strings('PRINT.PRICE_SIGNS')
       }}
-    />
+    >
+      {() => <PrintLists tab="PRICESIGN" />}
+    </Tab.Screen>
     <Tab.Screen
       name="Locations"
-      component={PrintLists}
       options={{
         title: strings('PRINT.LOCATIONS')
       }}
-    />
+    >
+      {() => <PrintLists tab="LOCATION" />}
+    </Tab.Screen>
   </Tab.Navigator>
 );
 
-const PrintListTabs = (): JSX.Element => (<PrintListTabNavigator />);
+const PrintListTabs = (): JSX.Element => (
+  <PrintListTabNavigator />
+);
 
 export default PrintListTabs;
