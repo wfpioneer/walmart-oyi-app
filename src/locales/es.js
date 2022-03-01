@@ -357,7 +357,10 @@ export default {
     PICKING: 'Pickeo'
   },
   BINNING: {
-    BINNING: 'Bodega'
+    BINNING: 'Bodega',
+    ASSIGN_LOCATION: 'Agrega la ubicación',
+    SCAN_LOCATION: 'Escanea la ubicación para ingresar a bodega el pallet',
+    SCAN_LOCATION_PLURAL: 'Escanea la ubicación para ingresar a bodega los pallets'
   },
   SETTINGS: {
     TITLE: 'Ajustes'
