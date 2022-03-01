@@ -16,6 +16,20 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
   >
     <PrintQueueEdit
       itemIndexToEdit={0}
+      printQueue={
+        Array [
+          Object {
+            "catgNbr": 2,
+            "itemName": "Test item",
+            "itemNbr": 123456,
+            "paperSize": "Small",
+            "signQty": 1,
+            "upcNbr": "123456",
+            "worklistType": "NSFL",
+          },
+        ]
+      }
+      queueName="PRICESIGN"
       setItemIndexToEdit={[MockFunction]}
     />
   </CustomModalComponent>
@@ -360,6 +374,101 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
   >
     <PrintQueueEdit
       itemIndexToEdit={-1}
+      printQueue={
+        Array [
+          Object {
+            "catgNbr": 2,
+            "itemName": "Test item",
+            "itemNbr": 123456,
+            "paperSize": "XSmall",
+            "signQty": 1,
+            "upcNbr": "123456",
+            "worklistType": "NSFL",
+          },
+          Object {
+            "catgNbr": 2,
+            "itemName": "Test item",
+            "itemNbr": 123456,
+            "paperSize": "Small",
+            "signQty": 1,
+            "upcNbr": "123456",
+            "worklistType": "NSFL",
+          },
+          Object {
+            "catgNbr": 2,
+            "itemName": "Test item",
+            "itemNbr": 123456,
+            "paperSize": "Medium",
+            "signQty": 1,
+            "upcNbr": "123456",
+            "worklistType": "NSFL",
+          },
+          Object {
+            "catgNbr": 2,
+            "itemName": "Test item",
+            "itemNbr": 123456,
+            "paperSize": "Large",
+            "signQty": 1,
+            "upcNbr": "123456",
+            "worklistType": "NSFL",
+          },
+          Object {
+            "catgNbr": 2,
+            "itemName": "Test item",
+            "itemNbr": 123456,
+            "paperSize": "Wine",
+            "signQty": 1,
+            "upcNbr": "123456",
+            "worklistType": "NSFL",
+          },
+          Object {
+            "catgNbr": 2,
+            "itemName": "Store Use Item",
+            "itemNbr": 789012,
+            "paperSize": "XSmall",
+            "signQty": 1,
+            "upcNbr": "789012",
+            "worklistType": "NSFL",
+          },
+          Object {
+            "catgNbr": 2,
+            "itemName": "Store Use Item",
+            "itemNbr": 789012,
+            "paperSize": "Small",
+            "signQty": 1,
+            "upcNbr": "789012",
+            "worklistType": "NSFL",
+          },
+          Object {
+            "catgNbr": 2,
+            "itemName": "Store Use Item",
+            "itemNbr": 789012,
+            "paperSize": "Medium",
+            "signQty": 1,
+            "upcNbr": "789012",
+            "worklistType": "NSFL",
+          },
+          Object {
+            "catgNbr": 2,
+            "itemName": "Store Use Item",
+            "itemNbr": 789012,
+            "paperSize": "Large",
+            "signQty": 1,
+            "upcNbr": "789012",
+            "worklistType": "NSFL",
+          },
+          Object {
+            "catgNbr": 2,
+            "itemName": "Store Use Item",
+            "itemNbr": 789012,
+            "paperSize": "Wine",
+            "signQty": 1,
+            "upcNbr": "789012",
+            "worklistType": "NSFL",
+          },
+        ]
+      }
+      queueName="PRICESIGN"
       setItemIndexToEdit={[MockFunction]}
     />
   </CustomModalComponent>
@@ -1544,6 +1653,20 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
   >
     <PrintQueueEdit
       itemIndexToEdit={-1}
+      printQueue={
+        Array [
+          Object {
+            "catgNbr": 2,
+            "itemName": "Test item",
+            "itemNbr": 123456,
+            "paperSize": "Small",
+            "signQty": 1,
+            "upcNbr": "123456",
+            "worklistType": "NSFL",
+          },
+        ]
+      }
+      queueName="PRICESIGN"
       setItemIndexToEdit={[MockFunction]}
     />
   </CustomModalComponent>
@@ -1765,6 +1888,20 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
   >
     <PrintQueueEdit
       itemIndexToEdit={-1}
+      printQueue={
+        Array [
+          Object {
+            "catgNbr": 2,
+            "itemName": "Test item",
+            "itemNbr": 123456,
+            "paperSize": "Small",
+            "signQty": 1,
+            "upcNbr": "123456",
+            "worklistType": "NSFL",
+          },
+        ]
+      }
+      queueName="PRICESIGN"
       setItemIndexToEdit={[MockFunction]}
     />
   </CustomModalComponent>

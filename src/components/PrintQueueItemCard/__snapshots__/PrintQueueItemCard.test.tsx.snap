@@ -6,6 +6,8 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
     Object {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
+      "borderBottomColor": "#e0e0e0",
+      "borderBottomWidth": 1,
       "flexDirection": "row",
       "justifyContent": "flex-start",
       "marginBottom": 2,
@@ -36,6 +38,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
         style={
           Object {
             "flex": 1,
+            "fontSize": 16,
           }
         }
       >
@@ -48,7 +51,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
           }
         }
       >
-        small
+        [missing "en.PRINT.small" translation]
       </Text>
     </View>
     <View
@@ -56,6 +59,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
         Object {
           "alignItems": "center",
           "flexDirection": "row",
+          "justifyContent": "space-around",
           "paddingTop": 10,
         }
       }
@@ -63,8 +67,8 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
       <Text
         style={
           Object {
+            "color": "#424242",
             "flex": 1,
-            "fontSize": 10,
           }
         }
       >
@@ -74,9 +78,8 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
         onPress={[Function]}
         style={
           Object {
-            "paddingBottom": 5,
-            "paddingLeft": 5,
-            "paddingTop": 5,
+            "paddingHorizontal": 5,
+            "paddingVertical": 5,
           }
         }
       >
@@ -84,7 +87,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
           <mockConstructor
             color="#545F7A"
             name="pencil"
-            size={20}
+            size={26}
           />
         </View>
       </ForwardRef>
@@ -92,9 +95,8 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
         onPress={[Function]}
         style={
           Object {
-            "paddingBottom": 5,
-            "paddingLeft": 5,
-            "paddingTop": 5,
+            "paddingHorizontal": 5,
+            "paddingVertical": 5,
           }
         }
       >
@@ -102,7 +104,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
           <mockConstructor
             color="#545F7A"
             name="trash-can"
-            size={20}
+            size={26}
           />
         </View>
       </ForwardRef>
@@ -117,6 +119,8 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
     Object {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
+      "borderBottomColor": "#e0e0e0",
+      "borderBottomWidth": 1,
       "flexDirection": "row",
       "justifyContent": "flex-start",
       "marginBottom": 2,
@@ -147,6 +151,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
         style={
           Object {
             "flex": 1,
+            "fontSize": 16,
           }
         }
       >
@@ -158,13 +163,16 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
             "textAlign": "right",
           }
         }
-      />
+      >
+        [missing "en.PRINT.undefined" translation]
+      </Text>
     </View>
     <View
       style={
         Object {
           "alignItems": "center",
           "flexDirection": "row",
+          "justifyContent": "space-around",
           "paddingTop": 10,
         }
       }
@@ -172,8 +180,8 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
       <Text
         style={
           Object {
+            "color": "#424242",
             "flex": 1,
-            "fontSize": 10,
           }
         }
       >
@@ -183,9 +191,8 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
         onPress={[Function]}
         style={
           Object {
-            "paddingBottom": 5,
-            "paddingLeft": 5,
-            "paddingTop": 5,
+            "paddingHorizontal": 5,
+            "paddingVertical": 5,
           }
         }
       >
@@ -193,7 +200,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
           <mockConstructor
             color="#545F7A"
             name="pencil"
-            size={20}
+            size={26}
           />
         </View>
       </ForwardRef>
@@ -201,9 +208,8 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
         onPress={[Function]}
         style={
           Object {
-            "paddingBottom": 5,
-            "paddingLeft": 5,
-            "paddingTop": 5,
+            "paddingHorizontal": 5,
+            "paddingVertical": 5,
           }
         }
       >
@@ -211,7 +217,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
           <mockConstructor
             color="#545F7A"
             name="trash-can"
-            size={20}
+            size={26}
           />
         </View>
       </ForwardRef>

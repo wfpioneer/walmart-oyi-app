@@ -16,6 +16,7 @@ export const UNSET_PRINTING_LOCATION_LABELS = 'PRINT/UNSET_PRINTING_LOCATION_LAB
 export const SET_PRINTING_PALLET_LABEL = 'PRINT/SET_PRINTING_PALLET_LABEL';
 export const UNSET_PRINTING_PALLET_LABEL = 'PRINT/UNSET_PRINTING_PALLET_LABEL';
 export const ADD_LOCATION_PRINT_QUEUE = 'PRINT/ADD_LOCATION_PRINT_QUEUE';
+export const SET_LOCATION_PRINT_QUEUE = 'PRINT/SET_LOCATION_PRINT_QUEUE';
 export const CLEAR_LOCATION_PRINT_QUEUE = 'PRINT/CLEAR_LOCATION_PRINT_QUEUE';
 export const SET_PRICE_LABEL_PRINTER = 'PRINT/SET_PRICE_LABEL_PRINTER';
 export const SET_LOCATION_LABEL_PRINTER = 'PRINT/SET_LOCATION_LABEL_PRINTER';
@@ -90,6 +91,11 @@ export const addLocationPrintQueue = (locationLabel: PrintQueueItem) => ({
   payload: locationLabel
 } as const);
 
+export const setLocationPrintQueue = (locationQueue: PrintQueueItem[]) => ({
+  type: SET_LOCATION_PRINT_QUEUE,
+  payload: locationQueue
+} as const);
+
 export const clearLocationPrintQueue = () => ({
   type: CLEAR_LOCATION_PRINT_QUEUE
 } as const);
@@ -134,6 +140,7 @@ export type Actions =
 | ReturnType<typeof setPrintingPalletLabel>
 | ReturnType<typeof unsetPrintingPalletLabel>
 | ReturnType<typeof addLocationPrintQueue>
+| ReturnType<typeof setLocationPrintQueue>
 | ReturnType<typeof clearLocationPrintQueue>
 | ReturnType<typeof setPriceLabelPrinter>
 | ReturnType<typeof setLocationLabelPrinter>
