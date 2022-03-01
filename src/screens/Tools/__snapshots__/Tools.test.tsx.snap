@@ -26,6 +26,41 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders Tools screen, loca
 </View>
 `;
 
+exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, Binning enabled by config 1`] = `
+<View
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "center",
+      "marginTop": 4,
+      "paddingTop": 8,
+    }
+  }
+>
+  <ToolsButton
+    destination="Binning"
+    title="[missing \\"en.BINNING.BINNING\\" translation]"
+  >
+    <mockConstructor
+      color="#0071e9"
+      name="login-variant"
+      size={28}
+      style={
+        Object {
+          "transform": Array [
+            Object {
+              "rotate": "270deg",
+            },
+          ],
+        }
+      }
+    />
+  </ToolsButton>
+</View>
+`;
+
 exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, SettingsTool enabled by config 1`] = `
 <View
   style={

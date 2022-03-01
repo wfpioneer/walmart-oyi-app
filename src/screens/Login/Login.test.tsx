@@ -48,7 +48,8 @@ const testUser: User = {
     locationManagementEdit: false,
     palletManagement: false,
     settingsTool: false,
-    printingUpdate: true
+    printingUpdate: true,
+    binning: false
   }
 };
 

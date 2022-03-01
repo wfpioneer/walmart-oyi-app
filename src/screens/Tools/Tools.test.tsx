@@ -14,7 +14,8 @@ describe('ToolsScreen', () => {
     locationManagementEdit: false,
     palletManagement: false,
     settingsTool: false,
-    printingUpdate: false
+    printingUpdate: false,
+    binning: false
   };
   describe('Tests rendering the Tools Screen', () => {
     const testUser: User = {
@@ -93,6 +94,24 @@ describe('ToolsScreen', () => {
             configs: {
               ...mockConfigs,
               settingsTool: true
+            }
+          }}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders tools screen, Binning enabled by config', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ToolsScreen
+          navigation={navigationProp}
+          user={{
+            ...testUser,
+            configs: {
+              ...mockConfigs,
+              binning: true
             }
           }}
         />
