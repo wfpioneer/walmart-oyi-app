@@ -1,10 +1,10 @@
 import {
   ADD_PALLET,
+  Actions,
   CLEAR_BIN_LOCATION,
   CLEAR_PALLETS,
   DELETE_PALLET,
-  SET_BIN_LOCATION,
-  Actions
+  SET_BIN_LOCATION
 } from '../actions/Binning';
 
 import { BinningPallet } from '../../models/Binning';

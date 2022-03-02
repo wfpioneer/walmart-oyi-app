@@ -1,14 +1,14 @@
 import {
-  addPallet,
   ADD_PALLET,
-  clearBinLocation,
   CLEAR_BIN_LOCATION,
-  clearPallets,
   CLEAR_PALLETS,
-  deletePallet,
   DELETE_PALLET,
-  setBinLocation,
-  SET_BIN_LOCATION
+  SET_BIN_LOCATION,
+  addPallet,
+  clearBinLocation,
+  clearPallets,
+  deletePallet,
+  setBinLocation
 } from './Binning';
 import { BinningPallet } from '../../models/Binning';
 
@@ -18,7 +18,7 @@ describe('test action creators for binning', () => {
       id: 1,
       expirationDate: '03/22/2022',
       firstItem: {
-        itemNbr:123456789,
+        itemNbr: 123456789,
         itemDesc: 'test',
         upcNbr: '123456789098',
         price: 10,
@@ -27,15 +27,15 @@ describe('test action creators for binning', () => {
     };
     const addPalletResult = addPallet(testPallet);
     expect(addPalletResult).toStrictEqual({
-      type:ADD_PALLET,
+      type: ADD_PALLET,
       payload: testPallet
     });
 
     const clearBinLocationResult = clearBinLocation();
-    expect(clearBinLocationResult).toStrictEqual({type: CLEAR_BIN_LOCATION});
+    expect(clearBinLocationResult).toStrictEqual({ type: CLEAR_BIN_LOCATION });
 
     const clearPalletsResult = clearPallets();
-    expect(clearPalletsResult).toStrictEqual({type: CLEAR_PALLETS});
+    expect(clearPalletsResult).toStrictEqual({ type: CLEAR_PALLETS });
 
     const deletePalletResult = deletePallet(1);
     expect(deletePalletResult).toStrictEqual({
@@ -52,6 +52,6 @@ describe('test action creators for binning', () => {
     expect(setBinLocationResult).toStrictEqual({
       type: SET_BIN_LOCATION,
       payload: 1234
-    })
-  })
+    });
+  });
 });

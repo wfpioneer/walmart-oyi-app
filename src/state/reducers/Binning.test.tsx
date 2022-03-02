@@ -14,7 +14,7 @@ describe('testing binning reducer', () => {
       id: 1,
       expirationDate: '03/22/2022',
       firstItem: {
-        itemNbr:123456789,
+        itemNbr: 123456789,
         itemDesc: 'test',
         upcNbr: '123456789098',
         price: 10,
