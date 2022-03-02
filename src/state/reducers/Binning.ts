@@ -9,7 +9,7 @@ import {
 
 import { BinningPallet } from '../../models/Binning';
 
-interface StateType {
+export interface StateType {
   pallets: BinningPallet[];
   binLocation: number | string | null;
 }

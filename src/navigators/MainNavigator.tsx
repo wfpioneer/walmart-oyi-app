@@ -14,9 +14,7 @@ const Stack = createStackNavigator();
 export const MainNavigator = (): JSX.Element => (
   <NavigationContainer>
     <Stack.Navigator screenOptions={{
-      headerShown: false,
-      gestureEnabled: true,
-      animationEnabled: false
+      headerShown: false
     }}
     >
       <Stack.Screen name="Login" component={Login} />
