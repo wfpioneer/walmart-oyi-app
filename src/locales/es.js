@@ -360,7 +360,9 @@ export default {
     BINNING: 'Bodega',
     ASSIGN_LOCATION: 'Agrega la ubicación',
     SCAN_LOCATION: 'Escanea la ubicación para ingresar a bodega el pallet',
-    SCAN_LOCATION_PLURAL: 'Escanea la ubicación para ingresar a bodega los pallets'
+    SCAN_LOCATION_PLURAL: 'Escanea la ubicación para ingresar a bodega los pallets',
+    SCAN_PALLET: 'Escanear el pallet para comenzar',
+    SCAN_PALLET_BIN: 'Escanear pallet a contenedor'
   },
   SETTINGS: {
     TITLE: 'Ajustes'

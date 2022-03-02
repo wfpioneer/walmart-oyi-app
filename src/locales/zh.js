@@ -360,7 +360,9 @@ export default {
     BINNING: '上架',
     ASSIGN_LOCATION: '分配货架位置',
     SCAN_LOCATION: '扫描货架号进行单卡板上架操作',
-    SCAN_LOCATION_PLURAL: '扫描货架号进行多卡板上架操作'
+    SCAN_LOCATION_PLURAL: '扫描货架号进行多卡板上架操作',
+    SCAN_PALLET: '扫描卡板号开始上架',
+    SCAN_PALLET_BIN: '扫描卡板号进行上架'
   },
   SETTINGS: {
     TITLE: '设置'
