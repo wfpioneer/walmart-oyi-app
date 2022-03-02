@@ -31,7 +31,7 @@ export const CustomModalComponent = (props: CustomModalProps): JSX.Element => {
   const {
     children, isVisible, modalType, onClose, animationType
   } = props;
-  console.log(isVisible);
+
   return (
     <Modal
       onRequestClose={() => onClose()}
