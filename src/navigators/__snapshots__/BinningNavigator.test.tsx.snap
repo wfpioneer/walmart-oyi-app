@@ -22,6 +22,16 @@ exports[`Binning Navigator Renders the Binning navigator component 1`] = `
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="AssignLocation"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.BINNING.ASSIGN_LOCATION\\" translation]",
+      }
+    }
+  />
 </StackNavigator>
 `;
 
