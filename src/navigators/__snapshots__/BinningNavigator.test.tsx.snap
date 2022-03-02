@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Binning Navigator Renders the Binning navigator component 1`] = `
+<StackNavigator
+  headerMode="float"
+  screenOptions={
+    Object {
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="Binning"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.BINNING.BINNING\\" translation]",
+      }
+    }
+  />
+</StackNavigator>
+`;
+
+exports[`Binning Navigator Renders the scanButton header icon for Binning Screen 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 15,
+      }
+    }
+  >
+    <mockConstructor
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+  </View>
+</TouchableOpacity>
+`;
