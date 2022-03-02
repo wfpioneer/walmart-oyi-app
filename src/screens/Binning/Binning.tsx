@@ -86,6 +86,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
         type={Button.Type.PRIMARY}
         style={styles.buttonWrapper}
         disabled={pallets.length < 1}
+        onPress={() => navigation.navigate('AssignLocation')}
       />
     </View>
   );
