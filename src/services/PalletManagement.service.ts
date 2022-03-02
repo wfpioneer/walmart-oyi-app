@@ -32,6 +32,6 @@ export default class PalletManagementService {
 
   public static getPalletInfo(payload: getPalletInfoRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
-    return Request.get(`${urls.locationUrl}/pallet/${payload.palletId}`);
+    return Request.get(`${urls.locationUrl}/pallet`, { palletIds: payload.palletId });
   }
 }
