@@ -258,7 +258,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
       dispatch(setManualScan(true));
     }).catch(() => { });
   };
-  console.log(inputLocation);
+
   return (
     <>
       <View style={styles.mainContainer}>
