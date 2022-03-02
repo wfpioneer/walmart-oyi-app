@@ -8,7 +8,7 @@ import styles from './AssignLocation.style';
 import { openCamera } from '../../utils/scannerUtils';
 
 interface AssignLocationProps {
-  palletsToBin: PalletInfo[]
+  palletsToBin: PalletInfo[];
 }
 
 export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element => {
@@ -52,6 +52,7 @@ export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element =>
 };
 
 const AssignLocation = (): JSX.Element => {
+
   // TODO get pallets from redux
   const palletsToBin: PalletInfo[] = [
     {
