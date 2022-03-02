@@ -8,6 +8,7 @@ import ReviewItemDetailsNavigator from './ReviewItemDetailsNavigator';
 import PrintPriceSignNavigator from './PrintPriceSignNavigator';
 import PalletManagementNavigator from './PalletManagementNavigator';
 import SettingsToolNavigator from './SettingsToolNavigator';
+import BinningNavigator from './BinningNavigator';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ export const MainNavigator = (): JSX.Element => (
       <Stack.Screen name="LocationManagement" component={LocationManagementNavigator} />
       <Stack.Screen name="PalletManagement" component={PalletManagementNavigator} />
       <Stack.Screen name="SettingsTool" component={SettingsToolNavigator} />
+      <Stack.Screen name="Binning" component={BinningNavigator} />
     </Stack.Navigator>
   </NavigationContainer>
 );

@@ -357,7 +357,11 @@ export default {
     PICKING: '楼面补货'
   },
   BINNING: {
-    BINNING: '上架'
+    BINNING: '上架',
+    SCAN_PALLET: '扫描卡板号开始上架',
+    SCAN_PALLET_BIN: '扫描卡板号进行上架',
+    ASSIGN_LOCATION: '分配货架位置',
+    SCAN_LOCATION: '扫描货架号进行卡板上架操作'
   },
   SETTINGS: {
     TITLE: '设置'
