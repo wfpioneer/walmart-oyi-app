@@ -1,14 +1,14 @@
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Pressable, Text, View } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import { PalletInfo } from '../../models/PalletManagementTypes';
 import styles from './AssignLocation.style';
-import Button from '../../components/buttons/Button';
+import { openCamera } from '../../utils/scannerUtils';
 
 interface AssignLocationProps {
-  palletsToBin: any[]
+  palletsToBin: PalletInfo[]
 }
 
 export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element => {
@@ -23,11 +23,14 @@ export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element =>
 
   const scanTextView = () => (
     <View style={styles.scanView}>
-      <MaterialCommunityIcon
-        name="barcode-scan"
-        size={70}
-        color={COLOR.MAIN_THEME_COLOR}
-      />
+      {/* TODO make dev only? */}
+      <Pressable onPress={() => openCamera()}>
+        <MaterialCommunityIcon
+          name="barcode-scan"
+          size={70}
+          color={COLOR.MAIN_THEME_COLOR}
+        />
+      </Pressable>
       <Text style={styles.scanText}>
         {palletsToBin.length === 1
           ? strings('BINNING.SCAN_LOCATION')

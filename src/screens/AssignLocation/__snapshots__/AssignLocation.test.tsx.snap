@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Assign Location screen render tests renders screen with items 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "id": 1,
+        },
+        Object {
+          "id": 2,
+        },
+        Object {
+          "id": 3,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderTopColor": "#888888",
+        "borderTopWidth": 1,
+        "flexDirection": "column",
+        "margin": 10,
+        "padding": 5,
+        "width": "95%",
+      }
+    }
+  >
+    <Memo(Pressable)
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#0071e9"
+        name="barcode-scan"
+        size={70}
+      />
+    </Memo(Pressable)>
+    <Text
+      style={
+        Object {
+          "fontSize": 20,
+        }
+      }
+    >
+      [missing "en.BINNING.SCAN_LOCATION_PLURAL" translation]
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Assign Location screen render tests renders screen with no items 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <FlatList
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderTopColor": "#888888",
+        "borderTopWidth": 1,
+        "flexDirection": "column",
+        "margin": 10,
+        "padding": 5,
+        "width": "95%",
+      }
+    }
+  >
+    <Memo(Pressable)
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#0071e9"
+        name="barcode-scan"
+        size={70}
+      />
+    </Memo(Pressable)>
+    <Text
+      style={
+        Object {
+          "fontSize": 20,
+        }
+      }
+    >
+      [missing "en.BINNING.SCAN_LOCATION_PLURAL" translation]
+    </Text>
+  </View>
+</View>
+`;
