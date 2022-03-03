@@ -207,7 +207,6 @@ exports[`FilterMenu Component Test renders the filter menu component and calls o
         "paddingVertical": 15,
       }
     }
-    testID="menu-button"
   >
     <View
       style={
@@ -329,7 +328,6 @@ Array [
         "paddingVertical": 15,
       }
     }
-    testID="menu-button"
   >
     <View
       style={
@@ -429,7 +427,6 @@ Array [
         "flex": 1,
       }
     }
-    testID="flat-test"
     updateCellsBatchingPeriod={50}
     viewabilityConfigCallbackPairs={Array []}
     windowSize={21}
@@ -1226,7 +1223,6 @@ exports[`FilterMenu Component Test the renderCategoryCollapsibleCard and calls d
       "paddingVertical": 15,
     }
   }
-  testID="menu-button"
 >
   <View
     style={

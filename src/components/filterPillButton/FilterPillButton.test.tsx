@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, waitFor } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { FilterPillButton } from './FilterPillButton';
 
@@ -9,7 +9,7 @@ describe('FilterPillButton Component', () => {
     const closeButton = jest.fn();
     const randomText = 'NO SALES FLOOR';
     const {
-      getByTestId, getByText, queryByTestId, toJSON, getByRole
+      getByTestId, toJSON
     } = render(<FilterPillButton filterText={randomText} onClosePress={closeButton} />);
     const button = getByTestId('button');
     fireEvent.press(button);
