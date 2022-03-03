@@ -109,7 +109,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       || (this.props.worklistSummaryApiState.result && this.props.worklistSummaryApiState.result.status === 204)) {
       return (
         <View style={styles.safeAreaView}>
-          {this.props.isManualScanEnabled && <ManualScanComponent />}
+          {this.props.isManualScanEnabled
+          && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
           <View style={[styles.container, styles.safeAreaView]}>
             <MaterialCommunityIcons name="alert" size={50} color={COLOR.RED_500} />
             <Text style={styles.errorText}>{strings('HOME.WORKLIST_API_ERROR')}</Text>
@@ -196,7 +197,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             />
           </View>
         </CustomModalComponent>
-        {this.props.isManualScanEnabled && <ManualScanComponent />}
+        {this.props.isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <ScrollView contentContainerStyle={styles.container}>
           <Text>
             { `${strings('HOME.WELCOME')} ${this.props.userName}` }

@@ -13,6 +13,10 @@ export interface CombinePalletsRequest {
   combinePallets: number[];
 }
 
+export interface getPalletInfoRequest {
+  palletId: number
+}
+
 export default class PalletManagementService {
   public static updateItemQuantity(payload: UpdateItemQuantityRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
@@ -24,5 +28,10 @@ export default class PalletManagementService {
     return Request.put(`${urls.locationUrl}/pallet/${payload.targetPallet}/combine`, {
       palletIds: payload.combinePallets
     });
+  }
+
+  public static getPalletInfo(payload: getPalletInfoRequest): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(`${urls.locationUrl}/pallet`, { palletIds: payload.palletId });
   }
 }

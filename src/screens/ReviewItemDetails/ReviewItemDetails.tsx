@@ -490,7 +490,7 @@ const isError = (
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-        {isManualScanEnabled && <ManualScanComponent />}
+        {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
           <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
@@ -610,7 +610,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-        {isManualScanEnabled && <ManualScanComponent />}
+        {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
           <Text style={styles.errorText}>{strings('ITEM.ITEM_NOT_FOUND')}</Text>
@@ -647,7 +647,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   return (
     <View style={styles.safeAreaView}>
-      {isManualScanEnabled && <ManualScanComponent />}
+      {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
       {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
       <CustomModalComponent
         isVisible={ohQtyModalVisible}

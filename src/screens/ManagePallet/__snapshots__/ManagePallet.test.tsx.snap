@@ -43,6 +43,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
   >
     <ManualScanComponent
       keyboardType="numeric"
+      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
     />
     <View
       style={
@@ -333,6 +334,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
   >
     <ManualScanComponent
       keyboardType="numeric"
+      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
     />
     <View
       style={
@@ -623,6 +625,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
   >
     <ManualScanComponent
       keyboardType="numeric"
+      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
     />
     <View
       style={
