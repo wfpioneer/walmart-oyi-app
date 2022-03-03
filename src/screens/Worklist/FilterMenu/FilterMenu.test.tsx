@@ -8,10 +8,10 @@ import { trackEvent } from '../../../utils/AppCenterTool';
 import {
   FilterMenuComponent,
   MenuCard,
-  renderCategoryCollapsibleCard,
+  RenderCategoryCollapsibleCard,
+  RenderExceptionTypeCard,
   renderCategoryFilterCard,
-  renderExceptionFilterCard,
-  renderExceptionTypeCard
+  renderExceptionFilterCard
 } from './FilterMenu';
 import { FilterListItem, FilteredCategory } from '../../../models/FilterListItem';
 import { AsyncState } from '../../../models/AsyncState';
@@ -160,7 +160,12 @@ describe('FilterMenu Component', () => {
       }
     };
     const { toJSON, getByText } = render(
-      renderCategoryCollapsibleCard(mockWorklistSuccess, false, mockFilterCategories, mockDispatch)
+      <RenderCategoryCollapsibleCard
+        workListAPI={mockWorklistSuccess}
+        categoryOpen={false}
+        filterCategories={mockFilterCategories}
+        dispatch={mockDispatch}
+      />
     );
     const menuButton = getByText(strings('WORKLIST.CATEGORY'));
     fireEvent.press(menuButton);
@@ -177,16 +182,26 @@ describe('FilterMenu Component', () => {
       }
     };
       // You cannot use queries if the component contains a FlatList and isn't a PureComponent
-    const { toJSON } = render(
-      renderCategoryCollapsibleCard(mockWorklistSuccess, true, mockFilterCategories, mockDispatch)
+    const { toJSON, getByText } = render(
+      <RenderCategoryCollapsibleCard
+        workListAPI={mockWorklistSuccess}
+        categoryOpen={true}
+        filterCategories={mockFilterCategories}
+        dispatch={mockDispatch}
+      />
     );
-
+    const categoryButton = getByText(strings('WORKLIST.CATEGORY'));
+    fireEvent.press(categoryButton);
     expect(toJSON()).toMatchSnapshot();
   });
 
   it('Test the renderExceptionTypeCard and calls dispatch()', () => {
     const { toJSON, getByText } = render(
-      renderExceptionTypeCard(false, mockFilterExeceptions, mockDispatch)
+      <RenderExceptionTypeCard
+        exceptionOpen={false}
+        filterExceptions={mockFilterExeceptions}
+        dispatch={mockDispatch}
+      />
     );
     const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));
     fireEvent.press(menuButton);
@@ -195,9 +210,16 @@ describe('FilterMenu Component', () => {
   });
 
   it('Test renders the renderExceptionTypeCard and ExceptionMap FlatList', () => {
-    const { toJSON } = render(
-      renderExceptionTypeCard(true, mockFilterExeceptions, mockDispatch)
+    const { toJSON, getByText } = render(
+      <RenderExceptionTypeCard
+        exceptionOpen={true}
+        filterExceptions={mockFilterExeceptions}
+        dispatch={mockDispatch}
+      />
     );
+    const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));
+    fireEvent.press(menuButton);
+    expect(mockDispatch).toBeCalledTimes(1);
     expect(toJSON()).toMatchSnapshot();
   });
 });

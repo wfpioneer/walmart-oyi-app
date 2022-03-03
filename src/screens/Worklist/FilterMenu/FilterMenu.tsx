@@ -99,12 +99,15 @@ export const renderExceptionFilterCard = (item: FilterListItem, dispatch: Dispat
   );
 };
 
-export const renderCategoryCollapsibleCard = (
+export const RenderCategoryCollapsibleCard = (props: {
   workListAPI: AsyncState,
   categoryOpen: boolean,
   filterCategories: string[],
   dispatch: Dispatch<any>
-): JSX.Element => {
+}): JSX.Element => {
+  const {
+    workListAPI, categoryOpen, filterCategories, dispatch
+  } = props;
   const { result } = workListAPI;
   const data = result && result.data && Array.isArray(result.data) ? result.data : [];
   const categoryMap = data.map((item: any) => {
@@ -156,11 +159,11 @@ export const renderCategoryCollapsibleCard = (
   );
 };
 
-export const renderExceptionTypeCard = (
+export const RenderExceptionTypeCard = (props:{
   exceptionOpen: boolean,
   filterExceptions: string[],
-  dispatch: Dispatch<any>
-): JSX.Element => {
+  dispatch: Dispatch<any>}): JSX.Element => {
+  const { exceptionOpen, filterExceptions, dispatch } = props;
   const fullExceptionList = ExceptionList.getInstance();
   const exceptionMap: FilterListItem[] = [];
 
@@ -224,8 +227,17 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
           <Text style={styles.clearText}>{strings('WORKLIST.CLEAR')}</Text>
         </TouchableOpacity>
       </View>
-      { renderCategoryCollapsibleCard(workListAPI, categoryOpen, filterCategories, dispatch) }
-      { renderExceptionTypeCard(exceptionOpen, filterExceptions, dispatch) }
+      <RenderCategoryCollapsibleCard
+        workListAPI={workListAPI}
+        categoryOpen={categoryOpen}
+        filterCategories={filterCategories}
+        dispatch={dispatch}
+      />
+      <RenderExceptionTypeCard
+        exceptionOpen={exceptionOpen}
+        filterExceptions={filterExceptions}
+        dispatch={dispatch}
+      />
     </View>
   );
 };
