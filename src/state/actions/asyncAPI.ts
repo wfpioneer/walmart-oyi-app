@@ -116,3 +116,6 @@ export const printPalletLabel = makeAsyncActionCreators(PRINT_PALLET_LABEL);
 
 export const CLEAR_PALLET = makeAsyncActionTypes('API/CLEAR_PALLET');
 export const clearPallet = makeAsyncActionCreators(CLEAR_PALLET);
+
+export const GET_PALLET_INFO = makeAsyncActionTypes('API/GET_PALLET_INFO');
+export const getPalletInfo = makeAsyncActionCreators(GET_PALLET_INFO);

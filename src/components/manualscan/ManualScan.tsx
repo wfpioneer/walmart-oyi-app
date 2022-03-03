@@ -1,7 +1,6 @@
 import React, { FC, RefObject, createRef } from 'react';
 import { TextInput, View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { strings } from '../../locales';
 import styles from './ManualScan.style';
 import COLOR from '../../themes/Color';
 import { manualScan } from '../../utils/scannerUtils';
@@ -12,9 +11,11 @@ import { ModalCloseIcon } from '../../screens/Modal/Modal';
 
 interface ManualScanProps {
   keyboardType?: 'numeric' | 'default';
+  placeholder?: string
 }
 const defaultProps: ManualScanProps = {
-  keyboardType: 'numeric'
+  keyboardType: 'numeric',
+  placeholder: ''
 };
 
 const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
@@ -42,7 +43,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
         value={value}
         onChangeText={(text: string) => onChangeText(text.replace(itemRegex, ''))}
         selectionColor={COLOR.MAIN_THEME_COLOR}
-        placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')}
+        placeholder={props.placeholder}
         onSubmitEditing={(event: any) => onSubmit(event.nativeEvent.text)}
         keyboardType={props.keyboardType}
         autoFocus={true}

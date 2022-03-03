@@ -12,6 +12,7 @@ import { SessionTimeout } from './SessionTimeout';
 import { Approvals } from './Approvals';
 import { SnackBar } from './SnackBar';
 import { PalletManagement } from './PalletManagement';
+import { Binning } from './Binning';
 
 /**
  * This is the root reducers,this RootReducer combine all sub reducers.git
@@ -28,7 +29,8 @@ const RootReducer = combineReducers({
   SessionTimeout,
   Approvals,
   SnackBar,
-  PalletManagement
+  PalletManagement,
+  Binning
 });
 
 export default RootReducer;

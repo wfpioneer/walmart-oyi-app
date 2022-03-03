@@ -41,7 +41,8 @@ export const asyncReducer = combineReducers({
   deleteUpcs: makeAsyncReducer(asyncActions.DELETE_UPCS),
   combinePallets: makeAsyncReducer(asyncActions.COMBINE_PALLETS),
   printPalletLabel: makeAsyncReducer(asyncActions.PRINT_PALLET_LABEL),
-  clearPallet: makeAsyncReducer(asyncActions.CLEAR_PALLET)
+  clearPallet: makeAsyncReducer(asyncActions.CLEAR_PALLET),
+  getPalletInfo: makeAsyncReducer(asyncActions.GET_PALLET_INFO)
 });
 
 export default asyncReducer;
