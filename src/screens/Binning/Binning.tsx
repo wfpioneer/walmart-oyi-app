@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Text, TouchableOpacity, View
 } from 'react-native';
@@ -14,41 +14,25 @@ import styles from './Binning.style';
 import Button from '../../components/buttons/Button';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { BinningPallet } from '../../models/Binning';
+import { addPallet, clearPallets, deletePallet } from '../../state/actions/Binning';
+import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
 
 export interface BinningScreenProps {
-  pallets: Pallet[] | [];
+  pallets: BinningPallet[];
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   isManualScanEnabled: boolean;
 }
-export interface Pallet {
-  palletId: number,
-  expirationDate: string,
-  lastLocation?: string,
-  firstItem: {
-    itemDesc: string,
-    price: number,
-    upcNbr: string,
-    quantity: number
-  }
-}
 
 // TODO: This component has to designed as part of INTLSAOPS-5163
-export const binningItemCard = ({ item }: { item: Pallet }): JSX.Element => (
-  <View>
-    <View>
-      <Text>{`Id: ${item.palletId}`}</Text>
-      <Text>{`Last Loc: ${item?.lastLocation}`}</Text>
-    </View>
-    <View>
-      <Text>{`First Item: ${item.firstItem.itemDesc}`}</Text>
-      <TouchableOpacity style={styles.icon}>
-        <View>
-          <Icon name="trash-can" size={20} color={COLOR.TRACKER_GREY} />
-        </View>
-      </TouchableOpacity>
-    </View>
-  </View>
+export const binningItemCard = ({ item }: { item: BinningPallet }, dispatch: Dispatch<any>) => (
+  <BinningItemCard
+    palletId={item.id}
+    itemDesc={item.firstItem.itemDesc}
+    lastLocation={item.lastLocation}
+    onDelete={() => { dispatch(deletePallet(item.id)) }}
+  />
 );
 
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -67,8 +51,8 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
         data={pallets}
         removeClippedSubviews={false}
         ItemSeparatorComponent={ItemSeparator}
-        renderItem={binningItemCard}
-        keyExtractor={(item: any) => item.palletId.toString()}
+        renderItem={item => binningItemCard(item, dispatch)}
+        keyExtractor={(item: any) => item.id.toString()}
         ListEmptyComponent={(
           <View style={styles.scanContainer}>
             <TouchableOpacity onPress={() => openCamera()}>
@@ -92,10 +76,50 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
 };
 const Binning = (): JSX.Element => {
   // TODO: pallets and binLocation needs to be connected to Redux
-  const pallets: Pallet[] = [];
+  const pallets = useTypedSelector(state => state.Binning.pallets);
+  const binLocation = useTypedSelector(state => state.Binning.binLocation);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
+
+  useEffect(() => {
+    dispatch(clearPallets());
+    dispatch(addPallet({
+      id: 123456,
+      expirationDate: '03/22/2022',
+      lastLocation: 'ABAR1-5',
+      firstItem: {
+        itemNbr: 1234,
+        upcNbr: '123456789098',
+        price: 10,
+        quantity: 100,
+        itemDesc: 'test'
+      }
+    }));
+    dispatch(addPallet({
+      id: 123457,
+      expirationDate: '03/22/2022',
+      firstItem: {
+        itemNbr: 1234,
+        upcNbr: '123456789098',
+        price: 10,
+        quantity: 100,
+        itemDesc: 'test'
+      }
+    }));
+    dispatch(addPallet({
+      id: 123458,
+      expirationDate: '03/22/2022',
+      lastLocation: 'ABAR1-5',
+      firstItem: {
+        itemNbr: 1234,
+        upcNbr: '123456789098',
+        price: 10,
+        quantity: 100,
+        itemDesc: 'test'
+      }
+    }));
+  }, []);
 
   return (
     <BinningScreen
