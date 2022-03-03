@@ -1,7 +1,11 @@
-interface FilterListItem {
+export interface FilterListItem {
     value: string;
     display: string;
     selected: boolean;
   }
 
-export default FilterListItem;
+export interface FilteredCategory {
+    catgNbr: number;
+    catgName: string;
+    selected: boolean;
+  }

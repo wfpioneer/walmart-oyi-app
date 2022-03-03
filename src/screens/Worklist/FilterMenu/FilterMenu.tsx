@@ -19,7 +19,8 @@ import {
 import { strings } from '../../../locales';
 import { ExceptionList } from '../FullExceptionList';
 import { trackEvent } from '../../../utils/AppCenterTool';
-import FilterListItem from '../../../models/FilterListItem';
+import { FilterListItem, FilteredCategory } from '../../../models/FilterListItem';
+import { AsyncState } from '../../../models/AsyncState';
 
 interface MenuCardProps {
   title: string;
@@ -46,9 +47,10 @@ export const MenuCard = (props: MenuCardProps): JSX.Element => {
   );
 };
 
-export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number; catgName: string; selected: boolean } },
-  dispatch: Dispatch<any>, filterCategories: string[]): JSX.Element => {
-  const { item } = listItem;
+export const renderCategoryFilterCard = (
+  item: FilteredCategory,
+  dispatch: Dispatch<any>, filterCategories: string[]
+): JSX.Element => {
   const onItemPress = () => {
     if (item.selected) {
       filterCategories.splice(filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`), 1);
@@ -61,7 +63,7 @@ export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number; ca
     return dispatch(updateFilterCategories(replacementFilter));
   };
   return (
-    <TouchableOpacity style={styles.categoryFilterCard} onPress={onItemPress}>
+    <TouchableOpacity testID="category button" style={styles.categoryFilterCard} onPress={onItemPress}>
       <View style={styles.selectionView}>
         { item.selected ? (
           <MaterialCommunityIcons name="checkbox-marked-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />
@@ -76,14 +78,13 @@ export const renderCategoryFilterCard = (listItem: { item: { catgNbr: number; ca
   );
 };
 
-export const renderExceptionFilterCard = (listItem: { item: FilterListItem }, dispatch: Dispatch<any>): JSX.Element => {
-  const { item } = listItem;
+export const renderExceptionFilterCard = (item: FilterListItem, dispatch: Dispatch<any>): JSX.Element => {
   const onItemPress = () => {
     trackEvent('worklist_update_filter_exceptions', { exception: item.value });
     return dispatch(updateFilterExceptions([item.value]));
   };
   return (
-    <TouchableOpacity style={styles.categoryFilterCard} onPress={onItemPress}>
+    <TouchableOpacity testID="exception button" style={styles.categoryFilterCard} onPress={onItemPress}>
       <View style={styles.selectionView}>
         { item.selected ? (
           <MaterialCommunityIcons name="checkbox-marked-circle-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />
@@ -98,11 +99,13 @@ export const renderExceptionFilterCard = (listItem: { item: FilterListItem }, di
   );
 };
 
-export const renderCategoryCollapsibleCard = (): JSX.Element => {
-  const { result } = useTypedSelector(state => state.async.getWorklist);
-  const { categoryOpen, filterCategories } = useTypedSelector(state => state.Worklist);
-  const dispatch = useDispatch();
-
+export const renderCategoryCollapsibleCard = (
+  workListAPI: AsyncState,
+  categoryOpen: boolean,
+  filterCategories: string[],
+  dispatch: Dispatch<any>
+): JSX.Element => {
+  const { result } = workListAPI;
   const data = result && result.data && Array.isArray(result.data) ? result.data : [];
   const categoryMap = data.map((item: any) => {
     const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
@@ -144,7 +147,7 @@ export const renderCategoryCollapsibleCard = (): JSX.Element => {
       { categoryOpen && (
         <FlatList
           data={filteredCategories}
-          renderItem={(item: any) => renderCategoryFilterCard(item, dispatch, filterCategories)}
+          renderItem={({ item }) => renderCategoryFilterCard(item, dispatch, filterCategories)}
           style={styles.categoryList}
           keyExtractor={(item: any) => item.catgNbr.toString()}
         />
@@ -153,11 +156,13 @@ export const renderCategoryCollapsibleCard = (): JSX.Element => {
   );
 };
 
-export const renderExceptionTypeCard = (): JSX.Element => {
-  const { exceptionOpen, filterExceptions } = useTypedSelector(state => state.Worklist);
-  const dispatch = useDispatch();
+export const renderExceptionTypeCard = (
+  exceptionOpen: boolean,
+  filterExceptions: string[],
+  dispatch: Dispatch<any>
+): JSX.Element => {
   const fullExceptionList = ExceptionList.getInstance();
-  const exceptionMap: { value: string; display: string; selected: boolean;}[] = [];
+  const exceptionMap: FilterListItem[] = [];
 
   fullExceptionList.forEach((value, key) => {
     const isSelected = filterExceptions.indexOf(key) !== -1;
@@ -186,7 +191,7 @@ export const renderExceptionTypeCard = (): JSX.Element => {
       { exceptionOpen && (
         <FlatList
           data={exceptionMap}
-          renderItem={(item: any) => renderExceptionFilterCard(item, dispatch)}
+          renderItem={({ item }) => renderExceptionFilterCard(item, dispatch)}
           style={styles.categoryList}
           keyExtractor={(item: any) => item.value}
         />
@@ -199,19 +204,47 @@ export const onClearPress = (dispatch: Dispatch<any>): void => {
   trackEvent('worklist_clear_filter');
   dispatch(clearFilter());
 };
-
-export const FilterMenu = (): JSX.Element => {
-  const dispatch = useDispatch();
+interface FilterMenuProps {
+  workListAPI: AsyncState,
+  categoryOpen: boolean,
+  filterCategories: string[],
+  exceptionOpen: boolean,
+  filterExceptions: string[],
+  dispatch: Dispatch<any>
+}
+export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
+  const {
+    workListAPI, categoryOpen, filterCategories, dispatch, exceptionOpen, filterExceptions
+  } = props;
   return (
     <View style={styles.menuContainer}>
       <View style={styles.headerBar}>
         <Text style={styles.refineText}>{strings('WORKLIST.REFINE')}</Text>
-        <TouchableOpacity style={styles.clearButton} onPress={() => onClearPress(dispatch)}>
+        <TouchableOpacity style={styles.clearButton} onPress={() => onClearPress(props.dispatch)}>
           <Text style={styles.clearText}>{strings('WORKLIST.CLEAR')}</Text>
         </TouchableOpacity>
       </View>
-      { renderCategoryCollapsibleCard() }
-      { renderExceptionTypeCard() }
+      { renderCategoryCollapsibleCard(workListAPI, categoryOpen, filterCategories, dispatch) }
+      { renderExceptionTypeCard(exceptionOpen, filterExceptions, dispatch) }
     </View>
+  );
+};
+
+export const FilterMenu = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const workListApi = useTypedSelector(state => state.async.getWorklist);
+  const {
+    categoryOpen, filterCategories, exceptionOpen, filterExceptions
+  } = useTypedSelector(state => state.Worklist);
+
+  return (
+    <FilterMenuComponent
+      dispatch={dispatch}
+      workListAPI={workListApi}
+      categoryOpen={categoryOpen}
+      filterCategories={filterCategories}
+      exceptionOpen={exceptionOpen}
+      filterExceptions={filterExceptions}
+    />
   );
 };
