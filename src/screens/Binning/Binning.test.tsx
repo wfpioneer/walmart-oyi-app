@@ -2,9 +2,10 @@ import React from 'react';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
-  BinningScreen, Pallet, binningItemCard
+  BinningScreen, binningItemCard
 } from './Binning';
 import { AsyncState } from '../../models/AsyncState';
+import { BinningPallet } from '../../models/Binning';
 import { mockPallets } from '../../mockData/binning';
 
 jest.mock('../../state/actions/Modal', () => ({
@@ -41,7 +42,7 @@ describe('BinningScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <BinningScreen
-          pallets={[]}
+          scannedPallets={[]}
           navigation={navigationProp}
           dispatch={jest.fn}
           isManualScanEnabled={true}
@@ -57,7 +58,7 @@ describe('BinningScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <BinningScreen
-          pallets={mockPallets}
+          scannedPallets={mockPallets}
           navigation={navigationProp}
           dispatch={jest.fn}
           isManualScanEnabled={true}
@@ -89,7 +90,7 @@ describe('BinningScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <BinningScreen
-          pallets={mockPallets}
+          scannedPallets={mockPallets}
           navigation={navigationProp}
           dispatch={jest.fn}
           isManualScanEnabled={true}
@@ -105,7 +106,7 @@ describe('BinningScreen', () => {
   describe('Tests rendering binningItemCard component', () => {
     const renderer = ShallowRenderer.createRenderer();
     it('should match snapshot', () => {
-      const item: Pallet = mockPallets[0];
+      const item: BinningPallet = mockPallets[0];
       renderer.render(
         binningItemCard({ item })
       );

@@ -6,9 +6,6 @@ exports[`BinningScreen Tests rendering binningItemCard component should match sn
     <Text>
       Id: 123456
     </Text>
-    <Text>
-      Last Loc: undefined
-    </Text>
   </View>
   <View>
     <Text>
@@ -57,19 +54,22 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   >
     <ManualScanComponent
       keyboardType="numeric"
+      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
     />
-    <Text
-      style={
-        Object {
-          "fontSize": 16,
-          "margin": 15,
-          "textAlign": "center",
+    <View>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "margin": 15,
+            "textAlign": "center",
+          }
         }
-      }
-    >
-      [missing "en.BINNING.SCAN_PALLET_BIN" translation]
-    </Text>
-    <ItemSeparator />
+      >
+        [missing "en.BINNING.SCAN_PALLET_BIN" translation]
+      </Text>
+      <ItemSeparator />
+    </View>
     <ForwardRef
       ItemSeparatorComponent={[Function]}
       ListEmptyComponent={
@@ -109,21 +109,23 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             "expirationDate": "10/3/2022",
             "firstItem": Object {
               "itemDesc": "itemDesc",
+              "itemNbr": 351231,
               "price": 123,
               "quantity": 2,
               "upcNbr": "12343534",
             },
-            "palletId": 123456,
+            "id": 123456,
           },
           Object {
             "expirationDate": "10/3/2022",
             "firstItem": Object {
               "itemDesc": "itemDesc",
+              "itemNbr": 351231,
               "price": 123,
               "quantity": 2,
               "upcNbr": "345345",
             },
-            "palletId": 345345,
+            "id": 345345,
           },
         ]
       }
@@ -176,19 +178,22 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   >
     <ManualScanComponent
       keyboardType="numeric"
+      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
     />
-    <Text
-      style={
-        Object {
-          "fontSize": 16,
-          "margin": 15,
-          "textAlign": "center",
+    <View>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "margin": 15,
+            "textAlign": "center",
+          }
         }
-      }
-    >
-      [missing "en.BINNING.SCAN_PALLET_BIN" translation]
-    </Text>
-    <ItemSeparator />
+      >
+        [missing "en.BINNING.SCAN_PALLET_BIN" translation]
+      </Text>
+      <ItemSeparator />
+    </View>
     <ForwardRef
       ItemSeparatorComponent={[Function]}
       ListEmptyComponent={
@@ -228,21 +233,23 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             "expirationDate": "10/3/2022",
             "firstItem": Object {
               "itemDesc": "itemDesc",
+              "itemNbr": 351231,
               "price": 123,
               "quantity": 2,
               "upcNbr": "12343534",
             },
-            "palletId": 123456,
+            "id": 123456,
           },
           Object {
             "expirationDate": "10/3/2022",
             "firstItem": Object {
               "itemDesc": "itemDesc",
+              "itemNbr": 351231,
               "price": 123,
               "quantity": 2,
               "upcNbr": "345345",
             },
-            "palletId": 345345,
+            "id": 345345,
           },
         ]
       }
@@ -295,19 +302,8 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   >
     <ManualScanComponent
       keyboardType="numeric"
+      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
     />
-    <Text
-      style={
-        Object {
-          "fontSize": 16,
-          "margin": 15,
-          "textAlign": "center",
-        }
-      }
-    >
-      [missing "en.BINNING.SCAN_PALLET_BIN" translation]
-    </Text>
-    <ItemSeparator />
     <ForwardRef
       ItemSeparatorComponent={[Function]}
       ListEmptyComponent={
