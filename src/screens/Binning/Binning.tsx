@@ -1,6 +1,6 @@
 import React, { EffectCallback, useEffect } from 'react';
 import {
-  EmitterSubscription, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity, View
+  BackHandler, EmitterSubscription, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity, View
 } from 'react-native';
 import { head, omit } from 'lodash';
 import { trackEvent } from 'appcenter-analytics';
@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
 import {
-  NavigationProp, RouteProp, useNavigation, useRoute
+  NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
@@ -39,7 +39,8 @@ export interface BinningScreenProps {
   navigation: NavigationProp<any>;
   isManualScanEnabled: boolean;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
-  getPalletApi: AsyncState
+  getPalletApi: AsyncState;
+  useFocusEffectHook: (effect: EffectCallback) => void;
 }
 
 interface PalletInfo {
@@ -80,7 +81,7 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   const {
-    scannedPallets, isManualScanEnabled, dispatch, navigation, route, useEffectHook, getPalletApi
+    scannedPallets, isManualScanEnabled, dispatch, navigation, route, useEffectHook, getPalletApi, useFocusEffectHook
   } = props;
 
   const palletExistForBinnning = scannedPallets.length > 0;
@@ -164,6 +165,16 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     }
   }, [getPalletApi]);
 
+  useFocusEffectHook(
+    () => {
+      const onBackPress = () => onValidateBackPress(props);
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }
+  );
+
   const handleUnhandledTouches = () => {
     Keyboard.dismiss();
     return false;
@@ -230,6 +241,7 @@ const Binning = (): JSX.Element => {
       useEffectHook={useEffect}
       isManualScanEnabled={isManualScanEnabled}
       getPalletApi={getPalletApi}
+      useFocusEffectHook={useFocusEffect}
     />
   );
 };
