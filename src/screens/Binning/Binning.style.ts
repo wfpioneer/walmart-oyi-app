@@ -24,12 +24,16 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   buttonWrapper: {
-    margin: 10
+    marginVertical: 10,
+    marginHorizontal: 15
   },
   icon: {
     paddingBottom: 5,
     paddingTop: 5,
     paddingLeft: 5
+  },
+  safeAreaView: {
+    flex: 1
   }
 });
 export default styles;

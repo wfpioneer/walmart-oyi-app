@@ -6,9 +6,6 @@ exports[`BinningScreen Tests rendering binningItemCard component should match sn
     <Text>
       Id: 123456
     </Text>
-    <Text>
-      Last Loc: undefined
-    </Text>
   </View>
   <View>
     <Text>
@@ -36,190 +33,334 @@ exports[`BinningScreen Tests rendering binningItemCard component should match sn
 `;
 
 exports[`BinningScreen Tests rendering the BinningScreen component Test renders the BinningScreen with Selected Pallets 1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
-      "flexDirection": "column",
     }
   }
 >
-  <ManualScanComponent
-    keyboardType="numeric"
-  />
-  <Text
+  <View
     style={
       Object {
-        "fontSize": 16,
-        "margin": 15,
-        "textAlign": "center",
+        "flex": 1,
+        "flexDirection": "column",
       }
     }
   >
-    [missing "en.BINNING.SCAN_PALLET_BIN" translation]
-  </Text>
-  <ItemSeparator />
-  <ForwardRef
-    ItemSeparatorComponent={[Function]}
-    ListEmptyComponent={
-      <View
+    <ManualScanComponent
+      keyboardType="numeric"
+      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+    />
+    <View>
+      <Text
         style={
           Object {
-            "alignItems": "center",
-            "marginVertical": 80,
+            "fontSize": 16,
+            "margin": 15,
+            "textAlign": "center",
           }
         }
       >
-        <ForwardRef
-          onPress={[Function]}
-        >
-          <mockConstructor
-            color="#000000"
-            name="barcode-scan"
-            size={100}
-          />
-        </ForwardRef>
+        [missing "en.BINNING.SCAN_PALLET_BIN" translation]
+      </Text>
+      <ItemSeparator />
+    </View>
+    <ForwardRef
+      ItemSeparatorComponent={[Function]}
+      ListEmptyComponent={
         <View
           style={
             Object {
-              "paddingTop": 30,
+              "alignItems": "center",
+              "marginVertical": 80,
             }
           }
         >
-          <Text>
-            [missing "en.BINNING.SCAN_PALLET" translation]
-          </Text>
+          <ForwardRef
+            onPress={[Function]}
+          >
+            <mockConstructor
+              color="#000000"
+              name="barcode-scan"
+              size={100}
+            />
+          </ForwardRef>
+          <View
+            style={
+              Object {
+                "paddingTop": 30,
+              }
+            }
+          >
+            <Text>
+              [missing "en.BINNING.SCAN_PALLET" translation]
+            </Text>
+          </View>
         </View>
-      </View>
-    }
-    data={
-      Array [
-        Object {
-          "expirationDate": "10/3/2022",
-          "firstItem": Object {
-            "itemDesc": "itemDesc",
-            "price": 123,
-            "quantity": 2,
-            "upcNbr": "12343534",
+      }
+      data={
+        Array [
+          Object {
+            "expirationDate": "10/3/2022",
+            "firstItem": Object {
+              "itemDesc": "itemDesc",
+              "itemNbr": 351231,
+              "price": 123,
+              "quantity": 2,
+              "upcNbr": "12343534",
+            },
+            "id": 123456,
           },
-          "palletId": 123456,
-        },
-        Object {
-          "expirationDate": "10/3/2022",
-          "firstItem": Object {
-            "itemDesc": "itemDesc",
-            "price": 123,
-            "quantity": 2,
-            "upcNbr": "345345",
+          Object {
+            "expirationDate": "10/3/2022",
+            "firstItem": Object {
+              "itemDesc": "itemDesc",
+              "itemNbr": 351231,
+              "price": 123,
+              "quantity": 2,
+              "upcNbr": "345345",
+            },
+            "id": 345345,
           },
-          "palletId": 345345,
-        },
-      ]
+        ]
+      }
+      keyExtractor={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+    />
+    <ItemSeparator />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      radius={5}
+      style={
+        Object {
+          "marginHorizontal": 15,
+          "marginVertical": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.NEXT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`BinningScreen Tests rendering the BinningScreen component Test renders the BinningScreen with Successful getPalletApi state 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
     }
-    keyExtractor={[Function]}
-    removeClippedSubviews={false}
-    renderItem={[Function]}
-  />
-  <ItemSeparator />
-  <Button
-    backgroundColor="#0071e9"
-    disabled={false}
-    height={45}
-    radius={5}
+  }
+>
+  <View
     style={
       Object {
-        "margin": 10,
+        "flex": 1,
+        "flexDirection": "column",
       }
     }
-    title="[missing \\"en.GENERICS.NEXT\\" translation]"
-    titleColor="#ffffffff"
-    titleFontSize={16}
-    titleFontWeight="normal"
-    type={1}
-    width={-1}
-  />
-</View>
+  >
+    <ManualScanComponent
+      keyboardType="numeric"
+      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+    />
+    <View>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "margin": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.BINNING.SCAN_PALLET_BIN" translation]
+      </Text>
+      <ItemSeparator />
+    </View>
+    <ForwardRef
+      ItemSeparatorComponent={[Function]}
+      ListEmptyComponent={
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "marginVertical": 80,
+            }
+          }
+        >
+          <ForwardRef
+            onPress={[Function]}
+          >
+            <mockConstructor
+              color="#000000"
+              name="barcode-scan"
+              size={100}
+            />
+          </ForwardRef>
+          <View
+            style={
+              Object {
+                "paddingTop": 30,
+              }
+            }
+          >
+            <Text>
+              [missing "en.BINNING.SCAN_PALLET" translation]
+            </Text>
+          </View>
+        </View>
+      }
+      data={
+        Array [
+          Object {
+            "expirationDate": "10/3/2022",
+            "firstItem": Object {
+              "itemDesc": "itemDesc",
+              "itemNbr": 351231,
+              "price": 123,
+              "quantity": 2,
+              "upcNbr": "12343534",
+            },
+            "id": 123456,
+          },
+          Object {
+            "expirationDate": "10/3/2022",
+            "firstItem": Object {
+              "itemDesc": "itemDesc",
+              "itemNbr": 351231,
+              "price": 123,
+              "quantity": 2,
+              "upcNbr": "345345",
+            },
+            "id": 345345,
+          },
+        ]
+      }
+      keyExtractor={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+    />
+    <ItemSeparator />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      radius={5}
+      style={
+        Object {
+          "marginHorizontal": 15,
+          "marginVertical": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.NEXT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
 `;
 
 exports[`BinningScreen Tests rendering the BinningScreen component Test renders the default BinningScreen  1`] = `
-<View
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "flex": 1,
-      "flexDirection": "column",
     }
   }
 >
-  <ManualScanComponent
-    keyboardType="numeric"
-  />
-  <Text
+  <View
     style={
       Object {
-        "fontSize": 16,
-        "margin": 15,
-        "textAlign": "center",
+        "flex": 1,
+        "flexDirection": "column",
       }
     }
   >
-    [missing "en.BINNING.SCAN_PALLET_BIN" translation]
-  </Text>
-  <ItemSeparator />
-  <ForwardRef
-    ItemSeparatorComponent={[Function]}
-    ListEmptyComponent={
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "marginVertical": 80,
-          }
-        }
-      >
-        <ForwardRef
-          onPress={[Function]}
-        >
-          <mockConstructor
-            color="#000000"
-            name="barcode-scan"
-            size={100}
-          />
-        </ForwardRef>
+    <ManualScanComponent
+      keyboardType="numeric"
+      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+    />
+    <ForwardRef
+      ItemSeparatorComponent={[Function]}
+      ListEmptyComponent={
         <View
           style={
             Object {
-              "paddingTop": 30,
+              "alignItems": "center",
+              "marginVertical": 80,
             }
           }
         >
-          <Text>
-            [missing "en.BINNING.SCAN_PALLET" translation]
-          </Text>
+          <ForwardRef
+            onPress={[Function]}
+          >
+            <mockConstructor
+              color="#000000"
+              name="barcode-scan"
+              size={100}
+            />
+          </ForwardRef>
+          <View
+            style={
+              Object {
+                "paddingTop": 30,
+              }
+            }
+          >
+            <Text>
+              [missing "en.BINNING.SCAN_PALLET" translation]
+            </Text>
+          </View>
         </View>
-      </View>
-    }
-    data={Array []}
-    keyExtractor={[Function]}
-    removeClippedSubviews={false}
-    renderItem={[Function]}
-  />
-  <ItemSeparator />
-  <Button
-    backgroundColor="#0071e9"
-    disabled={true}
-    height={45}
-    radius={5}
-    style={
-      Object {
-        "margin": 10,
       }
-    }
-    title="[missing \\"en.GENERICS.NEXT\\" translation]"
-    titleColor="#ffffffff"
-    titleFontSize={16}
-    titleFontWeight="normal"
-    type={1}
-    width={-1}
-  />
-</View>
+      data={Array []}
+      keyExtractor={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+    />
+    <ItemSeparator />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      radius={5}
+      style={
+        Object {
+          "marginHorizontal": 15,
+          "marginVertical": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.NEXT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
 `;
