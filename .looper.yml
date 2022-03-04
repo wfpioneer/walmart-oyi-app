@@ -118,5 +118,6 @@ flows:
     - npm ci
     - npm run test:coverage
   sonar:
+    - "echo ${GITHUB_BRANCH_NAME}"
     - "(name [sonar]) sonar-scanner -Dproject.settings=sonar-project.properties -Dsonar.branch.name=${GITHUB_BRANCH_NAME}"
     - hygieia.publishSonar
