@@ -536,7 +536,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         confirmText={strings('GENERICS.YES')}
       />
       <View style={styles.bodyContainer}>
-        {isManualScanEnabled && <ManualScan />}
+        {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <View style={styles.headerContainer}>
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>{strings('PALLET.PALLET_ID')}</Text>
