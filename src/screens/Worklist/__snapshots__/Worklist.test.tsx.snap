@@ -28,6 +28,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
   </Text>
   <ForwardRef
     onPress={[Function]}
+    testID="button"
   >
     <mockConstructor
       color="#ffffffff"
@@ -66,6 +67,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
   </Text>
   <ForwardRef
     onPress={[Function]}
+    testID="button"
   >
     <mockConstructor
       color="#ffffffff"
