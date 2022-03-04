@@ -7,7 +7,7 @@ import Binning from '../screens/Binning/Binning';
 import AssignLocation from '../screens/AssignLocation/AssignLocation';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
-import { setManualScan } from '../state/actions/Global';
+import { resetScannedEvent, setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './BinningNavigator.style';
 
@@ -37,6 +37,16 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
+export const resetManualScan = (
+  isManualScanEnabled: boolean,
+  dispatch: Dispatch<any>
+): void => {
+  if (isManualScanEnabled) {
+    dispatch(setManualScan(false));
+    dispatch(resetScannedEvent());
+  }
+};
+
 export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element => {
   const {
     isManualScanEnabled, dispatch
@@ -59,6 +69,14 @@ export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element
               {renderScanButton(dispatch, isManualScanEnabled)}
             </View>
           )
+        }}
+        listeners={{
+          blur: () => {
+            resetManualScan(isManualScanEnabled, dispatch);
+          },
+          beforeRemove: () => {
+            resetManualScan(isManualScanEnabled, dispatch);
+          }
         }}
       />
       <Stack.Screen

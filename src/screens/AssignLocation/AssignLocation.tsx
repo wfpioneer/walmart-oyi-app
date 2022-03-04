@@ -6,13 +6,16 @@ import { strings } from '../../locales';
 import { PalletInfo } from '../../models/PalletManagementTypes';
 import styles from './AssignLocation.style';
 import { openCamera } from '../../utils/scannerUtils';
+import ManualScanComponent from '../../components/manualscan/ManualScan';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
 
 interface AssignLocationProps {
   palletsToBin: PalletInfo[];
+  isManualScanEnabled: boolean;
 }
 
 export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element => {
-  const { palletsToBin } = props;
+  const { isManualScanEnabled, palletsToBin } = props;
 
   // TODO Replace with binning pallet card
   const renderItem = ({ item }: { item: PalletInfo }) => (
@@ -41,6 +44,7 @@ export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element =>
 
   return (
     <View style={styles.container}>
+    {isManualScanEnabled && <ManualScanComponent placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
       <FlatList
         data={palletsToBin}
         renderItem={renderItem}
@@ -52,19 +56,13 @@ export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element =>
 };
 
 const AssignLocation = (): JSX.Element => {
+  const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
+  const palletsToBin = useTypedSelector(state => state.Binning.pallets);
 
-  // TODO get pallets from redux
-  const palletsToBin: PalletInfo[] = [
-    {
-      id: 64
-    },
-    {
-      id: 643
-    }
-  ];
   return (
     <AssignLocationScreen
       palletsToBin={palletsToBin}
+      isManualScanEnabled={isManualScanEnabled}
     />
   );
 };
