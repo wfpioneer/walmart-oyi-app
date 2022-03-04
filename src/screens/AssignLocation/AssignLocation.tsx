@@ -44,7 +44,7 @@ export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element =>
 
   return (
     <View style={styles.container}>
-    {isManualScanEnabled && <ManualScanComponent placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
+    {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')} />}
       <FlatList
         data={palletsToBin}
         renderItem={renderItem}
