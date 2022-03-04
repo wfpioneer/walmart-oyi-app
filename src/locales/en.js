@@ -360,10 +360,11 @@ export default {
   },
   BINNING: {
     BINNING: 'Binning',
-    SCAN_PALLET: 'Scan a Pallet to begin',
-    SCAN_PALLET_BIN: 'Scan Pallet/s to Bin',
     ASSIGN_LOCATION: 'Assign Location',
-    SCAN_LOCATION: 'Scan Location to Bin Pallet/s'
+    SCAN_LOCATION: 'Scan location to bin pallet',
+    SCAN_LOCATION_PLURAL: 'Scan location to bin pallets',
+    SCAN_PALLET: 'Scan a Pallet to begin',
+    SCAN_PALLET_BIN: 'Scan Pallet/s to Bin'
   },
   SETTINGS: {
     TITLE: 'Settings'
