@@ -13,8 +13,10 @@ export interface CombinePalletsRequest {
   combinePallets: number[];
 }
 
-export interface getPalletInfoRequest {
-  palletId: number
+export interface GetPalletInfoRequest {
+  palletIds: number[],
+  isAllItems?: boolean,
+  isSummery?: boolean
 }
 
 export default class PalletManagementService {
@@ -30,8 +32,14 @@ export default class PalletManagementService {
     });
   }
 
-  public static getPalletInfo(payload: getPalletInfoRequest): Promise<AxiosResponse<unknown>> {
+  public static getPalletInfo(payload: GetPalletInfoRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
-    return Request.get(`${urls.locationUrl}/pallet`, { palletIds: payload.palletId });
+    const allItems = payload.isAllItems || false;
+    const summeryDetails = payload.isSummery || false;
+    return Request.get(`${urls.locationUrl}/pallet`, {
+      palletIds: payload.palletIds.join(),
+      allItems: allItems,
+      summeryDetails: summeryDetails
+    });
   }
 }

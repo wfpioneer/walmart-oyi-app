@@ -27,16 +27,16 @@ export const BinningItemCard = (props: Props): JSX.Element => {
         <View style={styles.infoContainer}>
           <View style={styles.firstLineContainer}>
             <View>
-              <Text>{`Id: ${palletId}`}</Text>
+              <Text>{`${strings('PALLET.PALLET_ID')}: ${palletId}`}</Text>
             </View>
             {lastLocation &&
             <View style={styles.lastLocationContainer}>
-              <Text>{`Last Loc: ${lastLocation}`}</Text>
+              <Text>{`${strings('BINNING.LAST_LOC')}: ${lastLocation}`}</Text>
             </View>
             }
           </View>
           <View>
-            <Text>{`First Item: ${itemDesc}`}</Text>
+            <Text>{`${strings('BINNING.FIRST_ITEM')}: ${itemDesc}`}</Text>
           </View>
         </View>
         <View>

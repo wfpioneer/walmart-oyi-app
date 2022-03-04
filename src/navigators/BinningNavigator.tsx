@@ -9,12 +9,16 @@ import { strings } from '../locales';
 import { setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './BinningNavigator.style';
+import ManagePallet from "../screens/ManagePallet/ManagePallet";
+import CombinePallets from "../screens/CombinePallets/CombinePallets";
+import { renderManagePalletKebabButton } from './PalletManagementNavigator';
 
 const Stack = createStackNavigator();
 
 interface BinningNavigatorProps {
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
+  managePalletMenu: boolean;
 }
 
 export const renderScanButton = (
@@ -38,7 +42,7 @@ export const renderScanButton = (
 
 export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element => {
   const {
-    isManualScanEnabled, dispatch
+    isManualScanEnabled, dispatch, managePalletMenu
   } = props;
   return (
     <Stack.Navigator
@@ -60,17 +64,44 @@ export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element
           )
         }}
       />
+      <Stack.Screen
+        name="ManagePallet"
+        component={ManagePallet}
+        options={{
+          headerTitle: strings('PALLET.MANAGE_PALLET'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderScanButton(dispatch, isManualScanEnabled)}
+              {renderManagePalletKebabButton(managePalletMenu, dispatch)}
+            </View>
+          )
+        }}
+      />
+      <Stack.Screen
+        name="CombinePallets"
+        component={CombinePallets}
+        options={{
+          headerTitle: strings('PALLET.COMBINE_PALLETS'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderScanButton(dispatch, isManualScanEnabled)}
+            </View>
+          )
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 const BinningNavigator = (): JSX.Element => {
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
+  const managePalletMenu = useTypedSelector(state => state.PalletManagement.managePalletMenu);
   const dispatch = useDispatch();
   return (
     <BinningNavigatorStack
       isManualScanEnabled={isManualScanEnabled}
       dispatch={dispatch}
+      managePalletMenu={managePalletMenu}
     />
   );
 };

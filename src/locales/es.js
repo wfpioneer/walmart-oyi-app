@@ -361,7 +361,9 @@ export default {
     SCAN_PALLET: 'Escanear el pallet para comenzar',
     SCAN_PALLET_BIN: 'Escanear pallet a contenedor',
     ASSIGN_LOCATION: 'Asignar ubicación',
-    SCAN_LOCATION: 'Escanear la ubicación al pallet de contenedores'
+    SCAN_LOCATION: 'Escanear la ubicación al pallet de contenedores',
+    LAST_LOC: 'Last Loc', // add translations
+    FIRST_ITEM: 'First Item' // add translations
   },
   SETTINGS: {
     TITLE: 'Ajustes'
