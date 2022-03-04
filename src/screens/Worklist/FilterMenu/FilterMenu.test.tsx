@@ -119,7 +119,7 @@ describe('FilterMenu Component', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
-  it('Test the renderExceptionFilterCard component with an item selected', async () => {
+  it('Test the renderExceptionFilterCard component with an item selected', () => {
     const mockFilterItemSelected: FilterListItem = {
       value: 'NP',
       display: 'Nil Pick',
@@ -135,7 +135,7 @@ describe('FilterMenu Component', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
-  it('Test the renderExceptionFilterCard component without an item selected', async () => {
+  it('Test the renderExceptionFilterCard component without an item selected', () => {
     const mockFilterItem: FilterListItem = {
       value: 'PO',
       display: 'Price Override',
@@ -173,7 +173,7 @@ describe('FilterMenu Component', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
-  it('Test renders the renderCategoryCollapsibleCard and filteredCategories FlatList ', async () => {
+  it('Test renders the renderCategoryCollapsibleCard and filteredCategories FlatList ', () => {
     const mockWorklistSuccess: AsyncState = {
       ...defaultAsyncState,
       result: {
@@ -181,7 +181,7 @@ describe('FilterMenu Component', () => {
         status: 200
       }
     };
-      // You cannot use queries if the component contains a FlatList and isn't a PureComponent
+    // You cannot use queries if the component contains a FlatList and isn't a PureComponent
     const { toJSON, getByText } = render(
       <RenderCategoryCollapsibleCard
         workListAPI={mockWorklistSuccess}
