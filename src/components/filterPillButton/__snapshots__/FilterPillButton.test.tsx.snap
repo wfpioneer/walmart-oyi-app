@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterPillButton Component FilterButton ShallowRender 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#0071e9",
+      "borderRadius": 20,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginHorizontal": 5,
+      "marginVertical": 10,
+      "paddingHorizontal": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    randomText
+  </Text>
+  <ForwardRef
+    onPress={[MockFunction]}
+    testID="button"
+  >
+    <Icon
+      color="#ffffffff"
+      name="close-circle"
+      size={20}
+    />
+  </ForwardRef>
+</View>
+`;
+
+exports[`FilterPillButton Component Test Filterbutton TouchableOpacity 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#0071e9",
+      "borderRadius": 20,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginHorizontal": 5,
+      "marginVertical": 10,
+      "paddingHorizontal": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    NO SALES FLOOR
+  </Text>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="button"
+  >
+    <Icon
+      color="#ffffffff"
+      name="close-circle"
+      size={20}
+    />
+  </View>
+</View>
+`;
