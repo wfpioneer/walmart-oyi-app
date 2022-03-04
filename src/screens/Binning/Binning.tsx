@@ -201,13 +201,14 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
               </View>
             </View>
         )}
-        />
-        <ItemSeparator />
+      />
+      <ItemSeparator />
         <Button
           title={strings('GENERICS.NEXT')}
           type={Button.Type.PRIMARY}
           style={styles.buttonWrapper}
           disabled={!palletExistForBinnning}
+          onPress={() => navigation.navigate('AssignLocation')}
         />
       </View>
     </KeyboardAvoidingView>
