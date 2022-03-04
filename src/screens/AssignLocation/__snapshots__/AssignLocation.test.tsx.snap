@@ -86,7 +86,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
 >
   <ManualScanComponent
     keyboardType="numeric"
-    placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+    placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
   />
   <FlatList
     data={Array []}
