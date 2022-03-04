@@ -8,7 +8,7 @@ describe('Assign Location screen render tests', () => {
     const renderer = ShallowRenderer.createRenderer();
     const testPallets: PalletInfo[] = [];
 
-    renderer.render(<AssignLocationScreen palletsToBin={testPallets} />);
+    renderer.render(<AssignLocationScreen palletsToBin={testPallets} isManualScanEnabled={false} />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -27,9 +27,18 @@ describe('Assign Location screen render tests', () => {
       }
     ];
 
-    renderer.render(<AssignLocationScreen palletsToBin={testPallets} />);
+    renderer.render(<AssignLocationScreen palletsToBin={testPallets} isManualScanEnabled={false} />);
 
     // TODO update snapshot after pallet card is added
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
+  it('renders screen with manual scan enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const testPallets: PalletInfo[] = [];
+
+    renderer.render(<AssignLocationScreen palletsToBin={testPallets} isManualScanEnabled={true} />);
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  })
 });

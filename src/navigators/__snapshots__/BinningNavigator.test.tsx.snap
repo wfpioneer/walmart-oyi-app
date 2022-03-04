@@ -14,6 +14,12 @@ exports[`Binning Navigator Renders the Binning navigator component 1`] = `
 >
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
     name="Binning"
     options={
       Object {
