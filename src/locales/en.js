@@ -363,7 +363,9 @@ export default {
     SCAN_PALLET: 'Scan a Pallet to begin',
     SCAN_PALLET_BIN: 'Scan Pallet/s to Bin',
     ASSIGN_LOCATION: 'Assign Location',
-    SCAN_LOCATION: 'Scan Location to Bin Pallet/s'
+    SCAN_LOCATION: 'Scan Location to Bin Pallet/s',
+    WARNING_LABEL: 'Warning',
+    WARNING_DESCRIPTION: 'If you navigate away from this screen the pallets already scanned will not be binned'
   },
   SETTINGS: {
     TITLE: 'Settings'
