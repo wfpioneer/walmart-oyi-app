@@ -224,6 +224,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       backgroundColor="#0071e9"
       disabled={false}
       height={45}
+      onPress={[Function]}
       radius={5}
       style={
         Object {
@@ -644,6 +645,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       backgroundColor="#0071e9"
       disabled={false}
       height={45}
+      onPress={[Function]}
       radius={5}
       style={
         Object {
@@ -815,6 +817,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       backgroundColor="#0071e9"
       disabled={true}
       height={45}
+      onPress={[Function]}
       radius={5}
       style={
         Object {
