@@ -2,7 +2,7 @@ import React, {
   EffectCallback, MutableRefObject, useEffect, useRef, useState
 } from 'react';
 import {
-  EmitterSubscription, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity, View
+  BackHandler, EmitterSubscription, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity, View
 } from 'react-native';
 import { head } from 'lodash';
 import { trackEvent } from 'appcenter-analytics';
@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
 import {
-  NavigationProp, RouteProp, useNavigation, useRoute
+  NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
@@ -31,11 +31,12 @@ import {
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { BinningPallet } from '../../models/Binning';
-import { addPallet, deletePallet } from '../../state/actions/Binning';
+import { addPallet, clearPallets, deletePallet } from '../../state/actions/Binning';
 import { setScannedEvent } from '../../state/actions/Global';
 import { setupPallet } from '../../state/actions/PalletManagement';
 import { Pallet } from '../../models/PalletManagementTypes';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
+import { CustomModalComponent } from '../Modal/Modal';
 
 export interface BinningScreenProps {
   scannedPallets: BinningPallet[];
@@ -49,6 +50,9 @@ export interface BinningScreenProps {
   isMounted: MutableRefObject<boolean>;
   palletClicked: boolean;
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  useFocusEffectHook: (effect: EffectCallback) => void;
+  displayWarningModal: boolean;
+  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const navigateToPalletManagement = (
@@ -84,10 +88,20 @@ const resetApis = (dispatch: Dispatch<any>) => {
   dispatch({ type: GET_PALLET_INFO.RESET });
 };
 
+const onValidateHardwareBackPress = (props: BinningScreenProps) => {
+  const { setDisplayWarningModal, scannedPallets } = props;
+  if (scannedPallets.length > 0) {
+    setDisplayWarningModal(true);
+    return true;
+  }
+  return false;
+};
+
 export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   const {
     scannedPallets, isManualScanEnabled, dispatch, navigation, route, useEffectHook,
-    getPalletApi, scannedEvent, isMounted, palletClicked, setPalletClicked
+    getPalletApi, scannedEvent, isMounted, palletClicked, setPalletClicked, useFocusEffectHook,
+    displayWarningModal, setDisplayWarningModal
   } = props;
 
   const palletExistForBinnning = scannedPallets.length > 0;
@@ -197,10 +211,73 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     }
   }, [getPalletApi]);
 
+  // validation on app back press
+  useEffectHook(() => {
+    const navigationListener = navigation.addListener('beforeRemove', e => {
+      if (scannedPallets.length > 0) {
+        setDisplayWarningModal(true);
+        e.preventDefault();
+      }
+    });
+    return navigationListener;
+  }, [navigation, scannedPallets]);
+
+  useEffectHook(() => {
+    if (displayWarningModal && !palletExistForBinnning) {
+      setDisplayWarningModal(false);
+      navigation.goBack();
+    }
+  }, [palletExistForBinnning]);
+
+  // validation on Hardware backPress
+  useFocusEffectHook(
+    () => {
+      const onHardwareBackPress = () => onValidateHardwareBackPress(props);
+      BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
+      return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
+    }
+  );
+
   const handleUnhandledTouches = () => {
     Keyboard.dismiss();
     return false;
   };
+
+  const backConfirmed = () => {
+    setDisplayWarningModal(false);
+    dispatch(clearPallets());
+    navigation.goBack();
+  };
+
+  const renderWarningModal = () => (
+    <CustomModalComponent
+      isVisible={displayWarningModal}
+      onClose={() => setDisplayWarningModal(false)}
+      modalType="Popup"
+    >
+      <>
+        <View>
+          <Text style={styles.labelHeader}>{strings('BINNING.WARNING_LABEL')}</Text>
+          <Text style={styles.message}>{strings('BINNING.WARNING_DESCRIPTION')}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            style={styles.buttonAlign}
+            title={strings('GENERICS.CANCEL')}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            type={Button.Type.SOLID_WHITE}
+            onPress={() => setDisplayWarningModal(false)}
+          />
+          <Button
+            style={styles.buttonAlign}
+            title={strings('GENERICS.OK')}
+            type={Button.Type.PRIMARY}
+            onPress={backConfirmed}
+          />
+        </View>
+      </>
+    </CustomModalComponent>
+  );
 
   return (
     <KeyboardAvoidingView
@@ -210,6 +287,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
       onStartShouldSetResponder={handleUnhandledTouches}
     >
       <View style={styles.container}>
+        {renderWarningModal()}
         {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
         {palletExistForBinnning
           && (
@@ -247,8 +325,10 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     </KeyboardAvoidingView>
   );
 };
+
 const Binning = (): JSX.Element => {
   const scannedPallets = useTypedSelector(state => state.Binning.pallets);
+  const [displayWarningModal, setDisplayWarningModal] = useState(false);
   const dispatch = useDispatch();
   const route = useRoute();
   const navigation = useNavigation();
@@ -270,6 +350,9 @@ const Binning = (): JSX.Element => {
       isMounted={isMounted}
       palletClicked={palletCLicked}
       setPalletClicked={setPalletClicked}
+      useFocusEffectHook={useFocusEffect}
+      displayWarningModal={displayWarningModal}
+      setDisplayWarningModal={setDisplayWarningModal}
     />
   );
 };

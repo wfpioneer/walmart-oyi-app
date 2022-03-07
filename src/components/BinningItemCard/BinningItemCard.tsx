@@ -39,7 +39,9 @@ export const BinningItemCard = (props: Props): JSX.Element => {
             )}
           </View>
           <View>
-            <Text>{`${strings('BINNING.FIRST_ITEM')}: ${itemDesc}`}</Text>
+            {itemDesc
+              ? <Text>{`${strings('BINNING.FIRST_ITEM')}: ${itemDesc}`}</Text>
+              : <Text style={styles.emptyPalletMsg}>{`${strings('BINNING.EMPTY_PALLET')}`}</Text>}
           </View>
         </View>
         {canDelete

@@ -89,5 +89,8 @@ export default StyleSheet.create({
   delButton: {
     flex: 1,
     paddingHorizontal: 10
+  },
+  emptyPalletMsg: {
+    color: COLOR.RED_500
   }
 });

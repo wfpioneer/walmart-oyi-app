@@ -364,7 +364,10 @@ export default {
     SCAN_LOCATION: '扫描货架号进行单卡板上架操作',
     SCAN_LOCATION_PLURAL: '扫描货架号进行多卡板上架操作',
     SCAN_PALLET: '扫描卡板号开始上架',
-    SCAN_PALLET_BIN: '扫描卡板号进行上架'
+    SCAN_PALLET_BIN: '扫描卡板号进行上架',
+    LAST_LOC: '上一个位置',
+    FIRST_ITEM: '第一个item',
+    EMPTY_PALLET: 'empty pallet'
   },
   SETTINGS: {
     TITLE: '设置'

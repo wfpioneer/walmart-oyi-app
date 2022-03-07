@@ -363,8 +363,11 @@ export default {
     SCAN_LOCATION_PLURAL: 'Escanea la ubicación para ingresar a bodega los pallets',
     SCAN_PALLET: 'Escanear el pallet para comenzar',
     SCAN_PALLET_BIN: 'Escanear pallet a contenedor',
-    LAST_LOC: 'Last Loc', // add translations
-    FIRST_ITEM: 'First Item' // add translations
+    WARNING_LABEL: 'Aviso',
+    WARNING_DESCRIPTION: 'Si navega afuera de esta pantalla los pallets ya escaneados no se agruparán',
+    LAST_LOC: 'Last Loc',
+    FIRST_ITEM: 'First Item',
+    EMPTY_PALLET: 'empty pallet'
   },
   SETTINGS: {
     TITLE: 'Ajustes'

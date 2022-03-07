@@ -30,6 +30,19 @@ describe('Binning Item card render tests', () => {
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+  it('renders the binning item card for empty pallet', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <BinningItemCard
+        palletId={1}
+        itemDesc=""
+        canDelete={true}
+        onClick={jest.fn}
+        onDelete={jest.fn}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
   it('renders the binning item card in read only mode', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(

@@ -82,6 +82,83 @@ exports[`Binning Item card render tests renders the binning item card 1`] = `
 </ForwardRef>
 `;
 
+exports[`Binning Item card render tests renders the binning item card for empty pallet 1`] = `
+<ForwardRef
+  onPress={[Function]}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 4,
+          "flexDirection": "column",
+          "margin": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginBottom": 5,
+          }
+        }
+      >
+        <View>
+          <Text>
+            [missing "en.PALLET.PALLET_ID" translation]: 1
+          </Text>
+        </View>
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+            }
+          }
+        >
+          [missing "en.BINNING.EMPTY_PALLET" translation]
+        </Text>
+      </View>
+    </View>
+    <View>
+      <ForwardRef
+        onPress={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 10,
+            "paddingBottom": 5,
+            "paddingLeft": 5,
+            "paddingTop": 5,
+          }
+        }
+      >
+        <View>
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
+          />
+        </View>
+      </ForwardRef>
+    </View>
+  </View>
+</ForwardRef>
+`;
+
 exports[`Binning Item card render tests renders the binning item card in read only mode 1`] = `
 <ForwardRef
   onPress={[Function]}

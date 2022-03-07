@@ -361,12 +361,15 @@ export default {
   BINNING: {
     BINNING: 'Binning',
     ASSIGN_LOCATION: 'Assign Location',
-    LAST_LOC: 'Last Loc',
-    FIRST_ITEM: 'First Item',
     SCAN_LOCATION: 'Scan location to bin pallet',
     SCAN_LOCATION_PLURAL: 'Scan location to bin pallets',
     SCAN_PALLET: 'Scan a Pallet to begin',
-    SCAN_PALLET_BIN: 'Scan Pallet/s to Bin'
+    SCAN_PALLET_BIN: 'Scan Pallet/s to Bin',
+    WARNING_LABEL: 'Warning',
+    WARNING_DESCRIPTION: 'If you navigate away from this screen the pallets already scanned will not be binned',
+    LAST_LOC: 'Last Loc',
+    FIRST_ITEM: 'First Item',
+    EMPTY_PALLET: 'empty pallet'
   },
   SETTINGS: {
     TITLE: 'Settings'
