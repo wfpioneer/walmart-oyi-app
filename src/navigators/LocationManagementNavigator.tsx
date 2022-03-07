@@ -45,7 +45,7 @@ export const renderScanButton = (
       dispatch(setManualScan(!isManualScanEnabled));
     }}
   >
-    <View style={styles.leftButton}>
+    <View style={styles.scanButton}>
       <MaterialCommunityIcon
         name="barcode-scan"
         size={20}
