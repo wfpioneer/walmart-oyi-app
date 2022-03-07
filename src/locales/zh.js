@@ -362,7 +362,9 @@ export default {
     SCAN_LOCATION: '扫描货架号进行单卡板上架操作',
     SCAN_LOCATION_PLURAL: '扫描货架号进行多卡板上架操作',
     SCAN_PALLET: '扫描卡板号开始上架',
-    SCAN_PALLET_BIN: '扫描卡板号进行上架'
+    SCAN_PALLET_BIN: '扫描卡板号进行上架',
+    WARNING_LABEL: '警示',
+    WARNING_DESCRIPTION: '如果你离开此屏幕，已经扫描的卡板将不会被维护在此高货架位置'
   },
   SETTINGS: {
     TITLE: '设置'

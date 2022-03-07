@@ -49,6 +49,9 @@ describe('BinningScreen', () => {
           useEffectHook={jest.fn}
           route={routeProp}
           getPalletApi={defaultAsyncState}
+          useFocusEffectHook={jest.fn}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -65,6 +68,9 @@ describe('BinningScreen', () => {
           useEffectHook={jest.fn}
           route={routeProp}
           getPalletApi={defaultAsyncState}
+          useFocusEffectHook={jest.fn}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -97,6 +103,27 @@ describe('BinningScreen', () => {
           useEffectHook={jest.fn}
           route={routeProp}
           getPalletApi={sucessAsyncState}
+          useFocusEffectHook={jest.fn}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Test renders the BinningScreen with warning Modal', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <BinningScreen
+          scannedPallets={mockPallets}
+          navigation={navigationProp}
+          dispatch={jest.fn}
+          isManualScanEnabled={true}
+          useEffectHook={jest.fn}
+          route={routeProp}
+          getPalletApi={defaultAsyncState}
+          useFocusEffectHook={jest.fn}
+          displayWarningModal={true}
+          setDisplayWarningModal={jest.fn}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
