@@ -1,4 +1,6 @@
-import React, { EffectCallback, MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, {
+  EffectCallback, MutableRefObject, useEffect, useRef, useState
+} from 'react';
 import {
   EmitterSubscription, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity, View
 } from 'react-native';
@@ -32,7 +34,7 @@ import { BinningPallet } from '../../models/Binning';
 import { addPallet, deletePallet } from '../../state/actions/Binning';
 import { setScannedEvent } from '../../state/actions/Global';
 import { setupPallet } from '../../state/actions/PalletManagement';
-import { Pallet } from "../../models/PalletManagementTypes";
+import { Pallet } from '../../models/PalletManagementTypes';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
 
 export interface BinningScreenProps {
@@ -55,14 +57,14 @@ export const navigateToPalletManagement = (
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   setPalletClicked(true);
-  dispatch(getPalletInfo({ palletIds:[palletId], isAllItems: true }));
+  dispatch(getPalletInfo({ palletIds: [palletId], isAllItems: true }));
 };
 
 export const binningItemCard = (
   { item }: { item: BinningPallet },
   dispatch: Dispatch<any>,
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>
-) =>{
+) => {
   const firstItem = head(item.items);
   return (
     <BinningItemCard
@@ -70,10 +72,10 @@ export const binningItemCard = (
       itemDesc={firstItem ? firstItem.itemDesc : ''}
       lastLocation={item.lastLocation}
       canDelete={true}
-      onDelete={() => { dispatch(deletePallet(item.id)) }}
-      onClick={() => { navigateToPalletManagement(item.id, dispatch, setPalletClicked) }}
+      onDelete={() => { dispatch(deletePallet(item.id)); }}
+      onClick={() => { navigateToPalletManagement(item.id, dispatch, setPalletClicked); }}
     />
-  )
+  );
 };
 
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -91,12 +93,6 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   const palletExistForBinnning = scannedPallets.length > 0;
 
   let scannedSubscription: EmitterSubscription;
-
-  // Clear API state before leaving this screen
-  useEffectHook(() => navigation.addListener('beforeRemove', () => {
-    // TODO: we have to add warning Modal as part of INTLSAOPS-5166
-    dispatch({ type: GET_PALLET_INFO.RESET });
-  }), []);
 
   // Scanner listener
   useEffectHook(() => {
@@ -127,14 +123,13 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
               barcode: scannedEvent.value,
               type: scannedEvent.type
             });
-            dispatch(getPalletInfo({ palletIds:[scannedEvent.value] }));
+            dispatch(getPalletInfo({ palletIds: [scannedEvent.value] }));
           }
         });
       }
     } else {
       isMounted.current = true;
     }
-
   }, [scannedEvent]);
 
   useEffectHook(() => {
@@ -239,8 +234,8 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
               </View>
             </View>
         )}
-      />
-      <ItemSeparator />
+        />
+        <ItemSeparator />
         <Button
           title={strings('GENERICS.NEXT')}
           type={Button.Type.PRIMARY}

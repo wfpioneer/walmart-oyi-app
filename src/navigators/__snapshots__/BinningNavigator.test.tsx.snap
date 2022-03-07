@@ -38,6 +38,26 @@ exports[`Binning Navigator Renders the Binning navigator component 1`] = `
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="ManagePallet"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.PALLET.MANAGE_PALLET\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="CombinePallets"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.PALLET.COMBINE_PALLETS\\" translation]",
+      }
+    }
+  />
 </StackNavigator>
 `;
 

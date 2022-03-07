@@ -10,8 +10,8 @@ import { strings } from '../locales';
 import { resetScannedEvent, setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './BinningNavigator.style';
-import ManagePallet from "../screens/ManagePallet/ManagePallet";
-import CombinePallets from "../screens/CombinePallets/CombinePallets";
+import ManagePallet from '../screens/ManagePallet/ManagePallet';
+import CombinePallets from '../screens/CombinePallets/CombinePallets';
 import { renderManagePalletKebabButton } from './PalletManagementNavigator';
 
 const Stack = createStackNavigator();
