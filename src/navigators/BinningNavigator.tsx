@@ -4,9 +4,10 @@ import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createStackNavigator } from '@react-navigation/stack';
 import Binning from '../screens/Binning/Binning';
+import AssignLocation from '../screens/AssignLocation/AssignLocation';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
-import { setManualScan } from '../state/actions/Global';
+import { resetScannedEvent, setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './BinningNavigator.style';
 import ManagePallet from "../screens/ManagePallet/ManagePallet";
@@ -40,6 +41,16 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
+export const resetManualScan = (
+  isManualScanEnabled: boolean,
+  dispatch: Dispatch<any>
+): void => {
+  if (isManualScanEnabled) {
+    dispatch(setManualScan(false));
+    dispatch(resetScannedEvent());
+  }
+};
+
 export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element => {
   const {
     isManualScanEnabled, dispatch, managePalletMenu
@@ -57,6 +68,26 @@ export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element
         component={Binning}
         options={{
           headerTitle: strings('BINNING.BINNING'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderScanButton(dispatch, isManualScanEnabled)}
+            </View>
+          )
+        }}
+        listeners={{
+          blur: () => {
+            resetManualScan(isManualScanEnabled, dispatch);
+          },
+          beforeRemove: () => {
+            resetManualScan(isManualScanEnabled, dispatch);
+          }
+        }}
+      />
+      <Stack.Screen
+        name="AssignLocation"
+        component={AssignLocation}
+        options={{
+          headerTitle: strings('BINNING.ASSIGN_LOCATION'),
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderScanButton(dispatch, isManualScanEnabled)}

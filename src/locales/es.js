@@ -358,10 +358,11 @@ export default {
   },
   BINNING: {
     BINNING: 'Bodega',
+    ASSIGN_LOCATION: 'Agrega la ubicación',
+    SCAN_LOCATION: 'Escanea la ubicación para ingresar a bodega el pallet',
+    SCAN_LOCATION_PLURAL: 'Escanea la ubicación para ingresar a bodega los pallets',
     SCAN_PALLET: 'Escanear el pallet para comenzar',
     SCAN_PALLET_BIN: 'Escanear pallet a contenedor',
-    ASSIGN_LOCATION: 'Asignar ubicación',
-    SCAN_LOCATION: 'Escanear la ubicación al pallet de contenedores',
     LAST_LOC: 'Last Loc', // add translations
     FIRST_ITEM: 'First Item' // add translations
   },
