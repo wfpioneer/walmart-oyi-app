@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
   rightButton: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingRight: 10
+    justifyContent: 'center'
   },
   leftButton: {
     flex: 1,
@@ -19,9 +18,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   },
   image: {
-    width: 25,
+    width: 15,
     height: 25,
-    marginRight: 10
+    marginRight: 20
+  },
+  scanButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 10,
+    paddingRight: 15
   }
 });
 
