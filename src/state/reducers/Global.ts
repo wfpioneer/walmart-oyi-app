@@ -1,4 +1,5 @@
 import {
+  Actions,
   RESET_SCANNED_EVENT, SET_BYOD, SET_MANUAL_SCAN, SET_SCANNED_EVENT
 } from '../actions/Global';
 
@@ -11,7 +12,7 @@ const initialState = {
   isManualScanEnabled: false
 };
 
-export const Global = (state = initialState, action: any) => {
+export const Global = (state = initialState, action: Actions) => {
   switch (action.type) {
     case SET_BYOD:
       return {
