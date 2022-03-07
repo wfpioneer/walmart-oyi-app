@@ -315,55 +315,122 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
 exports[`HomeScreen rendering renders error View when worklistSummaryApiState.error is not null 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      },
-      Object {
-        "backgroundColor": "#ffffffff",
-        "flex": 1,
-      },
-    ]
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
   }
 >
-  <mockConstructor
-    color="#f44336"
-    name="alert"
-    size={50}
-  />
-  <Text
+  <View
     style={
-      Object {
-        "paddingVertical": 10,
-        "textAlign": "center",
-        "width": "95%",
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+        Object {
+          "backgroundColor": "#ffffffff",
+          "flex": 1,
+        },
+      ]
     }
   >
-    [missing "en.HOME.WORKLIST_API_ERROR" translation]
-  </Text>
-  <ForwardRef
-    onPress={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#f44336",
-        "borderRadius": 4,
-        "height": 40,
-        "justifyContent": "center",
-        "width": "95%",
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={50}
+    />
+    <Text
+      style={
+        Object {
+          "paddingVertical": 10,
+          "textAlign": "center",
+          "width": "95%",
+        }
       }
-    }
-  >
-    <Text>
-      [missing "en.GENERICS.RETRY" translation]
+    >
+      [missing "en.HOME.WORKLIST_API_ERROR" translation]
     </Text>
-  </ForwardRef>
+    <ForwardRef
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#f44336",
+          "borderRadius": 4,
+          "height": 40,
+          "justifyContent": "center",
+          "width": "95%",
+        }
+      }
+    >
+      <Text>
+        [missing "en.GENERICS.RETRY" translation]
+      </Text>
+    </ForwardRef>
+  </View>
 </View>
 `;
 
-exports[`HomeScreen rendering renders null when worklistApiState.result.status is 204 1`] = `null`;
+exports[`HomeScreen rendering renders null when worklistApiState.result.status is 204 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+        Object {
+          "backgroundColor": "#ffffffff",
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={50}
+    />
+    <Text
+      style={
+        Object {
+          "paddingVertical": 10,
+          "textAlign": "center",
+          "width": "95%",
+        }
+      }
+    >
+      [missing "en.HOME.WORKLIST_API_ERROR" translation]
+    </Text>
+    <ForwardRef
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#f44336",
+          "borderRadius": 4,
+          "height": 40,
+          "justifyContent": "center",
+          "width": "95%",
+        }
+      }
+    >
+      <Text>
+        [missing "en.GENERICS.RETRY" translation]
+      </Text>
+    </ForwardRef>
+  </View>
+</View>
+`;
 
 exports[`HomeScreen rendering renders null when worklistSummaryApiState.result is null 1`] = `null`;
 

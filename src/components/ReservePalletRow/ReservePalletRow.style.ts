@@ -35,5 +35,29 @@ export default StyleSheet.create({
   itemContainer: {
     paddingLeft: 15,
     paddingTop: 15
+  },
+  textHeader: {
+    flex: 1
+  },
+  pallet: {
+    flexDirection: 'row'
+  },
+  activityIndicator: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  message: {
+    textAlign: 'center',
+    fontSize: 18,
+    padding: 15
+  },
+  buttonContainer: {
+    width: '100%',
+    alignContent: 'space-around',
+    flexDirection: 'row'
+  },
+  delButton: {
+    flex: 1,
+    paddingHorizontal: 10
   }
 });

@@ -16,7 +16,7 @@ import Location from '../../models/Location';
 import { COLOR } from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  deleteLocationFromExisting, setFloorLocations, setReserveLocations
+  deleteLocationFromExisting, setFloorLocations, setReserveLocations, setSelectedLocation
 } from '../../state/actions/ItemDetailScreen';
 import { deleteLocation } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -33,7 +33,6 @@ interface LocationDetailsProps {
   reserveLocations: Location[];
   itemNbr: number;
   upcNbr: string;
-  exceptionType: string | null | undefined;
   delAPI: AsyncState
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -50,9 +49,22 @@ interface LocationDetailsProps {
     locationTypeNbr: number;
   }>>;
   locationsApi: AsyncState
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
-
+const getlocationsApiResult = (props: LocationDetailsProps, locationsApi: AsyncState) => {
+  const {
+    dispatch
+  } = props;
+  const locDetails = (locationsApi.result && locationsApi.result.data);
+  if (locDetails.location) {
+    if (locDetails.location.floor) {
+      dispatch(setFloorLocations(locDetails.location.floor));
+    }
+    if (locDetails.location.reserve) {
+      dispatch(setReserveLocations(locDetails.location.reserve));
+    }
+  }
+};
 export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element => {
   const {
     delAPI,
@@ -62,7 +74,6 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     reserveLocations,
     itemNbr,
     upcNbr,
-    exceptionType,
     locToConfirm,
     locationsApi,
     navigation,
@@ -96,19 +107,16 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     // brace style ignored to allow comments to remain.
     // on api success
     if (!locationsApi.isWaiting && locationsApi.result) {
-      const locDetails = (locationsApi.result && locationsApi.result.data);
-      if (locDetails.location) {
-        if (locDetails.location.floor) dispatch(setFloorLocations(locDetails.location.floor));
-        if (locDetails.location.reserve) dispatch(setReserveLocations(locDetails.location.reserve));
-      }
+      getlocationsApiResult(props, locationsApi);
     }
   }, [locationsApi]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
       trackEvent('location_edit_location_click', { location: JSON.stringify(loc), index: locIndex });
-      navigation.navigate('EditLocation', { currentLocation: loc, locIndex });
-    }).catch(() => {});
+      dispatch(setSelectedLocation(loc));
+      navigation.navigate('EditLocation');
+    }).catch(() => { });
   };
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
@@ -121,13 +129,13 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
         locationTypeNbr: loc.typeNbr
       });
       setDisplayConfirmation(true);
-    }).catch(() => {});
+    }).catch(() => { });
   };
 
   const deleteConfirmed = () => {
     dispatch(
       deleteLocation({
-        headers: { itemNbr: itemNbr },
+        headers: { itemNbr },
         upc: upcNbr,
         sectionId: locToConfirm.locationName,
         locationTypeNbr: locToConfirm.locationTypeNbr
@@ -153,7 +161,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     validateSession(navigation, route.name).then(() => {
       trackEvent('location_add_location_click');
       navigation.navigate('AddLocation');
-    }).catch(() => {});
+    }).catch(() => { });
   };
   if (locationsApi.isWaiting) {
     return (
@@ -186,8 +194,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
             <Text style={styles.message}>
               {delAPI.error
                 ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
-                : `${strings('LOCATION.DELETE_CONFIRMATION')}${
-                  locToConfirm.locationName
+                : `${strings('LOCATION.DELETE_CONFIRMATION')}${locToConfirm.locationName
                 }`}
             </Text>
             <View style={styles.buttonContainer}>
@@ -243,8 +250,7 @@ const LocationDetails = (): JSX.Element => {
     floorLocations,
     reserveLocations,
     itemNbr,
-    upcNbr,
-    exceptionType
+    upcNbr
   } = useTypedSelector(state => state.ItemDetailScreen);
   const delAPI = useTypedSelector(state => state.async.deleteLocation);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
@@ -261,7 +267,6 @@ const LocationDetails = (): JSX.Element => {
       reserveLocations={reserveLocations}
       itemNbr={itemNbr}
       upcNbr={upcNbr}
-      exceptionType={exceptionType}
       locToConfirm={locToConfirm}
       locationsApi={locations}
       navigation={navigation}

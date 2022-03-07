@@ -11,7 +11,13 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    paddingLeft: 10
+    paddingLeft: 10,
+    color: COLOR.BLACK
+  },
+  textInputRed: {
+    flex: 1,
+    paddingLeft: 10,
+    color: COLOR.RED
   }
 });
 

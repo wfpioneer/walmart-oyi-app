@@ -12,32 +12,48 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import {
-  LaserPaper, PrintQueueItem, Printer
+  LaserPaper,
+  PrintItemList,
+  PrintLocationList,
+  PrintQueueAPIMultistatus,
+  PrintQueueItem,
+  PrintQueueItemType,
+  Printer
 } from '../../models/Printer';
 import styles from './PrintQueue.styles';
 import { strings } from '../../locales';
-import { setPrintQueue } from '../../state/actions/Print';
-import { printSign } from '../../state/actions/saga';
+import {
+  removeMultipleFromPrintQueueByItemNbr,
+  removeMultipleFromPrintQueueByUpc,
+  setPrintQueue,
+  unsetPrintingLocationLabels
+} from '../../state/actions/Print';
+import { printLocationLabel, printSign } from '../../state/actions/saga';
 import IconButton from '../../components/buttons/IconButton';
 import COLOR from '../../themes/Color';
 import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
 import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
-import { PRINT_SIGN } from '../../state/actions/asyncAPI';
+import { PRINT_LOCATION_LABELS, PRINT_SIGN } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
+import { showSnackBar } from '../../state/actions/SnackBar';
 
 interface HandlePrintProps {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: Route<any>;
   printQueue: PrintQueueItem[];
+  printingLocationLabels: string;
   selectedPrinter: Printer;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
 }
+
 interface PrintQueueScreenProps {
   printQueue: PrintQueueItem[];
   selectedPrinter: Printer;
-  printAPI: AsyncState
+  printAPI: AsyncState;
+  printLabelAPI: AsyncState;
+  printingLocationLabels: string;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: Route<any>;
@@ -73,7 +89,7 @@ export const renderPrintItem = (
 
   return printQueue.map((item, index) => (
     <View
-      key={`${item.itemNbr}-${item.upcNbr}`}
+      key={`${item.itemNbr}-${item.upcNbr}-${item.locationId}`}
       style={[styles.itemContainer, index < printQueue.length - 1 ? styles.itemContainerBorder : {}]}
     >
       <View style={styles.itemDetailsContainer}>
@@ -101,35 +117,119 @@ export const renderPrintItem = (
   ));
 };
 
+// TODO Handle Print All call one API for a single List or Both APIs asynchronously??
 export const handlePrint = (props: HandlePrintProps): void => {
   const {
     validateSessionCall,
     navigation,
     route,
     printQueue,
+    printingLocationLabels,
     selectedPrinter,
     dispatch
   } = props;
+
   validateSessionCall(navigation, route.name).then(() => {
-    const printArray = printQueue.map((printItem: PrintQueueItem) => {
-      const {
-        itemNbr, signQty, paperSize, worklistType
-      } = printItem;
-      return {
-        itemNbr,
-        qty: signQty,
-        // @ts-ignore
-        code: LaserPaper[paperSize],
-        description: paperSize,
-        printerMACAddress: selectedPrinter.id,
-        isPortablePrinter: false,
-        workListTypeCode: worklistType
-      };
-    });
-    dispatch(printSign({
-      printlist: printArray
-    }));
+    if (printingLocationLabels) {
+      const printLocationArray: PrintLocationList[] = printQueue
+        .filter(printLoc => printLoc.itemType !== PrintQueueItemType.ITEM)
+        .map(printLabel => {
+          const { locationId, signQty } = printLabel;
+          return {
+            locationId: locationId ?? 0,
+            qty: signQty,
+            printerMACAddress: selectedPrinter.id
+          };
+        });
+
+      dispatch(printLocationLabel({ printLabelList: printLocationArray }));
+    } else {
+      const printArray: PrintItemList[] = printQueue
+        .filter(printItem => printItem.itemType === PrintQueueItemType.ITEM)
+        .map(printItem => {
+          const {
+            itemNbr, signQty, paperSize, worklistType
+          } = printItem;
+          return {
+            itemNbr: itemNbr ?? 0,
+            qty: signQty,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore needed because typechecking error
+            code: LaserPaper[paperSize],
+            description: paperSize,
+            printerMACAddress: selectedPrinter.id,
+            isPortablePrinter: false,
+            workListTypeCode: worklistType ?? ''
+          };
+        });
+      dispatch(printSign({ printList: printArray }));
+    }
   }).catch(() => {});
+};
+
+export const printItemApiEffect = (
+  printAPI: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean, message: string }>>
+): void => {
+  if (!printAPI.isWaiting && printAPI.result) {
+    if (printAPI.result.status === 207) {
+      const { data } = printAPI.result;
+      const succeededItemNbrs: number[] = [];
+      const succeededUpcs: string[] = [];
+      data.filter((item: PrintQueueAPIMultistatus) => item.completed)
+        .forEach((item: PrintQueueAPIMultistatus) => {
+          if (item.itemNbr) {
+            succeededItemNbrs.push(item.itemNbr);
+          } else {
+            succeededUpcs.push(item.upcNbr);
+          }
+        });
+      dispatch(removeMultipleFromPrintQueueByItemNbr(succeededItemNbrs));
+      dispatch(removeMultipleFromPrintQueueByUpc(succeededUpcs));
+      dispatch(showSnackBar(strings('PRINT.SOME_PRINTS_FAILED'), 2500));
+    } else {
+      dispatch(setPrintQueue([]));
+      navigation.goBack();
+    }
+    return undefined;
+  }
+
+  // on api failure
+  if (!printAPI.isWaiting && printAPI.error) {
+    return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+  }
+
+  // on api submission
+  if (printAPI.isWaiting) {
+    setError({ error: false, message: '' });
+  }
+
+  return undefined;
+};
+
+export const locationLabelsApiEffect = (
+  printLabelAPI: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean, message: string }>>
+): void => {
+  // on api success
+  if (!printLabelAPI.isWaiting && printLabelAPI.result) {
+    // TODO future task only remove print label items from print queue
+    dispatch(setPrintQueue([]));
+    dispatch(showSnackBar(strings('PRINT.LOCATION_SUCCESS'), 3000));
+    navigation.goBack();
+  }
+  // on api failure
+  if (!printLabelAPI.isWaiting && printLabelAPI.error) {
+    setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
+  }
+  // on api submission
+  if (printLabelAPI.isWaiting) {
+    setError({ error: false, message: '' });
+  }
 };
 
 export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
@@ -137,6 +237,8 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
     printQueue,
     selectedPrinter,
     printAPI,
+    printLabelAPI,
+    printingLocationLabels,
     dispatch,
     navigation,
     route,
@@ -153,30 +255,28 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
     // Resets Print api response data when navigating off-screen
     navigation.addListener('beforeRemove', () => {
       dispatch({ type: PRINT_SIGN.RESET });
+      dispatch({ type: PRINT_LOCATION_LABELS.RESET });
+      if (printingLocationLabels) {
+        dispatch(unsetPrintingLocationLabels());
+      }
     });
   }, []);
 
   // Print API (Queue)
-  useEffectHook(() => {
-    // on api success
-    if (!printAPI.isWaiting && printAPI.result) {
-      dispatch(setPrintQueue([]));
-      navigation.goBack();
-      return undefined;
-    }
+  useEffectHook(() => printItemApiEffect(
+    printAPI,
+    dispatch,
+    navigation,
+    setError
+  ), [printAPI]);
 
-    // on api failure
-    if (!printAPI.isWaiting && printAPI.error) {
-      return setError({ error: true, message: strings('PRINT.PRINT_SERVICE_ERROR') });
-    }
-
-    // on api submission
-    if (printAPI.isWaiting) {
-      setError({ error: false, message: '' });
-    }
-
-    return undefined;
-  }, [printAPI]);
+  // Print Label API
+  useEffectHook(() => locationLabelsApiEffect(
+    printLabelAPI,
+    dispatch,
+    navigation,
+    setError
+  ), [printLabelAPI]);
 
   return (printQueue.length === 0
     ? (
@@ -203,7 +303,11 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
           }}
           modalType="Form"
         >
-          <PrintQueueEdit itemIndexToEdit={itemIndexToEdit} setItemIndexToEdit={setItemIndexToEdit} />
+          <PrintQueueEdit
+            itemIndexToEdit={itemIndexToEdit}
+            setItemIndexToEdit={setItemIndexToEdit}
+            printQueue={printQueue}
+          />
         </CustomModalComponent>
         <ScrollView contentContainerStyle={styles.container}>
           <View style={styles.totalCountContainer}>
@@ -244,6 +348,7 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
                 navigation,
                 selectedPrinter,
                 printQueue,
+                printingLocationLabels,
                 route,
                 validateSessionCall
               })}
@@ -257,8 +362,9 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
 };
 
 export const PrintQueue = (): JSX.Element => {
-  const { printQueue, selectedPrinter } = useTypedSelector(state => state.Print);
+  const { printQueue, selectedPrinter, printingLocationLabels } = useTypedSelector(state => state.Print);
   const printAPI = useTypedSelector(state => state.async.printSign);
+  const printLabelAPI = useTypedSelector(state => state.async.printLocationLabels);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -270,6 +376,8 @@ export const PrintQueue = (): JSX.Element => {
       printQueue={printQueue}
       selectedPrinter={selectedPrinter}
       printAPI={printAPI}
+      printLabelAPI={printLabelAPI}
+      printingLocationLabels={printingLocationLabels}
       dispatch={dispatch}
       navigation={navigation}
       route={route}

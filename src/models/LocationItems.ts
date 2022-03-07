@@ -19,12 +19,22 @@ export interface SectionDetailsItem {
   itemNbr: number;
   itemDesc: string;
   price: number;
+  upcNbr: string;
+  locationType: number;
 }
 
 export interface SectionDetailsPallet {
   palletId: number;
   palletCreateTS: string;
-  items: Omit<SectionDetailsItem, 'price'>[];
+  items?: Omit<SectionDetailsItem, 'price'>[];
+}
+
+export interface ReserveDetailsPallet{
+  id: number;
+  createDate: string;
+  expirationDate: string;
+  items: SectionDetailsItem[];
+  statusCode: number;
 }
 
 export interface LocationItem {
@@ -40,6 +50,21 @@ export interface LocationItem {
     id: number;
     name: string;
   };
-  floor: SectionDetailsItem[];
-  reserve: SectionDetailsPallet[];
+  items: { sectionItems: SectionDetailsItem[] };
+  pallets: {
+    palletData: Omit<SectionDetailsPallet, 'items'>[];
+  }
+}
+
+export interface PossibleZone {
+  zoneName: string;
+  description: string;
+}
+
+// eslint-disable-next-line no-shadow
+export enum CREATE_FLOW {
+  CREATE_ZONE = 'CREATE_ZONE',
+  CREATE_AISLE = 'CREATE_AISLE',
+  CREATE_SECTION = 'CREATE_SECTION',
+  NOT_STARTED = 'NOT_STARTED'
 }

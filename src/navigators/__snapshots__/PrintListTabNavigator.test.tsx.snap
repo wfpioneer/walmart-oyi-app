@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrintListTab Navigator Renders the PrintListTab navigator component 1`] = `
+<MaterialTopTabNavigator>
+  <Screen
+    name="PriceSigns"
+    options={
+      Object {
+        "title": "[missing \\"en.PRINT.PRICE_SIGNS\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    name="Locations"
+    options={
+      Object {
+        "title": "[missing \\"en.PRINT.LOCATIONS\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+</MaterialTopTabNavigator>
+`;

@@ -1,184 +1,176 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
-<View
-  style={
+<Context.Provider
+  value={
     Object {
-      "alignItems": "center",
-      "backgroundColor": "#ffffffff",
-      "flexDirection": "row",
-      "justifyContent": "flex-start",
-      "marginBottom": 2,
-      "padding": 15,
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "onStateChange": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
     }
   }
 >
-  <View
-    style={
+  <ReservePalletRow
+    reservePallet={
       Object {
-        "alignItems": "flex-start",
-        "flex": 1,
-        "justifyContent": "space-evenly",
+        "createDate": "2022-01-05T12:04:50.000Z",
+        "expirationDate": "12/31/2022",
+        "id": 1,
+        "items": Array [
+          Object {
+            "itemDesc": "Nature Valley Honey Nut Granola Bars",
+            "itemNbr": 500252,
+            "locationType": 8,
+            "price": 0,
+            "upcNbr": "750500252570",
+          },
+          Object {
+            "itemDesc": "Cabbage",
+            "itemNbr": 123456,
+            "locationType": 8,
+            "price": 0,
+            "upcNbr": "123456000789",
+          },
+        ],
+        "palletCreateTS": "2021-01-01",
+        "palletId": 1,
+        "statusCode": 200,
       }
     }
-  >
-    <Text>
-      [missing "en.LOCATION.PALLET" translation] 1
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "#9e9e9e",
-          "fontSize": 12,
-        }
+    section={
+      Object {
+        "id": 1,
+        "name": "Section 1",
       }
-    >
-      [missing "en.LOCATION.CREATED_ON" translation] 2021-01-01
-    </Text>
-    <View
-      style={
-        Object {
-          "paddingLeft": 15,
-          "paddingTop": 15,
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#616161",
-            "fontSize": 12,
-            "lineHeight": 22,
-          }
-        }
-      >
-        [missing "en.ITEM.ITEM" translation] 500252
-      </Text>
-      <Text>
-        Nature Valley Honey Nut Granola Bars
-      </Text>
-      <Text
-        style={
-          Object {
-            "color": "#9e9e9e",
-            "fontSize": 12,
-          }
-        }
-      >
-        +1 [missing "en.LOCATION.MORE" translation]
-      </Text>
-    </View>
-  </View>
-</View>
+    }
+  />
+</Context.Provider>
 `;
 
 exports[`ReservePalletRow Component Renders a ReservePallet with an item with a long name 1`] = `
-<View
-  style={
+<Context.Provider
+  value={
     Object {
-      "alignItems": "center",
-      "backgroundColor": "#ffffffff",
-      "flexDirection": "row",
-      "justifyContent": "flex-start",
-      "marginBottom": 2,
-      "padding": 15,
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "onStateChange": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
     }
   }
 >
-  <View
-    style={
+  <ReservePalletRow
+    reservePallet={
       Object {
-        "alignItems": "flex-start",
-        "flex": 1,
-        "justifyContent": "space-evenly",
+        "createDate": "2022-01-05T12:04:50.000Z",
+        "expirationDate": "12/31/2022",
+        "id": 1,
+        "items": Array [
+          Object {
+            "itemDesc": "Nature Valley Honey Nut Granola Bars",
+            "itemNbr": 500252,
+            "locationType": 8,
+            "price": 0,
+            "upcNbr": "750500252570",
+          },
+          Object {
+            "itemDesc": "Cabbage",
+            "itemNbr": 123456,
+            "locationType": 8,
+            "price": 0,
+            "upcNbr": "123456000789",
+          },
+          Object {
+            "itemDesc": "An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description",
+            "itemNbr": 980078597,
+            "locationType": 8,
+            "price": 2.4,
+            "upcNbr": "123456789098",
+          },
+        ],
+        "palletCreateTS": "2021-01-01",
+        "palletId": 1,
+        "statusCode": 200,
       }
     }
-  >
-    <Text>
-      [missing "en.LOCATION.PALLET" translation] 1
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "#9e9e9e",
-          "fontSize": 12,
-        }
+    section={
+      Object {
+        "id": 1,
+        "name": "Section 1",
       }
-    >
-      [missing "en.LOCATION.CREATED_ON" translation] 2021-01-01
-    </Text>
-    <View
-      style={
-        Object {
-          "paddingLeft": 15,
-          "paddingTop": 15,
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#616161",
-            "fontSize": 12,
-            "lineHeight": 22,
-          }
-        }
-      >
-        [missing "en.ITEM.ITEM" translation] 500252
-      </Text>
-      <Text>
-        Nature Valley Honey Nut Granola Bars
-      </Text>
-      <Text
-        style={
-          Object {
-            "color": "#9e9e9e",
-            "fontSize": 12,
-          }
-        }
-      >
-        +2 [missing "en.LOCATION.MORE" translation]
-      </Text>
-    </View>
-  </View>
-</View>
+    }
+  />
+</Context.Provider>
 `;
 
 exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = `
-<View
-  style={
+<Context.Provider
+  value={
     Object {
-      "alignItems": "center",
-      "backgroundColor": "#ffffffff",
-      "flexDirection": "row",
-      "justifyContent": "flex-start",
-      "marginBottom": 2,
-      "padding": 15,
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "onStateChange": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
     }
   }
 >
-  <View
-    style={
+  <ReservePalletRow
+    reservePallet={
       Object {
-        "alignItems": "flex-start",
-        "flex": 1,
-        "justifyContent": "space-evenly",
+        "createDate": "2022-01-05T12:04:50.000Z",
+        "expirationDate": "12/31/2022",
+        "id": 1,
+        "items": Array [],
+        "palletCreateTS": "2021-01-01",
+        "palletId": 1,
+        "statusCode": 200,
       }
     }
-  >
-    <Text>
-      [missing "en.LOCATION.PALLET" translation] 1
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "#9e9e9e",
-          "fontSize": 12,
-        }
+    section={
+      Object {
+        "id": 1,
+        "name": "Section 1",
       }
-    >
-      [missing "en.LOCATION.CREATED_ON" translation] 2021-01-01
-    </Text>
-  </View>
-</View>
+    }
+  />
+</Context.Provider>
 `;

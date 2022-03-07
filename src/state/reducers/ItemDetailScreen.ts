@@ -1,13 +1,13 @@
 import {
   ACTION_COMPLETED,
   Actions,
-  ADD_LOCATION_TO_EXISTING,
+  CLEAR_SELECTED_LOCATION,
   DELETE_LOCATION_FROM_EXISTING,
-  EDIT_EXISTING_LOCATION,
   RESET_LOCATIONS,
+  SETUP_SCREEN,
   SET_FLOOR_LOCATIONS,
   SET_RESERVE_LOCATIONS,
-  SETUP_SCREEN,
+  SET_SELECTED_LOCATION, SET_UPC,
   UPDATE_PENDING_OH_QTY
 } from '../actions/ItemDetailScreen';
 import LocationType from '../../models/Location';
@@ -20,6 +20,8 @@ interface ItemDetailsState {
   actionCompleted: boolean;
   floorLocations: Array<LocationType>;
   reserveLocations: Array<LocationType>;
+  selectedLocation: LocationType | null;
+  salesFloor: boolean;
 }
 
 const initialState : ItemDetailsState = {
@@ -29,7 +31,9 @@ const initialState : ItemDetailsState = {
   exceptionType: null,
   actionCompleted: false,
   floorLocations: [],
-  reserveLocations: []
+  reserveLocations: [],
+  selectedLocation: null,
+  salesFloor: false
 };
 
 export const ItemDetailScreen = (
@@ -51,7 +55,9 @@ export const ItemDetailScreen = (
         })),
         exceptionType: action.payload.exceptionType,
         pendingOnHandsQty: action.payload.pendingOHQty,
-        actionCompleted: action.payload.completed
+        actionCompleted: action.payload.completed,
+        selectedLocation: null,
+        salesFloor: action.payload.salesFloor
       };
     case UPDATE_PENDING_OH_QTY:
       return {
@@ -78,86 +84,6 @@ export const ItemDetailScreen = (
           ...loc,
           locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`
         }))
-      };
-    case ADD_LOCATION_TO_EXISTING:
-      if (action.payload.locationArea === 'floor') {
-        const addFloorLocations = [...state.floorLocations];
-        addFloorLocations.push({
-          zoneId: 0,
-          aisleId: 0,
-          sectionId: 0,
-          zoneName: '',
-          aisleName: '',
-          sectionName: '',
-          locationName: action.payload.locationName,
-          type: '',
-          typeNbr: action.payload.locationTypeNbr
-        });
-        return {
-          ...state,
-          floorLocations: addFloorLocations
-        };
-      }
-      if (action.payload.locationArea === 'reserve') {
-        const addReserveLocations = [...state.reserveLocations];
-        addReserveLocations.push({
-          zoneId: 0,
-          aisleId: 0,
-          sectionId: 0,
-          zoneName: '',
-          aisleName: '',
-          sectionName: '',
-          locationName: action.payload.locationName,
-          type: '',
-          typeNbr: action.payload.locationTypeNbr
-        });
-        return {
-          ...state,
-          reserveLocations: addReserveLocations
-        };
-      }
-      return {
-        ...state
-      };
-    case EDIT_EXISTING_LOCATION:
-      if (action.payload.locationArea === 'floor') {
-        const editedLocation = {
-          zoneId: 0,
-          aisleId: 0,
-          sectionId: 0,
-          zoneName: '',
-          aisleName: '',
-          sectionName: '',
-          locationName: action.payload.locationName,
-          type: '',
-          typeNbr: action.payload.locationTypeNbr
-        };
-        const editFloorLocations = [...state.floorLocations].splice(action.payload.locIndex, 1, editedLocation);
-        return {
-          ...state,
-          floorLocations: editFloorLocations
-        };
-      }
-      if (action.payload.locationArea === 'reserve') {
-        const editedLocation = {
-          zoneId: 0,
-          aisleId: 0,
-          sectionId: 0,
-          zoneName: '',
-          aisleName: '',
-          sectionName: '',
-          locationName: action.payload.locationName,
-          type: '',
-          typeNbr: action.payload.locationTypeNbr
-        };
-        const editReserveLocations = [...state.reserveLocations].splice(action.payload.locIndex, 1, editedLocation);
-        return {
-          ...state,
-          reserveLocations: editReserveLocations
-        };
-      }
-      return {
-        ...state
       };
     case DELETE_LOCATION_FROM_EXISTING: {
       const { locIndex } = action.payload;
@@ -186,6 +112,21 @@ export const ItemDetailScreen = (
     }
     case RESET_LOCATIONS:
       return initialState;
+    case SET_SELECTED_LOCATION:
+      return {
+        ...state,
+        selectedLocation: action.payload.location
+      };
+    case CLEAR_SELECTED_LOCATION:
+      return {
+        ...state,
+        selectedLocation: null
+      };
+    case SET_UPC:
+      return {
+        ...state,
+        upcNbr: action.payload.upc
+      };
     default:
       return state;
   }

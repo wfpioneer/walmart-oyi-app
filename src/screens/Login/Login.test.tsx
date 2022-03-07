@@ -42,7 +42,15 @@ const testUser: User = {
   siteId: 1,
   token: 'aFakeToken',
   userId: 'aFakeUserId',
-  features: []
+  features: [],
+  configs: {
+    locationManagement: false,
+    locationManagementEdit: false,
+    palletManagement: false,
+    settingsTool: false,
+    printingUpdate: true,
+    binning: false
+  }
 };
 
 const defaultTestProp: LoginScreenProps = {
@@ -59,7 +67,19 @@ const defaultTestProp: LoginScreenProps = {
     result: {}
   },
   assignFluffyFeatures: jest.fn(),
-  showActivityModal: jest.fn()
+  getClubConfig: jest.fn(),
+  getClubConfigApiState: {
+    isWaiting: false,
+    value: null,
+    error: null,
+    result: null
+  },
+  setConfigs: jest.fn(),
+  showActivityModal: jest.fn(),
+  setLocationLabelPrinter: jest.fn(),
+  setPriceLabelPrinter: jest.fn(),
+  setPalletLabelPrinter: jest.fn(),
+  setPrinterList: jest.fn()
 };
 
 describe('LoginScreen', () => {
@@ -79,7 +99,19 @@ describe('LoginScreen', () => {
         result: {}
       }}
       assignFluffyFeatures={jest.fn}
+      getClubConfig={jest.fn()}
+      getClubConfigApiState={{
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: null
+      }}
+      setConfigs={jest.fn()}
       showActivityModal={jest.fn}
+      setLocationLabelPrinter={jest.fn}
+      setPrinterList={jest.fn}
+      setPalletLabelPrinter={jest.fn}
+      setPriceLabelPrinter={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -100,7 +132,52 @@ describe('LoginScreen', () => {
         result: {}
       }}
       assignFluffyFeatures={jest.fn}
+      getClubConfig={jest.fn()}
+      getClubConfigApiState={{
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: null
+      }}
+      setConfigs={jest.fn()}
       showActivityModal={jest.fn}
+      setLocationLabelPrinter={jest.fn}
+      setPrinterList={jest.fn}
+      setPalletLabelPrinter={jest.fn}
+      setPriceLabelPrinter={jest.fn}
+    />);
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders the Select CountryCode modal when a user logs in as US HomeOffice', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(<LoginScreen
+      loginUser={jest.fn}
+      logoutUser={jest.fn}
+      navigation={navigationProp}
+      hideActivityModal={jest.fn}
+      User={{ ...testUser, countryCode: 'US' }}
+      setEndTime={jest.fn}
+      getFluffyFeatures={jest.fn}
+      fluffyApiState={{
+        isWaiting: false,
+        error: '',
+        result: {}
+      }}
+      assignFluffyFeatures={jest.fn}
+      getClubConfig={jest.fn()}
+      getClubConfigApiState={{
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: null
+      }}
+      setConfigs={jest.fn()}
+      showActivityModal={jest.fn}
+      setLocationLabelPrinter={jest.fn}
+      setPrinterList={jest.fn}
+      setPalletLabelPrinter={jest.fn}
+      setPriceLabelPrinter={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -123,7 +200,19 @@ describe('LoginScreen', () => {
         result: {}
       }}
       assignFluffyFeatures={jest.fn}
+      getClubConfig={jest.fn()}
+      getClubConfigApiState={{
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: null
+      }}
+      setConfigs={jest.fn()}
       showActivityModal={jest.fn}
+      setLocationLabelPrinter={jest.fn}
+      setPrinterList={jest.fn}
+      setPalletLabelPrinter={jest.fn}
+      setPriceLabelPrinter={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -146,7 +235,19 @@ describe('LoginScreen', () => {
         result: {}
       }}
       assignFluffyFeatures={jest.fn}
+      getClubConfig={jest.fn()}
+      getClubConfigApiState={{
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: null
+      }}
+      setConfigs={jest.fn()}
       showActivityModal={jest.fn}
+      setLocationLabelPrinter={jest.fn}
+      setPrinterList={jest.fn}
+      setPalletLabelPrinter={jest.fn}
+      setPriceLabelPrinter={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   }));
@@ -191,5 +292,64 @@ describe('ComponentWillUnmount', () => {
     loginScreen['unsubscribe'] = jest.fn();
     loginScreen.componentWillUnmount();
     expect(loginScreen['unsubscribe']).toHaveBeenCalled();
+  });
+});
+
+describe('ComponentDidUpdate', () => {
+  it('should call getPrinterDetailsFromAsyncStorage when resolved config response has printingUpdate', () => {
+    const props = {
+      ...defaultTestProp,
+      getClubConfigApiState: {
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: {
+          data: {
+            printingUpdate: true
+          }
+        }
+      }
+    };
+    const prevProps = {
+      ...defaultTestProp,
+      getClubConfigApiState: {
+        isWaiting: true,
+        value: null,
+        error: null,
+        result: null
+      }
+    };
+    const loginScreen = new LoginScreen(props);
+    loginScreen.getPrinterDetailsFromAsyncStorage = jest.fn();
+    loginScreen.componentDidUpdate(prevProps);
+    expect(loginScreen.getPrinterDetailsFromAsyncStorage).toHaveBeenCalled();
+  });
+  it('should not call getPrinterDetailsFromAsyncStorage when config response not having printingUpdate', () => {
+    const props = {
+      ...defaultTestProp,
+      getClubConfigApiState: {
+        isWaiting: false,
+        value: null,
+        error: null,
+        result: {
+          data: {
+            printingUpdate: false
+          }
+        }
+      }
+    };
+    const prevProps = {
+      ...defaultTestProp,
+      getClubConfigApiState: {
+        isWaiting: true,
+        value: null,
+        error: null,
+        result: null
+      }
+    };
+    const loginScreen = new LoginScreen(props);
+    loginScreen.getPrinterDetailsFromAsyncStorage = jest.fn();
+    loginScreen.componentDidUpdate(prevProps);
+    expect(loginScreen.getPrinterDetailsFromAsyncStorage).not.toHaveBeenCalled();
   });
 });

@@ -13,64 +13,50 @@ export const mockLocationDetails : LocationItem = {
     id: 1,
     name: 'Section 1'
   },
-  floor: [
-    {
-      itemNbr: 980078597,
-      itemDesc: 'Nature Valley Sweet and Salty Granola Bars',
-      price: 2.40
-    },
-    {
-      itemNbr: 980011111,
-      itemDesc: 'Nature Valley Honey Bars',
-      price: 5.80
-    }
-  ],
-  reserve: [
-    {
-      palletId: 1,
-      palletCreateTS: '2021-01-01',
-      items: [
-        {
-          itemNbr: 500252,
-          itemDesc: 'Nature Valley Honey Nut Granola Bars'
-        },
-        {
-          itemNbr: 123456,
-          itemDesc: 'Cabbage'
-        }
-      ]
-    },
-    {
-      palletId: 123,
-      palletCreateTS: '2021-01-10',
-      items: [
-        {
-          itemNbr: 555555,
-          itemDesc: 'Nature Valley Granola Bars'
-        }
-      ]
-    },
-    {
-      palletId: 456,
-      palletCreateTS: '1999-10-10',
-      items: [
-        {
-          itemNbr: 980012,
-          itemDesc: 'Cabbage'
-        }
-      ]
-    }
-  ]
+  items: {
+    sectionItems: [
+      {
+        itemNbr: 980078597,
+        itemDesc: 'Nature Valley Sweet and Salty Granola Bars',
+        price: 2.40,
+        upcNbr: '123456789098',
+        locationType: 8
+      },
+      {
+        itemNbr: 980011111,
+        itemDesc: 'Nature Valley Honey Bars',
+        price: 5.80,
+        upcNbr: '123456789099',
+        locationType: 8
+      }
+    ]
+  },
+  pallets: {
+    palletData: [
+      {
+        palletId: 1,
+        palletCreateTS: '2021-01-01'
+      },
+      {
+        palletId: 123,
+        palletCreateTS: '2021-01-10'
+      },
+      {
+        palletId: 456,
+        palletCreateTS: '1999-10-10'
+      }
+    ]
+  }
 };
 
 export const mockLocationDetailsEmpty : LocationItem = {
   ...mockLocationDetails,
-  floor: [],
-  reserve: []
+  items: { sectionItems: [] },
+  pallets: { palletData: [] }
 };
 
 export const mockLocationDetailsLargeLocationCount : LocationItem = {
   ...mockLocationDetails,
-  floor: Array.from({ length: 100 }, () => mockLocationDetails.floor[0]),
-  reserve: Array.from({ length: 100 }, () => mockLocationDetails.reserve[0])
+  items: { sectionItems: Array.from({ length: 100 }, () => mockLocationDetails.items.sectionItems[0]) },
+  pallets: { palletData: Array.from({ length: 100 }, () => mockLocationDetails.pallets.palletData[0]) }
 };

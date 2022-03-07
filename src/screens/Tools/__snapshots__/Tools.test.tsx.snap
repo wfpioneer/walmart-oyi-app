@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ToolsScreen Tests rendering the Tools Screen Renders Tools screen 1`] = `
+exports[`ToolsScreen Tests rendering the Tools Screen Renders Tools screen, location management enabled by fluffy 1`] = `
 <View
   style={
     Object {
@@ -20,6 +20,119 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders Tools screen 1`] =
     <mockConstructor
       color="#0071e9"
       name="map-marker-outline"
+      size={28}
+    />
+  </ToolsButton>
+</View>
+`;
+
+exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, Binning enabled by config 1`] = `
+<View
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "center",
+      "marginTop": 4,
+      "paddingTop": 8,
+    }
+  }
+>
+  <ToolsButton
+    destination="Binning"
+    title="[missing \\"en.BINNING.BINNING\\" translation]"
+  >
+    <mockConstructor
+      color="#0071e9"
+      name="login-variant"
+      size={28}
+      style={
+        Object {
+          "transform": Array [
+            Object {
+              "rotate": "270deg",
+            },
+          ],
+        }
+      }
+    />
+  </ToolsButton>
+</View>
+`;
+
+exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, SettingsTool enabled by config 1`] = `
+<View
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "center",
+      "marginTop": 4,
+      "paddingTop": 8,
+    }
+  }
+>
+  <ToolsButton
+    destination="SettingsTool"
+    title="[missing \\"en.SETTINGS.TITLE\\" translation]"
+  >
+    <mockConstructor
+      color="#0071e9"
+      name="cog-outline"
+      size={28}
+    />
+  </ToolsButton>
+</View>
+`;
+
+exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, location management enabled by config 1`] = `
+<View
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "center",
+      "marginTop": 4,
+      "paddingTop": 8,
+    }
+  }
+>
+  <ToolsButton
+    destination="LocationManagement"
+    title="[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]"
+  >
+    <mockConstructor
+      color="#0071e9"
+      name="map-marker-outline"
+      size={28}
+    />
+  </ToolsButton>
+</View>
+`;
+
+exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, pallet management enabled by config 1`] = `
+<View
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "center",
+      "marginTop": 4,
+      "paddingTop": 8,
+    }
+  }
+>
+  <ToolsButton
+    destination="PalletManagement"
+    title="[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]"
+  >
+    <mockConstructor
+      color="#0071e9"
+      name="cube-outline"
       size={28}
     />
   </ToolsButton>

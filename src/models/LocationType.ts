@@ -3,5 +3,5 @@ export enum LocationType {
     ZONE = 'Zones',
     AISLE = 'Aisles',
     SECTION = 'Sections',
-    LOCATION_DETAILS = 'LocationDetails'
+    SECTION_DETAILS = 'SectionDetails'
 }

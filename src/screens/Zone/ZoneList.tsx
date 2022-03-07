@@ -21,38 +21,88 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
 import { strings } from '../../locales';
 import { LocationHeader } from '../../components/locationHeader/LocationHeader';
-import { getAllZones } from '../../state/actions/saga';
+import { getAllZones, getZoneNames } from '../../state/actions/saga';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
-import { hideLocationPopup } from '../../state/actions/Location';
+import { CREATE_FLOW } from '../../models/LocationItems';
+import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
+import { barcodeEmitter } from '../../utils/scannerUtils';
+import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import {
+  hideLocationPopup,
+  setAisles,
+  setAislesToCreate,
+  setCreateFlow,
+  setPossibleZones,
+  setZones
+} from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
+import { CustomModalComponent } from '../Modal/Modal';
+import Button from '../../components/buttons/Button';
 
-const NoZonesMessage = () : JSX.Element => (
+const NoZonesMessage = (): JSX.Element => (
   <View style={styles.noZones}>
     <Text style={styles.noZonesText}>{strings('LOCATION.NO_ZONES_AVAILABLE')}</Text>
   </View>
 );
 
 interface ZoneProps {
-    siteId: number,
-    dispatch: Dispatch<any>,
-    getZoneApi: AsyncState,
-    navigation: NavigationProp<any>,
-    apiStart: number,
-    setApiStart: React.Dispatch<React.SetStateAction<number>>,
-    route: RouteProp<any, string>,
-    useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void,
-    trackEventCall: (eventName: string, params?: any) => void,
-    locationPopupVisible: boolean
+  siteId: number,
+  dispatch: Dispatch<any>,
+  getZoneApi: AsyncState,
+  getZoneNamesApi: AsyncState,
+  isManualScanEnabled: boolean,
+  navigation: NavigationProp<any>,
+  apiStart: number,
+  setApiStart: React.Dispatch<React.SetStateAction<number>>,
+  errorVisible: boolean,
+  setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  isLoading: boolean,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  route: RouteProp<any, string>,
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void,
+  trackEventCall: (eventName: string, params?: any) => void,
+  locationPopupVisible: boolean
 }
+const getZoneErrorModal = (
+  errorVisible: boolean,
+  setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
+): JSX.Element => (
+  <CustomModalComponent
+    isVisible={errorVisible}
+    onClose={() => setErrorVisible(false)}
+    modalType="Error"
+  >
+    <MaterialCommunityIcon name="alert" size={30} color={COLOR.RED_500} style={styles.iconPosition} />
+    <Text style={styles.errorText}>
+      {strings('LOCATION.ZONE_NAME_ERROR')}
+    </Text>
+    <View style={styles.buttonContainer}>
+      <Button
+        style={styles.modalButton}
+        title={strings('GENERICS.CANCEL')}
+        backgroundColor={COLOR.TRACKER_RED}
+        onPress={() => setErrorVisible(false)}
+      />
+      <Button
+        style={styles.modalButton}
+        title={strings('GENERICS.RETRY')}
+        backgroundColor={COLOR.MAIN_THEME_COLOR}
+        onPress={() => dispatch(getZoneNames())}
+      />
+    </View>
+  </CustomModalComponent>
+);
 
-export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
+export const ZoneScreen = (props: ZoneProps): JSX.Element => {
   const {
     siteId,
     getZoneApi,
+    isManualScanEnabled,
     apiStart,
     setApiStart,
     dispatch,
@@ -60,7 +110,12 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
     route,
     useEffectHook,
     trackEventCall,
-    locationPopupVisible
+    locationPopupVisible,
+    getZoneNamesApi,
+    errorVisible,
+    setErrorVisible,
+    isLoading,
+    setIsLoading
   } = props;
 
   // calls the get all zone api
@@ -69,13 +124,31 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
       trackEventCall('get_zones_api_call');
       setApiStart(moment().valueOf());
       dispatch(getAllZones());
-    }).catch(() => {});
+    }).catch(() => { });
   }), [navigation]);
 
+  // scanned event listener
+  useEffectHook(() => {
+    const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused()) {
+        validateSession(navigation, route.name).then(() => {
+          trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
+          dispatch(setScannedEvent(scan));
+          dispatch(setManualScan(false));
+          navigation.navigate('SectionDetails');
+        });
+      }
+    });
+    return () => {
+      scanSubscription.remove();
+    };
+  }, []);
+  // Get Zone Api
   useEffectHook(() => {
     // on api success
     if (!getZoneApi.isWaiting && getZoneApi.result) {
-      trackEventCall('get_zones_success', { duration: moment().valueOf() - apiStart });
+      dispatch(setZones(getZoneApi.result.data));
+      setIsLoading(false);
     }
 
     // on api failure
@@ -84,13 +157,48 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
         errorDetails: getZoneApi.error.message || getZoneApi.error,
         duration: moment().valueOf() - apiStart
       });
+      setIsLoading(false);
+    }
+
+    // on api call
+    if (getZoneApi.isWaiting) {
+      setIsLoading(true);
     }
   }, [getZoneApi]);
+  // Get Zone Names Api
+  useEffectHook(() => {
+    // on api success
+    if (!getZoneNamesApi.isWaiting && getZoneNamesApi.result) {
+      dispatch(setPossibleZones(getZoneNamesApi.result.data));
+      dispatch(setAisles([]));
+      dispatch(setAislesToCreate(0));
+      if (errorVisible) {
+        setErrorVisible(false);
+      }
+      navigation.navigate('AddZone');
+      // Delay loading indicator to prevent screen flicker on navigation.
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 0);
+    }
 
-  if (getZoneApi.isWaiting) {
+    // on api failure
+    if (!getZoneNamesApi.isWaiting && getZoneNamesApi.error) {
+      setIsLoading(false);
+      // Alert Modal
+      setErrorVisible(true);
+    }
+
+    // on api call
+    if (getZoneNamesApi.isWaiting) {
+      setIsLoading(true);
+    }
+  }, [getZoneNamesApi]);
+
+  if (isLoading) {
     return (
       <ActivityIndicator
-        animating={getZoneApi.isWaiting}
+        animating={isLoading}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -116,16 +224,29 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
       </View>
     );
   }
+  const sortZone = (firstItem: any, secondItem: any) => {
+    if (firstItem.zoneName < secondItem.zoneName) {
+      return -1;
+    }
+    if (firstItem.zoneName > secondItem.zoneName) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const getZoneSorted = () => (getZoneApi.result && getZoneApi.result.data
+    && Array.isArray(getZoneApi.result.data) ? getZoneApi.result?.data.sort(sortZone) : []);
 
   return (
     <View>
+      {getZoneErrorModal(errorVisible, setErrorVisible, dispatch)}
+      {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
         details={`${getZoneApi.result?.data.length || 0} ${strings('LOCATION.ZONES')}`}
       />
-
       <FlatList
-        data={getZoneApi.result?.data || []}
+        data={getZoneSorted()}
         renderItem={({ item }) => (
           <LocationItemCard
             location={item.zoneName}
@@ -148,27 +269,38 @@ export const ZoneScreen = (props: ZoneProps) : JSX.Element => {
 };
 
 const ZoneList = (): JSX.Element => {
+  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const siteId = useTypedSelector(state => state.User.siteId);
   const getZoneApi = useTypedSelector(state => state.async.getAllZones);
+  const getZoneNamesApi = useTypedSelector(state => state.async.getZoneNames);
   const location = useTypedSelector(state => state.Location);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [apiStart, setApiStart] = useState(0);
+  const [errorVisible, setErrorVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const route = useRoute();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['22%', '50%'], []);
+  const snapPoints = useMemo(() => ['15%'], []);
 
   useEffect(() => {
-    if (navigation.isFocused()) {
+    if (navigation.isFocused() && bottomSheetModalRef.current) {
       if (location.locationPopupVisible) {
-        bottomSheetModalRef.current?.present();
+        bottomSheetModalRef.current.present();
       } else {
-        bottomSheetModalRef.current?.dismiss();
+        bottomSheetModalRef.current.dismiss();
       }
     }
   }, [location]);
+
+  const handleAddZone = () => {
+    dispatch(hideLocationPopup());
+    bottomSheetModalRef.current?.dismiss();
+    dispatch(setCreateFlow(CREATE_FLOW.CREATE_ZONE));
+    dispatch(getZoneNames());
+  };
 
   return (
     <BottomSheetModalProvider>
@@ -176,12 +308,13 @@ const ZoneList = (): JSX.Element => {
         onPress={() => dispatch(hideLocationPopup())}
         activeOpacity={1}
         disabled={!location.locationPopupVisible}
-        style={styles.container}
+        style={location.locationPopupVisible ? styles.disabledContainer : styles.container}
       >
         <ZoneScreen
           siteId={siteId}
           dispatch={dispatch}
           getZoneApi={getZoneApi}
+          isManualScanEnabled={isManualScanEnabled}
           navigation={navigation}
           route={route}
           useEffectHook={useEffect}
@@ -189,6 +322,11 @@ const ZoneList = (): JSX.Element => {
           setApiStart={setApiStart}
           trackEventCall={trackEvent}
           locationPopupVisible={location.locationPopupVisible}
+          getZoneNamesApi={getZoneNamesApi}
+          errorVisible={errorVisible}
+          setErrorVisible={setErrorVisible}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
         />
       </TouchableOpacity>
       <BottomSheetModal
@@ -201,8 +339,8 @@ const ZoneList = (): JSX.Element => {
         <BottomSheetAddCard
           isManagerOption={true}
           isVisible={true}
-          text={strings('LOCATION.ADD_AREA')}
-          onPress={() => {}}
+          text={strings('LOCATION.ADD_ZONE')}
+          onPress={handleAddZone}
         />
       </BottomSheetModal>
     </BottomSheetModalProvider>

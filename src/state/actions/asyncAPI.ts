@@ -56,3 +56,66 @@ export const getSections = makeAsyncActionCreators(GET_SECTIONS);
 
 export const GET_SECTION_DETAILS = makeAsyncActionTypes('API/GET_SECTION_DETAILS');
 export const getSectionDetails = makeAsyncActionCreators(GET_SECTION_DETAILS);
+
+export const PRINT_LOCATION_LABELS = makeAsyncActionTypes('API/PRINT_LOCATION_LABELS');
+export const printLocationLabels = makeAsyncActionCreators(PRINT_LOCATION_LABELS);
+
+export const ADD_PALLET = makeAsyncActionTypes('API/ADD_PALLET');
+export const addPallet = makeAsyncActionCreators(ADD_PALLET);
+
+export const DELETE_PALLET = makeAsyncActionTypes('API/DELETE_PALLET');
+export const deletePallet = makeAsyncActionCreators(DELETE_PALLET);
+
+export const GET_PALLET_DETAILS = makeAsyncActionTypes('API/GET_PALLET_DETAILS');
+export const getPalletDetails = makeAsyncActionCreators(GET_PALLET_DETAILS);
+
+export const POST_CREATE_AISLES = makeAsyncActionTypes('API/POST_CREATE_AISLES');
+export const postCreateAisles = makeAsyncActionCreators(POST_CREATE_AISLES);
+
+export const CREATE_SECTIONS = makeAsyncActionTypes('API/CREATE_SECTIONS');
+export const createSections = makeAsyncActionCreators(CREATE_SECTIONS);
+
+export const CREATE_ZONE = makeAsyncActionTypes('API/CREATE_ZONE');
+export const createZone = makeAsyncActionCreators(CREATE_ZONE);
+
+export const DELETE_ZONE = makeAsyncActionTypes('API/DELETE_ZONE');
+export const deleteZone = makeAsyncActionCreators(DELETE_ZONE);
+
+export const CLEAR_LOCATION = makeAsyncActionTypes('API/CLEAR_LOCATION');
+export const clearLocation = makeAsyncActionCreators(CLEAR_LOCATION);
+
+export const DELETE_AISLE = makeAsyncActionTypes('API/DELETE_AISLE');
+export const deleteAisle = makeAsyncActionCreators(DELETE_AISLE);
+
+export const REMOVE_SECTION = makeAsyncActionTypes('API/REMOVE_SECTION');
+export const removeSection = makeAsyncActionCreators(REMOVE_SECTION);
+
+export const GET_ZONE_NAMES = makeAsyncActionTypes('API/GET_ZONE_NAMES');
+export const getZoneNames = makeAsyncActionCreators(GET_ZONE_NAMES);
+
+export const GET_CLUB_CONFIG = makeAsyncActionTypes('API/GET_CLUB_CONFIG');
+export const getClubConfig = makeAsyncActionCreators(GET_CLUB_CONFIG);
+
+export const GET_ITEM_DETAIL_UPC = makeAsyncActionTypes('API/GET_ITEM_DETAIL_UPC');
+export const getItemDetailsUPC = makeAsyncActionCreators(GET_ITEM_DETAIL_UPC);
+
+export const ADD_PALLET_UPCS = makeAsyncActionTypes('API/ADD_PALLET_UPCS');
+export const addPalletUPCs = makeAsyncActionCreators(ADD_PALLET_UPCS);
+
+export const UPDATE_PALLET_ITEM_QTY = makeAsyncActionTypes('API/PATCH_PALLET_ITEM_QTY');
+export const updatePalletItemQty = makeAsyncActionCreators(UPDATE_PALLET_ITEM_QTY);
+
+export const DELETE_UPCS = makeAsyncActionTypes('API/DELETE_UPCS');
+export const deleteUpcs = makeAsyncActionCreators(DELETE_UPCS);
+
+export const COMBINE_PALLETS = makeAsyncActionTypes('API/PATCH_COMBINE_PALLETS');
+export const combinePallets = makeAsyncActionCreators(COMBINE_PALLETS);
+
+export const PRINT_PALLET_LABEL = makeAsyncActionTypes('API/PRINT_PALLET_LABEL');
+export const printPalletLabel = makeAsyncActionCreators(PRINT_PALLET_LABEL);
+
+export const CLEAR_PALLET = makeAsyncActionTypes('API/CLEAR_PALLET');
+export const clearPallet = makeAsyncActionCreators(CLEAR_PALLET);
+
+export const GET_PALLET_INFO = makeAsyncActionTypes('API/GET_PALLET_INFO');
+export const getPalletInfo = makeAsyncActionCreators(GET_PALLET_INFO);

@@ -11,5 +11,17 @@ export default interface User {
     loginId: string;
     mailId: string;
   };
-  features: string[]
+  features: string[],
+  configs: Configurations
 }
+
+export interface Configurations {
+  locationManagement: boolean;
+  locationManagementEdit: boolean;
+  palletManagement: boolean;
+  settingsTool: boolean;
+  printingUpdate: boolean;
+  binning: boolean;
+}
+
+export const AVAILABLE_TOOLS = ['location management', 'pallet management', 'picking', 'binning', 'settings tool'];

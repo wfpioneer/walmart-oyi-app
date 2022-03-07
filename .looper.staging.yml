@@ -18,7 +18,7 @@ envs:
       # Cert / Prod
       AIRWATCH_ENV: Prod
       # whether the APK should be built or not
-      BUILD_APP_FLAG: false
+      BUILD_APP_FLAG: true
       # true / false
       DEPLOY_TO_AIRWATCH: false
       # email list where the notification will be sent
@@ -93,53 +93,11 @@ envs:
       projects:
         - rootDir: './'
           type: reactnative
-  # Overrides Global Variable declarations
-  major:
-    variables:
-      # whether the APK should be built or not
-      BUILD_APP_FLAG: true
-      #Versioning vars
-      VERSION_TYPE: 'major'
-  minor:
-    variables:
-      # whether the APK should be built or not
-      BUILD_APP_FLAG: true
-      #Versioning vars
-      VERSION_TYPE: 'minor'
-  patch:
-    variables:
-      # whether the APK should be built or not
-      BUILD_APP_FLAG: true
-      #Versioning vars
-      VERSION_TYPE: 'patch'
-
-  #  aos-variables:
-  #    variables:
-  #      APK_NAME: 'OYI'
-  #      ENV_TYPE: "prod"
 
   aos-tc-variables:
     variables:
       APK_NAME: 'OYI-International'
       ENV_TYPE: "prodint"
-
-#  ios-variables:
-#    variables:
-#      IPA_NAME: "ReactNativeSkeleton"
-#      ENV_TYPE: "prod/prodint/cert/certint/stage/stageint"
-#      PROFILE: "<MOBILEPROVISION_PROFILE>"
-#      PLIST: "<ENTITLEMENTS.FILE_PATH>"
-#      EXPORT_OPTIONS: "EXPORT_OPTIONS.PLIST_FILE_PATH"
-#      INFO_PLIST: "<PROD_INFO.PLIST_FILE_PATH>"
-#      BUNDLE_ID: "${NEXUS_GROUP_ID}"
-#      # Output archive type. Use 'enterprise' for AirWatch. Use 'app-store' for App Store.
-#      ARCHIVE_TYPE: enterprise
-#      # xcode project location, just update the name and leave the rest as it is
-#      XC_PROJECT: "${WORKSPACE}/${iosDir}/<XC_PROJECT_NAME>.xcodeproj"
-#      # Name of your xcode scheme, required for the IPA build & export
-#      XC_SCHEME: <XC_SCHEME>
-#      # optional: config required to perform an xcode export action. Default is "Release"
-#      XCODE_CONFIG: 'Release'
 
 tools:
   jdk: 8
@@ -156,37 +114,15 @@ tools:
   npm: 7.20.6
   sonarscanner: 4.6.2.2472
 
-triggers:
-  - push:
-      ignoreMessage: .*\#nobuild
-  - pr:
-      ignoreMessage: .*\#nobuild
-      call: pr-preparation
-  - manual:
-      name: Build Stage Major Version
-      call: reactnative-build(major)
-  - manual:
-      name: Build Stage Minor Version
-      call: reactnative-build(minor)
-  - manual:
-      name: Build Stage Patch Version
-      call: reactnative-build(patch)
-
 rules:
   - before(build-android):
       - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
       - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_STAGE\" }" >> android/app/src/main/assets/appcenter-config.json'
 
 flows:
-#Overrides RN templates default flow to prevent apk's from building when pushing commits to Development
-  default:
-    - call: npm-install-and-coverage
-    - call: sonar
-#Overrides RN templates default flow to prevent apk's from building when making PR commits.
-  pr-preparation:
-    - call: validate-pr-repository
-    - call: npm-install-and-coverage
-    - call: sonar
   npm-install-and-coverage:
     - npm ci
     - npm run test:coverage
+  sonar:
+    - "(name [sonar]) sonar-scanner -Dproject.settings=sonar-project.properties -Dsonar.branch.name=${GITHUB_PR_SOURCE_BRANCH?${GITHUB_BRANCH_NAME}}"
+    - hygieia.publishSonar

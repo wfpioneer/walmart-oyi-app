@@ -252,7 +252,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
 </View>
 `;
 
-exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Service response   1`] = `
+exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Label Service response   1`] = `
 <ForwardRef(SafeAreaView)
   style={
     Object {
@@ -416,7 +416,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         }
       >
         <Button
-          backgroundColor="#eeeeee"
+          backgroundColor="#0071e9"
           disabled={false}
           height={25}
           onPress={[Function]}
@@ -427,7 +427,411 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
             }
           }
           title="[missing \\"en.PRINT.XSmall\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width={56}
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={25}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+            }
+          }
+          title="[missing \\"en.PRINT.Small\\" translation]"
           titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width={56}
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={25}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+            }
+          }
+          title="[missing \\"en.PRINT.Medium\\" translation]"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width={56}
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={25}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+            }
+          }
+          title="[missing \\"en.PRINT.Large\\" translation]"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width={56}
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <mockConstructor
+          name="printer-check"
+          size={24}
+        />
+        <View
+          style={
+            Object {
+              "marginLeft": 12,
+            }
+          }
+        >
+          <Text>
+            Front desk printer
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#757575",
+                "fontSize": 12,
+              }
+            }
+          >
+            Default
+          </Text>
+        </View>
+      </View>
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={20}
+        onPress={[Function]}
+        radius={5}
+        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={14}
+        titleFontWeight="normal"
+        type={3}
+        width={-1}
+      />
+    </View>
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "elevation": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 20,
+        "paddingHorizontal": 4,
+        "paddingTop": 8,
+      }
+    }
+  >
+    <ActivityIndicator
+      animating={true}
+      color="#0071e9"
+      hidesWhenStopped={true}
+      size="large"
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Pallet Label Service response   1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PRINT.PLEASE_CHOOSE_PORTABLE" translation]
+      </Text>
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={20}
+        onPress={[Function]}
+        radius={5}
+        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={14}
+        titleFontWeight="normal"
+        type={3}
+        width={-1}
+      />
+    </View>
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "elevation": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 20,
+        "paddingHorizontal": 4,
+        "paddingTop": 8,
+      }
+    }
+  >
+    <ActivityIndicator
+      animating={true}
+      color="#0071e9"
+      hidesWhenStopped={true}
+      size="large"
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Sign Service response   1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "paddingHorizontal": 8,
+          "paddingVertical": 16,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "flex": 1,
+            "flexWrap": "wrap",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "lineHeight": 16,
+            "marginHorizontal": 8,
+          }
+        }
+      >
+        Test Item That is Really, Really Long (and has parenthesis)
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 16,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#9e9e9e",
+            "fontSize": 12,
+            "marginVertical": 8,
+          }
+        }
+      >
+        [missing "en.PRINT.COPY_QTY" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 12,
+            "marginTop": 6,
+          }
+        }
+      >
+        <IconButton
+          backgroundColor="#bdbdbd"
+          disabled={false}
+          height={30}
+          icon={
+            <mockConstructor
+              color="#0071e9"
+              name="minus"
+              size={18}
+            />
+          }
+          onPress={[Function]}
+          radius={50}
+          type={2}
+          width={30}
+        />
+        <TextInput
+          allowFontScaling={true}
+          keyboardType="numeric"
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          style={
+            Array [
+              Object {
+                "borderColor": "#0071e9",
+                "borderWidth": 1,
+                "fontSize": 12,
+                "height": 30,
+                "marginHorizontal": 12,
+                "minWidth": "15%",
+                "padding": 6,
+                "textAlign": "center",
+              },
+              Object {
+                "borderColor": "#0071e9",
+              },
+            ]
+          }
+          underlineColorAndroid="transparent"
+        >
+          1
+        </TextInput>
+        <IconButton
+          backgroundColor="#bdbdbd"
+          disabled={false}
+          height={30}
+          icon={
+            <mockConstructor
+              color="#0071e9"
+              name="plus"
+              size={18}
+            />
+          }
+          onPress={[Function]}
+          radius={50}
+          type={2}
+          width={30}
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#9e9e9e",
+            "fontSize": 12,
+            "marginVertical": 8,
+          }
+        }
+      >
+        [missing "en.PRINT.SIGN_SIZE" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "marginVertical": 4,
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={25}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+            }
+          }
+          title="[missing \\"en.PRINT.XSmall\\" translation]"
+          titleColor="#ffffffff"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
@@ -755,7 +1159,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         }
       >
         <Button
-          backgroundColor="#eeeeee"
+          backgroundColor="#0071e9"
           disabled={false}
           height={25}
           onPress={[Function]}
@@ -766,7 +1170,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
             }
           }
           title="[missing \\"en.PRINT.XSmall\\" translation]"
-          titleColor="#000000"
+          titleColor="#ffffffff"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
@@ -1109,7 +1513,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         }
       >
         <Button
-          backgroundColor="#eeeeee"
+          backgroundColor="#0071e9"
           disabled={false}
           height={25}
           onPress={[Function]}
@@ -1120,7 +1524,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
             }
           }
           title="[missing \\"en.PRINT.XSmall\\" translation]"
-          titleColor="#000000"
+          titleColor="#ffffffff"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
@@ -1306,6 +1710,527 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     <Button
       backgroundColor="#0071e9"
       disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 4,
+        }
+      }
+      title="[missing \\"en.PRINT.PRINT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle labels 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "paddingHorizontal": 8,
+          "paddingVertical": 16,
+        }
+      }
+    >
+      <Text>
+        [missing "en.LOCATION.AISLE" translation] yesyes (0 [missing "en.LOCATION.SECTIONS" translation])
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 16,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#9e9e9e",
+            "fontSize": 12,
+            "marginVertical": 8,
+          }
+        }
+      >
+        [missing "en.PRINT.COPY_QTY" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 12,
+            "marginTop": 6,
+          }
+        }
+      >
+        <IconButton
+          backgroundColor="#bdbdbd"
+          disabled={false}
+          height={30}
+          icon={
+            <mockConstructor
+              color="#0071e9"
+              name="minus"
+              size={18}
+            />
+          }
+          onPress={[Function]}
+          radius={50}
+          type={2}
+          width={30}
+        />
+        <TextInput
+          allowFontScaling={true}
+          keyboardType="numeric"
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          style={
+            Array [
+              Object {
+                "borderColor": "#0071e9",
+                "borderWidth": 1,
+                "fontSize": 12,
+                "height": 30,
+                "marginHorizontal": 12,
+                "minWidth": "15%",
+                "padding": 6,
+                "textAlign": "center",
+              },
+              Object {
+                "borderColor": "#b71c1c",
+              },
+            ]
+          }
+          underlineColorAndroid="transparent"
+        >
+          1
+        </TextInput>
+        <IconButton
+          backgroundColor="#bdbdbd"
+          disabled={false}
+          height={30}
+          icon={
+            <mockConstructor
+              color="#0071e9"
+              name="plus"
+              size={18}
+            />
+          }
+          onPress={[Function]}
+          radius={50}
+          type={2}
+          width={30}
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#b71c1c",
+            "fontSize": 10,
+            "marginBottom": 12,
+          }
+        }
+      >
+        [missing "en.ITEM.OH_UPDATE_ERROR" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PRINT.PLEASE_CHOOSE_PORTABLE" translation]
+      </Text>
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={20}
+        onPress={[Function]}
+        radius={5}
+        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={14}
+        titleFontWeight="normal"
+        type={3}
+        width={-1}
+      />
+    </View>
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "elevation": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 20,
+        "paddingHorizontal": 4,
+        "paddingTop": 8,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 4,
+        }
+      }
+      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
+      titleColor="#0071e9"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={2}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 4,
+        }
+      }
+      title="[missing \\"en.PRINT.PRINT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing the pallets 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PRINT.PLEASE_CHOOSE_PORTABLE" translation]
+      </Text>
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={20}
+        onPress={[Function]}
+        radius={5}
+        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={14}
+        titleFontWeight="normal"
+        type={3}
+        width={-1}
+      />
+    </View>
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "elevation": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 20,
+        "paddingHorizontal": 4,
+        "paddingTop": 8,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 4,
+        }
+      }
+      title="[missing \\"en.PRINT.PRINT\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section labels 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "paddingHorizontal": 8,
+          "paddingVertical": 16,
+        }
+      }
+    >
+      <Text>
+        [missing "en.LOCATION.SECTION" translation] yesyes-yes
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 16,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#9e9e9e",
+            "fontSize": 12,
+            "marginVertical": 8,
+          }
+        }
+      >
+        [missing "en.PRINT.COPY_QTY" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 12,
+            "marginTop": 6,
+          }
+        }
+      >
+        <IconButton
+          backgroundColor="#bdbdbd"
+          disabled={false}
+          height={30}
+          icon={
+            <mockConstructor
+              color="#0071e9"
+              name="minus"
+              size={18}
+            />
+          }
+          onPress={[Function]}
+          radius={50}
+          type={2}
+          width={30}
+        />
+        <TextInput
+          allowFontScaling={true}
+          keyboardType="numeric"
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          style={
+            Array [
+              Object {
+                "borderColor": "#0071e9",
+                "borderWidth": 1,
+                "fontSize": 12,
+                "height": 30,
+                "marginHorizontal": 12,
+                "minWidth": "15%",
+                "padding": 6,
+                "textAlign": "center",
+              },
+              Object {
+                "borderColor": "#b71c1c",
+              },
+            ]
+          }
+          underlineColorAndroid="transparent"
+        >
+          1
+        </TextInput>
+        <IconButton
+          backgroundColor="#bdbdbd"
+          disabled={false}
+          height={30}
+          icon={
+            <mockConstructor
+              color="#0071e9"
+              name="plus"
+              size={18}
+            />
+          }
+          onPress={[Function]}
+          radius={50}
+          type={2}
+          width={30}
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#b71c1c",
+            "fontSize": 10,
+            "marginBottom": 12,
+          }
+        }
+      >
+        [missing "en.ITEM.OH_UPDATE_ERROR" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginTop": 8,
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PRINT.PLEASE_CHOOSE_PORTABLE" translation]
+      </Text>
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={20}
+        onPress={[Function]}
+        radius={5}
+        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={14}
+        titleFontWeight="normal"
+        type={3}
+        width={-1}
+      />
+    </View>
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "elevation": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": 20,
+        "paddingHorizontal": 4,
+        "paddingTop": 8,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 4,
+        }
+      }
+      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
+      titleColor="#0071e9"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={2}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
       height={45}
       onPress={[Function]}
       radius={5}

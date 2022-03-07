@@ -1,0 +1,273 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Numeric selector component NumericSelector minus button is disabled if value is less than or equal to minValue 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "marginBottom": 4,
+      },
+      Object {
+        "borderColor": "#e0e0e0",
+      },
+    ]
+  }
+>
+  <IconButton
+    backgroundColor="#0071e9"
+    disabled={true}
+    height={15}
+    icon={
+      <mockConstructor
+        color="#5FA7F2"
+        name="minus"
+        size={18}
+      />
+    }
+    onPress={[MockFunction]}
+    radius={5}
+    type={3}
+    width={35}
+  />
+  <TextInput
+    allowFontScaling={true}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    rejectResponderTermination={true}
+    style={
+      Object {
+        "color": "#0071e9",
+        "height": 40,
+        "minWidth": "15%",
+        "textAlign": "center",
+      }
+    }
+    underlineColorAndroid="transparent"
+    value="10"
+  />
+  <IconButton
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={15}
+    icon={
+      <mockConstructor
+        color="#0071e9"
+        name="plus"
+        size={18}
+      />
+    }
+    onPress={[MockFunction]}
+    radius={5}
+    type={3}
+    width={35}
+  />
+</View>
+`;
+
+exports[`Numeric selector component NumericSelector plus button is disabled if value is greater than or equal to maxValue 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "marginBottom": 4,
+      },
+      Object {
+        "borderColor": "#e0e0e0",
+      },
+    ]
+  }
+>
+  <IconButton
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={15}
+    icon={
+      <mockConstructor
+        color="#0071e9"
+        name="minus"
+        size={18}
+      />
+    }
+    onPress={[MockFunction]}
+    radius={5}
+    type={3}
+    width={35}
+  />
+  <TextInput
+    allowFontScaling={true}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    rejectResponderTermination={true}
+    style={
+      Object {
+        "color": "#0071e9",
+        "height": 40,
+        "minWidth": "15%",
+        "textAlign": "center",
+      }
+    }
+    underlineColorAndroid="transparent"
+    value="10"
+  />
+  <IconButton
+    backgroundColor="#0071e9"
+    disabled={true}
+    height={15}
+    icon={
+      <mockConstructor
+        color="#5FA7F2"
+        name="plus"
+        size={18}
+      />
+    }
+    onPress={[MockFunction]}
+    radius={5}
+    type={3}
+    width={35}
+  />
+</View>
+`;
+
+exports[`Numeric selector component NumericSelector with invalid input 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "marginBottom": 4,
+      },
+      Object {
+        "borderColor": "#b71c1c",
+      },
+    ]
+  }
+>
+  <IconButton
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={15}
+    icon={
+      <mockConstructor
+        color="#0071e9"
+        name="minus"
+        size={18}
+      />
+    }
+    onPress={[MockFunction]}
+    radius={5}
+    type={3}
+    width={35}
+  />
+  <TextInput
+    allowFontScaling={true}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    rejectResponderTermination={true}
+    style={
+      Object {
+        "color": "#0071e9",
+        "height": 40,
+        "minWidth": "15%",
+        "textAlign": "center",
+      }
+    }
+    underlineColorAndroid="transparent"
+    value="10"
+  />
+  <IconButton
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={15}
+    icon={
+      <mockConstructor
+        color="#0071e9"
+        name="plus"
+        size={18}
+      />
+    }
+    onPress={[MockFunction]}
+    radius={5}
+    type={3}
+    width={35}
+  />
+</View>
+`;
+
+exports[`Numeric selector component NumericSelector with valid input 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "marginBottom": 4,
+      },
+      Object {
+        "borderColor": "#e0e0e0",
+      },
+    ]
+  }
+>
+  <IconButton
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={15}
+    icon={
+      <mockConstructor
+        color="#0071e9"
+        name="minus"
+        size={18}
+      />
+    }
+    onPress={[MockFunction]}
+    radius={5}
+    type={3}
+    width={35}
+  />
+  <TextInput
+    allowFontScaling={true}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    rejectResponderTermination={true}
+    style={
+      Object {
+        "color": "#0071e9",
+        "height": 40,
+        "minWidth": "15%",
+        "textAlign": "center",
+      }
+    }
+    underlineColorAndroid="transparent"
+    value="10"
+  />
+  <IconButton
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={15}
+    icon={
+      <mockConstructor
+        color="#0071e9"
+        name="plus"
+        size={18}
+      />
+    }
+    onPress={[MockFunction]}
+    radius={5}
+    type={3}
+    width={35}
+  />
+</View>
+`;

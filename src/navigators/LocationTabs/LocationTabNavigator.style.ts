@@ -15,6 +15,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end'
   },
+  disabledContainer: {
+    width: '100%',
+    flex: 1,
+    justifyContent: 'flex-end',
+    opacity: 0.2
+  },
   clear: {
     color: COLOR.MAIN_THEME_COLOR,
     paddingRight: 14,
@@ -33,8 +39,33 @@ const styles = StyleSheet.create({
     color: COLOR.GREY_600,
     fontSize: 14
   },
-  bottomSheetView: {
+  confirmationView: {
     flexDirection: 'column'
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  errorView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 15
+  },
+  errorButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLOR.RED_300,
+    width: '95%',
+    borderRadius: 4,
+    height: 40,
+    marginVertical: 10
+  },
+  errorText: {
+    fontSize: 16,
+    textAlign: 'center'
   },
   bottomSheetModal: {
     borderColor: COLOR.GREY_200,

@@ -1,3 +1,5 @@
+import { DefaultTheme } from "@react-navigation/native";
+
 export const COLOR = {
   // Ex: BLUE_GREY_900, YELLOW_PRIMARY, GREY_300
   MAIN_THEME_COLOR: '#0071e9',
@@ -68,7 +70,10 @@ export const COLOR = {
   MIDNIGHT: '#323a4e',
   PALE_BLUE: '#dbecff',
   PALE_GRAY: '#edededcc',
-  PINK: '#d938ab'
+  PINK: '#d938ab',
+  YELLOW: '#FFFFE0',
+  //Navigation Colors
+  NAVIGATION_DEFAULT_BACKGROUND: DefaultTheme.colors.background
 };
 
 export default COLOR;

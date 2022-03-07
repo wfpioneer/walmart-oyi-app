@@ -10,14 +10,30 @@ import PrintQueue from '../screens/PrintQueue/PrintQueue';
 import { ChangePrinter } from '../screens/PrintPriceSign/ChangePrinter/ChangePrinter';
 import PrinterList from '../screens/PrintPriceSign/PrinterList/PrinterList';
 import styles from './PrintPriceSignNavigator.styles';
+import { useTypedSelector } from '../state/reducers/RootReducer';
+import PrintListTabs from './PrintListTabNavigator';
 
 const Stack = createStackNavigator();
 
-const PrintPriceSignNavigator = () => {
+const PrintPriceSignNavigator = (): JSX.Element => {
   const navigation = useNavigation();
-
+  const { printingLocationLabels, printingPalletLabel } = useTypedSelector(state => state.Print);
+  const user = useTypedSelector(state => state.User);
+  const isPrintUpdate = user.features.includes('printing update') || user.configs.printingUpdate;
   const navigateBack = () => {
     navigation.goBack();
+  };
+
+  const getHeaderTitle = () => {
+    let title;
+    if (printingLocationLabels) {
+      title = strings('PRINT.LOCATION_TITLE');
+    } else if (printingPalletLabel) {
+      title = strings('PRINT.PALLET_TITLE');
+    } else {
+      title = strings('PRINT.MAIN_TITLE');
+    }
+    return title;
   };
 
   return (
@@ -32,7 +48,7 @@ const PrintPriceSignNavigator = () => {
         name="PrintPriceSignScreen"
         component={PrintPriceSign}
         options={{
-          headerTitle: strings('PRINT.MAIN_TITLE'),
+          headerTitle: getHeaderTitle(),
           headerTitleAlign: 'left',
           headerTitleStyle: styles.headerTitle,
           headerBackTitleVisible: false,
@@ -71,7 +87,7 @@ const PrintPriceSignNavigator = () => {
       />
       <Stack.Screen
         name="PrintQueue"
-        component={PrintQueue}
+        component={isPrintUpdate ? PrintListTabs : PrintQueue}
         options={{
           headerTitle: strings('PRINT.QUEUE_TITLE'),
           headerTitleAlign: 'left',

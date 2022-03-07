@@ -1,5 +1,8 @@
 import 'react-native-gesture-handler/jestSetup';
 import mockRNDeviceInfo from 'react-native-device-info/jest/react-native-device-info-mock';
+import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-native/extend-expect';
+import { cleanup } from '@testing-library/react-native';
 
 jest.mock('react-native-device-info', () => mockRNDeviceInfo);
 jest.mock('react-native-reanimated', () => {
@@ -24,3 +27,8 @@ jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 const moment = jest.requireActual('moment-timezone');
 moment.tz.setDefault('America/Chicago');
 jest.setMock('moment', moment);
+
+// Unmounts React trees that were mounted with the `testing-library's` render method
+afterEach(() => {
+  cleanup();
+});

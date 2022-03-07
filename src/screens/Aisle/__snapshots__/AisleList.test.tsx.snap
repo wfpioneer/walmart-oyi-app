@@ -1,9 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test Aisle List Renders Aisle Screen with Data 1`] = `
+exports[`Aisle List basic render tests Renders Aisle Screen with Data 1`] = `
 <View>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
   <LocationHeader
     details="6 [missing \\"en.LOCATION.AISLES\\" translation]"
+    isDisabled={false}
     location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
   />
   <FlatList
@@ -63,10 +83,30 @@ exports[`Test Aisle List Renders Aisle Screen with Data 1`] = `
 </View>
 `;
 
-exports[`Test Aisle List Renders Aisle Screen with Empty Data 1`] = `
+exports[`Aisle List basic render tests Renders Aisle Screen with no-aisles-message when getAisles response is 204 1`] = `
 <View>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
   <LocationHeader
     details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
+    isDisabled={false}
     location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
   />
   <FlatList
@@ -76,7 +116,7 @@ exports[`Test Aisle List Renders Aisle Screen with Empty Data 1`] = `
         "paddingBottom": 100,
       }
     }
-    data={Object {}}
+    data={Array []}
     disableVirtualization={false}
     horizontal={false}
     initialNumToRender={10}
@@ -93,10 +133,192 @@ exports[`Test Aisle List Renders Aisle Screen with Empty Data 1`] = `
 </View>
 `;
 
-exports[`Test Aisle List Renders Aisle Screen with no-aisles-message when getAisles response is 204 1`] = `
+exports[`Aisle List basic render tests Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
 <View>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
+  <LocationManualScan
+    keyboardType="default"
+  />
   <LocationHeader
     details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
+    isDisabled={false}
+    location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
+  />
+  <FlatList
+    ListEmptyComponent={<NoAisleMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`Aisle List basic render tests renders correctly with remove zone modal after api errors 1`] = `
+<View>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": "timeout",
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
+  <LocationManualScan
+    keyboardType="default"
+  />
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
+    isDisabled={false}
+    location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
+  />
+  <FlatList
+    ListEmptyComponent={<NoAisleMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`Aisle List basic render tests renders correctly with remove zone modal preconfirm 1`] = `
+<View>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
+  <LocationManualScan
+    keyboardType="default"
+  />
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
+    isDisabled={false}
+    location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
+  />
+  <FlatList
+    ListEmptyComponent={<NoAisleMessage />}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 100,
+      }
+    }
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
+
+exports[`Aisle List basic render tests renders correctly with remove zone modal waiting for api 1`] = `
+<View>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": true,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText={null}
+    confirmText={null}
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.LOCATION.REMOVE_ZONE_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1="[missing \\"en.LOCATION.REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS\\" translation]"
+    subtext2={null}
+  />
+  <LocationManualScan
+    keyboardType="default"
+  />
+  <LocationHeader
+    details="0 [missing \\"en.LOCATION.AISLES\\" translation]"
+    isDisabled={false}
     location="[missing \\"en.LOCATION.ZONE\\" translation] Grocery"
   />
   <FlatList

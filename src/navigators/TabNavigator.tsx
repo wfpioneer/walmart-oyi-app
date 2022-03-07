@@ -12,11 +12,21 @@ import { ToolsNavigator } from './ToolsNavigator';
 import { WorklistNavigator } from './WorklistNavigator';
 import { ApprovalListNavigator } from './ApprovalListNavigator';
 import { resetApprovals } from '../state/actions/Approvals';
+import { AVAILABLE_TOOLS, Configurations } from '../models/User';
 
 const Tab = createBottomTabNavigator();
 
+const isToolsEnabled = (userFeatures: string[], configurations: Configurations) => {
+  if (configurations.locationManagement || configurations.palletManagement || configurations.settingsTool) {
+    return true;
+  }
+  const enabledTools = AVAILABLE_TOOLS.filter(feature => userFeatures.includes(feature));
+  return enabledTools.length > 0;
+};
+
 const TabNavigator = (): JSX.Element => {
-  const userFeatures = useTypedSelector(state => state.User.features);
+  // TODO combine userFeatures from both fluffy and config service once it is implemented
+  const user = useTypedSelector(state => state.User);
   const selectedAmount = useTypedSelector(state => state.Approvals.selectedItemQty);
   const dispatch = useDispatch();
   return (
@@ -25,11 +35,14 @@ const TabNavigator = (): JSX.Element => {
         tabBarIcon: ({ color, size }) => {
           if (route.name === strings('HOME.HOME')) {
             return <MaterialIcons name="home" size={size} color={color} />;
-          } if (route.name === strings('WORKLIST.WORKLIST')) {
+          }
+          if (route.name === strings('WORKLIST.WORKLIST')) {
             return <AntDesign name="profile" size={size} color={color} />;
-          } if (route.name === strings('GENERICS.TOOLS')) {
+          }
+          if (route.name === strings('GENERICS.TOOLS')) {
             return <MaterialIcons name="apps" size={size} color={color} />;
-          } if (route.name === strings('APPROVAL.APPROVALS')) {
+          }
+          if (route.name === strings('APPROVAL.APPROVALS')) {
             return <MaterialCommunityIcons name="clipboard-check" size={size} color={color} />;
           }
 
@@ -50,7 +63,7 @@ const TabNavigator = (): JSX.Element => {
         component={WorklistNavigator}
       />
 
-      {userFeatures.includes('location management')
+      {isToolsEnabled(user.features, user.configs)
         && (
         <Tab.Screen
           name={strings('GENERICS.TOOLS')}
@@ -58,7 +71,7 @@ const TabNavigator = (): JSX.Element => {
         />
         )}
 
-      {userFeatures.includes('manager approval')
+      {user.features.includes('manager approval')
         && (
           <Tab.Screen
             name={strings('APPROVAL.APPROVALS')}

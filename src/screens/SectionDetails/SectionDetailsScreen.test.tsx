@@ -1,18 +1,17 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { NavigationProp, Route } from '@react-navigation/native';
-import { SectionDetailsScreen } from './SectionDetailsScreen';
+import { NavigationProp } from '@react-navigation/native';
+import { SectionDetailsScreen, handleEditItem, palletDataToIds } from './SectionDetailsScreen';
 import { AsyncState } from '../../models/AsyncState';
 import {
   mockLocationDetails,
   mockLocationDetailsEmpty,
   mockLocationDetailsLargeLocationCount
 } from '../../mockData/locationDetails';
+import { SectionDetailsItem } from '../../models/LocationItems';
+import { LocationIdName } from '../../state/reducers/Location';
 
 let navigationProp: NavigationProp<any, string>;
-const SECTION_NAME = '1';
-const ZONE_NAME = 'ABAR';
-const AISLE_NAME = '2';
 
 // TODO Adjust Snapshot naming convention Remove on final PR
 describe('Test Location Details Screen', () => {
@@ -23,9 +22,22 @@ describe('Test Location Details Screen', () => {
     result: null
   };
 
-  const defaultRouteProp: Route<any> = {
-    key: '',
-    name: 'FloorDetails'
+  const defaultScannedEvent = {
+    value: '',
+    type: ''
+  };
+
+  const defaultSelectedItem: SectionDetailsItem = {
+    itemNbr: 1234,
+    upcNbr: '123456789',
+    itemDesc: 'test',
+    price: 10.00,
+    locationType: 8
+  };
+
+  const defaultSection: LocationIdName = {
+    id: 1,
+    name: 'test'
   };
 
   describe('Tests rendering location details screen data', () => {
@@ -36,60 +48,21 @@ describe('Test Location Details Screen', () => {
       }
     };
 
-    it('Renders reserve list when reserve tab is selected', () => {
-      const reserveSelectedRouteProp = { ...defaultRouteProp, name: 'ReserveDetails' };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
-          getSectionDetailsApi={sectionDetails}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          route={reserveSelectedRouteProp}
-          trackEventCall={jest.fn()}
-          useEffectHook={jest.fn()}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
     it('Renders Location Details Screen with Mock Floor Items', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
           getSectionDetailsApi={sectionDetails}
+          deleteLocationApi={defaultAsyncState}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          route={defaultRouteProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('Renders Location Details Screen with Mock Reserve Items', () => {
-      const routePropReserve: Route<any> = {
-        key: '',
-        name: 'ReserveDetails'
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
-          getSectionDetailsApi={sectionDetails}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          route={routePropReserve}
-          trackEventCall={jest.fn()}
-          useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
+          displayConfirmation={false}
+          setDisplayConfirmation={jest.fn()}
+          selectedItem={defaultSelectedItem}
+          selectedSection={defaultSection}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -105,15 +78,17 @@ describe('Test Location Details Screen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
           getSectionDetailsApi={sectionDetailsEmpty}
+          deleteLocationApi={defaultAsyncState}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          route={defaultRouteProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
+          displayConfirmation={false}
+          setDisplayConfirmation={jest.fn()}
+          selectedItem={defaultSelectedItem}
+          selectedSection={defaultSection}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -129,15 +104,17 @@ describe('Test Location Details Screen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
           getSectionDetailsApi={sectionDetailsLargeLocationCount}
+          deleteLocationApi={defaultAsyncState}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          route={defaultRouteProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
+          displayConfirmation={false}
+          setDisplayConfirmation={jest.fn()}
+          selectedItem={defaultSelectedItem}
+          selectedSection={defaultSection}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -145,48 +122,157 @@ describe('Test Location Details Screen', () => {
   });
 
   describe('Tests rendering Get Section Details api responses', () => {
-    it('Renders Location Details error message', () => {
-      const getSectionDetailsError: AsyncState = {
+    it('Renders Section Not found when getSectionDetails responds with a 204 status code', () => {
+      const getSectionDetailsEmpty: AsyncState = {
         ...defaultAsyncState,
-        error: 'NetWork Error'
+        result: {
+          data: '',
+          status: 204
+        }
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
-          getSectionDetailsApi={getSectionDetailsError}
+          getSectionDetailsApi={getSectionDetailsEmpty}
+          deleteLocationApi={defaultAsyncState}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          route={defaultRouteProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
+          displayConfirmation={false}
+          setDisplayConfirmation={jest.fn()}
+          selectedItem={defaultSelectedItem}
+          selectedSection={defaultSection}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+
+  describe('test delete api', () => {
+    const sectionDetails: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: mockLocationDetails
+      }
+    };
+    const deleteLocationAPIIsWaiting: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+    const deleteLocationAPIError: AsyncState = {
+      ...defaultAsyncState,
+      error: 'testError'
+    };
+    const deleteLocationAPIComplete: AsyncState = {
+      ...defaultAsyncState,
+      result: 'testResult'
+    };
+
+    it('test delete api is waiting', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <SectionDetailsScreen
+          getSectionDetailsApi={sectionDetails}
+          deleteLocationApi={deleteLocationAPIIsWaiting}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
+          displayConfirmation={true}
+          setDisplayConfirmation={jest.fn()}
+          selectedItem={defaultSelectedItem}
+          selectedSection={defaultSection}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Renders Location Details activity indicator when waiting for an api response', () => {
-      const getSectionDetailsIsWaiting: AsyncState = {
-        ...defaultAsyncState,
-        isWaiting: true
-      };
+    it('test delete api with error', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <SectionDetailsScreen
-          sectionName={SECTION_NAME}
-          zoneName={ZONE_NAME}
-          aisleName={AISLE_NAME}
-          getSectionDetailsApi={getSectionDetailsIsWaiting}
+          getSectionDetailsApi={sectionDetails}
+          deleteLocationApi={deleteLocationAPIError}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          route={defaultRouteProp}
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
+          displayConfirmation={true}
+          setDisplayConfirmation={jest.fn()}
+          selectedItem={defaultSelectedItem}
+          selectedSection={defaultSection}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('test delete api is complete', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <SectionDetailsScreen
+          getSectionDetailsApi={sectionDetails}
+          deleteLocationApi={deleteLocationAPIComplete}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          trackEventCall={jest.fn()}
+          useEffectHook={jest.fn()}
+          scannedEvent={defaultScannedEvent}
+          displayConfirmation={false}
+          setDisplayConfirmation={jest.fn()}
+          selectedItem={defaultSelectedItem}
+          selectedSection={defaultSection}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('tests functions', () => {
+    it('tests handleEditLocation function', () => {
+      const mockDispatch = jest.fn();
+      const mockNavigate = jest.fn();
+      // @ts-expect-error we need to ignore this typescript error as the navigationProp is expecting several properties
+      navigationProp = { navigate: mockNavigate };
+      const mockSelectedItem = {
+        itemNbr: 123,
+        itemDesc: 'test',
+        price: 2.00,
+        upcNbr: '123',
+        locationType: 8
+      };
+      const mockZone = {
+        id: 1,
+        name: 'A'
+      };
+      const mockAisle = {
+        id: 2,
+        name: '1'
+      };
+      const mockSection = {
+        id: 3,
+        name: '1'
+      };
+      handleEditItem(
+        mockSelectedItem,
+        mockDispatch,
+        navigationProp,
+        mockZone,
+        mockAisle,
+        mockSection
+      );
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: 'ITEM_DETAILS_SCREEN/SETUP' }));
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: 'LOCATION/SET_SELECTED_LOCATION' }));
+      expect(mockDispatch).lastCalledWith({ type: 'LOCATION/HIDE_ITEM_POPUP' });
+      expect(mockNavigate).toBeCalledWith('EditLocation');
+    });
+
+    it('tests palletDataToIds function', () => {
+      const palletIds = palletDataToIds(mockLocationDetails.pallets.palletData);
+      const listOfIds = [1, 123, 456];
+      expect(palletIds).toStrictEqual(listOfIds);
     });
   });
 });
