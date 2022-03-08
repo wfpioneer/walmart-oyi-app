@@ -1,6 +1,8 @@
+import { Actions } from '../actions/SessionTimeout';
+
 const initialState = null;
 
-export const SessionTimeout = (state = initialState, action: any) => {
+export const SessionTimeout = (state = initialState, action: Actions): number | null => {
   switch (action.type) {
     case 'SESSION/ENDTIME':
       return action.payload;
@@ -8,5 +10,5 @@ export const SessionTimeout = (state = initialState, action: any) => {
       return initialState;
     default:
       return state;
-  };
+  }
 };
