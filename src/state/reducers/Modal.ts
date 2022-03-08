@@ -11,7 +11,7 @@ interface ModalState {
   showActivity: boolean;
   content: { title: string; text: string };
 }
-const initialState = {
+const initialState: ModalState = {
   showModal: false,
   showActivity: false,
   content: { title: '', text: '' }
