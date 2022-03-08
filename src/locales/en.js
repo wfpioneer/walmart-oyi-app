@@ -364,7 +364,10 @@ export default {
     SCAN_LOCATION: 'Scan location to bin pallet',
     SCAN_LOCATION_PLURAL: 'Scan location to bin pallets',
     SCAN_PALLET: 'Scan a Pallet to begin',
-    SCAN_PALLET_BIN: 'Scan Pallet/s to Bin'
+    SCAN_PALLET_BIN: 'Scan Pallet/s to Bin',
+    PALLET_BIN_SUCCESS: 'Pallets successfully binned',
+    PALLET_BIN_FAILURE: 'Pallets failed to bin',
+    PALLET_BIN_PARTIAL: 'Not all pallets binned, %{number} failed'
   },
   SETTINGS: {
     TITLE: 'Settings'

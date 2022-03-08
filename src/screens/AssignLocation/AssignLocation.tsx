@@ -1,24 +1,140 @@
-import React from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import React, { EffectCallback, useEffect } from 'react';
+import {
+  FlatList, Pressable, Text, View
+} from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import COLOR from '../../themes/Color';
-import { strings } from '../../locales';
-import { PalletInfo } from '../../models/PalletManagementTypes';
-import styles from './AssignLocation.style';
-import { openCamera } from '../../utils/scannerUtils';
+import {
+  NavigationProp, RouteProp, useNavigation, useRoute
+} from '@react-navigation/native';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
+import Toast from 'react-native-toast-message';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { setScannedEvent } from '../../state/actions/Global';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { clearPallets, deletePallet } from '../../state/actions/Binning';
+import { binPallets } from '../../state/actions/saga';
+import { POST_BIN_PALLETS } from '../../state/actions/asyncAPI';
+import { BinningPallet } from '../../models/Binning';
+import { AsyncState } from '../../models/AsyncState';
+import { PostBinPalletsMultistatusResponse } from '../../services/PalletManagement.service';
+import { trackEvent } from '../../utils/AppCenterTool';
+import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { validateSession } from '../../utils/sessionTimeout';
+import { strings } from '../../locales';
+import styles from './AssignLocation.style';
+import COLOR from '../../themes/Color';
 
 interface AssignLocationProps {
-  palletsToBin: PalletInfo[];
+  palletsToBin: BinningPallet[];
   isManualScanEnabled: boolean;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
+  navigation: NavigationProp<any>;
+  route: RouteProp<any, string>;
+  dispatch: Dispatch<any>;
+  scannedEvent: { value?: string; type?: string };
+  binPalletsApi: AsyncState;
 }
 
-export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element => {
-  const { isManualScanEnabled, palletsToBin } = props;
+export const getFailedPallets = (data: PostBinPalletsMultistatusResponse): number[] => data.binSummary
+  .reduce((failIds: number[], currentResponse) => (currentResponse.status === 200
+    ? failIds
+    : [...failIds, currentResponse.palletId]), []);
+
+export const binPalletsApiEffect = (
+  navigation: NavigationProp<any>,
+  binPalletsApi: AsyncState,
+  dispatch: Dispatch<any>
+) => {
+  if (navigation.isFocused()) {
+    if (!binPalletsApi.isWaiting) {
+      dispatch(hideActivityModal());
+      // Success
+      if (binPalletsApi.result) {
+        if (binPalletsApi.result.status === 207) {
+          const failedPallets = getFailedPallets(binPalletsApi.result.data as PostBinPalletsMultistatusResponse);
+          Toast.show({
+            type: 'error',
+            position: 'bottom',
+            text1: strings('BINNING.PALLET_BIN_PARTIAL', { number: failedPallets.length }),
+            visibilityTime: SNACKBAR_TIMEOUT + 1000
+          });
+
+          failedPallets.forEach(palletId => dispatch(deletePallet(palletId)));
+          dispatch({ type: POST_BIN_PALLETS.RESET });
+        } else {
+          Toast.show({
+            type: 'success',
+            position: 'bottom',
+            text1: strings('BINNING.PALLET_BIN_SUCCESS'),
+            visibilityTime: SNACKBAR_TIMEOUT
+          });
+
+          dispatch(clearPallets());
+          dispatch({ type: POST_BIN_PALLETS.RESET });
+          navigation.goBack();
+        }
+      }
+
+      // Fail
+      if (binPalletsApi.error) {
+        Toast.show({
+          position: 'bottom',
+          type: 'error',
+          text1: strings('BINNING.PALLET_BIN_FAILURE'),
+          visibilityTime: SNACKBAR_TIMEOUT
+        });
+        dispatch({ type: POST_BIN_PALLETS.RESET });
+      }
+    } else {
+      dispatch(showActivityModal());
+    }
+  }
+};
+
+export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
+  const {
+    palletsToBin, isManualScanEnabled, useEffectHook,
+    navigation, dispatch, route, scannedEvent, binPalletsApi
+  } = props;
+
+  useEffectHook(() => {
+    if (navigation.isFocused() && scannedEvent.value) {
+      dispatch(binPallets({
+        locationId: scannedEvent.value,
+        pallets: palletsToBin.reduce((palletIds: number[], pallet) => [...palletIds, pallet.id], [])
+      }));
+    }
+  }, [scannedEvent]);
+
+  useEffectHook(() => {
+    const scannerListener = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused()) {
+        validateSession(navigation, route.name).then(() => {
+          trackEvent('bin_location_scanned', {
+            barcode: scan.value,
+            type: scan.type
+          });
+          dispatch(setScannedEvent(scan));
+        });
+      }
+    });
+
+    return () => {
+      scannerListener.remove();
+    };
+  }, []);
+
+  useEffectHook(() => binPalletsApiEffect(
+    navigation,
+    binPalletsApi,
+    dispatch
+  ), [binPalletsApi]);
 
   // TODO Replace with binning pallet card
-  const renderItem = ({ item }: { item: PalletInfo }) => (
+  const renderItem = ({ item }: { item: BinningPallet }) => (
     <View style={{ borderWidth: 1, borderRadius: 3, borderColor: 'black' }}>
       <Text>{item.id}</Text>
     </View>
@@ -44,7 +160,12 @@ export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element =>
 
   return (
     <View style={styles.container}>
-    {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')} />}
+      {isManualScanEnabled && (
+        <ManualScanComponent
+          placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')}
+          keyboardType="default"
+        />
+      )}
       <FlatList
         data={palletsToBin}
         renderItem={renderItem}
@@ -53,18 +174,29 @@ export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element =>
       {scanTextView()}
     </View>
   );
-};
+}
 
-const AssignLocation = (): JSX.Element => {
+function AssignLocation(): JSX.Element {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const dispatch = useDispatch();
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const palletsToBin = useTypedSelector(state => state.Binning.pallets);
+  const scannedEvent = useTypedSelector(state => state.Global.scannedEvent);
+  const binPalletsApi = useTypedSelector(state => state.async.binPallets);
 
   return (
     <AssignLocationScreen
       palletsToBin={palletsToBin}
       isManualScanEnabled={isManualScanEnabled}
+      useEffectHook={useEffect}
+      dispatch={dispatch}
+      navigation={navigation}
+      route={route}
+      scannedEvent={scannedEvent}
+      binPalletsApi={binPalletsApi}
     />
   );
-};
+}
 
 export default AssignLocation;

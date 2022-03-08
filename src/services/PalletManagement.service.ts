@@ -13,8 +13,20 @@ export interface CombinePalletsRequest {
   combinePallets: number[];
 }
 
-export interface getPalletInfoRequest {
+export interface GetPalletInfoRequest {
   palletId: number
+}
+
+export interface PostBinPalletsRequest {
+  locationId: number | string;
+  pallets: number[];
+}
+
+export interface PostBinPalletsMultistatusResponse {
+  binSummary: {
+    palletId: number;
+    status: number;
+  }[];
 }
 
 export default class PalletManagementService {
@@ -30,8 +42,18 @@ export default class PalletManagementService {
     });
   }
 
-  public static getPalletInfo(payload: getPalletInfoRequest): Promise<AxiosResponse<unknown>> {
+  public static getPalletInfo(payload: GetPalletInfoRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.get(`${urls.locationUrl}/pallet`, { palletIds: payload.palletId });
+  }
+
+  public static postBinPallets(payload: PostBinPalletsRequest): Promise<
+    AxiosResponse<unknown | PostBinPalletsMultistatusResponse>
+  > {
+    const urls: Environment = getEnvironment();
+    return Request.post(
+      `${urls.locationUrl}/bin`,
+      payload
+    );
   }
 }

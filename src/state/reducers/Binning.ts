@@ -15,7 +15,19 @@ export interface StateType {
 }
 
 const initialState: StateType = {
-  pallets: [],
+  pallets: [
+    {
+      id: 12595,
+      expirationDate: '',
+      firstItem: {
+        itemDesc: 'pulitzer prize',
+        itemNbr: 435,
+        price: 12.32,
+        quantity: 5,
+        upcNbr: '65432345678'
+      }
+    }
+  ],
   binLocation: null
 };
 

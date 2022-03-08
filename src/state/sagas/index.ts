@@ -66,7 +66,8 @@ const genericSagas = [
   makeAsyncSaga(saga.COMBINE_PALLETS, actions.combinePallets, PalletManagementService.combinePallets),
   makeAsyncSaga(saga.PRINT_PALLET_LABEL, actions.printPalletLabel, PrintService.printPallet),
   makeAsyncSaga(saga.CLEAR_PALLET, actions.clearPallet, DeletePalletService.clearPallet),
-  makeAsyncSaga(saga.GET_PALLET_INFO, actions.getPalletInfo, PalletManagementService.getPalletInfo)
+  makeAsyncSaga(saga.GET_PALLET_INFO, actions.getPalletInfo, PalletManagementService.getPalletInfo),
+  makeAsyncSaga(saga.POST_BIN_PALLETS, actions.binPallets, PalletManagementService.postBinPallets)
 ];
 
 export default function* rootSaga() {

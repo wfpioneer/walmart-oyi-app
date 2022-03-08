@@ -15,12 +15,36 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
     data={
       Array [
         Object {
+          "expirationDate": "today",
+          "firstItem": Object {
+            "itemDesc": "pulitzer prize",
+            "itemNbr": 423,
+            "price": 12.2,
+            "quantity": 4,
+            "upcNbr": "65432",
+          },
           "id": 1,
         },
         Object {
+          "expirationDate": "tomorrow",
+          "firstItem": Object {
+            "itemDesc": "nobel peace",
+            "itemNbr": 45,
+            "price": 12,
+            "quantity": 2,
+            "upcNbr": "765432",
+          },
           "id": 2,
         },
         Object {
+          "expirationDate": "yesterday",
+          "firstItem": Object {
+            "itemDesc": "Newberry",
+            "itemNbr": 5,
+            "price": 12.95,
+            "quantity": 83,
+            "upcNbr": "23456789",
+          },
           "id": 3,
         },
       ]
@@ -85,7 +109,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
   }
 >
   <ManualScanComponent
-    keyboardType="numeric"
+    keyboardType="default"
     placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
   />
   <FlatList

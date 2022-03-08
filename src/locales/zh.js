@@ -362,7 +362,10 @@ export default {
     SCAN_LOCATION: '扫描货架号进行单卡板上架操作',
     SCAN_LOCATION_PLURAL: '扫描货架号进行多卡板上架操作',
     SCAN_PALLET: '扫描卡板号开始上架',
-    SCAN_PALLET_BIN: '扫描卡板号进行上架'
+    SCAN_PALLET_BIN: '扫描卡板号进行上架',
+    PALLET_BIN_SUCCESS: '卡板上架成功',
+    PALLET_BIN_FAILURE: '卡板上架失败',
+    PALLET_BIN_PARTIAL: '部分卡板上架成功，%{number} 失败'
   },
   SETTINGS: {
     TITLE: '设置'
