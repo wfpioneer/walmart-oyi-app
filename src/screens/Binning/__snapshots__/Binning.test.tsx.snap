@@ -62,7 +62,7 @@ exports[`BinningScreen Tests rendering binningItemCard component should match sn
           <mockConstructor
             color="#545F7A"
             name="trash-can"
-            size={40}
+            size={30}
           />
         </View>
       </ForwardRef>

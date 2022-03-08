@@ -10,7 +10,7 @@ describe('Binning Item card render tests', () => {
         palletId={1}
         itemDesc="itemDesc"
         lastLocation="A1-1"
-        canDelete={true}
+        canDelete
         onClick={jest.fn}
         onDelete={jest.fn}
       />
@@ -23,7 +23,7 @@ describe('Binning Item card render tests', () => {
       <BinningItemCard
         palletId={1}
         itemDesc="itemDesc"
-        canDelete={true}
+        canDelete
         onClick={jest.fn}
         onDelete={jest.fn}
       />
@@ -36,7 +36,7 @@ describe('Binning Item card render tests', () => {
       <BinningItemCard
         palletId={1}
         itemDesc=""
-        canDelete={true}
+        canDelete
         onClick={jest.fn}
         onDelete={jest.fn}
       />

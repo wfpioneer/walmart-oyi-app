@@ -38,18 +38,24 @@ export const BinningItemCard = (props: Props): JSX.Element => {
             </View>
             )}
           </View>
-          <View>
-            {itemDesc
-              ? <Text>{`${strings('BINNING.FIRST_ITEM')}: ${itemDesc}`}</Text>
-              : <Text style={styles.emptyPalletMsg}>{`${strings('BINNING.EMPTY_PALLET')}`}</Text>}
-          </View>
+          {itemDesc
+            ? (
+              <View>
+                <Text>{`${strings('BINNING.FIRST_ITEM')}: ${itemDesc}`}</Text>
+              </View>
+            )
+            : (
+              <View>
+                <Text style={styles.emptyPalletMsg}>{`${strings('BINNING.EMPTY_PALLET')}`}</Text>
+              </View>
+            )}
         </View>
         {canDelete
         && (
         <View>
           <TouchableOpacity style={styles.icon} onPress={() => onDelete && onDelete()}>
             <View>
-              <Icon name="trash-can" size={40} color={COLOR.TRACKER_GREY} />
+              <Icon name="trash-can" size={30} color={COLOR.TRACKER_GREY} />
             </View>
           </TouchableOpacity>
         </View>

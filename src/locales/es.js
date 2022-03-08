@@ -365,9 +365,9 @@ export default {
     SCAN_PALLET_BIN: 'Escanear pallet a contenedor',
     WARNING_LABEL: 'Aviso',
     WARNING_DESCRIPTION: 'Si navega afuera de esta pantalla los pallets ya escaneados no se agruparán',
-    LAST_LOC: 'Last Loc',
-    FIRST_ITEM: 'First Item',
-    EMPTY_PALLET: 'empty pallet'
+    LAST_LOC: 'última ubicación',
+    FIRST_ITEM: 'Primer articulo',
+    EMPTY_PALLET: 'Pallet vacía'
   },
   SETTINGS: {
     TITLE: 'Ajustes'

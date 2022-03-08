@@ -369,7 +369,7 @@ export default {
     WARNING_DESCRIPTION: 'If you navigate away from this screen the pallets already scanned will not be binned',
     LAST_LOC: 'Last Loc',
     FIRST_ITEM: 'First Item',
-    EMPTY_PALLET: 'empty pallet'
+    EMPTY_PALLET: 'Empty Pallet'
   },
   SETTINGS: {
     TITLE: 'Settings'

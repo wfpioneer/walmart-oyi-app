@@ -367,7 +367,7 @@ export default {
     SCAN_PALLET_BIN: '扫描卡板号进行上架',
     LAST_LOC: '上一个位置',
     FIRST_ITEM: '第一个item',
-    EMPTY_PALLET: 'empty pallet'
+    EMPTY_PALLET: '空卡板'
   },
   SETTINGS: {
     TITLE: '设置'

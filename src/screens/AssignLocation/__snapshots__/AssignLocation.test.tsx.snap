@@ -15,13 +15,30 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
     data={
       Array [
         Object {
-          "id": 1,
+          "expirationDate": "10/3/2022",
+          "id": 123456,
+          "items": Array [
+            Object {
+              "itemDesc": "itemDesc",
+              "itemNbr": 351231,
+              "price": 123,
+              "quantity": 2,
+              "upcNbr": "12343534",
+            },
+          ],
         },
         Object {
-          "id": 2,
-        },
-        Object {
-          "id": 3,
+          "expirationDate": "10/3/2022",
+          "id": 345345,
+          "items": Array [
+            Object {
+              "itemDesc": "itemDesc",
+              "itemNbr": 351231,
+              "price": 123,
+              "quantity": 2,
+              "upcNbr": "345345",
+            },
+          ],
         },
       ]
     }

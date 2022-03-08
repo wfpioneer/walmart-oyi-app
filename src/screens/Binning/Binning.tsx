@@ -75,7 +75,7 @@ export const binningItemCard = (
       palletId={item.id}
       itemDesc={firstItem ? firstItem.itemDesc : ''}
       lastLocation={item.lastLocation}
-      canDelete={true}
+      canDelete
       onDelete={() => { dispatch(deletePallet(item.id)); }}
       onClick={() => { navigateToPalletManagement(item.id, dispatch, setPalletClicked); }}
     />
@@ -124,8 +124,8 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     if (isMounted.current) {
       if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
-          const alreadyScannedpallet = scannedPallets.filter(item => item.id === parseInt(scannedEvent.value, 10));
-          if (alreadyScannedpallet.length > 0) {
+          const alreadyScannedPallet = scannedPallets.find(item => item.id === parseInt(scannedEvent.value, 10));
+          if (alreadyScannedPallet) {
             Toast.show({
               type: 'info',
               text1: strings('PALLET.PALLET_EXISTS'),
