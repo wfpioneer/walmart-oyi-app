@@ -88,7 +88,7 @@ export interface LoginScreenProps {
   User: User;
   navigation: NavigationProp<any>;
   hideActivityModal: () => void;
-  setEndTime: (sessionEndTime: any) => void;
+  setEndTime: (sessionEndTime: number) => void;
   getFluffyFeatures: (payload: any) => void;
   fluffyApiState: any;
   assignFluffyFeatures: (resultPayload: string[]) => void;
