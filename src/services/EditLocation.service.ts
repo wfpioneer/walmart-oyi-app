@@ -1,9 +1,16 @@
+import { AxiosRequestHeaders } from 'axios';
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
 
 export default class EditLocationService {
-  public static editLocation(payload: {headers: object; upc: string; sectionId: string; newSectionId: string;
-    locationTypeNbr: number; newLocationTypeNbr: number;}) {
+  public static editLocation(payload: {
+    headers?: AxiosRequestHeaders;
+    upc: string;
+    sectionId: string;
+    newSectionId: string;
+    locationTypeNbr: number;
+    newLocationTypeNbr: number;
+  }) {
     const urls: Environment = getEnvironment();
     return Request.put(
       `${urls.orchestrationURL}/location/${payload.sectionId}/${payload.locationTypeNbr}/item/${payload.upc}`,

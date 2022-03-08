@@ -96,7 +96,7 @@ const onValidateSessionCallResponse = (
         sectionId: selectedLocation.locationName,
         newSectionId: loc,
         locationTypeNbr: selectedLocation.typeNbr,
-        newLocationTypeNbr: SALES_FLOOR_LOCATION_TYPE
+        newLocationTypeNbr: Number.parseInt(SALES_FLOOR_LOCATION_TYPE, 10)
       }));
     } else {
       trackEventCall('select_location_edit_duplicate');

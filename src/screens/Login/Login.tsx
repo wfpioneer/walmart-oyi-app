@@ -89,8 +89,8 @@ export interface LoginScreenProps {
   navigation: NavigationProp<any>;
   hideActivityModal: () => void;
   setEndTime: (sessionEndTime: number) => void;
-  getFluffyFeatures: (payload: any) => void;
-  fluffyApiState: any;
+  getFluffyFeatures: (payload: WMSSOUser) => void;
+  fluffyApiState: AsyncState;
   assignFluffyFeatures: (resultPayload: string[]) => void;
   getClubConfig: () => void;
   getClubConfigApiState: AsyncState;
