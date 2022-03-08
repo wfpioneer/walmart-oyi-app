@@ -201,13 +201,13 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
               <Button
                 style={styles.delButton}
                 title={strings('GENERICS.CANCEL')}
-                backgroundColor={COLOR.TRACKER_RED}
+                backgroundColor={COLOR.MAIN_THEME_COLOR}
                 onPress={() => setDisplayConfirmation(false)}
               />
               <Button
                 style={styles.delButton}
                 title={delAPI.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
-                backgroundColor={COLOR.MAIN_THEME_COLOR}
+                backgroundColor={COLOR.TRACKER_RED}
                 onPress={deleteConfirmed}
               />
             </View>

@@ -30,7 +30,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -49,7 +49,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -184,7 +184,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -203,7 +203,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -458,7 +458,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -477,7 +477,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -612,7 +612,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -631,7 +631,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -773,7 +773,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -792,7 +792,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -940,7 +940,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -959,7 +959,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -1114,7 +1114,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
         }
       >
         <Button
-          backgroundColor="#D6512D"
+          backgroundColor="#0071e9"
           disabled={false}
           height={45}
           onPress={[Function]}
@@ -1133,7 +1133,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           width={-1}
         />
         <Button
-          backgroundColor="#0071e9"
+          backgroundColor="#D6512D"
           disabled={false}
           height={45}
           onPress={[Function]}

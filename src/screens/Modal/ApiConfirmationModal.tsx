@@ -65,13 +65,13 @@ const ApiConfirmationModal = (props: ApiConfirmationModalProps): JSX.Element => 
         <Button
           style={styles.delButton}
           title={cancelText ?? strings('GENERICS.CANCEL')}
-          backgroundColor={COLOR.TRACKER_RED}
+          backgroundColor={COLOR.MAIN_THEME_COLOR}
           onPress={() => onClose()}
         />
         <Button
           style={styles.delButton}
           title={api.error ? strings('GENERICS.RETRY') : (confirmText ?? strings('GENERICS.OK'))}
-          backgroundColor={COLOR.MAIN_THEME_COLOR}
+          backgroundColor={COLOR.TRACKER_RED}
           onPress={handleConfirm}
         />
       </View>
