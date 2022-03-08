@@ -36,7 +36,7 @@ interface AssignLocationProps {
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
   dispatch: Dispatch<any>;
-  scannedEvent: { value?: string; type?: string };
+  scannedEvent: { value: string | null; type: string | null };
   binPalletsApi: AsyncState;
 }
 const ItemSeparator = () => <View style={styles.separator} />;

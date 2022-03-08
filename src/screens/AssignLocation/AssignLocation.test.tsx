@@ -18,8 +18,8 @@ const defaultAsyncState: AsyncState = {
 };
 
 const defaultScannedEvent = {
-  type: undefined,
-  value: undefined
+  type: null,
+  value: null
 };
 
 const mockNavigate = jest.fn();
@@ -53,41 +53,6 @@ describe('Assign Location screen render tests', () => {
 
   it('renders screen with items', () => {
     const renderer = ShallowRenderer.createRenderer();
-    /* const testPallets: BinningPallet[] = [
-      {
-        id: 1,
-        expirationDate: 'today',
-        firstItem: {
-          itemDesc: 'pulitzer prize',
-          itemNbr: 423,
-          price: 12.2,
-          quantity: 4,
-          upcNbr: '65432'
-        }
-      },
-      {
-        id: 2,
-        expirationDate: 'tomorrow',
-        firstItem: {
-          itemDesc: 'nobel peace',
-          itemNbr: 45,
-          price: 12,
-          quantity: 2,
-          upcNbr: '765432'
-        }
-      },
-      {
-        id: 3,
-        expirationDate: 'yesterday',
-        firstItem: {
-          itemDesc: 'Newberry',
-          itemNbr: 5,
-          price: 12.95,
-          quantity: 83,
-          upcNbr: '23456789'
-        }
-      }
-    ]; */
 
     renderer.render(<AssignLocationScreen
       palletsToBin={mockPallets}
@@ -100,7 +65,6 @@ describe('Assign Location screen render tests', () => {
       useEffectHook={jest.fn()}
     />);
 
-    // TODO update snapshot after pallet card is added
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
