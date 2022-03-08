@@ -1,14 +1,13 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
 import {
+  Image,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { strings } from '../../locales';
 import styles from './BinningItemCard.style';
-import COLOR from '../../themes/Color';
 
 interface Props {
   palletId: number;
@@ -55,7 +54,9 @@ export const BinningItemCard = (props: Props): JSX.Element => {
         <View>
           <TouchableOpacity style={styles.icon} onPress={() => onDelete && onDelete()}>
             <View>
-              <Icon name="trash-can" size={30} color={COLOR.TRACKER_GREY} />
+              <Image
+                source={require('../../assets/images/trash_can.png')}
+              />
             </View>
           </TouchableOpacity>
         </View>

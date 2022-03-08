@@ -50,8 +50,6 @@ describe('Binning Item card render tests', () => {
         palletId={1}
         itemDesc="itemDesc"
         lastLocation="A1-1"
-        onClick={jest.fn}
-        onDelete={jest.fn}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
