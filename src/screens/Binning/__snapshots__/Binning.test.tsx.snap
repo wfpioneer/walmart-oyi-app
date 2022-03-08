@@ -1,35 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BinningScreen Tests rendering binningItemCard component should match snapshot 1`] = `
-<View>
-  <View>
-    <Text>
-      Id: 123456
-    </Text>
-  </View>
-  <View>
-    <Text>
-      First Item: itemDesc
-    </Text>
-    <ForwardRef
+<ForwardRef
+  onPress={[Function]}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View
       style={
         Object {
-          "paddingBottom": 5,
-          "paddingLeft": 5,
-          "paddingTop": 5,
+          "flex": 4,
+          "flexDirection": "column",
+          "margin": 10,
         }
       }
     >
-      <View>
-        <mockConstructor
-          color="#545F7A"
-          name="trash-can"
-          size={20}
-        />
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginBottom": 5,
+          }
+        }
+      >
+        <View>
+          <Text>
+            [missing "en.PALLET.PALLET_ID" translation]: 123456
+          </Text>
+        </View>
       </View>
-    </ForwardRef>
+      <View>
+        <Text>
+          [missing "en.BINNING.FIRST_ITEM" translation]: itemDesc
+        </Text>
+      </View>
+    </View>
+    <View>
+      <ForwardRef
+        onPress={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 10,
+            "paddingBottom": 5,
+            "paddingLeft": 5,
+            "paddingTop": 5,
+          }
+        }
+      >
+        <View>
+          <Image
+            source=""
+          />
+        </View>
+      </ForwardRef>
+    </View>
   </View>
-</View>
+</ForwardRef>
 `;
 
 exports[`BinningScreen Tests rendering the BinningScreen component Test renders the BinningScreen with Selected Pallets 1`] = `
@@ -193,25 +230,29 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         Array [
           Object {
             "expirationDate": "10/3/2022",
-            "firstItem": Object {
-              "itemDesc": "itemDesc",
-              "itemNbr": 351231,
-              "price": 123,
-              "quantity": 2,
-              "upcNbr": "12343534",
-            },
             "id": 123456,
+            "items": Array [
+              Object {
+                "itemDesc": "itemDesc",
+                "itemNbr": 351231,
+                "price": 123,
+                "quantity": 2,
+                "upcNbr": "12343534",
+              },
+            ],
           },
           Object {
             "expirationDate": "10/3/2022",
-            "firstItem": Object {
-              "itemDesc": "itemDesc",
-              "itemNbr": 351231,
-              "price": 123,
-              "quantity": 2,
-              "upcNbr": "345345",
-            },
             "id": 345345,
+            "items": Array [
+              Object {
+                "itemDesc": "itemDesc",
+                "itemNbr": 351231,
+                "price": 123,
+                "quantity": 2,
+                "upcNbr": "345345",
+              },
+            ],
           },
         ]
       }
@@ -404,25 +445,29 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         Array [
           Object {
             "expirationDate": "10/3/2022",
-            "firstItem": Object {
-              "itemDesc": "itemDesc",
-              "itemNbr": 351231,
-              "price": 123,
-              "quantity": 2,
-              "upcNbr": "12343534",
-            },
             "id": 123456,
+            "items": Array [
+              Object {
+                "itemDesc": "itemDesc",
+                "itemNbr": 351231,
+                "price": 123,
+                "quantity": 2,
+                "upcNbr": "12343534",
+              },
+            ],
           },
           Object {
             "expirationDate": "10/3/2022",
-            "firstItem": Object {
-              "itemDesc": "itemDesc",
-              "itemNbr": 351231,
-              "price": 123,
-              "quantity": 2,
-              "upcNbr": "345345",
-            },
             "id": 345345,
+            "items": Array [
+              Object {
+                "itemDesc": "itemDesc",
+                "itemNbr": 351231,
+                "price": 123,
+                "quantity": 2,
+                "upcNbr": "345345",
+              },
+            ],
           },
         ]
       }
@@ -615,25 +660,29 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         Array [
           Object {
             "expirationDate": "10/3/2022",
-            "firstItem": Object {
-              "itemDesc": "itemDesc",
-              "itemNbr": 351231,
-              "price": 123,
-              "quantity": 2,
-              "upcNbr": "12343534",
-            },
             "id": 123456,
+            "items": Array [
+              Object {
+                "itemDesc": "itemDesc",
+                "itemNbr": 351231,
+                "price": 123,
+                "quantity": 2,
+                "upcNbr": "12343534",
+              },
+            ],
           },
           Object {
             "expirationDate": "10/3/2022",
-            "firstItem": Object {
-              "itemDesc": "itemDesc",
-              "itemNbr": 351231,
-              "price": 123,
-              "quantity": 2,
-              "upcNbr": "345345",
-            },
             "id": 345345,
+            "items": Array [
+              Object {
+                "itemDesc": "itemDesc",
+                "itemNbr": 351231,
+                "price": 123,
+                "quantity": 2,
+                "upcNbr": "345345",
+              },
+            ],
           },
         ]
       }

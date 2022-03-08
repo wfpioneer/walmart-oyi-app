@@ -5,8 +5,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    justifyContent: 'space-between'
   },
   scanView: {
     flexDirection: 'column',
@@ -19,6 +18,11 @@ const styles = StyleSheet.create({
   },
   scanText: {
     fontSize: 20
+  },
+  separator: {
+    backgroundColor: COLOR.GREY_300,
+    height: 1,
+    width: '100%'
   }
 });
 

@@ -1,28 +1,39 @@
 import React from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import {
+  FlatList, Pressable, Text, View
+} from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { head } from 'lodash';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
-import { PalletInfo } from '../../models/PalletManagementTypes';
+import { BinningPallet } from '../../models/Binning';
 import styles from './AssignLocation.style';
 import { openCamera } from '../../utils/scannerUtils';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
 
 interface AssignLocationProps {
-  palletsToBin: PalletInfo[];
+  palletsToBin: BinningPallet[];
   isManualScanEnabled: boolean;
 }
+const ItemSeparator = () => <View style={styles.separator} />;
+
+export const binningItemCardReadOnly = (
+  { item }: { item: BinningPallet },
+) => {
+  const firstItem = head(item.items);
+  return (
+    <BinningItemCard
+      palletId={item.id}
+      itemDesc={firstItem ? firstItem.itemDesc : ''}
+      lastLocation={item.lastLocation}
+    />
+  );
+};
 
 export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element => {
   const { isManualScanEnabled, palletsToBin } = props;
-
-  // TODO Replace with binning pallet card
-  const renderItem = ({ item }: { item: PalletInfo }) => (
-    <View style={{ borderWidth: 1, borderRadius: 3, borderColor: 'black' }}>
-      <Text>{item.id}</Text>
-    </View>
-  );
 
   const scanTextView = () => (
     <View style={styles.scanView}>
@@ -44,10 +55,12 @@ export const AssignLocationScreen = (props: AssignLocationProps): JSX.Element =>
 
   return (
     <View style={styles.container}>
-    {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')} />}
+      {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')} />}
       <FlatList
         data={palletsToBin}
-        renderItem={renderItem}
+        renderItem={item => binningItemCardReadOnly(item)}
+        removeClippedSubviews={false}
+        ItemSeparatorComponent={ItemSeparator}
         keyExtractor={(item, index) => `${item.id}-${index}`}
       />
       {scanTextView()}
