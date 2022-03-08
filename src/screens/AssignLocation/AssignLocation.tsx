@@ -103,7 +103,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   useEffectHook(() => {
     if (navigation.isFocused() && scannedEvent.value) {
       dispatch(binPallets({
-        locationId: scannedEvent.value,
+        location: scannedEvent.value,
         pallets: palletsToBin.reduce((palletIds: number[], pallet) => [...palletIds, pallet.id], [])
       }));
     }

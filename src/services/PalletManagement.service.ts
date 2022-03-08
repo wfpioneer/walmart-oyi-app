@@ -18,7 +18,7 @@ export interface GetPalletInfoRequest {
 }
 
 export interface PostBinPalletsRequest {
-  locationId: number | string;
+  location: number | string;
   pallets: number[];
 }
 
