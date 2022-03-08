@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
-  BinningNavigatorStack, renderScanButton
+  BinningNavigatorStack, renderScanButton, resetManualScan
 } from './BinningNavigator';
 
 describe('Binning Navigator', () => {
@@ -11,6 +11,7 @@ describe('Binning Navigator', () => {
       <BinningNavigatorStack
         isManualScanEnabled={false}
         dispatch={jest.fn}
+        managePalletMenu={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -21,5 +22,11 @@ describe('Binning Navigator', () => {
       renderScanButton(jest.fn(), false)
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Expects dispatch to be called if isManualScanEnabled is true for "resetManualScan()"', () => {
+    const mockDispatch = jest.fn();
+    const manualScanEnabled = true;
+    resetManualScan(manualScanEnabled, mockDispatch);
+    expect(mockDispatch).toHaveBeenCalled();
   });
 });

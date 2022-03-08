@@ -367,7 +367,12 @@ export default {
     SCAN_PALLET_BIN: 'Scan Pallet/s to Bin',
     PALLET_BIN_SUCCESS: 'Pallets successfully binned',
     PALLET_BIN_FAILURE: 'Pallets failed to bin',
-    PALLET_BIN_PARTIAL: 'Not all pallets binned, %{number} failed'
+    PALLET_BIN_PARTIAL: 'Not all pallets binned, %{number} failed',
+    WARNING_LABEL: 'Warning',
+    WARNING_DESCRIPTION: 'If you navigate away from this screen the pallets already scanned will not be binned',
+    LAST_LOC: 'Last Loc',
+    FIRST_ITEM: 'First Item',
+    EMPTY_PALLET: 'Empty Pallet'
   },
   SETTINGS: {
     TITLE: 'Settings'

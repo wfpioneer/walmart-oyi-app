@@ -14,7 +14,9 @@ export interface CombinePalletsRequest {
 }
 
 export interface GetPalletInfoRequest {
-  palletId: number
+  palletIds: number[],
+  isAllItems?: boolean,
+  isSummary?: boolean
 }
 
 export interface PostBinPalletsRequest {
@@ -44,7 +46,13 @@ export default class PalletManagementService {
 
   public static getPalletInfo(payload: GetPalletInfoRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
-    return Request.get(`${urls.locationUrl}/pallet`, { palletIds: payload.palletId });
+    const allItems = payload.isAllItems || false;
+    const summaryDetails = payload.isSummary || false;
+    return Request.get(`${urls.locationUrl}/pallet`, {
+      palletIds: payload.palletIds.join(),
+      allItems,
+      summaryDetails
+    });
   }
 
   public static postBinPallets(payload: PostBinPalletsRequest): Promise<

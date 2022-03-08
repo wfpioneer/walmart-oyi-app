@@ -9,6 +9,7 @@ import {
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
+import { head } from 'lodash';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { setScannedEvent } from '../../state/actions/Global';
@@ -26,6 +27,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { strings } from '../../locales';
 import styles from './AssignLocation.style';
 import COLOR from '../../themes/Color';
+import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
 
 interface AssignLocationProps {
   palletsToBin: BinningPallet[];
@@ -37,6 +39,20 @@ interface AssignLocationProps {
   scannedEvent: { value?: string; type?: string };
   binPalletsApi: AsyncState;
 }
+const ItemSeparator = () => <View style={styles.separator} />;
+
+export const binningItemCardReadOnly = (
+  { item }: { item: BinningPallet },
+) => {
+  const firstItem = head(item.items);
+  return (
+    <BinningItemCard
+      palletId={item.id}
+      itemDesc={firstItem ? firstItem.itemDesc : ''}
+      lastLocation={item.lastLocation}
+    />
+  );
+};
 
 export const getFailedPallets = (data: PostBinPalletsMultistatusResponse): number[] => data.binSummary
   .reduce((failIds: number[], currentResponse) => (currentResponse.status === 200
@@ -133,13 +149,6 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     dispatch
   ), [binPalletsApi]);
 
-  // TODO Replace with binning pallet card
-  const renderItem = ({ item }: { item: BinningPallet }) => (
-    <View style={{ borderWidth: 1, borderRadius: 3, borderColor: 'black' }}>
-      <Text>{item.id}</Text>
-    </View>
-  );
-
   const scanTextView = () => (
     <View style={styles.scanView}>
       {/* TODO make dev only? */}
@@ -168,7 +177,9 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
       )}
       <FlatList
         data={palletsToBin}
-        renderItem={renderItem}
+        renderItem={item => binningItemCardReadOnly(item)}
+        removeClippedSubviews={false}
+        ItemSeparatorComponent={ItemSeparator}
         keyExtractor={(item, index) => `${item.id}-${index}`}
       />
       {scanTextView()}

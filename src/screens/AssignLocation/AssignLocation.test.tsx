@@ -8,6 +8,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { AssignLocationScreen, binPalletsApiEffect, getFailedPallets } from './AssignLocation';
 import { CLEAR_PALLETS, DELETE_PALLET } from '../../state/actions/Binning';
 import { BinningPallet } from '../../models/Binning';
+import { mockPallets } from '../../mockData/binning';
 
 const defaultAsyncState: AsyncState = {
   error: null,
@@ -52,7 +53,7 @@ describe('Assign Location screen render tests', () => {
 
   it('renders screen with items', () => {
     const renderer = ShallowRenderer.createRenderer();
-    const testPallets: BinningPallet[] = [
+    /* const testPallets: BinningPallet[] = [
       {
         id: 1,
         expirationDate: 'today',
@@ -86,10 +87,10 @@ describe('Assign Location screen render tests', () => {
           upcNbr: '23456789'
         }
       }
-    ];
+    ]; */
 
     renderer.render(<AssignLocationScreen
-      palletsToBin={testPallets}
+      palletsToBin={mockPallets}
       isManualScanEnabled={false}
       binPalletsApi={defaultAsyncState}
       dispatch={jest.fn()}

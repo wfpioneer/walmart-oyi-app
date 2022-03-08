@@ -4,7 +4,6 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
 <View
   style={
     Object {
-      "alignItems": "center",
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -12,40 +11,34 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
   }
 >
   <FlatList
+    ItemSeparatorComponent={[Function]}
     data={
       Array [
         Object {
-          "expirationDate": "today",
-          "firstItem": Object {
-            "itemDesc": "pulitzer prize",
-            "itemNbr": 423,
-            "price": 12.2,
-            "quantity": 4,
-            "upcNbr": "65432",
-          },
-          "id": 1,
+          "expirationDate": "10/3/2022",
+          "id": 123456,
+          "items": Array [
+            Object {
+              "itemDesc": "itemDesc",
+              "itemNbr": 351231,
+              "price": 123,
+              "quantity": 2,
+              "upcNbr": "12343534",
+            },
+          ],
         },
         Object {
-          "expirationDate": "tomorrow",
-          "firstItem": Object {
-            "itemDesc": "nobel peace",
-            "itemNbr": 45,
-            "price": 12,
-            "quantity": 2,
-            "upcNbr": "765432",
-          },
-          "id": 2,
-        },
-        Object {
-          "expirationDate": "yesterday",
-          "firstItem": Object {
-            "itemDesc": "Newberry",
-            "itemNbr": 5,
-            "price": 12.95,
-            "quantity": 83,
-            "upcNbr": "23456789",
-          },
-          "id": 3,
+          "expirationDate": "10/3/2022",
+          "id": 345345,
+          "items": Array [
+            Object {
+              "itemDesc": "itemDesc",
+              "itemNbr": 351231,
+              "price": 123,
+              "quantity": 2,
+              "upcNbr": "345345",
+            },
+          ],
         },
       ]
     }
@@ -101,7 +94,6 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
 <View
   style={
     Object {
-      "alignItems": "center",
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -113,6 +105,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
     placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
   />
   <FlatList
+    ItemSeparatorComponent={[Function]}
     data={Array []}
     disableVirtualization={false}
     horizontal={false}
@@ -166,7 +159,6 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
 <View
   style={
     Object {
-      "alignItems": "center",
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -174,6 +166,7 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
   }
 >
   <FlatList
+    ItemSeparatorComponent={[Function]}
     data={Array []}
     disableVirtualization={false}
     horizontal={false}

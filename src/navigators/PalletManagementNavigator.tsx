@@ -41,7 +41,7 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
-const renderManagePalletKebabButton = (managePalletMenu: boolean, dispatch: Dispatch<any>) => (
+export const renderManagePalletKebabButton = (managePalletMenu: boolean, dispatch: Dispatch<any>) => (
   <TouchableOpacity onPress={() => {
     dispatch(showManagePalletMenu(!managePalletMenu));
     trackEvent('pallet_menu_button_click');
