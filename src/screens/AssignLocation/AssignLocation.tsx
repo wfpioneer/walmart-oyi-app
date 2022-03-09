@@ -28,6 +28,7 @@ import { strings } from '../../locales';
 import styles from './AssignLocation.style';
 import COLOR from '../../themes/Color';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
+import { removeCheckDigit, removeLeadingZero } from '../../utils/barcodeUtils';
 
 interface AssignLocationProps {
   palletsToBin: BinningPallet[];
@@ -118,8 +119,13 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
 
   useEffectHook(() => {
     if (navigation.isFocused() && scannedEvent.value) {
+      let searchValue: string = scannedEvent.value;
+      if (scannedEvent.type === 'LABEL-TYPE-UPCA') {
+        searchValue = removeCheckDigit(searchValue);
+        searchValue = removeLeadingZero(searchValue);
+      }
       dispatch(binPallets({
-        location: scannedEvent.value,
+        location: searchValue,
         pallets: palletsToBin.reduce((palletIds: number[], pallet) => [...palletIds, pallet.id], [])
       }));
     }
