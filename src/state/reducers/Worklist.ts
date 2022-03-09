@@ -1,4 +1,5 @@
 import {
+  Actions,
   CLEAR_FILTER,
   TOGGLE_CATEGORIES,
   TOGGLE_EXCEPTIONS,
@@ -15,7 +16,7 @@ const initialState = {
   filterExceptions: []
 };
 
-export const worklist = (state = initialState, action: any) => {
+export const worklist = (state = initialState, action: Actions) => {
   switch (action.type) {
     case TOGGLE_MENU:
       return {
