@@ -36,7 +36,7 @@ exports[`Api Confirmation Modal render tests does not show when isVisible is set
     }
   >
     <Button
-      backgroundColor="#D6512D"
+      backgroundColor="#0071e9"
       disabled={false}
       height={45}
       onPress={[Function]}
@@ -55,7 +55,7 @@ exports[`Api Confirmation Modal render tests does not show when isVisible is set
       width={-1}
     />
     <Button
-      backgroundColor="#0071e9"
+      backgroundColor="#D6512D"
       disabled={false}
       height={45}
       onPress={[MockFunction]}
@@ -123,7 +123,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
     }
   >
     <Button
-      backgroundColor="#D6512D"
+      backgroundColor="#0071e9"
       disabled={false}
       height={45}
       onPress={[Function]}
@@ -142,7 +142,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
       width={-1}
     />
     <Button
-      backgroundColor="#0071e9"
+      backgroundColor="#D6512D"
       disabled={false}
       height={45}
       onPress={[MockFunction]}
@@ -214,7 +214,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
     }
   >
     <Button
-      backgroundColor="#D6512D"
+      backgroundColor="#0071e9"
       disabled={false}
       height={45}
       onPress={[Function]}
@@ -233,7 +233,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
       width={-1}
     />
     <Button
-      backgroundColor="#0071e9"
+      backgroundColor="#D6512D"
       disabled={false}
       height={45}
       onPress={[MockFunction]}
@@ -305,7 +305,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
     }
   >
     <Button
-      backgroundColor="#D6512D"
+      backgroundColor="#0071e9"
       disabled={false}
       height={45}
       onPress={[Function]}
@@ -324,7 +324,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       width={-1}
     />
     <Button
-      backgroundColor="#0071e9"
+      backgroundColor="#D6512D"
       disabled={false}
       height={45}
       onPress={[MockFunction]}
@@ -396,7 +396,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
     }
   >
     <Button
-      backgroundColor="#D6512D"
+      backgroundColor="#0071e9"
       disabled={false}
       height={45}
       onPress={[Function]}
@@ -415,7 +415,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       width={-1}
     />
     <Button
-      backgroundColor="#0071e9"
+      backgroundColor="#D6512D"
       disabled={false}
       height={45}
       onPress={[MockFunction]}
@@ -499,7 +499,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
     }
   >
     <Button
-      backgroundColor="#D6512D"
+      backgroundColor="#0071e9"
       disabled={false}
       height={45}
       onPress={[Function]}
@@ -518,7 +518,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       width={-1}
     />
     <Button
-      backgroundColor="#0071e9"
+      backgroundColor="#D6512D"
       disabled={false}
       height={45}
       onPress={[MockFunction]}
@@ -590,7 +590,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
     }
   >
     <Button
-      backgroundColor="#D6512D"
+      backgroundColor="#0071e9"
       disabled={false}
       height={45}
       onPress={[Function]}
@@ -609,7 +609,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       width={-1}
     />
     <Button
-      backgroundColor="#0071e9"
+      backgroundColor="#D6512D"
       disabled={false}
       height={45}
       onPress={[MockFunction]}
@@ -667,7 +667,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the the api 
     }
   >
     <Button
-      backgroundColor="#D6512D"
+      backgroundColor="#0071e9"
       disabled={false}
       height={45}
       onPress={[Function]}
@@ -686,7 +686,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the the api 
       width={-1}
     />
     <Button
-      backgroundColor="#0071e9"
+      backgroundColor="#D6512D"
       disabled={false}
       height={45}
       onPress={[MockFunction]}
