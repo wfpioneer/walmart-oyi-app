@@ -366,7 +366,10 @@ export default {
     SCAN_PALLET: 'Scan a Pallet to begin',
     SCAN_PALLET_BIN: 'Scan Pallet/s to Bin',
     WARNING_LABEL: 'Warning',
-    WARNING_DESCRIPTION: 'If you navigate away from this screen the pallets already scanned will not be binned'
+    WARNING_DESCRIPTION: 'If you navigate away from this screen the pallets already scanned will not be binned',
+    LAST_LOC: 'Last Loc',
+    FIRST_ITEM: 'First Item',
+    EMPTY_PALLET: 'Empty Pallet'
   },
   SETTINGS: {
     TITLE: 'Settings'
