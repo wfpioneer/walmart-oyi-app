@@ -264,13 +264,14 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
           <Button
             style={styles.buttonAlign}
             title={strings('GENERICS.CANCEL')}
-            backgroundColor={COLOR.MAIN_THEME_COLOR}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            type={Button.Type.SOLID_WHITE}
             onPress={() => setDisplayWarningModal(false)}
           />
           <Button
             style={styles.buttonAlign}
             title={strings('GENERICS.OK')}
-            backgroundColor={COLOR.TRACKER_RED}
+            type={Button.Type.PRIMARY}
             onPress={backConfirmed}
           />
         </View>
