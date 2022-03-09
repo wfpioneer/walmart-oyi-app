@@ -9,6 +9,7 @@ import {
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR,
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC,
   SET_LOCATION_LABEL_PRINTER,
+  SET_LOCATION_PRINT_QUEUE,
   SET_PALLET_LABEL_PRINTER,
   SET_PRICE_LABEL_PRINTER,
   SET_PRINTER_LIST,
@@ -115,12 +116,10 @@ export const Print = (state = initialState, action: Actions): StateType => {
       };
     case ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE:
       // eslint-disable-next-line no-case-declarations
-      const newLocationPrintQueue: PrintQueueItem[] = printQueue.concat(action.payload);
+      const newLocationPrintQueue: PrintQueueItem[] = locationPrintQueue.concat(action.payload);
       return {
         ...state,
-        locationPrintQueue: newLocationPrintQueue,
-        // TODO: This needs to removed once PrintQueue component got integrated with new redux state.
-        printQueue: newLocationPrintQueue
+        locationPrintQueue: newLocationPrintQueue
       };
     case REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR: {
       const newQueue: PrintQueueItem[] = [];
@@ -181,6 +180,11 @@ export const Print = (state = initialState, action: Actions): StateType => {
       return {
         ...state,
         locationPrintQueue: initialState.locationPrintQueue
+      };
+    case SET_LOCATION_PRINT_QUEUE:
+      return {
+        ...state,
+        locationPrintQueue: action.payload
       };
     case SET_PRICE_LABEL_PRINTER:
       return {

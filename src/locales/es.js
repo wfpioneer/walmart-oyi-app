@@ -156,7 +156,8 @@ export default {
     PALLET_LABEL_PRINTER: 'Impresora de etiquetas de pallet',
     LOCATION_PRINTING: 'Impresión de Ubicaciones',
     PRICE_SIGNS: 'Señalización Precios',
-    LOCATIONS: 'Ubicaciones'
+    LOCATIONS: 'Ubicaciones',
+    PRICE_SIGN_SUCCESS: 'Etiqueta de señal de precio impresa correctamente' // TODO Spanish translations (This is google translated in the same format as PALLET_SUCCESS)
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -356,7 +357,17 @@ export default {
     PICKING: 'Pickeo'
   },
   BINNING: {
-    BINNING: 'Bodega'
+    BINNING: 'Bodega',
+    ASSIGN_LOCATION: 'Agrega la ubicación',
+    SCAN_LOCATION: 'Escanea la ubicación para ingresar a bodega el pallet',
+    SCAN_LOCATION_PLURAL: 'Escanea la ubicación para ingresar a bodega los pallets',
+    SCAN_PALLET: 'Escanear el pallet para comenzar',
+    SCAN_PALLET_BIN: 'Escanear pallet a contenedor',
+    WARNING_LABEL: 'Aviso',
+    WARNING_DESCRIPTION: 'Si navega afuera de esta pantalla los pallets ya escaneados no se agruparán',
+    LAST_LOC: 'última ubicación',
+    FIRST_ITEM: 'Primer articulo',
+    EMPTY_PALLET: 'Pallet vacía'
   },
   SETTINGS: {
     TITLE: 'Ajustes'

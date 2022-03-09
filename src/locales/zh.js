@@ -156,7 +156,8 @@ export default {
     PALLET_LABEL_PRINTER: '卡板标签打印机',
     LOCATION_PRINTING: '正在打印货架标签',
     PRICE_SIGNS: '价格标签',
-    LOCATIONS: '位置'
+    LOCATIONS: '位置',
+    PRICE_SIGN_SUCCESS: '价格标签打印成功'
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',
@@ -356,7 +357,17 @@ export default {
     PICKING: '楼面补货'
   },
   BINNING: {
-    BINNING: '上架'
+    BINNING: '上架',
+    ASSIGN_LOCATION: '分配货架位置',
+    WARNING_LABEL: '警示',
+    WARNING_DESCRIPTION: '如果你离开此屏幕，已经扫描的卡板将不会被维护在此高货架位置',
+    SCAN_LOCATION: '扫描货架号进行单卡板上架操作',
+    SCAN_LOCATION_PLURAL: '扫描货架号进行多卡板上架操作',
+    SCAN_PALLET: '扫描卡板号开始上架',
+    SCAN_PALLET_BIN: '扫描卡板号进行上架',
+    LAST_LOC: '上一个位置',
+    FIRST_ITEM: '第一个item',
+    EMPTY_PALLET: '空卡板'
   },
   SETTINGS: {
     TITLE: '设置'

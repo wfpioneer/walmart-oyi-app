@@ -80,7 +80,8 @@ const user: User = {
     locationManagementEdit: false,
     palletManagement: false,
     settingsTool: false,
-    printingUpdate: false
+    printingUpdate: false,
+    binning: false
   },
   countryCode: 'CN',
   domain: 'Homeoffice',

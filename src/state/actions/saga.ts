@@ -5,7 +5,7 @@ import {
 import { PrintItemList, PrintLocationList, PrintPalletList } from '../../models/Printer';
 import { CreateZoneRequest } from '../reducers/Location';
 import { PalletItem } from '../../models/PalletItem';
-import { CombinePalletsRequest, UpdateItemQuantityRequest } from '../../services/PalletManagement.service';
+import { CombinePalletsRequest, GetPalletInfoRequest, UpdateItemQuantityRequest } from '../../services/PalletManagement.service';
 import { GetItemDetailsPayload } from '../../services/GetItemDetails.service';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
@@ -47,6 +47,7 @@ export const DELETE_UPCS = 'SAGA/DELETE_UPCS';
 export const COMBINE_PALLETS = 'SAGA/COMBINE_PALLETS';
 export const PRINT_PALLET_LABEL = 'SAGA/PRINT_PALLET_LABEL';
 export const CLEAR_PALLET = 'SAGA/CLEAR_PALLET';
+export const GET_PALLET_INFO = 'SAGA/GET_PALLET_INFO';
 
 // TODO add types for each service payload
 export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
@@ -116,4 +117,7 @@ export const printPalletLabel = (payload: {
 }) => ({ type: PRINT_PALLET_LABEL, payload } as const);
 export const clearPallet = (payload: {palletId: number}) => ({
   type: CLEAR_PALLET, payload
+} as const);
+export const getPalletInfo = (payload: GetPalletInfoRequest) => ({
+  type: GET_PALLET_INFO, payload
 } as const);

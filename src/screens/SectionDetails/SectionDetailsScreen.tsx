@@ -223,13 +223,13 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
               <Button
                 style={styles.delButton}
                 title={strings('GENERICS.CANCEL')}
-                backgroundColor={COLOR.TRACKER_RED}
+                backgroundColor={COLOR.MAIN_THEME_COLOR}
                 onPress={() => setDisplayConfirmation(false)}
               />
               <Button
                 style={styles.delButton}
                 title={deleteLocationApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
-                backgroundColor={COLOR.MAIN_THEME_COLOR}
+                backgroundColor={COLOR.TRACKER_RED}
                 onPress={() => handleDeleteItem(selectedItem, selectedSection.id, dispatch)}
               />
             </View>
