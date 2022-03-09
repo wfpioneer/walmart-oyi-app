@@ -11,25 +11,25 @@ import {
 
 describe('test action creators for Global', () => {
   it('test action creators for binning', () => {
-    // setScannedEvent action creator
     const testEvent: {value: string; type: string} = {
       type: 'manual',
       value: '123'
     };
+    // setScannedEvent action creator
     const setScannedEventResult = setScannedEvent(testEvent);
     expect(setScannedEventResult).toStrictEqual({
       type: SET_SCANNED_EVENT,
       payload: testEvent
     });
-    // setScannedEvent action creator
     const mockIsManualScan = false;
+    // setManualScan action creator
     const setManualScanResult = setManualScan(mockIsManualScan);
     expect(setManualScanResult).toStrictEqual({ type: SET_MANUAL_SCAN, payload: mockIsManualScan });
-    // setScannedEvent action creator
+    // resetScannedEvent action creator
     const resetScannedEventResult = resetScannedEvent();
     expect(resetScannedEventResult).toStrictEqual({ type: RESET_SCANNED_EVENT });
-    // setScannedEvent action creator
     const mockIsByod = true;
+    // setIsByod action creator
     const setIsByodResult = setIsByod(mockIsByod);
     expect(setIsByodResult).toStrictEqual({
       type: SET_BYOD,
