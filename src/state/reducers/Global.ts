@@ -1,20 +1,8 @@
 import {
-  Actions,
-  RESET_SCANNED_EVENT,
-  SET_BYOD,
-  SET_MANUAL_SCAN,
-  SET_SCANNED_EVENT
+  RESET_SCANNED_EVENT, SET_BYOD, SET_MANUAL_SCAN, SET_SCANNED_EVENT
 } from '../actions/Global';
 
-interface GlobalState {
-  isByod: boolean;
-  scannedEvent: {
-    value: string | null;
-    type: string | null;
-  };
-  isManualScanEnabled: boolean;
-}
-const initialState: GlobalState = {
+const initialState = {
   isByod: false,
   scannedEvent: {
     value: null,
@@ -23,7 +11,7 @@ const initialState: GlobalState = {
   isManualScanEnabled: false
 };
 
-export const Global = (state = initialState, action: Actions): GlobalState => {
+export const Global = (state = initialState, action: any) => {
   switch (action.type) {
     case SET_BYOD:
       return {
