@@ -200,7 +200,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           style={
             Object {
               "alignItems": "center",
-              "marginVertical": 80,
+              "marginVertical": 130,
             }
           }
         >
@@ -260,26 +260,28 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       removeClippedSubviews={false}
       renderItem={[Function]}
     />
-    <ItemSeparator />
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "marginHorizontal": 15,
-          "marginVertical": 10,
+    <React.Fragment>
+      <ItemSeparator />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "marginHorizontal": 15,
+            "marginVertical": 10,
+          }
         }
-      }
-      title="[missing \\"en.GENERICS.NEXT\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
+        title="[missing \\"en.GENERICS.NEXT\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </React.Fragment>
   </View>
 </KeyboardAvoidingView>
 `;
@@ -415,7 +417,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           style={
             Object {
               "alignItems": "center",
-              "marginVertical": 80,
+              "marginVertical": 130,
             }
           }
         >
@@ -475,26 +477,28 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       removeClippedSubviews={false}
       renderItem={[Function]}
     />
-    <ItemSeparator />
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "marginHorizontal": 15,
-          "marginVertical": 10,
+    <React.Fragment>
+      <ItemSeparator />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "marginHorizontal": 15,
+            "marginVertical": 10,
+          }
         }
-      }
-      title="[missing \\"en.GENERICS.NEXT\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
+        title="[missing \\"en.GENERICS.NEXT\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </React.Fragment>
   </View>
 </KeyboardAvoidingView>
 `;
@@ -630,7 +634,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           style={
             Object {
               "alignItems": "center",
-              "marginVertical": 80,
+              "marginVertical": 130,
             }
           }
         >
@@ -690,26 +694,28 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       removeClippedSubviews={false}
       renderItem={[Function]}
     />
-    <ItemSeparator />
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "marginHorizontal": 15,
-          "marginVertical": 10,
+    <React.Fragment>
+      <ItemSeparator />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "marginHorizontal": 15,
+            "marginVertical": 10,
+          }
         }
-      }
-      title="[missing \\"en.GENERICS.NEXT\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
+        title="[missing \\"en.GENERICS.NEXT\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </React.Fragment>
   </View>
 </KeyboardAvoidingView>
 `;
@@ -831,7 +837,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           style={
             Object {
               "alignItems": "center",
-              "marginVertical": 80,
+              "marginVertical": 130,
             }
           }
         >
@@ -861,26 +867,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       keyExtractor={[Function]}
       removeClippedSubviews={false}
       renderItem={[Function]}
-    />
-    <ItemSeparator />
-    <Button
-      backgroundColor="#0071e9"
-      disabled={true}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "marginHorizontal": 15,
-          "marginVertical": 10,
-        }
-      }
-      title="[missing \\"en.GENERICS.NEXT\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
     />
   </View>
 </KeyboardAvoidingView>

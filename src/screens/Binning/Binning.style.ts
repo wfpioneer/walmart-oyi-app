@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
   scanContainer: {
     alignItems: 'center',
-    marginVertical: 80
+    marginVertical: 130
   },
   scanText: {
     paddingTop: 30
