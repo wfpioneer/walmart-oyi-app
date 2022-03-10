@@ -81,6 +81,12 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
     * Note that you must have an emulator set up with Walmart certificates.
     * Also, you must have the WMSSO apk installed on the emulator
     * For more information go to https://collaboration.wal-mart.com/display/ISCM/Front-End+React+Native+Onboarding
+    
+### To run the app on an actual Android device
+
+* Ensure your device is connected to your laptop via USB
+* Run `adb reverse tcp:8081 tcp:8081`. This ensures that all calls made to `localhost:8081` from the device get forwarded to your laptop.
+* Follow the steps above in "To run the app"
 
 ### How the app is structured
 
@@ -278,4 +284,3 @@ or `Master`.
        to [Delete a Product and Smart Group](https://collaboration.wal-mart.com/display/MOBILE/Delete+a+Product+and+Smart+Group)
        and click the Workflow Link
     2. Add the same `Product Name` &`AirWatch Environment` and submit the product for deletion.
-  

@@ -19,6 +19,18 @@ export interface GetPalletInfoRequest {
   isSummary?: boolean
 }
 
+export interface PostBinPalletsRequest {
+  location: number | string;
+  pallets: number[];
+}
+
+export interface PostBinPalletsMultistatusResponse {
+  binSummary: {
+    palletId: number;
+    status: number;
+  }[];
+}
+
 export default class PalletManagementService {
   public static updateItemQuantity(payload: UpdateItemQuantityRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
@@ -41,5 +53,15 @@ export default class PalletManagementService {
       allItems,
       summaryDetails
     });
+  }
+
+  public static postBinPallets(payload: PostBinPalletsRequest): Promise<
+    AxiosResponse<unknown | PostBinPalletsMultistatusResponse>
+  > {
+    const urls: Environment = getEnvironment();
+    return Request.post(
+      `${urls.locationUrl}/bin`,
+      payload
+    );
   }
 }
