@@ -41,7 +41,9 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
         ref={textInputRef}
         style={styles.textInput}
         value={value}
-        onChangeText={(text: string) => onChangeText(text.replace(itemRegex, ''))}
+        onChangeText={(text: string) => props.keyboardType === 'numeric'
+          ? onChangeText(text.replace(itemRegex, ''))
+          : onChangeText(text)}
         selectionColor={COLOR.MAIN_THEME_COLOR}
         placeholder={props.placeholder}
         onSubmitEditing={(event: any) => onSubmit(event.nativeEvent.text)}
