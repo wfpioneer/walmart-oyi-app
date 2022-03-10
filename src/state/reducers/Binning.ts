@@ -15,13 +15,7 @@ export interface StateType {
 }
 
 const initialState: StateType = {
-  pallets: [
-    {
-      id: 4,
-      expirationDate: '',
-      items: []
-    }
-  ],
+  pallets: [],
   binLocation: null
 };
 
