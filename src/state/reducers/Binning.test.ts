@@ -13,13 +13,13 @@ describe('testing binning reducer', () => {
     const testPallet: BinningPallet = {
       id: 1,
       expirationDate: '03/22/2022',
-      firstItem: {
+      items: [{
         itemNbr: 123456789,
         itemDesc: 'test',
         upcNbr: '123456789098',
         price: 10,
         quantity: 100
-      }
+      }]
     };
 
     const testInitialState: StateType = {

@@ -17,13 +17,13 @@ describe('test action creators for binning', () => {
     const testPallet: BinningPallet = {
       id: 1,
       expirationDate: '03/22/2022',
-      firstItem: {
+      items: [{
         itemNbr: 123456789,
         itemDesc: 'test',
         upcNbr: '123456789098',
         price: 10,
         quantity: 100
-      }
+      }]
     };
     const addPalletResult = addPallet(testPallet);
     expect(addPalletResult).toStrictEqual({
