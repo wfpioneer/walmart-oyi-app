@@ -28,7 +28,7 @@ import { strings } from '../../locales';
 import styles from './AssignLocation.style';
 import COLOR from '../../themes/Color';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
-import { cleanIfUpcOrEan } from '../../utils/barcodeUtils';
+import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
 
 interface AssignLocationProps {
   palletsToBin: BinningPallet[];
@@ -119,7 +119,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
 
   useEffectHook(() => {
     if (navigation.isFocused() && scannedEvent.value) {
-      const searchValue = cleanIfUpcOrEan(scannedEvent);
+      const searchValue = cleanScanIfUpcOrEanBarcode(scannedEvent);
       dispatch(binPallets({
         location: searchValue,
         pallets: palletsToBin.reduce((palletIds: number[], pallet) => [...palletIds, pallet.id], [])

@@ -14,7 +14,7 @@ export const removeCheckDigit = (barcode: string): string => barcode.substring(0
 
 export const removeLeadingZero = (barcode: string): string => barcode.replace(/\D|^0+/g, '');
 
-export const cleanIfUpcOrEan = (scanned: { type: string | null; value: string | null}): string => {
+export const cleanScanIfUpcOrEanBarcode = (scanned: { type: string | null; value: string | null }): string => {
   if (scanned.value) {
     if (scanned.type === BARCODE_TYPES.EAN13 || scanned.type === BARCODE_TYPES.UPC_A) {
       return removeLeadingZero(removeCheckDigit(scanned.value));

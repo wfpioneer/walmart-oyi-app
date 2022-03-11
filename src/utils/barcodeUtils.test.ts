@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   BARCODE_TYPES,
-  cleanIfUpcOrEan,
+  cleanScanIfUpcOrEanBarcode,
   removeCheckDigit,
   removeLeadingZero
 } from './barcodeUtils';
@@ -64,7 +64,7 @@ describe('Barcode utilities function tests', () => {
 
     Object.entries(scanInputs).forEach(entry => {
       const [key, value] = entry;
-      const actualOutput = cleanIfUpcOrEan(value);
+      const actualOutput = cleanScanIfUpcOrEanBarcode(value);
 
       expect(actualOutput).toBe(expectedOutput[key]);
     });
