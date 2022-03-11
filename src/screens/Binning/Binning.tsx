@@ -299,6 +299,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
         <FlatList
           data={scannedPallets}
           removeClippedSubviews={false}
+          contentContainerStyle={!palletExistForBinnning && styles.emptyFlatListContainer}
           ItemSeparatorComponent={ItemSeparator}
           renderItem={item => binningItemCard(item, dispatch, setPalletClicked)}
           keyExtractor={(item: any) => item.id.toString()}
