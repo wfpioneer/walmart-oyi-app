@@ -305,6 +305,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
         <FlatList
           data={scannedPallets}
           removeClippedSubviews={false}
+          contentContainerStyle={!palletExistForBinnning && styles.emptyFlatListContainer}
           ItemSeparatorComponent={ItemSeparator}
           renderItem={item => binningItemCard(item, dispatch, setPalletClicked)}
           keyExtractor={(item: any) => item.id.toString()}
@@ -319,14 +320,18 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
             </View>
         )}
         />
-        <ItemSeparator />
-        <Button
-          title={strings('GENERICS.NEXT')}
-          type={Button.Type.PRIMARY}
-          style={styles.buttonWrapper}
-          disabled={!palletExistForBinnning}
-          onPress={() => navigateAssignLocationScreen()}
-        />
+        {palletExistForBinnning
+          && (
+          <>
+            <ItemSeparator />
+            <Button
+              title={strings('GENERICS.NEXT')}
+              type={Button.Type.PRIMARY}
+              style={styles.buttonWrapper}
+              onPress={() => navigateAssignLocationScreen()}
+            />
+          </>
+          )}
       </View>
     </KeyboardAvoidingView>
   );
