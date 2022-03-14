@@ -6,16 +6,16 @@ import {
   SET_SCANNED_EVENT
 } from '../actions/Global';
 
-interface GlobalState {
+export interface StateType {
   isByod: boolean;
+  isManualScanEnabled: boolean;
   scannedEvent: {
     value: string | null;
     type: string | null;
   };
-  isManualScanEnabled: boolean;
 }
 
-const initialState: GlobalState = {
+const initialState: StateType = {
   isByod: false,
   scannedEvent: {
     value: null,
