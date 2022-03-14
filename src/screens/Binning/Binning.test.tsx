@@ -62,6 +62,7 @@ describe('BinningScreen', () => {
           useFocusEffectHook={jest.fn}
           displayWarningModal={false}
           setDisplayWarningModal={jest.fn}
+          useCallbackHook={jest.fn}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -85,6 +86,7 @@ describe('BinningScreen', () => {
           useFocusEffectHook={jest.fn}
           displayWarningModal={false}
           setDisplayWarningModal={jest.fn}
+          useCallbackHook={jest.fn}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -126,6 +128,7 @@ describe('BinningScreen', () => {
           useFocusEffectHook={jest.fn}
           displayWarningModal={false}
           setDisplayWarningModal={jest.fn}
+          useCallbackHook={jest.fn}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -148,6 +151,7 @@ describe('BinningScreen', () => {
           useFocusEffectHook={jest.fn}
           displayWarningModal={true}
           setDisplayWarningModal={jest.fn}
+          useCallbackHook={jest.fn}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

@@ -101,7 +101,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
   }
 >
   <ManualScanComponent
-    keyboardType="numeric"
+    keyboardType="default"
     placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
   />
   <FlatList
