@@ -1,7 +1,7 @@
 import {
   mapKeys, mapValues, nth, replace, split, toLower
 } from 'lodash';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { AsyncState } from '../../reducers/generic/makeAsyncReducer';
 import { PartialState } from '../../reducers/RootReducer';
 
@@ -45,7 +45,7 @@ export const createGenericTag = (
 
 export function makeAsyncActionCreators<
   RequestPayload = never,
-  ResponsePayload = never,
+  ResponsePayload = AxiosResponse,
   ErrorPayload = AxiosError
 >(actionTypeSet: {
   [key in keyof SubactionsMap]: string;
@@ -83,7 +83,7 @@ export function makeAsyncActionCreators<
  * */
 export type GenericActionTypes<
   RequestPayload,
-  ResponsePayload,
+  ResponsePayload = AxiosResponse,
   ErrorPayload = AxiosError
 > = {
   [ActionKey in keyof SubactionsMap]: (
