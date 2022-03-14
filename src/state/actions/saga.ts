@@ -91,7 +91,7 @@ export const addToPicklist = (payload: {
 }) => ({ type: ADD_TO_PICKLIST, payload } as const);
 export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
 export const deleteLocation = (payload: {
-  headers: AxiosRequestHeaders;
+  headers?: AxiosRequestHeaders;
   upc: string;
   sectionId: string;
   locationTypeNbr: number;
@@ -103,7 +103,7 @@ export const noAction = (payload: {
   scannedValue: string;
 }) => ({ type: NO_ACTION, payload } as const);
 export const printSign = (payload: {
-  headers?: Record<string, unknown>;
+  headers?: AxiosRequestHeaders;
   printList: PrintItemList[];
 }) => ({ type: PRINT_SIGN, payload } as const);
 export const getLocationDetails = (payload: {
@@ -125,6 +125,7 @@ export const getAisle = (payload: { zoneId: number }) => ({ type: GET_AISLE, pay
 export const getSections = (payload: { aisleId: number }) => ({ type: GET_SECTIONS, payload } as const);
 export const getSectionDetails = (payload: { sectionId: string }) => ({ type: GET_SECTION_DETAILS, payload } as const);
 export const printLocationLabel = (payload: {
+  headers?: AxiosRequestHeaders;
   printLabelList: PrintLocationList[];
 }) => ({ type: PRINT_LOCATION_LABELS, payload } as const);
 export const addPallet = (payload: { palletId: string; sectionId: number }) => ({ type: ADD_PALLET, payload } as const);
@@ -164,6 +165,7 @@ export const combinePallets = (payload: CombinePalletsRequest) => ({
   payload
 } as const);
 export const printPalletLabel = (payload: {
+  headers?: AxiosRequestHeaders;
   printPalletList: PrintPalletList[];
 }) => ({ type: PRINT_PALLET_LABEL, payload } as const);
 export const clearPallet = (payload: { palletId: number }) => ({

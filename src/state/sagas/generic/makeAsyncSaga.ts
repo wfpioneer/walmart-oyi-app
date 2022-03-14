@@ -6,6 +6,8 @@ import _ from 'lodash';
 import { AxiosError } from 'axios';
 import { GenericActionTypes } from '../../actions/generic/makeAsyncActions';
 import { AsyncSelector, asyncSelector } from '../../reducers/AsyncSelectors';
+import { trackEvent } from '../../../utils/AppCenterTool';
+import moment from 'moment';
 
 export function makeAsyncSaga<Q = any, R = any, E = AxiosError>(
   INITIATOR: string,
@@ -15,24 +17,61 @@ export function makeAsyncSaga<Q = any, R = any, E = AxiosError>(
   handleError = _.noop
 ) {
   function* worker(initiationAction: { type: string; payload: Q }) {
-    const { payload } = initiationAction;
+    const { payload, type } = initiationAction;
     const initiator = opActions.START(payload).type;
     const initiatesUsingOpAction = INITIATOR === initiator;
-
+    // Removes SAGA from saga action type
+    const eventName = type.slice(5);
+    /* Tracks the request payload data that is sent from saga.ts Actions.
+       New payload data should be added here for tracking if they don't already exist
+    */
+    const eventParams = {
+      apiName: eventName,
+      itemNbr: payload?.itemNbr || payload?.id,
+      duration: payload?.duration,
+      itemDetails: JSON.stringify(payload?.itemDetails),
+      upc: payload?.upc,
+      zoneId: payload?.zoneId,
+      aisleId: payload?.aisleId,
+      sectionId: payload?.sectionId,
+      locationTypeNbr: payload?.locationTypeNbr,
+      approvalAction: payload?.headers?.action,
+      scannedValue: payload?.scannedValue,
+      status: payload?.status,
+      onHandsItem: JSON.stringify(payload?.data),
+      printQueue: JSON.stringify(payload?.printList),
+      locationId: payload?.locationId,
+      palletId: payload?.palletId,
+      palletIds: JSON.stringify(payload?.palletIds)
+    };
+    const apiStart = moment().valueOf();
     if (!initiatesUsingOpAction) {
       // If we decide to remove saga actions, then this put goes away
+      trackEvent('API_START', eventParams);
       yield put(opActions.START(payload));
     }
 
     try {
       // @ts-expect-error expression implicitly results in an 'any' type because its containing generator lacks a return-type annotation.
-      const serviceResult = yield call<(payload: Q) => Promise<R>>(
-        service, payload);
+      const serviceResult = yield call<(payload: Q) => Promise<R>>(service, payload);
+      // Track Successful api Requests
+      const duration = moment().valueOf() - apiStart;
+      let getFluffyResult;
+      if (eventName.includes('FLUFFY')) {
+        getFluffyResult = serviceResult.data;
+      }
+      trackEvent('API_SUCCESS', {
+        ...eventParams, duration, statusCode: serviceResult.status, fluffyRoles: JSON.stringify(getFluffyResult)
+      });
 
       yield put(opActions.SUCCEED(serviceResult));
 
       return serviceResult;
     } catch (error: any) {
+      // Track Failed api Requests
+      const duration = moment().valueOf() - apiStart;
+      trackEvent('API_FAIL', { ...eventParams, duration, errorDetails: error.message || JSON.stringify(error) });
+
       yield put(opActions.FAIL(error));
       yield call(handleError, error);
 
