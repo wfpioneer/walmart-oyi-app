@@ -1,14 +1,23 @@
 import {
-  HIDE_ACTIVITY_MODAL, HIDE_INFO_MODAL, SHOW_ACTIVITY_MODAL, SHOW_INFO_MODAL
+  Actions,
+  HIDE_ACTIVITY_MODAL,
+  HIDE_INFO_MODAL,
+  SHOW_ACTIVITY_MODAL,
+  SHOW_INFO_MODAL
 } from '../actions/Modal';
 
-const initialState = {
+interface ModalState {
+  showModal: boolean;
+  showActivity: boolean;
+  content: { title: string; text: string } | null;
+}
+const initialState: ModalState = {
   showModal: false,
   showActivity: false,
   content: null
 };
 
-export const modal = (state = initialState, action: any) => {
+export const modal = (state = initialState, action: Actions): ModalState => {
   switch (action.type) {
     case SHOW_ACTIVITY_MODAL:
       return { ...state, showModal: true, showActivity: true };
@@ -16,7 +25,10 @@ export const modal = (state = initialState, action: any) => {
       return initialState;
     case SHOW_INFO_MODAL:
       return {
-        ...state, showModal: true, showActivity: false, content: action.payload
+        ...state,
+        showModal: true,
+        showActivity: false,
+        content: action.payload
       };
     case HIDE_INFO_MODAL:
       return initialState;
