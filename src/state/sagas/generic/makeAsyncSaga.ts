@@ -15,7 +15,7 @@ export function makeAsyncSaga<Q = any, R = AxiosResponse, E = AxiosError>(
   service: (payload: any) => Promise<R>, 
   selector: AsyncSelector<Q, R, E> = asyncSelector,
   handleError = _.noop
-) { // Set payload to type "any" because a generic type parameter (Q = any) is recognized as type "never" allowing no parameters
+) { // Set payload to type "any" because a generic type parameter (Q = any) is recognized as type "never" allowing no params to be passed
   function* worker(initiationAction: { type: string; payload: any }) {
     const { payload, type } = initiationAction;
     const initiator = opActions.START(payload).type;

@@ -44,6 +44,7 @@ import { LocationIdName } from '../../state/reducers/Location';
 import { GET_SECTION_DETAILS, REMOVE_SECTION } from '../../state/actions/asyncAPI';
 import User from '../../models/User';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
 
 const Tab = createMaterialTopTabNavigator();
 const LOCATION_EDIT_FLAG = 'location management edit';
@@ -59,7 +60,7 @@ export interface LocationProps {
     dispatch: Dispatch<any>;
     navigation: NavigationProp<any>;
     route: RouteProp<any, string>;
-    scannedEvent: {type?: string; value?: string};
+    scannedEvent: { type: string | null; value: string | null };
     trackEventCall: (eventName: string, params?: any) => void;
     validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
     locationPopupVisible: boolean;
@@ -106,14 +107,15 @@ export const handleClearModalClose = (
 export const getSectionDetailsEffect = (
   validateSessionCall: (navigation: NavigationProp<any>, routeName: any) => any,
   route: RouteProp<any, string>,
-  scannedEvent: { value?: string, type?: string },
+  scannedEvent: { value: string | null; type: string | null },
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>
 ): void => {
   validateSessionCall(navigation, route.name).then(() => {
     // Handles scanned event changes if the screen is in focus
     if (scannedEvent.value && navigation.isFocused()) {
-      dispatch(getSectionDetails({ sectionId: scannedEvent.value }));
+      const searchValue = cleanScanIfUpcOrEanBarcode(scannedEvent);
+      dispatch(getSectionDetails({ sectionId: searchValue }));
     }
   }).catch(() => {});
 };
@@ -413,7 +415,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           style={styles.errorButton}
           onPress={() => {
             trackEventCall('location_api_retry',);
-            dispatch(getSectionDetails({ sectionId: scannedEvent.value || section.id.toString() }));
+            dispatch(getSectionDetails({ sectionId: cleanScanIfUpcOrEanBarcode(scannedEvent) || section.id.toString() }));
           }}
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
