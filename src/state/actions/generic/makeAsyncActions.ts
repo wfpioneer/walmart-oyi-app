@@ -38,6 +38,7 @@ export const createGenericTag = (
   subtypeKey: string
 ) => {
   const splitAction = split(toLower(actionTypeSet[subtypeKey]), '/');
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const action = replace(nth(splitAction, -2)!, /get_/, '');
 
   return `req_${action}_${toLower(subtypeKey)}`;

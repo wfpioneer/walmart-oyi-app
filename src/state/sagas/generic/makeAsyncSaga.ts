@@ -4,18 +4,19 @@ import {
 } from 'redux-saga/effects';
 import _ from 'lodash';
 import { AxiosError, AxiosResponse } from 'axios';
+import moment from 'moment';
 import { GenericActionTypes } from '../../actions/generic/makeAsyncActions';
 import { AsyncSelector, asyncSelector } from '../../reducers/AsyncSelectors';
 import { trackEvent } from '../../../utils/AppCenterTool';
-import moment from 'moment';
 
 export function makeAsyncSaga<Q = any, R = AxiosResponse, E = AxiosError>(
   INITIATOR: string,
   opActions: GenericActionTypes<Q, R>,
-  service: (payload: any) => Promise<R>, 
+  service: (payload: any) => Promise<R>,
   selector: AsyncSelector<Q, R, E> = asyncSelector,
   handleError = _.noop
-) { // Set payload to type "any" because a generic type parameter (Q = any) is recognized as type "never" allowing no params to be passed
+) { /* Set payload to type "any" because a generic type parameter (Q = any)
+        is recognized as type "never" allowing no params to be passed */
   function* worker(initiationAction: { type: string; payload: any }) {
     const { payload, type } = initiationAction;
     const initiator = opActions.START(payload).type;
