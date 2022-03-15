@@ -1,5 +1,5 @@
 import React, {
-  EffectCallback, MutableRefObject, useEffect, useRef, useState
+  DependencyList, EffectCallback, MutableRefObject, useCallback, useEffect, useRef, useState
 } from 'react';
 import {
   BackHandler, EmitterSubscription, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity, View
@@ -32,7 +32,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { BinningPallet } from '../../models/Binning';
 import { addPallet, clearPallets, deletePallet } from '../../state/actions/Binning';
-import { setScannedEvent } from '../../state/actions/Global';
+import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
 import { setupPallet } from '../../state/actions/PalletManagement';
 import { Pallet } from '../../models/PalletManagementTypes';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
@@ -53,6 +53,7 @@ export interface BinningScreenProps {
   useFocusEffectHook: (effect: EffectCallback) => void;
   displayWarningModal: boolean;
   setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>;
+  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
 }
 
 export const navigateToPalletManagement = (
@@ -101,7 +102,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   const {
     scannedPallets, isManualScanEnabled, dispatch, navigation, route, useEffectHook,
     getPalletApi, scannedEvent, isMounted, palletClicked, setPalletClicked, useFocusEffectHook,
-    displayWarningModal, setDisplayWarningModal
+    displayWarningModal, setDisplayWarningModal, useCallbackHook
   } = props;
 
   const palletExistForBinnning = scannedPallets.length > 0;
@@ -231,16 +232,21 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
 
   // validation on Hardware backPress
   useFocusEffectHook(
-    () => {
+    useCallbackHook(() => {
       const onHardwareBackPress = () => onValidateHardwareBackPress(props);
       BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
       return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
-    }
+    }, [])
   );
 
   const handleUnhandledTouches = () => {
     Keyboard.dismiss();
     return false;
+  };
+
+  const navigateAssignLocationScreen = () => {
+    dispatch(resetScannedEvent());
+    navigation.navigate('AssignLocation');
   };
 
   const backConfirmed = () => {
@@ -299,6 +305,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
         <FlatList
           data={scannedPallets}
           removeClippedSubviews={false}
+          contentContainerStyle={!palletExistForBinnning && styles.emptyFlatListContainer}
           ItemSeparatorComponent={ItemSeparator}
           renderItem={item => binningItemCard(item, dispatch, setPalletClicked)}
           keyExtractor={(item: any) => item.id.toString()}
@@ -313,14 +320,18 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
             </View>
         )}
         />
-        <ItemSeparator />
-        <Button
-          title={strings('GENERICS.NEXT')}
-          type={Button.Type.PRIMARY}
-          style={styles.buttonWrapper}
-          disabled={!palletExistForBinnning}
-          onPress={() => navigation.navigate('AssignLocation')}
-        />
+        {palletExistForBinnning
+          && (
+          <>
+            <ItemSeparator />
+            <Button
+              title={strings('GENERICS.NEXT')}
+              type={Button.Type.PRIMARY}
+              style={styles.buttonWrapper}
+              onPress={() => navigateAssignLocationScreen()}
+            />
+          </>
+          )}
       </View>
     </KeyboardAvoidingView>
   );
@@ -353,6 +364,7 @@ const Binning = (): JSX.Element => {
       useFocusEffectHook={useFocusEffect}
       displayWarningModal={displayWarningModal}
       setDisplayWarningModal={setDisplayWarningModal}
+      useCallbackHook={useCallback}
     />
   );
 };
