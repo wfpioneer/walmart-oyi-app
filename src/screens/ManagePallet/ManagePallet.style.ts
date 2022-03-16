@@ -78,5 +78,21 @@ export default StyleSheet.create({
     borderColor: COLOR.GREY_200,
     borderRadius: 5,
     borderWidth: 2
+  },
+  errorLabel: {
+    color: COLOR.RED_500
+  },
+  effectiveDateHeaderItem: {
+    fontSize: 16,
+    color: COLOR.BLACK
+  },
+  effectiveDateContainer: {
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  modifiedEffectiveDateContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: COLOR.YELLOW
   }
 });
