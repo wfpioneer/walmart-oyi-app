@@ -26,7 +26,6 @@ import COLOR from '../../themes/Color';
 import IconButton from '../../components/buttons/IconButton';
 import { AsyncState } from '../../models/AsyncState';
 import { ConfigResponse } from '../../services/Config.service';
-import { setPerishableCategories } from '../../state/actions/PalletManagement';
 import {
   getLocationLabelPrinter,
   getPalletLabelPrinter,
@@ -54,8 +53,7 @@ const mapDispatchToProps = {
   setLocationLabelPrinter,
   setPalletLabelPrinter,
   setPriceLabelPrinter,
-  setPrinterList,
-  setPerishableCategories
+  setPrinterList
 };
 
 // This type uses all fields from the User type except it makes siteId optional
@@ -91,8 +89,8 @@ export interface LoginScreenProps {
   navigation: NavigationProp<any>;
   hideActivityModal: () => void;
   setEndTime: (sessionEndTime: number) => void;
-  getFluffyFeatures: (payload: WMSSOUser) => void;
-  fluffyApiState: AsyncState;
+  getFluffyFeatures: (payload: any) => void;
+  fluffyApiState: any;
   assignFluffyFeatures: (resultPayload: string[]) => void;
   getClubConfig: () => void;
   getClubConfigApiState: AsyncState;
@@ -102,7 +100,6 @@ export interface LoginScreenProps {
   setPriceLabelPrinter: (payload: Printer | null) => void;
   setLocationLabelPrinter: (payload: Printer | null) => void;
   setPalletLabelPrinter: (payload: Printer | null) => void;
-  setPerishableCategories: (payload: {perishableCategories: number[]}) => void;
 }
 
 const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
@@ -181,17 +178,9 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
 
     if (prevProps.getClubConfigApiState.isWaiting) {
       if (this.props.getClubConfigApiState.result) {
-        const { data } = this.props.getClubConfigApiState.result;
-        this.props.setConfigs(data);
-        if (data?.printingUpdate) {
+        this.props.setConfigs(this.props.getClubConfigApiState.result.data);
+        if (this.props.getClubConfigApiState.result.data.printingUpdate) {
           this.getPrinterDetailsFromAsyncStorage();
-        }
-        if (data?.palletExpiration) {
-          // TODO replace this when Config PR is added to development
-          const mockPerishableCatg: number[] = [
-            35, 36, 39, 41, 43, 45, 48, 49, 52, 56, 57, 58, 76, 86, 91
-          ];
-          this.props.setPerishableCategories({ perishableCategories: mockPerishableCatg });
         }
       } else if (this.props.getClubConfigApiState.error) {
         // TODO Display toast/popup for error
