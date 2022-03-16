@@ -2,10 +2,12 @@ import { PickListItem, PickStatus } from '../../models/Picking.d';
 import {
   DELETE_PICKS,
   INITIALIZE_PICKLIST,
+  RESET_PICKLIST,
   SELECT_PICKS,
   UPDATE_PICKS,
   deletePicks,
   initializePicklist,
+  resetPickList,
   selectPicks,
   updatePicks
 } from './Picking';
@@ -53,6 +55,11 @@ describe('Picking action tests', () => {
     expect(deleteResult).toStrictEqual({
       type: DELETE_PICKS,
       payload: [1, 2, 3]
+    });
+
+    const resetResult = resetPickList();
+    expect(resetResult).toStrictEqual({
+      type: RESET_PICKLIST
     });
   });
 });

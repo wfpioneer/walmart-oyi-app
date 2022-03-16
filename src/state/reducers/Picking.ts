@@ -3,6 +3,7 @@ import {
   Actions,
   DELETE_PICKS,
   INITIALIZE_PICKLIST,
+  RESET_PICKLIST,
   SELECT_PICKS,
   UPDATE_PICKS
 } from '../actions/Picking';
@@ -43,6 +44,8 @@ export const Picking = (state = initialState, action: Actions): PickingState => 
         ...state,
         pickList: state.pickList.filter(pick => !action.payload.includes(pick.id))
       };
+    case RESET_PICKLIST:
+      return initialState;
     default:
       return state;
   }

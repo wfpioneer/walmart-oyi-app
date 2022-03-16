@@ -4,6 +4,7 @@ export const INITIALIZE_PICKLIST = 'PICKLIST/INITIALIZE';
 export const UPDATE_PICKS = 'PICKLIST/UPDATE_PICKS';
 export const SELECT_PICKS = 'PICKLIST/SELECT_PICKS';
 export const DELETE_PICKS = 'PICKLIST/DELETE_PICKS';
+export const RESET_PICKLIST = 'PICKLIST/RESET';
 
 export const initializePicklist = (plItems: PickListItem[]) => ({
   type: INITIALIZE_PICKLIST,
@@ -25,8 +26,13 @@ export const deletePicks = (pickIds: number[]) => ({
   payload: pickIds
 } as const);
 
+export const resetPickList = () => ({
+  type: RESET_PICKLIST
+} as const);
+
 export type Actions =
   | ReturnType<typeof initializePicklist>
   | ReturnType<typeof updatePicks>
   | ReturnType<typeof selectPicks>
-  | ReturnType<typeof deletePicks>;
+  | ReturnType<typeof deletePicks>
+  | ReturnType<typeof resetPickList>;
