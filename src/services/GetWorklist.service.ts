@@ -2,7 +2,7 @@ import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
 
 export default class GetWorklistService {
-  public static getWorklist(payload: {headers: object; worklistType?: [string]}) {
+  public static getWorklist(payload: {worklistType?: [string]}) {
     const urls: Environment = getEnvironment();
     let filterUrl = `${urls.worklistURL}/worklist/items`;
     if (payload && payload.worklistType) {

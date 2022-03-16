@@ -1,8 +1,16 @@
+import { AxiosRequestHeaders } from 'axios';
 import { CreateAisleRequest } from '../../models/CreateZoneAisleSection.d';
 import {
-  ApprovalListItem, approvalAction, approvalRequestSource, approvalStatus
+  ApprovalListItem,
+  approvalAction,
+  approvalRequestSource,
+  approvalStatus
 } from '../../models/ApprovalListItem';
-import { PrintItemList, PrintLocationList, PrintPalletList } from '../../models/Printer';
+import {
+  PrintItemList,
+  PrintLocationList,
+  PrintPalletList
+} from '../../models/Printer';
 import { CreateZoneRequest } from '../reducers/Location';
 import { PalletItem } from '../../models/PalletItem';
 import {
@@ -12,6 +20,7 @@ import {
   UpdateItemQuantityRequest
 } from '../../services/PalletManagement.service';
 import { GetItemDetailsPayload } from '../../services/GetItemDetails.service';
+import User from '../../models/User';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
@@ -56,23 +65,52 @@ export const GET_PALLET_INFO = 'SAGA/GET_PALLET_INFO';
 export const POST_BIN_PALLETS = 'SAGA/POST_BIN_PALLETS';
 
 // TODO add types for each service payload
-export const hitGoogle = (payload: any) => ({ type: HIT_GOOGLE, payload } as const);
+export const hitGoogle = () => ({ type: HIT_GOOGLE } as const);
 export const getItemDetails = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS, payload } as const);
-export const getWorklist = (payload?: any) => ({ type: GET_WORKLIST, payload } as const);
-export const editLocation = (payload: any) => ({ type: EDIT_LOCATION, payload } as const);
-export const addLocation = (payload: any) => ({ type: ADD_LOCATION, payload } as const);
+export const getWorklist = (payload?: { worklistType?: [string] }) => ({ type: GET_WORKLIST, payload } as const);
+export const editLocation = (payload: {
+  headers?: AxiosRequestHeaders;
+  upc: string;
+  sectionId: string;
+  newSectionId: string;
+  locationTypeNbr: number;
+  newLocationTypeNbr: number;
+}) => ({ type: EDIT_LOCATION, payload } as const);
+export const addLocation = (payload: {
+  headers?: AxiosRequestHeaders;
+  upc: string;
+  sectionId: string;
+  locationTypeNbr: number;
+}) => ({ type: ADD_LOCATION, payload } as const);
 export const updateOHQty = (payload: {
   data: Partial<ApprovalListItem>
 }) => ({ type: UPDATE_OH_QTY, payload } as const);
-export const addToPicklist = (payload: any) => ({ type: ADD_TO_PICKLIST, payload } as const);
+export const addToPicklist = (payload: {
+  headers?: AxiosRequestHeaders;
+  itemNumber: number;
+}) => ({ type: ADD_TO_PICKLIST, payload } as const);
 export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
-export const deleteLocation = (payload: any) => ({ type: DELETE_LOCATION, payload } as const);
-export const noAction = (payload: any) => ({ type: NO_ACTION, payload } as const);
+export const deleteLocation = (payload: {
+  headers?: AxiosRequestHeaders;
+  upc: string;
+  sectionId: string;
+  locationTypeNbr: number;
+}) => ({ type: DELETE_LOCATION, payload } as const);
+export const noAction = (payload: {
+  headers?: AxiosRequestHeaders;
+  upc: string;
+  itemNbr: number;
+  scannedValue: string;
+}) => ({ type: NO_ACTION, payload } as const);
 export const printSign = (payload: {
-  headers?: Record<string, unknown>;
-  printList: PrintItemList[]}) => ({ type: PRINT_SIGN, payload } as const);
-export const getLocationDetails = (payload: any) => ({ type: GET_LOCATION_DETAILS, payload } as const);
-export const getFluffyFeatures = (payload: any) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
+  headers?: AxiosRequestHeaders;
+  printList: PrintItemList[];
+}) => ({ type: PRINT_SIGN, payload } as const);
+export const getLocationDetails = (payload: {
+  headers?: AxiosRequestHeaders;
+  itemNbr: number;
+}) => ({ type: GET_LOCATION_DETAILS, payload } as const);
+export const getFluffyFeatures = (payload: User) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
 export const getApprovalList = (payload: {
   itemNbr?: number;
   status?: approvalStatus;
@@ -87,42 +125,52 @@ export const getAisle = (payload: { zoneId: number }) => ({ type: GET_AISLE, pay
 export const getSections = (payload: { aisleId: number }) => ({ type: GET_SECTIONS, payload } as const);
 export const getSectionDetails = (payload: { sectionId: string }) => ({ type: GET_SECTION_DETAILS, payload } as const);
 export const printLocationLabel = (payload: {
-  printLabelList: PrintLocationList[]
+  headers?: AxiosRequestHeaders;
+  printLabelList: PrintLocationList[];
 }) => ({ type: PRINT_LOCATION_LABELS, payload } as const);
-export const addPallet = (payload: any) => ({ type: ADD_PALLET, payload } as const);
-export const deletePallet = (payload: {palletId: number}) => ({ type: DELETE_PALLET, payload } as const);
-export const createSections = (payload: any) => ({ type: CREATE_SECTIONS, payload } as const);
+export const addPallet = (payload: { palletId: string; sectionId: number }) => ({ type: ADD_PALLET, payload } as const);
+export const deletePallet = (payload: { palletId: number }) => ({ type: DELETE_PALLET, payload } as const);
+export const createSections = (
+  payload: { aisleId: number; sectionCount: number }[]
+) => ({ type: CREATE_SECTIONS, payload } as const);
 export const getPalletDetails = (payload: {
-  palletIds: number[], isAllItems?: boolean
+  palletIds: number[];
+  isAllItems?: boolean;
 }) => ({ type: GET_PALLET_DETAILS, payload } as const);
 export const deleteZone = (payload: number) => ({ type: DELETE_ZONE, payload } as const);
 export const postCreateAisles = (payload: {
-  aislesToCreate: CreateAisleRequest
+  aislesToCreate: CreateAisleRequest;
 }) => ({ type: POST_CREATE_AISLES, payload } as const);
 export const postCreateZone = (payload: CreateZoneRequest) => ({ type: CREATE_ZONE, payload } as const);
 export const clearLocation = (payload: {
-  locationId: number, target: string
+  locationId: number;
+  target: string;
 }) => ({ type: CLEAR_LOCATION, payload } as const);
-export const deleteAisle = (payload: any) => ({ type: DELETE_AISLE, payload } as const);
+export const deleteAisle = (payload: { aisleId: number }) => ({ type: DELETE_AISLE, payload } as const);
 export const removeSection = (payload: number) => ({ type: REMOVE_SECTION, payload } as const);
 export const getZoneNames = () => ({ type: GET_ZONE_NAMES } as const);
 export const getClubConfig = () => ({ type: GET_CLUB_CONFIG } as const);
 export const getItemDetailsUPC = (payload: { upc: number }) => ({ type: GET_ITEM_DETAIL_UPC, payload } as const);
 export const addPalletUPCs = (payload: {
-  palletId: number, items: PalletItem[]
+  palletId: number;
+  items: PalletItem[];
 }) => ({ type: ADD_PALLET_UPCS, payload } as const);
 export const updatePalletItemQty = (payload: UpdateItemQuantityRequest) => ({
-  type: UPDATE_PALLET_ITEM_QTY, payload
+  type: UPDATE_PALLET_ITEM_QTY,
+  payload
 } as const);
 export const deleteUpcs = (payload: { palletId: number; upcs: string[] }) => ({ type: DELETE_UPCS, payload } as const);
 export const combinePallets = (payload: CombinePalletsRequest) => ({
-  type: COMBINE_PALLETS, payload
+  type: COMBINE_PALLETS,
+  payload
 } as const);
 export const printPalletLabel = (payload: {
-  printPalletList: PrintPalletList[]
+  headers?: AxiosRequestHeaders;
+  printPalletList: PrintPalletList[];
 }) => ({ type: PRINT_PALLET_LABEL, payload } as const);
-export const clearPallet = (payload: {palletId: number}) => ({
-  type: CLEAR_PALLET, payload
+export const clearPallet = (payload: { palletId: number }) => ({
+  type: CLEAR_PALLET,
+  payload
 } as const);
 export const getPalletInfo = (payload: GetPalletInfoRequest) => ({
   type: GET_PALLET_INFO, payload
