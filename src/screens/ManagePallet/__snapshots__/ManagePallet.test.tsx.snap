@@ -414,7 +414,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Picker
           display="spinner"
           is24Hour={true}
-          minimumDate={2022-03-16T11:57:56.777Z}
+          minimumDate={2022-03-15T18:30:00.000Z}
           mode="date"
           onChange={[Function]}
           value={2022-01-30T18:30:00.000Z}
