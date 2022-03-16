@@ -89,8 +89,8 @@ export interface LoginScreenProps {
   navigation: NavigationProp<any>;
   hideActivityModal: () => void;
   setEndTime: (sessionEndTime: number) => void;
-  getFluffyFeatures: (payload: any) => void;
-  fluffyApiState: any;
+  getFluffyFeatures: (payload: WMSSOUser) => void;
+  fluffyApiState: AsyncState;
   assignFluffyFeatures: (resultPayload: string[]) => void;
   getClubConfig: () => void;
   getClubConfigApiState: AsyncState;
@@ -163,7 +163,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     }
 
     if (prevProps.fluffyApiState.isWaiting) {
-      if (this.props.fluffyApiState.result) {
+      if (this.props.fluffyApiState.result && this.props.fluffyApiState.result.status === 200) {
         const userCountryCode = this.props.User.countryCode.toUpperCase();
         const fluffyResultData = this.props.fluffyApiState.result.data;
         const fluffyFeatures = userCountryCode === 'CN' ? addCNAssociateRoleOverrides(fluffyResultData)

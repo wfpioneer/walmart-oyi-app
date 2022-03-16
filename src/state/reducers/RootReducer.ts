@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { DeepPartial, combineReducers } from 'redux';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { UserReducer } from './User';
 import { modal } from './Modal';
@@ -39,6 +39,6 @@ export default RootReducer;
 
 // This pulls the types out of the root reducer, for typing the redux state
 export type RootState = ReturnType<typeof RootReducer>;
-
+export type PartialState = DeepPartial<RootState>;
 // This cleans up the definition of the state in `useSelector(...)`
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;

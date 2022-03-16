@@ -33,7 +33,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <withTheme(undefined)
+      <Text
         style={
           Object {
             "fontWeight": "bold",
@@ -42,8 +42,8 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </withTheme(undefined)>
-      <withTheme(undefined)
+      </Text>
+      <Text
         style={
           Object {
             "fontSize": 16,
@@ -54,7 +54,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         
-      </withTheme(undefined)>
+      </Text>
     </View>
     <View
       style={
@@ -101,7 +101,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         name="alert"
         size={40}
       />
-      <withTheme(undefined)
+      <Text
         style={
           Object {
             "color": "#ec0439",
@@ -110,7 +110,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         [missing "en.LOCATION.ADD_LOCATION_API_ERROR" translation]
-      </withTheme(undefined)>
+      </Text>
     </View>
   </View>
   <View
@@ -173,7 +173,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <withTheme(undefined)
+      <Text
         style={
           Object {
             "fontWeight": "bold",
@@ -182,8 +182,8 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </withTheme(undefined)>
-      <withTheme(undefined)
+      </Text>
+      <Text
         style={
           Object {
             "fontSize": 16,
@@ -194,7 +194,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         
-      </withTheme(undefined)>
+      </Text>
     </View>
     <View
       style={
@@ -285,7 +285,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       }
     >
-      <withTheme(undefined)
+      <Text
         style={
           Object {
             "fontWeight": "bold",
@@ -294,8 +294,8 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </withTheme(undefined)>
-      <withTheme(undefined)
+      </Text>
+      <Text
         style={
           Object {
             "fontSize": 16,
@@ -306,7 +306,7 @@ exports[`SelectLocationTypeScreen Tests rendering Add/Edit location API response
         }
       >
         
-      </withTheme(undefined)>
+      </Text>
     </View>
     <View
       style={
@@ -397,7 +397,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <withTheme(undefined)
+      <Text
         style={
           Object {
             "fontWeight": "bold",
@@ -406,8 +406,8 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </withTheme(undefined)>
-      <withTheme(undefined)
+      </Text>
+      <Text
         style={
           Object {
             "fontSize": 16,
@@ -418,7 +418,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         TestLocation-3
-      </withTheme(undefined)>
+      </Text>
     </View>
     <View
       style={
@@ -510,7 +510,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <withTheme(undefined)
+      <Text
         style={
           Object {
             "fontWeight": "bold",
@@ -519,8 +519,8 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </withTheme(undefined)>
-      <withTheme(undefined)
+      </Text>
+      <Text
         style={
           Object {
             "fontSize": 16,
@@ -531,7 +531,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         
-      </withTheme(undefined)>
+      </Text>
     </View>
     <View
       style={
@@ -623,7 +623,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       }
     >
-      <withTheme(undefined)
+      <Text
         style={
           Object {
             "fontWeight": "bold",
@@ -632,8 +632,8 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
-      </withTheme(undefined)>
-      <withTheme(undefined)
+      </Text>
+      <Text
         style={
           Object {
             "fontSize": 16,
@@ -644,7 +644,7 @@ exports[`SelectLocationTypeScreen Tests rendering the SelectLocationType Screen 
         }
       >
         
-      </withTheme(undefined)>
+      </Text>
     </View>
     <View
       style={

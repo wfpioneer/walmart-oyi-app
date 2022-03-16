@@ -1,4 +1,4 @@
-import { ColorPropType, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
 const styles = StyleSheet.create({
@@ -6,9 +6,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
+  emptyFlatListContainer: {
+    flex: 1,
+    justifyContent: 'center'
+  },
   scanContainer: {
-    alignItems: 'center',
-    marginVertical: 80
+    alignItems: 'center'
   },
   scanText: {
     paddingTop: 30
