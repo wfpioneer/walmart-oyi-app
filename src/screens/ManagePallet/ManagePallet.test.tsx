@@ -150,9 +150,9 @@ describe('ManagePalletScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders the DatePicker Dialog when the isPickerShow is true ', () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() => new Date('03/16/2022').valueOf());
+      const mockDate = new Date(1647369000000);
+      jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
+      Date.now = () => 1647369000000;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ManagePalletScreen

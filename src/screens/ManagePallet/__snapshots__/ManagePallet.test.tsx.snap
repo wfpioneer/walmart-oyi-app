@@ -417,7 +417,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           minimumDate={2022-03-15T18:30:00.000Z}
           mode="date"
           onChange={[Function]}
-          value={2022-01-30T18:30:00.000Z}
+          value={2022-03-15T18:30:00.000Z}
         />
       </View>
       <View
