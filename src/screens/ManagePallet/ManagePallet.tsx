@@ -526,11 +526,12 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     return false;
   };
   const onDatePickerChange = (event: DateTimePickerEvent, value: Date| undefined) => {
+    const { type } = event;
     const newDate = value && moment(value).format('MM/DD/YYYY');
     setIsPickerShow(false);
-    setIsExpirationDateModified(true);
-    if (newDate && newDate !== expirationDate) {
+    if (type === 'set' && newDate && newDate !== expirationDate) {
       dispatch(updatePalletExpirationDate(newDate));
+      setIsExpirationDateModified(true);
     }
   };
 
@@ -563,10 +564,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           <View
             style={isExpirationDateModified ? styles.modifiedEffectiveDateContainer : styles.effectiveDateContainer}
           >
-            <Text style={styles.headerText}>
-              {strings('PALLET.EXPIRATION_DATE')}
-            </Text>
             <TouchableOpacity onPress={() => setIsPickerShow(true)}>
+              <Text style={styles.headerText}>
+                {strings('PALLET.EXPIRATION_DATE')}
+              </Text>
               <Text style={expirationDate ? styles.effectiveDateHeaderItem : styles.errorLabel}>
                 {expirationDate || strings('GENERICS.REQUIRED')}
               </Text>

@@ -80,11 +80,13 @@ export default StyleSheet.create({
     borderWidth: 2
   },
   errorLabel: {
-    color: COLOR.RED_500
+    color: COLOR.RED_500,
+    textAlign: 'center'
   },
   effectiveDateHeaderItem: {
     fontSize: 16,
-    color: COLOR.BLACK
+    color: COLOR.BLACK,
+    textAlign: 'center'
   },
   effectiveDateContainer: {
     flexDirection: 'column',

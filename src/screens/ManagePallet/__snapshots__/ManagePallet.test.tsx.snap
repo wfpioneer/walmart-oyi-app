@@ -91,24 +91,25 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           }
         }
       >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          [missing "en.PALLET.EXPIRATION_DATE" translation]
-        </Text>
         <ForwardRef
           onPress={[Function]}
         >
           <Text
             style={
               Object {
+                "fontSize": 18,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            [missing "en.PALLET.EXPIRATION_DATE" translation]
+          </Text>
+          <Text
+            style={
+              Object {
                 "color": "#000000",
                 "fontSize": 16,
+                "textAlign": "center",
               }
             }
           >
@@ -387,24 +388,25 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           }
         }
       >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          [missing "en.PALLET.EXPIRATION_DATE" translation]
-        </Text>
         <ForwardRef
           onPress={[Function]}
         >
           <Text
             style={
               Object {
+                "fontSize": 18,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            [missing "en.PALLET.EXPIRATION_DATE" translation]
+          </Text>
+          <Text
+            style={
+              Object {
                 "color": "#000000",
                 "fontSize": 16,
+                "textAlign": "center",
               }
             }
           >
@@ -691,24 +693,25 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           }
         }
       >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          [missing "en.PALLET.EXPIRATION_DATE" translation]
-        </Text>
         <ForwardRef
           onPress={[Function]}
         >
           <Text
             style={
               Object {
+                "fontSize": 18,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            [missing "en.PALLET.EXPIRATION_DATE" translation]
+          </Text>
+          <Text
+            style={
+              Object {
                 "color": "#000000",
                 "fontSize": 16,
+                "textAlign": "center",
               }
             }
           >
@@ -987,24 +990,25 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           }
         }
       >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          [missing "en.PALLET.EXPIRATION_DATE" translation]
-        </Text>
         <ForwardRef
           onPress={[Function]}
         >
           <Text
             style={
               Object {
+                "fontSize": 18,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            [missing "en.PALLET.EXPIRATION_DATE" translation]
+          </Text>
+          <Text
+            style={
+              Object {
                 "color": "#000000",
                 "fontSize": 16,
+                "textAlign": "center",
               }
             }
           >
@@ -1285,24 +1289,25 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           }
         }
       >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          [missing "en.PALLET.EXPIRATION_DATE" translation]
-        </Text>
         <ForwardRef
           onPress={[Function]}
         >
           <Text
             style={
               Object {
+                "fontSize": 18,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            [missing "en.PALLET.EXPIRATION_DATE" translation]
+          </Text>
+          <Text
+            style={
+              Object {
                 "color": "#000000",
                 "fontSize": 16,
+                "textAlign": "center",
               }
             }
           >
