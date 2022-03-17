@@ -6,6 +6,7 @@ import {
   FlatList,
   Keyboard,
   KeyboardAvoidingView,
+  Platform,
   Text,
   TouchableOpacity,
   View
@@ -13,6 +14,8 @@ import {
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
+import moment from 'moment';
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
@@ -42,7 +45,8 @@ import {
   setPerishableCategories,
   setupPallet,
   showManagePalletMenu,
-  updateItems
+  updateItems,
+  updatePalletExpirationDate
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
@@ -73,6 +77,10 @@ interface ManagePalletProps {
   perishableCategories: number[];
   isPerishable: boolean;
   setIsPerishable: React.Dispatch<React.SetStateAction<boolean>>;
+  isPickerShow: boolean;
+  setIsPickerShow: React.Dispatch<React.SetStateAction<boolean>>;
+  isExpirationDateModified: boolean;
+  setIsExpirationDateModified: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface ApiResult {
   data: any;
@@ -404,8 +412,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
-    displayClearConfirmation, setDisplayClearConfirmation, perishableCategories,
-    isPerishable, setIsPerishable
+    displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow, 
+    isPickerShow, isExpirationDateModified, setIsExpirationDateModified,
+    perishableCategories, isPerishable, setIsPerishable,   
   } = props;
   const { id, expirationDate } = palletInfo;
 
@@ -535,11 +544,21 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     handleAddItems(palletId, items, dispatch);
     // Calls update pallet item qty api
     handleUpdateItems(items, id, dispatch);
+    setIsExpirationDateModified(false);
   };
 
   const handleUnhandledTouches = () => {
     Keyboard.dismiss();
     return false;
+  };
+  const onDatePickerChange = (event: DateTimePickerEvent, value: Date| undefined) => {
+    const { type } = event;
+    const newDate = value && moment(value).format('MM/DD/YYYY');
+    setIsPickerShow(false);
+    if (type === 'set' && newDate && newDate !== expirationDate) {
+      dispatch(updatePalletExpirationDate(newDate));
+      setIsExpirationDateModified(true);
+    }
   };
 
   return (
@@ -568,16 +587,28 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             <Text style={styles.headerText}>{strings('PALLET.PALLET_ID')}</Text>
             <Text style={styles.headerItemText}>{id}</Text>
           </View>
-          {(expirationDate && expirationDate.length >= 0) || isPerishable ? (
-            <View style={(isPerishable && !expirationDate) ? styles.headerItemEdit : styles.headerItem}>
+          <View
+            style={isExpirationDateModified ? styles.modifiedEffectiveDateContainer : styles.effectiveDateContainer}
+          >
+            <TouchableOpacity onPress={() => setIsPickerShow(true)}>
               <Text style={styles.headerText}>
                 {strings('PALLET.EXPIRATION_DATE')}
               </Text>
-              {expirationDate
-                ? <Text style={styles.headerItemText}>{expirationDate}</Text>
-                : <Text style={styles.headerRequiredText}>{ strings('GENERICS.REQUIRED')}</Text>}
-            </View>
-          ) : null}
+              <Text style={expirationDate ? styles.effectiveDateHeaderItem : styles.errorLabel}>
+                {expirationDate || strings('GENERICS.REQUIRED')}
+              </Text>
+            </TouchableOpacity>
+            {isPickerShow && (
+            <DateTimePicker
+              value={expirationDate ? new Date(expirationDate) : new Date()}
+              mode="date"
+              display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+              is24Hour={true}
+              minimumDate={new Date(Date.now())}
+              onChange={onDatePickerChange}
+            />
+            )}
+          </View>
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>{strings('LOCATION.ITEMS')}</Text>
             <Text style={styles.headerItemText}>{items.length}</Text>
@@ -639,6 +670,8 @@ const ManagePallet = (): JSX.Element => {
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const [isPerishable, setIsPerishable] = useState(false);
+  const [isPickerShow, setIsPickerShow] = useState(false);
+  const [isExpirationDateModified, setIsExpirationDateModified] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
@@ -698,6 +731,10 @@ const ManagePallet = (): JSX.Element => {
           perishableCategories={perishableCategories}
           isPerishable={isPerishable}
           setIsPerishable={setIsPerishable}
+          isPickerShow={isPickerShow}
+          setIsPickerShow={setIsPickerShow}
+          isExpirationDateModified={isExpirationDateModified}
+          setIsExpirationDateModified={setIsExpirationDateModified}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

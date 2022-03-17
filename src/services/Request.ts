@@ -24,6 +24,8 @@ class Request {
 
   public service: AxiosInstance;
 
+  private requestTimeoutId: ReturnType<typeof setTimeout> = setTimeout(() => 0);
+
   constructor() {
     this.service = axios.create({
       timeout: TIMEOUT,
@@ -144,8 +146,6 @@ class Request {
     }
     return Request.instance;
   }
-
-   private requestTimeoutId = 0;
 
    // Creates a CancelToken for the Request
   getCancelToken = (options?: AxiosRequestConfig) => {

@@ -112,6 +112,10 @@ describe('ManagePalletScreen', () => {
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
+          isPickerShow={false}
+          isExpirationDateModified={false}
+          setIsExpirationDateModified={jest.fn()}
+          setIsPickerShow={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -137,6 +141,67 @@ describe('ManagePalletScreen', () => {
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
+          isPickerShow={false}
+          isExpirationDateModified={false}
+          setIsExpirationDateModified={jest.fn()}
+          setIsPickerShow={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders the DatePicker Dialog when the isPickerShow is true ', () => {
+      const mockDate = new Date(1647369000000);
+      jest.spyOn(global, 'Date').mockImplementation(() => (mockDate as unknown) as string);
+      Date.now = () => 1647369000000;
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
+          clearPalletApi={defaultAsyncState}
+          displayClearConfirmation={true}
+          setDisplayClearConfirmation={jest.fn()}
+          isPickerShow={true}
+          isExpirationDateModified={false}
+          setIsExpirationDateModified={jest.fn()}
+          setIsPickerShow={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders the palletManagement when expiration date got modified', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
+          clearPalletApi={defaultAsyncState}
+          displayClearConfirmation={true}
+          setDisplayClearConfirmation={jest.fn()}
+          isPickerShow={false}
+          isExpirationDateModified={true}
+          setIsExpirationDateModified={jest.fn()}
+          setIsPickerShow={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -173,6 +238,10 @@ describe('ManagePalletScreen', () => {
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
+          isPickerShow={false}
+          isExpirationDateModified={false}
+          setIsExpirationDateModified={jest.fn()}
+          setIsPickerShow={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

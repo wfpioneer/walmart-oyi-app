@@ -50,7 +50,7 @@ export default {
     NO: '否',
     ENABLED: '激活',
     DISABLED: '不可用',
-    REQUIRED: 'Required' // TODO Mandarin Translation
+    REQUIRED: '必需的'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',

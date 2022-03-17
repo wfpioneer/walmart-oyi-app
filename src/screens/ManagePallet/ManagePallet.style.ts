@@ -90,5 +90,24 @@ export default StyleSheet.create({
     borderColor: COLOR.GREY_200,
     borderRadius: 5,
     borderWidth: 2
+  },
+  errorLabel: {
+    color: COLOR.RED_500,
+    textAlign: 'center'
+  },
+  effectiveDateHeaderItem: {
+    fontSize: 16,
+    color: COLOR.BLACK,
+    textAlign: 'center'
+  },
+  effectiveDateContainer: {
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  modifiedEffectiveDateContainer: {
+    paddingHorizontal: 10,
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: COLOR.YELLOW
   }
 });
