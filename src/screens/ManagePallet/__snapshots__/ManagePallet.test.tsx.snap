@@ -1281,6 +1281,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
             "alignItems": "center",
             "backgroundColor": "#FFFFE0",
             "flexDirection": "column",
+            "paddingHorizontal": 10,
           }
         }
       >

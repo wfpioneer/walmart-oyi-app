@@ -91,6 +91,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   modifiedEffectiveDateContainer: {
+    paddingHorizontal: 10,
     flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: COLOR.YELLOW
