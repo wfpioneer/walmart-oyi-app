@@ -25,7 +25,7 @@ import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, updatePalletItemQty
+  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, getPalletConfig, updatePalletItemQty
 } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
@@ -39,6 +39,7 @@ import {
   removeItem,
   resetItems,
   setPalletItemNewQuantity,
+  setPerishableCategories,
   setupPallet,
   showManagePalletMenu,
   updateItems
@@ -50,6 +51,7 @@ import {
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
+import { Configurations } from '../../models/User';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 
@@ -69,6 +71,9 @@ interface ManagePalletProps {
   clearPalletApi: AsyncState;
   displayClearConfirmation: boolean;
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
+  getPalletConfigApi: AsyncState;
+  perishableCategories: number[];
+  userConfig: Configurations
 }
 interface ApiResult {
   data: any;
@@ -175,6 +180,55 @@ export const handleAddItems = (id: number, items: PalletItem[], dispatch: Dispat
 
   if (addPalletItems.length > 0) {
     dispatch(addPalletUPCs({ palletId: id, items: addPalletItems }));
+  }
+};
+
+export const getPalletConfigApiHook = (
+  getPalletDetailsApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+): void => {
+  if (navigation.isFocused() && !getPalletConfigApi.isWaiting) {
+    // on api success
+    if (getPalletDetailsApi.result) {
+      const {
+        id, createDate, expirationDate, items
+      } = getPalletDetailsApi.result.data.pallets[0];
+      const palletItems = items.map((item: PalletItem) => ({
+        ...item,
+        quantity: item.quantity || 0,
+        newQuantity: item.quantity || 0,
+        deleted: false,
+        added: false
+      }));
+      const palletDetails: Pallet = {
+        palletInfo: {
+          id,
+          createDate,
+          expirationDate
+        },
+        items: palletItems
+      };
+      dispatch(setupPallet(palletDetails));
+      dispatch(hideActivityModal());
+      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+    }
+    // on api error
+    if (getPalletDetailsApi.error) {
+      dispatch(hideActivityModal());
+      Toast.show({
+        type: 'error',
+        text1: strings('PALLET.PALLET_DETAILS_ERROR'),
+        text2: strings(TRY_AGAIN),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+    }
+  }
+  // api is Loading
+  if (getPalletDetailsApi.isWaiting) {
+    dispatch(showActivityModal());
   }
 };
 
@@ -379,7 +433,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
-    displayClearConfirmation, setDisplayClearConfirmation
+    displayClearConfirmation, setDisplayClearConfirmation, getPalletConfigApi, perishableCategories, userConfig
   } = props;
   const { id, expirationDate } = palletInfo;
 
@@ -390,6 +444,19 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     // Suggestion add confirmation before leaving screen if they want to undo unsaved changes
     dispatch({ type: GET_ITEM_DETAILS.RESET });
   }), []);
+
+  useEffectHook(() => {
+    if (perishableCategories.length > 0) {
+      dispatch(getPalletConfig());
+    }
+  }, [perishableCategories]);
+
+  // update pallet hook (get pallet details api)
+  useEffectHook(() => getPalletConfigApiHook(
+    getPalletConfig,
+    dispatch,
+    navigation
+  ), [getPalletDetailsApi]);
 
   // Scanner listener
   useEffectHook(() => {
@@ -607,6 +674,9 @@ const ManagePallet = (): JSX.Element => {
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
+  const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
+  const userConfig = useTypedSelector(state => state.User.configs);
+  const { perishableCategories } = useTypedSelector(state => state.PalletManagement);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
@@ -663,6 +733,9 @@ const ManagePallet = (): JSX.Element => {
           clearPalletApi={clearPalletApi}
           displayClearConfirmation={displayClearConfirmation}
           setDisplayClearConfirmation={setDisplayClearConfirmation}
+          getPalletConfigApi={getPalletConfigApi}
+          userConfig={userConfig}
+          perishableCategories={perishableCategories}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}
