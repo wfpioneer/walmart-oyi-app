@@ -50,7 +50,8 @@ export default {
     YES: 'Yes',
     NO: 'No',
     ENABLED: 'Enabled',
-    DISABLED: 'Disabled'
+    DISABLED: 'Disabled',
+    REQUIRED: 'Required'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
