@@ -15,7 +15,8 @@ describe('ToolsScreen', () => {
     palletManagement: false,
     settingsTool: false,
     printingUpdate: false,
-    binning: false
+    binning: false,
+    picking: false
   };
   describe('Tests rendering the Tools Screen', () => {
     const testUser: User = {
@@ -112,6 +113,24 @@ describe('ToolsScreen', () => {
             configs: {
               ...mockConfigs,
               binning: true
+            }
+          }}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders tools screen, picking enabled by config', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ToolsScreen
+          navigation={navigationProp}
+          user={{
+            ...testUser,
+            configs: {
+              ...mockConfigs,
+              picking: true
             }
           }}
         />

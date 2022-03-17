@@ -9,6 +9,7 @@ export interface ConfigResponse {
   settingsTool: boolean;
   printingUpdate: boolean;
   binning: boolean;
+  picking: boolean;
 }
 
 export default class ConfigService {

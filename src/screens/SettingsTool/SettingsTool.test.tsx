@@ -1,11 +1,25 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { NavigationProp } from '@react-navigation/native';
 import {
   CollapsibleCard, SettingsToolScreen, featureCard, printerCard
 } from './SettingsTool';
 import { mockPrinterList } from '../../mockData/mockPrinterList';
+import { Configurations } from '../../models/User';
 
 describe('SettingsToolScreen', () => {
+
+  const testConfigs: Configurations = {
+    locationManagement: true,
+    locationManagementEdit: true,
+    settingsTool: true,
+    palletManagement: true,
+    binning: true,
+    picking: true,
+    printingUpdate: true
+  };
+  let navigationProp: NavigationProp<any>;
+
   describe('Tests rendering the SettingsToolScreen component', () => {
     it('Test renders the default SettingsToolScreen ', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -19,6 +33,9 @@ describe('SettingsToolScreen', () => {
           locationLabelPrinter={null}
           palletLabelPrinter={null}
           userFeatures={[]}
+          userConfigs={testConfigs}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -36,6 +53,9 @@ describe('SettingsToolScreen', () => {
           locationLabelPrinter={mockPrinterList[1]}
           palletLabelPrinter={mockPrinterList[2]}
           userFeatures={[]}
+          userConfigs={testConfigs}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -53,6 +73,9 @@ describe('SettingsToolScreen', () => {
           locationLabelPrinter={null}
           palletLabelPrinter={null}
           userFeatures={[]}
+          userConfigs={testConfigs}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -70,6 +93,9 @@ describe('SettingsToolScreen', () => {
           locationLabelPrinter={null}
           palletLabelPrinter={null}
           userFeatures={[]}
+          userConfigs={testConfigs}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

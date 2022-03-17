@@ -22,6 +22,7 @@ export interface Configurations {
   settingsTool: boolean;
   printingUpdate: boolean;
   binning: boolean;
+  picking: boolean;
 }
 
 export const AVAILABLE_TOOLS = ['location management', 'pallet management', 'picking', 'binning', 'settings tool'];
