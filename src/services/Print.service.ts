@@ -1,11 +1,11 @@
-import { AxiosResponse } from 'axios';
+import { AxiosRequestHeaders, AxiosResponse } from 'axios';
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
 import { PrintItemList, PrintLocationList, PrintPalletList } from '../models/Printer';
 
 export default class PrintService {
   public static print(payload: {
-    headers: Record<string, unknown>;
+    headers?: AxiosRequestHeaders;
     printList: PrintItemList[];
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
@@ -17,7 +17,7 @@ export default class PrintService {
   }
 
   public static printLabels(payload: {
-    headers: Record<string, unknown>;
+    headers?: AxiosRequestHeaders;
     printLabelList: PrintLocationList[];
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
@@ -31,7 +31,7 @@ export default class PrintService {
   }
 
   public static printPallet(payload: {
-    headers: Record<string, unknown>;
+    headers?: AxiosRequestHeaders;
     printPalletList: PrintPalletList[];
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();

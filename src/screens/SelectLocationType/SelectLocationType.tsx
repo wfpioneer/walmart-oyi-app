@@ -1,7 +1,6 @@
 import React, { EffectCallback, useEffect, useState } from 'react';
-import { Text } from 'react-native-paper';
 import {
-  ActivityIndicator, EmitterSubscription, View
+  ActivityIndicator, EmitterSubscription, Text, View
 } from 'react-native';
 import {
   NavigationProp, useNavigation
@@ -79,7 +78,7 @@ const onValidateSessionCallResponse = (
       dispatch(addLocation({
         upc: upcNbr,
         sectionId: loc,
-        locationTypeNbr: SALES_FLOOR_LOCATION_TYPE
+        locationTypeNbr: Number.parseInt(SALES_FLOOR_LOCATION_TYPE, 10)
       }));
     } else {
       trackEventCall('select_location_add_duplicate');
@@ -96,7 +95,7 @@ const onValidateSessionCallResponse = (
         sectionId: selectedLocation.locationName,
         newSectionId: loc,
         locationTypeNbr: selectedLocation.typeNbr,
-        newLocationTypeNbr: SALES_FLOOR_LOCATION_TYPE
+        newLocationTypeNbr: Number.parseInt(SALES_FLOOR_LOCATION_TYPE, 10)
       }));
     } else {
       trackEventCall('select_location_edit_duplicate');

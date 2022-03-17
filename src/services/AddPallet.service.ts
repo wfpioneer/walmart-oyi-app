@@ -6,7 +6,7 @@ import { PalletItem } from '../models/PalletItem';
 export default class AddPalletService {
   public static addPallet(payload: {
     palletId: string;
-    sectionId: string;
+    sectionId: number;
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.put(
