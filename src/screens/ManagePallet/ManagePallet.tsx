@@ -39,6 +39,7 @@ import {
   removeItem,
   resetItems,
   setPalletItemNewQuantity,
+  setPerishableCategories,
   setupPallet,
   showManagePalletMenu,
   updateItems
@@ -69,6 +70,9 @@ interface ManagePalletProps {
   clearPalletApi: AsyncState;
   displayClearConfirmation: boolean;
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
+  perishableCategories: number[];
+  isPerishable: boolean;
+  setIsPerishable: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface ApiResult {
   data: any;
@@ -123,6 +127,7 @@ export const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text
     dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), newQuantity));
   }
 };
+
 const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
   // Remove item from redux if this item was being added to pallet
   if (item.added) {
@@ -131,11 +136,25 @@ const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
     dispatch(deleteItem(item.itemNbr.toString()));
   }
 };
+
 const undoDelete = (dispatch: Dispatch<any>) => {
   dispatch(resetItems());
 };
-// TODO implement palletItemCard
-const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
+
+const isPerishableItem = (item: PalletItem, perishableCategories: number[]): boolean => (
+  perishableCategories.some(catNbr => item.category === catNbr)
+);
+
+const itemCard = (
+  { item }: { item: PalletItem },
+  dispatch: Dispatch<any>,
+  perishableCategories: number[],
+  setIsPerishable: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  const perishable = isPerishableItem(item, perishableCategories);
+  if (perishable) {
+    setIsPerishable(perishable);
+  }
   if (!item.deleted) {
     return (
       <PalletItemCard
@@ -147,7 +166,7 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
         isValid={true}
         itemName={item.itemDesc}
         itemNumber={item.itemNbr.toString()}
-        markEdited={isQuantityChanged(item)}
+        markEdited={isQuantityChanged(item) || perishable}
         maxValue={9999}
         minValue={0}
         numberOfItems={item.newQuantity || item.quantity}
@@ -189,7 +208,7 @@ export const getPalletDetailsApiHook = (
       const {
         id, createDate, expirationDate, items
       } = getPalletDetailsApi.result.data.pallets[0];
-      const palletItems = items.map((item: PalletItem) => ({
+      const palletItems: PalletItem[] = items.map((item: PalletItem) => ({
         ...item,
         quantity: item.quantity || 0,
         newQuantity: item.quantity || 0,
@@ -205,6 +224,12 @@ export const getPalletDetailsApiHook = (
         items: palletItems
       };
       dispatch(setupPallet(palletDetails));
+      // TODO replace this when Config PR is added to development
+      const mockPerishableCatg: number[] = [
+        35, 36, 39, 41, 43, 45, 48, 49, 52, 56, 57, 58, 76, 86, 91
+      ];
+      dispatch(setPerishableCategories(mockPerishableCatg));
+
       dispatch(hideActivityModal());
       dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
     }
@@ -379,7 +404,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
-    displayClearConfirmation, setDisplayClearConfirmation
+    displayClearConfirmation, setDisplayClearConfirmation, perishableCategories,
+    isPerishable, setIsPerishable
   } = props;
   const { id, expirationDate } = palletInfo;
 
@@ -542,12 +568,14 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             <Text style={styles.headerText}>{strings('PALLET.PALLET_ID')}</Text>
             <Text style={styles.headerItemText}>{id}</Text>
           </View>
-          {expirationDate && expirationDate.length > 0 ? (
-            <View style={styles.headerItem}>
+          {(expirationDate && expirationDate.length >= 0) || isPerishable ? (
+            <View style={(isPerishable && !expirationDate) ? styles.headerItemEdit : styles.headerItem}>
               <Text style={styles.headerText}>
                 {strings('PALLET.EXPIRATION_DATE')}
               </Text>
-              <Text style={styles.headerItemText}>{expirationDate}</Text>
+              {expirationDate
+                ? <Text style={styles.headerItemText}>{expirationDate}</Text>
+                : <Text style={styles.headerRequiredText}>{ strings('GENERICS.REQUIRED')}</Text>}
             </View>
           ) : null}
           <View style={styles.headerItem}>
@@ -575,7 +603,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           <FlatList
             data={items}
             removeClippedSubviews={false}
-            renderItem={item => itemCard(item, dispatch)}
+            renderItem={item => itemCard(item, dispatch, perishableCategories, setIsPerishable)}
             keyExtractor={(item: PalletItem) => item.upcNbr}
           />
         </View>
@@ -587,6 +615,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             style={styles.saveButton}
             backgroundColor={COLOR.GREEN}
             onPress={() => submit()}
+            disabled={isPerishable && !expirationDate}
           />
         </View>
       ) : null}
@@ -595,7 +624,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 };
 
 const ManagePallet = (): JSX.Element => {
-  const { palletInfo, managePalletMenu, items } = useTypedSelector(state => state.PalletManagement);
+  const {
+    palletInfo, managePalletMenu, items, perishableCategories
+  } = useTypedSelector(state => state.PalletManagement);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const navigation = useNavigation();
   const route = useRoute();
@@ -607,6 +638,7 @@ const ManagePallet = (): JSX.Element => {
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
+  const [isPerishable, setIsPerishable] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
@@ -663,6 +695,9 @@ const ManagePallet = (): JSX.Element => {
           clearPalletApi={clearPalletApi}
           displayClearConfirmation={displayClearConfirmation}
           setDisplayClearConfirmation={setDisplayClearConfirmation}
+          perishableCategories={perishableCategories}
+          isPerishable={isPerishable}
+          setIsPerishable={setIsPerishable}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

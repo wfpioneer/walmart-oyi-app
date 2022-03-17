@@ -49,7 +49,8 @@ export default {
     YES: '是',
     NO: '否',
     ENABLED: '激活',
-    DISABLED: '不可用'
+    DISABLED: '不可用',
+    REQUIRED: 'Required' // TODO Mandarin Translation
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
