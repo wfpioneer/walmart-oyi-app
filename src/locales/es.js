@@ -49,7 +49,8 @@ export default {
     YES: 'Sí',
     NO: 'No',
     ENABLED: 'Activado',
-    DISABLED: 'Desactivado'
+    DISABLED: 'Desactivado',
+    REQUIRED: 'Requerido'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',

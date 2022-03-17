@@ -13,7 +13,8 @@ import {
   SET_ITEM_QUANTITY,
   SET_PERISHABLE_CATEGORIES,
   SHOW_MANAGE_PALLET_MENU,
-  UPDATE_PALLET
+  UPDATE_PALLET,
+  UPDATE_PALLET_EXPIRATION_DATE
 } from '../actions/PalletManagement';
 import { CombinePallet, PalletInfo } from '../../models/PalletManagementTypes';
 import { PalletItem } from '../../models/PalletItem';
@@ -145,6 +146,17 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       return {
         ...state,
         perishableCategories
+      };
+    }
+    case UPDATE_PALLET_EXPIRATION_DATE: {
+      const { palletInfo } = state;
+      const updatedPalletInfo = {
+        ...palletInfo,
+        expirationDate: action.payload.date
+      };
+      return {
+        ...state,
+        palletInfo: updatedPalletInfo
       };
     }
     default:
