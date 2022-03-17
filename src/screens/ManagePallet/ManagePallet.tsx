@@ -13,6 +13,7 @@ import {
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
+import { isEmpty } from 'lodash';
 import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
@@ -46,7 +47,7 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, GET_PALLET_CONFIG, UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
@@ -184,50 +185,30 @@ export const handleAddItems = (id: number, items: PalletItem[], dispatch: Dispat
 };
 
 export const getPalletConfigApiHook = (
-  getPalletDetailsApi: AsyncState,
+  getPalletConfigApi: AsyncState,
   dispatch: Dispatch<any>,
+  userConfig: Configurations,
   navigation: NavigationProp<any>
 ): void => {
   if (navigation.isFocused() && !getPalletConfigApi.isWaiting) {
     // on api success
-    if (getPalletDetailsApi.result) {
-      const {
-        id, createDate, expirationDate, items
-      } = getPalletDetailsApi.result.data.pallets[0];
-      const palletItems = items.map((item: PalletItem) => ({
-        ...item,
-        quantity: item.quantity || 0,
-        newQuantity: item.quantity || 0,
-        deleted: false,
-        added: false
-      }));
-      const palletDetails: Pallet = {
-        palletInfo: {
-          id,
-          createDate,
-          expirationDate
-        },
-        items: palletItems
-      };
-      dispatch(setupPallet(palletDetails));
+    if (getPalletConfigApi.result) {
+      const { perishableCategories } = getPalletConfigApi.result.data;
+      dispatch(setPerishableCategories(perishableCategories));
       dispatch(hideActivityModal());
-      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+      dispatch({ type: GET_PALLET_CONFIG.RESET });
     }
     // on api error
-    if (getPalletDetailsApi.error) {
+    if (getPalletConfigApi.error) {
       dispatch(hideActivityModal());
-      Toast.show({
-        type: 'error',
-        text1: strings('PALLET.PALLET_DETAILS_ERROR'),
-        text2: strings(TRY_AGAIN),
-        visibilityTime: 4000,
-        position: 'bottom'
-      });
-      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+      const { backupCategories } = userConfig;
+      const backupPerishableCategories = backupCategories.split(',').map(Number);
+      dispatch(setPerishableCategories(backupPerishableCategories));
+      dispatch({ type: GET_PALLET_CONFIG.RESET });
     }
   }
   // api is Loading
-  if (getPalletDetailsApi.isWaiting) {
+  if (getPalletConfigApi.isWaiting) {
     dispatch(showActivityModal());
   }
 };
@@ -446,17 +427,18 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   }), []);
 
   useEffectHook(() => {
-    if (perishableCategories.length > 0) {
+    if (userConfig.palletExpiration && isEmpty(perishableCategories)) {
       dispatch(getPalletConfig());
     }
   }, [perishableCategories]);
 
   // update pallet hook (get pallet details api)
   useEffectHook(() => getPalletConfigApiHook(
-    getPalletConfig,
+    getPalletConfigApi,
     dispatch,
+    userConfig,
     navigation
-  ), [getPalletDetailsApi]);
+  ), [getPalletConfigApi]);
 
   // Scanner listener
   useEffectHook(() => {
