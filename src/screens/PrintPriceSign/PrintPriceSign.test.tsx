@@ -8,6 +8,7 @@ import getItemDetails from '../../mockData/getItemDetails';
 import { Printer, PrinterType } from '../../models/Printer';
 import { strings } from '../../locales';
 import { LocationName } from '../../models/Location';
+import { mockConfig } from '../../mockData/mockConfig';
 
 // Something gets into a weird state, and this seems to fix it
 jest.useFakeTimers();
@@ -49,14 +50,10 @@ describe('PrintPriceSignScreen', () => {
     id: '000000000000'
   }];
   const mockUserConfig = {
+    ...mockConfig,
     locationManagement: true,
-    locationManagementEdit: false,
     palletManagement: true,
-    settingsTool: false,
     printingUpdate: true,
-    binning: false,
-    palletExpiration: false,
-    backupCategories: ''
   };
 
   describe('Tests rendering print Errors/Api responses', () => {
