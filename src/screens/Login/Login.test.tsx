@@ -49,7 +49,9 @@ const testUser: User = {
     palletManagement: false,
     settingsTool: false,
     printingUpdate: true,
-    binning: false
+    binning: false,
+    palletExpiration: false,
+    backupCategories: ''
   }
 };
 
