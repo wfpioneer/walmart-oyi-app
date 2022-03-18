@@ -42,6 +42,7 @@ import {
   removeItem,
   resetItems,
   setPalletItemNewQuantity,
+  setPalletNewExpiration,
   setupPallet,
   showManagePalletMenu,
   updateItems,
@@ -75,8 +76,6 @@ interface ManagePalletProps {
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
   isPickerShow: boolean;
   setIsPickerShow: React.Dispatch<React.SetStateAction<boolean>>;
-  isExpirationDateModified: boolean;
-  setIsExpirationDateModified: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface ApiResult {
   data: any;
@@ -93,6 +92,10 @@ export const getNumberOfDeleted = (items: PalletItem[]): number => items.reduce(
 export const isQuantityChanged = (
   item: PalletItem
 ): boolean => !!(item.newQuantity && item.newQuantity !== item.quantity);
+
+export const isExpiryDateChanged = (palletInfo: PalletInfo): boolean => !!(
+  palletInfo.newExpirationDate && palletInfo.newExpirationDate !== palletInfo.expirationDate
+);
 
 const enableSave = (items: PalletItem[]): boolean => {
   const modifiedArray = items.filter((item: PalletItem) => isQuantityChanged(item)
@@ -167,12 +170,16 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   return null;
 };
 
-export const handleUpdateItems = (items: PalletItem[], palletId: number, dispatch: Dispatch<any>): void => {
+export const handleUpdateItems = (items: PalletItem[], palletInfo: PalletInfo, dispatch: Dispatch<any>): void => {
   const updatePalletItems = items.filter(item => isQuantityChanged(item) && !item.added && !item.deleted)
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
 
-  if (updatePalletItems.length > 0) {
-    dispatch(updatePalletItemQty({ palletId, palletItem: updatePalletItems }));
+  if (updatePalletItems.length > 0 || isExpiryDateChanged(palletInfo)) {
+    dispatch(updatePalletItemQty({
+      palletId: palletInfo.id,
+      palletItem: updatePalletItems,
+      palletExpiration: palletInfo.newExpirationDate
+    }));
   }
 };
 
@@ -286,6 +293,7 @@ export const updatePalletApisHook = (
         }
         return item;
       });
+      dispatch(updatePalletExpirationDate());
     } else {
       totalResponses.set('ERROR', updateResponse);
     }
@@ -388,7 +396,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation,
-    setIsPickerShow, isPickerShow, isExpirationDateModified, setIsExpirationDateModified
+    setIsPickerShow, isPickerShow
   } = props;
   const { id, expirationDate } = palletInfo;
 
@@ -517,21 +525,20 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     // Calls add items to pallet via api
     handleAddItems(palletId, items, dispatch);
     // Calls update pallet item qty api
-    handleUpdateItems(items, id, dispatch);
-    setIsExpirationDateModified(false);
+    handleUpdateItems(items, palletInfo, dispatch);
   };
 
   const handleUnhandledTouches = () => {
     Keyboard.dismiss();
     return false;
   };
+
   const onDatePickerChange = (event: DateTimePickerEvent, value: Date| undefined) => {
     const { type } = event;
     const newDate = value && moment(value).format('MM/DD/YYYY');
     setIsPickerShow(false);
     if (type === 'set' && newDate && newDate !== expirationDate) {
-      dispatch(updatePalletExpirationDate(newDate));
-      setIsExpirationDateModified(true);
+      dispatch(setPalletNewExpiration(newDate));
     }
   };
 
@@ -562,7 +569,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             <Text style={styles.headerItemText}>{id}</Text>
           </View>
           <View
-            style={isExpirationDateModified ? styles.modifiedEffectiveDateContainer : styles.effectiveDateContainer}
+            style={isExpiryDateChanged(palletInfo)
+              ? styles.modifiedEffectiveDateContainer
+              : styles.effectiveDateContainer}
           >
             <TouchableOpacity onPress={() => setIsPickerShow(true)}>
               <Text style={styles.headerText}>
@@ -641,7 +650,6 @@ const ManagePallet = (): JSX.Element => {
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const [isPickerShow, setIsPickerShow] = useState(false);
-  const [isExpirationDateModified, setIsExpirationDateModified] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
@@ -700,8 +708,6 @@ const ManagePallet = (): JSX.Element => {
           setDisplayClearConfirmation={setDisplayClearConfirmation}
           isPickerShow={isPickerShow}
           setIsPickerShow={setIsPickerShow}
-          isExpirationDateModified={isExpirationDateModified}
-          setIsExpirationDateModified={setIsExpirationDateModified}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

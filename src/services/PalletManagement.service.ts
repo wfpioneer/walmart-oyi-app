@@ -1,11 +1,13 @@
 import { AxiosResponse } from 'axios';
+import moment from 'moment';
 import { PalletItem } from '../models/PalletManagementTypes';
 import { Environment, getEnvironment } from '../utils/environment';
 import Request from './Request';
 
 export interface UpdateItemQuantityRequest {
-  palletId: number
-  palletItem: Pick<PalletItem, 'quantity' | 'upcNbr'>[]
+  palletId: number;
+  palletItem: Pick<PalletItem, 'quantity' | 'upcNbr'>[];
+  palletExpiration?: string;
 }
 
 export interface CombinePalletsRequest {
@@ -34,7 +36,10 @@ export interface PostBinPalletsMultistatusResponse {
 export default class PalletManagementService {
   public static updateItemQuantity(payload: UpdateItemQuantityRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
-    return Request.patch(`${urls.locationUrl}/pallet/${payload.palletId}/upc/qtys`, payload.palletItem);
+    const expiryParam = payload.palletExpiration
+      ? `?expirationDate=${moment(payload.palletExpiration, 'MM/DD/YYYY').toISOString()}`
+      : '';
+    return Request.patch(`${urls.locationUrl}/pallet/${payload.palletId}/upc/qtys${expiryParam}`, payload.palletItem);
   }
 
   public static combinePallets(payload: CombinePalletsRequest): Promise<AxiosResponse<unknown>> {
