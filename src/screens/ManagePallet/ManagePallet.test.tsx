@@ -551,7 +551,7 @@ describe('ManagePalletScreen', () => {
       expect(mockDispatch).toBeCalledTimes(3);
     });
 
-    it('Tests getPalletConfigApiHook on success', () => {
+    it('Tests getPalletConfigApiHook isLoading', () => {
       const apiIsWaiting: AsyncState = {
         ...defaultAsyncState,
         isWaiting: true
