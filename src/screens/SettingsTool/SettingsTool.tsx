@@ -166,7 +166,7 @@ const SettingsTool = (): JSX.Element => {
   const [featuresOpen, toggleFeatureList] = useState(true);
   const { priceLabelPrinter, locationLabelPrinter, palletLabelPrinter } = useTypedSelector(state => state.Print);
   const userFeatures = useTypedSelector(state => state.User.features);
-  const userConfigureation = useTypedSelector(state => state.User.configs);
+  const userConfiguration = useTypedSelector(state => state.User.configs);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -180,7 +180,7 @@ const SettingsTool = (): JSX.Element => {
       locationLabelPrinter={locationLabelPrinter}
       palletLabelPrinter={palletLabelPrinter}
       userFeatures={userFeatures}
-      userConfigs={userConfigureation}
+      userConfigs={userConfiguration}
       dispatch={dispatch}
       navigation={navigation}
     />
