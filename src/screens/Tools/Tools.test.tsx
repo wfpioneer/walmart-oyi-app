@@ -16,6 +16,8 @@ describe('ToolsScreen', () => {
     settingsTool: false,
     printingUpdate: false,
     binning: false,
+    palletExpiration: false,
+    backupCategories: '',
     picking: false
   };
   describe('Tests rendering the Tools Screen', () => {
