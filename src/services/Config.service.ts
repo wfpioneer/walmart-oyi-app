@@ -11,6 +11,7 @@ export interface ConfigResponse {
   binning: boolean;
   palletExpiration: boolean;
   backupCategories: string;
+  picking: boolean;
 }
 
 export default class ConfigService {
