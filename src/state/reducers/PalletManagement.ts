@@ -11,6 +11,7 @@ import {
   SETUP_PALLET,
   SET_ITEM_NEW_QUANTITY,
   SET_ITEM_QUANTITY,
+  SET_PERISHABLE_CATEGORIES,
   SHOW_MANAGE_PALLET_MENU,
   UPDATE_PALLET,
   UPDATE_PALLET_EXPIRATION_DATE
@@ -20,9 +21,10 @@ import { PalletItem } from '../../models/PalletItem';
 
 interface PalletManagementState {
   managePalletMenu: boolean;
-  palletInfo: PalletInfo
+  palletInfo: PalletInfo;
   items: PalletItem[];
-  combinePallets: CombinePallet[]
+  combinePallets: CombinePallet[];
+  perishableCategories: number[];
 }
 
 const initialState: PalletManagementState = {
@@ -31,7 +33,8 @@ const initialState: PalletManagementState = {
     id: 0
   },
   items: [],
-  combinePallets: []
+  combinePallets: [],
+  perishableCategories: []
 };
 
 export const PalletManagement = (state = initialState, action: Actions): PalletManagementState => {
@@ -41,11 +44,13 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         ...state,
         managePalletMenu: action.payload
       };
-    case SETUP_PALLET:
+    case SETUP_PALLET: {
+      const { perishableCategories } = state;
       return {
         ...initialState,
-        ...action.payload
-      };
+        ...action.payload,
+        perishableCategories
+      }; }
     case ADD_COMBINE_PALLET:
       return {
         ...state,
@@ -134,6 +139,13 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       return {
         ...state,
         items: updatedItems
+      };
+    }
+    case SET_PERISHABLE_CATEGORIES: {
+      const { perishableCategories } = action.payload;
+      return {
+        ...state,
+        perishableCategories
       };
     }
     case UPDATE_PALLET_EXPIRATION_DATE: {

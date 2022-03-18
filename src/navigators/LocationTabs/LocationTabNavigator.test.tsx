@@ -42,8 +42,8 @@ const routeProp: RouteProp<any, string> = {
 };
 
 const defaultScannedEvent = {
-  type: undefined,
-  value: undefined
+  type: null,
+  value: null
 };
 
 const mockNavigate = jest.fn();
@@ -81,7 +81,9 @@ const user: User = {
     palletManagement: false,
     settingsTool: false,
     printingUpdate: false,
-    binning: false
+    binning: false,
+    palletExpiration: false,
+    backupCategories: ''
   },
   countryCode: 'CN',
   domain: 'Homeoffice',

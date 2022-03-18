@@ -15,7 +15,9 @@ describe('ToolsScreen', () => {
     palletManagement: false,
     settingsTool: false,
     printingUpdate: false,
-    binning: false
+    binning: false,
+    palletExpiration: false,
+    backupCategories: ''
   };
   describe('Tests rendering the Tools Screen', () => {
     const testUser: User = {

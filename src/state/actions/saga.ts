@@ -63,6 +63,7 @@ export const PRINT_PALLET_LABEL = 'SAGA/PRINT_PALLET_LABEL';
 export const CLEAR_PALLET = 'SAGA/CLEAR_PALLET';
 export const GET_PALLET_INFO = 'SAGA/GET_PALLET_INFO';
 export const POST_BIN_PALLETS = 'SAGA/POST_BIN_PALLETS';
+export const GET_PALLET_CONFIG = 'SAGA/GET_PALLET_CONFIG';
 
 // TODO add types for each service payload
 export const hitGoogle = () => ({ type: HIT_GOOGLE } as const);
@@ -177,4 +178,7 @@ export const getPalletInfo = (payload: GetPalletInfoRequest) => ({
 } as const);
 export const binPallets = (payload: PostBinPalletsRequest) => ({
   type: POST_BIN_PALLETS, payload
+} as const);
+export const getPalletConfig = () => ({
+  type: GET_PALLET_CONFIG
 } as const);

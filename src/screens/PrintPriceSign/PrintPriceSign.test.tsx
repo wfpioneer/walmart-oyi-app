@@ -54,7 +54,9 @@ describe('PrintPriceSignScreen', () => {
     palletManagement: true,
     settingsTool: false,
     printingUpdate: true,
-    binning: false
+    binning: false,
+    palletExpiration: false,
+    backupCategories: ''
   };
 
   describe('Tests rendering print Errors/Api responses', () => {
