@@ -24,6 +24,7 @@ export interface Configurations {
   binning: boolean;
   palletExpiration: boolean;
   backupCategories: string;
+  picking: boolean;
 }
 
 export const AVAILABLE_TOOLS = ['location management', 'pallet management', 'picking', 'binning', 'settings tool'];
