@@ -23,7 +23,8 @@ const initialState: User = {
     settingsTool: false,
     printingUpdate: false,
     binning: false,
-    palletExpiration: false
+    palletExpiration: false,
+    backupCategories: ''
   }
 };
 
@@ -52,7 +53,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           settingsTool: action.payload.settingsTool || false,
           printingUpdate: action.payload.printingUpdate || false,
           binning: action.payload.binning || false,
-          palletExpiration: action.payload.palletExpiration || false
+          palletExpiration: action.payload.palletExpiration || false,
+          backupCategories: action.payload.backupCategories
         }
       };
     default:

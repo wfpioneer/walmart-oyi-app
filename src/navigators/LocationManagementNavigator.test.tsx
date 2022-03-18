@@ -32,7 +32,9 @@ describe('LocationManagement Navigator', () => {
       palletManagement: false,
       settingsTool: false,
       printingUpdate: false,
-      binning: false
+      binning: false,
+      palletExpiration: false,
+      backupCategories: ''
     },
     countryCode: 'CN',
     domain: 'Homeoffice',

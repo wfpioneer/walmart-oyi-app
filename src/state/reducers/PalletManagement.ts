@@ -21,10 +21,10 @@ import { PalletItem } from '../../models/PalletItem';
 
 interface PalletManagementState {
   managePalletMenu: boolean;
-  palletInfo: PalletInfo
+  palletInfo: PalletInfo;
   items: PalletItem[];
-  combinePallets: CombinePallet[]
-  perishableCategories: number[]
+  combinePallets: CombinePallet[];
+  perishableCategories: number[];
 }
 
 const initialState: PalletManagementState = {
@@ -47,11 +47,13 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         ...state,
         managePalletMenu: action.payload
       };
-    case SETUP_PALLET:
+    case SETUP_PALLET: {
+      const { perishableCategories } = state;
       return {
         ...initialState,
-        ...action.payload
-      };
+        ...action.payload,
+        perishableCategories
+      }; }
     case ADD_COMBINE_PALLET:
       return {
         ...state,
@@ -143,9 +145,10 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       };
     }
     case SET_PERISHABLE_CATEGORIES: {
+      const { perishableCategories } = action.payload;
       return {
         ...state,
-        perishableCategories: action.payload.perishableCategories
+        perishableCategories
       };
     }
     case UPDATE_PALLET_EXPIRATION_DATE: {

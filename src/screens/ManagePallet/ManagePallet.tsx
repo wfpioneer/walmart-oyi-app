@@ -14,6 +14,7 @@ import {
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
+import { isEmpty } from 'lodash';
 import moment from 'moment';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { trackEvent } from 'appcenter-analytics';
@@ -28,7 +29,7 @@ import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, updatePalletItemQty
+  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, getPalletConfig, updatePalletItemQty
 } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
@@ -50,11 +51,12 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, GET_PALLET_CONFIG, UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
+import { Configurations } from '../../models/User';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 
@@ -74,9 +76,11 @@ interface ManagePalletProps {
   clearPalletApi: AsyncState;
   displayClearConfirmation: boolean;
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
-  perishableCategories: number[];
   isPerishable: boolean;
   setIsPerishable: React.Dispatch<React.SetStateAction<boolean>>;
+  getPalletConfigApi: AsyncState;
+  perishableCategories: number[];
+  userConfig: Configurations
   isPickerShow: boolean;
   setIsPickerShow: React.Dispatch<React.SetStateAction<boolean>>;
   isExpirationDateModified: boolean;
@@ -202,6 +206,35 @@ export const handleAddItems = (id: number, items: PalletItem[], dispatch: Dispat
 
   if (addPalletItems.length > 0) {
     dispatch(addPalletUPCs({ palletId: id, items: addPalletItems }));
+  }
+};
+
+export const getPalletConfigApiHook = (
+  getPalletConfigApi: AsyncState,
+  dispatch: Dispatch<any>,
+  userConfig: Configurations,
+  navigation: NavigationProp<any>
+): void => {
+  if (navigation.isFocused() && !getPalletConfigApi.isWaiting) {
+    // on api success
+    if (getPalletConfigApi.result) {
+      const { perishableCategories } = getPalletConfigApi.result.data;
+      dispatch(setPerishableCategories(perishableCategories));
+      dispatch(hideActivityModal());
+      dispatch({ type: GET_PALLET_CONFIG.RESET });
+    }
+    // on api error
+    if (getPalletConfigApi.error) {
+      dispatch(hideActivityModal());
+      const { backupCategories } = userConfig;
+      const backupPerishableCategories = backupCategories.split(',').map(Number);
+      dispatch(setPerishableCategories(backupPerishableCategories));
+      dispatch({ type: GET_PALLET_CONFIG.RESET });
+    }
+  }
+  // api is Loading
+  if (getPalletConfigApi.isWaiting) {
+    dispatch(showActivityModal());
   }
 };
 
@@ -412,9 +445,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
-    displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow, 
+    displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, isExpirationDateModified, setIsExpirationDateModified,
-    perishableCategories, isPerishable, setIsPerishable,   
+    perishableCategories, isPerishable, setIsPerishable, getPalletConfigApi, userConfig
   } = props;
   const { id, expirationDate } = palletInfo;
 
@@ -425,6 +458,20 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     // Suggestion add confirmation before leaving screen if they want to undo unsaved changes
     dispatch({ type: GET_ITEM_DETAILS.RESET });
   }), []);
+
+  useEffectHook(() => {
+    if (userConfig.palletExpiration && isEmpty(perishableCategories)) {
+      dispatch(getPalletConfig());
+    }
+  }, [perishableCategories]);
+
+  // update pallet hook (get pallet details api)
+  useEffectHook(() => getPalletConfigApiHook(
+    getPalletConfigApi,
+    dispatch,
+    userConfig,
+    navigation
+  ), [getPalletConfigApi]);
 
   // Scanner listener
   useEffectHook(() => {
@@ -670,6 +717,8 @@ const ManagePallet = (): JSX.Element => {
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const [isPerishable, setIsPerishable] = useState(false);
+  const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
+  const userConfig = useTypedSelector(state => state.User.configs);
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [isExpirationDateModified, setIsExpirationDateModified] = useState(false);
 
@@ -728,9 +777,11 @@ const ManagePallet = (): JSX.Element => {
           clearPalletApi={clearPalletApi}
           displayClearConfirmation={displayClearConfirmation}
           setDisplayClearConfirmation={setDisplayClearConfirmation}
-          perishableCategories={perishableCategories}
           isPerishable={isPerishable}
           setIsPerishable={setIsPerishable}
+          getPalletConfigApi={getPalletConfigApi}
+          userConfig={userConfig}
+          perishableCategories={perishableCategories}
           isPickerShow={isPickerShow}
           setIsPickerShow={setIsPickerShow}
           isExpirationDateModified={isExpirationDateModified}
