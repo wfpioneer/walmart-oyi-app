@@ -42,8 +42,8 @@ const routeProp: RouteProp<any, string> = {
 };
 
 const defaultScannedEvent = {
-  type: undefined,
-  value: undefined
+  type: null,
+  value: null
 };
 
 const mockNavigate = jest.fn();

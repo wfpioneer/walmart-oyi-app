@@ -6,6 +6,7 @@ import {
   ManagePalletScreen,
   clearPalletApiHook,
   getNumberOfDeleted,
+  getPalletConfigApiHook,
   getPalletDetailsApiHook,
   handleAddItems,
   handleDecreaseQuantity,
@@ -27,6 +28,18 @@ jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
 }));
+
+const mockUserConfig = {
+  locationManagement: true,
+  locationManagementEdit: false,
+  palletManagement: true,
+  settingsTool: false,
+  printingUpdate: true,
+  binning: false,
+  palletExpiration: false,
+  backupCategories: ''
+};
+
 describe('ManagePalletScreen', () => {
   const mockPalletInfo: PalletInfo = {
     id: 1514,
@@ -116,6 +129,9 @@ describe('ManagePalletScreen', () => {
           isExpirationDateModified={false}
           setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
+          perishableCategories={[]}
+          getPalletConfigApi={defaultAsyncState}
+          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -145,6 +161,9 @@ describe('ManagePalletScreen', () => {
           isExpirationDateModified={false}
           setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
+          perishableCategories={[]}
+          getPalletConfigApi={defaultAsyncState}
+          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -175,6 +194,9 @@ describe('ManagePalletScreen', () => {
           isExpirationDateModified={false}
           setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
+          perishableCategories={[]}
+          getPalletConfigApi={defaultAsyncState}
+          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -202,6 +224,9 @@ describe('ManagePalletScreen', () => {
           isExpirationDateModified={true}
           setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
+          perishableCategories={[]}
+          getPalletConfigApi={defaultAsyncState}
+          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -242,6 +267,9 @@ describe('ManagePalletScreen', () => {
           isExpirationDateModified={false}
           setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
+          perishableCategories={[]}
+          getPalletConfigApi={defaultAsyncState}
+          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -498,6 +526,41 @@ describe('ManagePalletScreen', () => {
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
       expect(Toast.show).toHaveBeenCalledWith(failedToast);
+    });
+
+    it('Tests getPalletConfigApiHook on success', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: {
+            perishableCategories: [1, 8]
+          }
+        }
+      };
+
+      getPalletConfigApiHook(successApi, mockDispatch, mockUserConfig, navigationProp);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(3);
+    });
+
+    it('Tests getPalletConfigApiHook on failure', () => {
+      const failApi: AsyncState = { ...defaultAsyncState, error: { status: 400 } };
+
+      getPalletConfigApiHook(failApi, mockDispatch, { ...mockUserConfig, backupCategories: '1, 10' }, navigationProp);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(3);
+    });
+
+    it('Tests getPalletConfigApiHook on success', () => {
+      const apiIsWaiting: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+
+      getPalletConfigApiHook(apiIsWaiting, mockDispatch, mockUserConfig, navigationProp);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(showActivityModal).toBeCalledTimes(1);
     });
   });
 });
