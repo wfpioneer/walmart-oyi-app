@@ -3,7 +3,7 @@ export interface PalletItem {
   itemNbr: number | string;
   price: number;
   itemDesc: string;
-  category?: number;
+  categoryNbr?: number;
   categoryDesc?: string;
   quantity: number;
   newQuantity?: number;
@@ -20,7 +20,7 @@ export interface PalletInfo {
   id: number;
   createDate?: string;
   expirationDate?: string;
-  newExpirationDate?: Date
+  newExpirationDate?: string;
 }
 
 export interface Pallet {

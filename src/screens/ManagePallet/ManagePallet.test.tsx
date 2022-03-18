@@ -5,6 +5,7 @@ import Toast from 'react-native-toast-message';
 import {
   ManagePalletScreen,
   clearPalletApiHook,
+  getItemDetailsApiHook,
   getNumberOfDeleted,
   getPalletConfigApiHook,
   getPalletDetailsApiHook,
@@ -23,6 +24,7 @@ import {
   showActivityModal
 } from '../../state/actions/Modal';
 import { strings } from '../../locales';
+import getItemDetails from '../../mockData/getItemDetails';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -53,7 +55,7 @@ describe('ManagePalletScreen', () => {
       quantity: 3,
       newQuantity: 3,
       price: 10.0,
-      category: 54,
+      categoryNbr: 54,
       categoryDesc: 'test cat',
       deleted: true,
       added: false
@@ -65,7 +67,7 @@ describe('ManagePalletScreen', () => {
       quantity: 3,
       newQuantity: 4,
       price: 10.0,
-      category: 54,
+      categoryNbr: 54,
       categoryDesc: 'test cat',
       deleted: false,
       added: false
@@ -77,12 +79,15 @@ describe('ManagePalletScreen', () => {
       quantity: 2,
       newQuantity: 1,
       price: 3.49,
-      category: 72,
+      categoryNbr: 72,
       categoryDesc: 'deli',
       deleted: false,
       added: false
     }
   ];
+
+  const mockPerishableCatg: number[] = [1, 8, 54, 72, 93];
+
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
     value: null,
@@ -132,6 +137,8 @@ describe('ManagePalletScreen', () => {
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockUserConfig}
+          isPerishable={false}
+          setIsPerishable={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -164,10 +171,13 @@ describe('ManagePalletScreen', () => {
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockUserConfig}
+          isPerishable={false}
+          setIsPerishable={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
     it('Renders the DatePicker Dialog when the isPickerShow is true ', () => {
       const mockDate = new Date(1647369000000);
       jest.spyOn(global, 'Date').mockImplementation(() => (mockDate as unknown) as string);
@@ -197,10 +207,13 @@ describe('ManagePalletScreen', () => {
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockUserConfig}
+          isPerishable={false}
+          setIsPerishable={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
     it('Renders the palletManagement when expiration date got modified', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -227,6 +240,46 @@ describe('ManagePalletScreen', () => {
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockUserConfig}
+          isPerishable={false}
+          setIsPerishable={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders the expiration date required text if pallet has no date with perishableItems', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const isPerishable = true;
+      const mockPalletNoDate: PalletInfo = {
+        id: 2,
+        createDate: '03/31/2022'
+      };
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletNoDate}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
+          clearPalletApi={defaultAsyncState}
+          displayClearConfirmation={true}
+          setDisplayClearConfirmation={jest.fn()}
+          isPickerShow={false}
+          isExpirationDateModified={true}
+          setIsExpirationDateModified={jest.fn()}
+          setIsPickerShow={jest.fn()}
+          perishableCategories={[]}
+          getPalletConfigApi={defaultAsyncState}
+          userConfig={mockUserConfig}
+          isPerishable={isPerishable}
+          setIsPerishable={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -270,6 +323,8 @@ describe('ManagePalletScreen', () => {
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockUserConfig}
+          isPerishable={false}
+          setIsPerishable={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -369,6 +424,7 @@ describe('ManagePalletScreen', () => {
       handleAddItems(palletId, mockAddPallet, dispatch);
       expect(dispatch).toHaveBeenCalled();
     });
+
     it('Does not call dispatch if the "added" flag is false for all palletItems', () => {
       const dispatch = jest.fn();
       handleAddItems(palletId, mockItems, dispatch);
@@ -561,6 +617,93 @@ describe('ManagePalletScreen', () => {
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(showActivityModal).toBeCalledTimes(1);
+    });
+
+    it('Tests getPalletDetailsApiHook on 200 success if item already exists', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: mockItems[0],
+          status: 200
+        }
+      };
+      const mockSetIsPerishable = jest.fn();
+      const toastItemExists = {
+        type: 'info',
+        text1: strings('PALLET.ITEMS_DETAILS_EXIST'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      getItemDetailsApiHook(successApi, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
+      expect(Toast.show).toHaveBeenCalledWith(toastItemExists);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetIsPerishable).not.toHaveBeenCalled();
+    });
+
+    it('Tests getPalletDetailsApiHook on 200 success for a new item', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: getItemDetails[123],
+          status: 200
+        }
+      };
+      const mockSetIsPerishable = jest.fn();
+
+      getItemDetailsApiHook(successApi, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockSetIsPerishable).toBeCalledTimes(1);
+    });
+
+    it('Tests getPalletDetailsApiHook on 204 success for a new item', () => {
+      const successApi204: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      const mockSetIsPerishable = jest.fn();
+      const toastItemNotFound = {
+        type: 'info',
+        text1: strings('PALLET.ITEMS_NOT_FOUND'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      getItemDetailsApiHook(successApi204, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
+      expect(mockSetIsPerishable).not.toHaveBeenCalled();
+    });
+
+    it('Tests getItemDetailsApi on failure', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      const mockSetIsPerishable = jest.fn();
+      const toastGetItemError = {
+        type: 'error',
+        text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      getItemDetailsApiHook(failureApi, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastGetItemError);
+      expect(mockSetIsPerishable).not.toHaveBeenCalled();
+    });
+
+    it('Tests getItemDetailsApi isWaiting', () => {
+      const isLoadingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      const mockSetIsPerishable = jest.fn();
+      getItemDetailsApiHook(isLoadingApi, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetIsPerishable).not.toHaveBeenCalled();
     });
   });
 });

@@ -108,6 +108,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: COLOR.YELLOW
+    backgroundColor: COLOR.YELLOW,
+    borderWidth: 1
   }
 });
