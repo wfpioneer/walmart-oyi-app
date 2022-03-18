@@ -6,17 +6,19 @@ import {
 } from './SettingsTool';
 import { mockPrinterList } from '../../mockData/mockPrinterList';
 import { Configurations } from '../../models/User';
+import { mockConfig } from '../../mockData/mockConfig';
 
 describe('SettingsToolScreen', () => {
 
   const testConfigs: Configurations = {
+    ...mockConfig,
     locationManagement: true,
     locationManagementEdit: true,
     settingsTool: true,
     palletManagement: true,
     binning: true,
     picking: true,
-    printingUpdate: true
+    printingUpdate: true,
   };
   let navigationProp: NavigationProp<any>;
 

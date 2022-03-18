@@ -151,7 +151,7 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
         data={appFeatures}
         renderItem={({ item }) => featureCard(
           item.name,
-          userFeatures.some(feature => feature === item.key) || userConfigs[item.key as keyof Configurations]
+          userFeatures.some(feature => feature === item.key) || Boolean(userConfigs[item.key as keyof Configurations])
         )}
         keyExtractor={item => item.key}
         ListFooterComponent={<View />}

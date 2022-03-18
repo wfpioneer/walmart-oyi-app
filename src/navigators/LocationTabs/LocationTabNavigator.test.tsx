@@ -32,6 +32,7 @@ import { ClearLocationTarget } from '../../models/Location';
 import User from '../../models/User';
 import { REMOVE_SECTION } from '../../state/actions/asyncAPI';
 import { HIDE_LOCATION_POPUP } from '../../state/actions/Location';
+import { mockConfig } from '../../mockData/mockConfig';
 
 const REACT_NAV_NATIVE = '@react-navigation/native';
 
@@ -75,16 +76,7 @@ const user: User = {
     loginId: 'vn50pz4',
     mailId: 'vn50pz4@homeoffice.wal-mart.com'
   },
-  configs: {
-    locationManagement: false,
-    locationManagementEdit: false,
-    palletManagement: false,
-    settingsTool: false,
-    printingUpdate: false,
-    binning: false,
-    palletExpiration: false,
-    backupCategories: ''
-  },
+  configs: mockConfig,
   countryCode: 'CN',
   domain: 'Homeoffice',
   features: [],
