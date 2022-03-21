@@ -12,6 +12,7 @@ import {
   handleIncreaseQuantity,
   handleTextChange,
   handleUpdateItems,
+  isExpiryDateChanged,
   isQuantityChanged,
   updatePalletApisHook
 } from './ManagePallet';
@@ -323,6 +324,21 @@ describe('ManagePalletScreen', () => {
       expect(mockDispatch).not.toHaveBeenCalled();
     });
 
+    it('tests handleUpdateItems dispatches when expiration date changed', () => {
+      const items: PalletItem[] = [];
+      palletInfo.expirationDate = '03/07/2023';
+      palletInfo.newExpirationDate = '03/05/2023';
+      handleUpdateItems(items, palletInfo, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+
+    it('tests handleUpdateItems doesnt dispatch when expiry date changed back', () => {
+      const items: PalletItem[] = [];
+      palletInfo.newExpirationDate = '03/07/2023';
+      handleUpdateItems(items, palletInfo, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(0);
+    });
+
     it('Calls dispatch if the "added" flag is true for at least one palletItem', () => {
       const dispatch = jest.fn();
       const mockAddPallet: PalletItem[] = [
@@ -492,6 +508,24 @@ describe('ManagePalletScreen', () => {
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
       expect(Toast.show).toHaveBeenCalledWith(failedToast);
+    });
+
+    it('tests isExpiryDateChanged', () => {
+      // expiry date has a space at the end of it from the service
+      // for one reason or another
+      palletInfo.expirationDate = '12/25/2024 ';
+      palletInfo.newExpirationDate = undefined;
+      const unsetExpirationDate = isExpiryDateChanged(palletInfo);
+
+      palletInfo.newExpirationDate = '12/11/2024';
+      const setExpirationDate = isExpiryDateChanged(palletInfo);
+
+      palletInfo.newExpirationDate = '12/25/2024';
+      const expirationDateSetBackToOld = isExpiryDateChanged(palletInfo);
+
+      expect(unsetExpirationDate).toBe(false);
+      expect(setExpirationDate).toBe(true);
+      expect(expirationDateSetBackToOld).toBe(false);
     });
   });
 });

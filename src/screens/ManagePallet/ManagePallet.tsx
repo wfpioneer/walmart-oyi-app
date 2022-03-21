@@ -97,7 +97,7 @@ export const isExpiryDateChanged = (palletInfo: PalletInfo): boolean => !!(
   palletInfo.newExpirationDate && palletInfo.newExpirationDate !== palletInfo.expirationDate?.trim()
 );
 
-export const dateOfExpirationDate = (stringDate?: string): Date => (stringDate ? new Date(stringDate) : new Date());
+const dateOfExpirationDate = (stringDate?: string): Date => (stringDate ? new Date(stringDate) : new Date());
 
 const enableSave = (items: PalletItem[], palletInfo: PalletInfo): boolean => {
   const isItemsModified = items.some((item: PalletItem) => isQuantityChanged(item)
