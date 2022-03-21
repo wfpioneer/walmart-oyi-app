@@ -23,6 +23,8 @@ import {
 } from '../../state/actions/Modal';
 import { strings } from '../../locales';
 
+const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
+
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
@@ -113,8 +115,6 @@ describe('ManagePalletScreen', () => {
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
           isPickerShow={false}
-          isExpirationDateModified={false}
-          setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
         />
       );
@@ -142,8 +142,6 @@ describe('ManagePalletScreen', () => {
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
           isPickerShow={false}
-          isExpirationDateModified={false}
-          setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
         />
       );
@@ -172,8 +170,6 @@ describe('ManagePalletScreen', () => {
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
           isPickerShow={true}
-          isExpirationDateModified={false}
-          setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
         />
       );
@@ -199,8 +195,6 @@ describe('ManagePalletScreen', () => {
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
           isPickerShow={false}
-          isExpirationDateModified={true}
-          setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
         />
       );
@@ -239,8 +233,6 @@ describe('ManagePalletScreen', () => {
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
           isPickerShow={false}
-          isExpirationDateModified={false}
-          setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
         />
       );
@@ -250,7 +242,9 @@ describe('ManagePalletScreen', () => {
 
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
-    const palletId = 3;
+    const palletInfo: PalletInfo = {
+      id: 3
+    };
 
     const onSuccessApi: AsyncState = {
       ...defaultAsyncState,
@@ -315,7 +309,7 @@ describe('ManagePalletScreen', () => {
 
     it('tests handleUpdateItems calls dispatch if added/deleted flags are false and has newQty', () => {
       const items = [...mockItems];
-      handleUpdateItems(items, palletId, mockDispatch);
+      handleUpdateItems(items, palletInfo, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
     });
 
@@ -325,7 +319,7 @@ describe('ManagePalletScreen', () => {
         { ...mockItems[1], added: true },
         { ...mockItems[2], deleted: true }
       ];
-      handleUpdateItems(items, palletId, mockDispatch);
+      handleUpdateItems(items, palletInfo, mockDispatch);
       expect(mockDispatch).not.toHaveBeenCalled();
     });
 
@@ -338,12 +332,12 @@ describe('ManagePalletScreen', () => {
           added: true
         }
       ];
-      handleAddItems(palletId, mockAddPallet, dispatch);
+      handleAddItems(palletInfo.id, mockAddPallet, dispatch);
       expect(dispatch).toHaveBeenCalled();
     });
     it('Does not call dispatch if the "added" flag is false for all palletItems', () => {
       const dispatch = jest.fn();
-      handleAddItems(palletId, mockItems, dispatch);
+      handleAddItems(palletInfo.id, mockItems, dispatch);
       expect(dispatch).not.toHaveBeenCalled();
     });
 
@@ -407,7 +401,7 @@ describe('ManagePalletScreen', () => {
         mockItems,
         mockDispatch
       );
-      expect(mockDispatch).toBeCalledTimes(5);
+      expect(mockDispatch).toBeCalledTimes(6);
       expect(hideActivityModal).toBeCalledTimes(1);
 
       expect(Toast.show).toHaveBeenCalledWith(
@@ -418,7 +412,7 @@ describe('ManagePalletScreen', () => {
       const partialToastProps = {
         type: 'info',
         text1: strings('PALLET.SAVE_PALLET_PARTIAL'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: strings(TRY_AGAIN_TEXT),
         position: 'bottom'
       };
       updatePalletApisHook(
@@ -428,7 +422,7 @@ describe('ManagePalletScreen', () => {
         mockItems,
         mockDispatch
       );
-      expect(mockDispatch).toBeCalledTimes(5);
+      expect(mockDispatch).toBeCalledTimes(6);
       expect(hideActivityModal).toBeCalledTimes(1);
 
       expect(Toast.show).toHaveBeenCalledWith(
@@ -440,7 +434,7 @@ describe('ManagePalletScreen', () => {
       const errorToastProps = {
         type: 'error',
         text1: strings('PALLET.SAVE_PALLET_FAILURE'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: strings(TRY_AGAIN_TEXT),
         position: 'bottom'
       };
       updatePalletApisHook(
@@ -469,10 +463,10 @@ describe('ManagePalletScreen', () => {
       const mockSetDisplayConfirmation = jest.fn();
       const successToast = {
         type: 'success',
-        text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
+        text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId: palletInfo }),
         position: 'bottom'
       };
-      clearPalletApiHook(clearPalletSuccess, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+      clearPalletApiHook(clearPalletSuccess, palletInfo.id, navigationProp, mockDispatch, mockSetDisplayConfirmation);
 
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
@@ -490,10 +484,10 @@ describe('ManagePalletScreen', () => {
       const failedToast = {
         type: 'error',
         text1: strings('PALLET.CLEAR_PALLET_ERROR'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: strings(TRY_AGAIN_TEXT),
         position: 'bottom'
       };
-      clearPalletApiHook(clearPalletFailure, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+      clearPalletApiHook(clearPalletFailure, palletInfo.id, navigationProp, mockDispatch, mockSetDisplayConfirmation);
 
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
