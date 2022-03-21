@@ -20,7 +20,6 @@ export interface PalletInfo {
   id: number;
   createDate?: string;
   expirationDate?: string;
-  newExpirationDate?: string;
 }
 
 export interface Pallet {

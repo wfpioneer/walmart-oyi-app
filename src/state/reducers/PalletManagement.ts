@@ -32,8 +32,7 @@ const initialState: PalletManagementState = {
   palletInfo: {
     id: 0,
     createDate: undefined,
-    expirationDate: undefined,
-    newExpirationDate: undefined
+    expirationDate: undefined
   },
   items: [],
   combinePallets: [],
