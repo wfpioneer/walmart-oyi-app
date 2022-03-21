@@ -20,11 +20,17 @@ export default class AddPalletService {
   public static addPalletUPCs(payload: {
     palletId: number;
     items: PalletItem[];
+    expirationDate?: string;
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.put(
-      `${urls.locationUrl}/pallet/${payload.palletId}/upcs`,
-      payload.items
+      `${urls.locationUrl}/v1/pallet/${payload.palletId}/upcs`,
+      payload.items,
+      {
+        headers: {
+          expirationDate: payload.expirationDate || ''
+        }
+      }
     );
   }
 }

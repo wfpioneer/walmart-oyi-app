@@ -25,13 +25,14 @@ import {
 } from '../../state/actions/Modal';
 import { strings } from '../../locales';
 import getItemDetails from '../../mockData/getItemDetails';
+import { Configurations } from '../../models/User';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
 }));
 
-const mockUserConfig = {
+const mockUserConfig: Configurations = {
   locationManagement: true,
   locationManagementEdit: false,
   palletManagement: true,
@@ -39,7 +40,8 @@ const mockUserConfig = {
   printingUpdate: true,
   binning: false,
   palletExpiration: false,
-  backupCategories: ''
+  backupCategories: '',
+  picking: false
 };
 
 describe('ManagePalletScreen', () => {
@@ -334,7 +336,7 @@ describe('ManagePalletScreen', () => {
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
     const palletId = 3;
-
+    const mockSetIsPerishable = jest.fn();
     const onSuccessApi: AsyncState = {
       ...defaultAsyncState,
       result: {
@@ -473,10 +475,13 @@ describe('ManagePalletScreen', () => {
         defaultAsyncState,
         defaultAsyncState,
         mockItems,
-        mockDispatch
+        mockDispatch,
+        true,
+        mockSetIsPerishable
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(showActivityModal).toBeCalledTimes(1);
+      expect(mockSetIsPerishable).not.toHaveBeenCalled();
     });
     it('Tests updatePalletApisHook with Successful responses', () => {
       const successToastProps = {
@@ -489,11 +494,13 @@ describe('ManagePalletScreen', () => {
         onSuccessApi,
         onSuccessApi,
         mockItems,
-        mockDispatch
+        mockDispatch,
+        true,
+        mockSetIsPerishable
       );
       expect(mockDispatch).toBeCalledTimes(5);
       expect(hideActivityModal).toBeCalledTimes(1);
-
+      expect(mockSetIsPerishable).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(successToastProps)
       );
@@ -510,11 +517,13 @@ describe('ManagePalletScreen', () => {
         onSuccessApi,
         onFailureApi,
         mockItems,
-        mockDispatch
+        mockDispatch,
+        true,
+        mockSetIsPerishable
       );
       expect(mockDispatch).toBeCalledTimes(5);
       expect(hideActivityModal).toBeCalledTimes(1);
-
+      expect(mockSetIsPerishable).not.toHaveBeenCalled();
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(partialToastProps)
       );
@@ -532,11 +541,13 @@ describe('ManagePalletScreen', () => {
         onFailureApi,
         onFailureApi,
         mockItems,
-        mockDispatch
+        mockDispatch,
+        true,
+        mockSetIsPerishable
       );
       expect(mockDispatch).toBeCalledTimes(5);
       expect(hideActivityModal).toBeCalledTimes(1);
-
+      expect(mockSetIsPerishable).not.toHaveBeenCalled();
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(errorToastProps)
       );
@@ -627,7 +638,6 @@ describe('ManagePalletScreen', () => {
           status: 200
         }
       };
-      const mockSetIsPerishable = jest.fn();
       const toastItemExists = {
         type: 'info',
         text1: strings('PALLET.ITEMS_DETAILS_EXIST'),
@@ -648,8 +658,6 @@ describe('ManagePalletScreen', () => {
           status: 200
         }
       };
-      const mockSetIsPerishable = jest.fn();
-
       getItemDetailsApiHook(successApi, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetIsPerishable).toBeCalledTimes(1);
@@ -663,7 +671,6 @@ describe('ManagePalletScreen', () => {
           status: 204
         }
       };
-      const mockSetIsPerishable = jest.fn();
       const toastItemNotFound = {
         type: 'info',
         text1: strings('PALLET.ITEMS_NOT_FOUND'),
@@ -681,7 +688,6 @@ describe('ManagePalletScreen', () => {
         ...defaultAsyncState,
         error: 'Internal Server Error'
       };
-      const mockSetIsPerishable = jest.fn();
       const toastGetItemError = {
         type: 'error',
         text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
@@ -700,7 +706,6 @@ describe('ManagePalletScreen', () => {
         ...defaultAsyncState,
         isWaiting: true
       };
-      const mockSetIsPerishable = jest.fn();
       getItemDetailsApiHook(isLoadingApi, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockSetIsPerishable).not.toHaveBeenCalled();

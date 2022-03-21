@@ -190,13 +190,18 @@ export const handleUpdateItems = (items: PalletItem[], palletId: number, dispatc
   }
 };
 
-export const handleAddItems = (id: number, items: PalletItem[], dispatch: Dispatch<any>): void => {
+export const handleAddItems = (
+  id: number,
+  items: PalletItem[],
+  dispatch: Dispatch<any>,
+  expirationDate?: string
+): void => {
   // Filter Items by added flag
   const addPalletItems = items.filter(item => item.added)
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
 
   if (addPalletItems.length > 0) {
-    dispatch(addPalletUPCs({ palletId: id, items: addPalletItems }));
+    dispatch(addPalletUPCs({ palletId: id, items: addPalletItems, expirationDate }));
   }
 };
 
@@ -287,6 +292,8 @@ export const updatePalletApisHook = (
   deleteUpcsApi: AsyncState,
   items: PalletItem[],
   dispatch: Dispatch<any>,
+  isPerishable: boolean,
+  setIsPerishable: React.Dispatch<React.SetStateAction<boolean>>
 ): void => {
   const addResponse: ApiResult | string = (addPalletUpcApi.result ?? addPalletUpcApi.error);
   const updateResponse: ApiResult | string = (updateItemQtyAPI.result ?? updateItemQtyAPI.error);
@@ -313,6 +320,10 @@ export const updatePalletApisHook = (
         }
         return item;
       });
+      // If Persihable Item was added set isPerishable to false
+      if (isPerishable) {
+        setIsPerishable(false);
+      }
     } else {
       totalResponses.set('ERROR', addResponse);
     }
@@ -556,7 +567,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     updateItemQtyAPI,
     deleteUpcsApi,
     items,
-    dispatch
+    dispatch,
+    isPerishable,
+    setIsPerishable
   ), [addPalletUpcApi, deleteUpcsApi, updateItemQtyAPI]);
   // Get Item Details UPC api
   useEffectHook(() => getItemDetailsApiHook(
@@ -595,7 +608,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       dispatch(deleteUpcs({ palletId, upcs }));
     }
     // Calls add items to pallet via api
-    handleAddItems(palletId, items, dispatch);
+    handleAddItems(palletId, items, dispatch, expirationDate ? new Date(expirationDate).toISOString() : undefined);
     // Calls update pallet item qty api
     handleUpdateItems(items, id, dispatch);
     setIsExpirationDateModified(false);

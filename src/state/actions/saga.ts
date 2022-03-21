@@ -155,6 +155,7 @@ export const getItemDetailsUPC = (payload: { upc: number }) => ({ type: GET_ITEM
 export const addPalletUPCs = (payload: {
   palletId: number;
   items: PalletItem[];
+  expirationDate?: string;
 }) => ({ type: ADD_PALLET_UPCS, payload } as const);
 export const updatePalletItemQty = (payload: UpdateItemQuantityRequest) => ({
   type: UPDATE_PALLET_ITEM_QTY,
