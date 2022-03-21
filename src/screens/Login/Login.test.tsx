@@ -3,6 +3,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { LoginScreen, LoginScreenProps } from './Login';
 import User from '../../models/User';
+import { mockConfig } from '../../mockData/mockConfig';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
@@ -43,14 +44,7 @@ const testUser: User = {
   token: 'aFakeToken',
   userId: 'aFakeUserId',
   features: [],
-  configs: {
-    locationManagement: false,
-    locationManagementEdit: false,
-    palletManagement: false,
-    settingsTool: false,
-    printingUpdate: true,
-    binning: false
-  }
+  configs: mockConfig
 };
 
 const defaultTestProp: LoginScreenProps = {

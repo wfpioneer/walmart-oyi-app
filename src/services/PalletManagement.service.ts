@@ -33,6 +33,10 @@ export interface PostBinPalletsMultistatusResponse {
   }[];
 }
 
+export interface GetPalletConfigResponse {
+  perishableCategories: number[];
+}
+
 export default class PalletManagementService {
   public static updateItemQuantity(payload: UpdateItemQuantityRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
@@ -70,6 +74,13 @@ export default class PalletManagementService {
     return Request.post(
       `${urls.locationUrl}/bin`,
       payload
+    );
+  }
+
+  public static getPalletConfig(): Promise<AxiosResponse<GetPalletConfigResponse>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.locationUrl}/pallet/pallet-config`
     );
   }
 }

@@ -3,20 +3,14 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import User from '../../models/User';
 import { ToolsScreen } from './Tools';
+import { mockConfig } from '../../mockData/mockConfig';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 
 describe('ToolsScreen', () => {
   let navigationProp: NavigationProp<any>;
-  const mockConfigs = {
-    locationManagement: false,
-    locationManagementEdit: false,
-    palletManagement: false,
-    settingsTool: false,
-    printingUpdate: false,
-    binning: false
-  };
+
   describe('Tests rendering the Tools Screen', () => {
     const testUser: User = {
       additional: {
@@ -31,9 +25,7 @@ describe('ToolsScreen', () => {
       token: 'aFakeToken',
       userId: 'aFakeUserId',
       features: [],
-      configs: {
-        ...mockConfigs
-      }
+      configs: mockConfig
     };
     it('Renders Tools screen, location management enabled by fluffy', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -58,7 +50,7 @@ describe('ToolsScreen', () => {
           user={{
             ...testUser,
             configs: {
-              ...mockConfigs,
+              ...mockConfig,
               locationManagement: true
             }
           }}
@@ -75,7 +67,7 @@ describe('ToolsScreen', () => {
           user={{
             ...testUser,
             configs: {
-              ...mockConfigs,
+              ...mockConfig,
               palletManagement: true
             }
           }}
@@ -92,7 +84,7 @@ describe('ToolsScreen', () => {
           user={{
             ...testUser,
             configs: {
-              ...mockConfigs,
+              ...mockConfig,
               settingsTool: true
             }
           }}
@@ -110,8 +102,26 @@ describe('ToolsScreen', () => {
           user={{
             ...testUser,
             configs: {
-              ...mockConfigs,
+              ...mockConfig,
               binning: true
+            }
+          }}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders tools screen, picking enabled by config', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ToolsScreen
+          navigation={navigationProp}
+          user={{
+            ...testUser,
+            configs: {
+              ...mockConfig,
+              picking: true
             }
           }}
         />

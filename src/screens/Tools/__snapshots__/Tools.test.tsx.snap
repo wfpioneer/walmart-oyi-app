@@ -138,3 +138,38 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, pall
   </ToolsButton>
 </View>
 `;
+
+exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, picking enabled by config 1`] = `
+<View
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "center",
+      "marginTop": 4,
+      "paddingTop": 8,
+    }
+  }
+>
+  <ToolsButton
+    destination="Picking"
+    title="[missing \\"en.PICKING.PICKING\\" translation]"
+  >
+    <mockConstructor
+      color="#0071e9"
+      name="login-variant"
+      size={28}
+      style={
+        Object {
+          "transform": Array [
+            Object {
+              "rotate": "90deg",
+            },
+          ],
+        }
+      }
+    />
+  </ToolsButton>
+</View>
+`;

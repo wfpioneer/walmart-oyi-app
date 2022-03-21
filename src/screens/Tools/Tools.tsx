@@ -25,6 +25,7 @@ const LOCATION_MANAGEMENT = 'location management';
 const PALLET_MANAGEMENT = 'pallet management';
 const SETTINGS_TOOL = 'settings tool';
 const BINNING = 'binning';
+const PICKING = 'picking';
 
 // Add more objects to the array in the order they need to appear
 const tools: ToolsFeatures[] = [
@@ -59,6 +60,17 @@ const tools: ToolsFeatures[] = [
       style={{ transform: [{ rotate: '270deg' }] }}
     />
   },
+  {
+    key: PICKING,
+    title: 'PICKING.PICKING',
+    destination: 'Picking',
+    icon: <MaterialCommunityIcon
+      name="login-variant"
+      size={28}
+      color={COLOR.MAIN_THEME_COLOR}
+      style={{ transform: [{ rotate: '90deg' }] }}
+    />
+  },
   { // Should always be last in the list
     key: SETTINGS_TOOL,
     title: 'SETTINGS.TITLE',
@@ -85,6 +97,9 @@ export const ToolsScreen = (props: ToolsScreenProps): JSX.Element => {
   }
   if (user.configs.binning && !userFeatures.includes(BINNING)) {
     userFeatures.push(BINNING);
+  }
+  if (user.configs.picking && !userFeatures.includes(PICKING)) {
+    userFeatures.push(PICKING);
   }
 
   return (
