@@ -36,10 +36,13 @@ export interface PostBinPalletsMultistatusResponse {
 export default class PalletManagementService {
   public static updateItemQuantity(payload: UpdateItemQuantityRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
-    const expiryParam = payload.palletExpiration
-      ? `?expirationDate=${moment(payload.palletExpiration, 'MM/DD/YYYY').toISOString()}`
-      : '';
-    return Request.patch(`${urls.locationUrl}/pallet/${payload.palletId}/upc/qtys${expiryParam}`, payload.palletItem);
+    return Request.patch(
+      `${urls.locationUrl}/v1/pallet/${payload.palletId}/upc/qty`,
+      {
+        upcs: payload.palletItem,
+        expirationDate: moment(payload.palletExpiration, 'MM/DD/YYYY').toISOString()
+      }
+    );
   }
 
   public static combinePallets(payload: CombinePalletsRequest): Promise<AxiosResponse<unknown>> {

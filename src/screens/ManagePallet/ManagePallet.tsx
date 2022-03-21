@@ -94,13 +94,15 @@ export const isQuantityChanged = (
 ): boolean => !!(item.newQuantity && item.newQuantity !== item.quantity);
 
 export const isExpiryDateChanged = (palletInfo: PalletInfo): boolean => !!(
-  palletInfo.newExpirationDate && palletInfo.newExpirationDate !== palletInfo.expirationDate
+  palletInfo.newExpirationDate && palletInfo.newExpirationDate !== palletInfo.expirationDate?.trim()
 );
 
-const enableSave = (items: PalletItem[]): boolean => {
-  const modifiedArray = items.filter((item: PalletItem) => isQuantityChanged(item)
+export const dateOfExpirationDate = (stringDate?: string): Date => (stringDate ? new Date(stringDate) : new Date());
+
+const enableSave = (items: PalletItem[], palletInfo: PalletInfo): boolean => {
+  const isItemsModified = items.some((item: PalletItem) => isQuantityChanged(item)
     || item.deleted || item.added);
-  return modifiedArray.length > 0;
+  return isItemsModified || isExpiryDateChanged(palletInfo);
 };
 
 export const handleDecreaseQuantity = (item: PalletItem, dispatch: Dispatch<any>): void => {
@@ -398,7 +400,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     displayClearConfirmation, setDisplayClearConfirmation,
     setIsPickerShow, isPickerShow
   } = props;
-  const { id, expirationDate } = palletInfo;
+  const { id, expirationDate, newExpirationDate } = palletInfo;
 
   let scannedSubscription: EmitterSubscription;
 
@@ -578,12 +580,12 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
                 {strings('PALLET.EXPIRATION_DATE')}
               </Text>
               <Text style={expirationDate ? styles.effectiveDateHeaderItem : styles.errorLabel}>
-                {expirationDate || strings('GENERICS.REQUIRED')}
+                {newExpirationDate || expirationDate || strings('GENERICS.REQUIRED')}
               </Text>
             </TouchableOpacity>
             {isPickerShow && (
             <DateTimePicker
-              value={expirationDate ? new Date(expirationDate) : new Date()}
+              value={newExpirationDate ? new Date(newExpirationDate) : dateOfExpirationDate(expirationDate)}
               mode="date"
               display={Platform.OS === 'ios' ? 'spinner' : 'default'}
               is24Hour={true}
@@ -622,7 +624,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           />
         </View>
       </View>
-      {items && enableSave(items) ? (
+      {items && enableSave(items, palletInfo) ? (
         <View style={styles.buttonContainer}>
           <Button
             title={strings('GENERICS.SAVE')}
