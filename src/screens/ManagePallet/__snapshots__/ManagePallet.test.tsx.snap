@@ -88,6 +88,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           Object {
             "alignItems": "center",
             "flexDirection": "column",
+            "paddingHorizontal": 10,
           }
         }
       >
@@ -385,6 +386,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
+            "paddingHorizontal": 10,
           }
         }
       >
@@ -690,6 +692,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
+            "paddingHorizontal": 10,
           }
         }
       >
@@ -987,6 +990,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
+            "paddingHorizontal": 10,
           }
         }
       >
@@ -1283,7 +1287,6 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         style={
           Object {
             "alignItems": "center",
-            "backgroundColor": "#FFFFE0",
             "flexDirection": "column",
             "paddingHorizontal": 10,
           }
