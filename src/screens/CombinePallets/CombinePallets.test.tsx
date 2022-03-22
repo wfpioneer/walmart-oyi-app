@@ -27,7 +27,7 @@ describe('CombinePalletsScreen', () => {
       quantity: 3,
       newQuantity: 2,
       price: 10.0,
-      category: 50,
+      categoryNbr: 50,
       categoryDesc: 'test',
       deleted: false,
       added: false
@@ -39,7 +39,7 @@ describe('CombinePalletsScreen', () => {
       quantity: 5,
       newQuantity: 10,
       price: 15.0,
-      category: 45,
+      categoryNbr: 45,
       categoryDesc: 'test',
       deleted: false,
       added: false

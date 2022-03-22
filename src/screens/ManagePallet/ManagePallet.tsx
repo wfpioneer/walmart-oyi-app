@@ -167,10 +167,16 @@ const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
     dispatch(deleteItem(item.itemNbr.toString()));
   }
 };
+
 const undoDelete = (dispatch: Dispatch<any>) => {
   dispatch(resetItems());
 };
-// TODO implement palletItemCard
+
+export const isAddedItemPerishable = (items: PalletItem[], perishableCategories: number[]) => {
+  const addedItems = items.filter(item => item.added);
+  return isPerishableItemExist(addedItems, perishableCategories);
+};
+
 const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   if (!item.deleted) {
     return (
@@ -208,13 +214,18 @@ export const handleUpdateItems = (items: PalletItem[], palletInfo: PalletInfo, d
   }
 };
 
-export const handleAddItems = (id: number, items: PalletItem[], dispatch: Dispatch<any>): void => {
+export const handleAddItems = (
+  id: number,
+  items: PalletItem[],
+  dispatch: Dispatch<any>,
+  expirationDate?: string
+): void => {
   // Filter Items by added flag
   const addPalletItems = items.filter(item => item.added)
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
 
   if (addPalletItems.length > 0) {
-    dispatch(addPalletUPCs({ palletId: id, items: addPalletItems }));
+    dispatch(addPalletUPCs({ palletId: id, items: addPalletItems, expirationDate }));
   }
 };
 
@@ -453,6 +464,75 @@ export const clearPalletApiHook = (
   }
 };
 
+export const getItemDetailsApiHook = (
+  getItemDetailsApi: AsyncState,
+  items: PalletItem[],
+  dispatch: Dispatch<any>
+) => {
+  // on api success
+  if (!getItemDetailsApi.isWaiting && getItemDetailsApi.result) {
+    if (getItemDetailsApi.result.status === 200) {
+      const {
+        data
+      } = getItemDetailsApi.result;
+      const palletItem = items.filter(item => item.itemNbr === data.itemNbr);
+      if (palletItem.length > 0) {
+        Toast.show({
+          type: 'info',
+          text1: strings('PALLET.ITEMS_DETAILS_EXIST'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      } else {
+        const {
+          upcNbr,
+          itemNbr,
+          price,
+          itemName,
+          categoryNbr,
+          categoryDesc
+        } = data;
+        const pallet: PalletItem = {
+          upcNbr,
+          itemNbr,
+          price,
+          categoryNbr,
+          categoryDesc,
+          itemDesc: itemName,
+          quantity: 1,
+          deleted: false,
+          added: true
+        };
+
+        dispatch(addItemToPallet(pallet));
+      }
+    } else if (getItemDetailsApi.result.status === 204) {
+      Toast.show({
+        type: 'info',
+        text1: strings('PALLET.ITEMS_NOT_FOUND'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+    dispatch(hideActivityModal());
+  }
+  // on api error
+  if (!getItemDetailsApi.isWaiting && getItemDetailsApi.error) {
+    dispatch(hideActivityModal());
+    Toast.show({
+      type: 'error',
+      text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
+      text2: strings(TRY_AGAIN),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+  }
+  // on api request
+  if (getItemDetailsApi.isWaiting) {
+    dispatch(showActivityModal());
+  }
+};
+
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
@@ -494,7 +574,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             barcode: scan.value,
             type: scan.type
           });
-          dispatch(getItemDetails({ id: scan.value, getSummary: true }));
+          dispatch(getItemDetails({ id: scan.value, getSummary: false }));
         });
       }
     });
@@ -512,65 +592,11 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     dispatch
   ), [addPalletUpcApi, deleteUpcsApi, updateItemQtyAPI]);
   // Get Item Details UPC api
-  useEffectHook(() => {
-    // on api success
-    if (!getItemDetailsApi.isWaiting && getItemDetailsApi.result) {
-      if (getItemDetailsApi.result.status === 200) {
-        const {
-          data
-        } = getItemDetailsApi.result;
-        const palletItem = items.filter(item => item.itemNbr === data.itemNbr);
-        if (palletItem.length > 0) {
-          Toast.show({
-            type: 'info',
-            text1: strings('PALLET.ITEMS_DETAILS_EXIST'),
-            visibilityTime: 4000,
-            position: 'bottom'
-          });
-        } else {
-          const {
-            upcNbr,
-            itemNbr,
-            price,
-            itemName
-          } = data;
-          const pallet: PalletItem = {
-            upcNbr,
-            itemNbr,
-            price,
-            itemDesc: itemName,
-            quantity: 1,
-            deleted: false,
-            added: true
-          };
-          dispatch(addItemToPallet(pallet));
-        }
-      } else if (getItemDetailsApi.result.status === 204) {
-        Toast.show({
-          type: 'info',
-          text1: strings('PALLET.ITEMS_NOT_FOUND'),
-          visibilityTime: 4000,
-          position: 'bottom'
-        });
-      }
-      dispatch(hideActivityModal());
-    }
-    // on api error
-    if (!getItemDetailsApi.isWaiting && getItemDetailsApi.error) {
-      dispatch(hideActivityModal());
-      Toast.show({
-        type: 'error',
-        text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
-        text2: strings(TRY_AGAIN),
-        visibilityTime: 4000,
-        position: 'bottom'
-      });
-    }
-    // on api request
-    if (getItemDetailsApi.isWaiting) {
-      dispatch(showActivityModal());
-    }
-  }, [getItemDetailsApi]);
+  useEffectHook(() => getItemDetailsApiHook(
+    getItemDetailsApi,
+    items,
+    dispatch
+  ), [getItemDetailsApi]);
 
   // update pallet hook (get pallet info api)
   useEffectHook(() => getPalletInfoApiHook(
@@ -606,7 +632,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       dispatch(deleteUpcs(payload));
     }
     // Calls add items to pallet via api
-    handleAddItems(palletId, items, dispatch);
+    handleAddItems(palletId, items, dispatch, expirationDate ? new Date(expirationDate).toISOString() : undefined);
     // Calls update pallet item qty api
     handleUpdateItems(items, palletInfo, dispatch);
   };
@@ -625,6 +651,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     }
   };
   const isRemoveExpirationDate = removeExpirationDate(items, perishableCategories);
+  const isAddedPerishable = isAddedItemPerishable(items, perishableCategories);
   return (
     <KeyboardAvoidingView
       style={styles.safeAreaView}
@@ -719,6 +746,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             style={styles.saveButton}
             backgroundColor={COLOR.GREEN}
             onPress={() => submit()}
+            disabled={isAddedPerishable && !(newExpirationDate || expirationDate)}
           />
         </View>
       ) : null}

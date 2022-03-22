@@ -5,6 +5,7 @@ import Toast from 'react-native-toast-message';
 import {
   ManagePalletScreen,
   clearPalletApiHook,
+  getItemDetailsApiHook,
   getNumberOfDeleted,
   getPalletConfigApiHook,
   getPalletInfoApiHook,
@@ -13,6 +14,7 @@ import {
   handleIncreaseQuantity,
   handleTextChange,
   handleUpdateItems,
+  isAddedItemPerishable,
   isExpiryDateChanged,
   isQuantityChanged,
   removeExpirationDate,
@@ -25,6 +27,8 @@ import {
   showActivityModal
 } from '../../state/actions/Modal';
 import { strings } from '../../locales';
+import getItemDetails from '../../mockData/getItemDetails';
+import { Configurations } from '../../models/User';
 
 const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
 
@@ -33,7 +37,7 @@ jest.mock('../../state/actions/Modal', () => ({
   hideActivityModal: jest.fn()
 }));
 
-const mockUserConfig = {
+const mockUserConfig: Configurations = {
   locationManagement: true,
   locationManagementEdit: false,
   palletManagement: true,
@@ -58,11 +62,10 @@ describe('ManagePalletScreen', () => {
       quantity: 3,
       newQuantity: 3,
       price: 10.0,
-      category: 54,
+      categoryNbr: 54,
       categoryDesc: 'test cat',
       deleted: true,
-      added: false,
-      categoryNbr: 1
+      added: false
     },
     {
       itemNbr: 1234,
@@ -71,11 +74,10 @@ describe('ManagePalletScreen', () => {
       quantity: 3,
       newQuantity: 4,
       price: 10.0,
-      category: 54,
+      categoryNbr: 54,
       categoryDesc: 'test cat',
       deleted: false,
-      added: false,
-      categoryNbr: 1
+      added: false
     },
     {
       itemNbr: 4221,
@@ -84,13 +86,13 @@ describe('ManagePalletScreen', () => {
       quantity: 2,
       newQuantity: 1,
       price: 3.49,
-      category: 72,
+      categoryNbr: 72,
       categoryDesc: 'deli',
       deleted: false,
-      added: false,
-      categoryNbr: 8
+      added: false
     }
   ];
+
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
     value: null,
@@ -172,6 +174,7 @@ describe('ManagePalletScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
     it('Renders the DatePicker Dialog when the isPickerShow is true ', () => {
       const mockDate = new Date(1647369000000);
       jest.spyOn(global, 'Date').mockImplementation(() => (mockDate as unknown) as string);
@@ -203,6 +206,7 @@ describe('ManagePalletScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
     it('Renders the palletManagement when expiration date got modified', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -210,6 +214,39 @@ describe('ManagePalletScreen', () => {
           useEffectHook={jest.fn}
           isManualScanEnabled={true}
           palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
+          clearPalletApi={defaultAsyncState}
+          displayClearConfirmation={true}
+          setDisplayClearConfirmation={jest.fn()}
+          isPickerShow={false}
+          setIsPickerShow={jest.fn()}
+          perishableCategories={[]}
+          getPalletConfigApi={defaultAsyncState}
+          userConfig={mockUserConfig}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders the expiration date required text if pallet has no date with perishableItems', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const mockPalletNoDate: PalletInfo = {
+        id: 2,
+        createDate: '03/31/2022'
+      };
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletNoDate}
           items={mockItems}
           navigation={navigationProp}
           route={routeProp}
@@ -384,6 +421,7 @@ describe('ManagePalletScreen', () => {
       handleAddItems(palletInfo.id, mockAddPallet, dispatch);
       expect(dispatch).toHaveBeenCalled();
     });
+
     it('Does not call dispatch if the "added" flag is false for all palletItems', () => {
       const dispatch = jest.fn();
       handleAddItems(palletInfo.id, mockItems, dispatch);
@@ -453,7 +491,6 @@ describe('ManagePalletScreen', () => {
       );
       expect(mockDispatch).toBeCalledTimes(6);
       expect(hideActivityModal).toBeCalledTimes(1);
-
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(successToastProps)
       );
@@ -474,7 +511,6 @@ describe('ManagePalletScreen', () => {
       );
       expect(mockDispatch).toBeCalledTimes(6);
       expect(hideActivityModal).toBeCalledTimes(1);
-
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(partialToastProps)
       );
@@ -496,7 +532,6 @@ describe('ManagePalletScreen', () => {
       );
       expect(mockDispatch).toBeCalledTimes(5);
       expect(hideActivityModal).toBeCalledTimes(1);
-
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(errorToastProps)
       );
@@ -597,38 +632,146 @@ describe('ManagePalletScreen', () => {
       expect(showActivityModal).toBeCalledTimes(1);
     });
 
-    it('Tests removeExpirationDate function', () => {
-      const mockPerishableCategories = [1, 10, 11];
-      expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(false);
-      const newItems: PalletItem[] = [
-        {
-          itemNbr: 1234,
-          upcNbr: '1234567890',
-          itemDesc: 'test',
-          quantity: 3,
-          newQuantity: 3,
-          price: 10.0,
-          category: 54,
-          categoryDesc: 'test cat',
-          deleted: true,
-          added: false,
-          categoryNbr: 1
-        },
-        {
-          itemNbr: 4221,
-          upcNbr: '765432123456',
-          itemDesc: 'food',
-          quantity: 2,
-          newQuantity: 1,
-          price: 3.49,
-          category: 72,
-          categoryDesc: 'deli',
-          deleted: false,
-          added: false,
-          categoryNbr: 8
+    it('Tests getItemDetailsApiHook on 200 success if item already exists', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: mockItems[0],
+          status: 200
         }
-      ];
-      expect(removeExpirationDate(newItems, mockPerishableCategories)).toBe(true);
+      };
+      const toastItemExists = {
+        type: 'info',
+        text1: strings('PALLET.ITEMS_DETAILS_EXIST'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      getItemDetailsApiHook(successApi, mockItems, mockDispatch);
+      expect(Toast.show).toHaveBeenCalledWith(toastItemExists);
+      expect(mockDispatch).toBeCalledTimes(1);
     });
+
+    it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: getItemDetails[123],
+          status: 200
+        }
+      };
+      getItemDetailsApiHook(successApi, mockItems, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(2);
+    });
+
+    it('Tests getItemDetailsApiHook on 204 success for a new item', () => {
+      const successApi204: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      const toastItemNotFound = {
+        type: 'info',
+        text1: strings('PALLET.ITEMS_NOT_FOUND'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      getItemDetailsApiHook(successApi204, mockItems, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
+    });
+
+    it('Tests getItemDetailsApi on failure', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      const toastGetItemError = {
+        type: 'error',
+        text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
+        text2: strings(TRY_AGAIN_TEXT),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      getItemDetailsApiHook(failureApi, mockItems, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastGetItemError);
+    });
+
+    it('Tests getItemDetailsApi isWaiting', () => {
+      const isLoadingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      getItemDetailsApiHook(isLoadingApi, mockItems, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+  });
+
+  it('Tests isAddedItemPerishable', () => {
+    const mockPerishableCatg: number[] = [1, 8, 54, 72, 93];
+    const isAddedFalse = isAddedItemPerishable(mockItems, mockPerishableCatg);
+    expect(isAddedFalse).toBe(false);
+
+    const mockAddedItems: PalletItem[] = [
+      {
+        itemNbr: 1234,
+        upcNbr: '1234567890',
+        itemDesc: 'test',
+        quantity: 3,
+        newQuantity: 3,
+        price: 10.0,
+        categoryNbr: 8,
+        categoryDesc: 'test cat',
+        deleted: false,
+        added: true
+      },
+      {
+        itemNbr: 1234,
+        upcNbr: '12345678901',
+        itemDesc: 'test',
+        quantity: 3,
+        newQuantity: 4,
+        price: 10.0,
+        categoryNbr: 54,
+        categoryDesc: 'test cat',
+        deleted: false,
+        added: true
+      }
+    ];
+    const isAddedTrue = isAddedItemPerishable(mockAddedItems, mockPerishableCatg);
+    expect(isAddedTrue).toBe(true);
+  });
+  it('Tests removeExpirationDate function', () => {
+    const mockPerishableCategories = [1, 10, 11];
+    expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(false);
+    const newItems: PalletItem[] = [
+      {
+        itemNbr: 1234,
+        upcNbr: '1234567890',
+        itemDesc: 'test',
+        quantity: 3,
+        newQuantity: 3,
+        price: 10.0,
+        categoryDesc: 'test cat',
+        deleted: true,
+        added: false,
+        categoryNbr: 1
+      },
+      {
+        itemNbr: 4221,
+        upcNbr: '765432123456',
+        itemDesc: 'food',
+        quantity: 2,
+        newQuantity: 1,
+        price: 3.49,
+        categoryDesc: 'deli',
+        deleted: false,
+        added: false,
+        categoryNbr: 8
+      }
+    ];
+    expect(removeExpirationDate(newItems, mockPerishableCategories)).toBe(true);
   });
 });
