@@ -58,26 +58,24 @@ export const getPalletInfoApiEffect = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>
 ): void => {
-  if (!palletInfoApi.isWaiting && navigation.isFocused()) {
+  if (navigation.isFocused()) {
     // Success
-    if (palletInfoApi.result) {
-      const { result } = palletInfoApi;
-      if (result.status === 204) {
-        Toast.show({
-          type: 'info',
-          position: 'bottom',
-          text1: strings('PALLET.PALLET_DOESNT_EXIST'),
-          visibilityTime: SNACKBAR_TIMEOUT + 1000
-        });
-      } else {
+    if (!palletInfoApi.isWaiting && palletInfoApi.result) {
+      if (palletInfoApi.result.status === 200) {
+        const { result } = palletInfoApi;
         dispatch(addCombinePallet({
           itemCount: result.data.pallets[0].items.length,
           palletId: result.data.pallets[0].id
         }));
+      } else if (palletInfoApi.result.status === 204) {
+        Toast.show({
+          type: 'error',
+          position: 'bottom',
+          text1: strings('PALLET.PALLET_DOESNT_EXIST'),
+          visibilityTime: SNACKBAR_TIMEOUT + 1000
+        });
       }
-      dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
     }
-
     // Failure
     if (palletInfoApi.error) {
       Toast.show({
@@ -86,8 +84,8 @@ export const getPalletInfoApiEffect = (
         text1: strings('PALLET.PALLET_DETAILS_ERROR'),
         visibilityTime: SNACKBAR_TIMEOUT + 1000
       });
-      dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
     }
+    dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
   }
 };
 

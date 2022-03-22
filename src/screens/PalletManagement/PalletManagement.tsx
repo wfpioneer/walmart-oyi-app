@@ -105,27 +105,37 @@ export const PalletManagementScreen = (
     if (navigation.isFocused()) {
       // on api success
       if (!getPalletInfoApi.isWaiting && getPalletInfoApi.result) {
-        const {
-          id, createDate, expirationDate, items
-        } = getPalletInfoApi.result.data.pallets[0];
-        const palletItems = items.map((item: PalletItem) => ({
-          ...item,
-          quantity: item.quantity || 0,
-          newQuantity: item.quantity || 0,
-          deleted: false,
-          added: false
-        }));
-        const palletDetails: Pallet = {
-          palletInfo: {
-            id,
-            createDate,
-            expirationDate
-          },
-          items: palletItems
-        };
-        dispatch(setupPallet(palletDetails));
-        navigation.navigate('ManagePallet');
+        if (getPalletInfoApi.result.status === 200) {
+          const {
+            id, createDate, expirationDate, items
+          } = getPalletInfoApi.result.data.pallets[0];
+          const palletItems = items.map((item: PalletItem) => ({
+            ...item,
+            quantity: item.quantity || 0,
+            newQuantity: item.quantity || 0,
+            deleted: false,
+            added: false
+          }));
+          const palletDetails: Pallet = {
+            palletInfo: {
+              id,
+              createDate,
+              expirationDate
+            },
+            items: palletItems
+          };
+          dispatch(setupPallet(palletDetails));
+          navigation.navigate('ManagePallet');
+        } else if (getPalletInfoApi.result.status === 204) {
+          Toast.show({
+            type: 'error',
+            text1: strings('LOCATION.PALLET_NOT_FOUND'),
+            visibilityTime: 3000,
+            position: 'bottom'
+          });
+        }
       }
+
       // on api error
       if (!getPalletInfoApi.isWaiting && getPalletInfoApi.error) {
         Toast.show({

@@ -72,7 +72,7 @@ interface ManagePalletProps {
   addPalletUpcApi: AsyncState;
   updateItemQtyAPI: AsyncState;
   deleteUpcsApi: AsyncState;
-  getPalletDetailsApi: AsyncState;
+  getPalletInfoApi: AsyncState;
   clearPalletApi: AsyncState;
   displayClearConfirmation: boolean;
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -147,6 +147,11 @@ export const removeExpirationDate = (items: PalletItem[], perishableCategories: 
   const deletedPerishableItem = isPerishableItemExist(deletedItems, perishableCategories);
   const perishableExistsInPallet = isPerishableItemExist(otherItemsInPallet, perishableCategories);
   return deletedPerishableItem && !perishableExistsInPallet;
+};
+
+const isPerishableItemDeleted = (items: PalletItem[], perishableCategories: number[]): boolean => {
+  const deletedItems = items.filter(item => item.deleted);
+  return isPerishableItemExist(deletedItems, perishableCategories);
 };
 
 const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
@@ -233,38 +238,47 @@ export const getPalletConfigApiHook = (
   }
 };
 
-export const getPalletDetailsApiHook = (
-  getPalletDetailsApi: AsyncState,
+export const getPalletInfoApiHook = (
+  getPalletInfoApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>
 ): void => {
-  if (navigation.isFocused() && !getPalletDetailsApi.isWaiting) {
+  if (navigation.isFocused()) {
     // on api success
-    if (getPalletDetailsApi.result) {
-      const {
-        id, createDate, expirationDate, items
-      } = getPalletDetailsApi.result.data.pallets[0];
-      const palletItems: PalletItem[] = items.map((item: PalletItem) => ({
-        ...item,
-        quantity: item.quantity || 0,
-        newQuantity: item.quantity || 0,
-        deleted: false,
-        added: false
-      }));
-      const palletDetails: Pallet = {
-        palletInfo: {
-          id,
-          createDate,
-          expirationDate
-        },
-        items: palletItems
-      };
-      dispatch(setupPallet(palletDetails));
-      dispatch(hideActivityModal());
-      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+    if (!getPalletInfoApi.isWaiting && getPalletInfoApi.result) {
+      if (getPalletInfoApi.result.status === 200) {
+        const {
+          id, createDate, expirationDate, items
+        } = getPalletInfoApi.result.data.pallets[0];
+        const palletItems: PalletItem[] = items.map((item: PalletItem) => ({
+          ...item,
+          quantity: item.quantity || 0,
+          newQuantity: item.quantity || 0,
+          deleted: false,
+          added: false
+        }));
+        const palletDetails: Pallet = {
+          palletInfo: {
+            id,
+            createDate,
+            expirationDate
+          },
+          items: palletItems
+        };
+        dispatch(setupPallet(palletDetails));
+        dispatch(hideActivityModal());
+        dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
+      } else if (getPalletInfoApi.result.status === 204) {
+        Toast.show({
+          type: 'error',
+          text1: strings('LOCATION.PALLET_NOT_FOUND'),
+          visibilityTime: 3000,
+          position: 'bottom'
+        });
+      }
     }
     // on api error
-    if (getPalletDetailsApi.error) {
+    if (getPalletInfoApi.error) {
       dispatch(hideActivityModal());
       Toast.show({
         type: 'error',
@@ -273,11 +287,11 @@ export const getPalletDetailsApiHook = (
         visibilityTime: 4000,
         position: 'bottom'
       });
-      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+      dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
     }
   }
   // api is Loading
-  if (getPalletDetailsApi.isWaiting) {
+  if (getPalletInfoApi.isWaiting) {
     dispatch(showActivityModal());
   }
 };
@@ -433,7 +447,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
-    deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
+    deleteUpcsApi, addPalletUpcApi, getPalletInfoApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, isExpirationDateModified, setIsExpirationDateModified,
     perishableCategories, getPalletConfigApi, userConfig
@@ -454,7 +468,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     }
   }, [perishableCategories]);
 
-  // update pallet hook (get pallet details api)
+  // update pallet hook (get pallet config api)
   useEffectHook(() => getPalletConfigApiHook(
     getPalletConfigApi,
     dispatch,
@@ -549,12 +563,12 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     }
   }, [getItemDetailsApi]);
 
-  // update pallet hook (get pallet details api)
-  useEffectHook(() => getPalletDetailsApiHook(
-    getPalletDetailsApi,
+  // update pallet hook (get pallet info api)
+  useEffectHook(() => getPalletInfoApiHook(
+    getPalletInfoApi,
     dispatch,
     navigation
-  ), [getPalletDetailsApi]);
+  ), [getPalletInfoApi]);
 
   useEffectHook(() => clearPalletApiHook(
     clearPalletApi,
@@ -603,7 +617,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     }
   };
   const isRemoveExpirationDate = removeExpirationDate(items, perishableCategories);
-
   return (
     <KeyboardAvoidingView
       style={styles.safeAreaView}
@@ -632,9 +645,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           </View>
           {(isPerishableItemExist(items, perishableCategories)) && (
             <View
-              style={isExpirationDateModified || isRemoveExpirationDate
-                ? styles.modifiedEffectiveDateContainer
-                : styles.effectiveDateContainer}
+              style={
+              isExpirationDateModified || isRemoveExpirationDate || isPerishableItemDeleted(items, perishableCategories)
+                ? styles.modifiedEffectiveDateContainer : styles.effectiveDateContainer
+              }
             >
               <TouchableOpacity onPress={() => setIsPickerShow(true)}>
                 <Text style={styles.headerText}>
@@ -716,7 +730,7 @@ const ManagePallet = (): JSX.Element => {
   const addPalletUpcApi = useTypedSelector(state => state.async.addPalletUPCs);
   const updateItemQtyAPI = useTypedSelector(state => state.async.updatePalletItemQty);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
-  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
+  const getPalletInfoApi = useTypedSelector(state => state.async.getPalletInfo);
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
@@ -775,7 +789,7 @@ const ManagePallet = (): JSX.Element => {
           addPalletUpcApi={addPalletUpcApi}
           updateItemQtyAPI={updateItemQtyAPI}
           deleteUpcsApi={deleteUpcsApi}
-          getPalletDetailsApi={getPalletDetailsApi}
+          getPalletInfoApi={getPalletInfoApi}
           clearPalletApi={clearPalletApi}
           displayClearConfirmation={displayClearConfirmation}
           setDisplayClearConfirmation={setDisplayClearConfirmation}

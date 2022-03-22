@@ -163,7 +163,7 @@ export const updatePalletItemQty = (payload: UpdateItemQuantityRequest) => ({
 export const deleteUpcs = (payload: {
   palletId: number;
   upcs: string[],
-  expirationDate: string|undefined,
+  expirationDate?: string,
   removeExpirationDate: boolean
 }) => ({ type: DELETE_UPCS, payload } as const);
 export const combinePallets = (payload: CombinePalletsRequest) => ({
