@@ -31,7 +31,9 @@ interface PalletManagementState {
 const initialState: PalletManagementState = {
   managePalletMenu: false,
   palletInfo: {
-    id: 0
+    id: 0,
+    createDate: undefined,
+    expirationDate: undefined
   },
   items: [],
   combinePallets: [],
