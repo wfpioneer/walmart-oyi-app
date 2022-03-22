@@ -101,6 +101,7 @@ export default StyleSheet.create({
     textAlign: 'center'
   },
   effectiveDateContainer: {
+    paddingHorizontal: 10,
     flexDirection: 'column',
     alignItems: 'center'
   },
