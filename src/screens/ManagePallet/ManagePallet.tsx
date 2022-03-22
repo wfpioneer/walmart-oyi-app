@@ -568,7 +568,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     updateItemQtyAPI,
     deleteUpcsApi,
     items,
-    dispatch,
+    dispatch
   ), [addPalletUpcApi, deleteUpcsApi, updateItemQtyAPI]);
   // Get Item Details UPC api
   useEffectHook(() => getItemDetailsApiHook(
