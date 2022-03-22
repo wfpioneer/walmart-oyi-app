@@ -50,7 +50,8 @@ export default {
     NO: 'No',
     ENABLED: 'Activado',
     DISABLED: 'Desactivado',
-    REQUIRED: 'Requerido'
+    REQUIRED: 'Requerido',
+    REMOVED: 'Removido'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',

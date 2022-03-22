@@ -14,7 +14,7 @@ import {
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
-import { isEmpty } from 'lodash';
+import { isEmpty, partition } from 'lodash';
 import moment from 'moment';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { trackEvent } from 'appcenter-analytics';
@@ -137,6 +137,18 @@ export const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text
     dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), newQuantity));
   }
 };
+
+const isPerishableItemExist = (items: PalletItem[], perishableCategories: number[]): boolean => (
+  items.some(item => item.categoryNbr && perishableCategories.includes(item.categoryNbr))
+);
+
+export const removeExpirationDate = (items: PalletItem[], perishableCategories: number[]): boolean => {
+  const [deletedItems, otherItemsInPallet] = partition(items, item => item.deleted);
+  const deletedPerishableItem = isPerishableItemExist(deletedItems, perishableCategories);
+  const perishableExistsInPallet = isPerishableItemExist(otherItemsInPallet, perishableCategories);
+  return deletedPerishableItem && !perishableExistsInPallet;
+};
+
 const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
   // Remove item from redux if this item was being added to pallet
   if (item.added) {
@@ -232,7 +244,7 @@ export const getPalletDetailsApiHook = (
       const {
         id, createDate, expirationDate, items
       } = getPalletDetailsApi.result.data.pallets[0];
-      const palletItems = items.map((item: PalletItem) => ({
+      const palletItems: PalletItem[] = items.map((item: PalletItem) => ({
         ...item,
         quantity: item.quantity || 0,
         newQuantity: item.quantity || 0,
@@ -422,8 +434,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
-    displayClearConfirmation, setDisplayClearConfirmation, getPalletConfigApi, perishableCategories, userConfig,
-    setIsPickerShow, isPickerShow, isExpirationDateModified, setIsExpirationDateModified
+    displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
+    isPickerShow, isExpirationDateModified, setIsExpirationDateModified,
+    perishableCategories, getPalletConfigApi, userConfig
   } = props;
   const { id, expirationDate } = palletInfo;
 
@@ -559,9 +572,15 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       reducer.push(current.upcNbr);
       return reducer;
     }, reducerInitialValue);
+    const payload = {
+      palletId,
+      upcs,
+      expirationDate,
+      removeExpirationDate: removeExpirationDate(items, perishableCategories)
+    };
 
     if (upcs.length > 0) {
-      dispatch(deleteUpcs({ palletId, upcs }));
+      dispatch(deleteUpcs(payload));
     }
     // Calls add items to pallet via api
     handleAddItems(palletId, items, dispatch);
@@ -583,6 +602,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       setIsExpirationDateModified(true);
     }
   };
+  const isRemoveExpirationDate = removeExpirationDate(items, perishableCategories);
 
   return (
     <KeyboardAvoidingView
@@ -610,28 +630,36 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             <Text style={styles.headerText}>{strings('PALLET.PALLET_ID')}</Text>
             <Text style={styles.headerItemText}>{id}</Text>
           </View>
-          <View
-            style={isExpirationDateModified ? styles.modifiedEffectiveDateContainer : styles.effectiveDateContainer}
-          >
-            <TouchableOpacity onPress={() => setIsPickerShow(true)}>
-              <Text style={styles.headerText}>
-                {strings('PALLET.EXPIRATION_DATE')}
-              </Text>
-              <Text style={expirationDate ? styles.effectiveDateHeaderItem : styles.errorLabel}>
-                {expirationDate || strings('GENERICS.REQUIRED')}
-              </Text>
-            </TouchableOpacity>
-            {isPickerShow && (
-            <DateTimePicker
-              value={expirationDate ? new Date(expirationDate) : new Date()}
-              mode="date"
-              display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-              is24Hour={true}
-              minimumDate={new Date(Date.now())}
-              onChange={onDatePickerChange}
-            />
-            )}
-          </View>
+          {(isPerishableItemExist(items, perishableCategories)) && (
+            <View
+              style={isExpirationDateModified || isRemoveExpirationDate
+                ? styles.modifiedEffectiveDateContainer
+                : styles.effectiveDateContainer}
+            >
+              <TouchableOpacity onPress={() => setIsPickerShow(true)}>
+                <Text style={styles.headerText}>
+                  {strings('PALLET.EXPIRATION_DATE')}
+                </Text>
+                <Text
+                  style={(expirationDate || isRemoveExpirationDate)
+                    ? styles.effectiveDateHeaderItem : styles.errorLabel}
+                >
+                  {isRemoveExpirationDate ? strings('GENERICS.REMOVED')
+                    : expirationDate || strings('GENERICS.REQUIRED')}
+                </Text>
+              </TouchableOpacity>
+              {isPickerShow && (
+              <DateTimePicker
+                value={expirationDate ? new Date(expirationDate) : new Date()}
+                mode="date"
+                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                is24Hour={true}
+                minimumDate={new Date(Date.now())}
+                onChange={onDatePickerChange}
+              />
+              )}
+            </View>
+          )}
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>{strings('LOCATION.ITEMS')}</Text>
             <Text style={styles.headerItemText}>{items.length}</Text>
@@ -677,7 +705,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 };
 
 const ManagePallet = (): JSX.Element => {
-  const { palletInfo, managePalletMenu, items } = useTypedSelector(state => state.PalletManagement);
+  const {
+    palletInfo, managePalletMenu, items, perishableCategories
+  } = useTypedSelector(state => state.PalletManagement);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const navigation = useNavigation();
   const route = useRoute();
@@ -691,7 +721,6 @@ const ManagePallet = (): JSX.Element => {
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
   const userConfig = useTypedSelector(state => state.User.configs);
-  const { perishableCategories } = useTypedSelector(state => state.PalletManagement);
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [isExpirationDateModified, setIsExpirationDateModified] = useState(false);
 

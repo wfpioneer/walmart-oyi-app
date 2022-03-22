@@ -16,6 +16,22 @@ exports[`PalletManagementScreen Tests rendering Get Pallet Details Api responses
 />
 `;
 
+exports[`PalletManagementScreen Tests rendering Get Pallet Info Api responses Renders Loading indicator if get pallet info waiting for an api response 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
 exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Renders the PalletManagement default  1`] = `
 <View
   style={

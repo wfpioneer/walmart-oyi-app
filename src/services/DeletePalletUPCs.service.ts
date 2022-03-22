@@ -2,7 +2,12 @@ import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
 
 export default class DeletePalletUPCsService {
-  public static deletePalletUPCs(payload: {palletId: number; upcs: string[]}) {
+  public static deletePalletUPCs(payload: {
+    palletId: number;
+    upcs: string[],
+    expirationdate: string|undefined,
+    removeExpirationDate: boolean
+  }) {
     const upcsUrlParam = payload.upcs.reduce((reducer, current, index, array) => {
       if (index !== array.length - 1) {
         return reducer += `upcs=${current}&`;
@@ -11,7 +16,10 @@ export default class DeletePalletUPCsService {
     }, '');
     const urls: Environment = getEnvironment();
     return Request.delete(
-      `${urls.locationUrl}/pallet/${payload.palletId}/upc?${upcsUrlParam}`, undefined
+      `${urls.locationUrl}/pallet/${payload.palletId}/upc?${upcsUrlParam}`, {
+        removeExpirationDate: payload.removeExpirationDate,
+        expirationDate: payload.expirationdate
+      }
     );
   }
 }
