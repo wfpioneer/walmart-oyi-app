@@ -14,6 +14,7 @@ import {
   handleTextChange,
   handleUpdateItems,
   isQuantityChanged,
+  removeExpirationDate,
   updatePalletApisHook
 } from './ManagePallet';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
@@ -37,7 +38,8 @@ const mockUserConfig = {
   printingUpdate: true,
   binning: false,
   palletExpiration: false,
-  backupCategories: ''
+  backupCategories: '',
+  picking: false
 };
 
 describe('ManagePalletScreen', () => {
@@ -56,7 +58,8 @@ describe('ManagePalletScreen', () => {
       category: 54,
       categoryDesc: 'test cat',
       deleted: true,
-      added: false
+      added: false,
+      categoryNbr: 1
     },
     {
       itemNbr: 1234,
@@ -68,7 +71,8 @@ describe('ManagePalletScreen', () => {
       category: 54,
       categoryDesc: 'test cat',
       deleted: false,
-      added: false
+      added: false,
+      categoryNbr: 1
     },
     {
       itemNbr: 4221,
@@ -80,7 +84,8 @@ describe('ManagePalletScreen', () => {
       category: 72,
       categoryDesc: 'deli',
       deleted: false,
-      added: false
+      added: false,
+      categoryNbr: 8
     }
   ];
   const defaultAsyncState: AsyncState = {
@@ -561,6 +566,40 @@ describe('ManagePalletScreen', () => {
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(showActivityModal).toBeCalledTimes(1);
+    });
+
+    it('Tests removeExpirationDate function', () => {
+      const mockPerishableCategories = [1, 10, 11];
+      expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(false);
+      const newItems: PalletItem[] = [
+        {
+          itemNbr: 1234,
+          upcNbr: '1234567890',
+          itemDesc: 'test',
+          quantity: 3,
+          newQuantity: 3,
+          price: 10.0,
+          category: 54,
+          categoryDesc: 'test cat',
+          deleted: true,
+          added: false,
+          categoryNbr: 1
+        },
+        {
+          itemNbr: 4221,
+          upcNbr: '765432123456',
+          itemDesc: 'food',
+          quantity: 2,
+          newQuantity: 1,
+          price: 3.49,
+          category: 72,
+          categoryDesc: 'deli',
+          deleted: false,
+          added: false,
+          categoryNbr: 8
+        }
+      ];
+      expect(removeExpirationDate(newItems, mockPerishableCategories)).toBe(true);
     });
   });
 });
