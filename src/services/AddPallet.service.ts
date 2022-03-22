@@ -26,11 +26,13 @@ export default class AddPalletService {
     return Request.put(
       `${urls.locationUrl}/v1/pallet/${payload.palletId}/upcs`,
       payload.items,
-      {
-        headers: {
-          expirationDate: payload.expirationDate || ''
+      payload.expirationDate
+        ? {
+          headers: {
+            expirationDate: payload.expirationDate
+          }
         }
-      }
+        : undefined
     );
   }
 }

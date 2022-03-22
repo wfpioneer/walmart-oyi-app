@@ -14,6 +14,7 @@ import {
   handleIncreaseQuantity,
   handleTextChange,
   handleUpdateItems,
+  isAddedItemPerishable,
   isQuantityChanged,
   updatePalletApisHook
 } from './ManagePallet';
@@ -43,6 +44,8 @@ const mockUserConfig: Configurations = {
   backupCategories: '',
   picking: false
 };
+
+const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 
 describe('ManagePalletScreen', () => {
   const mockPalletInfo: PalletInfo = {
@@ -87,8 +90,6 @@ describe('ManagePalletScreen', () => {
       added: false
     }
   ];
-
-  const mockPerishableCatg: number[] = [1, 8, 54, 72, 93];
 
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
@@ -139,8 +140,6 @@ describe('ManagePalletScreen', () => {
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockUserConfig}
-          isPerishable={false}
-          setIsPerishable={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -173,8 +172,6 @@ describe('ManagePalletScreen', () => {
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockUserConfig}
-          isPerishable={false}
-          setIsPerishable={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -209,8 +206,6 @@ describe('ManagePalletScreen', () => {
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockUserConfig}
-          isPerishable={false}
-          setIsPerishable={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -242,8 +237,6 @@ describe('ManagePalletScreen', () => {
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockUserConfig}
-          isPerishable={false}
-          setIsPerishable={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -251,7 +244,6 @@ describe('ManagePalletScreen', () => {
 
     it('Renders the expiration date required text if pallet has no date with perishableItems', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const isPerishable = true;
       const mockPalletNoDate: PalletInfo = {
         id: 2,
         createDate: '03/31/2022'
@@ -280,8 +272,6 @@ describe('ManagePalletScreen', () => {
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockUserConfig}
-          isPerishable={isPerishable}
-          setIsPerishable={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -325,8 +315,6 @@ describe('ManagePalletScreen', () => {
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockUserConfig}
-          isPerishable={false}
-          setIsPerishable={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -336,7 +324,6 @@ describe('ManagePalletScreen', () => {
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
     const palletId = 3;
-    const mockSetIsPerishable = jest.fn();
     const onSuccessApi: AsyncState = {
       ...defaultAsyncState,
       result: {
@@ -475,13 +462,10 @@ describe('ManagePalletScreen', () => {
         defaultAsyncState,
         defaultAsyncState,
         mockItems,
-        mockDispatch,
-        true,
-        mockSetIsPerishable
+        mockDispatch
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(showActivityModal).toBeCalledTimes(1);
-      expect(mockSetIsPerishable).not.toHaveBeenCalled();
     });
     it('Tests updatePalletApisHook with Successful responses', () => {
       const successToastProps = {
@@ -494,13 +478,10 @@ describe('ManagePalletScreen', () => {
         onSuccessApi,
         onSuccessApi,
         mockItems,
-        mockDispatch,
-        true,
-        mockSetIsPerishable
+        mockDispatch
       );
       expect(mockDispatch).toBeCalledTimes(5);
       expect(hideActivityModal).toBeCalledTimes(1);
-      expect(mockSetIsPerishable).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(successToastProps)
       );
@@ -509,7 +490,7 @@ describe('ManagePalletScreen', () => {
       const partialToastProps = {
         type: 'info',
         text1: strings('PALLET.SAVE_PALLET_PARTIAL'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: strings(TRY_AGAIN),
         position: 'bottom'
       };
       updatePalletApisHook(
@@ -517,13 +498,10 @@ describe('ManagePalletScreen', () => {
         onSuccessApi,
         onFailureApi,
         mockItems,
-        mockDispatch,
-        true,
-        mockSetIsPerishable
+        mockDispatch
       );
       expect(mockDispatch).toBeCalledTimes(5);
       expect(hideActivityModal).toBeCalledTimes(1);
-      expect(mockSetIsPerishable).not.toHaveBeenCalled();
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(partialToastProps)
       );
@@ -533,7 +511,7 @@ describe('ManagePalletScreen', () => {
       const errorToastProps = {
         type: 'error',
         text1: strings('PALLET.SAVE_PALLET_FAILURE'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: strings(TRY_AGAIN),
         position: 'bottom'
       };
       updatePalletApisHook(
@@ -541,13 +519,10 @@ describe('ManagePalletScreen', () => {
         onFailureApi,
         onFailureApi,
         mockItems,
-        mockDispatch,
-        true,
-        mockSetIsPerishable
+        mockDispatch
       );
       expect(mockDispatch).toBeCalledTimes(5);
       expect(hideActivityModal).toBeCalledTimes(1);
-      expect(mockSetIsPerishable).not.toHaveBeenCalled();
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(errorToastProps)
       );
@@ -567,7 +542,13 @@ describe('ManagePalletScreen', () => {
         text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
         position: 'bottom'
       };
-      clearPalletApiHook(clearPalletSuccess, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+      clearPalletApiHook(
+        clearPalletSuccess,
+        palletId,
+        navigationProp,
+        mockDispatch,
+        mockSetDisplayConfirmation
+      );
 
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
@@ -585,7 +566,7 @@ describe('ManagePalletScreen', () => {
       const failedToast = {
         type: 'error',
         text1: strings('PALLET.CLEAR_PALLET_ERROR'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: strings(TRY_AGAIN),
         position: 'bottom'
       };
       clearPalletApiHook(clearPalletFailure, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
@@ -644,10 +625,9 @@ describe('ManagePalletScreen', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      getItemDetailsApiHook(successApi, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
+      getItemDetailsApiHook(successApi, mockItems, mockDispatch);
       expect(Toast.show).toHaveBeenCalledWith(toastItemExists);
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockSetIsPerishable).not.toHaveBeenCalled();
     });
 
     it('Tests getPalletDetailsApiHook on 200 success for a new item', () => {
@@ -658,9 +638,8 @@ describe('ManagePalletScreen', () => {
           status: 200
         }
       };
-      getItemDetailsApiHook(successApi, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
+      getItemDetailsApiHook(successApi, mockItems, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockSetIsPerishable).toBeCalledTimes(1);
     });
 
     it('Tests getPalletDetailsApiHook on 204 success for a new item', () => {
@@ -677,10 +656,9 @@ describe('ManagePalletScreen', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      getItemDetailsApiHook(successApi204, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
+      getItemDetailsApiHook(successApi204, mockItems, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
-      expect(mockSetIsPerishable).not.toHaveBeenCalled();
     });
 
     it('Tests getItemDetailsApi on failure', () => {
@@ -691,14 +669,13 @@ describe('ManagePalletScreen', () => {
       const toastGetItemError = {
         type: 'error',
         text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: strings(TRY_AGAIN),
         visibilityTime: 4000,
         position: 'bottom'
       };
-      getItemDetailsApiHook(failureApi, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
+      getItemDetailsApiHook(failureApi, mockItems, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(toastGetItemError);
-      expect(mockSetIsPerishable).not.toHaveBeenCalled();
     });
 
     it('Tests getItemDetailsApi isWaiting', () => {
@@ -706,9 +683,43 @@ describe('ManagePalletScreen', () => {
         ...defaultAsyncState,
         isWaiting: true
       };
-      getItemDetailsApiHook(isLoadingApi, mockItems, mockPerishableCatg, mockSetIsPerishable, mockDispatch);
+      getItemDetailsApiHook(isLoadingApi, mockItems, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockSetIsPerishable).not.toHaveBeenCalled();
     });
+  });
+
+  it('Tests isAddedItemPerishable', () => {
+    const mockPerishableCatg: number[] = [1, 8, 54, 72, 93];
+    const isAddedFalse = isAddedItemPerishable(mockItems, mockPerishableCatg);
+    expect(isAddedFalse).toBe(false);
+
+    const mockAddedItems: PalletItem[] = [
+      {
+        itemNbr: 1234,
+        upcNbr: '1234567890',
+        itemDesc: 'test',
+        quantity: 3,
+        newQuantity: 3,
+        price: 10.0,
+        categoryNbr: 8,
+        categoryDesc: 'test cat',
+        deleted: false,
+        added: true
+      },
+      {
+        itemNbr: 1234,
+        upcNbr: '12345678901',
+        itemDesc: 'test',
+        quantity: 3,
+        newQuantity: 4,
+        price: 10.0,
+        categoryNbr: 54,
+        categoryDesc: 'test cat',
+        deleted: false,
+        added: true
+      }
+    ];
+    const isAddedTrue = isAddedItemPerishable(mockAddedItems, mockPerishableCatg);
+    expect(isAddedTrue).toBe(true);
   });
 });

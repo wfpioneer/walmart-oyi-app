@@ -1292,42 +1292,6 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         style={
           Object {
             "alignItems": "center",
-            "backgroundColor": "#FFFFE0",
-            "borderWidth": 1,
-            "flexDirection": "column",
-            "paddingHorizontal": 10,
-          }
-        }
-      >
-        <ForwardRef
-          onPress={[Function]}
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 18,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            [missing "en.PALLET.EXPIRATION_DATE" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#f44336",
-                "textAlign": "center",
-              }
-            }
-          >
-            [missing "en.GENERICS.REQUIRED" translation]
-          </Text>
-        </ForwardRef>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
             "flexDirection": "column",
             "paddingHorizontal": 5,
           }
@@ -1485,7 +1449,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
   >
     <Button
       backgroundColor="#33691E"
-      disabled={true}
+      disabled={false}
       height={45}
       onPress={[Function]}
       radius={5}

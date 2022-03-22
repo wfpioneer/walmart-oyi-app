@@ -76,8 +76,6 @@ interface ManagePalletProps {
   clearPalletApi: AsyncState;
   displayClearConfirmation: boolean;
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
-  isPerishable: boolean;
-  setIsPerishable: React.Dispatch<React.SetStateAction<boolean>>;
   getPalletConfigApi: AsyncState;
   perishableCategories: number[];
   userConfig: Configurations
@@ -153,9 +151,14 @@ const undoDelete = (dispatch: Dispatch<any>) => {
   dispatch(resetItems());
 };
 
-const isPerishableItem = (item: PalletItem, perishableCategories: number[]): boolean => (
-  perishableCategories.some(catNbr => item.categoryNbr === catNbr)
+const isPerishableItemExist = (items: PalletItem[], perishableCategories: number[]): boolean => (
+  items.some(item => item.categoryNbr && perishableCategories.includes(item.categoryNbr))
 );
+
+export const isAddedItemPerishable = (items: PalletItem[], perishableCategories: number[]) => {
+  const addedItems = items.filter(item => item.added);
+  return isPerishableItemExist(addedItems, perishableCategories);
+};
 
 const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   if (!item.deleted) {
@@ -292,8 +295,6 @@ export const updatePalletApisHook = (
   deleteUpcsApi: AsyncState,
   items: PalletItem[],
   dispatch: Dispatch<any>,
-  isPerishable: boolean,
-  setIsPerishable: React.Dispatch<React.SetStateAction<boolean>>
 ): void => {
   const addResponse: ApiResult | string = (addPalletUpcApi.result ?? addPalletUpcApi.error);
   const updateResponse: ApiResult | string = (updateItemQtyAPI.result ?? updateItemQtyAPI.error);
@@ -320,10 +321,6 @@ export const updatePalletApisHook = (
         }
         return item;
       });
-      // If Persihable Item was added set isPerishable to false
-      if (isPerishable) {
-        setIsPerishable(false);
-      }
     } else {
       totalResponses.set('ERROR', addResponse);
     }
@@ -439,8 +436,6 @@ export const clearPalletApiHook = (
 export const getItemDetailsApiHook = (
   getItemDetailsApi: AsyncState,
   items: PalletItem[],
-  perishableCategories: number[],
-  setIsPerishable: React.Dispatch<React.SetStateAction<boolean>>,
   dispatch: Dispatch<any>
 ) => {
   // on api success
@@ -478,10 +473,6 @@ export const getItemDetailsApiHook = (
           added: true
         };
 
-        const perishable = isPerishableItem(pallet, perishableCategories);
-        if (perishable) {
-          setIsPerishable(perishable);
-        }
         dispatch(addItemToPallet(pallet));
       }
     } else if (getItemDetailsApi.result.status === 204) {
@@ -510,6 +501,7 @@ export const getItemDetailsApiHook = (
     dispatch(showActivityModal());
   }
 };
+
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
@@ -517,7 +509,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, isExpirationDateModified, setIsExpirationDateModified,
-    perishableCategories, isPerishable, setIsPerishable, getPalletConfigApi, userConfig
+    perishableCategories, getPalletConfigApi, userConfig
   } = props;
   const { id, expirationDate } = palletInfo;
 
@@ -568,15 +560,11 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     deleteUpcsApi,
     items,
     dispatch,
-    isPerishable,
-    setIsPerishable
   ), [addPalletUpcApi, deleteUpcsApi, updateItemQtyAPI]);
   // Get Item Details UPC api
   useEffectHook(() => getItemDetailsApiHook(
     getItemDetailsApi,
     items,
-    perishableCategories,
-    setIsPerishable,
     dispatch
   ), [getItemDetailsApi]);
 
@@ -627,7 +615,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       setIsExpirationDateModified(true);
     }
   };
-
+  const isAddedPerishable = isAddedItemPerishable(items, perishableCategories);
   return (
     <KeyboardAvoidingView
       style={styles.safeAreaView}
@@ -654,9 +642,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             <Text style={styles.headerText}>{strings('PALLET.PALLET_ID')}</Text>
             <Text style={styles.headerItemText}>{id}</Text>
           </View>
-          {(expirationDate || isPerishable) && (
+          {(expirationDate || isPerishableItemExist(items, perishableCategories)) && (
             <View
-              style={isExpirationDateModified || isPerishable
+              style={isExpirationDateModified || isAddedPerishable
                 ? styles.modifiedEffectiveDateContainer
                 : styles.effectiveDateContainer}
             >
@@ -717,7 +705,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             style={styles.saveButton}
             backgroundColor={COLOR.GREEN}
             onPress={() => submit()}
-            disabled={isPerishable && !expirationDate}
+            disabled={isAddedPerishable && !expirationDate}
           />
         </View>
       ) : null}
@@ -740,7 +728,6 @@ const ManagePallet = (): JSX.Element => {
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
-  const [isPerishable, setIsPerishable] = useState(false);
   const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
   const userConfig = useTypedSelector(state => state.User.configs);
   const [isPickerShow, setIsPickerShow] = useState(false);
@@ -801,8 +788,6 @@ const ManagePallet = (): JSX.Element => {
           clearPalletApi={clearPalletApi}
           displayClearConfirmation={displayClearConfirmation}
           setDisplayClearConfirmation={setDisplayClearConfirmation}
-          isPerishable={isPerishable}
-          setIsPerishable={setIsPerishable}
           getPalletConfigApi={getPalletConfigApi}
           userConfig={userConfig}
           perishableCategories={perishableCategories}
