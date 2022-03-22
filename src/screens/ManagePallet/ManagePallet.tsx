@@ -681,7 +681,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           {(isPerishableItemExist(items, perishableCategories)) && (
           <View
             style={
-              isExpiryDateChanged(palletInfo) || isRemoveExpirationDate
+              isExpiryDateChanged(palletInfo) || isAddedPerishable || isRemoveExpirationDate
               || isPerishableItemDeleted(items, perishableCategories)
                 ? styles.modifiedEffectiveDateContainer : styles.effectiveDateContainer
             }
