@@ -713,7 +713,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             style={styles.saveButton}
             backgroundColor={COLOR.GREEN}
             onPress={() => submit()}
-            disabled={isAddedPerishable && !expirationDate}
+            disabled={isAddedPerishable && !(newExpirationDate || expirationDate)}
           />
         </View>
       ) : null}
