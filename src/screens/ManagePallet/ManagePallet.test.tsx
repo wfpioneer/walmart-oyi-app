@@ -8,7 +8,7 @@ import {
   getItemDetailsApiHook,
   getNumberOfDeleted,
   getPalletConfigApiHook,
-  getPalletDetailsApiHook,
+  getPalletInfoApiHook,
   handleAddItems,
   handleDecreaseQuantity,
   handleIncreaseQuantity,
@@ -17,6 +17,7 @@ import {
   isAddedItemPerishable,
   isExpiryDateChanged,
   isQuantityChanged,
+  removeExpirationDate,
   updatePalletApisHook
 } from './ManagePallet';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
@@ -130,7 +131,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
@@ -160,7 +161,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
@@ -192,7 +193,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
@@ -221,7 +222,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
@@ -254,7 +255,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
@@ -295,7 +296,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
@@ -427,10 +428,11 @@ describe('ManagePalletScreen', () => {
       expect(dispatch).not.toHaveBeenCalled();
     });
 
-    it('Tests getPalletDetailsApiHook on success', () => {
+    it('Tests getPalletInfoApiHook on success', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
+          status: 200,
           data: {
             pallets: [
               {
@@ -444,16 +446,16 @@ describe('ManagePalletScreen', () => {
         }
       };
 
-      getPalletDetailsApiHook(successApi, mockDispatch, navigationProp);
+      getPalletInfoApiHook(successApi, mockDispatch, navigationProp);
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(3);
       expect(Toast.show).toBeCalledTimes(0);
     });
 
-    it('Tests getPalletDetailsApiHook on fail', () => {
+    it('Tests getPalletInfoApiHook on fail', () => {
       const failApi: AsyncState = { ...defaultAsyncState, error: {} };
 
-      getPalletDetailsApiHook(failApi, mockDispatch, navigationProp);
+      getPalletInfoApiHook(failApi, mockDispatch, navigationProp);
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
@@ -630,7 +632,7 @@ describe('ManagePalletScreen', () => {
       expect(showActivityModal).toBeCalledTimes(1);
     });
 
-    it('Tests getPalletDetailsApiHook on 200 success if item already exists', () => {
+    it('Tests getItemDetailsApiHook on 200 success if item already exists', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
@@ -649,7 +651,7 @@ describe('ManagePalletScreen', () => {
       expect(mockDispatch).toBeCalledTimes(1);
     });
 
-    it('Tests getPalletDetailsApiHook on 200 success for a new item', () => {
+    it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
@@ -661,7 +663,7 @@ describe('ManagePalletScreen', () => {
       expect(mockDispatch).toBeCalledTimes(2);
     });
 
-    it('Tests getPalletDetailsApiHook on 204 success for a new item', () => {
+    it('Tests getItemDetailsApiHook on 204 success for a new item', () => {
       const successApi204: AsyncState = {
         ...defaultAsyncState,
         result: {
@@ -740,5 +742,36 @@ describe('ManagePalletScreen', () => {
     ];
     const isAddedTrue = isAddedItemPerishable(mockAddedItems, mockPerishableCatg);
     expect(isAddedTrue).toBe(true);
+  });
+  it('Tests removeExpirationDate function', () => {
+    const mockPerishableCategories = [1, 10, 11];
+    expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(false);
+    const newItems: PalletItem[] = [
+      {
+        itemNbr: 1234,
+        upcNbr: '1234567890',
+        itemDesc: 'test',
+        quantity: 3,
+        newQuantity: 3,
+        price: 10.0,
+        categoryDesc: 'test cat',
+        deleted: true,
+        added: false,
+        categoryNbr: 1
+      },
+      {
+        itemNbr: 4221,
+        upcNbr: '765432123456',
+        itemDesc: 'food',
+        quantity: 2,
+        newQuantity: 1,
+        price: 3.49,
+        categoryDesc: 'deli',
+        deleted: false,
+        added: false,
+        categoryNbr: 8
+      }
+    ];
+    expect(removeExpirationDate(newItems, mockPerishableCategories)).toBe(true);
   });
 });

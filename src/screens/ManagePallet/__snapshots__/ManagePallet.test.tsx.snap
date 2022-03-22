@@ -89,41 +89,6 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 10,
-          }
-        }
-      >
-        <ForwardRef
-          onPress={[Function]}
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 18,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            [missing "en.PALLET.EXPIRATION_DATE" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#000000",
-                "fontSize": 16,
-                "textAlign": "center",
-              }
-            }
-          >
-            01/31/2022
-          </Text>
-        </ForwardRef>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "column",
             "paddingHorizontal": 5,
           }
         }
@@ -383,49 +348,6 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         >
           1514
         </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "column",
-            "paddingHorizontal": 10,
-          }
-        }
-      >
-        <ForwardRef
-          onPress={[Function]}
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 18,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            [missing "en.PALLET.EXPIRATION_DATE" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#000000",
-                "fontSize": 16,
-                "textAlign": "center",
-              }
-            }
-          >
-            01/31/2022
-          </Text>
-        </ForwardRef>
-        <Picker
-          display="spinner"
-          is24Hour={true}
-          minimumDate={2022-03-15T18:30:00.000Z}
-          mode="date"
-          onChange={[Function]}
-          value={2022-03-15T18:30:00.000Z}
-        />
       </View>
       <View
         style={
@@ -697,41 +619,6 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 10,
-          }
-        }
-      >
-        <ForwardRef
-          onPress={[Function]}
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 18,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            [missing "en.PALLET.EXPIRATION_DATE" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#000000",
-                "fontSize": 16,
-                "textAlign": "center",
-              }
-            }
-          >
-            01/31/2022
-          </Text>
-        </ForwardRef>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "column",
             "paddingHorizontal": 5,
           }
         }
@@ -991,41 +878,6 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         >
           1514
         </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "column",
-            "paddingHorizontal": 10,
-          }
-        }
-      >
-        <ForwardRef
-          onPress={[Function]}
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 18,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            [missing "en.PALLET.EXPIRATION_DATE" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#000000",
-                "fontSize": 16,
-                "textAlign": "center",
-              }
-            }
-          >
-            01/31/2022
-          </Text>
-        </ForwardRef>
       </View>
       <View
         style={
@@ -1556,41 +1408,6 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         >
           1514
         </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "column",
-            "paddingHorizontal": 10,
-          }
-        }
-      >
-        <ForwardRef
-          onPress={[Function]}
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 18,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            [missing "en.PALLET.EXPIRATION_DATE" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#000000",
-                "fontSize": 16,
-                "textAlign": "center",
-              }
-            }
-          >
-            01/31/2022
-          </Text>
-        </ForwardRef>
       </View>
       <View
         style={

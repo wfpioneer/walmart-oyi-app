@@ -23,7 +23,7 @@ describe('PalletManagementScreen', () => {
           useEffectHook={jest.fn()}
           searchText=""
           setSearchText={jest.fn()}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           navigation={navigationProp}
           dispatch={jest.fn()}
           route={routeProp}
@@ -32,8 +32,8 @@ describe('PalletManagementScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
-  describe('Tests rendering Get Pallet Details Api responses', () => {
-    it('Renders Loading indicator if get pallet details waiting for an api response', () => {
+  describe('Tests rendering Get Pallet Info Api responses', () => {
+    it('Renders Loading indicator if get pallet info waiting for an api response', () => {
       const palletDetailsIsWaiting: AsyncState = {
         ...defaultAsyncState,
         isWaiting: true
@@ -43,7 +43,7 @@ describe('PalletManagementScreen', () => {
           useEffectHook={jest.fn()}
           searchText=""
           setSearchText={jest.fn()}
-          getPalletDetailsApi={palletDetailsIsWaiting}
+          getPalletInfoApi={palletDetailsIsWaiting}
           navigation={navigationProp}
           dispatch={jest.fn()}
           route={routeProp}
