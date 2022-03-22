@@ -43,6 +43,7 @@ import {
   removeItem,
   resetItems,
   setPalletItemNewQuantity,
+  setPalletNewExpiration,
   setPerishableCategories,
   setupPallet,
   showManagePalletMenu,
@@ -81,8 +82,6 @@ interface ManagePalletProps {
   userConfig: Configurations
   isPickerShow: boolean;
   setIsPickerShow: React.Dispatch<React.SetStateAction<boolean>>;
-  isExpirationDateModified: boolean;
-  setIsExpirationDateModified: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface ApiResult {
   data: any;
@@ -100,10 +99,16 @@ export const isQuantityChanged = (
   item: PalletItem
 ): boolean => !!(item.newQuantity && item.newQuantity !== item.quantity);
 
-const enableSave = (items: PalletItem[]): boolean => {
-  const modifiedArray = items.filter((item: PalletItem) => isQuantityChanged(item)
+export const isExpiryDateChanged = (palletInfo: PalletInfo): boolean => !!(
+  palletInfo.newExpirationDate && palletInfo.newExpirationDate !== palletInfo.expirationDate?.trim()
+);
+
+const dateOfExpirationDate = (stringDate?: string): Date => (stringDate ? new Date(stringDate) : new Date());
+
+const enableSave = (items: PalletItem[], palletInfo: PalletInfo): boolean => {
+  const isItemsModified = items.some((item: PalletItem) => isQuantityChanged(item)
     || item.deleted || item.added);
-  return modifiedArray.length > 0;
+  return isItemsModified || isExpiryDateChanged(palletInfo);
 };
 
 export const handleDecreaseQuantity = (item: PalletItem, dispatch: Dispatch<any>): void => {
@@ -190,12 +195,16 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   return null;
 };
 
-export const handleUpdateItems = (items: PalletItem[], palletId: number, dispatch: Dispatch<any>): void => {
+export const handleUpdateItems = (items: PalletItem[], palletInfo: PalletInfo, dispatch: Dispatch<any>): void => {
   const updatePalletItems = items.filter(item => isQuantityChanged(item) && !item.added && !item.deleted)
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
 
-  if (updatePalletItems.length > 0) {
-    dispatch(updatePalletItemQty({ palletId, palletItem: updatePalletItems }));
+  if (updatePalletItems.length > 0 || isExpiryDateChanged(palletInfo)) {
+    dispatch(updatePalletItemQty({
+      palletId: palletInfo.id,
+      palletItem: updatePalletItems,
+      palletExpiration: palletInfo.newExpirationDate
+    }));
   }
 };
 
@@ -347,6 +356,7 @@ export const updatePalletApisHook = (
         }
         return item;
       });
+      dispatch(updatePalletExpirationDate());
     } else {
       totalResponses.set('ERROR', updateResponse);
     }
@@ -449,10 +459,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletInfoApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
-    isPickerShow, isExpirationDateModified, setIsExpirationDateModified,
-    perishableCategories, getPalletConfigApi, userConfig
+    isPickerShow, getPalletConfigApi, perishableCategories, userConfig
   } = props;
-  const { id, expirationDate } = palletInfo;
+  const { id, expirationDate, newExpirationDate } = palletInfo;
 
   let scannedSubscription: EmitterSubscription;
 
@@ -599,21 +608,20 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     // Calls add items to pallet via api
     handleAddItems(palletId, items, dispatch);
     // Calls update pallet item qty api
-    handleUpdateItems(items, id, dispatch);
-    setIsExpirationDateModified(false);
+    handleUpdateItems(items, palletInfo, dispatch);
   };
 
   const handleUnhandledTouches = () => {
     Keyboard.dismiss();
     return false;
   };
+
   const onDatePickerChange = (event: DateTimePickerEvent, value: Date| undefined) => {
     const { type } = event;
     const newDate = value && moment(value).format('MM/DD/YYYY');
     setIsPickerShow(false);
     if (type === 'set' && newDate && newDate !== expirationDate) {
-      dispatch(updatePalletExpirationDate(newDate));
-      setIsExpirationDateModified(true);
+      dispatch(setPalletNewExpiration(newDate));
     }
   };
   const isRemoveExpirationDate = removeExpirationDate(items, perishableCategories);
@@ -644,35 +652,35 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             <Text style={styles.headerItemText}>{id}</Text>
           </View>
           {(isPerishableItemExist(items, perishableCategories)) && (
-            <View
-              style={
-              isExpirationDateModified || isRemoveExpirationDate || isPerishableItemDeleted(items, perishableCategories)
+          <View
+            style={
+              isExpiryDateChanged(palletInfo) || isRemoveExpirationDate
+              || isPerishableItemDeleted(items, perishableCategories)
                 ? styles.modifiedEffectiveDateContainer : styles.effectiveDateContainer
-              }
-            >
-              <TouchableOpacity onPress={() => setIsPickerShow(true)}>
-                <Text style={styles.headerText}>
-                  {strings('PALLET.EXPIRATION_DATE')}
-                </Text>
-                <Text
-                  style={(expirationDate || isRemoveExpirationDate)
-                    ? styles.effectiveDateHeaderItem : styles.errorLabel}
-                >
-                  {isRemoveExpirationDate ? strings('GENERICS.REMOVED')
-                    : expirationDate || strings('GENERICS.REQUIRED')}
-                </Text>
-              </TouchableOpacity>
-              {isPickerShow && (
-              <DateTimePicker
-                value={expirationDate ? new Date(expirationDate) : new Date()}
-                mode="date"
-                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                is24Hour={true}
-                minimumDate={new Date(Date.now())}
-                onChange={onDatePickerChange}
-              />
-              )}
-            </View>
+            }
+          >
+            <TouchableOpacity onPress={() => setIsPickerShow(true)}>
+              <Text style={styles.headerText}>
+                {strings('PALLET.EXPIRATION_DATE')}
+              </Text>
+              <Text style={(expirationDate || isRemoveExpirationDate)
+                ? styles.effectiveDateHeaderItem : styles.errorLabel}
+              >
+                {isRemoveExpirationDate ? strings('GENERICS.REMOVED')
+                  : newExpirationDate || expirationDate || strings('GENERICS.REQUIRED')}
+              </Text>
+            </TouchableOpacity>
+            {isPickerShow && (
+            <DateTimePicker
+              value={newExpirationDate ? new Date(newExpirationDate) : dateOfExpirationDate(expirationDate)}
+              mode="date"
+              display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+              is24Hour={true}
+              minimumDate={new Date(Date.now())}
+              onChange={onDatePickerChange}
+            />
+            )}
+          </View>
           )}
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>{strings('LOCATION.ITEMS')}</Text>
@@ -704,7 +712,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           />
         </View>
       </View>
-      {items && enableSave(items) ? (
+      {items && enableSave(items, palletInfo) ? (
         <View style={styles.buttonContainer}>
           <Button
             title={strings('GENERICS.SAVE')}
@@ -736,7 +744,6 @@ const ManagePallet = (): JSX.Element => {
   const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
   const userConfig = useTypedSelector(state => state.User.configs);
   const [isPickerShow, setIsPickerShow] = useState(false);
-  const [isExpirationDateModified, setIsExpirationDateModified] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['45%'], []);
@@ -798,8 +805,6 @@ const ManagePallet = (): JSX.Element => {
           perishableCategories={perishableCategories}
           isPickerShow={isPickerShow}
           setIsPickerShow={setIsPickerShow}
-          isExpirationDateModified={isExpirationDateModified}
-          setIsExpirationDateModified={setIsExpirationDateModified}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}
