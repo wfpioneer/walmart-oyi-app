@@ -61,13 +61,13 @@ export const getPalletInfoApiEffect = (
   if (navigation.isFocused()) {
     // Success
     if (!palletInfoApi.isWaiting && palletInfoApi.result) {
-      if (palletInfoApi.result.status === 200) {
-        const { result } = palletInfoApi;
+      const { result } = palletInfoApi;
+      if (result.status === 200) {
         dispatch(addCombinePallet({
           itemCount: result.data.pallets[0].items.length,
           palletId: result.data.pallets[0].id
         }));
-      } else if (palletInfoApi.result.status === 204) {
+      } else if (result.status === 204) {
         Toast.show({
           type: 'error',
           position: 'bottom',
