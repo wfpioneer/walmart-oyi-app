@@ -51,7 +51,8 @@ export default {
     NO: 'No',
     ENABLED: 'Enabled',
     DISABLED: 'Disabled',
-    REQUIRED: 'Required'
+    REQUIRED: 'Required',
+    REMOVED: 'Removed'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',

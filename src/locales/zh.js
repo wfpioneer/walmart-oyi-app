@@ -50,7 +50,8 @@ export default {
     NO: '否',
     ENABLED: '激活',
     DISABLED: '不可用',
-    REQUIRED: '必需的'
+    REQUIRED: '适用',
+    REMOVED: '移除'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',

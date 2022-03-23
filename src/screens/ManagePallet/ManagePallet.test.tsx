@@ -5,15 +5,19 @@ import Toast from 'react-native-toast-message';
 import {
   ManagePalletScreen,
   clearPalletApiHook,
+  getItemDetailsApiHook,
   getNumberOfDeleted,
   getPalletConfigApiHook,
-  getPalletDetailsApiHook,
+  getPalletInfoApiHook,
   handleAddItems,
   handleDecreaseQuantity,
   handleIncreaseQuantity,
   handleTextChange,
   handleUpdateItems,
+  isAddedItemPerishable,
+  isExpiryDateChanged,
   isQuantityChanged,
+  removeExpirationDate,
   updatePalletApisHook
 } from './ManagePallet';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
@@ -23,13 +27,17 @@ import {
   showActivityModal
 } from '../../state/actions/Modal';
 import { strings } from '../../locales';
+import getItemDetails from '../../mockData/getItemDetails';
+import { Configurations } from '../../models/User';
+
+const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
 }));
 
-const mockUserConfig = {
+const mockUserConfig: Configurations = {
   locationManagement: true,
   locationManagementEdit: false,
   palletManagement: true,
@@ -37,7 +45,8 @@ const mockUserConfig = {
   printingUpdate: true,
   binning: false,
   palletExpiration: false,
-  backupCategories: ''
+  backupCategories: '',
+  picking: false
 };
 
 describe('ManagePalletScreen', () => {
@@ -53,7 +62,7 @@ describe('ManagePalletScreen', () => {
       quantity: 3,
       newQuantity: 3,
       price: 10.0,
-      category: 54,
+      categoryNbr: 54,
       categoryDesc: 'test cat',
       deleted: true,
       added: false
@@ -65,7 +74,7 @@ describe('ManagePalletScreen', () => {
       quantity: 3,
       newQuantity: 4,
       price: 10.0,
-      category: 54,
+      categoryNbr: 54,
       categoryDesc: 'test cat',
       deleted: false,
       added: false
@@ -77,12 +86,13 @@ describe('ManagePalletScreen', () => {
       quantity: 2,
       newQuantity: 1,
       price: 3.49,
-      category: 72,
+      categoryNbr: 72,
       categoryDesc: 'deli',
       deleted: false,
       added: false
     }
   ];
+
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
     value: null,
@@ -121,13 +131,11 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
           isPickerShow={false}
-          isExpirationDateModified={false}
-          setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
@@ -153,13 +161,11 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
           isPickerShow={false}
-          isExpirationDateModified={false}
-          setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
@@ -168,6 +174,7 @@ describe('ManagePalletScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
     it('Renders the DatePicker Dialog when the isPickerShow is true ', () => {
       const mockDate = new Date(1647369000000);
       jest.spyOn(global, 'Date').mockImplementation(() => (mockDate as unknown) as string);
@@ -186,13 +193,11 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
           isPickerShow={true}
-          isExpirationDateModified={false}
-          setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
@@ -201,6 +206,7 @@ describe('ManagePalletScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
     it('Renders the palletManagement when expiration date got modified', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -216,13 +222,44 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
           isPickerShow={false}
-          isExpirationDateModified={true}
-          setIsExpirationDateModified={jest.fn()}
+          setIsPickerShow={jest.fn()}
+          perishableCategories={[]}
+          getPalletConfigApi={defaultAsyncState}
+          userConfig={mockUserConfig}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders the expiration date required text if pallet has no date with perishableItems', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const mockPalletNoDate: PalletInfo = {
+        id: 2,
+        createDate: '03/31/2022'
+      };
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletNoDate}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
+          clearPalletApi={defaultAsyncState}
+          displayClearConfirmation={true}
+          setDisplayClearConfirmation={jest.fn()}
+          isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
@@ -259,13 +296,11 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
+          getPalletInfoApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
           isPickerShow={false}
-          isExpirationDateModified={false}
-          setIsExpirationDateModified={jest.fn()}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
           getPalletConfigApi={defaultAsyncState}
@@ -278,7 +313,9 @@ describe('ManagePalletScreen', () => {
 
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
-    const palletId = 3;
+    const palletInfo: PalletInfo = {
+      id: 3
+    };
 
     const onSuccessApi: AsyncState = {
       ...defaultAsyncState,
@@ -343,7 +380,7 @@ describe('ManagePalletScreen', () => {
 
     it('tests handleUpdateItems calls dispatch if added/deleted flags are false and has newQty', () => {
       const items = [...mockItems];
-      handleUpdateItems(items, palletId, mockDispatch);
+      handleUpdateItems(items, palletInfo, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
     });
 
@@ -353,8 +390,23 @@ describe('ManagePalletScreen', () => {
         { ...mockItems[1], added: true },
         { ...mockItems[2], deleted: true }
       ];
-      handleUpdateItems(items, palletId, mockDispatch);
+      handleUpdateItems(items, palletInfo, mockDispatch);
       expect(mockDispatch).not.toHaveBeenCalled();
+    });
+
+    it('tests handleUpdateItems dispatches when expiration date changed', () => {
+      const items: PalletItem[] = [];
+      palletInfo.expirationDate = '03/07/2023';
+      palletInfo.newExpirationDate = '03/05/2023';
+      handleUpdateItems(items, palletInfo, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+
+    it('tests handleUpdateItems doesnt dispatch when expiry date changed back', () => {
+      const items: PalletItem[] = [];
+      palletInfo.newExpirationDate = '03/07/2023';
+      handleUpdateItems(items, palletInfo, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(0);
     });
 
     it('Calls dispatch if the "added" flag is true for at least one palletItem', () => {
@@ -366,19 +418,21 @@ describe('ManagePalletScreen', () => {
           added: true
         }
       ];
-      handleAddItems(palletId, mockAddPallet, dispatch);
+      handleAddItems(palletInfo.id, mockAddPallet, dispatch);
       expect(dispatch).toHaveBeenCalled();
     });
+
     it('Does not call dispatch if the "added" flag is false for all palletItems', () => {
       const dispatch = jest.fn();
-      handleAddItems(palletId, mockItems, dispatch);
+      handleAddItems(palletInfo.id, mockItems, dispatch);
       expect(dispatch).not.toHaveBeenCalled();
     });
 
-    it('Tests getPalletDetailsApiHook on success', () => {
+    it('Tests getPalletInfoApiHook on success', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
+          status: 200,
           data: {
             pallets: [
               {
@@ -392,16 +446,16 @@ describe('ManagePalletScreen', () => {
         }
       };
 
-      getPalletDetailsApiHook(successApi, mockDispatch, navigationProp);
+      getPalletInfoApiHook(successApi, mockDispatch, navigationProp);
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(3);
       expect(Toast.show).toBeCalledTimes(0);
     });
 
-    it('Tests getPalletDetailsApiHook on fail', () => {
+    it('Tests getPalletInfoApiHook on fail', () => {
       const failApi: AsyncState = { ...defaultAsyncState, error: {} };
 
-      getPalletDetailsApiHook(failApi, mockDispatch, navigationProp);
+      getPalletInfoApiHook(failApi, mockDispatch, navigationProp);
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
@@ -435,9 +489,8 @@ describe('ManagePalletScreen', () => {
         mockItems,
         mockDispatch
       );
-      expect(mockDispatch).toBeCalledTimes(5);
+      expect(mockDispatch).toBeCalledTimes(6);
       expect(hideActivityModal).toBeCalledTimes(1);
-
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(successToastProps)
       );
@@ -446,7 +499,7 @@ describe('ManagePalletScreen', () => {
       const partialToastProps = {
         type: 'info',
         text1: strings('PALLET.SAVE_PALLET_PARTIAL'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: strings(TRY_AGAIN_TEXT),
         position: 'bottom'
       };
       updatePalletApisHook(
@@ -456,9 +509,8 @@ describe('ManagePalletScreen', () => {
         mockItems,
         mockDispatch
       );
-      expect(mockDispatch).toBeCalledTimes(5);
+      expect(mockDispatch).toBeCalledTimes(6);
       expect(hideActivityModal).toBeCalledTimes(1);
-
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(partialToastProps)
       );
@@ -468,7 +520,7 @@ describe('ManagePalletScreen', () => {
       const errorToastProps = {
         type: 'error',
         text1: strings('PALLET.SAVE_PALLET_FAILURE'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: strings(TRY_AGAIN_TEXT),
         position: 'bottom'
       };
       updatePalletApisHook(
@@ -480,7 +532,6 @@ describe('ManagePalletScreen', () => {
       );
       expect(mockDispatch).toBeCalledTimes(5);
       expect(hideActivityModal).toBeCalledTimes(1);
-
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(errorToastProps)
       );
@@ -497,10 +548,10 @@ describe('ManagePalletScreen', () => {
       const mockSetDisplayConfirmation = jest.fn();
       const successToast = {
         type: 'success',
-        text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
+        text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId: palletInfo }),
         position: 'bottom'
       };
-      clearPalletApiHook(clearPalletSuccess, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+      clearPalletApiHook(clearPalletSuccess, palletInfo.id, navigationProp, mockDispatch, mockSetDisplayConfirmation);
 
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
@@ -518,14 +569,32 @@ describe('ManagePalletScreen', () => {
       const failedToast = {
         type: 'error',
         text1: strings('PALLET.CLEAR_PALLET_ERROR'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: strings(TRY_AGAIN_TEXT),
         position: 'bottom'
       };
-      clearPalletApiHook(clearPalletFailure, palletId, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+      clearPalletApiHook(clearPalletFailure, palletInfo.id, navigationProp, mockDispatch, mockSetDisplayConfirmation);
 
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
       expect(Toast.show).toHaveBeenCalledWith(failedToast);
+    });
+
+    it('tests isExpiryDateChanged', () => {
+      // expiry date has a space at the end of it from the service
+      // for one reason or another
+      palletInfo.expirationDate = '12/25/2024 ';
+      palletInfo.newExpirationDate = undefined;
+      const unsetExpirationDate = isExpiryDateChanged(palletInfo);
+
+      palletInfo.newExpirationDate = '12/11/2024';
+      const setExpirationDate = isExpiryDateChanged(palletInfo);
+
+      palletInfo.newExpirationDate = '12/25/2024';
+      const expirationDateSetBackToOld = isExpiryDateChanged(palletInfo);
+
+      expect(unsetExpirationDate).toBe(false);
+      expect(setExpirationDate).toBe(true);
+      expect(expirationDateSetBackToOld).toBe(false);
     });
 
     it('Tests getPalletConfigApiHook on success', () => {
@@ -562,5 +631,147 @@ describe('ManagePalletScreen', () => {
       expect(mockDispatch).toBeCalledTimes(1);
       expect(showActivityModal).toBeCalledTimes(1);
     });
+
+    it('Tests getItemDetailsApiHook on 200 success if item already exists', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: mockItems[0],
+          status: 200
+        }
+      };
+      const toastItemExists = {
+        type: 'info',
+        text1: strings('PALLET.ITEMS_DETAILS_EXIST'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      getItemDetailsApiHook(successApi, mockItems, mockDispatch);
+      expect(Toast.show).toHaveBeenCalledWith(toastItemExists);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+
+    it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: getItemDetails[123],
+          status: 200
+        }
+      };
+      getItemDetailsApiHook(successApi, mockItems, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(2);
+    });
+
+    it('Tests getItemDetailsApiHook on 204 success for a new item', () => {
+      const successApi204: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      const toastItemNotFound = {
+        type: 'info',
+        text1: strings('PALLET.ITEMS_NOT_FOUND'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      getItemDetailsApiHook(successApi204, mockItems, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
+    });
+
+    it('Tests getItemDetailsApi on failure', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      const toastGetItemError = {
+        type: 'error',
+        text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
+        text2: strings(TRY_AGAIN_TEXT),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      getItemDetailsApiHook(failureApi, mockItems, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastGetItemError);
+    });
+
+    it('Tests getItemDetailsApi isWaiting', () => {
+      const isLoadingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      getItemDetailsApiHook(isLoadingApi, mockItems, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+  });
+
+  it('Tests isAddedItemPerishable', () => {
+    const mockPerishableCatg: number[] = [1, 8, 54, 72, 93];
+    const isAddedFalse = isAddedItemPerishable(mockItems, mockPerishableCatg);
+    expect(isAddedFalse).toBe(false);
+
+    const mockAddedItems: PalletItem[] = [
+      {
+        itemNbr: 1234,
+        upcNbr: '1234567890',
+        itemDesc: 'test',
+        quantity: 3,
+        newQuantity: 3,
+        price: 10.0,
+        categoryNbr: 8,
+        categoryDesc: 'test cat',
+        deleted: false,
+        added: true
+      },
+      {
+        itemNbr: 1234,
+        upcNbr: '12345678901',
+        itemDesc: 'test',
+        quantity: 3,
+        newQuantity: 4,
+        price: 10.0,
+        categoryNbr: 54,
+        categoryDesc: 'test cat',
+        deleted: false,
+        added: true
+      }
+    ];
+    const isAddedTrue = isAddedItemPerishable(mockAddedItems, mockPerishableCatg);
+    expect(isAddedTrue).toBe(true);
+  });
+  it('Tests removeExpirationDate function', () => {
+    const mockPerishableCategories = [1, 10, 11];
+    expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(false);
+    const newItems: PalletItem[] = [
+      {
+        itemNbr: 1234,
+        upcNbr: '1234567890',
+        itemDesc: 'test',
+        quantity: 3,
+        newQuantity: 3,
+        price: 10.0,
+        categoryDesc: 'test cat',
+        deleted: true,
+        added: false,
+        categoryNbr: 1
+      },
+      {
+        itemNbr: 4221,
+        upcNbr: '765432123456',
+        itemDesc: 'food',
+        quantity: 2,
+        newQuantity: 1,
+        price: 3.49,
+        categoryDesc: 'deli',
+        deleted: false,
+        added: false,
+        categoryNbr: 8
+      }
+    ];
+    expect(removeExpirationDate(newItems, mockPerishableCategories)).toBe(true);
   });
 });

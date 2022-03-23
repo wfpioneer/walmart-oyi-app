@@ -11,6 +11,7 @@ import {
   SETUP_PALLET,
   SET_ITEM_NEW_QUANTITY,
   SET_ITEM_QUANTITY,
+  SET_PALLET_NEW_EXPIRY,
   SET_PERISHABLE_CATEGORIES,
   SHOW_MANAGE_PALLET_MENU,
   UPDATE_PALLET,
@@ -30,7 +31,9 @@ interface PalletManagementState {
 const initialState: PalletManagementState = {
   managePalletMenu: false,
   palletInfo: {
-    id: 0
+    id: 0,
+    createDate: undefined,
+    expirationDate: undefined
   },
   items: [],
   combinePallets: [],
@@ -141,6 +144,16 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         items: updatedItems
       };
     }
+    case SET_PALLET_NEW_EXPIRY: {
+      const { palletInfo } = state;
+      const updatedPalletInfo: PalletInfo = {
+        ...palletInfo,
+        newExpirationDate: action.payload
+      };
+      return {
+        ...state, palletInfo: updatedPalletInfo
+      };
+    }
     case SET_PERISHABLE_CATEGORIES: {
       const { perishableCategories } = action.payload;
       return {
@@ -150,9 +163,10 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
     }
     case UPDATE_PALLET_EXPIRATION_DATE: {
       const { palletInfo } = state;
-      const updatedPalletInfo = {
+      const updatedPalletInfo: PalletInfo = {
         ...palletInfo,
-        expirationDate: action.payload.date
+        expirationDate: palletInfo.newExpirationDate,
+        newExpirationDate: undefined
       };
       return {
         ...state,

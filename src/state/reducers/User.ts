@@ -53,8 +53,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           palletManagement: action.payload.palletManagement || false,
           settingsTool: action.payload.settingsTool || false,
           printingUpdate: action.payload.printingUpdate || false,
-          binning: action.payload.binning,
-          palletExpiration: action.payload.palletExpiration,
+          binning: action.payload.binning || false,
+          palletExpiration: action.payload.palletExpiration || false,
           backupCategories: action.payload.backupCategories,
           picking: action.payload.picking
         }
