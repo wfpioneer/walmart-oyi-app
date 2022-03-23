@@ -3,12 +3,17 @@ import COLOR from '../../themes/Color';
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    width: '100%'
   },
   header: {
     backgroundColor: COLOR.PALE_BLUE,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    padding: 10
+  },
+  itemList: {
+    margin: 10
   }
 });
 

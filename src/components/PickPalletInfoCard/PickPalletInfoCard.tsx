@@ -30,7 +30,7 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
 
   // TODO replace with pickpalletinfocard
   const renderItem = ({ item }: { item: PickListItem }) => (
-    <View>
+    <View style={styles.itemList}>
       <Text>{item.itemDesc}</Text>
       <Text>{item.itemNbr}</Text>
     </View>

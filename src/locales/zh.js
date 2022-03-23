@@ -363,7 +363,7 @@ export default {
     ACCEPTED_BIN: '已上架',
     COMPLETE: '完成',
     DELETED: '删除',
-    NO_PALLETS: '未发现卡板'
+    NO_PALLETS_FOUND: '未发现卡板'
   },
   BINNING: {
     BINNING: '上架',

@@ -356,14 +356,14 @@ export default {
   },
   PICKING: {
     PICKING: 'Pickeo',
-    READY_TO_PICK: 'Ready to pick',
-    ACCEPTED_PICK: 'Accepted pick',
-    READY_TO_WORK: 'Ready to work',
-    READY_TO_BIN: 'Ready to bin',
-    ACCEPTED_BIN: 'Accepted bin',
-    COMPLETE: 'Complete',
-    DELETED: 'Deleted',
-    NO_PALLETS: 'No pallets found'
+    READY_TO_PICK: 'Listo para pickear',
+    ACCEPTED_PICK: 'Pickeo aceptado',
+    READY_TO_WORK: 'Listo para trabajar',
+    READY_TO_BIN: 'Listo para ingresar a bodega',
+    ACCEPTED_BIN: 'Ingreso a bodega aceptado',
+    COMPLETE: 'Completado',
+    DELETED: 'Borrado',
+    NO_PALLETS_FOUND: 'No se encontraron pallets'
   },
   BINNING: {
     BINNING: 'Bodega',

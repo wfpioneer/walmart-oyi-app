@@ -365,7 +365,7 @@ export default {
     ACCEPTED_BIN: 'Accepted bin',
     COMPLETE: 'Complete',
     DELETED: 'Deleted',
-    NO_PALLETS: 'No pallets found'
+    NO_PALLETS_FOUND: 'No pallets found'
   },
   BINNING: {
     BINNING: 'Binning',
