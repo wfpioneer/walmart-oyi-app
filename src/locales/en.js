@@ -357,7 +357,15 @@ export default {
     ENTER_CLUB_NBR: 'Enter a Club Number'
   },
   PICKING: {
-    PICKING: 'Picking'
+    PICKING: 'Picking',
+    READY_TO_PICK: 'Ready to pick',
+    ACCEPTED_PICK: 'Accepted pick',
+    READY_TO_WORK: 'Ready to work',
+    READY_TO_BIN: 'Ready to bin',
+    ACCEPTED_BIN: 'Accepted bin',
+    COMPLETE: 'Complete',
+    DELETED: 'Deleted',
+    NO_PALLETS: 'No pallets found'
   },
   BINNING: {
     BINNING: 'Binning',

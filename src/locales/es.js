@@ -355,7 +355,15 @@ export default {
     ENTER_CLUB_NBR: 'Ingresa número de club'
   },
   PICKING: {
-    PICKING: 'Pickeo'
+    PICKING: 'Pickeo',
+    READY_TO_PICK: 'Ready to pick',
+    ACCEPTED_PICK: 'Accepted pick',
+    READY_TO_WORK: 'Ready to work',
+    READY_TO_BIN: 'Ready to bin',
+    ACCEPTED_BIN: 'Accepted bin',
+    COMPLETE: 'Complete',
+    DELETED: 'Deleted',
+    NO_PALLETS: 'No pallets found'
   },
   BINNING: {
     BINNING: 'Bodega',

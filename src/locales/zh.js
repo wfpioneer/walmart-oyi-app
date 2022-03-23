@@ -355,7 +355,15 @@ export default {
     ENTER_CLUB_NBR: '输入店号'
   },
   PICKING: {
-    PICKING: '楼面补货'
+    PICKING: '楼面补货',
+    READY_TO_PICK: '开始补货',
+    ACCEPTED_PICK: '已补货',
+    READY_TO_WORK: '开始运行',
+    READY_TO_BIN: '准备上架',
+    ACCEPTED_BIN: '已上架',
+    COMPLETE: '完成',
+    DELETED: '删除',
+    NO_PALLETS: '未发现卡板'
   },
   BINNING: {
     BINNING: '上架',
