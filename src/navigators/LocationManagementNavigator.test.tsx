@@ -6,6 +6,7 @@ import {
 } from './LocationManagementNavigator';
 import { AsyncState } from '../models/AsyncState';
 import User from '../models/User';
+import { mockConfig } from '../mockData/mockConfig';
 
 jest.mock('../utils/AppCenterTool.ts', () => jest.requireActual('../utils/__mocks__/AppCenterTool'));
 jest.mock('../utils/sessionTimeout.ts', () => jest.requireActual('../utils/__mocks__/sessTimeout'));
@@ -26,14 +27,7 @@ describe('LocationManagement Navigator', () => {
       loginId: 'vn50pz4',
       mailId: 'vn50pz4@homeoffice.wal-mart.com'
     },
-    configs: {
-      locationManagement: false,
-      locationManagementEdit: false,
-      palletManagement: false,
-      settingsTool: false,
-      printingUpdate: false,
-      binning: false
-    },
+    configs: mockConfig,
     countryCode: 'CN',
     domain: 'Homeoffice',
     features: [],

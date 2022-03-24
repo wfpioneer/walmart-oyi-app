@@ -11,6 +11,7 @@ import styles from './SettingsTool.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { Printer, PrintingType } from '../../models/Printer';
 import { setPrintingType } from '../../state/actions/Print';
+import { Configurations } from '../../models/User';
 
 interface SettingsToolProps {
   printerOpen: boolean;
@@ -21,6 +22,7 @@ interface SettingsToolProps {
   locationLabelPrinter: Printer | null;
   palletLabelPrinter: Printer | null;
   userFeatures: string[];
+  userConfigs: Configurations;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
 }
@@ -70,7 +72,7 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
   const {
     featuresOpen, printerOpen, toggleFeaturesList, togglePrinterList,
     locationLabelPrinter, palletLabelPrinter, priceLabelPrinter,
-    userFeatures, dispatch, navigation
+    userFeatures, userConfigs, dispatch, navigation
   } = props;
 
   const changePrinter = (printerType: PrintingType) => {
@@ -147,7 +149,10 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       {featuresOpen && (
       <FlatList
         data={appFeatures}
-        renderItem={({ item }) => featureCard(item.name, userFeatures.some(feature => feature === item.key))}
+        renderItem={({ item }) => featureCard(
+          item.name,
+          userFeatures.some(feature => feature === item.key) || Boolean(userConfigs[item.key as keyof Configurations])
+        )}
         keyExtractor={item => item.key}
         ListFooterComponent={<View />}
         ListFooterComponentStyle={styles.footer}
@@ -161,6 +166,7 @@ const SettingsTool = (): JSX.Element => {
   const [featuresOpen, toggleFeatureList] = useState(true);
   const { priceLabelPrinter, locationLabelPrinter, palletLabelPrinter } = useTypedSelector(state => state.Print);
   const userFeatures = useTypedSelector(state => state.User.features);
+  const userConfiguration = useTypedSelector(state => state.User.configs);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -174,6 +180,7 @@ const SettingsTool = (): JSX.Element => {
       locationLabelPrinter={locationLabelPrinter}
       palletLabelPrinter={palletLabelPrinter}
       userFeatures={userFeatures}
+      userConfigs={userConfiguration}
       dispatch={dispatch}
       navigation={navigation}
     />

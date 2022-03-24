@@ -6,7 +6,7 @@ import { PalletItem } from '../models/PalletItem';
 export default class AddPalletService {
   public static addPallet(payload: {
     palletId: string;
-    sectionId: string;
+    sectionId: number;
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.put(
@@ -20,11 +20,19 @@ export default class AddPalletService {
   public static addPalletUPCs(payload: {
     palletId: number;
     items: PalletItem[];
+    expirationDate?: string;
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.put(
-      `${urls.locationUrl}/pallet/${payload.palletId}/upcs`,
-      payload.items
+      `${urls.locationUrl}/v1/pallet/${payload.palletId}/upcs`,
+      payload.items,
+      payload.expirationDate
+        ? {
+          headers: {
+            expirationDate: payload.expirationDate
+          }
+        }
+        : undefined
     );
   }
 }

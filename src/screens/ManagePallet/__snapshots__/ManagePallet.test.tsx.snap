@@ -60,6 +60,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           Object {
             "alignItems": "center",
             "flexDirection": "column",
+            "paddingHorizontal": 5,
           }
         }
       >
@@ -88,34 +89,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          [missing "en.PALLET.EXPIRATION_DATE" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 16,
-            }
-          }
-        >
-          01/31/2022
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "column",
+            "paddingHorizontal": 5,
           }
         }
       >
@@ -210,8 +184,8 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           Array [
             Object {
               "added": false,
-              "category": 54,
               "categoryDesc": "test cat",
+              "categoryNbr": 54,
               "deleted": true,
               "itemDesc": "test",
               "itemNbr": 1234,
@@ -222,8 +196,8 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
             },
             Object {
               "added": false,
-              "category": 54,
               "categoryDesc": "test cat",
+              "categoryNbr": 54,
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
@@ -234,8 +208,273 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
             },
             Object {
               "added": false,
-              "category": 72,
               "categoryDesc": "deli",
+              "categoryNbr": 72,
+              "deleted": false,
+              "itemDesc": "food",
+              "itemNbr": 4221,
+              "newQuantity": 1,
+              "price": 3.49,
+              "quantity": 2,
+              "upcNbr": "765432123456",
+            },
+          ]
+        }
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#33691E"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the DatePicker Dialog when the isPickerShow is true  1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText="[missing \\"en.GENERICS.NO\\" translation]"
+    confirmText="[missing \\"en.GENERICS.YES\\" translation]"
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.PALLET.CLEAR_PALLET_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginTop": 5,
+      }
+    }
+  >
+    <ManualScanComponent
+      keyboardType="numeric"
+      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+    />
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-around",
+          "marginBottom": 5,
+          "marginHorizontal": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.PALLET.PALLET_ID" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          1514
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.LOCATION.ITEMS" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          3
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderBottomWidth": 1,
+          "borderColor": "#000000",
+          "borderTopWidth": 1,
+          "padding": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        [missing "en.PALLET.SCAN_INSTRUCTIONS" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#B40C00",
+          "flexDirection": "row",
+          "justifyContent": "space-around",
+          "padding": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 16,
+          }
+        }
+      >
+        [missing "en.PALLET.ITEM_DELETE" translation]
+      </Text>
+      <ForwardRef
+        onPress={[Function]}
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 16,
+              "textDecorationLine": "underline",
+            }
+          }
+        >
+          [missing "en.GENERICS.UNDO" translation]
+        </Text>
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <FlatList
+        data={
+          Array [
+            Object {
+              "added": false,
+              "categoryDesc": "test cat",
+              "categoryNbr": 54,
+              "deleted": true,
+              "itemDesc": "test",
+              "itemNbr": 1234,
+              "newQuantity": 3,
+              "price": 10,
+              "quantity": 3,
+              "upcNbr": "1234567890",
+            },
+            Object {
+              "added": false,
+              "categoryDesc": "test cat",
+              "categoryNbr": 54,
+              "deleted": false,
+              "itemDesc": "test",
+              "itemNbr": 1234,
+              "newQuantity": 4,
+              "price": 10,
+              "quantity": 3,
+              "upcNbr": "12345678901",
+            },
+            Object {
+              "added": false,
+              "categoryDesc": "deli",
+              "categoryNbr": 72,
               "deleted": false,
               "itemDesc": "food",
               "itemNbr": 4221,
@@ -351,6 +590,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
+            "paddingHorizontal": 5,
           }
         }
       >
@@ -379,34 +619,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          [missing "en.PALLET.EXPIRATION_DATE" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 16,
-            }
-          }
-        >
-          01/31/2022
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "column",
+            "paddingHorizontal": 5,
           }
         }
       >
@@ -501,8 +714,8 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Array [
             Object {
               "added": false,
-              "category": 54,
               "categoryDesc": "test cat",
+              "categoryNbr": 54,
               "deleted": true,
               "itemDesc": "test",
               "itemNbr": 1234,
@@ -513,8 +726,8 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
             },
             Object {
               "added": false,
-              "category": 54,
               "categoryDesc": "test cat",
+              "categoryNbr": 54,
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
@@ -525,8 +738,8 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
             },
             Object {
               "added": false,
-              "category": 72,
               "categoryDesc": "deli",
+              "categoryNbr": 72,
               "deleted": false,
               "itemDesc": "food",
               "itemNbr": 4221,
@@ -642,6 +855,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
+            "paddingHorizontal": 5,
           }
         }
       >
@@ -670,34 +884,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 18,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          [missing "en.PALLET.EXPIRATION_DATE" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 16,
-            }
-          }
-        >
-          01/31/2022
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "column",
+            "paddingHorizontal": 5,
           }
         }
       >
@@ -792,8 +979,8 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Array [
             Object {
               "added": false,
-              "category": 54,
               "categoryDesc": "test cat",
+              "categoryNbr": 54,
               "deleted": true,
               "itemDesc": "test",
               "itemNbr": 1234,
@@ -804,8 +991,8 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
             },
             Object {
               "added": false,
-              "category": 54,
               "categoryDesc": "test cat",
+              "categoryNbr": 54,
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
@@ -816,8 +1003,538 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
             },
             Object {
               "added": false,
-              "category": 72,
               "categoryDesc": "deli",
+              "categoryNbr": 72,
+              "deleted": false,
+              "itemDesc": "food",
+              "itemNbr": 4221,
+              "newQuantity": 1,
+              "price": 3.49,
+              "quantity": 2,
+              "upcNbr": "765432123456",
+            },
+          ]
+        }
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#33691E"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the expiration date required text if pallet has no date with perishableItems 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText="[missing \\"en.GENERICS.NO\\" translation]"
+    confirmText="[missing \\"en.GENERICS.YES\\" translation]"
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.PALLET.CLEAR_PALLET_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginTop": 5,
+      }
+    }
+  >
+    <ManualScanComponent
+      keyboardType="numeric"
+      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+    />
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-around",
+          "marginBottom": 5,
+          "marginHorizontal": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.PALLET.PALLET_ID" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          2
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.LOCATION.ITEMS" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          3
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderBottomWidth": 1,
+          "borderColor": "#000000",
+          "borderTopWidth": 1,
+          "padding": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        [missing "en.PALLET.SCAN_INSTRUCTIONS" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#B40C00",
+          "flexDirection": "row",
+          "justifyContent": "space-around",
+          "padding": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 16,
+          }
+        }
+      >
+        [missing "en.PALLET.ITEM_DELETE" translation]
+      </Text>
+      <ForwardRef
+        onPress={[Function]}
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 16,
+              "textDecorationLine": "underline",
+            }
+          }
+        >
+          [missing "en.GENERICS.UNDO" translation]
+        </Text>
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <FlatList
+        data={
+          Array [
+            Object {
+              "added": false,
+              "categoryDesc": "test cat",
+              "categoryNbr": 54,
+              "deleted": true,
+              "itemDesc": "test",
+              "itemNbr": 1234,
+              "newQuantity": 3,
+              "price": 10,
+              "quantity": 3,
+              "upcNbr": "1234567890",
+            },
+            Object {
+              "added": false,
+              "categoryDesc": "test cat",
+              "categoryNbr": 54,
+              "deleted": false,
+              "itemDesc": "test",
+              "itemNbr": 1234,
+              "newQuantity": 4,
+              "price": 10,
+              "quantity": 3,
+              "upcNbr": "12345678901",
+            },
+            Object {
+              "added": false,
+              "categoryDesc": "deli",
+              "categoryNbr": 72,
+              "deleted": false,
+              "itemDesc": "food",
+              "itemNbr": 4221,
+              "newQuantity": 1,
+              "price": 3.49,
+              "quantity": 2,
+              "upcNbr": "765432123456",
+            },
+          ]
+        }
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onEndReachedThreshold={2}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 15,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#33691E"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "margin": 15,
+        }
+      }
+      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the palletManagement when expiration date got modified 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  enabled={true}
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText="[missing \\"en.GENERICS.NO\\" translation]"
+    confirmText="[missing \\"en.GENERICS.YES\\" translation]"
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={true}
+    mainText="[missing \\"en.PALLET.CLEAR_PALLET_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginTop": 5,
+      }
+    }
+  >
+    <ManualScanComponent
+      keyboardType="numeric"
+      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+    />
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-around",
+          "marginBottom": 5,
+          "marginHorizontal": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.PALLET.PALLET_ID" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          1514
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.LOCATION.ITEMS" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          3
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderBottomWidth": 1,
+          "borderColor": "#000000",
+          "borderTopWidth": 1,
+          "padding": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        [missing "en.PALLET.SCAN_INSTRUCTIONS" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#B40C00",
+          "flexDirection": "row",
+          "justifyContent": "space-around",
+          "padding": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 16,
+          }
+        }
+      >
+        [missing "en.PALLET.ITEM_DELETE" translation]
+      </Text>
+      <ForwardRef
+        onPress={[Function]}
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 16,
+              "textDecorationLine": "underline",
+            }
+          }
+        >
+          [missing "en.GENERICS.UNDO" translation]
+        </Text>
+      </ForwardRef>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <FlatList
+        data={
+          Array [
+            Object {
+              "added": false,
+              "categoryDesc": "test cat",
+              "categoryNbr": 54,
+              "deleted": true,
+              "itemDesc": "test",
+              "itemNbr": 1234,
+              "newQuantity": 3,
+              "price": 10,
+              "quantity": 3,
+              "upcNbr": "1234567890",
+            },
+            Object {
+              "added": false,
+              "categoryDesc": "test cat",
+              "categoryNbr": 54,
+              "deleted": false,
+              "itemDesc": "test",
+              "itemNbr": 1234,
+              "newQuantity": 4,
+              "price": 10,
+              "quantity": 3,
+              "upcNbr": "12345678901",
+            },
+            Object {
+              "added": false,
+              "categoryDesc": "deli",
+              "categoryNbr": 72,
               "deleted": false,
               "itemDesc": "food",
               "itemNbr": 4221,
