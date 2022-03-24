@@ -13,8 +13,8 @@ interface PickItemInfoProps {
   onDeletePressed: () => void;
 }
 
-const deleteView = (onDeletePressed: () => void) => (
-  <View style={{ justifyContent: 'center' }}>
+export const deleteView = (onDeletePressed: () => void) => (
+  <View>
     <Button
       style={styles.deleteButton}
       title={strings('GENERICS.DELETE')}
