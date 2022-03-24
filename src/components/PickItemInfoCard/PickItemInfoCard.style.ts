@@ -8,12 +8,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderWidth: 1,
     borderColor: COLOR.TRAINING_BLUE,
-    paddingBottom: 10
+    paddingBottom: 10,
+    backgroundColor: COLOR.WHITE
   },
   itemDescContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 10
+    paddingHorizontal: 7
   },
   itemDescText: {
     flex: 1,
@@ -22,10 +23,8 @@ const styles = StyleSheet.create({
   salesFloorContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingHorizontal: 5,
-    flex: 1,
-    borderColor: COLOR.GREEN,
-    borderEndWidth: 1
+    paddingHorizontal: 7,
+    flex: 1
   },
   contentText: {
     fontSize: 12
@@ -33,6 +32,10 @@ const styles = StyleSheet.create({
   contentContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly'
+  },
+  deleteButton: {
+    flex: 1,
+    width: 60
   }
 });
 
