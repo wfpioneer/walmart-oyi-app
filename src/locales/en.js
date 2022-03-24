@@ -358,7 +358,10 @@ export default {
     ENTER_CLUB_NBR: 'Enter a Club Number'
   },
   PICKING: {
-    PICKING: 'Picking'
+    PICKING: 'Picking',
+    ASSIGNED: 'Assigned',
+    CREATED_BY: 'Created By',
+    CREATED: 'Created'
   },
   BINNING: {
     BINNING: 'Binning',

@@ -356,7 +356,10 @@ export default {
     ENTER_CLUB_NBR: '输入店号'
   },
   PICKING: {
-    PICKING: '楼面补货'
+    PICKING: '楼面补货',
+    ASSIGNED: '任务', // TODO REPLACE with Mandarin translations on confluence
+    CREATED_BY: '由...制作', // TODO REPLACE with Mandarin translations on confluence
+    CREATED: '创建' // TODO REPLACE with Mandarin translations on confluence
   },
   BINNING: {
     BINNING: '上架',
