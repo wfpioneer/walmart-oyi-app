@@ -690,7 +690,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               <Text style={styles.headerText}>
                 {strings('PALLET.EXPIRATION_DATE')}
               </Text>
-              <Text style={(expirationDate || isRemoveExpirationDate)
+              <Text style={(expirationDate || newExpirationDate || isRemoveExpirationDate)
                 ? styles.effectiveDateHeaderItem : styles.errorLabel}
               >
                 {isRemoveExpirationDate ? strings('GENERICS.REMOVED')

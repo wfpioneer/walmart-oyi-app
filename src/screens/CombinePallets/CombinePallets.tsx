@@ -75,6 +75,7 @@ export const getPalletInfoApiEffect = (
           visibilityTime: SNACKBAR_TIMEOUT + 1000
         });
       }
+      dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
     }
     // Failure
     if (palletInfoApi.error) {
@@ -84,8 +85,8 @@ export const getPalletInfoApiEffect = (
         text1: strings('PALLET.PALLET_DETAILS_ERROR'),
         visibilityTime: SNACKBAR_TIMEOUT + 1000
       });
+      dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
     }
-    dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
   }
 };
 
