@@ -32,7 +32,7 @@ const PickItemInfo = (props: PickItemInfoProps) => {
     category,
     itemNbr,
     upcNbr,
-    salesFloorLocation,
+    salesFloorLocationName,
     createdBy,
     createTS,
     assignedAssociate
@@ -50,7 +50,7 @@ const PickItemInfo = (props: PickItemInfoProps) => {
         <View style={styles.contentContainer}>
           <View style={styles.salesFloorContainer}>
             <Text style={styles.contentText}>
-              {`${strings('ITEM.SALES_FLOOR_QTY')}: ${salesFloorLocation}`}
+              {`${strings('ITEM.SALES_FLOOR_QTY')}: ${salesFloorLocationName}`}
             </Text>
             <Text style={styles.contentText}>
               {`${strings('PICKING.ASSIGNED')}: ${assignedAssociate}`}

@@ -247,7 +247,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
               }
             }
           >
-            [missing "en.PICKING.ASSIGNED" translation]: me
+            [missing "en.PICKING.ASSIGNED" translation]: Associate 1
           </Text>
           <Text
             style={
@@ -256,7 +256,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
               }
             }
           >
-            [missing "en.PICKING.CREATED_BY" translation]: someone else
+            [missing "en.PICKING.CREATED_BY" translation]: Associate 1
           </Text>
         </View>
         <View
