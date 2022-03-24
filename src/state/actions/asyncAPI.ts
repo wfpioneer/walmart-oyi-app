@@ -122,3 +122,6 @@ export const getPalletInfo = makeAsyncActionCreators(GET_PALLET_INFO);
 
 export const POST_BIN_PALLETS = makeAsyncActionTypes('API/POST_BIN_PALLETS');
 export const binPallets = makeAsyncActionCreators(POST_BIN_PALLETS);
+
+export const GET_PALLET_CONFIG = makeAsyncActionTypes('API/GET_PALLET_CONFIG');
+export const getPalletConfig = makeAsyncActionCreators(GET_PALLET_CONFIG);

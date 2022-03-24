@@ -23,12 +23,12 @@ import styles from './PalletManagement.style';
 import { strings } from '../../locales';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { validateSession } from '../../utils/sessionTimeout';
-import { getPalletDetails } from '../../state/actions/saga';
+import { getPalletInfo } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { setupPallet } from '../../state/actions/PalletManagement';
-import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
+import { GET_PALLET_INFO } from '../../state/actions/asyncAPI';
 import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
 
 interface PalletManagementProps {
@@ -38,7 +38,7 @@ interface PalletManagementProps {
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
   dispatch: Dispatch<any>;
-  getPalletDetailsApi: AsyncState;
+  getPalletInfoApi: AsyncState;
 }
 const palletIDRegex = new RegExp(/^[0-9]+$/);
 const nonNumRegex = new RegExp(/[^0-9]/g);
@@ -46,9 +46,10 @@ const nonNumRegex = new RegExp(/[^0-9]/g);
 export const onSubmit = (searchText: string, dispatch: Dispatch<any>): void => {
   if (searchText.match(palletIDRegex)) {
     dispatch(
-      getPalletDetails({
+      getPalletInfo({
         palletIds: [Number.parseInt(searchText, 10)],
-        isAllItems: true
+        isAllItems: true,
+        isSummary: false
       })
     );
   }
@@ -64,19 +65,19 @@ export const PalletManagementScreen = (
     navigation,
     route,
     dispatch,
-    getPalletDetailsApi
+    getPalletInfoApi
   } = props;
 
   let scannedSubscription: EmitterSubscription;
 
-  // Resets Get PalletDetails api state when navigating off-screen
+  // Resets Get PalletInfo api state when navigating off-screen
   useEffectHook(() => {
     navigation.addListener('blur', () => {
-      if (getPalletDetailsApi.value) {
-        dispatch({ type: GET_PALLET_DETAILS.RESET });
+      if (getPalletInfoApi.value) {
+        dispatch({ type: GET_PALLET_INFO.RESET });
       }
     });
-  }, [getPalletDetailsApi]);
+  }, [getPalletInfoApi]);
 
   // Scanner listener
   useEffectHook(() => {
@@ -89,7 +90,7 @@ export const PalletManagementScreen = (
           });
           setSearchText(scan.value);
           dispatch(
-            getPalletDetails({ palletIds: [scan.value], isAllItems: true })
+            getPalletInfo({ palletIds: [scan.value], isAllItems: true, isSummary: false })
           );
         });
       }
@@ -99,34 +100,44 @@ export const PalletManagementScreen = (
     };
   }, []);
 
-  // Get Pallet Details Api
+  // Get Pallet Info Api
   useEffectHook(() => {
     if (navigation.isFocused()) {
       // on api success
-      if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
-        const {
-          id, createDate, expirationDate, items
-        } = getPalletDetailsApi.result.data.pallets[0];
-        const palletItems = items.map((item: PalletItem) => ({
-          ...item,
-          quantity: item.quantity || 0,
-          newQuantity: item.quantity || 0,
-          deleted: false,
-          added: false
-        }));
-        const palletDetails: Pallet = {
-          palletInfo: {
-            id,
-            createDate,
-            expirationDate
-          },
-          items: palletItems
-        };
-        dispatch(setupPallet(palletDetails));
-        navigation.navigate('ManagePallet');
+      if (!getPalletInfoApi.isWaiting && getPalletInfoApi.result) {
+        if (getPalletInfoApi.result.status === 200) {
+          const {
+            id, createDate, expirationDate, items
+          } = getPalletInfoApi.result.data.pallets[0];
+          const palletItems = items.map((item: PalletItem) => ({
+            ...item,
+            quantity: item.quantity || 0,
+            newQuantity: item.quantity || 0,
+            deleted: false,
+            added: false
+          }));
+          const palletDetails: Pallet = {
+            palletInfo: {
+              id,
+              createDate,
+              expirationDate
+            },
+            items: palletItems
+          };
+          dispatch(setupPallet(palletDetails));
+          navigation.navigate('ManagePallet');
+        } else if (getPalletInfoApi.result.status === 204) {
+          Toast.show({
+            type: 'error',
+            text1: strings('LOCATION.PALLET_NOT_FOUND'),
+            visibilityTime: 3000,
+            position: 'bottom'
+          });
+        }
       }
+
       // on api error
-      if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
+      if (!getPalletInfoApi.isWaiting && getPalletInfoApi.error) {
         Toast.show({
           type: 'error',
           text1: strings('PALLET.PALLET_DETAILS_ERROR'),
@@ -136,12 +147,12 @@ export const PalletManagementScreen = (
         });
       }
     }
-  }, [getPalletDetailsApi]);
+  }, [getPalletInfoApi]);
 
-  if (getPalletDetailsApi.isWaiting) {
+  if (getPalletInfoApi.isWaiting) {
     return (
       <ActivityIndicator
-        animating={getPalletDetailsApi.isWaiting}
+        animating={getPalletInfoApi.isWaiting}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -176,8 +187,8 @@ export const PalletManagementScreen = (
 };
 
 const PalletManagement = (): JSX.Element => {
-  const getPalletDetailsApi = useTypedSelector(
-    state => state.async.getPalletDetails
+  const getPalletInfoApi = useTypedSelector(
+    state => state.async.getPalletInfo
   );
   const [searchText, setSearchText] = useState('');
   const navigation = useNavigation();
@@ -188,7 +199,7 @@ const PalletManagement = (): JSX.Element => {
       useEffectHook={useEffect}
       searchText={searchText}
       setSearchText={setSearchText}
-      getPalletDetailsApi={getPalletDetailsApi}
+      getPalletInfoApi={getPalletInfoApi}
       navigation={navigation}
       route={route}
       dispatch={dispatch}

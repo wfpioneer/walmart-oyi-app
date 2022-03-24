@@ -21,7 +21,15 @@ export default StyleSheet.create({
   },
   headerItem: {
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingHorizontal: 5
+  },
+  headerItemEdit: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: COLOR.YELLOW,
+    paddingHorizontal: 5,
+    borderWidth: 1
   },
   headerText: {
     fontSize: 18,
@@ -29,6 +37,10 @@ export default StyleSheet.create({
   },
   headerItemText: {
     fontSize: 16
+  },
+  headerRequiredText: {
+    fontSize: 16,
+    color: COLOR.DEEP_RED
   },
   instructionLabel: {
     borderColor: COLOR.BLACK,
@@ -78,5 +90,26 @@ export default StyleSheet.create({
     borderColor: COLOR.GREY_200,
     borderRadius: 5,
     borderWidth: 2
+  },
+  errorLabel: {
+    color: COLOR.RED_500,
+    textAlign: 'center'
+  },
+  effectiveDateHeaderItem: {
+    fontSize: 16,
+    color: COLOR.BLACK,
+    textAlign: 'center'
+  },
+  effectiveDateContainer: {
+    paddingHorizontal: 10,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  modifiedEffectiveDateContainer: {
+    paddingHorizontal: 10,
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: COLOR.YELLOW,
+    borderWidth: 1
   }
 });

@@ -12,7 +12,7 @@ import {
 } from '../actions/ItemDetailScreen';
 import LocationType from '../../models/Location';
 
-interface ItemDetailsState {
+export interface ItemDetailsState {
   itemNbr: number;
   upcNbr: string;
   pendingOnHandsQty: number;
