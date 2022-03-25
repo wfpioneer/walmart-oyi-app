@@ -356,7 +356,9 @@ export default {
     ENTER_CLUB_NBR: '输入店号'
   },
   PICKING: {
-    PICKING: '楼面补货'
+    PICKING: '楼面补货',
+    PICK: 'Pick', // TODO Mandarin translation
+    QUICKPICK: 'Quick Pick' // TODO Mandarin translation
   },
   BINNING: {
     BINNING: '上架',

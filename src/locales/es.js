@@ -356,7 +356,9 @@ export default {
     ENTER_CLUB_NBR: 'Ingresa número de club'
   },
   PICKING: {
-    PICKING: 'Pickeo'
+    PICKING: 'Pickeo',
+    PICK: 'Pick', // TODO Spanish translation
+    QUICKPICK: 'Quick Pick' // TODO Spanish translation
   },
   BINNING: {
     BINNING: 'Bodega',
