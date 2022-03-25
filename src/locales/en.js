@@ -359,6 +359,9 @@ export default {
   },
   PICKING: {
     PICKING: 'Picking',
+    ASSIGNED: 'Assigned',
+    CREATED_BY: 'Created By',
+    CREATED: 'Created',
     READY_TO_PICK: 'Ready to pick',
     ACCEPTED_PICK: 'Accepted pick',
     READY_TO_WORK: 'Ready to work',
