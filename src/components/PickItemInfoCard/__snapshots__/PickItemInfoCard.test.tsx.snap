@@ -176,7 +176,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
         Object {
           "alignItems": "flex-start",
           "backgroundColor": "#ffffffff",
-          "borderColor": "#006DE5",
+          "borderColor": "#dbecff",
           "borderWidth": 1,
           "flex": 1,
           "justifyContent": "space-between",

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     borderWidth: 1,
-    borderColor: COLOR.TRAINING_BLUE,
+    borderColor: COLOR.PALE_BLUE,
     paddingBottom: 10,
     backgroundColor: COLOR.WHITE
   },
