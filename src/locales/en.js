@@ -361,7 +361,15 @@ export default {
     PICKING: 'Picking',
     ASSIGNED: 'Assigned',
     CREATED_BY: 'Created By',
-    CREATED: 'Created'
+    CREATED: 'Created',
+    READY_TO_PICK: 'Ready to pick',
+    ACCEPTED_PICK: 'Accepted pick',
+    READY_TO_WORK: 'Ready to work',
+    READY_TO_BIN: 'Ready to bin',
+    ACCEPTED_BIN: 'Accepted bin',
+    COMPLETE: 'Complete',
+    DELETED: 'Deleted',
+    NO_PALLETS_FOUND: 'No pallets found'
   },
   BINNING: {
     BINNING: 'Binning',
