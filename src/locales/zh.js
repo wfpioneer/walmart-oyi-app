@@ -357,9 +357,9 @@ export default {
   },
   PICKING: {
     PICKING: '楼面补货',
-    ASSIGNED: '任务', // TODO REPLACE with Mandarin translations on confluence
-    CREATED_BY: '由...制作', // TODO REPLACE with Mandarin translations on confluence
-    CREATED: '创建' // TODO REPLACE with Mandarin translations on confluence
+    ASSIGNED: '已分配',
+    CREATED_BY: '创建者',
+    CREATED: '已创建'
   },
   BINNING: {
     BINNING: '上架',
