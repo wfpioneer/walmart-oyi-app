@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems prop as false 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "marginVertical": 10,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#1977d3",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "paddingHorizontal": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <CollapsibleCard
+      isOpened={true}
+      title="AbAR-2"
+      toggleIsOpened={[Function]}
+    />
+  </View>
+  <View>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "me",
+            "category": 71,
+            "createTS": "2022-02-15T05:31:47.000Z",
+            "createdBy": "you",
+            "id": 2,
+            "itemDesc": "Lucas gusano",
+            "itemNbr": 54321,
+            "moveToFront": true,
+            "palletId": 3,
+            "palletLocation": "ABAR1-1",
+            "quickPick": true,
+            "salesFloorLocation": "ABAR1-2",
+            "status": "accepted bin",
+            "upcNbr": "725181009016",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={true}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "me",
+            "category": 71,
+            "createTS": "2022-02-16T05:31:47.000Z",
+            "createdBy": "you",
+            "id": 2,
+            "itemDesc": "Lucas gusano",
+            "itemNbr": 54321,
+            "moveToFront": true,
+            "palletId": 3,
+            "palletLocation": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocation": "ABAR1-2",
+            "status": "accepted bin",
+            "upcNbr": "725181009016",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={true}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "you",
+            "category": 34,
+            "createTS": "2022-02-18T05:31:47.000Z",
+            "createdBy": "why",
+            "id": 5,
+            "itemDesc": "Duvalín Bi Sabor",
+            "itemNbr": 12345,
+            "moveToFront": true,
+            "palletId": 4,
+            "palletLocation": "ABAR1-2",
+            "quickPick": false,
+            "salesFloorLocation": "ABAR1-1",
+            "status": "accepted pick",
+            "upcNbr": "02520568",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={true}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+</View>
+`;
+
+exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems prop as true 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "marginVertical": 10,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#1977d3",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "paddingHorizontal": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <CollapsibleCard
+      isOpened={true}
+      title="AbAR-2"
+      toggleIsOpened={[Function]}
+    />
+  </View>
+  <View>
+    <FlatList
+      disableVirtualization={false}
+      horizontal={true}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+    <FlatList
+      disableVirtualization={false}
+      horizontal={true}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+</View>
+`;
