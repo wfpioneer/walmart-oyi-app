@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import ListGroup from './ListGroup';
-import { mockPickList } from '../../mockData/mockPickList';
+import { mockPickLists } from '../../mockData/mockPickList';
 
 describe('ListGroup', () => {
   describe('Tests rendering the ListGroup component', () => {
@@ -10,7 +10,7 @@ describe('ListGroup', () => {
       renderer.render(
         <ListGroup
           groupItems={false}
-          pickListItems={mockPickList}
+          pickListItems={mockPickLists}
           title="AbAR-2"
         />
       );
@@ -22,7 +22,7 @@ describe('ListGroup', () => {
       renderer.render(
         <ListGroup
           groupItems={true}
-          pickListItems={mockPickList}
+          pickListItems={mockPickLists}
           title="AbAR-2"
         />
       );

@@ -1,52 +1,40 @@
-import { PickStatus } from '../models/Picking.d';
+import { PickListItem, PickStatus } from '../models/Picking.d';
 
-export const mockPickList = [
+export const mockPickLists: PickListItem[] = [
   {
-    assignedAssociate: 'me',
+    assignedAssociate: 'Associate 1',
     category: 71,
-    createTS: '2022-02-15T05:31:47.000Z',
-    createdBy: 'you',
-    id: 2,
-    itemDesc: 'Lucas gusano',
-    itemNbr: 54321,
+    createTS: '10:32 AM 02/04/2022',
+    createdBy: 'Associate 1',
+    id: 418,
+    itemDesc: 'Teapot',
+    itemNbr: 734,
     moveToFront: true,
-    palletId: 3,
-    palletLocation: 'ABAR1-1',
-    quickPick: true,
-    salesFloorLocation: 'ABAR1-2',
-    status: PickStatus.ACCEPTED_BIN,
-    upcNbr: '725181009016'
-  },
-  {
-    assignedAssociate: 'you',
-    category: 34,
-    createTS: '2022-02-18T05:31:47.000Z',
-    createdBy: 'why',
-    id: 5,
-    itemDesc: 'Duvalín Bi Sabor',
-    itemNbr: 12345,
-    moveToFront: true,
-    palletId: 4,
-    palletLocation: 'ABAR1-2',
+    palletId: 4321,
+    palletLocationId: 1672,
+    palletLocationName: 'C1-2',
     quickPick: false,
-    salesFloorLocation: 'ABAR1-1',
+    salesFloorLocationId: 1673,
+    salesFloorLocationName: 'C1-3',
     status: PickStatus.ACCEPTED_PICK,
-    upcNbr: '02520568'
+    upcNbr: '000041800003'
   },
   {
-    assignedAssociate: 'me',
+    assignedAssociate: 'Associate 1',
     category: 71,
-    createTS: '2022-02-16T05:31:47.000Z',
-    createdBy: 'you',
-    id: 2,
-    itemDesc: 'Lucas gusano',
-    itemNbr: 54321,
+    createTS: '4:25 PM 02/09/2022',
+    createdBy: 'Manager 1',
+    id: 3,
+    itemDesc: 'Swiffer',
+    itemNbr: 845,
     moveToFront: true,
-    palletId: 3,
-    palletLocation: 'ABAR1-2',
-    quickPick: true,
-    salesFloorLocation: 'ABAR1-2',
-    status: PickStatus.ACCEPTED_BIN,
-    upcNbr: '725181009016'
+    palletId: 5432,
+    palletLocationId: 2345,
+    palletLocationName: 'BREW1-2',
+    quickPick: false,
+    salesFloorLocationId: 2345,
+    salesFloorLocationName: 'BREW1-2',
+    status: PickStatus.ACCEPTED_PICK,
+    upcNbr: '000052900004'
   }
 ];
