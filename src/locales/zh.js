@@ -364,7 +364,11 @@ export default {
     ACCEPTED_BIN: '已上架',
     COMPLETE: '完成',
     DELETED: '删除',
-    NO_PALLETS_FOUND: '未发现卡板'
+    NO_PALLETS_FOUND: '未发现卡板',
+    ASSIGNED_TO_ME: '分配给我',
+    PICK: '拣货',
+    WORK: '工作状态',
+    BIN: '上架'
   },
   BINNING: {
     BINNING: '上架',

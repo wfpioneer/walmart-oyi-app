@@ -364,7 +364,11 @@ export default {
     ACCEPTED_BIN: 'Ingreso a bodega aceptado',
     COMPLETE: 'Completado',
     DELETED: 'Borrado',
-    NO_PALLETS_FOUND: 'No se encontraron pallets'
+    NO_PALLETS_FOUND: 'No se encontraron pallets',
+    ASSIGNED_TO_ME: 'Asignado a mi',
+    PICK: 'Pick',
+    WORK: 'Trabajar',
+    BIN: 'Ingresar a Bodega'
   },
   BINNING: {
     BINNING: 'Bodega',
