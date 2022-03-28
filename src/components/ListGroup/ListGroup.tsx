@@ -32,7 +32,7 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>{ title }</Text>
       </View>
-      <TouchableOpacity style={styles.arrowView} onPress={() => toggleIsOpened(!isOpened)}>
+      <TouchableOpacity testID="collapsible-card" style={styles.arrowView} onPress={() => toggleIsOpened(!isOpened)}>
         <MaterialIcons name={iconName} size={25} color={COLOR.BLACK} />
       </TouchableOpacity>
     </>
@@ -40,7 +40,7 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
 };
 
 const sortPickListByPalletLocation = (items: PickListItem[]) => (items.sort(
-  (a, b) => (a.palletLocation > b.palletLocation ? -1 : 1)
+  (a, b) => (a.palletLocationName > b.palletLocationName ? -1 : 1)
 ));
 
 const sortPickListByCreatedDate = (items: PickListItem[]) => (items.sort(
@@ -63,13 +63,13 @@ const pickPalletInfoCard = (items: PickListItem[]) => (
         <Text>{item.itemNbr}</Text>
       </View>
     )}
-    keyExtractor={item => item.palletLocation.toString()}
+    keyExtractor={item => item.palletLocationId.toString()}
   />
 );
 
 const renderGroupItems = (items: PickListItem[]) => {
   const pickListItems = getGroupItemsBasedOnPallet(items);
-  return Object.values(pickListItems).map(key => pickPalletInfoCard(pickListItems[key]));
+  return Object.values(pickListItems).map(value => pickPalletInfoCard(value));
 };
 
 const renderItems = (items: PickListItem[]) => {
