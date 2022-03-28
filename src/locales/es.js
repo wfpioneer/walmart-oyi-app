@@ -357,6 +357,9 @@ export default {
   },
   PICKING: {
     PICKING: 'Pickeo',
+    ASSIGNED: 'Asignado', // TODO REPLACE with Spanish translations on confluence
+    CREATED_BY: 'Creado Por', // TODO REPLACE with Spanish translations on confluence
+    CREATED: 'Creado', // TODO REPLACE with Spanish translations on confluence
     READY_TO_PICK: 'Listo para pickear',
     ACCEPTED_PICK: 'Pickeo aceptado',
     READY_TO_WORK: 'Listo para trabajar',

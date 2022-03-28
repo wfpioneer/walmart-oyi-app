@@ -357,6 +357,9 @@ export default {
   },
   PICKING: {
     PICKING: '楼面补货',
+    ASSIGNED: '已分配',
+    CREATED_BY: '创建者',
+    CREATED: '已创建',
     READY_TO_PICK: '开始补货',
     ACCEPTED_PICK: '已补货',
     READY_TO_WORK: '开始运行',
