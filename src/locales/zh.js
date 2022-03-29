@@ -44,6 +44,7 @@ export default {
     ITEM: '商品',
     ITEMS: '多个商品',
     TOOLS: '工具箱',
+    OR: '要么', // TODO needs Mandarin translation
     CURRENCY_SYMBOL: '¥',
     UNDO: '未处理',
     YES: '是',
