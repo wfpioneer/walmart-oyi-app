@@ -99,19 +99,12 @@ Array [
 `;
 
 exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems prop as false 1`] = `
-<View
-  style={
-    Object {
-      "flex": 1,
-      "marginVertical": 10,
-    }
-  }
->
+<View>
   <View
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#1977d3",
+        "backgroundColor": "#5a9ae0",
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "paddingHorizontal": 10,
@@ -150,7 +143,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
         ]
       }
       disableVirtualization={false}
-      horizontal={true}
+      horizontal={false}
       initialNumToRender={10}
       keyExtractor={[Function]}
       maxToRenderPerBatch={10}
@@ -186,7 +179,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
         ]
       }
       disableVirtualization={false}
-      horizontal={true}
+      horizontal={false}
       initialNumToRender={10}
       keyExtractor={[Function]}
       maxToRenderPerBatch={10}
@@ -203,19 +196,12 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
 `;
 
 exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems prop as true 1`] = `
-<View
-  style={
-    Object {
-      "flex": 1,
-      "marginVertical": 10,
-    }
-  }
->
+<View>
   <View
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#1977d3",
+        "backgroundColor": "#5a9ae0",
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "paddingHorizontal": 10,
@@ -272,7 +258,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
         ]
       }
       disableVirtualization={false}
-      horizontal={true}
+      horizontal={false}
       initialNumToRender={10}
       keyExtractor={[Function]}
       maxToRenderPerBatch={10}
@@ -308,7 +294,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
         ]
       }
       disableVirtualization={false}
-      horizontal={true}
+      horizontal={false}
       initialNumToRender={10}
       keyExtractor={[Function]}
       maxToRenderPerBatch={10}

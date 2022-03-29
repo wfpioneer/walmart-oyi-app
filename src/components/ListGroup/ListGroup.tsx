@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { groupBy } from 'lodash';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import PickPalletInfoCard from '../PickPalletInfoCard/PickPalletInfoCard';
 import { PickListItem } from '../../models/Picking.d';
 import styles from './ListGroup.style';
 import COLOR from '../../themes/Color';
@@ -14,7 +15,7 @@ import COLOR from '../../themes/Color';
 interface ListGroupProps {
   title: string;
   pickListItems: PickListItem[];
-  groupItems: boolean;
+  groupItems?: boolean;
 }
 
 interface CollapsibleCardProps {
@@ -52,34 +53,36 @@ const getGroupItemsBasedOnPallet = (items: PickListItem[]) => {
   return groupBy(sortedItems, item => item.palletId);
 };
 
-// TODO: Need to replace it with pickPalletInfoCard Component
-const pickPalletInfoCard = (items: PickListItem[]) => (
+const renderPickPalletInfoList = (items: PickListItem[]) => (
   <FlatList
     data={items}
-    horizontal
     renderItem={({ item }) => (
-      <View>
-        <Text>{item.itemDesc}</Text>
-        <Text>{item.itemNbr}</Text>
-      </View>
+      <PickPalletInfoCard
+        // TODO: Placeholder method for pickBinWorkflow Navigation
+        onPress={() => {}}
+        palletId={item.palletId}
+        palletLocation={item.palletLocationName}
+        pickListItems={[item]}
+        pickStatus={item.status}
+      />
     )}
-    keyExtractor={item => item.palletLocationId.toString()}
+    keyExtractor={(item, index) => `${item.id}-${index}`}
   />
 );
 
 const renderGroupItems = (items: PickListItem[]) => {
   const pickListItems = getGroupItemsBasedOnPallet(items);
-  return Object.values(pickListItems).map(value => pickPalletInfoCard(value));
+  return Object.values(pickListItems).map(value => renderPickPalletInfoList(value));
 };
 
 const renderItems = (items: PickListItem[]) => {
   const pickListItems = sortPickListByCreatedDate(items);
   return (
-    pickListItems.map((item: PickListItem) => pickPalletInfoCard([item]))
+    pickListItems.map((item: PickListItem) => renderPickPalletInfoList([item]))
   );
 };
 
-const ListGroup = (props: ListGroupProps) => {
+const ListGroup = (props: ListGroupProps): JSX.Element => {
   const {
     title,
     pickListItems,
@@ -89,7 +92,7 @@ const ListGroup = (props: ListGroupProps) => {
   const [listGroupOpen, toggleListGroup] = useState(true);
 
   return (
-    <View style={styles.container}>
+    <View key={title}>
       <View style={styles.menuContainer}>
         <CollapsibleCard title={title} isOpened={listGroupOpen} toggleIsOpened={toggleListGroup} />
       </View>
@@ -101,6 +104,10 @@ const ListGroup = (props: ListGroupProps) => {
         )}
     </View>
   );
+};
+
+ListGroup.defaultProps = {
+  groupItems: false
 };
 
 export default ListGroup;

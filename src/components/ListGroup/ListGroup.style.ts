@@ -2,17 +2,13 @@ import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginVertical: 10
-  },
   menuContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderBottomWidth: 1,
-    backgroundColor: COLOR.TIP_BLUE
+    backgroundColor: COLOR.HAVELOCK_BLUE
   },
   titleContainer: {
     flex: 1,
