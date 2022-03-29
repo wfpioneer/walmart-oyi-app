@@ -367,7 +367,9 @@ export default {
     ACCEPTED_BIN: 'Ingreso a bodega aceptado',
     COMPLETE: 'Completado',
     DELETED: 'Borrado',
-    NO_PALLETS_FOUND: 'No se encontraron pallets'
+    NO_PALLETS_FOUND: 'No se encontraron pallets',
+    SCAN_ITEM_LABEL: 'Escanea el artículo para agregarlo a la lista de pickeos',
+    ASSIGNED_TO_ME: 'Asignado a mi'
   },
   BINNING: {
     BINNING: 'Bodega',

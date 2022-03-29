@@ -369,7 +369,9 @@ export default {
     ACCEPTED_BIN: 'Accepted bin',
     COMPLETE: 'Complete',
     DELETED: 'Deleted',
-    NO_PALLETS_FOUND: 'No pallets found'
+    NO_PALLETS_FOUND: 'No pallets found',
+    SCAN_ITEM_LABEL: 'Scan item to add to picklist',
+    ASSIGNED_TO_ME: 'Assigned to me'
   },
   BINNING: {
     BINNING: 'Binning',
