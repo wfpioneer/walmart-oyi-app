@@ -364,7 +364,12 @@ export default {
     ACCEPTED_BIN: 'Ingreso a bodega aceptado',
     COMPLETE: 'Completado',
     DELETED: 'Borrado',
-    NO_PALLETS_FOUND: 'No se encontraron pallets'
+    NO_PALLETS_FOUND: 'No se encontraron pallets',
+    SELECT_LOCATION: 'Elige una ubicación',
+    NUMBER_PALLETS: 'Número de pallets',
+    QUICK_PICK: 'Pickeo rápido',
+    MOVE_TO_FRONT: 'Llevar al frente',
+    CREATE_PICK: 'Crear un Pick'
   },
   BINNING: {
     BINNING: 'Bodega',

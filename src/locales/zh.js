@@ -364,7 +364,12 @@ export default {
     ACCEPTED_BIN: '已上架',
     COMPLETE: '完成',
     DELETED: '删除',
-    NO_PALLETS_FOUND: '未发现卡板'
+    NO_PALLETS_FOUND: '未发现卡板',
+    SELECT_LOCATION: '选择货架位置',
+    NUMBER_PALLETS: '卡板数量',
+    QUICK_PICK: '快速拣货',
+    MOVE_TO_FRONT: '移到最前',
+    CREATE_PICK: '创建补货'
   },
   BINNING: {
     BINNING: '上架',
