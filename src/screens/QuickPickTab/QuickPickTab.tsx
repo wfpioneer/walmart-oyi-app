@@ -28,7 +28,7 @@ export const QuickPickTabScreen = (props: QuickPickTabProps) => {
     <PickPalletInfoCard
       onPress={() => {}}
       palletId={item.palletId}
-      palletLocation={item.palletLocation}
+      palletLocation={item.palletLocationName}
       pickListItems={[item]}
       pickStatus={item.status}
     />

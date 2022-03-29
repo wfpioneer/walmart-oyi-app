@@ -1,0 +1,644 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Quick pick tab render tests renders the screen with no picking items 1`] = `
+<View>
+  <View>
+    <Text>
+      [missing "en.PICKING.ASSIGNED_TO_ME" translation]
+    </Text>
+    <FlatList
+      data={Array []}
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.PICK" translation]
+    </Text>
+    <FlatList
+      data={Array []}
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.WORK" translation]
+    </Text>
+    <FlatList
+      data={Array []}
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.BIN" translation]
+    </Text>
+    <FlatList
+      data={Array []}
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+</View>
+`;
+
+exports[`Quick pick tab render tests renders the screen with not all items assigned to me 1`] = `
+<View>
+  <View>
+    <Text>
+      [missing "en.PICKING.ASSIGNED_TO_ME" translation]
+    </Text>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 0,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to work",
+            "upcNbr": "1234567890123",
+          },
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 1,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to bin",
+            "upcNbr": "1234567890123",
+          },
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 2,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to pick",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.PICK" translation]
+    </Text>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 2,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to pick",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.WORK" translation]
+    </Text>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 0,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to work",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.BIN" translation]
+    </Text>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 1,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to bin",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+</View>
+`;
+
+exports[`Quick pick tab render tests renders the screen with picking items all assigned to me 1`] = `
+<View>
+  <View>
+    <Text>
+      [missing "en.PICKING.ASSIGNED_TO_ME" translation]
+    </Text>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 0,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to work",
+            "upcNbr": "1234567890123",
+          },
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 1,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to bin",
+            "upcNbr": "1234567890123",
+          },
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 2,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to pick",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.PICK" translation]
+    </Text>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 2,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to pick",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.WORK" translation]
+    </Text>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 0,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to work",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.BIN" translation]
+    </Text>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 1,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to bin",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+</View>
+`;
+
+exports[`Quick pick tab render tests renders the screen with some quick pick items 1`] = `
+<View>
+  <View>
+    <Text>
+      [missing "en.PICKING.ASSIGNED_TO_ME" translation]
+    </Text>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 2,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to pick",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.PICK" translation]
+    </Text>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 2,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to pick",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.WORK" translation]
+    </Text>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "t0s0og",
+            "category": 3,
+            "createTS": "yesterday",
+            "createdBy": "Guude",
+            "id": 0,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": 43,
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to work",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+  <View>
+    <Text>
+      [missing "en.PICKING.BIN" translation]
+    </Text>
+    <FlatList
+      data={Array []}
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+</View>
+`;
