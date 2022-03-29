@@ -4,51 +4,68 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
-import {
-  getFocusedRouteNameFromRoute,
-  useRoute
-} from '@react-navigation/native';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
-import Picking from '../screens/Picking/Picking';
 import PickBinTab from '../screens/PickBinTab/PickBinTabScreen';
 import QuickPickTab from '../screens/QuickPickTab/QuickPickTabScreen';
 import SalesFloorTab from '../screens/SalesFloorTab/SalesFloorTabScreen';
 import { setManualScan } from '../state/actions/Global';
 import styles from './PickingNavigator.style';
 import { useTypedSelector } from '../state/reducers/RootReducer';
+import { PickListItem, PickStatus } from '../models/Picking.d';
+import { mockPickLists } from '../mockData/mockPickList';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 interface PickingNavigatorProps {
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
+  picklist: PickListItem[];
 }
-export const PickTabNavigator = (): JSX.Element => (
-  <Tab.Navigator initialRouteName="Pick">
-    <Tab.Screen
-      name="QuickPick"
-      options={{
-        title: strings('PICKING.QUICKPICK')
-      }}
-      component={QuickPickTab}
-    />
-    <Tab.Screen
-      name="Pick"
-      options={{
-        title: strings('PICKING.PICK')
-      }}
-      component={PickBinTab}
-    />
-    <Tab.Screen
-      name="SalesFloor"
-      options={{
-        title: strings('ITEM.SALES_FLOOR_QTY')
-      }}
-      component={SalesFloorTab}
-    />
-  </Tab.Navigator>
-);
+export const PickTabNavigator = (props: {
+  picklist: PickListItem[];
+}): JSX.Element => {
+  const { picklist } = props;
+
+  const quickPickList = picklist.filter(item => item.quickPick);
+  const pickBinList = picklist.filter(
+    item => !item.quickPick
+      && (item.status === PickStatus.ACCEPTED_BIN
+        || item.status === PickStatus.ACCEPTED_PICK
+        || item.status === PickStatus.READY_TO_BIN
+        || item.status === PickStatus.READY_TO_PICK)
+  );
+  const salesFloorList = picklist.filter(
+    item => item.quickPick && item.status === PickStatus.READY_TO_WORK
+  );
+
+  return (
+    <Tab.Navigator initialRouteName="Pick">
+      <Tab.Screen
+        name="QuickPick"
+        options={{
+          title: strings('PICKING.QUICKPICK')
+        }}
+        component={QuickPickTab}
+      />
+      <Tab.Screen
+        name="Pick"
+        options={{
+          title: strings('PICKING.PICK')
+        }}
+        component={PickBinTab}
+      />
+      <Tab.Screen
+        name="SalesFloor"
+        options={{
+          title: strings('ITEM.SALES_FLOOR_QTY')
+        }}
+        component={SalesFloorTab}
+      />
+    </Tab.Navigator>
+  );
+};
 
 export const renderScanButton = (
   dispatch: Dispatch<any>,
@@ -58,6 +75,7 @@ export const renderScanButton = (
     onPress={() => {
       dispatch(setManualScan(!isManualScanEnabled));
     }}
+    testID="manual-scan"
   >
     <View style={styles.leftButton}>
       <MaterialCommunityIcons
@@ -73,38 +91,33 @@ export const renderScanButton = (
 export const PickingNavigatorStack = (
   props: PickingNavigatorProps
 ): JSX.Element => {
-  const { dispatch, isManualScanEnabled } = props;
-  // TODO the focused Child Tab routeName is not active on the firstRender
+  const { dispatch, isManualScanEnabled, picklist } = props;
   return (
     <Stack.Navigator
       headerMode="float"
-      screenOptions={({ route }) => ({
-        headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
-        headerTintColor: COLOR.WHITE,
-        headerRight: () => (
-          <View style={styles.headerContainer}>
-            {getFocusedRouteNameFromRoute(route) === 'QuickPick' ||
-            getFocusedRouteNameFromRoute(route) === 'Pick'
-              ? renderScanButton(dispatch, isManualScanEnabled)
-              : null}
-          </View>
-        )
-      })}
+      screenOptions={({ route }) => {
+        const routeName = getFocusedRouteNameFromRoute(route) ?? 'Pick';
+        return {
+          headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
+          headerTintColor: COLOR.WHITE,
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {routeName === 'QuickPick' || routeName === 'Pick'
+                ? renderScanButton(dispatch, isManualScanEnabled)
+                : null}
+            </View>
+          )
+        };
+      }}
     >
       <Stack.Screen
         name="PickingTabs"
-        component={PickTabNavigator}
         options={{
           headerTitle: strings('PICKING.PICKING')
         }}
-      />
-      <Stack.Screen
-        name="Picking"
-        component={Picking}
-        options={{
-          headerTitle: strings('PICKING.PICKING')
-        }}
-      />
+      >
+        {() => <PickTabNavigator picklist={picklist} />}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 };
@@ -112,12 +125,11 @@ export const PickingNavigatorStack = (
 const PickingNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const route = useRoute();
-  const routeName = getFocusedRouteNameFromRoute(route);
   return (
     <PickingNavigatorStack
       dispatch={dispatch}
       isManualScanEnabled={isManualScanEnabled}
+      picklist={mockPickLists}
     />
   );
 };
