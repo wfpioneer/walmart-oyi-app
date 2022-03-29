@@ -16,7 +16,28 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
         [missing "en.PICKING.ASSIGNED_TO_ME" translation]
       </Text>
       <FlatList
-        data={Array []}
+        data={
+          Array [
+            Object {
+              "assignedAssociate": "vn51wu8",
+              "category": 46,
+              "createTS": "10:32 AM 03/04/2022",
+              "createdBy": "Associate 2",
+              "id": 4,
+              "itemDesc": "Candy",
+              "itemNbr": 7344,
+              "moveToFront": true,
+              "palletId": 4321,
+              "palletLocationId": 1672,
+              "palletLocationName": "C1-2-1",
+              "quickPick": false,
+              "salesFloorLocationId": 1673,
+              "salesFloorLocationName": "C1-3",
+              "status": "accepted pick",
+              "upcNbr": "000041800004",
+            },
+          ]
+        }
         disableVirtualization={false}
         horizontal={false}
         initialNumToRender={10}
@@ -96,6 +117,24 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
               "salesFloorLocationName": "C1-3",
               "status": "accepted pick",
               "upcNbr": "000041800003",
+            },
+            Object {
+              "assignedAssociate": "vn51wu8",
+              "category": 46,
+              "createTS": "10:32 AM 03/04/2022",
+              "createdBy": "Associate 2",
+              "id": 4,
+              "itemDesc": "Candy",
+              "itemNbr": 7344,
+              "moveToFront": true,
+              "palletId": 4321,
+              "palletLocationId": 1672,
+              "palletLocationName": "C1-2-1",
+              "quickPick": false,
+              "salesFloorLocationId": 1673,
+              "salesFloorLocationName": "C1-3",
+              "status": "accepted pick",
+              "upcNbr": "000041800004",
             },
           ]
         }
