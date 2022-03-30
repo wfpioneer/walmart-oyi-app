@@ -44,7 +44,7 @@ export default {
     ITEM: 'Artículo',
     ITEMS: 'Artículos',
     TOOLS: 'Herramientas',
-    OR: 'O', // TODO Need spanish translation
+    OR: 'O', // TODO Crosscheck spanish translation with confluence
     CURRENCY_SYMBOL: '$',
     UNDO: 'Deshacer',
     YES: 'Sí',
