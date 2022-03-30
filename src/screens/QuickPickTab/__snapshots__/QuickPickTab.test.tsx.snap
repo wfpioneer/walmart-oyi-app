@@ -45,8 +45,7 @@ exports[`Quick pick tab render tests renders the screen with no picking items 1`
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-  <Memo(Pressable)
-    onPress={[Function]}
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -66,7 +65,7 @@ exports[`Quick pick tab render tests renders the screen with no picking items 1`
     >
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
-  </Memo(Pressable)>
+  </View>
 </ForwardRef(SafeAreaView)>
 `;
 
@@ -115,8 +114,7 @@ exports[`Quick pick tab render tests renders the screen with no quick pick items
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-  <Memo(Pressable)
-    onPress={[Function]}
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -136,7 +134,7 @@ exports[`Quick pick tab render tests renders the screen with no quick pick items
     >
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
-  </Memo(Pressable)>
+  </View>
 </ForwardRef(SafeAreaView)>
 `;
 
@@ -336,8 +334,7 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-  <Memo(Pressable)
-    onPress={[Function]}
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -357,7 +354,7 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
     >
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
-  </Memo(Pressable)>
+  </View>
 </ForwardRef(SafeAreaView)>
 `;
 
@@ -575,8 +572,7 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-  <Memo(Pressable)
-    onPress={[Function]}
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -596,7 +592,7 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
     >
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
-  </Memo(Pressable)>
+  </View>
 </ForwardRef(SafeAreaView)>
 `;
 
@@ -741,8 +737,7 @@ exports[`Quick pick tab render tests renders the screen with some quick pick ite
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-  <Memo(Pressable)
-    onPress={[Function]}
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -762,6 +757,6 @@ exports[`Quick pick tab render tests renders the screen with some quick pick ite
     >
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
-  </Memo(Pressable)>
+  </View>
 </ForwardRef(SafeAreaView)>
 `;
