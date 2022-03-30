@@ -1,15 +1,26 @@
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import {
+  FlatList,
+  SafeAreaView,
+  Text,
+  View
+} from 'react-native';
 import { PickingState } from '../../state/reducers/Picking';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import User from '../../models/User';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
-import PickPalletInfoCard from '../../components/PickPalletInfoCard/PickPalletInfoCard';
+import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
+import styles from './QuickPickTab.style';
 
 interface QuickPickTabProps {
   picking: PickingState;
   user: User;
+}
+
+interface GroupItem {
+  picks: PickListItem[];
+  title: string
 }
 
 export const QuickPickTabScreen = (props: QuickPickTabProps) => {
@@ -24,34 +35,34 @@ export const QuickPickTabScreen = (props: QuickPickTabProps) => {
   );
   const work = quickPicks.filter(pick => pick.status === PickStatus.READY_TO_WORK);
 
-  const renderItem = ({ item }: { item: PickListItem }) => (
-    <PickPalletInfoCard
-      onPress={() => {}}
-      palletId={item.palletId}
-      palletLocation={item.palletLocationName}
-      pickListItems={[item]}
-      pickStatus={item.status}
+  const groupItems: GroupItem[] = [
+    { picks: assignedToMe, title: strings('PICKING.ASSIGNED_TO_ME') },
+    { picks, title: strings('PICKING.PICK') },
+    { picks: work, title: strings('PICKING.WORK') },
+    { picks: bins, title: strings('PICKING.BIN') }
+  ];
+
+  const renderItem = ({ item }: { item: GroupItem }) => (
+    <ListGroup
+      title={`${item.title} (${item.picks.length})`}
+      groupItems={false}
+      pickListItems={item.picks}
+      key={item.title}
     />
   );
 
-  const mockDropDownCard = (title: string, items: PickListItem[]) => (
-    <View>
-      <Text>{title}</Text>
-      <FlatList
-        data={items}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => `${item.id}-${index}`}
-      />
-    </View>
-  );
-
   return (
-    <View>
-      {mockDropDownCard(strings('PICKING.ASSIGNED_TO_ME'), assignedToMe)}
-      {mockDropDownCard(strings('PICKING.PICK'), picks)}
-      {mockDropDownCard(strings('PICKING.WORK'), work)}
-      {mockDropDownCard(strings('PICKING.BIN'), bins)}
-    </View>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={groupItems}
+        renderItem={renderItem}
+        keyExtractor={item => item.title}
+        extraData={quickPicks}
+      />
+      <View style={styles.scanTextView}>
+        <Text style={styles.scanText}>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 

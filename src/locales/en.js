@@ -373,7 +373,8 @@ export default {
     ASSIGNED_TO_ME: 'Assigned to me',
     PICK: 'Pick',
     WORK: 'Work',
-    BIN: 'Bin'
+    BIN: 'Bin',
+    SCAN_ITEM_LABEL: 'Scan item to add to picklist'
   },
   BINNING: {
     BINNING: 'Binning',
