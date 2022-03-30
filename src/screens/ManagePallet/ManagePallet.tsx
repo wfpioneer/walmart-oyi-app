@@ -325,6 +325,7 @@ export const updatePalletApisHook = (
   deleteUpcsApi: AsyncState,
   items: PalletItem[],
   dispatch: Dispatch<any>,
+  newExpirationDate?: string
 ): void => {
   const addResponse: ApiResult | string = (addPalletUpcApi.result ?? addPalletUpcApi.error);
   const updateResponse: ApiResult | string = (updateItemQtyAPI.result ?? updateItemQtyAPI.error);
@@ -367,7 +368,9 @@ export const updatePalletApisHook = (
         }
         return item;
       });
-      dispatch(updatePalletExpirationDate());
+      if (newExpirationDate) {
+        dispatch(updatePalletExpirationDate());
+      }
     } else {
       totalResponses.set('ERROR', updateResponse);
     }
@@ -589,7 +592,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     updateItemQtyAPI,
     deleteUpcsApi,
     items,
-    dispatch
+    dispatch,
+    newExpirationDate
   ), [addPalletUpcApi, deleteUpcsApi, updateItemQtyAPI]);
   // Get Item Details UPC api
   useEffectHook(() => getItemDetailsApiHook(
