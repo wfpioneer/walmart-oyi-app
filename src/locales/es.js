@@ -44,6 +44,7 @@ export default {
     ITEM: 'Artículo',
     ITEMS: 'Artículos',
     TOOLS: 'Herramientas',
+    OR: 'O',
     CURRENCY_SYMBOL: '$',
     UNDO: 'Deshacer',
     YES: 'Sí',
@@ -357,6 +358,11 @@ export default {
   },
   PICKING: {
     PICKING: 'Pickeo',
+    PICK: 'Pick',
+    QUICKPICK: 'Pickeo Rápido',
+    ASSIGNED: 'Asignado',
+    CREATED_BY: 'Creado Por',
+    CREATED: 'Creado',
     READY_TO_PICK: 'Listo para pickear',
     ACCEPTED_PICK: 'Pickeo aceptado',
     READY_TO_WORK: 'Listo para trabajar',
@@ -365,11 +371,13 @@ export default {
     COMPLETE: 'Completado',
     DELETED: 'Borrado',
     NO_PALLETS_FOUND: 'No se encontraron pallets',
+    BIN: 'Ingresar a Bodega',
+    SCAN_ITEM_LABEL: 'Escanea el artículo para agregarlo a la lista de pickeos',
     SELECT_LOCATION: 'Elige una ubicación',
     NUMBER_PALLETS: 'Número de pallets',
-    QUICK_PICK: 'Pickeo rápido',
+    CREATE_PICK: 'Crear un Pick',
     MOVE_TO_FRONT: 'Llevar al frente',
-    CREATE_PICK: 'Crear un Pick'
+    QUICK_PICK: 'Pickeo rápido'
   },
   BINNING: {
     BINNING: 'Bodega',

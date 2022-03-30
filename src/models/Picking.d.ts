@@ -17,11 +17,13 @@ export interface PickListItem {
   itemDesc: string;
   category: number;
   quickPick: boolean;
-  salesFloorLocation: string;
+  salesFloorLocationId: number
+  salesFloorLocationName: string;
   moveToFront: boolean;
   assignedAssociate: string;
   palletId: number;
-  palletLocation: string;
+  palletLocationId: number
+  palletLocationName: string;
   status: PickStatus;
   createdBy: string;
   createTS: string;

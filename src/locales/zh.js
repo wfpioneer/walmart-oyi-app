@@ -44,6 +44,7 @@ export default {
     ITEM: '商品',
     ITEMS: '多个商品',
     TOOLS: '工具箱',
+    OR: '要么',
     CURRENCY_SYMBOL: '¥',
     UNDO: '未处理',
     YES: '是',
@@ -357,6 +358,11 @@ export default {
   },
   PICKING: {
     PICKING: '楼面补货',
+    PICK: '拣货',
+    QUICKPICK: '快速拣货',
+    ASSIGNED: '已分配',
+    CREATED_BY: '创建者',
+    CREATED: '已创建',
     READY_TO_PICK: '开始补货',
     ACCEPTED_PICK: '已补货',
     READY_TO_WORK: '开始运行',
@@ -365,11 +371,13 @@ export default {
     COMPLETE: '完成',
     DELETED: '删除',
     NO_PALLETS_FOUND: '未发现卡板',
+    BIN: '上架',
+    SCAN_ITEM_LABEL: '扫描商品添加到补货清单',
     SELECT_LOCATION: '选择货架位置',
     NUMBER_PALLETS: '卡板数量',
-    QUICK_PICK: '快速拣货',
+    CREATE_PICK: '创建补货',
     MOVE_TO_FRONT: '移到最前',
-    CREATE_PICK: '创建补货'
+    QUICK_PICK: '快速拣货'
   },
   BINNING: {
     BINNING: '上架',

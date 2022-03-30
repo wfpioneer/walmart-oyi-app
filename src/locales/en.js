@@ -359,6 +359,10 @@ export default {
   },
   PICKING: {
     PICKING: 'Picking',
+    PICK: 'Pick',
+    ASSIGNED: 'Assigned',
+    CREATED_BY: 'Created By',
+    CREATED: 'Created',
     READY_TO_PICK: 'Ready to pick',
     ACCEPTED_PICK: 'Accepted pick',
     READY_TO_WORK: 'Ready to work',
@@ -371,7 +375,9 @@ export default {
     NUMBER_PALLETS: 'Number of Pallets',
     QUICK_PICK: 'Quick Pick',
     MOVE_TO_FRONT: 'Move to Front',
-    CREATE_PICK: 'Create Pick'
+    CREATE_PICK: 'Create Pick',
+    BIN: 'Bin',
+    SCAN_ITEM_LABEL: 'Scan item to add to picklist'
   },
   BINNING: {
     BINNING: 'Binning',

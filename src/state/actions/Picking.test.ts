@@ -1,4 +1,4 @@
-import { PickListItem, PickStatus } from '../../models/Picking.d';
+import { mockPickLists } from '../../mockData/mockPickList';
 import {
   DELETE_PICKS,
   INITIALIZE_PICKLIST,
@@ -14,35 +14,16 @@ import {
 
 describe('Picking action tests', () => {
   it('tests action creators for picking', () => {
-    const testPicks: PickListItem[] = [
-      {
-        assignedAssociate: 'me',
-        category: 71,
-        createTS: 'yesterday',
-        createdBy: 'someone else',
-        id: 418,
-        itemDesc: 'teapot',
-        itemNbr: 734,
-        moveToFront: true,
-        palletId: 4321,
-        palletLocation: 'brewing',
-        quickPick: false,
-        salesFloorLocation: 'brewing',
-        status: PickStatus.ACCEPTED_PICK,
-        upcNbr: '000041800003'
-      }
-    ];
-
-    const initialize = initializePicklist(testPicks);
+    const initialize = initializePicklist(mockPickLists);
     expect(initialize).toStrictEqual({
       type: INITIALIZE_PICKLIST,
-      payload: testPicks
+      payload: mockPickLists
     });
 
-    const update = updatePicks(testPicks);
+    const update = updatePicks(mockPickLists);
     expect(update).toStrictEqual({
       type: UPDATE_PICKS,
-      payload: testPicks
+      payload: mockPickLists
     });
 
     const select = selectPicks([1, 2, 3]);
