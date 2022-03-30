@@ -360,6 +360,7 @@ export default {
   PICKING: {
     PICKING: 'Picking',
     PICK: 'Pick',
+    QUICKPICK: 'Quick Pick',
     ASSIGNED: 'Assigned',
     CREATED_BY: 'Created By',
     CREATED: 'Created',

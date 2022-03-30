@@ -85,6 +85,7 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
           icon={ModalCloseIcon}
           type={Button.Type.NO_BORDER}
           onPress={() => onClose()}
+          testID="closeButton"
         />
       </View>
       <Text style={styles.locationText}>
@@ -123,6 +124,7 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
             onValueChange={() => onQuickPickChange(setIsQuickPick)}
             thumbColor={COLOR.MAIN_THEME_COLOR}
             trackColor={{ false: COLOR.GREY, true: COLOR.MAIN_THEME_COLOR }}
+            testID="quickPickSwitch"
           />
         </View>
       <View style={styles.buttonContainer}>
@@ -131,10 +133,11 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
           title={strings('PICKING.CREATE_PICK')}
           type={Button.Type.PRIMARY}
           onPress={onSubmit}
+          testID="submitButton"
         />
       </View>
     </View>
-  )
+  );
 };
 
 export default CreatePickDialog;
