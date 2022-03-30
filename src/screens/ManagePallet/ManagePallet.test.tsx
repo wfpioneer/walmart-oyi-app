@@ -26,6 +26,7 @@ import {
   hideActivityModal,
   showActivityModal
 } from '../../state/actions/Modal';
+import { updatePalletExpirationDate } from '../../state/actions/PalletManagement';
 import { strings } from '../../locales';
 import getItemDetails from '../../mockData/getItemDetails';
 import { Configurations } from '../../models/User';
@@ -35,6 +36,10 @@ const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
+}));
+jest.mock('../../state/actions/PalletManagement', () => ({
+  ...jest.requireActual('../../state/actions/PalletManagement'),
+  updatePalletExpirationDate: jest.fn()
 }));
 
 const mockUserConfig: Configurations = {
@@ -54,6 +59,7 @@ describe('ManagePalletScreen', () => {
     id: 1514,
     expirationDate: '01/31/2022'
   };
+  const mockNewExpirationDate = '03/04/2022';
   const mockItems: PalletItem[] = [
     {
       itemNbr: 1234,
@@ -471,7 +477,8 @@ describe('ManagePalletScreen', () => {
         defaultAsyncState,
         defaultAsyncState,
         mockItems,
-        mockDispatch
+        mockDispatch,
+        mockNewExpirationDate
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(showActivityModal).toBeCalledTimes(1);
@@ -487,10 +494,12 @@ describe('ManagePalletScreen', () => {
         onSuccessApi,
         onSuccessApi,
         mockItems,
-        mockDispatch
+        mockDispatch,
+        mockNewExpirationDate
       );
       expect(mockDispatch).toBeCalledTimes(6);
       expect(hideActivityModal).toBeCalledTimes(1);
+      expect(updatePalletExpirationDate).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(successToastProps)
       );
@@ -507,12 +516,35 @@ describe('ManagePalletScreen', () => {
         onSuccessApi,
         onFailureApi,
         mockItems,
-        mockDispatch
+        mockDispatch,
+        mockNewExpirationDate
       );
       expect(mockDispatch).toBeCalledTimes(6);
       expect(hideActivityModal).toBeCalledTimes(1);
+      expect(updatePalletExpirationDate).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(partialToastProps)
+      );
+    });
+
+    it('Tests updatePalletApisHook should not call updatePalletExpirationDate when exp date is not changed', () => {
+      const successToastProps = {
+        type: 'success',
+        text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
+        position: 'bottom'
+      };
+      updatePalletApisHook(
+        onSuccessApi,
+        onSuccessApi,
+        onSuccessApi,
+        mockItems,
+        mockDispatch
+      );
+      expect(mockDispatch).toBeCalledTimes(5);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(updatePalletExpirationDate).not.toHaveBeenCalled();
+      expect(Toast.show).toHaveBeenCalledWith(
+        expect.objectContaining(successToastProps)
       );
     });
 
@@ -528,7 +560,8 @@ describe('ManagePalletScreen', () => {
         onFailureApi,
         onFailureApi,
         mockItems,
-        mockDispatch
+        mockDispatch,
+        mockNewExpirationDate
       );
       expect(mockDispatch).toBeCalledTimes(5);
       expect(hideActivityModal).toBeCalledTimes(1);
