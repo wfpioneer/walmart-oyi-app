@@ -635,8 +635,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     if (upcs.length > 0) {
       dispatch(deleteUpcs(payload));
     }
+
+    const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
     // Calls add items to pallet via api
-    handleAddItems(palletId, items, dispatch, expirationDate ? new Date(expirationDate).toISOString() : undefined);
+    handleAddItems(palletId, items, dispatch, addExpiry ? new Date(addExpiry).toISOString() : undefined);
     // Calls update pallet item qty api
     handleUpdateItems(items, palletInfo, dispatch);
   };
