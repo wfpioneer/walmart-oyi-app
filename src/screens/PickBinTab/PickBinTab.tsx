@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  FlatList, Text, View
+  Text, View
 } from 'react-native';
 import { groupBy } from 'lodash';
 import { PickingState } from '../../state/reducers/Picking';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import User from '../../models/User';
 import { PickListItem } from '../../models/Picking.d';
-import PickPalletInfoCard from '../../components/PickPalletInfoCard/PickPalletInfoCard';
+import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
 import styles from './PickBinTab.style';
 
@@ -19,28 +19,6 @@ interface PickBinTabProps {
 const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletLocation ? palletLocation.substring(0,
   palletLocation.indexOf('-')).replace(/[^a-zA-Z]+/g, '') : '');
 
-const renderItem = ({ item }: { item: PickListItem }) => (
-  <PickPalletInfoCard
-    onPress={() => {}}
-    palletId={item.palletId}
-    palletLocation={item.palletLocationName}
-    pickListItems={[item]}
-    pickStatus={item.status}
-  />
-);
-
-// TODO: Needs to be replaced with ListGroup component once it got merged to development
-const mockListGroup = (title: string, items: PickListItem[]) => (
-  <View>
-    <Text>{title}</Text>
-    <FlatList
-      data={items}
-      renderItem={renderItem}
-      keyExtractor={(item, index) => `${item.id}-${index}`}
-    />
-  </View>
-);
-
 export const PickBinTabScreen = (props: PickBinTabProps) => {
   const { picking, user } = props;
   const assignedToMe = picking.pickList.filter(pick => pick.assignedAssociate === user.userId);
@@ -51,9 +29,19 @@ export const PickBinTabScreen = (props: PickBinTabProps) => {
   return (
     <View style={styles.container}>
       <View>
-        {mockListGroup(strings('PICKING.ASSIGNED_TO_ME'), assignedToMe)}
+        <ListGroup
+          title={`${strings('PICKING.ASSIGNED_TO_ME')}(${assignedToMe.length})`}
+          key="assinged-to-me"
+          pickListItems={assignedToMe}
+          groupItems
+        />
         {sortedZones.map((key: string) => (
-          mockListGroup(key, groupedPicksByZone[key])
+          <ListGroup
+            key={key}
+            title={`${key}(${groupedPicksByZone[key].length})`}
+            pickListItems={groupedPicksByZone[key]}
+            groupItems
+          />
         ))}
       </View>
       <View style={styles.scanItemLabel}>
