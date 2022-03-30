@@ -7,7 +7,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 370
+    width: '100%'
   },
   textInput: {
     paddingLeft: 10,
@@ -21,7 +21,7 @@ export default StyleSheet.create({
     paddingTop: 20
   },
   textView: {
-    width: 200,
+    width: '60%',
     paddingTop: 20
   },
   activityIndicator: {
