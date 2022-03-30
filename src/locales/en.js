@@ -359,6 +359,7 @@ export default {
   },
   PICKING: {
     PICKING: 'Picking',
+    QUICKPICK: 'Quick Pick',
     ASSIGNED: 'Assigned',
     CREATED_BY: 'Created By',
     CREATED: 'Created',
@@ -374,7 +375,11 @@ export default {
     PICK: 'Pick',
     WORK: 'Work',
     BIN: 'Bin',
-    SCAN_ITEM_LABEL: 'Scan item to add to picklist'
+    SCAN_ITEM_LABEL: 'Scan item to add to picklist',
+    SELECT_LOCATION: 'Select a Location',
+    NUMBER_PALLETS: 'Number of Pallets',
+    CREATE_PICK: 'Create Pick',
+    MOVE_TO_FRONT: 'Move to Front'
   },
   BINNING: {
     BINNING: 'Binning',

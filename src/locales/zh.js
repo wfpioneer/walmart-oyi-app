@@ -44,6 +44,7 @@ export default {
     ITEM: '商品',
     ITEMS: '多个商品',
     TOOLS: '工具箱',
+    OR: '要么', // TODO needs Mandarin translation
     CURRENCY_SYMBOL: '¥',
     UNDO: '未处理',
     YES: '是',
@@ -357,6 +358,7 @@ export default {
   },
   PICKING: {
     PICKING: '楼面补货',
+    QUICKPICK: '快速拣货',
     ASSIGNED: '已分配',
     CREATED_BY: '创建者',
     CREATED: '已创建',
@@ -371,7 +373,12 @@ export default {
     ASSIGNED_TO_ME: '分配给我',
     PICK: '拣货',
     WORK: '工作状态',
-    BIN: '上架'
+    BIN: '上架',
+    SCAN_ITEM_LABEL: '扫描商品添加到补货清单',
+    SELECT_LOCATION: '选择货架位置',
+    NUMBER_PALLETS: '卡板数量',
+    CREATE_PICK: '创建补货',
+    MOVE_TO_FRONT: '移到最前'
   },
   BINNING: {
     BINNING: '上架',
