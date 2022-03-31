@@ -43,6 +43,7 @@ export const COLOR = {
   HOLO_GREEN_DARK: '#669900',
   LIGHT_AQUA_BLUE: '#F0F9FF',
   TIP_BLUE: '#1977d3',
+  HAVELOCK_BLUE: '#5a9ae0',
 
   // Native Color
 

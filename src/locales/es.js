@@ -44,6 +44,7 @@ export default {
     ITEM: 'Artículo',
     ITEMS: 'Artículos',
     TOOLS: 'Herramientas',
+    OR: 'O', // TODO Crosscheck spanish translation with confluence
     CURRENCY_SYMBOL: '$',
     UNDO: 'Deshacer',
     YES: 'Sí',
@@ -357,9 +358,11 @@ export default {
   },
   PICKING: {
     PICKING: 'Pickeo',
-    ASSIGNED: 'Asignado', // TODO REPLACE with Spanish translations on confluence
-    CREATED_BY: 'Creado Por', // TODO REPLACE with Spanish translations on confluence
-    CREATED: 'Creado', // TODO REPLACE with Spanish translations on confluence
+    PICK: 'Pick',
+    QUICKPICK: 'Pickeo Rápido',
+    ASSIGNED: 'Asignado',
+    CREATED_BY: 'Creado Por',
+    CREATED: 'Creado',
     READY_TO_PICK: 'Listo para pickear',
     ACCEPTED_PICK: 'Pickeo aceptado',
     READY_TO_WORK: 'Listo para trabajar',
@@ -367,7 +370,13 @@ export default {
     ACCEPTED_BIN: 'Ingreso a bodega aceptado',
     COMPLETE: 'Completado',
     DELETED: 'Borrado',
-    NO_PALLETS_FOUND: 'No se encontraron pallets'
+    NO_PALLETS_FOUND: 'No se encontraron pallets',
+    BIN: 'Ingresar a Bodega',
+    SCAN_ITEM_LABEL: 'Escanea el artículo para agregarlo a la lista de pickeos',
+    SELECT_LOCATION: 'Elige una ubicación',
+    NUMBER_PALLETS: 'Número de pallets',
+    CREATE_PICK: 'Crear un Pick',
+    MOVE_TO_FRONT: 'Llevar al frente'
   },
   BINNING: {
     BINNING: 'Bodega',
