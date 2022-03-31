@@ -616,6 +616,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const submit = () => {
     const palletId = id;
     const reducerInitialValue: string[] = [];
+    const updatedExpirationDate = newExpirationDate || expirationDate;
+    const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
     // Filter Items by deleted flag
     const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
       reducer.push(current.upcNbr);
@@ -624,15 +626,21 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     const payload = {
       palletId,
       upcs,
-      expirationDate,
-      removeExpirationDate: removeExpirationDate(items, perishableCategories)
+      expirationDate: (!removeExpirationDateForPallet && updatedExpirationDate)
+        ? `${moment(updatedExpirationDate).format('YYYY-MM-DDT00:00:00.000')}Z` : undefined,
+      removeExpirationDate: removeExpirationDateForPallet
     };
 
     if (upcs.length > 0) {
       dispatch(deleteUpcs(payload));
     }
     // Calls add items to pallet via api
-    handleAddItems(palletId, items, dispatch, expirationDate ? new Date(expirationDate).toISOString() : undefined);
+    handleAddItems(
+      palletId,
+      items,
+      dispatch,
+      updatedExpirationDate ? `${moment(updatedExpirationDate).format('YYYY-MM-DDT00:00:00.000')}Z` : undefined
+    );
     // Calls update pallet item qty api
     handleUpdateItems(items, palletInfo, dispatch);
   };
