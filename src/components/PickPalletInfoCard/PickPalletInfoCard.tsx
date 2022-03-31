@@ -49,6 +49,7 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
         <FlatList
           data={palletsItems}
           renderItem={renderItem}
+          scrollEnabled={false}
           keyExtractor={(item, index) => `${item.id}-${index}`}
         />
       </Pressable>

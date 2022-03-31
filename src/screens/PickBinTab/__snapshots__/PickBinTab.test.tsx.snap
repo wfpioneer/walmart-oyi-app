@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component with AssignedToMe List and zone 1`] = `
-<View
+<ForwardRef(SafeAreaView)
   style={
     Object {
       "flex": 1,
@@ -10,104 +10,27 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     }
   }
 >
-  <View>
-    <ListGroup
-      groupItems={true}
-      pickListItems={
-        Array [
-          Object {
-            "assignedAssociate": "vn51wu8",
-            "category": 46,
-            "createTS": "10:32 AM 03/04/2022",
-            "createdBy": "Associate 2",
-            "id": 4,
-            "itemDesc": "Candy",
-            "itemNbr": 7344,
-            "moveToFront": true,
-            "palletId": 4321,
-            "palletLocationId": 1672,
-            "palletLocationName": "C1-2-1",
-            "quickPick": false,
-            "salesFloorLocationId": 1673,
-            "salesFloorLocationName": "C1-3",
-            "status": "accepted pick",
-            "upcNbr": "000041800004",
-          },
-        ]
-      }
-      title="[missing \\"en.PICKING.ASSIGNED_TO_ME\\" translation](1)"
-    />
-    <ListGroup
-      groupItems={true}
-      pickListItems={
-        Array [
-          Object {
-            "assignedAssociate": "Associate 1",
-            "category": 71,
-            "createTS": "4:25 PM 02/09/2022",
-            "createdBy": "Manager 1",
-            "id": 3,
-            "itemDesc": "Swiffer",
-            "itemNbr": 845,
-            "moveToFront": true,
-            "palletId": 5432,
-            "palletLocationId": 2345,
-            "palletLocationName": "BREW1-2",
-            "quickPick": false,
-            "salesFloorLocationId": 2345,
-            "salesFloorLocationName": "BREW1-2",
-            "status": "accepted pick",
-            "upcNbr": "000052900004",
-          },
-        ]
-      }
-      title="BREW(1)"
-    />
-    <ListGroup
-      groupItems={true}
-      pickListItems={
-        Array [
-          Object {
-            "assignedAssociate": "Associate 1",
-            "category": 71,
-            "createTS": "10:32 AM 02/04/2022",
-            "createdBy": "Associate 1",
-            "id": 418,
-            "itemDesc": "Teapot",
-            "itemNbr": 734,
-            "moveToFront": true,
-            "palletId": 4321,
-            "palletLocationId": 1672,
-            "palletLocationName": "C1-2",
-            "quickPick": false,
-            "salesFloorLocationId": 1673,
-            "salesFloorLocationName": "C1-3",
-            "status": "accepted pick",
-            "upcNbr": "000041800003",
-          },
-          Object {
-            "assignedAssociate": "vn51wu8",
-            "category": 46,
-            "createTS": "10:32 AM 03/04/2022",
-            "createdBy": "Associate 2",
-            "id": 4,
-            "itemDesc": "Candy",
-            "itemNbr": 7344,
-            "moveToFront": true,
-            "palletId": 4321,
-            "palletLocationId": 1672,
-            "palletLocationName": "C1-2-1",
-            "quickPick": false,
-            "salesFloorLocationId": 1673,
-            "salesFloorLocationName": "C1-3",
-            "status": "accepted pick",
-            "upcNbr": "000041800004",
-          },
-        ]
-      }
-      title="C(2)"
-    />
-  </View>
+  <FlatList
+    data={
+      Array [
+        "assignedToMe",
+        "BREW",
+        "C",
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
   <View
     style={
       Object {
@@ -121,11 +44,11 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
   </View>
-</View>
+</ForwardRef(SafeAreaView)>
 `;
 
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component without AssignedToMe List and zone 1`] = `
-<View
+<ForwardRef(SafeAreaView)
   style={
     Object {
       "flex": 1,
@@ -134,65 +57,27 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     }
   }
 >
-  <View>
-    <ListGroup
-      groupItems={true}
-      pickListItems={Array []}
-      title="[missing \\"en.PICKING.ASSIGNED_TO_ME\\" translation](0)"
-    />
-    <ListGroup
-      groupItems={true}
-      pickListItems={
-        Array [
-          Object {
-            "assignedAssociate": "Associate 1",
-            "category": 71,
-            "createTS": "4:25 PM 02/09/2022",
-            "createdBy": "Manager 1",
-            "id": 3,
-            "itemDesc": "Swiffer",
-            "itemNbr": 845,
-            "moveToFront": true,
-            "palletId": 5432,
-            "palletLocationId": 2345,
-            "palletLocationName": "BREW1-2",
-            "quickPick": false,
-            "salesFloorLocationId": 2345,
-            "salesFloorLocationName": "BREW1-2",
-            "status": "accepted pick",
-            "upcNbr": "000052900004",
-          },
-        ]
-      }
-      title="BREW(1)"
-    />
-    <ListGroup
-      groupItems={true}
-      pickListItems={
-        Array [
-          Object {
-            "assignedAssociate": "Associate 1",
-            "category": 71,
-            "createTS": "10:32 AM 02/04/2022",
-            "createdBy": "Associate 1",
-            "id": 418,
-            "itemDesc": "Teapot",
-            "itemNbr": 734,
-            "moveToFront": true,
-            "palletId": 4321,
-            "palletLocationId": 1672,
-            "palletLocationName": "C1-2",
-            "quickPick": false,
-            "salesFloorLocationId": 1673,
-            "salesFloorLocationName": "C1-3",
-            "status": "accepted pick",
-            "upcNbr": "000041800003",
-          },
-        ]
-      }
-      title="C(1)"
-    />
-  </View>
+  <FlatList
+    data={
+      Array [
+        "assignedToMe",
+        "BREW",
+        "C",
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
   <View
     style={
       Object {
@@ -206,5 +91,5 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
   </View>
-</View>
+</ForwardRef(SafeAreaView)>
 `;

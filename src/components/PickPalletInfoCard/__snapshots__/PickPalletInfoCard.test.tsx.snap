@@ -44,6 +44,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}
@@ -96,6 +97,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}
@@ -148,6 +150,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}
@@ -200,6 +203,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}
@@ -252,6 +256,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}
@@ -304,6 +309,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}
@@ -356,6 +362,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}
@@ -408,6 +415,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}
@@ -460,6 +468,7 @@ exports[`Pick pallet info card render tests renders the card with items (some fi
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}
