@@ -9,7 +9,6 @@ export interface PalletItem {
   newQuantity?: number;
   deleted: boolean;
   added: boolean;
-  categoryNbr?: number;
 }
 
 export interface CombinePallet {
