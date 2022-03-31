@@ -116,7 +116,7 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
           />
         </View> : null}
         <View style={styles.switchContainer}>
-          <Text>
+          <Text style={styles.quickPickText}>
             {strings('PICKING.QUICK_PICK')}
           </Text>
           <Switch

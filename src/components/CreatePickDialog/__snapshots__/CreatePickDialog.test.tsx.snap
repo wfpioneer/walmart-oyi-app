@@ -34,6 +34,7 @@ exports[`Test createPickDialog Component Renders the createPickDialog component 
   <Text
     style={
       Object {
+        "fontSize": 18,
         "textAlign": "center",
       }
     }
@@ -95,13 +96,20 @@ exports[`Test createPickDialog Component Renders the createPickDialog component 
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "center",
-        "marginBottom": 10,
+        "marginBottom": 20,
         "marginHorizontal": 20,
+        "marginTop": 10,
         "paddingHorizontal": 10,
       }
     }
   >
-    <Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+        }
+      }
+    >
       [missing "en.PICKING.QUICK_PICK" translation]
     </Text>
     <Switch
@@ -176,6 +184,7 @@ exports[`Test createPickDialog Component Renders the createPickDialog component 
   <Text
     style={
       Object {
+        "fontSize": 18,
         "textAlign": "center",
       }
     }
@@ -214,13 +223,20 @@ exports[`Test createPickDialog Component Renders the createPickDialog component 
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "center",
-        "marginBottom": 10,
+        "marginBottom": 20,
         "marginHorizontal": 20,
+        "marginTop": 10,
         "paddingHorizontal": 10,
       }
     }
   >
-    <Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+        }
+      }
+    >
       [missing "en.PICKING.QUICK_PICK" translation]
     </Text>
     <Switch

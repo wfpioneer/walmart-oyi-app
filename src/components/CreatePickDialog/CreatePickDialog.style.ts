@@ -17,7 +17,11 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   locationText: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 18
+  },
+  quickPickText: {
+    fontSize: 18
   },
   numericSelectorContainer: {
     justifyContent: 'center',
@@ -30,7 +34,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 20,
-    marginBottom: 10,
+    marginTop: 10,
+    marginBottom: 20,
     paddingHorizontal: 10
   },
   buttonContainer: {
