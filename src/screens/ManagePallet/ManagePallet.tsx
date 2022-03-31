@@ -212,6 +212,8 @@ export const handleUpdateItems = (items: PalletItem[], palletInfo: PalletInfo, d
       palletId: palletInfo.id,
       palletItem: updatePalletItems,
       palletExpiration: palletInfo.newExpirationDate
+        ? new Date(palletInfo.newExpirationDate).toISOString()
+        : undefined
     }));
   }
 };
@@ -354,9 +356,6 @@ export const updatePalletApisHook = (
         }
         return item;
       });
-      if (newExpirationDate) {
-        dispatch(updatePalletExpirationDate());
-      }
     } else {
       totalResponses.set('ERROR', addResponse);
     }
@@ -373,9 +372,6 @@ export const updatePalletApisHook = (
         }
         return item;
       });
-      if (newExpirationDate) {
-        dispatch(updatePalletExpirationDate());
-      }
     } else {
       totalResponses.set('ERROR', updateResponse);
     }
@@ -411,6 +407,9 @@ export const updatePalletApisHook = (
         position: 'bottom'
       });
     } else if (totalResponses.keys().next().value === 'SUCCESS') {
+      if (newExpirationDate) {
+        dispatch(updatePalletExpirationDate());
+      }
       Toast.show({
         type: 'success',
         text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
