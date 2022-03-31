@@ -205,7 +205,9 @@ export const handleUpdateItems = (items: PalletItem[], palletInfo: PalletInfo, d
   const updatePalletItems = items.filter(item => isQuantityChanged(item) && !item.added && !item.deleted)
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
 
-  if (updatePalletItems.length > 0 || isExpiryDateChanged(palletInfo)) {
+  const isAddNoUpdate = items.some(item => item.added) && !updatePalletItems.length;
+
+  if (updatePalletItems.length > 0 || (isExpiryDateChanged(palletInfo) && !isAddNoUpdate)) {
     dispatch(updatePalletItemQty({
       palletId: palletInfo.id,
       palletItem: updatePalletItems,
@@ -352,6 +354,9 @@ export const updatePalletApisHook = (
         }
         return item;
       });
+      if (newExpirationDate) {
+        dispatch(updatePalletExpirationDate());
+      }
     } else {
       totalResponses.set('ERROR', addResponse);
     }
