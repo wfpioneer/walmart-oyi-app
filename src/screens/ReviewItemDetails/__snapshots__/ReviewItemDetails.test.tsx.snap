@@ -1184,6 +1184,71 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       setOhQtyModalVisible={[MockFunction]}
     />
   </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <CreatePickDialog
+      isQuickPick={false}
+      locations={
+        Array [
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-1",
+            "sectionId": 1,
+            "sectionName": "1",
+            "type": "Sales Floor",
+            "typeNbr": 8,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 0,
+            "aisleName": "1",
+            "locationName": "A1-2",
+            "sectionId": 2,
+            "sectionName": "2",
+            "type": "End Cap",
+            "typeNbr": 12,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-3",
+            "sectionId": 3,
+            "sectionName": "3",
+            "type": "Pod",
+            "typeNbr": 13,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-4",
+            "sectionId": 4,
+            "sectionName": "4",
+            "type": "Display",
+            "typeNbr": 11,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+        ]
+      }
+      numberOfPallets={1}
+      onClose={[Function]}
+      onSubmit={[Function]}
+      selectedSection=""
+      setIsQuickPick={[MockFunction]}
+      setNumberOfPallets={[MockFunction]}
+      setSelectedSection={[MockFunction]}
+    />
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -1850,6 +1915,71 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       setOhQtyModalVisible={[MockFunction]}
     />
   </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <CreatePickDialog
+      isQuickPick={false}
+      locations={
+        Array [
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-1",
+            "sectionId": 1,
+            "sectionName": "1",
+            "type": "Sales Floor",
+            "typeNbr": 8,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 0,
+            "aisleName": "1",
+            "locationName": "A1-2",
+            "sectionId": 2,
+            "sectionName": "2",
+            "type": "End Cap",
+            "typeNbr": 12,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-3",
+            "sectionId": 3,
+            "sectionName": "3",
+            "type": "Pod",
+            "typeNbr": 13,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-4",
+            "sectionId": 4,
+            "sectionName": "4",
+            "type": "Display",
+            "typeNbr": 11,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+        ]
+      }
+      numberOfPallets={1}
+      onClose={[Function]}
+      onSubmit={[Function]}
+      selectedSection=""
+      setIsQuickPick={[MockFunction]}
+      setNumberOfPallets={[MockFunction]}
+      setSelectedSection={[MockFunction]}
+    />
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -2295,6 +2425,71 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       setOhQtyModalVisible={[MockFunction]}
     />
   </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <CreatePickDialog
+      isQuickPick={false}
+      locations={
+        Array [
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-1",
+            "sectionId": 1,
+            "sectionName": "1",
+            "type": "Sales Floor",
+            "typeNbr": 8,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 0,
+            "aisleName": "1",
+            "locationName": "A1-2",
+            "sectionId": 2,
+            "sectionName": "2",
+            "type": "End Cap",
+            "typeNbr": 12,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-3",
+            "sectionId": 3,
+            "sectionName": "3",
+            "type": "Pod",
+            "typeNbr": 13,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-4",
+            "sectionId": 4,
+            "sectionName": "4",
+            "type": "Display",
+            "typeNbr": 11,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+        ]
+      }
+      numberOfPallets={1}
+      onClose={[Function]}
+      onSubmit={[Function]}
+      selectedSection=""
+      setIsQuickPick={[MockFunction]}
+      setNumberOfPallets={[MockFunction]}
+      setSelectedSection={[MockFunction]}
+    />
+  </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -2596,6 +2791,71 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       exceptionType="nsfl"
       ohQty={42}
       setOhQtyModalVisible={[MockFunction]}
+    />
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <CreatePickDialog
+      isQuickPick={false}
+      locations={
+        Array [
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-1",
+            "sectionId": 1,
+            "sectionName": "1",
+            "type": "Sales Floor",
+            "typeNbr": 8,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 0,
+            "aisleName": "1",
+            "locationName": "A1-2",
+            "sectionId": 2,
+            "sectionName": "2",
+            "type": "End Cap",
+            "typeNbr": 12,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-3",
+            "sectionId": 3,
+            "sectionName": "3",
+            "type": "Pod",
+            "typeNbr": 13,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-4",
+            "sectionId": 4,
+            "sectionName": "4",
+            "type": "Display",
+            "typeNbr": 11,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+        ]
+      }
+      numberOfPallets={1}
+      onClose={[Function]}
+      onSubmit={[Function]}
+      selectedSection=""
+      setIsQuickPick={[MockFunction]}
+      setNumberOfPallets={[MockFunction]}
+      setSelectedSection={[MockFunction]}
     />
   </CustomModalComponent>
   <ScrollView
@@ -3041,6 +3301,71 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       exceptionType="nsfl"
       ohQty={42}
       setOhQtyModalVisible={[MockFunction]}
+    />
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <CreatePickDialog
+      isQuickPick={false}
+      locations={
+        Array [
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-1",
+            "sectionId": 1,
+            "sectionName": "1",
+            "type": "Sales Floor",
+            "typeNbr": 8,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 0,
+            "aisleName": "1",
+            "locationName": "A1-2",
+            "sectionId": 2,
+            "sectionName": "2",
+            "type": "End Cap",
+            "typeNbr": 12,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-3",
+            "sectionId": 3,
+            "sectionName": "3",
+            "type": "Pod",
+            "typeNbr": 13,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+          Object {
+            "aisleId": 1,
+            "aisleName": "1",
+            "locationName": "A1-4",
+            "sectionId": 4,
+            "sectionName": "4",
+            "type": "Display",
+            "typeNbr": 11,
+            "zoneId": 0,
+            "zoneName": "A",
+          },
+        ]
+      }
+      numberOfPallets={1}
+      onClose={[Function]}
+      onSubmit={[Function]}
+      selectedSection=""
+      setIsQuickPick={[MockFunction]}
+      setNumberOfPallets={[MockFunction]}
+      setSelectedSection={[MockFunction]}
     />
   </CustomModalComponent>
   <ScrollView

@@ -378,8 +378,9 @@ export default {
     SCAN_ITEM_LABEL: 'Scan item to add to picklist',
     SELECT_LOCATION: 'Select a Location',
     NUMBER_PALLETS: 'Number of Pallets',
-    CREATE_PICK: 'Create Pick',
-    MOVE_TO_FRONT: 'Move to Front'
+    QUICK_PICK: 'Quick Pick',
+    MOVE_TO_FRONT: 'Move to Front',
+    CREATE_PICK: 'Create Pick'
   },
   BINNING: {
     BINNING: 'Binning',
