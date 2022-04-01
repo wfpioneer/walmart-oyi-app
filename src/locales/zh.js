@@ -44,7 +44,7 @@ export default {
     ITEM: '商品',
     ITEMS: '多个商品',
     TOOLS: '工具箱',
-    OR: '或者',
+    OR: '要么',
     CURRENCY_SYMBOL: '¥',
     UNDO: '未处理',
     YES: '是',
@@ -376,7 +376,8 @@ export default {
     SELECT_LOCATION: '选择货架位置',
     NUMBER_PALLETS: '卡板数量',
     CREATE_PICK: '创建补货',
-    MOVE_TO_FRONT: '移到最前'
+    MOVE_TO_FRONT: '移到最前',
+    QUICK_PICK: '快速拣货'
   },
   BINNING: {
     BINNING: '上架',
