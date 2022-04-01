@@ -16,9 +16,11 @@ describe('Pick pallet info card render tests', () => {
       itemNbr: 54321,
       moveToFront: true,
       palletId: 3,
-      palletLocation: 'ABAR1-1',
+      palletLocationId: 2346,
+      palletLocationName: 'ABAR1-1',
       quickPick: true,
-      salesFloorLocation: 'ABAR1-2',
+      salesFloorLocationId: 2344,
+      salesFloorLocationName: 'ABAR1-2',
       status: PickStatus.ACCEPTED_BIN,
       upcNbr: '725181009016'
     },
@@ -32,9 +34,11 @@ describe('Pick pallet info card render tests', () => {
       itemNbr: 12345,
       moveToFront: true,
       palletId: 4,
-      palletLocation: 'ABAR1-2',
+      palletLocationId: 2345,
+      palletLocationName: 'ABAR1-2',
       quickPick: false,
-      salesFloorLocation: 'ABAR1-1',
+      salesFloorLocationName: 'ABAR1-1',
+      salesFloorLocationId: 2345,
       status: PickStatus.ACCEPTED_PICK,
       upcNbr: '02520568'
     }

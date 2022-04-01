@@ -44,7 +44,7 @@ export default {
     ITEM: 'Artículo',
     ITEMS: 'Artículos',
     TOOLS: 'Herramientas',
-    OR: 'O', // TODO Crosscheck spanish translation with confluence
+    OR: 'O',
     CURRENCY_SYMBOL: '$',
     UNDO: 'Deshacer',
     YES: 'Sí',
@@ -371,12 +371,14 @@ export default {
     COMPLETE: 'Completado',
     DELETED: 'Borrado',
     NO_PALLETS_FOUND: 'No se encontraron pallets',
+    ASSIGNED_TO_ME: 'Asignado a mi',
     BIN: 'Ingresar a Bodega',
     SCAN_ITEM_LABEL: 'Escanea el artículo para agregarlo a la lista de pickeos',
     SELECT_LOCATION: 'Elige una ubicación',
     NUMBER_PALLETS: 'Número de pallets',
     CREATE_PICK: 'Crear un Pick',
-    MOVE_TO_FRONT: 'Llevar al frente'
+    MOVE_TO_FRONT: 'Llevar al frente',
+    QUICK_PICK: 'Pickeo rápido'
   },
   BINNING: {
     BINNING: 'Bodega',
