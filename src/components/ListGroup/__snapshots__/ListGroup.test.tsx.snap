@@ -202,8 +202,8 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
     <FlatList
       data={
         Array [
-          "4321",
           "5432",
+          "4321",
         ]
       }
       disableVirtualization={false}

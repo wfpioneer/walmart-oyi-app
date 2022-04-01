@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { groupBy, head } from 'lodash';
+import { groupBy, head, uniq } from 'lodash';
 import {
   NavigationProp, useNavigation
 } from '@react-navigation/native';
@@ -44,7 +44,7 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
 };
 
 const sortPickListByPalletLocation = (items: PickListItem[]) => (items.sort(
-  (a, b) => (a.palletLocationName > b.palletLocationName ? -1 : 1)
+  (a, b) => (a.palletLocationName > b.palletLocationName ? 1 : -1)
 ));
 
 const sortPickListByCreatedDate = (items: PickListItem[]) => (items.sort(
@@ -70,12 +70,14 @@ const renderPickPalletInfoList = (items: PickListItem[], navigation: NavigationP
 };
 
 const renderGroupItems = (items: PickListItem[], navigation: NavigationProp<any>) => {
-  const pickListItems = getGroupItemsBasedOnPallet(items);
-  const groupedPickListKeys = Object.keys(pickListItems);
+  const groupedItemList = getGroupItemsBasedOnPallet(items);
+  const sortedPalletIdsBasedonLocation = uniq(
+    sortPickListByPalletLocation(items).map(item => item.palletId.toString())
+  );
   return (
     <FlatList
-      data={groupedPickListKeys}
-      renderItem={({ item }) => renderPickPalletInfoList(pickListItems[item], navigation)}
+      data={sortedPalletIdsBasedonLocation}
+      renderItem={({ item }) => renderPickPalletInfoList(groupedItemList[item], navigation)}
       scrollEnabled={false}
       keyExtractor={(item, index) => `ListGroup-${item}-${index}`}
     />
