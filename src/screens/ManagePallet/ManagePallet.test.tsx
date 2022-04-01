@@ -519,9 +519,9 @@ describe('ManagePalletScreen', () => {
         mockDispatch,
         mockNewExpirationDate
       );
-      expect(mockDispatch).toBeCalledTimes(6);
+      expect(mockDispatch).toBeCalledTimes(5);
       expect(hideActivityModal).toBeCalledTimes(1);
-      expect(updatePalletExpirationDate).toBeCalledTimes(1);
+      expect(updatePalletExpirationDate).toBeCalledTimes(0);
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(partialToastProps)
       );
