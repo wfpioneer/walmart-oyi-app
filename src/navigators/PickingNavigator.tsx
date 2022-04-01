@@ -8,7 +8,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import PickBinTab from '../screens/PickBinTab/PickBinTabScreen';
-import QuickPickTab from '../screens/QuickPickTab/QuickPickTabScreen';
+import QuickPickTab from '../screens/QuickPickTab/QuickPickTab';
 import SalesFloorTab from '../screens/SalesFloorTab/SalesFloorTabScreen';
 import { setManualScan } from '../state/actions/Global';
 import styles from './PickingNavigator.style';
@@ -45,7 +45,7 @@ export const PickTabNavigator = (props: {
       <Tab.Screen
         name="QuickPick"
         options={{
-          title: strings('PICKING.QUICKPICK')
+          title: `${strings('PICKING.QUICKPICK')} (${quickPickList.length})`
         }}
         component={QuickPickTab}
       />
@@ -125,11 +125,12 @@ export const PickingNavigatorStack = (
 const PickingNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const picklist = useTypedSelector(state => state.Picking.pickList);
   return (
     <PickingNavigatorStack
       dispatch={dispatch}
       isManualScanEnabled={isManualScanEnabled}
-      picklist={mockPickLists}
+      picklist={picklist}
     />
   );
 };
