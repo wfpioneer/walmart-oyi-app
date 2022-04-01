@@ -37,7 +37,7 @@ export const PickTabNavigator = (props: {
         || item.status === PickStatus.READY_TO_PICK)
   );
   const salesFloorList = picklist.filter(
-    item => item.quickPick && item.status === PickStatus.READY_TO_WORK
+    item => !item.quickPick && item.status === PickStatus.READY_TO_WORK
   );
 
   return (
@@ -61,8 +61,9 @@ export const PickTabNavigator = (props: {
         options={{
           title: strings('ITEM.SALES_FLOOR_QTY')
         }}
-        component={SalesFloorTab}
-      />
+      >
+        {() => <SalesFloorTab picklist={salesFloorList} />}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 };
@@ -87,7 +88,6 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
-// TODO implement PickListTab navigator https://jira.walmart.com/browse/INTLSAOPS-5446
 export const PickingNavigatorStack = (
   props: PickingNavigatorProps
 ): JSX.Element => {

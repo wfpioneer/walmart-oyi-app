@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import {
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View
+  FlatList, Text, TouchableOpacity, View
 } from 'react-native';
-import { groupBy } from 'lodash';
+import { groupBy, head } from 'lodash';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PickPalletInfoCard from '../PickPalletInfoCard/PickPalletInfoCard';
 import { PickListItem } from '../../models/Picking.d';
@@ -21,7 +18,7 @@ interface ListGroupProps {
 interface CollapsibleCardProps {
   title: string;
   isOpened: boolean;
-  toggleIsOpened: React.Dispatch<React.SetStateAction<boolean>>
+  toggleIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
@@ -31,7 +28,7 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
   return (
     <>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>{ title }</Text>
+        <Text style={styles.titleText}>{title}</Text>
       </View>
       <TouchableOpacity testID="collapsible-card" style={styles.arrowView} onPress={() => toggleIsOpened(!isOpened)}>
         <MaterialIcons name={iconName} size={25} color={COLOR.BLACK} />
@@ -53,55 +50,65 @@ const getGroupItemsBasedOnPallet = (items: PickListItem[]) => {
   return groupBy(sortedItems, item => item.palletId);
 };
 
-const renderPickPalletInfoList = (items: PickListItem[]) => (
-  <FlatList
-    data={items}
-    renderItem={({ item }) => (
-      <PickPalletInfoCard
-        // TODO: Placeholder method for pickBinWorkflow Navigation
-        onPress={() => {}}
-        palletId={item.palletId}
-        palletLocation={item.palletLocationName}
-        pickListItems={[item]}
-        pickStatus={item.status}
-      />
-    )}
-    keyExtractor={(item, index) => `${item.id}-${index}`}
-  />
-);
+const renderPickPalletInfoList = (items: PickListItem[]) => {
+  const item = head(items);
+  return item ? (
+    <PickPalletInfoCard
+      // TODO: Placeholder method for pickBinWorkflow Navigation
+      onPress={() => console.log('navigate to pickBinWorkFlow??')}
+      palletId={item.palletId}
+      palletLocation={item.palletLocationName}
+      pickListItems={[item]}
+      pickStatus={item.status}
+    />
+  ) : null;
+};
 
 const renderGroupItems = (items: PickListItem[]) => {
   const pickListItems = getGroupItemsBasedOnPallet(items);
-  return Object.values(pickListItems).map(value => renderPickPalletInfoList(value));
+  const groupedPickListKeys = Object.keys(pickListItems);
+  return (
+    <FlatList
+      data={groupedPickListKeys}
+      renderItem={({ item }) => renderPickPalletInfoList(pickListItems[item])}
+      scrollEnabled={false}
+      keyExtractor={(item, index) => `ListGroup-${item}-${index}`}
+    />
+  );
 };
 
 const renderItems = (items: PickListItem[]) => {
   const pickListItems = sortPickListByCreatedDate(items);
   return (
-    pickListItems.map((item: PickListItem) => renderPickPalletInfoList([item]))
+    <FlatList
+      data={pickListItems}
+      renderItem={({ item }) => renderPickPalletInfoList([item])}
+      keyExtractor={(item, index) => `ListGroup-${item}-$${index}`}
+    />
   );
 };
 
 const ListGroup = (props: ListGroupProps): JSX.Element => {
-  const {
-    title,
-    pickListItems,
-    groupItems
-  } = props;
+  const { title, pickListItems, groupItems } = props;
 
   const [listGroupOpen, toggleListGroup] = useState(true);
 
   return (
     <View key={title}>
       <View style={styles.menuContainer}>
-        <CollapsibleCard title={title} isOpened={listGroupOpen} toggleIsOpened={toggleListGroup} />
+        <CollapsibleCard
+          title={title}
+          isOpened={listGroupOpen}
+          toggleIsOpened={toggleListGroup}
+        />
       </View>
-      {listGroupOpen
-        && (
+      {listGroupOpen && (
         <View>
-          {groupItems ? renderGroupItems(pickListItems) : renderItems(pickListItems)}
+          {groupItems
+            ? renderGroupItems(pickListItems)
+            : renderItems(pickListItems)}
         </View>
-        )}
+      )}
     </View>
   );
 };
