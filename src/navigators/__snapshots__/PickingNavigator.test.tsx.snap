@@ -46,7 +46,7 @@ exports[`Picking Navigator Renders the Pick TabNavigator 1`] = `
     name="QuickPick"
     options={
       Object {
-        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation]",
+        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation] (0)",
       }
     }
   />
