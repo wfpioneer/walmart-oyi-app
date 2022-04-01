@@ -6,6 +6,10 @@ import { mockPickLists } from '../../mockData/mockPickList';
 import { PickStatus } from '../../models/Picking.d';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
+jest.mock('@react-navigation/native', () => ({
+  ...jest.requireActual('@react-navigation/native') as any,
+  useNavigation: () => jest.fn
+}));
 
 describe('ListGroup', () => {
   describe('Tests rendering the ListGroup component', () => {

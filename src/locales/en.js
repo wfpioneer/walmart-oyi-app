@@ -372,6 +372,7 @@ export default {
     COMPLETE: 'Complete',
     DELETED: 'Deleted',
     NO_PALLETS_FOUND: 'No pallets found',
+    ASSIGNED_TO_ME: 'Assigned To Me',
     SELECT_LOCATION: 'Select a Location',
     NUMBER_PALLETS: 'Number of Pallets',
     QUICK_PICK: 'Quick Pick',

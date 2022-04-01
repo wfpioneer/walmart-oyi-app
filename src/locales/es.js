@@ -371,6 +371,7 @@ export default {
     COMPLETE: 'Completado',
     DELETED: 'Borrado',
     NO_PALLETS_FOUND: 'No se encontraron pallets',
+    ASSIGNED_TO_ME: 'Asignado a mi',
     BIN: 'Ingresar a Bodega',
     SCAN_ITEM_LABEL: 'Escanea el artículo para agregarlo a la lista de pickeos',
     SELECT_LOCATION: 'Elige una ubicación',

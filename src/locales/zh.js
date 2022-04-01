@@ -371,6 +371,7 @@ export default {
     COMPLETE: '完成',
     DELETED: '删除',
     NO_PALLETS_FOUND: '未发现卡板',
+    ASSIGNED_TO_ME: '分配给我',
     BIN: '上架',
     SCAN_ITEM_LABEL: '扫描商品添加到补货清单',
     SELECT_LOCATION: '选择货架位置',
