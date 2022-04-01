@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { strings } from '../../locales';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
+import PickItemInfo from '../PickItemInfoCard/PickItemInfoCard';
 import styles from './PickPalletInfoCard.style';
 
 interface PickPalletInfoProps {
@@ -28,12 +29,12 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
 
   const palletsItems = pickListItems.filter(item => item.palletId === palletId);
 
-  // TODO replace with pickpalletinfocard
   const renderItem = ({ item }: { item: PickListItem }) => (
-    <View style={styles.itemList}>
-      <Text>{item.itemDesc}</Text>
-      <Text>{item.itemNbr}</Text>
-    </View>
+    <PickItemInfo
+      pickListItem={item}
+      canDelete={true}
+      onDeletePressed={() => undefined}
+    />
   );
 
   const pickStatusString = () => pickStatus.toUpperCase().replace(/\s/g, '_');
