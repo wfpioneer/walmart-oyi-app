@@ -8,6 +8,7 @@ import {
   RenderProps, ReviewItemDetailsScreen, renderAddPicklistButton, renderBarcodeErrorModal,
   renderLocationComponent, renderOHQtyComponent, renderScanForNoActionButton
 } from './ReviewItemDetails';
+import { mockConfig } from '../../mockData/mockConfig';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
@@ -32,7 +33,8 @@ describe('ReviewItemDetailsScreen', () => {
     actionCompleted: false,
     isManualScanEnabled: false,
     addToPicklistStatus: defaultAsyncState,
-    completeItemApi: defaultAsyncState
+    completeItemApi: defaultAsyncState,
+    userConfigs: mockConfig
   };
   describe('Tests renders ItemDetails API Responses', () => {
     it('renders the details for a single item with non-null status', () => {
@@ -70,6 +72,15 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          userConfigs={mockConfig}
+          createPickModalVisible={false}
+          setCreatePickModalVisible={jest.fn()}
+          selectedSection={''}
+          setSelectedSection={jest.fn()}
+          numberOfPallets={1}
+          setNumberOfPallets={jest.fn()}
+          isQuickPick={false}
+          setIsQuickPick={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -112,6 +123,15 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          userConfigs={mockConfig}
+          createPickModalVisible={false}
+          setCreatePickModalVisible={jest.fn()}
+          selectedSection={''}
+          setSelectedSection={jest.fn()}
+          numberOfPallets={1}
+          setNumberOfPallets={jest.fn()}
+          isQuickPick={false}
+          setIsQuickPick={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -155,6 +175,15 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={['']}
+          userConfigs={mockConfig}
+          createPickModalVisible={false}
+          setCreatePickModalVisible={jest.fn()}
+          selectedSection={''}
+          setSelectedSection={jest.fn()}
+          numberOfPallets={1}
+          setNumberOfPallets={jest.fn()}
+          isQuickPick={false}
+          setIsQuickPick={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -197,6 +226,15 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={['on hands change']}
+          userConfigs={mockConfig}
+          createPickModalVisible={false}
+          setCreatePickModalVisible={jest.fn()}
+          selectedSection={''}
+          setSelectedSection={jest.fn()}
+          numberOfPallets={1}
+          setNumberOfPallets={jest.fn()}
+          isQuickPick={false}
+          setIsQuickPick={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -233,6 +271,15 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          userConfigs={mockConfig}
+          createPickModalVisible={false}
+          setCreatePickModalVisible={jest.fn()}
+          selectedSection={''}
+          setSelectedSection={jest.fn()}
+          numberOfPallets={1}
+          setNumberOfPallets={jest.fn()}
+          isQuickPick={false}
+          setIsQuickPick={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -273,6 +320,15 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          userConfigs={mockConfig}
+          createPickModalVisible={false}
+          setCreatePickModalVisible={jest.fn()}
+          selectedSection={''}
+          setSelectedSection={jest.fn()}
+          numberOfPallets={1}
+          setNumberOfPallets={jest.fn()}
+          isQuickPick={false}
+          setIsQuickPick={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -309,6 +365,15 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          userConfigs={mockConfig}
+          createPickModalVisible={false}
+          setCreatePickModalVisible={jest.fn()}
+          selectedSection={''}
+          setSelectedSection={jest.fn()}
+          numberOfPallets={1}
+          setNumberOfPallets={jest.fn()}
+          isQuickPick={false}
+          setIsQuickPick={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -348,6 +413,15 @@ describe('ReviewItemDetailsScreen', () => {
           useEffectHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           userFeatures={[]}
+          userConfigs={mockConfig}
+          createPickModalVisible={false}
+          setCreatePickModalVisible={jest.fn()}
+          selectedSection={''}
+          setSelectedSection={jest.fn()}
+          numberOfPallets={1}
+          setNumberOfPallets={jest.fn()}
+          isQuickPick={false}
+          setIsQuickPick={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -429,7 +503,7 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: itemDetail[123].location.floor,
           reserveLocations: itemDetail[123].location.reserve
-        }, itemDetail[123])
+        }, itemDetail[123], jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -440,7 +514,7 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: itemDetail[123].location.floor,
           reserveLocations: []
-        }, itemDetail[123])
+        }, itemDetail[123], jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -451,7 +525,7 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: [],
           reserveLocations: itemDetail[123].location.reserve
-        }, itemDetail[123])
+        }, itemDetail[123], jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -463,12 +537,13 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: [],
           reserveLocations: []
-        }, itemDetail[123])
+        }, itemDetail[123], jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
-
+  //TODO once create pick dialog and api are fully implemented into item review screen we need to add tests for
+  //TODO testing the api when picking is enabled
   describe('Tests rendering for Adding an Item to the Picklist', () => {
     it('renders \'Item Added to Picklist \'', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -488,7 +563,7 @@ describe('ReviewItemDetailsScreen', () => {
         renderAddPicklistButton({
           ...mockHandleProps,
           addToPicklistStatus: addPicklistResult
-        }, itemDetail[123])
+        }, itemDetail[123], jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -505,7 +580,7 @@ describe('ReviewItemDetailsScreen', () => {
         renderAddPicklistButton({
           ...mockHandleProps,
           addToPicklistStatus: addPicklistError
-        }, itemDetail[123])
+        }, itemDetail[123], jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -522,7 +597,7 @@ describe('ReviewItemDetailsScreen', () => {
         renderAddPicklistButton({
           ...mockHandleProps,
           addToPicklistStatus: addPicklistError
-        }, itemDetail[123])
+        }, itemDetail[123], jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -539,7 +614,7 @@ describe('ReviewItemDetailsScreen', () => {
       renderer.render(
         renderAddPicklistButton({
           ...mockHandleProps
-        }, noReserveItemDetails)
+        }, noReserveItemDetails, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

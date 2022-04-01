@@ -373,12 +373,13 @@ export default {
     DELETED: 'Deleted',
     NO_PALLETS_FOUND: 'No pallets found',
     ASSIGNED_TO_ME: 'Assigned To Me',
-    BIN: 'Bin',
-    SCAN_ITEM_LABEL: 'Scan item to add to picklist',
     SELECT_LOCATION: 'Select a Location',
     NUMBER_PALLETS: 'Number of Pallets',
+    QUICK_PICK: 'Quick Pick',
+    MOVE_TO_FRONT: 'Move to Front',
     CREATE_PICK: 'Create Pick',
-    MOVE_TO_FRONT: 'Move to Front'
+    BIN: 'Bin',
+    SCAN_ITEM_LABEL: 'Scan item to add to picklist'
   },
   BINNING: {
     BINNING: 'Binning',
