@@ -140,24 +140,6 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
             "status": "accepted pick",
             "upcNbr": "000041800003",
           },
-        ]
-      }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
-      keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
-      renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
-    />
-    <FlatList
-      data={
-        Array [
           Object {
             "assignedAssociate": "Associate 1",
             "category": 71,
@@ -187,6 +169,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}
@@ -219,42 +202,8 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
     <FlatList
       data={
         Array [
-          Object {
-            "assignedAssociate": "Associate 2",
-            "category": 46,
-            "createTS": "10:32 AM 03/04/2022",
-            "createdBy": "Associate 2",
-            "id": 4,
-            "itemDesc": "Candy",
-            "itemNbr": 7344,
-            "moveToFront": true,
-            "palletId": 4321,
-            "palletLocationId": 1672,
-            "palletLocationName": "C1-2-1",
-            "quickPick": false,
-            "salesFloorLocationId": 1673,
-            "salesFloorLocationName": "C1-3",
-            "status": "accepted pick",
-            "upcNbr": "000041800004",
-          },
-          Object {
-            "assignedAssociate": "Associate 1",
-            "category": 71,
-            "createTS": "10:32 AM 02/04/2022",
-            "createdBy": "Associate 1",
-            "id": 418,
-            "itemDesc": "Teapot",
-            "itemNbr": 734,
-            "moveToFront": true,
-            "palletId": 4321,
-            "palletLocationId": 1672,
-            "palletLocationName": "C1-2",
-            "quickPick": false,
-            "salesFloorLocationId": 1673,
-            "salesFloorLocationName": "C1-3",
-            "status": "accepted pick",
-            "upcNbr": "000041800003",
-          },
+          "5432",
+          "4321",
         ]
       }
       disableVirtualization={false}
@@ -266,42 +215,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
-    />
-    <FlatList
-      data={
-        Array [
-          Object {
-            "assignedAssociate": "Associate 1",
-            "category": 71,
-            "createTS": "4:25 PM 02/09/2022",
-            "createdBy": "Manager 1",
-            "id": 3,
-            "itemDesc": "Swiffer",
-            "itemNbr": 845,
-            "moveToFront": true,
-            "palletId": 5432,
-            "palletLocationId": 2345,
-            "palletLocationName": "BREW1-2",
-            "quickPick": false,
-            "salesFloorLocationId": 2345,
-            "salesFloorLocationName": "BREW1-2",
-            "status": "accepted pick",
-            "upcNbr": "000052900004",
-          },
-        ]
-      }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
-      keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
-      renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}
