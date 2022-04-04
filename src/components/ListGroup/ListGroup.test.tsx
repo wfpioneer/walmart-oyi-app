@@ -7,7 +7,11 @@ import { mockPickLists } from '../../mockData/mockPickList';
 import { PickStatus } from '../../models/Picking.d';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
-let navigationProp: NavigationProp<any>;
+jest.mock('@react-navigation/native', () => ({
+  ...jest.requireActual('@react-navigation/native') as any,
+  useNavigation: () => jest.fn
+}));
+
 describe('ListGroup', () => {
   describe('Tests rendering the ListGroup component', () => {
     it('Test renders the ListGroup component with groupItems prop as false', () => {
@@ -17,7 +21,6 @@ describe('ListGroup', () => {
           groupItems={false}
           pickListItems={mockPickLists}
           title="ABAR-2"
-          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -51,7 +54,6 @@ describe('ListGroup', () => {
           groupItems={true}
           pickListItems={newMockPickLists}
           title="ABAR-2"
-          navigation={navigationProp}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

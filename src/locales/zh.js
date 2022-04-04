@@ -44,7 +44,7 @@ export default {
     ITEM: '商品',
     ITEMS: '多个商品',
     TOOLS: '工具箱',
-    OR: '或者',
+    OR: '要么',
     CURRENCY_SYMBOL: '¥',
     UNDO: '未处理',
     YES: '是',
@@ -371,13 +371,15 @@ export default {
     COMPLETE: '完成',
     DELETED: '删除',
     NO_PALLETS_FOUND: '未发现卡板',
+    ASSIGNED_TO_ME: '分配给我',
     BIN: '上架',
     SCAN_ITEM_LABEL: '扫描商品添加到补货清单',
     SELECT_LOCATION: '选择货架位置',
     NUMBER_PALLETS: '卡板数量',
     CREATE_PICK: '创建补货',
     MOVE_TO_FRONT: '移到最前',
-    FRONT: '正面' // TODO Replace with mandarin translation on confluence
+    FRONT: '正面', // TODO Replace with mandarin translation on confluence
+    QUICK_PICK: '快速拣货'
   },
   BINNING: {
     BINNING: '上架',

@@ -7,7 +7,8 @@ import { useDispatch } from 'react-redux';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
-import PickBinTab from '../screens/PickBinTab/PickBinTabScreen';
+import PickBinTab from '../screens/PickBinTab/PickBinTab';
+import PickBinWorkflow from '../screens/PickBinWorkflow/PickBinWorkflowScreen';
 import QuickPickTab from '../screens/QuickPickTab/QuickPickTabScreen';
 import SalesFloorTab from '../screens/SalesFloorTab/SalesFloorTabScreen';
 import { setManualScan } from '../state/actions/Global';
@@ -118,6 +119,14 @@ export const PickingNavigatorStack = (
       >
         {() => <PickTabNavigator picklist={picklist} />}
       </Stack.Screen>
+      <Stack.Screen
+        name="PickBinWorkflow"
+        // TODO: Placeholder for PickBinWorkflow
+        component={PickBinWorkflow}
+        options={{
+          headerTitle: strings('PICKING.PICKING')
+        }}
+      />
     </Stack.Navigator>
   );
 };

@@ -38,7 +38,8 @@ class IconButton extends PureComponent {
       backgroundColor,
       radius,
       style,
-      icon
+      icon,
+      testID
     } = this.props;
     const containerStyle = width === -1
       ? { height }
@@ -85,6 +86,7 @@ class IconButton extends PureComponent {
             onPress={this.onPress}
             activeOpacity={0.8}
             style={buttonStyle}
+            testID={testID}
           >
             {icon}
           </TouchableOpacity>
@@ -103,7 +105,8 @@ IconButton.propTypes = {
   radius: PropTypes.number,
   style: PropTypes.object,
   type: PropTypes.number,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  testID: PropTypes.string
 };
 
 IconButton.defaultProps = {

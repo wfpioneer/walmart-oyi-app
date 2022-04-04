@@ -169,6 +169,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
       onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
+      scrollEnabled={false}
       scrollEventThrottle={50}
       updateCellsBatchingPeriod={50}
       windowSize={21}

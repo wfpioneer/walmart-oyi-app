@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import {
   FlatList, Text, TouchableOpacity, View
 } from 'react-native';
-import { groupBy } from 'lodash';
+import { groupBy, uniq } from 'lodash';
+import {
+  NavigationProp, useNavigation
+} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { NavigationProp } from '@react-navigation/native';
 import PickPalletInfoCard from '../PickPalletInfoCard/PickPalletInfoCard';
 import { PickListItem } from '../../models/Picking.d';
 import styles from './ListGroup.style';
@@ -14,7 +16,6 @@ interface ListGroupProps {
   title: string;
   pickListItems: PickListItem[];
   groupItems?: boolean;
-  navigation: NavigationProp<any>
 }
 
 interface CollapsibleCardProps {
@@ -43,8 +44,9 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
   );
 };
 
-const sortPickListByPalletLocation = (items: PickListItem[]) => (
-  items.sort((a, b) => (a.palletLocationName > b.palletLocationName ? -1 : 1)));
+const sortPickListByPalletLocation = (items: PickListItem[]) => (items.sort(
+  (a, b) => (a.palletLocationName > b.palletLocationName ? 1 : -1)
+));
 
 const sortPickListByCreatedDate = (items: PickListItem[]) => (
   items.sort(
@@ -64,22 +66,24 @@ const renderPickPalletInfoList = (
   return (
     <PickPalletInfoCard
       // TODO: Placeholder method for pickBinWorkflow Navigation
-      onPress={() => navigation.navigate('PickBinWorkFlow')}
+      onPress={() => navigation.navigate('PickBinWorkflow')}
       palletId={item.palletId}
       palletLocation={item.palletLocationName}
       pickListItems={items}
       pickStatus={item.status}
     />
-  );
+  )
 };
 
 const renderGroupItems = (items: PickListItem[], navigation: NavigationProp<any>) => {
-  const pickListItems = getGroupItemsBasedOnPallet(items);
-  const groupedPickListKeys = Object.keys(pickListItems);
+  const groupedItemList = getGroupItemsBasedOnPallet(items);
+  const sortedPalletIdsBasedonLocation = uniq(
+    sortPickListByPalletLocation(items).map(item => item.palletId.toString())
+  );
   return (
     <FlatList
-      data={groupedPickListKeys}
-      renderItem={({ item }) => renderPickPalletInfoList(pickListItems[item], navigation)}
+      data={sortedPalletIdsBasedonLocation}
+      renderItem={({ item }) => renderPickPalletInfoList(groupedItemList[item], navigation)}
       scrollEnabled={false}
       keyExtractor={(item, index) => `ListGroup-${item}-${index}`}
     />
@@ -92,19 +96,22 @@ const renderItems = (items: PickListItem[], navigation: NavigationProp<any>) => 
     <FlatList
       data={pickListItems}
       renderItem={({ item }) => renderPickPalletInfoList([item], navigation)}
-      keyExtractor={(item, index) => `ListGroup-${item}-$${index}`}
+      scrollEnabled={false}
+      keyExtractor={(item, index) => `ListGroup-${item}-${index}`}
     />
   );
 };
 
 const ListGroup = (props: ListGroupProps): JSX.Element => {
   const {
-    title, pickListItems, groupItems, navigation
+    title, pickListItems, groupItems
   } = props;
 
   const [listGroupOpen, toggleListGroup] = useState(true);
+  const navigation = useNavigation();
+
   return (
-    <View key={title}>
+    <View>
       <View style={styles.menuContainer}>
         <CollapsibleCard
           title={title}
@@ -114,9 +121,7 @@ const ListGroup = (props: ListGroupProps): JSX.Element => {
       </View>
       {listGroupOpen && (
         <View>
-          {groupItems
-            ? renderGroupItems(pickListItems, navigation)
-            : renderItems(pickListItems, navigation)}
+          {groupItems ? renderGroupItems(pickListItems, navigation) : renderItems(pickListItems, navigation)}
         </View>
       )}
     </View>
