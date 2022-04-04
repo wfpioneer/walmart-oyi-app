@@ -5,7 +5,7 @@ export default class DeletePalletUPCsService {
   public static deletePalletUPCs(payload: {
     palletId: number;
     upcs: string[],
-    expirationdate?: string,
+    expirationDate?: string,
     removeExpirationDate: boolean
   }) {
     const upcsUrlParam = payload.upcs.reduce((reducer, current, index, array) => {
@@ -19,7 +19,7 @@ export default class DeletePalletUPCsService {
     return Request.delete(
       `${urls.locationUrl}/pallet/${payload.palletId}/upc?${upcsUrlParam}`, {
         removeExpirationDate: payload.removeExpirationDate,
-        expirationDate: payload.expirationdate
+        expirationDate: payload.expirationDate
       }
     );
   }
