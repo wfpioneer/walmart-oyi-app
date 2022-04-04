@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react';
+import React, { Dispatch, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { TouchableOpacity, View } from 'react-native';
@@ -9,6 +9,7 @@ import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import PickBinTab from '../screens/PickBinTab/PickBinTab';
 import PickBinWorkflow from '../screens/PickBinWorkflow/PickBinWorkflowScreen';
+import CreatePick from '../screens/CreatePick/CreatePick';
 import QuickPickTab from '../screens/QuickPickTab/QuickPickTabScreen';
 import SalesFloorTab from '../screens/SalesFloorTab/SalesFloorTabScreen';
 import { setManualScan } from '../state/actions/Global';
@@ -19,15 +20,24 @@ import { mockPickLists } from '../mockData/mockPickList';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
+// eslint-disable-next-line no-shadow
+enum Tabs {
+  QUICKPICK,
+  PICK,
+  SALESFLOOR
+}
 interface PickingNavigatorProps {
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
   picklist: PickListItem[];
+  selectedTab: Tabs;
+  setSelectedTab: React.Dispatch<React.SetStateAction<Tabs>>
 }
 export const PickTabNavigator = (props: {
   picklist: PickListItem[];
+  setSelectedTab: React.Dispatch<React.SetStateAction<Tabs>>;
 }): JSX.Element => {
-  const { picklist } = props;
+  const { picklist, setSelectedTab } = props;
 
   const quickPickList = picklist.filter(item => item.quickPick);
   const pickBinList = picklist.filter(
@@ -48,6 +58,9 @@ export const PickTabNavigator = (props: {
         options={{
           title: strings('PICKING.QUICKPICK')
         }}
+        listeners={{
+          focus: () => setSelectedTab(Tabs.QUICKPICK)
+        }}
         component={QuickPickTab}
       />
       <Tab.Screen
@@ -55,12 +68,18 @@ export const PickTabNavigator = (props: {
         options={{
           title: strings('PICKING.PICK')
         }}
+        listeners={{
+          focus: () => setSelectedTab(Tabs.PICK)
+        }}
         component={PickBinTab}
       />
       <Tab.Screen
         name="SalesFloor"
         options={{
           title: strings('ITEM.SALES_FLOOR_QTY')
+        }}
+        listeners={{
+          focus: () => setSelectedTab(Tabs.SALESFLOOR)
         }}
         component={SalesFloorTab}
       />
@@ -92,7 +111,18 @@ export const renderScanButton = (
 export const PickingNavigatorStack = (
   props: PickingNavigatorProps
 ): JSX.Element => {
-  const { dispatch, isManualScanEnabled, picklist } = props;
+  const {
+    dispatch, isManualScanEnabled, picklist,
+    selectedTab, setSelectedTab
+  } = props;
+
+  let createPickTitle = '';
+  if (selectedTab === Tabs.PICK) {
+    createPickTitle = strings('PICKING.CREATE_PICK');
+  } else if (selectedTab === Tabs.QUICKPICK) {
+    createPickTitle = strings('CREATE_QUICK_PICK');
+  }
+
   return (
     <Stack.Navigator
       headerMode="float"
@@ -117,7 +147,7 @@ export const PickingNavigatorStack = (
           headerTitle: strings('PICKING.PICKING')
         }}
       >
-        {() => <PickTabNavigator picklist={picklist} />}
+        {() => <PickTabNavigator picklist={picklist} setSelectedTab={setSelectedTab} />}
       </Stack.Screen>
       <Stack.Screen
         name="PickBinWorkflow"
@@ -127,6 +157,13 @@ export const PickingNavigatorStack = (
           headerTitle: strings('PICKING.PICKING')
         }}
       />
+      <Stack.Screen
+        name="CreatePick"
+        options={{
+          headerTitle: createPickTitle
+        }}
+        component={CreatePick}
+      />
     </Stack.Navigator>
   );
 };
@@ -134,11 +171,14 @@ export const PickingNavigatorStack = (
 const PickingNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const [selectedTab, setSelectedTab] = useState<Tabs>(Tabs.PICK);
   return (
     <PickingNavigatorStack
       dispatch={dispatch}
       isManualScanEnabled={isManualScanEnabled}
       picklist={mockPickLists}
+      selectedTab={selectedTab}
+      setSelectedTab={setSelectedTab}
     />
   );
 };

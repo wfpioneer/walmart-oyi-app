@@ -4,6 +4,8 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PickingState } from '../../state/reducers/Picking';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
 import { strings } from '../../locales';
+import ItemDetails from '../../models/ItemDetails';
+import ItemInfo from '../../components/iteminfo/ItemInfo';
 
 interface CreatePickProps {
   picking: PickingState;
@@ -12,38 +14,65 @@ interface CreatePickProps {
 export const CreatePickScreen = (props: CreatePickProps) => {
   const { picking } = props;
 
-  const item: PickListItem = {
-    assignedAssociate: '',
-    category: 73,
-    createTS: 'Day before yesterday',
-    createdBy: 'me',
-    id: 8001,
-    itemDesc: 'treacle tart',
+  const item: ItemDetails = {
+    categoryNbr: 73,
+    itemName: 'treacle tart',
     itemNbr: 2,
-    moveToFront: false,
-    palletId: 12595,
-    palletLocationId: 5019,
-    palletLocationName: 'ABAR1-1',
-    quickPick: false,
-    salesFloorLocationId: 5019,
-    salesFloorLocationName: 'ABAR1-1',
-    status: PickStatus.READY_TO_PICK,
-    upcNbr: '8675309'
+    upcNbr: '8675309',
+    backroomQty: 765432,
+    basePrice: 4.92,
+    categoryDesc: 'Deli',
+    claimsOnHandQty: 765457,
+    completed: false,
+    consolidatedOnHandQty: 65346,
+    location: {
+      reserve: [
+        {
+          aisleId: 5018,
+          aisleName: '1',
+          locationName: 'ABAR1-1',
+          sectionId: 5019,
+          sectionName: '1',
+          type: 'reserve',
+          typeNbr: 1,
+          zoneId: 3632,
+          zoneName: 'ABAR'
+        }
+      ],
+      count: 1
+    },
+    onHandsQty: 76543234,
+    pendingOnHandsQty: 2984328947,
+    price: 4.92,
+    replenishment: {
+      onOrder: 100000
+    },
+    sales: {
+      daily: [{
+        day: 'Thursday',
+        value: 3
+      }],
+      dailyAvgSales: 500,
+      lastUpdateTs: 'right now',
+      weekly: [{
+        week: 34,
+        value: 654
+      }],
+      weeklyAvgSales: 3500
+    }
   };
 
-  const statusString = `PICKING.${item.status.toUpperCase().replace(/\s/g, '_')}`;
-
-  const itemCard = () => (
-    <View>
-      <Text>{item.itemDesc}</Text>
-      <Text>{`${strings('ITEM.ITEM')}: ${item.itemNbr}  |  ${strings('ITEM.UPC')}: ${item.upcNbr}`}</Text>
-      <Text>{`${strings('ITEM.STATUS')}: ${strings(statusString)}`}</Text>
-      <Text>{`${strings('ITEM.CATEGORY')}: ${item.category}`}</Text>
-    </View>
-  )
-
   return (
-    <SafeAreaView />
+    <SafeAreaView>
+      <ItemInfo
+        category={`${item.categoryNbr} - ${item.categoryDesc}`}
+        itemName={item.itemName}
+        itemNbr={item.itemNbr}
+        upcNbr={item.upcNbr}
+        price={item.price}
+        status={item.status || ''}
+      />
+    </SafeAreaView>
   );
 };
 
