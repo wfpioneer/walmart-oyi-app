@@ -377,7 +377,8 @@ export default {
     SELECT_LOCATION: 'Select a Location',
     NUMBER_PALLETS: 'Number of Pallets',
     CREATE_PICK: 'Create Pick',
-    MOVE_TO_FRONT: 'Move to Front'
+    MOVE_TO_FRONT: 'Move to Front',
+    FRONT: 'Front'
   },
   BINNING: {
     BINNING: 'Binning',

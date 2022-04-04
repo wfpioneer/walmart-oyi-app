@@ -26,7 +26,7 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
     <PickItemInfo
       pickListItem={item}
       canDelete={true}
-      onDeletePressed={() => console.log('Pass a proper delete function here')}
+      onDeletePressed={() => undefined} // TODO implement deleting an item from a pallet
     />
   );
 

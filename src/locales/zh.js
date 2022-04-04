@@ -376,7 +376,8 @@ export default {
     SELECT_LOCATION: '选择货架位置',
     NUMBER_PALLETS: '卡板数量',
     CREATE_PICK: '创建补货',
-    MOVE_TO_FRONT: '移到最前'
+    MOVE_TO_FRONT: '移到最前',
+    FRONT: '正面' // TODO Replace with mandarin translation on confluence
   },
   BINNING: {
     BINNING: '上架',

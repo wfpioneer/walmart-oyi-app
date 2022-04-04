@@ -19,7 +19,7 @@ const getZoneFromPalletLocation = (pickItem: PickListItem) => {
     : FRONT;
 };
 
-const SalesFloorTabScreen = (props: SalesFloorTabProps) => {
+export const SalesFloorTabScreen = (props: SalesFloorTabProps) => {
   const { picklist, navigation } = props;
 
   const listGroupMap: Map<string, PickListItem[]> = new Map().set(FRONT, []);
@@ -51,12 +51,12 @@ const SalesFloorTabScreen = (props: SalesFloorTabProps) => {
     .filter(keyName => keyName !== FRONT)
     .sort((a, b) => (a > b ? 1 : -1));
   // Set Front group as the first index
-  const allPickKeys = [FRONT, ...picklistZoneKeys];
+  const allPicklistKeys = [FRONT, ...picklistZoneKeys];
 
   return (
     <View>
       <FlatList
-        data={allPickKeys}
+        data={allPicklistKeys}
         renderItem={({ item }) => (
           <ListGroup
             title={`${item === FRONT ? strings('PICKING.FRONT') : item} (${
