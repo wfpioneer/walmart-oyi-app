@@ -44,7 +44,7 @@ export default class PalletManagementService {
       `${urls.locationUrl}/v1/pallet/${payload.palletId}/upc/qty`,
       {
         upcs: payload.palletItem,
-        expirationDate: `${moment(payload.palletExpiration).format('YYYY-MM-DDT00:00:00.000')}Z`
+        expirationDate: payload.palletExpiration
       }
     );
   }

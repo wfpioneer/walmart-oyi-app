@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Picking Navigator Renders and Calls the Manual Scan Button 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="manual-scan"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 15,
+      }
+    }
+  >
+    <Icon
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+  </View>
+</View>
+`;
+
+exports[`Picking Navigator Renders the Pick TabNavigator 1`] = `
+<MaterialTopTabNavigator
+  initialRouteName="Pick"
+>
+  <Screen
+    component={[Function]}
+    name="QuickPick"
+    options={
+      Object {
+        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="Pick"
+    options={
+      Object {
+        "title": "[missing \\"en.PICKING.PICK\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="SalesFloor"
+    options={
+      Object {
+        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+      }
+    }
+  />
+</MaterialTopTabNavigator>
+`;
+
+exports[`Picking Navigator Renders the Picking Navigator 1`] = `
+<StackNavigator
+  headerMode="float"
+  screenOptions={[Function]}
+>
+  <Screen
+    name="PickingTabs"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    component={[Function]}
+    name="PickBinWorkflow"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
+      }
+    }
+  />
+</StackNavigator>
+`;

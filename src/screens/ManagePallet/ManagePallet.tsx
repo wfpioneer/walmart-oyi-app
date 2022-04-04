@@ -201,15 +201,19 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   return null;
 };
 
-export const handleUpdateItems = (items: PalletItem[], palletInfo: PalletInfo, dispatch: Dispatch<any>): void => {
+export const handleUpdateItems = (
+  items: PalletItem[], palletInfo: PalletInfo, dispatch: Dispatch<any>, updatedExpirationDate?: string
+): void => {
   const updatePalletItems = items.filter(item => isQuantityChanged(item) && !item.added && !item.deleted)
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
 
-  if (updatePalletItems.length > 0 || isExpiryDateChanged(palletInfo)) {
+  const isAddNoUpdate = items.some(item => item.added) && !updatePalletItems.length;
+
+  if (updatePalletItems.length > 0 || (isExpiryDateChanged(palletInfo) && !isAddNoUpdate)) {
     dispatch(updatePalletItemQty({
       palletId: palletInfo.id,
       palletItem: updatePalletItems,
-      palletExpiration: palletInfo.newExpirationDate
+      palletExpiration: updatedExpirationDate
     }));
   }
 };
@@ -325,6 +329,7 @@ export const updatePalletApisHook = (
   deleteUpcsApi: AsyncState,
   items: PalletItem[],
   dispatch: Dispatch<any>,
+  newExpirationDate?: string
 ): void => {
   const addResponse: ApiResult | string = (addPalletUpcApi.result ?? addPalletUpcApi.error);
   const updateResponse: ApiResult | string = (updateItemQtyAPI.result ?? updateItemQtyAPI.error);
@@ -367,7 +372,6 @@ export const updatePalletApisHook = (
         }
         return item;
       });
-      dispatch(updatePalletExpirationDate());
     } else {
       totalResponses.set('ERROR', updateResponse);
     }
@@ -403,6 +407,9 @@ export const updatePalletApisHook = (
         position: 'bottom'
       });
     } else if (totalResponses.keys().next().value === 'SUCCESS') {
+      if (newExpirationDate) {
+        dispatch(updatePalletExpirationDate());
+      }
       Toast.show({
         type: 'success',
         text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
@@ -589,7 +596,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     updateItemQtyAPI,
     deleteUpcsApi,
     items,
-    dispatch
+    dispatch,
+    newExpirationDate
   ), [addPalletUpcApi, deleteUpcsApi, updateItemQtyAPI]);
   // Get Item Details UPC api
   useEffectHook(() => getItemDetailsApiHook(
@@ -616,8 +624,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const submit = () => {
     const palletId = id;
     const reducerInitialValue: string[] = [];
-    const updatedExpirationDate = newExpirationDate || expirationDate;
+    const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
     const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
+    // updated expiration date
+    const updatedExpirationDate = addExpiry ? `${moment(addExpiry).format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
     // Filter Items by deleted flag
     const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
       reducer.push(current.upcNbr);
@@ -626,23 +636,24 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     const payload = {
       palletId,
       upcs,
-      expirationDate: (!removeExpirationDateForPallet && updatedExpirationDate)
-        ? `${moment(updatedExpirationDate).format('YYYY-MM-DDT00:00:00.000')}Z` : undefined,
+      expirationDate: (!removeExpirationDateForPallet && addExpiry)
+        ? updatedExpirationDate : undefined,
       removeExpirationDate: removeExpirationDateForPallet
     };
 
     if (upcs.length > 0) {
       dispatch(deleteUpcs(payload));
     }
+
     // Calls add items to pallet via api
     handleAddItems(
       palletId,
       items,
       dispatch,
-      updatedExpirationDate ? `${moment(updatedExpirationDate).format('YYYY-MM-DDT00:00:00.000')}Z` : undefined
+      updatedExpirationDate
     );
     // Calls update pallet item qty api
-    handleUpdateItems(items, palletInfo, dispatch);
+    handleUpdateItems(items, palletInfo, dispatch, updatedExpirationDate);
   };
 
   const handleUnhandledTouches = () => {
