@@ -25,14 +25,18 @@ interface GroupItem {
 
 export const QuickPickTabScreen = (props: QuickPickTabScreenProps) => {
   const { quickPicks, user } = props;
-  const assignedToMe = quickPicks.filter(pick => pick.assignedAssociate === user.userId);
-  const picks = quickPicks.filter(
+  const [assignedToMe, assignedToOthers] = quickPicks.reduce(
+    ([mine, others]: [PickListItem[], PickListItem[]], pick) => (
+      pick.assignedAssociate === user.userId ? [[...mine, pick], others] : [mine, [...others, pick]]
+    ), [[], []]
+  );
+  const picks = assignedToOthers.filter(
     pick => pick.status === PickStatus.ACCEPTED_PICK || pick.status === PickStatus.READY_TO_PICK
   );
-  const bins = quickPicks.filter(
+  const bins = assignedToOthers.filter(
     pick => pick.status === PickStatus.ACCEPTED_BIN || pick.status === PickStatus.READY_TO_BIN
   );
-  const work = quickPicks.filter(pick => pick.status === PickStatus.READY_TO_WORK);
+  const work = assignedToOthers.filter(pick => pick.status === PickStatus.READY_TO_WORK);
 
   const groupItems: GroupItem[] = [
     { picks: assignedToMe, title: strings('PICKING.ASSIGNED_TO_ME') },
