@@ -205,11 +205,15 @@ export const handleUpdateItems = (items: PalletItem[], palletInfo: PalletInfo, d
   const updatePalletItems = items.filter(item => isQuantityChanged(item) && !item.added && !item.deleted)
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
 
-  if (updatePalletItems.length > 0 || isExpiryDateChanged(palletInfo)) {
+  const isAddNoUpdate = items.some(item => item.added) && !updatePalletItems.length;
+
+  if (updatePalletItems.length > 0 || (isExpiryDateChanged(palletInfo) && !isAddNoUpdate)) {
     dispatch(updatePalletItemQty({
       palletId: palletInfo.id,
       palletItem: updatePalletItems,
       palletExpiration: palletInfo.newExpirationDate
+        ? new Date(palletInfo.newExpirationDate).toISOString()
+        : undefined
     }));
   }
 };
@@ -368,9 +372,6 @@ export const updatePalletApisHook = (
         }
         return item;
       });
-      if (newExpirationDate) {
-        dispatch(updatePalletExpirationDate());
-      }
     } else {
       totalResponses.set('ERROR', updateResponse);
     }
@@ -406,6 +407,9 @@ export const updatePalletApisHook = (
         position: 'bottom'
       });
     } else if (totalResponses.keys().next().value === 'SUCCESS') {
+      if (newExpirationDate) {
+        dispatch(updatePalletExpirationDate());
+      }
       Toast.show({
         type: 'success',
         text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
@@ -635,8 +639,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     if (upcs.length > 0) {
       dispatch(deleteUpcs(payload));
     }
+
+    const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
     // Calls add items to pallet via api
-    handleAddItems(palletId, items, dispatch, expirationDate ? new Date(expirationDate).toISOString() : undefined);
+    handleAddItems(palletId, items, dispatch, addExpiry ? new Date(addExpiry).toISOString() : undefined);
     // Calls update pallet item qty api
     handleUpdateItems(items, palletInfo, dispatch);
   };
