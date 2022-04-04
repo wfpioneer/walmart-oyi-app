@@ -60,14 +60,15 @@ exports[`Picking Navigator Renders the Pick TabNavigator 1`] = `
     }
   />
   <Screen
-    component={[Function]}
     name="SalesFloor"
     options={
       Object {
         "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
       }
     }
-  />
+  >
+    [Function]
+  </Screen>
 </MaterialTopTabNavigator>
 `;
 
