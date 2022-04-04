@@ -13,8 +13,8 @@ import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
 import styles from './QuickPickTab.style';
 
-interface QuickPickTabProps {
-  picking: PickingState;
+interface QuickPickTabScreenProps {
+  quickPicks: PickListItem[];
   user: User;
 }
 
@@ -23,9 +23,8 @@ interface GroupItem {
   title: string
 }
 
-export const QuickPickTabScreen = (props: QuickPickTabProps) => {
-  const { picking, user } = props;
-  const quickPicks = picking.pickList.filter(pick => pick.quickPick);
+export const QuickPickTabScreen = (props: QuickPickTabScreenProps) => {
+  const { quickPicks, user } = props;
   const assignedToMe = quickPicks.filter(pick => pick.assignedAssociate === user.userId);
   const picks = quickPicks.filter(
     pick => pick.status === PickStatus.ACCEPTED_PICK || pick.status === PickStatus.READY_TO_PICK
@@ -66,13 +65,16 @@ export const QuickPickTabScreen = (props: QuickPickTabProps) => {
   );
 };
 
-const QuickPickTab = () => {
-  const picking = useTypedSelector(state => state.Picking);
+interface QuickPickTabProps {
+  quickPickItems: PickListItem[]
+}
+
+const QuickPickTab = (props: QuickPickTabProps) => {
   const user = useTypedSelector(state => state.User);
 
   return (
     <QuickPickTabScreen
-      picking={picking}
+      quickPicks={props.quickPickItems}
       user={user}
     />
   );

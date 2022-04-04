@@ -48,8 +48,9 @@ export const PickTabNavigator = (props: {
         options={{
           title: `${strings('PICKING.QUICKPICK')} (${quickPickList.length})`
         }}
-        component={QuickPickTab}
-      />
+      >
+        {() => <QuickPickTab quickPickItems={quickPickList} />}
+      </Tab.Screen>
       <Tab.Screen
         name="Pick"
         options={{

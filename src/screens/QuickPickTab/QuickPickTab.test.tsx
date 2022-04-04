@@ -53,7 +53,7 @@ describe('Quick pick tab render tests', () => {
   it('renders the screen with no picking items', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    renderer.render(<QuickPickTabScreen picking={{ pickList: [], selectedPicks: [] }} user={mockUser} />);
+    renderer.render(<QuickPickTabScreen quickPicks={[]} user={mockUser} />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -80,7 +80,7 @@ describe('Quick pick tab render tests', () => {
       }
     ];
 
-    renderer.render(<QuickPickTabScreen picking={{ pickList: myPickItems, selectedPicks: [] }} user={mockUser} />);
+    renderer.render(<QuickPickTabScreen quickPicks={myPickItems} user={mockUser} />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -107,65 +107,7 @@ describe('Quick pick tab render tests', () => {
       }
     ];
 
-    renderer.render(<QuickPickTabScreen picking={{ pickList: quickPickItems, selectedPicks: [] }} user={mockUser} />);
-
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
-
-  it('renders the screen with some quick pick items', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    const pickItems: PickListItem[] = [
-      {
-        ...basePickItem,
-        assignedAssociate: 't0s0og',
-        status: PickStatus.READY_TO_WORK
-      },
-      {
-        ...basePickItem,
-        assignedAssociate: 'vn50pz4',
-        id: 1,
-        status: PickStatus.READY_TO_BIN,
-        quickPick: false
-      },
-      {
-        ...basePickItem,
-        assignedAssociate: 'vn50pz4',
-        id: 2,
-        status: PickStatus.READY_TO_PICK
-      }
-    ];
-
-    renderer.render(<QuickPickTabScreen picking={{ pickList: pickItems, selectedPicks: [] }} user={mockUser} />);
-
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
-
-  it('renders the screen with no quick pick items', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    const noQuickPicks: PickListItem[] = [
-      {
-        ...basePickItem,
-        assignedAssociate: 't0s0og',
-        status: PickStatus.READY_TO_WORK,
-        quickPick: false
-      },
-      {
-        ...basePickItem,
-        assignedAssociate: 'vn50pz4',
-        id: 1,
-        status: PickStatus.READY_TO_BIN,
-        quickPick: false
-      },
-      {
-        ...basePickItem,
-        assignedAssociate: 'vn50pz4',
-        id: 2,
-        status: PickStatus.READY_TO_PICK,
-        quickPick: false
-      }
-    ];
-
-    renderer.render(<QuickPickTabScreen picking={{ pickList: noQuickPicks, selectedPicks: [] }} user={mockUser} />);
+    renderer.render(<QuickPickTabScreen quickPicks={quickPickItems} user={mockUser} />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });

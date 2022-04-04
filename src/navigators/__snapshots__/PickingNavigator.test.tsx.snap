@@ -42,14 +42,15 @@ exports[`Picking Navigator Renders the Pick TabNavigator 1`] = `
   initialRouteName="Pick"
 >
   <Screen
-    component={[Function]}
     name="QuickPick"
     options={
       Object {
         "title": "[missing \\"en.PICKING.QUICKPICK\\" translation] (0)",
       }
     }
-  />
+  >
+    [Function]
+  </Screen>
   <Screen
     component={[Function]}
     name="Pick"
