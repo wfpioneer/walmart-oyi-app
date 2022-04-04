@@ -201,7 +201,9 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
   return null;
 };
 
-export const handleUpdateItems = (items: PalletItem[], palletInfo: PalletInfo, dispatch: Dispatch<any>): void => {
+export const handleUpdateItems = (
+  items: PalletItem[], palletInfo: PalletInfo, dispatch: Dispatch<any>, updatedExpirationDate?: string
+): void => {
   const updatePalletItems = items.filter(item => isQuantityChanged(item) && !item.added && !item.deleted)
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
 
@@ -211,9 +213,7 @@ export const handleUpdateItems = (items: PalletItem[], palletInfo: PalletInfo, d
     dispatch(updatePalletItemQty({
       palletId: palletInfo.id,
       palletItem: updatePalletItems,
-      palletExpiration: palletInfo.newExpirationDate
-        ? new Date(palletInfo.newExpirationDate).toISOString()
-        : undefined
+      palletExpiration: updatedExpirationDate
     }));
   }
 };
@@ -624,6 +624,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const submit = () => {
     const palletId = id;
     const reducerInitialValue: string[] = [];
+    const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
+    const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
+    // updated expiration date
+    const updatedExpirationDate = addExpiry ? `${moment(addExpiry).format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
     // Filter Items by deleted flag
     const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
       reducer.push(current.upcNbr);
@@ -632,19 +636,24 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     const payload = {
       palletId,
       upcs,
-      expirationDate,
-      removeExpirationDate: removeExpirationDate(items, perishableCategories)
+      expirationDate: (!removeExpirationDateForPallet && addExpiry)
+        ? updatedExpirationDate : undefined,
+      removeExpirationDate: removeExpirationDateForPallet
     };
 
     if (upcs.length > 0) {
       dispatch(deleteUpcs(payload));
     }
 
-    const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
     // Calls add items to pallet via api
-    handleAddItems(palletId, items, dispatch, addExpiry ? new Date(addExpiry).toISOString() : undefined);
+    handleAddItems(
+      palletId,
+      items,
+      dispatch,
+      updatedExpirationDate
+    );
     // Calls update pallet item qty api
-    handleUpdateItems(items, palletInfo, dispatch);
+    handleUpdateItems(items, palletInfo, dispatch, updatedExpirationDate);
   };
 
   const handleUnhandledTouches = () => {
