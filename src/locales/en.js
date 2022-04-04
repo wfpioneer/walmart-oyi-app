@@ -378,8 +378,11 @@ export default {
     QUICK_PICK: 'Quick Pick',
     MOVE_TO_FRONT: 'Move to Front',
     CREATE_PICK: 'Create Pick',
+    CREATE_QUICK_PICK: 'Create Quick Pick',
     BIN: 'Bin',
-    SCAN_ITEM_LABEL: 'Scan item to add to picklist'
+    SCAN_ITEM_LABEL: 'Scan item to add to picklist',
+    RESERVE_LOC: 'Reserve Location',
+    FLOOR_LOC: 'Floor location'
   },
   BINNING: {
     BINNING: 'Binning',
