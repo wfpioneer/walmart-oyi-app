@@ -52,7 +52,8 @@ export default {
     ENABLED: 'Enabled',
     DISABLED: 'Disabled',
     REQUIRED: 'Required',
-    REMOVED: 'Removed'
+    REMOVED: 'Removed',
+    CREATE: 'Create'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',

@@ -52,7 +52,8 @@ export default {
     ENABLED: '激活',
     DISABLED: '不可用',
     REQUIRED: '适用',
-    REMOVED: '移除'
+    REMOVED: '移除',
+    CREATE: '创建'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -378,7 +379,9 @@ export default {
     NUMBER_PALLETS: '卡板数量',
     CREATE_PICK: '创建补货',
     MOVE_TO_FRONT: '移到最前',
-    QUICK_PICK: '快速拣货'
+    QUICK_PICK: '快速拣货',
+    RESERVE_LOC: 'Reserve Location',
+    FLOOR_LOC: 'Floor location'
   },
   BINNING: {
     BINNING: '上架',

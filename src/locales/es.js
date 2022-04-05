@@ -52,7 +52,8 @@ export default {
     ENABLED: 'Activado',
     DISABLED: 'Desactivado',
     REQUIRED: 'Requerido',
-    REMOVED: 'Removido'
+    REMOVED: 'Removido',
+    CREATE: 'Crear'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -378,7 +379,9 @@ export default {
     NUMBER_PALLETS: 'Número de pallets',
     CREATE_PICK: 'Crear un Pick',
     MOVE_TO_FRONT: 'Llevar al frente',
-    QUICK_PICK: 'Pickeo rápido'
+    QUICK_PICK: 'Pickeo rápido',
+    RESERVE_LOC: 'Ubicación de Bodega',
+    FLOOR_LOC: 'Ubicación en Piso'
   },
   BINNING: {
     BINNING: 'Bodega',

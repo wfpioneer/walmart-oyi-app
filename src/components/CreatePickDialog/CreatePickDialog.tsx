@@ -6,8 +6,9 @@ import IconButton from '../buttons/IconButton';
 import NumericSelector from '../NumericSelector/NumericSelector';
 import styles from './CreatePickDialog.style';
 import { ModalCloseIcon } from '../../screens/Modal/Modal';
-import {strings} from '../../locales';
+import { strings } from '../../locales';
 import Location from '../../models/Location';
+import { MOVE_TO_FRONT, PALLET_MAX, PALLET_MIN } from '../../screens/CreatePick/CreatePick';
 import COLOR from '../../themes/Color';
 
 interface CreatePickDialogProps {
@@ -21,10 +22,6 @@ interface CreatePickDialogProps {
   onClose(): void;
   onSubmit(): void;
 }
-
-export const MOVE_TO_FRONT = 'moveToFront';
-const PALLET_MIN = 1;
-const PALLET_MAX = 99;
 
 const addLocationsToPicker = (locations: Location[]) => {
   return [

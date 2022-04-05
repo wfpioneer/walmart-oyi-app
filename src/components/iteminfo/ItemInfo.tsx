@@ -16,11 +16,12 @@ type ItemInfoProps = {
   category: string;
   price: number;
   exceptionType?: string; // This is enumerated
+  hidePrintButton?: boolean;
 };
 
 const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
-    itemName, itemNbr, upcNbr, status, category, price, exceptionType
+    itemName, itemNbr, upcNbr, status, category, price, exceptionType, hidePrintButton
   } = props;
   const navigation = useNavigation();
 
@@ -67,19 +68,22 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
       <Text style={styles.statusText}>{`${strings('ITEM.STATUS')}: ${status}`}</Text>
       <Text style={styles.catgText}>{`${strings('ITEM.CATEGORY')}: ${category}`}</Text>
       <Text style={styles.priceText}>{`${currencies(price)}`}</Text>
-      <Button
-        type={2}
-        title={strings('PRINT.PRICE_SIGN')}
-        titleColor={COLOR.MAIN_THEME_COLOR}
-        style={styles.printPriceBtn}
-        onPress={handlePrintPriceSign}
-      />
+      {!hidePrintButton && (
+        <Button
+          type={2}
+          title={strings('PRINT.PRICE_SIGN')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          style={styles.printPriceBtn}
+          onPress={handlePrintPriceSign}
+        />
+      )}
     </View>
   );
 };
 
 ItemInfo.defaultProps = {
-  exceptionType: null
+  exceptionType: null,
+  hidePrintButton: false
 };
 
 export default ItemInfo;
