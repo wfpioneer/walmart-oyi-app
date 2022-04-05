@@ -358,7 +358,6 @@ export default {
   },
   PICKING: {
     PICKING: 'Pickeo',
-    PICK: 'Pick',
     QUICKPICK: 'Pickeo Rápido',
     ASSIGNED: 'Asignado',
     CREATED_BY: 'Creado Por',
@@ -372,6 +371,8 @@ export default {
     DELETED: 'Borrado',
     NO_PALLETS_FOUND: 'No se encontraron pallets',
     ASSIGNED_TO_ME: 'Asignado a mi',
+    PICK: 'Pick',
+    WORK: 'Trabajar',
     BIN: 'Ingresar a Bodega',
     SCAN_ITEM_LABEL: 'Escanea el artículo para agregarlo a la lista de pickeos',
     SELECT_LOCATION: 'Elige una ubicación',

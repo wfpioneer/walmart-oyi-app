@@ -7,9 +7,9 @@ import { useDispatch } from 'react-redux';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
+import QuickPickTab from '../screens/QuickPickTab/QuickPickTab';
 import PickBinTab from '../screens/PickBinTab/PickBinTab';
 import PickBinWorkflow from '../screens/PickBinWorkflow/PickBinWorkflowScreen';
-import QuickPickTab from '../screens/QuickPickTab/QuickPickTabScreen';
 import SalesFloorTab from '../screens/SalesFloorTab/SalesFloorTabScreen';
 import { setManualScan } from '../state/actions/Global';
 import styles from './PickingNavigator.style';
@@ -46,17 +46,19 @@ export const PickTabNavigator = (props: {
       <Tab.Screen
         name="QuickPick"
         options={{
-          title: strings('PICKING.QUICKPICK')
+          title: `${strings('PICKING.QUICKPICK')} (${quickPickList.length})`
         }}
-        component={QuickPickTab}
-      />
+      >
+        {() => <QuickPickTab quickPickItems={quickPickList} />}
+      </Tab.Screen>
       <Tab.Screen
         name="Pick"
         options={{
-          title: strings('PICKING.PICK')
+          title: `${strings('PICKING.PICK')} (${pickBinList.length})`
         }}
-        component={PickBinTab}
-      />
+      >
+        {() => <PickBinTab pickBinList={pickBinList} />}
+      </Tab.Screen>
       <Tab.Screen
         name="SalesFloor"
         options={{
@@ -134,11 +136,12 @@ export const PickingNavigatorStack = (
 const PickingNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const picklist = useTypedSelector(state => state.Picking.pickList);
   return (
     <PickingNavigatorStack
       dispatch={dispatch}
       isManualScanEnabled={isManualScanEnabled}
-      picklist={mockPickLists}
+      picklist={picklist}
     />
   );
 };
