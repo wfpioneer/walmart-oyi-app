@@ -54,10 +54,11 @@ export const PickTabNavigator = (props: {
       <Tab.Screen
         name="Pick"
         options={{
-          title: strings('PICKING.PICK')
+          title: `${strings('PICKING.PICK')} (${pickBinList.length})`
         }}
-        component={PickBinTab}
-      />
+      >
+        {() => <PickBinTab pickBinList={pickBinList} />}
+      </Tab.Screen>
       <Tab.Screen
         name="SalesFloor"
         options={{
