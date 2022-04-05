@@ -65,14 +65,13 @@ const renderPickPalletInfoList = (
   const item = items[0];
   return (
     <PickPalletInfoCard
-      // TODO: Placeholder method for pickBinWorkflow Navigation
       onPress={() => navigation.navigate('PickBinWorkflow')}
       palletId={item.palletId}
       palletLocation={item.palletLocationName}
       pickListItems={items}
       pickStatus={item.status}
     />
-  )
+  );
 };
 
 const renderGroupItems = (items: PickListItem[], navigation: NavigationProp<any>) => {

@@ -1,10 +1,8 @@
-import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
 import { SalesFloorTabScreen } from './SalesFloorTabScreen';
 
-let navigationProp: NavigationProp<any>;
 describe('SalesFloorTabScreen', () => {
   it('Renders the SalesFloorTabScreen Component', () => {
     const renderer = ShallowRenderer.createRenderer();
@@ -84,8 +82,7 @@ describe('SalesFloorTabScreen', () => {
     ]
     renderer.render(
       <SalesFloorTabScreen
-        picklist={salesPickList}
-        navigation={navigationProp}
+        readyToWorklist={salesPickList}
       />
     );
 

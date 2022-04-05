@@ -63,7 +63,7 @@ export const PickTabNavigator = (props: {
           title: strings('ITEM.SALES_FLOOR_QTY')
         }}
       >
-        {() => <SalesFloorTab picklist={salesFloorList} />}
+        {() => <SalesFloorTab readyToWorklist={salesFloorList} />}
       </Tab.Screen>
     </Tab.Navigator>
   );
