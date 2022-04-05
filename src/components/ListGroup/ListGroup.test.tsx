@@ -1,6 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { NavigationProp } from '@react-navigation/native';
 import ListGroup, { CollapsibleCard } from './ListGroup';
 import { mockPickLists } from '../../mockData/mockPickList';
 import { PickStatus } from '../../models/Picking.d';
@@ -19,7 +20,7 @@ describe('ListGroup', () => {
         <ListGroup
           groupItems={false}
           pickListItems={mockPickLists}
-          title="AbAR-2"
+          title="ABAR-2"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -27,29 +28,32 @@ describe('ListGroup', () => {
 
     it('Test renders the ListGroup component with groupItems prop as true', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const newMockPickLists = [...mockPickLists, {
-        assignedAssociate: 'Associate 2',
-        category: 46,
-        createTS: '10:32 AM 03/04/2022',
-        createdBy: 'Associate 2',
-        id: 4,
-        itemDesc: 'Candy',
-        itemNbr: 7344,
-        moveToFront: true,
-        palletId: 4321,
-        palletLocationId: 1672,
-        palletLocationName: 'C1-2-1',
-        quickPick: false,
-        salesFloorLocationId: 1673,
-        salesFloorLocationName: 'C1-3',
-        status: PickStatus.ACCEPTED_PICK,
-        upcNbr: '000041800004'
-      }];
+      const newMockPickLists = [
+        ...mockPickLists,
+        {
+          assignedAssociate: 'Associate 2',
+          category: 46,
+          createTS: '10:32 AM 03/04/2022',
+          createdBy: 'Associate 2',
+          id: 4,
+          itemDesc: 'Candy',
+          itemNbr: 7344,
+          moveToFront: true,
+          palletId: 4321,
+          palletLocationId: 1672,
+          palletLocationName: 'C1-2-1',
+          quickPick: false,
+          salesFloorLocationId: 1673,
+          salesFloorLocationName: 'C1-3',
+          status: PickStatus.ACCEPTED_PICK,
+          upcNbr: '000041800004'
+        }
+      ];
       renderer.render(
         <ListGroup
           groupItems={true}
           pickListItems={newMockPickLists}
-          title="AbAR-2"
+          title="ABAR-2"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -85,7 +89,7 @@ describe('ListGroup', () => {
           title="ABAR-1"
         />
       );
-      const collapsibleCard = await (findByTestId('collapsible-card'));
+      const collapsibleCard = await findByTestId('collapsible-card');
       fireEvent.press(collapsibleCard);
       expect(mockToggleOpen).toHaveBeenCalledTimes(1);
       expect(mockToggleOpen).toHaveBeenCalledWith(true);

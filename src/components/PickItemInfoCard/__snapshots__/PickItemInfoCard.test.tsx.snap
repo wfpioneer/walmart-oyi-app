@@ -238,7 +238,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
               }
             }
           >
-            [missing "en.ITEM.SALES_FLOOR_QTY" translation]: C1-3
+            [missing "en.ITEM.SALES_FLOOR_QTY" translation]: [missing "en.PICKING.FRONT" translation]
           </Text>
           <Text
             style={
