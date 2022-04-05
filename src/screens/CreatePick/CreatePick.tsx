@@ -22,8 +22,8 @@ export const PALLET_MAX = 99;
 
 interface CreatePickProps {
   item: ItemDetails;
-  selectedSectionState: [string, React.Dispatch<React.SetStateAction<string>>]
-  palletNumberState: [number, React.Dispatch<React.SetStateAction<number>>]
+  selectedSectionState: [string, React.Dispatch<React.SetStateAction<string>>];
+  palletNumberState: [number, React.Dispatch<React.SetStateAction<number>>];
   floorLocations: Location[];
 }
 
@@ -35,13 +35,20 @@ export const CreatePickScreen = (props: CreatePickProps) => {
   const [selectedSection, setSelectedSection] = selectedSectionState;
   const [palletNumber, setPalletNumber] = palletNumberState;
 
-  const pickerLocations = (locations: Location[]) => [
-    <Picker.Item label={strings('PICKING.SELECT_LOCATION')} value="" key={-1} />,
-    ...locations.map((location: Location) => (
-      <Picker.Item label={location.locationName} value={location.locationName} key={location.locationName} />
-    )),
-    <Picker.Item label={strings('PICKING.MOVE_TO_FRONT')} value={MOVE_TO_FRONT} key={MOVE_TO_FRONT} />
-  ];
+  const pickerLocations = (locations: Location[]) => {
+    const pickerItems = [
+      ...locations.map((location: Location) => (
+        <Picker.Item label={location.locationName} value={location.locationName} key={location.locationName} />
+      )),
+      <Picker.Item label={strings('PICKING.MOVE_TO_FRONT')} value={MOVE_TO_FRONT} key={MOVE_TO_FRONT} />
+    ];
+
+    if (!locations.length) {
+      pickerItems.unshift(<Picker.Item label={strings('PICKING.SELECT_LOCATION')} value="" key={-1} />);
+    }
+
+    return pickerItems;
+  };
 
   const onPalletIncrease = (
     numberOfPallets: number,
@@ -111,18 +118,20 @@ export const CreatePickScreen = (props: CreatePickProps) => {
             </Picker>
           </View>
         </View>
-        <View style={styles.pickParamLine}>
-          <Text>{strings('PICKING.NUMBER_PALLETS')}</Text>
-          <NumericSelector
-            isValid={isNumberOfPalletsValid(palletNumber)}
-            onDecreaseQty={() => onPalletDecrease(palletNumber, setPalletNumber)}
-            onIncreaseQty={() => onPalletIncrease(palletNumber, setPalletNumber)}
-            onTextChange={(text: string) => onPalletTextChange(text, setPalletNumber)}
-            minValue={PALLET_MIN}
-            maxValue={PALLET_MAX}
-            value={palletNumber}
-          />
-        </View>
+        {selectedSection === MOVE_TO_FRONT ? (
+          <View style={styles.pickParamLine}>
+            <Text>{strings('PICKING.NUMBER_PALLETS')}</Text>
+            <NumericSelector
+              isValid={isNumberOfPalletsValid(palletNumber)}
+              onDecreaseQty={() => onPalletDecrease(palletNumber, setPalletNumber)}
+              onIncreaseQty={() => onPalletIncrease(palletNumber, setPalletNumber)}
+              onTextChange={(text: string) => onPalletTextChange(text, setPalletNumber)}
+              minValue={PALLET_MIN}
+              maxValue={PALLET_MAX}
+              value={palletNumber}
+            />
+          </View>
+        ) : null}
       </View>
       <View style={styles.createButtonView}>
         <Button title={strings('GENERICS.CREATE')} disabled={disableCreateButton()} />
@@ -132,9 +141,8 @@ export const CreatePickScreen = (props: CreatePickProps) => {
 };
 
 const CreatePick = () => {
-  const picking = useTypedSelector(state => state.Picking);
   const floorLocations = useTypedSelector(state => state.ItemDetailScreen.floorLocations);
-  const selectedSectionState = useState('');
+  const selectedSectionState = useState(floorLocations.length ? floorLocations[0].locationName : '');
   const palletNumberState = useState(1);
 
   const mockLocations: Location[] = [
@@ -162,7 +170,7 @@ const CreatePick = () => {
     }
   ];
 
-  // May need to change this as not all item details are stored in item details redux
+  // May need to use api call results as not all item details are stored in item details redux
   const mockItem: ItemDetails = {
     categoryNbr: 73,
     itemName: 'treacle tart',

@@ -1267,6 +1267,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         category="93 - Meat PI"
         exceptionType="nsfl"
+        hidePrintButton={false}
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         price={2000.94}
@@ -1998,6 +1999,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         category="99 - Store Use"
         exceptionType="nsfl"
+        hidePrintButton={false}
         itemName="Small, Store Use Item"
         itemNbr={987654321}
         price={2000.94}
@@ -2508,6 +2510,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         category="93 - Meat PI"
         exceptionType="nsfl"
+        hidePrintButton={false}
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         price={2000.94}
@@ -2876,6 +2879,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         category="93 - Meat PI"
         exceptionType="nsfl"
+        hidePrintButton={false}
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         price={2000.94}
@@ -3386,6 +3390,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         category="93 - Meat PI"
         exceptionType="nsfl"
+        hidePrintButton={false}
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         price={2000.94}

@@ -4,6 +4,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import {
   PickTabNavigator,
   PickingNavigatorStack,
+  Tabs,
   renderScanButton
 } from './PickingNavigator';
 
@@ -17,6 +18,8 @@ describe('Picking Navigator', () => {
         dispatch={jest.fn()}
         isManualScanEnabled={false}
         picklist={[]}
+        selectedTab={Tabs.PICK}
+        setSelectedTab={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -24,7 +27,7 @@ describe('Picking Navigator', () => {
 
   it('Renders the Pick TabNavigator', () => {
     const renderer = ShallowRenderer.createRenderer();
-    renderer.render(<PickTabNavigator picklist={[]} />);
+    renderer.render(<PickTabNavigator picklist={[]} setSelectedTab={jest.fn()} />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 

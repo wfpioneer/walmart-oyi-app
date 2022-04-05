@@ -20,7 +20,7 @@ import { PickListItem, PickStatus } from '../models/Picking.d';
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 // eslint-disable-next-line no-shadow
-enum Tabs {
+export enum Tabs {
   QUICKPICK,
   PICK,
   SALESFLOOR

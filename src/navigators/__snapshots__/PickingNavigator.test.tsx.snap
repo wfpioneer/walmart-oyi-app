@@ -42,6 +42,11 @@ exports[`Picking Navigator Renders the Pick TabNavigator 1`] = `
   initialRouteName="Pick"
 >
   <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
     name="QuickPick"
     options={
       Object {
@@ -52,6 +57,11 @@ exports[`Picking Navigator Renders the Pick TabNavigator 1`] = `
     [Function]
   </Screen>
   <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
     name="Pick"
     options={
       Object {
@@ -62,6 +72,11 @@ exports[`Picking Navigator Renders the Pick TabNavigator 1`] = `
     [Function]
   </Screen>
   <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
     name="SalesFloor"
     options={
       Object {
@@ -95,6 +110,15 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
     options={
       Object {
         "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="CreatePick"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.PICKING.CREATE_PICK\\" translation]",
       }
     }
   />
