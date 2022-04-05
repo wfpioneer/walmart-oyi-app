@@ -138,18 +138,18 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
         style={
           Object {
             "justifyContent": "center",
-            "paddingLeft": 180,
+            "paddingLeft": 160,
           }
         }
       >
         <ForwardRef
           onPress={[Function]}
         >
-          <View>
-            <Image
-              source=""
-            />
-          </View>
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
+          />
         </ForwardRef>
       </View>
     </View>
@@ -295,18 +295,18 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
         style={
           Object {
             "justifyContent": "center",
-            "paddingLeft": 180,
+            "paddingLeft": 160,
           }
         }
       >
         <ForwardRef
           onPress={[Function]}
         >
-          <View>
-            <Image
-              source=""
-            />
-          </View>
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
+          />
         </ForwardRef>
       </View>
     </View>
@@ -452,18 +452,18 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
         style={
           Object {
             "justifyContent": "center",
-            "paddingLeft": 180,
+            "paddingLeft": 160,
           }
         }
       >
         <ForwardRef
           onPress={[Function]}
         >
-          <View>
-            <Image
-              source=""
-            />
-          </View>
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
+          />
         </ForwardRef>
       </View>
     </View>
