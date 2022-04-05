@@ -51,14 +51,15 @@ exports[`Picking Navigator Renders the Pick TabNavigator 1`] = `
     }
   />
   <Screen
-    component={[Function]}
     name="Pick"
     options={
       Object {
-        "title": "[missing \\"en.PICKING.PICK\\" translation]",
+        "title": "[missing \\"en.PICKING.PICK\\" translation] (0)",
       }
     }
-  />
+  >
+    [Function]
+  </Screen>
   <Screen
     component={[Function]}
     name="SalesFloor"
