@@ -358,7 +358,6 @@ export default {
   },
   PICKING: {
     PICKING: '楼面补货',
-    PICK: '拣货',
     QUICKPICK: '快速拣货',
     ASSIGNED: '已分配',
     CREATED_BY: '创建者',
@@ -372,6 +371,8 @@ export default {
     DELETED: '删除',
     NO_PALLETS_FOUND: '未发现卡板',
     ASSIGNED_TO_ME: '分配给我',
+    PICK: '拣货',
+    WORK: '工作状态',
     BIN: '上架',
     SCAN_ITEM_LABEL: '扫描商品添加到补货清单',
     SELECT_LOCATION: '选择货架位置',
