@@ -7,16 +7,15 @@ import { useDispatch } from 'react-redux';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
+import QuickPickTab from '../screens/QuickPickTab/QuickPickTab';
 import PickBinTab from '../screens/PickBinTab/PickBinTab';
 import PickBinWorkflow from '../screens/PickBinWorkflow/PickBinWorkflowScreen';
 import CreatePick from '../screens/CreatePick/CreatePick';
-import QuickPickTab from '../screens/QuickPickTab/QuickPickTabScreen';
 import SalesFloorTab from '../screens/SalesFloorTab/SalesFloorTabScreen';
 import { setManualScan } from '../state/actions/Global';
 import styles from './PickingNavigator.style';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { PickListItem, PickStatus } from '../models/Picking.d';
-import { mockPickLists } from '../mockData/mockPickList';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -48,7 +47,7 @@ export const PickTabNavigator = (props: {
         || item.status === PickStatus.READY_TO_PICK)
   );
   const salesFloorList = picklist.filter(
-    item => item.quickPick && item.status === PickStatus.READY_TO_WORK
+    item => !item.quickPick && item.status === PickStatus.READY_TO_WORK
   );
 
   return (
@@ -56,33 +55,36 @@ export const PickTabNavigator = (props: {
       <Tab.Screen
         name="QuickPick"
         options={{
-          title: strings('PICKING.QUICKPICK')
+          title: `${strings('PICKING.QUICKPICK')} (${quickPickList.length})`
         }}
         listeners={{
           focus: () => setSelectedTab(Tabs.QUICKPICK)
         }}
-        component={QuickPickTab}
-      />
+      >
+        {() => <QuickPickTab quickPickItems={quickPickList} />}
+      </Tab.Screen>
       <Tab.Screen
         name="Pick"
         options={{
-          title: strings('PICKING.PICK')
+          title: `${strings('PICKING.PICK')} (${pickBinList.length})`
         }}
         listeners={{
           focus: () => setSelectedTab(Tabs.PICK)
         }}
-        component={PickBinTab}
-      />
+      >
+        {() => <PickBinTab pickBinList={pickBinList} />}
+      </Tab.Screen>
       <Tab.Screen
         name="SalesFloor"
         options={{
-          title: strings('ITEM.SALES_FLOOR_QTY')
+          title: `${strings('ITEM.SALES_FLOOR_QTY')} (${salesFloorList.length})`
         }}
         listeners={{
           focus: () => setSelectedTab(Tabs.SALESFLOOR)
         }}
-        component={SalesFloorTab}
-      />
+      >
+        {() => <SalesFloorTab readyToWorklist={salesFloorList} />}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 };
@@ -107,7 +109,6 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
-// TODO implement PickListTab navigator https://jira.walmart.com/browse/INTLSAOPS-5446
 export const PickingNavigatorStack = (
   props: PickingNavigatorProps
 ): JSX.Element => {
@@ -171,14 +172,15 @@ export const PickingNavigatorStack = (
 const PickingNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const picklist = useTypedSelector(state => state.Picking.pickList);
   const [selectedTab, setSelectedTab] = useState<Tabs>(Tabs.PICK);
   return (
     <PickingNavigatorStack
       dispatch={dispatch}
       isManualScanEnabled={isManualScanEnabled}
-      picklist={mockPickLists}
       selectedTab={selectedTab}
       setSelectedTab={setSelectedTab}
+      picklist={picklist}
     />
   );
 };

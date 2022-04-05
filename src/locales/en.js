@@ -360,7 +360,6 @@ export default {
   },
   PICKING: {
     PICKING: 'Picking',
-    PICK: 'Pick',
     QUICKPICK: 'Quick Pick',
     ASSIGNED: 'Assigned',
     CREATED_BY: 'Created By',
@@ -373,17 +372,20 @@ export default {
     COMPLETE: 'Complete',
     DELETED: 'Deleted',
     NO_PALLETS_FOUND: 'No pallets found',
-    ASSIGNED_TO_ME: 'Assigned To Me',
+    ASSIGNED_TO_ME: 'Assigned to me',
+    PICK: 'Pick',
+    WORK: 'Work',
+    BIN: 'Bin',
+    SCAN_ITEM_LABEL: 'Scan item to add to picklist',
     SELECT_LOCATION: 'Select a Location',
     NUMBER_PALLETS: 'Number of Pallets',
     QUICK_PICK: 'Quick Pick',
     MOVE_TO_FRONT: 'Move to Front',
     CREATE_PICK: 'Create Pick',
     CREATE_QUICK_PICK: 'Create Quick Pick',
-    BIN: 'Bin',
-    SCAN_ITEM_LABEL: 'Scan item to add to picklist',
     RESERVE_LOC: 'Reserve Location',
-    FLOOR_LOC: 'Floor location'
+    FLOOR_LOC: 'Floor location',
+    FRONT: 'Front'
   },
   BINNING: {
     BINNING: 'Binning',

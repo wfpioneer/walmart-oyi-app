@@ -114,7 +114,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
   >
     <CollapsibleCard
       isOpened={true}
-      title="AbAR-2"
+      title="ABAR-2"
       toggleIsOpened={[Function]}
     />
   </View>
@@ -194,7 +194,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
   >
     <CollapsibleCard
       isOpened={true}
-      title="AbAR-2"
+      title="ABAR-2"
       toggleIsOpened={[Function]}
     />
   </View>

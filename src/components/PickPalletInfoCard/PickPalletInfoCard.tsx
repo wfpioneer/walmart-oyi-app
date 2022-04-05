@@ -1,9 +1,6 @@
 import React from 'react';
 import {
-  FlatList,
-  Pressable,
-  Text,
-  View
+  FlatList, Pressable, Text, View
 } from 'react-native';
 import { strings } from '../../locales';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
@@ -20,11 +17,7 @@ interface PickPalletInfoProps {
 
 const PickPalletInfoCard = (props: PickPalletInfoProps) => {
   const {
-    onPress,
-    palletId,
-    pickListItems,
-    pickStatus,
-    palletLocation
+    onPress, palletId, pickListItems, pickStatus, palletLocation
   } = props;
 
   const palletsItems = pickListItems.filter(item => item.palletId === palletId);
@@ -33,7 +26,7 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
     <PickItemInfo
       pickListItem={item}
       canDelete={true}
-      onDeletePressed={() => undefined}
+      onDeletePressed={() => undefined} // TODO implement deleting an item from a pallet
     />
   );
 
