@@ -15,7 +15,6 @@ import { setManualScan } from '../state/actions/Global';
 import styles from './PickingNavigator.style';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { PickListItem, PickStatus } from '../models/Picking.d';
-import { mockPickLists } from '../mockData/mockPickList';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -62,7 +61,7 @@ export const PickTabNavigator = (props: {
       <Tab.Screen
         name="SalesFloor"
         options={{
-          title: strings('ITEM.SALES_FLOOR_QTY')
+          title: `${strings('ITEM.SALES_FLOOR_QTY')} (${salesFloorList.length})`
         }}
       >
         {() => <SalesFloorTab readyToWorklist={salesFloorList} />}

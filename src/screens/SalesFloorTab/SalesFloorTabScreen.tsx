@@ -1,6 +1,5 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import ListGroup from '../../components/ListGroup/ListGroup';
 import { PickListItem } from '../../models/Picking.d';
 import { strings } from '../../locales';
@@ -67,11 +66,8 @@ export const SalesFloorTabScreen = (props: SalesFloorTabProps) => {
     </View>
   );
 };
-const SalesFloorTab = (props: { readyToWorklist: PickListItem[] }) => {
-  const navigation = useNavigation();
-  return (
-    <SalesFloorTabScreen readyToWorklist={props.readyToWorklist} />
-  );
-};
+const SalesFloorTab = (props: { readyToWorklist: PickListItem[] }) => (
+  <SalesFloorTabScreen readyToWorklist={props.readyToWorklist} />
+);
 
 export default SalesFloorTab;

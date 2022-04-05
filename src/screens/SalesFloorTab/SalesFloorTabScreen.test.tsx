@@ -79,7 +79,7 @@ describe('SalesFloorTabScreen', () => {
         status: PickStatus.READY_TO_WORK,
         upcNbr: '000052900004'
       }
-    ]
+    ];
     renderer.render(
       <SalesFloorTabScreen
         readyToWorklist={salesPickList}

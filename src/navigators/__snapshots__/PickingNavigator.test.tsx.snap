@@ -65,7 +65,7 @@ exports[`Picking Navigator Renders the Pick TabNavigator 1`] = `
     name="SalesFloor"
     options={
       Object {
-        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation] (0)",
       }
     }
   >
