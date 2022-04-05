@@ -70,11 +70,14 @@ export const PalletManagementScreen = (
 
   let scannedSubscription: EmitterSubscription;
 
+  const resetSearchText = () => setSearchText('');
+
   // Resets Get PalletInfo api state when navigating off-screen
   useEffectHook(() => {
     navigation.addListener('blur', () => {
       if (getPalletInfoApi.value) {
         dispatch({ type: GET_PALLET_INFO.RESET });
+        resetSearchText();
       }
     });
   }, [getPalletInfoApi]);
