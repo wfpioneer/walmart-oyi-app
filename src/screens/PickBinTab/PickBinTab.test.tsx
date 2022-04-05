@@ -6,11 +6,6 @@ import { PickStatus } from '../../models/Picking.d';
 import User from '../../models/User';
 import { mockConfig } from '../../mockData/mockConfig';
 
-const mockPicking = {
-  pickList: mockPickLists,
-  selectedPicks: []
-};
-
 const user: User = {
   userId: 'vn51wu8',
   additional: {
@@ -33,8 +28,9 @@ describe('PickBinTabScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <PickBinTabScreen
-          picking={mockPicking}
+          pickBinList={mockPickLists}
           user={user}
+          isManualScanEnabled={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -62,8 +58,9 @@ describe('PickBinTabScreen', () => {
       }];
       renderer.render(
         <PickBinTabScreen
-          picking={{ pickList: newMockPickList, selectedPicks: [] }}
+          pickBinList={newMockPickList}
           user={user}
+          isManualScanEnabled={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

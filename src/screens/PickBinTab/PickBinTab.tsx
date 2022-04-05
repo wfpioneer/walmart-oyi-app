@@ -3,7 +3,6 @@ import {
   FlatList, SafeAreaView, Text, View
 } from 'react-native';
 import { groupBy, partition } from 'lodash';
-import { PickingState } from '../../state/reducers/Picking';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import User from '../../models/User';
 import { PickListItem } from '../../models/Picking.d';
@@ -13,7 +12,10 @@ import styles from './PickBinTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
 
 interface PickBinTabProps {
-  picking: PickingState;
+  pickBinList: PickListItem[]
+}
+interface PickBinTabScreenProps {
+  pickBinList: PickListItem[];
   user: User;
   isManualScanEnabled: boolean;
 }
@@ -23,9 +25,9 @@ const ASSIGNED_TO_ME = 'assignedToMe';
 const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletLocation ? palletLocation.substring(0,
   palletLocation.indexOf('-')).replace(/[\d.]+$/, '') : '');
 
-export const PickBinTabScreen = (props: PickBinTabProps) => {
-  const { picking, user, isManualScanEnabled } = props;
-  const [assignedToMe, otherPickList] = partition(picking.pickList, pick => pick.assignedAssociate === user.userId);
+export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
+  const { pickBinList, user, isManualScanEnabled } = props;
+  const [assignedToMe, otherPickList] = partition(pickBinList, pick => pick.assignedAssociate === user.userId);
   const groupedPickListByZone = groupBy(otherPickList,
     (item: PickListItem) => getZoneFromPalletLocation(item.palletLocationName));
   const sortedZones = Object.keys(groupedPickListByZone).sort((a, b) => (a > b ? 1 : -1));
@@ -58,14 +60,14 @@ export const PickBinTabScreen = (props: PickBinTabProps) => {
   );
 };
 
-const PickBinTab = () => {
-  const picking = useTypedSelector(state => state.Picking);
+const PickBinTab = (props: PickBinTabProps) => {
+  const { pickBinList } = props;
   const user = useTypedSelector(state => state.User);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
 
   return (
     <PickBinTabScreen
-      picking={picking}
+      pickBinList={pickBinList}
       user={user}
       isManualScanEnabled={isManualScanEnabled}
     />
