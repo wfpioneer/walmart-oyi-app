@@ -1,13 +1,14 @@
 import React from 'react';
 import {
-  Image,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { strings } from '../../locales';
 import NumericSelector from '../NumericSelector/NumericSelector';
 import styles from './PalletItemCard.style';
+import COLOR from '../../themes/Color';
 
 interface PalletItemCardProp {
     itemName: string;
@@ -95,11 +96,7 @@ const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
           </View>
           <View style={styles.delete}>
             <TouchableOpacity onPress={() => { deleteItem(); }}>
-              <View>
-                <Image
-                  source={require('../../assets/images/trash_can.png')}
-                />
-              </View>
+              <MaterialCommunityIcons name="trash-can" size={40} color={COLOR.TRACKER_GREY} />
             </TouchableOpacity>
           </View>
         </View>
