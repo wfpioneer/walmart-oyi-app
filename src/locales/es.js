@@ -379,6 +379,7 @@ export default {
     NUMBER_PALLETS: 'Número de pallets',
     CREATE_PICK: 'Crear un Pick',
     MOVE_TO_FRONT: 'Llevar al frente',
+    FRONT: 'Frente',
     QUICK_PICK: 'Pickeo rápido'
   },
   BINNING: {

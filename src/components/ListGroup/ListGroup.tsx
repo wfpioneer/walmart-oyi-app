@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import {
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View
+  FlatList, Text, TouchableOpacity, View
 } from 'react-native';
-import { groupBy, head, uniq } from 'lodash';
+import { groupBy, uniq } from 'lodash';
 import {
   NavigationProp, useNavigation
 } from '@react-navigation/native';
@@ -24,7 +21,7 @@ interface ListGroupProps {
 interface CollapsibleCardProps {
   title: string;
   isOpened: boolean;
-  toggleIsOpened: React.Dispatch<React.SetStateAction<boolean>>
+  toggleIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
@@ -34,9 +31,13 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
   return (
     <>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>{ title }</Text>
+        <Text style={styles.titleText}>{title}</Text>
       </View>
-      <TouchableOpacity testID="collapsible-card" style={styles.arrowView} onPress={() => toggleIsOpened(!isOpened)}>
+      <TouchableOpacity
+        testID="collapsible-card"
+        style={styles.arrowView}
+        onPress={() => toggleIsOpened(!isOpened)}
+      >
         <MaterialIcons name={iconName} size={25} color={COLOR.BLACK} />
       </TouchableOpacity>
     </>
@@ -47,18 +48,22 @@ const sortPickListByPalletLocation = (items: PickListItem[]) => (items.sort(
   (a, b) => (a.palletLocationName > b.palletLocationName ? 1 : -1)
 ));
 
-const sortPickListByCreatedDate = (items: PickListItem[]) => (items.sort(
-  (a, b) => new Date(a.createTS).valueOf() - new Date(b.createTS).valueOf()
-));
+const sortPickListByCreatedDate = (items: PickListItem[]) => (
+  items.sort(
+    (a, b) => new Date(a.createTS).valueOf() - new Date(b.createTS).valueOf()
+  ));
 
 const getGroupItemsBasedOnPallet = (items: PickListItem[]) => {
   const sortedItems = sortPickListByPalletLocation(items);
   return groupBy(sortedItems, item => item.palletId);
 };
 
-const renderPickPalletInfoList = (items: PickListItem[], navigation: NavigationProp<any>) => {
-  const item = head(items);
-  return item ? (
+const renderPickPalletInfoList = (
+  items: PickListItem[],
+  navigation: NavigationProp<any>
+) => {
+  const item = items[0];
+  return (
     <PickPalletInfoCard
       onPress={() => navigation.navigate('PickBinWorkflow')}
       palletId={item.palletId}
@@ -66,7 +71,7 @@ const renderPickPalletInfoList = (items: PickListItem[], navigation: NavigationP
       pickListItems={items}
       pickStatus={item.status}
     />
-  ) : null;
+  );
 };
 
 const renderGroupItems = (items: PickListItem[], navigation: NavigationProp<any>) => {
@@ -98,9 +103,7 @@ const renderItems = (items: PickListItem[], navigation: NavigationProp<any>) => 
 
 const ListGroup = (props: ListGroupProps): JSX.Element => {
   const {
-    title,
-    pickListItems,
-    groupItems
+    title, pickListItems, groupItems
   } = props;
 
   const [listGroupOpen, toggleListGroup] = useState(true);
@@ -109,14 +112,17 @@ const ListGroup = (props: ListGroupProps): JSX.Element => {
   return (
     <View>
       <View style={styles.menuContainer}>
-        <CollapsibleCard title={title} isOpened={listGroupOpen} toggleIsOpened={toggleListGroup} />
+        <CollapsibleCard
+          title={title}
+          isOpened={listGroupOpen}
+          toggleIsOpened={toggleListGroup}
+        />
       </View>
-      {listGroupOpen
-        && (
+      {listGroupOpen && (
         <View>
           {groupItems ? renderGroupItems(pickListItems, navigation) : renderItems(pickListItems, navigation)}
         </View>
-        )}
+      )}
     </View>
   );
 };
