@@ -1,11 +1,10 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { fireEvent, render } from '@testing-library/react-native';
 import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
-import { CreatePickScreen } from './CreatePick';
+import { CreatePickScreen, MOVE_TO_FRONT, UseStateType } from './CreatePick';
 
-export const mockLocations: Location[] = [
+const mockLocations: Location[] = [
   {
     aisleId: 2,
     aisleName: '1',
@@ -31,7 +30,7 @@ export const mockLocations: Location[] = [
 ];
 
 // May need to use api call results as not all item details are stored in item details redux
-export const mockItem: ItemDetails = {
+const mockItem: ItemDetails = {
   categoryNbr: 73,
   itemName: 'treacle tart',
   itemNbr: 2,
@@ -82,11 +81,11 @@ export const mockItem: ItemDetails = {
 describe('Create Pick screen render tests', () => {
   const mockSetSelectedSection = jest.fn();
   const mockSetPalletNumber = jest.fn();
-  const selectedSectionState: [string, React.Dispatch<React.SetStateAction<string>>] = [
+  const selectedSectionState: UseStateType<string> = [
     '',
     mockSetSelectedSection
   ];
-  const palletNumberState: [number, React.Dispatch<React.SetStateAction<number>>] = [
+  const palletNumberState: UseStateType<number> = [
     1,
     mockSetPalletNumber
   ];
@@ -95,31 +94,92 @@ describe('Create Pick screen render tests', () => {
     jest.clearAllMocks();
   });
 
-  it('renders the screen with an item', () => {
+  it('renders the screen with item with floor locations', () => {
     const renderer = ShallowRenderer.createRenderer();
+
+    const itemWithFloor: ItemDetails = {
+      ...mockItem,
+      location: {
+        ...mockItem.location,
+        floor: mockLocations
+      }
+    }
+
+    const defaultSelectedSectionState: UseStateType<string> = [...selectedSectionState];
+    defaultSelectedSectionState[0] = mockLocations[0].locationName;
 
     renderer.render(
       <CreatePickScreen
-        item={mockItem}
-        selectedSectionState={selectedSectionState}
+        item={itemWithFloor}
+        selectedSectionState={defaultSelectedSectionState}
         palletNumberState={palletNumberState}
-        floorLocations={mockLocations}
       />
     );
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('tests the testable inputs', () => {
-    const { getByTestId } = render(
+  it('renders the screen without floor locations', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const itemWithoutFloor: ItemDetails = { ...mockItem };
+
+    renderer.render(
       <CreatePickScreen
-        item={mockItem}
+        item={itemWithoutFloor}
         selectedSectionState={selectedSectionState}
         palletNumberState={palletNumberState}
-        floorLocations={mockLocations}
       />
     );
 
-    const createButton = getByTestId('createButton');
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
+  it('renders the screen with no reserve location', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const itemWithoutReserve: ItemDetails = {
+      ...mockItem,
+      location: {
+        ...mockItem.location,
+        reserve: undefined,
+        floor: mockLocations
+      }
+    };
+
+    renderer.render(
+      <CreatePickScreen
+        item={itemWithoutReserve}
+        selectedSectionState={selectedSectionState}
+        palletNumberState={palletNumberState}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders the screen when items are move to front', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const itemWithFloor: ItemDetails = {
+      ...mockItem,
+      location: {
+        ...mockItem.location,
+        floor: mockLocations
+      }
+    }
+
+    const moveToFrontSectionState: UseStateType<string> = [...selectedSectionState];
+    moveToFrontSectionState[0] = MOVE_TO_FRONT;
+
+    renderer.render(
+      <CreatePickScreen
+        item={itemWithFloor}
+        selectedSectionState={moveToFrontSectionState}
+        palletNumberState={palletNumberState}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  })
 });
