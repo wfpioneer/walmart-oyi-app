@@ -381,8 +381,8 @@ export default {
     CREATE_PICK: '创建补货',
     MOVE_TO_FRONT: '移到最前',
     QUICK_PICK: '快速拣货',
-    RESERVE_LOC: 'Reserve Location',
-    FLOOR_LOC: 'Floor location',
+    RESERVE_LOC: '高货架位置',
+    FLOOR_LOC: '楼面位置',
     FRONT: '正面' // TODO Replace with mandarin translation on confluence
   },
   BINNING: {
