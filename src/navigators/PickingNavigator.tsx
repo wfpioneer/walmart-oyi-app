@@ -121,7 +121,7 @@ export const PickingNavigatorStack = (
   if (selectedTab === Tabs.PICK) {
     createPickTitle = strings('PICKING.CREATE_PICK');
   } else if (selectedTab === Tabs.QUICKPICK) {
-    createPickTitle = strings('CREATE_QUICK_PICK');
+    createPickTitle = strings('PICKING.CREATE_QUICK_PICK');
   }
 
   return (
