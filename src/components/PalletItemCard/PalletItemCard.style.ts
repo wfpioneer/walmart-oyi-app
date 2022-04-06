@@ -49,7 +49,7 @@ export default StyleSheet.create({
   },
   delete: {
     justifyContent: 'center',
-    paddingLeft: 180
+    paddingLeft: 160
   },
   itemHeaderFirstRow: {
     flex: 1,
