@@ -15,6 +15,7 @@ import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
 import { strings } from '../../locales';
 import styles from './CreatePick.style';
+import { mockItem, mockLocations } from './CreatePick.test';
 
 export const MOVE_TO_FRONT = 'moveToFront';
 export const PALLET_MIN = 1;
@@ -91,7 +92,6 @@ export const CreatePickScreen = (props: CreatePickProps) => {
           upcNbr={item.upcNbr}
           price={item.price}
           status={item.status || ''}
-          hidePrintButton={true}
         />
       </View>
       <View style={styles.pickParamView}>
@@ -113,6 +113,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
               selectedValue={selectedSection}
               onValueChange={section => setSelectedSection(section)}
               mode="dropdown"
+              testID="sectionPicker"
             >
               {pickerLocations(floorLocations)}
             </Picker>
@@ -134,7 +135,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
         ) : null}
       </View>
       <View style={styles.createButtonView}>
-        <Button title={strings('GENERICS.CREATE')} disabled={disableCreateButton()} />
+        <Button title={strings('GENERICS.CREATE')} disabled={disableCreateButton()} testId="createButton" />
       </View>
     </SafeAreaView>
   );
@@ -144,80 +145,6 @@ const CreatePick = () => {
   const floorLocations = useTypedSelector(state => state.ItemDetailScreen.floorLocations);
   const selectedSectionState = useState(floorLocations.length ? floorLocations[0].locationName : '');
   const palletNumberState = useState(1);
-
-  const mockLocations: Location[] = [
-    {
-      aisleId: 2,
-      aisleName: '1',
-      locationName: 'ABAR1-1',
-      sectionId: 3,
-      sectionName: '1',
-      type: 'floor',
-      typeNbr: 2,
-      zoneId: 1,
-      zoneName: 'ABAR'
-    },
-    {
-      aisleId: 2,
-      aisleName: '2',
-      locationName: 'ABAR1-2',
-      sectionId: 4,
-      sectionName: '2',
-      type: 'floor',
-      typeNbr: 2,
-      zoneId: 1,
-      zoneName: 'ABAR'
-    }
-  ];
-
-  // May need to use api call results as not all item details are stored in item details redux
-  const mockItem: ItemDetails = {
-    categoryNbr: 73,
-    itemName: 'treacle tart',
-    itemNbr: 2,
-    upcNbr: '8675309',
-    backroomQty: 765432,
-    basePrice: 4.92,
-    categoryDesc: 'Deli',
-    claimsOnHandQty: 765457,
-    completed: false,
-    consolidatedOnHandQty: 65346,
-    location: {
-      reserve: [
-        {
-          aisleId: 5018,
-          aisleName: '1',
-          locationName: 'ABAR1-1',
-          sectionId: 5019,
-          sectionName: '1',
-          type: 'reserve',
-          typeNbr: 1,
-          zoneId: 3632,
-          zoneName: 'ABAR'
-        }
-      ],
-      count: 1
-    },
-    onHandsQty: 76543234,
-    pendingOnHandsQty: 2984328947,
-    price: 4.92,
-    replenishment: {
-      onOrder: 100000
-    },
-    sales: {
-      daily: [{
-        day: 'Thursday',
-        value: 3
-      }],
-      dailyAvgSales: 500,
-      lastUpdateTs: 'right now',
-      weekly: [{
-        week: 34,
-        value: 654
-      }],
-      weeklyAvgSales: 3500
-    }
-  };
 
   return (
     <CreatePickScreen

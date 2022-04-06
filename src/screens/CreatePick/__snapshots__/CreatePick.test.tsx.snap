@@ -20,7 +20,6 @@ exports[`Create Pick screen render tests renders the screen with an item 1`] = `
     <ItemInfo
       category="73 - Deli"
       exceptionType={null}
-      hidePrintButton={true}
       itemName="treacle tart"
       itemNbr={2}
       price={4.92}
@@ -50,7 +49,7 @@ exports[`Create Pick screen render tests renders the screen with an item 1`] = `
         }
       }
     >
-      <Icon
+      <mockConstructor
         name="map-marker-outline"
         size={40}
       />
@@ -126,6 +125,7 @@ exports[`Create Pick screen render tests renders the screen with an item 1`] = `
           mode="dropdown"
           onValueChange={[Function]}
           selectedValue=""
+          testID="sectionPicker"
         >
           <PickerItem
             label="ABAR1-1"
@@ -156,6 +156,7 @@ exports[`Create Pick screen render tests renders the screen with an item 1`] = `
       disabled={true}
       height={45}
       radius={5}
+      testId="createButton"
       title="[missing \\"en.GENERICS.CREATE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -165,129 +166,4 @@ exports[`Create Pick screen render tests renders the screen with an item 1`] = `
     />
   </View>
 </ForwardRef(SafeAreaView)>
-`;
-
-exports[`Picking Navigator Renders and Calls the Manual Scan Button 1`] = `
-<View
-  accessible={true}
-  focusable={true}
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  style={
-    Object {
-      "opacity": 1,
-    }
-  }
-  testID="manual-scan"
->
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-        "paddingHorizontal": 15,
-      }
-    }
-  >
-    <Icon
-      color="#ffffffff"
-      name="barcode-scan"
-      size={20}
-    />
-  </View>
-</View>
-`;
-
-exports[`Picking Navigator Renders the Pick TabNavigator 1`] = `
-<MaterialTopTabNavigator
-  initialRouteName="Pick"
->
-  <Screen
-    listeners={
-      Object {
-        "focus": [Function],
-      }
-    }
-    name="QuickPick"
-    options={
-      Object {
-        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation] (0)",
-      }
-    }
-  >
-    [Function]
-  </Screen>
-  <Screen
-    listeners={
-      Object {
-        "focus": [Function],
-      }
-    }
-    name="Pick"
-    options={
-      Object {
-        "title": "[missing \\"en.PICKING.PICK\\" translation] (0)",
-      }
-    }
-  >
-    [Function]
-  </Screen>
-  <Screen
-    listeners={
-      Object {
-        "focus": [Function],
-      }
-    }
-    name="SalesFloor"
-    options={
-      Object {
-        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation] (0)",
-      }
-    }
-  >
-    [Function]
-  </Screen>
-</MaterialTopTabNavigator>
-`;
-
-exports[`Picking Navigator Renders the Picking Navigator 1`] = `
-<StackNavigator
-  headerMode="float"
-  screenOptions={[Function]}
->
-  <Screen
-    name="PickingTabs"
-    options={
-      Object {
-        "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
-      }
-    }
-  >
-    [Function]
-  </Screen>
-  <Screen
-    component={[Function]}
-    name="PickBinWorkflow"
-    options={
-      Object {
-        "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
-      }
-    }
-  />
-  <Screen
-    component={[Function]}
-    name="CreatePick"
-    options={
-      Object {
-        "headerTitle": "[missing \\"en.PICKING.CREATE_PICK\\" translation]",
-      }
-    }
-  />
-</StackNavigator>
 `;

@@ -721,6 +721,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
               price={itemDetails.price}
               exceptionType={getexceptionType(actionCompleted, itemDetails)}
+              navigationForPrint={navigation}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}
