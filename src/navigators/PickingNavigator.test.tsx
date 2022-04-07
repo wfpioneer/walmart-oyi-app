@@ -18,8 +18,7 @@ describe('Picking Navigator', () => {
         dispatch={jest.fn()}
         isManualScanEnabled={false}
         picklist={[]}
-        selectedTab={Tabs.PICK}
-        setSelectedTab={jest.fn()}
+        selectedTabState={[Tabs.PICK, jest.fn()]}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
