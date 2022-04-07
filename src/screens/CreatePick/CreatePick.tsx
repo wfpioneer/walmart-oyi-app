@@ -10,17 +10,15 @@ import { Picker } from '@react-native-picker/picker';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
 import Button from '../../components/buttons/Button';
-import { useTypedSelector } from '../../state/reducers/RootReducer';
 import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
 import { strings } from '../../locales';
 import styles from './CreatePick.style';
+import { UseStateType } from '../../models/Generics.d';
 
 export const MOVE_TO_FRONT = 'moveToFront';
 export const PALLET_MIN = 1;
 export const PALLET_MAX = 99;
-
-export type UseStateType<T> = [T, React.Dispatch<React.SetStateAction<T>>];
 
 interface CreatePickProps {
   item: ItemDetails;
@@ -143,7 +141,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
 
 const CreatePick = () => {
   const palletNumberState = useState(1);
-  
+
   const mockLocations: Location[] = [
     {
       aisleId: 2,
@@ -168,7 +166,7 @@ const CreatePick = () => {
       zoneName: 'ABAR'
     }
   ];
-  
+
   // May need to use api call results as not all item details are stored in item details redux
   const mockItem: ItemDetails = {
     categoryNbr: 73,
@@ -221,7 +219,7 @@ const CreatePick = () => {
 
   const floorLocations = mockItem.location.floor;
   const selectedSectionState = useState(floorLocations && floorLocations.length ? floorLocations[0].locationName : '');
-  
+
   return (
     <CreatePickScreen
       item={mockItem}

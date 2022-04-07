@@ -1,8 +1,9 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { UseStateType } from '../../models/Generics.d';
 import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
-import { CreatePickScreen, MOVE_TO_FRONT, UseStateType } from './CreatePick';
+import { CreatePickScreen, MOVE_TO_FRONT } from './CreatePick';
 
 const mockLocations: Location[] = [
   {
@@ -103,7 +104,7 @@ describe('Create Pick screen render tests', () => {
         ...mockItem.location,
         floor: mockLocations
       }
-    }
+    };
 
     const defaultSelectedSectionState: UseStateType<string> = [...selectedSectionState];
     defaultSelectedSectionState[0] = mockLocations[0].locationName;
@@ -167,7 +168,7 @@ describe('Create Pick screen render tests', () => {
         ...mockItem.location,
         floor: mockLocations
       }
-    }
+    };
 
     const moveToFrontSectionState: UseStateType<string> = [...selectedSectionState];
     moveToFrontSectionState[0] = MOVE_TO_FRONT;
@@ -181,5 +182,5 @@ describe('Create Pick screen render tests', () => {
     );
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
-  })
+  });
 });

@@ -16,22 +16,25 @@ import { setManualScan } from '../state/actions/Global';
 import styles from './PickingNavigator.style';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { PickListItem, PickStatus } from '../models/Picking.d';
+import { UseStateType } from '../models/Generics.d';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
+
 // eslint-disable-next-line no-shadow
 export enum Tabs {
   QUICKPICK,
   PICK,
   SALESFLOOR
 }
+
 interface PickingNavigatorProps {
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
   picklist: PickListItem[];
-  selectedTab: Tabs;
-  setSelectedTab: React.Dispatch<React.SetStateAction<Tabs>>
+  selectedTabState: UseStateType<Tabs>
 }
+
 export const PickTabNavigator = (props: {
   picklist: PickListItem[];
   setSelectedTab: React.Dispatch<React.SetStateAction<Tabs>>;
@@ -113,9 +116,9 @@ export const PickingNavigatorStack = (
   props: PickingNavigatorProps
 ): JSX.Element => {
   const {
-    dispatch, isManualScanEnabled, picklist,
-    selectedTab, setSelectedTab
+    dispatch, isManualScanEnabled, picklist, selectedTabState
   } = props;
+  const [selectedTab, setSelectedTab] = selectedTabState;
 
   let createPickTitle = '';
   if (selectedTab === Tabs.PICK) {
@@ -161,7 +164,8 @@ export const PickingNavigatorStack = (
       <Stack.Screen
         name="CreatePick"
         options={{
-          headerTitle: createPickTitle
+          headerTitle: createPickTitle,
+          headerRight: () => null
         }}
         component={CreatePick}
       />
@@ -173,13 +177,12 @@ const PickingNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const picklist = useTypedSelector(state => state.Picking.pickList);
-  const [selectedTab, setSelectedTab] = useState<Tabs>(Tabs.PICK);
+  const selectedTabState = useState<Tabs>(Tabs.PICK);
   return (
     <PickingNavigatorStack
       dispatch={dispatch}
       isManualScanEnabled={isManualScanEnabled}
-      selectedTab={selectedTab}
-      setSelectedTab={setSelectedTab}
+      selectedTabState={selectedTabState}
       picklist={picklist}
     />
   );
