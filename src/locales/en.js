@@ -358,7 +358,30 @@ export default {
     ENTER_CLUB_NBR: 'Enter a Club Number'
   },
   PICKING: {
-    PICKING: 'Picking'
+    PICKING: 'Picking',
+    QUICKPICK: 'Quick Pick',
+    ASSIGNED: 'Assigned',
+    CREATED_BY: 'Created By',
+    CREATED: 'Created',
+    READY_TO_PICK: 'Ready to pick',
+    ACCEPTED_PICK: 'Accepted pick',
+    READY_TO_WORK: 'Ready to work',
+    READY_TO_BIN: 'Ready to bin',
+    ACCEPTED_BIN: 'Accepted bin',
+    COMPLETE: 'Complete',
+    DELETED: 'Deleted',
+    NO_PALLETS_FOUND: 'No pallets found',
+    ASSIGNED_TO_ME: 'Assigned to me',
+    PICK: 'Pick',
+    WORK: 'Work',
+    BIN: 'Bin',
+    SCAN_ITEM_LABEL: 'Scan item to add to picklist',
+    SELECT_LOCATION: 'Select a Location',
+    NUMBER_PALLETS: 'Number of Pallets',
+    QUICK_PICK: 'Quick Pick',
+    MOVE_TO_FRONT: 'Move to Front',
+    FRONT: 'Front',
+    CREATE_PICK: 'Create Pick'
   },
   BINNING: {
     BINNING: 'Binning',

@@ -26,6 +26,7 @@ import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
+import CreatePickDialog from '../../components/CreatePickDialog/CreatePickDialog';
 import { resetLocations, setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { showInfoModal } from '../../state/actions/Modal';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -35,6 +36,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { ADD_TO_PICKLIST, GET_ITEM_DETAILS, NO_ACTION } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
+import { Configurations } from '../../models/User';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -56,12 +58,17 @@ export interface ItemDetailsScreenProps {
   scrollViewRef: RefObject<ScrollView>;
   isSalesMetricsGraphView: boolean; setIsSalesMetricsGraphView: React.Dispatch<React.SetStateAction<boolean>>;
   ohQtyModalVisible: boolean; setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  createPickModalVisible: boolean; setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   errorModalVisible: boolean; setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedSection: string; setSelectedSection: React.Dispatch<React.SetStateAction<string>>;
+  numberOfPallets: number; setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>;
+  isQuickPick: boolean; setIsQuickPick: React.Dispatch<React.SetStateAction<boolean>>;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
   userFeatures: string[];
+  userConfigs: Configurations
 }
 
 export interface HandleProps {
@@ -80,6 +87,7 @@ export interface RenderProps {
   isManualScanEnabled: boolean;
   floorLocations?: Location[];
   reserveLocations?: Location[];
+  userConfigs: Configurations;
 }
 
 const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
@@ -159,9 +167,12 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
   return <ItemDetailsList rows={qtyRows} indentAfterFirstRow={true} />;
 };
 
-export const renderAddPicklistButton = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
+export const renderAddPicklistButton = (
+  props: (RenderProps & HandleProps),
+  itemDetails: ItemDetails,
+  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>): JSX.Element => {
   const { reserve } = itemDetails.location;
-  const { addToPicklistStatus } = props;
+  const { addToPicklistStatus, userConfigs } = props;
   if (addToPicklistStatus?.isWaiting) {
     return (
       <ActivityIndicator
@@ -204,7 +215,9 @@ export const renderAddPicklistButton = (props: (RenderProps & HandleProps), item
         titleFontSize={12}
         titleFontWeight="bold"
         height={28}
-        onPress={() => handleAddToPicklist(props, itemDetails)}
+        onPress={() => {
+          userConfigs.picking ? setCreatePickModalVisible(true) : handleAddToPicklist(props, itemDetails);
+        }}
       />
     );
   }
@@ -212,7 +225,10 @@ export const renderAddPicklistButton = (props: (RenderProps & HandleProps), item
   return <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>;
 };
 
-export const renderLocationComponent = (props: (RenderProps & HandleProps), itemDetails: ItemDetails): JSX.Element => {
+export const renderLocationComponent = (
+  props: (RenderProps & HandleProps),
+  itemDetails: ItemDetails,
+  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>): JSX.Element => {
   const { floorLocations, reserveLocations } = props;
   return (
     <View style={styles.locationContainer}>
@@ -249,7 +265,7 @@ export const renderLocationComponent = (props: (RenderProps & HandleProps), item
           )}
       </View>
       <View style={styles.renderPickListContainer}>
-        {renderAddPicklistButton(props, itemDetails)}
+        {renderAddPicklistButton(props, itemDetails, setCreatePickModalVisible)}
       </View>
     </View>
   );
@@ -531,11 +547,16 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     scrollViewRef,
     isSalesMetricsGraphView, setIsSalesMetricsGraphView,
     ohQtyModalVisible, setOhQtyModalVisible,
+    createPickModalVisible, setCreatePickModalVisible,
     errorModalVisible, setErrorModalVisible,
+    selectedSection, setSelectedSection,
+    numberOfPallets, setNumberOfPallets,
+    isQuickPick, setIsQuickPick,
     trackEventCall,
     validateSessionCall,
     useEffectHook,
-    useFocusEffectHook
+    useFocusEffectHook,
+    floorLocations
   } = props;
 
   useEffectHook(() => () => {
@@ -660,6 +681,29 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           exceptionType={itemDetails.exceptionType}
         />
       </CustomModalComponent>
+      <CustomModalComponent
+        isVisible={createPickModalVisible}
+        onClose={() => setCreatePickModalVisible(false)}
+        modalType="Form"
+      >
+        <CreatePickDialog
+          selectedSection={selectedSection}
+          setSelectedSection={setSelectedSection}
+          numberOfPallets={numberOfPallets}
+          setNumberOfPallets={setNumberOfPallets}
+          isQuickPick={isQuickPick}
+          setIsQuickPick={setIsQuickPick}
+          locations={floorLocations || []}
+          onClose={() => setCreatePickModalVisible(false)}
+          onSubmit={() => {
+            //TODO implement submitting user input from dialog to call api, temporarily resets values and closes modal
+            setSelectedSection('');
+            setNumberOfPallets(1);
+            setIsQuickPick(false);
+            setCreatePickModalVisible(false);
+          }}
+        />
+      </CustomModalComponent>
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={styles.container}
@@ -709,7 +753,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               topRightBtnTxt={gettopRightBtnTxt(locationCount)}
               topRightBtnAction={() => handleLocationAction(props, itemDetails)}
             >
-              {renderLocationComponent(props, itemDetails)}
+              {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
             </SFTCard>
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
               itemDetails, isSalesMetricsGraphView)}
@@ -734,13 +778,18 @@ const ReviewItemDetails = (): JSX.Element => {
     reserveLocations
   } = useTypedSelector(state => state.ItemDetailScreen);
   const userFeatures = useTypedSelector(state => state.User.features);
+  const userConfigs = useTypedSelector(state => state.User.configs);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const [isSalesMetricsGraphView, setIsSalesMetricsGraphView] = useState(false);
   const [ohQtyModalVisible, setOhQtyModalVisible] = useState(false);
+  const [createPickModalVisible, setCreatePickModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [selectedSection, setSelectedSection] = useState('');
+  const [numberOfPallets, setNumberOfPallets] = useState(1);
+  const [isQuickPick, setIsQuickPick] = useState(false);
   return (
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
@@ -764,13 +813,22 @@ const ReviewItemDetails = (): JSX.Element => {
       setIsSalesMetricsGraphView={setIsSalesMetricsGraphView}
       ohQtyModalVisible={ohQtyModalVisible}
       setOhQtyModalVisible={setOhQtyModalVisible}
+      createPickModalVisible={createPickModalVisible}
+      setCreatePickModalVisible={setCreatePickModalVisible}
       errorModalVisible={errorModalVisible}
       setErrorModalVisible={setErrorModalVisible}
+      selectedSection={selectedSection}
+      setSelectedSection={setSelectedSection}
+      numberOfPallets={numberOfPallets}
+      setNumberOfPallets={setNumberOfPallets}
+      isQuickPick={isQuickPick}
+      setIsQuickPick={setIsQuickPick}
       trackEventCall={trackEvent}
       validateSessionCall={validateSession}
       useEffectHook={useEffect}
       useFocusEffectHook={useFocusEffect}
       userFeatures={userFeatures}
+      userConfigs={userConfigs}
     />
   );
 };

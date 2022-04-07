@@ -41,7 +41,8 @@ class Button extends PureComponent {
       titleColor,
       titleFontSize,
       titleFontWeight,
-      title
+      title,
+      testID
     } = this.props;
     const containerStyle = width === -1
       ? { height }
@@ -88,6 +89,7 @@ class Button extends PureComponent {
             onPress={this.onPress}
             activeOpacity={0.8}
             style={buttonStyle}
+            testID={testID}
           >
             <Text
               style={{
@@ -118,7 +120,8 @@ Button.propTypes = {
   radius: PropTypes.number,
   style: PropTypes.object,
   type: PropTypes.number,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  testID: PropTypes.string
 };
 
 Button.defaultProps = {

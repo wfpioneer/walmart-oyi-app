@@ -1,0 +1,304 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests rendering PickItemInfoCard Renders the deleteView component and fires the Delete button 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "height": 45,
+        },
+        Object {
+          "flex": 1,
+          "width": 60,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ec0439",
+            "borderRadius": 5,
+            "elevation": 1,
+            "flex": 1,
+            "justifyContent": "center",
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontFamily": "Roboto-Medium",
+              "fontSize": 16,
+              "fontWeight": "normal",
+            }
+          }
+        >
+          [missing "en.GENERICS.DELETE" translation]
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
+<View
+  collapsable={false}
+  forwardedRef={[Function]}
+  onGestureHandlerEvent={[Function]}
+  onGestureHandlerStateChange={[Function]}
+  onLayout={[Function]}
+  style={
+    Object {
+      "overflow": "hidden",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "bottom": 0,
+        "flexDirection": "row-reverse",
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+        "transform": Array [
+          Object {
+            "translateX": -10000,
+          },
+        ],
+      }
+    }
+  >
+    <View>
+      <View
+        style={
+          Array [
+            Object {
+              "height": 45,
+            },
+            Object {
+              "flex": 1,
+              "width": 60,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          <View
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ec0439",
+                "borderRadius": 5,
+                "elevation": 1,
+                "flex": 1,
+                "justifyContent": "center",
+                "opacity": 1,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#ffffffff",
+                  "fontFamily": "Roboto-Medium",
+                  "fontSize": 16,
+                  "fontWeight": "normal",
+                }
+              }
+            >
+              [missing "en.GENERICS.DELETE" translation]
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+    />
+  </View>
+  <View
+    collapsable={false}
+    forwardedRef={[Function]}
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    pointerEvents="auto"
+    style={
+      Object {
+        "transform": Array [
+          Object {
+            "translateX": -0,
+          },
+        ],
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "flex-start",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#dbecff",
+          "borderWidth": 1,
+          "flex": 1,
+          "justifyContent": "space-between",
+          "paddingBottom": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 7,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+              "fontSize": 14,
+            }
+          }
+        >
+          Teapot
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.ITEM.CATEGORY" translation]: 71
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "flexDirection": "column",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 7,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.ITEM.SALES_FLOOR_QTY" translation]: [missing "en.PICKING.FRONT" translation]
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.PICKING.ASSIGNED" translation]: Associate 1
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.PICKING.CREATED_BY" translation]: Associate 1
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "flexDirection": "column",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 7,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.GENERICS.ITEM" translation]: 734
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.ITEM.UPC" translation]: 000041800003
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.PICKING.CREATED" translation]: 10:32 AM 02/04/2022
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

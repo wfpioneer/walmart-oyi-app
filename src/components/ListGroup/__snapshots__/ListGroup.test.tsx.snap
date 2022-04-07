@@ -1,0 +1,225 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard when the card is closed 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+        }
+      }
+    >
+      ABAR-1
+    </Text>
+  </View>,
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "flex": 0.1,
+        "opacity": 1,
+        "paddingLeft": 5,
+      }
+    }
+    testID="collapsible-card"
+  >
+    <Icon
+      color="#000000"
+      name="keyboard-arrow-down"
+      size={25}
+    />
+  </View>,
+]
+`;
+
+exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard when the card is opened 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+        }
+      }
+    >
+      ABAR-1
+    </Text>
+  </View>,
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "flex": 0.1,
+        "opacity": 1,
+        "paddingLeft": 5,
+      }
+    }
+    testID="collapsible-card"
+  >
+    <Icon
+      color="#000000"
+      name="keyboard-arrow-up"
+      size={25}
+    />
+  </View>,
+]
+`;
+
+exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems prop as false 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#5a9ae0",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "paddingHorizontal": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <CollapsibleCard
+      isOpened={true}
+      title="ABAR-2"
+      toggleIsOpened={[Function]}
+    />
+  </View>
+  <View>
+    <FlatList
+      data={
+        Array [
+          Object {
+            "assignedAssociate": "Associate 1",
+            "category": 71,
+            "createTS": "10:32 AM 02/04/2022",
+            "createdBy": "Associate 1",
+            "id": 418,
+            "itemDesc": "Teapot",
+            "itemNbr": 734,
+            "moveToFront": true,
+            "palletId": 4321,
+            "palletLocationId": 1672,
+            "palletLocationName": "C1-2",
+            "quickPick": false,
+            "salesFloorLocationId": 1673,
+            "salesFloorLocationName": "C1-3",
+            "status": "accepted pick",
+            "upcNbr": "000041800003",
+          },
+          Object {
+            "assignedAssociate": "Associate 1",
+            "category": 71,
+            "createTS": "4:25 PM 02/09/2022",
+            "createdBy": "Manager 1",
+            "id": 3,
+            "itemDesc": "Swiffer",
+            "itemNbr": 845,
+            "moveToFront": true,
+            "palletId": 5432,
+            "palletLocationId": 2345,
+            "palletLocationName": "BREW1-2",
+            "quickPick": false,
+            "salesFloorLocationId": 2345,
+            "salesFloorLocationName": "BREW1-2",
+            "status": "accepted pick",
+            "upcNbr": "000052900004",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEnabled={false}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+</View>
+`;
+
+exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems prop as true 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#5a9ae0",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "paddingHorizontal": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <CollapsibleCard
+      isOpened={true}
+      title="ABAR-2"
+      toggleIsOpened={[Function]}
+    />
+  </View>
+  <View>
+    <FlatList
+      data={
+        Array [
+          "5432",
+          "4321",
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEnabled={false}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </View>
+</View>
+`;
