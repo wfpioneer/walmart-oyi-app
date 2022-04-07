@@ -381,7 +381,9 @@ export default {
     QUICK_PICK: 'Quick Pick',
     MOVE_TO_FRONT: 'Move to Front',
     FRONT: 'Front',
-    CREATE_PICK: 'Create Pick'
+    CREATE_PICK: 'Create Pick',
+    ACCEPT: 'Accept',
+    RELEASE: 'Release'
   },
   BINNING: {
     BINNING: 'Binning',
