@@ -34,36 +34,41 @@ const pickingState: PickingState = {
       ...basePickItem,
       assignedAssociate: 't0s0og',
       status: PickStatus.ACCEPTED_PICK,
-      id: 1
+      id: 1,
+      palletId: 40
     },
     {
       ...basePickItem,
       status: PickStatus.READY_TO_PICK,
-      id: 2
+      id: 2,
+      palletId: 41
     },
     {
       ...basePickItem,
       id: 3,
-      status: PickStatus.READY_TO_BIN
+      status: PickStatus.READY_TO_BIN,
+      palletId: 42
     },
     {
       ...basePickItem,
       id: 4,
-      status: PickStatus.READY_TO_BIN
+      status: PickStatus.READY_TO_BIN,
+      palletId: 42
     },
     {
       ...basePickItem,
       assignedAssociate: 'vn50pz4',
       id: 5,
       status: PickStatus.ACCEPTED_PICK,
-      quickPick: true
+      quickPick: true,
+      palletId: 44
     },
     {
       ...basePickItem,
       assignedAssociate: 'vn50pz4',
       id: 6,
       status: PickStatus.ACCEPTED_BIN,
-      palletId: 2,
+      palletId: 45,
       palletLocationId: 5,
       palletLocationName: 'ABAR1-4',
       quickPick: true
