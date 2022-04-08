@@ -32,7 +32,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     const { status } = selectedPicks[0];
     const isMine = selectedPicks[0].assignedAssociate === userId;
 
-    const amManager = userFeatures.includes('manager approval');
+    const amManager = !userFeatures.includes('manager approval');
     const releaseButton = (status === PickStatus.ACCEPTED_BIN || status === PickStatus.ACCEPTED_PICK)
       && (isMine || amManager) ? (
         <Button
