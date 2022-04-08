@@ -380,7 +380,9 @@ export default {
     CREATE_PICK: '创建补货',
     MOVE_TO_FRONT: '移到最前',
     FRONT: '正面', // TODO Replace with mandarin translation on confluence
-    QUICK_PICK: '快速拣货'
+    QUICK_PICK: '快速拣货',
+    ACCEPT: '接收',
+    RELEASE: '释放'
   },
   BINNING: {
     BINNING: '上架',

@@ -380,7 +380,9 @@ export default {
     CREATE_PICK: 'Crear un Pick',
     MOVE_TO_FRONT: 'Llevar al frente',
     FRONT: 'Frente',
-    QUICK_PICK: 'Pickeo rápido'
+    QUICK_PICK: 'Pickeo rápido',
+    ACCEPT: 'Aceptar',
+    RELEASE: 'Liberar'
   },
   BINNING: {
     BINNING: 'Bodega',

@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '../../components/buttons/Button';
 import PickPalletInfoCard from '../../components/PickPalletInfoCard/PickPalletInfoCard';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { PickingState } from '../../state/reducers/Picking';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
 import { strings } from '../../locales';
 import styles from './PickBinWorkflow.style';
@@ -11,11 +12,13 @@ import styles from './PickBinWorkflow.style';
 interface PBWorkflowProps {
   userFeatures: string[];
   userId: string;
-  selectedPicks: PickListItem[];
+  pickingState: PickingState;
 }
 
-const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
-  const { userFeatures, userId, selectedPicks } = props;
+export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
+  const { userFeatures, userId, pickingState } = props;
+
+  const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
 
   const handleAccept = () => {};
 
@@ -30,23 +33,22 @@ const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     const isMine = selectedPicks[0].assignedAssociate === userId;
 
     const amManager = userFeatures.includes('manager approval');
-    const releaseButton = ((
-      (status === PickStatus.ACCEPTED_BIN || status === PickStatus.ACCEPTED_PICK) && isMine)
-      || amManager) ? (
-        <Button title={strings('PICKING.RELEASE')} onPress={handleRelease} />
+    const releaseButton = (status === PickStatus.ACCEPTED_BIN || status === PickStatus.ACCEPTED_PICK)
+      && (isMine || amManager) ? (
+        <Button title={strings('PICKING.RELEASE')} onPress={handleRelease} style={styles.actionButton} />
       ) : null;
 
     const isReady = status === PickStatus.READY_TO_BIN || status === PickStatus.READY_TO_PICK;
     const acceptButton = isReady ? (
-      <Button title={strings('PICKING.ACCEPT')} onPress={handleAccept} />
+      <Button title={strings('PICKING.ACCEPT')} onPress={handleAccept} style={styles.actionButton} />
     ) : null;
 
     const continueButton = isMine && status === PickStatus.ACCEPTED_PICK ? (
-      <Button title={strings('GENERICS.CONTINUE')} onPress={handleContinue} />
+      <Button title={strings('GENERICS.CONTINUE')} onPress={handleContinue} style={styles.actionButton} />
     ) : null;
 
     const binButton = isMine && status === PickStatus.ACCEPTED_BIN ? (
-      <Button title={strings('PICKING.BIN')} onPress={handleBin} />
+      <Button title={strings('PICKING.BIN')} onPress={handleBin} style={styles.actionButton} />
     ) : null;
 
     const buttonList: Array<JSX.Element | null> = [
@@ -79,13 +81,11 @@ const PickBinWorkflow = () => {
   const userId = useTypedSelector(state => state.User.userId);
   const picking = useTypedSelector(state => state.Picking);
 
-  const selectedPicks = picking.pickList.filter(pick => picking.selectedPicks.includes(pick.id));
-
   return (
     <PickBinWorkflowScreen
       userFeatures={userFeatures}
       userId={userId}
-      selectedPicks={selectedPicks}
+      pickingState={picking}
     />
   );
 };

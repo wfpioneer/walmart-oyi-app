@@ -18,6 +18,13 @@ import { PickListItem, PickStatus } from '../models/Picking.d';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
+// eslint-disable-next-line no-shadow
+export enum Tabs {
+  QUICKPICK,
+  PICK,
+  SALESFLOOR
+}
+
 interface PickingNavigatorProps {
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
@@ -122,7 +129,6 @@ export const PickingNavigatorStack = (
       </Stack.Screen>
       <Stack.Screen
         name="PickBinWorkflow"
-        // TODO: Placeholder for PickBinWorkflow
         component={PickBinWorkflow}
         options={{
           headerTitle: strings('PICKING.PICKING')

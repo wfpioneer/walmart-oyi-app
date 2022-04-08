@@ -7,7 +7,12 @@ const styles = StyleSheet.create({
   },
   actionButtonsView: {
     flexDirection: 'row',
-    marginTop: 'auto'
+    marginTop: 'auto',
+    width: '100%'
+  },
+  actionButton: {
+    flex: 1,
+    margin: 5
   }
 });
 
