@@ -1,7 +1,8 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { CreatePickDialog, MOVE_TO_FRONT } from './CreatePickDialog';
+import { CreatePickDialog } from './CreatePickDialog';
+import { MOVE_TO_FRONT } from '../../screens/CreatePick/CreatePick';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => {
     return 'mockMaterialCommunityIcons'
