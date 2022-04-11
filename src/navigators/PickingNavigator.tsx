@@ -115,8 +115,8 @@ export const renderScanButton = (
 export const kebabMenuButton = () => (
   <Pressable onPress={() => {}} style={styles.leftButton}>
     <MaterialCommunityIcons
-      name="dots-verticle"
-      size={20}
+      name="dots-vertical"
+      size={30}
       color={COLOR.WHITE}
     />
   </Pressable>
@@ -168,7 +168,7 @@ export const PickingNavigatorStack = (
         component={PickBinWorkflow}
         options={{
           headerTitle: strings('PICKING.PICKING'),
-          headerRight: () => kebabMenuButton
+          headerRight: () => kebabMenuButton()
         }}
       />
       <Stack.Screen
