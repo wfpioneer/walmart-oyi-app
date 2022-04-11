@@ -1,4 +1,4 @@
-inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-v1.3.2
+inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-v1.3.3
 
 # Maximum commits to be ShallowCloned by Looper
 gitShallowDepth: 2147483647
@@ -32,7 +32,7 @@ envs:
 
       #Slack related vars
       # Optional - Slack channel for notifications
-      SLACK_CHANNEL: 'intl_sams_oyi_ops_alerts'
+      SLACK_CHANNEL: ''
 
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
@@ -71,6 +71,9 @@ envs:
       #Versioning vars
       # major / minor / patch / noBump > defaults to patch
       VERSION_TYPE: 'noBump'
+
+      # Optional - weather the build will be zip alligned. Defaults to true
+      ZIPALIGN_REQUIRED: true
 
       #Proximity related vars
       RELEASES_REPO: 'pangaea_releases'
