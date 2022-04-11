@@ -32,7 +32,7 @@ envs:
 
       #Slack related vars
       # Optional - Slack channel for notifications
-      SLACK_CHANNEL: 'intl_sams_oyi_ops_alerts'
+      SLACK_CHANNEL: 'mobile-cicd-notifs'
 
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
