@@ -14,7 +14,7 @@ import {
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
-import { isEmpty, partition } from 'lodash';
+import { partition } from 'lodash';
 import moment from 'moment';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { trackEvent } from 'appcenter-analytics';
@@ -44,7 +44,6 @@ import {
   resetItems,
   setPalletItemNewQuantity,
   setPalletNewExpiration,
-  setPerishableCategories,
   setupPallet,
   showManagePalletMenu,
   updateItems,
@@ -52,7 +51,7 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, GET_PALLET_CONFIG, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
@@ -77,9 +76,7 @@ interface ManagePalletProps {
   clearPalletApi: AsyncState;
   displayClearConfirmation: boolean;
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
-  getPalletConfigApi: AsyncState;
   perishableCategories: number[];
-  userConfig: Configurations
   isPickerShow: boolean;
   setIsPickerShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -230,35 +227,6 @@ export const handleAddItems = (
 
   if (addPalletItems.length > 0) {
     dispatch(addPalletUPCs({ palletId: id, items: addPalletItems, expirationDate }));
-  }
-};
-
-export const getPalletConfigApiHook = (
-  getPalletConfigApi: AsyncState,
-  dispatch: Dispatch<any>,
-  userConfig: Configurations,
-  navigation: NavigationProp<any>
-): void => {
-  if (navigation.isFocused() && !getPalletConfigApi.isWaiting) {
-    // on api success
-    if (getPalletConfigApi.result) {
-      const { perishableCategories } = getPalletConfigApi.result.data;
-      dispatch(setPerishableCategories(perishableCategories));
-      dispatch(hideActivityModal());
-      dispatch({ type: GET_PALLET_CONFIG.RESET });
-    }
-    // on api error
-    if (getPalletConfigApi.error) {
-      dispatch(hideActivityModal());
-      const { backupCategories } = userConfig;
-      const backupPerishableCategories = backupCategories.split(',').map(Number);
-      dispatch(setPerishableCategories(backupPerishableCategories));
-      dispatch({ type: GET_PALLET_CONFIG.RESET });
-    }
-  }
-  // api is Loading
-  if (getPalletConfigApi.isWaiting) {
-    dispatch(showActivityModal());
   }
 };
 
@@ -546,7 +514,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletInfoApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
-    isPickerShow, getPalletConfigApi, perishableCategories, userConfig
+    isPickerShow, perishableCategories
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
 
@@ -557,20 +525,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     // Suggestion add confirmation before leaving screen if they want to undo unsaved changes
     dispatch({ type: GET_ITEM_DETAILS.RESET });
   }), []);
-
-  useEffectHook(() => {
-    if (userConfig.palletExpiration && isEmpty(perishableCategories)) {
-      dispatch(getPalletConfig());
-    }
-  }, [perishableCategories]);
-
-  // update pallet hook (get pallet config api)
-  useEffectHook(() => getPalletConfigApiHook(
-    getPalletConfigApi,
-    dispatch,
-    userConfig,
-    navigation
-  ), [getPalletConfigApi]);
 
   // Scanner listener
   useEffectHook(() => {
@@ -788,8 +742,6 @@ const ManagePallet = (): JSX.Element => {
   const getPalletInfoApi = useTypedSelector(state => state.async.getPalletInfo);
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
-  const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
-  const userConfig = useTypedSelector(state => state.User.configs);
   const [isPickerShow, setIsPickerShow] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -847,8 +799,6 @@ const ManagePallet = (): JSX.Element => {
           clearPalletApi={clearPalletApi}
           displayClearConfirmation={displayClearConfirmation}
           setDisplayClearConfirmation={setDisplayClearConfirmation}
-          getPalletConfigApi={getPalletConfigApi}
-          userConfig={userConfig}
           perishableCategories={perishableCategories}
           isPickerShow={isPickerShow}
           setIsPickerShow={setIsPickerShow}
