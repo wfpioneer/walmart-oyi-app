@@ -5,6 +5,7 @@ import Button from '../../components/buttons/Button';
 import { PickingState } from '../../state/reducers/Picking';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
+import styles from './SalesFloorWorkflow.style';
 
 interface SFWorklfowProps {
   pickingState: PickingState;
@@ -20,10 +21,10 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const handleBin = () => {};
 
   return (
-    <SafeAreaView>
-      <View>
-        <Button title={strings('PICKING.COMPLETE')} onPress={handleComplete} />
-        <Button title={strings('PICKING.READY_TO_BIN')} onPress={handleBin} />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.actionButtonsView}>
+        <Button title={strings('PICKING.COMPLETE')} onPress={handleComplete} style={styles.actionButton} />
+        <Button title={strings('PICKING.READY_TO_BIN')} onPress={handleBin} style={styles.actionButton} />
       </View>
     </SafeAreaView>
   );
