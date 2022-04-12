@@ -32,7 +32,6 @@ envs:
 
       #Slack related vars
       # Optional - Slack channel for notifications
-      SLACK_CHANNEL: ''
 
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
