@@ -40,6 +40,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
   <View
     style={
       Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
         "flexDirection": "row",
         "marginTop": "auto",
         "width": "100%",
@@ -128,6 +130,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
   <View
     style={
       Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
         "flexDirection": "row",
         "marginTop": "auto",
         "width": "100%",
@@ -197,6 +201,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
   <View
     style={
       Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
         "flexDirection": "row",
         "marginTop": "auto",
         "width": "100%",
@@ -246,6 +252,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
   <View
     style={
       Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
         "flexDirection": "row",
         "marginTop": "auto",
         "width": "100%",
@@ -334,6 +342,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
   <View
     style={
       Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
         "flexDirection": "row",
         "marginTop": "auto",
         "width": "100%",
@@ -403,6 +413,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
   <View
     style={
       Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
         "flexDirection": "row",
         "marginTop": "auto",
         "width": "100%",
@@ -470,6 +482,8 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
   <View
     style={
       Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
         "flexDirection": "row",
         "marginTop": "auto",
         "width": "100%",
@@ -539,6 +553,8 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
   <View
     style={
       Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
         "flexDirection": "row",
         "marginTop": "auto",
         "width": "100%",
