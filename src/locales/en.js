@@ -387,7 +387,10 @@ export default {
     FLOOR_LOC: 'Floor location',
     FRONT: 'Front',
     ACCEPT: 'Accept',
-    RELEASE: 'Release'
+    RELEASE: 'Release',
+    PICKLIST_SUCCESS: 'Successfully retrieved pickLists',
+    PICKLIST_NOT_FOUND: 'No picklists were found for this club',
+    PICKLIST_ERROR: 'There was an error retrieving the Picklist'
   },
   BINNING: {
     BINNING: 'Binning',

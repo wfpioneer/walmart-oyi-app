@@ -385,7 +385,10 @@ export default {
     FLOOR_LOC: '楼面位置',
     FRONT: '正面', // TODO Replace with mandarin translation on confluence
     ACCEPT: '接收',
-    RELEASE: '释放'
+    RELEASE: '释放',
+    PICKLIST_SUCCESS: 'Successfully retrieved pickLists', // TODO add Mandarin translations
+    PICKLIST_NOT_FOUND: 'No picklists were found for this club', // TODO add Mandarin translations
+    PICKLIST_ERROR: 'There was an error retrieving the Picklist' // TODO add Mandarin translations
   },
   BINNING: {
     BINNING: '上架',

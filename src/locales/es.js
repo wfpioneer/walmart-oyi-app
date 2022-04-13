@@ -385,7 +385,10 @@ export default {
     FLOOR_LOC: 'Ubicación en Piso',
     FRONT: 'Frente',
     ACCEPT: 'Aceptar',
-    RELEASE: 'Liberar'
+    RELEASE: 'Liberar',
+    PICKLIST_SUCCESS: 'Successfully retrieved pickLists', // TODO add Spanish translations
+    PICKLIST_NOT_FOUND: 'No picklists were found for this club', // TODO add Spanish translations
+    PICKLIST_ERROR: 'There was an error retrieving the Picklist' // TODO add Spanish translations
   },
   BINNING: {
     BINNING: 'Bodega',
