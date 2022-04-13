@@ -3,6 +3,8 @@ import {
   FlatList, SafeAreaView, Text, View
 } from 'react-native';
 import { groupBy, partition } from 'lodash';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import User from '../../models/User';
 import { PickListItem } from '../../models/Picking.d';
@@ -10,6 +12,7 @@ import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
 import styles from './PickBinTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
+import { Tabs } from '../../navigators/PickingNavigator';
 
 interface PickBinTabProps {
   pickBinList: PickListItem[]
@@ -18,6 +21,7 @@ interface PickBinTabScreenProps {
   pickBinList: PickListItem[];
   user: User;
   isManualScanEnabled: boolean;
+  dispatch: Dispatch<any>;
 }
 
 const ASSIGNED_TO_ME = 'assignedToMe';
@@ -26,7 +30,9 @@ const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletL
   palletLocation.indexOf('-')).replace(/[\d.]+$/, '') : '');
 
 export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
-  const { pickBinList, user, isManualScanEnabled } = props;
+  const {
+    pickBinList, user, isManualScanEnabled, dispatch
+  } = props;
   const [assignedToMe, otherPickList] = partition(pickBinList, pick => pick.assignedAssociate === user.userId);
   const groupedPickListByZone = groupBy(otherPickList,
     (item: PickListItem) => getZoneFromPalletLocation(item.palletLocationName));
@@ -48,6 +54,8 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
               title={title}
               pickListItems={items}
               groupItems
+              currentTab={Tabs.PICK}
+              dispatch={dispatch}
             />
           );
         }}
@@ -62,6 +70,7 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
 
 const PickBinTab = (props: PickBinTabProps) => {
   const { pickBinList } = props;
+  const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
 
@@ -70,6 +79,7 @@ const PickBinTab = (props: PickBinTabProps) => {
       pickBinList={pickBinList}
       user={user}
       isManualScanEnabled={isManualScanEnabled}
+      dispatch={dispatch}
     />
   );
 };

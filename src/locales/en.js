@@ -385,7 +385,9 @@ export default {
     CREATE_QUICK_PICK: 'Create Quick Pick',
     RESERVE_LOC: 'Reserve Location',
     FLOOR_LOC: 'Floor location',
-    FRONT: 'Front'
+    FRONT: 'Front',
+    ACCEPT: 'Accept',
+    RELEASE: 'Release'
   },
   BINNING: {
     BINNING: 'Binning',
