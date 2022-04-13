@@ -1,4 +1,4 @@
-inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-v1.3.2
+inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-v1.3.3
 
 # Maximum commits to be ShallowCloned by Looper
 gitShallowDepth: 2147483647
