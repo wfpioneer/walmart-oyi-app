@@ -5,7 +5,6 @@ const SPACE_BETWEEN = 'space-between';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'flex-start',
     justifyContent: SPACE_BETWEEN,
     borderWidth: 1,
@@ -34,6 +33,14 @@ const styles = StyleSheet.create({
   contentContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly'
+  },
+  quantityContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    padding: 7,
+    paddingBottom: 0
   }
 });
 

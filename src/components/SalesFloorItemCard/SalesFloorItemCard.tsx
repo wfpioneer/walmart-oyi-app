@@ -4,6 +4,8 @@ import { strings } from '../../locales';
 import NumericSelector from '../NumericSelector/NumericSelector';
 import styles from './SalesFloorItemCard.style';
 
+const MAX = 999;
+
 interface SFItemCardProps {
   itemDesc: string;
   salesFloorLocation: string;
@@ -16,7 +18,7 @@ interface SFItemCardProps {
   quantity: number;
   incrementQty: () => void;
   decrementQty: () => void;
-  onQtyTextChange: (value: string) => void;
+  onQtyTextChange: (text: string) => void;
 }
 
 const SalesFloorItemCard = (props: SFItemCardProps) => {
@@ -26,6 +28,8 @@ const SalesFloorItemCard = (props: SFItemCardProps) => {
     category, quantity, incrementQty,
     decrementQty, onQtyTextChange
   } = props;
+
+  const isValid = () => quantity >= 1 && quantity <= MAX;
 
   return (
     <View style={styles.container}>
@@ -59,11 +63,11 @@ const SalesFloorItemCard = (props: SFItemCardProps) => {
           </Text>
         </View>
       </View>
-      <View style={styles.contentContainer}>
+      <View style={styles.quantityContainer}>
         <Text>{strings('PICKING.REMAINING_QTY')}</Text>
         <NumericSelector
-          isValid={true}
-          maxValue={99}
+          isValid={isValid()}
+          maxValue={MAX}
           minValue={1}
           onDecreaseQty={decrementQty}
           onIncreaseQty={incrementQty}

@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sales floor item card render tests renders the item card 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "backgroundColor": "#ffffffff",
+      "borderColor": "#dbecff",
+      "borderWidth": 1,
+      "justifyContent": "space-between",
+      "paddingBottom": 10,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingHorizontal": 7,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "flex": 1,
+          "fontSize": 14,
+        }
+      }
+    >
+      Paganini
+    </Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.ITEM.CATEGORY" translation]: 73
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-evenly",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 7,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 12,
+          }
+        }
+      >
+        [missing "en.ITEM.SALES_FLOOR_QTY" translation]: ABAR1-1
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 12,
+          }
+        }
+      >
+        [missing "en.PICKING.ASSIGNED" translation]: vn50pz4
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 12,
+          }
+        }
+      >
+        [missing "en.PICKING.CREATED_BY" translation]: t0s0og
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 7,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 12,
+          }
+        }
+      >
+        [missing "en.GENERICS.ITEM" translation]: 1234
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 12,
+          }
+        }
+      >
+        [missing "en.ITEM.UPC" translation]: 1234567890
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 12,
+          }
+        }
+      >
+        [missing "en.PICKING.CREATED" translation]: gestern
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "padding": 7,
+        "paddingBottom": 0,
+        "width": "100%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.PICKING.REMAINING_QTY" translation]
+    </Text>
+    <NumericSelector
+      isValid={true}
+      maxValue={999}
+      minValue={1}
+      onDecreaseQty={[MockFunction]}
+      onIncreaseQty={[MockFunction]}
+      onTextChange={[Function]}
+      value={4}
+    />
+  </View>
+</View>
+`;
