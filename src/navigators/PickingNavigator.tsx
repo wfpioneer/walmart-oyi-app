@@ -175,6 +175,7 @@ export const getPicklistApiHook = (
     dispatch(showActivityModal());
   }
 };
+
 export const PickingNavigatorStack = (
   props: PickingNavigatorProps
 ): JSX.Element => {
