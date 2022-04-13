@@ -52,7 +52,8 @@ export default {
     ENABLED: 'Enabled',
     DISABLED: 'Disabled',
     REQUIRED: 'Required',
-    REMOVED: 'Removed'
+    REMOVED: 'Removed',
+    CREATE: 'Create'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -380,8 +381,11 @@ export default {
     NUMBER_PALLETS: 'Number of Pallets',
     QUICK_PICK: 'Quick Pick',
     MOVE_TO_FRONT: 'Move to Front',
-    FRONT: 'Front',
-    CREATE_PICK: 'Create Pick'
+    CREATE_PICK: 'Create Pick',
+    CREATE_QUICK_PICK: 'Create Quick Pick',
+    RESERVE_LOC: 'Reserve Location',
+    FLOOR_LOC: 'Floor location',
+    FRONT: 'Front'
   },
   BINNING: {
     BINNING: 'Binning',
