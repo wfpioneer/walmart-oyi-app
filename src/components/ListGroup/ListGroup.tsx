@@ -74,9 +74,11 @@ const handleWorkflowNav = (
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>
 ) => {
+  dispatch(selectPicks(items.reduce((pickIds: number[], pickItem) => [...pickIds, pickItem.id], [])));
   if (currentTab !== Tabs.SALESFLOOR && pickOrBin(items[0])) {
-    dispatch(selectPicks(items.reduce((pickIds: number[], pickItem) => [...pickIds, pickItem.id], [])));
     navigation.navigate('PickBinWorkflow');
+  } else {
+    navigation.navigate('SalesFloorWorkflow');
   }
 };
 
