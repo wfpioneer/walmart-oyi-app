@@ -5,6 +5,7 @@ import { NavigationProp } from '@react-navigation/native';
 import ListGroup, { CollapsibleCard } from './ListGroup';
 import { mockPickLists } from '../../mockData/mockPickList';
 import { PickStatus } from '../../models/Picking.d';
+import { Tabs } from '../../navigators/PickingNavigator';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('@react-navigation/native', () => ({
@@ -21,6 +22,8 @@ describe('ListGroup', () => {
           groupItems={false}
           pickListItems={mockPickLists}
           title="ABAR-2"
+          currentTab={Tabs.PICK}
+          dispatch={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -54,6 +57,8 @@ describe('ListGroup', () => {
           groupItems={true}
           pickListItems={newMockPickLists}
           title="ABAR-2"
+          currentTab={Tabs.PICK}
+          dispatch={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

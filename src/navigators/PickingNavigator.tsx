@@ -3,9 +3,11 @@ import React, {
 } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { EmitterSubscription, TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { trackEvent } from 'appcenter-analytics';
+import {
+  EmitterSubscription, Pressable, TouchableOpacity, View
+} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import {
@@ -199,6 +201,16 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
+export const kebabMenuButton = () => (
+  <Pressable onPress={() => {}} style={styles.leftButton}>
+    <MaterialCommunityIcons
+      name="dots-vertical"
+      size={30}
+      color={COLOR.WHITE}
+    />
+  </Pressable>
+);
+
 export const PickingNavigatorStack = (
   props: PickingNavigatorProps
 ): JSX.Element => {
@@ -254,10 +266,10 @@ export const PickingNavigatorStack = (
       </Stack.Screen>
       <Stack.Screen
         name="PickBinWorkflow"
-        // TODO: Placeholder for PickBinWorkflow
         component={PickBinWorkflow}
         options={{
-          headerTitle: strings('PICKING.PICKING')
+          headerTitle: strings('PICKING.PICKING'),
+          headerRight: () => kebabMenuButton()
         }}
       />
       <Stack.Screen

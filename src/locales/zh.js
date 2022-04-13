@@ -383,7 +383,9 @@ export default {
     QUICK_PICK: '快速拣货',
     RESERVE_LOC: '高货架位置',
     FLOOR_LOC: '楼面位置',
-    FRONT: '正面' // TODO Replace with mandarin translation on confluence
+    FRONT: '正面', // TODO Replace with mandarin translation on confluence
+    ACCEPT: '接收',
+    RELEASE: '释放'
   },
   BINNING: {
     BINNING: '上架',
