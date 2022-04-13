@@ -30,10 +30,6 @@ envs:
       # whether we should use the old version of BUILD_SUPPORT or not. Defaults to false.
       USE_OLD_BUILD_SUPPORT: false
 
-      #Slack related vars
-      # Optional - Slack channel for notifications
-      SLACK_CHANNEL: 'intl_sams_oyi_ops_alerts'
-
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
       ANDROID_BUILD_PROFILE: ':app:assembleStagingRelease'
