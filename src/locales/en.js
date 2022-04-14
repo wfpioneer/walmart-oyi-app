@@ -387,7 +387,9 @@ export default {
     FLOOR_LOC: 'Floor location',
     FRONT: 'Front',
     ACCEPT: 'Accept',
-    RELEASE: 'Release'
+    RELEASE: 'Release',
+    UPDATE_REMAINING_QTY: 'Update quantity of each item left on pallet before continuing',
+    REMAINING_QTY: 'Quantity left on pallet'
   },
   BINNING: {
     BINNING: 'Binning',
