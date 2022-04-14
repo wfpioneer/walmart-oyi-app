@@ -28,7 +28,6 @@ import {
 import { updatePalletExpirationDate } from '../../state/actions/PalletManagement';
 import { strings } from '../../locales';
 import getItemDetails from '../../mockData/getItemDetails';
-import { Configurations } from '../../models/User';
 
 const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
 

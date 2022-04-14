@@ -29,7 +29,7 @@ import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, getPalletConfig, updatePalletItemQty
+  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, updatePalletItemQty
 } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
@@ -56,7 +56,6 @@ import {
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
-import { Configurations } from '../../models/User';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 

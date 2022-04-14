@@ -4,9 +4,9 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import Toast from 'react-native-toast-message';
 import { AsyncState } from '../../models/AsyncState';
 import {
+  PalletManagementScreen,
   getPalletConfigHook,
   getPalletInfoHook,
-  PalletManagementScreen,
   onSubmit
 } from './PalletManagement';
 import { mockConfig } from '../../mockData/mockConfig';
@@ -120,7 +120,7 @@ describe('PalletManagementScreen', () => {
       const successNoPalletAsyncState = {
         ...defaultAsyncState,
         result: {
-          status: 204,
+          status: 204
         }
       };
       const failureAsyncState = {
@@ -167,5 +167,5 @@ describe('PalletManagementScreen', () => {
       expect(dispatch).toBeCalledTimes(2);
       expect(setConfigComplete).toBeCalledTimes(1);
     });
-  })
+  });
 });

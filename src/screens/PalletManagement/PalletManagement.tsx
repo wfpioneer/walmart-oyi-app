@@ -23,12 +23,12 @@ import styles from './PalletManagement.style';
 import { strings } from '../../locales';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { validateSession } from '../../utils/sessionTimeout';
-import { getPalletInfo, getPalletConfig } from '../../state/actions/saga';
+import { getPalletConfig, getPalletInfo } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
-import {GET_PALLET_CONFIG, GET_PALLET_INFO} from '../../state/actions/asyncAPI';
+import { GET_PALLET_CONFIG, GET_PALLET_INFO } from '../../state/actions/asyncAPI';
 import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
 import { Configurations } from '../../models/User';
 
@@ -202,7 +202,7 @@ export const PalletManagementScreen = (
     }
   }, [getPalletInfoApi]);
 
-  //GetPalletConfig API
+  // GetPalletConfig API
   useEffectHook(() => {
     if (navigation.isFocused()) {
       getPalletConfigHook(getPalletConfigApi, dispatch, setConfigComplete, userConfig.backupCategories);
