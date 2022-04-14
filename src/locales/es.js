@@ -383,7 +383,11 @@ export default {
     QUICK_PICK: 'Pickeo rápido',
     RESERVE_LOC: 'Ubicación de Bodega',
     FLOOR_LOC: 'Ubicación en Piso',
-    FRONT: 'Frente'
+    FRONT: 'Frente',
+    ACCEPT: 'Aceptar',
+    RELEASE: 'Liberar',
+    UPDATE_REMAINING_QTY: 'Actualiza la cantidad de cada artículo antes de continuar',
+    REMAINING_QTY: 'Cantidad restante en pallet'
   },
   BINNING: {
     BINNING: 'Bodega',

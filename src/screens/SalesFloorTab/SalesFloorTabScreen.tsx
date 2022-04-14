@@ -1,11 +1,15 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 import ListGroup from '../../components/ListGroup/ListGroup';
 import { PickListItem } from '../../models/Picking.d';
 import { strings } from '../../locales';
+import { Tabs } from '../../navigators/PickingNavigator';
 
 interface SalesFloorTabProps {
   readyToWorklist: PickListItem[];
+  dispatch: Dispatch<any>;
 }
 
 const FRONT = 'Front';
@@ -16,7 +20,7 @@ const getZoneFromPalletLocation = (pickItem: PickListItem) => (pickItem.palletLo
   : FRONT);
 
 export const SalesFloorTabScreen = (props: SalesFloorTabProps) => {
-  const { readyToWorklist } = props;
+  const { readyToWorklist, dispatch } = props;
 
   const listGroupMap: Map<string, PickListItem[]> = new Map().set(FRONT, []);
 
@@ -59,6 +63,8 @@ export const SalesFloorTabScreen = (props: SalesFloorTabProps) => {
             })`}
             pickListItems={picklistGroup[item]}
             groupItems={true}
+            currentTab={Tabs.SALESFLOOR}
+            dispatch={dispatch}
           />
         )}
         keyExtractor={(item, index) => `${item}-${index}`}
@@ -66,8 +72,14 @@ export const SalesFloorTabScreen = (props: SalesFloorTabProps) => {
     </View>
   );
 };
-const SalesFloorTab = (props: { readyToWorklist: PickListItem[] }) => (
-  <SalesFloorTabScreen readyToWorklist={props.readyToWorklist} />
-);
+const SalesFloorTab = (props: { readyToWorklist: PickListItem[] }) => {
+  const dispatch = useDispatch();
+  return (
+    <SalesFloorTabScreen
+      readyToWorklist={props.readyToWorklist}
+      dispatch={dispatch}
+    />
+  );
+};
 
 export default SalesFloorTab;

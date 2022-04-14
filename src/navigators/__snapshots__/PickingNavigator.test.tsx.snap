@@ -109,9 +109,14 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
     name="PickBinWorkflow"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
       }
     }
+  />
+  <Screen
+    component={[Function]}
+    name="SalesFloorWorkflow"
   />
   <Screen
     component={[Function]}
