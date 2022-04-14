@@ -6,12 +6,19 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Toast from 'react-native-toast-message';
 import { trackEvent } from 'appcenter-analytics';
 import {
-  EmitterSubscription, Pressable, TouchableOpacity, View
+  EmitterSubscription,
+  Pressable,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import {
-  NavigationProp, RouteProp, getFocusedRouteNameFromRoute, useNavigation, useRoute
+  NavigationProp,
+  RouteProp,
+  getFocusedRouteNameFromRoute,
+  useNavigation,
+  useRoute
 } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
@@ -54,7 +61,7 @@ interface PickingNavigatorProps {
   getItemDetailsApi: AsyncState;
 }
 
-interface PickTabNavigator {
+interface PickTabNavigatorProps {
   picklist: PickListItem[];
   setSelectedTab: React.Dispatch<React.SetStateAction<Tabs>>;
   dispatch: Dispatch<any>;
@@ -62,7 +69,8 @@ interface PickTabNavigator {
   route: RouteProp<any, string>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   getItemDetailsApi: AsyncState;
-  selectedTab: Tabs
+  getPicklistsApi: AsyncState;
+  selectedTab: Tabs;
 }
 
 export const getItemDetailsApiHook = (
@@ -101,9 +109,61 @@ export const getItemDetailsApiHook = (
   }
 };
 
-export const PickTabNavigator = (props: PickTabNavigator): JSX.Element => {
+export const getPicklistApiHook = (
+  getPicklistApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+): void => {
+  if (navigation.isFocused() && !getPicklistApi.isWaiting) {
+    // Get Picklist api success
+    if (getPicklistApi.result) {
+      if (getPicklistApi.result.status === 200) {
+        dispatch(initializePicklist(getPicklistApi.result.data));
+        Toast.show({
+          type: 'success',
+          text1: strings('PICKING.PICKLIST_SUCCESS'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      } else if (getPicklistApi.result.status === 204) {
+        Toast.show({
+          type: 'info',
+          text1: strings('PICKING.PICKLIST_NOT_FOUND'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      }
+      dispatch(hideActivityModal());
+    }
+    // Get Picklist api error
+    if (getPicklistApi.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('PICKING.PICKLIST_ERROR'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      dispatch(hideActivityModal());
+    }
+  }
+  // Get Picklist api isWaiting
+  if (navigation.isFocused() && getPicklistApi.isWaiting) {
+    dispatch(showActivityModal());
+  }
+};
+
+export const PickTabNavigator = (props: PickTabNavigatorProps): JSX.Element => {
   const {
-    picklist, setSelectedTab, dispatch, navigation, route, useEffectHook, getItemDetailsApi, selectedTab
+    picklist,
+    setSelectedTab,
+    dispatch,
+    navigation,
+    route,
+    useEffectHook,
+    getItemDetailsApi,
+    getPicklistsApi,
+    selectedTab
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -122,7 +182,10 @@ export const PickTabNavigator = (props: PickTabNavigator): JSX.Element => {
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (navigation.isFocused() && (selectedTab === Tabs.PICK || selectedTab === Tabs.QUICKPICK)) {
+      if (
+        navigation.isFocused()
+        && (selectedTab === Tabs.PICK || selectedTab === Tabs.QUICKPICK)
+      ) {
         validateSession(navigation, route.name).then(() => {
           trackEvent('Items_Details_scanned', {
             barcode: scan.value,
@@ -137,12 +200,27 @@ export const PickTabNavigator = (props: PickTabNavigator): JSX.Element => {
     };
   }, []);
 
+  // Get Picklist Api call
+  useEffect(
+    () => navigation.addListener('focus', () => {
+      validateSession(navigation, route.name).then(() => {
+        dispatch(getPicklists());
+      });
+    }),
+    [navigation]
+  );
+
   // Get Item Details UPC api
-  useEffectHook(() => getItemDetailsApiHook(
-    getItemDetailsApi,
-    dispatch,
-    navigation
-  ), [getItemDetailsApi]);
+  useEffectHook(
+    () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation),
+    [getItemDetailsApi]
+  );
+
+  // Get Picklist Api Hook
+  useEffect(
+    () => getPicklistApiHook(getPicklistsApi, dispatch, navigation),
+    [getPicklistsApi]
+  );
 
   return (
     <Tab.Navigator initialRouteName="Pick">
@@ -212,71 +290,22 @@ export const kebabMenuButton = () => (
     />
   </Pressable>
 );
-export const getPicklistApiHook = (
-  getPicklistApi: AsyncState,
-  dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
-): void => {
-  if (navigation.isFocused() && !getPicklistApi.isWaiting) {
-    // Get Picklist api success
-    if (getPicklistApi.result) {
-      if (getPicklistApi.result.status === 200) {
-        dispatch(initializePicklist(getPicklistApi.result.data));
-        Toast.show({
-          type: 'success',
-          text1: strings('PICKING.PICKLIST_SUCCESS'),
-          visibilityTime: 4000,
-          position: 'bottom'
-        });
-      } else if (getPicklistApi.result.status === 204) {
-        Toast.show({
-          type: 'info',
-          text1: strings('PICKING.PICKLIST_NOT_FOUND'),
-          visibilityTime: 4000,
-          position: 'bottom'
-        });
-      }
-      dispatch(hideActivityModal());
-    }
-    // Get Picklist api error
-    if (getPicklistApi.error) {
-      Toast.show({
-        type: 'error',
-        text1: strings('PICKING.PICKLIST_ERROR'),
-        text2: strings('GENERICS.TRY_AGAIN'),
-        visibilityTime: 4000,
-        position: 'bottom'
-      });
-      dispatch(hideActivityModal());
-    }
-  }
-  // Get Picklist api isWaiting
-  if (navigation.isFocused() && getPicklistApi.isWaiting) {
-    dispatch(showActivityModal());
-  }
-};
 
 export const PickingNavigatorStack = (
   props: PickingNavigatorProps
 ): JSX.Element => {
   const {
-    dispatch, isManualScanEnabled, picklist, selectedTabState, navigation, route, getPicklistsApi, useEffectHook, getItemDetailsApi
+    dispatch,
+    isManualScanEnabled,
+    picklist,
+    selectedTabState,
+    navigation,
+    route,
+    getPicklistsApi,
+    useEffectHook,
+    getItemDetailsApi
   } = props;
   const [selectedTab, setSelectedTab] = selectedTabState;
-
-  // Get Picklist Api call
-  useEffect(() => navigation.addListener('focus', () => {
-    validateSession(navigation, route.name).then(() => {
-      dispatch(getPicklists());
-    });
-  }), [navigation]);
-
-  // Get Picklist Api Hook
-  useEffect(() => getPicklistApiHook(
-    getPicklistsApi,
-    dispatch,
-    navigation
-  ), [getPicklistsApi]);
 
   let createPickTitle = '';
   if (selectedTab === Tabs.PICK) {
@@ -318,6 +347,7 @@ export const PickingNavigatorStack = (
             dispatch={dispatch}
             useEffectHook={useEffectHook}
             getItemDetailsApi={getItemDetailsApi}
+            getPicklistsApi={getPicklistsApi}
             selectedTab={selectedTab}
           />
         )}
@@ -347,7 +377,9 @@ const PickingNavigator = (): JSX.Element => {
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const picklist = useTypedSelector(state => state.Picking.pickList);
   const getPicklistApi = useTypedSelector(state => state.async.getPicklists);
-  const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
+  const getItemDetailsApi = useTypedSelector(
+    state => state.async.getItemDetails
+  );
   const selectedTabState = useState<Tabs>(Tabs.PICK);
   const navigation = useNavigation();
   const route = useRoute();
