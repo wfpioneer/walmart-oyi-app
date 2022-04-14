@@ -113,9 +113,9 @@ export const getItemDetailsApiHook = (
 export const getPicklistApiHook = (
   getPicklistApi: AsyncState,
   dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
+  isFocused: boolean
 ): void => {
-  if (navigation.isFocused() && !getPicklistApi.isWaiting) {
+  if (isFocused && !getPicklistApi.isWaiting) {
     // Get Picklist api success
     if (getPicklistApi.result) {
       if (getPicklistApi.result.status === 200) {
@@ -149,7 +149,7 @@ export const getPicklistApiHook = (
     }
   }
   // Get Picklist api isWaiting
-  if (navigation.isFocused() && getPicklistApi.isWaiting) {
+  if (isFocused && getPicklistApi.isWaiting) {
     dispatch(showActivityModal());
   }
 };
@@ -219,7 +219,7 @@ export const PickTabNavigator = (props: PickTabNavigatorProps): JSX.Element => {
 
   // Get Picklist Api Hook
   useEffect(
-    () => getPicklistApiHook(getPicklistsApi, dispatch, navigation),
+    () => getPicklistApiHook(getPicklistsApi, dispatch, navigation.isFocused()),
     [getPicklistsApi]
   );
 

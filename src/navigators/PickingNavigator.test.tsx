@@ -75,6 +75,7 @@ describe('Picking Navigator', () => {
         route={routeProp}
         useEffectHook={jest.fn}
         getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
         dispatch={jest.fn()}
         selectedTab={Tabs.PICK}
       />
@@ -177,8 +178,7 @@ describe('Picking Navigator', () => {
         position: 'bottom'
       };
 
-      getPicklistApiHook(successApi, mockDispatch, navigationProp);
-      expect(navigationProp.isFocused).toBeCalledTimes(2);
+      getPicklistApiHook(successApi, mockDispatch, true);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toHaveBeenCalledWith(successToast);
     });
@@ -198,8 +198,7 @@ describe('Picking Navigator', () => {
         position: 'bottom'
       };
 
-      getPicklistApiHook(successApi204, mockDispatch, navigationProp);
-      expect(navigationProp.isFocused).toBeCalledTimes(2);
+      getPicklistApiHook(successApi204, mockDispatch, true);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(picklistNotFound);
     });
@@ -218,8 +217,7 @@ describe('Picking Navigator', () => {
         position: 'bottom'
       };
 
-      getPicklistApiHook(failureApi, mockDispatch, navigationProp);
-      expect(navigationProp.isFocused).toBeCalledTimes(2);
+      getPicklistApiHook(failureApi, mockDispatch, true);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(picklistError);
     });
@@ -230,7 +228,7 @@ describe('Picking Navigator', () => {
         isWaiting: true
       };
 
-      getPicklistApiHook(isLoadingApi, mockDispatch, navigationProp);
+      getPicklistApiHook(isLoadingApi, mockDispatch, true);
       expect(navigationProp.isFocused).toBeCalledTimes(2);
       expect(mockDispatch).toBeCalledTimes(1);
     });
