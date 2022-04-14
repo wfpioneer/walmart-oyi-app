@@ -29,7 +29,7 @@ const SalesFloorItemCard = (props: SFItemCardProps) => {
     decrementQty, onQtyTextChange
   } = props;
 
-  const isValid = () => quantity >= 1 && quantity <= MAX;
+  const isValid = () => quantity >= 0 && quantity <= MAX;
 
   return (
     <View style={styles.container}>
@@ -68,7 +68,7 @@ const SalesFloorItemCard = (props: SFItemCardProps) => {
         <NumericSelector
           isValid={isValid()}
           maxValue={MAX}
-          minValue={1}
+          minValue={0}
           onDecreaseQty={decrementQty}
           onIncreaseQty={incrementQty}
           onTextChange={(text: string) => onQtyTextChange(text)}
