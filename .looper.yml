@@ -30,9 +30,8 @@ envs:
       # whether we should use the old version of BUILD_SUPPORT or not. Defaults to false.
       USE_OLD_BUILD_SUPPORT: false
 
-      #Slack related vars
-      # Optional - Slack channel for notifications
-
+      # determines whether the app should be signed using APK Signature Scheme v2. (Required on Android 11 and up)
+      ANDROID_VERSION_ABOVE_11: false
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
       ANDROID_BUILD_PROFILE: ':app:assembleProductionRelease'
