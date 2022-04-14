@@ -26,6 +26,7 @@ import QuickPickTab from '../screens/QuickPickTab/QuickPickTab';
 import { barcodeEmitter } from '../utils/scannerUtils';
 import PickBinTab from '../screens/PickBinTab/PickBinTab';
 import PickBinWorkflow from '../screens/PickBinWorkflow/PickBinWorkflowScreen';
+import SalesFloorWorkflow from '../screens/SalesFloorWorkflow/SalesFloorWorkflow';
 import CreatePick from '../screens/CreatePick/CreatePick';
 import SalesFloorTab from '../screens/SalesFloorTab/SalesFloorTabScreen';
 import { setManualScan } from '../state/actions/Global';
@@ -359,6 +360,10 @@ export const PickingNavigatorStack = (
           headerTitle: strings('PICKING.PICKING'),
           headerRight: () => kebabMenuButton()
         }}
+      />
+      <Stack.Screen
+        name="SalesFloorWorkflow"
+        component={SalesFloorWorkflow}
       />
       <Stack.Screen
         name="CreatePick"
