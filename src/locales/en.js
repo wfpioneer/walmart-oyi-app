@@ -385,7 +385,11 @@ export default {
     CREATE_QUICK_PICK: 'Create Quick Pick',
     RESERVE_LOC: 'Reserve Location',
     FLOOR_LOC: 'Floor location',
-    FRONT: 'Front'
+    FRONT: 'Front',
+    ACCEPT: 'Accept',
+    RELEASE: 'Release',
+    UPDATE_REMAINING_QTY: 'Update quantity of each item left on pallet before continuing',
+    REMAINING_QTY: 'Quantity left on pallet'
   },
   BINNING: {
     BINNING: 'Binning',
