@@ -145,7 +145,7 @@ exports[`Sales floor item card render tests renders the item card 1`] = `
     <NumericSelector
       isValid={true}
       maxValue={999}
-      minValue={1}
+      minValue={0}
       onDecreaseQty={[MockFunction]}
       onIncreaseQty={[MockFunction]}
       onTextChange={[Function]}
@@ -298,9 +298,9 @@ exports[`Sales floor item card render tests renders the item with an invalid qua
       [missing "en.PICKING.REMAINING_QTY" translation]
     </Text>
     <NumericSelector
-      isValid={false}
+      isValid={true}
       maxValue={999}
-      minValue={1}
+      minValue={0}
       onDecreaseQty={[MockFunction]}
       onIncreaseQty={[MockFunction]}
       onTextChange={[Function]}
