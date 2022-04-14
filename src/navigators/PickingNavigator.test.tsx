@@ -229,7 +229,6 @@ describe('Picking Navigator', () => {
       };
 
       getPicklistApiHook(isLoadingApi, mockDispatch, true);
-      expect(navigationProp.isFocused).toBeCalledTimes(2);
       expect(mockDispatch).toBeCalledTimes(1);
     });
   });
