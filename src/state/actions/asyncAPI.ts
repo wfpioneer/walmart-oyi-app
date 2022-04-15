@@ -125,3 +125,6 @@ export const binPallets = makeAsyncActionCreators(POST_BIN_PALLETS);
 
 export const GET_PALLET_CONFIG = makeAsyncActionTypes('API/GET_PALLET_CONFIG');
 export const getPalletConfig = makeAsyncActionCreators(GET_PALLET_CONFIG);
+
+export const GET_PICKLISTS = makeAsyncActionTypes('API/GET_PICKLISTS');
+export const getPicklists = makeAsyncActionCreators(GET_PICKLISTS);

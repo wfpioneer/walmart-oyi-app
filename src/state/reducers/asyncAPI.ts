@@ -44,7 +44,8 @@ export const asyncReducer = combineReducers({
   clearPallet: makeAsyncReducer(asyncActions.CLEAR_PALLET),
   getPalletInfo: makeAsyncReducer(asyncActions.GET_PALLET_INFO),
   binPallets: makeAsyncReducer(asyncActions.POST_BIN_PALLETS),
-  getPalletConfig: makeAsyncReducer(asyncActions.GET_PALLET_CONFIG)
+  getPalletConfig: makeAsyncReducer(asyncActions.GET_PALLET_CONFIG),
+  getPicklists: makeAsyncReducer(asyncActions.GET_PICKLISTS)
 });
 
 export default asyncReducer;
