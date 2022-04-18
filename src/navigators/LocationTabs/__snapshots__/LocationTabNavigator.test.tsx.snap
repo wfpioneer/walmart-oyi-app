@@ -681,7 +681,7 @@ exports[`Test Location Tabs Tests rendering Tab Headers Renders pallet Header 1`
 `;
 
 exports[`Test Location Tabs Tests rendering getSectionsDetails api Renders Loading Indicator for get Section details 1`] = `
-<withTheme(ActivityIndicator)
+<ActivityIndicator
   animating={true}
   color="#0071e9"
   hidesWhenStopped={true}
