@@ -248,9 +248,9 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
   );
 };
 
-const FloorDetailsList = (props: {sectionExists: boolean}) => {
+const FloorDetailsList = (props: {sectionExists: boolean, locationPopupVisible: boolean}) => {
   const user = useTypedSelector(state => state.User);
-  const { sectionExists } = props;
+  const { sectionExists, locationPopupVisible } = props;
   const locationManagementEdit = () => user.features.includes(LOCATION_EDIT_FLAG)
   || user.configs.locationManagementEdit;
 
@@ -260,16 +260,16 @@ const FloorDetailsList = (props: {sectionExists: boolean}) => {
         headerText={strings(LOCATION_ITEMS)}
         isEditEnabled={locationManagementEdit()}
         isReserve={false}
-        isDisabled={!sectionExists}
+        isDisabled={!sectionExists || locationPopupVisible}
       />
       <SectionDetails />
     </>
   );
 };
 
-const ReserveDetailsList = (props: {sectionExists: boolean}) => {
+const ReserveDetailsList = (props: {sectionExists: boolean, locationPopupVisible: boolean}) => {
   const user = useTypedSelector(state => state.User);
-  const { sectionExists } = props;
+  const { sectionExists, locationPopupVisible } = props;
   const locationManagementEdit = () => user.features.includes(LOCATION_EDIT_FLAG)
     || user.configs.locationManagementEdit;
 
@@ -279,7 +279,7 @@ const ReserveDetailsList = (props: {sectionExists: boolean}) => {
         headerText={strings(LOCATION_PALLETS)}
         isEditEnabled={locationManagementEdit()}
         isReserve={true}
-        isDisabled={!sectionExists}
+        isDisabled={!sectionExists || locationPopupVisible}
       />
       <ReserveSectionDetails />
     </>
@@ -460,7 +460,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           navigation.navigate('PrintPriceSign');
         }}
         buttonText={locationManagementEdit() ? strings('LOCATION.PRINT_LABEL') : undefined}
-        isDisabled={!sectionExists}
+        isDisabled={!sectionExists || locationPopupVisible}
       />
       <Tab.Navigator
         tabBarOptions={{
@@ -487,7 +487,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
             focus: () => setSelectedTab(ClearLocationTarget.FLOOR)
           }}
         >
-          { () => <FloorDetailsList sectionExists={sectionExists} />}
+          { () => <FloorDetailsList sectionExists={sectionExists} locationPopupVisible={locationPopupVisible} />}
         </Tab.Screen>
         <Tab.Screen
           name="ReserveDetails"
@@ -510,7 +510,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
             focus: () => setSelectedTab(ClearLocationTarget.RESERVE)
           }}
         >
-          {() => <ReserveDetailsList sectionExists={sectionExists} />}
+          {() => <ReserveDetailsList sectionExists={sectionExists} locationPopupVisible={locationPopupVisible} />}
         </Tab.Screen>
       </Tab.Navigator>
     </>
