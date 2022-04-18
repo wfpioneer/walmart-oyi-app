@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
   actionButton: {
     flex: 1,
     margin: 5
+  },
+  updateQuantityTextView: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

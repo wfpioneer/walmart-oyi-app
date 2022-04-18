@@ -4,7 +4,7 @@ import { strings } from '../../locales';
 import NumericSelector from '../NumericSelector/NumericSelector';
 import styles from './SalesFloorItemCard.style';
 
-const MAX = 999;
+export const MAX = 999;
 
 interface SFItemCardProps {
   itemDesc: string;
