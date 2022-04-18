@@ -7,7 +7,6 @@ import {
   clearPalletApiHook,
   getItemDetailsApiHook,
   getNumberOfDeleted,
-  getPalletConfigApiHook,
   getPalletInfoApiHook,
   handleAddItems,
   handleDecreaseQuantity,
@@ -29,7 +28,6 @@ import {
 import { updatePalletExpirationDate } from '../../state/actions/PalletManagement';
 import { strings } from '../../locales';
 import getItemDetails from '../../mockData/getItemDetails';
-import { Configurations } from '../../models/User';
 
 const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
 
@@ -41,18 +39,6 @@ jest.mock('../../state/actions/PalletManagement', () => ({
   ...jest.requireActual('../../state/actions/PalletManagement'),
   updatePalletExpirationDate: jest.fn()
 }));
-
-const mockUserConfig: Configurations = {
-  locationManagement: true,
-  locationManagementEdit: false,
-  palletManagement: true,
-  settingsTool: false,
-  printingUpdate: true,
-  binning: false,
-  palletExpiration: false,
-  backupCategories: '',
-  picking: false
-};
 
 describe('ManagePalletScreen', () => {
   const mockPalletInfo: PalletInfo = {
@@ -144,8 +130,6 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
-          getPalletConfigApi={defaultAsyncState}
-          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -174,8 +158,6 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
-          getPalletConfigApi={defaultAsyncState}
-          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -206,8 +188,6 @@ describe('ManagePalletScreen', () => {
           isPickerShow={true}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
-          getPalletConfigApi={defaultAsyncState}
-          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -235,8 +215,6 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
-          getPalletConfigApi={defaultAsyncState}
-          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -268,8 +246,6 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
-          getPalletConfigApi={defaultAsyncState}
-          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -309,8 +285,6 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
-          getPalletConfigApi={defaultAsyncState}
-          userConfig={mockUserConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -628,41 +602,6 @@ describe('ManagePalletScreen', () => {
       expect(unsetExpirationDate).toBe(false);
       expect(setExpirationDate).toBe(true);
       expect(expirationDateSetBackToOld).toBe(false);
-    });
-
-    it('Tests getPalletConfigApiHook on success', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          data: {
-            perishableCategories: [1, 8]
-          }
-        }
-      };
-
-      getPalletConfigApiHook(successApi, mockDispatch, mockUserConfig, navigationProp);
-      expect(navigationProp.isFocused).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledTimes(3);
-    });
-
-    it('Tests getPalletConfigApiHook on failure', () => {
-      const failApi: AsyncState = { ...defaultAsyncState, error: { status: 400 } };
-
-      getPalletConfigApiHook(failApi, mockDispatch, { ...mockUserConfig, backupCategories: '1, 10' }, navigationProp);
-      expect(navigationProp.isFocused).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledTimes(3);
-    });
-
-    it('Tests getPalletConfigApiHook isLoading', () => {
-      const apiIsWaiting: AsyncState = {
-        ...defaultAsyncState,
-        isWaiting: true
-      };
-
-      getPalletConfigApiHook(apiIsWaiting, mockDispatch, mockUserConfig, navigationProp);
-      expect(navigationProp.isFocused).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledTimes(1);
-      expect(showActivityModal).toBeCalledTimes(1);
     });
 
     it('Tests getItemDetailsApiHook on 200 success if item already exists', () => {

@@ -25,7 +25,7 @@ import ConfigService from '../../services/Config.service';
 import GetItemDetailsUPCService from '../../services/GetItemDetailsUPCService';
 import PalletManagementService from '../../services/PalletManagement.service';
 import DeletePalletUPCsService from '../../services/DeletePalletUPCs.service';
-import UpdatePicklistService from '../../services/UpdatePicklist.service';
+import PickingService from '../../services/Picking.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
@@ -70,7 +70,8 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_PALLET_INFO, actions.getPalletInfo, PalletManagementService.getPalletInfo),
   makeAsyncSaga(saga.POST_BIN_PALLETS, actions.binPallets, PalletManagementService.postBinPallets),
   makeAsyncSaga(saga.GET_PALLET_CONFIG, actions.getPalletConfig, PalletManagementService.getPalletConfig),
-  makeAsyncSaga(saga.UPDATE_PICKLIST_STATUS, actions.updatePicklistStatus, UpdatePicklistService.updatePickListStatus)
+  makeAsyncSaga(saga.UPDATE_PICKLIST_STATUS, actions.updatePicklistStatus, PickingService.updatePickListStatus),
+  makeAsyncSaga(saga.GET_PICKLISTS, actions.getPicklists, PickingService.getPickListService)
 ];
 
 export default function* rootSaga() {

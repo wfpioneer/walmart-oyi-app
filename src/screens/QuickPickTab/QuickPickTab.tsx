@@ -5,6 +5,8 @@ import {
   Text,
   View
 } from 'react-native';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
 import { PickingState } from '../../state/reducers/Picking';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import User from '../../models/User';
@@ -12,10 +14,12 @@ import { PickListItem, PickStatus } from '../../models/Picking.d';
 import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
 import styles from './QuickPickTab.style';
+import { Tabs } from '../../navigators/PickingNavigator';
 
 interface QuickPickTabScreenProps {
   quickPicks: PickListItem[];
   user: User;
+  dispatch: Dispatch<any>;
 }
 
 interface GroupItem {
@@ -24,7 +28,7 @@ interface GroupItem {
 }
 
 export const QuickPickTabScreen = (props: QuickPickTabScreenProps) => {
-  const { quickPicks, user } = props;
+  const { quickPicks, user, dispatch } = props;
   const [assignedToMe, assignedToOthers] = quickPicks.reduce(
     ([mine, others]: [PickListItem[], PickListItem[]], pick) => (
       pick.assignedAssociate === user.userId ? [[...mine, pick], others] : [mine, [...others, pick]]
@@ -51,6 +55,8 @@ export const QuickPickTabScreen = (props: QuickPickTabScreenProps) => {
       groupItems={false}
       pickListItems={item.picks}
       key={item.title}
+      currentTab={Tabs.QUICKPICK}
+      dispatch={dispatch}
     />
   );
 
@@ -74,12 +80,14 @@ interface QuickPickTabProps {
 }
 
 const QuickPickTab = (props: QuickPickTabProps) => {
+  const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
 
   return (
     <QuickPickTabScreen
       quickPicks={props.quickPickItems}
       user={user}
+      dispatch={dispatch}
     />
   );
 };

@@ -31,6 +31,7 @@ describe('PickBinTabScreen', () => {
           pickBinList={mockPickLists}
           user={user}
           isManualScanEnabled={false}
+          dispatch={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -61,6 +62,7 @@ describe('PickBinTabScreen', () => {
           pickBinList={newMockPickList}
           user={user}
           isManualScanEnabled={false}
+          dispatch={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

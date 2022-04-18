@@ -383,7 +383,14 @@ export default {
     QUICK_PICK: '快速拣货',
     RESERVE_LOC: '高货架位置',
     FLOOR_LOC: '楼面位置',
-    FRONT: '正面' // TODO Replace with mandarin translation on confluence
+    FRONT: '正面', // TODO Replace with mandarin translation on confluence
+    ACCEPT: '接收',
+    RELEASE: '释放',
+    UPDATE_REMAINING_QTY: '继续之前请更新卡板剩余商品的数量',
+    REMAINING_QTY: '卡板剩余数量',
+    PICKLIST_SUCCESS: 'Successfully retrieved pickLists', // TODO add Mandarin translations
+    PICKLIST_NOT_FOUND: 'No picklists were found for this club', // TODO add Mandarin translations
+    PICKLIST_ERROR: 'There was an error retrieving the Picklist' // TODO add Mandarin translations
   },
   BINNING: {
     BINNING: '上架',
