@@ -2,7 +2,7 @@ import React, {
   EffectCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
-  Text, TouchableOpacity, View
+  ActivityIndicator, Text, TouchableOpacity, View
 } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useDispatch } from 'react-redux';
@@ -11,7 +11,6 @@ import {
 } from '@react-navigation/native';
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 import { Dispatch } from 'redux';
-import { ActivityIndicator } from 'react-native-paper';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
 import { strings } from '../../locales';
@@ -415,7 +414,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           style={styles.errorButton}
           onPress={() => {
             trackEventCall('location_api_retry',);
-            dispatch(getSectionDetails({ sectionId: cleanScanIfUpcOrEanBarcode(scannedEvent) || section.id.toString() }));
+            dispatch(getSectionDetails(
+              { sectionId: cleanScanIfUpcOrEanBarcode(scannedEvent) || section.id.toString() }
+            ));
           }}
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
