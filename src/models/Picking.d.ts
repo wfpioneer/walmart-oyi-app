@@ -10,6 +10,17 @@ export enum PickStatus {
   NO_PALLETS_FOUND = 'no pallets found'
 }
 
+// eslint-disable-next-line no-shadow
+export enum PickAction {
+  ACCEPT_PICK = 'acceptPick',
+  RELEASE = 'release',
+  READY_TO_WORK = 'readyToWork',
+  READY_TO_BIN = 'readyToBin',
+  ACCEPT_BIN = 'acceptBin',
+  COMPLETE = 'complete',
+  DELETE = 'delete'
+}
+
 export interface PickListItem {
   id: number;
   itemNbr: number;
