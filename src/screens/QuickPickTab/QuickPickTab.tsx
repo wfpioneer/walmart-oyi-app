@@ -7,18 +7,19 @@ import {
 } from 'react-native';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
-import { PickingState } from '../../state/reducers/Picking';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import User from '../../models/User';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
 import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
 import styles from './QuickPickTab.style';
+import ManualScan from '../../components/manualscan/ManualScan';
 import { Tabs } from '../../navigators/PickingNavigator';
 
 interface QuickPickTabScreenProps {
   quickPicks: PickListItem[];
   user: User;
+  isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
 }
 
@@ -28,7 +29,12 @@ interface GroupItem {
 }
 
 export const QuickPickTabScreen = (props: QuickPickTabScreenProps) => {
-  const { quickPicks, user, dispatch } = props;
+  const {
+    quickPicks,
+    user,
+    isManualScanEnabled,
+    dispatch
+  } = props;
   const [assignedToMe, assignedToOthers] = quickPicks.reduce(
     ([mine, others]: [PickListItem[], PickListItem[]], pick) => (
       pick.assignedAssociate === user.userId ? [[...mine, pick], others] : [mine, [...others, pick]]
@@ -62,6 +68,7 @@ export const QuickPickTabScreen = (props: QuickPickTabScreenProps) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
       <FlatList
         data={groupItems}
         renderItem={renderItem}
@@ -82,11 +89,13 @@ interface QuickPickTabProps {
 const QuickPickTab = (props: QuickPickTabProps) => {
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
+  const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
 
   return (
     <QuickPickTabScreen
       quickPicks={props.quickPickItems}
       user={user}
+      isManualScanEnabled={isManualScanEnabled}
       dispatch={dispatch}
     />
   );
