@@ -116,6 +116,10 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
   />
   <Screen
     component={[Function]}
+    name="SalesFloorWorkflow"
+  />
+  <Screen
+    component={[Function]}
     name="CreatePick"
     options={
       Object {
