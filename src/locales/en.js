@@ -392,7 +392,9 @@ export default {
     PICKLIST_NOT_FOUND: 'No picklists were found for this club',
     PICKLIST_ERROR: 'There was an error retrieving the Picklist',
     UPDATE_REMAINING_QTY: 'Update quantity of each item left on pallet before continuing',
-    REMAINING_QTY: 'Quantity left on pallet'
+    REMAINING_QTY: 'Quantity left on pallet',
+    UPDATE_PICKLIST_STATUS_SUCCESS: 'Successfully updated picklist status',
+    UPDATE_PICKLIST_STATUS_ERROR: 'There was an error while updating the Picklist status'
   },
   BINNING: {
     BINNING: 'Binning',

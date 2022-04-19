@@ -390,7 +390,9 @@ export default {
     REMAINING_QTY: '卡板剩余数量',
     PICKLIST_SUCCESS: 'Successfully retrieved pickLists', // TODO add Mandarin translations
     PICKLIST_NOT_FOUND: 'No picklists were found for this club', // TODO add Mandarin translations
-    PICKLIST_ERROR: 'There was an error retrieving the Picklist' // TODO add Mandarin translations
+    PICKLIST_ERROR: 'There was an error retrieving the Picklist', // TODO add Mandarin translations
+    UPDATE_PICKLIST_STATUS_SUCCESS: '成功更新补货承担',
+    UPDATE_PICKLIST_STATUS_ERROR: '更新补货清单时出错'
   },
   BINNING: {
     BINNING: '上架',

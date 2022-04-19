@@ -1,8 +1,19 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { PickListItem, PickStatus } from '../../models/Picking.d';
+import { NavigationProp } from '@react-navigation/native';
+import { fireEvent, render } from '@testing-library/react-native';
+import Toast from 'react-native-toast-message';
+import { PickAction, PickListItem, PickStatus } from '../../models/Picking.d';
 import { PickingState } from '../../state/reducers/Picking';
-import { PickBinWorkflowScreen } from './PickBinWorkflowScreen';
+import { PickBinWorkflowScreen, updatePicklistStatusApiHook } from './PickBinWorkflowScreen';
+import { AsyncState } from '../../models/AsyncState';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { strings } from '../../locales';
+
+jest.mock('../../state/actions/Modal', () => ({
+  showActivityModal: jest.fn(),
+  hideActivityModal: jest.fn()
+}));
 
 const basePickItem: PickListItem = {
   assignedAssociate: '',
@@ -21,6 +32,27 @@ const basePickItem: PickListItem = {
   salesFloorLocationName: 'ABAR1-3',
   status: PickStatus.DELETED,
   upcNbr: '1234567890123'
+};
+
+const defaultAsyncState: AsyncState = {
+  isWaiting: false,
+  value: null,
+  error: null,
+  result: null
+};
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dangerouslyGetParent: jest.fn(),
+  dangerouslyGetState: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn()
 };
 
 const pickingState: PickingState = {
@@ -91,6 +123,12 @@ describe('PickBin Workflow render tests', () => {
         pickingState={readyToPickPicks}
         userFeatures={[]}
         userId="vn50pz4"
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn}
+        dispatch={jest.fn}
+        navigation={navigationProp}
+        selectedPicklistAction={null}
+        setSelectedPicklistAction={jest.fn()}
       />
     );
 
@@ -110,6 +148,12 @@ describe('PickBin Workflow render tests', () => {
         pickingState={readyToBinPicks}
         userFeatures={[]}
         userId="vn50pz4"
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn}
+        dispatch={jest.fn}
+        navigation={navigationProp}
+        selectedPicklistAction={null}
+        setSelectedPicklistAction={jest.fn()}
       />
     );
 
@@ -129,6 +173,12 @@ describe('PickBin Workflow render tests', () => {
         pickingState={myAcceptedPicks}
         userFeatures={[]}
         userId="vn50pz4"
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn}
+        dispatch={jest.fn}
+        navigation={navigationProp}
+        selectedPicklistAction={null}
+        setSelectedPicklistAction={jest.fn()}
       />
     );
 
@@ -148,6 +198,12 @@ describe('PickBin Workflow render tests', () => {
         pickingState={otherAcceptedPick}
         userFeatures={[]}
         userId="vn50pz4"
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn}
+        dispatch={jest.fn}
+        navigation={navigationProp}
+        selectedPicklistAction={null}
+        setSelectedPicklistAction={jest.fn()}
       />
     );
 
@@ -167,6 +223,12 @@ describe('PickBin Workflow render tests', () => {
         pickingState={otherAcceptedPick}
         userFeatures={['manager approval']}
         userId="vn50pz4"
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn}
+        dispatch={jest.fn}
+        navigation={navigationProp}
+        selectedPicklistAction={null}
+        setSelectedPicklistAction={jest.fn()}
       />
     );
 
@@ -186,6 +248,12 @@ describe('PickBin Workflow render tests', () => {
         pickingState={myAcceptedBin}
         userFeatures={[]}
         userId="vn50pz4"
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn}
+        dispatch={jest.fn}
+        navigation={navigationProp}
+        selectedPicklistAction={null}
+        setSelectedPicklistAction={jest.fn()}
       />
     );
 
@@ -205,6 +273,12 @@ describe('PickBin Workflow render tests', () => {
         pickingState={otherAcceptedBin}
         userFeatures={[]}
         userId="vn50pz4"
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn}
+        dispatch={jest.fn}
+        navigation={navigationProp}
+        selectedPicklistAction={null}
+        setSelectedPicklistAction={jest.fn()}
       />
     );
 
@@ -224,9 +298,161 @@ describe('PickBin Workflow render tests', () => {
         pickingState={otherAcceptedBin}
         userFeatures={['manager approval']}
         userId="vn50pz4"
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn}
+        dispatch={jest.fn}
+        navigation={navigationProp}
+        selectedPicklistAction={null}
+        setSelectedPicklistAction={jest.fn()}
       />
     );
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Tests PickBinWorkflow component and calls Accept action for updating the picklist', async () => {
+    const mockPickState: PickingState = {
+      pickList: [
+        {
+          ...basePickItem,
+          assignedAssociate: 'vn51wu8',
+          status: PickStatus.READY_TO_PICK
+        },
+        {
+          ...basePickItem,
+          assignedAssociate: 't0s0og',
+          status: PickStatus.ACCEPTED_PICK,
+          id: 1,
+          palletId: 40
+        }
+      ],
+      selectedPicks: [0]
+    };
+    const mockDispatch = jest.fn();
+    const setSelectedPicklistAction = jest.fn();
+    const { findByText, queryAllByText } = render(
+      <PickBinWorkflowScreen
+        pickingState={mockPickState}
+        userFeatures={['manager approval']}
+        userId="vn51wu8"
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn}
+        dispatch={mockDispatch}
+        navigation={navigationProp}
+        selectedPicklistAction={null}
+        setSelectedPicklistAction={setSelectedPicklistAction}
+      />
+    );
+    const acceptButton = findByText(strings('PICKING.ACCEPT'));
+    fireEvent.press(await acceptButton);
+    expect(queryAllByText(strings('PICKING.RELEASE'))).toHaveLength(0);
+    expect(queryAllByText(strings('GENERICS.CONTINUE'))).toHaveLength(0);
+    expect(mockDispatch).toBeCalledTimes(1);
+    expect(setSelectedPicklistAction).toBeCalledTimes(1);
+  });
+
+  it('Tests PickBinWorkflow component and calls Release action for updating the picklist', async () => {
+    const mockPickState: PickingState = {
+      pickList: [
+        {
+          ...basePickItem,
+          assignedAssociate: 'vn51wu8',
+          status: PickStatus.ACCEPTED_PICK
+        },
+        {
+          ...basePickItem,
+          assignedAssociate: 't0s0og',
+          status: PickStatus.ACCEPTED_PICK,
+          id: 1,
+          palletId: 40
+        }
+      ],
+      selectedPicks: [0]
+    };
+    const mockDispatch = jest.fn();
+    const setSelectedPicklistAction = jest.fn();
+    const { findByText, queryAllByText } = render(
+      <PickBinWorkflowScreen
+        pickingState={mockPickState}
+        userFeatures={['manager approval']}
+        userId="vn51wu8"
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn}
+        dispatch={mockDispatch}
+        navigation={navigationProp}
+        selectedPicklistAction={null}
+        setSelectedPicklistAction={setSelectedPicklistAction}
+      />
+    );
+    const releaseButton = findByText(strings('PICKING.RELEASE'));
+    fireEvent.press(await releaseButton);
+    expect(queryAllByText(strings('PICKING.ACCEPT'))).toHaveLength(0);
+    expect(queryAllByText(strings('GENERICS.CONTINUE'))).toHaveLength(1);
+    expect(mockDispatch).toBeCalledTimes(1);
+    expect(setSelectedPicklistAction).toBeCalledTimes(1);
+  });
+
+  describe('Manage PickBinWorkflow externalized function tests', () => {
+    const mockDispatch = jest.fn();
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    const mockSelectedItems = [
+      {
+        ...basePickItem,
+        status: PickStatus.ACCEPTED_BIN,
+        id: 2,
+        palletId: 41
+      }
+    ];
+
+    it('Tests updatePicklistStatusApiHook on 200 success for picklist status update', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 200
+        }
+      };
+      const toastUpdatePicklistSuccess = {
+        type: 'success',
+        text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      updatePicklistStatusApiHook(successApi, mockSelectedItems, mockDispatch, navigationProp, PickAction.RELEASE);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+      expect(mockDispatch).toBeCalledTimes(3);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistSuccess);
+    });
+
+    it('Tests updatePicklistStatusApiHook on failure', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      const toastUpdatePicklistError = {
+        type: 'error',
+        text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      updatePicklistStatusApiHook(failureApi, mockSelectedItems, mockDispatch, navigationProp, PickAction.ACCEPT_BIN);
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistError);
+    });
+
+    it('Tests updatePicklistStatusApiHook isWaiting', () => {
+      const isLoadingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      updatePicklistStatusApiHook(isLoadingApi, mockSelectedItems, mockDispatch, navigationProp, PickAction.ACCEPT_BIN);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(showActivityModal).toBeCalledTimes(1);
+    });
   });
 });

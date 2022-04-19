@@ -390,7 +390,9 @@ export default {
     REMAINING_QTY: 'Cantidad restante en pallet',
     PICKLIST_SUCCESS: 'Successfully retrieved pickLists', // TODO add Spanish translations
     PICKLIST_NOT_FOUND: 'No picklists were found for this club', // TODO add Spanish translations
-    PICKLIST_ERROR: 'There was an error retrieving the Picklist' // TODO add Spanish translations
+    PICKLIST_ERROR: 'There was an error retrieving the Picklist', // TODO add Spanish translations
+    UPDATE_PICKLIST_STATUS_SUCCESS: 'Se actualizaron correctamente los estatus de pick',
+    UPDATE_PICKLIST_STATUS_ERROR: 'Hubo un error al actualizar el estatus de pickeo'
   },
   BINNING: {
     BINNING: 'Bodega',
