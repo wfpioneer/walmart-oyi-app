@@ -387,7 +387,10 @@ export default {
     ACCEPT: 'Aceptar',
     RELEASE: 'Liberar',
     UPDATE_REMAINING_QTY: 'Actualiza la cantidad de cada artículo antes de continuar',
-    REMAINING_QTY: 'Cantidad restante en pallet'
+    REMAINING_QTY: 'Cantidad restante en pallet',
+    PICKLIST_SUCCESS: 'Successfully retrieved pickLists', // TODO add Spanish translations
+    PICKLIST_NOT_FOUND: 'No picklists were found for this club', // TODO add Spanish translations
+    PICKLIST_ERROR: 'There was an error retrieving the Picklist' // TODO add Spanish translations
   },
   BINNING: {
     BINNING: 'Bodega',

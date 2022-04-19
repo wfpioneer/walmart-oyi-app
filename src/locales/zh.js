@@ -387,7 +387,10 @@ export default {
     ACCEPT: '接收',
     RELEASE: '释放',
     UPDATE_REMAINING_QTY: '继续之前请更新卡板剩余商品的数量',
-    REMAINING_QTY: '卡板剩余数量'
+    REMAINING_QTY: '卡板剩余数量',
+    PICKLIST_SUCCESS: 'Successfully retrieved pickLists', // TODO add Mandarin translations
+    PICKLIST_NOT_FOUND: 'No picklists were found for this club', // TODO add Mandarin translations
+    PICKLIST_ERROR: 'There was an error retrieving the Picklist' // TODO add Mandarin translations
   },
   BINNING: {
     BINNING: '上架',
