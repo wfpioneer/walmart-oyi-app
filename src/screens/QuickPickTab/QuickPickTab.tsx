@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
-import { PickingState } from '../../state/reducers/Picking';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import User from '../../models/User';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
@@ -30,7 +29,12 @@ interface GroupItem {
 }
 
 export const QuickPickTabScreen = (props: QuickPickTabScreenProps) => {
-  const { quickPicks, user, isManualScanEnabled, dispatch } = props;
+  const {
+    quickPicks,
+    user,
+    isManualScanEnabled,
+    dispatch
+  } = props;
   const [assignedToMe, assignedToOthers] = quickPicks.reduce(
     ([mine, others]: [PickListItem[], PickListItem[]], pick) => (
       pick.assignedAssociate === user.userId ? [[...mine, pick], others] : [mine, [...others, pick]]
