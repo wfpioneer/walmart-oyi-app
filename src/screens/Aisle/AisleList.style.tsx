@@ -2,14 +2,6 @@ import { StyleSheet } from 'react-native';
 import { COLOR } from '../../themes/Color';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  disabledContainer: {
-    flex: 1,
-    opacity: 0.2,
-    backgroundColor: COLOR.BLACK_TRANSPARENT_200
-  },
   item: {
     backgroundColor: COLOR.WHITE,
     padding: 14,
@@ -63,7 +55,7 @@ const styles = StyleSheet.create({
   },
   bottomSheetModal: {
     borderColor: COLOR.GREY_200,
-    borderRadius: 5,
+    borderRadius: 20,
     borderWidth: 2
   },
   confirmationTextView: {

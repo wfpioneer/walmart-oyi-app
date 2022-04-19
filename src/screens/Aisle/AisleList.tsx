@@ -15,7 +15,9 @@ import {
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
+import {
+  BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView
+} from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
 import styles from './AisleList.style';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
@@ -312,39 +314,33 @@ const AisleList = (): JSX.Element => {
 
   return (
     <BottomSheetModalProvider>
-      <TouchableOpacity
-        onPress={() => dispatch(hideLocationPopup())}
-        activeOpacity={1}
-        disabled={!locationPopupVisible}
-        style={locationPopupVisible ? styles.disabledContainer : styles.container}
-      >
-        <AisleScreen
-          zoneId={zoneId}
-          zoneName={zoneName}
-          navigation={navigation}
-          dispatch={dispatch}
-          getAllAisles={getAllAisles}
-          deleteZoneApi={deleteZoneApi}
-          isManualScanEnabled={isManualScanEnabled}
-          getAislesApiStart={getAislesApiStart}
-          setGetAislesApiStart={setGetAislesApiStart}
-          deleteZoneApiStart={deleteZoneApiStart}
-          setDeleteZoneApiStart={setDeleteZoneApiStart}
-          displayConfirmation={displayConfirmation}
-          setDisplayConfirmation={setDisplayConfirmation}
-          route={route}
-          useEffectHook={useEffect}
-          trackEventCall={trackEvent}
-          locationPopupVisible={locationPopupVisible}
-          activityModal={activityModal}
-        />
-      </TouchableOpacity>
+      <AisleScreen
+        zoneId={zoneId}
+        zoneName={zoneName}
+        navigation={navigation}
+        dispatch={dispatch}
+        getAllAisles={getAllAisles}
+        deleteZoneApi={deleteZoneApi}
+        isManualScanEnabled={isManualScanEnabled}
+        getAislesApiStart={getAislesApiStart}
+        setGetAislesApiStart={setGetAislesApiStart}
+        deleteZoneApiStart={deleteZoneApiStart}
+        setDeleteZoneApiStart={setDeleteZoneApiStart}
+        displayConfirmation={displayConfirmation}
+        setDisplayConfirmation={setDisplayConfirmation}
+        route={route}
+        useEffectHook={useEffect}
+        trackEventCall={trackEvent}
+        locationPopupVisible={locationPopupVisible}
+        activityModal={activityModal}
+      />
       <BottomSheetModal
         ref={bottomSheetModalRef}
         snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
         index={0}
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}
+        backdropComponent={BottomSheetBackdrop}
       >
         <BottomSheetView>
           <BottomSheetAddCard

@@ -14,7 +14,7 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
-import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
 import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
@@ -524,44 +524,38 @@ const SectionList = (): JSX.Element => {
 
   return (
     <BottomSheetModalProvider>
-      <TouchableOpacity
-        onPress={() => dispatch(hideLocationPopup())}
-        activeOpacity={1}
-        disabled={!location.locationPopupVisible}
-        style={location.locationPopupVisible ? styles.disabledContainer : styles.container}
-      >
-        <SectionScreen
-          aisleId={aisleId}
-          aisleName={aisleName}
-          zoneName={zoneName}
-          navigation={navigation}
-          dispatch={dispatch}
-          getAllSections={getAllSections}
-          isManualScanEnabled={isManualScanEnabled}
-          apiStart={apiStart}
-          setApiStart={setApiStart}
-          route={route}
-          useEffectHook={useEffect}
-          trackEventCall={trackEvent}
-          locationPopupVisible={location.locationPopupVisible}
-          displayConfirmation={displayConfirmation}
-          setDisplayConfirmation={setDisplayConfirmation}
-          deleteAisleApi={deleteAisleApi}
-          deleteAisleApiStart={deleteAisleApiStart}
-          setDeleteAisleApiStart={setDeleteAisleApiStart}
-          isClearAisle={isClearAisle}
-          clearAisleApi={clearAisleApi}
-          clearLocationTarget={clearLocationTarget}
-          setClearLocationTarget={setClearLocationTarget}
-          activityModal={activityModal}
-        />
-      </TouchableOpacity>
+      <SectionScreen
+        aisleId={aisleId}
+        aisleName={aisleName}
+        zoneName={zoneName}
+        navigation={navigation}
+        dispatch={dispatch}
+        getAllSections={getAllSections}
+        isManualScanEnabled={isManualScanEnabled}
+        apiStart={apiStart}
+        setApiStart={setApiStart}
+        route={route}
+        useEffectHook={useEffect}
+        trackEventCall={trackEvent}
+        locationPopupVisible={location.locationPopupVisible}
+        displayConfirmation={displayConfirmation}
+        setDisplayConfirmation={setDisplayConfirmation}
+        deleteAisleApi={deleteAisleApi}
+        deleteAisleApiStart={deleteAisleApiStart}
+        setDeleteAisleApiStart={setDeleteAisleApiStart}
+        isClearAisle={isClearAisle}
+        clearAisleApi={clearAisleApi}
+        clearLocationTarget={clearLocationTarget}
+        setClearLocationTarget={setClearLocationTarget}
+        activityModal={activityModal}
+      />
       <BottomSheetModal
         ref={bottomSheetModalRef}
         snapPoints={user.features.includes(MANAGER_APPROVAL) ? managerSnapPoints : associateSnapPoints}
         index={0}
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}
+        backdropComponent={BottomSheetBackdrop}
       >
         <BottomSheetPrintCard
           isVisible={locationManagementEdit()}
