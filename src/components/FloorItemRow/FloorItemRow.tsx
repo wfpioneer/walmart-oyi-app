@@ -39,7 +39,10 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
     || user.configs.locationManagementEdit;
 
   return (
-    <TouchableOpacity disabled={location.itemPopupVisible} onPress={() => itemOnPress()}>
+    <TouchableOpacity
+      disabled={location.itemPopupVisible || location.locationPopupVisible}
+      onPress={() => itemOnPress()}
+    >
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.pallet}>
@@ -47,15 +50,17 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
               {`${strings('ITEM.ITEM')} ${item.itemNbr}`}
             </Text>
             {locationManagementEdit() && (
-              <TouchableOpacity onPress={() => {
-                if (location.itemPopupVisible) {
-                  dispatch(clearSelectedItem());
-                  dispatch(hideItemPopup());
-                } else {
-                  dispatch(setSelectedItem(item));
-                  dispatch(showItemPopup());
-                }
-              }}
+              <TouchableOpacity
+                onPress={() => {
+                  if (location.itemPopupVisible) {
+                    dispatch(clearSelectedItem());
+                    dispatch(hideItemPopup());
+                  } else {
+                    dispatch(setSelectedItem(item));
+                    dispatch(showItemPopup());
+                  }
+                }}
+                disabled={location.locationPopupVisible}
               >
                 <View style={styles.rightButton}>
                   <Image

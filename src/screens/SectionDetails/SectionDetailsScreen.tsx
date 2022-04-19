@@ -16,7 +16,6 @@ import { deleteLocation, getPalletDetails, getSectionDetails } from '../../state
 import { AsyncState } from '../../models/AsyncState';
 import styles from './SectionDetailsScreen.style';
 import COLOR from '../../themes/Color';
-import { trackEvent } from '../../utils/AppCenterTool';
 import FloorItemRow from '../../components/FloorItemRow/FloorItemRow';
 import Button from '../../components/buttons/Button';
 import { CustomModalComponent } from '../Modal/Modal';
@@ -35,7 +34,6 @@ interface SectionDetailsProps {
   deleteLocationApi: AsyncState;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
-  trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -53,7 +51,7 @@ export const handleDeleteItem = (
       deleteLocation({
         headers: { itemNbr: selectedItem.itemNbr },
         upc: selectedItem.upcNbr,
-        sectionId,
+        sectionId: sectionId.toString(),
         locationTypeNbr: selectedItem.locationType
       })
     );
@@ -108,7 +106,6 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
     deleteLocationApi,
     dispatch,
     navigation,
-    trackEventCall,
     useEffectHook,
     displayConfirmation,
     setDisplayConfirmation,
@@ -277,7 +274,6 @@ const SectionDetails = (): JSX.Element => {
           deleteLocationApi={deleteLocationApi}
           dispatch={dispatch}
           navigation={navigation}
-          trackEventCall={trackEvent}
           useEffectHook={useEffect}
           displayConfirmation={displayConfirmation}
           setDisplayConfirmation={setDisplayConfirmation}
