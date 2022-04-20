@@ -12,7 +12,7 @@ export default class PickingService {
   public static updatePickListStatus(payload: {
     headers: { action: PickAction };
     picklistItems: {
-      id: number;
+      picklistId: number;
       locationId: number;
       locationName: string;
     }[];
