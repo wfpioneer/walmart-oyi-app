@@ -82,7 +82,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         pickStatus={selectedPicks[0].status}
       />
       <View style={styles.updateQuantityTextView}>
-        <Text>{strings('PICKING.UPDATE_REMAINING_QTY')}</Text>
+        <Text style={styles.updateQuantityText}>{strings('PICKING.UPDATE_REMAINING_QTY')}</Text>
       </View>
       <FlatList
         data={selectedPicks}

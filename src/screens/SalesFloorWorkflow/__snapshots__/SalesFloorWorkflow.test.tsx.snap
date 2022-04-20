@@ -21,10 +21,17 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
       Object {
         "alignItems": "center",
         "justifyContent": "center",
+        "padding": 5,
       }
     }
   >
-    <Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 13,
+        }
+      }
+    >
       [missing "en.PICKING.UPDATE_REMAINING_QTY" translation]
     </Text>
   </View>
@@ -140,10 +147,17 @@ exports[`Sales floor workflow tests renders the screen with several items on the
       Object {
         "alignItems": "center",
         "justifyContent": "center",
+        "padding": 5,
       }
     }
   >
-    <Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 13,
+        }
+      }
+    >
       [missing "en.PICKING.UPDATE_REMAINING_QTY" translation]
     </Text>
   </View>

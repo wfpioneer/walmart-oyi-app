@@ -19,7 +19,11 @@ const styles = StyleSheet.create({
   },
   updateQuantityTextView: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 5
+  },
+  updateQuantityText: {
+    fontSize: 13
   }
 });
 
