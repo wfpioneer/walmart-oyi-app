@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   FlatList, SafeAreaView, Text, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import Button from '../../components/buttons/Button';
 import PickPalletInfoCard from '../../components/PickPalletInfoCard/PickPalletInfoCard';
 import SalesFloorItemCard, { MAX } from '../../components/SalesFloorItemCard/SalesFloorItemCard';
@@ -13,19 +14,49 @@ import { updatePicks } from '../../state/actions/Picking';
 import { PickListItem } from '../../models/Picking.d';
 import { strings } from '../../locales';
 import styles from './SalesFloorWorkflow.style';
-import { Pallet } from '../../models/PalletManagementTypes';
+import { Pallet, PalletInfo } from '../../models/PalletManagementTypes';
+import { UseEffectType } from '../../models/Generics.d';
+import { AsyncState } from '../../models/AsyncState';
+import { getPalletDetails } from '../../state/actions/saga';
 
 interface SFWorklfowProps {
   pickingState: PickingState;
   palletToWork: Pallet;
   dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
+  useEffectHook: UseEffectType;
+  palletDetailsApi: AsyncState;
 }
 
 export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
-  const { pickingState, palletToWork, dispatch } = props;
+  const {
+    pickingState, palletToWork, palletDetailsApi,
+    dispatch, navigation, useEffectHook
+  } = props;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
   const assigned = selectedPicks[0].assignedAssociate;
+
+  useEffectHook(() => {
+    const navListener = navigation.addListener('focus', () => {
+      dispatch(getPalletDetails({ palletIds: [selectedPicks[0].palletId] }));
+    });
+
+    return navListener;
+  });
+
+  useEffectHook(() => {
+    if (navigation.isFocused() && !palletDetailsApi.isWaiting) {
+      // success
+      if (palletDetailsApi.result) {
+        const { pallets }: { pallets: Pallet[] } = palletDetailsApi.result.data;
+        const pallet = pallets[0];
+        pallet.items.forEach(item => {
+          selectedPicks.findIndex
+        })
+      }
+    }
+  }, [palletDetailsApi]);
 
   const handleComplete = () => {};
 
@@ -109,7 +140,9 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
 
 const SalesFloorWorkflow = () => {
   const pickingState = useTypedSelector(state => state.Picking);
+  const palletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const mockPallet: Pallet = {
     items: [],
@@ -125,6 +158,9 @@ const SalesFloorWorkflow = () => {
       pickingState={pickingState}
       palletToWork={mockPallet}
       dispatch={dispatch}
+      navigation={navigation}
+      useEffectHook={useEffect}
+      palletDetailsApi={palletDetailsApi}
     />
   );
 };
