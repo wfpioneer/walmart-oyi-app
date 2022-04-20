@@ -388,9 +388,11 @@ export default {
     RELEASE: 'Liberar',
     UPDATE_REMAINING_QTY: 'Actualiza la cantidad de cada artículo antes de continuar',
     REMAINING_QTY: 'Cantidad restante en pallet',
-    PICKLIST_SUCCESS: 'Successfully retrieved pickLists', // TODO add Spanish translations
-    PICKLIST_NOT_FOUND: 'No picklists were found for this club', // TODO add Spanish translations
-    PICKLIST_ERROR: 'There was an error retrieving the Picklist' // TODO add Spanish translations
+    PICKLIST_SUCCESS: 'Se obtuvo con éxito la lista de pickeos',
+    PICKLIST_NOT_FOUND: 'No se encontró la lista de pickeos para este club',
+    PICKLIST_ERROR: 'Hubo un error obteniendo la lista de pickeos',
+    UPDATE_PICKLIST_STATUS_SUCCESS: 'Se actualizaron correctamente los estatus de pick',
+    UPDATE_PICKLIST_STATUS_ERROR: 'Hubo un error al actualizar el estatus de pickeo'
   },
   BINNING: {
     BINNING: 'Bodega',

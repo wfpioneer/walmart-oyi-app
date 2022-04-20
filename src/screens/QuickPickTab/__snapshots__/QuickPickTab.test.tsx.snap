@@ -69,6 +69,79 @@ exports[`Quick pick tab render tests renders the screen with no picking items 1`
 </ForwardRef(SafeAreaView)>
 `;
 
+exports[`Quick pick tab render tests renders the screen with no picking items and manual scan true 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+      "height": "100%",
+    }
+  }
+>
+  <ManualScanComponent
+    keyboardType="numeric"
+    placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+  />
+  <FlatList
+    data={
+      Array [
+        Object {
+          "picks": Array [],
+          "title": "[missing \\"en.PICKING.ASSIGNED_TO_ME\\" translation]",
+        },
+        Object {
+          "picks": Array [],
+          "title": "[missing \\"en.PICKING.PICK\\" translation]",
+        },
+        Object {
+          "picks": Array [],
+          "title": "[missing \\"en.PICKING.WORK\\" translation]",
+        },
+        Object {
+          "picks": Array [],
+          "title": "[missing \\"en.PICKING.BIN\\" translation]",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    extraData={Array []}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#eaeaea",
+        "marginTop": "auto",
+        "padding": 7,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+        }
+      }
+    >
+      [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
+    </Text>
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
 exports[`Quick pick tab render tests renders the screen with not all items assigned to me 1`] = `
 <ForwardRef(SafeAreaView)
   style={
