@@ -364,6 +364,10 @@ export const PickingNavigatorStack = (
       <Stack.Screen
         name="SalesFloorWorkflow"
         component={SalesFloorWorkflow}
+        options={{
+          headerTitle: strings('PICKING.PICKING'),
+          headerRight: () => kebabMenuButton()
+        }}
       />
       <Stack.Screen
         name="CreatePick"

@@ -1,4 +1,4 @@
-inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-v1.3.3
+inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-beta
 
 # Maximum commits to be ShallowCloned by Looper
 gitShallowDepth: 2147483647
@@ -29,6 +29,9 @@ envs:
       SITES_FILE: sites.txt
       # whether we should use the old version of BUILD_SUPPORT or not. Defaults to false.
       USE_OLD_BUILD_SUPPORT: false
+
+      # determines whether the app should be signed using APK Signature Scheme v2. (Required on Android 11 and up)
+      ANDROID_VERSION_ABOVE_11: false
 
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
@@ -67,6 +70,9 @@ envs:
       #Versioning vars
       # major / minor / patch / noBump > defaults to patch
       VERSION_TYPE: 'noBump'
+
+      # Optional - weather the build will be zip aligned. Defaults to false
+      ZIPALIGN_REQUIRED: false
 
       #Proximity related vars
       RELEASES_REPO: 'pangaea_releases'

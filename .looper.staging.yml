@@ -1,4 +1,4 @@
-inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-v1.3.3
+inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-beta
 
 # Maximum commits to be ShallowCloned by Looper
 gitShallowDepth: 2147483647
@@ -30,6 +30,9 @@ envs:
       # whether we should use the old version of BUILD_SUPPORT or not. Defaults to false.
       USE_OLD_BUILD_SUPPORT: false
 
+      # determines whether the app should be signed using APK Signature Scheme v2. (Required on Android 11 and up)
+      ANDROID_VERSION_ABOVE_11: false
+
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
       ANDROID_BUILD_PROFILE: ':app:assembleStagingRelease'
@@ -42,7 +45,7 @@ envs:
       # whether you want the template to create a ServiceNow CHG or not. Defaults to true
       SN_CREATE_AUTO_CHANGE: false
       # The ServiceNow requested_by_group field. No default.
-      SN_REQUESTED_BY_GROUP: "IntlSamsTech"
+      SN_REQUESTED_BY_GROUP: 'IntlSamsTech'
       # The ServiceNow requested_by_group field. Defaults to Change Managers - US
       SN_CHG_MANAGER_GROUP: "Change Managers - US Sam's"
       # risk level to apply in ServiceNow, from 1 (highest) to 5 (none). Defaults to 5
@@ -50,7 +53,7 @@ envs:
       # impact level to apply in ServiceNow, from 1 (highest) to 4 (none). Defaults to 4
       SN_IMPACT: '4'
       # Link to test plan documentation
-      SN_TEST_PLAN: "Activate OYI International in Airwatch"
+      SN_TEST_PLAN: 'Activate OYI International in Airwatch'
       # Optional description of the SN change
       SN_DESCRIPTION: "Deploy OYI to Sam's Pilot Club for UAT"
 
@@ -58,7 +61,7 @@ envs:
       # Optional - target Organization Group (OG) in AirWatch where the app will reside. Defaults to InternalStore.
       #      DEFAULT_BUSINESS_TYPE: '<BUSINESS_TYPE>'
       # Optional - if no countries are found in SITES_FILE, this will be used instead (single value). Defaults to "US"
-      DEFAULT_COUNTRY_CODE: "CN"
+      DEFAULT_COUNTRY_CODE: 'CN'
       # Optional - version number to use instead of latest found in Proximity.
       #      DEFAULT_CURRENT_VERSION: ''
       # Optional - cocoapods version to use. Defaults to 1.8.4
@@ -67,6 +70,9 @@ envs:
       #Versioning vars
       # major / minor / patch / noBump > defaults to patch
       VERSION_TYPE: 'noBump'
+
+      # Optional - weather the build will be zip aligned. Defaults to false
+      ZIPALIGN_REQUIRED: false
 
       #Proximity related vars
       RELEASES_REPO: 'pangaea_releases'
@@ -93,7 +99,7 @@ envs:
   aos-tc-variables:
     variables:
       APK_NAME: 'OYI-International'
-      ENV_TYPE: "prodint"
+      ENV_TYPE: 'prodint'
 
 tools:
   jdk: 8
@@ -120,5 +126,5 @@ flows:
     - npm ci
     - npm run test:coverage
   sonar:
-    - "(name [sonar]) sonar-scanner -Dproject.settings=sonar-project.properties -Dsonar.branch.name=${GITHUB_PR_SOURCE_BRANCH:-${GITHUB_BRANCH_NAME}}"
+    - '(name [sonar]) sonar-scanner -Dproject.settings=sonar-project.properties -Dsonar.branch.name=${GITHUB_PR_SOURCE_BRANCH:-${GITHUB_BRANCH_NAME}}'
     - hygieia.publishSonar
