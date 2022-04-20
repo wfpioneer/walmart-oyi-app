@@ -32,6 +32,7 @@ envs:
 
       # determines whether the app should be signed using APK Signature Scheme v2. (Required on Android 11 and up)
       ANDROID_VERSION_ABOVE_11: false
+
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
       ANDROID_BUILD_PROFILE: ':app:assembleProductionRelease'
@@ -70,8 +71,8 @@ envs:
       # major / minor / patch / noBump > defaults to patch
       VERSION_TYPE: 'noBump'
 
-      # Optional - weather the build will be zip alligned. Defaults to true
-      ZIPALIGN_REQUIRED: true
+      # Optional - weather the build will be zip aligned. Defaults to false
+      ZIPALIGN_REQUIRED: false
 
       #Proximity related vars
       RELEASES_REPO: 'pangaea_releases'
