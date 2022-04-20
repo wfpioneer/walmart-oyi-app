@@ -2,16 +2,17 @@ import React, {
   EffectCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
-  Text, TouchableOpacity, View
+  ActivityIndicator, Text, TouchableOpacity, View
 } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useDispatch } from 'react-redux';
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
-import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
+import {
+  BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView
+} from '@gorhom/bottom-sheet';
 import { Dispatch } from 'redux';
-import { ActivityIndicator } from 'react-native-paper';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
 import { strings } from '../../locales';
@@ -415,7 +416,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           style={styles.errorButton}
           onPress={() => {
             trackEventCall('location_api_retry',);
-            dispatch(getSectionDetails({ sectionId: cleanScanIfUpcOrEanBarcode(scannedEvent) || section.id.toString() }));
+            dispatch(getSectionDetails(
+              { sectionId: cleanScanIfUpcOrEanBarcode(scannedEvent) || section.id.toString() }
+            ));
           }}
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
@@ -554,46 +557,40 @@ const LocationTabs = () : JSX.Element => {
 
   return (
     <BottomSheetModalProvider>
-      <TouchableOpacity
-        onPress={() => dispatch(hideLocationPopup())}
-        activeOpacity={1}
-        disabled={!locationPopupVisible}
-        style={locationPopupVisible ? styles.disabledContainer : styles.container}
-      >
-        <LocationTabsNavigator
-          dispatch={dispatch}
-          floorItems={locItem?.items?.sectionItems ?? []}
-          reserveItems={locItem?.pallets?.palletData ?? []}
-          section={selectedSection}
-          locationName={locationName}
-          locationPopupVisible={locationPopupVisible}
-          isManualScanEnabled={isManualScanEnabled}
-          useEffectHook={useEffect}
-          navigation={navigation}
-          route={route}
-          scannedEvent={scannedEvent}
-          trackEventCall={trackEvent}
-          validateSessionCall={validateSession}
-          user={user}
-          itemPopupVisible={itemPopupVisible}
-          getSectionDetailsApi={getSectionDetailsApi}
-          setSelectedTab={setSelectedTab}
-          clearSectionApi={clearSectionApi}
-          removeSectionApi={removeSectionApi}
-          displayRemoveConfirmation={displayRemoveConfirmation}
-          setDisplayRemoveConfirmation={setDisplayRemoveConfirmation}
-          displayClearConfirmation={displayClearConfirmation}
-          setDisplayClearConfirmation={setDisplayClearConfirmation}
-          selectedTab={selectedTab}
-          activityModal={activityModal}
-        />
-      </TouchableOpacity>
+      <LocationTabsNavigator
+        dispatch={dispatch}
+        floorItems={locItem?.items?.sectionItems ?? []}
+        reserveItems={locItem?.pallets?.palletData ?? []}
+        section={selectedSection}
+        locationName={locationName}
+        locationPopupVisible={locationPopupVisible}
+        isManualScanEnabled={isManualScanEnabled}
+        useEffectHook={useEffect}
+        navigation={navigation}
+        route={route}
+        scannedEvent={scannedEvent}
+        trackEventCall={trackEvent}
+        validateSessionCall={validateSession}
+        user={user}
+        itemPopupVisible={itemPopupVisible}
+        getSectionDetailsApi={getSectionDetailsApi}
+        setSelectedTab={setSelectedTab}
+        clearSectionApi={clearSectionApi}
+        removeSectionApi={removeSectionApi}
+        displayRemoveConfirmation={displayRemoveConfirmation}
+        setDisplayRemoveConfirmation={setDisplayRemoveConfirmation}
+        displayClearConfirmation={displayClearConfirmation}
+        setDisplayClearConfirmation={setDisplayClearConfirmation}
+        selectedTab={selectedTab}
+        activityModal={activityModal}
+      />
       <BottomSheetModal
         ref={bottomSheetLocationDetailsModalRef}
         snapPoints={user.features.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
         index={0}
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}
+        backdropComponent={BottomSheetBackdrop}
       >
         <BottomSheetView>
           <BottomSheetClearCard

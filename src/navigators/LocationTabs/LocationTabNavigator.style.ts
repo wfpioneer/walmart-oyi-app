@@ -10,17 +10,6 @@ const styles = StyleSheet.create({
     borderBottomColor: COLOR.GREY_200,
     flexDirection: 'row'
   },
-  container: {
-    width: '100%',
-    flex: 1,
-    justifyContent: 'flex-end'
-  },
-  disabledContainer: {
-    width: '100%',
-    flex: 1,
-    justifyContent: 'flex-end',
-    opacity: 0.2
-  },
   clear: {
     color: COLOR.MAIN_THEME_COLOR,
     paddingRight: 14,
@@ -69,7 +58,7 @@ const styles = StyleSheet.create({
   },
   bottomSheetModal: {
     borderColor: COLOR.GREY_200,
-    borderRadius: 5,
+    borderRadius: 20,
     borderWidth: 2
   }
 });
