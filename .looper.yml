@@ -1,4 +1,4 @@
-inherit: job:///Mobile/templates-reactNative/rn-tc-chain-template-v1.4.0
+inherit: job:///Mobile/templates-reactNative/androidTemplate-beta
 
 # Maximum commits to be ShallowCloned by Looper
 gitShallowDepth: 2147483647
@@ -35,11 +35,11 @@ envs:
 
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
-      ANDROID_BUILD_PROFILE: ':app:assembleProductionRelease'
+      GRADLEW_BUILD_COMMAND: ':app:assembleProductionRelease'
       # Optional - if your app needs a special command to be built (debug version). Defaults to assembleDebug.
-      ANDROID_BUILD_PR_PROFILE: ':app:assembleProductionRelease'
+      GRADLEW_BUILD_PR_COMMAND: ':app:assembleProductionRelease'
       # Optional - if your app needs arguments to be built. It's empty by default.
-      GRADLE_ARG: ''
+      GRADLEW_ARG: ''
 
       #ServiceNow variables
       # whether you want the template to create a ServiceNow CHG or not. Defaults to true
