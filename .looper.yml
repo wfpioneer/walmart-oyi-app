@@ -35,9 +35,9 @@ envs:
 
       #Android build vars
       # Optional - if your app needs a special command to be built (release version). Defaults to assembleRelease.
-      GRADLEW_BUILD_COMMAND: ':app:assembleProductionRelease'
+      GRADLEW_BUILD_COMMAND: 'assembleRelease'
       # Optional - if your app needs a special command to be built (debug version). Defaults to assembleDebug.
-      GRADLEW_BUILD_PR_COMMAND: ':app:assembleProductionRelease'
+      GRADLEW_BUILD_PR_COMMAND: 'assembleDebug'
       # Optional - if your app needs arguments to be built. It's empty by default.
       GRADLEW_ARG: ''
 
