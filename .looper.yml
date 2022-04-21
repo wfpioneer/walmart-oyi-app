@@ -114,6 +114,9 @@ rules:
   - before(build-android):
       - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
       - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_PROD\" }" >> android/app/src/main/assets/appcenter-config.json'
+  - before(gradlew-wrapper):
+    - npm ci
+    - npm run test:coverage
 
 flows:
   npm-install-and-coverage:
