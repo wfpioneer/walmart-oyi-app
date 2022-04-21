@@ -111,12 +111,11 @@ tools:
   sonarscanner: 4.6.2.2472
 
 rules:
-  - before(build-android):
+  - before(android-build):
+      - npm ci
+      - npm run test:coverage
       - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
       - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_PROD\" }" >> android/app/src/main/assets/appcenter-config.json'
-  - before(gradlew-wrapper):
-    - npm ci
-    - npm run test:coverage
 
 flows:
   npm-install-and-coverage:
