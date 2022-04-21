@@ -88,7 +88,7 @@ envs:
 
       projects:
         - rootDir: './'
-          type: reactnative
+          type: android
 
   aos-tc-variables:
     variables:
