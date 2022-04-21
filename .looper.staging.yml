@@ -118,6 +118,8 @@ tools:
 
 rules:
   - before(build-android):
+      - npm ci
+      - npm run test:coverage
       - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
       - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_STAGE\" }" >> android/app/src/main/assets/appcenter-config.json'
 
