@@ -93,7 +93,7 @@ envs:
       APM_ID: 'APM0007047'
 
       projects:
-        - rootDir: './'
+        - rootDir: './android'
           type: android
 
   aos-tc-variables:
