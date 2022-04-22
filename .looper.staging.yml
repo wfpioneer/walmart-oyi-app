@@ -129,9 +129,6 @@ flows:
         - var (buildTask): "echo \"${task:-build}\""
         - var (buildArgs): "echo \"${args:--x lint}\""
         - call: "gradlew(task = ${buildTask}, args = ${buildArgs})"
-  npm-install-and-coverage:
-    - npm ci
-    - npm run test:coverage
   sonar:
     - group("Publish Sonar"):
         - '(name [sonar]) sonar-scanner -Dproject.settings=sonar-project.properties -Dsonar.branch.name=${GITHUB_PR_SOURCE_BRANCH:-${GITHUB_BRANCH_NAME}}'
