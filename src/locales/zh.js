@@ -392,7 +392,9 @@ export default {
     PICKLIST_NOT_FOUND: '此门店无补货清单',
     PICKLIST_ERROR: '重置补货清单时报错',
     UPDATE_PICKLIST_STATUS_SUCCESS: '成功更新补货承担',
-    UPDATE_PICKLIST_STATUS_ERROR: '更新补货清单时出错'
+    UPDATE_PICKLIST_STATUS_ERROR: '更新补货清单时出错',
+    SELECT_CONTINUE_ACTION: '选择任务继续',
+    PALLET_NOT_FOUND: '未找到卡板'
   },
   BINNING: {
     BINNING: '上架',

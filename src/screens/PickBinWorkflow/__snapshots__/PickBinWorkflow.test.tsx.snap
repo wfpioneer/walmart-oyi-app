@@ -1,5 +1,112 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PickBin Workflow render tests ContinueActionDialog render tests renders dialog with different coninue actions for the selected picks 1`] = `
+<CustomModalComponent
+  animationType="none"
+  isVisible={true}
+  modalType="Popup"
+  onClose={[Function]}
+>
+  <React.Fragment>
+    <View
+      style={
+        Object {
+          "margin": 5,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PICKING.SELECT_CONTINUE_ACTION" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderTopColor": "#bdbdbd",
+          "borderTopWidth": 2,
+          "flexDirection": "column",
+          "marginTop": "auto",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "margin": 10,
+          }
+        }
+        title="[missing \\"en.PICKING.READY_TO_WORK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "margin": 10,
+          }
+        }
+        title="[missing \\"en.PICKING.COMPLETE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "margin": 10,
+          }
+        }
+        title="[missing \\"en.PICKING.PALLET_NOT_FOUND\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "margin": 10,
+          }
+        }
+        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        titleColor="#0071e9"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={2}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
+</CustomModalComponent>
+`;
+
 exports[`PickBin Workflow render tests renders screen with accepted bin & current user 1`] = `
 <RNCSafeAreaView
   style={
@@ -9,6 +116,34 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
     }
   }
 >
+  <ContinueActionDialog
+    dispatch={[Function]}
+    items={
+      Array [
+        Object {
+          "assignedAssociate": "vn50pz4",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 6,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 45,
+          "palletLocationId": 5,
+          "palletLocationName": "ABAR1-4",
+          "quickPick": true,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "accepted bin",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    setSelectedPicklistAction={[MockFunction]}
+    setShowContinueActionDialog={[Function]}
+    showContinueActionDialog={false}
+  />
   <PickPalletInfoCard
     onPress={[Function]}
     palletId={45}
@@ -99,6 +234,34 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
     }
   }
 >
+  <ContinueActionDialog
+    dispatch={[Function]}
+    items={
+      Array [
+        Object {
+          "assignedAssociate": "t0s0og",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 0,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 43,
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "accepted bin",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    setSelectedPicklistAction={[MockFunction]}
+    setShowContinueActionDialog={[Function]}
+    showContinueActionDialog={false}
+  />
   <PickPalletInfoCard
     onPress={[Function]}
     palletId={43}
@@ -170,6 +333,34 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
     }
   }
 >
+  <ContinueActionDialog
+    dispatch={[Function]}
+    items={
+      Array [
+        Object {
+          "assignedAssociate": "t0s0og",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 0,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 43,
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "accepted bin",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    setSelectedPicklistAction={[MockFunction]}
+    setShowContinueActionDialog={[Function]}
+    showContinueActionDialog={false}
+  />
   <PickPalletInfoCard
     onPress={[Function]}
     palletId={43}
@@ -221,6 +412,34 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
     }
   }
 >
+  <ContinueActionDialog
+    dispatch={[Function]}
+    items={
+      Array [
+        Object {
+          "assignedAssociate": "vn50pz4",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 5,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 44,
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": true,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "accepted pick",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    setSelectedPicklistAction={[MockFunction]}
+    setShowContinueActionDialog={[Function]}
+    showContinueActionDialog={false}
+  />
   <PickPalletInfoCard
     onPress={[Function]}
     palletId={44}
@@ -311,6 +530,34 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
     }
   }
 >
+  <ContinueActionDialog
+    dispatch={[Function]}
+    items={
+      Array [
+        Object {
+          "assignedAssociate": "t0s0og",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 1,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 40,
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "accepted pick",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    setSelectedPicklistAction={[MockFunction]}
+    setShowContinueActionDialog={[Function]}
+    showContinueActionDialog={false}
+  />
   <PickPalletInfoCard
     onPress={[Function]}
     palletId={40}
@@ -369,6 +616,25 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
       type={1}
       width={-1}
     />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "margin": 5,
+        }
+      }
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
   </View>
 </RNCSafeAreaView>
 `;
@@ -382,6 +648,34 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
     }
   }
 >
+  <ContinueActionDialog
+    dispatch={[Function]}
+    items={
+      Array [
+        Object {
+          "assignedAssociate": "t0s0og",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 1,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 40,
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "accepted pick",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    setSelectedPicklistAction={[MockFunction]}
+    setShowContinueActionDialog={[Function]}
+    showContinueActionDialog={false}
+  />
   <PickPalletInfoCard
     onPress={[Function]}
     palletId={40}
@@ -420,7 +714,27 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
         "width": "100%",
       }
     }
-  />
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "margin": 5,
+        }
+      }
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
 </RNCSafeAreaView>
 `;
 
@@ -433,6 +747,52 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
     }
   }
 >
+  <ContinueActionDialog
+    dispatch={[Function]}
+    items={
+      Array [
+        Object {
+          "assignedAssociate": "",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 3,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 42,
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "ready to bin",
+          "upcNbr": "1234567890123",
+        },
+        Object {
+          "assignedAssociate": "",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 4,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 42,
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "ready to bin",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    setSelectedPicklistAction={[MockFunction]}
+    setShowContinueActionDialog={[Function]}
+    showContinueActionDialog={false}
+  />
   <PickPalletInfoCard
     onPress={[Function]}
     palletId={42}
@@ -522,6 +882,34 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
     }
   }
 >
+  <ContinueActionDialog
+    dispatch={[Function]}
+    items={
+      Array [
+        Object {
+          "assignedAssociate": "",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 2,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 41,
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "ready to pick",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    setSelectedPicklistAction={[MockFunction]}
+    setShowContinueActionDialog={[Function]}
+    showContinueActionDialog={false}
+  />
   <PickPalletInfoCard
     onPress={[Function]}
     palletId={41}
