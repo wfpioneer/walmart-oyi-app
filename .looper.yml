@@ -112,13 +112,13 @@ tools:
 
 flows:
   gradlew-wrapper:
-    group('npm install'):
+    group ('npm install'):
       - npm ci
       - npm run test:coverage
-    group('appcenter commands'):
+    group ('appcenter commands'):
       - call: 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
       - call: 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_PROD\" }" >> android/app/src/main/assets/appcenter-config.json'
-    group('gradle build'):
+    group ('gradle build'):
       - gradle clean
       - var (buildTask): "echo \"${task:-build}\""
       - var (buildArgs): "echo \"${args:--x lint}\""
