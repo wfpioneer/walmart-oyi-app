@@ -1,4 +1,4 @@
-inherit: job:///Mobile/templates-reactNative/androidTemplate-beta
+inherit: job:///Mobile/templates-reactNative/androidTemplate-1.3.0
 
 # Maximum commits to be ShallowCloned by Looper
 gitShallowDepth: 2147483647
@@ -90,10 +90,10 @@ envs:
         - rootDir: './android'
           type: android
 
-  aos-tc-variables:
+  aos-variables:
     variables:
+      PLATFORM: 'aos'
       APK_NAME: 'OYI-International'
-      ENV_TYPE: "prodint"
 
 tools:
   jdk: 8
