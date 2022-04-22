@@ -96,10 +96,10 @@ envs:
         - rootDir: './android'
           type: android
 
-  aos-tc-variables:
+  aos-variables:
     variables:
+      PLATFORM: 'aos'
       APK_NAME: 'OYI-International'
-      ENV_TYPE: 'prodint'
 
 tools:
   jdk: 8
