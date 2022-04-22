@@ -83,6 +83,7 @@ describe('SalesFloorTabScreen', () => {
     renderer.render(
       <SalesFloorTabScreen
         readyToWorklist={salesPickList}
+        dispatch={jest.fn()}
       />
     );
 

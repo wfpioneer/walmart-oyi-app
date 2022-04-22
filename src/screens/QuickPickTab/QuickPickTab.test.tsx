@@ -53,7 +53,25 @@ describe('Quick pick tab render tests', () => {
   it('renders the screen with no picking items', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    renderer.render(<QuickPickTabScreen quickPicks={[]} user={mockUser} />);
+    renderer.render(<QuickPickTabScreen
+      quickPicks={[]}
+      user={mockUser}
+      dispatch={jest.fn()}
+      isManualScanEnabled={false}
+    />);
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders the screen with no picking items and manual scan true', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    renderer.render(<QuickPickTabScreen
+      quickPicks={[]}
+      user={mockUser}
+      dispatch={jest.fn()}
+      isManualScanEnabled={true}
+    />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -80,7 +98,12 @@ describe('Quick pick tab render tests', () => {
       }
     ];
 
-    renderer.render(<QuickPickTabScreen quickPicks={myPickItems} user={mockUser} />);
+    renderer.render(<QuickPickTabScreen
+      quickPicks={myPickItems}
+      user={mockUser}
+      dispatch={jest.fn()}
+      isManualScanEnabled={false}
+    />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -107,7 +130,12 @@ describe('Quick pick tab render tests', () => {
       }
     ];
 
-    renderer.render(<QuickPickTabScreen quickPicks={quickPickItems} user={mockUser} />);
+    renderer.render(<QuickPickTabScreen
+      quickPicks={quickPickItems}
+      user={mockUser}
+      dispatch={jest.fn()}
+      isManualScanEnabled={false}
+    />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });

@@ -52,7 +52,8 @@ export default {
     ENABLED: 'Activado',
     DISABLED: 'Desactivado',
     REQUIRED: 'Requerido',
-    REMOVED: 'Removido'
+    REMOVED: 'Removido',
+    CREATE: 'Crear'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -379,8 +380,19 @@ export default {
     NUMBER_PALLETS: 'Número de pallets',
     CREATE_PICK: 'Crear un Pick',
     MOVE_TO_FRONT: 'Llevar al frente',
+    QUICK_PICK: 'Pickeo rápido',
+    RESERVE_LOC: 'Ubicación de Bodega',
+    FLOOR_LOC: 'Ubicación en Piso',
     FRONT: 'Frente',
-    QUICK_PICK: 'Pickeo rápido'
+    ACCEPT: 'Aceptar',
+    RELEASE: 'Liberar',
+    UPDATE_REMAINING_QTY: 'Actualiza la cantidad de cada artículo antes de continuar',
+    REMAINING_QTY: 'Cantidad restante en pallet',
+    PICKLIST_SUCCESS: 'Se obtuvo con éxito la lista de pickeos',
+    PICKLIST_NOT_FOUND: 'No se encontró la lista de pickeos para este club',
+    PICKLIST_ERROR: 'Hubo un error obteniendo la lista de pickeos',
+    UPDATE_PICKLIST_STATUS_SUCCESS: 'Se actualizaron correctamente los estatus de pick',
+    UPDATE_PICKLIST_STATUS_ERROR: 'Hubo un error al actualizar el estatus de pickeo'
   },
   BINNING: {
     BINNING: 'Bodega',

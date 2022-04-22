@@ -52,7 +52,8 @@ export default {
     ENABLED: 'Enabled',
     DISABLED: 'Disabled',
     REQUIRED: 'Required',
-    REMOVED: 'Removed'
+    REMOVED: 'Removed',
+    CREATE: 'Create'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -380,8 +381,20 @@ export default {
     NUMBER_PALLETS: 'Number of Pallets',
     QUICK_PICK: 'Quick Pick',
     MOVE_TO_FRONT: 'Move to Front',
+    CREATE_PICK: 'Create Pick',
+    CREATE_QUICK_PICK: 'Create Quick Pick',
+    RESERVE_LOC: 'Reserve Location',
+    FLOOR_LOC: 'Floor location',
     FRONT: 'Front',
-    CREATE_PICK: 'Create Pick'
+    ACCEPT: 'Accept',
+    RELEASE: 'Release',
+    PICKLIST_SUCCESS: 'Successfully retrieved pickLists',
+    PICKLIST_NOT_FOUND: 'No picklists were found for this club',
+    PICKLIST_ERROR: 'There was an error retrieving the Picklist',
+    UPDATE_REMAINING_QTY: 'Update quantity of each item left on pallet before continuing',
+    REMAINING_QTY: 'Quantity left on pallet',
+    UPDATE_PICKLIST_STATUS_SUCCESS: 'Successfully updated picklist status',
+    UPDATE_PICKLIST_STATUS_ERROR: 'There was an error while updating the Picklist status'
   },
   BINNING: {
     BINNING: 'Binning',

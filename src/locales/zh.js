@@ -52,7 +52,8 @@ export default {
     ENABLED: '激活',
     DISABLED: '不可用',
     REQUIRED: '适用',
-    REMOVED: '移除'
+    REMOVED: '移除',
+    CREATE: '创建'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -379,8 +380,19 @@ export default {
     NUMBER_PALLETS: '卡板数量',
     CREATE_PICK: '创建补货',
     MOVE_TO_FRONT: '移到最前',
-    FRONT: '正面', // TODO Replace with mandarin translation on confluence
-    QUICK_PICK: '快速拣货'
+    QUICK_PICK: '快速拣货',
+    RESERVE_LOC: '高货架位置',
+    FLOOR_LOC: '楼面位置',
+    FRONT: '靠前',
+    ACCEPT: '接收',
+    RELEASE: '释放',
+    UPDATE_REMAINING_QTY: '继续之前请更新卡板剩余商品的数量',
+    REMAINING_QTY: '卡板剩余数量',
+    PICKLIST_SUCCESS: '成功重置铺货清单',
+    PICKLIST_NOT_FOUND: '此门店无补货清单',
+    PICKLIST_ERROR: '重置补货清单时报错',
+    UPDATE_PICKLIST_STATUS_SUCCESS: '成功更新补货承担',
+    UPDATE_PICKLIST_STATUS_ERROR: '更新补货清单时出错'
   },
   BINNING: {
     BINNING: '上架',

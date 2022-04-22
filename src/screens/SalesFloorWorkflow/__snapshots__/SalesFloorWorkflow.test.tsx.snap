@@ -1,0 +1,271 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sales floor workflow tests renders the screen with one item on pallet 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <PickPalletInfoCard
+    onPress={[Function]}
+    palletId={43}
+    palletLocation="ABAR1-2"
+    pickListItems={Array []}
+    pickStatus="ready to work"
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "padding": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 13,
+        }
+      }
+    >
+      [missing "en.PICKING.UPDATE_REMAINING_QTY" translation]
+    </Text>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "assignedAssociate": "",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 0,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 43,
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "ready to work",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <View
+    style={
+      Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
+        "flexDirection": "row",
+        "marginTop": "auto",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "margin": 5,
+        }
+      }
+      testId="complete"
+      title="[missing \\"en.PICKING.COMPLETE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "margin": 5,
+        }
+      }
+      testId="bin"
+      title="[missing \\"en.PICKING.READY_TO_BIN\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`Sales floor workflow tests renders the screen with several items on the pallet 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <PickPalletInfoCard
+    onPress={[Function]}
+    palletId={43}
+    palletLocation="ABAR1-2"
+    pickListItems={Array []}
+    pickStatus="ready to work"
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "padding": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 13,
+        }
+      }
+    >
+      [missing "en.PICKING.UPDATE_REMAINING_QTY" translation]
+    </Text>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "assignedAssociate": "",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 0,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 43,
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "ready to work",
+          "upcNbr": "1234567890123",
+        },
+        Object {
+          "assignedAssociate": "",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 1,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": 43,
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "ready to work",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <View
+    style={
+      Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
+        "flexDirection": "row",
+        "marginTop": "auto",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "margin": 5,
+        }
+      }
+      testId="complete"
+      title="[missing \\"en.PICKING.COMPLETE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "margin": 5,
+        }
+      }
+      testId="bin"
+      title="[missing \\"en.PICKING.READY_TO_BIN\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;

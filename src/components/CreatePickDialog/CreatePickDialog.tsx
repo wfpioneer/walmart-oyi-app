@@ -6,8 +6,9 @@ import IconButton from '../buttons/IconButton';
 import NumericSelector from '../NumericSelector/NumericSelector';
 import styles from './CreatePickDialog.style';
 import { ModalCloseIcon } from '../../screens/Modal/Modal';
-import {strings} from '../../locales';
+import { strings } from '../../locales';
 import Location from '../../models/Location';
+import { MOVE_TO_FRONT, PALLET_MAX, PALLET_MIN } from '../../screens/CreatePick/CreatePick';
 import COLOR from '../../themes/Color';
 
 interface CreatePickDialogProps {
@@ -22,26 +23,20 @@ interface CreatePickDialogProps {
   onSubmit(): void;
 }
 
-export const MOVE_TO_FRONT = 'moveToFront';
-const PALLET_MIN = 1;
-const PALLET_MAX = 99;
-
-const addLocationsToPicker = (locations: Location[]) => {
-  return [
-    <Picker.Item label={strings('PICKING.SELECT_LOCATION')} value={''} key={-1} />,
-    ...locations.map((location: Location) =>
-      <Picker.Item label={location.locationName} value={location.locationName} key={location.locationName}/>
-    ),
-    <Picker.Item label={strings('PICKING.MOVE_TO_FRONT')} value={MOVE_TO_FRONT} key={MOVE_TO_FRONT} />
-  ]
-};
+const addLocationsToPicker = (locations: Location[]) => [
+  <Picker.Item label={strings('PICKING.SELECT_LOCATION')} value="" key={-1} />,
+  ...locations.map((location: Location) => (
+    <Picker.Item label={location.locationName} value={location.locationName} key={location.locationName} />
+  )),
+  <Picker.Item label={strings('PICKING.MOVE_TO_FRONT')} value={MOVE_TO_FRONT} key={MOVE_TO_FRONT} />
+];
 
 const onPalletIncrease = (
   numberOfPallets: number,
   setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>
 ) => {
   if (numberOfPallets < PALLET_MAX) {
-    setNumberOfPallets((preaviousState: number) => preaviousState + 1)
+    setNumberOfPallets((preaviousState: number) => preaviousState + 1);
   }
 };
 
@@ -50,25 +45,28 @@ const onPalletDecrease = (
   setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>
 ) => {
   if (numberOfPallets > PALLET_MIN) {
-    setNumberOfPallets((preaviousState: number) => preaviousState - 1)
+    setNumberOfPallets((preaviousState: number) => preaviousState - 1);
   }
 };
 
 const onPalletTextChange = (text: string, setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>) => {
   const newQty = parseInt(text, 10);
   if (!Number.isNaN(newQty) && newQty >= PALLET_MIN && newQty <= PALLET_MAX) {
-    setNumberOfPallets(newQty)
+    setNumberOfPallets(newQty);
   }
 };
 
-const isNumberOfPalletsValid  = (numberOfPallets: number) =>
-  numberOfPallets >= PALLET_MIN && numberOfPallets <= PALLET_MAX;
+const isNumberOfPalletsValid = (numberOfPallets: number) => (
+  numberOfPallets >= PALLET_MIN && numberOfPallets <= PALLET_MAX
+);
 
-const onQuickPickChange = (setIsQuickPick: React.Dispatch<React.SetStateAction<boolean>>) =>
-  setIsQuickPick((previousState: boolean) => !previousState);
+const onQuickPickChange = (setIsQuickPick: React.Dispatch<React.SetStateAction<boolean>>) => (
+  setIsQuickPick((previousState: boolean) => !previousState)
+);
 
 export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
-  const { selectedSection,
+  const {
+    selectedSection,
     setSelectedSection,
     numberOfPallets,
     setNumberOfPallets,
@@ -100,7 +98,7 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
           {addLocationsToPicker(locations)}
         </Picker>
       </View>
-      {selectedSection === MOVE_TO_FRONT ?
+      {selectedSection === MOVE_TO_FRONT ? (
         <View style={styles.numericSelectorContainer}>
           <Text>
             {strings('PICKING.NUMBER_PALLETS')}
@@ -114,19 +112,20 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
             maxValue={PALLET_MAX}
             value={numberOfPallets}
           />
-        </View> : null}
-        <View style={styles.switchContainer}>
-          <Text style={styles.quickPickText}>
-            {strings('PICKING.QUICK_PICK')}
-          </Text>
-          <Switch
-            value={isQuickPick}
-            onValueChange={() => onQuickPickChange(setIsQuickPick)}
-            thumbColor={COLOR.MAIN_THEME_COLOR}
-            trackColor={{ false: COLOR.GREY, true: COLOR.MAIN_THEME_COLOR }}
-            testID="quickPickSwitch"
-          />
         </View>
+      ) : null}
+      <View style={styles.switchContainer}>
+        <Text style={styles.quickPickText}>
+          {strings('PICKING.QUICK_PICK')}
+        </Text>
+        <Switch
+          value={isQuickPick}
+          onValueChange={() => onQuickPickChange(setIsQuickPick)}
+          thumbColor={COLOR.MAIN_THEME_COLOR}
+          trackColor={{ false: COLOR.GREY, true: COLOR.MAIN_THEME_COLOR }}
+          testID="quickPickSwitch"
+        />
+      </View>
       <View style={styles.buttonContainer}>
         <Button
           disabled={selectedSection === ''}

@@ -14,7 +14,7 @@ import { Dispatch } from 'redux';
 import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
-import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import moment from 'moment';
 import styles from './ZoneList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -304,37 +304,31 @@ const ZoneList = (): JSX.Element => {
 
   return (
     <BottomSheetModalProvider>
-      <TouchableOpacity
-        onPress={() => dispatch(hideLocationPopup())}
-        activeOpacity={1}
-        disabled={!location.locationPopupVisible}
-        style={location.locationPopupVisible ? styles.disabledContainer : styles.container}
-      >
-        <ZoneScreen
-          siteId={siteId}
-          dispatch={dispatch}
-          getZoneApi={getZoneApi}
-          isManualScanEnabled={isManualScanEnabled}
-          navigation={navigation}
-          route={route}
-          useEffectHook={useEffect}
-          apiStart={apiStart}
-          setApiStart={setApiStart}
-          trackEventCall={trackEvent}
-          locationPopupVisible={location.locationPopupVisible}
-          getZoneNamesApi={getZoneNamesApi}
-          errorVisible={errorVisible}
-          setErrorVisible={setErrorVisible}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-        />
-      </TouchableOpacity>
+      <ZoneScreen
+        siteId={siteId}
+        dispatch={dispatch}
+        getZoneApi={getZoneApi}
+        isManualScanEnabled={isManualScanEnabled}
+        navigation={navigation}
+        route={route}
+        useEffectHook={useEffect}
+        apiStart={apiStart}
+        setApiStart={setApiStart}
+        trackEventCall={trackEvent}
+        locationPopupVisible={location.locationPopupVisible}
+        getZoneNamesApi={getZoneNamesApi}
+        errorVisible={errorVisible}
+        setErrorVisible={setErrorVisible}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
       <BottomSheetModal
         ref={bottomSheetModalRef}
         snapPoints={snapPoints}
         index={0}
         onDismiss={() => dispatch(hideLocationPopup())}
         style={styles.bottomSheetModal}
+        backdropComponent={BottomSheetBackdrop}
       >
         <BottomSheetAddCard
           isManagerOption={true}
