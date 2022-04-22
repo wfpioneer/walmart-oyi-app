@@ -118,17 +118,21 @@ tools:
 
 flows:
   gradlew-wrapper:
-    - npm ci
-    - npm run test:coverage
-    - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
-    - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_STAGE\" }" >> app/src/main/assets/appcenter-config.json'
-    - gradle clean
-    - var (buildTask): "echo \"${task:-build}\""
-    - var (buildArgs): "echo \"${args:--x lint}\""
-    - call: "gradlew(task = ${buildTask}, args = ${buildArgs})"
+    - group("npm install"):
+        - npm ci
+        - npm run test:coverage
+    - group ("appcenter commands"):
+        - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
+        - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_STAGE\" }" >> app/src/main/assets/appcenter-config.json'
+    - group("gradle build"):
+        - gradle clean
+        - var (buildTask): "echo \"${task:-build}\""
+        - var (buildArgs): "echo \"${args:--x lint}\""
+        - call: "gradlew(task = ${buildTask}, args = ${buildArgs})"
   npm-install-and-coverage:
     - npm ci
     - npm run test:coverage
   sonar:
-    - '(name [sonar]) sonar-scanner -Dproject.settings=sonar-project.properties -Dsonar.branch.name=${GITHUB_PR_SOURCE_BRANCH:-${GITHUB_BRANCH_NAME}}'
-    - hygieia.publishSonar
+    - group("Publish Sonar"):
+        - '(name [sonar]) sonar-scanner -Dproject.settings=sonar-project.properties -Dsonar.branch.name=${GITHUB_PR_SOURCE_BRANCH:-${GITHUB_BRANCH_NAME}}'
+        - hygieia.publishSonar
