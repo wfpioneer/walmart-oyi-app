@@ -114,7 +114,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     const action = status === PickStatus.READY_TO_PICK ? PickAction.ACCEPT_PICK : PickAction.ACCEPT_BIN;
     setSelectedPicklistAction(action);
     const picklistItems = items.map(item => ({
-      id: item.id,
+      picklistId: item.id,
       locationId: item.palletLocationId,
       locationName: item.palletLocationName
     }));
@@ -132,7 +132,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     const action = PickAction.RELEASE;
     setSelectedPicklistAction(action);
     const picklistItems = items.map(item => ({
-      id: item.id,
+      picklistId: item.id,
       locationId: item.palletLocationId,
       locationName: item.palletLocationName
     }));
