@@ -152,7 +152,6 @@ describe('Sales floor workflow tests', () => {
         backupCategories=""
       />
     );
-
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 

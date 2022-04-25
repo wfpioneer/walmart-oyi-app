@@ -123,7 +123,9 @@ export const palletDetailsApiEffect = (
 
 export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const {
-    pickingState, dispatch, useEffectHook, navigation, updatePicklistStatusApi, palletDetailsApi, expirationState, perishableItemsState, perishableCategories, backupCategories
+    pickingState, dispatch, useEffectHook, navigation,
+    updatePicklistStatusApi, palletDetailsApi, expirationState,
+    perishableItemsState, perishableCategories, backupCategories
   } = props;
 
   const perishableCats = perishableCategories.length
