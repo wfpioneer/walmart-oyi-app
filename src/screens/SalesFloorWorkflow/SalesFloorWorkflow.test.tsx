@@ -5,23 +5,16 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { strings } from '../../locales';
 import { AsyncState } from '../../models/AsyncState';
 import { Pallet } from '../../models/PalletManagementTypes';
+import { UseStateType } from '../../models/Generics.d';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { PickingState } from '../../state/reducers/Picking';
-import { SalesFloorWorkflowScreen, updatePicklistStatusApiHook } from './SalesFloorWorkflow';
+import { SalesFloorWorkflowScreen, palletDetailsApiEffect, updatePicklistStatusApiHook } from './SalesFloorWorkflow';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
 }));
-
-const testPallet: Pallet = {
-  items: [],
-  palletInfo: {
-    id: 1,
-    createDate: 'yesterday'
-  }
-};
 
 const basePickItem: PickListItem = {
   assignedAssociate: '',
@@ -74,7 +67,19 @@ const defaultAsyncState: AsyncState = {
   result: null
 };
 
+const mockDispatch = jest.fn();
+
+const mockSetExpiration = jest.fn();
+const mockExpirationState: UseStateType<string> = ['', mockSetExpiration];
+
+const mockSetPerishables = jest.fn();
+const mockPerishablesState: UseStateType<Array<number>> = [[], mockSetPerishables];
+
 describe('Sales floor workflow tests', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('renders the screen with one item on pallet', () => {
     const renderer = ShallowRenderer.createRenderer();
 
@@ -82,10 +87,14 @@ describe('Sales floor workflow tests', () => {
       <SalesFloorWorkflowScreen
         dispatch={jest.fn()}
         pickingState={pickingState}
-        palletToWork={testPallet}
         navigation={navigationProp}
         updatePicklistStatusApi={defaultAsyncState}
         useEffectHook={jest.fn()}
+        palletDetailsApi={defaultAsyncState}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
       />
     );
 
@@ -93,6 +102,61 @@ describe('Sales floor workflow tests', () => {
   });
 
   it('renders the screen with several items on the pallet', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const waitingAsyncState: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+
+    renderer.render(
+      <SalesFloorWorkflowScreen
+        dispatch={jest.fn()}
+        pickingState={pickingState}
+        navigation={navigationProp}
+        updatePicklistStatusApi={defaultAsyncState}
+        palletDetailsApi={waitingAsyncState}
+        useEffectHook={jest.fn()}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('shows the retry button when get pallet details errors', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const errorAsyncState: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        status: 418,
+        message: 'Im a teapot'
+      }
+    };
+
+    renderer.render(
+      <SalesFloorWorkflowScreen
+        dispatch={jest.fn()}
+        pickingState={pickingState}
+        navigation={navigationProp}
+        updatePicklistStatusApi={defaultAsyncState}
+        palletDetailsApi={errorAsyncState}
+        useEffectHook={jest.fn()}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('shows the activity indicator when waiting for pallet details', () => {
     const renderer = ShallowRenderer.createRenderer();
 
     const multiPicksState: PickingState = {
@@ -104,25 +168,26 @@ describe('Sales floor workflow tests', () => {
           status: PickStatus.READY_TO_WORK
         }
       ],
-      selectedPicks: [0, 1]
+      selectedPicks: [0]
     };
 
     renderer.render(
       <SalesFloorWorkflowScreen
         dispatch={jest.fn()}
         pickingState={multiPicksState}
-        palletToWork={testPallet}
         navigation={navigationProp}
         updatePicklistStatusApi={defaultAsyncState}
         useEffectHook={jest.fn()}
+        palletDetailsApi={defaultAsyncState}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
       />
     );
-
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
   describe('Manage SalesFloorWorkflow externalized function tests', () => {
-    const mockDispatch = jest.fn();
     afterEach(() => {
       jest.clearAllMocks();
     });
@@ -135,6 +200,71 @@ describe('Sales floor workflow tests', () => {
         palletId: 41
       }
     ];
+    it('tests the get pallet details to get quantities, success', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 200,
+          data: {
+            pallets: [
+              {
+                id: 43,
+                createDate: 'yesterday',
+                expirationDate: 'tomorrows',
+                items: [
+                  {
+                    itemNbr: 2,
+                    itemDesc: 'ye olde yo',
+                    price: 2.99,
+                    upc: '1234567890',
+                    quantity: 6,
+                    categoryNbr: 72
+                  },
+                  {
+                    itemNbr: 1,
+                    itemDesc: 'Zweite Sache',
+                    price: 4.92,
+                    upc: '9876543210',
+                    quantity: 8,
+                    categoryNbr: 34
+                  },
+                  {
+                    itemNbr: 3,
+                    itemDesc: 'Dritte Sache',
+                    price: 4.22,
+                    upc: '1029384756',
+                    quantity: 65443,
+                    categoryNbr: 2
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      };
+      const selectedPicks: PickListItem[] = [
+        {
+          ...basePickItem,
+          status: PickStatus.READY_TO_WORK
+        },
+        {
+          ...basePickItem,
+          status: PickStatus.READY_TO_WORK,
+          id: 1,
+          itemNbr: 2
+        }
+      ];
+      const perishableCategories: number[] = [72];
+      palletDetailsApiEffect(
+        navigationProp, successApi, selectedPicks,
+        mockDispatch, mockSetExpiration, mockSetPerishables, perishableCategories
+      );
+      expect(mockSetPerishables).toBeCalledTimes(1);
+      expect(mockSetPerishables).toBeCalledWith([2]);
+      expect(mockSetExpiration).toBeCalledTimes(1);
+      expect(mockSetExpiration).toBeCalledWith('tomorrows');
+      expect(mockDispatch).toBeCalledTimes(2);
+    });
 
     it('Tests updatePicklistStatusApiHook on 200 success for picklist status update', () => {
       const successApi: AsyncState = {
