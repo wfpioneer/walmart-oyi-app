@@ -91,13 +91,9 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
   const assigned = selectedPicks[0].assignedAssociate;
 
-  useEffectHook(() => {
-    const navListener = navigation.addListener('focus', () => {
-      dispatch(getPalletDetails({ palletIds: [selectedPicks[0].palletId] }));
-    });
-
-    return navListener;
-  });
+  useEffectHook(() => navigation.addListener('focus', () => {
+    dispatch(getPalletDetails({ palletIds: [selectedPicks[0].palletId] }));
+  }), []);
 
   useEffectHook(() => palletDetailsApiEffect(
     navigation,
