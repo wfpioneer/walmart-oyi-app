@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   errorView: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     paddingHorizontal: 15,
     paddingVertical: 15
   },

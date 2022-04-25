@@ -148,7 +148,7 @@ exports[`Sales floor workflow tests shows the retry button when get pallet detai
     Object {
       "alignItems": "center",
       "flex": 1,
-      "justifyContent": "flex-start",
+      "justifyContent": "center",
       "paddingHorizontal": 15,
       "paddingVertical": 15,
     }
