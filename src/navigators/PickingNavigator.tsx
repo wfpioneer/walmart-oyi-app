@@ -1,5 +1,5 @@
 import React, {
-  Dispatch, EffectCallback, useEffect, useState
+  DependencyList, Dispatch, EffectCallback, useCallback, useEffect, useState
 } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -17,6 +17,7 @@ import {
   NavigationProp,
   RouteProp,
   getFocusedRouteNameFromRoute,
+  useFocusEffect,
   useNavigation,
   useRoute
 } from '@react-navigation/native';
@@ -60,6 +61,8 @@ interface PickingNavigatorProps {
   getPicklistsApi: AsyncState;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   getItemDetailsApi: AsyncState;
+  useFocusEffectHook: (effect: EffectCallback) => void;
+  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
 }
 
 interface PickTabNavigatorProps {
@@ -72,6 +75,8 @@ interface PickTabNavigatorProps {
   getItemDetailsApi: AsyncState;
   getPicklistsApi: AsyncState;
   selectedTab: Tabs;
+  useFocusEffectHook: (effect: EffectCallback) => void;
+  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
 }
 
 export const getItemDetailsApiHook = (
@@ -164,7 +169,9 @@ export const PickTabNavigator = (props: PickTabNavigatorProps): JSX.Element => {
     useEffectHook,
     getItemDetailsApi,
     getPicklistsApi,
-    selectedTab
+    selectedTab,
+    useCallbackHook,
+    useFocusEffectHook
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -202,13 +209,12 @@ export const PickTabNavigator = (props: PickTabNavigatorProps): JSX.Element => {
   }, []);
 
   // Get Picklist Api call
-  useEffect(
-    () => navigation.addListener('focus', () => {
+  useFocusEffectHook(
+    useCallbackHook(() => {
       validateSession(navigation, route.name).then(() => {
         dispatch(getPicklists());
       });
-    }),
-    [navigation]
+    }, [navigation])
   );
 
   // Get Item Details UPC api
@@ -304,7 +310,9 @@ export const PickingNavigatorStack = (
     route,
     getPicklistsApi,
     useEffectHook,
-    getItemDetailsApi
+    getItemDetailsApi,
+    useCallbackHook,
+    useFocusEffectHook
   } = props;
   const [selectedTab, setSelectedTab] = selectedTabState;
 
@@ -350,6 +358,8 @@ export const PickingNavigatorStack = (
             getItemDetailsApi={getItemDetailsApi}
             getPicklistsApi={getPicklistsApi}
             selectedTab={selectedTab}
+            useCallbackHook={useCallbackHook}
+            useFocusEffectHook={useFocusEffectHook}
           />
         )}
       </Stack.Screen>
@@ -403,6 +413,8 @@ const PickingNavigator = (): JSX.Element => {
       getPicklistsApi={getPicklistApi}
       useEffectHook={useEffect}
       getItemDetailsApi={getItemDetailsApi}
+      useCallbackHook={useCallback}
+      useFocusEffectHook={useFocusEffect}
     />
   );
 };

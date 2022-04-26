@@ -392,7 +392,9 @@ export default {
     PICKLIST_NOT_FOUND: 'No se encontró la lista de pickeos para este club',
     PICKLIST_ERROR: 'Hubo un error obteniendo la lista de pickeos',
     UPDATE_PICKLIST_STATUS_SUCCESS: 'Se actualizaron correctamente los estatus de pick',
-    UPDATE_PICKLIST_STATUS_ERROR: 'Hubo un error al actualizar el estatus de pickeo'
+    UPDATE_PICKLIST_STATUS_ERROR: 'Hubo un error al actualizar el estatus de pickeo',
+    SELECT_CONTINUE_ACTION: 'Seleccionar acción para continuar',
+    PALLET_NOT_FOUND: 'Pallet no encontrado'
   },
   BINNING: {
     BINNING: 'Bodega',
