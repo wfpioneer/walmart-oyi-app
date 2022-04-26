@@ -394,7 +394,9 @@ export default {
     UPDATE_REMAINING_QTY: 'Update quantity of each item left on pallet before continuing',
     REMAINING_QTY: 'Quantity left on pallet',
     UPDATE_PICKLIST_STATUS_SUCCESS: 'Successfully updated picklist status',
-    UPDATE_PICKLIST_STATUS_ERROR: 'There was an error while updating the Picklist status'
+    UPDATE_PICKLIST_STATUS_ERROR: 'There was an error while updating the Picklist status',
+    LOCATIONS_UPDATED: 'Locations Updated',
+    LOCATIONS_FAILED_UPDATE: 'Locations Failed to Update'
   },
   BINNING: {
     BINNING: 'Binning',

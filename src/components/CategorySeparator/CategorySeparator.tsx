@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import styles from './CategorySeparator.style';
-import { strings } from '../../locales';
+import { strings } from '../../locales/index';
 
 interface PropsI {
   categoryName: string;

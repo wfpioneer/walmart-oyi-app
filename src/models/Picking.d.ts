@@ -1,4 +1,5 @@
 // eslint-disable-next-line no-shadow
+
 export enum PickStatus {
   READY_TO_PICK = 'ready to pick',
   ACCEPTED_PICK = 'accepted pick',
@@ -40,3 +41,20 @@ export interface PickListItem {
   createTS: string;
   quantityLeft?: number;
 }
+
+export interface PickCreateItem {
+  itemName: string;
+  itemNbr: number;
+  upcNbr: string;
+  status?: string;
+  categoryNbr: number;
+  categoryDesc: string;
+  price: number;
+}
+
+export enum Tabs {
+  QUICKPICK = 'QuickPick',
+  PICK = 'Pick',
+  SALESFLOOR = 'SalesFloor'
+}
+

@@ -9,12 +9,11 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import User from '../../models/User';
-import { PickListItem, PickStatus } from '../../models/Picking.d';
+import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
 import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
 import styles from './QuickPickTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
-import { Tabs } from '../../navigators/PickingNavigator';
 
 interface QuickPickTabScreenProps {
   quickPicks: PickListItem[];

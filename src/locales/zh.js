@@ -392,7 +392,9 @@ export default {
     PICKLIST_NOT_FOUND: '此门店无补货清单',
     PICKLIST_ERROR: '重置补货清单时报错',
     UPDATE_PICKLIST_STATUS_SUCCESS: '成功更新补货承担',
-    UPDATE_PICKLIST_STATUS_ERROR: '更新补货清单时出错'
+    UPDATE_PICKLIST_STATUS_ERROR: '更新补货清单时出错',
+    LOCATIONS_UPDATED: 'Locations Updated',
+    LOCATIONS_FAILED_UPDATE: 'Locations Failed to Update'
   },
   BINNING: {
     BINNING: '上架',
