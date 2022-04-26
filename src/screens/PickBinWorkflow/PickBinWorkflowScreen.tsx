@@ -62,7 +62,8 @@ export const updatePicklistStatusApiHook = (
   if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result
     && updatePicklistStatusApi.result.status === 200) {
     if (selectedPicklistAction === PickAction.ACCEPT_PICK || selectedPicklistAction === PickAction.ACCEPT_BIN) {
-      const updatedStatus = PickAction.ACCEPT_PICK ? PickStatus.ACCEPTED_PICK : PickStatus.ACCEPTED_BIN;
+      const updatedStatus = selectedPicklistAction === PickAction.ACCEPT_PICK
+        ? PickStatus.ACCEPTED_PICK : PickStatus.ACCEPTED_BIN;
       const updatedItems = items.map(item => ({
         ...item,
         status: updatedStatus
