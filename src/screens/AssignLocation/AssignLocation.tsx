@@ -63,7 +63,8 @@ export const getFailedPallets = (data: PostBinPalletsMultistatusResponse): numbe
 export const binPalletsApiEffect = (
   navigation: NavigationProp<any>,
   binPalletsApi: AsyncState,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  route: RouteProp<any, string>
 ) => {
   if (navigation.isFocused()) {
     if (!binPalletsApi.isWaiting) {
@@ -91,7 +92,11 @@ export const binPalletsApiEffect = (
 
           dispatch(clearPallets());
           dispatch({ type: POST_BIN_PALLETS.RESET });
-          navigation.goBack();
+          if (route.params && route.params.source === 'picking') {
+            navigation.navigate('PickingTabs');
+          } else {
+            navigation.goBack();
+          }
         }
       }
 
@@ -148,7 +153,8 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   useEffectHook(() => binPalletsApiEffect(
     navigation,
     binPalletsApi,
-    dispatch
+    dispatch,
+    route
   ), [binPalletsApi]);
 
   const scanTextView = () => (
