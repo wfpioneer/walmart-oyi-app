@@ -60,6 +60,8 @@ describe('Picking Navigator', () => {
         route={routeProp}
         useEffectHook={jest.fn}
         getItemDetailsApi={defaultAsyncState}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -78,6 +80,8 @@ describe('Picking Navigator', () => {
         getPicklistsApi={defaultAsyncState}
         dispatch={jest.fn()}
         selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
