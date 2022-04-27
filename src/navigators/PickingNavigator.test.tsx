@@ -183,7 +183,7 @@ describe('Picking Navigator', () => {
       };
 
       getPicklistApiHook(successApi, mockDispatch, true);
-      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledTimes(3);
       expect(Toast.show).toHaveBeenCalledWith(successToast);
     });
 
@@ -203,7 +203,7 @@ describe('Picking Navigator', () => {
       };
 
       getPicklistApiHook(successApi204, mockDispatch, true);
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toHaveBeenCalledWith(picklistNotFound);
     });
 
@@ -222,7 +222,7 @@ describe('Picking Navigator', () => {
       };
 
       getPicklistApiHook(failureApi, mockDispatch, true);
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toHaveBeenCalledWith(picklistError);
     });
 
