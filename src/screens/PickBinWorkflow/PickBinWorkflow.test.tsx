@@ -5,7 +5,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import Toast from 'react-native-toast-message';
 import { PickAction, PickListItem, PickStatus } from '../../models/Picking.d';
 import { PickingState } from '../../state/reducers/Picking';
-import { PickBinWorkflowScreen, updatePicklistStatusApiHook } from './PickBinWorkflowScreen';
+import { ContinueActionDialog, PickBinWorkflowScreen, updatePicklistStatusApiHook } from './PickBinWorkflowScreen';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { strings } from '../../locales';
@@ -129,6 +129,8 @@ describe('PickBin Workflow render tests', () => {
         navigation={navigationProp}
         selectedPicklistAction={null}
         setSelectedPicklistAction={jest.fn()}
+        showContinueActionDialog={false}
+        setShowContinueActionDialog={jest.fn}
       />
     );
 
@@ -154,6 +156,8 @@ describe('PickBin Workflow render tests', () => {
         navigation={navigationProp}
         selectedPicklistAction={null}
         setSelectedPicklistAction={jest.fn()}
+        showContinueActionDialog={false}
+        setShowContinueActionDialog={jest.fn}
       />
     );
 
@@ -179,6 +183,8 @@ describe('PickBin Workflow render tests', () => {
         navigation={navigationProp}
         selectedPicklistAction={null}
         setSelectedPicklistAction={jest.fn()}
+        showContinueActionDialog={false}
+        setShowContinueActionDialog={jest.fn}
       />
     );
 
@@ -204,6 +210,8 @@ describe('PickBin Workflow render tests', () => {
         navigation={navigationProp}
         selectedPicklistAction={null}
         setSelectedPicklistAction={jest.fn()}
+        showContinueActionDialog={false}
+        setShowContinueActionDialog={jest.fn}
       />
     );
 
@@ -229,6 +237,8 @@ describe('PickBin Workflow render tests', () => {
         navigation={navigationProp}
         selectedPicklistAction={null}
         setSelectedPicklistAction={jest.fn()}
+        showContinueActionDialog={false}
+        setShowContinueActionDialog={jest.fn}
       />
     );
 
@@ -254,6 +264,8 @@ describe('PickBin Workflow render tests', () => {
         navigation={navigationProp}
         selectedPicklistAction={null}
         setSelectedPicklistAction={jest.fn()}
+        showContinueActionDialog={false}
+        setShowContinueActionDialog={jest.fn}
       />
     );
 
@@ -279,6 +291,8 @@ describe('PickBin Workflow render tests', () => {
         navigation={navigationProp}
         selectedPicklistAction={null}
         setSelectedPicklistAction={jest.fn()}
+        showContinueActionDialog={false}
+        setShowContinueActionDialog={jest.fn}
       />
     );
 
@@ -304,6 +318,8 @@ describe('PickBin Workflow render tests', () => {
         navigation={navigationProp}
         selectedPicklistAction={null}
         setSelectedPicklistAction={jest.fn()}
+        showContinueActionDialog={false}
+        setShowContinueActionDialog={jest.fn}
       />
     );
 
@@ -341,6 +357,8 @@ describe('PickBin Workflow render tests', () => {
         navigation={navigationProp}
         selectedPicklistAction={null}
         setSelectedPicklistAction={setSelectedPicklistAction}
+        showContinueActionDialog={false}
+        setShowContinueActionDialog={jest.fn}
       />
     );
     const acceptButton = findByText(strings('PICKING.ACCEPT'));
@@ -382,6 +400,8 @@ describe('PickBin Workflow render tests', () => {
         navigation={navigationProp}
         selectedPicklistAction={null}
         setSelectedPicklistAction={setSelectedPicklistAction}
+        showContinueActionDialog={false}
+        setShowContinueActionDialog={jest.fn}
       />
     );
     const releaseButton = findByText(strings('PICKING.RELEASE'));
@@ -390,6 +410,83 @@ describe('PickBin Workflow render tests', () => {
     expect(queryAllByText(strings('GENERICS.CONTINUE'))).toHaveLength(1);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(setSelectedPicklistAction).toBeCalledTimes(1);
+  });
+
+  describe('ContinueActionDialog render tests', () => {
+    const mockSetSelectedPicklistAction = jest.fn();
+    const mockSetShowContinueActionDialog = jest.fn();
+    const mockDispatch = jest.fn();
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    const mockSelectedItems = [
+      {
+        ...basePickItem,
+        status: PickStatus.ACCEPTED_BIN,
+        id: 2,
+        palletId: 41
+      }
+    ];
+    it('renders dialog with different coninue actions for the selected picks', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ContinueActionDialog
+          showContinueActionDialog={true}
+          setShowContinueActionDialog={jest.fn}
+          dispatch={jest.fn}
+          items={mockSelectedItems}
+          setSelectedPicklistAction={jest.fn}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('tests readyToWork action functionality', async () => {
+      const { findByText } = render(
+        <ContinueActionDialog
+          showContinueActionDialog={true}
+          setShowContinueActionDialog={mockSetShowContinueActionDialog}
+          dispatch={mockDispatch}
+          items={mockSelectedItems}
+          setSelectedPicklistAction={mockSetSelectedPicklistAction}
+        />
+      );
+      const readyToWorkActionButton = findByText(strings('PICKING.READY_TO_WORK'));
+      fireEvent.press(await readyToWorkActionButton);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetSelectedPicklistAction).toHaveBeenCalledWith(PickAction.READY_TO_WORK);
+      expect(mockSetShowContinueActionDialog).toHaveBeenCalledWith(false);
+    });
+    it('tests complete action functionality', async () => {
+      const { findByText } = render(
+        <ContinueActionDialog
+          showContinueActionDialog={true}
+          setShowContinueActionDialog={mockSetShowContinueActionDialog}
+          dispatch={mockDispatch}
+          items={mockSelectedItems}
+          setSelectedPicklistAction={mockSetSelectedPicklistAction}
+        />
+      );
+      const completeActionButton = findByText(strings('PICKING.COMPLETE'));
+      fireEvent.press(await completeActionButton);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetSelectedPicklistAction).toHaveBeenCalledWith(PickAction.COMPLETE);
+      expect(mockSetShowContinueActionDialog).toHaveBeenCalledWith(false);
+    });
+    it('tests cancel action functionality', async () => {
+      const { findByText } = render(
+        <ContinueActionDialog
+          showContinueActionDialog={true}
+          setShowContinueActionDialog={mockSetShowContinueActionDialog}
+          dispatch={mockDispatch}
+          items={mockSelectedItems}
+          setSelectedPicklistAction={mockSetSelectedPicklistAction}
+        />
+      );
+      const cancelButton = findByText(strings('GENERICS.CANCEL'));
+      fireEvent.press(await cancelButton);
+      expect(mockSetShowContinueActionDialog).toHaveBeenCalledWith(false);
+    });
   });
 
   describe('Manage PickBinWorkflow externalized function tests', () => {
@@ -422,7 +519,7 @@ describe('PickBin Workflow render tests', () => {
       };
       updatePicklistStatusApiHook(successApi, mockSelectedItems, mockDispatch, navigationProp, PickAction.RELEASE);
       expect(navigationProp.goBack).toHaveBeenCalled();
-      expect(mockDispatch).toBeCalledTimes(3);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(hideActivityModal).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistSuccess);
     });

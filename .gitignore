@@ -28,7 +28,11 @@ build/
 .gradle
 local.properties
 *.iml
-/android/java_pid*.hprof
+android/java_pid*.hprof
+android/TEMPLATE-APK*
+cx.json
+.scannerwork/
+BuildSupport/
 # Visual Studio Code
 #
 .vscode/

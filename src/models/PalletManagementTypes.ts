@@ -27,3 +27,7 @@ export interface Pallet {
   palletInfo: PalletInfo;
   items: PalletItem[];
 }
+
+export interface PalletItemDetails extends PalletInfo {
+  items: PalletItem[]
+}

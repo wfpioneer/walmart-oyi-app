@@ -6,6 +6,30 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  errorButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLOR.RED_300,
+    borderRadius: 4,
+    height: 40,
+    width: '100%'
+  },
+  errorText: {
+    marginVertical: 10,
+    textAlign: 'center'
+  },
+  errorView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 15
+  },
   actionButtonsView: {
     flexDirection: 'row',
     marginTop: 'auto',
