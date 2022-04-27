@@ -28,8 +28,6 @@ interface PickingNavigatorProps {
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
   selectedTab: Tabs;
-  useFocusEffectHook: (effect: EffectCallback) => void;
-  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
 }
 
 export const renderScanButton = (

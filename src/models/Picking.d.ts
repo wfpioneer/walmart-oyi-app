@@ -1,5 +1,4 @@
 // eslint-disable-next-line no-shadow
-
 export enum PickStatus {
   READY_TO_PICK = 'ready to pick',
   ACCEPTED_PICK = 'accepted pick',
@@ -57,4 +56,3 @@ export enum Tabs {
   PICK = 'Pick',
   SALESFLOOR = 'SalesFloor'
 }
-

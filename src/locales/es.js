@@ -393,8 +393,8 @@ export default {
     PICKLIST_ERROR: 'Hubo un error obteniendo la lista de pickeos',
     UPDATE_PICKLIST_STATUS_SUCCESS: 'Se actualizaron correctamente los estatus de pick',
     UPDATE_PICKLIST_STATUS_ERROR: 'Hubo un error al actualizar el estatus de pickeo',
-    LOCATIONS_UPDATED: 'Locations Updated',
-    LOCATIONS_FAILED_UPDATE: 'Locations Failed to Update',
+    LOCATIONS_UPDATED: 'Ubicaciones actualizadas',
+    LOCATIONS_FAILED_UPDATE: 'Falló la actualización de ubicaciones',
     SELECT_CONTINUE_ACTION: 'Seleccionar acción para continuar',
     PALLET_NOT_FOUND: 'Pallet no encontrado'
   },

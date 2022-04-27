@@ -1,5 +1,5 @@
 import React, {
-  Dispatch, EffectCallback, useEffect
+  DependencyList, Dispatch, EffectCallback, useCallback, useEffect
 } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Toast from 'react-native-toast-message';
@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import {
   NavigationProp,
   RouteProp,
+  useFocusEffect,
   useNavigation,
   useRoute
 } from '@react-navigation/native';
@@ -18,7 +19,6 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import PickBinTab from '../../screens/PickBinTab/PickBinTab';
 import CreatePick from '../../screens/CreatePick/CreatePick';
 import SalesFloorTab from '../../screens/SalesFloorTab/SalesFloorTabScreen';
-import styles from './PickingTabNavigator.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -45,6 +45,8 @@ interface PickingTabNavigatorProps {
   getItemDetailsApi: AsyncState;
   getPicklistsApi: AsyncState;
   selectedTab: Tabs;
+  useFocusEffectHook: (effect: EffectCallback) => void;
+  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
 }
 
 export const getItemDetailsApiHook = (
@@ -148,7 +150,9 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     useEffectHook,
     getItemDetailsApi,
     getPicklistsApi,
-    selectedTab
+    selectedTab,
+    useCallbackHook,
+    useFocusEffectHook
   } = props;
 
   let scannedSubscription: EmitterSubscription;
@@ -189,13 +193,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
   }, []);
 
   // Get Picklist Api call
-  useEffect(
-    () => navigation.addListener('focus', () => {
+  useFocusEffectHook(
+    useCallbackHook(() => {
       validateSession(navigation, route.name).then(() => {
         dispatch(getPicklists());
       });
-    }),
-    [navigation]
+    }, [navigation])
   );
 
   // Get Item Details UPC api
@@ -267,6 +270,8 @@ export const PickingTabs = (): JSX.Element => {
       getItemDetailsApi={getItemDetailsApi}
       getPicklistsApi={getPicklistApi}
       selectedTab={selectedTab}
+      useCallbackHook={useCallback}
+      useFocusEffectHook={useFocusEffect}
     />
   )
 };

@@ -393,8 +393,8 @@ export default {
     PICKLIST_ERROR: '重置补货清单时报错',
     UPDATE_PICKLIST_STATUS_SUCCESS: '成功更新补货承担',
     UPDATE_PICKLIST_STATUS_ERROR: '更新补货清单时出错',
-    LOCATIONS_UPDATED: 'Locations Updated',
-    LOCATIONS_FAILED_UPDATE: 'Locations Failed to Update',
+    LOCATIONS_UPDATED: '位置已更新',
+    LOCATIONS_FAILED_UPDATE: '位置更新失败',
     SELECT_CONTINUE_ACTION: '选择任务继续',
     PALLET_NOT_FOUND: '未找到卡板'
   },
