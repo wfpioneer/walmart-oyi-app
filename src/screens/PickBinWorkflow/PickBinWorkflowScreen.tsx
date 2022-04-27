@@ -22,6 +22,7 @@ import {
 } from '../../state/actions/asyncAPI';
 import { updatePicklistStatus } from '../../state/actions/saga';
 import { updatePicks } from '../../state/actions/Picking';
+import { addPallet } from '../../state/actions/Binning';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { CustomModalComponent } from '../Modal/Modal';
 
@@ -200,7 +201,25 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     updatePicklistItemsStatus(items, action, dispatch);
   };
 
-  const handleBin = () => {};
+  const handleBin = (items: PickListItem[]) => {
+    const { palletId } = items[0];
+
+    const palletDetails = {
+      id: palletId,
+      items: items.map(item => ({
+        itemNbr: item.itemNbr,
+        itemDesc: item.itemDesc,
+        upcNbr: item.upcNbr
+      }))
+    };
+    dispatch(addPallet(palletDetails));
+    navigation.navigate('Binning', {
+      screen: 'Binning',
+      params: {
+        source: 'picking'
+      }
+    });
+  };
 
   const actionButtonsView = () => {
     const { status } = selectedPicks[0];
@@ -239,7 +258,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     const binButton = isMine && status === PickStatus.ACCEPTED_BIN ? (
       <Button
         title={strings('PICKING.BIN')}
-        onPress={handleBin}
+        onPress={() => handleBin(selectedPicks)}
         style={styles.actionButton}
         key="continue"
       />
