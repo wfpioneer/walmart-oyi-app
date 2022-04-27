@@ -1,9 +1,33 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import Toast from 'react-native-toast-message';
 import { UseStateType } from '../../models/Generics.d';
-import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
-import { CreatePickScreen, MOVE_TO_FRONT } from './CreatePick';
+import { addLocationHandler, CreatePickScreen, getLocationsApiHook, MOVE_TO_FRONT } from './CreatePick';
+import { NavigationProp } from '@react-navigation/native';
+import { AsyncState } from '../../models/AsyncState';
+import { PickCreateItem } from '../../models/Picking.d';
+
+const defaultAsyncState: AsyncState = {
+  isWaiting: false,
+  value: null,
+  error: null,
+  result: null
+};
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dangerouslyGetParent: jest.fn(),
+  dangerouslyGetState: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn()
+};
 
 const mockLocations: Location[] = [
   {
@@ -30,53 +54,38 @@ const mockLocations: Location[] = [
   }
 ];
 
-// May need to use api call results as not all item details are stored in item details redux
-const mockItem: ItemDetails = {
-  categoryNbr: 73,
+const mockReserveLocations: Location[] = [
+  {
+    aisleId: 3,
+    aisleName: '2',
+    locationName: 'ABAR2-2',
+    sectionId: 3,
+    sectionName: '1',
+    type: 'floor',
+    typeNbr: 2,
+    zoneId: 1,
+    zoneName: 'ABAR'
+  },
+  {
+    aisleId: 3,
+    aisleName: '2',
+    locationName: 'ABAR2-2',
+    sectionId: 4,
+    sectionName: '2',
+    type: 'floor',
+    typeNbr: 2,
+    zoneId: 1,
+    zoneName: 'ABAR'
+  }
+];
+
+const mockItem: PickCreateItem = {
   itemName: 'treacle tart',
   itemNbr: 2,
   upcNbr: '8675309',
-  backroomQty: 765432,
-  basePrice: 4.92,
+  categoryNbr: 72,
   categoryDesc: 'Deli',
-  claimsOnHandQty: 765457,
-  completed: false,
-  consolidatedOnHandQty: 65346,
-  location: {
-    reserve: [
-      {
-        aisleId: 5018,
-        aisleName: '1',
-        locationName: 'ABAR1-1',
-        sectionId: 5019,
-        sectionName: '1',
-        type: 'reserve',
-        typeNbr: 1,
-        zoneId: 3632,
-        zoneName: 'ABAR'
-      }
-    ],
-    count: 1
-  },
-  onHandsQty: 76543234,
-  pendingOnHandsQty: 2984328947,
-  price: 4.92,
-  replenishment: {
-    onOrder: 100000
-  },
-  sales: {
-    daily: [{
-      day: 'Thursday',
-      value: 3
-    }],
-    dailyAvgSales: 500,
-    lastUpdateTs: 'right now',
-    weekly: [{
-      week: 34,
-      value: 654
-    }],
-    weeklyAvgSales: 3500
-  }
+  price: 4.92
 };
 
 describe('Create Pick screen render tests', () => {
@@ -98,22 +107,20 @@ describe('Create Pick screen render tests', () => {
   it('renders the screen with item with floor locations', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    const itemWithFloor: ItemDetails = {
-      ...mockItem,
-      location: {
-        ...mockItem.location,
-        floor: mockLocations
-      }
-    };
-
     const defaultSelectedSectionState: UseStateType<string> = [...selectedSectionState];
     defaultSelectedSectionState[0] = mockLocations[0].locationName;
 
     renderer.render(
       <CreatePickScreen
-        item={itemWithFloor}
+        item={mockItem}
         selectedSectionState={defaultSelectedSectionState}
         palletNumberState={palletNumberState}
+        floorLocations={mockLocations}
+        reserveLocations={mockReserveLocations}
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        getLocationApi={defaultAsyncState}
+        useEffectHook={jest.fn()}
       />
     );
 
@@ -123,13 +130,20 @@ describe('Create Pick screen render tests', () => {
   it('renders the screen without floor locations', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    const itemWithoutFloor: ItemDetails = { ...mockItem };
+    const defaultSelectedSectionState: UseStateType<string> = [...selectedSectionState];
+    defaultSelectedSectionState[0] = mockLocations[0].locationName;
 
     renderer.render(
       <CreatePickScreen
-        item={itemWithoutFloor}
-        selectedSectionState={selectedSectionState}
+        item={mockItem}
+        selectedSectionState={defaultSelectedSectionState}
         palletNumberState={palletNumberState}
+        floorLocations={[]}
+        reserveLocations={mockReserveLocations}
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        getLocationApi={defaultAsyncState}
+        useEffectHook={jest.fn()}
       />
     );
 
@@ -139,20 +153,20 @@ describe('Create Pick screen render tests', () => {
   it('renders the screen with no reserve location', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    const itemWithoutReserve: ItemDetails = {
-      ...mockItem,
-      location: {
-        ...mockItem.location,
-        reserve: undefined,
-        floor: mockLocations
-      }
-    };
+    const defaultSelectedSectionState: UseStateType<string> = [...selectedSectionState];
+    defaultSelectedSectionState[0] = mockLocations[0].locationName;
 
     renderer.render(
       <CreatePickScreen
-        item={itemWithoutReserve}
-        selectedSectionState={selectedSectionState}
+        item={mockItem}
+        selectedSectionState={defaultSelectedSectionState}
         palletNumberState={palletNumberState}
+        floorLocations={mockLocations}
+        reserveLocations={[]}
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        getLocationApi={defaultAsyncState}
+        useEffectHook={jest.fn()}
       />
     );
 
@@ -162,25 +176,75 @@ describe('Create Pick screen render tests', () => {
   it('renders the screen when items are move to front', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    const itemWithFloor: ItemDetails = {
-      ...mockItem,
-      location: {
-        ...mockItem.location,
-        floor: mockLocations
-      }
-    };
-
     const moveToFrontSectionState: UseStateType<string> = [...selectedSectionState];
     moveToFrontSectionState[0] = MOVE_TO_FRONT;
 
     renderer.render(
       <CreatePickScreen
-        item={itemWithFloor}
+        item={mockItem}
         selectedSectionState={moveToFrontSectionState}
         palletNumberState={palletNumberState}
+        floorLocations={mockLocations}
+        reserveLocations={[]}
+        dispatch={jest.fn()}
+        navigation={navigationProp}
+        getLocationApi={defaultAsyncState}
+        useEffectHook={jest.fn()}
       />
     );
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+});
+
+describe('createPick function tests', () => {
+  it('addLocationHandler', () => {
+    const mockDispatch = jest.fn();
+    const mockNavigate = jest.fn();
+    navigationProp.navigate = mockNavigate;
+    addLocationHandler(mockItem, [], [], mockDispatch, navigationProp);
+    expect(mockDispatch).toBeCalledTimes(1);
+    expect(mockNavigate).toBeCalledTimes(1);
+  });
+
+  it('getLocationsApiHook', () => {
+    const mockDispatch = jest.fn();
+
+    // success
+    const successAsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: {
+          location: {
+            floor: mockLocations,
+            reserve: mockReserveLocations
+          }
+        }
+      }
+    };
+    getLocationsApiHook(successAsyncState, mockDispatch, true);
+    expect(mockDispatch).toBeCalledTimes(4);
+    expect(Toast.show).toBeCalledTimes(1);
+
+    // failure
+    mockDispatch.mockReset();
+    // @ts-ignore
+    Toast.show.mockReset();
+    const failureAsyncState = {
+      ...defaultAsyncState,
+      error: 'test'
+    };
+    getLocationsApiHook(failureAsyncState, mockDispatch, true);
+    expect(mockDispatch).toBeCalledTimes(2);
+    expect(Toast.show).toBeCalledTimes(1);
+
+    // waiting
+    mockDispatch.mockReset();
+    const waitingAsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+    getLocationsApiHook(waitingAsyncState, mockDispatch, true);
+    expect(mockDispatch).toBeCalledTimes(1);
   });
 });

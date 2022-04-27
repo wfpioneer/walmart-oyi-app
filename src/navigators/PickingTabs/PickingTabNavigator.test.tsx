@@ -92,7 +92,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
       position: 'bottom'
     };
     getItemDetailsApiHook(successApi204, mockDispatch, navigationProp);
-    expect(mockDispatch).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledTimes(2);
     expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
     expect(hideActivityModal).toBeCalledTimes(1);
   });
@@ -110,7 +110,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
       position: 'bottom'
     };
     getItemDetailsApiHook(failureApi, mockDispatch, navigationProp);
-    expect(mockDispatch).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledTimes(2);
     expect(hideActivityModal).toBeCalledTimes(1);
     expect(Toast.show).toHaveBeenCalledWith(toastGetItemError);
   });

@@ -33,6 +33,7 @@ import {
 import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { GET_ITEM_DETAILS } from '../../state/actions/asyncAPI';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -77,11 +78,13 @@ export const getItemDetailsApiHook = (
           position: 'bottom'
         });
       }
+      dispatch({type: GET_ITEM_DETAILS.RESET});
       dispatch(hideActivityModal());
     }
     // on api error
     if (!getItemDetailsApi.isWaiting && getItemDetailsApi.error) {
       dispatch(hideActivityModal());
+      dispatch({type: GET_ITEM_DETAILS.RESET});
       Toast.show({
         type: 'error',
         text1: strings('ITEM.API_ERROR'),

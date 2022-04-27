@@ -23,6 +23,7 @@ import { setupScreen } from '../../state/actions/ItemDetailScreen';
 import { AsyncState } from "../../models/AsyncState";
 import { setPickCreateFloor, setPickCreateReserve } from '../../state/actions/Picking';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
 
 export const MOVE_TO_FRONT = 'moveToFront';
 export const PALLET_MIN = 1;
@@ -40,7 +41,7 @@ interface CreatePickProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
 
-const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispatch<any>, isFocused: boolean) => {
+export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispatch<any>, isFocused: boolean) => {
   const {isWaiting, result, error} = getLocationApi;
   if (isFocused) {
     // API success
@@ -48,6 +49,7 @@ const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispatch<any>
       dispatch(setPickCreateFloor(result.data.location.floor || []));
       dispatch(setPickCreateReserve(result.data.location.reserve || []));
       dispatch(hideActivityModal());
+      dispatch({type: GET_LOCATION_DETAILS.RESET});
       Toast.show({
         type: 'success',
         text1: strings('PICKING.LOCATIONS_UPDATED'),
@@ -58,6 +60,7 @@ const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispatch<any>
     // API failure
     if (!isWaiting && error) {
       dispatch(hideActivityModal());
+      dispatch({type: GET_LOCATION_DETAILS.RESET});
       Toast.show({
         type: 'error',
         text1: strings('PICKING.LOCATIONS_FAILED_UPDATE'),
@@ -72,7 +75,7 @@ const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispatch<any>
   }
 };
 
-const addLocationHandler = (
+export const addLocationHandler = (
   item: PickCreateItem,
   floorLocations: Location[],
   reserveLocations: Location[],
@@ -94,11 +97,16 @@ const addLocationHandler = (
 
 export const CreatePickScreen = (props: CreatePickProps) => {
   const {
-    item, floorLocations, reserveLocations, selectedSectionState, palletNumberState, dispatch, navigation
+    item, floorLocations, reserveLocations, selectedSectionState,
+    palletNumberState, dispatch, navigation, getLocationApi, useEffectHook
   } = props;
 
   const [selectedSection, setSelectedSection] = selectedSectionState;
   const [palletNumber, setPalletNumber] = palletNumberState;
+
+  useEffectHook(() => getLocationsApiHook(getLocationApi, dispatch, navigation.isFocused()),
+    [getLocationApi]
+  );
 
   const pickerLocations = (locations: Location[]) => {
     const pickerItems = [
