@@ -412,6 +412,47 @@ describe('PickBin Workflow render tests', () => {
     expect(setSelectedPicklistAction).toBeCalledTimes(1);
   });
 
+  it('Tests Binning Navigation while clicking on Bin button', async () => {
+    const mockPickState: PickingState = {
+      pickList: [
+        {
+          ...basePickItem,
+          assignedAssociate: 'vn51wu8',
+          status: PickStatus.ACCEPTED_BIN
+        },
+        {
+          ...basePickItem,
+          assignedAssociate: 't0s0og',
+          status: PickStatus.ACCEPTED_BIN,
+          id: 1,
+          palletId: 40
+        }
+      ],
+      selectedPicks: [0]
+    };
+    const mockDispatch = jest.fn();
+    const setSelectedPicklistAction = jest.fn();
+    const { findByText } = render(
+      <PickBinWorkflowScreen
+        pickingState={mockPickState}
+        userFeatures={['']}
+        userId="vn51wu8"
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn}
+        dispatch={mockDispatch}
+        navigation={navigationProp}
+        selectedPicklistAction={null}
+        setSelectedPicklistAction={setSelectedPicklistAction}
+        showContinueActionDialog={false}
+        setShowContinueActionDialog={jest.fn}
+      />
+    );
+    const binButton = findByText(strings('PICKING.BIN'));
+    fireEvent.press(await binButton);
+    expect(navigationProp.navigate).toHaveBeenCalled();
+    expect(mockDispatch).toBeCalledTimes(1);
+  });
+
   describe('ContinueActionDialog render tests', () => {
     const mockSetSelectedPicklistAction = jest.fn();
     const mockSetShowContinueActionDialog = jest.fn();

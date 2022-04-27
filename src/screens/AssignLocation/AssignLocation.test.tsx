@@ -88,6 +88,8 @@ describe('Assign Location screen render tests', () => {
 });
 
 describe('Assign Location externalized function tests', () => {
+  const routeProp: RouteProp<any, string> = { key: '', name: 'AssignLocation' };
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -113,7 +115,7 @@ describe('Assign Location externalized function tests', () => {
         status: 200
       }
     };
-    binPalletsApiEffect(navigationProp, successApi, mockDispatch);
+    binPalletsApiEffect(navigationProp, successApi, mockDispatch, routeProp);
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
     expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
@@ -121,6 +123,24 @@ describe('Assign Location externalized function tests', () => {
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: CLEAR_PALLETS }));
     expect(mockDispatch).toBeCalledTimes(3);
     expect(mockGoBack).toBeCalledTimes(1);
+  });
+
+  it('tests binPalletsApiEffect on 200 when the source is picking', () => {
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        status: 200
+      }
+    };
+    const newRouteProp: RouteProp<any, string> = { key: '', name: 'AssignLocation', params: { source: 'picking' } };
+    binPalletsApiEffect(navigationProp, successApi, mockDispatch, newRouteProp);
+    expect(mockIsFocused).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
+    expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
+    expect(Toast.show).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: CLEAR_PALLETS }));
+    expect(mockDispatch).toBeCalledTimes(3);
+    expect(mockNavigate).toHaveBeenCalledWith('PickingTabs');
   });
 
   it('tests binPalletsApiEffect on 207', () => {
@@ -132,7 +152,7 @@ describe('Assign Location externalized function tests', () => {
       }
     };
 
-    binPalletsApiEffect(navigationProp, partialSuccessApi, mockDispatch);
+    binPalletsApiEffect(navigationProp, partialSuccessApi, mockDispatch, routeProp);
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
     expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
@@ -151,7 +171,7 @@ describe('Assign Location externalized function tests', () => {
       }
     };
 
-    binPalletsApiEffect(navigationProp, failApi, mockDispatch);
+    binPalletsApiEffect(navigationProp, failApi, mockDispatch, routeProp);
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
     expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
@@ -165,7 +185,7 @@ describe('Assign Location externalized function tests', () => {
       isWaiting: true
     };
 
-    binPalletsApiEffect(navigationProp, waitApi, mockDispatch);
+    binPalletsApiEffect(navigationProp, waitApi, mockDispatch, routeProp);
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: SHOW_ACTIVITY_MODAL }));
     expect(mockDispatch).toBeCalledTimes(1);

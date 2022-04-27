@@ -1,9 +1,9 @@
 export interface BinningItem {
   itemNbr: number;
   itemDesc: string;
-  price: number;
+  price?: number;
   upcNbr: string;
-  quantity: number;
+  quantity?: number;
 }
 export interface BinningPallet {
   id: number;
