@@ -39,6 +39,9 @@ import { validateSession } from '../utils/sessionTimeout';
 import { getItemDetails, getPicklists } from '../state/actions/saga';
 import { initializePicklist } from '../state/actions/Picking';
 import { AsyncState } from '../models/AsyncState';
+import {
+  GET_PICKLISTS
+} from '../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../state/actions/Modal';
 
 const Stack = createStackNavigator();
@@ -78,6 +81,10 @@ interface PickTabNavigatorProps {
   useFocusEffectHook: (effect: EffectCallback) => void;
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
 }
+
+const resetApis = (dispatch: Dispatch<any>) => {
+  dispatch({ type: GET_PICKLISTS.RESET });
+};
 
 export const getItemDetailsApiHook = (
   getItemDetailsApi: AsyncState,
@@ -139,6 +146,7 @@ export const getPicklistApiHook = (
           position: 'bottom'
         });
       }
+      resetApis(dispatch);
       dispatch(hideActivityModal());
     }
     // Get Picklist api error
@@ -150,6 +158,7 @@ export const getPicklistApiHook = (
         visibilityTime: 4000,
         position: 'bottom'
       });
+      resetApis(dispatch);
       dispatch(hideActivityModal());
     }
   }
