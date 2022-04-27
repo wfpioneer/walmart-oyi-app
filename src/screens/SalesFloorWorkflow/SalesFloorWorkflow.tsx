@@ -42,29 +42,30 @@ const resetApis = (dispatch: Dispatch<any>) => {
   dispatch({ type: UPDATE_PICKLIST_STATUS.RESET });
 };
 
-export const updatePicklistStatusApiHook = (
+export const updatePicklistStatusApiEffect = (
   updatePicklistStatusApi: AsyncState,
   items: PickListItem[],
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
 ) => {
   // on api success
-  if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result
-    && updatePicklistStatusApi.result.status === 200) {
-    const updatedItems = items.map(item => ({
-      ...item,
-      status: PickStatus.COMPLETE
-    }));
-    dispatch(updatePicks(updatedItems));
-    Toast.show({
-      type: 'success',
-      text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
-      visibilityTime: 4000,
-      position: 'bottom'
-    });
+  if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result) {
+    if (updatePicklistStatusApi.result.status === 200) {
+      const updatedItems = items.map(item => ({
+        ...item,
+        status: PickStatus.COMPLETE
+      }));
+      dispatch(updatePicks(updatedItems));
+      Toast.show({
+        type: 'success',
+        text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      resetApis(dispatch);
+      navigation.goBack();
+    }
     dispatch(hideActivityModal());
-    resetApis(dispatch);
-    navigation.goBack();
   }
   // on api error
   if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.error) {
@@ -82,7 +83,7 @@ export const updatePicklistStatusApiHook = (
   if (updatePicklistStatusApi.isWaiting) {
     dispatch(showActivityModal());
   }
-}
+};
 
 export const palletDetailsApiEffect = (
   navigation: NavigationProp<any>,
@@ -138,7 +139,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
   const assigned = selectedPicks[0].assignedAssociate;
 
-  useEffectHook(() => updatePicklistStatusApiHook(
+  useEffectHook(() => updatePicklistStatusApiEffect(
     updatePicklistStatusApi,
     selectedPicks,
     dispatch,
@@ -158,6 +159,10 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     setPerishableItems,
     perishableCats
   ), [palletDetailsApi]);
+
+  const isReadyToComplete = ():boolean => (
+    !selectedPicks.every(pick => pick.status === PickStatus.COMPLETE && pick.quantityLeft === 0)
+  );
 
   const handleComplete = () => {
     const selectedPickItems = selectedPicks.map(pick => ({
@@ -269,12 +274,14 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
           onPress={handleComplete}
           style={styles.actionButton}
           testId="complete"
+          disabled={isReadyToComplete()}
         />
         <Button
           title={strings('PICKING.READY_TO_BIN')}
           onPress={handleBin}
           style={styles.actionButton}
           testId="bin"
+          disabled={!isReadyToComplete()}
         />
       </View>
     </SafeAreaView>

@@ -4,12 +4,11 @@ import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { strings } from '../../locales';
 import { AsyncState } from '../../models/AsyncState';
-import { Pallet } from '../../models/PalletManagementTypes';
 import { UseStateType } from '../../models/Generics.d';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { PickingState } from '../../state/reducers/Picking';
-import { SalesFloorWorkflowScreen, palletDetailsApiEffect, updatePicklistStatusApiHook } from './SalesFloorWorkflow';
+import { SalesFloorWorkflowScreen, palletDetailsApiEffect, updatePicklistStatusApiEffect } from './SalesFloorWorkflow';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -265,7 +264,7 @@ describe('Sales floor workflow tests', () => {
       expect(mockDispatch).toBeCalledTimes(2);
     });
 
-    it('Tests updatePicklistStatusApiHook on 200 success for picklist status update', () => {
+    it('Tests updatePicklistStatusApiEffect on 200 success for picklist status update', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
@@ -278,14 +277,14 @@ describe('Sales floor workflow tests', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      updatePicklistStatusApiHook(successApi, mockSelectedItems, mockDispatch, navigationProp);
+      updatePicklistStatusApiEffect(successApi, mockSelectedItems, mockDispatch, navigationProp);
       expect(navigationProp.goBack).toHaveBeenCalled();
       expect(mockDispatch).toBeCalledTimes(3);
       expect(hideActivityModal).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistSuccess);
     });
 
-    it('Tests updatePicklistStatusApiHook on failure', () => {
+    it('Tests updatePicklistStatusApiEffect on failure', () => {
       const failureApi: AsyncState = {
         ...defaultAsyncState,
         error: 'Internal Server Error'
@@ -297,18 +296,18 @@ describe('Sales floor workflow tests', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      updatePicklistStatusApiHook(failureApi, mockSelectedItems, mockDispatch, navigationProp);
+      updatePicklistStatusApiEffect(failureApi, mockSelectedItems, mockDispatch, navigationProp);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(hideActivityModal).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistError);
     });
 
-    it('Tests updatePicklistStatusApiHook isWaiting', () => {
+    it('Tests updatePicklistStatusApiEffect isWaiting', () => {
       const isLoadingApi: AsyncState = {
         ...defaultAsyncState,
         isWaiting: true
       };
-      updatePicklistStatusApiHook(isLoadingApi, mockSelectedItems, mockDispatch, navigationProp);
+      updatePicklistStatusApiEffect(isLoadingApi, mockSelectedItems, mockDispatch, navigationProp);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(showActivityModal).toBeCalledTimes(1);
     });
