@@ -141,7 +141,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
     };
 
     getPicklistApiHook(successApi, mockDispatch, true);
-    expect(mockDispatch).toBeCalledTimes(2);
+    expect(mockDispatch).toBeCalledTimes(3);
     expect(Toast.show).toHaveBeenCalledWith(successToast);
   });
 
@@ -161,7 +161,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
     };
 
     getPicklistApiHook(successApi204, mockDispatch, true);
-    expect(mockDispatch).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledTimes(2);
     expect(Toast.show).toHaveBeenCalledWith(picklistNotFound);
   });
 
@@ -180,7 +180,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
     };
 
     getPicklistApiHook(failureApi, mockDispatch, true);
-    expect(mockDispatch).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledTimes(2);
     expect(Toast.show).toHaveBeenCalledWith(picklistError);
   });
 

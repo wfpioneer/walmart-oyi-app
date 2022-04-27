@@ -33,7 +33,7 @@ import {
 import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
-import { GET_ITEM_DETAILS } from '../../state/actions/asyncAPI';
+import { GET_ITEM_DETAILS, GET_PICKLISTS } from '../../state/actions/asyncAPI';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -124,6 +124,7 @@ export const getPicklistApiHook = (
           position: 'bottom'
         });
       }
+      dispatch({type: GET_PICKLISTS.RESET});
       dispatch(hideActivityModal());
     }
     // Get Picklist api error
@@ -135,6 +136,7 @@ export const getPicklistApiHook = (
         visibilityTime: 4000,
         position: 'bottom'
       });
+      dispatch({type: GET_PICKLISTS.RESET});
       dispatch(hideActivityModal());
     }
   }
