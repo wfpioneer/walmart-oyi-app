@@ -7,9 +7,7 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
-import {
-  getFocusedRouteNameFromRoute,
-} from '@react-navigation/native';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import PickingTabs from './PickingTabs/PickingTabNavigator';
@@ -66,7 +64,7 @@ export const PickingNavigatorStack = (
   const {
     dispatch,
     isManualScanEnabled,
-    selectedTab,
+    selectedTab
   } = props;
 
   let createPickTitle = '';

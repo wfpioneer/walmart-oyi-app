@@ -11,7 +11,7 @@ import {
   SET_SELECTED_TAB,
   UPDATE_PICKS
 } from '../actions/Picking';
-import Location from "../../models/Location";
+import Location from '../../models/Location';
 
 export interface PickingState {
   pickList: PickListItem[];

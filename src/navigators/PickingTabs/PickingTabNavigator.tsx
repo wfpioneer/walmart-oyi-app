@@ -17,7 +17,6 @@ import { strings } from '../../locales';
 import QuickPickTab from '../../screens/QuickPickTab/QuickPickTab';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import PickBinTab from '../../screens/PickBinTab/PickBinTab';
-import CreatePick from '../../screens/CreatePick/CreatePick';
 import SalesFloorTab from '../../screens/SalesFloorTab/SalesFloorTabScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
@@ -25,8 +24,8 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { getItemDetails, getPicklists } from '../../state/actions/saga';
 import {
   initializePicklist,
-  setPickCreateItem,
   setPickCreateFloor,
+  setPickCreateItem,
   setPickCreateReserve,
   setSelectedTab
 } from '../../state/actions/Picking';
@@ -78,13 +77,13 @@ export const getItemDetailsApiHook = (
           position: 'bottom'
         });
       }
-      dispatch({type: GET_ITEM_DETAILS.RESET});
+      dispatch({ type: GET_ITEM_DETAILS.RESET });
       dispatch(hideActivityModal());
     }
     // on api error
     if (!getItemDetailsApi.isWaiting && getItemDetailsApi.error) {
       dispatch(hideActivityModal());
-      dispatch({type: GET_ITEM_DETAILS.RESET});
+      dispatch({ type: GET_ITEM_DETAILS.RESET });
       Toast.show({
         type: 'error',
         text1: strings('ITEM.API_ERROR'),
@@ -124,7 +123,7 @@ export const getPicklistApiHook = (
           position: 'bottom'
         });
       }
-      dispatch({type: GET_PICKLISTS.RESET});
+      dispatch({ type: GET_PICKLISTS.RESET });
       dispatch(hideActivityModal());
     }
     // Get Picklist api error
@@ -136,7 +135,7 @@ export const getPicklistApiHook = (
         visibilityTime: 4000,
         position: 'bottom'
       });
-      dispatch({type: GET_PICKLISTS.RESET});
+      dispatch({ type: GET_PICKLISTS.RESET });
       dispatch(hideActivityModal());
     }
   }
@@ -278,7 +277,7 @@ export const PickingTabs = (): JSX.Element => {
       useCallbackHook={useCallback}
       useFocusEffectHook={useFocusEffect}
     />
-  )
+  );
 };
 
 export default PickingTabs;

@@ -17,10 +17,10 @@ import Location from '../../models/Location';
 import { strings } from '../../locales';
 import styles from './CreatePick.style';
 import { UseStateType } from '../../models/Generics.d';
-import { PickCreateItem } from '../../models/Picking';
-import {useTypedSelector} from "../../state/reducers/RootReducer";
+import { PickCreateItem } from '../../models/Picking.d';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { setupScreen } from '../../state/actions/ItemDetailScreen';
-import { AsyncState } from "../../models/AsyncState";
+import { AsyncState } from '../../models/AsyncState';
 import { setPickCreateFloor, setPickCreateReserve } from '../../state/actions/Picking';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
@@ -42,14 +42,14 @@ interface CreatePickProps {
 }
 
 export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispatch<any>, isFocused: boolean) => {
-  const {isWaiting, result, error} = getLocationApi;
+  const { isWaiting, result, error } = getLocationApi;
   if (isFocused) {
     // API success
     if (!isWaiting && result) {
       dispatch(setPickCreateFloor(result.data.location.floor || []));
       dispatch(setPickCreateReserve(result.data.location.reserve || []));
       dispatch(hideActivityModal());
-      dispatch({type: GET_LOCATION_DETAILS.RESET});
+      dispatch({ type: GET_LOCATION_DETAILS.RESET });
       Toast.show({
         type: 'success',
         text1: strings('PICKING.LOCATIONS_UPDATED'),
@@ -60,7 +60,7 @@ export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispat
     // API failure
     if (!isWaiting && error) {
       dispatch(hideActivityModal());
-      dispatch({type: GET_LOCATION_DETAILS.RESET});
+      dispatch({ type: GET_LOCATION_DETAILS.RESET });
       Toast.show({
         type: 'error',
         text1: strings('PICKING.LOCATIONS_FAILED_UPDATE'),
@@ -69,7 +69,7 @@ export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispat
       });
     }
     // API waiting
-    if(isWaiting) {
+    if (isWaiting) {
       dispatch(showActivityModal());
     }
   }
@@ -92,7 +92,7 @@ export const addLocationHandler = (
     false,
     false
   ));
-  navigation.navigate("AddLocation");
+  navigation.navigate('AddLocation');
 };
 
 export const CreatePickScreen = (props: CreatePickProps) => {
@@ -104,9 +104,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
   const [selectedSection, setSelectedSection] = selectedSectionState;
   const [palletNumber, setPalletNumber] = palletNumberState;
 
-  useEffectHook(() => getLocationsApiHook(getLocationApi, dispatch, navigation.isFocused()),
-    [getLocationApi]
-  );
+  useEffectHook(() => getLocationsApiHook(getLocationApi, dispatch, navigation.isFocused()), [getLocationApi]);
 
   const pickerLocations = (locations: Location[]) => {
     const pickerItems = [

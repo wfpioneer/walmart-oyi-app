@@ -1,10 +1,15 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { NavigationProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import { UseStateType } from '../../models/Generics.d';
 import Location from '../../models/Location';
-import { addLocationHandler, CreatePickScreen, getLocationsApiHook, MOVE_TO_FRONT } from './CreatePick';
-import { NavigationProp } from '@react-navigation/native';
+import {
+  CreatePickScreen,
+  addLocationHandler,
+  getLocationsApiHook,
+  MOVE_TO_FRONT
+} from './CreatePick';
 import { AsyncState } from '../../models/AsyncState';
 import { PickCreateItem } from '../../models/Picking.d';
 
@@ -228,7 +233,7 @@ describe('createPick function tests', () => {
 
     // failure
     mockDispatch.mockReset();
-    // @ts-ignore
+    // @ts-ignore need ts ignore here as ts tries to say mockReset is not a method from mocking function
     Toast.show.mockReset();
     const failureAsyncState = {
       ...defaultAsyncState,

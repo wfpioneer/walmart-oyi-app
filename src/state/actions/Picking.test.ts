@@ -1,4 +1,9 @@
-import { mockItem, mockLocations, mockPickLists, mockReserveLocations } from '../../mockData/mockPickList';
+import {
+  mockItem,
+  mockLocations,
+  mockPickLists,
+  mockReserveLocations
+} from '../../mockData/mockPickList';
 import {
   DELETE_PICKS,
   INITIALIZE_PICKLIST,

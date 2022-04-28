@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { getItemDetailsApiHook, getPicklistApiHook, PickingTabNavigator } from './PickingTabNavigator';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
-import { strings } from '../../locales';
 import Toast from 'react-native-toast-message';
+import { PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook } from './PickingTabNavigator';
+import { strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { AsyncState } from '../../models/AsyncState';
 import { mockPickLists } from '../../mockData/mockPickList';
