@@ -193,8 +193,7 @@ export const PickTabNavigator = (props: PickTabNavigatorProps): JSX.Element => {
         || item.status === PickStatus.READY_TO_PICK)
   );
   const salesFloorList = picklist.filter(
-    item => !item.quickPick && (item.status === PickStatus.READY_TO_WORK 
-      || item.status === PickStatus.COMPLETE)
+    item => !item.quickPick && item.status === PickStatus.READY_TO_WORK
   );
 
   // Scanner listener

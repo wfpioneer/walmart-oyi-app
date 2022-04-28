@@ -161,7 +161,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   ), [palletDetailsApi]);
 
   const isReadyToComplete = ():boolean => (
-    !selectedPicks.every(pick => pick.status === PickStatus.COMPLETE && pick.quantityLeft === 0)
+    !selectedPicks.every(pick => pick.quantityLeft === 0)
   );
 
   const handleComplete = () => {
