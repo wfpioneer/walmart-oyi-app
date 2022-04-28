@@ -36,6 +36,7 @@ interface SFWorklfowProps {
   perishableItemsState: UseStateType<Array<number>>;
   perishableCategories: number[];
   backupCategories: string;
+  completePalletState: UseStateType<boolean>;
 }
 
 const resetApis = (dispatch: Dispatch<any>) => {
@@ -92,15 +93,21 @@ export const palletDetailsApiEffect = (
   dispatch: Dispatch<any>,
   setExpiration: UseStateType<string>[1],
   setPerishableItems: UseStateType<Array<number>>[1],
-  perishableCategories: number[]
+  setIsReadyToComplete: UseStateType<boolean>[1],
+  perishableCategories: number[],
 ) => {
   if (navigation.isFocused() && !palletDetailsApi.isWaiting) {
     // success
     if (palletDetailsApi.result) {
       const { pallets }: { pallets: PalletItemDetails[] } = palletDetailsApi.result.data;
       const pallet = pallets[0];
-
+      // validate that there are no other items besides the selectedPicks on the pallet
       const quantifiedPicks: PickListItem[] = [];
+
+      // Check if all pallet items are in selectedPicks
+      if (pallet.items.length === selectedPicks.length) {
+        setIsReadyToComplete(true);
+      }
 
       selectedPicks.forEach(pick => {
         const itemWithQty = pallet.items.find(palletItem => pick.itemNbr === palletItem.itemNbr);
@@ -126,7 +133,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const {
     pickingState, dispatch, useEffectHook, navigation,
     updatePicklistStatusApi, palletDetailsApi, expirationState,
-    perishableItemsState, perishableCategories, backupCategories
+    perishableItemsState, perishableCategories, backupCategories, completePalletState
   } = props;
 
   const perishableCats = perishableCategories.length
@@ -135,6 +142,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
 
   const [expirationDate, setExpiration] = expirationState;
   const [perishableItems, setPerishableItems] = perishableItemsState;
+  const [isReadyToComplete, setIsReadyToComplete] = completePalletState;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
   const assigned = selectedPicks[0].assignedAssociate;
@@ -157,11 +165,12 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     dispatch,
     setExpiration,
     setPerishableItems,
+    setIsReadyToComplete,
     perishableCats
   ), [palletDetailsApi]);
 
-  const isReadyToComplete = ():boolean => (
-    !selectedPicks.every(pick => pick.quantityLeft === 0)
+  const isPickQtyZero = ():boolean => (
+    selectedPicks.every(pick => pick.quantityLeft === 0)
   );
 
   const handleComplete = () => {
@@ -274,14 +283,14 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
           onPress={handleComplete}
           style={styles.actionButton}
           testId="complete"
-          disabled={isReadyToComplete()}
+          disabled={!isPickQtyZero() || !isReadyToComplete}
         />
         <Button
           title={strings('PICKING.READY_TO_BIN')}
           onPress={handleBin}
           style={styles.actionButton}
           testId="bin"
-          disabled={!isReadyToComplete()}
+          disabled={isPickQtyZero() && isReadyToComplete}
         />
       </View>
     </SafeAreaView>
@@ -299,7 +308,7 @@ const SalesFloorWorkflow = () => {
   const navigation = useNavigation();
   const expirationState = useState('');
   const perishableItemsState = useState<Array<number>>([]);
-
+  const completePalletState = useState(false);
   return (
     <SalesFloorWorkflowScreen
       pickingState={pickingState}
@@ -312,6 +321,7 @@ const SalesFloorWorkflow = () => {
       perishableItemsState={perishableItemsState}
       perishableCategories={perishableCategories}
       backupCategories={backupCategories}
+      completePalletState={completePalletState}
     />
   );
 };

@@ -74,6 +74,9 @@ const mockExpirationState: UseStateType<string> = ['', mockSetExpiration];
 const mockSetPerishables = jest.fn();
 const mockPerishablesState: UseStateType<Array<number>> = [[], mockSetPerishables];
 
+const mockSetIsReadytoComplete = jest.fn();
+const mockCompletePalletState: UseStateType<boolean> = [false, mockSetIsReadytoComplete];
+
 describe('Sales floor workflow tests', () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -94,6 +97,7 @@ describe('Sales floor workflow tests', () => {
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
         backupCategories=""
+        completePalletState={mockCompletePalletState}
       />
     );
 
@@ -120,6 +124,7 @@ describe('Sales floor workflow tests', () => {
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
         backupCategories=""
+        completePalletState={mockCompletePalletState}
       />
     );
 
@@ -149,6 +154,7 @@ describe('Sales floor workflow tests', () => {
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
         backupCategories=""
+        completePalletState={mockCompletePalletState}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -181,6 +187,7 @@ describe('Sales floor workflow tests', () => {
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
         backupCategories=""
+        completePalletState={mockCompletePalletState}
       />
     );
   });
@@ -225,14 +232,6 @@ describe('Sales floor workflow tests', () => {
                     upc: '9876543210',
                     quantity: 8,
                     categoryNbr: 34
-                  },
-                  {
-                    itemNbr: 3,
-                    itemDesc: 'Dritte Sache',
-                    price: 4.22,
-                    upc: '1029384756',
-                    quantity: 65443,
-                    categoryNbr: 2
                   }
                 ]
               }
@@ -255,12 +254,14 @@ describe('Sales floor workflow tests', () => {
       const perishableCategories: number[] = [72];
       palletDetailsApiEffect(
         navigationProp, successApi, selectedPicks,
-        mockDispatch, mockSetExpiration, mockSetPerishables, perishableCategories
+        mockDispatch, mockSetExpiration, mockSetPerishables,
+        mockSetIsReadytoComplete, perishableCategories
       );
       expect(mockSetPerishables).toBeCalledTimes(1);
       expect(mockSetPerishables).toBeCalledWith([2]);
       expect(mockSetExpiration).toBeCalledTimes(1);
       expect(mockSetExpiration).toBeCalledWith('tomorrows');
+      expect(mockSetIsReadytoComplete).toBeCalledWith(true);
       expect(mockDispatch).toBeCalledTimes(2);
     });
 
