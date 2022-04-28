@@ -137,8 +137,8 @@ const PrintQueueEdit = (props: {
         <View style={styles.printerAlignment}>
           <MaterialCommunityIcon name="printer-check" size={24} />
           <View style={styles.printerTextMargin}>
-            {selectedPrinter
-              ? <Text>{selectedPrinter?.name}</Text>
+            {selectedPrinter?.name
+              ? <Text>{selectedPrinter.name}</Text>
               : (
                 <>
                   <Text>{strings('PRINT.FRONT_DESK')}</Text>
