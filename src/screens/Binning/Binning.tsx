@@ -160,6 +160,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
           const palletItems = newPallet.items.map(item => ({
             ...item,
             quantity: item.quantity || 0,
+            price: item.price || 0,
             newQuantity: item.quantity || 0,
             deleted: false,
             added: false
@@ -246,7 +247,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
 
   const navigateAssignLocationScreen = () => {
     dispatch(resetScannedEvent());
-    navigation.navigate('AssignLocation');
+    navigation.navigate('AssignLocation', route.params);
   };
 
   const backConfirmed = () => {
