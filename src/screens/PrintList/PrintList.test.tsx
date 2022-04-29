@@ -3,7 +3,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import {
-  NoPrintQueueMessage, PrintListsScreen, locationLabelsApiEffect, printItemApiEffect
+  NoPrintQueueMessage, PrintListsScreen, handleChangePrinter, locationLabelsApiEffect, printItemApiEffect
 } from './PrintList';
 import { Printer, PrinterType } from '../../models/Printer';
 import { mockLargePrintQueue, mockPrintQueue } from '../../mockData/mockPrintQueue';
@@ -287,6 +287,24 @@ describe('PrintListScreen', () => {
 
       locationLabelsApiEffect(printApiError, mockDispatch, navigationProp);
       expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(printError));
+    });
+
+    it('Tests handleChangePrinter function on Location Tab', () => {
+      const newRouteProp: RouteProp<any, string> = { key: '', name: 'PrintList' };
+      handleChangePrinter('LOCATION', navigationProp, newRouteProp, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledWith({
+        payload: 'Location',
+        type: 'PRINT/SET_PRINTING_TYPE'
+      });
+    });
+
+    it('Tests handleChangePrinter function on Price Sign Tab', () => {
+      const newRouteProp: RouteProp<any, string> = { key: '', name: 'PrintList' };
+      handleChangePrinter('PRICESIGN', navigationProp, newRouteProp, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledWith({
+        payload: 'Price Sign',
+        type: 'PRINT/SET_PRINTING_TYPE'
+      });
     });
   });
 });

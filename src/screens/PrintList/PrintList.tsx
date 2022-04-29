@@ -14,7 +14,8 @@ import { strings } from '../../locales';
 import styles from './PrintList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  LaserPaper, PrintItemList, PrintLocationList, PrintQueueAPIMultistatus, PrintQueueItem, PrintQueueItemType, Printer
+  LaserPaper, PrintItemList, PrintLocationList, PrintQueueAPIMultistatus, PrintQueueItem, PrintQueueItemType,
+  Printer, PrintingType
 } from '../../models/Printer';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -23,7 +24,7 @@ import { AsyncState } from '../../models/AsyncState';
 import {
   clearLocationPrintQueue, removeMultipleFromPrintQueueByItemNbr, removeMultipleFromPrintQueueByUpc,
   setLocationPrintQueue,
-  setPrintQueue, unsetPrintingLocationLabels
+  setPrintQueue, setPrintingType, unsetPrintingLocationLabels
 } from '../../state/actions/Print';
 import IconButton from '../../components/buttons/IconButton';
 import COLOR from '../../themes/Color';
@@ -205,6 +206,21 @@ const handlePrint = (
     }
   }).catch(() => {});
 };
+
+export const handleChangePrinter = (
+  tabName: PrintTab,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>,
+  dispatch: Dispatch<any>
+) => {
+  const printingType = tabName === 'LOCATION' ? PrintingType.LOCATION : PrintingType.PRICE_SIGN;
+  dispatch(setPrintingType(printingType));
+  validateSession(navigation, route.name).then(() => {
+    trackEvent('print_change_printer_click');
+    navigation.navigate('PrinterList');
+  }).catch(() => {});
+};
+
 export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
   const {
     selectedPrinter, printQueue, navigation, route, dispatch, tabName, useEffectHook,
@@ -236,12 +252,6 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
     dispatch,
     navigation,
   ), [printLocationAPI]);
-  const handleChangePrinter = () => {
-    validateSession(navigation, route.name).then(() => {
-      trackEvent('print_change_printer_click');
-      navigation.navigate('PrinterList');
-    }).catch(() => {});
-  };
 
   return (
     <View style={styles.container}>
@@ -257,6 +267,7 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
           setItemIndexToEdit={setItemIndexToEdit}
           printQueue={printQueue}
           queueName={tabName}
+          selectedPrinter={selectedPrinter}
         />
       </CustomModalComponent>
       {printQueue.length !== 0 && (
@@ -296,7 +307,7 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
               <MaterialCommunityIcons name="printer-check" size={24} />
               <Text style={styles.printerName}>{selectedPrinter?.name}</Text>
             </View>
-            <TouchableOpacity onPress={handleChangePrinter}>
+            <TouchableOpacity onPress={() => handleChangePrinter(tabName, navigation, route, dispatch)}>
               <Text style={styles.changeButton}>{strings('GENERICS.CHANGE')}</Text>
             </TouchableOpacity>
           </View>
