@@ -161,7 +161,7 @@ export default {
     LOCATION_PRINTING: 'Impresión de Ubicaciones',
     PRICE_SIGNS: 'Señalización Precios',
     LOCATIONS: 'Ubicaciones',
-    PRICE_SIGN_SUCCESS: 'Etiqueta de señal de precio impresa correctamente' // TODO Spanish translations (This is google translated in the same format as PALLET_SUCCESS)
+    PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
