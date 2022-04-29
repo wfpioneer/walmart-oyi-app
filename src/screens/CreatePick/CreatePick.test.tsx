@@ -8,7 +8,7 @@ import {
   CreatePickScreen,
   MOVE_TO_FRONT,
   addLocationHandler,
-  getLocationsApiHook,
+  getLocationsApiHook
 } from './CreatePick';
 import { AsyncState } from '../../models/AsyncState';
 import { PickCreateItem } from '../../models/Picking.d';
