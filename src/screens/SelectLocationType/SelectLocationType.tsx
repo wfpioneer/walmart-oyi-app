@@ -203,6 +203,9 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
         isNotActionCompleted(actionCompleted, dispatch, exceptionType);
         dispatch(getLocationDetails({ itemNbr }));
       }
+      else if (!salesFloor && !selectedLocation) {
+        dispatch(getLocationDetails({ itemNbr }));
+      }
       navigation.goBack();
     }
   }, [addAPI]);
