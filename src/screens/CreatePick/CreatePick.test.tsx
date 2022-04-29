@@ -6,9 +6,9 @@ import { UseStateType } from '../../models/Generics.d';
 import Location from '../../models/Location';
 import {
   CreatePickScreen,
+  MOVE_TO_FRONT,
   addLocationHandler,
   getLocationsApiHook,
-  MOVE_TO_FRONT
 } from './CreatePick';
 import { AsyncState } from '../../models/AsyncState';
 import { PickCreateItem } from '../../models/Picking.d';

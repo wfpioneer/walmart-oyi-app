@@ -1,4 +1,9 @@
-import React, {Dispatch, EffectCallback, useEffect, useState} from 'react';
+import React, {
+  Dispatch,
+  EffectCallback,
+  useEffect,
+  useState
+} from 'react';
 import {
   Pressable,
   SafeAreaView,

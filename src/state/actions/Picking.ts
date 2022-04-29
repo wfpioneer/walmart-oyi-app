@@ -1,5 +1,5 @@
 import { PickCreateItem, PickListItem, Tabs } from '../../models/Picking.d';
-import Location from "../../models/Location";
+import Location from '../../models/Location';
 
 export const INITIALIZE_PICKLIST = 'PICKLIST/INITIALIZE';
 export const UPDATE_PICKS = 'PICKLIST/UPDATE_PICKS';
