@@ -13,7 +13,7 @@ import { setLocationPrintQueue, setPrintQueue } from '../../state/actions/Print'
 import { trackEvent } from '../../utils/AppCenterTool';
 import { ModalCloseIcon } from '../../screens/Modal/Modal';
 import { PrintTab } from '../../screens/PrintList/PrintList';
-import { PrintQueueItem } from '../../models/Printer';
+import { PrintQueueItem, Printer } from '../../models/Printer';
 
 const QTY_MIN = 1;
 const QTY_MAX = 100;
@@ -33,9 +33,10 @@ const PrintQueueEdit = (props: {
   printQueue: PrintQueueItem[]
   setItemIndexToEdit: React.Dispatch<React.SetStateAction<number>>;
   queueName?: PrintTab
+  selectedPrinter: Printer | null;
 }): JSX.Element => {
   const {
-    itemIndexToEdit, printQueue, setItemIndexToEdit, queueName
+    itemIndexToEdit, printQueue, setItemIndexToEdit, queueName, selectedPrinter
   } = props;
   const itemToEdit = printQueue[itemIndexToEdit];
   const dispatch = useDispatch();
@@ -136,8 +137,14 @@ const PrintQueueEdit = (props: {
         <View style={styles.printerAlignment}>
           <MaterialCommunityIcon name="printer-check" size={24} />
           <View style={styles.printerTextMargin}>
-            <Text>{strings('PRINT.FRONT_DESK')}</Text>
-            <Text style={styles.genericTextLabel}>{strings('GENERICS.DEFAULT')}</Text>
+            {selectedPrinter?.name
+              ? <Text>{selectedPrinter.name}</Text>
+              : (
+                <>
+                  <Text>{strings('PRINT.FRONT_DESK')}</Text>
+                  <Text style={styles.genericTextLabel}>{strings('GENERICS.DEFAULT')}</Text>
+                </>
+              )}
           </View>
         </View>
       </View>
