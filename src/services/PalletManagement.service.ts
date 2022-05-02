@@ -16,7 +16,7 @@ export interface CombinePalletsRequest {
 }
 
 export interface GetPalletInfoRequest {
-  palletIds: number[],
+  palletIds: string[],
   isAllItems?: boolean,
   isSummary?: boolean
 }

@@ -54,7 +54,7 @@ export const onSubmit = (searchText: string, dispatch: Dispatch<any>): void => {
   if (searchText.match(palletIDRegex)) {
     dispatch(
       getPalletInfo({
-        palletIds: [Number.parseInt(searchText, 10)],
+        palletIds: [searchText],
         isAllItems: true,
         isSummary: false
       })
