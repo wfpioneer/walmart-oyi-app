@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator, Image, Text, TouchableOpacity, View
+  ActivityIndicator, Text, TouchableOpacity, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './ReservePalletRow.style';
 import { strings } from '../../locales';
-import { LocationItem, ReserveDetailsPallet } from '../../models/LocationItems';
+import { ReserveDetailsPallet } from '../../models/LocationItems';
 import { CustomModalComponent } from '../../screens/Modal/Modal';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
@@ -52,9 +53,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
           { locationManagementEdit() && (
             <TouchableOpacity onPress={() => deletePalletConfirmation()}>
               <View>
-                <Image
-                  source={require('../../assets/images/trash_can.png')}
-                />
+                <MaterialCommunityIcons name="trash-can" size={40} color={COLOR.TRACKER_GREY} />
               </View>
             </TouchableOpacity>
           )}

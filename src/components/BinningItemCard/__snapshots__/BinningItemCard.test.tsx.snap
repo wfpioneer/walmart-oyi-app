@@ -70,8 +70,10 @@ exports[`Binning Item card render tests renders the binning item card 1`] = `
         }
       >
         <View>
-          <Image
-            source=""
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
           />
         </View>
       </ForwardRef>
@@ -145,8 +147,10 @@ exports[`Binning Item card render tests renders the binning item card for empty 
         }
       >
         <View>
-          <Image
-            source=""
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
           />
         </View>
       </ForwardRef>
@@ -274,8 +278,10 @@ exports[`Binning Item card render tests renders the binning item card without la
         }
       >
         <View>
-          <Image
-            source=""
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
           />
         </View>
       </ForwardRef>

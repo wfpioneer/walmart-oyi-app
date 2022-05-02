@@ -4,7 +4,6 @@ exports[`Remove aisle render tests renders the bottom sheet remove aisle, non vi
 
 exports[`Remove aisle render tests renders the bottom sheet remove aisle, visible, manager option 1`] = `
 <BottomSheetBaseCard
-  image=""
   onPress={[Function]}
   text="Remove aisle"
 />
