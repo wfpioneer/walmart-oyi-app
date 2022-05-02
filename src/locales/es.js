@@ -161,7 +161,7 @@ export default {
     LOCATION_PRINTING: 'Impresión de Ubicaciones',
     PRICE_SIGNS: 'Señalización Precios',
     LOCATIONS: 'Ubicaciones',
-    PRICE_SIGN_SUCCESS: 'Etiqueta de señal de precio impresa correctamente' // TODO Spanish translations (This is google translated in the same format as PALLET_SUCCESS)
+    PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -393,6 +393,8 @@ export default {
     PICKLIST_ERROR: 'Hubo un error obteniendo la lista de pickeos',
     UPDATE_PICKLIST_STATUS_SUCCESS: 'Se actualizaron correctamente los estatus de pick',
     UPDATE_PICKLIST_STATUS_ERROR: 'Hubo un error al actualizar el estatus de pickeo',
+    LOCATIONS_UPDATED: 'Ubicaciones actualizadas',
+    LOCATIONS_FAILED_UPDATE: 'Falló la actualización de ubicaciones',
     SELECT_CONTINUE_ACTION: 'Seleccionar acción para continuar',
     PALLET_NOT_FOUND: 'Pallet no encontrado'
   },

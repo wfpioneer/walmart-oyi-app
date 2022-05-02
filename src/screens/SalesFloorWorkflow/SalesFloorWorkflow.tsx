@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList, SafeAreaView, Text, TouchableOpacity, View
@@ -14,27 +14,77 @@ import SalesFloorItemCard, { MAX } from '../../components/SalesFloorItemCard/Sal
 import { PickingState } from '../../state/reducers/Picking';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { updatePicks } from '../../state/actions/Picking';
-import { PickListItem } from '../../models/Picking.d';
+import { PickAction, PickListItem, PickStatus } from '../../models/Picking.d';
 import { strings } from '../../locales';
 import styles from './SalesFloorWorkflow.style';
 import { PalletItemDetails } from '../../models/PalletManagementTypes';
-import { UseEffectType, UseStateType } from '../../models/Generics.d';
+import { getPalletDetails, updatePicklistStatus } from '../../state/actions/saga';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { AsyncState } from '../../models/AsyncState';
-import { getPalletDetails } from '../../state/actions/saga';
+import { GET_PALLET_DETAILS, UPDATE_PICKLIST_STATUS } from '../../state/actions/asyncAPI';
+import { UseStateType } from '../../models/Generics.d';
 import COLOR from '../../themes/Color';
-import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 
 interface SFWorklfowProps {
   pickingState: PickingState;
   dispatch: Dispatch<any>;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   navigation: NavigationProp<any>;
-  useEffectHook: UseEffectType;
+  updatePicklistStatusApi: AsyncState;
   palletDetailsApi: AsyncState;
   expirationState: UseStateType<string>;
   perishableItemsState: UseStateType<Array<number>>;
   perishableCategories: number[];
   backupCategories: string;
+  completePalletState: UseStateType<boolean>;
 }
+
+const resetApis = (dispatch: Dispatch<any>) => {
+  dispatch({ type: UPDATE_PICKLIST_STATUS.RESET });
+};
+
+export const updatePicklistStatusApiEffect = (
+  updatePicklistStatusApi: AsyncState,
+  items: PickListItem[],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+) => {
+  // on api success
+  if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result) {
+    if (updatePicklistStatusApi.result.status === 200) {
+      const updatedItems = items.map(item => ({
+        ...item,
+        status: PickStatus.COMPLETE
+      }));
+      dispatch(updatePicks(updatedItems));
+      Toast.show({
+        type: 'success',
+        text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      resetApis(dispatch);
+      navigation.goBack();
+    }
+    dispatch(hideActivityModal());
+  }
+  // on api error
+  if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.error) {
+    dispatch(hideActivityModal());
+    Toast.show({
+      type: 'error',
+      text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
+      text2: strings('GENERICS.TRY_AGAIN'),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+    resetApis(dispatch);
+  }
+  // on api request
+  if (updatePicklistStatusApi.isWaiting) {
+    dispatch(showActivityModal());
+  }
+};
 
 export const palletDetailsApiEffect = (
   navigation: NavigationProp<any>,
@@ -43,15 +93,21 @@ export const palletDetailsApiEffect = (
   dispatch: Dispatch<any>,
   setExpiration: UseStateType<string>[1],
   setPerishableItems: UseStateType<Array<number>>[1],
-  perishableCategories: number[]
+  setIsReadyToComplete: UseStateType<boolean>[1],
+  perishableCategories: number[],
 ) => {
   if (navigation.isFocused() && !palletDetailsApi.isWaiting) {
     // success
     if (palletDetailsApi.result) {
       const { pallets }: { pallets: PalletItemDetails[] } = palletDetailsApi.result.data;
       const pallet = pallets[0];
-
+      // validate that there are no other items besides the selectedPicks on the pallet
       const quantifiedPicks: PickListItem[] = [];
+
+      // Check if all pallet items are in selectedPicks
+      if (pallet.items.length === selectedPicks.length) {
+        setIsReadyToComplete(true);
+      }
 
       selectedPicks.forEach(pick => {
         const itemWithQty = pallet.items.find(palletItem => pick.itemNbr === palletItem.itemNbr);
@@ -75,10 +131,9 @@ export const palletDetailsApiEffect = (
 
 export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const {
-    pickingState, palletDetailsApi,
-    dispatch, navigation, useEffectHook,
-    expirationState, perishableItemsState,
-    perishableCategories, backupCategories
+    pickingState, dispatch, useEffectHook, navigation,
+    updatePicklistStatusApi, palletDetailsApi, expirationState,
+    perishableItemsState, perishableCategories, backupCategories, completePalletState
   } = props;
 
   const perishableCats = perishableCategories.length
@@ -87,9 +142,17 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
 
   const [expirationDate, setExpiration] = expirationState;
   const [perishableItems, setPerishableItems] = perishableItemsState;
+  const [isReadyToComplete, setIsReadyToComplete] = completePalletState;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
   const assigned = selectedPicks[0].assignedAssociate;
+
+  useEffectHook(() => updatePicklistStatusApiEffect(
+    updatePicklistStatusApi,
+    selectedPicks,
+    dispatch,
+    navigation,
+  ), [updatePicklistStatusApi]);
 
   useEffectHook(() => navigation.addListener('focus', () => {
     dispatch(getPalletDetails({ palletIds: [selectedPicks[0].palletId] }));
@@ -102,11 +165,29 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     dispatch,
     setExpiration,
     setPerishableItems,
+    setIsReadyToComplete,
     perishableCats
   ), [palletDetailsApi]);
 
-  const handleComplete = () => {};
+  const isPickQtyZero = ():boolean => (
+    selectedPicks.every(pick => pick.quantityLeft === 0)
+  );
 
+  const handleComplete = () => {
+    const selectedPickItems = selectedPicks.map(pick => ({
+      picklistId: pick.id,
+      locationId: pick.palletLocationId,
+      locationName: pick.palletLocationName
+    }));
+    // dispatch picks to complete
+    dispatch(
+      updatePicklistStatus({
+        headers: { action: PickAction.COMPLETE },
+        picklistItems: selectedPickItems,
+        palletId: selectedPicks[0].palletId
+      })
+    );
+  };
   const handleBin = () => {};
 
   const handleIncrement = (item: PickListItem) => {
@@ -187,7 +268,9 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         pickStatus={selectedPicks[0].status}
       />
       <View style={styles.updateQuantityTextView}>
-        <Text style={styles.updateQuantityText}>{strings('PICKING.UPDATE_REMAINING_QTY')}</Text>
+        <Text style={styles.updateQuantityText}>
+          {strings('PICKING.UPDATE_REMAINING_QTY')}
+        </Text>
       </View>
       <FlatList
         data={selectedPicks}
@@ -200,12 +283,14 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
           onPress={handleComplete}
           style={styles.actionButton}
           testId="complete"
+          disabled={!isPickQtyZero() || !isReadyToComplete}
         />
         <Button
           title={strings('PICKING.READY_TO_BIN')}
           onPress={handleBin}
           style={styles.actionButton}
           testId="bin"
+          disabled={isPickQtyZero() && isReadyToComplete}
         />
       </View>
     </SafeAreaView>
@@ -214,6 +299,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
 
 const SalesFloorWorkflow = () => {
   const pickingState = useTypedSelector(state => state.Picking);
+  const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
+
   const palletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const { perishableCategories } = useTypedSelector(state => state.PalletManagement);
   const { backupCategories } = useTypedSelector(state => state.User.configs);
@@ -221,18 +308,20 @@ const SalesFloorWorkflow = () => {
   const navigation = useNavigation();
   const expirationState = useState('');
   const perishableItemsState = useState<Array<number>>([]);
-
+  const completePalletState = useState(false);
   return (
     <SalesFloorWorkflowScreen
       pickingState={pickingState}
       dispatch={dispatch}
       navigation={navigation}
+      updatePicklistStatusApi={updatePicklistStatusApi}
       useEffectHook={useEffect}
       palletDetailsApi={palletDetailsApi}
       expirationState={expirationState}
       perishableItemsState={perishableItemsState}
       perishableCategories={perishableCategories}
       backupCategories={backupCategories}
+      completePalletState={completePalletState}
     />
   );
 };

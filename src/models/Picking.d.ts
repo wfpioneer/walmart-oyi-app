@@ -40,3 +40,19 @@ export interface PickListItem {
   createTS: string;
   quantityLeft?: number;
 }
+
+export interface PickCreateItem {
+  itemName: string;
+  itemNbr: number;
+  upcNbr: string;
+  status?: string;
+  categoryNbr: number;
+  categoryDesc: string;
+  price: number;
+}
+
+export enum Tabs {
+  QUICKPICK = 'QuickPick',
+  PICK = 'Pick',
+  SALESFLOOR = 'SalesFloor'
+}

@@ -9,7 +9,7 @@ import { WorklistItem } from '../../components/worklistItem/WorklistItem';
 import COLOR from '../../themes/Color';
 import styles from './Worklist.style';
 import { WorklistItemI } from '../../models/WorklistItem';
-import { CategorySeparator } from '../../components/worklistItem/CategorySeparator';
+import { CategorySeparator } from '../../components/CategorySeparator/CategorySeparator';
 import { strings } from '../../locales';
 import { ExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';

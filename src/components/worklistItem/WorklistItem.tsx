@@ -18,7 +18,6 @@ interface WorklistItemProps {
   dispatch: Dispatch<any>;
 }
 
-// TODO change this to default export
 export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
   const {
     navigation, dispatch, exceptionType, itemDescription, itemNumber, upcNbr

@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
+<MaterialTopTabNavigator
+  initialRouteName="Pick"
+>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="QuickPick"
+    options={
+      Object {
+        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation] (0)",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="Pick"
+    options={
+      Object {
+        "title": "[missing \\"en.PICKING.PICK\\" translation] (0)",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="SalesFloor"
+    options={
+      Object {
+        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation] (0)",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+</MaterialTopTabNavigator>
+`;
