@@ -71,7 +71,7 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     flex: 0.1,
-    marginBottom: 20
+    marginBottom: 15
   },
   undoText: {
     fontSize: 16,
@@ -79,10 +79,7 @@ export default StyleSheet.create({
     textDecorationLine: 'underline'
   },
   saveButton: {
-    marginVertical: 10,
-    marginHorizontal: 20,
-    paddingBottom: 20,
-    height: '140%'
+    margin: 15
   },
   activityIndicator: {
     flex: 1,
