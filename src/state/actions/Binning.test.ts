@@ -15,7 +15,7 @@ import { BinningPallet } from '../../models/Binning';
 describe('test action creators for binning', () => {
   it('test action creators for binning', () => {
     const testPallet: BinningPallet = {
-      id: 1,
+      id: '1',
       expirationDate: '03/22/2022',
       items: [{
         itemNbr: 123456789,
@@ -37,7 +37,7 @@ describe('test action creators for binning', () => {
     const clearPalletsResult = clearPallets();
     expect(clearPalletsResult).toStrictEqual({ type: CLEAR_PALLETS });
 
-    const deletePalletResult = deletePallet(1);
+    const deletePalletResult = deletePallet('1');
     expect(deletePalletResult).toStrictEqual({
       type: DELETE_PALLET,
       payload: 1

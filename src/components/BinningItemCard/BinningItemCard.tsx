@@ -11,7 +11,7 @@ import COLOR from '../../themes/Color';
 import styles from './BinningItemCard.style';
 
 interface Props {
-  palletId: number;
+  palletId: string;
   itemDesc: string;
   lastLocation?: string;
   canDelete?: boolean;

@@ -57,12 +57,12 @@ export interface BinningScreenProps {
 }
 
 export const navigateToPalletManagement = (
-  palletId: number,
+  palletId: string,
   dispatch: Dispatch<any>,
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   setPalletClicked(true);
-  dispatch(getPalletInfo({ palletIds: [palletId.toString()], isAllItems: true }));
+  dispatch(getPalletInfo({ palletIds: [palletId], isAllItems: true }));
 };
 
 export const binningItemCard = (
@@ -125,7 +125,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     if (isMounted.current) {
       if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
-          const alreadyScannedPallet = scannedPallets.find(item => item.id === parseInt(scannedEvent.value, 10));
+          const alreadyScannedPallet = scannedPallets.find(item => item.id === scannedEvent.value);
           if (alreadyScannedPallet) {
             Toast.show({
               type: 'info',
