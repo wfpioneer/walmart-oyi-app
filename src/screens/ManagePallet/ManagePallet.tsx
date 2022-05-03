@@ -27,6 +27,7 @@ import COLOR from '../../themes/Color';
 import styles from './ManagePallet.style';
 import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
+import PalletExpiration from '../../components/PalletExpiration/PalletExpiration';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import {
   addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, updatePalletItemQty
@@ -651,35 +652,16 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             <Text style={styles.headerItemText}>{id}</Text>
           </View>
           {(isPerishableItemExist(items, perishableCategories)) && (
-          <View
-            style={
-              isExpiryDateChanged(palletInfo) || isAddedPerishable || isRemoveExpirationDate
-              || isPerishableItemDeleted(items, perishableCategories)
-                ? styles.modifiedEffectiveDateContainer : styles.effectiveDateContainer
-            }
-          >
-            <TouchableOpacity onPress={() => setIsPickerShow(true)}>
-              <Text style={styles.headerText}>
-                {strings('PALLET.EXPIRATION_DATE')}
-              </Text>
-              <Text style={(expirationDate || newExpirationDate || isRemoveExpirationDate)
-                ? styles.effectiveDateHeaderItem : styles.errorLabel}
-              >
-                {isRemoveExpirationDate ? strings('GENERICS.REMOVED')
-                  : newExpirationDate || expirationDate || strings('GENERICS.REQUIRED')}
-              </Text>
-            </TouchableOpacity>
-            {isPickerShow && (
-            <DateTimePicker
-              value={newExpirationDate ? new Date(newExpirationDate) : dateOfExpirationDate(expirationDate)}
-              mode="date"
-              display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-              is24Hour={true}
-              minimumDate={new Date(Date.now())}
-              onChange={onDatePickerChange}
+            <PalletExpiration
+              expirationDate={expirationDate}
+              newExpirationDate={newExpirationDate}
+              dateChanged={isExpiryDateChanged(palletInfo) || isAddedPerishable || isRemoveExpirationDate
+              || isPerishableItemDeleted(items, perishableCategories)}
+              dateRemoved={isRemoveExpirationDate}
+              showPicker={isPickerShow}
+              setShowPicker={setIsPickerShow}
+              onDateChange={onDatePickerChange}
             />
-            )}
-          </View>
           )}
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>{strings('LOCATION.ITEMS')}</Text>
