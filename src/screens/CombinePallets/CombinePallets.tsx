@@ -105,7 +105,7 @@ export const combinePalletsApiEffect = (
         text1: strings('PALLET.COMBINE_PALLET_SUCCESS')
       });
       dispatch({ type: 'API/PATCH_COMBINE_PALLETS/RESET' });
-      dispatch(getPalletInfo({ palletIds: [palletId], isAllItems: true, isSummary: false }));
+      dispatch(getPalletInfo({ palletIds: [palletId.toString()], isAllItems: true, isSummary: false }));
       navigation.goBack();
     }
 

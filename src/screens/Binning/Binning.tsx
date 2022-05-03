@@ -46,7 +46,7 @@ export interface BinningScreenProps {
   isManualScanEnabled: boolean;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   getPalletApi: AsyncState;
-  scannedEvent: { value: any; type: string };
+  scannedEvent: { value: any; type: string | null};
   isMounted: MutableRefObject<boolean>;
   palletClicked: boolean;
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
@@ -62,7 +62,7 @@ export const navigateToPalletManagement = (
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   setPalletClicked(true);
-  dispatch(getPalletInfo({ palletIds: [palletId], isAllItems: true }));
+  dispatch(getPalletInfo({ palletIds: [palletId.toString()], isAllItems: true }));
 };
 
 export const binningItemCard = (
@@ -136,7 +136,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
           } else {
             trackEvent('pallet_scanned', {
               barcode: scannedEvent.value,
-              type: scannedEvent.type
+              type: scannedEvent.type ?? ''
             });
             dispatch(getPalletInfo({ palletIds: [scannedEvent.value] }));
           }
