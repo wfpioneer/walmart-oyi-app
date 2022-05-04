@@ -70,16 +70,25 @@ interface SFWorklfowProps {
 export const activityIndicatorEffect = (
   updatePalletItemsApi: AsyncState,
   deletePalletItemsApi: AsyncState,
+  updatePicklistStatusApi: AsyncState,
   showActivity: boolean,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>
 ) => {
   if (navigation.isFocused()) {
     if (!showActivity) {
-      if (updatePalletItemsApi.isWaiting || deletePalletItemsApi.isWaiting) {
+      if (
+        updatePalletItemsApi.isWaiting
+        || deletePalletItemsApi.isWaiting
+        || updatePicklistStatusApi.isWaiting
+      ) {
         dispatch(showActivityModal());
       }
-    } else if (!updatePalletItemsApi.isWaiting && !deletePalletItemsApi.isWaiting) {
+    } else if (
+      !updatePalletItemsApi.isWaiting
+      && !deletePalletItemsApi.isWaiting
+      && !updatePicklistStatusApi.isWaiting
+    ) {
       dispatch(hideActivityModal());
     }
   }
@@ -209,7 +218,12 @@ export const binApisEffect = (
   dispatch: Dispatch<any>,
   selectedPicks: PickListItem[]
 ) => {
-  if (navigation.isFocused() && !updateQuantitiesApi.isWaiting && !deleteItemsApi.isWaiting) {
+  if (
+    navigation.isFocused()
+    && !updateQuantitiesApi.isWaiting
+    && !deleteItemsApi.isWaiting
+    && (updateQuantitiesApi.value || deleteItemsApi.value)
+  ) {
     if ((updateQuantitiesApi.result || noUpdate) && (deleteItemsApi.result || noDelete)) {
       const selectedPickItems = selectedPicks.map(pick => ({
         picklistId: pick.id,
@@ -344,10 +358,11 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   useEffectHook(() => activityIndicatorEffect(
     updatePalletItemsApi,
     deletePalletItemsApi,
+    updatePicklistStatusApi,
     showActivity,
     navigation,
     dispatch
-  ), [showActivity, updatePalletItemsApi, deletePalletItemsApi]);
+  ), [showActivity, updatePalletItemsApi, deletePalletItemsApi, updatePicklistStatusApi]);
 
   useEffectHook(() => updatePicklistStatusApiEffect(
     updatePicklistStatusApi,
@@ -380,7 +395,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     navigation,
     dispatch,
     selectedPicks
-  ), [updatePalletItemsApi, deletePalletItemsApi]);
+  ), [updatePalletItemsApi, deletePalletItemsApi, isUpdateItems, isDeleteItems]);
 
   const handleBin = (newExpirationDate?: string) => {
     const toUpdateItems: PickListItem[] = [];
