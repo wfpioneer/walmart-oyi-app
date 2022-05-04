@@ -113,7 +113,7 @@ export const setAisleSectionCount = (aisleIndex: number, sectionCount: number) =
   }
 } as const);
 
-export const setPalletIds = (pallets: number[]) => ({
+export const setPalletIds = (pallets: string[]) => ({
   type: SET_PALLET_IDS,
   payload: pallets
 } as const);

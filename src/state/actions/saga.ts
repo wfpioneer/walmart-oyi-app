@@ -138,7 +138,7 @@ export const createSections = (
   payload: { aisleId: number; sectionCount: number }[]
 ) => ({ type: CREATE_SECTIONS, payload } as const);
 export const getPalletDetails = (payload: {
-  palletIds: number[];
+  palletIds: string[];
   isAllItems?: boolean;
 }) => ({ type: GET_PALLET_DETAILS, payload } as const);
 export const deleteZone = (payload: number) => ({ type: DELETE_ZONE, payload } as const);

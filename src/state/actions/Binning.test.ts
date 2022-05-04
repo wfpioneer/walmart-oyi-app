@@ -40,7 +40,7 @@ describe('test action creators for binning', () => {
     const deletePalletResult = deletePallet('1');
     expect(deletePalletResult).toStrictEqual({
       type: DELETE_PALLET,
-      payload: 1
+      payload: '1'
     });
 
     let setBinLocationResult = setBinLocation('A1-1');

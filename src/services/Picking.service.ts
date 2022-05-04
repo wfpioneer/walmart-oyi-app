@@ -16,7 +16,7 @@ export default class PickingService {
       locationId: number;
       locationName: string;
     }[];
-    palletId: number
+    palletId: string;
   }) {
     const urls: Environment = getEnvironment();
     const { palletId, picklistItems, headers } = payload;

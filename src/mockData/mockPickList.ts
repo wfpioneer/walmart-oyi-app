@@ -1,5 +1,5 @@
 import { PickCreateItem, PickListItem, PickStatus } from '../models/Picking.d';
-import Location from "../models/Location";
+import Location from '../models/Location';
 
 export const mockPickLists: PickListItem[] = [
   {
@@ -11,7 +11,7 @@ export const mockPickLists: PickListItem[] = [
     itemDesc: 'Teapot',
     itemNbr: 734,
     moveToFront: true,
-    palletId: 4321,
+    palletId: '4321',
     palletLocationId: 1672,
     palletLocationName: 'C1-2',
     quickPick: false,
@@ -29,7 +29,7 @@ export const mockPickLists: PickListItem[] = [
     itemDesc: 'Swiffer',
     itemNbr: 845,
     moveToFront: true,
-    palletId: 5432,
+    palletId: '5432',
     palletLocationId: 2345,
     palletLocationName: 'BREW1-2',
     quickPick: false,

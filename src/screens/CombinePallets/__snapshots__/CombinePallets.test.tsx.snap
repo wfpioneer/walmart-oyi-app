@@ -62,11 +62,11 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
       Array [
         Object {
           "itemCount": 7,
-          "palletId": 789,
+          "palletId": "789",
         },
         Object {
           "itemCount": 4,
-          "palletId": 902,
+          "palletId": "902",
         },
       ]
     }
