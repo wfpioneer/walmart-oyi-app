@@ -7,7 +7,7 @@ describe('Tests rendering PalletExpiration', () => {
   let testNewExpirationDate: string | undefined;
   const testSetShowPicker = jest.fn();
   const testDateChange = jest.fn();
-  const testDate = new Date("10/17/1973");
+  const testDate = new Date('10/17/1973');
 
   it('Renders the PalletExpiration with expiration date and no changes', () => {
     const { toJSON } = render(
@@ -102,7 +102,7 @@ describe('Tests rendering PalletExpiration', () => {
     testExpirationDate = '5/30/2002';
     testNewExpirationDate = undefined;
 
-    const { toJSON, getByTestId } = render(
+    const { getByTestId } = render(
       <PalletExpiration
         expirationDate={testExpirationDate}
         newExpirationDate={testNewExpirationDate}
