@@ -112,6 +112,12 @@ const mockConfigCompleteState: UseStateType<boolean> = [false, mockSetConfigComp
 const mockSetIsReadytoComplete = jest.fn();
 const mockCompletePalletState: UseStateType<boolean> = [false, mockSetIsReadytoComplete];
 
+const mockSetIsUpdateItems = jest.fn();
+const mockUpdateItemsState: UseStateType<boolean> = [false, mockSetIsUpdateItems];
+
+const mockSetIsDeleteItems = jest.fn();
+const mockDeleteItemsState: UseStateType<boolean> = [false, mockSetIsDeleteItems];
+
 describe('Sales floor workflow tests', () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -139,6 +145,8 @@ describe('Sales floor workflow tests', () => {
         updatePalletItemsApi={defaultAsyncState}
         deletePalletItemsApi={defaultAsyncState}
         completePalletState={mockCompletePalletState}
+        deleteItemsState={mockDeleteItemsState}
+        updateItemsState={mockUpdateItemsState}
       />
     );
 
@@ -172,6 +180,8 @@ describe('Sales floor workflow tests', () => {
         updatePalletItemsApi={defaultAsyncState}
         deletePalletItemsApi={defaultAsyncState}
         completePalletState={mockCompletePalletState}
+        deleteItemsState={mockDeleteItemsState}
+        updateItemsState={mockUpdateItemsState}
       />
     );
 
@@ -208,6 +218,8 @@ describe('Sales floor workflow tests', () => {
         updatePalletItemsApi={defaultAsyncState}
         deletePalletItemsApi={defaultAsyncState}
         completePalletState={mockCompletePalletState}
+        deleteItemsState={mockDeleteItemsState}
+        updateItemsState={mockUpdateItemsState}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -252,6 +264,8 @@ describe('Sales floor workflow tests', () => {
         deletePalletItemsApi={defaultAsyncState}
         completePalletState={mockCompletePalletState}
         updatePicklistStatusApi={defaultAsyncState}
+        deleteItemsState={mockDeleteItemsState}
+        updateItemsState={mockUpdateItemsState}
       />
     );
 
@@ -298,6 +312,8 @@ describe('Sales floor workflow tests', () => {
         deletePalletItemsApi={defaultAsyncState}
         completePalletState={mockCompletePalletState}
         updatePicklistStatusApi={defaultAsyncState}
+        deleteItemsState={mockDeleteItemsState}
+        updateItemsState={mockUpdateItemsState}
       />
     );
 
@@ -344,6 +360,8 @@ describe('Sales floor workflow tests', () => {
         deletePalletItemsApi={defaultAsyncState}
         completePalletState={mockCompletePalletState}
         updatePicklistStatusApi={defaultAsyncState}
+        deleteItemsState={mockDeleteItemsState}
+        updateItemsState={mockUpdateItemsState}
       />
     );
 
@@ -390,6 +408,8 @@ describe('Sales floor workflow tests', () => {
         updatePalletItemsApi={defaultAsyncState}
         deletePalletItemsApi={defaultAsyncState}
         completePalletState={mockCompletePalletState}
+        deleteItemsState={mockDeleteItemsState}
+        updateItemsState={mockUpdateItemsState}
       />
     );
 
@@ -508,21 +528,45 @@ describe('Sales floor workflow tests', () => {
       };
 
       // success
-      binApisEffect(successApi, successApi, navigationProp, mockDispatch, mockSelectedItems);
+      binApisEffect(
+        successApi,
+        successApi,
+        false,
+        false,
+        navigationProp,
+        mockDispatch,
+        mockSelectedItems
+      );
       expect(mockDispatch).toBeCalledTimes(3);
       expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PICKLIST_STATUS }));
       expect(Toast.show).not.toBeCalled();
       jest.clearAllMocks();
 
       // partial failure
-      binApisEffect(successApi, failApi, navigationProp, mockDispatch, mockSelectedItems);
+      binApisEffect(
+        successApi,
+        failApi,
+        false,
+        false,
+        navigationProp,
+        mockDispatch,
+        mockSelectedItems
+      );
       expect(mockDispatch).not.toBeCalled();
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ text1: strings('PALLET.SAVE_PALLET_PARTIAL') }));
       jest.clearAllMocks();
 
       // complete failure
-      binApisEffect(failApi, failApi, navigationProp, mockDispatch, mockSelectedItems);
+      binApisEffect(
+        failApi,
+        failApi,
+        false,
+        false,
+        navigationProp,
+        mockDispatch,
+        mockSelectedItems
+      );
       expect(mockDispatch).not.toBeCalled();
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ text1: strings('PALLET.SAVE_PALLET_FAILURE') }));
@@ -695,34 +739,80 @@ describe('Sales floor workflow tests', () => {
       ];
 
       // only update items
-      binServiceCall(picks, [], mockDispatch, '1', mockSetExpirationShow, perishableItems);
+      binServiceCall(
+        picks,
+        [],
+        mockDispatch,
+        '1',
+        mockSetExpirationShow,
+        perishableItems,
+        mockSetIsUpdateItems,
+        mockSetIsDeleteItems
+      );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PALLET_ITEM_QTY }));
       expect(mockSetExpirationShow).not.toBeCalled();
+      expect(mockSetIsUpdateItems).toBeCalledTimes(1);
+      expect(mockSetIsDeleteItems).toBeCalledTimes(0);
       jest.clearAllMocks();
 
       // only delete items, no new expiry date
-      binServiceCall([], picks, mockDispatch, '1', mockSetExpirationShow, perishableItems);
+      binServiceCall(
+        [],
+        picks,
+        mockDispatch,
+        '1',
+        mockSetExpirationShow,
+        perishableItems,
+        mockSetIsUpdateItems,
+        mockSetIsDeleteItems
+      );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: DELETE_UPCS }));
       expect(mockSetExpirationShow).not.toBeCalled();
+      expect(mockSetIsUpdateItems).toBeCalledTimes(0);
+      expect(mockSetIsDeleteItems).toBeCalledTimes(1);
       jest.clearAllMocks();
 
       // only delete items, new expiry date
-      binServiceCall([], picks, mockDispatch, '1', mockSetExpirationShow, perishableItems, 'yesterday');
+      binServiceCall(
+        [],
+        picks,
+        mockDispatch,
+        '1',
+        mockSetExpirationShow,
+        perishableItems,
+        mockSetIsUpdateItems,
+        mockSetIsDeleteItems,
+        'yesterday'
+      );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: DELETE_UPCS }));
       expect(mockSetExpirationShow).toBeCalledTimes(1);
       expect(mockSetExpirationShow).toBeCalledWith(ExpiryPromptShow.HIDDEN);
+      expect(mockSetIsUpdateItems).toBeCalledTimes(0);
+      expect(mockSetIsDeleteItems).toBeCalledTimes(1);
       jest.clearAllMocks();
 
       // update and delete
-      binServiceCall(picks, picks, mockDispatch, '1', mockSetExpirationShow, perishableItems, 'tomorrow');
+      binServiceCall(
+        picks,
+        picks,
+        mockDispatch,
+        '1',
+        mockSetExpirationShow,
+        perishableItems,
+        mockSetIsUpdateItems,
+        mockSetIsDeleteItems,
+        'tomorrow'
+      );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PALLET_ITEM_QTY }));
       expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: DELETE_UPCS }));
       expect(mockSetExpirationShow).toBeCalledTimes(1);
       expect(mockSetExpirationShow).toBeCalledWith(ExpiryPromptShow.HIDDEN);
+      expect(mockSetIsUpdateItems).toBeCalledTimes(1);
+      expect(mockSetIsDeleteItems).toBeCalledTimes(1);
     });
 
     it('Tests updatePicklistStatusApiEffect on 200 success for picklist status update', () => {

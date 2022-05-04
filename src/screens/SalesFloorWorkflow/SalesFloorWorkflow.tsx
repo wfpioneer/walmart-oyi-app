@@ -63,6 +63,8 @@ interface SFWorklfowProps {
   configCompleteState: UseStateType<boolean>;
   showActivity: boolean;
   completePalletState: UseStateType<boolean>;
+  updateItemsState: UseStateType<boolean>;
+  deleteItemsState: UseStateType<boolean>;
 }
 
 export const activityIndicatorEffect = (
@@ -201,12 +203,14 @@ export const palletConfigApiEffect = (
 export const binApisEffect = (
   updateQuantitiesApi: AsyncState,
   deleteItemsApi: AsyncState,
+  noUpdate: boolean,
+  noDelete: boolean,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
   selectedPicks: PickListItem[]
 ) => {
   if (navigation.isFocused() && !updateQuantitiesApi.isWaiting && !deleteItemsApi.isWaiting) {
-    if (updateQuantitiesApi.result && deleteItemsApi.result) {
+    if ((updateQuantitiesApi.result || noUpdate) && (deleteItemsApi.result || noDelete)) {
       const selectedPickItems = selectedPicks.map(pick => ({
         picklistId: pick.id,
         locationId: pick.palletLocationId,
@@ -268,17 +272,21 @@ export const binServiceCall = (
   palletId: string,
   setShowExpiryPrompt: UseStateType<ExpiryPromptShow>[1],
   perishableItems: number[],
+  setIsUpdateItems: UseStateType<boolean>[1],
+  setIsDeleteItems: UseStateType<boolean>[1],
   newExpirationDate?: string
 ) => {
   if (toUpdateItems.length) {
     const reqUpdateItems = toUpdateItems.reduce((items: Pick<PalletItem, 'quantity' | 'upcNbr'>[], pick) => (
       [...items, { upcNbr: pick.upcNbr, quantity: pick.newQuantityLeft || 1 }]
     ), []);
+    setIsUpdateItems(true);
     dispatch(updatePalletItemQty({ palletId, palletItem: reqUpdateItems }));
   }
 
   if (toDeleteItems.length) {
     const reqUpcs = toDeleteItems.reduce((upcs: string[], pick) => [...upcs, pick.upcNbr], []);
+    setIsDeleteItems(true);
     if (newExpirationDate) {
       dispatch(deleteUpcs({
         palletId,
@@ -303,7 +311,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     navigation, useEffectHook, expirationState, perishableItemsState,
     showExpiryPromptState, perishableCategories, backupCategories,
     configCompleteState, showActivity, updatePalletItemsApi,
-    deletePalletItemsApi, completePalletState, updatePicklistStatusApi
+    deletePalletItemsApi, completePalletState, updatePicklistStatusApi,
+    updateItemsState, deleteItemsState
   } = props;
 
   const [expirationDate, setExpiration] = expirationState;
@@ -311,6 +320,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const [showExpiryPrompt, setShowExpiryPrompt] = showExpiryPromptState;
   const [configComplete, setConfigComplete] = configCompleteState;
   const [isReadyToComplete, setIsReadyToComplete] = completePalletState;
+  const [isUpdateItems, setIsUpdateItems] = updateItemsState;
+  const [isDeleteItems, setIsDeleteItems] = deleteItemsState;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
   const assigned = selectedPicks[0].assignedAssociate;
@@ -364,6 +375,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   useEffectHook(() => binApisEffect(
     updatePalletItemsApi,
     deletePalletItemsApi,
+    !isUpdateItems,
+    !isDeleteItems,
     navigation,
     dispatch,
     selectedPicks
@@ -392,6 +405,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         palletId,
         setShowExpiryPrompt,
         perishableItems,
+        setIsUpdateItems,
+        setIsDeleteItems,
         newExpirationDate
       );
     }
@@ -598,8 +613,10 @@ const SalesFloorWorkflow = () => {
   const perishableItemsState = useState<Array<number>>([]);
   const showExpiryPromptState = useState(ExpiryPromptShow.HIDDEN);
   const configCompleteState = useState(false);
-
   const completePalletState = useState(false);
+  const updateItemsState = useState(false);
+  const deleteItemsState = useState(false);
+
   return (
     <SalesFloorWorkflowScreen
       pickingState={pickingState}
@@ -619,6 +636,8 @@ const SalesFloorWorkflow = () => {
       updatePalletItemsApi={updatePalletItemsApi}
       deletePalletItemsApi={deletePalletItemsApi}
       completePalletState={completePalletState}
+      updateItemsState={updateItemsState}
+      deleteItemsState={deleteItemsState}
     />
   );
 };
