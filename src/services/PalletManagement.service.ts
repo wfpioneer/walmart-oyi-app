@@ -1,34 +1,33 @@
 import { AxiosResponse } from 'axios';
-import moment from 'moment';
 import { PalletItem } from '../models/PalletManagementTypes';
 import { Environment, getEnvironment } from '../utils/environment';
 import Request from './Request';
 
 export interface UpdateItemQuantityRequest {
-  palletId: number;
+  palletId: string;
   palletItem: Pick<PalletItem, 'quantity' | 'upcNbr'>[];
   palletExpiration?: string;
 }
 
 export interface CombinePalletsRequest {
-  targetPallet: number;
-  combinePallets: number[];
+  targetPallet: string;
+  combinePallets: string[];
 }
 
 export interface GetPalletInfoRequest {
-  palletIds: number[],
+  palletIds: string[],
   isAllItems?: boolean,
   isSummary?: boolean
 }
 
 export interface PostBinPalletsRequest {
   location: number | string;
-  pallets: number[];
+  pallets: string[];
 }
 
 export interface PostBinPalletsMultistatusResponse {
   binSummary: {
-    palletId: number;
+    palletId: string;
     status: number;
   }[];
 }

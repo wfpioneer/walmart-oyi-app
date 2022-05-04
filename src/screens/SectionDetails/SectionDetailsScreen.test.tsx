@@ -1,7 +1,11 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
-import { SectionDetailsScreen, handleEditItem, palletDataToIds } from './SectionDetailsScreen';
+import {
+  SectionDetailsScreen,
+  handleEditItem,
+  palletDataToIds
+} from './SectionDetailsScreen';
 import { AsyncState } from '../../models/AsyncState';
 import {
   mockLocationDetails,
@@ -22,16 +26,11 @@ describe('Test Location Details Screen', () => {
     result: null
   };
 
-  const defaultScannedEvent = {
-    value: '',
-    type: ''
-  };
-
   const defaultSelectedItem: SectionDetailsItem = {
     itemNbr: 1234,
     upcNbr: '123456789',
     itemDesc: 'test',
-    price: 10.00,
+    price: 10.0,
     locationType: 8
   };
 
@@ -56,9 +55,7 @@ describe('Test Location Details Screen', () => {
           deleteLocationApi={defaultAsyncState}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          scannedEvent={defaultScannedEvent}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -82,9 +79,7 @@ describe('Test Location Details Screen', () => {
           deleteLocationApi={defaultAsyncState}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          scannedEvent={defaultScannedEvent}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -108,9 +103,7 @@ describe('Test Location Details Screen', () => {
           deleteLocationApi={defaultAsyncState}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          scannedEvent={defaultScannedEvent}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -137,9 +130,7 @@ describe('Test Location Details Screen', () => {
           deleteLocationApi={defaultAsyncState}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          scannedEvent={defaultScannedEvent}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -178,9 +169,7 @@ describe('Test Location Details Screen', () => {
           deleteLocationApi={deleteLocationAPIIsWaiting}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          scannedEvent={defaultScannedEvent}
           displayConfirmation={true}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -198,9 +187,7 @@ describe('Test Location Details Screen', () => {
           deleteLocationApi={deleteLocationAPIError}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          scannedEvent={defaultScannedEvent}
           displayConfirmation={true}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -218,9 +205,7 @@ describe('Test Location Details Screen', () => {
           deleteLocationApi={deleteLocationAPIComplete}
           dispatch={jest.fn()}
           navigation={navigationProp}
-          trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
-          scannedEvent={defaultScannedEvent}
           displayConfirmation={false}
           setDisplayConfirmation={jest.fn()}
           selectedItem={defaultSelectedItem}
@@ -239,7 +224,7 @@ describe('Test Location Details Screen', () => {
       const mockSelectedItem = {
         itemNbr: 123,
         itemDesc: 'test',
-        price: 2.00,
+        price: 2.0,
         upcNbr: '123',
         locationType: 8
       };
@@ -263,15 +248,19 @@ describe('Test Location Details Screen', () => {
         mockAisle,
         mockSection
       );
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: 'ITEM_DETAILS_SCREEN/SETUP' }));
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: 'LOCATION/SET_SELECTED_LOCATION' }));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({ type: 'ITEM_DETAILS_SCREEN/SETUP' })
+      );
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({ type: 'LOCATION/SET_SELECTED_LOCATION' })
+      );
       expect(mockDispatch).lastCalledWith({ type: 'LOCATION/HIDE_ITEM_POPUP' });
       expect(mockNavigate).toBeCalledWith('EditLocation');
     });
 
     it('tests palletDataToIds function', () => {
       const palletIds = palletDataToIds(mockLocationDetails.pallets.palletData);
-      const listOfIds = [1, 123, 456];
+      const listOfIds = ['1', '123', '456'];
       expect(palletIds).toStrictEqual(listOfIds);
     });
   });

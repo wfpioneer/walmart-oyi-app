@@ -3,9 +3,10 @@ import React from 'react';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { strings } from '../../locales';
+import { mockItem } from '../../mockData/mockPickList';
 import { AsyncState } from '../../models/AsyncState';
 import { UseStateType } from '../../models/Generics.d';
-import { PickListItem, PickStatus } from '../../models/Picking.d';
+import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { PickingState } from '../../state/reducers/Picking';
 import { SalesFloorWorkflowScreen, palletDetailsApiEffect, updatePicklistStatusApiEffect } from './SalesFloorWorkflow';
@@ -24,7 +25,7 @@ const basePickItem: PickListItem = {
   itemDesc: 'generic description',
   itemNbr: 1,
   moveToFront: false,
-  palletId: 43,
+  palletId: '43',
   palletLocationId: 4,
   palletLocationName: 'ABAR1-2',
   quickPick: false,
@@ -33,7 +34,13 @@ const basePickItem: PickListItem = {
   status: PickStatus.DELETED,
   upcNbr: '1234567890123'
 };
-
+const pickStateMissingProps = {
+  selectedPicks: [0],
+  pickCreateItem: mockItem,
+  pickCreateFloorLocations: [],
+  pickCreateReserveLocations: [],
+  selectedTab: Tabs.QUICKPICK
+};
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
@@ -56,7 +63,7 @@ const pickingState: PickingState = {
       status: PickStatus.READY_TO_WORK
     }
   ],
-  selectedPicks: [0]
+  ...pickStateMissingProps
 };
 
 const defaultAsyncState: AsyncState = {
@@ -172,7 +179,7 @@ describe('Sales floor workflow tests', () => {
           status: PickStatus.READY_TO_WORK
         }
       ],
-      selectedPicks: [0]
+      ...pickStateMissingProps
     };
 
     renderer.render(
@@ -197,12 +204,12 @@ describe('Sales floor workflow tests', () => {
       jest.clearAllMocks();
     });
 
-    const mockSelectedItems = [
+    const mockSelectedItems: PickListItem[] = [
       {
         ...basePickItem,
         status: PickStatus.COMPLETE,
         id: 2,
-        palletId: 41
+        palletId: '41'
       }
     ];
     it('tests the get pallet details to get quantities, success', () => {

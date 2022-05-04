@@ -55,8 +55,8 @@ export const binningItemCardReadOnly = (
   );
 };
 
-export const getFailedPallets = (data: PostBinPalletsMultistatusResponse): number[] => data.binSummary
-  .reduce((failIds: number[], currentResponse) => (currentResponse.status === 200
+export const getFailedPallets = (data: PostBinPalletsMultistatusResponse): string[] => data.binSummary
+  .reduce((failIds: string[], currentResponse) => (currentResponse.status === 200
     ? failIds
     : [...failIds, currentResponse.palletId]), []);
 
@@ -127,7 +127,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
       const searchValue = cleanScanIfUpcOrEanBarcode(scannedEvent);
       dispatch(binPallets({
         location: searchValue,
-        pallets: palletsToBin.reduce((palletIds: number[], pallet) => [...palletIds, pallet.id], [])
+        pallets: palletsToBin.reduce((palletIds: string[], pallet) => [...palletIds, pallet.id], [])
       }));
     }
   }, [scannedEvent]);

@@ -11,7 +11,7 @@ export const addPallet = (pallet: BinningPallet) => ({
   payload: pallet
 } as const);
 
-export const deletePallet = (palletId: number) => ({
+export const deletePallet = (palletId: string) => ({
   type: DELETE_PALLET,
   payload: palletId
 } as const);

@@ -47,7 +47,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
           },
         ],
         "palletCreateTS": "2021-01-01",
-        "palletId": 1,
+        "palletId": "1",
         "statusCode": 200,
       }
     }
@@ -115,7 +115,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
           },
         ],
         "palletCreateTS": "2021-01-01",
-        "palletId": 1,
+        "palletId": "1",
         "statusCode": 200,
       }
     }
@@ -161,7 +161,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = 
         "id": 1,
         "items": Array [],
         "palletCreateTS": "2021-01-01",
-        "palletId": 1,
+        "palletId": "1",
         "statusCode": 200,
       }
     }

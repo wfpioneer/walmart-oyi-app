@@ -47,6 +47,8 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
   } = props;
 
   const palletIDRegex = /^[0-9]+$/;
+  const nonNumRegex = new RegExp(/[^0-9]/g);
+
   if (addAPI.isWaiting) {
     return (
       <ActivityIndicator
@@ -116,7 +118,7 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
       <TextInput
         style={styles.textField}
         value={palletId}
-        onChangeText={(text: string) => updatePalletId(text)}
+        onChangeText={(text: string) => updatePalletId(text.replace(nonNumRegex, ''))}
         selectionColor={COLOR.MAIN_THEME_COLOR}
         placeholder={strings('LOCATION.PALLET_PLACEHOLDER')}
         onSubmitEditing={submitPalletId}

@@ -92,7 +92,7 @@ export const handleEditItem = (
   navigation.navigate('EditLocation');
 };
 
-export const palletDataToIds = (palletData: SectionDetailsPallet[]): number[] => {
+export const palletDataToIds = (palletData: SectionDetailsPallet[]): string[] => {
   let palletIds = [];
   palletIds = palletData.map(
     (item: Omit<SectionDetailsPallet, 'items'>) => item.palletId

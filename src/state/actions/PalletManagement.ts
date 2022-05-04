@@ -41,7 +41,7 @@ export const clearCombinePallet = () => ({
   type: CLEAR_COMBINE_PALLET
 } as const);
 
-export const removeCombinePallet = (palletId: number) => ({
+export const removeCombinePallet = (palletId: string) => ({
   type: REMOVE_COMBINE_PALLET,
   payload: palletId
 } as const);

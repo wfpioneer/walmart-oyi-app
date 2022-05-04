@@ -53,7 +53,7 @@ interface LocationState {
   zones: ZoneItem[];
   aisles: AisleItem[];
   sections: SectionItem[];
-  palletIds: number[];
+  palletIds: string[];
   possibleZones: PossibleZone[];
   locationPopupVisible: boolean;
   createFlow: CREATE_FLOW;

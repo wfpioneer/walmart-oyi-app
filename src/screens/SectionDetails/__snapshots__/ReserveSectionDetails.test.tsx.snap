@@ -169,6 +169,8 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
               "upcNbr": "123456000789",
             },
           ],
+          "palletCreateTS": "2022-01-03T14:22:34.000Z",
+          "palletId": "1",
           "statusCode": 200,
         },
         Object {
@@ -184,6 +186,8 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
               "upcNbr": "456789000123",
             },
           ],
+          "palletCreateTS": "2022-01-03T14:22:34.000Z",
+          "palletId": "123",
           "statusCode": 200,
         },
         Object {
@@ -199,6 +203,8 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
               "upcNbr": "123789000456",
             },
           ],
+          "palletCreateTS": "2022-01-03T14:22:34.000Z",
+          "palletId": "456",
           "statusCode": 200,
         },
       ]
@@ -262,7 +268,7 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
             },
           ],
           "palletCreateTS": "2021-01-01",
-          "palletId": 1,
+          "palletId": "1",
           "statusCode": 200,
         },
         Object {
@@ -279,7 +285,7 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
             },
           ],
           "palletCreateTS": "2021-01-10",
-          "palletId": 123,
+          "palletId": "123",
           "statusCode": 200,
         },
         Object {
@@ -296,7 +302,7 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
             },
           ],
           "palletCreateTS": "1999-10-10",
-          "palletId": 456,
+          "palletId": "456",
           "statusCode": 200,
         },
       ]
