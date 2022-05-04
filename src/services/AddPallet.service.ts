@@ -18,7 +18,7 @@ export default class AddPalletService {
   }
 
   public static addPalletUPCs(payload: {
-    palletId: number;
+    palletId: string;
     items: PalletItem[];
     expirationDate?: string;
   }): Promise<AxiosResponse<unknown>> {
