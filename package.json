@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "TZ='America/Chicago' jest",
     "test:coverage": "jest --collect-coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "build-release": "cd android && ./gradlew clean && ./gradlew assembleRelease",
