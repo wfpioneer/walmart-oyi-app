@@ -5,7 +5,20 @@ import { UseStateType } from '../../models/Generics.d';
 import { AsyncState } from '../../models/AsyncState';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
 import { PickingState } from '../../state/reducers/Picking';
-import { SalesFloorWorkflowScreen, palletDetailsApiEffect } from './SalesFloorWorkflow';
+import {
+  ExpiryPromptShow,
+  SalesFloorWorkflowScreen,
+  activityIndicatorEffect,
+  binServiceCall,
+  palletConfigApiEffect,
+  palletDetailsApiEffect,
+  shouldDelete,
+  shouldPromptNewExpiry,
+  shouldRemoveExpiry,
+  shouldUpdateQty
+} from './SalesFloorWorkflow';
+import { HIDE_ACTIVITY_MODAL, SHOW_ACTIVITY_MODAL } from '../../state/actions/Modal';
+import { DELETE_UPCS, UPDATE_PALLET_ITEM_QTY } from '../../state/actions/saga';
 
 const basePickItem: PickListItem = {
   assignedAssociate: '',
@@ -60,6 +73,12 @@ const mockExpirationState: UseStateType<string> = ['', mockSetExpiration];
 const mockSetPerishables = jest.fn();
 const mockPerishablesState: UseStateType<Array<number>> = [[], mockSetPerishables];
 
+const mockSetExpirationShow = jest.fn();
+const mockExpirationShowState: UseStateType<ExpiryPromptShow> = [ExpiryPromptShow.HIDDEN, mockSetExpirationShow];
+
+const mockSetConfigComplete = jest.fn();
+const mockConfigCompleteState: UseStateType<boolean> = [false, mockSetConfigComplete];
+
 describe('Sales floor workflow tests', () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -79,6 +98,12 @@ describe('Sales floor workflow tests', () => {
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
         backupCategories=""
+        palletConfigApi={defaultAsyncState}
+        configCompleteState={mockConfigCompleteState}
+        showExpiryPromptState={mockExpirationShowState}
+        showActivity={false}
+        updatePalletItemsApi={defaultAsyncState}
+        deletePalletItemsApi={defaultAsyncState}
       />
     );
 
@@ -104,6 +129,12 @@ describe('Sales floor workflow tests', () => {
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
         backupCategories=""
+        palletConfigApi={defaultAsyncState}
+        configCompleteState={mockConfigCompleteState}
+        showExpiryPromptState={mockExpirationShowState}
+        showActivity={false}
+        updatePalletItemsApi={defaultAsyncState}
+        deletePalletItemsApi={defaultAsyncState}
       />
     );
 
@@ -132,11 +163,17 @@ describe('Sales floor workflow tests', () => {
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
         backupCategories=""
+        palletConfigApi={defaultAsyncState}
+        configCompleteState={mockConfigCompleteState}
+        showExpiryPromptState={mockExpirationShowState}
+        showActivity={false}
+        updatePalletItemsApi={defaultAsyncState}
+        deletePalletItemsApi={defaultAsyncState}
       />
     );
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
-  })
+  });
 
   it('shows the activity indicator when waiting for pallet details', () => {
     const renderer = ShallowRenderer.createRenderer();
@@ -153,6 +190,54 @@ describe('Sales floor workflow tests', () => {
       selectedPicks: [0]
     };
 
+    const waitingAsyncState: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+
+    renderer.render(
+      <SalesFloorWorkflowScreen
+        dispatch={jest.fn()}
+        pickingState={multiPicksState}
+        navigation={navigationProp}
+        palletDetailsApi={waitingAsyncState}
+        useEffectHook={jest.fn()}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
+        palletConfigApi={defaultAsyncState}
+        configCompleteState={mockConfigCompleteState}
+        showExpiryPromptState={mockExpirationShowState}
+        showActivity={false}
+        updatePalletItemsApi={defaultAsyncState}
+        deletePalletItemsApi={defaultAsyncState}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('shows the activity indicator when waiting for pallet config api', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const multiPicksState: PickingState = {
+      pickList: [
+        ...pickingState.pickList,
+        {
+          ...basePickItem,
+          id: 1,
+          status: PickStatus.READY_TO_WORK
+        }
+      ],
+      selectedPicks: [0]
+    };
+
+    const waitingAsyncState: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+
     renderer.render(
       <SalesFloorWorkflowScreen
         dispatch={jest.fn()}
@@ -164,9 +249,103 @@ describe('Sales floor workflow tests', () => {
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
         backupCategories=""
+        palletConfigApi={waitingAsyncState}
+        configCompleteState={mockConfigCompleteState}
+        showExpiryPromptState={mockExpirationShowState}
+        showActivity={false}
+        updatePalletItemsApi={defaultAsyncState}
+        deletePalletItemsApi={defaultAsyncState}
       />
     );
-  })
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('shows the expiration date modal', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const multiPicksState: PickingState = {
+      pickList: [
+        ...pickingState.pickList,
+        {
+          ...basePickItem,
+          id: 1,
+          status: PickStatus.READY_TO_WORK
+        }
+      ],
+      selectedPicks: [0]
+    };
+
+    const showExpiryDialogState: UseStateType<ExpiryPromptShow> = [
+      ExpiryPromptShow.DIALOGUE_SHOW,
+      mockExpirationShowState[1]
+    ];
+
+    renderer.render(
+      <SalesFloorWorkflowScreen
+        dispatch={jest.fn()}
+        pickingState={multiPicksState}
+        navigation={navigationProp}
+        palletDetailsApi={defaultAsyncState}
+        useEffectHook={jest.fn()}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
+        palletConfigApi={defaultAsyncState}
+        configCompleteState={mockConfigCompleteState}
+        showExpiryPromptState={showExpiryDialogState}
+        showActivity={false}
+        updatePalletItemsApi={defaultAsyncState}
+        deletePalletItemsApi={defaultAsyncState}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('shows the expiration date modal date picker', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const multiPicksState: PickingState = {
+      pickList: [
+        ...pickingState.pickList,
+        {
+          ...basePickItem,
+          id: 1,
+          status: PickStatus.READY_TO_WORK
+        }
+      ],
+      selectedPicks: [0]
+    };
+
+    const showExpiryCalendarState: UseStateType<ExpiryPromptShow> = [
+      ExpiryPromptShow.CALENDAR_SHOW,
+      mockExpirationShowState[1]
+    ];
+
+    renderer.render(
+      <SalesFloorWorkflowScreen
+        dispatch={jest.fn()}
+        pickingState={multiPicksState}
+        navigation={navigationProp}
+        palletDetailsApi={defaultAsyncState}
+        useEffectHook={jest.fn()}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
+        palletConfigApi={defaultAsyncState}
+        configCompleteState={mockConfigCompleteState}
+        showExpiryPromptState={showExpiryCalendarState}
+        showActivity={false}
+        updatePalletItemsApi={defaultAsyncState}
+        deletePalletItemsApi={defaultAsyncState}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
 
   describe('externalized function tests', () => {
     it('tests the get pallet details to get quantities, success', () => {
@@ -233,6 +412,233 @@ describe('Sales floor workflow tests', () => {
       expect(mockSetExpiration).toBeCalledTimes(1);
       expect(mockSetExpiration).toBeCalledWith('tomorrows');
       expect(mockDispatch).toBeCalledTimes(2);
+    });
+
+    it('test getPalletConfigHook', async () => {
+      const dispatch = jest.fn();
+      const setConfigComplete = jest.fn();
+      const successAsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 200,
+          data: {
+            perishableCategories: [1, 8, 35, 36, 40, 41, 43, 45, 46, 47, 49, 51, 52, 53, 54, 55, 58]
+          }
+        }
+      };
+      const failureAsyncState = {
+        ...defaultAsyncState,
+        error: 'test'
+      };
+
+      palletConfigApiEffect(successAsyncState, dispatch, navigationProp, setConfigComplete, '1, 8');
+      expect(dispatch).toBeCalledTimes(2);
+      expect(setConfigComplete).toBeCalledTimes(1);
+
+      dispatch.mockReset();
+      setConfigComplete.mockReset();
+      palletConfigApiEffect(failureAsyncState, dispatch, navigationProp, setConfigComplete, '1, 8');
+      expect(dispatch).toBeCalledTimes(2);
+      expect(setConfigComplete).toBeCalledTimes(1);
+    });
+
+    it('tests the activity indicator hook', () => {
+      const waitingState: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+
+      // no apis going
+      activityIndicatorEffect(defaultAsyncState, defaultAsyncState, false, navigationProp, mockDispatch);
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockDispatch).not.toBeCalled();
+
+      jest.clearAllMocks();
+      // first api going
+      activityIndicatorEffect(waitingState, defaultAsyncState, false, navigationProp, mockDispatch);
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledWith({ type: SHOW_ACTIVITY_MODAL });
+
+      jest.clearAllMocks();
+      // second api joins
+      activityIndicatorEffect(waitingState, waitingState, true, navigationProp, mockDispatch);
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockDispatch).not.toBeCalled();
+
+      jest.clearAllMocks();
+      // first api finishes
+      activityIndicatorEffect(defaultAsyncState, waitingState, true, navigationProp, mockDispatch);
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockDispatch).not.toBeCalled();
+
+      jest.clearAllMocks();
+      // second api finishes
+      activityIndicatorEffect(defaultAsyncState, defaultAsyncState, true, navigationProp, mockDispatch);
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledWith({ type: HIDE_ACTIVITY_MODAL });
+    });
+
+    it('tests shouldUpdateQuantity', () => {
+      const defaultPick: PickListItem = {
+        ...basePickItem
+      };
+      const presetQuantityPick: PickListItem = {
+        ...basePickItem,
+        quantityLeft: 54
+      };
+      const quantityModifiedButEqualPick: PickListItem = {
+        ...basePickItem,
+        quantityLeft: 54,
+        newQuantityLeft: 54
+      };
+      const quantityModifiedPick: PickListItem = {
+        ...basePickItem,
+        quantityLeft: 43,
+        newQuantityLeft: 34
+      };
+      const quantityZeroPick: PickListItem = {
+        ...basePickItem,
+        quantityLeft: 43,
+        newQuantityLeft: 0
+      };
+
+      const defaultResult = shouldUpdateQty(defaultPick);
+      const presetResult = shouldUpdateQty(presetQuantityPick);
+      const modifiedEqualResult = shouldUpdateQty(quantityModifiedButEqualPick);
+      const modifiedResult = shouldUpdateQty(quantityModifiedPick);
+      const quantityZeroResult = shouldUpdateQty(quantityZeroPick);
+
+      expect(defaultResult).toBe(false);
+      expect(presetResult).toBe(false);
+      expect(modifiedEqualResult).toBe(false);
+      expect(modifiedResult).toBe(true);
+      expect(quantityZeroResult).toBe(false);
+    });
+
+    it('tests shouldDelete', () => {
+      const unmodifiedPick: PickListItem = {
+        ...basePickItem,
+        quantityLeft: 4
+      };
+      const modifiedPick: PickListItem = {
+        ...basePickItem,
+        quantityLeft: 5,
+        newQuantityLeft: 4
+      };
+      const deletablePick: PickListItem = {
+        ...basePickItem,
+        quantityLeft: 4,
+        newQuantityLeft: 0
+      };
+
+      const unmodifiedResult = shouldDelete(unmodifiedPick);
+      const modifiedResult = shouldDelete(modifiedPick);
+      const deletableResult = shouldDelete(deletablePick);
+
+      expect(unmodifiedResult).toBe(false);
+      expect(modifiedResult).toBe(false);
+      expect(deletableResult).toBe(true);
+    });
+
+    it('tests shouldRemoveExpiry', () => {
+      const perishableItems = [1, 3, 5];
+      const noPerishablePicks: PickListItem[] = [
+        { ...basePickItem, itemNbr: 2 },
+        { ...basePickItem, itemNbr: 4 }
+      ];
+      const notAllPerishablePicks: PickListItem[] = [
+        { ...basePickItem, itemNbr: 1 },
+        { ...basePickItem, itemNbr: 2 },
+        { ...basePickItem, itemNbr: 4 }
+      ];
+      const allPerishablePicks: PickListItem[] = [
+        { ...basePickItem, itemNbr: 1 },
+        { ...basePickItem, itemNbr: 3 },
+        { ...basePickItem, itemNbr: 5 }
+      ];
+      const moreThanPerishablePicks: PickListItem[] = [
+        { ...basePickItem, itemNbr: 1 },
+        { ...basePickItem, itemNbr: 2 },
+        { ...basePickItem, itemNbr: 3 },
+        { ...basePickItem, itemNbr: 4 },
+        { ...basePickItem, itemNbr: 5 }
+      ];
+
+      const noPerishables = shouldRemoveExpiry(noPerishablePicks, perishableItems);
+      const notAllPerishables = shouldRemoveExpiry(notAllPerishablePicks, perishableItems);
+      const allPerishables = shouldRemoveExpiry(allPerishablePicks, perishableItems);
+      const moreThanPerishables = shouldRemoveExpiry(moreThanPerishablePicks, perishableItems);
+
+      expect(noPerishables).toBe(false);
+      expect(notAllPerishables).toBe(false);
+      expect(allPerishables).toBe(true);
+      expect(moreThanPerishables).toBe(true);
+    });
+
+    it('tests shouldPromptNewExpiry', () => {
+      const perishableItems = [1, 3, 5];
+      const noPerishablePicks: PickListItem[] = [
+        { ...basePickItem, itemNbr: 2 },
+        { ...basePickItem, itemNbr: 4 }
+      ];
+      const notAllPerishablePicks: PickListItem[] = [
+        { ...basePickItem, itemNbr: 1 },
+        { ...basePickItem, itemNbr: 2 },
+        { ...basePickItem, itemNbr: 4 }
+      ];
+      const allPerishablePicks: PickListItem[] = [
+        { ...basePickItem, itemNbr: 1 },
+        { ...basePickItem, itemNbr: 3 },
+        { ...basePickItem, itemNbr: 5 }
+      ];
+
+      const noPerishables = shouldPromptNewExpiry(noPerishablePicks, perishableItems);
+      const notAllPerishables = shouldPromptNewExpiry(notAllPerishablePicks, perishableItems);
+      const allPerishables = shouldPromptNewExpiry(allPerishablePicks, perishableItems);
+
+      expect(noPerishables).toBe(false);
+      expect(notAllPerishables).toBe(true);
+      expect(allPerishables).toBe(false);
+    });
+
+    it('tests the binServiceCall', () => {
+      const perishableItems = [1, 3, 5];
+      const picks: PickListItem[] = [
+        { ...basePickItem, itemNbr: 2 },
+        { ...basePickItem, itemNbr: 4 }
+      ];
+
+      // only update items
+      binServiceCall(picks, [], mockDispatch, 1, mockSetExpirationShow, perishableItems);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PALLET_ITEM_QTY }));
+      expect(mockSetExpirationShow).not.toBeCalled();
+      jest.clearAllMocks();
+
+      // only delete items, no new expiry date
+      binServiceCall([], picks, mockDispatch, 1, mockSetExpirationShow, perishableItems);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: DELETE_UPCS }));
+      expect(mockSetExpirationShow).not.toBeCalled();
+      jest.clearAllMocks();
+
+      // only delete items, new expiry date
+      binServiceCall([], picks, mockDispatch, 1, mockSetExpirationShow, perishableItems, 'yesterday');
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: DELETE_UPCS }));
+      expect(mockSetExpirationShow).toBeCalledTimes(1);
+      expect(mockSetExpirationShow).toBeCalledWith(ExpiryPromptShow.HIDDEN);
+      jest.clearAllMocks();
+
+      // update and delete
+      binServiceCall(picks, picks, mockDispatch, 1, mockSetExpirationShow, perishableItems, 'tomorrow');
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PALLET_ITEM_QTY }));
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: DELETE_UPCS }));
+      expect(mockSetExpirationShow).toBeCalledTimes(1);
+      expect(mockSetExpirationShow).toBeCalledWith(ExpiryPromptShow.HIDDEN);
     });
   });
 });
