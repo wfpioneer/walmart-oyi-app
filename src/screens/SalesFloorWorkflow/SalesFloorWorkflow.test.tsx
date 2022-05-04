@@ -9,8 +9,6 @@ import { AsyncState } from '../../models/AsyncState';
 import { UseStateType } from '../../models/Generics.d';
 import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
 import {
-  HIDE_ACTIVITY_MODAL,
-  SHOW_ACTIVITY_MODAL,
   hideActivityModal,
   showActivityModal
 } from '../../state/actions/Modal';
@@ -94,6 +92,10 @@ const defaultAsyncState: AsyncState = {
   error: null,
   result: null
 };
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+global.Date.now = jest.fn(() => new Date('2021-02-16T22:16:30Z').getTime());
 
 const mockDispatch = jest.fn();
 
@@ -520,11 +522,13 @@ describe('Sales floor workflow tests', () => {
     it('tests the bin apis effect', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
-        result: {}
+        result: {},
+        value: {}
       };
       const failApi: AsyncState = {
         ...defaultAsyncState,
-        error: {}
+        error: {},
+        value: {}
       };
 
       // success
@@ -579,31 +583,66 @@ describe('Sales floor workflow tests', () => {
       };
 
       // no apis going
-      activityIndicatorEffect(defaultAsyncState, defaultAsyncState, false, navigationProp, mockDispatch);
+      activityIndicatorEffect(
+        defaultAsyncState,
+        defaultAsyncState,
+        defaultAsyncState,
+        false,
+        navigationProp,
+        mockDispatch
+      );
       expect(mockIsFocused).toBeCalledTimes(1);
       expect(mockDispatch).not.toBeCalled();
 
       jest.clearAllMocks();
       // first api going
-      activityIndicatorEffect(waitingState, defaultAsyncState, false, navigationProp, mockDispatch);
+      activityIndicatorEffect(
+        waitingState,
+        defaultAsyncState,
+        defaultAsyncState,
+        false,
+        navigationProp,
+        mockDispatch
+      );
       expect(mockIsFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
 
       jest.clearAllMocks();
       // second api joins
-      activityIndicatorEffect(waitingState, waitingState, true, navigationProp, mockDispatch);
+      activityIndicatorEffect(
+        waitingState,
+        waitingState,
+        defaultAsyncState,
+        true,
+        navigationProp,
+        mockDispatch
+      );
       expect(mockIsFocused).toBeCalledTimes(1);
       expect(mockDispatch).not.toBeCalled();
 
       jest.clearAllMocks();
       // first api finishes
-      activityIndicatorEffect(defaultAsyncState, waitingState, true, navigationProp, mockDispatch);
+      activityIndicatorEffect(
+        defaultAsyncState,
+        waitingState,
+        defaultAsyncState,
+        true,
+        navigationProp,
+        mockDispatch
+      );
       expect(mockIsFocused).toBeCalledTimes(1);
       expect(mockDispatch).not.toBeCalled();
 
       jest.clearAllMocks();
       // second api finishes
-      activityIndicatorEffect(defaultAsyncState, defaultAsyncState, true, navigationProp, mockDispatch);
+      activityIndicatorEffect(
+        defaultAsyncState,
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        navigationProp,
+        mockDispatch
+      );
       expect(mockIsFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
     });

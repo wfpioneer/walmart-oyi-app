@@ -633,10 +633,10 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
   <Picker
     display="spinner"
     is24Hour={true}
-    minimumDate={2022-05-04T22:21:20.488Z}
+    minimumDate={2021-02-16T22:16:30.000Z}
     mode="date"
     onChange={[Function]}
-    value={2022-05-04T22:21:20.488Z}
+    value={2021-02-16T22:16:30.000Z}
   />
   <PickPalletInfoCard
     onPress={[Function]}

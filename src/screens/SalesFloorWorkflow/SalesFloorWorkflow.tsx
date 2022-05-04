@@ -566,7 +566,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
       </CustomModalComponent>
       {showExpiryPrompt === ExpiryPromptShow.CALENDAR_SHOW && (
         <DateTimePicker
-          value={expirationDate ? new Date(expirationDate) : new Date()}
+          value={expirationDate ? new Date(expirationDate) : new Date(Date.now())}
           mode="date"
           display={Platform.OS === 'ios' ? 'spinner' : 'default'}
           is24Hour={true}
