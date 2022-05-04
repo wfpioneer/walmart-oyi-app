@@ -14,6 +14,18 @@ export interface PalletExpirationProps {
   onDateChange(event: DateTimePickerEvent, value: Date| undefined): void;
 }
 
+const getDateValue = (expirationDate: string | undefined, newExpirationDate: string | undefined): Date => {
+  if (newExpirationDate) {
+    return new Date(newExpirationDate)
+  }
+
+  if (expirationDate) {
+    new Date(expirationDate)
+  }
+
+  return new Date(Date.now());
+};
+
 export const PalletExpiration = (props: PalletExpirationProps): JSX.Element => {
   const {
     dateChanged,
@@ -24,9 +36,6 @@ export const PalletExpiration = (props: PalletExpirationProps): JSX.Element => {
     showPicker,
     setShowPicker
   } = props;
-
-  const getDateValue = (expirationDate: string | undefined, newExpirationDate: string | undefined): Date =>
-    newExpirationDate ? new Date(newExpirationDate) : (expirationDate ? new Date(expirationDate) : new Date(Date.now()));
 
   return (
     <View style={dateChanged ? styles.modifiedEffectiveDateContainer : styles.effectiveDateContainer}>

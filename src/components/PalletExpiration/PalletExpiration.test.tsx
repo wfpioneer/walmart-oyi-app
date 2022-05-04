@@ -4,7 +4,7 @@ import PalletExpiration from './PalletExpiration';
 
 describe('Tests rendering PalletExpiration', () => {
   let testExpirationDate: string | undefined = '05/31/2022';
-  let testNewExpirationDate: string | undefined = undefined;
+  let testNewExpirationDate: string | undefined;
   const testSetShowPicker = jest.fn();
   const testDateChange = jest.fn();
 

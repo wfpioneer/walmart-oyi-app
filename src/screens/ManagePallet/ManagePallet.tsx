@@ -16,7 +16,7 @@ import {
 } from '@react-navigation/native';
 import { partition } from 'lodash';
 import moment from 'moment';
-import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
@@ -99,8 +99,6 @@ export const isQuantityChanged = (
 export const isExpiryDateChanged = (palletInfo: PalletInfo): boolean => !!(
   palletInfo.newExpirationDate && palletInfo.newExpirationDate !== palletInfo.expirationDate?.trim()
 );
-
-const dateOfExpirationDate = (stringDate?: string): Date => (stringDate ? new Date(stringDate) : new Date());
 
 const enableSave = (items: PalletItem[], palletInfo: PalletInfo): boolean => {
   const isItemsModified = items.some((item: PalletItem) => isQuantityChanged(item)
