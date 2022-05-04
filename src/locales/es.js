@@ -388,6 +388,8 @@ export default {
     RELEASE: 'Liberar',
     UPDATE_REMAINING_QTY: 'Actualiza la cantidad de cada artículo antes de continuar',
     REMAINING_QTY: 'Cantidad restante en pallet',
+    REMOVE_PERISHABLE: 'Eliminando artículo con caducidad',
+    REMOVE_PERISHABLE_NEW_EXPIRY: 'Por favor ingresa la nueva fecha de caducidad',
     PICKLIST_SUCCESS: 'Se obtuvo con éxito la lista de pickeos',
     PICKLIST_NOT_FOUND: 'No se encontró la lista de pickeos para este club',
     PICKLIST_ERROR: 'Hubo un error obteniendo la lista de pickeos',
