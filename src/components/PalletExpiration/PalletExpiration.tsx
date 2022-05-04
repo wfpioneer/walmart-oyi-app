@@ -20,7 +20,7 @@ const getDateValue = (expirationDate: string | undefined, newExpirationDate: str
   }
 
   if (expirationDate) {
-    new Date(expirationDate)
+    return new Date(expirationDate)
   }
 
   return new Date(Date.now());

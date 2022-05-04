@@ -55,7 +55,7 @@ exports[`Tests rendering PalletExpiration Renders the PalletExpiration showing p
     date={1022734800000}
     displayIOS="spinner"
     enabled={true}
-    minimumDate={1651527542804}
+    minimumDate={1651693464771}
     mode="date"
     onChange={[Function]}
     onResponderTerminationRequest={[Function]}
