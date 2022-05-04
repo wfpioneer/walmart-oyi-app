@@ -659,6 +659,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               showPicker={isPickerShow}
               setShowPicker={setIsPickerShow}
               onDateChange={onDatePickerChange}
+              minimumDate={new Date(Date.now())}
             />
           )}
           <View style={styles.headerItem}>

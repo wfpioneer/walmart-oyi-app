@@ -9,6 +9,7 @@ export interface PalletExpirationProps {
   dateRemoved: boolean;
   expirationDate: string | undefined;
   newExpirationDate: string | undefined;
+  minimumDate: Date | undefined;
   showPicker: boolean;
   setShowPicker: React.Dispatch<React.SetStateAction<boolean>>;
   onDateChange(event: DateTimePickerEvent, value: Date| undefined): void;
@@ -32,6 +33,7 @@ export const PalletExpiration = (props: PalletExpirationProps): JSX.Element => {
     dateRemoved,
     expirationDate,
     newExpirationDate,
+    minimumDate,
     onDateChange,
     showPicker,
     setShowPicker
@@ -56,7 +58,7 @@ export const PalletExpiration = (props: PalletExpirationProps): JSX.Element => {
           mode="date"
           display={Platform.OS === 'ios' ? 'spinner' : 'default'}
           is24Hour={true}
-          minimumDate={new Date(Date.now())}
+          minimumDate={minimumDate}
           onChange={onDateChange}
           testID="datePicker"
         />

@@ -7,6 +7,7 @@ describe('Tests rendering PalletExpiration', () => {
   let testNewExpirationDate: string | undefined;
   const testSetShowPicker = jest.fn();
   const testDateChange = jest.fn();
+  const testDate = new Date("10/17/1973");
 
   it('Renders the PalletExpiration with expiration date and no changes', () => {
     const { toJSON } = render(
@@ -18,6 +19,7 @@ describe('Tests rendering PalletExpiration', () => {
         dateRemoved={false}
         dateChanged={false}
         onDateChange={testDateChange}
+        minimumDate={testDate}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -35,6 +37,7 @@ describe('Tests rendering PalletExpiration', () => {
         dateRemoved={false}
         dateChanged={false}
         onDateChange={testDateChange}
+        minimumDate={testDate}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -52,6 +55,7 @@ describe('Tests rendering PalletExpiration', () => {
         dateRemoved={false}
         dateChanged={true}
         onDateChange={testDateChange}
+        minimumDate={testDate}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -69,6 +73,7 @@ describe('Tests rendering PalletExpiration', () => {
         dateRemoved={true}
         dateChanged={true}
         onDateChange={testDateChange}
+        minimumDate={testDate}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -87,6 +92,7 @@ describe('Tests rendering PalletExpiration', () => {
         dateRemoved={true}
         dateChanged={true}
         onDateChange={testDateChange}
+        minimumDate={testDate}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -105,6 +111,7 @@ describe('Tests rendering PalletExpiration', () => {
         dateRemoved={true}
         dateChanged={true}
         onDateChange={testDateChange}
+        minimumDate={testDate}
       />
     );
     const testClick = getByTestId('openDate');
