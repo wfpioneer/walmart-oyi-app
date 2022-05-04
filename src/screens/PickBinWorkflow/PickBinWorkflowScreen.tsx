@@ -1,13 +1,14 @@
 import React, {
   Dispatch, EffectCallback, useEffect, useState
 } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import {
   NavigationProp, useNavigation
 } from '@react-navigation/native';
+import { COLOR } from '../../themes/Color';
 import Button from '../../components/buttons/Button';
 import PickPalletInfoCard from '../../components/PickPalletInfoCard/PickPalletInfoCard';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -21,7 +22,9 @@ import {
 } from '../../state/actions/asyncAPI';
 import { updatePicklistStatus } from '../../state/actions/saga';
 import { updatePicks } from '../../state/actions/Picking';
+import { addPallet } from '../../state/actions/Binning';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { CustomModalComponent } from '../Modal/Modal';
 
 interface PBWorkflowProps {
   userFeatures: string[];
@@ -33,6 +36,16 @@ interface PBWorkflowProps {
   navigation: NavigationProp<any>;
   selectedPicklistAction: PickAction | null;
   setSelectedPicklistAction: React.Dispatch<React.SetStateAction<PickAction|null>>;
+  showContinueActionDialog: boolean;
+  setShowContinueActionDialog: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface ContinueActionDialogProps {
+  showContinueActionDialog: boolean,
+  setShowContinueActionDialog: React.Dispatch<React.SetStateAction<boolean>>;
+  dispatch: Dispatch<any>;
+  items: PickListItem[];
+  setSelectedPicklistAction: React.Dispatch<React.SetStateAction<PickAction|null>>
 }
 
 const resetApis = (dispatch: Dispatch<any>) => {
@@ -50,20 +63,14 @@ export const updatePicklistStatusApiHook = (
   if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result
     && updatePicklistStatusApi.result.status === 200) {
     if (selectedPicklistAction === PickAction.ACCEPT_PICK || selectedPicklistAction === PickAction.ACCEPT_BIN) {
-      const updatedStatus = PickAction.ACCEPT_PICK ? PickStatus.ACCEPTED_PICK : PickStatus.ACCEPTED_BIN;
+      const updatedStatus = selectedPicklistAction === PickAction.ACCEPT_PICK
+        ? PickStatus.ACCEPTED_PICK : PickStatus.ACCEPTED_BIN;
       const updatedItems = items.map(item => ({
         ...item,
         status: updatedStatus
       }));
       dispatch(updatePicks(updatedItems));
-    } else if (selectedPicklistAction === PickAction.RELEASE) {
-      const { status } = items[0];
-      const updatedStatus = status === PickStatus.ACCEPTED_BIN ? PickStatus.READY_TO_BIN : PickStatus.READY_TO_PICK;
-      const updatedItems = items.map(item => ({
-        ...item,
-        status: updatedStatus
-      }));
-      dispatch(updatePicks(updatedItems));
+    } else {
       navigation.goBack();
     }
     Toast.show({
@@ -93,10 +100,82 @@ export const updatePicklistStatusApiHook = (
   }
 };
 
+export const updatePicklistItemsStatus = (items: PickListItem[], action: PickAction, dispatch: Dispatch<any>) => {
+  const picklistItems = items.map(item => ({
+    picklistId: item.id,
+    locationId: item.palletLocationId,
+    locationName: item.palletLocationName
+  }));
+  const { palletId } = items[0];
+  dispatch(updatePicklistStatus({
+    headers: {
+      action
+    },
+    picklistItems,
+    palletId
+  }));
+};
+
+export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
+  const {
+    showContinueActionDialog, setShowContinueActionDialog, dispatch, items, setSelectedPicklistAction
+  } = props;
+  // Continue Action handler
+  const handleContinueAction = (action: PickAction) => {
+    setShowContinueActionDialog(false);
+    setSelectedPicklistAction(action);
+    updatePicklistItemsStatus(items, action, dispatch);
+  };
+
+  // TODO: Need to call /picklist/{palletId}/palletnotfound service and redirect to TabNavigator on Success
+  const handlePalletNotFound = () => {};
+
+  return (
+    <CustomModalComponent
+      isVisible={showContinueActionDialog}
+      onClose={() => setShowContinueActionDialog(false)}
+      modalType="Popup"
+    >
+      <>
+        <View style={styles.continueActionHeader}>
+          <Text>{strings('PICKING.SELECT_CONTINUE_ACTION')}</Text>
+        </View>
+        <View style={styles.picklistActionView}>
+          <Button
+            style={styles.picklistActionButton}
+            title={strings('PICKING.READY_TO_WORK')}
+            type={Button.Type.PRIMARY}
+            onPress={() => handleContinueAction(PickAction.READY_TO_WORK)}
+          />
+          <Button
+            style={styles.picklistActionButton}
+            title={strings('PICKING.COMPLETE')}
+            type={Button.Type.PRIMARY}
+            onPress={() => handleContinueAction(PickAction.COMPLETE)}
+          />
+          <Button
+            style={styles.picklistActionButton}
+            title={strings('PICKING.PALLET_NOT_FOUND')}
+            type={Button.Type.PRIMARY}
+            onPress={() => handlePalletNotFound()}
+          />
+          <Button
+            style={styles.picklistActionButton}
+            title={strings('GENERICS.CANCEL')}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            type={Button.Type.SOLID_WHITE}
+            onPress={() => setShowContinueActionDialog(false)}
+          />
+        </View>
+      </>
+    </CustomModalComponent>
+  );
+};
+
 export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
   const {
     userFeatures, userId, pickingState, updatePicklistStatusApi, useEffectHook, dispatch, navigation,
-    selectedPicklistAction, setSelectedPicklistAction
+    selectedPicklistAction, setSelectedPicklistAction, showContinueActionDialog, setShowContinueActionDialog
   } = props;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
@@ -110,44 +189,37 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
   ), [updatePicklistStatusApi]);
 
   const handleAccept = (items: PickListItem[]) => {
-    const { status, palletId } = items[0];
+    const { status } = items[0];
     const action = status === PickStatus.READY_TO_PICK ? PickAction.ACCEPT_PICK : PickAction.ACCEPT_BIN;
     setSelectedPicklistAction(action);
-    const picklistItems = items.map(item => ({
-      picklistId: item.id,
-      locationId: item.palletLocationId,
-      locationName: item.palletLocationName
-    }));
-    dispatch(updatePicklistStatus({
-      headers: {
-        action
-      },
-      picklistItems,
-      palletId
-    }));
+    updatePicklistItemsStatus(items, action, dispatch);
   };
 
   const handleRelease = (items: PickListItem[]) => {
-    const { palletId } = items[0];
     const action = PickAction.RELEASE;
     setSelectedPicklistAction(action);
-    const picklistItems = items.map(item => ({
-      picklistId: item.id,
-      locationId: item.palletLocationId,
-      locationName: item.palletLocationName
-    }));
-    dispatch(updatePicklistStatus({
-      headers: {
-        action
-      },
-      picklistItems,
-      palletId
-    }));
+    updatePicklistItemsStatus(items, action, dispatch);
   };
 
-  const handleContinue = () => {};
+  const handleBin = (items: PickListItem[]) => {
+    const { palletId } = items[0];
 
-  const handleBin = () => {};
+    const palletDetails = {
+      id: palletId,
+      items: items.map(item => ({
+        itemNbr: item.itemNbr,
+        itemDesc: item.itemDesc,
+        upcNbr: item.upcNbr
+      }))
+    };
+    dispatch(addPallet(palletDetails));
+    navigation.navigate('Binning', {
+      screen: 'Binning',
+      params: {
+        source: 'picking'
+      }
+    });
+  };
 
   const actionButtonsView = () => {
     const { status } = selectedPicks[0];
@@ -174,10 +246,10 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
       />
     ) : null;
 
-    const continueButton = isMine && status === PickStatus.ACCEPTED_PICK ? (
+    const continueButton = status === PickStatus.ACCEPTED_PICK ? (
       <Button
         title={strings('GENERICS.CONTINUE')}
-        onPress={handleContinue}
+        onPress={() => setShowContinueActionDialog(true)}
         style={styles.actionButton}
         key="continue"
       />
@@ -186,7 +258,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     const binButton = isMine && status === PickStatus.ACCEPTED_BIN ? (
       <Button
         title={strings('PICKING.BIN')}
-        onPress={handleBin}
+        onPress={() => handleBin(selectedPicks)}
         style={styles.actionButton}
         key="continue"
       />
@@ -203,6 +275,13 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ContinueActionDialog
+        showContinueActionDialog={showContinueActionDialog}
+        setShowContinueActionDialog={setShowContinueActionDialog}
+        dispatch={dispatch}
+        items={selectedPicks}
+        setSelectedPicklistAction={setSelectedPicklistAction}
+      />
       <PickPalletInfoCard
         onPress={() => {}}
         palletId={selectedPicks[0].palletId}
@@ -223,6 +302,7 @@ const PickBinWorkflow = () => {
   const picking = useTypedSelector(state => state.Picking);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
   const [selectedPicklistAction, setSelectedPicklistAction] = useState<PickAction|null>(null);
+  const [showContinueActionDialog, setShowContinueActionDialog] = useState<boolean>(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -237,6 +317,8 @@ const PickBinWorkflow = () => {
       navigation={navigation}
       selectedPicklistAction={selectedPicklistAction}
       setSelectedPicklistAction={setSelectedPicklistAction}
+      showContinueActionDialog={showContinueActionDialog}
+      setShowContinueActionDialog={setShowContinueActionDialog}
     />
   );
 };

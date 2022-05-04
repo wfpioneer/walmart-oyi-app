@@ -59,8 +59,10 @@ exports[`BinningScreen Tests rendering binningItemCard component should match sn
         }
       >
         <View>
-          <Image
-            source=""
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
           />
         </View>
       </ForwardRef>
@@ -230,7 +232,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         Array [
           Object {
             "expirationDate": "10/3/2022",
-            "id": 123456,
+            "id": "123456",
             "items": Array [
               Object {
                 "itemDesc": "itemDesc",
@@ -243,7 +245,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           },
           Object {
             "expirationDate": "10/3/2022",
-            "id": 345345,
+            "id": "345345",
             "items": Array [
               Object {
                 "itemDesc": "itemDesc",
@@ -447,7 +449,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         Array [
           Object {
             "expirationDate": "10/3/2022",
-            "id": 123456,
+            "id": "123456",
             "items": Array [
               Object {
                 "itemDesc": "itemDesc",
@@ -460,7 +462,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           },
           Object {
             "expirationDate": "10/3/2022",
-            "id": 345345,
+            "id": "345345",
             "items": Array [
               Object {
                 "itemDesc": "itemDesc",
@@ -664,7 +666,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         Array [
           Object {
             "expirationDate": "10/3/2022",
-            "id": 123456,
+            "id": "123456",
             "items": Array [
               Object {
                 "itemDesc": "itemDesc",
@@ -677,7 +679,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           },
           Object {
             "expirationDate": "10/3/2022",
-            "id": 345345,
+            "id": "345345",
             "items": Array [
               Object {
                 "itemDesc": "itemDesc",

@@ -1,38 +1,115 @@
-import React, { useState } from 'react';
+import React, {
+  Dispatch,
+  EffectCallback,
+  useEffect,
+  useState
+} from 'react';
 import {
   Pressable,
   SafeAreaView,
   Text,
   View
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Picker } from '@react-native-picker/picker';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
 import Button from '../../components/buttons/Button';
-import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
 import { strings } from '../../locales';
 import styles from './CreatePick.style';
 import { UseStateType } from '../../models/Generics.d';
+import { PickCreateItem } from '../../models/Picking.d';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { setupScreen } from '../../state/actions/ItemDetailScreen';
+import { AsyncState } from '../../models/AsyncState';
+import { setPickCreateFloor, setPickCreateReserve } from '../../state/actions/Picking';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
 
 export const MOVE_TO_FRONT = 'moveToFront';
 export const PALLET_MIN = 1;
 export const PALLET_MAX = 99;
 
 interface CreatePickProps {
-  item: ItemDetails;
+  item: PickCreateItem;
+  floorLocations: Location[];
+  reserveLocations: Location[];
   selectedSectionState: UseStateType<string>;
   palletNumberState: UseStateType<number>;
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
+  getLocationApi: AsyncState;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
+
+export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispatch<any>, isFocused: boolean) => {
+  const { isWaiting, result, error } = getLocationApi;
+  if (isFocused) {
+    // API success
+    if (!isWaiting && result) {
+      dispatch(setPickCreateFloor(result.data.location.floor || []));
+      dispatch(setPickCreateReserve(result.data.location.reserve || []));
+      dispatch(hideActivityModal());
+      dispatch({ type: GET_LOCATION_DETAILS.RESET });
+      Toast.show({
+        type: 'success',
+        text1: strings('PICKING.LOCATIONS_UPDATED'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+    // API failure
+    if (!isWaiting && error) {
+      dispatch(hideActivityModal());
+      dispatch({ type: GET_LOCATION_DETAILS.RESET });
+      Toast.show({
+        type: 'error',
+        text1: strings('PICKING.LOCATIONS_FAILED_UPDATE'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+    // API waiting
+    if (isWaiting) {
+      dispatch(showActivityModal());
+    }
+  }
+};
+
+export const addLocationHandler = (
+  item: PickCreateItem,
+  floorLocations: Location[],
+  reserveLocations: Location[],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+) => {
+  dispatch(setupScreen(
+    item ? item.itemNbr : 0,
+    item ? item.upcNbr : '',
+    floorLocations,
+    reserveLocations,
+    null,
+    -999,
+    false,
+    false
+  ));
+  navigation.navigate('AddLocation');
+};
 
 export const CreatePickScreen = (props: CreatePickProps) => {
   const {
-    item, selectedSectionState, palletNumberState
+    item, floorLocations, reserveLocations, selectedSectionState,
+    palletNumberState, dispatch, navigation, getLocationApi, useEffectHook
   } = props;
 
   const [selectedSection, setSelectedSection] = selectedSectionState;
   const [palletNumber, setPalletNumber] = palletNumberState;
+
+  useEffectHook(() => getLocationsApiHook(getLocationApi, dispatch, navigation.isFocused()), [getLocationApi]);
 
   const pickerLocations = (locations: Location[]) => {
     const pickerItems = [
@@ -78,7 +155,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
     numberOfPallets >= PALLET_MIN && numberOfPallets <= PALLET_MAX
   );
 
-  const disableCreateButton = () => !selectedSection || !item.location.reserve;
+  const disableCreateButton = () => !selectedSection || !reserveLocations.length;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -96,13 +173,16 @@ export const CreatePickScreen = (props: CreatePickProps) => {
         <View style={styles.pickParamLine}>
           <MaterialCommunityIcons name="map-marker-outline" size={40} />
           <Text>{strings('ITEM.LOCATION')}</Text>
-          <Pressable onPress={() => {}} style={styles.pickLocationAddButton}>
+          <Pressable
+            onPress={() => addLocationHandler(item, floorLocations, reserveLocations, dispatch, navigation)}
+            style={styles.pickLocationAddButton}
+          >
             <Text style={styles.pickLocationAddText}>{strings('GENERICS.ADD')}</Text>
           </Pressable>
         </View>
         <View style={styles.pickParamLine}>
           <Text>{strings('PICKING.RESERVE_LOC')}</Text>
-          <Text>{item.location.reserve && item.location.reserve[0].locationName}</Text>
+          <Text>{reserveLocations.length > 0 && reserveLocations[0].locationName}</Text>
         </View>
         <View style={styles.pickParamLine}>
           <Text>{strings('PICKING.FLOOR_LOC')}</Text>
@@ -113,7 +193,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
               mode="dropdown"
               testID="sectionPicker"
             >
-              {pickerLocations(item.location.floor || [])}
+              {pickerLocations(floorLocations || [])}
             </Picker>
           </View>
         </View>
@@ -140,91 +220,26 @@ export const CreatePickScreen = (props: CreatePickProps) => {
 };
 
 const CreatePick = () => {
-  const palletNumberState = useState(1);
-
-  const mockLocations: Location[] = [
-    {
-      aisleId: 2,
-      aisleName: '1',
-      locationName: 'ABAR1-1',
-      sectionId: 3,
-      sectionName: '1',
-      type: 'floor',
-      typeNbr: 2,
-      zoneId: 1,
-      zoneName: 'ABAR'
-    },
-    {
-      aisleId: 2,
-      aisleName: '2',
-      locationName: 'ABAR1-2',
-      sectionId: 4,
-      sectionName: '2',
-      type: 'floor',
-      typeNbr: 2,
-      zoneId: 1,
-      zoneName: 'ABAR'
-    }
-  ];
-
-  // May need to use api call results as not all item details are stored in item details redux
-  const mockItem: ItemDetails = {
-    categoryNbr: 73,
-    itemName: 'treacle tart',
-    itemNbr: 2,
-    upcNbr: '8675309',
-    backroomQty: 765432,
-    basePrice: 4.92,
-    categoryDesc: 'Deli',
-    claimsOnHandQty: 765457,
-    completed: false,
-    consolidatedOnHandQty: 65346,
-    location: {
-      reserve: [
-        {
-          aisleId: 5018,
-          aisleName: '1',
-          locationName: 'ABAR1-1',
-          sectionId: 5019,
-          sectionName: '1',
-          type: 'reserve',
-          typeNbr: 1,
-          zoneId: 3632,
-          zoneName: 'ABAR'
-        }
-      ],
-      count: 1,
-      floor: mockLocations
-    },
-    onHandsQty: 76543234,
-    pendingOnHandsQty: 2984328947,
-    price: 4.92,
-    replenishment: {
-      onOrder: 100000
-    },
-    sales: {
-      daily: [{
-        day: 'Thursday',
-        value: 3
-      }],
-      dailyAvgSales: 500,
-      lastUpdateTs: 'right now',
-      weekly: [{
-        week: 34,
-        value: 654
-      }],
-      weeklyAvgSales: 3500
-    }
-  };
-
-  const floorLocations = mockItem.location.floor;
+  const item = useTypedSelector(state => state.Picking.pickCreateItem);
+  const floorLocations = useTypedSelector(state => state.Picking.pickCreateFloorLocations);
+  const reserveLocations = useTypedSelector(state => state.Picking.pickCreateReserveLocations);
+  const getLocationsApi = useTypedSelector(state => state.async.getLocation);
   const selectedSectionState = useState(floorLocations && floorLocations.length ? floorLocations[0].locationName : '');
+  const palletNumberState = useState(1);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   return (
     <CreatePickScreen
-      item={mockItem}
+      item={item}
+      floorLocations={floorLocations}
+      reserveLocations={reserveLocations}
       selectedSectionState={selectedSectionState}
       palletNumberState={palletNumberState}
+      dispatch={dispatch}
+      navigation={navigation}
+      getLocationApi={getLocationsApi}
+      useEffectHook={useEffect}
     />
   );
 };

@@ -34,7 +34,7 @@ import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 interface CombinePalletsProps {
   combinePallets: CombinePallet[];
-  palletId: number;
+  palletId: string;
   palletItems: PalletItem[];
   isManualScanEnabled: boolean;
   navigation: NavigationProp<any>;
@@ -92,7 +92,7 @@ export const getPalletInfoApiEffect = (
 
 export const combinePalletsApiEffect = (
   combinePalletsApi: AsyncState,
-  palletId: number,
+  palletId: string,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>
 ): void => {
@@ -144,8 +144,8 @@ export const CombinePalletsScreen = (
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
-          const alreadyScanned = palletId.toString() === scan.value
-             || combinePallets.some(pallet => pallet.palletId.toString() === scan.value);
+          const alreadyScanned = palletId === scan.value
+             || combinePallets.some(pallet => pallet.palletId === scan.value);
           trackEvent('combine_pallet_scanned', {
             barcode: scan.value,
             type: scan.type,
@@ -155,7 +155,7 @@ export const CombinePalletsScreen = (
             Toast.show({
               type: 'error',
               position: 'bottom',
-              text1: strings(palletId.toString() === scan.value
+              text1: strings(palletId === scan.value
                 ? 'PALLET.PALLET_EXISTS_AS_TARGET'
                 : 'PALLET.PALLET_EXISTS'),
               visibilityTime: SNACKBAR_TIMEOUT
@@ -241,7 +241,7 @@ export const CombinePalletsScreen = (
             onPress={() => dispatch(combinePalletsSaga({
               targetPallet: palletId,
               combinePallets: combinePallets.reduce(
-                (prevVal: number[], currVal) => prevVal.concat(currVal.palletId), []
+                (prevVal: string[], currVal) => prevVal.concat(currVal.palletId), []
               )
             }))}
             disabled={combinePallets.length === 0}

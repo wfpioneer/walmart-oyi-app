@@ -15,7 +15,7 @@ describe('Pick pallet info card render tests', () => {
       itemDesc: 'Lucas gusano',
       itemNbr: 54321,
       moveToFront: true,
-      palletId: 3,
+      palletId: '3',
       palletLocationId: 2346,
       palletLocationName: 'ABAR1-1',
       quickPick: true,
@@ -33,7 +33,7 @@ describe('Pick pallet info card render tests', () => {
       itemDesc: 'Duvalín Bi Sabor',
       itemNbr: 12345,
       moveToFront: true,
-      palletId: 4,
+      palletId: '4',
       palletLocationId: 2345,
       palletLocationName: 'ABAR1-2',
       quickPick: false,
@@ -50,7 +50,7 @@ describe('Pick pallet info card render tests', () => {
       renderer.render(
         <PickPalletInfoCard
           onPress={jest.fn()}
-          palletId={2}
+          palletId="2"
           palletLocation="ABAR1-1"
           pickListItems={[]}
           pickStatus={status}
@@ -67,7 +67,7 @@ describe('Pick pallet info card render tests', () => {
     renderer.render(
       <PickPalletInfoCard
         onPress={jest.fn()}
-        palletId={2}
+        palletId="2"
         palletLocation="ABAR1-1"
         pickListItems={mockPickListItems}
         pickStatus={PickStatus.READY_TO_PICK}
@@ -82,7 +82,7 @@ describe('Pick pallet info card render tests', () => {
     const { getByTestId } = render(
       <PickPalletInfoCard
         onPress={mockPressPallet}
-        palletId={3}
+        palletId="3"
         palletLocation="ABAR1-1"
         pickListItems={[]}
         pickStatus={PickStatus.COMPLETE}

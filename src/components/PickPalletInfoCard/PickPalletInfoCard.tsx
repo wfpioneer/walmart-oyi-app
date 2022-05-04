@@ -8,7 +8,7 @@ import PickItemInfo from '../PickItemInfoCard/PickItemInfoCard';
 import styles from './PickPalletInfoCard.style';
 
 interface PickPalletInfoProps {
-  palletId: number;
+  palletId: string;
   pickListItems: PickListItem[];
   onPress: () => void;
   pickStatus: PickStatus;

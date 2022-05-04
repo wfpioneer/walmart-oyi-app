@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-shadow
+/* eslint-disable no-shadow */
 export enum PickStatus {
   READY_TO_PICK = 'ready to pick',
   ACCEPTED_PICK = 'accepted pick',
@@ -10,7 +10,6 @@ export enum PickStatus {
   NO_PALLETS_FOUND = 'no pallets found'
 }
 
-// eslint-disable-next-line no-shadow
 export enum PickAction {
   ACCEPT_PICK = 'acceptPick',
   RELEASE = 'release',
@@ -32,7 +31,7 @@ export interface PickListItem {
   salesFloorLocationName: string;
   moveToFront: boolean;
   assignedAssociate: string;
-  palletId: number;
+  palletId: string;
   palletLocationId: number
   palletLocationName: string;
   status: PickStatus;
@@ -40,4 +39,20 @@ export interface PickListItem {
   createTS: string;
   quantityLeft?: number;
   newQuantityLeft?: number;
+}
+
+export interface PickCreateItem {
+  itemName: string;
+  itemNbr: number;
+  upcNbr: string;
+  status?: string;
+  categoryNbr: number;
+  categoryDesc: string;
+  price: number;
+}
+
+export enum Tabs {
+  QUICKPICK = 'QuickPick',
+  PICK = 'Pick',
+  SALESFLOOR = 'SalesFloor'
 }

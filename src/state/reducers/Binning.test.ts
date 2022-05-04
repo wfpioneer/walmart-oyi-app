@@ -11,7 +11,7 @@ import { BinningPallet } from '../../models/Binning';
 describe('testing binning reducer', () => {
   it('testing binning reducer', () => {
     const testPallet: BinningPallet = {
-      id: 1,
+      id: '1',
       expirationDate: '03/22/2022',
       items: [{
         itemNbr: 123456789,
@@ -49,7 +49,7 @@ describe('testing binning reducer', () => {
     testResults = Binning(testInitialState, clearPallets());
     expect(testResults).toStrictEqual(testChangedState);
 
-    testResults = Binning(testInitialState, deletePallet(1));
+    testResults = Binning(testInitialState, deletePallet('1'));
     expect(testResults).toStrictEqual(testChangedState);
 
     testInitialState.pallets = [];

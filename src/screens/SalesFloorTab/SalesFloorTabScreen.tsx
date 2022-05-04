@@ -3,9 +3,8 @@ import { FlatList, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import ListGroup from '../../components/ListGroup/ListGroup';
-import { PickListItem } from '../../models/Picking.d';
+import { PickListItem, Tabs } from '../../models/Picking.d';
 import { strings } from '../../locales';
-import { Tabs } from '../../navigators/PickingNavigator';
 
 interface SalesFloorTabProps {
   readyToWorklist: PickListItem[];

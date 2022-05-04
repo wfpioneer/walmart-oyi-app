@@ -4,7 +4,7 @@ import { Image, Text } from 'react-native';
 import styles from './BottomSheetBaseCard.style';
 
 interface BaseCardProps {
-  image: { uri: string },
+  image: { uri: string } | undefined,
   text: string,
   onPress: () => void
 }

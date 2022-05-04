@@ -16,7 +16,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
       Array [
         Object {
           "expirationDate": "10/3/2022",
-          "id": 123456,
+          "id": "123456",
           "items": Array [
             Object {
               "itemDesc": "itemDesc",
@@ -29,7 +29,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
         },
         Object {
           "expirationDate": "10/3/2022",
-          "id": 345345,
+          "id": "345345",
           "items": Array [
             Object {
               "itemDesc": "itemDesc",

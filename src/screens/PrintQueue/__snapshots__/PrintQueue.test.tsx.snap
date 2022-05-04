@@ -30,6 +30,17 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
         ]
       }
       queueName="PRICESIGN"
+      selectedPrinter={
+        Object {
+          "desc": "Default",
+          "id": "000000000000",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Front Desk Printer",
+          "type": 0,
+        }
+      }
       setItemIndexToEdit={[MockFunction]}
     />
   </CustomModalComponent>
@@ -469,6 +480,17 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         ]
       }
       queueName="PRICESIGN"
+      selectedPrinter={
+        Object {
+          "desc": "Default",
+          "id": "000000000000",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Front Desk Printer",
+          "type": 0,
+        }
+      }
       setItemIndexToEdit={[MockFunction]}
     />
   </CustomModalComponent>
@@ -1667,6 +1689,17 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
         ]
       }
       queueName="PRICESIGN"
+      selectedPrinter={
+        Object {
+          "desc": "Default",
+          "id": "000000000000",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Front Desk Printer",
+          "type": 0,
+        }
+      }
       setItemIndexToEdit={[MockFunction]}
     />
   </CustomModalComponent>
@@ -1902,6 +1935,17 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
         ]
       }
       queueName="PRICESIGN"
+      selectedPrinter={
+        Object {
+          "desc": "Default",
+          "id": "000000000000",
+          "labelsAvailable": Array [
+            "price",
+          ],
+          "name": "Front Desk Printer",
+          "type": 0,
+        }
+      }
       setItemIndexToEdit={[MockFunction]}
     />
   </CustomModalComponent>

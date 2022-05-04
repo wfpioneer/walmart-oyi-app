@@ -1,4 +1,5 @@
-import { PickListItem, PickStatus } from '../models/Picking.d';
+import { PickCreateItem, PickListItem, PickStatus } from '../models/Picking.d';
+import Location from '../models/Location';
 
 export const mockPickLists: PickListItem[] = [
   {
@@ -10,7 +11,7 @@ export const mockPickLists: PickListItem[] = [
     itemDesc: 'Teapot',
     itemNbr: 734,
     moveToFront: true,
-    palletId: 4321,
+    palletId: '4321',
     palletLocationId: 1672,
     palletLocationName: 'C1-2',
     quickPick: false,
@@ -28,7 +29,7 @@ export const mockPickLists: PickListItem[] = [
     itemDesc: 'Swiffer',
     itemNbr: 845,
     moveToFront: true,
-    palletId: 5432,
+    palletId: '5432',
     palletLocationId: 2345,
     palletLocationName: 'BREW1-2',
     quickPick: false,
@@ -36,5 +37,64 @@ export const mockPickLists: PickListItem[] = [
     salesFloorLocationName: 'BREW1-2',
     status: PickStatus.ACCEPTED_PICK,
     upcNbr: '000052900004'
+  }
+];
+
+export const mockItem: PickCreateItem = {
+  itemName: 'treacle tart',
+  itemNbr: 2,
+  upcNbr: '8675309',
+  categoryNbr: 72,
+  categoryDesc: 'Deli',
+  price: 4.92
+};
+
+export const mockLocations: Location[] = [
+  {
+    aisleId: 2,
+    aisleName: '1',
+    locationName: 'ABAR1-1',
+    sectionId: 3,
+    sectionName: '1',
+    type: 'floor',
+    typeNbr: 2,
+    zoneId: 1,
+    zoneName: 'ABAR'
+  },
+  {
+    aisleId: 2,
+    aisleName: '2',
+    locationName: 'ABAR2-2',
+    sectionId: 4,
+    sectionName: '2',
+    type: 'floor',
+    typeNbr: 2,
+    zoneId: 1,
+    zoneName: 'ABAR'
+  }
+];
+
+export const mockReserveLocations: Location[] = [
+  {
+    aisleId: 2,
+    aisleName: '2',
+    locationName: 'ABAR2-1',
+    sectionId: 3,
+    sectionName: '1',
+    type: 'reserve',
+    typeNbr: 2,
+    zoneId: 1,
+    zoneName: 'ABAR'
+  },
+  {
+    aisleId: 3,
+    aisleName: '2',
+    locationName: 'ABAR2-2',
+    sectionId: 4,
+    sectionName: '2',
+    type: 'reserve',
+    typeNbr: 2,
+    zoneId: 1,
+    zoneName: 'ABAR'
   }
 ];

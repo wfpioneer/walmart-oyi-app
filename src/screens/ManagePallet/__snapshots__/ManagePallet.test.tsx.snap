@@ -239,7 +239,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 15,
+        "marginBottom": 20,
       }
     }
   >
@@ -251,7 +251,10 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
       radius={5}
       style={
         Object {
-          "margin": 15,
+          "height": "140%",
+          "marginHorizontal": 20,
+          "marginVertical": 10,
+          "paddingBottom": 20,
         }
       }
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
@@ -504,7 +507,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 15,
+        "marginBottom": 20,
       }
     }
   >
@@ -516,7 +519,10 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       radius={5}
       style={
         Object {
-          "margin": 15,
+          "height": "140%",
+          "marginHorizontal": 20,
+          "marginVertical": 10,
+          "paddingBottom": 20,
         }
       }
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
@@ -769,7 +775,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 15,
+        "marginBottom": 20,
       }
     }
   >
@@ -781,7 +787,10 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       radius={5}
       style={
         Object {
-          "margin": 15,
+          "height": "140%",
+          "marginHorizontal": 20,
+          "marginVertical": 10,
+          "paddingBottom": 20,
         }
       }
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
@@ -1034,7 +1043,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 15,
+        "marginBottom": 20,
       }
     }
   >
@@ -1046,7 +1055,10 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       radius={5}
       style={
         Object {
-          "margin": 15,
+          "height": "140%",
+          "marginHorizontal": 20,
+          "marginVertical": 10,
+          "paddingBottom": 20,
         }
       }
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
@@ -1299,7 +1311,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 15,
+        "marginBottom": 20,
       }
     }
   >
@@ -1311,7 +1323,10 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       radius={5}
       style={
         Object {
-          "margin": 15,
+          "height": "140%",
+          "marginHorizontal": 20,
+          "marginVertical": 10,
+          "paddingBottom": 20,
         }
       }
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
@@ -1564,7 +1579,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
     style={
       Object {
         "flex": 0.1,
-        "marginBottom": 15,
+        "marginBottom": 20,
       }
     }
   >
@@ -1576,7 +1591,10 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       radius={5}
       style={
         Object {
-          "margin": 15,
+          "height": "140%",
+          "marginHorizontal": 20,
+          "marginVertical": 10,
+          "paddingBottom": 20,
         }
       }
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
