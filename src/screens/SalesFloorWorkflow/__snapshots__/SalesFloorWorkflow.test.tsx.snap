@@ -399,7 +399,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
   </CustomModalComponent>
   <PickPalletInfoCard
     onPress={[Function]}
-    palletId={43}
+    palletId="43"
     palletLocation="ABAR1-2"
     pickListItems={Array []}
     pickStatus="ready to work"
@@ -435,7 +435,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
           "itemDesc": "generic description",
           "itemNbr": 1,
           "moveToFront": false,
-          "palletId": 43,
+          "palletId": "43",
           "palletLocationId": 4,
           "palletLocationName": "ABAR1-2",
           "quickPick": false,
@@ -472,7 +472,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
   >
     <Button
       backgroundColor="#0071e9"
-      disabled={false}
+      disabled={true}
       height={45}
       onPress={[Function]}
       radius={5}
@@ -633,14 +633,14 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
   <Picker
     display="spinner"
     is24Hour={true}
-    minimumDate={2022-05-04T19:19:13.015Z}
+    minimumDate={2022-05-04T22:01:40.307Z}
     mode="date"
     onChange={[Function]}
-    value={2022-05-04T19:19:13.015Z}
+    value={2022-05-04T22:01:40.307Z}
   />
   <PickPalletInfoCard
     onPress={[Function]}
-    palletId={43}
+    palletId="43"
     palletLocation="ABAR1-2"
     pickListItems={Array []}
     pickStatus="ready to work"
@@ -676,7 +676,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
           "itemDesc": "generic description",
           "itemNbr": 1,
           "moveToFront": false,
-          "palletId": 43,
+          "palletId": "43",
           "palletLocationId": 4,
           "palletLocationName": "ABAR1-2",
           "quickPick": false,
@@ -713,7 +713,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
   >
     <Button
       backgroundColor="#0071e9"
-      disabled={false}
+      disabled={true}
       height={45}
       onPress={[Function]}
       radius={5}

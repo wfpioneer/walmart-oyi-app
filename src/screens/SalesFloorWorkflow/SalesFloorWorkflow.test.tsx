@@ -2,7 +2,7 @@ import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { DELETE_UPCS, UPDATE_PALLET_ITEM_QTY } from '../../state/actions/saga';
+import { DELETE_UPCS, UPDATE_PALLET_ITEM_QTY, UPDATE_PICKLIST_STATUS } from '../../state/actions/saga';
 import { strings } from '../../locales';
 import { mockItem } from '../../mockData/mockPickList';
 import { AsyncState } from '../../models/AsyncState';
@@ -19,6 +19,7 @@ import {
   ExpiryPromptShow,
   SalesFloorWorkflowScreen,
   activityIndicatorEffect,
+  binApisEffect,
   binServiceCall,
   palletConfigApiEffect,
   palletDetailsApiEffect,
@@ -496,6 +497,37 @@ describe('Sales floor workflow tests', () => {
       expect(setConfigComplete).toBeCalledTimes(1);
     });
 
+    it('tests the bin apis effect', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {}
+      };
+      const failApi: AsyncState = {
+        ...defaultAsyncState,
+        error: {}
+      };
+
+      // success
+      binApisEffect(successApi, successApi, navigationProp, mockDispatch, mockSelectedItems);
+      expect(mockDispatch).toBeCalledTimes(3);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PICKLIST_STATUS }));
+      expect(Toast.show).not.toBeCalled();
+      jest.clearAllMocks();
+
+      // partial failure
+      binApisEffect(successApi, failApi, navigationProp, mockDispatch, mockSelectedItems);
+      expect(mockDispatch).not.toBeCalled();
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(expect.objectContaining({ text1: strings('PALLET.SAVE_PALLET_PARTIAL') }));
+      jest.clearAllMocks();
+
+      // complete failure
+      binApisEffect(failApi, failApi, navigationProp, mockDispatch, mockSelectedItems);
+      expect(mockDispatch).not.toBeCalled();
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(expect.objectContaining({ text1: strings('PALLET.SAVE_PALLET_FAILURE') }));
+    });
+
     it('tests the activity indicator hook', () => {
       const waitingState: AsyncState = {
         ...defaultAsyncState,
@@ -512,7 +544,6 @@ describe('Sales floor workflow tests', () => {
       activityIndicatorEffect(waitingState, defaultAsyncState, false, navigationProp, mockDispatch);
       expect(mockIsFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledWith({ type: SHOW_ACTIVITY_MODAL });
 
       jest.clearAllMocks();
       // second api joins
@@ -531,7 +562,6 @@ describe('Sales floor workflow tests', () => {
       activityIndicatorEffect(defaultAsyncState, defaultAsyncState, true, navigationProp, mockDispatch);
       expect(mockIsFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledWith({ type: HIDE_ACTIVITY_MODAL });
     });
 
     it('tests shouldUpdateQuantity', () => {

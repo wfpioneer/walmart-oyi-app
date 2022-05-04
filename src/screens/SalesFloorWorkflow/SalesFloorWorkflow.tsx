@@ -26,10 +26,17 @@ import {
   deleteUpcs, getPalletConfig, getPalletDetails, updatePalletItemQty, updatePicklistStatus
 } from '../../state/actions/saga';
 import COLOR from '../../themes/Color';
-import { GET_PALLET_CONFIG, GET_PALLET_DETAILS, UPDATE_PICKLIST_STATUS } from '../../state/actions/asyncAPI';
+import {
+  DELETE_UPCS,
+  GET_PALLET_CONFIG,
+  GET_PALLET_DETAILS,
+  UPDATE_PALLET_ITEM_QTY,
+  UPDATE_PICKLIST_STATUS
+} from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import { setPerishableCategories } from '../../state/actions/PalletManagement';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 // eslint-disable-next-line no-shadow
 export enum ExpiryPromptShow {
@@ -191,6 +198,49 @@ export const palletConfigApiEffect = (
   }
 };
 
+export const binApisEffect = (
+  updateQuantitiesApi: AsyncState,
+  deleteItemsApi: AsyncState,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+  selectedPicks: PickListItem[]
+) => {
+  if (navigation.isFocused() && !updateQuantitiesApi.isWaiting && !deleteItemsApi.isWaiting) {
+    if (updateQuantitiesApi.result && deleteItemsApi.result) {
+      const selectedPickItems = selectedPicks.map(pick => ({
+        picklistId: pick.id,
+        locationId: pick.palletLocationId,
+        locationName: pick.palletLocationName
+      }));
+      dispatch(updatePicklistStatus({
+        headers: { action: PickAction.READY_TO_BIN },
+        palletId: selectedPicks[0].palletId,
+        picklistItems: selectedPickItems
+      }));
+      dispatch({ type: UPDATE_PALLET_ITEM_QTY.RESET });
+      dispatch({ type: DELETE_UPCS.RESET });
+    }
+
+    if (updateQuantitiesApi.error || deleteItemsApi.error) {
+      if (updateQuantitiesApi.error && deleteItemsApi.error) {
+        Toast.show({
+          type: 'error',
+          position: 'bottom',
+          text1: strings('PALLET.SAVE_PALLET_FAILURE'),
+          visibilityTime: SNACKBAR_TIMEOUT
+        });
+      } else {
+        Toast.show({
+          type: 'error',
+          position: 'bottom',
+          text1: strings('PALLET.SAVE_PALLET_PARTIAL'),
+          visibilityTime: SNACKBAR_TIMEOUT
+        });
+      }
+    }
+  }
+};
+
 export const shouldUpdateQty = (item: PickListItem): boolean => !!(
   typeof item.quantityLeft === 'number'
     && typeof item.newQuantityLeft === 'number'
@@ -266,13 +316,6 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const assigned = selectedPicks[0].assignedAssociate;
   const { palletId } = selectedPicks[0];
 
-  useEffectHook(() => updatePicklistStatusApiEffect(
-    updatePicklistStatusApi,
-    selectedPicks,
-    dispatch,
-    navigation,
-  ), [updatePicklistStatusApi]);
-
   useEffectHook(() => navigation.addListener('focus', () => {
     if (perishableCategories.length) {
       dispatch(getPalletDetails({ palletIds: [selectedPicks[0].palletId], isAllItems: true }));
@@ -286,6 +329,21 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
       dispatch(getPalletDetails({ palletIds: [selectedPicks[0].palletId], isAllItems: true }));
     }
   }, [configComplete]);
+
+  useEffectHook(() => activityIndicatorEffect(
+    updatePalletItemsApi,
+    deletePalletItemsApi,
+    showActivity,
+    navigation,
+    dispatch
+  ), [showActivity, updatePalletItemsApi, deletePalletItemsApi]);
+
+  useEffectHook(() => updatePicklistStatusApiEffect(
+    updatePicklistStatusApi,
+    selectedPicks,
+    dispatch,
+    navigation,
+  ), [updatePicklistStatusApi]);
 
   // GetPalletConfig API
   useEffectHook(() => {
@@ -303,13 +361,13 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     perishableCategories
   ), [palletDetailsApi]);
 
-  useEffectHook(() => activityIndicatorEffect(
+  useEffectHook(() => binApisEffect(
     updatePalletItemsApi,
     deletePalletItemsApi,
-    showActivity,
     navigation,
-    dispatch
-  ), [showActivity, updatePalletItemsApi, deletePalletItemsApi]);
+    dispatch,
+    selectedPicks
+  ), [updatePalletItemsApi, deletePalletItemsApi]);
 
   const handleBin = (newExpirationDate?: string) => {
     const toUpdateItems: PickListItem[] = [];
@@ -527,7 +585,6 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
 const SalesFloorWorkflow = () => {
   const pickingState = useTypedSelector(state => state.Picking);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
-
   const palletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const palletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
   const updatePalletItemsApi = useTypedSelector(state => state.async.updatePalletItemQty);
