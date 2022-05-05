@@ -3,12 +3,15 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
 import { fireEvent, render } from '@testing-library/react-native';
 import Toast from 'react-native-toast-message';
-import { PickAction, PickListItem, PickStatus } from '../../models/Picking.d';
+import {
+  PickAction, PickListItem, PickStatus, Tabs
+} from '../../models/Picking.d';
 import { PickingState } from '../../state/reducers/Picking';
 import { ContinueActionDialog, PickBinWorkflowScreen, updatePicklistStatusApiHook } from './PickBinWorkflowScreen';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { strings } from '../../locales';
+import { mockItem } from '../../mockData/mockPickList';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -24,7 +27,7 @@ const basePickItem: PickListItem = {
   itemDesc: 'generic description',
   itemNbr: 1,
   moveToFront: false,
-  palletId: 43,
+  palletId: '43',
   palletLocationId: 4,
   palletLocationName: 'ABAR1-2',
   quickPick: false,
@@ -54,7 +57,13 @@ const navigationProp: NavigationProp<any> = {
   setParams: jest.fn(),
   navigate: jest.fn()
 };
-
+const pickStateMissingProps = {
+  selectedPicks: [0],
+  pickCreateItem: mockItem,
+  pickCreateFloorLocations: [],
+  pickCreateReserveLocations: [],
+  selectedTab: Tabs.QUICKPICK
+};
 const pickingState: PickingState = {
   pickList: [
     {
@@ -67,25 +76,25 @@ const pickingState: PickingState = {
       assignedAssociate: 't0s0og',
       status: PickStatus.ACCEPTED_PICK,
       id: 1,
-      palletId: 40
+      palletId: '40'
     },
     {
       ...basePickItem,
       status: PickStatus.READY_TO_PICK,
       id: 2,
-      palletId: 41
+      palletId: '41'
     },
     {
       ...basePickItem,
       id: 3,
       status: PickStatus.READY_TO_BIN,
-      palletId: 42
+      palletId: '42'
     },
     {
       ...basePickItem,
       id: 4,
       status: PickStatus.READY_TO_BIN,
-      palletId: 42
+      palletId: '42'
     },
     {
       ...basePickItem,
@@ -93,20 +102,20 @@ const pickingState: PickingState = {
       id: 5,
       status: PickStatus.ACCEPTED_PICK,
       quickPick: true,
-      palletId: 44
+      palletId: '44'
     },
     {
       ...basePickItem,
       assignedAssociate: 'vn50pz4',
       id: 6,
       status: PickStatus.ACCEPTED_BIN,
-      palletId: 45,
+      palletId: '45',
       palletLocationId: 5,
       palletLocationName: 'ABAR1-4',
       quickPick: true
     }
   ],
-  selectedPicks: []
+  ...pickStateMissingProps
 };
 
 describe('PickBin Workflow render tests', () => {
@@ -339,10 +348,10 @@ describe('PickBin Workflow render tests', () => {
           assignedAssociate: 't0s0og',
           status: PickStatus.ACCEPTED_PICK,
           id: 1,
-          palletId: 40
+          palletId: '40'
         }
       ],
-      selectedPicks: [0]
+      ...pickStateMissingProps
     };
     const mockDispatch = jest.fn();
     const setSelectedPicklistAction = jest.fn();
@@ -382,10 +391,10 @@ describe('PickBin Workflow render tests', () => {
           assignedAssociate: 't0s0og',
           status: PickStatus.ACCEPTED_PICK,
           id: 1,
-          palletId: 40
+          palletId: '40'
         }
       ],
-      selectedPicks: [0]
+      ...pickStateMissingProps
     };
     const mockDispatch = jest.fn();
     const setSelectedPicklistAction = jest.fn();
@@ -425,10 +434,10 @@ describe('PickBin Workflow render tests', () => {
           assignedAssociate: 't0s0og',
           status: PickStatus.ACCEPTED_BIN,
           id: 1,
-          palletId: 40
+          palletId: '40'
         }
       ],
-      selectedPicks: [0]
+      ...pickStateMissingProps
     };
     const mockDispatch = jest.fn();
     const setSelectedPicklistAction = jest.fn();
@@ -460,12 +469,12 @@ describe('PickBin Workflow render tests', () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
-    const mockSelectedItems = [
+    const mockSelectedItems: PickListItem[] = [
       {
         ...basePickItem,
         status: PickStatus.ACCEPTED_BIN,
         id: 2,
-        palletId: 41
+        palletId: '41'
       }
     ];
     it('renders dialog with different coninue actions for the selected picks', () => {
@@ -536,12 +545,12 @@ describe('PickBin Workflow render tests', () => {
       jest.clearAllMocks();
     });
 
-    const mockSelectedItems = [
+    const mockSelectedItems: PickListItem[] = [
       {
         ...basePickItem,
         status: PickStatus.ACCEPTED_BIN,
         id: 2,
-        palletId: 41
+        palletId: '41'
       }
     ];
 

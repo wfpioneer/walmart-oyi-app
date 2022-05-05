@@ -34,15 +34,15 @@ export const mockLocationDetails : LocationItem = {
   pallets: {
     palletData: [
       {
-        palletId: 1,
+        palletId: '1',
         palletCreateTS: '2021-01-01'
       },
       {
-        palletId: 123,
+        palletId: '123',
         palletCreateTS: '2021-01-10'
       },
       {
-        palletId: 456,
+        palletId: '456',
         palletCreateTS: '1999-10-10'
       }
     ]

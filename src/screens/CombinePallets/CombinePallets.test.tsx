@@ -52,7 +52,7 @@ describe('CombinePalletsScreen', () => {
       renderer.render(
         <CombinePalletsScreen
           combinePallets={[]}
-          palletId={1}
+          palletId="1"
           palletItems={mockPalletItems}
           isManualScanEnabled={false}
           useEffectHook={jest.fn()}
@@ -72,18 +72,18 @@ describe('CombinePalletsScreen', () => {
     const renderer = ShallowRenderer.createRenderer();
     const mockCombinePallets: CombinePallet[] = [
       {
-        palletId: 789,
+        palletId: '789',
         itemCount: 7
       },
       {
-        palletId: 902,
+        palletId: '902',
         itemCount: 4
       }
     ];
     renderer.render(
       <CombinePalletsScreen
         combinePallets={mockCombinePallets}
-        palletId={1}
+        palletId="1"
         palletItems={mockPalletItems}
         isManualScanEnabled={false}
         useEffectHook={jest.fn()}
@@ -114,7 +114,7 @@ describe('Combine Pallets externalized function tests', () => {
   it('Tests the combine pallets api effect, on success', () => {
     const successApi: AsyncState = { ...defaultAsyncState, result: {} };
 
-    combinePalletsApiEffect(successApi, 12, navigationProp, mockDispatch);
+    combinePalletsApiEffect(successApi, '12', navigationProp, mockDispatch);
     expect(mockDispatch).toBeCalledTimes(2);
     expect(mockGoBack).toBeCalledTimes(1);
     expect(Toast.show).toBeCalledTimes(1);
@@ -123,7 +123,7 @@ describe('Combine Pallets externalized function tests', () => {
   it('Tests the combine pallets api effect, on fail', () => {
     const failApi: AsyncState = { ...defaultAsyncState, error: {} };
 
-    combinePalletsApiEffect(failApi, 12, navigationProp, mockDispatch);
+    combinePalletsApiEffect(failApi, '12', navigationProp, mockDispatch);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(mockGoBack).toBeCalledTimes(0);
     expect(Toast.show).toBeCalledTimes(1);

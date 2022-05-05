@@ -25,7 +25,7 @@ interface ReserveSectionDetailsProps {
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
-  palletIds: number[];
+  palletIds: string[];
 }
 // Combines the Reserve Response data from the get pallet/sectionDetails api to display creation date.
 export const combineReserveArrays = (
@@ -34,7 +34,7 @@ export const combineReserveArrays = (
   let palletDetails: ReserveDetailsPallet[] = [];
   if (reserveDetails && palletData) {
     palletDetails = reserveDetails.map(pallet => {
-      const sectionReserve = palletData.find(loc => loc.palletId === pallet.id);
+      const sectionReserve = palletData.find(loc => loc.palletId === pallet.id.toString());
       return { ...pallet, ...sectionReserve };
     });
   }

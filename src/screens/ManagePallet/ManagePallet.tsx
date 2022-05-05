@@ -214,7 +214,7 @@ export const handleUpdateItems = (
 };
 
 export const handleAddItems = (
-  id: number,
+  id: string,
   items: PalletItem[],
   dispatch: Dispatch<any>,
   expirationDate?: string
@@ -399,7 +399,7 @@ export const updatePalletApisHook = (
 
 export const clearPalletApiHook = (
   clearPalletApi: AsyncState,
-  palletId: number,
+  palletId: string,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>,

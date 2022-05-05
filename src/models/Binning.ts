@@ -6,7 +6,7 @@ export interface BinningItem {
   quantity?: number;
 }
 export interface BinningPallet {
-  id: number;
+  id: string;
   expirationDate?: string;
   lastLocation?: string;
   createDate?: string;

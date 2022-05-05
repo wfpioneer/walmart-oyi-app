@@ -11,7 +11,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
 >
   <PickPalletInfoCard
     onPress={[Function]}
-    palletId={43}
+    palletId="43"
     palletLocation="ABAR1-2"
     pickListItems={Array []}
     pickStatus="ready to work"
@@ -47,7 +47,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
           "itemDesc": "generic description",
           "itemNbr": 1,
           "moveToFront": false,
-          "palletId": 43,
+          "palletId": "43",
           "palletLocationId": 4,
           "palletLocationName": "ABAR1-2",
           "quickPick": false,

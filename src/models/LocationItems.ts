@@ -24,7 +24,7 @@ export interface SectionDetailsItem {
 }
 
 export interface SectionDetailsPallet {
-  palletId: number;
+  palletId: string;
   palletCreateTS: string;
   items?: Omit<SectionDetailsItem, 'price'>[];
 }
@@ -35,6 +35,8 @@ export interface ReserveDetailsPallet{
   expirationDate: string;
   items: SectionDetailsItem[];
   statusCode: number;
+  palletCreateTS: string;
+  palletId: string;
 }
 
 export interface LocationItem {

@@ -46,7 +46,7 @@ export interface BinningScreenProps {
   isManualScanEnabled: boolean;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   getPalletApi: AsyncState;
-  scannedEvent: { value: any; type: string };
+  scannedEvent: { value: any; type: string | null};
   isMounted: MutableRefObject<boolean>;
   palletClicked: boolean;
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
@@ -57,7 +57,7 @@ export interface BinningScreenProps {
 }
 
 export const navigateToPalletManagement = (
-  palletId: number,
+  palletId: string,
   dispatch: Dispatch<any>,
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
@@ -125,7 +125,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     if (isMounted.current) {
       if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
-          const alreadyScannedPallet = scannedPallets.find(item => item.id === parseInt(scannedEvent.value, 10));
+          const alreadyScannedPallet = scannedPallets.find(item => item.id === scannedEvent.value);
           if (alreadyScannedPallet) {
             Toast.show({
               type: 'info',
@@ -136,7 +136,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
           } else {
             trackEvent('pallet_scanned', {
               barcode: scannedEvent.value,
-              type: scannedEvent.type
+              type: scannedEvent.type ?? ''
             });
             dispatch(getPalletInfo({ palletIds: [scannedEvent.value] }));
           }
