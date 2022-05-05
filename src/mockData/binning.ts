@@ -1,5 +1,7 @@
-export const mockPallets = [{
-  id: 123456,
+import { BinningPallet } from '../models/Binning';
+
+export const mockPallets: BinningPallet[] = [{
+  id: '123456',
   expirationDate: '10/3/2022',
   items: [{
     itemDesc: 'itemDesc',
@@ -9,7 +11,7 @@ export const mockPallets = [{
     quantity: 2
   }]
 }, {
-  id: 345345,
+  id: '345345',
   expirationDate: '10/3/2022',
   items: [{
     itemDesc: 'itemDesc',

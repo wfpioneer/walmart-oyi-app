@@ -4,8 +4,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
 import ListGroup, { CollapsibleCard } from './ListGroup';
 import { mockPickLists } from '../../mockData/mockPickList';
-import { PickStatus } from '../../models/Picking.d';
-import { Tabs } from '../../navigators/PickingNavigator';
+import { PickStatus, Tabs } from '../../models/Picking.d';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('@react-navigation/native', () => ({

@@ -1,16 +1,17 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
 import {
-  Image,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { strings } from '../../locales';
+import COLOR from '../../themes/Color';
 import styles from './BinningItemCard.style';
 
 interface Props {
-  palletId: number;
+  palletId: string;
   itemDesc: string;
   lastLocation?: string;
   canDelete?: boolean;
@@ -54,9 +55,7 @@ export const BinningItemCard = (props: Props): JSX.Element => {
         <View>
           <TouchableOpacity style={styles.icon} onPress={() => onDelete && onDelete()}>
             <View>
-              <Image
-                source={require('../../assets/images/trash_can.png')}
-              />
+              <MaterialCommunityIcons name="trash-can" size={40} color={COLOR.TRACKER_GREY} />
             </View>
           </TouchableOpacity>
         </View>

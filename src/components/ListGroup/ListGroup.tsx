@@ -9,10 +9,9 @@ import {
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Dispatch } from 'redux';
 import PickPalletInfoCard from '../PickPalletInfoCard/PickPalletInfoCard';
-import { PickListItem, PickStatus } from '../../models/Picking.d';
+import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
 import styles from './ListGroup.style';
 import COLOR from '../../themes/Color';
-import { Tabs } from '../../navigators/PickingNavigator';
 import { selectPicks } from '../../state/actions/Picking';
 
 interface ListGroupProps {

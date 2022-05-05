@@ -37,73 +37,20 @@ exports[`Picking Navigator Renders and Calls the Manual Scan Button 1`] = `
 </View>
 `;
 
-exports[`Picking Navigator Renders the Pick TabNavigator 1`] = `
-<MaterialTopTabNavigator
-  initialRouteName="Pick"
->
-  <Screen
-    listeners={
-      Object {
-        "focus": [Function],
-      }
-    }
-    name="QuickPick"
-    options={
-      Object {
-        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation] (0)",
-      }
-    }
-  >
-    [Function]
-  </Screen>
-  <Screen
-    listeners={
-      Object {
-        "focus": [Function],
-      }
-    }
-    name="Pick"
-    options={
-      Object {
-        "title": "[missing \\"en.PICKING.PICK\\" translation] (0)",
-      }
-    }
-  >
-    [Function]
-  </Screen>
-  <Screen
-    listeners={
-      Object {
-        "focus": [Function],
-      }
-    }
-    name="SalesFloor"
-    options={
-      Object {
-        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation] (0)",
-      }
-    }
-  >
-    [Function]
-  </Screen>
-</MaterialTopTabNavigator>
-`;
-
 exports[`Picking Navigator Renders the Picking Navigator 1`] = `
 <StackNavigator
   headerMode="float"
   screenOptions={[Function]}
 >
   <Screen
+    component={[Function]}
     name="PickingTabs"
     options={
       Object {
         "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
       }
     }
-  >
-    [Function]
-  </Screen>
+  />
   <Screen
     component={[Function]}
     name="PickBinWorkflow"
@@ -131,6 +78,17 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
       Object {
         "headerRight": [Function],
         "headerTitle": "[missing \\"en.PICKING.CREATE_PICK\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddLocation"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitleAlign": "left",
       }
     }
   />

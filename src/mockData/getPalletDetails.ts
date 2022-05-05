@@ -2,9 +2,10 @@ import { ReserveDetailsPallet } from '../models/LocationItems';
 import { mockLocationDetails } from './locationDetails';
 
 export interface ReservePallet extends ReserveDetailsPallet {
-  palletId: number;
+  palletId: string;
 }
 const CREATION_DATE = '2022-01-05T12:04:50.000Z';
+const PALLETCREATETS = '2022-01-03T14:22:34.000Z';
 const EXPIRATION_DATE = '12/31/2022';
 export const mockPalletDetails: ReserveDetailsPallet[] = [
   {
@@ -27,7 +28,9 @@ export const mockPalletDetails: ReserveDetailsPallet[] = [
         locationType: 8
       }
     ],
-    statusCode: 200
+    statusCode: 200,
+    palletCreateTS: PALLETCREATETS,
+    palletId: '1'
   },
   {
     id: 123,
@@ -42,7 +45,9 @@ export const mockPalletDetails: ReserveDetailsPallet[] = [
         locationType: 8
       }
     ],
-    statusCode: 200
+    statusCode: 200,
+    palletCreateTS: PALLETCREATETS,
+    palletId: '123'
   },
   {
     id: 456,
@@ -57,7 +62,9 @@ export const mockPalletDetails: ReserveDetailsPallet[] = [
         locationType: 8
       }
     ],
-    statusCode: 200
+    statusCode: 200,
+    palletCreateTS: PALLETCREATETS,
+    palletId: '456'
   }
 ];
 

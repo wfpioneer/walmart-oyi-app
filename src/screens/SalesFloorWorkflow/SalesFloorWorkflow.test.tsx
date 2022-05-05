@@ -1,17 +1,20 @@
+import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
+import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { Pallet } from '../../models/PalletManagementTypes';
-import { PickListItem, PickStatus } from '../../models/Picking.d';
+import { strings } from '../../locales';
+import { mockItem } from '../../mockData/mockPickList';
+import { AsyncState } from '../../models/AsyncState';
+import { UseStateType } from '../../models/Generics.d';
+import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { PickingState } from '../../state/reducers/Picking';
-import { SalesFloorWorkflowScreen } from './SalesFloorWorkflow';
+import { SalesFloorWorkflowScreen, palletDetailsApiEffect, updatePicklistStatusApiEffect } from './SalesFloorWorkflow';
 
-const testPallet: Pallet = {
-  items: [],
-  palletInfo: {
-    id: 1,
-    createDate: 'yesterday'
-  }
-};
+jest.mock('../../state/actions/Modal', () => ({
+  showActivityModal: jest.fn(),
+  hideActivityModal: jest.fn()
+}));
 
 const basePickItem: PickListItem = {
   assignedAssociate: '',
@@ -22,7 +25,7 @@ const basePickItem: PickListItem = {
   itemDesc: 'generic description',
   itemNbr: 1,
   moveToFront: false,
-  palletId: 43,
+  palletId: '43',
   palletLocationId: 4,
   palletLocationName: 'ABAR1-2',
   quickPick: false,
@@ -30,6 +33,27 @@ const basePickItem: PickListItem = {
   salesFloorLocationName: 'ABAR1-3',
   status: PickStatus.DELETED,
   upcNbr: '1234567890123'
+};
+const pickStateMissingProps = {
+  selectedPicks: [0],
+  pickCreateItem: mockItem,
+  pickCreateFloorLocations: [],
+  pickCreateReserveLocations: [],
+  selectedTab: Tabs.QUICKPICK
+};
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dangerouslyGetParent: jest.fn(),
+  dangerouslyGetState: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn()
 };
 
 const pickingState: PickingState = {
@@ -39,10 +63,32 @@ const pickingState: PickingState = {
       status: PickStatus.READY_TO_WORK
     }
   ],
-  selectedPicks: [0]
+  ...pickStateMissingProps
 };
 
+const defaultAsyncState: AsyncState = {
+  isWaiting: false,
+  value: null,
+  error: null,
+  result: null
+};
+
+const mockDispatch = jest.fn();
+
+const mockSetExpiration = jest.fn();
+const mockExpirationState: UseStateType<string> = ['', mockSetExpiration];
+
+const mockSetPerishables = jest.fn();
+const mockPerishablesState: UseStateType<Array<number>> = [[], mockSetPerishables];
+
+const mockSetIsReadytoComplete = jest.fn();
+const mockCompletePalletState: UseStateType<boolean> = [false, mockSetIsReadytoComplete];
+
 describe('Sales floor workflow tests', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('renders the screen with one item on pallet', () => {
     const renderer = ShallowRenderer.createRenderer();
 
@@ -50,7 +96,15 @@ describe('Sales floor workflow tests', () => {
       <SalesFloorWorkflowScreen
         dispatch={jest.fn()}
         pickingState={pickingState}
-        palletToWork={testPallet}
+        navigation={navigationProp}
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn()}
+        palletDetailsApi={defaultAsyncState}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
+        completePalletState={mockCompletePalletState}
       />
     );
 
@@ -58,6 +112,62 @@ describe('Sales floor workflow tests', () => {
   });
 
   it('renders the screen with several items on the pallet', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const waitingAsyncState: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+
+    renderer.render(
+      <SalesFloorWorkflowScreen
+        dispatch={jest.fn()}
+        pickingState={pickingState}
+        navigation={navigationProp}
+        updatePicklistStatusApi={defaultAsyncState}
+        palletDetailsApi={waitingAsyncState}
+        useEffectHook={jest.fn()}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
+        completePalletState={mockCompletePalletState}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('shows the retry button when get pallet details errors', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const errorAsyncState: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        status: 418,
+        message: 'Im a teapot'
+      }
+    };
+
+    renderer.render(
+      <SalesFloorWorkflowScreen
+        dispatch={jest.fn()}
+        pickingState={pickingState}
+        navigation={navigationProp}
+        updatePicklistStatusApi={defaultAsyncState}
+        palletDetailsApi={errorAsyncState}
+        useEffectHook={jest.fn()}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
+        completePalletState={mockCompletePalletState}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('shows the activity indicator when waiting for pallet details', () => {
     const renderer = ShallowRenderer.createRenderer();
 
     const multiPicksState: PickingState = {
@@ -69,17 +179,145 @@ describe('Sales floor workflow tests', () => {
           status: PickStatus.READY_TO_WORK
         }
       ],
-      selectedPicks: [0, 1]
+      ...pickStateMissingProps
     };
 
     renderer.render(
       <SalesFloorWorkflowScreen
         dispatch={jest.fn()}
         pickingState={multiPicksState}
-        palletToWork={testPallet}
+        navigation={navigationProp}
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn()}
+        palletDetailsApi={defaultAsyncState}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
+        completePalletState={mockCompletePalletState}
       />
     );
+  });
 
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  describe('Manage SalesFloorWorkflow externalized function tests', () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    const mockSelectedItems: PickListItem[] = [
+      {
+        ...basePickItem,
+        status: PickStatus.COMPLETE,
+        id: 2,
+        palletId: '41'
+      }
+    ];
+    it('tests the get pallet details to get quantities, success', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 200,
+          data: {
+            pallets: [
+              {
+                id: 43,
+                createDate: 'yesterday',
+                expirationDate: 'tomorrows',
+                items: [
+                  {
+                    itemNbr: 2,
+                    itemDesc: 'ye olde yo',
+                    price: 2.99,
+                    upc: '1234567890',
+                    quantity: 6,
+                    categoryNbr: 72
+                  },
+                  {
+                    itemNbr: 1,
+                    itemDesc: 'Zweite Sache',
+                    price: 4.92,
+                    upc: '9876543210',
+                    quantity: 8,
+                    categoryNbr: 34
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      };
+      const selectedPicks: PickListItem[] = [
+        {
+          ...basePickItem,
+          status: PickStatus.READY_TO_WORK
+        },
+        {
+          ...basePickItem,
+          status: PickStatus.READY_TO_WORK,
+          id: 1,
+          itemNbr: 2
+        }
+      ];
+      const perishableCategories: number[] = [72];
+      palletDetailsApiEffect(
+        navigationProp, successApi, selectedPicks,
+        mockDispatch, mockSetExpiration, mockSetPerishables,
+        mockSetIsReadytoComplete, perishableCategories
+      );
+      expect(mockSetPerishables).toBeCalledTimes(1);
+      expect(mockSetPerishables).toBeCalledWith([2]);
+      expect(mockSetExpiration).toBeCalledTimes(1);
+      expect(mockSetExpiration).toBeCalledWith('tomorrows');
+      expect(mockSetIsReadytoComplete).toBeCalledWith(true);
+      expect(mockDispatch).toBeCalledTimes(2);
+    });
+
+    it('Tests updatePicklistStatusApiEffect on 200 success for picklist status update', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 200
+        }
+      };
+      const toastUpdatePicklistSuccess = {
+        type: 'success',
+        text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      updatePicklistStatusApiEffect(successApi, mockSelectedItems, mockDispatch, navigationProp);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+      expect(mockDispatch).toBeCalledTimes(3);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistSuccess);
+    });
+
+    it('Tests updatePicklistStatusApiEffect on failure', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      const toastUpdatePicklistError = {
+        type: 'error',
+        text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      updatePicklistStatusApiEffect(failureApi, mockSelectedItems, mockDispatch, navigationProp);
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistError);
+    });
+
+    it('Tests updatePicklistStatusApiEffect isWaiting', () => {
+      const isLoadingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      updatePicklistStatusApiEffect(isLoadingApi, mockSelectedItems, mockDispatch, navigationProp);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(showActivityModal).toBeCalledTimes(1);
+    });
   });
 });

@@ -55,15 +55,16 @@ export const binningItemCardReadOnly = (
   );
 };
 
-export const getFailedPallets = (data: PostBinPalletsMultistatusResponse): number[] => data.binSummary
-  .reduce((failIds: number[], currentResponse) => (currentResponse.status === 200
+export const getFailedPallets = (data: PostBinPalletsMultistatusResponse): string[] => data.binSummary
+  .reduce((failIds: string[], currentResponse) => (currentResponse.status === 200
     ? failIds
     : [...failIds, currentResponse.palletId]), []);
 
 export const binPalletsApiEffect = (
   navigation: NavigationProp<any>,
   binPalletsApi: AsyncState,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  route: RouteProp<any, string>
 ) => {
   if (navigation.isFocused()) {
     if (!binPalletsApi.isWaiting) {
@@ -91,7 +92,11 @@ export const binPalletsApiEffect = (
 
           dispatch(clearPallets());
           dispatch({ type: POST_BIN_PALLETS.RESET });
-          navigation.goBack();
+          if (route.params && route.params.source === 'picking') {
+            navigation.navigate('PickingTabs');
+          } else {
+            navigation.goBack();
+          }
         }
       }
 
@@ -122,7 +127,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
       const searchValue = cleanScanIfUpcOrEanBarcode(scannedEvent);
       dispatch(binPallets({
         location: searchValue,
-        pallets: palletsToBin.reduce((palletIds: number[], pallet) => [...palletIds, pallet.id], [])
+        pallets: palletsToBin.reduce((palletIds: string[], pallet) => [...palletIds, pallet.id], [])
       }));
     }
   }, [scannedEvent]);
@@ -148,7 +153,8 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   useEffectHook(() => binPalletsApiEffect(
     navigation,
     binPalletsApi,
-    dispatch
+    dispatch,
+    route
   ), [binPalletsApi]);
 
   const scanTextView = () => (

@@ -12,12 +12,12 @@ export interface PalletItem {
 }
 
 export interface CombinePallet {
-  palletId: number;
+  palletId: string;
   itemCount: number;
 }
 
 export interface PalletInfo {
-  id: number;
+  id: string;
   createDate?: string;
   expirationDate?: string;
   newExpirationDate?: string;
@@ -26,4 +26,8 @@ export interface PalletInfo {
 export interface Pallet {
   palletInfo: PalletInfo;
   items: PalletItem[];
+}
+
+export interface PalletItemDetails extends PalletInfo {
+  items: PalletItem[]
 }

@@ -8,7 +8,7 @@ describe('Test CombinePalletCard Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     const mockCombinePallet: CombinePallet = {
       itemCount: 5,
-      palletId: 123
+      palletId: '123'
     };
     renderer.render(
       <CombinePalletCard item={mockCombinePallet} dispatch={jest.fn()} />

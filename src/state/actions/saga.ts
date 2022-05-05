@@ -138,7 +138,7 @@ export const createSections = (
   payload: { aisleId: number; sectionCount: number }[]
 ) => ({ type: CREATE_SECTIONS, payload } as const);
 export const getPalletDetails = (payload: {
-  palletIds: number[];
+  palletIds: string[];
   isAllItems?: boolean;
 }) => ({ type: GET_PALLET_DETAILS, payload } as const);
 export const deleteZone = (payload: number) => ({ type: DELETE_ZONE, payload } as const);
@@ -156,7 +156,7 @@ export const getZoneNames = () => ({ type: GET_ZONE_NAMES } as const);
 export const getClubConfig = () => ({ type: GET_CLUB_CONFIG } as const);
 export const getItemDetailsUPC = (payload: { upc: number }) => ({ type: GET_ITEM_DETAIL_UPC, payload } as const);
 export const addPalletUPCs = (payload: {
-  palletId: number;
+  palletId: string;
   items: PalletItem[];
   expirationDate?: string;
 }) => ({ type: ADD_PALLET_UPCS, payload } as const);
@@ -165,7 +165,7 @@ export const updatePalletItemQty = (payload: UpdateItemQuantityRequest) => ({
   payload
 } as const);
 export const deleteUpcs = (payload: {
-  palletId: number;
+  palletId: string;
   upcs: string[],
   expirationDate?: string,
   removeExpirationDate: boolean
@@ -178,7 +178,7 @@ export const printPalletLabel = (payload: {
   headers?: AxiosRequestHeaders;
   printPalletList: PrintPalletList[];
 }) => ({ type: PRINT_PALLET_LABEL, payload } as const);
-export const clearPallet = (payload: { palletId: number }) => ({
+export const clearPallet = (payload: { palletId: string }) => ({
   type: CLEAR_PALLET,
   payload
 } as const);
@@ -196,9 +196,9 @@ export const updatePicklistStatus = (payload: {
   picklistItems: {
     picklistId: number;
     locationId: number;
-    locationName: string
+    locationName: string;
   }[];
-  palletId: number
+  palletId: string;
 }) => ({
   type: UPDATE_PICKLIST_STATUS,
   payload

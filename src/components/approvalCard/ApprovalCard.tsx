@@ -20,7 +20,6 @@ export interface ApprovalCardProps{
   dispatch: Dispatch<any>;
 }
 
-// TODO change this to default export
 export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
   const {
     itemNbr, itemName, oldQuantity,

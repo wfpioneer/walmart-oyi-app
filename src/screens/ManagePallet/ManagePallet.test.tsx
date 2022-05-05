@@ -42,7 +42,7 @@ jest.mock('../../state/actions/PalletManagement', () => ({
 
 describe('ManagePalletScreen', () => {
   const mockPalletInfo: PalletInfo = {
-    id: 1514,
+    id: '1514',
     expirationDate: '01/31/2022'
   };
   const mockNewExpirationDate = '03/04/2022';
@@ -223,7 +223,7 @@ describe('ManagePalletScreen', () => {
     it('Renders the expiration date required text if pallet has no date with perishableItems', () => {
       const renderer = ShallowRenderer.createRenderer();
       const mockPalletNoDate: PalletInfo = {
-        id: 2,
+        id: '2',
         createDate: '03/31/2022'
       };
       renderer.render(
@@ -294,7 +294,7 @@ describe('ManagePalletScreen', () => {
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
     const palletInfo: PalletInfo = {
-      id: 3
+      id: '3'
     };
 
     const onSuccessApi: AsyncState = {
