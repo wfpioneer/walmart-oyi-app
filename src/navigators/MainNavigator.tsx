@@ -19,16 +19,12 @@ export const MainNavigator = (): JSX.Element => {
   const appState = useRef(AppState.currentState);
   useEffect(() => {
     const callAppState = (nextAppState: AppStateStatus) => {
-      if (
-        appState.current.match(/inactive|background/)
-        && nextAppState === 'active'
-      ) {
+      if (appState.current.match(/inactive|background|active/) && nextAppState === 'active') {
         console.log('App has come to the foreground!');
         enableScanner();
       } else {
         disableScanner();
       }
-
       appState.current = nextAppState;
     };
 
