@@ -27,6 +27,7 @@ jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 const moment = jest.requireActual('moment-timezone');
 moment.tz.setDefault('America/Chicago');
 jest.setMock('moment', moment);
+process.env.TZ = 'America/Chicago';
 
 // Unmounts React trees that were mounted with the `testing-library's` render method
 afterEach(() => {
