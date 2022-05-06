@@ -26,4 +26,16 @@ export default class PickingService {
       { headers }
     );
   }
+
+  public static updatePalletNotFound(payload: {
+    palletId: number;
+    pickListIds: number[]
+  }) {
+    const urls: Environment = getEnvironment();
+    const { palletId, pickListIds } = payload;
+    return Request.put(
+      `${urls.locationUrl}/picklist/${palletId}/palletnotfound`,
+      { pickListIds },
+    );
+  }
 }
