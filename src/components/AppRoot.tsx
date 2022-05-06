@@ -1,16 +1,18 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { getBrand, getDevice, getManufacturer } from 'react-native-device-info';
+import { AppState, AppStateStatus } from 'react-native';
 import { setIsByod } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import {
-  barcodeEmitter, determineScanner, getInitialScanners, setScanner
+  barcodeEmitter, determineScanner, disableScanner, enableScanner, getInitialScanners, setScanner
 } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
 
 const AppRoot = (props: {children: any}) => {
   const dispatch = useDispatch();
   const { isByod } = useTypedSelector(state => state.Global);
+  const appState = useRef(AppState.currentState);
 
   // Effect for getting device type. Should only need to get called once
   // Layout effect is used to have this fire before the DOM is rendered,
@@ -44,6 +46,28 @@ const AppRoot = (props: {children: any}) => {
     };
   }, []);
 
+  useEffect(() => {
+    // enables the scanner on app initialization
+    if (appState.current === 'active') {
+      enableScanner();
+    }
+    const callAppState = (nextAppState: AppStateStatus) => {
+      if (appState.current.match(/inactive|background|active/) && nextAppState === 'active') {
+        // eslint-disable-next-line no-console
+        console.log('App has come to the foreground!');
+        enableScanner();
+      } else {
+        disableScanner();
+      }
+      appState.current = nextAppState;
+    };
+
+    AppState.addEventListener('change', callAppState);
+
+    return () => {
+      AppState.removeEventListener('change', callAppState);
+    };
+  }, []);
   return (props.children);
 };
 
