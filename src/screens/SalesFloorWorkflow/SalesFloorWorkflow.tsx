@@ -212,8 +212,8 @@ export const palletConfigApiEffect = (
 export const binApisEffect = (
   updateQuantitiesApi: AsyncState,
   deleteItemsApi: AsyncState,
-  noUpdate: boolean,
-  noDelete: boolean,
+  isUpdateItemsState: UseStateType<boolean>,
+  isDeleteItemsState: UseStateType<boolean>,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
   selectedPicks: PickListItem[]
@@ -224,7 +224,9 @@ export const binApisEffect = (
     && !deleteItemsApi.isWaiting
     && (updateQuantitiesApi.value || deleteItemsApi.value)
   ) {
-    if ((updateQuantitiesApi.result || noUpdate) && (deleteItemsApi.result || noDelete)) {
+    const [isUpdateItems, setIsUpdateItems] = isUpdateItemsState;
+    const [isDeleteItems, setIsDeleteItems] = isDeleteItemsState;
+    if ((updateQuantitiesApi.result || !isUpdateItems) && (deleteItemsApi.result || !isDeleteItems)) {
       const selectedPickItems = selectedPicks.map(pick => ({
         picklistId: pick.id,
         locationId: pick.palletLocationId,
@@ -237,6 +239,8 @@ export const binApisEffect = (
       }));
       dispatch({ type: UPDATE_PALLET_ITEM_QTY.RESET });
       dispatch({ type: DELETE_UPCS.RESET });
+      setIsUpdateItems(false);
+      setIsDeleteItems(false);
     }
 
     if (updateQuantitiesApi.error || deleteItemsApi.error) {
@@ -255,6 +259,8 @@ export const binApisEffect = (
           visibilityTime: SNACKBAR_TIMEOUT
         });
       }
+      setIsUpdateItems(false);
+      setIsDeleteItems(false);
     }
   }
 };
@@ -302,10 +308,11 @@ export const binServiceCall = (
     const reqUpcs = toDeleteItems.reduce((upcs: string[], pick) => [...upcs, pick.upcNbr], []);
     setIsDeleteItems(true);
     if (newExpirationDate) {
+      const expirationDate = `${moment(newExpirationDate).format('YYYY-MM-DDT00:00:00.000')}Z`;
       dispatch(deleteUpcs({
         palletId,
         upcs: reqUpcs,
-        expirationDate: newExpirationDate,
+        expirationDate,
         removeExpirationDate: false
       }));
       setShowExpiryPrompt(ExpiryPromptShow.HIDDEN);
@@ -390,8 +397,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   useEffectHook(() => binApisEffect(
     updatePalletItemsApi,
     deletePalletItemsApi,
-    !isUpdateItems,
-    !isDeleteItems,
+    updateItemsState,
+    deleteItemsState,
     navigation,
     dispatch,
     selectedPicks
@@ -456,9 +463,13 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     );
   };
 
+  const getCurrentQuantity = (item: PickListItem) => (typeof item.newQuantityLeft === 'number'
+    ? item.newQuantityLeft
+    : item.quantityLeft || 0);
+
   const handleIncrement = (item: PickListItem) => {
-    const currentQuantity = item.newQuantityLeft || item.quantityLeft;
-    if (currentQuantity && currentQuantity < MAX) {
+    const currentQuantity = getCurrentQuantity(item);
+    if (item.quantityLeft && currentQuantity < MAX) {
       dispatch(updatePicks([{ ...item, newQuantityLeft: currentQuantity + 1 }]));
     } else {
       dispatch(updatePicks([{ ...item, quantityLeft: 1 }]));
@@ -466,8 +477,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   };
 
   const handleDecrement = (item: PickListItem) => {
-    const currentQuantity = item.newQuantityLeft || item.quantityLeft;
-    if (currentQuantity && currentQuantity > 0) {
+    const currentQuantity = getCurrentQuantity(item);
+    if (item.quantityLeft && currentQuantity > 0) {
       dispatch(updatePicks([{ ...item, newQuantityLeft: currentQuantity - 1 }]));
     }
   };
@@ -508,9 +519,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   }
 
   const renderItem = ({ item }: { item: PickListItem }) => {
-    const currentQuantity = typeof item.newQuantityLeft === 'number'
-      ? item.newQuantityLeft
-      : item.quantityLeft || 0;
+    const currentQuantity = getCurrentQuantity(item);
     return (
       <SalesFloorItemCard
         assigned={assigned}
