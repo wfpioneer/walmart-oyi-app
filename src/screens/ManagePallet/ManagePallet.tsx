@@ -16,7 +16,7 @@ import {
 } from '@react-navigation/native';
 import { partition } from 'lodash';
 import moment from 'moment';
-import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
@@ -27,6 +27,7 @@ import COLOR from '../../themes/Color';
 import styles from './ManagePallet.style';
 import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
+import PalletExpiration from '../../components/PalletExpiration/PalletExpiration';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import {
   addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, updatePalletItemQty
@@ -98,8 +99,6 @@ export const isQuantityChanged = (
 export const isExpiryDateChanged = (palletInfo: PalletInfo): boolean => !!(
   palletInfo.newExpirationDate && palletInfo.newExpirationDate !== palletInfo.expirationDate?.trim()
 );
-
-const dateOfExpirationDate = (stringDate?: string): Date => (stringDate ? new Date(stringDate) : new Date());
 
 const enableSave = (items: PalletItem[], palletInfo: PalletInfo): boolean => {
   const isItemsModified = items.some((item: PalletItem) => isQuantityChanged(item)
@@ -651,35 +650,17 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             <Text style={styles.headerItemText}>{id}</Text>
           </View>
           {(isPerishableItemExist(items, perishableCategories)) && (
-          <View
-            style={
-              isExpiryDateChanged(palletInfo) || isAddedPerishable || isRemoveExpirationDate
-              || isPerishableItemDeleted(items, perishableCategories)
-                ? styles.modifiedEffectiveDateContainer : styles.effectiveDateContainer
-            }
-          >
-            <TouchableOpacity onPress={() => setIsPickerShow(true)}>
-              <Text style={styles.headerText}>
-                {strings('PALLET.EXPIRATION_DATE')}
-              </Text>
-              <Text style={(expirationDate || newExpirationDate || isRemoveExpirationDate)
-                ? styles.effectiveDateHeaderItem : styles.errorLabel}
-              >
-                {isRemoveExpirationDate ? strings('GENERICS.REMOVED')
-                  : newExpirationDate || expirationDate || strings('GENERICS.REQUIRED')}
-              </Text>
-            </TouchableOpacity>
-            {isPickerShow && (
-            <DateTimePicker
-              value={newExpirationDate ? new Date(newExpirationDate) : dateOfExpirationDate(expirationDate)}
-              mode="date"
-              display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-              is24Hour={true}
+            <PalletExpiration
+              expirationDate={expirationDate}
+              newExpirationDate={newExpirationDate}
+              dateChanged={isExpiryDateChanged(palletInfo) || isAddedPerishable || isRemoveExpirationDate
+              || isPerishableItemDeleted(items, perishableCategories)}
+              dateRemoved={isRemoveExpirationDate}
+              showPicker={isPickerShow}
+              setShowPicker={setIsPickerShow}
+              onDateChange={onDatePickerChange}
               minimumDate={new Date(Date.now())}
-              onChange={onDatePickerChange}
             />
-            )}
-          </View>
           )}
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>{strings('LOCATION.ITEMS')}</Text>

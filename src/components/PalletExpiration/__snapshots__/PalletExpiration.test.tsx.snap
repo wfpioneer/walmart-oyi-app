@@ -1,0 +1,282 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests rendering PalletExpiration Renders the PalletExpiration showing picker 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFFFE0",
+      "borderWidth": 1,
+      "flexDirection": "column",
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="openDate"
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.PALLET.EXPIRATION_DATE" translation]
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#000000",
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.GENERICS.REMOVED" translation]
+    </Text>
+  </View>
+  <RNDateTimePicker
+    date={1022734800000}
+    displayIOS="spinner"
+    enabled={true}
+    minimumDate={119682000000}
+    mode="date"
+    onChange={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "height": 216,
+      }
+    }
+    testID="datePicker"
+  />
+</View>
+`;
+
+exports[`Tests rendering PalletExpiration Renders the PalletExpiration with date removed 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFFFE0",
+      "borderWidth": 1,
+      "flexDirection": "column",
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="openDate"
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.PALLET.EXPIRATION_DATE" translation]
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#000000",
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.GENERICS.REMOVED" translation]
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Tests rendering PalletExpiration Renders the PalletExpiration with expiration date and no changes 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "column",
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="openDate"
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.PALLET.EXPIRATION_DATE" translation]
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#000000",
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      05/31/2022
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Tests rendering PalletExpiration Renders the PalletExpiration with newExpiration date 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFFFE0",
+      "borderWidth": 1,
+      "flexDirection": "column",
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="openDate"
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.PALLET.EXPIRATION_DATE" translation]
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#000000",
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      05/31/2022
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Tests rendering PalletExpiration Renders the PalletExpiration with no expiration date and no changes 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "column",
+      "paddingHorizontal": 10,
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="openDate"
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.PALLET.EXPIRATION_DATE" translation]
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#f44336",
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.GENERICS.REQUIRED" translation]
+    </Text>
+  </View>
+</View>
+`;
