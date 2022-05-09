@@ -208,7 +208,7 @@ export const getPicklists = () => ({
   type: GET_PICKLISTS
 } as const);
 export const updatePalletNotFound = (payload: {
-  palletId: number;
+  palletId: string;
   pickListIds: number[]
 }) => ({
   type: UPDATE_PALLET_NOT_FOUND,

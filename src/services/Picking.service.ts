@@ -28,7 +28,7 @@ export default class PickingService {
   }
 
   public static updatePalletNotFound(payload: {
-    palletId: number;
+    palletId: string;
     pickListIds: number[]
   }) {
     const urls: Environment = getEnvironment();
