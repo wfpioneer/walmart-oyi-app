@@ -555,7 +555,11 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
             onPress={() => setShowExpiryPrompt(ExpiryPromptShow.CALENDAR_SHOW)}
             style={styles.expirationDateTextView}
           >
-            <Text style={styles.expirationDateText}>{expirationDate}</Text>
+            <Text style={styles.expirationDateText}>
+              {expirationDate
+                ? moment(expirationDate, 'MM/DD/YYYY').format('DD/MM/YYYY')
+                : moment().format('DD/MM/YYYY')}
+            </Text>
           </Pressable>
           <View style={styles.updateExpirationButtonsView}>
             <Button

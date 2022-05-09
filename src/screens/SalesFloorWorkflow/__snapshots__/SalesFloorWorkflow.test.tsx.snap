@@ -63,7 +63,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
             }
           }
         >
-          
+          16/02/2021
         </Text>
       </Memo(Pressable)>
       <View
@@ -344,7 +344,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
             }
           }
         >
-          
+          16/02/2021
         </Text>
       </Memo(Pressable)>
       <View
@@ -577,7 +577,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
             }
           }
         >
-          
+          16/02/2021
         </Text>
       </Memo(Pressable)>
       <View

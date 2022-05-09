@@ -531,12 +531,15 @@ describe('Sales floor workflow tests', () => {
         value: {}
       };
 
+      const updateItemsCalledState: UseStateType<boolean> = [true, mockSetIsUpdateItems];
+      const deleteItemsCalledState: UseStateType<boolean> = [true, mockSetIsDeleteItems];
+
       // success
       binApisEffect(
         successApi,
         successApi,
-        false,
-        false,
+        updateItemsCalledState,
+        deleteItemsCalledState,
         navigationProp,
         mockDispatch,
         mockSelectedItems
@@ -550,8 +553,8 @@ describe('Sales floor workflow tests', () => {
       binApisEffect(
         successApi,
         failApi,
-        false,
-        false,
+        updateItemsCalledState,
+        deleteItemsCalledState,
         navigationProp,
         mockDispatch,
         mockSelectedItems
@@ -565,8 +568,8 @@ describe('Sales floor workflow tests', () => {
       binApisEffect(
         failApi,
         failApi,
-        false,
-        false,
+        updateItemsCalledState,
+        deleteItemsCalledState,
         navigationProp,
         mockDispatch,
         mockSelectedItems
