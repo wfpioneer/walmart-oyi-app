@@ -8,7 +8,7 @@ export interface CreatePickRequest {
   itemDesc: string;
   category: string
   salesFloorLocationId?: number;
-  salesFloorLocationName: string;
+  salesFloorLocationName?: string;
   moveToFront?: boolean;
   numberOfPallets?: number;
   quickPick: boolean;
