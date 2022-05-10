@@ -6,11 +6,11 @@ export interface CreatePickRequest {
   itemNbr: number;
   upcNbr: string;
   itemDesc: string;
-  category: string
+  category: number;
   salesFloorLocationId?: number;
   salesFloorLocationName?: string;
   moveToFront?: boolean;
-  numberOfPallets?: number;
+  numberOfPallets: number;
   quickPick: boolean;
 }
 
