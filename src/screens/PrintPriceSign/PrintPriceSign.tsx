@@ -19,12 +19,12 @@ import styles from './PrintPriceSign.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getMockItemDetails } from '../../mockData';
 import {
-  addLocationPrintQueue, addMultipleToLocationPrintQueue, addToPrintQueue, addToPrinterList,
+  addLocationPrintQueue, addMultipleToLocationPrintQueue, addToPrintQueue, addToPrinterList, setPrintingType,
   setPriceLabelPrinter, setSignType, unsetPrintingLocationLabels, unsetPrintingPalletLabel
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
-  LaserPaper, PortablePaper, PrintItemList, PrintLocationList,
+  LaserPaper, PortablePaper, PrintingType, PrintItemList, PrintLocationList,
   PrintPalletList, PrintPaperSize, PrintQueueItem, PrintQueueItemType, Printer, PrinterType
 } from '../../models/Printer';
 import { Configurations } from '../../models/User';
@@ -251,6 +251,13 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       }
       savePrinter(defaultPrinter);
     }
+    if (printingPalletLabel) {
+      dispatch(setPrintingType(PrintingType.PALLET))
+    } else if (printingLocationLabels) {
+      dispatch(setPrintingType(PrintingType.LOCATION))
+    } else {
+      dispatch(setPrintingType(PrintingType.PRICE_SIGN))
+    }
   }, []);
 
   // Navigation Listener
@@ -266,6 +273,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       if (printingPalletLabel) {
         dispatch(unsetPrintingPalletLabel());
       }
+      dispatch(setPrintingType(null))
     });
     // set sign type to extra small when coming from loc mgmt screens
     navigation.addListener('focus', () => {

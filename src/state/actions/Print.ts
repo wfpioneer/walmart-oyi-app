@@ -115,7 +115,7 @@ export const setPalletLabelPrinter = (printer : Printer | null) => ({
   payload: printer
 } as const);
 
-export const setPrintingType = (printingType: PrintingType) => ({
+export const setPrintingType = (printingType: PrintingType | null) => ({
   type: SET_PRINTING_TYPE,
   payload: printingType
 } as const);
