@@ -19,13 +19,13 @@ import styles from './PrintPriceSign.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getMockItemDetails } from '../../mockData';
 import {
-  addLocationPrintQueue, addMultipleToLocationPrintQueue, addToPrintQueue, addToPrinterList, setPrintingType,
-  setPriceLabelPrinter, setSignType, unsetPrintingLocationLabels, unsetPrintingPalletLabel
+  addLocationPrintQueue, addMultipleToLocationPrintQueue, addToPrintQueue, addToPrinterList,
+  setPriceLabelPrinter, setPrintingType, setSignType, unsetPrintingLocationLabels, unsetPrintingPalletLabel
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
-  LaserPaper, PortablePaper, PrintingType, PrintItemList, PrintLocationList,
-  PrintPalletList, PrintPaperSize, PrintQueueItem, PrintQueueItemType, Printer, PrinterType
+  LaserPaper, PortablePaper, PrintItemList, PrintLocationList,
+  PrintPalletList, PrintPaperSize, PrintQueueItem, PrintQueueItemType, Printer, PrinterType, PrintingType
 } from '../../models/Printer';
 import { Configurations } from '../../models/User';
 
@@ -252,11 +252,11 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       savePrinter(defaultPrinter);
     }
     if (printingPalletLabel) {
-      dispatch(setPrintingType(PrintingType.PALLET))
+      dispatch(setPrintingType(PrintingType.PALLET));
     } else if (printingLocationLabels) {
-      dispatch(setPrintingType(PrintingType.LOCATION))
+      dispatch(setPrintingType(PrintingType.LOCATION));
     } else {
-      dispatch(setPrintingType(PrintingType.PRICE_SIGN))
+      dispatch(setPrintingType(PrintingType.PRICE_SIGN));
     }
   }, []);
 
@@ -273,7 +273,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       if (printingPalletLabel) {
         dispatch(unsetPrintingPalletLabel());
       }
-      dispatch(setPrintingType(null))
+      dispatch(setPrintingType(null));
     });
     // set sign type to extra small when coming from loc mgmt screens
     navigation.addListener('focus', () => {
