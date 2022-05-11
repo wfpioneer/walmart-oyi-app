@@ -398,7 +398,9 @@ export default {
     LOCATIONS_UPDATED: 'Ubicaciones actualizadas',
     LOCATIONS_FAILED_UPDATE: 'Falló la actualización de ubicaciones',
     SELECT_CONTINUE_ACTION: 'Seleccionar acción para continuar',
-    PALLET_NOT_FOUND: 'Pallet no encontrado'
+    PALLET_NOT_FOUND: 'Pallet no encontrado',
+    CREATE_PICK_SUCCESS: 'Successfully created a new pick', // TODO Spanish translation
+    CREATE_PICK_ERROR: 'There was an error creating a new pick' // TODO Spanish translation
   },
   BINNING: {
     BINNING: 'Bodega',
