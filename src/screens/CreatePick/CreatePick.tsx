@@ -259,20 +259,18 @@ export const CreatePickScreen = (props: CreatePickProps) => {
             </Picker>
           </View>
         </View>
-        {selectedSection === MOVE_TO_FRONT ? (
-          <View style={styles.pickParamLine}>
-            <Text>{strings('PICKING.NUMBER_PALLETS')}</Text>
-            <NumericSelector
-              isValid={isNumberOfPalletsValid(palletNumber)}
-              onDecreaseQty={() => onPalletDecrease(palletNumber, setPalletNumber)}
-              onIncreaseQty={() => onPalletIncrease(palletNumber, setPalletNumber)}
-              onTextChange={(text: string) => onPalletTextChange(text, setPalletNumber)}
-              minValue={PALLET_MIN}
-              maxValue={PALLET_MAX}
-              value={palletNumber}
-            />
-          </View>
-        ) : null}
+        <View style={styles.pickParamLine}>
+          <Text>{strings('PICKING.NUMBER_PALLETS')}</Text>
+          <NumericSelector
+            isValid={isNumberOfPalletsValid(palletNumber)}
+            onDecreaseQty={() => onPalletDecrease(palletNumber, setPalletNumber)}
+            onIncreaseQty={() => onPalletIncrease(palletNumber, setPalletNumber)}
+            onTextChange={(text: string) => onPalletTextChange(text, setPalletNumber)}
+            minValue={PALLET_MIN}
+            maxValue={PALLET_MAX}
+            value={palletNumber}
+          />
+        </View>
       </View>
       <View style={styles.createButtonView}>
         <Button

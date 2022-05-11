@@ -335,6 +335,32 @@ exports[`Create Pick screen render tests renders the screen with item with floor
         </Picker>
       </View>
     </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderColor": "#c5c5c5",
+          "borderTopWidth": 2,
+          "flexDirection": "row",
+          "height": 60,
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PICKING.NUMBER_PALLETS" translation]
+      </Text>
+      <NumericSelector
+        isValid={true}
+        maxValue={99}
+        minValue={1}
+        onDecreaseQty={[Function]}
+        onIncreaseQty={[Function]}
+        onTextChange={[Function]}
+        value={1}
+      />
+    </View>
   </View>
   <View
     style={
@@ -502,6 +528,32 @@ exports[`Create Pick screen render tests renders the screen with no reserve loca
         </Picker>
       </View>
     </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderColor": "#c5c5c5",
+          "borderTopWidth": 2,
+          "flexDirection": "row",
+          "height": 60,
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PICKING.NUMBER_PALLETS" translation]
+      </Text>
+      <NumericSelector
+        isValid={true}
+        maxValue={99}
+        minValue={1}
+        onDecreaseQty={[Function]}
+        onIncreaseQty={[Function]}
+        onTextChange={[Function]}
+        value={1}
+      />
+    </View>
   </View>
   <View
     style={
@@ -666,6 +718,32 @@ exports[`Create Pick screen render tests renders the screen without floor locati
           />
         </Picker>
       </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderColor": "#c5c5c5",
+          "borderTopWidth": 2,
+          "flexDirection": "row",
+          "height": 60,
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PICKING.NUMBER_PALLETS" translation]
+      </Text>
+      <NumericSelector
+        isValid={true}
+        maxValue={99}
+        minValue={1}
+        onDecreaseQty={[Function]}
+        onIncreaseQty={[Function]}
+        onTextChange={[Function]}
+        value={1}
+      />
     </View>
   </View>
   <View
