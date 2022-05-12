@@ -19,7 +19,16 @@ import {
 } from '../../../models/Printer';
 import { strings } from '../../../locales';
 import {
-  deletePrinter, setLocationLabelPrinter, setPalletLabelPrinter, setPriceLabelPrinter
+  deleteLocationLabelPrinter,
+  deletePalletLabelPrinter,
+  deletePriceLabelPrinter,
+  deletePrinter,
+  getLocationLabelPrinter,
+  getPalletLabelPrinter,
+  getPriceLabelPrinter,
+  setLocationLabelPrinter,
+  setPalletLabelPrinter,
+  setPriceLabelPrinter
 } from '../../../utils/asyncStorageUtils';
 
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -144,13 +153,29 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
       this.props.navigation.goBack();
     };
 
-    const onDeleteClick = () => {
+    const onDeleteClick = async () => {
+      const priceLabelPrinter = await getPriceLabelPrinter();
+      const loclabelPrinter = await getLocationLabelPrinter();
+      const palletLabelPrinter = await getPalletLabelPrinter();
+
+      if (priceLabelPrinter && priceLabelPrinter.id === item.id) {
+        deletePriceLabelPrinter();
+        this.props.setPriceLabelPrinterAction(null);
+      }
+      if (loclabelPrinter && loclabelPrinter.id === item.id) {
+        deleteLocationLabelPrinter();
+        this.props.setLocationLabelPrinterAction(null);
+      }
+      if (palletLabelPrinter && palletLabelPrinter.id === item.id) {
+        deletePalletLabelPrinter();
+        this.props.setPalletLabelPrinterAction(null);
+      }
+
       this.props.deleteFromPrinterList(item.id);
       deletePrinter(item.id);
       // TODO: remove this to replace with some better update after
       this.forceUpdate();
     };
-
     return (
       <TouchableOpacity
         style={disabled() ? styles.disabledCardContainer : styles.cardContainer}
