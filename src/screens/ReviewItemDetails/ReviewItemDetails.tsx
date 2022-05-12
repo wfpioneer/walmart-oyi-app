@@ -5,6 +5,7 @@ import {
   ActivityIndicator, BackHandler, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
 import _ from 'lodash';
+import Toast from 'react-native-toast-message';
 import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
@@ -13,7 +14,9 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { addToPicklist, getItemDetails, noAction } from '../../state/actions/saga';
+import {
+  addToPicklist, createNewPick, getItemDetails, noAction
+} from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
@@ -28,15 +31,19 @@ import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import CreatePickDialog from '../../components/CreatePickDialog/CreatePickDialog';
 import { resetLocations, setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
-import { showInfoModal } from '../../state/actions/Modal';
+import { hideActivityModal, showActivityModal, showInfoModal } from '../../state/actions/Modal';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
-import { ADD_TO_PICKLIST, GET_ITEM_DETAILS, NO_ACTION } from '../../state/actions/asyncAPI';
+import {
+  ADD_TO_PICKLIST, CREATE_NEW_PICK, GET_ITEM_DETAILS, NO_ACTION
+} from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
 import { Configurations } from '../../models/User';
+import { CreatePickRequest } from '../../services/Picking.service';
+import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -48,6 +55,7 @@ export interface ItemDetailsScreenProps {
   isWaiting: boolean; error: any; result: any;
   addToPicklistStatus: AsyncState;
   completeItemApi: AsyncState;
+  createNewPickApi: AsyncState;
   userId: string;
   exceptionType: string | null | undefined; actionCompleted: boolean; pendingOnHandsQty: number;
   floorLocations?: Location[];
@@ -167,10 +175,54 @@ export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
   return <ItemDetailsList rows={qtyRows} indentAfterFirstRow={true} />;
 };
 
+export const createNewPickApiHook = (
+  createNewPickApi: AsyncState,
+  dispatch: Dispatch<any>,
+  isFocused: boolean,
+  setSelectedSection: React.Dispatch<React.SetStateAction<string>>,
+  setIsQuickPick: React.Dispatch<React.SetStateAction<boolean>>,
+  setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>
+): void => {
+  if (isFocused && !createNewPickApi.isWaiting) {
+    // create new pick api success
+    if (createNewPickApi.result && createNewPickApi.result.status === 200) {
+      Toast.show({
+        type: 'success',
+        text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      // Reset the form inputs and close the createPick Modal
+      setSelectedSection('');
+      setIsQuickPick(false);
+      setNumberOfPallets(1);
+      dispatch({ type: CREATE_NEW_PICK.RESET });
+      dispatch(hideActivityModal());
+    }
+    // create new pick api error
+    if (createNewPickApi.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      dispatch({ type: CREATE_NEW_PICK.RESET });
+      dispatch(hideActivityModal());
+    }
+  }
+  // create new pick api isWaiting
+  if (isFocused && createNewPickApi.isWaiting) {
+    dispatch(showActivityModal());
+  }
+};
+
 export const renderAddPicklistButton = (
   props: (RenderProps & HandleProps),
   itemDetails: ItemDetails,
-  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>): JSX.Element => {
+  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+): JSX.Element => {
   const { reserve } = itemDetails.location;
   const { addToPicklistStatus, userConfigs } = props;
   if (addToPicklistStatus?.isWaiting) {
@@ -216,6 +268,7 @@ export const renderAddPicklistButton = (
         titleFontWeight="bold"
         height={28}
         onPress={() => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
           userConfigs.picking ? setCreatePickModalVisible(true) : handleAddToPicklist(props, itemDetails);
         }}
       />
@@ -228,7 +281,8 @@ export const renderAddPicklistButton = (
 export const renderLocationComponent = (
   props: (RenderProps & HandleProps),
   itemDetails: ItemDetails,
-  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>): JSX.Element => {
+  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+): JSX.Element => {
   const { floorLocations, reserveLocations } = props;
   return (
     <View style={styles.locationContainer}>
@@ -423,6 +477,34 @@ const callBackbarcodeEmitter = (props: ItemDetailsScreenProps, scan: any, itemDe
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
 };
+
+export const handleCreateNewPick = (
+  props: ItemDetailsScreenProps,
+  itemDetails: ItemDetails,
+  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  const {
+    numberOfPallets, isQuickPick, selectedSection, dispatch, floorLocations
+  } = props;
+  const {
+    itemNbr, upcNbr, categoryNbr, itemName
+  } = itemDetails;
+  const locationDetails = floorLocations?.find(loc => loc.locationName === selectedSection);
+  const createPickPayload: CreatePickRequest = {
+    itemNbr,
+    upcNbr,
+    itemDesc: itemName,
+    category: categoryNbr,
+    salesFloorLocationName: selectedSection,
+    salesFloorLocationId: locationDetails?.sectionId,
+    moveToFront: selectedSection === MOVE_TO_FRONT,
+    numberOfPallets,
+    quickPick: isQuickPick
+  };
+  setCreatePickModalVisible(false);
+  dispatch(createNewPick(createPickPayload));
+};
+
 const onValidateBackPress = (props: ItemDetailsScreenProps) => {
   const {
     exceptionType, actionCompleted, dispatch, trackEventCall
@@ -540,6 +622,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     scannedEvent, isManualScanEnabled,
     isWaiting, error, result,
     completeItemApi,
+    createNewPickApi,
     userId, actionCompleted, pendingOnHandsQty,
     route,
     dispatch,
@@ -562,6 +645,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   useEffectHook(() => () => {
     dispatch(resetLocations());
   }, []);
+
+  useEffectHook(() => {
+    if (floorLocations && floorLocations.length > 0) {
+      setSelectedSection(floorLocations[0].locationName);
+    }
+  }, [floorLocations]);
 
   // Scanned Item Event Listener
   useEffectHook(() => {
@@ -594,6 +683,18 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       dispatch({ type: NO_ACTION.RESET });
     }
   }, [completeItemApi]);
+
+  useEffect(
+    () => createNewPickApiHook(
+      createNewPickApi,
+      dispatch,
+      navigation.isFocused(),
+      setSelectedSection,
+      setIsQuickPick,
+      setNumberOfPallets
+    ),
+    [createNewPickApi]
+  );
 
   useEffectHook(() => {
     // on api failure
@@ -695,13 +796,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           setIsQuickPick={setIsQuickPick}
           locations={floorLocations || []}
           onClose={() => setCreatePickModalVisible(false)}
-          onSubmit={() => {
-            //TODO implement submitting user input from dialog to call api, temporarily resets values and closes modal
-            setSelectedSection('');
-            setNumberOfPallets(1);
-            setIsQuickPick(false);
-            setCreatePickModalVisible(false);
-          }}
+          onSubmit={() => handleCreateNewPick(props, itemDetails, setCreatePickModalVisible)}
         />
       </CustomModalComponent>
       <ScrollView
@@ -770,6 +865,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
+  const createNewPickApi = useTypedSelector(state => state.async.createNewPick);
   const { userId } = useTypedSelector(state => state.User);
   const {
     exceptionType,
@@ -800,6 +896,7 @@ const ReviewItemDetails = (): JSX.Element => {
       result={result}
       addToPicklistStatus={addToPicklistStatus}
       completeItemApi={completeItemApi}
+      createNewPickApi={createNewPickApi}
       userId={userId}
       exceptionType={exceptionType}
       actionCompleted={actionCompleted}

@@ -1,17 +1,25 @@
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView } from 'react-native';
+import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { strings } from '../../locales';
 import itemDetail from '../../mockData/getItemDetails';
 import {
-  HandleProps,
-  RenderProps, ReviewItemDetailsScreen, renderAddPicklistButton, renderBarcodeErrorModal,
-  renderLocationComponent, renderOHQtyComponent, renderScanForNoActionButton
+  HandleProps, RenderProps,
+  ReviewItemDetailsScreen, createNewPickApiHook, handleCreateNewPick, renderAddPicklistButton,
+  renderBarcodeErrorModal, renderLocationComponent, renderOHQtyComponent, renderScanForNoActionButton
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { AsyncState } from '../../models/AsyncState';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
+jest.mock('../../state/actions/Modal', () => ({
+  showActivityModal: jest.fn(),
+  hideActivityModal: jest.fn()
+}));
 
 let navigationProp: NavigationProp<any>;
 let routeProp: RouteProp<any, string>;
@@ -75,12 +83,13 @@ describe('ReviewItemDetailsScreen', () => {
           userConfigs={mockConfig}
           createPickModalVisible={false}
           setCreatePickModalVisible={jest.fn()}
-          selectedSection={''}
+          selectedSection=""
           setSelectedSection={jest.fn()}
           numberOfPallets={1}
           setNumberOfPallets={jest.fn()}
           isQuickPick={false}
           setIsQuickPick={jest.fn()}
+          createNewPickApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -126,12 +135,13 @@ describe('ReviewItemDetailsScreen', () => {
           userConfigs={mockConfig}
           createPickModalVisible={false}
           setCreatePickModalVisible={jest.fn()}
-          selectedSection={''}
+          selectedSection=""
           setSelectedSection={jest.fn()}
           numberOfPallets={1}
           setNumberOfPallets={jest.fn()}
           isQuickPick={false}
           setIsQuickPick={jest.fn()}
+          createNewPickApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -178,12 +188,13 @@ describe('ReviewItemDetailsScreen', () => {
           userConfigs={mockConfig}
           createPickModalVisible={false}
           setCreatePickModalVisible={jest.fn()}
-          selectedSection={''}
+          selectedSection=""
           setSelectedSection={jest.fn()}
           numberOfPallets={1}
           setNumberOfPallets={jest.fn()}
           isQuickPick={false}
           setIsQuickPick={jest.fn()}
+          createNewPickApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -229,12 +240,13 @@ describe('ReviewItemDetailsScreen', () => {
           userConfigs={mockConfig}
           createPickModalVisible={false}
           setCreatePickModalVisible={jest.fn()}
-          selectedSection={''}
+          selectedSection=""
           setSelectedSection={jest.fn()}
           numberOfPallets={1}
           setNumberOfPallets={jest.fn()}
           isQuickPick={false}
           setIsQuickPick={jest.fn()}
+          createNewPickApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -274,12 +286,13 @@ describe('ReviewItemDetailsScreen', () => {
           userConfigs={mockConfig}
           createPickModalVisible={false}
           setCreatePickModalVisible={jest.fn()}
-          selectedSection={''}
+          selectedSection=""
           setSelectedSection={jest.fn()}
           numberOfPallets={1}
           setNumberOfPallets={jest.fn()}
           isQuickPick={false}
           setIsQuickPick={jest.fn()}
+          createNewPickApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -323,12 +336,13 @@ describe('ReviewItemDetailsScreen', () => {
           userConfigs={mockConfig}
           createPickModalVisible={false}
           setCreatePickModalVisible={jest.fn()}
-          selectedSection={''}
+          selectedSection=""
           setSelectedSection={jest.fn()}
           numberOfPallets={1}
           setNumberOfPallets={jest.fn()}
           isQuickPick={false}
           setIsQuickPick={jest.fn()}
+          createNewPickApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -368,12 +382,13 @@ describe('ReviewItemDetailsScreen', () => {
           userConfigs={mockConfig}
           createPickModalVisible={false}
           setCreatePickModalVisible={jest.fn()}
-          selectedSection={''}
+          selectedSection=""
           setSelectedSection={jest.fn()}
           numberOfPallets={1}
           setNumberOfPallets={jest.fn()}
           isQuickPick={false}
           setIsQuickPick={jest.fn()}
+          createNewPickApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -416,12 +431,13 @@ describe('ReviewItemDetailsScreen', () => {
           userConfigs={mockConfig}
           createPickModalVisible={false}
           setCreatePickModalVisible={jest.fn()}
-          selectedSection={''}
+          selectedSection=""
           setSelectedSection={jest.fn()}
           numberOfPallets={1}
           setNumberOfPallets={jest.fn()}
           isQuickPick={false}
           setIsQuickPick={jest.fn()}
+          createNewPickApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -542,8 +558,8 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
-  //TODO once create pick dialog and api are fully implemented into item review screen we need to add tests for
-  //TODO testing the api when picking is enabled
+  // TODO once create pick dialog and api are fully implemented into item review screen we need to add tests for
+  // TODO testing the api when picking is enabled
   describe('Tests rendering for Adding an Item to the Picklist', () => {
     it('renders \'Item Added to Picklist \'', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -634,6 +650,133 @@ describe('ReviewItemDetailsScreen', () => {
         renderBarcodeErrorModal(false, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('Manage ReviewItemDetails externalized function tests', () => {
+    const mockDispatch = jest.fn();
+    const mockSetSelectedSection = jest.fn();
+    const mockSetIsQuickPick = jest.fn();
+    const mockSetNumberOfPallets = jest.fn();
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('Tests createNewPickApiHook on 200 success', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 200
+        }
+      };
+      const toastPicklistSuccess = {
+        type: 'success',
+        text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      createNewPickApiHook(
+        successApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
+      );
+      expect(Toast.show).toHaveBeenCalledWith(toastPicklistSuccess);
+      expect(mockSetSelectedSection).toHaveBeenCalledWith('');
+      expect(mockSetIsQuickPick).toHaveBeenCalledWith(false);
+      expect(mockSetNumberOfPallets).toHaveBeenCalledWith(1);
+      expect(hideActivityModal).toBeCalledTimes(1);
+    });
+
+    it('Tests createNewPickApiHook on failure', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      const toastPickListError = {
+        type: 'error',
+        text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      createNewPickApiHook(
+        failureApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastPickListError);
+    });
+
+    it('Tests createNewPickApiHook isWaiting', () => {
+      const isLoadingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      createNewPickApiHook(
+        isLoadingApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
+      );
+      expect(showActivityModal).toBeCalledTimes(1);
+    });
+
+    it('Tests handleCreatePick method', () => {
+      const mockProps = {
+        scannedEvent: undefined,
+        isManualScanEnabled: false,
+        isWaiting: false,
+        error: undefined,
+        result: {
+          data: itemDetail[321],
+          status: 207
+        },
+        addToPicklistStatus: defaultAsyncState,
+        completeItemApi: defaultAsyncState,
+        userId: '',
+        exceptionType: 'NSFL',
+        actionCompleted: false,
+        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
+        floorLocations: itemDetail[123].location.floor,
+        reserveLocations: itemDetail[123].location.reserve,
+        route: routeProp,
+        dispatch: jest.fn(),
+        navigation: navigationProp,
+        scrollViewRef: scrollViewProp,
+        isSalesMetricsGraphView: false,
+        setIsSalesMetricsGraphView: jest.fn(),
+        ohQtyModalVisible: false,
+        setOhQtyModalVisible: jest.fn(),
+        errorModalVisible: false,
+        setErrorModalVisible: jest.fn(),
+        trackEventCall: jest.fn(),
+        validateSessionCall: jest.fn(() => Promise.resolve()),
+        useEffectHook: jest.fn(),
+        useFocusEffectHook: jest.fn(),
+        userFeatures: [],
+        userConfigs: mockConfig,
+        createPickModalVisible: false,
+        setCreatePickModalVisible: jest.fn(),
+        selectedSection: '',
+        setSelectedSection: jest.fn(),
+        numberOfPallets: 1,
+        setNumberOfPallets: jest.fn(),
+        isQuickPick: false,
+        setIsQuickPick: jest.fn(),
+        createNewPickApi: defaultAsyncState
+      };
+      const mockItemDetails = itemDetail[321];
+      const mockSetCreatePickModalVisible = jest.fn();
+      handleCreateNewPick(mockProps, mockItemDetails, mockSetCreatePickModalVisible);
+      expect(mockSetCreatePickModalVisible).toHaveBeenCalledWith(false);
+      expect(mockProps.dispatch).toHaveBeenCalledWith({
+        payload: {
+          category: 93,
+          itemDesc: 'Test Item That is Really, Really Long (and has parenthesis)',
+          itemNbr: 1234567890,
+          moveToFront: false,
+          numberOfPallets: 1,
+          quickPick: false,
+          salesFloorLocationId: undefined,
+          salesFloorLocationName: '',
+          upcNbr: '000055559999'
+        },
+        type: 'SAGA/CREATE_NEW_PICK'
+      });
     });
   });
 });
