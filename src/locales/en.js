@@ -402,7 +402,7 @@ export default {
     SELECT_CONTINUE_ACTION: 'Select Action to Continue',
     PALLET_NOT_FOUND: 'Pallet Not Found',
     CREATE_PICK_SUCCESS: 'Pick Created',
-    CREATE_PICK_FAILURE: 'There was an error creating a new pick'
+    CREATE_PICK_FAILURE: 'There was an error creating the pick'
   },
   BINNING: {
     BINNING: 'Binning',

@@ -399,8 +399,8 @@ export default {
     LOCATIONS_FAILED_UPDATE: '位置更新失败',
     SELECT_CONTINUE_ACTION: '选择任务继续',
     PALLET_NOT_FOUND: '未找到卡板',
-    CREATE_PICK_SUCCESS: 'Pick Created', // TODO Mandarin Translation
-    CREATE_PICK_FAILURE: 'There was an error creating a new pick' // TODO Mandarin Translation
+    CREATE_PICK_SUCCESS: '补货已创建',
+    CREATE_PICK_FAILURE: '创建补货时报错'
   },
   BINNING: {
     BINNING: '上架',
