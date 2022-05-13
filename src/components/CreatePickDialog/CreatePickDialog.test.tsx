@@ -3,18 +3,16 @@ import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { CreatePickDialog } from './CreatePickDialog';
 import { MOVE_TO_FRONT } from '../../screens/CreatePick/CreatePick';
+import { strings } from '../../locales';
 
-jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => {
-    return 'mockMaterialCommunityIcons'
-  },
-);
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
 
 describe('Test createPickDialog Component', () => {
   it('Renders the createPickDialog component with location other than moveToFront selected', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <CreatePickDialog
-        selectedSection={''}
+        selectedSection=""
         setSelectedSection={jest.fn()}
         numberOfPallets={1}
         setNumberOfPallets={jest.fn()}
@@ -72,5 +70,21 @@ describe('Test createPickDialog Component', () => {
     expect(mockSwitch).toHaveBeenCalled();
     fireEvent.press(submitButton);
     expect(mockSubmit).toHaveBeenCalled();
+  });
+  it('should test existence of noOfpallets input element based on selectedSection other than MOVE_TO_FRONT', () => {
+    const { queryAllByText } = render(
+      <CreatePickDialog
+        selectedSection="ABAR1-1"
+        setSelectedSection={jest.fn()}
+        numberOfPallets={1}
+        setNumberOfPallets={jest.fn()}
+        isQuickPick={false}
+        setIsQuickPick={jest.fn}
+        onClose={jest.fn}
+        onSubmit={jest.fn}
+        locations={[]}
+      />,
+    );
+    expect(queryAllByText(strings('PICKING.NUMBER_PALLETS'))).toHaveLength(1);
   });
 });
