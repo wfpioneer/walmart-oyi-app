@@ -402,7 +402,8 @@ export default {
     SELECT_CONTINUE_ACTION: 'Select Action to Continue',
     PALLET_NOT_FOUND: 'Pallet Not Found',
     CREATE_PICK_SUCCESS: 'Pick Created',
-    CREATE_PICK_FAILURE: 'There was an error creating the pick'
+    CREATE_PICK_FAILURE: 'There was an error creating the pick',
+    PICK_REQUEST_CRITERIA_ALREADY_MET: 'Not enough pallets available for this pick'
   },
   BINNING: {
     BINNING: 'Binning',

@@ -400,7 +400,8 @@ export default {
     SELECT_CONTINUE_ACTION: '选择任务继续',
     PALLET_NOT_FOUND: '未找到卡板',
     CREATE_PICK_SUCCESS: '补货已创建',
-    CREATE_PICK_FAILURE: '创建补货时报错'
+    CREATE_PICK_FAILURE: '创建补货时报错',
+    PICK_REQUEST_CRITERIA_ALREADY_MET: '无足够的卡板可供提取'
   },
   BINNING: {
     BINNING: '上架',

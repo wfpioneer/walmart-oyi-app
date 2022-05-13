@@ -106,12 +106,21 @@ export const createPickApiHook = (
     if (!isWaiting && error) {
       dispatch(hideActivityModal());
       dispatch({ type: CREATE_NEW_PICK.RESET });
-      Toast.show({
-        type: 'error',
-        text1: strings('PICKING.CREATE_PICK_FAILURE'),
-        visibilityTime: 4000,
-        position: 'bottom'
-      });
+      if (error.response.status === 409) {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.PICK_REQUEST_CRITERIA_ALREADY_MET'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.CREATE_PICK_FAILURE'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      }
     }
     // API waiting
     if (isWaiting) {
