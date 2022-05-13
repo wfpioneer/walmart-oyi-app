@@ -98,7 +98,7 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
           {addLocationsToPicker(locations)}
         </Picker>
       </View>
-      {selectedSection === MOVE_TO_FRONT ? (
+      {selectedSection ? (
         <View style={styles.numericSelectorContainer}>
           <Text>
             {strings('PICKING.NUMBER_PALLETS')}
