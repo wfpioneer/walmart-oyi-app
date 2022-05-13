@@ -276,6 +276,18 @@ describe('createPick function tests', () => {
       ...defaultAsyncState,
       error: 'Server Error'
     };
+
+    const failure409AsyncState: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        response: {
+          status: 409,
+          data: {
+            errorEnum: 'PICK_REQUEST_CRITERIA_ALREADY_MET'
+          }
+        }
+      }
+    };
     const isWaitingAsyncState: AsyncState = {
       ...defaultAsyncState,
       isWaiting: true
@@ -302,6 +314,18 @@ describe('createPick function tests', () => {
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
       text1: strings('PICKING.CREATE_PICK_FAILURE'),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+
+    mockDispatch.mockReset();
+    // @ts-expect-error Reset Toast Object
+    Toast.show.mockReset();
+    createPickApiHook(failure409AsyncState, mockDispatch, navigationProp)
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    expect(Toast.show).toHaveBeenCalledWith({
+      type: 'error',
+      text1: strings('PICKING.PICK_REQUEST_CRITERIA_ALREADY_MET'),
       visibilityTime: 4000,
       position: 'bottom'
     });
