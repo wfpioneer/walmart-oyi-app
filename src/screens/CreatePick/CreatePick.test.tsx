@@ -300,7 +300,7 @@ describe('createPick function tests', () => {
     expect(navigationProp.goBack).toHaveBeenCalled();
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'success',
-      text1: strings('PICKING.CREATE_PICK_SUCCESS'),
+      text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
       visibilityTime: 4000,
       position: 'bottom'
     });
@@ -313,7 +313,7 @@ describe('createPick function tests', () => {
     expect(mockDispatch).toHaveBeenCalledTimes(2);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
-      text1: strings('PICKING.CREATE_PICK_FAILURE'),
+      text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
       visibilityTime: 4000,
       position: 'bottom'
     });

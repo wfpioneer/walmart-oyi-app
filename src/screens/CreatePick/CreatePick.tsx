@@ -97,7 +97,7 @@ export const createPickApiHook = (
       navigation.goBack();
       Toast.show({
         type: 'success',
-        text1: strings('PICKING.CREATE_PICK_SUCCESS'),
+        text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
         visibilityTime: 4000,
         position: 'bottom'
       });
@@ -115,7 +115,7 @@ export const createPickApiHook = (
       } else {
         Toast.show({
           type: 'error',
-          text1: strings('PICKING.CREATE_PICK_FAILURE'),
+          text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
           visibilityTime: 4000,
           position: 'bottom'
         });
