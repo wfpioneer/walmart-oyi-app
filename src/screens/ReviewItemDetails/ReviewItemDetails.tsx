@@ -192,22 +192,34 @@ export const createNewPickApiHook = (
         visibilityTime: 4000,
         position: 'bottom'
       });
-      // Reset the form inputs and close the createPick Modal
+      // Reset the form inputs on success
       setSelectedSection('');
       setIsQuickPick(false);
       setNumberOfPallets(1);
+      // Reset the create new pick API
       dispatch({ type: CREATE_NEW_PICK.RESET });
       dispatch(hideActivityModal());
     }
     // create new pick api error
     if (createNewPickApi.error) {
-      Toast.show({
-        type: 'error',
-        text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
-        text2: strings('GENERICS.TRY_AGAIN'),
-        visibilityTime: 4000,
-        position: 'bottom'
-      });
+      const errResponse = createNewPickApi.error.response;
+      if (errResponse && errResponse.status === 409
+        && errResponse.data.errorEnum === 'PICK_REQUEST_CRITERIA_ALREADY_MET') {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.PICK_REQUEST_CRITERIA_ALREADY_MET'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
+          text2: strings('GENERICS.TRY_AGAIN'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      }
       dispatch({ type: CREATE_NEW_PICK.RESET });
       dispatch(hideActivityModal());
     }

@@ -684,6 +684,33 @@ describe('ReviewItemDetailsScreen', () => {
       expect(hideActivityModal).toBeCalledTimes(1);
     });
 
+    it('Tests createNewPickApiHook on 409 failure', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        result: null,
+        error: {
+          response: {
+            status: 409,
+            data: {
+              errorEnum: 'PICK_REQUEST_CRITERIA_ALREADY_MET'
+            }
+          }
+        }
+      };
+      const toastPickList409Error = {
+        type: 'error',
+        text1: strings('PICKING.PICK_REQUEST_CRITERIA_ALREADY_MET'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      createNewPickApiHook(
+        failureApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastPickList409Error);
+    });
+
     it('Tests createNewPickApiHook on failure', () => {
       const failureApi: AsyncState = {
         ...defaultAsyncState,
