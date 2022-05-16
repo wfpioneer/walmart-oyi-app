@@ -14,7 +14,7 @@ export interface CombinePalletsRequest {
   combinePallets: string[];
 }
 
-export interface GetPalletInfoRequest {
+export interface GetPalletDetailsRequest {
   palletIds: string[],
   isAllItems?: boolean,
   isSummary?: boolean
@@ -55,7 +55,7 @@ export default class PalletManagementService {
     });
   }
 
-  public static getPalletInfo(payload: GetPalletInfoRequest): Promise<AxiosResponse<unknown>> {
+  public static getPalletDetails(payload: GetPalletDetailsRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     const allItems = payload.isAllItems || false;
     const summaryDetails = payload.isSummary || false;
