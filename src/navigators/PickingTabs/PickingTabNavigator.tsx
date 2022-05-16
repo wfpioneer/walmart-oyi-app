@@ -32,7 +32,7 @@ import {
 import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
-import { GET_ITEM_DETAILS, GET_PICKLISTS } from '../../state/actions/asyncAPI';
+import { GET_ITEM_DETAILS, GET_PICKLISTS, UPDATE_PICKLIST_STATUS } from '../../state/actions/asyncAPI';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -44,6 +44,7 @@ interface PickingTabNavigatorProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   getItemDetailsApi: AsyncState;
   getPicklistsApi: AsyncState;
+  updatePicklistStatusApi: AsyncState;
   selectedTab: Tabs;
   useFocusEffectHook: (effect: EffectCallback) => void;
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
@@ -145,6 +146,44 @@ export const getPicklistApiHook = (
   }
 };
 
+export const updatePicklistStatusApiHook = (
+  updatePicklistStatusApi: AsyncState,
+  dispatch: Dispatch<any>,
+  screenIsFocused: boolean
+) => {
+  if (screenIsFocused) {
+    // on api success
+    if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result
+    && updatePicklistStatusApi.result.status === 200) {
+      Toast.show({
+        type: 'success',
+        text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      dispatch(hideActivityModal());
+      dispatch({ type: UPDATE_PICKLIST_STATUS.RESET });
+      dispatch(getPicklists());
+    }
+    // on api error
+    if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.error) {
+      dispatch(hideActivityModal());
+      Toast.show({
+        type: 'error',
+        text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      dispatch({ type: UPDATE_PICKLIST_STATUS.RESET });
+    }
+    // on api request
+    if (updatePicklistStatusApi.isWaiting) {
+      dispatch(showActivityModal());
+    }
+  }
+};
+
 export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Element => {
   const {
     picklist,
@@ -154,6 +193,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     useEffectHook,
     getItemDetailsApi,
     getPicklistsApi,
+    updatePicklistStatusApi,
     selectedTab,
     useCallbackHook,
     useFocusEffectHook
@@ -212,9 +252,14 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
   );
 
   // Get Picklist Api Hook
-  useEffect(
+  useEffectHook(
     () => getPicklistApiHook(getPicklistsApi, dispatch, navigation.isFocused()),
     [getPicklistsApi]
+  );
+
+  useEffectHook(
+    () => updatePicklistStatusApiHook(updatePicklistStatusApi, dispatch, navigation.isFocused()),
+    [updatePicklistStatusApi]
   );
 
   return (
@@ -261,6 +306,7 @@ export const PickingTabs = (): JSX.Element => {
   const picklist = useTypedSelector(state => state.Picking.pickList);
   const getPicklistApi = useTypedSelector(state => state.async.getPicklists);
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
+  const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
   const selectedTab = useTypedSelector(state => state.Picking.selectedTab);
   const navigation = useNavigation();
   const route = useRoute();
@@ -273,6 +319,7 @@ export const PickingTabs = (): JSX.Element => {
       useEffectHook={useEffect}
       getItemDetailsApi={getItemDetailsApi}
       getPicklistsApi={getPicklistApi}
+      updatePicklistStatusApi={updatePicklistStatusApi}
       selectedTab={selectedTab}
       useCallbackHook={useCallback}
       useFocusEffectHook={useFocusEffect}
