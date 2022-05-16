@@ -53,7 +53,8 @@ export default {
     DISABLED: 'Desactivado',
     REQUIRED: 'Requerido',
     REMOVED: 'Removido',
-    CREATE: 'Crear'
+    CREATE: 'Crear',
+    UNASSIGNED: 'Sin asignar'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',

@@ -53,7 +53,8 @@ export default {
     DISABLED: '不可用',
     REQUIRED: '适用',
     REMOVED: '移除',
-    CREATE: '创建'
+    CREATE: '创建',
+    UNASSIGNED: '未分派'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
