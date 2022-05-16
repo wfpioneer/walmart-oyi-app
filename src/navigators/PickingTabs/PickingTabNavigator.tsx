@@ -155,13 +155,13 @@ export const updatePicklistStatusApiHook = (
     // on api success
     if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result
     && updatePicklistStatusApi.result.status === 200) {
+      dispatch(hideActivityModal());
       Toast.show({
         type: 'success',
         text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
         visibilityTime: 4000,
         position: 'bottom'
       });
-      dispatch(hideActivityModal());
       dispatch({ type: UPDATE_PICKLIST_STATUS.RESET });
       dispatch(getPicklists());
     }
