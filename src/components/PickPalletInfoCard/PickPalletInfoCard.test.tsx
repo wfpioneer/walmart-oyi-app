@@ -54,6 +54,8 @@ describe('Pick pallet info card render tests', () => {
           palletLocation="ABAR1-1"
           pickListItems={[]}
           pickStatus={status}
+          canDelete={false}
+          onDeletePress={jest.fn()}
         />
       );
 
@@ -71,6 +73,8 @@ describe('Pick pallet info card render tests', () => {
         palletLocation="ABAR1-1"
         pickListItems={mockPickListItems}
         pickStatus={PickStatus.READY_TO_PICK}
+        canDelete={false}
+        onDeletePress={jest.fn()}
       />
     );
 
@@ -86,6 +90,8 @@ describe('Pick pallet info card render tests', () => {
         palletLocation="ABAR1-1"
         pickListItems={[]}
         pickStatus={PickStatus.COMPLETE}
+        canDelete={false}
+        onDeletePress={jest.fn()}
       />
     );
 

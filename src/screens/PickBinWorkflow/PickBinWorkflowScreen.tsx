@@ -288,6 +288,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
         palletLocation={selectedPicks[0].palletLocationName}
         pickListItems={selectedPicks}
         pickStatus={selectedPicks[0].status}
+        canDelete={false}
         onDeletePress={() => undefined}
       />
       <View style={styles.actionButtonsView}>

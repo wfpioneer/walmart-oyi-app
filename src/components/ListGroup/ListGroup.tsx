@@ -104,6 +104,7 @@ const renderPickPalletInfoList = (
       palletLocation={item.palletLocationName}
       pickListItems={items}
       pickStatus={item.status}
+      canDelete={true}
       onDeletePress={() => dispatch(updatePicklistStatus({
         headers: { action: PickAction.DELETE },
         picklistItems,

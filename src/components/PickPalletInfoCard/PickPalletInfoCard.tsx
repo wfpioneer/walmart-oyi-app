@@ -14,11 +14,12 @@ interface PickPalletInfoProps {
   pickStatus: PickStatus;
   palletLocation: string;
   onDeletePress: () => void;
+  canDelete: boolean;
 }
 
 const PickPalletInfoCard = (props: PickPalletInfoProps) => {
   const {
-    onPress, palletId, pickListItems, pickStatus, palletLocation, onDeletePress
+    onPress, palletId, pickListItems, pickStatus, palletLocation, onDeletePress, canDelete
   } = props;
 
   const palletsItems = pickListItems.filter(item => item.palletId === palletId);
@@ -26,7 +27,7 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
   const renderItem = ({ item }: { item: PickListItem }) => (
     <PickItemInfo
       pickListItem={item}
-      canDelete={pickStatus === PickStatus.READY_TO_PICK}
+      canDelete={canDelete && pickStatus === PickStatus.READY_TO_PICK}
       onDeletePressed={() => onDeletePress()}
     />
   );
