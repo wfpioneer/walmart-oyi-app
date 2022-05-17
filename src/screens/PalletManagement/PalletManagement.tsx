@@ -23,12 +23,12 @@ import styles from './PalletManagement.style';
 import { strings } from '../../locales';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { validateSession } from '../../utils/sessionTimeout';
-import { getPalletConfig, getPalletInfo } from '../../state/actions/saga';
+import { getPalletConfig, getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
-import { GET_PALLET_CONFIG, GET_PALLET_INFO } from '../../state/actions/asyncAPI';
+import { GET_PALLET_CONFIG, GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
 import { Configurations } from '../../models/User';
 
@@ -43,7 +43,7 @@ interface PalletManagementProps {
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
   dispatch: Dispatch<any>;
-  getPalletInfoApi: AsyncState;
+  getPalletDetailsApi: AsyncState;
   getPalletConfigApi: AsyncState;
   userConfig: Configurations
 }
@@ -53,7 +53,7 @@ const nonNumRegex = new RegExp(/[^0-9]/g);
 export const onSubmit = (searchText: string, dispatch: Dispatch<any>): void => {
   if (searchText.match(palletIDRegex)) {
     dispatch(
-      getPalletInfo({
+      getPalletDetails({
         palletIds: [searchText],
         isAllItems: true,
         isSummary: false
@@ -68,17 +68,17 @@ export const showActivitySpinner = (
   getInfoCompleted: boolean
 ) => (getInfoWaiting && configWaiting) || (getInfoWaiting) || (configWaiting && getInfoCompleted);
 
-export const getPalletInfoHook = (
-  getPalletInfoApi: AsyncState,
+export const getPalletDetailsApiHook = (
+  getPalletDetailsApi: AsyncState,
   dispatch: Dispatch<any>,
   setGetInfoComplete: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   // on api success
-  if (!getPalletInfoApi.isWaiting && getPalletInfoApi.result) {
-    if (getPalletInfoApi.result.status === 200) {
+  if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
+    if (getPalletDetailsApi.result.status === 200) {
       const {
         id, createDate, expirationDate, items
-      } = getPalletInfoApi.result.data.pallets[0];
+      } = getPalletDetailsApi.result.data.pallets[0];
       const palletItems = items.map((item: PalletItem) => ({
         ...item,
         quantity: item.quantity || 0,
@@ -96,7 +96,7 @@ export const getPalletInfoHook = (
       };
       dispatch(setupPallet(palletDetails));
       setGetInfoComplete(true);
-    } else if (getPalletInfoApi.result.status === 204) {
+    } else if (getPalletDetailsApi.result.status === 204) {
       Toast.show({
         type: 'error',
         text1: strings('LOCATION.PALLET_NOT_FOUND'),
@@ -107,7 +107,7 @@ export const getPalletInfoHook = (
   }
 
   // on api error
-  if (!getPalletInfoApi.isWaiting && getPalletInfoApi.error) {
+  if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
     Toast.show({
       type: 'error',
       text1: strings('PALLET.PALLET_DETAILS_ERROR'),
@@ -154,7 +154,7 @@ export const PalletManagementScreen = (
     navigation,
     route,
     dispatch,
-    getPalletInfoApi,
+    getPalletDetailsApi,
     getPalletConfigApi,
     userConfig
   } = props;
@@ -166,12 +166,12 @@ export const PalletManagementScreen = (
   // Resets Get PalletInfo api state when navigating off-screen
   useEffectHook(() => {
     navigation.addListener('blur', () => {
-      if (getPalletInfoApi.value) {
-        dispatch({ type: GET_PALLET_INFO.RESET });
+      if (getPalletDetailsApi.value) {
+        dispatch({ type: GET_PALLET_DETAILS.RESET });
         resetSearchText();
       }
     });
-  }, [getPalletInfoApi]);
+  }, [getPalletDetailsApi]);
 
   // Scanner listener
   useEffectHook(() => {
@@ -185,7 +185,7 @@ export const PalletManagementScreen = (
           });
           setSearchText(scan.value);
           dispatch(
-            getPalletInfo({ palletIds: [scan.value], isAllItems: true, isSummary: false })
+            getPalletDetails({ palletIds: [scan.value], isAllItems: true, isSummary: false })
           );
         });
       }
@@ -198,9 +198,9 @@ export const PalletManagementScreen = (
   // Get Pallet Info Api
   useEffectHook(() => {
     if (navigation.isFocused()) {
-      getPalletInfoHook(getPalletInfoApi, dispatch, setGetInfoComplete);
+      getPalletDetailsApiHook(getPalletDetailsApi, dispatch, setGetInfoComplete);
     }
-  }, [getPalletInfoApi]);
+  }, [getPalletDetailsApi]);
 
   // GetPalletConfig API
   useEffectHook(() => {
@@ -218,10 +218,10 @@ export const PalletManagementScreen = (
     }
   }, [configComplete, getInfoComplete]);
 
-  if (showActivitySpinner(getPalletConfigApi.isWaiting, getPalletInfoApi.isWaiting, getInfoComplete)) {
+  if (showActivitySpinner(getPalletConfigApi.isWaiting, getPalletDetailsApi.isWaiting, getInfoComplete)) {
     return (
       <ActivityIndicator
-        animating={showActivitySpinner(getPalletConfigApi.isWaiting, getPalletInfoApi.isWaiting, getInfoComplete)}
+        animating={showActivitySpinner(getPalletConfigApi.isWaiting, getPalletDetailsApi.isWaiting, getInfoComplete)}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -256,7 +256,7 @@ export const PalletManagementScreen = (
 };
 
 const PalletManagement = (): JSX.Element => {
-  const getPalletInfoApi = useTypedSelector(state => state.async.getPalletInfo);
+  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
   const userConfig = useTypedSelector(state => state.User.configs);
   const [configComplete, setConfigComplete] = useState(false);
@@ -274,7 +274,7 @@ const PalletManagement = (): JSX.Element => {
       setConfigComplete={setConfigComplete}
       getInfoComplete={getInfoComplete}
       setGetInfoComplete={setGetInfoComplete}
-      getPalletInfoApi={getPalletInfoApi}
+      getPalletDetailsApi={getPalletDetailsApi}
       getPalletConfigApi={getPalletConfigApi}
       navigation={navigation}
       route={route}
