@@ -55,7 +55,7 @@ describe('Pick pallet info card render tests', () => {
           pickListItems={[]}
           pickStatus={status}
           canDelete={false}
-          onDeletePress={jest.fn()}
+          dispatch={jest.fn()}
         />
       );
 
@@ -74,7 +74,7 @@ describe('Pick pallet info card render tests', () => {
         pickListItems={mockPickListItems}
         pickStatus={PickStatus.READY_TO_PICK}
         canDelete={false}
-        onDeletePress={jest.fn()}
+        dispatch={jest.fn()}
       />
     );
 
@@ -91,7 +91,7 @@ describe('Pick pallet info card render tests', () => {
         pickListItems={[]}
         pickStatus={PickStatus.COMPLETE}
         canDelete={false}
-        onDeletePress={jest.fn()}
+        dispatch={jest.fn()}
       />
     );
 

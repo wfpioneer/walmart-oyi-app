@@ -146,7 +146,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
   />
   <PickPalletInfoCard
     canDelete={false}
-    onDeletePress={[Function]}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="45"
     palletLocation="ABAR1-4"
@@ -266,7 +266,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
   />
   <PickPalletInfoCard
     canDelete={false}
-    onDeletePress={[Function]}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
@@ -367,7 +367,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
   />
   <PickPalletInfoCard
     canDelete={false}
-    onDeletePress={[Function]}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
@@ -448,7 +448,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
   />
   <PickPalletInfoCard
     canDelete={false}
-    onDeletePress={[Function]}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="44"
     palletLocation="ABAR1-2"
@@ -568,7 +568,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
   />
   <PickPalletInfoCard
     canDelete={false}
-    onDeletePress={[Function]}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="40"
     palletLocation="ABAR1-2"
@@ -688,7 +688,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
   />
   <PickPalletInfoCard
     canDelete={false}
-    onDeletePress={[Function]}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="40"
     palletLocation="ABAR1-2"
@@ -807,7 +807,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
   />
   <PickPalletInfoCard
     canDelete={false}
-    onDeletePress={[Function]}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="42"
     palletLocation="ABAR1-2"
@@ -926,7 +926,7 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
   />
   <PickPalletInfoCard
     canDelete={false}
-    onDeletePress={[Function]}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="41"
     palletLocation="ABAR1-2"

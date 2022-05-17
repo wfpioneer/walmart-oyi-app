@@ -91,12 +91,6 @@ const renderPickPalletInfoList = (
   dispatch: Dispatch<any>
 ) => {
   const item = items[0];
-  const picklistItems = [{
-    picklistId: item.id,
-    locationId: item.palletLocationId,
-    locationName: item.palletLocationName
-  }];
-
   return (
     <PickPalletInfoCard
       onPress={() => handleWorkflowNav(currentTab, items, navigation, dispatch)}
@@ -105,11 +99,7 @@ const renderPickPalletInfoList = (
       pickListItems={items}
       pickStatus={item.status}
       canDelete={true}
-      onDeletePress={() => dispatch(updatePicklistStatus({
-        headers: { action: PickAction.DELETE },
-        picklistItems,
-        palletId: item.palletId
-      }))}
+      dispatch={dispatch}
     />
   );
 };

@@ -289,7 +289,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
         pickListItems={selectedPicks}
         pickStatus={selectedPicks[0].status}
         canDelete={false}
-        onDeletePress={() => undefined}
+        dispatch={dispatch}
       />
       <View style={styles.actionButtonsView}>
         {actionButtonsView()}

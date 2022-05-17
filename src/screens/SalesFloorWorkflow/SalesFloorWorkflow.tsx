@@ -595,7 +595,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         pickListItems={[]}
         pickStatus={selectedPicks[0].status}
         canDelete={false}
-        onDeletePress={() => undefined}
+        dispatch={dispatch}
       />
       <View style={styles.updateQuantityTextView}>
         <Text style={styles.updateQuantityText}>
