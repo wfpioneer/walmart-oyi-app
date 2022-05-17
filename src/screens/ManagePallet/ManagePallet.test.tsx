@@ -7,7 +7,7 @@ import {
   clearPalletApiHook,
   getItemDetailsApiHook,
   getNumberOfDeleted,
-  getPalletInfoApiHook,
+  getPalletDetailsApiHook,
   handleAddItems,
   handleDecreaseQuantity,
   handleIncreaseQuantity,
@@ -123,7 +123,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletInfoApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
@@ -151,7 +151,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletInfoApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
@@ -181,7 +181,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletInfoApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
@@ -208,7 +208,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletInfoApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
@@ -239,7 +239,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletInfoApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={true}
           setDisplayClearConfirmation={jest.fn()}
@@ -278,7 +278,7 @@ describe('ManagePalletScreen', () => {
           addPalletUpcApi={defaultAsyncState}
           updateItemQtyAPI={defaultAsyncState}
           deleteUpcsApi={defaultAsyncState}
-          getPalletInfoApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
           clearPalletApi={defaultAsyncState}
           displayClearConfirmation={false}
           setDisplayClearConfirmation={jest.fn()}
@@ -408,7 +408,7 @@ describe('ManagePalletScreen', () => {
       expect(dispatch).not.toHaveBeenCalled();
     });
 
-    it('Tests getPalletInfoApiHook on success', () => {
+    it('Tests getPalletDetailsApiHook on success', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
@@ -426,16 +426,16 @@ describe('ManagePalletScreen', () => {
         }
       };
 
-      getPalletInfoApiHook(successApi, mockDispatch, navigationProp);
+      getPalletDetailsApiHook(successApi, mockDispatch, navigationProp);
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(3);
       expect(Toast.show).toBeCalledTimes(0);
     });
 
-    it('Tests getPalletInfoApiHook on fail', () => {
+    it('Tests getPalletDetailsApiHook on fail', () => {
       const failApi: AsyncState = { ...defaultAsyncState, error: {} };
 
-      getPalletInfoApiHook(failApi, mockDispatch, navigationProp);
+      getPalletDetailsApiHook(failApi, mockDispatch, navigationProp);
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);

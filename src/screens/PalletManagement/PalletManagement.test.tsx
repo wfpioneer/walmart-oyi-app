@@ -6,7 +6,7 @@ import { AsyncState } from '../../models/AsyncState';
 import {
   PalletManagementScreen,
   getPalletConfigHook,
-  getPalletInfoHook,
+  getPalletDetailsApiHook,
   onSubmit
 } from './PalletManagement';
 import { mockConfig } from '../../mockData/mockConfig';
@@ -31,7 +31,7 @@ describe('PalletManagementScreen', () => {
           useEffectHook={jest.fn()}
           searchText=""
           setSearchText={jest.fn()}
-          getPalletInfoApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
           configComplete={false}
           setConfigComplete={jest.fn()}
           getInfoComplete={false}
@@ -57,7 +57,7 @@ describe('PalletManagementScreen', () => {
           useEffectHook={jest.fn()}
           searchText=""
           setSearchText={jest.fn()}
-          getPalletInfoApi={palletDetailsIsWaiting}
+          getPalletDetailsApi={palletDetailsIsWaiting}
           configComplete={false}
           setConfigComplete={jest.fn()}
           getInfoComplete={false}
@@ -89,7 +89,7 @@ describe('PalletManagementScreen', () => {
     });
   });
   describe('Tests functions for hooks', () => {
-    it('testGetPalletInfoHook', async () => {
+    it('testgetPalletDetailsHook', async () => {
       const dispatch = jest.fn();
       const setGetInfoComplete = jest.fn();
       const successAsyncState = {
@@ -127,16 +127,16 @@ describe('PalletManagementScreen', () => {
         ...defaultAsyncState,
         error: 'test'
       };
-      getPalletInfoHook(successAsyncState, dispatch, setGetInfoComplete);
+      getPalletDetailsApiHook(successAsyncState, dispatch, setGetInfoComplete);
       expect(dispatch).toHaveBeenCalled();
       expect(setGetInfoComplete).toHaveBeenCalled();
 
-      getPalletInfoHook(successNoPalletAsyncState, dispatch, setGetInfoComplete);
+      getPalletDetailsApiHook(successNoPalletAsyncState, dispatch, setGetInfoComplete);
       expect(Toast.show).toBeCalledTimes(1);
 
       // @ts-ignore
       Toast.show.mockReset();
-      getPalletInfoHook(failureAsyncState, dispatch, setGetInfoComplete);
+      getPalletDetailsApiHook(failureAsyncState, dispatch, setGetInfoComplete);
       expect(Toast.show).toBeCalledTimes(1);
     });
 
