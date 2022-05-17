@@ -399,7 +399,10 @@ export default {
     LOCATIONS_UPDATED: 'Ubicaciones actualizadas',
     LOCATIONS_FAILED_UPDATE: 'Falló la actualización de ubicaciones',
     SELECT_CONTINUE_ACTION: 'Seleccionar acción para continuar',
-    PALLET_NOT_FOUND: 'Pallet no encontrado'
+    PALLET_NOT_FOUND: 'Pallet no encontrado',
+    CREATE_NEW_PICK_SUCCESS: 'Pick creado',
+    CREATE_NEW_PICK_FAILURE: 'Hubo un error creando el pick',
+    PICK_REQUEST_CRITERIA_ALREADY_MET: 'No hay suficientes pallets disponibles para este pick'
   },
   BINNING: {
     BINNING: 'Bodega',

@@ -399,7 +399,10 @@ export default {
     LOCATIONS_UPDATED: '位置已更新',
     LOCATIONS_FAILED_UPDATE: '位置更新失败',
     SELECT_CONTINUE_ACTION: '选择任务继续',
-    PALLET_NOT_FOUND: '未找到卡板'
+    PALLET_NOT_FOUND: '未找到卡板',
+    CREATE_NEW_PICK_SUCCESS: '补货已创建',
+    CREATE_NEW_PICK_FAILURE: '创建补货时报错',
+    PICK_REQUEST_CRITERIA_ALREADY_MET: '无足够的卡板可供提取'
   },
   BINNING: {
     BINNING: '上架',
