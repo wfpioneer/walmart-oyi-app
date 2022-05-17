@@ -57,7 +57,7 @@ const PickItemInfo = (props: PickItemInfoProps) => {
               }`}
             </Text>
             <Text style={styles.contentText}>
-              {`${strings('PICKING.ASSIGNED')}: ${assignedAssociate}`}
+              {`${strings('PICKING.ASSIGNED')}: ${assignedAssociate || strings('GENERICS.UNASSIGNED')}`}
             </Text>
             <Text style={styles.contentText}>
               {`${strings('PICKING.CREATED_BY')}: ${createdBy}`}
