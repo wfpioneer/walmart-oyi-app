@@ -5,7 +5,7 @@ export const mockPickLists: PickListItem[] = [
   {
     assignedAssociate: 'Associate 1',
     category: 71,
-    createTS: '10:32 AM 02/04/2022',
+    createTs: '2022-04-02T12:55:31.9633333Z',
     createdBy: 'Associate 1',
     id: 418,
     itemDesc: 'Teapot',
@@ -23,7 +23,7 @@ export const mockPickLists: PickListItem[] = [
   {
     assignedAssociate: 'Associate 1',
     category: 71,
-    createTS: '4:25 PM 02/09/2022',
+    createTs: '2022-02-09T12:55:31.9633333Z',
     createdBy: 'Manager 1',
     id: 3,
     itemDesc: 'Swiffer',
