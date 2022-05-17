@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import moment from 'moment';
 import { Swipeable } from 'react-native-gesture-handler';
 import { strings } from '../../locales';
 import { PickListItem } from '../../models/Picking.d';
@@ -34,7 +35,7 @@ const PickItemInfo = (props: PickItemInfoProps) => {
     upcNbr,
     salesFloorLocationName,
     createdBy,
-    createTS,
+    createTs,
     assignedAssociate,
     moveToFront
   } = pickListItem;
@@ -70,7 +71,7 @@ const PickItemInfo = (props: PickItemInfoProps) => {
               {`${strings('ITEM.UPC')}: ${upcNbr}`}
             </Text>
             <Text style={styles.contentText}>
-              {`${strings('PICKING.CREATED')}: ${createTS}`}
+              {`${strings('PICKING.CREATED')}: ${moment(createTs).format('hh:mm A DD/MM/YYYY')}`}
             </Text>
           </View>
         </View>
