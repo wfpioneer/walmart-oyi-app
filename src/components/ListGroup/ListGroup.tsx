@@ -9,10 +9,13 @@ import {
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Dispatch } from 'redux';
 import PickPalletInfoCard from '../PickPalletInfoCard/PickPalletInfoCard';
-import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
+import {
+  PickAction, PickListItem, PickStatus, Tabs
+} from '../../models/Picking.d';
 import styles from './ListGroup.style';
 import COLOR from '../../themes/Color';
 import { selectPicks } from '../../state/actions/Picking';
+import { updatePicklistStatus } from '../../state/actions/saga';
 
 interface ListGroupProps {
   title: string;
@@ -95,6 +98,8 @@ const renderPickPalletInfoList = (
       palletLocation={item.palletLocationName}
       pickListItems={items}
       pickStatus={item.status}
+      canDelete={true}
+      dispatch={dispatch}
     />
   );
 };

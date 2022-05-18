@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import {
   FlatList, Pressable, Text, View
 } from 'react-native';
 import { strings } from '../../locales';
-import { PickListItem, PickStatus } from '../../models/Picking.d';
+import { PickAction, PickListItem, PickStatus } from '../../models/Picking.d';
+import { updatePicklistStatus } from '../../state/actions/saga';
 import PickItemInfo from '../PickItemInfoCard/PickItemInfoCard';
 import styles from './PickPalletInfoCard.style';
 
@@ -13,11 +14,13 @@ interface PickPalletInfoProps {
   onPress: () => void;
   pickStatus: PickStatus;
   palletLocation: string;
+  dispatch: Dispatch<any>
+  canDelete: boolean;
 }
 
 const PickPalletInfoCard = (props: PickPalletInfoProps) => {
   const {
-    onPress, palletId, pickListItems, pickStatus, palletLocation
+    onPress, palletId, pickListItems, pickStatus, palletLocation, dispatch, canDelete
   } = props;
 
   const palletsItems = pickListItems.filter(item => item.palletId === palletId);
@@ -25,8 +28,16 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
   const renderItem = ({ item }: { item: PickListItem }) => (
     <PickItemInfo
       pickListItem={item}
-      canDelete={true}
-      onDeletePressed={() => undefined} // TODO implement deleting an item from a pallet
+      canDelete={canDelete && pickStatus === PickStatus.READY_TO_PICK}
+      onDeletePressed={() => dispatch(updatePicklistStatus({
+        headers: { action: PickAction.DELETE },
+        picklistItems: [{
+          picklistId: item.id,
+          locationId: item.palletLocationId,
+          locationName: item.palletLocationName
+        }],
+        palletId: item.palletId
+      }))}
     />
   );
 
