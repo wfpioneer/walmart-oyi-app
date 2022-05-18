@@ -1,10 +1,9 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { NavigationProp } from '@react-navigation/native';
 import ListGroup, { CollapsibleCard } from './ListGroup';
 import { mockPickLists } from '../../mockData/mockPickList';
-import { PickStatus, Tabs } from '../../models/Picking.d';
+import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('@react-navigation/native', () => ({
@@ -30,7 +29,7 @@ describe('ListGroup', () => {
 
     it('Test renders the ListGroup component with groupItems prop as true', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const newMockPickLists = [
+      const newMockPickLists: PickListItem[] = [
         ...mockPickLists,
         {
           assignedAssociate: 'Associate 2',
@@ -41,7 +40,7 @@ describe('ListGroup', () => {
           itemDesc: 'Candy',
           itemNbr: 7344,
           moveToFront: true,
-          palletId: 4321,
+          palletId: '4321',
           palletLocationId: 1672,
           palletLocationName: 'C1-2-1',
           quickPick: false,
