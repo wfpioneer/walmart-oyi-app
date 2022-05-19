@@ -129,5 +129,8 @@ export const updatePicklistStatus = makeAsyncActionCreators(UPDATE_PICKLIST_STAT
 export const GET_PICKLISTS = makeAsyncActionTypes('API/GET_PICKLISTS');
 export const getPicklists = makeAsyncActionCreators(GET_PICKLISTS);
 
+export const UPDATE_PALLET_NOT_FOUND = makeAsyncActionTypes('API/UPDATE_PALLET_NOT_FOUND');
+export const updatePalletNotFound = makeAsyncActionCreators(UPDATE_PALLET_NOT_FOUND);
+
 export const CREATE_NEW_PICK = makeAsyncActionTypes('API/CREATE_NEW_PICK');
 export const createNewPick = makeAsyncActionCreators(CREATE_NEW_PICK);
