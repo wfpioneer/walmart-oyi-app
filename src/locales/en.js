@@ -53,7 +53,8 @@ export default {
     DISABLED: 'Disabled',
     REQUIRED: 'Required',
     REMOVED: 'Removed',
-    CREATE: 'Create'
+    CREATE: 'Create',
+    UNASSIGNED: 'unassigned'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -393,12 +394,17 @@ export default {
     PICKLIST_ERROR: 'There was an error retrieving the Picklist',
     UPDATE_REMAINING_QTY: 'Update quantity of each item left on pallet before continuing',
     REMAINING_QTY: 'Quantity left on pallet',
+    REMOVE_PERISHABLE: 'Removing perishable item',
+    REMOVE_PERISHABLE_NEW_EXPIRY: 'Please enter new expiration date',
     UPDATE_PICKLIST_STATUS_SUCCESS: 'Successfully updated picklist status',
     UPDATE_PICKLIST_STATUS_ERROR: 'There was an error while updating the Picklist status',
     LOCATIONS_UPDATED: 'Locations Updated',
     LOCATIONS_FAILED_UPDATE: 'Locations Failed to Update',
     SELECT_CONTINUE_ACTION: 'Select Action to Continue',
-    PALLET_NOT_FOUND: 'Pallet Not Found'
+    PALLET_NOT_FOUND: 'Pallet Not Found',
+    CREATE_NEW_PICK_SUCCESS: 'Pick Created',
+    CREATE_NEW_PICK_FAILURE: 'There was an error creating the pick',
+    PICK_REQUEST_CRITERIA_ALREADY_MET: 'Not enough pallets available for this pick'
   },
   BINNING: {
     BINNING: 'Binning',

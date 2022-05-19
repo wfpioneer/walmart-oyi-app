@@ -2,11 +2,11 @@ import React from 'react';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import Toast from 'react-native-toast-message';
-import { CombinePalletsScreen, combinePalletsApiEffect, getPalletInfoApiEffect } from './CombinePallets';
+import { CombinePalletsScreen, combinePalletsApiEffect, getPalletDetailsApiEffect } from './CombinePallets';
 import { CombinePallet, PalletItem } from '../../models/PalletManagementTypes';
 import { AsyncState } from '../../models/AsyncState';
 import { ADD_COMBINE_PALLET } from '../../state/actions/PalletManagement';
-import { GET_PALLET_INFO } from '../../state/actions/asyncAPI';
+import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 
 let navigationProp: NavigationProp<any>;
 let routeProp: RouteProp<any, string>;
@@ -60,7 +60,7 @@ describe('CombinePalletsScreen', () => {
           navigation={navigationProp}
           dispatch={jest.fn()}
           activityModal={false}
-          getPalletInfoApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
           combinePalletsApi={defaultAsyncState}
         />
       );
@@ -91,7 +91,7 @@ describe('CombinePalletsScreen', () => {
         navigation={navigationProp}
         dispatch={jest.fn()}
         activityModal={false}
-        getPalletInfoApi={defaultAsyncState}
+        getPalletDetailsApi={defaultAsyncState}
         combinePalletsApi={defaultAsyncState}
       />
     );
@@ -145,11 +145,11 @@ describe('Combine Pallets externalized function tests', () => {
       }
     };
 
-    getPalletInfoApiEffect(successApi, mockDispatch, navigationProp);
+    getPalletDetailsApiEffect(successApi, mockDispatch, navigationProp);
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(2);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: ADD_COMBINE_PALLET }));
-    expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_INFO.RESET }));
+    expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_DETAILS.RESET }));
     expect(Toast.show).toBeCalledTimes(0);
   });
 
@@ -161,11 +161,11 @@ describe('Combine Pallets externalized function tests', () => {
       }
     };
 
-    getPalletInfoApiEffect(successApi, mockDispatch, navigationProp);
+    getPalletDetailsApiEffect(successApi, mockDispatch, navigationProp);
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(Toast.show).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(1);
-    expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_INFO.RESET }));
+    expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_DETAILS.RESET }));
   });
 
   it('Tests the get pallet info api effect, on fail', () => {
@@ -177,10 +177,10 @@ describe('Combine Pallets externalized function tests', () => {
       }
     };
 
-    getPalletInfoApiEffect(failApi, mockDispatch, navigationProp);
+    getPalletDetailsApiEffect(failApi, mockDispatch, navigationProp);
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(Toast.show).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(1);
-    expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_INFO.RESET }));
+    expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_DETAILS.RESET }));
   });
 });

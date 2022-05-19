@@ -526,7 +526,57 @@ export default {
       count: 5
     },
     sales: {
-      error: ''
+      lastUpdateTs: SALES_LAST_UPDATE_TS,
+      dailyAvgSales: 15,
+      daily: [
+        {
+          day: SALES_DAYS.DAY1,
+          value: 10
+        },
+        {
+          day: SALES_DAYS.DAY2,
+          value: 0
+        },
+        {
+          day: SALES_DAYS.DAY3,
+          value: 10
+        },
+        {
+          day: SALES_DAYS.DAY4,
+          value: 10
+        },
+        {
+          day: SALES_DAYS.DAY5,
+          value: 42
+        },
+        {
+          day: SALES_DAYS.DAY6,
+          value: 5
+        },
+        {
+          day: SALES_DAYS.DAY7,
+          value: 1
+        }
+      ],
+      weeklyAvgSales: 10,
+      weekly: [
+        {
+          week: 51,
+          value: 0
+        },
+        {
+          week: 1,
+          value: 10
+        },
+        {
+          week: 2,
+          value: 27
+        },
+        {
+          week: 3,
+          value: 10
+        }
+      ]
     }
   }
 };

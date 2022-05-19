@@ -27,7 +27,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { addCombinePallet, clearCombinePallet } from '../../state/actions/PalletManagement';
 import CombinePalletCard from '../../components/CombinePalletCard/CombinePalletCard';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
-import { combinePallets as combinePalletsSaga, getPalletInfo } from '../../state/actions/saga';
+import { combinePallets as combinePalletsSaga, getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
@@ -42,7 +42,7 @@ interface CombinePalletsProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   dispatch: Dispatch<any>;
   activityModal: boolean;
-  getPalletInfoApi: AsyncState;
+  getPalletDetailsApi: AsyncState;
   combinePalletsApi: AsyncState;
 }
 
@@ -53,15 +53,15 @@ const ScanPalletComponent = (): JSX.Element => (
   </View>
 );
 
-export const getPalletInfoApiEffect = (
-  palletInfoApi: AsyncState,
+export const getPalletDetailsApiEffect = (
+  getPalletDetailsApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>
 ): void => {
   if (navigation.isFocused()) {
     // Success
-    if (!palletInfoApi.isWaiting && palletInfoApi.result) {
-      const { result } = palletInfoApi;
+    if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
+      const { result } = getPalletDetailsApi;
       if (result.status === 200) {
         dispatch(addCombinePallet({
           itemCount: result.data.pallets[0].items.length,
@@ -75,17 +75,17 @@ export const getPalletInfoApiEffect = (
           visibilityTime: SNACKBAR_TIMEOUT + 1000
         });
       }
-      dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
+      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
     }
     // Failure
-    if (palletInfoApi.error) {
+    if (getPalletDetailsApi.error) {
       Toast.show({
         type: 'error',
         position: 'bottom',
         text1: strings('PALLET.PALLET_DETAILS_ERROR'),
         visibilityTime: SNACKBAR_TIMEOUT + 1000
       });
-      dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
+      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
     }
   }
 };
@@ -105,7 +105,7 @@ export const combinePalletsApiEffect = (
         text1: strings('PALLET.COMBINE_PALLET_SUCCESS')
       });
       dispatch({ type: 'API/PATCH_COMBINE_PALLETS/RESET' });
-      dispatch(getPalletInfo({ palletIds: [palletId], isAllItems: true, isSummary: false }));
+      dispatch(getPalletDetails({ palletIds: [palletId], isAllItems: true, isSummary: false }));
       navigation.goBack();
     }
 
@@ -134,7 +134,7 @@ export const CombinePalletsScreen = (
     navigation,
     dispatch,
     activityModal,
-    getPalletInfoApi,
+    getPalletDetailsApi,
     combinePalletsApi
   } = props;
   let scannedSubscription: EmitterSubscription;
@@ -161,7 +161,7 @@ export const CombinePalletsScreen = (
               visibilityTime: SNACKBAR_TIMEOUT
             });
           } else {
-            dispatch(getPalletInfo({ palletIds: [scan.value], isAllItems: true, isSummary: false }));
+            dispatch(getPalletDetails({ palletIds: [scan.value], isAllItems: true, isSummary: false }));
           }
         });
       }
@@ -185,15 +185,15 @@ export const CombinePalletsScreen = (
     if (navigation.isFocused()) {
       if (!activityModal) {
         if (combinePalletsApi.isWaiting
-          || getPalletInfoApi.isWaiting) {
+          || getPalletDetailsApi.isWaiting) {
           dispatch(showActivityModal());
         }
       } else if (!combinePalletsApi.isWaiting
-        && !getPalletInfoApi.isWaiting) {
+        && !getPalletDetailsApi.isWaiting) {
         dispatch(hideActivityModal());
       }
     }
-  }, [activityModal, combinePalletsApi, getPalletInfoApi]);
+  }, [activityModal, combinePalletsApi, getPalletDetailsApi]);
 
   useEffectHook(() => combinePalletsApiEffect(
     combinePalletsApi,
@@ -202,7 +202,7 @@ export const CombinePalletsScreen = (
     dispatch
   ), [combinePalletsApi]);
 
-  useEffectHook(() => getPalletInfoApiEffect(getPalletInfoApi, dispatch, navigation), [getPalletInfoApi]);
+  useEffectHook(() => getPalletDetailsApiEffect(getPalletDetailsApi, dispatch, navigation), [getPalletDetailsApi]);
 
   return (
     <View style={styles.container}>
@@ -260,7 +260,7 @@ const CombinePallets = (): JSX.Element => {
     state => state.Global.isManualScanEnabled
   );
   const activityModal = useTypedSelector(state => state.modal.showActivity);
-  const getPalletInfoApi = useTypedSelector(state => state.async.getPalletInfo);
+  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const combinePalletsApi = useTypedSelector(state => state.async.combinePallets);
   const navigation = useNavigation();
   const route = useRoute();
@@ -277,7 +277,7 @@ const CombinePallets = (): JSX.Element => {
       navigation={navigation}
       dispatch={dispatch}
       activityModal={activityModal}
-      getPalletInfoApi={getPalletInfoApi}
+      getPalletDetailsApi={getPalletDetailsApi}
       combinePalletsApi={combinePalletsApi}
     />
   );

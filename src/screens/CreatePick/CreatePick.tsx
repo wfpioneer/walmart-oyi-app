@@ -22,13 +22,14 @@ import Location from '../../models/Location';
 import { strings } from '../../locales';
 import styles from './CreatePick.style';
 import { UseStateType } from '../../models/Generics.d';
-import { PickCreateItem } from '../../models/Picking.d';
+import { PickCreateItem, Tabs } from '../../models/Picking.d';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { setupScreen } from '../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../models/AsyncState';
 import { setPickCreateFloor, setPickCreateReserve } from '../../state/actions/Picking';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
-import { GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
+import { CREATE_NEW_PICK, GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
+import { createNewPick } from '../../state/actions/saga';
 
 export const MOVE_TO_FRONT = 'moveToFront';
 export const PALLET_MIN = 1;
@@ -40,9 +41,11 @@ interface CreatePickProps {
   reserveLocations: Location[];
   selectedSectionState: UseStateType<string>;
   palletNumberState: UseStateType<number>;
+  selectedTab: Tabs;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   getLocationApi: AsyncState;
+  createPickApi: AsyncState;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
 
@@ -80,6 +83,52 @@ export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispat
   }
 };
 
+export const createPickApiHook = (
+  createPickApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+) => {
+  const { isWaiting, result, error } = createPickApi;
+  if (navigation.isFocused()) {
+    // API success
+    if (!isWaiting && result) {
+      dispatch(hideActivityModal());
+      dispatch({ type: CREATE_NEW_PICK.RESET });
+      navigation.goBack();
+      Toast.show({
+        type: 'success',
+        text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+    // API failure
+    if (!isWaiting && error) {
+      dispatch(hideActivityModal());
+      if (error.response && error.response.status === 409) {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.PICK_REQUEST_CRITERIA_ALREADY_MET'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      }
+      dispatch({ type: CREATE_NEW_PICK.RESET });
+    }
+    // API waiting
+    if (isWaiting) {
+      dispatch(showActivityModal());
+    }
+  }
+};
+
 export const addLocationHandler = (
   item: PickCreateItem,
   floorLocations: Location[],
@@ -102,14 +151,22 @@ export const addLocationHandler = (
 
 export const CreatePickScreen = (props: CreatePickProps) => {
   const {
-    item, floorLocations, reserveLocations, selectedSectionState,
-    palletNumberState, dispatch, navigation, getLocationApi, useEffectHook
+    item, floorLocations, reserveLocations, selectedSectionState, createPickApi,
+    palletNumberState, dispatch, navigation, getLocationApi, useEffectHook,
+    selectedTab
   } = props;
 
   const [selectedSection, setSelectedSection] = selectedSectionState;
   const [palletNumber, setPalletNumber] = palletNumberState;
 
-  useEffectHook(() => getLocationsApiHook(getLocationApi, dispatch, navigation.isFocused()), [getLocationApi]);
+  useEffectHook(
+    () => getLocationsApiHook(getLocationApi, dispatch, navigation.isFocused()),
+    [getLocationApi]
+  );
+  useEffectHook(
+    () => createPickApiHook(createPickApi, dispatch, navigation),
+    [createPickApi]
+  );
 
   const pickerLocations = (locations: Location[]) => {
     const pickerItems = [
@@ -157,6 +214,20 @@ export const CreatePickScreen = (props: CreatePickProps) => {
 
   const disableCreateButton = () => !selectedSection || !reserveLocations.length;
 
+  const onSubmit = () => {
+    dispatch(createNewPick({
+      category: item.categoryNbr,
+      itemDesc: item.itemName,
+      itemNbr: item.itemNbr,
+      quickPick: selectedTab === Tabs.QUICKPICK,
+      salesFloorLocationName: floorLocations && floorLocations.length ? floorLocations[0].locationName : undefined,
+      upcNbr: item.upcNbr,
+      moveToFront: selectedSection === MOVE_TO_FRONT,
+      numberOfPallets: palletNumber,
+      salesFloorLocationId: floorLocations && floorLocations.length ? floorLocations[0].sectionId : undefined
+    }));
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.itemDetailsView}>
@@ -197,23 +268,26 @@ export const CreatePickScreen = (props: CreatePickProps) => {
             </Picker>
           </View>
         </View>
-        {selectedSection === MOVE_TO_FRONT ? (
-          <View style={styles.pickParamLine}>
-            <Text>{strings('PICKING.NUMBER_PALLETS')}</Text>
-            <NumericSelector
-              isValid={isNumberOfPalletsValid(palletNumber)}
-              onDecreaseQty={() => onPalletDecrease(palletNumber, setPalletNumber)}
-              onIncreaseQty={() => onPalletIncrease(palletNumber, setPalletNumber)}
-              onTextChange={(text: string) => onPalletTextChange(text, setPalletNumber)}
-              minValue={PALLET_MIN}
-              maxValue={PALLET_MAX}
-              value={palletNumber}
-            />
-          </View>
-        ) : null}
+        <View style={styles.pickParamLine}>
+          <Text>{strings('PICKING.NUMBER_PALLETS')}</Text>
+          <NumericSelector
+            isValid={isNumberOfPalletsValid(palletNumber)}
+            onDecreaseQty={() => onPalletDecrease(palletNumber, setPalletNumber)}
+            onIncreaseQty={() => onPalletIncrease(palletNumber, setPalletNumber)}
+            onTextChange={(text: string) => onPalletTextChange(text, setPalletNumber)}
+            minValue={PALLET_MIN}
+            maxValue={PALLET_MAX}
+            value={palletNumber}
+          />
+        </View>
       </View>
       <View style={styles.createButtonView}>
-        <Button title={strings('GENERICS.CREATE')} disabled={disableCreateButton()} testId="createButton" />
+        <Button
+          title={strings('GENERICS.CREATE')}
+          disabled={disableCreateButton()}
+          testId="createButton"
+          onPress={() => onSubmit()}
+        />
       </View>
     </SafeAreaView>
   );
@@ -221,9 +295,13 @@ export const CreatePickScreen = (props: CreatePickProps) => {
 
 const CreatePick = () => {
   const item = useTypedSelector(state => state.Picking.pickCreateItem);
-  const floorLocations = useTypedSelector(state => state.Picking.pickCreateFloorLocations);
-  const reserveLocations = useTypedSelector(state => state.Picking.pickCreateReserveLocations);
+  const {
+    pickCreateFloorLocations: floorLocations,
+    pickCreateReserveLocations: reserveLocations,
+    selectedTab
+  } = useTypedSelector(state => state.Picking);
   const getLocationsApi = useTypedSelector(state => state.async.getLocation);
+  const createPickApi = useTypedSelector(state => state.async.createNewPick);
   const selectedSectionState = useState(floorLocations && floorLocations.length ? floorLocations[0].locationName : '');
   const palletNumberState = useState(1);
   const dispatch = useDispatch();
@@ -236,9 +314,11 @@ const CreatePick = () => {
       reserveLocations={reserveLocations}
       selectedSectionState={selectedSectionState}
       palletNumberState={palletNumberState}
+      selectedTab={selectedTab}
       dispatch={dispatch}
       navigation={navigation}
       getLocationApi={getLocationsApi}
+      createPickApi={createPickApi}
       useEffectHook={useEffect}
     />
   );

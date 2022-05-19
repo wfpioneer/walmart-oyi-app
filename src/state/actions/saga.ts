@@ -15,13 +15,14 @@ import { CreateZoneRequest } from '../reducers/Location';
 import { PalletItem } from '../../models/PalletItem';
 import {
   CombinePalletsRequest,
-  GetPalletInfoRequest,
+  GetPalletDetailsRequest,
   PostBinPalletsRequest,
   UpdateItemQuantityRequest
 } from '../../services/PalletManagement.service';
 import { GetItemDetailsPayload } from '../../services/GetItemDetails.service';
 import User from '../../models/User';
 import { PickAction } from '../../models/Picking.d';
+import { CreatePickRequest } from '../../services/Picking.service';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
@@ -45,7 +46,6 @@ export const GET_SECTION_DETAILS = 'SAGA/GET_SECTION_DETAILS';
 export const PRINT_LOCATION_LABELS = 'SAGA/PRINT_SECTION_LABELS';
 export const ADD_PALLET = 'SAGA/ADD_PALLET';
 export const DELETE_PALLET = 'SAGA/DELETE_PALLET';
-export const GET_PALLET_DETAILS = 'SAGA/GET_PALLET_DETAILS';
 export const POST_CREATE_AISLES = 'SAGA/POST_CREATE_AISLES';
 export const CREATE_SECTIONS = 'SAGA/CREATE_SECTIONS';
 export const CREATE_ZONE = 'SAGA/CREATE_ZONE';
@@ -62,12 +62,13 @@ export const DELETE_UPCS = 'SAGA/DELETE_UPCS';
 export const COMBINE_PALLETS = 'SAGA/COMBINE_PALLETS';
 export const PRINT_PALLET_LABEL = 'SAGA/PRINT_PALLET_LABEL';
 export const CLEAR_PALLET = 'SAGA/CLEAR_PALLET';
-export const GET_PALLET_INFO = 'SAGA/GET_PALLET_INFO';
+export const GET_PALLET_DETAILS = 'SAGA/GET_PALLET_DETAILS';
 export const POST_BIN_PALLETS = 'SAGA/POST_BIN_PALLETS';
 export const GET_PALLET_CONFIG = 'SAGA/GET_PALLET_CONFIG';
 export const UPDATE_PICKLIST_STATUS = 'SAGA/UPDATE_PICKLIST_STATUS';
 export const GET_PICKLISTS = 'SAGA/GET_PICKLISTS';
 export const UPDATE_PALLET_NOT_FOUND = 'SAGA/UPDATE_PALLET_NOT_FOUND';
+export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
 
 // TODO add types for each service payload
 export const hitGoogle = () => ({ type: HIT_GOOGLE } as const);
@@ -138,10 +139,6 @@ export const deletePallet = (payload: { palletId: number }) => ({ type: DELETE_P
 export const createSections = (
   payload: { aisleId: number; sectionCount: number }[]
 ) => ({ type: CREATE_SECTIONS, payload } as const);
-export const getPalletDetails = (payload: {
-  palletIds: string[];
-  isAllItems?: boolean;
-}) => ({ type: GET_PALLET_DETAILS, payload } as const);
 export const deleteZone = (payload: number) => ({ type: DELETE_ZONE, payload } as const);
 export const postCreateAisles = (payload: {
   aislesToCreate: CreateAisleRequest;
@@ -183,8 +180,8 @@ export const clearPallet = (payload: { palletId: string }) => ({
   type: CLEAR_PALLET,
   payload
 } as const);
-export const getPalletInfo = (payload: GetPalletInfoRequest) => ({
-  type: GET_PALLET_INFO, payload
+export const getPalletDetails = (payload: GetPalletDetailsRequest) => ({
+  type: GET_PALLET_DETAILS, payload
 } as const);
 export const binPallets = (payload: PostBinPalletsRequest) => ({
   type: POST_BIN_PALLETS, payload
@@ -212,5 +209,9 @@ export const updatePalletNotFound = (payload: {
   pickListIds: number[]
 }) => ({
   type: UPDATE_PALLET_NOT_FOUND,
+  payload
+} as const);
+export const createNewPick = (payload: CreatePickRequest) => ({
+  type: CREATE_NEW_PICK,
   payload
 } as const);
