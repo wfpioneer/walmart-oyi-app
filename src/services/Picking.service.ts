@@ -41,13 +41,13 @@ export default class PickingService {
 
   public static updatePalletNotFound(payload: {
     palletId: string;
-    pickListIds: number[];
+    picklistIds: number[];
   }) {
     const urls: Environment = getEnvironment();
-    const { palletId, pickListIds } = payload;
+    const { palletId, picklistIds } = payload;
     return Request.put(
       `${urls.locationUrl}/picklist/${palletId}/palletnotfound`,
-      { pickListIds },
+      { picklistIds },
     );
   }
 
