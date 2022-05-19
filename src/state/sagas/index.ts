@@ -50,7 +50,6 @@ const genericSagas = [
   makeAsyncSaga(saga.ADD_PALLET, actions.addPallet, AddPalletService.addPallet),
   makeAsyncSaga(saga.DELETE_PALLET, actions.deletePallet, DeletePalletService.deletePallet),
   makeAsyncSaga(saga.PRINT_LOCATION_LABELS, actions.printLocationLabels, PrintService.printLabels),
-  makeAsyncSaga(saga.GET_PALLET_DETAILS, actions.getPalletDetails, LocationService.getPalletDetails),
   makeAsyncSaga(saga.POST_CREATE_AISLES, actions.postCreateAisles, LocationService.createLocationAislesSection),
   makeAsyncSaga(saga.CREATE_SECTIONS, actions.createSections, LocationService.createSections),
   makeAsyncSaga(saga.CREATE_ZONE, actions.createZone, LocationService.createZone),
@@ -67,11 +66,13 @@ const genericSagas = [
   makeAsyncSaga(saga.COMBINE_PALLETS, actions.combinePallets, PalletManagementService.combinePallets),
   makeAsyncSaga(saga.PRINT_PALLET_LABEL, actions.printPalletLabel, PrintService.printPallet),
   makeAsyncSaga(saga.CLEAR_PALLET, actions.clearPallet, DeletePalletService.clearPallet),
-  makeAsyncSaga(saga.GET_PALLET_INFO, actions.getPalletInfo, PalletManagementService.getPalletInfo),
+  makeAsyncSaga(saga.GET_PALLET_DETAILS, actions.getPalletDetails, PalletManagementService.getPalletDetails),
   makeAsyncSaga(saga.POST_BIN_PALLETS, actions.binPallets, PalletManagementService.postBinPallets),
   makeAsyncSaga(saga.GET_PALLET_CONFIG, actions.getPalletConfig, PalletManagementService.getPalletConfig),
   makeAsyncSaga(saga.UPDATE_PICKLIST_STATUS, actions.updatePicklistStatus, PickingService.updatePickListStatus),
-  makeAsyncSaga(saga.GET_PICKLISTS, actions.getPicklists, PickingService.getPickListService)
+  makeAsyncSaga(saga.GET_PICKLISTS, actions.getPicklists, PickingService.getPickListService),
+  makeAsyncSaga(saga.UPDATE_PALLET_NOT_FOUND, actions.updatePalletNotFound, PickingService.updatePalletNotFound),
+  makeAsyncSaga(saga.CREATE_NEW_PICK, actions.createNewPick, PickingService.createNewPick)
 ];
 
 export default function* rootSaga() {

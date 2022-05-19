@@ -2,7 +2,9 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
-import { PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook } from './PickingTabNavigator';
+import {
+  PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
+} from './PickingTabNavigator';
 import { strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { AsyncState } from '../../models/AsyncState';
@@ -48,6 +50,7 @@ describe('Picking Tab Navigator', () => {
         useEffectHook={jest.fn}
         getItemDetailsApi={defaultAsyncState}
         getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
         dispatch={jest.fn()}
         selectedTab={Tabs.PICK}
         useCallbackHook={jest.fn}
@@ -191,6 +194,51 @@ describe('Manage PickingNavigator externalized function tests', () => {
     };
 
     getPicklistApiHook(isLoadingApi, mockDispatch, true);
+    expect(mockDispatch).toBeCalledTimes(1);
+  });
+
+  it('Tests updatePicklistStatusApiHook', () => {
+    const updateSuccessApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: '',
+        status: 200
+      }
+    };
+    const updateFailureApi: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Server Error'
+    };
+    const updateIsLoadingApi: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+    // on update success
+    updatePicklistStatusApiHook(updateSuccessApi, mockDispatch, true);
+    expect(mockDispatch).toBeCalledTimes(3);
+    expect(Toast.show).toHaveBeenCalledWith({
+      type: 'success',
+      text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+
+    // on update failure
+    mockDispatch.mockReset();
+    // @ts-expect-error Reset Toast Object
+    Toast.show.mockReset();
+    updatePicklistStatusApiHook(updateFailureApi, mockDispatch, true);
+    expect(mockDispatch).toBeCalledTimes(2);
+    expect(Toast.show).toHaveBeenCalledWith({
+      type: 'error',
+      text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
+      text2: strings('GENERICS.TRY_AGAIN'),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+    // on api request
+    mockDispatch.mockReset();
+    updatePicklistStatusApiHook(updateIsLoadingApi, mockDispatch, true);
     expect(mockDispatch).toBeCalledTimes(1);
   });
 });

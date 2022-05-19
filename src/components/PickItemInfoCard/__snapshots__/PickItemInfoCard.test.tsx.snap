@@ -294,7 +294,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
               }
             }
           >
-            [missing "en.PICKING.CREATED" translation]: 10:32 AM 02/04/2022
+            [missing "en.PICKING.CREATED" translation]: 07:55 早上 02/04/2022
           </Text>
         </View>
       </View>

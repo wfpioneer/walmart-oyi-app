@@ -53,7 +53,8 @@ export default {
     DISABLED: '不可用',
     REQUIRED: '适用',
     REMOVED: '移除',
-    CREATE: '创建'
+    CREATE: '创建',
+    UNASSIGNED: '未分配'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -388,6 +389,8 @@ export default {
     RELEASE: '释放',
     UPDATE_REMAINING_QTY: '继续之前请更新卡板剩余商品的数量',
     REMAINING_QTY: '卡板剩余数量',
+    REMOVE_PERISHABLE: '移除易腐商品',
+    REMOVE_PERISHABLE_NEW_EXPIRY: '请录入新到期日',
     PICKLIST_SUCCESS: '成功重置铺货清单',
     PICKLIST_NOT_FOUND: '此门店无补货清单',
     PICKLIST_ERROR: '重置补货清单时报错',
@@ -396,7 +399,10 @@ export default {
     LOCATIONS_UPDATED: '位置已更新',
     LOCATIONS_FAILED_UPDATE: '位置更新失败',
     SELECT_CONTINUE_ACTION: '选择任务继续',
-    PALLET_NOT_FOUND: '未找到卡板'
+    PALLET_NOT_FOUND: '未找到卡板',
+    CREATE_NEW_PICK_SUCCESS: '补货已创建',
+    CREATE_NEW_PICK_FAILURE: '创建补货时报错',
+    PICK_REQUEST_CRITERIA_ALREADY_MET: '无足够的卡板可供提取'
   },
   BINNING: {
     BINNING: '上架',

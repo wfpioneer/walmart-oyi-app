@@ -48,17 +48,6 @@ export default class LocationService {
     );
   }
 
-  public static getPalletDetails(payload: {
-    palletIds: number[], isAllItems?: boolean
-  }): Promise<AxiosResponse<unknown>> {
-    const urls: Environment = getEnvironment();
-    const queryParam = payload.palletIds.join(',');
-    const allItems = payload.isAllItems || false;
-    return Request.get(
-      `${urls.locationUrl}/pallet/items/itemdetails?palletIds=${queryParam}&allItems=${allItems}`,
-    );
-  }
-
   public static createLocationAislesSection(payload: { aislesToCreate: CreateAisleRequest }):
     Promise<AxiosResponse<Array<CreateAisleResponse>>> {
     const urls: Environment = getEnvironment();

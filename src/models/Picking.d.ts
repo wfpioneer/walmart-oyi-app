@@ -36,8 +36,9 @@ export interface PickListItem {
   palletLocationName: string;
   status: PickStatus;
   createdBy: string;
-  createTS: string;
+  createTs: string;
   quantityLeft?: number;
+  newQuantityLeft?: number;
 }
 
 export interface PickCreateItem {

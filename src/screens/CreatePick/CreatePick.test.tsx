@@ -8,10 +8,12 @@ import {
   CreatePickScreen,
   MOVE_TO_FRONT,
   addLocationHandler,
+  createPickApiHook,
   getLocationsApiHook
 } from './CreatePick';
 import { AsyncState } from '../../models/AsyncState';
-import { PickCreateItem } from '../../models/Picking.d';
+import { PickCreateItem, Tabs } from '../../models/Picking.d';
+import { strings } from '../../locales';
 
 const defaultAsyncState: AsyncState = {
   isWaiting: false,
@@ -126,6 +128,8 @@ describe('Create Pick screen render tests', () => {
         navigation={navigationProp}
         getLocationApi={defaultAsyncState}
         useEffectHook={jest.fn()}
+        createPickApi={defaultAsyncState}
+        selectedTab={Tabs.PICK}
       />
     );
 
@@ -149,6 +153,8 @@ describe('Create Pick screen render tests', () => {
         navigation={navigationProp}
         getLocationApi={defaultAsyncState}
         useEffectHook={jest.fn()}
+        createPickApi={defaultAsyncState}
+        selectedTab={Tabs.PICK}
       />
     );
 
@@ -172,6 +178,8 @@ describe('Create Pick screen render tests', () => {
         navigation={navigationProp}
         getLocationApi={defaultAsyncState}
         useEffectHook={jest.fn()}
+        createPickApi={defaultAsyncState}
+        selectedTab={Tabs.PICK}
       />
     );
 
@@ -195,6 +203,8 @@ describe('Create Pick screen render tests', () => {
         navigation={navigationProp}
         getLocationApi={defaultAsyncState}
         useEffectHook={jest.fn()}
+        createPickApi={defaultAsyncState}
+        selectedTab={Tabs.PICK}
       />
     );
 
@@ -233,7 +243,7 @@ describe('createPick function tests', () => {
 
     // failure
     mockDispatch.mockReset();
-    // @ts-ignore need ts ignore here as ts tries to say mockReset is not a method from mocking function
+    // @ts-expect-error need ts ignore here as ts tries to say mockReset is not a method from mocking function
     Toast.show.mockReset();
     const failureAsyncState = {
       ...defaultAsyncState,
@@ -251,5 +261,78 @@ describe('createPick function tests', () => {
     };
     getLocationsApiHook(waitingAsyncState, mockDispatch, true);
     expect(mockDispatch).toBeCalledTimes(1);
+  });
+
+  it('CreatePickApiHook', () => {
+    const mockDispatch = jest.fn();
+    const successAsyncState: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        status: 200,
+        data: ''
+      }
+    };
+    const failureAsyncState: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Server Error'
+    };
+
+    const failure409AsyncState: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        response: {
+          status: 409,
+          data: {
+            errorEnum: 'PICK_REQUEST_CRITERIA_ALREADY_MET'
+          }
+        }
+      }
+    };
+    const isWaitingAsyncState: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+
+    // API Success
+    createPickApiHook(successAsyncState, mockDispatch, navigationProp);
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    expect(navigationProp.isFocused).toHaveBeenCalled();
+    expect(navigationProp.goBack).toHaveBeenCalled();
+    expect(Toast.show).toHaveBeenCalledWith({
+      type: 'success',
+      text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+
+    // API Failure
+    mockDispatch.mockReset();
+    // @ts-expect-error Reset Toast Object
+    Toast.show.mockReset();
+    createPickApiHook(failureAsyncState, mockDispatch, navigationProp);
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    expect(Toast.show).toHaveBeenCalledWith({
+      type: 'error',
+      text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+
+    mockDispatch.mockReset();
+    // @ts-expect-error Reset Toast Object
+    Toast.show.mockReset();
+    createPickApiHook(failure409AsyncState, mockDispatch, navigationProp)
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    expect(Toast.show).toHaveBeenCalledWith({
+      type: 'error',
+      text1: strings('PICKING.PICK_REQUEST_CRITERIA_ALREADY_MET'),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+
+    // API waiting
+    mockDispatch.mockReset();
+    createPickApiHook(isWaitingAsyncState, mockDispatch, navigationProp);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
   });
 });

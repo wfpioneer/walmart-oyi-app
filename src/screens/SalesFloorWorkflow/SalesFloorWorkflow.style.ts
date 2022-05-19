@@ -48,6 +48,35 @@ const styles = StyleSheet.create({
   },
   updateQuantityText: {
     fontSize: 13
+  },
+  updateExpirationTitleView: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 30,
+    width: '100%',
+    backgroundColor: COLOR.HAVELOCK_BLUE,
+    borderWidth: 1,
+    borderRadius: 2,
+    marginTop: 8
+  },
+  expirationDateTextView: {
+    marginTop: 10,
+    borderBottomWidth: 1
+  },
+  expirationDateText: {
+    fontSize: 18
+  },
+  udpateExpirationContentView: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    margin: 10
+  },
+  updateExpirationButtonsView: {
+    flexDirection: 'row',
+    marginTop: 30,
+    width: '100%'
   }
 });
 
