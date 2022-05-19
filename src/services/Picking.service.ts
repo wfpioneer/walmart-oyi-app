@@ -39,6 +39,18 @@ export default class PickingService {
     );
   }
 
+  public static updatePalletNotFound(payload: {
+    palletId: string;
+    picklistIds: number[];
+  }) {
+    const urls: Environment = getEnvironment();
+    const { palletId, picklistIds } = payload;
+    return Request.put(
+      `${urls.locationUrl}/picklist/${palletId}/palletnotfound`,
+      { picklistIds },
+    );
+  }
+
   public static createNewPick(payload: CreatePickRequest) {
     const urls: Environment = getEnvironment();
 
