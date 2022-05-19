@@ -157,6 +157,66 @@ const isError = (error: { error: boolean; message: string }) => (
   )
     : null
 );
+
+export const AddLocationApiHook = (
+  addAPI: AsyncState,
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string; }>>,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  salesFloor: boolean,
+  actionCompleted: boolean,
+  exceptionType: string | null | undefined,
+  itemNbr: number,
+  selectedLocation: Location | null,
+) => {
+  // on api submission
+  if (addAPI.isWaiting) {
+    setError({ error: false, message: '' });
+  }
+  // on api failure
+  if (isApiError(addAPI)) {
+    setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
+  }
+  // on api success
+  if (isApiSuccess(addAPI)) {
+    if (salesFloor) {
+      isNotActionCompleted(actionCompleted, dispatch, exceptionType);
+      dispatch(getLocationDetails({ itemNbr }));
+    } else if (!salesFloor && !selectedLocation) {
+      dispatch(getLocationDetails({ itemNbr }));
+    }
+    navigation.goBack();
+  }
+};
+
+export const EditLocationApiHook = (
+  editAPI: AsyncState,
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string; }>>,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  salesFloor: boolean,
+  itemNbr: number,
+  selectedLocation: Location | null
+) => {
+  // on api submission
+  if (editAPI.isWaiting) {
+    setError({ error: false, message: '' });
+  }
+  // on api failure
+  if (isApiError(editAPI)) {
+    setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
+  }
+  // on api success
+  if (isApiSuccess(editAPI)) {
+    if (salesFloor) {
+      dispatch(getLocationDetails({ itemNbr }));
+    } else {
+      dispatch(getSectionDetails({ sectionId: selectedLocation ? selectedLocation.sectionId.toString() : '' }));
+    }
+    navigation.goBack();
+  }
+};
+
 export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Element => {
   const {
     inputLocation, setInputLocation, loc, setLoc, actionCompleted, floorLocations, upcNbr,
@@ -188,48 +248,28 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
   }, []);
 
   // Add Location API
-  useEffectHook(() => {
-    // on api submission
-    if (addAPI.isWaiting) {
-      setError({ error: false, message: '' });
-    }
-    // on api failure
-    if (isApiError(addAPI)) {
-      setError({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
-    }
-    // on api success
-    if (isApiSuccess(addAPI)) {
-      if (salesFloor) {
-        isNotActionCompleted(actionCompleted, dispatch, exceptionType);
-        dispatch(getLocationDetails({ itemNbr }));
-      }
-      else if (!salesFloor && !selectedLocation) {
-        dispatch(getLocationDetails({ itemNbr }));
-      }
-      navigation.goBack();
-    }
-  }, [addAPI]);
+  useEffectHook(() => AddLocationApiHook(
+    addAPI,
+    setError,
+    dispatch,
+    navigation,
+    salesFloor,
+    actionCompleted,
+    exceptionType,
+    itemNbr, selectedLocation
+  ),
+  [addAPI]);
 
   // Edit Location API
-  useEffectHook(() => {
-    // on api submission
-    if (editAPI.isWaiting) {
-      setError({ error: false, message: '' });
-    }
-    // on api failure
-    if (isApiError(editAPI)) {
-      setError({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
-    }
-    // on api success
-    if (isApiSuccess(editAPI)) {
-      if (salesFloor) {
-        dispatch(getLocationDetails({ itemNbr }));
-      } else {
-        dispatch(getSectionDetails({ sectionId: selectedLocation ? selectedLocation.sectionId.toString() : '' }));
-      }
-      navigation.goBack();
-    }
-  }, [editAPI]);
+  useEffectHook(() => EditLocationApiHook(
+    editAPI,
+    setError,
+    dispatch,
+    navigation,
+    salesFloor,
+    itemNbr,
+    selectedLocation
+  ), [editAPI]);
 
   const modelOnSubmit = (value: string) => {
     validateSessionCall(navigation).then(() => {
