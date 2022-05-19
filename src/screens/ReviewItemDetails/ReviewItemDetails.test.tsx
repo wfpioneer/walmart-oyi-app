@@ -1,50 +1,163 @@
-import { NavigationProp, RouteProp } from '@react-navigation/native';
+import { NavigationContainer, NavigationContext, NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
+import { View } from 'react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 import { ScrollView } from 'react-native';
+import { Provider } from "react-redux";
+import { RootState } from "../../state/reducers/RootReducer";
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { strings } from '../../locales';
 import itemDetail from '../../mockData/getItemDetails';
-import {
-  HandleProps, RenderProps,
-  ReviewItemDetailsScreen, createNewPickApiHook, handleCreateNewPick, renderAddPicklistButton,
-  renderBarcodeErrorModal, renderLocationComponent, renderOHQtyComponent, renderScanForNoActionButton
+import ReviewItemDetails, {
+  COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
+  createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount, getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales, handleAddToPicklist, handleCreateNewPick,
+  handleLocationAction, handleUpdateQty, callBackbarcodeEmitter, isError, isItemDetailsCompleted, onIsWaiting,
+  onValidateBackPress, onValidateCompleteItemApiErrortHook, onValidateCompleteItemApiResultHook, onValidateItemDetails,
+  onValidateScannedEvent, renderAddPicklistButton, renderBarcodeErrorModal, renderLocationComponent,
+  renderOHQtyComponent, renderScanForNoActionButton
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
-import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { AsyncState } from '../../models/AsyncState';
+import store from '../../state/index';
 
-jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
-jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
-jest.mock('../../state/actions/Modal', () => ({
-  showActivityModal: jest.fn(),
-  hideActivityModal: jest.fn()
+jest.mock('../../utils/AppCenterTool', () => ({
+  ...jest.requireActual('../../utils/AppCenterTool'),
+  initialize: jest.fn(),
+  trackEvent: jest.fn(() => Promise.resolve()),
+  setUserId: jest.fn(() => Promise.resolve())
 }));
+jest.mock('../../utils/sessionTimeout.ts', () => ({
+  ...jest.requireActual('../../utils/sessionTimeout.ts'),
+  validateSession: jest.fn(() => Promise.resolve())
+}));
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
+jest.mock("@react-navigation/native", () => {
+  const actualNav = jest.requireActual("@react-navigation/native");
+  return {
+    ...actualNav,
+    useNavigation: () => ({
+      navigate: jest.fn(),
+      dispatch: jest.fn(),
+      isFocused: jest.fn().mockReturnValue(true),
+      goBack: jest.fn()
+    }),
+    useRoute: () => ({
+      key: 'test',
+      name: 'test'
+    })
+  };
+});
 
-let navigationProp: NavigationProp<any>;
-let routeProp: RouteProp<any, string>;
-let scrollViewProp: React.RefObject<ScrollView>;
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dangerouslyGetParent: jest.fn(),
+  dangerouslyGetState: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn()
+};
+
+let routeProp: RouteProp<any, string> = {
+  key: 'test',
+  name: 'test'
+};
+
+let scrollViewProp: React.RefObject<ScrollView> = {
+  current: null
+};
+
+const defaultAsyncState = {
+  isWaiting: false,
+  value: null,
+  error: null,
+  result: null
+};
+
+const mockHandleProps: (HandleProps & RenderProps) = {
+  validateSessionCall: jest.fn(() => Promise.resolve()),
+  trackEventCall: jest.fn(),
+  navigation: navigationProp,
+  route: routeProp,
+  dispatch: jest.fn(),
+  setOhQtyModalVisible: jest.fn(),
+  actionCompleted: false,
+  isManualScanEnabled: false,
+  addToPicklistStatus: defaultAsyncState,
+  completeItemApi: defaultAsyncState,
+  userConfigs: mockConfig
+};
+
+const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
+  scannedEvent: {value: 'test', type: 'UPC-A'},
+  isManualScanEnabled: false,
+  isWaiting: false,
+  error: null,
+  result: null,
+  addToPicklistStatus: defaultAsyncState,
+  completeItemApi: defaultAsyncState,
+  createNewPickApi: defaultAsyncState,
+  userId: 'testUser',
+  exceptionType: null,
+  actionCompleted: false,
+  pendingOnHandsQty: -999,
+  floorLocations: [],
+  reserveLocations: [],
+  route: routeProp,
+  dispatch: jest.fn(),
+  navigation: navigationProp,
+  scrollViewRef: scrollViewProp,
+  isSalesMetricsGraphView: false,
+  setIsSalesMetricsGraphView: jest.fn(),
+  ohQtyModalVisible: false,
+  setOhQtyModalVisible: jest.fn(),
+  createPickModalVisible: false,
+  setCreatePickModalVisible: jest.fn(),
+  errorModalVisible: false,
+  setErrorModalVisible: jest.fn(),
+  selectedSection: '',
+  setSelectedSection: jest.fn(),
+  numberOfPallets: 1,
+  setNumberOfPallets: jest.fn(),
+  isQuickPick: false,
+  setIsQuickPick: jest.fn(),
+  trackEventCall: jest.fn(),
+  validateSessionCall: jest.fn(() => Promise.resolve()),
+  useEffectHook: jest.fn(),
+  useFocusEffectHook: jest.fn(),
+  userFeatures: [],
+  userConfigs: mockConfig
+};
+//const initialStore: RootState = {
+//
+//};
 describe('ReviewItemDetailsScreen', () => {
-  const defaultAsyncState = {
-    isWaiting: false,
-    value: null,
-    error: null,
-    result: null
-  };
-  const mockHandleProps: (HandleProps & RenderProps) = {
-    validateSessionCall: jest.fn(() => Promise.resolve()),
-    trackEventCall: jest.fn(),
-    navigation: navigationProp,
-    route: routeProp,
-    dispatch: jest.fn(),
-    setOhQtyModalVisible: jest.fn(),
-    actionCompleted: false,
-    isManualScanEnabled: false,
-    addToPicklistStatus: defaultAsyncState,
-    completeItemApi: defaultAsyncState,
-    userConfigs: mockConfig
-  };
   describe('Tests renders ItemDetails API Responses', () => {
+    const actualNav = jest.requireActual("@react-navigation/native");
+    const navContextValue = {
+      ...actualNav.navigation,
+      isFocused: () => false,
+      addListener: jest.fn(() => jest.fn()),
+    };
+    it('render screen with redux', () => {
+      const component = (
+        <Provider store={store}>
+          <NavigationContainer>
+            <NavigationContext.Provider value={navContextValue}>
+              <ReviewItemDetails />
+            </NavigationContext.Provider>
+          </NavigationContainer>
+        </Provider>
+      );
+      const { toJSON } = render(component);
+      expect(toJSON()).toMatchSnapshot();
+    });
     it('renders the details for a single item with non-null status', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -297,7 +410,6 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-
     it('renders \'Scanned Item Not Found\' on request status 204', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -443,6 +555,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
+
   describe('Tests Rendering \'Scan for No Action Button\'', () => {
     it('Renders Nothing for\' Scan for No Action\' button', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -487,11 +600,15 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const pendingOHQty = -999;
       renderer.render(
-        renderOHQtyComponent({ ...itemDetail[123], onHandsQty: negOnHandsQty, pendingOnHandsQty: pendingOHQty })
+        renderOHQtyComponent({
+          ...itemDetail[123],
+          onHandsQty: negOnHandsQty,
+          pendingOnHandsQty: pendingOHQty,
+          inTransitCloudQty: 10
+        })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-
     it('renders Pending On Hands Quantity \'Pending Mgr Approval\'', () => {
       const renderer = ShallowRenderer.createRenderer();
       const pendingOHQty = 40;
@@ -545,7 +662,6 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-
     it('renders button for adding a Reserve & Floor Location', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -583,7 +699,6 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-
     it('renders \'Add to Picklist Error\' Retry', () => {
       const renderer = ShallowRenderer.createRenderer();
       const addPicklistError = {
@@ -600,7 +715,6 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-
     it('renders a Loader when waiting for Picklist response', () => {
       const renderer = ShallowRenderer.createRenderer();
       const addPicklistError = {
@@ -652,6 +766,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
+
   describe('Manage ReviewItemDetails externalized function tests', () => {
     const mockDispatch = jest.fn();
     const mockSetSelectedSection = jest.fn();
@@ -681,9 +796,9 @@ describe('ReviewItemDetailsScreen', () => {
       expect(mockSetSelectedSection).toHaveBeenCalledWith('');
       expect(mockSetIsQuickPick).toHaveBeenCalledWith(false);
       expect(mockSetNumberOfPallets).toHaveBeenCalledWith(1);
-      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
     });
-
     it('Tests createNewPickApiHook on 409 failure', () => {
       const failureApi: AsyncState = {
         ...defaultAsyncState,
@@ -707,10 +822,10 @@ describe('ReviewItemDetailsScreen', () => {
         failureApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
       expect(Toast.show).toHaveBeenCalledWith(toastPickList409Error);
     });
-
     it('Tests createNewPickApiHook on failure', () => {
       const failureApi: AsyncState = {
         ...defaultAsyncState,
@@ -727,10 +842,10 @@ describe('ReviewItemDetailsScreen', () => {
         failureApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
       expect(Toast.show).toHaveBeenCalledWith(toastPickListError);
     });
-
     it('Tests createNewPickApiHook isWaiting', () => {
       const isLoadingApi: AsyncState = {
         ...defaultAsyncState,
@@ -739,9 +854,8 @@ describe('ReviewItemDetailsScreen', () => {
       createNewPickApiHook(
         isLoadingApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
       );
-      expect(showActivityModal).toBeCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledWith({ type: 'MODAL/SHOW_ACTIVITY' });
     });
-
     it('Tests handleCreatePick method', () => {
       const mockProps = {
         scannedEvent: undefined,
@@ -804,6 +918,419 @@ describe('ReviewItemDetailsScreen', () => {
         },
         type: 'SAGA/CREATE_NEW_PICK'
       });
+    });
+    it('test handleUpdateQty', async() => {
+      const mockSetOhQtyModalVisible = jest.fn();
+      mockHandleProps.setOhQtyModalVisible = mockSetOhQtyModalVisible;
+      await handleUpdateQty(mockHandleProps, itemDetail[123]);
+      expect(mockSetOhQtyModalVisible).toHaveBeenCalledWith(true);
+      mockHandleProps.setOhQtyModalVisible = jest.fn();
+      //mockHandleProps.validateSessionCall = jest.fn(() => Promise.reject());
+      //const mockTrackEvent = jest.fn();
+      //mockHandleProps.trackEventCall = mockTrackEvent;
+      //await handleUpdateQty(mockHandleProps, mockItemDetails);
+      //expect(mockTrackEvent).toHaveBeenCalled();
+    });
+    it('test handleLocationUpdate', async() => {
+      const mockNavigate = jest.fn();
+      navigationProp.navigate = mockNavigate;
+      await handleLocationAction(mockHandleProps, itemDetail[123]);
+      expect(mockNavigate).toHaveBeenCalledWith('LocationDetails');
+      navigationProp.navigate = jest.fn();
+    });
+    it('test handleAddToPicklist', async() => {
+      mockHandleProps.dispatch = mockDispatch;
+      await handleAddToPicklist(mockHandleProps, itemDetail[123]);
+      expect(mockDispatch).toHaveBeenCalledWith({payload: {itemNumber: 1234567890}, type: 'SAGA/ADD_TO_PICKLIST'});
+      mockHandleProps.dispatch = jest.fn();
+    });
+    it('test getFloorItemDetails', () => {
+      const expectedResults = [
+        {
+          aisleId: 1,
+          aisleName: '1',
+          locationName: 'A1-1',
+          sectionId: 1,
+          sectionName: '1',
+          type: 'Sales Floor',
+          typeNbr: 8,
+          zoneId: 0,
+          zoneName: 'A'
+        },
+        {
+          aisleId: 0,
+          aisleName: "1",
+          locationName: "A1-2",
+          sectionId: 2,
+          sectionName: "2",
+          type: "End Cap",
+          typeNbr: 12,
+          zoneId: 0,
+          zoneName: "A",
+        },
+        {
+          aisleId: 1,
+          aisleName: "1",
+          locationName: "A1-3",
+          sectionId: 3,
+          sectionName: "3",
+          type: "Pod",
+          typeNbr: 13,
+          zoneId: 0,
+          zoneName: "A",
+        },
+        {
+          aisleId: 1,
+          aisleName: "1",
+          locationName: "A1-4",
+          sectionId: 4,
+          sectionName: "4",
+          type: "Display",
+          typeNbr: 11,
+          zoneId: 0,
+          zoneName: "A",
+        }
+      ];
+      const getFloorItemDetailsResults = getFloorItemDetails(itemDetail[123]);
+      expect(getFloorItemDetailsResults).toStrictEqual(expectedResults);
+    });
+    it('test getReserveItemDetails', () => {
+      const expectedResults = [
+        {
+          aisleId: 1,
+          aisleName: '1',
+          locationName: 'A1-1',
+          sectionId: 1,
+          sectionName: '1',
+          type: 'Reserve',
+          typeNbr: 7,
+          zoneId: 0,
+          zoneName: 'A'
+        }
+      ];
+      const getReserveItemDetailsResults = getReserveItemDetails(itemDetail[123]);
+      expect(getReserveItemDetailsResults).toStrictEqual(expectedResults);
+    });
+    it('test isItemDetailsCompleted', () => {
+      let isItemDetailsCompletedResults = isItemDetailsCompleted(itemDetail[123]);
+      expect(isItemDetailsCompletedResults).toStrictEqual(false);
+      isItemDetailsCompletedResults = isItemDetailsCompleted({ ...itemDetail[123], completed: true });
+      expect(isItemDetailsCompletedResults).toStrictEqual(true);
+    });
+    it('test onValidateItemDetails', () => {
+      const expectedResults = {
+        payload: {
+          completed: false,
+          exceptionType: "nsfl",
+          floorLocations: [
+            {
+              aisleId: 1,
+              aisleName: '1',
+              locationName: 'A1-1',
+              sectionId: 1,
+              sectionName: '1',
+              type: 'Sales Floor',
+              typeNbr: 8,
+              zoneId: 0,
+              zoneName: 'A'
+            },
+            {
+              aisleId: 0,
+              aisleName: "1",
+              locationName: "A1-2",
+              sectionId: 2,
+              sectionName: "2",
+              type: "End Cap",
+              typeNbr: 12,
+              zoneId: 0,
+              zoneName: "A",
+            },
+            {
+              aisleId: 1,
+              aisleName: "1",
+              locationName: "A1-3",
+              sectionId: 3,
+              sectionName: "3",
+              type: "Pod",
+              typeNbr: 13,
+              zoneId: 0,
+              zoneName: "A",
+            },
+            {
+              aisleId: 1,
+              aisleName: "1",
+              locationName: "A1-4",
+              sectionId: 4,
+              sectionName: "4",
+              type: "Display",
+              typeNbr: 11,
+              zoneId: 0,
+              zoneName: "A",
+            }
+          ],
+          itemNbr: 1234567890,
+          pendingOHQty: -999,
+          reserveLocations: [
+            {
+              aisleId: 1,
+              aisleName: '1',
+              locationName: 'A1-1',
+              sectionId: 1,
+              sectionName: '1',
+              type: 'Reserve',
+              typeNbr: 7,
+              zoneId: 0,
+              zoneName: 'A'
+            }
+          ],
+          salesFloor: true,
+          upcNbr: "000055559999",
+        },
+        type: "ITEM_DETAILS_SCREEN/SETUP",
+      };
+      onValidateItemDetails(mockDispatch, itemDetail[123]);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedResults);
+    });
+    it('testing callBackbarcodeEmitter', async() => {
+      const expectedNoActionResults = {
+        payload: {
+          itemNbr: 1234567890,
+          scannedValue: "1234567890098",
+          upc: "000055559999",
+        },
+        type: "SAGA/NO_ACTION",
+      };
+      const expectedSetManualScanResults = {
+        payload: false,
+        type: "GLOBAL/SET_MANUAL_SCAN",
+      };
+      const expectedSetScannedEventAction = {
+        payload: {
+          type: "UPC-A",
+          value: "1234567890098",
+        },
+        type: "GLOBAL/SET_SCANNED_EVENT",
+      };
+      mockItemDetailsScreenProps.dispatch = mockDispatch;
+      await callBackbarcodeEmitter(
+        mockItemDetailsScreenProps,
+        {value: '1234567890098', type: 'UPC-A'},
+        itemDetail[123]
+      );
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedNoActionResults);
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, expectedSetManualScanResults);
+      mockDispatch.mockReset();
+      mockItemDetailsScreenProps.actionCompleted = true;
+      await callBackbarcodeEmitter(
+        mockItemDetailsScreenProps,
+        {value: '1234567890098', type: 'UPC-A'},
+        itemDetail[123]
+      );
+      expect(mockDispatch).toHaveBeenCalledWith(expectedSetScannedEventAction);
+      const mockSetErrorModalVisible = jest.fn();
+      mockItemDetailsScreenProps.actionCompleted = false;
+      mockItemDetailsScreenProps.setErrorModalVisible = mockSetErrorModalVisible;
+      await callBackbarcodeEmitter(
+        mockItemDetailsScreenProps,
+        {value: '1234567890098', type: 'QRCODE'},
+        itemDetail[123]
+      );
+      expect(mockSetErrorModalVisible).toHaveBeenCalledWith(true);
+      mockItemDetailsScreenProps.dispatch = jest.fn();
+      mockItemDetailsScreenProps.setErrorModalVisible = jest.fn();
+    });
+    it('test onValidatePackPress', () => {
+      const expectedActionCompleteResults = {
+        payload: false,
+        type: "GLOBAL/SET_MANUAL_SCAN",
+      };
+      const expectedActionNotCompletePOResults = {
+        payload: {
+          text: '[missing \"en.ITEM.NO_SIGN_PRINTED_DETAILS\" translation]',
+          title: '[missing \"en.ITEM.NO_SIGN_PRINTED\" translation]',
+        },
+        type: 'MODAL/SHOW_INFO_MODAL',
+      };
+      const expectedActionNotCompleteNSFLResults = {
+        payload: {
+          text: '[missing \"en.ITEM.NO_FLOOR_LOCATION_DETAILS\" translation]',
+          title: '[missing \"en.ITEM.NO_FLOOR_LOCATION\" translation]',
+        },
+        type: 'MODAL/SHOW_INFO_MODAL',
+      };
+      mockItemDetailsScreenProps.dispatch = mockDispatch;
+      mockItemDetailsScreenProps.actionCompleted = true;
+      onValidateBackPress(mockItemDetailsScreenProps);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedActionCompleteResults);
+      mockDispatch.mockReset();
+      mockItemDetailsScreenProps.actionCompleted = false;
+      mockItemDetailsScreenProps.exceptionType = 'po';
+      onValidateBackPress(mockItemDetailsScreenProps);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedActionNotCompletePOResults);
+      mockDispatch.mockReset();
+      mockItemDetailsScreenProps.exceptionType = 'nsfl';
+      onValidateBackPress(mockItemDetailsScreenProps);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedActionNotCompleteNSFLResults);
+      mockItemDetailsScreenProps.dispatch = jest.fn();
+    });
+    it('test onValidateScannedEvent', async() => {
+      const expectedGetItemDetailsAction = {
+        payload: {
+          id: 'test'
+        },
+        type: 'SAGA/GET_ITEM_DETAILS'
+      };
+      mockItemDetailsScreenProps.dispatch = mockDispatch;
+      await onValidateScannedEvent(mockItemDetailsScreenProps);
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS/RESET' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, expectedGetItemDetailsAction);
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: 'API/ADD_TO_PICKLIST/RESET' });
+      mockItemDetailsScreenProps.dispatch = jest.fn();
+    });
+    it('test onIsWaiting', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<View>{onIsWaiting(true)}</View>);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+      renderer.render(<View>{onIsWaiting(false)}</View>);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('test onValidateCompleteItemApiResultHook', () => {
+      const completedApi = {
+        ...defaultAsyncState,
+        result: {
+          status: 204
+        }
+      };
+      const expectedShowModalAction = {
+        payload: {
+          text: "[missing \"en.ITEM.SCAN_DOESNT_MATCH_DETAILS\" translation]",
+          title: "[missing \"en.ITEM.SCAN_DOESNT_MATCH\" translation]",
+        },
+        type: "MODAL/SHOW_INFO_MODAL",
+      };
+      mockItemDetailsScreenProps.dispatch = mockDispatch;
+      onValidateCompleteItemApiResultHook(mockItemDetailsScreenProps, completedApi);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedShowModalAction);
+      mockDispatch.mockReset();
+      const mockGoBack = jest.fn();
+      navigationProp.goBack = mockGoBack;
+      onValidateCompleteItemApiResultHook(mockItemDetailsScreenProps, defaultAsyncState);
+      expect(mockDispatch).toHaveBeenCalledWith({ type: "ITEM_DETAILS_SCREEN/ACTION_COMPLETED" });
+      expect(mockGoBack).toHaveBeenCalledTimes(1);
+      navigationProp.goBack = jest.fn();
+      mockItemDetailsScreenProps.dispatch = jest.fn();
+    });
+    it('test onValidateCompleteItemApiErrortHook', () => {
+      const errorApi = {
+        ...defaultAsyncState,
+        error: COMPLETE_API_409_ERROR
+      };
+      const expectedShowModalAction = {
+        payload: {
+          text: "[missing \"en.ITEM.SCAN_DOESNT_MATCH_DETAILS\" translation]",
+          title: "[missing \"en.ITEM.SCAN_DOESNT_MATCH\" translation]",
+        },
+        type: "MODAL/SHOW_INFO_MODAL",
+      };
+      const expectedShowModalCompleteError = {
+        payload: {
+          text: "[missing \"en.ITEM.ACTION_COMPLETE_ERROR_DETAILS\" translation]",
+          title: "[missing \"en.ITEM.ACTION_COMPLETE_ERROR\" translation]",
+        },
+        type: "MODAL/SHOW_INFO_MODAL",
+      };
+      mockItemDetailsScreenProps.dispatch = mockDispatch;
+      onValidateCompleteItemApiErrortHook(mockItemDetailsScreenProps, errorApi);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedShowModalAction);
+      mockDispatch.mockReset();
+      onValidateCompleteItemApiErrortHook(mockItemDetailsScreenProps, defaultAsyncState);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedShowModalCompleteError);
+      mockItemDetailsScreenProps.dispatch = jest.fn();
+    });
+    it('test getLocationCount', () => {
+      let getLocationCountResult = getLocationCount(mockItemDetailsScreenProps);
+      expect(getLocationCountResult).toStrictEqual(0);
+      mockItemDetailsScreenProps.floorLocations = itemDetail[123].location.floor;
+      getLocationCountResult = getLocationCount(mockItemDetailsScreenProps);
+      expect(getLocationCountResult).toStrictEqual(4);
+      mockItemDetailsScreenProps.reserveLocations = itemDetail[123].location.reserve;
+      getLocationCountResult = getLocationCount(mockItemDetailsScreenProps);
+      expect(getLocationCountResult).toStrictEqual(5);
+      mockItemDetailsScreenProps.floorLocations = [];
+      getLocationCountResult = getLocationCount(mockItemDetailsScreenProps);
+      expect(getLocationCountResult).toStrictEqual(1);
+      mockItemDetailsScreenProps.reserveLocations = [];
+    });
+    it('test getUpdatedSales', () => {
+      const expectedResults = "[missing \"en.GENERICS.UPDATED\" translation] 星期三, 7月 15 08:02 早上";
+      const getUpdatedSalesResult = getUpdatedSales(itemDetail[123]);
+      expect(getUpdatedSalesResult).toStrictEqual(expectedResults);
+    });
+    it('test isError', () => {
+      const expectedGetItemDetailAction = {
+        payload: {
+          id: "1234567890098",
+        },
+        type: "SAGA/GET_ITEM_DETAILS",
+      };
+      const { getByTestId, rerender, toJSON } = render(isError(
+        'test',
+        true,
+        jest.fn(),
+        false,
+        { value: '1234567890098', type: 'UPC-A' },
+        'testUser',
+        mockDispatch,
+        jest.fn()
+      ));
+      expect(toJSON()).toMatchSnapshot();
+      const retryButton = getByTestId('scanErrorRetry');
+      fireEvent.press(retryButton);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedGetItemDetailAction);
+      rerender(isError(
+        'test',
+        false,
+        jest.fn(),
+        false,
+        { value: '1234567890098', type: 'UPC-A' },
+        'testUser',
+        mockDispatch,
+        jest.fn()
+      ));
+      expect(toJSON()).toMatchSnapshot();
+      rerender(isError(
+        null,
+        false,
+        jest.fn(),
+        false,
+        { value: '1234567890098', type: 'UPC-A' },
+        'testUser',
+        mockDispatch,
+        jest.fn()
+      ));
+      expect(toJSON()).toMatchSnapshot();
+    });
+    it('test getExceptionType', () => {
+      let getExceptionTypeResults = getExceptionType(false, itemDetail[123]);
+      expect(getExceptionTypeResults).toStrictEqual('nsfl');
+      getExceptionTypeResults = getExceptionType(true, itemDetail[123]);
+      expect(getExceptionTypeResults).toStrictEqual(undefined);
+    });
+    it('test getTopRightBtnTxt', () => {
+      let getTopRightBtnTxtResult = getTopRightBtnTxt(0);
+      expect(getTopRightBtnTxtResult).toStrictEqual('[missing \"en.GENERICS.ADD\" translation]');
+      getTopRightBtnTxtResult = getTopRightBtnTxt(1);
+      expect(getTopRightBtnTxtResult).toStrictEqual('[missing \"en.GENERICS.SEE_ALL\" translation]');
+    });
+    it('test getPendingOnHandsQty', () => {
+      let getPendingOnHandsQtyResult = getPendingOnHandsQty(['on hands change'], -999);
+      expect(getPendingOnHandsQtyResult).toStrictEqual(true);
+      getPendingOnHandsQtyResult = getPendingOnHandsQty([], -999);
+      expect(getPendingOnHandsQtyResult).toStrictEqual(false);
+      getPendingOnHandsQtyResult = getPendingOnHandsQty(['on hands change'], 0);
+      expect(getPendingOnHandsQtyResult).toStrictEqual(false);
+      getPendingOnHandsQtyResult = getPendingOnHandsQty(['on hands change'], 100);
+      expect(getPendingOnHandsQtyResult).toStrictEqual(false);
     });
   });
 });
