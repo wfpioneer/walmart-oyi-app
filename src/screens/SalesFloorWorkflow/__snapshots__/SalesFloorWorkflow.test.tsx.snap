@@ -9,7 +9,116 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#5a9ae0",
+          "borderRadius": 2,
+          "borderWidth": 1,
+          "flexDirection": "column",
+          "height": 30,
+          "justifyContent": "center",
+          "marginTop": 8,
+          "width": "100%",
+        }
+      }
+    >
+      <Text>
+        [missing "en.PICKING.REMOVE_PERISHABLE" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "margin": 10,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PICKING.REMOVE_PERISHABLE_NEW_EXPIRY" translation]
+      </Text>
+      <Memo(Pressable)
+        onPress={[Function]}
+        style={
+          Object {
+            "borderBottomWidth": 1,
+            "marginTop": 10,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+            }
+          }
+        >
+          16/02/2021
+        </Text>
+      </Memo(Pressable)>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "marginTop": 30,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "margin": 5,
+            }
+          }
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "margin": 5,
+            }
+          }
+          title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </CustomModalComponent>
   <PickPalletInfoCard
+    canDelete={false}
+    dispatch={[MockFunction]}
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
@@ -140,6 +249,516 @@ exports[`Sales floor workflow tests renders the screen with several items on the
     }
   }
 />
+`;
+
+exports[`Sales floor workflow tests shows the activity indicator when waiting for pallet config api 1`] = `
+<ActivityIndicator
+  animating={false}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`Sales floor workflow tests shows the activity indicator when waiting for pallet details 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={true}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#5a9ae0",
+          "borderRadius": 2,
+          "borderWidth": 1,
+          "flexDirection": "column",
+          "height": 30,
+          "justifyContent": "center",
+          "marginTop": 8,
+          "width": "100%",
+        }
+      }
+    >
+      <Text>
+        [missing "en.PICKING.REMOVE_PERISHABLE" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "margin": 10,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PICKING.REMOVE_PERISHABLE_NEW_EXPIRY" translation]
+      </Text>
+      <Memo(Pressable)
+        onPress={[Function]}
+        style={
+          Object {
+            "borderBottomWidth": 1,
+            "marginTop": 10,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+            }
+          }
+        >
+          16/02/2021
+        </Text>
+      </Memo(Pressable)>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "marginTop": 30,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "margin": 5,
+            }
+          }
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "margin": 5,
+            }
+          }
+          title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </CustomModalComponent>
+  <PickPalletInfoCard
+    canDelete={false}
+    dispatch={[MockFunction]}
+    onPress={[Function]}
+    palletId="43"
+    palletLocation="ABAR1-2"
+    pickListItems={Array []}
+    pickStatus="ready to work"
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "padding": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 13,
+        }
+      }
+    >
+      [missing "en.PICKING.UPDATE_REMAINING_QTY" translation]
+    </Text>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "assignedAssociate": "",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 0,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": "43",
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "ready to work",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <View
+    style={
+      Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
+        "flexDirection": "row",
+        "marginTop": "auto",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "margin": 5,
+        }
+      }
+      testId="complete"
+      title="[missing \\"en.PICKING.COMPLETE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "margin": 5,
+        }
+      }
+      testId="bin"
+      title="[missing \\"en.PICKING.READY_TO_BIN\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`Sales floor workflow tests shows the expiration date modal date picker 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#5a9ae0",
+          "borderRadius": 2,
+          "borderWidth": 1,
+          "flexDirection": "column",
+          "height": 30,
+          "justifyContent": "center",
+          "marginTop": 8,
+          "width": "100%",
+        }
+      }
+    >
+      <Text>
+        [missing "en.PICKING.REMOVE_PERISHABLE" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "margin": 10,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PICKING.REMOVE_PERISHABLE_NEW_EXPIRY" translation]
+      </Text>
+      <Memo(Pressable)
+        onPress={[Function]}
+        style={
+          Object {
+            "borderBottomWidth": 1,
+            "marginTop": 10,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+            }
+          }
+        >
+          16/02/2021
+        </Text>
+      </Memo(Pressable)>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "marginTop": 30,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "margin": 5,
+            }
+          }
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "margin": 5,
+            }
+          }
+          title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </CustomModalComponent>
+  <Picker
+    display="spinner"
+    is24Hour={true}
+    minimumDate={2021-02-16T22:16:30.000Z}
+    mode="date"
+    onChange={[Function]}
+    value={2021-02-16T22:16:30.000Z}
+  />
+  <PickPalletInfoCard
+    canDelete={false}
+    dispatch={[MockFunction]}
+    onPress={[Function]}
+    palletId="43"
+    palletLocation="ABAR1-2"
+    pickListItems={Array []}
+    pickStatus="ready to work"
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "padding": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 13,
+        }
+      }
+    >
+      [missing "en.PICKING.UPDATE_REMAINING_QTY" translation]
+    </Text>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "assignedAssociate": "",
+          "category": 3,
+          "createTS": "yesterday",
+          "createdBy": "Guude",
+          "id": 0,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": "43",
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "ready to work",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <View
+    style={
+      Object {
+        "borderTopColor": "#bdbdbd",
+        "borderTopWidth": 2,
+        "flexDirection": "row",
+        "marginTop": "auto",
+        "width": "100%",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "margin": 5,
+        }
+      }
+      testId="complete"
+      title="[missing \\"en.PICKING.COMPLETE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "flex": 1,
+          "margin": 5,
+        }
+      }
+      testId="bin"
+      title="[missing \\"en.PICKING.READY_TO_BIN\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
 `;
 
 exports[`Sales floor workflow tests shows the retry button when get pallet details errors 1`] = `

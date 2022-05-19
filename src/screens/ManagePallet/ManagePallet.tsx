@@ -72,7 +72,7 @@ interface ManagePalletProps {
   addPalletUpcApi: AsyncState;
   updateItemQtyAPI: AsyncState;
   deleteUpcsApi: AsyncState;
-  getPalletInfoApi: AsyncState;
+  getPalletDetailsApi: AsyncState;
   clearPalletApi: AsyncState;
   displayClearConfirmation: boolean;
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -228,18 +228,18 @@ export const handleAddItems = (
   }
 };
 
-export const getPalletInfoApiHook = (
-  getPalletInfoApi: AsyncState,
+export const getPalletDetailsApiHook = (
+  getPalletDetailsApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>
 ): void => {
   if (navigation.isFocused()) {
     // on api success
-    if (!getPalletInfoApi.isWaiting && getPalletInfoApi.result) {
-      if (getPalletInfoApi.result.status === 200) {
+    if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
+      if (getPalletDetailsApi.result.status === 200) {
         const {
           id, createDate, expirationDate, items
-        } = getPalletInfoApi.result.data.pallets[0];
+        } = getPalletDetailsApi.result.data.pallets[0];
         const palletItems: PalletItem[] = items.map((item: PalletItem) => ({
           ...item,
           quantity: item.quantity || 0,
@@ -257,8 +257,8 @@ export const getPalletInfoApiHook = (
         };
         dispatch(setupPallet(palletDetails));
         dispatch(hideActivityModal());
-        dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
-      } else if (getPalletInfoApi.result.status === 204) {
+        dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
+      } else if (getPalletDetailsApi.result.status === 204) {
         Toast.show({
           type: 'error',
           text1: strings('LOCATION.PALLET_NOT_FOUND'),
@@ -268,7 +268,7 @@ export const getPalletInfoApiHook = (
       }
     }
     // on api error
-    if (getPalletInfoApi.error) {
+    if (getPalletDetailsApi.error) {
       dispatch(hideActivityModal());
       Toast.show({
         type: 'error',
@@ -277,11 +277,11 @@ export const getPalletInfoApiHook = (
         visibilityTime: 4000,
         position: 'bottom'
       });
-      dispatch({ type: 'API/GET_PALLET_INFO/RESET' });
+      dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
     }
   }
   // api is Loading
-  if (getPalletInfoApi.isWaiting) {
+  if (getPalletDetailsApi.isWaiting) {
     dispatch(showActivityModal());
   }
 };
@@ -510,7 +510,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
-    deleteUpcsApi, addPalletUpcApi, getPalletInfoApi, clearPalletApi,
+    deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, perishableCategories
   } = props;
@@ -558,12 +558,12 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     dispatch
   ), [getItemDetailsApi]);
 
-  // update pallet hook (get pallet info api)
-  useEffectHook(() => getPalletInfoApiHook(
-    getPalletInfoApi,
+  // update pallet hook (get pallet details api)
+  useEffectHook(() => getPalletDetailsApiHook(
+    getPalletDetailsApi,
     dispatch,
     navigation
-  ), [getPalletInfoApi]);
+  ), [getPalletDetailsApi]);
 
   useEffectHook(() => clearPalletApiHook(
     clearPalletApi,
@@ -719,7 +719,7 @@ const ManagePallet = (): JSX.Element => {
   const addPalletUpcApi = useTypedSelector(state => state.async.addPalletUPCs);
   const updateItemQtyAPI = useTypedSelector(state => state.async.updatePalletItemQty);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
-  const getPalletInfoApi = useTypedSelector(state => state.async.getPalletInfo);
+  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const [isPickerShow, setIsPickerShow] = useState(false);
@@ -775,7 +775,7 @@ const ManagePallet = (): JSX.Element => {
           addPalletUpcApi={addPalletUpcApi}
           updateItemQtyAPI={updateItemQtyAPI}
           deleteUpcsApi={deleteUpcsApi}
-          getPalletInfoApi={getPalletInfoApi}
+          getPalletDetailsApi={getPalletDetailsApi}
           clearPalletApi={clearPalletApi}
           displayClearConfirmation={displayClearConfirmation}
           setDisplayClearConfirmation={setDisplayClearConfirmation}

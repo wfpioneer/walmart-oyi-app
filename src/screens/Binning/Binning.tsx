@@ -23,10 +23,10 @@ import Button from '../../components/buttons/Button';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  getPalletInfo
+  getPalletDetails
 } from '../../state/actions/saga';
 import {
-  GET_PALLET_INFO
+  GET_PALLET_DETAILS
 } from '../../state/actions/asyncAPI';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -45,7 +45,7 @@ export interface BinningScreenProps {
   navigation: NavigationProp<any>;
   isManualScanEnabled: boolean;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
-  getPalletApi: AsyncState;
+  getPalletDetailsApi: AsyncState;
   scannedEvent: { value: any; type: string | null};
   isMounted: MutableRefObject<boolean>;
   palletClicked: boolean;
@@ -62,7 +62,7 @@ export const navigateToPalletManagement = (
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   setPalletClicked(true);
-  dispatch(getPalletInfo({ palletIds: [palletId], isAllItems: true }));
+  dispatch(getPalletDetails({ palletIds: [palletId], isAllItems: true }));
 };
 
 export const binningItemCard = (
@@ -86,7 +86,7 @@ export const binningItemCard = (
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const resetApis = (dispatch: Dispatch<any>) => {
-  dispatch({ type: GET_PALLET_INFO.RESET });
+  dispatch({ type: GET_PALLET_DETAILS.RESET });
 };
 
 const onValidateHardwareBackPress = (props: BinningScreenProps) => {
@@ -101,7 +101,7 @@ const onValidateHardwareBackPress = (props: BinningScreenProps) => {
 export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   const {
     scannedPallets, isManualScanEnabled, dispatch, navigation, route, useEffectHook,
-    getPalletApi, scannedEvent, isMounted, palletClicked, setPalletClicked, useFocusEffectHook,
+    getPalletDetailsApi, scannedEvent, isMounted, palletClicked, setPalletClicked, useFocusEffectHook,
     displayWarningModal, setDisplayWarningModal, useCallbackHook
   } = props;
 
@@ -138,7 +138,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
               barcode: scannedEvent.value,
               type: scannedEvent.type ?? ''
             });
-            dispatch(getPalletInfo({ palletIds: [scannedEvent.value] }));
+            dispatch(getPalletDetails({ palletIds: [scannedEvent.value] }));
           }
         });
       }
@@ -149,11 +149,11 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
 
   useEffectHook(() => {
     // on api success
-    if (!getPalletApi.isWaiting && getPalletApi.result) {
-      if (getPalletApi.result.status === 200) {
+    if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
+      if (getPalletDetailsApi.result.status === 200) {
         const {
           pallets
-        } = getPalletApi.result.data;
+        } = getPalletDetailsApi.result.data;
         const newPallet = head(pallets) as BinningPallet;
         if (palletClicked) {
           setPalletClicked(false);
@@ -184,7 +184,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
             position: 'bottom'
           });
         }
-      } else if (getPalletApi.result.status === 204) {
+      } else if (getPalletDetailsApi.result.status === 204) {
         Toast.show({
           type: 'error',
           text1: strings('LOCATION.PALLET_NOT_FOUND'),
@@ -196,7 +196,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
       resetApis(dispatch);
     }
     // on api error
-    if (!getPalletApi.isWaiting && getPalletApi.error) {
+    if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
       dispatch(hideActivityModal());
       Toast.show({
         type: 'error',
@@ -208,10 +208,10 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
       resetApis(dispatch);
     }
     // on api request
-    if (getPalletApi.isWaiting) {
+    if (getPalletDetailsApi.isWaiting) {
       dispatch(showActivityModal());
     }
-  }, [getPalletApi]);
+  }, [getPalletDetailsApi]);
 
   // validation on app back press
   useEffectHook(() => {
@@ -345,7 +345,7 @@ const Binning = (): JSX.Element => {
   const route = useRoute();
   const navigation = useNavigation();
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const getPalletApi = useTypedSelector(state => state.async.getPalletInfo);
+  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const isMounted = useRef(false);
   const [palletCLicked, setPalletClicked] = useState(false);
 
@@ -357,7 +357,7 @@ const Binning = (): JSX.Element => {
       navigation={navigation}
       useEffectHook={useEffect}
       isManualScanEnabled={isManualScanEnabled}
-      getPalletApi={getPalletApi}
+      getPalletDetailsApi={getPalletDetailsApi}
       scannedEvent={scannedEvent}
       isMounted={isMounted}
       palletClicked={palletCLicked}

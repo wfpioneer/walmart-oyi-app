@@ -3,7 +3,7 @@ import {
   ASSIGN_FLUFFY_FEATURES, Actions, SET_CONFIGS, USER_LOGIN, USER_LOGOUT
 } from '../actions/User';
 
-const initialState: User = {
+export const initialState: User = {
   additional: {
     clockCheckResult: '',
     displayName: '',

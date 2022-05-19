@@ -145,6 +145,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
     showContinueActionDialog={false}
   />
   <PickPalletInfoCard
+    canDelete={false}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="45"
     palletLocation="ABAR1-4"
@@ -263,6 +265,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
     showContinueActionDialog={false}
   />
   <PickPalletInfoCard
+    canDelete={false}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
@@ -362,6 +366,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
     showContinueActionDialog={false}
   />
   <PickPalletInfoCard
+    canDelete={false}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
@@ -441,6 +447,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
     showContinueActionDialog={false}
   />
   <PickPalletInfoCard
+    canDelete={false}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="44"
     palletLocation="ABAR1-2"
@@ -559,6 +567,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
     showContinueActionDialog={false}
   />
   <PickPalletInfoCard
+    canDelete={false}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="40"
     palletLocation="ABAR1-2"
@@ -677,6 +687,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
     showContinueActionDialog={false}
   />
   <PickPalletInfoCard
+    canDelete={false}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="40"
     palletLocation="ABAR1-2"
@@ -794,6 +806,8 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
     showContinueActionDialog={false}
   />
   <PickPalletInfoCard
+    canDelete={false}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="42"
     palletLocation="ABAR1-2"
@@ -911,6 +925,8 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
     showContinueActionDialog={false}
   />
   <PickPalletInfoCard
+    canDelete={false}
+    dispatch={[Function]}
     onPress={[Function]}
     palletId="41"
     palletLocation="ABAR1-2"
