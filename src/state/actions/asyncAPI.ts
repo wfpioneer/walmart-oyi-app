@@ -66,9 +66,6 @@ export const addPallet = makeAsyncActionCreators(ADD_PALLET);
 export const DELETE_PALLET = makeAsyncActionTypes('API/DELETE_PALLET');
 export const deletePallet = makeAsyncActionCreators(DELETE_PALLET);
 
-export const GET_PALLET_DETAILS = makeAsyncActionTypes('API/GET_PALLET_DETAILS');
-export const getPalletDetails = makeAsyncActionCreators(GET_PALLET_DETAILS);
-
 export const POST_CREATE_AISLES = makeAsyncActionTypes('API/POST_CREATE_AISLES');
 export const postCreateAisles = makeAsyncActionCreators(POST_CREATE_AISLES);
 
@@ -117,8 +114,8 @@ export const printPalletLabel = makeAsyncActionCreators(PRINT_PALLET_LABEL);
 export const CLEAR_PALLET = makeAsyncActionTypes('API/CLEAR_PALLET');
 export const clearPallet = makeAsyncActionCreators(CLEAR_PALLET);
 
-export const GET_PALLET_INFO = makeAsyncActionTypes('API/GET_PALLET_INFO');
-export const getPalletInfo = makeAsyncActionCreators(GET_PALLET_INFO);
+export const GET_PALLET_DETAILS = makeAsyncActionTypes('API/GET_PALLET_DETAILS');
+export const getPalletDetails = makeAsyncActionCreators(GET_PALLET_DETAILS);
 
 export const POST_BIN_PALLETS = makeAsyncActionTypes('API/POST_BIN_PALLETS');
 export const binPallets = makeAsyncActionCreators(POST_BIN_PALLETS);
