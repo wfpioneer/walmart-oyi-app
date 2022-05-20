@@ -10,7 +10,7 @@ describe('SalesFloorTabScreen', () => {
       {
         assignedAssociate: 'Associate 3',
         category: 72,
-        createTs: '4:25 PM 02/09/2022',
+        createTs: '2022-02-09T12:55:31.9633333Z',
         createdBy: 'Manager 1',
         id: 5,
         itemDesc: 'Tea',
@@ -28,7 +28,7 @@ describe('SalesFloorTabScreen', () => {
       {
         assignedAssociate: 'Associate 4',
         category: 78,
-        createTs: '4:25 PM 02/09/2022',
+        createTs: '2022-02-09T12:55:31.9633333Z',
         createdBy: 'Manager 1',
         id: 6,
         itemDesc: 'Steak',
@@ -46,7 +46,7 @@ describe('SalesFloorTabScreen', () => {
       {
         assignedAssociate: 'Associate 4',
         category: 78,
-        createTs: '4:25 PM 02/09/2022',
+        createTs: '2022-02-09T12:55:31.9633333Z',
         createdBy: 'Manager 1',
         id: 7,
         itemDesc: 'Chicken',
@@ -64,7 +64,7 @@ describe('SalesFloorTabScreen', () => {
       {
         assignedAssociate: 'Associate 3',
         category: 72,
-        createTs: '4:25 PM 02/09/2022',
+        createTs: '2022-02-09T12:55:31.9633333Z',
         createdBy: 'Manager 1',
         id: 8,
         itemDesc: 'Juice',

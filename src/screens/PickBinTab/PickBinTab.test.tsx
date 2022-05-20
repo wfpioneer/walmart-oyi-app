@@ -42,7 +42,7 @@ describe('PickBinTabScreen', () => {
       const newMockPickList = [...mockPickLists, {
         assignedAssociate: 'vn51wu8',
         category: 46,
-        createTs: '10:32 AM 03/04/2022',
+        createTs: '2022-04-03T12:55:31.9633333Z',
         createdBy: 'Associate 2',
         id: 4,
         itemDesc: 'Candy',
