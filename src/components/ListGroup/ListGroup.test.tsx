@@ -34,7 +34,7 @@ describe('ListGroup', () => {
         {
           assignedAssociate: 'Associate 2',
           category: 46,
-          createTS: '10:32 AM 03/04/2022',
+          createTs: '10:32 AM 03/04/2022',
           createdBy: 'Associate 2',
           id: 4,
           itemDesc: 'Candy',

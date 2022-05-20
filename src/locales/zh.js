@@ -402,7 +402,12 @@ export default {
     PALLET_NOT_FOUND: '未找到卡板',
     CREATE_NEW_PICK_SUCCESS: '补货已创建',
     CREATE_NEW_PICK_FAILURE: '创建补货时报错',
-    PICK_REQUEST_CRITERIA_ALREADY_MET: '无足够的卡板可供提取'
+    PICK_REQUEST_CRITERIA_ALREADY_MET: '无足够的卡板可供提取',
+    PICK_COMPLETED: '补货已完成',
+    PICK_COMPLETED_PLURAL: '补货已完成',
+    PICKLIST_UPDATED: '补货已完成',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED: '完成补货，补货清单已更新',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: '完成补货，补货清单已更新'
   },
   BINNING: {
     BINNING: '上架',

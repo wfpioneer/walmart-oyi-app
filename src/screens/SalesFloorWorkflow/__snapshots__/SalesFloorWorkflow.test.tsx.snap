@@ -150,7 +150,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
         Object {
           "assignedAssociate": "",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "yesterday",
           "createdBy": "Guude",
           "id": 0,
           "itemDesc": "generic description",
@@ -433,7 +433,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
         Object {
           "assignedAssociate": "",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "yesterday",
           "createdBy": "Guude",
           "id": 0,
           "itemDesc": "generic description",
@@ -676,7 +676,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
         Object {
           "assignedAssociate": "",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "yesterday",
           "createdBy": "Guude",
           "id": 0,
           "itemDesc": "generic description",

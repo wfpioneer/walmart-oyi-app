@@ -19,6 +19,7 @@ import { binPallets } from '../../state/actions/saga';
 import { POST_BIN_PALLETS } from '../../state/actions/asyncAPI';
 import { BinningPallet } from '../../models/Binning';
 import { AsyncState } from '../../models/AsyncState';
+import { BinPalletResponse, BinPicklistInfo, picklistActionType } from '../../models/Picking.d';
 import { PostBinPalletsMultistatusResponse } from '../../services/PalletManagement.service';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
@@ -71,7 +72,75 @@ export const binPalletsApiEffect = (
       dispatch(hideActivityModal());
       // Success
       if (binPalletsApi.result) {
-        if (binPalletsApi.result.status === 207) {
+        if (binPalletsApi.result.status === 200) {
+          const { data } = binPalletsApi.result;
+          const updatedPicklists: BinPicklistInfo[] = data && data.binSummary ? data.binSummary.flatMap(
+            (item: BinPalletResponse) => item.picklists.map(picklist => picklist)
+          ) : [];
+          const [completedPicks, locationUpdatedPicks] = updatedPicklists.reduce((acc: any, item) => {
+            if (item.picklistActionType === picklistActionType.COMPLETE) {
+              acc[0].push(item);
+            } else if (item.picklistActionType === picklistActionType.UPDATE_LOCATION) {
+              acc[1].push(item);
+            }
+            return acc;
+          }, [[], []]);
+          if (completedPicks.length > 0 && !(locationUpdatedPicks.length > 0)) {
+            if (completedPicks.length === 1) {
+              Toast.show({
+                type: 'success',
+                position: 'bottom',
+                text1: strings('PICKING.PICK_COMPLETED'),
+                visibilityTime: 4000
+              });
+            } else {
+              Toast.show({
+                type: 'success',
+                position: 'bottom',
+                text1: strings('PICKING.PICK_COMPLETED_PLURAL'),
+                visibilityTime: 4000
+              });
+            }
+          } else if (locationUpdatedPicks.length > 0 && !(completedPicks.length > 0)) {
+            Toast.show({
+              type: 'success',
+              position: 'bottom',
+              text1: strings('PICKING.PICKLIST_UPDATED'),
+              visibilityTime: 4000
+            });
+          } else if (completedPicks.length > 0 && locationUpdatedPicks.length > 0) {
+            if (completedPicks.length === 1) {
+              Toast.show({
+                type: 'success',
+                position: 'bottom',
+                text1: strings('PICKING.PICK_COMPLETED_AND_PICKLIST_UPDATED'),
+                visibilityTime: 4000
+              });
+            } else {
+              Toast.show({
+                type: 'success',
+                position: 'bottom',
+                text1: strings('PICKING.PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL'),
+                visibilityTime: 4000
+              });
+            }
+          } else {
+            Toast.show({
+              type: 'success',
+              position: 'bottom',
+              text1: strings('BINNING.PALLET_BIN_SUCCESS'),
+              visibilityTime: SNACKBAR_TIMEOUT
+            });
+          }
+
+          dispatch(clearPallets());
+          dispatch({ type: POST_BIN_PALLETS.RESET });
+          if (route.params && route.params.source === 'picking') {
+            navigation.navigate('PickingTabs');
+          } else {
+            navigation.goBack();
+          }
+        } else if (binPalletsApi.result.status === 207) {
           const failedPallets = getFailedPallets(binPalletsApi.result.data as PostBinPalletsMultistatusResponse);
           Toast.show({
             type: 'error',
@@ -82,21 +151,6 @@ export const binPalletsApiEffect = (
 
           failedPallets.forEach(palletId => dispatch(deletePallet(palletId)));
           dispatch({ type: POST_BIN_PALLETS.RESET });
-        } else {
-          Toast.show({
-            type: 'success',
-            position: 'bottom',
-            text1: strings('BINNING.PALLET_BIN_SUCCESS'),
-            visibilityTime: SNACKBAR_TIMEOUT
-          });
-
-          dispatch(clearPallets());
-          dispatch({ type: POST_BIN_PALLETS.RESET });
-          if (route.params && route.params.source === 'picking') {
-            navigation.navigate('PickingTabs');
-          } else {
-            navigation.goBack();
-          }
         }
       }
 
