@@ -408,8 +408,8 @@ export default {
     PICK_COMPLETED: 'The pick has been completed',
     PICK_COMPLETED_PLURAL: 'The picks have been completed',
     PICKLIST_UPDATED: 'The picklist has been updated',
-    PICK_COMPLETED_AND_PICKLIST_UPDATED: 'The pick and the picklist have been completed',
-    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'The picks and the picklist have been completed'
+    PICK_COMPLETED_AND_PICKLIST_UPDATED: 'The pick has been completed and the picklist has been updated',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'The picks have been completed and the picklist have been updated'
   },
   BINNING: {
     BINNING: 'Binning',

@@ -6,6 +6,7 @@ import { PostBinPalletsMultistatusResponse } from '../../services/PalletManageme
 import { HIDE_ACTIVITY_MODAL, SHOW_ACTIVITY_MODAL } from '../../state/actions/Modal';
 import { AsyncState } from '../../models/AsyncState';
 import { strings } from '../../locales';
+import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 import { AssignLocationScreen, binPalletsApiEffect, getFailedPallets } from './AssignLocation';
 import { CLEAR_PALLETS, DELETE_PALLET } from '../../state/actions/Binning';
 import { BinningPallet } from '../../models/Binning';
@@ -163,7 +164,7 @@ describe('Assign Location externalized function tests', () => {
       type: 'success',
       position: 'bottom',
       text1: strings('PICKING.PICK_COMPLETED'),
-      visibilityTime: 4000
+      visibilityTime: SNACKBAR_TIMEOUT
     });
   });
 
@@ -186,7 +187,7 @@ describe('Assign Location externalized function tests', () => {
       type: 'success',
       position: 'bottom',
       text1: strings('PICKING.PICKLIST_UPDATED'),
-      visibilityTime: 4000
+      visibilityTime: SNACKBAR_TIMEOUT
     });
   });
 
@@ -213,7 +214,7 @@ describe('Assign Location externalized function tests', () => {
       type: 'success',
       position: 'bottom',
       text1: strings('PICKING.PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL'),
-      visibilityTime: 4000
+      visibilityTime: SNACKBAR_TIMEOUT_LONG
     });
   });
 

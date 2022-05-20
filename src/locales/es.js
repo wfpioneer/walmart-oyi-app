@@ -406,8 +406,8 @@ export default {
     PICK_COMPLETED: 'El pick ha sido completado',
     PICK_COMPLETED_PLURAL: 'Se han completado los picks',
     PICKLIST_UPDATED: 'La lista de pickeos ha sido actualizada',
-    PICK_COMPLETED_AND_PICKLIST_UPDATED: 'El pick y la lista han sido completados',
-    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los picks y la lista han sido completados'
+    PICK_COMPLETED_AND_PICKLIST_UPDATED: 'El pickeo se ha completado y la lista se ha actualizado',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los pickeos se han completado y la lista se ha actualizado'
   },
   BINNING: {
     BINNING: 'Bodega',

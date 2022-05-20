@@ -23,7 +23,7 @@ import { BinPalletResponse, BinPicklistInfo, picklistActionType } from '../../mo
 import { PostBinPalletsMultistatusResponse } from '../../services/PalletManagement.service';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
-import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 import { validateSession } from '../../utils/sessionTimeout';
 import { strings } from '../../locales';
 import styles from './AssignLocation.style';
@@ -77,36 +77,38 @@ export const binPalletsApiEffect = (
           const updatedPicklists: BinPicklistInfo[] = data && data.binSummary ? data.binSummary.flatMap(
             (item: BinPalletResponse) => item.picklists.map(picklist => picklist)
           ) : [];
-          const [completedPicks, locationUpdatedPicks] = updatedPicklists.reduce((acc: any, item) => {
-            if (item.picklistActionType === picklistActionType.COMPLETE) {
-              acc[0].push(item);
-            } else if (item.picklistActionType === picklistActionType.UPDATE_LOCATION) {
-              acc[1].push(item);
-            }
-            return acc;
-          }, [[], []]);
-          if (completedPicks.length > 0 && !(locationUpdatedPicks.length > 0)) {
+          const [completedPicks, locationUpdatedPicks] = updatedPicklists.reduce(
+            (acc: [BinPicklistInfo[], BinPicklistInfo[]], item) => {
+              if (item.picklistActionType === picklistActionType.COMPLETE) {
+                acc[0].push(item);
+              } else if (item.picklistActionType === picklistActionType.UPDATE_LOCATION) {
+                acc[1].push(item);
+              }
+              return acc;
+            }, [[], []]
+          );
+          if (completedPicks.length > 0 && locationUpdatedPicks.length === 0) {
             if (completedPicks.length === 1) {
               Toast.show({
                 type: 'success',
                 position: 'bottom',
                 text1: strings('PICKING.PICK_COMPLETED'),
-                visibilityTime: 4000
+                visibilityTime: SNACKBAR_TIMEOUT
               });
             } else {
               Toast.show({
                 type: 'success',
                 position: 'bottom',
                 text1: strings('PICKING.PICK_COMPLETED_PLURAL'),
-                visibilityTime: 4000
+                visibilityTime: SNACKBAR_TIMEOUT
               });
             }
-          } else if (locationUpdatedPicks.length > 0 && !(completedPicks.length > 0)) {
+          } else if (locationUpdatedPicks.length > 0 && completedPicks.length === 0) {
             Toast.show({
               type: 'success',
               position: 'bottom',
               text1: strings('PICKING.PICKLIST_UPDATED'),
-              visibilityTime: 4000
+              visibilityTime: SNACKBAR_TIMEOUT
             });
           } else if (completedPicks.length > 0 && locationUpdatedPicks.length > 0) {
             if (completedPicks.length === 1) {
@@ -114,14 +116,14 @@ export const binPalletsApiEffect = (
                 type: 'success',
                 position: 'bottom',
                 text1: strings('PICKING.PICK_COMPLETED_AND_PICKLIST_UPDATED'),
-                visibilityTime: 4000
+                visibilityTime: SNACKBAR_TIMEOUT_LONG
               });
             } else {
               Toast.show({
                 type: 'success',
                 position: 'bottom',
                 text1: strings('PICKING.PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL'),
-                visibilityTime: 4000
+                visibilityTime: SNACKBAR_TIMEOUT_LONG
               });
             }
           } else {
@@ -146,7 +148,7 @@ export const binPalletsApiEffect = (
             type: 'error',
             position: 'bottom',
             text1: strings('BINNING.PALLET_BIN_PARTIAL', { number: failedPallets.length }),
-            visibilityTime: SNACKBAR_TIMEOUT + 1000
+            visibilityTime: SNACKBAR_TIMEOUT_LONG
           });
 
           failedPallets.forEach(palletId => dispatch(deletePallet(palletId)));
