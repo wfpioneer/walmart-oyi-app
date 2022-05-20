@@ -306,7 +306,12 @@ export default {
     CLEAR_AISLE_ITEMS_SUCCEED: 'All selected items successfully cleared from this aisle',
     CLEAR_AISLE_ITEMS_FAIL: 'There was an error clearing items from this aisle.  Please try again',
     PALLET_MANAGEMENT: 'Pallet Management',
-    LOCATION_MGMT_EDIT: 'Location Management Edit'
+    LOCATION_MGMT_EDIT: 'Location Management Edit',
+    NEW_PICK_ADDED_TO_PICKLIST: 'The pick request has been added to the picklist',
+    NEW_PICK_ADDED_TO_PICKLIST_PLURAL: 'The pick requests have been added to the picklist',
+    NO_PALLETS_AVAILABLE_PICK_DELETED: 'The pallet is not available. The pick requested has been deleted',
+    UPDATE_PICK_FAILED_TRY_AGAIN: 'Failed to update pick. Please try again',
+    UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again'
   },
   WORKLIST: {
     WORKLIST: 'Work List',

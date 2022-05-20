@@ -18,9 +18,10 @@ import { strings } from '../../locales';
 import styles from './PickBinWorkflow.style';
 import { AsyncState } from '../../models/AsyncState';
 import {
+  UPDATE_PALLET_NOT_FOUND,
   UPDATE_PICKLIST_STATUS
 } from '../../state/actions/asyncAPI';
-import { updatePicklistStatus } from '../../state/actions/saga';
+import { updatePalletNotFound, updatePicklistStatus } from '../../state/actions/saga';
 import { updatePicks } from '../../state/actions/Picking';
 import { addPallet } from '../../state/actions/Binning';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -31,6 +32,7 @@ interface PBWorkflowProps {
   userId: string;
   pickingState: PickingState;
   updatePicklistStatusApi: AsyncState;
+  updatePalletNotFoundApi: AsyncState;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
@@ -100,6 +102,42 @@ export const updatePicklistStatusApiHook = (
   }
 };
 
+export const updatePalletNotFoundApiHook = (
+  updatePalletNotFoundApi: AsyncState,
+  items: PickListItem[],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+) => {
+  // on api success
+  if (navigation.isFocused() && !updatePalletNotFoundApi.isWaiting && updatePalletNotFoundApi.result
+    && updatePalletNotFoundApi.result.status === 200) {
+    dispatch(hideActivityModal());
+    Toast.show({
+      type: 'success',
+      text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+    dispatch({ type: UPDATE_PALLET_NOT_FOUND.RESET });
+  }
+  // on api error
+  if (!updatePalletNotFoundApi.isWaiting && updatePalletNotFoundApi.error) {
+    dispatch(hideActivityModal());
+    Toast.show({
+      type: 'error',
+      text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
+      text2: strings('GENERICS.TRY_AGAIN'),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+    dispatch({ type: UPDATE_PALLET_NOT_FOUND.RESET });
+  }
+  // on api request
+  if (updatePalletNotFoundApi.isWaiting) {
+    dispatch(showActivityModal());
+  }
+};
+
 export const updatePicklistItemsStatus = (items: PickListItem[], action: PickAction, dispatch: Dispatch<any>) => {
   const picklistItems = items.map(item => ({
     picklistId: item.id,
@@ -127,8 +165,11 @@ export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
     updatePicklistItemsStatus(items, action, dispatch);
   };
 
-  // TODO: Need to call /picklist/{palletId}/palletnotfound service and redirect to TabNavigator on Success
-  const handlePalletNotFound = () => {};
+  const handlePalletNotFound = () => {
+    const { palletId } = items[0];
+    const picklistIds = items.map(item => item.id);
+    dispatch(updatePalletNotFound({ palletId, picklistIds }));
+  };
 
   return (
     <CustomModalComponent
@@ -175,7 +216,8 @@ export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
 export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
   const {
     userFeatures, userId, pickingState, updatePicklistStatusApi, useEffectHook, dispatch, navigation,
-    selectedPicklistAction, setSelectedPicklistAction, showContinueActionDialog, setShowContinueActionDialog
+    selectedPicklistAction, setSelectedPicklistAction, showContinueActionDialog,
+    setShowContinueActionDialog, updatePalletNotFoundApi
   } = props;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
@@ -187,6 +229,13 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     navigation,
     selectedPicklistAction
   ), [updatePicklistStatusApi]);
+
+  useEffectHook(() => updatePalletNotFoundApiHook(
+    updatePalletNotFoundApi,
+    selectedPicks,
+    dispatch,
+    navigation,
+  ), [updatePalletNotFoundApi]);
 
   const handleAccept = (items: PickListItem[]) => {
     const { status } = items[0];
@@ -303,6 +352,7 @@ const PickBinWorkflow = () => {
   const userId = useTypedSelector(state => state.User.userId);
   const picking = useTypedSelector(state => state.Picking);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
+  const updatePalletNotFoundApi = useTypedSelector(state => state.async.updatePalletNotFound);
   const [selectedPicklistAction, setSelectedPicklistAction] = useState<PickAction|null>(null);
   const [showContinueActionDialog, setShowContinueActionDialog] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -314,6 +364,7 @@ const PickBinWorkflow = () => {
       userId={userId}
       pickingState={picking}
       updatePicklistStatusApi={updatePicklistStatusApi}
+      updatePalletNotFoundApi={updatePalletNotFoundApi}
       useEffectHook={useEffect}
       dispatch={dispatch}
       navigation={navigation}

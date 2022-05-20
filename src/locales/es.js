@@ -402,7 +402,12 @@ export default {
     PALLET_NOT_FOUND: 'Pallet no encontrado',
     CREATE_NEW_PICK_SUCCESS: 'Pick creado',
     CREATE_NEW_PICK_FAILURE: 'Hubo un error creando el pick',
-    PICK_REQUEST_CRITERIA_ALREADY_MET: 'No hay suficientes pallets disponibles para este pick'
+    PICK_REQUEST_CRITERIA_ALREADY_MET: 'No hay suficientes pallets disponibles para este pick',
+    NEW_PICK_ADDED_TO_PICKLIST: 'La solicitud de pick se ha agregado a la lista',
+    NEW_PICK_ADDED_TO_PICKLIST_PLURAL: 'Las solicitudes de picks se han agregado a la lista',
+    NO_PALLETS_AVAILABLE_PICK_DELETED: 'El pallet no está disponible. La solicitud ha sido rechazada',
+    UPDATE_PICK_FAILED_TRY_AGAIN: 'Falló la actualización de pick. Por favor inténtalo de nuevo',
+    UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Falló la actualización de picks. Por favor inténtalo de nuevo'
   },
   BINNING: {
     BINNING: 'Bodega',
