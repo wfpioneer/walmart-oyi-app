@@ -60,7 +60,7 @@ export const validateLocation = (loc: string): boolean => {
   const locRegex = new RegExp(/^[\d]+$|[A-z][0-9]+-[0-9]+/);
   return loc.length > 0 && locRegex.test(loc);
 };
-const onValidateSessionCallResponse = (
+export const onValidateSessionCallResponse = (
   loc: string,
   setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string; }>>,
   floorLocations: Location[],
@@ -103,7 +103,8 @@ const onValidateSessionCallResponse = (
     }
   }
 };
-const onBarcodeEmitterResponse = (
+
+export const onBarcodeEmitterResponse = (
   setLoc: React.Dispatch<React.SetStateAction<string>>,
   setScanType: React.Dispatch<React.SetStateAction<string>>,
   navigation: NavigationProp<any>,
@@ -135,7 +136,7 @@ const onBarcodeEmitterResponse = (
   }
 };
 
-const isNotActionCompleted = (
+export const isNotActionCompleted = (
   actionCompleted: boolean,
   dispatch: Dispatch<any>,
   exceptionType: string | null | undefined
@@ -217,6 +218,17 @@ export const EditLocationApiHook = (
   }
 };
 
+export const scanUPCAHook = (
+  scanType: string,
+  onSubmit: () => void,
+  setScanType:React.Dispatch<React.SetStateAction<string>>
+) => {
+  if (scanType === 'LABEL-TYPE-UPCA') {
+    onSubmit();
+    setScanType('');
+  }
+};
+
 export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Element => {
   const {
     inputLocation, setInputLocation, loc, setLoc, actionCompleted, floorLocations, upcNbr,
@@ -287,12 +299,11 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
 
   // Submits Add/Edit Location after Barcode Scan
   // This useEffect is not grouped with other useEffects only to call 'onSubmit()' from the upper scope.
-  useEffectHook(() => {
-    if (scanType === 'LABEL-TYPE-UPCA') {
-      onSubmit();
-      setScanType('');
-    }
-  }, [loc]);
+  useEffectHook(() => scanUPCAHook(
+    scanType,
+    onSubmit,
+    setScanType
+  ), [loc]);
 
   const handleManualScan = () => {
     validateSessionCall(navigation).then(() => {
@@ -320,6 +331,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
             titleFontSize={12}
             titleFontWeight="bold"
             onPress={handleManualScan}
+            testID="manual"
           />
         </View>
         {isError(error)}
@@ -341,6 +353,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
               radius={0}
               onPress={onSubmit}
               disabled={!validateLocation(loc)}
+              testID="submit"
             />
           )}
       </View>
