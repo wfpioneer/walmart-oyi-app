@@ -3,15 +3,15 @@ import React from 'react';
 import { View } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import { ScrollView } from 'react-native';
-import { Provider } from "react-redux";
-import { RootState } from "../../state/reducers/RootReducer";
+import { Provider } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { strings } from '../../locales';
 import itemDetail from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
-  createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount, getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales, handleAddToPicklist, handleCreateNewPick,
+  createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount, getPendingOnHandsQty,
+  getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales, handleAddToPicklist, handleCreateNewPick,
   handleLocationAction, handleUpdateQty, callBackbarcodeEmitter, isError, isItemDetailsCompleted, onIsWaiting,
   onValidateBackPress, onValidateCompleteItemApiErrortHook, onValidateCompleteItemApiResultHook, onValidateItemDetails,
   onValidateScannedEvent, renderAddPicklistButton, renderBarcodeErrorModal, renderLocationComponent,
@@ -32,8 +32,8 @@ jest.mock('../../utils/sessionTimeout.ts', () => ({
   validateSession: jest.fn(() => Promise.resolve())
 }));
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
-jest.mock("@react-navigation/native", () => {
-  const actualNav = jest.requireActual("@react-navigation/native");
+jest.mock('@react-navigation/native', () => {
+  const actualNav = jest.requireActual('@react-navigation/native');
   return {
     ...actualNav,
     useNavigation: () => ({
@@ -139,7 +139,7 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
 //};
 describe('ReviewItemDetailsScreen', () => {
   describe('Tests renders ItemDetails API Responses', () => {
-    const actualNav = jest.requireActual("@react-navigation/native");
+    const actualNav = jest.requireActual('@react-navigation/native');
     const navContextValue = {
       ...actualNav.navigation,
       isFocused: () => false,
@@ -159,398 +159,146 @@ describe('ReviewItemDetailsScreen', () => {
       expect(toJSON()).toMatchSnapshot();
     });
     it('renders the details for a single item with non-null status', () => {
+      const testProps = {
+        ...mockItemDetailsScreenProps,
+        result: {
+          data: itemDetail[123],
+          status: 200
+        },
+        exceptionType: 'NSFL',
+        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
+        floorLocations: itemDetail[123].location.floor,
+        reserveLocations: itemDetail[123].location.reserve,
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen
-          scannedEvent={undefined}
-          isManualScanEnabled={false}
-          isWaiting={false}
-          error={undefined}
-          result={{
-            data: itemDetail[123],
-            status: 200
-          }}
-          addToPicklistStatus={defaultAsyncState}
-          completeItemApi={defaultAsyncState}
-          userId=""
-          exceptionType="NSFL"
-          actionCompleted={false}
-          pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
-          floorLocations={itemDetail[123].location.floor}
-          reserveLocations={itemDetail[123].location.reserve}
-          route={routeProp}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          scrollViewRef={scrollViewProp}
-          isSalesMetricsGraphView={false}
-          setIsSalesMetricsGraphView={jest.fn()}
-          ohQtyModalVisible={false}
-          setOhQtyModalVisible={jest.fn()}
-          errorModalVisible={false}
-          setErrorModalVisible={jest.fn()}
-          trackEventCall={jest.fn()}
-          validateSessionCall={jest.fn(() => Promise.resolve())}
-          useEffectHook={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          userFeatures={[]}
-          userConfigs={mockConfig}
-          createPickModalVisible={false}
-          setCreatePickModalVisible={jest.fn()}
-          selectedSection=""
-          setSelectedSection={jest.fn()}
-          numberOfPallets={1}
-          setNumberOfPallets={jest.fn()}
-          isQuickPick={false}
-          setIsQuickPick={jest.fn()}
-          createNewPickApi={defaultAsyncState}
-        />
+        <ReviewItemDetailsScreen { ...testProps } />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the details for a single item with null status', () => {
+      const testProps = {
+        ...mockItemDetailsScreenProps,
+        result: {
+          data: {
+            ...itemDetail[123],
+          status: undefined
+          },
+          status: 200
+        },
+        exceptionType: 'NSFL',
+        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
+        floorLocations: itemDetail[123].location.floor,
+        reserveLocations: itemDetail[123].location.reserve,
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen
-          scannedEvent={undefined}
-          isManualScanEnabled={false}
-          isWaiting={false}
-          error={undefined}
-          result={{
-            data: {
-              ...itemDetail[123],
-              status: undefined
-            },
-            status: 200
-          }}
-          addToPicklistStatus={defaultAsyncState}
-          completeItemApi={defaultAsyncState}
-          userId=""
-          exceptionType="NSFL"
-          actionCompleted={false}
-          pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
-          floorLocations={itemDetail[123].location.floor}
-          reserveLocations={itemDetail[123].location.reserve}
-          route={routeProp}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          scrollViewRef={scrollViewProp}
-          isSalesMetricsGraphView={false}
-          setIsSalesMetricsGraphView={jest.fn()}
-          ohQtyModalVisible={false}
-          setOhQtyModalVisible={jest.fn()}
-          errorModalVisible={false}
-          setErrorModalVisible={jest.fn()}
-          trackEventCall={jest.fn()}
-          validateSessionCall={jest.fn(() => Promise.resolve())}
-          useEffectHook={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          userFeatures={[]}
-          userConfigs={mockConfig}
-          createPickModalVisible={false}
-          setCreatePickModalVisible={jest.fn()}
-          selectedSection=""
-          setSelectedSection={jest.fn()}
-          numberOfPallets={1}
-          setNumberOfPallets={jest.fn()}
-          isQuickPick={false}
-          setIsQuickPick={jest.fn()}
-          createNewPickApi={defaultAsyncState}
-        />
+        <ReviewItemDetailsScreen { ...testProps } />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the On Hands Cloud Qty of 42', () => {
+      const testProps = {
+        ...mockItemDetailsScreenProps,
+        result: {
+          data: {
+            ...itemDetail[456],
+            status: undefined
+          },
+          status: 200
+        },
+        exceptionType: 'NSFL',
+        pendingOnHandsQty: itemDetail[456].pendingOnHandsQty,
+        floorLocations: itemDetail[456].location.floor,
+        reserveLocations: itemDetail[456].location.reserve,
+      };
       const renderer = ShallowRenderer.createRenderer();
       // Mock Item Number 456 has cloud Qty defined
       renderer.render(
-        <ReviewItemDetailsScreen
-          scannedEvent={undefined}
-          isManualScanEnabled={false}
-          isWaiting={false}
-          error={undefined}
-          result={{
-            data: {
-              ...itemDetail[456],
-              status: undefined
-            },
-            status: 200
-          }}
-          addToPicklistStatus={defaultAsyncState}
-          completeItemApi={defaultAsyncState}
-          userId=""
-          exceptionType="NSFL"
-          actionCompleted={false}
-          pendingOnHandsQty={itemDetail[456].pendingOnHandsQty}
-          floorLocations={itemDetail[456].location.floor}
-          reserveLocations={itemDetail[456].location.reserve}
-          route={routeProp}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          scrollViewRef={scrollViewProp}
-          isSalesMetricsGraphView={false}
-          setIsSalesMetricsGraphView={jest.fn()}
-          ohQtyModalVisible={false}
-          setOhQtyModalVisible={jest.fn()}
-          errorModalVisible={false}
-          setErrorModalVisible={jest.fn()}
-          trackEventCall={jest.fn()}
-          validateSessionCall={jest.fn(() => Promise.resolve())}
-          useEffectHook={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          userFeatures={['']}
-          userConfigs={mockConfig}
-          createPickModalVisible={false}
-          setCreatePickModalVisible={jest.fn()}
-          selectedSection=""
-          setSelectedSection={jest.fn()}
-          numberOfPallets={1}
-          setNumberOfPallets={jest.fn()}
-          isQuickPick={false}
-          setIsQuickPick={jest.fn()}
-          createNewPickApi={defaultAsyncState}
-        />
+        <ReviewItemDetailsScreen { ...testProps } />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders "Generic Change translation" if pendingOH is -999 and user has OH role', () => {
+      const testProps = {
+        ...mockItemDetailsScreenProps,
+        result: {
+          data: {
+            ...itemDetail[123],
+            status: undefined
+          },
+          status: 200
+        },
+        exceptionType: 'NSFL',
+        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
+        floorLocations: itemDetail[123].location.floor,
+        reserveLocations: itemDetail[123].location.reserve,
+        userFeatures: ['on hands change']
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen
-          scannedEvent={undefined}
-          isManualScanEnabled={false}
-          isWaiting={false}
-          error={undefined}
-          result={{
-            data: {
-              ...itemDetail[123],
-              status: undefined
-            },
-            status: 200
-          }}
-          addToPicklistStatus={defaultAsyncState}
-          completeItemApi={defaultAsyncState}
-          userId=""
-          exceptionType="NSFL"
-          actionCompleted={false}
-          pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
-          floorLocations={itemDetail[123].location.floor}
-          reserveLocations={itemDetail[123].location.reserve}
-          route={routeProp}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          scrollViewRef={scrollViewProp}
-          isSalesMetricsGraphView={false}
-          setIsSalesMetricsGraphView={jest.fn()}
-          ohQtyModalVisible={false}
-          setOhQtyModalVisible={jest.fn()}
-          errorModalVisible={false}
-          setErrorModalVisible={jest.fn()}
-          trackEventCall={jest.fn()}
-          validateSessionCall={jest.fn(() => Promise.resolve())}
-          useEffectHook={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          userFeatures={['on hands change']}
-          userConfigs={mockConfig}
-          createPickModalVisible={false}
-          setCreatePickModalVisible={jest.fn()}
-          selectedSection=""
-          setSelectedSection={jest.fn()}
-          numberOfPallets={1}
-          setNumberOfPallets={jest.fn()}
-          isQuickPick={false}
-          setIsQuickPick={jest.fn()}
-          createNewPickApi={defaultAsyncState}
-        />
+        <ReviewItemDetailsScreen { ...testProps } />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders \'Item Details Api Error\' for a failed request ', () => {
+      const testProps = {
+        ...mockItemDetailsScreenProps,
+        error: 'Network Error',
+        exceptionType: '',
+        pendingOnHandsQty: 0,
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen
-          scannedEvent={undefined}
-          isManualScanEnabled={false}
-          isWaiting={false}
-          error="Network Error"
-          result={undefined}
-          addToPicklistStatus={defaultAsyncState}
-          completeItemApi={defaultAsyncState}
-          userId=""
-          exceptionType=""
-          actionCompleted={false}
-          pendingOnHandsQty={0}
-          floorLocations={[]}
-          reserveLocations={[]}
-          route={routeProp}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          scrollViewRef={scrollViewProp}
-          isSalesMetricsGraphView={false}
-          setIsSalesMetricsGraphView={jest.fn()}
-          ohQtyModalVisible={false}
-          setOhQtyModalVisible={jest.fn()}
-          errorModalVisible={false}
-          setErrorModalVisible={jest.fn()}
-          trackEventCall={jest.fn()}
-          validateSessionCall={jest.fn(() => Promise.resolve())}
-          useEffectHook={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          userFeatures={[]}
-          userConfigs={mockConfig}
-          createPickModalVisible={false}
-          setCreatePickModalVisible={jest.fn()}
-          selectedSection=""
-          setSelectedSection={jest.fn()}
-          numberOfPallets={1}
-          setNumberOfPallets={jest.fn()}
-          isQuickPick={false}
-          setIsQuickPick={jest.fn()}
-          createNewPickApi={defaultAsyncState}
-        />
+        <ReviewItemDetailsScreen { ...testProps } />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders \'Scanned Item Not Found\' on request status 204', () => {
+      const testProps = {
+        ...mockItemDetailsScreenProps,
+        result: {
+          data: [],
+          status: 204
+        },
+        exceptionType: '',
+        pendingOnHandsQty: 0
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen
-          scannedEvent={undefined}
-          isManualScanEnabled={false}
-          isWaiting={false}
-          error={undefined}
-          result={{
-            data: [],
-            status: 204
-          }}
-          addToPicklistStatus={defaultAsyncState}
-          completeItemApi={defaultAsyncState}
-          userId=""
-          exceptionType=""
-          actionCompleted={false}
-          pendingOnHandsQty={0}
-          floorLocations={[]}
-          reserveLocations={[]}
-          route={routeProp}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          scrollViewRef={scrollViewProp}
-          isSalesMetricsGraphView={false}
-          setIsSalesMetricsGraphView={jest.fn()}
-          ohQtyModalVisible={false}
-          setOhQtyModalVisible={jest.fn()}
-          errorModalVisible={false}
-          setErrorModalVisible={jest.fn()}
-          trackEventCall={jest.fn()}
-          validateSessionCall={jest.fn(() => Promise.resolve())}
-          useEffectHook={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          userFeatures={[]}
-          userConfigs={mockConfig}
-          createPickModalVisible={false}
-          setCreatePickModalVisible={jest.fn()}
-          selectedSection=""
-          setSelectedSection={jest.fn()}
-          numberOfPallets={1}
-          setNumberOfPallets={jest.fn()}
-          isQuickPick={false}
-          setIsQuickPick={jest.fn()}
-          createNewPickApi={defaultAsyncState}
-        />
+        <ReviewItemDetailsScreen { ...testProps } />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders \'Activity Indicator\' waiting for ItemDetails Response ', () => {
+
+      const testProps = {
+        ...mockItemDetailsScreenProps,
+        isWaiting: true,
+        exceptionType: '',
+        pendingOnHandsQty: 0
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen
-          scannedEvent={undefined}
-          isManualScanEnabled={false}
-          isWaiting={true}
-          error={undefined}
-          result={undefined}
-          addToPicklistStatus={defaultAsyncState}
-          completeItemApi={defaultAsyncState}
-          userId=""
-          exceptionType=""
-          actionCompleted={false}
-          pendingOnHandsQty={0}
-          floorLocations={[]}
-          reserveLocations={[]}
-          route={routeProp}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          scrollViewRef={scrollViewProp}
-          isSalesMetricsGraphView={false}
-          setIsSalesMetricsGraphView={jest.fn()}
-          ohQtyModalVisible={false}
-          setOhQtyModalVisible={jest.fn()}
-          errorModalVisible={false}
-          setErrorModalVisible={jest.fn()}
-          trackEventCall={jest.fn()}
-          validateSessionCall={jest.fn(() => Promise.resolve())}
-          useEffectHook={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          userFeatures={[]}
-          userConfigs={mockConfig}
-          createPickModalVisible={false}
-          setCreatePickModalVisible={jest.fn()}
-          selectedSection=""
-          setSelectedSection={jest.fn()}
-          numberOfPallets={1}
-          setNumberOfPallets={jest.fn()}
-          isQuickPick={false}
-          setIsQuickPick={jest.fn()}
-          createNewPickApi={defaultAsyncState}
-        />
+        <ReviewItemDetailsScreen { ...testProps } />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the details for a item with multi status 207(error retreiving sales history)', () => {
+      const testProps = {
+        ...mockItemDetailsScreenProps,
+        result: {
+          data: itemDetail[321],
+          status: 207
+        },
+        exceptionType: 'NSFL',
+        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
+        floorLocations: itemDetail[123].location.floor,
+        reserveLocations: itemDetail[123].location.reserve,
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen
-          scannedEvent={undefined}
-          isManualScanEnabled={false}
-          isWaiting={false}
-          error={undefined}
-          result={{
-            data: itemDetail[321],
-            status: 207
-          }}
-          addToPicklistStatus={defaultAsyncState}
-          completeItemApi={defaultAsyncState}
-          userId=""
-          exceptionType="NSFL"
-          actionCompleted={false}
-          pendingOnHandsQty={itemDetail[123].pendingOnHandsQty}
-          floorLocations={itemDetail[123].location.floor}
-          reserveLocations={itemDetail[123].location.reserve}
-          route={routeProp}
-          dispatch={jest.fn()}
-          navigation={navigationProp}
-          scrollViewRef={scrollViewProp}
-          isSalesMetricsGraphView={false}
-          setIsSalesMetricsGraphView={jest.fn()}
-          ohQtyModalVisible={false}
-          setOhQtyModalVisible={jest.fn()}
-          errorModalVisible={false}
-          setErrorModalVisible={jest.fn()}
-          trackEventCall={jest.fn()}
-          validateSessionCall={jest.fn(() => Promise.resolve())}
-          useEffectHook={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          userFeatures={[]}
-          userConfigs={mockConfig}
-          createPickModalVisible={false}
-          setCreatePickModalVisible={jest.fn()}
-          selectedSection=""
-          setSelectedSection={jest.fn()}
-          numberOfPallets={1}
-          setNumberOfPallets={jest.fn()}
-          isQuickPick={false}
-          setIsQuickPick={jest.fn()}
-          createNewPickApi={defaultAsyncState}
-        />
+        <ReviewItemDetailsScreen { ...testProps } />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -858,47 +606,15 @@ describe('ReviewItemDetailsScreen', () => {
     });
     it('Tests handleCreatePick method', () => {
       const mockProps = {
-        scannedEvent: undefined,
-        isManualScanEnabled: false,
-        isWaiting: false,
-        error: undefined,
+        ...mockItemDetailsScreenProps,
         result: {
           data: itemDetail[321],
           status: 207
         },
-        addToPicklistStatus: defaultAsyncState,
-        completeItemApi: defaultAsyncState,
-        userId: '',
         exceptionType: 'NSFL',
-        actionCompleted: false,
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve,
-        route: routeProp,
-        dispatch: jest.fn(),
-        navigation: navigationProp,
-        scrollViewRef: scrollViewProp,
-        isSalesMetricsGraphView: false,
-        setIsSalesMetricsGraphView: jest.fn(),
-        ohQtyModalVisible: false,
-        setOhQtyModalVisible: jest.fn(),
-        errorModalVisible: false,
-        setErrorModalVisible: jest.fn(),
-        trackEventCall: jest.fn(),
-        validateSessionCall: jest.fn(() => Promise.resolve()),
-        useEffectHook: jest.fn(),
-        useFocusEffectHook: jest.fn(),
-        userFeatures: [],
-        userConfigs: mockConfig,
-        createPickModalVisible: false,
-        setCreatePickModalVisible: jest.fn(),
-        selectedSection: '',
-        setSelectedSection: jest.fn(),
-        numberOfPallets: 1,
-        setNumberOfPallets: jest.fn(),
-        isQuickPick: false,
-        setIsQuickPick: jest.fn(),
-        createNewPickApi: defaultAsyncState
       };
       const mockItemDetails = itemDetail[321];
       const mockSetCreatePickModalVisible = jest.fn();
@@ -920,29 +636,23 @@ describe('ReviewItemDetailsScreen', () => {
       });
     });
     it('test handleUpdateQty', async() => {
-      const mockSetOhQtyModalVisible = jest.fn();
-      mockHandleProps.setOhQtyModalVisible = mockSetOhQtyModalVisible;
       await handleUpdateQty(mockHandleProps, itemDetail[123]);
-      expect(mockSetOhQtyModalVisible).toHaveBeenCalledWith(true);
-      mockHandleProps.setOhQtyModalVisible = jest.fn();
-      //mockHandleProps.validateSessionCall = jest.fn(() => Promise.reject());
-      //const mockTrackEvent = jest.fn();
-      //mockHandleProps.trackEventCall = mockTrackEvent;
-      //await handleUpdateQty(mockHandleProps, mockItemDetails);
-      //expect(mockTrackEvent).toHaveBeenCalled();
+      expect(mockHandleProps.setOhQtyModalVisible).toHaveBeenCalledWith(true);
     });
     it('test handleLocationUpdate', async() => {
-      const mockNavigate = jest.fn();
-      navigationProp.navigate = mockNavigate;
       await handleLocationAction(mockHandleProps, itemDetail[123]);
-      expect(mockNavigate).toHaveBeenCalledWith('LocationDetails');
-      navigationProp.navigate = jest.fn();
+      expect(navigationProp.navigate).toHaveBeenCalledWith('LocationDetails');
     });
-    it('test handleAddToPicklist', async() => {
-      mockHandleProps.dispatch = mockDispatch;
+    it('test handleAddToPicklist', async () => {
       await handleAddToPicklist(mockHandleProps, itemDetail[123]);
-      expect(mockDispatch).toHaveBeenCalledWith({payload: {itemNumber: 1234567890}, type: 'SAGA/ADD_TO_PICKLIST'});
-      mockHandleProps.dispatch = jest.fn();
+      expect(mockHandleProps.dispatch).toHaveBeenCalledWith(
+        {
+          payload: {
+            itemNumber: 1234567890
+          },
+          type: 'SAGA/ADD_TO_PICKLIST'
+        }
+      );
     });
     it('test getFloorItemDetails', () => {
       const expectedResults = [
@@ -959,36 +669,36 @@ describe('ReviewItemDetailsScreen', () => {
         },
         {
           aisleId: 0,
-          aisleName: "1",
-          locationName: "A1-2",
+          aisleName: '1',
+          locationName: 'A1-2',
           sectionId: 2,
-          sectionName: "2",
-          type: "End Cap",
+          sectionName: '2',
+          type: 'End Cap',
           typeNbr: 12,
           zoneId: 0,
-          zoneName: "A",
+          zoneName: 'A',
         },
         {
           aisleId: 1,
-          aisleName: "1",
-          locationName: "A1-3",
+          aisleName: '1',
+          locationName: 'A1-3',
           sectionId: 3,
-          sectionName: "3",
-          type: "Pod",
+          sectionName: '3',
+          type: 'Pod',
           typeNbr: 13,
           zoneId: 0,
-          zoneName: "A",
+          zoneName: 'A',
         },
         {
           aisleId: 1,
-          aisleName: "1",
-          locationName: "A1-4",
+          aisleName: '1',
+          locationName: 'A1-4',
           sectionId: 4,
-          sectionName: "4",
-          type: "Display",
+          sectionName: '4',
+          type: 'Display',
           typeNbr: 11,
           zoneId: 0,
-          zoneName: "A",
+          zoneName: 'A',
         }
       ];
       const getFloorItemDetailsResults = getFloorItemDetails(itemDetail[123]);
@@ -1021,7 +731,7 @@ describe('ReviewItemDetailsScreen', () => {
       const expectedResults = {
         payload: {
           completed: false,
-          exceptionType: "nsfl",
+          exceptionType: 'nsfl',
           floorLocations: [
             {
               aisleId: 1,
@@ -1036,36 +746,36 @@ describe('ReviewItemDetailsScreen', () => {
             },
             {
               aisleId: 0,
-              aisleName: "1",
-              locationName: "A1-2",
+              aisleName: '1',
+              locationName: 'A1-2',
               sectionId: 2,
-              sectionName: "2",
-              type: "End Cap",
+              sectionName: '2',
+              type: 'End Cap',
               typeNbr: 12,
               zoneId: 0,
-              zoneName: "A",
+              zoneName: 'A',
             },
             {
               aisleId: 1,
-              aisleName: "1",
-              locationName: "A1-3",
+              aisleName: '1',
+              locationName: 'A1-3',
               sectionId: 3,
-              sectionName: "3",
-              type: "Pod",
+              sectionName: '3',
+              type: 'Pod',
               typeNbr: 13,
               zoneId: 0,
-              zoneName: "A",
+              zoneName: 'A',
             },
             {
               aisleId: 1,
-              aisleName: "1",
-              locationName: "A1-4",
+              aisleName: '1',
+              locationName: 'A1-4',
               sectionId: 4,
-              sectionName: "4",
-              type: "Display",
+              sectionName: '4',
+              type: 'Display',
               typeNbr: 11,
               zoneId: 0,
-              zoneName: "A",
+              zoneName: 'A',
             }
           ],
           itemNbr: 1234567890,
@@ -1084,9 +794,9 @@ describe('ReviewItemDetailsScreen', () => {
             }
           ],
           salesFloor: true,
-          upcNbr: "000055559999",
+          upcNbr: '000055559999',
         },
-        type: "ITEM_DETAILS_SCREEN/SETUP",
+        type: 'ITEM_DETAILS_SCREEN/SETUP',
       };
       onValidateItemDetails(mockDispatch, itemDetail[123]);
       expect(mockDispatch).toHaveBeenCalledWith(expectedResults);
@@ -1095,21 +805,21 @@ describe('ReviewItemDetailsScreen', () => {
       const expectedNoActionResults = {
         payload: {
           itemNbr: 1234567890,
-          scannedValue: "1234567890098",
-          upc: "000055559999",
+          scannedValue: '1234567890098',
+          upc: '000055559999',
         },
-        type: "SAGA/NO_ACTION",
+        type: 'SAGA/NO_ACTION',
       };
       const expectedSetManualScanResults = {
         payload: false,
-        type: "GLOBAL/SET_MANUAL_SCAN",
+        type: 'GLOBAL/SET_MANUAL_SCAN',
       };
       const expectedSetScannedEventAction = {
         payload: {
-          type: "UPC-A",
-          value: "1234567890098",
+          type: 'UPC-A',
+          value: '1234567890098',
         },
-        type: "GLOBAL/SET_SCANNED_EVENT",
+        type: 'GLOBAL/SET_SCANNED_EVENT',
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       await callBackbarcodeEmitter(
@@ -1142,7 +852,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('test onValidatePackPress', () => {
       const expectedActionCompleteResults = {
         payload: false,
-        type: "GLOBAL/SET_MANUAL_SCAN",
+        type: 'GLOBAL/SET_MANUAL_SCAN',
       };
       const expectedActionNotCompletePOResults = {
         payload: {
@@ -1180,12 +890,10 @@ describe('ReviewItemDetailsScreen', () => {
         },
         type: 'SAGA/GET_ITEM_DETAILS'
       };
-      mockItemDetailsScreenProps.dispatch = mockDispatch;
       await onValidateScannedEvent(mockItemDetailsScreenProps);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS/RESET' });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, expectedGetItemDetailsAction);
-      expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: 'API/ADD_TO_PICKLIST/RESET' });
-      mockItemDetailsScreenProps.dispatch = jest.fn();
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS/RESET' });
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(2, expectedGetItemDetailsAction);
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(3, { type: 'API/ADD_TO_PICKLIST/RESET' });
     });
     it('test onIsWaiting', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -1203,10 +911,10 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const expectedShowModalAction = {
         payload: {
-          text: "[missing \"en.ITEM.SCAN_DOESNT_MATCH_DETAILS\" translation]",
-          title: "[missing \"en.ITEM.SCAN_DOESNT_MATCH\" translation]",
+          text: '[missing \"en.ITEM.SCAN_DOESNT_MATCH_DETAILS\" translation]',
+          title: '[missing \"en.ITEM.SCAN_DOESNT_MATCH\" translation]',
         },
-        type: "MODAL/SHOW_INFO_MODAL",
+        type: 'MODAL/SHOW_INFO_MODAL',
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       onValidateCompleteItemApiResultHook(mockItemDetailsScreenProps, completedApi);
@@ -1215,7 +923,7 @@ describe('ReviewItemDetailsScreen', () => {
       const mockGoBack = jest.fn();
       navigationProp.goBack = mockGoBack;
       onValidateCompleteItemApiResultHook(mockItemDetailsScreenProps, defaultAsyncState);
-      expect(mockDispatch).toHaveBeenCalledWith({ type: "ITEM_DETAILS_SCREEN/ACTION_COMPLETED" });
+      expect(mockDispatch).toHaveBeenCalledWith({ type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED' });
       expect(mockGoBack).toHaveBeenCalledTimes(1);
       navigationProp.goBack = jest.fn();
       mockItemDetailsScreenProps.dispatch = jest.fn();
@@ -1227,17 +935,17 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const expectedShowModalAction = {
         payload: {
-          text: "[missing \"en.ITEM.SCAN_DOESNT_MATCH_DETAILS\" translation]",
-          title: "[missing \"en.ITEM.SCAN_DOESNT_MATCH\" translation]",
+          text: '[missing \"en.ITEM.SCAN_DOESNT_MATCH_DETAILS\" translation]',
+          title: '[missing \"en.ITEM.SCAN_DOESNT_MATCH\" translation]',
         },
-        type: "MODAL/SHOW_INFO_MODAL",
+        type: 'MODAL/SHOW_INFO_MODAL',
       };
       const expectedShowModalCompleteError = {
         payload: {
-          text: "[missing \"en.ITEM.ACTION_COMPLETE_ERROR_DETAILS\" translation]",
-          title: "[missing \"en.ITEM.ACTION_COMPLETE_ERROR\" translation]",
+          text: '[missing \"en.ITEM.ACTION_COMPLETE_ERROR_DETAILS\" translation]',
+          title: '[missing \"en.ITEM.ACTION_COMPLETE_ERROR\" translation]',
         },
-        type: "MODAL/SHOW_INFO_MODAL",
+        type: 'MODAL/SHOW_INFO_MODAL',
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       onValidateCompleteItemApiErrortHook(mockItemDetailsScreenProps, errorApi);
@@ -1262,16 +970,16 @@ describe('ReviewItemDetailsScreen', () => {
       mockItemDetailsScreenProps.reserveLocations = [];
     });
     it('test getUpdatedSales', () => {
-      const expectedResults = "[missing \"en.GENERICS.UPDATED\" translation] 星期三, 7月 15 08:02 早上";
+      const expectedResults = '[missing \"en.GENERICS.UPDATED\" translation] 星期三, 7月 15 08:02 早上';
       const getUpdatedSalesResult = getUpdatedSales(itemDetail[123]);
       expect(getUpdatedSalesResult).toStrictEqual(expectedResults);
     });
     it('test isError', () => {
       const expectedGetItemDetailAction = {
         payload: {
-          id: "1234567890098",
+          id: '1234567890098',
         },
-        type: "SAGA/GET_ITEM_DETAILS",
+        type: 'SAGA/GET_ITEM_DETAILS',
       };
       const { getByTestId, rerender, toJSON } = render(isError(
         'test',
