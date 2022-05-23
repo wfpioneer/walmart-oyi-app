@@ -110,60 +110,62 @@ export const updatePalletNotFoundApiHook = (
   navigation: NavigationProp<any>,
 ) => {
   // on api success
-  if (navigation.isFocused() && !updatePalletNotFoundApi.isWaiting && updatePalletNotFoundApi.result
-    && updatePalletNotFoundApi.result.status === 200) {
-    dispatch(hideActivityModal());
-    const { message } = updatePalletNotFoundApi.result.data;
-    if (message === 'AT_LEAST_ONE_PICK_CREATED' && items.length > 1) {
-      Toast.show({
-        type: 'success',
-        text1: strings('PICKING.NEW_PICK_ADDED_TO_PICKLIST_PLURAL'),
-        visibilityTime: SNACKBAR_TIMEOUT,
-        position: 'bottom'
-      });
-    } else if (message === 'AT_LEAST_ONE_PICK_CREATED') {
-      Toast.show({
-        type: 'success',
-        text1: strings('PICKING.NEW_PICK_ADDED_TO_PICKLIST'),
-        visibilityTime: SNACKBAR_TIMEOUT,
-        position: 'bottom'
-      });
-    } else {
-      Toast.show({
-        type: 'success',
-        text1: strings('PICKING.NO_PALLETS_AVAILABLE_PICK_DELETED'),
-        visibilityTime: SNACKBAR_TIMEOUT_LONG,
-        position: 'bottom'
-      });
+  if (navigation.isFocused()) {
+    if (!updatePalletNotFoundApi.isWaiting && updatePalletNotFoundApi.result
+      && updatePalletNotFoundApi.result.status === 200) {
+      dispatch(hideActivityModal());
+      const { message } = updatePalletNotFoundApi.result.data;
+      if (message === 'AT_LEAST_ONE_PICK_CREATED' && items.length > 1) {
+        Toast.show({
+          type: 'success',
+          text1: strings('PICKING.NEW_PICK_ADDED_TO_PICKLIST_PLURAL'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+      } else if (message === 'AT_LEAST_ONE_PICK_CREATED') {
+        Toast.show({
+          type: 'success',
+          text1: strings('PICKING.NEW_PICK_ADDED_TO_PICKLIST'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+      } else {
+        Toast.show({
+          type: 'success',
+          text1: strings('PICKING.NO_PALLETS_AVAILABLE_PICK_DELETED'),
+          visibilityTime: SNACKBAR_TIMEOUT_LONG,
+          position: 'bottom'
+        });
+      }
+      dispatch({ type: UPDATE_PALLET_NOT_FOUND.RESET });
+      navigation.goBack();
     }
-    dispatch({ type: UPDATE_PALLET_NOT_FOUND.RESET });
-    navigation.goBack();
-  }
-  // on api error
-  if (!updatePalletNotFoundApi.isWaiting && updatePalletNotFoundApi.error) {
-    dispatch(hideActivityModal());
-    if (items.length > 1) {
-      Toast.show({
-        type: 'error',
-        text1: strings('PICKING.UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL'),
-        text2: strings('GENERICS.TRY_AGAIN'),
-        visibilityTime: SNACKBAR_TIMEOUT,
-        position: 'bottom'
-      });
-    } else {
-      Toast.show({
-        type: 'error',
-        text1: strings('PICKING.UPDATE_PICK_FAILED_TRY_AGAIN'),
-        text2: strings('GENERICS.TRY_AGAIN'),
-        visibilityTime: SNACKBAR_TIMEOUT,
-        position: 'bottom'
-      });
+    // on api error
+    if (!updatePalletNotFoundApi.isWaiting && updatePalletNotFoundApi.error) {
+      dispatch(hideActivityModal());
+      if (items.length > 1) {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL'),
+          text2: strings('GENERICS.TRY_AGAIN'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.UPDATE_PICK_FAILED_TRY_AGAIN'),
+          text2: strings('GENERICS.TRY_AGAIN'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+      }
+      dispatch({ type: UPDATE_PALLET_NOT_FOUND.RESET });
     }
-    dispatch({ type: UPDATE_PALLET_NOT_FOUND.RESET });
-  }
-  // on api request
-  if (updatePalletNotFoundApi.isWaiting) {
-    dispatch(showActivityModal());
+    // on api request
+    if (updatePalletNotFoundApi.isWaiting) {
+      dispatch(showActivityModal());
+    }
   }
 };
 
