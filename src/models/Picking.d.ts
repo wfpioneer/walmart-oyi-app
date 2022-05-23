@@ -56,3 +56,18 @@ export enum Tabs {
   PICK = 'Pick',
   SALESFLOOR = 'SalesFloor'
 }
+export enum picklistActionType {
+  COMPLETE = 'complete',
+  UPDATE_LOCATION ='updateLocation'
+}
+
+export interface BinPicklistInfo {
+  picklistId: number;
+  picklistActionType: picklistActionType;
+  picklistUpdateCode: number;
+}
+export interface BinPalletResponse {
+  palletId: string;
+  code: number;
+  picklists: BinPicklistInfo[];
+}

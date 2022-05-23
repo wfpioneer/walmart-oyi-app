@@ -21,7 +21,7 @@ jest.mock('../../state/actions/Modal', () => ({
 const basePickItem: PickListItem = {
   assignedAssociate: '',
   category: 3,
-  createTS: 'yesterday',
+  createTs: '2022-04-03T12:55:31.9633333Z',
   createdBy: 'Guude',
   id: 0,
   itemDesc: 'generic description',

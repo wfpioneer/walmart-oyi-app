@@ -123,7 +123,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
         Object {
           "assignedAssociate": "vn50pz4",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 6,
           "itemDesc": "generic description",
@@ -155,7 +155,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
         Object {
           "assignedAssociate": "vn50pz4",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 6,
           "itemDesc": "generic description",
@@ -243,7 +243,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
         Object {
           "assignedAssociate": "t0s0og",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 0,
           "itemDesc": "generic description",
@@ -275,7 +275,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
         Object {
           "assignedAssociate": "t0s0og",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 0,
           "itemDesc": "generic description",
@@ -344,7 +344,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
         Object {
           "assignedAssociate": "t0s0og",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 0,
           "itemDesc": "generic description",
@@ -376,7 +376,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
         Object {
           "assignedAssociate": "t0s0og",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 0,
           "itemDesc": "generic description",
@@ -425,7 +425,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
         Object {
           "assignedAssociate": "vn50pz4",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 5,
           "itemDesc": "generic description",
@@ -457,7 +457,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
         Object {
           "assignedAssociate": "vn50pz4",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 5,
           "itemDesc": "generic description",
@@ -545,7 +545,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
         Object {
           "assignedAssociate": "t0s0og",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 1,
           "itemDesc": "generic description",
@@ -577,7 +577,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
         Object {
           "assignedAssociate": "t0s0og",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 1,
           "itemDesc": "generic description",
@@ -665,7 +665,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
         Object {
           "assignedAssociate": "t0s0og",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 1,
           "itemDesc": "generic description",
@@ -697,7 +697,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
         Object {
           "assignedAssociate": "t0s0og",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 1,
           "itemDesc": "generic description",
@@ -766,7 +766,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
         Object {
           "assignedAssociate": "",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 3,
           "itemDesc": "generic description",
@@ -784,7 +784,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
         Object {
           "assignedAssociate": "",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 4,
           "itemDesc": "generic description",
@@ -816,7 +816,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
         Object {
           "assignedAssociate": "",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 3,
           "itemDesc": "generic description",
@@ -834,7 +834,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
         Object {
           "assignedAssociate": "",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 4,
           "itemDesc": "generic description",
@@ -903,7 +903,7 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
         Object {
           "assignedAssociate": "",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 2,
           "itemDesc": "generic description",
@@ -935,7 +935,7 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
         Object {
           "assignedAssociate": "",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 2,
           "itemDesc": "generic description",
