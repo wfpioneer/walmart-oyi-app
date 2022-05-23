@@ -71,7 +71,7 @@ export default class PalletManagementService {
   > {
     const urls: Environment = getEnvironment();
     return Request.post(
-      `${urls.locationUrl}/bin`,
+      `${urls.orchestrationURL}/bin`,
       payload
     );
   }

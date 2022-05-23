@@ -404,7 +404,12 @@ export default {
     PALLET_NOT_FOUND: 'Pallet Not Found',
     CREATE_NEW_PICK_SUCCESS: 'Pick Created',
     CREATE_NEW_PICK_FAILURE: 'There was an error creating the pick',
-    PICK_REQUEST_CRITERIA_ALREADY_MET: 'Not enough pallets available for this pick'
+    PICK_REQUEST_CRITERIA_ALREADY_MET: 'Not enough pallets available for this pick',
+    PICK_COMPLETED: 'The pick has been completed',
+    PICK_COMPLETED_PLURAL: 'The picks have been completed',
+    PICKLIST_UPDATED: 'The picklist has been updated',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED: 'The pick has been completed and the picklist has been updated',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'The picks have been completed and the picklist have been updated'
   },
   BINNING: {
     BINNING: 'Binning',
