@@ -26,6 +26,7 @@ import { updatePicks } from '../../state/actions/Picking';
 import { addPallet } from '../../state/actions/Binning';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { CustomModalComponent } from '../Modal/Modal';
+import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 
 interface PBWorkflowProps {
   userFeatures: string[];
@@ -112,24 +113,52 @@ export const updatePalletNotFoundApiHook = (
   if (navigation.isFocused() && !updatePalletNotFoundApi.isWaiting && updatePalletNotFoundApi.result
     && updatePalletNotFoundApi.result.status === 200) {
     dispatch(hideActivityModal());
-    Toast.show({
-      type: 'success',
-      text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
-      visibilityTime: 4000,
-      position: 'bottom'
-    });
+    const { message } = updatePalletNotFoundApi.result.data;
+    if (message === 'AT_LEAST_ONE_PICK_CREATED' && items.length > 1) {
+      Toast.show({
+        type: 'success',
+        text1: strings('PICKING.NEW_PICK_ADDED_TO_PICKLIST_PLURAL'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+    } else if (message === 'AT_LEAST_ONE_PICK_CREATED') {
+      Toast.show({
+        type: 'success',
+        text1: strings('PICKING.NEW_PICK_ADDED_TO_PICKLIST'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+    } else {
+      Toast.show({
+        type: 'success',
+        text1: strings('PICKING.NO_PALLETS_AVAILABLE_PICK_DELETED'),
+        visibilityTime: SNACKBAR_TIMEOUT_LONG,
+        position: 'bottom'
+      });
+    }
     dispatch({ type: UPDATE_PALLET_NOT_FOUND.RESET });
+    navigation.goBack();
   }
   // on api error
   if (!updatePalletNotFoundApi.isWaiting && updatePalletNotFoundApi.error) {
     dispatch(hideActivityModal());
-    Toast.show({
-      type: 'error',
-      text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
-      text2: strings('GENERICS.TRY_AGAIN'),
-      visibilityTime: 4000,
-      position: 'bottom'
-    });
+    if (items.length > 1) {
+      Toast.show({
+        type: 'error',
+        text1: strings('PICKING.UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: strings('PICKING.UPDATE_PICK_FAILED_TRY_AGAIN'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+    }
     dispatch({ type: UPDATE_PALLET_NOT_FOUND.RESET });
   }
   // on api request
@@ -168,6 +197,7 @@ export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
   const handlePalletNotFound = () => {
     const { palletId } = items[0];
     const picklistIds = items.map(item => item.id);
+    setShowContinueActionDialog(false);
     dispatch(updatePalletNotFound({ palletId, picklistIds }));
   };
 
@@ -332,19 +362,21 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
         setSelectedPicklistAction={setSelectedPicklistAction}
       />
       {selectedPicks.length > 0 ? (
-        <PickPalletInfoCard
-          onPress={() => {}}
-          palletId={selectedPicks[0].palletId}
-          palletLocation={selectedPicks[0].palletLocationName}
-          pickListItems={selectedPicks}
-          pickStatus={selectedPicks[0].status}
-          canDelete={false}
-          dispatch={dispatch}
-        />
+        <>
+          <PickPalletInfoCard
+            onPress={() => { }}
+            palletId={selectedPicks[0].palletId}
+            palletLocation={selectedPicks[0].palletLocationName}
+            pickListItems={selectedPicks}
+            pickStatus={selectedPicks[0].status}
+            canDelete={false}
+            dispatch={dispatch}
+          />
+          <View style={styles.actionButtonsView}>
+            {actionButtonsView()}
+          </View>
+        </>
       ) : null}
-      <View style={styles.actionButtonsView}>
-        {actionButtonsView()}
-      </View>
     </SafeAreaView>
   );
 };
