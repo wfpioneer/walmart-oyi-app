@@ -1,7 +1,6 @@
 import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { l } from 'i18n-js';
 import { fireEvent, render } from '@testing-library/react-native';
 import { strings } from '../../locales';
 import {
