@@ -282,15 +282,17 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
         items={selectedPicks}
         setSelectedPicklistAction={setSelectedPicklistAction}
       />
-      <PickPalletInfoCard
-        onPress={() => {}}
-        palletId={selectedPicks[0].palletId}
-        palletLocation={selectedPicks[0].palletLocationName}
-        pickListItems={selectedPicks}
-        pickStatus={selectedPicks[0].status}
-        canDelete={false}
-        dispatch={dispatch}
-      />
+      {selectedPicks.length > 0 ? (
+        <PickPalletInfoCard
+          onPress={() => {}}
+          palletId={selectedPicks[0].palletId}
+          palletLocation={selectedPicks[0].palletLocationName}
+          pickListItems={selectedPicks}
+          pickStatus={selectedPicks[0].status}
+          canDelete={false}
+          dispatch={dispatch}
+        />
+      ) : null}
       <View style={styles.actionButtonsView}>
         {actionButtonsView()}
       </View>

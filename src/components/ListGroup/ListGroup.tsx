@@ -10,12 +10,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Dispatch } from 'redux';
 import PickPalletInfoCard from '../PickPalletInfoCard/PickPalletInfoCard';
 import {
-  PickAction, PickListItem, PickStatus, Tabs
+  PickListItem, PickStatus, Tabs
 } from '../../models/Picking.d';
 import styles from './ListGroup.style';
 import COLOR from '../../themes/Color';
 import { selectPicks } from '../../state/actions/Picking';
-import { updatePicklistStatus } from '../../state/actions/saga';
 
 interface ListGroupProps {
   title: string;
@@ -57,7 +56,7 @@ const sortPickListByPalletLocation = (items: PickListItem[]) => (items.sort(
 
 const sortPickListByCreatedDate = (items: PickListItem[]) => (
   items.sort(
-    (a, b) => new Date(a.createTS).valueOf() - new Date(b.createTS).valueOf()
+    (a, b) => new Date(a.createTs).valueOf() - new Date(b.createTs).valueOf()
   ));
 
 const getGroupItemsBasedOnPallet = (items: PickListItem[]) => {

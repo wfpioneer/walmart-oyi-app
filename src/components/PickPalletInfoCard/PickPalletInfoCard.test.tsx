@@ -9,7 +9,7 @@ describe('Pick pallet info card render tests', () => {
     {
       assignedAssociate: 'me',
       category: 71,
-      createTS: 'just now',
+      createTs: '2022-04-03T12:55:31.9633333Z',
       createdBy: 'you',
       id: 2,
       itemDesc: 'Lucas gusano',
@@ -27,7 +27,7 @@ describe('Pick pallet info card render tests', () => {
     {
       assignedAssociate: 'you',
       category: 34,
-      createTS: 'yesterday',
+      createTs: '2022-04-02T12:55:31.9633333Z',
       createdBy: 'why',
       id: 5,
       itemDesc: 'Duvalín Bi Sabor',
