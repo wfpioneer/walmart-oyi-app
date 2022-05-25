@@ -51,6 +51,8 @@ const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
 const ITEM_SCAN_DOESNT_MATCH_DETAILS = 'ITEM.SCAN_DOESNT_MATCH_DETAILS';
 
 const GENERICS_ADD = 'GENERICS.ADD';
+const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
+
 export interface ItemDetailsScreenProps {
   scannedEvent: any; isManualScanEnabled: boolean;
   isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
@@ -601,7 +603,7 @@ const isError = (
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-        {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
+        {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
           <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
@@ -746,7 +748,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-        {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
+        {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
           <Text style={styles.errorText}>{strings('ITEM.ITEM_NOT_FOUND')}</Text>
@@ -776,14 +778,14 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
-      dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+      dispatch({ type: GET_ITEM_DETAILS.RESET });
       dispatch(getItemDetails({ id: itemDetails.itemNbr }));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 
   return (
     <View style={styles.safeAreaView}>
-      {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
+      {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
       {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
       <CustomModalComponent
         isVisible={ohQtyModalVisible}
