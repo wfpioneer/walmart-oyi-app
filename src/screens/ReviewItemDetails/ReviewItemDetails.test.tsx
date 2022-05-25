@@ -1,8 +1,11 @@
-import { NavigationContainer, NavigationContext, NavigationProp, RouteProp } from '@react-navigation/native';
+/* eslint-disable react/jsx-props-no-spreading */
+// adding this exception as a valid exception to the no spreading props rule is when there are a large amount of props
+import {
+  NavigationContainer, NavigationContext, NavigationProp, RouteProp
+} from '@react-navigation/native';
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
-import { ScrollView } from 'react-native';
 import { Provider } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
@@ -10,9 +13,9 @@ import { strings } from '../../locales';
 import itemDetail from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
-  createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount, getPendingOnHandsQty,
-  getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales, handleAddToPicklist, handleCreateNewPick,
-  handleLocationAction, handleUpdateQty, callBackbarcodeEmitter, isError, isItemDetailsCompleted, onIsWaiting,
+  callBackbarcodeEmitter, createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount,
+  getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales, handleAddToPicklist,
+  handleCreateNewPick, handleLocationAction, handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting,
   onValidateBackPress, onValidateCompleteItemApiErrortHook, onValidateCompleteItemApiResultHook, onValidateItemDetails,
   onValidateScannedEvent, renderAddPicklistButton, renderBarcodeErrorModal, renderLocationComponent,
   renderOHQtyComponent, renderScanForNoActionButton
@@ -64,12 +67,12 @@ const navigationProp: NavigationProp<any> = {
   navigate: jest.fn()
 };
 
-let routeProp: RouteProp<any, string> = {
+const routeProp: RouteProp<any, string> = {
   key: 'test',
   name: 'test'
 };
 
-let scrollViewProp: React.RefObject<ScrollView> = {
+const scrollViewProp: React.RefObject<ScrollView> = {
   current: null
 };
 
@@ -95,7 +98,7 @@ const mockHandleProps: (HandleProps & RenderProps) = {
 };
 
 const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
-  scannedEvent: {value: 'test', type: 'UPC-A'},
+  scannedEvent: { value: 'test', type: 'UPC-A' },
   isManualScanEnabled: false,
   isWaiting: false,
   error: null,
@@ -134,16 +137,14 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   userFeatures: [],
   userConfigs: mockConfig
 };
-//const initialStore: RootState = {
-//
-//};
+
 describe('ReviewItemDetailsScreen', () => {
   describe('Tests renders ItemDetails API Responses', () => {
     const actualNav = jest.requireActual('@react-navigation/native');
     const navContextValue = {
       ...actualNav.navigation,
       isFocused: () => false,
-      addListener: jest.fn(() => jest.fn()),
+      addListener: jest.fn(() => jest.fn())
     };
     it('render screen with redux', () => {
       const component = (
@@ -168,11 +169,11 @@ describe('ReviewItemDetailsScreen', () => {
         exceptionType: 'NSFL',
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
-        reserveLocations: itemDetail[123].location.reserve,
+        reserveLocations: itemDetail[123].location.reserve
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen { ...testProps } />
+        <ReviewItemDetailsScreen {...testProps} />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -193,7 +194,7 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen { ...testProps } />
+        <ReviewItemDetailsScreen {...testProps} />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -215,7 +216,7 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       // Mock Item Number 456 has cloud Qty defined
       renderer.render(
-        <ReviewItemDetailsScreen { ...testProps } />
+        <ReviewItemDetailsScreen {...testProps} />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -237,7 +238,7 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen { ...testProps } />
+        <ReviewItemDetailsScreen {...testProps} />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -250,7 +251,7 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen { ...testProps } />
+        <ReviewItemDetailsScreen {...testProps} />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -266,7 +267,7 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen { ...testProps } />
+        <ReviewItemDetailsScreen {...testProps} />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -280,7 +281,7 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen { ...testProps } />
+        <ReviewItemDetailsScreen {...testProps} />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -298,7 +299,7 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ReviewItemDetailsScreen { ...testProps } />
+        <ReviewItemDetailsScreen {...testProps} />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -614,7 +615,7 @@ describe('ReviewItemDetailsScreen', () => {
         exceptionType: 'NSFL',
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
-        reserveLocations: itemDetail[123].location.reserve,
+        reserveLocations: itemDetail[123].location.reserve
       };
       const mockItemDetails = itemDetail[321];
       const mockSetCreatePickModalVisible = jest.fn();
@@ -635,11 +636,11 @@ describe('ReviewItemDetailsScreen', () => {
         type: 'SAGA/CREATE_NEW_PICK'
       });
     });
-    it('test handleUpdateQty', async() => {
+    it('test handleUpdateQty', async () => {
       await handleUpdateQty(mockHandleProps, itemDetail[123]);
       expect(mockHandleProps.setOhQtyModalVisible).toHaveBeenCalledWith(true);
     });
-    it('test handleLocationUpdate', async() => {
+    it('test handleLocationUpdate', async () => {
       await handleLocationAction(mockHandleProps, itemDetail[123]);
       expect(navigationProp.navigate).toHaveBeenCalledWith('LocationDetails');
     });
@@ -676,7 +677,7 @@ describe('ReviewItemDetailsScreen', () => {
           type: 'End Cap',
           typeNbr: 12,
           zoneId: 0,
-          zoneName: 'A',
+          zoneName: 'A'
         },
         {
           aisleId: 1,
@@ -687,7 +688,7 @@ describe('ReviewItemDetailsScreen', () => {
           type: 'Pod',
           typeNbr: 13,
           zoneId: 0,
-          zoneName: 'A',
+          zoneName: 'A'
         },
         {
           aisleId: 1,
@@ -698,7 +699,7 @@ describe('ReviewItemDetailsScreen', () => {
           type: 'Display',
           typeNbr: 11,
           zoneId: 0,
-          zoneName: 'A',
+          zoneName: 'A'
         }
       ];
       const getFloorItemDetailsResults = getFloorItemDetails(itemDetail[123]);
@@ -753,7 +754,7 @@ describe('ReviewItemDetailsScreen', () => {
               type: 'End Cap',
               typeNbr: 12,
               zoneId: 0,
-              zoneName: 'A',
+              zoneName: 'A'
             },
             {
               aisleId: 1,
@@ -764,7 +765,7 @@ describe('ReviewItemDetailsScreen', () => {
               type: 'Pod',
               typeNbr: 13,
               zoneId: 0,
-              zoneName: 'A',
+              zoneName: 'A'
             },
             {
               aisleId: 1,
@@ -775,7 +776,7 @@ describe('ReviewItemDetailsScreen', () => {
               type: 'Display',
               typeNbr: 11,
               zoneId: 0,
-              zoneName: 'A',
+              zoneName: 'A'
             }
           ],
           itemNbr: 1234567890,
@@ -796,35 +797,35 @@ describe('ReviewItemDetailsScreen', () => {
           salesFloor: true,
           upcNbr: '000055559999',
         },
-        type: 'ITEM_DETAILS_SCREEN/SETUP',
+        type: 'ITEM_DETAILS_SCREEN/SETUP'
       };
       onValidateItemDetails(mockDispatch, itemDetail[123]);
       expect(mockDispatch).toHaveBeenCalledWith(expectedResults);
     });
-    it('testing callBackbarcodeEmitter', async() => {
+    it('testing callBackbarcodeEmitter', async () => {
       const expectedNoActionResults = {
         payload: {
           itemNbr: 1234567890,
           scannedValue: '1234567890098',
-          upc: '000055559999',
+          upc: '000055559999'
         },
-        type: 'SAGA/NO_ACTION',
+        type: 'SAGA/NO_ACTION'
       };
       const expectedSetManualScanResults = {
         payload: false,
-        type: 'GLOBAL/SET_MANUAL_SCAN',
+        type: 'GLOBAL/SET_MANUAL_SCAN'
       };
       const expectedSetScannedEventAction = {
         payload: {
           type: 'UPC-A',
-          value: '1234567890098',
+          value: '1234567890098'
         },
-        type: 'GLOBAL/SET_SCANNED_EVENT',
+        type: 'GLOBAL/SET_SCANNED_EVENT'
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       await callBackbarcodeEmitter(
         mockItemDetailsScreenProps,
-        {value: '1234567890098', type: 'UPC-A'},
+        { value: '1234567890098', type: 'UPC-A' },
         itemDetail[123]
       );
       expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedNoActionResults);
@@ -833,7 +834,7 @@ describe('ReviewItemDetailsScreen', () => {
       mockItemDetailsScreenProps.actionCompleted = true;
       await callBackbarcodeEmitter(
         mockItemDetailsScreenProps,
-        {value: '1234567890098', type: 'UPC-A'},
+        { value: '1234567890098', type: 'UPC-A' },
         itemDetail[123]
       );
       expect(mockDispatch).toHaveBeenCalledWith(expectedSetScannedEventAction);
@@ -842,7 +843,7 @@ describe('ReviewItemDetailsScreen', () => {
       mockItemDetailsScreenProps.setErrorModalVisible = mockSetErrorModalVisible;
       await callBackbarcodeEmitter(
         mockItemDetailsScreenProps,
-        {value: '1234567890098', type: 'QRCODE'},
+        { value: '1234567890098', type: 'QRCODE' },
         itemDetail[123]
       );
       expect(mockSetErrorModalVisible).toHaveBeenCalledWith(true);
@@ -852,21 +853,21 @@ describe('ReviewItemDetailsScreen', () => {
     it('test onValidatePackPress', () => {
       const expectedActionCompleteResults = {
         payload: false,
-        type: 'GLOBAL/SET_MANUAL_SCAN',
+        type: 'GLOBAL/SET_MANUAL_SCAN'
       };
       const expectedActionNotCompletePOResults = {
         payload: {
-          text: '[missing \"en.ITEM.NO_SIGN_PRINTED_DETAILS\" translation]',
-          title: '[missing \"en.ITEM.NO_SIGN_PRINTED\" translation]',
+          text: '[missing "en.ITEM.NO_SIGN_PRINTED_DETAILS" translation]',
+          title: '[missing "en.ITEM.NO_SIGN_PRINTED" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL',
+        type: 'MODAL/SHOW_INFO_MODAL'
       };
       const expectedActionNotCompleteNSFLResults = {
         payload: {
-          text: '[missing \"en.ITEM.NO_FLOOR_LOCATION_DETAILS\" translation]',
-          title: '[missing \"en.ITEM.NO_FLOOR_LOCATION\" translation]',
+          text: '[missing "en.ITEM.NO_FLOOR_LOCATION_DETAILS" translation]',
+          title: '[missing "en.ITEM.NO_FLOOR_LOCATION" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL',
+        type: 'MODAL/SHOW_INFO_MODAL'
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       mockItemDetailsScreenProps.actionCompleted = true;
@@ -883,7 +884,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(mockDispatch).toHaveBeenCalledWith(expectedActionNotCompleteNSFLResults);
       mockItemDetailsScreenProps.dispatch = jest.fn();
     });
-    it('test onValidateScannedEvent', async() => {
+    it('test onValidateScannedEvent', async () => {
       const expectedGetItemDetailsAction = {
         payload: {
           id: 'test'
@@ -911,10 +912,10 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const expectedShowModalAction = {
         payload: {
-          text: '[missing \"en.ITEM.SCAN_DOESNT_MATCH_DETAILS\" translation]',
-          title: '[missing \"en.ITEM.SCAN_DOESNT_MATCH\" translation]',
+          text: '[missing "en.ITEM.SCAN_DOESNT_MATCH_DETAILS" translation]',
+          title: '[missing "en.ITEM.SCAN_DOESNT_MATCH" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL',
+        type: 'MODAL/SHOW_INFO_MODAL'
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       onValidateCompleteItemApiResultHook(mockItemDetailsScreenProps, completedApi);
@@ -935,17 +936,17 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const expectedShowModalAction = {
         payload: {
-          text: '[missing \"en.ITEM.SCAN_DOESNT_MATCH_DETAILS\" translation]',
-          title: '[missing \"en.ITEM.SCAN_DOESNT_MATCH\" translation]',
+          text: '[missing "en.ITEM.SCAN_DOESNT_MATCH_DETAILS" translation]',
+          title: '[missing "en.ITEM.SCAN_DOESNT_MATCH" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL',
+        type: 'MODAL/SHOW_INFO_MODAL'
       };
       const expectedShowModalCompleteError = {
         payload: {
-          text: '[missing \"en.ITEM.ACTION_COMPLETE_ERROR_DETAILS\" translation]',
-          title: '[missing \"en.ITEM.ACTION_COMPLETE_ERROR\" translation]',
+          text: '[missing "en.ITEM.ACTION_COMPLETE_ERROR_DETAILS" translation]',
+          title: '[missing "en.ITEM.ACTION_COMPLETE_ERROR" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL',
+        type: 'MODAL/SHOW_INFO_MODAL'
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       onValidateCompleteItemApiErrortHook(mockItemDetailsScreenProps, errorApi);
@@ -970,16 +971,16 @@ describe('ReviewItemDetailsScreen', () => {
       mockItemDetailsScreenProps.reserveLocations = [];
     });
     it('test getUpdatedSales', () => {
-      const expectedResults = '[missing \"en.GENERICS.UPDATED\" translation] 星期三, 7月 15 08:02 早上';
+      const expectedResults = '[missing "en.GENERICS.UPDATED" translation] 星期三, 7月 15 08:02 早上';
       const getUpdatedSalesResult = getUpdatedSales(itemDetail[123]);
       expect(getUpdatedSalesResult).toStrictEqual(expectedResults);
     });
     it('test isError', () => {
       const expectedGetItemDetailAction = {
         payload: {
-          id: '1234567890098',
+          id: '1234567890098'
         },
-        type: 'SAGA/GET_ITEM_DETAILS',
+        type: 'SAGA/GET_ITEM_DETAILS'
       };
       const { getByTestId, rerender, toJSON } = render(isError(
         'test',
@@ -1026,9 +1027,9 @@ describe('ReviewItemDetailsScreen', () => {
     });
     it('test getTopRightBtnTxt', () => {
       let getTopRightBtnTxtResult = getTopRightBtnTxt(0);
-      expect(getTopRightBtnTxtResult).toStrictEqual('[missing \"en.GENERICS.ADD\" translation]');
+      expect(getTopRightBtnTxtResult).toStrictEqual('[missing "en.GENERICS.ADD" translation]');
       getTopRightBtnTxtResult = getTopRightBtnTxt(1);
-      expect(getTopRightBtnTxtResult).toStrictEqual('[missing \"en.GENERICS.SEE_ALL\" translation]');
+      expect(getTopRightBtnTxtResult).toStrictEqual('[missing "en.GENERICS.SEE_ALL" translation]');
     });
     it('test getPendingOnHandsQty', () => {
       let getPendingOnHandsQtyResult = getPendingOnHandsQty(['on hands change'], -999);
