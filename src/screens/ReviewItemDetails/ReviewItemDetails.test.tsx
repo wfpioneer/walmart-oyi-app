@@ -177,6 +177,63 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+    it('renders the details for a single item with ohQtyModalVisible true', () => {
+      const testProps = {
+        ...mockItemDetailsScreenProps,
+        result: {
+          data: itemDetail[123],
+          status: 200
+        },
+        exceptionType: 'NSFL',
+        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
+        floorLocations: itemDetail[123].location.floor,
+        reserveLocations: itemDetail[123].location.reserve,
+        ohQtyModalVisible: true
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReviewItemDetailsScreen {...testProps} />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('renders the details for a single item with createPickModalVisible true', () => {
+      const testProps = {
+        ...mockItemDetailsScreenProps,
+        result: {
+          data: itemDetail[123],
+          status: 200
+        },
+        exceptionType: 'NSFL',
+        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
+        floorLocations: itemDetail[123].location.floor,
+        reserveLocations: itemDetail[123].location.reserve,
+        createPickModalVisible: true
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReviewItemDetailsScreen {...testProps} />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('renders the details for a single item with errorModalVisible true', () => {
+      const testProps = {
+        ...mockItemDetailsScreenProps,
+        result: {
+          data: itemDetail[123],
+          status: 200
+        },
+        exceptionType: 'NSFL',
+        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
+        floorLocations: itemDetail[123].location.floor,
+        reserveLocations: itemDetail[123].location.reserve,
+        errorModalVisible: true
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReviewItemDetailsScreen {...testProps} />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
     it('renders the details for a single item with null status', () => {
       const testProps = {
         ...mockItemDetailsScreenProps,

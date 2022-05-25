@@ -451,7 +451,8 @@ export const getFloorItemDetails = (itemDetails: ItemDetails) => (itemDetails.lo
 export const getReserveItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.reserve
   ? itemDetails.location.reserve : []);
 
-export const isItemDetailsCompleted = (itemDetails: ItemDetails) => (itemDetails.exceptionType ? itemDetails.completed : true);
+export const isItemDetailsCompleted = (itemDetails: ItemDetails) =>
+  (itemDetails.exceptionType ? itemDetails.completed : true);
 
 export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: ItemDetails) => {
   if (itemDetails) {
@@ -643,9 +644,8 @@ export const getExceptionType = (actionCompleted: boolean, itemDetails: ItemDeta
 export const getTopRightBtnTxt = (locationCount: number) => (locationCount && locationCount >= 1
   ? strings('GENERICS.SEE_ALL') : strings(GENERICS_ADD));
 
-export const getPendingOnHandsQty = (userFeatures: string[], pendingOnHandsQty: number) => {
-  return (pendingOnHandsQty === -999 && userFeatures.includes('on hands change'));
-};
+export const getPendingOnHandsQty = (userFeatures: string[], pendingOnHandsQty: number) =>
+  (pendingOnHandsQty === -999 && userFeatures.includes('on hands change'));
 
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
   const {
