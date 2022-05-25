@@ -240,14 +240,14 @@ describe('ReviewItemDetailsScreen', () => {
         result: {
           data: {
             ...itemDetail[123],
-          status: undefined
+            status: undefined
           },
           status: 200
         },
         exceptionType: 'NSFL',
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
-        reserveLocations: itemDetail[123].location.reserve,
+        reserveLocations: itemDetail[123].location.reserve
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -268,7 +268,7 @@ describe('ReviewItemDetailsScreen', () => {
         exceptionType: 'NSFL',
         pendingOnHandsQty: itemDetail[456].pendingOnHandsQty,
         floorLocations: itemDetail[456].location.floor,
-        reserveLocations: itemDetail[456].location.reserve,
+        reserveLocations: itemDetail[456].location.reserve
       };
       const renderer = ShallowRenderer.createRenderer();
       // Mock Item Number 456 has cloud Qty defined
@@ -304,7 +304,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         error: 'Network Error',
         exceptionType: '',
-        pendingOnHandsQty: 0,
+        pendingOnHandsQty: 0
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -352,7 +352,7 @@ describe('ReviewItemDetailsScreen', () => {
         exceptionType: 'NSFL',
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
-        reserveLocations: itemDetail[123].location.reserve,
+        reserveLocations: itemDetail[123].location.reserve
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -852,7 +852,7 @@ describe('ReviewItemDetailsScreen', () => {
             }
           ],
           salesFloor: true,
-          upcNbr: '000055559999',
+          upcNbr: '000055559999'
         },
         type: 'ITEM_DETAILS_SCREEN/SETUP'
       };
