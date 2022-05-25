@@ -525,7 +525,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         assigned={assigned}
         category={item.category}
         createdBy={item.createdBy}
-        createdTS={item.createTS}
+        createdTS={item.createTs}
         decrementQty={() => handleDecrement(item)}
         incrementQty={() => handleIncrement(item)}
         itemDesc={item.itemDesc}

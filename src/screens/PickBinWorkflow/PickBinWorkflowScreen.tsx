@@ -18,19 +18,22 @@ import { strings } from '../../locales';
 import styles from './PickBinWorkflow.style';
 import { AsyncState } from '../../models/AsyncState';
 import {
+  UPDATE_PALLET_NOT_FOUND,
   UPDATE_PICKLIST_STATUS
 } from '../../state/actions/asyncAPI';
-import { updatePicklistStatus } from '../../state/actions/saga';
+import { updatePalletNotFound, updatePicklistStatus } from '../../state/actions/saga';
 import { updatePicks } from '../../state/actions/Picking';
 import { addPallet } from '../../state/actions/Binning';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { CustomModalComponent } from '../Modal/Modal';
+import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 
 interface PBWorkflowProps {
   userFeatures: string[];
   userId: string;
   pickingState: PickingState;
   updatePicklistStatusApi: AsyncState;
+  updatePalletNotFoundApi: AsyncState;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
@@ -100,6 +103,72 @@ export const updatePicklistStatusApiHook = (
   }
 };
 
+export const updatePalletNotFoundApiHook = (
+  updatePalletNotFoundApi: AsyncState,
+  items: PickListItem[],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+) => {
+  // on api success
+  if (navigation.isFocused()) {
+    if (!updatePalletNotFoundApi.isWaiting && updatePalletNotFoundApi.result
+      && updatePalletNotFoundApi.result.status === 200) {
+      dispatch(hideActivityModal());
+      const { message } = updatePalletNotFoundApi.result.data;
+      if (message === 'AT_LEAST_ONE_PICK_CREATED' && items.length > 1) {
+        Toast.show({
+          type: 'success',
+          text1: strings('PICKING.NEW_PICK_ADDED_TO_PICKLIST_PLURAL'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+      } else if (message === 'AT_LEAST_ONE_PICK_CREATED') {
+        Toast.show({
+          type: 'success',
+          text1: strings('PICKING.NEW_PICK_ADDED_TO_PICKLIST'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+      } else {
+        Toast.show({
+          type: 'success',
+          text1: strings('PICKING.NO_PALLETS_AVAILABLE_PICK_DELETED'),
+          visibilityTime: SNACKBAR_TIMEOUT_LONG,
+          position: 'bottom'
+        });
+      }
+      dispatch({ type: UPDATE_PALLET_NOT_FOUND.RESET });
+      navigation.goBack();
+    }
+    // on api error
+    if (!updatePalletNotFoundApi.isWaiting && updatePalletNotFoundApi.error) {
+      dispatch(hideActivityModal());
+      if (items.length > 1) {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL'),
+          text2: strings('GENERICS.TRY_AGAIN'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.UPDATE_PICK_FAILED_TRY_AGAIN'),
+          text2: strings('GENERICS.TRY_AGAIN'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+      }
+      dispatch({ type: UPDATE_PALLET_NOT_FOUND.RESET });
+    }
+    // on api request
+    if (updatePalletNotFoundApi.isWaiting) {
+      dispatch(showActivityModal());
+    }
+  }
+};
+
 export const updatePicklistItemsStatus = (items: PickListItem[], action: PickAction, dispatch: Dispatch<any>) => {
   const picklistItems = items.map(item => ({
     picklistId: item.id,
@@ -127,8 +196,12 @@ export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
     updatePicklistItemsStatus(items, action, dispatch);
   };
 
-  // TODO: Need to call /picklist/{palletId}/palletnotfound service and redirect to TabNavigator on Success
-  const handlePalletNotFound = () => {};
+  const handlePalletNotFound = () => {
+    const { palletId } = items[0];
+    const picklistIds = items.map(item => item.id);
+    setShowContinueActionDialog(false);
+    dispatch(updatePalletNotFound({ palletId, picklistIds }));
+  };
 
   return (
     <CustomModalComponent
@@ -175,7 +248,8 @@ export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
 export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
   const {
     userFeatures, userId, pickingState, updatePicklistStatusApi, useEffectHook, dispatch, navigation,
-    selectedPicklistAction, setSelectedPicklistAction, showContinueActionDialog, setShowContinueActionDialog
+    selectedPicklistAction, setSelectedPicklistAction, showContinueActionDialog,
+    setShowContinueActionDialog, updatePalletNotFoundApi
   } = props;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
@@ -187,6 +261,13 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     navigation,
     selectedPicklistAction
   ), [updatePicklistStatusApi]);
+
+  useEffectHook(() => updatePalletNotFoundApiHook(
+    updatePalletNotFoundApi,
+    selectedPicks,
+    dispatch,
+    navigation,
+  ), [updatePalletNotFoundApi]);
 
   const handleAccept = (items: PickListItem[]) => {
     const { status } = items[0];
@@ -282,18 +363,22 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
         items={selectedPicks}
         setSelectedPicklistAction={setSelectedPicklistAction}
       />
-      <PickPalletInfoCard
-        onPress={() => {}}
-        palletId={selectedPicks[0].palletId}
-        palletLocation={selectedPicks[0].palletLocationName}
-        pickListItems={selectedPicks}
-        pickStatus={selectedPicks[0].status}
-        canDelete={false}
-        dispatch={dispatch}
-      />
-      <View style={styles.actionButtonsView}>
-        {actionButtonsView()}
-      </View>
+      {selectedPicks.length > 0 ? (
+        <>
+          <PickPalletInfoCard
+            onPress={() => { }}
+            palletId={selectedPicks[0].palletId}
+            palletLocation={selectedPicks[0].palletLocationName}
+            pickListItems={selectedPicks}
+            pickStatus={selectedPicks[0].status}
+            canDelete={false}
+            dispatch={dispatch}
+          />
+          <View style={styles.actionButtonsView}>
+            {actionButtonsView()}
+          </View>
+        </>
+      ) : null}
     </SafeAreaView>
   );
 };
@@ -303,6 +388,7 @@ const PickBinWorkflow = () => {
   const userId = useTypedSelector(state => state.User.userId);
   const picking = useTypedSelector(state => state.Picking);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
+  const updatePalletNotFoundApi = useTypedSelector(state => state.async.updatePalletNotFound);
   const [selectedPicklistAction, setSelectedPicklistAction] = useState<PickAction|null>(null);
   const [showContinueActionDialog, setShowContinueActionDialog] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -314,6 +400,7 @@ const PickBinWorkflow = () => {
       userId={userId}
       pickingState={picking}
       updatePicklistStatusApi={updatePicklistStatusApi}
+      updatePalletNotFoundApi={updatePalletNotFoundApi}
       useEffectHook={useEffect}
       dispatch={dispatch}
       navigation={navigation}
