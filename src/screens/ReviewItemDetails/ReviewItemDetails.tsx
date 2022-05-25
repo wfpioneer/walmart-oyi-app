@@ -13,6 +13,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
   addToPicklist, createNewPick, getItemDetails, noAction
@@ -52,7 +53,7 @@ const ITEM_SCAN_DOESNT_MATCH_DETAILS = 'ITEM.SCAN_DOESNT_MATCH_DETAILS';
 const GENERICS_ADD = 'GENERICS.ADD';
 export interface ItemDetailsScreenProps {
   scannedEvent: any; isManualScanEnabled: boolean;
-  isWaiting: boolean; error: any; result: any;
+  isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
   addToPicklistStatus: AsyncState;
   completeItemApi: AsyncState;
   createNewPickApi: AsyncState;
@@ -687,6 +688,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       scanSubscription.remove();
     };
   }, [itemDetails, actionCompleted]);
+
   // Complete Item Details API
   useEffectHook(() => {
     // on api success
@@ -696,7 +698,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     }
   }, [completeItemApi]);
 
-  useEffect(
+  useEffectHook(
     () => createNewPickApiHook(
       createNewPickApi,
       dispatch,
@@ -872,6 +874,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     </View>
   );
 };
+
 const ReviewItemDetails = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);

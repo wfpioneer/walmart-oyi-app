@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { SubactionsMap } from '../../actions/generic/makeAsyncActions';
 import { PartialState } from '../RootReducer';
 
@@ -10,21 +10,21 @@ const getInitialState = <Q, R, E = string>(): AsyncState<Q, R, E> => ({
   result: null
 });
 
-export interface AsyncState<Q, R, E = AxiosError> {
+export interface AsyncState<Q, R = AxiosResponse, E = AxiosError> {
   isWaiting: boolean;
   value: Q | null;
   error: E | null;
   result: R | null;
 }
 
-export interface AsyncAction<Q, R, E = AxiosError> {
+export interface AsyncAction<Q, R = AxiosResponse, E = AxiosError> {
   type: string;
   payload?: Q | R | E | AsyncState<Q, R, E> | PartialState;
 }
 
 export type AsyncReducer<Q, R, E> = Reducer<AsyncState<Q, R, E>, any>;
 
-export function makeAsyncReducer<Q, R, E = AxiosError>(
+export function makeAsyncReducer<Q, R = AxiosResponse, E = AxiosError>(
   sagaSubaction: { [key in keyof SubactionsMap]: string }
 ): AsyncReducer<Q, R, E> {
   const reducer = (
