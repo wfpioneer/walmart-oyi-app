@@ -329,7 +329,6 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders \'Activity Indicator\' waiting for ItemDetails Response ', () => {
-
       const testProps = {
         ...mockItemDetailsScreenProps,
         isWaiting: true,
