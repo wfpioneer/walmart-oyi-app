@@ -144,86 +144,88 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
   />
-  <PickPalletInfoCard
-    canDelete={false}
-    dispatch={[Function]}
-    onPress={[Function]}
-    palletId="45"
-    palletLocation="ABAR1-4"
-    pickListItems={
-      Array [
-        Object {
-          "assignedAssociate": "vn50pz4",
-          "category": 3,
-          "createTs": "2022-04-03T12:55:31.9633333Z",
-          "createdBy": "Guude",
-          "id": 6,
-          "itemDesc": "generic description",
-          "itemNbr": 1,
-          "moveToFront": false,
-          "palletId": "45",
-          "palletLocationId": 5,
-          "palletLocationName": "ABAR1-4",
-          "quickPick": true,
-          "salesFloorLocationId": 5,
-          "salesFloorLocationName": "ABAR1-3",
-          "status": "accepted bin",
-          "upcNbr": "1234567890123",
-        },
-      ]
-    }
-    pickStatus="accepted bin"
-  />
-  <View
-    style={
-      Object {
-        "borderTopColor": "#bdbdbd",
-        "borderTopWidth": 2,
-        "flexDirection": "row",
-        "marginTop": "auto",
-        "width": "100%",
-      }
-    }
-  >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
+  <React.Fragment>
+    <PickPalletInfoCard
+      canDelete={false}
+      dispatch={[Function]}
       onPress={[Function]}
-      radius={5}
+      palletId="45"
+      palletLocation="ABAR1-4"
+      pickListItems={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTs": "2022-04-03T12:55:31.9633333Z",
+            "createdBy": "Guude",
+            "id": 6,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": "45",
+            "palletLocationId": 5,
+            "palletLocationName": "ABAR1-4",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "accepted bin",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      pickStatus="accepted bin"
+    />
+    <View
       style={
         Object {
-          "flex": 1,
-          "margin": 5,
+          "borderTopColor": "#bdbdbd",
+          "borderTopWidth": 2,
+          "flexDirection": "row",
+          "marginTop": "auto",
+          "width": "100%",
         }
       }
-      title="[missing \\"en.PICKING.RELEASE\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "flex": 1,
-          "margin": 5,
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 5,
+          }
         }
-      }
-      title="[missing \\"en.PICKING.BIN\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-  </View>
+        title="[missing \\"en.PICKING.RELEASE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 5,
+          }
+        }
+        title="[missing \\"en.PICKING.BIN\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
 </RNCSafeAreaView>
 `;
 
@@ -264,67 +266,69 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
   />
-  <PickPalletInfoCard
-    canDelete={false}
-    dispatch={[Function]}
-    onPress={[Function]}
-    palletId="43"
-    palletLocation="ABAR1-2"
-    pickListItems={
-      Array [
-        Object {
-          "assignedAssociate": "t0s0og",
-          "category": 3,
-          "createTs": "2022-04-03T12:55:31.9633333Z",
-          "createdBy": "Guude",
-          "id": 0,
-          "itemDesc": "generic description",
-          "itemNbr": 1,
-          "moveToFront": false,
-          "palletId": "43",
-          "palletLocationId": 4,
-          "palletLocationName": "ABAR1-2",
-          "quickPick": false,
-          "salesFloorLocationId": 5,
-          "salesFloorLocationName": "ABAR1-3",
-          "status": "accepted bin",
-          "upcNbr": "1234567890123",
-        },
-      ]
-    }
-    pickStatus="accepted bin"
-  />
-  <View
-    style={
-      Object {
-        "borderTopColor": "#bdbdbd",
-        "borderTopWidth": 2,
-        "flexDirection": "row",
-        "marginTop": "auto",
-        "width": "100%",
-      }
-    }
-  >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
+  <React.Fragment>
+    <PickPalletInfoCard
+      canDelete={false}
+      dispatch={[Function]}
       onPress={[Function]}
-      radius={5}
+      palletId="43"
+      palletLocation="ABAR1-2"
+      pickListItems={
+        Array [
+          Object {
+            "assignedAssociate": "t0s0og",
+            "category": 3,
+            "createTs": "2022-04-03T12:55:31.9633333Z",
+            "createdBy": "Guude",
+            "id": 0,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": "43",
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": false,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "accepted bin",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      pickStatus="accepted bin"
+    />
+    <View
       style={
         Object {
-          "flex": 1,
-          "margin": 5,
+          "borderTopColor": "#bdbdbd",
+          "borderTopWidth": 2,
+          "flexDirection": "row",
+          "marginTop": "auto",
+          "width": "100%",
         }
       }
-      title="[missing \\"en.PICKING.RELEASE\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-  </View>
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 5,
+          }
+        }
+        title="[missing \\"en.PICKING.RELEASE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
 </RNCSafeAreaView>
 `;
 
@@ -365,47 +369,49 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
   />
-  <PickPalletInfoCard
-    canDelete={false}
-    dispatch={[Function]}
-    onPress={[Function]}
-    palletId="43"
-    palletLocation="ABAR1-2"
-    pickListItems={
-      Array [
-        Object {
-          "assignedAssociate": "t0s0og",
-          "category": 3,
-          "createTs": "2022-04-03T12:55:31.9633333Z",
-          "createdBy": "Guude",
-          "id": 0,
-          "itemDesc": "generic description",
-          "itemNbr": 1,
-          "moveToFront": false,
-          "palletId": "43",
-          "palletLocationId": 4,
-          "palletLocationName": "ABAR1-2",
-          "quickPick": false,
-          "salesFloorLocationId": 5,
-          "salesFloorLocationName": "ABAR1-3",
-          "status": "accepted bin",
-          "upcNbr": "1234567890123",
-        },
-      ]
-    }
-    pickStatus="accepted bin"
-  />
-  <View
-    style={
-      Object {
-        "borderTopColor": "#bdbdbd",
-        "borderTopWidth": 2,
-        "flexDirection": "row",
-        "marginTop": "auto",
-        "width": "100%",
+  <React.Fragment>
+    <PickPalletInfoCard
+      canDelete={false}
+      dispatch={[Function]}
+      onPress={[Function]}
+      palletId="43"
+      palletLocation="ABAR1-2"
+      pickListItems={
+        Array [
+          Object {
+            "assignedAssociate": "t0s0og",
+            "category": 3,
+            "createTs": "2022-04-03T12:55:31.9633333Z",
+            "createdBy": "Guude",
+            "id": 0,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": "43",
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": false,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "accepted bin",
+            "upcNbr": "1234567890123",
+          },
+        ]
       }
-    }
-  />
+      pickStatus="accepted bin"
+    />
+    <View
+      style={
+        Object {
+          "borderTopColor": "#bdbdbd",
+          "borderTopWidth": 2,
+          "flexDirection": "row",
+          "marginTop": "auto",
+          "width": "100%",
+        }
+      }
+    />
+  </React.Fragment>
 </RNCSafeAreaView>
 `;
 
@@ -446,86 +452,88 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
   />
-  <PickPalletInfoCard
-    canDelete={false}
-    dispatch={[Function]}
-    onPress={[Function]}
-    palletId="44"
-    palletLocation="ABAR1-2"
-    pickListItems={
-      Array [
-        Object {
-          "assignedAssociate": "vn50pz4",
-          "category": 3,
-          "createTs": "2022-04-03T12:55:31.9633333Z",
-          "createdBy": "Guude",
-          "id": 5,
-          "itemDesc": "generic description",
-          "itemNbr": 1,
-          "moveToFront": false,
-          "palletId": "44",
-          "palletLocationId": 4,
-          "palletLocationName": "ABAR1-2",
-          "quickPick": true,
-          "salesFloorLocationId": 5,
-          "salesFloorLocationName": "ABAR1-3",
-          "status": "accepted pick",
-          "upcNbr": "1234567890123",
-        },
-      ]
-    }
-    pickStatus="accepted pick"
-  />
-  <View
-    style={
-      Object {
-        "borderTopColor": "#bdbdbd",
-        "borderTopWidth": 2,
-        "flexDirection": "row",
-        "marginTop": "auto",
-        "width": "100%",
-      }
-    }
-  >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
+  <React.Fragment>
+    <PickPalletInfoCard
+      canDelete={false}
+      dispatch={[Function]}
       onPress={[Function]}
-      radius={5}
+      palletId="44"
+      palletLocation="ABAR1-2"
+      pickListItems={
+        Array [
+          Object {
+            "assignedAssociate": "vn50pz4",
+            "category": 3,
+            "createTs": "2022-04-03T12:55:31.9633333Z",
+            "createdBy": "Guude",
+            "id": 5,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": "44",
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": true,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "accepted pick",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      pickStatus="accepted pick"
+    />
+    <View
       style={
         Object {
-          "flex": 1,
-          "margin": 5,
+          "borderTopColor": "#bdbdbd",
+          "borderTopWidth": 2,
+          "flexDirection": "row",
+          "marginTop": "auto",
+          "width": "100%",
         }
       }
-      title="[missing \\"en.PICKING.RELEASE\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "flex": 1,
-          "margin": 5,
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 5,
+          }
         }
-      }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-  </View>
+        title="[missing \\"en.PICKING.RELEASE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 5,
+          }
+        }
+        title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
 </RNCSafeAreaView>
 `;
 
@@ -566,86 +574,88 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
   />
-  <PickPalletInfoCard
-    canDelete={false}
-    dispatch={[Function]}
-    onPress={[Function]}
-    palletId="40"
-    palletLocation="ABAR1-2"
-    pickListItems={
-      Array [
-        Object {
-          "assignedAssociate": "t0s0og",
-          "category": 3,
-          "createTs": "2022-04-03T12:55:31.9633333Z",
-          "createdBy": "Guude",
-          "id": 1,
-          "itemDesc": "generic description",
-          "itemNbr": 1,
-          "moveToFront": false,
-          "palletId": "40",
-          "palletLocationId": 4,
-          "palletLocationName": "ABAR1-2",
-          "quickPick": false,
-          "salesFloorLocationId": 5,
-          "salesFloorLocationName": "ABAR1-3",
-          "status": "accepted pick",
-          "upcNbr": "1234567890123",
-        },
-      ]
-    }
-    pickStatus="accepted pick"
-  />
-  <View
-    style={
-      Object {
-        "borderTopColor": "#bdbdbd",
-        "borderTopWidth": 2,
-        "flexDirection": "row",
-        "marginTop": "auto",
-        "width": "100%",
-      }
-    }
-  >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
+  <React.Fragment>
+    <PickPalletInfoCard
+      canDelete={false}
+      dispatch={[Function]}
       onPress={[Function]}
-      radius={5}
+      palletId="40"
+      palletLocation="ABAR1-2"
+      pickListItems={
+        Array [
+          Object {
+            "assignedAssociate": "t0s0og",
+            "category": 3,
+            "createTs": "2022-04-03T12:55:31.9633333Z",
+            "createdBy": "Guude",
+            "id": 1,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": "40",
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": false,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "accepted pick",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      pickStatus="accepted pick"
+    />
+    <View
       style={
         Object {
-          "flex": 1,
-          "margin": 5,
+          "borderTopColor": "#bdbdbd",
+          "borderTopWidth": 2,
+          "flexDirection": "row",
+          "marginTop": "auto",
+          "width": "100%",
         }
       }
-      title="[missing \\"en.PICKING.RELEASE\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "flex": 1,
-          "margin": 5,
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 5,
+          }
         }
-      }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-  </View>
+        title="[missing \\"en.PICKING.RELEASE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 5,
+          }
+        }
+        title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
 </RNCSafeAreaView>
 `;
 
@@ -686,67 +696,69 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
   />
-  <PickPalletInfoCard
-    canDelete={false}
-    dispatch={[Function]}
-    onPress={[Function]}
-    palletId="40"
-    palletLocation="ABAR1-2"
-    pickListItems={
-      Array [
-        Object {
-          "assignedAssociate": "t0s0og",
-          "category": 3,
-          "createTs": "2022-04-03T12:55:31.9633333Z",
-          "createdBy": "Guude",
-          "id": 1,
-          "itemDesc": "generic description",
-          "itemNbr": 1,
-          "moveToFront": false,
-          "palletId": "40",
-          "palletLocationId": 4,
-          "palletLocationName": "ABAR1-2",
-          "quickPick": false,
-          "salesFloorLocationId": 5,
-          "salesFloorLocationName": "ABAR1-3",
-          "status": "accepted pick",
-          "upcNbr": "1234567890123",
-        },
-      ]
-    }
-    pickStatus="accepted pick"
-  />
-  <View
-    style={
-      Object {
-        "borderTopColor": "#bdbdbd",
-        "borderTopWidth": 2,
-        "flexDirection": "row",
-        "marginTop": "auto",
-        "width": "100%",
-      }
-    }
-  >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
+  <React.Fragment>
+    <PickPalletInfoCard
+      canDelete={false}
+      dispatch={[Function]}
       onPress={[Function]}
-      radius={5}
+      palletId="40"
+      palletLocation="ABAR1-2"
+      pickListItems={
+        Array [
+          Object {
+            "assignedAssociate": "t0s0og",
+            "category": 3,
+            "createTs": "2022-04-03T12:55:31.9633333Z",
+            "createdBy": "Guude",
+            "id": 1,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": "40",
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": false,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "accepted pick",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      pickStatus="accepted pick"
+    />
+    <View
       style={
         Object {
-          "flex": 1,
-          "margin": 5,
+          "borderTopColor": "#bdbdbd",
+          "borderTopWidth": 2,
+          "flexDirection": "row",
+          "marginTop": "auto",
+          "width": "100%",
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-  </View>
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 5,
+          }
+        }
+        title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
 </RNCSafeAreaView>
 `;
 
@@ -805,85 +817,87 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
   />
-  <PickPalletInfoCard
-    canDelete={false}
-    dispatch={[Function]}
-    onPress={[Function]}
-    palletId="42"
-    palletLocation="ABAR1-2"
-    pickListItems={
-      Array [
-        Object {
-          "assignedAssociate": "",
-          "category": 3,
-          "createTs": "2022-04-03T12:55:31.9633333Z",
-          "createdBy": "Guude",
-          "id": 3,
-          "itemDesc": "generic description",
-          "itemNbr": 1,
-          "moveToFront": false,
-          "palletId": "42",
-          "palletLocationId": 4,
-          "palletLocationName": "ABAR1-2",
-          "quickPick": false,
-          "salesFloorLocationId": 5,
-          "salesFloorLocationName": "ABAR1-3",
-          "status": "ready to bin",
-          "upcNbr": "1234567890123",
-        },
-        Object {
-          "assignedAssociate": "",
-          "category": 3,
-          "createTs": "2022-04-03T12:55:31.9633333Z",
-          "createdBy": "Guude",
-          "id": 4,
-          "itemDesc": "generic description",
-          "itemNbr": 1,
-          "moveToFront": false,
-          "palletId": "42",
-          "palletLocationId": 4,
-          "palletLocationName": "ABAR1-2",
-          "quickPick": false,
-          "salesFloorLocationId": 5,
-          "salesFloorLocationName": "ABAR1-3",
-          "status": "ready to bin",
-          "upcNbr": "1234567890123",
-        },
-      ]
-    }
-    pickStatus="ready to bin"
-  />
-  <View
-    style={
-      Object {
-        "borderTopColor": "#bdbdbd",
-        "borderTopWidth": 2,
-        "flexDirection": "row",
-        "marginTop": "auto",
-        "width": "100%",
-      }
-    }
-  >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
+  <React.Fragment>
+    <PickPalletInfoCard
+      canDelete={false}
+      dispatch={[Function]}
       onPress={[Function]}
-      radius={5}
+      palletId="42"
+      palletLocation="ABAR1-2"
+      pickListItems={
+        Array [
+          Object {
+            "assignedAssociate": "",
+            "category": 3,
+            "createTs": "2022-04-03T12:55:31.9633333Z",
+            "createdBy": "Guude",
+            "id": 3,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": "42",
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": false,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to bin",
+            "upcNbr": "1234567890123",
+          },
+          Object {
+            "assignedAssociate": "",
+            "category": 3,
+            "createTs": "2022-04-03T12:55:31.9633333Z",
+            "createdBy": "Guude",
+            "id": 4,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": "42",
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": false,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to bin",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      pickStatus="ready to bin"
+    />
+    <View
       style={
         Object {
-          "flex": 1,
-          "margin": 5,
+          "borderTopColor": "#bdbdbd",
+          "borderTopWidth": 2,
+          "flexDirection": "row",
+          "marginTop": "auto",
+          "width": "100%",
         }
       }
-      title="[missing \\"en.PICKING.ACCEPT\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-  </View>
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 5,
+          }
+        }
+        title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
 </RNCSafeAreaView>
 `;
 
@@ -924,66 +938,68 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
   />
-  <PickPalletInfoCard
-    canDelete={false}
-    dispatch={[Function]}
-    onPress={[Function]}
-    palletId="41"
-    palletLocation="ABAR1-2"
-    pickListItems={
-      Array [
-        Object {
-          "assignedAssociate": "",
-          "category": 3,
-          "createTs": "2022-04-03T12:55:31.9633333Z",
-          "createdBy": "Guude",
-          "id": 2,
-          "itemDesc": "generic description",
-          "itemNbr": 1,
-          "moveToFront": false,
-          "palletId": "41",
-          "palletLocationId": 4,
-          "palletLocationName": "ABAR1-2",
-          "quickPick": false,
-          "salesFloorLocationId": 5,
-          "salesFloorLocationName": "ABAR1-3",
-          "status": "ready to pick",
-          "upcNbr": "1234567890123",
-        },
-      ]
-    }
-    pickStatus="ready to pick"
-  />
-  <View
-    style={
-      Object {
-        "borderTopColor": "#bdbdbd",
-        "borderTopWidth": 2,
-        "flexDirection": "row",
-        "marginTop": "auto",
-        "width": "100%",
-      }
-    }
-  >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={45}
+  <React.Fragment>
+    <PickPalletInfoCard
+      canDelete={false}
+      dispatch={[Function]}
       onPress={[Function]}
-      radius={5}
+      palletId="41"
+      palletLocation="ABAR1-2"
+      pickListItems={
+        Array [
+          Object {
+            "assignedAssociate": "",
+            "category": 3,
+            "createTs": "2022-04-03T12:55:31.9633333Z",
+            "createdBy": "Guude",
+            "id": 2,
+            "itemDesc": "generic description",
+            "itemNbr": 1,
+            "moveToFront": false,
+            "palletId": "41",
+            "palletLocationId": 4,
+            "palletLocationName": "ABAR1-2",
+            "quickPick": false,
+            "salesFloorLocationId": 5,
+            "salesFloorLocationName": "ABAR1-3",
+            "status": "ready to pick",
+            "upcNbr": "1234567890123",
+          },
+        ]
+      }
+      pickStatus="ready to pick"
+    />
+    <View
       style={
         Object {
-          "flex": 1,
-          "margin": 5,
+          "borderTopColor": "#bdbdbd",
+          "borderTopWidth": 2,
+          "flexDirection": "row",
+          "marginTop": "auto",
+          "width": "100%",
         }
       }
-      title="[missing \\"en.PICKING.ACCEPT\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-  </View>
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 5,
+          }
+        }
+        title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </React.Fragment>
 </RNCSafeAreaView>
 `;

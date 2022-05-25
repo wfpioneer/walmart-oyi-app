@@ -409,7 +409,12 @@ export default {
     PICK_COMPLETED_PLURAL: 'The picks have been completed',
     PICKLIST_UPDATED: 'The picklist has been updated',
     PICK_COMPLETED_AND_PICKLIST_UPDATED: 'The pick has been completed and the picklist has been updated',
-    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'The picks have been completed and the picklist have been updated'
+    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'The picks have been completed and the picklist have been updated',
+    NEW_PICK_ADDED_TO_PICKLIST: 'The pick request has been added to the picklist',
+    NEW_PICK_ADDED_TO_PICKLIST_PLURAL: 'The pick requests have been added to the picklist',
+    NO_PALLETS_AVAILABLE_PICK_DELETED: 'The pallet is not available. The pick requested has been deleted',
+    UPDATE_PICK_FAILED_TRY_AGAIN: 'Failed to update pick. Please try again',
+    UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again'
   },
   BINNING: {
     BINNING: 'Binning',
