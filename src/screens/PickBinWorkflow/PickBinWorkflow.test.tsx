@@ -7,11 +7,15 @@ import {
   PickAction, PickListItem, PickStatus, Tabs
 } from '../../models/Picking.d';
 import { PickingState } from '../../state/reducers/Picking';
-import { ContinueActionDialog, PickBinWorkflowScreen, updatePicklistStatusApiHook } from './PickBinWorkflowScreen';
+import {
+  ContinueActionDialog, PickBinWorkflowScreen,
+  updatePalletNotFoundApiHook, updatePicklistStatusApiHook
+} from './PickBinWorkflowScreen';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { strings } from '../../locales';
 import { mockItem } from '../../mockData/mockPickList';
+import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -133,6 +137,7 @@ describe('PickBin Workflow render tests', () => {
         userFeatures={[]}
         userId="vn50pz4"
         updatePicklistStatusApi={defaultAsyncState}
+        updatePalletNotFoundApi={defaultAsyncState}
         useEffectHook={jest.fn}
         dispatch={jest.fn}
         navigation={navigationProp}
@@ -160,6 +165,7 @@ describe('PickBin Workflow render tests', () => {
         userFeatures={[]}
         userId="vn50pz4"
         updatePicklistStatusApi={defaultAsyncState}
+        updatePalletNotFoundApi={defaultAsyncState}
         useEffectHook={jest.fn}
         dispatch={jest.fn}
         navigation={navigationProp}
@@ -187,6 +193,7 @@ describe('PickBin Workflow render tests', () => {
         userFeatures={[]}
         userId="vn50pz4"
         updatePicklistStatusApi={defaultAsyncState}
+        updatePalletNotFoundApi={defaultAsyncState}
         useEffectHook={jest.fn}
         dispatch={jest.fn}
         navigation={navigationProp}
@@ -214,6 +221,7 @@ describe('PickBin Workflow render tests', () => {
         userFeatures={[]}
         userId="vn50pz4"
         updatePicklistStatusApi={defaultAsyncState}
+        updatePalletNotFoundApi={defaultAsyncState}
         useEffectHook={jest.fn}
         dispatch={jest.fn}
         navigation={navigationProp}
@@ -241,6 +249,7 @@ describe('PickBin Workflow render tests', () => {
         userFeatures={['manager approval']}
         userId="vn50pz4"
         updatePicklistStatusApi={defaultAsyncState}
+        updatePalletNotFoundApi={defaultAsyncState}
         useEffectHook={jest.fn}
         dispatch={jest.fn}
         navigation={navigationProp}
@@ -268,6 +277,7 @@ describe('PickBin Workflow render tests', () => {
         userFeatures={[]}
         userId="vn50pz4"
         updatePicklistStatusApi={defaultAsyncState}
+        updatePalletNotFoundApi={defaultAsyncState}
         useEffectHook={jest.fn}
         dispatch={jest.fn}
         navigation={navigationProp}
@@ -295,6 +305,7 @@ describe('PickBin Workflow render tests', () => {
         userFeatures={[]}
         userId="vn50pz4"
         updatePicklistStatusApi={defaultAsyncState}
+        updatePalletNotFoundApi={defaultAsyncState}
         useEffectHook={jest.fn}
         dispatch={jest.fn}
         navigation={navigationProp}
@@ -322,6 +333,7 @@ describe('PickBin Workflow render tests', () => {
         userFeatures={['manager approval']}
         userId="vn50pz4"
         updatePicklistStatusApi={defaultAsyncState}
+        updatePalletNotFoundApi={defaultAsyncState}
         useEffectHook={jest.fn}
         dispatch={jest.fn}
         navigation={navigationProp}
@@ -361,6 +373,7 @@ describe('PickBin Workflow render tests', () => {
         userFeatures={['manager approval']}
         userId="vn51wu8"
         updatePicklistStatusApi={defaultAsyncState}
+        updatePalletNotFoundApi={defaultAsyncState}
         useEffectHook={jest.fn}
         dispatch={mockDispatch}
         navigation={navigationProp}
@@ -404,6 +417,7 @@ describe('PickBin Workflow render tests', () => {
         userFeatures={['manager approval']}
         userId="vn51wu8"
         updatePicklistStatusApi={defaultAsyncState}
+        updatePalletNotFoundApi={defaultAsyncState}
         useEffectHook={jest.fn}
         dispatch={mockDispatch}
         navigation={navigationProp}
@@ -447,6 +461,7 @@ describe('PickBin Workflow render tests', () => {
         userFeatures={['']}
         userId="vn51wu8"
         updatePicklistStatusApi={defaultAsyncState}
+        updatePalletNotFoundApi={defaultAsyncState}
         useEffectHook={jest.fn}
         dispatch={mockDispatch}
         navigation={navigationProp}
@@ -598,6 +613,78 @@ describe('PickBin Workflow render tests', () => {
         isWaiting: true
       };
       updatePicklistStatusApiHook(isLoadingApi, mockSelectedItems, mockDispatch, navigationProp, PickAction.ACCEPT_BIN);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(showActivityModal).toBeCalledTimes(1);
+    });
+
+    it('Tests updatePalletNotFoundApiHook on 200 success and picks been created', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 200,
+          data: {
+            message: 'AT_LEAST_ONE_PICK_CREATED'
+          }
+        }
+      };
+      const toastUpdatePicklistSuccess = {
+        type: 'success',
+        text1: strings('PICKING.NEW_PICK_ADDED_TO_PICKLIST'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      };
+      updatePalletNotFoundApiHook(successApi, mockSelectedItems, mockDispatch, navigationProp);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistSuccess);
+    });
+
+    it('Tests updatePalletNotFoundApiHook on 200 success without created any picks', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 200,
+          data: {}
+        }
+      };
+      const toastUpdatePicklistSuccess = {
+        type: 'success',
+        text1: strings('PICKING.NO_PALLETS_AVAILABLE_PICK_DELETED'),
+        visibilityTime: SNACKBAR_TIMEOUT_LONG,
+        position: 'bottom'
+      };
+      updatePalletNotFoundApiHook(successApi, mockSelectedItems, mockDispatch, navigationProp);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistSuccess);
+    });
+
+    it('Tests updatePalletNotFoundApiHook on failure', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      const toastUpdatePicklistError = {
+        type: 'error',
+        text1: strings('PICKING.UPDATE_PICK_FAILED_TRY_AGAIN'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      };
+      updatePalletNotFoundApiHook(failureApi, mockSelectedItems, mockDispatch, navigationProp);
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistError);
+    });
+
+    it('Tests updatePalletNotFoundApiHook isWaiting', () => {
+      const isLoadingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      updatePalletNotFoundApiHook(isLoadingApi, mockSelectedItems, mockDispatch, navigationProp);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(showActivityModal).toBeCalledTimes(1);
     });
