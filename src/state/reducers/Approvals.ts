@@ -12,14 +12,14 @@ type Category = {
     totalItemQty: number;
   };
 }
-interface ApprovalState {
+export interface ApprovalState {
   approvalList: Array<ApprovalCategory>;
   categories: Category;
   categoryIndices: Array<number>;
   selectedItemQty: number;
   isAllSelected: boolean;
 }
-const initialState: ApprovalState = {
+export const initialState: ApprovalState = {
   approvalList: [],
   categories: {},
   categoryIndices: [],
