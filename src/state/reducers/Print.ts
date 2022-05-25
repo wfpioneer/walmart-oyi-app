@@ -31,7 +31,7 @@ import {
   PrintingType
 } from '../../models/Printer';
 
-interface StateType {
+export interface StateType {
   selectedPrinter: Printer;
   selectedSignType: PrintPaperSize;
   printerList: Printer[];
@@ -45,7 +45,7 @@ interface StateType {
   selectedPrintingType: PrintingType | null;
 }
 
-const initialState: StateType = {
+export const initialState: StateType = {
   selectedPrinter: {
     type: PrinterType.LASER,
     name: '',
