@@ -3,6 +3,8 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { AxiosError, AxiosResponse } from 'axios';
+import { object } from 'prop-types';
 import { strings } from '../../locales';
 import itemDetail from '../../mockData/getItemDetails';
 import {
@@ -25,12 +27,25 @@ let navigationProp: NavigationProp<any>;
 let routeProp: RouteProp<any, string>;
 let scrollViewProp: React.RefObject<ScrollView>;
 describe('ReviewItemDetailsScreen', () => {
-  const defaultAsyncState = {
+  const defaultAsyncState: AsyncState = {
     isWaiting: false,
     value: null,
     error: null,
     result: null
   };
+  const defaultScannedEvent = {
+    type: null,
+    value: null
+  };
+  const defaultResult: AxiosResponse = {
+    config: {},
+    data: {},
+    headers: {},
+    status: 200,
+    statusText: 'OK',
+    request: {}
+  };
+
   const mockHandleProps: (HandleProps & RenderProps) = {
     validateSessionCall: jest.fn(() => Promise.resolve()),
     trackEventCall: jest.fn(),
@@ -49,11 +64,12 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ReviewItemDetailsScreen
-          scannedEvent={undefined}
+          scannedEvent={defaultScannedEvent}
           isManualScanEnabled={false}
           isWaiting={false}
-          error={undefined}
+          error={null}
           result={{
+            ...defaultResult,
             data: itemDetail[123],
             status: 200
           }}
@@ -98,11 +114,12 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ReviewItemDetailsScreen
-          scannedEvent={undefined}
+          scannedEvent={defaultScannedEvent}
           isManualScanEnabled={false}
           isWaiting={false}
-          error={undefined}
+          error={null}
           result={{
+            ...defaultResult,
             data: {
               ...itemDetail[123],
               status: undefined
@@ -151,11 +168,12 @@ describe('ReviewItemDetailsScreen', () => {
       // Mock Item Number 456 has cloud Qty defined
       renderer.render(
         <ReviewItemDetailsScreen
-          scannedEvent={undefined}
+          scannedEvent={defaultScannedEvent}
           isManualScanEnabled={false}
           isWaiting={false}
-          error={undefined}
+          error={null}
           result={{
+            ...defaultResult,
             data: {
               ...itemDetail[456],
               status: undefined
@@ -203,11 +221,12 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ReviewItemDetailsScreen
-          scannedEvent={undefined}
+          scannedEvent={defaultScannedEvent}
           isManualScanEnabled={false}
           isWaiting={false}
-          error={undefined}
+          error={null}
           result={{
+            ...defaultResult,
             data: {
               ...itemDetail[123],
               status: undefined
@@ -253,13 +272,20 @@ describe('ReviewItemDetailsScreen', () => {
     });
     it('renders \'Item Details Api Error\' for a failed request ', () => {
       const renderer = ShallowRenderer.createRenderer();
+      const mockError: AxiosError = {
+        config: {},
+        isAxiosError: true,
+        message: '500 Network Error',
+        name: 'Network Error',
+        toJSON: () => object
+      };
       renderer.render(
         <ReviewItemDetailsScreen
-          scannedEvent={undefined}
+          scannedEvent={defaultScannedEvent}
           isManualScanEnabled={false}
           isWaiting={false}
-          error="Network Error"
-          result={undefined}
+          error={mockError}
+          result={null}
           addToPicklistStatus={defaultAsyncState}
           completeItemApi={defaultAsyncState}
           userId=""
@@ -302,11 +328,12 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ReviewItemDetailsScreen
-          scannedEvent={undefined}
+          scannedEvent={defaultScannedEvent}
           isManualScanEnabled={false}
           isWaiting={false}
-          error={undefined}
+          error={null}
           result={{
+            ...defaultResult,
             data: [],
             status: 204
           }}
@@ -351,11 +378,11 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ReviewItemDetailsScreen
-          scannedEvent={undefined}
+          scannedEvent={defaultScannedEvent}
           isManualScanEnabled={false}
           isWaiting={true}
-          error={undefined}
-          result={undefined}
+          error={null}
+          result={null}
           addToPicklistStatus={defaultAsyncState}
           completeItemApi={defaultAsyncState}
           userId=""
@@ -397,11 +424,12 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ReviewItemDetailsScreen
-          scannedEvent={undefined}
+          scannedEvent={defaultScannedEvent}
           isManualScanEnabled={false}
           isWaiting={false}
-          error={undefined}
+          error={null}
           result={{
+            ...defaultResult,
             data: itemDetail[321],
             status: 207
           }}
@@ -744,11 +772,12 @@ describe('ReviewItemDetailsScreen', () => {
 
     it('Tests handleCreatePick method', () => {
       const mockProps = {
-        scannedEvent: undefined,
+        scannedEvent: { type: null, value: null },
         isManualScanEnabled: false,
         isWaiting: false,
-        error: undefined,
+        error: null,
         result: {
+          ...defaultResult,
           data: itemDetail[321],
           status: 207
         },

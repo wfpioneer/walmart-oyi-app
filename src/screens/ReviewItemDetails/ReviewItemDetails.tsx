@@ -54,7 +54,8 @@ const GENERICS_ADD = 'GENERICS.ADD';
 const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
 
 export interface ItemDetailsScreenProps {
-  scannedEvent: any; isManualScanEnabled: boolean;
+  scannedEvent: { value: string | null; type: string | null; };
+  isManualScanEnabled: boolean;
   isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
   addToPicklistStatus: AsyncState;
   completeItemApi: AsyncState;
@@ -545,10 +546,12 @@ const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
     dispatch, navigation, trackEventCall,
     validateSessionCall
   } = props;
-  if (navigation.isFocused()) {
+  // typescript is not recognizing that scannedEvent.value has been typed checked
+  const scannedValue = scannedEvent.value;
+  if (navigation.isFocused() && scannedValue) {
     validateSessionCall(navigation, route.name).then(() => {
       dispatch({ type: GET_ITEM_DETAILS.RESET });
-      dispatch(getItemDetails({ id: scannedEvent.value }));
+      dispatch(getItemDetails({ id: parseInt(scannedValue, 10) }));
       dispatch({ type: ADD_TO_PICKLIST.RESET });
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
@@ -590,16 +593,16 @@ const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales
   : undefined);
 
 const isError = (
-  error: any,
+  error: AxiosError | null,
   errorModalVisible: boolean,
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   isManualScanEnabled: boolean,
-  scannedEvent: any,
-  userId: string,
+  scannedEvent: { value: string | null; type: string | null; },
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void
 ) => {
   if (error) {
+    const scannedValue = scannedEvent.value || '';
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
@@ -610,8 +613,8 @@ const isError = (
           <TouchableOpacity
             style={styles.errorButton}
             onPress={() => {
-              trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
-              return dispatch(getItemDetails({ id: scannedEvent.value }));
+              trackEventCall('item_details_api_retry', { barcode: scannedValue });
+              return dispatch(getItemDetails({ id: parseInt(scannedValue, 10) }));
             }}
           >
             <Text>{strings('GENERICS.RETRY')}</Text>
@@ -738,7 +741,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       setErrorModalVisible,
       isManualScanEnabled,
       scannedEvent,
-      userId,
       dispatch,
       trackEventCall
     );
