@@ -131,14 +131,16 @@ interface PriceSignProps {
   userConfig: Configurations;
 }
 
-const getPrinter = (selectedPrinter: Printer | null, selectedSignType: PrintPaperSize): LaserPaper | PortablePaper => (
+export const getPrinter = (
+  selectedPrinter: Printer | null, selectedSignType: PrintPaperSize
+): LaserPaper | PortablePaper => (
   selectedPrinter?.type === PrinterType.LASER
   // @ts-expect-error selectSignType contains keys that do not exist for each enum
     ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType]);
 
-const isValid = (actionCompleted: any, exceptionType: any) => !actionCompleted && exceptionType === 'PO';
+const isValid = (actionCompleted: boolean, exceptionType: string) => !actionCompleted && exceptionType === 'PO';
 
-const isItemSizeExists = (
+export const isItemSizeExists = (
   printQueue: PrintQueueItem[],
   selectedSignType: PrintPaperSize,
   itemNbr: number
@@ -146,10 +148,10 @@ const isItemSizeExists = (
   printItem => printItem.itemNbr === itemNbr && printItem.paperSize === selectedSignType
 );
 
-const aisleSectionExists = (printQueue: PrintQueueItem[], locationId: number) => printQueue
+export const aisleSectionExists = (printQueue: PrintQueueItem[], locationId: number) => printQueue
   .some(printLoc => printLoc.locationId === locationId);
 
-const setHandleDecreaseQty = (
+export const setHandleDecreaseQty = (
   signQty: number,
   setSignQty: React.Dispatch<React.SetStateAction<number>>
 ) => {
@@ -160,7 +162,7 @@ const setHandleDecreaseQty = (
   }
 };
 
-const setHandleIncreaseQty = (
+export const setHandleIncreaseQty = (
   signQty: number,
   setSignQty: React.Dispatch<React.SetStateAction<number>>
 ) => {
@@ -170,7 +172,7 @@ const setHandleIncreaseQty = (
     setSignQty((prevState: number) => prevState + 1);
   }
 };
-const isErrorRequired = (error: { error: boolean; message: string }) => (error.error ? (
+export const isErrorRequired = (error: { error: boolean; message: string }) => (error.error ? (
   <View style={styles.errorContainer}>
     <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
     <Text style={styles.errorText}>{error.message}</Text>
@@ -215,7 +217,7 @@ const isitemResultHasData = (itemResult: any) => (
   itemResult && itemResult.data
 );
 
-const handleAddPrintList = (
+export const handleAddPrintList = (
   printQueue: PrintQueueItem[],
   locationPrintQueue: PrintQueueItem[],
   selectedSignType: PrintPaperSize,
@@ -224,12 +226,12 @@ const handleAddPrintList = (
   exceptionType: string,
   selectedSection: LocationIdName,
   actionCompleted: boolean,
-  navigation: NavigationProp<any>,
   sectionsList: SectionItem[],
   printingLocationLabels: string,
-  dispatch: Dispatch<any>,
   getFullSectionName: (value: string) => string,
-  locationName: string
+  locationName: string,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
 ) => {
   const {
     itemName, itemNbr, upcNbr, categoryNbr
@@ -317,7 +319,8 @@ export const printSignApiHook = (
     setError({ error: false, message: '' });
   }
 };
-const printLocationApiHook = (
+
+export const printLocationApiHook = (
   printLabelAPI: AsyncState,
   navigation: NavigationProp<any>,
   setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string }>>,
@@ -341,7 +344,8 @@ const printLocationApiHook = (
     setError({ error: false, message: '' });
   }
 };
-const printPalletApiHook = (
+
+export const printPalletApiHook = (
   printPalletAPI: AsyncState,
   navigation: NavigationProp<any>,
   setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string }>>,
@@ -366,6 +370,38 @@ const printPalletApiHook = (
   }
 };
 
+export const setPrinterLayoutHook = (
+  printerList: Printer[],
+  selectedPrinter: Printer | null,
+  dispatch: Dispatch<any>,
+  printingPalletLabel: boolean,
+  printingLocationLabels: string
+) => {
+  // Just used to set the default printer the first time, since redux loads before the translations
+  const printListHasLaserPrinter = printerList.some(printer => printer.type === PrinterType.LASER);
+  if (selectedPrinter?.name === '' || !printListHasLaserPrinter) {
+    const defaultPrinter: Printer = {
+      type: PrinterType.LASER,
+      name: strings('PRINT.FRONT_DESK'),
+      desc: strings('GENERICS.DEFAULT'),
+      id: '000000000000',
+      labelsAvailable: ['price']
+    };
+    dispatch(setPriceLabelPrinter(defaultPrinter));
+    if (!printListHasLaserPrinter) {
+      dispatch(addToPrinterList(defaultPrinter));
+    }
+    savePrinter(defaultPrinter);
+  }
+  if (printingPalletLabel) {
+    dispatch(setPrintingType(PrintingType.PALLET));
+  } else if (printingLocationLabels) {
+    dispatch(setPrintingType(PrintingType.LOCATION));
+  } else {
+    dispatch(setPrintingType(PrintingType.PRICE_SIGN));
+  }
+};
+
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
     scannedEvent, exceptionType, actionCompleted, itemResult, printAPI, printLabelAPI, printPalletAPI,
@@ -375,7 +411,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   } = props;
   const itemDetailsResult = isitemResultHasData(itemResult) as ItemDetails || getMockItemDetails(scannedEvent.value);
   const {
-    itemName, itemNbr, upcNbr, categoryNbr
+    itemName, itemNbr, categoryNbr
   } = itemDetailsResult;
   const sectionsList: SectionItem[] = (sectionsResult && sectionsResult.data) || [];
 
@@ -386,31 +422,13 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const getFullSectionName = (sectionName: string) => (
     `${strings(LOCATION_SECTION)} ${selectedZone.name}${selectedAisle.name}-${sectionName}`);
 
-  useLayoutHook(() => {
-    // Just used to set the default printer the first time, since redux loads before the translations
-    const printListHasLaserPrinter = printerList.some(printer => printer.type === PrinterType.LASER);
-    if (selectedPrinter?.name === '' || !printListHasLaserPrinter) {
-      const defaultPrinter: Printer = {
-        type: PrinterType.LASER,
-        name: strings('PRINT.FRONT_DESK'),
-        desc: strings('GENERICS.DEFAULT'),
-        id: '000000000000',
-        labelsAvailable: ['price']
-      };
-      dispatch(setPriceLabelPrinter(defaultPrinter));
-      if (!printListHasLaserPrinter) {
-        dispatch(addToPrinterList(defaultPrinter));
-      }
-      savePrinter(defaultPrinter);
-    }
-    if (printingPalletLabel) {
-      dispatch(setPrintingType(PrintingType.PALLET));
-    } else if (printingLocationLabels) {
-      dispatch(setPrintingType(PrintingType.LOCATION));
-    } else {
-      dispatch(setPrintingType(PrintingType.PRICE_SIGN));
-    }
-  }, []);
+  useLayoutHook(() => setPrinterLayoutHook(
+    printerList,
+    selectedPrinter,
+    dispatch,
+    printingPalletLabel,
+    printingLocationLabels
+  ), []);
 
   // Navigation Listener
   useEffectHook(() => {
@@ -682,8 +700,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             onPress={() => handleAddPrintList(
               printQueue, locationPrintQueue, selectedSignType,
               itemDetailsResult, signQty, exceptionType, selectedSection,
-              actionCompleted, navigation, sectionsList, printingLocationLabels,
-              dispatch, getFullSectionName, getLocationName()
+              actionCompleted, sectionsList, printingLocationLabels,
+              getFullSectionName, getLocationName(), navigation, dispatch,
             )}
             disabled={isAddtoQueueDisabled(isValidQty, selectedSignType)}
           />
