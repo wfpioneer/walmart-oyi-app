@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   ADD_LOCATION_PRINT_QUEUE,
   ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE,
@@ -29,7 +30,6 @@ import {
   PrinterType,
   PrintingType
 } from '../../models/Printer';
-import _ from 'lodash';
 
 export interface StateType {
   selectedPrinter: Printer;

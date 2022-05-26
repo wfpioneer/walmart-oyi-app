@@ -1,8 +1,8 @@
 import {
   ADD_LOCATION_PRINT_QUEUE,
   ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE,
-  ADD_TO_PRINT_QUEUE,
   ADD_TO_PRINTER_LIST,
+  ADD_TO_PRINT_QUEUE,
   CLEAR_LOCATION_PRINT_QUEUE,
   DELETE_FROM_PRINTER_LIST,
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR,
@@ -12,10 +12,10 @@ import {
   SET_PALLET_LABEL_PRINTER,
   SET_PRICE_LABEL_PRINTER,
   SET_PRINTER_LIST,
-  SET_PRINT_QUEUE,
   SET_PRINTING_LOCATION_LABELS,
   SET_PRINTING_PALLET_LABEL,
   SET_PRINTING_TYPE,
+  SET_PRINT_QUEUE,
   SET_SELECTED_PRINTER,
   SET_SELECTED_SIGN_TYPE,
   UNSET_PRINTING_LOCATION_LABELS,
@@ -91,7 +91,7 @@ describe('testing action creators', () => {
     });
   });
   it('testing removeMultipleFromPrintQueueByItemNbr', () => {
-    const itemNbrs = [123456,789012];
+    const itemNbrs = [123456, 789012];
     const results = removeMultipleFromPrintQueueByItemNbr(itemNbrs);
     expect(results).toStrictEqual({
       type: REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR,
@@ -99,7 +99,7 @@ describe('testing action creators', () => {
     });
   });
   it('testing removeMultipleFromPrintQueueByUpc', () => {
-    const upcNbrs = ['123456','789012'];
+    const upcNbrs = ['123456', '789012'];
     const results = removeMultipleFromPrintQueueByUpc(upcNbrs);
     expect(results).toStrictEqual({
       type: REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC,
