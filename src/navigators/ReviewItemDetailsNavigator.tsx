@@ -17,6 +17,7 @@ import SelectLocationType from '../screens/SelectLocationType/SelectLocationType
 import { showInfoModal } from '../state/actions/Modal';
 import { openCamera } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
+import { GET_ITEM_DETAILS } from '../state/actions/asyncAPI';
 
 const Stack = createStackNavigator();
 
@@ -93,6 +94,7 @@ const ReviewItemDetailsNavigator = () => {
             // Shouldn't need to do this, but not showing on its own for some reason
             // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
             <HeaderBackButton
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...props}
               onPress={navigateBack}
             />
@@ -104,6 +106,11 @@ const ReviewItemDetailsNavigator = () => {
               {renderPrintQueueButton()}
             </View>
           )
+        }}
+        listeners={{
+          beforeRemove: () => {
+            dispatch({ type: GET_ITEM_DETAILS.RESET });
+          }
         }}
       />
       <Stack.Screen
