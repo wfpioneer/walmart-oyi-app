@@ -13,6 +13,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
   addToPicklist, createNewPick, getItemDetails, noAction
@@ -45,14 +46,17 @@ import { Configurations } from '../../models/User';
 import { CreatePickRequest } from '../../services/Picking.service';
 import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 
-const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
+export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
 const ITEM_SCAN_DOESNT_MATCH_DETAILS = 'ITEM.SCAN_DOESNT_MATCH_DETAILS';
 
 const GENERICS_ADD = 'GENERICS.ADD';
+const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
+
 export interface ItemDetailsScreenProps {
-  scannedEvent: any; isManualScanEnabled: boolean;
-  isWaiting: boolean; error: any; result: any;
+  scannedEvent: { value: string | null; type: string | null; };
+  isManualScanEnabled: boolean;
+  isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
   addToPicklistStatus: AsyncState;
   completeItemApi: AsyncState;
   createNewPickApi: AsyncState;
@@ -88,6 +92,7 @@ export interface HandleProps {
   setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   dispatch: Dispatch<any>;
 }
+
 export interface RenderProps {
   actionCompleted: boolean;
   completeItemApi: AsyncState;
@@ -98,7 +103,7 @@ export interface RenderProps {
   userConfigs: Configurations;
 }
 
-const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
+export const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
   const {
     navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId
   } = props;
@@ -108,7 +113,7 @@ const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
-const handleLocationAction = (props: HandleProps, itemDetails: ItemDetails) => {
+export const handleLocationAction = (props: HandleProps, itemDetails: ItemDetails) => {
   const {
     navigation, trackEventCall, validateSessionCall, route, userId
   } = props;
@@ -118,7 +123,7 @@ const handleLocationAction = (props: HandleProps, itemDetails: ItemDetails) => {
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
-const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
+export const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
   const {
     navigation, trackEventCall, validateSessionCall, route, userId, dispatch
   } = props;
@@ -336,7 +341,9 @@ export const renderLocationComponent = (
     </View>
   );
 };
+
 const MULTI_STATUS = 207;
+
 export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
   result: any, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
   if (result && result.status !== MULTI_STATUS) {
@@ -360,6 +367,7 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
     </View>
   );
 };
+
 const completeAction = () => {
   // TODO: reinstantiate when ios device support is needed
   // dispatch(actionCompletedAction());
@@ -441,14 +449,16 @@ export const renderBarcodeErrorModal = (
     </View>
   </CustomModalComponent>
 );
-const getFloorItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.floor
+export const getFloorItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.floor
   ? itemDetails.location.floor : []);
-const getReserveItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.reserve
-  ? itemDetails.location.reserve : []);
-const isItemDetailsCompleted = (itemDetails: ItemDetails) => (itemDetails.exceptionType ? itemDetails.completed : true);
 
-const onValidateItemDetails = (props: ItemDetailsScreenProps, itemDetails: ItemDetails) => {
-  const { dispatch } = props;
+export const getReserveItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.reserve
+  ? itemDetails.location.reserve : []);
+
+export const isItemDetailsCompleted = (itemDetails: ItemDetails) => (itemDetails.exceptionType
+  ? itemDetails.completed : true);
+
+export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: ItemDetails) => {
   if (itemDetails) {
     dispatch(setupScreen(
       itemDetails.itemNbr,
@@ -462,7 +472,8 @@ const onValidateItemDetails = (props: ItemDetailsScreenProps, itemDetails: ItemD
     ));
   }
 };
-const callBackbarcodeEmitter = (props: ItemDetailsScreenProps, scan: any, itemDetails: ItemDetails) => {
+
+export const callBackbarcodeEmitter = (props: ItemDetailsScreenProps, scan: any, itemDetails: ItemDetails) => {
   const {
     userId,
     actionCompleted,
@@ -517,7 +528,7 @@ export const handleCreateNewPick = (
   dispatch(createNewPick(createPickPayload));
 };
 
-const onValidateBackPress = (props: ItemDetailsScreenProps) => {
+export const onValidateBackPress = (props: ItemDetailsScreenProps) => {
   const {
     exceptionType, actionCompleted, dispatch, trackEventCall
   } = props;
@@ -536,21 +547,26 @@ const onValidateBackPress = (props: ItemDetailsScreenProps) => {
   dispatch(setManualScan(false));
   return false;
 };
-const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
+
+export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
   const {
     scannedEvent, userId, route,
     dispatch, navigation, trackEventCall,
     validateSessionCall
   } = props;
+
   if (navigation.isFocused()) {
     validateSessionCall(navigation, route.name).then(() => {
-      dispatch({ type: GET_ITEM_DETAILS.RESET });
-      dispatch(getItemDetails({ id: scannedEvent.value }));
-      dispatch({ type: ADD_TO_PICKLIST.RESET });
+      if (scannedEvent.value) {
+        dispatch({ type: GET_ITEM_DETAILS.RESET });
+        dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
+        dispatch({ type: ADD_TO_PICKLIST.RESET });
+      }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
 };
-const onIsWaiting = (isWaiting: boolean) => (
+
+export const onIsWaiting = (isWaiting: boolean) => (
   isWaiting && (
     <ActivityIndicator
       animating={isWaiting}
@@ -561,7 +577,8 @@ const onIsWaiting = (isWaiting: boolean) => (
     />
   )
 );
-const onValidateCompleteItemApiResultHook = (props: ItemDetailsScreenProps, completeItemApi: AsyncState) => {
+
+export const onValidateCompleteItemApiResultHook = (props: ItemDetailsScreenProps, completeItemApi: AsyncState) => {
   const { dispatch, navigation } = props;
   if (_.get(completeItemApi.result, 'status') === 204) {
     dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
@@ -570,7 +587,8 @@ const onValidateCompleteItemApiResultHook = (props: ItemDetailsScreenProps, comp
     navigation.goBack();
   }
 };
-const onValidateCompleteItemApiErrortHook = (props: ItemDetailsScreenProps, completeItemApi: AsyncState) => {
+
+export const onValidateCompleteItemApiErrortHook = (props: ItemDetailsScreenProps, completeItemApi: AsyncState) => {
   const { dispatch } = props;
   if (completeItemApi.error === COMPLETE_API_409_ERROR) {
     dispatch(showInfoModal(strings(ITEM_SCAN_DOESNT_MATCH), strings(ITEM_SCAN_DOESNT_MATCH_DETAILS)));
@@ -578,37 +596,40 @@ const onValidateCompleteItemApiErrortHook = (props: ItemDetailsScreenProps, comp
     dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
   }
 };
-const getLocationCount = (props: ItemDetailsScreenProps) => {
+
+export const getLocationCount = (props: ItemDetailsScreenProps) => {
   const { floorLocations, reserveLocations } = props;
   return (floorLocations?.length ?? 0) + (reserveLocations?.length ?? 0);
 };
-const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales.lastUpdateTs')
+
+export const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales.lastUpdateTs')
   ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
   : undefined);
 
-const isError = (
-  error: any,
+export const isError = (
+  error: AxiosError | null,
   errorModalVisible: boolean,
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   isManualScanEnabled: boolean,
-  scannedEvent: any,
-  userId: string,
+  scannedEvent: { value: string | null; type: string | null; },
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void
 ) => {
   if (error) {
+    const scannedValue = scannedEvent.value || '';
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-        {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
+        {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
           <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
           <TouchableOpacity
+            testID="scanErrorRetry"
             style={styles.errorButton}
             onPress={() => {
-              trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
-              return dispatch(getItemDetails({ id: scannedEvent.value }));
+              trackEventCall('item_details_api_retry', { barcode: scannedValue });
+              return dispatch(getItemDetails({ id: parseInt(scannedValue, 10) }));
             }}
           >
             <Text>{strings('GENERICS.RETRY')}</Text>
@@ -621,14 +642,16 @@ const isError = (
     <View />
   );
 };
-const getexceptionType = (actionCompleted: boolean, itemDetails: ItemDetails) => (!actionCompleted
+
+export const getExceptionType = (actionCompleted: boolean, itemDetails: ItemDetails) => (!actionCompleted
   ? itemDetails.exceptionType : undefined);
-const gettopRightBtnTxt = (locationCount: number) => (locationCount && locationCount >= 1
+
+export const getTopRightBtnTxt = (locationCount: number) => (locationCount && locationCount >= 1
   ? strings('GENERICS.SEE_ALL') : strings(GENERICS_ADD));
-const getPendingOnHandsQty = (props: ItemDetailsScreenProps, pendingOnHandsQty: number) => {
-  const { userFeatures } = props;
-  return (pendingOnHandsQty === -999 && userFeatures.includes('on hands change'));
-};
+
+export const getPendingOnHandsQty = (userFeatures: string[], pendingOnHandsQty: number) => (pendingOnHandsQty === -999
+  && userFeatures.includes('on hands change'));
+
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
@@ -651,7 +674,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     validateSessionCall,
     useEffectHook,
     useFocusEffectHook,
-    floorLocations
+    floorLocations, userFeatures
   } = props;
 
   useEffectHook(() => () => {
@@ -675,7 +698,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   // Set Item Details
   useEffectHook(() => {
-    onValidateItemDetails(props, itemDetails);
+    onValidateItemDetails(dispatch, itemDetails);
   }, [itemDetails]);
 
   // Barcode event listener effect
@@ -687,6 +710,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       scanSubscription.remove();
     };
   }, [itemDetails, actionCompleted]);
+
   // Complete Item Details API
   useEffectHook(() => {
     // on api success
@@ -696,7 +720,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     }
   }, [completeItemApi]);
 
-  useEffect(
+  useEffectHook(
     () => createNewPickApiHook(
       createNewPickApi,
       dispatch,
@@ -734,7 +758,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       setErrorModalVisible,
       isManualScanEnabled,
       scannedEvent,
-      userId,
       dispatch,
       trackEventCall
     );
@@ -744,7 +767,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-        {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
+        {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
           <Text style={styles.errorText}>{strings('ITEM.ITEM_NOT_FOUND')}</Text>
@@ -774,14 +797,14 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
-      dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
+      dispatch({ type: GET_ITEM_DETAILS.RESET });
       dispatch(getItemDetails({ id: itemDetails.itemNbr }));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 
   return (
     <View style={styles.safeAreaView}>
-      {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
+      {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
       {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
       <CustomModalComponent
         isVisible={ohQtyModalVisible}
@@ -827,13 +850,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               status={itemDetails.status || ''}
               category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
               price={itemDetails.price}
-              exceptionType={getexceptionType(actionCompleted, itemDetails)}
+              exceptionType={getExceptionType(actionCompleted, itemDetails)}
               navigationForPrint={navigation}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}
               iconName="pallet"
-              topRightBtnTxt={getPendingOnHandsQty(props, pendingOnHandsQty)
+              topRightBtnTxt={getPendingOnHandsQty(userFeatures, pendingOnHandsQty)
                 ? strings('GENERICS.CHANGE') : undefined}
               topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
             >
@@ -858,7 +881,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             <SFTCard
               iconName="map-marker-alt"
               title={`${strings('ITEM.LOCATION')}(${locationCount})`}
-              topRightBtnTxt={gettopRightBtnTxt(locationCount)}
+              topRightBtnTxt={getTopRightBtnTxt(locationCount)}
               topRightBtnAction={() => handleLocationAction(props, itemDetails)}
             >
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
@@ -872,6 +895,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     </View>
   );
 };
+
 const ReviewItemDetails = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
