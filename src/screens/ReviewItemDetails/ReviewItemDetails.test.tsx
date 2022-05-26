@@ -9,6 +9,8 @@ import { fireEvent, render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { AxiosError, AxiosResponse } from 'axios';
+import { object } from 'prop-types';
 import { strings } from '../../locales';
 import itemDetail from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
@@ -98,7 +100,7 @@ const mockHandleProps: (HandleProps & RenderProps) = {
 };
 
 const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
-  scannedEvent: { value: 'test', type: 'UPC-A' },
+  scannedEvent: { value: '123', type: 'UPC-A' },
   isManualScanEnabled: false,
   isWaiting: false,
   error: null,
@@ -139,6 +141,25 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
 };
 
 describe('ReviewItemDetailsScreen', () => {
+  const defaultScannedEvent = {
+    type: null,
+    value: null
+  };
+  const defaultResult: AxiosResponse = {
+    config: {},
+    data: {},
+    headers: {},
+    status: 200,
+    statusText: 'OK',
+    request: {}
+  };
+  const mockError: AxiosError = {
+    config: {},
+    isAxiosError: true,
+    message: '500 Network Error',
+    name: 'Network Error',
+    toJSON: () => object
+  };
   describe('Tests renders ItemDetails API Responses', () => {
     const actualNav = jest.requireActual('@react-navigation/native');
     const navContextValue = {
@@ -163,6 +184,7 @@ describe('ReviewItemDetailsScreen', () => {
       const testProps = {
         ...mockItemDetailsScreenProps,
         result: {
+          ...defaultResult,
           data: itemDetail[123],
           status: 200
         },
@@ -181,6 +203,7 @@ describe('ReviewItemDetailsScreen', () => {
       const testProps = {
         ...mockItemDetailsScreenProps,
         result: {
+          ...defaultResult,
           data: itemDetail[123],
           status: 200
         },
@@ -200,6 +223,7 @@ describe('ReviewItemDetailsScreen', () => {
       const testProps = {
         ...mockItemDetailsScreenProps,
         result: {
+          ...defaultResult,
           data: itemDetail[123],
           status: 200
         },
@@ -219,6 +243,7 @@ describe('ReviewItemDetailsScreen', () => {
       const testProps = {
         ...mockItemDetailsScreenProps,
         result: {
+          ...defaultResult,
           data: itemDetail[123],
           status: 200
         },
@@ -238,6 +263,7 @@ describe('ReviewItemDetailsScreen', () => {
       const testProps = {
         ...mockItemDetailsScreenProps,
         result: {
+          ...defaultResult,
           data: {
             ...itemDetail[123],
             status: undefined
@@ -259,6 +285,7 @@ describe('ReviewItemDetailsScreen', () => {
       const testProps = {
         ...mockItemDetailsScreenProps,
         result: {
+          ...defaultResult,
           data: {
             ...itemDetail[456],
             status: undefined
@@ -281,6 +308,7 @@ describe('ReviewItemDetailsScreen', () => {
       const testProps = {
         ...mockItemDetailsScreenProps,
         result: {
+          ...defaultResult,
           data: {
             ...itemDetail[123],
             status: undefined
@@ -302,11 +330,12 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders \'Item Details Api Error\' for a failed request ', () => {
       const testProps = {
         ...mockItemDetailsScreenProps,
-        error: 'Network Error',
+        error: mockError,
         exceptionType: '',
         pendingOnHandsQty: 0
       };
       const renderer = ShallowRenderer.createRenderer();
+
       renderer.render(
         <ReviewItemDetailsScreen {...testProps} />
       );
@@ -316,6 +345,7 @@ describe('ReviewItemDetailsScreen', () => {
       const testProps = {
         ...mockItemDetailsScreenProps,
         result: {
+          ...defaultResult,
           data: [],
           status: 204
         },
@@ -345,6 +375,7 @@ describe('ReviewItemDetailsScreen', () => {
       const testProps = {
         ...mockItemDetailsScreenProps,
         result: {
+          ...defaultResult,
           data: itemDetail[321],
           status: 207
         },
@@ -665,6 +696,7 @@ describe('ReviewItemDetailsScreen', () => {
       const mockProps = {
         ...mockItemDetailsScreenProps,
         result: {
+          ...defaultResult,
           data: itemDetail[321],
           status: 207
         },
@@ -943,7 +975,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('test onValidateScannedEvent', async () => {
       const expectedGetItemDetailsAction = {
         payload: {
-          id: 'test'
+          id: 123
         },
         type: 'SAGA/GET_ITEM_DETAILS'
       };
@@ -1034,17 +1066,16 @@ describe('ReviewItemDetailsScreen', () => {
     it('test isError', () => {
       const expectedGetItemDetailAction = {
         payload: {
-          id: '1234567890098'
+          id: 1234567890098
         },
         type: 'SAGA/GET_ITEM_DETAILS'
       };
       const { getByTestId, rerender, toJSON } = render(isError(
-        'test',
+        mockError,
         true,
         jest.fn(),
         false,
         { value: '1234567890098', type: 'UPC-A' },
-        'testUser',
         mockDispatch,
         jest.fn()
       ));
@@ -1053,12 +1084,11 @@ describe('ReviewItemDetailsScreen', () => {
       fireEvent.press(retryButton);
       expect(mockDispatch).toHaveBeenCalledWith(expectedGetItemDetailAction);
       rerender(isError(
-        'test',
+        mockError,
         false,
         jest.fn(),
         false,
         { value: '1234567890098', type: 'UPC-A' },
-        'testUser',
         mockDispatch,
         jest.fn()
       ));
@@ -1069,7 +1099,6 @@ describe('ReviewItemDetailsScreen', () => {
         jest.fn(),
         false,
         { value: '1234567890098', type: 'UPC-A' },
-        'testUser',
         mockDispatch,
         jest.fn()
       ));

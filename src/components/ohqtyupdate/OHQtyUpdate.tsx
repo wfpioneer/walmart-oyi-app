@@ -87,7 +87,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   const [apiSubmitting, updateApiSubmitting] = useState(false);
   const [error, updateError] = useState('');
   const { result } = useTypedSelector(state => state.async.getItemDetails);
-  const itemDetails: ItemDetails = result.data;
+  const itemDetails: ItemDetails = result?.data;
   const updateQuantityAPIStatus = useTypedSelector(state => state.async.updateOHQty);
   const dispatch = useDispatch();
   // Update Quantity API
