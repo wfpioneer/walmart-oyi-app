@@ -100,7 +100,7 @@ const mockHandleProps: (HandleProps & RenderProps) = {
 };
 
 const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
-  scannedEvent: { value: 'test', type: 'UPC-A' },
+  scannedEvent: { value: '123', type: 'UPC-A' },
   isManualScanEnabled: false,
   isWaiting: false,
   error: null,
@@ -975,7 +975,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('test onValidateScannedEvent', async () => {
       const expectedGetItemDetailsAction = {
         payload: {
-          id: 'test'
+          id: 123
         },
         type: 'SAGA/GET_ITEM_DETAILS'
       };
@@ -1066,7 +1066,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('test isError', () => {
       const expectedGetItemDetailAction = {
         payload: {
-          id: '1234567890098'
+          id: 1234567890098
         },
         type: 'SAGA/GET_ITEM_DETAILS'
       };
