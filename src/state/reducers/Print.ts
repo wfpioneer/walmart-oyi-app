@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   ADD_LOCATION_PRINT_QUEUE,
   ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE,
@@ -22,7 +23,6 @@ import {
   UNSET_PRINTING_LOCATION_LABELS,
   UNSET_PRINTING_PALLET_LABEL
 } from '../actions/Print';
-
 import {
   PrintPaperSize,
   PrintQueueItem,
@@ -31,7 +31,7 @@ import {
   PrintingType
 } from '../../models/Printer';
 
-interface StateType {
+export interface StateType {
   selectedPrinter: Printer;
   selectedSignType: PrintPaperSize;
   printerList: Printer[];
@@ -45,7 +45,7 @@ interface StateType {
   selectedPrintingType: PrintingType | null;
 }
 
-const initialState: StateType = {
+export const initialState: StateType = {
   selectedPrinter: {
     type: PrinterType.LASER,
     name: '',
@@ -72,7 +72,8 @@ const initialState: StateType = {
 };
 
 export const Print = (state = initialState, action: Actions): StateType => {
-  const { printerList, printQueue, locationPrintQueue } = state;
+  const clonedPrinterList = _.cloneDeep(state.printerList);
+  const clonedPrintQueue = _.cloneDeep(state.printQueue);
   switch (action.type) {
     case SET_SELECTED_PRINTER:
       return {
@@ -91,39 +92,33 @@ export const Print = (state = initialState, action: Actions): StateType => {
         selectedSignType: action.payload
       };
     case ADD_TO_PRINTER_LIST:
-      printerList.push(action.payload);
-
       return {
         ...state,
-        printerList
+        printerList: [...state.printerList, action.payload]
       };
     case DELETE_FROM_PRINTER_LIST:
       // eslint-disable-next-line no-case-declarations
-      const deleteIndex = printerList.findIndex(
+      const deleteIndex = clonedPrinterList.findIndex(
         item => item.id === action.payload
       );
-      printerList.splice(deleteIndex, 1);
+      clonedPrinterList.splice(deleteIndex, 1);
       return {
         ...state,
-        printerList
+        printerList: clonedPrinterList
       };
     case ADD_TO_PRINT_QUEUE:
-      printQueue.push(action.payload);
-
       return {
         ...state,
-        printQueue
+        printQueue: [...state.printQueue, action.payload]
       };
     case ADD_MULTIPLE_TO_LOCATION_PRINT_QUEUE:
-      // eslint-disable-next-line no-case-declarations
-      const newLocationPrintQueue: PrintQueueItem[] = locationPrintQueue.concat(action.payload);
       return {
         ...state,
-        locationPrintQueue: newLocationPrintQueue
+        locationPrintQueue: [...state.locationPrintQueue, ...action.payload]
       };
     case REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR: {
       const newQueue: PrintQueueItem[] = [];
-      printQueue.forEach(item => {
+      clonedPrintQueue.forEach(item => {
         if (!item.itemNbr || (item.itemNbr && !action.payload.includes(item.itemNbr))) {
           newQueue.push(item);
         }
@@ -135,7 +130,7 @@ export const Print = (state = initialState, action: Actions): StateType => {
     }
     case REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC: {
       const newQueue: PrintQueueItem[] = [];
-      printQueue.forEach(item => {
+      clonedPrintQueue.forEach(item => {
         if (!item.upcNbr || (item.upcNbr && !action.payload.includes(item.upcNbr))) {
           newQueue.push(item);
         }
@@ -171,10 +166,9 @@ export const Print = (state = initialState, action: Actions): StateType => {
         printingPalletLabel: false
       };
     case ADD_LOCATION_PRINT_QUEUE:
-      locationPrintQueue.push(action.payload);
       return {
         ...state,
-        locationPrintQueue
+        locationPrintQueue: [...state.locationPrintQueue, action.payload]
       };
     case CLEAR_LOCATION_PRINT_QUEUE:
       return {
