@@ -6,48 +6,66 @@ import {
   toggleItem
 } from '../actions/Approvals';
 import { ApprovalState, Approvals, initialState } from './Approvals';
+import { mockApprovals } from '../../mockData/mockApprovalList';
+import { convertApprovalListData } from '../../screens/ApprovalList/ApprovalList';
 
 describe('testing Worklist reducer', () => {
   it('testing Worklist reducer', () => {
     // Intitial State
     const testInitialState = initialState;
+    const { filteredData, headerIndices } = convertApprovalListData(mockApprovals);
     // Changed state
-    let testChangedState: ApprovalState = {
+    const testChangedState: ApprovalState = {
       ...initialState,
-      
+      categories: {
+        1: {
+          checkedItemQty: 0,
+          totalItemQty: 1
+        },
+        2: {
+          checkedItemQty: 0,
+          totalItemQty: 3
+        }
+      },
+      approvalList: filteredData,
+      categoryIndices: headerIndices
     };
-    // toggleMenu action
-    let testResults = toggleItem(testInitialState, toggleMenu(true));
+    let testResults = Approvals(testInitialState, setApprovalList(filteredData, headerIndices));
     expect(testResults).toStrictEqual(testChangedState);
-    testChangedState = { ...initialState, menuOpen: false };
-    testResults = worklist(testInitialState, toggleMenu(false));
+    testResults = Approvals(testChangedState, toggleCategory(1, true));
+    testChangedState.selectedItemQty = 1;
+    testChangedState.categories[1].checkedItemQty = 1;
+    testChangedState.approvalList[0].isChecked = true;
+    testChangedState.approvalList[1].isChecked = true;
     expect(testResults).toStrictEqual(testChangedState);
-    // toggleCategories action
-    testChangedState = { ...initialState, categoryOpen: false };
-    testResults = worklist(testInitialState, toggleCategories(false));
+    testResults = Approvals(testChangedState, toggleCategory(1, false));
+    testChangedState.selectedItemQty = 0;
+    testChangedState.categories[1].checkedItemQty = 0;
+    testChangedState.approvalList[0].isChecked = false;
+    testChangedState.approvalList[1].isChecked = false;
     expect(testResults).toStrictEqual(testChangedState);
-    testChangedState = { ...initialState, categoryOpen: true };
-    testResults = worklist(testInitialState, toggleCategories(true));
+    const mockItemNumber = 123;
+    const mockIsSelected = true;
+    testResults = Approvals(testChangedState, toggleItem(mockItemNumber, mockIsSelected));
+    testChangedState.selectedItemQty = 1;
+    testChangedState.categories[1].checkedItemQty = 1;
+    testChangedState.approvalList[0].isChecked = true;
+    testChangedState.approvalList[1].isChecked = true;
     expect(testResults).toStrictEqual(testChangedState);
-    // toggleExceptions action
-    testChangedState = { ...initialState, exceptionOpen: false };
-    testResults = worklist(testInitialState, toggleExceptions(false));
+    const mockIsSelectedAllItems = true;
+    testResults = Approvals(testChangedState, toggleAllItems(mockIsSelectedAllItems));
+    testChangedState.isAllSelected = true;
+    testChangedState.selectedItemQty = 4;
+    testChangedState.categories[1].checkedItemQty = testChangedState.categories[1].totalItemQty;
+    testChangedState.categories[2].checkedItemQty = testChangedState.categories[2].totalItemQty;
+    testChangedState.approvalList = testChangedState.approvalList.map(list => {
+      list.isChecked = true;
+      return list;
+    });
     expect(testResults).toStrictEqual(testChangedState);
-    testChangedState = { ...initialState, exceptionOpen: true };
-    testResults = worklist(testInitialState, toggleExceptions(true));
+    testResults = Approvals(testChangedState, setApprovalList(filteredData, headerIndices));
     expect(testResults).toStrictEqual(testChangedState);
-    // updateFilterCategories action
-    const testFilterCategories = ['3 - OFFICE SUPPLIES', '31 - OFFICE ELECTRONICS'];
-    testChangedState = { ...initialState, filterCategories: testFilterCategories };
-    testResults = worklist(testInitialState, updateFilterCategories(testFilterCategories));
-    expect(testResults).toStrictEqual(testChangedState);
-    // updateFilterExceptions action
-    const testFilterExceptions = ['PO'];
-    testChangedState = { ...initialState, filterExceptions: testFilterExceptions };
-    testResults = worklist(testInitialState, updateFilterExceptions(testFilterExceptions));
-    expect(testResults).toStrictEqual(testChangedState);
-    // clearFilter action
-    testResults = worklist(testInitialState, clearFilter());
+    testResults = Approvals(testChangedState, resetApprovals());
     expect(testResults).toStrictEqual(testInitialState);
   });
 });
