@@ -21,7 +21,6 @@ enum SALES_DAYS {
 
 const SALES_LAST_UPDATE_TS = '2020-07-15T08:02:17-05:00';
 
-
 export default {
   '123': {
     itemName: 'Test Item That is Really, Really Long (and has parenthesis)',
