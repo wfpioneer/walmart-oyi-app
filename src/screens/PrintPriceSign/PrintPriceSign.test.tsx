@@ -3,18 +3,25 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, Route } from '@react-navigation/native';
 import _ from 'lodash';
 import Toast from 'react-native-toast-message';
+import { fireEvent, render } from '@testing-library/react-native';
 import ItemDetails from '../../models/ItemDetails';
 import {
   PrintPriceSignScreen,
   aisleSectionExists,
+  checkQuantity,
   getPrinter,
   handleAddPrintList,
+  handleChangePrinter,
+  handlePrint,
   isErrorRequired,
   isItemSizeExists,
+  isValidDispatch,
+  navListenerHook,
   printLocationApiHook,
   printPalletApiHook,
   printSignApiHook,
   renderSignSizeButtons,
+  selectQuantityView,
   setHandleDecreaseQty,
   setHandleIncreaseQty,
   setPrinterLayoutHook,
@@ -33,6 +40,7 @@ import {
 import { mockSections } from '../../mockData/sectionDetails';
 import { LocationIdName } from '../../state/reducers/Location';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { validateSession } from '../../utils/sessionTimeout';
 
 // Something gets into a weird state, and this seems to fix it
 jest.useFakeTimers();
@@ -45,7 +53,11 @@ jest.mock('../../utils/AppCenterTool', () => {
     trackEvent: jest.fn()
   };
 });
-jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
+jest.mock('../../utils/sessionTimeout.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/sessTimeout'),
+  validateSession: jest.fn().mockImplementation(() => Promise.resolve())
+}));
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -62,7 +74,10 @@ const navigationProp: NavigationProp<any> = {
   navigate: jest.fn()
 };
 
-let routeProp: Route<any>;
+const routeProp: Route<any> = {
+  key: '',
+  name: 'PrintPriceSign'
+};
 describe('PrintPriceSignScreen', () => {
   const defaultError = {
     error: false,
@@ -85,10 +100,10 @@ describe('PrintPriceSignScreen', () => {
     id: '123000000000',
     labelsAvailable: ['price']
   };
-  const testItem: ItemDetails = mockItemDetails[123];
+  const testItem: ItemDetails = mockItemDetails[123]; // consistency
   const emptyLocation = { id: 0, name: '' };
   const nonemptyLocation = { id: 1, name: 'yes' };
-  const mockPalletInfo = { id: 6 };
+  const mockPalletInfo = { id: '6' };
   const mockPrinterList = [
     {
       type: 0,
@@ -468,7 +483,12 @@ describe('PrintPriceSignScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
 
       renderer.render(
-        renderSignSizeButtons(defaultPrinter, testItem.categoryNbr, 'XSmall', jest.fn())
+        renderSignSizeButtons(
+          defaultPrinter,
+          testItem.categoryNbr,
+          'XSmall',
+          jest.fn()
+        )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -483,7 +503,12 @@ describe('PrintPriceSignScreen', () => {
         id: '456000000000'
       };
       renderer.render(
-        renderSignSizeButtons(portablePrinter, testItem.categoryNbr, 'XSmall', jest.fn())
+        renderSignSizeButtons(
+          portablePrinter,
+          testItem.categoryNbr,
+          'XSmall',
+          jest.fn()
+        )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -516,6 +541,7 @@ describe('PrintPriceSignScreen', () => {
   describe('Tests PrintPriceSign Functions', () => {
     const mockDispatch = jest.fn();
     const mockSetError = jest.fn();
+    const mockSetSignQty = jest.fn();
     const printSuccessApi: AsyncState = {
       ...defaultAsyncState,
       result: {
@@ -540,6 +566,10 @@ describe('PrintPriceSignScreen', () => {
         id: '111111111111'
       }
     ];
+    const mockSelectedSection: LocationIdName = {
+      id: 3,
+      name: '1'
+    };
     it('Tests PrintSignApiHook', () => {
       printSignApiHook(
         printSuccessApi,
@@ -690,7 +720,6 @@ describe('PrintPriceSignScreen', () => {
     });
 
     it('Tests setHandleDecreaseQty function', () => {
-      const mockSetSignQty = jest.fn();
       setHandleDecreaseQty(200, mockSetSignQty);
       expect(mockSetSignQty).toHaveBeenCalledWith(100);
 
@@ -699,7 +728,6 @@ describe('PrintPriceSignScreen', () => {
     });
 
     it('Tests setHandleIncreaseQty function', () => {
-      const mockSetSignQty = jest.fn();
       setHandleIncreaseQty(0, mockSetSignQty);
       expect(mockSetSignQty).toHaveBeenCalledWith(1);
 
@@ -731,12 +759,8 @@ describe('PrintPriceSignScreen', () => {
         sectionName => `${strings('LOCATION.SECTION')} TEST1-${sectionName}`
       );
       const sectionLocName = `${strings('LOCATION.AISLE')} TEST1-2`;
-      const mockSelectedSection: LocationIdName = {
-        id: 3,
-        name: '1'
-      };
       const mockItemDetailsExists: ItemDetails = {
-        ...mockItemDetails[123],
+        ...testItem,
         itemNbr: 123456
       };
       handleAddPrintList(
@@ -756,15 +780,19 @@ describe('PrintPriceSignScreen', () => {
         mockDispatch
       );
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(trackEvent).toBeCalledTimes(1);
+      expect(trackEvent).toHaveBeenCalledWith('print_already_exists_in_queue', {
+        itemName: testItem.itemName,
+        selectedSignType: 'Small'
+      });
       mockDispatch.mockClear();
+      // @ts-expect-error Reset trackEvent Call
       trackEvent.mockClear();
 
       handleAddPrintList(
         mockPrintQueue,
         mockLocationPrintQueue,
         'Small',
-        mockItemDetails[123],
+        testItem,
         1,
         'C',
         mockSelectedSection,
@@ -777,16 +805,19 @@ describe('PrintPriceSignScreen', () => {
         mockDispatch
       );
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(trackEvent).toHaveBeenCalledWith('print_add_to_print_queue',
-        expect.any(Object));
+      expect(trackEvent).toHaveBeenCalledWith(
+        'print_add_to_print_queue',
+        expect.any(Object)
+      );
       mockDispatch.mockClear();
+      // @ts-expect-error Reset trackEvent Call
       trackEvent.mockClear();
 
       handleAddPrintList(
         mockPrintQueue,
         mockLocationPrintQueue,
         'Small',
-        mockItemDetails[123],
+        testItem,
         1,
         'C',
         mockSelectedSection,
@@ -803,6 +834,153 @@ describe('PrintPriceSignScreen', () => {
         'print_add_to_loc_print_queue',
         expect.any(Object)
       );
+      mockDispatch.mockClear();
+      // @ts-expect-error Reset trackEvent Call
+      trackEvent.mockClear();
+
+      handleAddPrintList(
+        mockPrintQueue,
+        mockLocationPrintQueue,
+        'Small',
+        testItem,
+        1,
+        'C',
+        mockSelectedSection,
+        false,
+        mockSections,
+        LocationName.SECTION,
+        mockGetFullSectionName,
+        sectionLocName,
+        navigationProp,
+        mockDispatch
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(trackEvent).toHaveBeenCalledWith(
+        'print_add_to_loc_print_queue',
+        expect.any(Object)
+      );
+      expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests checkQuantity function', () => {
+      const mockSetIsValidQty = jest.fn();
+      checkQuantity(50, mockSetIsValidQty, mockSetSignQty);
+
+      expect(mockSetSignQty).toHaveBeenCalledWith(50);
+      expect(mockSetIsValidQty).toHaveBeenCalled();
+    });
+
+    it('Tests isValidDispatch function', () => {
+      isValidDispatch(mockDispatch, true, 'NSFL');
+      expect(mockDispatch).not.toHaveBeenCalled();
+      isValidDispatch(mockDispatch, false, 'PO');
+      expect(mockDispatch).toHaveBeenCalled();
+    });
+
+    it('Tests handlePrint function', () => {
+      handlePrint(
+        navigationProp,
+        routeProp,
+        mockDispatch,
+        '',
+        mockSections,
+        5,
+        null,
+        mockSelectedSection,
+        false,
+        1,
+        123456,
+        'Small',
+        'C'
+      );
+      expect(validateSession).toHaveBeenCalled();
+    });
+
+    it('Tests handleChangePrinter function', () => {
+      handleChangePrinter(navigationProp, routeProp);
+      expect(validateSession).toHaveBeenCalled();
+    });
+    it('Tests PrintPriceSign buttons', () => {
+      const portablePrinter: Printer = {
+        ...defaultPrinter,
+        type: 1
+      };
+      const mockSetIsValidQty = jest.fn();
+      const { getByText } = render(
+        <PrintPriceSignScreen
+          scannedEvent={defaultScanEvent}
+          exceptionType=""
+          actionCompleted={false}
+          itemResult={null}
+          printAPI={defaultAsyncState}
+          printLabelAPI={defaultAsyncState}
+          printPalletAPI={defaultAsyncState}
+          palletInfo={mockPalletInfo}
+          sectionsResult={[]}
+          selectedPrinter={portablePrinter}
+          selectedSignType="XSmall"
+          printQueue={[]}
+          locationPrintQueue={[]}
+          printingLocationLabels={LocationName.SECTION}
+          printingPalletLabel={true}
+          selectedAisle={_.cloneDeep(nonemptyLocation)}
+          selectedSection={_.cloneDeep(nonemptyLocation)}
+          selectedZone={_.cloneDeep(nonemptyLocation)}
+          dispatch={mockDispatch}
+          navigation={navigationProp}
+          route={routeProp}
+          signQty={1}
+          setSignQty={jest.fn()}
+          isValidQty={true}
+          setIsValidQty={mockSetIsValidQty}
+          error={defaultError}
+          setError={jest.fn()}
+          useEffectHook={jest.fn()}
+          useLayoutHook={jest.fn()}
+          printerList={mockPrinterList}
+          userConfig={mockUserConfig}
+        />
+      );
+      const addPrintQueueButton = getByText(strings('PRINT.ADD_TO_QUEUE'));
+      const addPrintButton = getByText(strings('PRINT.PRINT'));
+
+      mockDispatch.mockClear();
+      fireEvent.press(addPrintQueueButton);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(trackEvent).toHaveBeenCalled();
+
+      fireEvent.press(addPrintButton);
+      expect(validateSession).toHaveBeenCalled();
+    });
+
+    it('Tests selectQuantityView buttons', () => {
+      const mockSetIsValidQty = jest.fn();
+      const { getByTestId } = render(
+        selectQuantityView(mockSetIsValidQty, 50, mockSetSignQty, true)
+      );
+
+      const minusButton = getByTestId('minusbutton');
+      const plusButton = getByTestId('plusbutton');
+      const signQtyInput = getByTestId('signQtyInput');
+      fireEvent.press(minusButton);
+      expect(mockSetIsValidQty).toBeCalledTimes(1);
+
+      fireEvent.press(plusButton);
+      expect(mockSetIsValidQty).toBeCalledTimes(2);
+
+      fireEvent.changeText(signQtyInput, '55');
+      expect(mockSetSignQty).toBeCalledWith(55);
+    });
+
+    it('Tests navListenerHook', () => {
+      navigationProp.addListener = jest.fn().mockImplementation((event, callBack) => {
+        callBack();
+      });
+
+      navListenerHook(navigationProp, mockDispatch, LocationName.SECTION, true);
+      expect(navigationProp.addListener).toBeCalledWith('beforeRemove', expect.any(Function));
+      expect(navigationProp.addListener).toBeCalledWith('focus', expect.any(Function));
+      expect(mockDispatch).toBeCalledTimes(7);
     });
   });
 });
