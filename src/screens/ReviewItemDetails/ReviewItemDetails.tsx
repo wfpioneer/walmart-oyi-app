@@ -807,9 +807,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         modalType="Form"
       >
         <OHQtyUpdate
-          ohQty={itemDetails.onHandsQty}
+          itemDetails={itemDetails}
           setOhQtyModalVisible={setOhQtyModalVisible}
-          exceptionType={itemDetails.exceptionType}
         />
       </CustomModalComponent>
       <CustomModalComponent
