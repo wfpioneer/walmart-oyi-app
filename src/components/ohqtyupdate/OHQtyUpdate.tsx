@@ -77,14 +77,6 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
       dispatch({ type: UPDATE_OH_QTY.RESET });
       return setOhQtyModalVisible(false);
     }
-    // on api failure
-    if (!updateQuantityAPIStatus.isWaiting && updateQuantityAPIStatus.error) {
-
-    }
-    // on api submission
-    if (updateQuantityAPIStatus.isWaiting) {
-
-    }
     return undefined;
   }, [updateQuantityAPIStatus]);
 

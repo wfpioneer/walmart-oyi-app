@@ -13,7 +13,6 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { AxiosError, AxiosResponse } from 'axios';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
   addToPicklist, createNewPick, getItemDetails, noAction
@@ -51,12 +50,9 @@ const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
 const ITEM_SCAN_DOESNT_MATCH_DETAILS = 'ITEM.SCAN_DOESNT_MATCH_DETAILS';
 
 const GENERICS_ADD = 'GENERICS.ADD';
-const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
-
 export interface ItemDetailsScreenProps {
-  scannedEvent: { value: string | null; type: string | null; };
-  isManualScanEnabled: boolean;
-  isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
+  scannedEvent: any; isManualScanEnabled: boolean;
+  isWaiting: boolean; error: any; result: any;
   addToPicklistStatus: AsyncState;
   completeItemApi: AsyncState;
   createNewPickApi: AsyncState;
@@ -554,12 +550,11 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
     dispatch, navigation, trackEventCall,
     validateSessionCall
   } = props;
-
   if (navigation.isFocused()) {
     validateSessionCall(navigation, route.name).then(() => {
       if (scannedEvent.value) {
         dispatch({ type: GET_ITEM_DETAILS.RESET });
-        dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
+        dispatch(getItemDetails({ id: scannedEvent.value }));
         dispatch({ type: ADD_TO_PICKLIST.RESET });
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
@@ -607,20 +602,20 @@ export const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails,
   : undefined);
 
 export const isError = (
-  error: AxiosError | null,
+  error: any,
   errorModalVisible: boolean,
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   isManualScanEnabled: boolean,
-  scannedEvent: { value: string | null; type: string | null; },
+  scannedEvent: any,
+  userId: string,
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void
 ) => {
   if (error) {
-    const scannedValue = scannedEvent.value || '';
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-        {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
+        {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
           <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
@@ -628,8 +623,8 @@ export const isError = (
             testID="scanErrorRetry"
             style={styles.errorButton}
             onPress={() => {
-              trackEventCall('item_details_api_retry', { barcode: scannedValue });
-              return dispatch(getItemDetails({ id: parseInt(scannedValue, 10) }));
+              trackEventCall('item_details_api_retry', { barcode: scannedEvent.value });
+              return dispatch(getItemDetails({ id: scannedEvent.value }));
             }}
           >
             <Text>{strings('GENERICS.RETRY')}</Text>
@@ -710,7 +705,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       scanSubscription.remove();
     };
   }, [itemDetails, actionCompleted]);
-
   // Complete Item Details API
   useEffectHook(() => {
     // on api success
@@ -720,7 +714,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     }
   }, [completeItemApi]);
 
-  useEffectHook(
+  useEffect(
     () => createNewPickApiHook(
       createNewPickApi,
       dispatch,
@@ -758,6 +752,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       setErrorModalVisible,
       isManualScanEnabled,
       scannedEvent,
+      userId,
       dispatch,
       trackEventCall
     );
@@ -767,7 +762,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-        {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
+        {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <View style={styles.activityIndicator}>
           <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
           <Text style={styles.errorText}>{strings('ITEM.ITEM_NOT_FOUND')}</Text>
@@ -797,14 +792,14 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
-      dispatch({ type: GET_ITEM_DETAILS.RESET });
+      dispatch({ type: 'API/GET_ITEM_DETAILS/RESET' });
       dispatch(getItemDetails({ id: itemDetails.itemNbr }));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 
   return (
     <View style={styles.safeAreaView}>
-      {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
+      {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
       {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
       <CustomModalComponent
         isVisible={ohQtyModalVisible}
@@ -894,7 +889,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     </View>
   );
 };
-
 const ReviewItemDetails = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
