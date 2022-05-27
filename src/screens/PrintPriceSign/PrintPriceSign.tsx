@@ -11,6 +11,7 @@ import {
 } from '@react-navigation/native';
 import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
+import { AxiosResponse } from 'axios';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
@@ -97,14 +98,14 @@ export const renderSignSizeButtons = (
 };
 
 interface PriceSignProps {
-  scannedEvent: { value: any; type: any };
+  scannedEvent: { value: string | null; type: string | null };
   exceptionType: string;
   actionCompleted: boolean;
-  itemResult: any;
+  itemResult: AxiosResponse | null;
   printAPI: AsyncState;
   printLabelAPI: AsyncState;
   printPalletAPI: AsyncState;
-  sectionsResult: any;
+  sectionsResult: AxiosResponse | null;
   palletInfo: PalletInfo;
   selectedPrinter: Printer | null;
   selectedSignType: PrintPaperSize;
@@ -214,7 +215,7 @@ export const isValidDispatch = (
   }
 };
 
-const isitemResultHasData = (itemResult: any) => (
+const isitemResultHasData = (itemResult: AxiosResponse | null) => (
   itemResult && itemResult.data
 );
 
@@ -564,7 +565,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     selectedAisle, selectedSection, selectedZone, dispatch, navigation, route, signQty, palletInfo, locationPrintQueue,
     setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook, printerList, userConfig
   } = props;
-  const itemDetailsResult = isitemResultHasData(itemResult) as ItemDetails || getMockItemDetails(scannedEvent.value);
+  const itemDetailsResult = (isitemResultHasData(itemResult) as ItemDetails
+  || getMockItemDetails(scannedEvent.value || ''));
   const {
     itemName, itemNbr, categoryNbr
   } = itemDetailsResult;

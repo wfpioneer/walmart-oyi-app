@@ -4,6 +4,7 @@ import { NavigationProp, Route } from '@react-navigation/native';
 import _ from 'lodash';
 import Toast from 'react-native-toast-message';
 import { fireEvent, render } from '@testing-library/react-native';
+import { AxiosResponse } from 'axios';
 import ItemDetails from '../../models/ItemDetails';
 import {
   PrintPriceSignScreen,
@@ -100,7 +101,7 @@ describe('PrintPriceSignScreen', () => {
     id: '123000000000',
     labelsAvailable: ['price']
   };
-  const testItem: ItemDetails = mockItemDetails[123]; // consistency
+  const testItem: ItemDetails = mockItemDetails[123];
   const emptyLocation = { id: 0, name: '' };
   const nonemptyLocation = { id: 1, name: 'yes' };
   const mockPalletInfo = { id: '6' };
@@ -120,12 +121,28 @@ describe('PrintPriceSignScreen', () => {
     printingUpdate: true
   };
 
+  const defaultResult: AxiosResponse = {
+    config: {},
+    data: {},
+    headers: {},
+    status: 200,
+    statusText: 'OK',
+    request: {}
+  };
   afterEach(() => {
     jest.clearAllMocks();
   });
 
+  const mockItemDetailsResult: AxiosResponse = {
+    ...defaultResult,
+    data: testItem
+  };
+  const mockSectionResult: AxiosResponse = {
+    ...defaultResult,
+    data: []
+  };
+
   describe('Tests rendering print Errors/Api responses', () => {
-    // Double Test here???
     const apiIsWaiting = {
       isWaiting: true,
       value: null,
@@ -144,7 +161,7 @@ describe('PrintPriceSignScreen', () => {
           printLabelAPI={defaultAsyncState}
           printPalletAPI={defaultAsyncState}
           palletInfo={mockPalletInfo}
-          itemResult={testItem}
+          itemResult={mockItemDetailsResult}
           sectionsResult={null}
           selectedPrinter={defaultPrinter}
           selectedSignType="XSmall"
@@ -184,7 +201,7 @@ describe('PrintPriceSignScreen', () => {
           printLabelAPI={apiIsWaiting}
           printPalletAPI={defaultAsyncState}
           palletInfo={mockPalletInfo}
-          itemResult={testItem}
+          itemResult={mockItemDetailsResult}
           sectionsResult={null}
           selectedPrinter={defaultPrinter}
           selectedSignType="XSmall"
@@ -224,7 +241,7 @@ describe('PrintPriceSignScreen', () => {
           printLabelAPI={defaultAsyncState}
           printPalletAPI={apiIsWaiting}
           palletInfo={mockPalletInfo}
-          itemResult={testItem}
+          itemResult={mockItemDetailsResult}
           sectionsResult={null}
           selectedPrinter={defaultPrinter}
           selectedSignType="XSmall"
@@ -264,7 +281,7 @@ describe('PrintPriceSignScreen', () => {
           scannedEvent={defaultScanEvent}
           exceptionType=""
           actionCompleted={false}
-          itemResult={testItem}
+          itemResult={mockItemDetailsResult}
           printAPI={defaultAsyncState}
           printLabelAPI={defaultAsyncState}
           printPalletAPI={defaultAsyncState}
@@ -306,7 +323,7 @@ describe('PrintPriceSignScreen', () => {
           scannedEvent={defaultScanEvent}
           exceptionType=""
           actionCompleted={false}
-          itemResult={testItem}
+          itemResult={mockItemDetailsResult}
           printAPI={defaultAsyncState}
           printLabelAPI={defaultAsyncState}
           printPalletAPI={defaultAsyncState}
@@ -353,7 +370,7 @@ describe('PrintPriceSignScreen', () => {
         printLabelAPI={defaultAsyncState}
         printPalletAPI={defaultAsyncState}
         palletInfo={mockPalletInfo}
-        sectionsResult={[]}
+        sectionsResult={mockSectionResult}
         selectedPrinter={defaultPrinter}
         selectedSignType="XSmall"
         printQueue={[]}
@@ -389,12 +406,12 @@ describe('PrintPriceSignScreen', () => {
         scannedEvent={defaultScanEvent}
         exceptionType=""
         actionCompleted={false}
-        itemResult={testItem}
+        itemResult={mockItemDetailsResult}
         printAPI={defaultAsyncState}
         printLabelAPI={defaultAsyncState}
         printPalletAPI={defaultAsyncState}
         palletInfo={mockPalletInfo}
-        sectionsResult={[]}
+        sectionsResult={mockSectionResult}
         selectedPrinter={defaultPrinter}
         selectedSignType="XSmall"
         printQueue={[]}
@@ -430,12 +447,12 @@ describe('PrintPriceSignScreen', () => {
         scannedEvent={defaultScanEvent}
         exceptionType=""
         actionCompleted={false}
-        itemResult={testItem}
+        itemResult={mockItemDetailsResult}
         printAPI={defaultAsyncState}
         printLabelAPI={defaultAsyncState}
         printPalletAPI={defaultAsyncState}
         palletInfo={mockPalletInfo}
-        sectionsResult={[]}
+        sectionsResult={mockSectionResult}
         selectedPrinter={defaultPrinter}
         selectedSignType="XSmall"
         printQueue={[]}
@@ -692,11 +709,9 @@ describe('PrintPriceSignScreen', () => {
     it('Tests getPrinter function', () => {
       let printerPaperSize = getPrinter(mockPrinterList[0], 'Small');
       expect(printerPaperSize).toStrictEqual('S');
-      // expect(typeof printerPaperSize).toBe(LaserPaper);
 
       printerPaperSize = getPrinter(mockPrinterListNoLaser[0], 'Small');
       expect(printerPaperSize).toStrictEqual('C');
-      // expect(typeof printerPaperSize).toBe(PortablePaper);
     });
 
     it('Tests aisleSectionExists function', () => {
@@ -916,7 +931,7 @@ describe('PrintPriceSignScreen', () => {
           printLabelAPI={defaultAsyncState}
           printPalletAPI={defaultAsyncState}
           palletInfo={mockPalletInfo}
-          sectionsResult={[]}
+          sectionsResult={mockSectionResult}
           selectedPrinter={portablePrinter}
           selectedSignType="XSmall"
           printQueue={[]}
