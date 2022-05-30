@@ -14,6 +14,7 @@ import {
 import { AsyncState } from '../../models/AsyncState';
 import { PickCreateItem, Tabs } from '../../models/Picking.d';
 import { strings } from '../../locales';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 const defaultAsyncState: AsyncState = {
   isWaiting: false,
@@ -301,7 +302,7 @@ describe('createPick function tests', () => {
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'success',
       text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
-      visibilityTime: 4000,
+      visibilityTime: SNACKBAR_TIMEOUT,
       position: 'bottom'
     });
 
@@ -314,19 +315,19 @@ describe('createPick function tests', () => {
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
       text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
-      visibilityTime: 4000,
+      visibilityTime: SNACKBAR_TIMEOUT,
       position: 'bottom'
     });
 
     mockDispatch.mockReset();
     // @ts-expect-error Reset Toast Object
     Toast.show.mockReset();
-    createPickApiHook(failure409AsyncState, mockDispatch, navigationProp)
+    createPickApiHook(failure409AsyncState, mockDispatch, navigationProp);
     expect(mockDispatch).toHaveBeenCalledTimes(2);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
       text1: strings('PICKING.PICK_REQUEST_CRITERIA_ALREADY_MET'),
-      visibilityTime: 4000,
+      visibilityTime: SNACKBAR_TIMEOUT,
       position: 'bottom'
     });
 
