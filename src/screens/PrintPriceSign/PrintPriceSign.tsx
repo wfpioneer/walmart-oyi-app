@@ -86,6 +86,7 @@ export const renderSignSizeButtons = (
               height={25}
               width={56}
               style={styles.sizeBtnMargin}
+              // @ts-expect-error key is of type PrinterPaperSize
               onPress={() => dispatch(setSignType(key))}
             />
           );
@@ -658,7 +659,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             titleFontSize={14}
             type={Button.Type.NO_BORDER}
             height={20}
-            onPress={handleChangePrinter}
+            onPress={() => handleChangePrinter(navigation, route)}
           />
         </View>
       )
@@ -677,7 +678,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             titleFontSize={14}
             type={Button.Type.NO_BORDER}
             height={20}
-            onPress={handleChangePrinter}
+            onPress={() => handleChangePrinter(navigation, route)}
           />
         </View>
       )
