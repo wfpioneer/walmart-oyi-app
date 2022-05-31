@@ -42,7 +42,7 @@ const style = StyleSheet.create({
     alignItems: 'flex-end',
     marginTop: 8,
     paddingHorizontal: 8,
-    paddingVertical: 12
+    paddingVertical: 8
   },
   footerBtnContainer: {
     flexDirection: 'row',
@@ -128,11 +128,15 @@ const style = StyleSheet.create({
     alignItems: 'center'
   },
   printTextMargin: {
-    marginLeft: 12
+    marginLeft: 12,
+    paddingTop: 14
   },
   printerDesc: {
     fontSize: 12,
     color: COLOR.GREY_600
+  },
+  changeButton: {
+    alignSelf: 'center'
   }
 });
 

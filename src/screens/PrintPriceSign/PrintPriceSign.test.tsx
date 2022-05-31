@@ -53,7 +53,7 @@ describe('PrintPriceSignScreen', () => {
     ...mockConfig,
     locationManagement: true,
     palletManagement: true,
-    printingUpdate: true,
+    printingUpdate: true
   };
 
   describe('Tests rendering print Errors/Api responses', () => {

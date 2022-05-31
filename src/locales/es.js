@@ -162,7 +162,8 @@ export default {
     LOCATION_PRINTING: 'Impresión de Ubicaciones',
     PRICE_SIGNS: 'Señalización Precios',
     LOCATIONS: 'Ubicaciones',
-    PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente'
+    PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente',
+    PRINTER_NOT_ASSIGNED: 'No Assigned Printer' // TODO spanish translation
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',

@@ -162,7 +162,8 @@ export default {
     LOCATION_PRINTING: 'Location Printing',
     PRICE_SIGNS: 'Price Signs',
     LOCATIONS: 'Locations',
-    PRICE_SIGN_SUCCESS: 'Price Sign Label Successfully Printed'
+    PRICE_SIGN_SUCCESS: 'Price Sign Label Successfully Printed',
+    PRINTER_NOT_ASSIGNED: 'No Assigned Printer'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Pallet Management',
