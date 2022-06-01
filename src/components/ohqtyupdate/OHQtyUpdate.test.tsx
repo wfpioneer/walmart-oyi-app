@@ -92,16 +92,16 @@ describe('testing OHQtyUpdate component', () => {
       const testSave = getByTestId('saveButton');
       fireEvent.press(testSave);
       expect(mockHandleSubmit).toHaveBeenCalled();
-      //fireEvent.press(testClose);
-      //expect(mockHandleClose).toHaveBeenCalled();
-      //fireEvent.press(testIncrease);
-      //expect(mockSetNewOHQty).toHaveBeenCalled();
-      //mockSetNewOHQty.mockReset();
-      //fireEvent.press(testDecrease);
-      //expect(mockSetNewOHQty).toHaveBeenCalled();
-      //mockSetNewOHQty.mockReset();
-      //fireEvent.changeText(testTextInput, '20');
-      //expect(mockSetNewOHQty).toHaveBeenCalled();
+      fireEvent.press(testClose);
+      expect(mockHandleClose).toHaveBeenCalled();
+      fireEvent.press(testIncrease);
+      expect(mockSetNewOHQty).toHaveBeenCalled();
+      mockSetNewOHQty.mockReset();
+      fireEvent.press(testDecrease);
+      expect(mockSetNewOHQty).toHaveBeenCalled();
+      mockSetNewOHQty.mockReset();
+      fireEvent.changeText(testTextInput, '20');
+      expect(mockSetNewOHQty).toHaveBeenCalled();
     });
     it('render component with error', () => {
       const mockError = {
