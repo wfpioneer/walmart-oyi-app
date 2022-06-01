@@ -1623,9 +1623,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     onClose={[Function]}
   >
     <OHQtyUpdate
-      exceptionType="nsfl"
-      ohQty={42}
-      setOhQtyModalVisible={[MockFunction]}
+      error={null}
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      isWaiting={false}
+      newOHQty={42}
+      onHandsQty={42}
+      setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -2371,9 +2375,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     onClose={[Function]}
   >
     <OHQtyUpdate
-      exceptionType="nsfl"
-      ohQty={42}
-      setOhQtyModalVisible={[MockFunction]}
+      error={null}
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      isWaiting={false}
+      newOHQty={42}
+      onHandsQty={42}
+      setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -2897,9 +2905,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     onClose={[Function]}
   >
     <OHQtyUpdate
-      exceptionType="nsfl"
-      ohQty={42}
-      setOhQtyModalVisible={[MockFunction]}
+      error={null}
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      isWaiting={false}
+      newOHQty={42}
+      onHandsQty={42}
+      setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -3281,9 +3293,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     onClose={[Function]}
   >
     <OHQtyUpdate
-      exceptionType="nsfl"
-      ohQty={42}
-      setOhQtyModalVisible={[MockFunction]}
+      error={null}
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      isWaiting={false}
+      newOHQty={42}
+      onHandsQty={42}
+      setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -3807,9 +3823,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     onClose={[Function]}
   >
     <OHQtyUpdate
-      exceptionType="nsfl"
-      ohQty={42}
-      setOhQtyModalVisible={[MockFunction]}
+      error={null}
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      isWaiting={false}
+      newOHQty={42}
+      onHandsQty={42}
+      setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -4333,9 +4353,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     onClose={[Function]}
   >
     <OHQtyUpdate
-      exceptionType="nsfl"
-      ohQty={42}
-      setOhQtyModalVisible={[MockFunction]}
+      error={null}
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      isWaiting={false}
+      newOHQty={42}
+      onHandsQty={42}
+      setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -4859,9 +4883,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     onClose={[Function]}
   >
     <OHQtyUpdate
-      exceptionType="nsfl"
-      ohQty={42}
-      setOhQtyModalVisible={[MockFunction]}
+      error={null}
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      isWaiting={false}
+      newOHQty={42}
+      onHandsQty={42}
+      setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -5385,9 +5413,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     onClose={[Function]}
   >
     <OHQtyUpdate
-      exceptionType="nsfl"
-      ohQty={42}
-      setOhQtyModalVisible={[MockFunction]}
+      error={null}
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      isWaiting={false}
+      newOHQty={42}
+      onHandsQty={42}
+      setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
   <CustomModalComponent

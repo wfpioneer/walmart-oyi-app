@@ -6,6 +6,7 @@ import COLOR from '../../themes/Color';
 import IconButton from '../buttons/IconButton';
 
 interface NumericSelectorProps {
+  testID?: string;
   isValid: boolean;
   onDecreaseQty(): void;
   onIncreaseQty(): void;
@@ -28,6 +29,7 @@ const renderPlusMinusBtn = (name: 'plus' | 'minus', isDisabled: boolean) => (
 
 const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
   const {
+    testID,
     isValid,
     onDecreaseQty,
     onIncreaseQty,
@@ -40,12 +42,14 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
   const isMaximum = value >= maxValue;
   return (
     <View
+      testID={testID}
       style={[
         styles.updateContainer,
         isValid ? styles.updateContainerValid : styles.updateContainerInvalid
       ]}
     >
       <IconButton
+        testID='decreaseButton'
         icon={renderPlusMinusBtn('minus', isMinimum)}
         type={IconButton.Type.NO_BORDER}
         height={15}
@@ -54,12 +58,14 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
         onPress={onDecreaseQty}
       />
       <TextInput
+        testID='numericTextInput'
         style={styles.input}
         keyboardType="numeric"
         onChangeText={text => onTextChange(numberInputFilter(text))}
         value={value.toString()}
       />
       <IconButton
+        testID='increaseButton'
         icon={renderPlusMinusBtn('plus', isMaximum)}
         type={IconButton.Type.NO_BORDER}
         height={15}

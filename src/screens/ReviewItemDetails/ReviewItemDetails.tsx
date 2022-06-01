@@ -16,7 +16,7 @@ import { Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  addToPicklist, createNewPick, getItemDetails, noAction
+  addToPicklist, createNewPick, getItemDetails, noAction, updateOHQty
 } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -31,20 +31,26 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import CreatePickDialog from '../../components/CreatePickDialog/CreatePickDialog';
-import { resetLocations, setActionCompleted, setupScreen } from '../../state/actions/ItemDetailScreen';
+import {
+  resetLocations,
+  setActionCompleted,
+  setupScreen,
+  updatePendingOHQty
+} from '../../state/actions/ItemDetailScreen';
 import { hideActivityModal, showActivityModal, showInfoModal } from '../../state/actions/Modal';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  ADD_TO_PICKLIST, CREATE_NEW_PICK, GET_ITEM_DETAILS, NO_ACTION
+  ADD_TO_PICKLIST, CREATE_NEW_PICK, GET_ITEM_DETAILS, NO_ACTION, UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
 import { Configurations } from '../../models/User';
 import { CreatePickRequest } from '../../services/Picking.service';
 import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
+import { approvalRequestSource } from '../../models/ApprovalListItem';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -60,6 +66,7 @@ export interface ItemDetailsScreenProps {
   addToPicklistStatus: AsyncState;
   completeItemApi: AsyncState;
   createNewPickApi: AsyncState;
+  updateOHQtyApi: AsyncState;
   userId: string;
   exceptionType: string | null | undefined; actionCompleted: boolean; pendingOnHandsQty: number;
   floorLocations?: Location[];
@@ -75,6 +82,7 @@ export interface ItemDetailsScreenProps {
   selectedSection: string; setSelectedSection: React.Dispatch<React.SetStateAction<string>>;
   numberOfPallets: number; setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>;
   isQuickPick: boolean; setIsQuickPick: React.Dispatch<React.SetStateAction<boolean>>;
+  newOHQty: number; setNewOHQty: React.Dispatch<React.SetStateAction<number>>;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
@@ -102,6 +110,9 @@ export interface RenderProps {
   reserveLocations?: Location[];
   userConfigs: Configurations;
 }
+
+const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
+  || exceptionType === 'C' || exceptionType === 'NSFL';
 
 export const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
   const {
@@ -133,6 +144,37 @@ export const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails
       itemNumber: itemDetails.itemNbr
     }));
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+};
+
+export const handleOHQtyClose = (
+  onHandQty: number,
+  dispatch: Dispatch<any>,
+  setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  setNewOHQty: React.Dispatch<React.SetStateAction<number>>
+) => {
+  dispatch({ type: UPDATE_OH_QTY.RESET });
+  setNewOHQty(onHandQty);
+  setOhQtyModalVisible(false);
+};
+
+export const handleOHQtySubmit = (itemDetails: ItemDetails, newOHQty: number, dispatch: Dispatch<any>) => {
+  const {
+    basePrice, categoryNbr, itemName, itemNbr, onHandsQty, upcNbr
+  } = itemDetails;
+  const change = basePrice * (newOHQty - itemDetails.onHandsQty);
+  dispatch(updateOHQty({
+    data: {
+      itemName,
+      itemNbr,
+      upcNbr: parseInt(upcNbr, 10),
+      categoryNbr,
+      oldQuantity: onHandsQty,
+      newQuantity: newOHQty,
+      dollarChange: change,
+      initiatedTimestamp: moment().toISOString(),
+      approvalRequestSource: approvalRequestSource.ItemDetails
+    }
+  }));
 };
 
 export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
@@ -232,6 +274,27 @@ export const createNewPickApiHook = (
   // create new pick api isWaiting
   if (isFocused && createNewPickApi.isWaiting) {
     dispatch(showActivityModal());
+  }
+};
+
+export const updateOHQtyApiHook = (
+  updateOHQtyApi: AsyncState,
+  dispatch: Dispatch<any>,
+  isFocused: boolean,
+  newOHQty: number,
+  exceptionType: string,
+  setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (isFocused) {
+    if (!updateOHQtyApi.isWaiting && updateOHQtyApi.result) {
+      dispatch(updatePendingOHQty(newOHQty));
+      if (validateExceptionType(exceptionType)) {
+        dispatch(setActionCompleted());
+      }
+      dispatch({ type: UPDATE_OH_QTY.RESET });
+      return setOhQtyModalVisible(false);
+    }
+    return undefined;
   }
 };
 
@@ -658,6 +721,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     isWaiting, error, result,
     completeItemApi,
     createNewPickApi,
+    updateOHQtyApi,
     userId, actionCompleted, pendingOnHandsQty,
     route,
     dispatch,
@@ -670,6 +734,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     selectedSection, setSelectedSection,
     numberOfPallets, setNumberOfPallets,
     isQuickPick, setIsQuickPick,
+    newOHQty, setNewOHQty,
     trackEventCall,
     validateSessionCall,
     useEffectHook,
@@ -699,6 +764,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   // Set Item Details
   useEffectHook(() => {
     onValidateItemDetails(dispatch, itemDetails);
+    setNewOHQty(itemDetails?.onHandsQty || 0);
   }, [itemDetails]);
 
   // Barcode event listener effect
@@ -749,6 +815,15 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }
   );
+
+  useEffectHook(() => updateOHQtyApiHook(
+    updateOHQtyApi,
+    dispatch,
+    navigation.isFocused(),
+    newOHQty,
+    itemDetails?.exceptionType || '',
+    setOhQtyModalVisible
+  ), [updateOHQtyApi]);
 
   // Get Item Details Error
   if (!isWaiting && error) {
@@ -812,9 +887,17 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         modalType="Form"
       >
         <OHQtyUpdate
-          ohQty={itemDetails.onHandsQty}
-          setOhQtyModalVisible={setOhQtyModalVisible}
-          exceptionType={itemDetails.exceptionType}
+          onHandsQty={itemDetails?.onHandsQty || 0}
+          newOHQty={newOHQty}
+          setNewOHQty={setNewOHQty}
+          isWaiting={updateOHQtyApi.isWaiting}
+          error={updateOHQtyApi.error}
+          handleClose={() => handleOHQtyClose(itemDetails?.onHandsQty || 0,
+            dispatch,
+            setOhQtyModalVisible,
+            setNewOHQty
+            )}
+          handleSubmit={() => handleOHQtySubmit(itemDetails, newOHQty, dispatch)}
         />
       </CustomModalComponent>
       <CustomModalComponent
@@ -902,6 +985,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const createNewPickApi = useTypedSelector(state => state.async.createNewPick);
+  const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const { userId } = useTypedSelector(state => state.User);
   const {
     exceptionType,
@@ -923,6 +1007,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const [selectedSection, setSelectedSection] = useState('');
   const [numberOfPallets, setNumberOfPallets] = useState(1);
   const [isQuickPick, setIsQuickPick] = useState(false);
+  const [newOHQty, setNewOHQty] = useState( 0);
   return (
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
@@ -933,6 +1018,7 @@ const ReviewItemDetails = (): JSX.Element => {
       addToPicklistStatus={addToPicklistStatus}
       completeItemApi={completeItemApi}
       createNewPickApi={createNewPickApi}
+      updateOHQtyApi={updateOHQtyApi}
       userId={userId}
       exceptionType={exceptionType}
       actionCompleted={actionCompleted}
@@ -957,6 +1043,8 @@ const ReviewItemDetails = (): JSX.Element => {
       setNumberOfPallets={setNumberOfPallets}
       isQuickPick={isQuickPick}
       setIsQuickPick={setIsQuickPick}
+      newOHQty={newOHQty}
+      setNewOHQty={setNewOHQty}
       trackEventCall={trackEvent}
       validateSessionCall={validateSession}
       useEffectHook={useEffect}
