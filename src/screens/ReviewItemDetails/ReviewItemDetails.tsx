@@ -300,9 +300,8 @@ export const updateOHQtyApiHook = (
         dispatch(setActionCompleted());
       }
       dispatch({ type: UPDATE_OH_QTY.RESET });
-      return setOhQtyModalVisible(false);
+      setOhQtyModalVisible(false);
     }
-    return undefined;
   }
 };
 
