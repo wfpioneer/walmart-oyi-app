@@ -26,6 +26,7 @@ import ReviewItemDetails, {
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
 import store from '../../state/index';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/AppCenterTool'),
@@ -634,7 +635,7 @@ describe('ReviewItemDetailsScreen', () => {
       const toastPicklistSuccess = {
         type: 'success',
         text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
-        visibilityTime: 4000,
+        visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       };
       createNewPickApiHook(
@@ -646,6 +647,33 @@ describe('ReviewItemDetailsScreen', () => {
       expect(mockSetNumberOfPallets).toHaveBeenCalledWith(1);
       expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
       expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
+    });
+    it('Tests createNewPickApiHook on 409 failure when there are no reserve pallets available', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        result: null,
+        error: {
+          response: {
+            status: 409,
+            data: {
+              errorEnum: 'NO_RESERVE_PALLETS_AVAILABLE'
+            }
+          }
+        }
+      };
+      const toastPickList409Error = {
+        type: 'error',
+        text1: strings('PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      };
+      createNewPickApiHook(
+        failureApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(Toast.show).toHaveBeenCalledWith(toastPickList409Error);
     });
     it('Tests createNewPickApiHook on 409 failure', () => {
       const failureApi: AsyncState = {
@@ -663,7 +691,7 @@ describe('ReviewItemDetailsScreen', () => {
       const toastPickList409Error = {
         type: 'error',
         text1: strings('PICKING.PICK_REQUEST_CRITERIA_ALREADY_MET'),
-        visibilityTime: 4000,
+        visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       };
       createNewPickApiHook(
@@ -683,7 +711,7 @@ describe('ReviewItemDetailsScreen', () => {
         type: 'error',
         text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
         text2: strings('GENERICS.TRY_AGAIN'),
-        visibilityTime: 4000,
+        visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       };
       createNewPickApiHook(

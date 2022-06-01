@@ -30,6 +30,7 @@ import { setPickCreateFloor, setPickCreateReserve } from '../../state/actions/Pi
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { CREATE_NEW_PICK, GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
 import { createNewPick } from '../../state/actions/saga';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 export const MOVE_TO_FRONT = 'moveToFront';
 export const PALLET_MIN = 1;
@@ -98,25 +99,33 @@ export const createPickApiHook = (
       Toast.show({
         type: 'success',
         text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
-        visibilityTime: 4000,
+        visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
     }
     // API failure
     if (!isWaiting && error) {
       dispatch(hideActivityModal());
-      if (error.response && error.response.status === 409) {
+      if (error.response && error.response.status === 409
+        && error.response.data.errorEnum === 'NO_RESERVE_PALLETS_AVAILABLE') {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+      } else if (error.response && error.response.status === 409) {
         Toast.show({
           type: 'error',
           text1: strings('PICKING.PICK_REQUEST_CRITERIA_ALREADY_MET'),
-          visibilityTime: 4000,
+          visibilityTime: SNACKBAR_TIMEOUT,
           position: 'bottom'
         });
       } else {
         Toast.show({
           type: 'error',
           text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
-          visibilityTime: 4000,
+          visibilityTime: SNACKBAR_TIMEOUT,
           position: 'bottom'
         });
       }

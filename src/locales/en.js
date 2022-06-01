@@ -414,7 +414,8 @@ export default {
     NEW_PICK_ADDED_TO_PICKLIST_PLURAL: 'The pick requests have been added to the picklist',
     NO_PALLETS_AVAILABLE_PICK_DELETED: 'The pallet is not available. The pick requested has been deleted',
     UPDATE_PICK_FAILED_TRY_AGAIN: 'Failed to update pick. Please try again',
-    UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again'
+    UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again',
+    NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available'
   },
   BINNING: {
     BINNING: 'Binning',
