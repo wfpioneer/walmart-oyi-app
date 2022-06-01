@@ -7,10 +7,11 @@ import {
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import {
-  NavigationProp, Route, useNavigation, useRoute
+  NavigationProp, Route, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
 import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
+import { AxiosResponse } from 'axios';
 import IconButton from '../../components/buttons/IconButton';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
@@ -40,6 +41,7 @@ import { LocationName } from '../../models/Location';
 import { SectionItem } from '../../models/LocationItems';
 import { showInfoModal } from '../../state/actions/Modal';
 import { savePrinter } from '../../utils/asyncStorageUtils';
+import { PalletInfo } from '../../models/PalletManagementTypes';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -84,6 +86,7 @@ export const renderSignSizeButtons = (
               height={25}
               width={56}
               style={styles.sizeBtnMargin}
+              // @ts-expect-error key is of type PrinterPaperSize
               onPress={() => dispatch(setSignType(key))}
             />
           );
@@ -96,15 +99,15 @@ export const renderSignSizeButtons = (
 };
 
 interface PriceSignProps {
-  scannedEvent: { value: any; type: any };
+  scannedEvent: { value: string | null; type: string | null };
   exceptionType: string;
   actionCompleted: boolean;
-  itemResult: any;
+  itemResult: AxiosResponse | null;
   printAPI: AsyncState;
   printLabelAPI: AsyncState;
   printPalletAPI: AsyncState;
-  sectionsResult: any;
-  palletInfo: any;
+  sectionsResult: AxiosResponse | null;
+  palletInfo: PalletInfo;
   selectedPrinter: Printer | null;
   selectedSignType: PrintPaperSize;
   printQueue: PrintQueueItem[];
@@ -131,14 +134,16 @@ interface PriceSignProps {
   userConfig: Configurations;
 }
 
-const getPrinter = (selectedPrinter: Printer | null, selectedSignType: PrintPaperSize) => (
+export const getPrinter = (
+  selectedPrinter: Printer | null, selectedSignType: PrintPaperSize
+): LaserPaper | PortablePaper => (
   selectedPrinter?.type === PrinterType.LASER
-  // @ts-ignore
+  // @ts-expect-error selectSignType contains keys that do not exist for each enum
     ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType]);
 
-const isValid = (actionCompleted: any, exceptionType: any) => !actionCompleted && exceptionType === 'PO';
+const isValid = (actionCompleted: boolean, exceptionType: string) => !actionCompleted && exceptionType === 'PO';
 
-const isItemSizeExists = (
+export const isItemSizeExists = (
   printQueue: PrintQueueItem[],
   selectedSignType: PrintPaperSize,
   itemNbr: number
@@ -146,10 +151,10 @@ const isItemSizeExists = (
   printItem => printItem.itemNbr === itemNbr && printItem.paperSize === selectedSignType
 );
 
-const aisleSectionExists = (printQueue: PrintQueueItem[], locationId: number) => printQueue
+export const aisleSectionExists = (printQueue: PrintQueueItem[], locationId: number) => printQueue
   .some(printLoc => printLoc.locationId === locationId);
 
-const setHandleDecreaseQty = (
+export const setHandleDecreaseQty = (
   signQty: number,
   setSignQty: React.Dispatch<React.SetStateAction<number>>
 ) => {
@@ -160,7 +165,7 @@ const setHandleDecreaseQty = (
   }
 };
 
-const setHandleIncreaseQty = (
+export const setHandleIncreaseQty = (
   signQty: number,
   setSignQty: React.Dispatch<React.SetStateAction<number>>
 ) => {
@@ -170,7 +175,7 @@ const setHandleIncreaseQty = (
     setSignQty((prevState: number) => prevState + 1);
   }
 };
-const isErrorRequired = (error: { error: boolean; message: string }) => (error.error ? (
+export const isErrorRequired = (error: { error: boolean; message: string }) => (error.error ? (
   <View style={styles.errorContainer}>
     <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
     <Text style={styles.errorText}>{error.message}</Text>
@@ -190,7 +195,7 @@ const isAddtoQueueDisabled = (
   selectedSignType: PrintPaperSize
 ) => !isValidQty || selectedSignType?.length === 0;
 
-const checkQuantity = (
+export const checkQuantity = (
   newQty: number,
   setIsValidQty: React.Dispatch<React.SetStateAction<boolean>>,
   setSignQty: React.Dispatch<React.SetStateAction<number>>
@@ -201,20 +206,359 @@ const checkQuantity = (
   }
 };
 
-const isValidDispatch = (
-  props: PriceSignProps,
+export const isValidDispatch = (
+  dispatch: Dispatch<any>,
   actionCompleted: boolean,
   exceptionType: string
 ) => {
-  const { dispatch } = props;
   if (isValid(actionCompleted, exceptionType)) {
     dispatch(setActionCompleted());
   }
 };
 
-const isitemResultHasData = (itemResult: any) => (
+const isitemResultHasData = (itemResult: AxiosResponse | null) => (
   itemResult && itemResult.data
 );
+
+export const handleAddPrintList = (
+  printQueue: PrintQueueItem[],
+  locationPrintQueue: PrintQueueItem[],
+  selectedSignType: PrintPaperSize,
+  itemDetails: ItemDetails,
+  signQty: number,
+  exceptionType: string,
+  selectedSection: LocationIdName,
+  actionCompleted: boolean,
+  sectionsList: SectionItem[],
+  printingLocationLabels: string,
+  getFullSectionName: (value: string) => string,
+  locationName: string,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+) => {
+  const {
+    itemName, itemNbr, upcNbr, categoryNbr
+  } = itemDetails;
+  // check if the item/size already exists on the print queue
+  const itemSizeExists = isItemSizeExists(printQueue, selectedSignType, itemNbr);
+  // TODO Disable check on price sign screen and vice versa
+  const locationLabelExists = aisleSectionExists(locationPrintQueue, selectedSection.id);
+  // TODO Use LocationLabelCheck to allow some items to be added to the print queue
+  if (itemSizeExists || (locationLabelExists && printingLocationLabels === LocationName.SECTION)) {
+    // TODO show popup if already exists
+    dispatch(showInfoModal(strings('LOCATION.PRINT_LABEL_EXISTS_HEADER'), strings('LOCATION.PRINT_LABEL_EXISTS')));
+    trackEvent('print_already_exists_in_queue', { itemName, selectedSignType });
+  } else {
+    // add to print queue, forcing to use laser
+    // TODO show popup if laser printer is not selected when adding to queue
+    // TODO show toast that the item was added to queue
+    let printQueueItem: PrintQueueItem;
+    if (!printingLocationLabels) {
+      printQueueItem = {
+        itemName,
+        itemNbr,
+        upcNbr,
+        catgNbr: categoryNbr,
+        signQty,
+        worklistType: exceptionType,
+        paperSize: selectedSignType,
+        itemType: PrintQueueItemType.ITEM
+      };
+      trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
+      dispatch(addToPrintQueue(printQueueItem));
+    } else if (printingLocationLabels === LocationName.AISLE) {
+      const printQueueItems: PrintQueueItem[] = [];
+      // Add Get Sections response to print queue
+      sectionsList.forEach(section => {
+        if (!aisleSectionExists(locationPrintQueue, section.sectionId)) {
+          const printQueueArrayItem: PrintQueueItem = {
+            itemName: getFullSectionName(section.sectionName),
+            locationId: section.sectionId,
+            paperSize: selectedSignType,
+            signQty,
+            itemType: PrintQueueItemType.SECTION
+          };
+          printQueueItems.push(printQueueArrayItem);
+        }
+      });
+      trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItems) });
+      dispatch(addMultipleToLocationPrintQueue(printQueueItems));
+    } else {
+      const { id } = selectedSection;
+      printQueueItem = {
+        itemName: locationName,
+        locationId: id,
+        paperSize: selectedSignType,
+        signQty,
+        itemType: PrintQueueItemType.SECTION
+      };
+      trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
+      dispatch(addLocationPrintQueue(printQueueItem));
+    }
+    isValidDispatch(dispatch, actionCompleted, exceptionType);
+    navigation.goBack();
+  }
+};
+
+export const printSignApiHook = (
+  printAPI: AsyncState,
+  navigation: NavigationProp<any>,
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string }>>,
+  dispatch: Dispatch<any>,
+  actionCompleted: boolean,
+  exceptionType: string
+) => {
+  // on api success
+  if (!printAPI.isWaiting && printAPI.result) {
+    isValidDispatch(dispatch, actionCompleted, exceptionType);
+    navigation.goBack();
+  }
+  // on api failure
+  if (!printAPI.isWaiting && printAPI.error) {
+    setError({ error: true, message: strings(PRINT_ERROR) });
+  }
+  // on api submission
+  if (printAPI.isWaiting) {
+    setError({ error: false, message: '' });
+  }
+};
+
+export const printLocationApiHook = (
+  printLabelAPI: AsyncState,
+  navigation: NavigationProp<any>,
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string }>>,
+) => {
+  // on api success
+  if (!printLabelAPI.isWaiting && printLabelAPI.result) {
+    Toast.show({
+      type: 'success',
+      text1: strings('PRINT.LOCATION_SUCCESS'),
+      position: 'bottom',
+      visibilityTime: 3000
+    });
+    navigation.goBack();
+  }
+  // on api failure
+  if (!printLabelAPI.isWaiting && printLabelAPI.error) {
+    setError({ error: true, message: strings(PRINT_ERROR) });
+  }
+  // on api submission
+  if (printLabelAPI.isWaiting) {
+    setError({ error: false, message: '' });
+  }
+};
+
+export const printPalletApiHook = (
+  printPalletAPI: AsyncState,
+  navigation: NavigationProp<any>,
+  setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string }>>,
+) => {
+  // on api success
+  if (!printPalletAPI.isWaiting && printPalletAPI.result) {
+    Toast.show({
+      type: 'success',
+      text1: strings('PRINT.PALLET_SUCCESS'),
+      position: 'bottom',
+      visibilityTime: 3000
+    });
+    navigation.goBack();
+  }
+  // on api failure
+  if (!printPalletAPI.isWaiting && printPalletAPI.error) {
+    setError({ error: true, message: strings(PRINT_ERROR) });
+  }
+  // on api submission
+  if (printPalletAPI.isWaiting) {
+    setError({ error: false, message: '' });
+  }
+};
+
+export const setPrinterLayoutHook = (
+  printerList: Printer[],
+  selectedPrinter: Printer | null,
+  dispatch: Dispatch<any>,
+  printingPalletLabel: boolean,
+  printingLocationLabels: string
+) => {
+  // Just used to set the default printer the first time, since redux loads before the translations
+  const printListHasLaserPrinter = printerList.some(printer => printer.type === PrinterType.LASER);
+  if (selectedPrinter?.name === '' || !printListHasLaserPrinter) {
+    const defaultPrinter: Printer = {
+      type: PrinterType.LASER,
+      name: strings('PRINT.FRONT_DESK'),
+      desc: strings('GENERICS.DEFAULT'),
+      id: '000000000000',
+      labelsAvailable: ['price']
+    };
+    dispatch(setPriceLabelPrinter(defaultPrinter));
+    if (!printListHasLaserPrinter) {
+      dispatch(addToPrinterList(defaultPrinter));
+    }
+    savePrinter(defaultPrinter);
+  }
+  if (printingPalletLabel) {
+    dispatch(setPrintingType(PrintingType.PALLET));
+  } else if (printingLocationLabels) {
+    dispatch(setPrintingType(PrintingType.LOCATION));
+  } else {
+    dispatch(setPrintingType(PrintingType.PRICE_SIGN));
+  }
+};
+
+export const handleChangePrinter = (navigation: NavigationProp<any>, route: RouteProp<any, string>) => {
+  validateSession(navigation, route.name).then(() => {
+    trackEvent('print_change_printer_click');
+    navigation.navigate('PrinterList');
+  }).catch(() => {});
+};
+
+export const handlePrint = (
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>,
+  dispatch: Dispatch<any>,
+  printingLocationLabels: string,
+  sectionsList: SectionItem[],
+  signQty: number,
+  selectedPrinter: Printer | null,
+  selectedSection: LocationIdName,
+  printingPalletLabel: boolean,
+  palletId: number,
+  itemNbr: number,
+  selectedSignType: PrintPaperSize,
+  exceptionType: string
+) => {
+  validateSession(navigation, route.name)
+    .then(() => {
+      if (printingLocationLabels) {
+        const printLocList: PrintLocationList[] = [];
+        if (printingLocationLabels === LocationName.AISLE) {
+          // Add Get Sections response to print list body
+          sectionsList.forEach(section => {
+            const printQueueArrayItem: PrintLocationList = {
+              locationId: section.sectionId,
+              qty: signQty,
+              printerMACAddress: selectedPrinter?.id || ''
+            };
+            printLocList.push(printQueueArrayItem);
+          });
+        } else {
+          printLocList.push({
+            locationId: selectedSection.id,
+            qty: signQty,
+            printerMACAddress: selectedPrinter?.id || ''
+          });
+        }
+        trackEvent('print_section_label', {
+          printItem: JSON.stringify(printLocList)
+        });
+        dispatch(printLocationLabel({ printLabelList: printLocList }));
+      } else if (printingPalletLabel) {
+        const printPalletList: PrintPalletList[] = [];
+        printPalletList.push({
+          palletId,
+          qty: signQty,
+          printerMACAddress: selectedPrinter?.id || ''
+        });
+        trackEvent('print_pallet', {
+          printItem: JSON.stringify(printPalletList)
+        });
+        dispatch(printPalletLabel({ printPalletList }));
+      } else {
+        const printList: PrintItemList[] = [
+          {
+            itemNbr,
+            qty: signQty,
+            code: getPrinter(selectedPrinter, selectedSignType),
+            description: selectedSignType,
+            printerMACAddress: selectedPrinter?.id || '',
+            isPortablePrinter: selectedPrinter?.type === 1,
+            workListTypeCode: exceptionType
+          }
+        ];
+        trackEvent('print_price_sign', { printItem: JSON.stringify(printList) });
+        dispatch(printSign({ printList }));
+      }
+    }).catch(() => {});
+};
+
+export const selectQuantityView = (
+  setIsValidQty: React.Dispatch<React.SetStateAction<boolean>>,
+  signQty: number,
+  setSignQty: React.Dispatch<React.SetStateAction<number>>,
+  isValidQty: boolean,
+) => (
+  <View style={styles.copyQtyContainer}>
+    <Text style={styles.copyQtyLabel}>{strings('PRINT.COPY_QTY')}</Text>
+    <View style={styles.qtyChangeContainer}>
+      <IconButton
+        icon={renderPlusMinusBtn('minus')}
+        type={IconButton.Type.SOLID_WHITE}
+        backgroundColor={COLOR.GREY_400}
+        height={30}
+        width={30}
+        radius={50}
+        onPress={() => {
+          setIsValidQty(true);
+          setHandleDecreaseQty(signQty, setSignQty);
+        }}
+        testID="minusbutton"
+      />
+      <TextInput
+        style={[styles.copyQtyInput, isValidQtyStyle(isValidQty)]}
+        keyboardType="numeric"
+        onChangeText={(text: string) => {
+          const newQty: number = parseInt(text, 10);
+          checkQuantity(newQty, setIsValidQty, setSignQty);
+        }}
+        testID="signQtyInput"
+      >
+        {signQty}
+      </TextInput>
+      <IconButton
+        icon={renderPlusMinusBtn('plus')}
+        type={IconButton.Type.SOLID_WHITE}
+        backgroundColor={COLOR.GREY_400}
+        height={30}
+        width={30}
+        radius={50}
+        onPress={() => {
+          setIsValidQty(true);
+          setHandleIncreaseQty(signQty, setSignQty);
+        }}
+        testID="plusbutton"
+      />
+    </View>
+    {validateQuantity(isValidQty)}
+  </View>
+);
+
+export const navListenerHook = (
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+  printingLocationLabels: string,
+  printingPalletLabel: boolean
+) => {
+  // Resets Print api response data when navigating off-screen
+  navigation.addListener('beforeRemove', () => {
+    dispatch({ type: PRINT_SIGN.RESET });
+    dispatch({ type: PRINT_LOCATION_LABELS.RESET });
+    dispatch({ type: PRINT_PALLET_LABEL.RESET });
+    if (printingLocationLabels) {
+      dispatch(unsetPrintingLocationLabels());
+    }
+    if (printingPalletLabel) {
+      dispatch(unsetPrintingPalletLabel());
+    }
+    dispatch(setPrintingType(null));
+  });
+  // set sign type to extra small when coming from loc mgmt screens
+  navigation.addListener('focus', () => {
+    if (printingLocationLabels) {
+      dispatch(setSignType('XSmall'));
+    }
+  });
+};
+
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
     scannedEvent, exceptionType, actionCompleted, itemResult, printAPI, printLabelAPI, printPalletAPI,
@@ -222,9 +566,11 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     selectedAisle, selectedSection, selectedZone, dispatch, navigation, route, signQty, palletInfo, locationPrintQueue,
     setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook, printerList, userConfig
   } = props;
+  const itemDetailsResult = (isitemResultHasData(itemResult) as ItemDetails
+  || getMockItemDetails(scannedEvent.value || ''));
   const {
-    itemName, itemNbr, upcNbr, categoryNbr
-  } = isitemResultHasData(itemResult) as ItemDetails || getMockItemDetails(scannedEvent.value);
+    itemName, itemNbr, categoryNbr
+  } = itemDetailsResult;
   const sectionsList: SectionItem[] = (sectionsResult && sectionsResult.data) || [];
 
   const getLocationName = () => (printingLocationLabels === LocationName.AISLE
@@ -234,254 +580,42 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const getFullSectionName = (sectionName: string) => (
     `${strings(LOCATION_SECTION)} ${selectedZone.name}${selectedAisle.name}-${sectionName}`);
 
-  useLayoutHook(() => {
-    // Just used to set the default printer the first time, since redux loads before the translations
-    const printListHasLaserPrinter = printerList.some(printer => printer.type === PrinterType.LASER);
-    if (selectedPrinter?.name === '' || !printListHasLaserPrinter) {
-      const defaultPrinter: Printer = {
-        type: PrinterType.LASER,
-        name: strings('PRINT.FRONT_DESK'),
-        desc: strings('GENERICS.DEFAULT'),
-        id: '000000000000',
-        labelsAvailable: ['price']
-      };
-      dispatch(setPriceLabelPrinter(defaultPrinter));
-      if (!printListHasLaserPrinter) {
-        dispatch(addToPrinterList(defaultPrinter));
-      }
-      savePrinter(defaultPrinter);
-    }
-    if (printingPalletLabel) {
-      dispatch(setPrintingType(PrintingType.PALLET));
-    } else if (printingLocationLabels) {
-      dispatch(setPrintingType(PrintingType.LOCATION));
-    } else {
-      dispatch(setPrintingType(PrintingType.PRICE_SIGN));
-    }
-  }, []);
+  useLayoutHook(() => setPrinterLayoutHook(
+    printerList,
+    selectedPrinter,
+    dispatch,
+    printingPalletLabel,
+    printingLocationLabels
+  ), []);
 
   // Navigation Listener
-  useEffectHook(() => {
-    // Resets Print api response data when navigating off-screen
-    navigation.addListener('beforeRemove', () => {
-      dispatch({ type: PRINT_SIGN.RESET });
-      dispatch({ type: PRINT_LOCATION_LABELS.RESET });
-      dispatch({ type: PRINT_PALLET_LABEL.RESET });
-      if (printingLocationLabels) {
-        dispatch(unsetPrintingLocationLabels());
-      }
-      if (printingPalletLabel) {
-        dispatch(unsetPrintingPalletLabel());
-      }
-      dispatch(setPrintingType(null));
-    });
-    // set sign type to extra small when coming from loc mgmt screens
-    navigation.addListener('focus', () => {
-      if (printingLocationLabels) {
-        dispatch(setSignType('XSmall'));
-      }
-    });
-  }, []);
+  useEffectHook(() => navListenerHook(
+    navigation, dispatch, printingLocationLabels, printingPalletLabel
+  ), []);
 
   // Print Sign API
-  useEffectHook(() => {
-    // on api success
-    if (!printAPI.isWaiting && printAPI.result) {
-      isValidDispatch(props, actionCompleted, exceptionType);
-      navigation.goBack();
-    }
-    // on api failure
-    if (!printAPI.isWaiting && printAPI.error) {
-      setError({ error: true, message: strings(PRINT_ERROR) });
-    }
-    // on api submission
-    if (printAPI.isWaiting) {
-      setError({ error: false, message: '' });
-    }
-  }, [printAPI]);
+  useEffectHook(() => printSignApiHook(
+    printAPI,
+    navigation,
+    setError,
+    dispatch,
+    actionCompleted,
+    exceptionType
+  ), [printAPI]);
 
   // Print Label API
-  useEffectHook(() => {
-    // on api success
-    if (!printLabelAPI.isWaiting && printLabelAPI.result) {
-      Toast.show({
-        type: 'success',
-        text1: strings('PRINT.LOCATION_SUCCESS'),
-        position: 'bottom',
-        visibilityTime: 3000
-      });
-      navigation.goBack();
-    }
-    // on api failure
-    if (!printLabelAPI.isWaiting && printLabelAPI.error) {
-      setError({ error: true, message: strings(PRINT_ERROR) });
-    }
-    // on api submission
-    if (printLabelAPI.isWaiting) {
-      setError({ error: false, message: '' });
-    }
-  }, [printLabelAPI]);
+  useEffectHook(() => printLocationApiHook(
+    printLabelAPI,
+    navigation,
+    setError
+  ), [printLabelAPI]);
 
   // Print Pallet API
-  useEffectHook(() => {
-    // on api success
-    if (!printPalletAPI.isWaiting && printPalletAPI.result) {
-      Toast.show({
-        type: 'success',
-        text1: strings('PRINT.PALLET_SUCCESS'),
-        position: 'bottom',
-        visibilityTime: 3000
-      });
-      navigation.goBack();
-    }
-    // on api failure
-    if (!printPalletAPI.isWaiting && printPalletAPI.error) {
-      setError({ error: true, message: strings(PRINT_ERROR) });
-    }
-    // on api submission
-    if (printPalletAPI.isWaiting) {
-      setError({ error: false, message: '' });
-    }
-  }, [printPalletAPI]);
-
-  const handleTextChange = (text: string) => {
-    const newQty: number = parseInt(text, 10);
-    checkQuantity(newQty, setIsValidQty, setSignQty);
-  };
-
-  const handleIncreaseQty = () => {
-    setIsValidQty(true);
-    setHandleIncreaseQty(signQty, setSignQty);
-  };
-
-  const handleDecreaseQty = () => {
-    setIsValidQty(true);
-    setHandleDecreaseQty(signQty, setSignQty);
-  };
-
-  const handleChangePrinter = () => {
-    validateSession(navigation, route.name).then(() => {
-      trackEvent('print_change_printer_click');
-      navigation.navigate('PrinterList');
-    }).catch(() => {});
-  };
-
-  const handleAddPrintList = () => {
-    // check if the item/size already exists on the print queue
-    const itemSizeExists = isItemSizeExists(printQueue, selectedSignType, itemNbr);
-    // TODO Disable check on price sign screen and vice versa
-    const locationLabelExists = aisleSectionExists(locationPrintQueue, selectedSection.id);
-    // TODO Use LocationLabelCheck to allow some items to be added to the print queue
-    if (itemSizeExists || (locationLabelExists && printingLocationLabels === LocationName.SECTION)) {
-      // TODO show popup if already exists
-      dispatch(showInfoModal(strings('LOCATION.PRINT_LABEL_EXISTS_HEADER'), strings('LOCATION.PRINT_LABEL_EXISTS')));
-      trackEvent('print_already_exists_in_queue', { itemName, selectedSignType });
-    } else {
-      // add to print queue, forcing to use laser
-      // TODO show popup if laser printer is not selected when adding to queue
-      // TODO show toast that the item was added to queue
-      let printQueueItem: PrintQueueItem;
-      if (!printingLocationLabels) {
-        printQueueItem = {
-          itemName,
-          itemNbr,
-          upcNbr,
-          catgNbr: categoryNbr,
-          signQty,
-          worklistType: exceptionType,
-          paperSize: selectedSignType,
-          itemType: PrintQueueItemType.ITEM
-        };
-        trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
-        dispatch(addToPrintQueue(printQueueItem));
-      } else if (printingLocationLabels === LocationName.AISLE) {
-        const printQueueItems: PrintQueueItem[] = [];
-        // Add Get Sections response to print queue
-        sectionsList.forEach(section => {
-          if (!aisleSectionExists(locationPrintQueue, section.sectionId)) {
-            const printQueueArrayItem: PrintQueueItem = {
-              itemName: getFullSectionName(section.sectionName),
-              locationId: section.sectionId,
-              paperSize: selectedSignType,
-              signQty,
-              itemType: PrintQueueItemType.SECTION
-            };
-            printQueueItems.push(printQueueArrayItem);
-          }
-        });
-        trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItems) });
-        dispatch(addMultipleToLocationPrintQueue(printQueueItems));
-      } else {
-        const { id } = selectedSection;
-        printQueueItem = {
-          itemName: getLocationName(),
-          locationId: id,
-          paperSize: selectedSignType,
-          signQty,
-          itemType: PrintQueueItemType.SECTION
-        };
-        trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
-        dispatch(addLocationPrintQueue(printQueueItem));
-      }
-      isValidDispatch(props, actionCompleted, exceptionType);
-      navigation.goBack();
-    }
-  };
-
-  const handlePrint = () => {
-    validateSession(navigation, route.name)
-      .then(() => {
-        if (printingLocationLabels) {
-          const printLocList: PrintLocationList[] = [];
-          if (printingLocationLabels === LocationName.AISLE) {
-            // Add Get Sections response to print list body
-            sectionsList.forEach(section => {
-              const printQueueArrayItem: PrintLocationList = {
-                locationId: section.sectionId,
-                qty: signQty,
-                printerMACAddress: selectedPrinter?.id || ''
-              };
-              printLocList.push(printQueueArrayItem);
-            });
-          } else {
-            printLocList.push({
-              locationId: selectedSection.id,
-              qty: signQty,
-              printerMACAddress: selectedPrinter?.id || ''
-            });
-          }
-          trackEvent('print_section_label', {
-            printItem: JSON.stringify(printLocList)
-          });
-          dispatch(printLocationLabel({ printLabelList: printLocList }));
-        } else if (printingPalletLabel) {
-          const printPalletList: PrintPalletList[] = [];
-          printPalletList.push({
-            palletId: palletInfo.id,
-            qty: signQty,
-            printerMACAddress: selectedPrinter?.id || ''
-          });
-          trackEvent('print_pallet', {
-            printItem: JSON.stringify(printPalletList)
-          });
-          dispatch(printPalletLabel({ printPalletList }));
-        } else {
-          const printList: PrintItemList[] = [
-            {
-              itemNbr,
-              qty: signQty,
-              code: getPrinter(selectedPrinter, selectedSignType),
-              description: selectedSignType,
-              printerMACAddress: selectedPrinter?.id || '',
-              isPortablePrinter: selectedPrinter?.type === 1,
-              workListTypeCode: exceptionType
-            }
-          ];
-          trackEvent('print_price_sign', { printItem: JSON.stringify(printList) });
-          dispatch(printSign({ printList }));
-        }
-      }).catch(() => {});
-  };
+  useEffectHook(() => printPalletApiHook(
+    printPalletAPI,
+    navigation,
+    setError
+  ), [printPalletAPI]);
 
   const detailsView = () => (!printingLocationLabels
     // Item details view
@@ -525,7 +659,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             titleFontSize={14}
             type={Button.Type.NO_BORDER}
             height={20}
-            onPress={handleChangePrinter}
+            onPress={() => handleChangePrinter(navigation, route)}
           />
         </View>
       )
@@ -544,44 +678,10 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             titleFontSize={14}
             type={Button.Type.NO_BORDER}
             height={20}
-            onPress={handleChangePrinter}
+            onPress={() => handleChangePrinter(navigation, route)}
           />
         </View>
       )
-  );
-
-  const selectQuantityView = () => (
-    <View style={styles.copyQtyContainer}>
-      <Text style={styles.copyQtyLabel}>{strings('PRINT.COPY_QTY')}</Text>
-      <View style={styles.qtyChangeContainer}>
-        <IconButton
-          icon={renderPlusMinusBtn('minus')}
-          type={IconButton.Type.SOLID_WHITE}
-          backgroundColor={COLOR.GREY_400}
-          height={30}
-          width={30}
-          radius={50}
-          onPress={handleDecreaseQty}
-        />
-        <TextInput
-          style={[styles.copyQtyInput, isValidQtyStyle(isValidQty)]}
-          keyboardType="numeric"
-          onChangeText={handleTextChange}
-        >
-          {signQty}
-        </TextInput>
-        <IconButton
-          icon={renderPlusMinusBtn('plus')}
-          type={IconButton.Type.SOLID_WHITE}
-          backgroundColor={COLOR.GREY_400}
-          height={30}
-          width={30}
-          radius={50}
-          onPress={handleIncreaseQty}
-        />
-      </View>
-      {validateQuantity(isValidQty)}
-    </View>
   );
 
   const disablePrint = () => {
@@ -601,7 +701,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
       ) : (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           {detailsView()}
-          {selectQuantityView()}
+          {selectQuantityView(setIsValidQty, signQty, setSignQty, isValidQty)}
           {sizeView()}
           {printerView()}
           {isErrorRequired(error)}
@@ -626,7 +726,12 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             titleColor={COLOR.MAIN_THEME_COLOR}
             type={Button.Type.SOLID_WHITE}
             style={styles.footerBtn}
-            onPress={handleAddPrintList}
+            onPress={() => handleAddPrintList(
+              printQueue, locationPrintQueue, selectedSignType,
+              itemDetailsResult, signQty, exceptionType, selectedSection,
+              actionCompleted, sectionsList, printingLocationLabels,
+              getFullSectionName, getLocationName(), navigation, dispatch,
+            )}
             disabled={isAddtoQueueDisabled(isValidQty, selectedSignType)}
           />
           )}
@@ -634,7 +739,11 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             title={strings('PRINT.PRINT')}
             type={Button.Type.PRIMARY}
             style={styles.footerBtn}
-            onPress={handlePrint}
+            onPress={() => handlePrint(
+              navigation, route, dispatch, printingLocationLabels, sectionsList,
+              signQty, selectedPrinter, selectedSection, printingPalletLabel,
+              parseInt(palletInfo.id, 10), itemNbr, selectedSignType, exceptionType
+            )}
             disabled={disablePrint()}
           />
         </View>
