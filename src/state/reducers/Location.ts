@@ -4,7 +4,7 @@ import {
   CLEAR_SELECTED_ITEM,
   HIDE_ITEM_POPUP,
   HIDE_LOCATION_POPUP,
-  RESET_SECTION_NAME,
+  RESET_LOCATION_ALL,
   SELECT_AISLE,
   SELECT_SECTION,
   SELECT_ZONE,
@@ -46,7 +46,7 @@ export interface CreateAisles {
   sectionCount: number;
 }
 
-interface LocationState {
+export interface LocationState {
   selectedZone: LocationIdName;
   selectedAisle: LocationIdName;
   selectedSection: LocationIdName;
@@ -63,7 +63,7 @@ interface LocationState {
   selectedItem: SectionDetailsItem | null;
 }
 
-const initialState: LocationState = {
+export const initialState: LocationState = {
   selectedZone: {
     id: 0,
     name: ''
@@ -176,6 +176,7 @@ export const Location = (
       };
     case SET_AISLES_TO_CREATE:
       while (aislesToCreate.length < action.payload) {
+        // eslint-disable-next-line no-loop-func
         if (!state.aisles.find(aisle => aisleCount === parseInt(aisle.aisleName, 10))) {
           aislesToCreate.push({
             aisleName: aisleCount,
@@ -195,7 +196,7 @@ export const Location = (
         ...state,
         aislesToCreate: aisles
       };
-    case RESET_SECTION_NAME:
+    case RESET_LOCATION_ALL:
       return initialState;
     case SET_PALLET_IDS: {
       return {
