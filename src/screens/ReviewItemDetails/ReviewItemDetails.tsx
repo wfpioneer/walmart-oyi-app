@@ -45,6 +45,7 @@ import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetail
 import { Configurations } from '../../models/User';
 import { CreatePickRequest } from '../../services/Picking.service';
 import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -194,7 +195,7 @@ export const createNewPickApiHook = (
       Toast.show({
         type: 'success',
         text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
-        visibilityTime: 4000,
+        visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
       // Reset the form inputs on success
@@ -208,12 +209,19 @@ export const createNewPickApiHook = (
     // create new pick api error
     if (createNewPickApi.error) {
       const errResponse = createNewPickApi.error.response;
-      if (errResponse && errResponse.status === 409
+      if (errResponse && errResponse.status === 409 && errResponse.data.errorEnum === 'NO_RESERVE_PALLETS_AVAILABLE') {
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+      } else if (errResponse && errResponse.status === 409
         && errResponse.data.errorEnum === 'PICK_REQUEST_CRITERIA_ALREADY_MET') {
         Toast.show({
           type: 'error',
           text1: strings('PICKING.PICK_REQUEST_CRITERIA_ALREADY_MET'),
-          visibilityTime: 4000,
+          visibilityTime: SNACKBAR_TIMEOUT,
           position: 'bottom'
         });
       } else {
@@ -221,7 +229,7 @@ export const createNewPickApiHook = (
           type: 'error',
           text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
           text2: strings('GENERICS.TRY_AGAIN'),
-          visibilityTime: 4000,
+          visibilityTime: SNACKBAR_TIMEOUT,
           position: 'bottom'
         });
       }
