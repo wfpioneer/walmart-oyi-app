@@ -1,10 +1,10 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
+import {object} from "prop-types";
 import OHQtyUpdate, {
   assignHandleTextChange, calculateDecreaseQty, calculateIncreaseQty,
-  validateSameQty, validateQty
+  validateQty, validateSameQty
 } from './OHQtyUpdate';
-import {object} from "prop-types";
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
 
