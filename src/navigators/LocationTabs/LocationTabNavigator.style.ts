@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   clear: {
     color: COLOR.MAIN_THEME_COLOR,
     paddingRight: 14,
-    fontSize: 14
+    fontSize: 16
   },
   addText: {
     color: COLOR.MAIN_THEME_COLOR,
