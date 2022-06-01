@@ -413,7 +413,8 @@ export default {
     PICK_COMPLETED_PLURAL: '补货已完成',
     PICKLIST_UPDATED: '补货清单已更新',
     PICK_COMPLETED_AND_PICKLIST_UPDATED: '已完成一个补货，补货清单已更新',
-    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: '已完成多个补货，补货清单已更新'
+    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: '已完成多个补货，补货清单已更新',
+    NO_RESERVE_PALLET_AVAILABLE_ERROR: '高货架无卡板可取'
   },
   BINNING: {
     BINNING: '上架',
