@@ -233,16 +233,13 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
           {headerText}
         </Text>
         {isEditEnabled ? (
-          <Button
-            type={3}
-            title={strings('GENERICS.ADD')}
-            titleColor={isDisabled ? COLOR.DISABLED_BLUE : COLOR.MAIN_THEME_COLOR}
-            titleFontSize={12}
-            titleFontWeight="bold"
-            height={28}
-            onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
-            disabled={isDisabled}
-          />
+          <TouchableOpacity onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}>
+            <View>
+              <Text style={styles.addText}>
+                {strings('GENERICS.ADD')}
+              </Text>
+            </View>
+          </TouchableOpacity>
         ) : null}
       </View>
     </>

@@ -4,21 +4,23 @@ import { COLOR } from '../../themes/Color';
 const styles = StyleSheet.create({
   tabHeader: {
     backgroundColor: COLOR.WHITE,
-    padding: 14,
     marginHorizontal: 0,
     borderBottomWidth: 2,
+    paddingLeft: 10,
     borderBottomColor: COLOR.GREY_200,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   clear: {
     color: COLOR.MAIN_THEME_COLOR,
     paddingRight: 14,
     fontSize: 14
   },
-  add: {
+  addText: {
     color: COLOR.MAIN_THEME_COLOR,
-    paddingLeft: 14,
-    fontSize: 14
+    fontSize: 14,
+    paddingVertical: 10,
+    paddingHorizontal: 25
   },
   tabHeaderText: {
     flex: 1,
