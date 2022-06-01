@@ -16,7 +16,7 @@ export const SELECT_SECTION = 'LOCATION/SELECT_SECTION';
 export const SET_SECTIONS = 'LOCATION/SET_SECTIONS';
 export const SHOW_LOCATION_POPUP = 'LOCATION/SHOW_POPUP';
 export const HIDE_LOCATION_POPUP = 'LOCATION/HIDE_POPUP';
-export const RESET_SECTION_NAME = 'LOCATION/RESET_SECTION_NAME';
+export const RESET_LOCATION_ALL = 'LOCATION/RESET_LOCATION_ALL';
 export const SET_POSSIBLE_ZONES = 'LOCATION/SET_POSSIBLE_ZONES';
 export const SET_CREATE_FLOW = 'LOCATION/SET_CREATE_FLOW';
 export const SET_NEW_ZONE = 'LOCATION/SET_NEW_ZONE';
@@ -77,7 +77,7 @@ export const hideLocationPopup = () => ({
 } as const);
 
 export const resetLocationAll = () => ({
-  type: RESET_SECTION_NAME // TODO rename type to match variable name
+  type: RESET_LOCATION_ALL
 } as const);
 
 export const setPossibleZones = (zoneArray: PossibleZone[]) => ({
