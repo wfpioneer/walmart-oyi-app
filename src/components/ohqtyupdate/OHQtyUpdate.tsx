@@ -1,5 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
+import { AxiosError } from 'axios';
 import styles from './OHQtyUpdate.style';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
@@ -7,7 +8,6 @@ import IconButton from '../buttons/IconButton';
 import NumericSelector from '../NumericSelector/NumericSelector';
 import { numbers, strings } from '../../locales';
 import { ModalCloseIcon } from '../../screens/Modal/Modal';
-import { AxiosError } from 'axios';
 
 interface OHQtyUpdateProps {
   onHandsQty: number;
@@ -54,7 +54,10 @@ export const calculateIncreaseQty = (newOHQty: any,
 };
 
 const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
-  const { onHandsQty, newOHQty, setNewOHQty, handleClose, handleSubmit, isWaiting, error } = props;
+  const {
+    onHandsQty, newOHQty, setNewOHQty,
+    handleClose, handleSubmit, isWaiting, error
+  } = props;
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
@@ -74,7 +77,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
       <View style={styles.closeContainer}>
         {!isWaiting && (
           <IconButton
-            testID='closeButton'
+            testID="closeButton"
             icon={ModalCloseIcon}
             type={Button.Type.NO_BORDER}
             onPress={handleClose}
@@ -82,7 +85,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
         )}
       </View>
       <NumericSelector
-        testID='numericSelector'
+        testID="numericSelector"
         isValid={validateQty(newOHQty)}
         onDecreaseQty={handleDecreaseQty}
         onIncreaseQty={handleIncreaseQty}
@@ -99,10 +102,11 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
       <Text style={styles.ohLabel}>
         {`${strings('GENERICS.TOTAL')} ${strings('ITEM.ON_HANDS')}`}
       </Text>
-      {error &&
-      <Text style={styles.invalidLabel}>
-        {strings('ITEM.OH_UPDATE_API_ERROR')}
-      </Text>}
+      {error && (
+        <Text style={styles.invalidLabel}>
+          {strings('ITEM.OH_UPDATE_API_ERROR')}
+        </Text>
+      )}
       {isWaiting ? (
         <ActivityIndicator
           hidesWhenStopped
@@ -113,7 +117,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
       )
         : (
           <Button
-            testID='saveButton'
+            testID="saveButton"
             style={styles.saveBtn}
             title="Save"
             type={Button.Type.PRIMARY}

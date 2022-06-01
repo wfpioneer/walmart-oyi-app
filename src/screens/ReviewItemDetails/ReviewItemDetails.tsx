@@ -895,8 +895,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           handleClose={() => handleOHQtyClose(itemDetails?.onHandsQty || 0,
             dispatch,
             setOhQtyModalVisible,
-            setNewOHQty
-            )}
+            setNewOHQty)}
           handleSubmit={() => handleOHQtySubmit(itemDetails, newOHQty, dispatch)}
         />
       </CustomModalComponent>
@@ -1007,7 +1006,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const [selectedSection, setSelectedSection] = useState('');
   const [numberOfPallets, setNumberOfPallets] = useState(1);
   const [isQuickPick, setIsQuickPick] = useState(false);
-  const [newOHQty, setNewOHQty] = useState( 0);
+  const [newOHQty, setNewOHQty] = useState(0);
   return (
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}

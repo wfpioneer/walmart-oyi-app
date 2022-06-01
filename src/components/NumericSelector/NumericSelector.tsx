@@ -6,6 +6,7 @@ import COLOR from '../../themes/Color';
 import IconButton from '../buttons/IconButton';
 
 interface NumericSelectorProps {
+  // eslint-disable-next-line react/require-default-props
   testID?: string;
   isValid: boolean;
   onDecreaseQty(): void;
@@ -49,7 +50,7 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
       ]}
     >
       <IconButton
-        testID='decreaseButton'
+        testID="decreaseButton"
         icon={renderPlusMinusBtn('minus', isMinimum)}
         type={IconButton.Type.NO_BORDER}
         height={15}
@@ -58,14 +59,14 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
         onPress={onDecreaseQty}
       />
       <TextInput
-        testID='numericTextInput'
+        testID="numericTextInput"
         style={styles.input}
         keyboardType="numeric"
         onChangeText={text => onTextChange(numberInputFilter(text))}
         value={value.toString()}
       />
       <IconButton
-        testID='increaseButton'
+        testID="increaseButton"
         icon={renderPlusMinusBtn('plus', isMaximum)}
         type={IconButton.Type.NO_BORDER}
         height={15}

@@ -1184,7 +1184,7 @@ describe('ReviewItemDetailsScreen', () => {
             upcNbr: 55559999
           }
           },
-        'type': 'SAGA/UPDATE_OH_QTY'
+        type: 'SAGA/UPDATE_OH_QTY'
       };
       handleOHQtySubmit(itemDetail[123], 10, mockDispatch);
       expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
