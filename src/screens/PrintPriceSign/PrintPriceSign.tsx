@@ -668,7 +668,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           <View style={styles.printerNameContainer}>
             <MaterialCommunityIcon name="printer-check" size={24} />
             <View style={styles.printTextMargin}>
-              <Text>{selectedPrinter?.name}</Text>
+              <Text>{selectedPrinter?.name || strings('PRINT.PRINTER_NOT_ASSIGNED')}</Text>
               <Text style={styles.printerDesc}>{selectedPrinter?.desc}</Text>
             </View>
           </View>
@@ -679,6 +679,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             type={Button.Type.NO_BORDER}
             height={20}
             onPress={() => handleChangePrinter(navigation, route)}
+            style={styles.changeButton}
           />
         </View>
       )
@@ -688,7 +689,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     if (printingPalletLabel || printingLocationLabels) {
       return selectedPrinter?.type !== PrinterType.PORTABLE;
     }
-    return isAddtoQueueDisabled(isValidQty, selectedSignType);
+    return isAddtoQueueDisabled(isValidQty, selectedSignType) || !selectedPrinter;
   };
 
   return (
