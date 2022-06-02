@@ -501,7 +501,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -521,6 +521,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginLeft": 12,
+              "paddingTop": 14,
             }
           }
         >
@@ -545,6 +546,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         height={20}
         onPress={[Function]}
         radius={5}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
         title="[missing \\"en.GENERICS.CHANGE\\" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
@@ -608,7 +614,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -908,7 +914,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -928,6 +934,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginLeft": 12,
+              "paddingTop": 14,
             }
           }
         >
@@ -952,6 +959,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         height={20}
         onPress={[Function]}
         radius={5}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
         title="[missing \\"en.GENERICS.CHANGE\\" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
@@ -1250,7 +1262,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -1270,6 +1282,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginLeft": 12,
+              "paddingTop": 14,
             }
           }
         >
@@ -1294,6 +1307,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         height={20}
         onPress={[Function]}
         radius={5}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
         title="[missing \\"en.GENERICS.CHANGE\\" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
@@ -1607,7 +1625,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -1627,6 +1645,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginLeft": 12,
+              "paddingTop": 14,
             }
           }
         >
@@ -1651,6 +1670,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         height={20}
         onPress={[Function]}
         radius={5}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
         title="[missing \\"en.GENERICS.CHANGE\\" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
@@ -1887,7 +1911,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -1989,7 +2013,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing 
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -2211,7 +2235,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
