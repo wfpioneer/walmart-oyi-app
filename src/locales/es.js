@@ -163,6 +163,7 @@ export default {
     PRICE_SIGNS: 'Señalización Precios',
     LOCATIONS: 'Ubicaciones',
     PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente',
+    PRINTER_NOT_ASSIGNED: 'No impresoras asignadas',
     PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick'
   },
   PALLET: {
@@ -413,7 +414,8 @@ export default {
     PICK_COMPLETED_PLURAL: 'Se han completado los picks',
     PICKLIST_UPDATED: 'La lista de pickeos ha sido actualizada',
     PICK_COMPLETED_AND_PICKLIST_UPDATED: 'El pickeo se ha completado y la lista se ha actualizado',
-    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los pickeos se han completado y la lista se ha actualizado'
+    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los pickeos se han completado y la lista se ha actualizado',
+    NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No hay pallet de reserva disponibles'
   },
   BINNING: {
     BINNING: 'Bodega',
