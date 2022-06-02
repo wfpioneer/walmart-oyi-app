@@ -241,17 +241,38 @@ describe('Assign Location externalized function tests', () => {
     const failApi: AsyncState = {
       ...defaultAsyncState,
       error: {
-        status: 418,
+        response: {
+          status: 418
+        },
         message: 'Im a teapot'
       }
     };
-
+    const failLocationNotFoundApi: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        response: {
+          status: 409
+        },
+        message: 'Location not found'
+      }
+    };
     binPalletsApiEffect(navigationProp, failApi, mockDispatch, routeProp);
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
-    expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
+    expect(Toast.show).toBeCalledWith(expect.objectContaining({
+      type: 'error',
+      text1: strings('BINNING.PALLET_BIN_FAILURE')
+    }));
     expect(Toast.show).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(2);
+
+    // @ts-expect-error Reset Toast.show function
+    Toast.show.mockReset();
+    binPalletsApiEffect(navigationProp, failLocationNotFoundApi, mockDispatch, routeProp);
+    expect(Toast.show).toBeCalledWith(expect.objectContaining({
+      type: 'error',
+      text1: strings('BINNING.PALLET_NOT_READY')
+    }));
   });
 
   it('tests binPalletsApiEffect on waiting', () => {

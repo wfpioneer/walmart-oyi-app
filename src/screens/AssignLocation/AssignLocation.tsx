@@ -158,12 +158,21 @@ export const binPalletsApiEffect = (
 
       // Fail
       if (binPalletsApi.error) {
-        Toast.show({
-          position: 'bottom',
-          type: 'error',
-          text1: strings('BINNING.PALLET_BIN_FAILURE'),
-          visibilityTime: SNACKBAR_TIMEOUT
-        });
+        if (binPalletsApi.error.response.status === 409) {
+          Toast.show({
+            position: 'bottom',
+            type: 'error',
+            text1: strings('BINNING.PALLET_NOT_READY'),
+            visibilityTime: SNACKBAR_TIMEOUT
+          });
+        } else {
+          Toast.show({
+            position: 'bottom',
+            type: 'error',
+            text1: strings('BINNING.PALLET_BIN_FAILURE'),
+            visibilityTime: SNACKBAR_TIMEOUT
+          });
+        }
         dispatch({ type: POST_BIN_PALLETS.RESET });
       }
     } else {

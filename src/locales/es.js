@@ -162,7 +162,8 @@ export default {
     LOCATION_PRINTING: 'Impresión de Ubicaciones',
     PRICE_SIGNS: 'Señalización Precios',
     LOCATIONS: 'Ubicaciones',
-    PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente'
+    PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente',
+    PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',

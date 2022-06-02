@@ -430,7 +430,8 @@ export default {
     WARNING_DESCRIPTION: 'If you navigate away from this screen the pallets already scanned will not be binned',
     LAST_LOC: 'Last Loc',
     FIRST_ITEM: 'First Item',
-    EMPTY_PALLET: 'Empty Pallet'
+    EMPTY_PALLET: 'Empty Pallet',
+    PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick'
   },
   SETTINGS: {
     TITLE: 'Settings'
