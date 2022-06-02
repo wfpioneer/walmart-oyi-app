@@ -22,6 +22,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 25
   },
+  addTextDisabled: {
+    color: COLOR.DISABLED_BLUE,
+    fontSize: 14,
+    paddingVertical: 10,
+    paddingHorizontal: 25
+  },
   tabHeaderText: {
     flex: 1,
     fontSize: 18

@@ -624,6 +624,7 @@ exports[`Test Location Tabs Tests rendering Tab Headers Renders items Header 1`]
       ITEMS
     </Text>
     <ForwardRef
+      disabled={false}
       onPress={[Function]}
     >
       <View>
@@ -671,6 +672,7 @@ exports[`Test Location Tabs Tests rendering Tab Headers Renders pallet Header 1`
       PALLETS
     </Text>
     <ForwardRef
+      disabled={false}
       onPress={[Function]}
     >
       <View>

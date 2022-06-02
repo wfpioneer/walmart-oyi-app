@@ -233,9 +233,12 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
           {headerText}
         </Text>
         {isEditEnabled ? (
-          <TouchableOpacity onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}>
+          <TouchableOpacity
+            onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
+            disabled={isDisabled}
+          >
             <View>
-              <Text style={styles.addText}>
+              <Text style={isDisabled ? styles.addTextDisabled : styles.addText}>
                 {strings('GENERICS.ADD')}
               </Text>
             </View>
