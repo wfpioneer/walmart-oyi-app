@@ -11,6 +11,7 @@ import COLOR from '../../../themes/Color';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
 import {
   clearFilter,
+  toggleArea,
   toggleCategories,
   toggleExceptions,
   updateFilterCategories,
@@ -96,6 +97,43 @@ export const renderExceptionFilterCard = (item: FilterListItem, dispatch: Dispat
         { item.display }
       </Text>
     </TouchableOpacity>
+  );
+};
+
+export const renderAreaFilterCard = (): JSX.Element => <View />;
+export const RenderAreaCard = (props: {
+  areaOpen: boolean,
+  dispatch: Dispatch<any>,
+  filteredAreas: any[],
+}): JSX.Element => {
+  const { areaOpen, dispatch, filteredAreas } = props;
+
+  let areaSubText = '';
+  if (filteredAreas.length === 0) {
+    areaSubText = strings('WORKLIST.ALL');
+  } else {
+    filteredAreas.forEach((area: string) => {
+      if (areaSubText !== '') {
+        areaSubText = `${areaSubText}\n${area}`;
+      } else if (area) {
+        areaSubText = area;
+      }
+    });
+  }
+  return (
+    <>
+      <TouchableOpacity style={styles.menuCard} onPress={() => { dispatch(toggleArea(!areaOpen)); }}>
+        <MenuCard title={strings('WORKLIST.AREA')} subtext={areaSubText} opened={areaOpen} />
+      </TouchableOpacity>
+      { areaOpen && (
+        <FlatList
+          data={filteredAreas}
+          renderItem={({ item }) => renderAreaFilterCard()}
+          style={styles.categoryList}
+          keyExtractor={(item: any) => item}
+        />
+      )}
+    </>
   );
 };
 
@@ -213,11 +251,12 @@ interface FilterMenuProps {
   filterCategories: string[],
   exceptionOpen: boolean,
   filterExceptions: string[],
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  areaOpen: boolean
 }
 export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
   const {
-    workListAPI, categoryOpen, filterCategories, dispatch, exceptionOpen, filterExceptions
+    workListAPI, categoryOpen, filterCategories, dispatch, exceptionOpen, filterExceptions, areaOpen
   } = props;
   return (
     <View style={styles.menuContainer}>
@@ -227,6 +266,11 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
           <Text style={styles.clearText}>{strings('WORKLIST.CLEAR')}</Text>
         </TouchableOpacity>
       </View>
+      <RenderAreaCard
+        areaOpen={areaOpen}
+        dispatch={dispatch}
+        filteredAreas={[]}
+      />
       <RenderCategoryCollapsibleCard
         workListAPI={workListAPI}
         categoryOpen={categoryOpen}
@@ -246,7 +290,7 @@ export const FilterMenu = (): JSX.Element => {
   const dispatch = useDispatch();
   const workListApi = useTypedSelector(state => state.async.getWorklist);
   const {
-    categoryOpen, filterCategories, exceptionOpen, filterExceptions
+    categoryOpen, filterCategories, exceptionOpen, filterExceptions, areaOpen
   } = useTypedSelector(state => state.Worklist);
 
   return (
@@ -257,6 +301,7 @@ export const FilterMenu = (): JSX.Element => {
       filterCategories={filterCategories}
       exceptionOpen={exceptionOpen}
       filterExceptions={filterExceptions}
+      areaOpen={areaOpen}
     />
   );
 };
