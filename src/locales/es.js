@@ -318,10 +318,10 @@ export default {
     TODO: 'Que hacer',
     COMPLETED: 'Terminado',
     WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo',
-    AREA: 'Area'
+    AREA: 'Área'
   },
   SELECTLOCATIONTYPE: {
-    TITLE: 'Seleccione el tipo de ubicación',
+    TITLE: 'Seleccione el tipo de ubicaciksón',
     FLOOR: 'Piso',
     ENDCAP: 'Cabecera',
     POD: 'POD',
