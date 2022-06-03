@@ -60,7 +60,8 @@ export const updatePicklistStatusApiHook = (
   items: PickListItem[],
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  selectedPicklistAction: PickAction|null
+  selectedPicklistAction: PickAction|null,
+  userId: string
 ) => {
   // on api success
   if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result
@@ -70,7 +71,8 @@ export const updatePicklistStatusApiHook = (
         ? PickStatus.ACCEPTED_PICK : PickStatus.ACCEPTED_BIN;
       const updatedItems = items.map(item => ({
         ...item,
-        status: updatedStatus
+        status: updatedStatus,
+        assignedAssociate: userId
       }));
       dispatch(updatePicks(updatedItems));
     } else {
@@ -259,7 +261,8 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     selectedPicks,
     dispatch,
     navigation,
-    selectedPicklistAction
+    selectedPicklistAction,
+    userId
   ), [updatePicklistStatusApi]);
 
   useEffectHook(() => updatePalletNotFoundApiHook(
