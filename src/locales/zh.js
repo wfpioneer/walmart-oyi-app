@@ -317,7 +317,7 @@ export default {
     TODO: '待完成',
     COMPLETED: '已完成',
     WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试',
-    AREA: 'Area'
+    AREA: '区域'
   },
   SELECTLOCATIONTYPE: {
     TITLE: '选择位置类型',

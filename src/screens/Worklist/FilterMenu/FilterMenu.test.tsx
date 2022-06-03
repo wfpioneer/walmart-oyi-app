@@ -58,6 +58,7 @@ describe('FilterMenu Component', () => {
           filterCategories={[]}
           exceptionOpen={false}
           filterExceptions={[]}
+          areaOpen={false}
         />
       </Provider>
     );
@@ -74,6 +75,7 @@ describe('FilterMenu Component', () => {
           filterCategories={[]}
           exceptionOpen={false}
           filterExceptions={[]}
+          areaOpen={false}
         />
       </Provider>
     );
