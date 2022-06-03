@@ -50,7 +50,8 @@ export const MenuCard = (props: MenuCardProps): JSX.Element => {
 
 export const renderCategoryFilterCard = (
   item: FilteredCategory,
-  dispatch: Dispatch<any>, filterCategories: string[]
+  dispatch: Dispatch<any>,
+  filterCategories: string[]
 ): JSX.Element => {
   const onItemPress = () => {
     if (item.selected) {
@@ -104,7 +105,7 @@ export const renderAreaFilterCard = (): JSX.Element => <View />;
 export const RenderAreaCard = (props: {
   areaOpen: boolean,
   dispatch: Dispatch<any>,
-  filteredAreas: any[],
+  filteredAreas: string[],
 }): JSX.Element => {
   const { areaOpen, dispatch, filteredAreas } = props;
 
