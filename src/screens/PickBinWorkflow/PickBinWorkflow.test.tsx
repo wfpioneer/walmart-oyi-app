@@ -16,6 +16,7 @@ import { hideActivityModal, showActivityModal } from '../../state/actions/Modal'
 import { strings } from '../../locales';
 import { mockItem } from '../../mockData/mockPickList';
 import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
+import mockUser from '../../mockData/mockUser';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -601,7 +602,9 @@ describe('PickBin Workflow render tests', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      updatePicklistStatusApiHook(failureApi, mockSelectedItems, mockDispatch, navigationProp, PickAction.ACCEPT_BIN);
+      updatePicklistStatusApiHook(
+        failureApi, mockSelectedItems, mockDispatch, navigationProp, PickAction.ACCEPT_BIN, mockUser.userId
+      );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(hideActivityModal).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistError);
@@ -612,7 +615,9 @@ describe('PickBin Workflow render tests', () => {
         ...defaultAsyncState,
         isWaiting: true
       };
-      updatePicklistStatusApiHook(isLoadingApi, mockSelectedItems, mockDispatch, navigationProp, PickAction.ACCEPT_BIN);
+      updatePicklistStatusApiHook(
+        isLoadingApi, mockSelectedItems, mockDispatch, navigationProp, PickAction.ACCEPT_BIN, mockUser.userId
+      );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(showActivityModal).toBeCalledTimes(1);
     });
