@@ -321,7 +321,7 @@ export default {
     AREA: 'Área'
   },
   SELECTLOCATIONTYPE: {
-    TITLE: 'Seleccione el tipo de ubicaciksón',
+    TITLE: 'Seleccione el tipo de ubicación',
     FLOOR: 'Piso',
     ENDCAP: 'Cabecera',
     POD: 'POD',
