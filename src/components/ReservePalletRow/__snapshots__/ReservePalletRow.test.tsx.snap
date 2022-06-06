@@ -57,6 +57,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
         "name": "Section 1",
       }
     }
+    setPalletClicked={[MockFunction]}
   />
 </Context.Provider>
 `;
@@ -125,6 +126,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
         "name": "Section 1",
       }
     }
+    setPalletClicked={[MockFunction]}
   />
 </Context.Provider>
 `;
@@ -171,6 +173,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = 
         "name": "Section 1",
       }
     }
+    setPalletClicked={[MockFunction]}
   />
 </Context.Provider>
 `;

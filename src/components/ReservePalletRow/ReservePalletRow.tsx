@@ -5,6 +5,10 @@ import {
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  deletePallet,
+  getPalletDetails, getSectionDetails
+} from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './ReservePalletRow.style';
 import { strings } from '../../locales';
@@ -12,11 +16,14 @@ import { ReserveDetailsPallet } from '../../models/LocationItems';
 import { CustomModalComponent } from '../../screens/Modal/Modal';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
-import { deletePallet, getSectionDetails } from '../../state/actions/saga';
 
-export type ReservePalletRowProps = { section: { id: number, name: string }, reservePallet: ReserveDetailsPallet };
+export type ReservePalletRowProps = {
+  section: { id: number, name: string },
+  reservePallet: ReserveDetailsPallet,
+  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
+};
 const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
-  const { section, reservePallet } = props;
+  const { section, reservePallet, setPalletClicked } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
@@ -37,6 +44,10 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
       palletId: reservePallet.id
     }));
   };
+  const onPalletClick = () => {
+    setPalletClicked(true);
+    dispatch(getPalletDetails({ palletIds: [reservePallet.id.toString()], isAllItems: true }));
+  };
   const createdDate = moment(reservePallet.palletCreateTS).format('YYYY-MM-DD');
 
   const locationManagementEdit = () => user.features.includes('location management edit')
@@ -45,7 +56,11 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   // TODO Map Pallet and Reserve Response and pass the array into this Component
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
+      <TouchableOpacity
+        testID="reserve-pallet-row"
+        style={styles.content}
+        onPress={onPalletClick}
+      >
         <View style={styles.pallet}>
           <Text style={styles.textHeader}>
             {`${strings('LOCATION.PALLET')} ${reservePallet.id}`}
@@ -77,7 +92,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
               )}
         </View>
         )}
-      </View>
+      </TouchableOpacity>
       <CustomModalComponent
         isVisible={displayConfirmation}
         onClose={() => setDisplayConfirmation(false)}
