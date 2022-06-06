@@ -25,6 +25,12 @@ export interface Configurations {
   palletExpiration: boolean;
   backupCategories: string;
   picking: boolean;
+  areas: area[];
+}
+
+export interface area {
+  area: string;
+  categories: number[];
 }
 
 export const AVAILABLE_TOOLS = ['location management', 'pallet management', 'picking', 'binning', 'settings tool'];
