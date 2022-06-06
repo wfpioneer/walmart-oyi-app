@@ -105,6 +105,43 @@ exports[`FilterMenu Component ShallowRender FilterMenu 1`] = `
   }
 >
   <FilterMenuComponent
+    areaOpen={false}
+    areas={
+      Array [
+        Object {
+          "area": "CENTER",
+          "categories": Array [
+            5,
+            7,
+            9,
+            11,
+            13,
+            16,
+          ],
+        },
+        Object {
+          "area": "GM",
+          "categories": Array [
+            21,
+            23,
+            24,
+            28,
+            31,
+          ],
+        },
+        Object {
+          "area": "Fresh",
+          "categories": Array [
+            41,
+            42,
+            43,
+            45,
+            47,
+            48,
+          ],
+        },
+      ]
+    }
     categoryOpen={false}
     dispatch={[MockFunction]}
     exceptionOpen={false}

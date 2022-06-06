@@ -3,6 +3,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
 import User from '../../models/User';
 import { QuickPickTabScreen } from './QuickPickTab';
+import { mockAreas } from '../../mockData/mockConfig';
 
 const mockUser: User = {
   userId: 'vn50pz4',
@@ -21,7 +22,8 @@ const mockUser: User = {
     palletManagement: true,
     picking: true,
     printingUpdate: true,
-    settingsTool: true
+    settingsTool: true,
+    areas: mockAreas
   },
   countryCode: 'US',
   domain: 'Home Office',
