@@ -163,8 +163,7 @@ export default {
     PRICE_SIGNS: '价格标签',
     LOCATIONS: '位置',
     PRICE_SIGN_SUCCESS: '价格标签打印成功',
-    PRINTER_NOT_ASSIGNED: '未分配打印机',
-    PALLET_NOT_READY: 'not ready to bin, pallet part of an active pick'
+    PRINTER_NOT_ASSIGNED: '未分配打印机'
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',
@@ -367,10 +366,10 @@ export default {
     CREATED_BY: '创建者',
     CREATED: '已创建',
     READY_TO_PICK: '开始补货',
-    ACCEPTED_PICK: '已补货',
+    ACCEPTED_PICK: '已接受补货任务',
     READY_TO_WORK: '开始运行',
     READY_TO_BIN: '准备上架',
-    ACCEPTED_BIN: '已上架',
+    ACCEPTED_BIN: '已接受上架任务',
     COMPLETE: '完成',
     DELETED: '删除',
     NO_PALLETS_FOUND: '未发现卡板',
@@ -396,7 +395,7 @@ export default {
     PICKLIST_SUCCESS: '成功重置铺货清单',
     PICKLIST_NOT_FOUND: '此门店无补货清单',
     PICKLIST_ERROR: '重置补货清单时报错',
-    UPDATE_PICKLIST_STATUS_SUCCESS: '成功更新补货承担',
+    UPDATE_PICKLIST_STATUS_SUCCESS: '补货清单状态更新成功',
     UPDATE_PICKLIST_STATUS_ERROR: '更新补货清单时出错',
     LOCATIONS_UPDATED: '位置已更新',
     LOCATIONS_FAILED_UPDATE: '位置更新失败',
@@ -431,7 +430,8 @@ export default {
     PALLET_BIN_PARTIAL: '部分卡板上架成功，%{number} 失败',
     LAST_LOC: '上一个位置',
     FIRST_ITEM: '第一个item',
-    EMPTY_PALLET: '空卡板'
+    EMPTY_PALLET: '空卡板',
+    PALLET_NOT_READY: '尚不可上架，部分卡板正处于补货状态'
   },
   SETTINGS: {
     TITLE: '设置'
