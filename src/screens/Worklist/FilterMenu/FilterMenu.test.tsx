@@ -17,6 +17,7 @@ import {
 import { FilterListItem, FilteredCategory } from '../../../models/FilterListItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { mockWorkListToDo } from '../../../mockData/mockWorkList';
+import { mockAreas } from '../../../mockData/mockConfig';
 
 jest.mock('../../../utils/AppCenterTool.ts', () => ({
   ...jest.requireActual('../../../utils/__mocks__/AppCenterTool'),
@@ -60,6 +61,7 @@ describe('FilterMenu Component', () => {
           exceptionOpen={false}
           filterExceptions={[]}
           areaOpen={false}
+          areas={mockAreas}
         />
       </Provider>
     );
@@ -77,6 +79,7 @@ describe('FilterMenu Component', () => {
           exceptionOpen={false}
           filterExceptions={[]}
           areaOpen={false}
+          areas={mockAreas}
         />
       </Provider>
     );
@@ -231,6 +234,7 @@ describe('FilterMenu Component', () => {
       <RenderAreaCard
         areaOpen={false}
         filteredAreas={[]}
+        areas={mockAreas}
         dispatch={mockDispatch}
       />
     );
