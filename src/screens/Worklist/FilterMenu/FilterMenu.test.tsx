@@ -61,6 +61,7 @@ describe('FilterMenu Component', () => {
           exceptionOpen={false}
           filterExceptions={[]}
           areaOpen={false}
+          areas={mockAreas}
         />
       </Provider>
     );
@@ -78,6 +79,7 @@ describe('FilterMenu Component', () => {
           exceptionOpen={false}
           filterExceptions={[]}
           areaOpen={false}
+          areas={mockAreas}
         />
       </Provider>
     );
@@ -233,6 +235,7 @@ describe('FilterMenu Component', () => {
         areaOpen={false}
         filteredAreas={[]}
         dispatch={mockDispatch}
+        areas={mockAreas}
       />
     );
     const menuButton = getByText(strings('WORKLIST.AREA'));
