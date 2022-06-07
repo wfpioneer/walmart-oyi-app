@@ -1,4 +1,4 @@
-import React, {EffectCallback, useEffect, useState} from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Keyboard,
@@ -47,20 +47,20 @@ export const addItemApiHook = (
   isFocusted: boolean,
   addItemApi: AsyncState,
   dispatch: Dispatch<any>,
-  navigateBack: Function,
-  trackEventCall: Function,
+  navigateBack: () => void,
+  trackEventCall: (eventName: string, params?: any) => void,
   addItemApiStart: number
 ) => {
   if (isFocusted) {
     if (!addItemApi.isWaiting && addItemApi.result) {
-      trackEventCall('create_items_to_section_success', { duration: moment().valueOf() - addItemApiStart });
+      trackEventCall('create_items_to_section_success', {duration: moment().valueOf() - addItemApiStart});
       Toast.show({
-          type: 'success',
-          text1: strings('LOCATION.ITEM_ADDED'),
-          visibilityTime: SNACKBAR_TIMEOUT,
-          position: 'bottom'
-        });
-      dispatch({ type: ADD_LOCATION.RESET });
+        type: 'success',
+        text1: strings('LOCATION.ITEM_ADDED'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      dispatch({type: ADD_LOCATION.RESET});
       navigateBack();
     }
 
@@ -80,7 +80,7 @@ export const addItemApiHook = (
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
-      dispatch({ type: ADD_LOCATION.RESET });
+      dispatch({type: ADD_LOCATION.RESET});
     }
   }
 };
