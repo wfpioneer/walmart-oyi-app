@@ -8,6 +8,7 @@ import { trackEvent } from '../../../utils/AppCenterTool';
 import {
   FilterMenuComponent,
   MenuCard,
+  RenderAreaCard,
   RenderCategoryCollapsibleCard,
   RenderExceptionTypeCard,
   renderCategoryFilterCard,
@@ -59,6 +60,7 @@ describe('FilterMenu Component', () => {
           filterCategories={[]}
           exceptionOpen={false}
           filterExceptions={[]}
+          areaOpen={false}
         />
       </Provider>
     );
@@ -75,6 +77,7 @@ describe('FilterMenu Component', () => {
           filterCategories={[]}
           exceptionOpen={false}
           filterExceptions={[]}
+          areaOpen={false}
         />
       </Provider>
     );
@@ -223,4 +226,19 @@ describe('FilterMenu Component', () => {
     expect(mockDispatch).toBeCalledTimes(1);
     expect(toJSON()).toMatchSnapshot();
   });
+
+  it('Test renders the RenderAreaCard function and calls dispatch', () => {
+    const { toJSON, getByText } = render(
+      <RenderAreaCard
+        areaOpen={false}
+        filteredAreas={[]}
+        dispatch={mockDispatch}
+      />
+    );
+    const menuButton = getByText(strings('WORKLIST.AREA'));
+    fireEvent.press(menuButton);
+    expect(mockDispatch).toBeCalledTimes(1);
+    expect(toJSON()).toMatchSnapshot();
+  });
+  // TODO add test for rendering filteredAreas in the Flatlist
 });

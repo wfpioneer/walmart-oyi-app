@@ -11,6 +11,7 @@ import COLOR from '../../../themes/Color';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
 import {
   clearFilter,
+  toggleArea,
   toggleCategories,
   toggleExceptions,
   updateFilterCategories,
@@ -50,7 +51,8 @@ export const MenuCard = (props: MenuCardProps): JSX.Element => {
 
 export const renderCategoryFilterCard = (
   item: FilteredCategory,
-  dispatch: Dispatch<any>, filterCategories: string[]
+  dispatch: Dispatch<any>,
+  filterCategories: string[]
 ): JSX.Element => {
   const onItemPress = () => {
     if (item.selected) {
@@ -274,6 +276,7 @@ interface FilterMenuProps {
   areaOpen: boolean,
   areas: area[]
 }
+
 export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
   const {
     workListAPI, categoryOpen, filterCategories, dispatch, exceptionOpen, filterExceptions, areaOpen, areas
@@ -311,7 +314,7 @@ export const FilterMenu = (): JSX.Element => {
   const dispatch = useDispatch();
   const workListApi = useTypedSelector(state => state.async.getWorklist);
   const {
-    categoryOpen, filterCategories, exceptionOpen, filterExceptions
+    categoryOpen, filterCategories, exceptionOpen, filterExceptions, areaOpen
   } = useTypedSelector(state => state.Worklist);
   const { areas } = useTypedSelector(state => state.User.configs);
 
