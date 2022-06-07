@@ -4,6 +4,7 @@ export const TOGGLE_EXCEPTIONS = 'WORKLIST_FILTER/TOGGLE_EXCEPTIONS';
 export const UPDATE_FILTER_CATEGORIES = 'WORKLIST_FILTER/UPDATE_FILTER_CATEGORIES';
 export const UPDATE_FILTER_EXCEPTIONS = 'WORKLIST_FILTER/UPDATE_FILTER_EXCEPTIONS';
 export const CLEAR_FILTER = 'WORKLIST_FILTER/CLEAR_FILTER';
+export const TOGGLE_AREA = 'WORKLIST_FILTER/TOGGLE_AREA';
 
 export const toggleMenu = (menuOpen: boolean) => ({
   type: TOGGLE_MENU,
@@ -19,6 +20,11 @@ export const toggleExceptions = (exceptionsOpen: boolean) => ({
   type: TOGGLE_EXCEPTIONS,
   payload: exceptionsOpen
 } as const);
+
+export const toggleArea = (areaOpen: boolean) => ({
+  type: TOGGLE_AREA,
+  payload: areaOpen
+});
 
 export const updateFilterCategories = (filterCategories: string[]) => ({
   type: UPDATE_FILTER_CATEGORIES,
@@ -40,4 +46,5 @@ export type Actions =
   | ReturnType<typeof toggleExceptions>
   | ReturnType<typeof updateFilterCategories>
   | ReturnType<typeof updateFilterExceptions>
-  | ReturnType<typeof clearFilter>;
+  | ReturnType<typeof clearFilter>
+  | ReturnType<typeof toggleArea>;
