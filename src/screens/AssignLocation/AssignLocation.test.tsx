@@ -242,7 +242,8 @@ describe('Assign Location externalized function tests', () => {
       ...defaultAsyncState,
       error: {
         response: {
-          status: 418
+          status: 418,
+          data: 'No Coffee'
         },
         message: 'Im a teapot'
       }
@@ -251,11 +252,23 @@ describe('Assign Location externalized function tests', () => {
       ...defaultAsyncState,
       error: {
         response: {
-          status: 409
+          status: 409,
+          data: 'Request failed due to: LOCATION_NOT_FOUND for URI: /bin'
         },
         message: 'Location not found'
       }
     };
+    const failPalletNotReadyApi: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        response: {
+          status: 409,
+          data: 'Request failed due to: not ready to bin, pallet part of an active pick for URI: /bin'
+        },
+        message: 'Conflict'
+      }
+    };
+
     binPalletsApiEffect(navigationProp, failApi, mockDispatch, routeProp);
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
@@ -269,6 +282,14 @@ describe('Assign Location externalized function tests', () => {
     // @ts-expect-error Reset Toast.show function
     Toast.show.mockReset();
     binPalletsApiEffect(navigationProp, failLocationNotFoundApi, mockDispatch, routeProp);
+    expect(Toast.show).toBeCalledWith(expect.objectContaining({
+      type: 'error',
+      text1: strings('LOCATION.SECTION_NOT_FOUND')
+    }));
+
+    // @ts-expect-error Reset Toast.show function
+    Toast.show.mockReset();
+    binPalletsApiEffect(navigationProp, failPalletNotReadyApi, mockDispatch, routeProp);
     expect(Toast.show).toBeCalledWith(expect.objectContaining({
       type: 'error',
       text1: strings('BINNING.PALLET_NOT_READY')
