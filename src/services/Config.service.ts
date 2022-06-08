@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
+import { area } from '../models/User';
 
 export interface ConfigResponse {
   locationManagement: boolean;
@@ -12,6 +13,7 @@ export interface ConfigResponse {
   palletExpiration: boolean;
   backupCategories: string;
   picking: boolean;
+  areas: area[];
 }
 
 export default class ConfigService {
