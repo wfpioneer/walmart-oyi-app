@@ -325,6 +325,7 @@ interface FilterMenuProps {
   areaOpen: boolean,
   areas: area[]
 }
+
 export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
   const {
     workListAPI, categoryOpen, filterCategories, dispatch, exceptionOpen, filterExceptions, areaOpen, areas
