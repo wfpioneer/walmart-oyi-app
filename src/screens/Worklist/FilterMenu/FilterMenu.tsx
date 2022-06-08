@@ -102,15 +102,40 @@ export const renderExceptionFilterCard = (item: FilterListItem, dispatch: Dispat
   );
 };
 
+interface FilteredArea extends area {
+ isSelected: boolean
+}
 export const renderAreaFilterCard = (
-  item: area,
+  item: FilteredArea,
+  categoryMap: FilteredCategory[],
+  filterCategories: string[],
+  dispatch: Dispatch<any>
 ): JSX.Element => {
   // TODO: Logic needs to be added as part of another story
-  const onAreaPress = () => {};
+  const onAreaPress = () => {
+    // Selects all categories for this Area
+    const filteredAreas: string[] = [];
+    if (item.isSelected) {
+      categoryMap.forEach(category => {
+        const index = item.categories.indexOf(category.catgNbr);
+        if (index !== -1) {
+          filteredAreas.push(`${category.catgNbr} - ${category.catgName}`);
+        }
+      });
+      dispatch(updateFilterCategories([...filterCategories, ...filteredAreas]));
+    } else {
+      const newFilteredCategories = filterCategories.filter(catgName => !filteredAreas.includes(catgName));
+      dispatch(updateFilterCategories(newFilteredCategories));
+    }
+  };
   return (
     <TouchableOpacity testID="area button" style={styles.categoryFilterCard} onPress={onAreaPress}>
       <View style={styles.selectionView}>
-        <MaterialCommunityIcons name="checkbox-blank-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />
+        { item.isSelected ? (
+          <MaterialCommunityIcons name="checkbox-marked-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />
+        ) : (
+          <MaterialCommunityIcons name="checkbox-blank-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />
+        )}
       </View>
       <Text style={styles.categoryFilterText} numberOfLines={2}>
         { `${item.area} `}
@@ -123,11 +148,23 @@ export const RenderAreaCard = (props: {
   areaOpen: boolean,
   dispatch: Dispatch<any>,
   filteredAreas: string[],
+  filterCategories: string[],
   areas: area[],
+  categoryMap: FilteredCategory[]
 }): JSX.Element => {
   const {
-    areaOpen, dispatch, filteredAreas, areas
+    areaOpen, dispatch, filteredAreas, areas, filterCategories, categoryMap
   } = props;
+
+  const filterCatgNbrs = filterCategories.map(category => {
+    const idx = category.indexOf(' ');
+    return parseInt(category.substring(0, idx), 10);
+  });
+  filterCatgNbrs.sort((first, second) => first - second);
+  const areasFiltered: FilteredArea[] = areas.map(item => {
+    // const isSelected = item.categories === filterCatgNbrs;
+    return { area: item.area, categories: item.categories, isSelected: false };
+  });
 
   let areaSubText = '';
   if (filteredAreas.length === 0) {
@@ -148,8 +185,8 @@ export const RenderAreaCard = (props: {
       </TouchableOpacity>
       { areaOpen && (
         <FlatList
-          data={areas}
-          renderItem={({ item }) => renderAreaFilterCard(item)}
+          data={areasFiltered}
+          renderItem={({ item }) => renderAreaFilterCard(item, categoryMap, filterCategories, dispatch)}
           style={styles.categoryList}
           keyExtractor={(item: area) => item.area}
         />
@@ -159,24 +196,16 @@ export const RenderAreaCard = (props: {
 };
 
 export const RenderCategoryCollapsibleCard = (props: {
-  workListAPI: AsyncState,
+  categoryMap: FilteredCategory[],
   categoryOpen: boolean,
   filterCategories: string[],
   dispatch: Dispatch<any>
 }): JSX.Element => {
   const {
-    workListAPI, categoryOpen, filterCategories, dispatch
+    categoryMap, categoryOpen, filterCategories, dispatch
   } = props;
-  const { result } = workListAPI;
-  const data = result && result.data && Array.isArray(result.data) ? result.data : [];
-  const categoryMap = data.map((item: any) => {
-    const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
-    return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
-  });
 
-  categoryMap.sort((firstItem: any, secondItem: any) => firstItem.catgNbr - secondItem.catgNbr);
-
-  const categoryNumberMap = categoryMap.map((item: any) => item.catgNbr);
+  const categoryNumberMap = categoryMap.map((item: FilteredCategory) => item.catgNbr);
   const categoryNumberSet = new Set();
   categoryNumberMap.forEach((item: any) => categoryNumberSet.add(item));
   const filteredCategories = categoryMap.filter((item: any) => {
@@ -280,6 +309,14 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
   const {
     workListAPI, categoryOpen, filterCategories, dispatch, exceptionOpen, filterExceptions, areaOpen, areas
   } = props;
+  const { result } = workListAPI;
+  const data = result && result.data && Array.isArray(result.data) ? result.data : [];
+  const categoryMap: FilteredCategory[] = data.map((item: any) => {
+    const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
+    return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
+  });
+  categoryMap.sort((firstItem, secondItem) => firstItem.catgNbr - secondItem.catgNbr);
+
   return (
     <View style={styles.menuContainer}>
       <View style={styles.headerBar}>
@@ -292,10 +329,12 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
         areaOpen={areaOpen}
         dispatch={dispatch}
         filteredAreas={[]}
+        filterCategories={filterCategories}
         areas={areas}
+        categoryMap={categoryMap}
       />
       <RenderCategoryCollapsibleCard
-        workListAPI={workListAPI}
+        categoryMap={categoryMap}
         categoryOpen={categoryOpen}
         filterCategories={filterCategories}
         dispatch={dispatch}
