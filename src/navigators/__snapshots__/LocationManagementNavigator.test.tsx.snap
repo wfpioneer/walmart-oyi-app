@@ -121,6 +121,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     name="AddItems"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
       }
     }
@@ -249,6 +250,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     name="AddItems"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
       }
     }
@@ -377,6 +379,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="AddItems"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
       }
     }
@@ -505,6 +508,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     name="AddItems"
     options={
       Object {
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
       }
     }

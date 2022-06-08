@@ -265,7 +265,12 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         name="AddItems"
         component={AddItems}
         options={{
-          headerTitle: strings('LOCATION.SCAN_ITEM')
+          headerTitle: strings('LOCATION.SCAN_ITEM'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderScanButton(dispatch, isManualScanEnabled)}
+            </View>
+          )
         }}
       />
     </Stack.Navigator>
