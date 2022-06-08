@@ -107,23 +107,25 @@ interface FilteredArea extends area {
 }
 export const renderAreaFilterCard = (
   item: FilteredArea,
-  categoryMap: FilteredCategory[],
+  categoryMap: Map<number, FilteredCategory>,
   filterCategories: string[],
   dispatch: Dispatch<any>
 ): JSX.Element => {
   // TODO: Logic needs to be added as part of another story
+
   const onAreaPress = () => {
     // Selects all categories for this Area
-    const filteredAreas: string[] = [];
-    if (item.isSelected) {
-      categoryMap.forEach(category => {
-        const index = item.categories.indexOf(category.catgNbr);
-        if (index !== -1) {
-          filteredAreas.push(`${category.catgNbr} - ${category.catgName}`);
-        }
-      });
-      dispatch(updateFilterCategories([...filterCategories, ...filteredAreas]));
+    const filteredAreas: string[] = filterCategories;
+    categoryMap.forEach(category => {
+      const index = item.categories.indexOf(category.catgNbr);
+      if (index !== -1 && !category.selected) {
+        filteredAreas.push(`${category.catgNbr} - ${category.catgName}`);
+      }
+    });
+    if (!item.isSelected) {
+      dispatch(updateFilterCategories(filteredAreas));
     } else {
+      // TODO Clear selected category
       const newFilteredCategories = filterCategories.filter(catgName => !filteredAreas.includes(catgName));
       dispatch(updateFilterCategories(newFilteredCategories));
     }
@@ -156,14 +158,32 @@ export const RenderAreaCard = (props: {
     areaOpen, dispatch, filteredAreas, areas, filterCategories, categoryMap
   } = props;
 
-  const filterCatgNbrs = filterCategories.map(category => {
-    const idx = category.indexOf(' ');
-    return parseInt(category.substring(0, idx), 10);
+  /* if all available categories in categoryMap exist in "Areas" Marked the area as selected,
+    if Areas has a category that "categoryMap" does not have. Ignore that catgNbr or remove
+      the categories that is missing from "categoryMap"
+  */
+
+  const catgMapSet: Map<number, FilteredCategory> = new Map();
+  categoryMap.forEach(category => {
+    catgMapSet.set(category.catgNbr, category);
   });
-  filterCatgNbrs.sort((first, second) => first - second);
   const areasFiltered: FilteredArea[] = areas.map(item => {
-    // const isSelected = item.categories === filterCatgNbrs;
-    return { area: item.area, categories: item.categories, isSelected: false };
+    const isAllSelected: boolean[] = [];
+    const newCategories: number[] = [];
+    // Checks if WorkList API is missing Item categories
+    item.categories.forEach(catgNbr => {
+      if (catgMapSet.has(catgNbr)) {
+        newCategories.push(catgNbr);
+
+        if (catgMapSet.get(catgNbr)?.selected) {
+          isAllSelected.push(true);
+        } else {
+          isAllSelected.push(false);
+        }
+      }
+    });
+
+    return { area: item.area, categories: newCategories, isSelected: isAllSelected.every(value => value === true) };
   });
 
   let areaSubText = '';
@@ -186,7 +206,7 @@ export const RenderAreaCard = (props: {
       { areaOpen && (
         <FlatList
           data={areasFiltered}
-          renderItem={({ item }) => renderAreaFilterCard(item, categoryMap, filterCategories, dispatch)}
+          renderItem={({ item }) => renderAreaFilterCard(item, catgMapSet, filterCategories, dispatch)}
           style={styles.categoryList}
           keyExtractor={(item: area) => item.area}
         />
