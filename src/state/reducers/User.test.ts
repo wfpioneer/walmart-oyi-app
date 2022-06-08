@@ -7,6 +7,7 @@ import {
 } from '../actions/User';
 import { UserReducer, initialState } from './User';
 import mockUser from '../../mockData/mockUser';
+import { mockAreas } from '../../mockData/mockConfig';
 import User from '../../models/User';
 
 describe('testing User reducer', () => {
@@ -31,7 +32,8 @@ describe('testing User reducer', () => {
       binning: false,
       palletExpiration: false,
       backupCategories: '',
-      picking: false
+      picking: false,
+      areas: mockAreas
     };
     const testConfig = { ...mockConfig, locMgmtEdit: false };
     testChangedState = {
