@@ -54,7 +54,8 @@ export default {
     REQUIRED: 'Requerido',
     REMOVED: 'Removido',
     CREATE: 'Crear',
-    UNASSIGNED: 'Sin asignar'
+    UNASSIGNED: 'Sin asignar',
+    SELECTED: 'Seleccionado'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',

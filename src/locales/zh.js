@@ -54,7 +54,8 @@ export default {
     REQUIRED: '适用',
     REMOVED: '移除',
     CREATE: '创建',
-    UNASSIGNED: '未分配'
+    UNASSIGNED: '未分配',
+    SELECTED: '已选择'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',

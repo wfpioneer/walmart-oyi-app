@@ -3,6 +3,7 @@ import {
   FlatList, Text, TouchableOpacity, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
+import uniq from 'lodash/uniq';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Dispatch } from 'redux';
@@ -102,15 +103,48 @@ export const renderExceptionFilterCard = (item: FilterListItem, dispatch: Dispat
   );
 };
 
+export const renderAreaCheckbox = (isSelected: boolean, isPartiallySelected: boolean) => {
+  if (isSelected) {
+    return <MaterialCommunityIcons name="checkbox-marked-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />;
+  } if (isPartiallySelected) {
+    return <MaterialCommunityIcons name="minus-box" size={15} color={COLOR.MAIN_THEME_COLOR} />;
+  }
+  return <MaterialCommunityIcons name="checkbox-blank-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />;
+};
+
 export const renderAreaFilterCard = (
   item: area,
+  dispatch: Dispatch<any>,
+  workListAPI: AsyncState,
+  filteredCategories: string[],
+  filteredCategoryNbr: number[]
 ): JSX.Element => {
-  // TODO: Logic needs to be added as part of another story
-  const onAreaPress = () => {};
+  const isSelected = item.categories.every(
+    categoryNbr => filteredCategoryNbr.includes(categoryNbr)
+  );
+  const isPartiallySelected = item.categories.some(
+    categoryNbr => filteredCategoryNbr.includes(categoryNbr)
+  );
+  const onAreaPress = () => {
+    const { result } = workListAPI;
+    const data = result && result.data && Array.isArray(result.data) ? result.data : [];
+    const categoryMap = data.map((worklistItem: any) => (
+      { catgNbr: worklistItem.catgNbr, catgName: worklistItem.catgName }));
+    const categoryMapBasedOnArea = categoryMap.filter((category: any) => item.categories.includes(category.catgNbr));
+    const categoryList = categoryMapBasedOnArea.map((category: any) => `${category.catgNbr} - ${category.catgName}`);
+    if (isSelected) {
+      const removedFilteredCategories = filteredCategories.filter(
+        category => !(categoryList.includes(category))
+      );
+      return dispatch(updateFilterCategories(removedFilteredCategories));
+    }
+    const updatedFilteredCategories = filteredCategories.concat(categoryList);
+    return dispatch(updateFilterCategories(uniq(updatedFilteredCategories)));
+  };
   return (
     <TouchableOpacity testID="area button" style={styles.categoryFilterCard} onPress={onAreaPress}>
       <View style={styles.selectionView}>
-        <MaterialCommunityIcons name="checkbox-blank-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />
+        {renderAreaCheckbox(isSelected, isPartiallySelected)}
       </View>
       <Text style={styles.categoryFilterText} numberOfLines={2}>
         { `${item.area} `}
@@ -122,24 +156,21 @@ export const renderAreaFilterCard = (
 export const RenderAreaCard = (props: {
   areaOpen: boolean,
   dispatch: Dispatch<any>,
-  filteredAreas: string[],
   areas: area[],
+  workListAPI: AsyncState,
+  filterCategories: string[]
 }): JSX.Element => {
   const {
-    areaOpen, dispatch, filteredAreas, areas
+    areaOpen, dispatch, areas, workListAPI, filterCategories
   } = props;
+  const filteredCategoryNbr: number[] = filterCategories.map(category => Number(category.split('-')[0]));
+  const filteredAreas = areas.filter(item => item.categories.some(category => filteredCategoryNbr.includes(category)));
 
   let areaSubText = '';
   if (filteredAreas.length === 0) {
     areaSubText = strings('WORKLIST.ALL');
   } else {
-    filteredAreas.forEach((areaName: string) => {
-      if (areaSubText !== '') {
-        areaSubText = `${areaSubText}\n${areaName}`;
-      } else if (areaName) {
-        areaSubText = areaName;
-      }
-    });
+    areaSubText = `${filteredAreas.length} ${strings('GENERICS.SELECTED')}`;
   }
   return (
     <>
@@ -149,7 +180,9 @@ export const RenderAreaCard = (props: {
       { areaOpen && (
         <FlatList
           data={areas}
-          renderItem={({ item }) => renderAreaFilterCard(item)}
+          renderItem={({ item }) => renderAreaFilterCard(
+            item, dispatch, workListAPI, filterCategories, filteredCategoryNbr
+          )}
           style={styles.categoryList}
           keyExtractor={(item: area) => item.area}
         />
@@ -192,13 +225,7 @@ export const RenderCategoryCollapsibleCard = (props: {
   if (filterCategories.length === 0) {
     categorySubtext = strings('WORKLIST.ALL');
   } else {
-    filterCategories.forEach((category: string) => {
-      if (categorySubtext !== '') {
-        categorySubtext = `${categorySubtext}\n${category}`;
-      } else if (category) {
-        categorySubtext = category;
-      }
-    });
+    categorySubtext = `${filterCategories.length} ${strings('GENERICS.SELECTED')}`;
   }
 
   return (
@@ -292,8 +319,9 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
       <RenderAreaCard
         areaOpen={areaOpen}
         dispatch={dispatch}
-        filteredAreas={[]}
         areas={areas}
+        workListAPI={workListAPI}
+        filterCategories={filterCategories}
       />
       <RenderCategoryCollapsibleCard
         workListAPI={workListAPI}

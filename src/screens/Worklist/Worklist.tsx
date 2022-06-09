@@ -14,6 +14,7 @@ import { strings } from '../../locales';
 import { ExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
+import { area } from '../../models/User';
 
 interface ListItemProps {
   item: WorklistItemI;
@@ -31,6 +32,7 @@ interface WorklistProps {
   filterExceptions: string[];
   filterCategories: string[];
   dispatch: Dispatch<any>;
+  areas: area[];
   navigation: NavigationProp<any>;
 }
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
@@ -96,6 +98,7 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
     } else {
       previousItem = item;
       if (returnData[previousCategoryIndex].itemCount) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         returnData[previousCategoryIndex].itemCount += 1;
       }
@@ -111,7 +114,8 @@ export const renderFilterPills = (
   dispatch: Dispatch<any>,
   filterCategories: string[],
   filterExceptions: string[],
-  fullExceptionList: Map<string, string>
+  fullExceptionList: Map<string, string>,
+  areas: area[]
 ): JSX.Element => {
   if (listFilter.type === 'EXCEPTION') {
     const exception = fullExceptionList.get(listFilter.value);
@@ -125,6 +129,16 @@ export const renderFilterPills = (
     }
 
     return <View />;
+  }
+  if (listFilter.type === 'AREA') {
+    const removeAreaFilter = () => {
+      const removedArea = areas.find(item => item.area === listFilter.value);
+      const updatedFilteredCategories = filterCategories.filter(
+        category => removedArea && !(removedArea.categories.includes(Number(category.split('-')[0])))
+      );
+      dispatch(updateFilterCategories(updatedFilteredCategories));
+    };
+    return <FilterPillButton filterText={listFilter.value} onClosePress={removeAreaFilter} />;
   }
 
   if (listFilter.type === 'CATEGORY') {
@@ -142,7 +156,7 @@ export const renderFilterPills = (
 export const Worklist = (props: WorklistProps): JSX.Element => {
   const {
     data, dispatch, error, filterCategories, filterExceptions,
-    groupToggle, onRefresh, refreshing, updateGroupToggle, navigation
+    groupToggle, onRefresh, refreshing, updateGroupToggle, navigation, areas
   } = props;
   const fullExceptionList = ExceptionList.getInstance();
   if (error) {
@@ -169,8 +183,26 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
     );
   }
 
+  const filteredCategoryNbr: number[] = filterCategories.map(category => Number(category.split('-')[0]));
+  const typedFilterAreas = areas.reduce((acc: { type: string, value: string}[], item: area) => {
+    const isSelected = item.categories.every(
+      categoryNbr => filteredCategoryNbr.includes(categoryNbr)
+    );
+    const isPartiallySelected = item.categories.some(
+      categoryNbr => filteredCategoryNbr.includes(categoryNbr)
+    );
+    if (isSelected) {
+      acc.push({ type: 'AREA', value: item.area });
+    } else if (isPartiallySelected) {
+      const partiallySelectedCategoryList = filterCategories.filter(
+        category => item.categories.includes(Number(category.split('-')[0]))
+      );
+      partiallySelectedCategoryList.map((category: string) => acc.push({ type: 'CATEGORY', value: category }));
+    }
+    return acc;
+  }, []);
+
   const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
-  const typedFilterCategories = filterCategories.map((category: string) => ({ type: 'CATEGORY', value: category }));
   let filteredData: WorklistItemI[] = data || [];
   if (filterCategories.length !== 0) {
     filteredData = filteredData.filter(worklistItem => filterCategories
@@ -192,10 +224,10 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
       { (filterCategories.length > 0 || filterExceptions.length > 0) && (
         <View style={styles.filterContainer}>
           <FlatList
-            data={[...typedFilterExceptions, ...typedFilterCategories]}
+            data={[...typedFilterExceptions, ...typedFilterAreas]}
             horizontal
             renderItem={({ item }) => renderFilterPills(
-              item, dispatch, filterCategories, filterExceptions, fullExceptionList
+              item, dispatch, filterCategories, filterExceptions, fullExceptionList, areas
             )}
             style={styles.filterList}
             keyExtractor={item => item.value}

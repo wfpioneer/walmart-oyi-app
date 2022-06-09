@@ -54,7 +54,8 @@ export default {
     REQUIRED: 'Required',
     REMOVED: 'Removed',
     CREATE: 'Create',
-    UNASSIGNED: 'unassigned'
+    UNASSIGNED: 'unassigned',
+    SELECTED: 'selected'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
