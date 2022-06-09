@@ -241,17 +241,59 @@ describe('Assign Location externalized function tests', () => {
     const failApi: AsyncState = {
       ...defaultAsyncState,
       error: {
-        status: 418,
+        response: {
+          status: 418,
+          data: 'No Coffee'
+        },
         message: 'Im a teapot'
+      }
+    };
+    const failLocationNotFoundApi: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        response: {
+          status: 409,
+          data: 'Request failed due to: LOCATION_NOT_FOUND for URI: /bin'
+        },
+        message: 'Location not found'
+      }
+    };
+    const failPalletNotReadyApi: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        response: {
+          status: 409,
+          data: 'Request failed due to: not ready to bin, pallet part of an active pick for URI: /bin'
+        },
+        message: 'Conflict'
       }
     };
 
     binPalletsApiEffect(navigationProp, failApi, mockDispatch, routeProp);
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
-    expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
+    expect(Toast.show).toBeCalledWith(expect.objectContaining({
+      type: 'error',
+      text1: strings('BINNING.PALLET_BIN_FAILURE')
+    }));
     expect(Toast.show).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(2);
+
+    // @ts-expect-error Reset Toast.show function
+    Toast.show.mockReset();
+    binPalletsApiEffect(navigationProp, failLocationNotFoundApi, mockDispatch, routeProp);
+    expect(Toast.show).toBeCalledWith(expect.objectContaining({
+      type: 'error',
+      text1: strings('LOCATION.SECTION_NOT_FOUND')
+    }));
+
+    // @ts-expect-error Reset Toast.show function
+    Toast.show.mockReset();
+    binPalletsApiEffect(navigationProp, failPalletNotReadyApi, mockDispatch, routeProp);
+    expect(Toast.show).toBeCalledWith(expect.objectContaining({
+      type: 'error',
+      text1: strings('BINNING.PALLET_NOT_READY')
+    }));
   });
 
   it('tests binPalletsApiEffect on waiting', () => {
