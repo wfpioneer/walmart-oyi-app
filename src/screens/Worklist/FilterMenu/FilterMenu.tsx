@@ -23,6 +23,7 @@ import { trackEvent } from '../../../utils/AppCenterTool';
 import { FilterListItem, FilteredCategory } from '../../../models/FilterListItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { area } from '../../../models/User';
+import { WorklistItemI } from '../../../models/WorklistItem';
 
 interface MenuCardProps {
   title: string;
@@ -116,20 +117,33 @@ export const renderAreaFilterCard = (
   const onAreaPress = () => {
     // Selects all categories for this Area
     const filteredAreas: string[] = filterCategories;
-    categoryMap.forEach(category => {
-      const index = item.categories.indexOf(category.catgNbr);
-      if (index !== -1 && !category.selected) {
-        filteredAreas.push(`${category.catgNbr} - ${category.catgName}`);
-      }
-    });
     if (!item.isSelected) {
+      categoryMap.forEach(category => {
+        const index = item.categories.indexOf(category.catgNbr);
+        if (index !== -1 && !category.selected) {
+          filteredAreas.push(`${category.catgNbr} - ${category.catgName}`);
+        }
+      });
       dispatch(updateFilterCategories(filteredAreas));
     } else {
       // TODO Clear selected category
-      const newFilteredCategories = filterCategories.filter(catgName => !filteredAreas.includes(catgName));
+      const filterCategoriesMap: Map<number, string> = new Map();
+
+      filterCategories.forEach(category => {
+        const idx = category.indexOf(' ');
+        filterCategoriesMap.set(parseInt(category.substring(0, idx), 10), category);
+      });
+      item.categories.forEach(catgNbr => {
+        if (filterCategoriesMap.has(catgNbr)) {
+          filterCategoriesMap.delete(catgNbr);
+        }
+      });
+
+      const newFilteredCategories: string[] = [...filterCategoriesMap.values()];
       dispatch(updateFilterCategories(newFilteredCategories));
     }
   };
+
   return (
     <TouchableOpacity testID="area button" style={styles.categoryFilterCard} onPress={onAreaPress}>
       <View style={styles.selectionView}>
@@ -157,11 +171,6 @@ export const RenderAreaCard = (props: {
   const {
     areaOpen, dispatch, filteredAreas, areas, filterCategories, categoryMap
   } = props;
-
-  /* if all available categories in categoryMap exist in "Areas" Marked the area as selected,
-    if Areas has a category that "categoryMap" does not have. Ignore that catgNbr or remove
-      the categories that is missing from "categoryMap"
-  */
 
   const catgMapSet: Map<number, FilteredCategory> = new Map();
   categoryMap.forEach(category => {
@@ -325,18 +334,20 @@ interface FilterMenuProps {
   areaOpen: boolean,
   areas: area[]
 }
-
+export const getCategoryMap = (workListItems: WorklistItemI[], filterCategories: string[]): FilteredCategory[] => {
+  const categoryMap: FilteredCategory[] = workListItems.map((item: any) => {
+    const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
+    return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
+  });
+  return categoryMap.sort((firstItem, secondItem) => firstItem.catgNbr - secondItem.catgNbr);
+};
 export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
   const {
     workListAPI, categoryOpen, filterCategories, dispatch, exceptionOpen, filterExceptions, areaOpen, areas
   } = props;
   const { result } = workListAPI;
-  const data = result && result.data && Array.isArray(result.data) ? result.data : [];
-  const categoryMap: FilteredCategory[] = data.map((item: any) => {
-    const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
-    return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
-  });
-  categoryMap.sort((firstItem, secondItem) => firstItem.catgNbr - secondItem.catgNbr);
+  const data: WorklistItemI[] = result && result.data && Array.isArray(result.data) ? result.data : [];
+  const categoryMap: FilteredCategory[] = getCategoryMap(data, filterCategories);
 
   return (
     <View style={styles.menuContainer}>

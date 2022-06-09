@@ -11,10 +11,14 @@ import {
   RenderAreaCard,
   RenderCategoryCollapsibleCard,
   RenderExceptionTypeCard,
+  getCategoryMap,
   renderCategoryFilterCard,
   renderExceptionFilterCard
 } from './FilterMenu';
-import { FilterListItem, FilteredCategory } from '../../../models/FilterListItem';
+import {
+  FilterListItem,
+  FilteredCategory
+} from '../../../models/FilterListItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { mockWorkListToDo } from '../../../mockData/mockWorkList';
 import { mockAreas } from '../../../mockData/mockConfig';
@@ -45,6 +49,7 @@ describe('FilterMenu Component', () => {
     error: null,
     result: null
   };
+  const mockCategoryMap: FilteredCategory[] = getCategoryMap(mockWorkListToDo, []);
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -92,12 +97,24 @@ describe('FilterMenu Component', () => {
   });
 
   it('Renders MenuCard with the dropdown icon Open', () => {
-    const { toJSON } = render(<MenuCard title="Menu Card Title" subtext="Sub Text Opened" opened={true} />);
+    const { toJSON } = render(
+      <MenuCard
+        title="Menu Card Title"
+        subtext="Sub Text Opened"
+        opened={true}
+      />
+    );
     expect(toJSON()).toMatchSnapshot();
   });
 
   it('Renders MenuCard with the dropdown icon Closed', () => {
-    const { toJSON } = render(<MenuCard title="Menu Card Title" subtext="Sub Text Closed" opened={false} />);
+    const { toJSON } = render(
+      <MenuCard
+        title="Menu Card Title"
+        subtext="Sub Text Closed"
+        opened={false}
+      />
+    );
     expect(toJSON()).toMatchSnapshot();
   });
 
@@ -158,16 +175,9 @@ describe('FilterMenu Component', () => {
   });
 
   it('Test the renderCategoryCollapsibleCard and calls dispatch()', () => {
-    const mockWorklistSuccess: AsyncState = {
-      ...defaultAsyncState,
-      result: {
-        data: mockWorkListToDo,
-        status: 200
-      }
-    };
     const { toJSON, getByText } = render(
       <RenderCategoryCollapsibleCard
-        workListAPI={mockWorklistSuccess}
+        categoryMap={mockCategoryMap}
         categoryOpen={false}
         filterCategories={mockFilterCategories}
         dispatch={mockDispatch}
@@ -180,17 +190,10 @@ describe('FilterMenu Component', () => {
   });
 
   it('Test renders the renderCategoryCollapsibleCard and filteredCategories FlatList ', () => {
-    const mockWorklistSuccess: AsyncState = {
-      ...defaultAsyncState,
-      result: {
-        data: mockWorkListToDo,
-        status: 200
-      }
-    };
     // You cannot use queries if the component contains a FlatList and isn't a PureComponent
     const { toJSON, getByText } = render(
       <RenderCategoryCollapsibleCard
-        workListAPI={mockWorklistSuccess}
+        categoryMap={mockCategoryMap}
         categoryOpen={true}
         filterCategories={mockFilterCategories}
         dispatch={mockDispatch}
@@ -236,6 +239,8 @@ describe('FilterMenu Component', () => {
         filteredAreas={[]}
         areas={mockAreas}
         dispatch={mockDispatch}
+        filterCategories={[]}
+        categoryMap={mockCategoryMap}
       />
     );
     const menuButton = getByText(strings('WORKLIST.AREA'));
