@@ -108,7 +108,7 @@ interface FilteredArea extends area {
 }
 export const renderAreaFilterCard = (
   item: FilteredArea,
-  categoryMap: Map<number, FilteredCategory>,
+  workListCatgMap: Map<number, FilteredCategory>,
   filterCategories: string[],
   dispatch: Dispatch<any>
 ): JSX.Element => {
@@ -118,7 +118,7 @@ export const renderAreaFilterCard = (
     // Selects all categories for this Area
     const filteredAreas: string[] = filterCategories;
     if (!item.isSelected) {
-      categoryMap.forEach(category => {
+      workListCatgMap.forEach(category => {
         const index = item.categories.indexOf(category.catgNbr);
         if (index !== -1 && !category.selected) {
           filteredAreas.push(`${category.catgNbr} - ${category.catgName}`);
@@ -163,28 +163,27 @@ export const renderAreaFilterCard = (
 export const RenderAreaCard = (props: {
   areaOpen: boolean,
   dispatch: Dispatch<any>,
-  filteredAreas: string[],
   filterCategories: string[],
   areas: area[],
   categoryMap: FilteredCategory[]
 }): JSX.Element => {
   const {
-    areaOpen, dispatch, filteredAreas, areas, filterCategories, categoryMap
+    areaOpen, dispatch, areas, filterCategories, categoryMap
   } = props;
 
-  const catgMapSet: Map<number, FilteredCategory> = new Map();
+  const workListCatgMap: Map<number, FilteredCategory> = new Map();
   categoryMap.forEach(category => {
-    catgMapSet.set(category.catgNbr, category);
+    workListCatgMap.set(category.catgNbr, category);
   });
   const areasFiltered: FilteredArea[] = areas.map(item => {
     const isAllSelected: boolean[] = [];
     const newCategories: number[] = [];
     // Checks if WorkList API is missing Item categories
     item.categories.forEach(catgNbr => {
-      if (catgMapSet.has(catgNbr)) {
+      if (workListCatgMap.has(catgNbr)) {
         newCategories.push(catgNbr);
 
-        if (catgMapSet.get(catgNbr)?.selected) {
+        if (workListCatgMap.get(catgNbr)?.selected) {
           isAllSelected.push(true);
         } else {
           isAllSelected.push(false);
@@ -195,18 +194,14 @@ export const RenderAreaCard = (props: {
     return { area: item.area, categories: newCategories, isSelected: isAllSelected.every(value => value === true) };
   });
 
+  const selectedAmount = areasFiltered.filter(item => item.isSelected).length;
   let areaSubText = '';
-  if (filteredAreas.length === 0) {
+  if (selectedAmount === 0) {
     areaSubText = strings('WORKLIST.ALL');
   } else {
-    filteredAreas.forEach((areaName: string) => {
-      if (areaSubText !== '') {
-        areaSubText = `${areaSubText}\n${areaName}`;
-      } else if (areaName) {
-        areaSubText = areaName;
-      }
-    });
+    areaSubText = `${selectedAmount} ${strings('APPROVAL.SELECTED')}`;
   }
+
   return (
     <>
       <TouchableOpacity style={styles.menuCard} onPress={() => { dispatch(toggleArea(!areaOpen)); }}>
@@ -215,7 +210,7 @@ export const RenderAreaCard = (props: {
       { areaOpen && (
         <FlatList
           data={areasFiltered}
-          renderItem={({ item }) => renderAreaFilterCard(item, catgMapSet, filterCategories, dispatch)}
+          renderItem={({ item }) => renderAreaFilterCard(item, workListCatgMap, filterCategories, dispatch)}
           style={styles.categoryList}
           keyExtractor={(item: area) => item.area}
         />
@@ -324,6 +319,15 @@ export const onClearPress = (dispatch: Dispatch<any>): void => {
   trackEvent('worklist_clear_filter');
   dispatch(clearFilter());
 };
+
+export const getCategoryMap = (workListItems: WorklistItemI[], filterCategories: string[]): FilteredCategory[] => {
+  const categoryMap: FilteredCategory[] = workListItems.map((item: any) => {
+    const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
+    return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
+  });
+  return categoryMap.sort((firstItem, secondItem) => firstItem.catgNbr - secondItem.catgNbr);
+};
+
 interface FilterMenuProps {
   workListAPI: AsyncState,
   categoryOpen: boolean,
@@ -334,13 +338,7 @@ interface FilterMenuProps {
   areaOpen: boolean,
   areas: area[]
 }
-export const getCategoryMap = (workListItems: WorklistItemI[], filterCategories: string[]): FilteredCategory[] => {
-  const categoryMap: FilteredCategory[] = workListItems.map((item: any) => {
-    const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
-    return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
-  });
-  return categoryMap.sort((firstItem, secondItem) => firstItem.catgNbr - secondItem.catgNbr);
-};
+
 export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
   const {
     workListAPI, categoryOpen, filterCategories, dispatch, exceptionOpen, filterExceptions, areaOpen, areas
@@ -360,7 +358,6 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
       <RenderAreaCard
         areaOpen={areaOpen}
         dispatch={dispatch}
-        filteredAreas={[]}
         filterCategories={filterCategories}
         areas={areas}
         categoryMap={categoryMap}

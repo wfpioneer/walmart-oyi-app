@@ -201,7 +201,7 @@ exports[`FilterMenu Component Test renders the RenderAreaCard function and calls
         }
       }
     >
-      [missing "en.WORKLIST.ALL" translation]
+      3 [missing "en.APPROVAL.SELECTED" translation]
     </Text>
   </View>
   <View
@@ -325,7 +325,7 @@ exports[`FilterMenu Component Test renders the filter menu component and calls o
           }
         }
       >
-        [missing "en.WORKLIST.ALL" translation]
+        3 [missing "en.APPROVAL.SELECTED" translation]
       </Text>
     </View>
     <View
@@ -1686,3 +1686,5 @@ exports[`FilterMenu Component Tests renderCategoryFilterCard component and calls
   </Text>
 </View>
 `;
+
+exports[`FilterMenu Component Tests renders the renderAreaFilterCard and calls Dispatch 1`] = `[Function]`;

@@ -12,6 +12,7 @@ import {
   RenderCategoryCollapsibleCard,
   RenderExceptionTypeCard,
   getCategoryMap,
+  renderAreaFilterCard,
   renderCategoryFilterCard,
   renderExceptionFilterCard
 } from './FilterMenu';
@@ -236,7 +237,6 @@ describe('FilterMenu Component', () => {
     const { toJSON, getByText } = render(
       <RenderAreaCard
         areaOpen={false}
-        filteredAreas={[]}
         areas={mockAreas}
         dispatch={mockDispatch}
         filterCategories={[]}
@@ -249,4 +249,47 @@ describe('FilterMenu Component', () => {
     expect(toJSON()).toMatchSnapshot();
   });
   // TODO add test for rendering filteredAreas in the Flatlist
+
+  it('Tests renders the renderAreaFilterCard and calls Dispatch', () => {
+    const mockFilterCategoryMap: Map<number, FilteredCategory> = new Map(
+      [[5, {
+        catgName: 'FOODSERVICE',
+        catgNbr: 5,
+        selected: false
+      }],
+      [7, {
+        catgName: 'TOYS',
+        catgNbr: 7,
+        selected: true
+      }]
+      ]
+    );
+    const { toJSON, getByTestId, update } = render(
+      renderAreaFilterCard(
+        { ...mockAreas[0], isSelected: false },
+        mockFilterCategoryMap,
+        mockFilterCategories,
+        mockDispatch
+      )
+    );
+    const areaPress = getByTestId('area button');
+    fireEvent.press(areaPress);
+    expect(mockDispatch).toBeCalledTimes(1);
+    mockFilterCategoryMap.set(5, {
+      catgName: 'FOODSERVICE',
+      catgNbr: 5,
+      selected: true
+    });
+    update(
+      renderAreaFilterCard(
+        { ...mockAreas[0], isSelected: true },
+        mockFilterCategoryMap,
+        [...mockFilterCategories, '5 - FOODSERVICE'],
+        mockDispatch
+      )
+    );
+    fireEvent.press(areaPress);
+    expect(mockDispatch).toBeCalledTimes(2);
+    expect(toJSON).toMatchSnapshot();
+  });
 });
