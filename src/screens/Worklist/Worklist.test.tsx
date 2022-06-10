@@ -1,5 +1,6 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { fireEvent, render } from '@testing-library/react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { strings } from '../../locales';
 import {
@@ -10,7 +11,9 @@ import {
   RenderWorklistItem, Worklist, convertDataToDisplayList, renderFilterPills
 } from './Worklist';
 import { ExceptionList } from './FullExceptionList';
+import { mockAreas } from '../../mockData/mockConfig';
 
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 let navigationProp: NavigationProp<any>;
@@ -32,6 +35,7 @@ describe('WorklistScreen', () => {
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          areas={mockAreas}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -51,6 +55,7 @@ describe('WorklistScreen', () => {
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          areas={mockAreas}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -70,6 +75,7 @@ describe('WorklistScreen', () => {
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          areas={mockAreas}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -89,6 +95,7 @@ describe('WorklistScreen', () => {
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          areas={mockAreas}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -107,6 +114,7 @@ describe('WorklistScreen', () => {
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          areas={mockAreas}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -125,6 +133,7 @@ describe('WorklistScreen', () => {
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          areas={mockAreas}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -144,6 +153,7 @@ describe('WorklistScreen', () => {
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          areas={mockAreas}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -173,7 +183,7 @@ describe('WorklistScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const exceptionFilter = { type: 'EXCEPTION', value: 'NSFL' };
       renderer.render(
-        renderFilterPills(exceptionFilter, jest.fn(), [], filterExceptions, exceptionList)
+        renderFilterPills(exceptionFilter, jest.fn(), [], filterExceptions, exceptionList, [])
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -181,7 +191,7 @@ describe('WorklistScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const exceptionFilter = { type: 'EXCEPTION', value: 'Not An Exception' };
       renderer.render(
-        renderFilterPills(exceptionFilter, jest.fn(), [], [], exceptionList)
+        renderFilterPills(exceptionFilter, jest.fn(), [], [], exceptionList, [])
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -189,17 +199,45 @@ describe('WorklistScreen', () => {
     it('Renders a filter button for list filter type CATEGORY ', () => {
       const renderer = ShallowRenderer.createRenderer();
       const categoryFilter = { type: 'CATEGORY', value: '99 - ELECTRONICS' };
+      const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
       renderer.render(
-        renderFilterPills(categoryFilter, jest.fn(), filterCategories, [], exceptionList)
+        renderFilterPills(categoryFilter, jest.fn(), filterCategories, [], exceptionList, areas)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders a filter button for list filter type AREA', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const areaFilter = { type: 'AREA', value: 'ELECTRONICS' };
+      const mockFilterCategories = ['99- MOBILE', '100-SMARTPHONE', '101-SMARTWATCH'];
+      const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
+      renderer.render(
+        renderFilterPills(areaFilter, jest.fn(), mockFilterCategories, [], exceptionList, areas)
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('should dispatch updateFilterCategories action with removed filtered categories', () => {
+      const areaFilter = { type: 'AREA', value: 'ELECTRONICS' };
+      const mockFilterCategories = ['99- MOBILE', '100-SMARTPHONE', '101-SMARTWATCH', '5-OFFICE SUPPLIES'];
+      const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
+      const mockDispatch = jest.fn();
+      const { getByTestId } = render(
+        renderFilterPills(areaFilter, mockDispatch, mockFilterCategories, [], exceptionList, areas)
+      );
+      const removeButton = getByTestId('button');
+      fireEvent.press(removeButton);
+      expect(mockDispatch).toHaveBeenCalledWith({
+        type: 'WORKLIST_FILTER/UPDATE_FILTER_CATEGORIES',
+        payload: ['5-OFFICE SUPPLIES']
+      });
     });
 
     it('Renders empty view element for invalid list filter type', () => {
       const renderer = ShallowRenderer.createRenderer();
       const invalidFilter = { type: '', value: '' };
       renderer.render(
-        renderFilterPills(invalidFilter, jest.fn(), [], [], exceptionList)
+        renderFilterPills(invalidFilter, jest.fn(), [], [], exceptionList, [])
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -220,6 +258,7 @@ describe('WorklistScreen', () => {
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          areas={mockAreas}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -239,6 +278,7 @@ describe('WorklistScreen', () => {
           updateGroupToggle={jest.fn()}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          areas={mockAreas}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

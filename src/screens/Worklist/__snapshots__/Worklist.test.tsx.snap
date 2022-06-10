@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button for list filter type AREA 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#0071e9",
+      "borderRadius": 20,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginHorizontal": 5,
+      "marginVertical": 10,
+      "paddingHorizontal": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    ELECTRONICS
+  </Text>
+  <ForwardRef
+    onPress={[Function]}
+    testID="button"
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="close-circle"
+      size={20}
+    />
+  </ForwardRef>
+</View>
+`;
+
 exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button for list filter type CATEGORY  1`] = `
 <View
   style={
@@ -30,7 +69,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
     onPress={[Function]}
     testID="button"
   >
-    <mockConstructor
+    <mockMaterialCommunityIcons
       color="#ffffffff"
       name="close-circle"
       size={20}
@@ -69,7 +108,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
     onPress={[Function]}
     testID="button"
   >
-    <mockConstructor
+    <mockMaterialCommunityIcons
       color="#ffffffff"
       name="close-circle"
       size={20}
@@ -460,10 +499,6 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
             "type": "EXCEPTION",
             "value": "NSFL",
           },
-          Object {
-            "type": "CATEGORY",
-            "value": "99 - ELECTRONICS",
-          },
         ]
       }
       disableVirtualization={false}
@@ -573,14 +608,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
     }
   >
     <FlatList
-      data={
-        Array [
-          Object {
-            "type": "CATEGORY",
-            "value": "99 - ELECTRONICS",
-          },
-        ]
-      }
+      data={Array []}
       disableVirtualization={false}
       horizontal={true}
       initialNumToRender={10}

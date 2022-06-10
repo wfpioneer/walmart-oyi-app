@@ -3,11 +3,11 @@ import { Configurations, area } from '../models/User';
 export const mockAreas: area[] = [
   {
     area: 'CENTER',
-    categories: [5, 7, 9, 11, 13, 16]
+    categories: [5, 7, 9, 11, 16]
   },
   {
     area: 'GM',
-    categories: [21, 23, 24, 28, 31]
+    categories: [23, 24, 28, 31]
   },
   {
     area: 'Fresh',
