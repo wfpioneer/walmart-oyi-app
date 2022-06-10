@@ -6,6 +6,7 @@ import { WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getWorklist } from '../../state/actions/saga';
+import { area } from '../../models/User';
 
 interface TodoWorklistProps {
   isWaiting: boolean;
@@ -17,12 +18,13 @@ interface TodoWorklistProps {
   filterExceptions: string[];
   filterCategories: string[];
   navigation: NavigationProp<any>;
+  areas: area[];
 }
 
 export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
-    groupToggle, updateGroupToggle, filterCategories, filterExceptions
+    groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas
   } = props;
 
   let todoData: WorklistItemI[] | undefined;
@@ -43,6 +45,7 @@ export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
       groupToggle={groupToggle}
       updateGroupToggle={updateGroupToggle}
       navigation={navigation}
+      areas={areas}
     />
   );
 };
@@ -51,6 +54,7 @@ export const TodoWorklist = (): JSX.Element => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
+  const { areas } = useTypedSelector(state => state.User.configs);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   return (
@@ -64,6 +68,7 @@ export const TodoWorklist = (): JSX.Element => {
       groupToggle={groupToggle}
       updateGroupToggle={updateGroupToggle}
       navigation={navigation}
+      areas={areas}
     />
   );
 };
