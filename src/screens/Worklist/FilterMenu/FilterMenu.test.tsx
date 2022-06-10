@@ -269,6 +269,7 @@ describe('FilterMenu Component', () => {
         { ...mockAreas[0], isSelected: false },
         mockFilterCategoryMap,
         mockFilterCategories,
+        [],
         mockDispatch
       )
     );
@@ -285,6 +286,7 @@ describe('FilterMenu Component', () => {
         { ...mockAreas[0], isSelected: true },
         mockFilterCategoryMap,
         [...mockFilterCategories, '5 - FOODSERVICE'],
+        [],
         mockDispatch
       )
     );

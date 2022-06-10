@@ -110,10 +110,15 @@ export const renderAreaFilterCard = (
   item: FilteredArea,
   workListCatgMap: Map<number, FilteredCategory>,
   filterCategories: string[],
+  filteredCategoryNbr: number[],
   dispatch: Dispatch<any>
 ): JSX.Element => {
-  // TODO: Logic needs to be added as part of another story
-
+  const isSelected = item.categories.every(
+    categoryNbr => filteredCategoryNbr.includes(categoryNbr)
+  );
+  const isPartiallySelected = item.categories.some(
+    categoryNbr => filteredCategoryNbr.includes(categoryNbr)
+  );
   const onAreaPress = () => {
     // Selects all categories for this Area
     const filteredAreas: string[] = filterCategories;
@@ -126,13 +131,11 @@ export const renderAreaFilterCard = (
       });
       dispatch(updateFilterCategories(filteredAreas));
     } else {
-      // TODO Clear selected category
       const filterCategoriesMap: Map<number, string> = new Map();
-
       filterCategories.forEach(category => {
-        const idx = category.indexOf(' ');
-        filterCategoriesMap.set(parseInt(category.substring(0, idx), 10), category);
+        filterCategoriesMap.set(Number(category.split('-')[0]), category);
       });
+
       item.categories.forEach(catgNbr => {
         if (filterCategoriesMap.has(catgNbr)) {
           filterCategoriesMap.delete(catgNbr);
@@ -170,6 +173,7 @@ export const RenderAreaCard = (props: {
   const {
     areaOpen, dispatch, areas, filterCategories, categoryMap
   } = props;
+  const filteredCategoryNbr: number[] = filterCategories.map(category => Number(category.split('-')[0]));
 
   const workListCatgMap: Map<number, FilteredCategory> = new Map();
   categoryMap.forEach(category => {
@@ -210,7 +214,9 @@ export const RenderAreaCard = (props: {
       { areaOpen && (
         <FlatList
           data={areasFiltered}
-          renderItem={({ item }) => renderAreaFilterCard(item, workListCatgMap, filterCategories, dispatch)}
+          renderItem={({ item }) => renderAreaFilterCard(
+            item, workListCatgMap, filterCategories, filteredCategoryNbr, dispatch
+          )}
           style={styles.categoryList}
           keyExtractor={(item: area) => item.area}
         />
