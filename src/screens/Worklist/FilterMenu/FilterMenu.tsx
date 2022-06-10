@@ -34,6 +34,9 @@ interface MenuCardProps {
   subtext: string;
   opened: boolean;
 }
+interface FilteredArea extends area {
+  isSelected: boolean;
+}
 
 export const MenuCard = (props: MenuCardProps): JSX.Element => {
   const iconName = props.opened ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
@@ -135,15 +138,6 @@ export const renderExceptionFilterCard = (
   );
 };
 
-interface FilteredArea extends area {
-  isSelected: boolean;
-}
-// export const renderAreaFilterCard = (
-//   item: FilteredArea,
-//   workListCatgMap: Map<number, FilteredCategory>,
-//   filterCategories: string[],
-//   filteredCategoryNbr: number[],
-//   dispatch: Dispatch<any>
 export const renderAreaCheckbox = (
   isSelected: boolean,
   isPartiallySelected: boolean
