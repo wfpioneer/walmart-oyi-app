@@ -5,7 +5,7 @@ export interface FilterListItem {
   }
 
 export interface FilteredCategory {
-    catgNbr: number;
+    catgNbr?: number;
     catgName: string;
     selected: boolean;
   }

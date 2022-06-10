@@ -22,8 +22,9 @@ import { strings } from '../../../locales';
 import { ExceptionList } from '../FullExceptionList';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import { FilterListItem, FilteredCategory } from '../../../models/FilterListItem';
-import { AsyncState } from '../../../models/AsyncState';
 import { area } from '../../../models/User';
+import { WorklistItemI } from '../../../models/WorklistItem';
+import { WorklistState } from '../../../state/reducers/Worklist';
 
 interface MenuCardProps {
   title: string;
@@ -106,7 +107,8 @@ export const renderExceptionFilterCard = (item: FilterListItem, dispatch: Dispat
 export const renderAreaCheckbox = (isSelected: boolean, isPartiallySelected: boolean) => {
   if (isSelected) {
     return <MaterialCommunityIcons name="checkbox-marked-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />;
-  } if (isPartiallySelected) {
+  }
+  if (isPartiallySelected) {
     return <MaterialCommunityIcons name="minus-box" size={15} color={COLOR.MAIN_THEME_COLOR} />;
   }
   return <MaterialCommunityIcons name="checkbox-blank-outline" size={15} color={COLOR.MAIN_THEME_COLOR} />;
@@ -115,9 +117,9 @@ export const renderAreaCheckbox = (isSelected: boolean, isPartiallySelected: boo
 export const renderAreaFilterCard = (
   item: area,
   dispatch: Dispatch<any>,
-  workListAPI: AsyncState,
   filteredCategories: string[],
-  filteredCategoryNbr: number[]
+  filteredCategoryNbr: number[],
+  categoryMap: FilteredCategory[]
 ): JSX.Element => {
   const isSelected = item.categories.every(
     categoryNbr => filteredCategoryNbr.includes(categoryNbr)
@@ -126,10 +128,6 @@ export const renderAreaFilterCard = (
     categoryNbr => filteredCategoryNbr.includes(categoryNbr)
   );
   const onAreaPress = () => {
-    const { result } = workListAPI;
-    const data = result && result.data && Array.isArray(result.data) ? result.data : [];
-    const categoryMap = data.map((worklistItem: any) => (
-      { catgNbr: worklistItem.catgNbr, catgName: worklistItem.catgName }));
     const categoryMapBasedOnArea = categoryMap.filter((category: any) => item.categories.includes(category.catgNbr));
     const categoryList = categoryMapBasedOnArea.map((category: any) => `${category.catgNbr} - ${category.catgName}`);
     if (isSelected) {
@@ -157,11 +155,11 @@ export const RenderAreaCard = (props: {
   areaOpen: boolean,
   dispatch: Dispatch<any>,
   areas: area[],
-  workListAPI: AsyncState,
-  filterCategories: string[]
+  filterCategories: string[],
+  categoryMap: FilteredCategory[]
 }): JSX.Element => {
   const {
-    areaOpen, dispatch, areas, workListAPI, filterCategories
+    areaOpen, dispatch, areas, filterCategories, categoryMap
   } = props;
   const filteredCategoryNbr: number[] = filterCategories.map(category => Number(category.split('-')[0]));
   const filteredAreas = areas.filter(item => item.categories.some(category => filteredCategoryNbr.includes(category)));
@@ -181,7 +179,7 @@ export const RenderAreaCard = (props: {
         <FlatList
           data={areas}
           renderItem={({ item }) => renderAreaFilterCard(
-            item, dispatch, workListAPI, filterCategories, filteredCategoryNbr
+            item, dispatch, filterCategories, filteredCategoryNbr, categoryMap
           )}
           style={styles.categoryList}
           keyExtractor={(item: area) => item.area}
@@ -192,23 +190,15 @@ export const RenderAreaCard = (props: {
 };
 
 export const RenderCategoryCollapsibleCard = (props: {
-  workListAPI: AsyncState,
+  categoryMap: FilteredCategory[],
   categoryOpen: boolean,
   filterCategories: string[],
   dispatch: Dispatch<any>
 }): JSX.Element => {
   const {
-    workListAPI, categoryOpen, filterCategories, dispatch
+    categoryMap, categoryOpen, filterCategories, dispatch
   } = props;
-  const { result } = workListAPI;
-  const data = result && result.data && Array.isArray(result.data) ? result.data : [];
-  const categoryMap = data.map((item: any) => {
-    const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
-    return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
-  });
-
   categoryMap.sort((firstItem: any, secondItem: any) => firstItem.catgNbr - secondItem.catgNbr);
-
   const categoryNumberMap = categoryMap.map((item: any) => item.catgNbr);
   const categoryNumberSet = new Set();
   categoryNumberMap.forEach((item: any) => categoryNumberSet.add(item));
@@ -294,19 +284,19 @@ export const onClearPress = (dispatch: Dispatch<any>): void => {
   dispatch(clearFilter());
 };
 interface FilterMenuProps {
-  workListAPI: AsyncState,
   categoryOpen: boolean,
   filterCategories: string[],
   exceptionOpen: boolean,
   filterExceptions: string[],
   dispatch: Dispatch<any>,
   areaOpen: boolean,
-  areas: area[]
+  areas: area[],
+  categoryMap: FilteredCategory[]
 }
 
 export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
   const {
-    workListAPI, categoryOpen, filterCategories, dispatch, exceptionOpen, filterExceptions, areaOpen, areas
+    categoryOpen, filterCategories, dispatch, exceptionOpen, filterExceptions, areaOpen, areas, categoryMap
   } = props;
   return (
     <View style={styles.menuContainer}>
@@ -320,11 +310,11 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
         areaOpen={areaOpen}
         dispatch={dispatch}
         areas={areas}
-        workListAPI={workListAPI}
         filterCategories={filterCategories}
+        categoryMap={categoryMap}
       />
       <RenderCategoryCollapsibleCard
-        workListAPI={workListAPI}
+        categoryMap={categoryMap}
         categoryOpen={categoryOpen}
         filterCategories={filterCategories}
         dispatch={dispatch}
@@ -343,19 +333,25 @@ export const FilterMenu = (): JSX.Element => {
   const workListApi = useTypedSelector(state => state.async.getWorklist);
   const {
     categoryOpen, filterCategories, exceptionOpen, filterExceptions, areaOpen
-  } = useTypedSelector(state => state.Worklist);
+  } = useTypedSelector(state => state.Worklist) as WorklistState;
   const { areas } = useTypedSelector(state => state.User.configs);
+  const { result } = workListApi;
+  const data = result && result.data && Array.isArray(result.data) ? result.data : [];
+  const categoryMap = data.map((item: WorklistItemI) => {
+    const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
+    return { catgNbr: item.catgNbr, catgName: item.catgName, selected: isSelected };
+  });
 
   return (
     <FilterMenuComponent
       dispatch={dispatch}
-      workListAPI={workListApi}
       categoryOpen={categoryOpen}
       filterCategories={filterCategories}
       exceptionOpen={exceptionOpen}
       filterExceptions={filterExceptions}
       areaOpen={areaOpen}
       areas={areas}
+      categoryMap={categoryMap}
     />
   );
 };

@@ -1,5 +1,7 @@
 import { WorklistItemI } from '../models/WorklistItem';
+import { FilteredCategory } from '../models/FilterListItem';
 
+// eslint-disable-next-line no-shadow
 enum ITEM_NAME {
   ELECTRONIC_ITEM = 'ELECTRONIC ITEM',
   BAKERY_ITEM = 'BAKERY ITEM',
@@ -9,6 +11,7 @@ enum ITEM_NAME {
   TEST_ITEM = 'TEST ITEM'
 }
 
+// eslint-disable-next-line no-shadow
 enum CATEGORY_NAME {
   FOODSERVICE = 'FOODSERVICE',
   ELECTRONICS = 'ELECTRONICS',
@@ -17,6 +20,7 @@ enum CATEGORY_NAME {
   PHARMACY_RX = 'PHARMACY RX'
 }
 
+// eslint-disable-next-line no-shadow
 enum WORKLISTTYPE {
   NSFL = 'NSFL',
   C = 'C',
@@ -424,5 +428,38 @@ export const missingExceptionsWorklist: WorklistItemI[] = [
     completedTs: undefined,
     completedUserId: undefined,
     completed: true
+  }
+];
+
+export const mockCategoryMap: FilteredCategory[] = [
+  {
+    catgName: CATEGORY_NAME.FOODSERVICE,
+    catgNbr: 93,
+    selected: false
+  },
+  {
+    catgName: CATEGORY_NAME.ELECTRONICS,
+    catgNbr: 99,
+    selected: false
+  },
+  {
+    catgName: CATEGORY_NAME.FRESH_BAKERY,
+    catgNbr: 88,
+    selected: false
+  },
+  {
+    catgName: CATEGORY_NAME.WINE,
+    catgNbr: 19,
+    selected: false
+  },
+  {
+    catgName: CATEGORY_NAME.PHARMACY_RX,
+    catgNbr: 87,
+    selected: false
+  },
+  {
+    catgName: CATEGORY_NAME.ELECTRONICS,
+    catgNbr: 199,
+    selected: false
   }
 ];
