@@ -383,6 +383,7 @@ export default {
     SELECT_LOCATION: '选择货架位置',
     NUMBER_PALLETS: '卡板数量',
     CREATE_PICK: '创建补货',
+    CREATE_QUICK_PICK: '创建快速补货',
     MOVE_TO_FRONT: '移到最前',
     QUICK_PICK: '快速拣货',
     RESERVE_LOC: '高货架位置',
