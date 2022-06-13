@@ -246,7 +246,6 @@ describe('FilterMenu Component', () => {
     expect(mockDispatch).toBeCalledTimes(1);
     expect(toJSON()).toMatchSnapshot();
   });
-  // TODO add test for rendering filteredAreas in the Flatlist
 
   it('Tests renders the renderAreaFilterCard and calls Dispatch', () => {
     const mockFilterCategoryMap: Map<number, FilteredCategory> = new Map([
