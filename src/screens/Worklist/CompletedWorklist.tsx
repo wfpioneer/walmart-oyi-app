@@ -6,6 +6,7 @@ import { WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
 import { getWorklist } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { area } from '../../models/User';
 
 interface CompletedWorklistProps {
     isWaiting: boolean;
@@ -17,12 +18,13 @@ interface CompletedWorklistProps {
     filterExceptions: string[];
     filterCategories: string[];
     navigation: NavigationProp<any>;
+    areas: area[];
 }
 
 export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
-    groupToggle, updateGroupToggle, filterCategories, filterExceptions
+    groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas
   } = props;
 
   let completedItems: WorklistItemI[] | undefined;
@@ -43,6 +45,7 @@ export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Elem
       groupToggle={groupToggle}
       updateGroupToggle={updateGroupToggle}
       navigation={navigation}
+      areas={areas}
     />
   );
 };
@@ -51,6 +54,7 @@ export const CompletedWorklist = (): JSX.Element => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
+  const { areas } = useTypedSelector(state => state.User.configs);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -65,6 +69,7 @@ export const CompletedWorklist = (): JSX.Element => {
       groupToggle={groupToggle}
       updateGroupToggle={updateGroupToggle}
       navigation={navigation}
+      areas={areas}
     />
   );
 };

@@ -11,12 +11,13 @@ import {
   RenderAreaCard,
   RenderCategoryCollapsibleCard,
   RenderExceptionTypeCard,
+  renderAreaCheckbox,
+  renderAreaFilterCard,
   renderCategoryFilterCard,
   renderExceptionFilterCard
 } from './FilterMenu';
 import { FilterListItem, FilteredCategory } from '../../../models/FilterListItem';
-import { AsyncState } from '../../../models/AsyncState';
-import { mockWorkListToDo } from '../../../mockData/mockWorkList';
+import { mockCategoryMap } from '../../../mockData/mockWorkList';
 import { mockAreas } from '../../../mockData/mockConfig';
 
 jest.mock('../../../utils/AppCenterTool.ts', () => ({
@@ -39,12 +40,6 @@ describe('FilterMenu Component', () => {
     { catgNbr: 7, catgName: 'TOYS', selected: false },
     { catgNbr: 12, catgName: 'WINE', selected: true }
   ];
-  const defaultAsyncState: AsyncState = {
-    isWaiting: false,
-    value: null,
-    error: null,
-    result: null
-  };
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -55,13 +50,13 @@ describe('FilterMenu Component', () => {
       <Provider store={store}>
         <FilterMenuComponent
           dispatch={jest.fn()}
-          workListAPI={defaultAsyncState}
           categoryOpen={false}
           filterCategories={[]}
           exceptionOpen={false}
           filterExceptions={[]}
           areaOpen={false}
           areas={mockAreas}
+          categoryMap={[]}
         />
       </Provider>
     );
@@ -73,13 +68,13 @@ describe('FilterMenu Component', () => {
       <Provider store={store}>
         <FilterMenuComponent
           dispatch={mockDispatch}
-          workListAPI={defaultAsyncState}
           categoryOpen={false}
           filterCategories={[]}
           exceptionOpen={false}
           filterExceptions={[]}
           areaOpen={false}
           areas={mockAreas}
+          categoryMap={[]}
         />
       </Provider>
     );
@@ -158,16 +153,9 @@ describe('FilterMenu Component', () => {
   });
 
   it('Test the renderCategoryCollapsibleCard and calls dispatch()', () => {
-    const mockWorklistSuccess: AsyncState = {
-      ...defaultAsyncState,
-      result: {
-        data: mockWorkListToDo,
-        status: 200
-      }
-    };
     const { toJSON, getByText } = render(
       <RenderCategoryCollapsibleCard
-        workListAPI={mockWorklistSuccess}
+        categoryMap={mockCategoryMap}
         categoryOpen={false}
         filterCategories={mockFilterCategories}
         dispatch={mockDispatch}
@@ -180,17 +168,10 @@ describe('FilterMenu Component', () => {
   });
 
   it('Test renders the renderCategoryCollapsibleCard and filteredCategories FlatList ', () => {
-    const mockWorklistSuccess: AsyncState = {
-      ...defaultAsyncState,
-      result: {
-        data: mockWorkListToDo,
-        status: 200
-      }
-    };
     // You cannot use queries if the component contains a FlatList and isn't a PureComponent
     const { toJSON, getByText } = render(
       <RenderCategoryCollapsibleCard
-        workListAPI={mockWorklistSuccess}
+        categoryMap={mockCategoryMap}
         categoryOpen={true}
         filterCategories={mockFilterCategories}
         dispatch={mockDispatch}
@@ -233,9 +214,10 @@ describe('FilterMenu Component', () => {
     const { toJSON, getByText } = render(
       <RenderAreaCard
         areaOpen={false}
-        filteredAreas={[]}
         dispatch={mockDispatch}
         areas={mockAreas}
+        filterCategories={mockFilterCategories}
+        categoryMap={mockCategoryMap}
       />
     );
     const menuButton = getByText(strings('WORKLIST.AREA'));
@@ -243,5 +225,51 @@ describe('FilterMenu Component', () => {
     expect(mockDispatch).toBeCalledTimes(1);
     expect(toJSON()).toMatchSnapshot();
   });
-  // TODO add test for rendering filteredAreas in the Flatlist
+
+  it('Test renders the renderAreaFilterCard function and calls dispatch', () => {
+    const item = mockAreas[0];
+    const mockFilteredCategories: string[] = mockFilterCategories;
+    const mockFilteredCategoryNbr: number[] = [3, 7, 8, 10, 12];
+    const { toJSON, getByTestId } = render(
+      renderAreaFilterCard(item, mockDispatch, mockFilteredCategories, mockFilteredCategoryNbr, mockCategoryMap)
+    );
+    const areaButton = getByTestId('area button');
+    fireEvent.press(areaButton);
+    expect(mockDispatch).toBeCalledTimes(1);
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('Test renders the renderAreaCheckbox function', () => {
+    const mockIsSelected = false;
+    const mockPartiallySelected = true;
+    const { toJSON } = render(
+      renderAreaCheckbox(mockIsSelected, mockPartiallySelected)
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('tests dispatch updateFilteredCategories with associated categories related to the selected area', () => {
+    const item = {
+      area: 'CENTER',
+      categories: [93, 99, 88, 19, 87]
+    };
+    const mockFilteredCategories: string[] = [];
+    const mockFilteredCategoryNbr: number[] = [];
+    const { getByTestId } = render(
+      renderAreaFilterCard(item, mockDispatch, mockFilteredCategories, mockFilteredCategoryNbr, mockCategoryMap)
+    );
+    const areaButton = getByTestId('area button');
+    fireEvent.press(areaButton);
+    const expectedAction = {
+      type: 'WORKLIST_FILTER/UPDATE_FILTER_CATEGORIES',
+      payload: [
+        '19 - WINE',
+        '87 - PHARMACY RX',
+        '88 - FRESH BAKERY',
+        '93 - FOODSERVICE',
+        '99 - ELECTRONICS'
+      ]
+    };
+    expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
+  });
 });

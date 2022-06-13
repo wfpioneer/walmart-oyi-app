@@ -115,14 +115,12 @@ exports[`FilterMenu Component ShallowRender FilterMenu 1`] = `
             7,
             9,
             11,
-            13,
             16,
           ],
         },
         Object {
           "area": "GM",
           "categories": Array [
-            21,
             23,
             24,
             28,
@@ -142,19 +140,12 @@ exports[`FilterMenu Component ShallowRender FilterMenu 1`] = `
         },
       ]
     }
+    categoryMap={Array []}
     categoryOpen={false}
     dispatch={[MockFunction]}
     exceptionOpen={false}
     filterCategories={Array []}
     filterExceptions={Array []}
-    workListAPI={
-      Object {
-        "error": null,
-        "isWaiting": false,
-        "result": null,
-        "value": null,
-      }
-    }
   />
 </Context.Provider>
 `;
@@ -201,7 +192,7 @@ exports[`FilterMenu Component Test renders the RenderAreaCard function and calls
         }
       }
     >
-      [missing "en.WORKLIST.ALL" translation]
+      1 [missing "en.GENERICS.SELECTED" translation]
     </Text>
   </View>
   <View
@@ -461,6 +452,65 @@ exports[`FilterMenu Component Test renders the filter menu component and calls o
 </View>
 `;
 
+exports[`FilterMenu Component Test renders the renderAreaCheckbox function 1`] = `
+<Icon
+  color="#0071e9"
+  name="minus-box"
+  size={15}
+/>
+`;
+
+exports[`FilterMenu Component Test renders the renderAreaFilterCard function and calls dispatch 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "flexDirection": "row",
+      "height": 40,
+      "justifyContent": "flex-start",
+      "opacity": 1,
+    }
+  }
+  testID="area button"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "width": "10%",
+      }
+    }
+  >
+    <Icon
+      color="#0071e9"
+      name="minus-box"
+      size={15}
+    />
+  </View>
+  <Text
+    numberOfLines={2}
+    style={
+      Object {
+        "width": "90%",
+      }
+    }
+  >
+    CENTER 
+  </Text>
+</View>
+`;
+
 exports[`FilterMenu Component Test renders the renderCategoryCollapsibleCard and filteredCategories FlatList  1`] = `
 Array [
   <View
@@ -504,11 +554,7 @@ Array [
           }
         }
       >
-        3 - OFFICE SUPPLIES
-7 - TOYS
-8 - PETS
-10 - AUTOMOTIVES
-7 - TOYS
+        5 [missing "en.GENERICS.SELECTED" translation]
       </Text>
     </View>
     <View
@@ -1399,11 +1445,7 @@ exports[`FilterMenu Component Test the renderCategoryCollapsibleCard and calls d
         }
       }
     >
-      3 - OFFICE SUPPLIES
-7 - TOYS
-8 - PETS
-10 - AUTOMOTIVES
-7 - TOYS
+      5 [missing "en.GENERICS.SELECTED" translation]
     </Text>
   </View>
   <View
