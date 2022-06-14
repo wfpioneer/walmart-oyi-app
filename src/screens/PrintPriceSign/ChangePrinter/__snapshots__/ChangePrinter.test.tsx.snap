@@ -13,11 +13,9 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Enabled Submit b
   }
 >
   <TextInput
-    allowFontScaling={true}
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
     placeholder="[missing \\"en.PRINT.MAC_ADDRESS\\" translation]"
-    rejectResponderTermination={true}
     selectionColor="#0071e9"
     style={
       Object {
@@ -27,7 +25,6 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Enabled Submit b
         "width": "100%",
       }
     }
-    underlineColorAndroid="transparent"
     value="777888999000"
   />
   <Button
@@ -65,11 +62,9 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Error for Printe
   }
 >
   <TextInput
-    allowFontScaling={true}
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
     placeholder="[missing \\"en.PRINT.MAC_ADDRESS\\" translation]"
-    rejectResponderTermination={true}
     selectionColor="#0071e9"
     style={
       Object {
@@ -79,7 +74,6 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Error for Printe
         "width": "100%",
       }
     }
-    underlineColorAndroid="transparent"
     value="123456"
   />
   <View
@@ -144,11 +138,9 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders enabled submit b
   }
 >
   <TextInput
-    allowFontScaling={true}
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
     placeholder="[missing \\"en.PRINT.MAC_ADDRESS\\" translation]"
-    rejectResponderTermination={true}
     selectionColor="#0071e9"
     style={
       Object {
@@ -158,7 +150,6 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders enabled submit b
         "width": "100%",
       }
     }
-    underlineColorAndroid="transparent"
     value="123456"
   />
   <View
@@ -223,11 +214,9 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders error if duplica
   }
 >
   <TextInput
-    allowFontScaling={true}
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
     placeholder="[missing \\"en.PRINT.MAC_ADDRESS\\" translation]"
-    rejectResponderTermination={true}
     selectionColor="#0071e9"
     style={
       Object {
@@ -237,7 +226,6 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders error if duplica
         "width": "100%",
       }
     }
-    underlineColorAndroid="transparent"
     value="123456"
   />
   <View

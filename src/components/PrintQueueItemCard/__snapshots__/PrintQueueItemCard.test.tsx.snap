@@ -74,7 +74,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
       >
         [missing "en.PRINT.COPIES" translation]: 1
       </Text>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
         style={
           Object {
@@ -90,8 +90,8 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
             size={26}
           />
         </View>
-      </ForwardRef>
-      <ForwardRef
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={[Function]}
         style={
           Object {
@@ -107,7 +107,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
             size={26}
           />
         </View>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
   </View>
 </View>
@@ -187,7 +187,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
       >
         [missing "en.PRINT.COPIES" translation]: 1
       </Text>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
         style={
           Object {
@@ -203,8 +203,8 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
             size={26}
           />
         </View>
-      </ForwardRef>
-      <ForwardRef
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={[Function]}
         style={
           Object {
@@ -220,7 +220,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
             size={26}
           />
         </View>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
   </View>
 </View>

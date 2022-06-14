@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BinningScreen Tests rendering binningItemCard component should match snapshot 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <View
@@ -46,7 +46,7 @@ exports[`BinningScreen Tests rendering binningItemCard component should match sn
       </View>
     </View>
     <View>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
         style={
           Object {
@@ -65,16 +65,15 @@ exports[`BinningScreen Tests rendering binningItemCard component should match sn
             size={40}
           />
         </View>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
   </View>
-</ForwardRef>
+</TouchableOpacity>
 `;
 
 exports[`BinningScreen Tests rendering the BinningScreen component Test renders the BinningScreen with Selected Pallets 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -205,7 +204,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             }
           }
         >
-          <ForwardRef
+          <TouchableOpacity
             onPress={[Function]}
           >
             <mockConstructor
@@ -213,7 +212,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               name="barcode-scan"
               size={100}
             />
-          </ForwardRef>
+          </TouchableOpacity>
           <View
             style={
               Object {
@@ -291,7 +290,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
 exports[`BinningScreen Tests rendering the BinningScreen component Test renders the BinningScreen with Successful getPalletApi state 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -422,7 +420,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             }
           }
         >
-          <ForwardRef
+          <TouchableOpacity
             onPress={[Function]}
           >
             <mockConstructor
@@ -430,7 +428,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               name="barcode-scan"
               size={100}
             />
-          </ForwardRef>
+          </TouchableOpacity>
           <View
             style={
               Object {
@@ -508,7 +506,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
 exports[`BinningScreen Tests rendering the BinningScreen component Test renders the BinningScreen with warning Modal 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -639,7 +636,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             }
           }
         >
-          <ForwardRef
+          <TouchableOpacity
             onPress={[Function]}
           >
             <mockConstructor
@@ -647,7 +644,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               name="barcode-scan"
               size={100}
             />
-          </ForwardRef>
+          </TouchableOpacity>
           <View
             style={
               Object {
@@ -725,7 +722,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
 exports[`BinningScreen Tests rendering the BinningScreen component Test renders the default BinningScreen  1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -842,7 +838,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             }
           }
         >
-          <ForwardRef
+          <TouchableOpacity
             onPress={[Function]}
           >
             <mockConstructor
@@ -850,7 +846,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               name="barcode-scan"
               size={100}
             />
-          </ForwardRef>
+          </TouchableOpacity>
           <View
             style={
               Object {
