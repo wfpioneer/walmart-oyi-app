@@ -54,7 +54,8 @@ export default {
     REQUIRED: '适用',
     REMOVED: '移除',
     CREATE: '创建',
-    UNASSIGNED: '未分配'
+    UNASSIGNED: '未分配',
+    SELECTED: '已选择'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -382,6 +383,7 @@ export default {
     SELECT_LOCATION: '选择货架位置',
     NUMBER_PALLETS: '卡板数量',
     CREATE_PICK: '创建补货',
+    CREATE_QUICK_PICK: '创建快速补货',
     MOVE_TO_FRONT: '移到最前',
     QUICK_PICK: '快速拣货',
     RESERVE_LOC: '高货架位置',

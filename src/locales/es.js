@@ -54,7 +54,8 @@ export default {
     REQUIRED: 'Requerido',
     REMOVED: 'Removido',
     CREATE: 'Crear',
-    UNASSIGNED: 'Sin asignar'
+    UNASSIGNED: 'Sin asignar',
+    SELECTED: 'Seleccionado'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -382,6 +383,7 @@ export default {
     SELECT_LOCATION: 'Elige una ubicación',
     NUMBER_PALLETS: 'Número de pallets',
     CREATE_PICK: 'Crear un Pick',
+    CREATE_QUICK_PICK: 'Crear un Pick Rápido',
     MOVE_TO_FRONT: 'Llevar al frente',
     QUICK_PICK: 'Pickeo rápido',
     RESERVE_LOC: 'Ubicación de Bodega',
