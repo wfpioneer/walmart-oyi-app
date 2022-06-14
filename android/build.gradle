@@ -21,6 +21,9 @@ buildscript {
         maven {
             url "https://repository.walmart.com/content/repositories/fabricio/"
         }
+        maven {
+            url "https://repository.walmart.com/content/repositories/center/"
+        }
         jcenter {
             url "https://repository.walmart.com/content/repositories/jcenter/"
         }
