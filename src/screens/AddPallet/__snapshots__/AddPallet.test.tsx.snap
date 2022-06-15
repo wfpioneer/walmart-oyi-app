@@ -27,12 +27,10 @@ exports[`AddPalletScreen Rendering Add pallet API responses Renders the success 
     [missing "en.LOCATION.SECTION" translation] 1A-1
   </Text>
   <TextInput
-    allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
     placeholder="[missing \\"en.LOCATION.PALLET_PLACEHOLDER\\" translation]"
-    rejectResponderTermination={true}
     selectionColor="#0071e9"
     style={
       Object {
@@ -42,7 +40,6 @@ exports[`AddPalletScreen Rendering Add pallet API responses Renders the success 
         "width": "100%",
       }
     }
-    underlineColorAndroid="transparent"
     value="123456"
   />
   <Button
@@ -110,12 +107,10 @@ exports[`AddPalletScreen Renders Enabled Submit button for pallet ID containing 
     [missing "en.LOCATION.SECTION" translation] 1A-1
   </Text>
   <TextInput
-    allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
     placeholder="[missing \\"en.LOCATION.PALLET_PLACEHOLDER\\" translation]"
-    rejectResponderTermination={true}
     selectionColor="#0071e9"
     style={
       Object {
@@ -125,7 +120,6 @@ exports[`AddPalletScreen Renders Enabled Submit button for pallet ID containing 
         "width": "100%",
       }
     }
-    underlineColorAndroid="transparent"
     value="123456"
   />
   <Button
@@ -177,12 +171,10 @@ exports[`AddPalletScreen Renders Error for pallet ID containing non number digit
     [missing "en.LOCATION.SECTION" translation] 1A-1
   </Text>
   <TextInput
-    allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
     placeholder="[missing \\"en.LOCATION.PALLET_PLACEHOLDER\\" translation]"
-    rejectResponderTermination={true}
     selectionColor="#0071e9"
     style={
       Object {
@@ -192,7 +184,6 @@ exports[`AddPalletScreen Renders Error for pallet ID containing non number digit
         "width": "100%",
       }
     }
-    underlineColorAndroid="transparent"
     value="123abc"
   />
   <View

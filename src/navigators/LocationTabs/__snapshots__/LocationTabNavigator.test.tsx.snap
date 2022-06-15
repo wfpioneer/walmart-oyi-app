@@ -623,7 +623,7 @@ exports[`Test Location Tabs Tests rendering Tab Headers Renders items Header 1`]
     >
       ITEMS
     </Text>
-    <ForwardRef
+    <TouchableOpacity
       disabled={false}
       onPress={[Function]}
     >
@@ -641,7 +641,7 @@ exports[`Test Location Tabs Tests rendering Tab Headers Renders items Header 1`]
           [missing "en.GENERICS.ADD" translation]
         </Text>
       </View>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
 </React.Fragment>
 `;
@@ -671,7 +671,7 @@ exports[`Test Location Tabs Tests rendering Tab Headers Renders pallet Header 1`
     >
       PALLETS
     </Text>
-    <ForwardRef
+    <TouchableOpacity
       disabled={false}
       onPress={[Function]}
     >
@@ -689,7 +689,7 @@ exports[`Test Location Tabs Tests rendering Tab Headers Renders pallet Header 1`
           [missing "en.GENERICS.ADD" translation]
         </Text>
       </View>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
 </React.Fragment>
 `;
@@ -737,7 +737,7 @@ exports[`Test Location Tabs Tests rendering getSectionsDetails api Renders Retry
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -754,7 +754,7 @@ exports[`Test Location Tabs Tests rendering getSectionsDetails api Renders Retry
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
