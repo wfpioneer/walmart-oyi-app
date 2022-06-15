@@ -13,7 +13,7 @@
     "postinstall": "npx jetify"
   },
   "dependencies": {
-    "@gorhom/bottom-sheet": "^4.3.1",
+    "@gorhom/bottom-sheet": "^4.3.2",
     "@react-native-async-storage/async-storage": "^1.16.1",
     "@react-native-community/datetimepicker": "^6.0.1",
     "@react-native-community/masked-view": "^0.1.7",
@@ -32,6 +32,8 @@
     "prop-types": "^15.8.1",
     "qs": "^6.10.3",
     "react": "^17.0.2",
+    "react-devtools": "^4.24.3",
+    "react-devtools-core": "^4.24.3",
     "react-native": "^0.67.0",
     "react-native-action-sheet": "^2.2.0",
     "react-native-config": "^1.4.5",
@@ -96,6 +98,9 @@
     "redux-devtools": "^3.5.0",
     "redux-devtools-extension": "^2.13.8",
     "typescript": "^4.3.5"
+  },
+  "relativeDependencies": {
+    "react-native-flipper": "./react-native-flipper"
   },
   "jest": {
     "preset": "react-native",
