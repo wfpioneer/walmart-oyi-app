@@ -28,7 +28,7 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
     }
   }
 >
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
   >
     <mockConstructor
@@ -36,7 +36,7 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
       name="barcode-scan"
       size={100}
     />
-  </ForwardRef>
+  </TouchableOpacity>
   <View
     style={
       Object {
@@ -68,12 +68,10 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
     }
   >
     <TextInput
-      allowFontScaling={true}
       keyboardType="numeric"
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
       placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
-      rejectResponderTermination={true}
       style={
         Object {
           "borderWidth": 1,
@@ -81,7 +79,6 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
           "paddingLeft": 10,
         }
       }
-      underlineColorAndroid="transparent"
       value=""
     />
   </View>

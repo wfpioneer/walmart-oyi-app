@@ -53,18 +53,8 @@ exports[`Rendering Remove Aisle responses Renders the success response from Remo
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -119,18 +109,8 @@ exports[`Rendering Remove Aisle responses Renders the waiting for response from 
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -872,7 +852,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 400 
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -889,7 +869,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 400 
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -920,7 +900,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 424 
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -937,7 +917,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 424 
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -968,7 +948,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 500 
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -985,7 +965,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 500 
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -1016,7 +996,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is netw
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -1033,7 +1013,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is netw
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -1064,7 +1044,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is time
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -1081,7 +1061,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is time
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -1154,18 +1134,8 @@ exports[`Test Section List Renders Manual Scan Component when isManualScanEnable
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -1247,18 +1217,8 @@ exports[`Test Section List Renders Section Screen with Data 1`] = `
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -1313,18 +1273,8 @@ exports[`Test Section List Renders Section Screen with no-section-message when g
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;

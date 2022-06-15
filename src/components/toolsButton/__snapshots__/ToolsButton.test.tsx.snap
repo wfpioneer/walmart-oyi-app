@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ToolsButton Component Tests Rendering ToolsButton Renders a ToolButton 1`] = `
-<ForwardRef
+<TouchableOpacity
   activeOpacity={0.8}
   onPress={[Function]}
   style={
@@ -38,5 +38,5 @@ exports[`ToolsButton Component Tests Rendering ToolsButton Renders a ToolButton 
   >
     [missing "en.LOCATION.LOCATION_MANAGEMENT" translation]
   </Text>
-</ForwardRef>
+</TouchableOpacity>
 `;
