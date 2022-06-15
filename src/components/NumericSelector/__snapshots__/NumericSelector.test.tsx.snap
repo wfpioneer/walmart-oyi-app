@@ -38,6 +38,7 @@ exports[`Numeric selector component NumericSelector minus button is disabled if 
     allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
+    onEndEditing={[Function]}
     rejectResponderTermination={true}
     style={
       Object {
@@ -109,6 +110,7 @@ exports[`Numeric selector component NumericSelector plus button is disabled if v
     allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
+    onEndEditing={[Function]}
     rejectResponderTermination={true}
     style={
       Object {
@@ -180,6 +182,7 @@ exports[`Numeric selector component NumericSelector with invalid input 1`] = `
     allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
+    onEndEditing={[Function]}
     rejectResponderTermination={true}
     style={
       Object {
@@ -251,6 +254,7 @@ exports[`Numeric selector component NumericSelector with valid input 1`] = `
     allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
+    onEndEditing={[Function]}
     rejectResponderTermination={true}
     style={
       Object {

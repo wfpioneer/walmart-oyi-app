@@ -26,7 +26,7 @@ const ERROR_FORMATTING_OPTIONS = {
   max: numbers(OH_MAX, { precision: 0 })
 };
 
-export const validateQty = (qty: number) => OH_MIN <= qty && qty <= OH_MAX;
+export const validateQty = (qty: number) => !!qty && OH_MIN <= qty && qty <= OH_MAX;
 export const validateSameQty = (qty: number, newQty: number) => qty === newQty;
 
 export const calculateDecreaseQty = (newOHQty: any,
@@ -39,11 +39,9 @@ export const calculateDecreaseQty = (newOHQty: any,
 };
 export const assignHandleTextChange = (newQty: any,
   setNewOHQty: React.Dispatch<React.SetStateAction<number>>) => {
-  // eslint-disable-next-line no-restricted-globals
-  if (!isNaN(newQty)) {
-    setNewOHQty(newQty);
-  }
+  setNewOHQty(newQty);
 };
+
 export const calculateIncreaseQty = (newOHQty: any,
   setNewOHQty: React.Dispatch<React.SetStateAction<number>>) => {
   if (newOHQty < OH_MIN) {

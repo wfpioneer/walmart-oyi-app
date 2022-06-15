@@ -64,7 +64,8 @@ const addZonesToPicker = (
 const validateNumericInput = (aisles: number, existingAisles = 0): boolean => (aisles >= NEW_ZONE_AISLE_MIN)
   && (aisles <= (NEW_ZONE_AISLE_MAX - existingAisles));
 
-const disableContinue = (aisles: number, existingAisles = 0, selectedZone: string) => aisles < NEW_ZONE_AISLE_MIN
+const disableContinue = (aisles: number, existingAisles = 0, selectedZone: string) => !aisles
+  || aisles < NEW_ZONE_AISLE_MIN
   || aisles > (NEW_ZONE_AISLE_MAX - existingAisles)
   || selectedZone === '';
 
@@ -122,8 +123,12 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
   };
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
-    if (!Number.isNaN(newQty)) {
-      setNumberOfAisles(newQty);
+    setNumberOfAisles(newQty);
+  };
+
+  const handleAisleEndEditing = () => {
+    if (!numberOfAisles) {
+      setNumberOfAisles(1);
     }
   };
 
@@ -176,6 +181,7 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
               minValue={NEW_ZONE_AISLE_MIN}
               maxValue={NEW_ZONE_AISLE_MAX}
               value={numberOfAisles}
+              onEndEditing={handleAisleEndEditing}
             />
           </View>
           {!validateNumericInput(numberOfAisles, existingAisles) && (

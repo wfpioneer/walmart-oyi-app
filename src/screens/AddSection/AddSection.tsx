@@ -63,7 +63,9 @@ export const validateNumericInput = (sections: number, existingSections = 0): bo
 export const validateSectionCounts = (aislesToCreate: CreateAisles[], existingSections: number): boolean => {
   let validation = true;
   aislesToCreate.forEach(aisle => {
-    if ((aisle.sectionCount < SECTION_MIN) || (aisle.sectionCount > (NEW_SECTION_MAX - existingSections))) {
+    if (!aisle.sectionCount
+      || (aisle.sectionCount < SECTION_MIN)
+      || (aisle.sectionCount > (NEW_SECTION_MAX - existingSections))) {
       validation = false;
     }
   });
@@ -233,10 +235,15 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
 
   const handleTextSectionCountChange = (text: string, aisleIndex: number) => {
     const newQty = parseInt(text, 10);
-    if (!Number.isNaN(newQty)) {
-      props.dispatch(setAisleSectionCount(aisleIndex, newQty));
+    props.dispatch(setAisleSectionCount(aisleIndex, Number.isNaN(newQty) ? undefined : newQty));
+  };
+
+  const handleSectionEndEditing = (aisleIndex: number, sectionCount: number) => {
+    if (!sectionCount) {
+      props.dispatch(setAisleSectionCount(aisleIndex, 1));
     }
   };
+
   props.useEffectHook(() => {
     if (!props.createZoneAPI.isWaiting && props.createZoneAPI.result) {
       props.dispatch(hideActivityModal());
@@ -299,6 +306,9 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
             }}
             onTextChange={(text: string) => {
               handleTextSectionCountChange(text, aisle.index);
+            }}
+            onEndEditing={() => {
+              handleSectionEndEditing(aisle.index, aisle.item.sectionCount);
             }}
             minValue={SECTION_MIN}
             maxValue={NEW_SECTION_MAX}
