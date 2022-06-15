@@ -92,18 +92,8 @@ exports[`Test Zone List Renders Get Zone Name Error Modal if errorVisible is set
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -203,18 +193,8 @@ exports[`Test Zone List Renders Manual Scan Component when isManualScanEnabled i
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -489,18 +469,8 @@ exports[`Test Zone List Renders Zone Screen with Data 1`] = `
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -597,18 +567,8 @@ exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -705,18 +665,8 @@ exports[`Test Zone List Renders Zone Screen with no-zones-message when get all z
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -748,7 +698,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -765,7 +715,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -796,7 +746,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -813,7 +763,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -844,7 +794,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -861,7 +811,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -892,7 +842,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -909,7 +859,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -940,7 +890,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -957,7 +907,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 

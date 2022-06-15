@@ -27,6 +27,7 @@ import {
   shouldUpdateQty,
   updatePicklistStatusApiEffect
 } from './SalesFloorWorkflow';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -489,6 +490,38 @@ describe('Sales floor workflow tests', () => {
       expect(mockSetExpiration).toBeCalledWith('tomorrows');
       expect(mockSetIsReadytoComplete).toBeCalledWith(true);
       expect(mockDispatch).toBeCalledTimes(2);
+    });
+
+    it('tests the get pallet details error with status code 204', () => {
+      const failureAPI: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 204,
+          data: {}
+        }
+      };
+      const selectedPicks: PickListItem[] = [
+        {
+          ...basePickItem,
+          status: PickStatus.READY_TO_WORK
+        }
+      ];
+      const perishableCategories: number[] = [72];
+      palletDetailsApiEffect(
+        navigationProp, failureAPI, selectedPicks,
+        mockDispatch, mockSetExpiration, mockSetPerishables,
+        mockSetIsReadytoComplete, perishableCategories
+      );
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('LOCATION.PALLET_NOT_FOUND'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockSetPerishables).not.toBeCalled();
+      expect(mockSetExpiration).not.toBeCalled();
+      expect(mockSetIsReadytoComplete).not.toBeCalled();
+      expect(mockDispatch).not.toBeCalled();
     });
 
     it('test getPalletConfigHook', async () => {

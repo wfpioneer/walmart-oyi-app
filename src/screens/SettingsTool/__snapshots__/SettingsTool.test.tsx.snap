@@ -22,7 +22,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
       
     </Text>
   </View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -36,7 +36,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
       name="keyboard-arrow-down"
       size={25}
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </React.Fragment>
 `;
 
@@ -62,7 +62,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
       
     </Text>
   </View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -76,7 +76,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
       name="keyboard-arrow-up"
       size={25}
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </React.Fragment>
 `;
 
@@ -181,7 +181,7 @@ exports[`SettingsToolScreen Tests rendering printerCard component printerCard fu
       [missing "en.GENERICS.NOT_ASSIGNED" translation]
     </Text>
   </View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[MockFunction]}
     style={
       Object {
@@ -198,7 +198,7 @@ exports[`SettingsToolScreen Tests rendering printerCard component printerCard fu
     >
       [missing "en.GENERICS.CHANGE" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -231,7 +231,7 @@ exports[`SettingsToolScreen Tests rendering printerCard component printerCard fu
       Test Laser Printer
     </Text>
   </View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[MockFunction]}
     style={
       Object {
@@ -248,7 +248,7 @@ exports[`SettingsToolScreen Tests rendering printerCard component printerCard fu
     >
       [missing "en.GENERICS.CHANGE" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -307,7 +307,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         Test Laser Printer
       </Text>
     </View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
       style={
         Object {
@@ -324,7 +324,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       >
         [missing "en.GENERICS.CHANGE" translation]
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View
     style={
@@ -354,7 +354,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         Test Portable Printer
       </Text>
     </View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
       style={
         Object {
@@ -371,7 +371,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       >
         [missing "en.GENERICS.CHANGE" translation]
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View
     style={
@@ -401,7 +401,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         Test Laser Printer#2
       </Text>
     </View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
       style={
         Object {
@@ -418,7 +418,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       >
         [missing "en.GENERICS.CHANGE" translation]
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View
     style={
@@ -542,7 +542,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         [missing "en.GENERICS.NOT_ASSIGNED" translation]
       </Text>
     </View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
       style={
         Object {
@@ -559,7 +559,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       >
         [missing "en.GENERICS.CHANGE" translation]
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View
     style={
@@ -589,7 +589,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         [missing "en.GENERICS.NOT_ASSIGNED" translation]
       </Text>
     </View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
       style={
         Object {
@@ -606,7 +606,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       >
         [missing "en.GENERICS.CHANGE" translation]
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View
     style={
@@ -636,7 +636,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         [missing "en.GENERICS.NOT_ASSIGNED" translation]
       </Text>
     </View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
       style={
         Object {
@@ -653,7 +653,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       >
         [missing "en.GENERICS.CHANGE" translation]
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View
     style={
@@ -825,7 +825,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         [missing "en.GENERICS.NOT_ASSIGNED" translation]
       </Text>
     </View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
       style={
         Object {
@@ -842,7 +842,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       >
         [missing "en.GENERICS.CHANGE" translation]
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View
     style={
@@ -872,7 +872,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         [missing "en.GENERICS.NOT_ASSIGNED" translation]
       </Text>
     </View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
       style={
         Object {
@@ -889,7 +889,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       >
         [missing "en.GENERICS.CHANGE" translation]
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View
     style={
@@ -919,7 +919,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         [missing "en.GENERICS.NOT_ASSIGNED" translation]
       </Text>
     </View>
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
       style={
         Object {
@@ -936,7 +936,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       >
         [missing "en.GENERICS.CHANGE" translation]
       </Text>
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <View
     style={

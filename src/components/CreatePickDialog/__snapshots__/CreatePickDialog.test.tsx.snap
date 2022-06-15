@@ -113,7 +113,7 @@ exports[`Test createPickDialog Component Renders the createPickDialog component 
     >
       [missing "en.PICKING.QUICK_PICK" translation]
     </Text>
-    <Switch
+    <ForwardRef(Switch)
       onValueChange={[Function]}
       testID="quickPickSwitch"
       thumbColor="#0071e9"
@@ -240,7 +240,7 @@ exports[`Test createPickDialog Component Renders the createPickDialog component 
     >
       [missing "en.PICKING.QUICK_PICK" translation]
     </Text>
-    <Switch
+    <ForwardRef(Switch)
       onValueChange={[Function]}
       testID="quickPickSwitch"
       thumbColor="#0071e9"

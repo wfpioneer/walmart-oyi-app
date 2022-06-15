@@ -14,6 +14,7 @@ exports[`Tests rendering PalletExpiration Renders the PalletExpiration showing p
 >
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -84,6 +85,7 @@ exports[`Tests rendering PalletExpiration Renders the PalletExpiration with date
 >
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -136,6 +138,7 @@ exports[`Tests rendering PalletExpiration Renders the PalletExpiration with expi
 >
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -190,6 +193,7 @@ exports[`Tests rendering PalletExpiration Renders the PalletExpiration with newE
 >
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -242,6 +246,7 @@ exports[`Tests rendering PalletExpiration Renders the PalletExpiration with no e
 >
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}

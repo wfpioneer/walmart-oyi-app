@@ -3,7 +3,6 @@
 exports[`AddSection Screen render tests AddSectionScreen with invalid section count 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -32,18 +31,9 @@ exports[`AddSection Screen render tests AddSectionScreen with invalid section co
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -79,7 +69,6 @@ exports[`AddSection Screen render tests AddSectionScreen with invalid section co
 exports[`AddSection Screen render tests AddSectionScreen with valid input from add aisle 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -116,18 +105,9 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -163,7 +143,6 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
 exports[`AddSection Screen render tests AddSectionScreen with valid input from add section 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -192,18 +171,9 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -239,7 +209,6 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
 exports[`AddSection Screen render tests AddSectionScreen with valid input from add zone 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -276,18 +245,9 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -323,7 +283,6 @@ exports[`AddSection Screen render tests AddSectionScreen with valid input from a
 exports[`AddSection Screen render tests Waits on the create zone/aisles/sections api 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -352,18 +311,9 @@ exports[`AddSection Screen render tests Waits on the create zone/aisles/sections
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -399,7 +349,6 @@ exports[`AddSection Screen render tests Waits on the create zone/aisles/sections
 exports[`AddSection Screen render tests addSectionScreen after createSections api called and failed 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -428,18 +377,9 @@ exports[`AddSection Screen render tests addSectionScreen after createSections ap
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -475,7 +415,6 @@ exports[`AddSection Screen render tests addSectionScreen after createSections ap
 exports[`AddSection Screen render tests addSectionScreen after createSections api called and successful 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -504,18 +443,9 @@ exports[`AddSection Screen render tests addSectionScreen after createSections ap
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -551,7 +481,6 @@ exports[`AddSection Screen render tests addSectionScreen after createSections ap
 exports[`AddSection Screen render tests addSectionScreen while waiting for api to finish 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -580,18 +509,9 @@ exports[`AddSection Screen render tests addSectionScreen while waiting for api t
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -627,7 +547,6 @@ exports[`AddSection Screen render tests addSectionScreen while waiting for api t
 exports[`AddSection Screen render tests failed on the create aisles/sections api 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -656,18 +575,9 @@ exports[`AddSection Screen render tests failed on the create aisles/sections api
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -703,7 +613,6 @@ exports[`AddSection Screen render tests failed on the create aisles/sections api
 exports[`AddSection Screen render tests partially succeeded on the create aisles/sections api 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -732,18 +641,9 @@ exports[`AddSection Screen render tests partially succeeded on the create aisles
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -779,7 +679,6 @@ exports[`AddSection Screen render tests partially succeeded on the create aisles
 exports[`AddSection Screen render tests partially succeeded on the create aisles/sections api 2`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -808,18 +707,9 @@ exports[`AddSection Screen render tests partially succeeded on the create aisles
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -855,7 +745,6 @@ exports[`AddSection Screen render tests partially succeeded on the create aisles
 exports[`AddSection Screen render tests succeeded on the create aisles/sections api 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -884,18 +773,9 @@ exports[`AddSection Screen render tests succeeded on the create aisles/sections 
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -931,7 +811,6 @@ exports[`AddSection Screen render tests succeeded on the create aisles/sections 
 exports[`AddSection Screen render tests succeeded on the create zone/aisles/sections api 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -960,18 +839,9 @@ exports[`AddSection Screen render tests succeeded on the create zone/aisles/sect
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -1007,7 +877,6 @@ exports[`AddSection Screen render tests succeeded on the create zone/aisles/sect
 exports[`AddSection Screen render tests waits on the create aisles/sections api 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -1036,18 +905,9 @@ exports[`AddSection Screen render tests waits on the create aisles/sections api 
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
       removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View

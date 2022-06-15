@@ -23,7 +23,13 @@ exports[`Tests rendering PickItemInfoCard Renders the deleteView component and f
       }
     >
       <View
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -66,6 +72,8 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
 <View
   collapsable={false}
   forwardedRef={[Function]}
+  handlerTag={1}
+  handlerType="PanGestureHandler"
   onGestureHandlerEvent={[Function]}
   onGestureHandlerStateChange={[Function]}
   onLayout={[Function]}
@@ -76,6 +84,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "bottom": 0,
@@ -114,7 +123,13 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
           }
         >
           <View
+            accessibilityState={
+              Object {
+                "disabled": false,
+              }
+            }
             accessible={true}
+            collapsable={false}
             focusable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
@@ -158,6 +173,8 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
   <View
     collapsable={false}
     forwardedRef={[Function]}
+    handlerTag={2}
+    handlerType="TapGestureHandler"
     onGestureHandlerEvent={[Function]}
     onGestureHandlerStateChange={[Function]}
     pointerEvents="auto"

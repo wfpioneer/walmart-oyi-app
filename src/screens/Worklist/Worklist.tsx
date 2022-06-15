@@ -182,28 +182,45 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
       />
     );
   }
+  let filteredData: WorklistItemI[] = data || [];
+
+  // removes missing WorkList categories from the config list Area categories
+  const filteredWorklistCatgNbr = new Set(
+    filteredData.map((item: WorklistItemI) => item.catgNbr)
+  );
+  const configAreas: area[] = areas.map(item => {
+    const newCategories: number[] = [];
+    item.categories.forEach(catgNbr => {
+      if (filteredWorklistCatgNbr.has(catgNbr)) {
+        newCategories.push(catgNbr);
+      }
+    });
+
+    return { ...item, categories: newCategories };
+  });
 
   const filteredCategoryNbr: number[] = filterCategories.map(category => Number(category.split('-')[0]));
-  const typedFilterAreas = areas.reduce((acc: { type: string, value: string}[], item: area) => {
+
+  const typedFilterAreas = configAreas.reduce((acc: { type: string, value: string}[], item: area) => {
     const isSelected = item.categories.every(
       categoryNbr => filteredCategoryNbr.includes(categoryNbr)
     );
     const isPartiallySelected = item.categories.some(
       categoryNbr => filteredCategoryNbr.includes(categoryNbr)
     );
-    if (isSelected) {
+    if (isSelected && item.categories.length !== 0) {
       acc.push({ type: 'AREA', value: item.area });
     } else if (isPartiallySelected) {
       const partiallySelectedCategoryList = filterCategories.filter(
         category => item.categories.includes(Number(category.split('-')[0]))
       );
-      partiallySelectedCategoryList.map((category: string) => acc.push({ type: 'CATEGORY', value: category }));
+      partiallySelectedCategoryList.forEach((category: string) => acc.push({ type: 'CATEGORY', value: category }));
     }
     return acc;
   }, []);
 
   const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
-  let filteredData: WorklistItemI[] = data || [];
+
   if (filterCategories.length !== 0) {
     filteredData = filteredData.filter(worklistItem => filterCategories
       .indexOf(`${worklistItem.catgNbr} - ${worklistItem.catgName}`) !== -1);

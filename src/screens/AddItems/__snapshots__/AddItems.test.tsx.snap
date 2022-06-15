@@ -3,7 +3,6 @@
 exports[`AddItemScreen render addItem screen Renders addItem screen before service call with manual scan 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -59,7 +58,6 @@ exports[`AddItemScreen render addItem screen Renders addItem screen before servi
 exports[`AddItemScreen render addItem screen Renders addItem screen before service call without manual scan 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={

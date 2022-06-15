@@ -9,7 +9,7 @@ exports[`Base card render tests renders the bottom sheet base card 1`] = `
     }
   }
 >
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -62,6 +62,6 @@ exports[`Base card render tests renders the bottom sheet base card 1`] = `
         hello
       </Text>
     </Memo(BottomSheetViewComponent)>
-  </ForwardRef>
+  </TouchableOpacity>
 </Memo(BottomSheetViewComponent)>
 `;

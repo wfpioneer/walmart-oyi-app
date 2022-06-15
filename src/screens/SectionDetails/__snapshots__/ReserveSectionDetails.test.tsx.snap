@@ -27,7 +27,7 @@ exports[`Tests Reserve Section Details Screen Tests rendering Get Section Detail
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -44,7 +44,7 @@ exports[`Tests Reserve Section Details Screen Tests rendering Get Section Detail
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 

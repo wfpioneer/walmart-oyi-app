@@ -3,7 +3,6 @@
 exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -152,7 +151,6 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
 exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -485,7 +483,6 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
 exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
@@ -622,7 +619,6 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
 exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
 <KeyboardAvoidingView
   behavior="height"
-  enabled={true}
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={

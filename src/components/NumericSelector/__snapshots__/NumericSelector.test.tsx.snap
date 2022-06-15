@@ -35,11 +35,9 @@ exports[`Numeric selector component NumericSelector minus button is disabled if 
     width={35}
   />
   <TextInput
-    allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
     onEndEditing={[Function]}
-    rejectResponderTermination={true}
     style={
       Object {
         "color": "#0071e9",
@@ -49,7 +47,6 @@ exports[`Numeric selector component NumericSelector minus button is disabled if 
       }
     }
     testID="numericTextInput"
-    underlineColorAndroid="transparent"
     value="10"
   />
   <IconButton
@@ -107,11 +104,9 @@ exports[`Numeric selector component NumericSelector plus button is disabled if v
     width={35}
   />
   <TextInput
-    allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
     onEndEditing={[Function]}
-    rejectResponderTermination={true}
     style={
       Object {
         "color": "#0071e9",
@@ -121,7 +116,6 @@ exports[`Numeric selector component NumericSelector plus button is disabled if v
       }
     }
     testID="numericTextInput"
-    underlineColorAndroid="transparent"
     value="10"
   />
   <IconButton
@@ -179,11 +173,9 @@ exports[`Numeric selector component NumericSelector with invalid input 1`] = `
     width={35}
   />
   <TextInput
-    allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
     onEndEditing={[Function]}
-    rejectResponderTermination={true}
     style={
       Object {
         "color": "#0071e9",
@@ -193,7 +185,6 @@ exports[`Numeric selector component NumericSelector with invalid input 1`] = `
       }
     }
     testID="numericTextInput"
-    underlineColorAndroid="transparent"
     value="10"
   />
   <IconButton
@@ -251,11 +242,9 @@ exports[`Numeric selector component NumericSelector with valid input 1`] = `
     width={35}
   />
   <TextInput
-    allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
     onEndEditing={[Function]}
-    rejectResponderTermination={true}
     style={
       Object {
         "color": "#0071e9",
@@ -265,7 +254,6 @@ exports[`Numeric selector component NumericSelector with valid input 1`] = `
       }
     }
     testID="numericTextInput"
-    underlineColorAndroid="transparent"
     value="10"
   />
   <IconButton

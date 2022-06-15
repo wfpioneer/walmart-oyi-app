@@ -38,23 +38,13 @@ exports[`PrinterList Renders list of Printers in Flatlist  1`] = `
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "backgroundColor": "#ffffffff",
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </React.Fragment>
 `;
@@ -107,23 +97,13 @@ exports[`PrinterList Renders list of Printers in Flatlist setting location 1`] =
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "backgroundColor": "#ffffffff",
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </React.Fragment>
 `;
@@ -176,23 +156,13 @@ exports[`PrinterList Renders list of Printers in Flatlist setting pallet 1`] = `
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "backgroundColor": "#ffffffff",
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </React.Fragment>
 `;
@@ -245,23 +215,13 @@ exports[`PrinterList Renders list of Printers in Flatlist setting price sign 1`]
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "backgroundColor": "#ffffffff",
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </React.Fragment>
 `;
@@ -302,7 +262,7 @@ exports[`PrinterList Renders printer item card that is disabled 1`] = `
       Invalid printer
     </Text>
   </View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -317,7 +277,7 @@ exports[`PrinterList Renders printer item card that is disabled 1`] = `
       name="trash-can"
       size={20}
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </TouchableOpacity>
 `;
 
@@ -356,7 +316,7 @@ exports[`PrinterList Renders printer item card that is not disabled when locatio
       Mobile printer
     </Text>
   </View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -371,7 +331,7 @@ exports[`PrinterList Renders printer item card that is not disabled when locatio
       name="trash-can"
       size={20}
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </TouchableOpacity>
 `;
 
@@ -410,7 +370,7 @@ exports[`PrinterList Renders printer item card with no delete icon 1`] = `
       Invalid printer
     </Text>
   </View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -425,7 +385,7 @@ exports[`PrinterList Renders printer item card with no delete icon 1`] = `
       name="trash-can"
       size={20}
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </TouchableOpacity>
 `;
 
@@ -464,7 +424,7 @@ exports[`PrinterList Renders the delete icon for PrinterIds not equal to 0 1`] =
       Front desk printer
     </Text>
   </View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -479,6 +439,6 @@ exports[`PrinterList Renders the delete icon for PrinterIds not equal to 0 1`] =
       name="trash-can"
       size={20}
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </TouchableOpacity>
 `;

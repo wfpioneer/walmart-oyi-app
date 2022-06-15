@@ -35,19 +35,9 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     </View>
     <FlatList
       data={Array []}
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEnabled={false}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </Memo(Pressable)>
 </View>
@@ -88,19 +78,9 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     </View>
     <FlatList
       data={Array []}
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEnabled={false}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </Memo(Pressable)>
 </View>
@@ -141,19 +121,9 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     </View>
     <FlatList
       data={Array []}
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEnabled={false}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </Memo(Pressable)>
 </View>
@@ -194,19 +164,9 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     </View>
     <FlatList
       data={Array []}
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEnabled={false}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </Memo(Pressable)>
 </View>
@@ -247,19 +207,9 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     </View>
     <FlatList
       data={Array []}
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEnabled={false}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </Memo(Pressable)>
 </View>
@@ -300,19 +250,9 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     </View>
     <FlatList
       data={Array []}
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEnabled={false}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </Memo(Pressable)>
 </View>
@@ -353,19 +293,9 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     </View>
     <FlatList
       data={Array []}
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEnabled={false}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </Memo(Pressable)>
 </View>
@@ -406,19 +336,9 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     </View>
     <FlatList
       data={Array []}
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEnabled={false}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </Memo(Pressable)>
 </View>
@@ -459,19 +379,9 @@ exports[`Pick pallet info card render tests renders the card with items (some fi
     </View>
     <FlatList
       data={Array []}
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEnabled={false}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </Memo(Pressable)>
 </View>
