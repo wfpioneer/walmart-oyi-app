@@ -6,7 +6,7 @@ export interface PalletItem {
   categoryNbr?: number;
   categoryDesc?: string;
   quantity: number;
-  newQuantity: number;
+  newQuantity?: number;
   deleted: boolean;
   added: boolean;
 }
