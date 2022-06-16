@@ -75,7 +75,8 @@ export default {
     NEGATIVE_ON_HANDS: '负现货清单',
     CANCELLED: '取消状态商品清单',
     NSFL: '无楼面位置商品清单',
-    UNKNOWN: '未知错误'
+    UNKNOWN: '未知错误',
+    MISSING_PALLETS: 'Missing Pallets'
   },
   ITEM: {
     TITLE: '查看商品明细',
