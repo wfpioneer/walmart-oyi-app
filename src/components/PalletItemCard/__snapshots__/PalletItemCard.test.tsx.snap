@@ -142,7 +142,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
           }
         }
       >
-        <ForwardRef
+        <TouchableOpacity
           onPress={[Function]}
         >
           <mockConstructor
@@ -150,7 +150,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
             name="trash-can"
             size={40}
           />
-        </ForwardRef>
+        </TouchableOpacity>
       </View>
     </View>
   </View>
@@ -299,7 +299,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
           }
         }
       >
-        <ForwardRef
+        <TouchableOpacity
           onPress={[Function]}
         >
           <mockConstructor
@@ -307,7 +307,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
             name="trash-can"
             size={40}
           />
-        </ForwardRef>
+        </TouchableOpacity>
       </View>
     </View>
   </View>
@@ -456,7 +456,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
           }
         }
       >
-        <ForwardRef
+        <TouchableOpacity
           onPress={[Function]}
         >
           <mockConstructor
@@ -464,7 +464,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
             name="trash-can"
             size={40}
           />
-        </ForwardRef>
+        </TouchableOpacity>
       </View>
     </View>
   </View>

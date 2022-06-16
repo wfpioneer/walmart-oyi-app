@@ -31,7 +31,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -96,7 +102,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -125,10 +137,8 @@ Array [
       </View>
     </View>
     <TextInput
-      allowFontScaling={true}
       keyboardType="numeric"
       onChangeText={[Function]}
-      rejectResponderTermination={true}
       style={
         Object {
           "color": "#0071e9",
@@ -138,7 +148,6 @@ Array [
         }
       }
       testID="numericTextInput"
-      underlineColorAndroid="transparent"
       value="11"
     />
     <View
@@ -160,7 +169,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -220,7 +235,13 @@ Array [
       }
     >
       <View
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -291,7 +312,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -356,7 +383,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -385,10 +418,8 @@ Array [
       </View>
     </View>
     <TextInput
-      allowFontScaling={true}
       keyboardType="numeric"
       onChangeText={[Function]}
-      rejectResponderTermination={true}
       style={
         Object {
           "color": "#0071e9",
@@ -398,7 +429,6 @@ Array [
         }
       }
       testID="numericTextInput"
-      underlineColorAndroid="transparent"
       value="11"
     />
     <View
@@ -420,7 +450,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -491,7 +527,13 @@ Array [
       }
     >
       <View
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -562,7 +604,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -627,7 +675,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -656,10 +710,8 @@ Array [
       </View>
     </View>
     <TextInput
-      allowFontScaling={true}
       keyboardType="numeric"
       onChangeText={[Function]}
-      rejectResponderTermination={true}
       style={
         Object {
           "color": "#0071e9",
@@ -669,7 +721,6 @@ Array [
         }
       }
       testID="numericTextInput"
-      underlineColorAndroid="transparent"
       value="-11"
     />
     <View
@@ -691,7 +742,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -762,7 +819,13 @@ Array [
       }
     >
       <View
+        accessibilityState={
+          Object {
+            "disabled": true,
+          }
+        }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
@@ -851,7 +914,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -880,10 +949,8 @@ Array [
       </View>
     </View>
     <TextInput
-      allowFontScaling={true}
       keyboardType="numeric"
       onChangeText={[Function]}
-      rejectResponderTermination={true}
       style={
         Object {
           "color": "#0071e9",
@@ -893,7 +960,6 @@ Array [
         }
       }
       testID="numericTextInput"
-      underlineColorAndroid="transparent"
       value="10"
     />
     <View
@@ -915,7 +981,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -955,7 +1027,6 @@ Array [
     [missing "en.GENERICS.TOTAL" translation] [missing "en.ITEM.ON_HANDS" translation]
   </Text>,
   <ActivityIndicator
-    animating={true}
     color="#0071e9"
     hidesWhenStopped={true}
     size="large"
@@ -999,7 +1070,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1064,7 +1141,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1093,10 +1176,8 @@ Array [
       </View>
     </View>
     <TextInput
-      allowFontScaling={true}
       keyboardType="numeric"
       onChangeText={[Function]}
-      rejectResponderTermination={true}
       style={
         Object {
           "color": "#0071e9",
@@ -1106,7 +1187,6 @@ Array [
         }
       }
       testID="numericTextInput"
-      underlineColorAndroid="transparent"
       value="10"
     />
     <View
@@ -1128,7 +1208,13 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1188,7 +1274,13 @@ Array [
       }
     >
       <View
+        accessibilityState={
+          Object {
+            "disabled": true,
+          }
+        }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}

@@ -20,7 +20,6 @@ exports[`Test Location Manual Scan Component Renders Error message with Invalid 
     }
   >
     <TextInput
-      allowFontScaling={true}
       autoCapitalize="characters"
       autoCorrect={false}
       autoFocus={true}
@@ -28,7 +27,6 @@ exports[`Test Location Manual Scan Component Renders Error message with Invalid 
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
       placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
-      rejectResponderTermination={true}
       selectionColor="#0071e9"
       style={
         Object {
@@ -37,7 +35,6 @@ exports[`Test Location Manual Scan Component Renders Error message with Invalid 
           "paddingLeft": 10,
         }
       }
-      underlineColorAndroid="transparent"
       value="Not a Location"
     />
     <IconButton
@@ -109,7 +106,6 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
     }
   >
     <TextInput
-      allowFontScaling={true}
       autoCapitalize="characters"
       autoCorrect={false}
       autoFocus={true}
@@ -117,7 +113,6 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
       placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
-      rejectResponderTermination={true}
       selectionColor="#0071e9"
       style={
         Object {
@@ -126,7 +121,6 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
           "paddingLeft": 10,
         }
       }
-      underlineColorAndroid="transparent"
       value="12345"
     />
     <IconButton
@@ -169,7 +163,6 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
     }
   >
     <TextInput
-      allowFontScaling={true}
       autoCapitalize="characters"
       autoCorrect={false}
       autoFocus={true}
@@ -177,7 +170,6 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
       placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
-      rejectResponderTermination={true}
       selectionColor="#0071e9"
       style={
         Object {
@@ -186,7 +178,6 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
           "paddingLeft": 10,
         }
       }
-      underlineColorAndroid="transparent"
       value="ABCD1-2"
     />
     <IconButton

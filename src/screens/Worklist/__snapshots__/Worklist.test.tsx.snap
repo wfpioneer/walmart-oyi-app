@@ -26,7 +26,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
   >
     ELECTRONICS
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     testID="button"
   >
@@ -35,7 +35,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
       name="close-circle"
       size={20}
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -65,7 +65,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
   >
     99 - ELECTRONICS
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     testID="button"
   >
@@ -74,7 +74,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
       name="close-circle"
       size={20}
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -104,7 +104,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
   >
     [missing "en.EXCEPTION.NSFL" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     testID="button"
   >
@@ -113,7 +113,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
       name="close-circle"
       size={20}
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -164,7 +164,7 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders error for 
   >
     [missing "en.WORKLIST.WORKLIST_ITEM_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[MockFunction]}
     style={
       Object {
@@ -180,7 +180,7 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders error for 
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -225,7 +225,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
       }
     }
   >
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -233,8 +233,8 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
         name="menu"
         size={25}
       />
-    </ForwardRef>
-    <ForwardRef
+    </TouchableOpacity>
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -242,7 +242,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
         name="list"
         size={25}
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <FlatList
     data={
@@ -332,26 +332,16 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
     onRefresh={[MockFunction]}
     refreshing={false}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "flex": 1,
         "width": "100%",
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -386,23 +376,14 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
           },
         ]
       }
-      disableVirtualization={false}
       horizontal={true}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
       style={
         Object {
           "paddingHorizontal": 0,
         }
       }
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -418,7 +399,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
       }
     }
   >
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -426,8 +407,8 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
         name="menu"
         size={25}
       />
-    </ForwardRef>
-    <ForwardRef
+    </TouchableOpacity>
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -435,7 +416,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
         name="list"
         size={25}
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <FlatList
     data={
@@ -447,26 +428,16 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
     onRefresh={[MockFunction]}
     refreshing={false}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "flex": 1,
         "width": "100%",
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -501,23 +472,14 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
           },
         ]
       }
-      disableVirtualization={false}
       horizontal={true}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
       style={
         Object {
           "paddingHorizontal": 0,
         }
       }
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -533,7 +495,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
       }
     }
   >
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -541,8 +503,8 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
         name="menu"
         size={25}
       />
-    </ForwardRef>
-    <ForwardRef
+    </TouchableOpacity>
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -550,7 +512,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
         name="list"
         size={25}
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <FlatList
     data={
@@ -562,26 +524,16 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
     onRefresh={[MockFunction]}
     refreshing={false}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "flex": 1,
         "width": "100%",
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -609,23 +561,14 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
   >
     <FlatList
       data={Array []}
-      disableVirtualization={false}
       horizontal={true}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
       style={
         Object {
           "paddingHorizontal": 0,
         }
       }
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -641,7 +584,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
       }
     }
   >
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -649,8 +592,8 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
         name="menu"
         size={25}
       />
-    </ForwardRef>
-    <ForwardRef
+    </TouchableOpacity>
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -658,7 +601,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
         name="list"
         size={25}
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <FlatList
     data={
@@ -683,26 +626,16 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
     onRefresh={[MockFunction]}
     refreshing={false}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "flex": 1,
         "width": "100%",
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -737,23 +670,14 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
           },
         ]
       }
-      disableVirtualization={false}
       horizontal={true}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
       style={
         Object {
           "paddingHorizontal": 0,
         }
       }
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
   <View
@@ -769,7 +693,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
       }
     }
   >
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -777,8 +701,8 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
         name="menu"
         size={25}
       />
-    </ForwardRef>
-    <ForwardRef
+    </TouchableOpacity>
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -786,7 +710,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
         name="list"
         size={25}
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <FlatList
     data={
@@ -811,26 +735,16 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
     onRefresh={[MockFunction]}
     refreshing={false}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "flex": 1,
         "width": "100%",
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -859,7 +773,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
       }
     }
   >
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -867,8 +781,8 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
         name="menu"
         size={25}
       />
-    </ForwardRef>
-    <ForwardRef
+    </TouchableOpacity>
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -876,7 +790,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
         name="list"
         size={25}
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <FlatList
     data={
@@ -966,26 +880,16 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
     onRefresh={[MockFunction]}
     refreshing={false}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "flex": 1,
         "width": "100%",
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -1014,7 +918,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
       }
     }
   >
-    <ForwardRef
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -1022,8 +926,8 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
         name="menu"
         size={25}
       />
-    </ForwardRef>
-    <ForwardRef
+    </TouchableOpacity>
+    <TouchableOpacity
       onPress={[Function]}
     >
       <mockConstructor
@@ -1031,7 +935,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
         name="list"
         size={25}
       />
-    </ForwardRef>
+    </TouchableOpacity>
   </View>
   <FlatList
     data={
@@ -1152,26 +1056,16 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
     onRefresh={[MockFunction]}
     refreshing={false}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "flex": 1,
         "width": "100%",
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;

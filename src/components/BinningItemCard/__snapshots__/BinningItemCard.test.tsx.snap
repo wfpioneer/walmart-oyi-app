@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Binning Item card render tests renders the binning item card 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <View
@@ -57,7 +57,7 @@ exports[`Binning Item card render tests renders the binning item card 1`] = `
       </View>
     </View>
     <View>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
         style={
           Object {
@@ -76,14 +76,14 @@ exports[`Binning Item card render tests renders the binning item card 1`] = `
             size={40}
           />
         </View>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
   </View>
-</ForwardRef>
+</TouchableOpacity>
 `;
 
 exports[`Binning Item card render tests renders the binning item card for empty pallet 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <View
@@ -134,7 +134,7 @@ exports[`Binning Item card render tests renders the binning item card for empty 
       </View>
     </View>
     <View>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
         style={
           Object {
@@ -153,14 +153,14 @@ exports[`Binning Item card render tests renders the binning item card for empty 
             size={40}
           />
         </View>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
   </View>
-</ForwardRef>
+</TouchableOpacity>
 `;
 
 exports[`Binning Item card render tests renders the binning item card in read only mode 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <View
@@ -216,11 +216,11 @@ exports[`Binning Item card render tests renders the binning item card in read on
       </View>
     </View>
   </View>
-</ForwardRef>
+</TouchableOpacity>
 `;
 
 exports[`Binning Item card render tests renders the binning item card without last loc 1`] = `
-<ForwardRef
+<TouchableOpacity
   onPress={[Function]}
 >
   <View
@@ -265,7 +265,7 @@ exports[`Binning Item card render tests renders the binning item card without la
       </View>
     </View>
     <View>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
         style={
           Object {
@@ -284,8 +284,8 @@ exports[`Binning Item card render tests renders the binning item card without la
             size={40}
           />
         </View>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
   </View>
-</ForwardRef>
+</TouchableOpacity>
 `;
