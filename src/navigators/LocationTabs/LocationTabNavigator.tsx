@@ -28,13 +28,11 @@ import {
 import SectionDetails from '../../screens/SectionDetails/SectionDetailsScreen';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { setScannedEvent } from '../../state/actions/Global';
+import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 import { hideItemPopup, hideLocationPopup } from '../../state/actions/Location';
-
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
-import Button from '../../components/buttons/Button';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
 import { ClearLocationTarget, LocationName } from '../../models/Location';
 import ReserveSectionDetails from '../../screens/SectionDetails/ReserveSectionDetails';
@@ -376,7 +374,14 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     navigation.addListener('blur', () => {
       dispatch(hideItemPopup());
       dispatch({ type: GET_SECTION_DETAILS.RESET });
+      if (scannedEvent.value) {
+        dispatch(resetScannedEvent());
+      }
     });
+    return () => {
+      navigation.removeListener('focus', () => {});
+      navigation.removeListener('blur', () => {});
+    };
   }, [navigation, scannedEvent]);
 
   // scanned event listener
