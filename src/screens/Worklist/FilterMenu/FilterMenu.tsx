@@ -256,7 +256,7 @@ export const RenderAreaCard = (props: {
     return {
       area: item.area,
       categories: newCategories,
-      isSelected: isAllSelected.every(value => value === true)
+      isSelected: isAllSelected.length > 0 && isAllSelected.every(value => value === true)
     };
   });
 
