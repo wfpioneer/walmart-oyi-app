@@ -615,7 +615,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
   const onDatePickerChange = (event: DateTimePickerEvent, value: Date| undefined) => {
     const { type } = event;
-    const newDate = value && moment(value).format('MM/DD/YYYY');
+    const newDate = value && moment(value).format('DD/MM/YYYY');
     setIsPickerShow(false);
     if (type === 'set' && newDate && newDate !== expirationDate) {
       dispatch(setPalletNewExpiration(newDate));
