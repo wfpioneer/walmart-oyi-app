@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { createGenericTag, makeAsyncActionCreators, makeAsyncActionTypes, SubactionsMap } from './makeAsyncActions';
+import { createGenericTag, makeAsyncActionCreators, makeAsyncActionTypes } from './makeAsyncActions';
 
 const TEST_CREATOR = 'API/TEST_CREATOR';
 
