@@ -46,7 +46,7 @@ export const removeCombinePallet = (palletId: string) => ({
   payload: palletId
 } as const);
 
-export const setPalletItemNewQuantity = (itemNbr: string, newQuantity: number | undefined) => ({
+export const setPalletItemNewQuantity = (itemNbr: string, newQuantity: number) => ({
   type: SET_ITEM_NEW_QUANTITY,
   payload: { itemNbr, newQuantity }
 } as const);

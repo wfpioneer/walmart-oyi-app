@@ -51,6 +51,13 @@ export const calculateIncreaseQty = (newOHQty: any,
   }
 };
 
+export const onQtyEditingEnd = (newOHQty: any, onHandsQty: number,
+  setNewOHQty: React.Dispatch<React.SetStateAction<number>>) => {
+  if (newOHQty === OH_MIN) {
+    setNewOHQty(onHandsQty);
+  }
+};
+
 const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
   const {
     onHandsQty, newOHQty, setNewOHQty,
@@ -59,7 +66,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
-    assignHandleTextChange(newQty, setNewOHQty);
+    assignHandleTextChange(Number.isNaN(newQty) ? 0 : newQty, setNewOHQty);
   };
 
   const handleIncreaseQty = () => {
@@ -68,6 +75,10 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
 
   const handleDecreaseQty = () => {
     calculateDecreaseQty(newOHQty, setNewOHQty);
+  };
+
+  const handleEndEditingQty = () => {
+    onQtyEditingEnd(newOHQty, onHandsQty, setNewOHQty);
   };
 
   return (
@@ -91,6 +102,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
         minValue={OH_MIN}
         maxValue={OH_MAX}
         value={newOHQty}
+        onEndEditing={handleEndEditingQty}
       />
       {!validateQty(newOHQty) && (
         <Text style={styles.invalidLabel}>

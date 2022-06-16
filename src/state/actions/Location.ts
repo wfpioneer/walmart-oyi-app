@@ -105,7 +105,7 @@ export const setNewZone = (name: string) => ({
   payload: name
 } as const);
 
-export const setAisleSectionCount = (aisleIndex: number, sectionCount: number | undefined) => ({
+export const setAisleSectionCount = (aisleIndex: number, sectionCount: number) => ({
   type: SET_AISLE_SECTION_COUNT,
   payload: {
     aisleIndex,

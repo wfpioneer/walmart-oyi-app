@@ -51,8 +51,17 @@ const onPalletDecrease = (
 
 const onPalletTextChange = (text: string, setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>) => {
   const newQty = parseInt(text, 10);
-  if (!Number.isNaN(newQty) && newQty >= PALLET_MIN && newQty <= PALLET_MAX) {
-    setNumberOfPallets(newQty);
+  if (text === '' || (!Number.isNaN(newQty) && newQty >= PALLET_MIN && newQty <= PALLET_MAX)) {
+    setNumberOfPallets(Number.isNaN(newQty) ? 0 : newQty);
+  }
+};
+
+const onPalletEditingEnd = (
+  numberOfPallets: number,
+  setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>
+) => {
+  if (numberOfPallets === 0) {
+    setNumberOfPallets(1);
   }
 };
 
@@ -111,6 +120,7 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
             minValue={PALLET_MIN}
             maxValue={PALLET_MAX}
             value={numberOfPallets}
+            onEndEditing={() => onPalletEditingEnd(numberOfPallets, setNumberOfPallets)}
           />
         </View>
       ) : null}
@@ -128,7 +138,7 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          disabled={selectedSection === ''}
+          disabled={selectedSection === '' || !isNumberOfPalletsValid(numberOfPallets)}
           title={strings('PICKING.CREATE_PICK')}
           type={Button.Type.PRIMARY}
           onPress={onSubmit}

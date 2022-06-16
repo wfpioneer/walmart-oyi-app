@@ -462,8 +462,10 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     }
   };
 
-  const isPickQtyZero = ():boolean => (
-    selectedPicks.every(pick => pick.quantityLeft === 0)
+  const isPickQtyZero = ():boolean => selectedPicks.every(pick => pick.quantityLeft === 0);
+
+  const isAnyNewPickQtyZero = ():boolean => selectedPicks.some(
+    pick => !!pick.quantityLeft && pick.newQuantityLeft === 0
   );
 
   const handleComplete = () => {
@@ -505,8 +507,14 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const handleTextChange = (text: string, item: PickListItem) => {
     const newQuantity = Number.parseInt(text, 10);
 
-    if (newQuantity && newQuantity < MAX && newQuantity > 0) {
-      dispatch(updatePicks([{ ...item, newQuantityLeft: newQuantity }]));
+    if (text === '' || (newQuantity && newQuantity < MAX && newQuantity > 0)) {
+      dispatch(updatePicks([{ ...item, newQuantityLeft: Number.isNaN(newQuantity) ? 0 : newQuantity }]));
+    }
+  };
+
+  const onEndEditing = (item: PickListItem) => {
+    if (item.newQuantityLeft === 0 && item.quantityLeft !== 0) {
+      dispatch(updatePicks([{ ...item, newQuantityLeft: item.quantityLeft }]));
     }
   };
 
@@ -554,6 +562,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         quantity={currentQuantity}
         salesFloorLocation={item.salesFloorLocationName}
         upcNbr={item.upcNbr}
+        onEndEditing={() => onEndEditing(item)}
       />
     );
   };
@@ -639,7 +648,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
           onPress={() => handleBin()}
           style={styles.actionButton}
           testId="bin"
-          disabled={isPickQtyZero() && isReadyToComplete}
+          disabled={(isPickQtyZero() && isReadyToComplete) || isAnyNewPickQtyZero()}
         />
       </View>
     </SafeAreaView>

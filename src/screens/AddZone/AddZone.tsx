@@ -123,11 +123,11 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
   };
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
-    setNumberOfAisles(newQty);
+    setNumberOfAisles(Number.isNaN(newQty) ? 0 : newQty);
   };
 
   const handleAisleEndEditing = () => {
-    if (!numberOfAisles) {
+    if (numberOfAisles === 0) {
       setNumberOfAisles(1);
     }
   };

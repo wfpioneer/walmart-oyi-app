@@ -134,12 +134,12 @@ export const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text
       visibilityTime: 3000
     });
   } else {
-    dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), Number.isNaN(newQuantity) ? undefined : newQuantity));
+    dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), Number.isNaN(newQuantity) ? 0 : newQuantity));
   }
 };
 
 export const onEndEditing = (item: PalletItem, dispatch: Dispatch<any>): void => {
-  if (!item.newQuantity) {
+  if (item.newQuantity === 0 && item.quantity !== 0) {
     dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), item.quantity));
   }
 };

@@ -210,10 +210,19 @@ export const CreatePickScreen = (props: CreatePickProps) => {
     }
   };
 
+  const onPalletEndEditing = (
+    numberOfPallets: number,
+    setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>
+  ) => {
+    if (numberOfPallets === 0) {
+      setNumberOfPallets(1);
+    }
+  };
+
   const onPalletTextChange = (text: string, setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>) => {
     const newQty = parseInt(text, 10);
-    if (!Number.isNaN(newQty) && newQty >= PALLET_MIN && newQty <= PALLET_MAX) {
-      setNumberOfPallets(newQty);
+    if (text === '' || (!Number.isNaN(newQty) && newQty >= PALLET_MIN && newQty <= PALLET_MAX)) {
+      setNumberOfPallets(Number.isNaN(newQty) ? 0 : newQty);
     }
   };
 
@@ -221,7 +230,9 @@ export const CreatePickScreen = (props: CreatePickProps) => {
     numberOfPallets >= PALLET_MIN && numberOfPallets <= PALLET_MAX
   );
 
-  const disableCreateButton = () => !selectedSection || !reserveLocations.length;
+  const disableCreateButton = () => !selectedSection
+    || !reserveLocations.length
+    || !isNumberOfPalletsValid(palletNumber);
 
   const onSubmit = () => {
     dispatch(createNewPick({
@@ -287,6 +298,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
             minValue={PALLET_MIN}
             maxValue={PALLET_MAX}
             value={palletNumber}
+            onEndEditing={() => onPalletEndEditing(palletNumber, setPalletNumber)}
           />
         </View>
       </View>
