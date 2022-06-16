@@ -110,18 +110,8 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <View
     style={
@@ -172,7 +162,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           Front desk printer
         </Text>
       </View>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
       >
         <Text
@@ -186,7 +176,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         >
           [missing "en.GENERICS.CHANGE" translation]
         </Text>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
     <View
       style={
@@ -452,18 +442,8 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <View
     style={
@@ -514,7 +494,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           Front desk printer
         </Text>
       </View>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
       >
         <Text
@@ -528,7 +508,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         >
           [missing "en.GENERICS.CHANGE" translation]
         </Text>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
     <View
       style={
@@ -632,18 +612,8 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <View
     style={
@@ -694,7 +664,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           Front desk printer
         </Text>
       </View>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
       >
         <Text
@@ -708,7 +678,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         >
           [missing "en.GENERICS.CHANGE" translation]
         </Text>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
     <View
       style={
@@ -777,18 +747,8 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   <FlatList
     ListEmptyComponent={<NoPrintQueueMessage />}
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <View
     style={
@@ -839,7 +799,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           Front desk printer
         </Text>
       </View>
-      <ForwardRef
+      <TouchableOpacity
         onPress={[Function]}
       >
         <Text
@@ -853,7 +813,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         >
           [missing "en.GENERICS.CHANGE" translation]
         </Text>
-      </ForwardRef>
+      </TouchableOpacity>
     </View>
     <View
       style={
@@ -957,18 +917,8 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <View
     style={
@@ -1070,18 +1020,8 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <View
     style={

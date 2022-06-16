@@ -343,10 +343,8 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -365,7 +363,6 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
             ]
           }
           testID="signQtyInput"
-          underlineColorAndroid="transparent"
         >
           1
         </TextInput>
@@ -756,10 +753,8 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -778,7 +773,6 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
             ]
           }
           testID="signQtyInput"
-          underlineColorAndroid="transparent"
         >
           1
         </TextInput>
@@ -1093,10 +1087,8 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -1115,7 +1107,6 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
             ]
           }
           testID="signQtyInput"
-          underlineColorAndroid="transparent"
         >
           101
         </TextInput>
@@ -1467,10 +1458,8 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -1489,7 +1478,6 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
             ]
           }
           testID="signQtyInput"
-          underlineColorAndroid="transparent"
         >
           1
         </TextInput>
@@ -1846,10 +1834,8 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -1868,7 +1854,6 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
             ]
           }
           testID="signQtyInput"
-          underlineColorAndroid="transparent"
         >
           1
         </TextInput>
@@ -2170,10 +2155,8 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -2192,7 +2175,6 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
             ]
           }
           testID="signQtyInput"
-          underlineColorAndroid="transparent"
         >
           1
         </TextInput>

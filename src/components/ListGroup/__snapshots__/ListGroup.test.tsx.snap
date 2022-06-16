@@ -23,6 +23,7 @@ Array [
   </View>,
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -72,6 +73,7 @@ Array [
   </View>,
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -160,19 +162,9 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEnabled={false}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
 </View>
@@ -206,19 +198,9 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
           "4321",
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEnabled={false}
-      scrollEventThrottle={50}
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
   </View>
 </View>

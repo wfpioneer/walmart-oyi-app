@@ -433,13 +433,13 @@ export const missingExceptionsWorklist: WorklistItemI[] = [
 
 export const mockCategoryMap: FilteredCategory[] = [
   {
-    catgName: CATEGORY_NAME.FOODSERVICE,
-    catgNbr: 93,
+    catgName: CATEGORY_NAME.WINE,
+    catgNbr: 19,
     selected: false
   },
   {
-    catgName: CATEGORY_NAME.ELECTRONICS,
-    catgNbr: 99,
+    catgName: CATEGORY_NAME.PHARMACY_RX,
+    catgNbr: 87,
     selected: false
   },
   {
@@ -448,13 +448,13 @@ export const mockCategoryMap: FilteredCategory[] = [
     selected: false
   },
   {
-    catgName: CATEGORY_NAME.WINE,
-    catgNbr: 19,
+    catgName: CATEGORY_NAME.FOODSERVICE,
+    catgNbr: 93,
     selected: false
   },
   {
-    catgName: CATEGORY_NAME.PHARMACY_RX,
-    catgNbr: 87,
+    catgName: CATEGORY_NAME.ELECTRONICS,
+    catgNbr: 99,
     selected: false
   },
   {

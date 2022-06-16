@@ -26,7 +26,7 @@ exports[`FilterPillButton Component FilterButton ShallowRender 1`] = `
   >
     randomText
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[MockFunction]}
     testID="button"
   >
@@ -35,7 +35,7 @@ exports[`FilterPillButton Component FilterButton ShallowRender 1`] = `
       name="close-circle"
       size={20}
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -67,6 +67,7 @@ exports[`FilterPillButton Component Test Filterbutton TouchableOpacity 1`] = `
   </Text>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}

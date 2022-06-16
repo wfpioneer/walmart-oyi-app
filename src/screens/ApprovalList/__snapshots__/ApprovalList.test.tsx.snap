@@ -28,7 +28,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders A
   >
     [missing "en.APPROVAL.APPROVAL_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -45,7 +45,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders A
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -101,24 +101,14 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
           },
         ]
       }
-      disableVirtualization={false}
-      horizontal={false}
-      initialNumToRender={10}
       keyExtractor={[Function]}
-      maxToRenderPerBatch={10}
-      numColumns={1}
-      onEndReachedThreshold={2}
-      removeClippedSubviews={false}
       renderItem={[Function]}
-      scrollEventThrottle={50}
       style={
         Object {
           "minHeight": 80,
           "paddingVertical": 20,
         }
       }
-      updateCellsBatchingPeriod={50}
-      windowSize={21}
     />
     <Button
       backgroundColor="#0071e9"
@@ -162,24 +152,15 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
       </View>
     }
     data={Array []}
-    disableVirtualization={false}
     extraData={Array []}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "flex": 1,
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -329,7 +310,6 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
         },
       ]
     }
-    disableVirtualization={false}
     extraData={
       Array [
         Object {
@@ -422,15 +402,9 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
         },
       ]
     }
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     stickyHeaderIndices={
       Array [
         0,
@@ -442,8 +416,6 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
         "flex": 1,
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <ButtonBottomTab
     leftTitle="[missing \\"en.APPROVAL.REJECT\\" translation]"
@@ -485,24 +457,15 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Empty Appr
       </View>
     }
     data={Array []}
-    disableVirtualization={false}
     extraData={Array []}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     style={
       Object {
         "flex": 1,
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -629,7 +592,6 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
         },
       ]
     }
-    disableVirtualization={false}
     extraData={
       Array [
         Object {
@@ -722,15 +684,9 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
         },
       ]
     }
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
     stickyHeaderIndices={
       Array [
         0,
@@ -742,8 +698,6 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
         "flex": 1,
       }
     }
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -801,24 +755,14 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
             },
           ]
         }
-        disableVirtualization={false}
-        horizontal={false}
-        initialNumToRender={10}
         keyExtractor={[Function]}
-        maxToRenderPerBatch={10}
-        numColumns={1}
-        onEndReachedThreshold={2}
-        removeClippedSubviews={false}
         renderItem={[Function]}
-        scrollEventThrottle={50}
         style={
           Object {
             "minHeight": 80,
             "paddingVertical": 20,
           }
         }
-        updateCellsBatchingPeriod={50}
-        windowSize={21}
       />
       <Button
         backgroundColor="#0071e9"
@@ -961,24 +905,14 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
       </Text>
       <FlatList
         data={Array []}
-        disableVirtualization={false}
-        horizontal={false}
-        initialNumToRender={10}
         keyExtractor={[Function]}
-        maxToRenderPerBatch={10}
-        numColumns={1}
-        onEndReachedThreshold={2}
-        removeClippedSubviews={false}
         renderItem={[Function]}
-        scrollEventThrottle={50}
         style={
           Object {
             "minHeight": 80,
             "paddingVertical": 20,
           }
         }
-        updateCellsBatchingPeriod={50}
-        windowSize={21}
       />
       <Button
         backgroundColor="#0071e9"
@@ -1056,24 +990,14 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
             },
           ]
         }
-        disableVirtualization={false}
-        horizontal={false}
-        initialNumToRender={10}
         keyExtractor={[Function]}
-        maxToRenderPerBatch={10}
-        numColumns={1}
-        onEndReachedThreshold={2}
-        removeClippedSubviews={false}
         renderItem={[Function]}
-        scrollEventThrottle={50}
         style={
           Object {
             "minHeight": 80,
             "paddingVertical": 20,
           }
         }
-        updateCellsBatchingPeriod={50}
-        windowSize={21}
       />
       <Button
         backgroundColor="#0071e9"
