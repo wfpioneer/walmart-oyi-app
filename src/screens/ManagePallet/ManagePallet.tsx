@@ -725,7 +725,7 @@ const ManagePallet = (): JSX.Element => {
   const [isPickerShow, setIsPickerShow] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ['45%'], []);
+  const snapPoints = useMemo(() => ['55%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {
