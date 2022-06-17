@@ -1,16 +1,14 @@
 import { StyleSheet } from 'react-native';
-import COLOR from '../../themes/Color';
 
 export default StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
-    width: '100%'
+    flex: 1
   },
   button: {
     height: 40,
-    width: '85%',
+    width: '90%',
     marginBottom: 15
   }
 });

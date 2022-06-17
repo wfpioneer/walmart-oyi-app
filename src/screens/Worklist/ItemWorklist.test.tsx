@@ -9,7 +9,7 @@ import {
 import { WorklistItemI } from '../../models/WorklistItem';
 import {
   RenderWorklistItem, Worklist, convertDataToDisplayList, renderFilterPills
-} from './Worklist';
+} from './ItemWorklist';
 import { ExceptionList } from './FullExceptionList';
 import { mockAreas } from '../../mockData/mockConfig';
 

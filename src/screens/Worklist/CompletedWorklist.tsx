@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { WorklistItemI } from '../../models/WorklistItem';
-import { Worklist } from './Worklist';
+import { Worklist } from './ItemWorklist';
 import { getWorklist } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { area } from '../../models/User';
