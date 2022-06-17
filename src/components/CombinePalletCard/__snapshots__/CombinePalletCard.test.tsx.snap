@@ -39,7 +39,7 @@ exports[`Test CombinePalletCard Component Renders the Combine Pallet Card 1`] = 
       [missing "en.GENERICS.ITEMS" translation]: 5
     </Text>
   </View>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -53,6 +53,6 @@ exports[`Test CombinePalletCard Component Renders the Combine Pallet Card 1`] = 
       name="trash-can"
       size={30}
     />
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;

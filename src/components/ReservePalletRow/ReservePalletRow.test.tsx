@@ -1,6 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { Provider } from 'react-redux';
+import { fireEvent, render } from '@testing-library/react-native';
 import { mockLocationDetails } from '../../mockData/locationDetails';
 import ReservePalletRow from './ReservePalletRow';
 import { ReserveDetailsPallet, SectionDetailsItem } from '../../models/LocationItems';
@@ -9,20 +10,23 @@ import { mockCombinedReserveData } from '../../mockData/getPalletDetails';
 
 const mockReservePallet = mockCombinedReserveData[0];
 const mockSection = mockLocationDetails.section;
+const mockDispatch = jest.fn();
 
 jest.mock('react-redux', () => {
   const ActualReactRedux = jest.requireActual('react-redux');
   return {
     ...ActualReactRedux,
-    useTypedSelector: jest.fn().mockImplementation(() => { })
+    useTypedSelector: jest.fn().mockImplementation(() => { }),
+    useDispatch: () => mockDispatch
   };
 });
+jest.mock('../../utils/AppCenterTool.ts', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 describe('ReservePalletRow Component', () => {
   it('Renders a ReservePallet', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <ReservePalletRow section={mockSection} reservePallet={mockReservePallet} />
+        <ReservePalletRow section={mockSection} reservePallet={mockReservePallet} setPalletClicked={jest.fn()} />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -40,7 +44,11 @@ describe('ReservePalletRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <ReservePalletRow section={mockSection} reservePallet={mockReservePalletLongFirstItemName} />
+        <ReservePalletRow
+          section={mockSection}
+          reservePallet={mockReservePalletLongFirstItemName}
+          setPalletClicked={jest.fn()}
+        />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -51,9 +59,25 @@ describe('ReservePalletRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <ReservePalletRow section={mockSection} reservePallet={mockReservePalletNoItems} />
+        <ReservePalletRow section={mockSection} reservePallet={mockReservePalletNoItems} setPalletClicked={jest.fn()} />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('tests click functionality of reserve pallet row', async () => {
+    const mockSetPalletClicked = jest.fn();
+    const { findByTestId } = render(
+      <Provider store={store}>
+        <ReservePalletRow
+          section={mockSection}
+          reservePallet={mockReservePallet}
+          setPalletClicked={mockSetPalletClicked}
+        />
+      </Provider>
+    );
+    const reservePalletRow = await findByTestId('reserve-pallet-row');
+    fireEvent.press(reservePalletRow);
+    expect(mockSetPalletClicked).toBeCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalled();
   });
 });

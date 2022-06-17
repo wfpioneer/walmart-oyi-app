@@ -6,7 +6,7 @@ import {
   SHOW_INFO_MODAL
 } from '../actions/Modal';
 
-interface ModalState {
+export interface ModalState {
   showModal: boolean;
   showActivity: boolean;
   content: { title: string; text: string } | null;

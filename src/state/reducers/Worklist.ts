@@ -1,6 +1,7 @@
 import {
   Actions,
   CLEAR_FILTER,
+  TOGGLE_AREA,
   TOGGLE_CATEGORIES,
   TOGGLE_EXCEPTIONS,
   TOGGLE_MENU,
@@ -8,10 +9,20 @@ import {
   UPDATE_FILTER_EXCEPTIONS
 } from '../actions/Worklist';
 
-const initialState = {
+export interface WorklistState {
+  menuOpen: boolean;
+  categoryOpen: boolean;
+  exceptionOpen: boolean;
+  areaOpen: boolean;
+  filterCategories: string[];
+  filterExceptions: string[];
+}
+
+export const initialState: WorklistState = {
   menuOpen: false,
   categoryOpen: false,
   exceptionOpen: false,
+  areaOpen: false,
   filterCategories: [],
   filterExceptions: []
 };
@@ -32,6 +43,11 @@ export const worklist = (state = initialState, action: Actions) => {
       return {
         ...state,
         exceptionOpen: action.payload
+      };
+    case TOGGLE_AREA:
+      return {
+        ...state,
+        areaOpen: action.payload
       };
     case UPDATE_FILTER_CATEGORIES:
       return {

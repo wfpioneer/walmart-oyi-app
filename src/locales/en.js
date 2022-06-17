@@ -54,7 +54,8 @@ export default {
     REQUIRED: 'Required',
     REMOVED: 'Removed',
     CREATE: 'Create',
-    UNASSIGNED: 'unassigned'
+    UNASSIGNED: 'unassigned',
+    SELECTED: 'selected'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -162,7 +163,8 @@ export default {
     LOCATION_PRINTING: 'Location Printing',
     PRICE_SIGNS: 'Price Signs',
     LOCATIONS: 'Locations',
-    PRICE_SIGN_SUCCESS: 'Price Sign Label Successfully Printed'
+    PRICE_SIGN_SUCCESS: 'Price Sign Label Successfully Printed',
+    PRINTER_NOT_ASSIGNED: 'No assigned printer'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Pallet Management',
@@ -317,7 +319,8 @@ export default {
     CLEAR: 'Clear',
     TODO: 'Todo',
     COMPLETED: 'Completed',
-    WORKLIST_ITEM_API_ERROR: 'There was an error retrieving worklist items.\nPlease try again.'
+    WORKLIST_ITEM_API_ERROR: 'There was an error retrieving worklist items.\nPlease try again.',
+    AREA: 'Area'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',
@@ -404,7 +407,18 @@ export default {
     PALLET_NOT_FOUND: 'Pallet Not Found',
     CREATE_NEW_PICK_SUCCESS: 'Pick Created',
     CREATE_NEW_PICK_FAILURE: 'There was an error creating the pick',
-    PICK_REQUEST_CRITERIA_ALREADY_MET: 'Not enough pallets available for this pick'
+    PICK_REQUEST_CRITERIA_ALREADY_MET: 'Not enough pallets available for this pick',
+    PICK_COMPLETED: 'The pick has been completed',
+    PICK_COMPLETED_PLURAL: 'The picks have been completed',
+    PICKLIST_UPDATED: 'The picklist has been updated',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED: 'The pick has been completed and the picklist has been updated',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'The picks have been completed and the picklist have been updated',
+    NEW_PICK_ADDED_TO_PICKLIST: 'The pick request has been added to the picklist',
+    NEW_PICK_ADDED_TO_PICKLIST_PLURAL: 'The pick requests have been added to the picklist',
+    NO_PALLETS_AVAILABLE_PICK_DELETED: 'The pallet is not available. The pick requested has been deleted',
+    UPDATE_PICK_FAILED_TRY_AGAIN: 'Failed to update pick. Please try again',
+    UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again',
+    NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available'
   },
   BINNING: {
     BINNING: 'Binning',
@@ -420,7 +434,8 @@ export default {
     WARNING_DESCRIPTION: 'If you navigate away from this screen the pallets already scanned will not be binned',
     LAST_LOC: 'Last Loc',
     FIRST_ITEM: 'First Item',
-    EMPTY_PALLET: 'Empty Pallet'
+    EMPTY_PALLET: 'Empty Pallet',
+    PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick'
   },
   SETTINGS: {
     TITLE: 'Settings'

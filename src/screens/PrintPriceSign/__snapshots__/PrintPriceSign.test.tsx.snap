@@ -330,7 +330,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="minus"
               size={18}
@@ -338,14 +338,13 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
           onPress={[Function]}
           radius={50}
+          testID="minusbutton"
           type={2}
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -363,7 +362,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
               },
             ]
           }
-          underlineColorAndroid="transparent"
+          testID="signQtyInput"
         >
           1
         </TextInput>
@@ -372,7 +371,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="plus"
               size={18}
@@ -380,6 +379,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
           onPress={[Function]}
           radius={50}
+          testID="plusbutton"
           type={2}
           width={30}
         />
@@ -498,7 +498,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -510,7 +510,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
         }
       >
-        <mockConstructor
+        <Icon
           name="printer-check"
           size={24}
         />
@@ -518,6 +518,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginLeft": 12,
+              "paddingTop": 14,
             }
           }
         >
@@ -542,6 +543,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         height={20}
         onPress={[Function]}
         radius={5}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
         title="[missing \\"en.GENERICS.CHANGE\\" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
@@ -605,7 +611,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -734,7 +740,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="minus"
               size={18}
@@ -742,14 +748,13 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
           onPress={[Function]}
           radius={50}
+          testID="minusbutton"
           type={2}
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -767,7 +772,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
               },
             ]
           }
-          underlineColorAndroid="transparent"
+          testID="signQtyInput"
         >
           1
         </TextInput>
@@ -776,7 +781,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="plus"
               size={18}
@@ -784,6 +789,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
           onPress={[Function]}
           radius={50}
+          testID="plusbutton"
           type={2}
           width={30}
         />
@@ -902,7 +908,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -914,7 +920,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
         }
       >
-        <mockConstructor
+        <Icon
           name="printer-check"
           size={24}
         />
@@ -922,6 +928,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginLeft": 12,
+              "paddingTop": 14,
             }
           }
         >
@@ -946,6 +953,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         height={20}
         onPress={[Function]}
         radius={5}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
         title="[missing \\"en.GENERICS.CHANGE\\" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
@@ -1062,7 +1074,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="minus"
               size={18}
@@ -1070,14 +1082,13 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
           onPress={[Function]}
           radius={50}
+          testID="minusbutton"
           type={2}
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -1095,7 +1106,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
               },
             ]
           }
-          underlineColorAndroid="transparent"
+          testID="signQtyInput"
         >
           101
         </TextInput>
@@ -1104,7 +1115,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="plus"
               size={18}
@@ -1112,6 +1123,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
           onPress={[Function]}
           radius={50}
+          testID="plusbutton"
           type={2}
           width={30}
         />
@@ -1241,7 +1253,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -1253,7 +1265,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
         }
       >
-        <mockConstructor
+        <Icon
           name="printer-check"
           size={24}
         />
@@ -1261,6 +1273,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginLeft": 12,
+              "paddingTop": 14,
             }
           }
         >
@@ -1285,6 +1298,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         height={20}
         onPress={[Function]}
         radius={5}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
         title="[missing \\"en.GENERICS.CHANGE\\" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
@@ -1427,7 +1445,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="minus"
               size={18}
@@ -1435,14 +1453,13 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
           onPress={[Function]}
           radius={50}
+          testID="minusbutton"
           type={2}
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -1460,7 +1477,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
               },
             ]
           }
-          underlineColorAndroid="transparent"
+          testID="signQtyInput"
         >
           1
         </TextInput>
@@ -1469,7 +1486,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="plus"
               size={18}
@@ -1477,6 +1494,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
           onPress={[Function]}
           radius={50}
+          testID="plusbutton"
           type={2}
           width={30}
         />
@@ -1595,7 +1613,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -1607,7 +1625,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           }
         }
       >
-        <mockConstructor
+        <Icon
           name="printer-check"
           size={24}
         />
@@ -1615,6 +1633,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginLeft": 12,
+              "paddingTop": 14,
             }
           }
         >
@@ -1639,6 +1658,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         height={20}
         onPress={[Function]}
         radius={5}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
         title="[missing \\"en.GENERICS.CHANGE\\" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
@@ -1658,7 +1682,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         }
       }
     >
-      <mockConstructor
+      <Icon
         color="#e57373"
         name="alert"
         size={40}
@@ -1797,7 +1821,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="minus"
               size={18}
@@ -1805,14 +1829,13 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
           }
           onPress={[Function]}
           radius={50}
+          testID="minusbutton"
           type={2}
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -1830,7 +1853,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
               },
             ]
           }
-          underlineColorAndroid="transparent"
+          testID="signQtyInput"
         >
           1
         </TextInput>
@@ -1839,7 +1862,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="plus"
               size={18}
@@ -1847,6 +1870,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
           }
           onPress={[Function]}
           radius={50}
+          testID="plusbutton"
           type={2}
           width={30}
         />
@@ -1872,7 +1896,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -1974,7 +1998,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing 
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >
@@ -2118,7 +2142,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="minus"
               size={18}
@@ -2126,14 +2150,13 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
           }
           onPress={[Function]}
           radius={50}
+          testID="minusbutton"
           type={2}
           width={30}
         />
         <TextInput
-          allowFontScaling={true}
           keyboardType="numeric"
           onChangeText={[Function]}
-          rejectResponderTermination={true}
           style={
             Array [
               Object {
@@ -2151,7 +2174,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
               },
             ]
           }
-          underlineColorAndroid="transparent"
+          testID="signQtyInput"
         >
           1
         </TextInput>
@@ -2160,7 +2183,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
           disabled={false}
           height={30}
           icon={
-            <mockConstructor
+            <Icon
               color="#0071e9"
               name="plus"
               size={18}
@@ -2168,6 +2191,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
           }
           onPress={[Function]}
           radius={50}
+          testID="plusbutton"
           type={2}
           width={30}
         />
@@ -2193,7 +2217,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
           "justifyContent": "space-between",
           "marginTop": 8,
           "paddingHorizontal": 8,
-          "paddingVertical": 12,
+          "paddingVertical": 8,
         }
       }
     >

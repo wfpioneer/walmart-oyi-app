@@ -127,6 +127,7 @@ exports[`ApprovalList Navigator Renders the closeButton component  1`] = `
   delayLongPress={600}
   extraButtonProps={
     Object {
+      "exclusive": true,
       "rippleColor": "transparent",
     }
   }
@@ -155,6 +156,7 @@ exports[`ApprovalList Navigator Renders the deselect all button header 1`] = `
   delayLongPress={600}
   extraButtonProps={
     Object {
+      "exclusive": true,
       "rippleColor": "transparent",
     }
   }
@@ -201,6 +203,7 @@ exports[`ApprovalList Navigator Renders the select all button header 1`] = `
   delayLongPress={600}
   extraButtonProps={
     Object {
+      "exclusive": true,
       "rippleColor": "transparent",
     }
   }

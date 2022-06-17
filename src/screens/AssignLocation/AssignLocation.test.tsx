@@ -5,6 +5,8 @@ import Toast from 'react-native-toast-message';
 import { PostBinPalletsMultistatusResponse } from '../../services/PalletManagement.service';
 import { HIDE_ACTIVITY_MODAL, SHOW_ACTIVITY_MODAL } from '../../state/actions/Modal';
 import { AsyncState } from '../../models/AsyncState';
+import { strings } from '../../locales';
+import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 import { AssignLocationScreen, binPalletsApiEffect, getFailedPallets } from './AssignLocation';
 import { CLEAR_PALLETS, DELETE_PALLET } from '../../state/actions/Binning';
 import { BinningPallet } from '../../models/Binning';
@@ -96,10 +98,10 @@ describe('Assign Location externalized function tests', () => {
 
   const multiStatusData: PostBinPalletsMultistatusResponse = {
     binSummary: [
-      { palletId: 1, status: 200 },
-      { palletId: 2, status: 204 },
-      { palletId: 3, status: 400 },
-      { palletId: 4, status: 418 }
+      { palletId: '1', status: 200 },
+      { palletId: '2', status: 204 },
+      { palletId: '3', status: 400 },
+      { palletId: '4', status: 418 }
     ]
   };
 
@@ -143,6 +145,79 @@ describe('Assign Location externalized function tests', () => {
     expect(mockNavigate).toHaveBeenCalledWith('PickingTabs');
   });
 
+  it('tests binPalletApiEffect on 200 with only completed pick', () => {
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        status: 200,
+        data: {
+          binSummary: [{
+            palletId: 12595,
+            code: 200,
+            picklists: [{ picklistId: 13, picklistActionType: 'complete', picklistUpdateCode: 200 }]
+          }]
+        }
+      }
+    };
+    binPalletsApiEffect(navigationProp, successApi, mockDispatch, routeProp);
+    expect(Toast.show).toBeCalledWith({
+      type: 'success',
+      position: 'bottom',
+      text1: strings('PICKING.PICK_COMPLETED'),
+      visibilityTime: SNACKBAR_TIMEOUT
+    });
+  });
+
+  it('tests binPalletApiEffect on 200 with only updated location picklist', () => {
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        status: 200,
+        data: {
+          binSummary: [{
+            palletId: 12595,
+            code: 200,
+            picklists: [{ picklistId: 13, picklistActionType: 'updateLocation', picklistUpdateCode: 200 }]
+          }]
+        }
+      }
+    };
+    binPalletsApiEffect(navigationProp, successApi, mockDispatch, routeProp);
+    expect(Toast.show).toBeCalledWith({
+      type: 'success',
+      position: 'bottom',
+      text1: strings('PICKING.PICKLIST_UPDATED'),
+      visibilityTime: SNACKBAR_TIMEOUT
+    });
+  });
+
+  it('tests binPalletApiEffect on 200 with completed picks and updated location picklist', () => {
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        status: 200,
+        data: {
+          binSummary: [{
+            palletId: 12595,
+            code: 200,
+            picklists: [
+              { picklistId: 13, picklistActionType: 'updateLocation', picklistUpdateCode: 200 },
+              { picklistId: 54, picklistActionType: 'complete', picklistUpdateCode: 200 },
+              { picklistId: 63, picklistActionType: 'complete', picklistUpdateCode: 200 }
+            ]
+          }]
+        }
+      }
+    };
+    binPalletsApiEffect(navigationProp, successApi, mockDispatch, routeProp);
+    expect(Toast.show).toBeCalledWith({
+      type: 'success',
+      position: 'bottom',
+      text1: strings('PICKING.PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL'),
+      visibilityTime: SNACKBAR_TIMEOUT_LONG
+    });
+  });
+
   it('tests binPalletsApiEffect on 207', () => {
     const partialSuccessApi: AsyncState = {
       ...defaultAsyncState,
@@ -166,17 +241,59 @@ describe('Assign Location externalized function tests', () => {
     const failApi: AsyncState = {
       ...defaultAsyncState,
       error: {
-        status: 418,
+        response: {
+          status: 418,
+          data: 'No Coffee'
+        },
         message: 'Im a teapot'
+      }
+    };
+    const failLocationNotFoundApi: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        response: {
+          status: 409,
+          data: 'Request failed due to: LOCATION_NOT_FOUND for URI: /bin'
+        },
+        message: 'Location not found'
+      }
+    };
+    const failPalletNotReadyApi: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        response: {
+          status: 409,
+          data: 'Request failed due to: not ready to bin, pallet part of an active pick for URI: /bin'
+        },
+        message: 'Conflict'
       }
     };
 
     binPalletsApiEffect(navigationProp, failApi, mockDispatch, routeProp);
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
-    expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
+    expect(Toast.show).toBeCalledWith(expect.objectContaining({
+      type: 'error',
+      text1: strings('BINNING.PALLET_BIN_FAILURE')
+    }));
     expect(Toast.show).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(2);
+
+    // @ts-expect-error Reset Toast.show function
+    Toast.show.mockReset();
+    binPalletsApiEffect(navigationProp, failLocationNotFoundApi, mockDispatch, routeProp);
+    expect(Toast.show).toBeCalledWith(expect.objectContaining({
+      type: 'error',
+      text1: strings('LOCATION.SECTION_NOT_FOUND')
+    }));
+
+    // @ts-expect-error Reset Toast.show function
+    Toast.show.mockReset();
+    binPalletsApiEffect(navigationProp, failPalletNotReadyApi, mockDispatch, routeProp);
+    expect(Toast.show).toBeCalledWith(expect.objectContaining({
+      type: 'error',
+      text1: strings('BINNING.PALLET_NOT_READY')
+    }));
   });
 
   it('tests binPalletsApiEffect on waiting', () => {

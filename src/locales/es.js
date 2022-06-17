@@ -54,7 +54,8 @@ export default {
     REQUIRED: 'Requerido',
     REMOVED: 'Removido',
     CREATE: 'Crear',
-    UNASSIGNED: 'Sin asignar'
+    UNASSIGNED: 'Sin asignar',
+    SELECTED: 'Seleccionado'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -162,7 +163,8 @@ export default {
     LOCATION_PRINTING: 'Impresión de Ubicaciones',
     PRICE_SIGNS: 'Señalización Precios',
     LOCATIONS: 'Ubicaciones',
-    PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente'
+    PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente',
+    PRINTER_NOT_ASSIGNED: 'No impresoras asignadas'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -316,7 +318,8 @@ export default {
     CLEAR: 'Limpiar',
     TODO: 'Que hacer',
     COMPLETED: 'Terminado',
-    WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo'
+    WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo',
+    AREA: 'Área'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
@@ -380,6 +383,7 @@ export default {
     SELECT_LOCATION: 'Elige una ubicación',
     NUMBER_PALLETS: 'Número de pallets',
     CREATE_PICK: 'Crear un Pick',
+    CREATE_QUICK_PICK: 'Crear un Pick Rápido',
     MOVE_TO_FRONT: 'Llevar al frente',
     QUICK_PICK: 'Pickeo rápido',
     RESERVE_LOC: 'Ubicación de Bodega',
@@ -402,7 +406,18 @@ export default {
     PALLET_NOT_FOUND: 'Pallet no encontrado',
     CREATE_NEW_PICK_SUCCESS: 'Pick creado',
     CREATE_NEW_PICK_FAILURE: 'Hubo un error creando el pick',
-    PICK_REQUEST_CRITERIA_ALREADY_MET: 'No hay suficientes pallets disponibles para este pick'
+    PICK_REQUEST_CRITERIA_ALREADY_MET: 'No hay suficientes pallets disponibles para este pick',
+    NEW_PICK_ADDED_TO_PICKLIST: 'La solicitud de pick se ha agregado a la lista',
+    NEW_PICK_ADDED_TO_PICKLIST_PLURAL: 'Las solicitudes de picks se han agregado a la lista',
+    NO_PALLETS_AVAILABLE_PICK_DELETED: 'El pallet no está disponible. La solicitud ha sido rechazada',
+    UPDATE_PICK_FAILED_TRY_AGAIN: 'Falló la actualización de pick. Por favor inténtalo de nuevo',
+    UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Falló la actualización de picks. Por favor inténtalo de nuevo',
+    PICK_COMPLETED: 'El pick ha sido completado',
+    PICK_COMPLETED_PLURAL: 'Se han completado los picks',
+    PICKLIST_UPDATED: 'La lista de pickeos ha sido actualizada',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED: 'El pickeo se ha completado y la lista se ha actualizado',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los pickeos se han completado y la lista se ha actualizado',
+    NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No hay pallet de reserva disponibles'
   },
   BINNING: {
     BINNING: 'Bodega',
@@ -418,7 +433,8 @@ export default {
     WARNING_DESCRIPTION: 'Si navega afuera de esta pantalla los pallets ya escaneados no se agruparán',
     LAST_LOC: 'última ubicación',
     FIRST_ITEM: 'Primer articulo',
-    EMPTY_PALLET: 'Pallet vacía'
+    EMPTY_PALLET: 'Pallet vacía',
+    PALLET_NOT_READY: 'No se puede ingresar a bodega. Ell pallet es parte de un pick activo'
   },
   SETTINGS: {
     TITLE: 'Ajustes'

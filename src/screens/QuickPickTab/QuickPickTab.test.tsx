@@ -3,6 +3,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
 import User from '../../models/User';
 import { QuickPickTabScreen } from './QuickPickTab';
+import { mockAreas } from '../../mockData/mockConfig';
 
 const mockUser: User = {
   userId: 'vn50pz4',
@@ -21,7 +22,8 @@ const mockUser: User = {
     palletManagement: true,
     picking: true,
     printingUpdate: true,
-    settingsTool: true
+    settingsTool: true,
+    areas: mockAreas
   },
   countryCode: 'US',
   domain: 'Home Office',
@@ -33,13 +35,13 @@ const mockUser: User = {
 const basePickItem: PickListItem = {
   assignedAssociate: '',
   category: 3,
-  createTS: 'yesterday',
+  createTs: '2022-04-03T12:55:31.9633333Z',
   createdBy: 'Guude',
   id: 0,
   itemDesc: 'generic description',
   itemNbr: 1,
   moveToFront: false,
-  palletId: 43,
+  palletId: '43',
   palletLocationId: 4,
   palletLocationName: 'ABAR1-2',
   quickPick: true,

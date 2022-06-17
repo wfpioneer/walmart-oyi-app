@@ -67,18 +67,8 @@ exports[`Aisle List basic render tests Renders Aisle Screen with Data 1`] = `
         },
       ]
     }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -117,18 +107,8 @@ exports[`Aisle List basic render tests Renders Aisle Screen with no-aisles-messa
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -170,18 +150,8 @@ exports[`Aisle List basic render tests Renders Manual Scan Component when isManu
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -223,18 +193,8 @@ exports[`Aisle List basic render tests renders correctly with remove zone modal 
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -276,18 +236,8 @@ exports[`Aisle List basic render tests renders correctly with remove zone modal 
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -329,18 +279,8 @@ exports[`Aisle List basic render tests renders correctly with remove zone modal 
       }
     }
     data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
 </View>
 `;
@@ -372,7 +312,7 @@ exports[`Test Get Aisle Api Response Renders Aisle Api Error Message 1`] = `
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -389,7 +329,7 @@ exports[`Test Get Aisle Api Response Renders Aisle Api Error Message 1`] = `
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -420,7 +360,7 @@ exports[`Test Get Aisle Api Response Renders Aisle Api Error Message when get ai
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -437,7 +377,7 @@ exports[`Test Get Aisle Api Response Renders Aisle Api Error Message when get ai
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -468,7 +408,7 @@ exports[`Test Get Aisle Api Response Renders Error Message when result is 400 er
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -485,7 +425,7 @@ exports[`Test Get Aisle Api Response Renders Error Message when result is 400 er
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -516,7 +456,7 @@ exports[`Test Get Aisle Api Response Renders Error Message when result is 424 er
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -533,7 +473,7 @@ exports[`Test Get Aisle Api Response Renders Error Message when result is 424 er
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -564,7 +504,7 @@ exports[`Test Get Aisle Api Response Renders Error Message when result is 500 er
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -581,7 +521,7 @@ exports[`Test Get Aisle Api Response Renders Error Message when result is 500 er
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -612,7 +552,7 @@ exports[`Test Get Aisle Api Response Renders Error Message when result is networ
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -629,7 +569,7 @@ exports[`Test Get Aisle Api Response Renders Error Message when result is networ
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -660,7 +600,7 @@ exports[`Test Get Aisle Api Response Renders Error Message when result is timeou
   >
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
-  <ForwardRef
+  <TouchableOpacity
     onPress={[Function]}
     style={
       Object {
@@ -677,7 +617,7 @@ exports[`Test Get Aisle Api Response Renders Error Message when result is timeou
     <Text>
       [missing "en.GENERICS.RETRY" translation]
     </Text>
-  </ForwardRef>
+  </TouchableOpacity>
 </View>
 `;
 

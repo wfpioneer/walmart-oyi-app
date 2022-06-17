@@ -12,14 +12,14 @@ type Category = {
     totalItemQty: number;
   };
 }
-interface ApprovalState {
+export interface ApprovalState {
   approvalList: Array<ApprovalCategory>;
   categories: Category;
   categoryIndices: Array<number>;
   selectedItemQty: number;
   isAllSelected: boolean;
 }
-const initialState: ApprovalState = {
+export const initialState: ApprovalState = {
   approvalList: [],
   categories: {},
   categoryIndices: [],
@@ -50,7 +50,7 @@ const isCheckedSelectedQtyToAdd = (updatedItemCat: ApprovalCategory[],
   index: number) => (!updatedItemCat[index].isChecked
   ? 1 : 0);
 
-const filterCheckedListValiddate = (filterCheckedList: ApprovalCategory[], newApprovalList: ApprovalCategory[],
+const filterCheckedListValidate = (filterCheckedList: ApprovalCategory[], newApprovalList: ApprovalCategory[],
   newCategories: Category) => {
   filterCheckedList.forEach(checkedItem => {
     const checkedIdx = newApprovalList.findIndex(item => item.itemNbr === checkedItem.itemNbr);
@@ -92,7 +92,7 @@ export const Approvals = (
       if (state.approvalList.length !== 0) {
         const filterCheckedList = state.approvalList.filter(item => (item.isChecked === true && !item.categoryHeader));
         selectedQty = filterCheckedList.length;
-        filterCheckedListValiddate(filterCheckedList, newApprovalList, newCategories);
+        filterCheckedListValidate(filterCheckedList, newApprovalList, newCategories);
       }
       return {
         ...state,

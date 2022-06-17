@@ -30,14 +30,13 @@ exports[`Numeric selector component NumericSelector minus button is disabled if 
     }
     onPress={[MockFunction]}
     radius={5}
+    testID="decreaseButton"
     type={3}
     width={35}
   />
   <TextInput
-    allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
-    rejectResponderTermination={true}
     style={
       Object {
         "color": "#0071e9",
@@ -46,7 +45,7 @@ exports[`Numeric selector component NumericSelector minus button is disabled if 
         "textAlign": "center",
       }
     }
-    underlineColorAndroid="transparent"
+    testID="numericTextInput"
     value="10"
   />
   <IconButton
@@ -62,6 +61,7 @@ exports[`Numeric selector component NumericSelector minus button is disabled if 
     }
     onPress={[MockFunction]}
     radius={5}
+    testID="increaseButton"
     type={3}
     width={35}
   />
@@ -98,14 +98,13 @@ exports[`Numeric selector component NumericSelector plus button is disabled if v
     }
     onPress={[MockFunction]}
     radius={5}
+    testID="decreaseButton"
     type={3}
     width={35}
   />
   <TextInput
-    allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
-    rejectResponderTermination={true}
     style={
       Object {
         "color": "#0071e9",
@@ -114,7 +113,7 @@ exports[`Numeric selector component NumericSelector plus button is disabled if v
         "textAlign": "center",
       }
     }
-    underlineColorAndroid="transparent"
+    testID="numericTextInput"
     value="10"
   />
   <IconButton
@@ -130,6 +129,7 @@ exports[`Numeric selector component NumericSelector plus button is disabled if v
     }
     onPress={[MockFunction]}
     radius={5}
+    testID="increaseButton"
     type={3}
     width={35}
   />
@@ -166,14 +166,13 @@ exports[`Numeric selector component NumericSelector with invalid input 1`] = `
     }
     onPress={[MockFunction]}
     radius={5}
+    testID="decreaseButton"
     type={3}
     width={35}
   />
   <TextInput
-    allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
-    rejectResponderTermination={true}
     style={
       Object {
         "color": "#0071e9",
@@ -182,7 +181,7 @@ exports[`Numeric selector component NumericSelector with invalid input 1`] = `
         "textAlign": "center",
       }
     }
-    underlineColorAndroid="transparent"
+    testID="numericTextInput"
     value="10"
   />
   <IconButton
@@ -198,6 +197,7 @@ exports[`Numeric selector component NumericSelector with invalid input 1`] = `
     }
     onPress={[MockFunction]}
     radius={5}
+    testID="increaseButton"
     type={3}
     width={35}
   />
@@ -234,14 +234,13 @@ exports[`Numeric selector component NumericSelector with valid input 1`] = `
     }
     onPress={[MockFunction]}
     radius={5}
+    testID="decreaseButton"
     type={3}
     width={35}
   />
   <TextInput
-    allowFontScaling={true}
     keyboardType="numeric"
     onChangeText={[Function]}
-    rejectResponderTermination={true}
     style={
       Object {
         "color": "#0071e9",
@@ -250,7 +249,7 @@ exports[`Numeric selector component NumericSelector with valid input 1`] = `
         "textAlign": "center",
       }
     }
-    underlineColorAndroid="transparent"
+    testID="numericTextInput"
     value="10"
   />
   <IconButton
@@ -266,6 +265,7 @@ exports[`Numeric selector component NumericSelector with valid input 1`] = `
     }
     onPress={[MockFunction]}
     radius={5}
+    testID="increaseButton"
     type={3}
     width={35}
   />

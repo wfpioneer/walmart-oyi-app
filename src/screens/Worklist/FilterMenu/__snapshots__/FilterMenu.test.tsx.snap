@@ -105,21 +105,111 @@ exports[`FilterMenu Component ShallowRender FilterMenu 1`] = `
   }
 >
   <FilterMenuComponent
+    areaOpen={false}
+    areas={
+      Array [
+        Object {
+          "area": "CENTER",
+          "categories": Array [
+            5,
+            7,
+            9,
+            11,
+            16,
+          ],
+        },
+        Object {
+          "area": "GM",
+          "categories": Array [
+            23,
+            24,
+            28,
+            31,
+          ],
+        },
+        Object {
+          "area": "Fresh",
+          "categories": Array [
+            41,
+            42,
+            43,
+            45,
+            47,
+            48,
+          ],
+        },
+      ]
+    }
+    categoryMap={Array []}
     categoryOpen={false}
     dispatch={[MockFunction]}
     exceptionOpen={false}
     filterCategories={Array []}
     filterExceptions={Array []}
-    workListAPI={
-      Object {
-        "error": null,
-        "isWaiting": false,
-        "result": null,
-        "value": null,
-      }
-    }
   />
 </Context.Provider>
+`;
+
+exports[`FilterMenu Component Test renders the RenderAreaCard function and calls dispatch 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "borderBottomColor": "#e0e0e0",
+      "borderBottomWidth": 1,
+      "flexDirection": "row",
+      "opacity": 1,
+      "paddingHorizontal": 10,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text>
+      [missing "en.WORKLIST.AREA" translation]
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#9e9e9e",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.WORKLIST.ALL" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+      }
+    }
+  >
+    <Icon
+      color="#616161"
+      name="keyboard-arrow-down"
+      size={25}
+    />
+  </View>
+</View>
 `;
 
 exports[`FilterMenu Component Test renders the filter menu component and calls onPress Function 1`] = `
@@ -158,6 +248,7 @@ exports[`FilterMenu Component Test renders the filter menu component and calls o
     </Text>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -188,6 +279,66 @@ exports[`FilterMenu Component Test renders the filter menu component and calls o
   </View>
   <View
     accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "borderBottomColor": "#e0e0e0",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "opacity": 1,
+        "paddingHorizontal": 10,
+        "paddingVertical": 15,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text>
+        [missing "en.WORKLIST.AREA" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#9e9e9e",
+            "fontSize": 12,
+          }
+        }
+      >
+        [missing "en.WORKLIST.ALL" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 0.1,
+        }
+      }
+    >
+      <Icon
+        color="#616161"
+        name="keyboard-arrow-down"
+        size={25}
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -246,6 +397,7 @@ exports[`FilterMenu Component Test renders the filter menu component and calls o
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -305,10 +457,19 @@ exports[`FilterMenu Component Test renders the filter menu component and calls o
 </View>
 `;
 
+exports[`FilterMenu Component Test renders the renderAreaCheckbox function 1`] = `
+<Icon
+  color="#0071e9"
+  name="minus-box"
+  size={15}
+/>
+`;
+
 exports[`FilterMenu Component Test renders the renderCategoryCollapsibleCard and filteredCategories FlatList  1`] = `
 Array [
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -348,11 +509,7 @@ Array [
           }
         }
       >
-        3 - OFFICE SUPPLIES
-7 - TOYS
-8 - PETS
-10 - AUTOMOTIVES
-7 - TOYS
+        5 [missing "en.GENERICS.SELECTED" translation]
       </Text>
     </View>
     <View
@@ -404,16 +561,12 @@ Array [
         },
       ]
     }
-    disableVirtualization={false}
     getItem={[Function]}
     getItemCount={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     onContentSizeChange={[Function]}
-    onEndReachedThreshold={2}
     onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
@@ -427,9 +580,7 @@ Array [
         "flex": 1,
       }
     }
-    updateCellsBatchingPeriod={50}
     viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
   >
     <View>
       <View
@@ -438,6 +589,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -491,6 +643,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -544,6 +697,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -597,6 +751,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -650,6 +805,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -703,6 +859,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -759,6 +916,7 @@ exports[`FilterMenu Component Test renders the renderExceptionTypeCard and Excep
 Array [
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -850,16 +1008,12 @@ Array [
         },
       ]
     }
-    disableVirtualization={false}
     getItem={[Function]}
     getItemCount={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     onContentSizeChange={[Function]}
-    onEndReachedThreshold={2}
     onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
@@ -873,9 +1027,7 @@ Array [
         "flex": 1,
       }
     }
-    updateCellsBatchingPeriod={50}
     viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
   >
     <View>
       <View
@@ -884,6 +1036,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -937,6 +1090,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -990,6 +1144,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1043,6 +1198,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1096,6 +1252,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1149,6 +1306,7 @@ Array [
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1204,6 +1362,7 @@ Array [
 exports[`FilterMenu Component Test the renderCategoryCollapsibleCard and calls dispatch() 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
@@ -1243,11 +1402,7 @@ exports[`FilterMenu Component Test the renderCategoryCollapsibleCard and calls d
         }
       }
     >
-      3 - OFFICE SUPPLIES
-7 - TOYS
-8 - PETS
-10 - AUTOMOTIVES
-7 - TOYS
+      5 [missing "en.GENERICS.SELECTED" translation]
     </Text>
   </View>
   <View
@@ -1269,6 +1424,7 @@ exports[`FilterMenu Component Test the renderCategoryCollapsibleCard and calls d
 exports[`FilterMenu Component Test the renderExceptionFilterCard component with an item selected 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
@@ -1320,6 +1476,7 @@ exports[`FilterMenu Component Test the renderExceptionFilterCard component with 
 exports[`FilterMenu Component Test the renderExceptionFilterCard component without an item selected 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
@@ -1371,6 +1528,7 @@ exports[`FilterMenu Component Test the renderExceptionFilterCard component witho
 exports[`FilterMenu Component Test the renderExceptionTypeCard and calls dispatch() 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
@@ -1432,6 +1590,7 @@ exports[`FilterMenu Component Test the renderExceptionTypeCard and calls dispatc
 exports[`FilterMenu Component Tests renderCategoryFilterCard component and calls onItemPress with an item selected 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
@@ -1483,6 +1642,7 @@ exports[`FilterMenu Component Tests renderCategoryFilterCard component and calls
 exports[`FilterMenu Component Tests renderCategoryFilterCard component and calls onItemPress without an item selected 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
@@ -1530,3 +1690,5 @@ exports[`FilterMenu Component Tests renderCategoryFilterCard component and calls
   </Text>
 </View>
 `;
+
+exports[`FilterMenu Component Tests renders the renderAreaFilterCard and calls Dispatch 1`] = `[Function]`;

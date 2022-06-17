@@ -54,7 +54,8 @@ export default {
     REQUIRED: '适用',
     REMOVED: '移除',
     CREATE: '创建',
-    UNASSIGNED: '未分配'
+    UNASSIGNED: '未分配',
+    SELECTED: '已选择'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -162,7 +163,8 @@ export default {
     LOCATION_PRINTING: '正在打印货架标签',
     PRICE_SIGNS: '价格标签',
     LOCATIONS: '位置',
-    PRICE_SIGN_SUCCESS: '价格标签打印成功'
+    PRICE_SIGN_SUCCESS: '价格标签打印成功',
+    PRINTER_NOT_ASSIGNED: '未分配打印机'
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',
@@ -316,7 +318,8 @@ export default {
     CLEAR: '清除',
     TODO: '待完成',
     COMPLETED: '已完成',
-    WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试'
+    WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试',
+    AREA: '区域'
   },
   SELECTLOCATIONTYPE: {
     TITLE: '选择位置类型',
@@ -365,10 +368,10 @@ export default {
     CREATED_BY: '创建者',
     CREATED: '已创建',
     READY_TO_PICK: '开始补货',
-    ACCEPTED_PICK: '已补货',
+    ACCEPTED_PICK: '已接受补货任务',
     READY_TO_WORK: '开始运行',
     READY_TO_BIN: '准备上架',
-    ACCEPTED_BIN: '已上架',
+    ACCEPTED_BIN: '已接受上架任务',
     COMPLETE: '完成',
     DELETED: '删除',
     NO_PALLETS_FOUND: '未发现卡板',
@@ -380,6 +383,7 @@ export default {
     SELECT_LOCATION: '选择货架位置',
     NUMBER_PALLETS: '卡板数量',
     CREATE_PICK: '创建补货',
+    CREATE_QUICK_PICK: '创建快速补货',
     MOVE_TO_FRONT: '移到最前',
     QUICK_PICK: '快速拣货',
     RESERVE_LOC: '高货架位置',
@@ -394,7 +398,7 @@ export default {
     PICKLIST_SUCCESS: '成功重置铺货清单',
     PICKLIST_NOT_FOUND: '此门店无补货清单',
     PICKLIST_ERROR: '重置补货清单时报错',
-    UPDATE_PICKLIST_STATUS_SUCCESS: '成功更新补货承担',
+    UPDATE_PICKLIST_STATUS_SUCCESS: '补货清单状态更新成功',
     UPDATE_PICKLIST_STATUS_ERROR: '更新补货清单时出错',
     LOCATIONS_UPDATED: '位置已更新',
     LOCATIONS_FAILED_UPDATE: '位置更新失败',
@@ -402,7 +406,18 @@ export default {
     PALLET_NOT_FOUND: '未找到卡板',
     CREATE_NEW_PICK_SUCCESS: '补货已创建',
     CREATE_NEW_PICK_FAILURE: '创建补货时报错',
-    PICK_REQUEST_CRITERIA_ALREADY_MET: '无足够的卡板可供提取'
+    PICK_REQUEST_CRITERIA_ALREADY_MET: '无足够的卡板可供提取',
+    NEW_PICK_ADDED_TO_PICKLIST: '一个补货需求已经添加到补货清单',
+    NEW_PICK_ADDED_TO_PICKLIST_PLURAL: '多个补货需求已经添加到补货清单',
+    NO_PALLETS_AVAILABLE_PICK_DELETED: '无法获取卡板，补货需求已被删除',
+    UPDATE_PICK_FAILED_TRY_AGAIN: '补货更新失败，请重试',
+    UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: '补货更新失败，请重试',
+    PICK_COMPLETED: '补货已完成',
+    PICK_COMPLETED_PLURAL: '补货已完成',
+    PICKLIST_UPDATED: '补货清单已更新',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED: '已完成一个补货，补货清单已更新',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: '已完成多个补货，补货清单已更新',
+    NO_RESERVE_PALLET_AVAILABLE_ERROR: '高货架无卡板可取'
   },
   BINNING: {
     BINNING: '上架',
@@ -418,7 +433,8 @@ export default {
     PALLET_BIN_PARTIAL: '部分卡板上架成功，%{number} 失败',
     LAST_LOC: '上一个位置',
     FIRST_ITEM: '第一个item',
-    EMPTY_PALLET: '空卡板'
+    EMPTY_PALLET: '空卡板',
+    PALLET_NOT_READY: '尚不可上架，部分卡板正处于补货状态'
   },
   SETTINGS: {
     TITLE: '设置'

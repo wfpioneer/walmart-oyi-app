@@ -24,6 +24,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { getItemDetails, getPicklists } from '../../state/actions/saga';
 import {
   initializePicklist,
+  resetPickList,
   setPickCreateFloor,
   setPickCreateItem,
   setPickCreateReserve,
@@ -117,6 +118,8 @@ export const getPicklistApiHook = (
           position: 'bottom'
         });
       } else if (getPicklistApi.result.status === 204) {
+        // Resetting the picking redux if no more picks available
+        dispatch(resetPickList());
         Toast.show({
           type: 'info',
           text1: strings('PICKING.PICKLIST_NOT_FOUND'),

@@ -31,19 +31,9 @@ exports[`Quick pick tab render tests renders the screen with no picking items 1`
         },
       ]
     }
-    disableVirtualization={false}
     extraData={Array []}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <View
     style={
@@ -104,19 +94,9 @@ exports[`Quick pick tab render tests renders the screen with no picking items an
         },
       ]
     }
-    disableVirtualization={false}
     extraData={Array []}
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <View
     style={
@@ -160,13 +140,13 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
             Object {
               "assignedAssociate": "vn50pz4",
               "category": 3,
-              "createTS": "yesterday",
+              "createTs": "2022-04-03T12:55:31.9633333Z",
               "createdBy": "Guude",
               "id": 1,
               "itemDesc": "generic description",
               "itemNbr": 1,
               "moveToFront": false,
-              "palletId": 43,
+              "palletId": "43",
               "palletLocationId": 4,
               "palletLocationName": "ABAR1-2",
               "quickPick": true,
@@ -178,13 +158,13 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
             Object {
               "assignedAssociate": "vn50pz4",
               "category": 3,
-              "createTS": "yesterday",
+              "createTs": "2022-04-03T12:55:31.9633333Z",
               "createdBy": "Guude",
               "id": 2,
               "itemDesc": "generic description",
               "itemNbr": 1,
               "moveToFront": false,
-              "palletId": 43,
+              "palletId": "43",
               "palletLocationId": 4,
               "palletLocationName": "ABAR1-2",
               "quickPick": true,
@@ -205,13 +185,13 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
             Object {
               "assignedAssociate": "t0s0og",
               "category": 3,
-              "createTS": "yesterday",
+              "createTs": "2022-04-03T12:55:31.9633333Z",
               "createdBy": "Guude",
               "id": 0,
               "itemDesc": "generic description",
               "itemNbr": 1,
               "moveToFront": false,
-              "palletId": 43,
+              "palletId": "43",
               "palletLocationId": 4,
               "palletLocationName": "ABAR1-2",
               "quickPick": true,
@@ -229,19 +209,18 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
         },
       ]
     }
-    disableVirtualization={false}
     extraData={
       Array [
         Object {
           "assignedAssociate": "t0s0og",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 0,
           "itemDesc": "generic description",
           "itemNbr": 1,
           "moveToFront": false,
-          "palletId": 43,
+          "palletId": "43",
           "palletLocationId": 4,
           "palletLocationName": "ABAR1-2",
           "quickPick": true,
@@ -253,13 +232,13 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
         Object {
           "assignedAssociate": "vn50pz4",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 1,
           "itemDesc": "generic description",
           "itemNbr": 1,
           "moveToFront": false,
-          "palletId": 43,
+          "palletId": "43",
           "palletLocationId": 4,
           "palletLocationName": "ABAR1-2",
           "quickPick": true,
@@ -271,13 +250,13 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
         Object {
           "assignedAssociate": "vn50pz4",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 2,
           "itemDesc": "generic description",
           "itemNbr": 1,
           "moveToFront": false,
-          "palletId": 43,
+          "palletId": "43",
           "palletLocationId": 4,
           "palletLocationName": "ABAR1-2",
           "quickPick": true,
@@ -288,17 +267,8 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
         },
       ]
     }
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <View
     style={
@@ -342,13 +312,13 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
             Object {
               "assignedAssociate": "vn50pz4",
               "category": 3,
-              "createTS": "yesterday",
+              "createTs": "2022-04-03T12:55:31.9633333Z",
               "createdBy": "Guude",
               "id": 0,
               "itemDesc": "generic description",
               "itemNbr": 1,
               "moveToFront": false,
-              "palletId": 43,
+              "palletId": "43",
               "palletLocationId": 4,
               "palletLocationName": "ABAR1-2",
               "quickPick": true,
@@ -360,13 +330,13 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
             Object {
               "assignedAssociate": "vn50pz4",
               "category": 3,
-              "createTS": "yesterday",
+              "createTs": "2022-04-03T12:55:31.9633333Z",
               "createdBy": "Guude",
               "id": 1,
               "itemDesc": "generic description",
               "itemNbr": 1,
               "moveToFront": false,
-              "palletId": 43,
+              "palletId": "43",
               "palletLocationId": 4,
               "palletLocationName": "ABAR1-2",
               "quickPick": true,
@@ -378,13 +348,13 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
             Object {
               "assignedAssociate": "vn50pz4",
               "category": 3,
-              "createTS": "yesterday",
+              "createTs": "2022-04-03T12:55:31.9633333Z",
               "createdBy": "Guude",
               "id": 2,
               "itemDesc": "generic description",
               "itemNbr": 1,
               "moveToFront": false,
-              "palletId": 43,
+              "palletId": "43",
               "palletLocationId": 4,
               "palletLocationName": "ABAR1-2",
               "quickPick": true,
@@ -410,19 +380,18 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
         },
       ]
     }
-    disableVirtualization={false}
     extraData={
       Array [
         Object {
           "assignedAssociate": "vn50pz4",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 0,
           "itemDesc": "generic description",
           "itemNbr": 1,
           "moveToFront": false,
-          "palletId": 43,
+          "palletId": "43",
           "palletLocationId": 4,
           "palletLocationName": "ABAR1-2",
           "quickPick": true,
@@ -434,13 +403,13 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
         Object {
           "assignedAssociate": "vn50pz4",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 1,
           "itemDesc": "generic description",
           "itemNbr": 1,
           "moveToFront": false,
-          "palletId": 43,
+          "palletId": "43",
           "palletLocationId": 4,
           "palletLocationName": "ABAR1-2",
           "quickPick": true,
@@ -452,13 +421,13 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
         Object {
           "assignedAssociate": "vn50pz4",
           "category": 3,
-          "createTS": "yesterday",
+          "createTs": "2022-04-03T12:55:31.9633333Z",
           "createdBy": "Guude",
           "id": 2,
           "itemDesc": "generic description",
           "itemNbr": 1,
           "moveToFront": false,
-          "palletId": 43,
+          "palletId": "43",
           "palletLocationId": 4,
           "palletLocationName": "ABAR1-2",
           "quickPick": true,
@@ -469,17 +438,8 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
         },
       ]
     }
-    horizontal={false}
-    initialNumToRender={10}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={2}
-    removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
   />
   <View
     style={

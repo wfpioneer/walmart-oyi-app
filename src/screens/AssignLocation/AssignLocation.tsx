@@ -19,10 +19,11 @@ import { binPallets } from '../../state/actions/saga';
 import { POST_BIN_PALLETS } from '../../state/actions/asyncAPI';
 import { BinningPallet } from '../../models/Binning';
 import { AsyncState } from '../../models/AsyncState';
+import { BinPalletResponse, BinPicklistInfo, picklistActionType } from '../../models/Picking.d';
 import { PostBinPalletsMultistatusResponse } from '../../services/PalletManagement.service';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
-import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 import { validateSession } from '../../utils/sessionTimeout';
 import { strings } from '../../locales';
 import styles from './AssignLocation.style';
@@ -71,24 +72,68 @@ export const binPalletsApiEffect = (
       dispatch(hideActivityModal());
       // Success
       if (binPalletsApi.result) {
-        if (binPalletsApi.result.status === 207) {
-          const failedPallets = getFailedPallets(binPalletsApi.result.data as PostBinPalletsMultistatusResponse);
-          Toast.show({
-            type: 'error',
-            position: 'bottom',
-            text1: strings('BINNING.PALLET_BIN_PARTIAL', { number: failedPallets.length }),
-            visibilityTime: SNACKBAR_TIMEOUT + 1000
-          });
-
-          failedPallets.forEach(palletId => dispatch(deletePallet(palletId)));
-          dispatch({ type: POST_BIN_PALLETS.RESET });
-        } else {
-          Toast.show({
-            type: 'success',
-            position: 'bottom',
-            text1: strings('BINNING.PALLET_BIN_SUCCESS'),
-            visibilityTime: SNACKBAR_TIMEOUT
-          });
+        if (binPalletsApi.result.status === 200) {
+          const { data } = binPalletsApi.result;
+          const updatedPicklists: BinPicklistInfo[] = data && data.binSummary ? data.binSummary.flatMap(
+            (item: BinPalletResponse) => item.picklists.map(picklist => picklist)
+          ) : [];
+          const [completedPicks, locationUpdatedPicks] = updatedPicklists.reduce(
+            (acc: [BinPicklistInfo[], BinPicklistInfo[]], item) => {
+              if (item.picklistActionType === picklistActionType.COMPLETE) {
+                acc[0].push(item);
+              } else if (item.picklistActionType === picklistActionType.UPDATE_LOCATION) {
+                acc[1].push(item);
+              }
+              return acc;
+            }, [[], []]
+          );
+          if (completedPicks.length > 0 && locationUpdatedPicks.length === 0) {
+            if (completedPicks.length === 1) {
+              Toast.show({
+                type: 'success',
+                position: 'bottom',
+                text1: strings('PICKING.PICK_COMPLETED'),
+                visibilityTime: SNACKBAR_TIMEOUT
+              });
+            } else {
+              Toast.show({
+                type: 'success',
+                position: 'bottom',
+                text1: strings('PICKING.PICK_COMPLETED_PLURAL'),
+                visibilityTime: SNACKBAR_TIMEOUT
+              });
+            }
+          } else if (locationUpdatedPicks.length > 0 && completedPicks.length === 0) {
+            Toast.show({
+              type: 'success',
+              position: 'bottom',
+              text1: strings('PICKING.PICKLIST_UPDATED'),
+              visibilityTime: SNACKBAR_TIMEOUT
+            });
+          } else if (completedPicks.length > 0 && locationUpdatedPicks.length > 0) {
+            if (completedPicks.length === 1) {
+              Toast.show({
+                type: 'success',
+                position: 'bottom',
+                text1: strings('PICKING.PICK_COMPLETED_AND_PICKLIST_UPDATED'),
+                visibilityTime: SNACKBAR_TIMEOUT_LONG
+              });
+            } else {
+              Toast.show({
+                type: 'success',
+                position: 'bottom',
+                text1: strings('PICKING.PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL'),
+                visibilityTime: SNACKBAR_TIMEOUT_LONG
+              });
+            }
+          } else {
+            Toast.show({
+              type: 'success',
+              position: 'bottom',
+              text1: strings('BINNING.PALLET_BIN_SUCCESS'),
+              visibilityTime: SNACKBAR_TIMEOUT
+            });
+          }
 
           dispatch(clearPallets());
           dispatch({ type: POST_BIN_PALLETS.RESET });
@@ -97,17 +142,47 @@ export const binPalletsApiEffect = (
           } else {
             navigation.goBack();
           }
+        } else if (binPalletsApi.result.status === 207) {
+          const failedPallets = getFailedPallets(binPalletsApi.result.data as PostBinPalletsMultistatusResponse);
+          Toast.show({
+            type: 'error',
+            position: 'bottom',
+            text1: strings('BINNING.PALLET_BIN_PARTIAL', { number: failedPallets.length }),
+            visibilityTime: SNACKBAR_TIMEOUT_LONG
+          });
+
+          failedPallets.forEach(palletId => dispatch(deletePallet(palletId)));
+          dispatch({ type: POST_BIN_PALLETS.RESET });
         }
       }
 
       // Fail
       if (binPalletsApi.error) {
-        Toast.show({
-          position: 'bottom',
-          type: 'error',
-          text1: strings('BINNING.PALLET_BIN_FAILURE'),
-          visibilityTime: SNACKBAR_TIMEOUT
-        });
+        const errorResponse = binPalletsApi.error.response;
+        if (errorResponse.status === 409) {
+          if (errorResponse.data.includes('not ready to bin, pallet part of an active pick')) {
+            Toast.show({
+              position: 'bottom',
+              type: 'error',
+              text1: strings('BINNING.PALLET_NOT_READY'),
+              visibilityTime: SNACKBAR_TIMEOUT
+            });
+          } else {
+            Toast.show({
+              position: 'bottom',
+              type: 'error',
+              text1: strings('LOCATION.SECTION_NOT_FOUND'),
+              visibilityTime: SNACKBAR_TIMEOUT
+            });
+          }
+        } else {
+          Toast.show({
+            position: 'bottom',
+            type: 'error',
+            text1: strings('BINNING.PALLET_BIN_FAILURE'),
+            visibilityTime: SNACKBAR_TIMEOUT
+          });
+        }
         dispatch({ type: POST_BIN_PALLETS.RESET });
       }
     } else {
