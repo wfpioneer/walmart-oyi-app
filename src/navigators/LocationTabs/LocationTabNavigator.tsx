@@ -547,8 +547,8 @@ const LocationTabs = () : JSX.Element => {
 
   const bottomSheetLocationDetailsModalRef = useRef<BottomSheetModal>(null);
 
-  const managerSnapPoints = useMemo(() => ['30%'], []);
-  const associateSnapPoints = useMemo(() => ['15%'], []);
+  const managerSnapPoints = useMemo(() => ['40%'], []);
+  const associateSnapPoints = useMemo(() => ['20%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetLocationDetailsModalRef.current) {

@@ -27,7 +27,8 @@ enum WORKLISTTYPE {
   NO = 'NO',
   NS = 'NS',
   CATEGORY = 'CATEGORY',
-  NON_EXCEPTION = 'Non-Exception'
+  NON_EXCEPTION = 'Non-Exception',
+  MP = 'MP'
 }
 
 const COMPLETED_TS = '2020-07-15T08:02:17-05:00';

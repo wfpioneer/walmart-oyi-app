@@ -249,7 +249,7 @@ const SectionDetails = (): JSX.Element => {
     selectedAisle,
     selectedSection
   } = useTypedSelector(state => state.Location);
-  const snapPoints = useMemo(() => ['40%'], []);
+  const snapPoints = useMemo(() => ['50%'], []);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   useEffect(() => {
