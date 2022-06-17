@@ -382,7 +382,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       navigation.removeListener('focus', () => {});
       navigation.removeListener('blur', () => {});
     };
-  }, [navigation, scannedEvent]);
+  }, [navigation, scannedEvent, section]);
 
   // scanned event listener
   useEffectHook(() => {
