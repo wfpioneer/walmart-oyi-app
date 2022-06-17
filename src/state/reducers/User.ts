@@ -2,7 +2,6 @@ import User from '../../models/User';
 import {
   ASSIGN_FLUFFY_FEATURES, Actions, SET_CONFIGS, USER_LOGIN, USER_LOGOUT
 } from '../actions/User';
-import { mockAreas } from '../../mockData/mockConfig';
 
 export const initialState: User = {
   additional: {
@@ -59,8 +58,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           palletExpiration: action.payload.palletExpiration || false,
           backupCategories: action.payload.backupCategories,
           picking: action.payload.picking,
-          // TODO: This mock data needs to be removed once the backend API dev gets completed.
-          areas: mockAreas
+          areas: action.payload.areas || []
         }
       };
     default:

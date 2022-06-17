@@ -193,7 +193,7 @@ exports[`FilterMenu Component Test renders the RenderAreaCard function and calls
         }
       }
     >
-      3 [missing "en.GENERICS.SELECTED" translation]
+      [missing "en.WORKLIST.ALL" translation]
     </Text>
   </View>
   <View
@@ -319,7 +319,7 @@ exports[`FilterMenu Component Test renders the filter menu component and calls o
           }
         }
       >
-        3 [missing "en.GENERICS.SELECTED" translation]
+        [missing "en.WORKLIST.ALL" translation]
       </Text>
     </View>
     <View
