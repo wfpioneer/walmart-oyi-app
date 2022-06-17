@@ -7,7 +7,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { NavigationProp } from '@react-navigation/native';
 import { WorklistItem } from '../../components/worklistItem/WorklistItem';
 import COLOR from '../../themes/Color';
-import styles from './Worklist.style';
+import styles from './ItemWorklist.style';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { CategorySeparator } from '../../components/CategorySeparator/CategorySeparator';
 import { strings } from '../../locales';
