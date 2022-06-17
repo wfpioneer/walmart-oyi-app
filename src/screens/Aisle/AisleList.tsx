@@ -292,8 +292,8 @@ const AisleList = (): JSX.Element => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const managerSnapPoints = useMemo(() => ['30%'], []);
-  const associateSnapPoints = useMemo(() => ['15%'], []);
+  const managerSnapPoints = useMemo(() => ['40%'], []);
+  const associateSnapPoints = useMemo(() => ['20%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {
