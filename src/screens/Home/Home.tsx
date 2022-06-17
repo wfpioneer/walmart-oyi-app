@@ -25,6 +25,7 @@ import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
 import { WorklistSummary } from '../../models/WorklistSummary';
 import { CustomModalComponent } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
+import { mockMissingPalletWorklistSummary } from '../../mockData/mockWorklistSummary';
 
 const mapStateToProps = (state: RootState) => ({
   userName: state.User.additional.displayName,
@@ -132,30 +133,31 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       return null;
     }
 
-    const { data }: { data: WorklistSummary[] } = this.props.worklistSummaryApiState.result;
+    let { data }: { data: WorklistSummary[] } = this.props.worklistSummaryApiState.result;
 
-    /* data = [...data, {
-      totalCompletedItems: 1,
-      totalItems: 151,
-      worklistEndGoalPct: 100,
-      worklistGoal: 'DAILY',
-      worklistGoalPct: 1,
-      worklistTypes: [
-        { worklistType: 'MP', totalItems: 0, completedItems: 0 }
-      ]
-    }] */
+    // Mock data for missing pallet worklist
+    // TODO: Needs to be removed once the backend changes completed
+    data = data.concat(mockMissingPalletWorklistSummary);
+
+    const onGoalTitlePress = (index : number) => {
+      this.setState({
+        activeGoal: index
+      });
+    };
 
     const renderGoalCircles = () => data.map((goal, index) => {
       const frequency = goal.worklistGoal === 'DAILY' ? strings('GENERICS.DAILY') : '';
+      const key = `${goal.worklistGoal}-${index}`;
 
       return (
         <GoalCircle
-          key={goal.worklistGoal}
-          goalTitle={strings('HOME.ITEMS')}
+          key={key}
+          goalTitle={index === 0 ? strings('HOME.ITEMS') : strings('LOCATION.PALLETS')}
           completionGoal={goal.worklistEndGoalPct}
           completionPercentage={goal.worklistGoalPct}
           active={index === this.state.activeGoal}
           frequency={frequency}
+          onPress={() => onGoalTitlePress(index)}
         />
       );
     });
@@ -165,6 +167,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       .map(worklist => {
         const worklistType = exceptionTypeToDisplayString(worklist?.worklistType.toUpperCase() ?? '');
 
+        // TODO: Needs to navigate to new Missing worklist Landing page if worklistType is MP
         const onWorklistCardPress = () => {
           trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
           this.props.updateFilterExceptions([worklist.worklistType]);

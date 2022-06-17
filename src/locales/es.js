@@ -76,7 +76,7 @@ export default {
     CANCELLED: 'Cancelados',
     NSFL: 'Sin Ubicación en Piso de Ventas',
     UNKNOWN: 'desconocida',
-    MISSING_PALLETS: 'Missing Pallets'
+    MISSING_PALLETS: 'Pallets Faltantes'
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',

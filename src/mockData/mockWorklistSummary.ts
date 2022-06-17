@@ -95,3 +95,14 @@ export const mockAllCompleteWorklistSummaries: WorklistSummary[] = [
     totalCompletedItems: 184
   }
 ];
+
+export const mockMissingPalletWorklistSummary : WorklistSummary[] = [{
+  totalCompletedItems: 1,
+  totalItems: 151,
+  worklistEndGoalPct: 100,
+  worklistGoal: 'DAILY',
+  worklistGoalPct: 1,
+  worklistTypes: [
+    { worklistType: 'MP', totalItems: 0, completedItems: 0 }
+  ]
+}];
