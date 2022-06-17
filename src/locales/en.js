@@ -320,7 +320,9 @@ export default {
     TODO: 'Todo',
     COMPLETED: 'Completed',
     WORKLIST_ITEM_API_ERROR: 'There was an error retrieving worklist items.\nPlease try again.',
-    AREA: 'Area'
+    AREA: 'Area',
+    ITEM_WORKLIST: 'Item Work Lists',
+    PALLET_WORKLIST: 'Pallet Work Lists'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',

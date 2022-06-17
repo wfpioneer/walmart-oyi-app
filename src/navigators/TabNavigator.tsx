@@ -10,6 +10,7 @@ import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import { ToolsNavigator } from './ToolsNavigator';
 import { WorklistNavigator } from './WorklistNavigator';
+import WorkListHome from '../screens/Worklist/WorkListHome';
 import { ApprovalListNavigator } from './ApprovalListNavigator';
 import { resetApprovals } from '../state/actions/Approvals';
 import { AVAILABLE_TOOLS, Configurations } from '../models/User';
@@ -60,7 +61,7 @@ const TabNavigator = (): JSX.Element => {
 
       <Tab.Screen
         name={strings('WORKLIST.WORKLIST')}
-        component={WorklistNavigator}
+        component={WorkListHome}
       />
 
       {isToolsEnabled(user.features, user.configs)
