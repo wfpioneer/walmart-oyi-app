@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0
   },
+  wrapperContainer: {
+    marginHorizontal: 20
+  },
   baseRing: {
     width: 100,
     height: 100,

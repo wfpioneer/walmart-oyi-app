@@ -15,7 +15,8 @@ export class ExceptionList {
        ['NS', strings('EXCEPTION.NO_SALES')],
        ['NO', strings('EXCEPTION.NEGATIVE_ON_HANDS')],
        ['C', strings('EXCEPTION.CANCELLED')],
-       ['NSFL', strings('EXCEPTION.NSFL')]
+       ['NSFL', strings('EXCEPTION.NSFL')],
+       ['MP', strings('EXCEPTION.MISSING_PALLETS')]
      ]);
    }
 
