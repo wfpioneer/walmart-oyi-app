@@ -14,6 +14,7 @@ export interface ConfigResponse {
   backupCategories: string;
   picking: boolean;
   areas: area[];
+  enableAreaFilter: boolean;
 }
 
 export default class ConfigService {
