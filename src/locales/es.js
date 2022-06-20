@@ -75,7 +75,8 @@ export default {
     NEGATIVE_ON_HANDS: 'Existencia Negativa',
     CANCELLED: 'Cancelados',
     NSFL: 'Sin Ubicación en Piso de Ventas',
-    UNKNOWN: 'desconocida'
+    UNKNOWN: 'desconocida',
+    MISSING_PALLETS: 'Pallets Faltantes'
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',
