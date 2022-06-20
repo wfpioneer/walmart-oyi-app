@@ -10,8 +10,16 @@ function makeStore() {
   // eslint-disable-next-line no-underscore-dangle
   const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+  const middlewares = [sagaMiddleware];
+
+  if (__DEV__) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const createDebugger = require('redux-flipper').default;
+    middlewares.push(createDebugger());
+  }
+
   const store = createStore(RootReducer,
-    composeEnhancer(applyMiddleware(sagaMiddleware)));
+    composeEnhancer(applyMiddleware(...middlewares)));
 
   sagaMiddleware.run(rootSaga);
   return store;

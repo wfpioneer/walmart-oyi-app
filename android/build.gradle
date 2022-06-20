@@ -19,7 +19,7 @@ buildscript {
             url "https://repository.walmart.com/content/repositories/fabricio/"
         }
         maven {
-            url "https://repository.walmart.com/content/repositories/center/"
+            url "https://repository.walmart.com/content/repositories/central/"
         }
         jcenter {
             url "https://repository.walmart.com/content/repositories/jcenter/"
@@ -53,6 +53,9 @@ allprojects {
         maven {
             url 'https://repository.walmart.com/content/repositories/pangaea_releases'
         }
+        maven {
+            url "https://repository.walmart.com/content/repositories/central/"
+        }
         jcenter {
             url 'https://repository.walmart.com/content/repositories/jcenter/'
         }
@@ -80,6 +83,9 @@ allprojects {
             }
             maven {
                 url "https://repository.walmart.com/content/repositories/fabricio/"
+            }
+            maven {
+                url "https://repository.walmart.com/content/repositories/central/"
             }
             jcenter {
                 url "https://repository.walmart.com/content/repositories/jcenter/"

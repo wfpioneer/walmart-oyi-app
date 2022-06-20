@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './GoalCircle.style';
 
  interface GoalCircleProps {
@@ -8,11 +8,12 @@ import styles from './GoalCircle.style';
     completionGoal: number;
     active: boolean;
     frequency: string;
+    onPress: () => void
 }
 
 function GoalCircle(props: GoalCircleProps): JSX.Element {
   const {
-    active, completionGoal, completionPercentage, frequency, goalTitle
+    active, completionGoal, completionPercentage, frequency, goalTitle, onPress
   } = props;
 
   const atGoalStyle = (completionPercentage >= completionGoal) ? styles.goalMet : styles.goalNotMet;
@@ -24,7 +25,7 @@ function GoalCircle(props: GoalCircleProps): JSX.Element {
   const goalStyle = active ? styles.goalNameActive : styles.goalNameInactive;
 
   return (
-    <View>
+    <View style={styles.wrapperContainer}>
       <View style={styles.baseRing}>
         <View style={[styles.container, { transform: [{ rotate: `${transfOne}deg` }] }]}>
           <View style={[atGoalStyle, styles.halfRing]} />
@@ -40,7 +41,9 @@ function GoalCircle(props: GoalCircleProps): JSX.Element {
         </View>
       </View>
       <Text style={styles.freq}>{frequency}</Text>
-      <Text style={goalStyle}>{goalTitle}</Text>
+      <TouchableOpacity onPress={onPress}>
+        <Text style={goalStyle}>{goalTitle}</Text>
+      </TouchableOpacity>
     </View>
   );
 }
