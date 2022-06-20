@@ -19,12 +19,13 @@ interface CompletedWorklistProps {
     filterCategories: string[];
     navigation: NavigationProp<any>;
     areas: area[];
+    enableAreaFilter: boolean;
 }
 
 export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
-    groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas
+    groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter
   } = props;
 
   let completedItems: WorklistItemI[] | undefined;
@@ -46,6 +47,7 @@ export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Elem
       updateGroupToggle={updateGroupToggle}
       navigation={navigation}
       areas={areas}
+      enableAreaFilter={enableAreaFilter}
     />
   );
 };
@@ -54,7 +56,7 @@ export const CompletedWorklist = (): JSX.Element => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
-  const { areas } = useTypedSelector(state => state.User.configs);
+  const { areas, enableAreaFilter } = useTypedSelector(state => state.User.configs);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -70,6 +72,7 @@ export const CompletedWorklist = (): JSX.Element => {
       updateGroupToggle={updateGroupToggle}
       navigation={navigation}
       areas={areas}
+      enableAreaFilter={enableAreaFilter}
     />
   );
 };

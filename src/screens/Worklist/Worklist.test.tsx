@@ -36,6 +36,7 @@ describe('WorklistScreen', () => {
           dispatch={jest.fn()}
           navigation={navigationProp}
           areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -56,6 +57,7 @@ describe('WorklistScreen', () => {
           dispatch={jest.fn()}
           navigation={navigationProp}
           areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -76,6 +78,7 @@ describe('WorklistScreen', () => {
           dispatch={jest.fn()}
           navigation={navigationProp}
           areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -96,6 +99,7 @@ describe('WorklistScreen', () => {
           dispatch={jest.fn()}
           navigation={navigationProp}
           areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -115,6 +119,7 @@ describe('WorklistScreen', () => {
           dispatch={jest.fn()}
           navigation={navigationProp}
           areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -134,6 +139,7 @@ describe('WorklistScreen', () => {
           dispatch={jest.fn()}
           navigation={navigationProp}
           areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -154,6 +160,7 @@ describe('WorklistScreen', () => {
           dispatch={jest.fn()}
           navigation={navigationProp}
           areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -259,6 +266,7 @@ describe('WorklistScreen', () => {
           dispatch={jest.fn()}
           navigation={navigationProp}
           areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -279,6 +287,7 @@ describe('WorklistScreen', () => {
           dispatch={jest.fn()}
           navigation={navigationProp}
           areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

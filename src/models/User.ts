@@ -26,6 +26,7 @@ export interface Configurations {
   backupCategories: string;
   picking: boolean;
   areas: area[];
+  enableAreaFilter: boolean;
 }
 
 export interface area {
