@@ -25,5 +25,6 @@ export const mockConfig: Configurations = {
   palletExpiration: false,
   backupCategories: '',
   picking: false,
-  areas: mockAreas
+  areas: mockAreas,
+  enableAreaFilter: false
 };

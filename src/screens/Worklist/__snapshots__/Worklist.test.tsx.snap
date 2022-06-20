@@ -470,6 +470,10 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
             "type": "EXCEPTION",
             "value": "NSFL",
           },
+          Object {
+            "type": "CATEGORY",
+            "value": "99 - ELECTRONICS",
+          },
         ]
       }
       horizontal={true}
@@ -560,7 +564,14 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
     }
   >
     <FlatList
-      data={Array []}
+      data={
+        Array [
+          Object {
+            "type": "CATEGORY",
+            "value": "99 - ELECTRONICS",
+          },
+        ]
+      }
       horizontal={true}
       keyExtractor={[Function]}
       renderItem={[Function]}
