@@ -75,7 +75,8 @@ export default {
     NEGATIVE_ON_HANDS: 'Negative On-Hands',
     CANCELLED: 'Cancelled',
     NSFL: 'No Sales Floor Location',
-    UNKNOWN: 'Unknown'
+    UNKNOWN: 'Unknown',
+    MISSING_PALLETS: 'Missing Pallets'
   },
   ITEM: {
     TITLE: 'Review item details',
