@@ -320,7 +320,10 @@ export default {
     TODO: '待完成',
     COMPLETED: '已完成',
     WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试',
-    AREA: '区域'
+    AREA: '区域',
+    SCAN_PALLET: 'Scan Pallet',
+    SCAN_PALLET_LABEL: 'Scan Pallet Label to continue',
+    SCAN_PALLET_ERROR: 'Pallet scanned must match pallet on worklist'
   },
   SELECTLOCATIONTYPE: {
     TITLE: '选择位置类型',
