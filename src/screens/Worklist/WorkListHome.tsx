@@ -3,17 +3,17 @@ import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Button from '../../components/buttons/Button';
-import styles from './WorkListHome.style';
+import styles from './WorklistHome.style';
 import { strings } from '../../locales';
 
-const WorkLikstHome = () => {
+const WorklistHome = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <Button
         title={strings('WORKLIST.ITEM_WORKLIST')}
-        onPress={() => navigation.navigate('ItemWorkList')}
+        onPress={() => navigation.navigate('ItemWorklist')}
         style={styles.button}
       />
       <Button
@@ -26,4 +26,4 @@ const WorkLikstHome = () => {
   );
 };
 
-export default WorkLikstHome;
+export default WorklistHome;
