@@ -321,8 +321,8 @@ export default {
     COMPLETED: '已完成',
     WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试',
     AREA: '区域',
-    ITEM_WORKLIST: 'Item Work Lists',
-    PALLET_WORKLIST: 'Pallet Work Lists'
+    ITEM_WORKLIST: '商品例外清单',
+    PALLET_WORKLIST: '卡板例外清单'
   },
   SELECTLOCATIONTYPE: {
     TITLE: '选择位置类型',
