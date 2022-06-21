@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WorkListHome Tests rendering the WorkListHome Screen Renders WorkListHome screen 1`] = `
+exports[`WorkListHome Renders WorkListHome screen 1`] = `
 <View
   style={
     Object {
@@ -23,6 +23,7 @@ exports[`WorkListHome Tests rendering the WorkListHome Screen Renders WorkListHo
         "width": "90%",
       }
     }
+    testID="itemWkListBtn"
     title="[missing \\"en.WORKLIST.ITEM_WORKLIST\\" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
@@ -43,6 +44,7 @@ exports[`WorkListHome Tests rendering the WorkListHome Screen Renders WorkListHo
         "width": "90%",
       }
     }
+    testID="palletWkListBtn"
     title="[missing \\"en.WORKLIST.PALLET_WORKLIST\\" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}

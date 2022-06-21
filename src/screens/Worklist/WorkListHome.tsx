@@ -15,12 +15,14 @@ const WorklistHome = () => {
         title={strings('WORKLIST.ITEM_WORKLIST')}
         onPress={() => navigation.navigate('ItemWorklist')}
         style={styles.button}
+        testID="itemWkListBtn"
       />
       <Button
         title={strings('WORKLIST.PALLET_WORKLIST')}
         onPress={() => {}}
         type={Button.Type.PRIMARY}
         style={styles.button}
+        testID="palletWkListBtn"
       />
     </View>
   );
