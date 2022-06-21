@@ -19,12 +19,13 @@ interface TodoWorklistProps {
   filterCategories: string[];
   navigation: NavigationProp<any>;
   areas: area[];
+  enableAreaFilter: boolean;
 }
 
 export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
-    groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas
+    groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter
   } = props;
 
   let todoData: WorklistItemI[] | undefined;
@@ -46,6 +47,7 @@ export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
       updateGroupToggle={updateGroupToggle}
       navigation={navigation}
       areas={areas}
+      enableAreaFilter={enableAreaFilter}
     />
   );
 };
@@ -54,7 +56,7 @@ export const TodoWorklist = (): JSX.Element => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
-  const { areas } = useTypedSelector(state => state.User.configs);
+  const { areas, enableAreaFilter } = useTypedSelector(state => state.User.configs);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   return (
@@ -69,6 +71,7 @@ export const TodoWorklist = (): JSX.Element => {
       updateGroupToggle={updateGroupToggle}
       navigation={navigation}
       areas={areas}
+      enableAreaFilter={enableAreaFilter}
     />
   );
 };

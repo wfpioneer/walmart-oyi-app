@@ -34,6 +34,7 @@ interface WorklistProps {
   dispatch: Dispatch<any>;
   areas: area[];
   navigation: NavigationProp<any>;
+  enableAreaFilter: boolean;
 }
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   const { dispatch, item, navigation } = props;
@@ -156,7 +157,7 @@ export const renderFilterPills = (
 export const Worklist = (props: WorklistProps): JSX.Element => {
   const {
     data, dispatch, error, filterCategories, filterExceptions,
-    groupToggle, onRefresh, refreshing, updateGroupToggle, navigation, areas
+    groupToggle, onRefresh, refreshing, updateGroupToggle, navigation, areas, enableAreaFilter
   } = props;
   const fullExceptionList = ExceptionList.getInstance();
   if (error) {
@@ -201,23 +202,24 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
 
   const filteredCategoryNbr: number[] = filterCategories.map(category => Number(category.split('-')[0]));
 
-  const typedFilterAreas = configAreas.reduce((acc: { type: string, value: string}[], item: area) => {
-    const isSelected = item.categories.every(
-      categoryNbr => filteredCategoryNbr.includes(categoryNbr)
-    );
-    const isPartiallySelected = item.categories.some(
-      categoryNbr => filteredCategoryNbr.includes(categoryNbr)
-    );
-    if (isSelected && item.categories.length !== 0) {
-      acc.push({ type: 'AREA', value: item.area });
-    } else if (isPartiallySelected) {
-      const partiallySelectedCategoryList = filterCategories.filter(
-        category => item.categories.includes(Number(category.split('-')[0]))
+  const typedFilterAreaOrCategoryList = enableAreaFilter
+    ? configAreas.reduce((acc: { type: string, value: string}[], item: area) => {
+      const isSelected = item.categories.every(
+        categoryNbr => filteredCategoryNbr.includes(categoryNbr)
       );
-      partiallySelectedCategoryList.forEach((category: string) => acc.push({ type: 'CATEGORY', value: category }));
-    }
-    return acc;
-  }, []);
+      const isPartiallySelected = item.categories.some(
+        categoryNbr => filteredCategoryNbr.includes(categoryNbr)
+      );
+      if (isSelected && item.categories.length !== 0) {
+        acc.push({ type: 'AREA', value: item.area });
+      } else if (isPartiallySelected) {
+        const partiallySelectedCategoryList = filterCategories.filter(
+          category => item.categories.includes(Number(category.split('-')[0]))
+        );
+        partiallySelectedCategoryList.forEach((category: string) => acc.push({ type: 'CATEGORY', value: category }));
+      }
+      return acc;
+    }, []) : filterCategories.map((category: string) => ({ type: 'CATEGORY', value: category }));
 
   const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
 
@@ -241,7 +243,7 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
       { (filterCategories.length > 0 || filterExceptions.length > 0) && (
         <View style={styles.filterContainer}>
           <FlatList
-            data={[...typedFilterExceptions, ...typedFilterAreas]}
+            data={[...typedFilterExceptions, ...typedFilterAreaOrCategoryList]}
             horizontal
             renderItem={({ item }) => renderFilterPills(
               item, dispatch, filterCategories, filterExceptions, fullExceptionList, areas
