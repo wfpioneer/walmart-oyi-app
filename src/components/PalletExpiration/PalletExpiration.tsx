@@ -18,7 +18,8 @@ export interface PalletExpirationProps {
 
 const getDateValue = (expirationDate: string | undefined, newExpirationDate: string | undefined): Date => {
   if (newExpirationDate) {
-    return new Date(newExpirationDate)
+    const reformatNewExpirationDate = moment(newExpirationDate, 'DD/MM/YYYY').toString();
+    return new Date(reformatNewExpirationDate.includes('Invalid date') ? newExpirationDate : reformatNewExpirationDate);
   }
 
   if (expirationDate) {
