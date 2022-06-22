@@ -20,7 +20,7 @@ import { getWorklist } from '../state/actions/saga';
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
-export const worklistTabs = () => (
+const worklistTabs = () => (
   <Tab.Navigator
     tabBarOptions={{
       activeTintColor: COLOR.WHITE,
@@ -47,7 +47,7 @@ const onFilterMenuPress = (dispatch: any, menuOpen: boolean) => {
   }
 };
 
-export const renderHeaderRight = (dispatch: any, menuOpen: boolean) => (
+const renderHeaderRight = (dispatch: any, menuOpen: boolean) => (
   <View style={styles.headerRightView}>
     <TouchableOpacity onPress={() => onFilterMenuPress(dispatch, menuOpen)}>
       <MaterialIcons name="filter-list" size={25} color={COLOR.WHITE} />
