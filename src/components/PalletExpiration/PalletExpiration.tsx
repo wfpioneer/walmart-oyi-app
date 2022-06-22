@@ -3,6 +3,7 @@ import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { strings } from '../../locales';
 import styles from './PalletExpiration.style';
+import moment from 'moment';
 
 export interface PalletExpirationProps {
   dateChanged: boolean;
@@ -21,7 +22,8 @@ const getDateValue = (expirationDate: string | undefined, newExpirationDate: str
   }
 
   if (expirationDate) {
-    return new Date(expirationDate)
+    const reformatExpirationDate = moment(expirationDate, 'DD/MM/YYYY').toString();
+    return new Date(reformatExpirationDate.includes('Invalid date') ? expirationDate : reformatExpirationDate);
   }
 
   return new Date(Date.now());
