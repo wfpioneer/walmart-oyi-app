@@ -442,6 +442,7 @@ interface FilterMenuProps {
   areaOpen: boolean;
   areas: area[];
   categoryMap: FilteredCategory[];
+  enableAreaFilter: boolean;
 }
 
 export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
@@ -453,7 +454,8 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
     filterExceptions,
     areaOpen,
     areas,
-    categoryMap
+    categoryMap,
+    enableAreaFilter
   } = props;
 
   return (
@@ -467,6 +469,8 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
           <Text style={styles.clearText}>{strings('WORKLIST.CLEAR')}</Text>
         </TouchableOpacity>
       </View>
+      { enableAreaFilter
+      && (
       <RenderAreaCard
         areaOpen={areaOpen}
         dispatch={dispatch}
@@ -474,6 +478,7 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
         filterCategories={filterCategories}
         categoryMap={categoryMap}
       />
+      )}
       <RenderCategoryCollapsibleCard
         categoryMap={categoryMap}
         categoryOpen={categoryOpen}
@@ -499,7 +504,7 @@ export const FilterMenu = (): JSX.Element => {
     filterExceptions,
     areaOpen
   } = useTypedSelector(state => state.Worklist) as WorklistState;
-  const { areas } = useTypedSelector(state => state.User.configs);
+  const { areas, enableAreaFilter } = useTypedSelector(state => state.User.configs);
   const { result } = workListApi;
   const data: WorklistItemI[] = result && result.data && Array.isArray(result.data) ? result.data : [];
   const categoryMap: FilteredCategory[] = getCategoryMap(
@@ -517,6 +522,7 @@ export const FilterMenu = (): JSX.Element => {
       areaOpen={areaOpen}
       areas={areas}
       categoryMap={categoryMap}
+      enableAreaFilter={enableAreaFilter}
     />
   );
 };

@@ -26,7 +26,7 @@ const ERROR_FORMATTING_OPTIONS = {
   max: numbers(OH_MAX, { precision: 0 })
 };
 
-export const validateQty = (qty: number) => OH_MIN <= qty && qty <= OH_MAX;
+export const validateQty = (qty: number) => !!qty && OH_MIN <= qty && qty <= OH_MAX;
 export const validateSameQty = (qty: number, newQty: number) => qty === newQty;
 
 export const calculateDecreaseQty = (newOHQty: any,
@@ -39,17 +39,22 @@ export const calculateDecreaseQty = (newOHQty: any,
 };
 export const assignHandleTextChange = (newQty: any,
   setNewOHQty: React.Dispatch<React.SetStateAction<number>>) => {
-  // eslint-disable-next-line no-restricted-globals
-  if (!isNaN(newQty)) {
-    setNewOHQty(newQty);
-  }
+  setNewOHQty(newQty);
 };
+
 export const calculateIncreaseQty = (newOHQty: any,
   setNewOHQty: React.Dispatch<React.SetStateAction<number>>) => {
-  if (newOHQty < OH_MIN) {
+  if (newOHQty < OH_MIN || Number.isNaN(newOHQty)) {
     setNewOHQty(OH_MIN);
   } else if (newOHQty < OH_MAX) {
     setNewOHQty((prevState => prevState + 1));
+  }
+};
+
+export const onQtyEditingEnd = (newOHQty: any, onHandsQty: number,
+  setNewOHQty: React.Dispatch<React.SetStateAction<number>>) => {
+  if (Number.isNaN(newOHQty)) {
+    setNewOHQty(onHandsQty);
   }
 };
 
@@ -70,6 +75,10 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
 
   const handleDecreaseQty = () => {
     calculateDecreaseQty(newOHQty, setNewOHQty);
+  };
+
+  const handleEndEditingQty = () => {
+    onQtyEditingEnd(newOHQty, onHandsQty, setNewOHQty);
   };
 
   return (
@@ -93,6 +102,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
         minValue={OH_MIN}
         maxValue={OH_MAX}
         value={newOHQty}
+        onEndEditing={handleEndEditingQty}
       />
       {!validateQty(newOHQty) && (
         <Text style={styles.invalidLabel}>

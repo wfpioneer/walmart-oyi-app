@@ -37,6 +37,7 @@ exports[`Numeric selector component NumericSelector minus button is disabled if 
   <TextInput
     keyboardType="numeric"
     onChangeText={[Function]}
+    onEndEditing={[Function]}
     style={
       Object {
         "color": "#0071e9",
@@ -105,6 +106,7 @@ exports[`Numeric selector component NumericSelector plus button is disabled if v
   <TextInput
     keyboardType="numeric"
     onChangeText={[Function]}
+    onEndEditing={[Function]}
     style={
       Object {
         "color": "#0071e9",
@@ -173,6 +175,7 @@ exports[`Numeric selector component NumericSelector with invalid input 1`] = `
   <TextInput
     keyboardType="numeric"
     onChangeText={[Function]}
+    onEndEditing={[Function]}
     style={
       Object {
         "color": "#0071e9",
@@ -241,6 +244,7 @@ exports[`Numeric selector component NumericSelector with valid input 1`] = `
   <TextInput
     keyboardType="numeric"
     onChangeText={[Function]}
+    onEndEditing={[Function]}
     style={
       Object {
         "color": "#0071e9",

@@ -2,6 +2,7 @@
 
 exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncompleted worklist items 1`] = `
 <Worklist
+  areas={Array []}
   data={
     Array [
       Object {
@@ -85,6 +86,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
     ]
   }
   dispatch={[MockFunction]}
+  enableAreaFilter={false}
   error={null}
   filterCategories={Array []}
   filterExceptions={Array []}
@@ -97,8 +99,10 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
 
 exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array for completed worklist items  1`] = `
 <Worklist
+  areas={Array []}
   data={Array []}
   dispatch={[MockFunction]}
+  enableAreaFilter={false}
   error={null}
   filterCategories={Array []}
   filterExceptions={Array []}
@@ -111,8 +115,10 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array fo
 
 exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array for zero worklist items 1`] = `
 <Worklist
+  areas={Array []}
   data={Array []}
   dispatch={[MockFunction]}
+  enableAreaFilter={false}
   error={null}
   filterCategories={Array []}
   filterExceptions={Array []}
@@ -125,6 +131,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array fo
 
 exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render incomplete items for a WorkList with incomplete & complete items 1`] = `
 <Worklist
+  areas={Array []}
   data={
     Array [
       Object {
@@ -208,6 +215,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
     ]
   }
   dispatch={[MockFunction]}
+  enableAreaFilter={false}
   error={null}
   filterCategories={Array []}
   filterExceptions={Array []}
@@ -220,7 +228,9 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
 
 exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders error message for failed worklist request 1`] = `
 <Worklist
+  areas={Array []}
   dispatch={[MockFunction]}
+  enableAreaFilter={false}
   error="Network Error"
   filterCategories={Array []}
   filterExceptions={Array []}
@@ -233,7 +243,9 @@ exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders error
 
 exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders refresh set to true waiting for worklist api response 1`] = `
 <Worklist
+  areas={Array []}
   dispatch={[MockFunction]}
+  enableAreaFilter={false}
   error={null}
   filterCategories={Array []}
   filterExceptions={Array []}

@@ -1,6 +1,6 @@
 {
   "name": "OYI",
-  "version": "4.6.8",
+  "version": "4.6.9",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -118,7 +118,7 @@
       "node"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?@react-native|react-native|@?react-navigation)"
+      "node_modules/(?!(jest-)?@react-native|react-native|@?react-navigation|@?gorhom)"
     ],
     "transform": {
       ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
