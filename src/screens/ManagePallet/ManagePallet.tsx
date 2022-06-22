@@ -258,7 +258,7 @@ export const getPalletDetailsApiHook = (
           palletInfo: {
             id,
             createDate,
-            expirationDate
+            expirationDate: expirationDate && moment(expirationDate).format('DD/MM/YYYY')
           },
           items: palletItems
         };
