@@ -117,7 +117,7 @@ export const handleDecreaseQuantity = (item: PalletItem, dispatch: Dispatch<any>
 };
 
 export const handleIncreaseQuantity = (item: PalletItem, dispatch: Dispatch<any>): void => {
-  const currentQuantity = item.newQuantity || item.quantity;
+  const currentQuantity = item.newQuantity || item.quantity || 0;
   dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), currentQuantity + 1));
 };
 
@@ -135,6 +135,12 @@ export const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text
     });
   } else {
     dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), newQuantity));
+  }
+};
+
+export const onEndEditing = (item: PalletItem, dispatch: Dispatch<any>): void => {
+  if (Number.isNaN(item.newQuantity)) {
+    dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), item.quantity));
   }
 };
 
@@ -187,9 +193,10 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
         markEdited={isQuantityChanged(item)}
         maxValue={9999}
         minValue={0}
-        numberOfItems={item.newQuantity || item.quantity}
+        numberOfItems={item.newQuantity}
         price={item.price}
         upc={item.upcNbr}
+        onEndEditing={() => onEndEditing(item, dispatch)}
       />
     );
   }
