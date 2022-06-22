@@ -93,11 +93,10 @@ export const WorklistNavigator = (): JSX.Element => {
           }}
         />
         <Stack.Screen
-          name="ItemWorklist"
+          name={strings('WORKLIST.WORKLIST')}
           component={worklistTabs}
           options={() => ({
-            headerRight: () => renderHeaderRight(dispatch, menuOpen),
-            headerTitle: strings('WORKLIST.WORKLIST')
+            headerRight: () => renderHeaderRight(dispatch, menuOpen)
           })}
         />
       </Stack.Navigator>

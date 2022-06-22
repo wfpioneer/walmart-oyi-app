@@ -13,7 +13,7 @@ const WorklistHome = () => {
     <View style={styles.container}>
       <Button
         title={strings('WORKLIST.ITEM_WORKLIST')}
-        onPress={() => navigation.navigate('ItemWorklist')}
+        onPress={() => navigation.navigate(strings('WORKLIST.WORKLIST'))}
         style={styles.button}
         testID="itemWkListBtn"
       />
