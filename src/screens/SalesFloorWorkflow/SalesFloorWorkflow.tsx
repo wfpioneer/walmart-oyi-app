@@ -464,10 +464,6 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
 
   const isPickQtyZero = ():boolean => selectedPicks.every(pick => pick.quantityLeft === 0);
 
-  const isAnyNewPickQtyZero = ():boolean => selectedPicks.some(
-    pick => !!pick.quantityLeft && !pick.newQuantityLeft
-  );
-
   const handleComplete = () => {
     const selectedPickItems = selectedPicks.map(pick => ({
       picklistId: pick.id,
@@ -513,7 +509,6 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   };
 
   const onEndEditing = (item: PickListItem) => {
-    console.log('Number.isNaN(item.newQuantityLeft) ----', item.newQuantityLeft, ' ------', Number.isNaN(item.newQuantityLeft));
     if (Number.isNaN(item.newQuantityLeft)) {
       dispatch(updatePicks([{ ...item, newQuantityLeft: item.quantityLeft }]));
     }
@@ -649,7 +644,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
           onPress={() => handleBin()}
           style={styles.actionButton}
           testId="bin"
-          disabled={(isPickQtyZero() && isReadyToComplete) || isAnyNewPickQtyZero()}
+          disabled={(isPickQtyZero() && isReadyToComplete)}
         />
       </View>
     </SafeAreaView>
