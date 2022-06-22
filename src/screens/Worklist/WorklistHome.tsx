@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Button from '../../components/buttons/Button';
-import styles from './WorklistHomeX.style';
+import styles from './WorklistHome.style';
 import { strings } from '../../locales';
 
 const WorklistHome = () => {
