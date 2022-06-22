@@ -147,6 +147,7 @@ exports[`Sales floor item card render tests renders the item card 1`] = `
       maxValue={999}
       minValue={0}
       onDecreaseQty={[MockFunction]}
+      onEndEditing={[Function]}
       onIncreaseQty={[MockFunction]}
       onTextChange={[Function]}
       value={4}
@@ -302,6 +303,7 @@ exports[`Sales floor item card render tests renders the item with an invalid qua
       maxValue={999}
       minValue={0}
       onDecreaseQty={[MockFunction]}
+      onEndEditing={[Function]}
       onIncreaseQty={[MockFunction]}
       onTextChange={[Function]}
       value={0}

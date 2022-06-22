@@ -25,6 +25,7 @@ interface PalletItemCardProp {
     maxValue: number;
     isValid: boolean;
     isAdded: boolean;
+    onEndEditing(): void;
   }
 
 export const styleSelector = (isAdded: boolean, isEdited: boolean): Record<string, any> => {
@@ -49,7 +50,8 @@ const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
     minValue,
     maxValue,
     isValid,
-    isAdded
+    isAdded,
+    onEndEditing
   } = props;
   return (
     <View style={styleSelector(isAdded, markEdited)}>
@@ -92,6 +94,7 @@ const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
               maxValue={maxValue}
               value={numberOfItems}
               isValid={isValid}
+              onEndEditing={onEndEditing}
             />
           </View>
           <View style={styles.delete}>
