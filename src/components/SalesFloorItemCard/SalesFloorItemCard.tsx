@@ -19,6 +19,7 @@ interface SFItemCardProps {
   incrementQty: () => void;
   decrementQty: () => void;
   onQtyTextChange: (text: string) => void;
+  onEndEditing(): void
 }
 
 const SalesFloorItemCard = (props: SFItemCardProps) => {
@@ -26,7 +27,7 @@ const SalesFloorItemCard = (props: SFItemCardProps) => {
     itemDesc, salesFloorLocation, createdBy,
     createdTS, assigned, itemNbr, upcNbr,
     category, quantity, incrementQty,
-    decrementQty, onQtyTextChange
+    decrementQty, onQtyTextChange, onEndEditing
   } = props;
 
   const isValid = () => quantity >= 0 && quantity <= MAX;
@@ -73,6 +74,7 @@ const SalesFloorItemCard = (props: SFItemCardProps) => {
           onIncreaseQty={incrementQty}
           onTextChange={(text: string) => onQtyTextChange(text)}
           value={quantity}
+          onEndEditing={onEndEditing}
         />
       </View>
     </View>
