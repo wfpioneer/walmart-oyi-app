@@ -11,7 +11,6 @@ import {
   RenderAreaCard,
   RenderCategoryCollapsibleCard,
   RenderExceptionTypeCard,
-  getCategoryMap,
   renderAreaCheckbox,
   renderAreaFilterCard,
   renderCategoryFilterCard,
@@ -21,10 +20,8 @@ import {
   FilterListItem,
   FilteredCategory
 } from '../../../models/FilterListItem';
-import { AsyncState } from '../../../models/AsyncState';
 import {
-  mockCategoryMap,
-  mockWorkListToDo
+  mockCategoryMap
 } from '../../../mockData/mockWorkList';
 import { mockAreas } from '../../../mockData/mockConfig';
 
@@ -66,6 +63,7 @@ describe('FilterMenu Component', () => {
           areaOpen={false}
           areas={mockAreas}
           categoryMap={[]}
+          enableAreaFilter={false}
         />
       </Provider>
     );
@@ -84,6 +82,7 @@ describe('FilterMenu Component', () => {
           areaOpen={false}
           areas={mockAreas}
           categoryMap={[]}
+          enableAreaFilter={true}
         />
       </Provider>
     );

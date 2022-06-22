@@ -25,6 +25,8 @@ describe('ToDoWorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           navigation={navigationProp}
+          areas={[]}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -45,6 +47,8 @@ describe('ToDoWorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           navigation={navigationProp}
+          areas={[]}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -65,6 +69,8 @@ describe('ToDoWorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           navigation={navigationProp}
+          areas={[]}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -85,6 +91,8 @@ describe('ToDoWorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           navigation={navigationProp}
+          areas={[]}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -105,6 +113,8 @@ describe('ToDoWorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           navigation={navigationProp}
+          areas={[]}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -123,6 +133,8 @@ describe('ToDoWorklistScreen', () => {
           groupToggle={false}
           updateGroupToggle={jest.fn()}
           navigation={navigationProp}
+          areas={[]}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

@@ -26,7 +26,8 @@ export const initialState: User = {
     palletExpiration: false,
     backupCategories: '',
     picking: false,
-    areas: []
+    areas: [],
+    enableAreaFilter: false
   }
 };
 
@@ -58,7 +59,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           palletExpiration: action.payload.palletExpiration || false,
           backupCategories: action.payload.backupCategories,
           picking: action.payload.picking,
-          areas: action.payload.areas || []
+          areas: action.payload.areas || [],
+          enableAreaFilter: action.payload.enableAreaFilter || false
         }
       };
     default:
