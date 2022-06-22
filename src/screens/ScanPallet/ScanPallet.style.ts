@@ -6,6 +6,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   scanContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center'
   },
   scanText: {

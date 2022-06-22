@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createStackNavigator } from '@react-navigation/stack';
 import Binning from '../screens/Binning/Binning';
+import ScanPallet from '../screens/ScanPallet/ScanPallet';
 import AssignLocation from '../screens/AssignLocation/AssignLocation';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
@@ -65,9 +66,9 @@ export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element
     >
       <Stack.Screen
         name="Binning"
-        component={Binning}
+        component={ScanPallet}
         options={{
-          headerTitle: strings('BINNING.BINNING'),
+          headerTitle: strings('WORKLIST.SCAN_PALLET'),
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderScanButton(dispatch, isManualScanEnabled)}

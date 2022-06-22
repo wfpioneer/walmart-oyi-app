@@ -32,6 +32,31 @@ export interface ScanPalletScreenProps {
     selectedWorklistPalletId: string;
   }
 
+const navigateScanLocationScreen = () => {
+  // TODO: Navigate to scan location screen
+};
+
+export const getScannedPalletEffect = (
+  navigation: NavigationProp<any>,
+  scannedEvent: { type: string | null; value: string | null },
+  selectedWorklistPalletId: string,
+  dispatch: Dispatch<any>
+) => {
+  if (navigation.isFocused() && scannedEvent.value) {
+    if (scannedEvent.value === selectedWorklistPalletId) {
+      navigateScanLocationScreen();
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: strings('WORKLIST.SCAN_PALLET_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+    }
+    dispatch(resetScannedEvent());
+  }
+};
+
 export const ScanPalletScreen = (props: ScanPalletScreenProps): JSX.Element => {
   const {
     isManualScanEnabled, dispatch, navigation, route, useEffectHook,
@@ -39,11 +64,6 @@ export const ScanPalletScreen = (props: ScanPalletScreenProps): JSX.Element => {
   } = props;
 
   let scannedSubscription: EmitterSubscription;
-
-  const navigateScanLocationScreen = () => {
-    dispatch(resetScannedEvent());
-    // TODO: Navigate to scan location screen
-  };
 
   // Scanner listener
   useEffectHook(() => {
@@ -60,20 +80,9 @@ export const ScanPalletScreen = (props: ScanPalletScreenProps): JSX.Element => {
     };
   }, []);
 
-  useEffectHook(() => {
-    if (navigation.isFocused()) {
-      if (scannedEvent.value === selectedWorklistPalletId) {
-        navigateScanLocationScreen();
-      } else {
-        Toast.show({
-          type: 'error',
-          text1: strings('WORKLIST.SCAN_PALLET_ERROR'),
-          visibilityTime: SNACKBAR_TIMEOUT,
-          position: 'bottom'
-        });
-      }
-    }
-  }, [scannedEvent]);
+  useEffectHook(() => getScannedPalletEffect(
+    navigation, scannedEvent, selectedWorklistPalletId, dispatch
+  ), [scannedEvent]);
 
   return (
     <View style={styles.container}>
