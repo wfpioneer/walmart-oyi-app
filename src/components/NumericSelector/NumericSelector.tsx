@@ -15,6 +15,7 @@ interface NumericSelectorProps {
   minValue: number;
   maxValue: number;
   value: number;
+  onEndEditing?: () => void;
 }
 
 // Move to stringUtils file if we make one
@@ -37,7 +38,8 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
     onTextChange,
     minValue,
     maxValue,
-    value
+    value,
+    onEndEditing
   } = props;
   const isMinimum = value <= minValue;
   const isMaximum = value >= maxValue;
@@ -63,7 +65,8 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
         style={styles.input}
         keyboardType="numeric"
         onChangeText={text => onTextChange(numberInputFilter(text))}
-        value={value.toString()}
+        value={!Number.isNaN(value) ? value.toString() : ''}
+        onEndEditing={onEndEditing}
       />
       <IconButton
         testID="increaseButton"
@@ -79,3 +82,7 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
 };
 
 export default NumericSelector;
+
+NumericSelector.defaultProps = {
+  onEndEditing: () => {}
+};
