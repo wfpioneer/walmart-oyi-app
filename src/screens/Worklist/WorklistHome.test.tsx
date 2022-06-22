@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import WorklistHome from './WorklistHome';
+import WorklistHome from './WorklistHomeX';
 
 const mockedNavigate = jest.fn();
 jest.mock('@react-navigation/native', () => ({
