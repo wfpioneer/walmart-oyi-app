@@ -109,6 +109,9 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
       if (prevState < NEW_ZONE_AISLE_MAX - existingAisles) {
         return prevState + 1;
       }
+      if (Number.isNaN(prevState)) {
+        return 1;
+      }
       return prevState;
     });
   };
@@ -123,11 +126,11 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
   };
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
-    setNumberOfAisles(Number.isNaN(newQty) ? 0 : newQty);
+    setNumberOfAisles(newQty);
   };
 
   const handleAisleEndEditing = () => {
-    if (numberOfAisles === 0) {
+    if (Number.isNaN(numberOfAisles)) {
       setNumberOfAisles(1);
     }
   };

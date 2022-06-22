@@ -465,7 +465,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const isPickQtyZero = ():boolean => selectedPicks.every(pick => pick.quantityLeft === 0);
 
   const isAnyNewPickQtyZero = ():boolean => selectedPicks.some(
-    pick => !!pick.quantityLeft && pick.newQuantityLeft === 0
+    pick => !!pick.quantityLeft && !pick.newQuantityLeft
   );
 
   const handleComplete = () => {
@@ -492,7 +492,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     const currentQuantity = getCurrentQuantity(item);
     if (item.quantityLeft && currentQuantity < MAX) {
       dispatch(updatePicks([{ ...item, newQuantityLeft: currentQuantity + 1 }]));
-    } else {
+    } else if (!item.quantityLeft) {
       dispatch(updatePicks([{ ...item, quantityLeft: 1 }]));
     }
   };
@@ -508,12 +508,13 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     const newQuantity = Number.parseInt(text, 10);
 
     if (text === '' || (newQuantity && newQuantity < MAX && newQuantity > 0)) {
-      dispatch(updatePicks([{ ...item, newQuantityLeft: Number.isNaN(newQuantity) ? 0 : newQuantity }]));
+      dispatch(updatePicks([{ ...item, newQuantityLeft: newQuantity }]));
     }
   };
 
   const onEndEditing = (item: PickListItem) => {
-    if (item.newQuantityLeft === 0 && item.quantityLeft !== 0) {
+    console.log('Number.isNaN(item.newQuantityLeft) ----', item.newQuantityLeft, ' ------', Number.isNaN(item.newQuantityLeft));
+    if (Number.isNaN(item.newQuantityLeft)) {
       dispatch(updatePicks([{ ...item, newQuantityLeft: item.quantityLeft }]));
     }
   };

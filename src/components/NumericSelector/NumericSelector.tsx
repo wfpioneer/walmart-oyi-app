@@ -65,7 +65,7 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
         style={styles.input}
         keyboardType="numeric"
         onChangeText={text => onTextChange(numberInputFilter(text))}
-        value={value ? value.toString() : ''}
+        value={!Number.isNaN(value) ? value.toString() : ''}
         onEndEditing={onEndEditing}
       />
       <IconButton

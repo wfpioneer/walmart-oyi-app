@@ -198,6 +198,8 @@ export const CreatePickScreen = (props: CreatePickProps) => {
   ) => {
     if (numberOfPallets < PALLET_MAX) {
       setNumberOfPallets((previousState: number) => previousState + 1);
+    } else if (Number.isNaN(numberOfPallets)) {
+      setNumberOfPallets(1);
     }
   };
 
@@ -214,7 +216,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
     numberOfPallets: number,
     setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>
   ) => {
-    if (numberOfPallets === 0) {
+    if (Number.isNaN(numberOfPallets)) {
       setNumberOfPallets(1);
     }
   };
@@ -222,7 +224,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
   const onPalletTextChange = (text: string, setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>) => {
     const newQty = parseInt(text, 10);
     if (text === '' || (!Number.isNaN(newQty) && newQty >= PALLET_MIN && newQty <= PALLET_MAX)) {
-      setNumberOfPallets(Number.isNaN(newQty) ? 0 : newQty);
+      setNumberOfPallets(newQty);
     }
   };
 

@@ -37,6 +37,8 @@ const onPalletIncrease = (
 ) => {
   if (numberOfPallets < PALLET_MAX) {
     setNumberOfPallets((preaviousState: number) => preaviousState + 1);
+  } else if (Number.isNaN(numberOfPallets)) {
+    setNumberOfPallets(PALLET_MIN);
   }
 };
 
@@ -52,7 +54,7 @@ const onPalletDecrease = (
 const onPalletTextChange = (text: string, setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>) => {
   const newQty = parseInt(text, 10);
   if (text === '' || (!Number.isNaN(newQty) && newQty >= PALLET_MIN && newQty <= PALLET_MAX)) {
-    setNumberOfPallets(Number.isNaN(newQty) ? 0 : newQty);
+    setNumberOfPallets(newQty);
   }
 };
 
@@ -60,7 +62,7 @@ const onPalletEditingEnd = (
   numberOfPallets: number,
   setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>
 ) => {
-  if (numberOfPallets === 0) {
+  if (Number.isNaN(numberOfPallets)) {
     setNumberOfPallets(1);
   }
 };

@@ -224,6 +224,8 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
   const handleAisleSectionCountIncrement = (aisleIndex: number, sectionCount: number) => {
     if (sectionCount < NEW_SECTION_MAX - props.existingSections) {
       props.dispatch(setAisleSectionCount(aisleIndex, sectionCount + 1));
+    } else if (Number.isNaN(sectionCount)) {
+      props.dispatch(setAisleSectionCount(aisleIndex, 1));
     }
   };
 
@@ -235,11 +237,11 @@ export const AddSectionScreen = (props: AddSectionProps): JSX.Element => {
 
   const handleTextSectionCountChange = (text: string, aisleIndex: number) => {
     const newQty = parseInt(text, 10);
-    props.dispatch(setAisleSectionCount(aisleIndex, Number.isNaN(newQty) ? 0 : newQty));
+    props.dispatch(setAisleSectionCount(aisleIndex, newQty));
   };
 
   const handleSectionEndEditing = (aisleIndex: number, sectionCount: number) => {
-    if (sectionCount === 0) {
+    if (Number.isNaN(sectionCount)) {
       props.dispatch(setAisleSectionCount(aisleIndex, 1));
     }
   };

@@ -44,7 +44,7 @@ export const assignHandleTextChange = (newQty: any,
 
 export const calculateIncreaseQty = (newOHQty: any,
   setNewOHQty: React.Dispatch<React.SetStateAction<number>>) => {
-  if (newOHQty < OH_MIN) {
+  if (newOHQty < OH_MIN || Number.isNaN(newOHQty)) {
     setNewOHQty(OH_MIN);
   } else if (newOHQty < OH_MAX) {
     setNewOHQty((prevState => prevState + 1));
@@ -53,7 +53,7 @@ export const calculateIncreaseQty = (newOHQty: any,
 
 export const onQtyEditingEnd = (newOHQty: any, onHandsQty: number,
   setNewOHQty: React.Dispatch<React.SetStateAction<number>>) => {
-  if (newOHQty === OH_MIN) {
+  if (Number.isNaN(newOHQty)) {
     setNewOHQty(onHandsQty);
   }
 };
@@ -66,7 +66,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
-    assignHandleTextChange(Number.isNaN(newQty) ? 0 : newQty, setNewOHQty);
+    assignHandleTextChange(newQty, setNewOHQty);
   };
 
   const handleIncreaseQty = () => {
