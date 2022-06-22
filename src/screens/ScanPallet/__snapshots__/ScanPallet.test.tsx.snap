@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScanPalletScreen Tests rendering the ScanPalletScreen component Test renders the default ScanPalletScreen  1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <ManualScanComponent
+    keyboardType="numeric"
+    placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <TouchableOpacity
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#000000"
+        name="barcode-scan"
+        size={100}
+      />
+    </TouchableOpacity>
+    <View
+      style={
+        Object {
+          "paddingTop": 30,
+        }
+      }
+    >
+      <Text>
+        [missing "en.WORKLIST.SCAN_PALLET_LABEL" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
