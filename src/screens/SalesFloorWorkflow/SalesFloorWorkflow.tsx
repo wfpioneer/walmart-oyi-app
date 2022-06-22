@@ -464,6 +464,10 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
 
   const isPickQtyZero = ():boolean => selectedPicks.every(pick => pick.quantityLeft === 0);
 
+  const isAnyNewInvalidPickQty = ():boolean => selectedPicks.some(
+    pick => !!pick.quantityLeft && Number.isNaN(pick.newQuantityLeft)
+  );
+
   const handleComplete = () => {
     const selectedPickItems = selectedPicks.map(pick => ({
       picklistId: pick.id,
@@ -644,7 +648,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
           onPress={() => handleBin()}
           style={styles.actionButton}
           testId="bin"
-          disabled={(isPickQtyZero() && isReadyToComplete)}
+          disabled={(isPickQtyZero() && isReadyToComplete) || isAnyNewInvalidPickQty()}
         />
       </View>
     </SafeAreaView>
