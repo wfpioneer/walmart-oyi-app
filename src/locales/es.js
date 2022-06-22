@@ -321,8 +321,8 @@ export default {
     COMPLETED: 'Terminado',
     WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo',
     AREA: 'Área',
-    ITEM_WORKLIST: 'Item Work Lists',
-    PALLET_WORKLIST: 'Pallet Work Lists'
+    ITEM_WORKLIST: 'Lista De Articulos',
+    PALLET_WORKLIST: 'Lista De Pallet'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
