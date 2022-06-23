@@ -326,6 +326,15 @@ export default {
     SCAN_PALLET_LABEL: 'Scan Pallet Label to continue',
     SCAN_PALLET_ERROR: 'Pallet scanned must match pallet on worklist'
   },
+  MISSING_PALLET_WORKLIST: {
+    MISSING_PALLET_LABEL: 'Missing Pallet',
+    PALLET_ID: 'Pallet ID',
+    LAST_LOCATION: 'Last Location',
+    REPORTED_DATE: 'Reported Date',
+    REPORTED_BY: 'Reported by',
+    ADD_LOCATION: 'Add Location',
+    DELETE_PALLET: 'Delete Pallet'
+  },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',
     FLOOR: 'Floor',

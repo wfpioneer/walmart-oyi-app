@@ -325,6 +325,15 @@ export default {
     SCAN_PALLET_LABEL: '扫描卡板标签继续操作',
     SCAN_PALLET_ERROR: '扫描的卡板标签必须和任务清单的匹配'
   },
+  MISSING_PALLET_WORKLIST: {
+    MISSING_PALLET_LABEL: 'Missing Pallet',
+    PALLET_ID: 'Pallet ID',
+    LAST_LOCATION: 'Last Location',
+    REPORTED_DATE: 'Reported Date',
+    REPORTED_BY: 'Reported by',
+    ADD_LOCATION: 'Add Location',
+    DELETE_PALLLET: 'Delete Pallet'
+  },
   SELECTLOCATIONTYPE: {
     TITLE: '选择位置类型',
     FLOOR: '边柜',

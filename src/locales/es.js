@@ -325,6 +325,15 @@ export default {
     SCAN_PALLET_LABEL: 'Escanea la etiqueta del pallet para continuar',
     SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet de la lista'
   },
+  MISSING_PALLET_WORKLIST: {
+    MISSING_PALLET_LABEL: 'Missing Pallet',
+    PALLET_ID: 'Pallet ID',
+    LAST_LOCATION: 'Last Location',
+    REPORTED_DATE: 'Reported Date',
+    REPORTED_BY: 'Reported by',
+    ADD_LOCATION: 'Add Location',
+    DELETE_PALLLET: 'Delete Pallet'
+  },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
     FLOOR: 'Piso',
