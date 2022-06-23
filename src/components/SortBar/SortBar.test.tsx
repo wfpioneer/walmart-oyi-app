@@ -1,20 +1,17 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
-import { PalletWorklist } from './PalletWorklist';
+import SortBar from './SortBar';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'mockMaterialIcons');
 
-describe('PalletWorkListScreen', () => {
+describe('SortBar Component', () => {
   it('Test renders default PalletWorkList Screen', () => {
     const mockUpdateToggle = jest.fn();
-    const { toJSON, getByTestId } = render(
-      <PalletWorklist groupToggle={false} updateGroupToggle={mockUpdateToggle} />
-    );
+    const { toJSON, getByTestId } = render(SortBar(false, mockUpdateToggle));
 
     const menuToggle = getByTestId('menu');
     const listToggle = getByTestId('list');
 
-    fireEvent.press(menuToggle)
+    fireEvent.press(menuToggle);
     expect(mockUpdateToggle).toHaveBeenCalledWith(false);
 
     fireEvent.press(listToggle);
