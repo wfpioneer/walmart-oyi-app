@@ -139,7 +139,7 @@ export const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text
 };
 
 export const onEndEditing = (item: PalletItem, dispatch: Dispatch<any>): void => {
-  if (Number.isNaN(item.newQuantity)) {
+  if (typeof (item.newQuantity) !== 'number' || Number.isNaN(item.newQuantity)) {
     dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), item.quantity));
   }
 };
@@ -480,6 +480,7 @@ export const getItemDetailsApiHook = (
           categoryDesc,
           itemDesc: itemName,
           quantity: 1,
+          newQuantity: 1,
           deleted: false,
           added: true
         };
