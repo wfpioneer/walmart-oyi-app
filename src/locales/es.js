@@ -320,7 +320,10 @@ export default {
     TODO: 'Que hacer',
     COMPLETED: 'Terminado',
     WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo',
-    AREA: 'Área'
+    AREA: 'Área',
+    SCAN_PALLET: 'Escanea Pallet',
+    SCAN_PALLET_LABEL: 'Escanea la etiqueta del pallet para continuar',
+    SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet de la lista'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
