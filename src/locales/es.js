@@ -308,7 +308,8 @@ export default {
     CLEAR_AISLE_ITEMS_SUCCEED: 'Todos los artículos seleccionados fueron limpiados del pasillo',
     CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo',
     PALLET_MANAGEMENT: 'Administración de Pallet',
-    LOCATION_MGMT_EDIT: 'Editar Administración de Pallet'
+    LOCATION_MGMT_EDIT: 'Editar Administración de Pallet',
+    SCAN_LOCATION_HEADER: 'Ubicación De Escaneo' // TODO spanish translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
