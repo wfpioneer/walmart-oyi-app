@@ -309,7 +309,7 @@ export default {
     CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
     PALLET_MANAGEMENT: '卡板管理',
     LOCATION_MGMT_EDIT: '编辑位置管理',
-    SCAN_LOCATION_HEADER: 'Scan Location' // TODO mandarin translation
+    SCAN_LOCATION_HEADER: '扫描地点'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
