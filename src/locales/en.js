@@ -323,7 +323,10 @@ export default {
     WORKLIST_ITEM_API_ERROR: 'There was an error retrieving worklist items.\nPlease try again.',
     AREA: 'Area',
     ITEM_WORKLIST: 'Item Work List',
-    PALLET_WORKLIST: 'Pallet Work List'
+    PALLET_WORKLIST: 'Pallet Work List',
+    SCAN_PALLET: 'Scan Pallet',
+    SCAN_PALLET_LABEL: 'Scan Pallet Label to continue',
+    SCAN_PALLET_ERROR: 'Pallet scanned must match pallet on worklist'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',

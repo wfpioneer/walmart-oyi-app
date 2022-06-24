@@ -172,7 +172,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
           this.props.updateFilterExceptions([worklist.worklistType]);
           validateSession(this.props.navigation, this.props.route.name).then(() => {
-            this.props.navigation.navigate('WorklistHome', { screen: strings('WORKLIST.WORKLIST') });
+            this.props.navigation.navigate(strings('WORKLIST.WORKLIST'));
           }).catch(() => {});
         };
 
