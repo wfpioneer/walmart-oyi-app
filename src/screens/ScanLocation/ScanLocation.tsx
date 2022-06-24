@@ -12,7 +12,7 @@ import Toast from 'react-native-toast-message';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
-import { setScannedEvent } from '../../state/actions/Global';
+import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
 import { strings } from '../../locales';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { styles } from './ScanLocation.style';
@@ -28,23 +28,23 @@ interface ScanLocationProps {
   isManualScanEnabled: boolean;
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
+  selectedPalletId: string;
   trackEventCall: (eventName: string, params?: any) => void;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   validateSessionCall: (
     navigation: NavigationProp<any>,
     route?: string
   ) => Promise<void>;
+
 }
-const updatePalletLocationHook = (
+export const updatePalletLocationHook = (
   addPalletAPI: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>
 ) => {
   // on api success
-  // eslint-disable-next-line no-empty
   if (!addPalletAPI.isWaiting && addPalletAPI.result) {
-    // dispatch(getSectionDetails({ sectionId: section.id.toString() }));
-    // dispatch(showSnackBar(strings('LOCATION.PALLET_ADDED'), 3000));
+    dispatch(resetScannedEvent());
     Toast.show({
       type: 'success',
       position: 'bottom',
@@ -56,6 +56,7 @@ const updatePalletLocationHook = (
 
   // on api failure
   if (!addPalletAPI.isWaiting && addPalletAPI.error) {
+    dispatch(resetScannedEvent());
     if (addPalletAPI.error === 'Request failed with status code 409') {
       Toast.show({
         type: 'error',
@@ -75,13 +76,15 @@ const updatePalletLocationHook = (
     }
   }
 };
-const ScanLocationScreen = (props: ScanLocationProps) => {
+
+export const ScanLocationScreen = (props: ScanLocationProps) => {
   const {
     addPalletAPI,
     dispatch,
     isManualScanEnabled,
     navigation,
     route,
+    selectedPalletId,
     trackEventCall,
     useEffectHook,
     validateSessionCall
@@ -95,7 +98,7 @@ const ScanLocationScreen = (props: ScanLocationProps) => {
             value: scan.value,
             type: scan.type
           });
-          dispatch(addPallet({ palletId: '0', sectionId: scan.value })); // Double check code
+          dispatch(addPallet({ palletId: selectedPalletId, sectionId: scan.value }));
           dispatch(setScannedEvent(scan));
         });
       }
@@ -109,7 +112,7 @@ const ScanLocationScreen = (props: ScanLocationProps) => {
   useEffectHook(() => updatePalletLocationHook(addPalletAPI, dispatch, navigation));
   return (
     <View style={styles.container}>
-      {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
+      {isManualScanEnabled && <LocationManualScan keyboardType="numeric" />}
       <View style={styles.scanContainer}>
         <TouchableOpacity onPress={() => openCamera()}>
           <MaterialCommunityIcons
@@ -131,6 +134,9 @@ export const ScanLocation = () => {
   const route = useRoute();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const addPalletAPI = useTypedSelector(state => state.async.addPallet);
+
+  // TODO: Selected pallet detail needs to fetched from redux state
+  const selectedWorklistPalletId = '7988';
   return (
     <ScanLocationScreen
       addPalletAPI={addPalletAPI}
@@ -138,6 +144,7 @@ export const ScanLocation = () => {
       isManualScanEnabled={isManualScanEnabled}
       navigation={navigation}
       route={route}
+      selectedPalletId={selectedWorklistPalletId}
       trackEventCall={trackEvent}
       useEffectHook={useEffect}
       validateSessionCall={validateSession}
