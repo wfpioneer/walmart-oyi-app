@@ -3,31 +3,23 @@ import COLOR from '../../themes/Color';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
     borderWidth: 1,
     borderColor: COLOR.PALE_BLUE,
-    paddingBottom: 10,
+    padding: 10,
     backgroundColor: COLOR.WHITE
   },
-  headerContainer: {
+  contentContainer: {
+    display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 7
+    justifyContent: 'space-between'
   },
   wrapperContainer: {
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    paddingHorizontal: 7,
-    flex: 1
+    justifyContent: 'space-between'
   },
   contentText: {
-    fontSize: 12
-  },
-  contentContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly'
+    fontSize: 12,
+    paddingVertical: 2
   },
   exceptionType: {
     fontSize: 12,
@@ -36,17 +28,17 @@ const styles = StyleSheet.create({
   },
   actionButton: {
     flex: 1,
+    fontSize: 12,
     paddingHorizontal: 10
   },
   palletActionContainer: {
-    width: '100%',
-    alignContent: 'space-around',
+    alignContent: 'space-between',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 10
+    marginTop: 5
   },
-  arrowIcon: {
-    flex: 1
+  iconView: {
+    alignItems: 'flex-end'
   }
 });
 

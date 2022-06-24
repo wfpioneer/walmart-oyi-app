@@ -326,13 +326,13 @@ export default {
     SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet de la lista'
   },
   MISSING_PALLET_WORKLIST: {
-    MISSING_PALLET_LABEL: 'Missing Pallet',
+    MISSING_PALLET_LABEL: 'Pallets Faltantes',
     PALLET_ID: 'Pallet ID',
-    LAST_LOCATION: 'Last Location',
-    REPORTED_DATE: 'Reported Date',
-    REPORTED_BY: 'Reported by',
-    ADD_LOCATION: 'Add Location',
-    DELETE_PALLLET: 'Delete Pallet'
+    LAST_LOCATION: 'Última Ubicación',
+    REPORTED_DATE: 'Fecha Reportada',
+    REPORTED_BY: 'Reportado Por',
+    ADD_LOCATION: 'Agregar Ubicación',
+    DELETE_PALLLET: 'Eliminar Pallet'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
