@@ -258,7 +258,7 @@ export const getPalletDetailsApiHook = (
           palletInfo: {
             id,
             createDate,
-            expirationDate
+            expirationDate: expirationDate && moment(expirationDate).format('DD/MM/YYYY')
           },
           items: palletItems
         };
@@ -587,7 +587,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
     const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
     // updated expiration date
-    const updatedExpirationDate = addExpiry ? `${moment(addExpiry).format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
+    const updatedExpirationDate = addExpiry ? `${moment(addExpiry,'DD/MM/YYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
     // Filter Items by deleted flag
     const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
       reducer.push(current.upcNbr);
@@ -623,7 +623,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
   const onDatePickerChange = (event: DateTimePickerEvent, value: Date| undefined) => {
     const { type } = event;
-    const newDate = value && moment(value).format('MM/DD/YYYY');
+    const newDate = value && moment(value).format('DD/MM/YYYY');
     setIsPickerShow(false);
     if (type === 'set' && newDate && newDate !== expirationDate) {
       dispatch(setPalletNewExpiration(newDate));
