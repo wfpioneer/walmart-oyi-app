@@ -513,7 +513,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   };
 
   const onEndEditing = (item: PickListItem) => {
-    if (Number.isNaN(item.newQuantityLeft)) {
+    if (typeof (item.newQuantityLeft) !== 'number' || Number.isNaN(item.newQuantityLeft)) {
       dispatch(updatePicks([{ ...item, newQuantityLeft: item.quantityLeft }]));
     }
   };

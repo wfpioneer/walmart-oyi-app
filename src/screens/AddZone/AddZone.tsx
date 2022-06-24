@@ -109,7 +109,7 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
       if (prevState < NEW_ZONE_AISLE_MAX - existingAisles) {
         return prevState + 1;
       }
-      if (Number.isNaN(prevState)) {
+      if (typeof (prevState) !== 'number' || Number.isNaN(prevState)) {
         return 1;
       }
       return prevState;
@@ -130,7 +130,7 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
   };
 
   const handleAisleEndEditing = () => {
-    if (Number.isNaN(numberOfAisles)) {
+    if (typeof (numberOfAisles) !== 'number' || Number.isNaN(numberOfAisles)) {
       setNumberOfAisles(1);
     }
   };
