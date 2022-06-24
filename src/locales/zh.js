@@ -308,7 +308,8 @@ export default {
     CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
     CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
     PALLET_MANAGEMENT: '卡板管理',
-    LOCATION_MGMT_EDIT: '编辑位置管理'
+    LOCATION_MGMT_EDIT: '编辑位置管理',
+    SCAN_LOCATION_HEADER: 'Scan Location' // TODO mandarin translation
   },
   WORKLIST: {
     WORKLIST: '待办任务',

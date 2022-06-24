@@ -12,7 +12,6 @@ import Toast from 'react-native-toast-message';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
-import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
 import { strings } from '../../locales';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { styles } from './ScanLocation.style';
@@ -21,6 +20,11 @@ import LocationManualScan from '../../components/LocationManualScan/LocationManu
 import { AsyncState } from '../../models/AsyncState';
 import { addPallet } from '../../state/actions/saga';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import {
+  hideActivityModal,
+  showActivityModal
+} from '../../state/actions/Modal';
+import { ADD_PALLET } from '../../state/actions/asyncAPI';
 
 interface ScanLocationProps {
   addPalletAPI: AsyncState;
@@ -35,7 +39,6 @@ interface ScanLocationProps {
     navigation: NavigationProp<any>,
     route?: string
   ) => Promise<void>;
-
 }
 export const updatePalletLocationHook = (
   addPalletAPI: AsyncState,
@@ -44,19 +47,20 @@ export const updatePalletLocationHook = (
 ) => {
   // on api success
   if (!addPalletAPI.isWaiting && addPalletAPI.result) {
-    dispatch(resetScannedEvent());
+    dispatch(hideActivityModal());
     Toast.show({
       type: 'success',
       position: 'bottom',
       text1: strings('LOCATION.PALLET_ADDED'),
       visibilityTime: SNACKBAR_TIMEOUT
     });
+    dispatch({ type: ADD_PALLET.RESET });
     navigation.goBack();
   }
 
   // on api failure
   if (!addPalletAPI.isWaiting && addPalletAPI.error) {
-    dispatch(resetScannedEvent());
+    dispatch(hideActivityModal());
     if (addPalletAPI.error === 'Request failed with status code 409') {
       Toast.show({
         type: 'error',
@@ -74,6 +78,12 @@ export const updatePalletLocationHook = (
         visibilityTime: SNACKBAR_TIMEOUT
       });
     }
+    dispatch({ type: ADD_PALLET.RESET });
+  }
+
+  // on api request
+  if (addPalletAPI.isWaiting) {
+    dispatch(showActivityModal());
   }
 };
 
@@ -98,8 +108,9 @@ export const ScanLocationScreen = (props: ScanLocationProps) => {
             value: scan.value,
             type: scan.type
           });
-          dispatch(addPallet({ palletId: selectedPalletId, sectionId: scan.value }));
-          dispatch(setScannedEvent(scan));
+          dispatch(
+            addPallet({ palletId: selectedPalletId, sectionId: scan.value })
+          );
         });
       }
     });
@@ -109,7 +120,10 @@ export const ScanLocationScreen = (props: ScanLocationProps) => {
   }, []);
 
   // Add Pallet API
-  useEffectHook(() => updatePalletLocationHook(addPalletAPI, dispatch, navigation));
+  useEffectHook(
+    () => updatePalletLocationHook(addPalletAPI, dispatch, navigation),
+    [addPalletAPI]
+  );
   return (
     <View style={styles.container}>
       {isManualScanEnabled && <LocationManualScan keyboardType="numeric" />}

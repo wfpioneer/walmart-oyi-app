@@ -97,10 +97,14 @@ describe('ScanLocation Screen', () => {
         ...defaultAsyncState,
         error: 'NetWork Error'
       };
+      const apiIsWaiting: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
 
       updatePalletLocationHook(successApi, mockDispatch, navigationProp);
       expect(navigationProp.goBack).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(
         expect.objectContaining({ type: 'success' })
@@ -109,7 +113,7 @@ describe('ScanLocation Screen', () => {
       jest.clearAllMocks();
 
       updatePalletLocationHook(error409Api, mockDispatch, navigationProp);
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(
         expect.objectContaining({
@@ -121,7 +125,7 @@ describe('ScanLocation Screen', () => {
       jest.clearAllMocks();
 
       updatePalletLocationHook(errorApi, mockDispatch, navigationProp);
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(
         expect.objectContaining({
@@ -129,6 +133,10 @@ describe('ScanLocation Screen', () => {
           text1: strings('LOCATION.ADD_PALLET_ERROR')
         })
       );
+
+      jest.clearAllMocks();
+      updatePalletLocationHook(apiIsWaiting, mockDispatch, navigationProp);
+      expect(mockDispatch).toBeCalledTimes(1);
     });
   });
 });
