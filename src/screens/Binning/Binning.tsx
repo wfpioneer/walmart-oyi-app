@@ -37,7 +37,6 @@ import { setupPallet } from '../../state/actions/PalletManagement';
 import { Pallet } from '../../models/PalletManagementTypes';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
 import { CustomModalComponent } from '../Modal/Modal';
-import MissingPalletWorklistCard from '../../components/MissingPalletWorklistCard/MissingPalletWorklistCard';
 
 export interface BinningScreenProps {
   scannedPallets: BinningPallet[];
@@ -304,16 +303,6 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
             <ItemSeparator />
           </View>
           )}
-        <MissingPalletWorklistCard
-          palletId="7988"
-          lastLocation="A1-1"
-          reportedBy="vn51wu8"
-          reportedDate="24/6/2022"
-          expanded={true}
-          addCallback={() => {}}
-          deleteCallback={() => {}}
-          navigateCallback={() => {}}
-        />
         <FlatList
           data={scannedPallets}
           removeClippedSubviews={false}
