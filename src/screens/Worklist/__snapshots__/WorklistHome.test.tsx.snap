@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WorkListHome Renders WorkListHome screen 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "height": 40,
+        "marginBottom": 15,
+        "width": "90%",
+      }
+    }
+    testID="itemWkListBtn"
+    title="[missing \\"en.WORKLIST.ITEM_WORKLIST\\" translation]"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "height": 40,
+        "marginBottom": 15,
+        "width": "90%",
+      }
+    }
+    testID="palletWkListBtn"
+    title="[missing \\"en.WORKLIST.PALLET_WORKLIST\\" translation]"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+</View>
+`;
