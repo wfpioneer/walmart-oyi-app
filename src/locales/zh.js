@@ -321,6 +321,8 @@ export default {
     COMPLETED: '已完成',
     WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试',
     AREA: '区域',
+    ITEM_WORKLIST: '商品例外清单',
+    PALLET_WORKLIST: '卡板例外清单',
     SCAN_PALLET: '扫描卡板',
     SCAN_PALLET_LABEL: '扫描卡板标签继续操作',
     SCAN_PALLET_ERROR: '扫描的卡板标签必须和任务清单的匹配'
