@@ -309,7 +309,8 @@ export default {
     CLEAR_AISLE_ITEMS_SUCCEED: 'All selected items successfully cleared from this aisle',
     CLEAR_AISLE_ITEMS_FAIL: 'There was an error clearing items from this aisle.  Please try again',
     PALLET_MANAGEMENT: 'Pallet Management',
-    LOCATION_MGMT_EDIT: 'Location Management Edit'
+    LOCATION_MGMT_EDIT: 'Location Management Edit',
+    SCAN_LOCATION_HEADER: 'Scan Location'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
