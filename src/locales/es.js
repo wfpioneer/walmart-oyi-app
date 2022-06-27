@@ -308,7 +308,8 @@ export default {
     CLEAR_AISLE_ITEMS_SUCCEED: 'Todos los artículos seleccionados fueron limpiados del pasillo',
     CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo',
     PALLET_MANAGEMENT: 'Administración de Pallet',
-    LOCATION_MGMT_EDIT: 'Editar Administración de Pallet'
+    LOCATION_MGMT_EDIT: 'Editar Administración de Pallet',
+    SCAN_LOCATION_HEADER: 'Ubicación De Escaneo' // TODO spanish translation
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -321,6 +322,8 @@ export default {
     COMPLETED: 'Terminado',
     WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo',
     AREA: 'Área',
+    ITEM_WORKLIST: 'Lista De Articulos',
+    PALLET_WORKLIST: 'Lista De Pallet',
     SCAN_PALLET: 'Escanea Pallet',
     SCAN_PALLET_LABEL: 'Escanea la etiqueta del pallet para continuar',
     SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet de la lista'

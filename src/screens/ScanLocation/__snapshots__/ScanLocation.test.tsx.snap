@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScanLocation Screen Test renders the scanLocation Screen 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Icon
+        color="#000000"
+        name="barcode-scan"
+        size={100}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "paddingTop": 30,
+        }
+      }
+    >
+      <Text>
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`ScanLocation Screen Test renders the scanLocation Screen Manual scan enabled 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "column",
+        "marginBottom": 8,
+        "paddingRight": 16,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <TextInput
+        autoCapitalize="characters"
+        autoCorrect={false}
+        autoFocus={true}
+        keyboardType="numeric"
+        onChangeText={[Function]}
+        onSubmitEditing={[Function]}
+        placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        selectionColor="#0071e9"
+        style={
+          Object {
+            "color": "#000000",
+            "flex": 1,
+            "paddingLeft": 10,
+          }
+        }
+        value=""
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Icon
+        color="#000000"
+        name="barcode-scan"
+        size={100}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "paddingTop": 30,
+        }
+      }
+    >
+      <Text>
+        [missing "en.LOCATION.SCAN_INSTRUCTION" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
