@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import Toast from 'react-native-toast-message';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import MissingPalletWorklistCard from '../../components/MissingPalletWorklistCard/MissingPalletWorklistCard';
 import { strings } from '../../locales';
 import { MissingPalletWorklistItemI } from '../../models/WorklistItem';
@@ -7,15 +10,95 @@ import { CustomModalComponent } from '../Modal/Modal';
 import { styles } from './PalletWorklist.style';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
+import { clearPallet } from '../../state/actions/saga';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { AsyncState } from '../../models/AsyncState';
+import {
+  hideActivityModal,
+  showActivityModal
+} from '../../state/actions/Modal';
+import { CLEAR_PALLET } from '../../state/actions/asyncAPI';
 
 interface PalletWorkListProps {
   palletWorklist: MissingPalletWorklistItemI[];
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
+  dispatch: Dispatch<any>;
+  clearPalletAPI: AsyncState;
+  navigation: NavigationProp<any>;
 }
-const onDeletePress = () => {};
+
+export const clearPalletApiHook = (
+  clearPalletApi: AsyncState,
+  palletId: string,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>
+): void => {
+  if (navigation.isFocused()) {
+    if (!clearPalletApi.isWaiting) {
+      // Success
+      if (clearPalletApi.result) {
+        dispatch(hideActivityModal());
+        setDisplayConfirmation(false);
+        dispatch({ type: CLEAR_PALLET.RESET });
+
+        // TODO REFRESH/CALL MISSING PALLET WORKLIST API
+
+        Toast.show({
+          type: 'success',
+          text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
+          position: 'bottom'
+        });
+        navigation.goBack();
+      }
+
+      // Failure
+      if (clearPalletApi.error) {
+        dispatch(hideActivityModal());
+        setDisplayConfirmation(false);
+        dispatch({ type: CLEAR_PALLET.RESET });
+        Toast.show({
+          type: 'error',
+          text1: strings('PALLET.CLEAR_PALLET_ERROR'),
+          text2: strings('GENERICS.TRY_AGAIN'),
+          position: 'bottom'
+        });
+      }
+    } else {
+      dispatch(showActivityModal());
+    }
+  }
+};
+
 export const PalletWorklistScreen = (props: PalletWorkListProps) => {
-  const { displayConfirmation, palletWorklist, setDisplayConfirmation } = props;
+  const {
+    clearPalletAPI,
+    displayConfirmation,
+    dispatch,
+    palletWorklist,
+    setDisplayConfirmation,
+    navigation
+  } = props;
+  let deletePalletId = '';
+
+  useEffect(() => clearPalletApiHook(
+    clearPalletAPI,
+    deletePalletId,
+    navigation,
+    dispatch,
+    setDisplayConfirmation
+  ),
+  [clearPalletAPI]);
+
+  const onDeletePress = () => {
+    dispatch(clearPallet({ palletId: deletePalletId }));
+  };
+
+  const handleDeleteClick = (palletId: string) => {
+    setDisplayConfirmation(true);
+    deletePalletId = palletId;
+  };
   return (
     <View style={styles.container}>
       <CustomModalComponent
@@ -42,7 +125,7 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
             style={styles.delButton}
             title={strings('GENERICS.OK')}
             backgroundColor={COLOR.TRACKER_RED}
-            onPress={undefined}
+            onPress={() => onDeletePress()}
           />
         </View>
       </CustomModalComponent>
@@ -55,9 +138,9 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
             lastLocation={item.lastKnownLocationName}
             reportedBy={item.createId}
             reportedDate={item.createTS}
-            expanded={true}
+            expanded={true} // TODO Toggle for a single Pallet WorkList Item
             addCallback={() => {}}
-            deleteCallback={() => setDisplayConfirmation(true)}
+            deleteCallback={() => handleDeleteClick(item.palletId.toString())}
             navigateCallback={() => {}}
           />
         )}
@@ -71,6 +154,9 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
 
 export const PalletWorkList = () => {
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
+  const clearPalletAPI = useTypedSelector(state => state.async.clearPallet);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const mockMPWorklist: MissingPalletWorklistItemI[] = [
     {
       createId: '11',
@@ -90,6 +176,9 @@ export const PalletWorkList = () => {
       palletWorklist={mockMPWorklist}
       displayConfirmation={displayConfirmation}
       setDisplayConfirmation={setDisplayConfirmation}
+      dispatch={dispatch}
+      clearPalletAPI={clearPalletAPI}
+      navigation={navigation}
     />
   );
 };
