@@ -1,4 +1,6 @@
-import React, { Dispatch, useEffect, useState } from 'react';
+import React, {
+  Dispatch, EffectCallback, useEffect, useState
+} from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
@@ -26,9 +28,10 @@ interface PalletWorkListProps {
   dispatch: Dispatch<any>;
   clearPalletAPI: AsyncState;
   navigation: NavigationProp<any>;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
 
-export const clearPalletApiHook = (
+export const clearPalletAPIHook = (
   clearPalletApi: AsyncState,
   palletId: string,
   navigation: NavigationProp<any>,
@@ -50,7 +53,6 @@ export const clearPalletApiHook = (
           text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
           position: 'bottom'
         });
-        navigation.goBack();
       }
 
       // Failure
@@ -78,11 +80,12 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
     dispatch,
     palletWorklist,
     setDisplayConfirmation,
-    navigation
+    navigation,
+    useEffectHook
   } = props;
   let deletePalletId = '';
 
-  useEffect(() => clearPalletApiHook(
+  useEffectHook(() => clearPalletAPIHook(
     clearPalletAPI,
     deletePalletId,
     navigation,
@@ -179,6 +182,7 @@ export const PalletWorkList = () => {
       dispatch={dispatch}
       clearPalletAPI={clearPalletAPI}
       navigation={navigation}
+      useEffectHook={useEffect}
     />
   );
 };

@@ -1,4 +1,4 @@
-import { WorklistItemI } from '../models/WorklistItem';
+import { MissingPalletWorklistItemI, WorklistItemI } from '../models/WorklistItem';
 import { FilteredCategory } from '../models/FilterListItem';
 
 // eslint-disable-next-line no-shadow
@@ -462,5 +462,32 @@ export const mockCategoryMap: FilteredCategory[] = [
     catgName: CATEGORY_NAME.ELECTRONICS,
     catgNbr: 199,
     selected: false
+  }
+];
+
+export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
+  {
+    createId: '11',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 1,
+    lastKnownLocationName: 'A1-1',
+    palletDeleted: false,
+    palletId: 7988,
+    worklistType: 'MP',
+    completed: undefined,
+    completedId: undefined,
+    completedTS: undefined
+  },
+  {
+    createId: '12',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 2,
+    lastKnownLocationName: 'A1-2',
+    palletDeleted: false,
+    palletId: 7989,
+    worklistType: 'MP',
+    completed: undefined,
+    completedId: undefined,
+    completedTS: undefined
   }
 ];
