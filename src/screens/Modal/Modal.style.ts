@@ -65,6 +65,14 @@ export default StyleSheet.create({
     paddingBottom: 12,
     paddingHorizontal: 8
   },
+  formHeaderContainer: {
+    width: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLOR.YELLOW,
+    borderRadius: 7.5,
+    paddingBottom: 12
+  },
   popUpContainer: {
     paddingVertical: 15,
     backgroundColor: COLOR.WHITE,

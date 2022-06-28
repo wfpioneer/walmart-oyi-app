@@ -15,14 +15,15 @@ interface CustomModalProps {
   animationType?:'fade' | 'slide' | 'none';
   children: ReactNode | ReactElement;
   isVisible: boolean;
-  modalType: 'Error' | 'Form' | 'Popup';
+  modalType: 'Error' | 'Form' | 'FormHeader' |'Popup';
   onClose: () => void;
 }
 
 const styleSelector = {
   Error: styles.errorContainer,
   Form: styles.contentContainer,
-  Popup: styles.popUpContainer
+  Popup: styles.popUpContainer,
+  FormHeader: styles.formHeaderContainer
 };
 
 export const ModalCloseIcon = <MaterialCommunityIcon name="close" size={16} color={COLOR.GREY_500} />;
@@ -64,8 +65,8 @@ export const ActivityModalComponent = (): JSX.Element => {
   const renderContentView = () => (
     <View style={styles.infoView}>
       <MaterialIcons name="info" size={30} color={COLOR.MAIN_THEME_COLOR} style={styles.normalText} />
-      <Text style={styles.titleText}>{modalContent.title}</Text>
-      <Text style={styles.normalText}>{modalContent.text}</Text>
+      <Text style={styles.titleText}>{modalContent ? modalContent.title : ''}</Text>
+      <Text style={styles.normalText}>{modalContent ? modalContent.text : ''}</Text>
       <TouchableOpacity style={styles.okButton} onPress={() => dispatch(hideInfoModal())}>
         <Text style={styles.okText}>{strings('GENERICS.OK')}</Text>
       </TouchableOpacity>
