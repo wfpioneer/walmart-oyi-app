@@ -69,8 +69,8 @@ export default StyleSheet.create({
     width: '80%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLOR.YELLOW,
-    borderRadius: 7.5,
+    backgroundColor: COLOR.WHITE,
+    borderRadius: 8,
     paddingBottom: 12
   },
   popUpContainer: {

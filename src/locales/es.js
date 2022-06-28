@@ -309,7 +309,7 @@ export default {
     CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo',
     PALLET_MANAGEMENT: 'Administración de Pallet',
     LOCATION_MGMT_EDIT: 'Editar Administración de Pallet',
-    SCAN_LOCATION_HEADER: 'Ubicación De Escaneo' // TODO spanish translation
+    SCAN_LOCATION_HEADER: 'Ubicación De Escaneo'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -335,7 +335,8 @@ export default {
     REPORTED_DATE: 'Fecha Reportada',
     REPORTED_BY: 'Reportado Por',
     ADD_LOCATION: 'Agregar Ubicación',
-    DELETE_PALLLET: 'Eliminar Pallet'
+    DELETE_PALLLET: 'Eliminar Pallet',
+    DELETE_PALLET_CONFIRMATION: 'Are you sure you want to delete the pallet?' // TODO SPANISH TRANSLATION
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
