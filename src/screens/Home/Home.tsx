@@ -7,6 +7,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AsyncState } from '../../models/AsyncState';
+import { Configurations } from '../../models/User';
 import { RootState } from '../../state/reducers/RootReducer';
 import styles from './Home.style';
 import { barcodeEmitter } from '../../utils/scannerUtils';
@@ -29,6 +30,7 @@ import { mockMissingPalletWorklistSummary } from '../../mockData/mockWorklistSum
 
 const mapStateToProps = (state: RootState) => ({
   userName: state.User.additional.displayName,
+  userConfig: state.User.configs,
   isManualScanEnabled: state.Global.isManualScanEnabled,
   worklistSummaryApiState: state.async.getWorklistSummary
 });
@@ -53,6 +55,7 @@ interface HomeScreenProps {
   navigation: StackNavigationProp<any>;
   updateFilterExceptions: (worklistTypes: string[]) => void;
   route: RouteProp<any, string>;
+  userConfig: Configurations
 }
 
 interface HomeScreenState {
@@ -148,6 +151,11 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const renderGoalCircles = () => data.map((goal, index) => {
       const frequency = goal.worklistGoal === 'DAILY' ? strings('GENERICS.DAILY') : '';
       const key = `${goal.worklistGoal}-${index}`;
+      const isMissingPalletWorklistEnabled = this.props.userConfig.enableMpWorklist;
+
+      if (!isMissingPalletWorklistEnabled && goal.worklistTypes.find(worklist => worklist.worklistType === 'MP')) {
+        return null;
+      }
 
       return (
         <GoalCircle
@@ -165,7 +173,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const dataSummary = data[this.state.activeGoal];
     const renderWorklistCards = () => dataSummary.worklistTypes
       .map(worklist => {
-        const worklistType = exceptionTypeToDisplayString(worklist?.worklistType.toUpperCase() ?? '');
+        const worklistType = worklist.worklistType === 'MP'
+          ? strings('EXCEPTION.MISSING_PALLETS')
+          : exceptionTypeToDisplayString(worklist?.worklistType.toUpperCase() ?? '');
 
         // TODO: Needs to navigate to new Missing worklist Landing page if worklistType is MP
         const onWorklistCardPress = () => {

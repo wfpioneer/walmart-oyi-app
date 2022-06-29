@@ -27,7 +27,8 @@ export const initialState: User = {
     backupCategories: '',
     picking: false,
     areas: [],
-    enableAreaFilter: false
+    enableAreaFilter: false,
+    enableMpWorklist: false
   }
 };
 
@@ -60,7 +61,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           backupCategories: action.payload.backupCategories,
           picking: action.payload.picking,
           areas: action.payload.areas || [],
-          enableAreaFilter: action.payload.enableAreaFilter || false
+          enableAreaFilter: action.payload.enableAreaFilter || false,
+          enableMpWorklist: action.payload.enableMpWorklist || false
         }
       };
     default:

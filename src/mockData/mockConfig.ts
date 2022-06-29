@@ -26,5 +26,6 @@ export const mockConfig: Configurations = {
   backupCategories: '',
   picking: false,
   areas: mockAreas,
-  enableAreaFilter: false
+  enableAreaFilter: false,
+  enableMpWorklist: false
 };
