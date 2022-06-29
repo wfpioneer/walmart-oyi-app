@@ -1007,11 +1007,6 @@ Array [
           "selected": true,
           "value": "NSFL",
         },
-        Object {
-          "display": "[missing \\"en.EXCEPTION.MISSING_PALLETS\\" translation]",
-          "selected": false,
-          "value": "MP",
-        },
       ]
     }
     getItem={[Function]}
@@ -1357,60 +1352,6 @@ Array [
             }
           >
             [missing "en.EXCEPTION.NSFL" translation]
-          </Text>
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          accessible={true}
-          collapsable={false}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "alignItems": "center",
-              "flex": 1,
-              "flexDirection": "row",
-              "height": 40,
-              "justifyContent": "flex-start",
-              "opacity": 1,
-            }
-          }
-          testID="exception button"
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "justifyContent": "center",
-                "width": "10%",
-              }
-            }
-          >
-            <Icon
-              color="#0071e9"
-              name="checkbox-blank-circle-outline"
-              size={15}
-            />
-          </View>
-          <Text
-            numberOfLines={2}
-            style={
-              Object {
-                "width": "90%",
-              }
-            }
-          >
-            [missing "en.EXCEPTION.MISSING_PALLETS" translation]
           </Text>
         </View>
       </View>
