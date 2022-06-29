@@ -151,7 +151,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const renderGoalCircles = () => data.map((goal, index) => {
       const frequency = goal.worklistGoal === 'DAILY' ? strings('GENERICS.DAILY') : '';
       const key = `${goal.worklistGoal}-${index}`;
-      const isMissingPalletWorklistEnabled = this.props.userConfig.enableMpWorklist;
+      const isMissingPalletWorklistEnabled = this.props.userConfig.palletWorklists;
 
       if (!isMissingPalletWorklistEnabled && goal.worklistTypes.find(worklist => worklist.worklistType === 'MP')) {
         return null;

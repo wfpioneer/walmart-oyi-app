@@ -15,7 +15,7 @@ export interface ConfigResponse {
   picking: boolean;
   areas: area[];
   enableAreaFilter: boolean;
-  enableMpWorklist: boolean;
+  palletWorklists: boolean;
 }
 
 export default class ConfigService {

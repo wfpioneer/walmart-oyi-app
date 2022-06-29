@@ -28,7 +28,7 @@ export const initialState: User = {
     picking: false,
     areas: [],
     enableAreaFilter: false,
-    enableMpWorklist: false
+    palletWorklists: false
   }
 };
 
@@ -62,7 +62,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           picking: action.payload.picking,
           areas: action.payload.areas || [],
           enableAreaFilter: action.payload.enableAreaFilter || false,
-          enableMpWorklist: action.payload.enableMpWorklist || false
+          palletWorklists: action.payload.palletWorklists || false
         }
       };
     default:

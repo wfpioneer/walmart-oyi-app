@@ -139,7 +139,7 @@ describe('HomeScreen', () => {
     it('renders worklist summaries when worklistApiState.result.data has summaries and missing pallet enabled', () => {
       props = {
         ...homeScreenProps,
-        userConfig: { ...mockConfig, enableMpWorklist: true },
+        userConfig: { ...mockConfig, palletWorklists: true },
         worklistSummaryApiState: {
           ...defaultAsyncState,
           result: {

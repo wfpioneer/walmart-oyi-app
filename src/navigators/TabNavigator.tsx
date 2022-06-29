@@ -30,7 +30,7 @@ const TabNavigator = (): JSX.Element => {
   const user = useTypedSelector(state => state.User);
   const selectedAmount = useTypedSelector(state => state.Approvals.selectedItemQty);
   const dispatch = useDispatch();
-  const { enableMpWorklist } = user.configs;
+  const { palletWorklists } = user.configs;
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -62,7 +62,7 @@ const TabNavigator = (): JSX.Element => {
 
       <Tab.Screen
         name={strings('WORKLIST.WORKLIST')}
-        component={enableMpWorklist ? WorklistHomeNavigator : WorklistNavigator}
+        component={palletWorklists ? WorklistHomeNavigator : WorklistNavigator}
       />
 
       {isToolsEnabled(user.features, user.configs)
