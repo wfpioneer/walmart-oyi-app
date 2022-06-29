@@ -336,7 +336,7 @@ export default {
     REPORTED_BY: '报告人',
     ADD_LOCATION: '添加位置',
     DELETE_PALLLET: '删除卡板',
-    DELETE_PALLET_CONFIRMATION: 'Are you sure you want to delete the pallet?' // TODO MANDARIN TRANSLATION
+    DELETE_PALLET_CONFIRMATION: '确定要删除此卡板吗?'
   },
   SELECTLOCATIONTYPE: {
     TITLE: '选择位置类型',

@@ -30,7 +30,9 @@ export const styles = StyleSheet.create({
     backgroundColor: COLOR.MAIN_THEME_COLOR,
     justifyContent: 'flex-start',
     width: '100%',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8
   },
   delText: {
     textAlign: 'center',

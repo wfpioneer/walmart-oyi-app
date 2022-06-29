@@ -336,7 +336,7 @@ export default {
     REPORTED_BY: 'Reportado Por',
     ADD_LOCATION: 'Agregar Ubicación',
     DELETE_PALLLET: 'Eliminar Pallet',
-    DELETE_PALLET_CONFIRMATION: 'Are you sure you want to delete the pallet?' // TODO SPANISH TRANSLATION
+    DELETE_PALLET_CONFIRMATION: '¿Estás seguro que quieres eliminar el Pallet?'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',
