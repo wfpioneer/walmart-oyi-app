@@ -166,14 +166,15 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const renderWorklistCards = () => dataSummary.worklistTypes
       .map(worklist => {
         const worklistType = exceptionTypeToDisplayString(worklist?.worklistType.toUpperCase() ?? '');
+        const isMissingPalletWorklistType = worklist?.worklistType === 'MP';
 
-        // TODO: Needs to navigate to new Missing worklist Landing page if worklistType is MP
         const onWorklistCardPress = () => {
           trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
           this.props.updateFilterExceptions([worklist.worklistType]);
-          validateSession(this.props.navigation, this.props.route.name).then(() => {
-            this.props.navigation.navigate(strings('WORKLIST.WORKLIST'));
-          }).catch(() => {});
+          validateSession(this.props.navigation, this.props.route.name).then(() => (isMissingPalletWorklistType
+            ? this.props.navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' })
+            : this.props.navigation.navigate(strings('WORKLIST.WORKLIST'))))
+            .catch(() => {});
         };
 
         const calculationValue = (worklist.completedItems / worklist.totalItems) * 100;
