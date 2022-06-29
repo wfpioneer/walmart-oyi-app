@@ -71,11 +71,7 @@ export const MissingPalletWorklistNavigatorStack = (props: MissingPalletWorklist
         component={MissingPalletWorklistTabs}
         options={{
           headerTitle: strings('WORKLIST.WORKLIST'),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled)}
-            </View>
-          )
+          headerRight: () => kebabMenuButton()
         }}
       />
       <Stack.Screen
