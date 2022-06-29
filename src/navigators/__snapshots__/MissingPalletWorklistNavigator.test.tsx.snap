@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MissingPalletWorklist Navigator Renders and Calls the Manual Scan Button 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="manual-scan"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 15,
+      }
+    }
+  >
+    <Icon
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+  </View>
+</View>
+`;
+
+exports[`MissingPalletWorklist Navigator Renders the MissingPalletWorklist Navigator 1`] = `
+<StackNavigator
+  headerMode="float"
+  screenOptions={[Function]}
+>
+  <Screen
+    component={[Function]}
+    name="MissingPalletWorklistTabs"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.WORKLIST.WORKLIST\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="ScanPallet"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.WORKLIST.SCAN_PALLET\\" translation]",
+      }
+    }
+  />
+</StackNavigator>
+`;
