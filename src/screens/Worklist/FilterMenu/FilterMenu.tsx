@@ -103,11 +103,23 @@ export const renderCategoryFilterCard = (
 
 export const renderExceptionFilterCard = (
   item: FilterListItem,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  filterExceptions: string[]
 ): JSX.Element => {
   const onItemPress = () => {
-    trackEvent('worklist_update_filter_exceptions', { exception: item.value });
-    return dispatch(updateFilterExceptions([item.value]));
+    if (item.selected) {
+      filterExceptions.splice(
+        filterExceptions.indexOf(item.value),
+        1
+      );
+      trackEvent('worklist_update_filter_exceptions', {
+        exception: JSON.stringify(filterExceptions)
+      });
+      return dispatch(updateFilterCategories(filterExceptions));
+    }
+    const replacementFilter = filterExceptions;
+    replacementFilter.push(item.value);
+    return dispatch(updateFilterExceptions(replacementFilter));
   };
   return (
     <TouchableOpacity
@@ -118,13 +130,13 @@ export const renderExceptionFilterCard = (
       <View style={styles.selectionView}>
         {item.selected ? (
           <MaterialCommunityIcons
-            name="checkbox-marked-circle-outline"
+            name="checkbox-marked-outline"
             size={15}
             color={COLOR.MAIN_THEME_COLOR}
           />
         ) : (
           <MaterialCommunityIcons
-            name="checkbox-blank-circle-outline"
+            name="checkbox-blank-outline"
             size={15}
             color={COLOR.MAIN_THEME_COLOR}
           />
@@ -402,7 +414,7 @@ export const RenderExceptionTypeCard = (props: {
       {exceptionOpen && (
         <FlatList
           data={exceptionMap}
-          renderItem={({ item }) => renderExceptionFilterCard(item, dispatch)}
+          renderItem={({ item }) => renderExceptionFilterCard(item, dispatch, filterExceptions)}
           style={styles.categoryList}
           keyExtractor={(item: any) => item.value}
         />
