@@ -82,7 +82,7 @@ export const MissingPalletWorklistNavigatorStack = (props: MissingPalletWorklist
         name="ScanPallet"
         component={ScanPallet}
         options={{
-          headerTitle: strings('WORKLIST.WORKLIST'),
+          headerTitle: strings('WORKLIST.SCAN_PALLET'),
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderScanButton(dispatch, isManualScanEnabled)}
