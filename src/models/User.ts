@@ -27,6 +27,7 @@ export interface Configurations {
   picking: boolean;
   areas: area[];
   enableAreaFilter: boolean;
+  palletWorklists: boolean;
 }
 
 export interface area {
