@@ -1,4 +1,6 @@
-import React, { EffectCallback, useEffect, useState } from 'react';
+import React, {
+  EffectCallback, useEffect, useMemo, useRef, useState
+} from 'react';
 import {
   ActivityIndicator,
   FlatList, Platform, Pressable, SafeAreaView, Text, TouchableOpacity, View
@@ -7,19 +9,21 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import Toast from 'react-native-toast-message';
+import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import Button from '../../components/buttons/Button';
 import PickPalletInfoCard from '../../components/PickPalletInfoCard/PickPalletInfoCard';
 import SalesFloorItemCard, { MAX } from '../../components/SalesFloorItemCard/SalesFloorItemCard';
 import { PickingState } from '../../state/reducers/Picking';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { updatePicks } from '../../state/actions/Picking';
+import { showPickingMenu, updatePicks } from '../../state/actions/Picking';
 import { PickAction, PickListItem, PickStatus } from '../../models/Picking.d';
 import { strings } from '../../locales';
 import styles from './SalesFloorWorkflow.style';
-import { PalletItem, PalletItemDetails } from '../../models/PalletManagementTypes';
+import { Pallet, PalletItem, PalletItemDetails } from '../../models/PalletManagementTypes';
 import { UseStateType } from '../../models/Generics.d';
 import { AsyncState } from '../../models/AsyncState';
 import {
@@ -34,9 +38,10 @@ import {
   UPDATE_PICKLIST_STATUS
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
-import { setPerishableCategories } from '../../state/actions/PalletManagement';
+import { setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { setPrintingPalletLabel } from '../../state/actions/Print';
 
 // eslint-disable-next-line no-shadow
 export enum ExpiryPromptShow {
@@ -675,28 +680,78 @@ const SalesFloorWorkflow = () => {
   const updateItemsState = useState(false);
   const deleteItemsState = useState(false);
 
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const snapPoints = useMemo(() => ['21%'], []);
+
+  useEffect(() => {
+    if (navigation.isFocused() && bottomSheetModalRef.current) {
+      if (pickingState.pickingMenu) {
+        bottomSheetModalRef.current.present();
+      } else {
+        bottomSheetModalRef.current.dismiss();
+      }
+    }
+  }, [pickingState.pickingMenu]);
+
+  const handlePrintPallet = () => {
+    dispatch(showPickingMenu(false));
+    bottomSheetModalRef.current?.dismiss();
+    const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
+    const palletDetails: Pallet = {
+      palletInfo: {
+        id: selectedPicks[0].palletId
+      },
+      items: []
+    };
+    dispatch(setupPallet(palletDetails));
+    dispatch(setPrintingPalletLabel());
+    navigation.navigate('PrintPriceSign');
+  };
+
   return (
-    <SalesFloorWorkflowScreen
-      pickingState={pickingState}
-      dispatch={dispatch}
-      navigation={navigation}
-      updatePicklistStatusApi={updatePicklistStatusApi}
-      useEffectHook={useEffect}
-      palletDetailsApi={palletDetailsApi}
-      palletConfigApi={palletConfigApi}
-      expirationState={expirationState}
-      perishableItemsState={perishableItemsState}
-      perishableCategories={perishableCategories}
-      backupCategories={backupCategories}
-      showExpiryPromptState={showExpiryPromptState}
-      configCompleteState={configCompleteState}
-      showActivity={showActivity}
-      updatePalletItemsApi={updatePalletItemsApi}
-      deletePalletItemsApi={deletePalletItemsApi}
-      completePalletState={completePalletState}
-      updateItemsState={updateItemsState}
-      deleteItemsState={deleteItemsState}
-    />
+    <BottomSheetModalProvider>
+      <TouchableOpacity
+        onPress={() => dispatch(showPickingMenu(!pickingState.pickingMenu))}
+        activeOpacity={1}
+        disabled={!pickingState.pickingMenu}
+        style={pickingState.pickingMenu ? styles.disabledContainer : styles.safeAreaView}
+      >
+        <SalesFloorWorkflowScreen
+          pickingState={pickingState}
+          dispatch={dispatch}
+          navigation={navigation}
+          updatePicklistStatusApi={updatePicklistStatusApi}
+          useEffectHook={useEffect}
+          palletDetailsApi={palletDetailsApi}
+          palletConfigApi={palletConfigApi}
+          expirationState={expirationState}
+          perishableItemsState={perishableItemsState}
+          perishableCategories={perishableCategories}
+          backupCategories={backupCategories}
+          showExpiryPromptState={showExpiryPromptState}
+          configCompleteState={configCompleteState}
+          showActivity={showActivity}
+          updatePalletItemsApi={updatePalletItemsApi}
+          deletePalletItemsApi={deletePalletItemsApi}
+          completePalletState={completePalletState}
+          updateItemsState={updateItemsState}
+          deleteItemsState={deleteItemsState}
+        />
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          snapPoints={snapPoints}
+          index={0}
+          style={styles.bottomSheetModal}
+          onDismiss={() => dispatch(showPickingMenu(false))}
+        >
+          <BottomSheetPrintCard
+            isVisible={true}
+            onPress={handlePrintPallet}
+            text={strings('PALLET.PRINT_PALLET')}
+          />
+        </BottomSheetModal>
+      </TouchableOpacity>
+    </BottomSheetModalProvider>
   );
 };
 

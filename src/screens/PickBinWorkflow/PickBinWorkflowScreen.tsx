@@ -1,13 +1,15 @@
 import React, {
-  Dispatch, EffectCallback, useEffect, useState
+  Dispatch, EffectCallback, useEffect, useMemo, useRef, useState
 } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import {
   NavigationProp, useNavigation
 } from '@react-navigation/native';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import { COLOR } from '../../themes/Color';
 import Button from '../../components/buttons/Button';
 import PickPalletInfoCard from '../../components/PickPalletInfoCard/PickPalletInfoCard';
@@ -22,11 +24,14 @@ import {
   UPDATE_PICKLIST_STATUS
 } from '../../state/actions/asyncAPI';
 import { updatePalletNotFound, updatePicklistStatus } from '../../state/actions/saga';
-import { updatePicks } from '../../state/actions/Picking';
+import { showPickingMenu, updatePicks } from '../../state/actions/Picking';
 import { addPallet } from '../../state/actions/Binning';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { CustomModalComponent } from '../Modal/Modal';
 import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
+import { setPrintingPalletLabel } from '../../state/actions/Print';
+import { setupPallet } from '../../state/actions/PalletManagement';
+import { Pallet } from '../../models/PalletManagementTypes';
 
 interface PBWorkflowProps {
   userFeatures: string[];
@@ -397,21 +402,71 @@ const PickBinWorkflow = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const snapPoints = useMemo(() => ['21%'], []);
+
+  useEffect(() => {
+    if (navigation.isFocused() && bottomSheetModalRef.current) {
+      if (picking.pickingMenu) {
+        bottomSheetModalRef.current.present();
+      } else {
+        bottomSheetModalRef.current.dismiss();
+      }
+    }
+  }, [picking.pickingMenu]);
+
+  const handlePrintPallet = () => {
+    dispatch(showPickingMenu(false));
+    bottomSheetModalRef.current?.dismiss();
+    const selectedPicks = picking.pickList.filter(pick => picking.selectedPicks.includes(pick.id));
+    const palletDetails: Pallet = {
+      palletInfo: {
+        id: selectedPicks[0].palletId
+      },
+      items: []
+    };
+    dispatch(setupPallet(palletDetails));
+    dispatch(setPrintingPalletLabel());
+    navigation.navigate('PrintPriceSign');
+  };
+
   return (
-    <PickBinWorkflowScreen
-      userFeatures={userFeatures}
-      userId={userId}
-      pickingState={picking}
-      updatePicklistStatusApi={updatePicklistStatusApi}
-      updatePalletNotFoundApi={updatePalletNotFoundApi}
-      useEffectHook={useEffect}
-      dispatch={dispatch}
-      navigation={navigation}
-      selectedPicklistAction={selectedPicklistAction}
-      setSelectedPicklistAction={setSelectedPicklistAction}
-      showContinueActionDialog={showContinueActionDialog}
-      setShowContinueActionDialog={setShowContinueActionDialog}
-    />
+    <BottomSheetModalProvider>
+      <TouchableOpacity
+        onPress={() => dispatch(showPickingMenu(!picking.pickingMenu))}
+        activeOpacity={1}
+        disabled={!picking.pickingMenu}
+        style={picking.pickingMenu ? styles.disabledContainer : styles.safeAreaView}
+      >
+        <PickBinWorkflowScreen
+          userFeatures={userFeatures}
+          userId={userId}
+          pickingState={picking}
+          updatePicklistStatusApi={updatePicklistStatusApi}
+          updatePalletNotFoundApi={updatePalletNotFoundApi}
+          useEffectHook={useEffect}
+          dispatch={dispatch}
+          navigation={navigation}
+          selectedPicklistAction={selectedPicklistAction}
+          setSelectedPicklistAction={setSelectedPicklistAction}
+          showContinueActionDialog={showContinueActionDialog}
+          setShowContinueActionDialog={setShowContinueActionDialog}
+        />
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          snapPoints={snapPoints}
+          index={0}
+          style={styles.bottomSheetModal}
+          onDismiss={() => dispatch(showPickingMenu(false))}
+        >
+          <BottomSheetPrintCard
+            isVisible={true}
+            onPress={handlePrintPallet}
+            text={strings('PALLET.PRINT_PALLET')}
+          />
+        </BottomSheetModal>
+      </TouchableOpacity>
+    </BottomSheetModalProvider>
   );
 };
 
