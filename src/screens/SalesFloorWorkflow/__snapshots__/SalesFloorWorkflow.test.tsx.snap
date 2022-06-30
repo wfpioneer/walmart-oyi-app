@@ -203,7 +203,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
     />
     <Button
       backgroundColor="#0071e9"
-      disabled={false}
+      disabled={true}
       height={45}
       onPress={[Function]}
       radius={5}
@@ -476,7 +476,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
     />
     <Button
       backgroundColor="#0071e9"
-      disabled={false}
+      disabled={true}
       height={45}
       onPress={[Function]}
       radius={5}
@@ -709,7 +709,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
     />
     <Button
       backgroundColor="#0071e9"
-      disabled={false}
+      disabled={true}
       height={45}
       onPress={[Function]}
       radius={5}
