@@ -335,7 +335,7 @@ export default {
     REPORTED_DATE: 'Fecha Reportada',
     REPORTED_BY: 'Reportado Por',
     ADD_LOCATION: 'Agregar Ubicación',
-    DELETE_PALLLET: 'Eliminar Pallet',
+    DELETE_PALLET: 'Eliminar Pallet',
     DELETE_PALLET_CONFIRMATION: '¿Estás seguro que quieres eliminar el Pallet?'
   },
   SELECTLOCATIONTYPE: {
