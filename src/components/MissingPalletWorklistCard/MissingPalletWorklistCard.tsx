@@ -7,7 +7,7 @@ import Button from '../buttons/Button';
 import styles from './MissingPalletWorklistCard.style';
 
 interface MissingPalletWorklistCardProps {
- palletId: string;
+ palletId: number;
  reportedDate: string;
  lastLocation: string;
  reportedBy: string;

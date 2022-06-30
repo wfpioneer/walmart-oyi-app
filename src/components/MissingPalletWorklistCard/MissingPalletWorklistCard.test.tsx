@@ -8,7 +8,7 @@ describe('Tests rendering MissingPalletWorklistCard', () => {
   it('Renders the MissingPalletWorklistCard', () => {
     const { toJSON } = render(
       <MissingPalletWorklistCard
-        palletId="7988"
+        palletId={7988}
         reportedBy="vn51wu8"
         reportedDate="26/06/2022"
         lastLocation="A1-1"
@@ -23,7 +23,7 @@ describe('Tests rendering MissingPalletWorklistCard', () => {
   it('Renders the MissingPalletWorklistCard with expanded prop as true', () => {
     const { toJSON } = render(
       <MissingPalletWorklistCard
-        palletId="7989"
+        palletId={7989}
         reportedBy="vn51wu8"
         reportedDate="26/06/2022"
         lastLocation="A1-3"
@@ -41,7 +41,7 @@ describe('Tests rendering MissingPalletWorklistCard', () => {
     const mockNavigateCallback = jest.fn();
     const { getByTestId } = render(
       <MissingPalletWorklistCard
-        palletId="7989"
+        palletId={7989}
         reportedBy="vn51wu8"
         reportedDate="26/06/2022"
         lastLocation="A1-3"
