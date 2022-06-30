@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { mockConfig } from '../../mockData/mockConfig';
 import {
   mockAllCompleteWorklistSummaries,
   mockHalfCompleteWorklistSummaries,
@@ -40,7 +41,8 @@ const homeScreenProps: any = {
   getWorklistSummary: jest.fn(),
   navigation: navigationProp,
   updateFilterExceptions: jest.fn(),
-  route: jest.fn()
+  route: jest.fn(),
+  userConfig: mockConfig
 };
 
 // opt out of type checking in order to create mocks that don't exactly match
@@ -119,6 +121,25 @@ describe('HomeScreen', () => {
     it('renders worklist summaries when worklistApiState.result.data has summaries (items 50% complete)', () => {
       props = {
         ...homeScreenProps,
+        worklistSummaryApiState: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: mockHalfCompleteWorklistSummaries
+          }
+        }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<HomeScreen
+        {...props}
+      />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('renders worklist summaries when worklistApiState.result.data has summaries and missing pallet enabled', () => {
+      props = {
+        ...homeScreenProps,
+        userConfig: { ...mockConfig, palletWorklists: true },
         worklistSummaryApiState: {
           ...defaultAsyncState,
           result: {
