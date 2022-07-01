@@ -22,6 +22,8 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
         Object {
           "backgroundColor": "#0071e9",
           "borderBottomWidth": 1,
+          "borderTopLeftRadius": 8,
+          "borderTopRightRadius": 8,
           "justifyContent": "flex-start",
           "width": "100%",
         }

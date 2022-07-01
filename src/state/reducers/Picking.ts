@@ -9,6 +9,7 @@ import {
   SET_PICK_CREATE_ITEM,
   SET_PICK_CREATE_RESERVE,
   SET_SELECTED_TAB,
+  SHOW_PICKING_MENU,
   UPDATE_PICKS
 } from '../actions/Picking';
 import Location from '../../models/Location';
@@ -20,6 +21,7 @@ export interface PickingState {
   pickCreateFloorLocations: Location[];
   pickCreateReserveLocations: Location[];
   selectedTab: Tabs;
+  pickingMenu: boolean
 }
 
 const initialState: PickingState = {
@@ -35,7 +37,8 @@ const initialState: PickingState = {
   },
   pickCreateFloorLocations: [],
   pickCreateReserveLocations: [],
-  selectedTab: Tabs.PICK
+  selectedTab: Tabs.PICK,
+  pickingMenu: false
 };
 
 export const Picking = (
@@ -100,6 +103,11 @@ export const Picking = (
       return {
         ...state,
         selectedTab: action.payload
+      };
+    case SHOW_PICKING_MENU:
+      return {
+        ...state,
+        pickingMenu: action.payload
       };
     case RESET_PICKLIST:
       return initialState;
