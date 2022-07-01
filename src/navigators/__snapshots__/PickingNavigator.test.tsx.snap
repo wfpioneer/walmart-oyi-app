@@ -57,6 +57,7 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
     name="PickBinWorkflow"
     options={
       Object {
+        "headerLeft": [Function],
         "headerRight": [Function],
         "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
       }
@@ -67,6 +68,7 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
     name="SalesFloorWorkflow"
     options={
       Object {
+        "headerLeft": [Function],
         "headerRight": [Function],
         "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
       }
