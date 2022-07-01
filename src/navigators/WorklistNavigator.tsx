@@ -77,8 +77,7 @@ export const WorklistNavigator = (): JSX.Element => {
       onChange={isOpen => {
         if (!isOpen && menuOpen) {
           dispatch(toggleMenu(false));
-        }
-        if (isOpen && !menuOpen) {
+        } else if (isOpen && !menuOpen) {
           dispatch(toggleMenu(true));
         }
       }}
