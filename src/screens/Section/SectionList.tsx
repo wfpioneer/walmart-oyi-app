@@ -490,8 +490,8 @@ const SectionList = (): JSX.Element => {
   const dispatch = useDispatch();
   const route = useRoute();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const managerSnapPoints = useMemo(() => ['60%'], []);
-  const associateSnapPoints = useMemo(() => ['30%'], []);
+  const managerSnapPoints = useMemo(() => ['65%'], []);
+  const associateSnapPoints = useMemo(() => ['45%'], []);
   const deleteAisleApi = useTypedSelector(state => state.async.deleteAisle);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [isClearAisle, setIsClearAisle] = useState(false);

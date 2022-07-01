@@ -283,7 +283,7 @@ const ZoneList = (): JSX.Element => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['15%'], []);
+  const snapPoints = useMemo(() => ['25%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {

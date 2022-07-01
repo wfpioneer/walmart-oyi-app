@@ -75,7 +75,8 @@ export default {
     NEGATIVE_ON_HANDS: 'Existencia Negativa',
     CANCELLED: 'Cancelados',
     NSFL: 'Sin Ubicación en Piso de Ventas',
-    UNKNOWN: 'desconocida'
+    UNKNOWN: 'desconocida',
+    MISSING_PALLETS: 'Pallets Faltantes'
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',
@@ -307,7 +308,8 @@ export default {
     CLEAR_AISLE_ITEMS_SUCCEED: 'Todos los artículos seleccionados fueron limpiados del pasillo',
     CLEAR_AISLE_ITEMS_FAIL: 'Hubo un error limpiando artículos del pasillo. Por favor inténtalo de nuevo',
     PALLET_MANAGEMENT: 'Administración de Pallet',
-    LOCATION_MGMT_EDIT: 'Editar Administración de Pallet'
+    LOCATION_MGMT_EDIT: 'Editar Administración de Pallet',
+    SCAN_LOCATION_HEADER: 'Ubicación De Escaneo'
   },
   WORKLIST: {
     WORKLIST: 'Lista de Trabajo',
@@ -319,7 +321,22 @@ export default {
     TODO: 'Que hacer',
     COMPLETED: 'Terminado',
     WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo',
-    AREA: 'Área'
+    AREA: 'Área',
+    ITEM_WORKLIST: 'Lista De Articulos',
+    PALLET_WORKLIST: 'Lista De Pallet',
+    SCAN_PALLET: 'Escanea Pallet',
+    SCAN_PALLET_LABEL: 'Escanea la etiqueta del pallet para continuar',
+    SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet de la lista'
+  },
+  MISSING_PALLET_WORKLIST: {
+    MISSING_PALLET_LABEL: 'Pallets Faltantes',
+    PALLET_ID: 'Pallet ID',
+    LAST_LOCATION: 'Última Ubicación',
+    REPORTED_DATE: 'Fecha Reportada',
+    REPORTED_BY: 'Reportado Por',
+    ADD_LOCATION: 'Agregar Ubicación',
+    DELETE_PALLET: 'Eliminar Pallet',
+    DELETE_PALLET_CONFIRMATION: '¿Estás seguro que quieres eliminar el Pallet?'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Seleccione el tipo de ubicación',

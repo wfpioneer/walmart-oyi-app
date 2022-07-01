@@ -75,7 +75,8 @@ export default {
     NEGATIVE_ON_HANDS: 'Negative On-Hands',
     CANCELLED: 'Cancelled',
     NSFL: 'No Sales Floor Location',
-    UNKNOWN: 'Unknown'
+    UNKNOWN: 'Unknown',
+    MISSING_PALLETS: 'Missing Pallets'
   },
   ITEM: {
     TITLE: 'Review item details',
@@ -308,7 +309,8 @@ export default {
     CLEAR_AISLE_ITEMS_SUCCEED: 'All selected items successfully cleared from this aisle',
     CLEAR_AISLE_ITEMS_FAIL: 'There was an error clearing items from this aisle.  Please try again',
     PALLET_MANAGEMENT: 'Pallet Management',
-    LOCATION_MGMT_EDIT: 'Location Management Edit'
+    LOCATION_MGMT_EDIT: 'Location Management Edit',
+    SCAN_LOCATION_HEADER: 'Scan Location'
   },
   WORKLIST: {
     WORKLIST: 'Work List',
@@ -320,7 +322,22 @@ export default {
     TODO: 'Todo',
     COMPLETED: 'Completed',
     WORKLIST_ITEM_API_ERROR: 'There was an error retrieving worklist items.\nPlease try again.',
-    AREA: 'Area'
+    AREA: 'Area',
+    ITEM_WORKLIST: 'Item Work List',
+    PALLET_WORKLIST: 'Pallet Work List',
+    SCAN_PALLET: 'Scan Pallet',
+    SCAN_PALLET_LABEL: 'Scan Pallet Label to continue',
+    SCAN_PALLET_ERROR: 'Pallet scanned must match pallet on worklist'
+  },
+  MISSING_PALLET_WORKLIST: {
+    MISSING_PALLET_LABEL: 'Missing Pallet',
+    PALLET_ID: 'Pallet ID',
+    LAST_LOCATION: 'Last Location',
+    REPORTED_DATE: 'Reported Date',
+    REPORTED_BY: 'Reported by',
+    ADD_LOCATION: 'Add Location',
+    DELETE_PALLET: 'Delete Pallet',
+    DELETE_PALLET_CONFIRMATION: 'Are you sure you want to delete the pallet?'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',

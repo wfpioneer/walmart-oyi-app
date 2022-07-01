@@ -75,7 +75,8 @@ export default {
     NEGATIVE_ON_HANDS: '负现货清单',
     CANCELLED: '取消状态商品清单',
     NSFL: '无楼面位置商品清单',
-    UNKNOWN: '未知错误'
+    UNKNOWN: '未知错误',
+    MISSING_PALLETS: '不在储位卡板'
   },
   ITEM: {
     TITLE: '查看商品明细',
@@ -307,7 +308,8 @@ export default {
     CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
     CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
     PALLET_MANAGEMENT: '卡板管理',
-    LOCATION_MGMT_EDIT: '编辑位置管理'
+    LOCATION_MGMT_EDIT: '编辑位置管理',
+    SCAN_LOCATION_HEADER: '扫描地点'
   },
   WORKLIST: {
     WORKLIST: '待办任务',
@@ -319,7 +321,22 @@ export default {
     TODO: '待完成',
     COMPLETED: '已完成',
     WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试',
-    AREA: '区域'
+    AREA: '区域',
+    ITEM_WORKLIST: '商品例外清单',
+    PALLET_WORKLIST: '卡板例外清单',
+    SCAN_PALLET: '扫描卡板',
+    SCAN_PALLET_LABEL: '扫描卡板标签继续操作',
+    SCAN_PALLET_ERROR: '扫描的卡板标签必须和任务清单的匹配'
+  },
+  MISSING_PALLET_WORKLIST: {
+    MISSING_PALLET_LABEL: '不在货架位卡板',
+    PALLET_ID: '卡板号',
+    LAST_LOCATION: '原位置',
+    REPORTED_DATE: '报告日期',
+    REPORTED_BY: '报告人',
+    ADD_LOCATION: '添加位置',
+    DELETE_PALLET: '删除卡板',
+    DELETE_PALLET_CONFIRMATION: '确定要删除此卡板吗?'
   },
   SELECTLOCATIONTYPE: {
     TITLE: '选择位置类型',

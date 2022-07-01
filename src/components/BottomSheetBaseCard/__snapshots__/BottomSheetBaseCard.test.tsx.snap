@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Base card render tests renders the bottom sheet base card 1`] = `
-<Memo(BottomSheetViewComponent)
+<Memo(BottomSheetView)
   style={
     Object {
       "flexDirection": "row",
@@ -20,7 +20,7 @@ exports[`Base card render tests renders the bottom sheet base card 1`] = `
       }
     }
   >
-    <Memo(BottomSheetViewComponent)
+    <Memo(BottomSheetView)
       style={
         Object {
           "alignItems": "center",
@@ -43,8 +43,8 @@ exports[`Base card render tests renders the bottom sheet base card 1`] = `
           }
         }
       />
-    </Memo(BottomSheetViewComponent)>
-    <Memo(BottomSheetViewComponent)
+    </Memo(BottomSheetView)>
+    <Memo(BottomSheetView)
       style={
         Object {
           "flex": 1,
@@ -61,7 +61,7 @@ exports[`Base card render tests renders the bottom sheet base card 1`] = `
       >
         hello
       </Text>
-    </Memo(BottomSheetViewComponent)>
+    </Memo(BottomSheetView)>
   </TouchableOpacity>
-</Memo(BottomSheetViewComponent)>
+</Memo(BottomSheetView)>
 `;

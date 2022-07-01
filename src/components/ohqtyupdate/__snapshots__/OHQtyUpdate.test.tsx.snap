@@ -139,6 +139,7 @@ Array [
     <TextInput
       keyboardType="numeric"
       onChangeText={[Function]}
+      onEndEditing={[Function]}
       style={
         Object {
           "color": "#0071e9",
@@ -420,6 +421,7 @@ Array [
     <TextInput
       keyboardType="numeric"
       onChangeText={[Function]}
+      onEndEditing={[Function]}
       style={
         Object {
           "color": "#0071e9",
@@ -712,6 +714,7 @@ Array [
     <TextInput
       keyboardType="numeric"
       onChangeText={[Function]}
+      onEndEditing={[Function]}
       style={
         Object {
           "color": "#0071e9",
@@ -951,6 +954,7 @@ Array [
     <TextInput
       keyboardType="numeric"
       onChangeText={[Function]}
+      onEndEditing={[Function]}
       style={
         Object {
           "color": "#0071e9",
@@ -1178,6 +1182,7 @@ Array [
     <TextInput
       keyboardType="numeric"
       onChangeText={[Function]}
+      onEndEditing={[Function]}
       style={
         Object {
           "color": "#0071e9",

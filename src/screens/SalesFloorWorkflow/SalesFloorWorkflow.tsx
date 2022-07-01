@@ -462,8 +462,14 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     }
   };
 
-  const isPickQtyZero = ():boolean => (
-    selectedPicks.every(pick => pick.quantityLeft === 0)
+  const isPickQtyZero = ():boolean => selectedPicks.every(pick => pick.quantityLeft === 0);
+
+  const isAnyNewInvalidPickQty = ():boolean => selectedPicks.some(
+    pick => !!pick.quantityLeft && Number.isNaN(pick.newQuantityLeft)
+  );
+
+  const isPickQtyUpdatedOrDel = ():boolean => selectedPicks.some(
+    pick => shouldDelete(pick) || shouldUpdateQty(pick)
   );
 
   const handleComplete = () => {
@@ -490,7 +496,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     const currentQuantity = getCurrentQuantity(item);
     if (item.quantityLeft && currentQuantity < MAX) {
       dispatch(updatePicks([{ ...item, newQuantityLeft: currentQuantity + 1 }]));
-    } else {
+    } else if (!item.quantityLeft) {
       dispatch(updatePicks([{ ...item, quantityLeft: 1 }]));
     }
   };
@@ -505,8 +511,14 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const handleTextChange = (text: string, item: PickListItem) => {
     const newQuantity = Number.parseInt(text, 10);
 
-    if (newQuantity && newQuantity < MAX && newQuantity > 0) {
+    if (text === '' || (newQuantity && newQuantity < MAX && newQuantity > 0)) {
       dispatch(updatePicks([{ ...item, newQuantityLeft: newQuantity }]));
+    }
+  };
+
+  const onEndEditing = (item: PickListItem) => {
+    if (typeof (item.newQuantityLeft) !== 'number' || Number.isNaN(item.newQuantityLeft)) {
+      dispatch(updatePicks([{ ...item, newQuantityLeft: item.quantityLeft }]));
     }
   };
 
@@ -554,6 +566,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         quantity={currentQuantity}
         salesFloorLocation={item.salesFloorLocationName}
         upcNbr={item.upcNbr}
+        onEndEditing={() => onEndEditing(item)}
       />
     );
   };
@@ -639,7 +652,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
           onPress={() => handleBin()}
           style={styles.actionButton}
           testId="bin"
-          disabled={isPickQtyZero() && isReadyToComplete}
+          disabled={(isPickQtyZero() && isReadyToComplete) || !isPickQtyUpdatedOrDel() || isAnyNewInvalidPickQty()}
         />
       </View>
     </SafeAreaView>

@@ -37,6 +37,8 @@ const onPalletIncrease = (
 ) => {
   if (numberOfPallets < PALLET_MAX) {
     setNumberOfPallets((preaviousState: number) => preaviousState + 1);
+  } else if (typeof (numberOfPallets) !== 'number' || Number.isNaN(numberOfPallets)) {
+    setNumberOfPallets(PALLET_MIN);
   }
 };
 
@@ -51,8 +53,17 @@ const onPalletDecrease = (
 
 const onPalletTextChange = (text: string, setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>) => {
   const newQty = parseInt(text, 10);
-  if (!Number.isNaN(newQty) && newQty >= PALLET_MIN && newQty <= PALLET_MAX) {
+  if (text === '' || (!Number.isNaN(newQty) && newQty >= PALLET_MIN && newQty <= PALLET_MAX)) {
     setNumberOfPallets(newQty);
+  }
+};
+
+const onPalletEditingEnd = (
+  numberOfPallets: number,
+  setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>
+) => {
+  if (typeof (numberOfPallets) !== 'number' || Number.isNaN(numberOfPallets)) {
+    setNumberOfPallets(1);
   }
 };
 
@@ -111,6 +122,7 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
             minValue={PALLET_MIN}
             maxValue={PALLET_MAX}
             value={numberOfPallets}
+            onEndEditing={() => onPalletEditingEnd(numberOfPallets, setNumberOfPallets)}
           />
         </View>
       ) : null}
@@ -128,7 +140,7 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          disabled={selectedSection === ''}
+          disabled={selectedSection === '' || !isNumberOfPalletsValid(numberOfPallets)}
           title={strings('PICKING.CREATE_PICK')}
           type={Button.Type.PRIMARY}
           onPress={onSubmit}

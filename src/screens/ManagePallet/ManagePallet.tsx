@@ -117,7 +117,7 @@ export const handleDecreaseQuantity = (item: PalletItem, dispatch: Dispatch<any>
 };
 
 export const handleIncreaseQuantity = (item: PalletItem, dispatch: Dispatch<any>): void => {
-  const currentQuantity = item.newQuantity || item.quantity;
+  const currentQuantity = item.newQuantity || item.quantity || 0;
   dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), currentQuantity + 1));
 };
 
@@ -135,6 +135,12 @@ export const handleTextChange = (item: PalletItem, dispatch: Dispatch<any>, text
     });
   } else {
     dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), newQuantity));
+  }
+};
+
+export const onEndEditing = (item: PalletItem, dispatch: Dispatch<any>): void => {
+  if (typeof (item.newQuantity) !== 'number' || Number.isNaN(item.newQuantity)) {
+    dispatch(setPalletItemNewQuantity(item.itemNbr.toString(), item.quantity));
   }
 };
 
@@ -187,9 +193,10 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
         markEdited={isQuantityChanged(item)}
         maxValue={9999}
         minValue={0}
-        numberOfItems={item.newQuantity || item.quantity}
+        numberOfItems={item.newQuantity}
         price={item.price}
         upc={item.upcNbr}
+        onEndEditing={() => onEndEditing(item, dispatch)}
       />
     );
   }
@@ -251,7 +258,7 @@ export const getPalletDetailsApiHook = (
           palletInfo: {
             id,
             createDate,
-            expirationDate
+            expirationDate: expirationDate && moment(expirationDate).format('DD/MM/YYYY')
           },
           items: palletItems
         };
@@ -473,6 +480,7 @@ export const getItemDetailsApiHook = (
           categoryDesc,
           itemDesc: itemName,
           quantity: 1,
+          newQuantity: 1,
           deleted: false,
           added: true
         };
@@ -579,7 +587,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
     const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
     // updated expiration date
-    const updatedExpirationDate = addExpiry ? `${moment(addExpiry).format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
+    const updatedExpirationDate = addExpiry ? `${moment(addExpiry,'DD/MM/YYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
     // Filter Items by deleted flag
     const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
       reducer.push(current.upcNbr);
@@ -615,7 +623,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
   const onDatePickerChange = (event: DateTimePickerEvent, value: Date| undefined) => {
     const { type } = event;
-    const newDate = value && moment(value).format('MM/DD/YYYY');
+    const newDate = value && moment(value).format('DD/MM/YYYY');
     setIsPickerShow(false);
     if (type === 'set' && newDate && newDate !== expirationDate) {
       dispatch(setPalletNewExpiration(newDate));
@@ -725,7 +733,7 @@ const ManagePallet = (): JSX.Element => {
   const [isPickerShow, setIsPickerShow] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ['45%'], []);
+  const snapPoints = useMemo(() => ['55%'], []);
 
   useEffect(() => {
     if (navigation.isFocused() && bottomSheetModalRef.current) {

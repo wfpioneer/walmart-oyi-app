@@ -161,6 +161,7 @@ exports[`Create Pick screen render tests renders the screen when items are move 
         maxValue={99}
         minValue={1}
         onDecreaseQty={[Function]}
+        onEndEditing={[Function]}
         onIncreaseQty={[Function]}
         onTextChange={[Function]}
         value={1}
@@ -356,6 +357,7 @@ exports[`Create Pick screen render tests renders the screen with item with floor
         maxValue={99}
         minValue={1}
         onDecreaseQty={[Function]}
+        onEndEditing={[Function]}
         onIncreaseQty={[Function]}
         onTextChange={[Function]}
         value={1}
@@ -549,6 +551,7 @@ exports[`Create Pick screen render tests renders the screen with no reserve loca
         maxValue={99}
         minValue={1}
         onDecreaseQty={[Function]}
+        onEndEditing={[Function]}
         onIncreaseQty={[Function]}
         onTextChange={[Function]}
         value={1}
@@ -740,6 +743,7 @@ exports[`Create Pick screen render tests renders the screen without floor locati
         maxValue={99}
         minValue={1}
         onDecreaseQty={[Function]}
+        onEndEditing={[Function]}
         onIncreaseQty={[Function]}
         onTextChange={[Function]}
         value={1}
