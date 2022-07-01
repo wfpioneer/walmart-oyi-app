@@ -1,5 +1,5 @@
 import React, { Dispatch } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { HeaderBackButton, StackHeaderLeftButtonProps, createStackNavigator } from '@react-navigation/stack';
 import {
   Pressable,
   TouchableOpacity,
@@ -19,6 +19,10 @@ import { setManualScan } from '../state/actions/Global';
 import styles from './PickingNavigator.style';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { Tabs } from '../models/Picking.d';
+import {
+  showPickingMenu
+} from '../state/actions/Picking';
+import { trackEvent } from '../utils/AppCenterTool';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +30,7 @@ interface PickingNavigatorProps {
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
   selectedTab: Tabs;
+  pickingMenu: boolean;
 }
 
 export const renderScanButton = (
@@ -48,8 +53,14 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
-export const kebabMenuButton = () => (
-  <Pressable onPress={() => {}} style={styles.leftButton}>
+export const kebabMenuButton = (pickingMenu: boolean, dispatch: Dispatch<any>) => (
+  <Pressable
+    onPress={() => {
+      dispatch(showPickingMenu(!pickingMenu));
+      trackEvent('picking_menu_button_click');
+    }}
+    style={styles.leftButton}
+  >
     <MaterialCommunityIcons
       name="dots-vertical"
       size={30}
@@ -64,8 +75,15 @@ export const PickingNavigatorStack = (
   const {
     dispatch,
     isManualScanEnabled,
-    selectedTab
+    selectedTab,
+    pickingMenu
   } = props;
+
+  const navigate = (hlProps: StackHeaderLeftButtonProps) => {
+    dispatch(showPickingMenu(false));
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    hlProps.canGoBack && hlProps.onPress && hlProps.onPress();
+  };
 
   let createPickTitle = '';
   if (selectedTab === Tabs.PICK) {
@@ -104,7 +122,13 @@ export const PickingNavigatorStack = (
         component={PickBinWorkflow}
         options={{
           headerTitle: strings('PICKING.PICKING'),
-          headerRight: () => kebabMenuButton()
+          headerRight: () => kebabMenuButton(pickingMenu, dispatch),
+          headerLeft: hlProps => (
+            <HeaderBackButton
+              {...hlProps}
+              onPress={() => { navigate(hlProps); }}
+            />
+          )
         }}
       />
       <Stack.Screen
@@ -112,7 +136,13 @@ export const PickingNavigatorStack = (
         component={SalesFloorWorkflow}
         options={{
           headerTitle: strings('PICKING.PICKING'),
-          headerRight: () => kebabMenuButton()
+          headerRight: () => kebabMenuButton(pickingMenu, dispatch),
+          headerLeft: hlProps => (
+            <HeaderBackButton
+              {...hlProps}
+              onPress={() => { navigate(hlProps); }}
+            />
+          )
         }}
       />
       <Stack.Screen
@@ -137,7 +167,7 @@ export const PickingNavigatorStack = (
 };
 
 const PickingNavigator = (): JSX.Element => {
-  const selectedTab = useTypedSelector(state => state.Picking.selectedTab);
+  const { selectedTab, pickingMenu } = useTypedSelector(state => state.Picking);
   const dispatch = useDispatch();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   return (
@@ -145,6 +175,7 @@ const PickingNavigator = (): JSX.Element => {
       dispatch={dispatch}
       isManualScanEnabled={isManualScanEnabled}
       selectedTab={selectedTab}
+      pickingMenu={pickingMenu}
     />
   );
 };
