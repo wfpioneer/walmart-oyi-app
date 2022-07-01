@@ -335,7 +335,8 @@ export default {
     REPORTED_DATE: '报告日期',
     REPORTED_BY: '报告人',
     ADD_LOCATION: '添加位置',
-    DELETE_PALLLET: '删除卡板'
+    DELETE_PALLET: '删除卡板',
+    DELETE_PALLET_CONFIRMATION: '确定要删除此卡板吗?'
   },
   SELECTLOCATIONTYPE: {
     TITLE: '选择位置类型',

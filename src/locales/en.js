@@ -336,7 +336,8 @@ export default {
     REPORTED_DATE: 'Reported Date',
     REPORTED_BY: 'Reported by',
     ADD_LOCATION: 'Add Location',
-    DELETE_PALLET: 'Delete Pallet'
+    DELETE_PALLET: 'Delete Pallet',
+    DELETE_PALLET_CONFIRMATION: 'Are you sure you want to delete the pallet?'
   },
   SELECTLOCATIONTYPE: {
     TITLE: 'Select type of location',
