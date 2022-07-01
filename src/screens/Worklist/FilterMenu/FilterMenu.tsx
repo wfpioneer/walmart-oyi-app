@@ -115,7 +115,7 @@ export const renderExceptionFilterCard = (
       trackEvent('worklist_update_filter_exceptions', {
         exception: JSON.stringify(filterExceptions)
       });
-      return dispatch(updateFilterCategories(filterExceptions));
+      return dispatch(updateFilterExceptions(filterExceptions));
     }
     const replacementFilter = filterExceptions;
     replacementFilter.push(item.value);
