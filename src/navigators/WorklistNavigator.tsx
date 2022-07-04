@@ -58,13 +58,19 @@ export const WorklistNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
+  const user = useTypedSelector(state => state.User);
+  const { palletWorklists } = user.configs;
 
   useEffect(() => navigation.addListener('focus', () => {
     dispatch(getWorklist());
   }), [navigation]);
 
   const navigateBack = () => {
-    navigation.navigate(strings('WORKLIST.WORKLIST'));
+    if (palletWorklists) {
+      navigation.navigate(strings('WORKLIST.WORKLIST'));
+    } else {
+      navigation.goBack();
+    }
   };
 
   const menu = (
@@ -94,13 +100,14 @@ export const WorklistNavigator = (): JSX.Element => {
           options={() => ({
             headerRight: () => renderHeaderRight(dispatch, menuOpen),
             headerTitle: strings('WORKLIST.WORKLIST'),
-            headerLeft: props => (
-              // Shouldn't need to do this, but not showing on its own for some reason
-              <HeaderBackButton
-                {...props}
-                onPress={navigateBack}
-              />
-            )
+            headerLeft: props => props.canGoBack
+            && (
+            <HeaderBackButton
+              {...props}
+              onPress={navigateBack}
+            />
+            ),
+            headerBackVisible: palletWorklists
           })}
         />
       </Stack.Navigator>
