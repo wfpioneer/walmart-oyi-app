@@ -183,7 +183,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           this.props.updateFilterExceptions([worklist.worklistType]);
           validateSession(this.props.navigation, this.props.route.name).then(() => (isMissingPalletWorklistType
             ? this.props.navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' })
-            : this.props.navigation.navigate(strings('WORKLIST.WORKLIST'))))
+            : this.props.navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' })))
             .catch(() => {});
         };
 

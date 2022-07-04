@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { HeaderBackButton, createStackNavigator } from '@react-navigation/stack';
 import { Animated, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -63,6 +63,10 @@ export const WorklistNavigator = (): JSX.Element => {
     dispatch(getWorklist());
   }), [navigation]);
 
+  const navigateBack = () => {
+    navigation.navigate(strings('WORKLIST.WORKLIST'));
+  };
+
   const menu = (
     <FilterMenu />
   );
@@ -85,10 +89,18 @@ export const WorklistNavigator = (): JSX.Element => {
         }}
       >
         <Stack.Screen
-          name={strings('WORKLIST.WORKLIST')}
+          name="ITEMWORKLIST"
           component={worklistTabs}
           options={() => ({
-            headerRight: () => renderHeaderRight(dispatch, menuOpen)
+            headerRight: () => renderHeaderRight(dispatch, menuOpen),
+            headerTitle: strings('WORKLIST.WORKLIST'),
+            headerLeft: props => (
+              // Shouldn't need to do this, but not showing on its own for some reason
+              <HeaderBackButton
+                {...props}
+                onPress={navigateBack}
+              />
+            )
           })}
         />
       </Stack.Navigator>
