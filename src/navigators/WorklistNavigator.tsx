@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Dispatch, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Animated, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -27,10 +27,7 @@ const worklistTabs = () => (
       indicatorStyle: { backgroundColor: COLOR.WHITE }
     }}
   >
-    <Tab.Screen
-      name={strings('WORKLIST.TODO')}
-      component={TodoWorklist}
-    />
+    <Tab.Screen name={strings('WORKLIST.TODO')} component={TodoWorklist} />
     <Tab.Screen
       name={strings('WORKLIST.COMPLETED')}
       component={CompletedWorklist}
@@ -38,7 +35,7 @@ const worklistTabs = () => (
   </Tab.Navigator>
 );
 
-const onFilterMenuPress = (dispatch: any, menuOpen: boolean) => {
+const onFilterMenuPress = (dispatch: Dispatch<any>, menuOpen: boolean) => {
   if (menuOpen) {
     dispatch(toggleMenu(false));
   } else {
@@ -46,7 +43,7 @@ const onFilterMenuPress = (dispatch: any, menuOpen: boolean) => {
   }
 };
 
-const renderHeaderRight = (dispatch: any, menuOpen: boolean) => (
+const renderHeaderRight = (dispatch: Dispatch<any>, menuOpen: boolean) => (
   <View style={styles.headerRightView}>
     <TouchableOpacity onPress={() => onFilterMenuPress(dispatch, menuOpen)}>
       <MaterialIcons name="filter-list" size={25} color={COLOR.WHITE} />
@@ -59,13 +56,14 @@ export const WorklistNavigator = (): JSX.Element => {
   const navigation = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
 
-  useEffect(() => navigation.addListener('focus', () => {
-    dispatch(getWorklist());
-  }), [navigation]);
-
-  const menu = (
-    <FilterMenu />
+  useEffect(
+    () => navigation.addListener('focus', () => {
+      dispatch(getWorklist());
+    }),
+    [navigation]
   );
+
+  const menu = <FilterMenu />;
   return (
     <SideMenu
       menu={menu}
@@ -76,6 +74,13 @@ export const WorklistNavigator = (): JSX.Element => {
         friction: 8,
         useNativeDriver: true
       })}
+      onChange={isOpen => {
+        if (!isOpen && menuOpen) {
+          dispatch(toggleMenu(false));
+        } else if (isOpen && !menuOpen) {
+          dispatch(toggleMenu(true));
+        }
+      }}
     >
       <Stack.Navigator
         headerMode="float"
