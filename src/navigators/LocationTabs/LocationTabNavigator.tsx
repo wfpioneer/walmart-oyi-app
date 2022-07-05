@@ -400,18 +400,6 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     };
   }, []);
 
-  if (getSectionDetailsApi.isWaiting) {
-    return (
-      <ActivityIndicator
-        animating={true}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
-
   if (getSectionDetailsApi.error) {
     return (
       <View style={styles.errorView}>
@@ -429,6 +417,18 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           <Text>{strings('GENERICS.RETRY')}</Text>
         </TouchableOpacity>
       </View>
+    );
+  }
+
+  if (getSectionDetailsApi.isWaiting || !getSectionDetailsApi.result) {
+    return (
+      <ActivityIndicator
+        animating={true}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
     );
   }
 
