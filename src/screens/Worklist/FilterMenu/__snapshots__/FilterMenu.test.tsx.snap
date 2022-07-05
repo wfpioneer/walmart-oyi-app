@@ -957,7 +957,7 @@ Array [
           }
         }
       >
-        [missing "en.EXCEPTION.NSFL" translation]
+        [missing "en.EXCEPTION.PRICE_OVERRIDE" translation]
       </Text>
     </View>
     <View
@@ -984,7 +984,7 @@ Array [
         },
         Object {
           "display": "[missing \\"en.EXCEPTION.PRICE_OVERRIDE\\" translation]",
-          "selected": false,
+          "selected": true,
           "value": "PO",
         },
         Object {
@@ -1004,7 +1004,7 @@ Array [
         },
         Object {
           "display": "[missing \\"en.EXCEPTION.NSFL\\" translation]",
-          "selected": true,
+          "selected": false,
           "value": "NSFL",
         },
       ]
@@ -1069,7 +1069,7 @@ Array [
           >
             <Icon
               color="#0071e9"
-              name="checkbox-blank-circle-outline"
+              name="checkbox-blank-outline"
               size={15}
             />
           </View>
@@ -1123,7 +1123,7 @@ Array [
           >
             <Icon
               color="#0071e9"
-              name="checkbox-blank-circle-outline"
+              name="checkbox-marked-outline"
               size={15}
             />
           </View>
@@ -1177,7 +1177,7 @@ Array [
           >
             <Icon
               color="#0071e9"
-              name="checkbox-blank-circle-outline"
+              name="checkbox-blank-outline"
               size={15}
             />
           </View>
@@ -1231,7 +1231,7 @@ Array [
           >
             <Icon
               color="#0071e9"
-              name="checkbox-blank-circle-outline"
+              name="checkbox-blank-outline"
               size={15}
             />
           </View>
@@ -1285,7 +1285,7 @@ Array [
           >
             <Icon
               color="#0071e9"
-              name="checkbox-blank-circle-outline"
+              name="checkbox-blank-outline"
               size={15}
             />
           </View>
@@ -1339,7 +1339,7 @@ Array [
           >
             <Icon
               color="#0071e9"
-              name="checkbox-marked-circle-outline"
+              name="checkbox-blank-outline"
               size={15}
             />
           </View>
@@ -1457,7 +1457,7 @@ exports[`FilterMenu Component Test the renderExceptionFilterCard component with 
   >
     <Icon
       color="#0071e9"
-      name="checkbox-marked-circle-outline"
+      name="checkbox-marked-outline"
       size={15}
     />
   </View>
@@ -1509,7 +1509,7 @@ exports[`FilterMenu Component Test the renderExceptionFilterCard component witho
   >
     <Icon
       color="#0071e9"
-      name="checkbox-blank-circle-outline"
+      name="checkbox-blank-outline"
       size={15}
     />
   </View>
@@ -1569,7 +1569,7 @@ exports[`FilterMenu Component Test the renderExceptionTypeCard and calls dispatc
         }
       }
     >
-      [missing "en.EXCEPTION.NSFL" translation]
+      [missing "en.EXCEPTION.PRICE_OVERRIDE" translation]
     </Text>
   </View>
   <View
