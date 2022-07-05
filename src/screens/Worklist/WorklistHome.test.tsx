@@ -11,6 +11,9 @@ jest.mock('@react-navigation/native', () => ({
     dispatch: jest.fn
   })
 }));
+jest.mock('react-redux', () => ({
+  useDispatch: () => jest.fn
+}));
 
 describe('WorkListHome', () => {
   afterEach(() => {
