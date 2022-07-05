@@ -108,6 +108,7 @@ export const WorklistNavigator = (): JSX.Element => {
             headerLeft: props => props.canGoBack
             && (
             <HeaderBackButton
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...props}
               onPress={navigateBack}
             />
