@@ -147,7 +147,7 @@ describe('FilterMenu Component', () => {
       selected: true
     };
     const { toJSON, getByTestId } = render(
-      renderExceptionFilterCard(mockFilterItemSelected, mockDispatch)
+      renderExceptionFilterCard(mockFilterItemSelected, mockDispatch, mockFilterExeceptions)
     );
     const exceptionButton = getByTestId('exception button');
     fireEvent.press(exceptionButton);
@@ -163,11 +163,11 @@ describe('FilterMenu Component', () => {
       selected: false
     };
     const { toJSON, getByTestId } = render(
-      renderExceptionFilterCard(mockFilterItem, mockDispatch)
+      renderExceptionFilterCard(mockFilterItem, mockDispatch, mockFilterExeceptions)
     );
     const exceptionButton = getByTestId('exception button');
     fireEvent.press(exceptionButton);
-    expect(trackEvent).toBeCalledTimes(1);
+    expect(trackEvent).toBeCalledTimes(0);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(toJSON()).toMatchSnapshot();
   });
