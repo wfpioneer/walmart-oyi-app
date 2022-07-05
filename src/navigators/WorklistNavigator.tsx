@@ -14,7 +14,7 @@ import { toggleMenu } from '../state/actions/Worklist';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
 import { strings } from '../locales';
-import { getWorklist } from '../state/actions/saga';
+import { getPalletWorklist, getWorklist } from '../state/actions/saga';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -59,6 +59,7 @@ export const WorklistNavigator = (): JSX.Element => {
   useEffect(
     () => navigation.addListener('focus', () => {
       dispatch(getWorklist());
+      dispatch(getPalletWorklist({ worklistType: ['MP'] }));
     }),
     [navigation]
   );

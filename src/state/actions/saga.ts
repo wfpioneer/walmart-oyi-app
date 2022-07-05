@@ -27,6 +27,7 @@ import { CreatePickRequest } from '../../services/Picking.service';
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
 export const GET_WORKLIST = 'SAGA/GET_WORKLIST';
+export const GET_PALLET_WORKLIST = 'SAGA/GET_PALLET_WORKLIST';
 export const EDIT_LOCATION = 'SAGA/EDIT_LOCATION';
 export const UPDATE_OH_QTY = 'SAGA/UPDATE_OH_QTY';
 export const ADD_TO_PICKLIST = 'SAGA/ADD_TO_PICKLIST';
@@ -74,6 +75,9 @@ export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
 export const hitGoogle = () => ({ type: HIT_GOOGLE } as const);
 export const getItemDetails = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS, payload } as const);
 export const getWorklist = (payload?: { worklistType?: [string] }) => ({ type: GET_WORKLIST, payload } as const);
+export const getPalletWorklist = (payload?: { worklistType?: [string] }) => (
+  { type: GET_PALLET_WORKLIST, payload } as const
+);
 export const editLocation = (payload: {
   headers?: AxiosRequestHeaders;
   upc: string;

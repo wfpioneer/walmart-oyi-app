@@ -6,6 +6,7 @@ import * as actions from '../actions/asyncAPI';
 import HitGoogleService from '../../services/HitGoogle.service';
 import GetItemDetailsService from '../../services/GetItemDetails.service';
 import GetWorklistService from '../../services/GetWorklist.service';
+import GetPalletWorklist from '../../services/GetPalletWorklist.service';
 import EditLocationService from '../../services/EditLocation.service';
 import UpdateOHQtyService from '../../services/UpdateOHQty.service';
 import AddToPicklistService from '../../services/AddToPicklist.service';
@@ -31,6 +32,11 @@ const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
   makeAsyncSaga(saga.GET_ITEM_DETAILS, actions.getItemDetails, GetItemDetailsService.getItemDetails),
   makeAsyncSaga(saga.GET_WORKLIST, actions.getWorklist, GetWorklistService.getWorklist),
+  makeAsyncSaga(
+    saga.GET_PALLET_WORKLIST,
+    actions.getPalletWorklist,
+    GetPalletWorklist.getPalletWorklist
+  ),
   makeAsyncSaga(saga.EDIT_LOCATION, actions.editLocation, EditLocationService.editLocation),
   makeAsyncSaga(saga.ADD_TO_PICKLIST, actions.addToPicklist, AddToPicklistService.addToPicklist),
   makeAsyncSaga(saga.ADD_LOCATION, actions.addLocation, AddLocationService.addLocation),
