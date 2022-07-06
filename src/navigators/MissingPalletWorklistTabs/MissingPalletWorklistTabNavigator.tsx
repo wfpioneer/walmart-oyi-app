@@ -3,12 +3,13 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { View } from 'react-native';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
+import { PalletWorkList } from '../../screens/Worklist/PalletWorklist';
 
 const Tab = createMaterialTopTabNavigator();
 
 export const MissingPalletWorklistTabNavigator = (): JSX.Element => {
   // TODO: Need to replace placeholder component
-  const TodoWorklistPlaceholder = () => <View />;
+  const TodoWorklistPlaceholder = () => <PalletWorkList />;
   const CompletedWorklistPlaceholder = () => <View />;
 
   return (

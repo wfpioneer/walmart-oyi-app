@@ -102,6 +102,9 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
     setDisplayConfirmation(true);
     deletePalletId = palletId;
   };
+
+  const handleAddLocationClick = () => navigation.navigate('ScanPallet');
+
   return (
     <View style={styles.container}>
       <CustomModalComponent
@@ -142,7 +145,7 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
             reportedBy={item.createId}
             reportedDate={item.createTS}
             expanded={true} // TODO Toggle for a single Pallet WorkList Item
-            addCallback={() => {}}
+            addCallback={handleAddLocationClick}
             deleteCallback={() => handleDeleteClick(item.palletId.toString())}
             navigateCallback={() => {}}
           />
