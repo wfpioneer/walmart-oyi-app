@@ -1,19 +1,24 @@
 import React from 'react';
+import { NavigationProp } from '@react-navigation/native';
 import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import WorklistHome from './WorklistHome';
+import { WorklistHomeScreen } from './WorklistHome';
 
-const mockedNavigate = jest.fn();
-jest.mock('@react-navigation/native', () => ({
-  ...jest.requireActual('@react-navigation/native') as any,
-  useNavigation: () => ({
-    navigate: mockedNavigate,
-    dispatch: jest.fn
-  })
-}));
-jest.mock('react-redux', () => ({
-  useDispatch: () => jest.fn
-}));
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dangerouslyGetParent: jest.fn(),
+  dangerouslyGetState: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn()
+};
+const mockDispatch = jest.fn();
 
 describe('WorkListHome', () => {
   afterEach(() => {
@@ -22,21 +27,36 @@ describe('WorkListHome', () => {
 
   it('Renders WorkListHome screen', () => {
     const renderer = ShallowRenderer.createRenderer();
-
     renderer.render(
-      <WorklistHome />
+      <WorklistHomeScreen
+        navigation={navigationProp}
+        dispatch={mockDispatch}
+      />
     );
-
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('test buttons in component', () => {
+  it('test item worklist button functionality', () => {
     const { getByTestId } = render(
-      <WorklistHome />,
+      <WorklistHomeScreen
+        navigation={navigationProp}
+        dispatch={mockDispatch}
+      />
     );
+    const itemWorklistButton = getByTestId('itemWorkListButton');
+    fireEvent.press(itemWorklistButton);
+    expect(navigationProp.navigate).toBeCalledTimes(1);
+  });
 
-    const itemWkListBtn = getByTestId('itemWkListBtn');
-    fireEvent.press(itemWkListBtn);
-    expect(mockedNavigate).toHaveBeenCalled();
+  it('test pallet worklist button functionality', () => {
+    const { getByTestId } = render(
+      <WorklistHomeScreen
+        navigation={navigationProp}
+        dispatch={mockDispatch}
+      />
+    );
+    const palletWorkListButton = getByTestId('palletWorkListButton');
+    fireEvent.press(palletWorkListButton);
+    expect(navigationProp.navigate).toBeCalledTimes(1);
   });
 });
