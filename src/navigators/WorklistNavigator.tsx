@@ -1,5 +1,5 @@
 import React, { Dispatch, useEffect } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { HeaderBackButton, createStackNavigator } from '@react-navigation/stack';
 import { Animated, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -55,6 +55,8 @@ export const WorklistNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
+  const user = useTypedSelector(state => state.User);
+  const { palletWorklists } = user.configs;
 
   useEffect(
     () => navigation.addListener('focus', () => {
@@ -62,6 +64,14 @@ export const WorklistNavigator = (): JSX.Element => {
     }),
     [navigation]
   );
+
+  const navigateBack = () => {
+    if (palletWorklists) {
+      navigation.navigate(strings('WORKLIST.WORKLIST'));
+    } else {
+      navigation.goBack();
+    }
+  };
 
   const menu = <FilterMenu />;
   return (
@@ -90,10 +100,19 @@ export const WorklistNavigator = (): JSX.Element => {
         }}
       >
         <Stack.Screen
-          name={strings('WORKLIST.WORKLIST')}
+          name="ITEMWORKLIST"
           component={worklistTabs}
           options={() => ({
-            headerRight: () => renderHeaderRight(dispatch, menuOpen)
+            headerRight: () => renderHeaderRight(dispatch, menuOpen),
+            headerTitle: strings('WORKLIST.WORKLIST'),
+            headerLeft: props => props.canGoBack
+            && (
+            <HeaderBackButton
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...props}
+              onPress={navigateBack}
+            />
+            )
           })}
         />
       </Stack.Navigator>
