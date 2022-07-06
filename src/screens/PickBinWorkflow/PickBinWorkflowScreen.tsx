@@ -24,8 +24,8 @@ import {
   UPDATE_PICKLIST_STATUS
 } from '../../state/actions/asyncAPI';
 import { updatePalletNotFound, updatePicklistStatus } from '../../state/actions/saga';
+import { addPallet, clearPallets } from '../../state/actions/Binning';
 import { showPickingMenu, updatePicks } from '../../state/actions/Picking';
-import { addPallet } from '../../state/actions/Binning';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { CustomModalComponent } from '../Modal/Modal';
 import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
@@ -301,9 +301,10 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
         upcNbr: item.upcNbr
       }))
     };
+    dispatch(clearPallets());
     dispatch(addPallet(palletDetails));
     navigation.navigate('Binning', {
-      screen: 'Binning',
+      screen: 'AssignLocation',
       params: {
         source: 'picking'
       }
