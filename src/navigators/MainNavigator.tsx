@@ -11,6 +11,7 @@ import SettingsToolNavigator from './SettingsToolNavigator';
 import BinningNavigator from './BinningNavigator';
 import PickingNavigator from './PickingNavigator';
 import MissingPalletWorklistNavigator from './MissingPalletWorklistNavigator';
+import { WorklistNavigator } from './WorklistNavigator';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,7 @@ export const MainNavigator = (): JSX.Element => (
       <Stack.Screen name="Binning" component={BinningNavigator} />
       <Stack.Screen name="Picking" component={PickingNavigator} />
       <Stack.Screen name="MissingPalletWorklist" component={MissingPalletWorklistNavigator} />
+      <Stack.Screen name="WorklistNavigator" component={WorklistNavigator} />
     </Stack.Navigator>
   </NavigationContainer>
 );
