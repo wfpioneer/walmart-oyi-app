@@ -475,7 +475,7 @@ describe('PickBin Workflow render tests', () => {
     const binButton = findByText(strings('PICKING.BIN'));
     fireEvent.press(await binButton);
     expect(navigationProp.navigate).toHaveBeenCalled();
-    expect(mockDispatch).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledTimes(2);
   });
 
   describe('ContinueActionDialog render tests', () => {
