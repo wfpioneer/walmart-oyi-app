@@ -7,8 +7,8 @@ export default class GetPalletWorklistService {
     let filterUrl = `${urls.worklistURL}/worklist/pallets`;
     if (payload && payload.worklistType) {
       if (payload.worklistType.length > 0) {
-        const filters = payload.worklistType.reduce((acc, current) => `${acc}&type=${current}`);
-        filterUrl = `${filterUrl}?type=${filters}`;
+        const filters = payload.worklistType.reduce((acc, current) => `${acc}&worklistType=${current}`);
+        filterUrl = `${filterUrl}?worklistType=${filters}`;
       }
     }
     return Request.get(filterUrl, undefined);
