@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WorklistHeader Component Test worklistHeader component snaphsot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "justifyContent": "center",
+      "marginTop": 10,
+      "paddingHorizontal": 15,
+      "paddingVertical": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#616161",
+        "fontSize": 14,
+      }
+    }
+  >
+    A1-12
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#616161",
+        "fontSize": 12,
+      }
+    }
+  >
+    15 [missing "en.GENERICS.ITEMS" translation]
+  </Text>
+</View>
+`;

@@ -11,7 +11,7 @@ export default StyleSheet.create({
     marginTop: 10,
     paddingHorizontal: 15
   },
-  categoryName: {
+  headerTitle: {
     color: COLOR.GREY_700,
     fontSize: 14
   },
