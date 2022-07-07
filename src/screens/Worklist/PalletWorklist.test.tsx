@@ -2,11 +2,8 @@ import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import {
-  PalletWorklist,
-  clearPalletAPIHook
-} from './PalletWorklist';
-import { mockMissingPalletWorklist } from '../../mockData/mockWorkList';
+import { PalletWorklist, clearPalletAPIHook } from './PalletWorklist';
+import { mockMissingPalletWorklistTodo } from '../../mockData/mockWorkList';
 import { AsyncState } from '../../models/AsyncState';
 import { strings } from '../../locales';
 
@@ -42,7 +39,7 @@ describe('Tests rendering PalletWorklist screen', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <PalletWorklist
-        palletWorklist={mockMissingPalletWorklist}
+        palletWorklist={mockMissingPalletWorklistTodo}
         displayConfirmation={false}
         setDisplayConfirmation={jest.fn()}
         dispatch={mockDispatch}
@@ -55,7 +52,7 @@ describe('Tests rendering PalletWorklist screen', () => {
   });
 
   it('Test clearPalletApi hook function', () => {
-    const mockPalletID = mockMissingPalletWorklist[0].palletId.toString();
+    const mockPalletID = mockMissingPalletWorklistTodo[0].palletId.toString();
     const clearPalletSuccess: AsyncState = {
       ...defaultAsyncState,
       result: {

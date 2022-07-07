@@ -6,7 +6,7 @@ import { MissingPalletWorklistItemI } from '../../models/WorklistItem';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PalletWorklist } from './PalletWorklist';
 import { AsyncState } from '../../models/AsyncState';
-import { mockMissingPalletWorklist } from '../../mockData/mockWorkList';
+import { mockMissingPalletWorklistTodo } from '../../mockData/mockWorkList';
 
 interface TodoWorklistProps {
   getMPWorklistApi: AsyncState;
@@ -31,7 +31,7 @@ export const TodoPalletWorklistScreen = (
 
   let todoPalletData: MissingPalletWorklistItemI[] | undefined;
   // TODO remove when implementing getPalletWorklist items api call
-  todoPalletData = [mockMissingPalletWorklist[0]];
+  todoPalletData = mockMissingPalletWorklistTodo;
 
   if (getMPWorklistApi.result && getMPWorklistApi.result.data) {
     todoPalletData = getMPWorklistApi.result.data.filter(

@@ -106,7 +106,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
     data={
       Array [
         Object {
-          "completed": undefined,
+          "completed": false,
           "completedId": undefined,
           "completedTS": undefined,
           "createId": "11",
@@ -118,7 +118,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
           "worklistType": "MP",
         },
         Object {
-          "completed": undefined,
+          "completed": false,
           "completedId": undefined,
           "completedTS": undefined,
           "createId": "12",

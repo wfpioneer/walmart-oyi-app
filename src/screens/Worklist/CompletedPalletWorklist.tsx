@@ -6,7 +6,7 @@ import { MissingPalletWorklistItemI } from '../../models/WorklistItem';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PalletWorklist } from './PalletWorklist';
 import { AsyncState } from '../../models/AsyncState';
-import { mockMissingPalletWorklist } from '../../mockData/mockWorkList';
+import { mockMissingPalletWorklistComplete } from '../../mockData/mockWorkList';
 
 interface CompletedWorklistProps {
   getMPWorklistApi: AsyncState;
@@ -31,7 +31,7 @@ export const CompletedPalletWorklistScreen = (
 
   let completedPalletItems: MissingPalletWorklistItemI[] | undefined;
   // TODO remove when implementing getPalletWorklist items api call
-  completedPalletItems = [mockMissingPalletWorklist[1]];
+  completedPalletItems = mockMissingPalletWorklistComplete;
 
   if (getMPWorklistApi.result && getMPWorklistApi.result.data) {
     completedPalletItems = getMPWorklistApi.result.data.filter(
