@@ -465,7 +465,7 @@ export const mockCategoryMap: FilteredCategory[] = [
   }
 ];
 
-export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
+export const mockMissingPalletWorklistTodo: MissingPalletWorklistItemI[] = [
   {
     createId: '11',
     createTS: '26/06/2022',
@@ -474,7 +474,7 @@ export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
     palletDeleted: false,
     palletId: 7988,
     worklistType: 'MP',
-    completed: undefined,
+    completed: false,
     completedId: undefined,
     completedTS: undefined
   },
@@ -486,8 +486,35 @@ export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
     palletDeleted: false,
     palletId: 7989,
     worklistType: 'MP',
-    completed: undefined,
+    completed: false,
     completedId: undefined,
     completedTS: undefined
+  }
+];
+
+export const mockMissingPalletWorklistComplete: MissingPalletWorklistItemI[] = [
+  {
+    createId: '13',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 3,
+    lastKnownLocationName: 'B1-1',
+    palletDeleted: false,
+    palletId: 7990,
+    worklistType: 'MP',
+    completed: true,
+    completedId: '1',
+    completedTS: '2022-07-07T12:40:00.000Z'
+  },
+  {
+    createId: '14',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 4,
+    lastKnownLocationName: 'B1-2',
+    palletDeleted: false,
+    palletId: 7991,
+    worklistType: 'MP',
+    completed: true,
+    completedId: '2',
+    completedTS: '2022-07-07T12:40:00.000Z'
   }
 ];

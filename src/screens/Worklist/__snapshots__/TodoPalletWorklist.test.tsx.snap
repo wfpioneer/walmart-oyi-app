@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoPalletWorklistScreen Renders an array of incomplete pallet worklist items with incomplete and complete items 1`] = `
+<PalletWorklist
+  clearPalletAPI={
+    Object {
+      "error": null,
+      "isWaiting": false,
+      "result": null,
+      "value": null,
+    }
+  }
+  dispatch={[MockFunction]}
+  displayConfirmation={false}
+  palletWorklist={
+    Array [
+      Object {
+        "completed": false,
+        "completedId": undefined,
+        "completedTS": undefined,
+        "createId": "11",
+        "createTS": "26/06/2022",
+        "lastKnownLocationId": 1,
+        "lastKnownLocationName": "A1-1",
+        "palletDeleted": false,
+        "palletId": 7988,
+        "worklistType": "MP",
+      },
+      Object {
+        "completed": false,
+        "completedId": undefined,
+        "completedTS": undefined,
+        "createId": "12",
+        "createTS": "26/06/2022",
+        "lastKnownLocationId": 2,
+        "lastKnownLocationName": "A1-2",
+        "palletDeleted": false,
+        "palletId": 7989,
+        "worklistType": "MP",
+      },
+    ]
+  }
+  setDisplayConfirmation={[MockFunction]}
+  useEffectHook={[Function]}
+/>
+`;

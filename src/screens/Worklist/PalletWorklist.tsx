@@ -92,7 +92,7 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
     setDisplayConfirmation
   ),
   [clearPalletAPI]);
-
+  // TODO handle request + response for getPalletWorklist service call
   const onDeletePress = () => {
     dispatch(clearPallet({ palletId: deletePalletId }));
   };
