@@ -1,5 +1,6 @@
 import { AxiosRequestHeaders } from 'axios';
 import { CreateAisleRequest } from '../../models/CreateZoneAisleSection.d';
+import { PalletWorklistType } from '../../models/WorklistItem';
 import {
   ApprovalListItem,
   approvalAction,
@@ -75,7 +76,7 @@ export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
 export const hitGoogle = () => ({ type: HIT_GOOGLE } as const);
 export const getItemDetails = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS, payload } as const);
 export const getWorklist = (payload?: { worklistType?: [string] }) => ({ type: GET_WORKLIST, payload } as const);
-export const getPalletWorklist = (payload?: { worklistType?: [string] }) => (
+export const getPalletWorklist = (payload?: { worklistType?: PalletWorklistType[] }) => (
   { type: GET_PALLET_WORKLIST, payload } as const
 );
 export const editLocation = (payload: {
