@@ -2,7 +2,6 @@ import React, {
   DependencyList, Dispatch, EffectCallback, useCallback, useEffect
 } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { View } from 'react-native';
 import {
   NavigationProp,
   RouteProp,
@@ -13,7 +12,8 @@ import {
 import { useDispatch } from 'react-redux';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
-import { PalletWorkList } from '../../screens/Worklist/PalletWorklist';
+import { TodoPalletWorklist } from '../../screens/Worklist/TodoPalletWorklist';
+import { CompletedPalletWorklist } from '../../screens/Worklist/CompletedPalletWorklist';
 import { validateSession } from '../../utils/sessionTimeout';
 import { getPalletWorklist } from '../../state/actions/saga';
 
@@ -30,10 +30,6 @@ interface MissingPalletWorklistTabNavigatorProps {
 }
 
 export const MissingPalletWorklistTabNavigator = (props: MissingPalletWorklistTabNavigatorProps): JSX.Element => {
-  // TODO: Need to replace placeholder component
-  const TodoWorklistPlaceholder = () => <PalletWorkList />;
-  const CompletedWorklistPlaceholder = () => <View />;
-
   const {
     useCallbackHook, useEffectHook, useFocusEffectHook,
     dispatch, navigation, route, validateSessionCall
@@ -58,11 +54,11 @@ export const MissingPalletWorklistTabNavigator = (props: MissingPalletWorklistTa
     >
       <Tab.Screen
         name={strings('WORKLIST.TODO')}
-        component={TodoWorklistPlaceholder}
+        component={TodoPalletWorklist}
       />
       <Tab.Screen
         name={strings('WORKLIST.COMPLETED')}
-        component={CompletedWorklistPlaceholder}
+        component={CompletedPalletWorklist}
       />
     </Tab.Navigator>
   );

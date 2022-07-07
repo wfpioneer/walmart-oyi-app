@@ -13,7 +13,6 @@ import { styles } from './PalletWorklist.style';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
 import { clearPallet } from '../../state/actions/saga';
-import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { AsyncState } from '../../models/AsyncState';
 import {
   hideActivityModal,
@@ -22,7 +21,7 @@ import {
 import { CLEAR_PALLET } from '../../state/actions/asyncAPI';
 
 interface PalletWorkListProps {
-  palletWorklist: MissingPalletWorklistItemI[];
+  palletWorklist: MissingPalletWorklistItemI[] | undefined;
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
   dispatch: Dispatch<any>;
@@ -73,7 +72,7 @@ export const clearPalletAPIHook = (
   }
 };
 
-export const PalletWorklistScreen = (props: PalletWorkListProps) => {
+export const PalletWorklist = (props: PalletWorkListProps) => {
   const {
     clearPalletAPI,
     displayConfirmation,
@@ -155,37 +154,5 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
         style={styles.list}
       />
     </View>
-  );
-};
-
-export const PalletWorkList = () => {
-  const [displayConfirmation, setDisplayConfirmation] = useState(false);
-  const clearPalletAPI = useTypedSelector(state => state.async.clearPallet);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const mockMPWorklist: MissingPalletWorklistItemI[] = [
-    {
-      createId: '11',
-      createTS: '26/06/2022',
-      lastKnownLocationId: 1,
-      lastKnownLocationName: 'A1-1',
-      palletDeleted: false,
-      palletId: 7988,
-      worklistType: 'MP',
-      completed: undefined,
-      completedId: undefined,
-      completedTS: undefined
-    }
-  ];
-  return (
-    <PalletWorklistScreen
-      palletWorklist={mockMPWorklist}
-      displayConfirmation={displayConfirmation}
-      setDisplayConfirmation={setDisplayConfirmation}
-      dispatch={dispatch}
-      clearPalletAPI={clearPalletAPI}
-      navigation={navigation}
-      useEffectHook={useEffect}
-    />
   );
 };

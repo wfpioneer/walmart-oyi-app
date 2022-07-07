@@ -3,7 +3,7 @@ import React from 'react';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
-  PalletWorklistScreen,
+  PalletWorklist,
   clearPalletAPIHook
 } from './PalletWorklist';
 import { mockMissingPalletWorklist } from '../../mockData/mockWorkList';
@@ -41,7 +41,7 @@ describe('Tests rendering PalletWorklist screen', () => {
   it('Renders the PalletWorklist screen', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <PalletWorklistScreen
+      <PalletWorklist
         palletWorklist={mockMissingPalletWorklist}
         displayConfirmation={false}
         setDisplayConfirmation={jest.fn()}

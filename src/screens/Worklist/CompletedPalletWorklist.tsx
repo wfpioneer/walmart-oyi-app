@@ -1,78 +1,70 @@
-import React, { useState } from 'react';
-import { Dispatch } from 'redux';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { WorklistItemI } from '../../models/WorklistItem';
-import { Worklist } from './Worklist';
-import { getWorklist } from '../../state/actions/saga';
+import { MissingPalletWorklistItemI } from '../../models/WorklistItem';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { area } from '../../models/User';
+import { PalletWorklist } from './PalletWorklist';
+import { AsyncState } from '../../models/AsyncState';
+import { mockMissingPalletWorklist } from '../../mockData/mockWorkList';
 
 interface CompletedWorklistProps {
-    isWaiting: boolean;
-    result: any;
-    error: any;
-    dispatch: Dispatch<any>;
-    groupToggle: boolean;
-    updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
-    filterExceptions: string[];
-    filterCategories: string[];
-    navigation: NavigationProp<any>;
-    areas: area[];
-    enableAreaFilter: boolean;
+  getMPWorklistApi: AsyncState;
+  displayConfirmation: boolean;
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
+  dispatch: Dispatch<any>;
+  clearPalletAPI: AsyncState;
+  navigation: NavigationProp<any>;
 }
 
-export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Element => {
+export const CompletedPalletWorklistScreen = (
+  props: CompletedWorklistProps
+): JSX.Element => {
   const {
-    isWaiting, result, error, dispatch, navigation,
-    groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter
+    clearPalletAPI,
+    displayConfirmation,
+    dispatch,
+    getMPWorklistApi,
+    setDisplayConfirmation,
+    navigation
   } = props;
 
-  let completedItems: WorklistItemI[] | undefined;
+  let completedPalletItems: MissingPalletWorklistItemI[] | undefined;
+  // TODO remove when implementing getPalletWorklist items api call
+  completedPalletItems = [mockMissingPalletWorklist[1]];
 
-  if (result && result.data) {
-    completedItems = result.data.filter((item: WorklistItemI) => item.completed === true);
+  if (getMPWorklistApi.result && getMPWorklistApi.result.data) {
+    completedPalletItems = getMPWorklistApi.result.data.filter(
+      (item: MissingPalletWorklistItemI) => item.completed === true
+    );
   }
-
   return (
-    <Worklist
-      data={completedItems}
-      refreshing={isWaiting}
-      onRefresh={() => dispatch(getWorklist())}
-      error={error}
+    <PalletWorklist
+      palletWorklist={completedPalletItems}
+      displayConfirmation={displayConfirmation}
+      setDisplayConfirmation={setDisplayConfirmation}
       dispatch={dispatch}
-      filterCategories={filterCategories}
-      filterExceptions={filterExceptions}
-      groupToggle={groupToggle}
-      updateGroupToggle={updateGroupToggle}
+      clearPalletAPI={clearPalletAPI}
       navigation={navigation}
-      areas={areas}
-      enableAreaFilter={enableAreaFilter}
+      useEffectHook={useEffect}
     />
   );
 };
 
-export const CompletedWorklist = (): JSX.Element => {
-  const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
-  const [groupToggle, updateGroupToggle] = useState(false);
-  const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
-  const { areas, enableAreaFilter } = useTypedSelector(state => state.User.configs);
+export const CompletedPalletWorklist = (): JSX.Element => {
+  const getMPWorklistApi = useTypedSelector(state => state.async.getWorklist);
+  const clearPalletAPI = useTypedSelector(state => state.async.clearPallet);
+  const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
   return (
-    <CompletedWorklistScreen
-      isWaiting={isWaiting}
-      result={result}
-      error={error}
+    <CompletedPalletWorklistScreen
       dispatch={dispatch}
-      filterCategories={filterCategories}
-      filterExceptions={filterExceptions}
-      groupToggle={groupToggle}
-      updateGroupToggle={updateGroupToggle}
+      clearPalletAPI={clearPalletAPI}
+      displayConfirmation={displayConfirmation}
+      setDisplayConfirmation={setDisplayConfirmation}
+      getMPWorklistApi={getMPWorklistApi}
       navigation={navigation}
-      areas={areas}
-      enableAreaFilter={enableAreaFilter}
     />
   );
 };
