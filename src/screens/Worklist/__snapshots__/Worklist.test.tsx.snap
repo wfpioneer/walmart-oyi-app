@@ -195,9 +195,9 @@ exports[`WorklistScreen Tests rendering WorklistItem Renders a single worklist i
 `;
 
 exports[`WorklistScreen Tests rendering WorklistItem Renders the category header for worklist type CATEGORY 1`] = `
-<CategorySeparator
-  categoryName="WINE"
+<WorklistHeader
   numberOfItems={1}
+  title="WINE"
 />
 `;
 
