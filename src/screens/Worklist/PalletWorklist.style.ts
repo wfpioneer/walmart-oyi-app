@@ -39,5 +39,14 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 20,
     paddingHorizontal: 10
+  },
+  viewSwitcher: {
+    backgroundColor: COLOR.WHITE,
+    width: '100%',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    flexDirection: 'row'
   }
 });

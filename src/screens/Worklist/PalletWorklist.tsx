@@ -1,8 +1,11 @@
 import React, {
   Dispatch, EffectCallback, useEffect, useState
 } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import {
+  FlatList, Text, TouchableOpacity, View
+} from 'react-native';
 import { useDispatch } from 'react-redux';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Toast from 'react-native-toast-message';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import MissingPalletWorklistCard from '../../components/MissingPalletWorklistCard/MissingPalletWorklistCard';
@@ -21,14 +24,23 @@ import {
 } from '../../state/actions/Modal';
 import { CLEAR_PALLET } from '../../state/actions/asyncAPI';
 
+interface MPWorklistI extends MissingPalletWorklistItemI {
+  idText: string;
+}
+
 interface PalletWorkListProps {
-  palletWorklist: MissingPalletWorklistItemI[];
+  palletWorklist: MPWorklistI[];
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
   dispatch: Dispatch<any>;
   clearPalletAPI: AsyncState;
   navigation: NavigationProp<any>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
+}
+interface ListItemProps {
+  item: MPWorklistI;
+  handleAddLocationClick: () => void;
+  handleDeleteClick: (palletID: string) => void;
 }
 
 export const clearPalletAPIHook = (
@@ -73,6 +85,31 @@ export const clearPalletAPIHook = (
   }
 };
 
+// export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
+//   const {
+//     item, handleAddLocationClick, handleDeleteClick
+//   } = props;
+//   if (item.la === 'CATEGORY') {
+//     const { catgName, itemCount } = item;
+//     return (
+//       <CategorySeparator categoryName={catgName} numberOfItems={itemCount || 0} />
+//     );
+//   }
+
+//   return (
+//     <MissingPalletWorklistCard
+//       palletId={item.palletId}
+//       lastLocation={item.lastKnownLocationName}
+//       reportedBy={item.createId}
+//       reportedDate={item.createTS}
+//       expanded={true} // TODO Toggle for a single Pallet WorkList Item
+//       addCallback={handleAddLocationClick}
+//       deleteCallback={() => handleDeleteClick(item.palletId.toString())}
+//       navigateCallback={() => {}}
+//     />
+//   );
+// };
+
 export const PalletWorklistScreen = (props: PalletWorkListProps) => {
   const {
     clearPalletAPI,
@@ -84,6 +121,7 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
     useEffectHook
   } = props;
   let deletePalletId = '';
+  const [groupToggle, updateGroupToggle] = useState(false);
 
   useEffectHook(() => clearPalletAPIHook(
     clearPalletAPI,
@@ -135,9 +173,25 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
           />
         </View>
       </CustomModalComponent>
+      <View style={styles.viewSwitcher}>
+        <TouchableOpacity onPress={() => updateGroupToggle(false)}>
+          <MaterialIcons
+            name="menu"
+            size={25}
+            color={!groupToggle ? COLOR.BLACK : COLOR.GREY}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => updateGroupToggle(true)}>
+          <MaterialIcons
+            name="list"
+            size={25}
+            color={groupToggle ? COLOR.BLACK : COLOR.GREY}
+          />
+        </TouchableOpacity>
+      </View>
       <FlatList
         data={palletWorklist}
-        keyExtractor={(item: MissingPalletWorklistItemI, index: number) => item.palletId + index.toString()}
+        keyExtractor={(item: MPWorklistI, index: number) => item.palletId + index.toString()}
         renderItem={({ item }) => (
           <MissingPalletWorklistCard
             palletId={item.palletId}
@@ -163,7 +217,7 @@ export const PalletWorkList = () => {
   const clearPalletAPI = useTypedSelector(state => state.async.clearPallet);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const mockMPWorklist: MissingPalletWorklistItemI[] = [
+  const mockMPWorklist: MPWorklistI[] = [
     {
       createId: '11',
       createTS: '26/06/2022',
@@ -174,7 +228,21 @@ export const PalletWorkList = () => {
       worklistType: 'MP',
       completed: undefined,
       completedId: undefined,
-      completedTS: undefined
+      completedTS: undefined,
+      idText: 'test'
+    },
+    {
+      createId: '12',
+      createTS: '26/06/2022',
+      lastKnownLocationId: 1,
+      lastKnownLocationName: 'A1-2',
+      palletDeleted: false,
+      palletId: 7989,
+      worklistType: 'MP',
+      completed: undefined,
+      completedId: undefined,
+      completedTS: undefined,
+      idText: 'test'
     }
   ];
   return (
