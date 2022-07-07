@@ -804,12 +804,12 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading I
   <LocationHeader
     buttonPress={[Function]}
     details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
     initialRouteName="FloorDetails"
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
@@ -905,12 +905,12 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry but
   <LocationHeader
     buttonPress={[Function]}
     details="0 [missing \\"en.LOCATION.ITEMS\\" translation], 0 [missing \\"en.LOCATION.PALLETS\\" translation]"
-    isDisabled={true}
+    isDisabled={false}
     location="[missing \\"en.LOCATION.SECTION\\" translation] -"
   />
   <MaterialTopTabNavigator
     initialRouteName="FloorDetails"
-    swipeEnabled={null}
+    swipeEnabled={true}
     tabBarOptions={
       Object {
         "activeTintColor": "#0071e9",
