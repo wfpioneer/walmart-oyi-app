@@ -15,10 +15,10 @@ export interface WorklistItemI {
   imageBlobKey?: string;
 }
 
-export type MissingPalletWorklistType = 'MP';
+export type PalletWorklistType = 'MP';
 
 export interface MissingPalletWorklistItemI {
-  worklistType: MissingPalletWorklistType;
+  worklistType: PalletWorklistType;
   palletId: number;
   lastKnownLocationId: number;
   lastKnownLocationName: string;
