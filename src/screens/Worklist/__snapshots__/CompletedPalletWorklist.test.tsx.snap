@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CompletedPalletWorklistScreen Renders an array ofcomplete pallet worklist items with a mixed worklist 1`] = `
+exports[`CompletedPalletWorklistScreen Renders an array of complete pallet worklist items with a mixed worklist 1`] = `
 <PalletWorklist
   clearPalletAPI={
     Object {

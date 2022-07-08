@@ -1,10 +1,7 @@
-import React, {
-  Dispatch, EffectCallback, useEffect, useState
-} from 'react';
+import React, { Dispatch, EffectCallback } from 'react';
 import { FlatList, Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { NavigationProp } from '@react-navigation/native';
 import MissingPalletWorklistCard from '../../components/MissingPalletWorklistCard/MissingPalletWorklistCard';
 import { strings } from '../../locales';
 import { MissingPalletWorklistItemI } from '../../models/WorklistItem';

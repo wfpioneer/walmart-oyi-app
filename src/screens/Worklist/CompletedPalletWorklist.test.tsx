@@ -18,7 +18,7 @@ describe('CompletedPalletWorklistScreen', () => {
     result: null
   };
 
-  it('Renders an array ofcomplete pallet worklist items with a mixed worklist', () => {
+  it('Renders an array of complete pallet worklist items with a mixed worklist', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getPalletWorklistSuccess: AsyncState = {
       ...defaultAsyncState,
