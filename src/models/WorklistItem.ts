@@ -18,7 +18,6 @@ export interface WorklistItemI {
 export type PalletWorklistType = 'MP';
 
 export interface MissingPalletWorklistItemI {
-  worklistType?: PalletWorklistType;
   palletId: number;
   lastKnownPalletLocationId: number;
   lastKnownPalletLocationName: string;

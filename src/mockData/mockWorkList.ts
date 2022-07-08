@@ -473,7 +473,6 @@ export const mockMissingPalletWorklistTodo: MissingPalletWorklistItemI[] = [
     lastKnownPalletLocationName: 'A1-1',
     palletDeleted: false,
     palletId: 7988,
-    worklistType: 'MP',
     completed: false,
     completedUserId: undefined,
     completedTs: undefined
@@ -485,7 +484,6 @@ export const mockMissingPalletWorklistTodo: MissingPalletWorklistItemI[] = [
     lastKnownPalletLocationName: 'A1-2',
     palletDeleted: false,
     palletId: 7989,
-    worklistType: 'MP',
     completed: false,
     completedUserId: undefined,
     completedTs: undefined
@@ -500,7 +498,6 @@ export const mockMissingPalletWorklistComplete: MissingPalletWorklistItemI[] = [
     lastKnownPalletLocationName: 'B1-1',
     palletDeleted: false,
     palletId: 7990,
-    worklistType: 'MP',
     completed: true,
     completedUserId: '1',
     completedTs: '2022-07-07T12:40:00.000Z'
@@ -512,7 +509,6 @@ export const mockMissingPalletWorklistComplete: MissingPalletWorklistItemI[] = [
     lastKnownPalletLocationName: 'B1-2',
     palletDeleted: false,
     palletId: 7991,
-    worklistType: 'MP',
     completed: true,
     completedUserId: '2',
     completedTs: '2022-07-07T12:40:00.000Z'

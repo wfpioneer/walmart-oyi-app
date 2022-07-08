@@ -26,7 +26,6 @@ exports[`TodoPalletWorklistScreen Renders an array of incomplete pallet worklist
         "lastKnownPalletLocationName": "A1-1",
         "palletDeleted": false,
         "palletId": 7988,
-        "worklistType": "MP",
       },
       Object {
         "completed": false,
@@ -38,7 +37,6 @@ exports[`TodoPalletWorklistScreen Renders an array of incomplete pallet worklist
         "lastKnownPalletLocationName": "A1-2",
         "palletDeleted": false,
         "palletId": 7989,
-        "worklistType": "MP",
       },
     ]
   }
