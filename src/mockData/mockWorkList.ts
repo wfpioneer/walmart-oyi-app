@@ -465,29 +465,52 @@ export const mockCategoryMap: FilteredCategory[] = [
   }
 ];
 
-export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
+export const mockMissingPalletWorklistTodo: MissingPalletWorklistItemI[] = [
   {
-    createId: '11',
-    createTS: '26/06/2022',
-    lastKnownLocationId: 1,
-    lastKnownLocationName: 'A1-1',
+    createUserId: '11',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 1,
+    lastKnownPalletLocationName: 'A1-1',
     palletDeleted: false,
     palletId: 7988,
-    worklistType: 'MP',
-    completed: undefined,
-    completedId: undefined,
-    completedTS: undefined
+    completed: false,
+    completedUserId: undefined,
+    completedTs: undefined
   },
   {
-    createId: '12',
-    createTS: '26/06/2022',
-    lastKnownLocationId: 2,
-    lastKnownLocationName: 'A1-2',
+    createUserId: '12',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 2,
+    lastKnownPalletLocationName: 'A1-2',
     palletDeleted: false,
     palletId: 7989,
-    worklistType: 'MP',
-    completed: undefined,
-    completedId: undefined,
-    completedTS: undefined
+    completed: false,
+    completedUserId: undefined,
+    completedTs: undefined
+  }
+];
+
+export const mockMissingPalletWorklistComplete: MissingPalletWorklistItemI[] = [
+  {
+    createUserId: '13',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 3,
+    lastKnownPalletLocationName: 'B1-1',
+    palletDeleted: false,
+    palletId: 7990,
+    completed: true,
+    completedUserId: '1',
+    completedTs: '2022-07-07T12:40:00.000Z'
+  },
+  {
+    createUserId: '14',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 4,
+    lastKnownPalletLocationName: 'B1-2',
+    palletDeleted: false,
+    palletId: 7991,
+    completed: true,
+    completedUserId: '2',
+    completedTs: '2022-07-07T12:40:00.000Z'
   }
 ];

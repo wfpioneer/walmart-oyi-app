@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CompletedPalletWorklistScreen Renders an array of complete pallet worklist items with a mixed worklist 1`] = `
+<PalletWorklist
+  clearPalletAPI={
+    Object {
+      "error": null,
+      "isWaiting": false,
+      "result": null,
+      "value": null,
+    }
+  }
+  dispatch={[MockFunction]}
+  displayConfirmation={false}
+  error={null}
+  onRefresh={[Function]}
+  palletWorklist={
+    Array [
+      Object {
+        "completed": true,
+        "completedTs": "2022-07-07T12:40:00.000Z",
+        "completedUserId": "1",
+        "createTs": "26/06/2022",
+        "createUserId": "13",
+        "lastKnownPalletLocationId": 3,
+        "lastKnownPalletLocationName": "B1-1",
+        "palletDeleted": false,
+        "palletId": 7990,
+      },
+      Object {
+        "completed": true,
+        "completedTs": "2022-07-07T12:40:00.000Z",
+        "completedUserId": "2",
+        "createTs": "26/06/2022",
+        "createUserId": "14",
+        "lastKnownPalletLocationId": 4,
+        "lastKnownPalletLocationName": "B1-2",
+        "palletDeleted": false,
+        "palletId": 7991,
+      },
+    ]
+  }
+  refreshing={false}
+  setDisplayConfirmation={[MockFunction]}
+  useEffectHook={[Function]}
+/>
+`;

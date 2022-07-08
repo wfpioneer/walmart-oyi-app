@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import moment from 'moment';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
@@ -33,7 +34,7 @@ const MissingPalletWorklistCard = (props: MissingPalletWorklistCardProps) => {
             {`${strings('MISSING_PALLET_WORKLIST.PALLET_ID')}: ${palletId}`}
           </Text>
           <Text style={styles.contentText}>
-            {`${strings('MISSING_PALLET_WORKLIST.REPORTED_DATE')}: ${reportedDate}`}
+            {`${strings('MISSING_PALLET_WORKLIST.REPORTED_DATE')}: ${moment(reportedDate).format('DD/MM/YYYY')}`}
           </Text>
         </View>
         <View style={styles.wrapperContainer}>

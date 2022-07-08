@@ -18,14 +18,13 @@ export interface WorklistItemI {
 export type PalletWorklistType = 'MP';
 
 export interface MissingPalletWorklistItemI {
-  worklistType: PalletWorklistType;
   palletId: number;
-  lastKnownLocationId: number;
-  lastKnownLocationName: string;
-  createId: string;
-  createTS: string;
+  lastKnownPalletLocationId: number;
+  lastKnownPalletLocationName: string;
+  createUserId: string;
+  createTs: string;
   palletDeleted: boolean;
-  completed?: boolean;
-  completedTS?: string;
-  completedId?: string;
+  completed: boolean;
+  completedTs?: string;
+  completedUserId?: string;
 }

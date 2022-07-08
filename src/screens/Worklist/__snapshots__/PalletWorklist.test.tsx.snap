@@ -106,33 +106,32 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
     data={
       Array [
         Object {
-          "completed": undefined,
-          "completedId": undefined,
-          "completedTS": undefined,
-          "createId": "11",
-          "createTS": "26/06/2022",
-          "lastKnownLocationId": 1,
-          "lastKnownLocationName": "A1-1",
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "createTs": "26/06/2022",
+          "createUserId": "11",
+          "lastKnownPalletLocationId": 1,
+          "lastKnownPalletLocationName": "A1-1",
           "palletDeleted": false,
           "palletId": 7988,
-          "worklistType": "MP",
         },
         Object {
-          "completed": undefined,
-          "completedId": undefined,
-          "completedTS": undefined,
-          "createId": "12",
-          "createTS": "26/06/2022",
-          "lastKnownLocationId": 2,
-          "lastKnownLocationName": "A1-2",
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "createTs": "26/06/2022",
+          "createUserId": "12",
+          "lastKnownPalletLocationId": 2,
+          "lastKnownPalletLocationName": "A1-2",
           "palletDeleted": false,
           "palletId": 7989,
-          "worklistType": "MP",
         },
       ]
     }
     keyExtractor={[Function]}
-    onRefresh={null}
+    onRefresh={[MockFunction]}
+    refreshing={false}
     renderItem={[Function]}
     style={
       Object {
@@ -141,5 +140,68 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
       }
     }
   />
+</View>
+`;
+
+exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen when refreshing prop is true 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen when the backend service encouters an error 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <mockConstructor
+    color="#e57373"
+    name="error"
+    size={60}
+  />
+  <Text
+    style={
+      Object {
+        "marginVertical": 10,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.WORKLIST.WORKLIST_ITEM_API_ERROR" translation]
+  </Text>
+  <TouchableOpacity
+    onPress={[MockFunction]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </TouchableOpacity>
 </View>
 `;

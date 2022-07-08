@@ -1,16 +1,47 @@
-import React from 'react';
+import React, {
+  DependencyList, Dispatch, EffectCallback, useCallback
+} from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { View } from 'react-native';
+import {
+  NavigationProp,
+  RouteProp,
+  useFocusEffect,
+  useNavigation,
+  useRoute
+} from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
-import { PalletWorkList } from '../../screens/Worklist/PalletWorklist';
+import { TodoPalletWorklist } from '../../screens/Worklist/TodoPalletWorklist';
+import { CompletedPalletWorklist } from '../../screens/Worklist/CompletedPalletWorklist';
+import { validateSession } from '../../utils/sessionTimeout';
+import { getPalletWorklist } from '../../state/actions/saga';
 
 const Tab = createMaterialTopTabNavigator();
 
-export const MissingPalletWorklistTabNavigator = (): JSX.Element => {
-  // TODO: Need to replace placeholder component
-  const TodoWorklistPlaceholder = () => <PalletWorkList />;
-  const CompletedWorklistPlaceholder = () => <View />;
+interface MissingPalletWorklistTabNavigatorProps {
+  useFocusEffectHook: (effect: EffectCallback) => void;
+  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
+  validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
+  route: RouteProp<any, string>;
+}
+
+export const MissingPalletWorklistTabNavigator = (props: MissingPalletWorklistTabNavigatorProps): JSX.Element => {
+  const {
+    useCallbackHook, useFocusEffectHook,
+    dispatch, navigation, route, validateSessionCall
+  } = props;
+
+  // Get Picklist Api call
+  useFocusEffectHook(
+    useCallbackHook(() => {
+      validateSessionCall(navigation, route.name).then(() => {
+        dispatch(getPalletWorklist({ worklistType: ['MP'] }));
+      });
+    }, [navigation])
+  );
 
   return (
     <Tab.Navigator
@@ -22,18 +53,30 @@ export const MissingPalletWorklistTabNavigator = (): JSX.Element => {
     >
       <Tab.Screen
         name={strings('WORKLIST.TODO')}
-        component={TodoWorklistPlaceholder}
+        component={TodoPalletWorklist}
       />
       <Tab.Screen
         name={strings('WORKLIST.COMPLETED')}
-        component={CompletedWorklistPlaceholder}
+        component={CompletedPalletWorklist}
       />
     </Tab.Navigator>
   );
 };
 
-export const MissingPalletWorklistTabs = (): JSX.Element => (
-  <MissingPalletWorklistTabNavigator />
-);
+export const MissingPalletWorklistTabs = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const route = useRoute();
+  return (
+    <MissingPalletWorklistTabNavigator
+      useCallbackHook={useCallback}
+      dispatch={dispatch}
+      navigation={navigation}
+      useFocusEffectHook={useFocusEffect}
+      route={route}
+      validateSessionCall={validateSession}
+    />
+  );
+};
 
 export default MissingPalletWorklistTabs;
