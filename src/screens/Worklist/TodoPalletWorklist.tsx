@@ -6,7 +6,7 @@ import { MissingPalletWorklistItemI } from '../../models/WorklistItem';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PalletWorklist } from './PalletWorklist';
 import { AsyncState } from '../../models/AsyncState';
-import { mockMissingPalletWorklistTodo } from '../../mockData/mockWorkList';
+import { getPalletWorklist } from '../../state/actions/saga';
 
 interface TodoWorklistProps {
   getMPWorklistApi: AsyncState;
@@ -29,12 +29,12 @@ export const TodoPalletWorklistScreen = (
     navigation
   } = props;
 
-  let todoPalletData: MissingPalletWorklistItemI[] | undefined;
-  // TODO remove when implementing getPalletWorklist items api call
-  todoPalletData = mockMissingPalletWorklistTodo;
+  const { isWaiting, error, result } = getMPWorklistApi;
 
-  if (getMPWorklistApi.result && getMPWorklistApi.result.data) {
-    todoPalletData = getMPWorklistApi.result.data.filter(
+  let todoPalletData: MissingPalletWorklistItemI[] | undefined;
+
+  if (result && result.data) {
+    todoPalletData = result.data.filter(
       (item: MissingPalletWorklistItemI) => item.completed === false
     );
   }
@@ -47,12 +47,15 @@ export const TodoPalletWorklistScreen = (
       clearPalletAPI={clearPalletAPI}
       navigation={navigation}
       useEffectHook={useEffect}
+      onRefresh={() => dispatch(getPalletWorklist({ worklistType: ['MP'] }))}
+      refreshing={isWaiting}
+      error={error}
     />
   );
 };
 
 export const TodoPalletWorklist = (): JSX.Element => {
-  const getMPWorklistApi = useTypedSelector(state => state.async.getWorklist);
+  const getMPWorklistApi = useTypedSelector(state => state.async.getPalletWorklist);
   const clearPalletAPI = useTypedSelector(state => state.async.clearPallet);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const dispatch = useDispatch();

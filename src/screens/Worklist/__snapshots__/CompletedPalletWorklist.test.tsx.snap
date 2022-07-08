@@ -12,34 +12,37 @@ exports[`CompletedPalletWorklistScreen Renders an array ofcomplete pallet workli
   }
   dispatch={[MockFunction]}
   displayConfirmation={false}
+  error={null}
+  onRefresh={[Function]}
   palletWorklist={
     Array [
       Object {
         "completed": true,
-        "completedId": "1",
-        "completedTS": "2022-07-07T12:40:00.000Z",
-        "createId": "13",
-        "createTS": "26/06/2022",
-        "lastKnownLocationId": 3,
-        "lastKnownLocationName": "B1-1",
+        "completedTs": "2022-07-07T12:40:00.000Z",
+        "completedUserId": "1",
+        "createTs": "26/06/2022",
+        "createUserId": "13",
+        "lastKnownPalletLocationId": 3,
+        "lastKnownPalletLocationName": "B1-1",
         "palletDeleted": false,
         "palletId": 7990,
         "worklistType": "MP",
       },
       Object {
         "completed": true,
-        "completedId": "2",
-        "completedTS": "2022-07-07T12:40:00.000Z",
-        "createId": "14",
-        "createTS": "26/06/2022",
-        "lastKnownLocationId": 4,
-        "lastKnownLocationName": "B1-2",
+        "completedTs": "2022-07-07T12:40:00.000Z",
+        "completedUserId": "2",
+        "createTs": "26/06/2022",
+        "createUserId": "14",
+        "lastKnownPalletLocationId": 4,
+        "lastKnownPalletLocationName": "B1-2",
         "palletDeleted": false,
         "palletId": 7991,
         "worklistType": "MP",
       },
     ]
   }
+  refreshing={false}
   setDisplayConfirmation={[MockFunction]}
   useEffectHook={[Function]}
 />

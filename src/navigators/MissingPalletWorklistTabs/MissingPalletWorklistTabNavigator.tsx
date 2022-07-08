@@ -1,5 +1,5 @@
 import React, {
-  DependencyList, Dispatch, EffectCallback, useCallback, useEffect
+  DependencyList, Dispatch, EffectCallback, useCallback
 } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {
@@ -26,12 +26,11 @@ interface MissingPalletWorklistTabNavigatorProps {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
-  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
 
 export const MissingPalletWorklistTabNavigator = (props: MissingPalletWorklistTabNavigatorProps): JSX.Element => {
   const {
-    useCallbackHook, useEffectHook, useFocusEffectHook,
+    useCallbackHook, useFocusEffectHook,
     dispatch, navigation, route, validateSessionCall
   } = props;
 
@@ -70,7 +69,6 @@ export const MissingPalletWorklistTabs = (): JSX.Element => {
   const route = useRoute();
   return (
     <MissingPalletWorklistTabNavigator
-      useEffectHook={useEffect}
       useCallbackHook={useCallback}
       dispatch={dispatch}
       navigation={navigation}
