@@ -4,9 +4,11 @@ import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
   PalletWorklistScreen,
-  clearPalletAPIHook
+  clearPalletAPIHook,
+  convertDataToDisplayList,
+  MPWorklistI
 } from './PalletWorklist';
-import { mockMissingPalletWorklist } from '../../mockData/mockWorkList';
+import { mockMissingPalletWorklist, mockMPSecWiseList } from '../../mockData/mockWorkList';
 import { AsyncState } from '../../models/AsyncState';
 import { strings } from '../../locales';
 
@@ -119,5 +121,27 @@ describe('Tests rendering PalletWorklist screen', () => {
       mockSetDisplayConfirmation
     );
     expect(mockDispatch).toBeCalledTimes(1);
+  });
+
+  describe('Tests convertDataToDisplayList', () => {
+    it('Returns array of MPWorklist items with location header indexes', () => {
+      expect(convertDataToDisplayList(mockMissingPalletWorklist, true)).toStrictEqual(mockMPSecWiseList);
+    });
+
+    it('Returns array of MPWorklist items with one single all category', () => {
+      const allLocList: MPWorklistI[] = [{
+        worklistType: 'MP',
+        palletId: 0,
+        lastKnownLocationId: -1,
+        lastKnownLocationName: strings('WORKLIST.ALL'),
+        itemCount: mockMissingPalletWorklist.length,
+        createId: '',
+        createTS: '',
+        palletDeleted: false,
+        sectionID: 0
+      },
+      ...mockMissingPalletWorklist.sort((a, b) => a.palletId - b.palletId)];
+      expect(convertDataToDisplayList(mockMissingPalletWorklist, false)).toStrictEqual(allLocList);
+    });
   });
 });

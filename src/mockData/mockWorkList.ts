@@ -1,4 +1,5 @@
-import { MissingPalletWorklistItemI, WorklistItemI } from '../models/WorklistItem';
+import { WorklistItemI } from '../models/WorklistItem';
+import { MPWorklistI } from '../screens/Worklist/PalletWorklist';
 import { FilteredCategory } from '../models/FilterListItem';
 
 // eslint-disable-next-line no-shadow
@@ -465,7 +466,7 @@ export const mockCategoryMap: FilteredCategory[] = [
   }
 ];
 
-export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
+export const mockMissingPalletWorklist: MPWorklistI[] = [
   {
     createId: '11',
     createTS: '26/06/2022',
@@ -476,7 +477,8 @@ export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
     worklistType: 'MP',
     completed: undefined,
     completedId: undefined,
-    completedTS: undefined
+    completedTS: undefined,
+    sectionID: 0
   },
   {
     createId: '12',
@@ -488,6 +490,158 @@ export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
     worklistType: 'MP',
     completed: undefined,
     completedId: undefined,
-    completedTS: undefined
+    completedTS: undefined,
+    sectionID: 0
+  },
+  {
+    createId: '14',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 5,
+    lastKnownLocationName: '1A1-2',
+    palletDeleted: false,
+    palletId: 7777,
+    worklistType: 'MP',
+    completed: undefined,
+    completedId: undefined,
+    completedTS: undefined,
+    sectionID: 0
+  },
+  {
+    createId: '15',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 2,
+    lastKnownLocationName: 'A1-2',
+    palletDeleted: false,
+    palletId: 888,
+    worklistType: 'MP',
+    completed: undefined,
+    completedId: undefined,
+    completedTS: undefined,
+    sectionID: 0
+  },
+  {
+    createId: '15',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 8,
+    lastKnownLocationName: 'A1-11',
+    palletDeleted: false,
+    palletId: 8889,
+    worklistType: 'MP',
+    completed: undefined,
+    completedId: undefined,
+    completedTS: undefined,
+    sectionID: 0
+  }
+];
+
+export const mockMPSecWiseList: MPWorklistI[] = [
+  {
+    createId: '',
+    createTS: '',
+    itemCount: 1,
+    lastKnownLocationId: 5,
+    lastKnownLocationName: '1A1-2',
+    palletDeleted: false,
+    palletId: 0,
+    sectionID: 0,
+    worklistType: 'MP'
+  },
+  {
+    completed: undefined,
+    completedId: undefined,
+    completedTS: undefined,
+    createId: '14',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 5,
+    lastKnownLocationName: '1A1-2',
+    palletDeleted: false,
+    palletId: 7777,
+    sectionID: 2,
+    worklistType: 'MP'
+  },
+  {
+    createId: '',
+    createTS: '',
+    itemCount: 1,
+    lastKnownLocationId: 1,
+    lastKnownLocationName: 'A1-1',
+    palletDeleted: false,
+    palletId: 0,
+    sectionID: 0,
+    worklistType: 'MP'
+  },
+  {
+    completed: undefined,
+    completedId: undefined,
+    completedTS: undefined,
+    createId: '11',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 1,
+    lastKnownLocationName: 'A1-1',
+    palletDeleted: false,
+    palletId: 7988,
+    sectionID: 1,
+    worklistType: 'MP'
+  },
+  {
+    createId: '',
+    createTS: '',
+    itemCount: 2,
+    lastKnownLocationId: 2,
+    lastKnownLocationName: 'A1-2',
+    palletDeleted: false,
+    palletId: 0,
+    sectionID: 0,
+    worklistType: 'MP'
+  },
+  {
+    completed: undefined,
+    completedId: undefined,
+    completedTS: undefined,
+    createId: '15',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 2,
+    lastKnownLocationName: 'A1-2',
+    palletDeleted: false,
+    palletId: 888,
+    sectionID: 2,
+    worklistType: 'MP'
+  },
+  {
+    completed: undefined,
+    completedId: undefined,
+    completedTS: undefined,
+    createId: '12',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 2,
+    lastKnownLocationName: 'A1-2',
+    palletDeleted: false,
+    palletId: 7989,
+    sectionID: 2,
+    worklistType: 'MP'
+  },
+  {
+    createId: '',
+    createTS: '',
+    itemCount: 1,
+    lastKnownLocationId: 8,
+    lastKnownLocationName: 'A1-11',
+    palletDeleted: false,
+    palletId: 0,
+    sectionID: 0,
+    worklistType: 'MP'
+  },
+  {
+    completed: undefined,
+    completedId: undefined,
+    completedTS: undefined,
+    createId: '15',
+    createTS: '26/06/2022',
+    lastKnownLocationId: 8,
+    lastKnownLocationName: 'A1-11',
+    palletDeleted: false,
+    palletId: 8889,
+    sectionID: 11,
+    worklistType: 'MP'
   }
 ];

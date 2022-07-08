@@ -23,9 +23,11 @@ import {
   showActivityModal
 } from '../../state/actions/Modal';
 import { CLEAR_PALLET } from '../../state/actions/asyncAPI';
+import WorklistHeader from '../../components/WorklistHeader/WorklistHeader';
 
-interface MPWorklistI extends MissingPalletWorklistItemI {
-  idText: string;
+export interface MPWorklistI extends MissingPalletWorklistItemI {
+  itemCount?: number;
+  sectionID: number;
 }
 
 interface PalletWorkListProps {
@@ -85,30 +87,130 @@ export const clearPalletAPIHook = (
   }
 };
 
-// export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
-//   const {
-//     item, handleAddLocationClick, handleDeleteClick
-//   } = props;
-//   if (item.la === 'CATEGORY') {
-//     const { catgName, itemCount } = item;
-//     return (
-//       <CategorySeparator categoryName={catgName} numberOfItems={itemCount || 0} />
-//     );
-//   }
+export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
+  const {
+    item, handleAddLocationClick, handleDeleteClick
+  } = props;
+  if (item.palletId === 0) {
+    const { lastKnownLocationName, itemCount } = item;
+    return (
+      <WorklistHeader title={lastKnownLocationName} numberOfItems={itemCount || 0} />
+    );
+  }
 
-//   return (
-//     <MissingPalletWorklistCard
-//       palletId={item.palletId}
-//       lastLocation={item.lastKnownLocationName}
-//       reportedBy={item.createId}
-//       reportedDate={item.createTS}
-//       expanded={true} // TODO Toggle for a single Pallet WorkList Item
-//       addCallback={handleAddLocationClick}
-//       deleteCallback={() => handleDeleteClick(item.palletId.toString())}
-//       navigateCallback={() => {}}
-//     />
-//   );
-// };
+  return (
+    <MissingPalletWorklistCard
+      palletId={item.palletId}
+      lastLocation={item.lastKnownLocationName}
+      reportedBy={item.createId}
+      reportedDate={item.createTS}
+      expanded={false} // TODO Toggle for a single Pallet WorkList Item
+      addCallback={handleAddLocationClick}
+      deleteCallback={() => handleDeleteClick(item.palletId.toString())}
+      navigateCallback={() => {}}
+    />
+  );
+};
+
+export const convertDataToDisplayList = (data: MPWorklistI[], groupToggle: boolean): MPWorklistI[] => {
+  if (!groupToggle) {
+    const workListItems = data.length
+      ? data.sort((a, b) => a.palletId - b.palletId) : [];
+    return [{
+      worklistType: 'MP',
+      palletId: 0,
+      lastKnownLocationId: -1,
+      lastKnownLocationName: strings('WORKLIST.ALL'),
+      itemCount: workListItems.length,
+      createId: '',
+      createTS: '',
+      palletDeleted: false,
+      sectionID: 0
+    },
+    ...workListItems];
+  }
+
+  const sortedData = data;
+  // first, sort by Loc
+  sortedData.sort((firstEl: MPWorklistI, secondEl: MPWorklistI) => {
+    if (firstEl.lastKnownLocationName && secondEl.lastKnownLocationName) {
+      if (firstEl.lastKnownLocationName < secondEl.lastKnownLocationName) {
+        return -1;
+      }
+      if (firstEl.lastKnownLocationName > secondEl.lastKnownLocationName) {
+        return 1;
+      }
+    }
+    return 0;
+  });
+
+  // second, sort by section
+  let locSecWiseItems: MPWorklistI[] = [];
+  let previousLocItem: MPWorklistI;
+  let zoneWiseItems: MPWorklistI[] = [];
+  sortedData.forEach(item => {
+    const currSec = item.lastKnownLocationName.split('-').pop();
+    const prevZone = previousLocItem ? previousLocItem.lastKnownLocationName.split('-')[0] : '';
+    const currZone = item.lastKnownLocationName.split('-')[0];
+    if (!prevZone || (prevZone !== currZone)) {
+      if (zoneWiseItems.length) {
+        const sortedLocWisePallets = zoneWiseItems.sort((a, b) => a.sectionID - b.sectionID);
+        locSecWiseItems = locSecWiseItems.concat(sortedLocWisePallets);
+      }
+      previousLocItem = item;
+      zoneWiseItems = [];
+      zoneWiseItems.push({ ...item, sectionID: Number(currSec) });
+    } else {
+      previousLocItem = item;
+      zoneWiseItems.push({ ...item, sectionID: Number(currSec) });
+    }
+  });
+
+  if (zoneWiseItems.length) {
+    const sortedLocWisePallets = zoneWiseItems.sort((a, b) => a.sectionID - b.sectionID);
+    locSecWiseItems = locSecWiseItems.concat(sortedLocWisePallets);
+  }
+
+  let returnData: MPWorklistI[] = [];
+
+  // Loc than sec than palletid
+  let previousItem: MPWorklistI;
+  let locWisePallets: MPWorklistI[] = [];
+  locSecWiseItems.forEach(item => {
+    if (!previousItem || (previousItem.lastKnownLocationId !== item.lastKnownLocationId)) {
+      if (locWisePallets.length) {
+        returnData[returnData.length - 1].itemCount = locWisePallets.length;
+        const sortedLocWisePallets = locWisePallets.sort((a, b) => a.palletId - b.palletId);
+        returnData = returnData.concat(sortedLocWisePallets);
+      }
+      previousItem = item;
+      returnData.push({
+        worklistType: 'MP',
+        palletId: 0,
+        lastKnownLocationId: item.lastKnownLocationId,
+        lastKnownLocationName: item.lastKnownLocationName,
+        createId: '',
+        createTS: '',
+        palletDeleted: false,
+        itemCount: 1,
+        sectionID: 0
+      });
+      locWisePallets = [];
+      locWisePallets.push(item);
+    } else {
+      previousItem = item;
+      locWisePallets.push(item);
+    }
+  });
+
+  if (locWisePallets.length) {
+    returnData[returnData.length - 1].itemCount = locWisePallets.length;
+    const sortedLocWisePallets = locWisePallets.sort((a, b) => a.palletId - b.palletId);
+    returnData = returnData.concat(sortedLocWisePallets);
+  }
+
+  return returnData;
+};
 
 export const PalletWorklistScreen = (props: PalletWorkListProps) => {
   const {
@@ -190,18 +292,18 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={palletWorklist}
-        keyExtractor={(item: MPWorklistI, index: number) => item.palletId + index.toString()}
+        data={convertDataToDisplayList(palletWorklist, groupToggle)}
+        keyExtractor={(item: MPWorklistI, index: number) => {
+          if (item.palletId === 0) {
+            return item.lastKnownLocationName.toString();
+          }
+          return item.palletId + index.toString();
+        }}
         renderItem={({ item }) => (
-          <MissingPalletWorklistCard
-            palletId={item.palletId}
-            lastLocation={item.lastKnownLocationName}
-            reportedBy={item.createId}
-            reportedDate={item.createTS}
-            expanded={true} // TODO Toggle for a single Pallet WorkList Item
-            addCallback={handleAddLocationClick}
-            deleteCallback={() => handleDeleteClick(item.palletId.toString())}
-            navigateCallback={() => {}}
+          <RenderWorklistItem
+            item={item}
+            handleAddLocationClick={handleAddLocationClick}
+            handleDeleteClick={() => handleDeleteClick(item.palletId.toString())}
           />
         )}
         onRefresh={null}
@@ -229,12 +331,12 @@ export const PalletWorkList = () => {
       completed: undefined,
       completedId: undefined,
       completedTS: undefined,
-      idText: 'test'
+      sectionID: 0
     },
     {
       createId: '12',
       createTS: '26/06/2022',
-      lastKnownLocationId: 1,
+      lastKnownLocationId: 2,
       lastKnownLocationName: 'A1-2',
       palletDeleted: false,
       palletId: 7989,
@@ -242,7 +344,46 @@ export const PalletWorkList = () => {
       completed: undefined,
       completedId: undefined,
       completedTS: undefined,
-      idText: 'test'
+      sectionID: 0
+    },
+    {
+      createId: '14',
+      createTS: '26/06/2022',
+      lastKnownLocationId: 5,
+      lastKnownLocationName: '1A1-2',
+      palletDeleted: false,
+      palletId: 7777,
+      worklistType: 'MP',
+      completed: undefined,
+      completedId: undefined,
+      completedTS: undefined,
+      sectionID: 0
+    },
+    {
+      createId: '15',
+      createTS: '26/06/2022',
+      lastKnownLocationId: 2,
+      lastKnownLocationName: 'A1-2',
+      palletDeleted: false,
+      palletId: 888,
+      worklistType: 'MP',
+      completed: undefined,
+      completedId: undefined,
+      completedTS: undefined,
+      sectionID: 0
+    },
+    {
+      createId: '15',
+      createTS: '26/06/2022',
+      lastKnownLocationId: 8,
+      lastKnownLocationName: 'A1-11',
+      palletDeleted: false,
+      palletId: 8889,
+      worklistType: 'MP',
+      completed: undefined,
+      completedId: undefined,
+      completedTS: undefined,
+      sectionID: 0
     }
   ];
   return (

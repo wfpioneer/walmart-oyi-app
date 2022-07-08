@@ -102,9 +102,78 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
       />
     </View>
   </CustomModalComponent>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "paddingHorizontal": 15,
+        "paddingVertical": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <TouchableOpacity
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#000000"
+        name="menu"
+        size={25}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#c5c5c5"
+        name="list"
+        size={25}
+      />
+    </TouchableOpacity>
+  </View>
   <FlatList
     data={
       Array [
+        Object {
+          "createId": "",
+          "createTS": "",
+          "itemCount": 5,
+          "lastKnownLocationId": -1,
+          "lastKnownLocationName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+          "palletDeleted": false,
+          "palletId": 0,
+          "sectionID": 0,
+          "worklistType": "MP",
+        },
+        Object {
+          "completed": undefined,
+          "completedId": undefined,
+          "completedTS": undefined,
+          "createId": "15",
+          "createTS": "26/06/2022",
+          "lastKnownLocationId": 2,
+          "lastKnownLocationName": "A1-2",
+          "palletDeleted": false,
+          "palletId": 888,
+          "sectionID": 0,
+          "worklistType": "MP",
+        },
+        Object {
+          "completed": undefined,
+          "completedId": undefined,
+          "completedTS": undefined,
+          "createId": "14",
+          "createTS": "26/06/2022",
+          "lastKnownLocationId": 5,
+          "lastKnownLocationName": "1A1-2",
+          "palletDeleted": false,
+          "palletId": 7777,
+          "sectionID": 0,
+          "worklistType": "MP",
+        },
         Object {
           "completed": undefined,
           "completedId": undefined,
@@ -115,6 +184,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
           "lastKnownLocationName": "A1-1",
           "palletDeleted": false,
           "palletId": 7988,
+          "sectionID": 0,
           "worklistType": "MP",
         },
         Object {
@@ -127,6 +197,20 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
           "lastKnownLocationName": "A1-2",
           "palletDeleted": false,
           "palletId": 7989,
+          "sectionID": 0,
+          "worklistType": "MP",
+        },
+        Object {
+          "completed": undefined,
+          "completedId": undefined,
+          "completedTS": undefined,
+          "createId": "15",
+          "createTS": "26/06/2022",
+          "lastKnownLocationId": 8,
+          "lastKnownLocationName": "A1-11",
+          "palletDeleted": false,
+          "palletId": 8889,
+          "sectionID": 0,
           "worklistType": "MP",
         },
       ]
