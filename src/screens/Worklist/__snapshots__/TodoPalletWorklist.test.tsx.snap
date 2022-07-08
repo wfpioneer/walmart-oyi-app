@@ -12,34 +12,35 @@ exports[`TodoPalletWorklistScreen Renders an array of incomplete pallet worklist
   }
   dispatch={[MockFunction]}
   displayConfirmation={false}
+  error={null}
+  onRefresh={[Function]}
   palletWorklist={
     Array [
       Object {
         "completed": false,
-        "completedId": undefined,
-        "completedTS": undefined,
-        "createId": "11",
-        "createTS": "26/06/2022",
-        "lastKnownLocationId": 1,
-        "lastKnownLocationName": "A1-1",
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "createTs": "26/06/2022",
+        "createUserId": "11",
+        "lastKnownPalletLocationId": 1,
+        "lastKnownPalletLocationName": "A1-1",
         "palletDeleted": false,
         "palletId": 7988,
-        "worklistType": "MP",
       },
       Object {
         "completed": false,
-        "completedId": undefined,
-        "completedTS": undefined,
-        "createId": "12",
-        "createTS": "26/06/2022",
-        "lastKnownLocationId": 2,
-        "lastKnownLocationName": "A1-2",
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "createTs": "26/06/2022",
+        "createUserId": "12",
+        "lastKnownPalletLocationId": 2,
+        "lastKnownPalletLocationName": "A1-2",
         "palletDeleted": false,
         "palletId": 7989,
-        "worklistType": "MP",
       },
     ]
   }
+  refreshing={false}
   setDisplayConfirmation={[MockFunction]}
   useEffectHook={[Function]}
 />

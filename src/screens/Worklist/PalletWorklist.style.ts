@@ -39,5 +39,29 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 20,
     paddingHorizontal: 10
+  },
+  errorButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLOR.RED_300,
+    borderRadius: 4,
+    height: 40,
+    width: '100%'
+  },
+  errorText: {
+    marginVertical: 10,
+    textAlign: 'center'
+  },
+  errorView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 15,
+    paddingVertical: 15
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

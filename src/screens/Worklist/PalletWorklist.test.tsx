@@ -1,6 +1,8 @@
 import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import Toast from 'react-native-toast-message';
+import { AxiosError } from 'axios';
+import { object } from 'prop-types';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { PalletWorklist, clearPalletAPIHook } from './PalletWorklist';
 import { mockMissingPalletWorklistTodo } from '../../mockData/mockWorkList';
@@ -24,11 +26,20 @@ const navigationProp: NavigationProp<any> = {
 
 describe('Tests rendering PalletWorklist screen', () => {
   const mockDispatch = jest.fn();
+  const mockOnRefresh = jest.fn();
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
     error: null,
     value: null,
     result: null
+  };
+
+  const mockError: AxiosError = {
+    config: {},
+    isAxiosError: true,
+    message: '500 Network Error',
+    name: 'Network Error',
+    toJSON: () => object
   };
 
   afterEach(() => {
@@ -46,6 +57,46 @@ describe('Tests rendering PalletWorklist screen', () => {
         clearPalletAPI={defaultAsyncState}
         navigation={navigationProp}
         useEffectHook={jest.fn()}
+        onRefresh={jest.fn()}
+        refreshing={false}
+        error={null}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders the PalletWorklist screen when refreshing prop is true', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PalletWorklist
+        palletWorklist={mockMissingPalletWorklistTodo}
+        displayConfirmation={false}
+        setDisplayConfirmation={jest.fn()}
+        dispatch={mockDispatch}
+        clearPalletAPI={defaultAsyncState}
+        navigation={navigationProp}
+        useEffectHook={jest.fn()}
+        onRefresh={jest.fn()}
+        refreshing={true}
+        error={null}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the PalletWorklist screen when the backend service encouters an error', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PalletWorklist
+        palletWorklist={mockMissingPalletWorklistTodo}
+        displayConfirmation={false}
+        setDisplayConfirmation={jest.fn()}
+        dispatch={mockDispatch}
+        clearPalletAPI={defaultAsyncState}
+        navigation={navigationProp}
+        useEffectHook={jest.fn()}
+        onRefresh={jest.fn()}
+        refreshing={false}
+        error={mockError}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -71,7 +122,8 @@ describe('Tests rendering PalletWorklist screen', () => {
       mockPalletID,
       navigationProp,
       mockDispatch,
-      mockSetDisplayConfirmation
+      mockSetDisplayConfirmation,
+      mockOnRefresh
     );
 
     expect(mockDispatch).toBeCalledTimes(2);
@@ -96,7 +148,8 @@ describe('Tests rendering PalletWorklist screen', () => {
       mockPalletID,
       navigationProp,
       mockDispatch,
-      mockSetDisplayConfirmation
+      mockSetDisplayConfirmation,
+      mockOnRefresh
     );
 
     expect(mockDispatch).toBeCalledTimes(2);
@@ -113,7 +166,8 @@ describe('Tests rendering PalletWorklist screen', () => {
       mockPalletID,
       navigationProp,
       mockDispatch,
-      mockSetDisplayConfirmation
+      mockSetDisplayConfirmation,
+      mockOnRefresh
     );
     expect(mockDispatch).toBeCalledTimes(1);
   });
