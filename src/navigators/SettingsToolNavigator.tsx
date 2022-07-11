@@ -7,8 +7,8 @@ import { strings } from '../locales';
 const Stack = createStackNavigator();
 export const SettingsToolNavigatorStack = (): JSX.Element => (
   <Stack.Navigator
-    headerMode="float"
     screenOptions={{
+      headerMode: 'float',
       headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
       headerTintColor: COLOR.WHITE
     }}

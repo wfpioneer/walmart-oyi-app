@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeaderBackButton, createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from 'react-native';
@@ -20,9 +20,6 @@ const PrintPriceSignNavigator = (): JSX.Element => {
   const { printingLocationLabels, printingPalletLabel } = useTypedSelector(state => state.Print);
   const user = useTypedSelector(state => state.User);
   const isPrintUpdate = user.features.includes('printing update') || user.configs.printingUpdate;
-  const navigateBack = () => {
-    navigation.goBack();
-  };
 
   const getHeaderTitle = () => {
     let title;
@@ -38,8 +35,8 @@ const PrintPriceSignNavigator = (): JSX.Element => {
 
   return (
     <Stack.Navigator
-      headerMode="float"
       screenOptions={{
+        headerMode: 'float',
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
         headerTintColor: COLOR.WHITE
       }}
@@ -51,15 +48,7 @@ const PrintPriceSignNavigator = (): JSX.Element => {
           headerTitle: getHeaderTitle(),
           headerTitleAlign: 'left',
           headerTitleStyle: styles.headerTitle,
-          headerBackTitleVisible: false,
-          headerLeft: props => (
-            // Shouldn't need to do this, but not showing on its own for some reason
-            // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
-            <HeaderBackButton
-              {...props}
-              onPress={navigateBack}
-            />
-          )
+          headerBackTitleVisible: false
         }}
       />
       <Stack.Screen
@@ -92,15 +81,7 @@ const PrintPriceSignNavigator = (): JSX.Element => {
           headerTitle: strings('PRINT.QUEUE_TITLE'),
           headerTitleAlign: 'left',
           headerTitleStyle: styles.headerTitle,
-          headerBackTitleVisible: false,
-          headerLeft: props => (
-            // Shouldn't need to do this, but not showing on its own for some reason
-            // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
-            <HeaderBackButton
-              {...props}
-              onPress={navigateBack}
-            />
-          )
+          headerBackTitleVisible: false
         }}
       />
     </Stack.Navigator>

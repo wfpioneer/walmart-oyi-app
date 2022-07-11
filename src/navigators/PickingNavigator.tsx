@@ -94,10 +94,10 @@ export const PickingNavigatorStack = (
 
   return (
     <Stack.Navigator
-      headerMode="float"
       screenOptions={({ route: screenRoute }) => {
         const routeName = getFocusedRouteNameFromRoute(screenRoute) ?? 'Pick';
         return {
+          headerMode: 'float',
           headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
           headerTintColor: COLOR.WHITE,
           headerRight: () => (
@@ -123,12 +123,12 @@ export const PickingNavigatorStack = (
         options={{
           headerTitle: strings('PICKING.PICKING'),
           headerRight: () => kebabMenuButton(pickingMenu, dispatch),
-          headerLeft: hlProps => (
-            <HeaderBackButton
-              {...hlProps}
-              onPress={() => { navigate(hlProps); }}
-            />
-          )
+          // headerLeft: hlProps => (
+          //   <HeaderBackButton
+          //     {...hlProps}
+          //     onPress={() => { navigate(hlProps); }}
+          //   />
+          // )
         }}
       />
       <Stack.Screen
@@ -137,12 +137,12 @@ export const PickingNavigatorStack = (
         options={{
           headerTitle: strings('PICKING.PICKING'),
           headerRight: () => kebabMenuButton(pickingMenu, dispatch),
-          headerLeft: hlProps => (
-            <HeaderBackButton
-              {...hlProps}
-              onPress={() => { navigate(hlProps); }}
-            />
-          )
+          // headerLeft: hlProps => (
+          //   <HeaderBackButton
+          //     {...hlProps}
+          //     onPress={() => { navigate(hlProps); }}
+          //   />
+          // )
         }}
       />
       <Stack.Screen

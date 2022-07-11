@@ -1,10 +1,6 @@
 import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import {
-  Pressable,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Pressable, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import COLOR from '../themes/Color';
@@ -38,8 +34,8 @@ export const renderScanButton = (
 );
 
 interface MissingPalletWorklistNavigatorProps {
-    isManualScanEnabled: boolean;
-    dispatch: Dispatch<any>;
+  isManualScanEnabled: boolean;
+  dispatch: Dispatch<any>;
 }
 
 export const kebabMenuButton = () => (
@@ -52,16 +48,15 @@ export const kebabMenuButton = () => (
   </Pressable>
 );
 
-export const MissingPalletWorklistNavigatorStack = (props: MissingPalletWorklistNavigatorProps): JSX.Element => {
-  const {
-    dispatch,
-    isManualScanEnabled
-  } = props;
+export const MissingPalletWorklistNavigatorStack = (
+  props: MissingPalletWorklistNavigatorProps
+): JSX.Element => {
+  const { dispatch, isManualScanEnabled } = props;
   // TODO: Need to add other screens related to Missing Pallet Navigator
   return (
     <Stack.Navigator
-      headerMode="float"
       screenOptions={() => ({
+        headerMode: 'float',
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
         headerTintColor: COLOR.WHITE
       })}
