@@ -61,7 +61,7 @@ export const CompletedPalletWorklistScreen = (
 };
 
 export const CompletedPalletWorklist = (): JSX.Element => {
-  const getMPWorklistApi = useTypedSelector(state => state.async.getWorklist);
+  const getMPWorklistApi = useTypedSelector(state => state.async.getPalletWorklist);
   const clearPalletAPI = useTypedSelector(state => state.async.clearPallet);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [groupToggle, updateGroupToggle] = useState(false);
