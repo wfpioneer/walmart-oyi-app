@@ -40,13 +40,28 @@ export const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 10
   },
-  viewSwitcher: {
-    backgroundColor: COLOR.WHITE,
-    width: '100%',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    paddingVertical: 5,
+  errorButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLOR.RED_300,
+    borderRadius: 4,
+    height: 40,
+    width: '100%'
+  },
+  errorText: {
+    marginVertical: 10,
+    textAlign: 'center'
+  },
+  errorView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     paddingHorizontal: 15,
-    flexDirection: 'row'
+    paddingVertical: 15
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

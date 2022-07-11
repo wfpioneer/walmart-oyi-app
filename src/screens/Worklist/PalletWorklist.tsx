@@ -1,14 +1,15 @@
 import React, {
-  Dispatch, EffectCallback, useEffect, useState
+  Dispatch, EffectCallback
 } from 'react';
 import {
-  FlatList, Text, TouchableOpacity, View
+  ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
-import { useDispatch } from 'react-redux';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Toast from 'react-native-toast-message';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { NavigationProp } from '@react-navigation/native';
+import { AxiosError } from 'axios';
 import MissingPalletWorklistCard from '../../components/MissingPalletWorklistCard/MissingPalletWorklistCard';
+import SortBar from '../../components/SortBar/SortBar';
 import { strings } from '../../locales';
 import { MissingPalletWorklistItemI } from '../../models/WorklistItem';
 import { CustomModalComponent } from '../Modal/Modal';
@@ -16,7 +17,6 @@ import { styles } from './PalletWorklist.style';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
 import { clearPallet } from '../../state/actions/saga';
-import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { AsyncState } from '../../models/AsyncState';
 import {
   hideActivityModal,
@@ -25,22 +25,22 @@ import {
 import { CLEAR_PALLET } from '../../state/actions/asyncAPI';
 import WorklistHeader from '../../components/WorklistHeader/WorklistHeader';
 
-export interface MPWorklistI extends MissingPalletWorklistItemI {
-  itemCount?: number;
-  sectionID: number;
-}
-
 interface PalletWorkListProps {
-  palletWorklist: MPWorklistI[];
+  palletWorklist: MissingPalletWorklistItemI[] | undefined;
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
   dispatch: Dispatch<any>;
   clearPalletAPI: AsyncState;
   navigation: NavigationProp<any>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
+  onRefresh: () => void;
+  refreshing: boolean;
+  error: AxiosError | null;
+  groupToggle: boolean;
+  updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface ListItemProps {
-  item: MPWorklistI;
+  item: MissingPalletWorklistItemI;
   handleAddLocationClick: () => void;
   handleDeleteClick: (palletID: string) => void;
 }
@@ -50,7 +50,8 @@ export const clearPalletAPIHook = (
   palletId: string,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
-  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  onRefresh: () => void
 ): void => {
   if (navigation.isFocused()) {
     if (!clearPalletApi.isWaiting) {
@@ -59,8 +60,7 @@ export const clearPalletAPIHook = (
         dispatch(hideActivityModal());
         setDisplayConfirmation(false);
         dispatch({ type: CLEAR_PALLET.RESET });
-
-        // TODO REFRESH/CALL MISSING PALLET WORKLIST API
+        onRefresh();
 
         Toast.show({
           type: 'success',
@@ -87,24 +87,24 @@ export const clearPalletAPIHook = (
   }
 };
 
-export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
+export const RenderWorklistItem = (props: ListItemProps, index: number): JSX.Element => {
   const {
     item, handleAddLocationClick, handleDeleteClick
   } = props;
   if (item.palletId === 0) {
-    const { lastKnownLocationName, itemCount } = item;
+    const { lastKnownPalletLocationName, itemCount } = item;
     return (
-      <WorklistHeader title={lastKnownLocationName} numberOfItems={itemCount || 0} />
+      <WorklistHeader title={lastKnownPalletLocationName} numberOfItems={itemCount || 0} />
     );
   }
 
   return (
     <MissingPalletWorklistCard
       palletId={item.palletId}
-      lastLocation={item.lastKnownLocationName}
-      reportedBy={item.createId}
-      reportedDate={item.createTS}
-      expanded={false} // TODO Toggle for a single Pallet WorkList Item
+      lastLocation={item.lastKnownPalletLocationName}
+      reportedBy={item.createUserId}
+      reportedDate={item.createTs}
+      expanded={index === 0} // TODO Toggle for a single Pallet WorkList Item
       addCallback={handleAddLocationClick}
       deleteCallback={() => handleDeleteClick(item.palletId.toString())}
       navigateCallback={() => {}}
@@ -112,32 +112,34 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   );
 };
 
-export const convertDataToDisplayList = (data: MPWorklistI[], groupToggle: boolean): MPWorklistI[] => {
+export const convertDataToDisplayList = (
+  data: MissingPalletWorklistItemI[] | undefined, groupToggle: boolean
+): MissingPalletWorklistItemI[] => {
   if (!groupToggle) {
-    const workListItems = data.length
+    const workListItems = data && data.length
       ? data.sort((a, b) => a.palletId - b.palletId) : [];
     return [{
-      worklistType: 'MP',
       palletId: 0,
-      lastKnownLocationId: -1,
-      lastKnownLocationName: strings('WORKLIST.ALL'),
+      lastKnownPalletLocationId: -1,
+      lastKnownPalletLocationName: strings('WORKLIST.ALL'),
       itemCount: workListItems.length,
-      createId: '',
-      createTS: '',
+      createUserId: '',
+      createTs: '',
       palletDeleted: false,
-      sectionID: 0
+      sectionID: 0,
+      completed: false
     },
     ...workListItems];
   }
 
-  const sortedData = data;
+  const sortedData = data || [];
   // first, sort by Loc
-  sortedData.sort((firstEl: MPWorklistI, secondEl: MPWorklistI) => {
-    if (firstEl.lastKnownLocationName && secondEl.lastKnownLocationName) {
-      if (firstEl.lastKnownLocationName < secondEl.lastKnownLocationName) {
+  sortedData.sort((firstEl: MissingPalletWorklistItemI, secondEl: MissingPalletWorklistItemI) => {
+    if (firstEl.lastKnownPalletLocationName && secondEl.lastKnownPalletLocationName) {
+      if (firstEl.lastKnownPalletLocationName < secondEl.lastKnownPalletLocationName) {
         return -1;
       }
-      if (firstEl.lastKnownLocationName > secondEl.lastKnownLocationName) {
+      if (firstEl.lastKnownPalletLocationName > secondEl.lastKnownPalletLocationName) {
         return 1;
       }
     }
@@ -145,16 +147,18 @@ export const convertDataToDisplayList = (data: MPWorklistI[], groupToggle: boole
   });
 
   // second, sort by section
-  let locSecWiseItems: MPWorklistI[] = [];
-  let previousLocItem: MPWorklistI;
-  let zoneWiseItems: MPWorklistI[] = [];
+  let locSecWiseItems: MissingPalletWorklistItemI[] = [];
+  let previousLocItem: MissingPalletWorklistItemI;
+  let zoneWiseItems: MissingPalletWorklistItemI[] = [];
   sortedData.forEach(item => {
-    const currSec = item.lastKnownLocationName.split('-').pop();
-    const prevZone = previousLocItem ? previousLocItem.lastKnownLocationName.split('-')[0] : '';
-    const currZone = item.lastKnownLocationName.split('-')[0];
+    const currSec = item.lastKnownPalletLocationName.split('-').pop();
+    const prevZone = previousLocItem ? previousLocItem.lastKnownPalletLocationName.split('-')[0] : '';
+    const currZone = item.lastKnownPalletLocationName.split('-')[0];
     if (!prevZone || (prevZone !== currZone)) {
       if (zoneWiseItems.length) {
-        const sortedLocWisePallets = zoneWiseItems.sort((a, b) => a.sectionID - b.sectionID);
+        const sortedLocWisePallets = zoneWiseItems.sort((a, b) => (
+          a.sectionID && b.sectionID ? a.sectionID - b.sectionID : 0
+        ));
         locSecWiseItems = locSecWiseItems.concat(sortedLocWisePallets);
       }
       previousLocItem = item;
@@ -167,17 +171,19 @@ export const convertDataToDisplayList = (data: MPWorklistI[], groupToggle: boole
   });
 
   if (zoneWiseItems.length) {
-    const sortedLocWisePallets = zoneWiseItems.sort((a, b) => a.sectionID - b.sectionID);
+    const sortedLocWisePallets = zoneWiseItems.sort((a, b) => (
+      a.sectionID && b.sectionID ? a.sectionID - b.sectionID : 0
+    ));
     locSecWiseItems = locSecWiseItems.concat(sortedLocWisePallets);
   }
 
-  let returnData: MPWorklistI[] = [];
+  let returnData: MissingPalletWorklistItemI[] = [];
 
   // Loc than sec than palletid
-  let previousItem: MPWorklistI;
-  let locWisePallets: MPWorklistI[] = [];
+  let previousItem: MissingPalletWorklistItemI;
+  let locWisePallets: MissingPalletWorklistItemI[] = [];
   locSecWiseItems.forEach(item => {
-    if (!previousItem || (previousItem.lastKnownLocationId !== item.lastKnownLocationId)) {
+    if (!previousItem || (previousItem.lastKnownPalletLocationId !== item.lastKnownPalletLocationId)) {
       if (locWisePallets.length) {
         returnData[returnData.length - 1].itemCount = locWisePallets.length;
         const sortedLocWisePallets = locWisePallets.sort((a, b) => a.palletId - b.palletId);
@@ -185,15 +191,15 @@ export const convertDataToDisplayList = (data: MPWorklistI[], groupToggle: boole
       }
       previousItem = item;
       returnData.push({
-        worklistType: 'MP',
         palletId: 0,
-        lastKnownLocationId: item.lastKnownLocationId,
-        lastKnownLocationName: item.lastKnownLocationName,
-        createId: '',
-        createTS: '',
+        lastKnownPalletLocationId: item.lastKnownPalletLocationId,
+        lastKnownPalletLocationName: item.lastKnownPalletLocationName,
+        createUserId: '',
+        createTs: '',
         palletDeleted: false,
         itemCount: 1,
-        sectionID: 0
+        sectionID: 0,
+        completed: false
       });
       locWisePallets = [];
       locWisePallets.push(item);
@@ -212,7 +218,7 @@ export const convertDataToDisplayList = (data: MPWorklistI[], groupToggle: boole
   return returnData;
 };
 
-export const PalletWorklistScreen = (props: PalletWorkListProps) => {
+export const PalletWorklist = (props: PalletWorkListProps) => {
   const {
     clearPalletAPI,
     displayConfirmation,
@@ -220,20 +226,25 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
     palletWorklist,
     setDisplayConfirmation,
     navigation,
-    useEffectHook
+    useEffectHook,
+    onRefresh,
+    refreshing,
+    error,
+    groupToggle,
+    updateGroupToggle
   } = props;
   let deletePalletId = '';
-  const [groupToggle, updateGroupToggle] = useState(false);
 
   useEffectHook(() => clearPalletAPIHook(
     clearPalletAPI,
     deletePalletId,
     navigation,
     dispatch,
-    setDisplayConfirmation
+    setDisplayConfirmation,
+    onRefresh
   ),
   [clearPalletAPI]);
-
+  // TODO handle request + response for getPalletWorklist service call
   const onDeletePress = () => {
     dispatch(clearPallet({ palletId: deletePalletId }));
   };
@@ -244,6 +255,30 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
   };
 
   const handleAddLocationClick = () => navigation.navigate('ScanPallet');
+
+  if (error) {
+    return (
+      <View style={styles.errorView}>
+        <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('WORKLIST.WORKLIST_ITEM_API_ERROR')}</Text>
+        <TouchableOpacity style={styles.errorButton} onPress={onRefresh}>
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  if (refreshing) {
+    return (
+      <ActivityIndicator
+        animating={refreshing}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -275,27 +310,15 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
           />
         </View>
       </CustomModalComponent>
-      <View style={styles.viewSwitcher}>
-        <TouchableOpacity onPress={() => updateGroupToggle(false)}>
-          <MaterialIcons
-            name="menu"
-            size={25}
-            color={!groupToggle ? COLOR.BLACK : COLOR.GREY}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => updateGroupToggle(true)}>
-          <MaterialIcons
-            name="list"
-            size={25}
-            color={groupToggle ? COLOR.BLACK : COLOR.GREY}
-          />
-        </TouchableOpacity>
-      </View>
+      <SortBar
+        isGrouped={groupToggle}
+        updateGroupToggle={updateGroupToggle}
+      />
       <FlatList
         data={convertDataToDisplayList(palletWorklist, groupToggle)}
-        keyExtractor={(item: MPWorklistI, index: number) => {
+        keyExtractor={(item: MissingPalletWorklistItemI, index: number) => {
           if (item.palletId === 0) {
-            return item.lastKnownLocationName.toString();
+            return item.lastKnownPalletLocationName.toString();
           }
           return item.palletId + index.toString();
         }}
@@ -306,95 +329,10 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
             handleDeleteClick={() => handleDeleteClick(item.palletId.toString())}
           />
         )}
-        onRefresh={null}
-        refreshing={undefined}
+        onRefresh={onRefresh}
+        refreshing={refreshing}
         style={styles.list}
       />
     </View>
-  );
-};
-
-export const PalletWorkList = () => {
-  const [displayConfirmation, setDisplayConfirmation] = useState(false);
-  const clearPalletAPI = useTypedSelector(state => state.async.clearPallet);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const mockMPWorklist: MPWorklistI[] = [
-    {
-      createId: '11',
-      createTS: '26/06/2022',
-      lastKnownLocationId: 1,
-      lastKnownLocationName: 'A1-1',
-      palletDeleted: false,
-      palletId: 7988,
-      worklistType: 'MP',
-      completed: undefined,
-      completedId: undefined,
-      completedTS: undefined,
-      sectionID: 0
-    },
-    {
-      createId: '12',
-      createTS: '26/06/2022',
-      lastKnownLocationId: 2,
-      lastKnownLocationName: 'A1-2',
-      palletDeleted: false,
-      palletId: 7989,
-      worklistType: 'MP',
-      completed: undefined,
-      completedId: undefined,
-      completedTS: undefined,
-      sectionID: 0
-    },
-    {
-      createId: '14',
-      createTS: '26/06/2022',
-      lastKnownLocationId: 5,
-      lastKnownLocationName: '1A1-2',
-      palletDeleted: false,
-      palletId: 7777,
-      worklistType: 'MP',
-      completed: undefined,
-      completedId: undefined,
-      completedTS: undefined,
-      sectionID: 0
-    },
-    {
-      createId: '15',
-      createTS: '26/06/2022',
-      lastKnownLocationId: 2,
-      lastKnownLocationName: 'A1-2',
-      palletDeleted: false,
-      palletId: 888,
-      worklistType: 'MP',
-      completed: undefined,
-      completedId: undefined,
-      completedTS: undefined,
-      sectionID: 0
-    },
-    {
-      createId: '15',
-      createTS: '26/06/2022',
-      lastKnownLocationId: 8,
-      lastKnownLocationName: 'A1-11',
-      palletDeleted: false,
-      palletId: 8889,
-      worklistType: 'MP',
-      completed: undefined,
-      completedId: undefined,
-      completedTS: undefined,
-      sectionID: 0
-    }
-  ];
-  return (
-    <PalletWorklistScreen
-      palletWorklist={mockMPWorklist}
-      displayConfirmation={displayConfirmation}
-      setDisplayConfirmation={setDisplayConfirmation}
-      dispatch={dispatch}
-      clearPalletAPI={clearPalletAPI}
-      navigation={navigation}
-      useEffectHook={useEffect}
-    />
   );
 };

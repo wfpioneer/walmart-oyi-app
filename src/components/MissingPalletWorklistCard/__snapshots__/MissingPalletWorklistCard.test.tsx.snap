@@ -72,7 +72,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
           }
         }
       >
-        [missing "en.MISSING_PALLET_WORKLIST.REPORTED_DATE" translation]: 26/06/2022
+        [missing "en.MISSING_PALLET_WORKLIST.REPORTED_DATE" translation]: Invalid date
       </Text>
     </View>
     <View
@@ -180,7 +180,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
           }
         }
       >
-        [missing "en.MISSING_PALLET_WORKLIST.REPORTED_DATE" translation]: 26/06/2022
+        [missing "en.MISSING_PALLET_WORKLIST.REPORTED_DATE" translation]: Invalid date
       </Text>
     </View>
     <View
