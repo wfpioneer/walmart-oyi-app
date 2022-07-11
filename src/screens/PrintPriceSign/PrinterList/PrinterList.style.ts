@@ -17,7 +17,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: center,
     justifyContent: flexStart,
-    paddingHorizontal: 15,
+    paddingLeft: 15,
     marginVertical: 10,
     height: 40
   },
@@ -42,8 +42,7 @@ export default StyleSheet.create({
     width: '100%'
   },
   trashCan: {
-    paddingLeft: 15,
-    paddingRight: 5,
+    paddingHorizontal: 20,
     paddingVertical: 10
   }
 });
