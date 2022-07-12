@@ -467,7 +467,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     }
   };
 
-  const isPickQtyZero = ():boolean => selectedPicks.every(pick => pick.quantityLeft === 0);
+  const isPickQtyZero = ():boolean => selectedPicks.every(pick => pick.newQuantityLeft === 0);
 
   const isAnyNewInvalidPickQty = ():boolean => selectedPicks.some(
     pick => !!pick.quantityLeft && Number.isNaN(pick.newQuantityLeft)
