@@ -1,10 +1,11 @@
 import React, { Dispatch } from 'react';
-import { HeaderBackButton, StackHeaderLeftButtonProps, createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
-  Pressable,
-  TouchableOpacity,
-  View
-} from 'react-native';
+  HeaderBackButton,
+  HeaderBackButtonProps
+} from '@react-navigation/elements';
+
+import { Pressable, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
@@ -19,9 +20,7 @@ import { setManualScan } from '../state/actions/Global';
 import styles from './PickingNavigator.style';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { Tabs } from '../models/Picking.d';
-import {
-  showPickingMenu
-} from '../state/actions/Picking';
+import { showPickingMenu } from '../state/actions/Picking';
 import { trackEvent } from '../utils/AppCenterTool';
 
 const Stack = createStackNavigator();
@@ -53,7 +52,10 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
-export const kebabMenuButton = (pickingMenu: boolean, dispatch: Dispatch<any>) => (
+export const kebabMenuButton = (
+  pickingMenu: boolean,
+  dispatch: Dispatch<any>
+) => (
   <Pressable
     onPress={() => {
       dispatch(showPickingMenu(!pickingMenu));
@@ -73,13 +75,10 @@ export const PickingNavigatorStack = (
   props: PickingNavigatorProps
 ): JSX.Element => {
   const {
-    dispatch,
-    isManualScanEnabled,
-    selectedTab,
-    pickingMenu
+    dispatch, isManualScanEnabled, selectedTab, pickingMenu
   } = props;
 
-  const navigate = (hlProps: StackHeaderLeftButtonProps) => {
+  const navigate = (hlProps: HeaderBackButtonProps) => {
     dispatch(showPickingMenu(false));
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     hlProps.canGoBack && hlProps.onPress && hlProps.onPress();
@@ -123,12 +122,15 @@ export const PickingNavigatorStack = (
         options={{
           headerTitle: strings('PICKING.PICKING'),
           headerRight: () => kebabMenuButton(pickingMenu, dispatch),
-          // headerLeft: hlProps => (
-          //   <HeaderBackButton
-          //     {...hlProps}
-          //     onPress={() => { navigate(hlProps); }}
-          //   />
-          // )
+          headerLeft: hlProps => (
+            <HeaderBackButton
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...hlProps}
+              onPress={() => {
+                navigate(hlProps);
+              }}
+            />
+          )
         }}
       />
       <Stack.Screen
@@ -137,12 +139,15 @@ export const PickingNavigatorStack = (
         options={{
           headerTitle: strings('PICKING.PICKING'),
           headerRight: () => kebabMenuButton(pickingMenu, dispatch),
-          // headerLeft: hlProps => (
-          //   <HeaderBackButton
-          //     {...hlProps}
-          //     onPress={() => { navigate(hlProps); }}
-          //   />
-          // )
+          headerLeft: hlProps => (
+            <HeaderBackButton
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...hlProps}
+              onPress={() => {
+                navigate(hlProps);
+              }}
+            />
+          )
         }}
       />
       <Stack.Screen
