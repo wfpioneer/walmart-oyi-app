@@ -174,7 +174,7 @@ export default {
     SCAN_PALLET: 'Escanea un pallet',
     PRINT_PALLET: 'Imprimir pallet',
     COMBINE_PALLETS: 'Combinar pallets',
-    CLEAR_PALLET: 'Vaciar pallets',
+    CLEAR_PALLET: 'Eliminar pallets',
     MANAGE_PALLET: 'Administrar Pallet',
     PALLET_ID: 'Pallet ID',
     EXPIRATION_DATE: 'Fecha de caducidad',

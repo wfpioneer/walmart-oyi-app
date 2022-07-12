@@ -1,8 +1,10 @@
-import React, {
-  Dispatch, EffectCallback
-} from 'react';
+import React, { Dispatch, EffectCallback } from 'react';
 import {
-  ActivityIndicator, FlatList, Text, TouchableOpacity, View
+  ActivityIndicator,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -93,15 +95,17 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
   } = props;
   let deletePalletId = '';
 
-  useEffectHook(() => clearPalletAPIHook(
-    clearPalletAPI,
-    deletePalletId,
-    navigation,
-    dispatch,
-    setDisplayConfirmation,
-    onRefresh
-  ),
-  [clearPalletAPI]);
+  useEffectHook(
+    () => clearPalletAPIHook(
+      clearPalletAPI,
+      deletePalletId,
+      navigation,
+      dispatch,
+      setDisplayConfirmation,
+      onRefresh
+    ),
+    [clearPalletAPI]
+  );
   // TODO handle request + response for getPalletWorklist service call
   const onDeletePress = () => {
     dispatch(clearPallet({ palletId: deletePalletId }));
@@ -118,7 +122,9 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
     return (
       <View style={styles.errorView}>
         <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
-        <Text style={styles.errorText}>{strings('WORKLIST.WORKLIST_ITEM_API_ERROR')}</Text>
+        <Text style={styles.errorText}>
+          {strings('WORKLIST.WORKLIST_ITEM_API_ERROR')}
+        </Text>
         <TouchableOpacity style={styles.errorButton} onPress={onRefresh}>
           <Text>{strings('GENERICS.RETRY')}</Text>
         </TouchableOpacity>
