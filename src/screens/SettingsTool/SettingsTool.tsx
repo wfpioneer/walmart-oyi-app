@@ -77,7 +77,7 @@ export const getConfigAndFluffyFeaturesApiHook = (
         dispatch(assignFluffyFeatures(data));
       }
     }
-    if (getClubConfigApiState.result && getClubConfigApiState.result) {
+    if (getClubConfigApiState.result && getFluffyApiState.result) {
       Toast.show({
         type: 'success',
         text1: strings('SETTINGS.FEATURE_UPDATE_SUCCESS'),
@@ -85,7 +85,7 @@ export const getConfigAndFluffyFeaturesApiHook = (
         position: 'bottom'
       });
       resetApis(dispatch);
-    } else if (getClubConfigApiState.error || getClubConfigApiState.error) {
+    } else if (getClubConfigApiState.error || getFluffyApiState.error) {
       Toast.show({
         type: 'error',
         text1: strings('SETTINGS.FEATURE_UPDATE_FAILURE'),

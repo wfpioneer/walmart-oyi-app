@@ -456,7 +456,7 @@ export default {
   },
   SETTINGS: {
     TITLE: '设置',
-    FEATURE_UPDATE_SUCCESS: 'Features Updated', // TODO: Add Mandarin Translation
-    FEATURE_UPDATE_FAILURE: 'Unable to get updated features' // TODO: Add Mandarin Translation
+    FEATURE_UPDATE_SUCCESS: '系统功能已更新',
+    FEATURE_UPDATE_FAILURE: '无法获取已更新的系统功能'
   }
 };
