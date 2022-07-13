@@ -1,6 +1,6 @@
 import React from 'react';
-import { HeaderBackButton, createStackNavigator } from '@react-navigation/stack';
-
+import { createStackNavigator } from '@react-navigation/stack';
+import { HeaderBackButton } from '@react-navigation/elements';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -76,8 +76,8 @@ const ReviewItemDetailsNavigator = () => {
 
   return (
     <Stack.Navigator
-      headerMode="float"
       screenOptions={{
+        headerMode: 'float',
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
         headerTintColor: COLOR.WHITE
       }}
