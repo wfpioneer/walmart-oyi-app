@@ -27,4 +27,6 @@ export interface MissingPalletWorklistItemI {
   completed: boolean;
   completedTs?: string;
   completedUserId?: string;
+  itemCount?: number;
+  sectionID?: number;
 }
