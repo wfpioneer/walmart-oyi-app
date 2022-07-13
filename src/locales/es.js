@@ -55,7 +55,8 @@ export default {
     REMOVED: 'Removido',
     CREATE: 'Crear',
     UNASSIGNED: 'Sin asignar',
-    SELECTED: 'Seleccionado'
+    SELECTED: 'Seleccionado',
+    UPDATE: 'Actualizar'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -454,6 +455,8 @@ export default {
     PALLET_NOT_READY: 'No se puede ingresar a bodega. Ell pallet es parte de un pick activo'
   },
   SETTINGS: {
-    TITLE: 'Ajustes'
+    TITLE: 'Ajustes',
+    FEATURE_UPDATE_SUCCESS: 'Funcionalidades actualizadas',
+    FEATURE_UPDATE_FAILURE: 'Incapaz de obtener las funcionalidades actualizadas'
   }
 };

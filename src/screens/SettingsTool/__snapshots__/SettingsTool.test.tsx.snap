@@ -31,7 +31,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
       }
     }
   >
-    <mockConstructor
+    <Icon
       color="#616161"
       name="keyboard-arrow-down"
       size={25}
@@ -71,7 +71,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
       }
     }
   >
-    <mockConstructor
+    <Icon
       color="#616161"
       name="keyboard-arrow-up"
       size={25}
@@ -258,232 +258,264 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     Object {
       "backgroundColor": "#ffffffff",
       "flex": 1,
+      "flexDirection": "column",
     }
   }
 >
   <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "paddingHorizontal": 10,
-        "paddingVertical": 10,
+        "flex": 1,
       }
     }
   >
-    <CollapsibleCard
-      isOpened={true}
-      title="Printers"
-      toggleIsOpened={[MockFunction]}
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 10,
+          "paddingVertical": 10,
+        }
+      }
+    >
+      <CollapsibleCard
+        isOpened={true}
+        title="Printers"
+        toggleIsOpened={[MockFunction]}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#9e9e9e",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingBottom": 10,
+          "paddingHorizontal": 10,
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          [missing "en.PRINT.PRICE_SIGN_PRINTER" translation]
+        </Text>
+        <Text>
+            
+          Test Laser Printer
+        </Text>
+      </View>
+      <TouchableOpacity
+        onPress={[Function]}
+        style={
+          Object {
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#006DE5",
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#9e9e9e",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingBottom": 10,
+          "paddingHorizontal": 10,
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          [missing "en.PRINT.LOCATION_LABEL_PRINTER" translation]
+        </Text>
+        <Text>
+            
+          Test Portable Printer
+        </Text>
+      </View>
+      <TouchableOpacity
+        onPress={[Function]}
+        style={
+          Object {
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#006DE5",
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#9e9e9e",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingBottom": 10,
+          "paddingHorizontal": 10,
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          [missing "en.PRINT.PALLET_LABEL_PRINTER" translation]
+        </Text>
+        <Text>
+            
+          Test Laser Printer#2
+        </Text>
+      </View>
+      <TouchableOpacity
+        onPress={[Function]}
+        style={
+          Object {
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#006DE5",
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 10,
+          "paddingVertical": 10,
+        }
+      }
+    >
+      <CollapsibleCard
+        isOpened={true}
+        title="Features"
+        toggleIsOpened={[MockFunction]}
+      />
+    </View>
+    <ForwardRef
+      ListFooterComponent={<View />}
+      ListFooterComponentStyle={
+        Object {
+          "borderBottomWidth": 1,
+        }
+      }
+      data={
+        Array [
+          Object {
+            "key": "manager approval",
+            "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
+          },
+          Object {
+            "key": "location management",
+            "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
+          },
+          Object {
+            "key": "on hands change",
+            "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
+          },
+          Object {
+            "key": "location management edit",
+            "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
+          },
+          Object {
+            "key": "location printing",
+            "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
+          },
+          Object {
+            "key": "pallet management",
+            "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
+          },
+          Object {
+            "key": "picking",
+            "name": "[missing \\"en.PICKING.PICKING\\" translation]",
+          },
+          Object {
+            "key": "binning",
+            "name": "[missing \\"en.BINNING.BINNING\\" translation]",
+          },
+        ]
+      }
+      keyExtractor={[Function]}
+      renderItem={[Function]}
     />
   </View>
   <View
     style={
       Object {
-        "backgroundColor": "#ffffffff",
-        "borderBottomColor": "#9e9e9e",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "paddingBottom": 10,
-        "paddingHorizontal": 10,
+        "marginHorizontal": 15,
+        "marginVertical": 10,
       }
     }
   >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-          }
-        }
-      >
-        [missing "en.PRINT.PRICE_SIGN_PRINTER" translation]
-      </Text>
-      <Text>
-          
-        Test Laser Printer
-      </Text>
-    </View>
-    <TouchableOpacity
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
       onPress={[Function]}
-      style={
-        Object {
-          "justifyContent": "flex-end",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#006DE5",
-          }
-        }
-      >
-        [missing "en.GENERICS.CHANGE" translation]
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View
-    style={
-      Object {
-        "backgroundColor": "#ffffffff",
-        "borderBottomColor": "#9e9e9e",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "paddingBottom": 10,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-          }
-        }
-      >
-        [missing "en.PRINT.LOCATION_LABEL_PRINTER" translation]
-      </Text>
-      <Text>
-          
-        Test Portable Printer
-      </Text>
-    </View>
-    <TouchableOpacity
-      onPress={[Function]}
-      style={
-        Object {
-          "justifyContent": "flex-end",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#006DE5",
-          }
-        }
-      >
-        [missing "en.GENERICS.CHANGE" translation]
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View
-    style={
-      Object {
-        "backgroundColor": "#ffffffff",
-        "borderBottomColor": "#9e9e9e",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "paddingBottom": 10,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-          }
-        }
-      >
-        [missing "en.PRINT.PALLET_LABEL_PRINTER" translation]
-      </Text>
-      <Text>
-          
-        Test Laser Printer#2
-      </Text>
-    </View>
-    <TouchableOpacity
-      onPress={[Function]}
-      style={
-        Object {
-          "justifyContent": "flex-end",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#006DE5",
-          }
-        }
-      >
-        [missing "en.GENERICS.CHANGE" translation]
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "paddingHorizontal": 10,
-        "paddingVertical": 10,
-      }
-    }
-  >
-    <CollapsibleCard
-      isOpened={true}
-      title="Features"
-      toggleIsOpened={[MockFunction]}
+      radius={5}
+      testID="updateButton"
+      title="[missing \\"en.GENERICS.UPDATE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
     />
   </View>
-  <ForwardRef
-    ListFooterComponent={<View />}
-    ListFooterComponentStyle={
-      Object {
-        "borderBottomWidth": 1,
-      }
-    }
-    data={
-      Array [
-        Object {
-          "key": "manager approval",
-          "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
-        },
-        Object {
-          "key": "location management",
-          "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
-        },
-        Object {
-          "key": "on hands change",
-          "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
-        },
-        Object {
-          "key": "location management edit",
-          "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
-        },
-        Object {
-          "key": "location printing",
-          "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
-        },
-        Object {
-          "key": "pallet management",
-          "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
-        },
-        Object {
-          "key": "picking",
-          "name": "[missing \\"en.PICKING.PICKING\\" translation]",
-        },
-        Object {
-          "key": "binning",
-          "name": "[missing \\"en.BINNING.BINNING\\" translation]",
-        },
-      ]
-    }
-    keyExtractor={[Function]}
-    renderItem={[Function]}
-  />
 </View>
 `;
 
@@ -493,184 +525,216 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     Object {
       "backgroundColor": "#ffffffff",
       "flex": 1,
+      "flexDirection": "column",
     }
   }
 >
   <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "paddingHorizontal": 10,
-        "paddingVertical": 10,
+        "flex": 1,
       }
     }
   >
-    <CollapsibleCard
-      isOpened={true}
-      title="Printers"
-      toggleIsOpened={[MockFunction]}
-    />
-  </View>
-  <View
-    style={
-      Object {
-        "backgroundColor": "#ffffffff",
-        "borderBottomColor": "#9e9e9e",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "paddingBottom": 10,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-          }
-        }
-      >
-        [missing "en.PRINT.PRICE_SIGN_PRINTER" translation]
-      </Text>
-      <Text>
-          
-        [missing "en.GENERICS.NOT_ASSIGNED" translation]
-      </Text>
-    </View>
-    <TouchableOpacity
-      onPress={[Function]}
+    <View
       style={
         Object {
-          "justifyContent": "flex-end",
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 10,
+          "paddingVertical": 10,
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "color": "#006DE5",
-          }
-        }
-      >
-        [missing "en.GENERICS.CHANGE" translation]
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View
-    style={
-      Object {
-        "backgroundColor": "#ffffffff",
-        "borderBottomColor": "#9e9e9e",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "paddingBottom": 10,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-          }
-        }
-      >
-        [missing "en.PRINT.LOCATION_LABEL_PRINTER" translation]
-      </Text>
-      <Text>
-          
-        [missing "en.GENERICS.NOT_ASSIGNED" translation]
-      </Text>
+      <CollapsibleCard
+        isOpened={true}
+        title="Printers"
+        toggleIsOpened={[MockFunction]}
+      />
     </View>
-    <TouchableOpacity
-      onPress={[Function]}
+    <View
       style={
         Object {
-          "justifyContent": "flex-end",
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#9e9e9e",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingBottom": 10,
+          "paddingHorizontal": 10,
         }
       }
     >
-      <Text
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          [missing "en.PRINT.PRICE_SIGN_PRINTER" translation]
+        </Text>
+        <Text>
+            
+          [missing "en.GENERICS.NOT_ASSIGNED" translation]
+        </Text>
+      </View>
+      <TouchableOpacity
+        onPress={[Function]}
         style={
           Object {
-            "color": "#006DE5",
+            "justifyContent": "flex-end",
           }
         }
       >
-        [missing "en.GENERICS.CHANGE" translation]
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View
-    style={
-      Object {
-        "backgroundColor": "#ffffffff",
-        "borderBottomColor": "#9e9e9e",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "paddingBottom": 10,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
+        <Text
+          style={
+            Object {
+              "color": "#006DE5",
+            }
           }
-        }
-      >
-        [missing "en.PRINT.PALLET_LABEL_PRINTER" translation]
-      </Text>
-      <Text>
-          
-        [missing "en.GENERICS.NOT_ASSIGNED" translation]
-      </Text>
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+      </TouchableOpacity>
     </View>
-    <TouchableOpacity
-      onPress={[Function]}
+    <View
       style={
         Object {
-          "justifyContent": "flex-end",
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#9e9e9e",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingBottom": 10,
+          "paddingHorizontal": 10,
         }
       }
     >
-      <Text
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          [missing "en.PRINT.LOCATION_LABEL_PRINTER" translation]
+        </Text>
+        <Text>
+            
+          [missing "en.GENERICS.NOT_ASSIGNED" translation]
+        </Text>
+      </View>
+      <TouchableOpacity
+        onPress={[Function]}
         style={
           Object {
-            "color": "#006DE5",
+            "justifyContent": "flex-end",
           }
         }
       >
-        [missing "en.GENERICS.CHANGE" translation]
-      </Text>
-    </TouchableOpacity>
+        <Text
+          style={
+            Object {
+              "color": "#006DE5",
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#9e9e9e",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingBottom": 10,
+          "paddingHorizontal": 10,
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          [missing "en.PRINT.PALLET_LABEL_PRINTER" translation]
+        </Text>
+        <Text>
+            
+          [missing "en.GENERICS.NOT_ASSIGNED" translation]
+        </Text>
+      </View>
+      <TouchableOpacity
+        onPress={[Function]}
+        style={
+          Object {
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#006DE5",
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 10,
+          "paddingVertical": 10,
+        }
+      }
+    >
+      <CollapsibleCard
+        isOpened={false}
+        title="Features"
+        toggleIsOpened={[MockFunction]}
+      />
+    </View>
   </View>
   <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "paddingHorizontal": 10,
-        "paddingVertical": 10,
+        "marginHorizontal": 15,
+        "marginVertical": 10,
       }
     }
   >
-    <CollapsibleCard
-      isOpened={false}
-      title="Features"
-      toggleIsOpened={[MockFunction]}
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      testID="updateButton"
+      title="[missing \\"en.GENERICS.UPDATE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
     />
   </View>
 </View>
@@ -682,91 +746,123 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     Object {
       "backgroundColor": "#ffffffff",
       "flex": 1,
+      "flexDirection": "column",
     }
   }
 >
   <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "paddingHorizontal": 10,
-        "paddingVertical": 10,
+        "flex": 1,
       }
     }
   >
-    <CollapsibleCard
-      isOpened={false}
-      title="Printers"
-      toggleIsOpened={[MockFunction]}
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 10,
+          "paddingVertical": 10,
+        }
+      }
+    >
+      <CollapsibleCard
+        isOpened={false}
+        title="Printers"
+        toggleIsOpened={[MockFunction]}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 10,
+          "paddingVertical": 10,
+        }
+      }
+    >
+      <CollapsibleCard
+        isOpened={true}
+        title="Features"
+        toggleIsOpened={[MockFunction]}
+      />
+    </View>
+    <ForwardRef
+      ListFooterComponent={<View />}
+      ListFooterComponentStyle={
+        Object {
+          "borderBottomWidth": 1,
+        }
+      }
+      data={
+        Array [
+          Object {
+            "key": "manager approval",
+            "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
+          },
+          Object {
+            "key": "location management",
+            "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
+          },
+          Object {
+            "key": "on hands change",
+            "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
+          },
+          Object {
+            "key": "location management edit",
+            "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
+          },
+          Object {
+            "key": "location printing",
+            "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
+          },
+          Object {
+            "key": "pallet management",
+            "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
+          },
+          Object {
+            "key": "picking",
+            "name": "[missing \\"en.PICKING.PICKING\\" translation]",
+          },
+          Object {
+            "key": "binning",
+            "name": "[missing \\"en.BINNING.BINNING\\" translation]",
+          },
+        ]
+      }
+      keyExtractor={[Function]}
+      renderItem={[Function]}
     />
   </View>
   <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "paddingHorizontal": 10,
-        "paddingVertical": 10,
+        "marginHorizontal": 15,
+        "marginVertical": 10,
       }
     }
   >
-    <CollapsibleCard
-      isOpened={true}
-      title="Features"
-      toggleIsOpened={[MockFunction]}
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      testID="updateButton"
+      title="[missing \\"en.GENERICS.UPDATE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
     />
   </View>
-  <ForwardRef
-    ListFooterComponent={<View />}
-    ListFooterComponentStyle={
-      Object {
-        "borderBottomWidth": 1,
-      }
-    }
-    data={
-      Array [
-        Object {
-          "key": "manager approval",
-          "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
-        },
-        Object {
-          "key": "location management",
-          "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
-        },
-        Object {
-          "key": "on hands change",
-          "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
-        },
-        Object {
-          "key": "location management edit",
-          "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
-        },
-        Object {
-          "key": "location printing",
-          "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
-        },
-        Object {
-          "key": "pallet management",
-          "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
-        },
-        Object {
-          "key": "picking",
-          "name": "[missing \\"en.PICKING.PICKING\\" translation]",
-        },
-        Object {
-          "key": "binning",
-          "name": "[missing \\"en.BINNING.BINNING\\" translation]",
-        },
-      ]
-    }
-    keyExtractor={[Function]}
-    renderItem={[Function]}
-  />
 </View>
 `;
 
@@ -776,231 +872,263 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     Object {
       "backgroundColor": "#ffffffff",
       "flex": 1,
+      "flexDirection": "column",
     }
   }
 >
   <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "paddingHorizontal": 10,
-        "paddingVertical": 10,
+        "flex": 1,
       }
     }
   >
-    <CollapsibleCard
-      isOpened={true}
-      title="Printers"
-      toggleIsOpened={[MockFunction]}
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 10,
+          "paddingVertical": 10,
+        }
+      }
+    >
+      <CollapsibleCard
+        isOpened={true}
+        title="Printers"
+        toggleIsOpened={[MockFunction]}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#9e9e9e",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingBottom": 10,
+          "paddingHorizontal": 10,
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          [missing "en.PRINT.PRICE_SIGN_PRINTER" translation]
+        </Text>
+        <Text>
+            
+          [missing "en.GENERICS.NOT_ASSIGNED" translation]
+        </Text>
+      </View>
+      <TouchableOpacity
+        onPress={[Function]}
+        style={
+          Object {
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#006DE5",
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#9e9e9e",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingBottom": 10,
+          "paddingHorizontal": 10,
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          [missing "en.PRINT.LOCATION_LABEL_PRINTER" translation]
+        </Text>
+        <Text>
+            
+          [missing "en.GENERICS.NOT_ASSIGNED" translation]
+        </Text>
+      </View>
+      <TouchableOpacity
+        onPress={[Function]}
+        style={
+          Object {
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#006DE5",
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#9e9e9e",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingBottom": 10,
+          "paddingHorizontal": 10,
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          [missing "en.PRINT.PALLET_LABEL_PRINTER" translation]
+        </Text>
+        <Text>
+            
+          [missing "en.GENERICS.NOT_ASSIGNED" translation]
+        </Text>
+      </View>
+      <TouchableOpacity
+        onPress={[Function]}
+        style={
+          Object {
+            "justifyContent": "flex-end",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#006DE5",
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 10,
+          "paddingVertical": 10,
+        }
+      }
+    >
+      <CollapsibleCard
+        isOpened={true}
+        title="Features"
+        toggleIsOpened={[MockFunction]}
+      />
+    </View>
+    <ForwardRef
+      ListFooterComponent={<View />}
+      ListFooterComponentStyle={
+        Object {
+          "borderBottomWidth": 1,
+        }
+      }
+      data={
+        Array [
+          Object {
+            "key": "manager approval",
+            "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
+          },
+          Object {
+            "key": "location management",
+            "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
+          },
+          Object {
+            "key": "on hands change",
+            "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
+          },
+          Object {
+            "key": "location management edit",
+            "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
+          },
+          Object {
+            "key": "location printing",
+            "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
+          },
+          Object {
+            "key": "pallet management",
+            "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
+          },
+          Object {
+            "key": "picking",
+            "name": "[missing \\"en.PICKING.PICKING\\" translation]",
+          },
+          Object {
+            "key": "binning",
+            "name": "[missing \\"en.BINNING.BINNING\\" translation]",
+          },
+        ]
+      }
+      keyExtractor={[Function]}
+      renderItem={[Function]}
     />
   </View>
   <View
     style={
       Object {
-        "backgroundColor": "#ffffffff",
-        "borderBottomColor": "#9e9e9e",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "paddingBottom": 10,
-        "paddingHorizontal": 10,
+        "marginHorizontal": 15,
+        "marginVertical": 10,
       }
     }
   >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-          }
-        }
-      >
-        [missing "en.PRINT.PRICE_SIGN_PRINTER" translation]
-      </Text>
-      <Text>
-          
-        [missing "en.GENERICS.NOT_ASSIGNED" translation]
-      </Text>
-    </View>
-    <TouchableOpacity
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
       onPress={[Function]}
-      style={
-        Object {
-          "justifyContent": "flex-end",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#006DE5",
-          }
-        }
-      >
-        [missing "en.GENERICS.CHANGE" translation]
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View
-    style={
-      Object {
-        "backgroundColor": "#ffffffff",
-        "borderBottomColor": "#9e9e9e",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "paddingBottom": 10,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-          }
-        }
-      >
-        [missing "en.PRINT.LOCATION_LABEL_PRINTER" translation]
-      </Text>
-      <Text>
-          
-        [missing "en.GENERICS.NOT_ASSIGNED" translation]
-      </Text>
-    </View>
-    <TouchableOpacity
-      onPress={[Function]}
-      style={
-        Object {
-          "justifyContent": "flex-end",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#006DE5",
-          }
-        }
-      >
-        [missing "en.GENERICS.CHANGE" translation]
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View
-    style={
-      Object {
-        "backgroundColor": "#ffffffff",
-        "borderBottomColor": "#9e9e9e",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "paddingBottom": 10,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-          }
-        }
-      >
-        [missing "en.PRINT.PALLET_LABEL_PRINTER" translation]
-      </Text>
-      <Text>
-          
-        [missing "en.GENERICS.NOT_ASSIGNED" translation]
-      </Text>
-    </View>
-    <TouchableOpacity
-      onPress={[Function]}
-      style={
-        Object {
-          "justifyContent": "flex-end",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#006DE5",
-          }
-        }
-      >
-        [missing "en.GENERICS.CHANGE" translation]
-      </Text>
-    </TouchableOpacity>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "borderBottomWidth": 1,
-        "flexDirection": "row",
-        "paddingHorizontal": 10,
-        "paddingVertical": 10,
-      }
-    }
-  >
-    <CollapsibleCard
-      isOpened={true}
-      title="Features"
-      toggleIsOpened={[MockFunction]}
+      radius={5}
+      testID="updateButton"
+      title="[missing \\"en.GENERICS.UPDATE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
     />
   </View>
-  <ForwardRef
-    ListFooterComponent={<View />}
-    ListFooterComponentStyle={
-      Object {
-        "borderBottomWidth": 1,
-      }
-    }
-    data={
-      Array [
-        Object {
-          "key": "manager approval",
-          "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
-        },
-        Object {
-          "key": "location management",
-          "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
-        },
-        Object {
-          "key": "on hands change",
-          "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
-        },
-        Object {
-          "key": "location management edit",
-          "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
-        },
-        Object {
-          "key": "location printing",
-          "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
-        },
-        Object {
-          "key": "pallet management",
-          "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
-        },
-        Object {
-          "key": "picking",
-          "name": "[missing \\"en.PICKING.PICKING\\" translation]",
-        },
-        Object {
-          "key": "binning",
-          "name": "[missing \\"en.BINNING.BINNING\\" translation]",
-        },
-      ]
-    }
-    keyExtractor={[Function]}
-    renderItem={[Function]}
-  />
 </View>
 `;
