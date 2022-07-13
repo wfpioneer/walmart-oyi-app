@@ -4,7 +4,7 @@ import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 import styles from './SFTCard.styles';
 import COLOR from '../../themes/Color';
-import Button from '../buttons/Button';
+import Button, { ButtonType } from '../buttons/Button';
 
 interface SFTCardProps {
   /* eslint-disable react/require-default-props */
@@ -31,7 +31,7 @@ const renderBottomRightBtns = (textArray: string[], actionFunc?: Function[]) => 
         {textArray.map((value, index) => (
           <View key={value} style={styles.bottomRowBtn}>
             <Button
-              type={Button.Type.NO_BORDER}
+              type={ButtonType.NO_BORDER}
               title={value}
               onPress={() => actionFunc[index]()}
               titleColor={COLOR.MAIN_THEME_COLOR}
@@ -80,7 +80,7 @@ const SFTCard = (props: SFTCardProps) => {
         </View>
         {topRightBtnTxt && topRightBtnAction && (
         <Button
-          type={Button.Type.NO_BORDER}
+          type={ButtonType.NO_BORDER}
           title={topRightBtnTxt}
           onPress={topRightBtnAction}
           titleColor={COLOR.MAIN_THEME_COLOR}

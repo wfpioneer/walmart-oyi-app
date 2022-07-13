@@ -9,7 +9,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import { strings } from '../../locales';
 import styles from './PrintList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -26,7 +26,7 @@ import {
   setLocationPrintQueue,
   setPrintQueue, setPrintingType, unsetPrintingLocationLabels
 } from '../../state/actions/Print';
-import IconButton from '../../components/buttons/IconButton';
+import IconButton, { IconButtonType } from '../../components/buttons/IconButton';
 import COLOR from '../../themes/Color';
 import { PRINT_LOCATION_LABELS, PRINT_SIGN } from '../../state/actions/asyncAPI';
 import PrintQueueItemCard from '../../components/PrintQueueItemCard/PrintQueueItemCard';
@@ -152,7 +152,7 @@ export const NoPrintQueueMessage = (): JSX.Element => (
   <View style={styles.emptyContainer}>
     <IconButton
       icon={<MaterialCommunityIcons name="printer" color={COLOR.GREY_500} size={100} />}
-      type={IconButton.Type.PRIMARY}
+      type={IconButtonType.PRIMARY}
       backgroundColor={COLOR.GREY_200}
       height={250}
       width={250}
@@ -314,7 +314,7 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
           <View style={styles.buttonView}>
             <Button
               title={strings('PRINT.PRINT')}
-              type={Button.Type.PRIMARY}
+              type={ButtonType.PRIMARY}
               style={styles.footerBtn}
               onPress={() => handlePrint(printQueue, tabName, selectedPrinter?.id, navigation, route, dispatch)}
               disabled={printQueue.length < 1}

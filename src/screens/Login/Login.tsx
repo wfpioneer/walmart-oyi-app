@@ -6,7 +6,7 @@ import { Platform, Text, View } from 'react-native';
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
 import { Printer, PrinterType } from '../../models/Printer';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
 import styles from './Login.style';
 import {
@@ -23,7 +23,7 @@ import { RootState } from '../../state/reducers/RootReducer';
 import { CustomModalComponent, ModalCloseIcon } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 import COLOR from '../../themes/Color';
-import IconButton from '../../components/buttons/IconButton';
+import IconButton, { IconButtonType } from '../../components/buttons/IconButton';
 import { AsyncState } from '../../models/AsyncState';
 import { ConfigResponse } from '../../services/Config.service';
 import {
@@ -110,7 +110,7 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
       <View style={styles.closeContainer}>
         <IconButton
           icon={ModalCloseIcon}
-          type={Button.Type.NO_BORDER}
+          type={IconButtonType.NO_BORDER}
           onPress={() => onSignOut()}
           style={styles.closeButton}
         />
@@ -122,14 +122,14 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
         <Button
           title="MX"
           onPress={() => onSubmitMX()}
-          type={Button.Type.SOLID_WHITE}
+          type={ButtonType.SOLID_WHITE}
           titleColor={COLOR.MAIN_THEME_COLOR}
           style={styles.affirmButton}
         />
         <Button
           title="CN"
           onPress={() => onSubmitCN()}
-          type={Button.Type.PRIMARY}
+          type={ButtonType.PRIMARY}
           style={styles.affirmButton}
         />
       </View>

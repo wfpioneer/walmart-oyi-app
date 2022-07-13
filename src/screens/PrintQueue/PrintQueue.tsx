@@ -29,10 +29,10 @@ import {
   unsetPrintingLocationLabels
 } from '../../state/actions/Print';
 import { printLocationLabel, printSign } from '../../state/actions/saga';
-import IconButton from '../../components/buttons/IconButton';
+import IconButton, { IconButtonType } from '../../components/buttons/IconButton';
 import COLOR from '../../themes/Color';
 import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { PRINT_LOCATION_LABELS, PRINT_SIGN } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
@@ -100,13 +100,13 @@ export const renderPrintItem = (
           <View style={styles.actionBtnContainer}>
             <IconButton
               icon={<MaterialCommunityIcon name="pencil" color={COLOR.GREY_700} size={22} />}
-              type={IconButton.Type.NO_BORDER}
+              type={IconButtonType.NO_BORDER}
               style={styles.actionBtns}
               onPress={handleEditAction(index)}
             />
             <IconButton
               icon={<MaterialCommunityIcon name="delete" color={COLOR.GREY_700} size={22} />}
-              type={IconButton.Type.NO_BORDER}
+              type={IconButtonType.NO_BORDER}
               style={styles.actionBtns}
               onPress={handleDeleteAction(index)}
             />
@@ -283,7 +283,7 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
       <View style={styles.emptyContainer}>
         <IconButton
           icon={<MaterialCommunityIcon name="printer" color={COLOR.GREY_500} size={100} />}
-          type={IconButton.Type.PRIMARY}
+          type={IconButtonType.PRIMARY}
           backgroundColor={COLOR.GREY_200}
           height={250}
           width={250}
@@ -342,7 +342,7 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
           <View style={styles.footerBtnContainer}>
             <Button
               title={strings('PRINT.PRINT_ALL')}
-              type={Button.Type.PRIMARY}
+              type={ButtonType.PRIMARY}
               style={styles.footerBtn}
               onPress={() => handlePrint({
                 dispatch,

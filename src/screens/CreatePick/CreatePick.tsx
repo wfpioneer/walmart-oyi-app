@@ -308,7 +308,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
         <Button
           title={strings('GENERICS.CREATE')}
           disabled={disableCreateButton()}
-          testId="createButton"
+          testID="createButton"
           onPress={() => onSubmit()}
         />
       </View>
