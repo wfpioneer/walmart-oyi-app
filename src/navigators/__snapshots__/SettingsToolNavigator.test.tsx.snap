@@ -2,9 +2,9 @@
 
 exports[`SettingsTool Navigator Renders the settings tool navigator component 1`] = `
 <StackNavigator
-  headerMode="float"
   screenOptions={
     Object {
+      "headerMode": "float",
       "headerStyle": Object {
         "backgroundColor": "#0071e9",
       },

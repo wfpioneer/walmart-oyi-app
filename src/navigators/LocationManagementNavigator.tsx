@@ -128,8 +128,8 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
 
   return (
     <Stack.Navigator
-      headerMode="float"
       screenOptions={{
+        headerMode: 'float',
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
         headerTitleStyle: { fontSize: 18 },
         headerTintColor: COLOR.WHITE

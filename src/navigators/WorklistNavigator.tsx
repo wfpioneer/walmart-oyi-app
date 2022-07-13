@@ -1,5 +1,6 @@
 import React, { Dispatch, useEffect } from 'react';
-import { HeaderBackButton, createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
+import { HeaderBackButton } from '@react-navigation/elements';
 import { Animated, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -19,12 +20,12 @@ import { getWorklist } from '../state/actions/saga';
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
-const worklistTabs = () => (
+const WorklistTabs = () => (
   <Tab.Navigator
-    tabBarOptions={{
-      activeTintColor: COLOR.WHITE,
-      style: { backgroundColor: COLOR.MAIN_THEME_COLOR },
-      indicatorStyle: { backgroundColor: COLOR.WHITE }
+    screenOptions={{
+      tabBarActiveTintColor: COLOR.WHITE,
+      tabBarIndicatorStyle: { backgroundColor: COLOR.WHITE },
+      tabBarStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
     }}
   >
     <Tab.Screen name={strings('WORKLIST.TODO')} component={TodoWorklist} />
@@ -93,22 +94,21 @@ export const WorklistNavigator = (): JSX.Element => {
       }}
     >
       <Stack.Navigator
-        headerMode="float"
         screenOptions={{
+          headerMode: 'float',
           headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
           headerTintColor: COLOR.WHITE
         }}
       >
         <Stack.Screen
           name="ITEMWORKLIST"
-          component={worklistTabs}
+          component={WorklistTabs}
           options={() => ({
             headerRight: () => renderHeaderRight(dispatch, menuOpen),
             headerTitle: strings('WORKLIST.WORKLIST'),
-            headerLeft: props => props.canGoBack
-            && (
+            headerLeft: props => props.canGoBack && (
             <HeaderBackButton
-              // eslint-disable-next-line react/jsx-props-no-spreading
+                  // eslint-disable-next-line react/jsx-props-no-spreading
               {...props}
               onPress={navigateBack}
             />
