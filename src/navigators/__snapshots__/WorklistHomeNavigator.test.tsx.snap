@@ -2,9 +2,9 @@
 
 exports[`WorklistHome Navigator Renders the WorklistHome Navigator 1`] = `
 <StackNavigator
-  headerMode="float"
   screenOptions={
     Object {
+      "headerMode": "float",
       "headerStyle": Object {
         "backgroundColor": "#0071e9",
       },

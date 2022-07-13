@@ -2,9 +2,9 @@
 
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator with LocationKebabMenu disabled 1`] = `
 <StackNavigator
-  headerMode="float"
   screenOptions={
     Object {
+      "headerMode": "float",
       "headerStyle": Object {
         "backgroundColor": "#0071e9",
       },
@@ -131,9 +131,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
 
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator with Print List Button 1`] = `
 <StackNavigator
-  headerMode="float"
   screenOptions={
     Object {
+      "headerMode": "float",
       "headerStyle": Object {
         "backgroundColor": "#0071e9",
       },
@@ -260,9 +260,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
 
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator, manager 1`] = `
 <StackNavigator
-  headerMode="float"
   screenOptions={
     Object {
+      "headerMode": "float",
       "headerStyle": Object {
         "backgroundColor": "#0071e9",
       },
@@ -389,9 +389,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
 
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator, non manager 1`] = `
 <StackNavigator
-  headerMode="float"
   screenOptions={
     Object {
+      "headerMode": "float",
       "headerStyle": Object {
         "backgroundColor": "#0071e9",
       },
