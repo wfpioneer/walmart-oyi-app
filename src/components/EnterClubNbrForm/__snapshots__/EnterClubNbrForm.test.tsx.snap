@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests rendering EnterClubNbrForm Renders the EnterClubNbrForm 1`] = `
+Array [
+  <Text
+    style={
+      Object {
+        "paddingTop": 12,
+      }
+    }
+  >
+    [missing "en.LOGIN.CLUB_NBR_REQUIRED" translation]
+  </Text>,
+  <TextInput
+    keyboardType="numeric"
+    maxLength={5}
+    onChangeText={[Function]}
+    placeholder="[missing \\"en.LOGIN.ENTER_CLUB_NBR\\" translation]"
+    selectionColor="#0071e9"
+    testID="txtClubNbr"
+    textAlign="center"
+    value=""
+  />,
+  <View
+    style={
+      Object {
+        "flex": 0,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 45,
+          },
+          Object {
+            "paddingHorizontal": 12,
+            "width": "50%",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ffffffff",
+              "borderColor": "#0071e9",
+              "borderRadius": 5,
+              "borderWidth": 1,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+            }
+          }
+          testID="btnSignOut"
+        >
+          <Text
+            style={
+              Object {
+                "color": "#0071e9",
+                "fontFamily": "Roboto-Medium",
+                "fontSize": 16,
+                "fontWeight": "normal",
+              }
+            }
+          >
+            [missing "en.GENERICS.SIGN_OUT" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "height": 45,
+          },
+          Object {
+            "paddingHorizontal": 12,
+            "width": "50%",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#5FA7F2",
+              "borderRadius": 5,
+              "elevation": 1,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+            }
+          }
+          testID="btnSubmit"
+        >
+          <Text
+            style={
+              Object {
+                "color": "#ffffffff",
+                "fontFamily": "Roboto-Medium",
+                "fontSize": 16,
+                "fontWeight": "normal",
+              }
+            }
+          >
+            [missing "en.GENERICS.SUBMIT" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>,
+]
+`;
