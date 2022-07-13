@@ -263,10 +263,19 @@ exports[`PrinterList Renders printer item card that is disabled 1`] = `
     </Text>
   </View>
   <TouchableOpacity
+    hitSlop={
+      Object {
+        "bottom": 10,
+        "left": 15,
+        "right": 15,
+        "top": 10,
+      }
+    }
     onPress={[Function]}
     style={
       Object {
-        "paddingHorizontal": 20,
+        "paddingLeft": 15,
+        "paddingRight": 5,
         "paddingVertical": 10,
       }
     }
@@ -292,7 +301,7 @@ exports[`PrinterList Renders printer item card that is not disabled when locatio
       "height": 40,
       "justifyContent": "flex-start",
       "marginVertical": 10,
-      "paddingLeft": 15,
+      "paddingHorizontal": 15,
     }
   }
 >
@@ -316,10 +325,19 @@ exports[`PrinterList Renders printer item card that is not disabled when locatio
     </Text>
   </View>
   <TouchableOpacity
+    hitSlop={
+      Object {
+        "bottom": 10,
+        "left": 15,
+        "right": 15,
+        "top": 10,
+      }
+    }
     onPress={[Function]}
     style={
       Object {
-        "paddingHorizontal": 20,
+        "paddingLeft": 15,
+        "paddingRight": 5,
         "paddingVertical": 10,
       }
     }
@@ -345,7 +363,7 @@ exports[`PrinterList Renders printer item card with no delete icon 1`] = `
       "height": 40,
       "justifyContent": "flex-start",
       "marginVertical": 10,
-      "paddingLeft": 15,
+      "paddingHorizontal": 15,
     }
   }
 >
@@ -369,10 +387,19 @@ exports[`PrinterList Renders printer item card with no delete icon 1`] = `
     </Text>
   </View>
   <TouchableOpacity
+    hitSlop={
+      Object {
+        "bottom": 10,
+        "left": 15,
+        "right": 15,
+        "top": 10,
+      }
+    }
     onPress={[Function]}
     style={
       Object {
-        "paddingHorizontal": 20,
+        "paddingLeft": 15,
+        "paddingRight": 5,
         "paddingVertical": 10,
       }
     }
@@ -398,7 +425,7 @@ exports[`PrinterList Renders the delete icon for PrinterIds not equal to 0 1`] =
       "height": 40,
       "justifyContent": "flex-start",
       "marginVertical": 10,
-      "paddingLeft": 15,
+      "paddingHorizontal": 15,
     }
   }
 >
@@ -422,10 +449,19 @@ exports[`PrinterList Renders the delete icon for PrinterIds not equal to 0 1`] =
     </Text>
   </View>
   <TouchableOpacity
+    hitSlop={
+      Object {
+        "bottom": 10,
+        "left": 15,
+        "right": 15,
+        "top": 10,
+      }
+    }
     onPress={[Function]}
     style={
       Object {
-        "paddingHorizontal": 20,
+        "paddingLeft": 15,
+        "paddingRight": 5,
         "paddingVertical": 10,
       }
     }
