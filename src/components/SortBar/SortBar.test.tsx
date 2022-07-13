@@ -6,7 +6,7 @@ jest.mock('react-native-vector-icons/MaterialIcons', () => 'mockMaterialIcons');
 describe('SortBar Component', () => {
   it('Test renders default PalletWorkList Screen', () => {
     const mockUpdateToggle = jest.fn();
-    const { toJSON, getByTestId } = render(SortBar(false, mockUpdateToggle));
+    const { toJSON, getByTestId } = render(SortBar({isGrouped: false, updateGroupToggle: mockUpdateToggle}));
 
     const menuToggle = getByTestId('menu');
     const listToggle = getByTestId('list');

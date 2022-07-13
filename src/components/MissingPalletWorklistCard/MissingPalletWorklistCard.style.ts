@@ -3,9 +3,10 @@ import COLOR from '../../themes/Color';
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
+    marginBottom: 2,
     borderColor: COLOR.PALE_BLUE,
-    padding: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
     backgroundColor: COLOR.WHITE
   },
   contentContainer: {
@@ -29,13 +30,13 @@ const styles = StyleSheet.create({
   actionButton: {
     flex: 1,
     fontSize: 12,
-    paddingHorizontal: 10
+    paddingRight: 15
   },
   palletActionContainer: {
     alignContent: 'space-between',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 5
+    marginVertical: 5
   },
   iconView: {
     alignItems: 'flex-end'
