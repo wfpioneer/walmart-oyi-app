@@ -1,15 +1,27 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
+import { fireEvent, render } from '@testing-library/react-native';
 import {
-  CollapsibleCard, SettingsToolScreen, featureCard, printerCard
+  CollapsibleCard, SettingsToolScreen, featureCard, getConfigAndFluffyFeaturesApiHook, printerCard
 } from './SettingsTool';
 import { mockPrinterList } from '../../mockData/mockPrinterList';
 import { Configurations } from '../../models/User';
 import { mockConfig } from '../../mockData/mockConfig';
+import mockUser from '../../mockData/mockUser';
+import { strings } from '../../locales';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+
+jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
+
+jest.mock('../../state/actions/Modal', () => ({
+  showActivityModal: jest.fn(),
+  hideActivityModal: jest.fn()
+}));
 
 describe('SettingsToolScreen', () => {
-
   const testConfigs: Configurations = {
     ...mockConfig,
     locationManagement: true,
@@ -18,10 +30,29 @@ describe('SettingsToolScreen', () => {
     palletManagement: true,
     binning: true,
     picking: true,
-    printingUpdate: true,
+    printingUpdate: true
   };
-  let navigationProp: NavigationProp<any>;
+  const navigationProp: NavigationProp<any> = {
+    addListener: jest.fn(),
+    canGoBack: jest.fn(),
+    dangerouslyGetParent: jest.fn(),
+    dangerouslyGetState: jest.fn(),
+    dispatch: jest.fn(),
+    goBack: jest.fn(),
+    isFocused: jest.fn(() => true),
+    removeListener: jest.fn(),
+    reset: jest.fn(),
+    setOptions: jest.fn(),
+    setParams: jest.fn(),
+    navigate: jest.fn()
+  };
 
+  const defaultAsyncState = {
+    isWaiting: false,
+    value: null,
+    error: null,
+    result: null
+  };
   describe('Tests rendering the SettingsToolScreen component', () => {
     it('Test renders the default SettingsToolScreen ', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -38,6 +69,10 @@ describe('SettingsToolScreen', () => {
           userConfigs={testConfigs}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          getClubConfigApiState={defaultAsyncState}
+          getFluffyApiState={defaultAsyncState}
+          useEffectHook={jest.fn}
+          user={mockUser}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -58,6 +93,10 @@ describe('SettingsToolScreen', () => {
           userConfigs={testConfigs}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          getClubConfigApiState={defaultAsyncState}
+          getFluffyApiState={defaultAsyncState}
+          useEffectHook={jest.fn}
+          user={mockUser}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -78,6 +117,10 @@ describe('SettingsToolScreen', () => {
           userConfigs={testConfigs}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          getClubConfigApiState={defaultAsyncState}
+          getFluffyApiState={defaultAsyncState}
+          useEffectHook={jest.fn}
+          user={mockUser}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -98,9 +141,38 @@ describe('SettingsToolScreen', () => {
           userConfigs={testConfigs}
           dispatch={jest.fn()}
           navigation={navigationProp}
+          getClubConfigApiState={defaultAsyncState}
+          getFluffyApiState={defaultAsyncState}
+          useEffectHook={jest.fn}
+          user={mockUser}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Tests functionality of update button in settings tool screen', () => {
+      const mockDispatch = jest.fn();
+      const { getByTestId } = render(
+        <SettingsToolScreen
+          printerOpen={true}
+          togglePrinterList={jest.fn()}
+          featuresOpen={false}
+          toggleFeaturesList={jest.fn()}
+          priceLabelPrinter={null}
+          locationLabelPrinter={null}
+          palletLabelPrinter={null}
+          userFeatures={[]}
+          userConfigs={testConfigs}
+          dispatch={mockDispatch}
+          navigation={navigationProp}
+          getClubConfigApiState={defaultAsyncState}
+          getFluffyApiState={defaultAsyncState}
+          useEffectHook={jest.fn}
+          user={mockUser}
+        />
+      );
+      const updateButton = getByTestId('updateButton');
+      fireEvent.press(updateButton);
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -156,6 +228,55 @@ describe('SettingsToolScreen', () => {
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('test externalized functions', () => {
+    const mockDispatch = jest.fn();
+    const successApi = {
+      ...defaultAsyncState,
+      result: {
+        data: 'test',
+        status: 200
+      }
+    };
+    const loadingApiState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+    const errorApi = {
+      ...defaultAsyncState,
+      error: 'testError'
+    };
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    it('test getConfigAndFluffyFeaturesApiHook with success response', () => {
+      getConfigAndFluffyFeaturesApiHook(successApi, successApi, navigationProp, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledTimes(5);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        text1: strings('SETTINGS.FEATURE_UPDATE_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+    });
+    it('test getConfigAndFluffyFeaturesApiHook with error response', () => {
+      getConfigAndFluffyFeaturesApiHook(errorApi, errorApi, navigationProp, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledTimes(3);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('SETTINGS.FEATURE_UPDATE_FAILURE'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+    });
+    it('test getConfigAndFluffyFeaturesApiHook during API request', () => {
+      getConfigAndFluffyFeaturesApiHook(loadingApiState, loadingApiState, navigationProp, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(showActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).not.toBeCalled();
     });
   });
 });

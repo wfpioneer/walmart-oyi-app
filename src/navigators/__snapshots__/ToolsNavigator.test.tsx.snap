@@ -2,9 +2,9 @@
 
 exports[`Tools Navigator Renders the Tools Navigator 1`] = `
 <StackNavigator
-  headerMode="float"
   screenOptions={
     Object {
+      "headerMode": "float",
       "headerStyle": Object {
         "backgroundColor": "#0071e9",
       },

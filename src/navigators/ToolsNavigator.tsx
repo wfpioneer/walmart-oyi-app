@@ -8,11 +8,10 @@ const Stack = createStackNavigator();
 
 export const ToolsNavigatorStack = (): JSX.Element => (
   <Stack.Navigator
-    headerMode="float"
     screenOptions={{
+      headerMode: 'float',
       headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
       headerTintColor: COLOR.WHITE
-
     }}
   >
     <Stack.Screen
@@ -25,6 +24,4 @@ export const ToolsNavigatorStack = (): JSX.Element => (
   </Stack.Navigator>
 );
 
-export const ToolsNavigator = (): JSX.Element => (
-  <ToolsNavigatorStack />
-);
+export const ToolsNavigator = (): JSX.Element => <ToolsNavigatorStack />;

@@ -55,7 +55,8 @@ export default {
     REMOVED: '移除',
     CREATE: '创建',
     UNASSIGNED: '未分配',
-    SELECTED: '已选择'
+    SELECTED: '已选择',
+    UPDATE: '更新'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -454,6 +455,8 @@ export default {
     PALLET_NOT_READY: '尚不可上架，部分卡板正处于补货状态'
   },
   SETTINGS: {
-    TITLE: '设置'
+    TITLE: '设置',
+    FEATURE_UPDATE_SUCCESS: '系统功能已更新',
+    FEATURE_UPDATE_FAILURE: '无法获取已更新的系统功能'
   }
 };
