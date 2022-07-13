@@ -51,12 +51,11 @@ const TabNavigator = (): JSX.Element => {
           // You can return any component that you like here!
           return <MaterialIcons name="help" size={size} color={color} />;
         },
-        tabBarVisible: selectedAmount <= 0
-      })}
-      tabBarOptions={{
+        tabBarVisible: selectedAmount <= 0,
         activeTintColor: COLOR.MAIN_THEME_COLOR,
-        inactiveTintColor: COLOR.GREY
-      }}
+        inactiveTintColor: COLOR.GREY,
+        headerShown: false
+      })}
     >
       <Tab.Screen name={strings('HOME.HOME')} component={HomeNavigator} />
 

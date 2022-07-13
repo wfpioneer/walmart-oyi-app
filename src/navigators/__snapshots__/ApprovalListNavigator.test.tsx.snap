@@ -73,9 +73,9 @@ exports[`ApprovalList Navigator Renders the SelectedItemQty component  1`] = `
 
 exports[`ApprovalList Navigator Renders the approval list navigator component 1`] = `
 <StackNavigator
-  headerMode="float"
   screenOptions={
     Object {
+      "headerMode": "float",
       "headerStyle": Object {
         "backgroundColor": "#0071e9",
       },
