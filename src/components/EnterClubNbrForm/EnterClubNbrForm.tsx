@@ -30,6 +30,7 @@ const EnterClubNbrForm = (props: EnterClubNbrFormProps): JSX.Element => {
     <>
       <Text style={modalStyles.titleText}>{strings('LOGIN.CLUB_NBR_REQUIRED')}</Text>
       <TextInput
+        testID="txtClubNbr"
         value={textInput}
         onChangeText={input => setTextInput(input.replace(nonNumberRegex, ''))}
         selectionColor={COLOR.MAIN_THEME_COLOR}
@@ -40,6 +41,7 @@ const EnterClubNbrForm = (props: EnterClubNbrFormProps): JSX.Element => {
       />
       <View style={modalStyles.buttonRow}>
         <Button
+          testID="btnSignOut"
           title={strings('GENERICS.SIGN_OUT')}
           onPress={() => onSignOut()}
           type={ButtonType.SOLID_WHITE}
@@ -47,6 +49,7 @@ const EnterClubNbrForm = (props: EnterClubNbrFormProps): JSX.Element => {
           style={modalStyles.cancelButton}
         />
         <Button
+          testID="btnSubmit"
           title={strings('GENERICS.SUBMIT')}
           onPress={() => onSubmit(parseInt(textInput, 10))}
           disabled={!inputIsValid}
