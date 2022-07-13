@@ -37,6 +37,8 @@ describe('CompletedPalletWorklistScreen', () => {
         setDisplayConfirmation={jest.fn()}
         getMPWorklistApi={getPalletWorklistSuccess}
         navigation={navigationProp}
+        groupToggle={false}
+        updateGroupToggle={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
