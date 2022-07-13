@@ -4,7 +4,12 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import COLOR from '../../themes/Color';
 import styles from './SortBar.style';
 
-const SortBar = (isGrouped: boolean, updateGroupToggle: any) => (
+interface SortBarProps {
+  isGrouped: boolean;
+  updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SortBar = ({ isGrouped, updateGroupToggle }: SortBarProps) => (
   <View style={styles.viewSwitcher}>
     <TouchableOpacity onPress={() => updateGroupToggle(false)} testID="menu">
       <MaterialIcons

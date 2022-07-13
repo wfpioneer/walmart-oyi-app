@@ -102,9 +102,24 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
       />
     </View>
   </CustomModalComponent>
+  <SortBar
+    isGrouped={false}
+    updateGroupToggle={[MockFunction]}
+  />
   <FlatList
     data={
       Array [
+        Object {
+          "completed": false,
+          "createTs": "",
+          "createUserId": "",
+          "itemCount": 2,
+          "lastKnownPalletLocationId": -1,
+          "lastKnownPalletLocationName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+          "palletDeleted": false,
+          "palletId": 0,
+          "sectionID": 0,
+        },
         Object {
           "completed": false,
           "completedTs": undefined,
@@ -115,6 +130,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
           "lastKnownPalletLocationName": "A1-1",
           "palletDeleted": false,
           "palletId": 7988,
+          "sectionID": 1,
         },
         Object {
           "completed": false,
@@ -126,6 +142,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
           "lastKnownPalletLocationName": "A1-2",
           "palletDeleted": false,
           "palletId": 7989,
+          "sectionID": 2,
         },
       ]
     }

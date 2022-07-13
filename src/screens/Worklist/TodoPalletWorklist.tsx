@@ -15,6 +15,8 @@ interface TodoWorklistProps {
   dispatch: Dispatch<any>;
   clearPalletAPI: AsyncState;
   navigation: NavigationProp<any>;
+  groupToggle: boolean;
+  updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const TodoPalletWorklistScreen = (
@@ -26,7 +28,9 @@ export const TodoPalletWorklistScreen = (
     dispatch,
     getMPWorklistApi,
     setDisplayConfirmation,
-    navigation
+    navigation,
+    groupToggle,
+    updateGroupToggle
   } = props;
 
   const { isWaiting, error, result } = getMPWorklistApi;
@@ -50,6 +54,8 @@ export const TodoPalletWorklistScreen = (
       onRefresh={() => dispatch(getPalletWorklist({ worklistType: ['MP'] }))}
       refreshing={isWaiting}
       error={error}
+      groupToggle={groupToggle}
+      updateGroupToggle={updateGroupToggle}
     />
   );
 };
@@ -58,6 +64,7 @@ export const TodoPalletWorklist = (): JSX.Element => {
   const getMPWorklistApi = useTypedSelector(state => state.async.getPalletWorklist);
   const clearPalletAPI = useTypedSelector(state => state.async.clearPallet);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
+  const [groupToggle, updateGroupToggle] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   return (
@@ -68,6 +75,8 @@ export const TodoPalletWorklist = (): JSX.Element => {
       setDisplayConfirmation={setDisplayConfirmation}
       getMPWorklistApi={getMPWorklistApi}
       navigation={navigation}
+      groupToggle={groupToggle}
+      updateGroupToggle={updateGroupToggle}
     />
   );
 };
