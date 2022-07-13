@@ -12,6 +12,7 @@ import styles from './Login.style';
 import {
   assignFluffyFeatures, loginUser, logoutUser, setConfigs
 } from '../../state/actions/User';
+import { GET_CLUB_CONFIG, GET_FLUFFY_ROLES } from '../../state/actions/asyncAPI';
 import { getClubConfig, getFluffyFeatures } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
@@ -40,6 +41,9 @@ import {
   setPrinterList
 } from '../../state/actions/Print';
 
+const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
+const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
+
 const mapDispatchToProps = {
   loginUser,
   logoutUser,
@@ -53,7 +57,9 @@ const mapDispatchToProps = {
   setLocationLabelPrinter,
   setPalletLabelPrinter,
   setPriceLabelPrinter,
-  setPrinterList
+  setPrinterList,
+  resetClubConfigApiState,
+  resetFluffyFeaturesApiState
 };
 
 // This type uses all fields from the User type except it makes siteId optional
@@ -100,6 +106,8 @@ export interface LoginScreenProps {
   setPriceLabelPrinter: (payload: Printer | null) => void;
   setLocationLabelPrinter: (payload: Printer | null) => void;
   setPalletLabelPrinter: (payload: Printer | null) => void;
+  resetClubConfigApiState: () => void;
+  resetFluffyFeaturesApiState: () => void;
 }
 
 const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
@@ -199,6 +207,8 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
+    this.props.resetClubConfigApiState();
+    this.props.resetFluffyFeaturesApiState();
   }
 
   async getPrinterDetailsFromAsyncStorage(): Promise<void> {
