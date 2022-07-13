@@ -187,7 +187,13 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
           <Text>{item.name}</Text>
         </View>
         {item.id !== '000000000000' && (
-          <TouchableOpacity style={styles.trashCan} onPress={onDeleteClick}>
+          <TouchableOpacity
+            style={styles.trashCan}
+            hitSlop={{
+              top: 10, bottom: 10, left: 15, right: 15
+            }}
+            onPress={onDeleteClick}
+          >
             <MaterialCommunityIcons
               name="trash-can"
               size={20}
