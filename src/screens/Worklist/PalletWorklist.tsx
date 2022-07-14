@@ -1,4 +1,4 @@
-import React, { Dispatch, EffectCallback } from 'react';
+import React, { Dispatch, EffectCallback, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -45,6 +45,9 @@ interface ListItemProps {
   item: MissingPalletWorklistItemI;
   handleAddLocationClick: () => void;
   handleDeleteClick: (palletID: string) => void;
+  expanded: boolean;
+  setActiveItemIndex: React.Dispatch<React.SetStateAction<number>>;
+  itemIndex: number
 }
 
 export const clearPalletAPIHook = (
@@ -89,9 +92,16 @@ export const clearPalletAPIHook = (
   }
 };
 
-export const RenderWorklistItem = (props: ListItemProps, index: number): JSX.Element => {
+const onPalletCardClick = (
+  index: number, setActiveItemIndex: React.Dispatch<React.SetStateAction<number>>
+) => {
+  // to do if already expanded navigate to pallet mgmt screen
+  setActiveItemIndex(index);
+};
+
+export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   const {
-    item, handleAddLocationClick, handleDeleteClick
+    item, handleAddLocationClick, handleDeleteClick, expanded, setActiveItemIndex, itemIndex
   } = props;
   if (item.palletId === 0) {
     const { lastKnownPalletLocationName, itemCount } = item;
@@ -106,10 +116,10 @@ export const RenderWorklistItem = (props: ListItemProps, index: number): JSX.Ele
       lastLocation={item.lastKnownPalletLocationName}
       reportedBy={item.createUserId}
       reportedDate={item.createTs}
-      expanded={index === 0} // TODO Toggle for a single Pallet WorkList Item
+      expanded={expanded}
       addCallback={handleAddLocationClick}
       deleteCallback={() => handleDeleteClick(item.palletId.toString())}
-      navigateCallback={() => {}}
+      navigateCallback={() => onPalletCardClick(itemIndex, setActiveItemIndex)}
     />
   );
 };
@@ -237,6 +247,7 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
   } = props;
   let deletePalletId = '';
 
+  const [activeItemIndex, setActiveItemIndex] = useState(1);
   useEffectHook(
     () => clearPalletAPIHook(
       clearPalletAPI,
@@ -248,6 +259,12 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
     ),
     [clearPalletAPI]
   );
+
+  // reset active item index to 1 on refresh / on sort toggle
+  useEffectHook(() => {
+    setActiveItemIndex(1);
+  }, [groupToggle, palletWorklist]);
+
   // TODO handle request + response for getPalletWorklist service call
   const onDeletePress = () => {
     dispatch(clearPallet({ palletId: deletePalletId }));
@@ -328,11 +345,14 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
           }
           return item.palletId + index.toString();
         }}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <RenderWorklistItem
             item={item}
             handleAddLocationClick={handleAddLocationClick}
             handleDeleteClick={() => handleDeleteClick(item.palletId.toString())}
+            expanded={index === activeItemIndex}
+            setActiveItemIndex={setActiveItemIndex}
+            itemIndex={index}
           />
         )}
         onRefresh={onRefresh}

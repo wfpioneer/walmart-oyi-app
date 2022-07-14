@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   actionButton: {
     flex: 1,
     fontSize: 12,
-    paddingRight: 15
+    paddingRight: 10
   },
   palletActionContainer: {
     alignContent: 'space-between',
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   iconView: {
-    alignItems: 'flex-end'
+    flex: 0.5
   }
 });
 
