@@ -3,8 +3,8 @@ import { ActivityIndicator, Text, View } from 'react-native';
 import { AxiosError } from 'axios';
 import styles from './OHQtyUpdate.style';
 import COLOR from '../../themes/Color';
-import Button from '../buttons/Button';
-import IconButton from '../buttons/IconButton';
+import Button, { ButtonType } from '../buttons/Button';
+import IconButton, { IconButtonType } from '../buttons/IconButton';
 import NumericSelector from '../NumericSelector/NumericSelector';
 import { numbers, strings } from '../../locales';
 import { ModalCloseIcon } from '../../screens/Modal/Modal';
@@ -88,7 +88,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
           <IconButton
             testID="closeButton"
             icon={ModalCloseIcon}
-            type={Button.Type.NO_BORDER}
+            type={IconButtonType.NO_BORDER}
             onPress={handleClose}
           />
         )}
@@ -130,7 +130,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
             testID="saveButton"
             style={styles.saveBtn}
             title="Save"
-            type={Button.Type.PRIMARY}
+            type={ButtonType.PRIMARY}
             disabled={!validateQty(newOHQty) || validateSameQty(onHandsQty, newOHQty)}
             onPress={handleSubmit}
           />

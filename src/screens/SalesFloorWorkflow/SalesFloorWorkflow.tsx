@@ -14,7 +14,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import Toast from 'react-native-toast-message';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import PickPalletInfoCard from '../../components/PickPalletInfoCard/PickPalletInfoCard';
 import SalesFloorItemCard, { MAX } from '../../components/SalesFloorItemCard/SalesFloorItemCard';
 import { PickingState } from '../../state/reducers/Picking';
@@ -467,7 +467,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     }
   };
 
-  const isPickQtyZero = ():boolean => selectedPicks.every(pick => pick.quantityLeft === 0);
+  const isPickQtyZero = ():boolean => selectedPicks.every(pick => pick.newQuantityLeft === 0);
 
   const isAnyNewInvalidPickQty = ():boolean => selectedPicks.some(
     pick => !!pick.quantityLeft && Number.isNaN(pick.newQuantityLeft)
@@ -602,7 +602,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
             <Button
               title={strings('GENERICS.CANCEL')}
               onPress={() => setShowExpiryPrompt(ExpiryPromptShow.HIDDEN)}
-              type={Button.Type.SOLID_WHITE}
+              type={ButtonType.SOLID_WHITE}
               titleColor={COLOR.MAIN_THEME_COLOR}
               style={styles.actionButton}
             />
@@ -649,14 +649,14 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
           title={strings('PICKING.COMPLETE')}
           onPress={handleComplete}
           style={styles.actionButton}
-          testId="complete"
+          testID="complete"
           disabled={!isPickQtyZero() || !isReadyToComplete}
         />
         <Button
           title={strings('PICKING.READY_TO_BIN')}
           onPress={() => handleBin()}
           style={styles.actionButton}
-          testId="bin"
+          testID="bin"
           disabled={(isPickQtyZero() && isReadyToComplete) || !isPickQtyUpdatedOrDel() || isAnyNewInvalidPickQty()}
         />
       </View>

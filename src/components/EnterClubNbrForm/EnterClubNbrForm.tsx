@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
-import Button from '../buttons/Button';
+import Button, { ButtonType } from '../buttons/Button';
 import { modalStyles } from './EnterClubNbrForm.style';
 
 const nonNumberRegex = /[^0-9]/;
@@ -44,7 +44,7 @@ const EnterClubNbrForm = (props: EnterClubNbrFormProps): JSX.Element => {
           testID="btnSignOut"
           title={strings('GENERICS.SIGN_OUT')}
           onPress={() => onSignOut()}
-          type={Button.Type.SOLID_WHITE}
+          type={ButtonType.SOLID_WHITE}
           titleColor={COLOR.MAIN_THEME_COLOR}
           style={modalStyles.cancelButton}
         />
@@ -53,7 +53,7 @@ const EnterClubNbrForm = (props: EnterClubNbrFormProps): JSX.Element => {
           title={strings('GENERICS.SUBMIT')}
           onPress={() => onSubmit(parseInt(textInput, 10))}
           disabled={!inputIsValid}
-          type={Button.Type.PRIMARY}
+          type={ButtonType.PRIMARY}
           style={modalStyles.affirmButton}
         />
       </View>
