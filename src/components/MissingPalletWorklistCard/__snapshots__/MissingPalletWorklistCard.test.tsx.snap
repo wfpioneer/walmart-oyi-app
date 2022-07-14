@@ -215,14 +215,14 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
     <View
       style={
         Object {
-          "alignItems": "flex-end",
+          "flex": 0.5,
         }
       }
     >
       <Icon
         color="#000000"
         name="navigate-next"
-        size={45}
+        size={40}
         testID="navigate-next-icon"
       />
     </View>
@@ -246,7 +246,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
           Object {
             "flex": 1,
             "fontSize": 12,
-            "paddingRight": 15,
+            "paddingRight": 10,
           },
         ]
       }
@@ -311,7 +311,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
           Object {
             "flex": 1,
             "fontSize": 12,
-            "paddingRight": 15,
+            "paddingRight": 10,
           },
         ]
       }

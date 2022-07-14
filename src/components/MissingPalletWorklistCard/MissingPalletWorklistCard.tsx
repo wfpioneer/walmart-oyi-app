@@ -48,7 +48,7 @@ const MissingPalletWorklistCard = (props: MissingPalletWorklistCardProps) => {
         {expanded
           && (
           <View style={styles.iconView}>
-            <MaterialIcons testID="navigate-next-icon" name="navigate-next" size={45} color={COLOR.BLACK} />
+            <MaterialIcons testID="navigate-next-icon" name="navigate-next" size={40} color={COLOR.BLACK} />
           </View>
           )}
       </View>
