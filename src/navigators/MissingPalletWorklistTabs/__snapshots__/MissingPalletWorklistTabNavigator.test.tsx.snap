@@ -2,13 +2,13 @@
 
 exports[`MissingPalletWorklist Navigator Renders the Missing Pallet Worklist navigator component 1`] = `
 <MaterialTopTabNavigator
-  tabBarOptions={
+  screenOptions={
     Object {
-      "activeTintColor": "#ffffffff",
-      "indicatorStyle": Object {
+      "tabBarActiveTintColor": "#ffffffff",
+      "tabBarIndicatorStyle": Object {
         "backgroundColor": "#ffffffff",
       },
-      "style": Object {
+      "tabBarStyle": Object {
         "backgroundColor": "#0071e9",
       },
     }

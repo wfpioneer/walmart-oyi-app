@@ -471,13 +471,13 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
         isDisabled={!sectionExists}
       />
       <Tab.Navigator
-        tabBarOptions={{
-          activeTintColor: COLOR.MAIN_THEME_COLOR,
-          inactiveTintColor: COLOR.GREY_700,
-          style: { backgroundColor: COLOR.WHITE },
-          indicatorStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
+        screenOptions={{
+          tabBarActiveTintColor: COLOR.MAIN_THEME_COLOR,
+          tabBarInactiveTintColor: COLOR.GREY_700,
+          tabBarStyle: { backgroundColor: COLOR.WHITE },
+          tabBarIndicatorStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
+          swipeEnabled: sectionExists
         }}
-        swipeEnabled={sectionExists}
         initialRouteName="FloorDetails"
       >
         <Tab.Screen
