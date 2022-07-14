@@ -4,9 +4,9 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import IconButton from '../buttons/IconButton';
+import IconButton, { IconButtonType } from '../buttons/IconButton';
 import COLOR from '../../themes/Color';
-import Button from '../buttons/Button';
+import Button, { ButtonType } from '../buttons/Button';
 import { numbers, strings } from '../../locales';
 import styles from './PrintQueueEdit.style';
 import { setLocationPrintQueue, setPrintQueue } from '../../state/actions/Print';
@@ -87,7 +87,7 @@ const PrintQueueEdit = (props: {
       <View style={styles.closeContainer}>
         <IconButton
           icon={ModalCloseIcon}
-          type={Button.Type.NO_BORDER}
+          type={IconButtonType.NO_BORDER}
           onPress={() => setItemIndexToEdit(-1)}
         />
       </View>
@@ -99,7 +99,7 @@ const PrintQueueEdit = (props: {
         <View style={styles.qtyChangeContainer}>
           <IconButton
             icon={renderPlusMinusBtn('minus')}
-            type={IconButton.Type.SOLID_WHITE}
+            type={IconButtonType.SOLID_WHITE}
             backgroundColor={COLOR.GREY_400}
             height={30}
             width={30}
@@ -115,7 +115,7 @@ const PrintQueueEdit = (props: {
           </TextInput>
           <IconButton
             icon={renderPlusMinusBtn('plus')}
-            type={IconButton.Type.SOLID_WHITE}
+            type={IconButtonType.SOLID_WHITE}
             backgroundColor={COLOR.GREY_400}
             height={30}
             width={30}
@@ -150,7 +150,7 @@ const PrintQueueEdit = (props: {
       </View>
       <Button
         title={strings('GENERICS.SAVE')}
-        type={Button.Type.PRIMARY}
+        type={ButtonType.PRIMARY}
         style={styles.buttonWidth}
         onPress={handleSave}
         disabled={!isValidQty}

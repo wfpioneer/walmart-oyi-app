@@ -1,0 +1,302 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component Renders the button with other custom specification props 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 5,
+        "width": 10,
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={false}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderRadius": 2,
+          "elevation": 1,
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+      testID="testButton"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontFamily": "Roboto-Medium",
+            "fontSize": 12,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        Test Button
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`Button Component Renders the button with type as No Border 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 45,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={false}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#00000000",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontFamily": "Roboto-Medium",
+            "fontSize": 16,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        default
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`Button Component Renders the button with type as Primary 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 45,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={false}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderRadius": 5,
+          "elevation": 1,
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontFamily": "Roboto-Medium",
+            "fontSize": 16,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        default
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`Button Component Renders the button with type as Solid White 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 45,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={false}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#0071e9",
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontFamily": "Roboto-Medium",
+            "fontSize": 16,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        default
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`Button Component Renders the default button 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 45,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={false}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderRadius": 5,
+          "elevation": 1,
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontFamily": "Roboto-Medium",
+            "fontSize": 16,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        default
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`Button Component Renders the disabled button 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 45,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={true}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#5FA7F2",
+          "borderRadius": 5,
+          "elevation": 1,
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontFamily": "Roboto-Medium",
+            "fontSize": 16,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        default
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;
