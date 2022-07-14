@@ -12,7 +12,7 @@ import { strings } from '../../locales';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import styles from './SettingsTool.style';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import { assignFluffyFeatures, setConfigs } from '../../state/actions/User';
 import { getClubConfig, getFluffyFeatures } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -246,7 +246,7 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       <View style={styles.buttonWrapper}>
         <Button
           title={strings('GENERICS.UPDATE')}
-          type={Button.Type.PRIMARY}
+          type={ButtonType.PRIMARY}
           onPress={onSubmit}
           testID="updateButton"
         />
