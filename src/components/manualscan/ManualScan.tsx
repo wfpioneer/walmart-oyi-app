@@ -4,9 +4,8 @@ import { useDispatch } from 'react-redux';
 import styles from './ManualScan.style';
 import COLOR from '../../themes/Color';
 import { manualScan } from '../../utils/scannerUtils';
-import Button from '../buttons/Button';
 import { setManualScan } from '../../state/actions/Global';
-import IconButton from '../buttons/IconButton';
+import IconButton, { IconButtonType } from '../buttons/IconButton';
 import { ModalCloseIcon } from '../../screens/Modal/Modal';
 
 interface ManualScanProps {
@@ -53,7 +52,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
       {value.length > 0 && value !== '' && (
         <IconButton
           icon={ModalCloseIcon}
-          type={Button.Type.NO_BORDER}
+          type={IconButtonType.NO_BORDER}
           onPress={clearText}
         />
       )}

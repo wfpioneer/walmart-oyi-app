@@ -12,8 +12,8 @@ import {
 import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
 import { AxiosResponse } from 'axios';
-import IconButton from '../../components/buttons/IconButton';
-import Button from '../../components/buttons/Button';
+import IconButton, { IconButtonType } from '../../components/buttons/IconButton';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
 import { numbers, strings } from '../../locales';
 import styles from './PrintPriceSign.style';
@@ -81,7 +81,7 @@ export const renderSignSizeButtons = (
               backgroundColor={
                 signType === key ? COLOR.MAIN_THEME_COLOR : COLOR.GREY_200
               }
-              type={Button.Type.PRIMARY}
+              type={ButtonType.PRIMARY}
               radius={20}
               height={25}
               width={56}
@@ -492,7 +492,7 @@ export const selectQuantityView = (
     <View style={styles.qtyChangeContainer}>
       <IconButton
         icon={renderPlusMinusBtn('minus')}
-        type={IconButton.Type.SOLID_WHITE}
+        type={IconButtonType.SOLID_WHITE}
         backgroundColor={COLOR.GREY_400}
         height={30}
         width={30}
@@ -516,7 +516,7 @@ export const selectQuantityView = (
       </TextInput>
       <IconButton
         icon={renderPlusMinusBtn('plus')}
-        type={IconButton.Type.SOLID_WHITE}
+        type={IconButtonType.SOLID_WHITE}
         backgroundColor={COLOR.GREY_400}
         height={30}
         width={30}
@@ -657,7 +657,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             title={strings('GENERICS.CHANGE')}
             titleColor={COLOR.MAIN_THEME_COLOR}
             titleFontSize={14}
-            type={Button.Type.NO_BORDER}
+            type={ButtonType.NO_BORDER}
             height={20}
             onPress={() => handleChangePrinter(navigation, route)}
           />
@@ -676,7 +676,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             title={strings('GENERICS.CHANGE')}
             titleColor={COLOR.MAIN_THEME_COLOR}
             titleFontSize={14}
-            type={Button.Type.NO_BORDER}
+            type={ButtonType.NO_BORDER}
             height={20}
             onPress={() => handleChangePrinter(navigation, route)}
             style={styles.changeButton}
@@ -725,7 +725,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           <Button
             title={strings('PRINT.ADD_TO_QUEUE')}
             titleColor={COLOR.MAIN_THEME_COLOR}
-            type={Button.Type.SOLID_WHITE}
+            type={ButtonType.SOLID_WHITE}
             style={styles.footerBtn}
             onPress={() => handleAddPrintList(
               printQueue, locationPrintQueue, selectedSignType,
@@ -738,7 +738,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           )}
           <Button
             title={strings('PRINT.PRINT')}
-            type={Button.Type.PRIMARY}
+            type={ButtonType.PRIMARY}
             style={styles.footerBtn}
             onPress={() => handlePrint(
               navigation, route, dispatch, printingLocationLabels, sectionsList,

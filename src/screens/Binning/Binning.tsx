@@ -19,7 +19,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import styles from './Binning.style';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
@@ -272,13 +272,13 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
             style={styles.buttonAlign}
             title={strings('GENERICS.CANCEL')}
             titleColor={COLOR.MAIN_THEME_COLOR}
-            type={Button.Type.SOLID_WHITE}
+            type={ButtonType.SOLID_WHITE}
             onPress={() => setDisplayWarningModal(false)}
           />
           <Button
             style={styles.buttonAlign}
             title={strings('GENERICS.OK')}
-            type={Button.Type.PRIMARY}
+            type={ButtonType.PRIMARY}
             onPress={backConfirmed}
           />
         </View>
@@ -327,7 +327,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
             <ItemSeparator />
             <Button
               title={strings('GENERICS.NEXT')}
-              type={Button.Type.PRIMARY}
+              type={ButtonType.PRIMARY}
               style={styles.buttonWrapper}
               onPress={() => navigateAssignLocationScreen()}
             />

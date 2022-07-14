@@ -11,7 +11,7 @@ import {
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import { COLOR } from '../../themes/Color';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import PickPalletInfoCard from '../../components/PickPalletInfoCard/PickPalletInfoCard';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PickingState } from '../../state/reducers/Picking';
@@ -224,26 +224,26 @@ export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
           <Button
             style={styles.picklistActionButton}
             title={strings('PICKING.READY_TO_WORK')}
-            type={Button.Type.PRIMARY}
+            type={ButtonType.PRIMARY}
             onPress={() => handleContinueAction(PickAction.READY_TO_WORK)}
           />
           <Button
             style={styles.picklistActionButton}
             title={strings('PICKING.COMPLETE')}
-            type={Button.Type.PRIMARY}
+            type={ButtonType.PRIMARY}
             onPress={() => handleContinueAction(PickAction.COMPLETE)}
           />
           <Button
             style={styles.picklistActionButton}
             title={strings('PICKING.PALLET_NOT_FOUND')}
-            type={Button.Type.PRIMARY}
+            type={ButtonType.PRIMARY}
             onPress={() => handlePalletNotFound()}
           />
           <Button
             style={styles.picklistActionButton}
             title={strings('GENERICS.CANCEL')}
             titleColor={COLOR.MAIN_THEME_COLOR}
-            type={Button.Type.SOLID_WHITE}
+            type={ButtonType.SOLID_WHITE}
             onPress={() => setShowContinueActionDialog(false)}
           />
         </View>

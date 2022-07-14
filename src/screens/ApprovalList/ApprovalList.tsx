@@ -20,7 +20,7 @@ import { ApprovalCategorySeparator } from '../../components/CategorySeparatorCar
 import { validateSession } from '../../utils/sessionTimeout';
 import { setApprovalList, toggleAllItems } from '../../state/actions/Approvals';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
@@ -154,7 +154,7 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
         )}
       <Button
         title={strings('APPROVAL.CONFIRM')}
-        type={Button.Type.PRIMARY}
+        type={ButtonType.PRIMARY}
         style={{ width: '50%' }}
         onPress={() => {
           dispatch({ type: UPDATE_APPROVAL_LIST.RESET });

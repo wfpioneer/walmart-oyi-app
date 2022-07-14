@@ -1,0 +1,260 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButton component Renders the default iconButton 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 45,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={false}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderRadius": 5,
+          "elevation": 1,
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <mockMaterialCommunityIcons
+        color="#9e9e9e"
+        name="close"
+        size={16}
+      />
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`IconButton component Renders the disabled icon button 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 45,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={true}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderRadius": 5,
+          "elevation": 1,
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <mockMaterialCommunityIcons
+        color="#9e9e9e"
+        name="close"
+        size={16}
+      />
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`IconButton component Renders the iconButton with other custom specification props 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 5,
+        "width": 10,
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={false}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderRadius": 2,
+          "elevation": 1,
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+      testID="testButton"
+    >
+      <mockMaterialCommunityIcons
+        color="#9e9e9e"
+        name="close"
+        size={16}
+      />
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`IconButton component Renders the iconButton with type as No Border 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 45,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={false}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#00000000",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <mockMaterialCommunityIcons
+        color="#9e9e9e"
+        name="close"
+        size={16}
+      />
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`IconButton component Renders the iconButton with type as Primary 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 45,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={false}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderRadius": 5,
+          "elevation": 1,
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <mockMaterialCommunityIcons
+        color="#9e9e9e"
+        name="close"
+        size={16}
+      />
+    </TouchableOpacity>
+  </View>
+</View>
+`;
+
+exports[`IconButton component Renders the iconButton with type as Solid White 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 45,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={false}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#0071e9",
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <mockMaterialCommunityIcons
+        color="#9e9e9e"
+        name="close"
+        size={16}
+      />
+    </TouchableOpacity>
+  </View>
+</View>
+`;

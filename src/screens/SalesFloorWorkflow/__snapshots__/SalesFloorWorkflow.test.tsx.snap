@@ -193,7 +193,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
           "margin": 5,
         }
       }
-      testId="complete"
+      testID="complete"
       title="[missing \\"en.PICKING.COMPLETE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -213,7 +213,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
           "margin": 5,
         }
       }
-      testId="bin"
+      testID="bin"
       title="[missing \\"en.PICKING.READY_TO_BIN\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -466,7 +466,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
           "margin": 5,
         }
       }
-      testId="complete"
+      testID="complete"
       title="[missing \\"en.PICKING.COMPLETE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -486,7 +486,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
           "margin": 5,
         }
       }
-      testId="bin"
+      testID="bin"
       title="[missing \\"en.PICKING.READY_TO_BIN\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -699,7 +699,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
           "margin": 5,
         }
       }
-      testId="complete"
+      testID="complete"
       title="[missing \\"en.PICKING.COMPLETE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -719,7 +719,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
           "margin": 5,
         }
       }
-      testId="bin"
+      testID="bin"
       title="[missing \\"en.PICKING.READY_TO_BIN\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}

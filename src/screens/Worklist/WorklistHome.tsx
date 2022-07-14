@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import styles from './WorklistHome.style';
 import { strings } from '../../locales';
 import { clearFilter } from '../../state/actions/Worklist';
@@ -30,7 +30,7 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
       <Button
         title={strings('WORKLIST.PALLET_WORKLIST')}
         onPress={() => navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' })}
-        type={Button.Type.PRIMARY}
+        type={ButtonType.PRIMARY}
         style={styles.button}
         testID="palletWorkListButton"
       />

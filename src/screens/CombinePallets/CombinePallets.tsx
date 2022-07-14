@@ -21,7 +21,7 @@ import { barcodeEmitter } from '../../utils/scannerUtils';
 import styles from './CombinePallets.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { CombinePallet, PalletItem } from '../../models/PalletManagementTypes';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { addCombinePallet, clearCombinePallet } from '../../state/actions/PalletManagement';
@@ -236,7 +236,7 @@ export const CombinePalletsScreen = (
         <View style={styles.saveButton}>
           <Button
             title={strings('GENERICS.SAVE')}
-            type={Button.Type.PRIMARY}
+            type={ButtonType.PRIMARY}
             style={{ width: '90%' }}
             onPress={() => dispatch(combinePalletsSaga({
               targetPallet: palletId,
