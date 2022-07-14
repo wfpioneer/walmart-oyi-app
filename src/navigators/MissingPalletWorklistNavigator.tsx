@@ -75,7 +75,7 @@ export const MissingPalletWorklistNavigatorStack = (
         name="ScanLocation"
         component={ScanLocation}
         options={{
-          headerTitle: strings('WORKLIST.SCAN_PALLET'),
+          headerTitle: strings('LOCATION.SCAN_LOCATION_HEADER'),
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderScanButton(dispatch, isManualScanEnabled)}

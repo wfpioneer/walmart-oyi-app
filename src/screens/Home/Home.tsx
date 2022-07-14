@@ -153,7 +153,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       const key = `${goal.worklistGoal}-${index}`;
       const isMissingPalletWorklistEnabled = this.props.userConfig.palletWorklists;
 
-      if (!isMissingPalletWorklistEnabled && goal.worklistTypes.find(worklist => worklist.worklistType === 'MP')) {
+      if (!isMissingPalletWorklistEnabled && goal.worklistGoal !== 'DAILY'
+       && goal.worklistTypes.find(worklist => worklist.worklistType === 'MP')) {
         return null;
       }
 
