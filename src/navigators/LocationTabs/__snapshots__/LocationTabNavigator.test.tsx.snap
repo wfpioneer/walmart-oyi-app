@@ -48,15 +48,15 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Data 1`] = `
   />
   <MaterialTopTabNavigator
     initialRouteName="FloorDetails"
-    swipeEnabled={true}
-    tabBarOptions={
+    screenOptions={
       Object {
-        "activeTintColor": "#0071e9",
-        "inactiveTintColor": "#616161",
-        "indicatorStyle": Object {
+        "swipeEnabled": true,
+        "tabBarActiveTintColor": "#0071e9",
+        "tabBarInactiveTintColor": "#616161",
+        "tabBarIndicatorStyle": Object {
           "backgroundColor": "#0071e9",
         },
-        "style": Object {
+        "tabBarStyle": Object {
           "backgroundColor": "#ffffffff",
         },
       }
@@ -146,15 +146,15 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Empty Data 1`] = `
   />
   <MaterialTopTabNavigator
     initialRouteName="FloorDetails"
-    swipeEnabled={true}
-    tabBarOptions={
+    screenOptions={
       Object {
-        "activeTintColor": "#0071e9",
-        "inactiveTintColor": "#616161",
-        "indicatorStyle": Object {
+        "swipeEnabled": true,
+        "tabBarActiveTintColor": "#0071e9",
+        "tabBarInactiveTintColor": "#616161",
+        "tabBarIndicatorStyle": Object {
           "backgroundColor": "#0071e9",
         },
-        "style": Object {
+        "tabBarStyle": Object {
           "backgroundColor": "#ffffffff",
         },
       }
@@ -244,15 +244,15 @@ exports[`Test Location Tabs Renders Location Tabs with Mock Large Location Data 
   />
   <MaterialTopTabNavigator
     initialRouteName="FloorDetails"
-    swipeEnabled={true}
-    tabBarOptions={
+    screenOptions={
       Object {
-        "activeTintColor": "#0071e9",
-        "inactiveTintColor": "#616161",
-        "indicatorStyle": Object {
+        "swipeEnabled": true,
+        "tabBarActiveTintColor": "#0071e9",
+        "tabBarInactiveTintColor": "#616161",
+        "tabBarIndicatorStyle": Object {
           "backgroundColor": "#0071e9",
         },
-        "style": Object {
+        "tabBarStyle": Object {
           "backgroundColor": "#ffffffff",
         },
       }
@@ -345,15 +345,15 @@ exports[`Test Location Tabs Renders Location header as Scanned Event Value when 
   />
   <MaterialTopTabNavigator
     initialRouteName="FloorDetails"
-    swipeEnabled={true}
-    tabBarOptions={
+    screenOptions={
       Object {
-        "activeTintColor": "#0071e9",
-        "inactiveTintColor": "#616161",
-        "indicatorStyle": Object {
+        "swipeEnabled": true,
+        "tabBarActiveTintColor": "#0071e9",
+        "tabBarInactiveTintColor": "#616161",
+        "tabBarIndicatorStyle": Object {
           "backgroundColor": "#0071e9",
         },
-        "style": Object {
+        "tabBarStyle": Object {
           "backgroundColor": "#ffffffff",
         },
       }
@@ -446,15 +446,15 @@ exports[`Test Location Tabs Renders Manual Scan Component when isManualScanEnabl
   />
   <MaterialTopTabNavigator
     initialRouteName="FloorDetails"
-    swipeEnabled={true}
-    tabBarOptions={
+    screenOptions={
       Object {
-        "activeTintColor": "#0071e9",
-        "inactiveTintColor": "#616161",
-        "indicatorStyle": Object {
+        "swipeEnabled": true,
+        "tabBarActiveTintColor": "#0071e9",
+        "tabBarInactiveTintColor": "#616161",
+        "tabBarIndicatorStyle": Object {
           "backgroundColor": "#0071e9",
         },
-        "style": Object {
+        "tabBarStyle": Object {
           "backgroundColor": "#ffffffff",
         },
       }
@@ -548,15 +548,15 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
   />
   <MaterialTopTabNavigator
     initialRouteName="FloorDetails"
-    swipeEnabled={true}
-    tabBarOptions={
+    screenOptions={
       Object {
-        "activeTintColor": "#0071e9",
-        "inactiveTintColor": "#616161",
-        "indicatorStyle": Object {
+        "swipeEnabled": true,
+        "tabBarActiveTintColor": "#0071e9",
+        "tabBarInactiveTintColor": "#616161",
+        "tabBarIndicatorStyle": Object {
           "backgroundColor": "#0071e9",
         },
-        "style": Object {
+        "tabBarStyle": Object {
           "backgroundColor": "#ffffffff",
         },
       }
@@ -809,15 +809,15 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Loading I
   />
   <MaterialTopTabNavigator
     initialRouteName="FloorDetails"
-    swipeEnabled={true}
-    tabBarOptions={
+    screenOptions={
       Object {
-        "activeTintColor": "#0071e9",
-        "inactiveTintColor": "#616161",
-        "indicatorStyle": Object {
+        "swipeEnabled": true,
+        "tabBarActiveTintColor": "#0071e9",
+        "tabBarInactiveTintColor": "#616161",
+        "tabBarIndicatorStyle": Object {
           "backgroundColor": "#0071e9",
         },
-        "style": Object {
+        "tabBarStyle": Object {
           "backgroundColor": "#ffffffff",
         },
       }
@@ -910,15 +910,15 @@ exports[`Test Location Tabs Tests rendering removeSectionModal Renders Retry but
   />
   <MaterialTopTabNavigator
     initialRouteName="FloorDetails"
-    swipeEnabled={true}
-    tabBarOptions={
+    screenOptions={
       Object {
-        "activeTintColor": "#0071e9",
-        "inactiveTintColor": "#616161",
-        "indicatorStyle": Object {
+        "swipeEnabled": true,
+        "tabBarActiveTintColor": "#0071e9",
+        "tabBarInactiveTintColor": "#616161",
+        "tabBarIndicatorStyle": Object {
           "backgroundColor": "#0071e9",
         },
-        "style": Object {
+        "tabBarStyle": Object {
           "backgroundColor": "#ffffffff",
         },
       }
