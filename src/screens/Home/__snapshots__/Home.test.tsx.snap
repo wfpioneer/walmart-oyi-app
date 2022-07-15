@@ -120,14 +120,6 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
         onPress={[Function]}
       />
-      <GoalCircle
-        active={false}
-        completionGoal={100}
-        completionPercentage={1}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
-        goalTitle="[missing \\"en.LOCATION.PALLETS\\" translation]"
-        onPress={[Function]}
-      />
     </View>
     <WorklistCard
       complete={0}
@@ -270,14 +262,6 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
         completionPercentage={0}
         frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
-        onPress={[Function]}
-      />
-      <GoalCircle
-        active={false}
-        completionGoal={100}
-        completionPercentage={1}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
-        goalTitle="[missing \\"en.LOCATION.PALLETS\\" translation]"
         onPress={[Function]}
       />
     </View>
@@ -546,14 +530,6 @@ exports[`HomeScreen rendering renders pure version number if build environment i
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
         onPress={[Function]}
       />
-      <GoalCircle
-        active={false}
-        completionGoal={100}
-        completionPercentage={1}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
-        goalTitle="[missing \\"en.LOCATION.PALLETS\\" translation]"
-        onPress={[Function]}
-      />
     </View>
     <WorklistCard
       complete={0}
@@ -696,14 +672,6 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         completionPercentage={50}
         frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
-        onPress={[Function]}
-      />
-      <GoalCircle
-        active={false}
-        completionGoal={100}
-        completionPercentage={1}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
-        goalTitle="[missing \\"en.LOCATION.PALLETS\\" translation]"
         onPress={[Function]}
       />
     </View>
@@ -850,14 +818,6 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
         onPress={[Function]}
       />
-      <GoalCircle
-        active={false}
-        completionGoal={100}
-        completionPercentage={1}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
-        goalTitle="[missing \\"en.LOCATION.PALLETS\\" translation]"
-        onPress={[Function]}
-      />
     </View>
     <WorklistCard
       complete={100}
@@ -1000,14 +960,6 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         completionPercentage={0}
         frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
-        onPress={[Function]}
-      />
-      <GoalCircle
-        active={false}
-        completionGoal={100}
-        completionPercentage={1}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
-        goalTitle="[missing \\"en.LOCATION.PALLETS\\" translation]"
         onPress={[Function]}
       />
     </View>
