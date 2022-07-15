@@ -104,8 +104,7 @@ const ScanPallet = (): JSX.Element => {
   const route = useRoute();
   const navigation = useNavigation();
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
-  // TODO: Selected pallet detail needs to fetched from redux state
-  const selectedWorklistPalletId = '7988';
+  const selectedWorklistPalletId = useTypedSelector(state => state.PalletWorklist.selectedWorklistPalletId);
 
   return (
     <ScanPalletScreen

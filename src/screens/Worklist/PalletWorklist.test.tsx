@@ -16,7 +16,7 @@ import {
 } from '../../mockData/mockWorkList';
 import { AsyncState } from '../../models/AsyncState';
 import { strings } from '../../locales';
-import { MissingPalletWorklistItemI } from '../../models/WorklistItem';
+import { MissingPalletWorklistItemI, Tabs } from '../../models/PalletWorklist';
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -71,6 +71,8 @@ describe('Tests rendering PalletWorklist screen', () => {
         error={null}
         groupToggle={false}
         updateGroupToggle={jest.fn()}
+        selectedTab={Tabs.TODO}
+        setPalletClicked={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -92,6 +94,8 @@ describe('Tests rendering PalletWorklist screen', () => {
         error={null}
         groupToggle={false}
         updateGroupToggle={jest.fn()}
+        selectedTab={Tabs.TODO}
+        setPalletClicked={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -112,6 +116,8 @@ describe('Tests rendering PalletWorklist screen', () => {
         error={mockError}
         groupToggle={false}
         updateGroupToggle={jest.fn()}
+        selectedTab={Tabs.TODO}
+        setPalletClicked={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

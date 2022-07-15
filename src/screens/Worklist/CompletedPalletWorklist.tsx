@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { MissingPalletWorklistItemI } from '../../models/WorklistItem';
+import { MissingPalletWorklistItemI, Tabs } from '../../models/PalletWorklist';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PalletWorklist } from './PalletWorklist';
 import { AsyncState } from '../../models/AsyncState';
 import { getPalletWorklist } from '../../state/actions/saga';
 
-interface CompletedWorklistProps {
+interface CompletedWorklistScreenProps {
   getMPWorklistApi: AsyncState;
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,10 +17,16 @@ interface CompletedWorklistProps {
   navigation: NavigationProp<any>;
   groupToggle: boolean;
   updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedTab: Tabs;
+  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface CompletedWorklistProps {
+  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const CompletedPalletWorklistScreen = (
-  props: CompletedWorklistProps
+  props: CompletedWorklistScreenProps
 ): JSX.Element => {
   const {
     clearPalletAPI,
@@ -30,7 +36,9 @@ export const CompletedPalletWorklistScreen = (
     setDisplayConfirmation,
     navigation,
     groupToggle,
-    updateGroupToggle
+    updateGroupToggle,
+    selectedTab,
+    setPalletClicked
   } = props;
 
   const { isWaiting, error, result } = getMPWorklistApi;
@@ -56,13 +64,17 @@ export const CompletedPalletWorklistScreen = (
       error={error}
       groupToggle={groupToggle}
       updateGroupToggle={updateGroupToggle}
+      selectedTab={selectedTab}
+      setPalletClicked={setPalletClicked}
     />
   );
 };
 
-export const CompletedPalletWorklist = (): JSX.Element => {
+export const CompletedPalletWorklist = (props: CompletedWorklistProps): JSX.Element => {
+  const { setPalletClicked } = props;
   const getMPWorklistApi = useTypedSelector(state => state.async.getPalletWorklist);
   const clearPalletAPI = useTypedSelector(state => state.async.clearPallet);
+  const selectedTab = useTypedSelector(state => state.PalletWorklist.selectedTab);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
   const [groupToggle, updateGroupToggle] = useState(false);
   const dispatch = useDispatch();
@@ -77,6 +89,8 @@ export const CompletedPalletWorklist = (): JSX.Element => {
       navigation={navigation}
       groupToggle={groupToggle}
       updateGroupToggle={updateGroupToggle}
+      selectedTab={selectedTab}
+      setPalletClicked={setPalletClicked}
     />
   );
 };

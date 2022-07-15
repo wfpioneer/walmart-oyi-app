@@ -64,4 +64,26 @@ describe('Tests rendering MissingPalletWorklistCard', () => {
     fireEvent.press(deletePalletButton);
     expect(mockDeleteCallback).toBeCalledTimes(1);
   });
+  it('test actions on the Missing pallet Worklist card in disabled mode', () => {
+    const mockAddCallback = jest.fn();
+    const mockDeleteCallback = jest.fn();
+    const mockNavigateCallback = jest.fn();
+    const { getByTestId } = render(
+      <MissingPalletWorklistCard
+        palletId={7989}
+        reportedBy="vn51wu8"
+        reportedDate="26/06/2022"
+        lastLocation="A1-3"
+        expanded={false}
+        addCallback={mockAddCallback}
+        deleteCallback={mockDeleteCallback}
+        navigateCallback={mockNavigateCallback}
+        disabled={true}
+      />
+    );
+    const missingPalletCard = getByTestId('missingPalletWorklistCard');
+
+    fireEvent.press(missingPalletCard);
+    expect(mockNavigateCallback).not.toBeCalled();
+  });
 });

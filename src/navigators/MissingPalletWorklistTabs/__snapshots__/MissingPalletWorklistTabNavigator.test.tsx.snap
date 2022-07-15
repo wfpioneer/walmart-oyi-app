@@ -2,6 +2,7 @@
 
 exports[`MissingPalletWorklist Navigator Renders the Missing Pallet Worklist navigator component 1`] = `
 <MaterialTopTabNavigator
+  initialRouteName="ToDo"
   tabBarOptions={
     Object {
       "activeTintColor": "#ffffffff",
@@ -15,12 +16,24 @@ exports[`MissingPalletWorklist Navigator Renders the Missing Pallet Worklist nav
   }
 >
   <Screen
-    component={[Function]}
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
     name="[missing \\"en.WORKLIST.TODO\\" translation]"
-  />
+  >
+    [Function]
+  </Screen>
   <Screen
-    component={[Function]}
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
     name="[missing \\"en.WORKLIST.COMPLETED\\" translation]"
-  />
+  >
+    [Function]
+  </Screen>
 </MaterialTopTabNavigator>
 `;
