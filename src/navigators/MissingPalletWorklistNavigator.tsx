@@ -1,6 +1,6 @@
 import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Pressable, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import COLOR from '../themes/Color';
@@ -8,6 +8,7 @@ import { strings } from '../locales';
 import MissingPalletWorklistTabs from './MissingPalletWorklistTabs/MissingPalletWorklistTabNavigator';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import ScanPallet from '../screens/ScanPallet/ScanPallet';
+import { ScanLocation } from '../screens/ScanLocation/ScanLocation';
 import { setManualScan } from '../state/actions/Global';
 import styles from './MissingPalletWorklistNavigator.style';
 
@@ -38,16 +39,6 @@ interface MissingPalletWorklistNavigatorProps {
   dispatch: Dispatch<any>;
 }
 
-export const kebabMenuButton = () => (
-  <Pressable onPress={() => {}} style={styles.leftButton}>
-    <MaterialCommunityIcons
-      name="dots-vertical"
-      size={30}
-      color={COLOR.WHITE}
-    />
-  </Pressable>
-);
-
 export const MissingPalletWorklistNavigatorStack = (
   props: MissingPalletWorklistNavigatorProps
 ): JSX.Element => {
@@ -65,8 +56,7 @@ export const MissingPalletWorklistNavigatorStack = (
         name="MissingPalletWorklistTabs"
         component={MissingPalletWorklistTabs}
         options={{
-          headerTitle: strings('WORKLIST.WORKLIST'),
-          headerRight: () => kebabMenuButton()
+          headerTitle: strings('WORKLIST.WORKLIST')
         }}
       />
       <Stack.Screen
@@ -74,6 +64,18 @@ export const MissingPalletWorklistNavigatorStack = (
         component={ScanPallet}
         options={{
           headerTitle: strings('WORKLIST.SCAN_PALLET'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderScanButton(dispatch, isManualScanEnabled)}
+            </View>
+          )
+        }}
+      />
+      <Stack.Screen
+        name="ScanLocation"
+        component={ScanLocation}
+        options={{
+          headerTitle: strings('LOCATION.SCAN_LOCATION_HEADER'),
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderScanButton(dispatch, isManualScanEnabled)}
