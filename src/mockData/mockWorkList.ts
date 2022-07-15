@@ -1,4 +1,5 @@
-import { MissingPalletWorklistItemI, WorklistItemI } from '../models/WorklistItem';
+import { WorklistItemI } from '../models/WorklistItem';
+import { MissingPalletWorklistItemI } from '../models/PalletWorklist';
 import { FilteredCategory } from '../models/FilterListItem';
 
 // eslint-disable-next-line no-shadow

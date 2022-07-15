@@ -1,6 +1,6 @@
 import { AxiosRequestHeaders } from 'axios';
 import { CreateAisleRequest } from '../../models/CreateZoneAisleSection.d';
-import { PalletWorklistType } from '../../models/WorklistItem';
+import { PalletWorklistType } from '../../models/PalletWorklist';
 import {
   ApprovalListItem,
   approvalAction,

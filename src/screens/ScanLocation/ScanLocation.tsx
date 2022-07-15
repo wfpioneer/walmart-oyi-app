@@ -25,6 +25,7 @@ import {
   showActivityModal
 } from '../../state/actions/Modal';
 import { ADD_PALLET } from '../../state/actions/asyncAPI';
+import { clearSelectedWorklistPalletId } from '../../state/actions/PalletWorklist';
 
 interface ScanLocationProps {
   addPalletAPI: AsyncState;
@@ -55,6 +56,7 @@ export const updatePalletLocationHook = (
       visibilityTime: SNACKBAR_TIMEOUT
     });
     dispatch({ type: ADD_PALLET.RESET });
+    dispatch(clearSelectedWorklistPalletId());
     navigation.goBack();
   }
 
@@ -148,9 +150,8 @@ export const ScanLocation = () => {
   const route = useRoute();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const addPalletAPI = useTypedSelector(state => state.async.addPallet);
+  const selectedWorklistPalletId = useTypedSelector(state => state.PalletWorklist.selectedWorklistPalletId);
 
-  // TODO: Selected pallet detail needs to fetched from redux state
-  const selectedWorklistPalletId = '7988';
   return (
     <ScanLocationScreen
       addPalletAPI={addPalletAPI}

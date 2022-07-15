@@ -14,6 +14,7 @@ import { SnackBar } from './SnackBar';
 import { PalletManagement } from './PalletManagement';
 import { Binning } from './Binning';
 import { Picking } from './Picking';
+import { PalletWorklist } from './PalletWorklist';
 
 /**
  * This is the root reducers,this RootReducer combine all sub reducers.git
@@ -32,7 +33,8 @@ const RootReducer = combineReducers({
   SnackBar,
   PalletManagement,
   Binning,
-  Picking
+  Picking,
+  PalletWorklist
 });
 
 export default RootReducer;

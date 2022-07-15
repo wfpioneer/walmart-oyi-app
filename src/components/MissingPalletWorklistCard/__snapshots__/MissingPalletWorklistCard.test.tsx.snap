@@ -2,6 +2,11 @@
 
 exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWorklistCard 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -110,6 +115,11 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
 
 exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWorklistCard with expanded prop as true 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}

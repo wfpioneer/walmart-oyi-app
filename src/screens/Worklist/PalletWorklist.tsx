@@ -13,12 +13,12 @@ import { AxiosError } from 'axios';
 import MissingPalletWorklistCard from '../../components/MissingPalletWorklistCard/MissingPalletWorklistCard';
 import SortBar from '../../components/SortBar/SortBar';
 import { strings } from '../../locales';
-import { MissingPalletWorklistItemI } from '../../models/WorklistItem';
+import { MissingPalletWorklistItemI, Tabs } from '../../models/PalletWorklist';
 import { CustomModalComponent } from '../Modal/Modal';
 import { styles } from './PalletWorklist.style';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
-import { clearPallet } from '../../state/actions/saga';
+import { clearPallet, getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import {
   hideActivityModal,
@@ -26,6 +26,7 @@ import {
 } from '../../state/actions/Modal';
 import { CLEAR_PALLET } from '../../state/actions/asyncAPI';
 import WorklistHeader from '../../components/WorklistHeader/WorklistHeader';
+import { setSelectedWorklistPalletId } from '../../state/actions/PalletWorklist';
 
 interface PalletWorkListProps {
   palletWorklist: MissingPalletWorklistItemI[] | undefined;
@@ -40,14 +41,20 @@ interface PalletWorkListProps {
   error: AxiosError | null;
   groupToggle: boolean;
   updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedTab: Tabs;
+  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface ListItemProps {
   item: MissingPalletWorklistItemI;
-  handleAddLocationClick: () => void;
-  handleDeleteClick: (palletID: string) => void;
+  handleAddLocationClick: (palletId: string) => void;
+  handleDeleteClick: (palletId: string) => void;
   expanded: boolean;
   setActiveItemIndex: React.Dispatch<React.SetStateAction<number>>;
-  itemIndex: number
+  itemIndex: number;
+  selectedTab: Tabs;
+  activeItemIndex: number;
+  dispatch: Dispatch<any>;
+  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const clearPalletAPIHook = (
@@ -93,15 +100,25 @@ export const clearPalletAPIHook = (
 };
 
 const onPalletCardClick = (
-  index: number, setActiveItemIndex: React.Dispatch<React.SetStateAction<number>>
+  item: MissingPalletWorklistItemI,
+  index: number,
+  activeItemIndex: number,
+  setActiveItemIndex: React.Dispatch<React.SetStateAction<number>>,
+  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
 ) => {
-  // to do if already expanded navigate to pallet mgmt screen
-  setActiveItemIndex(index);
+  if (activeItemIndex === index) {
+    setPalletClicked(true);
+    dispatch(getPalletDetails({ palletIds: [item.palletId.toString()], isAllItems: true }));
+  } else {
+    setActiveItemIndex(index);
+  }
 };
 
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   const {
-    item, handleAddLocationClick, handleDeleteClick, expanded, setActiveItemIndex, itemIndex
+    item, handleAddLocationClick, handleDeleteClick, expanded, setPalletClicked,
+    setActiveItemIndex, itemIndex, selectedTab, activeItemIndex, dispatch
   } = props;
   if (item.palletId === 0) {
     const { lastKnownPalletLocationName, itemCount } = item;
@@ -117,9 +134,12 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
       reportedBy={item.createUserId}
       reportedDate={item.createTs}
       expanded={expanded}
-      addCallback={handleAddLocationClick}
+      addCallback={() => handleAddLocationClick(item.palletId.toString())}
       deleteCallback={() => handleDeleteClick(item.palletId.toString())}
-      navigateCallback={() => onPalletCardClick(itemIndex, setActiveItemIndex)}
+      navigateCallback={() => onPalletCardClick(
+        item, itemIndex, activeItemIndex, setActiveItemIndex, setPalletClicked, dispatch
+      )}
+      disabled={selectedTab === Tabs.COMPLETED}
     />
   );
 };
@@ -243,11 +263,14 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
     refreshing,
     error,
     groupToggle,
-    updateGroupToggle
+    updateGroupToggle,
+    selectedTab,
+    setPalletClicked
   } = props;
   let deletePalletId = '';
 
   const [activeItemIndex, setActiveItemIndex] = useState(1);
+
   useEffectHook(
     () => clearPalletAPIHook(
       clearPalletAPI,
@@ -262,10 +285,11 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
 
   // reset active item index to 1 on refresh / on sort toggle
   useEffectHook(() => {
-    setActiveItemIndex(1);
-  }, [groupToggle, palletWorklist]);
+    if (groupToggle || refreshing) {
+      setActiveItemIndex(1);
+    }
+  }, [groupToggle, refreshing]);
 
-  // TODO handle request + response for getPalletWorklist service call
   const onDeletePress = () => {
     dispatch(clearPallet({ palletId: deletePalletId }));
   };
@@ -275,7 +299,10 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
     deletePalletId = palletId;
   };
 
-  const handleAddLocationClick = () => navigation.navigate('ScanPallet');
+  const handleAddLocationClick = (palletId: string) => {
+    dispatch(setSelectedWorklistPalletId(palletId));
+    navigation.navigate('ScanPallet');
+  };
 
   if (error) {
     return (
@@ -348,11 +375,15 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
         renderItem={({ item, index }) => (
           <RenderWorklistItem
             item={item}
+            dispatch={dispatch}
             handleAddLocationClick={handleAddLocationClick}
-            handleDeleteClick={() => handleDeleteClick(item.palletId.toString())}
-            expanded={index === activeItemIndex}
+            handleDeleteClick={handleDeleteClick}
+            expanded={selectedTab !== Tabs.COMPLETED ? index === activeItemIndex : false}
+            activeItemIndex={activeItemIndex}
             setActiveItemIndex={setActiveItemIndex}
             itemIndex={index}
+            selectedTab={selectedTab}
+            setPalletClicked={setPalletClicked}
           />
         )}
         onRefresh={onRefresh}
