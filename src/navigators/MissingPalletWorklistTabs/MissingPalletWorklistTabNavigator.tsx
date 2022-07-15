@@ -198,10 +198,10 @@ export const MissingPalletWorklistTabNavigator = (props: MissingPalletWorklistTa
 
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: COLOR.WHITE,
-        style: { backgroundColor: COLOR.MAIN_THEME_COLOR },
-        indicatorStyle: { backgroundColor: COLOR.WHITE }
+      screenOptions={{
+        tabBarActiveTintColor: COLOR.WHITE,
+        tabBarStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
+        tabBarIndicatorStyle: { backgroundColor: COLOR.WHITE }
       }}
       initialRouteName={selectedTab}
     >
