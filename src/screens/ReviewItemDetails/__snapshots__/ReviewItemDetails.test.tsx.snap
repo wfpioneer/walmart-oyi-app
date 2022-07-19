@@ -346,6 +346,17 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Ren
 </TouchableOpacity>
 `;
 
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pick history flat list 1`] = `
+<View>
+  <CollapsibleHeaderCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+    toggleIsOpened={[Function]}
+  />
+</View>
+`;
+
 exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders the barcodeErrorModal isVisible set to False 1`] = `
 <Modal
   animationType="none"

@@ -122,7 +122,9 @@ export default {
     FLY_CLOUD_QTY: 'Fly Cloud',
     IN_TRANSIT_FLY_QTY: 'In Transit Fly Cloud Qty',
     ERROR_SALES_HISTORY: 'Unable to retrieve sales history',
-    ITEM_NUMBER: 'Item Number'
+    ITEM_NUMBER: 'Item Number',
+    PICK_HISTORY: 'Pick History',
+    NO_PICK_HISTORY: 'No pick history available'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -436,7 +438,8 @@ export default {
     NO_PALLETS_AVAILABLE_PICK_DELETED: 'The pallet is not available. The pick requested has been deleted',
     UPDATE_PICK_FAILED_TRY_AGAIN: 'Failed to update pick. Please try again',
     UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again',
-    NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available'
+    NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available',
+    PICK_HISTORY: 'Pick History'
   },
   BINNING: {
     BINNING: 'Binning',

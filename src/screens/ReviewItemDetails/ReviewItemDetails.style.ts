@@ -115,6 +115,24 @@ const styles = StyleSheet.create({
   },
   labelIcon: {
     marginLeft: -4
+  },
+  historyCard: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: COLOR.WHITE,
+    paddingHorizontal: 10,
+    paddingVertical: 5
+  },
+  historyMoreBtn: {
+    width: 60
+  },
+  moreBtnContainer: {
+    backgroundColor: COLOR.WHITE
+  },
+  noDataContainer: {
+    padding: 10,
+    backgroundColor: COLOR.WHITE
   }
 });
 
