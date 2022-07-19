@@ -1,14 +1,22 @@
 import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import Toast from 'react-native-toast-message';
+import { AxiosError } from 'axios';
+import { object } from 'prop-types';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
-  PalletWorklistScreen,
-  clearPalletAPIHook
+  PalletWorklist,
+  clearPalletAPIHook,
+  convertDataToDisplayList
 } from './PalletWorklist';
-import { mockMissingPalletWorklist } from '../../mockData/mockWorkList';
+import {
+  mockMPSecWiseList,
+  mockMissingPalletWorklist,
+  mockMissingPalletWorklistTodo
+} from '../../mockData/mockWorkList';
 import { AsyncState } from '../../models/AsyncState';
 import { strings } from '../../locales';
+import { MissingPalletWorklistItemI, Tabs } from '../../models/PalletWorklist';
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -27,11 +35,20 @@ const navigationProp: NavigationProp<any> = {
 
 describe('Tests rendering PalletWorklist screen', () => {
   const mockDispatch = jest.fn();
+  const mockOnRefresh = jest.fn();
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
     error: null,
     value: null,
     result: null
+  };
+
+  const mockError: AxiosError = {
+    config: {},
+    isAxiosError: true,
+    message: '500 Network Error',
+    name: 'Network Error',
+    toJSON: () => object
   };
 
   afterEach(() => {
@@ -41,21 +58,73 @@ describe('Tests rendering PalletWorklist screen', () => {
   it('Renders the PalletWorklist screen', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <PalletWorklistScreen
-        palletWorklist={mockMissingPalletWorklist}
+      <PalletWorklist
+        palletWorklist={mockMissingPalletWorklistTodo}
         displayConfirmation={false}
         setDisplayConfirmation={jest.fn()}
         dispatch={mockDispatch}
         clearPalletAPI={defaultAsyncState}
         navigation={navigationProp}
         useEffectHook={jest.fn()}
+        onRefresh={jest.fn()}
+        refreshing={false}
+        error={null}
+        groupToggle={false}
+        updateGroupToggle={jest.fn()}
+        selectedTab={Tabs.TODO}
+        setPalletClicked={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders the PalletWorklist screen when refreshing prop is true', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PalletWorklist
+        palletWorklist={mockMissingPalletWorklistTodo}
+        displayConfirmation={false}
+        setDisplayConfirmation={jest.fn()}
+        dispatch={mockDispatch}
+        clearPalletAPI={defaultAsyncState}
+        navigation={navigationProp}
+        useEffectHook={jest.fn()}
+        onRefresh={jest.fn()}
+        refreshing={true}
+        error={null}
+        groupToggle={false}
+        updateGroupToggle={jest.fn()}
+        selectedTab={Tabs.TODO}
+        setPalletClicked={jest.fn()}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the PalletWorklist screen when the backend service encouters an error', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PalletWorklist
+        palletWorklist={mockMissingPalletWorklistTodo}
+        displayConfirmation={false}
+        setDisplayConfirmation={jest.fn()}
+        dispatch={mockDispatch}
+        clearPalletAPI={defaultAsyncState}
+        navigation={navigationProp}
+        useEffectHook={jest.fn()}
+        onRefresh={jest.fn()}
+        refreshing={false}
+        error={mockError}
+        groupToggle={false}
+        updateGroupToggle={jest.fn()}
+        selectedTab={Tabs.TODO}
+        setPalletClicked={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
   it('Test clearPalletApi hook function', () => {
-    const mockPalletID = mockMissingPalletWorklist[0].palletId.toString();
+    const mockPalletID = mockMissingPalletWorklistTodo[0].palletId.toString();
     const clearPalletSuccess: AsyncState = {
       ...defaultAsyncState,
       result: {
@@ -74,7 +143,8 @@ describe('Tests rendering PalletWorklist screen', () => {
       mockPalletID,
       navigationProp,
       mockDispatch,
-      mockSetDisplayConfirmation
+      mockSetDisplayConfirmation,
+      mockOnRefresh
     );
 
     expect(mockDispatch).toBeCalledTimes(2);
@@ -99,7 +169,8 @@ describe('Tests rendering PalletWorklist screen', () => {
       mockPalletID,
       navigationProp,
       mockDispatch,
-      mockSetDisplayConfirmation
+      mockSetDisplayConfirmation,
+      mockOnRefresh
     );
 
     expect(mockDispatch).toBeCalledTimes(2);
@@ -116,8 +187,31 @@ describe('Tests rendering PalletWorklist screen', () => {
       mockPalletID,
       navigationProp,
       mockDispatch,
-      mockSetDisplayConfirmation
+      mockSetDisplayConfirmation,
+      mockOnRefresh
     );
     expect(mockDispatch).toBeCalledTimes(1);
+  });
+
+  describe('Tests convertDataToDisplayList', () => {
+    it('Returns array of MPWorklist items with location header indexes', () => {
+      expect(convertDataToDisplayList(mockMissingPalletWorklist, true)).toStrictEqual(mockMPSecWiseList);
+    });
+
+    it('Returns array of MPWorklist items with one single all category', () => {
+      const allLocList: MissingPalletWorklistItemI[] = [{
+        palletId: 0,
+        lastKnownPalletLocationId: -1,
+        lastKnownPalletLocationName: strings('WORKLIST.ALL'),
+        itemCount: mockMissingPalletWorklist.length,
+        createUserId: '',
+        createTs: '',
+        palletDeleted: false,
+        sectionID: 0,
+        completed: false
+      },
+      ...mockMissingPalletWorklist.sort((a, b) => a.palletId - b.palletId)];
+      expect(convertDataToDisplayList(mockMissingPalletWorklist, false)).toStrictEqual(allLocList);
+    });
   });
 });

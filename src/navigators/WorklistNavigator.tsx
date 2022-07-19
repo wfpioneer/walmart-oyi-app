@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { Dispatch, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { HeaderBackButton } from '@react-navigation/elements';
 import { Animated, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -19,18 +20,15 @@ import { getWorklist } from '../state/actions/saga';
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
-const worklistTabs = () => (
+const WorklistTabs = () => (
   <Tab.Navigator
-    tabBarOptions={{
-      activeTintColor: COLOR.WHITE,
-      style: { backgroundColor: COLOR.MAIN_THEME_COLOR },
-      indicatorStyle: { backgroundColor: COLOR.WHITE }
+    screenOptions={{
+      tabBarActiveTintColor: COLOR.WHITE,
+      tabBarIndicatorStyle: { backgroundColor: COLOR.WHITE },
+      tabBarStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
     }}
   >
-    <Tab.Screen
-      name={strings('WORKLIST.TODO')}
-      component={TodoWorklist}
-    />
+    <Tab.Screen name={strings('WORKLIST.TODO')} component={TodoWorklist} />
     <Tab.Screen
       name={strings('WORKLIST.COMPLETED')}
       component={CompletedWorklist}
@@ -38,7 +36,7 @@ const worklistTabs = () => (
   </Tab.Navigator>
 );
 
-const onFilterMenuPress = (dispatch: any, menuOpen: boolean) => {
+const onFilterMenuPress = (dispatch: Dispatch<any>, menuOpen: boolean) => {
   if (menuOpen) {
     dispatch(toggleMenu(false));
   } else {
@@ -46,7 +44,7 @@ const onFilterMenuPress = (dispatch: any, menuOpen: boolean) => {
   }
 };
 
-const renderHeaderRight = (dispatch: any, menuOpen: boolean) => (
+const renderHeaderRight = (dispatch: Dispatch<any>, menuOpen: boolean) => (
   <View style={styles.headerRightView}>
     <TouchableOpacity onPress={() => onFilterMenuPress(dispatch, menuOpen)}>
       <MaterialIcons name="filter-list" size={25} color={COLOR.WHITE} />
@@ -58,14 +56,25 @@ export const WorklistNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
+  const user = useTypedSelector(state => state.User);
+  const { palletWorklists } = user.configs;
 
-  useEffect(() => navigation.addListener('focus', () => {
-    dispatch(getWorklist());
-  }), [navigation]);
-
-  const menu = (
-    <FilterMenu />
+  useEffect(
+    () => navigation.addListener('focus', () => {
+      dispatch(getWorklist());
+    }),
+    [navigation]
   );
+
+  const navigateBack = () => {
+    if (palletWorklists) {
+      navigation.navigate(strings('WORKLIST.WORKLIST'));
+    } else {
+      navigation.goBack();
+    }
+  };
+
+  const menu = <FilterMenu />;
   return (
     <SideMenu
       menu={menu}
@@ -76,19 +85,34 @@ export const WorklistNavigator = (): JSX.Element => {
         friction: 8,
         useNativeDriver: true
       })}
+      onChange={isOpen => {
+        if (!isOpen && menuOpen) {
+          dispatch(toggleMenu(false));
+        } else if (isOpen && !menuOpen) {
+          dispatch(toggleMenu(true));
+        }
+      }}
     >
       <Stack.Navigator
-        headerMode="float"
         screenOptions={{
+          headerMode: 'float',
           headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
           headerTintColor: COLOR.WHITE
         }}
       >
         <Stack.Screen
-          name={strings('WORKLIST.WORKLIST')}
-          component={worklistTabs}
+          name="ITEMWORKLIST"
+          component={WorklistTabs}
           options={() => ({
-            headerRight: () => renderHeaderRight(dispatch, menuOpen)
+            headerRight: () => renderHeaderRight(dispatch, menuOpen),
+            headerTitle: strings('WORKLIST.WORKLIST'),
+            headerLeft: props => props.canGoBack && (
+            <HeaderBackButton
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+              {...props}
+              onPress={navigateBack}
+            />
+            )
           })}
         />
       </Stack.Navigator>

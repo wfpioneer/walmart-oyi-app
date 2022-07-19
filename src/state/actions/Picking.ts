@@ -10,6 +10,7 @@ export const SET_PICK_CREATE_ITEM = 'PICKLIST/SET_PICK_CREATE_ITEM';
 export const SET_PICK_CREATE_FLOOR = 'PICKLIST/SET_PICK_CREATE_FLOOR';
 export const SET_PICK_CREATE_RESERVE = 'PICKLIST/SET_PICK_CREATE_RESERVE';
 export const SET_SELECTED_TAB = 'PICKLIST/SET_SELECTED_TAB';
+export const SHOW_PICKING_MENU = 'PICKLIST/SHOW_PICKING_MENU';
 
 export const initializePicklist = (plItems: PickListItem[]) => ({
   type: INITIALIZE_PICKLIST,
@@ -55,6 +56,11 @@ export const setSelectedTab = (tab: Tabs) => ({
   payload: tab
 } as const);
 
+export const showPickingMenu = (show: boolean) => ({
+  type: SHOW_PICKING_MENU,
+  payload: show
+} as const);
+
 export type Actions =
   | ReturnType<typeof initializePicklist>
   | ReturnType<typeof updatePicks>
@@ -64,4 +70,5 @@ export type Actions =
   | ReturnType<typeof setPickCreateFloor>
   | ReturnType<typeof setPickCreateReserve>
   | ReturnType<typeof setSelectedTab>
-  | ReturnType<typeof resetPickList>;
+  | ReturnType<typeof resetPickList>
+  | ReturnType<typeof showPickingMenu>;

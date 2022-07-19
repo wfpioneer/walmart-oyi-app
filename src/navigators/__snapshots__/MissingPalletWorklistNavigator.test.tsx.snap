@@ -40,7 +40,6 @@ exports[`MissingPalletWorklist Navigator Renders and Calls the Manual Scan Butto
 
 exports[`MissingPalletWorklist Navigator Renders the MissingPalletWorklist Navigator 1`] = `
 <StackNavigator
-  headerMode="float"
   screenOptions={[Function]}
 >
   <Screen
@@ -48,7 +47,6 @@ exports[`MissingPalletWorklist Navigator Renders the MissingPalletWorklist Navig
     name="MissingPalletWorklistTabs"
     options={
       Object {
-        "headerRight": [Function],
         "headerTitle": "[missing \\"en.WORKLIST.WORKLIST\\" translation]",
       }
     }
@@ -60,6 +58,16 @@ exports[`MissingPalletWorklist Navigator Renders the MissingPalletWorklist Navig
       Object {
         "headerRight": [Function],
         "headerTitle": "[missing \\"en.WORKLIST.SCAN_PALLET\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="ScanLocation"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_LOCATION_HEADER\\" translation]",
       }
     }
   />

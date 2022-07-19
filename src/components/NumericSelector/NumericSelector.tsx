@@ -3,7 +3,7 @@ import { TextInput, View } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './NumericSelector.style';
 import COLOR from '../../themes/Color';
-import IconButton from '../buttons/IconButton';
+import IconButton, { IconButtonType } from '../buttons/IconButton';
 
 interface NumericSelectorProps {
   // eslint-disable-next-line react/require-default-props
@@ -54,7 +54,7 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
       <IconButton
         testID="decreaseButton"
         icon={renderPlusMinusBtn('minus', isMinimum)}
-        type={IconButton.Type.NO_BORDER}
+        type={IconButtonType.NO_BORDER}
         height={15}
         width={35}
         disabled={isMinimum}
@@ -71,7 +71,7 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
       <IconButton
         testID="increaseButton"
         icon={renderPlusMinusBtn('plus', isMaximum)}
-        type={IconButton.Type.NO_BORDER}
+        type={IconButtonType.NO_BORDER}
         height={15}
         width={35}
         disabled={isMaximum}

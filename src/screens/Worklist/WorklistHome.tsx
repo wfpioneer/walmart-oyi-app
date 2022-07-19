@@ -1,30 +1,51 @@
 import React from 'react';
 import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-import Button from '../../components/buttons/Button';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import styles from './WorklistHome.style';
 import { strings } from '../../locales';
+import { clearFilter } from '../../state/actions/Worklist';
 
-const WorklistHome = () => {
-  const navigation = useNavigation();
+export interface WorklistHomeScreenProps {
+  navigation: NavigationProp<any>;
+  dispatch: Dispatch<any>;
+}
+
+export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
+  const { navigation, dispatch } = props;
 
   return (
     <View style={styles.container}>
       <Button
         title={strings('WORKLIST.ITEM_WORKLIST')}
-        onPress={() => navigation.navigate(strings('WORKLIST.WORKLIST'))}
+        onPress={() => {
+          dispatch(clearFilter());
+          navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' });
+        }}
         style={styles.button}
-        testID="itemWkListBtn"
+        testID="itemWorkListButton"
       />
       <Button
         title={strings('WORKLIST.PALLET_WORKLIST')}
-        onPress={() => {}}
-        type={Button.Type.PRIMARY}
+        onPress={() => navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' })}
+        type={ButtonType.PRIMARY}
         style={styles.button}
-        testID="palletWkListBtn"
+        testID="palletWorkListButton"
       />
     </View>
+  );
+};
+
+const WorklistHome = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  return (
+    <WorklistHomeScreen
+      navigation={navigation}
+      dispatch={dispatch}
+    />
   );
 };
 

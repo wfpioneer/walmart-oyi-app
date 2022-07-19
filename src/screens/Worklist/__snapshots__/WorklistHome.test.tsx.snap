@@ -23,7 +23,7 @@ exports[`WorkListHome Renders WorkListHome screen 1`] = `
         "width": "90%",
       }
     }
-    testID="itemWkListBtn"
+    testID="itemWorkListButton"
     title="[missing \\"en.WORKLIST.ITEM_WORKLIST\\" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
@@ -44,7 +44,7 @@ exports[`WorkListHome Renders WorkListHome screen 1`] = `
         "width": "90%",
       }
     }
-    testID="palletWkListBtn"
+    testID="palletWorkListButton"
     title="[missing \\"en.WORKLIST.PALLET_WORKLIST\\" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}

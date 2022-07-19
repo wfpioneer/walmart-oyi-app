@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, {
+  EffectCallback, useEffect, useState
+} from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import Toast from 'react-native-toast-message';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { FlatList } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { strings } from '../../locales';
+import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import styles from './SettingsTool.style';
+import Button, { ButtonType } from '../../components/buttons/Button';
+import { assignFluffyFeatures, setConfigs } from '../../state/actions/User';
+import { getClubConfig, getFluffyFeatures } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { Printer, PrintingType } from '../../models/Printer';
 import { setPrintingType } from '../../state/actions/Print';
-import { Configurations } from '../../models/User';
+import User, { Configurations } from '../../models/User';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { GET_CLUB_CONFIG, GET_FLUFFY_ROLES } from '../../state/actions/asyncAPI';
 
 interface SettingsToolProps {
   printerOpen: boolean;
@@ -25,7 +35,67 @@ interface SettingsToolProps {
   userConfigs: Configurations;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
+  getClubConfigApiState: AsyncState;
+  getFluffyApiState: AsyncState;
+  user: User;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
+
+const resetApis = (dispatch: Dispatch<any>) => {
+  dispatch({ type: GET_CLUB_CONFIG.RESET });
+  dispatch({ type: GET_FLUFFY_ROLES.RESET });
+};
+
+export const getConfigAndFluffyFeaturesApiHook = (
+  getClubConfigApiState: AsyncState,
+  getFluffyApiState: AsyncState,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+) => {
+  if (navigation.isFocused()) {
+    // on api request
+    if (getClubConfigApiState.isWaiting || getFluffyApiState.isWaiting) {
+      dispatch(showActivityModal());
+    } else {
+      dispatch(hideActivityModal());
+    }
+    // on getClubConfig api success
+    if (!getClubConfigApiState.isWaiting && getClubConfigApiState.result) {
+      if (getClubConfigApiState.result.status === 200) {
+        const {
+          data
+        } = getClubConfigApiState.result;
+        dispatch(setConfigs(data));
+      }
+    }
+    // on getFluffyFeatures api success
+    if (!getFluffyApiState.isWaiting && getFluffyApiState.result) {
+      if (getFluffyApiState.result.status === 200) {
+        const {
+          data
+        } = getFluffyApiState.result;
+        dispatch(assignFluffyFeatures(data));
+      }
+    }
+    if (getClubConfigApiState.result && getFluffyApiState.result) {
+      Toast.show({
+        type: 'success',
+        text1: strings('SETTINGS.FEATURE_UPDATE_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      resetApis(dispatch);
+    } else if (getClubConfigApiState.error || getFluffyApiState.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('SETTINGS.FEATURE_UPDATE_FAILURE'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      resetApis(dispatch);
+    }
+  }
+};
 interface CollapsibleCardProps {
   title: string;
   isOpened: boolean;
@@ -72,12 +142,25 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
   const {
     featuresOpen, printerOpen, toggleFeaturesList, togglePrinterList,
     locationLabelPrinter, palletLabelPrinter, priceLabelPrinter,
-    userFeatures, userConfigs, dispatch, navigation
+    userFeatures, userConfigs, dispatch, navigation, user, getClubConfigApiState,
+    getFluffyApiState, useEffectHook
   } = props;
+
+  useEffectHook(() => getConfigAndFluffyFeaturesApiHook(
+    getClubConfigApiState,
+    getFluffyApiState,
+    navigation,
+    dispatch,
+  ), [getClubConfigApiState, getFluffyApiState]);
 
   const changePrinter = (printerType: PrintingType) => {
     dispatch(setPrintingType(printerType));
     navigation.navigate('PrintPriceSign', { screen: 'PrinterList' });
+  };
+
+  const onSubmit = () => {
+    dispatch(getFluffyFeatures(user));
+    dispatch(getClubConfig());
   };
 
   const appFeatures: Array<{key: string, name:string}> = [
@@ -117,54 +200,67 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.menuContainer}>
-        <CollapsibleCard
-          title="Printers"
-          isOpened={printerOpen}
-          toggleIsOpened={togglePrinterList}
+      <View style={styles.contentWrapper}>
+        <View style={styles.menuContainer}>
+          <CollapsibleCard
+            title="Printers"
+            isOpened={printerOpen}
+            toggleIsOpened={togglePrinterList}
+          />
+        </View>
+        {printerOpen && (printerCard(
+          strings('PRINT.PRICE_SIGN_PRINTER'),
+          priceLabelPrinter,
+          () => changePrinter(PrintingType.PRICE_SIGN)
+        ))}
+        {printerOpen && (printerCard(
+          strings('PRINT.LOCATION_LABEL_PRINTER'),
+          locationLabelPrinter,
+          () => changePrinter(PrintingType.LOCATION)
+        ))}
+        {printerOpen && (printerCard(
+          strings('PRINT.PALLET_LABEL_PRINTER'),
+          palletLabelPrinter,
+          () => changePrinter(PrintingType.PALLET)
+        ))}
+        <View style={styles.menuContainer}>
+          <CollapsibleCard
+            title="Features"
+            isOpened={featuresOpen}
+            toggleIsOpened={toggleFeaturesList}
+          />
+        </View>
+        {featuresOpen && (
+        <FlatList
+          data={appFeatures}
+          renderItem={({ item }) => featureCard(
+            item.name,
+            userFeatures.some(feature => feature === item.key) || Boolean(userConfigs[item.key as keyof Configurations])
+          )}
+          keyExtractor={item => item.key}
+          ListFooterComponent={<View />}
+          ListFooterComponentStyle={styles.footer}
         />
-      </View>
-      {printerOpen && (printerCard(
-        strings('PRINT.PRICE_SIGN_PRINTER'),
-        priceLabelPrinter,
-        () => changePrinter(PrintingType.PRICE_SIGN)
-      ))}
-      {printerOpen && (printerCard(
-        strings('PRINT.LOCATION_LABEL_PRINTER'),
-        locationLabelPrinter,
-        () => changePrinter(PrintingType.LOCATION)
-      ))}
-      {printerOpen && (printerCard(
-        strings('PRINT.PALLET_LABEL_PRINTER'),
-        palletLabelPrinter,
-        () => changePrinter(PrintingType.PALLET)
-      ))}
-      <View style={styles.menuContainer}>
-        <CollapsibleCard
-          title="Features"
-          isOpened={featuresOpen}
-          toggleIsOpened={toggleFeaturesList}
-        />
-      </View>
-      {featuresOpen && (
-      <FlatList
-        data={appFeatures}
-        renderItem={({ item }) => featureCard(
-          item.name,
-          userFeatures.some(feature => feature === item.key) || Boolean(userConfigs[item.key as keyof Configurations])
         )}
-        keyExtractor={item => item.key}
-        ListFooterComponent={<View />}
-        ListFooterComponentStyle={styles.footer}
-      />
-      )}
+      </View>
+      <View style={styles.buttonWrapper}>
+        <Button
+          title={strings('GENERICS.UPDATE')}
+          type={ButtonType.PRIMARY}
+          onPress={onSubmit}
+          testID="updateButton"
+        />
+      </View>
     </View>
   );
 };
 const SettingsTool = (): JSX.Element => {
   const [printerOpen, togglePrinterView] = useState(true);
   const [featuresOpen, toggleFeatureList] = useState(true);
+  const getClubConfigApiState = useTypedSelector(state => state.async.getClubConfig);
+  const getFluffyApiState = useTypedSelector(state => state.async.getFluffyRoles);
   const { priceLabelPrinter, locationLabelPrinter, palletLabelPrinter } = useTypedSelector(state => state.Print);
+  const user = useTypedSelector(state => state.User);
   const userFeatures = useTypedSelector(state => state.User.features);
   const userConfiguration = useTypedSelector(state => state.User.configs);
   const dispatch = useDispatch();
@@ -179,10 +275,14 @@ const SettingsTool = (): JSX.Element => {
       priceLabelPrinter={priceLabelPrinter}
       locationLabelPrinter={locationLabelPrinter}
       palletLabelPrinter={palletLabelPrinter}
+      user={user}
       userFeatures={userFeatures}
       userConfigs={userConfiguration}
       dispatch={dispatch}
       navigation={navigation}
+      getClubConfigApiState={getClubConfigApiState}
+      getFluffyApiState={getFluffyApiState}
+      useEffectHook={useEffect}
     />
   );
 };

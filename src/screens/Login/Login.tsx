@@ -6,12 +6,13 @@ import { Platform, Text, View } from 'react-native';
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
 import { Printer, PrinterType } from '../../models/Printer';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
 import styles from './Login.style';
 import {
   assignFluffyFeatures, loginUser, logoutUser, setConfigs
 } from '../../state/actions/User';
+import { GET_CLUB_CONFIG, GET_FLUFFY_ROLES } from '../../state/actions/asyncAPI';
 import { getClubConfig, getFluffyFeatures } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
@@ -23,7 +24,7 @@ import { RootState } from '../../state/reducers/RootReducer';
 import { CustomModalComponent, ModalCloseIcon } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 import COLOR from '../../themes/Color';
-import IconButton from '../../components/buttons/IconButton';
+import IconButton, { IconButtonType } from '../../components/buttons/IconButton';
 import { AsyncState } from '../../models/AsyncState';
 import { ConfigResponse } from '../../services/Config.service';
 import {
@@ -40,6 +41,9 @@ import {
   setPrinterList
 } from '../../state/actions/Print';
 
+const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
+const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
+
 const mapDispatchToProps = {
   loginUser,
   logoutUser,
@@ -53,7 +57,9 @@ const mapDispatchToProps = {
   setLocationLabelPrinter,
   setPalletLabelPrinter,
   setPriceLabelPrinter,
-  setPrinterList
+  setPrinterList,
+  resetClubConfigApiState,
+  resetFluffyFeaturesApiState
 };
 
 // This type uses all fields from the User type except it makes siteId optional
@@ -100,6 +106,8 @@ export interface LoginScreenProps {
   setPriceLabelPrinter: (payload: Printer | null) => void;
   setLocationLabelPrinter: (payload: Printer | null) => void;
   setPalletLabelPrinter: (payload: Printer | null) => void;
+  resetClubConfigApiState: () => void;
+  resetFluffyFeaturesApiState: () => void;
 }
 
 const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
@@ -110,7 +118,7 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
       <View style={styles.closeContainer}>
         <IconButton
           icon={ModalCloseIcon}
-          type={Button.Type.NO_BORDER}
+          type={IconButtonType.NO_BORDER}
           onPress={() => onSignOut()}
           style={styles.closeButton}
         />
@@ -122,14 +130,14 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
         <Button
           title="MX"
           onPress={() => onSubmitMX()}
-          type={Button.Type.SOLID_WHITE}
+          type={ButtonType.SOLID_WHITE}
           titleColor={COLOR.MAIN_THEME_COLOR}
           style={styles.affirmButton}
         />
         <Button
           title="CN"
           onPress={() => onSubmitCN()}
-          type={Button.Type.PRIMARY}
+          type={ButtonType.PRIMARY}
           style={styles.affirmButton}
         />
       </View>
@@ -199,6 +207,8 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
+    this.props.resetClubConfigApiState();
+    this.props.resetFluffyFeaturesApiState();
   }
 
   async getPrinterDetailsFromAsyncStorage(): Promise<void> {

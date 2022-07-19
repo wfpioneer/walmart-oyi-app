@@ -1,8 +1,8 @@
 import React, { RefObject, useRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
 import styles from './EnterLocation.style';
-import IconButton from '../buttons/IconButton';
-import Button from '../buttons/Button';
+import IconButton, { IconButtonType } from '../buttons/IconButton';
+import Button, { ButtonType } from '../buttons/Button';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import { ModalCloseIcon } from '../../screens/Modal/Modal';
@@ -19,7 +19,7 @@ const EnterLocation = (
       <View style={styles.closeContainer}>
         <IconButton
           icon={ModalCloseIcon}
-          type={Button.Type.NO_BORDER}
+          type={IconButtonType.NO_BORDER}
           onPress={() => props.setEnterLocation(false)}
         />
       </View>
@@ -37,7 +37,7 @@ const EnterLocation = (
       </View>
       <Button
         title={strings('GENERICS.OK')}
-        type={Button.Type.PRIMARY}
+        type={ButtonType.PRIMARY}
         style={styles.buttonWidth}
         onPress={() => props.onSubmit(textInput.toUpperCase())}
         disabled={textInput.length < 1}

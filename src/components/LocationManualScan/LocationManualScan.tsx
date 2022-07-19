@@ -5,9 +5,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import { manualScan } from '../../utils/scannerUtils';
-import Button from '../buttons/Button';
 import { setManualScan } from '../../state/actions/Global';
-import IconButton from '../buttons/IconButton';
+import IconButton, { IconButtonType } from '../buttons/IconButton';
 import { ModalCloseIcon } from '../../screens/Modal/Modal';
 import styles from './LocationManualScan.style';
 
@@ -57,7 +56,7 @@ export const LocationManualScanComponent = (props: LocManualScanProps): JSX.Elem
         {value.length > 0 && value !== '' && (
         <IconButton
           icon={ModalCloseIcon}
-          type={Button.Type.NO_BORDER}
+          type={IconButtonType.NO_BORDER}
           onPress={() => onChangeText('')}
         />
         )}
