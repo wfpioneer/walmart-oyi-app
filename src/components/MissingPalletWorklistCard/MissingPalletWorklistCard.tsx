@@ -16,15 +16,21 @@ interface MissingPalletWorklistCardProps {
  addCallback: () => void;
  deleteCallback: () => void;
  navigateCallback: () => void;
+ disabled?: boolean;
 }
 
 const MissingPalletWorklistCard = (props: MissingPalletWorklistCardProps) => {
   const {
-    palletId, reportedDate, lastLocation, reportedBy, expanded, addCallback, deleteCallback, navigateCallback
+    palletId, reportedDate, lastLocation, reportedBy, expanded, addCallback, deleteCallback, navigateCallback, disabled
   } = props;
 
   return (
-    <TouchableOpacity testID="missingPalletWorklistCard" style={styles.container} onPress={navigateCallback}>
+    <TouchableOpacity
+      testID="missingPalletWorklistCard"
+      disabled={disabled}
+      style={styles.container}
+      onPress={navigateCallback}
+    >
       <View>
         <Text style={styles.exceptionType}>{strings('MISSING_PALLET_WORKLIST.MISSING_PALLET_LABEL')}</Text>
       </View>
@@ -73,6 +79,10 @@ const MissingPalletWorklistCard = (props: MissingPalletWorklistCardProps) => {
           )}
     </TouchableOpacity>
   );
+};
+
+MissingPalletWorklistCard.defaultProps = {
+  disabled: false
 };
 
 export default MissingPalletWorklistCard;

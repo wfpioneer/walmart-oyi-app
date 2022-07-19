@@ -1,6 +1,6 @@
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
-import { PalletWorklistType } from '../models/WorklistItem';
+import { PalletWorklistType } from '../models/PalletWorklist';
 
 export default class GetPalletWorklistService {
   public static getPalletWorklist(payload: {worklistType: PalletWorklistType[]}) {

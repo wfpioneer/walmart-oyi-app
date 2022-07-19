@@ -515,8 +515,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
 
   const handleTextChange = (text: string, item: PickListItem) => {
     const newQuantity = Number.parseInt(text, 10);
-
-    if (text === '' || (newQuantity && newQuantity < MAX && newQuantity > 0)) {
+    if (text === '' || (newQuantity < MAX && newQuantity >= 0)) {
       dispatch(updatePicks([{ ...item, newQuantityLeft: newQuantity }]));
     }
   };
