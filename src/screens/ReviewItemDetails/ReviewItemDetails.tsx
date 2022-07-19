@@ -328,7 +328,7 @@ export const RenderItemHistoryCard = (
 export const renderPickHistory = (props: IPickHistoryProps) => {
   const { pickHistoryList } = props;
   if (pickHistoryList && pickHistoryList.length) {
-    const data = pickHistoryList.length > 5 ? pickHistoryList.slice(0, 5) : pickHistoryList;
+    const data = pickHistoryList.length > 5 ? pickHistoryList.slice(-5) : pickHistoryList;
     return (
       <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
         {data.map(item => (
