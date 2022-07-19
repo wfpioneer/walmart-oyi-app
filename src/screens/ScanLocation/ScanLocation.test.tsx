@@ -104,7 +104,7 @@ describe('ScanLocation Screen', () => {
 
       updatePalletLocationHook(successApi, mockDispatch, navigationProp);
       expect(navigationProp.goBack).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledTimes(3);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(
         expect.objectContaining({ type: 'success' })
