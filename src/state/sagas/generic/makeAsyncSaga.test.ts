@@ -89,7 +89,7 @@ describe('Testing MakeAsyncSaga', () => {
         toJSON: () => Object
       };
 
-      it('MakeAsyncSaga yields error response', () => {
+      it('Worker function* yields error response', () => {
         // @ts-expect-error the error invoked is not undefined
         expect(rootWorkerError.throw(mockError).value).toEqual(
           put(mockActionCreator.FAIL(mockError))
@@ -106,12 +106,10 @@ describe('Testing MakeAsyncSaga', () => {
         );
       });
 
-      it('Worker function* returns null', () => {
-        expect(rootWorkerError.next().value).toBe(select());
-      });
-
       it('Worker function enters finally block', () => {
+        rootWorkerError.next();
         expect(rootWorkerError.next().value).toEqual(
+          // @ts-expect-error passing undefined here as we are not passing data for asyncSelector to makeAsyncSaga()
           put(mockActionCreator.COMPLETE(undefined))
         );
         expect(rootWorkerError.next().done).toBe(true);
