@@ -7,10 +7,13 @@ import { HIDE_ACTIVITY_MODAL, SHOW_ACTIVITY_MODAL } from '../../state/actions/Mo
 import { AsyncState } from '../../models/AsyncState';
 import { strings } from '../../locales';
 import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
-import { AssignLocationScreen, binPalletsApiEffect, getFailedPallets } from './AssignLocation';
+import {
+  AssignLocationScreen, binPalletsApiEffect, getFailedPallets, updatePicklistStatusApiHook
+} from './AssignLocation';
 import { CLEAR_PALLETS, DELETE_PALLET } from '../../state/actions/Binning';
 import { BinningPallet } from '../../models/Binning';
 import { mockPallets } from '../../mockData/binning';
+import { mockPickingState } from '../../mockData/mockPickingState';
 
 const defaultAsyncState: AsyncState = {
   error: null,
@@ -48,6 +51,10 @@ describe('Assign Location screen render tests', () => {
       route={routeProp}
       scannedEvent={defaultScannedEvent}
       useEffectHook={jest.fn()}
+      setDeletePicks={jest.fn()}
+      deletePicks={false}
+      pickingState={mockPickingState}
+      updatePicklistStatusApi={defaultAsyncState}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -65,6 +72,10 @@ describe('Assign Location screen render tests', () => {
       route={routeProp}
       scannedEvent={defaultScannedEvent}
       useEffectHook={jest.fn()}
+      setDeletePicks={jest.fn()}
+      deletePicks={false}
+      pickingState={mockPickingState}
+      updatePicklistStatusApi={defaultAsyncState}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -83,6 +94,10 @@ describe('Assign Location screen render tests', () => {
       route={routeProp}
       scannedEvent={defaultScannedEvent}
       useEffectHook={jest.fn()}
+      setDeletePicks={jest.fn()}
+      deletePicks={false}
+      pickingState={mockPickingState}
+      updatePicklistStatusApi={defaultAsyncState}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -95,6 +110,9 @@ describe('Assign Location externalized function tests', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
+
+  const mockSetDeletePicks = jest.fn();
+  const mockDeletePicks = true;
 
   const multiStatusData: PostBinPalletsMultistatusResponse = {
     binSummary: [
@@ -117,7 +135,9 @@ describe('Assign Location externalized function tests', () => {
         status: 200
       }
     };
-    binPalletsApiEffect(navigationProp, successApi, mockDispatch, routeProp);
+    binPalletsApiEffect(
+      navigationProp, successApi, mockDispatch, routeProp, mockPickingState.pickList, mockSetDeletePicks
+    );
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
     expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
@@ -135,7 +155,9 @@ describe('Assign Location externalized function tests', () => {
       }
     };
     const newRouteProp: RouteProp<any, string> = { key: '', name: 'AssignLocation', params: { source: 'picking' } };
-    binPalletsApiEffect(navigationProp, successApi, mockDispatch, newRouteProp);
+    binPalletsApiEffect(
+      navigationProp, successApi, mockDispatch, newRouteProp, mockPickingState.pickList, mockSetDeletePicks
+    );
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
     expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
@@ -159,7 +181,9 @@ describe('Assign Location externalized function tests', () => {
         }
       }
     };
-    binPalletsApiEffect(navigationProp, successApi, mockDispatch, routeProp);
+    binPalletsApiEffect(
+      navigationProp, successApi, mockDispatch, routeProp, mockPickingState.pickList, mockSetDeletePicks
+    );
     expect(Toast.show).toBeCalledWith({
       type: 'success',
       position: 'bottom',
@@ -182,7 +206,9 @@ describe('Assign Location externalized function tests', () => {
         }
       }
     };
-    binPalletsApiEffect(navigationProp, successApi, mockDispatch, routeProp);
+    binPalletsApiEffect(
+      navigationProp, successApi, mockDispatch, routeProp, mockPickingState.pickList, mockSetDeletePicks
+    );
     expect(Toast.show).toBeCalledWith({
       type: 'success',
       position: 'bottom',
@@ -209,7 +235,9 @@ describe('Assign Location externalized function tests', () => {
         }
       }
     };
-    binPalletsApiEffect(navigationProp, successApi, mockDispatch, routeProp);
+    binPalletsApiEffect(
+      navigationProp, successApi, mockDispatch, routeProp, mockPickingState.pickList, mockSetDeletePicks
+    );
     expect(Toast.show).toBeCalledWith({
       type: 'success',
       position: 'bottom',
@@ -227,7 +255,9 @@ describe('Assign Location externalized function tests', () => {
       }
     };
 
-    binPalletsApiEffect(navigationProp, partialSuccessApi, mockDispatch, routeProp);
+    binPalletsApiEffect(
+      navigationProp, partialSuccessApi, mockDispatch, routeProp, mockPickingState.pickList, mockSetDeletePicks
+    );
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
     expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
@@ -268,8 +298,9 @@ describe('Assign Location externalized function tests', () => {
         message: 'Conflict'
       }
     };
-
-    binPalletsApiEffect(navigationProp, failApi, mockDispatch, routeProp);
+    binPalletsApiEffect(
+      navigationProp, failApi, mockDispatch, routeProp, mockPickingState.pickList, mockSetDeletePicks
+    );
     expect(mockIsFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
     expect(Toast.show).toBeCalledWith(expect.objectContaining({
@@ -281,7 +312,9 @@ describe('Assign Location externalized function tests', () => {
 
     // @ts-expect-error Reset Toast.show function
     Toast.show.mockReset();
-    binPalletsApiEffect(navigationProp, failLocationNotFoundApi, mockDispatch, routeProp);
+    binPalletsApiEffect(
+      navigationProp, failLocationNotFoundApi, mockDispatch, routeProp, mockPickingState.pickList, mockSetDeletePicks
+    );
     expect(Toast.show).toBeCalledWith(expect.objectContaining({
       type: 'error',
       text1: strings('LOCATION.SECTION_NOT_FOUND')
@@ -289,11 +322,32 @@ describe('Assign Location externalized function tests', () => {
 
     // @ts-expect-error Reset Toast.show function
     Toast.show.mockReset();
-    binPalletsApiEffect(navigationProp, failPalletNotReadyApi, mockDispatch, routeProp);
+    binPalletsApiEffect(
+      navigationProp, failPalletNotReadyApi, mockDispatch, routeProp, mockPickingState.pickList, mockSetDeletePicks
+    );
     expect(Toast.show).toBeCalledWith(expect.objectContaining({
       type: 'error',
       text1: strings('BINNING.PALLET_NOT_READY')
     }));
+  });
+
+  it('tests binPalletsApiEffect on error with status 409 PALLET_NOT_FOUND', () => {
+    const failPalletNotFoundApi: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        response: {
+          status: 409,
+          data: 'Request failed due to: 409 CONFLICT "{"errorEnum":"PALLET_NOT_FOUND"}" for URI: /bin'
+        },
+        message: 'Conflict'
+      }
+    };
+    const newRouteProp: RouteProp<any, string> = { key: '', name: 'AssignLocation', params: { source: 'picking' } };
+    binPalletsApiEffect(
+      navigationProp, failPalletNotFoundApi, mockDispatch, newRouteProp, mockPickingState.pickList, mockSetDeletePicks
+    );
+    expect(mockSetDeletePicks).toHaveBeenCalled();
+    expect(mockDispatch).toHaveBeenCalledTimes(3);
   });
 
   it('tests binPalletsApiEffect on waiting', () => {
@@ -301,9 +355,61 @@ describe('Assign Location externalized function tests', () => {
       ...defaultAsyncState,
       isWaiting: true
     };
-
-    binPalletsApiEffect(navigationProp, waitApi, mockDispatch, routeProp);
+    binPalletsApiEffect(
+      navigationProp, waitApi, mockDispatch, routeProp, mockPickingState.pickList, mockSetDeletePicks
+    );
     expect(mockIsFocused).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: SHOW_ACTIVITY_MODAL }));
+    expect(mockDispatch).toBeCalledTimes(1);
+  });
+  it('tests updatePicklistStatusApiHook on success', () => {
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        status: 200
+      }
+    };
+    updatePicklistStatusApiHook(
+      successApi, mockDispatch, navigationProp, mockDeletePicks, mockSetDeletePicks
+    );
+    expect(navigationProp.isFocused).toBeCalledTimes(1);
+    expect(Toast.show).toBeCalledWith({
+      type: 'error',
+      text1: strings('PICKING.NO_PALLETS_AVAILABLE_PICK_DELETED'),
+      visibilityTime: SNACKBAR_TIMEOUT_LONG,
+      position: 'bottom'
+    });
+    expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
+    expect(mockDispatch).toBeCalledTimes(2);
+  });
+  it('tests updatePicklistStatusApiHook on error', () => {
+    const failureApi: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
+    updatePicklistStatusApiHook(
+      failureApi, mockDispatch, navigationProp, mockDeletePicks, mockSetDeletePicks
+    );
+    expect(navigationProp.isFocused).toBeCalledTimes(1);
+    expect(Toast.show).toBeCalledWith({
+      type: 'error',
+      text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
+      text2: strings('GENERICS.TRY_AGAIN'),
+      visibilityTime: SNACKBAR_TIMEOUT_LONG,
+      position: 'bottom'
+    });
+    expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
+    expect(mockDispatch).toBeCalledTimes(2);
+  });
+  it('tests updatePicklistStatusApiHook on waiting', () => {
+    const waitApi: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+    updatePicklistStatusApiHook(
+      waitApi, mockDispatch, navigationProp, mockDeletePicks, mockSetDeletePicks
+    );
+    expect(navigationProp.isFocused).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: SHOW_ACTIVITY_MODAL }));
     expect(mockDispatch).toBeCalledTimes(1);
   });

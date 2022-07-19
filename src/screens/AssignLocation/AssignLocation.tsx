@@ -1,4 +1,4 @@
-import React, { EffectCallback, useEffect } from 'react';
+import React, { EffectCallback, useEffect, useState } from 'react';
 import {
   FlatList, Pressable, Text, View
 } from 'react-native';
@@ -12,14 +12,16 @@ import Toast from 'react-native-toast-message';
 import { head } from 'lodash';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { setScannedEvent } from '../../state/actions/Global';
+import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { clearPallets, deletePallet } from '../../state/actions/Binning';
 import { binPallets } from '../../state/actions/saga';
-import { POST_BIN_PALLETS } from '../../state/actions/asyncAPI';
+import { POST_BIN_PALLETS, UPDATE_PICKLIST_STATUS } from '../../state/actions/asyncAPI';
 import { BinningPallet } from '../../models/Binning';
 import { AsyncState } from '../../models/AsyncState';
-import { BinPalletResponse, BinPicklistInfo, picklistActionType } from '../../models/Picking.d';
+import {
+  BinPalletResponse, BinPicklistInfo, PickAction, PickListItem, picklistActionType
+} from '../../models/Picking.d';
 import { PostBinPalletsMultistatusResponse } from '../../services/PalletManagement.service';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
@@ -30,6 +32,8 @@ import styles from './AssignLocation.style';
 import COLOR from '../../themes/Color';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
 import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
+import { PickingState } from '../../state/reducers/Picking';
+import { updatePicklistItemsStatus } from '../PickBinWorkflow/PickBinWorkflowScreen';
 
 interface AssignLocationProps {
   palletsToBin: BinningPallet[];
@@ -40,6 +44,10 @@ interface AssignLocationProps {
   dispatch: Dispatch<any>;
   scannedEvent: { value: string | null; type: string | null };
   binPalletsApi: AsyncState;
+  pickingState: PickingState;
+  updatePicklistStatusApi: AsyncState;
+  deletePicks: boolean;
+  setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -56,6 +64,49 @@ export const binningItemCardReadOnly = (
   );
 };
 
+export const updatePicklistStatusApiHook = (
+  updatePicklistStatusApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  deletePicks: boolean,
+  setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (navigation.isFocused()) {
+    if (deletePicks) {
+      // on api success
+      if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result
+  && updatePicklistStatusApi.result.status === 200) {
+        dispatch(hideActivityModal());
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.NO_PALLETS_AVAILABLE_PICK_DELETED'),
+          visibilityTime: SNACKBAR_TIMEOUT_LONG,
+          position: 'bottom'
+        });
+        setDeletePicks(false);
+        dispatch({ type: UPDATE_PICKLIST_STATUS.RESET });
+        navigation.navigate('PickingTabs');
+      }
+      // on api error
+      if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.error) {
+        dispatch(hideActivityModal());
+        Toast.show({
+          type: 'error',
+          text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
+          text2: strings('GENERICS.TRY_AGAIN'),
+          visibilityTime: SNACKBAR_TIMEOUT_LONG,
+          position: 'bottom'
+        });
+        dispatch({ type: UPDATE_PICKLIST_STATUS.RESET });
+      }
+      // on api request
+      if (updatePicklistStatusApi.isWaiting) {
+        dispatch(showActivityModal());
+      }
+    }
+  }
+};
+
 export const getFailedPallets = (data: PostBinPalletsMultistatusResponse): string[] => data.binSummary
   .reduce((failIds: string[], currentResponse) => (currentResponse.status === 200
     ? failIds
@@ -65,11 +116,12 @@ export const binPalletsApiEffect = (
   navigation: NavigationProp<any>,
   binPalletsApi: AsyncState,
   dispatch: Dispatch<any>,
-  route: RouteProp<any, string>
+  route: RouteProp<any, string>,
+  selectedPicks: PickListItem[],
+  setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
     if (!binPalletsApi.isWaiting) {
-      dispatch(hideActivityModal());
       // Success
       if (binPalletsApi.result) {
         if (binPalletsApi.result.status === 200) {
@@ -142,6 +194,7 @@ export const binPalletsApiEffect = (
           } else {
             navigation.goBack();
           }
+          dispatch(hideActivityModal());
         } else if (binPalletsApi.result.status === 207) {
           const failedPallets = getFailedPallets(binPalletsApi.result.data as PostBinPalletsMultistatusResponse);
           Toast.show({
@@ -153,6 +206,7 @@ export const binPalletsApiEffect = (
 
           failedPallets.forEach(palletId => dispatch(deletePallet(palletId)));
           dispatch({ type: POST_BIN_PALLETS.RESET });
+          dispatch(hideActivityModal());
         }
       }
 
@@ -167,6 +221,18 @@ export const binPalletsApiEffect = (
               text1: strings('BINNING.PALLET_NOT_READY'),
               visibilityTime: SNACKBAR_TIMEOUT
             });
+          } else if (errorResponse.data.includes('PALLET_NOT_FOUND')) {
+            if (route.params?.source === 'picking') {
+              setDeletePicks(true);
+              updatePicklistItemsStatus(selectedPicks, PickAction.DELETE, dispatch);
+            } else {
+              Toast.show({
+                position: 'bottom',
+                type: 'error',
+                text1: strings('LOCATION.PALLET_NOT_FOUND'),
+                visibilityTime: SNACKBAR_TIMEOUT
+              });
+            }
           } else {
             Toast.show({
               position: 'bottom',
@@ -175,6 +241,7 @@ export const binPalletsApiEffect = (
               visibilityTime: SNACKBAR_TIMEOUT
             });
           }
+          dispatch(hideActivityModal());
         } else {
           Toast.show({
             position: 'bottom',
@@ -182,6 +249,7 @@ export const binPalletsApiEffect = (
             text1: strings('BINNING.PALLET_BIN_FAILURE'),
             visibilityTime: SNACKBAR_TIMEOUT
           });
+          dispatch(hideActivityModal());
         }
         dispatch({ type: POST_BIN_PALLETS.RESET });
       }
@@ -193,9 +261,10 @@ export const binPalletsApiEffect = (
 
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   const {
-    palletsToBin, isManualScanEnabled, useEffectHook,
-    navigation, dispatch, route, scannedEvent, binPalletsApi
+    palletsToBin, isManualScanEnabled, useEffectHook, pickingState,
+    navigation, dispatch, route, scannedEvent, binPalletsApi, updatePicklistStatusApi, deletePicks, setDeletePicks
   } = props;
+  const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
 
   useEffectHook(() => {
     if (navigation.isFocused() && scannedEvent.value) {
@@ -206,6 +275,17 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
       }));
     }
   }, [scannedEvent]);
+
+  useEffectHook(() => {
+    navigation.addListener('blur', () => {
+      if (scannedEvent.value) {
+        dispatch(resetScannedEvent());
+      }
+    });
+    return () => {
+      navigation.removeListener('blur', () => {});
+    };
+  }, [navigation, scannedEvent]);
 
   useEffectHook(() => {
     const scannerListener = barcodeEmitter.addListener('scanned', scan => {
@@ -225,11 +305,24 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     };
   }, []);
 
+  useEffectHook(
+    () => updatePicklistStatusApiHook(
+      updatePicklistStatusApi,
+      dispatch,
+      navigation,
+      deletePicks,
+      setDeletePicks
+    ),
+    [updatePicklistStatusApi]
+  );
+
   useEffectHook(() => binPalletsApiEffect(
     navigation,
     binPalletsApi,
     dispatch,
-    route
+    route,
+    selectedPicks,
+    setDeletePicks
   ), [binPalletsApi]);
 
   const scanTextView = () => (
@@ -274,10 +367,13 @@ function AssignLocation(): JSX.Element {
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
+  const pickingState = useTypedSelector(state => state.Picking);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const palletsToBin = useTypedSelector(state => state.Binning.pallets);
   const scannedEvent = useTypedSelector(state => state.Global.scannedEvent);
   const binPalletsApi = useTypedSelector(state => state.async.binPallets);
+  const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
+  const [deletePicks, setDeletePicks] = useState(false);
 
   return (
     <AssignLocationScreen
@@ -289,6 +385,10 @@ function AssignLocation(): JSX.Element {
       route={route}
       scannedEvent={scannedEvent}
       binPalletsApi={binPalletsApi}
+      pickingState={pickingState}
+      updatePicklistStatusApi={updatePicklistStatusApi}
+      deletePicks={deletePicks}
+      setDeletePicks={setDeletePicks}
     />
   );
 }
