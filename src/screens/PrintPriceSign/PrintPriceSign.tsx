@@ -25,7 +25,7 @@ import {
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
-  LaserPaper, PortablePaper, PrintItemList, PrintLocationList,
+  LaserPaperCn, LaserPaperMx, PortablePaperCn, PortablePaperMx, PrintItemList, PrintLocationList,
   PrintPalletList, PrintPaperSize, PrintQueueItem, PrintQueueItemType, Printer, PrinterType, PrintingType
 } from '../../models/Printer';
 import { Configurations } from '../../models/User';
@@ -42,6 +42,7 @@ import { SectionItem } from '../../models/LocationItems';
 import { showInfoModal } from '../../state/actions/Modal';
 import { savePrinter } from '../../utils/asyncStorageUtils';
 import { PalletInfo } from '../../models/PalletManagementTypes';
+import { getPaperSizeBasedOnCountry } from '../../utils/global';
 
 const wineCatgNbr = 19;
 const QTY_MIN = 1;
@@ -63,9 +64,10 @@ export const renderSignSizeButtons = (
   selectedPrinter: Printer | null,
   catgNbr: number,
   signType: string,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  countryCode: string
 ): JSX.Element => {
-  const sizeObject = selectedPrinter?.type === PrinterType.LASER ? LaserPaper : PortablePaper;
+  const sizeObject = getPaperSizeBasedOnCountry(selectedPrinter?.type, countryCode);
   return (
     <View style={styles.sizeBtnContainer}>
       {Object.keys(sizeObject).map(key => {
@@ -132,14 +134,17 @@ interface PriceSignProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   useLayoutHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   userConfig: Configurations;
+  countryCode: string;
 }
 
 export const getPrinter = (
-  selectedPrinter: Printer | null, selectedSignType: PrintPaperSize
-): LaserPaper | PortablePaper => (
-  selectedPrinter?.type === PrinterType.LASER
+  selectedPrinter: Printer | null, selectedSignType: PrintPaperSize, countryCode: string
+): LaserPaperCn | PortablePaperCn | LaserPaperMx | PortablePaperMx => {
+  const sizeObject = getPaperSizeBasedOnCountry(selectedPrinter?.type, countryCode);
+  return (selectedPrinter?.type === PrinterType.LASER
   // @ts-expect-error selectSignType contains keys that do not exist for each enum
-    ? LaserPaper[selectedSignType] : PortablePaper[selectedSignType]);
+    ? sizeObject[selectedSignType] : sizeObject[selectedSignType]);
+};
 
 const isValid = (actionCompleted: boolean, exceptionType: string) => !actionCompleted && exceptionType === 'PO';
 
@@ -425,7 +430,8 @@ export const handlePrint = (
   palletId: number,
   itemNbr: number,
   selectedSignType: PrintPaperSize,
-  exceptionType: string
+  exceptionType: string,
+  countryCode: string
 ) => {
   validateSession(navigation, route.name)
     .then(() => {
@@ -468,7 +474,7 @@ export const handlePrint = (
           {
             itemNbr,
             qty: signQty,
-            code: getPrinter(selectedPrinter, selectedSignType),
+            code: getPrinter(selectedPrinter, selectedSignType, countryCode),
             description: selectedSignType,
             printerMACAddress: selectedPrinter?.id || '',
             isPortablePrinter: selectedPrinter?.type === 1,
@@ -561,7 +567,7 @@ export const navListenerHook = (
 
 export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
   const {
-    scannedEvent, exceptionType, actionCompleted, itemResult, printAPI, printLabelAPI, printPalletAPI,
+    scannedEvent, exceptionType, actionCompleted, itemResult, printAPI, printLabelAPI, printPalletAPI, countryCode,
     sectionsResult, selectedPrinter, selectedSignType, printQueue, printingLocationLabels, printingPalletLabel,
     selectedAisle, selectedSection, selectedZone, dispatch, navigation, route, signQty, palletInfo, locationPrintQueue,
     setSignQty, isValidQty, setIsValidQty, error, setError, useEffectHook, useLayoutHook, printerList, userConfig
@@ -641,7 +647,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     ? (
       <View style={styles.signSizeContainer}>
         <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
-        {renderSignSizeButtons(selectedPrinter, categoryNbr, selectedSignType, dispatch)}
+        {renderSignSizeButtons(selectedPrinter, categoryNbr, selectedSignType, dispatch, countryCode)}
       </View>
     )
     : null
@@ -743,7 +749,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
             onPress={() => handlePrint(
               navigation, route, dispatch, printingLocationLabels, sectionsList,
               signQty, selectedPrinter, selectedSection, printingPalletLabel,
-              parseInt(palletInfo.id, 10), itemNbr, selectedSignType, exceptionType
+              parseInt(palletInfo.id, 10), itemNbr, selectedSignType, exceptionType, countryCode
             )}
             disabled={disablePrint()}
           />
@@ -763,6 +769,7 @@ const PrintPriceSign = (): JSX.Element => {
   const printPalletAPI = useTypedSelector(state => state.async.printPalletLabel);
   const { palletInfo } = useTypedSelector(state => state.PalletManagement);
   const userConfig = useTypedSelector(state => state.User.configs);
+  const countryCode = useTypedSelector(state => state.User.countryCode);
   const {
     selectedSignType, printQueue, printingLocationLabels, printerList, locationPrintQueue,
     printingPalletLabel, priceLabelPrinter, locationLabelPrinter, palletLabelPrinter
@@ -817,6 +824,7 @@ const PrintPriceSign = (): JSX.Element => {
       palletInfo={palletInfo}
       printerList={printerList}
       userConfig={userConfig}
+      countryCode={countryCode}
     />
   );
 };

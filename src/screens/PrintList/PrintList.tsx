@@ -14,8 +14,8 @@ import { strings } from '../../locales';
 import styles from './PrintList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  LaserPaper, PrintItemList, PrintLocationList, PrintQueueAPIMultistatus, PrintQueueItem, PrintQueueItemType,
-  Printer, PrintingType
+  PrintItemList, PrintLocationList, PrintQueueAPIMultistatus, PrintQueueItem, PrintQueueItemType,
+  Printer, PrinterType, PrintingType
 } from '../../models/Printer';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -32,6 +32,7 @@ import { PRINT_LOCATION_LABELS, PRINT_SIGN } from '../../state/actions/asyncAPI'
 import PrintQueueItemCard from '../../components/PrintQueueItemCard/PrintQueueItemCard';
 import { CustomModalComponent } from '../Modal/Modal';
 import PrintQueueEdit from '../../components/printqueueedit/PrintQueueEdit';
+import { getPaperSizeBasedOnCountry } from '../../utils/global';
 
 export type PrintTab = 'PRICESIGN' | 'LOCATION';
 interface PrintListProps {
@@ -47,6 +48,7 @@ interface PrintListProps {
   printingLocationLabels: string;
   itemIndexToEdit: number;
   setItemIndexToEdit: React.Dispatch<React.SetStateAction<number>>;
+  countryCode: string;
 }
 
 export const printItemApiEffect = (
@@ -168,7 +170,8 @@ const handlePrint = (
   selectedPrinterId: string | undefined,
   navigation: NavigationProp<any>,
   route: RouteProp<any, string>,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  countryCode: string
 ): void => {
   validateSession(navigation, route.name).then(() => {
     if (tabName === 'LOCATION') {
@@ -184,6 +187,7 @@ const handlePrint = (
         });
       dispatch(printLocationLabel({ printLabelList: printLocationArray }));
     } else {
+      const paperSizeObj = getPaperSizeBasedOnCountry(PrinterType.LASER, countryCode);
       const printArray: PrintItemList[] = printQueue
         .filter(printItem => printItem.itemType === PrintQueueItemType.ITEM)
         .map(printItem => {
@@ -195,7 +199,7 @@ const handlePrint = (
             qty: signQty,
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore needed because typechecking error
-            code: LaserPaper[paperSize],
+            code: paperSizeObj[paperSize],
             description: paperSize,
             printerMACAddress: selectedPrinterId || '',
             isPortablePrinter: false,
@@ -223,7 +227,7 @@ export const handleChangePrinter = (
 
 export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
   const {
-    selectedPrinter, printQueue, navigation, route, dispatch, tabName, useEffectHook,
+    selectedPrinter, printQueue, navigation, route, dispatch, tabName, useEffectHook, countryCode,
     printAPI, printLocationAPI, printingLocationLabels, itemIndexToEdit, setItemIndexToEdit
   } = props;
   const queueLength = printQueue.length;
@@ -316,7 +320,9 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
               title={strings('PRINT.PRINT')}
               type={ButtonType.PRIMARY}
               style={styles.footerBtn}
-              onPress={() => handlePrint(printQueue, tabName, selectedPrinter?.id, navigation, route, dispatch)}
+              onPress={() => handlePrint(
+                printQueue, tabName, selectedPrinter?.id, navigation, route, dispatch, countryCode
+              )}
               disabled={printQueue.length < 1}
             />
           </View>
@@ -335,6 +341,7 @@ const PrintLists = (props: {tab: PrintTab}): JSX.Element => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [itemIndexToEdit, setItemIndexToEdit] = useState(-1);
+  const countryCode = useTypedSelector(state => state.User.countryCode);
 
   // Filter by tab
   const getSelectedPrinterBasedOnLabel = () => {
@@ -357,6 +364,7 @@ const PrintLists = (props: {tab: PrintTab}): JSX.Element => {
       printingLocationLabels={printingLocationLabels}
       itemIndexToEdit={itemIndexToEdit}
       setItemIndexToEdit={setItemIndexToEdit}
+      countryCode={countryCode}
     />
   );
 };
