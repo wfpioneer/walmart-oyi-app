@@ -460,7 +460,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
           },
           Object {
-            "key": "location management",
+            "key": "locationManagement",
             "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
           },
           Object {
@@ -468,7 +468,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
           },
           Object {
-            "key": "location management edit",
+            "key": "locationManagementEdit",
             "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
           },
           Object {
@@ -476,7 +476,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
           },
           Object {
-            "key": "pallet management",
+            "key": "palletManagement",
             "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
           },
           Object {
@@ -807,7 +807,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
           },
           Object {
-            "key": "location management",
+            "key": "locationManagement",
             "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
           },
           Object {
@@ -815,7 +815,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
           },
           Object {
-            "key": "location management edit",
+            "key": "locationManagementEdit",
             "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
           },
           Object {
@@ -823,7 +823,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
           },
           Object {
-            "key": "pallet management",
+            "key": "palletManagement",
             "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
           },
           Object {
@@ -1074,7 +1074,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
           },
           Object {
-            "key": "location management",
+            "key": "locationManagement",
             "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
           },
           Object {
@@ -1082,7 +1082,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
           },
           Object {
-            "key": "location management edit",
+            "key": "locationManagementEdit",
             "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
           },
           Object {
@@ -1090,7 +1090,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
           },
           Object {
-            "key": "pallet management",
+            "key": "palletManagement",
             "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
           },
           Object {
