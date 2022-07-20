@@ -358,19 +358,24 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
 `;
 
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pick history with error msg for result status 207 1`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "#ffffffff",
-      "padding": 10,
-    }
-  }
->
-  <Text
-    testID="msg-no-pick-data"
-  >
-    [missing "en.ITEM.NO_PICK_HISTORY" translation]
-  </Text>
+<View>
+  <CollapsibleHeaderCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+    toggleIsOpened={[Function]}
+  />
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pick history with no data for pick msg 1`] = `
+<View>
+  <CollapsibleHeaderCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+    toggleIsOpened={[Function]}
+  />
 </View>
 `;
 

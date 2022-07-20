@@ -131,6 +131,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.WHITE
   },
   noDataContainer: {
+    flex: 1,
+    alignItems: 'center',
     padding: 10,
     backgroundColor: COLOR.WHITE
   }

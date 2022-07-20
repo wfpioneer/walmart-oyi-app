@@ -357,18 +357,20 @@ export const renderPickHistory = (pickHistoryList: IPickHistory[], result: any) 
       );
     }
     return (
-      <View style={styles.noDataContainer}>
-        <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
-      </View>
+      <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+        <View style={styles.noDataContainer}>
+          <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
+        </View>
+      </CollapsibleCard>
     );
   }
   return (
-    <View>
+    <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
       <View style={styles.activityIndicator}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
         <Text>{strings('ITEM.ERROR_PICK_HISTORY')}</Text>
       </View>
-    </View>
+    </CollapsibleCard>
   );
 };
 

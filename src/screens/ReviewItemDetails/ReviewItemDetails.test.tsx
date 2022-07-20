@@ -1227,15 +1227,16 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders pick history with no data for pick msg', () => {
-      const { getAllByTestId } = render(
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
         renderPickHistory([], { status: 200 })
       );
-      expect(getAllByTestId('msg-no-pick-data').length).toBe(1);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders pick history with error msg for result status 207', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory([], { status: 200 })
+        renderPickHistory([], { status: 207 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
