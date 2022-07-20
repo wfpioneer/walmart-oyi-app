@@ -28,6 +28,7 @@ describe('Picking reducer tests', () => {
       },
       pickCreateFloorLocations: [],
       pickCreateReserveLocations: [],
+      pickingMenu: false,
       selectedTab: Tabs.PICK
     };
 
@@ -44,6 +45,7 @@ describe('Picking reducer tests', () => {
       },
       pickCreateFloorLocations: [],
       pickCreateReserveLocations: [],
+      pickingMenu: false,
       selectedTab: Tabs.PICK
     };
 

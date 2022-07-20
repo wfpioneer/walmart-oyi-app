@@ -182,7 +182,7 @@ exports[`Create Pick screen render tests renders the screen when items are move 
       height={45}
       onPress={[Function]}
       radius={5}
-      testId="createButton"
+      testID="createButton"
       title="[missing \\"en.GENERICS.CREATE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -378,7 +378,7 @@ exports[`Create Pick screen render tests renders the screen with item with floor
       height={45}
       onPress={[Function]}
       radius={5}
-      testId="createButton"
+      testID="createButton"
       title="[missing \\"en.GENERICS.CREATE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -572,7 +572,7 @@ exports[`Create Pick screen render tests renders the screen with no reserve loca
       height={45}
       onPress={[Function]}
       radius={5}
-      testId="createButton"
+      testID="createButton"
       title="[missing \\"en.GENERICS.CREATE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -764,7 +764,7 @@ exports[`Create Pick screen render tests renders the screen without floor locati
       height={45}
       onPress={[Function]}
       radius={5}
-      testId="createButton"
+      testID="createButton"
       title="[missing \\"en.GENERICS.CREATE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}

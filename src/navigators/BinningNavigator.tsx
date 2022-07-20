@@ -57,8 +57,8 @@ export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element
   } = props;
   return (
     <Stack.Navigator
-      headerMode="float"
       screenOptions={{
+        headerMode: 'float',
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
         headerTintColor: COLOR.WHITE
       }}

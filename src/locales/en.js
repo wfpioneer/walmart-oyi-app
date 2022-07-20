@@ -55,7 +55,8 @@ export default {
     REMOVED: 'Removed',
     CREATE: 'Create',
     UNASSIGNED: 'unassigned',
-    SELECTED: 'selected'
+    SELECTED: 'selected',
+    UPDATE: 'Update'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -455,6 +456,8 @@ export default {
     PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick'
   },
   SETTINGS: {
-    TITLE: 'Settings'
+    TITLE: 'Settings',
+    FEATURE_UPDATE_SUCCESS: 'Features Updated',
+    FEATURE_UPDATE_FAILURE: 'Unable to get updated features'
   }
 };

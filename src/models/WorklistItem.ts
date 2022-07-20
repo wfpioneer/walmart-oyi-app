@@ -14,18 +14,3 @@ export interface WorklistItemI {
   imageURLKey?: string;
   imageBlobKey?: string;
 }
-
-export type MissingPalletWorklistType = 'MP';
-
-export interface MissingPalletWorklistItemI {
-  worklistType: MissingPalletWorklistType;
-  palletId: number;
-  lastKnownLocationId: number;
-  lastKnownLocationName: string;
-  createId: string;
-  createTS: string;
-  palletDeleted: boolean;
-  completed?: boolean;
-  completedTS?: string;
-  completedId?: string;
-}

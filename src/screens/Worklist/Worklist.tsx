@@ -9,7 +9,7 @@ import { WorklistItem } from '../../components/worklistItem/WorklistItem';
 import COLOR from '../../themes/Color';
 import styles from './Worklist.style';
 import { WorklistItemI } from '../../models/WorklistItem';
-import { CategorySeparator } from '../../components/CategorySeparator/CategorySeparator';
+import WorklistHeader from '../../components/WorklistHeader/WorklistHeader';
 import { strings } from '../../locales';
 import { ExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
@@ -41,7 +41,7 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   if (item.worklistType === 'CATEGORY') {
     const { catgName, itemCount } = item;
     return (
-      <CategorySeparator categoryName={catgName} numberOfItems={itemCount || 0} />
+      <WorklistHeader title={catgName} numberOfItems={itemCount || 0} />
     );
   }
   const {

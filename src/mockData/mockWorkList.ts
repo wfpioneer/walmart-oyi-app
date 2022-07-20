@@ -1,4 +1,5 @@
-import { MissingPalletWorklistItemI, WorklistItemI } from '../models/WorklistItem';
+import { WorklistItemI } from '../models/WorklistItem';
+import { MissingPalletWorklistItemI } from '../models/PalletWorklist';
 import { FilteredCategory } from '../models/FilterListItem';
 
 // eslint-disable-next-line no-shadow
@@ -465,29 +466,206 @@ export const mockCategoryMap: FilteredCategory[] = [
   }
 ];
 
-export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
+export const mockMissingPalletWorklistTodo: MissingPalletWorklistItemI[] = [
   {
-    createId: '11',
-    createTS: '26/06/2022',
-    lastKnownLocationId: 1,
-    lastKnownLocationName: 'A1-1',
+    createUserId: '11',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 1,
+    lastKnownPalletLocationName: 'A1-1',
     palletDeleted: false,
     palletId: 7988,
-    worklistType: 'MP',
-    completed: undefined,
-    completedId: undefined,
-    completedTS: undefined
+    completed: false,
+    completedUserId: undefined,
+    completedTs: undefined,
+    sectionID: 1
   },
   {
-    createId: '12',
-    createTS: '26/06/2022',
-    lastKnownLocationId: 2,
-    lastKnownLocationName: 'A1-2',
+    createUserId: '12',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 2,
+    lastKnownPalletLocationName: 'A1-2',
     palletDeleted: false,
     palletId: 7989,
-    worklistType: 'MP',
-    completed: undefined,
-    completedId: undefined,
-    completedTS: undefined
+    completed: false,
+    completedUserId: undefined,
+    completedTs: undefined,
+    sectionID: 2
+  }
+];
+
+export const mockMissingPalletWorklistComplete: MissingPalletWorklistItemI[] = [
+  {
+    createUserId: '13',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 3,
+    lastKnownPalletLocationName: 'B1-1',
+    palletDeleted: false,
+    palletId: 7990,
+    completed: true,
+    completedUserId: '1',
+    completedTs: '2022-07-07T12:40:00.000Z',
+    sectionID: 1
+  },
+  {
+    createUserId: '14',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 4,
+    lastKnownPalletLocationName: 'B1-2',
+    palletDeleted: false,
+    palletId: 7991,
+    completed: true,
+    completedUserId: '2',
+    completedTs: '2022-07-07T12:40:00.000Z',
+    sectionID: 2
+  }
+];
+
+export const mockMPSecWiseList: MissingPalletWorklistItemI[] = [
+  {
+    createUserId: '',
+    itemCount: 1,
+    lastKnownPalletLocationId: 5,
+    lastKnownPalletLocationName: '1A1-2',
+    palletDeleted: false,
+    palletId: 0,
+    sectionID: 0,
+    completed: false,
+    createTs: ''
+  },
+  {
+    completed: false,
+    createUserId: '14',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 5,
+    lastKnownPalletLocationName: '1A1-2',
+    palletDeleted: false,
+    palletId: 7777,
+    sectionID: 2
+  },
+  {
+    completed: false,
+    createUserId: '',
+    createTs: '',
+    itemCount: 1,
+    lastKnownPalletLocationId: 1,
+    lastKnownPalletLocationName: 'A1-1',
+    palletDeleted: false,
+    palletId: 0,
+    sectionID: 0
+  },
+  {
+    completed: false,
+    createUserId: '11',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 1,
+    lastKnownPalletLocationName: 'A1-1',
+    palletDeleted: false,
+    palletId: 7988,
+    sectionID: 1
+  },
+  {
+    createUserId: '',
+    createTs: '',
+    itemCount: 2,
+    lastKnownPalletLocationId: 2,
+    lastKnownPalletLocationName: 'A1-2',
+    palletDeleted: false,
+    palletId: 0,
+    completed: false,
+    sectionID: 0
+  },
+  {
+    completed: false,
+    createUserId: '15',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 2,
+    lastKnownPalletLocationName: 'A1-2',
+    palletDeleted: false,
+    palletId: 888,
+    sectionID: 2
+  },
+  {
+    completed: false,
+    createUserId: '12',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 2,
+    lastKnownPalletLocationName: 'A1-2',
+    palletDeleted: false,
+    palletId: 7989,
+    sectionID: 2
+  },
+  {
+    createUserId: '',
+    createTs: '',
+    itemCount: 1,
+    lastKnownPalletLocationId: 8,
+    lastKnownPalletLocationName: 'A1-11',
+    palletDeleted: false,
+    palletId: 0,
+    sectionID: 0,
+    completed: false
+  },
+  {
+    completed: false,
+    createUserId: '15',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 8,
+    lastKnownPalletLocationName: 'A1-11',
+    palletDeleted: false,
+    palletId: 8889,
+    sectionID: 11
+  }
+];
+
+export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
+  {
+    createUserId: '11',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 1,
+    lastKnownPalletLocationName: 'A1-1',
+    palletDeleted: false,
+    palletId: 7988,
+    completed: false,
+    sectionID: 1
+  },
+  {
+    createUserId: '12',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 2,
+    lastKnownPalletLocationName: 'A1-2',
+    palletDeleted: false,
+    palletId: 7989,
+    completed: false,
+    sectionID: 2
+  },
+  {
+    createUserId: '14',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 5,
+    lastKnownPalletLocationName: '1A1-2',
+    palletDeleted: false,
+    palletId: 7777,
+    completed: false,
+    sectionID: 0
+  },
+  {
+    createUserId: '15',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 2,
+    lastKnownPalletLocationName: 'A1-2',
+    palletDeleted: false,
+    palletId: 888,
+    completed: false,
+    sectionID: 0
+  },
+  {
+    createUserId: '15',
+    createTs: '26/06/2022',
+    lastKnownPalletLocationId: 8,
+    lastKnownPalletLocationName: 'A1-11',
+    palletDeleted: false,
+    palletId: 8889,
+    completed: false,
+    sectionID: 0
   }
 ];

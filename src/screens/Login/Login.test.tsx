@@ -57,6 +57,7 @@ const defaultTestProp: LoginScreenProps = {
   getFluffyFeatures: jest.fn(),
   fluffyApiState: {
     isWaiting: false,
+    value: null,
     error: '',
     result: {}
   },
@@ -73,7 +74,9 @@ const defaultTestProp: LoginScreenProps = {
   setLocationLabelPrinter: jest.fn(),
   setPriceLabelPrinter: jest.fn(),
   setPalletLabelPrinter: jest.fn(),
-  setPrinterList: jest.fn()
+  setPrinterList: jest.fn(),
+  resetClubConfigApiState: jest.fn(),
+  resetFluffyFeaturesApiState: jest.fn()
 };
 
 describe('LoginScreen', () => {
@@ -89,6 +92,7 @@ describe('LoginScreen', () => {
       getFluffyFeatures={jest.fn}
       fluffyApiState={{
         isWaiting: false,
+        value: null,
         error: '',
         result: {}
       }}
@@ -106,6 +110,8 @@ describe('LoginScreen', () => {
       setPrinterList={jest.fn}
       setPalletLabelPrinter={jest.fn}
       setPriceLabelPrinter={jest.fn}
+      resetClubConfigApiState={jest.fn}
+      resetFluffyFeaturesApiState={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -122,6 +128,7 @@ describe('LoginScreen', () => {
       getFluffyFeatures={jest.fn}
       fluffyApiState={{
         isWaiting: false,
+        value: null,
         error: '',
         result: {}
       }}
@@ -139,6 +146,8 @@ describe('LoginScreen', () => {
       setPrinterList={jest.fn}
       setPalletLabelPrinter={jest.fn}
       setPriceLabelPrinter={jest.fn}
+      resetClubConfigApiState={jest.fn}
+      resetFluffyFeaturesApiState={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -156,6 +165,7 @@ describe('LoginScreen', () => {
       fluffyApiState={{
         isWaiting: false,
         error: '',
+        value: null,
         result: {}
       }}
       assignFluffyFeatures={jest.fn}
@@ -172,6 +182,8 @@ describe('LoginScreen', () => {
       setPrinterList={jest.fn}
       setPalletLabelPrinter={jest.fn}
       setPriceLabelPrinter={jest.fn}
+      resetClubConfigApiState={jest.fn}
+      resetFluffyFeaturesApiState={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -191,6 +203,7 @@ describe('LoginScreen', () => {
       fluffyApiState={{
         isWaiting: false,
         error: '',
+        value: null,
         result: {}
       }}
       assignFluffyFeatures={jest.fn}
@@ -207,6 +220,8 @@ describe('LoginScreen', () => {
       setPrinterList={jest.fn}
       setPalletLabelPrinter={jest.fn}
       setPriceLabelPrinter={jest.fn}
+      resetClubConfigApiState={jest.fn}
+      resetFluffyFeaturesApiState={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -226,7 +241,8 @@ describe('LoginScreen', () => {
       fluffyApiState={{
         isWaiting: false,
         error: '',
-        result: {}
+        result: {},
+        value: null
       }}
       assignFluffyFeatures={jest.fn}
       getClubConfig={jest.fn()}
@@ -242,6 +258,8 @@ describe('LoginScreen', () => {
       setPrinterList={jest.fn}
       setPalletLabelPrinter={jest.fn}
       setPriceLabelPrinter={jest.fn}
+      resetClubConfigApiState={jest.fn}
+      resetFluffyFeaturesApiState={jest.fn}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   }));

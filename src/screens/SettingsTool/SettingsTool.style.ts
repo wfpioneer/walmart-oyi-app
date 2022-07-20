@@ -4,7 +4,8 @@ import COLOR from '../../themes/Color';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLOR.WHITE,
-    flex: 1
+    flex: 1,
+    flexDirection: 'column'
   },
   menuContainer: {
     alignItems: 'center',
@@ -13,6 +14,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderBottomWidth: 1,
     backgroundColor: COLOR.WHITE
+  },
+  contentWrapper: {
+    flex: 1
   },
   titleContainer: {
     flex: 1,
@@ -60,6 +64,10 @@ const styles = StyleSheet.create({
   },
   footer: {
     borderBottomWidth: 1
+  },
+  buttonWrapper: {
+    marginVertical: 10,
+    marginHorizontal: 15
   }
 });
 export default styles;

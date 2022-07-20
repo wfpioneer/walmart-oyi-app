@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import moment from 'moment';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import Button from '../buttons/Button';
@@ -15,15 +16,21 @@ interface MissingPalletWorklistCardProps {
  addCallback: () => void;
  deleteCallback: () => void;
  navigateCallback: () => void;
+ disabled?: boolean;
 }
 
 const MissingPalletWorklistCard = (props: MissingPalletWorklistCardProps) => {
   const {
-    palletId, reportedDate, lastLocation, reportedBy, expanded, addCallback, deleteCallback, navigateCallback
+    palletId, reportedDate, lastLocation, reportedBy, expanded, addCallback, deleteCallback, navigateCallback, disabled
   } = props;
 
   return (
-    <TouchableOpacity testID="missingPalletWorklistCard" style={styles.container} onPress={navigateCallback}>
+    <TouchableOpacity
+      testID="missingPalletWorklistCard"
+      disabled={disabled}
+      style={styles.container}
+      onPress={navigateCallback}
+    >
       <View>
         <Text style={styles.exceptionType}>{strings('MISSING_PALLET_WORKLIST.MISSING_PALLET_LABEL')}</Text>
       </View>
@@ -33,7 +40,7 @@ const MissingPalletWorklistCard = (props: MissingPalletWorklistCardProps) => {
             {`${strings('MISSING_PALLET_WORKLIST.PALLET_ID')}: ${palletId}`}
           </Text>
           <Text style={styles.contentText}>
-            {`${strings('MISSING_PALLET_WORKLIST.REPORTED_DATE')}: ${reportedDate}`}
+            {`${strings('MISSING_PALLET_WORKLIST.REPORTED_DATE')}: ${moment(reportedDate).format('DD/MM/YYYY')}`}
           </Text>
         </View>
         <View style={styles.wrapperContainer}>
@@ -47,7 +54,7 @@ const MissingPalletWorklistCard = (props: MissingPalletWorklistCardProps) => {
         {expanded
           && (
           <View style={styles.iconView}>
-            <MaterialIcons testID="navigate-next-icon" name="navigate-next" size={45} color={COLOR.BLACK} />
+            <MaterialIcons testID="navigate-next-icon" name="navigate-next" size={40} color={COLOR.BLACK} />
           </View>
           )}
       </View>
@@ -72,6 +79,10 @@ const MissingPalletWorklistCard = (props: MissingPalletWorklistCardProps) => {
           )}
     </TouchableOpacity>
   );
+};
+
+MissingPalletWorklistCard.defaultProps = {
+  disabled: false
 };
 
 export default MissingPalletWorklistCard;

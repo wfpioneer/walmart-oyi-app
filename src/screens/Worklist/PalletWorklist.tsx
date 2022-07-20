@@ -1,34 +1,60 @@
-import React, {
-  Dispatch, EffectCallback, useEffect, useState
-} from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import React, { Dispatch, EffectCallback, useState } from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import Toast from 'react-native-toast-message';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { NavigationProp } from '@react-navigation/native';
+import { AxiosError } from 'axios';
 import MissingPalletWorklistCard from '../../components/MissingPalletWorklistCard/MissingPalletWorklistCard';
+import SortBar from '../../components/SortBar/SortBar';
 import { strings } from '../../locales';
-import { MissingPalletWorklistItemI } from '../../models/WorklistItem';
+import { MissingPalletWorklistItemI, Tabs } from '../../models/PalletWorklist';
 import { CustomModalComponent } from '../Modal/Modal';
 import { styles } from './PalletWorklist.style';
 import Button from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
-import { clearPallet } from '../../state/actions/saga';
-import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { clearPallet, getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import {
   hideActivityModal,
   showActivityModal
 } from '../../state/actions/Modal';
 import { CLEAR_PALLET } from '../../state/actions/asyncAPI';
+import WorklistHeader from '../../components/WorklistHeader/WorklistHeader';
+import { setSelectedWorklistPalletId } from '../../state/actions/PalletWorklist';
 
 interface PalletWorkListProps {
-  palletWorklist: MissingPalletWorklistItemI[];
+  palletWorklist: MissingPalletWorklistItemI[] | undefined;
   displayConfirmation: boolean;
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
   dispatch: Dispatch<any>;
   clearPalletAPI: AsyncState;
   navigation: NavigationProp<any>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
+  onRefresh: () => void;
+  refreshing: boolean;
+  error: AxiosError | null;
+  groupToggle: boolean;
+  updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedTab: Tabs;
+  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
+}
+interface ListItemProps {
+  item: MissingPalletWorklistItemI;
+  handleAddLocationClick: (palletId: string) => void;
+  handleDeleteClick: (palletId: string) => void;
+  expanded: boolean;
+  setActiveItemIndex: React.Dispatch<React.SetStateAction<number>>;
+  itemIndex: number;
+  selectedTab: Tabs;
+  activeItemIndex: number;
+  dispatch: Dispatch<any>;
+  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const clearPalletAPIHook = (
@@ -36,7 +62,8 @@ export const clearPalletAPIHook = (
   palletId: string,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
-  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>
+  setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  onRefresh: () => void
 ): void => {
   if (navigation.isFocused()) {
     if (!clearPalletApi.isWaiting) {
@@ -45,8 +72,7 @@ export const clearPalletAPIHook = (
         dispatch(hideActivityModal());
         setDisplayConfirmation(false);
         dispatch({ type: CLEAR_PALLET.RESET });
-
-        // TODO REFRESH/CALL MISSING PALLET WORKLIST API
+        onRefresh();
 
         Toast.show({
           type: 'success',
@@ -73,7 +99,158 @@ export const clearPalletAPIHook = (
   }
 };
 
-export const PalletWorklistScreen = (props: PalletWorkListProps) => {
+const onPalletCardClick = (
+  item: MissingPalletWorklistItemI,
+  index: number,
+  activeItemIndex: number,
+  setActiveItemIndex: React.Dispatch<React.SetStateAction<number>>,
+  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
+) => {
+  if (activeItemIndex === index) {
+    setPalletClicked(true);
+    dispatch(getPalletDetails({ palletIds: [item.palletId.toString()], isAllItems: true }));
+  } else {
+    setActiveItemIndex(index);
+  }
+};
+
+export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
+  const {
+    item, handleAddLocationClick, handleDeleteClick, expanded, setPalletClicked,
+    setActiveItemIndex, itemIndex, selectedTab, activeItemIndex, dispatch
+  } = props;
+  if (item.palletId === 0) {
+    const { lastKnownPalletLocationName, itemCount } = item;
+    return (
+      <WorklistHeader title={lastKnownPalletLocationName} numberOfItems={itemCount || 0} />
+    );
+  }
+
+  return (
+    <MissingPalletWorklistCard
+      palletId={item.palletId}
+      lastLocation={item.lastKnownPalletLocationName}
+      reportedBy={item.createUserId}
+      reportedDate={item.createTs}
+      expanded={expanded}
+      addCallback={() => handleAddLocationClick(item.palletId.toString())}
+      deleteCallback={() => handleDeleteClick(item.palletId.toString())}
+      navigateCallback={() => onPalletCardClick(
+        item, itemIndex, activeItemIndex, setActiveItemIndex, setPalletClicked, dispatch
+      )}
+      disabled={selectedTab === Tabs.COMPLETED}
+    />
+  );
+};
+
+export const convertDataToDisplayList = (
+  data: MissingPalletWorklistItemI[] | undefined, groupToggle: boolean
+): MissingPalletWorklistItemI[] => {
+  if (!groupToggle) {
+    const workListItems = data && data.length
+      ? data.sort((a, b) => a.palletId - b.palletId) : [];
+    return [{
+      palletId: 0,
+      lastKnownPalletLocationId: -1,
+      lastKnownPalletLocationName: strings('WORKLIST.ALL'),
+      itemCount: workListItems.length,
+      createUserId: '',
+      createTs: '',
+      palletDeleted: false,
+      sectionID: 0,
+      completed: false
+    },
+    ...workListItems];
+  }
+
+  const sortedData = data || [];
+  // first, sort by Loc
+  sortedData.sort((firstEl: MissingPalletWorklistItemI, secondEl: MissingPalletWorklistItemI) => {
+    if (firstEl.lastKnownPalletLocationName && secondEl.lastKnownPalletLocationName) {
+      if (firstEl.lastKnownPalletLocationName < secondEl.lastKnownPalletLocationName) {
+        return -1;
+      }
+      if (firstEl.lastKnownPalletLocationName > secondEl.lastKnownPalletLocationName) {
+        return 1;
+      }
+    }
+    return 0;
+  });
+
+  // second, sort by section
+  let locSecWiseItems: MissingPalletWorklistItemI[] = [];
+  let previousLocItem: MissingPalletWorklistItemI;
+  let zoneWiseItems: MissingPalletWorklistItemI[] = [];
+  sortedData.forEach(item => {
+    const currSec = item.lastKnownPalletLocationName.split('-').pop();
+    const prevZone = previousLocItem ? previousLocItem.lastKnownPalletLocationName.split('-')[0] : '';
+    const currZone = item.lastKnownPalletLocationName.split('-')[0];
+    if (!prevZone || (prevZone !== currZone)) {
+      if (zoneWiseItems.length) {
+        const sortedLocWisePallets = zoneWiseItems.sort((a, b) => (
+          a.sectionID && b.sectionID ? a.sectionID - b.sectionID : 0
+        ));
+        locSecWiseItems = locSecWiseItems.concat(sortedLocWisePallets);
+      }
+      previousLocItem = item;
+      zoneWiseItems = [];
+      zoneWiseItems.push({ ...item, sectionID: Number(currSec) });
+    } else {
+      previousLocItem = item;
+      zoneWiseItems.push({ ...item, sectionID: Number(currSec) });
+    }
+  });
+
+  if (zoneWiseItems.length) {
+    const sortedLocWisePallets = zoneWiseItems.sort((a, b) => (
+      a.sectionID && b.sectionID ? a.sectionID - b.sectionID : 0
+    ));
+    locSecWiseItems = locSecWiseItems.concat(sortedLocWisePallets);
+  }
+
+  let returnData: MissingPalletWorklistItemI[] = [];
+
+  // Loc than sec than palletid
+  let previousItem: MissingPalletWorklistItemI;
+  let locWisePallets: MissingPalletWorklistItemI[] = [];
+  locSecWiseItems.forEach(item => {
+    if (!previousItem || (previousItem.lastKnownPalletLocationId !== item.lastKnownPalletLocationId)) {
+      if (locWisePallets.length) {
+        returnData[returnData.length - 1].itemCount = locWisePallets.length;
+        const sortedLocWisePallets = locWisePallets.sort((a, b) => a.palletId - b.palletId);
+        returnData = returnData.concat(sortedLocWisePallets);
+      }
+      previousItem = item;
+      returnData.push({
+        palletId: 0,
+        lastKnownPalletLocationId: item.lastKnownPalletLocationId,
+        lastKnownPalletLocationName: item.lastKnownPalletLocationName,
+        createUserId: '',
+        createTs: '',
+        palletDeleted: false,
+        itemCount: 1,
+        sectionID: 0,
+        completed: false
+      });
+      locWisePallets = [];
+      locWisePallets.push(item);
+    } else {
+      previousItem = item;
+      locWisePallets.push(item);
+    }
+  });
+
+  if (locWisePallets.length) {
+    returnData[returnData.length - 1].itemCount = locWisePallets.length;
+    const sortedLocWisePallets = locWisePallets.sort((a, b) => a.palletId - b.palletId);
+    returnData = returnData.concat(sortedLocWisePallets);
+  }
+
+  return returnData;
+};
+
+export const PalletWorklist = (props: PalletWorkListProps) => {
   const {
     clearPalletAPI,
     displayConfirmation,
@@ -81,18 +258,37 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
     palletWorklist,
     setDisplayConfirmation,
     navigation,
-    useEffectHook
+    useEffectHook,
+    onRefresh,
+    refreshing,
+    error,
+    groupToggle,
+    updateGroupToggle,
+    selectedTab,
+    setPalletClicked
   } = props;
   let deletePalletId = '';
 
-  useEffectHook(() => clearPalletAPIHook(
-    clearPalletAPI,
-    deletePalletId,
-    navigation,
-    dispatch,
-    setDisplayConfirmation
-  ),
-  [clearPalletAPI]);
+  const [activeItemIndex, setActiveItemIndex] = useState(1);
+
+  useEffectHook(
+    () => clearPalletAPIHook(
+      clearPalletAPI,
+      deletePalletId,
+      navigation,
+      dispatch,
+      setDisplayConfirmation,
+      onRefresh
+    ),
+    [clearPalletAPI]
+  );
+
+  // reset active item index to 1 on refresh / on sort toggle
+  useEffectHook(() => {
+    if (groupToggle || refreshing) {
+      setActiveItemIndex(1);
+    }
+  }, [groupToggle, refreshing]);
 
   const onDeletePress = () => {
     dispatch(clearPallet({ palletId: deletePalletId }));
@@ -102,6 +298,38 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
     setDisplayConfirmation(true);
     deletePalletId = palletId;
   };
+
+  const handleAddLocationClick = (palletId: string) => {
+    dispatch(setSelectedWorklistPalletId(palletId));
+    navigation.navigate('ScanPallet');
+  };
+
+  if (error) {
+    return (
+      <View style={styles.errorView}>
+        <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>
+          {strings('WORKLIST.WORKLIST_ITEM_API_ERROR')}
+        </Text>
+        <TouchableOpacity style={styles.errorButton} onPress={onRefresh}>
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  if (refreshing) {
+    return (
+      <ActivityIndicator
+        animating={refreshing}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
+
   return (
     <View style={styles.container}>
       <CustomModalComponent
@@ -132,57 +360,36 @@ export const PalletWorklistScreen = (props: PalletWorkListProps) => {
           />
         </View>
       </CustomModalComponent>
+      <SortBar
+        isGrouped={groupToggle}
+        updateGroupToggle={updateGroupToggle}
+      />
       <FlatList
-        data={palletWorklist}
-        keyExtractor={(item: MissingPalletWorklistItemI, index: number) => item.palletId + index.toString()}
-        renderItem={({ item }) => (
-          <MissingPalletWorklistCard
-            palletId={item.palletId}
-            lastLocation={item.lastKnownLocationName}
-            reportedBy={item.createId}
-            reportedDate={item.createTS}
-            expanded={true} // TODO Toggle for a single Pallet WorkList Item
-            addCallback={() => {}}
-            deleteCallback={() => handleDeleteClick(item.palletId.toString())}
-            navigateCallback={() => {}}
+        data={convertDataToDisplayList(palletWorklist, groupToggle)}
+        keyExtractor={(item: MissingPalletWorklistItemI, index: number) => {
+          if (item.palletId === 0) {
+            return item.lastKnownPalletLocationName.toString();
+          }
+          return item.palletId + index.toString();
+        }}
+        renderItem={({ item, index }) => (
+          <RenderWorklistItem
+            item={item}
+            dispatch={dispatch}
+            handleAddLocationClick={handleAddLocationClick}
+            handleDeleteClick={handleDeleteClick}
+            expanded={selectedTab !== Tabs.COMPLETED ? index === activeItemIndex : false}
+            activeItemIndex={activeItemIndex}
+            setActiveItemIndex={setActiveItemIndex}
+            itemIndex={index}
+            selectedTab={selectedTab}
+            setPalletClicked={setPalletClicked}
           />
         )}
-        onRefresh={null}
-        refreshing={undefined}
+        onRefresh={onRefresh}
+        refreshing={refreshing}
         style={styles.list}
       />
     </View>
-  );
-};
-
-export const PalletWorkList = () => {
-  const [displayConfirmation, setDisplayConfirmation] = useState(false);
-  const clearPalletAPI = useTypedSelector(state => state.async.clearPallet);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const mockMPWorklist: MissingPalletWorklistItemI[] = [
-    {
-      createId: '11',
-      createTS: '26/06/2022',
-      lastKnownLocationId: 1,
-      lastKnownLocationName: 'A1-1',
-      palletDeleted: false,
-      palletId: 7988,
-      worklistType: 'MP',
-      completed: undefined,
-      completedId: undefined,
-      completedTS: undefined
-    }
-  ];
-  return (
-    <PalletWorklistScreen
-      palletWorklist={mockMPWorklist}
-      displayConfirmation={displayConfirmation}
-      setDisplayConfirmation={setDisplayConfirmation}
-      dispatch={dispatch}
-      clearPalletAPI={clearPalletAPI}
-      navigation={navigation}
-      useEffectHook={useEffect}
-    />
   );
 };

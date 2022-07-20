@@ -32,8 +32,8 @@ export interface ScanPalletScreenProps {
     selectedWorklistPalletId: string;
   }
 
-const navigateScanLocationScreen = () => {
-  // TODO: Navigate to scan location screen
+const navigateScanLocationScreen = (navigation: NavigationProp<any>) => {
+  navigation.navigate('ScanLocation');
 };
 
 export const getScannedPalletEffect = (
@@ -44,7 +44,7 @@ export const getScannedPalletEffect = (
 ) => {
   if (navigation.isFocused() && scannedEvent.value) {
     if (scannedEvent.value === selectedWorklistPalletId) {
-      navigateScanLocationScreen();
+      navigateScanLocationScreen(navigation);
     } else {
       Toast.show({
         type: 'error',
@@ -104,8 +104,7 @@ const ScanPallet = (): JSX.Element => {
   const route = useRoute();
   const navigation = useNavigation();
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
-  // TODO: Selected pallet detail needs to fetched from redux state
-  const selectedWorklistPalletId = '7988';
+  const selectedWorklistPalletId = useTypedSelector(state => state.PalletWorklist.selectedWorklistPalletId);
 
   return (
     <ScanPalletScreen

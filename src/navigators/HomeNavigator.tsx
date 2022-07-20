@@ -6,7 +6,7 @@ import {
 import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
-// @ts-ignore
+// @ts-expect-error wmsso exists as an imported dependency
 import WMSSO from 'react-native-wmsso';
 import { StackActions } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -153,8 +153,8 @@ const renderHomeHeader = (props: HomeNavigatorComponentProps, navigation: any) =
 
 export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.Element => (
   <Stack.Navigator
-    headerMode="float"
     screenOptions={{
+      headerMode: 'float',
       headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
       headerTintColor: COLOR.WHITE
     }}
@@ -178,6 +178,7 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
           }
         }
       }}
+
     />
   </Stack.Navigator>
 );

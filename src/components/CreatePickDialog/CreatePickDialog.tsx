@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Text, View } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import Button from '../buttons/Button';
-import IconButton from '../buttons/IconButton';
+import Button, { ButtonType } from '../buttons/Button';
+import IconButton, { IconButtonType } from '../buttons/IconButton';
 import NumericSelector from '../NumericSelector/NumericSelector';
 import styles from './CreatePickDialog.style';
 import { ModalCloseIcon } from '../../screens/Modal/Modal';
@@ -92,7 +92,7 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
       <View style={styles.closeContainer}>
         <IconButton
           icon={ModalCloseIcon}
-          type={Button.Type.NO_BORDER}
+          type={IconButtonType.NO_BORDER}
           onPress={() => onClose()}
           testID="closeButton"
         />
@@ -142,7 +142,7 @@ export const CreatePickDialog = (props: CreatePickDialogProps): JSX.Element => {
         <Button
           disabled={selectedSection === '' || !isNumberOfPalletsValid(numberOfPallets)}
           title={strings('PICKING.CREATE_PICK')}
-          type={Button.Type.PRIMARY}
+          type={ButtonType.PRIMARY}
           onPress={onSubmit}
           testID="submitButton"
         />

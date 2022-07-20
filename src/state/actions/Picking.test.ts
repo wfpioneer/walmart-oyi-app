@@ -13,6 +13,7 @@ import {
   SET_PICK_CREATE_ITEM,
   SET_PICK_CREATE_RESERVE,
   SET_SELECTED_TAB,
+  SHOW_PICKING_MENU,
   UPDATE_PICKS,
   deletePicks,
   initializePicklist,
@@ -22,6 +23,7 @@ import {
   setPickCreateItem,
   setPickCreateReserve,
   setSelectedTab,
+  showPickingMenu,
   updatePicks
 } from './Picking';
 import { Tabs } from '../../models/Picking.d';
@@ -79,6 +81,12 @@ describe('Picking action tests', () => {
     expect(setSelectedTabResult).toStrictEqual({
       type: SET_SELECTED_TAB,
       payload: Tabs.QUICKPICK
+    });
+
+    const showPickingMenuResult = showPickingMenu(true);
+    expect(showPickingMenuResult).toStrictEqual({
+      type: SHOW_PICKING_MENU,
+      payload: true
     });
   });
 });

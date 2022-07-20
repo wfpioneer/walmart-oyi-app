@@ -95,15 +95,15 @@ describe('Test Location Tabs', (): void => {
     id: 0,
     name: '0'
   };
+  const successApi: AsyncState = {
+    ...defaultAsyncState,
+    result: mockLocationDetails
+  };
   it('Renders Location Tabs with Mock Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const {
       items, pallets, zone, aisle, section
     } = mockLocationDetails;
-    const successApi: AsyncState = {
-      ...defaultAsyncState,
-      result: mockLocationDetails
-    };
     renderer.render(
       <LocationTabsNavigator
         floorItems={items.sectionItems}
@@ -182,10 +182,6 @@ describe('Test Location Tabs', (): void => {
     const {
       items, pallets, zone, aisle, section
     } = mockLocationDetailsLargeLocationCount;
-    const successApi: AsyncState = {
-      ...defaultAsyncState,
-      result: mockLocationDetailsLargeLocationCount
-    };
     renderer.render(
       <LocationTabsNavigator
         floorItems={items.sectionItems}
@@ -223,10 +219,6 @@ describe('Test Location Tabs', (): void => {
     const {
       items, pallets, zone, aisle, section
     } = mockLocationDetails;
-    const successApi: AsyncState = {
-      ...defaultAsyncState,
-      result: mockLocationDetails
-    };
     renderer.render(
       <LocationTabsNavigator
         floorItems={items.sectionItems}
@@ -266,10 +258,6 @@ describe('Test Location Tabs', (): void => {
       type: 'Test',
       value: 'SCAN1-1'
     };
-    const successApi: AsyncState = {
-      ...defaultAsyncState,
-      result: mockLocationDetails
-    };
     renderer.render(
       <LocationTabsNavigator
         floorItems={items.sectionItems}
@@ -305,10 +293,6 @@ describe('Test Location Tabs', (): void => {
   it('Renders Print Label button if "location printing" feature is enabled', (): void => {
     const renderer = ShallowRenderer.createRenderer();
     const { items, pallets } = mockLocationDetails;
-    const successApi: AsyncState = {
-      ...defaultAsyncState,
-      result: mockLocationDetails
-    };
     renderer.render(
       <LocationTabsNavigator
         floorItems={items.sectionItems}
@@ -366,7 +350,7 @@ describe('Test Location Tabs', (): void => {
           locationPopupVisible={false}
           user={user}
           itemPopupVisible={false}
-          getSectionDetailsApi={defaultAsyncState}
+          getSectionDetailsApi={successApi}
           section={defaultSection}
           removeSectionApi={deleteSectionIsWaiting}
           displayRemoveConfirmation={true}
@@ -406,7 +390,7 @@ describe('Test Location Tabs', (): void => {
           locationPopupVisible={false}
           user={user}
           itemPopupVisible={false}
-          getSectionDetailsApi={defaultAsyncState}
+          getSectionDetailsApi={successApi}
           section={defaultSection}
           removeSectionApi={deleteSectionError}
           displayRemoveConfirmation={true}
@@ -665,12 +649,12 @@ describe('Test Location Tabs', (): void => {
     });
 
     it('ensures removeSectionApiEffect works properly on success', () => {
-      const successApi: AsyncState = {
+      const successNotFoundApi: AsyncState = {
         ...defaultAsyncState,
         result: { status: 204 }
       };
 
-      removeSectionApiEffect(navigationProp, mockDispatch, successApi, mockSetDisplayConfirmation);
+      removeSectionApiEffect(navigationProp, mockDispatch, successNotFoundApi, mockSetDisplayConfirmation);
       expect(mockIsFocused).toBeCalledTimes(1);
       expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
       expect(mockSetDisplayConfirmation).lastCalledWith(false);

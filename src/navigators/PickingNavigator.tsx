@@ -1,10 +1,11 @@
 import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
-  Pressable,
-  TouchableOpacity,
-  View
-} from 'react-native';
+  HeaderBackButton,
+  HeaderBackButtonProps
+} from '@react-navigation/elements';
+
+import { Pressable, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
@@ -19,6 +20,8 @@ import { setManualScan } from '../state/actions/Global';
 import styles from './PickingNavigator.style';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { Tabs } from '../models/Picking.d';
+import { showPickingMenu } from '../state/actions/Picking';
+import { trackEvent } from '../utils/AppCenterTool';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +29,7 @@ interface PickingNavigatorProps {
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
   selectedTab: Tabs;
+  pickingMenu: boolean;
 }
 
 export const renderScanButton = (
@@ -48,8 +52,17 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
-export const kebabMenuButton = () => (
-  <Pressable onPress={() => {}} style={styles.leftButton}>
+export const kebabMenuButton = (
+  pickingMenu: boolean,
+  dispatch: Dispatch<any>
+) => (
+  <Pressable
+    onPress={() => {
+      dispatch(showPickingMenu(!pickingMenu));
+      trackEvent('picking_menu_button_click');
+    }}
+    style={styles.leftButton}
+  >
     <MaterialCommunityIcons
       name="dots-vertical"
       size={30}
@@ -62,10 +75,14 @@ export const PickingNavigatorStack = (
   props: PickingNavigatorProps
 ): JSX.Element => {
   const {
-    dispatch,
-    isManualScanEnabled,
-    selectedTab
+    dispatch, isManualScanEnabled, selectedTab, pickingMenu
   } = props;
+
+  const navigate = (hlProps: HeaderBackButtonProps) => {
+    dispatch(showPickingMenu(false));
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    hlProps.canGoBack && hlProps.onPress && hlProps.onPress();
+  };
 
   let createPickTitle = '';
   if (selectedTab === Tabs.PICK) {
@@ -76,10 +93,10 @@ export const PickingNavigatorStack = (
 
   return (
     <Stack.Navigator
-      headerMode="float"
       screenOptions={({ route: screenRoute }) => {
         const routeName = getFocusedRouteNameFromRoute(screenRoute) ?? 'Pick';
         return {
+          headerMode: 'float',
           headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
           headerTintColor: COLOR.WHITE,
           headerRight: () => (
@@ -104,7 +121,16 @@ export const PickingNavigatorStack = (
         component={PickBinWorkflow}
         options={{
           headerTitle: strings('PICKING.PICKING'),
-          headerRight: () => kebabMenuButton()
+          headerRight: () => kebabMenuButton(pickingMenu, dispatch),
+          headerLeft: hlProps => (
+            <HeaderBackButton
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...hlProps}
+              onPress={() => {
+                navigate(hlProps);
+              }}
+            />
+          )
         }}
       />
       <Stack.Screen
@@ -112,7 +138,16 @@ export const PickingNavigatorStack = (
         component={SalesFloorWorkflow}
         options={{
           headerTitle: strings('PICKING.PICKING'),
-          headerRight: () => kebabMenuButton()
+          headerRight: () => kebabMenuButton(pickingMenu, dispatch),
+          headerLeft: hlProps => (
+            <HeaderBackButton
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...hlProps}
+              onPress={() => {
+                navigate(hlProps);
+              }}
+            />
+          )
         }}
       />
       <Stack.Screen
@@ -137,7 +172,7 @@ export const PickingNavigatorStack = (
 };
 
 const PickingNavigator = (): JSX.Element => {
-  const selectedTab = useTypedSelector(state => state.Picking.selectedTab);
+  const { selectedTab, pickingMenu } = useTypedSelector(state => state.Picking);
   const dispatch = useDispatch();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   return (
@@ -145,6 +180,7 @@ const PickingNavigator = (): JSX.Element => {
       dispatch={dispatch}
       isManualScanEnabled={isManualScanEnabled}
       selectedTab={selectedTab}
+      pickingMenu={pickingMenu}
     />
   );
 };

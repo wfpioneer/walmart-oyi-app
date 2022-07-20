@@ -77,6 +77,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 30,
     width: '100%'
+  },
+  safeAreaView: {
+    flex: 1
+  },
+  bottomSheetModal: {
+    borderColor: COLOR.GREY_200,
+    borderRadius: 5,
+    borderWidth: 2
+  },
+  disabledContainer: {
+    flex: 1,
+    opacity: 0.2,
+    backgroundColor: COLOR.BLACK_TRANSPARENT_200
   }
 });
 
