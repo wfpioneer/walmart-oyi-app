@@ -413,7 +413,7 @@ export default {
     REMAINING_QTY: '卡板剩余数量',
     REMOVE_PERISHABLE: '移除易腐商品',
     REMOVE_PERISHABLE_NEW_EXPIRY: '请录入新到期日',
-    PICKLIST_SUCCESS: '成功重置铺货清单',
+    PICKLIST_SUCCESS: '补货清单重置成功',
     PICKLIST_NOT_FOUND: '此门店无补货清单',
     PICKLIST_ERROR: '重置补货清单时报错',
     UPDATE_PICKLIST_STATUS_SUCCESS: '补货清单状态更新成功',
