@@ -119,10 +119,6 @@ export interface IHistoryCardProps {
   qty: number;
 }
 
-export interface IPickHistoryProps {
-  pickHistoryList: IPickHistory[]
-}
-
 const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
   || exceptionType === 'C' || exceptionType === 'NSFL';
 
