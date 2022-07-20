@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { Text, View } from 'react-native';
 import { strings } from '../../locales';
@@ -60,7 +61,7 @@ const SalesFloorItemCard = (props: SFItemCardProps) => {
             {`${strings('ITEM.UPC')}: ${upcNbr}`}
           </Text>
           <Text style={styles.contentText}>
-            {`${strings('PICKING.CREATED')}: ${createdTS}`}
+            {`${strings('PICKING.CREATED')}: ${moment(createdTS).format('hh:mm A DD/MM/YYYY')}`}
           </Text>
         </View>
       </View>
