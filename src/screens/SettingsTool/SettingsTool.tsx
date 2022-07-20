@@ -169,7 +169,7 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       name: strings('APPROVAL.MANAGER_APPROVAL')
     },
     {
-      key: 'location management',
+      key: 'locationManagement',
       name: strings('LOCATION.LOCATION_MANAGEMENT')
     },
     {
@@ -177,7 +177,7 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       name: strings('APPROVAL.OH_CHANGE')
     },
     {
-      key: 'location management edit',
+      key: 'locationManagementEdit',
       name: strings('LOCATION.LOCATION_MGMT_EDIT')
     },
     {
@@ -185,7 +185,7 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       name: strings('PRINT.LOCATION_PRINTING')
     },
     {
-      key: 'pallet management',
+      key: 'palletManagement',
       name: strings('LOCATION.PALLET_MANAGEMENT')
     },
     {
