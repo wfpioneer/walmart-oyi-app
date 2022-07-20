@@ -346,6 +346,39 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Ren
 </TouchableOpacity>
 `;
 
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders pick history flat list 1`] = `
+<View>
+  <CollapsibleHeaderCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+    toggleIsOpened={[Function]}
+  />
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders pick history with error msg for result status 207 1`] = `
+<View>
+  <CollapsibleHeaderCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+    toggleIsOpened={[Function]}
+  />
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders pick history with no data for pick msg 1`] = `
+<View>
+  <CollapsibleHeaderCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+    toggleIsOpened={[Function]}
+  />
+</View>
+`;
+
 exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders the barcodeErrorModal isVisible set to False 1`] = `
 <Modal
   animationType="none"

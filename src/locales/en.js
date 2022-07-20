@@ -122,7 +122,10 @@ export default {
     FLY_CLOUD_QTY: 'Fly Cloud',
     IN_TRANSIT_FLY_QTY: 'In Transit Fly Cloud Qty',
     ERROR_SALES_HISTORY: 'Unable to retrieve sales history',
-    ITEM_NUMBER: 'Item Number'
+    ITEM_NUMBER: 'Item Number',
+    OH_CHANGE_HISTORY: 'On Hands Change History',
+    NO_OH_CHANGE_HISTORY: 'No On Hand history available',
+    ERROR_OH_CHANGE_HISTORY: 'Error retrieving data'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

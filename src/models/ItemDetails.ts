@@ -1,4 +1,24 @@
 import Location from './Location';
+import { approvalRequestSource, approvalStatus } from './ApprovalListItem';
+
+export interface IOHChangeHistory {
+  id : number;
+  itemName : string;
+  itemNbr : number;
+  upcNbr : number;
+  categoryNbr : number;
+  categoryDescription : string;
+  subCategoryNbr : number;
+  subCategoryDescription : string;
+  oldQuantity : number;
+  newQuantity : number;
+  dollarChange : number;
+  daysLeft: number;
+  initiatedUserId : string;
+  initiatedTimestamp : string;
+  approvalStatus : approvalStatus;
+  approvalRequestSource : approvalRequestSource;
+}
 
 interface ItemDetails {
   itemName: string;
@@ -41,6 +61,7 @@ interface ItemDetails {
       value: number;
     }[];
   };
+  ohChangeHistory: IOHChangeHistory[];
 }
 
 export default ItemDetails;

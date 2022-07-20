@@ -21,7 +21,8 @@ import {
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
-import ItemDetails from '../../models/ItemDetails';
+import ItemDetails, { IOHChangeHistory } from '../../models/ItemDetails';
+import { CollapsibleCard } from '../../components/CollapsibleCard/CollapsibleCard';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import Button from '../../components/buttons/Button';
@@ -110,6 +111,11 @@ export interface RenderProps {
   floorLocations?: Location[];
   reserveLocations?: Location[];
   userConfigs: Configurations;
+}
+
+export interface IHistoryCardProps {
+  date: string;
+  qty: number;
 }
 
 const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
@@ -305,6 +311,64 @@ export const updateOHQtyApiHook = (
   }
 };
 
+export const RenderItemHistoryCard = (
+  props: IHistoryCardProps
+): JSX.Element => (
+  <View style={styles.historyCard}>
+    <Text>{props.date}</Text>
+    <Text>{props.qty}</Text>
+  </View>
+);
+
+const MULTI_STATUS = 207;
+export const renderOHChangeHistory = (pickHistoryList: IOHChangeHistory[], result: any) => {
+  if (result && result.status !== MULTI_STATUS) {
+    if (pickHistoryList && pickHistoryList.length) {
+      const data = pickHistoryList.length > 5 ? pickHistoryList.slice(-5) : pickHistoryList;
+      return (
+        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+          {data.map(item => (
+            <RenderItemHistoryCard
+              key={item.id}
+              date={item.initiatedTimestamp}
+              qty={item.newQuantity}
+            />
+          ))}
+          {pickHistoryList.length > 5 && (
+          <View style={styles.moreBtnContainer}>
+            <Button
+              type={3}
+              title={`${strings('LOCATION.MORE')}...`}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight="bold"
+              height={28}
+              onPress={() => {}}
+              style={styles.historyMoreBtn}
+            />
+          </View>
+          )}
+        </CollapsibleCard>
+      );
+    }
+    return (
+      <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+        <View style={styles.noDataContainer}>
+          <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
+        </View>
+      </CollapsibleCard>
+    );
+  }
+  return (
+    <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
+        <Text>{strings('ITEM.ERROR_OH_CHANGE_HISTORY')}</Text>
+      </View>
+    </CollapsibleCard>
+  );
+};
+
 export const renderAddPicklistButton = (
   props: (RenderProps & HandleProps),
   itemDetails: ItemDetails,
@@ -411,8 +475,6 @@ export const renderLocationComponent = (
     </View>
   );
 };
-
-const MULTI_STATUS = 207;
 
 export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
   result: any, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
