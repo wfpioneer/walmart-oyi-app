@@ -325,20 +325,21 @@ export const RenderItemHistoryCard = (
   </View>
 );
 
-export const renderPickHistory = (props: IPickHistoryProps) => {
-  const { pickHistoryList } = props;
-  if (pickHistoryList && pickHistoryList.length) {
-    const data = pickHistoryList.length > 5 ? pickHistoryList.slice(-5) : pickHistoryList;
-    return (
-      <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
-        {data.map(item => (
-          <RenderItemHistoryCard
-            key={item.id}
-            date={item.createTS}
-            qty={item.itemQty}
-          />
-        ))}
-        {pickHistoryList.length > 5 && (
+const MULTI_STATUS = 207;
+export const renderPickHistory = (pickHistoryList: IPickHistory[], result: any) => {
+  if (result && result.status !== MULTI_STATUS) {
+    if (pickHistoryList && pickHistoryList.length) {
+      const data = pickHistoryList.length > 5 ? pickHistoryList.slice(-5) : pickHistoryList;
+      return (
+        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+          {data.map(item => (
+            <RenderItemHistoryCard
+              key={item.id}
+              date={item.createTS}
+              qty={item.itemQty}
+            />
+          ))}
+          {pickHistoryList.length > 5 && (
           <View style={styles.moreBtnContainer}>
             <Button
               type={3}
@@ -351,13 +352,22 @@ export const renderPickHistory = (props: IPickHistoryProps) => {
               style={styles.historyMoreBtn}
             />
           </View>
-        )}
-      </CollapsibleCard>
+          )}
+        </CollapsibleCard>
+      );
+    }
+    return (
+      <View style={styles.noDataContainer}>
+        <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
+      </View>
     );
   }
   return (
-    <View style={styles.noDataContainer}>
-      <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
+    <View>
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
+        <Text>{strings('ITEM.ERROR_PICK_HISTORY')}</Text>
+      </View>
     </View>
   );
 };
@@ -468,8 +478,6 @@ export const renderLocationComponent = (
     </View>
   );
 };
-
-const MULTI_STATUS = 207;
 
 export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
   result: any, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {

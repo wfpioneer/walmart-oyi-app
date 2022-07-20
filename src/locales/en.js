@@ -124,7 +124,8 @@ export default {
     ERROR_SALES_HISTORY: 'Unable to retrieve sales history',
     ITEM_NUMBER: 'Item Number',
     PICK_HISTORY: 'Pick History',
-    NO_PICK_HISTORY: 'No pick history available'
+    NO_PICK_HISTORY: 'No pick history available',
+    ERROR_PICK_HISTORY: 'Error retrieving data'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

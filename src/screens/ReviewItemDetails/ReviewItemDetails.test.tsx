@@ -1222,15 +1222,22 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders pick history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory({ pickHistoryList: pickListMockHistory })
+        renderPickHistory(pickListMockHistory, { status: 200 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders pick history with no data for pick msg', () => {
       const { getAllByTestId } = render(
-        renderPickHistory({ pickHistoryList: [] })
+        renderPickHistory([], { status: 200 })
       );
       expect(getAllByTestId('msg-no-pick-data').length).toBe(1);
+    });
+    it('Renders pick history with error msg for result status 207', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderPickHistory([], { status: 200 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
 });
