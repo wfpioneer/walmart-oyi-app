@@ -122,7 +122,10 @@ export default {
     FLY_CLOUD_QTY: '云仓库存',
     IN_TRANSIT_FLY_QTY: '云仓转运量',
     ERROR_SALES_HISTORY: '无法获取历史销售',
-    ITEM_NUMBER: '商品号'
+    ITEM_NUMBER: '商品号',
+    PICK_HISTORY: '历史补货清单',
+    NO_PICK_HISTORY: '无补货历史记录',
+    ERROR_PICK_HISTORY: '重置数据出错'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',

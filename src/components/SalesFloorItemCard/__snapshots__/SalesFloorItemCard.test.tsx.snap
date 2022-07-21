@@ -123,7 +123,7 @@ exports[`Sales floor item card render tests renders the item card 1`] = `
           }
         }
       >
-        [missing "en.PICKING.CREATED" translation]: gestern
+        [missing "en.PICKING.CREATED" translation]: 12:00 凌晨 07/02/2022
       </Text>
     </View>
   </View>
@@ -279,7 +279,7 @@ exports[`Sales floor item card render tests renders the item with an invalid qua
           }
         }
       >
-        [missing "en.PICKING.CREATED" translation]: gestern
+        [missing "en.PICKING.CREATED" translation]: 12:00 凌晨 07/02/2022
       </Text>
     </View>
   </View>
