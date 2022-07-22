@@ -61,6 +61,7 @@ interface ItemDetails {
       value: number;
     }[];
   };
+  picklistHistory?: IPickHistory[]
 }
 
 export interface IItemHistory {
