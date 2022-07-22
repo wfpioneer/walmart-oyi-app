@@ -47,6 +47,7 @@ exports[`MissingPalletWorklist Navigator Renders the MissingPalletWorklist Navig
     name="MissingPalletWorklistTabs"
     options={
       Object {
+        "headerLeft": [Function],
         "headerTitle": "[missing \\"en.WORKLIST.WORKLIST\\" translation]",
       }
     }
