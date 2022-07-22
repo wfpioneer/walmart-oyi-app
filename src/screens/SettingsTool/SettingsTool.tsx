@@ -163,37 +163,45 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
     dispatch(getClubConfig());
   };
 
-  const appFeatures: Array<{key: string, name:string}> = [
+  const appFeatures: Array<{fluffyKey: string, configKey: string, name:string}> = [
     {
-      key: 'manager approval',
+      fluffyKey: 'manager approval',
+      configKey: 'managerApproval',
       name: strings('APPROVAL.MANAGER_APPROVAL')
     },
     {
-      key: 'locationManagement',
+      fluffyKey: 'location management',
+      configKey: 'locationManagement',
       name: strings('LOCATION.LOCATION_MANAGEMENT')
     },
     {
-      key: 'on hands change',
+      fluffyKey: 'on hands change',
+      configKey: 'onHandsChange',
       name: strings('APPROVAL.OH_CHANGE')
     },
     {
-      key: 'locationManagementEdit',
+      fluffyKey: 'location management edit',
+      configKey: 'locationManagementEdit',
       name: strings('LOCATION.LOCATION_MGMT_EDIT')
     },
     {
-      key: 'location printing',
+      fluffyKey: 'location printing',
+      configKey: 'locationPrinting',
       name: strings('PRINT.LOCATION_PRINTING')
     },
     {
-      key: 'palletManagement',
+      fluffyKey: 'pallet management',
+      configKey: 'palletManagement',
       name: strings('LOCATION.PALLET_MANAGEMENT')
     },
     {
-      key: 'picking',
+      fluffyKey: 'picking',
+      configKey: 'picking',
       name: strings('PICKING.PICKING')
     },
     {
-      key: 'binning',
+      fluffyKey: 'binning',
+      configKey: 'binning',
       name: strings('BINNING.BINNING')
     }
   ];
@@ -235,9 +243,10 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
           data={appFeatures}
           renderItem={({ item }) => featureCard(
             item.name,
-            userFeatures.some(feature => feature === item.key) || Boolean(userConfigs[item.key as keyof Configurations])
+            userFeatures.some(feature => feature === item.fluffyKey)
+            || Boolean(userConfigs[item.configKey as keyof Configurations])
           )}
-          keyExtractor={item => item.key}
+          keyExtractor={item => item.name}
           ListFooterComponent={<View />}
           ListFooterComponentStyle={styles.footer}
         />

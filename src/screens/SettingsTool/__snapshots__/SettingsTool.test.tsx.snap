@@ -456,35 +456,43 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       data={
         Array [
           Object {
-            "key": "manager approval",
+            "configKey": "managerApproval",
+            "fluffyKey": "manager approval",
             "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
           },
           Object {
-            "key": "locationManagement",
+            "configKey": "locationManagement",
+            "fluffyKey": "location management",
             "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
           },
           Object {
-            "key": "on hands change",
+            "configKey": "onHandsChange",
+            "fluffyKey": "on hands change",
             "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
           },
           Object {
-            "key": "locationManagementEdit",
+            "configKey": "locationManagementEdit",
+            "fluffyKey": "location management edit",
             "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
           },
           Object {
-            "key": "location printing",
+            "configKey": "locationPrinting",
+            "fluffyKey": "location printing",
             "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
           },
           Object {
-            "key": "palletManagement",
+            "configKey": "palletManagement",
+            "fluffyKey": "pallet management",
             "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
           },
           Object {
-            "key": "picking",
+            "configKey": "picking",
+            "fluffyKey": "picking",
             "name": "[missing \\"en.PICKING.PICKING\\" translation]",
           },
           Object {
-            "key": "binning",
+            "configKey": "binning",
+            "fluffyKey": "binning",
             "name": "[missing \\"en.BINNING.BINNING\\" translation]",
           },
         ]
@@ -803,35 +811,43 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       data={
         Array [
           Object {
-            "key": "manager approval",
+            "configKey": "managerApproval",
+            "fluffyKey": "manager approval",
             "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
           },
           Object {
-            "key": "locationManagement",
+            "configKey": "locationManagement",
+            "fluffyKey": "location management",
             "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
           },
           Object {
-            "key": "on hands change",
+            "configKey": "onHandsChange",
+            "fluffyKey": "on hands change",
             "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
           },
           Object {
-            "key": "locationManagementEdit",
+            "configKey": "locationManagementEdit",
+            "fluffyKey": "location management edit",
             "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
           },
           Object {
-            "key": "location printing",
+            "configKey": "locationPrinting",
+            "fluffyKey": "location printing",
             "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
           },
           Object {
-            "key": "palletManagement",
+            "configKey": "palletManagement",
+            "fluffyKey": "pallet management",
             "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
           },
           Object {
-            "key": "picking",
+            "configKey": "picking",
+            "fluffyKey": "picking",
             "name": "[missing \\"en.PICKING.PICKING\\" translation]",
           },
           Object {
-            "key": "binning",
+            "configKey": "binning",
+            "fluffyKey": "binning",
             "name": "[missing \\"en.BINNING.BINNING\\" translation]",
           },
         ]
@@ -1070,35 +1086,43 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       data={
         Array [
           Object {
-            "key": "manager approval",
+            "configKey": "managerApproval",
+            "fluffyKey": "manager approval",
             "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
           },
           Object {
-            "key": "locationManagement",
+            "configKey": "locationManagement",
+            "fluffyKey": "location management",
             "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
           },
           Object {
-            "key": "on hands change",
+            "configKey": "onHandsChange",
+            "fluffyKey": "on hands change",
             "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
           },
           Object {
-            "key": "locationManagementEdit",
+            "configKey": "locationManagementEdit",
+            "fluffyKey": "location management edit",
             "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
           },
           Object {
-            "key": "location printing",
+            "configKey": "locationPrinting",
+            "fluffyKey": "location printing",
             "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
           },
           Object {
-            "key": "palletManagement",
+            "configKey": "palletManagement",
+            "fluffyKey": "pallet management",
             "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
           },
           Object {
-            "key": "picking",
+            "configKey": "picking",
+            "fluffyKey": "picking",
             "name": "[missing \\"en.PICKING.PICKING\\" translation]",
           },
           Object {
-            "key": "binning",
+            "configKey": "binning",
+            "fluffyKey": "binning",
             "name": "[missing \\"en.BINNING.BINNING\\" translation]",
           },
         ]
