@@ -12,7 +12,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { AxiosError, AxiosResponse } from 'axios';
 import { object } from 'prop-types';
 import { strings } from '../../locales';
-import itemDetail from '../../mockData/getItemDetails';
+import itemDetail, { mockOHChangeHistory, pickListMockHistory } from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
   callBackbarcodeEmitter, createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount,
@@ -20,8 +20,8 @@ import ReviewItemDetails, {
   handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError,
   isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateCompleteItemApiErrortHook,
   onValidateCompleteItemApiResultHook, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
-  renderBarcodeErrorModal, renderLocationComponent, renderOHQtyComponent, renderScanForNoActionButton,
-  updateOHQtyApiHook
+  renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
+  renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -1175,12 +1175,12 @@ describe('ReviewItemDetailsScreen', () => {
         }
       };
       const mockSetOhQtyModalVisible = jest.fn();
-      updateOHQtyApiHook(apiResponse, mockDispatch, true, 10, 'NSFL', mockSetOhQtyModalVisible)
+      updateOHQtyApiHook(apiResponse, mockDispatch, true, 10, 'NSFL', mockSetOhQtyModalVisible);
       expect(mockDispatch).toHaveBeenCalledTimes(3);
       expect(mockDispatch).toHaveBeenNthCalledWith(
         1,
         { payload: 10, type: 'ITEM_DETAILS_SCREEN/UPDATE_PENDING_OH_QTY' }
-        );
+      );
       expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED' });
       expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: 'API/UPDATE_OH_QTY/RESET' });
       expect(mockSetOhQtyModalVisible).toHaveBeenCalledWith(false);
@@ -1211,11 +1211,57 @@ describe('ReviewItemDetailsScreen', () => {
             oldQuantity: 42,
             upcNbr: 55559999
           }
-          },
+        },
         type: 'SAGA/UPDATE_OH_QTY'
       };
       handleOHQtySubmit(itemDetail[123], 10, mockDispatch);
       expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
+    });
+  });
+  describe('Tests Rendering \'renderOHChangeHistory\'', () => {
+    it('Renders OH history flat list', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderOHChangeHistory(mockOHChangeHistory, { status: 200 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders OH history with no data for pick msg', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderOHChangeHistory([], { status: 200 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders OH history with error msg for result status 207', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderOHChangeHistory([], { status: 207 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('Tests Rendering \'renderPickHistory\'', () => {
+    it('Renders pick history flat list', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderPickHistory(pickListMockHistory, { status: 200 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders pick history with no data for pick msg', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderPickHistory([], { status: 200 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders pick history with error msg for result status 207', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderPickHistory([], { status: 207 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
 });
