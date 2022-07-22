@@ -125,7 +125,10 @@ export default {
     ITEM_NUMBER: 'Item Number',
     OH_CHANGE_HISTORY: 'On Hands Change History',
     NO_OH_CHANGE_HISTORY: 'No On Hand history available',
-    ERROR_OH_CHANGE_HISTORY: 'Error retrieving data'
+    ERROR_OH_CHANGE_HISTORY: 'Error retrieving data',
+    PICK_HISTORY: 'Pick History',
+    NO_PICK_HISTORY: 'No pick history available',
+    ERROR_PICK_HISTORY: 'Error retrieving data'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -439,7 +442,8 @@ export default {
     NO_PALLETS_AVAILABLE_PICK_DELETED: 'The pallet is not available. The pick requested has been deleted',
     UPDATE_PICK_FAILED_TRY_AGAIN: 'Failed to update pick. Please try again',
     UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again',
-    NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available'
+    NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available',
+    PICK_HISTORY: 'Pick History'
   },
   BINNING: {
     BINNING: 'Binning',

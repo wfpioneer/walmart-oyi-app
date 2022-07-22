@@ -2,7 +2,8 @@ import React, {
   EffectCallback, RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, BackHandler, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, Platform, RefreshControl, ScrollView, Text, TouchableOpacity,
+  View
 } from 'react-native';
 import _ from 'lodash';
 import Toast from 'react-native-toast-message';
@@ -21,7 +22,7 @@ import {
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
-import ItemDetails, { IOHChangeHistory } from '../../models/ItemDetails';
+import ItemDetails, { IOHChangeHistory, IPickHistory } from '../../models/ItemDetails';
 import { CollapsibleCard } from '../../components/CollapsibleCard/CollapsibleCard';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
@@ -53,6 +54,7 @@ import { CreatePickRequest } from '../../services/Picking.service';
 import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import itemDetail, { mockOHChangeHistory, pickListMockHistory } from '../../mockData/getItemDetails';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -321,6 +323,54 @@ export const RenderItemHistoryCard = (
 );
 
 const MULTI_STATUS = 207;
+export const renderPickHistory = (pickHistoryList: IPickHistory[], result: any) => {
+  if (result && result.status !== MULTI_STATUS) {
+    if (pickHistoryList && pickHistoryList.length) {
+      const data = pickHistoryList.length > 5 ? pickHistoryList.slice(-5) : pickHistoryList;
+      return (
+        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+          {data.map(item => (
+            <RenderItemHistoryCard
+              key={item.id}
+              date={item.createTS}
+              qty={item.itemQty}
+            />
+          ))}
+          {pickHistoryList.length > 5 && (
+            <View style={styles.moreBtnContainer}>
+              <Button
+                type={3}
+                title={`${strings('LOCATION.MORE')}...`}
+                titleColor={COLOR.MAIN_THEME_COLOR}
+                titleFontSize={12}
+                titleFontWeight="bold"
+                height={28}
+                onPress={() => {}}
+                style={styles.historyMoreBtn}
+              />
+            </View>
+          )}
+        </CollapsibleCard>
+      );
+    }
+    return (
+      <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+        <View style={styles.noDataContainer}>
+          <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
+        </View>
+      </CollapsibleCard>
+    );
+  }
+  return (
+    <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
+        <Text>{strings('ITEM.ERROR_PICK_HISTORY')}</Text>
+      </View>
+    </CollapsibleCard>
+  );
+};
+
 export const renderOHChangeHistory = (ohChangeHistory: IOHChangeHistory[], result: any) => {
   if (result && result.status !== MULTI_STATUS) {
     if (ohChangeHistory && ohChangeHistory.length) {
@@ -1043,6 +1093,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             </SFTCard>
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
               itemDetails, isSalesMetricsGraphView)}
+            {renderOHChangeHistory(mockOHChangeHistory, { status: 200 })}
           </View>
           )}
       </ScrollView>

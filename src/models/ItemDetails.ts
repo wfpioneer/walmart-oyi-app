@@ -20,6 +20,26 @@ export interface IOHChangeHistory {
   approvalRequestSource : approvalRequestSource;
 }
 
+export interface IPickHistory {
+  id:number,
+  itemNbr: number,
+  upcNbr: number,
+  itemDesc: string,
+  itemQty: number,
+  category: string,
+  quickPick: boolean,
+  salesFloorLocationName: string,
+  salesFloorLocationId: number,
+  moveToFront: boolean,
+  assignedAssociate: string,
+  palletId: number,
+  palletLocationName: string,
+  palletLocationId: number,
+  status: string,
+  createdBy: string,
+  createTS: string
+}
+
 interface ItemDetails {
   itemName: string;
   itemNbr: number;
@@ -61,7 +81,8 @@ interface ItemDetails {
       value: number;
     }[];
   };
-  ohChangeHistory: IOHChangeHistory[];
+  ohChangeHistory?: IOHChangeHistory[];
+  picklistHistory?: IPickHistory[]
 }
 
 export default ItemDetails;

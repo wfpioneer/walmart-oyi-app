@@ -379,6 +379,39 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
 </View>
 `;
 
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pick history flat list 1`] = `
+<View>
+  <CollapsibleHeaderCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+    toggleIsOpened={[Function]}
+  />
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pick history with error msg for result status 207 1`] = `
+<View>
+  <CollapsibleHeaderCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+    toggleIsOpened={[Function]}
+  />
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pick history with no data for pick msg 1`] = `
+<View>
+  <CollapsibleHeaderCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+    toggleIsOpened={[Function]}
+  />
+</View>
+`;
+
 exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders the barcodeErrorModal isVisible set to False 1`] = `
 <Modal
   animationType="none"
@@ -1965,6 +1998,58 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
+      <CollapsibleCard
+        icon=""
+        isOpened={false}
+        title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+      >
+        <RenderItemHistoryCard
+          date="2022-07-23"
+          qty={55}
+        />
+        <RenderItemHistoryCard
+          date="2022-07-12"
+          qty={44}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-28"
+          qty={34}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-07"
+          qty={33}
+        />
+        <RenderItemHistoryCard
+          date="2022-05-15"
+          qty={23}
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "#ffffffff",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={28}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "width": 60,
+              }
+            }
+            title="[missing \\"en.LOCATION.MORE\\" translation]..."
+            titleColor="#0071e9"
+            titleFontSize={12}
+            titleFontWeight="bold"
+            type={3}
+            width={-1}
+          />
+        </View>
+      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -2716,6 +2801,58 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
+      <CollapsibleCard
+        icon=""
+        isOpened={false}
+        title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+      >
+        <RenderItemHistoryCard
+          date="2022-07-23"
+          qty={55}
+        />
+        <RenderItemHistoryCard
+          date="2022-07-12"
+          qty={44}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-28"
+          qty={34}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-07"
+          qty={33}
+        />
+        <RenderItemHistoryCard
+          date="2022-05-15"
+          qty={23}
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "#ffffffff",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={28}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "width": 60,
+              }
+            }
+            title="[missing \\"en.LOCATION.MORE\\" translation]..."
+            titleColor="#0071e9"
+            titleFontSize={12}
+            titleFontWeight="bold"
+            type={3}
+            width={-1}
+          />
+        </View>
+      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -3104,6 +3241,58 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </Text>
         </View>
       </View>
+      <CollapsibleCard
+        icon=""
+        isOpened={false}
+        title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+      >
+        <RenderItemHistoryCard
+          date="2022-07-23"
+          qty={55}
+        />
+        <RenderItemHistoryCard
+          date="2022-07-12"
+          qty={44}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-28"
+          qty={34}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-07"
+          qty={33}
+        />
+        <RenderItemHistoryCard
+          date="2022-05-15"
+          qty={23}
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "#ffffffff",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={28}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "width": 60,
+              }
+            }
+            title="[missing \\"en.LOCATION.MORE\\" translation]..."
+            titleColor="#0071e9"
+            titleFontSize={12}
+            titleFontWeight="bold"
+            type={3}
+            width={-1}
+          />
+        </View>
+      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -3634,6 +3823,58 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
+      <CollapsibleCard
+        icon=""
+        isOpened={false}
+        title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+      >
+        <RenderItemHistoryCard
+          date="2022-07-23"
+          qty={55}
+        />
+        <RenderItemHistoryCard
+          date="2022-07-12"
+          qty={44}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-28"
+          qty={34}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-07"
+          qty={33}
+        />
+        <RenderItemHistoryCard
+          date="2022-05-15"
+          qty={23}
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "#ffffffff",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={28}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "width": 60,
+              }
+            }
+            title="[missing \\"en.LOCATION.MORE\\" translation]..."
+            titleColor="#0071e9"
+            titleFontSize={12}
+            titleFontWeight="bold"
+            type={3}
+            width={-1}
+          />
+        </View>
+      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -4164,6 +4405,58 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
+      <CollapsibleCard
+        icon=""
+        isOpened={false}
+        title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+      >
+        <RenderItemHistoryCard
+          date="2022-07-23"
+          qty={55}
+        />
+        <RenderItemHistoryCard
+          date="2022-07-12"
+          qty={44}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-28"
+          qty={34}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-07"
+          qty={33}
+        />
+        <RenderItemHistoryCard
+          date="2022-05-15"
+          qty={23}
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "#ffffffff",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={28}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "width": 60,
+              }
+            }
+            title="[missing \\"en.LOCATION.MORE\\" translation]..."
+            titleColor="#0071e9"
+            titleFontSize={12}
+            titleFontWeight="bold"
+            type={3}
+            width={-1}
+          />
+        </View>
+      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -4694,6 +4987,58 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
+      <CollapsibleCard
+        icon=""
+        isOpened={false}
+        title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+      >
+        <RenderItemHistoryCard
+          date="2022-07-23"
+          qty={55}
+        />
+        <RenderItemHistoryCard
+          date="2022-07-12"
+          qty={44}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-28"
+          qty={34}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-07"
+          qty={33}
+        />
+        <RenderItemHistoryCard
+          date="2022-05-15"
+          qty={23}
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "#ffffffff",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={28}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "width": 60,
+              }
+            }
+            title="[missing \\"en.LOCATION.MORE\\" translation]..."
+            titleColor="#0071e9"
+            titleFontSize={12}
+            titleFontWeight="bold"
+            type={3}
+            width={-1}
+          />
+        </View>
+      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -5224,6 +5569,58 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
+      <CollapsibleCard
+        icon=""
+        isOpened={false}
+        title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+      >
+        <RenderItemHistoryCard
+          date="2022-07-23"
+          qty={55}
+        />
+        <RenderItemHistoryCard
+          date="2022-07-12"
+          qty={44}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-28"
+          qty={34}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-07"
+          qty={33}
+        />
+        <RenderItemHistoryCard
+          date="2022-05-15"
+          qty={23}
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "#ffffffff",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={28}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "width": 60,
+              }
+            }
+            title="[missing \\"en.LOCATION.MORE\\" translation]..."
+            titleColor="#0071e9"
+            titleFontSize={12}
+            titleFontWeight="bold"
+            type={3}
+            width={-1}
+          />
+        </View>
+      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -5754,6 +6151,58 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
+      <CollapsibleCard
+        icon=""
+        isOpened={false}
+        title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+      >
+        <RenderItemHistoryCard
+          date="2022-07-23"
+          qty={55}
+        />
+        <RenderItemHistoryCard
+          date="2022-07-12"
+          qty={44}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-28"
+          qty={34}
+        />
+        <RenderItemHistoryCard
+          date="2022-06-07"
+          qty={33}
+        />
+        <RenderItemHistoryCard
+          date="2022-05-15"
+          qty={23}
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "#ffffffff",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={28}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "width": 60,
+              }
+            }
+            title="[missing \\"en.LOCATION.MORE\\" translation]..."
+            titleColor="#0071e9"
+            titleFontSize={12}
+            titleFontWeight="bold"
+            type={3}
+            width={-1}
+          />
+        </View>
+      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity

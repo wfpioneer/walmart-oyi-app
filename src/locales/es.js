@@ -125,7 +125,10 @@ export default {
     ITEM_NUMBER: 'Número de Artículo',
     OH_CHANGE_HISTORY: 'Historial de cambio de existencia',
     NO_OH_CHANGE_HISTORY: 'No hay cambios de existencia disponibles',
-    ERROR_OH_CHANGE_HISTORY: 'Error obteniendo data'
+    ERROR_OH_CHANGE_HISTORY: 'Error obteniendo data',
+    PICK_HISTORY: 'Historial de Picks',
+    NO_PICK_HISTORY: 'No hay historial de Picks disponible',
+    ERROR_PICK_HISTORY: 'Error obteniendo data'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',

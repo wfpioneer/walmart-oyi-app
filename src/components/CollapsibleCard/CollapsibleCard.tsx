@@ -29,12 +29,16 @@ export const CollapsibleHeaderCard = (props: CollapsibleHeaderCardProps): JSX.El
   return (
     <View style={styles.menuContainer}>
       <View style={styles.titleContainer}>
-        <MaterialIcons
-          name={icon}
-          style={{ paddingRight: icon ? 10 : 0 }}
-          size={25}
-          color={COLOR.BLACK}
-        />
+        <Text>
+          {icon && (
+          <MaterialIcons
+            name={icon}
+            style={{ paddingRight: icon ? 10 : 0 }}
+            size={25}
+            color={COLOR.BLACK}
+          />
+          )}
+        </Text>
         <Text style={styles.titleText}>{title}</Text>
       </View>
       <TouchableOpacity

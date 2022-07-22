@@ -12,7 +12,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { AxiosError, AxiosResponse } from 'axios';
 import { object } from 'prop-types';
 import { strings } from '../../locales';
-import itemDetail, { mockOHChangeHistory } from '../../mockData/getItemDetails';
+import itemDetail, { mockOHChangeHistory, pickListMockHistory } from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
   callBackbarcodeEmitter, createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount,
@@ -20,7 +20,7 @@ import ReviewItemDetails, {
   handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError,
   isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateCompleteItemApiErrortHook,
   onValidateCompleteItemApiResultHook, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
-  renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent,
+  renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
   renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
@@ -1237,6 +1237,29 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         renderOHChangeHistory([], { status: 207 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('Tests Rendering \'renderPickHistory\'', () => {
+    it('Renders pick history flat list', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderPickHistory(pickListMockHistory, { status: 200 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders pick history with no data for pick msg', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderPickHistory([], { status: 200 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders pick history with error msg for result status 207', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderPickHistory([], { status: 207 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

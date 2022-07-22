@@ -125,7 +125,10 @@ export default {
     ITEM_NUMBER: '商品号',
     OH_CHANGE_HISTORY: '现货变更历史记录',
     NO_OH_CHANGE_HISTORY: '无历史库存信息可获取',
-    ERROR_OH_CHANGE_HISTORY: '重置数据出错'
+    ERROR_OH_CHANGE_HISTORY: '重置数据出错',
+    PICK_HISTORY: '历史补货清单',
+    NO_PICK_HISTORY: '无补货历史记录',
+    ERROR_PICK_HISTORY: '重置数据出错'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
