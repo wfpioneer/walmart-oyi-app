@@ -26,7 +26,7 @@ const ERROR_FORMATTING_OPTIONS = {
   max: numbers(OH_MAX, { precision: 0 })
 };
 
-export const validateQty = (qty: number) => !!qty && OH_MIN <= qty && qty <= OH_MAX;
+export const validateQty = (qty: number) => OH_MIN <= qty && qty <= OH_MAX;
 export const validateSameQty = (qty: number, newQty: number) => qty === newQty;
 
 export const calculateDecreaseQty = (newOHQty: any,
