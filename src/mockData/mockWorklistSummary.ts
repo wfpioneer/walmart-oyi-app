@@ -1,8 +1,9 @@
-import { WorklistSummary } from '../models/WorklistSummary';
+import { WorklistGoal, WorklistGoalDuration, WorklistSummary } from '../models/WorklistSummary';
 
 export const mockZeroCompleteWorklistSummaries: WorklistSummary[] = [
   {
-    worklistGoal: 'DAILY',
+    worklistGoal: WorklistGoal.ITEMS,
+    worklistGoalDuration: WorklistGoalDuration.DAILY,
     worklistGoalPct: 0,
     worklistEndGoalPct: 90,
     worklistTypes: [
@@ -34,7 +35,8 @@ export const mockZeroCompleteWorklistSummaries: WorklistSummary[] = [
 
 export const mockHalfCompleteWorklistSummaries: WorklistSummary[] = [
   {
-    worklistGoal: 'DAILY',
+    worklistGoal: WorklistGoal.ITEMS,
+    worklistGoalDuration: WorklistGoalDuration.DAILY,
     worklistGoalPct: 50,
     worklistEndGoalPct: 100,
     worklistTypes: [
@@ -66,7 +68,8 @@ export const mockHalfCompleteWorklistSummaries: WorklistSummary[] = [
 
 export const mockAllCompleteWorklistSummaries: WorklistSummary[] = [
   {
-    worklistGoal: 'DAILY',
+    worklistGoal: WorklistGoal.ITEMS,
+    worklistGoalDuration: WorklistGoalDuration.DAILY,
     worklistGoalPct: 100,
     worklistEndGoalPct: 95,
     worklistTypes: [
@@ -100,9 +103,54 @@ export const mockMissingPalletWorklistSummary : WorklistSummary[] = [{
   totalCompletedItems: 1,
   totalItems: 151,
   worklistEndGoalPct: 100,
-  worklistGoal: 'DAILY',
+  worklistGoal: WorklistGoal.PALLETS,
+  worklistGoalDuration: WorklistGoalDuration.DAILY,
   worklistGoalPct: 1,
   worklistTypes: [
     { worklistType: 'MP', totalItems: 0, completedItems: 0 }
   ]
 }];
+
+export const mockItemAndPalletWorklistSummary: WorklistSummary[] = [
+  {
+    worklistGoal: WorklistGoal.ITEMS,
+    worklistGoalDuration: WorklistGoalDuration.DAILY,
+    worklistGoalPct: 50,
+    worklistEndGoalPct: 100,
+    worklistTypes: [
+      {
+        worklistType: 'NSFL',
+        totalItems: 100,
+        completedItems: 50
+      },
+      {
+        worklistType: 'C',
+        totalItems: 50,
+        completedItems: 25
+      },
+      {
+        worklistType: 'NO',
+        totalItems: 14,
+        completedItems: 7
+      },
+      {
+        worklistType: 'NS',
+        totalItems: 24,
+        completedItems: 12
+      }
+    ],
+    totalItems: 188,
+    totalCompletedItems: 94
+  },
+  {
+    totalCompletedItems: 1,
+    totalItems: 151,
+    worklistEndGoalPct: 100,
+    worklistGoal: WorklistGoal.PALLETS,
+    worklistGoalDuration: WorklistGoalDuration.DAILY,
+    worklistGoalPct: 1,
+    worklistTypes: [
+      { worklistType: 'MP', totalItems: 0, completedItems: 0 }
+    ]
+  }
+];

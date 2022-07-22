@@ -12,7 +12,6 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
 import {
-  LaserPaper,
   PrintItemList,
   PrintLocationList,
   PrintQueueAPIMultistatus,
@@ -37,6 +36,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { PRINT_LOCATION_LABELS, PRINT_SIGN } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import { showSnackBar } from '../../state/actions/SnackBar';
+import { getPaperSizeBasedOnCountry } from '../../utils/global';
 
 interface HandlePrintProps {
   dispatch: Dispatch<any>;
@@ -46,6 +46,7 @@ interface HandlePrintProps {
   printingLocationLabels: string;
   selectedPrinter: Printer;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
+  countryCode: string;
 }
 
 interface PrintQueueScreenProps {
@@ -64,6 +65,7 @@ interface PrintQueueScreenProps {
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  countryCode: string;
 }
 
 export const renderPrintItem = (
@@ -126,7 +128,8 @@ export const handlePrint = (props: HandlePrintProps): void => {
     printQueue,
     printingLocationLabels,
     selectedPrinter,
-    dispatch
+    dispatch,
+    countryCode
   } = props;
 
   validateSessionCall(navigation, route.name).then(() => {
@@ -144,6 +147,7 @@ export const handlePrint = (props: HandlePrintProps): void => {
 
       dispatch(printLocationLabel({ printLabelList: printLocationArray }));
     } else {
+      const paperSizeObj = getPaperSizeBasedOnCountry(selectedPrinter?.type, countryCode);
       const printArray: PrintItemList[] = printQueue
         .filter(printItem => printItem.itemType === PrintQueueItemType.ITEM)
         .map(printItem => {
@@ -155,7 +159,7 @@ export const handlePrint = (props: HandlePrintProps): void => {
             qty: signQty,
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore needed because typechecking error
-            code: LaserPaper[paperSize],
+            code: paperSizeObj[paperSize],
             description: paperSize,
             printerMACAddress: selectedPrinter.id,
             isPortablePrinter: false,
@@ -247,7 +251,8 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
     error, setError,
     validateSessionCall,
     trackEventCall,
-    useEffectHook
+    useEffectHook,
+    countryCode
   } = props;
 
   // Navigation Listener
@@ -351,7 +356,8 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
                 printQueue,
                 printingLocationLabels,
                 route,
-                validateSessionCall
+                validateSessionCall,
+                countryCode
               })}
               disabled={printQueue.length < 1}
             />
@@ -366,6 +372,7 @@ export const PrintQueue = (): JSX.Element => {
   const { printQueue, selectedPrinter, printingLocationLabels } = useTypedSelector(state => state.Print);
   const printAPI = useTypedSelector(state => state.async.printSign);
   const printLabelAPI = useTypedSelector(state => state.async.printLocationLabels);
+  const countryCode = useTypedSelector(state => state.User.countryCode);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -389,6 +396,7 @@ export const PrintQueue = (): JSX.Element => {
       trackEventCall={trackEvent}
       validateSessionCall={validateSession}
       useEffectHook={useEffect}
+      countryCode={countryCode}
     />
   );
 };

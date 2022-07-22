@@ -1,5 +1,3 @@
-import { strings } from '../locales';
-
 /* eslint-disable no-shadow */
 export interface Printer {
   type: PrinterType;
@@ -52,8 +50,7 @@ export interface PrintItemList {
   workListTypeCode: string;
 }
 
-// TODO mx wine label code is 'W', when implementing multitenetness need to adjust papersizes for the correct market
-export enum LaserPaper {
+export enum LaserPaperCn {
   'XSmall' = 'X',
   'Small' = 'S',
   'Medium' = 'F',
@@ -61,14 +58,30 @@ export enum LaserPaper {
   'Wine' = 'X'
 }
 
-export enum PortablePaper {
+export enum LaserPaperMx {
+  'XSmall' = 'X',
+  'Small' = 'S',
+  'Medium' = 'F',
+  'Large' = 'H',
+  'Wine' = 'W'
+}
+
+export enum PortablePaperCn {
   'XSmall' = 'j',
   'Small' = 'C',
   'Medium' = 'D',
   'Wine' = 'X'
 }
 
-export type PrintPaperSize = keyof typeof LaserPaper | keyof typeof PortablePaper | '';
+export enum PortablePaperMx {
+  'XSmall' = 'j',
+  'Small' = 'C',
+  'Medium' = 'D',
+  'Wine' = 'W'
+}
+
+export type PrintPaperSize = keyof typeof LaserPaperCn | keyof typeof LaserPaperMx
+| keyof typeof PortablePaperCn |keyof typeof PortablePaperMx | '';
 
 export interface PrintQueueAPIMultistatus {
   itemNbr: number;

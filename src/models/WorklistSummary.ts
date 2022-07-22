@@ -1,5 +1,18 @@
+// eslint-disable-next-line no-shadow
+export enum WorklistGoal {
+  ITEMS = 'ITEMS',
+  PALLETS = 'PALLETS'
+}
+
+// eslint-disable-next-line @typescript-eslint/no-shadow, no-shadow
+export enum WorklistGoalDuration {
+  DAILY = 'DAILY',
+  WEEKLY = 'WEEKLY'
+}
+
 export interface WorklistSummary {
-  worklistGoal: 'DAILY' | 'WEEKLY',
+  worklistGoalDuration: WorklistGoalDuration,
+  worklistGoal: WorklistGoal,
   worklistGoalPct: number,
   worklistEndGoalPct: number,
   worklistTypes: WorklistTypeDetails[],
