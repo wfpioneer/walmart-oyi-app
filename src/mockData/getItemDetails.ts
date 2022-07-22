@@ -1,4 +1,4 @@
-import ItemDetails, { IOHChangeHistory } from '../models/ItemDetails';
+import ItemDetails, { OHChangeHistory } from '../models/ItemDetails';
 import { approvalRequestSource, approvalStatus } from '../models/ApprovalListItem';
 /* eslint-disable quote-props */
 
@@ -581,7 +581,7 @@ export default {
   }
 };
 
-export const mockOHChangeHistory: IOHChangeHistory[] = [
+export const mockOHChangeHistory: OHChangeHistory[] = [
   {
     id: 1,
     itemName: 'test',

@@ -22,7 +22,7 @@ import {
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
-import ItemDetails, { IOHChangeHistory, IPickHistory } from '../../models/ItemDetails';
+import ItemDetails, { OHChangeHistory, PickHistory } from '../../models/ItemDetails';
 import { CollapsibleCard } from '../../components/CollapsibleCard/CollapsibleCard';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
@@ -322,7 +322,7 @@ export const RenderItemHistoryCard = (
 );
 
 const MULTI_STATUS = 207;
-export const renderPickHistory = (pickHistoryList: IPickHistory[], result: any) => {
+export const renderPickHistory = (pickHistoryList: PickHistory[], result: any) => {
   if (result && result.status !== MULTI_STATUS) {
     if (pickHistoryList && pickHistoryList.length) {
       const data = pickHistoryList.length > 5 ? pickHistoryList.slice(-5) : pickHistoryList;
@@ -370,7 +370,7 @@ export const renderPickHistory = (pickHistoryList: IPickHistory[], result: any) 
   );
 };
 
-export const renderOHChangeHistory = (ohChangeHistory: IOHChangeHistory[], result: any) => {
+export const renderOHChangeHistory = (ohChangeHistory: OHChangeHistory[], result: any) => {
   if (result && result.status !== MULTI_STATUS) {
     if (ohChangeHistory && ohChangeHistory.length) {
       const data = ohChangeHistory.sort((a, b) => {
