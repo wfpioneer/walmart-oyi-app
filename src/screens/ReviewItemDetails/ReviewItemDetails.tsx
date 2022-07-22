@@ -113,7 +113,7 @@ export interface RenderProps {
   userConfigs: Configurations;
 }
 
-export interface IHistoryCardProps {
+export interface HistoryCardPropsI {
   date: string;
   qty: number;
 }
@@ -312,29 +312,30 @@ export const updateOHQtyApiHook = (
 };
 
 export const RenderItemHistoryCard = (
-  props: IHistoryCardProps
+  props: HistoryCardPropsI
 ): JSX.Element => (
   <View style={styles.historyCard}>
-    <Text>{props.date}</Text>
+    <Text>{moment(props.date).format('YYYY-MM-DD')}</Text>
     <Text>{props.qty}</Text>
   </View>
 );
 
 const MULTI_STATUS = 207;
-export const renderOHChangeHistory = (pickHistoryList: IOHChangeHistory[], result: any) => {
+export const renderOHChangeHistory = (ohChangeHistory: IOHChangeHistory[], result: any) => {
   if (result && result.status !== MULTI_STATUS) {
-    if (pickHistoryList && pickHistoryList.length) {
-      const data = pickHistoryList.length > 5 ? pickHistoryList.slice(-5) : pickHistoryList;
+    if (ohChangeHistory && ohChangeHistory.length) {
+      const data = ohChangeHistory.sort((a, b) => (
+        moment(a.initiatedTimestamp).isAfter(b.initiatedTimestamp) ? -1 : 1));
       return (
         <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
-          {data.map(item => (
+          {data.slice(0, 5).map(item => (
             <RenderItemHistoryCard
               key={item.id}
               date={item.initiatedTimestamp}
               qty={item.newQuantity}
             />
           ))}
-          {pickHistoryList.length > 5 && (
+          {ohChangeHistory.length > 5 && (
           <View style={styles.moreBtnContainer}>
             <Button
               type={3}

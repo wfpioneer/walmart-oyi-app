@@ -346,7 +346,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Ren
 </TouchableOpacity>
 `;
 
-exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders pick history flat list 1`] = `
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders OH history with error msg for result status 207 1`] = `
 <View>
   <CollapsibleHeaderCard
     icon=""
@@ -357,18 +357,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders pick history with error msg for result status 207 1`] = `
-<View>
-  <CollapsibleHeaderCard
-    icon=""
-    isOpened={false}
-    title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-    toggleIsOpened={[Function]}
-  />
-</View>
-`;
-
-exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders pick history with no data for pick msg 1`] = `
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders OH history with no data for pick msg 1`] = `
 <View>
   <CollapsibleHeaderCard
     icon=""
