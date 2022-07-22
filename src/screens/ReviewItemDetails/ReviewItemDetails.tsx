@@ -54,7 +54,6 @@ import { CreatePickRequest } from '../../services/Picking.service';
 import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
-import itemDetail, { mockOHChangeHistory, pickListMockHistory } from '../../mockData/getItemDetails';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -1093,7 +1092,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             </SFTCard>
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
               itemDetails, isSalesMetricsGraphView)}
-            {renderOHChangeHistory(mockOHChangeHistory, { status: 200 })}
           </View>
           )}
       </ScrollView>
