@@ -19,10 +19,11 @@ const HistoryNavigator = () => {
   const navigateBack = () => {
     navigation.goBack();
   };
+
   const renderCloseButton = () => (
     <TouchableOpacity onPress={navigateBack}>
       <View style={styles.closeButton}>
-        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+        <MaterialCommunityIcon name="close" size={24} color={COLOR.WHITE} />
       </View>
     </TouchableOpacity>
   );
@@ -43,15 +44,7 @@ const HistoryNavigator = () => {
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
-          headerLeft: props => (
-            // Shouldn't need to do this, but not showing on its own for some reason
-            // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
-            <HeaderBackButton
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...props}
-              onPress={navigateBack}
-            />
-          ),
+          headerLeft: () => null,
           headerRight: () => (
             <View>
               {renderCloseButton()}

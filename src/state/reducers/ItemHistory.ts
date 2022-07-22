@@ -20,7 +20,11 @@ export const ItemHistory = (state = initialState, action: Actions) => {
     case SET_PICK_HISTORY:
       return {
         ...state,
-        data: action.payload,
+        data: action.payload.map(itm => ({
+          id: itm.id,
+          date: itm.createTS,
+          qty: itm.itemQty
+        })),
         title: 'ITEM.PICK_HISTORY'
       };
     case CLEAR_ITEM_HISTORY:

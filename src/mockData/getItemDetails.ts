@@ -597,7 +597,7 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '12-05-2022'
+  createTS: '2022-07-23'
 },
 {
   id: 2,
@@ -616,7 +616,7 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '22-05-2022'
+  createTS: '2022-07-19'
 },
 {
   id: 3,
@@ -635,7 +635,7 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '12-07-2022'
+  createTS: '2022-07-20'
 },
 {
   id: 4,
@@ -654,7 +654,7 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '24-06-2022'
+  createTS: '2022-11-05'
 },
 {
   id: 5,
@@ -673,7 +673,7 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '28-05-2022'
+  createTS: '2022-05-23'
 },
 {
   id: 6,
@@ -692,5 +692,5 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '11-05-2022'
+  createTS: '2021-06-23'
 }];

@@ -2,7 +2,7 @@ import React, {
   EffectCallback, RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, BackHandler, FlatList, Platform, RefreshControl, ScrollView, Text, TouchableOpacity,
+  ActivityIndicator, BackHandler, Platform, RefreshControl, ScrollView, Text, TouchableOpacity,
   View
 } from 'react-native';
 import _ from 'lodash';
@@ -54,6 +54,8 @@ import { CreatePickRequest } from '../../services/Picking.service';
 import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { setPickHistory } from '../../state/actions/ItemHistory';
+import itemDetail, { pickListMockHistory } from '../../mockData/getItemDetails';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -316,19 +318,38 @@ export const RenderItemHistoryCard = (
   props: IHistoryCardProps
 ): JSX.Element => (
   <View style={styles.historyCard}>
-    <Text>{props.date}</Text>
+    <Text>{moment(props.date).format('YYYY-MM-DD')}</Text>
     <Text>{props.qty}</Text>
   </View>
 );
 
 const MULTI_STATUS = 207;
-export const renderPickHistory = (pickHistoryList: IPickHistory[], result: any) => {
+
+const onMorePickHistoryClick = (
+  dispatch: Dispatch<any>,
+  pickHistoryList: IPickHistory[],
+  navigation: NavigationProp<any>
+) => {
+  dispatch(setPickHistory(pickHistoryList));
+  navigation.navigate('ItemHistory');
+};
+
+export const renderPickHistory = (
+  dispatch: Dispatch<any>,
+  pickHistoryList: IPickHistory[],
+  navigation: NavigationProp<any>,
+  result: any
+) => {
   if (result && result.status !== MULTI_STATUS) {
     if (pickHistoryList && pickHistoryList.length) {
-      const data = pickHistoryList.length > 5 ? pickHistoryList.slice(-5) : pickHistoryList;
+      const data = pickHistoryList.sort((a, b) => {
+        const date1 = new Date(a.createTS);
+        const date2 = new Date(b.createTS);
+        return date2 > date1 ? 1 : -1;
+      });
       return (
         <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
-          {data.map(item => (
+          {data.slice(0, 5).map(item => (
             <RenderItemHistoryCard
               key={item.id}
               date={item.createTS}
@@ -344,7 +365,7 @@ export const renderPickHistory = (pickHistoryList: IPickHistory[], result: any) 
               titleFontSize={12}
               titleFontWeight="bold"
               height={28}
-              onPress={() => {}}
+              onPress={() => onMorePickHistoryClick(dispatch, data, navigation)}
               style={styles.historyMoreBtn}
             />
           </View>
@@ -1040,6 +1061,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             </SFTCard>
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
               itemDetails, isSalesMetricsGraphView)}
+            {renderPickHistory(dispatch, pickListMockHistory, navigation, result)}
           </View>
           )}
       </ScrollView>
