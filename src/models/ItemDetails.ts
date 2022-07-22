@@ -64,7 +64,7 @@ interface ItemDetails {
   picklistHistory?: IPickHistory[]
 }
 
-export interface IItemHistory {
+export interface ItemHistoryI {
   id: number;
   date: string;
   qty: number;

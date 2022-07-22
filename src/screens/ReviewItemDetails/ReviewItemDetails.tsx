@@ -335,9 +335,8 @@ const onMorePickHistoryClick = (
 };
 
 export const renderPickHistory = (
-  dispatch: Dispatch<any>,
+  props: HandleProps,
   pickHistoryList: IPickHistory[],
-  navigation: NavigationProp<any>,
   result: any
 ) => {
   if (result && result.status !== MULTI_STATUS) {
@@ -365,7 +364,7 @@ export const renderPickHistory = (
               titleFontSize={12}
               titleFontWeight="bold"
               height={28}
-              onPress={() => onMorePickHistoryClick(dispatch, data, navigation)}
+              onPress={() => onMorePickHistoryClick(props.dispatch, data, props.navigation)}
               style={styles.historyMoreBtn}
             />
           </View>
@@ -1061,7 +1060,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             </SFTCard>
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
               itemDetails, isSalesMetricsGraphView)}
-            {renderPickHistory(dispatch, pickListMockHistory, navigation, result)}
+            {renderPickHistory(props, pickListMockHistory, result)}
           </View>
           )}
       </ScrollView>

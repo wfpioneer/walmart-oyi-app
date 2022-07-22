@@ -1,4 +1,4 @@
-import { IItemHistory } from '../../models/ItemDetails';
+import { ItemHistoryI } from '../../models/ItemDetails';
 import {
   Actions,
   CLEAR_ITEM_HISTORY,
@@ -6,7 +6,7 @@ import {
 } from '../actions/ItemHistory';
 
 export interface ItemHistoryState {
-   data: IItemHistory[];
+   data: ItemHistoryI[];
    title: string
   }
 
