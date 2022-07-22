@@ -324,8 +324,11 @@ const MULTI_STATUS = 207;
 export const renderOHChangeHistory = (ohChangeHistory: IOHChangeHistory[], result: any) => {
   if (result && result.status !== MULTI_STATUS) {
     if (ohChangeHistory && ohChangeHistory.length) {
-      const data = ohChangeHistory.sort((a, b) => (
-        moment(a.initiatedTimestamp).isAfter(b.initiatedTimestamp) ? -1 : 1));
+      const data = ohChangeHistory.sort((a, b) => {
+        const date1 = new Date(a.initiatedTimestamp);
+        const date2 = new Date(b.initiatedTimestamp);
+        return date2 > date1 ? 1 : -1;
+      });
       return (
         <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
           {data.slice(0, 5).map(item => (
