@@ -2,9 +2,7 @@ import {
   SagaIteratorClone,
   cloneableGenerator
 } from '@redux-saga/testing-utils';
-import {
-  call, put, select, takeLatest
-} from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosError, AxiosResponse } from 'axios';
 import { makeAsyncSaga } from './makeAsyncSaga';
 import {
