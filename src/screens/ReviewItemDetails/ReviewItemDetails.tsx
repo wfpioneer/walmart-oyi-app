@@ -396,7 +396,7 @@ export const renderOHChangeHistory = (ohChangeHistory: OHChangeHistory[], result
               titleFontSize={12}
               titleFontWeight="bold"
               height={28}
-              onPress={() => {}}
+              onPress={() => {}} // TODO navigation to be handle in ticket 6935
               style={styles.historyMoreBtn}
             />
           </View>
