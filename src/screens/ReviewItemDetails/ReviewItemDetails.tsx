@@ -22,8 +22,8 @@ import {
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
+import ItemDetails, { OHChangeHistory, PickHistory } from '../../models/ItemDetails';
 import { CollapsibleCard } from '../../components/CollapsibleCard/CollapsibleCard';
-import ItemDetails, { IPickHistory } from '../../models/ItemDetails';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import Button from '../../components/buttons/Button';
@@ -55,7 +55,6 @@ import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setPickHistory } from '../../state/actions/ItemHistory';
-import itemDetail, { pickListMockHistory } from '../../mockData/getItemDetails';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -116,7 +115,7 @@ export interface RenderProps {
   userConfigs: Configurations;
 }
 
-export interface IHistoryCardProps {
+export interface HistoryCardPropsI {
   date: string;
   qty: number;
 }
@@ -315,7 +314,7 @@ export const updateOHQtyApiHook = (
 };
 
 export const RenderItemHistoryCard = (
-  props: IHistoryCardProps
+  props: HistoryCardPropsI
 ): JSX.Element => (
   <View style={styles.historyCard}>
     <Text>{moment(props.date).format('YYYY-MM-DD')}</Text>
@@ -327,16 +326,24 @@ const MULTI_STATUS = 207;
 
 const onMorePickHistoryClick = (
   dispatch: Dispatch<any>,
-  pickHistoryList: IPickHistory[],
+  pickHistoryList: PickHistory[],
   navigation: NavigationProp<any>
 ) => {
   dispatch(setPickHistory(pickHistoryList));
   navigation.navigate('ItemHistory');
 };
 
+const onMoreOHChangeHistoryClick = (
+  dispatch: Dispatch<any>,
+  ohHistoryList: OHChangeHistory[],
+  navigation: NavigationProp<any>
+) => {
+  navigation.navigate('ItemHistory');
+};
+
 export const renderPickHistory = (
   props: HandleProps,
-  pickHistoryList: IPickHistory[],
+  pickHistoryList: PickHistory[],
   result: any
 ) => {
   if (result && result.status !== MULTI_STATUS) {
@@ -356,18 +363,18 @@ export const renderPickHistory = (
             />
           ))}
           {pickHistoryList.length > 5 && (
-          <View style={styles.moreBtnContainer}>
-            <Button
-              type={3}
-              title={`${strings('LOCATION.MORE')}...`}
-              titleColor={COLOR.MAIN_THEME_COLOR}
-              titleFontSize={12}
-              titleFontWeight="bold"
-              height={28}
-              onPress={() => onMorePickHistoryClick(props.dispatch, data, props.navigation)}
-              style={styles.historyMoreBtn}
-            />
-          </View>
+            <View style={styles.moreBtnContainer}>
+              <Button
+                type={3}
+                title={`${strings('LOCATION.MORE')}...`}
+                titleColor={COLOR.MAIN_THEME_COLOR}
+                titleFontSize={12}
+                titleFontWeight="bold"
+                height={28}
+                onPress={() => onMorePickHistoryClick(props.dispatch, data, props.navigation)}
+                style={styles.historyMoreBtn}
+              />
+            </View>
           )}
         </CollapsibleCard>
       );
@@ -385,6 +392,58 @@ export const renderPickHistory = (
       <View style={styles.activityIndicator}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
         <Text>{strings('ITEM.ERROR_PICK_HISTORY')}</Text>
+      </View>
+    </CollapsibleCard>
+  );
+};
+
+export const renderOHChangeHistory = (props: HandleProps, ohChangeHistory: OHChangeHistory[], result: any) => {
+  if (result && result.status !== MULTI_STATUS) {
+    if (ohChangeHistory && ohChangeHistory.length) {
+      const data = ohChangeHistory.sort((a, b) => {
+        const date1 = new Date(a.initiatedTimestamp);
+        const date2 = new Date(b.initiatedTimestamp);
+        return date2 > date1 ? 1 : -1;
+      });
+      return (
+        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+          {data.slice(0, 5).map(item => (
+            <RenderItemHistoryCard
+              key={item.id}
+              date={item.initiatedTimestamp}
+              qty={item.newQuantity}
+            />
+          ))}
+          {ohChangeHistory.length > 5 && (
+          <View style={styles.moreBtnContainer}>
+            <Button
+              type={3}
+              title={`${strings('LOCATION.MORE')}...`}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight="bold"
+              height={28}
+              onPress={() => onMoreOHChangeHistoryClick(props.dispatch, data, props.navigation)}
+              style={styles.historyMoreBtn}
+            />
+          </View>
+          )}
+        </CollapsibleCard>
+      );
+    }
+    return (
+      <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+        <View style={styles.noDataContainer}>
+          <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
+        </View>
+      </CollapsibleCard>
+    );
+  }
+  return (
+    <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
+        <Text>{strings('ITEM.ERROR_OH_CHANGE_HISTORY')}</Text>
       </View>
     </CollapsibleCard>
   );
@@ -1060,7 +1119,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             </SFTCard>
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
               itemDetails, isSalesMetricsGraphView)}
-            {renderPickHistory(props, pickListMockHistory, result)}
           </View>
           )}
       </ScrollView>

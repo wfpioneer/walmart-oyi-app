@@ -1,4 +1,5 @@
-import ItemDetails from '../models/ItemDetails';
+import ItemDetails, { OHChangeHistory } from '../models/ItemDetails';
+import { approvalRequestSource, approvalStatus } from '../models/ApprovalListItem';
 /* eslint-disable quote-props */
 
 enum LOCATION_TYPES {
@@ -580,6 +581,116 @@ export default {
   }
 };
 
+export const mockOHChangeHistory: OHChangeHistory[] = [
+  {
+    id: 1,
+    itemName: 'test',
+    itemNbr: 123,
+    upcNbr: 234,
+    categoryNbr: 45,
+    categoryDescription: 'test',
+    subCategoryNbr: 77,
+    subCategoryDescription: '55',
+    oldQuantity: 66,
+    newQuantity: 33,
+    dollarChange: 33.33,
+    daysLeft: 4,
+    initiatedUserId: '4',
+    initiatedTimestamp: '2022-06-07',
+    approvalStatus: approvalStatus.Approved,
+    approvalRequestSource: approvalRequestSource.ItemDetails
+  },
+  {
+    id: 4,
+    initiatedTimestamp: '2022-07-12',
+    newQuantity: 44,
+    itemName: 'test',
+    itemNbr: 123,
+    upcNbr: 234,
+    categoryNbr: 45,
+    categoryDescription: 'test',
+    subCategoryNbr: 77,
+    subCategoryDescription: '55',
+    oldQuantity: 66,
+    dollarChange: 33.33,
+    daysLeft: 4,
+    initiatedUserId: '4',
+    approvalStatus: approvalStatus.Approved,
+    approvalRequestSource: approvalRequestSource.ItemDetails
+  },
+  {
+    id: 5,
+    initiatedTimestamp: '2022-07-23',
+    newQuantity: 55,
+    itemName: 'test',
+    itemNbr: 123,
+    upcNbr: 234,
+    categoryNbr: 45,
+    categoryDescription: 'test',
+    subCategoryNbr: 77,
+    subCategoryDescription: '55',
+    oldQuantity: 66,
+    dollarChange: 33.33,
+    daysLeft: 4,
+    initiatedUserId: '4',
+    approvalStatus: approvalStatus.Approved,
+    approvalRequestSource: approvalRequestSource.ItemDetails
+  },
+  {
+    id: 6,
+    initiatedTimestamp: '2022-05-13',
+    newQuantity: 11,
+    itemName: 'test',
+    itemNbr: 123,
+    upcNbr: 234,
+    categoryNbr: 45,
+    categoryDescription: 'test',
+    subCategoryNbr: 77,
+    subCategoryDescription: '55',
+    oldQuantity: 66,
+    dollarChange: 33.33,
+    daysLeft: 4,
+    initiatedUserId: '4',
+    approvalStatus: approvalStatus.Approved,
+    approvalRequestSource: approvalRequestSource.ItemDetails
+  },
+  {
+    id: 8,
+    initiatedTimestamp: '2022-05-15',
+    newQuantity: 23,
+    itemName: 'test',
+    itemNbr: 123,
+    upcNbr: 234,
+    categoryNbr: 45,
+    categoryDescription: 'test',
+    subCategoryNbr: 77,
+    subCategoryDescription: '55',
+    oldQuantity: 66,
+    dollarChange: 33.33,
+    daysLeft: 4,
+    initiatedUserId: '4',
+    approvalStatus: approvalStatus.Approved,
+    approvalRequestSource: approvalRequestSource.ItemDetails
+  },
+  {
+    id: 7,
+    initiatedTimestamp: '2022-06-28',
+    newQuantity: 34,
+    itemName: 'test',
+    itemNbr: 123,
+    upcNbr: 234,
+    categoryNbr: 45,
+    categoryDescription: 'test',
+    subCategoryNbr: 77,
+    subCategoryDescription: '55',
+    oldQuantity: 66,
+    dollarChange: 33.33,
+    daysLeft: 4,
+    initiatedUserId: '4',
+    approvalStatus: approvalStatus.Approved,
+    approvalRequestSource: approvalRequestSource.ItemDetails
+  }
+];
 export const pickListMockHistory = [{
   id: 1,
   itemNbr: 123,

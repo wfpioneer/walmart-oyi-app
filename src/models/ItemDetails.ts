@@ -1,6 +1,26 @@
 import Location from './Location';
+import { approvalRequestSource, approvalStatus } from './ApprovalListItem';
 
-export interface IPickHistory {
+export interface OHChangeHistory {
+  id : number;
+  itemName : string;
+  itemNbr : number;
+  upcNbr : number;
+  categoryNbr : number;
+  categoryDescription : string;
+  subCategoryNbr : number;
+  subCategoryDescription : string;
+  oldQuantity : number;
+  newQuantity : number;
+  dollarChange : number;
+  daysLeft: number;
+  initiatedUserId : string;
+  initiatedTimestamp : string;
+  approvalStatus : approvalStatus;
+  approvalRequestSource : approvalRequestSource;
+}
+
+export interface PickHistory {
   id:number,
   itemNbr: number,
   upcNbr: number,
@@ -61,7 +81,8 @@ interface ItemDetails {
       value: number;
     }[];
   };
-  picklistHistory?: IPickHistory[]
+  ohChangeHistory?: OHChangeHistory[];
+  picklistHistory?: PickHistory[]
 }
 
 export interface ItemHistoryI {
