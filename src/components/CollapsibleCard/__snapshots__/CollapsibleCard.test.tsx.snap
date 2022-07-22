@@ -24,16 +24,9 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
         }
       }
     >
-      <Icon
-        color="#000000"
-        name=""
-        size={25}
-        style={
-          Object {
-            "paddingRight": 0,
-          }
-        }
-      />
+      <Text>
+        
+      </Text>
       <Text
         style={
           Object {
@@ -98,16 +91,9 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
         }
       }
     >
-      <Icon
-        color="#000000"
-        name=""
-        size={25}
-        style={
-          Object {
-            "paddingRight": 0,
-          }
-        }
-      />
+      <Text>
+        
+      </Text>
       <Text
         style={
           Object {
