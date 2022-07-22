@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the card is closed 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#5a9ae0",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "paddingHorizontal": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <Icon
+        color="#000000"
+        name=""
+        size={25}
+        style={
+          Object {
+            "paddingRight": 0,
+          }
+        }
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        History
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flex": 0.1,
+          "opacity": 1,
+          "paddingLeft": 5,
+        }
+      }
+      testID="collapsible-card"
+    >
+      <Icon
+        color="#000000"
+        name="keyboard-arrow-down"
+        size={25}
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the card is opened 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#5a9ae0",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "paddingHorizontal": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <Icon
+        color="#000000"
+        name=""
+        size={25}
+        style={
+          Object {
+            "paddingRight": 0,
+          }
+        }
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        History
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flex": 0.1,
+          "opacity": 1,
+          "paddingLeft": 5,
+        }
+      }
+      testID="collapsible-card"
+    >
+      <Icon
+        color="#000000"
+        name="keyboard-arrow-up"
+        size={25}
+      />
+    </View>
+  </View>
+  <View>
+    ABC
+  </View>
+</View>
+`;
