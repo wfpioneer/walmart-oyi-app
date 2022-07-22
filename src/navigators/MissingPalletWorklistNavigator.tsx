@@ -1,8 +1,10 @@
 import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity, View } from 'react-native';
+import { HeaderBackButton } from '@react-navigation/elements';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import MissingPalletWorklistTabs from './MissingPalletWorklistTabs/MissingPalletWorklistTabNavigator';
@@ -37,13 +39,25 @@ export const renderScanButton = (
 interface MissingPalletWorklistNavigatorProps {
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
+  palletWorklists: boolean;
+  navigation: NavigationProp<any>;
 }
 
 export const MissingPalletWorklistNavigatorStack = (
   props: MissingPalletWorklistNavigatorProps
 ): JSX.Element => {
-  const { dispatch, isManualScanEnabled } = props;
-  // TODO: Need to add other screens related to Missing Pallet Navigator
+  const {
+    dispatch, isManualScanEnabled, palletWorklists, navigation
+  } = props;
+
+  const navigateBack = () => {
+    if (palletWorklists) {
+      navigation.navigate(strings('WORKLIST.WORKLIST'));
+    } else {
+      navigation.goBack();
+    }
+  };
+
   return (
     <Stack.Navigator
       screenOptions={() => ({
@@ -56,7 +70,14 @@ export const MissingPalletWorklistNavigatorStack = (
         name="MissingPalletWorklistTabs"
         component={MissingPalletWorklistTabs}
         options={{
-          headerTitle: strings('WORKLIST.WORKLIST')
+          headerTitle: strings('WORKLIST.WORKLIST'),
+          headerLeft: hlProps => hlProps.canGoBack && (
+            <HeaderBackButton
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...hlProps}
+              onPress={navigateBack}
+            />
+          )
         }}
       />
       <Stack.Screen
@@ -90,10 +111,14 @@ export const MissingPalletWorklistNavigatorStack = (
 const MissingPalletWorklistNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { palletWorklists } = useTypedSelector(state => state.User.configs);
+  const navigation = useNavigation();
   return (
     <MissingPalletWorklistNavigatorStack
       dispatch={dispatch}
       isManualScanEnabled={isManualScanEnabled}
+      palletWorklists={palletWorklists}
+      navigation={navigation}
     />
   );
 };

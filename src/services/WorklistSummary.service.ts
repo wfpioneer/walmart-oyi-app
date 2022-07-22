@@ -6,7 +6,7 @@ export default class WorklistSummaryService {
     const urls: Environment = getEnvironment();
 
     return Request.get(
-      `${urls.worklistURL}/worklist/summary`,
+      `${urls.worklistURL}/worklist/v1/summary`,
       undefined
     );
   }
