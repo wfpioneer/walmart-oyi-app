@@ -185,6 +185,7 @@ describe('PrintPriceSignScreen', () => {
           useLayoutHook={jest.fn()}
           printerList={mockPrinterList}
           userConfig={mockUserConfig}
+          countryCode="MX"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -225,6 +226,7 @@ describe('PrintPriceSignScreen', () => {
           useLayoutHook={jest.fn()}
           printerList={mockPrinterList}
           userConfig={mockUserConfig}
+          countryCode="MX"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -265,6 +267,7 @@ describe('PrintPriceSignScreen', () => {
           useLayoutHook={jest.fn()}
           printerList={mockPrinterList}
           userConfig={mockUserConfig}
+          countryCode="MX"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -309,6 +312,7 @@ describe('PrintPriceSignScreen', () => {
           useLayoutHook={jest.fn()}
           printerList={mockPrinterList}
           userConfig={mockUserConfig}
+          countryCode="CN"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -351,6 +355,7 @@ describe('PrintPriceSignScreen', () => {
           useLayoutHook={jest.fn()}
           printerList={mockPrinterList}
           userConfig={mockUserConfig}
+          countryCode="MX"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -393,6 +398,7 @@ describe('PrintPriceSignScreen', () => {
         useLayoutHook={jest.fn()}
         printerList={mockPrinterList}
         userConfig={mockUserConfig}
+        countryCode="CN"
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -434,6 +440,7 @@ describe('PrintPriceSignScreen', () => {
         useLayoutHook={jest.fn()}
         printerList={mockPrinterList}
         userConfig={mockUserConfig}
+        countryCode="MX"
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -475,6 +482,7 @@ describe('PrintPriceSignScreen', () => {
         useLayoutHook={jest.fn()}
         printerList={mockPrinterList}
         userConfig={mockUserConfig}
+        countryCode="MX"
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -490,7 +498,8 @@ describe('PrintPriceSignScreen', () => {
           defaultPrinter,
           wineItem.categoryNbr,
           'Wine',
-          jest.fn()
+          jest.fn(),
+          'MX'
         )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -504,7 +513,8 @@ describe('PrintPriceSignScreen', () => {
           defaultPrinter,
           testItem.categoryNbr,
           'XSmall',
-          jest.fn()
+          jest.fn(),
+          'CN'
         )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -524,7 +534,8 @@ describe('PrintPriceSignScreen', () => {
           portablePrinter,
           testItem.categoryNbr,
           'XSmall',
-          jest.fn()
+          jest.fn(),
+          'MX'
         )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -707,10 +718,10 @@ describe('PrintPriceSignScreen', () => {
     });
 
     it('Tests getPrinter function', () => {
-      let printerPaperSize = getPrinter(mockPrinterList[0], 'Small');
+      let printerPaperSize = getPrinter(mockPrinterList[0], 'Small', 'CN');
       expect(printerPaperSize).toStrictEqual('S');
 
-      printerPaperSize = getPrinter(mockPrinterListNoLaser[0], 'Small');
+      printerPaperSize = getPrinter(mockPrinterListNoLaser[0], 'Small', 'MX');
       expect(printerPaperSize).toStrictEqual('C');
     });
 
@@ -906,7 +917,8 @@ describe('PrintPriceSignScreen', () => {
         1,
         123456,
         'Small',
-        'C'
+        'C',
+        'MX'
       );
       expect(validateSession).toHaveBeenCalled();
     });
@@ -954,6 +966,7 @@ describe('PrintPriceSignScreen', () => {
           useLayoutHook={jest.fn()}
           printerList={mockPrinterList}
           userConfig={mockUserConfig}
+          countryCode="MX"
         />
       );
       const addPrintQueueButton = getByText(strings('PRINT.ADD_TO_QUEUE'));

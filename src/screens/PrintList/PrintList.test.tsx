@@ -40,6 +40,7 @@ describe('PrintListScreen', () => {
     error: null,
     result: null
   };
+  const mockCountryCode = 'MX';
   describe('Test rendering items in the PrintListScreen', () => {
     it('Renders the default empty PrintListScreen', () => {
       renderer.render(
@@ -56,6 +57,7 @@ describe('PrintListScreen', () => {
           printingLocationLabels=""
           itemIndexToEdit={-1}
           setItemIndexToEdit={jest.fn()}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -76,6 +78,7 @@ describe('PrintListScreen', () => {
           printingLocationLabels=""
           itemIndexToEdit={-1}
           setItemIndexToEdit={jest.fn()}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -96,6 +99,7 @@ describe('PrintListScreen', () => {
           printingLocationLabels=""
           itemIndexToEdit={-1}
           setItemIndexToEdit={jest.fn()}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -117,6 +121,7 @@ describe('PrintListScreen', () => {
           printingLocationLabels=""
           itemIndexToEdit={singleItemToEdit}
           setItemIndexToEdit={jest.fn()}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -151,6 +156,7 @@ describe('PrintListScreen', () => {
           printingLocationLabels=""
           itemIndexToEdit={-1}
           setItemIndexToEdit={jest.fn()}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -170,6 +176,7 @@ describe('PrintListScreen', () => {
           printingLocationLabels=""
           itemIndexToEdit={-1}
           setItemIndexToEdit={jest.fn()}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
