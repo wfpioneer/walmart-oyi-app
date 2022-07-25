@@ -64,7 +64,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           areas: action.payload.areas || [],
           enableAreaFilter: action.payload.enableAreaFilter || false,
           palletWorklists: action.payload.palletWorklists || false,
-          additionalItemDetails: action.payload.additionalItemDetails || false
+          additionalItemDetails: action.payload.addtItemDetails || false
         }
       };
     default:

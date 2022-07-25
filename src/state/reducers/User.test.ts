@@ -36,12 +36,16 @@ describe('testing User reducer', () => {
       areas: mockAreas,
       enableAreaFilter: false,
       palletWorklists: false,
-      additionalItemDetails: false
+      addtItemDetails: false
     };
     const testConfig = { ...mockConfig, locMgmtEdit: false };
     testChangedState = {
       ...initialState,
-      configs: { ...omit(mockConfig, 'locMgmtEdit'), locationManagementEdit: false }
+      configs: {
+        ...omit(mockConfig, ['locMgmtEdit', 'addtItemDetails']),
+        locationManagementEdit: false,
+        additionalItemDetails: false
+      }
     };
     testResults = UserReducer(testInitialState, setConfigs(testConfig));
     expect(testResults).toStrictEqual(testChangedState);
