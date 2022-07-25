@@ -2,7 +2,7 @@
 import {
   call, put, select, takeLatest
 } from 'redux-saga/effects';
-import _ from 'lodash';
+import noop from 'lodash/noop';
 import { AxiosError, AxiosResponse } from 'axios';
 import moment from 'moment';
 import { GenericActionTypes } from '../../actions/generic/makeAsyncActions';
@@ -14,7 +14,7 @@ export function makeAsyncSaga<Q = any, R = AxiosResponse, E = AxiosError>(
   opActions: GenericActionTypes<Q, R>,
   service: (payload: any) => Promise<R>,
   selector: AsyncSelector<Q, R, E> = asyncSelector,
-  handleError = _.noop
+  handleError = noop
 ) { /* Set payload to type "any" because a generic type parameter (Q = any)
         is recognized as type "never" allowing no params to be passed */
   function* worker(initiationAction: { type: string; payload: any }) {
@@ -26,7 +26,7 @@ export function makeAsyncSaga<Q = any, R = AxiosResponse, E = AxiosError>(
     /* Tracks the request payload data that is sent from saga.ts Actions.
        New payload data should be added here for tracking if they don't already exist
     */
-    const eventParams = {
+    const eventParams = { // refactor to retrieve payload keys
       apiName: eventName,
       itemNbr: payload?.itemNbr || payload?.id,
       duration: payload?.duration,
@@ -86,5 +86,5 @@ export function makeAsyncSaga<Q = any, R = AxiosResponse, E = AxiosError>(
     yield takeLatest(INITIATOR, worker);
   }
 
-  return watcher;
+  return { watcher, worker };
 }
