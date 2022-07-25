@@ -27,7 +27,8 @@ export enum approvalStatus {
   'Pending' = 'Pending',
   'Approved' = 'Approved',
   'Rejected' = 'Rejected',
-  'Expired' = 'Expired'
+  'Expired' = 'Expired',
+  'Outdated' = 'Outdated'
 }
 export enum approvalRequestSource {
   'ItemDetails' = 'itemdetails',
