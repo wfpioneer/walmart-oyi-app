@@ -50,7 +50,7 @@ const renderAdditionalItemDetails = (additionalItemDetails: AdditionalItemDetail
           </View>
           <View style={styles.ViewPadding}>
             <Text style={styles.contentText}>{vendorPackQty}</Text>
-            <Text style={styles.contentText}>{basePrice ? `$${basePrice}` : ''}</Text>
+            <Text style={styles.contentText}>{`$${basePrice}`}</Text>
           </View>
         </View>
         <View style={styles.contentView}>
@@ -60,7 +60,7 @@ const renderAdditionalItemDetails = (additionalItemDetails: AdditionalItemDetail
           </View>
           <View style={styles.ViewPadding}>
             <Text style={styles.contentText}>{color}</Text>
-            <Text style={styles.contentText}>{margin ? `$${margin}` : ''}</Text>
+            <Text style={styles.contentText}>{`$${margin}`}</Text>
           </View>
         </View>
         <View style={styles.contentView}>
@@ -70,7 +70,7 @@ const renderAdditionalItemDetails = (additionalItemDetails: AdditionalItemDetail
           </View>
           <View style={styles.ViewPadding}>
             <Text style={styles.contentText}>{size}</Text>
-            <Text style={styles.contentText}>{grossProfit ? `$${grossProfit}` : ''}</Text>
+            <Text style={styles.contentText}>{`$${grossProfit}`}</Text>
           </View>
         </View>
       </View>

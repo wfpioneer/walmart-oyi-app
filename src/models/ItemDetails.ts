@@ -64,6 +64,7 @@ interface ItemDetails {
   color: string;
   grossProfit: number;
   vendorPackQty: number;
+  margin: number;
   replenishment: {
     onOrder: number;
   };

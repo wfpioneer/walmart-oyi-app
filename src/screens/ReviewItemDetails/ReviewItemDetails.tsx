@@ -1059,7 +1059,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               showAdditionalItemDetails={userConfigs.additionalItemDetails}
               additionalItemDetails={{
                 color: itemDetails.color,
-                margin: itemDetails.price,
+                margin: itemDetails.margin,
                 vendorPackQty: itemDetails.vendorPackQty,
                 grossProfit: itemDetails.grossProfit,
                 size: itemDetails.size,
