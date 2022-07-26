@@ -128,7 +128,14 @@ export default {
     ERROR_OH_CHANGE_HISTORY: '重置数据出错',
     PICK_HISTORY: '历史补货清单',
     NO_PICK_HISTORY: '无补货历史记录',
-    ERROR_PICK_HISTORY: '重置数据出错'
+    ERROR_PICK_HISTORY: '重置数据出错',
+    ADDITIONAL_ITEM_DETAILS: '其它商品信息',
+    VENDOR_PACK: '供应商包装',
+    COLOR: '整版库存量',
+    SIZE: 'Ti-Hi',
+    PRICE_BEFORE_TAX: '税前零售',
+    MARGIN: '利润',
+    GROSS_PROFIT: '毛利'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
