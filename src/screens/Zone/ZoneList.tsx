@@ -147,7 +147,7 @@ export const ZoneScreen = (props: ZoneProps): JSX.Element => {
   useEffectHook(() => {
     // on api success
     if (!getZoneApi.isWaiting && getZoneApi.result) {
-      dispatch(setZones(getZoneApi.result.data));
+      dispatch(setZones(getZoneApi.result.data || []));
       setIsLoading(false);
     }
 
