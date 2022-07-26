@@ -55,6 +55,7 @@ import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setPickHistory } from '../../state/actions/ItemHistory';
+import itemDetail, { mockOHChangeHistory, pickListMockHistory } from '../../mockData/getItemDetails';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -338,7 +339,7 @@ const onMoreOHChangeHistoryClick = (
   ohHistoryList: OHChangeHistory[],
   navigation: NavigationProp<any>
 ) => {
-  navigation.navigate('ItemHistory');
+  navigation.navigate('ReviewItemDetails', { screen: 'ItemHistory' });
 };
 
 export const renderPickHistory = (
@@ -1119,6 +1120,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             </SFTCard>
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
               itemDetails, isSalesMetricsGraphView)}
+            {renderPickHistory(props, pickListMockHistory, { status: 200 })}
           </View>
           )}
       </ScrollView>

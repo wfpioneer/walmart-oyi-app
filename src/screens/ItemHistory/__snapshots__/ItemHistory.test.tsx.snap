@@ -3,7 +3,20 @@
 exports[`Tests Rendering Renders item history flat list 1`] = `
 <View>
   <RCTScrollView
-    data={Array []}
+    data={
+      Array [
+        Object {
+          "date": "2022-07-23",
+          "id": 1,
+          "qty": 22,
+        },
+        Object {
+          "date": "2022-07-19",
+          "id": 2,
+          "qty": 30,
+        },
+      ]
+    }
     getItem={[Function]}
     getItemCount={[Function]}
     keyExtractor={[Function]}
@@ -20,7 +33,58 @@ exports[`Tests Rendering Renders item history flat list 1`] = `
     stickyHeaderIndices={Array []}
     viewabilityConfigCallbackPairs={Array []}
   >
-    <View />
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ffffffff",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "marginBottom": 2,
+              "paddingHorizontal": 10,
+              "paddingVertical": 5,
+            }
+          }
+        >
+          <Text>
+            2022-07-23
+          </Text>
+          <Text>
+            22
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ffffffff",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "marginBottom": 2,
+              "paddingHorizontal": 10,
+              "paddingVertical": 5,
+            }
+          }
+        >
+          <Text>
+            2022-07-19
+          </Text>
+          <Text>
+            30
+          </Text>
+        </View>
+      </View>
+    </View>
   </RCTScrollView>
 </View>
 `;

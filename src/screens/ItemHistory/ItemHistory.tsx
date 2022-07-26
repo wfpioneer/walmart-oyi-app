@@ -3,10 +3,15 @@ import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { ItemHistoryState } from '../../state/reducers/ItemHistory';
+import { ItemHistoryI } from '../../models/ItemDetails';
 import styles from './ItemHistory.style';
 
-const ItemHistory = () => {
-  const { data } = useTypedSelector(state => state.ItemHistory) as ItemHistoryState;
+interface ItemHistoryProps {
+  data: ItemHistoryI[]
+}
+
+export const ItemHistoryScreen = (props: ItemHistoryProps) => {
+  const { data } = props;
   const today = new Date();
   const dateBefSixMonth = new Date(today.getTime() - (180 * 24 * 60 * 60 * 1000));
   const sortedData = data.filter(item => new Date(item.date) > dateBefSixMonth)
@@ -28,6 +33,13 @@ const ItemHistory = () => {
         )}
       />
     </View>
+  );
+};
+
+const ItemHistory = () => {
+  const { data } = useTypedSelector(state => state.ItemHistory) as ItemHistoryState;
+  return (
+    <ItemHistoryScreen data={data} />
   );
 };
 

@@ -1,15 +1,20 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import { Provider } from 'react-redux';
-import ItemHistory from './ItemHistory';
-import store from '../../state/index';
+import { ItemHistoryScreen } from './ItemHistory';
 
 describe('Tests Rendering', () => {
   it('Renders item history flat list', () => {
+    const data = [{
+      id: 1,
+      date: '2022-07-23',
+      qty: 22
+    }, {
+      id: 2,
+      date: '2022-07-19',
+      qty: 30
+    }];
     const component = (
-      <Provider store={store}>
-        <ItemHistory />
-      </Provider>
+      <ItemHistoryScreen data={data} />
     );
     const { toJSON } = render(component);
     expect(toJSON()).toMatchSnapshot();

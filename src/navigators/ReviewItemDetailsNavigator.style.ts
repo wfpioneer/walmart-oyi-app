@@ -26,5 +26,11 @@ export default StyleSheet.create({
     width: 25,
     height: 25,
     marginRight: 10
+  },
+  closeButton: {
+    flex: 1,
+    width: 55,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

@@ -29,7 +29,7 @@ export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
       itemDescription
     });
     dispatch(setScannedEvent({ type: 'worklist', value: itemNumber.toString() }));
-    navigation.navigate('ReviewItemDetails');
+    navigation.navigate('ReviewItemDetails', { screen: 'ReviewItemDetailsHome' });
   };
 
   return (

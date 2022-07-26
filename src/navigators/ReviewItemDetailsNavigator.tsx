@@ -18,12 +18,14 @@ import { showInfoModal } from '../state/actions/Modal';
 import { openCamera } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
 import { GET_ITEM_DETAILS } from '../state/actions/asyncAPI';
+import ItemHistory from '../screens/ItemHistory/ItemHistory';
 
 const Stack = createStackNavigator();
 
 const ReviewItemDetailsNavigator = () => {
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
+  const { title } = useTypedSelector(state => state.ItemHistory);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -74,6 +76,16 @@ const ReviewItemDetailsNavigator = () => {
     return navigation.goBack();
   };
 
+  const navigateHistoryBack = () => navigation.navigate('ReviewItemDetailsHome');
+
+  const renderCloseButton = () => (
+    <TouchableOpacity onPress={navigateHistoryBack}>
+      <View style={styles.closeButton}>
+        <MaterialCommunityIcon name="close" size={24} color={COLOR.WHITE} />
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -83,7 +95,7 @@ const ReviewItemDetailsNavigator = () => {
       }}
     >
       <Stack.Screen
-        name="ReviewItemDetails"
+        name="ReviewItemDetailsHome"
         component={ReviewItemDetails}
         options={{
           headerTitle: strings('ITEM.TITLE'),
@@ -149,6 +161,22 @@ const ReviewItemDetailsNavigator = () => {
           headerRight: () => (
             <View style={styles.headerContainer}>
               {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
+            </View>
+          )
+        }}
+      />
+      <Stack.Screen
+        name="ItemHistory"
+        component={ItemHistory}
+        options={{
+          headerTitle: strings(title),
+          headerTitleAlign: 'left',
+          headerTitleStyle: { fontSize: 18 },
+          headerBackTitleVisible: false,
+          headerLeft: () => null,
+          headerRight: () => (
+            <View>
+              {renderCloseButton()}
             </View>
           )
         }}
