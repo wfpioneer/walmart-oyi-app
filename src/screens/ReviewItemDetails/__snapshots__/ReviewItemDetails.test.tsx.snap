@@ -1283,7 +1283,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "justifyContent": "space-between",
-        "paddingBottom": 2,
         "paddingVertical": 14,
       }
     }
@@ -1376,7 +1375,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "justifyContent": "space-between",
-        "paddingBottom": 2,
         "paddingVertical": 14,
       }
     }
@@ -1384,7 +1382,9 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     <Text>
       [missing "en.ITEM.RESERVE" translation]
     </Text>
-    <Text />
+    <Text>
+      A1-1
+    </Text>
   </View>
   <View
     style={
@@ -1447,7 +1447,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "justifyContent": "space-between",
-        "paddingBottom": 2,
         "paddingVertical": 14,
       }
     }
@@ -1455,7 +1454,9 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     <Text>
       [missing "en.ITEM.RESERVE" translation]
     </Text>
-    <Text />
+    <Text>
+      A1-1
+    </Text>
   </View>
   <View
     style={
@@ -1528,7 +1529,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "justifyContent": "space-between",
-        "paddingBottom": 2,
         "paddingVertical": 14,
       }
     }
@@ -1885,7 +1885,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
-                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -1893,7 +1892,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text />
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -2640,7 +2641,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
-                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -2648,7 +2648,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text />
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -3166,7 +3168,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
-                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -3174,7 +3175,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text />
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -3553,7 +3556,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
-                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -3561,7 +3563,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text />
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -4083,7 +4087,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
-                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -4091,7 +4094,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text />
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -4613,7 +4618,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
-                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -4621,7 +4625,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text />
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -5143,7 +5149,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
-                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -5151,7 +5156,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text />
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -5673,7 +5680,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
-                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -5681,7 +5687,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text />
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={

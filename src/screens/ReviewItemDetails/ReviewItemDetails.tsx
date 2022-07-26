@@ -525,10 +525,10 @@ export const renderLocationComponent = (
             />
           )}
       </View>
-      <View style={{ ...styles.locationDetailsContainer, paddingBottom: 2 }}>
+      <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.RESERVE')}</Text>
         {reserveLocations && reserveLocations.length >= 1
-          ? <Text />
+          ? <Text>{reserveLocations[0].locationName}</Text>
           : (
             <Button
               type={3}
