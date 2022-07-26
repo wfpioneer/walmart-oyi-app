@@ -338,7 +338,7 @@ const onMoreOHChangeHistoryClick = (
   ohHistoryList: OHChangeHistory[],
   navigation: NavigationProp<any>
 ) => {
-  navigation.navigate('ReviewItemDetails', { screen: 'ItemHistory' });
+  navigation.navigate('ItemHistory');
 };
 
 export const renderPickHistory = (
