@@ -23,7 +23,10 @@ const mockUser: User = {
     picking: true,
     printingUpdate: true,
     settingsTool: true,
-    areas: mockAreas
+    areas: mockAreas,
+    enableAreaFilter: false,
+    palletWorklists: false,
+    additionalItemDetails: false
   },
   countryCode: 'US',
   domain: 'Home Office',

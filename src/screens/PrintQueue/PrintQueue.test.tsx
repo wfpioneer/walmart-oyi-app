@@ -33,6 +33,7 @@ describe('PrintQueueScreen', () => {
     error: false,
     message: ''
   };
+  const mockCountryCode = 'CN';
 
   describe('Test rendering items in printQueue', () => {
     it('Renders Empty Print list for Zero Items in queue', () => {
@@ -53,6 +54,7 @@ describe('PrintQueueScreen', () => {
         trackEventCall={jest.fn()}
         validateSessionCall={jest.fn(() => Promise.resolve())}
         useEffectHook={jest.fn()}
+        countryCode={mockCountryCode}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -75,6 +77,7 @@ describe('PrintQueueScreen', () => {
         trackEventCall={jest.fn()}
         validateSessionCall={jest.fn(() => Promise.resolve())}
         useEffectHook={jest.fn()}
+        countryCode={mockCountryCode}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -106,6 +109,7 @@ describe('PrintQueueScreen', () => {
         trackEventCall={jest.fn()}
         validateSessionCall={jest.fn(() => Promise.resolve())}
         useEffectHook={jest.fn()}
+        countryCode={mockCountryCode}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -134,6 +138,7 @@ describe('PrintQueueScreen', () => {
         trackEventCall={jest.fn()}
         validateSessionCall={jest.fn(() => Promise.resolve())}
         useEffectHook={jest.fn()}
+        countryCode={mockCountryCode}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -162,6 +167,7 @@ describe('PrintQueueScreen', () => {
         trackEventCall={jest.fn()}
         validateSessionCall={jest.fn(() => Promise.resolve())}
         useEffectHook={jest.fn()}
+        countryCode={mockCountryCode}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -176,7 +182,8 @@ describe('PrintQueueScreen', () => {
         printQueue: [],
         route: { key: '', name: 'TEST' },
         selectedPrinter: defaultPrinter,
-        printingLocationLabels: ''
+        printingLocationLabels: '',
+        countryCode: mockCountryCode
       });
 
       expect(dispatch).toHaveBeenCalled();
@@ -190,7 +197,8 @@ describe('PrintQueueScreen', () => {
         printQueue: [],
         route: { key: '', name: 'TEST' },
         selectedPrinter: defaultPrinter,
-        printingLocationLabels: ''
+        printingLocationLabels: '',
+        countryCode: mockCountryCode
       });
 
       expect(validateSessionCall).toHaveBeenCalled();
