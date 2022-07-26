@@ -3,6 +3,8 @@ import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
 import { PrintItemList, PrintLocationList, PrintPalletList } from '../models/Printer';
 
+const TIMEOUT = 15000;
+
 export default class PrintService {
   public static print(payload: {
     headers?: AxiosRequestHeaders;
@@ -12,7 +14,7 @@ export default class PrintService {
     return Request.post(
       `${urls.orchestrationURL}/print/price-sign`,
       payload.printList,
-      { headers: payload.headers }
+      { headers: payload.headers, timeout: TIMEOUT }
     );
   }
 
@@ -25,7 +27,8 @@ export default class PrintService {
       `${urls.printingUrl}/print/location-sign`,
       payload.printLabelList,
       {
-        headers: payload.headers
+        headers: payload.headers,
+        timeout: TIMEOUT
       }
     );
   }
@@ -39,7 +42,8 @@ export default class PrintService {
       `${urls.printingUrl}/print/pallet`,
       payload.printPalletList,
       {
-        headers: payload.headers
+        headers: payload.headers,
+        timeout: TIMEOUT
       }
     );
   }
