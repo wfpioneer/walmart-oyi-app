@@ -334,8 +334,6 @@ const onMorePickHistoryClick = (
 };
 
 const onMoreOHChangeHistoryClick = (
-  dispatch: Dispatch<any>,
-  ohHistoryList: OHChangeHistory[],
   navigation: NavigationProp<any>
 ) => {
   navigation.navigate('ItemHistory');
@@ -423,7 +421,7 @@ export const renderOHChangeHistory = (props: HandleProps, ohChangeHistory: OHCha
               titleFontSize={12}
               titleFontWeight="bold"
               height={28}
-              onPress={() => onMoreOHChangeHistoryClick(props.dispatch, data, props.navigation)}
+              onPress={() => onMoreOHChangeHistoryClick(props.navigation)}
               style={styles.historyMoreBtn}
             />
           </View>

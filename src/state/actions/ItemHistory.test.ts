@@ -4,11 +4,11 @@ import {
   clearHistory,
   setPickHistory
 } from './ItemHistory';
-import { IPickHistory } from '../../models/ItemDetails';
+import { PickHistory } from '../../models/ItemDetails';
 
 describe('test action creators for ItemHistory', () => {
   it('test action creators for ItemHistory', () => {
-    const data: IPickHistory[] = [{
+    const data: PickHistory[] = [{
       id: 1,
       itemNbr: 123,
       upcNbr: 12,

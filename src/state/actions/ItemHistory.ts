@@ -1,9 +1,9 @@
-import { IPickHistory } from '../../models/ItemDetails';
+import { PickHistory } from '../../models/ItemDetails';
 
 export const SET_PICK_HISTORY = 'ITEM_HISTORY/SET_PICK_HISTORY';
 export const CLEAR_ITEM_HISTORY = 'ITEM_HISTORY/CLEAR_ITEM_HISTORY';
 
-export const setPickHistory = (data: IPickHistory[]) => ({
+export const setPickHistory = (data: PickHistory[]) => ({
   type: SET_PICK_HISTORY,
   payload: data
 } as const);
