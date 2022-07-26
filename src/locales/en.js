@@ -443,7 +443,7 @@ export default {
     UPDATE_PICK_FAILED_TRY_AGAIN: 'Failed to update pick. Please try again',
     UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available',
-    PICK_HISTORY: 'Pick History'
+    ADDITIONAL_ITEMS: 'Pallet contains additional items'
   },
   BINNING: {
     BINNING: 'Binning',
