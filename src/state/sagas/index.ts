@@ -82,5 +82,5 @@ const genericSagas = [
 ];
 
 export default function* rootSaga() {
-  yield all(genericSagas.map(genericSaga => call(genericSaga)));
+  yield all(genericSagas.map(genericSaga => call(genericSaga.watcher)));
 }
