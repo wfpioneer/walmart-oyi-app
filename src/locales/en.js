@@ -128,7 +128,14 @@ export default {
     ERROR_OH_CHANGE_HISTORY: 'Error retrieving data',
     PICK_HISTORY: 'Pick History',
     NO_PICK_HISTORY: 'No pick history available',
-    ERROR_PICK_HISTORY: 'Error retrieving data'
+    ERROR_PICK_HISTORY: 'Error retrieving data',
+    ADDITIONAL_ITEM_DETAILS: 'Additional Item Details',
+    VENDOR_PACK: 'Vendor Pack',
+    COLOR: 'Color',
+    SIZE: 'Size',
+    PRICE_BEFORE_TAX: 'Price Before Tax',
+    MARGIN: 'Margin',
+    GROSS_PROFIT: 'Gross Profit'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

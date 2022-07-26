@@ -28,7 +28,8 @@ export const initialState: User = {
     picking: false,
     areas: [],
     enableAreaFilter: false,
-    palletWorklists: false
+    palletWorklists: false,
+    additionalItemDetails: false
   }
 };
 
@@ -62,7 +63,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           picking: action.payload.picking,
           areas: action.payload.areas || [],
           enableAreaFilter: action.payload.enableAreaFilter || false,
-          palletWorklists: action.payload.palletWorklists || false
+          palletWorklists: action.payload.palletWorklists || false,
+          additionalItemDetails: action.payload.addtItemDetails || false
         }
       };
     default:

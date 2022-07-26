@@ -128,7 +128,14 @@ export default {
     ERROR_OH_CHANGE_HISTORY: 'Error obteniendo data',
     PICK_HISTORY: 'Historial de Picks',
     NO_PICK_HISTORY: 'No hay historial de Picks disponible',
-    ERROR_PICK_HISTORY: 'Error obteniendo data'
+    ERROR_PICK_HISTORY: 'Error obteniendo data',
+    ADDITIONAL_ITEM_DETAILS: 'Detalles de artículo adicionales',
+    VENDOR_PACK: 'Vendor Pack',
+    COLOR: 'Color',
+    SIZE: 'Tamaño',
+    PRICE_BEFORE_TAX: 'Precio sin Impuesto',
+    MARGIN: 'Margen',
+    GROSS_PROFIT: 'Ganancia Bruta'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',

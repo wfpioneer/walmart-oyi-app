@@ -60,6 +60,11 @@ interface ItemDetails {
   backroomQty: number;
   cloudQty?: number;
   inTransitCloudQty?: number;
+  size: number;
+  color: string;
+  grossProfit: number;
+  vendorPackQty: number;
+  margin: number;
   replenishment: {
     onOrder: number;
   };
@@ -81,6 +86,10 @@ interface ItemDetails {
       value: number;
     }[];
   };
+  deliveries: {
+    date: string;
+    qty: number;
+  }[];
   ohChangeHistory?: OHChangeHistory[];
   picklistHistory?: PickHistory[]
 }
