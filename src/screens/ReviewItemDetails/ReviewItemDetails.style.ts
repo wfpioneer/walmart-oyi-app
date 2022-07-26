@@ -135,6 +135,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     backgroundColor: COLOR.WHITE
+  },
+  reserveLoc: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: COLOR.WHITE,
+    paddingLeft: 2,
+    paddingRight: 3,
+    paddingVertical: 3
   }
 });
 

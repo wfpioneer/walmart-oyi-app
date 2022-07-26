@@ -412,6 +412,91 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
 </View>
 `;
 
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderReserveLocQtys' Renders reserve location list 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingLeft": 2,
+        "paddingRight": 3,
+        "paddingVertical": 3,
+      }
+    }
+  >
+    <Text>
+      A1-1
+    </Text>
+    <Text>
+      10
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingLeft": 2,
+        "paddingRight": 3,
+        "paddingVertical": 3,
+      }
+    }
+  >
+    <Text>
+      A1-2
+    </Text>
+    <Text>
+      20
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingLeft": 2,
+        "paddingRight": 3,
+        "paddingVertical": 3,
+      }
+    }
+  >
+    <Text>
+      B1-1
+    </Text>
+    <Text>
+      30
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingLeft": 2,
+        "paddingRight": 3,
+        "paddingVertical": 3,
+      }
+    }
+  >
+    <Text>
+      D1-1
+    </Text>
+    <Text>
+      50
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders the barcodeErrorModal isVisible set to False 1`] = `
 <Modal
   animationType="none"
@@ -1198,6 +1283,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "justifyContent": "space-between",
+        "paddingBottom": 2,
         "paddingVertical": 14,
       }
     }
@@ -1290,6 +1376,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "justifyContent": "space-between",
+        "paddingBottom": 2,
         "paddingVertical": 14,
       }
     }
@@ -1297,9 +1384,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     <Text>
       [missing "en.ITEM.RESERVE" translation]
     </Text>
-    <Text>
-      A1-1
-    </Text>
+    <Text />
   </View>
   <View
     style={
@@ -1362,6 +1447,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "justifyContent": "space-between",
+        "paddingBottom": 2,
         "paddingVertical": 14,
       }
     }
@@ -1369,9 +1455,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     <Text>
       [missing "en.ITEM.RESERVE" translation]
     </Text>
-    <Text>
-      A1-1
-    </Text>
+    <Text />
   </View>
   <View
     style={
@@ -1444,6 +1528,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "justifyContent": "space-between",
+        "paddingBottom": 2,
         "paddingVertical": 14,
       }
     }
@@ -1800,6 +1885,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
+                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -1807,9 +1893,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text>
-              A1-1
-            </Text>
+            <Text />
           </View>
           <View
             style={
@@ -1920,6 +2004,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -2555,6 +2640,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
+                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -2562,9 +2648,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text>
-              A1-1
-            </Text>
+            <Text />
           </View>
           <View
             style={
@@ -2675,6 +2759,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 20,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -3081,6 +3166,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
+                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -3088,9 +3174,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text>
-              A1-1
-            </Text>
+            <Text />
           </View>
           <View
             style={
@@ -3469,6 +3553,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
+                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -3476,9 +3561,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text>
-              A1-1
-            </Text>
+            <Text />
           </View>
           <View
             style={
@@ -3589,6 +3672,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -3999,6 +4083,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
+                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -4006,9 +4091,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text>
-              A1-1
-            </Text>
+            <Text />
           </View>
           <View
             style={
@@ -4119,6 +4202,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -4529,6 +4613,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
+                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -4536,9 +4621,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text>
-              A1-1
-            </Text>
+            <Text />
           </View>
           <View
             style={
@@ -4649,6 +4732,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -5059,6 +5143,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
+                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -5066,9 +5151,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text>
-              A1-1
-            </Text>
+            <Text />
           </View>
           <View
             style={
@@ -5179,6 +5262,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -5589,6 +5673,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 "borderBottomWidth": 1,
                 "flexDirection": "row",
                 "justifyContent": "space-between",
+                "paddingBottom": 2,
                 "paddingVertical": 14,
               }
             }
@@ -5596,9 +5681,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text>
-              A1-1
-            </Text>
+            <Text />
           </View>
           <View
             style={
@@ -5709,6 +5792,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
