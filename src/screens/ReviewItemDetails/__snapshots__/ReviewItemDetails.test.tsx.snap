@@ -1998,58 +1998,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <CollapsibleCard
-        icon=""
-        isOpened={false}
-        title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-      >
-        <RenderItemHistoryCard
-          date="2022-11-05"
-          qty={66}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-23"
-          qty={22}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-20"
-          qty={45}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-19"
-          qty={30}
-        />
-        <RenderItemHistoryCard
-          date="2022-05-23"
-          qty={44}
-        />
-        <View
-          style={
-            Object {
-              "backgroundColor": "#ffffffff",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={28}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "width": 60,
-              }
-            }
-            title="[missing \\"en.LOCATION.MORE\\" translation]..."
-            titleColor="#0071e9"
-            titleFontSize={12}
-            titleFontWeight="bold"
-            type={3}
-            width={-1}
-          />
-        </View>
-      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -2801,58 +2749,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <CollapsibleCard
-        icon=""
-        isOpened={false}
-        title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-      >
-        <RenderItemHistoryCard
-          date="2022-11-05"
-          qty={66}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-23"
-          qty={22}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-20"
-          qty={45}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-19"
-          qty={30}
-        />
-        <RenderItemHistoryCard
-          date="2022-05-23"
-          qty={44}
-        />
-        <View
-          style={
-            Object {
-              "backgroundColor": "#ffffffff",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={28}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "width": 60,
-              }
-            }
-            title="[missing \\"en.LOCATION.MORE\\" translation]..."
-            titleColor="#0071e9"
-            titleFontSize={12}
-            titleFontWeight="bold"
-            type={3}
-            width={-1}
-          />
-        </View>
-      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -3241,58 +3137,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </Text>
         </View>
       </View>
-      <CollapsibleCard
-        icon=""
-        isOpened={false}
-        title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-      >
-        <RenderItemHistoryCard
-          date="2022-11-05"
-          qty={66}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-23"
-          qty={22}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-20"
-          qty={45}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-19"
-          qty={30}
-        />
-        <RenderItemHistoryCard
-          date="2022-05-23"
-          qty={44}
-        />
-        <View
-          style={
-            Object {
-              "backgroundColor": "#ffffffff",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={28}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "width": 60,
-              }
-            }
-            title="[missing \\"en.LOCATION.MORE\\" translation]..."
-            titleColor="#0071e9"
-            titleFontSize={12}
-            titleFontWeight="bold"
-            type={3}
-            width={-1}
-          />
-        </View>
-      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -3823,58 +3667,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <CollapsibleCard
-        icon=""
-        isOpened={false}
-        title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-      >
-        <RenderItemHistoryCard
-          date="2022-11-05"
-          qty={66}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-23"
-          qty={22}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-20"
-          qty={45}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-19"
-          qty={30}
-        />
-        <RenderItemHistoryCard
-          date="2022-05-23"
-          qty={44}
-        />
-        <View
-          style={
-            Object {
-              "backgroundColor": "#ffffffff",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={28}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "width": 60,
-              }
-            }
-            title="[missing \\"en.LOCATION.MORE\\" translation]..."
-            titleColor="#0071e9"
-            titleFontSize={12}
-            titleFontWeight="bold"
-            type={3}
-            width={-1}
-          />
-        </View>
-      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -4405,58 +4197,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <CollapsibleCard
-        icon=""
-        isOpened={false}
-        title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-      >
-        <RenderItemHistoryCard
-          date="2022-11-05"
-          qty={66}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-23"
-          qty={22}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-20"
-          qty={45}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-19"
-          qty={30}
-        />
-        <RenderItemHistoryCard
-          date="2022-05-23"
-          qty={44}
-        />
-        <View
-          style={
-            Object {
-              "backgroundColor": "#ffffffff",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={28}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "width": 60,
-              }
-            }
-            title="[missing \\"en.LOCATION.MORE\\" translation]..."
-            titleColor="#0071e9"
-            titleFontSize={12}
-            titleFontWeight="bold"
-            type={3}
-            width={-1}
-          />
-        </View>
-      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -4987,58 +4727,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <CollapsibleCard
-        icon=""
-        isOpened={false}
-        title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-      >
-        <RenderItemHistoryCard
-          date="2022-11-05"
-          qty={66}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-23"
-          qty={22}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-20"
-          qty={45}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-19"
-          qty={30}
-        />
-        <RenderItemHistoryCard
-          date="2022-05-23"
-          qty={44}
-        />
-        <View
-          style={
-            Object {
-              "backgroundColor": "#ffffffff",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={28}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "width": 60,
-              }
-            }
-            title="[missing \\"en.LOCATION.MORE\\" translation]..."
-            titleColor="#0071e9"
-            titleFontSize={12}
-            titleFontWeight="bold"
-            type={3}
-            width={-1}
-          />
-        </View>
-      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -5569,58 +5257,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <CollapsibleCard
-        icon=""
-        isOpened={false}
-        title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-      >
-        <RenderItemHistoryCard
-          date="2022-11-05"
-          qty={66}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-23"
-          qty={22}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-20"
-          qty={45}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-19"
-          qty={30}
-        />
-        <RenderItemHistoryCard
-          date="2022-05-23"
-          qty={44}
-        />
-        <View
-          style={
-            Object {
-              "backgroundColor": "#ffffffff",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={28}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "width": 60,
-              }
-            }
-            title="[missing \\"en.LOCATION.MORE\\" translation]..."
-            titleColor="#0071e9"
-            titleFontSize={12}
-            titleFontWeight="bold"
-            type={3}
-            width={-1}
-          />
-        </View>
-      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
@@ -6151,58 +5787,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <CollapsibleCard
-        icon=""
-        isOpened={false}
-        title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-      >
-        <RenderItemHistoryCard
-          date="2022-11-05"
-          qty={66}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-23"
-          qty={22}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-20"
-          qty={45}
-        />
-        <RenderItemHistoryCard
-          date="2022-07-19"
-          qty={30}
-        />
-        <RenderItemHistoryCard
-          date="2022-05-23"
-          qty={44}
-        />
-        <View
-          style={
-            Object {
-              "backgroundColor": "#ffffffff",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={28}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "width": 60,
-              }
-            }
-            title="[missing \\"en.LOCATION.MORE\\" translation]..."
-            titleColor="#0071e9"
-            titleFontSize={12}
-            titleFontWeight="bold"
-            type={3}
-            width={-1}
-          />
-        </View>
-      </CollapsibleCard>
     </View>
   </ScrollView>
   <TouchableOpacity
