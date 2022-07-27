@@ -59,8 +59,6 @@ jest.mock('@react-navigation/native', () => {
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -68,7 +66,10 @@ const navigationProp: NavigationProp<any> = {
   reset: jest.fn(),
   setOptions: jest.fn(),
   setParams: jest.fn(),
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  getState: jest.fn(),
+  getParent: jest.fn(),
+  getId: jest.fn()
 };
 
 const routeProp: RouteProp<any, string> = {
@@ -146,10 +147,6 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
 };
 
 describe('ReviewItemDetailsScreen', () => {
-  const defaultScannedEvent = {
-    type: null,
-    value: null
-  };
   const defaultResult: AxiosResponse = {
     config: {},
     data: {},
@@ -186,7 +183,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(toJSON()).toMatchSnapshot();
     });
     it('renders the details for a single item with non-null status', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -205,8 +202,29 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+    it('renders the details for a single item with AdditionItemDetails Flag set to true', () => {
+      const testProps: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        result: {
+          ...defaultResult,
+          data: itemDetail[123],
+          status: 200
+        },
+        exceptionType: 'NSFL',
+        newOHQty: itemDetail[123].onHandsQty,
+        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
+        floorLocations: itemDetail[123].location.floor,
+        reserveLocations: itemDetail[123].location.reserve,
+        userConfigs: { ...mockConfig, additionalItemDetails: true }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReviewItemDetailsScreen {...testProps} />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
     it('renders the details for a single item with ohQtyModalVisible true', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -227,7 +245,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the details for a single item with createPickModalVisible true', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -248,7 +266,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the details for a single item with errorModalVisible true', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -269,7 +287,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the details for a single item with null status', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -292,7 +310,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the On Hands Cloud Qty of 42', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -316,7 +334,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders "Generic Change translation" if pendingOH is -999 and user has OH role', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -340,7 +358,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders \'Item Details Api Error\' for a failed request ', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         error: mockError,
         exceptionType: '',
@@ -354,7 +372,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders \'Scanned Item Not Found\' on request status 204', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -371,7 +389,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders \'Activity Indicator\' waiting for ItemDetails Response ', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         isWaiting: true,
         exceptionType: '',
@@ -384,7 +402,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the details for a item with multi status 207(error retreiving sales history)', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -1219,24 +1237,32 @@ describe('ReviewItemDetailsScreen', () => {
     });
   });
   describe('Tests Rendering \'renderOHChangeHistory\'', () => {
+    const mockResult: AxiosResponse = {
+      config: {},
+      data: '',
+      status: 200,
+      headers: {},
+      statusText: 'OK',
+      request: {}
+    }
     it('Renders OH history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockOHChangeHistory, { status: 200 })
+        renderOHChangeHistory(mockOHChangeHistory, mockResult, navigationProp)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders OH history with no data for pick msg', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory([], { status: 200 })
+        renderOHChangeHistory([], mockResult, navigationProp)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders OH history with error msg for result status 207', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory([], { status: 207 })
+        renderOHChangeHistory([], { ...mockResult, status: 207 }, navigationProp)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

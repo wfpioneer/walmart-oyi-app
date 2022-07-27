@@ -1106,7 +1106,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
             </SFTCard>
-            {!userConfigs.additionalItemDetails && (
+            {userConfigs.additionalItemDetails && (
               <>
                 {renderOHChangeHistory(mockOHChangeHistory, {
                   config: {},
@@ -1115,7 +1115,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                   headers: {},
                   statusText: 'OK',
                   request: {}
-                },
+                }, // TODO pass Additional item details results here
                 navigation)}
               </>
             )}
