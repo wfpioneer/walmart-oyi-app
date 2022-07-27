@@ -1,0 +1,436 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info component with additional item details 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "padding": 8,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#d938ab",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "marginBottom": 4,
+        "marginTop": 16,
+      }
+    }
+  >
+    [missing "en.EXCEPTION.NSFL" translation]
+  </Text>
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "marginVertical": 4,
+      }
+    }
+  >
+    Test item
+  </Text>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": 4,
+        "marginTop": 4,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.ITEM.ITEM" translation] 10359
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 12,
+          "marginHorizontal": 8,
+        }
+      }
+    >
+      |
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.ITEM.UPC" translation] 286201035990
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "#616161",
+        "fontSize": 12,
+        "marginBottom": 4,
+      }
+    }
+  >
+    [missing "en.ITEM.STATUS" translation]: Active
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#616161",
+        "fontSize": 12,
+        "marginBottom": 4,
+      }
+    }
+  >
+    [missing "en.ITEM.CATEGORY" translation]: 17-test
+  </Text>
+  <CollapsibleCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]"
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+        }
+      }
+      testID="additional-item-details"
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 5,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            [missing "en.ITEM.VENDOR_PACK" translation]
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            [missing "en.ITEM.PRICE_BEFORE_TAX" translation]
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 5,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            33
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            $15.05
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 5,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            [missing "en.ITEM.COLOR" translation]
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            [missing "en.ITEM.MARGIN" translation]
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 5,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            red
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            $14
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 5,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            [missing "en.ITEM.SIZE" translation]
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            [missing "en.ITEM.GROSS_PROFIT" translation]
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 5,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            88
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 12,
+                "paddingVertical": 2,
+              }
+            }
+          >
+            $2.5
+          </Text>
+        </View>
+      </View>
+    </View>
+  </CollapsibleCard>
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "marginBottom": 6,
+        "marginTop": 16,
+      }
+    }
+  >
+    $14.00
+  </Text>
+</View>
+`;
+
+exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info component without additional item details 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "padding": 8,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#d938ab",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "marginBottom": 4,
+        "marginTop": 16,
+      }
+    }
+  >
+    [missing "en.EXCEPTION.NSFL" translation]
+  </Text>
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "marginVertical": 4,
+      }
+    }
+  >
+    Test item
+  </Text>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": 4,
+        "marginTop": 4,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.ITEM.ITEM" translation] 10359
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 12,
+          "marginHorizontal": 8,
+        }
+      }
+    >
+      |
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.ITEM.UPC" translation] 286201035990
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "#616161",
+        "fontSize": 12,
+        "marginBottom": 4,
+      }
+    }
+  >
+    [missing "en.ITEM.STATUS" translation]: Active
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#616161",
+        "fontSize": 12,
+        "marginBottom": 4,
+      }
+    }
+  >
+    [missing "en.ITEM.CATEGORY" translation]: 17-test
+  </Text>
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "marginBottom": 6,
+        "marginTop": 16,
+      }
+    }
+  >
+    $14.00
+  </Text>
+</View>
+`;

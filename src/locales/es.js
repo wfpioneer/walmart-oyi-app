@@ -122,7 +122,20 @@ export default {
     FLY_CLOUD_QTY: 'Cantidad Cloud', // Leaving This as is until MX has a need for Cloud Qty
     IN_TRANSIT_FLY_QTY: 'En Tránsito Cloud',
     ERROR_SALES_HISTORY: 'Incapaz de mostrar el historial de ventas',
-    ITEM_NUMBER: 'Número de Artículo'
+    ITEM_NUMBER: 'Número de Artículo',
+    OH_CHANGE_HISTORY: 'Historial de cambio de existencia',
+    NO_OH_CHANGE_HISTORY: 'No hay cambios de existencia disponibles',
+    ERROR_OH_CHANGE_HISTORY: 'Error obteniendo data',
+    PICK_HISTORY: 'Historial de Picks',
+    NO_PICK_HISTORY: 'No hay historial de Picks disponible',
+    ERROR_PICK_HISTORY: 'Error obteniendo data',
+    ADDITIONAL_ITEM_DETAILS: 'Detalles de artículo adicionales',
+    VENDOR_PACK: 'Vendor Pack',
+    COLOR: 'Color',
+    SIZE: 'Tamaño',
+    PRICE_BEFORE_TAX: 'Precio sin Impuesto',
+    MARGIN: 'Margen',
+    GROSS_PROFIT: 'Ganancia Bruta'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -435,7 +448,8 @@ export default {
     PICKLIST_UPDATED: 'La lista de pickeos ha sido actualizada',
     PICK_COMPLETED_AND_PICKLIST_UPDATED: 'El pickeo se ha completado y la lista se ha actualizado',
     PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los pickeos se han completado y la lista se ha actualizado',
-    NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No hay pallet de reserva disponibles'
+    NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No hay pallet de reserva disponibles',
+    ADDITIONAL_ITEMS: 'El pallet contiene artículos adicionales'
   },
   BINNING: {
     BINNING: 'Bodega',

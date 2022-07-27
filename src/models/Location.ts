@@ -8,6 +8,7 @@ interface Location {
   locationName: string;
   type: string;
   typeNbr: number;
+  qty?: number;
 }
 
 // eslint-disable-next-line no-shadow

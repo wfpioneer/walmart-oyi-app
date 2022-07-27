@@ -58,15 +58,17 @@ const pickStateMissingProps = {
   pickCreateItem: mockItem,
   pickCreateFloorLocations: [],
   pickCreateReserveLocations: [],
-  selectedTab: Tabs.QUICKPICK
+  selectedTab: Tabs.QUICKPICK,
+  pickingMenu: false
 };
 
 const mockIsFocused = jest.fn(() => true);
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
+  getParent: jest.fn(),
+  getId: jest.fn(),
+  getState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: mockIsFocused,
@@ -407,6 +409,72 @@ describe('Sales floor workflow tests', () => {
         palletConfigApi={defaultAsyncState}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={showExpiryCalendarState}
+        showActivity={false}
+        updatePalletItemsApi={defaultAsyncState}
+        deletePalletItemsApi={defaultAsyncState}
+        completePalletState={mockCompletePalletState}
+        deleteItemsState={mockDeleteItemsState}
+        updateItemsState={mockUpdateItemsState}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders the screen with additional items warning label', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const pickingStatewithZeroQuantity: PickingState = {
+      pickList: [
+        {
+          ...basePickItem,
+          status: PickStatus.READY_TO_WORK,
+          newQuantityLeft: 0
+        }
+      ],
+      ...pickStateMissingProps
+    };
+
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        status: 200,
+        data: {
+          pallets: [
+            {
+              id: 43,
+              createDate: 'yesterday',
+              expirationDate: 'tomorrows',
+              items: [
+                {
+                  itemNbr: 2,
+                  itemDesc: 'ye olde yo',
+                  price: 2.99,
+                  upc: '1234567890',
+                  quantity: 6,
+                  categoryNbr: 72
+                }
+              ]
+            }
+          ]
+        }
+      }
+    };
+
+    renderer.render(
+      <SalesFloorWorkflowScreen
+        dispatch={jest.fn()}
+        pickingState={pickingStatewithZeroQuantity}
+        navigation={navigationProp}
+        updatePicklistStatusApi={defaultAsyncState}
+        useEffectHook={jest.fn()}
+        palletDetailsApi={successApi}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        backupCategories=""
+        palletConfigApi={defaultAsyncState}
+        configCompleteState={mockConfigCompleteState}
+        showExpiryPromptState={mockExpirationShowState}
         showActivity={false}
         updatePalletItemsApi={defaultAsyncState}
         deletePalletItemsApi={defaultAsyncState}

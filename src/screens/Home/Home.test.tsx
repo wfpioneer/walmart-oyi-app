@@ -5,6 +5,7 @@ import { mockConfig } from '../../mockData/mockConfig';
 import {
   mockAllCompleteWorklistSummaries,
   mockHalfCompleteWorklistSummaries,
+  mockItemAndPalletWorklistSummary,
   mockZeroCompleteWorklistSummaries
 } from '../../mockData/mockWorklistSummary';
 import { AsyncState } from '../../models/AsyncState';
@@ -144,7 +145,7 @@ describe('HomeScreen', () => {
           ...defaultAsyncState,
           result: {
             status: 200,
-            data: mockHalfCompleteWorklistSummaries
+            data: mockItemAndPalletWorklistSummary
           }
         }
       };

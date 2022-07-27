@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import {
   ActivityIndicator, EmitterSubscription, SafeAreaView, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AsyncState } from '../../models/AsyncState';
 import { Configurations } from '../../models/User';
@@ -23,10 +22,9 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Button from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
-import { WorklistSummary } from '../../models/WorklistSummary';
+import { WorklistGoal, WorklistGoalDuration, WorklistSummary } from '../../models/WorklistSummary';
 import { CustomModalComponent } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
-import { mockMissingPalletWorklistSummary } from '../../mockData/mockWorklistSummary';
 
 const mapStateToProps = (state: RootState) => ({
   userName: state.User.additional.displayName,
@@ -52,7 +50,7 @@ interface HomeScreenProps {
   isManualScanEnabled: boolean;
   worklistSummaryApiState: AsyncState;
   getWorklistSummary: () => void;
-  navigation: StackNavigationProp<any>;
+  navigation: NavigationProp<any>;
   updateFilterExceptions: (worklistTypes: string[]) => void;
   route: RouteProp<any, string>;
   userConfig: Configurations
@@ -136,11 +134,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       return null;
     }
 
-    let { data }: { data: WorklistSummary[] } = this.props.worklistSummaryApiState.result;
-
-    // Mock data for missing pallet worklist
-    // TODO: Needs to be removed once the backend changes completed
-    data = data.concat(mockMissingPalletWorklistSummary);
+    const { data }: { data: WorklistSummary[] } = this.props.worklistSummaryApiState.result;
 
     const onGoalTitlePress = (index : number) => {
       this.setState({
@@ -148,19 +142,42 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       });
     };
 
-    const renderGoalCircles = () => data.map((goal, index) => {
-      const frequency = goal.worklistGoal === 'DAILY' ? strings('GENERICS.DAILY') : '';
-      const key = `${goal.worklistGoal}-${index}`;
-      const isMissingPalletWorklistEnabled = this.props.userConfig.palletWorklists;
+    const getWorklistGoalTitle = (worklistGoal: WorklistGoal) => {
+      switch (worklistGoal) {
+        case WorklistGoal.ITEMS:
+          return strings('HOME.ITEMS');
+        case WorklistGoal.PALLETS:
+          return strings('LOCATION.PALLETS');
+        default:
+          return '';
+      }
+    };
 
-      if (!isMissingPalletWorklistEnabled && goal.worklistTypes.find(worklist => worklist.worklistType === 'MP')) {
+    const getWorklistFrequency = (worklistGoalDuration: WorklistGoalDuration) => {
+      switch (worklistGoalDuration) {
+        case WorklistGoalDuration.DAILY:
+          return strings('GENERICS.DAILY');
+        case WorklistGoalDuration.WEEKLY:
+          return strings('GENERICS.WEEKLY');
+        default:
+          return '';
+      }
+    };
+
+    const renderGoalCircles = () => data.map((goal, index) => {
+      const frequency = getWorklistFrequency(goal.worklistGoalDuration);
+      const goalTitle = getWorklistGoalTitle(goal.worklistGoal);
+      const palletWorklistsEnabled = this.props.userConfig.palletWorklists;
+
+      // Disabled pallet worklist Goal Circle based on feature flag
+      if (!palletWorklistsEnabled && goal.worklistGoal === WorklistGoal.PALLETS) {
         return null;
       }
 
       return (
         <GoalCircle
-          key={key}
-          goalTitle={index === 0 ? strings('HOME.ITEMS') : strings('LOCATION.PALLETS')}
+          key={goal.worklistGoal}
+          goalTitle={goalTitle}
           completionGoal={goal.worklistEndGoalPct}
           completionPercentage={goal.worklistGoalPct}
           active={index === this.state.activeGoal}
@@ -176,12 +193,12 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         const worklistType = worklist.worklistType === 'MP'
           ? strings('EXCEPTION.MISSING_PALLETS')
           : exceptionTypeToDisplayString(worklist?.worklistType.toUpperCase() ?? '');
-        const isMissingPalletWorklistType = worklist?.worklistType === 'MP';
+        const isPalletWorklist = dataSummary.worklistGoal === WorklistGoal.PALLETS;
 
         const onWorklistCardPress = () => {
           trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
           this.props.updateFilterExceptions([worklist.worklistType]);
-          validateSession(this.props.navigation, this.props.route.name).then(() => (isMissingPalletWorklistType
+          validateSession(this.props.navigation, this.props.route.name).then(() => (isPalletWorklist
             ? this.props.navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' })
             : this.props.navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' })))
             .catch(() => {});

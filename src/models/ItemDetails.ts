@@ -1,4 +1,44 @@
 import Location from './Location';
+import { approvalRequestSource, approvalStatus } from './ApprovalListItem';
+
+export interface OHChangeHistory {
+  id : number;
+  itemName : string;
+  itemNbr : number;
+  upcNbr : number;
+  categoryNbr : number;
+  categoryDescription : string;
+  subCategoryNbr : number;
+  subCategoryDescription : string;
+  oldQuantity : number;
+  newQuantity : number;
+  dollarChange : number;
+  daysLeft: number;
+  initiatedUserId : string;
+  initiatedTimestamp : string;
+  approvalStatus : approvalStatus;
+  approvalRequestSource : approvalRequestSource;
+}
+
+export interface PickHistory {
+  id:number,
+  itemNbr: number,
+  upcNbr: number,
+  itemDesc: string,
+  itemQty: number,
+  category: string,
+  quickPick: boolean,
+  salesFloorLocationName: string,
+  salesFloorLocationId: number,
+  moveToFront: boolean,
+  assignedAssociate: string,
+  palletId: number,
+  palletLocationName: string,
+  palletLocationId: number,
+  status: string,
+  createdBy: string,
+  createTS: string
+}
 
 interface ItemDetails {
   itemName: string;
@@ -20,6 +60,11 @@ interface ItemDetails {
   backroomQty: number;
   cloudQty?: number;
   inTransitCloudQty?: number;
+  size: number;
+  color: string;
+  grossProfit: number;
+  vendorPackQty: number;
+  margin: number;
   replenishment: {
     onOrder: number;
   };
@@ -41,6 +86,12 @@ interface ItemDetails {
       value: number;
     }[];
   };
+  deliveries: {
+    date: string;
+    qty: number;
+  }[];
+  ohChangeHistory?: OHChangeHistory[];
+  picklistHistory?: PickHistory[]
 }
 
 export default ItemDetails;

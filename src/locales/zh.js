@@ -122,7 +122,20 @@ export default {
     FLY_CLOUD_QTY: '云仓库存',
     IN_TRANSIT_FLY_QTY: '云仓转运量',
     ERROR_SALES_HISTORY: '无法获取历史销售',
-    ITEM_NUMBER: '商品号'
+    ITEM_NUMBER: '商品号',
+    OH_CHANGE_HISTORY: '现货变更历史记录',
+    NO_OH_CHANGE_HISTORY: '无历史库存信息可获取',
+    ERROR_OH_CHANGE_HISTORY: '重置数据出错',
+    PICK_HISTORY: '历史补货清单',
+    NO_PICK_HISTORY: '无补货历史记录',
+    ERROR_PICK_HISTORY: '重置数据出错',
+    ADDITIONAL_ITEM_DETAILS: '其它商品信息',
+    VENDOR_PACK: '供应商包装',
+    COLOR: '整版库存量',
+    SIZE: 'Ti-Hi',
+    PRICE_BEFORE_TAX: '税前零售',
+    MARGIN: '利润',
+    GROSS_PROFIT: '毛利'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
@@ -435,7 +448,8 @@ export default {
     PICKLIST_UPDATED: '补货清单已更新',
     PICK_COMPLETED_AND_PICKLIST_UPDATED: '已完成一个补货，补货清单已更新',
     PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: '已完成多个补货，补货清单已更新',
-    NO_RESERVE_PALLET_AVAILABLE_ERROR: '高货架无卡板可取'
+    NO_RESERVE_PALLET_AVAILABLE_ERROR: '高货架无卡板可取',
+    ADDITIONAL_ITEMS: '卡板有其它商品'
   },
   BINNING: {
     BINNING: '上架',

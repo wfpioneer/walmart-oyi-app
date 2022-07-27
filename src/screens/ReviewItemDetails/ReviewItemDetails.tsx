@@ -2,7 +2,8 @@ import React, {
   EffectCallback, RefObject, createRef, useEffect, useState
 } from 'react';
 import {
-  ActivityIndicator, BackHandler, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator, BackHandler, Platform, RefreshControl, ScrollView, Text, TouchableOpacity,
+  View
 } from 'react-native';
 import _ from 'lodash';
 import Toast from 'react-native-toast-message';
@@ -21,7 +22,8 @@ import {
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
-import ItemDetails from '../../models/ItemDetails';
+import ItemDetails, { OHChangeHistory, PickHistory } from '../../models/ItemDetails';
+import { CollapsibleCard } from '../../components/CollapsibleCard/CollapsibleCard';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import Button from '../../components/buttons/Button';
@@ -110,6 +112,11 @@ export interface RenderProps {
   floorLocations?: Location[];
   reserveLocations?: Location[];
   userConfigs: Configurations;
+}
+
+export interface HistoryCardPropsI {
+  date: string;
+  qty: number;
 }
 
 const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
@@ -305,6 +312,116 @@ export const updateOHQtyApiHook = (
   }
 };
 
+export const RenderItemHistoryCard = (
+  props: HistoryCardPropsI
+): JSX.Element => (
+  <View style={styles.historyCard}>
+    <Text>{moment(props.date).format('YYYY-MM-DD')}</Text>
+    <Text>{props.qty}</Text>
+  </View>
+);
+
+const MULTI_STATUS = 207;
+export const renderPickHistory = (pickHistoryList: PickHistory[], result: any) => {
+  if (result && result.status !== MULTI_STATUS) {
+    if (pickHistoryList && pickHistoryList.length) {
+      const data = pickHistoryList.length > 5 ? pickHistoryList.slice(-5) : pickHistoryList;
+      return (
+        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+          {data.map(item => (
+            <RenderItemHistoryCard
+              key={item.id}
+              date={item.createTS}
+              qty={item.itemQty}
+            />
+          ))}
+          {pickHistoryList.length > 5 && (
+          <View style={styles.moreBtnContainer}>
+            <Button
+              type={3}
+              title={`${strings('LOCATION.MORE')}...`}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight="bold"
+              height={28}
+              onPress={() => {}}
+              style={styles.historyMoreBtn}
+            />
+          </View>
+          )}
+        </CollapsibleCard>
+      );
+    }
+    return (
+      <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+        <View style={styles.noDataContainer}>
+          <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
+        </View>
+      </CollapsibleCard>
+    );
+  }
+  return (
+    <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
+        <Text>{strings('ITEM.ERROR_PICK_HISTORY')}</Text>
+      </View>
+    </CollapsibleCard>
+  );
+};
+
+export const renderOHChangeHistory = (ohChangeHistory: OHChangeHistory[], result: any) => {
+  if (result && result.status !== MULTI_STATUS) {
+    if (ohChangeHistory && ohChangeHistory.length) {
+      const data = ohChangeHistory.sort((a, b) => {
+        const date1 = new Date(a.initiatedTimestamp);
+        const date2 = new Date(b.initiatedTimestamp);
+        return date2 > date1 ? 1 : -1;
+      });
+      return (
+        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+          {data.slice(0, 5).map(item => (
+            <RenderItemHistoryCard
+              key={item.id}
+              date={item.initiatedTimestamp}
+              qty={item.newQuantity}
+            />
+          ))}
+          {ohChangeHistory.length > 5 && (
+          <View style={styles.moreBtnContainer}>
+            <Button
+              type={3}
+              title={`${strings('LOCATION.MORE')}...`}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight="bold"
+              height={28}
+              onPress={() => {}} // TODO navigation to be handle in ticket 6935
+              style={styles.historyMoreBtn}
+            />
+          </View>
+          )}
+        </CollapsibleCard>
+      );
+    }
+    return (
+      <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+        <View style={styles.noDataContainer}>
+          <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
+        </View>
+      </CollapsibleCard>
+    );
+  }
+  return (
+    <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
+        <Text>{strings('ITEM.ERROR_OH_CHANGE_HISTORY')}</Text>
+      </View>
+    </CollapsibleCard>
+  );
+};
+
 export const renderAddPicklistButton = (
   props: (RenderProps & HandleProps),
   itemDetails: ItemDetails,
@@ -411,8 +528,6 @@ export const renderLocationComponent = (
     </View>
   );
 };
-
-const MULTI_STATUS = 207;
 
 export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
   result: any, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
@@ -746,7 +861,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     validateSessionCall,
     useEffectHook,
     useFocusEffectHook,
-    floorLocations, userFeatures
+    floorLocations, userFeatures, userConfigs
   } = props;
 
   useEffectHook(() => () => {
@@ -941,6 +1056,15 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               price={itemDetails.price}
               exceptionType={getExceptionType(actionCompleted, itemDetails)}
               navigationForPrint={navigation}
+              showAdditionalItemDetails={userConfigs.additionalItemDetails}
+              additionalItemDetails={{
+                color: itemDetails.color,
+                margin: itemDetails.margin,
+                vendorPackQty: itemDetails.vendorPackQty,
+                grossProfit: itemDetails.grossProfit,
+                size: itemDetails.size,
+                basePrice: itemDetails.basePrice
+              }}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}
