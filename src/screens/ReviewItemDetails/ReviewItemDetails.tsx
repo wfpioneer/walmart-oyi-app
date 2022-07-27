@@ -54,6 +54,7 @@ import { CreatePickRequest } from '../../services/Picking.service';
 import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { mockOHChangeHistory } from '../../mockData/getItemDetails';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -370,10 +371,14 @@ export const renderPickHistory = (pickHistoryList: PickHistory[], result: any) =
   );
 };
 
-export const renderOHChangeHistory = (ohChangeHistory: OHChangeHistory[], result: any) => {
+export const renderOHChangeHistory = (
+  ohChangeHistory: OHChangeHistory[],
+  result: AxiosResponse,
+  navigation: NavigationProp<any>
+) => {
   if (result && result.status !== MULTI_STATUS) {
     if (ohChangeHistory && ohChangeHistory.length) {
-      const data = ohChangeHistory.sort((a, b) => {
+      const data = [...ohChangeHistory].sort((a, b) => {
         const date1 = new Date(a.initiatedTimestamp);
         const date2 = new Date(b.initiatedTimestamp);
         return date2 > date1 ? 1 : -1;
@@ -396,7 +401,9 @@ export const renderOHChangeHistory = (ohChangeHistory: OHChangeHistory[], result
               titleFontSize={12}
               titleFontWeight="bold"
               height={28}
-              onPress={() => {}} // TODO navigation to be handle in ticket 6935
+              onPress={() => {
+                navigation.navigate('AdditionalItemHistory');
+              }}
               style={styles.historyMoreBtn}
             />
           </View>
@@ -1099,6 +1106,19 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
             </SFTCard>
+            {!userConfigs.additionalItemDetails && (
+              <>
+                {renderOHChangeHistory(mockOHChangeHistory, {
+                  config: {},
+                  data: '',
+                  status: 200,
+                  headers: {},
+                  statusText: 'OK',
+                  request: {}
+                },
+                navigation)}
+              </>
+            )}
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
               itemDetails, isSalesMetricsGraphView)}
           </View>
