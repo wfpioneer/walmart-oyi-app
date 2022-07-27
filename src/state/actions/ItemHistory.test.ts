@@ -1,56 +1,27 @@
 import {
   CLEAR_ITEM_HISTORY,
-  SET_PICK_HISTORY,
+  SET_HISTORY,
   clearHistory,
-  setPickHistory
+  setHistory
 } from './ItemHistory';
-import { PickHistory } from '../../models/ItemDetails';
+import { ItemHistoryI } from '../../models/ItemDetails';
 
 describe('test action creators for ItemHistory', () => {
   it('test action creators for ItemHistory', () => {
-    const data: PickHistory[] = [{
+    const data: ItemHistoryI[] = [{
       id: 1,
-      itemNbr: 123,
-      upcNbr: 12,
-      itemDesc: 'test',
-      itemQty: 22,
-      category: 'test',
-      quickPick: false,
-      salesFloorLocationName: 'test1-1',
-      salesFloorLocationId: 123,
-      moveToFront: false,
-      assignedAssociate: 'test',
-      palletId: 123,
-      palletLocationName: 'test-1-1',
-      palletLocationId: 123,
-      status: 'test',
-      createdBy: 'test',
-      createTS: '2022-07-23'
-    },
-    {
+      date: '2022-07-23',
+      qty: 22
+    }, {
       id: 2,
-      itemNbr: 123,
-      upcNbr: 12,
-      itemDesc: 'test',
-      itemQty: 30,
-      category: 'test',
-      quickPick: false,
-      salesFloorLocationName: 'test1-1',
-      salesFloorLocationId: 123,
-      moveToFront: false,
-      assignedAssociate: 'test',
-      palletId: 123,
-      palletLocationName: 'test-1-1',
-      palletLocationId: 123,
-      status: 'test',
-      createdBy: 'test',
-      createTS: '2022-07-19'
+      date: '2022-07-19',
+      qty: 30
     }];
-
-    const setPickHistoryResult = setPickHistory(data);
+    const title = 'ITEM.PICK_HISTORY';
+    const setPickHistoryResult = setHistory(data, title);
     expect(setPickHistoryResult).toStrictEqual({
-      type: SET_PICK_HISTORY,
-      payload: data
+      type: SET_HISTORY,
+      payload: { data, title }
     });
 
     const clearHistoryResult = clearHistory();

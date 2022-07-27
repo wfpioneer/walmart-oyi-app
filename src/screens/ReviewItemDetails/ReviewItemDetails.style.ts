@@ -135,6 +135,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     backgroundColor: COLOR.WHITE
+  },
+  historyContainer: {
+    marginTop: 8
   }
 });
 

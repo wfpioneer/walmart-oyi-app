@@ -54,7 +54,8 @@ import { CreatePickRequest } from '../../services/Picking.service';
 import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
-import { setPickHistory } from '../../state/actions/ItemHistory';
+import { setHistory } from '../../state/actions/ItemHistory';
+import { mockOHChangeHistory, pickListMockHistory } from '../../mockData/getItemDetails';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -329,7 +330,13 @@ const onMorePickHistoryClick = (
   pickHistoryList: PickHistory[],
   navigation: NavigationProp<any>
 ) => {
-  dispatch(setPickHistory(pickHistoryList));
+  const data = pickHistoryList.map(itm => ({
+    id: itm.id,
+    date: itm.createTS,
+    qty: itm.itemQty
+  }));
+  const title = 'ITEM.PICK_HISTORY';
+  dispatch(setHistory(data, title));
   navigation.navigate('ItemHistory');
 };
 
@@ -886,9 +893,10 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     validateSessionCall,
     useEffectHook,
     useFocusEffectHook,
-    floorLocations, userFeatures
+    floorLocations, userFeatures, userConfigs
   } = props;
 
+  const { additionalItemDetails } = userConfigs;
   useEffectHook(() => () => {
     dispatch(resetLocations());
   }, []);
@@ -1081,6 +1089,15 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               price={itemDetails.price}
               exceptionType={getExceptionType(actionCompleted, itemDetails)}
               navigationForPrint={navigation}
+              showAdditionalItemDetails={additionalItemDetails}
+              additionalItemDetails={{
+                color: itemDetails.color,
+                margin: itemDetails.margin,
+                vendorPackQty: itemDetails.vendorPackQty,
+                grossProfit: itemDetails.grossProfit,
+                size: itemDetails.size,
+                basePrice: itemDetails.basePrice
+              }}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}
@@ -1115,6 +1132,16 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
             </SFTCard>
+            {additionalItemDetails && (
+            <>
+              <View style={styles.historyContainer}>
+                {renderOHChangeHistory(props, mockOHChangeHistory, { status: 200 })}
+              </View>
+              <View style={styles.historyContainer}>
+                {renderPickHistory(props, pickListMockHistory, { status: 200 })}
+              </View>
+            </>
+            )}
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
               itemDetails, isSalesMetricsGraphView)}
           </View>

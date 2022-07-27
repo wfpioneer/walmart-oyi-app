@@ -1669,6 +1669,16 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <View>
       <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 1500.3,
+            "color": undefined,
+            "grossProfit": undefined,
+            "margin": undefined,
+            "size": undefined,
+            "vendorPackQty": undefined,
+          }
+        }
         category="93 - Meat PI"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
@@ -1690,6 +1700,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
+        showAdditionalItemDetails={false}
         status=""
         upcNbr="000055559999"
       />
@@ -2421,6 +2432,16 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <View>
       <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 1500.3,
+            "color": undefined,
+            "grossProfit": undefined,
+            "margin": undefined,
+            "size": undefined,
+            "vendorPackQty": undefined,
+          }
+        }
         category="99 - Store Use"
         exceptionType="nsfl"
         itemName="Small, Store Use Item"
@@ -2442,6 +2463,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
+        showAdditionalItemDetails={false}
         status=""
         upcNbr="777555333"
       />
@@ -2951,6 +2973,16 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <View>
       <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 1500.3,
+            "color": undefined,
+            "grossProfit": undefined,
+            "margin": undefined,
+            "size": undefined,
+            "vendorPackQty": undefined,
+          }
+        }
         category="93 - Meat PI"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
@@ -2972,6 +3004,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
+        showAdditionalItemDetails={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -3339,6 +3372,16 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <View>
       <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 1500.3,
+            "color": undefined,
+            "grossProfit": undefined,
+            "margin": undefined,
+            "size": undefined,
+            "vendorPackQty": undefined,
+          }
+        }
         category="93 - Meat PI"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
@@ -3360,6 +3403,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
+        showAdditionalItemDetails={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -3869,6 +3913,16 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <View>
       <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 1500.3,
+            "color": undefined,
+            "grossProfit": undefined,
+            "margin": undefined,
+            "size": undefined,
+            "vendorPackQty": undefined,
+          }
+        }
         category="93 - Meat PI"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
@@ -3890,6 +3944,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
+        showAdditionalItemDetails={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -4399,6 +4454,16 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <View>
       <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 1500.3,
+            "color": undefined,
+            "grossProfit": undefined,
+            "margin": undefined,
+            "size": undefined,
+            "vendorPackQty": undefined,
+          }
+        }
         category="93 - Meat PI"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
@@ -4420,6 +4485,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
+        showAdditionalItemDetails={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -4929,6 +4995,16 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <View>
       <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 1500.3,
+            "color": undefined,
+            "grossProfit": undefined,
+            "margin": undefined,
+            "size": undefined,
+            "vendorPackQty": undefined,
+          }
+        }
         category="93 - Meat PI"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
@@ -4950,6 +5026,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
+        showAdditionalItemDetails={false}
         status=""
         upcNbr="000055559999"
       />
@@ -5459,6 +5536,16 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <View>
       <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 1500.3,
+            "color": undefined,
+            "grossProfit": undefined,
+            "margin": undefined,
+            "size": undefined,
+            "vendorPackQty": undefined,
+          }
+        }
         category="93 - Meat PI"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
@@ -5480,6 +5567,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
+        showAdditionalItemDetails={false}
         status="Active"
         upcNbr="000055559999"
       />

@@ -1,11 +1,11 @@
-import { PickHistory } from '../../models/ItemDetails';
+import { ItemHistoryI } from '../../models/ItemDetails';
 
-export const SET_PICK_HISTORY = 'ITEM_HISTORY/SET_PICK_HISTORY';
+export const SET_HISTORY = 'ITEM_HISTORY/SET_HISTORY';
 export const CLEAR_ITEM_HISTORY = 'ITEM_HISTORY/CLEAR_ITEM_HISTORY';
 
-export const setPickHistory = (data: PickHistory[]) => ({
-  type: SET_PICK_HISTORY,
-  payload: data
+export const setHistory = (data: ItemHistoryI[], title: string) => ({
+  type: SET_HISTORY,
+  payload: { data, title }
 } as const);
 
 export const clearHistory = () => ({
@@ -13,5 +13,5 @@ export const clearHistory = () => ({
 } as const);
 
 export type Actions =
-  | ReturnType<typeof setPickHistory>
+  | ReturnType<typeof setHistory>
   | ReturnType<typeof clearHistory>

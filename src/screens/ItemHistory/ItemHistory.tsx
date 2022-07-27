@@ -12,12 +12,11 @@ interface ItemHistoryProps {
 
 export const ItemHistoryScreen = (props: ItemHistoryProps) => {
   const { data } = props;
-  const today = new Date();
-  const dateBefSixMonth = new Date(today.getTime() - (180 * 24 * 60 * 60 * 1000));
-  const sortedData = data.filter(item => new Date(item.date) > dateBefSixMonth)
+  const dateBefSixMonth = moment().subtract(180, 'days');
+  const sortedData = data.filter(item => moment(item.date) > dateBefSixMonth)
     .sort((a, b) => {
-      const date1 = new Date(a.date);
-      const date2 = new Date(b.date);
+      const date1 = moment(a.date);
+      const date2 = moment(b.date);
       return date2 > date1 ? 1 : -1;
     });
   return (

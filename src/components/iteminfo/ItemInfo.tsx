@@ -7,8 +7,9 @@ import { currencies, strings } from '../../locales';
 import Button from '../buttons/Button';
 import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
+import CollapsibleCard from '../CollapsibleCard/CollapsibleCard';
 
-type ItemInfoProps = {
+export type ItemInfoProps = {
   itemName: string;
   itemNbr: number;
   upcNbr: string;
@@ -17,12 +18,70 @@ type ItemInfoProps = {
   price: number;
   exceptionType?: string; // This is enumerated
   navigationForPrint?: NavigationProp<any>;
+  additionalItemDetails: AdditionalItemDetailsProps;
+  showAdditionalItemDetails: boolean;
+};
+
+export type AdditionalItemDetailsProps = {
+  color: string,
+  size: number,
+  grossProfit: number,
+  vendorPackQty: number,
+  basePrice: number,
+  margin: number
+}
+
+const renderAdditionalItemDetails = (additionalItemDetails: AdditionalItemDetailsProps): JSX.Element => {
+  const {
+    color,
+    size,
+    grossProfit,
+    vendorPackQty,
+    basePrice,
+    margin
+  } = additionalItemDetails;
+  return (
+    <CollapsibleCard title={strings('ITEM.ADDITIONAL_ITEM_DETAILS')}>
+      <View testID="additional-item-details" style={styles.contentView}>
+        <View style={styles.contentView}>
+          <View style={styles.ViewPadding}>
+            <Text style={styles.contentText}>{strings('ITEM.VENDOR_PACK')}</Text>
+            <Text style={styles.contentText}>{strings('ITEM.PRICE_BEFORE_TAX')}</Text>
+          </View>
+          <View style={styles.ViewPadding}>
+            <Text style={styles.contentText}>{vendorPackQty}</Text>
+            <Text style={styles.contentText}>{`$${basePrice}`}</Text>
+          </View>
+        </View>
+        <View style={styles.contentView}>
+          <View style={styles.ViewPadding}>
+            <Text style={styles.contentText}>{strings('ITEM.COLOR')}</Text>
+            <Text style={styles.contentText}>{strings('ITEM.MARGIN')}</Text>
+          </View>
+          <View style={styles.ViewPadding}>
+            <Text style={styles.contentText}>{color}</Text>
+            <Text style={styles.contentText}>{`$${margin}`}</Text>
+          </View>
+        </View>
+        <View style={styles.contentView}>
+          <View style={styles.ViewPadding}>
+            <Text style={styles.contentText}>{strings('ITEM.SIZE')}</Text>
+            <Text style={styles.contentText}>{strings('ITEM.GROSS_PROFIT')}</Text>
+          </View>
+          <View style={styles.ViewPadding}>
+            <Text style={styles.contentText}>{size}</Text>
+            <Text style={styles.contentText}>{`$${grossProfit}`}</Text>
+          </View>
+        </View>
+      </View>
+    </CollapsibleCard>
+  );
 };
 
 const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
     itemName, itemNbr, upcNbr, status, category,
-    price, exceptionType, navigationForPrint: navigation
+    price, exceptionType, navigationForPrint: navigation, showAdditionalItemDetails, additionalItemDetails
   } = props;
 
   const handlePrintPriceSign = () => {
@@ -68,6 +127,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
       </View>
       <Text style={styles.statusText}>{`${strings('ITEM.STATUS')}: ${status}`}</Text>
       <Text style={styles.catgText}>{`${strings('ITEM.CATEGORY')}: ${category}`}</Text>
+      {showAdditionalItemDetails ? renderAdditionalItemDetails(additionalItemDetails) : null}
       <Text style={styles.priceText}>{`${currencies(price)}`}</Text>
       {navigation && (
         <Button

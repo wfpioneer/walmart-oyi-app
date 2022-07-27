@@ -2,7 +2,7 @@ import { ItemHistoryI } from '../../models/ItemDetails';
 import {
   Actions,
   CLEAR_ITEM_HISTORY,
-  SET_PICK_HISTORY
+  SET_HISTORY
 } from '../actions/ItemHistory';
 
 export interface ItemHistoryState {
@@ -17,15 +17,11 @@ export const initialState: ItemHistoryState = {
 
 export const ItemHistory = (state = initialState, action: Actions) => {
   switch (action.type) {
-    case SET_PICK_HISTORY:
+    case SET_HISTORY:
       return {
         ...state,
-        data: action.payload.map(itm => ({
-          id: itm.id,
-          date: itm.createTS,
-          qty: itm.itemQty
-        })),
-        title: 'ITEM.PICK_HISTORY'
+        data: action.payload.data,
+        title: action.payload.title
       };
     case CLEAR_ITEM_HISTORY:
       return {

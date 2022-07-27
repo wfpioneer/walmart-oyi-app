@@ -6,7 +6,8 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#5a9ae0",
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "paddingHorizontal": 10,
@@ -27,13 +28,7 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
       <Text>
         
       </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-          }
-        }
-      >
+      <Text>
         History
       </Text>
     </View>
@@ -73,7 +68,8 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#5a9ae0",
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
         "borderBottomWidth": 1,
         "flexDirection": "row",
         "paddingHorizontal": 10,
@@ -94,13 +90,7 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
       <Text>
         
       </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-          }
-        }
-      >
+      <Text>
         History
       </Text>
     </View>

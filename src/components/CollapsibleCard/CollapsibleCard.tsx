@@ -39,7 +39,7 @@ export const CollapsibleHeaderCard = (props: CollapsibleHeaderCardProps): JSX.El
           />
           )}
         </Text>
-        <Text style={styles.titleText}>{title}</Text>
+        <Text>{title}</Text>
       </View>
       <TouchableOpacity
         testID="collapsible-card"
