@@ -336,18 +336,18 @@ export const renderPickHistory = (pickHistoryList: PickHistory[], result: any) =
             />
           ))}
           {pickHistoryList.length > 5 && (
-            <View style={styles.moreBtnContainer}>
-              <Button
-                type={3}
-                title={`${strings('LOCATION.MORE')}...`}
-                titleColor={COLOR.MAIN_THEME_COLOR}
-                titleFontSize={12}
-                titleFontWeight="bold"
-                height={28}
-                onPress={() => {}}
-                style={styles.historyMoreBtn}
-              />
-            </View>
+          <View style={styles.moreBtnContainer}>
+            <Button
+              type={3}
+              title={`${strings('LOCATION.MORE')}...`}
+              titleColor={COLOR.MAIN_THEME_COLOR}
+              titleFontSize={12}
+              titleFontWeight="bold"
+              height={28}
+              onPress={() => {}}
+              style={styles.historyMoreBtn}
+            />
+          </View>
           )}
         </CollapsibleCard>
       );
@@ -882,7 +882,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     validateSessionCall,
     useEffectHook,
     useFocusEffectHook,
-    floorLocations, userFeatures
+    floorLocations, userFeatures, userConfigs
   } = props;
 
   useEffectHook(() => () => {
@@ -1077,6 +1077,15 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               price={itemDetails.price}
               exceptionType={getExceptionType(actionCompleted, itemDetails)}
               navigationForPrint={navigation}
+              showAdditionalItemDetails={userConfigs.additionalItemDetails}
+              additionalItemDetails={{
+                color: itemDetails.color,
+                margin: itemDetails.margin,
+                vendorPackQty: itemDetails.vendorPackQty,
+                grossProfit: itemDetails.grossProfit,
+                size: itemDetails.size,
+                basePrice: itemDetails.basePrice
+              }}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}
