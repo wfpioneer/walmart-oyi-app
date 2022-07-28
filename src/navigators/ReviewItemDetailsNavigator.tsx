@@ -18,7 +18,6 @@ import { showInfoModal } from '../state/actions/Modal';
 import { openCamera } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
 import { GET_ITEM_DETAILS } from '../state/actions/asyncAPI';
-import AdditionalItemHistory from '../screens/AdditionalItemHistory/AdditionalItemHistory';
 import ItemHistory from '../screens/ItemHistory/ItemHistory';
 import { clearItemHistory } from '../state/actions/ItemHistory';
 
@@ -168,16 +167,6 @@ const ReviewItemDetailsNavigator = () => {
               {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
             </View>
           )
-        }}
-      />
-      <Stack.Screen
-        name="AdditionalItemHistory"
-        component={AdditionalItemHistory}
-        options={{
-          headerTitle: strings('ITEM.OH_CHANGE_HISTORY'),
-          headerTitleAlign: 'left',
-          headerTitleStyle: { fontSize: 18 },
-          headerBackTitleVisible: false
         }}
       />
       <Stack.Screen

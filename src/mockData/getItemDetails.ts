@@ -583,7 +583,7 @@ export default {
         }
       ]
     }
-  }
+  } as ItemDetails
 };
 
 export const mockOHChangeHistory: OHChangeHistory[] = [

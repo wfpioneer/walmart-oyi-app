@@ -644,6 +644,8 @@ describe('ReviewItemDetailsScreen', () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
+    const HIDE_ACTIVITY = 'MODAL/HIDE_ACTIVITY';
+    const RESET_CREATE_PICK = 'API/CREATE_NEW_PICK/RESET';
 
     it('Tests createNewPickApiHook on 200 success', () => {
       const successApi: AsyncState = {
@@ -665,8 +667,8 @@ describe('ReviewItemDetailsScreen', () => {
       expect(mockSetSelectedSection).toHaveBeenCalledWith('');
       expect(mockSetIsQuickPick).toHaveBeenCalledWith(false);
       expect(mockSetNumberOfPallets).toHaveBeenCalledWith(1);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
     });
     it('Tests createNewPickApiHook on 409 failure when there are no reserve pallets available', () => {
       const failureApi: AsyncState = {
@@ -691,8 +693,8 @@ describe('ReviewItemDetailsScreen', () => {
         failureApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
       expect(Toast.show).toHaveBeenCalledWith(toastPickList409Error);
     });
     it('Tests createNewPickApiHook on 409 failure', () => {
@@ -718,8 +720,8 @@ describe('ReviewItemDetailsScreen', () => {
         failureApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
       expect(Toast.show).toHaveBeenCalledWith(toastPickList409Error);
     });
     it('Tests createNewPickApiHook on failure', () => {
@@ -738,8 +740,8 @@ describe('ReviewItemDetailsScreen', () => {
         failureApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
       expect(Toast.show).toHaveBeenCalledWith(toastPickListError);
     });
     it('Tests createNewPickApiHook isWaiting', () => {
@@ -1281,7 +1283,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders pick history with error msg for result status 207', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, pickListMockHistory, defaultResult)
+        renderPickHistory(mockHandleProps, pickListMockHistory, { ...defaultResult, status: 207 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
