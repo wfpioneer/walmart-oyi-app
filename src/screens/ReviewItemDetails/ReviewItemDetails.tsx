@@ -422,6 +422,25 @@ export const renderOHChangeHistory = (ohChangeHistory: OHChangeHistory[], result
   );
 };
 
+export const renderReserveLocQtys = (reserve?: Location[]) => {
+  if (reserve && reserve.length >= 1) {
+    return (
+      <View>
+        {reserve.map(item => (
+          <View
+            key={item.locationName}
+            style={styles.reserveLoc}
+          >
+            <Text>{item.locationName}</Text>
+            <Text>{item.qty}</Text>
+          </View>
+        ))}
+      </View>
+    );
+  }
+  return <></>;
+};
+
 export const renderAddPicklistButton = (
   props: (RenderProps & HandleProps),
   itemDetails: ItemDetails,
@@ -522,6 +541,8 @@ export const renderLocationComponent = (
             />
           )}
       </View>
+      {/* TODO : remove first location name from above when un commenting below line */}
+      {/* {renderReserveLocQtys(itemDetails.location.reserve)} */}
       <View style={styles.renderPickListContainer}>
         {renderAddPicklistButton(props, itemDetails, setCreatePickModalVisible)}
       </View>
