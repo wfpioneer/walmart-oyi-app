@@ -3464,12 +3464,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -3611,9 +3611,88 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.RESERVE" translation]
             </Text>
-            <Text>
-              A1-1
-            </Text>
+          </View>
+          <View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingLeft": 2,
+                  "paddingRight": 3,
+                  "paddingVertical": 3,
+                }
+              }
+            >
+              <Text>
+                A1-1
+              </Text>
+              <Text>
+                10
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingLeft": 2,
+                  "paddingRight": 3,
+                  "paddingVertical": 3,
+                }
+              }
+            >
+              <Text>
+                A1-2
+              </Text>
+              <Text>
+                20
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingLeft": 2,
+                  "paddingRight": 3,
+                  "paddingVertical": 3,
+                }
+              }
+            >
+              <Text>
+                B1-1
+              </Text>
+              <Text>
+                30
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingLeft": 2,
+                  "paddingRight": 3,
+                  "paddingVertical": 3,
+                }
+              }
+            >
+              <Text>
+                D1-1
+              </Text>
+              <Text>
+                50
+              </Text>
+            </View>
           </View>
           <View
             style={
@@ -3641,58 +3720,126 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         </View>
       </SFTCard>
       <React.Fragment>
-        <CollapsibleCard
-          icon=""
-          isOpened={false}
-          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-        >
-          <RenderItemHistoryCard
-            date="2022-07-23"
-            qty={55}
-          />
-          <RenderItemHistoryCard
-            date="2022-07-12"
-            qty={44}
-          />
-          <RenderItemHistoryCard
-            date="2022-06-28"
-            qty={34}
-          />
-          <RenderItemHistoryCard
-            date="2022-06-07"
-            qty={33}
-          />
-          <RenderItemHistoryCard
-            date="2022-05-15"
-            qty={23}
-          />
-          <View
-            style={
-              Object {
-                "backgroundColor": "#ffffffff",
-              }
+        <View
+          style={
+            Object {
+              "marginTop": 8,
             }
+          }
+        >
+          <CollapsibleCard
+            icon=""
+            isOpened={false}
+            title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
           >
-            <Button
-              backgroundColor="#0071e9"
-              disabled={false}
-              height={28}
-              onPress={[Function]}
-              radius={5}
+            <RenderItemHistoryCard
+              date="2022-07-23"
+              qty={55}
+            />
+            <RenderItemHistoryCard
+              date="2022-07-12"
+              qty={44}
+            />
+            <RenderItemHistoryCard
+              date="2022-06-28"
+              qty={34}
+            />
+            <RenderItemHistoryCard
+              date="2022-06-07"
+              qty={33}
+            />
+            <RenderItemHistoryCard
+              date="2022-05-15"
+              qty={23}
+            />
+            <View
               style={
                 Object {
-                  "width": 60,
+                  "backgroundColor": "#ffffffff",
                 }
               }
-              title="[missing \\"en.LOCATION.MORE\\" translation]..."
-              titleColor="#0071e9"
-              titleFontSize={12}
-              titleFontWeight="bold"
-              type={3}
-              width={-1}
+            >
+              <Button
+                backgroundColor="#0071e9"
+                disabled={false}
+                height={28}
+                onPress={[Function]}
+                radius={5}
+                style={
+                  Object {
+                    "width": 60,
+                  }
+                }
+                title="[missing \\"en.LOCATION.MORE\\" translation]..."
+                titleColor="#0071e9"
+                titleFontSize={12}
+                titleFontWeight="bold"
+                type={3}
+                width={-1}
+              />
+            </View>
+          </CollapsibleCard>
+        </View>
+        <View
+          style={
+            Object {
+              "marginTop": 8,
+            }
+          }
+        >
+          <CollapsibleCard
+            icon=""
+            isOpened={false}
+            title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+          >
+            <RenderItemHistoryCard
+              date="2022-11-05"
+              qty={66}
             />
-          </View>
-        </CollapsibleCard>
+            <RenderItemHistoryCard
+              date="2022-07-23"
+              qty={22}
+            />
+            <RenderItemHistoryCard
+              date="2022-07-20"
+              qty={45}
+            />
+            <RenderItemHistoryCard
+              date="2022-07-19"
+              qty={30}
+            />
+            <RenderItemHistoryCard
+              date="2022-05-23"
+              qty={44}
+            />
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#ffffffff",
+                }
+              }
+            >
+              <Button
+                backgroundColor="#0071e9"
+                disabled={false}
+                height={28}
+                onPress={[Function]}
+                radius={5}
+                style={
+                  Object {
+                    "width": 60,
+                  }
+                }
+                title="[missing \\"en.LOCATION.MORE\\" translation]..."
+                titleColor="#0071e9"
+                titleFontSize={12}
+                titleFontWeight="bold"
+                type={3}
+                width={-1}
+              />
+            </View>
+          </CollapsibleCard>
+        </View>
       </React.Fragment>
       <SFTCard
         bottomRightBtnAction={
@@ -3778,6 +3925,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",

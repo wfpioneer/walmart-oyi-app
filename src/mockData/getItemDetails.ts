@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import ItemDetails, { OHChangeHistory } from '../models/ItemDetails';
 import { approvalRequestSource, approvalStatus } from '../models/ApprovalListItem';
 /* eslint-disable quote-props */
