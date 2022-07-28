@@ -8,10 +8,10 @@ export const setItemHistory = (data: ItemHistoryI[], title: string) => ({
   payload: { data, title }
 } as const);
 
-export const clearHistory = () => ({
+export const clearItemHistory = () => ({
   type: CLEAR_ITEM_HISTORY
 } as const);
 
 export type Actions =
   | ReturnType<typeof setItemHistory>
-  | ReturnType<typeof clearHistory>
+  | ReturnType<typeof clearItemHistory>

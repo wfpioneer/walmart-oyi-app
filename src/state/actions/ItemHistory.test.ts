@@ -1,7 +1,7 @@
 import {
   CLEAR_ITEM_HISTORY,
   SET_ITEM_HISTORY,
-  clearHistory,
+  clearItemHistory,
   setItemHistory
 } from './ItemHistory';
 import { ItemHistoryI } from '../../models/ItemDetails';
@@ -24,7 +24,7 @@ describe('test action creators for ItemHistory', () => {
       payload: { data, title }
     });
 
-    const clearHistoryResult = clearHistory();
+    const clearHistoryResult = clearItemHistory();
     expect(clearHistoryResult).toStrictEqual({ type: CLEAR_ITEM_HISTORY });
   });
 });
