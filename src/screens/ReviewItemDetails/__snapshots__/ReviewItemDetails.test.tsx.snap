@@ -412,6 +412,91 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
 </View>
 `;
 
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderReserveLocQtys' Renders reserve location list 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingLeft": 2,
+        "paddingRight": 3,
+        "paddingVertical": 3,
+      }
+    }
+  >
+    <Text>
+      A1-1
+    </Text>
+    <Text>
+      10
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingLeft": 2,
+        "paddingRight": 3,
+        "paddingVertical": 3,
+      }
+    }
+  >
+    <Text>
+      A1-2
+    </Text>
+    <Text>
+      20
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingLeft": 2,
+        "paddingRight": 3,
+        "paddingVertical": 3,
+      }
+    }
+  >
+    <Text>
+      B1-1
+    </Text>
+    <Text>
+      30
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingLeft": 2,
+        "paddingRight": 3,
+        "paddingVertical": 3,
+      }
+    }
+  >
+    <Text>
+      D1-1
+    </Text>
+    <Text>
+      50
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders the barcodeErrorModal isVisible set to False 1`] = `
 <Modal
   animationType="none"
@@ -1671,12 +1756,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -1931,6 +2016,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -2434,12 +2520,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="99 - Store Use"
@@ -2697,6 +2783,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 20,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -2975,12 +3062,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -3374,12 +3461,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -3633,6 +3720,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -3915,12 +4003,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -4174,6 +4262,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -4456,12 +4545,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -4715,6 +4804,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -4997,12 +5087,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -5256,6 +5346,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",
@@ -5538,12 +5629,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -5797,6 +5888,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
+                    "qty": 10,
                     "sectionId": 1,
                     "sectionName": "1",
                     "type": "Reserve",

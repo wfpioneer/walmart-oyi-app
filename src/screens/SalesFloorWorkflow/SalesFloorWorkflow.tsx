@@ -643,6 +643,13 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         renderItem={renderItem}
         keyExtractor={(item, index) => `${item.id}-${index}`}
       />
+      {!isReadyToComplete && isPickQtyZero()
+        && (
+        <View style={styles.additionalItemsLabelView}>
+          <MaterialIcons name="info" size={30} color={COLOR.MAIN_THEME_COLOR} />
+          <Text style={styles.additionalItemsLabel}>{strings('PICKING.ADDITIONAL_ITEMS')}</Text>
+        </View>
+        )}
       <View style={styles.actionButtonsView}>
         <Button
           title={strings('PICKING.COMPLETE')}
@@ -674,7 +681,7 @@ const SalesFloorWorkflow = () => {
   const { backupCategories } = useTypedSelector(state => state.User.configs);
   const { showActivity } = useTypedSelector(state => state.modal);
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const navigation: NavigationProp<any> = useNavigation();
   const expirationState = useState('');
   const perishableItemsState = useState<Array<number>>([]);
   const showExpiryPromptState = useState(ExpiryPromptShow.HIDDEN);

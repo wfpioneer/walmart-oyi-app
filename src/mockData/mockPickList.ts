@@ -59,7 +59,8 @@ export const mockLocations: Location[] = [
     type: 'floor',
     typeNbr: 2,
     zoneId: 1,
-    zoneName: 'ABAR'
+    zoneName: 'ABAR',
+    qty: 10
   },
   {
     aisleId: 2,
@@ -70,7 +71,8 @@ export const mockLocations: Location[] = [
     type: 'floor',
     typeNbr: 2,
     zoneId: 1,
-    zoneName: 'ABAR'
+    zoneName: 'ABAR',
+    qty: 10
   }
 ];
 
@@ -84,7 +86,8 @@ export const mockReserveLocations: Location[] = [
     type: 'reserve',
     typeNbr: 2,
     zoneId: 1,
-    zoneName: 'ABAR'
+    zoneName: 'ABAR',
+    qty: 10
   },
   {
     aisleId: 3,
@@ -95,6 +98,7 @@ export const mockReserveLocations: Location[] = [
     type: 'reserve',
     typeNbr: 2,
     zoneId: 1,
-    zoneName: 'ABAR'
+    zoneName: 'ABAR',
+    qty: 10
   }
 ];

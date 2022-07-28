@@ -12,7 +12,9 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { AxiosError, AxiosResponse } from 'axios';
 import { object } from 'prop-types';
 import { strings } from '../../locales';
-import itemDetail, { mockOHChangeHistory, pickListMockHistory } from '../../mockData/getItemDetails';
+import
+itemDetail, { mockOHChangeHistory, mockReserveLocations, pickListMockHistory }
+  from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
   callBackbarcodeEmitter, createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount,
@@ -21,7 +23,7 @@ import ReviewItemDetails, {
   isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateCompleteItemApiErrortHook,
   onValidateCompleteItemApiResultHook, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
   renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
-  renderScanForNoActionButton, updateOHQtyApiHook
+  renderReserveLocQtys, renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -844,7 +846,8 @@ describe('ReviewItemDetailsScreen', () => {
           type: 'Reserve',
           typeNbr: 7,
           zoneId: 0,
-          zoneName: 'A'
+          zoneName: 'A',
+          qty: 10
         }
       ];
       const getReserveItemDetailsResults = getReserveItemDetails(itemDetail[123]);
@@ -919,7 +922,8 @@ describe('ReviewItemDetailsScreen', () => {
               type: 'Reserve',
               typeNbr: 7,
               zoneId: 0,
-              zoneName: 'A'
+              zoneName: 'A',
+              qty: 10
             }
           ],
           salesFloor: true,
@@ -1245,21 +1249,30 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders pick history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(pickListMockHistory, { status: 200 })
+        renderPickHistory(mockHandleProps, pickListMockHistory, { status: 200 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders pick history with no data for pick msg', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory([], { status: 200 })
+        renderPickHistory(mockHandleProps, [], { status: 200 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders pick history with error msg for result status 207', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory([], { status: 207 })
+        renderPickHistory(mockHandleProps, pickListMockHistory, { status: 207 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('Tests Rendering \'renderReserveLocQtys\'', () => {
+    it('Renders reserve location list', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderReserveLocQtys(mockReserveLocations)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

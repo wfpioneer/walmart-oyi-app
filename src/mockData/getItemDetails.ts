@@ -102,7 +102,8 @@ export default {
           sectionName: '1',
           locationName: 'A1-1',
           type: LOCATION_TYPES.RESERVE,
-          typeNbr: 7
+          typeNbr: 7,
+          qty: 10
         }
       ],
       count: 5
@@ -244,7 +245,8 @@ export default {
           sectionName: '1',
           locationName: 'A1-1',
           type: LOCATION_TYPES.RESERVE,
-          typeNbr: 7
+          typeNbr: 7,
+          qty: 20
         }
       ],
       count: 5
@@ -382,7 +384,8 @@ export default {
           sectionName: '1',
           locationName: 'A1-1',
           type: LOCATION_TYPES.RESERVE,
-          typeNbr: 7
+          typeNbr: 7,
+          qty: 30
         }
       ],
       count: 5
@@ -520,7 +523,8 @@ export default {
           sectionName: '1',
           locationName: 'A1-1',
           type: LOCATION_TYPES.RESERVE,
-          typeNbr: 7
+          typeNbr: 7,
+          qty: 40
         }
       ],
       count: 5
@@ -708,7 +712,7 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '12-05-2022'
+  createTS: '2022-07-23'
 },
 {
   id: 2,
@@ -727,7 +731,7 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '22-05-2022'
+  createTS: '2022-07-19'
 },
 {
   id: 3,
@@ -746,7 +750,7 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '12-07-2022'
+  createTS: '2022-07-20'
 },
 {
   id: 4,
@@ -765,7 +769,7 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '24-06-2022'
+  createTS: '2022-11-05'
 },
 {
   id: 5,
@@ -784,7 +788,7 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '28-05-2022'
+  createTS: '2022-05-23'
 },
 {
   id: 6,
@@ -803,5 +807,65 @@ export const pickListMockHistory = [{
   palletLocationId: 123,
   status: 'test',
   createdBy: 'test',
-  createTS: '11-05-2022'
+  createTS: '2021-06-23'
 }];
+
+export const mockReserveLocations = [
+  {
+    zoneId: 0,
+    aisleId: 1,
+    sectionId: 1,
+    zoneName: 'A',
+    aisleName: '1',
+    sectionName: '1',
+    locationName: 'A1-1',
+    type: LOCATION_TYPES.RESERVE,
+    typeNbr: 7,
+    qty: 10
+  },
+  {
+    zoneId: 0,
+    aisleId: 1,
+    sectionId: 2,
+    zoneName: 'A',
+    aisleName: '1',
+    sectionName: '2',
+    locationName: 'A1-2',
+    type: LOCATION_TYPES.RESERVE,
+    typeNbr: 7,
+    qty: 20
+  },
+  {
+    zoneId: 1,
+    aisleId: 1,
+    sectionId: 1,
+    zoneName: 'B',
+    aisleName: '1',
+    sectionName: '1',
+    locationName: 'B1-1',
+    type: LOCATION_TYPES.RESERVE,
+    typeNbr: 7,
+    qty: 30
+  },
+  {
+    zoneId: 3,
+    aisleId: 1,
+    sectionId: 1,
+    zoneName: 'D',
+    aisleName: '1',
+    sectionName: '1',
+    locationName: 'D1-1',
+    type: LOCATION_TYPES.RESERVE,
+    typeNbr: 7,
+    qty: 50
+  }
+];
+
+export const mockAdditionalItemDetails = {
+  color: 'red',
+  size: 88,
+  grossProfit: 2.5,
+  vendorPackQty: 33,
+  basePrice: 15.05,
+  margin: 14
+};
