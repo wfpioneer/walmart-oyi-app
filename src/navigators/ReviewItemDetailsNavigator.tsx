@@ -19,6 +19,7 @@ import { openCamera } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
 import { GET_ITEM_DETAILS } from '../state/actions/asyncAPI';
 import ItemHistory from '../screens/ItemHistory/ItemHistory';
+import { clearItemHistory } from '../state/actions/ItemHistory';
 
 const Stack = createStackNavigator();
 
@@ -76,7 +77,10 @@ const ReviewItemDetailsNavigator = () => {
     return navigation.goBack();
   };
 
-  const navigateHistoryBack = () => navigation.navigate('ReviewItemDetailsHome');
+  const navigateHistoryBack = () => {
+    dispatch(clearItemHistory());
+    navigation.navigate('ReviewItemDetailsHome');
+  };
 
   const renderCloseButton = () => (
     <TouchableOpacity onPress={navigateHistoryBack}>
