@@ -10,7 +10,7 @@ export default class AddPalletService {
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.put(
-      `${urls.locationUrl}/pallet/${payload.palletId}/section`,
+      `${urls.orchestrationURL}/pallet/${payload.palletId}/section`,
       {
         sectionId: payload.sectionId
       }
