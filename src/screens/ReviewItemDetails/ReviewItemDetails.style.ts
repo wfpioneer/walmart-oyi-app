@@ -135,6 +135,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     backgroundColor: COLOR.WHITE
+  },
+  historyContainer: {
+    marginTop: 8
+  },
+  reserveLoc: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: COLOR.WHITE,
+    paddingLeft: 2,
+    paddingRight: 3,
+    paddingVertical: 3
   }
 });
 
