@@ -131,14 +131,10 @@ export const clearSectionApiEffect = (
       // Success
       handleClearModalClose(setDisplayClearConfirmation, dispatch);
       const selectedTab: ClearLocationTarget = clearSectionApi.value.target;
-      if (selectedTab === ClearLocationTarget.FLOOR) {
-        // TODO refactor screen to put section details information into redux so we
-        // need to clear only that for this part
-        dispatch({ type: 'API/GET_SECTION_DETAILS/RESET' });
-        dispatch(getSectionDetails({ sectionId: section.id.toString() }));
-      } else {
-        dispatch({ type: 'API/GET_PALLET_DETAILS/RESET' });
-      }
+      // TODO refactor screen to put section details information into redux so we
+      // need to clear only that for this part
+      dispatch({ type: 'API/GET_SECTION_DETAILS/RESET' });
+      dispatch(getSectionDetails({ sectionId: section.id.toString() }));
       Toast.show({
         type: 'success',
         position: 'bottom',
@@ -478,7 +474,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           tabBarIndicatorStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
           swipeEnabled: sectionExists
         }}
-        initialRouteName="FloorDetails"
+        initialRouteName={selectedTab === ClearLocationTarget.FLOOR ? 'FloorDetails' : 'ReserveDetails'}
       >
         <Tab.Screen
           name="FloorDetails"
@@ -543,7 +539,7 @@ const LocationTabs = () : JSX.Element => {
   const locItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data);
   const locationName = `${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`;
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
-  const [selectedTab, setSelectedTab] = useState<ClearLocationTarget>();
+  const [selectedTab, setSelectedTab] = useState<ClearLocationTarget>(ClearLocationTarget.FLOOR);
 
   const bottomSheetLocationDetailsModalRef = useRef<BottomSheetModal>(null);
 
