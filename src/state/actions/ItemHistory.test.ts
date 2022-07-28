@@ -1,8 +1,8 @@
 import {
   CLEAR_ITEM_HISTORY,
-  SET_HISTORY,
+  SET_ITEM_HISTORY,
   clearHistory,
-  setHistory
+  setItemHistory
 } from './ItemHistory';
 import { ItemHistoryI } from '../../models/ItemDetails';
 
@@ -18,9 +18,9 @@ describe('test action creators for ItemHistory', () => {
       qty: 30
     }];
     const title = 'ITEM.PICK_HISTORY';
-    const setPickHistoryResult = setHistory(data, title);
+    const setPickHistoryResult = setItemHistory(data, title);
     expect(setPickHistoryResult).toStrictEqual({
-      type: SET_HISTORY,
+      type: SET_ITEM_HISTORY,
       payload: { data, title }
     });
 

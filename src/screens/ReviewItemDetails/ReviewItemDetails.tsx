@@ -54,7 +54,7 @@ import { CreatePickRequest } from '../../services/Picking.service';
 import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
-import { setHistory } from '../../state/actions/ItemHistory';
+import { setItemHistory } from '../../state/actions/ItemHistory';
 import {
   mockAdditionalItemDetails, mockOHChangeHistory, mockReserveLocations, pickListMockHistory
 } from '../../mockData/getItemDetails';
@@ -338,7 +338,7 @@ const onMorePickHistoryClick = (
     qty: itm.itemQty
   }));
   const title = 'ITEM.PICK_HISTORY';
-  dispatch(setHistory(data, title));
+  dispatch(setItemHistory(data, title));
   navigation.navigate('ItemHistory');
 };
 

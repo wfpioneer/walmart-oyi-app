@@ -4,7 +4,7 @@ import {
 import { ItemHistoryI } from '../../models/ItemDetails';
 import {
   clearHistory,
-  setHistory
+  setItemHistory
 } from '../actions/ItemHistory';
 
 describe('testing ItemHistory reducer', () => {
@@ -20,7 +20,7 @@ describe('testing ItemHistory reducer', () => {
     }];
     const title = 'ITEM.PICK_HISTORY';
     const resultState: ItemHistoryState = { data, title };
-    expect(ItemHistory(initialState, setHistory(data, title))).toStrictEqual(resultState);
+    expect(ItemHistory(initialState, setItemHistory(data, title))).toStrictEqual(resultState);
     expect(ItemHistory(initialState, clearHistory())).toStrictEqual(initialState);
   });
 });

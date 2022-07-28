@@ -31,7 +31,6 @@ const TabNavigator = (): JSX.Element => {
   const selectedAmount = useTypedSelector(state => state.Approvals.selectedItemQty);
   const dispatch = useDispatch();
   const { palletWorklists } = user.configs;
-  console.log('----user.configs-----', user.configs);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

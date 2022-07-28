@@ -2,7 +2,7 @@ import { ItemHistoryI } from '../../models/ItemDetails';
 import {
   Actions,
   CLEAR_ITEM_HISTORY,
-  SET_HISTORY
+  SET_ITEM_HISTORY
 } from '../actions/ItemHistory';
 
 export interface ItemHistoryState {
@@ -17,7 +17,7 @@ export const initialState: ItemHistoryState = {
 
 export const ItemHistory = (state = initialState, action: Actions) => {
   switch (action.type) {
-    case SET_HISTORY:
+    case SET_ITEM_HISTORY:
       return {
         ...state,
         data: action.payload.data,
