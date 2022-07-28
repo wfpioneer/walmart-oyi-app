@@ -164,6 +164,8 @@ describe('ReviewItemDetailsScreen', () => {
     name: 'Network Error',
     toJSON: () => object
   };
+  const onHandsChangeText = 'on hands change';
+
   describe('Tests renders ItemDetails API Responses', () => {
     const actualNav = jest.requireActual('@react-navigation/native');
     const navContextValue = {
@@ -204,7 +206,7 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('renders the details for a single item with AdditionItemDetails Flag set to true', () => {
+    it('renders extra details & change/pick history for a single item when AdditionItemDetails Flag is true', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
@@ -351,7 +353,7 @@ describe('ReviewItemDetailsScreen', () => {
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve,
-        userFeatures: ['on hands change']
+        userFeatures: [onHandsChangeText]
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -646,6 +648,7 @@ describe('ReviewItemDetailsScreen', () => {
     });
     const HIDE_ACTIVITY = 'MODAL/HIDE_ACTIVITY';
     const RESET_CREATE_PICK = 'API/CREATE_NEW_PICK/RESET';
+    const SHOW_INFO_MODAL = 'MODAL/SHOW_INFO_MODAL';
 
     it('Tests createNewPickApiHook on 200 success', () => {
       const successApi: AsyncState = {
@@ -1012,14 +1015,14 @@ describe('ReviewItemDetailsScreen', () => {
           text: '[missing "en.ITEM.NO_SIGN_PRINTED_DETAILS" translation]',
           title: '[missing "en.ITEM.NO_SIGN_PRINTED" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL'
+        type: SHOW_INFO_MODAL
       };
       const expectedActionNotCompleteNSFLResults = {
         payload: {
           text: '[missing "en.ITEM.NO_FLOOR_LOCATION_DETAILS" translation]',
           title: '[missing "en.ITEM.NO_FLOOR_LOCATION" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL'
+        type: SHOW_INFO_MODAL
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       mockItemDetailsScreenProps.actionCompleted = true;
@@ -1067,7 +1070,7 @@ describe('ReviewItemDetailsScreen', () => {
           text: '[missing "en.ITEM.SCAN_DOESNT_MATCH_DETAILS" translation]',
           title: '[missing "en.ITEM.SCAN_DOESNT_MATCH" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL'
+        type: SHOW_INFO_MODAL
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       onValidateCompleteItemApiResultHook(mockItemDetailsScreenProps, completedApi);
@@ -1091,14 +1094,14 @@ describe('ReviewItemDetailsScreen', () => {
           text: '[missing "en.ITEM.SCAN_DOESNT_MATCH_DETAILS" translation]',
           title: '[missing "en.ITEM.SCAN_DOESNT_MATCH" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL'
+        type: SHOW_INFO_MODAL
       };
       const expectedShowModalCompleteError = {
         payload: {
           text: '[missing "en.ITEM.ACTION_COMPLETE_ERROR_DETAILS" translation]',
           title: '[missing "en.ITEM.ACTION_COMPLETE_ERROR" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL'
+        type: SHOW_INFO_MODAL
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       onValidateCompleteItemApiErrortHook(mockItemDetailsScreenProps, errorApi);
@@ -1181,13 +1184,13 @@ describe('ReviewItemDetailsScreen', () => {
       expect(getTopRightBtnTxtResult).toStrictEqual('[missing "en.GENERICS.SEE_ALL" translation]');
     });
     it('test getPendingOnHandsQty', () => {
-      let getPendingOnHandsQtyResult = getPendingOnHandsQty(['on hands change'], -999);
+      let getPendingOnHandsQtyResult = getPendingOnHandsQty([onHandsChangeText], -999);
       expect(getPendingOnHandsQtyResult).toStrictEqual(true);
       getPendingOnHandsQtyResult = getPendingOnHandsQty([], -999);
       expect(getPendingOnHandsQtyResult).toStrictEqual(false);
-      getPendingOnHandsQtyResult = getPendingOnHandsQty(['on hands change'], 0);
+      getPendingOnHandsQtyResult = getPendingOnHandsQty([onHandsChangeText], 0);
       expect(getPendingOnHandsQtyResult).toStrictEqual(false);
-      getPendingOnHandsQtyResult = getPendingOnHandsQty(['on hands change'], 100);
+      getPendingOnHandsQtyResult = getPendingOnHandsQty([onHandsChangeText], 100);
       expect(getPendingOnHandsQtyResult).toStrictEqual(false);
     });
     it('test updateOHQtyApiHook', () => {
