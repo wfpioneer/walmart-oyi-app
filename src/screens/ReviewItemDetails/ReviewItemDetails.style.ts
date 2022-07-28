@@ -138,6 +138,15 @@ const styles = StyleSheet.create({
   },
   historyContainer: {
     marginTop: 8
+  },
+  reserveLoc: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: COLOR.WHITE,
+    paddingLeft: 2,
+    paddingRight: 3,
+    paddingVertical: 3
   }
 });
 
