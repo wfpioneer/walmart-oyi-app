@@ -90,6 +90,14 @@ const styles = StyleSheet.create({
     flex: 1,
     opacity: 0.2,
     backgroundColor: COLOR.BLACK_TRANSPARENT_200
+  },
+  additionalItemsLabelView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10
+  },
+  additionalItemsLabel: {
+    fontSize: 13
   }
 });
 
