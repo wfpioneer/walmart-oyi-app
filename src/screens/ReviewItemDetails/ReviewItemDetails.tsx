@@ -54,7 +54,10 @@ import { CreatePickRequest } from '../../services/Picking.service';
 import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
-import { mockOHChangeHistory } from '../../mockData/getItemDetails';
+import { setItemHistory } from '../../state/actions/ItemHistory';
+import {
+  mockAdditionalItemDetails, mockOHChangeHistory, mockReserveLocations, pickListMockHistory
+} from '../../mockData/getItemDetails';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -323,13 +326,45 @@ export const RenderItemHistoryCard = (
 );
 
 const MULTI_STATUS = 207;
-export const renderPickHistory = (pickHistoryList: PickHistory[], result: any) => {
+
+const onMorePickHistoryClick = (
+  dispatch: Dispatch<any>,
+  pickHistoryList: PickHistory[],
+  navigation: NavigationProp<any>
+) => {
+  const data = pickHistoryList.map(itm => ({
+    id: itm.id,
+    date: itm.createTS,
+    qty: itm.itemQty
+  }));
+  const title = 'ITEM.PICK_HISTORY';
+  dispatch(setItemHistory(data, title));
+  navigation.navigate('ItemHistory');
+};
+
+const onMoreOHChangeHistoryClick = (
+  navigation: NavigationProp<any>
+) => {
+  navigation.navigate('ItemHistory');
+  // navigation.navigate('AdditionalItemHistory');
+};
+
+export const renderPickHistory = (
+  props: HandleProps,
+  pickHistoryList: PickHistory[],
+  result: any
+) => {
+  // TODO : also check for their respective status if status for oh change history is 200 than render
   if (result && result.status !== MULTI_STATUS) {
     if (pickHistoryList && pickHistoryList.length) {
-      const data = pickHistoryList.length > 5 ? pickHistoryList.slice(-5) : pickHistoryList;
+      const data = pickHistoryList.sort((a, b) => {
+        const date1 = new Date(a.createTS);
+        const date2 = new Date(b.createTS);
+        return date2 > date1 ? 1 : -1;
+      });
       return (
         <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
-          {data.map(item => (
+          {data.slice(0, 5).map(item => (
             <RenderItemHistoryCard
               key={item.id}
               date={item.createTS}
@@ -337,18 +372,18 @@ export const renderPickHistory = (pickHistoryList: PickHistory[], result: any) =
             />
           ))}
           {pickHistoryList.length > 5 && (
-          <View style={styles.moreBtnContainer}>
-            <Button
-              type={3}
-              title={`${strings('LOCATION.MORE')}...`}
-              titleColor={COLOR.MAIN_THEME_COLOR}
-              titleFontSize={12}
-              titleFontWeight="bold"
-              height={28}
-              onPress={() => {}}
-              style={styles.historyMoreBtn}
-            />
-          </View>
+            <View style={styles.moreBtnContainer}>
+              <Button
+                type={3}
+                title={`${strings('LOCATION.MORE')}...`}
+                titleColor={COLOR.MAIN_THEME_COLOR}
+                titleFontSize={12}
+                titleFontWeight="bold"
+                height={28}
+                onPress={() => onMorePickHistoryClick(props.dispatch, data, props.navigation)}
+                style={styles.historyMoreBtn}
+              />
+            </View>
           )}
         </CollapsibleCard>
       );
@@ -371,11 +406,8 @@ export const renderPickHistory = (pickHistoryList: PickHistory[], result: any) =
   );
 };
 
-export const renderOHChangeHistory = (
-  ohChangeHistory: OHChangeHistory[],
-  result: AxiosResponse,
-  navigation: NavigationProp<any>
-) => {
+export const renderOHChangeHistory = (props: HandleProps, ohChangeHistory: OHChangeHistory[], result: AxiosResponse) => {
+  // TODO : also check for their respective status if status for oh change history is 200 than render
   if (result && result.status !== MULTI_STATUS) {
     if (ohChangeHistory && ohChangeHistory.length) {
       const data = [...ohChangeHistory].sort((a, b) => {
@@ -401,9 +433,7 @@ export const renderOHChangeHistory = (
               titleFontSize={12}
               titleFontWeight="bold"
               height={28}
-              onPress={() => {
-                navigation.navigate('AdditionalItemHistory');
-              }}
+              onPress={() => onMoreOHChangeHistoryClick(props.navigation)}
               style={styles.historyMoreBtn}
             />
           </View>
@@ -427,6 +457,25 @@ export const renderOHChangeHistory = (
       </View>
     </CollapsibleCard>
   );
+};
+
+export const renderReserveLocQtys = (reserve?: Location[]) => {
+  if (reserve && reserve.length) {
+    return (
+      <View>
+        {reserve.map(item => (
+          <View
+            key={item.locationName}
+            style={styles.reserveLoc}
+          >
+            <Text>{item.locationName}</Text>
+            <Text>{item.qty}</Text>
+          </View>
+        ))}
+      </View>
+    );
+  }
+  return <></>;
 };
 
 export const renderAddPicklistButton = (
@@ -494,7 +543,8 @@ export const renderLocationComponent = (
   itemDetails: ItemDetails,
   setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => {
-  const { floorLocations, reserveLocations } = props;
+  const { floorLocations, reserveLocations, userConfigs } = props;
+  const { additionalItemDetails } = userConfigs;
   return (
     <View style={styles.locationContainer}>
       <View style={styles.locationDetailsContainer}>
@@ -516,7 +566,7 @@ export const renderLocationComponent = (
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.RESERVE')}</Text>
         {reserveLocations && reserveLocations.length >= 1
-          ? <Text>{reserveLocations[0].locationName}</Text>
+          ? !additionalItemDetails && <Text>{reserveLocations[0].locationName}</Text>
           : (
             <Button
               type={3}
@@ -529,6 +579,8 @@ export const renderLocationComponent = (
             />
           )}
       </View>
+      {/* TODO : replace mockReserveLocations with reserveLocations after orchestration api integration */}
+      {additionalItemDetails && renderReserveLocQtys(mockReserveLocations)}
       <View style={styles.renderPickListContainer}>
         {renderAddPicklistButton(props, itemDetails, setCreatePickModalVisible)}
       </View>
@@ -871,6 +923,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     floorLocations, userFeatures, userConfigs
   } = props;
 
+  const { additionalItemDetails } = userConfigs;
   useEffectHook(() => () => {
     dispatch(resetLocations());
   }, []);
@@ -1063,14 +1116,15 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               price={itemDetails.price}
               exceptionType={getExceptionType(actionCompleted, itemDetails)}
               navigationForPrint={navigation}
-              showAdditionalItemDetails={userConfigs.additionalItemDetails}
+              showAdditionalItemDetails={additionalItemDetails}
+              // TODO : replace mockAdditionalItemDetails with itemDetails after integration of orchestration api
               additionalItemDetails={{
-                color: itemDetails.color,
-                margin: itemDetails.margin,
-                vendorPackQty: itemDetails.vendorPackQty,
-                grossProfit: itemDetails.grossProfit,
-                size: itemDetails.size,
-                basePrice: itemDetails.basePrice
+                color: mockAdditionalItemDetails.color,
+                margin: mockAdditionalItemDetails.margin,
+                vendorPackQty: mockAdditionalItemDetails.vendorPackQty,
+                grossProfit: mockAdditionalItemDetails.grossProfit,
+                size: mockAdditionalItemDetails.size,
+                basePrice: mockAdditionalItemDetails.basePrice
               }}
             />
             <SFTCard
@@ -1106,18 +1160,33 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
             </SFTCard>
-            {userConfigs.additionalItemDetails && (
-              <>
-                {renderOHChangeHistory(mockOHChangeHistory, {
+            {/* TODO : replace mockOHChangeHistory, pickListMockHistory
+              with itemDetails.ohChangeHistory, itemDetails.picklistHistory after orchestration api integration
+              and { status: 200 } with result
+            */}
+            {additionalItemDetails && (
+            <>
+              <View style={styles.historyContainer}>
+                {renderOHChangeHistory(props, mockOHChangeHistory, {
                   config: {},
                   data: '',
                   status: 200,
                   headers: {},
                   statusText: 'OK',
                   request: {}
-                }, // TODO pass Additional item details results here
-                navigation)}
-              </>
+                })}
+              </View>
+              <View style={styles.historyContainer}>
+                {renderPickHistory(props, pickListMockHistory, {
+                  config: {},
+                  data: '',
+                  status: 200,
+                  headers: {},
+                  statusText: 'OK',
+                  request: {}
+                })}
+              </View>
+            </>
             )}
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
               itemDetails, isSalesMetricsGraphView)}

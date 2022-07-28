@@ -57,7 +57,8 @@ describe('ItemDetailScreen reducer tests', () => {
           sectionName: '1',
           locationName: 'A1-1',
           type: 'Reserve',
-          typeNbr: 7
+          typeNbr: 7,
+          qty: 10
         }
       ],
       selectedLocation: null,
