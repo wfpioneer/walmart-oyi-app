@@ -94,4 +94,10 @@ interface ItemDetails {
   picklistHistory?: PickHistory[]
 }
 
+export interface ItemHistoryI {
+  id: number;
+  date: string;
+  qty: number;
+}
+
 export default ItemDetails;

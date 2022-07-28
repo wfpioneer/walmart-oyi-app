@@ -1249,21 +1249,21 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders pick history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(pickListMockHistory, { status: 200 })
+        renderPickHistory(mockHandleProps, pickListMockHistory, { status: 200 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders pick history with no data for pick msg', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory([], { status: 200 })
+        renderPickHistory(mockHandleProps, [], { status: 200 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders pick history with error msg for result status 207', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory([], { status: 207 })
+        renderPickHistory(mockHandleProps, pickListMockHistory, { status: 207 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

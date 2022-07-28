@@ -1756,12 +1756,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -2520,12 +2520,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="99 - Store Use"
@@ -3062,12 +3062,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -3461,12 +3461,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -4003,12 +4003,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -4545,12 +4545,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -5087,12 +5087,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"
@@ -5629,12 +5629,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 1500.3,
-            "color": undefined,
-            "grossProfit": undefined,
-            "margin": undefined,
-            "size": undefined,
-            "vendorPackQty": undefined,
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
           }
         }
         category="93 - Meat PI"

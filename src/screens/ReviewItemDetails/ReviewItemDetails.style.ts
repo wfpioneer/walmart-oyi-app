@@ -136,6 +136,9 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: COLOR.WHITE
   },
+  historyContainer: {
+    marginTop: 8
+  },
   reserveLoc: {
     flexDirection: 'row',
     justifyContent: 'space-between',
