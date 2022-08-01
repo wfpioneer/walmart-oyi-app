@@ -405,6 +405,59 @@ export const renderPickHistory = (
   );
 };
 
+export const renderReplenishmentCard = (
+  props: HandleProps,
+  itemDetails: ItemDetails,
+  result: any
+) => {
+  // TODO : also check for their respective status
+  if (result && result.status !== MULTI_STATUS) {
+    const { replenishment, deliveries } = itemDetails;
+    if (deliveries && deliveries.length) {
+      const data = deliveries.sort((a, b) => {
+        const date1 = new Date(a.date);
+        const date2 = new Date(b.date);
+        return date2 > date1 ? 1 : -1;
+      });
+      return (
+        <CollapsibleCard title={strings('ITEM.REPLENISHMENT')}>
+          <>
+            <View style={styles.historyCard}>
+              <Text>{strings('ITEM.ON_ORDER')}</Text>
+              <Text>{replenishment.onOrder}</Text>
+            </View>
+            {data.slice(0, 5).map((item, index) => {
+              const key = `delivery-${index}`;
+              return (
+                <RenderItemHistoryCard
+                  key={key}
+                  date={item.date}
+                  qty={item.qty}
+                />
+              );
+            })}
+          </>
+        </CollapsibleCard>
+      );
+    }
+    return (
+      <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+        <View style={styles.noDataContainer}>
+          <Text>{strings('ITEM.NO_PICK_HISTORY')}</Text>
+        </View>
+      </CollapsibleCard>
+    );
+  }
+  return (
+    <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
+        <Text>{strings('ITEM.ERROR_PICK_HISTORY')}</Text>
+      </View>
+    </CollapsibleCard>
+  );
+};
+
 export const renderOHChangeHistory = (props: HandleProps, ohChangeHistory: OHChangeHistory[], result: any) => {
   // TODO : also check for their respective status if status for oh change history is 200 than render
   if (result && result.status !== MULTI_STATUS) {
