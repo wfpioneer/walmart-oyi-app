@@ -67,7 +67,7 @@ export interface LocationProps {
     itemPopupVisible:boolean;
     getSectionDetailsApi: AsyncState;
     clearSectionApi: AsyncState;
-    setSelectedTab: React.Dispatch<React.SetStateAction<ClearLocationTarget | undefined>>;
+    setSelectedTab: React.Dispatch<React.SetStateAction<ClearLocationTarget>>;
     setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
     removeSectionApi: AsyncState;
     displayRemoveConfirmation: boolean;
