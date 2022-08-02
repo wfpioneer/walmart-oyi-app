@@ -22,7 +22,7 @@ import {
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
-import ItemDetails, { OHChangeHistory, PickHistory } from '../../models/ItemDetails';
+import ItemDetails, { ItemHistoryI, OHChangeHistory, PickHistory } from '../../models/ItemDetails';
 import { CollapsibleCard } from '../../components/CollapsibleCard/CollapsibleCard';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
@@ -56,7 +56,8 @@ import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setItemHistory } from '../../state/actions/ItemHistory';
 import {
-  mockAdditionalItemDetails, mockOHChangeHistory, mockReserveLocations, pickListMockHistory
+  mockAdditionalItemDetails, mockOHChangeHistory,
+  mockReserveLocations, pickListMockHistory
 } from '../../mockData/getItemDetails';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
@@ -332,10 +333,10 @@ const onMorePickHistoryClick = (
   pickHistoryList: PickHistory[],
   navigation: NavigationProp<any>
 ) => {
-  const data = pickHistoryList.map(itm => ({
-    id: itm.id,
-    date: itm.createTS,
-    qty: itm.itemQty
+  const data: ItemHistoryI[] = pickHistoryList.map(item => ({
+    id: item.id,
+    date: item.createTS,
+    qty: item.itemQty
   }));
   const title = 'ITEM.PICK_HISTORY';
   dispatch(setItemHistory(data, title));
@@ -343,20 +344,28 @@ const onMorePickHistoryClick = (
 };
 
 const onMoreOHChangeHistoryClick = (
+  dispatch: Dispatch<any>,
+  onHandsHistory: OHChangeHistory[],
   navigation: NavigationProp<any>
 ) => {
+  const historyData: ItemHistoryI[] = onHandsHistory.map(item => ({
+    id: item.id,
+    date: item.initiatedTimestamp,
+    qty: item.oldQuantity
+  }));
+  dispatch(setItemHistory(historyData, 'ITEM.OH_CHANGE_HISTORY'));
   navigation.navigate('ItemHistory');
 };
 
 export const renderPickHistory = (
   props: HandleProps,
   pickHistoryList: PickHistory[],
-  result: any
+  result: AxiosResponse
 ) => {
   // TODO : also check for their respective status if status for oh change history is 200 than render
   if (result && result.status !== MULTI_STATUS) {
     if (pickHistoryList && pickHistoryList.length) {
-      const data = pickHistoryList.sort((a, b) => {
+      const data = [...pickHistoryList].sort((a, b) => {
         const date1 = new Date(a.createTS);
         const date2 = new Date(b.createTS);
         return date2 > date1 ? 1 : -1;
@@ -405,11 +414,11 @@ export const renderPickHistory = (
   );
 };
 
-export const renderOHChangeHistory = (props: HandleProps, ohChangeHistory: OHChangeHistory[], result: any) => {
+export const renderOHChangeHistory = (props: HandleProps, ohChangeHistory: OHChangeHistory[], result: AxiosResponse) => {
   // TODO : also check for their respective status if status for oh change history is 200 than render
   if (result && result.status !== MULTI_STATUS) {
     if (ohChangeHistory && ohChangeHistory.length) {
-      const data = ohChangeHistory.sort((a, b) => {
+      const data = [...ohChangeHistory].sort((a, b) => {
         const date1 = new Date(a.initiatedTimestamp);
         const date2 = new Date(b.initiatedTimestamp);
         return date2 > date1 ? 1 : -1;
@@ -432,7 +441,7 @@ export const renderOHChangeHistory = (props: HandleProps, ohChangeHistory: OHCha
               titleFontSize={12}
               titleFontWeight="bold"
               height={28}
-              onPress={() => onMoreOHChangeHistoryClick(props.navigation)}
+              onPress={() => onMoreOHChangeHistoryClick(props.dispatch, ohChangeHistory, props.navigation)}
               style={styles.historyMoreBtn}
             />
           </View>
@@ -1166,10 +1175,24 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             {additionalItemDetails && (
             <>
               <View style={styles.historyContainer}>
-                {renderOHChangeHistory(props, mockOHChangeHistory, { status: 200 })}
+                {renderOHChangeHistory(props, mockOHChangeHistory, {
+                  config: {},
+                  data: '',
+                  status: 200,
+                  headers: {},
+                  statusText: 'OK',
+                  request: {}
+                })}
               </View>
               <View style={styles.historyContainer}>
-                {renderPickHistory(props, pickListMockHistory, { status: 200 })}
+                {renderPickHistory(props, pickListMockHistory, {
+                  config: {},
+                  data: '',
+                  status: 200,
+                  headers: {},
+                  statusText: 'OK',
+                  request: {}
+                })}
               </View>
             </>
             )}

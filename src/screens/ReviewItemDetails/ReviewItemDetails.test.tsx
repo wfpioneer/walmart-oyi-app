@@ -61,8 +61,6 @@ jest.mock('@react-navigation/native', () => {
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -70,7 +68,10 @@ const navigationProp: NavigationProp<any> = {
   reset: jest.fn(),
   setOptions: jest.fn(),
   setParams: jest.fn(),
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  getState: jest.fn(),
+  getParent: jest.fn(),
+  getId: jest.fn()
 };
 
 const routeProp: RouteProp<any, string> = {
@@ -148,10 +149,6 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
 };
 
 describe('ReviewItemDetailsScreen', () => {
-  const defaultScannedEvent = {
-    type: null,
-    value: null
-  };
   const defaultResult: AxiosResponse = {
     config: {},
     data: {},
@@ -167,6 +164,8 @@ describe('ReviewItemDetailsScreen', () => {
     name: 'Network Error',
     toJSON: () => object
   };
+  const onHandsChangeText = 'on hands change';
+
   describe('Tests renders ItemDetails API Responses', () => {
     const actualNav = jest.requireActual('@react-navigation/native');
     const navContextValue = {
@@ -188,7 +187,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(toJSON()).toMatchSnapshot();
     });
     it('renders the details for a single item with non-null status', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -207,8 +206,29 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+    it('renders extra details & change/pick history for a single item when AdditionItemDetails Flag is true', () => {
+      const testProps: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        result: {
+          ...defaultResult,
+          data: itemDetail[123],
+          status: 200
+        },
+        exceptionType: 'NSFL',
+        newOHQty: itemDetail[123].onHandsQty,
+        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
+        floorLocations: itemDetail[123].location.floor,
+        reserveLocations: itemDetail[123].location.reserve,
+        userConfigs: { ...mockConfig, additionalItemDetails: true }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReviewItemDetailsScreen {...testProps} />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
     it('renders the details for a single item with ohQtyModalVisible true', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -229,7 +249,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the details for a single item with createPickModalVisible true', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -250,7 +270,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the details for a single item with errorModalVisible true', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -271,7 +291,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the details for a single item with null status', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -294,7 +314,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the On Hands Cloud Qty of 42', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -318,7 +338,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders "Generic Change translation" if pendingOH is -999 and user has OH role', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -333,7 +353,7 @@ describe('ReviewItemDetailsScreen', () => {
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve,
-        userFeatures: ['on hands change']
+        userFeatures: [onHandsChangeText]
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -342,7 +362,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders \'Item Details Api Error\' for a failed request ', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         error: mockError,
         exceptionType: '',
@@ -356,7 +376,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders \'Scanned Item Not Found\' on request status 204', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -373,7 +393,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders \'Activity Indicator\' waiting for ItemDetails Response ', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         isWaiting: true,
         exceptionType: '',
@@ -386,7 +406,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders the details for a item with multi status 207(error retreiving sales history)', () => {
-      const testProps = {
+      const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
@@ -626,6 +646,9 @@ describe('ReviewItemDetailsScreen', () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
+    const HIDE_ACTIVITY = 'MODAL/HIDE_ACTIVITY';
+    const RESET_CREATE_PICK = 'API/CREATE_NEW_PICK/RESET';
+    const SHOW_INFO_MODAL = 'MODAL/SHOW_INFO_MODAL';
 
     it('Tests createNewPickApiHook on 200 success', () => {
       const successApi: AsyncState = {
@@ -647,8 +670,8 @@ describe('ReviewItemDetailsScreen', () => {
       expect(mockSetSelectedSection).toHaveBeenCalledWith('');
       expect(mockSetIsQuickPick).toHaveBeenCalledWith(false);
       expect(mockSetNumberOfPallets).toHaveBeenCalledWith(1);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
     });
     it('Tests createNewPickApiHook on 409 failure when there are no reserve pallets available', () => {
       const failureApi: AsyncState = {
@@ -673,8 +696,8 @@ describe('ReviewItemDetailsScreen', () => {
         failureApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
       expect(Toast.show).toHaveBeenCalledWith(toastPickList409Error);
     });
     it('Tests createNewPickApiHook on 409 failure', () => {
@@ -700,8 +723,8 @@ describe('ReviewItemDetailsScreen', () => {
         failureApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
       expect(Toast.show).toHaveBeenCalledWith(toastPickList409Error);
     });
     it('Tests createNewPickApiHook on failure', () => {
@@ -720,8 +743,8 @@ describe('ReviewItemDetailsScreen', () => {
         failureApi, mockDispatch, true, mockSetSelectedSection, mockSetIsQuickPick, mockSetNumberOfPallets
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/CREATE_NEW_PICK/RESET' });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
       expect(Toast.show).toHaveBeenCalledWith(toastPickListError);
     });
     it('Tests createNewPickApiHook isWaiting', () => {
@@ -992,14 +1015,14 @@ describe('ReviewItemDetailsScreen', () => {
           text: '[missing "en.ITEM.NO_SIGN_PRINTED_DETAILS" translation]',
           title: '[missing "en.ITEM.NO_SIGN_PRINTED" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL'
+        type: SHOW_INFO_MODAL
       };
       const expectedActionNotCompleteNSFLResults = {
         payload: {
           text: '[missing "en.ITEM.NO_FLOOR_LOCATION_DETAILS" translation]',
           title: '[missing "en.ITEM.NO_FLOOR_LOCATION" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL'
+        type: SHOW_INFO_MODAL
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       mockItemDetailsScreenProps.actionCompleted = true;
@@ -1047,7 +1070,7 @@ describe('ReviewItemDetailsScreen', () => {
           text: '[missing "en.ITEM.SCAN_DOESNT_MATCH_DETAILS" translation]',
           title: '[missing "en.ITEM.SCAN_DOESNT_MATCH" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL'
+        type: SHOW_INFO_MODAL
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       onValidateCompleteItemApiResultHook(mockItemDetailsScreenProps, completedApi);
@@ -1071,14 +1094,14 @@ describe('ReviewItemDetailsScreen', () => {
           text: '[missing "en.ITEM.SCAN_DOESNT_MATCH_DETAILS" translation]',
           title: '[missing "en.ITEM.SCAN_DOESNT_MATCH" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL'
+        type: SHOW_INFO_MODAL
       };
       const expectedShowModalCompleteError = {
         payload: {
           text: '[missing "en.ITEM.ACTION_COMPLETE_ERROR_DETAILS" translation]',
           title: '[missing "en.ITEM.ACTION_COMPLETE_ERROR" translation]'
         },
-        type: 'MODAL/SHOW_INFO_MODAL'
+        type: SHOW_INFO_MODAL
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       onValidateCompleteItemApiErrortHook(mockItemDetailsScreenProps, errorApi);
@@ -1161,13 +1184,13 @@ describe('ReviewItemDetailsScreen', () => {
       expect(getTopRightBtnTxtResult).toStrictEqual('[missing "en.GENERICS.SEE_ALL" translation]');
     });
     it('test getPendingOnHandsQty', () => {
-      let getPendingOnHandsQtyResult = getPendingOnHandsQty(['on hands change'], -999);
+      let getPendingOnHandsQtyResult = getPendingOnHandsQty([onHandsChangeText], -999);
       expect(getPendingOnHandsQtyResult).toStrictEqual(true);
       getPendingOnHandsQtyResult = getPendingOnHandsQty([], -999);
       expect(getPendingOnHandsQtyResult).toStrictEqual(false);
-      getPendingOnHandsQtyResult = getPendingOnHandsQty(['on hands change'], 0);
+      getPendingOnHandsQtyResult = getPendingOnHandsQty([onHandsChangeText], 0);
       expect(getPendingOnHandsQtyResult).toStrictEqual(false);
-      getPendingOnHandsQtyResult = getPendingOnHandsQty(['on hands change'], 100);
+      getPendingOnHandsQtyResult = getPendingOnHandsQty([onHandsChangeText], 100);
       expect(getPendingOnHandsQtyResult).toStrictEqual(false);
     });
     it('test updateOHQtyApiHook', () => {
@@ -1226,21 +1249,21 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders OH history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockOHChangeHistory, { status: 200 })
+        renderOHChangeHistory(mockHandleProps, mockOHChangeHistory, defaultResult)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders OH history with no data for pick msg', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory([], { status: 200 })
+        renderOHChangeHistory(mockHandleProps, [], defaultResult)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders OH history with error msg for result status 207', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory([], { status: 207 })
+        renderOHChangeHistory(mockHandleProps, [], { ...defaultResult, status: 207 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -1249,21 +1272,21 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders pick history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, pickListMockHistory, { status: 200 })
+        renderPickHistory(mockHandleProps, pickListMockHistory, defaultResult)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders pick history with no data for pick msg', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, [], { status: 200 })
+        renderPickHistory(mockHandleProps, [], defaultResult)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders pick history with error msg for result status 207', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, pickListMockHistory, { status: 207 })
+        renderPickHistory(mockHandleProps, pickListMockHistory, { ...defaultResult, status: 207 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

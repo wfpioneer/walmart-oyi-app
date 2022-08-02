@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HeaderBackButton } from '@react-navigation/elements';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -28,7 +28,7 @@ const ReviewItemDetailsNavigator = () => {
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const { title } = useTypedSelector(state => state.ItemHistory);
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const navigation: NavigationProp<any> = useNavigation();
 
   const renderScanButton = () => (
     <TouchableOpacity onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
