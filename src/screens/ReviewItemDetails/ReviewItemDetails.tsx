@@ -55,7 +55,7 @@ import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setItemHistory } from '../../state/actions/ItemHistory';
-import {
+import itemDetail, {
   mockAdditionalItemDetails, mockOHChangeHistory,
   mockReserveLocations, pickListMockHistory
 } from '../../mockData/getItemDetails';
@@ -1229,8 +1229,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
             </SFTCard>
-            {/* TODO : replace mockOHChangeHistory, pickListMockHistory
-              with itemDetails.ohChangeHistory, itemDetails.picklistHistory after orchestration api integration
+            {/* TODO : replace mockOHChangeHistory, pickListMockHistory, itemDetail[123]
+              with itemDetails.ohChangeHistory, itemDetails.picklistHistory, itemDetails
+              after orchestration api integration
               and { status: 200 } with result
             */}
             {additionalItemDetails && (
@@ -1256,7 +1257,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 })}
               </View>
               <View style={styles.historyContainer}>
-                {renderReplenishmentCard(itemDetails, {
+                {renderReplenishmentCard(itemDetail[123], {
                   config: {},
                   data: '',
                   status: 200,
