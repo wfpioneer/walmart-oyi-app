@@ -56,7 +56,7 @@ export default {
     CREATE: 'Create',
     UNASSIGNED: 'unassigned',
     SELECTED: 'selected',
-    UPDATE: 'Update'
+    UPDATE: 'Update Configuration'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
