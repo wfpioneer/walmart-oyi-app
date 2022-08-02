@@ -415,7 +415,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders replenishment card with delivery history 1`] = `
 <View>
   <CollapsibleHeaderCard
-    icon=""
+    icon="label-variant"
     isOpened={false}
     title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
     toggleIsOpened={[Function]}
@@ -426,7 +426,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders replenishment card with no delivery history 1`] = `
 <View>
   <CollapsibleHeaderCard
-    icon=""
+    icon="label-variant"
     isOpened={false}
     title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
     toggleIsOpened={[Function]}
@@ -2908,7 +2908,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         >
           <CollapsibleCard
-            icon=""
+            icon="label-variant"
             isOpened={false}
             title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
           >

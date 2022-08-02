@@ -457,7 +457,7 @@ export const renderReplenishmentCard = (
 ) => {
   const { replenishment } = itemDetails;
   return (
-    <CollapsibleCard title={strings('ITEM.REPLENISHMENT')}>
+    <CollapsibleCard title={strings('ITEM.REPLENISHMENT')} icon="label-variant">
       <View style={styles.replenishmentContainer}>
         <View style={styles.replenishmentOrder}>
           <Text>{strings('ITEM.ON_ORDER')}</Text>
