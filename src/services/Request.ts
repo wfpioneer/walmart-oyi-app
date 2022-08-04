@@ -147,7 +147,7 @@ class Request {
     return Request.instance;
   }
 
-   // Creates a CancelToken for the Request
+  // Creates a CancelToken for the Request
   getCancelToken = (options?: AxiosRequestConfig) => {
     const axiosCancelToken = axios.CancelToken.source();
     const timeoutInterval: number = options?.timeout ? options.timeout : TIMEOUT;

@@ -56,7 +56,7 @@ export default {
     CREATE: '创建',
     UNASSIGNED: '未分配',
     SELECTED: '已选择',
-    UPDATE: '更新'
+    UPDATE: '更新配置'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -135,7 +135,9 @@ export default {
     SIZE: 'Ti-Hi',
     PRICE_BEFORE_TAX: '税前零售',
     MARGIN: '利润',
-    GROSS_PROFIT: '毛利'
+    GROSS_PROFIT: '毛利',
+    HISTORY: '历史信息',
+    NO_HISTORY: '无历史记录信息'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',

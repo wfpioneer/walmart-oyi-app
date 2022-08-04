@@ -63,18 +63,6 @@ const styles = StyleSheet.create({
   },
   printPriceBtn: {
     marginVertical: 10
-  },
-  contentView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly'
-  },
-  contentText: {
-    fontSize: 12,
-    paddingVertical: 2
-  },
-  ViewPadding: {
-    paddingHorizontal: 5
   }
 });
 

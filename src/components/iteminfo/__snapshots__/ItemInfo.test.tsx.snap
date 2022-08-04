@@ -102,213 +102,39 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
     title="[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]"
   >
     <View
-      style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "justifyContent": "space-evenly",
-        }
-      }
       testID="additional-item-details"
     >
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-          }
+      <ItemDetailsList
+        indentAfterFirstRow={false}
+        rows={
+          Array [
+            Object {
+              "label": "[missing \\"en.ITEM.VENDOR_PACK\\" translation]",
+              "value": 33,
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.COLOR\\" translation]",
+              "value": "red",
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.SIZE\\" translation]",
+              "value": 88,
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.PRICE_BEFORE_TAX\\" translation]",
+              "value": "$15.05",
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.MARGIN\\" translation]",
+              "value": "$14.00",
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.GROSS_PROFIT\\" translation]",
+              "value": "$2.50",
+            },
+          ]
         }
-      >
-        <View
-          style={
-            Object {
-              "paddingHorizontal": 5,
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            [missing "en.ITEM.VENDOR_PACK" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            [missing "en.ITEM.PRICE_BEFORE_TAX" translation]
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "paddingHorizontal": 5,
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            33
-          </Text>
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            $15.05
-          </Text>
-        </View>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-          }
-        }
-      >
-        <View
-          style={
-            Object {
-              "paddingHorizontal": 5,
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            [missing "en.ITEM.COLOR" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            [missing "en.ITEM.MARGIN" translation]
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "paddingHorizontal": 5,
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            red
-          </Text>
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            $14
-          </Text>
-        </View>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-          }
-        }
-      >
-        <View
-          style={
-            Object {
-              "paddingHorizontal": 5,
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            [missing "en.ITEM.SIZE" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            [missing "en.ITEM.GROSS_PROFIT" translation]
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "paddingHorizontal": 5,
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            88
-          </Text>
-          <Text
-            style={
-              Object {
-                "fontSize": 12,
-                "paddingVertical": 2,
-              }
-            }
-          >
-            $2.5
-          </Text>
-        </View>
-      </View>
+      />
     </View>
   </CollapsibleCard>
   <Text

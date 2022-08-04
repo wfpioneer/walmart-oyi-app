@@ -56,7 +56,7 @@ export default {
     CREATE: 'Crear',
     UNASSIGNED: 'Sin asignar',
     SELECTED: 'Seleccionado',
-    UPDATE: 'Actualizar'
+    UPDATE: 'Actualizar Configuración'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -135,7 +135,9 @@ export default {
     SIZE: 'Tamaño',
     PRICE_BEFORE_TAX: 'Precio sin Impuesto',
     MARGIN: 'Margen',
-    GROSS_PROFIT: 'Ganancia Bruta'
+    GROSS_PROFIT: 'Ganancia Bruta',
+    HISTORY: 'Historial',
+    NO_HISTORY: 'No hay historial disponible'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
