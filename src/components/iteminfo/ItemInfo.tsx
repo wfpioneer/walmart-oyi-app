@@ -8,6 +8,7 @@ import Button from '../buttons/Button';
 import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import CollapsibleCard from '../CollapsibleCard/CollapsibleCard';
+import ItemDetailsList, { ItemDetailsListRow } from '../ItemDetailsList/ItemDetailsList';
 
 export type ItemInfoProps = {
   itemName: string;
@@ -31,48 +32,41 @@ export type AdditionalItemDetailsProps = {
   margin: number
 }
 
-const renderAdditionalItemDetails = (additionalItemDetails: AdditionalItemDetailsProps): JSX.Element => {
+export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalItemDetailsProps): JSX.Element => {
   const {
     color,
-    size,
-    grossProfit,
+    margin,
     vendorPackQty,
-    basePrice,
-    margin
+    grossProfit,
+    size,
+    basePrice
   } = additionalItemDetails;
+
+  const qtyRows: ItemDetailsListRow[] = [
+    { label: strings('ITEM.VENDOR_PACK'), value: vendorPackQty },
+    { label: strings('ITEM.COLOR'), value: color },
+    { label: strings('ITEM.SIZE'), value: size },
+    {
+      label: strings('ITEM.PRICE_BEFORE_TAX'),
+      value:
+    `$${typeof basePrice === 'number' ? basePrice.toFixed(2) : '0.00'}`
+    },
+    {
+      label: strings('ITEM.MARGIN'),
+      value:
+    `$${typeof margin === 'number' ? margin.toFixed(2) : '0.00'}`
+    },
+    {
+      label: strings('ITEM.GROSS_PROFIT'),
+      value:
+    `$${typeof grossProfit === 'number' ? grossProfit.toFixed(2) : '0.00'}`
+    }
+  ];
+
   return (
     <CollapsibleCard title={strings('ITEM.ADDITIONAL_ITEM_DETAILS')}>
-      <View testID="additional-item-details" style={styles.contentView}>
-        <View style={styles.contentView}>
-          <View style={styles.ViewPadding}>
-            <Text style={styles.contentText}>{strings('ITEM.VENDOR_PACK')}</Text>
-            <Text style={styles.contentText}>{strings('ITEM.PRICE_BEFORE_TAX')}</Text>
-          </View>
-          <View style={styles.ViewPadding}>
-            <Text style={styles.contentText}>{vendorPackQty}</Text>
-            <Text style={styles.contentText}>{`$${basePrice}`}</Text>
-          </View>
-        </View>
-        <View style={styles.contentView}>
-          <View style={styles.ViewPadding}>
-            <Text style={styles.contentText}>{strings('ITEM.COLOR')}</Text>
-            <Text style={styles.contentText}>{strings('ITEM.MARGIN')}</Text>
-          </View>
-          <View style={styles.ViewPadding}>
-            <Text style={styles.contentText}>{color}</Text>
-            <Text style={styles.contentText}>{`$${margin}`}</Text>
-          </View>
-        </View>
-        <View style={styles.contentView}>
-          <View style={styles.ViewPadding}>
-            <Text style={styles.contentText}>{strings('ITEM.SIZE')}</Text>
-            <Text style={styles.contentText}>{strings('ITEM.GROSS_PROFIT')}</Text>
-          </View>
-          <View style={styles.ViewPadding}>
-            <Text style={styles.contentText}>{size}</Text>
-            <Text style={styles.contentText}>{`$${grossProfit}`}</Text>
-          </View>
-        </View>
+      <View testID="additional-item-details">
+        <ItemDetailsList rows={qtyRows} indentAfterFirstRow={false} />
       </View>
     </CollapsibleCard>
   );
@@ -127,7 +121,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
       </View>
       <Text style={styles.statusText}>{`${strings('ITEM.STATUS')}: ${status}`}</Text>
       <Text style={styles.catgText}>{`${strings('ITEM.CATEGORY')}: ${category}`}</Text>
-      {showAdditionalItemDetails ? renderAdditionalItemDetails(additionalItemDetails) : null}
+      {showAdditionalItemDetails && renderAdditionalItemDetails(additionalItemDetails)}
       <Text style={styles.priceText}>{`${currencies(price)}`}</Text>
       {navigation && (
         <Button
