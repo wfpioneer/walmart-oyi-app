@@ -415,45 +415,47 @@ export const renderPickHistory = (
 };
 
 export const renderReplenishmentHistory = (
-  itemDetails: ItemDetails,
-  result: AxiosResponse
+  itemDetails: ItemDetails
 ) => {
-  // TODO : also check for their respective status
-  if (result && result.status !== MULTI_STATUS) {
-    const { deliveries } = itemDetails;
-    if (deliveries && deliveries.length) {
-      const data = deliveries.sort((a, b) => {
-        const date1 = new Date(a.date);
-        const date2 = new Date(b.date);
-        return date2 > date1 ? 1 : -1;
-      });
-      return (
-        <View style={styles.replenishmentContainer}>
-          <View style={styles.replenishmentHistory}>
-            <Text>{strings('ITEM.HISTORY')}</Text>
-          </View>
-          {data.slice(0, 5).map((item, index) => {
-            const key = `delivery-${index}`;
-            return (
-              <RenderItemHistoryCard
-                key={key}
-                date={item.date}
-                qty={item.qty}
-              />
-            );
-          })}
+  const { deliveries } = itemDetails;
+  if (deliveries && deliveries.length) {
+    const data = deliveries.sort((a, b) => {
+      const date1 = new Date(a.date);
+      const date2 = new Date(b.date);
+      return date2 > date1 ? 1 : -1;
+    });
+    return (
+      <View style={styles.replenishmentContainer}>
+        <View style={styles.replenishmentHistory}>
+          <Text>{strings('ITEM.HISTORY')}</Text>
         </View>
-      );
-    }
+        {data.slice(0, 5).map((item, index) => {
+          const key = `delivery-${index}`;
+          return (
+            <RenderItemHistoryCard
+              key={key}
+              date={item.date}
+              qty={item.qty}
+            />
+          );
+        })}
+      </View>
+    );
   }
   return (
-    <></>
+    <View style={styles.replenishmentContainer}>
+      <View style={styles.replenishmentHistory}>
+        <Text>{strings('ITEM.HISTORY')}</Text>
+      </View>
+      <View style={styles.noDataContainer}>
+        <Text>{strings('ITEM.NO_HISTORY')}</Text>
+      </View>
+    </View>
   );
 };
 
 export const renderReplenishmentCard = (
-  itemDetails: ItemDetails,
-  result: AxiosResponse
+  itemDetails: ItemDetails
 ) => {
   const { replenishment } = itemDetails;
   return (
@@ -464,7 +466,7 @@ export const renderReplenishmentCard = (
           <Text>{replenishment.onOrder}</Text>
         </View>
       </View>
-      {renderReplenishmentHistory(itemDetails, result)}
+      {renderReplenishmentHistory(itemDetails)}
     </CollapsibleCard>
   );
 };
@@ -1257,14 +1259,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 })}
               </View>
               <View style={styles.historyContainer}>
-                {renderReplenishmentCard(itemDetail[123], {
-                  config: {},
-                  data: '',
-                  status: 200,
-                  headers: {},
-                  statusText: 'OK',
-                  request: {}
-                })}
+                {renderReplenishmentCard(itemDetail[123])}
               </View>
             </>
             )}

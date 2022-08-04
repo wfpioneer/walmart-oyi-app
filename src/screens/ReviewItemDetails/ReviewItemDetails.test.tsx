@@ -1304,14 +1304,14 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders replenishment card with delivery history', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderReplenishmentCard(itemDetail[123], defaultResult)
+        renderReplenishmentCard(itemDetail[123])
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders replenishment card with no delivery history', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderReplenishmentCard(itemDetail[789], defaultResult)
+        renderReplenishmentCard(itemDetail[789])
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

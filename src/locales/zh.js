@@ -135,7 +135,9 @@ export default {
     SIZE: 'Ti-Hi',
     PRICE_BEFORE_TAX: '税前零售',
     MARGIN: '利润',
-    GROSS_PROFIT: '毛利'
+    GROSS_PROFIT: '毛利',
+    HISTORY: 'History',
+    NO_HISTORY: 'No history available'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
