@@ -56,7 +56,7 @@ export default {
     CREATE: '创建',
     UNASSIGNED: '未分配',
     SELECTED: '已选择',
-    UPDATE: '更新'
+    UPDATE: '更新配置'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
