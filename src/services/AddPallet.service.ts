@@ -6,13 +6,15 @@ import { PalletItem } from '../models/PalletItem';
 export default class AddPalletService {
   public static addPallet(payload: {
     palletId: string;
-    sectionId: number;
+    sectionId?: number;
+    locationName?: string;
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.put(
       `${urls.orchestrationURL}/pallet/${payload.palletId}/section`,
       {
-        sectionId: payload.sectionId
+        sectionId: payload.sectionId,
+        locationName: payload.locationName
       }
     );
   }

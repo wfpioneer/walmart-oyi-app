@@ -110,8 +110,13 @@ export const ScanLocationScreen = (props: ScanLocationProps) => {
             value: scan.value,
             type: scan.type
           });
+          const isManualScan = scan.type === 'manual';
           dispatch(
-            addPallet({ palletId: selectedPalletId, sectionId: scan.value })
+            addPallet({
+              palletId: selectedPalletId,
+              sectionId: !isManualScan ? scan.value : null,
+              locationName: isManualScan ? scan.value : null
+            })
           );
         });
       }
@@ -128,7 +133,7 @@ export const ScanLocationScreen = (props: ScanLocationProps) => {
   );
   return (
     <View style={styles.container}>
-      {isManualScanEnabled && <LocationManualScan keyboardType="numeric" />}
+      {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <View style={styles.scanContainer}>
         <TouchableOpacity onPress={() => openCamera()}>
           <MaterialCommunityIcons
@@ -150,7 +155,9 @@ export const ScanLocation = () => {
   const route = useRoute();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const addPalletAPI = useTypedSelector(state => state.async.addPallet);
-  const selectedWorklistPalletId = useTypedSelector(state => state.PalletWorklist.selectedWorklistPalletId);
+  const selectedWorklistPalletId = useTypedSelector(
+    state => state.PalletWorklist.selectedWorklistPalletId
+  );
 
   return (
     <ScanLocationScreen
