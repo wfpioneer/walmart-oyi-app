@@ -165,7 +165,21 @@ export default {
           value: 34
         }
       ]
-    }
+    },
+    deliveries: [
+      {
+        date: '2022-06-23',
+        qty: 23
+      },
+      {
+        date: '2022-07-25',
+        qty: 44
+      },
+      {
+        date: '2022-07-26',
+        qty: 23
+      }
+    ]
   } as ItemDetails,
   '456': {
     itemName: 'Small, Store Use Item',
