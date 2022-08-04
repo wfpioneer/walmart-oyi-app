@@ -224,6 +224,13 @@ export const palletConfigApiEffect = (
   }
 };
 
+const calculatePickDelta = (oldQty: number, newQty?: number) => {
+  if (newQty && oldQty) {
+    return newQty - oldQty;
+  }
+  return oldQty;
+};
+
 export const binApisEffect = (
   updateQuantitiesApi: AsyncState,
   deleteItemsApi: AsyncState,
@@ -247,8 +254,13 @@ export const binApisEffect = (
         locationId: pick.palletLocationId,
         locationName: pick.palletLocationName
       }));
+
+      const pick = selectedPicks[0];
       dispatch(updatePicklistStatus({
-        headers: { action: PickAction.READY_TO_BIN },
+        headers: {
+          action: PickAction.READY_TO_BIN,
+          itemQty: calculatePickDelta(pick.quantityLeft ?? 0, pick.newQuantityLeft)
+        },
         palletId: selectedPicks[0].palletId,
         picklistItems: selectedPickItems
       }));
@@ -486,7 +498,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     // dispatch picks to complete
     dispatch(
       updatePicklistStatus({
-        headers: { action: PickAction.COMPLETE },
+        headers: { action: PickAction.COMPLETE, itemQty: selectedPicks[0].quantityLeft },
         picklistItems: selectedPickItems,
         palletId: selectedPicks[0].palletId
       })

@@ -22,7 +22,7 @@ export default class PickingService {
   }
 
   public static updatePickListStatus(payload: {
-    headers: { action: PickAction };
+    headers: { action: PickAction, itemQty?: number };
     picklistItems: {
       picklistId: number;
       locationId: number;

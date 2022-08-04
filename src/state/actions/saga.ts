@@ -195,7 +195,7 @@ export const getPalletConfig = () => ({
   type: GET_PALLET_CONFIG
 } as const);
 export const updatePicklistStatus = (payload: {
-  headers: { action: PickAction };
+  headers: { action: PickAction, itemQty?: number };
   picklistItems: {
     picklistId: number;
     locationId: number;
