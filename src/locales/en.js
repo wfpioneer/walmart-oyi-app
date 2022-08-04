@@ -135,7 +135,9 @@ export default {
     SIZE: 'Size',
     PRICE_BEFORE_TAX: 'Price Before Tax',
     MARGIN: 'Margin',
-    GROSS_PROFIT: 'Gross Profit'
+    GROSS_PROFIT: 'Gross Profit',
+    HISTORY: 'History',
+    NO_HISTORY: 'No history available'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

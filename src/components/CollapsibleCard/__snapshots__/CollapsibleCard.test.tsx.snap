@@ -25,7 +25,13 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
         }
       }
     >
-      <Text>
+      <Text
+        style={
+          Object {
+            "marginRight": 0,
+          }
+        }
+      >
         
       </Text>
       <Text>
@@ -87,7 +93,13 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
         }
       }
     >
-      <Text>
+      <Text
+        style={
+          Object {
+            "marginRight": 0,
+          }
+        }
+      >
         
       </Text>
       <Text>
