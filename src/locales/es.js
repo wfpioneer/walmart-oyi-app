@@ -135,7 +135,9 @@ export default {
     SIZE: 'Tamaño',
     PRICE_BEFORE_TAX: 'Precio sin Impuesto',
     MARGIN: 'Margen',
-    GROSS_PROFIT: 'Ganancia Bruta'
+    GROSS_PROFIT: 'Ganancia Bruta',
+    HISTORY: 'Historial',
+    NO_HISTORY: 'No hay historial disponible'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',

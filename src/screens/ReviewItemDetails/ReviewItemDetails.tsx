@@ -55,7 +55,7 @@ import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setItemHistory } from '../../state/actions/ItemHistory';
-import {
+import itemDetail, {
   mockAdditionalItemDetails, mockOHChangeHistory,
   mockReserveLocations, pickListMockHistory
 } from '../../mockData/getItemDetails';
@@ -414,7 +414,68 @@ export const renderPickHistory = (
   );
 };
 
-export const renderOHChangeHistory = (props: HandleProps, ohChangeHistory: OHChangeHistory[], result: AxiosResponse) => {
+export const renderReplenishmentHistory = (
+  itemDetails: ItemDetails
+) => {
+  const { deliveries } = itemDetails;
+  if (deliveries && deliveries.length) {
+    const data = deliveries.sort((a, b) => {
+      const date1 = new Date(a.date);
+      const date2 = new Date(b.date);
+      return date2 > date1 ? 1 : -1;
+    });
+    return (
+      <View style={styles.replenishmentContainer}>
+        <View style={styles.replenishmentHistory}>
+          <Text>{strings('ITEM.HISTORY')}</Text>
+        </View>
+        {data.slice(0, 5).map((item, index) => {
+          const key = `delivery-${index}`;
+          return (
+            <RenderItemHistoryCard
+              key={key}
+              date={item.date}
+              qty={item.qty}
+            />
+          );
+        })}
+      </View>
+    );
+  }
+  return (
+    <View style={styles.replenishmentContainer}>
+      <View style={styles.replenishmentHistory}>
+        <Text>{strings('ITEM.HISTORY')}</Text>
+      </View>
+      <View style={styles.noDataContainer}>
+        <Text>{strings('ITEM.NO_HISTORY')}</Text>
+      </View>
+    </View>
+  );
+};
+
+export const renderReplenishmentCard = (
+  itemDetails: ItemDetails
+) => {
+  const { replenishment } = itemDetails;
+  return (
+    <CollapsibleCard title={strings('ITEM.REPLENISHMENT')} icon="label-variant">
+      <View style={styles.replenishmentContainer}>
+        <View style={styles.replenishmentOrder}>
+          <Text>{strings('ITEM.ON_ORDER')}</Text>
+          <Text>{replenishment.onOrder}</Text>
+        </View>
+      </View>
+      {renderReplenishmentHistory(itemDetails)}
+    </CollapsibleCard>
+  );
+};
+
+export const renderOHChangeHistory = (
+  props: HandleProps,
+  ohChangeHistory: OHChangeHistory[],
+  result: AxiosResponse
+) => {
   // TODO : also check for their respective status if status for oh change history is 200 than render
   if (result && result.status !== MULTI_STATUS) {
     if (ohChangeHistory && ohChangeHistory.length) {
@@ -1144,6 +1205,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
+            {!additionalItemDetails && (
             <SFTCard
               iconProp={(
                 <MaterialCommunityIcon
@@ -1160,6 +1222,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 <Text>{itemDetails.replenishment.onOrder}</Text>
               </View>
             </SFTCard>
+            )}
             <SFTCard
               iconName="map-marker-alt"
               title={`${strings('ITEM.LOCATION')}(${locationCount})`}
@@ -1168,8 +1231,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
             </SFTCard>
-            {/* TODO : replace mockOHChangeHistory, pickListMockHistory
-              with itemDetails.ohChangeHistory, itemDetails.picklistHistory after orchestration api integration
+            {/* TODO : replace mockOHChangeHistory, pickListMockHistory, itemDetail[123]
+              with itemDetails.ohChangeHistory, itemDetails.picklistHistory, itemDetails
+              after orchestration api integration
               and { status: 200 } with result
             */}
             {additionalItemDetails && (
@@ -1193,6 +1257,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                   statusText: 'OK',
                   request: {}
                 })}
+              </View>
+              <View style={styles.historyContainer}>
+                {renderReplenishmentCard(itemDetail[123])}
               </View>
             </>
             )}
