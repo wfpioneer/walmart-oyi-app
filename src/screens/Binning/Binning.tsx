@@ -133,7 +133,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
               visibilityTime: 3000,
               position: 'bottom'
             });
-          } else {
+          } else if (scannedEvent.value) {
             trackEvent('pallet_scanned', {
               barcode: scannedEvent.value,
               type: scannedEvent.type ?? ''
