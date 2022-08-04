@@ -136,8 +136,8 @@ export default {
     PRICE_BEFORE_TAX: '税前零售',
     MARGIN: '利润',
     GROSS_PROFIT: '毛利',
-    HISTORY: 'History',
-    NO_HISTORY: 'No history available'
+    HISTORY: '历史信息',
+    NO_HISTORY: '无历史记录信息'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
