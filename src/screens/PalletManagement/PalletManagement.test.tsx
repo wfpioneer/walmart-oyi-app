@@ -6,7 +6,7 @@ import { AsyncState } from '../../models/AsyncState';
 import {
   PalletManagementScreen,
   getPalletConfigHook,
-  getPalletDetailsApiHookonSubmit
+  getPalletDetailsApiHook
 } from './PalletManagement';
 import { mockConfig } from '../../mockData/mockConfig';
 
