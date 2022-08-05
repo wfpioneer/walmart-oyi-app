@@ -15,7 +15,7 @@ export default class DeletePalletService {
   public static clearPallet(payload: {palletId: string}): Promise<AxiosResponse> {
     const urls: Environment = getEnvironment();
     return Request.delete(
-      `${urls.locationUrl}/v1/pallet/${payload.palletId}`
+      `${urls.orchestrationURL}/pallet/${payload.palletId}`
     );
   }
 }
