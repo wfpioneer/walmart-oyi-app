@@ -6,8 +6,7 @@ import { AsyncState } from '../../models/AsyncState';
 import {
   PalletManagementScreen,
   getPalletConfigHook,
-  getPalletDetailsApiHook,
-  onSubmit
+  getPalletDetailsApiHookonSubmit
 } from './PalletManagement';
 import { mockConfig } from '../../mockData/mockConfig';
 
@@ -29,8 +28,6 @@ describe('PalletManagementScreen', () => {
       renderer.render(
         <PalletManagementScreen
           useEffectHook={jest.fn()}
-          searchText=""
-          setSearchText={jest.fn()}
           getPalletDetailsApi={defaultAsyncState}
           configComplete={false}
           setConfigComplete={jest.fn()}
@@ -41,6 +38,7 @@ describe('PalletManagementScreen', () => {
           route={routeProp}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockConfig}
+          isManualScanEnabled={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -55,8 +53,6 @@ describe('PalletManagementScreen', () => {
       renderer.render(
         <PalletManagementScreen
           useEffectHook={jest.fn()}
-          searchText=""
-          setSearchText={jest.fn()}
           getPalletDetailsApi={palletDetailsIsWaiting}
           configComplete={false}
           setConfigComplete={jest.fn()}
@@ -67,27 +63,13 @@ describe('PalletManagementScreen', () => {
           route={routeProp}
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockConfig}
+          isManualScanEnabled={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
 
-  describe('Tests Manual Scan Pallet onSubmit function', () => {
-    it('Calls Dispatch Function if a valid numerical Pallet ID is submitted', async () => {
-      const dispatch = jest.fn();
-      const validPalletID = '12487';
-      onSubmit(validPalletID, dispatch);
-      expect(dispatch).toHaveBeenCalled();
-    });
-
-    it('Does not Call Dispatch function if an in-valid PalletId is submitted', async () => {
-      const dispatch = jest.fn();
-      const invalidPalletId = '123NotAnId';
-      onSubmit(invalidPalletId, dispatch);
-      expect(dispatch).not.toHaveBeenCalled();
-    });
-  });
   describe('Tests functions for hooks', () => {
     it('testgetPalletDetailsHook', async () => {
       const dispatch = jest.fn();

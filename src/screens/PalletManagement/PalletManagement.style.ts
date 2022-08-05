@@ -15,7 +15,7 @@ export default StyleSheet.create({
     borderWidth: 1
   },
   scanText: {
-    paddingTop: 30
+    paddingTop: 10
   },
   orText: {
     paddingTop: 20
@@ -28,5 +28,11 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%'
   }
 });
