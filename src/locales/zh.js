@@ -214,7 +214,8 @@ export default {
     SAVE_PALLET_FAILURE: '卡板更新失败',
     CLEAR_PALLET_CONFIRMATION: '确定要清除此卡板信息?',
     CLEAR_PALLET_ERROR: '清除卡板信息发生错误导致失败',
-    CLEAR_PALLET_SUCCESS: '卡板%{palletId}清理失败'
+    CLEAR_PALLET_SUCCESS: '卡板%{palletId}清理失败',
+    CREATE_PALLET: 'Create Pallet'
   },
   LOCATION: {
     TITLE: '所有位置',
