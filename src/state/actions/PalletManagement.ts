@@ -17,6 +17,7 @@ export const REMOVE_ITEM = 'PALLET_MANAGEMENT/REMOVE_ITEM';
 export const SET_PALLET_NEW_EXPIRY = 'PALLET_MANAGEMENT/SET_NEW_EXPIRATION';
 export const SET_PERISHABLE_CATEGORIES = 'PALLET_MANAGEMENT/SET_PERISHABLE_CATEGORIES';
 export const UPDATE_PALLET_EXPIRATION_DATE = 'PALLET/UPDATE_PALLET_EXPIRATION_DATE';
+export const CREATE_PALLET = 'PALLET/CREATE_PALLET';
 
 export const showManagePalletMenu = (show: boolean) => ({
   type: SHOW_MANAGE_PALLET_MENU,
@@ -94,6 +95,10 @@ export const setPerishableCategories = (perishableCategories: number[]) => ({
   payload: { perishableCategories }
 } as const);
 
+export const createPallet = () => ({
+  type: CREATE_PALLET
+} as const);
+
 export type Actions =
 ReturnType<typeof showManagePalletMenu>
   | ReturnType<typeof setupPallet>
@@ -110,4 +115,5 @@ ReturnType<typeof showManagePalletMenu>
   | ReturnType<typeof removeItem>
   | ReturnType<typeof setPalletNewExpiration>
   | ReturnType<typeof setPerishableCategories>
-  | ReturnType<typeof updatePalletExpirationDate>;
+  | ReturnType<typeof updatePalletExpirationDate>
+  | ReturnType<typeof createPallet>;
