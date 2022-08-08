@@ -72,7 +72,12 @@ export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorP
         name="PalletManagement"
         component={PalletManagement}
         options={{
-          headerTitle: strings('PALLET.PALLET_MANAGEMENT')
+          headerTitle: strings('PALLET.PALLET_MANAGEMENT'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderScanButton(dispatch, isManualScanEnabled)}
+            </View>
+          )
         }}
       />
       <Stack.Screen

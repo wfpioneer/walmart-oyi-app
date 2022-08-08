@@ -31,11 +31,10 @@ import { setPerishableCategories, setupPallet } from '../../state/actions/Pallet
 import { GET_PALLET_CONFIG, GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
 import { Configurations } from '../../models/User';
+import ManualScan from '../../components/manualscan/ManualScan';
 
 interface PalletManagementProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
-  searchText: string;
-  setSearchText: React.Dispatch<React.SetStateAction<string>>;
   configComplete: boolean;
   setConfigComplete: React.Dispatch<React.SetStateAction<boolean>>;
   getInfoComplete: boolean;
@@ -45,22 +44,9 @@ interface PalletManagementProps {
   dispatch: Dispatch<any>;
   getPalletDetailsApi: AsyncState;
   getPalletConfigApi: AsyncState;
-  userConfig: Configurations
+  userConfig: Configurations;
+  isManualScanEnabled: boolean;
 }
-const palletIDRegex = new RegExp(/^[0-9]+$/);
-const nonNumRegex = new RegExp(/[^0-9]/g);
-
-export const onSubmit = (searchText: string, dispatch: Dispatch<any>): void => {
-  if (searchText.match(palletIDRegex)) {
-    dispatch(
-      getPalletDetails({
-        palletIds: [searchText],
-        isAllItems: true,
-        isSummary: false
-      })
-    );
-  }
-};
 
 export const showActivitySpinner = (
   configWaiting: boolean,
@@ -145,8 +131,6 @@ export const PalletManagementScreen = (
 ): JSX.Element => {
   const {
     useEffectHook,
-    searchText,
-    setSearchText,
     configComplete,
     setConfigComplete,
     getInfoComplete,
@@ -156,19 +140,17 @@ export const PalletManagementScreen = (
     dispatch,
     getPalletDetailsApi,
     getPalletConfigApi,
-    userConfig
+    userConfig,
+    isManualScanEnabled
   } = props;
 
   let scannedSubscription: EmitterSubscription;
-
-  const resetSearchText = () => setSearchText('');
 
   // Resets Get PalletInfo api state when navigating off-screen
   useEffectHook(() => {
     navigation.addListener('blur', () => {
       if (getPalletDetailsApi.value) {
         dispatch({ type: GET_PALLET_DETAILS.RESET });
-        resetSearchText();
       }
     });
   }, [getPalletDetailsApi]);
@@ -183,7 +165,6 @@ export const PalletManagementScreen = (
             barcode: scan.value,
             type: scan.type
           });
-          setSearchText(scan.value);
           dispatch(
             getPalletDetails({ palletIds: [scan.value], isAllItems: true, isSummary: false })
           );
@@ -231,25 +212,15 @@ export const PalletManagementScreen = (
   }
 
   return (
-    <View style={styles.scanContainer}>
-      <TouchableOpacity onPress={() => openCamera()}>
-        <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
-      </TouchableOpacity>
-      <View style={styles.scanText}>
-        <Text>{strings('PALLET.SCAN_PALLET')}</Text>
-      </View>
-      <View style={styles.orText}>
-        <Text>{strings('GENERICS.OR')}</Text>
-      </View>
-      <View style={styles.textView}>
-        <TextInput
-          value={searchText}
-          onChangeText={(text: string) => setSearchText(text.replace(nonNumRegex, ''))}
-          style={styles.textInput}
-          keyboardType="numeric"
-          placeholder={strings('PALLET.ENTER_PALLET_ID')}
-          onSubmitEditing={() => onSubmit(searchText, dispatch)}
-        />
+    <View style={styles.container}>
+      {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
+      <View style={styles.scanContainer}>
+        <TouchableOpacity onPress={() => openCamera()}>
+          <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
+        </TouchableOpacity>
+        <View style={styles.scanText}>
+          <Text>{strings('PALLET.SCAN_PALLET')}</Text>
+        </View>
       </View>
     </View>
   );
@@ -257,19 +228,18 @@ export const PalletManagementScreen = (
 
 const PalletManagement = (): JSX.Element => {
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
+  const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
   const userConfig = useTypedSelector(state => state.User.configs);
   const [configComplete, setConfigComplete] = useState(false);
   const [getInfoComplete, setGetInfoComplete] = useState(false);
-  const [searchText, setSearchText] = useState('');
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
   return (
     <PalletManagementScreen
+      isManualScanEnabled={isManualScanEnabled}
       useEffectHook={useEffect}
-      searchText={searchText}
-      setSearchText={setSearchText}
       configComplete={configComplete}
       setConfigComplete={setConfigComplete}
       getInfoComplete={getInfoComplete}
