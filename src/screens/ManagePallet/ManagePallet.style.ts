@@ -114,5 +114,21 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLOR.YELLOW,
     borderWidth: 1
+  },
+  buttonAlign: {
+    alignSelf: 'center',
+    width: '40%',
+    margin: 10
+  },
+  message: {
+    textAlign: 'center',
+    fontSize: 16,
+    padding: 15
+  },
+  labelHeader: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: COLOR.RED_500,
+    paddingBottom: 5
   }
 });

@@ -56,7 +56,8 @@ export default {
     CREATE: 'Crear',
     UNASSIGNED: 'Sin asignar',
     SELECTED: 'Seleccionado',
-    UPDATE: 'Actualizar Configuración'
+    UPDATE: 'Actualizar Configuración',
+    WARNING_LABEL: 'Aviso'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',

@@ -1,18 +1,18 @@
 import React, {
-  Dispatch, EffectCallback, useEffect, useMemo, useRef, useState
+  Dispatch, EffectCallback, useCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
+  BackHandler,
   EmitterSubscription,
   FlatList,
   Keyboard,
   KeyboardAvoidingView,
-  Platform,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import {
-  NavigationProp, RouteProp, useNavigation, useRoute
+  NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import { partition } from 'lodash';
 import moment from 'moment';
@@ -36,7 +36,7 @@ import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import { Pallet, PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 import {
   addItemToPallet,
@@ -57,6 +57,7 @@ import {
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
+import { CustomModalComponent } from '../Modal/Modal';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 
@@ -79,6 +80,10 @@ interface ManagePalletProps {
   perishableCategories: number[];
   isPickerShow: boolean;
   setIsPickerShow: React.Dispatch<React.SetStateAction<boolean>>;
+  displayWarningModal: boolean;
+  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>;
+  useFocusEffectHook: (effect: EffectCallback) => void;
+  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
 }
 interface ApiResult {
   data: any;
@@ -514,23 +519,51 @@ export const getItemDetailsApiHook = (
   }
 };
 
+const onValidateHardwareBackPress = (
+  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
+  dataUnsaved: boolean
+) => {
+  if (dataUnsaved) {
+    setDisplayWarningModal(true);
+    return true;
+  }
+  return false;
+};
+
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
-    isPickerShow, perishableCategories
+    isPickerShow, perishableCategories, displayWarningModal, setDisplayWarningModal,
+    useFocusEffectHook, useCallbackHook
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
 
   let scannedSubscription: EmitterSubscription;
 
-  // Clear API state before leaving this screen
-  useEffectHook(() => navigation.addListener('beforeRemove', () => {
-    // Suggestion add confirmation before leaving screen if they want to undo unsaved changes
-    dispatch({ type: GET_ITEM_DETAILS.RESET });
-  }), []);
+  // validation on app back press
+  useEffectHook(() => {
+    const navigationListener = navigation.addListener('beforeRemove', e => {
+      if (enableSave(items, palletInfo)) {
+        setDisplayWarningModal(true);
+        e.preventDefault();
+      }
+    });
+    return navigationListener;
+  }, [navigation]);
+
+  // validation on Hardware backPress
+  useFocusEffectHook(
+    useCallbackHook(() => {
+      const onHardwareBackPress = () => onValidateHardwareBackPress(
+        setDisplayWarningModal, enableSave(items, palletInfo)
+      );
+      BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
+      return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
+    }, [])
+  );
 
   // Scanner listener
   useEffectHook(() => {
@@ -587,7 +620,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
     const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
     // updated expiration date
-    const updatedExpirationDate = addExpiry ? `${moment(addExpiry,'DD/MM/YYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
+    const updatedExpirationDate = addExpiry
+      ? `${moment(addExpiry, 'DD/MM/YYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
     // Filter Items by deleted flag
     const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
       reducer.push(current.upcNbr);
@@ -631,6 +665,43 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   };
   const isRemoveExpirationDate = removeExpirationDate(items, perishableCategories);
   const isAddedPerishable = isAddedItemPerishable(items, perishableCategories);
+
+  const backConfirmed = () => {
+    setDisplayWarningModal(false);
+    dispatch({ type: GET_ITEM_DETAILS.RESET });
+    navigation.goBack();
+  };
+
+  const renderWarningModal = () => (
+    <CustomModalComponent
+      isVisible={displayWarningModal}
+      onClose={() => setDisplayWarningModal(false)}
+      modalType="Popup"
+    >
+      <>
+        <View>
+          <Text style={styles.labelHeader}>{strings('GENERICS.WARNING_LABEL')}</Text>
+          <Text style={styles.message}>{strings('PALLET.UNSAVED_WARNING_MSG')}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            style={styles.buttonAlign}
+            title={strings('GENERICS.CANCEL')}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            type={ButtonType.SOLID_WHITE}
+            onPress={() => setDisplayWarningModal(false)}
+          />
+          <Button
+            style={styles.buttonAlign}
+            title={strings('GENERICS.OK')}
+            type={ButtonType.PRIMARY}
+            onPress={backConfirmed}
+          />
+        </View>
+      </>
+    </CustomModalComponent>
+  );
+
   return (
     <KeyboardAvoidingView
       style={styles.safeAreaView}
@@ -651,6 +722,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         confirmText={strings('GENERICS.YES')}
       />
       <View style={styles.bodyContainer}>
+        {renderWarningModal()}
         {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <View style={styles.headerContainer}>
           <View style={styles.headerItem}>
@@ -731,6 +803,7 @@ const ManagePallet = (): JSX.Element => {
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const [isPickerShow, setIsPickerShow] = useState(false);
+  const [displayWarningModal, setDisplayWarningModal] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['55%'], []);
@@ -790,6 +863,10 @@ const ManagePallet = (): JSX.Element => {
           perishableCategories={perishableCategories}
           isPickerShow={isPickerShow}
           setIsPickerShow={setIsPickerShow}
+          displayWarningModal={displayWarningModal}
+          setDisplayWarningModal={setDisplayWarningModal}
+          useFocusEffectHook={useFocusEffect}
+          useCallbackHook={useCallback}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}
