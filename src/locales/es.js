@@ -215,7 +215,8 @@ export default {
     SAVE_PALLET_FAILURE: 'Falló la actualización de pallet',
     CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
     CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
-    CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente'
+    CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente',
+    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán'
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
