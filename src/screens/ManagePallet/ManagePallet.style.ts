@@ -115,15 +115,22 @@ export default StyleSheet.create({
     backgroundColor: COLOR.YELLOW,
     borderWidth: 1
   },
+  buttonWarningContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignContent: 'center',
+    height: 60,
+    elevation: 10
+  },
   buttonAlign: {
     alignSelf: 'center',
     width: '40%',
-    margin: 10
+    marginHorizontal: 10
   },
   message: {
     textAlign: 'center',
     fontSize: 16,
-    padding: 15
+    padding: 10
   },
   labelHeader: {
     fontSize: 18,

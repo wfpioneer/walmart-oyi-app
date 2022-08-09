@@ -130,6 +130,45 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          unSavedDataLossConfirmed={false}
+          setUnSavedDataLossConfirmed={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders the PalletManagement with warning modal ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
+          clearPalletApi={defaultAsyncState}
+          displayClearConfirmation={false}
+          setDisplayClearConfirmation={jest.fn()}
+          isPickerShow={false}
+          setIsPickerShow={jest.fn()}
+          perishableCategories={[]}
+          displayWarningModal={true}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          unSavedDataLossConfirmed={false}
+          setUnSavedDataLossConfirmed={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -158,6 +197,12 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          unSavedDataLossConfirmed={false}
+          setUnSavedDataLossConfirmed={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -188,6 +233,12 @@ describe('ManagePalletScreen', () => {
           isPickerShow={true}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          unSavedDataLossConfirmed={false}
+          setUnSavedDataLossConfirmed={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -215,6 +266,12 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          unSavedDataLossConfirmed={false}
+          setUnSavedDataLossConfirmed={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -246,6 +303,12 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          unSavedDataLossConfirmed={false}
+          setUnSavedDataLossConfirmed={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -285,6 +348,12 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          unSavedDataLossConfirmed={false}
+          setUnSavedDataLossConfirmed={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

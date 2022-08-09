@@ -217,7 +217,7 @@ export default {
     CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?',
     CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful',
     CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared',
-    UNSAVED_WARNING_MSG: 'If you navigate away from this screen, the unsaved changes will lose'
+    UNSAVED_WARNING_MSG: 'All unsaved changes will be lost'
   },
   LOCATION: {
     TITLE: 'All locations',
