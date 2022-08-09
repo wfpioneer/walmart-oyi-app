@@ -211,7 +211,7 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       <View style={styles.contentWrapper}>
         <View style={styles.menuContainer}>
           <CollapsibleCard
-            title="Printers"
+            title={strings('PRINT.CHANGE_TITLE')}
             isOpened={printerOpen}
             toggleIsOpened={togglePrinterList}
           />
@@ -233,7 +233,7 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
         ))}
         <View style={styles.menuContainer}>
           <CollapsibleCard
-            title="Features"
+            title={strings('SETTINGS.FEATURES')}
             isOpened={featuresOpen}
             toggleIsOpened={toggleFeaturesList}
           />
