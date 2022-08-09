@@ -57,7 +57,8 @@ describe('ManagePalletScreen', () => {
       categoryNbr: 54,
       categoryDesc: 'test cat',
       deleted: true,
-      added: false
+      added: false,
+      locationName: 'ARAR1-1'
     },
     {
       itemNbr: 1234,
@@ -69,7 +70,8 @@ describe('ManagePalletScreen', () => {
       categoryNbr: 54,
       categoryDesc: 'test cat',
       deleted: false,
-      added: false
+      added: false,
+      locationName: 'ARAR1-1'
     },
     {
       itemNbr: 4221,
@@ -81,7 +83,8 @@ describe('ManagePalletScreen', () => {
       categoryNbr: 72,
       categoryDesc: 'deli',
       deleted: false,
-      added: false
+      added: false,
+      locationName: 'ARAR1-1'
     }
   ];
 
