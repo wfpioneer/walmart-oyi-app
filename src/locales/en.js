@@ -474,6 +474,7 @@ export default {
   SETTINGS: {
     TITLE: 'Settings',
     FEATURE_UPDATE_SUCCESS: 'Features Updated',
-    FEATURE_UPDATE_FAILURE: 'Unable to get updated features'
+    FEATURE_UPDATE_FAILURE: 'Unable to get updated features',
+    FEATURES: 'Features'
   }
 };

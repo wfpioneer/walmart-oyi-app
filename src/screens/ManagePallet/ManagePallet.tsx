@@ -148,6 +148,10 @@ const isPerishableItemExist = (items: PalletItem[], perishableCategories: number
   items.some(item => item.categoryNbr && perishableCategories.includes(item.categoryNbr))
 );
 
+const isLocationExistOnAnItem = (items: PalletItem[]): boolean => {
+  return items.some(item => item.locationName);
+}
+
 export const removeExpirationDate = (items: PalletItem[], perishableCategories: number[]): boolean => {
   const [deletedItems, otherItemsInPallet] = partition(items, item => item.deleted);
   const deletedPerishableItem = isPerishableItemExist(deletedItems, perishableCategories);
@@ -674,6 +678,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             <Text style={styles.headerText}>{strings('LOCATION.ITEMS')}</Text>
             <Text style={styles.headerItemText}>{items.length}</Text>
           </View>
+          {(isLocationExistOnAnItem(items)) && (<View style={styles.headerItem}>
+            <Text style={styles.headerText}>{strings('ITEM.LOCATION')}</Text>
+            <Text style={styles.headerItemText}>{items[0]?.locationName}</Text>
+          </View>)}
         </View>
         <View style={styles.instructionLabel}>
           <Text style={styles.instructionLabelText}>

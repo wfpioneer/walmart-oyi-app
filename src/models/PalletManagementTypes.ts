@@ -9,6 +9,7 @@ export interface PalletItem {
   newQuantity: number;
   deleted: boolean;
   added: boolean;
+  locationName?: string;
 }
 
 export interface CombinePallet {
