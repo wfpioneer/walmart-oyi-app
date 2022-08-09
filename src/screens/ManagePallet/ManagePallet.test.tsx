@@ -134,8 +134,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          unSavedDataLossConfirmed={false}
-          setUnSavedDataLossConfirmed={jest.fn()}
+          confirmNavigate={false}
+          setConfirmNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -167,8 +167,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          unSavedDataLossConfirmed={false}
-          setUnSavedDataLossConfirmed={jest.fn()}
+          confirmNavigate={false}
+          setConfirmNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -201,8 +201,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          unSavedDataLossConfirmed={false}
-          setUnSavedDataLossConfirmed={jest.fn()}
+          confirmNavigate={false}
+          setConfirmNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -237,8 +237,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          unSavedDataLossConfirmed={false}
-          setUnSavedDataLossConfirmed={jest.fn()}
+          confirmNavigate={false}
+          setConfirmNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -270,8 +270,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          unSavedDataLossConfirmed={false}
-          setUnSavedDataLossConfirmed={jest.fn()}
+          confirmNavigate={false}
+          setConfirmNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -307,8 +307,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          unSavedDataLossConfirmed={false}
-          setUnSavedDataLossConfirmed={jest.fn()}
+          confirmNavigate={false}
+          setConfirmNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -352,8 +352,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          unSavedDataLossConfirmed={false}
-          setUnSavedDataLossConfirmed={jest.fn()}
+          confirmNavigate={false}
+          setConfirmNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -622,16 +622,24 @@ describe('ManagePalletScreen', () => {
         }
       };
       const mockSetDisplayConfirmation = jest.fn();
+      const mockSetNavigateConfirmation = jest.fn();
       const successToast = {
         type: 'success',
         text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId: palletInfo }),
         position: 'bottom'
       };
-      clearPalletApiHook(clearPalletSuccess, palletInfo.id, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+      clearPalletApiHook(
+        clearPalletSuccess,
+        palletInfo.id,
+        navigationProp,
+        mockDispatch,
+        mockSetDisplayConfirmation,
+        mockSetNavigateConfirmation
+      );
 
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
-      expect(navigationProp.goBack).toBeCalledTimes(1);
+      expect(mockSetNavigateConfirmation).toHaveBeenCalledWith(true);
       expect(Toast.show).toHaveBeenCalledWith(successToast);
     });
 
@@ -642,13 +650,21 @@ describe('ManagePalletScreen', () => {
       };
       // mock navigate go back
       const mockSetDisplayConfirmation = jest.fn();
+      const mockSetNavigateConfirmation = jest.fn();
       const failedToast = {
         type: 'error',
         text1: strings('PALLET.CLEAR_PALLET_ERROR'),
         text2: strings(TRY_AGAIN_TEXT),
         position: 'bottom'
       };
-      clearPalletApiHook(clearPalletFailure, palletInfo.id, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+      clearPalletApiHook(
+        clearPalletFailure,
+        palletInfo.id,
+        navigationProp,
+        mockDispatch,
+        mockSetDisplayConfirmation,
+        mockSetNavigateConfirmation
+      );
 
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);

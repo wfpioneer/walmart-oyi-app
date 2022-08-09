@@ -84,8 +84,8 @@ interface ManagePalletProps {
   setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>;
   useFocusEffectHook: (effect: EffectCallback) => void;
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
-  unSavedDataLossConfirmed: boolean;
-  setUnSavedDataLossConfirmed: React.Dispatch<React.SetStateAction<boolean>>;
+  confirmNavigate: boolean;
+  setConfirmNavigate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface ApiResult {
   data: any;
@@ -417,6 +417,7 @@ export const clearPalletApiHook = (
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  setConfirmNavigate: React.Dispatch<React.SetStateAction<boolean>>,
 ): void => {
   if (navigation.isFocused()) {
     if (!clearPalletApi.isWaiting) {
@@ -430,7 +431,7 @@ export const clearPalletApiHook = (
           text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId }),
           position: 'bottom'
         });
-        navigation.goBack();
+        setConfirmNavigate(true);
       }
 
       // Failure
@@ -539,7 +540,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, perishableCategories, displayWarningModal, setDisplayWarningModal,
-    useFocusEffectHook, useCallbackHook, unSavedDataLossConfirmed, setUnSavedDataLossConfirmed
+    useFocusEffectHook, useCallbackHook, confirmNavigate, setConfirmNavigate
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
 
@@ -548,13 +549,13 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   // validation on app back press
   useEffectHook(() => {
     const navigationListener = navigation.addListener('beforeRemove', e => {
-      if (!unSavedDataLossConfirmed && enableSave(items, palletInfo)) {
+      if (!confirmNavigate && enableSave(items, palletInfo)) {
         setDisplayWarningModal(true);
         e.preventDefault();
       }
     });
     return navigationListener;
-  }, [navigation, items, unSavedDataLossConfirmed]);
+  }, [navigation, items, confirmNavigate]);
 
   // validation on Hardware backPress
   useFocusEffectHook(
@@ -570,10 +571,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
   // On data loss back confirm
   useEffectHook(() => {
-    if (unSavedDataLossConfirmed) {
+    if (confirmNavigate) {
       navigation.goBack();
     }
-  }, [unSavedDataLossConfirmed]);
+  }, [confirmNavigate]);
 
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -620,7 +621,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     id,
     navigation,
     dispatch,
-    setDisplayClearConfirmation
+    setDisplayClearConfirmation,
+    setConfirmNavigate
   ), [clearPalletApi]);
 
   const submit = () => {
@@ -677,14 +679,14 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
   const backConfirmed = () => {
     setDisplayWarningModal(false);
-    setUnSavedDataLossConfirmed(true);
+    setConfirmNavigate(true);
     dispatch({ type: GET_ITEM_DETAILS.RESET });
   };
 
   const renderWarningModal = () => (
     <CustomModalComponent
       isVisible={displayWarningModal}
-      onClose={() => { setDisplayWarningModal(false); setUnSavedDataLossConfirmed(false); }}
+      onClose={() => { setDisplayWarningModal(false); setConfirmNavigate(false); }}
       modalType="Popup"
     >
       <>
@@ -698,7 +700,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             title={strings('GENERICS.CANCEL')}
             titleColor={COLOR.MAIN_THEME_COLOR}
             type={ButtonType.SOLID_WHITE}
-            onPress={() => { setDisplayWarningModal(false); setUnSavedDataLossConfirmed(false); }}
+            onPress={() => { setDisplayWarningModal(false); setConfirmNavigate(false); }}
           />
           <Button
             style={styles.buttonAlign}
@@ -813,7 +815,7 @@ const ManagePallet = (): JSX.Element => {
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [displayWarningModal, setDisplayWarningModal] = useState(false);
-  const [unSavedDataLossConfirmed, setUnSavedDataLossConfirmed] = useState(false);
+  const [confirmNavigate, setConfirmNavigate] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['55%'], []);
@@ -877,8 +879,8 @@ const ManagePallet = (): JSX.Element => {
           setDisplayWarningModal={setDisplayWarningModal}
           useFocusEffectHook={useFocusEffect}
           useCallbackHook={useCallback}
-          unSavedDataLossConfirmed={unSavedDataLossConfirmed}
-          setUnSavedDataLossConfirmed={setUnSavedDataLossConfirmed}
+          confirmNavigate={confirmNavigate}
+          setConfirmNavigate={setConfirmNavigate}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}
