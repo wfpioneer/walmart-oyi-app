@@ -315,7 +315,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     const { status } = selectedPicks[0];
     const isMine = selectedPicks[0].assignedAssociate === userId;
 
-    const amManager = !userFeatures.includes('manager approval');
+    const amManager = userFeatures.includes('manager approval');
     const releaseButton = (status === PickStatus.ACCEPTED_BIN || status === PickStatus.ACCEPTED_PICK)
       && (isMine || amManager) ? (
         <Button
@@ -336,7 +336,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
       />
     ) : null;
 
-    const continueButton = status === PickStatus.ACCEPTED_PICK ? (
+    const continueButton = status === PickStatus.ACCEPTED_PICK && isMine ? (
       <Button
         title={strings('GENERICS.CONTINUE')}
         onPress={() => setShowContinueActionDialog(true)}
@@ -375,7 +375,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
       {selectedPicks.length > 0 ? (
         <>
           <PickPalletInfoCard
-            onPress={() => { }}
+            onPress={() => {}}
             palletId={selectedPicks[0].palletId}
             palletLocation={selectedPicks[0].palletLocationName}
             pickListItems={selectedPicks}
@@ -401,7 +401,7 @@ const PickBinWorkflow = () => {
   const [selectedPicklistAction, setSelectedPicklistAction] = useState<PickAction|null>(null);
   const [showContinueActionDialog, setShowContinueActionDialog] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const navigation: NavigationProp<any> = useNavigation();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['21%'], []);
