@@ -215,7 +215,8 @@ export default {
     SAVE_PALLET_FAILURE: 'Pallet update failed',
     CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?',
     CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful',
-    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared'
+    CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared',
+    CREATE_PALLET: 'Create Pallet'
   },
   LOCATION: {
     TITLE: 'All locations',

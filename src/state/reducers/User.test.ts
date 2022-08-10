@@ -36,7 +36,8 @@ describe('testing User reducer', () => {
       areas: mockAreas,
       enableAreaFilter: false,
       palletWorklists: false,
-      addtItemDetails: false
+      addtItemDetails: false,
+      createPallet: false
     };
     const testConfig = { ...mockConfig, locMgmtEdit: false };
     testChangedState = {
