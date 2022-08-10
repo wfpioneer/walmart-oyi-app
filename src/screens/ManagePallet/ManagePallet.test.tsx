@@ -134,8 +134,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          confirmNavigate={false}
-          setConfirmNavigate={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -167,8 +167,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          confirmNavigate={false}
-          setConfirmNavigate={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -201,8 +201,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          confirmNavigate={false}
-          setConfirmNavigate={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -237,8 +237,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          confirmNavigate={false}
-          setConfirmNavigate={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -270,8 +270,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          confirmNavigate={false}
-          setConfirmNavigate={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -307,8 +307,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          confirmNavigate={false}
-          setConfirmNavigate={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -352,8 +352,8 @@ describe('ManagePalletScreen', () => {
           setDisplayWarningModal={jest.fn()}
           useFocusEffectHook={jest.fn()}
           useCallbackHook={jest.fn()}
-          confirmNavigate={false}
-          setConfirmNavigate={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
