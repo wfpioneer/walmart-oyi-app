@@ -94,8 +94,6 @@ describe('ManagePalletScreen', () => {
   const navigationProp: NavigationProp<any> = {
     addListener: jest.fn(),
     canGoBack: jest.fn(),
-    dangerouslyGetParent: jest.fn(),
-    dangerouslyGetState: jest.fn(),
     dispatch: jest.fn(),
     goBack: jest.fn(),
     isFocused: jest.fn(() => true),
@@ -103,7 +101,10 @@ describe('ManagePalletScreen', () => {
     reset: jest.fn(),
     setOptions: jest.fn(),
     setParams: jest.fn(),
-    navigate: jest.fn()
+    navigate: jest.fn(),
+    getId: jest.fn(),
+    getParent: jest.fn(),
+    getState: jest.fn()
   };
   let routeProp: RouteProp<any, string>;
   describe('Tests rendering the PalletManagement Screen', () => {
@@ -608,7 +609,11 @@ describe('ManagePalletScreen', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
-          data: mockItems[0],
+          data: {
+            itemDetails: mockItems[0],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
+          },
           status: 200
         }
       };
@@ -627,7 +632,11 @@ describe('ManagePalletScreen', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
-          data: getItemDetails[123],
+          data: {
+            itemDetails: getItemDetails[123],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
+          },
           status: 200
         }
       };

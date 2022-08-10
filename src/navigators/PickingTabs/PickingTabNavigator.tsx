@@ -34,6 +34,7 @@ import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { GET_ITEM_DETAILS, GET_PICKLISTS, UPDATE_PICKLIST_STATUS } from '../../state/actions/asyncAPI';
+import ItemDetails from '../../models/ItemDetails';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -59,17 +60,18 @@ export const getItemDetailsApiHook = (
   if (navigation.isFocused()) {
     // on api success
     if (!getItemDetailsApi.isWaiting && getItemDetailsApi.result) {
-      if (getItemDetailsApi.result.status === 200) {
+      if (getItemDetailsApi.result.status === 200 || getItemDetailsApi.result.status === 207) {
+        const { itemDetails }: {itemDetails: ItemDetails} = getItemDetailsApi.result.data;
         dispatch(setPickCreateItem({
-          itemName: getItemDetailsApi.result.data.itemName,
-          itemNbr: getItemDetailsApi.result.data.itemNbr,
-          upcNbr: getItemDetailsApi.result.data.upcNbr,
-          categoryNbr: getItemDetailsApi.result.data.categoryNbr,
-          categoryDesc: getItemDetailsApi.result.data.categoryDesc,
-          price: getItemDetailsApi.result.data.price
+          itemName: itemDetails.itemName,
+          itemNbr: itemDetails.itemNbr,
+          upcNbr: itemDetails.upcNbr,
+          categoryNbr: itemDetails.categoryNbr,
+          categoryDesc: itemDetails.categoryDesc,
+          price: itemDetails.price
         }));
-        dispatch(setPickCreateFloor(getItemDetailsApi.result.data.location.floor || []));
-        dispatch(setPickCreateReserve(getItemDetailsApi.result.data.location.reserve || []));
+        dispatch(setPickCreateFloor(itemDetails.location.floor || []));
+        dispatch(setPickCreateReserve(itemDetails.location.reserve || []));
         navigation.navigate('CreatePick');
       } else if (getItemDetailsApi.result.status === 204) {
         Toast.show({

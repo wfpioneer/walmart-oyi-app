@@ -57,6 +57,7 @@ import {
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
+import ItemDetails from '../../models/ItemDetails';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 
@@ -451,11 +452,11 @@ export const getItemDetailsApiHook = (
 ) => {
   // on api success
   if (!getItemDetailsApi.isWaiting && getItemDetailsApi.result) {
-    if (getItemDetailsApi.result.status === 200) {
+    if (getItemDetailsApi.result.status === 200 || getItemDetailsApi.result.status === 207) {
       const {
-        data
-      } = getItemDetailsApi.result;
-      const palletItem = items.filter(item => item.itemNbr === data.itemNbr);
+        itemDetails
+      }: {itemDetails: ItemDetails} = getItemDetailsApi.result.data;
+      const palletItem = items.filter(item => item.itemNbr === itemDetails.itemNbr);
       if (palletItem.length > 0) {
         Toast.show({
           type: 'info',
@@ -471,7 +472,7 @@ export const getItemDetailsApiHook = (
           itemName,
           categoryNbr,
           categoryDesc
-        } = data;
+        } = itemDetails;
         const pallet: PalletItem = {
           upcNbr,
           itemNbr,
@@ -587,7 +588,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
     const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
     // updated expiration date
-    const updatedExpirationDate = addExpiry ? `${moment(addExpiry,'DD/MM/YYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
+    const updatedExpirationDate = addExpiry
+      ? `${moment(addExpiry, 'DD/MM/YYY').format('YYYY-MM-DDT00:00:00.000')}Z`
+      : undefined;
     // Filter Items by deleted flag
     const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
       reducer.push(current.upcNbr);
@@ -720,7 +723,7 @@ const ManagePallet = (): JSX.Element => {
     palletInfo, managePalletMenu, items, perishableCategories
   } = useTypedSelector(state => state.PalletManagement);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
-  const navigation = useNavigation();
+  const navigation: NavigationProp<any> = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
