@@ -283,7 +283,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="Printers"
+        title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
         toggleIsOpened={[MockFunction]}
       />
     </View>
@@ -442,7 +442,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="Features"
+        title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
         toggleIsOpened={[MockFunction]}
       />
     </View>
@@ -558,7 +558,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="Printers"
+        title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
         toggleIsOpened={[MockFunction]}
       />
     </View>
@@ -717,7 +717,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={false}
-        title="Features"
+        title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
         toggleIsOpened={[MockFunction]}
       />
     </View>
@@ -779,7 +779,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={false}
-        title="Printers"
+        title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
         toggleIsOpened={[MockFunction]}
       />
     </View>
@@ -797,7 +797,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="Features"
+        title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
         toggleIsOpened={[MockFunction]}
       />
     </View>
@@ -913,7 +913,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="Printers"
+        title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
         toggleIsOpened={[MockFunction]}
       />
     </View>
@@ -1072,7 +1072,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="Features"
+        title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
         toggleIsOpened={[MockFunction]}
       />
     </View>

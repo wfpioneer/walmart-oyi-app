@@ -63,7 +63,8 @@ export const clearPalletAPIHook = (
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
   setDisplayConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
-  onRefresh: () => void
+  onRefresh: () => void,
+  setDeletePalletId: React.Dispatch<React.SetStateAction<string>>
 ): void => {
   if (navigation.isFocused()) {
     if (!clearPalletApi.isWaiting) {
@@ -71,6 +72,7 @@ export const clearPalletAPIHook = (
       if (clearPalletApi.result) {
         dispatch(hideActivityModal());
         setDisplayConfirmation(false);
+        setDeletePalletId('');
         dispatch({ type: CLEAR_PALLET.RESET });
         onRefresh();
 
@@ -86,6 +88,7 @@ export const clearPalletAPIHook = (
         dispatch(hideActivityModal());
         setDisplayConfirmation(false);
         dispatch({ type: CLEAR_PALLET.RESET });
+        setDeletePalletId('');
         Toast.show({
           type: 'error',
           text1: strings('PALLET.CLEAR_PALLET_ERROR'),
@@ -267,9 +270,9 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
     selectedTab,
     setPalletClicked
   } = props;
-  let deletePalletId = '';
 
   const [activeItemIndex, setActiveItemIndex] = useState(1);
+  const [deletePalletId, setDeletePalletId] = useState('');
 
   useEffectHook(
     () => clearPalletAPIHook(
@@ -278,7 +281,8 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
       navigation,
       dispatch,
       setDisplayConfirmation,
-      onRefresh
+      onRefresh,
+      setDeletePalletId
     ),
     [clearPalletAPI]
   );
@@ -296,7 +300,7 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
 
   const handleDeleteClick = (palletId: string) => {
     setDisplayConfirmation(true);
-    deletePalletId = palletId;
+    setDeletePalletId(palletId);
   };
 
   const handleAddLocationClick = (palletId: string) => {

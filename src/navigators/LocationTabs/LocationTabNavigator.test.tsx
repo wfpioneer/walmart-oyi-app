@@ -614,7 +614,7 @@ describe('Test Location Tabs', (): void => {
       );
       expect(mockIsFocused).toBeCalledTimes(1);
       // called thrice because of handleClearModalClose
-      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledTimes(3);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
     });

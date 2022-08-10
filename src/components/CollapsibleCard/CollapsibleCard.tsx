@@ -3,6 +3,7 @@ import {
   Text, TouchableOpacity, View
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './CollapsibleCard.style';
 import COLOR from '../../themes/Color';
 
@@ -29,13 +30,12 @@ export const CollapsibleHeaderCard = (props: CollapsibleHeaderCardProps): JSX.El
   return (
     <View style={styles.menuContainer}>
       <View style={styles.titleContainer}>
-        <Text>
+        <Text style={{ marginRight: icon ? 10 : 0 }}>
           {icon && (
-          <MaterialIcons
+          <MaterialCommunityIcon
             name={icon}
-            style={{ paddingRight: icon ? 10 : 0 }}
-            size={25}
-            color={COLOR.BLACK}
+            size={20}
+            color={COLOR.GREY_700}
           />
           )}
         </Text>

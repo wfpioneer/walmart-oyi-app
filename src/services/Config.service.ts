@@ -17,6 +17,7 @@ export interface ConfigResponse {
   enableAreaFilter: boolean;
   palletWorklists: boolean;
   addtItemDetails: boolean;
+  createPallet: boolean;
 }
 
 export default class ConfigService {

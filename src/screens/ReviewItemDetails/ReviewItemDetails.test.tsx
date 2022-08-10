@@ -23,7 +23,7 @@ import ReviewItemDetails, {
   isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateCompleteItemApiErrortHook,
   onValidateCompleteItemApiResultHook, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
   renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
-  renderReserveLocQtys, renderScanForNoActionButton, updateOHQtyApiHook
+  renderReplenishmentCard, renderReserveLocQtys, renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -1323,6 +1323,22 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         renderReserveLocQtys(mockReserveLocations)
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('Tests Rendering \'renderReplenishments\'', () => {
+    it('Renders replenishment card with delivery history', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderReplenishmentCard(itemDetail[123])
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders replenishment card with no delivery history', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderReplenishmentCard(itemDetail[789])
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

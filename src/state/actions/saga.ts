@@ -139,7 +139,11 @@ export const printLocationLabel = (payload: {
   headers?: AxiosRequestHeaders;
   printLabelList: PrintLocationList[];
 }) => ({ type: PRINT_LOCATION_LABELS, payload } as const);
-export const addPallet = (payload: { palletId: string; sectionId: number }) => ({ type: ADD_PALLET, payload } as const);
+export const addPallet = (payload: {
+  palletId: string;
+  sectionId?: number;
+  locationName?: string
+}) => ({ type: ADD_PALLET, payload } as const);
 export const deletePallet = (payload: { palletId: number }) => ({ type: DELETE_PALLET, payload } as const);
 export const createSections = (
   payload: { aisleId: number; sectionCount: number }[]
