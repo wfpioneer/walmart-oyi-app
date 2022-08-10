@@ -474,6 +474,7 @@ export default {
   SETTINGS: {
     TITLE: 'Ajustes',
     FEATURE_UPDATE_SUCCESS: 'Funcionalidades actualizadas',
-    FEATURE_UPDATE_FAILURE: 'Incapaz de obtener las funcionalidades actualizadas'
+    FEATURE_UPDATE_FAILURE: 'Incapaz de obtener las funcionalidades actualizadas',
+    FEATURES: 'Funcionalidades'
   }
 };
