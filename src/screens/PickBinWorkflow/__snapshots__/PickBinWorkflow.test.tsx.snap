@@ -307,27 +307,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
           "width": "100%",
         }
       }
-    >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "margin": 5,
-          }
-        }
-        title="[missing \\"en.PICKING.RELEASE\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
+    />
   </React.Fragment>
 </RNCSafeAreaView>
 `;
@@ -410,7 +390,27 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
           "width": "100%",
         }
       }
-    />
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "margin": 5,
+          }
+        }
+        title="[missing \\"en.PICKING.RELEASE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
   </React.Fragment>
 </RNCSafeAreaView>
 `;
@@ -615,46 +615,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
           "width": "100%",
         }
       }
-    >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "margin": 5,
-          }
-        }
-        title="[missing \\"en.PICKING.RELEASE\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "flex": 1,
-            "margin": 5,
-          }
-        }
-        title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
+    />
   </React.Fragment>
 </RNCSafeAreaView>
 `;
@@ -750,7 +711,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
             "margin": 5,
           }
         }
-        title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+        title="[missing \\"en.PICKING.RELEASE\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
