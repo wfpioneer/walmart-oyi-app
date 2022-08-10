@@ -56,7 +56,8 @@ export default {
     CREATE: 'Create',
     UNASSIGNED: 'unassigned',
     SELECTED: 'selected',
-    UPDATE: 'Update Configuration'
+    UPDATE: 'Update Configuration',
+    WARNING_LABEL: 'Warning'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -216,6 +217,7 @@ export default {
     CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?',
     CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful',
     CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared',
+    UNSAVED_WARNING_MSG: 'All unsaved changes will be lost',
     CREATE_PALLET: 'Create Pallet'
   },
   LOCATION: {

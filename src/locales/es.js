@@ -56,7 +56,8 @@ export default {
     CREATE: 'Crear',
     UNASSIGNED: 'Sin asignar',
     SELECTED: 'Seleccionado',
-    UPDATE: 'Actualizar Configuración'
+    UPDATE: 'Actualizar Configuración',
+    WARNING_LABEL: 'Aviso'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -215,6 +216,7 @@ export default {
     CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
     CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
     CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente',
+    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán',
     CREATE_PALLET: 'Crear Pallet'
   },
   LOCATION: {
