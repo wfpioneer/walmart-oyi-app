@@ -54,7 +54,7 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
     <View
       style={
         Object {
-          "paddingTop": 10,
+          "paddingTop": 20,
         }
       }
     >

@@ -79,6 +79,7 @@ interface ManagePalletProps {
   perishableCategories: number[];
   isPickerShow: boolean;
   setIsPickerShow: React.Dispatch<React.SetStateAction<boolean>>;
+  createPallet: boolean;
 }
 interface ApiResult {
   data: any;
@@ -524,7 +525,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
-    isPickerShow, perishableCategories
+    isPickerShow, perishableCategories, createPallet
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
 
@@ -591,7 +592,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
     const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
     // updated expiration date
-    const updatedExpirationDate = addExpiry ? `${moment(addExpiry,'DD/MM/YYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
+    const updatedExpirationDate = addExpiry
+      ? `${moment(addExpiry, 'DD/MM/YYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
     // Filter Items by deleted flag
     const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
       reducer.push(current.upcNbr);
@@ -657,10 +659,12 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       <View style={styles.bodyContainer}>
         {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <View style={styles.headerContainer}>
+          {!createPallet && (
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>{strings('PALLET.PALLET_ID')}</Text>
             <Text style={styles.headerItemText}>{id}</Text>
           </View>
+          )}
           {(isPerishableItemExist(items, perishableCategories)) && (
             <PalletExpiration
               expirationDate={expirationDate}
@@ -711,7 +715,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       {items && enableSave(items, palletInfo) ? (
         <View style={styles.buttonContainer}>
           <Button
-            title={strings('GENERICS.SAVE')}
+            title={strings(createPallet ? 'GENERICS.CREATE' : 'GENERICS.SAVE')}
             style={styles.saveButton}
             backgroundColor={COLOR.GREEN}
             onPress={() => submit()}
@@ -725,7 +729,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
 const ManagePallet = (): JSX.Element => {
   const {
-    palletInfo, managePalletMenu, items, perishableCategories
+    palletInfo, managePalletMenu, items, perishableCategories, createPallet
   } = useTypedSelector(state => state.PalletManagement);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const navigation = useNavigation();
@@ -798,6 +802,7 @@ const ManagePallet = (): JSX.Element => {
           perishableCategories={perishableCategories}
           isPickerShow={isPickerShow}
           setIsPickerShow={setIsPickerShow}
+          createPallet={createPallet}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

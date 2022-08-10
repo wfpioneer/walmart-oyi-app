@@ -18,6 +18,7 @@ interface PalletManagementNavigatorProps {
   isManualScanEnabled: boolean;
   managePalletMenu: boolean;
   dispatch: Dispatch<any>;
+  createPallet: boolean;
 }
 
 const Stack = createStackNavigator();
@@ -58,7 +59,7 @@ export const renderManagePalletKebabButton = (managePalletMenu: boolean, dispatc
 
 export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorProps): JSX.Element => {
   const {
-    isManualScanEnabled, managePalletMenu, dispatch
+    isManualScanEnabled, managePalletMenu, dispatch, createPallet
   } = props;
   return (
     <Stack.Navigator
@@ -88,7 +89,7 @@ export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorP
           headerRight: () => (
             <View style={styles.headerContainer}>
               {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderManagePalletKebabButton(managePalletMenu, dispatch)}
+              {!createPallet && renderManagePalletKebabButton(managePalletMenu, dispatch)}
             </View>
           )
         }}
@@ -111,13 +112,14 @@ export const PalletManagementNavigatorStack = (props: PalletManagementNavigatorP
 
 const PalletManagementNavigator = (): JSX.Element => {
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
-  const { managePalletMenu } = useTypedSelector(state => state.PalletManagement);
+  const { managePalletMenu, createPallet } = useTypedSelector(state => state.PalletManagement);
   const dispatch = useDispatch();
   return (
     <PalletManagementNavigatorStack
       isManualScanEnabled={isManualScanEnabled}
       managePalletMenu={managePalletMenu}
       dispatch={dispatch}
+      createPallet={createPallet}
     />
   );
 };
