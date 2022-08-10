@@ -114,5 +114,28 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLOR.YELLOW,
     borderWidth: 1
+  },
+  buttonWarningContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignContent: 'center',
+    height: 60,
+    elevation: 10
+  },
+  buttonAlign: {
+    alignSelf: 'center',
+    width: '40%',
+    marginHorizontal: 10
+  },
+  message: {
+    textAlign: 'center',
+    fontSize: 16,
+    padding: 10
+  },
+  labelHeader: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: COLOR.RED_500,
+    paddingBottom: 5
   }
 });
