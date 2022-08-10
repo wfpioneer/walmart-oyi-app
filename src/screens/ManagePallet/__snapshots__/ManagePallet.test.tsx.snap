@@ -1326,6 +1326,35 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           3
         </Text>
       </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.ITEM.LOCATION" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          ARAR1-1
+        </Text>
+      </View>
     </View>
     <View
       style={
@@ -1402,6 +1431,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": true,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 3,
               "price": 10,
               "quantity": 3,
@@ -1414,6 +1444,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 4,
               "price": 10,
               "quantity": 3,
@@ -1426,6 +1457,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "food",
               "itemNbr": 4221,
+              "locationName": "ARAR1-1",
               "newQuantity": 1,
               "price": 3.49,
               "quantity": 2,
