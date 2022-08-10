@@ -4,6 +4,7 @@ import {
   Actions,
   CLEAR_COMBINE_PALLET,
   CLEAR_PALLET_MANAGEMENT,
+  CREATE_PALLET,
   DELETE_ITEM,
   REMOVE_COMBINE_PALLET,
   REMOVE_ITEM,
@@ -26,6 +27,7 @@ interface PalletManagementState {
   items: PalletItem[];
   combinePallets: CombinePallet[];
   perishableCategories: number[];
+  createPallet: boolean;
 }
 
 const initialState: PalletManagementState = {
@@ -37,7 +39,8 @@ const initialState: PalletManagementState = {
   },
   items: [],
   combinePallets: [],
-  perishableCategories: []
+  perishableCategories: [],
+  createPallet: false
 };
 
 export const PalletManagement = (state = initialState, action: Actions): PalletManagementState => {
@@ -171,6 +174,14 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       return {
         ...state,
         palletInfo: updatedPalletInfo
+      };
+    }
+    case CREATE_PALLET: {
+      const { perishableCategories } = state;
+      return {
+        ...initialState,
+        perishableCategories,
+        createPallet: true
       };
     }
     default:

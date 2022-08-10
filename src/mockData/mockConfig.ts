@@ -28,5 +28,6 @@ export const mockConfig: Configurations = {
   areas: mockAreas,
   enableAreaFilter: false,
   palletWorklists: false,
-  additionalItemDetails: false
+  additionalItemDetails: false,
+  createPallet: false
 };

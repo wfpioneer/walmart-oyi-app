@@ -29,6 +29,7 @@ export interface Configurations {
   enableAreaFilter: boolean;
   palletWorklists: boolean;
   additionalItemDetails: boolean;
+  createPallet: boolean;
 }
 
 export interface area {

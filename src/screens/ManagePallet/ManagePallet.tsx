@@ -86,6 +86,7 @@ interface ManagePalletProps {
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
   confirmBackNavigate: boolean;
   setConfirmBackNavigate: React.Dispatch<React.SetStateAction<boolean>>;
+  createPallet: boolean;
 }
 interface ApiResult {
   data: any;
@@ -154,6 +155,8 @@ export const onEndEditing = (item: PalletItem, dispatch: Dispatch<any>): void =>
 const isPerishableItemExist = (items: PalletItem[], perishableCategories: number[]): boolean => (
   items.some(item => item.categoryNbr && perishableCategories.includes(item.categoryNbr))
 );
+
+const isLocationExistOnAnItem = (items: PalletItem[]): boolean => items.some(item => item.locationName);
 
 export const removeExpirationDate = (items: PalletItem[], perishableCategories: number[]): boolean => {
   const [deletedItems, otherItemsInPallet] = partition(items, item => item.deleted);
@@ -540,7 +543,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, perishableCategories, displayWarningModal, setDisplayWarningModal,
-    useFocusEffectHook, useCallbackHook, confirmBackNavigate, setConfirmBackNavigate
+    useFocusEffectHook, useCallbackHook, confirmBackNavigate, setConfirmBackNavigate,
+    createPallet
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
 
@@ -736,10 +740,12 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         {renderWarningModal()}
         {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <View style={styles.headerContainer}>
+          {!createPallet && (
           <View style={styles.headerItem}>
             <Text style={styles.headerText}>{strings('PALLET.PALLET_ID')}</Text>
             <Text style={styles.headerItemText}>{id}</Text>
           </View>
+          )}
           {(isPerishableItemExist(items, perishableCategories)) && (
             <PalletExpiration
               expirationDate={expirationDate}
@@ -757,6 +763,12 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             <Text style={styles.headerText}>{strings('LOCATION.ITEMS')}</Text>
             <Text style={styles.headerItemText}>{items.length}</Text>
           </View>
+          {(isLocationExistOnAnItem(items)) && (
+          <View style={styles.headerItem}>
+            <Text style={styles.headerText}>{strings('ITEM.LOCATION')}</Text>
+            <Text style={styles.headerItemText}>{items[0]?.locationName}</Text>
+          </View>
+          )}
         </View>
         <View style={styles.instructionLabel}>
           <Text style={styles.instructionLabelText}>
@@ -786,7 +798,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       {items && enableSave(items, palletInfo) ? (
         <View style={styles.buttonContainer}>
           <Button
-            title={strings('GENERICS.SAVE')}
+            title={strings(createPallet ? 'GENERICS.CREATE' : 'GENERICS.SAVE')}
             style={styles.saveButton}
             backgroundColor={COLOR.GREEN}
             onPress={() => submit()}
@@ -800,7 +812,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
 const ManagePallet = (): JSX.Element => {
   const {
-    palletInfo, managePalletMenu, items, perishableCategories
+    palletInfo, managePalletMenu, items, perishableCategories, createPallet
   } = useTypedSelector(state => state.PalletManagement);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const navigation = useNavigation();
@@ -881,6 +893,7 @@ const ManagePallet = (): JSX.Element => {
           useCallbackHook={useCallback}
           confirmBackNavigate={confirmBackNavigate}
           setConfirmBackNavigate={setConfirmBackNavigate}
+          createPallet={createPallet}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

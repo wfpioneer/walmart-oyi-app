@@ -5,7 +5,6 @@ import {
   ActivityIndicator,
   EmitterSubscription,
   Text,
-  TextInput,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -27,11 +26,12 @@ import { getPalletConfig, getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
-import { setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
+import { createPallet, setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
 import { GET_PALLET_CONFIG, GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
 import { Configurations } from '../../models/User';
 import ManualScan from '../../components/manualscan/ManualScan';
+import Button, { ButtonType } from '../../components/buttons/Button';
 
 interface PalletManagementProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
@@ -221,6 +221,22 @@ export const PalletManagementScreen = (
         <View style={styles.scanText}>
           <Text>{strings('PALLET.SCAN_PALLET')}</Text>
         </View>
+        {userConfig.createPallet && (
+        <>
+          <View style={styles.orText}>
+            <Text>{strings('GENERICS.OR')}</Text>
+          </View>
+          <Button
+            title={strings('PALLET.CREATE_PALLET')}
+            type={ButtonType.PRIMARY}
+            style={styles.btnCreate}
+            onPress={() => {
+              dispatch(createPallet());
+              navigation.navigate('ManagePallet');
+            }}
+          />
+        </>
+        )}
       </View>
     </View>
   );

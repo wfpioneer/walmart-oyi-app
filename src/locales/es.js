@@ -216,7 +216,8 @@ export default {
     CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
     CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
     CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente',
-    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán'
+    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán',
+    CREATE_PALLET: 'Crear Pallet'
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -475,6 +476,7 @@ export default {
   SETTINGS: {
     TITLE: 'Ajustes',
     FEATURE_UPDATE_SUCCESS: 'Funcionalidades actualizadas',
-    FEATURE_UPDATE_FAILURE: 'Incapaz de obtener las funcionalidades actualizadas'
+    FEATURE_UPDATE_FAILURE: 'Incapaz de obtener las funcionalidades actualizadas',
+    FEATURES: 'Funcionalidades'
   }
 };
