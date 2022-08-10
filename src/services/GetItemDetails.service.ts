@@ -8,6 +8,7 @@ export interface GetItemDetailsPayload {
   id: number;
   getSummary?: boolean;
   getExcludeHistory?: boolean;
+  getMetadataHistory?: boolean;
 }
 
 export default class GetItemDetailsService {
@@ -15,8 +16,9 @@ export default class GetItemDetailsService {
     const urls: Environment = getEnvironment();
     const summaryParam = payload.getSummary ? `?summaryDetails=${payload.getSummary}` : '';
     const excludeHistoryParam = payload.getExcludeHistory ? `?excludeHistory'=${payload.getExcludeHistory}` : '';
+    const metadataHistoryParam = payload.getMetadataHistory ? `?metadataHistory=${payload.getMetadataHistory}` : '';
     return Request.get(
-      `${urls.itemDetailsURL}/v2/item/${payload.id}${summaryParam}${excludeHistoryParam}`,
+      `${urls.orchestrationURL}/item/${payload.id}${summaryParam}${excludeHistoryParam}${metadataHistoryParam}`,
       undefined,
       { timeout: TIMEOUT }
     );

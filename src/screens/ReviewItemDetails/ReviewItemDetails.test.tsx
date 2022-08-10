@@ -191,7 +191,11 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {
+            itemDetails: itemDetail[123],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
+          },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -211,7 +215,11 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {
+            itemDetails: itemDetail[123],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
+          },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -232,7 +240,11 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {
+            itemDetails: itemDetail[123],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
+          },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -253,7 +265,11 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {
+            itemDetails: itemDetail[123],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
+          },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -274,7 +290,11 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {
+            itemDetails: itemDetail[123],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
+          },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -296,8 +316,9 @@ describe('ReviewItemDetailsScreen', () => {
         result: {
           ...defaultResult,
           data: {
-            ...itemDetail[123],
-            status: undefined
+            itemDetails: itemDetail[123],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
           },
           status: 200
         },
@@ -319,8 +340,9 @@ describe('ReviewItemDetailsScreen', () => {
         result: {
           ...defaultResult,
           data: {
-            ...itemDetail[456],
-            status: undefined
+            itemDetails: itemDetail[456],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
           },
           status: 200
         },
@@ -343,8 +365,9 @@ describe('ReviewItemDetailsScreen', () => {
         result: {
           ...defaultResult,
           data: {
-            ...itemDetail[123],
-            status: undefined
+            itemDetails: itemDetail[123],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
           },
           status: 200
         },
@@ -410,7 +433,11 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[321],
+          data: {
+            itemDetails: itemDetail[321],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
+          },
           status: 207
         },
         exceptionType: 'NSFL',

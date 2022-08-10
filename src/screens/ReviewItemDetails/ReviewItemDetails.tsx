@@ -22,7 +22,9 @@ import {
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
-import ItemDetails, { ItemHistoryI, OHChangeHistory, PickHistory } from '../../models/ItemDetails';
+import ItemDetails, {
+  ItemHistoryI, ItemOHChangeHistory, OHChangeHistory, PickHistory, PicklistHistory
+} from '../../models/ItemDetails';
 import { CollapsibleCard } from '../../components/CollapsibleCard/CollapsibleCard';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
@@ -414,7 +416,11 @@ export const renderPickHistory = (
   );
 };
 
-export const renderOHChangeHistory = (props: HandleProps, ohChangeHistory: OHChangeHistory[], result: AxiosResponse) => {
+export const renderOHChangeHistory = (
+  props: HandleProps,
+  ohChangeHistory: OHChangeHistory[],
+  result: AxiosResponse
+) => {
   // TODO : also check for their respective status if status for oh change history is 200 than render
   if (result && result.status !== MULTI_STATUS) {
     if (ohChangeHistory && ohChangeHistory.length) {
@@ -597,7 +603,7 @@ export const renderLocationComponent = (
 };
 
 export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
-  result: any, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
+  result: AxiosResponse | null, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
   if (result && result.status !== MULTI_STATUS) {
     return (
       <SFTCard
@@ -947,7 +953,16 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     onValidateScannedEvent(props);
   }, [scannedEvent]);
 
-  const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
+  const {
+    itemDetails,
+    itemOhChangeHistory,
+    picklistHistory
+  }: {
+    itemDetails: ItemDetails;
+    itemOhChangeHistory: ItemOHChangeHistory;
+    picklistHistory: PicklistHistory;
+  } = (result && result.data) || {}; // || getMockItemDetails(scannedEvent.value);
+
   const locationCount = getLocationCount(props);
   const updatedSalesTS = getUpdatedSales(itemDetails);
 
