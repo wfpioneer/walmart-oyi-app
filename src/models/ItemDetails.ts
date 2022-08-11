@@ -90,7 +90,7 @@ interface ItemDetails {
     error?: string
   };
   deliveryHistory: {
-    deliveries: {
+    deliveries?: {
       date: string;
       qty: number;
     }[];

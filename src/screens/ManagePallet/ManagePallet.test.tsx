@@ -28,6 +28,7 @@ import {
 import { updatePalletExpirationDate } from '../../state/actions/PalletManagement';
 import { strings } from '../../locales';
 import getItemDetails from '../../mockData/getItemDetails';
+import mockUser from '../../mockData/mockUser';
 
 const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
 
@@ -140,6 +141,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -173,6 +177,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -207,6 +214,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -243,6 +253,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -276,6 +289,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -313,6 +329,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -358,6 +377,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -697,11 +719,7 @@ describe('ManagePalletScreen', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
-          data: {
-            itemDetails: mockItems[0],
-            itemOhChangeHistory: { code: 204 },
-            picklistHistory: { code: 204 }
-          },
+          data: mockItems[0],
           status: 200
         }
       };

@@ -1983,7 +1983,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "consolidatedOnHandQty": 10,
               "deliveries": Array [
                 Object {
-                  "date": "2022-07-26",
+                  "date": "2022-06-23",
                   "qty": 23,
                 },
                 Object {
@@ -1991,7 +1991,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   "qty": 44,
                 },
                 Object {
-                  "date": "2022-06-23",
+                  "date": "2022-07-26",
                   "qty": 23,
                 },
               ],
@@ -2967,18 +2967,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   [missing "en.ITEM.HISTORY" translation]
                 </Text>
               </View>
-              <RenderItemHistoryCard
-                date="2022-07-26"
-                qty={23}
-              />
-              <RenderItemHistoryCard
-                date="2022-07-25"
-                qty={44}
-              />
-              <RenderItemHistoryCard
-                date="2022-06-23"
-                qty={23}
-              />
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "flex": 1,
+                    "padding": 10,
+                  }
+                }
+              >
+                <Text>
+                  [missing "en.ITEM.NO_HISTORY" translation]
+                </Text>
+              </View>
             </View>
           </CollapsibleCard>
         </View>
@@ -3011,7 +3013,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "consolidatedOnHandQty": 10,
               "deliveries": Array [
                 Object {
-                  "date": "2022-07-26",
+                  "date": "2022-06-23",
                   "qty": 23,
                 },
                 Object {
@@ -3019,7 +3021,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   "qty": 44,
                 },
                 Object {
-                  "date": "2022-06-23",
+                  "date": "2022-07-26",
                   "qty": 23,
                 },
               ],
@@ -4511,7 +4513,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "consolidatedOnHandQty": 10,
               "deliveries": Array [
                 Object {
-                  "date": "2022-07-26",
+                  "date": "2022-06-23",
                   "qty": 23,
                 },
                 Object {
@@ -4519,7 +4521,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   "qty": 44,
                 },
                 Object {
-                  "date": "2022-06-23",
+                  "date": "2022-07-26",
                   "qty": 23,
                 },
               ],
@@ -5068,7 +5070,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "consolidatedOnHandQty": 10,
               "deliveries": Array [
                 Object {
-                  "date": "2022-07-26",
+                  "date": "2022-06-23",
                   "qty": 23,
                 },
                 Object {
@@ -5076,7 +5078,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   "qty": 44,
                 },
                 Object {
-                  "date": "2022-06-23",
+                  "date": "2022-07-26",
                   "qty": 23,
                 },
               ],
@@ -6182,7 +6184,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "consolidatedOnHandQty": 10,
               "deliveries": Array [
                 Object {
-                  "date": "2022-07-26",
+                  "date": "2022-06-23",
                   "qty": 23,
                 },
                 Object {
@@ -6190,7 +6192,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   "qty": 44,
                 },
                 Object {
-                  "date": "2022-06-23",
+                  "date": "2022-07-26",
                   "qty": 23,
                 },
               ],
@@ -6739,7 +6741,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "consolidatedOnHandQty": 10,
               "deliveries": Array [
                 Object {
-                  "date": "2022-07-26",
+                  "date": "2022-06-23",
                   "qty": 23,
                 },
                 Object {
@@ -6747,7 +6749,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   "qty": 44,
                 },
                 Object {
-                  "date": "2022-06-23",
+                  "date": "2022-07-26",
                   "qty": 23,
                 },
               ],

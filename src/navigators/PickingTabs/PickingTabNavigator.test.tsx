@@ -11,6 +11,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { mockPickLists } from '../../mockData/mockPickList';
 import getItemDetails from '../../mockData/getItemDetails';
 import { Tabs } from '../../models/Picking.d';
+import mockUser from '../../mockData/mockUser';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -56,6 +57,8 @@ describe('Picking Tab Navigator', () => {
         selectedTab={Tabs.PICK}
         useCallbackHook={jest.fn}
         useFocusEffectHook={jest.fn}
+        userConfigs={mockUser.configs}
+        getItemDetailsV2Api={defaultAsyncState}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -72,11 +75,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
     const successApi: AsyncState = {
       ...defaultAsyncState,
       result: {
-        data: {
-          itemDetails: getItemDetails[456],
-          itemOhChangeHistory: { code: 204 },
-          picklistHistory: { code: 204 }
-        },
+        data: getItemDetails[456],
         status: 200
       }
     };

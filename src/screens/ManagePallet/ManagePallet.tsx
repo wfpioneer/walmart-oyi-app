@@ -30,7 +30,7 @@ import ManualScan from '../../components/manualscan/ManualScan';
 import PalletExpiration from '../../components/PalletExpiration/PalletExpiration';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, updatePalletItemQty
+  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, getItemDetailsV2, updatePalletItemQty
 } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
@@ -59,6 +59,7 @@ import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import ItemDetails from '../../models/ItemDetails';
 import { CustomModalComponent } from '../Modal/Modal';
+import { Configurations } from '../../models/User';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 
@@ -88,6 +89,8 @@ interface ManagePalletProps {
   confirmBackNavigate: boolean;
   setConfirmBackNavigate: React.Dispatch<React.SetStateAction<boolean>>;
   createPallet: boolean;
+  userConfigs: Configurations;
+  getItemDetailsV2Api: AsyncState;
 }
 interface ApiResult {
   data: any;
@@ -313,7 +316,7 @@ export const updatePalletApisHook = (
   deleteUpcsApi: AsyncState,
   items: PalletItem[],
   dispatch: Dispatch<any>,
-  newExpirationDate?: string
+  newExpirationDate?: string,
 ): void => {
   const addResponse: ApiResult | string = (addPalletUpcApi.result ?? addPalletUpcApi.error);
   const updateResponse: ApiResult | string = (updateItemQtyAPI.result ?? updateItemQtyAPI.error);
@@ -463,10 +466,8 @@ export const getItemDetailsApiHook = (
 ) => {
   // on api success
   if (!getItemDetailsApi.isWaiting && getItemDetailsApi.result) {
-    if (getItemDetailsApi.result.status === 200 || getItemDetailsApi.result.status === 207) {
-      const {
-        itemDetails
-      }: {itemDetails: ItemDetails} = getItemDetailsApi.result.data;
+    if (getItemDetailsApi.result.status === 200) {
+      const itemDetails: ItemDetails = getItemDetailsApi.result.data;
       const palletItem = items.filter(item => item.itemNbr === itemDetails.itemNbr);
       if (palletItem.length > 0) {
         Toast.show({
@@ -526,6 +527,79 @@ export const getItemDetailsApiHook = (
   }
 };
 
+export const getItemDetailsApiV2Hook = (
+  getItemDetailsV2Api: AsyncState,
+  items: PalletItem[],
+  dispatch: Dispatch<any>
+) => {
+  // on api success
+  if (!getItemDetailsV2Api.isWaiting && getItemDetailsV2Api.result) {
+    const responseData = getItemDetailsV2Api.result?.data;
+    const itemDetails: ItemDetails = (responseData && responseData.itemDetails);
+    if (getItemDetailsV2Api.result.status === 200 || itemDetails.code === 200) {
+      const palletItem = items.filter(item => item.itemNbr === itemDetails.itemNbr);
+      if (palletItem.length > 0) {
+        Toast.show({
+          type: 'info',
+          text1: strings('PALLET.ITEMS_DETAILS_EXIST'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      } else {
+        const {
+          upcNbr,
+          itemNbr,
+          price,
+          itemName,
+          categoryNbr,
+          categoryDesc
+        } = itemDetails;
+        const pallet: PalletItem = {
+          upcNbr,
+          itemNbr,
+          price,
+          categoryNbr,
+          categoryDesc,
+          itemDesc: itemName,
+          quantity: 1,
+          newQuantity: 1,
+          deleted: false,
+          added: true
+        };
+
+        dispatch(addItemToPallet(pallet));
+      }
+    } else if (getItemDetailsV2Api.result?.status === 204) {
+      Toast.show({
+        type: 'info',
+        text1: strings('PALLET.ITEMS_NOT_FOUND'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+    dispatch(hideActivityModal());
+  }
+  // on api error
+  if (
+    !getItemDetailsV2Api.isWaiting && (getItemDetailsV2Api.error
+      || (getItemDetailsV2Api.result
+        && getItemDetailsV2Api.result.data.itemDetails.message))
+  ) {
+    dispatch(hideActivityModal());
+    Toast.show({
+      type: 'error',
+      text1: strings('PALLET.ITEMS_DETAILS_ERROR'),
+      text2: strings(TRY_AGAIN),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+  }
+  // on api request
+  if (getItemDetailsV2Api.isWaiting) {
+    dispatch(showActivityModal());
+  }
+};
+
 const onValidateHardwareBackPress = (
   setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
   dataUnsaved: boolean
@@ -545,10 +619,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, perishableCategories, displayWarningModal, setDisplayWarningModal,
     useFocusEffectHook, useCallbackHook, confirmBackNavigate, setConfirmBackNavigate,
-    createPallet
+    createPallet, userConfigs, getItemDetailsV2Api
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
-
   let scannedSubscription: EmitterSubscription;
 
   // validation on app back press
@@ -589,7 +662,11 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             barcode: scan.value,
             type: scan.type
           });
-          dispatch(getItemDetails({ id: scan.value, getSummary: false }));
+          if (userConfigs.additionalItemDetails) {
+            dispatch(getItemDetailsV2({ id: scan.value, getSummary: false, getMetadataHistory: false }));
+          } else {
+            dispatch(getItemDetails({ id: scan.value, getSummary: false }));
+          }
         });
       }
     });
@@ -607,12 +684,20 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     dispatch,
     newExpirationDate
   ), [addPalletUpcApi, deleteUpcsApi, updateItemQtyAPI]);
+
   // Get Item Details UPC api
   useEffectHook(() => getItemDetailsApiHook(
     getItemDetailsApi,
     items,
     dispatch
   ), [getItemDetailsApi]);
+
+  // Get Item Details UPC api V2
+  useEffectHook(() => getItemDetailsApiV2Hook(
+    getItemDetailsV2Api,
+    items,
+    dispatch
+  ), [getItemDetailsV2Api]);
 
   // update pallet hook (get pallet details api)
   useEffectHook(() => getPalletDetailsApiHook(
@@ -826,6 +911,8 @@ const ManagePallet = (): JSX.Element => {
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
+  const getItemDetailsV2Api = useTypedSelector(state => state.async.getItemDetailsV2);
+  const userConfigs = useTypedSelector(state => state.User.configs);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [displayWarningModal, setDisplayWarningModal] = useState(false);
@@ -896,6 +983,8 @@ const ManagePallet = (): JSX.Element => {
           confirmBackNavigate={confirmBackNavigate}
           setConfirmBackNavigate={setConfirmBackNavigate}
           createPallet={createPallet}
+          userConfigs={userConfigs}
+          getItemDetailsV2Api={getItemDetailsV2Api}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}
