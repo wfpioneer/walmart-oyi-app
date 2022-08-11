@@ -30,19 +30,22 @@ import ManualScan from '../../components/manualscan/ManualScan';
 import PalletExpiration from '../../components/PalletExpiration/PalletExpiration';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, updatePalletItemQty
+  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, postCreatePallet, updatePalletItemQty
 } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import Button, { ButtonType } from '../../components/buttons/Button';
-import { Pallet, PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
+import {
+  CreatePallet, CreatePalletResponse, Pallet, PalletInfo, PalletItem
+} from '../../models/PalletManagementTypes';
 import {
   addItemToPallet,
   deleteItem,
   removeItem,
   resetItems,
+  setCreatePalletState,
   setPalletItemNewQuantity,
   setPalletNewExpiration,
   setupPallet,
@@ -52,7 +55,7 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, POST_CREATE_PALLET, UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
@@ -87,6 +90,9 @@ interface ManagePalletProps {
   confirmBackNavigate: boolean;
   setConfirmBackNavigate: React.Dispatch<React.SetStateAction<boolean>>;
   createPallet: boolean;
+  postCreatePalletApi: AsyncState;
+  postCreatePalletApiStart: number;
+  setPostCreatePalletApiStart: React.Dispatch<React.SetStateAction<number>>;
 }
 interface ApiResult {
   data: any;
@@ -536,6 +542,84 @@ const onValidateHardwareBackPress = (
   return false;
 };
 
+const setupNewPalletInfo = (
+  dispatch: Dispatch<any>,
+  palletId: number,
+  items: PalletItem[],
+  expirationDate?: string
+) => {
+  const palletItems = items.map((item: PalletItem) => ({
+    ...item,
+    quantity: item.newQuantity || 0,
+    deleted: false,
+    added: false
+  }));
+  const palletDetails: Pallet = {
+    palletInfo: {
+      id: palletId.toString(),
+      expirationDate
+    },
+    items: palletItems
+  };
+  dispatch(setupPallet(palletDetails));
+};
+
+const printPalletLabel = (
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
+) => {
+  dispatch(showManagePalletMenu(false));
+  dispatch(setPrintingPalletLabel());
+  navigation.navigate('PrintPriceSign');
+};
+
+export const postCreatePalletApiEffect = (
+  postCreatePalletApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  postCreatePalletApiStart: number,
+  trackApiEvents: (eventName: string, params: any) => void,
+  items: PalletItem[],
+  expirationDate?: string
+): void => {
+  if (navigation.isFocused() && !postCreatePalletApi.isWaiting) {
+    // Success
+    if (postCreatePalletApi.result) {
+      const createPalletResponse = postCreatePalletApi.result.data as Array<CreatePalletResponse>;
+      switch (postCreatePalletApi.result.status) {
+        case 200:
+          trackApiEvents('create_pallet_success', { duration: moment().valueOf() - postCreatePalletApiStart });
+          Toast.show({
+            type: 'success',
+            text1: strings('PALLET.CREATE_PALLET_SUCCESS'),
+            position: 'bottom'
+          });
+          dispatch({ type: POST_CREATE_PALLET.RESET });
+          setupNewPalletInfo(dispatch, createPalletResponse[0].palletId, items, expirationDate);
+          dispatch(setCreatePalletState(false));
+          printPalletLabel(navigation, dispatch);
+          break;
+        default:
+      }
+    }
+
+    // Failure
+    if (postCreatePalletApi.error) {
+      trackApiEvents('create_pallet_failure', {
+        duration: moment().valueOf() - postCreatePalletApiStart,
+        errorDetails: postCreatePalletApi.error.message || postCreatePalletApi.error.toString()
+      });
+      Toast.show({
+        type: 'error',
+        text1: strings('PALLET.CREATE_PALLET_FAILED'),
+        visibilityTime: 3000,
+        position: 'bottom'
+      });
+      dispatch({ type: POST_CREATE_PALLET.RESET });
+    }
+  }
+};
+
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
@@ -544,7 +628,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, perishableCategories, displayWarningModal, setDisplayWarningModal,
     useFocusEffectHook, useCallbackHook, confirmBackNavigate, setConfirmBackNavigate,
-    createPallet
+    createPallet, postCreatePalletApi, postCreatePalletApiStart, setPostCreatePalletApiStart
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
 
@@ -629,40 +713,64 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     setConfirmBackNavigate
   ), [clearPalletApi]);
 
-  const submit = () => {
-    const palletId = id;
-    const reducerInitialValue: string[] = [];
-    const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
-    const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
-    // updated expiration date
-    const updatedExpirationDate = addExpiry
-      ? `${moment(addExpiry, 'DD/MM/YYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
-    // Filter Items by deleted flag
-    const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
-      reducer.push(current.upcNbr);
-      return reducer;
-    }, reducerInitialValue);
-    const payload = {
-      palletId,
-      upcs,
-      expirationDate: (!removeExpirationDateForPallet && addExpiry)
-        ? updatedExpirationDate : undefined,
-      removeExpirationDate: removeExpirationDateForPallet
+  useEffectHook(() => postCreatePalletApiEffect(
+    postCreatePalletApi,
+    dispatch,
+    navigation,
+    postCreatePalletApiStart,
+    trackEvent,
+    items,
+    newExpirationDate
+  ), [postCreatePalletApi]);
+
+  const postCreateNewPallet = () => {
+    const createPalletPayload : CreatePallet = {
+      expirationDate: newExpirationDate || '',
+      numberOfPallets: 1,
+      items: items.map(item => ({ upc: item.upcNbr, quantity: item.newQuantity }))
     };
+    setPostCreatePalletApiStart(moment().valueOf());
+    dispatch(postCreatePallet(createPalletPayload));
+  };
 
-    if (upcs.length > 0) {
-      dispatch(deleteUpcs(payload));
+  const submit = () => {
+    if (createPallet) {
+      postCreateNewPallet();
+    } else {
+      const palletId = id;
+      const reducerInitialValue: string[] = [];
+      const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
+      const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
+      // updated expiration date
+      const updatedExpirationDate = addExpiry
+        ? `${moment(addExpiry, 'DD/MM/YYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
+      // Filter Items by deleted flag
+      const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
+        reducer.push(current.upcNbr);
+        return reducer;
+      }, reducerInitialValue);
+      const payload = {
+        palletId,
+        upcs,
+        expirationDate: (!removeExpirationDateForPallet && addExpiry)
+          ? updatedExpirationDate : undefined,
+        removeExpirationDate: removeExpirationDateForPallet
+      };
+
+      if (upcs.length > 0) {
+        dispatch(deleteUpcs(payload));
+      }
+
+      // Calls add items to pallet via api
+      handleAddItems(
+        palletId,
+        items,
+        dispatch,
+        updatedExpirationDate
+      );
+      // Calls update pallet item qty api
+      handleUpdateItems(items, palletInfo, dispatch, updatedExpirationDate);
     }
-
-    // Calls add items to pallet via api
-    handleAddItems(
-      palletId,
-      items,
-      dispatch,
-      updatedExpirationDate
-    );
-    // Calls update pallet item qty api
-    handleUpdateItems(items, palletInfo, dispatch, updatedExpirationDate);
   };
 
   const handleUnhandledTouches = () => {
@@ -824,10 +932,12 @@ const ManagePallet = (): JSX.Element => {
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
+  const postCreatePalletApi = useTypedSelector(state => state.async.postCreatePallet);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [displayWarningModal, setDisplayWarningModal] = useState(false);
   const [confirmBackNavigate, setConfirmBackNavigate] = useState(false);
+  const [postCreatePalletApiStart, setPostCreatePalletApiStart] = useState(0);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['55%'], []);
@@ -843,10 +953,8 @@ const ManagePallet = (): JSX.Element => {
   }, [managePalletMenu]);
 
   const handlePrintPallet = () => {
-    dispatch(showManagePalletMenu(false));
     bottomSheetModalRef.current?.dismiss();
-    dispatch(setPrintingPalletLabel());
-    navigation.navigate('PrintPriceSign');
+    printPalletLabel(navigation, dispatch);
   };
 
   const handleCombinePallets = () => {
@@ -894,6 +1002,9 @@ const ManagePallet = (): JSX.Element => {
           confirmBackNavigate={confirmBackNavigate}
           setConfirmBackNavigate={setConfirmBackNavigate}
           createPallet={createPallet}
+          postCreatePalletApi={postCreatePalletApi}
+          postCreatePalletApiStart={postCreatePalletApiStart}
+          setPostCreatePalletApiStart={setPostCreatePalletApiStart}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

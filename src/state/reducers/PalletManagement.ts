@@ -4,12 +4,12 @@ import {
   Actions,
   CLEAR_COMBINE_PALLET,
   CLEAR_PALLET_MANAGEMENT,
-  CREATE_PALLET,
   DELETE_ITEM,
   REMOVE_COMBINE_PALLET,
   REMOVE_ITEM,
   RESET_PALLET,
   SETUP_PALLET,
+  SET_CREATE_PALLET,
   SET_ITEM_NEW_QUANTITY,
   SET_ITEM_QUANTITY,
   SET_PALLET_NEW_EXPIRY,
@@ -176,12 +176,12 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         palletInfo: updatedPalletInfo
       };
     }
-    case CREATE_PALLET: {
+    case SET_CREATE_PALLET: {
       const { perishableCategories } = state;
       return {
         ...initialState,
         perishableCategories,
-        createPallet: true
+        createPallet: action.payload
       };
     }
     default:

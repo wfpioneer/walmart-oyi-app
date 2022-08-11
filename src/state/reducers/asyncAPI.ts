@@ -45,6 +45,7 @@ export const asyncReducer = combineReducers({
   getPalletDetails: makeAsyncReducer(asyncActions.GET_PALLET_DETAILS),
   binPallets: makeAsyncReducer(asyncActions.POST_BIN_PALLETS),
   getPalletConfig: makeAsyncReducer(asyncActions.GET_PALLET_CONFIG),
+  postCreatePallet: makeAsyncReducer(asyncActions.POST_CREATE_PALLET),
   updatePicklistStatus: makeAsyncReducer(asyncActions.UPDATE_PICKLIST_STATUS),
   getPicklists: makeAsyncReducer(asyncActions.GET_PICKLISTS),
   updatePalletNotFound: makeAsyncReducer(asyncActions.UPDATE_PALLET_NOT_FOUND),

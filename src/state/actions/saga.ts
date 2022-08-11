@@ -24,6 +24,7 @@ import { GetItemDetailsPayload } from '../../services/GetItemDetails.service';
 import User from '../../models/User';
 import { PickAction } from '../../models/Picking.d';
 import { CreatePickRequest } from '../../services/Picking.service';
+import { CreatePallet } from '../../models/PalletManagementTypes';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
@@ -71,6 +72,7 @@ export const UPDATE_PICKLIST_STATUS = 'SAGA/UPDATE_PICKLIST_STATUS';
 export const GET_PICKLISTS = 'SAGA/GET_PICKLISTS';
 export const UPDATE_PALLET_NOT_FOUND = 'SAGA/UPDATE_PALLET_NOT_FOUND';
 export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
+export const POST_CREATE_PALLET = 'SAGA/POST_CREATE_PALLET';
 
 // TODO add types for each service payload
 export const hitGoogle = () => ({ type: HIT_GOOGLE } as const);
@@ -224,3 +226,4 @@ export const createNewPick = (payload: CreatePickRequest) => ({
   type: CREATE_NEW_PICK,
   payload
 } as const);
+export const postCreatePallet = (payload: CreatePallet) => ({ type: POST_CREATE_PALLET, payload } as const);

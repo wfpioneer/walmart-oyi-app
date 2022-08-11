@@ -218,7 +218,9 @@ export default {
     CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful',
     CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared',
     UNSAVED_WARNING_MSG: 'All unsaved changes will be lost',
-    CREATE_PALLET: 'Create Pallet'
+    CREATE_PALLET: 'Create Pallet',
+    CREATE_PALLET_SUCCESS: 'Pallet created successfully',
+    CREATE_PALLET_FAILED: 'Failed to create pallet'
   },
   LOCATION: {
     TITLE: 'All locations',
