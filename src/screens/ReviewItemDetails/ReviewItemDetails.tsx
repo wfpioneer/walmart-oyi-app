@@ -662,7 +662,8 @@ export const renderLocationComponent = (
 export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
   result: AxiosResponse | null, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
   // Checks orchestration response status for itemDetails only.
-  if ((itemDetails.code !== undefined && itemDetails.code !== MULTI_STATUS)) {
+
+  if ((itemDetails.code !== undefined && itemDetails.code !== MULTI_STATUS) && itemDetails.sales.error === undefined) {
     return (
       <SFTCard
         title={strings('ITEM.SALES_METRICS')}
@@ -674,7 +675,7 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
       </SFTCard>
     );
   }
-  if ((result && result.status !== MULTI_STATUS)) {
+  if ((result && result.status !== MULTI_STATUS) && itemDetails.sales.error === undefined) {
     return (
       <SFTCard
         title={strings('ITEM.SALES_METRICS')}
@@ -1302,7 +1303,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 })}
               </View>
               <View style={styles.historyContainer}>
-                {renderReplenishmentCard(itemDetail[123])}
+                {renderReplenishmentCard(itemDetails)}
               </View>
             </>
             )}
@@ -1346,6 +1347,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const [numberOfPallets, setNumberOfPallets] = useState(1);
   const [isQuickPick, setIsQuickPick] = useState(false);
   const [newOHQty, setNewOHQty] = useState(0);
+
   return (
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
