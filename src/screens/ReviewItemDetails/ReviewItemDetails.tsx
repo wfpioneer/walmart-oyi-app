@@ -663,7 +663,7 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
   result: AxiosResponse | null, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
   // Checks orchestration response status for itemDetails only.
 
-  if ((itemDetails.code !== undefined && itemDetails.code !== MULTI_STATUS) && itemDetails.sales.error === undefined) {
+  if ((itemDetails.code !== undefined && itemDetails.code !== MULTI_STATUS) || itemDetails.sales.error === undefined) {
     return (
       <SFTCard
         title={strings('ITEM.SALES_METRICS')}
@@ -675,7 +675,7 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
       </SFTCard>
     );
   }
-  if ((result && result.status !== MULTI_STATUS) && itemDetails.sales.error === undefined) {
+  if ((result && result.status !== MULTI_STATUS) || itemDetails.sales.error === undefined) {
     return (
       <SFTCard
         title={strings('ITEM.SALES_METRICS')}
