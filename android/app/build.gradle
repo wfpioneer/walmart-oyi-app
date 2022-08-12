@@ -142,7 +142,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 246
-        versionName "4.6.13"
+        versionName "4.7.0"
         resValue "string", "build_config_package", "com.samsclub.intl.oyi"
     }
     splits {
