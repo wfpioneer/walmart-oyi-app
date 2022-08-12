@@ -41,6 +41,8 @@ export interface PickHistory {
 }
 
 interface ItemDetails {
+  code: number;
+  message?: string;
   itemName: string;
   itemNbr: number;
   upcNbr: string;
@@ -85,13 +87,32 @@ interface ItemDetails {
       week: number;
       value: number;
     }[];
+    error?: string
   };
-  deliveries: {
-    date: string;
-    qty: number;
-  }[];
+  deliveryHistory: {
+    deliveries?: {
+      date: string;
+      qty: number;
+    }[];
+    error?: string;
+  }
+}
+export interface ItemOHChangeHistory {
+  code: number;
+  message?: string;
   ohChangeHistory?: OHChangeHistory[];
-  picklistHistory?: PickHistory[]
+}
+
+export interface PicklistHistory {
+  code: number;
+  message?: string;
+  picklists?: PickHistory[]
+}
+
+export interface ItemHistoryI {
+  id: number;
+  date: string;
+  qty: number;
 }
 
 export default ItemDetails;

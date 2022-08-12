@@ -133,6 +133,7 @@ describe('Tests rendering PalletWorklist screen', () => {
       }
     };
     const mockSetDisplayConfirmation = jest.fn();
+    const mockSetDeletePalletId = jest.fn();
     const successToast = {
       type: 'success',
       text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId: mockPalletID }),
@@ -144,7 +145,8 @@ describe('Tests rendering PalletWorklist screen', () => {
       navigationProp,
       mockDispatch,
       mockSetDisplayConfirmation,
-      mockOnRefresh
+      mockOnRefresh,
+      mockSetDeletePalletId
     );
 
     expect(mockDispatch).toBeCalledTimes(2);
@@ -170,7 +172,8 @@ describe('Tests rendering PalletWorklist screen', () => {
       navigationProp,
       mockDispatch,
       mockSetDisplayConfirmation,
-      mockOnRefresh
+      mockOnRefresh,
+      mockSetDeletePalletId
     );
 
     expect(mockDispatch).toBeCalledTimes(2);
@@ -188,7 +191,8 @@ describe('Tests rendering PalletWorklist screen', () => {
       navigationProp,
       mockDispatch,
       mockSetDisplayConfirmation,
-      mockOnRefresh
+      mockOnRefresh,
+      mockSetDeletePalletId
     );
     expect(mockDispatch).toBeCalledTimes(1);
   });

@@ -8,16 +8,14 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderBottomWidth: 1,
-    backgroundColor: COLOR.HAVELOCK_BLUE
+    borderBottomColor: COLOR.GREY_200,
+    backgroundColor: COLOR.WHITE
   },
   titleContainer: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row'
-  },
-  titleText: {
-    fontSize: 16
   },
   arrowView: {
     flex: 0.1,

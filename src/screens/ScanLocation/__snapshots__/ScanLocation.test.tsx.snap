@@ -87,7 +87,7 @@ exports[`ScanLocation Screen Test renders the scanLocation Screen Manual scan en
         autoCapitalize="characters"
         autoCorrect={false}
         autoFocus={true}
-        keyboardType="numeric"
+        keyboardType="default"
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"

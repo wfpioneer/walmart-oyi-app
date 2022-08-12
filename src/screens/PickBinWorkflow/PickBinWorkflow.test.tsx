@@ -51,8 +51,6 @@ const defaultAsyncState: AsyncState = {
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -60,16 +58,22 @@ const navigationProp: NavigationProp<any> = {
   reset: jest.fn(),
   setOptions: jest.fn(),
   setParams: jest.fn(),
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
 };
-const pickStateMissingProps = {
+const pickStateMissingProps: PickingState = {
+  pickList: [],
   selectedPicks: [0],
   pickCreateItem: mockItem,
   pickCreateFloorLocations: [],
   pickCreateReserveLocations: [],
-  selectedTab: Tabs.QUICKPICK
+  selectedTab: Tabs.QUICKPICK,
+  pickingMenu: false
 };
 const pickingState: PickingState = {
+  ...pickStateMissingProps,
   pickList: [
     {
       ...basePickItem,
@@ -119,8 +123,7 @@ const pickingState: PickingState = {
       palletLocationName: 'ABAR1-4',
       quickPick: true
     }
-  ],
-  ...pickStateMissingProps
+  ]
 };
 
 describe('PickBin Workflow render tests', () => {
@@ -350,6 +353,7 @@ describe('PickBin Workflow render tests', () => {
 
   it('Tests PickBinWorkflow component and calls Accept action for updating the picklist', async () => {
     const mockPickState: PickingState = {
+      ...pickStateMissingProps,
       pickList: [
         {
           ...basePickItem,
@@ -363,8 +367,7 @@ describe('PickBin Workflow render tests', () => {
           id: 1,
           palletId: '40'
         }
-      ],
-      ...pickStateMissingProps
+      ]
     };
     const mockDispatch = jest.fn();
     const setSelectedPicklistAction = jest.fn();
@@ -394,6 +397,7 @@ describe('PickBin Workflow render tests', () => {
 
   it('Tests PickBinWorkflow component and calls Release action for updating the picklist', async () => {
     const mockPickState: PickingState = {
+      ...pickStateMissingProps,
       pickList: [
         {
           ...basePickItem,
@@ -407,8 +411,7 @@ describe('PickBin Workflow render tests', () => {
           id: 1,
           palletId: '40'
         }
-      ],
-      ...pickStateMissingProps
+      ]
     };
     const mockDispatch = jest.fn();
     const setSelectedPicklistAction = jest.fn();
@@ -438,6 +441,7 @@ describe('PickBin Workflow render tests', () => {
 
   it('Tests Binning Navigation while clicking on Bin button', async () => {
     const mockPickState: PickingState = {
+      ...pickStateMissingProps,
       pickList: [
         {
           ...basePickItem,
@@ -451,8 +455,7 @@ describe('PickBin Workflow render tests', () => {
           id: 1,
           palletId: '40'
         }
-      ],
-      ...pickStateMissingProps
+      ]
     };
     const mockDispatch = jest.fn();
     const setSelectedPicklistAction = jest.fn();
@@ -583,7 +586,9 @@ describe('PickBin Workflow render tests', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      updatePicklistStatusApiHook(successApi, mockSelectedItems, mockDispatch, navigationProp, PickAction.RELEASE);
+      updatePicklistStatusApiHook(
+        successApi, mockSelectedItems, mockDispatch, navigationProp, PickAction.RELEASE, 'TESTUSER'
+      );
       expect(navigationProp.goBack).toHaveBeenCalled();
       expect(mockDispatch).toBeCalledTimes(2);
       expect(hideActivityModal).toBeCalledTimes(1);

@@ -32,7 +32,7 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
     dispatch(
       setScannedEvent({ type: 'Section', value: item.itemNbr.toString() })
     );
-    navigation.navigate('ReviewItemDetails');
+    navigation.navigate('ReviewItemDetails', { screen: 'ReviewItemDetailsHome' });
   };
 
   const locationManagementEdit = () => user.features.includes('location management edit')

@@ -3,6 +3,8 @@ import { makeAsyncReducer } from './generic/makeAsyncReducer';
 import * as asyncActions from '../actions/asyncAPI';
 
 export const asyncReducer = combineReducers({
+  // TODO remove this reducer once the BE orchestration changes have been pushed to production
+  getItemDetailsV2: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS_V2),
   hitGoogle: makeAsyncReducer(asyncActions.HIT_GOOGLE),
   getItemDetails: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS),
   getWorklist: makeAsyncReducer(asyncActions.GET_WORKLIST),

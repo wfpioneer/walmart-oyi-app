@@ -135,6 +135,41 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     backgroundColor: COLOR.WHITE
+  },
+  historyContainer: {
+    marginTop: 8
+  },
+  reserveLoc: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: COLOR.WHITE,
+    paddingLeft: 2,
+    paddingRight: 3,
+    paddingVertical: 3
+  },
+  replenishmentContainer: {
+    backgroundColor: COLOR.WHITE,
+    padding: 5
+  },
+  replenishmentHistory: {
+    backgroundColor: COLOR.WHITE,
+    paddingHorizontal: 10,
+    paddingBottom: 5,
+    marginBottom: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: COLOR.GREY_200
+  },
+  replenishmentOrder: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: COLOR.WHITE,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginBottom: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: COLOR.GREY_200
   }
 });
 

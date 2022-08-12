@@ -29,7 +29,8 @@ export const initialState: User = {
     areas: [],
     enableAreaFilter: false,
     palletWorklists: false,
-    additionalItemDetails: false
+    additionalItemDetails: false,
+    createPallet: false
   }
 };
 
@@ -64,7 +65,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           areas: action.payload.areas || [],
           enableAreaFilter: action.payload.enableAreaFilter || false,
           palletWorklists: action.payload.palletWorklists || false,
-          additionalItemDetails: action.payload.addtItemDetails || false
+          additionalItemDetails: action.payload.addItemDetails || false,
+          createPallet: action.payload.createPallet || false
         }
       };
     default:

@@ -56,7 +56,8 @@ export default {
     CREATE: 'Crear',
     UNASSIGNED: 'Sin asignar',
     SELECTED: 'Seleccionado',
-    UPDATE: 'Actualizar'
+    UPDATE: 'Actualizar Configuración',
+    WARNING_LABEL: 'Aviso'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -135,7 +136,9 @@ export default {
     SIZE: 'Tamaño',
     PRICE_BEFORE_TAX: 'Precio sin Impuesto',
     MARGIN: 'Margen',
-    GROSS_PROFIT: 'Ganancia Bruta'
+    GROSS_PROFIT: 'Ganancia Bruta',
+    HISTORY: 'Historial',
+    NO_HISTORY: 'No hay historial disponible'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -212,7 +215,9 @@ export default {
     SAVE_PALLET_FAILURE: 'Falló la actualización de pallet',
     CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
     CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
-    CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente'
+    CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente',
+    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán',
+    CREATE_PALLET: 'Crear Pallet'
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -471,6 +476,7 @@ export default {
   SETTINGS: {
     TITLE: 'Ajustes',
     FEATURE_UPDATE_SUCCESS: 'Funcionalidades actualizadas',
-    FEATURE_UPDATE_FAILURE: 'Incapaz de obtener las funcionalidades actualizadas'
+    FEATURE_UPDATE_FAILURE: 'Incapaz de obtener las funcionalidades actualizadas',
+    FEATURES: 'Funcionalidades'
   }
 };

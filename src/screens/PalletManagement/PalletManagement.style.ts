@@ -15,10 +15,10 @@ export default StyleSheet.create({
     borderWidth: 1
   },
   scanText: {
-    paddingTop: 30
+    paddingTop: 20
   },
   orText: {
-    paddingTop: 20
+    paddingVertical: 20
   },
   textView: {
     width: '60%',
@@ -28,5 +28,14 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%'
+  },
+  btnCreate: {
+    width: '50%'
   }
 });

@@ -84,7 +84,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
             props.setScannedEvent(scan);
             props.setManualScan(false);
-            props.navigation.navigate('ReviewItemDetails');
+            props.navigation.navigate('ReviewItemDetails', { screen: 'ReviewItemDetailsHome' });
           } else {
             this.setState({ errorModalVisible: true });
           }
