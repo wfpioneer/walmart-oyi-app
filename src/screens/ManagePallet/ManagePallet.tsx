@@ -466,7 +466,7 @@ export const getItemDetailsApiHook = (
 ) => {
   // on api success
   if (!getItemDetailsApi.isWaiting && getItemDetailsApi.result) {
-    if (getItemDetailsApi.result.status === 200) {
+    if (getItemDetailsApi.result.status === 200 || getItemDetailsApi.result.status === 207) {
       const itemDetails: ItemDetails = getItemDetailsApi.result.data;
       const palletItem = items.filter(item => item.itemNbr === itemDetails.itemNbr);
       if (palletItem.length > 0) {
@@ -536,7 +536,7 @@ export const getItemDetailsApiV2Hook = (
   if (!getItemDetailsV2Api.isWaiting && getItemDetailsV2Api.result) {
     const responseData = getItemDetailsV2Api.result?.data;
     const itemDetails: ItemDetails = (responseData && responseData.itemDetails);
-    if (getItemDetailsV2Api.result.status === 200 || itemDetails.code === 200) {
+    if (getItemDetailsV2Api.result.status === 200 || itemDetails.code === 200 || itemDetails.code === 207) {
       const palletItem = items.filter(item => item.itemNbr === itemDetails.itemNbr);
       if (palletItem.length > 0) {
         Toast.show({
