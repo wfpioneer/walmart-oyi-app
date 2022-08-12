@@ -211,7 +211,11 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {
+            itemDetails: itemDetail[123],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
+          },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -295,10 +299,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: {
-            ...itemDetail[123],
-            status: undefined
-          },
+          data: itemDetail[123],
           status: 200
         },
         exceptionType: 'NSFL',
@@ -318,10 +319,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: {
-            ...itemDetail[456],
-            status: undefined
-          },
+          data: itemDetail[456],
           status: 200
         },
         exceptionType: 'NSFL',
@@ -342,10 +340,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: {
-            ...itemDetail[123],
-            status: undefined
-          },
+          data: itemDetail[123],
           status: 200
         },
         exceptionType: 'NSFL',
@@ -1144,7 +1139,8 @@ describe('ReviewItemDetailsScreen', () => {
         false,
         { value: '1234567890098', type: 'UPC-A' },
         mockDispatch,
-        jest.fn()
+        jest.fn(),
+        false
       ));
       expect(toJSON()).toMatchSnapshot();
       const retryButton = getByTestId('scanErrorRetry');
@@ -1157,7 +1153,8 @@ describe('ReviewItemDetailsScreen', () => {
         false,
         { value: '1234567890098', type: 'UPC-A' },
         mockDispatch,
-        jest.fn()
+        jest.fn(),
+        false
       ));
       expect(toJSON()).toMatchSnapshot();
       rerender(isError(
@@ -1167,7 +1164,8 @@ describe('ReviewItemDetailsScreen', () => {
         false,
         { value: '1234567890098', type: 'UPC-A' },
         mockDispatch,
-        jest.fn()
+        jest.fn(),
+        false
       ));
       expect(toJSON()).toMatchSnapshot();
     });
