@@ -57,7 +57,8 @@ describe('ManagePalletScreen', () => {
       categoryNbr: 54,
       categoryDesc: 'test cat',
       deleted: true,
-      added: false
+      added: false,
+      locationName: 'ARAR1-1'
     },
     {
       itemNbr: 1234,
@@ -69,7 +70,8 @@ describe('ManagePalletScreen', () => {
       categoryNbr: 54,
       categoryDesc: 'test cat',
       deleted: false,
-      added: false
+      added: false,
+      locationName: 'ARAR1-1'
     },
     {
       itemNbr: 4221,
@@ -81,7 +83,8 @@ describe('ManagePalletScreen', () => {
       categoryNbr: 72,
       categoryDesc: 'deli',
       deleted: false,
-      added: false
+      added: false,
+      locationName: 'ARAR1-1'
     }
   ];
 
@@ -130,6 +133,45 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders the PalletManagement with warning modal ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(
+        <ManagePalletScreen
+          useEffectHook={jest.fn}
+          isManualScanEnabled={true}
+          palletInfo={mockPalletInfo}
+          items={mockItems}
+          navigation={navigationProp}
+          route={routeProp}
+          dispatch={jest.fn()}
+          getItemDetailsApi={defaultAsyncState}
+          addPalletUpcApi={defaultAsyncState}
+          updateItemQtyAPI={defaultAsyncState}
+          deleteUpcsApi={defaultAsyncState}
+          getPalletDetailsApi={defaultAsyncState}
+          clearPalletApi={defaultAsyncState}
+          displayClearConfirmation={false}
+          setDisplayClearConfirmation={jest.fn()}
+          isPickerShow={false}
+          setIsPickerShow={jest.fn()}
+          perishableCategories={[]}
+          displayWarningModal={true}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -158,6 +200,12 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -188,6 +236,12 @@ describe('ManagePalletScreen', () => {
           isPickerShow={true}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -215,6 +269,12 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -246,6 +306,12 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -285,6 +351,12 @@ describe('ManagePalletScreen', () => {
           isPickerShow={false}
           setIsPickerShow={jest.fn()}
           perishableCategories={[]}
+          displayWarningModal={false}
+          setDisplayWarningModal={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useCallbackHook={jest.fn()}
+          confirmBackNavigate={false}
+          setConfirmBackNavigate={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -553,16 +625,24 @@ describe('ManagePalletScreen', () => {
         }
       };
       const mockSetDisplayConfirmation = jest.fn();
+      const mockSetNavigateConfirmation = jest.fn();
       const successToast = {
         type: 'success',
         text1: strings('PALLET.CLEAR_PALLET_SUCCESS', { palletId: palletInfo }),
         position: 'bottom'
       };
-      clearPalletApiHook(clearPalletSuccess, palletInfo.id, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+      clearPalletApiHook(
+        clearPalletSuccess,
+        palletInfo.id,
+        navigationProp,
+        mockDispatch,
+        mockSetDisplayConfirmation,
+        mockSetNavigateConfirmation
+      );
 
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
-      expect(navigationProp.goBack).toBeCalledTimes(1);
+      expect(mockSetNavigateConfirmation).toHaveBeenCalledWith(true);
       expect(Toast.show).toHaveBeenCalledWith(successToast);
     });
 
@@ -573,13 +653,21 @@ describe('ManagePalletScreen', () => {
       };
       // mock navigate go back
       const mockSetDisplayConfirmation = jest.fn();
+      const mockSetNavigateConfirmation = jest.fn();
       const failedToast = {
         type: 'error',
         text1: strings('PALLET.CLEAR_PALLET_ERROR'),
         text2: strings(TRY_AGAIN_TEXT),
         position: 'bottom'
       };
-      clearPalletApiHook(clearPalletFailure, palletInfo.id, navigationProp, mockDispatch, mockSetDisplayConfirmation);
+      clearPalletApiHook(
+        clearPalletFailure,
+        palletInfo.id,
+        navigationProp,
+        mockDispatch,
+        mockSetDisplayConfirmation,
+        mockSetNavigateConfirmation
+      );
 
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);

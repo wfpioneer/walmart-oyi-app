@@ -40,6 +40,92 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
       }
     }
   >
+    <CustomModalComponent
+      animationType="none"
+      isVisible={false}
+      modalType="Popup"
+      onClose={[Function]}
+    >
+      <React.Fragment>
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "#f44336",
+                "fontSize": 18,
+                "paddingBottom": 5,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.GENERICS.WARNING_LABEL" translation]
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 16,
+                "padding": 10,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignContent": "center",
+              "elevation": 10,
+              "flexDirection": "row",
+              "height": 60,
+              "justifyContent": "space-evenly",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#0071e9"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={2}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
       placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
@@ -110,6 +196,35 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           }
         >
           3
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.ITEM.LOCATION" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          ARAR1-1
         </Text>
       </View>
     </View>
@@ -188,6 +303,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
               "deleted": true,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 3,
               "price": 10,
               "quantity": 3,
@@ -200,6 +316,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 4,
               "price": 10,
               "quantity": 3,
@@ -212,6 +329,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
               "deleted": false,
               "itemDesc": "food",
               "itemNbr": 4221,
+              "locationName": "ARAR1-1",
               "newQuantity": 1,
               "price": 3.49,
               "quantity": 2,
@@ -298,6 +416,92 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       }
     }
   >
+    <CustomModalComponent
+      animationType="none"
+      isVisible={false}
+      modalType="Popup"
+      onClose={[Function]}
+    >
+      <React.Fragment>
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "#f44336",
+                "fontSize": 18,
+                "paddingBottom": 5,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.GENERICS.WARNING_LABEL" translation]
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 16,
+                "padding": 10,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignContent": "center",
+              "elevation": 10,
+              "flexDirection": "row",
+              "height": 60,
+              "justifyContent": "space-evenly",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#0071e9"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={2}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
       placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
@@ -368,6 +572,35 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           }
         >
           3
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.ITEM.LOCATION" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          ARAR1-1
         </Text>
       </View>
     </View>
@@ -446,6 +679,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": true,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 3,
               "price": 10,
               "quantity": 3,
@@ -458,6 +692,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 4,
               "price": 10,
               "quantity": 3,
@@ -470,6 +705,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "food",
               "itemNbr": 4221,
+              "locationName": "ARAR1-1",
               "newQuantity": 1,
               "price": 3.49,
               "quantity": 2,
@@ -556,6 +792,92 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       }
     }
   >
+    <CustomModalComponent
+      animationType="none"
+      isVisible={false}
+      modalType="Popup"
+      onClose={[Function]}
+    >
+      <React.Fragment>
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "#f44336",
+                "fontSize": 18,
+                "paddingBottom": 5,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.GENERICS.WARNING_LABEL" translation]
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 16,
+                "padding": 10,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignContent": "center",
+              "elevation": 10,
+              "flexDirection": "row",
+              "height": 60,
+              "justifyContent": "space-evenly",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#0071e9"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={2}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
       placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
@@ -626,6 +948,35 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           }
         >
           3
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.ITEM.LOCATION" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          ARAR1-1
         </Text>
       </View>
     </View>
@@ -704,6 +1055,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": true,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 3,
               "price": 10,
               "quantity": 3,
@@ -716,6 +1068,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 4,
               "price": 10,
               "quantity": 3,
@@ -728,6 +1081,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "food",
               "itemNbr": 4221,
+              "locationName": "ARAR1-1",
               "newQuantity": 1,
               "price": 3.49,
               "quantity": 2,
@@ -814,6 +1168,92 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       }
     }
   >
+    <CustomModalComponent
+      animationType="none"
+      isVisible={false}
+      modalType="Popup"
+      onClose={[Function]}
+    >
+      <React.Fragment>
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "#f44336",
+                "fontSize": 18,
+                "paddingBottom": 5,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.GENERICS.WARNING_LABEL" translation]
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 16,
+                "padding": 10,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignContent": "center",
+              "elevation": 10,
+              "flexDirection": "row",
+              "height": 60,
+              "justifyContent": "space-evenly",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#0071e9"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={2}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
       placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
@@ -884,6 +1324,35 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           }
         >
           3
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.ITEM.LOCATION" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          ARAR1-1
         </Text>
       </View>
     </View>
@@ -962,6 +1431,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": true,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 3,
               "price": 10,
               "quantity": 3,
@@ -974,6 +1444,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 4,
               "price": 10,
               "quantity": 3,
@@ -986,6 +1457,383 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "food",
               "itemNbr": 4221,
+              "locationName": "ARAR1-1",
+              "newQuantity": 1,
+              "price": 3.49,
+              "quantity": 2,
+              "upcNbr": "765432123456",
+            },
+          ]
+        }
+        keyExtractor={[Function]}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 0.1,
+        "marginBottom": 20,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#33691E"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "height": "140%",
+          "marginHorizontal": 20,
+          "marginVertical": 10,
+          "paddingBottom": 20,
+        }
+      }
+      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the PalletManagement with warning modal  1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ApiConfirmationModal
+    api={
+      Object {
+        "error": null,
+        "isWaiting": false,
+        "result": null,
+        "value": null,
+      }
+    }
+    cancelText="[missing \\"en.GENERICS.NO\\" translation]"
+    confirmText="[missing \\"en.GENERICS.YES\\" translation]"
+    errorText={null}
+    handleConfirm={[Function]}
+    isVisible={false}
+    mainText="[missing \\"en.PALLET.CLEAR_PALLET_CONFIRMATION\\" translation]"
+    onClose={[Function]}
+    subtext1={null}
+    subtext2={null}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "flex": 1,
+        "justifyContent": "flex-start",
+        "marginTop": 5,
+      }
+    }
+  >
+    <CustomModalComponent
+      animationType="none"
+      isVisible={true}
+      modalType="Popup"
+      onClose={[Function]}
+    >
+      <React.Fragment>
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "#f44336",
+                "fontSize": 18,
+                "paddingBottom": 5,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.GENERICS.WARNING_LABEL" translation]
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 16,
+                "padding": 10,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignContent": "center",
+              "elevation": 10,
+              "flexDirection": "row",
+              "height": 60,
+              "justifyContent": "space-evenly",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#0071e9"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={2}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </CustomModalComponent>
+    <ManualScanComponent
+      keyboardType="numeric"
+      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+    />
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-around",
+          "marginBottom": 5,
+          "marginHorizontal": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.PALLET.PALLET_ID" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          1514
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.LOCATION.ITEMS" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          3
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.ITEM.LOCATION" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          ARAR1-1
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderBottomWidth": 1,
+          "borderColor": "#000000",
+          "borderTopWidth": 1,
+          "padding": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        [missing "en.PALLET.SCAN_INSTRUCTIONS" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#B40C00",
+          "flexDirection": "row",
+          "justifyContent": "space-around",
+          "padding": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 16,
+          }
+        }
+      >
+        [missing "en.PALLET.ITEM_DELETE" translation]
+      </Text>
+      <TouchableOpacity
+        onPress={[Function]}
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 16,
+              "textDecorationLine": "underline",
+            }
+          }
+        >
+          [missing "en.GENERICS.UNDO" translation]
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <FlatList
+        data={
+          Array [
+            Object {
+              "added": false,
+              "categoryDesc": "test cat",
+              "categoryNbr": 54,
+              "deleted": true,
+              "itemDesc": "test",
+              "itemNbr": 1234,
+              "locationName": "ARAR1-1",
+              "newQuantity": 3,
+              "price": 10,
+              "quantity": 3,
+              "upcNbr": "1234567890",
+            },
+            Object {
+              "added": false,
+              "categoryDesc": "test cat",
+              "categoryNbr": 54,
+              "deleted": false,
+              "itemDesc": "test",
+              "itemNbr": 1234,
+              "locationName": "ARAR1-1",
+              "newQuantity": 4,
+              "price": 10,
+              "quantity": 3,
+              "upcNbr": "12345678901",
+            },
+            Object {
+              "added": false,
+              "categoryDesc": "deli",
+              "categoryNbr": 72,
+              "deleted": false,
+              "itemDesc": "food",
+              "itemNbr": 4221,
+              "locationName": "ARAR1-1",
               "newQuantity": 1,
               "price": 3.49,
               "quantity": 2,
@@ -1072,6 +1920,92 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       }
     }
   >
+    <CustomModalComponent
+      animationType="none"
+      isVisible={false}
+      modalType="Popup"
+      onClose={[Function]}
+    >
+      <React.Fragment>
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "#f44336",
+                "fontSize": 18,
+                "paddingBottom": 5,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.GENERICS.WARNING_LABEL" translation]
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 16,
+                "padding": 10,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignContent": "center",
+              "elevation": 10,
+              "flexDirection": "row",
+              "height": 60,
+              "justifyContent": "space-evenly",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#0071e9"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={2}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
       placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
@@ -1142,6 +2076,35 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           }
         >
           3
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.ITEM.LOCATION" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          ARAR1-1
         </Text>
       </View>
     </View>
@@ -1220,6 +2183,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": true,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 3,
               "price": 10,
               "quantity": 3,
@@ -1232,6 +2196,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 4,
               "price": 10,
               "quantity": 3,
@@ -1244,6 +2209,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "food",
               "itemNbr": 4221,
+              "locationName": "ARAR1-1",
               "newQuantity": 1,
               "price": 3.49,
               "quantity": 2,
@@ -1330,6 +2296,92 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       }
     }
   >
+    <CustomModalComponent
+      animationType="none"
+      isVisible={false}
+      modalType="Popup"
+      onClose={[Function]}
+    >
+      <React.Fragment>
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "#f44336",
+                "fontSize": 18,
+                "paddingBottom": 5,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.GENERICS.WARNING_LABEL" translation]
+          </Text>
+          <Text
+            style={
+              Object {
+                "fontSize": 16,
+                "padding": 10,
+                "textAlign": "center",
+              }
+            }
+          >
+            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignContent": "center",
+              "elevation": 10,
+              "flexDirection": "row",
+              "height": 60,
+              "justifyContent": "space-evenly",
+            }
+          }
+        >
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            titleColor="#0071e9"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={2}
+            width={-1}
+          />
+          <Button
+            backgroundColor="#0071e9"
+            disabled={false}
+            height={45}
+            onPress={[Function]}
+            radius={5}
+            style={
+              Object {
+                "alignSelf": "center",
+                "marginHorizontal": 10,
+                "width": "40%",
+              }
+            }
+            title="[missing \\"en.GENERICS.OK\\" translation]"
+            titleColor="#ffffffff"
+            titleFontSize={16}
+            titleFontWeight="normal"
+            type={1}
+            width={-1}
+          />
+        </View>
+      </React.Fragment>
+    </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
       placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
@@ -1400,6 +2452,35 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           }
         >
           3
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "paddingHorizontal": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.ITEM.LOCATION" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          ARAR1-1
         </Text>
       </View>
     </View>
@@ -1478,6 +2559,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": true,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 3,
               "price": 10,
               "quantity": 3,
@@ -1490,6 +2572,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "test",
               "itemNbr": 1234,
+              "locationName": "ARAR1-1",
               "newQuantity": 4,
               "price": 10,
               "quantity": 3,
@@ -1502,6 +2585,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
               "deleted": false,
               "itemDesc": "food",
               "itemNbr": 4221,
+              "locationName": "ARAR1-1",
               "newQuantity": 1,
               "price": 3.49,
               "quantity": 2,

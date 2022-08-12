@@ -56,7 +56,8 @@ export default {
     CREATE: '创建',
     UNASSIGNED: '未分配',
     SELECTED: '已选择',
-    UPDATE: '更新配置'
+    UPDATE: '更新配置',
+    WARNING_LABEL: '警示'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -214,7 +215,9 @@ export default {
     SAVE_PALLET_FAILURE: '卡板更新失败',
     CLEAR_PALLET_CONFIRMATION: '确定要清除此卡板信息?',
     CLEAR_PALLET_ERROR: '清除卡板信息发生错误导致失败',
-    CLEAR_PALLET_SUCCESS: '卡板%{palletId}清理失败'
+    CLEAR_PALLET_SUCCESS: '卡板%{palletId}清理失败',
+    UNSAVED_WARNING_MSG: '未保存的卡板补货信息将丢失',
+    CREATE_PALLET: '创建卡板'
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -474,6 +477,7 @@ export default {
   SETTINGS: {
     TITLE: '设置',
     FEATURE_UPDATE_SUCCESS: '系统功能已更新',
-    FEATURE_UPDATE_FAILURE: '无法获取已更新的系统功能'
+    FEATURE_UPDATE_FAILURE: '无法获取已更新的系统功能',
+    FEATURES: '功能模块'
   }
 };
