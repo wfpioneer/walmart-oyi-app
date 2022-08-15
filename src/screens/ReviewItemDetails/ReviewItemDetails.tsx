@@ -365,7 +365,7 @@ export const renderPickHistory = (
   result: AxiosResponse
 ) => {
   // TODO : also check for their respective status if status for oh change history is 200 than render
-  if (result && result.status !== MULTI_STATUS) {
+  if (result && result.status === MULTI_STATUS) {
     if (pickHistoryList && pickHistoryList.length) {
       const data = [...pickHistoryList].sort((a, b) => {
         const date1 = new Date(a.createTS);
@@ -479,7 +479,7 @@ export const renderOHChangeHistory = (
   result: AxiosResponse
 ) => {
   // TODO : also check for their respective status if status for oh change history is 200 than render
-  if (result && result.status !== MULTI_STATUS) {
+  if (result && result.status === MULTI_STATUS) {
     if (ohChangeHistory && ohChangeHistory.length) {
       const data = [...ohChangeHistory].sort((a, b) => {
         const date1 = new Date(a.initiatedTimestamp);
@@ -1036,15 +1036,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     ? (result && result.data.itemDetails)
     : (result && result.data); // || getMockItemDetails(scannedEvent.value);
 
-  // const {
-  //   itemDetails,
-  //   itemOhChangeHistory,
-  //   picklistHistory
-  // }: {
-  //   itemDetails: ItemDetails;
-  //   itemOhChangeHistory: ItemOHChangeHistory;
-  //   picklistHistory: PicklistHistory;
-  // } = (result && result.data) || {};
+  const itemOhChangeHistory = (result && result.data.itemOhChangeHistory) ? result.data.itemOhChangeHistory : {};
+  const picklistHistory = (result && result.data.picklistHistory) ? result.data.picklistHistory : {};
 
   const locationCount = getLocationCount(props);
   const updatedSalesTS = getUpdatedSales(itemDetails);
@@ -1230,14 +1223,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               exceptionType={getExceptionType(actionCompleted, itemDetails)}
               navigationForPrint={navigation}
               showAdditionalItemDetails={additionalItemDetails}
-              // TODO : replace mockAdditionalItemDetails with itemDetails after integration of orchestration api
               additionalItemDetails={{
-                color: mockAdditionalItemDetails.color,
-                margin: mockAdditionalItemDetails.margin,
-                vendorPackQty: mockAdditionalItemDetails.vendorPackQty,
-                grossProfit: mockAdditionalItemDetails.grossProfit,
-                size: mockAdditionalItemDetails.size,
-                basePrice: mockAdditionalItemDetails.basePrice
+                color: itemDetails.color,
+                margin: itemDetails.margin,
+                vendorPackQty: itemDetails.vendorPackQty,
+                grossProfit: itemDetails.grossProfit,
+                size: itemDetails.size,
+                basePrice: itemDetails.basePrice
               }}
             />
             <SFTCard
@@ -1275,32 +1267,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
             </SFTCard>
-            {/* TODO : replace mockOHChangeHistory, pickListMockHistory, itemDetail[123]
-              with itemDetails.ohChangeHistory, itemDetails.picklistHistory, itemDetails
-              after orchestration api integration
-              and { status: 200 } with result
-            */}
             {additionalItemDetails && (
             <>
               <View style={styles.historyContainer}>
-                {renderOHChangeHistory(props, mockOHChangeHistory, {
-                  config: {},
-                  data: '',
-                  status: 200,
-                  headers: {},
-                  statusText: 'OK',
-                  request: {}
-                })}
+                {renderOHChangeHistory(props, itemOhChangeHistory, result)}
               </View>
               <View style={styles.historyContainer}>
-                {renderPickHistory(props, pickListMockHistory, {
-                  config: {},
-                  data: '',
-                  status: 200,
-                  headers: {},
-                  statusText: 'OK',
-                  request: {}
-                })}
+                {renderPickHistory(props, picklistHistory, result)}
               </View>
               <View style={styles.historyContainer}>
                 {renderReplenishmentCard(itemDetails)}
