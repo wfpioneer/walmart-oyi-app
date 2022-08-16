@@ -455,7 +455,7 @@ export default {
     PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: '已完成多个补货，补货清单已更新',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: '高货架无卡板可取',
     ADDITIONAL_ITEMS: '卡板有其它商品',
-    QUANTITY_STOCKED: 'Quantity Stocked' // TODO MANDARIN TRANSLATION
+    QUANTITY_STOCKED: '楼面陈列数量'
   },
   BINNING: {
     BINNING: '上架',

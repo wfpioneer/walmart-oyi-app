@@ -70,6 +70,7 @@ interface SFWorklfowProps {
   completePalletState: UseStateType<boolean>;
   updateItemsState: UseStateType<boolean>;
   deleteItemsState: UseStateType<boolean>;
+  stockedQtyState: UseStateType<number>;
 }
 
 export const activityIndicatorEffect = (
@@ -360,7 +361,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     showExpiryPromptState, perishableCategories, backupCategories,
     configCompleteState, showActivity, updatePalletItemsApi,
     deletePalletItemsApi, completePalletState, updatePicklistStatusApi,
-    updateItemsState, deleteItemsState
+    updateItemsState, deleteItemsState, stockedQtyState
   } = props;
 
   const [expirationDate, setExpiration] = expirationState;
@@ -370,6 +371,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const [isReadyToComplete, setIsReadyToComplete] = completePalletState;
   const [isUpdateItems, setIsUpdateItems] = updateItemsState;
   const [isDeleteItems, setIsDeleteItems] = deleteItemsState;
+  const [stockedQty, setStockedQty] = stockedQtyState;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
   const assigned = selectedPicks[0].assignedAssociate;
@@ -583,6 +585,9 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         salesFloorLocation={item.salesFloorLocationName}
         upcNbr={item.upcNbr}
         onEndEditing={() => onEndEditing(item)}
+        stockedQty={stock}
+        incrementStckQty={setStockedQty()}
+        decrementStckQty={setStockedQty()}
       />
     );
   };
@@ -701,7 +706,7 @@ const SalesFloorWorkflow = () => {
   const completePalletState = useState(false);
   const updateItemsState = useState(false);
   const deleteItemsState = useState(false);
-
+  const stockedQtyState = useState(0);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['21%'], []);
 
@@ -758,6 +763,7 @@ const SalesFloorWorkflow = () => {
           completePalletState={completePalletState}
           updateItemsState={updateItemsState}
           deleteItemsState={deleteItemsState}
+          stockedQtyState={stockedQtyState}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}
