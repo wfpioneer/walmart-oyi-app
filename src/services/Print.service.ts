@@ -24,7 +24,7 @@ export default class PrintService {
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.post(
-      `${urls.printingUrl}/print/location-sign`,
+      `${urls.itemDetailsURL}/print/location-sign`,
       payload.printLabelList,
       {
         headers: payload.headers,
@@ -39,7 +39,7 @@ export default class PrintService {
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.post(
-      `${urls.printingUrl}/print/pallet`,
+      `${urls.itemDetailsURL}/print/pallet-label`,
       payload.printPalletList,
       {
         headers: payload.headers,
