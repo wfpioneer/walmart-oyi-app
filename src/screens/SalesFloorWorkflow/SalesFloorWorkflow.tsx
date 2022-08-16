@@ -70,7 +70,6 @@ interface SFWorklfowProps {
   completePalletState: UseStateType<boolean>;
   updateItemsState: UseStateType<boolean>;
   deleteItemsState: UseStateType<boolean>;
-  stockedQtyState: UseStateType<number>;
 }
 
 export const activityIndicatorEffect = (
@@ -225,13 +224,6 @@ export const palletConfigApiEffect = (
   }
 };
 
-const calculatePickDelta = (oldQty: number, newQty?: number) => {
-  if (newQty && oldQty) {
-    return newQty - oldQty;
-  }
-  return oldQty;
-};
-
 export const binApisEffect = (
   updateQuantitiesApi: AsyncState,
   deleteItemsApi: AsyncState,
@@ -253,15 +245,12 @@ export const binApisEffect = (
       const selectedPickItems = selectedPicks.map(pick => ({
         picklistId: pick.id,
         locationId: pick.palletLocationId,
-        locationName: pick.palletLocationName
+        locationName: pick.palletLocationName,
+        itemQty: pick.itemQty
       }));
 
-      const pick = selectedPicks[0];
       dispatch(updatePicklistStatus({
-        headers: {
-          action: PickAction.READY_TO_BIN,
-          itemQty: calculatePickDelta(pick.quantityLeft ?? 0, pick.newQuantityLeft)
-        },
+        headers: { action: PickAction.READY_TO_BIN },
         palletId: selectedPicks[0].palletId,
         picklistItems: selectedPickItems
       }));
@@ -361,7 +350,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     showExpiryPromptState, perishableCategories, backupCategories,
     configCompleteState, showActivity, updatePalletItemsApi,
     deletePalletItemsApi, completePalletState, updatePicklistStatusApi,
-    updateItemsState, deleteItemsState, stockedQtyState
+    updateItemsState, deleteItemsState
   } = props;
 
   const [expirationDate, setExpiration] = expirationState;
@@ -371,7 +360,6 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const [isReadyToComplete, setIsReadyToComplete] = completePalletState;
   const [isUpdateItems, setIsUpdateItems] = updateItemsState;
   const [isDeleteItems, setIsDeleteItems] = deleteItemsState;
-  const [stockedQty, setStockedQty] = stockedQtyState;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
   const assigned = selectedPicks[0].assignedAssociate;
@@ -495,12 +483,13 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     const selectedPickItems = selectedPicks.map(pick => ({
       picklistId: pick.id,
       locationId: pick.palletLocationId,
-      locationName: pick.palletLocationName
+      locationName: pick.palletLocationName,
+      itemQty: pick.itemQty
     }));
     // dispatch picks to complete
     dispatch(
       updatePicklistStatus({
-        headers: { action: PickAction.COMPLETE, itemQty: selectedPicks[0].quantityLeft },
+        headers: { action: PickAction.COMPLETE },
         picklistItems: selectedPickItems,
         palletId: selectedPicks[0].palletId
       })
@@ -537,6 +526,33 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const onEndEditing = (item: PickListItem) => {
     if (typeof (item.newQuantityLeft) !== 'number' || Number.isNaN(item.newQuantityLeft)) {
       dispatch(updatePicks([{ ...item, newQuantityLeft: item.quantityLeft }]));
+    }
+  };
+
+  const increaseStockQty = (item: PickListItem) => {
+    if (item.itemQty && item.itemQty < MAX) {
+      dispatch(updatePicks([{ ...item, itemQty: item.itemQty + 1 }]));
+    } else if (!item.itemQty) {
+      dispatch(updatePicks([{ ...item, itemQty: 1 }]));
+    }
+  };
+
+  const decreaseStockQty = (item: PickListItem) => {
+    if (item.itemQty && item.itemQty > 0) {
+      dispatch(updatePicks([{ ...item, itemQty: item.itemQty - 1 }]));
+    }
+  };
+
+  const onEndStockQtyEdit = (item: PickListItem) => {
+    if (typeof (item.itemQty) !== 'number' || Number.isNaN(item.itemQty)) {
+      dispatch(updatePicks([{ ...item, itemQty: item.itemQty }]));
+    }
+  };
+
+  const onStockQtyTextChange = (text: string, item: PickListItem) => {
+    const newItemQty = Number.parseInt(text, 10);
+    if (text === '' || (newItemQty < MAX && newItemQty >= 0)) {
+      dispatch(updatePicks([{ ...item, itemQty: newItemQty }]));
     }
   };
 
@@ -585,9 +601,11 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         salesFloorLocation={item.salesFloorLocationName}
         upcNbr={item.upcNbr}
         onEndEditing={() => onEndEditing(item)}
-        stockedQty={stock}
-        incrementStckQty={setStockedQty()}
-        decrementStckQty={setStockedQty()}
+        stockedQty={item.itemQty || 0}
+        incrementStockQty={() => increaseStockQty(item)}
+        decrementStockQty={() => decreaseStockQty(item)}
+        onStockQtyTextChange={(text: string) => onStockQtyTextChange(text, item)}
+        onStockEndEditing={() => onEndStockQtyEdit(item)}
       />
     );
   };
@@ -763,7 +781,6 @@ const SalesFloorWorkflow = () => {
           completePalletState={completePalletState}
           updateItemsState={updateItemsState}
           deleteItemsState={deleteItemsState}
-          stockedQtyState={stockedQtyState}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}
