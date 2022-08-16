@@ -11,6 +11,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { mockPickLists } from '../../mockData/mockPickList';
 import getItemDetails from '../../mockData/getItemDetails';
 import { Tabs } from '../../models/Picking.d';
+import mockUser from '../../mockData/mockUser';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -26,8 +27,6 @@ const defaultAsyncState: AsyncState = {
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -35,7 +34,10 @@ const navigationProp: NavigationProp<any> = {
   reset: jest.fn(),
   setOptions: jest.fn(),
   setParams: jest.fn(),
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
 };
 let routeProp: RouteProp<any, string>;
 
@@ -55,6 +57,8 @@ describe('Picking Tab Navigator', () => {
         selectedTab={Tabs.PICK}
         useCallbackHook={jest.fn}
         useFocusEffectHook={jest.fn}
+        userConfigs={mockUser.configs}
+        getItemDetailsV2Api={defaultAsyncState}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

@@ -28,6 +28,7 @@ import {
 import { updatePalletExpirationDate } from '../../state/actions/PalletManagement';
 import { strings } from '../../locales';
 import getItemDetails from '../../mockData/getItemDetails';
+import mockUser from '../../mockData/mockUser';
 
 const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
 
@@ -97,8 +98,6 @@ describe('ManagePalletScreen', () => {
   const navigationProp: NavigationProp<any> = {
     addListener: jest.fn(),
     canGoBack: jest.fn(),
-    dangerouslyGetParent: jest.fn(),
-    dangerouslyGetState: jest.fn(),
     dispatch: jest.fn(),
     goBack: jest.fn(),
     isFocused: jest.fn(() => true),
@@ -106,7 +105,10 @@ describe('ManagePalletScreen', () => {
     reset: jest.fn(),
     setOptions: jest.fn(),
     setParams: jest.fn(),
-    navigate: jest.fn()
+    navigate: jest.fn(),
+    getId: jest.fn(),
+    getParent: jest.fn(),
+    getState: jest.fn()
   };
   let routeProp: RouteProp<any, string>;
   describe('Tests rendering the PalletManagement Screen', () => {
@@ -139,6 +141,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -172,6 +177,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -206,6 +214,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -242,6 +253,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -275,6 +289,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -312,6 +329,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -357,6 +377,9 @@ describe('ManagePalletScreen', () => {
           useCallbackHook={jest.fn()}
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
+          createPallet={false}
+          getItemDetailsV2Api={defaultAsyncState}
+          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -715,7 +738,11 @@ describe('ManagePalletScreen', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
-          data: getItemDetails[123],
+          data: {
+            itemDetails: getItemDetails[123],
+            itemOhChangeHistory: { code: 204 },
+            picklistHistory: { code: 204 }
+          },
           status: 200
         }
       };
