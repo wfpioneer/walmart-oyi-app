@@ -890,7 +890,14 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         // TODO revert V2 changes once BE orchestration is pushed to production
         if (userConfigs.additionalItemDetails) {
-          dispatch(getItemDetailsV2({ id: parseInt(scannedEvent.value, 10) }));
+          dispatch(
+            getItemDetailsV2(
+              {
+                id: parseInt(scannedEvent.value, 10),
+                getMetadataHistory: userConfigs.additionalItemDetails
+              }
+            )
+          );
         } else {
           dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
         }
