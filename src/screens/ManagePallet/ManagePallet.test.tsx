@@ -16,6 +16,7 @@ import {
   isAddedItemPerishable,
   isExpiryDateChanged,
   isQuantityChanged,
+  postCreatePalletApiHook,
   removeExpirationDate,
   updatePalletApisHook
 } from './ManagePallet';
@@ -142,8 +143,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+          postCreatePalletApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -178,8 +178,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+          postCreatePalletApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -215,8 +214,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+          postCreatePalletApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -224,7 +222,9 @@ describe('ManagePalletScreen', () => {
 
     it('Renders the DatePicker Dialog when the isPickerShow is true ', () => {
       const mockDate = new Date(1647369000000);
-      jest.spyOn(global, 'Date').mockImplementation(() => (mockDate as unknown) as string);
+      jest
+        .spyOn(global, 'Date')
+        .mockImplementation(() => mockDate as unknown as string);
       Date.now = () => 1647369000000;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -254,8 +254,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+          postCreatePalletApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -290,8 +289,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+          postCreatePalletApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -330,8 +328,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+          postCreatePalletApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -378,8 +375,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+          postCreatePalletApi={defaultAsyncState}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -639,6 +635,68 @@ describe('ManagePalletScreen', () => {
       );
     });
 
+    it('Tests postCreatePalletApiHook isLoading', () => {
+      const apiIsWaiting: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      postCreatePalletApiHook(
+        apiIsWaiting,
+        mockDispatch,
+        navigationProp,
+        mockItems,
+        mockNewExpirationDate
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(showActivityModal).toBeCalledTimes(1);
+    });
+    it('Tests postCreatePalletApiHook with Successful responses', () => {
+      const successToastProps = {
+        type: 'success',
+        text1: strings('PALLET.CREATE_PALLET_SUCCESS'),
+        position: 'bottom'
+      };
+      const onCreatePalletSuccessApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: [{ palletId: 1 }],
+          status: 200
+        }
+      };
+      postCreatePalletApiHook(
+        onCreatePalletSuccessApi,
+        mockDispatch,
+        navigationProp,
+        mockItems,
+        mockNewExpirationDate
+      );
+      expect(mockDispatch).toBeCalledTimes(6);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(
+        expect.objectContaining(successToastProps)
+      );
+    });
+
+    it('Tests postCreatePalletApiHook with error responses', () => {
+      const errorToastProps = {
+        type: 'error',
+        text1: strings('PALLET.CREATE_PALLET_FAILED'),
+        position: 'bottom'
+      };
+      postCreatePalletApiHook(
+        onFailureApi,
+        mockDispatch,
+        navigationProp,
+        mockItems,
+        mockNewExpirationDate
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(
+        expect.objectContaining(errorToastProps)
+      );
+    });
+
     it('Test clearPalletApi hook on success', () => {
       const clearPalletSuccess: AsyncState = {
         ...defaultAsyncState,
@@ -827,12 +885,17 @@ describe('ManagePalletScreen', () => {
         added: true
       }
     ];
-    const isAddedTrue = isAddedItemPerishable(mockAddedItems, mockPerishableCatg);
+    const isAddedTrue = isAddedItemPerishable(
+      mockAddedItems,
+      mockPerishableCatg
+    );
     expect(isAddedTrue).toBe(true);
   });
   it('Tests removeExpirationDate function', () => {
     const mockPerishableCategories = [1, 10, 11];
-    expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(false);
+    expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(
+      false
+    );
     const newItems: PalletItem[] = [
       {
         itemNbr: 1234,

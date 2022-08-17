@@ -203,6 +203,21 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       fluffyKey: 'binning',
       configKey: 'binning',
       name: strings('BINNING.BINNING')
+    },
+    {
+      fluffyKey: 'create Pallet',
+      configKey: 'createPallet',
+      name: strings('PALLET.CREATE_PALLET')
+    },
+    {
+      fluffyKey: 'pallet worklists',
+      configKey: 'palletWorklists',
+      name: strings('EXCEPTION.MISSING_PALLETS')
+    },
+    {
+      fluffyKey: 'additional item details',
+      configKey: 'additionalItemDetails',
+      name: strings('ITEM.ADDITIONAL_ITEM_DETAILS')
     }
   ];
 

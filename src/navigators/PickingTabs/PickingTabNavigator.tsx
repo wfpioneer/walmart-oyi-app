@@ -21,7 +21,7 @@ import SalesFloorTab from '../../screens/SalesFloorTab/SalesFloorTabScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
 import { validateSession } from '../../utils/sessionTimeout';
-import { getItemDetails, getItemDetailsV2, getPicklists } from '../../state/actions/saga';
+import { getItemDetails, getPicklists } from '../../state/actions/saga';
 import {
   initializePicklist,
   resetPickList,
@@ -35,7 +35,6 @@ import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { GET_ITEM_DETAILS, GET_PICKLISTS, UPDATE_PICKLIST_STATUS } from '../../state/actions/asyncAPI';
 import ItemDetails from '../../models/ItemDetails';
-import { Configurations } from '../../models/User';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -51,8 +50,6 @@ interface PickingTabNavigatorProps {
   selectedTab: Tabs;
   useFocusEffectHook: (effect: EffectCallback) => void;
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
-  userConfigs: Configurations;
-  getItemDetailsV2Api: AsyncState;
 }
 
 export const getItemDetailsApiHook = (
@@ -101,60 +98,6 @@ export const getItemDetailsApiHook = (
     }
     // on api request
     if (getItemDetailsApi.isWaiting) {
-      dispatch(showActivityModal());
-    }
-  }
-};
-
-export const getItemDetailsV2ApiHook = (
-  getItemDetailsV2Api: AsyncState,
-  dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
-) => {
-  if (navigation.isFocused()) {
-    // on api success
-    if (!getItemDetailsV2Api.isWaiting && getItemDetailsV2Api.result) {
-      const responseData = getItemDetailsV2Api.result?.data;
-      const itemDetails: ItemDetails = (responseData && responseData.itemDetails);
-      if (getItemDetailsV2Api.result.status === 200 || itemDetails.code === 200 || itemDetails.code === 207) {
-        dispatch(setPickCreateItem({
-          itemName: itemDetails.itemName,
-          itemNbr: itemDetails.itemNbr,
-          upcNbr: itemDetails.upcNbr,
-          categoryNbr: itemDetails.categoryNbr,
-          categoryDesc: itemDetails.categoryDesc,
-          price: itemDetails.price
-        }));
-        dispatch(setPickCreateFloor(itemDetails.location.floor || []));
-        dispatch(setPickCreateReserve(itemDetails.location.reserve || []));
-        navigation.navigate('CreatePick');
-      } else if (getItemDetailsV2Api.result.status === 204) {
-        Toast.show({
-          type: 'error',
-          text1: strings('ITEM.ITEM_NOT_FOUND'),
-          visibilityTime: 4000,
-          position: 'bottom'
-        });
-      }
-      dispatch({ type: GET_ITEM_DETAILS.RESET });
-      dispatch(hideActivityModal());
-    }
-    // on api error
-    if (!getItemDetailsV2Api.isWaiting && (getItemDetailsV2Api.error
-      || (getItemDetailsV2Api.result
-        && getItemDetailsV2Api.result.data.itemDetails.message))) {
-      dispatch(hideActivityModal());
-      dispatch({ type: GET_ITEM_DETAILS.RESET });
-      Toast.show({
-        type: 'error',
-        text1: strings('ITEM.API_ERROR'),
-        text2: strings('GENERICS.TRY_AGAIN'),
-        visibilityTime: 4000,
-        position: 'bottom'
-      });
-    }
-    // on api request
-    if (getItemDetailsV2Api.isWaiting) {
       dispatch(showActivityModal());
     }
   }
@@ -258,9 +201,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     updatePicklistStatusApi,
     selectedTab,
     useCallbackHook,
-    useFocusEffectHook,
-    userConfigs,
-    getItemDetailsV2Api
+    useFocusEffectHook
   } = props;
 
   let scannedSubscription: EmitterSubscription;
@@ -290,11 +231,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
             barcode: scan.value,
             type: scan.type
           });
-          if (userConfigs.additionalItemDetails) {
-            dispatch(getItemDetailsV2({ id: scan.value, getSummary: false, getMetadataHistory: false }));
-          } else {
-            dispatch(getItemDetails({ id: scan.value, getSummary: false }));
-          }
+          dispatch(getItemDetails({ id: scan.value, getSummary: false }));
           dispatch(resetScannedEvent());
         });
       }
@@ -317,11 +254,6 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
   useEffectHook(
     () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation),
     [getItemDetailsApi]
-  );
-  // Get Item Details UPC api V2
-  useEffectHook(
-    () => getItemDetailsV2ApiHook(getItemDetailsV2Api, dispatch, navigation),
-    [getItemDetailsV2Api]
   );
 
   // Get Picklist Api Hook
@@ -380,9 +312,7 @@ export const PickingTabs = (): JSX.Element => {
   const getPicklistApi = useTypedSelector(state => state.async.getPicklists);
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
-  const getItemDetailsV2Api = useTypedSelector(state => state.async.getItemDetailsV2);
   const selectedTab = useTypedSelector(state => state.Picking.selectedTab);
-  const userConfigs = useTypedSelector(state => state.User.configs);
   const navigation = useNavigation();
   const route = useRoute();
   return (
@@ -398,8 +328,6 @@ export const PickingTabs = (): JSX.Element => {
       selectedTab={selectedTab}
       useCallbackHook={useCallback}
       useFocusEffectHook={useFocusEffect}
-      userConfigs={userConfigs}
-      getItemDetailsV2Api={getItemDetailsV2Api}
     />
   );
 };

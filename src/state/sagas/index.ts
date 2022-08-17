@@ -25,6 +25,7 @@ import DeleteAisleService from '../../services/DeleteAisle.service';
 import ConfigService from '../../services/Config.service';
 import GetItemDetailsUPCService from '../../services/GetItemDetailsUPCService';
 import PalletManagementService from '../../services/PalletManagement.service';
+import CreatePalletService from '../../services/CreatePallet.service';
 import DeletePalletUPCsService from '../../services/DeletePalletUPCs.service';
 import PickingService from '../../services/Picking.service';
 
@@ -77,6 +78,7 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_PALLET_DETAILS, actions.getPalletDetails, PalletManagementService.getPalletDetails),
   makeAsyncSaga(saga.POST_BIN_PALLETS, actions.binPallets, PalletManagementService.postBinPallets),
   makeAsyncSaga(saga.GET_PALLET_CONFIG, actions.getPalletConfig, PalletManagementService.getPalletConfig),
+  makeAsyncSaga(saga.POST_CREATE_PALLET, actions.postCreatePallet, CreatePalletService.createPallet),
   makeAsyncSaga(saga.UPDATE_PICKLIST_STATUS, actions.updatePicklistStatus, PickingService.updatePickListStatus),
   makeAsyncSaga(saga.GET_PICKLISTS, actions.getPicklists, PickingService.getPickListService),
   makeAsyncSaga(saga.UPDATE_PALLET_NOT_FOUND, actions.updatePalletNotFound, PickingService.updatePalletNotFound),

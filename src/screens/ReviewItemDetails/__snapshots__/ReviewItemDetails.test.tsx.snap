@@ -1974,13 +1974,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemDetails={
             Object {
               "backroomQty": 6,
-              "basePrice": 1500.3,
+              "basePrice": 15.05,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
               "claimsOnHandQty": 5,
               "cloudQty": undefined,
               "code": 200,
-              "color": "blue",
+              "color": "red",
               "completed": false,
               "consolidatedOnHandQty": 10,
               "deliveryHistory": Object {
@@ -2000,7 +2000,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
               },
               "exceptionType": "nsfl",
-              "grossProfit": 0,
+              "grossProfit": 2.5,
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
@@ -2068,7 +2068,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   },
                 ],
               },
-              "margin": 0,
+              "margin": 14,
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
@@ -2132,10 +2132,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
                 "weeklyAvgSales": 10,
               },
-              "size": 0,
+              "size": 88,
               "status": "Active",
               "upcNbr": "000055559999",
-              "vendorPackQty": 0,
+              "vendorPackQty": 33,
             }
           }
         />
@@ -2701,66 +2701,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 10
               </Text>
             </View>
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#ffffffff",
-                  "flexDirection": "row",
-                  "justifyContent": "space-between",
-                  "paddingLeft": 2,
-                  "paddingRight": 3,
-                  "paddingVertical": 3,
-                }
-              }
-            >
-              <Text>
-                A1-2
-              </Text>
-              <Text>
-                20
-              </Text>
-            </View>
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#ffffffff",
-                  "flexDirection": "row",
-                  "justifyContent": "space-between",
-                  "paddingLeft": 2,
-                  "paddingRight": 3,
-                  "paddingVertical": 3,
-                }
-              }
-            >
-              <Text>
-                B1-1
-              </Text>
-              <Text>
-                30
-              </Text>
-            </View>
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#ffffffff",
-                  "flexDirection": "row",
-                  "justifyContent": "space-between",
-                  "paddingLeft": 2,
-                  "paddingRight": 3,
-                  "paddingVertical": 3,
-                }
-              }
-            >
-              <Text>
-                D1-1
-              </Text>
-              <Text>
-                50
-              </Text>
-            </View>
           </View>
           <View
             style={
@@ -2800,51 +2740,21 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             isOpened={false}
             title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
           >
-            <RenderItemHistoryCard
-              date="2022-07-23"
-              qty={55}
-            />
-            <RenderItemHistoryCard
-              date="2022-07-12"
-              qty={44}
-            />
-            <RenderItemHistoryCard
-              date="2022-06-28"
-              qty={34}
-            />
-            <RenderItemHistoryCard
-              date="2022-06-07"
-              qty={33}
-            />
-            <RenderItemHistoryCard
-              date="2022-05-15"
-              qty={23}
-            />
             <View
               style={
                 Object {
+                  "alignItems": "center",
                   "backgroundColor": "#ffffffff",
+                  "flex": 1,
+                  "padding": 10,
                 }
               }
             >
-              <Button
-                backgroundColor="#0071e9"
-                disabled={false}
-                height={28}
-                onPress={[Function]}
-                radius={5}
-                style={
-                  Object {
-                    "width": 60,
-                  }
-                }
-                title="[missing \\"en.LOCATION.MORE\\" translation]..."
-                titleColor="#0071e9"
-                titleFontSize={12}
-                titleFontWeight="bold"
-                type={3}
-                width={-1}
-              />
+              <Text
+                testID="msg-no-pick-data"
+              >
+                [missing "en.ITEM.NO_OH_CHANGE_HISTORY" translation]
+              </Text>
             </View>
           </CollapsibleCard>
         </View>
@@ -2860,51 +2770,21 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             isOpened={false}
             title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
           >
-            <RenderItemHistoryCard
-              date="2022-11-05"
-              qty={66}
-            />
-            <RenderItemHistoryCard
-              date="2022-07-23"
-              qty={22}
-            />
-            <RenderItemHistoryCard
-              date="2022-07-20"
-              qty={45}
-            />
-            <RenderItemHistoryCard
-              date="2022-07-19"
-              qty={30}
-            />
-            <RenderItemHistoryCard
-              date="2022-05-23"
-              qty={44}
-            />
             <View
               style={
                 Object {
+                  "alignItems": "center",
                   "backgroundColor": "#ffffffff",
+                  "flex": 1,
+                  "padding": 10,
                 }
               }
             >
-              <Button
-                backgroundColor="#0071e9"
-                disabled={false}
-                height={28}
-                onPress={[Function]}
-                radius={5}
-                style={
-                  Object {
-                    "width": 60,
-                  }
-                }
-                title="[missing \\"en.LOCATION.MORE\\" translation]..."
-                titleColor="#0071e9"
-                titleFontSize={12}
-                titleFontWeight="bold"
-                type={3}
-                width={-1}
-              />
+              <Text
+                testID="msg-no-pick-data"
+              >
+                [missing "en.ITEM.NO_PICK_HISTORY" translation]
+              </Text>
             </View>
           </CollapsibleCard>
         </View>
@@ -3010,13 +2890,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemDetails={
             Object {
               "backroomQty": 6,
-              "basePrice": 1500.3,
+              "basePrice": 15.05,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
               "claimsOnHandQty": 5,
               "cloudQty": undefined,
               "code": 200,
-              "color": "blue",
+              "color": "red",
               "completed": false,
               "consolidatedOnHandQty": 10,
               "deliveryHistory": Object {
@@ -3036,7 +2916,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
               },
               "exceptionType": "nsfl",
-              "grossProfit": 0,
+              "grossProfit": 2.5,
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
@@ -3104,7 +2984,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   },
                 ],
               },
-              "margin": 0,
+              "margin": 14,
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
@@ -3168,10 +3048,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
                 "weeklyAvgSales": 10,
               },
-              "size": 0,
+              "size": 88,
               "status": "Active",
               "upcNbr": "000055559999",
-              "vendorPackQty": 0,
+              "vendorPackQty": 33,
             }
           }
         />
@@ -3579,14 +3459,16 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemDetails={
             Object {
               "backroomQty": 6,
-              "basePrice": 1500.3,
+              "basePrice": 15.05,
               "categoryDesc": "Store Use",
               "categoryNbr": 99,
               "claimsOnHandQty": 5,
               "cloudQty": 42,
+              "color": "red",
               "completed": false,
               "consolidatedOnHandQty": 0,
               "exceptionType": "nsfl",
+              "grossProfit": 2.5,
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
               "itemName": "Small, Store Use Item",
@@ -3654,6 +3536,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   },
                 ],
               },
+              "margin": 14,
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
@@ -3713,8 +3596,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
                 "weeklyAvgSales": 10,
               },
+              "size": 88,
               "status": "Active",
               "upcNbr": "777555333",
+              "vendorPackQty": 33,
             }
           }
         />
@@ -4118,14 +4003,16 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemDetails={
             Object {
               "backroomQty": 6,
-              "basePrice": 1500.3,
+              "basePrice": 15.05,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
               "claimsOnHandQty": 5,
               "cloudQty": undefined,
+              "color": "red",
               "completed": false,
               "consolidatedOnHandQty": 10,
               "exceptionType": "nsfl",
+              "grossProfit": 2.5,
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
@@ -4193,6 +4080,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   },
                 ],
               },
+              "margin": 14,
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
@@ -4252,8 +4140,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
                 "weeklyAvgSales": 10,
               },
+              "size": 88,
               "status": "Active",
               "upcNbr": "000055559999",
+              "vendorPackQty": 33,
             }
           }
         />
@@ -4657,13 +4547,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemDetails={
             Object {
               "backroomQty": 6,
-              "basePrice": 1500.3,
+              "basePrice": 15.05,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
               "claimsOnHandQty": 5,
               "cloudQty": undefined,
               "code": 200,
-              "color": "blue",
+              "color": "red",
               "completed": false,
               "consolidatedOnHandQty": 10,
               "deliveryHistory": Object {
@@ -4683,7 +4573,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
               },
               "exceptionType": "nsfl",
-              "grossProfit": 0,
+              "grossProfit": 2.5,
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
@@ -4751,7 +4641,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   },
                 ],
               },
-              "margin": 0,
+              "margin": 14,
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
@@ -4815,10 +4705,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
                 "weeklyAvgSales": 10,
               },
-              "size": 0,
+              "size": 88,
               "status": "Active",
               "upcNbr": "000055559999",
-              "vendorPackQty": 0,
+              "vendorPackQty": 33,
             }
           }
         />
@@ -5222,13 +5112,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemDetails={
             Object {
               "backroomQty": 6,
-              "basePrice": 1500.3,
+              "basePrice": 15.05,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
               "claimsOnHandQty": 5,
               "cloudQty": undefined,
               "code": 200,
-              "color": "blue",
+              "color": "red",
               "completed": false,
               "consolidatedOnHandQty": 10,
               "deliveryHistory": Object {
@@ -5248,7 +5138,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
               },
               "exceptionType": "nsfl",
-              "grossProfit": 0,
+              "grossProfit": 2.5,
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
@@ -5316,7 +5206,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   },
                 ],
               },
-              "margin": 0,
+              "margin": 14,
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
@@ -5380,10 +5270,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
                 "weeklyAvgSales": 10,
               },
-              "size": 0,
+              "size": 88,
               "status": "Active",
               "upcNbr": "000055559999",
-              "vendorPackQty": 0,
+              "vendorPackQty": 33,
             }
           }
         />
@@ -5787,13 +5677,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemDetails={
             Object {
               "backroomQty": 6,
-              "basePrice": 1500.3,
+              "basePrice": 15.05,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
               "claimsOnHandQty": 5,
               "cloudQty": undefined,
               "code": 200,
-              "color": "blue",
+              "color": "red",
               "completed": false,
               "consolidatedOnHandQty": 10,
               "deliveryHistory": Object {
@@ -5813,7 +5703,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
               },
               "exceptionType": "nsfl",
-              "grossProfit": 0,
+              "grossProfit": 2.5,
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
@@ -5881,7 +5771,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   },
                 ],
               },
-              "margin": 0,
+              "margin": 14,
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
@@ -5945,10 +5835,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
                 "weeklyAvgSales": 10,
               },
-              "size": 0,
+              "size": 88,
               "status": "Active",
               "upcNbr": "000055559999",
-              "vendorPackQty": 0,
+              "vendorPackQty": 33,
             }
           }
         />
@@ -6352,13 +6242,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemDetails={
             Object {
               "backroomQty": 6,
-              "basePrice": 1500.3,
+              "basePrice": 15.05,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
               "claimsOnHandQty": 5,
               "cloudQty": undefined,
               "code": 200,
-              "color": "blue",
+              "color": "red",
               "completed": false,
               "consolidatedOnHandQty": 10,
               "deliveryHistory": Object {
@@ -6378,7 +6268,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
               },
               "exceptionType": "nsfl",
-              "grossProfit": 0,
+              "grossProfit": 2.5,
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
@@ -6446,7 +6336,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   },
                 ],
               },
-              "margin": 0,
+              "margin": 14,
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
@@ -6510,10 +6400,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
                 "weeklyAvgSales": 10,
               },
-              "size": 0,
+              "size": 88,
               "status": "Active",
               "upcNbr": "000055559999",
-              "vendorPackQty": 0,
+              "vendorPackQty": 33,
             }
           }
         />
@@ -6917,13 +6807,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemDetails={
             Object {
               "backroomQty": 6,
-              "basePrice": 1500.3,
+              "basePrice": 15.05,
               "categoryDesc": "Meat PI",
               "categoryNbr": 93,
               "claimsOnHandQty": 5,
               "cloudQty": undefined,
               "code": 200,
-              "color": "blue",
+              "color": "red",
               "completed": false,
               "consolidatedOnHandQty": 10,
               "deliveryHistory": Object {
@@ -6943,7 +6833,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
               },
               "exceptionType": "nsfl",
-              "grossProfit": 0,
+              "grossProfit": 2.5,
               "imageBlobKey": undefined,
               "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
@@ -7011,7 +6901,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                   },
                 ],
               },
-              "margin": 0,
+              "margin": 14,
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
@@ -7075,10 +6965,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 ],
                 "weeklyAvgSales": 10,
               },
-              "size": 0,
+              "size": 88,
               "status": "Active",
               "upcNbr": "000055559999",
-              "vendorPackQty": 0,
+              "vendorPackQty": 33,
             }
           }
         />

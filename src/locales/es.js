@@ -217,7 +217,9 @@ export default {
     CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
     CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente',
     UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán',
-    CREATE_PALLET: 'Crear Pallet'
+    CREATE_PALLET: 'Crear Pallet',
+    CREATE_PALLET_SUCCESS: 'Pallet creado con éxito',
+    CREATE_PALLET_FAILED: 'Falló la creación de pallet'
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -454,7 +456,8 @@ export default {
     PICK_COMPLETED_AND_PICKLIST_UPDATED: 'El pickeo se ha completado y la lista se ha actualizado',
     PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los pickeos se han completado y la lista se ha actualizado',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No hay pallet de reserva disponibles',
-    ADDITIONAL_ITEMS: 'El pallet contiene artículos adicionales'
+    ADDITIONAL_ITEMS: 'El pallet contiene artículos adicionales',
+    QUANTITY_STOCKED: 'Cantidad abastecida'
   },
   BINNING: {
     BINNING: 'Bodega',

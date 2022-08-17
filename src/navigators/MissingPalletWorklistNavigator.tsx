@@ -70,7 +70,7 @@ export const MissingPalletWorklistNavigatorStack = (
         name="MissingPalletWorklistTabs"
         component={MissingPalletWorklistTabs}
         options={{
-          headerTitle: strings('WORKLIST.WORKLIST'),
+          headerTitle: strings('WORKLIST.PALLET_WORKLIST'),
           headerLeft: hlProps => hlProps.canGoBack && (
             <HeaderBackButton
               // eslint-disable-next-line react/jsx-props-no-spreading
