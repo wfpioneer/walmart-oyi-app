@@ -26,7 +26,7 @@ import { getPalletConfig, getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
-import { createPallet, setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
+import { setCreatePalletState, setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
 import { GET_PALLET_CONFIG, GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
 import { Configurations } from '../../models/User';
@@ -231,7 +231,7 @@ export const PalletManagementScreen = (
             type={ButtonType.PRIMARY}
             style={styles.btnCreate}
             onPress={() => {
-              dispatch(createPallet());
+              dispatch(setCreatePalletState(true));
               navigation.navigate('ManagePallet');
             }}
           />

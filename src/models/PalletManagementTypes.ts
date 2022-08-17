@@ -32,3 +32,18 @@ export interface Pallet {
 export interface PalletItemDetails extends PalletInfo {
   items: PalletItem[]
 }
+
+export interface CreatePalletItem {
+  upcNbr: string,
+  qty: number
+}
+
+export interface CreatePallet {
+  numberOfPallets: number,
+  items: CreatePalletItem[],
+  expirationDate: string
+}
+
+export interface CreatePalletResponse {
+  palletId: number;
+}
