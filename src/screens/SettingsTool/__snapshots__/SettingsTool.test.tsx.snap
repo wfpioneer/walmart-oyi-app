@@ -495,6 +495,21 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "fluffyKey": "binning",
             "name": "[missing \\"en.BINNING.BINNING\\" translation]",
           },
+          Object {
+            "configKey": "createPallet",
+            "fluffyKey": "create Pallet",
+            "name": "[missing \\"en.PALLET.CREATE_PALLET\\" translation]",
+          },
+          Object {
+            "configKey": "palletWorklists",
+            "fluffyKey": "pallet worklists",
+            "name": "[missing \\"en.EXCEPTION.MISSING_PALLETS\\" translation]",
+          },
+          Object {
+            "configKey": "additionalItemDetails",
+            "fluffyKey": "additional item details",
+            "name": "[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]",
+          },
         ]
       }
       keyExtractor={[Function]}
@@ -850,6 +865,21 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "fluffyKey": "binning",
             "name": "[missing \\"en.BINNING.BINNING\\" translation]",
           },
+          Object {
+            "configKey": "createPallet",
+            "fluffyKey": "create Pallet",
+            "name": "[missing \\"en.PALLET.CREATE_PALLET\\" translation]",
+          },
+          Object {
+            "configKey": "palletWorklists",
+            "fluffyKey": "pallet worklists",
+            "name": "[missing \\"en.EXCEPTION.MISSING_PALLETS\\" translation]",
+          },
+          Object {
+            "configKey": "additionalItemDetails",
+            "fluffyKey": "additional item details",
+            "name": "[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]",
+          },
         ]
       }
       keyExtractor={[Function]}
@@ -1124,6 +1154,21 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "configKey": "binning",
             "fluffyKey": "binning",
             "name": "[missing \\"en.BINNING.BINNING\\" translation]",
+          },
+          Object {
+            "configKey": "createPallet",
+            "fluffyKey": "create Pallet",
+            "name": "[missing \\"en.PALLET.CREATE_PALLET\\" translation]",
+          },
+          Object {
+            "configKey": "palletWorklists",
+            "fluffyKey": "pallet worklists",
+            "name": "[missing \\"en.EXCEPTION.MISSING_PALLETS\\" translation]",
+          },
+          Object {
+            "configKey": "additionalItemDetails",
+            "fluffyKey": "additional item details",
+            "name": "[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]",
           },
         ]
       }
