@@ -30,7 +30,7 @@ import ManualScan from '../../components/manualscan/ManualScan';
 import PalletExpiration from '../../components/PalletExpiration/PalletExpiration';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, getItemDetailsV2, updatePalletItemQty
+  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, updatePalletItemQty
 } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
@@ -59,7 +59,6 @@ import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import ItemDetails from '../../models/ItemDetails';
 import { CustomModalComponent } from '../Modal/Modal';
-import { Configurations } from '../../models/User';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 
@@ -89,8 +88,6 @@ interface ManagePalletProps {
   confirmBackNavigate: boolean;
   setConfirmBackNavigate: React.Dispatch<React.SetStateAction<boolean>>;
   createPallet: boolean;
-  userConfigs: Configurations;
-  getItemDetailsV2Api: AsyncState;
 }
 interface ApiResult {
   data: any;
@@ -619,7 +616,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, perishableCategories, displayWarningModal, setDisplayWarningModal,
     useFocusEffectHook, useCallbackHook, confirmBackNavigate, setConfirmBackNavigate,
-    createPallet, userConfigs, getItemDetailsV2Api
+    createPallet
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
@@ -662,11 +659,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             barcode: scan.value,
             type: scan.type
           });
-          if (userConfigs.additionalItemDetails) {
-            dispatch(getItemDetailsV2({ id: scan.value, getSummary: false, getMetadataHistory: false }));
-          } else {
-            dispatch(getItemDetails({ id: scan.value, getSummary: false }));
-          }
+          dispatch(getItemDetails({ id: scan.value, getSummary: false }));
         });
       }
     });
@@ -691,13 +684,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     items,
     dispatch
   ), [getItemDetailsApi]);
-
-  // Get Item Details UPC api V2
-  useEffectHook(() => getItemDetailsApiV2Hook(
-    getItemDetailsV2Api,
-    items,
-    dispatch
-  ), [getItemDetailsV2Api]);
 
   // update pallet hook (get pallet details api)
   useEffectHook(() => getPalletDetailsApiHook(
@@ -911,8 +897,6 @@ const ManagePallet = (): JSX.Element => {
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const clearPalletApi = useTypedSelector(state => state.async.clearPallet);
-  const getItemDetailsV2Api = useTypedSelector(state => state.async.getItemDetailsV2);
-  const userConfigs = useTypedSelector(state => state.User.configs);
   const [displayClearConfirmation, setDisplayClearConfirmation] = useState(false);
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [displayWarningModal, setDisplayWarningModal] = useState(false);
@@ -983,8 +967,6 @@ const ManagePallet = (): JSX.Element => {
           confirmBackNavigate={confirmBackNavigate}
           setConfirmBackNavigate={setConfirmBackNavigate}
           createPallet={createPallet}
-          userConfigs={userConfigs}
-          getItemDetailsV2Api={getItemDetailsV2Api}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

@@ -57,8 +57,6 @@ describe('Picking Tab Navigator', () => {
         selectedTab={Tabs.PICK}
         useCallbackHook={jest.fn}
         useFocusEffectHook={jest.fn}
-        userConfigs={mockUser.configs}
-        getItemDetailsV2Api={defaultAsyncState}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

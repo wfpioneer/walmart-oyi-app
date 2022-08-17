@@ -142,8 +142,6 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -178,8 +176,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -215,8 +212,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -254,8 +250,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -290,8 +285,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -330,8 +324,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -378,8 +371,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
+
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
