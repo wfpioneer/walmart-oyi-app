@@ -329,6 +329,8 @@ export const RenderItemHistoryCard = (
 );
 
 const MULTI_STATUS = 207;
+const NO_RESULTS_STATUS = 204;
+const SUCCESS_STATUS = 200;
 
 const onMorePickHistoryClick = (
   dispatch: Dispatch<any>,
@@ -364,47 +366,57 @@ export const renderPickHistory = (
   pickHistoryList: PickHistory[],
   result: AxiosResponse
 ) => {
-  // TODO : also check for their respective status if status for oh change history is 200 than render
-  if (result && result.status !== MULTI_STATUS) {
-    if (pickHistoryList && pickHistoryList.length) {
-      const data = [...pickHistoryList].sort((a, b) => {
-        const date1 = new Date(a.createTS);
-        const date2 = new Date(b.createTS);
-        return date2 > date1 ? 1 : -1;
-      });
+  if (result && (result.status === SUCCESS_STATUS || result.status === MULTI_STATUS)) {
+    if (result.data.picklistHistory.code === SUCCESS_STATUS) {
+      if (pickHistoryList && pickHistoryList.length) {
+        const data = [...pickHistoryList].sort((a, b) => {
+          const date1 = new Date(a.createTS);
+          const date2 = new Date(b.createTS);
+          return date2 > date1 ? 1 : -1;
+        });
+        return (
+          <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+            {data.slice(0, 5).map(item => (
+              <RenderItemHistoryCard
+                key={item.id}
+                date={item.createTS}
+                qty={item.itemQty}
+              />
+            ))}
+            {pickHistoryList.length > 5 && (
+              <View style={styles.moreBtnContainer}>
+                <Button
+                  type={3}
+                  title={`${strings('LOCATION.MORE')}...`}
+                  titleColor={COLOR.MAIN_THEME_COLOR}
+                  titleFontSize={12}
+                  titleFontWeight="bold"
+                  height={28}
+                  onPress={() => onMorePickHistoryClick(props.dispatch, data, props.navigation)}
+                  style={styles.historyMoreBtn}
+                />
+              </View>
+            )}
+          </CollapsibleCard>
+        );
+      }
       return (
         <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
-          {data.slice(0, 5).map(item => (
-            <RenderItemHistoryCard
-              key={item.id}
-              date={item.createTS}
-              qty={item.itemQty}
-            />
-          ))}
-          {pickHistoryList.length > 5 && (
-            <View style={styles.moreBtnContainer}>
-              <Button
-                type={3}
-                title={`${strings('LOCATION.MORE')}...`}
-                titleColor={COLOR.MAIN_THEME_COLOR}
-                titleFontSize={12}
-                titleFontWeight="bold"
-                height={28}
-                onPress={() => onMorePickHistoryClick(props.dispatch, data, props.navigation)}
-                style={styles.historyMoreBtn}
-              />
-            </View>
-          )}
+          <View style={styles.noDataContainer}>
+            <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
+          </View>
         </CollapsibleCard>
       );
     }
-    return (
-      <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
-        <View style={styles.noDataContainer}>
-          <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
-        </View>
-      </CollapsibleCard>
-    );
+    if (result.data.picklistHistory.code === NO_RESULTS_STATUS) {
+      return (
+        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+          <View style={styles.noDataContainer}>
+            <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
+          </View>
+        </CollapsibleCard>
+      );
+    }
   }
   return (
     <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
@@ -478,47 +490,57 @@ export const renderOHChangeHistory = (
   ohChangeHistory: OHChangeHistory[],
   result: AxiosResponse
 ) => {
-  // TODO : also check for their respective status if status for oh change history is 200 than render
-  if (result && result.status !== MULTI_STATUS) {
-    if (ohChangeHistory && ohChangeHistory.length) {
-      const data = [...ohChangeHistory].sort((a, b) => {
-        const date1 = new Date(a.initiatedTimestamp);
-        const date2 = new Date(b.initiatedTimestamp);
-        return date2 > date1 ? 1 : -1;
-      });
+  if (result && (result.status === SUCCESS_STATUS || result.status === MULTI_STATUS)) {
+    if (result.data.itemOhChangeHistory.code === SUCCESS_STATUS) {
+      if (ohChangeHistory && ohChangeHistory.length) {
+        const data = [...ohChangeHistory].sort((a, b) => {
+          const date1 = new Date(a.initiatedTimestamp);
+          const date2 = new Date(b.initiatedTimestamp);
+          return date2 > date1 ? 1 : -1;
+        });
+        return (
+          <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+            {data.slice(0, 5).map(item => (
+              <RenderItemHistoryCard
+                key={item.id}
+                date={item.initiatedTimestamp}
+                qty={item.newQuantity}
+              />
+            ))}
+            {ohChangeHistory.length > 5 && (
+              <View style={styles.moreBtnContainer}>
+                <Button
+                  type={3}
+                  title={`${strings('LOCATION.MORE')}...`}
+                  titleColor={COLOR.MAIN_THEME_COLOR}
+                  titleFontSize={12}
+                  titleFontWeight="bold"
+                  height={28}
+                  onPress={() => onMoreOHChangeHistoryClick(props.dispatch, ohChangeHistory, props.navigation)}
+                  style={styles.historyMoreBtn}
+                />
+              </View>
+            )}
+          </CollapsibleCard>
+        );
+      }
       return (
         <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
-          {data.slice(0, 5).map(item => (
-            <RenderItemHistoryCard
-              key={item.id}
-              date={item.initiatedTimestamp}
-              qty={item.newQuantity}
-            />
-          ))}
-          {ohChangeHistory.length > 5 && (
-          <View style={styles.moreBtnContainer}>
-            <Button
-              type={3}
-              title={`${strings('LOCATION.MORE')}...`}
-              titleColor={COLOR.MAIN_THEME_COLOR}
-              titleFontSize={12}
-              titleFontWeight="bold"
-              height={28}
-              onPress={() => onMoreOHChangeHistoryClick(props.dispatch, ohChangeHistory, props.navigation)}
-              style={styles.historyMoreBtn}
-            />
+          <View style={styles.noDataContainer}>
+            <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
           </View>
-          )}
         </CollapsibleCard>
       );
     }
-    return (
-      <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
-        <View style={styles.noDataContainer}>
-          <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
-        </View>
-      </CollapsibleCard>
-    );
+    if (result.data.itemOhChangeHistory.code === NO_RESULTS_STATUS) {
+      return (
+        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+          <View style={styles.noDataContainer}>
+            <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
+          </View>
+        </CollapsibleCard>
+      );
+    }
   }
   return (
     <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
@@ -650,8 +672,7 @@ export const renderLocationComponent = (
             />
           )}
       </View>
-      {/* TODO : replace mockReserveLocations with reserveLocations after orchestration api integration */}
-      {additionalItemDetails && renderReserveLocQtys(mockReserveLocations)}
+      {additionalItemDetails && renderReserveLocQtys(reserveLocations)}
       <View style={styles.renderPickListContainer}>
         {renderAddPicklistButton(props, itemDetails, setCreatePickModalVisible)}
       </View>
@@ -890,7 +911,14 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         // TODO revert V2 changes once BE orchestration is pushed to production
         if (userConfigs.additionalItemDetails) {
-          dispatch(getItemDetailsV2({ id: parseInt(scannedEvent.value, 10) }));
+          dispatch(
+            getItemDetailsV2(
+              {
+                id: parseInt(scannedEvent.value, 10),
+                getMetadataHistory: userConfigs.additionalItemDetails
+              }
+            )
+          );
         } else {
           dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
         }
@@ -1036,15 +1064,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     ? (result && result.data.itemDetails)
     : (result && result.data); // || getMockItemDetails(scannedEvent.value);
 
-  // const {
-  //   itemDetails,
-  //   itemOhChangeHistory,
-  //   picklistHistory
-  // }: {
-  //   itemDetails: ItemDetails;
-  //   itemOhChangeHistory: ItemOHChangeHistory;
-  //   picklistHistory: PicklistHistory;
-  // } = (result && result.data) || {};
+  const itemOhChangeHistory = (result && result.data.itemOhChangeHistory) ?
+    result.data.itemOhChangeHistory.ohChangeHistory : [];
+  const picklistHistory = (result && result.data.picklistHistory) ? result.data.picklistHistory.picklists : [];
 
   const locationCount = getLocationCount(props);
   const updatedSalesTS = getUpdatedSales(itemDetails);
@@ -1230,14 +1252,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               exceptionType={getExceptionType(actionCompleted, itemDetails)}
               navigationForPrint={navigation}
               showAdditionalItemDetails={additionalItemDetails}
-              // TODO : replace mockAdditionalItemDetails with itemDetails after integration of orchestration api
               additionalItemDetails={{
-                color: mockAdditionalItemDetails.color,
-                margin: mockAdditionalItemDetails.margin,
-                vendorPackQty: mockAdditionalItemDetails.vendorPackQty,
-                grossProfit: mockAdditionalItemDetails.grossProfit,
-                size: mockAdditionalItemDetails.size,
-                basePrice: mockAdditionalItemDetails.basePrice
+                color: itemDetails.color,
+                margin: itemDetails.margin,
+                vendorPackQty: itemDetails.vendorPackQty,
+                grossProfit: itemDetails.grossProfit,
+                size: itemDetails.size,
+                basePrice: itemDetails.basePrice
               }}
             />
             <SFTCard
@@ -1275,32 +1296,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
             </SFTCard>
-            {/* TODO : replace mockOHChangeHistory, pickListMockHistory, itemDetail[123]
-              with itemDetails.ohChangeHistory, itemDetails.picklistHistory, itemDetails
-              after orchestration api integration
-              and { status: 200 } with result
-            */}
             {additionalItemDetails && (
             <>
               <View style={styles.historyContainer}>
-                {renderOHChangeHistory(props, mockOHChangeHistory, {
-                  config: {},
-                  data: '',
-                  status: 200,
-                  headers: {},
-                  statusText: 'OK',
-                  request: {}
-                })}
+                {renderOHChangeHistory(props, itemOhChangeHistory, result)}
               </View>
               <View style={styles.historyContainer}>
-                {renderPickHistory(props, pickListMockHistory, {
-                  config: {},
-                  data: '',
-                  status: 200,
-                  headers: {},
-                  statusText: 'OK',
-                  request: {}
-                })}
+                {renderPickHistory(props, picklistHistory, result)}
               </View>
               <View style={styles.historyContainer}>
                 {renderReplenishmentCard(itemDetails)}
