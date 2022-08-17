@@ -828,7 +828,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
       // updated expiration date
       const updatedExpirationDate = addExpiry
-        ? `${moment(addExpiry, 'DD/MM/YYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
+        ? `${moment(addExpiry, 'DD/MM/YYYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
       // Filter Items by deleted flag
       const upcs = items.filter(item => item.deleted && !item.added).reduce((reducer, current) => {
         reducer.push(current.upcNbr);
