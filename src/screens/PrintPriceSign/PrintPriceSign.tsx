@@ -222,7 +222,7 @@ export const isValidDispatch = (
 };
 
 const isitemResultHasData = (itemResult: AxiosResponse | null) => (
-  itemResult && itemResult.data
+  itemResult && (itemResult.data.itemDetails || itemResult.data)
 );
 
 export const handleAddPrintList = (
@@ -763,6 +763,7 @@ const PrintPriceSign = (): JSX.Element => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const { result: itemResult } = useTypedSelector(state => state.async.getItemDetails);
+  const { result: itemResultV2 } = useTypedSelector(state => state.async.getItemDetailsV2);
   const printAPI = useTypedSelector(state => state.async.printSign);
   const { result: sectionsResult } = useTypedSelector(state => state.async.getSections);
   const printLabelAPI = useTypedSelector(state => state.async.printLocationLabels);
@@ -796,7 +797,7 @@ const PrintPriceSign = (): JSX.Element => {
       scannedEvent={scannedEvent}
       exceptionType={exceptionType ?? ''}
       actionCompleted={actionCompleted}
-      itemResult={itemResult}
+      itemResult={itemResult ?? itemResultV2}
       printAPI={printAPI}
       printLabelAPI={printLabelAPI}
       printPalletAPI={printPalletAPI}
