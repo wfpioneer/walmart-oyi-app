@@ -16,6 +16,7 @@ import {
   isAddedItemPerishable,
   isExpiryDateChanged,
   isQuantityChanged,
+  postCreatePalletApiHook,
   removeExpirationDate,
   updatePalletApisHook
 } from './ManagePallet';
@@ -142,6 +143,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
+          postCreatePalletApi={defaultAsyncState}
           getItemDetailsV2Api={defaultAsyncState}
           userConfigs={mockUser.configs}
         />
@@ -178,6 +180,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
+          postCreatePalletApi={defaultAsyncState}
           getItemDetailsV2Api={defaultAsyncState}
           userConfigs={mockUser.configs}
         />
@@ -215,6 +218,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
+          postCreatePalletApi={defaultAsyncState}
           getItemDetailsV2Api={defaultAsyncState}
           userConfigs={mockUser.configs}
         />
@@ -254,6 +258,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
+          postCreatePalletApi={defaultAsyncState}
           getItemDetailsV2Api={defaultAsyncState}
           userConfigs={mockUser.configs}
         />
@@ -290,6 +295,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
+          postCreatePalletApi={defaultAsyncState}
           getItemDetailsV2Api={defaultAsyncState}
           userConfigs={mockUser.configs}
         />
@@ -330,6 +336,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
+          postCreatePalletApi={defaultAsyncState}
           getItemDetailsV2Api={defaultAsyncState}
           userConfigs={mockUser.configs}
         />
@@ -378,6 +385,7 @@ describe('ManagePalletScreen', () => {
           confirmBackNavigate={false}
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
+          postCreatePalletApi={defaultAsyncState}
           getItemDetailsV2Api={defaultAsyncState}
           userConfigs={mockUser.configs}
         />
@@ -633,6 +641,70 @@ describe('ManagePalletScreen', () => {
         mockNewExpirationDate
       );
       expect(mockDispatch).toBeCalledTimes(5);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(
+        expect.objectContaining(errorToastProps)
+      );
+    });
+
+    it('Tests postCreatePalletApiHook isLoading', () => {
+      const apiIsWaiting: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      postCreatePalletApiHook(
+        apiIsWaiting,
+        mockDispatch,
+        navigationProp,
+        mockItems,
+        mockNewExpirationDate
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(showActivityModal).toBeCalledTimes(1);
+    });
+    it('Tests postCreatePalletApiHook with Successful responses', () => {
+      const successToastProps = {
+        type: 'success',
+        text1: strings('PALLET.CREATE_PALLET_SUCCESS'),
+        position: 'bottom'
+      };
+      const onCreatePalletSuccessApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: [
+            { palletId: 1 }
+          ],
+          status: 200
+        }
+      };
+      postCreatePalletApiHook(
+        onCreatePalletSuccessApi,
+        mockDispatch,
+        navigationProp,
+        mockItems,
+        mockNewExpirationDate
+      );
+      expect(mockDispatch).toBeCalledTimes(6);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(
+        expect.objectContaining(successToastProps)
+      );
+    });
+
+    it('Tests postCreatePalletApiHook with error responses', () => {
+      const errorToastProps = {
+        type: 'error',
+        text1: strings('PALLET.CREATE_PALLET_FAILED'),
+        position: 'bottom'
+      };
+      postCreatePalletApiHook(
+        onFailureApi,
+        mockDispatch,
+        navigationProp,
+        mockItems,
+        mockNewExpirationDate
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(hideActivityModal).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(errorToastProps)

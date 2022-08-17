@@ -218,7 +218,9 @@ export default {
     CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful',
     CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared',
     UNSAVED_WARNING_MSG: 'All unsaved changes will be lost',
-    CREATE_PALLET: 'Create Pallet'
+    CREATE_PALLET: 'Create Pallet',
+    CREATE_PALLET_SUCCESS: 'Pallet created successfully',
+    CREATE_PALLET_FAILED: 'Failed to create pallet'
   },
   LOCATION: {
     TITLE: 'All locations',
@@ -455,7 +457,8 @@ export default {
     UPDATE_PICK_FAILED_TRY_AGAIN: 'Failed to update pick. Please try again',
     UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available',
-    ADDITIONAL_ITEMS: 'Pallet contains additional items'
+    ADDITIONAL_ITEMS: 'Pallet contains additional items',
+    QUANTITY_STOCKED: 'Quantity Stocked'
   },
   BINNING: {
     BINNING: 'Binning',
