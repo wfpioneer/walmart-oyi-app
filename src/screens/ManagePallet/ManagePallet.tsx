@@ -808,8 +808,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   ), [postCreatePalletApi]);
 
   const postCreateNewPallet = () => {
+    const expirationDt = newExpirationDate
+      ? `${moment(newExpirationDate, 'DD/MM/YYYY').format('YYYY-MM-DDT00:00:00.000')}Z` : '';
     const createPalletPayload : CreatePallet = {
-      expirationDate: newExpirationDate || '',
+      expirationDate: expirationDt,
       numberOfPallets: 1,
       items: items.map(item => ({ upcNbr: item.upcNbr, qty: item.newQuantity }))
     };

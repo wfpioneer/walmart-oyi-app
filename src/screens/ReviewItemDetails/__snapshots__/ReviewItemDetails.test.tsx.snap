@@ -1326,88 +1326,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
       width={-1}
     />
   </View>
-  <View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        A1-1
-      </Text>
-      <Text>
-        10
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        A1-2
-      </Text>
-      <Text>
-        20
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        B1-1
-      </Text>
-      <Text>
-        30
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        D1-1
-      </Text>
-      <Text>
-        50
-      </Text>
-    </View>
-  </View>
   <View
     style={
       Object {
@@ -1486,88 +1404,9 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     <Text>
       [missing "en.ITEM.RESERVE" translation]
     </Text>
-  </View>
-  <View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        A1-1
-      </Text>
-      <Text>
-        10
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        A1-2
-      </Text>
-      <Text>
-        20
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        B1-1
-      </Text>
-      <Text>
-        30
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        D1-1
-      </Text>
-      <Text>
-        50
-      </Text>
-    </View>
+    <Text>
+      A1-1
+    </Text>
   </View>
   <View
     style={
@@ -1637,88 +1476,9 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     <Text>
       [missing "en.ITEM.RESERVE" translation]
     </Text>
-  </View>
-  <View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        A1-1
-      </Text>
-      <Text>
-        10
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        A1-2
-      </Text>
-      <Text>
-        20
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        B1-1
-      </Text>
-      <Text>
-        30
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        D1-1
-      </Text>
-      <Text>
-        50
-      </Text>
-    </View>
+    <Text>
+      A1-1
+    </Text>
   </View>
   <View
     style={
@@ -1811,88 +1571,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
       type={3}
       width={-1}
     />
-  </View>
-  <View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        A1-1
-      </Text>
-      <Text>
-        10
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        A1-2
-      </Text>
-      <Text>
-        20
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        B1-1
-      </Text>
-      <Text>
-        30
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingLeft": 2,
-          "paddingRight": 3,
-          "paddingVertical": 3,
-        }
-      }
-    >
-      <Text>
-        D1-1
-      </Text>
-      <Text>
-        50
-      </Text>
-    </View>
   </View>
   <View
     style={
@@ -2013,7 +1691,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       handleSubmit={[Function]}
       isWaiting={false}
       newOHQty={42}
-      onHandsQty={0}
+      onHandsQty={42}
       setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
@@ -2095,7 +1773,375 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         refreshing={false}
       />
     }
-  />
+  >
+    <View>
+      <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
+          }
+        }
+        category="93 - Meat PI"
+        exceptionType="nsfl"
+        itemName="Test Item That is Really, Really Long (and has parenthesis)"
+        itemNbr={1234567890}
+        navigationForPrint={
+          Object {
+            "addListener": [MockFunction],
+            "canGoBack": [MockFunction],
+            "dispatch": [MockFunction],
+            "getId": [MockFunction],
+            "getParent": [MockFunction],
+            "getState": [MockFunction],
+            "goBack": [MockFunction],
+            "isFocused": [MockFunction],
+            "navigate": [MockFunction],
+            "removeListener": [MockFunction],
+            "reset": [MockFunction],
+            "setOptions": [MockFunction],
+            "setParams": [MockFunction],
+          }
+        }
+        price={2000.94}
+        showAdditionalItemDetails={false}
+        status="Active"
+        upcNbr="000055559999"
+      />
+      <SFTCard
+        iconName="pallet"
+        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.CHANGE\\" translation]"
+      >
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
+              Object {
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": 21,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 10,
+              },
+            ]
+          }
+        />
+      </SFTCard>
+      <SFTCard
+        iconProp={
+          <mockMaterialCommunityIcons
+            color="#616161"
+            name="label-variant"
+            size={20}
+            style={
+              Object {
+                "marginLeft": -4,
+              }
+            }
+          />
+        }
+        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 18,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <Text>
+            [missing "en.ITEM.ON_ORDER" translation]
+          </Text>
+          <Text>
+            48
+          </Text>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconName="map-marker-alt"
+        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.FLOOR" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Button
+              backgroundColor="#0071e9"
+              disabled={false}
+              height={28}
+              onPress={[Function]}
+              radius={5}
+              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+              titleColor="#0071e9"
+              titleFontSize={12}
+              titleFontWeight="bold"
+              type={3}
+              width={-1}
+            />
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        bottomRightBtnAction={
+          Array [
+            [Function],
+          ]
+        }
+        bottomRightBtnTxt={
+          Array [
+            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          ]
+        }
+        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+      >
+        <SalesMetrics
+          isGraphView={false}
+          itemDetails={
+            Object {
+              "backroomQty": 6,
+              "basePrice": 1500.3,
+              "categoryDesc": "Meat PI",
+              "categoryNbr": 93,
+              "claimsOnHandQty": 5,
+              "cloudQty": undefined,
+              "code": 200,
+              "color": "blue",
+              "completed": false,
+              "consolidatedOnHandQty": 10,
+              "deliveryHistory": Object {
+                "deliveries": Array [
+                  Object {
+                    "date": "2022-06-23",
+                    "qty": 23,
+                  },
+                  Object {
+                    "date": "2022-07-25",
+                    "qty": 44,
+                  },
+                  Object {
+                    "date": "2022-07-26",
+                    "qty": 23,
+                  },
+                ],
+              },
+              "exceptionType": "nsfl",
+              "grossProfit": 0,
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
+              "itemNbr": 1234567890,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "qty": 10,
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "margin": 0,
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 100,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 39,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 26,
+                    "week": 52,
+                  },
+                  Object {
+                    "value": 45,
+                    "week": 53,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 54,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 55,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "size": 0,
+              "status": "Active",
+              "upcNbr": "000055559999",
+              "vendorPackQty": 0,
+            }
+          }
+        />
+      </SFTCard>
+    </View>
+  </ScrollView>
   <TouchableOpacity
     onPress={[Function]}
     style={
@@ -3247,7 +3293,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       handleSubmit={[Function]}
       isWaiting={false}
       newOHQty={42}
-      onHandsQty={0}
+      onHandsQty={42}
       setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
@@ -3329,7 +3375,352 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         refreshing={false}
       />
     }
-  />
+  >
+    <View>
+      <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
+          }
+        }
+        category="99 - Store Use"
+        exceptionType="nsfl"
+        itemName="Small, Store Use Item"
+        itemNbr={987654321}
+        navigationForPrint={
+          Object {
+            "addListener": [MockFunction],
+            "canGoBack": [MockFunction],
+            "dispatch": [MockFunction],
+            "getId": [MockFunction],
+            "getParent": [MockFunction],
+            "getState": [MockFunction],
+            "goBack": [MockFunction],
+            "isFocused": [MockFunction],
+            "navigate": [MockFunction],
+            "removeListener": [MockFunction],
+            "reset": [MockFunction],
+            "setOptions": [MockFunction],
+            "setParams": [MockFunction],
+          }
+        }
+        price={2000.94}
+        showAdditionalItemDetails={false}
+        status="Active"
+        upcNbr="777555333"
+      />
+      <SFTCard
+        iconName="pallet"
+        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        topRightBtnAction={[Function]}
+      >
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
+              Object {
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": -11,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 0,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.FLY_CLOUD_QTY\\" translation]",
+                "value": 42,
+              },
+            ]
+          }
+        />
+      </SFTCard>
+      <SFTCard
+        iconProp={
+          <mockMaterialCommunityIcons
+            color="#616161"
+            name="label-variant"
+            size={20}
+            style={
+              Object {
+                "marginLeft": -4,
+              }
+            }
+          />
+        }
+        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 18,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <Text>
+            [missing "en.ITEM.ON_ORDER" translation]
+          </Text>
+          <Text>
+            48
+          </Text>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconName="map-marker-alt"
+        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.FLOOR" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Button
+              backgroundColor="#0071e9"
+              disabled={false}
+              height={28}
+              onPress={[Function]}
+              radius={5}
+              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+              titleColor="#0071e9"
+              titleFontSize={12}
+              titleFontWeight="bold"
+              type={3}
+              width={-1}
+            />
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        bottomRightBtnAction={
+          Array [
+            [Function],
+          ]
+        }
+        bottomRightBtnTxt={
+          Array [
+            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          ]
+        }
+        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+      >
+        <SalesMetrics
+          isGraphView={false}
+          itemDetails={
+            Object {
+              "backroomQty": 6,
+              "basePrice": 1500.3,
+              "categoryDesc": "Store Use",
+              "categoryNbr": 99,
+              "claimsOnHandQty": 5,
+              "cloudQty": 42,
+              "completed": false,
+              "consolidatedOnHandQty": 0,
+              "exceptionType": "nsfl",
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Small, Store Use Item",
+              "itemNbr": 987654321,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "qty": 20,
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 0,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 10,
+                    "week": 1,
+                  },
+                  Object {
+                    "value": 27,
+                    "week": 2,
+                  },
+                  Object {
+                    "value": 10,
+                    "week": 3,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "status": "Active",
+              "upcNbr": "777555333",
+            }
+          }
+        />
+      </SFTCard>
+    </View>
+  </ScrollView>
   <TouchableOpacity
     onPress={[Function]}
     style={
@@ -3445,7 +3836,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       handleSubmit={[Function]}
       isWaiting={false}
       newOHQty={42}
-      onHandsQty={0}
+      onHandsQty={42}
       setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
@@ -3527,7 +3918,348 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         refreshing={false}
       />
     }
-  />
+  >
+    <View>
+      <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
+          }
+        }
+        category="93 - Meat PI"
+        exceptionType="nsfl"
+        itemName="Test Item That is Really, Really Long (and has parenthesis)"
+        itemNbr={1234567890}
+        navigationForPrint={
+          Object {
+            "addListener": [MockFunction],
+            "canGoBack": [MockFunction],
+            "dispatch": [MockFunction],
+            "getId": [MockFunction],
+            "getParent": [MockFunction],
+            "getState": [MockFunction],
+            "goBack": [MockFunction],
+            "isFocused": [MockFunction],
+            "navigate": [MockFunction],
+            "removeListener": [MockFunction],
+            "reset": [MockFunction],
+            "setOptions": [MockFunction],
+            "setParams": [MockFunction],
+          }
+        }
+        price={2000.94}
+        showAdditionalItemDetails={false}
+        status="Active"
+        upcNbr="000055559999"
+      />
+      <SFTCard
+        iconName="pallet"
+        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        topRightBtnAction={[Function]}
+      >
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
+              Object {
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": 21,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 10,
+              },
+            ]
+          }
+        />
+      </SFTCard>
+      <SFTCard
+        iconProp={
+          <mockMaterialCommunityIcons
+            color="#616161"
+            name="label-variant"
+            size={20}
+            style={
+              Object {
+                "marginLeft": -4,
+              }
+            }
+          />
+        }
+        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 18,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <Text>
+            [missing "en.ITEM.ON_ORDER" translation]
+          </Text>
+          <Text>
+            48
+          </Text>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconName="map-marker-alt"
+        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.FLOOR" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Button
+              backgroundColor="#0071e9"
+              disabled={false}
+              height={28}
+              onPress={[Function]}
+              radius={5}
+              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+              titleColor="#0071e9"
+              titleFontSize={12}
+              titleFontWeight="bold"
+              type={3}
+              width={-1}
+            />
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        bottomRightBtnAction={
+          Array [
+            [Function],
+          ]
+        }
+        bottomRightBtnTxt={
+          Array [
+            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          ]
+        }
+        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+      >
+        <SalesMetrics
+          isGraphView={false}
+          itemDetails={
+            Object {
+              "backroomQty": 6,
+              "basePrice": 1500.3,
+              "categoryDesc": "Meat PI",
+              "categoryNbr": 93,
+              "claimsOnHandQty": 5,
+              "cloudQty": undefined,
+              "completed": false,
+              "consolidatedOnHandQty": 10,
+              "exceptionType": "nsfl",
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
+              "itemNbr": 1234567890,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "qty": 40,
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 0,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 10,
+                    "week": 1,
+                  },
+                  Object {
+                    "value": 27,
+                    "week": 2,
+                  },
+                  Object {
+                    "value": 10,
+                    "week": 3,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "status": "Active",
+              "upcNbr": "000055559999",
+            }
+          }
+        />
+      </SFTCard>
+    </View>
+  </ScrollView>
   <TouchableOpacity
     onPress={[Function]}
     style={
@@ -3643,7 +4375,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       handleSubmit={[Function]}
       isWaiting={false}
       newOHQty={42}
-      onHandsQty={0}
+      onHandsQty={42}
       setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
@@ -3725,7 +4457,374 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         refreshing={false}
       />
     }
-  />
+  >
+    <View>
+      <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
+          }
+        }
+        category="93 - Meat PI"
+        exceptionType="nsfl"
+        itemName="Test Item That is Really, Really Long (and has parenthesis)"
+        itemNbr={1234567890}
+        navigationForPrint={
+          Object {
+            "addListener": [MockFunction],
+            "canGoBack": [MockFunction],
+            "dispatch": [MockFunction],
+            "getId": [MockFunction],
+            "getParent": [MockFunction],
+            "getState": [MockFunction],
+            "goBack": [MockFunction],
+            "isFocused": [MockFunction],
+            "navigate": [MockFunction],
+            "removeListener": [MockFunction],
+            "reset": [MockFunction],
+            "setOptions": [MockFunction],
+            "setParams": [MockFunction],
+          }
+        }
+        price={2000.94}
+        showAdditionalItemDetails={false}
+        status="Active"
+        upcNbr="000055559999"
+      />
+      <SFTCard
+        iconName="pallet"
+        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        topRightBtnAction={[Function]}
+      >
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
+              Object {
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": 21,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 10,
+              },
+            ]
+          }
+        />
+      </SFTCard>
+      <SFTCard
+        iconProp={
+          <mockMaterialCommunityIcons
+            color="#616161"
+            name="label-variant"
+            size={20}
+            style={
+              Object {
+                "marginLeft": -4,
+              }
+            }
+          />
+        }
+        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 18,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <Text>
+            [missing "en.ITEM.ON_ORDER" translation]
+          </Text>
+          <Text>
+            48
+          </Text>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconName="map-marker-alt"
+        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.FLOOR" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Button
+              backgroundColor="#0071e9"
+              disabled={false}
+              height={28}
+              onPress={[Function]}
+              radius={5}
+              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+              titleColor="#0071e9"
+              titleFontSize={12}
+              titleFontWeight="bold"
+              type={3}
+              width={-1}
+            />
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        bottomRightBtnAction={
+          Array [
+            [Function],
+          ]
+        }
+        bottomRightBtnTxt={
+          Array [
+            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          ]
+        }
+        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+      >
+        <SalesMetrics
+          isGraphView={false}
+          itemDetails={
+            Object {
+              "backroomQty": 6,
+              "basePrice": 1500.3,
+              "categoryDesc": "Meat PI",
+              "categoryNbr": 93,
+              "claimsOnHandQty": 5,
+              "cloudQty": undefined,
+              "code": 200,
+              "color": "blue",
+              "completed": false,
+              "consolidatedOnHandQty": 10,
+              "deliveryHistory": Object {
+                "deliveries": Array [
+                  Object {
+                    "date": "2022-06-23",
+                    "qty": 23,
+                  },
+                  Object {
+                    "date": "2022-07-25",
+                    "qty": 44,
+                  },
+                  Object {
+                    "date": "2022-07-26",
+                    "qty": 23,
+                  },
+                ],
+              },
+              "exceptionType": "nsfl",
+              "grossProfit": 0,
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
+              "itemNbr": 1234567890,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "qty": 10,
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "margin": 0,
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 100,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 39,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 26,
+                    "week": 52,
+                  },
+                  Object {
+                    "value": 45,
+                    "week": 53,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 54,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 55,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "size": 0,
+              "status": "Active",
+              "upcNbr": "000055559999",
+              "vendorPackQty": 0,
+            }
+          }
+        />
+      </SFTCard>
+    </View>
+  </ScrollView>
   <TouchableOpacity
     onPress={[Function]}
     style={
@@ -3841,7 +4940,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       handleSubmit={[Function]}
       isWaiting={false}
       newOHQty={42}
-      onHandsQty={0}
+      onHandsQty={42}
       setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
@@ -3923,7 +5022,374 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         refreshing={false}
       />
     }
-  />
+  >
+    <View>
+      <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
+          }
+        }
+        category="93 - Meat PI"
+        exceptionType="nsfl"
+        itemName="Test Item That is Really, Really Long (and has parenthesis)"
+        itemNbr={1234567890}
+        navigationForPrint={
+          Object {
+            "addListener": [MockFunction],
+            "canGoBack": [MockFunction],
+            "dispatch": [MockFunction],
+            "getId": [MockFunction],
+            "getParent": [MockFunction],
+            "getState": [MockFunction],
+            "goBack": [MockFunction],
+            "isFocused": [MockFunction],
+            "navigate": [MockFunction],
+            "removeListener": [MockFunction],
+            "reset": [MockFunction],
+            "setOptions": [MockFunction],
+            "setParams": [MockFunction],
+          }
+        }
+        price={2000.94}
+        showAdditionalItemDetails={false}
+        status="Active"
+        upcNbr="000055559999"
+      />
+      <SFTCard
+        iconName="pallet"
+        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        topRightBtnAction={[Function]}
+      >
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
+              Object {
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": 21,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 10,
+              },
+            ]
+          }
+        />
+      </SFTCard>
+      <SFTCard
+        iconProp={
+          <mockMaterialCommunityIcons
+            color="#616161"
+            name="label-variant"
+            size={20}
+            style={
+              Object {
+                "marginLeft": -4,
+              }
+            }
+          />
+        }
+        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 18,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <Text>
+            [missing "en.ITEM.ON_ORDER" translation]
+          </Text>
+          <Text>
+            48
+          </Text>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconName="map-marker-alt"
+        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.FLOOR" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Button
+              backgroundColor="#0071e9"
+              disabled={false}
+              height={28}
+              onPress={[Function]}
+              radius={5}
+              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+              titleColor="#0071e9"
+              titleFontSize={12}
+              titleFontWeight="bold"
+              type={3}
+              width={-1}
+            />
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        bottomRightBtnAction={
+          Array [
+            [Function],
+          ]
+        }
+        bottomRightBtnTxt={
+          Array [
+            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          ]
+        }
+        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+      >
+        <SalesMetrics
+          isGraphView={false}
+          itemDetails={
+            Object {
+              "backroomQty": 6,
+              "basePrice": 1500.3,
+              "categoryDesc": "Meat PI",
+              "categoryNbr": 93,
+              "claimsOnHandQty": 5,
+              "cloudQty": undefined,
+              "code": 200,
+              "color": "blue",
+              "completed": false,
+              "consolidatedOnHandQty": 10,
+              "deliveryHistory": Object {
+                "deliveries": Array [
+                  Object {
+                    "date": "2022-06-23",
+                    "qty": 23,
+                  },
+                  Object {
+                    "date": "2022-07-25",
+                    "qty": 44,
+                  },
+                  Object {
+                    "date": "2022-07-26",
+                    "qty": 23,
+                  },
+                ],
+              },
+              "exceptionType": "nsfl",
+              "grossProfit": 0,
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
+              "itemNbr": 1234567890,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "qty": 10,
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "margin": 0,
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 100,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 39,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 26,
+                    "week": 52,
+                  },
+                  Object {
+                    "value": 45,
+                    "week": 53,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 54,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 55,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "size": 0,
+              "status": "Active",
+              "upcNbr": "000055559999",
+              "vendorPackQty": 0,
+            }
+          }
+        />
+      </SFTCard>
+    </View>
+  </ScrollView>
   <TouchableOpacity
     onPress={[Function]}
     style={
@@ -4039,7 +5505,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       handleSubmit={[Function]}
       isWaiting={false}
       newOHQty={42}
-      onHandsQty={0}
+      onHandsQty={42}
       setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
@@ -4121,7 +5587,374 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         refreshing={false}
       />
     }
-  />
+  >
+    <View>
+      <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
+          }
+        }
+        category="93 - Meat PI"
+        exceptionType="nsfl"
+        itemName="Test Item That is Really, Really Long (and has parenthesis)"
+        itemNbr={1234567890}
+        navigationForPrint={
+          Object {
+            "addListener": [MockFunction],
+            "canGoBack": [MockFunction],
+            "dispatch": [MockFunction],
+            "getId": [MockFunction],
+            "getParent": [MockFunction],
+            "getState": [MockFunction],
+            "goBack": [MockFunction],
+            "isFocused": [MockFunction],
+            "navigate": [MockFunction],
+            "removeListener": [MockFunction],
+            "reset": [MockFunction],
+            "setOptions": [MockFunction],
+            "setParams": [MockFunction],
+          }
+        }
+        price={2000.94}
+        showAdditionalItemDetails={false}
+        status="Active"
+        upcNbr="000055559999"
+      />
+      <SFTCard
+        iconName="pallet"
+        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        topRightBtnAction={[Function]}
+      >
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
+              Object {
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": 21,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 10,
+              },
+            ]
+          }
+        />
+      </SFTCard>
+      <SFTCard
+        iconProp={
+          <mockMaterialCommunityIcons
+            color="#616161"
+            name="label-variant"
+            size={20}
+            style={
+              Object {
+                "marginLeft": -4,
+              }
+            }
+          />
+        }
+        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 18,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <Text>
+            [missing "en.ITEM.ON_ORDER" translation]
+          </Text>
+          <Text>
+            48
+          </Text>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconName="map-marker-alt"
+        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.FLOOR" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Button
+              backgroundColor="#0071e9"
+              disabled={false}
+              height={28}
+              onPress={[Function]}
+              radius={5}
+              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+              titleColor="#0071e9"
+              titleFontSize={12}
+              titleFontWeight="bold"
+              type={3}
+              width={-1}
+            />
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        bottomRightBtnAction={
+          Array [
+            [Function],
+          ]
+        }
+        bottomRightBtnTxt={
+          Array [
+            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          ]
+        }
+        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+      >
+        <SalesMetrics
+          isGraphView={false}
+          itemDetails={
+            Object {
+              "backroomQty": 6,
+              "basePrice": 1500.3,
+              "categoryDesc": "Meat PI",
+              "categoryNbr": 93,
+              "claimsOnHandQty": 5,
+              "cloudQty": undefined,
+              "code": 200,
+              "color": "blue",
+              "completed": false,
+              "consolidatedOnHandQty": 10,
+              "deliveryHistory": Object {
+                "deliveries": Array [
+                  Object {
+                    "date": "2022-06-23",
+                    "qty": 23,
+                  },
+                  Object {
+                    "date": "2022-07-25",
+                    "qty": 44,
+                  },
+                  Object {
+                    "date": "2022-07-26",
+                    "qty": 23,
+                  },
+                ],
+              },
+              "exceptionType": "nsfl",
+              "grossProfit": 0,
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
+              "itemNbr": 1234567890,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "qty": 10,
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "margin": 0,
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 100,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 39,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 26,
+                    "week": 52,
+                  },
+                  Object {
+                    "value": 45,
+                    "week": 53,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 54,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 55,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "size": 0,
+              "status": "Active",
+              "upcNbr": "000055559999",
+              "vendorPackQty": 0,
+            }
+          }
+        />
+      </SFTCard>
+    </View>
+  </ScrollView>
   <TouchableOpacity
     onPress={[Function]}
     style={
@@ -4237,7 +6070,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       handleSubmit={[Function]}
       isWaiting={false}
       newOHQty={42}
-      onHandsQty={0}
+      onHandsQty={42}
       setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
@@ -4319,7 +6152,374 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         refreshing={false}
       />
     }
-  />
+  >
+    <View>
+      <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
+          }
+        }
+        category="93 - Meat PI"
+        exceptionType="nsfl"
+        itemName="Test Item That is Really, Really Long (and has parenthesis)"
+        itemNbr={1234567890}
+        navigationForPrint={
+          Object {
+            "addListener": [MockFunction],
+            "canGoBack": [MockFunction],
+            "dispatch": [MockFunction],
+            "getId": [MockFunction],
+            "getParent": [MockFunction],
+            "getState": [MockFunction],
+            "goBack": [MockFunction],
+            "isFocused": [MockFunction],
+            "navigate": [MockFunction],
+            "removeListener": [MockFunction],
+            "reset": [MockFunction],
+            "setOptions": [MockFunction],
+            "setParams": [MockFunction],
+          }
+        }
+        price={2000.94}
+        showAdditionalItemDetails={false}
+        status="Active"
+        upcNbr="000055559999"
+      />
+      <SFTCard
+        iconName="pallet"
+        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        topRightBtnAction={[Function]}
+      >
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
+              Object {
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": 21,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 10,
+              },
+            ]
+          }
+        />
+      </SFTCard>
+      <SFTCard
+        iconProp={
+          <mockMaterialCommunityIcons
+            color="#616161"
+            name="label-variant"
+            size={20}
+            style={
+              Object {
+                "marginLeft": -4,
+              }
+            }
+          />
+        }
+        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 18,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <Text>
+            [missing "en.ITEM.ON_ORDER" translation]
+          </Text>
+          <Text>
+            48
+          </Text>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconName="map-marker-alt"
+        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.FLOOR" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Button
+              backgroundColor="#0071e9"
+              disabled={false}
+              height={28}
+              onPress={[Function]}
+              radius={5}
+              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+              titleColor="#0071e9"
+              titleFontSize={12}
+              titleFontWeight="bold"
+              type={3}
+              width={-1}
+            />
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        bottomRightBtnAction={
+          Array [
+            [Function],
+          ]
+        }
+        bottomRightBtnTxt={
+          Array [
+            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          ]
+        }
+        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+      >
+        <SalesMetrics
+          isGraphView={false}
+          itemDetails={
+            Object {
+              "backroomQty": 6,
+              "basePrice": 1500.3,
+              "categoryDesc": "Meat PI",
+              "categoryNbr": 93,
+              "claimsOnHandQty": 5,
+              "cloudQty": undefined,
+              "code": 200,
+              "color": "blue",
+              "completed": false,
+              "consolidatedOnHandQty": 10,
+              "deliveryHistory": Object {
+                "deliveries": Array [
+                  Object {
+                    "date": "2022-06-23",
+                    "qty": 23,
+                  },
+                  Object {
+                    "date": "2022-07-25",
+                    "qty": 44,
+                  },
+                  Object {
+                    "date": "2022-07-26",
+                    "qty": 23,
+                  },
+                ],
+              },
+              "exceptionType": "nsfl",
+              "grossProfit": 0,
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
+              "itemNbr": 1234567890,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "qty": 10,
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "margin": 0,
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 100,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 39,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 26,
+                    "week": 52,
+                  },
+                  Object {
+                    "value": 45,
+                    "week": 53,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 54,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 55,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "size": 0,
+              "status": "Active",
+              "upcNbr": "000055559999",
+              "vendorPackQty": 0,
+            }
+          }
+        />
+      </SFTCard>
+    </View>
+  </ScrollView>
   <TouchableOpacity
     onPress={[Function]}
     style={
@@ -4435,7 +6635,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       handleSubmit={[Function]}
       isWaiting={false}
       newOHQty={42}
-      onHandsQty={0}
+      onHandsQty={42}
       setNewOHQty={[MockFunction]}
     />
   </CustomModalComponent>
@@ -4517,7 +6717,374 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         refreshing={false}
       />
     }
-  />
+  >
+    <View>
+      <ItemInfo
+        additionalItemDetails={
+          Object {
+            "basePrice": 15.05,
+            "color": "red",
+            "grossProfit": 2.5,
+            "margin": 14,
+            "size": 88,
+            "vendorPackQty": 33,
+          }
+        }
+        category="93 - Meat PI"
+        exceptionType="nsfl"
+        itemName="Test Item That is Really, Really Long (and has parenthesis)"
+        itemNbr={1234567890}
+        navigationForPrint={
+          Object {
+            "addListener": [MockFunction],
+            "canGoBack": [MockFunction],
+            "dispatch": [MockFunction],
+            "getId": [MockFunction],
+            "getParent": [MockFunction],
+            "getState": [MockFunction],
+            "goBack": [MockFunction],
+            "isFocused": [MockFunction],
+            "navigate": [MockFunction],
+            "removeListener": [MockFunction],
+            "reset": [MockFunction],
+            "setOptions": [MockFunction],
+            "setParams": [MockFunction],
+          }
+        }
+        price={2000.94}
+        showAdditionalItemDetails={false}
+        status="Active"
+        upcNbr="000055559999"
+      />
+      <SFTCard
+        iconName="pallet"
+        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        topRightBtnAction={[Function]}
+      >
+        <ItemDetailsList
+          indentAfterFirstRow={true}
+          rows={
+            Array [
+              Object {
+                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+                "value": 42,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+                "value": 21,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+                "value": 6,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+                "value": 5,
+              },
+              Object {
+                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+                "value": 10,
+              },
+            ]
+          }
+        />
+      </SFTCard>
+      <SFTCard
+        iconProp={
+          <mockMaterialCommunityIcons
+            color="#616161"
+            name="label-variant"
+            size={20}
+            style={
+              Object {
+                "marginLeft": -4,
+              }
+            }
+          />
+        }
+        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingHorizontal": 18,
+              "paddingVertical": 16,
+            }
+          }
+        >
+          <Text>
+            [missing "en.ITEM.ON_ORDER" translation]
+          </Text>
+          <Text>
+            48
+          </Text>
+        </View>
+      </SFTCard>
+      <SFTCard
+        iconName="map-marker-alt"
+        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+      >
+        <View
+          style={
+            Object {
+              "paddingHorizontal": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.FLOOR" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f5f5f5",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Button
+              backgroundColor="#0071e9"
+              disabled={false}
+              height={28}
+              onPress={[Function]}
+              radius={5}
+              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+              titleColor="#0071e9"
+              titleFontSize={12}
+              titleFontWeight="bold"
+              type={3}
+              width={-1}
+            />
+          </View>
+        </View>
+      </SFTCard>
+      <SFTCard
+        bottomRightBtnAction={
+          Array [
+            [Function],
+          ]
+        }
+        bottomRightBtnTxt={
+          Array [
+            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          ]
+        }
+        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+      >
+        <SalesMetrics
+          isGraphView={false}
+          itemDetails={
+            Object {
+              "backroomQty": 6,
+              "basePrice": 1500.3,
+              "categoryDesc": "Meat PI",
+              "categoryNbr": 93,
+              "claimsOnHandQty": 5,
+              "cloudQty": undefined,
+              "code": 200,
+              "color": "blue",
+              "completed": false,
+              "consolidatedOnHandQty": 10,
+              "deliveryHistory": Object {
+                "deliveries": Array [
+                  Object {
+                    "date": "2022-06-23",
+                    "qty": 23,
+                  },
+                  Object {
+                    "date": "2022-07-25",
+                    "qty": 44,
+                  },
+                  Object {
+                    "date": "2022-07-26",
+                    "qty": 23,
+                  },
+                ],
+              },
+              "exceptionType": "nsfl",
+              "grossProfit": 0,
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
+              "itemNbr": 1234567890,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "qty": 10,
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "margin": 0,
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 100,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 39,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 26,
+                    "week": 52,
+                  },
+                  Object {
+                    "value": 45,
+                    "week": 53,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 54,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 55,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "size": 0,
+              "status": "Active",
+              "upcNbr": "000055559999",
+              "vendorPackQty": 0,
+            }
+          }
+        />
+      </SFTCard>
+    </View>
+  </ScrollView>
   <TouchableOpacity
     onPress={[Function]}
     style={
