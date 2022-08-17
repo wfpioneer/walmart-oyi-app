@@ -889,6 +889,6 @@ export const mockAdditionalItemDetails = {
   size: 88,
   grossProfit: 2.5,
   vendorPackQty: 33,
-  basePrice: 16.50,
+  basePrice: 15.05,
   margin: 14
 };

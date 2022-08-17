@@ -2519,7 +2519,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <ItemInfo
         additionalItemDetails={
           Object {
-            "basePrice": 16.5,
+            "basePrice": 15.05,
             "color": "red",
             "grossProfit": 2.5,
             "margin": 14,
