@@ -13,7 +13,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { object } from 'prop-types';
 import { strings } from '../../locales';
 import
-itemDetail, { mockOHChangeHistory, mockReserveLocations, pickListMockHistory }
+itemDetail, { mockAdditionalItemDetails, mockOHChangeHistory, mockReserveLocations, pickListMockHistory }
   from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
@@ -191,7 +191,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {...itemDetail[123], ...mockAdditionalItemDetails},
           status: 200
         },
         exceptionType: 'NSFL',
@@ -212,7 +212,7 @@ describe('ReviewItemDetailsScreen', () => {
         result: {
           ...defaultResult,
           data: {
-            itemDetails: itemDetail[123],
+            itemDetails: {...itemDetail[123], ...mockAdditionalItemDetails},
             itemOhChangeHistory: { code: 204 },
             picklistHistory: { code: 204 }
           },
@@ -236,7 +236,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {...itemDetail[123], ...mockAdditionalItemDetails},
           status: 200
         },
         exceptionType: 'NSFL',
@@ -257,7 +257,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {...itemDetail[123], ...mockAdditionalItemDetails},
           status: 200
         },
         exceptionType: 'NSFL',
@@ -278,7 +278,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {...itemDetail[123], ...mockAdditionalItemDetails},
           status: 200
         },
         exceptionType: 'NSFL',
@@ -299,7 +299,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {...itemDetail[123], ...mockAdditionalItemDetails},
           status: 200
         },
         exceptionType: 'NSFL',
@@ -319,7 +319,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[456],
+          data: {...itemDetail[456], ...mockAdditionalItemDetails},
           status: 200
         },
         exceptionType: 'NSFL',
@@ -340,7 +340,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[123],
+          data: {...itemDetail[123], ...mockAdditionalItemDetails},
           status: 200
         },
         exceptionType: 'NSFL',
@@ -405,7 +405,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: itemDetail[321],
+          data: {...itemDetail[321], ...mockAdditionalItemDetails},
           status: 207
         },
         exceptionType: 'NSFL',
@@ -1244,49 +1244,89 @@ describe('ReviewItemDetailsScreen', () => {
     });
   });
   describe('Tests Rendering \'renderOHChangeHistory\'', () => {
+    const mockApiResponse = {
+      ...defaultResult,
+      data: {
+        itemDetails: {
+          code: 200
+        },
+        itemOhChangeHistory: {
+          code: 200
+        },
+        picklistHistory: {
+          code: 200
+        }
+      }
+    };
     it('Renders OH history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, mockOHChangeHistory, defaultResult)
+        renderOHChangeHistory(mockHandleProps, mockOHChangeHistory, mockApiResponse)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders OH history with no data for pick msg', () => {
+      mockApiResponse.data.itemOhChangeHistory.code = 204;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, [], defaultResult)
+        renderOHChangeHistory(mockHandleProps, [], mockApiResponse)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+      mockApiResponse.data.itemOhChangeHistory.code = 200;
     });
     it('Renders OH history with error msg for result status 207', () => {
+      mockApiResponse.status = 207;
+      mockApiResponse.data.itemOhChangeHistory.code = 409;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, [], { ...defaultResult, status: 207 })
+        renderOHChangeHistory(mockHandleProps, [], mockApiResponse)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+      mockApiResponse.status = 200;
+      mockApiResponse.data.itemOhChangeHistory.code = 200;
     });
   });
   describe('Tests Rendering \'renderPickHistory\'', () => {
+    const mockApiResponse = {
+      ...defaultResult,
+      data: {
+        itemDetails: {
+          code: 200
+        },
+        itemOhChangeHistory: {
+          code: 200
+        },
+        picklistHistory: {
+          code: 200
+        }
+      }
+    };
     it('Renders pick history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, pickListMockHistory, defaultResult)
+        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders pick history with no data for pick msg', () => {
+      mockApiResponse.data.picklistHistory.code = 204;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, [], defaultResult)
+        renderPickHistory(mockHandleProps, [], mockApiResponse)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+      mockApiResponse.data.picklistHistory.code = 200;
     });
     it('Renders pick history with error msg for result status 207', () => {
+      mockApiResponse.status = 207;
+      mockApiResponse.data.picklistHistory.code = 409;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, pickListMockHistory, { ...defaultResult, status: 207 })
+        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+      mockApiResponse.status = 200;
+      mockApiResponse.data.picklistHistory.code = 200;
     });
   });
   describe('Tests Rendering \'renderReserveLocQtys\'', () => {
