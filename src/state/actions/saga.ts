@@ -204,11 +204,12 @@ export const getPalletConfig = () => ({
   type: GET_PALLET_CONFIG
 } as const);
 export const updatePicklistStatus = (payload: {
-  headers: { action: PickAction };
+  headers: { action: PickAction};
   picklistItems: {
     picklistId: number;
     locationId: number;
     locationName: string;
+    itemQty?: number;
   }[];
   palletId: string;
 }) => ({

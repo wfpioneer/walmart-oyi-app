@@ -454,7 +454,8 @@ export default {
     PICK_COMPLETED_AND_PICKLIST_UPDATED: 'El pickeo se ha completado y la lista se ha actualizado',
     PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los pickeos se han completado y la lista se ha actualizado',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No hay pallet de reserva disponibles',
-    ADDITIONAL_ITEMS: 'El pallet contiene artículos adicionales'
+    ADDITIONAL_ITEMS: 'El pallet contiene artículos adicionales',
+    QUANTITY_STOCKED: 'Cantidad abastecida'
   },
   BINNING: {
     BINNING: 'Bodega',
