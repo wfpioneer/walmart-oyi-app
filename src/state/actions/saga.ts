@@ -24,6 +24,7 @@ import { GetItemDetailsPayload } from '../../services/GetItemDetails.service';
 import User from '../../models/User';
 import { PickAction } from '../../models/Picking.d';
 import { CreatePickRequest } from '../../services/Picking.service';
+import { CreatePallet } from '../../models/PalletManagementTypes';
 
 // TODO Remove this Action once the BE has been pushed to Production
 export const GET_ITEM_DETAILS_V2 = 'SAGA/GET_ITEM_DETAILS_V2';
@@ -74,6 +75,7 @@ export const UPDATE_PICKLIST_STATUS = 'SAGA/UPDATE_PICKLIST_STATUS';
 export const GET_PICKLISTS = 'SAGA/GET_PICKLISTS';
 export const UPDATE_PALLET_NOT_FOUND = 'SAGA/UPDATE_PALLET_NOT_FOUND';
 export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
+export const POST_CREATE_PALLET = 'SAGA/POST_CREATE_PALLET';
 
 // TODO Remove this dispatch call once the BE has been pushed to Production
 export const getItemDetailsV2 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V2, payload } as const);
@@ -204,11 +206,12 @@ export const getPalletConfig = () => ({
   type: GET_PALLET_CONFIG
 } as const);
 export const updatePicklistStatus = (payload: {
-  headers: { action: PickAction };
+  headers: { action: PickAction};
   picklistItems: {
     picklistId: number;
     locationId: number;
     locationName: string;
+    itemQty?: number;
   }[];
   palletId: string;
 }) => ({
@@ -229,3 +232,4 @@ export const createNewPick = (payload: CreatePickRequest) => ({
   type: CREATE_NEW_PICK,
   payload
 } as const);
+export const postCreatePallet = (payload: CreatePallet) => ({ type: POST_CREATE_PALLET, payload } as const);

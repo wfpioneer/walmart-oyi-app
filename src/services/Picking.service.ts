@@ -27,13 +27,14 @@ export default class PickingService {
       picklistId: number;
       locationId: number;
       locationName: string;
+      itemQty?: number
     }[];
     palletId: string;
   }) {
     const urls: Environment = getEnvironment();
     const { palletId, picklistItems, headers } = payload;
     return Request.patch(
-      `${urls.locationUrl}/picklist/${palletId}/update`,
+      `${urls.locationUrl}/picklist/v1/${palletId}/update`,
       { picklistItems },
       { headers }
     );

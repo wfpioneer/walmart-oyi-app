@@ -217,7 +217,9 @@ export default {
     CLEAR_PALLET_ERROR: '清除卡板信息发生错误导致失败',
     CLEAR_PALLET_SUCCESS: '卡板%{palletId}清理失败',
     UNSAVED_WARNING_MSG: '未保存的卡板补货信息将丢失',
-    CREATE_PALLET: '创建卡板'
+    CREATE_PALLET: '创建卡板',
+    CREATE_PALLET_SUCCESS: '卡板创建成功',
+    CREATE_PALLET_FAILED: '卡板创建失败'
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -454,7 +456,8 @@ export default {
     PICK_COMPLETED_AND_PICKLIST_UPDATED: '已完成一个补货，补货清单已更新',
     PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: '已完成多个补货，补货清单已更新',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: '高货架无卡板可取',
-    ADDITIONAL_ITEMS: '卡板有其它商品'
+    ADDITIONAL_ITEMS: '卡板有其它商品',
+    QUANTITY_STOCKED: '楼面陈列数量'
   },
   BINNING: {
     BINNING: '上架',
