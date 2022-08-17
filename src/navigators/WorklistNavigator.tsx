@@ -105,7 +105,7 @@ export const WorklistNavigator = (): JSX.Element => {
           component={WorklistTabs}
           options={() => ({
             headerRight: () => renderHeaderRight(dispatch, menuOpen),
-            headerTitle: strings('WORKLIST.WORKLIST'),
+            headerTitle: strings('WORKLIST.ITEM_WORKLIST'),
             headerLeft: props => props.canGoBack && (
             <HeaderBackButton
                   // eslint-disable-next-line react/jsx-props-no-spreading
