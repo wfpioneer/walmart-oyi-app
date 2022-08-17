@@ -34,8 +34,8 @@ export interface PalletItemDetails extends PalletInfo {
 }
 
 export interface CreatePalletItem {
-  quantity: number,
-  upc: string
+  upcNbr: string,
+  qty: number
 }
 
 export interface CreatePallet {

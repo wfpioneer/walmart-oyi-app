@@ -613,7 +613,8 @@ export const renderLocationComponent = (
   setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => {
   const { floorLocations, reserveLocations, userConfigs } = props;
-  const { additionalItemDetails } = userConfigs;
+  // const { additionalItemDetails } = userConfigs;
+  const additionalItemDetails = true;
   return (
     <View style={styles.locationContainer}>
       <View style={styles.locationDetailsContainer}>
@@ -992,7 +993,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     floorLocations, userFeatures, userConfigs
   } = props;
 
-  const { additionalItemDetails } = userConfigs;
+  // const { additionalItemDetails } = userConfigs;
+  const additionalItemDetails = true;
   useEffectHook(() => () => {
     dispatch(resetLocations());
   }, []);

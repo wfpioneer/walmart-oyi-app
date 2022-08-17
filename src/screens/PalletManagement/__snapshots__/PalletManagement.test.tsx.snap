@@ -62,6 +62,37 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
         [missing "en.PALLET.SCAN_PALLET" translation]
       </Text>
     </View>
+    <React.Fragment>
+      <View
+        style={
+          Object {
+            "paddingVertical": 20,
+          }
+        }
+      >
+        <Text>
+          [missing "en.GENERICS.OR" translation]
+        </Text>
+      </View>
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="[missing \\"en.PALLET.CREATE_PALLET\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </React.Fragment>
   </View>
 </View>
 `;

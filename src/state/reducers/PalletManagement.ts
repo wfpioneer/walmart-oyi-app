@@ -178,8 +178,9 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
     }
     case SET_CREATE_PALLET: {
       const { perishableCategories } = state;
+      const palletState = action.payload ? initialState : state;
       return {
-        ...initialState,
+        ...palletState,
         perishableCategories,
         createPallet: action.payload
       };

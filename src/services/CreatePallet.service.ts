@@ -7,7 +7,7 @@ export default class CreatePalletService {
   public static createPallet(payload: CreatePallet): Promise<AxiosResponse<Array<CreatePalletResponse>>> {
     const urls: Environment = getEnvironment();
     return Request.post(
-      `${urls.locationUrl}/v1/pallet/v2/pallet`,
+      `${urls.locationUrl}/v2/pallet`,
       payload
     );
   }
