@@ -25,6 +25,7 @@ const SALES_LAST_UPDATE_TS = '2020-07-15T08:02:17-05:00';
 
 export default {
   '123': {
+    code: 200,
     itemName: 'Test Item That is Really, Really Long (and has parenthesis)',
     itemNbr: 1234567890,
     upcNbr: '000055559999',
@@ -166,20 +167,27 @@ export default {
         }
       ]
     },
-    deliveries: [
-      {
-        date: '2022-06-23',
-        qty: 23
-      },
-      {
-        date: '2022-07-25',
-        qty: 44
-      },
-      {
-        date: '2022-07-26',
-        qty: 23
-      }
-    ]
+    deliveryHistory: {
+      deliveries: [
+        {
+          date: '2022-06-23',
+          qty: 23
+        },
+        {
+          date: '2022-07-25',
+          qty: 44
+        },
+        {
+          date: '2022-07-26',
+          qty: 23
+        }
+      ]
+    },
+    color: 'blue',
+    grossProfit: 0,
+    margin: 0,
+    size: 0,
+    vendorPackQty: 0
   } as ItemDetails,
   '456': {
     itemName: 'Small, Store Use Item',

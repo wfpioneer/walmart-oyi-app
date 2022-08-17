@@ -26,6 +26,9 @@ import { PickAction } from '../../models/Picking.d';
 import { CreatePickRequest } from '../../services/Picking.service';
 import { CreatePallet } from '../../models/PalletManagementTypes';
 
+// TODO Remove this Action once the BE has been pushed to Production
+export const GET_ITEM_DETAILS_V2 = 'SAGA/GET_ITEM_DETAILS_V2';
+
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
 export const GET_WORKLIST = 'SAGA/GET_WORKLIST';
@@ -74,7 +77,9 @@ export const UPDATE_PALLET_NOT_FOUND = 'SAGA/UPDATE_PALLET_NOT_FOUND';
 export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
 export const POST_CREATE_PALLET = 'SAGA/POST_CREATE_PALLET';
 
-// TODO add types for each service payload
+// TODO Remove this dispatch call once the BE has been pushed to Production
+export const getItemDetailsV2 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V2, payload } as const);
+
 export const hitGoogle = () => ({ type: HIT_GOOGLE } as const);
 export const getItemDetails = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS, payload } as const);
 export const getWorklist = (payload?: { worklistType?: [string] }) => ({ type: GET_WORKLIST, payload } as const);

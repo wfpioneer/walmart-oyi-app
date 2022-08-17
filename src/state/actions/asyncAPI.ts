@@ -1,5 +1,9 @@
 import { makeAsyncActionCreators, makeAsyncActionTypes } from './generic/makeAsyncActions';
 
+// TODO Remove these actions when the BE orchestration changes are pushed to Production
+export const GET_ITEM_DETAILS_V2 = makeAsyncActionTypes('API/GET_ITEM_DETAILS_V2');
+export const getItemDetailsV2 = makeAsyncActionCreators(GET_ITEM_DETAILS_V2);
+
 export const HIT_GOOGLE = makeAsyncActionTypes('API/HIT_GOOGLE');
 export const hitGoogle = makeAsyncActionCreators(HIT_GOOGLE);
 

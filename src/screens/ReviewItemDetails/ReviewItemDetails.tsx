@@ -17,12 +17,14 @@ import { Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  addToPicklist, createNewPick, getItemDetails, noAction, updateOHQty
+  addToPicklist, createNewPick, getItemDetails, getItemDetailsV2, noAction, updateOHQty
 } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
-import ItemDetails, { ItemHistoryI, OHChangeHistory, PickHistory } from '../../models/ItemDetails';
+import ItemDetails, {
+  ItemHistoryI, OHChangeHistory, PickHistory
+} from '../../models/ItemDetails';
 import { CollapsibleCard } from '../../components/CollapsibleCard/CollapsibleCard';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
@@ -96,7 +98,7 @@ export interface ItemDetailsScreenProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
   userFeatures: string[];
-  userConfigs: Configurations
+  userConfigs: Configurations;
 }
 
 export interface HandleProps {
@@ -417,9 +419,9 @@ export const renderPickHistory = (
 export const renderReplenishmentHistory = (
   itemDetails: ItemDetails
 ) => {
-  const { deliveries } = itemDetails;
-  if (deliveries && deliveries.length) {
-    const data = deliveries.sort((a, b) => {
+  const { deliveryHistory } = itemDetails;
+  if (deliveryHistory?.deliveries && deliveryHistory.deliveries.length) {
+    const data = [...deliveryHistory.deliveries].sort((a, b) => {
       const date1 = new Date(a.date);
       const date2 = new Date(b.date);
       return date2 > date1 ? 1 : -1;
@@ -659,8 +661,22 @@ export const renderLocationComponent = (
 };
 
 export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
-  result: any, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
-  if (result && result.status !== MULTI_STATUS) {
+  result: AxiosResponse | null, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
+  // Checks orchestration response status for itemDetails only.
+
+  if ((itemDetails.code !== undefined && itemDetails.code !== MULTI_STATUS) || itemDetails.sales.error === undefined) {
+    return (
+      <SFTCard
+        title={strings('ITEM.SALES_METRICS')}
+        subTitle={updatedSalesTS}
+        bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
+        bottomRightBtnAction={[toggleSalesGraphView]}
+      >
+        <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
+      </SFTCard>
+    );
+  }
+  if ((result && result.status !== MULTI_STATUS) || itemDetails.sales.error === undefined) {
     return (
       <SFTCard
         title={strings('ITEM.SALES_METRICS')}
@@ -866,14 +882,19 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
   const {
     scannedEvent, userId, route,
     dispatch, navigation, trackEventCall,
-    validateSessionCall
+    validateSessionCall, userConfigs
   } = props;
 
   if (navigation.isFocused()) {
     validateSessionCall(navigation, route.name).then(() => {
       if (scannedEvent.value) {
         dispatch({ type: GET_ITEM_DETAILS.RESET });
-        dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
+        // TODO revert V2 changes once BE orchestration is pushed to production
+        if (userConfigs.additionalItemDetails) {
+          dispatch(getItemDetailsV2({ id: parseInt(scannedEvent.value, 10) }));
+        } else {
+          dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
+        }
         dispatch({ type: ADD_TO_PICKLIST.RESET });
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
@@ -927,9 +948,11 @@ export const isError = (
   isManualScanEnabled: boolean,
   scannedEvent: { value: string | null; type: string | null; },
   dispatch: Dispatch<any>,
-  trackEventCall: (eventName: string, params?: any) => void
+  trackEventCall: (eventName: string, params?: any) => void,
+  additionalItemDetails: boolean,
+  message?: string
 ) => {
-  if (error) {
+  if (error || message) {
     const scannedValue = scannedEvent.value || '';
     return (
       <View style={styles.safeAreaView}>
@@ -943,7 +966,8 @@ export const isError = (
             style={styles.errorButton}
             onPress={() => {
               trackEventCall('item_details_api_retry', { barcode: scannedValue });
-              return dispatch(getItemDetails({ id: parseInt(scannedValue, 10) }));
+              return additionalItemDetails ? dispatch(getItemDetailsV2({ id: parseInt(scannedValue, 10) }))
+                : dispatch(getItemDetails({ id: parseInt(scannedValue, 10) }));
             }}
           >
             <Text>{strings('GENERICS.RETRY')}</Text>
@@ -1010,7 +1034,20 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     onValidateScannedEvent(props);
   }, [scannedEvent]);
 
-  const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
+  const itemDetails: ItemDetails = additionalItemDetails
+    ? (result && result.data.itemDetails)
+    : (result && result.data); // || getMockItemDetails(scannedEvent.value);
+
+  // const {
+  //   itemDetails,
+  //   itemOhChangeHistory,
+  //   picklistHistory
+  // }: {
+  //   itemDetails: ItemDetails;
+  //   itemOhChangeHistory: ItemOHChangeHistory;
+  //   picklistHistory: PicklistHistory;
+  // } = (result && result.data) || {};
+
   const locationCount = getLocationCount(props);
   const updatedSalesTS = getUpdatedSales(itemDetails);
 
@@ -1079,7 +1116,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   ), [updateOHQtyApi]);
 
   // Get Item Details Error
-  if (!isWaiting && error) {
+  if (!isWaiting && (error || (itemDetails && itemDetails.message))) {
+    const message = (itemDetails && itemDetails.message) ? itemDetails.message : undefined;
     return isError(
       error,
       errorModalVisible,
@@ -1087,11 +1125,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       isManualScanEnabled,
       scannedEvent,
       dispatch,
-      trackEventCall
+      trackEventCall,
+      additionalItemDetails,
+      message // Checks for an error message from ItemDetails orchestration
     );
   }
 
-  if (_.get(result, 'status') === 204) {
+  if (_.get(result, 'status') === 204 || _.get(itemDetails, 'code') === 204) {
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
@@ -1126,7 +1166,11 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
       dispatch({ type: GET_ITEM_DETAILS.RESET });
-      dispatch(getItemDetails({ id: itemDetails.itemNbr }));
+      if (additionalItemDetails) {
+        dispatch(getItemDetailsV2({ id: itemDetails.itemNbr }));
+      } else {
+        dispatch(getItemDetails({ id: itemDetails.itemNbr }));
+      }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 
@@ -1261,7 +1305,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 })}
               </View>
               <View style={styles.historyContainer}>
-                {renderReplenishmentCard(itemDetail[123])}
+                {renderReplenishmentCard(itemDetails)}
               </View>
             </>
             )}
@@ -1282,6 +1326,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const createNewPickApi = useTypedSelector(state => state.async.createNewPick);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
+  const getItemDetailsV2Api = useTypedSelector(state => state.async.getItemDetailsV2);
   const { userId } = useTypedSelector(state => state.User);
   const {
     exceptionType,
@@ -1304,13 +1349,14 @@ const ReviewItemDetails = (): JSX.Element => {
   const [numberOfPallets, setNumberOfPallets] = useState(1);
   const [isQuickPick, setIsQuickPick] = useState(false);
   const [newOHQty, setNewOHQty] = useState(0);
+
   return (
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
       isManualScanEnabled={isManualScanEnabled}
-      isWaiting={isWaiting}
-      error={error}
-      result={result}
+      isWaiting={userConfigs.additionalItemDetails ? getItemDetailsV2Api.isWaiting : isWaiting}
+      error={userConfigs.additionalItemDetails ? getItemDetailsV2Api.error : error}
+      result={userConfigs.additionalItemDetails ? getItemDetailsV2Api.result : result}
       addToPicklistStatus={addToPicklistStatus}
       completeItemApi={completeItemApi}
       createNewPickApi={createNewPickApi}

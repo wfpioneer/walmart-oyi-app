@@ -30,6 +30,8 @@ import DeletePalletUPCsService from '../../services/DeletePalletUPCs.service';
 import PickingService from '../../services/Picking.service';
 
 const genericSagas = [
+  // TODO remove this saga once the BE orchestration changes are pushed to Production
+  makeAsyncSaga(saga.GET_ITEM_DETAILS_V2, actions.getItemDetailsV2, GetItemDetailsService.getItemDetailsV2),
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
   makeAsyncSaga(saga.GET_ITEM_DETAILS, actions.getItemDetails, GetItemDetailsService.getItemDetails),
   makeAsyncSaga(saga.GET_WORKLIST, actions.getWorklist, GetWorklistService.getWorklist),
