@@ -141,7 +141,7 @@ export const getItemDetailsV2ApiHook = (
     }
     // on api error
     if (!getItemDetailsV2Api.isWaiting && (getItemDetailsV2Api.error
-      || (getItemDetailsV2Api.result
+      || (getItemDetailsV2Api.result && getItemDetailsV2Api.result.status !== 204
         && getItemDetailsV2Api.result.data.itemDetails.message))) {
       dispatch(hideActivityModal());
       dispatch({ type: GET_ITEM_DETAILS.RESET });
