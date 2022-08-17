@@ -147,10 +147,36 @@ exports[`Sales floor item card render tests renders the item card 1`] = `
       maxValue={999}
       minValue={0}
       onDecreaseQty={[MockFunction]}
-      onEndEditing={[Function]}
+      onEndEditing={[MockFunction]}
       onIncreaseQty={[MockFunction]}
       onTextChange={[Function]}
       value={4}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "padding": 7,
+        "paddingBottom": 0,
+        "width": "100%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.PICKING.QUANTITY_STOCKED" translation]
+    </Text>
+    <NumericSelector
+      isValid={true}
+      maxValue={999}
+      minValue={0}
+      onDecreaseQty={[MockFunction]}
+      onEndEditing={[MockFunction]}
+      onIncreaseQty={[MockFunction]}
+      onTextChange={[Function]}
+      value={0}
     />
   </View>
 </View>
@@ -303,10 +329,36 @@ exports[`Sales floor item card render tests renders the item with an invalid qua
       maxValue={999}
       minValue={0}
       onDecreaseQty={[MockFunction]}
-      onEndEditing={[Function]}
+      onEndEditing={[MockFunction]}
       onIncreaseQty={[MockFunction]}
       onTextChange={[Function]}
       value={0}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "padding": 7,
+        "paddingBottom": 0,
+        "width": "100%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.PICKING.QUANTITY_STOCKED" translation]
+    </Text>
+    <NumericSelector
+      isValid={true}
+      maxValue={999}
+      minValue={0}
+      onDecreaseQty={[MockFunction]}
+      onEndEditing={[MockFunction]}
+      onIncreaseQty={[MockFunction]}
+      onTextChange={[Function]}
+      value={5}
     />
   </View>
 </View>

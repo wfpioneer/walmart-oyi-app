@@ -39,6 +39,7 @@ export interface PickListItem {
   createTs: string;
   quantityLeft?: number;
   newQuantityLeft?: number;
+  itemQty?: number;
 }
 
 export interface PickCreateItem {

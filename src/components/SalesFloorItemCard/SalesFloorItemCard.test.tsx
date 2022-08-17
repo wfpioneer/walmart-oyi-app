@@ -17,9 +17,15 @@ describe('Sales floor item card render tests', () => {
         itemDesc="Paganini"
         itemNbr={1234}
         onQtyTextChange={jest.fn()}
+        onEndEditing={jest.fn()}
         quantity={4}
         salesFloorLocation="ABAR1-1"
         upcNbr="1234567890"
+        decrementStockQty={jest.fn()}
+        incrementStockQty={jest.fn()}
+        onStockEndEditing={jest.fn()}
+        onStockQtyTextChange={jest.fn()}
+        stockedQty={0}
       />
     );
 
@@ -40,9 +46,15 @@ describe('Sales floor item card render tests', () => {
         itemDesc="Paganini"
         itemNbr={1234}
         onQtyTextChange={jest.fn()}
+        onEndEditing={jest.fn()}
         quantity={0}
         salesFloorLocation="ABAR1-1"
         upcNbr="1234567890"
+        decrementStockQty={jest.fn()}
+        incrementStockQty={jest.fn()}
+        onStockEndEditing={jest.fn()}
+        onStockQtyTextChange={jest.fn()}
+        stockedQty={5}
       />
     );
 
