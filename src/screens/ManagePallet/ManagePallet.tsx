@@ -55,7 +55,7 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, POST_CREATE_PALLET, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS_V2, POST_CREATE_PALLET, UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
@@ -658,6 +658,7 @@ export const postCreatePalletApiHook = (
     // Success
       if (postCreatePalletApi.result) {
         const createPalletResponse = postCreatePalletApi.result.data as Array<CreatePalletResponse>;
+        const palletId = createPalletResponse.length > 0 ? createPalletResponse[0].palletId : 0;
         switch (postCreatePalletApi.result.status) {
           case 200:
             dispatch(hideActivityModal());
@@ -668,7 +669,7 @@ export const postCreatePalletApiHook = (
             });
             dispatch({ type: POST_CREATE_PALLET.RESET });
             dispatch(setCreatePalletState(false));
-            setupNewPalletInfo(dispatch, createPalletResponse[0].palletId, items, expirationDate);
+            setupNewPalletInfo(dispatch, palletId, items, expirationDate);
             printPalletLabel(navigation, dispatch);
             break;
           default:
@@ -711,6 +712,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       if (!confirmBackNavigate && enableSave(items, palletInfo)) {
         setDisplayWarningModal(true);
         e.preventDefault();
+      } else {
+        dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
       }
     });
     return navigationListener;
@@ -872,7 +875,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const backConfirmed = () => {
     setDisplayWarningModal(false);
     setConfirmBackNavigate(true);
-    dispatch({ type: GET_ITEM_DETAILS.RESET });
+    dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
   };
 
   const renderWarningModal = () => (

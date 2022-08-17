@@ -27,7 +27,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { setCreatePalletState, setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
-import { GET_ITEM_DETAILS, GET_PALLET_CONFIG, GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
+import { GET_PALLET_CONFIG, GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
 import { Configurations } from '../../models/User';
 import ManualScan from '../../components/manualscan/ManualScan';
@@ -221,7 +221,7 @@ export const PalletManagementScreen = (
         <View style={styles.scanText}>
           <Text>{strings('PALLET.SCAN_PALLET')}</Text>
         </View>
-        {!userConfig.createPallet && (
+        {userConfig.createPallet && (
         <>
           <View style={styles.orText}>
             <Text>{strings('GENERICS.OR')}</Text>
@@ -232,7 +232,6 @@ export const PalletManagementScreen = (
             style={styles.btnCreate}
             onPress={() => {
               dispatch(setCreatePalletState(true));
-              dispatch({ type: GET_ITEM_DETAILS.RESET });
               navigation.navigate('ManagePallet');
             }}
           />
