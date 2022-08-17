@@ -55,7 +55,7 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS_V2, POST_CREATE_PALLET, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, POST_CREATE_PALLET, UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
@@ -710,7 +710,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         setDisplayWarningModal(true);
         e.preventDefault();
       } else {
-        dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
+        dispatch({ type: GET_ITEM_DETAILS.RESET });
       }
     });
     return navigationListener;
@@ -863,7 +863,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const backConfirmed = () => {
     setDisplayWarningModal(false);
     setConfirmBackNavigate(true);
-    dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
+    dispatch({ type: GET_ITEM_DETAILS.RESET });
   };
 
   const renderWarningModal = () => (
