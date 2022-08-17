@@ -144,8 +144,6 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -181,8 +179,6 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -219,8 +215,6 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -228,7 +222,9 @@ describe('ManagePalletScreen', () => {
 
     it('Renders the DatePicker Dialog when the isPickerShow is true ', () => {
       const mockDate = new Date(1647369000000);
-      jest.spyOn(global, 'Date').mockImplementation(() => (mockDate as unknown) as string);
+      jest
+        .spyOn(global, 'Date')
+        .mockImplementation(() => mockDate as unknown as string);
       Date.now = () => 1647369000000;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -259,8 +255,6 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -296,8 +290,6 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -337,8 +329,6 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -386,8 +376,6 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
-          getItemDetailsV2Api={defaultAsyncState}
-          userConfigs={mockUser.configs}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -671,9 +659,7 @@ describe('ManagePalletScreen', () => {
       const onCreatePalletSuccessApi: AsyncState = {
         ...defaultAsyncState,
         result: {
-          data: [
-            { palletId: 1 }
-          ],
+          data: [{ palletId: 1 }],
           status: 200
         }
       };
@@ -899,12 +885,17 @@ describe('ManagePalletScreen', () => {
         added: true
       }
     ];
-    const isAddedTrue = isAddedItemPerishable(mockAddedItems, mockPerishableCatg);
+    const isAddedTrue = isAddedItemPerishable(
+      mockAddedItems,
+      mockPerishableCatg
+    );
     expect(isAddedTrue).toBe(true);
   });
   it('Tests removeExpirationDate function', () => {
     const mockPerishableCategories = [1, 10, 11];
-    expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(false);
+    expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(
+      false
+    );
     const newItems: PalletItem[] = [
       {
         itemNbr: 1234,
