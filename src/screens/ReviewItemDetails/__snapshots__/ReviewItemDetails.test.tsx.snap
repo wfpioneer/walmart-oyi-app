@@ -414,23 +414,121 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
 
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders replenishment card with delivery history 1`] = `
 <View>
-  <CollapsibleHeaderCard
-    icon="label-variant"
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "padding": 10,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.REPLENISHMENT" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 1,
+        "paddingHorizontal": 10,
+        "paddingVertical": 8,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.ON_ORDER" translation]
+    </Text>
+    <Text>
+      48
+    </Text>
+  </View>
+  <CollapsibleCard
+    icon=""
     isOpened={false}
-    title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
-    toggleIsOpened={[Function]}
-  />
+    title="[missing \\"en.ITEM.HISTORY\\" translation]"
+  >
+    <RenderItemHistoryCard
+      date="2022-07-26"
+      qty={23}
+    />
+    <RenderItemHistoryCard
+      date="2022-07-25"
+      qty={44}
+    />
+    <RenderItemHistoryCard
+      date="2022-06-23"
+      qty={23}
+    />
+  </CollapsibleCard>
 </View>
 `;
 
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders replenishment card with no delivery history 1`] = `
 <View>
-  <CollapsibleHeaderCard
-    icon="label-variant"
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "padding": 10,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.REPLENISHMENT" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 1,
+        "paddingHorizontal": 10,
+        "paddingVertical": 8,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.ON_ORDER" translation]
+    </Text>
+    <Text>
+      48
+    </Text>
+  </View>
+  <CollapsibleCard
+    icon=""
     isOpened={false}
-    title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
-    toggleIsOpened={[Function]}
-  />
+    title="[missing \\"en.ITEM.HISTORY\\" translation]"
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "flex": 1,
+          "padding": 10,
+        }
+      }
+    >
+      <Text>
+        [missing "en.ITEM.NO_HISTORY" translation]
+      </Text>
+    </View>
+  </CollapsibleCard>
 </View>
 `;
 
@@ -2795,66 +2893,48 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             }
           }
         >
-          <CollapsibleCard
-            icon="label-variant"
-            isOpened={false}
-            title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
-          >
+          <View>
             <View
               style={
                 Object {
                   "backgroundColor": "#ffffffff",
-                  "padding": 5,
+                  "borderBottomColor": "#eeeeee",
+                  "borderBottomWidth": 1,
+                  "padding": 10,
                 }
               }
             >
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#ffffffff",
-                    "borderBottomColor": "#eeeeee",
-                    "borderBottomWidth": 1,
-                    "flexDirection": "row",
-                    "justifyContent": "space-between",
-                    "marginBottom": 1,
-                    "paddingHorizontal": 10,
-                    "paddingVertical": 5,
-                  }
-                }
-              >
-                <Text>
-                  [missing "en.ITEM.ON_ORDER" translation]
-                </Text>
-                <Text>
-                  48
-                </Text>
-              </View>
+              <Text>
+                [missing "en.ITEM.REPLENISHMENT" translation]
+              </Text>
             </View>
             <View
               style={
                 Object {
+                  "alignItems": "center",
                   "backgroundColor": "#ffffffff",
-                  "padding": 5,
+                  "borderBottomColor": "#eeeeee",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "marginBottom": 1,
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 8,
                 }
               }
             >
-              <View
-                style={
-                  Object {
-                    "backgroundColor": "#ffffffff",
-                    "borderBottomColor": "#eeeeee",
-                    "borderBottomWidth": 1,
-                    "marginBottom": 1,
-                    "paddingBottom": 5,
-                    "paddingHorizontal": 10,
-                  }
-                }
-              >
-                <Text>
-                  [missing "en.ITEM.HISTORY" translation]
-                </Text>
-              </View>
+              <Text>
+                [missing "en.ITEM.ON_ORDER" translation]
+              </Text>
+              <Text>
+                48
+              </Text>
+            </View>
+            <CollapsibleCard
+              icon=""
+              isOpened={false}
+              title="[missing \\"en.ITEM.HISTORY\\" translation]"
+            >
               <RenderItemHistoryCard
                 date="2022-07-26"
                 qty={23}
@@ -2867,8 +2947,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 date="2022-06-23"
                 qty={23}
               />
-            </View>
-          </CollapsibleCard>
+            </CollapsibleCard>
+          </View>
         </View>
       </React.Fragment>
       <SFTCard

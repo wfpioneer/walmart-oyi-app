@@ -439,10 +439,7 @@ export const renderReplenishmentHistory = (
       return date2 > date1 ? 1 : -1;
     });
     return (
-      <View style={styles.replenishmentContainer}>
-        <View style={styles.replenishmentHistory}>
-          <Text>{strings('ITEM.HISTORY')}</Text>
-        </View>
+      <CollapsibleCard title={strings('ITEM.HISTORY')}>
         {data.slice(0, 5).map((item, index) => {
           const key = `delivery-${index}`;
           return (
@@ -453,18 +450,15 @@ export const renderReplenishmentHistory = (
             />
           );
         })}
-      </View>
+      </CollapsibleCard>
     );
   }
   return (
-    <View style={styles.replenishmentContainer}>
-      <View style={styles.replenishmentHistory}>
-        <Text>{strings('ITEM.HISTORY')}</Text>
-      </View>
+    <CollapsibleCard title={strings('ITEM.HISTORY')}>
       <View style={styles.noDataContainer}>
         <Text>{strings('ITEM.NO_HISTORY')}</Text>
       </View>
-    </View>
+    </CollapsibleCard>
   );
 };
 
@@ -473,15 +467,16 @@ export const renderReplenishmentCard = (
 ) => {
   const { replenishment } = itemDetails;
   return (
-    <CollapsibleCard title={strings('ITEM.REPLENISHMENT')} icon="label-variant">
+    <View>
       <View style={styles.replenishmentContainer}>
-        <View style={styles.replenishmentOrder}>
-          <Text>{strings('ITEM.ON_ORDER')}</Text>
-          <Text>{replenishment.onOrder}</Text>
-        </View>
+        <Text>{strings('ITEM.REPLENISHMENT')}</Text>
+      </View>
+      <View style={styles.replenishmentOrder}>
+        <Text>{strings('ITEM.ON_ORDER')}</Text>
+        <Text>{replenishment.onOrder}</Text>
       </View>
       {renderReplenishmentHistory(itemDetails)}
-    </CollapsibleCard>
+    </View>
   );
 };
 
