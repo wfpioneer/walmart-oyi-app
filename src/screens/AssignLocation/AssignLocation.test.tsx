@@ -271,31 +271,22 @@ describe('Assign Location externalized function tests', () => {
     const failApi: AsyncState = {
       ...defaultAsyncState,
       error: {
-        response: {
-          status: 418,
-          data: 'No Coffee'
-        },
-        message: 'Im a teapot'
+        status: 418,
+        message: 'No Coffee'
       }
     };
     const failLocationNotFoundApi: AsyncState = {
       ...defaultAsyncState,
       error: {
-        response: {
-          status: 409,
-          data: 'Request failed due to: LOCATION_NOT_FOUND for URI: /bin'
-        },
-        message: 'Location not found'
+        status: 409,
+        message: 'Request failed due to: LOCATION_NOT_FOUND for URI: /bin',
       }
     };
     const failPalletNotReadyApi: AsyncState = {
       ...defaultAsyncState,
       error: {
-        response: {
-          status: 409,
-          data: 'Request failed due to: not ready to bin, pallet part of an active pick for URI: /bin'
-        },
-        message: 'Conflict'
+        status: 409,
+        message: 'Request failed due to: not ready to bin, pallet part of an active pick for URI: /bin'
       }
     };
     binPalletsApiEffect(
@@ -335,11 +326,8 @@ describe('Assign Location externalized function tests', () => {
     const failPalletNotFoundApi: AsyncState = {
       ...defaultAsyncState,
       error: {
-        response: {
-          status: 409,
-          data: 'Request failed due to: 409 CONFLICT "{"errorEnum":"PALLET_NOT_FOUND"}" for URI: /bin'
-        },
-        message: 'Conflict'
+        status: 409,
+        message: 'Request failed due to: 409 CONFLICT "{"errorEnum":"PALLET_NOT_FOUND"}" for URI: /bin'
       }
     };
     const newRouteProp: RouteProp<any, string> = { key: '', name: 'AssignLocation', params: { source: 'picking' } };
