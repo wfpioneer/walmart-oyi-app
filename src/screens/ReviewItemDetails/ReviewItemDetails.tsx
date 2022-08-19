@@ -57,10 +57,6 @@ import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setItemHistory } from '../../state/actions/ItemHistory';
-import itemDetail, {
-  mockAdditionalItemDetails, mockOHChangeHistory,
-  mockReserveLocations, pickListMockHistory
-} from '../../mockData/getItemDetails';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -439,10 +435,7 @@ export const renderReplenishmentHistory = (
       return date2 > date1 ? 1 : -1;
     });
     return (
-      <View style={styles.replenishmentContainer}>
-        <View style={styles.replenishmentHistory}>
-          <Text>{strings('ITEM.HISTORY')}</Text>
-        </View>
+      <CollapsibleCard title={strings('ITEM.HISTORY')}>
         {data.slice(0, 5).map((item, index) => {
           const key = `delivery-${index}`;
           return (
@@ -453,18 +446,15 @@ export const renderReplenishmentHistory = (
             />
           );
         })}
-      </View>
+      </CollapsibleCard>
     );
   }
   return (
-    <View style={styles.replenishmentContainer}>
-      <View style={styles.replenishmentHistory}>
-        <Text>{strings('ITEM.HISTORY')}</Text>
-      </View>
+    <CollapsibleCard title={strings('ITEM.HISTORY')}>
       <View style={styles.noDataContainer}>
         <Text>{strings('ITEM.NO_HISTORY')}</Text>
       </View>
-    </View>
+    </CollapsibleCard>
   );
 };
 
@@ -473,15 +463,16 @@ export const renderReplenishmentCard = (
 ) => {
   const { replenishment } = itemDetails;
   return (
-    <CollapsibleCard title={strings('ITEM.REPLENISHMENT')} icon="label-variant">
+    <View>
       <View style={styles.replenishmentContainer}>
-        <View style={styles.replenishmentOrder}>
-          <Text>{strings('ITEM.ON_ORDER')}</Text>
-          <Text>{replenishment.onOrder}</Text>
-        </View>
+        <Text>{strings('ITEM.REPLENISHMENT')}</Text>
+      </View>
+      <View style={styles.replenishmentOrder}>
+        <Text>{strings('ITEM.ON_ORDER')}</Text>
+        <Text>{replenishment.onOrder}</Text>
       </View>
       {renderReplenishmentHistory(itemDetails)}
-    </CollapsibleCard>
+    </View>
   );
 };
 
@@ -1064,8 +1055,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     ? (result && result.data.itemDetails)
     : (result && result.data); // || getMockItemDetails(scannedEvent.value);
 
-  const itemOhChangeHistory = (result && result.data.itemOhChangeHistory) ?
-    result.data.itemOhChangeHistory.ohChangeHistory : [];
+  const itemOhChangeHistory = (result && result.data.itemOhChangeHistory)
+    ? result.data.itemOhChangeHistory.ohChangeHistory : [];
   const picklistHistory = (result && result.data.picklistHistory) ? result.data.picklistHistory.picklists : [];
 
   const locationCount = getLocationCount(props);
@@ -1270,6 +1261,16 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
+            {additionalItemDetails && (
+              <>
+                <View style={styles.historyContainer}>
+                  {renderOHChangeHistory(props, itemOhChangeHistory, result)}
+                </View>
+                <View style={styles.historyContainer}>
+                  {renderReplenishmentCard(itemDetails)}
+                </View>
+              </>
+            )}
             {!additionalItemDetails && (
             <SFTCard
               iconProp={(
@@ -1297,17 +1298,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
             </SFTCard>
             {additionalItemDetails && (
-            <>
-              <View style={styles.historyContainer}>
-                {renderOHChangeHistory(props, itemOhChangeHistory, result)}
-              </View>
               <View style={styles.historyContainer}>
                 {renderPickHistory(props, picklistHistory, result)}
               </View>
-              <View style={styles.historyContainer}>
-                {renderReplenishmentCard(itemDetails)}
-              </View>
-            </>
             )}
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
               itemDetails, isSalesMetricsGraphView)}

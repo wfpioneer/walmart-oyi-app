@@ -237,16 +237,17 @@ export const CreatePickScreen = (props: CreatePickProps) => {
     || !isNumberOfPalletsValid(palletNumber);
 
   const onSubmit = () => {
+    const locationDetails = floorLocations?.find(loc => loc.locationName === selectedSection);
     dispatch(createNewPick({
       category: item.categoryNbr,
       itemDesc: item.itemName,
       itemNbr: item.itemNbr,
       quickPick: selectedTab === Tabs.QUICKPICK,
-      salesFloorLocationName: floorLocations && floorLocations.length ? floorLocations[0].locationName : undefined,
+      salesFloorLocationName: selectedSection,
       upcNbr: item.upcNbr,
       moveToFront: selectedSection === MOVE_TO_FRONT,
       numberOfPallets: palletNumber,
-      salesFloorLocationId: floorLocations && floorLocations.length ? floorLocations[0].sectionId : undefined
+      salesFloorLocationId: locationDetails?.sectionId
     }));
   };
 
@@ -260,6 +261,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
           upcNbr={item.upcNbr}
           price={item.price}
           status={item.status || ''}
+          showAdditionalItemDetails={false}
         />
       </View>
       <View style={styles.pickParamView}>

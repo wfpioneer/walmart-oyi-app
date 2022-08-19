@@ -414,23 +414,121 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
 
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders replenishment card with delivery history 1`] = `
 <View>
-  <CollapsibleHeaderCard
-    icon="label-variant"
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "padding": 10,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.REPLENISHMENT" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 1,
+        "paddingHorizontal": 10,
+        "paddingVertical": 8,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.ON_ORDER" translation]
+    </Text>
+    <Text>
+      48
+    </Text>
+  </View>
+  <CollapsibleCard
+    icon=""
     isOpened={false}
-    title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
-    toggleIsOpened={[Function]}
-  />
+    title="[missing \\"en.ITEM.HISTORY\\" translation]"
+  >
+    <RenderItemHistoryCard
+      date="2022-07-26"
+      qty={23}
+    />
+    <RenderItemHistoryCard
+      date="2022-07-25"
+      qty={44}
+    />
+    <RenderItemHistoryCard
+      date="2022-06-23"
+      qty={23}
+    />
+  </CollapsibleCard>
 </View>
 `;
 
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders replenishment card with no delivery history 1`] = `
 <View>
-  <CollapsibleHeaderCard
-    icon="label-variant"
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "padding": 10,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.REPLENISHMENT" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 1,
+        "paddingHorizontal": 10,
+        "paddingVertical": 8,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.ON_ORDER" translation]
+    </Text>
+    <Text>
+      48
+    </Text>
+  </View>
+  <CollapsibleCard
+    icon=""
     isOpened={false}
-    title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
-    toggleIsOpened={[Function]}
-  />
+    title="[missing \\"en.ITEM.HISTORY\\" translation]"
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "flex": 1,
+          "padding": 10,
+        }
+      }
+    >
+      <Text>
+        [missing "en.ITEM.NO_HISTORY" translation]
+      </Text>
+    </View>
+  </CollapsibleCard>
 </View>
 `;
 
@@ -2632,6 +2730,102 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
+      <React.Fragment>
+        <View
+          style={
+            Object {
+              "marginTop": 8,
+            }
+          }
+        >
+          <CollapsibleCard
+            icon=""
+            isOpened={false}
+            title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "flex": 1,
+                  "padding": 10,
+                }
+              }
+            >
+              <Text
+                testID="msg-no-pick-data"
+              >
+                [missing "en.ITEM.NO_OH_CHANGE_HISTORY" translation]
+              </Text>
+            </View>
+          </CollapsibleCard>
+        </View>
+        <View
+          style={
+            Object {
+              "marginTop": 8,
+            }
+          }
+        >
+          <View>
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#ffffffff",
+                  "borderBottomColor": "#eeeeee",
+                  "borderBottomWidth": 1,
+                  "padding": 10,
+                }
+              }
+            >
+              <Text>
+                [missing "en.ITEM.REPLENISHMENT" translation]
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "borderBottomColor": "#eeeeee",
+                  "borderBottomWidth": 1,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "marginBottom": 1,
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 8,
+                }
+              }
+            >
+              <Text>
+                [missing "en.ITEM.ON_ORDER" translation]
+              </Text>
+              <Text>
+                48
+              </Text>
+            </View>
+            <CollapsibleCard
+              icon=""
+              isOpened={false}
+              title="[missing \\"en.ITEM.HISTORY\\" translation]"
+            >
+              <RenderItemHistoryCard
+                date="2022-07-26"
+                qty={23}
+              />
+              <RenderItemHistoryCard
+                date="2022-07-25"
+                qty={44}
+              />
+              <RenderItemHistoryCard
+                date="2022-06-23"
+                qty={23}
+              />
+            </CollapsibleCard>
+          </View>
+        </View>
+      </React.Fragment>
       <SFTCard
         iconName="map-marker-alt"
         title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
@@ -2727,150 +2921,36 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
         </View>
       </SFTCard>
-      <React.Fragment>
-        <View
-          style={
-            Object {
-              "marginTop": 8,
-            }
+      <View
+        style={
+          Object {
+            "marginTop": 8,
           }
+        }
+      >
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
         >
-          <CollapsibleCard
-            icon=""
-            isOpened={false}
-            title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-          >
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#ffffffff",
-                  "flex": 1,
-                  "padding": 10,
-                }
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "flex": 1,
+                "padding": 10,
               }
-            >
-              <Text
-                testID="msg-no-pick-data"
-              >
-                [missing "en.ITEM.NO_OH_CHANGE_HISTORY" translation]
-              </Text>
-            </View>
-          </CollapsibleCard>
-        </View>
-        <View
-          style={
-            Object {
-              "marginTop": 8,
             }
-          }
-        >
-          <CollapsibleCard
-            icon=""
-            isOpened={false}
-            title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
           >
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#ffffffff",
-                  "flex": 1,
-                  "padding": 10,
-                }
-              }
+            <Text
+              testID="msg-no-pick-data"
             >
-              <Text
-                testID="msg-no-pick-data"
-              >
-                [missing "en.ITEM.NO_PICK_HISTORY" translation]
-              </Text>
-            </View>
-          </CollapsibleCard>
-        </View>
-        <View
-          style={
-            Object {
-              "marginTop": 8,
-            }
-          }
-        >
-          <CollapsibleCard
-            icon="label-variant"
-            isOpened={false}
-            title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
-          >
-            <View
-              style={
-                Object {
-                  "backgroundColor": "#ffffffff",
-                  "padding": 5,
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#ffffffff",
-                    "borderBottomColor": "#eeeeee",
-                    "borderBottomWidth": 1,
-                    "flexDirection": "row",
-                    "justifyContent": "space-between",
-                    "marginBottom": 1,
-                    "paddingHorizontal": 10,
-                    "paddingVertical": 5,
-                  }
-                }
-              >
-                <Text>
-                  [missing "en.ITEM.ON_ORDER" translation]
-                </Text>
-                <Text>
-                  48
-                </Text>
-              </View>
-            </View>
-            <View
-              style={
-                Object {
-                  "backgroundColor": "#ffffffff",
-                  "padding": 5,
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "backgroundColor": "#ffffffff",
-                    "borderBottomColor": "#eeeeee",
-                    "borderBottomWidth": 1,
-                    "marginBottom": 1,
-                    "paddingBottom": 5,
-                    "paddingHorizontal": 10,
-                  }
-                }
-              >
-                <Text>
-                  [missing "en.ITEM.HISTORY" translation]
-                </Text>
-              </View>
-              <RenderItemHistoryCard
-                date="2022-07-26"
-                qty={23}
-              />
-              <RenderItemHistoryCard
-                date="2022-07-25"
-                qty={44}
-              />
-              <RenderItemHistoryCard
-                date="2022-06-23"
-                qty={23}
-              />
-            </View>
-          </CollapsibleCard>
-        </View>
-      </React.Fragment>
+              [missing "en.ITEM.NO_PICK_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
       <SFTCard
         bottomRightBtnAction={
           Array [
