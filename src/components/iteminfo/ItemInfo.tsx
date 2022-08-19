@@ -19,7 +19,7 @@ export type ItemInfoProps = {
   price: number;
   exceptionType?: string; // This is enumerated
   navigationForPrint?: NavigationProp<any>;
-  additionalItemDetails: AdditionalItemDetailsProps;
+  additionalItemDetails?: AdditionalItemDetailsProps;
   showAdditionalItemDetails: boolean;
 };
 
@@ -121,7 +121,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
       </View>
       <Text style={styles.statusText}>{`${strings('ITEM.STATUS')}: ${status}`}</Text>
       <Text style={styles.catgText}>{`${strings('ITEM.CATEGORY')}: ${category}`}</Text>
-      {showAdditionalItemDetails && renderAdditionalItemDetails(additionalItemDetails)}
+      {showAdditionalItemDetails && additionalItemDetails && renderAdditionalItemDetails(additionalItemDetails)}
       <Text style={styles.priceText}>{`${currencies(price)}`}</Text>
       {navigation && (
         <Button
