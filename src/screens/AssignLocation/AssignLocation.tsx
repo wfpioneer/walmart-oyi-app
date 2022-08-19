@@ -212,16 +212,16 @@ export const binPalletsApiEffect = (
 
       // Fail
       if (binPalletsApi.error) {
-        const errorResponse = binPalletsApi.error.response;
+        const errorResponse = binPalletsApi.error;
         if (errorResponse.status === 409) {
-          if (errorResponse.data.includes('not ready to bin, pallet part of an active pick')) {
+          if (errorResponse.message.includes('not ready to bin, pallet part of an active pick')) {
             Toast.show({
               position: 'bottom',
               type: 'error',
               text1: strings('BINNING.PALLET_NOT_READY'),
               visibilityTime: SNACKBAR_TIMEOUT
             });
-          } else if (errorResponse.data.includes('PALLET_NOT_FOUND')) {
+          } else if (errorResponse.message.includes('PALLET_NOT_FOUND')) {
             if (route.params?.source === 'picking') {
               setDeletePicks(true);
               updatePicklistItemsStatus(selectedPicks, PickAction.DELETE, dispatch);
