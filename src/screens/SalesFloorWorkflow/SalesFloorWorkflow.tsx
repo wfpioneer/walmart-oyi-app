@@ -612,11 +612,9 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
 
   const handleContinue = () => {
     if (isPickQtyZero() && isReadyToComplete) {
-      console.log('handleComplete');
       handleComplete();
     }
     if (!(isPickQtyZero() && isReadyToComplete)) {
-      console.log('handleBin');
       handleBin();
     }
   };
