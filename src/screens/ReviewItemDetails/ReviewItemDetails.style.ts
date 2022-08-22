@@ -150,7 +150,9 @@ const styles = StyleSheet.create({
   },
   replenishmentContainer: {
     backgroundColor: COLOR.WHITE,
-    padding: 5
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: COLOR.GREY_200
   },
   replenishmentHistory: {
     backgroundColor: COLOR.WHITE,
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLOR.WHITE,
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 8,
     marginBottom: 1,
     borderBottomWidth: 1,
     borderBottomColor: COLOR.GREY_200
