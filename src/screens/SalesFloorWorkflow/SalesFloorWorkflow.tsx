@@ -610,6 +610,15 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     );
   };
 
+  const handleContinue = () => {
+    if (isPickQtyZero() && isReadyToComplete) {
+      handleComplete();
+    }
+    if (!(isPickQtyZero() && isReadyToComplete)) {
+      handleBin();
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <CustomModalComponent
@@ -687,18 +696,11 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         )}
       <View style={styles.actionButtonsView}>
         <Button
-          title={strings('PICKING.COMPLETE')}
-          onPress={handleComplete}
+          title={strings('GENERICS.CONTINUE')}
+          onPress={() => handleContinue()}
           style={styles.actionButton}
-          testID="complete"
-          disabled={!isPickQtyZero() || !isReadyToComplete}
-        />
-        <Button
-          title={strings('PICKING.READY_TO_BIN')}
-          onPress={() => handleBin()}
-          style={styles.actionButton}
-          testID="bin"
-          disabled={(isPickQtyZero() && isReadyToComplete) || !isPickQtyUpdatedOrDel() || isAnyNewInvalidPickQty()}
+          testID="continue"
+          disabled={!isPickQtyUpdatedOrDel() || isAnyNewInvalidPickQty()}
         />
       </View>
     </SafeAreaView>
@@ -724,7 +726,6 @@ const SalesFloorWorkflow = () => {
   const completePalletState = useState(false);
   const updateItemsState = useState(false);
   const deleteItemsState = useState(false);
-  const stockedQtyState = useState(0);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['21%'], []);
 
