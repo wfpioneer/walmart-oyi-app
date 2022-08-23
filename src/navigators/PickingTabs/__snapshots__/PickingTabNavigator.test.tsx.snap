@@ -13,7 +13,8 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
     name="QuickPick"
     options={
       Object {
-        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation] (0)",
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation]",
       }
     }
   >
@@ -28,7 +29,8 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
     name="Pick"
     options={
       Object {
-        "title": "[missing \\"en.PICKING.PICK\\" translation] (0)",
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.PICKING.PICK\\" translation]",
       }
     }
   >
@@ -43,7 +45,63 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
     name="SalesFloor"
     options={
       Object {
-        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation] (0)",
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+</MaterialTopTabNavigator>
+`;
+
+exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks 1`] = `
+<MaterialTopTabNavigator
+  initialRouteName="Pick"
+>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="QuickPick"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="Pick"
+    options={
+      Object {
+        "tabBarBadge": [Function],
+        "title": "[missing \\"en.PICKING.PICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="SalesFloor"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
       }
     }
   >
