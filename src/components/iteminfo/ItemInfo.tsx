@@ -54,7 +54,7 @@ export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalIte
     {
       label: strings('ITEM.MARGIN'),
       value:
-    `$${typeof margin === 'number' ? margin.toFixed(2) : '0.00'}`
+    `${typeof margin === 'number' ? margin.toFixed(2) : '0.00'}%`
     },
     {
       label: strings('ITEM.GROSS_PROFIT'),
