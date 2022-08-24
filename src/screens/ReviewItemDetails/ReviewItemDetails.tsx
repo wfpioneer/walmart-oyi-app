@@ -351,7 +351,7 @@ const onMoreOHChangeHistoryClick = (
   const historyData: ItemHistoryI[] = onHandsHistory.map(item => ({
     id: item.id,
     date: item.initiatedTimestamp,
-    qty: item.oldQuantity
+    qty: item.newQuantity - item.oldQuantity
   }));
   dispatch(setItemHistory(historyData, 'ITEM.OH_CHANGE_HISTORY'));
   navigation.navigate('ItemHistory');
@@ -495,7 +495,7 @@ export const renderOHChangeHistory = (
               <RenderItemHistoryCard
                 key={item.id}
                 date={item.initiatedTimestamp}
-                qty={item.newQuantity}
+                qty={item.newQuantity - item.oldQuantity}
               />
             ))}
             {ohChangeHistory.length > 5 && (
