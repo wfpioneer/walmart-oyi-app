@@ -52,7 +52,7 @@ export const showActivitySpinner = (
   configWaiting: boolean,
   getInfoWaiting: boolean,
   getInfoCompleted: boolean
-) => (getInfoWaiting && configWaiting) || (getInfoWaiting) || (configWaiting && getInfoCompleted);
+) => (getInfoWaiting) || (configWaiting) || (configWaiting && getInfoCompleted);
 
 export const getPalletDetailsApiHook = (
   getPalletDetailsApi: AsyncState,
