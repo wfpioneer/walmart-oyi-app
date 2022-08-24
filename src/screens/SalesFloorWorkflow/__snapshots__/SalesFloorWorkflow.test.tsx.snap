@@ -208,26 +208,6 @@ exports[`Sales floor workflow tests renders the screen with additional items war
   >
     <Button
       backgroundColor="#0071e9"
-      disabled={true}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "flex": 1,
-          "margin": 5,
-        }
-      }
-      testID="complete"
-      title="[missing \\"en.PICKING.COMPLETE\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-    <Button
-      backgroundColor="#0071e9"
       disabled={false}
       height={45}
       onPress={[Function]}
@@ -238,8 +218,8 @@ exports[`Sales floor workflow tests renders the screen with additional items war
           "margin": 5,
         }
       }
-      testID="bin"
-      title="[missing \\"en.PICKING.READY_TO_BIN\\" translation]"
+      testID="continue"
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -443,28 +423,8 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
           "margin": 5,
         }
       }
-      testID="complete"
-      title="[missing \\"en.PICKING.COMPLETE\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-    <Button
-      backgroundColor="#0071e9"
-      disabled={true}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "flex": 1,
-          "margin": 5,
-        }
-      }
-      testID="bin"
-      title="[missing \\"en.PICKING.READY_TO_BIN\\" translation]"
+      testID="continue"
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -716,28 +676,8 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
           "margin": 5,
         }
       }
-      testID="complete"
-      title="[missing \\"en.PICKING.COMPLETE\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-    <Button
-      backgroundColor="#0071e9"
-      disabled={true}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "flex": 1,
-          "margin": 5,
-        }
-      }
-      testID="bin"
-      title="[missing \\"en.PICKING.READY_TO_BIN\\" translation]"
+      testID="continue"
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -949,28 +889,8 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
           "margin": 5,
         }
       }
-      testID="complete"
-      title="[missing \\"en.PICKING.COMPLETE\\" translation]"
-      titleColor="#ffffffff"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-    <Button
-      backgroundColor="#0071e9"
-      disabled={true}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "flex": 1,
-          "margin": 5,
-        }
-      }
-      testID="bin"
-      title="[missing \\"en.PICKING.READY_TO_BIN\\" translation]"
+      testID="continue"
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
