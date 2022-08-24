@@ -18,6 +18,7 @@ const EnterLocation = (
     <>
       <View style={styles.closeContainer}>
         <IconButton
+          testID="btnSetEnterLoc"
           icon={ModalCloseIcon}
           type={IconButtonType.NO_BORDER}
           onPress={() => props.setEnterLocation(false)}
@@ -25,6 +26,7 @@ const EnterLocation = (
       </View>
       <View style={styles.scanContainer}>
         <TextInput
+          testID="txtLocation"
           ref={textInputRef}
           style={styles.textInput}
           value={textInput}
@@ -36,6 +38,7 @@ const EnterLocation = (
         />
       </View>
       <Button
+        testID="btnLocationSubmit"
         title={strings('GENERICS.OK')}
         type={ButtonType.PRIMARY}
         style={styles.buttonWidth}
