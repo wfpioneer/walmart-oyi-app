@@ -1945,18 +1945,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
       <SFTCard
-        iconProp={
-          <mockMaterialCommunityIcons
-            color="#616161"
-            name="label-variant"
-            size={20}
-            style={
-              Object {
-                "marginLeft": -4,
-              }
-            }
-          />
-        }
         title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
       >
         <View
@@ -1964,7 +1952,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 18,
+              "paddingHorizontal": 10,
               "paddingVertical": 16,
             }
           }
@@ -3412,18 +3400,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
       <SFTCard
-        iconProp={
-          <mockMaterialCommunityIcons
-            color="#616161"
-            name="label-variant"
-            size={20}
-            style={
-              Object {
-                "marginLeft": -4,
-              }
-            }
-          />
-        }
         title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
       >
         <View
@@ -3431,7 +3407,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 18,
+              "paddingHorizontal": 10,
               "paddingVertical": 16,
             }
           }
@@ -3956,18 +3932,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
       <SFTCard
-        iconProp={
-          <mockMaterialCommunityIcons
-            color="#616161"
-            name="label-variant"
-            size={20}
-            style={
-              Object {
-                "marginLeft": -4,
-              }
-            }
-          />
-        }
         title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
       >
         <View
@@ -3975,7 +3939,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 18,
+              "paddingHorizontal": 10,
               "paddingVertical": 16,
             }
           }
@@ -4500,18 +4464,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
       <SFTCard
-        iconProp={
-          <mockMaterialCommunityIcons
-            color="#616161"
-            name="label-variant"
-            size={20}
-            style={
-              Object {
-                "marginLeft": -4,
-              }
-            }
-          />
-        }
         title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
       >
         <View
@@ -4519,7 +4471,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 18,
+              "paddingHorizontal": 10,
               "paddingVertical": 16,
             }
           }
@@ -5065,18 +5017,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
       <SFTCard
-        iconProp={
-          <mockMaterialCommunityIcons
-            color="#616161"
-            name="label-variant"
-            size={20}
-            style={
-              Object {
-                "marginLeft": -4,
-              }
-            }
-          />
-        }
         title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
       >
         <View
@@ -5084,7 +5024,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 18,
+              "paddingHorizontal": 10,
               "paddingVertical": 16,
             }
           }
@@ -5630,18 +5570,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
       <SFTCard
-        iconProp={
-          <mockMaterialCommunityIcons
-            color="#616161"
-            name="label-variant"
-            size={20}
-            style={
-              Object {
-                "marginLeft": -4,
-              }
-            }
-          />
-        }
         title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
       >
         <View
@@ -5649,7 +5577,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 18,
+              "paddingHorizontal": 10,
               "paddingVertical": 16,
             }
           }
@@ -6195,18 +6123,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
       <SFTCard
-        iconProp={
-          <mockMaterialCommunityIcons
-            color="#616161"
-            name="label-variant"
-            size={20}
-            style={
-              Object {
-                "marginLeft": -4,
-              }
-            }
-          />
-        }
         title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
       >
         <View
@@ -6214,7 +6130,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 18,
+              "paddingHorizontal": 10,
               "paddingVertical": 16,
             }
           }
@@ -6760,18 +6676,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         />
       </SFTCard>
       <SFTCard
-        iconProp={
-          <mockMaterialCommunityIcons
-            color="#616161"
-            name="label-variant"
-            size={20}
-            style={
-              Object {
-                "marginLeft": -4,
-              }
-            }
-          />
-        }
         title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
       >
         <View
@@ -6779,7 +6683,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
-              "paddingHorizontal": 18,
+              "paddingHorizontal": 10,
               "paddingVertical": 16,
             }
           }
