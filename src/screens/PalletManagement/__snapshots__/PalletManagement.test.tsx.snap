@@ -17,51 +17,17 @@ exports[`PalletManagementScreen Tests rendering Get Pallet Info Api responses Re
 `;
 
 exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Renders the PalletManagement default  1`] = `
-<View
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
   style={
     Object {
       "alignItems": "center",
       "flex": 1,
-      "justifyContent": "space-between",
-      "width": "100%",
+      "justifyContent": "center",
     }
   }
->
-  <ManualScanComponent
-    keyboardType="numeric"
-    placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
-  />
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "column",
-        "justifyContent": "center",
-        "width": "100%",
-      }
-    }
-  >
-    <TouchableOpacity
-      onPress={[Function]}
-    >
-      <mockConstructor
-        color="#000000"
-        name="barcode-scan"
-        size={100}
-      />
-    </TouchableOpacity>
-    <View
-      style={
-        Object {
-          "paddingTop": 20,
-        }
-      }
-    >
-      <Text>
-        [missing "en.PALLET.SCAN_PALLET" translation]
-      </Text>
-    </View>
-  </View>
-</View>
+/>
 `;
