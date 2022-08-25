@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests rendering LocationDetailsCard Renders the LocationDetailsCard for location type floor and onaction btn click call mock function 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "height": 70,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#e0e0e0",
+        "borderBottomWidth": 1,
+        "flex": 8,
+        "paddingBottom": 15,
+        "paddingTop": 15,
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#545F7A",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      A1-1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "borderBottomColor": "#e0e0e0",
+        "borderBottomWidth": 1,
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
+        "paddingBottom": 15,
+        "paddingTop": 15,
+      }
+    }
+    testID="pencil"
+  >
+    <View>
+      <mockMaterialCommunityIcons
+        color="#545F7A"
+        name="pencil"
+        size={20}
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "borderBottomColor": "#e0e0e0",
+        "borderBottomWidth": 1,
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
+        "paddingBottom": 15,
+        "paddingTop": 15,
+      }
+    }
+    testID="trash-can"
+  >
+    <View>
+      <mockMaterialCommunityIcons
+        color="#545F7A"
+        name="trash-can"
+        size={20}
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Tests rendering LocationDetailsCard Renders the LocationDetailsCard for location type reserve 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "height": 70,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#e0e0e0",
+        "borderBottomWidth": 1,
+        "flex": 8,
+        "paddingBottom": 15,
+        "paddingTop": 15,
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#545F7A",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      A1-1
+    </Text>
+  </View>
+</View>
+`;
