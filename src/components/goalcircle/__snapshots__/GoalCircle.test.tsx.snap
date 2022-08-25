@@ -1,0 +1,523 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as false and completion perc 40 1`] = `
+<View
+  style={
+    Object {
+      "marginHorizontal": 20,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "#e0e0e0",
+        "borderRadius": 50,
+        "height": 100,
+        "justifyContent": "center",
+        "width": 100,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 100,
+            "left": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": 100,
+          },
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "144deg",
+              },
+            ],
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#D6512D",
+            },
+            Object {
+              "borderBottomLeftRadius": 50,
+              "borderTopLeftRadius": 50,
+              "height": 100,
+              "left": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": 50,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "height": 100,
+            "left": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": 100,
+          },
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#e0e0e0",
+            },
+            Object {
+              "borderBottomLeftRadius": 50,
+              "borderTopLeftRadius": 50,
+              "height": 100,
+              "left": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": 50,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderRadius": 43,
+          "height": 85,
+          "justifyContent": "center",
+          "width": 85,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 25,
+            "textAlign": "center",
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        40
+        %
+      </Text>
+    </View>
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "padding": 5,
+        "textAlign": "center",
+      }
+    }
+  >
+    70
+  </Text>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="btnGoalTitleClick"
+  >
+    <Text
+      style={
+        Object {
+          "backgroundColor": "#e0e0e0",
+          "borderRadius": 30,
+          "color": "#006DE5",
+          "height": 30,
+          "textAlign": "center",
+          "textAlignVertical": "center",
+          "width": 100,
+        }
+      }
+      testID="txtGoalTitle"
+    >
+      Test
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as true and completion perc 100 1`] = `
+<View
+  style={
+    Object {
+      "marginHorizontal": 20,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "#e0e0e0",
+        "borderRadius": 50,
+        "height": 100,
+        "justifyContent": "center",
+        "width": 100,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 100,
+            "left": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": 100,
+          },
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "180deg",
+              },
+            ],
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#33691E",
+            },
+            Object {
+              "borderBottomLeftRadius": 50,
+              "borderTopLeftRadius": 50,
+              "height": 100,
+              "left": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": 50,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "height": 100,
+            "left": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": 100,
+          },
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "360deg",
+              },
+            ],
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#33691E",
+            },
+            Object {
+              "borderBottomLeftRadius": 50,
+              "borderTopLeftRadius": 50,
+              "height": 100,
+              "left": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": 50,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderRadius": 43,
+          "height": 85,
+          "justifyContent": "center",
+          "width": 85,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 25,
+            "textAlign": "center",
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        100
+        %
+      </Text>
+    </View>
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "padding": 5,
+        "textAlign": "center",
+      }
+    }
+  >
+    70
+  </Text>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="btnGoalTitleClick"
+  >
+    <Text
+      style={
+        Object {
+          "backgroundColor": "#006DE5",
+          "borderRadius": 30,
+          "color": "#ffffffff",
+          "height": 30,
+          "textAlign": "center",
+          "textAlignVertical": "center",
+          "width": 100,
+        }
+      }
+      testID="txtGoalTitle"
+    >
+      Test
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`GoalCircle Component Renders an GoalCircle with goal tiltle, active as false and completion perc 100 1`] = `
+<View
+  style={
+    Object {
+      "marginHorizontal": 20,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "#e0e0e0",
+        "borderRadius": 50,
+        "height": 100,
+        "justifyContent": "center",
+        "width": 100,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 100,
+            "left": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": 100,
+          },
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "180deg",
+              },
+            ],
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#33691E",
+            },
+            Object {
+              "borderBottomLeftRadius": 50,
+              "borderTopLeftRadius": 50,
+              "height": 100,
+              "left": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": 50,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "height": 100,
+            "left": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": 100,
+          },
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "360deg",
+              },
+            ],
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#33691E",
+            },
+            Object {
+              "borderBottomLeftRadius": 50,
+              "borderTopLeftRadius": 50,
+              "height": 100,
+              "left": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": 50,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderRadius": 43,
+          "height": 85,
+          "justifyContent": "center",
+          "width": 85,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 25,
+            "textAlign": "center",
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        100
+        %
+      </Text>
+    </View>
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "padding": 5,
+        "textAlign": "center",
+      }
+    }
+  >
+    70
+  </Text>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="btnGoalTitleClick"
+  >
+    <Text
+      style={
+        Object {
+          "backgroundColor": "#e0e0e0",
+          "borderRadius": 30,
+          "color": "#006DE5",
+          "height": 30,
+          "textAlign": "center",
+          "textAlignVertical": "center",
+          "width": 100,
+        }
+      }
+      testID="txtGoalTitle"
+    >
+      Test
+    </Text>
+  </View>
+</View>
+`;
