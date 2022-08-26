@@ -186,7 +186,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const isRollOverComplete = () => {
       const rollOverSummary = dataSummary.worklistTypes.find(wlType => wlType.worklistType === 'RA');
       if (rollOverSummary) {
-        return rollOverSummary.completedItems === rollOverSummary.totalItems;
+        return rollOverSummary.totalItems === 0 || rollOverSummary.completedItems === rollOverSummary.totalItems;
       }
       return true;
     };
