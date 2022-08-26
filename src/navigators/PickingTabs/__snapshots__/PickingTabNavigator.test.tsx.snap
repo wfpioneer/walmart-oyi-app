@@ -3,6 +3,16 @@
 exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
 <MaterialTopTabNavigator
   initialRouteName="Pick"
+  screenOptions={
+    Object {
+      "tabBarActiveTintColor": "#0071e9",
+      "tabBarInactiveTintColor": "#616161",
+      "tabBarItemStyle": Object {
+        "borderColor": "#9e9e9e",
+        "borderEndWidth": 0.5,
+      },
+    }
+  }
 >
   <Screen
     listeners={
@@ -58,6 +68,16 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
 exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks 1`] = `
 <MaterialTopTabNavigator
   initialRouteName="Pick"
+  screenOptions={
+    Object {
+      "tabBarActiveTintColor": "#0071e9",
+      "tabBarInactiveTintColor": "#616161",
+      "tabBarItemStyle": Object {
+        "borderColor": "#9e9e9e",
+        "borderEndWidth": 0.5,
+      },
+    }
+  }
 >
   <Screen
     listeners={
