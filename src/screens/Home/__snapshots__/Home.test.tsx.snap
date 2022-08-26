@@ -677,6 +677,13 @@ exports[`HomeScreen rendering renders wl summaries when api data has summaries, 
         goalTitle="[missing \\"en.LOCATION.PALLETS\\" translation]"
         onPress={[Function]}
       />
+      <GoalCircle
+        active={false}
+        completionGoal={100}
+        completionPercentage={60}
+        goalTitle="[missing \\"en.EXCEPTION.AUDITS\\" translation]"
+        onPress={[Function]}
+      />
     </View>
     <WorklistCard
       complete={50}
@@ -1404,6 +1411,13 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         completionGoal={100}
         completionPercentage={1}
         goalTitle="[missing \\"en.LOCATION.PALLETS\\" translation]"
+        onPress={[Function]}
+      />
+      <GoalCircle
+        active={false}
+        completionGoal={100}
+        completionPercentage={60}
+        goalTitle="[missing \\"en.EXCEPTION.AUDITS\\" translation]"
         onPress={[Function]}
       />
     </View>
