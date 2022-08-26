@@ -37,7 +37,9 @@ describe('testing User reducer', () => {
       enableAreaFilter: false,
       palletWorklists: false,
       addtItemDetails: false,
-      createPallet: false
+      createPallet: false,
+      auditWorklists: false,
+      showRollOverAuditComplete: false
     };
     const testConfig = { ...mockConfig, locMgmtEdit: false };
     testChangedState = {

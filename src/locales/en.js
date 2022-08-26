@@ -78,7 +78,9 @@ export default {
     CANCELLED: 'Cancelled',
     NSFL: 'No Sales Floor Location',
     UNKNOWN: 'Unknown',
-    MISSING_PALLETS: 'Missing Pallets'
+    MISSING_PALLETS: 'Missing Pallets',
+    AUDITS: 'Audits',
+    ROLLOVER_AUDITS: 'Roll Over Audits'
   },
   ITEM: {
     TITLE: 'Review item details',
