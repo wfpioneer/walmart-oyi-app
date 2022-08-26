@@ -37,6 +37,7 @@ import { hideActivityModal, showActivityModal } from '../../state/actions/Modal'
 import { GET_ITEM_DETAILS, GET_PICKLISTS, UPDATE_PICKLIST_STATUS } from '../../state/actions/asyncAPI';
 import ItemDetails from '../../models/ItemDetails';
 import styles from './PickingTabNavigator.style';
+import COLOR from '../../themes/Color';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -270,7 +271,14 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
   );
 
   return (
-    <Tab.Navigator initialRouteName={selectedTab}>
+    <Tab.Navigator
+      initialRouteName={selectedTab}
+      screenOptions={{
+        tabBarActiveTintColor: COLOR.MAIN_THEME_COLOR,
+        tabBarInactiveTintColor: COLOR.GREY_700,
+        tabBarItemStyle: styles.tabBarStyle
+      }}
+    >
       <Tab.Screen
         name={Tabs.QUICKPICK}
         options={{
