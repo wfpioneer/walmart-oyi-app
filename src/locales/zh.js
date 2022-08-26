@@ -80,7 +80,7 @@ export default {
     UNKNOWN: '未知错误',
     MISSING_PALLETS: '不在储位卡板',
     AUDITS: '盘点',
-    ROLLOVER_AUDITS: '上周剩余盘点清单'
+    ROLLOVER_AUDITS: '上周遗留盘点清单'
   },
   ITEM: {
     TITLE: '查看商品明细',
