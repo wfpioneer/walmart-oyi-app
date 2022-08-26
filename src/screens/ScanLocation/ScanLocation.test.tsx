@@ -12,8 +12,9 @@ jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: () => true,
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn(),
+  getId: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
