@@ -1273,14 +1273,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             )}
             {!additionalItemDetails && (
             <SFTCard
-              iconProp={(
-                <MaterialCommunityIcon
-                  name="label-variant"
-                  size={20}
-                  color={COLOR.GREY_700}
-                  style={styles.labelIcon}
-                />
-              )}
               title={strings('ITEM.REPLENISHMENT')}
             >
               <View style={styles.itemOnOrderView}>

@@ -50,9 +50,10 @@ interface PalletManagementProps {
 
 export const showActivitySpinner = (
   configWaiting: boolean,
+  configComplete: boolean,
   getInfoWaiting: boolean,
   getInfoCompleted: boolean
-) => (getInfoWaiting && configWaiting) || (getInfoWaiting) || (configWaiting && getInfoCompleted);
+) => (getInfoWaiting) || (configWaiting || !configComplete) || (configWaiting && getInfoCompleted);
 
 export const getPalletDetailsApiHook = (
   getPalletDetailsApi: AsyncState,
@@ -199,10 +200,10 @@ export const PalletManagementScreen = (
     }
   }, [configComplete, getInfoComplete]);
 
-  if (showActivitySpinner(getPalletConfigApi.isWaiting, getPalletDetailsApi.isWaiting, getInfoComplete)) {
+  if (showActivitySpinner(getPalletConfigApi.isWaiting, configComplete, getPalletDetailsApi.isWaiting, getInfoComplete)) {
     return (
       <ActivityIndicator
-        animating={showActivitySpinner(getPalletConfigApi.isWaiting, getPalletDetailsApi.isWaiting, getInfoComplete)}
+        animating={showActivitySpinner(getPalletConfigApi.isWaiting, configComplete, getPalletDetailsApi.isWaiting, getInfoComplete)}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
