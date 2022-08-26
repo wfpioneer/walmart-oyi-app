@@ -382,7 +382,7 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
             dispatch={dispatch}
             handleAddLocationClick={handleAddLocationClick}
             handleDeleteClick={handleDeleteClick}
-            expanded={selectedTab !== Tabs.COMPLETED ? index === activeItemIndex : false}
+            expanded={index === activeItemIndex && !item.completed}
             activeItemIndex={activeItemIndex}
             setActiveItemIndex={setActiveItemIndex}
             itemIndex={index}
