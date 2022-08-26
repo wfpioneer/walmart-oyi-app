@@ -80,7 +80,7 @@ export default {
     UNKNOWN: 'Unknown',
     MISSING_PALLETS: 'Missing Pallets',
     AUDITS: 'Audits',
-    ROLLOVER_AUDITS: 'Roll Over Audits'
+    ROLLOVER_AUDITS: 'Rollover Audits'
   },
   ITEM: {
     TITLE: 'Review item details',
