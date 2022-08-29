@@ -22,6 +22,7 @@ describe('Picking Navigator', () => {
         dispatch={jest.fn()}
         isManualScanEnabled={false}
         selectedTab={Tabs.PICK}
+        pickingMenu={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
