@@ -11,9 +11,10 @@ import { strings } from '../../locales';
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
-  canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
+  canGoBack: () => true,
+  getParent: jest.fn(),
+  getState: jest.fn(),
+  getId: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -103,7 +104,7 @@ describe('ScanLocation Screen', () => {
       };
 
       updatePalletLocationHook(successApi, mockDispatch, navigationProp);
-      expect(navigationProp.goBack).toBeCalledTimes(1);
+      expect(navigationProp.dispatch).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(3);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(

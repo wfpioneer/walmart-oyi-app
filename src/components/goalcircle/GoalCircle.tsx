@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './GoalCircle.style';
 
  interface GoalCircleProps {
@@ -41,8 +41,8 @@ function GoalCircle(props: GoalCircleProps): JSX.Element {
         </View>
       </View>
       <Text style={styles.freq}>{frequency}</Text>
-      <TouchableOpacity onPress={onPress}>
-        <Text style={goalStyle}>{goalTitle}</Text>
+      <TouchableOpacity testID="btnGoalTitleClick" onPress={onPress}>
+        <Text style={goalStyle} testID="txtGoalTitle">{goalTitle}</Text>
       </TouchableOpacity>
     </View>
   );
