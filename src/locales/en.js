@@ -346,6 +346,7 @@ export default {
     AREA: 'Area',
     ITEM_WORKLIST: 'Item Work List',
     PALLET_WORKLIST: 'Pallet Work List',
+    AUDIT_WORKLIST: 'Audit Work List',
     SCAN_PALLET: 'Scan Pallet',
     SCAN_PALLET_LABEL: 'Scan Pallet Label to continue',
     SCAN_PALLET_ERROR: 'Pallet scanned must match pallet on worklist'

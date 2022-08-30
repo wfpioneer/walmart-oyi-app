@@ -34,6 +34,13 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
         style={styles.button}
         testID="palletWorkListButton"
       />
+      <Button
+        title={strings('WORKLIST.AUDIT_WORKLIST')}
+        onPress={() => navigation.navigate('AuditWorklist', { screen: 'MissingPalletWorklistTabs' })}
+        type={ButtonType.PRIMARY}
+        style={styles.button}
+        testID="palletWorkListButton"
+      />
     </View>
   );
 };

@@ -345,6 +345,7 @@ export default {
     AREA: 'Área',
     ITEM_WORKLIST: 'Lista De Articulos',
     PALLET_WORKLIST: 'Lista De Pallet',
+    AUDIT_WORKLIST: 'Lista de trabajo de Auditorías',
     SCAN_PALLET: 'Escanea Pallet',
     SCAN_PALLET_LABEL: 'Escanea la etiqueta del pallet para continuar',
     SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet de la lista'
