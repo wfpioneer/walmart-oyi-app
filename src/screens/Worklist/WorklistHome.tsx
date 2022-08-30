@@ -7,14 +7,17 @@ import Button, { ButtonType } from '../../components/buttons/Button';
 import styles from './WorklistHome.style';
 import { strings } from '../../locales';
 import { clearFilter } from '../../state/actions/Worklist';
+import { Configurations } from '../../models/User';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
 
 export interface WorklistHomeScreenProps {
   navigation: NavigationProp<any>;
   dispatch: Dispatch<any>;
+  configs: Configurations;
 }
 
 export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
-  const { navigation, dispatch } = props;
+  const { navigation, dispatch, configs } = props;
 
   return (
     <View style={styles.container}>
@@ -27,20 +30,26 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
         style={styles.button}
         testID="itemWorkListButton"
       />
-      <Button
-        title={strings('WORKLIST.PALLET_WORKLIST')}
-        onPress={() => navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' })}
-        type={ButtonType.PRIMARY}
-        style={styles.button}
-        testID="palletWorkListButton"
-      />
-      <Button
-        title={strings('WORKLIST.AUDIT_WORKLIST')}
-        onPress={() => navigation.navigate('AuditWorklist', { screen: 'MissingPalletWorklistTabs' })}
-        type={ButtonType.PRIMARY}
-        style={styles.button}
-        testID="palletWorkListButton"
-      />
+      {configs.palletWorklists
+      && (
+        <Button
+          title={strings('WORKLIST.PALLET_WORKLIST')}
+          onPress={() => navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' })}
+          type={ButtonType.PRIMARY}
+          style={styles.button}
+          testID="palletWorkListButton"
+        />
+      )}
+      { configs.auditWorklists
+        && (
+        <Button
+          title={strings('WORKLIST.AUDIT_WORKLIST')}
+          onPress={() => navigation.navigate('AuditWorklist', { screen: 'MissingPalletWorklistTabs' })}
+          type={ButtonType.PRIMARY}
+          style={styles.button}
+          testID="palletWorkListButton"
+        />
+        )}
     </View>
   );
 };
@@ -48,10 +57,12 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
 const WorklistHome = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const configs = useTypedSelector(state => state.User.configs);
   return (
     <WorklistHomeScreen
       navigation={navigation}
       dispatch={dispatch}
+      configs={configs}
     />
   );
 };

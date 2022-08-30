@@ -30,6 +30,8 @@ export interface Configurations {
   palletWorklists: boolean;
   additionalItemDetails: boolean;
   createPallet: boolean;
+  auditWorklists: boolean;
+  showRollOverAuditComplete: boolean;
 }
 
 export interface area {

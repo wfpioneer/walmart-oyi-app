@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { View } from 'react-native';
 import { strings } from '../locales';
+import { useTypedSelector } from '../state/reducers/RootReducer';
 import COLOR from '../themes/Color';
 
 const Stack = createStackNavigator();
@@ -32,7 +33,7 @@ const AuditWorklistNavigatorStack = (props: AuditWorklistNavProps): JSX.Element 
         name="AuditWorklistTabs"
         component={() => <View />}
         options={{
-          headerTitle: strings('WORKLIST.PALLET_WORKLIST'),
+          headerTitle: strings('WORKLIST.AUDIT_WORKLIST'),
           headerLeft: hlProps => hlProps.canGoBack && (
           <HeaderBackButton
           // eslint-disable-next-line react/jsx-props-no-spreading
@@ -47,9 +48,10 @@ const AuditWorklistNavigatorStack = (props: AuditWorklistNavProps): JSX.Element 
 };
 const AuditWorklistNavigator = (): JSX.Element => {
   const navigation = useNavigation();
+  const { auditWorklists } = useTypedSelector(state => state.User.configs);
   return (
     <AuditWorklistNavigatorStack
-      auditWorklists={false}
+      auditWorklists={auditWorklists}
       navigation={navigation}
     />
   );
