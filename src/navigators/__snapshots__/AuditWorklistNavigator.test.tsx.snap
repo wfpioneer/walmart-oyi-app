@@ -41,6 +41,16 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
 >
   <Screen
     component={[Function]}
+    name="AuditWorklistTabs"
+    options={
+      Object {
+        "headerLeft": [Function],
+        "headerTitle": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
     name="AuditItemWorklistTabs"
     options={
       Object {
