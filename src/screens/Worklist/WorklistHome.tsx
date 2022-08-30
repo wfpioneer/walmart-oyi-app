@@ -44,10 +44,10 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
         && (
         <Button
           title={strings('WORKLIST.AUDIT_WORKLIST')}
-          onPress={() => navigation.navigate('AuditWorklist', { screen: 'MissingPalletWorklistTabs' })}
+          onPress={() => navigation.navigate('AuditWorklist', { screen: 'AuditWorklistTabs' })}
           type={ButtonType.PRIMARY}
           style={styles.button}
-          testID="palletWorkListButton"
+          testID="auditWorkListButton"
         />
         )}
     </View>
