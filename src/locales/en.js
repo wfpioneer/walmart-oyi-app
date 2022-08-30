@@ -482,5 +482,8 @@ export default {
     FEATURE_UPDATE_SUCCESS: 'Features Updated',
     FEATURE_UPDATE_FAILURE: 'Unable to get updated features',
     FEATURES: 'Features'
+  },
+  AUDITS: {
+    AUDIT_ITEM: 'Audit Item'
   }
 };
