@@ -482,5 +482,8 @@ export default {
     FEATURE_UPDATE_SUCCESS: '系统功能已更新',
     FEATURE_UPDATE_FAILURE: '无法获取已更新的系统功能',
     FEATURES: '功能模块'
+  },
+  AUDITS: {
+    AUDIT_ITEM: '盘点商品'
   }
 };
