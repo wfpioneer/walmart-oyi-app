@@ -36,7 +36,7 @@ import LocationManualScan from '../../components/LocationManualScan/LocationManu
 import { hideLocationPopup, setAisles, setCreateFlow } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
-import { CREATE_FLOW } from '../../models/LocationItems';
+import { AisleItem, CREATE_FLOW } from '../../models/LocationItems';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -234,7 +234,9 @@ export const AisleScreen = (props: AisleProps): JSX.Element => {
       </View>
     );
   }
-  const sortAisle = (firstItem: any, secondItem: any) => firstItem.aisleName - secondItem.aisleName;
+  const sortAisle = (firstItem: AisleItem, secondItem: AisleItem) => (
+    parseInt(firstItem.aisleName, 10) - parseInt(secondItem.aisleName, 10)
+  );
   const getAisleSorted = () => (getAllAisles.result && getAllAisles.result.data
     && Array.isArray(getAllAisles.result.data) ? getAllAisles.result?.data.sort(sortAisle) : []);
   return (
@@ -276,7 +278,7 @@ export const AisleScreen = (props: AisleProps): JSX.Element => {
 };
 
 const AisleList = (): JSX.Element => {
-  const navigation = useNavigation();
+  const navigation: NavigationProp<any> = useNavigation();
   const getAllAisles = useTypedSelector(state => state.async.getAisle);
   const deleteZoneApi = useTypedSelector(state => state.async.deleteZone);
   const { id: zoneId, name: zoneName } = useTypedSelector(state => state.Location.selectedZone);
@@ -306,7 +308,7 @@ const AisleList = (): JSX.Element => {
   }, [locationPopupVisible]);
 
   const handleAddAisles = () => {
-    dispatch(setAisles(getAllAisles.result.data));
+    dispatch(setAisles(getAllAisles.result?.data || []));
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_AISLE));
     bottomSheetModalRef.current?.dismiss();
     navigation.navigate('AddZone');
