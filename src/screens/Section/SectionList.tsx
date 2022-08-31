@@ -46,7 +46,7 @@ import {
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
 import { ClearLocationTarget, LocationName } from '../../models/Location';
-import { CREATE_FLOW } from '../../models/LocationItems';
+import { CREATE_FLOW, SectionItem } from '../../models/LocationItems';
 import { CustomModalComponent } from '../Modal/Modal';
 import Button from '../../components/buttons/Button';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
@@ -385,6 +385,8 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
     trackEventCall
   ), [getAllSections]);
 
+  const sectionList: SectionItem[] = getAllSections.result?.data || [];
+
   if (getAllSections.isWaiting) {
     return (
       <ActivityIndicator
@@ -430,6 +432,10 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
     dispatch(clearLocation({ locationId: aisleId, target: clearLocationTarget }));
   };
 
+  const sortSectionName = (sectionNameList: SectionItem[]) => [...sectionNameList].sort((a, b) => (
+    parseInt(a.sectionName, 10) - parseInt(b.sectionName, 10)
+  ));
+
   return (
     <View>
       <ApiConfirmationModal
@@ -455,7 +461,7 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
         details={`${getAllSections.result?.data.length || 0} ${strings('LOCATION.SECTIONS')}`}
       />
       <FlatList
-        data={getAllSections.result?.data || []}
+        data={sortSectionName(sectionList)}
         renderItem={({ item }) => (
           <LocationItemCard
             location={`${strings('LOCATION.SECTION')} ${zoneName}${aisleName}-${item.sectionName}`}
@@ -478,7 +484,7 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
 };
 
 const SectionList = (): JSX.Element => {
-  const navigation = useNavigation();
+  const navigation: NavigationProp<any> = useNavigation();
   const getAllSections = useTypedSelector(state => state.async.getSections);
   const { id: aisleId, name: aisleName } = useTypedSelector(state => state.Location.selectedAisle);
   const { name: zoneName } = useTypedSelector(state => state.Location.selectedZone);
@@ -513,7 +519,7 @@ const SectionList = (): JSX.Element => {
     || user.configs.locationManagementEdit;
 
   const handleAddSections = () => {
-    dispatch(setSections(getAllSections.result.data));
+    dispatch(setSections(getAllSections.result?.data || []));
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_SECTION));
     dispatch(setAislesToCreateToExistingAisle({ id: aisleId, name: aisleName }));
     if (bottomSheetModalRef.current) {
