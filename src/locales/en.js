@@ -430,7 +430,7 @@ export default {
     FRONT: 'Front',
     ACCEPT: 'Accept',
     RELEASE: 'Release',
-    PICKLIST_SUCCESS: 'Successfully retrieved pickLists',
+    PICKLIST_SUCCESS: 'Successfully retrieved pick list',
     PICKLIST_NOT_FOUND: 'No picklists were found for this club',
     PICKLIST_ERROR: 'There was an error retrieving the Picklist',
     UPDATE_REMAINING_QTY: 'Update quantity of each item left on pallet before continuing',

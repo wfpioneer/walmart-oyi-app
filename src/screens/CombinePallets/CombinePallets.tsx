@@ -207,7 +207,7 @@ export const CombinePalletsScreen = (
   return (
     <View style={styles.container}>
       {/* TODO add change to pass Placeholder text to ManualScan component */}
-      {isManualScanEnabled && <ManualScanComponent placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
+      {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.PALLET_PLACEHOLDER')} />}
       {combinePallets.length > 0 && (
         <View style={styles.scanView}>
           <Text style={styles.scanText}>{strings('PALLET.SCAN_PALLET')}</Text>
