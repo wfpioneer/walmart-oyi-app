@@ -483,5 +483,8 @@ export default {
     FEATURE_UPDATE_SUCCESS: 'Funcionalidades actualizadas',
     FEATURE_UPDATE_FAILURE: 'Incapaz de obtener las funcionalidades actualizadas',
     FEATURES: 'Funcionalidades'
+  },
+  AUDITS: {
+    AUDIT_ITEM: 'Auditar Artículo'
   }
 };

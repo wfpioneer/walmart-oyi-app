@@ -27,7 +27,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
 import COLOR from '../../themes/Color';
 import { LocationType } from '../../models/LocationType';
-import { CREATE_FLOW } from '../../models/LocationItems';
+import { CREATE_FLOW, ZoneItem } from '../../models/LocationItems';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { setManualScan, setScannedEvent } from '../../state/actions/Global';
@@ -224,7 +224,7 @@ export const ZoneScreen = (props: ZoneProps): JSX.Element => {
       </View>
     );
   }
-  const sortZone = (firstItem: any, secondItem: any) => {
+  const sortZone = (firstItem: ZoneItem, secondItem: ZoneItem) => {
     if (firstItem.zoneName < secondItem.zoneName) {
       return -1;
     }
