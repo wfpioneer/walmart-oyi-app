@@ -11,6 +11,7 @@ import { setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import COLOR from '../themes/Color';
 import styles from './AuditWorklistNavigator.style';
+import AuditWorklistTabs from './AuditWorklistTabs/AuditWorklistTabs';
 
 const Stack = createStackNavigator();
 
@@ -73,7 +74,7 @@ export const AuditWorklistNavigatorStack = (
     >
       <Stack.Screen
         name="AuditWorklistTabs"
-        component={() => <View />}
+        component={AuditWorklistTabs}
         options={{
           headerTitle: strings('WORKLIST.AUDIT_WORKLIST'),
           headerLeft: hlProps => hlProps.canGoBack && (
