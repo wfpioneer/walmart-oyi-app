@@ -31,6 +31,40 @@ exports[`WorkListHome Renders WorkListHome screen 1`] = `
     type={1}
     width={-1}
   />
+</View>
+`;
+
+exports[`WorkListHome Renders WorkListHome screen with Configs all configs enabled 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "height": 40,
+        "marginBottom": 15,
+        "width": "90%",
+      }
+    }
+    testID="itemWorkListButton"
+    title="[missing \\"en.WORKLIST.ITEM_WORKLIST\\" translation]"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
   <Button
     backgroundColor="#0071e9"
     disabled={false}
@@ -46,6 +80,27 @@ exports[`WorkListHome Renders WorkListHome screen 1`] = `
     }
     testID="palletWorkListButton"
     title="[missing \\"en.WORKLIST.PALLET_WORKLIST\\" translation]"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "height": 40,
+        "marginBottom": 15,
+        "width": "90%",
+      }
+    }
+    testID="auditWorkListButton"
+    title="[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"

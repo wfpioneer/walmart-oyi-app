@@ -30,7 +30,9 @@ export const initialState: User = {
     enableAreaFilter: false,
     palletWorklists: false,
     additionalItemDetails: false,
-    createPallet: false
+    createPallet: false,
+    auditWorklists: false,
+    showRollOverAuditComplete: false
   }
 };
 
@@ -66,7 +68,9 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           enableAreaFilter: action.payload.enableAreaFilter || false,
           palletWorklists: action.payload.palletWorklists || false,
           additionalItemDetails: action.payload.addItemDetails || false,
-          createPallet: action.payload.createPallet || false
+          createPallet: action.payload.createPallet || false,
+          auditWorklists: action.payload.auditWorklists || false,
+          showRollOverAuditComplete: action.payload.showRollOverAuditComplete || false
         }
       };
     default:

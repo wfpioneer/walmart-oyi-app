@@ -3,12 +3,14 @@ import { NavigationProp } from '@react-navigation/native';
 import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { WorklistHomeScreen } from './WorklistHome';
+import { mockConfig } from '../../mockData/mockConfig';
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -31,6 +33,19 @@ describe('WorkListHome', () => {
       <WorklistHomeScreen
         navigation={navigationProp}
         dispatch={mockDispatch}
+        configs={mockConfig}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders WorkListHome screen with Configs all configs enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <WorklistHomeScreen
+        navigation={navigationProp}
+        dispatch={mockDispatch}
+        configs={{ ...mockConfig, palletWorklists: true, auditWorklists: true }}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -41,6 +56,7 @@ describe('WorkListHome', () => {
       <WorklistHomeScreen
         navigation={navigationProp}
         dispatch={mockDispatch}
+        configs={mockConfig}
       />
     );
     const itemWorklistButton = getByTestId('itemWorkListButton');
@@ -53,9 +69,23 @@ describe('WorkListHome', () => {
       <WorklistHomeScreen
         navigation={navigationProp}
         dispatch={mockDispatch}
+        configs={{ ...mockConfig, palletWorklists: true }}
       />
     );
     const palletWorkListButton = getByTestId('palletWorkListButton');
+    fireEvent.press(palletWorkListButton);
+    expect(navigationProp.navigate).toBeCalledTimes(1);
+  });
+
+  it('test audit worklist button functionality', () => {
+    const { getByTestId } = render(
+      <WorklistHomeScreen
+        navigation={navigationProp}
+        dispatch={mockDispatch}
+        configs={{ ...mockConfig, auditWorklists: true }}
+      />
+    );
+    const palletWorkListButton = getByTestId('auditWorkListButton');
     fireEvent.press(palletWorkListButton);
     expect(navigationProp.navigate).toBeCalledTimes(1);
   });
