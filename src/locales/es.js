@@ -484,6 +484,16 @@ export default {
     FEATURES: 'Funcionalidades'
   },
   AUDITS: {
-    AUDIT_ITEM: 'Auditar Artículo'
+    AUDITS: 'Auditorías',
+    AUDIT_ITEM: 'Auditar Artículo',
+    ROLLOVER_AUDITS: 'Auditorías Atrasadas',
+    COLLAPSE_ALL: 'Colapsar todo',
+    VALIDATE_QUANTITY: 'Valida la cantidad en cada ubicación',
+    VALIDATE_SCAN_QUANTITY: 'Escanea cada pallet y valida la cantidad',
+    OTHER_ON_HANDS: 'Otras ubicaciones',
+    PALLET_COUNT: 'Por favor ingresa el conteo del pallet',
+    CONFIRM_AUDIT: 'Confirma el cambio de existencia',
+    UPDATED_QTY: 'Cantidad actualizada',
+    LARGE_CURRENCY_CHANGE: 'Cambio de cantidad elevada'
   }
 };
