@@ -25,13 +25,19 @@ describe('testing User reducer', () => {
     expect(testResults).toStrictEqual(testChangedState);
     // setConfigs action
 
-    const testConfig: ConfigResponse = { ...mockConfig, locMgmtEdit: false, addItemDetails: false };
+    const testConfig: ConfigResponse = {
+      ...mockConfig,
+      locMgmtEdit: false,
+      addItemDetails: false,
+      showRollOverAuditCmp: false
+    };
     testChangedState = {
       ...initialState,
       configs: {
-        ...omit(mockConfig, ['locMgmtEdit', 'addtItemDetails']),
+        ...omit(mockConfig, ['locMgmtEdit', 'addtItemDetails', 'showRollOverAuditCmp']),
         locationManagementEdit: false,
-        additionalItemDetails: false
+        additionalItemDetails: false,
+        showRollOverAuditComplete: false
       }
     };
     testResults = UserReducer(testInitialState, setConfigs(testConfig));

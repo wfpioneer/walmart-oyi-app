@@ -19,7 +19,7 @@ export interface ConfigResponse {
   addItemDetails: boolean;
   createPallet: boolean;
   auditWorklists: boolean;
-  showRollOverAuditComplete: boolean;
+  showRollOverAuditCmp: boolean;
 }
 
 export default class ConfigService {

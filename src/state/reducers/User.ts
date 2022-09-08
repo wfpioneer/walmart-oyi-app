@@ -70,7 +70,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           additionalItemDetails: action.payload.addItemDetails || false,
           createPallet: action.payload.createPallet || false,
           auditWorklists: action.payload.auditWorklists || false,
-          showRollOverAuditComplete: action.payload.showRollOverAuditComplete || false
+          showRollOverAuditComplete: action.payload.showRollOverAuditCmp || false
         }
       };
     default:
