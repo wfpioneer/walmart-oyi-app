@@ -7,8 +7,9 @@ import {
 } from '../actions/User';
 import { UserReducer, initialState } from './User';
 import mockUser from '../../mockData/mockUser';
-import { mockAreas } from '../../mockData/mockConfig';
+import { mockConfig } from '../../mockData/mockConfig';
 import User from '../../models/User';
+import { ConfigResponse } from '../../services/Config.service';
 
 describe('testing User reducer', () => {
   it('testing User reducer', () => {
@@ -23,23 +24,8 @@ describe('testing User reducer', () => {
     testResults = UserReducer(testInitialState, assignFluffyFeatures(testFluffyFeatures));
     expect(testResults).toStrictEqual(testChangedState);
     // setConfigs action
-    const mockConfig = {
-      locationManagement: false,
-      locMgmtEdit: false,
-      palletManagement: false,
-      settingsTool: false,
-      printingUpdate: false,
-      binning: false,
-      palletExpiration: false,
-      backupCategories: '',
-      picking: false,
-      areas: mockAreas,
-      enableAreaFilter: false,
-      palletWorklists: false,
-      addtItemDetails: false,
-      createPallet: false
-    };
-    const testConfig = { ...mockConfig, locMgmtEdit: false };
+
+    const testConfig: ConfigResponse = { ...mockConfig, locMgmtEdit: false, addItemDetails: false };
     testChangedState = {
       ...initialState,
       configs: {

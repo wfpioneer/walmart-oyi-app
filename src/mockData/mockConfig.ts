@@ -29,5 +29,7 @@ export const mockConfig: Configurations = {
   enableAreaFilter: false,
   palletWorklists: false,
   additionalItemDetails: false,
-  createPallet: false
+  createPallet: false,
+  auditWorklists: false,
+  showRollOverAuditComplete: false
 };
