@@ -197,7 +197,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         // when show roll over complte is enabled than show only roll over when it is not completed
         // and do not show the audit worklist type
         // if completeted or no roll over than show both audit worklist
-        if (worklist.worklistType === 'AU' && !rollOverAuditWLEnabled && !isRollOverComplete()) {
+        if (worklist.worklistType === 'AU' && rollOverAuditWLEnabled && !isRollOverComplete()) {
           return null;
         }
         const worklistType = worklist.worklistType === 'MP'
