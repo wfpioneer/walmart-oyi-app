@@ -510,29 +510,6 @@ describe('ManagePalletScreen', () => {
               {
                 id: 1,
                 createDate: '2022-01-01T12:00:00.000Z',
-                expirationDate: undefined,
-                items: []
-              }
-            ]
-          }
-        }
-      };
-
-      getPalletDetailsApiHook(successApi, mockDispatch, navigationProp);
-      expect(navigationProp.isFocused).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledTimes(3);
-      expect(Toast.show).toBeCalledTimes(0);
-    });
-    it('Tests getPalletDetailsApiHook on success with pallet expiration date', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          status: 200,
-          data: {
-            pallets: [
-              {
-                id: 1,
-                createDate: '2022-01-01T12:00:00.000Z',
                 expirationDate: '01/05/2022',
                 items: []
               }
