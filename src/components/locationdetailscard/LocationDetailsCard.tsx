@@ -18,7 +18,7 @@ export interface Props {
 
 function locationDetailsCard(props: Props) {
   const renderIcon = (name: string, action?: (event: GestureResponderEvent) => void) => (
-    <TouchableOpacity style={styles.icon} onPress={action}>
+    <TouchableOpacity testID={name} style={styles.icon} onPress={action}>
       <View>
         <MaterialCommunityIcon name={name} size={20} color={COLOR.TRACKER_GREY} />
       </View>

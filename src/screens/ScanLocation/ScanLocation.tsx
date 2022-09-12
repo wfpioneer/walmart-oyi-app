@@ -1,6 +1,7 @@
 import {
   NavigationProp,
   RouteProp,
+  StackActions,
   useNavigation,
   useRoute
 } from '@react-navigation/native';
@@ -41,6 +42,7 @@ interface ScanLocationProps {
     route?: string
   ) => Promise<void>;
 }
+
 export const updatePalletLocationHook = (
   addPalletAPI: AsyncState,
   dispatch: Dispatch<any>,
@@ -57,7 +59,10 @@ export const updatePalletLocationHook = (
     });
     dispatch({ type: ADD_PALLET.RESET });
     dispatch(clearSelectedWorklistPalletId());
-    navigation.goBack();
+
+    if (navigation.canGoBack()) {
+      navigation.dispatch(StackActions.pop(2));
+    }
   }
 
   // on api failure

@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   itemOnOrderView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 18,
+    paddingHorizontal: 10,
     paddingVertical: 16
   },
   renderPickListContainer: {

@@ -78,7 +78,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false,  // clean and rebuild if changing
+    enableHermes: true,  // clean and rebuild if changing
 ]
 // Maps builds variants to environment files Defaults to ".env"
 project.ext.envConfigFiles = [
@@ -141,8 +141,8 @@ android {
         applicationId "com.walmart.intl.oyi"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 249
-        versionName "4.7.3"
+        versionCode 250
+        versionName "4.7.4"
         resValue "string", "build_config_package", "com.samsclub.intl.oyi"
     }
     splits {

@@ -66,7 +66,7 @@ export default {
     WELCOME: '欢迎',
     STYLE_GUIDE: '页面风格',
     CHANGE_LANGUAGE: '改变语言',
-    ITEMS: '项目',
+    ITEMS: '商品例外',
     WORKLIST_GOAL_COMPLETE: '%{complete}的%{total}项目'
   },
   EXCEPTION: {
@@ -132,8 +132,8 @@ export default {
     ERROR_PICK_HISTORY: '重置数据出错',
     ADDITIONAL_ITEM_DETAILS: '其它商品信息',
     VENDOR_PACK: '供应商包装',
-    COLOR: '整版库存量',
-    SIZE: 'Ti-Hi',
+    SIZE: '整版库存量',
+    COLOR: 'Ti-Hi',
     PRICE_BEFORE_TAX: '税前零售',
     MARGIN: '利润',
     GROSS_PROFIT: '毛利',
@@ -240,7 +240,7 @@ export default {
     EDIT_LOCATION: '修改位置',
     LOCATION_MANAGEMENT: '通道管理',
     ITEMS: '多个商品',
-    PALLETS: '卡板',
+    PALLETS: '卡板例外',
     PALLET: '卡板',
     ZONES: '区域',
     ZONE: '区域',
@@ -345,6 +345,7 @@ export default {
     AREA: '区域',
     ITEM_WORKLIST: '商品例外清单',
     PALLET_WORKLIST: '卡板例外清单',
+    AUDIT_WORKLIST: '盘点任务清单',
     SCAN_PALLET: '扫描卡板',
     SCAN_PALLET_LABEL: '扫描卡板标签继续操作',
     SCAN_PALLET_ERROR: '扫描的卡板标签必须和任务清单的匹配'
@@ -481,5 +482,8 @@ export default {
     FEATURE_UPDATE_SUCCESS: '系统功能已更新',
     FEATURE_UPDATE_FAILURE: '无法获取已更新的系统功能',
     FEATURES: '功能模块'
+  },
+  AUDITS: {
+    AUDIT_ITEM: '盘点商品'
   }
 };

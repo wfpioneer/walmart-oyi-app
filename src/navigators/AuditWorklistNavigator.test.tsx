@@ -1,28 +1,21 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import {
-  PickingNavigatorStack,
-  renderScanButton
-} from './PickingNavigator';
-import { Tabs } from '../models/Picking.d';
+import { NavigationProp } from '@react-navigation/native';
+import { AuditWorklistNavigatorStack, renderScanButton } from './AuditWorklistNavigator';
 
+let navigationProp: NavigationProp<any>;
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
-jest.mock('../state/actions/Modal', () => ({
-  showActivityModal: jest.fn(),
-  hideActivityModal: jest.fn()
-}));
-
-describe('Picking Navigator', () => {
-  it('Renders the Picking Navigator', () => {
+describe('AuditItemWorklist Navigator', () => {
+  it('Renders the AuditItemWorklist Navigator', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      <PickingNavigatorStack
+      <AuditWorklistNavigatorStack
         dispatch={jest.fn()}
         isManualScanEnabled={false}
-        selectedTab={Tabs.PICK}
-        pickingMenu={false}
+        auditWorklists={false}
+        navigation={navigationProp}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

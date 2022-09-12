@@ -346,6 +346,7 @@ export default {
     AREA: 'Area',
     ITEM_WORKLIST: 'Item Work List',
     PALLET_WORKLIST: 'Pallet Work List',
+    AUDIT_WORKLIST: 'Audit Work List',
     SCAN_PALLET: 'Scan Pallet',
     SCAN_PALLET_LABEL: 'Scan Pallet Label to continue',
     SCAN_PALLET_ERROR: 'Pallet scanned must match pallet on worklist'
@@ -430,7 +431,7 @@ export default {
     FRONT: 'Front',
     ACCEPT: 'Accept',
     RELEASE: 'Release',
-    PICKLIST_SUCCESS: 'Successfully retrieved pickLists',
+    PICKLIST_SUCCESS: 'Successfully retrieved pick list',
     PICKLIST_NOT_FOUND: 'No picklists were found for this club',
     PICKLIST_ERROR: 'There was an error retrieving the Picklist',
     UPDATE_REMAINING_QTY: 'Update quantity of each item left on pallet before continuing',
@@ -482,5 +483,8 @@ export default {
     FEATURE_UPDATE_SUCCESS: 'Features Updated',
     FEATURE_UPDATE_FAILURE: 'Unable to get updated features',
     FEATURES: 'Features'
+  },
+  AUDITS: {
+    AUDIT_ITEM: 'Audit Item'
   }
 };

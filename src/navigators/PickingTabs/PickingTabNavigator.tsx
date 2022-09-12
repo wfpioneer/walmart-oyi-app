@@ -13,6 +13,7 @@ import {
   useNavigation,
   useRoute
 } from '@react-navigation/native';
+import { Badge } from 'react-native-paper';
 import { strings } from '../../locales';
 import QuickPickTab from '../../screens/QuickPickTab/QuickPickTab';
 import { barcodeEmitter } from '../../utils/scannerUtils';
@@ -35,6 +36,8 @@ import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { GET_ITEM_DETAILS, GET_PICKLISTS, UPDATE_PICKLIST_STATUS } from '../../state/actions/asyncAPI';
 import ItemDetails from '../../models/ItemDetails';
+import styles from './PickingTabNavigator.style';
+import COLOR from '../../themes/Color';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -268,11 +271,23 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
   );
 
   return (
-    <Tab.Navigator initialRouteName={selectedTab}>
+    <Tab.Navigator
+      initialRouteName={selectedTab}
+      screenOptions={{
+        tabBarActiveTintColor: COLOR.MAIN_THEME_COLOR,
+        tabBarInactiveTintColor: COLOR.GREY_700,
+        tabBarItemStyle: styles.tabBarStyle
+      }}
+    >
       <Tab.Screen
         name={Tabs.QUICKPICK}
         options={{
-          title: `${strings('PICKING.QUICKPICK')} (${quickPickList.length})`
+          title: `${strings('PICKING.QUICKPICK')}`,
+          tabBarBadge: quickPickList.length !== 0 ? () => (
+            <Badge onPressIn={undefined} onPressOut={undefined} style={styles.quickPickBadge} visible={true}>
+              {quickPickList.length}
+            </Badge>
+          ) : undefined
         }}
         listeners={{
           focus: () => dispatch(setSelectedTab(Tabs.QUICKPICK))
@@ -283,7 +298,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
       <Tab.Screen
         name={Tabs.PICK}
         options={{
-          title: `${strings('PICKING.PICK')} (${pickBinList.length})`
+          title: `${strings('PICKING.PICK')}`,
+          tabBarBadge: pickBinList.length !== 0 ? () => (
+            <Badge onPressIn={undefined} onPressOut={undefined} style={styles.badge} visible={true}>
+              {pickBinList.length}
+            </Badge>
+          ) : undefined
         }}
         listeners={{
           focus: () => dispatch(setSelectedTab(Tabs.PICK))
@@ -294,7 +314,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
       <Tab.Screen
         name={Tabs.SALESFLOOR}
         options={{
-          title: `${strings('ITEM.SALES_FLOOR_QTY')} (${salesFloorList.length})`
+          title: `${strings('ITEM.SALES_FLOOR_QTY')}`,
+          tabBarBadge: salesFloorList.length !== 0 ? () => (
+            <Badge onPressIn={undefined} onPressOut={undefined} style={styles.badge} visible={true}>
+              {salesFloorList.length}
+            </Badge>
+          ) : undefined
         }}
         listeners={{
           focus: () => dispatch(setSelectedTab(Tabs.SALESFLOOR))
