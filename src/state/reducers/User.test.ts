@@ -25,7 +25,9 @@ describe('testing User reducer', () => {
     expect(testResults).toStrictEqual(testChangedState);
     // setConfigs action
 
-    const testConfig: ConfigResponse = { ...mockConfig, locMgmtEdit: false, addItemDetails: false };
+    const testConfig: ConfigResponse = {
+      ...mockConfig, locMgmtEdit: false, addItemDetails: false, showRollOverAudit: false
+    };
     testChangedState = {
       ...initialState,
       configs: {
