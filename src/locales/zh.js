@@ -486,6 +486,6 @@ export default {
   AUDITS: {
     AUDIT_ITEM: '盘点商品',
     COLLAPSE_ALL: '折叠',
-    EXPAND_ALL: 'Expand All'
+    EXPAND_ALL: '全部展开'
   }
 };
