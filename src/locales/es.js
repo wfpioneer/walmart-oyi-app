@@ -486,6 +486,6 @@ export default {
   AUDITS: {
     AUDIT_ITEM: 'Auditar Artículo',
     COLLAPSE_ALL: 'Colapsar todo',
-    EXPAND_ALL: 'Expandir Todo'
+    EXPAND_ALL: 'Expandir todo'
   }
 };
