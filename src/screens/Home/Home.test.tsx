@@ -182,7 +182,7 @@ describe('HomeScreen', () => {
         props = {
           ...homeScreenProps,
           userConfig: {
-            ...mockConfig, palletWorklists: true, auditWorklists: true, showRollOverAuditComplete: true
+            ...mockConfig, palletWorklists: true, auditWorklists: true, showRollOverAudit: true
           },
           worklistSummaryApiState: {
             ...defaultAsyncState,
