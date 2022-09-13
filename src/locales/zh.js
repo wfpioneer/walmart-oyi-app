@@ -484,6 +484,8 @@ export default {
     FEATURES: '功能模块'
   },
   AUDITS: {
-    AUDIT_ITEM: '盘点商品'
+    AUDIT_ITEM: '盘点商品',
+    COLLAPSE_ALL: '折叠',
+    EXPAND_ALL: 'Expand All'
   }
 };

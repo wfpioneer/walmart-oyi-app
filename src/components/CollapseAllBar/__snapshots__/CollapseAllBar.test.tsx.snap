@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CollapseAllBar Component Test renders default CollapseAllBar with collapsed as false 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "paddingHorizontal": 10,
+      "paddingVertical": 5,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="collapse-text-btn"
+  >
+    <Text
+      style={
+        Object {
+          "color": "#5a9ae0",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.AUDITS.COLLAPSE_ALL" translation]
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`CollapseAllBar Component Test renders default CollapseAllBar with collapsed as true 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "paddingHorizontal": 10,
+      "paddingVertical": 5,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="collapse-text-btn"
+  >
+    <Text
+      style={
+        Object {
+          "color": "#5a9ae0",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.AUDITS.EXPAND_ALL" translation]
+    </Text>
+  </View>
+</View>
+`;
