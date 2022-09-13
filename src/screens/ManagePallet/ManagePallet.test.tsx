@@ -29,7 +29,6 @@ import {
 import { updatePalletExpirationDate } from '../../state/actions/PalletManagement';
 import { strings } from '../../locales';
 import getItemDetails from '../../mockData/getItemDetails';
-import mockUser from '../../mockData/mockUser';
 
 const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
 
@@ -225,7 +224,7 @@ describe('ManagePalletScreen', () => {
       jest
         .spyOn(global, 'Date')
         .mockImplementation(() => mockDate as unknown as string);
-      Date.now = () => 1647369000000;
+
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         <ManagePalletScreen
@@ -402,6 +401,8 @@ describe('ManagePalletScreen', () => {
 
     afterEach(() => {
       jest.clearAllMocks();
+      // Resets methods overwritten with jest.spyOn
+      jest.restoreAllMocks();
     });
 
     it('tests getNumberOfDeleted', () => {
@@ -508,8 +509,8 @@ describe('ManagePalletScreen', () => {
             pallets: [
               {
                 id: 1,
-                createDate: 'today',
-                expirationDate: 'tomorrow',
+                createDate: '2022-01-01T12:00:00.000Z',
+                expirationDate: '01/05/2022',
                 items: []
               }
             ]
