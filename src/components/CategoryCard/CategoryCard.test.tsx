@@ -42,7 +42,7 @@ describe('Tests CategoryCard Component', () => {
     );
     expect(findByText(`43 - ${CATEGORY_NAME.FOODSERVICE}`)).toBeTruthy();
   });
-  it('should test on click functinality of collasible icon', async () => {
+  it('should test on click functionality of collapsible icon', async () => {
     const mockOnPress = jest.fn();
     const { findByTestId } = render(
       <CategoryCard
