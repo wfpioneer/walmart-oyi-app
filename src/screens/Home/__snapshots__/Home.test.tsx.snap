@@ -116,7 +116,6 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
         active={true}
         completionGoal={90}
         completionPercentage={0}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
         onPress={[Function]}
       />
@@ -260,7 +259,6 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
         active={true}
         completionGoal={90}
         completionPercentage={0}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
         onPress={[Function]}
       />
@@ -526,7 +524,6 @@ exports[`HomeScreen rendering renders pure version number if build environment i
         active={true}
         completionGoal={90}
         completionPercentage={0}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
         onPress={[Function]}
       />
@@ -574,6 +571,163 @@ exports[`HomeScreen rendering renders pure version number if build environment i
     }
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0
+  </Text>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`HomeScreen rendering renders wl summaries when api data has summaries, mp and audits enabled with rollover flag true 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "marginTop": 16,
+            "width": "70%",
+          }
+        }
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </CustomModalComponent>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text>
+      [missing "en.HOME.WELCOME" translation] testUser
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <GoalCircle
+        active={true}
+        completionGoal={100}
+        completionPercentage={50}
+        goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
+        onPress={[Function]}
+      />
+      <GoalCircle
+        active={false}
+        completionGoal={100}
+        completionPercentage={1}
+        goalTitle="[missing \\"en.LOCATION.PALLETS\\" translation]"
+        onPress={[Function]}
+      />
+      <GoalCircle
+        active={false}
+        completionGoal={100}
+        completionPercentage={60}
+        goalTitle="[missing \\"en.EXCEPTION.AUDITS\\" translation]"
+        onPress={[Function]}
+      />
+    </View>
+    <WorklistCard
+      complete={50}
+      completionGoal={100}
+      completionPercentage={50}
+      goal={100}
+      goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={25}
+      completionGoal={100}
+      completionPercentage={50}
+      goal={50}
+      goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={7}
+      completionGoal={100}
+      completionPercentage={50}
+      goal={14}
+      goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={12}
+      completionGoal={100}
+      completionPercentage={50}
+      goal={24}
+      goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      onPress={[Function]}
+    />
+  </ScrollView>
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
   </Text>
 </ForwardRef(SafeAreaView)>
 `;
@@ -670,7 +824,6 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         active={true}
         completionGoal={100}
         completionPercentage={50}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
         onPress={[Function]}
       />
@@ -814,7 +967,6 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         active={true}
         completionGoal={95}
         completionPercentage={100}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
         onPress={[Function]}
       />
@@ -958,7 +1110,6 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         active={true}
         completionGoal={90}
         completionPercentage={0}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
         onPress={[Function]}
       />
@@ -1102,7 +1253,6 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         active={true}
         completionGoal={100}
         completionPercentage={50}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
         onPress={[Function]}
       />
@@ -1110,8 +1260,164 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
         active={false}
         completionGoal={100}
         completionPercentage={1}
-        frequency="[missing \\"en.GENERICS.DAILY\\" translation]"
         goalTitle="[missing \\"en.LOCATION.PALLETS\\" translation]"
+        onPress={[Function]}
+      />
+    </View>
+    <WorklistCard
+      complete={50}
+      completionGoal={100}
+      completionPercentage={50}
+      goal={100}
+      goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={25}
+      completionGoal={100}
+      completionPercentage={50}
+      goal={50}
+      goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={7}
+      completionGoal={100}
+      completionPercentage={50}
+      goal={14}
+      goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={12}
+      completionGoal={100}
+      completionPercentage={50}
+      goal={24}
+      goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      onPress={[Function]}
+    />
+  </ScrollView>
+  <Text
+    style={
+      Object {
+        "color": "#9e9e9e",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
+  </Text>
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`HomeScreen rendering renders worklist summaries when worklistApiState.result.data has summaries, missing pallet and audits enabled 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <mockConstructor
+      color="#f44336"
+      name="alert"
+      size={30}
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "marginTop": 16,
+            "width": "70%",
+          }
+        }
+        title="[missing \\"en.GENERICS.OK\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </CustomModalComponent>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text>
+      [missing "en.HOME.WELCOME" translation] testUser
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <GoalCircle
+        active={true}
+        completionGoal={100}
+        completionPercentage={50}
+        goalTitle="[missing \\"en.HOME.ITEMS\\" translation]"
+        onPress={[Function]}
+      />
+      <GoalCircle
+        active={false}
+        completionGoal={100}
+        completionPercentage={1}
+        goalTitle="[missing \\"en.LOCATION.PALLETS\\" translation]"
+        onPress={[Function]}
+      />
+      <GoalCircle
+        active={false}
+        completionGoal={100}
+        completionPercentage={60}
+        goalTitle="[missing \\"en.EXCEPTION.AUDITS\\" translation]"
         onPress={[Function]}
       />
     </View>

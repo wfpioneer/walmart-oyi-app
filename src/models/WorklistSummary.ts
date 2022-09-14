@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-shadow
 export enum WorklistGoal {
   ITEMS = 'ITEMS',
-  PALLETS = 'PALLETS'
+  PALLETS = 'PALLETS',
+  AUDITS = 'AUDITS'
 }
 
 // eslint-disable-next-line @typescript-eslint/no-shadow, no-shadow
@@ -26,4 +27,4 @@ export interface WorklistTypeDetails {
   completedItems: number
 }
 
-export type WorklistType = 'NSFL' | 'C' | 'NO' | 'NS' | 'NP' | 'PO' | 'MP';
+export type WorklistType = 'NSFL' | 'C' | 'NO' | 'NS' | 'NP' | 'PO' | 'MP' | 'AU' | 'RA';
