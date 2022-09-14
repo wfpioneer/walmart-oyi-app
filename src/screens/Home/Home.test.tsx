@@ -6,6 +6,7 @@ import {
   mockAllCompleteWorklistSummaries,
   mockHalfCompleteWorklistSummaries,
   mockItemAndPalletWorklistSummary,
+  mockItemNPalletNAuditWorklistSummary,
   mockZeroCompleteWorklistSummaries
 } from '../../mockData/mockWorklistSummary';
 import { AsyncState } from '../../models/AsyncState';
@@ -155,6 +156,48 @@ describe('HomeScreen', () => {
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('renders worklist summaries when worklistApiState.result.data has summaries, missing pallet and audits enabled',
+      () => {
+        props = {
+          ...homeScreenProps,
+          userConfig: { ...mockConfig, palletWorklists: true, auditWorklists: true },
+          worklistSummaryApiState: {
+            ...defaultAsyncState,
+            result: {
+              status: 200,
+              data: mockItemNPalletNAuditWorklistSummary
+            }
+          }
+        };
+        const renderer = ShallowRenderer.createRenderer();
+        renderer.render(<HomeScreen
+          {...props}
+        />);
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      });
+
+    it('renders wl summaries when api data has summaries, mp and audits enabled with rollover flag true',
+      () => {
+        props = {
+          ...homeScreenProps,
+          userConfig: {
+            ...mockConfig, palletWorklists: true, auditWorklists: true, showRollOverAudit: true
+          },
+          worklistSummaryApiState: {
+            ...defaultAsyncState,
+            result: {
+              status: 200,
+              data: mockItemNPalletNAuditWorklistSummary
+            }
+          }
+        };
+        const renderer = ShallowRenderer.createRenderer();
+        renderer.render(<HomeScreen
+          {...props}
+        />);
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      });
 
     it('renders worklist summaries when worklistApiState.result.data has summaries (items 100% complete)', () => {
       props = {

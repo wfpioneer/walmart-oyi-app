@@ -31,5 +31,5 @@ export const mockConfig: Configurations = {
   additionalItemDetails: false,
   createPallet: false,
   auditWorklists: false,
-  showRollOverAuditComplete: false
+  showRollOverAudit: false
 };

@@ -7,13 +7,12 @@ import styles from './GoalCircle.style';
     completionPercentage: number;
     completionGoal: number;
     active: boolean;
-    frequency: string;
     onPress: () => void
 }
 
 function GoalCircle(props: GoalCircleProps): JSX.Element {
   const {
-    active, completionGoal, completionPercentage, frequency, goalTitle, onPress
+    active, completionGoal, completionPercentage, goalTitle, onPress
   } = props;
 
   const atGoalStyle = (completionPercentage >= completionGoal) ? styles.goalMet : styles.goalNotMet;
@@ -40,7 +39,6 @@ function GoalCircle(props: GoalCircleProps): JSX.Element {
           </Text>
         </View>
       </View>
-      <Text style={styles.freq}>{frequency}</Text>
       <TouchableOpacity testID="btnGoalTitleClick" onPress={onPress}>
         <Text style={goalStyle} testID="txtGoalTitle">{goalTitle}</Text>
       </TouchableOpacity>

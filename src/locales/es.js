@@ -78,7 +78,9 @@ export default {
     CANCELLED: 'Cancelados',
     NSFL: 'Sin Ubicación en Piso de Ventas',
     UNKNOWN: 'desconocida',
-    MISSING_PALLETS: 'Pallets Faltantes'
+    MISSING_PALLETS: 'Pallets Faltantes',
+    AUDITS: 'Auditorías',
+    ROLLOVER_AUDITS: 'Auditorías Atrasadas'
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',
@@ -484,6 +486,8 @@ export default {
     FEATURES: 'Funcionalidades'
   },
   AUDITS: {
-    AUDIT_ITEM: 'Auditar Artículo'
+    AUDIT_ITEM: 'Auditar Artículo',
+    COLLAPSE_ALL: 'Colapsar todo',
+    EXPAND_ALL: 'Expandir todo'
   }
 };

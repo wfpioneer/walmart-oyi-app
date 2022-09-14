@@ -22,7 +22,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Button from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
-import { WorklistGoal, WorklistGoalDuration, WorklistSummary } from '../../models/WorklistSummary';
+import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
 import { CustomModalComponent } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 
@@ -148,29 +148,25 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           return strings('HOME.ITEMS');
         case WorklistGoal.PALLETS:
           return strings('LOCATION.PALLETS');
-        default:
-          return '';
-      }
-    };
-
-    const getWorklistFrequency = (worklistGoalDuration: WorklistGoalDuration) => {
-      switch (worklistGoalDuration) {
-        case WorklistGoalDuration.DAILY:
-          return strings('GENERICS.DAILY');
-        case WorklistGoalDuration.WEEKLY:
-          return strings('GENERICS.WEEKLY');
+        case WorklistGoal.AUDITS:
+          return strings('EXCEPTION.AUDITS');
         default:
           return '';
       }
     };
 
     const renderGoalCircles = () => data.map((goal, index) => {
-      const frequency = getWorklistFrequency(goal.worklistGoalDuration);
       const goalTitle = getWorklistGoalTitle(goal.worklistGoal);
       const palletWorklistsEnabled = this.props.userConfig.palletWorklists;
+      const auditsWorklistsEnabled = this.props.userConfig.auditWorklists;
 
       // Disabled pallet worklist Goal Circle based on feature flag
       if (!palletWorklistsEnabled && goal.worklistGoal === WorklistGoal.PALLETS) {
+        return null;
+      }
+
+      // Disabled audits worklist Goal Circle based on feature flag
+      if (!auditsWorklistsEnabled && goal.worklistGoal === WorklistGoal.AUDITS) {
         return null;
       }
 
@@ -181,27 +177,47 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           completionGoal={goal.worklistEndGoalPct}
           completionPercentage={goal.worklistGoalPct}
           active={index === this.state.activeGoal}
-          frequency={frequency}
           onPress={() => onGoalTitlePress(index)}
         />
       );
     });
 
     const dataSummary = data[this.state.activeGoal];
+    const isRollOverComplete = () => {
+      const rollOverSummary = dataSummary.worklistTypes.find(wlType => wlType.worklistType === 'RA');
+      if (rollOverSummary) {
+        return rollOverSummary.totalItems === 0 || rollOverSummary.completedItems === rollOverSummary.totalItems;
+      }
+      return true;
+    };
+
     const renderWorklistCards = () => dataSummary.worklistTypes
       .map(worklist => {
+        const rollOverAuditWLEnabled = this.props.userConfig.showRollOverAudit;
+        // when show roll over complte is enabled than show only roll over when it is not completed
+        // and do not show the audit worklist type
+        // if completeted or no roll over than show both audit worklist
+        if (worklist.worklistType === 'AU' && rollOverAuditWLEnabled && !isRollOverComplete()) {
+          return null;
+        }
         const worklistType = worklist.worklistType === 'MP'
           ? strings('EXCEPTION.MISSING_PALLETS')
           : exceptionTypeToDisplayString(worklist?.worklistType.toUpperCase() ?? '');
         const isPalletWorklist = dataSummary.worklistGoal === WorklistGoal.PALLETS;
+        const isAuditWorklist = dataSummary.worklistGoal === WorklistGoal.AUDITS;
 
         const onWorklistCardPress = () => {
           trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
           this.props.updateFilterExceptions([worklist.worklistType]);
-          validateSession(this.props.navigation, this.props.route.name).then(() => (isPalletWorklist
-            ? this.props.navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' })
-            : this.props.navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' })))
-            .catch(() => {});
+          validateSession(this.props.navigation, this.props.route.name).then(() => {
+            if (isPalletWorklist) {
+              this.props.navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' });
+            } else if (isAuditWorklist) {
+              this.props.navigation.navigate('AuditWorklist', { screen: 'AuditWorklistTabs' });
+            } else {
+              this.props.navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' });
+            }
+          }).catch(() => {});
         };
 
         const calculationValue = (worklist.completedItems / worklist.totalItems) * 100;
