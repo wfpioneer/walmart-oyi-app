@@ -487,6 +487,8 @@ export default {
     FEATURES: 'Features'
   },
   AUDITS: {
-    AUDIT_ITEM: 'Audit Item'
+    AUDIT_ITEM: 'Audit Item',
+    COLLAPSE_ALL: 'Collapse all',
+    EXPAND_ALL: 'Expand all'
   }
 };
