@@ -213,7 +213,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             if (isPalletWorklist) {
               this.props.navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' });
             } else if (isAuditWorklist) {
-              this.props.navigation.navigate('AuditWorklist', { screen: 'AuditWorklistTabs' });
+              this.props.navigation.navigate('AuditWorklistNavigator', { screen: 'AuditWorklistTabs' });
             } else {
               this.props.navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' });
             }
