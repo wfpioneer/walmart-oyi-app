@@ -225,8 +225,8 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       name: strings('WORKLIST.AUDIT_WORKLIST')
     },
     {
-      fluffyKey: 'show roll over audits',
-      configKey: 'showRollOverAudits',
+      fluffyKey: 'show roll over audit',
+      configKey: 'showRollOverAudit',
       name: strings('AUDITS.ROLLOVER_AUDITS')
     }
   ];
