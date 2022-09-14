@@ -78,7 +78,9 @@ export default {
     CANCELLED: '取消状态商品清单',
     NSFL: '无楼面位置商品清单',
     UNKNOWN: '未知错误',
-    MISSING_PALLETS: '不在储位卡板'
+    MISSING_PALLETS: '不在储位卡板',
+    AUDITS: '盘点',
+    ROLLOVER_AUDITS: '上周遗留盘点清单'
   },
   ITEM: {
     TITLE: '查看商品明细',

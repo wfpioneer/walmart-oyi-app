@@ -154,3 +154,59 @@ export const mockItemAndPalletWorklistSummary: WorklistSummary[] = [
     ]
   }
 ];
+
+export const mockItemNPalletNAuditWorklistSummary: WorklistSummary[] = [
+  {
+    worklistGoal: WorklistGoal.ITEMS,
+    worklistGoalDuration: WorklistGoalDuration.DAILY,
+    worklistGoalPct: 50,
+    worklistEndGoalPct: 100,
+    worklistTypes: [
+      {
+        worklistType: 'NSFL',
+        totalItems: 100,
+        completedItems: 50
+      },
+      {
+        worklistType: 'C',
+        totalItems: 50,
+        completedItems: 25
+      },
+      {
+        worklistType: 'NO',
+        totalItems: 14,
+        completedItems: 7
+      },
+      {
+        worklistType: 'NS',
+        totalItems: 24,
+        completedItems: 12
+      }
+    ],
+    totalItems: 188,
+    totalCompletedItems: 94
+  },
+  {
+    totalCompletedItems: 1,
+    totalItems: 151,
+    worklistEndGoalPct: 100,
+    worklistGoal: WorklistGoal.PALLETS,
+    worklistGoalDuration: WorklistGoalDuration.DAILY,
+    worklistGoalPct: 1,
+    worklistTypes: [
+      { worklistType: 'MP', totalItems: 0, completedItems: 0 }
+    ]
+  },
+  {
+    totalCompletedItems: 80,
+    totalItems: 151,
+    worklistEndGoalPct: 100,
+    worklistGoal: WorklistGoal.AUDITS,
+    worklistGoalDuration: WorklistGoalDuration.DAILY,
+    worklistGoalPct: 60,
+    worklistTypes: [
+      { worklistType: 'AU', totalItems: 20, completedItems: 6 },
+      { worklistType: 'RA', totalItems: 5, completedItems: 5 }
+    ]
+  }
+];

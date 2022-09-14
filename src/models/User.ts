@@ -31,7 +31,7 @@ export interface Configurations {
   additionalItemDetails: boolean;
   createPallet: boolean;
   auditWorklists: boolean;
-  showRollOverAuditComplete: boolean;
+  showRollOverAudit: boolean;
 }
 
 export interface area {
