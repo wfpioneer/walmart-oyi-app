@@ -26,7 +26,9 @@ describe('testing User reducer', () => {
     // setConfigs action
 
     const testConfig: ConfigResponse = {
-      ...mockConfig, locMgmtEdit: false, addItemDetails: false, showRollOverAudit: false
+      ...mockConfig,
+      locMgmtEdit: false,
+      addItemDetails: false
     };
     testChangedState = {
       ...initialState,

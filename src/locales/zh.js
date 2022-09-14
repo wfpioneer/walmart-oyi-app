@@ -78,7 +78,9 @@ export default {
     CANCELLED: '取消状态商品清单',
     NSFL: '无楼面位置商品清单',
     UNKNOWN: '未知错误',
-    MISSING_PALLETS: '不在储位卡板'
+    MISSING_PALLETS: '不在储位卡板',
+    AUDITS: '盘点',
+    ROLLOVER_AUDITS: '上周遗留盘点清单'
   },
   ITEM: {
     TITLE: '查看商品明细',
@@ -284,7 +286,8 @@ export default {
     RESERVE_EMPTY: '存储区域无卡板',
     GET_FAILED_PALLETS: '获取 %{amount} 卡板失败',
     AISLES_ADDED: '通道号{number}已添加',
-    INCOMPLETE_AISLES_ADDED: '创建通道/货架位置数量缺失，只创建了{number}通道/货架',
+    INCOMPLETE_AISLES_ADDED:
+      '创建通道/货架位置数量缺失，只创建了{number}通道/货架',
     INCOMPLETE_AISLES_PLEASE_CHECK: '请确认已创建的通道和货架清单',
     ADD_AISLES_ERROR: '添加通道/货架时出错,请再试一次。',
     SECTIONS_ADDED: '已添加 %{number} 个货架位置',
@@ -296,7 +299,8 @@ export default {
     PRINT_LABEL_EXISTS: '此标签已经在打印清单中',
     ZONE_ADDED: '区域 %{name} 已添加',
     ADD_ZONE_ERROR: '添加区域失败，请重试。',
-    INCOMPLETE_ZONE_ADDED: '区域 %{name} 已添加， 但是仅部分通道/货架创建成功，请检查已创建的通道/货架清单',
+    INCOMPLETE_ZONE_ADDED:
+      '区域 %{name} 已添加， 但是仅部分通道/货架创建成功，请检查已创建的通道/货架清单',
     REMOVE_ZONE_CONFIRMATION: '确定移除此区域?',
     REMOVE_ZONE_WILL_REMOVE_AISLES_SECTIONS: '移除所有通道和此通道内的货架号',
     REMOVE_ZONE_FAIL: '移除此区域失败，请重试。',
@@ -324,7 +328,8 @@ export default {
     ZONE_NAME_ERROR: '重置区域名称出错，\n请重试',
     SELECT_ZONE: '选择区域',
     CLEAR_AISLE_ITEMS_CONFIRMATION: '确定要移除此通道所有商品吗？',
-    CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE: '请选择楼面，高货架或者两个都选进行清除',
+    CLEAR_AISLE_ITEMS_CHOOSE_SF_OR_RESERVE:
+      '请选择楼面，高货架或者两个都选进行清除',
     CLEAR_AISLE_ITEMS_WONT_DELETE: '删除此通道的货架信息',
     CLEAR_AISLE_ITEMS_SUCCEED: '已清除此通道下所有选择的商品信息',
     CLEAR_AISLE_ITEMS_FAIL: '清除此通道下商品时出错，请重试',
@@ -455,7 +460,8 @@ export default {
     PICK_COMPLETED_PLURAL: '补货已完成',
     PICKLIST_UPDATED: '补货清单已更新',
     PICK_COMPLETED_AND_PICKLIST_UPDATED: '已完成一个补货，补货清单已更新',
-    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: '已完成多个补货，补货清单已更新',
+    PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL:
+      '已完成多个补货，补货清单已更新',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: '高货架无卡板可取',
     ADDITIONAL_ITEMS: '卡板有其它商品',
     QUANTITY_STOCKED: '楼面陈列数量'
@@ -464,7 +470,8 @@ export default {
     BINNING: '上架',
     ASSIGN_LOCATION: '分配货架位置',
     WARNING_LABEL: '警示',
-    WARNING_DESCRIPTION: '如果你离开此屏幕，已经扫描的卡板将不会被维护在此高货架位置',
+    WARNING_DESCRIPTION:
+      '如果你离开此屏幕，已经扫描的卡板将不会被维护在此高货架位置',
     SCAN_LOCATION: '扫描货架号进行单卡板上架操作',
     SCAN_LOCATION_PLURAL: '扫描货架号进行多卡板上架操作',
     SCAN_PALLET: '扫描卡板号开始上架',
@@ -484,16 +491,6 @@ export default {
     FEATURES: '功能模块'
   },
   AUDITS: {
-    AUDITS: '盘点',
-    AUDIT_ITEM: '盘点商品',
-    ROLLOVER_AUDITS: '上周遗留盘点清单',
-    COLLAPSE_ALL: '折叠',
-    VALIDATE_QUANTITY: '实盘每一个位置数量',
-    VALIDATE_SCAN_QUANTITY: '扫描卡板并实盘数量',
-    OTHER_ON_HANDS: '其它库存',
-    PALLET_COUNT: '请输入卡板库存数量',
-    CONFIRM_AUDIT: '确认现货盘点结果',
-    UPDATED_QTY: '更新数量',
-    LARGE_CURRENCY_CHANGE: '大金额调整(超1000)'
+    AUDIT_ITEM: '盘点商品'
   }
 };

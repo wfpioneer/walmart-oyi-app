@@ -78,7 +78,9 @@ export default {
     CANCELLED: 'Cancelados',
     NSFL: 'Sin Ubicación en Piso de Ventas',
     UNKNOWN: 'desconocida',
-    MISSING_PALLETS: 'Pallets Faltantes'
+    MISSING_PALLETS: 'Pallets Faltantes',
+    AUDITS: 'Auditorías',
+    ROLLOVER_AUDITS: 'Auditorías Atrasadas'
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',
@@ -488,6 +490,7 @@ export default {
     AUDIT_ITEM: 'Auditar Artículo',
     ROLLOVER_AUDITS: 'Auditorías Atrasadas',
     COLLAPSE_ALL: 'Colapsar todo',
+    EXPAND_ALL: 'Expandir todo',
     VALIDATE_QUANTITY: 'Valida la cantidad en cada ubicación',
     VALIDATE_SCAN_QUANTITY: 'Escanea cada pallet y valida la cantidad',
     OTHER_ON_HANDS: 'Otras ubicaciones',

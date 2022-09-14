@@ -78,7 +78,9 @@ export default {
     CANCELLED: 'Cancelled',
     NSFL: 'No Sales Floor Location',
     UNKNOWN: 'Unknown',
-    MISSING_PALLETS: 'Missing Pallets'
+    MISSING_PALLETS: 'Missing Pallets',
+    AUDITS: 'Audits',
+    ROLLOVER_AUDITS: 'Rollover Audits'
   },
   ITEM: {
     TITLE: 'Review item details',
@@ -490,6 +492,7 @@ export default {
     AUDIT_ITEM: 'Audit Item',
     ROLLOVER_AUDITS: 'Rollover Audits',
     COLLAPSE_ALL: 'Collapse All',
+    EXPAND_ALL: 'Expand all',
     VALIDATE_QUANTITY: 'Validate quantity in each location',
     VALIDATE_SCAN_QUANTITY: 'Scan each pallet and validate quantity',
     OTHER_ON_HANDS: 'Other On-Hands',
