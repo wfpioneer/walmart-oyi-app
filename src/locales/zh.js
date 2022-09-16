@@ -441,6 +441,7 @@ export default {
     PICKLIST_ERROR: '重置补货清单时报错',
     UPDATE_PICKLIST_STATUS_SUCCESS: '补货清单状态更新成功',
     UPDATE_PICKLIST_STATUS_ERROR: '更新补货清单时出错',
+    ITEM_QUANTITY_IS_MANDATORY_ERROR: '楼面需陈列数量已更新',
     LOCATIONS_UPDATED: '位置已更新',
     LOCATIONS_FAILED_UPDATE: '位置更新失败',
     SELECT_CONTINUE_ACTION: '选择任务继续',

@@ -441,6 +441,7 @@ export default {
     PICKLIST_ERROR: 'Hubo un error obteniendo la lista de pickeos',
     UPDATE_PICKLIST_STATUS_SUCCESS: 'Se actualizaron correctamente los estatus de pick',
     UPDATE_PICKLIST_STATUS_ERROR: 'Hubo un error al actualizar el estatus de pickeo',
+    ITEM_QUANTITY_IS_MANDATORY_ERROR: 'El campo de cantidad abastecida debe llenarse',
     LOCATIONS_UPDATED: 'Ubicaciones actualizadas',
     LOCATIONS_FAILED_UPDATE: 'Falló la actualización de ubicaciones',
     SELECT_CONTINUE_ACTION: 'Seleccionar acción para continuar',
