@@ -17,7 +17,7 @@ import SelectLocationType from '../screens/SelectLocationType/SelectLocationType
 import { showInfoModal } from '../state/actions/Modal';
 import { openCamera } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
-import { GET_ITEM_DETAILS } from '../state/actions/asyncAPI';
+import { GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2 } from '../state/actions/asyncAPI';
 import ItemHistory from '../screens/ItemHistory/ItemHistory';
 import { clearItemHistory } from '../state/actions/ItemHistory';
 
@@ -126,6 +126,7 @@ const ReviewItemDetailsNavigator = () => {
         listeners={{
           beforeRemove: () => {
             dispatch({ type: GET_ITEM_DETAILS.RESET });
+            dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
           }
         }}
       />

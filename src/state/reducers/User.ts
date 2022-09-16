@@ -1,6 +1,10 @@
 import User from '../../models/User';
 import {
-  ASSIGN_FLUFFY_FEATURES, Actions, SET_CONFIGS, USER_LOGIN, USER_LOGOUT
+  ASSIGN_FLUFFY_FEATURES,
+  Actions,
+  SET_CONFIGS,
+  USER_LOGIN,
+  USER_LOGOUT
 } from '../actions/User';
 
 export const initialState: User = {
