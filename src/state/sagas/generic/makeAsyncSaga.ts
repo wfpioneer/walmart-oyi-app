@@ -60,7 +60,7 @@ export function makeAsyncSaga<Q = any, R = AxiosResponse, E = AxiosError>(
       newLocationTypeNbr: payload?.newLocationTypeNbr,
       newSectionId: payload?.newSectionId,
       numberOfPallets: payload?.numberOfPallets,
-      palletItem: payload?.palletItem,
+      palletItem: JSON.stringify(payload?.palletItem),
       picklistIds: JSON.stringify(payload?.picklistIds),
       picklistItems: JSON.stringify(payload?.picklistItems),
       printList: JSON.stringify(payload?.printList),
