@@ -131,8 +131,8 @@ export const updatePicklistStatusApiEffect = (
   // on api error
   if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.error) {
     dispatch(hideActivityModal());
-    if (updatePicklistStatusApi.error.response.status === 400
-      && updatePicklistStatusApi.error.response.data.errorEnum === 'ITEM_QUANTITY_IS_MANDATORY') {
+    if (updatePicklistStatusApi.error?.response?.status === 400
+      && updatePicklistStatusApi.error?.response?.data?.errorEnum === 'ITEM_QUANTITY_IS_MANDATORY') {
       Toast.show({
         type: 'error',
         text1: strings('PICKING.ITEM_QUANTITY_IS_MANDATORY_ERROR'),
