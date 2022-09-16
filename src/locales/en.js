@@ -349,6 +349,7 @@ export default {
     ITEM_WORKLIST: 'Item Work List',
     PALLET_WORKLIST: 'Pallet Work List',
     AUDIT_WORKLIST: 'Audit Work List',
+    ROLLOVER_WORKLIST: 'Rollover Work List',
     SCAN_PALLET: 'Scan Pallet',
     SCAN_PALLET_LABEL: 'Scan Pallet Label to continue',
     SCAN_PALLET_ERROR: 'Pallet scanned must match pallet on worklist'
@@ -487,8 +488,17 @@ export default {
     FEATURES: 'Features'
   },
   AUDITS: {
+    AUDITS: 'Audits',
     AUDIT_ITEM: 'Audit Item',
-    COLLAPSE_ALL: 'Collapse all',
-    EXPAND_ALL: 'Expand all'
+    ROLLOVER_AUDITS: 'Rollover Audits',
+    COLLAPSE_ALL: 'Collapse All',
+    EXPAND_ALL: 'Expand all',
+    VALIDATE_QUANTITY: 'Validate quantity in each location',
+    VALIDATE_SCAN_QUANTITY: 'Scan each pallet and validate quantity',
+    OTHER_ON_HANDS: 'Other On-Hands',
+    PALLET_COUNT: 'Please enter the count for pallet',
+    CONFIRM_AUDIT: 'Confirm On-Hands Audit',
+    UPDATED_QTY: 'Updated Quantity',
+    LARGE_CURRENCY_CHANGE: 'Large Currency Change'
   }
 };
