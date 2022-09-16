@@ -43,7 +43,7 @@ export const MainNavigator = (): JSX.Element => (
       <Stack.Screen name="Picking" component={PickingNavigator} />
       <Stack.Screen name="MissingPalletWorklist" component={MissingPalletWorklistNavigator} />
       <Stack.Screen name="WorklistNavigator" component={WorklistNavigator} />
-      <Stack.Screen name="AuditWorklist" component={AuditWorklistNavigator} />
+      <Stack.Screen name="AuditWorklistNavigator" component={AuditWorklistNavigator} />
     </Stack.Navigator>
   </NavigationContainer>
 );
