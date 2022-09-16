@@ -15,6 +15,8 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
       ]
     }
     keyExtractor={[Function]}
+    onRefresh={[Function]}
+    refreshing={false}
     renderItem={[Function]}
     scrollEnabled={false}
   />
@@ -36,6 +38,8 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
       ]
     }
     keyExtractor={[Function]}
+    onRefresh={[Function]}
+    refreshing={false}
     renderItem={[Function]}
     scrollEnabled={false}
   />
@@ -106,9 +110,11 @@ Array [
     onLayout={[Function]}
     onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
+    onRefresh={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
+    refreshing={false}
     removeClippedSubviews={false}
     renderItem={[Function]}
     renderScrollComponent={[Function]}
@@ -829,9 +835,11 @@ Array [
     onLayout={[Function]}
     onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
+    onRefresh={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
+    refreshing={false}
     removeClippedSubviews={false}
     renderItem={[Function]}
     renderScrollComponent={[Function]}
