@@ -325,13 +325,13 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     setDeletePicks
   ), [binPalletsApi]);
 
-  useEffectHook(() => {
-    return navigation.addListener('beforeRemove', e => {
-      if (route.params && route.params.source && route.params.source === "picking") {
+  useEffectHook(() => (
+    navigation.addListener('beforeRemove', () => {
+      if (route.params && route.params.source && route.params.source === 'picking') {
         dispatch(clearPallets());
       }
-    });
-  }, [navigation]);
+    })
+  ), [navigation]);
 
   const scanTextView = () => (
     <View style={styles.scanView}>
