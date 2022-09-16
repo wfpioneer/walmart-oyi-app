@@ -45,6 +45,7 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
     options={
       Object {
         "headerLeft": [Function],
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
       }
     }

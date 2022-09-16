@@ -510,6 +510,16 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "fluffyKey": "additional item details",
             "name": "[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]",
           },
+          Object {
+            "configKey": "auditWorklists",
+            "fluffyKey": "audit worklists",
+            "name": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+          },
+          Object {
+            "configKey": "showRollOverAudit",
+            "fluffyKey": "show roll over audit",
+            "name": "[missing \\"en.AUDITS.ROLLOVER_AUDITS\\" translation]",
+          },
         ]
       }
       keyExtractor={[Function]}
@@ -880,6 +890,16 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "fluffyKey": "additional item details",
             "name": "[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]",
           },
+          Object {
+            "configKey": "auditWorklists",
+            "fluffyKey": "audit worklists",
+            "name": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+          },
+          Object {
+            "configKey": "showRollOverAudit",
+            "fluffyKey": "show roll over audit",
+            "name": "[missing \\"en.AUDITS.ROLLOVER_AUDITS\\" translation]",
+          },
         ]
       }
       keyExtractor={[Function]}
@@ -1169,6 +1189,16 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "configKey": "additionalItemDetails",
             "fluffyKey": "additional item details",
             "name": "[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]",
+          },
+          Object {
+            "configKey": "auditWorklists",
+            "fluffyKey": "audit worklists",
+            "name": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+          },
+          Object {
+            "configKey": "showRollOverAudit",
+            "fluffyKey": "show roll over audit",
+            "name": "[missing \\"en.AUDITS.ROLLOVER_AUDITS\\" translation]",
           },
         ]
       }
