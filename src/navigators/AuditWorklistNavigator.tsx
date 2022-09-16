@@ -6,12 +6,12 @@ import { TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import { strings } from '../locales';
-import AuditWorklist from '../screens/Worklist/AuditWorklistScreen';
+import AuditWorklist from '../screens/Worklist/AuditWorklist/AuditWorklistScreen';
 import { setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import COLOR from '../themes/Color';
 import styles from './AuditWorklistNavigator.style';
-import AuditWorklistTabs from './AuditWorklistTabs/AuditWorklistTabs';
+import AuditWorklistTabs from './AuditWorklistTabNavigator/AuditWorklistTabNavigator';
 
 const Stack = createStackNavigator();
 
@@ -39,6 +39,14 @@ const renderPrintButton = () => (
   <TouchableOpacity onPress={() => {}}>
     <View>
       <MaterialCommunityIcons name="printer" size={20} color={COLOR.WHITE} />
+    </View>
+  </TouchableOpacity>
+);
+
+const renderFilterButton = () => (
+  <TouchableOpacity onPress={() => {}}>
+    <View style={styles.filterButton}>
+      <MaterialCommunityIcons name="filter-variant" size={30} color={COLOR.WHITE} />
     </View>
   </TouchableOpacity>
 );
@@ -83,6 +91,11 @@ export const AuditWorklistNavigatorStack = (
             {...hlProps}
             onPress={navigateBack}
           />
+          ),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderFilterButton()}
+            </View>
           )
         }}
       />
