@@ -20,6 +20,12 @@ import { hideActivityModal, showActivityModal } from '../state/actions/Modal';
 import { setManualScan } from '../state/actions/Global';
 import { trackEvent } from '../utils/AppCenterTool';
 import { openCamera } from '../utils/scannerUtils';
+import { Printer, PrinterType } from '../models/Printer';
+import {
+  savePrinter,
+  setPriceLabelPrinter as setPriceLabelPrinterAsyncStorage
+} from '../utils/asyncStorageUtils';
+import { setPriceLabelPrinter, updatePrinterByID } from '../state/actions/Print';
 
 interface HomeNavigatorComponentProps {
   logoutUser: () => void;
@@ -29,18 +35,24 @@ interface HomeNavigatorComponentProps {
   isManualScanEnabled: boolean;
   setManualScan: (bool: boolean) => void;
   clubNbr: number;
+  updatePrinterByID: (payload: any) => void;
+  priceLabelPrinter: Printer;
+  setPriceLabelPrinter: (payload: Printer) => void
 }
 
 const mapStateToProps = (state: any) => ({
   isManualScanEnabled: state.Global.isManualScanEnabled,
-  clubNbr: state.User.siteId
+  clubNbr: state.User.siteId,
+  priceLabelPrinter: state.Print.priceLabelPrinter
 });
 
 const mapDispatchToProps = {
   logoutUser,
   showActivityModal,
   hideActivityModal,
-  setManualScan
+  setManualScan,
+  updatePrinterByID,
+  setPriceLabelPrinter
 };
 
 const Stack = createStackNavigator();
@@ -51,6 +63,22 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
     strings('GENERICS.SIGN_OUT'),
     strings('GENERICS.CANCEL')
   ];
+
+  const updateDefaultPrinter = () => {
+    const defPrinter = {
+      type: PrinterType.LASER,
+      name: strings('PRINT.FRONT_DESK'),
+      desc: strings('GENERICS.DEFAULT'),
+      id: '000000000000',
+      labelsAvailable: ['price']
+    };
+    props.updatePrinterByID({ id: '000000000000', printer: defPrinter });
+    savePrinter(defPrinter);
+    if (props.priceLabelPrinter.id === defPrinter.id) {
+      props.setPriceLabelPrinter(defPrinter);
+      setPriceLabelPrinterAsyncStorage(defPrinter);
+    }
+  };
 
   ActionSheet.showActionSheetWithOptions({
     options,
@@ -71,14 +99,17 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
         switch (selectedLanguageIndex) {
           case 0:
             setLanguage('en');
+            updateDefaultPrinter();
             trackEvent('change_language', { language: 'en' });
             return navigation.dispatch(StackActions.replace('Tabs'));
           case 1:
             setLanguage('es');
+            updateDefaultPrinter();
             trackEvent('change_language', { language: 'es' });
             return navigation.dispatch(StackActions.replace('Tabs'));
           case 2:
             setLanguage('zh');
+            updateDefaultPrinter();
             trackEvent('change_language', { language: 'zh' });
             return navigation.dispatch(StackActions.replace('Tabs'));
           default:
