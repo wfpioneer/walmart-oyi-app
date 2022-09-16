@@ -442,6 +442,7 @@ export default {
     REMOVE_PERISHABLE: 'Removing perishable item',
     REMOVE_PERISHABLE_NEW_EXPIRY: 'Please enter new expiration date',
     UPDATE_PICKLIST_STATUS_SUCCESS: 'Successfully updated picklist status',
+    ITEM_QUANTITY_IS_MANDATORY_ERROR: 'Quantity Stocked field needs updated',
     UPDATE_PICKLIST_STATUS_ERROR: 'There was an error while updating the Picklist status',
     LOCATIONS_UPDATED: 'Locations Updated',
     LOCATIONS_FAILED_UPDATE: 'Locations Failed to Update',
