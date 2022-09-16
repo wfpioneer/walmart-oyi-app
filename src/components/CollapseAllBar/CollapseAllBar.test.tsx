@@ -9,7 +9,7 @@ describe('CollapseAllBar Component', () => {
     const btnCollapse = getByTestId('collapse-text-btn');
 
     fireEvent.press(btnCollapse);
-    expect(mockOnclick).toHaveBeenCalledWith(true);
+    expect(mockOnclick).toHaveBeenCalled();
     expect(toJSON()).toMatchSnapshot();
   });
   it('Test renders default CollapseAllBar with collapsed as true', () => {
@@ -19,7 +19,7 @@ describe('CollapseAllBar Component', () => {
     const btnCollapse = getByTestId('collapse-text-btn');
 
     fireEvent.press(btnCollapse);
-    expect(mockOnclick).toHaveBeenCalledWith(false);
+    expect(mockOnclick).toHaveBeenCalled();
     expect(toJSON()).toMatchSnapshot();
   });
 });
