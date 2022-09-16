@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
@@ -10,17 +10,25 @@ import COLOR from '../../themes/Color';
 
 export type CategoryCardProps = {
   listOfItems: WorklistItemI[];
-  categoryNbr: number;
-  categoryName: string;
+  category: string;
   collapsed: boolean;
-  onPress: () => void;
 };
 
 const CategoryCard = (props: CategoryCardProps): JSX.Element => {
   const {
-    listOfItems, categoryNbr, categoryName, collapsed, onPress
+    listOfItems, category, collapsed
   } = props;
-  const iconName = collapsed ? 'keyboard-arrow-down' : 'keyboard-arrow-up';
+
+  const [open, setOpen] = useState(true);
+  const iconName = open ? 'keyboard-arrow-down' : 'keyboard-arrow-up';
+
+  useEffect(() => {
+    if (collapsed) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
+  }, [collapsed]);
 
   // placeholder render item
   const renderItem = ({ item }: { item: WorklistItemI }) => {
@@ -46,7 +54,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
       <View style={styles.headerContainer}>
         <View style={styles.titleContainer}>
           <Text>
-            {`${categoryNbr} - ${categoryName}`}
+            {category}
           </Text>
           <Text>
             {`${listOfItems.length} ${strings('GENERICS.ITEMS')}`}
@@ -56,13 +64,13 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
           hitSlop={{
             top: 10, bottom: 10, left: 15, right: 15
           }}
-          onPress={onPress}
+          onPress={() => setOpen(!open)}
           testID="collapsible-card"
         >
           <MaterialIcons name={iconName} size={25} color={COLOR.MAIN_THEME_COLOR} />
         </TouchableOpacity>
       </View>
-      {!collapsed && (
+      {open && (
         <FlatList
           data={listOfItems}
           renderItem={renderItem}

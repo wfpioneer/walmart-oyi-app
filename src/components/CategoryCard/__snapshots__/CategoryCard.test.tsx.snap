@@ -27,91 +27,13 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         43 - FOODSERVICE
       </Text>
       <Text>
-        3 [missing "en.GENERICS.ITEMS" translation]
+        4 [missing "en.GENERICS.ITEMS" translation]
       </Text>
     </View>
     <RNGestureHandlerButton
       collapsable={false}
       exclusive={true}
-      handlerTag={6}
-      handlerType="NativeViewGestureHandler"
-      hitSlop={
-        Object {
-          "bottom": 10,
-          "left": 15,
-          "right": 15,
-          "top": 10,
-        }
-      }
-      onGestureEvent={[Function]}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      onHandlerStateChange={[Function]}
-      rippleColor={0}
-      testID="collapsible-card"
-    >
-      <View
-        accessible={true}
-        collapsable={false}
-        hitSlop={
-          Object {
-            "bottom": 10,
-            "left": 15,
-            "right": 15,
-            "top": 10,
-          }
-        }
-        style={
-          Object {
-            "opacity": 1,
-          }
-        }
-      >
-        <Icon
-          color="#0071e9"
-          name="keyboard-arrow-down"
-          size={25}
-        />
-      </View>
-    </RNGestureHandlerButton>
-  </View>
-</View>
-`;
-
-exports[`Tests CategoryCard Component should tests CategoryCard when the card is opened 1`] = `
-<View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "borderBottomWidth": 1,
-        "borderColor": "#616161",
-        "flexDirection": "row",
-        "paddingHorizontal": 15,
-        "paddingVertical": 10,
-      }
-    }
-  >
-    <View
-      style={
-        Object {
-          "flex": 1,
-          "flexDirection": "column",
-        }
-      }
-    >
-      <Text>
-        43 - FOODSERVICE
-      </Text>
-      <Text>
-        3 [missing "en.GENERICS.ITEMS" translation]
-      </Text>
-    </View>
-    <RNGestureHandlerButton
-      collapsable={false}
-      exclusive={true}
-      handlerTag={1}
+      handlerTag={7}
       handlerType="NativeViewGestureHandler"
       hitSlop={
         Object {
@@ -153,6 +75,84 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
       </View>
     </RNGestureHandlerButton>
   </View>
+</View>
+`;
+
+exports[`Tests CategoryCard Component should tests CategoryCard when the card is opened 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderBottomWidth": 1,
+        "borderColor": "#616161",
+        "flexDirection": "row",
+        "paddingHorizontal": 15,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text>
+        43 - FOODSERVICE
+      </Text>
+      <Text>
+        4 [missing "en.GENERICS.ITEMS" translation]
+      </Text>
+    </View>
+    <RNGestureHandlerButton
+      collapsable={false}
+      exclusive={true}
+      handlerTag={1}
+      handlerType="NativeViewGestureHandler"
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 15,
+          "right": 15,
+          "top": 10,
+        }
+      }
+      onGestureEvent={[Function]}
+      onGestureHandlerEvent={[Function]}
+      onGestureHandlerStateChange={[Function]}
+      onHandlerStateChange={[Function]}
+      rippleColor={0}
+      testID="collapsible-card"
+    >
+      <View
+        accessible={true}
+        collapsable={false}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 15,
+            "right": 15,
+            "top": 10,
+          }
+        }
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Icon
+          color="#0071e9"
+          name="keyboard-arrow-down"
+          size={25}
+        />
+      </View>
+    </RNGestureHandlerButton>
+  </View>
   <RCTScrollView
     collapsable={false}
     data={
@@ -168,6 +168,19 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "000055559999",
+          "worklistType": "AU",
+        },
+        Object {
+          "catgName": "FOODSERVICE",
+          "catgNbr": 93,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "TEST ITEM",
+          "itemNbr": 1234567899,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "000055559934",
           "worklistType": "AU",
         },
         Object {
@@ -334,6 +347,71 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   }
                 }
               >
+                TEST ITEM
+              </Text>
+              <Text
+                style={
+                  Object {
+                    "color": "#616161",
+                    "fontSize": 12,
+                  }
+                }
+              >
+                1234567899
+              </Text>
+            </View>
+          </View>
+        </RNGestureHandlerButton>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <RNGestureHandlerButton
+          collapsable={false}
+          exclusive={true}
+          handlerTag={5}
+          handlerType="NativeViewGestureHandler"
+          onGestureEvent={[Function]}
+          onGestureHandlerEvent={[Function]}
+          onGestureHandlerStateChange={[Function]}
+          onHandlerStateChange={[Function]}
+          rippleColor={0}
+        >
+          <View
+            accessible={true}
+            collapsable={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "flexDirection": "row",
+                "height": 100,
+                "justifyContent": "flex-start",
+                "marginBottom": 2,
+                "opacity": 1,
+                "paddingHorizontal": 15,
+                "paddingVertical": 5,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "flex-start",
+                  "flex": 1,
+                  "height": 100,
+                  "justifyContent": "space-evenly",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 12,
+                  }
+                }
+              >
                 ELECTRONIC ITEM
               </Text>
               <Text
@@ -357,7 +435,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         <RNGestureHandlerButton
           collapsable={false}
           exclusive={true}
-          handlerTag={5}
+          handlerTag={6}
           handlerType="NativeViewGestureHandler"
           onGestureEvent={[Function]}
           onGestureHandlerEvent={[Function]}
