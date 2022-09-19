@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator component 1`] = `
+<MaterialTopTabNavigator
+  screenOptions={
+    Object {
+      "tabBarActiveTintColor": "#ffffffff",
+      "tabBarIndicatorStyle": Object {
+        "backgroundColor": "#ffffffff",
+      },
+      "tabBarStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.WORKLIST.TODO\\" translation]"
+  />
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.WORKLIST.COMPLETED\\" translation]"
+  />
+</MaterialTopTabNavigator>
+`;

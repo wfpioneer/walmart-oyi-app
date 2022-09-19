@@ -441,6 +441,7 @@ export default {
     PICKLIST_ERROR: 'Hubo un error obteniendo la lista de pickeos',
     UPDATE_PICKLIST_STATUS_SUCCESS: 'Se actualizaron correctamente los estatus de pick',
     UPDATE_PICKLIST_STATUS_ERROR: 'Hubo un error al actualizar el estatus de pickeo',
+    ITEM_QUANTITY_IS_MANDATORY_ERROR: 'El campo de cantidad abastecida debe llenarse',
     LOCATIONS_UPDATED: 'Ubicaciones actualizadas',
     LOCATIONS_FAILED_UPDATE: 'Falló la actualización de ubicaciones',
     SELECT_CONTINUE_ACTION: 'Seleccionar acción para continuar',
@@ -486,8 +487,17 @@ export default {
     FEATURES: 'Funcionalidades'
   },
   AUDITS: {
+    AUDITS: 'Auditorías',
     AUDIT_ITEM: 'Auditar Artículo',
+    ROLLOVER_AUDITS: 'Auditorías Atrasadas',
     COLLAPSE_ALL: 'Colapsar todo',
-    EXPAND_ALL: 'Expandir todo'
+    EXPAND_ALL: 'Expandir todo',
+    VALIDATE_QUANTITY: 'Valida la cantidad en cada ubicación',
+    VALIDATE_SCAN_QUANTITY: 'Escanea cada pallet y valida la cantidad',
+    OTHER_ON_HANDS: 'Otras ubicaciones',
+    PALLET_COUNT: 'Por favor ingresa el conteo del pallet',
+    CONFIRM_AUDIT: 'Confirma el cambio de existencia',
+    UPDATED_QTY: 'Cantidad actualizada',
+    LARGE_CURRENCY_CHANGE: 'Cambio de cantidad elevada'
   }
 };

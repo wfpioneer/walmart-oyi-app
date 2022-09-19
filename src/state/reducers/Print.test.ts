@@ -20,7 +20,8 @@ import {
   setSelectedPrinter,
   setSignType,
   unsetPrintingLocationLabels,
-  unsetPrintingPalletLabel
+  unsetPrintingPalletLabel,
+  updatePrinterByID
 } from '../actions/Print';
 import { PrintingType } from '../../models/Printer';
 import { mockPrinterList } from '../../mockData/mockPrinterList';
@@ -195,5 +196,19 @@ describe('testing printing reducer', () => {
     };
     const results = Print(changedState, unsetPrintingPalletLabel());
     expect(results).toStrictEqual(initialState);
+  });
+  it('test reducer with updatePrinterByID', () => {
+    const newPrinterList = [...mockPrinterList];
+    newPrinterList[0].name = 'Test Laser Printer 1';
+    const expectedChangedState: StateType = {
+      ...initialState,
+      printerList: newPrinterList
+    };
+    const initialSt = {
+      ...initialState,
+      printerList: mockPrinterList
+    };
+    const results = Print(initialSt, updatePrinterByID({ id: '123', printer: newPrinterList[0] }));
+    expect(results).toStrictEqual(expectedChangedState);
   });
 });

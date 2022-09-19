@@ -218,6 +218,16 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       fluffyKey: 'additional item details',
       configKey: 'additionalItemDetails',
       name: strings('ITEM.ADDITIONAL_ITEM_DETAILS')
+    },
+    {
+      fluffyKey: 'audit worklists',
+      configKey: 'auditWorklists',
+      name: strings('WORKLIST.AUDIT_WORKLIST')
+    },
+    {
+      fluffyKey: 'show roll over audit',
+      configKey: 'showRollOverAudit',
+      name: strings('AUDITS.ROLLOVER_AUDITS')
     }
   ];
 
