@@ -12,7 +12,7 @@ import COLOR from '../../themes/Color';
 
 interface LocationCardProp {
     location: string;
-    palletID?: number;
+    palletID?: string;
     quantity: number;
     locationType: string;
     onQtyIncrement(): void;
@@ -29,10 +29,10 @@ export const MAX = 9999;
 export const getContentStyle = (
   locationType: string, scannerEnabled: boolean, scanned: boolean | undefined, isLocationText: boolean
 ) => {
-  if (locationType === 'Reserve' && scannerEnabled && scanned) {
+  if (locationType === 'reserve' && scannerEnabled && scanned) {
     return isLocationText ? styles.locScanned : styles.palletScanned;
   }
-  if (locationType === 'Reserve' && scannerEnabled && !scanned) {
+  if (locationType === 'reserve' && scannerEnabled && !scanned) {
     return isLocationText ? styles.mandatoryLocScan : styles.mandatoryPalletScan;
   }
   return isLocationText ? styles.location : styles.pallet;
@@ -92,7 +92,7 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
 };
 
 LocationCard.defaultProps = {
-  palletID: 0,
+  palletID: '',
   scanned: false
 };
 

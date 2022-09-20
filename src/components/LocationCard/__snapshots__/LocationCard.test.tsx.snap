@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LocationCard Tests rendering LocationCard LocationCard with locationType as Reserve 1`] = `
+exports[`LocationCard Tests rendering LocationCard LocationCard with locationType as reserve 1`] = `
 <View
   style={
     Object {
@@ -32,18 +32,6 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
         }
       >
         A1-1
-      </Text>
-    </View>
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 12,
-            "marginTop": 1,
-          }
-        }
-      >
-        [missing "en.LOCATION.PALLET" translation] 1234
       </Text>
     </View>
   </View>
@@ -156,7 +144,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
 </View>
 `;
 
-exports[`LocationCard Tests rendering LocationCard renders the card with locationType Reserve and scannerEnabled true 1`] = `
+exports[`LocationCard Tests rendering LocationCard renders the card with locationType reserve and scannerEnabled true 1`] = `
 <View
   style={
     Object {
@@ -189,19 +177,6 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
         }
       >
         A1-1
-      </Text>
-    </View>
-    <View>
-      <Text
-        style={
-          Object {
-            "color": "#e57373",
-            "fontSize": 12,
-            "marginTop": 1,
-          }
-        }
-      >
-        [missing "en.LOCATION.PALLET" translation] 1234
       </Text>
     </View>
   </View>
@@ -242,7 +217,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
 </View>
 `;
 
-exports[`LocationCard Tests rendering LocationCard renders the card with locationType Reserve, scannerEnabled true and scanned true 1`] = `
+exports[`LocationCard Tests rendering LocationCard renders the card with locationType reserve, scannerEnabled true and scanned true 1`] = `
 <View
   style={
     Object {
@@ -275,19 +250,6 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
         }
       >
         A1-1
-      </Text>
-    </View>
-    <View>
-      <Text
-        style={
-          Object {
-            "color": "#33691E",
-            "fontSize": 12,
-            "marginTop": 1,
-          }
-        }
-      >
-        [missing "en.LOCATION.PALLET" translation] 1234
       </Text>
     </View>
   </View>

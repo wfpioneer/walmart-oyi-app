@@ -9,7 +9,7 @@ describe('LocationCard', () => {
     it('LocationCard with valid input', () => {
       renderer.render(<LocationCard
         location="A1-1"
-        locationType="Floor"
+        locationType="floor"
         onQtyIncrement={jest.fn}
         onEndEditing={jest.fn}
         onTextChange={jest.fn}
@@ -23,10 +23,10 @@ describe('LocationCard', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('LocationCard with locationType as Reserve', () => {
+    it('LocationCard with locationType as reserve', () => {
       renderer.render(<LocationCard
         location="A1-1"
-        locationType="Reserve"
+        locationType="reserve"
         onQtyIncrement={jest.fn}
         onEndEditing={jest.fn}
         onTextChange={jest.fn}
@@ -40,10 +40,10 @@ describe('LocationCard', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renders the card with locationType Reserve and scannerEnabled true', () => {
+    it('renders the card with locationType reserve and scannerEnabled true', () => {
       renderer.render(<LocationCard
         location="A1-1"
-        locationType="Reserve"
+        locationType="reserve"
         onQtyIncrement={jest.fn}
         onEndEditing={jest.fn}
         onTextChange={jest.fn}
@@ -57,10 +57,10 @@ describe('LocationCard', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renders the card with locationType Reserve, scannerEnabled true and scanned true', () => {
+    it('renders the card with locationType reserve, scannerEnabled true and scanned true', () => {
       renderer.render(<LocationCard
         location="A1-1"
-        locationType="Reserve"
+        locationType="reserve"
         onQtyIncrement={jest.fn}
         onEndEditing={jest.fn}
         onTextChange={jest.fn}
@@ -83,16 +83,16 @@ describe('LocationCard', () => {
       expect(getContentStyle('Floor', false, false, false)).toStrictEqual(styles.pallet);
     });
     it('should return style mandatorylocation when location type reserve, isLocation content true', () => {
-      expect(getContentStyle('Reserve', true, false, true)).toStrictEqual(styles.mandatoryLocScan);
+      expect(getContentStyle('reserve', true, false, true)).toStrictEqual(styles.mandatoryLocScan);
     });
     it('should return style mandatoryPallet when location type reserve, isLocation content false', () => {
-      expect(getContentStyle('Reserve', true, false, false)).toStrictEqual(styles.mandatoryPalletScan);
+      expect(getContentStyle('reserve', true, false, false)).toStrictEqual(styles.mandatoryPalletScan);
     });
     it('should return style locationscanned when location type reserve, isLocation content true', () => {
-      expect(getContentStyle('Reserve', true, true, true)).toStrictEqual(styles.locScanned);
+      expect(getContentStyle('reserve', true, true, true)).toStrictEqual(styles.locScanned);
     });
     it('should return style mandatoryPallet when location type reserve, isLocation content false', () => {
-      expect(getContentStyle('Reserve', true, true, false)).toStrictEqual(styles.palletScanned);
+      expect(getContentStyle('reserve', true, true, false)).toStrictEqual(styles.palletScanned);
     });
   });
 });
