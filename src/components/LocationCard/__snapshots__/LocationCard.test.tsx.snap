@@ -34,6 +34,18 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
         A1-1
       </Text>
     </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "fontSize": 12,
+            "marginTop": 1,
+          }
+        }
+      >
+        [missing "en.LOCATION.PALLET" translation] 1234
+      </Text>
+    </View>
   </View>
   <View
     style={
@@ -179,6 +191,19 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
         A1-1
       </Text>
     </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "#e57373",
+            "fontSize": 12,
+            "marginTop": 1,
+          }
+        }
+      >
+        [missing "en.LOCATION.PALLET" translation] 1234
+      </Text>
+    </View>
   </View>
   <View
     style={
@@ -250,6 +275,19 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
         }
       >
         A1-1
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "#33691E",
+            "fontSize": 12,
+            "marginTop": 1,
+          }
+        }
+      >
+        [missing "en.LOCATION.PALLET" translation] 1234
       </Text>
     </View>
   </View>

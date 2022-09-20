@@ -60,7 +60,7 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
             {location}
           </Text>
         </View>
-        {locationType === 'Reserve' && (
+        {locationType === 'reserve' && (
         <View>
           <Text style={getContentStyle(locationType, scannerEnabled, scanned, false)}>
             {`${strings('LOCATION.PALLET')} ${palletID}`}
