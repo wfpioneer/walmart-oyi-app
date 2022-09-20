@@ -9,7 +9,6 @@ exports[`Numeric selector component NumericSelector minus button is disabled if 
         "borderRadius": 10,
         "borderWidth": 1,
         "flexDirection": "row",
-        "marginBottom": 4,
       },
       Object {
         "borderColor": "#e0e0e0",
@@ -78,7 +77,6 @@ exports[`Numeric selector component NumericSelector plus button is disabled if v
         "borderRadius": 10,
         "borderWidth": 1,
         "flexDirection": "row",
-        "marginBottom": 4,
       },
       Object {
         "borderColor": "#e0e0e0",
@@ -147,7 +145,6 @@ exports[`Numeric selector component NumericSelector with invalid input 1`] = `
         "borderRadius": 10,
         "borderWidth": 1,
         "flexDirection": "row",
-        "marginBottom": 4,
       },
       Object {
         "borderColor": "#b71c1c",
@@ -216,7 +213,6 @@ exports[`Numeric selector component NumericSelector with valid input 1`] = `
         "borderRadius": 10,
         "borderWidth": 1,
         "flexDirection": "row",
-        "marginBottom": 4,
       },
       Object {
         "borderColor": "#e0e0e0",
