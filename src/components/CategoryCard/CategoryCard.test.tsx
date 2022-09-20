@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 import CategoryCard from './CategoryCard';
 import { CATEGORY_NAME, mockToDoAuditWorklist } from '../../mockData/mockWorkList';
 

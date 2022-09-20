@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SortBar Component Test renders default ItemCard when loading is false 1`] = `
+<View
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "opacity": 1,
+        "padding": 5,
+        "width": "100%",
+      }
+    }
+    testID="itemCard"
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/images/sams_logo.jpeg",
+        }
+      }
+      style={
+        Object {
+          "height": 85,
+          "width": 85,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "flexShrink": 1,
+          "padding": 5,
+        }
+      }
+      testID="item-details"
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.GENERICS.ITEM" translation] 1234
+        </Text>
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 14,
+              "marginVertical": 2,
+            }
+          }
+        >
+          test item
+        </Text>
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.ITEM.ON_HANDS" translation] 12
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`SortBar Component Test renders default ItemCard when loading is true 1`] = `
+<View
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#f4f4f9",
+        "flexDirection": "row",
+        "margin": 5,
+        "opacity": 1,
+        "padding": 5,
+      }
+    }
+    testID="itemCard"
+  >
+    <Image
+      source=""
+      style={
+        Object {
+          "height": 85,
+          "width": 85,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+      testID="loader"
+    >
+      <ActivityIndicator
+        size={30}
+      />
+    </View>
+  </View>
+</View>
+`;
