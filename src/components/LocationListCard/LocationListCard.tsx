@@ -43,7 +43,6 @@ const renderLocationCard = ({ item, locationType, scanRequired }:
         location={locationName}
         locationType={locationType}
         onQtyIncrement={increment}
-        onEndEditing={() => {}}
         onTextChange={qtyChange}
         onQtyDecrement={decrement}
         palletID={palletId}

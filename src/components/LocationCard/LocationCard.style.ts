@@ -21,7 +21,7 @@ export default StyleSheet.create({
   },
   mandatoryLocScan: {
     fontSize: 16,
-    color: COLOR.RED_300,
+    color: COLOR.RED_400,
     fontWeight: 'bold'
   },
   locScanned: {
@@ -35,7 +35,7 @@ export default StyleSheet.create({
   },
   mandatoryPalletScan: {
     fontSize: 12,
-    color: COLOR.RED_300,
+    color: COLOR.RED_400,
     marginTop: 1
   },
   palletScanned: {

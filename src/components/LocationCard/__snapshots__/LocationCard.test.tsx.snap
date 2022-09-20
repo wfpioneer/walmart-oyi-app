@@ -182,7 +182,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
       <Text
         style={
           Object {
-            "color": "#e57373",
+            "color": "#ef5350",
             "fontSize": 16,
             "fontWeight": "bold",
           }
@@ -195,7 +195,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
       <Text
         style={
           Object {
-            "color": "#e57373",
+            "color": "#ef5350",
             "fontSize": 12,
             "marginTop": 1,
           }

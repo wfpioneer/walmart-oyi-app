@@ -19,12 +19,13 @@ interface LocationCardProp {
     onQtyDecrement(): void;
     onTextChange(text: string): void;
     onLocationDelete(): void;
-    onEndEditing(): void;
+    onEndEditing?: () => void;
     scannerEnabled: boolean;
     scanned?: boolean;
   }
 
 export const MAX = 9999;
+export const MIN = 0;
 
 export const getContentStyle = (
   locationType: string, scannerEnabled: boolean, scanned: boolean | undefined, isLocationText: boolean
@@ -37,6 +38,8 @@ export const getContentStyle = (
   }
   return isLocationText ? styles.location : styles.pallet;
 };
+
+export const validateQty = (qty: number) => MIN <= qty && qty <= MAX;
 
 const LocationCard = (props: LocationCardProp): JSX.Element => {
   const {
@@ -77,7 +80,7 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
             minValue={0}
             maxValue={MAX}
             value={quantity}
-            isValid={true}
+            isValid={validateQty(quantity)}
             onEndEditing={onEndEditing}
           />
         </View>
@@ -93,7 +96,8 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
 
 LocationCard.defaultProps = {
   palletID: '',
-  scanned: false
+  scanned: false,
+  onEndEditing: () => {}
 };
 
 export default LocationCard;
