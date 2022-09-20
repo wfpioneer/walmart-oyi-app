@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
   },
   leftButton: {
     paddingHorizontal: 15
+  },
+  filterButton: {
+    paddingHorizontal: 10
   }
 });
 

@@ -1,6 +1,10 @@
 import User from '../../models/User';
 import {
-  ASSIGN_FLUFFY_FEATURES, Actions, SET_CONFIGS, USER_LOGIN, USER_LOGOUT
+  ASSIGN_FLUFFY_FEATURES,
+  Actions,
+  SET_CONFIGS,
+  USER_LOGIN,
+  USER_LOGOUT
 } from '../actions/User';
 
 export const initialState: User = {
@@ -32,7 +36,7 @@ export const initialState: User = {
     additionalItemDetails: false,
     createPallet: false,
     auditWorklists: false,
-    showRollOverAuditComplete: false
+    showRollOverAudit: false
   }
 };
 
@@ -70,7 +74,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           additionalItemDetails: action.payload.addItemDetails || false,
           createPallet: action.payload.createPallet || false,
           auditWorklists: action.payload.auditWorklists || false,
-          showRollOverAuditComplete: action.payload.showRollOverAuditComplete || false
+          showRollOverAudit: action.payload.showRollOverAudit || false
         }
       };
     default:

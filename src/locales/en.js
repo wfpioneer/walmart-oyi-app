@@ -78,7 +78,9 @@ export default {
     CANCELLED: 'Cancelled',
     NSFL: 'No Sales Floor Location',
     UNKNOWN: 'Unknown',
-    MISSING_PALLETS: 'Missing Pallets'
+    MISSING_PALLETS: 'Missing Pallets',
+    AUDITS: 'Audits',
+    ROLLOVER_AUDITS: 'Rollover Audits'
   },
   ITEM: {
     TITLE: 'Review item details',
@@ -347,6 +349,7 @@ export default {
     ITEM_WORKLIST: 'Item Work List',
     PALLET_WORKLIST: 'Pallet Work List',
     AUDIT_WORKLIST: 'Audit Work List',
+    ROLLOVER_WORKLIST: 'Rollover Work List',
     SCAN_PALLET: 'Scan Pallet',
     SCAN_PALLET_LABEL: 'Scan Pallet Label to continue',
     SCAN_PALLET_ERROR: 'Pallet scanned must match pallet on worklist'
@@ -439,6 +442,7 @@ export default {
     REMOVE_PERISHABLE: 'Removing perishable item',
     REMOVE_PERISHABLE_NEW_EXPIRY: 'Please enter new expiration date',
     UPDATE_PICKLIST_STATUS_SUCCESS: 'Successfully updated picklist status',
+    ITEM_QUANTITY_IS_MANDATORY_ERROR: 'Quantity Stocked field needs updated',
     UPDATE_PICKLIST_STATUS_ERROR: 'There was an error while updating the Picklist status',
     LOCATIONS_UPDATED: 'Locations Updated',
     LOCATIONS_FAILED_UPDATE: 'Locations Failed to Update',
@@ -485,6 +489,17 @@ export default {
     FEATURES: 'Features'
   },
   AUDITS: {
-    AUDIT_ITEM: 'Audit Item'
+    AUDITS: 'Audits',
+    AUDIT_ITEM: 'Audit Item',
+    ROLLOVER_AUDITS: 'Rollover Audits',
+    COLLAPSE_ALL: 'Collapse All',
+    EXPAND_ALL: 'Expand all',
+    VALIDATE_QUANTITY: 'Validate quantity in each location',
+    VALIDATE_SCAN_QUANTITY: 'Scan each pallet and validate quantity',
+    OTHER_ON_HANDS: 'Other On-Hands',
+    PALLET_COUNT: 'Please enter the count for pallet',
+    CONFIRM_AUDIT: 'Confirm On-Hands Audit',
+    UPDATED_QTY: 'Updated Quantity',
+    LARGE_CURRENCY_CHANGE: 'Large Currency Change'
   }
 };

@@ -217,6 +217,11 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
     const palletLabelPrinter = await getPalletLabelPrinter();
     const locationLabelPrinter = await getLocationLabelPrinter();
     if (printerList && printerList.length > 0) {
+      const defPrinter = printerList.find(obj => obj.id === '000000000000');
+      if (defPrinter) {
+        defPrinter.desc = strings('GENERICS.DEFAULT');
+        defPrinter.name = strings('PRINT.FRONT_DESK');
+      }
       this.props.setPrinterList(printerList);
     } else {
       const defaultPrinter: Printer = {
@@ -228,6 +233,10 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
       };
       this.props.setPrinterList([defaultPrinter]);
       savePrinter(defaultPrinter);
+    }
+    if (priceLabelPrinter && priceLabelPrinter.id === '000000000000') {
+      priceLabelPrinter.desc = strings('GENERICS.DEFAULT');
+      priceLabelPrinter.name = strings('PRINT.FRONT_DESK');
     }
     this.props.setPriceLabelPrinter(priceLabelPrinter);
     this.props.setPalletLabelPrinter(palletLabelPrinter);

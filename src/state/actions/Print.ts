@@ -23,6 +23,7 @@ export const SET_LOCATION_LABEL_PRINTER = 'PRINT/SET_LOCATION_LABEL_PRINTER';
 export const SET_PALLET_LABEL_PRINTER = 'PRINT/SET_PALLET_LABEL_PRINTER';
 export const SET_PRINTING_TYPE = 'PRINT/SET_PRINTING_TYPE';
 export const SET_PRINTER_LIST = 'PRINT/SET_PRINTER_LIST';
+export const UPDATE_PRINTER_BY_ID = 'PRINT/UPDATE_PRINTER_BY_ID';
 
 export const setSelectedPrinter = (printer: Printer) => ({
   type: SET_SELECTED_PRINTER,
@@ -125,6 +126,11 @@ export const setPrinterList = (printerList: Printer[]) => ({
   payload: printerList
 } as const);
 
+export const updatePrinterByID = (payload: {id: string, printer : Printer}) => ({
+  type: UPDATE_PRINTER_BY_ID,
+  payload
+} as const);
+
 export type Actions =
 | ReturnType<typeof setSelectedPrinter>
 | ReturnType<typeof setSignType>
@@ -147,3 +153,4 @@ export type Actions =
 | ReturnType<typeof setPalletLabelPrinter>
 | ReturnType<typeof setPrintingType>
 | ReturnType<typeof setPrinterList>
+| ReturnType<typeof updatePrinterByID>
