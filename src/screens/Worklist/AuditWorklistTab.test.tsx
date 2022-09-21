@@ -25,6 +25,7 @@ describe('AuditWorklistTab', () => {
           dispatch={mockDispatch}
           collapsed={false}
           setCollapsed={jest.fn}
+          refreshing={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -40,6 +41,7 @@ describe('AuditWorklistTab', () => {
           dispatch={mockDispatch}
           collapsed={false}
           setCollapsed={jest.fn}
+          refreshing={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -55,6 +57,7 @@ describe('AuditWorklistTab', () => {
           dispatch={mockDispatch}
           collapsed={false}
           setCollapsed={jest.fn}
+          refreshing={false}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');
@@ -70,6 +73,7 @@ describe('AuditWorklistTab', () => {
           dispatch={mockDispatch}
           collapsed={true}
           setCollapsed={jest.fn}
+          refreshing={false}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');

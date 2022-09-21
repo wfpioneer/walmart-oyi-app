@@ -6,7 +6,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
     collapsed={false}
     onclick={[Function]}
   />
-  <ForwardRef
+  <FlatList
     data={
       Array [
         "88 - FRESH BAKERY",
@@ -15,8 +15,9 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
       ]
     }
     keyExtractor={[Function]}
+    onRefresh={[Function]}
+    refreshing={false}
     renderItem={[Function]}
-    scrollEnabled={false}
   />
 </React.Fragment>
 `;
@@ -27,7 +28,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
     collapsed={false}
     onclick={[Function]}
   />
-  <ForwardRef
+  <FlatList
     data={
       Array [
         "88 - FRESH BAKERY",
@@ -36,8 +37,9 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
       ]
     }
     keyExtractor={[Function]}
+    onRefresh={[Function]}
+    refreshing={false}
     renderItem={[Function]}
-    scrollEnabled={false}
   />
 </React.Fragment>
 `;
@@ -87,7 +89,6 @@ Array [
     </View>
   </View>,
   <RCTScrollView
-    collapsable={false}
     data={
       Array [
         "88 - FRESH BAKERY",
@@ -97,26 +98,29 @@ Array [
     }
     getItem={[Function]}
     getItemCount={[Function]}
-    handlerTag={1}
-    handlerType="NativeViewGestureHandler"
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
-    onGestureHandlerEvent={[Function]}
-    onGestureHandlerStateChange={[Function]}
     onLayout={[Function]}
     onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
+    onRefresh={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+    refreshing={false}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    renderScrollComponent={[Function]}
-    scrollEnabled={false}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
     viewabilityConfigCallbackPairs={Array []}
   >
+    <RCTRefreshControl />
     <View>
       <View
         onLayout={[Function]}
@@ -151,11 +155,10 @@ Array [
                 1 [missing "en.GENERICS.ITEMS" translation]
               </Text>
             </View>
-            <RNGestureHandlerButton
+            <View
+              accessible={true}
               collapsable={false}
-              exclusive={true}
-              handlerTag={2}
-              handlerType="NativeViewGestureHandler"
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 10,
@@ -164,40 +167,28 @@ Array [
                   "top": 10,
                 }
               }
-              onGestureEvent={[Function]}
-              onGestureHandlerEvent={[Function]}
-              onGestureHandlerStateChange={[Function]}
-              onHandlerStateChange={[Function]}
-              rippleColor={0}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
               testID="collapsible-card"
             >
-              <View
-                accessible={true}
-                collapsable={false}
-                hitSlop={
-                  Object {
-                    "bottom": 10,
-                    "left": 15,
-                    "right": 15,
-                    "top": 10,
-                  }
-                }
-                style={
-                  Object {
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Icon
-                  color="#0071e9"
-                  name="keyboard-arrow-down"
-                  size={25}
-                />
-              </View>
-            </RNGestureHandlerButton>
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-up"
+                size={25}
+              />
+            </View>
           </View>
-          <RCTScrollView
-            collapsable={false}
+          <View
             data={
               Array [
                 Object {
@@ -217,12 +208,8 @@ Array [
             }
             getItem={[Function]}
             getItemCount={[Function]}
-            handlerTag={3}
-            handlerType="NativeViewGestureHandler"
             keyExtractor={[Function]}
             onContentSizeChange={[Function]}
-            onGestureHandlerEvent={[Function]}
-            onGestureHandlerStateChange={[Function]}
             onLayout={[Function]}
             onMomentumScrollBegin={[Function]}
             onMomentumScrollEnd={[Function]}
@@ -231,79 +218,72 @@ Array [
             onScrollEndDrag={[Function]}
             removeClippedSubviews={false}
             renderItem={[Function]}
-            renderScrollComponent={[Function]}
             scrollEventThrottle={50}
             stickyHeaderIndices={Array []}
             viewabilityConfigCallbackPairs={Array []}
           >
-            <View>
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
               <View
-                onLayout={[Function]}
-                style={null}
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "height": 100,
+                    "justifyContent": "flex-start",
+                    "marginBottom": 2,
+                    "opacity": 1,
+                    "paddingHorizontal": 15,
+                    "paddingVertical": 5,
+                  }
+                }
               >
-                <RNGestureHandlerButton
-                  collapsable={false}
-                  exclusive={true}
-                  handlerTag={4}
-                  handlerType="NativeViewGestureHandler"
-                  onGestureEvent={[Function]}
-                  onGestureHandlerEvent={[Function]}
-                  onGestureHandlerStateChange={[Function]}
-                  onHandlerStateChange={[Function]}
-                  rippleColor={0}
+                <View
+                  style={
+                    Object {
+                      "alignItems": "flex-start",
+                      "flex": 1,
+                      "height": 100,
+                      "justifyContent": "space-evenly",
+                    }
+                  }
                 >
-                  <View
-                    accessible={true}
-                    collapsable={false}
+                  <Text
                     style={
                       Object {
-                        "alignItems": "center",
-                        "backgroundColor": "#ffffffff",
-                        "flexDirection": "row",
-                        "height": 100,
-                        "justifyContent": "flex-start",
-                        "marginBottom": 2,
-                        "opacity": 1,
-                        "paddingHorizontal": 15,
-                        "paddingVertical": 5,
+                        "fontSize": 12,
                       }
                     }
                   >
-                    <View
-                      style={
-                        Object {
-                          "alignItems": "flex-start",
-                          "flex": 1,
-                          "height": 100,
-                          "justifyContent": "space-evenly",
-                        }
+                    BAKERY ITEM
+                  </Text>
+                  <Text
+                    style={
+                      Object {
+                        "color": "#616161",
+                        "fontSize": 12,
                       }
-                    >
-                      <Text
-                        style={
-                          Object {
-                            "fontSize": 12,
-                          }
-                        }
-                      >
-                        BAKERY ITEM
-                      </Text>
-                      <Text
-                        style={
-                          Object {
-                            "color": "#616161",
-                            "fontSize": 12,
-                          }
-                        }
-                      >
-                        123789456
-                      </Text>
-                    </View>
-                  </View>
-                </RNGestureHandlerButton>
+                    }
+                  >
+                    123789456
+                  </Text>
+                </View>
               </View>
             </View>
-          </RCTScrollView>
+          </View>
         </View>
       </View>
       <View
@@ -339,11 +319,10 @@ Array [
                 2 [missing "en.GENERICS.ITEMS" translation]
               </Text>
             </View>
-            <RNGestureHandlerButton
+            <View
+              accessible={true}
               collapsable={false}
-              exclusive={true}
-              handlerTag={5}
-              handlerType="NativeViewGestureHandler"
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 10,
@@ -352,40 +331,28 @@ Array [
                   "top": 10,
                 }
               }
-              onGestureEvent={[Function]}
-              onGestureHandlerEvent={[Function]}
-              onGestureHandlerStateChange={[Function]}
-              onHandlerStateChange={[Function]}
-              rippleColor={0}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
               testID="collapsible-card"
             >
-              <View
-                accessible={true}
-                collapsable={false}
-                hitSlop={
-                  Object {
-                    "bottom": 10,
-                    "left": 15,
-                    "right": 15,
-                    "top": 10,
-                  }
-                }
-                style={
-                  Object {
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Icon
-                  color="#0071e9"
-                  name="keyboard-arrow-down"
-                  size={25}
-                />
-              </View>
-            </RNGestureHandlerButton>
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-up"
+                size={25}
+              />
+            </View>
           </View>
-          <RCTScrollView
-            collapsable={false}
+          <View
             data={
               Array [
                 Object {
@@ -418,12 +385,8 @@ Array [
             }
             getItem={[Function]}
             getItemCount={[Function]}
-            handlerTag={6}
-            handlerType="NativeViewGestureHandler"
             keyExtractor={[Function]}
             onContentSizeChange={[Function]}
-            onGestureHandlerEvent={[Function]}
-            onGestureHandlerStateChange={[Function]}
             onLayout={[Function]}
             onMomentumScrollBegin={[Function]}
             onMomentumScrollEnd={[Function]}
@@ -432,144 +395,133 @@ Array [
             onScrollEndDrag={[Function]}
             removeClippedSubviews={false}
             renderItem={[Function]}
-            renderScrollComponent={[Function]}
             scrollEventThrottle={50}
             stickyHeaderIndices={Array []}
             viewabilityConfigCallbackPairs={Array []}
           >
-            <View>
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
               <View
-                onLayout={[Function]}
-                style={null}
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "height": 100,
+                    "justifyContent": "flex-start",
+                    "marginBottom": 2,
+                    "opacity": 1,
+                    "paddingHorizontal": 15,
+                    "paddingVertical": 5,
+                  }
+                }
               >
-                <RNGestureHandlerButton
-                  collapsable={false}
-                  exclusive={true}
-                  handlerTag={7}
-                  handlerType="NativeViewGestureHandler"
-                  onGestureEvent={[Function]}
-                  onGestureHandlerEvent={[Function]}
-                  onGestureHandlerStateChange={[Function]}
-                  onHandlerStateChange={[Function]}
-                  rippleColor={0}
+                <View
+                  style={
+                    Object {
+                      "alignItems": "flex-start",
+                      "flex": 1,
+                      "height": 100,
+                      "justifyContent": "space-evenly",
+                    }
+                  }
                 >
-                  <View
-                    accessible={true}
-                    collapsable={false}
+                  <Text
                     style={
                       Object {
-                        "alignItems": "center",
-                        "backgroundColor": "#ffffffff",
-                        "flexDirection": "row",
-                        "height": 100,
-                        "justifyContent": "flex-start",
-                        "marginBottom": 2,
-                        "opacity": 1,
-                        "paddingHorizontal": 15,
-                        "paddingVertical": 5,
+                        "fontSize": 12,
                       }
                     }
                   >
-                    <View
-                      style={
-                        Object {
-                          "alignItems": "flex-start",
-                          "flex": 1,
-                          "height": 100,
-                          "justifyContent": "space-evenly",
-                        }
-                      }
-                    >
-                      <Text
-                        style={
-                          Object {
-                            "fontSize": 12,
-                          }
-                        }
-                      >
-                        TEST ITEM
-                      </Text>
-                      <Text
-                        style={
-                          Object {
-                            "color": "#616161",
-                            "fontSize": 12,
-                          }
-                        }
-                      >
-                        1234567890
-                      </Text>
-                    </View>
-                  </View>
-                </RNGestureHandlerButton>
-              </View>
-              <View
-                onLayout={[Function]}
-                style={null}
-              >
-                <RNGestureHandlerButton
-                  collapsable={false}
-                  exclusive={true}
-                  handlerTag={8}
-                  handlerType="NativeViewGestureHandler"
-                  onGestureEvent={[Function]}
-                  onGestureHandlerEvent={[Function]}
-                  onGestureHandlerStateChange={[Function]}
-                  onHandlerStateChange={[Function]}
-                  rippleColor={0}
-                >
-                  <View
-                    accessible={true}
-                    collapsable={false}
+                    TEST ITEM
+                  </Text>
+                  <Text
                     style={
                       Object {
-                        "alignItems": "center",
-                        "backgroundColor": "#ffffffff",
-                        "flexDirection": "row",
-                        "height": 100,
-                        "justifyContent": "flex-start",
-                        "marginBottom": 2,
-                        "opacity": 1,
-                        "paddingHorizontal": 15,
-                        "paddingVertical": 5,
+                        "color": "#616161",
+                        "fontSize": 12,
                       }
                     }
                   >
-                    <View
-                      style={
-                        Object {
-                          "alignItems": "flex-start",
-                          "flex": 1,
-                          "height": 100,
-                          "justifyContent": "space-evenly",
-                        }
-                      }
-                    >
-                      <Text
-                        style={
-                          Object {
-                            "fontSize": 12,
-                          }
-                        }
-                      >
-                        TEST ITEM
-                      </Text>
-                      <Text
-                        style={
-                          Object {
-                            "color": "#616161",
-                            "fontSize": 12,
-                          }
-                        }
-                      >
-                        1234567899
-                      </Text>
-                    </View>
-                  </View>
-                </RNGestureHandlerButton>
+                    1234567890
+                  </Text>
+                </View>
               </View>
             </View>
-          </RCTScrollView>
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "height": 100,
+                    "justifyContent": "flex-start",
+                    "marginBottom": 2,
+                    "opacity": 1,
+                    "paddingHorizontal": 15,
+                    "paddingVertical": 5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "flex-start",
+                      "flex": 1,
+                      "height": 100,
+                      "justifyContent": "space-evenly",
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      Object {
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    TEST ITEM
+                  </Text>
+                  <Text
+                    style={
+                      Object {
+                        "color": "#616161",
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    1234567899
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
         </View>
       </View>
       <View
@@ -605,11 +557,10 @@ Array [
                 1 [missing "en.GENERICS.ITEMS" translation]
               </Text>
             </View>
-            <RNGestureHandlerButton
+            <View
+              accessible={true}
               collapsable={false}
-              exclusive={true}
-              handlerTag={9}
-              handlerType="NativeViewGestureHandler"
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 10,
@@ -618,40 +569,28 @@ Array [
                   "top": 10,
                 }
               }
-              onGestureEvent={[Function]}
-              onGestureHandlerEvent={[Function]}
-              onGestureHandlerStateChange={[Function]}
-              onHandlerStateChange={[Function]}
-              rippleColor={0}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
               testID="collapsible-card"
             >
-              <View
-                accessible={true}
-                collapsable={false}
-                hitSlop={
-                  Object {
-                    "bottom": 10,
-                    "left": 15,
-                    "right": 15,
-                    "top": 10,
-                  }
-                }
-                style={
-                  Object {
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Icon
-                  color="#0071e9"
-                  name="keyboard-arrow-down"
-                  size={25}
-                />
-              </View>
-            </RNGestureHandlerButton>
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-up"
+                size={25}
+              />
+            </View>
           </View>
-          <RCTScrollView
-            collapsable={false}
+          <View
             data={
               Array [
                 Object {
@@ -671,12 +610,8 @@ Array [
             }
             getItem={[Function]}
             getItemCount={[Function]}
-            handlerTag={10}
-            handlerType="NativeViewGestureHandler"
             keyExtractor={[Function]}
             onContentSizeChange={[Function]}
-            onGestureHandlerEvent={[Function]}
-            onGestureHandlerStateChange={[Function]}
             onLayout={[Function]}
             onMomentumScrollBegin={[Function]}
             onMomentumScrollEnd={[Function]}
@@ -685,79 +620,72 @@ Array [
             onScrollEndDrag={[Function]}
             removeClippedSubviews={false}
             renderItem={[Function]}
-            renderScrollComponent={[Function]}
             scrollEventThrottle={50}
             stickyHeaderIndices={Array []}
             viewabilityConfigCallbackPairs={Array []}
           >
-            <View>
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
               <View
-                onLayout={[Function]}
-                style={null}
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "height": 100,
+                    "justifyContent": "flex-start",
+                    "marginBottom": 2,
+                    "opacity": 1,
+                    "paddingHorizontal": 15,
+                    "paddingVertical": 5,
+                  }
+                }
               >
-                <RNGestureHandlerButton
-                  collapsable={false}
-                  exclusive={true}
-                  handlerTag={11}
-                  handlerType="NativeViewGestureHandler"
-                  onGestureEvent={[Function]}
-                  onGestureHandlerEvent={[Function]}
-                  onGestureHandlerStateChange={[Function]}
-                  onHandlerStateChange={[Function]}
-                  rippleColor={0}
+                <View
+                  style={
+                    Object {
+                      "alignItems": "flex-start",
+                      "flex": 1,
+                      "height": 100,
+                      "justifyContent": "space-evenly",
+                    }
+                  }
                 >
-                  <View
-                    accessible={true}
-                    collapsable={false}
+                  <Text
                     style={
                       Object {
-                        "alignItems": "center",
-                        "backgroundColor": "#ffffffff",
-                        "flexDirection": "row",
-                        "height": 100,
-                        "justifyContent": "flex-start",
-                        "marginBottom": 2,
-                        "opacity": 1,
-                        "paddingHorizontal": 15,
-                        "paddingVertical": 5,
+                        "fontSize": 12,
                       }
                     }
                   >
-                    <View
-                      style={
-                        Object {
-                          "alignItems": "flex-start",
-                          "flex": 1,
-                          "height": 100,
-                          "justifyContent": "space-evenly",
-                        }
+                    ELECTRONIC ITEM
+                  </Text>
+                  <Text
+                    style={
+                      Object {
+                        "color": "#616161",
+                        "fontSize": 12,
                       }
-                    >
-                      <Text
-                        style={
-                          Object {
-                            "fontSize": 12,
-                          }
-                        }
-                      >
-                        ELECTRONIC ITEM
-                      </Text>
-                      <Text
-                        style={
-                          Object {
-                            "color": "#616161",
-                            "fontSize": 12,
-                          }
-                        }
-                      >
-                        987654321
-                      </Text>
-                    </View>
-                  </View>
-                </RNGestureHandlerButton>
+                    }
+                  >
+                    987654321
+                  </Text>
+                </View>
               </View>
             </View>
-          </RCTScrollView>
+          </View>
         </View>
       </View>
     </View>
@@ -810,7 +738,6 @@ Array [
     </View>
   </View>,
   <RCTScrollView
-    collapsable={false}
     data={
       Array [
         "88 - FRESH BAKERY",
@@ -820,26 +747,29 @@ Array [
     }
     getItem={[Function]}
     getItemCount={[Function]}
-    handlerTag={12}
-    handlerType="NativeViewGestureHandler"
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
-    onGestureHandlerEvent={[Function]}
-    onGestureHandlerStateChange={[Function]}
     onLayout={[Function]}
     onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
+    onRefresh={[Function]}
     onScroll={[Function]}
     onScrollBeginDrag={[Function]}
     onScrollEndDrag={[Function]}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+    refreshing={false}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    renderScrollComponent={[Function]}
-    scrollEnabled={false}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
     viewabilityConfigCallbackPairs={Array []}
   >
+    <RCTRefreshControl />
     <View>
       <View
         onLayout={[Function]}
@@ -874,11 +804,10 @@ Array [
                 1 [missing "en.GENERICS.ITEMS" translation]
               </Text>
             </View>
-            <RNGestureHandlerButton
+            <View
+              accessible={true}
               collapsable={false}
-              exclusive={true}
-              handlerTag={13}
-              handlerType="NativeViewGestureHandler"
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 10,
@@ -887,37 +816,26 @@ Array [
                   "top": 10,
                 }
               }
-              onGestureEvent={[Function]}
-              onGestureHandlerEvent={[Function]}
-              onGestureHandlerStateChange={[Function]}
-              onHandlerStateChange={[Function]}
-              rippleColor={0}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
               testID="collapsible-card"
             >
-              <View
-                accessible={true}
-                collapsable={false}
-                hitSlop={
-                  Object {
-                    "bottom": 10,
-                    "left": 15,
-                    "right": 15,
-                    "top": 10,
-                  }
-                }
-                style={
-                  Object {
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Icon
-                  color="#0071e9"
-                  name="keyboard-arrow-up"
-                  size={25}
-                />
-              </View>
-            </RNGestureHandlerButton>
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-down"
+                size={25}
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -954,11 +872,10 @@ Array [
                 2 [missing "en.GENERICS.ITEMS" translation]
               </Text>
             </View>
-            <RNGestureHandlerButton
+            <View
+              accessible={true}
               collapsable={false}
-              exclusive={true}
-              handlerTag={16}
-              handlerType="NativeViewGestureHandler"
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 10,
@@ -967,37 +884,26 @@ Array [
                   "top": 10,
                 }
               }
-              onGestureEvent={[Function]}
-              onGestureHandlerEvent={[Function]}
-              onGestureHandlerStateChange={[Function]}
-              onHandlerStateChange={[Function]}
-              rippleColor={0}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
               testID="collapsible-card"
             >
-              <View
-                accessible={true}
-                collapsable={false}
-                hitSlop={
-                  Object {
-                    "bottom": 10,
-                    "left": 15,
-                    "right": 15,
-                    "top": 10,
-                  }
-                }
-                style={
-                  Object {
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Icon
-                  color="#0071e9"
-                  name="keyboard-arrow-up"
-                  size={25}
-                />
-              </View>
-            </RNGestureHandlerButton>
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-down"
+                size={25}
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -1034,11 +940,10 @@ Array [
                 1 [missing "en.GENERICS.ITEMS" translation]
               </Text>
             </View>
-            <RNGestureHandlerButton
+            <View
+              accessible={true}
               collapsable={false}
-              exclusive={true}
-              handlerTag={20}
-              handlerType="NativeViewGestureHandler"
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 10,
@@ -1047,37 +952,26 @@ Array [
                   "top": 10,
                 }
               }
-              onGestureEvent={[Function]}
-              onGestureHandlerEvent={[Function]}
-              onGestureHandlerStateChange={[Function]}
-              onHandlerStateChange={[Function]}
-              rippleColor={0}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
               testID="collapsible-card"
             >
-              <View
-                accessible={true}
-                collapsable={false}
-                hitSlop={
-                  Object {
-                    "bottom": 10,
-                    "left": 15,
-                    "right": 15,
-                    "top": 10,
-                  }
-                }
-                style={
-                  Object {
-                    "opacity": 1,
-                  }
-                }
-              >
-                <Icon
-                  color="#0071e9"
-                  name="keyboard-arrow-up"
-                  size={25}
-                />
-              </View>
-            </RNGestureHandlerButton>
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-down"
+                size={25}
+              />
+            </View>
           </View>
         </View>
       </View>

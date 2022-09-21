@@ -1,7 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
+import AuditWorklistTab from '../AuditWorklistTab';
 
-export const CompletedAuditWorklistScreen = () => <View />;
+export const CompletedAuditWorklistScreen = () => <AuditWorklistTab toDo={false} />;
 const CompletedAuditWorklist = () => <CompletedAuditWorklistScreen />;
 
 export default CompletedAuditWorklist;

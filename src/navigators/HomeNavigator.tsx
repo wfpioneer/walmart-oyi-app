@@ -74,7 +74,7 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
     };
     props.updatePrinterByID({ id: '000000000000', printer: defPrinter });
     savePrinter(defPrinter);
-    if (props.priceLabelPrinter.id === defPrinter.id) {
+    if (props.priceLabelPrinter && props.priceLabelPrinter.id === defPrinter.id) {
       props.setPriceLabelPrinter(defPrinter);
       setPriceLabelPrinterAsyncStorage(defPrinter);
     }
