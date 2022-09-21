@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import {
+  FlatList, Text, TouchableOpacity, View
+} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './CategoryCard.style';
 import { WorklistItemI } from '../../models/WorklistItem';
@@ -20,7 +20,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
   } = props;
 
   const [open, setOpen] = useState(true);
-  const iconName = open ? 'keyboard-arrow-down' : 'keyboard-arrow-up';
+  const iconName = open ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
 
   useEffect(() => {
     if (collapsed) {
