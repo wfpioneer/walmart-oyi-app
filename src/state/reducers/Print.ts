@@ -21,7 +21,8 @@ import {
   SET_SELECTED_PRINTER,
   SET_SELECTED_SIGN_TYPE,
   UNSET_PRINTING_LOCATION_LABELS,
-  UNSET_PRINTING_PALLET_LABEL
+  UNSET_PRINTING_PALLET_LABEL,
+  UPDATE_PRINTER_BY_ID
 } from '../actions/Print';
 import {
   PrintPaperSize,
@@ -205,6 +206,19 @@ export const Print = (state = initialState, action: Actions): StateType => {
         ...state,
         printerList: action.payload
       };
+    case UPDATE_PRINTER_BY_ID: {
+      const { id, printer } = action.payload;
+      const newPrinterList = [...state.printerList];
+      const defPrinter = newPrinterList.find(obj => obj.id === id);
+      if (defPrinter) {
+        defPrinter.name = printer.name;
+        defPrinter.desc = printer.desc;
+      }
+      return {
+        ...state,
+        printerList: newPrinterList
+      };
+    }
     default:
       return state;
   }
