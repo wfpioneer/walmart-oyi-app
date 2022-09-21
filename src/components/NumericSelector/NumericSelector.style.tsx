@@ -6,8 +6,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 10,
-    borderWidth: 1,
-    marginBottom: 4
+    borderWidth: 1
   },
   updateContainerValid: {
     borderColor: COLOR.GREY_300

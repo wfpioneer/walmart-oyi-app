@@ -47,6 +47,9 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  locationCard: {
+    marginBottom: 5
   }
 });
 
