@@ -16,6 +16,7 @@ describe('AuditItemWorklist Navigator', () => {
         isManualScanEnabled={false}
         auditWorklists={false}
         navigation={navigationProp}
+        menuOpen={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

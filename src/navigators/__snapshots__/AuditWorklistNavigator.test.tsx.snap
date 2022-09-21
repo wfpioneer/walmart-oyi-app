@@ -36,29 +36,50 @@ exports[`AuditItemWorklist Navigator Renders and Calls the Manual Scan Button 1`
 `;
 
 exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`] = `
-<StackNavigator
-  screenOptions={[Function]}
+<SideMenu
+  animationFunction={[Function]}
+  animationStyle={[Function]}
+  autoClosing={true}
+  bounceBackOnOverdraw={true}
+  disableGestures={false}
+  edgeHitWidth={60}
+  hiddenMenuOffset={0}
+  isOpen={false}
+  menu={<FilterMenu />}
+  menuPosition="right"
+  onAnimationComplete={[Function]}
+  onChange={[Function]}
+  onMove={[Function]}
+  onSliding={[Function]}
+  onStartShouldSetResponderCapture={[Function]}
+  openMenuOffset={500}
+  toleranceX={10}
+  toleranceY={10}
 >
-  <Screen
-    component={[Function]}
-    name="AuditWorklistTabs"
-    options={
-      Object {
-        "headerLeft": [Function],
-        "headerRight": [Function],
-        "headerTitle": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+  <StackNavigator
+    screenOptions={[Function]}
+  >
+    <Screen
+      component={[Function]}
+      name="AuditWorklistTabs"
+      options={
+        Object {
+          "headerLeft": [Function],
+          "headerRight": [Function],
+          "headerTitle": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+        }
       }
-    }
-  />
-  <Screen
-    component={[Function]}
-    name="AuditWorklist"
-    options={
-      Object {
-        "headerRight": [Function],
-        "headerTitle": "[missing \\"en.AUDITS.AUDIT_ITEM\\" translation]",
+    />
+    <Screen
+      component={[Function]}
+      name="AuditWorklist"
+      options={
+        Object {
+          "headerRight": [Function],
+          "headerTitle": "[missing \\"en.AUDITS.AUDIT_ITEM\\" translation]",
+        }
       }
-    }
-  />
-</StackNavigator>
+    />
+  </StackNavigator>
+</SideMenu>
 `;
