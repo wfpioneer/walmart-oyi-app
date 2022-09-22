@@ -6,7 +6,7 @@ jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'MaterialCom
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'MaterialIcon');
 
 describe('Tests OtherOHItemCard Component', () => {
-  it('should tests redering OtherOHItemCard with other OH Qty props', async () => {
+  it('should tests rendering OtherOHItemCard with other OH Qty props', async () => {
     const { toJSON } = render(
       <OtherOHItemCard
         flyCloudInTransitOH={5}
