@@ -484,7 +484,8 @@ export default {
     TITLE: 'Ajustes',
     FEATURE_UPDATE_SUCCESS: 'Funcionalidades actualizadas',
     FEATURE_UPDATE_FAILURE: 'Incapaz de obtener las funcionalidades actualizadas',
-    FEATURES: 'Funcionalidades'
+    FEATURES: 'Funcionalidades',
+    AREA_FILTER: 'Filtros por Área '
   },
   AUDITS: {
     AUDITS: 'Auditorías',
