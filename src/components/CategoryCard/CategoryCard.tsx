@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   FlatList, Text, TouchableOpacity, View
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './CategoryCard.style';
 import { WorklistItemI } from '../../models/WorklistItem';
@@ -22,6 +23,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
 
   const [open, setOpen] = useState(true);
   const iconName = open ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (collapsed) {
@@ -44,7 +46,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             description={itemName || ''}
             imageUrl={imageURLKey ? { uri: imageURLKey } : undefined}
             onHandQty={11}
-            onClick={() => {}}
+            onClick={() => { navigation.navigate('AuditItem'); }}
             loading={false}
           />
         </View>

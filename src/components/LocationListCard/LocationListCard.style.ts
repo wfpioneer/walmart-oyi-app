@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   loader: {
-    ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 30
   },
   locationCard: {
-    marginBottom: 5
+    marginBottom: 2
   }
 });
 

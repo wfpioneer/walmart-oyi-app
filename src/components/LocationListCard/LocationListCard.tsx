@@ -81,13 +81,13 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
       </View>
     );
   }
-  if (loading) {
-    return (
-      <View style={styles.loader} testID="loader">
-        <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
-      </View>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <View style={styles.loader} testID="loader">
+  //       <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
+  //     </View>
+  //   );
+  // }
 
   return (
     <View>
@@ -119,11 +119,17 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
             </TouchableOpacity>
             )}
       </View>
-      <FlatList
-        data={locationList}
-        renderItem={({ item }) => renderLocationCard({ item, locationType, scanRequired })}
-        keyExtractor={(item: LocationList, index: number) => item.sectionId + index.toString()}
-      />
+      {loading ? (
+        <View style={styles.loader} testID="loader">
+          <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
+        </View>
+      ) : (
+        <FlatList
+          data={locationList}
+          renderItem={({ item }) => renderLocationCard({ item, locationType, scanRequired })}
+          keyExtractor={(item: LocationList, index: number) => item.sectionId + index.toString()}
+        />
+      )}
     </View>
   );
 };

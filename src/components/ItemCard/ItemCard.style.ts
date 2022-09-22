@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
   loaderContainer: {
     backgroundColor: COLOR.GREY_TRANSPARENT,
     padding: 5,
-    margin: 5,
     flexDirection: 'row'
   },
   image: {

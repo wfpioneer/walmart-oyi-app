@@ -6,7 +6,7 @@ import { TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import { strings } from '../locales';
-import AuditItem from '../screens/Worklist/AuditWorklist/AuditItem';
+import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
 import { setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import COLOR from '../themes/Color';
