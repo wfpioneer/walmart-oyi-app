@@ -6,17 +6,19 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import { strings } from '../../locales';
 import { COLOR } from '../../themes/Color';
 import styles from './LocationListCard.style';
+import LocationCard from '../LocationCard/LocationCard';
 
 export type LocationType = 'floor' | 'reserve'
 
 export interface LocationList {
     sectionId: number;
     locationName: string;
-    quantity: string;
+    quantity: number;
     palletId: string;
     increment: () => void;
     decrement: () => void;
-    delete: () => void;
+    onDelete: () => void;
+    qtyChange: () => void
 }
 
 interface LocationListCardProp {
@@ -30,15 +32,24 @@ interface LocationListCardProp {
   scanRequired: boolean;
 }
 
-const renderLocationCard = ({ item }: { item: LocationList }) => {
+const renderLocationCard = ({ item, locationType, scanRequired }:
+  { item: LocationList, locationType: LocationType, scanRequired: boolean }) => {
   const {
-    sectionId, locationName
+    locationName, quantity, palletId, increment, decrement, onDelete, qtyChange
   } = item;
-  // TODO: Added placeholder and below needs to be replaced with Location Card component once its gets completed
   return (
-    <View>
-      <Text>{sectionId}</Text>
-      <Text>{locationName}</Text>
+    <View style={styles.locationCard}>
+      <LocationCard
+        location={locationName}
+        locationType={locationType}
+        onQtyIncrement={increment}
+        onTextChange={qtyChange}
+        onQtyDecrement={decrement}
+        palletID={palletId}
+        scannerEnabled={scanRequired}
+        quantity={quantity}
+        onLocationDelete={onDelete}
+      />
     </View>
   );
 };
@@ -110,7 +121,7 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
       </View>
       <FlatList
         data={locationList}
-        renderItem={renderLocationCard}
+        renderItem={({ item }) => renderLocationCard({ item, locationType, scanRequired })}
         keyExtractor={(item: LocationList, index: number) => item.sectionId + index.toString()}
       />
     </View>

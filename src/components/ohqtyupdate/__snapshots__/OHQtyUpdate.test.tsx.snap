@@ -74,7 +74,6 @@ Array [
           "borderRadius": 10,
           "borderWidth": 1,
           "flexDirection": "row",
-          "marginBottom": 4,
         },
         Object {
           "borderColor": "#e0e0e0",
@@ -356,7 +355,6 @@ Array [
           "borderRadius": 10,
           "borderWidth": 1,
           "flexDirection": "row",
-          "marginBottom": 4,
         },
         Object {
           "borderColor": "#e0e0e0",
@@ -649,7 +647,6 @@ Array [
           "borderRadius": 10,
           "borderWidth": 1,
           "flexDirection": "row",
-          "marginBottom": 4,
         },
         Object {
           "borderColor": "#b71c1c",
@@ -889,7 +886,6 @@ Array [
           "borderRadius": 10,
           "borderWidth": 1,
           "flexDirection": "row",
-          "marginBottom": 4,
         },
         Object {
           "borderColor": "#e0e0e0",
@@ -1117,7 +1113,6 @@ Array [
           "borderRadius": 10,
           "borderWidth": 1,
           "flexDirection": "row",
-          "marginBottom": 4,
         },
         Object {
           "borderColor": "#e0e0e0",

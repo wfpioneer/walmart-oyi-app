@@ -7,11 +7,12 @@ jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 const mockLocationList: LocationList[] = [{
   sectionId: 1502,
   locationName: 'A1-1',
-  quantity: '22',
+  quantity: 22,
   palletId: '4928',
   increment: jest.fn,
   decrement: jest.fn,
-  delete: jest.fn
+  onDelete: jest.fn,
+  qtyChange: jest.fn
 }];
 
 describe('Tests LocationListCard Component', () => {
