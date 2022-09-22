@@ -104,7 +104,6 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
     getItem={[Function]}
     getItemCount={[Function]}
     keyExtractor={[Function]}
-    nestedScrollEnabled={true}
     onContentSizeChange={[Function]}
     onLayout={[Function]}
     onMomentumScrollBegin={[Function]}
@@ -114,7 +113,6 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
     onScrollEndDrag={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEnabled={false}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
     viewabilityConfigCallbackPairs={Array []}
