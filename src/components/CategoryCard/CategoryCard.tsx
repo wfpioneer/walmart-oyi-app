@@ -7,6 +7,7 @@ import styles from './CategoryCard.style';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
+import ItemCard from '../ItemCard/ItemCard';
 
 export type CategoryCardProps = {
   listOfItems: WorklistItemI[];
@@ -33,17 +34,19 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
   // placeholder render item
   const renderItem = ({ item }: { item: WorklistItemI }) => {
     const {
-      itemName, itemNbr
+      itemName, itemNbr, imageURLKey
     } = item;
     return (
       <TouchableOpacity style={styles.itemContainer}>
         <View style={styles.content}>
-          <Text style={styles.itemInfo}>
-            { itemName }
-          </Text>
-          <Text style={styles.itemNumber}>
-            { itemNbr }
-          </Text>
+          <ItemCard
+            itemNumber={itemNbr || 0}
+            description={itemName || ''}
+            imageUrl={imageURLKey ? { uri: imageURLKey } : undefined}
+            onHandQty={11}
+            onClick={() => {}}
+            loading={false}
+          />
         </View>
       </TouchableOpacity>
     );
