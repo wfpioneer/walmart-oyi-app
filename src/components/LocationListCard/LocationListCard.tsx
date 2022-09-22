@@ -128,6 +128,8 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
           data={locationList}
           renderItem={({ item }) => renderLocationCard({ item, locationType, scanRequired })}
           keyExtractor={(item: LocationList, index: number) => item.sectionId + index.toString()}
+          scrollEnabled={false}
+          nestedScrollEnabled={true}
         />
       )}
     </View>

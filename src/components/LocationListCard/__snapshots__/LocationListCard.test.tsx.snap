@@ -104,6 +104,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
     getItem={[Function]}
     getItemCount={[Function]}
     keyExtractor={[Function]}
+    nestedScrollEnabled={true}
     onContentSizeChange={[Function]}
     onLayout={[Function]}
     onMomentumScrollBegin={[Function]}
@@ -113,6 +114,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
     onScrollEndDrag={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
+    scrollEnabled={false}
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
     viewabilityConfigCallbackPairs={Array []}
@@ -125,7 +127,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
         <View
           style={
             Object {
-              "marginBottom": 5,
+              "marginBottom": 2,
             }
           }
         >
@@ -406,22 +408,104 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
 `;
 
 exports[`Tests LocationListCard Component should tests rendering LocationListCard with loader while fetching async API data 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "center",
-      "bottom": 0,
-      "justifyContent": "center",
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderBottomWidth": 1,
+        "borderColor": "#616161",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingHorizontal": 15,
+        "paddingVertical": 10,
+      }
     }
-  }
-  testID="loader"
->
-  <ActivityIndicator
-    size={30}
-  />
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View>
+        <Icon
+          color="#000000"
+          name="map-marker-outline"
+          size={25}
+        />
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.LOCATION.FLOOR" translation] (0)
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.AUDITS.VALIDATE_QUANTITY" translation]
+        </Text>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={false}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 15,
+          "right": 15,
+          "top": 10,
+        }
+      }
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID="add-location"
+    >
+      <Icon
+        color="#0071e9"
+        name="plus-thick"
+        size={25}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "padding": 30,
+      }
+    }
+    testID="loader"
+  >
+    <ActivityIndicator
+      size={30}
+    />
+  </View>
 </View>
 `;

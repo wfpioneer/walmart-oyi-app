@@ -34,6 +34,7 @@ import {
 
 import ItemCard from '../../../components/ItemCard/ItemCard';
 import LocationListCard, { LocationList } from '../../../components/LocationListCard/LocationListCard';
+import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard';
 
 export interface AuditItemScreenProps {
     scannedEvent: { value: string | null; type: string | null; };
@@ -181,7 +182,12 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const itemDetailsData = (itemDetails || emptyData);
   return (
-    <View style={styles.safeAreaView}>
+    <ScrollView
+      ref={scrollViewRef}
+      contentContainerStyle={styles.container}
+      nestedScrollEnabled={true}
+      refreshControl={<RefreshControl refreshing={false} onRefresh={handleRefresh} />}
+    >
       {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />}
       <View
         style={styles.container}
@@ -216,8 +222,18 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
             scanRequired={false}
           />
         </View>
+        <View style={styles.marginBottomStyle}>
+          <OtherOHItemCard
+            flyCloudInTransitOH={5}
+            flyCloudOH={3}
+            claimsOH={5}
+            consolidatorOH={2}
+            loading={isWaitingItemDetailsRes}
+            collapsed={false}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

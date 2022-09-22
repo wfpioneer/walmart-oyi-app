@@ -12,10 +12,6 @@ import { getWorklist } from '../../state/actions/saga';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
 
-import {
-  mockCompletedAuditWorklist, mockToDoAuditWorklist
-} from '../../mockData/mockWorkList';
-
 export interface AuditWorklistTabProps {
     toDo: boolean;
 }
@@ -30,17 +26,20 @@ export interface AuditWorklistTabScreenProps {
     refreshing: boolean;
 }
 
-const renderCategoryCard = (category: string, items: WorklistItemI[], collapsed: boolean) => (
+const renderCategoryCard = (
+  category: string, items: WorklistItemI[], collapsed: boolean, navigation: NavigationProp<any>
+) => (
   <CategoryCard
     category={category}
     listOfItems={items}
     collapsed={collapsed}
+    navigation={navigation}
   />
 );
 
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
-    items, collapsed, setCollapsed, refreshing, dispatch
+    items, collapsed, setCollapsed, refreshing, dispatch, navigation
   } = props;
   const itemsBasedOnCategory = groupBy(items, item => `${item.catgNbr} - ${item.catgName}`);
   const sortedItemKeys = Object.keys(itemsBasedOnCategory).sort((a, b) => (a > b ? 1 : -1));
@@ -62,7 +61,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
       <CollapseAllBar collapsed={collapsed} onclick={() => setCollapsed(!collapsed)} />
       <FlatList
         data={sortedItemKeys}
-        renderItem={({ item: key }) => renderCategoryCard(key, itemsBasedOnCategory[key], collapsed)}
+        renderItem={({ item: key }) => renderCategoryCard(key, itemsBasedOnCategory[key], collapsed, navigation)}
         keyExtractor={item => `category-${item}`}
         // TODO: worklist types needs to be updated after Filter component gets completed
         onRefresh={() => dispatch(getWorklist({ worklistType: ['AU', 'RA'] }))}
@@ -79,7 +78,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const [collapsed, setCollapsed] = useState(false);
   const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
   const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
-  const items = toDo ? mockToDoAuditWorklist : mockCompletedAuditWorklist;
+  const items = toDo ? toDoItems : completedItems;
   const { isWaiting } = useTypedSelector(state => state.async.getWorklist);
   // TODO: If there are no worklist items we need to show error message
   if (isEmpty(items)) {

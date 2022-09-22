@@ -1,0 +1,379 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuditItemScreen Manage AuditItem externalized function tests test isError 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#e57373"
+      name="alert"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.API_ERROR" translation]
+    </Text>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#e57373",
+          "borderRadius": 4,
+          "height": 40,
+          "justifyContent": "center",
+          "marginVertical": 10,
+          "opacity": 1,
+          "width": "95%",
+        }
+      }
+      testID="errorLoadingItemRetry"
+    >
+      <Text>
+        [missing "en.GENERICS.RETRY" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`AuditItemScreen Manage AuditItem externalized function tests test isError 2`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#e57373"
+      name="alert"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.API_ERROR" translation]
+    </Text>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#e57373",
+          "borderRadius": 4,
+          "height": 40,
+          "justifyContent": "center",
+          "marginVertical": 10,
+          "opacity": 1,
+          "width": "95%",
+        }
+      }
+      testID="errorLoadingItemRetry"
+    >
+      <Text>
+        [missing "en.GENERICS.RETRY" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activity Indicator' waiting for ItemDetails Response  1`] = `
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "stretch",
+      "justifyContent": "center",
+    }
+  }
+  nestedScrollEnabled={true}
+  refreshControl={
+    <RefreshControlMock
+      onRefresh={[Function]}
+      refreshing={false}
+    />
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "marginBottom": 8,
+        }
+      }
+    >
+      <ItemCard
+        description=""
+        itemNumber={0}
+        loading={true}
+        onClick={[Function]}
+        onHandQty={0}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "marginBottom": 6,
+        }
+      }
+    >
+      <LocationListCard
+        error={false}
+        loading={true}
+        locationList={Array []}
+        locationType="floor"
+        onRetry={[Function]}
+        scanRequired={false}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "marginBottom": 6,
+        }
+      }
+    >
+      <LocationListCard
+        error={false}
+        loading={true}
+        locationList={Array []}
+        locationType="reserve"
+        onRetry={[Function]}
+        scanRequired={false}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "marginBottom": 6,
+        }
+      }
+    >
+      <OtherOHItemCard
+        claimsOH={5}
+        collapsed={false}
+        consolidatorOH={2}
+        flyCloudInTransitOH={5}
+        flyCloudOH={3}
+        loading={true}
+      />
+    </View>
+  </View>
+</ScrollView>
+`;
+
+exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Scanned Item Not Found' on request status 204 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the details for a single item with non-null status 1`] = `
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "stretch",
+      "justifyContent": "center",
+    }
+  }
+  nestedScrollEnabled={true}
+  refreshControl={
+    <RefreshControlMock
+      onRefresh={[Function]}
+      refreshing={false}
+    />
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "marginBottom": 8,
+        }
+      }
+    >
+      <ItemCard
+        description="Test Item That is Really, Really Long (and has parenthesis)"
+        itemNumber={1234567890}
+        loading={false}
+        onClick={[Function]}
+        onHandQty={42}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "marginBottom": 6,
+        }
+      }
+    >
+      <LocationListCard
+        error={false}
+        loading={false}
+        locationList={
+          Array [
+            Object {
+              "decrement": [Function],
+              "increment": [Function],
+              "locationName": "A1-1",
+              "onDelete": [Function],
+              "palletId": "",
+              "qtyChange": [Function],
+              "quantity": 0,
+              "sectionId": 1,
+            },
+            Object {
+              "decrement": [Function],
+              "increment": [Function],
+              "locationName": "A1-2",
+              "onDelete": [Function],
+              "palletId": "",
+              "qtyChange": [Function],
+              "quantity": 0,
+              "sectionId": 2,
+            },
+            Object {
+              "decrement": [Function],
+              "increment": [Function],
+              "locationName": "A1-3",
+              "onDelete": [Function],
+              "palletId": "",
+              "qtyChange": [Function],
+              "quantity": 0,
+              "sectionId": 3,
+            },
+            Object {
+              "decrement": [Function],
+              "increment": [Function],
+              "locationName": "A1-4",
+              "onDelete": [Function],
+              "palletId": "",
+              "qtyChange": [Function],
+              "quantity": 0,
+              "sectionId": 4,
+            },
+          ]
+        }
+        locationType="floor"
+        onRetry={[Function]}
+        scanRequired={false}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "marginBottom": 6,
+        }
+      }
+    >
+      <LocationListCard
+        error={false}
+        loading={false}
+        locationList={
+          Array [
+            Object {
+              "decrement": [Function],
+              "increment": [Function],
+              "locationName": "A1-1",
+              "onDelete": [Function],
+              "palletId": "",
+              "qtyChange": [Function],
+              "quantity": 10,
+              "sectionId": 1,
+            },
+          ]
+        }
+        locationType="reserve"
+        onRetry={[Function]}
+        scanRequired={false}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "marginBottom": 6,
+        }
+      }
+    >
+      <OtherOHItemCard
+        claimsOH={5}
+        collapsed={false}
+        consolidatorOH={2}
+        flyCloudInTransitOH={5}
+        flyCloudOH={3}
+        loading={false}
+      />
+    </View>
+  </View>
+</ScrollView>
+`;
