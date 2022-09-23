@@ -8,6 +8,7 @@ import moment from 'moment';
 import { GenericActionTypes } from '../../actions/generic/makeAsyncActions';
 import { AsyncSelector, asyncSelector } from '../../reducers/AsyncSelectors';
 import { trackEvent } from '../../../utils/AppCenterTool';
+import { SagaParams } from '../../actions/saga';
 
 export function makeAsyncSaga<Q = any, R = AxiosResponse, E = AxiosError>(
   INITIATOR: string,
@@ -15,10 +16,12 @@ export function makeAsyncSaga<Q = any, R = AxiosResponse, E = AxiosError>(
   service: (payload: any) => Promise<R>,
   selector: AsyncSelector<Q, R, E> = asyncSelector,
   handleError = noop
-) { /* Set payload to type "any" because a generic type parameter (Q = any)
+) {
+  /* Set payload to type "any" because a generic type parameter (Q = any)
         is recognized as type "never" allowing no params to be passed */
-  function* worker(initiationAction: { type: string; payload: any }) {
+  function* worker(initiationAction: { type: string; payload: SagaParams['payload'] }) {
     const { payload, type } = initiationAction;
+    // @ts-expect-error "payload: Q" assumes "Q" can be instantiated with a type other than "payload"
     const initiator = opActions.START(payload).type;
     const initiatesUsingOpAction = INITIATOR === initiator;
     // Removes SAGA from saga action type
@@ -26,29 +29,61 @@ export function makeAsyncSaga<Q = any, R = AxiosResponse, E = AxiosError>(
     /* Tracks the request payload data that is sent from saga.ts Actions.
        New payload data should be added here for tracking if they don't already exist
     */
-    const eventParams = { // refactor to retrieve payload keys
+
+    const eventParams = {
       apiName: eventName,
-      itemNbr: payload?.itemNbr || payload?.id,
-      duration: payload?.duration,
-      itemDetails: JSON.stringify(payload?.itemDetails),
-      upc: payload?.upc,
+      id: payload?.id,
+      itemNbr: payload?.itemNbr || payload?.itemNumber,
+      description: payload?.itemDesc || payload?.description,
+      upc: payload?.upc || payload?.upcNbr,
       zoneId: payload?.zoneId,
       aisleId: payload?.aisleId,
       sectionId: payload?.sectionId,
       locationTypeNbr: payload?.locationTypeNbr,
+      // @ts-expect-error "action" only exists on one header causing type never error
       approvalAction: payload?.headers?.action,
       scannedValue: payload?.scannedValue,
       status: payload?.status,
       onHandsItem: JSON.stringify(payload?.data),
       printQueue: JSON.stringify(payload?.printList),
-      locationId: payload?.locationId,
+      locationId: payload?.locationId || payload?.salesFloorLocationId,
       palletId: payload?.palletId,
-      palletIds: JSON.stringify(payload?.palletIds)
+      palletIds: JSON.stringify(payload?.palletIds),
+      combinePallets: JSON.stringify(payload?.combinePallets),
+      aisles: JSON.stringify(payload?.aisles),
+      targetPallet: payload?.targetPallet,
+      approvalItems: JSON.stringify(payload?.approvalItems),
+      categoryNbr: payload?.category,
+      expirationDate: payload?.expirationDate,
+      items: JSON.stringify(payload?.items),
+      location: payload?.location,
+      newLocationTypeNbr: payload?.newLocationTypeNbr,
+      newSectionId: payload?.newSectionId,
+      numberOfPallets: payload?.numberOfPallets,
+      palletItem: JSON.stringify(payload?.palletItem),
+      picklistIds: JSON.stringify(payload?.picklistIds),
+      picklistItems: JSON.stringify(payload?.picklistItems),
+      printList: JSON.stringify(payload?.printList),
+      printLabelList: JSON.stringify(payload?.printLabelList),
+      printPalletList: JSON.stringify(payload?.printPalletList),
+      upcs: JSON.stringify(payload?.upcs),
+      worklistType: JSON.stringify(payload?.worklistType),
+      zoneName: payload?.zoneName,
+      approvalRequestSource: payload?.approvalRequestSource,
+      getExcludeHistory: payload?.getExcludeHistory,
+      getMetadataHistory: payload?.getMetadataHistory,
+      getSummary: payload?.getSummary,
+      isAllItems: payload?.isAllItems,
+      isSummary: payload?.isSummary,
+      locationName: payload?.locationName || payload?.salesFloorLocationName,
+      moveToFront: payload?.moveToFront,
+      palletExpiration: payload?.palletExpiration
     };
     const apiStart = moment().valueOf();
     if (!initiatesUsingOpAction) {
       // If we decide to remove saga actions, then this put goes away
       trackEvent('API_START', eventParams);
+      // @ts-expect-error "payload: Q" assumes "Q" can be instantiated with a type other than "payload"
       yield put(opActions.START(payload));
     }
 

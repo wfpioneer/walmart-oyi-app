@@ -131,13 +131,23 @@ export const updatePicklistStatusApiEffect = (
   // on api error
   if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.error) {
     dispatch(hideActivityModal());
-    Toast.show({
-      type: 'error',
-      text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
-      text2: strings('GENERICS.TRY_AGAIN'),
-      visibilityTime: 4000,
-      position: 'bottom'
-    });
+    if (updatePicklistStatusApi.error?.response?.status === 400
+      && updatePicklistStatusApi.error?.response?.data?.errorEnum === 'ITEM_QUANTITY_IS_MANDATORY') {
+      Toast.show({
+        type: 'error',
+        text1: strings('PICKING.ITEM_QUANTITY_IS_MANDATORY_ERROR'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
+        text2: strings('GENERICS.TRY_AGAIN'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
     resetApis(dispatch);
   }
   // on api request

@@ -13,7 +13,7 @@ enum ITEM_NAME {
 }
 
 // eslint-disable-next-line no-shadow
-enum CATEGORY_NAME {
+export enum CATEGORY_NAME {
   FOODSERVICE = 'FOODSERVICE',
   ELECTRONICS = 'ELECTRONICS',
   FRESH_BAKERY = 'FRESH BAKERY',
@@ -29,7 +29,9 @@ enum WORKLISTTYPE {
   NS = 'NS',
   CATEGORY = 'CATEGORY',
   NON_EXCEPTION = 'Non-Exception',
-  MP = 'MP'
+  MP = 'MP',
+  AU = 'AU',
+  RA = 'RA'
 }
 
 const COMPLETED_TS = '2020-07-15T08:02:17-05:00';
@@ -669,3 +671,109 @@ export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
     sectionID: 0
   }
 ];
+
+export const mockToDoAuditWorklist = [{
+  worklistType: WORKLISTTYPE.AU,
+  itemName: ITEM_NAME.TEST_ITEM,
+  itemNbr: 1234567890,
+  upcNbr: '000055559999',
+  catgNbr: 93,
+  catgName: CATEGORY_NAME.FOODSERVICE,
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: undefined,
+  completedUserId: undefined,
+  completed: false
+},
+{
+  worklistType: WORKLISTTYPE.AU,
+  itemName: ITEM_NAME.TEST_ITEM,
+  itemNbr: 1234567899,
+  upcNbr: '000055559934',
+  catgNbr: 93,
+  catgName: CATEGORY_NAME.FOODSERVICE,
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: undefined,
+  completedUserId: undefined,
+  completed: false
+},
+{
+  worklistType: WORKLISTTYPE.AU,
+  itemName: ITEM_NAME.ELECTRONIC_ITEM,
+  itemNbr: 987654321,
+  upcNbr: '777555333',
+  catgNbr: 99,
+  catgName: CATEGORY_NAME.ELECTRONICS,
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: undefined,
+  completedUserId: undefined,
+  completed: false
+},
+{
+  worklistType: WORKLISTTYPE.RA,
+  itemName: ITEM_NAME.BAKERY_ITEM,
+  itemNbr: 123789456,
+  upcNbr: '111122223333',
+  catgNbr: 88,
+  catgName: CATEGORY_NAME.FRESH_BAKERY,
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: undefined,
+  completedUserId: undefined,
+  completed: false
+}];
+
+export const mockCompletedAuditWorklist = [{
+  worklistType: WORKLISTTYPE.AU,
+  itemName: ITEM_NAME.TEST_ITEM,
+  itemNbr: 1234567890,
+  upcNbr: '000055559999',
+  catgNbr: 93,
+  catgName: CATEGORY_NAME.FOODSERVICE,
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: '2022-09-15T13:32:41+05:30',
+  completedUserId: 'vn51wu8',
+  completed: true
+},
+{
+  worklistType: WORKLISTTYPE.AU,
+  itemName: ITEM_NAME.TEST_ITEM,
+  itemNbr: 1234567899,
+  upcNbr: '000055559934',
+  catgNbr: 93,
+  catgName: CATEGORY_NAME.FOODSERVICE,
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: '2022-09-15T13:32:41+05:30',
+  completedUserId: 'vn51wu8',
+  completed: true
+},
+{
+  worklistType: WORKLISTTYPE.AU,
+  itemName: ITEM_NAME.ELECTRONIC_ITEM,
+  itemNbr: 987654321,
+  upcNbr: '777555333',
+  catgNbr: 99,
+  catgName: CATEGORY_NAME.ELECTRONICS,
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: '2022-09-15T13:32:41+05:30',
+  completedUserId: 'vn51wu8',
+  completed: true
+},
+{
+  worklistType: WORKLISTTYPE.RA,
+  itemName: ITEM_NAME.BAKERY_ITEM,
+  itemNbr: 123789456,
+  upcNbr: '111122223333',
+  catgNbr: 88,
+  catgName: CATEGORY_NAME.FRESH_BAKERY,
+  subCatgNbr: 0,
+  subCatgName: undefined,
+  completedTs: '2022-09-15T13:32:41+05:30',
+  completedUserId: 'vn51wu8',
+  completed: true
+}];

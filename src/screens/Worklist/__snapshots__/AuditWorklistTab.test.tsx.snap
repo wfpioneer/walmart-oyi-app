@@ -1,0 +1,981 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuditWorklistTab Tests rendering Audit worklist component Renders completed Audit worklist items 1`] = `
+<React.Fragment>
+  <CollapseAllBar
+    collapsed={false}
+    onclick={[Function]}
+  />
+  <FlatList
+    data={
+      Array [
+        "88 - FRESH BAKERY",
+        "93 - FOODSERVICE",
+        "99 - ELECTRONICS",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={[Function]}
+    refreshing={false}
+    renderItem={[Function]}
+  />
+</React.Fragment>
+`;
+
+exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do Audit worklist items 1`] = `
+<React.Fragment>
+  <CollapseAllBar
+    collapsed={false}
+    onclick={[Function]}
+  />
+  <FlatList
+    data={
+      Array [
+        "88 - FRESH BAKERY",
+        "93 - FOODSERVICE",
+        "99 - ELECTRONICS",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={[Function]}
+    refreshing={false}
+    renderItem={[Function]}
+  />
+</React.Fragment>
+`;
+
+exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collapsible prop Renders the worklist items in collapsible mode when collapse button clicked 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "paddingHorizontal": 10,
+        "paddingVertical": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID="collapse-text-btn"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#5a9ae0",
+            "fontSize": 12,
+          }
+        }
+      >
+        [missing "en.AUDITS.COLLAPSE_ALL" translation]
+      </Text>
+    </View>
+  </View>,
+  <RCTScrollView
+    data={
+      Array [
+        "88 - FRESH BAKERY",
+        "93 - FOODSERVICE",
+        "99 - ELECTRONICS",
+      ]
+    }
+    getItem={[Function]}
+    getItemCount={[Function]}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onRefresh={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+    refreshing={false}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <RCTRefreshControl />
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomWidth": 1,
+                "borderColor": "#616161",
+                "flexDirection": "row",
+                "paddingHorizontal": 15,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "column",
+                }
+              }
+            >
+              <Text>
+                88 - FRESH BAKERY
+              </Text>
+              <Text>
+                1 [missing "en.GENERICS.ITEMS" translation]
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              hitSlop={
+                Object {
+                  "bottom": 10,
+                  "left": 15,
+                  "right": 15,
+                  "top": 10,
+                }
+              }
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID="collapsible-card"
+            >
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-up"
+                size={25}
+              />
+            </View>
+          </View>
+          <View
+            data={
+              Array [
+                Object {
+                  "catgName": "FRESH BAKERY",
+                  "catgNbr": 88,
+                  "completed": false,
+                  "completedTs": undefined,
+                  "completedUserId": undefined,
+                  "itemName": "BAKERY ITEM",
+                  "itemNbr": 123789456,
+                  "subCatgName": undefined,
+                  "subCatgNbr": 0,
+                  "upcNbr": "111122223333",
+                  "worklistType": "RA",
+                },
+              ]
+            }
+            getItem={[Function]}
+            getItemCount={[Function]}
+            keyExtractor={[Function]}
+            onContentSizeChange={[Function]}
+            onLayout={[Function]}
+            onMomentumScrollBegin={[Function]}
+            onMomentumScrollEnd={[Function]}
+            onScroll={[Function]}
+            onScrollBeginDrag={[Function]}
+            onScrollEndDrag={[Function]}
+            removeClippedSubviews={false}
+            renderItem={[Function]}
+            scrollEventThrottle={50}
+            stickyHeaderIndices={Array []}
+            viewabilityConfigCallbackPairs={Array []}
+          >
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "height": 100,
+                    "justifyContent": "flex-start",
+                    "marginBottom": 2,
+                    "opacity": 1,
+                    "paddingHorizontal": 15,
+                    "paddingVertical": 5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "flex-start",
+                      "flex": 1,
+                      "height": 100,
+                      "justifyContent": "space-evenly",
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      Object {
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    BAKERY ITEM
+                  </Text>
+                  <Text
+                    style={
+                      Object {
+                        "color": "#616161",
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    123789456
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomWidth": 1,
+                "borderColor": "#616161",
+                "flexDirection": "row",
+                "paddingHorizontal": 15,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "column",
+                }
+              }
+            >
+              <Text>
+                93 - FOODSERVICE
+              </Text>
+              <Text>
+                2 [missing "en.GENERICS.ITEMS" translation]
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              hitSlop={
+                Object {
+                  "bottom": 10,
+                  "left": 15,
+                  "right": 15,
+                  "top": 10,
+                }
+              }
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID="collapsible-card"
+            >
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-up"
+                size={25}
+              />
+            </View>
+          </View>
+          <View
+            data={
+              Array [
+                Object {
+                  "catgName": "FOODSERVICE",
+                  "catgNbr": 93,
+                  "completed": false,
+                  "completedTs": undefined,
+                  "completedUserId": undefined,
+                  "itemName": "TEST ITEM",
+                  "itemNbr": 1234567890,
+                  "subCatgName": undefined,
+                  "subCatgNbr": 0,
+                  "upcNbr": "000055559999",
+                  "worklistType": "AU",
+                },
+                Object {
+                  "catgName": "FOODSERVICE",
+                  "catgNbr": 93,
+                  "completed": false,
+                  "completedTs": undefined,
+                  "completedUserId": undefined,
+                  "itemName": "TEST ITEM",
+                  "itemNbr": 1234567899,
+                  "subCatgName": undefined,
+                  "subCatgNbr": 0,
+                  "upcNbr": "000055559934",
+                  "worklistType": "AU",
+                },
+              ]
+            }
+            getItem={[Function]}
+            getItemCount={[Function]}
+            keyExtractor={[Function]}
+            onContentSizeChange={[Function]}
+            onLayout={[Function]}
+            onMomentumScrollBegin={[Function]}
+            onMomentumScrollEnd={[Function]}
+            onScroll={[Function]}
+            onScrollBeginDrag={[Function]}
+            onScrollEndDrag={[Function]}
+            removeClippedSubviews={false}
+            renderItem={[Function]}
+            scrollEventThrottle={50}
+            stickyHeaderIndices={Array []}
+            viewabilityConfigCallbackPairs={Array []}
+          >
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "height": 100,
+                    "justifyContent": "flex-start",
+                    "marginBottom": 2,
+                    "opacity": 1,
+                    "paddingHorizontal": 15,
+                    "paddingVertical": 5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "flex-start",
+                      "flex": 1,
+                      "height": 100,
+                      "justifyContent": "space-evenly",
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      Object {
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    TEST ITEM
+                  </Text>
+                  <Text
+                    style={
+                      Object {
+                        "color": "#616161",
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    1234567890
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "height": 100,
+                    "justifyContent": "flex-start",
+                    "marginBottom": 2,
+                    "opacity": 1,
+                    "paddingHorizontal": 15,
+                    "paddingVertical": 5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "flex-start",
+                      "flex": 1,
+                      "height": 100,
+                      "justifyContent": "space-evenly",
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      Object {
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    TEST ITEM
+                  </Text>
+                  <Text
+                    style={
+                      Object {
+                        "color": "#616161",
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    1234567899
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomWidth": 1,
+                "borderColor": "#616161",
+                "flexDirection": "row",
+                "paddingHorizontal": 15,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "column",
+                }
+              }
+            >
+              <Text>
+                99 - ELECTRONICS
+              </Text>
+              <Text>
+                1 [missing "en.GENERICS.ITEMS" translation]
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              hitSlop={
+                Object {
+                  "bottom": 10,
+                  "left": 15,
+                  "right": 15,
+                  "top": 10,
+                }
+              }
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID="collapsible-card"
+            >
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-up"
+                size={25}
+              />
+            </View>
+          </View>
+          <View
+            data={
+              Array [
+                Object {
+                  "catgName": "ELECTRONICS",
+                  "catgNbr": 99,
+                  "completed": false,
+                  "completedTs": undefined,
+                  "completedUserId": undefined,
+                  "itemName": "ELECTRONIC ITEM",
+                  "itemNbr": 987654321,
+                  "subCatgName": undefined,
+                  "subCatgNbr": 0,
+                  "upcNbr": "777555333",
+                  "worklistType": "AU",
+                },
+              ]
+            }
+            getItem={[Function]}
+            getItemCount={[Function]}
+            keyExtractor={[Function]}
+            onContentSizeChange={[Function]}
+            onLayout={[Function]}
+            onMomentumScrollBegin={[Function]}
+            onMomentumScrollEnd={[Function]}
+            onScroll={[Function]}
+            onScrollBeginDrag={[Function]}
+            onScrollEndDrag={[Function]}
+            removeClippedSubviews={false}
+            renderItem={[Function]}
+            scrollEventThrottle={50}
+            stickyHeaderIndices={Array []}
+            viewabilityConfigCallbackPairs={Array []}
+          >
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "height": 100,
+                    "justifyContent": "flex-start",
+                    "marginBottom": 2,
+                    "opacity": 1,
+                    "paddingHorizontal": 15,
+                    "paddingVertical": 5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "flex-start",
+                      "flex": 1,
+                      "height": 100,
+                      "justifyContent": "space-evenly",
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      Object {
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    ELECTRONIC ITEM
+                  </Text>
+                  <Text
+                    style={
+                      Object {
+                        "color": "#616161",
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    987654321
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>,
+]
+`;
+
+exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collapsible prop Renders the worklist items in open mode when expand button clicked 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "paddingHorizontal": 10,
+        "paddingVertical": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID="collapse-text-btn"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#5a9ae0",
+            "fontSize": 12,
+          }
+        }
+      >
+        [missing "en.AUDITS.EXPAND_ALL" translation]
+      </Text>
+    </View>
+  </View>,
+  <RCTScrollView
+    data={
+      Array [
+        "88 - FRESH BAKERY",
+        "93 - FOODSERVICE",
+        "99 - ELECTRONICS",
+      ]
+    }
+    getItem={[Function]}
+    getItemCount={[Function]}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onRefresh={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+    refreshing={false}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <RCTRefreshControl />
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomWidth": 1,
+                "borderColor": "#616161",
+                "flexDirection": "row",
+                "paddingHorizontal": 15,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "column",
+                }
+              }
+            >
+              <Text>
+                88 - FRESH BAKERY
+              </Text>
+              <Text>
+                1 [missing "en.GENERICS.ITEMS" translation]
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              hitSlop={
+                Object {
+                  "bottom": 10,
+                  "left": 15,
+                  "right": 15,
+                  "top": 10,
+                }
+              }
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID="collapsible-card"
+            >
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-down"
+                size={25}
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomWidth": 1,
+                "borderColor": "#616161",
+                "flexDirection": "row",
+                "paddingHorizontal": 15,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "column",
+                }
+              }
+            >
+              <Text>
+                93 - FOODSERVICE
+              </Text>
+              <Text>
+                2 [missing "en.GENERICS.ITEMS" translation]
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              hitSlop={
+                Object {
+                  "bottom": 10,
+                  "left": 15,
+                  "right": 15,
+                  "top": 10,
+                }
+              }
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID="collapsible-card"
+            >
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-down"
+                size={25}
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomWidth": 1,
+                "borderColor": "#616161",
+                "flexDirection": "row",
+                "paddingHorizontal": 15,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "column",
+                }
+              }
+            >
+              <Text>
+                99 - ELECTRONICS
+              </Text>
+              <Text>
+                1 [missing "en.GENERICS.ITEMS" translation]
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              hitSlop={
+                Object {
+                  "bottom": 10,
+                  "left": 15,
+                  "right": 15,
+                  "top": 10,
+                }
+              }
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID="collapsible-card"
+            >
+              <Icon
+                color="#0071e9"
+                name="keyboard-arrow-down"
+                size={25}
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>,
+]
+`;

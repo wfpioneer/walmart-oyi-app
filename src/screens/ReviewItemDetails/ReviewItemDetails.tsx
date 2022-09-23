@@ -47,7 +47,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  ADD_TO_PICKLIST, CREATE_NEW_PICK, GET_ITEM_DETAILS, NO_ACTION, UPDATE_OH_QTY
+  ADD_TO_PICKLIST, CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2, NO_ACTION, UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
@@ -899,9 +899,9 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
   if (navigation.isFocused()) {
     validateSessionCall(navigation, route.name).then(() => {
       if (scannedEvent.value) {
-        dispatch({ type: GET_ITEM_DETAILS.RESET });
         // TODO revert V2 changes once BE orchestration is pushed to production
         if (userConfigs.additionalItemDetails) {
+          dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
           dispatch(
             getItemDetailsV2(
               {
@@ -911,6 +911,7 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
             )
           );
         } else {
+          dispatch({ type: GET_ITEM_DETAILS.RESET });
           dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
         }
         dispatch({ type: ADD_TO_PICKLIST.RESET });
@@ -1176,10 +1177,11 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
-      dispatch({ type: GET_ITEM_DETAILS.RESET });
       if (additionalItemDetails) {
+        dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
         dispatch(getItemDetailsV2({ id: itemDetails.itemNbr }));
       } else {
+        dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ id: itemDetails.itemNbr }));
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });

@@ -996,6 +996,30 @@ describe('Sales floor workflow tests', () => {
       expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistError);
     });
 
+    it('Tests updatePicklistStatusApiEffect on failure when stock quantity is not updated', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: {
+          response: {
+            status: 400,
+            data: {
+              errorEnum: 'ITEM_QUANTITY_IS_MANDATORY'
+            }
+          }
+        }
+      };
+      const toastUpdatePicklistError = {
+        type: 'error',
+        text1: strings('PICKING.ITEM_QUANTITY_IS_MANDATORY_ERROR'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      updatePicklistStatusApiEffect(failureApi, mockSelectedItems, mockDispatch, navigationProp);
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(hideActivityModal).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistError);
+    });
+
     it('Tests updatePicklistStatusApiEffect isWaiting', () => {
       const isLoadingApi: AsyncState = {
         ...defaultAsyncState,

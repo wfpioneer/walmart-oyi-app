@@ -20,6 +20,7 @@ import {
   SET_SELECTED_SIGN_TYPE,
   UNSET_PRINTING_LOCATION_LABELS,
   UNSET_PRINTING_PALLET_LABEL,
+  UPDATE_PRINTER_BY_ID,
   addLocationPrintQueue,
   addMultipleToLocationPrintQueue,
   addToPrintQueue,
@@ -40,7 +41,8 @@ import {
   setSelectedPrinter,
   setSignType,
   unsetPrintingLocationLabels,
-  unsetPrintingPalletLabel
+  unsetPrintingPalletLabel,
+  updatePrinterByID
 } from './Print';
 import { PrintingType } from '../../models/Printer';
 import { mockPrinterList } from '../../mockData/mockPrinterList';
@@ -191,6 +193,13 @@ describe('testing action creators', () => {
     expect(results).toStrictEqual({
       type: SET_PRINTER_LIST,
       payload: mockPrinterList
+    });
+  });
+  it('testing updatePrinterByID', () => {
+    const results = updatePrinterByID({ id: '1', printer: mockPrinterList[0] });
+    expect(results).toStrictEqual({
+      type: UPDATE_PRINTER_BY_ID,
+      payload: { id: '1', printer: mockPrinterList[0] }
     });
   });
 });
